@@ -1,0 +1,431 @@
+{
+  "appPolicies" : {
+    "eula" : "",
+    "policies" : [
+      {
+        "locale" : "en_US",
+        "policyText" : "",
+        "policyURL" : ""
+      }
+    ]
+  },
+  "identifier" : "DC8EDDC1",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+
+  ],
+  "settings" : {
+    "_applicationInternalID" : "6751406823",
+    "_askToBuyEnabled" : false,
+    "_billingGracePeriodEnabled" : false,
+    "_billingIssuesEnabled" : false,
+    "_developerTeamID" : "8293TNMX6S",
+    "_disableDialogs" : false,
+    "_failTransactionsEnabled" : false,
+    "_lastSynchronizedDate" : 786370825.53259301,
+    "_locale" : "en_US",
+    "_renewalBillingIssuesEnabled" : false,
+    "_storefront" : "USA",
+    "_storeKitErrors" : [
+      {
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ],
+    "_timeRate" : 0
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "21768675",
+      "localizations" : [
+
+      ],
+      "name" : "Wise.Eating.Group",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "3.99",
+          "familyShareable" : false,
+          "groupNumber" : 4,
+          "internalID" : "6751720695",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Remove adds and ulock up to 4 profiles, monthly",
+              "displayName" : "Advanced Monthly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "Wise.Eating.Advanced.Monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Advanced Monthly",
+          "subscriptionGroupID" : "21768675",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "39.99",
+          "familyShareable" : false,
+          "groupNumber" : 3,
+          "internalID" : "6751720715",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Remove adds and ulock up to 4 profiles, yearly",
+              "displayName" : "Advanced Yearly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "Wise.Eating.Advanced.Yearly",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Advanced Yearly",
+          "subscriptionGroupID" : "21768675",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "6.99",
+          "familyShareable" : false,
+          "groupNumber" : 2,
+          "internalID" : "6751720597",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Remove adds and ulock up to 12 profiles, monthly",
+              "displayName" : "Premium Monthly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "Wise.Eating.Premium.Monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Premium Monthly",
+          "subscriptionGroupID" : "21768675",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "69.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "6751720247",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Remove adds and ulock up to 12 profiles, yearly",
+              "displayName" : "Premium Yearly ",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "Wise.Eating.Premium.Yearly",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Premium Yearly",
+          "subscriptionGroupID" : "21768675",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "2.99",
+          "familyShareable" : false,
+          "groupNumber" : 6,
+          "internalID" : "6751720440",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Enjoy a clean interface without ads, monthly",
+              "displayName" : "Remove Ads Monthly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "Wise.Eating.Remove.Ads.Monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Remove Ads Monthly",
+          "subscriptionGroupID" : "21768675",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "29.99",
+          "familyShareable" : false,
+          "groupNumber" : 5,
+          "internalID" : "6751719854",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Enjoy a clean interface without ads, yearly",
+              "displayName" : "Remove Ads Yearly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "Wise.Eating.Remove.Ads.Yearly",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Remove Ads Yearly",
+          "subscriptionGroupID" : "21768675",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        }
+      ]
+    },
+    {
+      "id" : "21847766",
+      "localizations" : [
+
+      ],
+      "name" : "Wise.Eating.Group.v2",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "6.99",
+          "familyShareable" : false,
+          "groupNumber" : 2,
+          "internalID" : "6756009218",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Remove adds and ulock up to 12 profiles, monthly",
+              "displayName" : "Premium Monthly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "Wise.Eating.Premium.Monthly.v2",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : " Premium  Monthly",
+          "subscriptionGroupID" : "21847766",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "3.99",
+          "familyShareable" : false,
+          "groupNumber" : 4,
+          "internalID" : "6756009254",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Remove adds and ulock up to 4 profiles, monthly",
+              "displayName" : "Advanced Monthly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "Wise.Eating.Advanced.Monthly.v2",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Advanced  Monthly",
+          "subscriptionGroupID" : "21847766",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "39.99",
+          "familyShareable" : false,
+          "groupNumber" : 3,
+          "internalID" : "6756009340",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Remove adds and ulock up to 4 profiles, yearly",
+              "displayName" : "Advanced Yearly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "Wise.Eating.Advanced.Yearly.v2",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Advanced  Yearly",
+          "subscriptionGroupID" : "21847766",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "69.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "6756008934",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Remove adds and ulock up to 12 profiles, yearly",
+              "displayName" : "Premium Yearly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "Wise.Eating.Premium.Yearly.v2",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Premium  Yearly",
+          "subscriptionGroupID" : "21847766",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "2.99",
+          "familyShareable" : false,
+          "groupNumber" : 6,
+          "internalID" : "6756009463",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Enjoy a clean interface without ads, monthly",
+              "displayName" : "Remove Ads Monthly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "Wise.Eating.Remove.Ads.Monthly.v2",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Remove Ads  Monthly",
+          "subscriptionGroupID" : "21847766",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "29.99",
+          "familyShareable" : false,
+          "groupNumber" : 5,
+          "internalID" : "6756009293",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Enjoy a clean interface without ads, yearly",
+              "displayName" : "Remove Ads Yearly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "Wise.Eating.Remove.Ads.Yearly.v2",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Remove Ads  Yearly",
+          "subscriptionGroupID" : "21847766",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 4,
+    "minor" : 0
+  }
+}
