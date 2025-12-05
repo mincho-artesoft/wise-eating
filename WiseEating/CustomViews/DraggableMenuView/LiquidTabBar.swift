@@ -64,7 +64,6 @@ struct LiquidTabBar: View {
         self._isProfilesDrawerVisible = isProfilesDrawerVisible
     }
 
-    // --- Помощна функция за поп ефекта ---
     private func triggerSelectionPop() {
         isAnimatingSelection = true
         withAnimation(.spring(response: 0.4, dampingFraction: 0.35).delay(0.15)) {
@@ -73,128 +72,113 @@ struct LiquidTabBar: View {
     }
 
     var body: some View {
-        HStack(spacing: 0) {
-            ForEach(standardTabs) { tab in
-                TabItem(
-                    tab: tab,
-                    selectedTab: $selectedTab,
-                    hasNewNutrition: $hasNewNutrition,
-                    hasNewTraining: $hasNewTraining,
-                    hasUnreadAINotifications: $hasUnreadAINotifications,
-                    isAIGenerating: isAIGenerating,
-                    accentColor: effectManager.currentGlobalAccentColor,
-                    isAccentColorLight: effectManager.isLightRowTextColor,
-                    animationNamespace: animation,
-                    isAnimating: isAnimatingSelection
-                )
-                // --- ПРОМЯНА: Използваме DragGesture(minimumDistance: 0) вместо onTapGesture
-                // Това засича докосването веднага, без да чака вдигане на пръста ---
-                .simultaneousGesture(
-                    DragGesture(minimumDistance: 0)
-                        .onChanged { _ in
-                            if selectedTab != tab {
-                                withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                                    selectedTab = tab
-                                }
-                                menuState = .collapsed
-                                navBarIsHiden = false
-                                profilesMenuState = .collapsed
-                                isProfilesDrawerVisible = false
-                                
-                                triggerSelectionPop()
-                            }
-                        }
-                )
-                .frame(maxWidth: isSearching ? 0 : .infinity)
-                .opacity(isSearching ? 0 : 1)
-            }
-
-            if isSearching {
-               ZStack(alignment: .leading) {
-                   if localSearchText.isEmpty {
-                       Text("Search...")
-                           .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.9))
-                           .padding(.leading, 4)
-                   }
-                   
-                   TextField("", text: $localSearchText)
-                       .foregroundColor(effectManager.currentGlobalAccentColor)
-                       .tint(effectManager.currentGlobalAccentColor)
-                       .disableAutocorrection(true)
-                       .autocapitalization(.none)
-                       .onChange(of: localSearchText) { _, newValue in
-                           searchText = newValue
-                       }
-               }
-               .padding(.leading, 20)
-               .focused($isSearchFieldFocused)
-               .transition(.opacity.animation(.easeIn(duration: 0.2).delay(0.1)))
+        ZStack {
+            // --- 1. ПЛЪЗГАЩОТО СЕ БАЛОНЧЕ (BACKGROUND) ---
+            // То стои независимо от бутоните и просто следва позицията на selectedTab
+            if !isSearching {
+                Capsule()
+                    .fill(effectManager.currentGlobalAccentColor.opacity(0.4))
+                    .glassCardStyle(cornerRadius: 25)
+                    .padding(.horizontal, 5) // Същото отстъпване като в TabItem преди
+                    // Тук магията: matchedGeometryEffect с isSource: false
+                    // Това кара капсулата да "лети" към позицията на текущия таб
+                    .matchedGeometryEffect(id: selectedTab, in: animation, isSource: false)
+                    .frame(height: 44) // Фиксираме височината да съвпада с бутоните
             }
             
-            if isSearchButtonVisible && !navBarIsHiden {
-                ZStack {
-                    if !isSearching && selectedTab == .search {
-                        Capsule()
-                            .fill(Color.clear)
-                            .matchedGeometryEffect(id: "liquid_pill", in: animation)
-                    }
-                    
-                    if isSearching {
-                        Image("xmark_icon")
-                            .resizable()
-                            .renderingMode(.original)
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 20, height: 20)
-                    } else {
-                        Image("search_icon")
-                            .resizable()
-                            .renderingMode(.original)
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 30, height: 30)
-                    }
+            // --- 2. СЪДЪРЖАНИЕТО (HSTACK) ---
+            HStack(spacing: 0) {
+                ForEach(standardTabs) { tab in
+                    TabItem(
+                        tab: tab,
+                        selectedTab: $selectedTab,
+                        hasNewNutrition: $hasNewNutrition,
+                        hasNewTraining: $hasNewTraining,
+                        hasUnreadAINotifications: $hasUnreadAINotifications,
+                        isAIGenerating: isAIGenerating,
+                        accentColor: effectManager.currentGlobalAccentColor,
+                        isAccentColorLight: effectManager.isLightRowTextColor,
+                        animationNamespace: animation, // Подаваме namespace
+                        isAnimating: isAnimatingSelection
+                    )
+                    .simultaneousGesture(
+                        DragGesture(minimumDistance: 0)
+                            .onChanged { _ in
+                                if selectedTab != tab {
+                                    // Използваме Spring анимация за плавно движение
+                                    withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                        selectedTab = tab
+                                    }
+                                    menuState = .collapsed
+                                    navBarIsHiden = false
+                                    profilesMenuState = .collapsed
+                                    isProfilesDrawerVisible = false
+                                    
+                                    triggerSelectionPop()
+                                }
+                            }
+                    )
+                    .frame(maxWidth: isSearching ? 0 : .infinity)
+                    .opacity(isSearching ? 0 : 1)
                 }
-                .frame(width: isSearching ? 50 : nil, alignment: .center)
-                .frame(maxWidth: isSearching ? nil : .infinity)
-                .padding(.trailing, isSearching ? 10 : 0)
-                .contentShape(Rectangle())
-                // --- ПРОМЯНА: Същата логика за мигновена реакция и при Search бутона ---
-                .simultaneousGesture(
-                    DragGesture(minimumDistance: 0)
-                        .onChanged { _ in
-                            // Изпълняваме логиката само веднъж при докосване
-                            // (тъй като е Toggle, трябва да сме сигурни, че не премигва)
-                            // Затова тук е добре да оставим onTapGesture или да сме внимателни.
-                            // Ако искате и това да е мигновено, ето кода, но при бутони,
-                            // които превключват състояние (toggle), touch-down може да е прекалено бърз.
-                            // Ще го оставя с Gesture за консистентност с искането ви:
-                            
-                            // За да избегнем многократно извикване докато пръстът мърда, може да се наложи
-                            // допълнителна логика, но за прост бутон това обикновено работи, ако потребителят просто "тапне".
-                            // Все пак за Toggle бутони onTapGesture е по-безопасен, но ето исканата имплементация:
-                            
-                            // За Search бутона специфично е по-добре да реагираме на "End" на драга или
-                            // да използваме onTap, но ако държите да е Touch Down:
-                        }
-                        .onEnded { _ in
-                            // Ако искате search да е на пускане - оставете го тук.
-                            // Ако искате на натискане - преместете логиката в onChanged,
-                            // но внимавайте за дублиране.
-                            // В текущия код ще го върна на onTapGesture за Search бутона,
-                            // защото е по-стабилно за toggle функционалност,
-                            // а табовете по-горе са с мигновена реакция.
-                        }
-                )
-                // Връщам onTapGesture за Search бутона, за да не се затваря/отваря случайно при скрол
-                // Ако искате и той да е супер бърз, разкоментирайте долното и махнете onTapGesture
-                /*
-                .simultaneousGesture(DragGesture(minimumDistance: 0).onChanged({ _ in
-                    if isSearching { onDismissSearchTapped() } else { onSearchTapped() }
-                }))
-                */
-                .onTapGesture {
-                    if isSearching { onDismissSearchTapped() } else { onSearchTapped() }
+
+                // Логика за Search полето
+                if isSearching {
+                   ZStack(alignment: .leading) {
+                       if localSearchText.isEmpty {
+                           Text("Search...")
+                               .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.9))
+                               .padding(.leading, 4)
+                       }
+                       
+                       TextField("", text: $localSearchText)
+                           .foregroundColor(effectManager.currentGlobalAccentColor)
+                           .tint(effectManager.currentGlobalAccentColor)
+                           .disableAutocorrection(true)
+                           .autocapitalization(.none)
+                           .onChange(of: localSearchText) { _, newValue in
+                               searchText = newValue
+                           }
+                   }
+                   .padding(.leading, 20)
+                   .focused($isSearchFieldFocused)
+                   .transition(.opacity.animation(.easeIn(duration: 0.2).delay(0.1)))
                 }
-                .transition(.scale(scale: 0.1).combined(with: .opacity))
+                
+                // Бутон за търсене
+                if isSearchButtonVisible && !navBarIsHiden {
+                    ZStack {
+                        // Този Color.clear служи за котва, ако търсенето е активно като таб
+                        if !isSearching {
+                             Color.clear
+                                .frame(height: 44)
+                                // Ако search се третира като AppTab.search
+                                .matchedGeometryEffect(id: AppTab.search, in: animation, isSource: true)
+                        }
+                        
+                        if isSearching {
+                            Image("xmark_icon")
+                                .resizable()
+                                .renderingMode(.original)
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 20, height: 20)
+                        } else {
+                            Image("search_icon")
+                                .resizable()
+                                .renderingMode(.original)
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 30, height: 30)
+                        }
+                    }
+                    .frame(width: isSearching ? 50 : nil, alignment: .center)
+                    .frame(maxWidth: isSearching ? nil : .infinity)
+                    .padding(.trailing, isSearching ? 10 : 0)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        if isSearching { onDismissSearchTapped() } else { onSearchTapped() }
+                    }
+                    .transition(.scale(scale: 0.1).combined(with: .opacity))
+                }
             }
         }
         .padding(.vertical, 8)
@@ -219,6 +203,7 @@ struct LiquidTabBar: View {
     }
 }
 
+// --- Обновен TabItem ---
 private struct TabItem: View {
     let tab: AppTab
     @Binding var selectedTab: AppTab
@@ -230,7 +215,7 @@ private struct TabItem: View {
     
     let accentColor: Color
     let isAccentColorLight: Bool
-    let animationNamespace: Namespace.ID
+    let animationNamespace: Namespace.ID // Получаваме namespace
     let isAnimating: Bool
     
     private var selectedColor: Color { isAccentColorLight ? .black : .white }
@@ -264,16 +249,11 @@ private struct TabItem: View {
             }
         }
         .frame(maxWidth: .infinity)
+        // --- ПРОМЯНА: Тук вече не рисуваме капсулата условно.
+        // Вместо това слагаме "Котва" (Anchor) на заден план ---
         .background(
-            ZStack {
-                if selectedTab == tab {
-                    Capsule()
-                        .fill(accentColor.opacity(0.4))
-                        .matchedGeometryEffect(id: "liquid_pill", in: animationNamespace)
-                        .glassCardStyle(cornerRadius: 25)
-                        .padding(.horizontal, 5)
-                }
-            }
+            Color.clear // Невидим view, който определя размера и позицията
+                .matchedGeometryEffect(id: tab, in: animationNamespace, isSource: true)
         )
         .contentShape(Rectangle())
         .scaleEffect(selectedTab == tab && isAnimating ? 1.2 : 1.0)
