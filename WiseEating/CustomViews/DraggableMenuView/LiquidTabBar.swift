@@ -28,6 +28,7 @@ struct LiquidTabBar: View {
     
     let standardTabs: [AppTab]
 
+    // ... (init методът остава същият) ...
     init(
         menuState: Binding<MenuState>,
         selectedTab: Binding<AppTab>,
@@ -73,17 +74,20 @@ struct LiquidTabBar: View {
 
     var body: some View {
         ZStack {
+            // --- ПРОМЯНА: Проверяваме дали избраният таб е един от видимите ---
+            let isTabVisible = standardTabs.contains(selectedTab)
+            
             // --- 1. ПЛЪЗГАЩОТО СЕ БАЛОНЧЕ (BACKGROUND) ---
-            // То стои независимо от бутоните и просто следва позицията на selectedTab
-            if !isSearching {
+            // Показваме го САМО ако не търсим И ако табът е в списъка
+            if !isSearching && isTabVisible {
                 Capsule()
                     .fill(effectManager.currentGlobalAccentColor.opacity(0.4))
                     .glassCardStyle(cornerRadius: 25)
-                    .padding(.horizontal, 5) // Същото отстъпване като в TabItem преди
-                    // Тук магията: matchedGeometryEffect с isSource: false
-                    // Това кара капсулата да "лети" към позицията на текущия таб
+                    .padding(.horizontal, 5)
                     .matchedGeometryEffect(id: selectedTab, in: animation, isSource: false)
-                    .frame(height: 44) // Фиксираме височината да съвпада с бутоните
+                    .frame(height: 44)
+                    // Добавяме транзишън, за да изчезва плавно, а не рязко
+                    .transition(.opacity)
             }
             
             // --- 2. СЪДЪРЖАНИЕТО (HSTACK) ---
@@ -98,14 +102,13 @@ struct LiquidTabBar: View {
                         isAIGenerating: isAIGenerating,
                         accentColor: effectManager.currentGlobalAccentColor,
                         isAccentColorLight: effectManager.isLightRowTextColor,
-                        animationNamespace: animation, // Подаваме namespace
+                        animationNamespace: animation,
                         isAnimating: isAnimatingSelection
                     )
                     .simultaneousGesture(
                         DragGesture(minimumDistance: 0)
                             .onChanged { _ in
                                 if selectedTab != tab {
-                                    // Използваме Spring анимация за плавно движение
                                     withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
                                         selectedTab = tab
                                     }
@@ -148,11 +151,10 @@ struct LiquidTabBar: View {
                 // Бутон за търсене
                 if isSearchButtonVisible && !navBarIsHiden {
                     ZStack {
-                        // Този Color.clear служи за котва, ако търсенето е активно като таб
+                        // Котва за анимацията при търсене (ако се ползва като таб)
                         if !isSearching {
                              Color.clear
                                 .frame(height: 44)
-                                // Ако search се третира като AppTab.search
                                 .matchedGeometryEffect(id: AppTab.search, in: animation, isSource: true)
                         }
                         
@@ -189,6 +191,7 @@ struct LiquidTabBar: View {
         .glassCardStyle(cornerRadius: 50)
         .padding(.horizontal)
         .padding(.bottom, 8)
+        // Тези анимации са важни за плавния ефект при изчезване
         .animation(.interactiveSpring(response: 0.4, dampingFraction: 0.8), value: selectedTab)
         .animation(.interactiveSpring(response: 0.4, dampingFraction: 0.8), value: isSearching)
         .animation(.interactiveSpring(response: 0.4, dampingFraction: 0.8), value: isSearchButtonVisible)
