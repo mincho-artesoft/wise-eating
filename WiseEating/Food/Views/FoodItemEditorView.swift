@@ -4,6 +4,10 @@ import PhotosUI
 
 @MainActor
 struct FoodItemEditorView: View {
+    @State private var showPhotoSourceDialog = false
+    @State private var isShowingCameraPicker = false
+    @State private var isShowingPhotoLibraryPicker = false
+
     @ObservedObject private var aiManager = AIManager.shared // Add this
        @State private var hasUserMadeEdits: Bool = true // Add this
        @State private var runningGenerationJobID: UUID? = nil // Add this
@@ -621,31 +625,59 @@ struct FoodItemEditorView: View {
     }
 
 
-        private var photoPicker: some View {
-            let imageData = photoData
-            let color = effectManager.currentGlobalAccentColor.opacity(0.6)
+    private var photoPicker: some View {
+        let imageData = photoData
+        let color = effectManager.currentGlobalAccentColor.opacity(0.6)
 
-            return PhotosPicker(selection: $selectedPhoto, matching: .images) {
-                Group {
-                    if let data = imageData, let ui = UIImage(data: data) {
-                        Image(uiImage: ui).resizable().scaledToFill()
-                    } else {
-                        Image(systemName: "fork.knife.circle.fill").resizable().aspectRatio(contentMode: .fit).symbolRenderingMode(.hierarchical).foregroundStyle(color)
-                    }
-                }
-                .frame(width: 120, height: 120).clipShape(Circle())
-            }
-            .buttonStyle(.plain)
-            .onChange(of: selectedPhoto) { _, newItem in
-                Task {
-                    if let data = try? await newItem?.loadTransferable(type: Data.self) {
-                        await MainActor.run { photoData = data }
-                    }
+        return Button {
+            showPhotoSourceDialog = true
+        } label: {
+            Group {
+                if let data = imageData, let ui = UIImage(data: data) {
+                    Image(uiImage: ui)
+                        .resizable()
+                        .scaledToFill()
+                } else {
+                    Image(systemName: "fork.knife.circle.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .symbolRenderingMode(.hierarchical)
+                        .foregroundStyle(color)
                 }
             }
-            .padding(.leading, -4)
+            .frame(width: 120, height: 120)
+            .clipShape(Circle())
         }
-    
+        .buttonStyle(.plain)
+        .confirmationDialog("Select photo source", isPresented: $showPhotoSourceDialog) {
+            Button("Take Photo") {
+                isShowingCameraPicker = true
+            }
+            Button("Photo Library") {
+                isShowingPhotoLibraryPicker = true
+            }
+            Button("Cancel", role: .cancel) { }
+        }
+        .sheet(isPresented: $isShowingCameraPicker) {
+            CameraPicker { image in
+                if let data = image.jpegData(compressionQuality: 0.9) {
+                    photoData = data
+                    hasUserMadeEdits = true
+                }
+            }
+            .presentationCornerRadius(20)
+        }
+        .sheet(isPresented: $isShowingPhotoLibraryPicker) {
+            PhotoLibraryPicker { image in
+                if let data = image.jpegData(compressionQuality: 0.9) {
+                    photoData = data
+                    hasUserMadeEdits = true
+                }
+            }
+            .presentationCornerRadius(20)
+        }
+    }
+
     private var descriptionEditor: some View {
             ZStack(alignment: .topLeading) {
                 if itemDescription.isEmpty {

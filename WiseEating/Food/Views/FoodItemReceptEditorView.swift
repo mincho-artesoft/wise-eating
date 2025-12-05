@@ -4,6 +4,20 @@ import PhotosUI
 
 @MainActor
 struct FoodItemReceptEditorView: View {
+    // MARK: - Photo source state
+
+    private enum PhotoSourceTarget {
+        case main
+        case gallery
+        case galleryReplace(index: Int)
+    }
+
+    @State private var showPhotoSourceDialog = false
+    @State private var showCameraPicker = false
+    @State private var showPhotoLibraryPicker = false
+    @State private var currentPhotoTarget: PhotoSourceTarget? = nil
+
+    
     @State private var selectedNutrientID: String? = nil
     @State private var aiIsPressed: Bool = false
     @ObservedObject private var aiManager = AIManager.shared
@@ -320,6 +334,35 @@ struct FoodItemReceptEditorView: View {
            .onChange(of: itemDescription) { _, _ in hasUserMadeEdits = true }
            .onChange(of: selectedIng) { _, _ in hasUserMadeEdits = true }
            .onAppear { loadAIButtonPosition() }
+           .sheet(isPresented: $showCameraPicker) {
+               CameraPicker { image in
+                   handlePickedUIImage(image)
+               }
+               .presentationCornerRadius(20)
+           }
+           .sheet(isPresented: $showPhotoLibraryPicker) {
+               PhotoLibraryPicker { image in
+                   handlePickedUIImage(image)
+               }
+               .presentationCornerRadius(20)
+           }
+           .confirmationDialog(
+               "Select photo source",
+               isPresented: $showPhotoSourceDialog,
+           ) {
+               Button("Take Photo") {
+                   showPhotoSourceDialog = false
+                   showCameraPicker = true
+               }
+               Button("Choose from Library") {
+                   showPhotoSourceDialog = false
+                   showPhotoLibraryPicker = true
+               }
+               Button("Cancel", role: .cancel) {
+                   showPhotoSourceDialog = false
+                   currentPhotoTarget = nil
+               }
+           }
        }
 
     @ViewBuilder
@@ -852,10 +895,14 @@ struct FoodItemReceptEditorView: View {
         let imageData = photoData
         let color = effectManager.currentGlobalAccentColor.opacity(0.6)
 
-        return PhotosPicker(selection: $selectedPhoto, matching: .images) {
+        return Button {
+            presentPhotoSource(for: .main)
+        } label: {
             Group {
                 if let data = imageData, let ui = UIImage(data: data) {
-                    Image(uiImage: ui).resizable().scaledToFill()
+                    Image(uiImage: ui)
+                        .resizable()
+                        .scaledToFill()
                 } else {
                     Image(systemName: "fork.knife.circle.fill")
                         .resizable()
@@ -868,7 +915,6 @@ struct FoodItemReceptEditorView: View {
             .clipShape(Circle())
         }
         .buttonStyle(.plain)
-        .onChange(of: selectedPhoto, handleNewPhotoSelection)
         .padding(.leading, -4)
     }
 
@@ -894,24 +940,42 @@ struct FoodItemReceptEditorView: View {
             ForEach(Array(galleryData.enumerated()), id: \.offset) { index, data in
                 if let ui = UIImage(data: data) {
                     Image(uiImage: ui)
-                        .resizable().scaledToFill()
-                        .frame(width: 80, height: 80).clipped().cornerRadius(8)
-                        .onLongPressGesture { tappedIndex = index; showPopover = true }
-                        .popover(isPresented: popoverBinding(for: index), attachmentAnchor: .rect(.bounds), arrowEdge: .bottom) {
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 80, height: 80)
+                        .clipped()
+                        .cornerRadius(8)
+                        .onLongPressGesture {
+                            tappedIndex = index
+                            showPopover = true
+                        }
+                        .popover(
+                            isPresented: popoverBinding(for: index),
+                            attachmentAnchor: .rect(.bounds),
+                            arrowEdge: .bottom
+                        ) {
                             galleryPopoverContent(for: index, data: data)
                         }
                 }
             }
+
             let color = effectManager.currentGlobalAccentColor
-            PhotosPicker(selection: $newGalleryItems, matching: .images) {
+            Button {
+                presentPhotoSource(for: .gallery)
+            } label: {
                 ZStack {
-                    RoundedRectangle(cornerRadius: 8).stroke(style: .init(lineWidth: 1, dash: [4])).frame(width: 80, height: 80)
-                    Image(systemName: "plus").font(.title2.weight(.semibold))
-                }.foregroundColor(color)
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(style: .init(lineWidth: 1, dash: [4]))
+                        .frame(width: 80, height: 80)
+                    Image(systemName: "plus")
+                        .font(.title2.weight(.semibold))
+                }
+                .foregroundColor(color)
             }
-            .onChange(of: newGalleryItems, handleNewGalleryItems)
+            .buttonStyle(.plain)
         }
     }
+
     
     @ViewBuilder
     private func collapsibleHeader(_ title: String, isExpanded: Binding<Bool>, hasOtherItems: Bool = true) -> some View {
@@ -1075,17 +1139,37 @@ struct FoodItemReceptEditorView: View {
 
     private func galleryPopoverContent(for index: Int, data: Data) -> some View {
         HStack(spacing: 0) {
-            Button("Set as main") { photoData = data; showPopover = false }.frame(maxWidth: .infinity)
+            Button("Set as main") {
+                photoData = data
+                showPopover = false
+            }
+            .frame(maxWidth: .infinity)
+
             Divider()
-            Button("Change") { replaceAtIndex = index; showPopover = false; showReplacePicker = true }.frame(maxWidth: .infinity)
+
+            Button("Change") {
+                showPopover = false
+                presentPhotoSource(for: .galleryReplace(index: index))
+            }
+            .frame(maxWidth: .infinity)
+
             Divider()
-            Button(role: .destructive) { galleryData.remove(at: index); showPopover = false } label: { Text("Remove") }.frame(maxWidth: .infinity)
+
+            Button(role: .destructive) {
+                galleryData.remove(at: index)
+                showPopover = false
+            } label: {
+                Text("Remove")
+            }
+            .frame(maxWidth: .infinity)
         }
         .font(.footnote)
-        .padding(.horizontal, 12).padding(.vertical, 8)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 8)
         .frame(minWidth: 300)
         .presentationCompactAdaptation(.none)
     }
+
 
     private func handleNewPhotoSelection(_: PhotosPickerItem?, newItem: PhotosPickerItem?) {
         Task {
@@ -2074,6 +2158,34 @@ struct FoodItemReceptEditorView: View {
         }
         showAlert = true
         return false
+    }
+
+    private func presentPhotoSource(for target: PhotoSourceTarget) {
+        currentPhotoTarget = target
+        showPhotoSourceDialog = true
+    }
+
+    private func handlePickedUIImage(_ image: UIImage) {
+        guard let data = image.jpegData(compressionQuality: 0.9) else { return }
+
+        switch currentPhotoTarget {
+        case .main:
+            photoData = data
+
+        case .gallery:
+            galleryData.append(data)
+
+        case .galleryReplace(let index):
+            if galleryData.indices.contains(index) {
+                galleryData[index] = data
+            }
+
+        case .none:
+            break
+        }
+
+        // след успешен избор – чистим таргета
+        currentPhotoTarget = nil
     }
 
 }

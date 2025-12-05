@@ -1,17 +1,28 @@
-
 import SwiftUI
 import SwiftData
 import PhotosUI
 
 @MainActor
 struct ExerciseItemEditorView: View {
-    @ObservedObject private var aiManager = AIManager.shared // Add this
-       @State private var hasUserMadeEdits: Bool = true // Add this
-       @State private var runningGenerationJobID: UUID? = nil // Add this
-       @State private var showAIGenerationToast = false // Add this
-       @State private var toastTimer: Timer? = nil // Add this
-       @State private var toastProgress: Double = 0.0 // Add this
+    @ObservedObject private var aiManager = AIManager.shared
+    @State private var hasUserMadeEdits: Bool = true
+    @State private var runningGenerationJobID: UUID? = nil
+    @State private var showAIGenerationToast = false
+    @State private var toastTimer: Timer? = nil
+    @State private var toastProgress: Double = 0.0
     @State private var alertMsg = ""
+
+    // --- Photo source state (като при FoodItemReceptEditorView) ---
+    private enum PhotoSourceTarget {
+        case main
+        case gallery
+        case galleryReplace(index: Int)
+    }
+
+    @State private var showPhotoSourceDialog = false
+    @State private var showCameraPicker = false
+    @State private var showPhotoLibraryPicker = false
+    @State private var currentPhotoTarget: PhotoSourceTarget? = nil
 
     // --- AI Floating Button: State ---
     @State private var isAIButtonVisible: Bool = true
@@ -22,7 +33,6 @@ struct ExerciseItemEditorView: View {
     private let aiButtonPositionKey = "floatingFoodAIButtonPosition"
     @State private var isGeneratingAIData = false
 
-    
     @ObservedObject private var effectManager = EffectManager.shared
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.modelContext) private var ctx
@@ -44,9 +54,9 @@ struct ExerciseItemEditorView: View {
     @State private var videoURL: String
     @State private var metValueString: String
     @State private var durationMinutesString: String
-    // +++ НАЧАЛО НА ПРОМЯНАТА 1/6: Добавяме ново състояние +++
     @State private var minAgeMonthsTxt: String
 
+    // Вече не ползваме PhotosPicker директно, но може да оставим това състояние ако искаш
     @State private var selectedPhoto: PhotosPickerItem?
     @State private var photoData: Data?
     
@@ -54,7 +64,7 @@ struct ExerciseItemEditorView: View {
     @State private var selectedSports: Set<Sport.ID>
     
     @State private var galleryData: [Data] = []
-    @State private var newGalleryItems: [PhotosPickerItem] = []
+    @State private var newGalleryItems: [PhotosPickerItem] = []   // вече не се използва, но не пречи
     @State private var showReplacePicker = false
     @State private var replacementItem: PhotosPickerItem?
     @State private var replaceAtIndex: Int?
@@ -142,8 +152,11 @@ struct ExerciseItemEditorView: View {
                 mainForm
             }
             .alert("Error", isPresented: $showAlert) {
-                Button("OK", role: .cancel) { }.foregroundColor(effectManager.currentGlobalAccentColor)
-            } message: { Text(alertMessage) }
+                Button("OK", role: .cancel) { }
+                    .foregroundColor(effectManager.currentGlobalAccentColor)
+            } message: {
+                Text(alertMessage)
+            }
             .presentationDetents([.medium, .large])
             .disabled(isSaving)
             .blur(radius: isSaving ? 1.5 : 0)
@@ -177,7 +190,6 @@ struct ExerciseItemEditorView: View {
             }
             GeometryReader { geometry in
                 Group {
-                    // Скрий при deviceNotEligible; иначе покажи и остави tap да реши какво да прави
                     if !isSaving && !showAlert && GlobalState.aiAvailability != .deviceNotEligible {
                         AIButton(geometry: geometry)
                     }
@@ -185,36 +197,62 @@ struct ExerciseItemEditorView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
             }
         }
-           .onReceive(NotificationCenter.default.publisher(for: .aiExerciseDetailJobCompleted)) { notification in
-                      guard !hasUserMadeEdits,
-                            let userInfo = notification.userInfo,
-                            let completedJobID = userInfo["jobID"] as? UUID,
-                            completedJobID == self.runningGenerationJobID else {
-                          return
-                      }
+        .onReceive(NotificationCenter.default.publisher(for: .aiExerciseDetailJobCompleted)) { notification in
+            guard !hasUserMadeEdits,
+                  let userInfo = notification.userInfo,
+                  let completedJobID = userInfo["jobID"] as? UUID,
+                  completedJobID == self.runningGenerationJobID else {
+                return
+            }
 
-                      print("▶️ ExerciseItemEditorView: Received .aiExerciseDetailJobCompleted for job \(completedJobID). Populating data.")
-                      
-               
-                      Task {
-                          if #available(iOS 26.0, *) {
-                              await populateFromCompletedJob(jobID: completedJobID)
-                          } else {
-                              // Fallback on earlier versions
-                          }
-                      }
-                  }
-           .onChange(of: name) { _, _ in hasUserMadeEdits = true }
-           .onChange(of: description) { _, _ in hasUserMadeEdits = true }
-           .onChange(of: selectedPhoto) { _, _ in hasUserMadeEdits = true }
-           .onAppear { loadAIButtonPosition() }
+            print("▶️ ExerciseItemEditorView: Received .aiExerciseDetailJobCompleted for job \(completedJobID). Populating data.")
+            
+            Task {
+                if #available(iOS 26.0, *) {
+                    await populateFromCompletedJob(jobID: completedJobID)
+                }
+            }
+        }
+        .onChange(of: name) { _, _ in hasUserMadeEdits = true }
+        .onChange(of: description) { _, _ in hasUserMadeEdits = true }
+        .onAppear { loadAIButtonPosition() }
+        .sheet(isPresented: $showCameraPicker) {
+            CameraPicker { image in
+                handlePickedUIImage(image)
+            }
+            .presentationCornerRadius(20)
+        }
+        .sheet(isPresented: $showPhotoLibraryPicker) {
+            PhotoLibraryPicker { image in
+                handlePickedUIImage(image)
+            }
+            .presentationCornerRadius(20)
+        }
+        .confirmationDialog(
+            "Select photo source",
+            isPresented: $showPhotoSourceDialog
+        ) {
+            Button("Take Photo") {
+                showPhotoSourceDialog = false
+                showCameraPicker = true
+            }
+            Button("Choose from Library") {
+                showPhotoSourceDialog = false
+                showPhotoLibraryPicker = true
+            }
+            Button("Cancel", role: .cancel) {
+                showPhotoSourceDialog = false
+                currentPhotoTarget = nil
+            }
+        }
     }
     
     @ViewBuilder
     private var customToolbar: some View {
         HStack {
             Button("Cancel", action: { onDismiss(nil) })
-                .padding(.horizontal, 10).padding(.vertical, 5)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
                 .glassCardStyle(cornerRadius: 20)
             
             Spacer()
@@ -223,7 +261,8 @@ struct ExerciseItemEditorView: View {
             
             Button("Save", action: save)
                 .disabled(isSaveDisabled)
-                .padding(.horizontal, 10).padding(.vertical, 5)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
                 .glassCardStyle(cornerRadius: 20)
                 .foregroundStyle(isSaveDisabled ? effectManager.currentGlobalAccentColor.opacity(0.4) : effectManager.currentGlobalAccentColor)
         }
@@ -232,42 +271,41 @@ struct ExerciseItemEditorView: View {
     }
     
     private var mainForm: some View {
-          ScrollViewReader { proxy in
-              ScrollView(showsIndicators: false) {
-                  VStack(spacing: 24) {
-                      generalSection
-                      gallerySection
-                      detailsSection
-                      muscleGroupSection
-                      sportsSection
-                  }
-                  .padding()
-                  Spacer(minLength: 150)
-              }
-              .onChange(of: focusedField) { _, newFocus in
-                  guard let fieldID = newFocus else { return }
-                  
-                  DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-                      withAnimation(.easeInOut(duration: 0.3)) {
-                          proxy.scrollTo(fieldID, anchor: .top)
-                      }
-                  }
-              }
-              .mask(
-                  LinearGradient(
-                      gradient: Gradient(stops: [
-                          .init(color: .clear, location: 0),
-                          .init(color: effectManager.currentGlobalAccentColor, location: 0.01),
-                          .init(color: effectManager.currentGlobalAccentColor, location: 0.9),
-                          .init(color: .clear, location: 0.95)
-                      ]),
-                      startPoint: .top,
-                      endPoint: .bottom
-                  )
-              )
-              .background(Color.clear)
-          }
-      }
+        ScrollViewReader { proxy in
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 24) {
+                    generalSection
+                    gallerySection
+                    detailsSection
+                    muscleGroupSection
+                    sportsSection
+                }
+                .padding()
+                Spacer(minLength: 150)
+            }
+            .onChange(of: focusedField) { _, newFocus in
+                guard let fieldID = newFocus else { return }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        proxy.scrollTo(fieldID, anchor: .top)
+                    }
+                }
+            }
+            .mask(
+                LinearGradient(
+                    gradient: Gradient(stops: [
+                        .init(color: .clear, location: 0),
+                        .init(color: effectManager.currentGlobalAccentColor, location: 0.01),
+                        .init(color: effectManager.currentGlobalAccentColor, location: 0.9),
+                        .init(color: .clear, location: 0.95)
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            )
+            .background(Color.clear)
+        }
+    }
     
     // MARK: - Sections
     private var generalSection: some View {
@@ -279,7 +317,15 @@ struct ExerciseItemEditorView: View {
 
             VStack(spacing: 16) {
                 StyledLabeledPicker(label: "Exercise Name", isRequired: true) {
-                    ConfigurableTextField(title: "e.g., Barbell Squat", value: $name, type: .standard, placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6), textAlignment: .leading, focused: $focusedField, fieldIdentifier: .name)
+                    ConfigurableTextField(
+                        title: "e.g., Barbell Squat",
+                        value: $name,
+                        type: .standard,
+                        placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
+                        textAlignment: .leading,
+                        focused: $focusedField,
+                        fieldIdentifier: .name
+                    )
                 }
                 .id(FocusableField.name)
                 
@@ -301,7 +347,6 @@ struct ExerciseItemEditorView: View {
                         }
                         .id(FocusableField.duration)
                         
-                        
                         StyledLabeledPicker(label: "Description", height: 120) {
                             descriptionEditor
                                 .focused($focusedField, equals: .description)
@@ -309,7 +354,7 @@ struct ExerciseItemEditorView: View {
                         .id(FocusableField.description)
                     }
                 }
-                 // +++ НАЧАЛО НА ПРОМЯНАТА 4/6: Добавяме новото поле тук +++
+                
                 StyledLabeledPicker(label: "Minimum Age (months)") {
                     ConfigurableTextField(
                         title: "e.g. 6",
@@ -323,7 +368,6 @@ struct ExerciseItemEditorView: View {
                     .font(.system(size: 16))
                 }
                 .id(FocusableField.minAge)
-                 // +++ КРАЙ НА ПРОМЯНАТА 4/6 ---
             }
             .padding()
             .glassCardStyle(cornerRadius: 20)
@@ -339,7 +383,8 @@ struct ExerciseItemEditorView: View {
                     .padding(.horizontal, 3)
                     .padding(.vertical, 8)
             }
-            TextEditor(text: $description).font(.system(size: 16))
+            TextEditor(text: $description)
+                .font(.system(size: 16))
                 .frame(height: 120)
                 .scrollContentBackground(.hidden)
                 .foregroundStyle(effectManager.currentGlobalAccentColor)
@@ -355,6 +400,9 @@ struct ExerciseItemEditorView: View {
             VStack { galleryGrid }
                 .padding()
                 .glassCardStyle(cornerRadius: 20)
+                // като при FoodItemReceptEditorView – PhotosPicker остава само за legacy replace по желание
+                .photosPicker(isPresented: $showReplacePicker, selection: $replacementItem, matching: .images)
+                .onChange(of: replacementItem, handleReplacementItemChange)
         }
     }
     
@@ -364,34 +412,70 @@ struct ExerciseItemEditorView: View {
                 if let ui = UIImage(data: data) {
                     Image(uiImage: ui)
                         .resizable().scaledToFill()
-                        .frame(width: 80, height: 80).clipped().cornerRadius(8)
-                        .onLongPressGesture { tappedIndex = index; showPopover = true }
-                        .popover(isPresented: popoverBinding(for: index), attachmentAnchor: .rect(.bounds), arrowEdge: .bottom) {
+                        .frame(width: 80, height: 80)
+                        .clipped()
+                        .cornerRadius(8)
+                        .onLongPressGesture {
+                            tappedIndex = index
+                            showPopover = true
+                        }
+                        .popover(
+                            isPresented: popoverBinding(for: index),
+                            attachmentAnchor: .rect(.bounds),
+                            arrowEdge: .bottom
+                        ) {
                             galleryPopoverContent(for: index, data: data)
                         }
                 }
             }
             let color = effectManager.currentGlobalAccentColor
-            PhotosPicker(selection: $newGalleryItems, matching: .images) {
+            Button {
+                presentPhotoSource(for: .gallery)
+            } label: {
                 ZStack {
-                    RoundedRectangle(cornerRadius: 8).stroke(style: .init(lineWidth: 1, dash: [4])).frame(width: 80, height: 80)
-                    Image(systemName: "plus").font(.title2.weight(.semibold))
-                }.foregroundColor(color)
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(style: .init(lineWidth: 1, dash: [4]))
+                        .frame(width: 80, height: 80)
+                    Image(systemName: "plus")
+                        .font(.title2.weight(.semibold))
+                }
+                .foregroundColor(color)
             }
-            .onChange(of: newGalleryItems, handleNewGalleryItems)
+            .buttonStyle(.plain)
         }
     }
 
     private func galleryPopoverContent(for index: Int, data: Data) -> some View {
         HStack(spacing: 0) {
-            Button("Set as main") { photoData = data; showPopover = false }.frame(maxWidth: .infinity)
+            Button("Set as main") {
+                photoData = data
+                showPopover = false
+                hasUserMadeEdits = true
+            }
+            .frame(maxWidth: .infinity)
+            
             Divider()
-            Button("Change") { replaceAtIndex = index; showPopover = false; showReplacePicker = true }.frame(maxWidth: .infinity)
+            
+            Button("Change") {
+                showPopover = false
+                presentPhotoSource(for: .galleryReplace(index: index))
+            }
+            .frame(maxWidth: .infinity)
+            
             Divider()
-            Button(role: .destructive) { galleryData.remove(at: index); showPopover = false } label: { Text("Remove") }.frame(maxWidth: .infinity)
+            
+            Button(role: .destructive) {
+                galleryData.remove(at: index)
+                showPopover = false
+                hasUserMadeEdits = true
+            } label: {
+                Text("Remove")
+            }
+            .frame(maxWidth: .infinity)
         }
         .font(.footnote)
-        .padding(.horizontal, 12).padding(.vertical, 8)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 8)
         .frame(minWidth: 300)
         .presentationCompactAdaptation(.none)
     }
@@ -399,12 +483,28 @@ struct ExerciseItemEditorView: View {
     private var detailsSection: some View {
         VStack(spacing: 16) {
             StyledLabeledPicker(label: "Video URL (optional)") {
-                ConfigurableTextField(title: "e.g., https://youtube.com/...", value: $videoURL, type: .standard, placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6), textAlignment: .leading, focused: $focusedField, fieldIdentifier: .videoURL)
+                ConfigurableTextField(
+                    title: "e.g., https://youtube.com/...",
+                    value: $videoURL,
+                    type: .standard,
+                    placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
+                    textAlignment: .leading,
+                    focused: $focusedField,
+                    fieldIdentifier: .videoURL
+                )
             }
             .id(FocusableField.videoURL)
             
             StyledLabeledPicker(label: "MET Value (optional)") {
-                ConfigurableTextField(title: "e.g., 8.0", value: $metValueString, type: .decimal, placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6), textAlignment: .leading, focused: $focusedField, fieldIdentifier: .metValue)
+                ConfigurableTextField(
+                    title: "e.g., 8.0",
+                    value: $metValueString,
+                    type: .decimal,
+                    placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
+                    textAlignment: .leading,
+                    focused: $focusedField,
+                    fieldIdentifier: .metValue
+                )
             }
             .id(FocusableField.metValue)
         }
@@ -414,45 +514,66 @@ struct ExerciseItemEditorView: View {
     
     private var muscleGroupSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Primary Muscles").font(.headline).foregroundStyle(effectManager.currentGlobalAccentColor)
-            MultiSelectButton(selection: $selectedMuscleGroups, items: MuscleGroup.allCases, label: { $0.rawValue }, prompt: "Select muscle groups...", isExpanded: openMenu == .muscle)
-                .contentShape(Rectangle())
-                .onTapGesture { withAnimation { openMenu = .muscle } }
-                .padding(.vertical, 5).padding(.horizontal, 10)
-                .glassCardStyle(cornerRadius: 20)
+            Text("Primary Muscles")
+                .font(.headline)
+                .foregroundStyle(effectManager.currentGlobalAccentColor)
+            MultiSelectButton(
+                selection: $selectedMuscleGroups,
+                items: MuscleGroup.allCases,
+                label: { $0.rawValue },
+                prompt: "Select muscle groups...",
+                isExpanded: openMenu == .muscle
+            )
+            .contentShape(Rectangle())
+            .onTapGesture { withAnimation { openMenu = .muscle } }
+            .padding(.vertical, 5)
+            .padding(.horizontal, 10)
+            .glassCardStyle(cornerRadius: 20)
         }
     }
     
     private var sportsSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Related Sports").font(.headline).foregroundStyle(effectManager.currentGlobalAccentColor)
-            MultiSelectButton(selection: $selectedSports, items: Sport.allCases.sorted { $0.rawValue < $1.rawValue }, label: { $0.rawValue }, prompt: "Select related sports...", isExpanded: openMenu == .sport)
-                .contentShape(Rectangle())
-                .onTapGesture { withAnimation { openMenu = .sport } }
-                .padding(.vertical, 5).padding(.horizontal, 10)
-                .glassCardStyle(cornerRadius: 20)
+            Text("Related Sports")
+                .font(.headline)
+                .foregroundStyle(effectManager.currentGlobalAccentColor)
+            MultiSelectButton(
+                selection: $selectedSports,
+                items: Sport.allCases.sorted { $0.rawValue < $1.rawValue },
+                label: { $0.rawValue },
+                prompt: "Select related sports...",
+                isExpanded: openMenu == .sport
+            )
+            .contentShape(Rectangle())
+            .onTapGesture { withAnimation { openMenu = .sport } }
+            .padding(.vertical, 5)
+            .padding(.horizontal, 10)
+            .glassCardStyle(cornerRadius: 20)
         }
     }
 
     // MARK: - UI Components
     private var photoPicker: some View {
         let imageData = photoData
-        let color = effectManager.currentGlobalAccentColor
+        let color = effectManager.currentGlobalAccentColor.opacity(0.6)
         
-       return PhotosPicker(selection: $selectedPhoto, matching: .images) {
+        return Button {
+            presentPhotoSource(for: .main)
+        } label: {
             Group {
                 if let data = imageData, let uiImage = UIImage(data: data) {
-                    Image(uiImage: uiImage).resizable().scaledToFill()
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFill()
                 } else {
                     ZStack {
                         Circle()
-                            .fill(color.opacity(0.1))
-                        
+                            .fill(color.opacity(0.15))
                         Image(systemName: "dumbbell.fill")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 80, height: 80)
-                            .foregroundStyle(color.opacity(0.6))
+                            .foregroundStyle(color)
                     }
                 }
             }
@@ -460,13 +581,6 @@ struct ExerciseItemEditorView: View {
             .clipShape(Circle())
         }
         .buttonStyle(.plain)
-        .onChange(of: selectedPhoto) { _, newItem in
-            Task {
-                if let data = try? await newItem?.loadTransferable(type: Data.self) {
-                    photoData = data
-                }
-            }
-        }
         .padding(.leading, -4)
     }
     
@@ -479,20 +593,36 @@ struct ExerciseItemEditorView: View {
 
             VStack(spacing: 8) {
                 HStack {
-                    Text("Select \(openMenu.title)").font(.headline).foregroundColor(effectManager.currentGlobalAccentColor)
+                    Text("Select \(openMenu.title)")
+                        .font(.headline)
+                        .foregroundColor(effectManager.currentGlobalAccentColor)
                     Spacer()
                     Button("Done") { withAnimation { openMenu = .none } }
                         .foregroundColor(effectManager.currentGlobalAccentColor)
-                        .padding(.horizontal, 10).padding(.vertical, 5)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 5)
                         .glassCardStyle(cornerRadius: 20)
                 }
-                .padding(.horizontal).frame(height: 35)
+                .padding(.horizontal)
+                .frame(height: 35)
                 
                 switch openMenu {
                 case .muscle:
-                    IconMultiSelectGridView(items: MuscleGroup.allCases, selection: $selectedMuscleGroups, searchPrompt: "Search muscles...", iconSize: CGSize(width: 48, height: 80), useIconColor: true)
+                    IconMultiSelectGridView(
+                        items: MuscleGroup.allCases,
+                        selection: $selectedMuscleGroups,
+                        searchPrompt: "Search muscles...",
+                        iconSize: CGSize(width: 48, height: 80),
+                        useIconColor: true
+                    )
                 case .sport:
-                    IconMultiSelectGridView(items: Sport.allCases.sorted { $0.rawValue < $1.rawValue }, selection: $selectedSports, searchPrompt: "Search sports...", iconSize: CGSize(width: 48, height: 48), useIconColor: false)
+                    IconMultiSelectGridView(
+                        items: Sport.allCases.sorted { $0.rawValue < $1.rawValue },
+                        selection: $selectedSports,
+                        searchPrompt: "Search sports...",
+                        iconSize: CGSize(width: 48, height: 48),
+                        useIconColor: false
+                    )
                 case .none:
                     EmptyView()
                 }
@@ -501,7 +631,7 @@ struct ExerciseItemEditorView: View {
             .background {
                 Rectangle()
                     .fill(.ultraThinMaterial)
-                    .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light) // 👈 Това принуждава материала да е тъмен
+                    .environment(\.colorScheme, effectManager.isLightRowTextColor ? .dark : .light)
             }
             .cornerRadius(20, corners: [.topLeft, .topRight])
             .frame(maxHeight: UIScreen.main.bounds.height * 0.85)
@@ -514,7 +644,9 @@ struct ExerciseItemEditorView: View {
     private func save() {
         let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmedName.isEmpty else {
-            alertMessage = "Exercise name cannot be empty."; showAlert = true; return
+            alertMessage = "Exercise name cannot be empty."
+            showAlert = true
+            return
         }
         
         Task {
@@ -558,11 +690,14 @@ struct ExerciseItemEditorView: View {
                 try ctx.save()
                 onDismiss(itemToSave)
             } catch {
-                alertMessage = "Failed to save exercise: \(error.localizedDescription)"; showAlert = true; isSaving = false
+                alertMessage = "Failed to save exercise: \(error.localizedDescription)"
+                showAlert = true
+                isSaving = false
             }
         }
     }
     
+    // Оставяме тази функция, макар че вече не ползваме PhotosPicker за добавяне
     private func handleNewGalleryItems(_: [PhotosPickerItem], items: [PhotosPickerItem]) {
         Task {
             for item in items {
@@ -594,7 +729,7 @@ struct ExerciseItemEditorView: View {
         )
     }
     
-    // +++ НАЧАЛО НА ПРОМЯНАТА (6/7): Добавяме нови функции за AI +++
+    // MARK: - AI
     private func handleAITap() {
         guard ensureAIAvailableOrShowMessage() else { return }
         
@@ -611,7 +746,7 @@ struct ExerciseItemEditorView: View {
             triggerAIGenerationToast()
 
             if let newJob = aiManager.startExerciseDetailGeneration(
-                for: self.profile, // Профилът не е задължителен тук
+                for: self.profile,
                 exerciseName: self.name,
                 jobType: .exerciseDetail
             ) {
@@ -619,7 +754,8 @@ struct ExerciseItemEditorView: View {
             } else {
                 alertMessage = "Could not start AI generation job."
                 showAlert = true
-                toastTimer?.invalidate(); toastTimer = nil
+                toastTimer?.invalidate()
+                toastTimer = nil
                 withAnimation { showAIGenerationToast = false }
             }
         } else {
@@ -632,7 +768,10 @@ struct ExerciseItemEditorView: View {
     private func populateFromCompletedJob(jobID: UUID) async {
         guard let job = (aiManager.jobs.first { $0.id == jobID }),
               let resultData = job.resultData else {
-            alertMsg = "Could not find completed job data."; showAlert = true; runningGenerationJobID = nil; return
+            alertMsg = "Could not find completed job data."
+            showAlert = true
+            runningGenerationJobID = nil
+            return
         }
 
         do {
@@ -652,7 +791,9 @@ struct ExerciseItemEditorView: View {
             runningGenerationJobID = nil
 
         } catch {
-            alertMessage = "Failed to process AI data: \(error.localizedDescription)"; showAlert = true; runningGenerationJobID = nil
+            alertMessage = "Failed to process AI data: \(error.localizedDescription)"
+            showAlert = true
+            runningGenerationJobID = nil
             await aiManager.deleteJob(job)
         }
     }
@@ -671,7 +812,8 @@ struct ExerciseItemEditorView: View {
                 }
                 Spacer()
                 Button("OK") {
-                    toastTimer?.invalidate(); toastTimer = nil
+                    toastTimer?.invalidate()
+                    toastTimer = nil
                     withAnimation { showAIGenerationToast = false }
                 }
                 .buttonStyle(.borderless)
@@ -692,7 +834,7 @@ struct ExerciseItemEditorView: View {
         toastProgress = 0.0
         withAnimation { showAIGenerationToast = true }
 
-        let totalDuration = 5.0 // По-дълго време
+        let totalDuration = 5.0
         let updateInterval = 0.1
         let progressIncrement = updateInterval / totalDuration
 
@@ -809,14 +951,43 @@ struct ExerciseItemEditorView: View {
         showAlert = true
         return false
     }
+
+    // MARK: - Photo source helpers (същите като при FoodItemReceptEditorView)
+    private func presentPhotoSource(for target: PhotoSourceTarget) {
+        currentPhotoTarget = target
+        showPhotoSourceDialog = true
+    }
+
+    private func handlePickedUIImage(_ image: UIImage) {
+        guard let data = image.jpegData(compressionQuality: 0.9) else { return }
+
+        switch currentPhotoTarget {
+        case .main:
+            photoData = data
+
+        case .gallery:
+            galleryData.append(data)
+
+        case .galleryReplace(let index):
+            if galleryData.indices.contains(index) {
+                galleryData[index] = data
+            }
+
+        case .none:
+            break
+        }
+
+        hasUserMadeEdits = true
+        currentPhotoTarget = nil
+    }
 }
 
 fileprivate extension ExerciseItemEditorView.OpenMenu {
     var title: String {
         switch self {
         case .muscle: "Muscle Groups"
-        case .sport: "Sports"
-        case .none: ""
+        case .sport:  "Sports"
+        case .none:   ""
         }
     }
 }

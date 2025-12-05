@@ -1,6 +1,77 @@
 import SwiftUI
+import AVFoundation
 
-struct CameraPicker: UIViewControllerRepresentable {
+/// Основният View, който управлява логиката за достъп до камерата.
+struct CameraPicker: View {
+    var onImagePicked: (UIImage) -> Void
+    @Environment(\.presentationMode) private var presentationMode
+    
+    // Следим статуса на правата
+    @State private var permissionStatus: AVAuthorizationStatus = .notDetermined
+    
+    var body: some View {
+        Group {
+            switch permissionStatus {
+            case .authorized:
+                // Ако имаме права, показваме контролера на камерата
+                CameraPickerRepresentable(onImagePicked: onImagePicked)
+                
+            case .denied, .restricted:
+                // Ако правата са отказани, показваме екрана за грешка
+                PermissionDeniedView(
+                    type: .camera,
+                    hasBackground: true,
+                    onTryAgain: {
+                        checkPermission()
+                    }
+                )
+                // Добавяме бутон за затваряне, защото PermissionDeniedView може да не го включва по подразбиране в този контекст
+                .overlay(alignment: .topLeading) {
+                    Button("Cancel") {
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                    .padding()
+                    .foregroundColor(.primary)
+                }
+                
+            case .notDetermined:
+                // Докато зареждаме или искаме права
+                ZStack {
+                    Color.black.ignoresSafeArea()
+                    ProgressView()
+                }
+                .task {
+                    await requestPermission()
+                }
+                
+            @unknown default:
+                ContentUnavailableView("Unknown Camera Error", systemImage: "camera.badge.ellipsis")
+            }
+        }
+        .onAppear {
+            checkPermission()
+        }
+    }
+    
+    private func checkPermission() {
+        let status = AVCaptureDevice.authorizationStatus(for: .video)
+        // Обновяваме UI на главната нишка
+        DispatchQueue.main.async {
+            self.permissionStatus = status
+        }
+    }
+    
+    private func requestPermission() async {
+        let granted = await AVCaptureDevice.requestAccess(for: .video)
+        DispatchQueue.main.async {
+            self.permissionStatus = granted ? .authorized : .denied
+        }
+    }
+}
+
+// MARK: - Internal Implementation
+/// Това е оригиналният `CameraPicker`, сега преименуван и скрит, за да се ползва само вътрешно.
+fileprivate struct CameraPickerRepresentable: UIViewControllerRepresentable {
     var onImagePicked: (UIImage) -> Void
     @Environment(\.presentationMode) private var presentationMode
 
@@ -8,6 +79,8 @@ struct CameraPicker: UIViewControllerRepresentable {
         let picker = UIImagePickerController()
         picker.sourceType = .camera
         picker.delegate = context.coordinator
+        // Задаваме черен фон, за да не се вижда бяло премигване при старт
+        picker.view.backgroundColor = .black
         return picker
     }
 
@@ -18,9 +91,9 @@ struct CameraPicker: UIViewControllerRepresentable {
     }
 
     final class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-        var parent: CameraPicker
+        var parent: CameraPickerRepresentable
 
-        init(_ parent: CameraPicker) {
+        init(_ parent: CameraPickerRepresentable) {
             self.parent = parent
         }
 
