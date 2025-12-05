@@ -29,37 +29,38 @@ class ScannedItem: ObservableObject, @preconcurrency Identifiable {
             self.isLoading = true
 
             // 2. Извършваме бързото локално търсене.
-            let modelContext = ModelContext(container)
+            // ProductLookupService.shared.lookup се очаква да е thread-safe или actor-isolated
             let productInfo = await ProductLookupService.shared.lookup(gtin: gtin)
 
-            // 3. Актуализираме UI веднага след локалното търсене. Все още сме на Main Actor.
+            // 3. Актуализираме UI веднага след локалното търсене.
             self.productName = productInfo?.title
             
-            // 4. Ако продукт е намерен локално, продължаваме с по-бавното AI търсене. В противен случай, приключваме.
+            // 4. Ако продукт е намерен локално, продължаваме с AI търсенето.
             if let info = productInfo {
-                // UI вече показва името на продукта със спинър.
-                // Сега стартираме бавното AI търсене в отделна задача.
-                let resolvedID: PersistentIdentifier? = try? await Task.detached(priority: .userInitiated) {
-                    let smartFoodSearch = SmartFoodSearch(container: container)
-                    let tokenizedWords = FoodItem.makeTokens(from: info.title)
-                    let ids = await smartFoodSearch.searchFoodsAI(query: info.title, limit: 1, context: nil, requiredHeadwords: tokenizedWords)
-                    return ids.first
-                }.value
+                // Инициализираме SmartFoodSearch3 (изисква MainActor)
+                let smartFoodSearch = SmartFoodSearch3(container: container)
+                let tokenizedWords = FoodItem.makeTokens(from: info.title)
+                
+                // Изпълняваме търсенето (SmartFoodSearch3.searchFoodsAI е async @MainActor)
+                let ids = await smartFoodSearch.searchFoodsAI(
+                    query: info.title,
+                    limit: 1,
+                    context: nil,
+                    requiredHeadwords: tokenizedWords
+                )
 
                 // 5. Финална актуализация на UI на MainActor.
-                if let pid = resolvedID {
+                if let pid = ids.first {
                     let context = ModelContext(container)
                     if let foodItem = context.model(for: pid) as? FoodItem {
                         self.resolvedFoodItem = foodItem
                     }
                 }
-                self.isLoading = false
-            } else {
-                // Продуктът не е намерен локално, спираме зареждането.
-                self.isLoading = false
             }
+            
+            // Приключваме зареждането
+            self.isLoading = false
         }
     }
     // --- КРАЙ НА ПРОМЯНАТА ---
-
 }
