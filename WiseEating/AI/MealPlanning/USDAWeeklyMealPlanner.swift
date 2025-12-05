@@ -345,7 +345,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
     private func resolveAndCreateItemsForMeal(
         _ conceptualMeal: ConceptualMeal,
         relevantPrompts: [String],
-        smartSearch: SmartFoodSearch,
+        smartSearch: SmartFoodSearch3,
         onLog: (@Sendable (String) -> Void)?
     ) async -> [MealPlanPreviewItem] {
         let components = conceptualMeal.components
@@ -552,7 +552,9 @@ public final class USDAWeeklyMealPlanner: Sendable {
         try Task.checkCancellation()
         // --- END OF CHANGE (2/3) ---
         
-        let smartSearch = SmartFoodSearch(container: self.container)
+        // REPLACED: Use SmartFoodSearch3
+        let smartSearch = SmartFoodSearch3(container: self.container)
+        smartSearch.loadData() // Populate in-memory index
         try Task.checkCancellation()
         
         // --- Checkpoint 1: Interpretation ---
@@ -627,12 +629,14 @@ public final class USDAWeeklyMealPlanner: Sendable {
             for t in contextTags {
                 try Task.checkCancellation()
                 if t.kind == "cuisine" {
+                    // Using local smartSearch instance
                     let sub = try await aiGenerateFoodPaletteForCuisine(profile: profile, cuisineTag: t.tag, onLog: onLog)
                     if !sub.isEmpty {
                         foodPalettesByContext.append((kind: t.kind, tag: t.tag, foods: Array(sub.shuffled().prefix(25)), associatedCuisine: nil))
                     }
                 } else if t.kind == "headword" {
-                    let (sub, inferredCuisine) = try await aiGenerateFoodPaletteForHeadword(profile: profile, headword: t.tag, includeHeadword: true, onLog: onLog)
+                    // Using local smartSearch instance
+                    let (sub, inferredCuisine) = try await aiGenerateFoodPaletteForHeadword(profile: profile, headword: t.tag, includeHeadword: true, smartSearch: smartSearch, onLog: onLog)
                     if !sub.isEmpty {
                         foodPalettesByContext.append((kind: t.kind, tag: t.tag, foods: Array(sub.shuffled().prefix(25)), associatedCuisine: inferredCuisine))
                     }
@@ -1103,17 +1107,29 @@ public final class USDAWeeklyMealPlanner: Sendable {
         emitLog("[Specialize] Heads=\(headwords) | cuisines=\(cuisines)", onLog: onLog)
         guard !headwords.isEmpty else { return }
         
-        struct HeadwordAssets { let variants: [String]; let complements: [String] }
+        struct HeadwordAssets {
+            let variants: [String]
+            let complements: [String]
+        }
         var assets: [String: HeadwordAssets] = [:]
+        
+        // ✅ Инициализация на SmartFoodSearch3 на MainActor
+        let smartSearch: SmartFoodSearch3 = await MainActor.run {
+            let engine = SmartFoodSearch3(container: self.container)
+            engine.loadData()
+            return engine
+        }
         
         for h in headwords {
             do {
                 try Task.checkCancellation()
                 
+                // ✅ Подаваме smartSearch към AI генератора
                 let (foods, _) = try await aiGenerateFoodPaletteForHeadword(
                     profile: profile,
                     headword: h,
                     includeHeadword: false,
+                    smartSearch: smartSearch,
                     onLog: onLog
                 )
                 try Task.checkCancellation()
@@ -1129,25 +1145,37 @@ public final class USDAWeeklyMealPlanner: Sendable {
                 onLog?("  -> ⚠️ Could not prefetch complements/variants for headword '\(h)': \(error.localizedDescription)")
             }
         }
+        
         guard !assets.isEmpty else { return }
         
+        // --- Cuisine palette допълнения ---
         var cuisineAdds: [String] = []
         for c in cuisines {
             do {
                 try Task.checkCancellation()
-                let examples = try await aiGenerateFoodPaletteForCuisine(profile: profile, cuisineTag: c, onLog: onLog)
+                let examples = try await aiGenerateFoodPaletteForCuisine(
+                    profile: profile,
+                    cuisineTag: c,
+                    onLog: onLog
+                )
                 try Task.checkCancellation()
                 cuisineAdds.append(contentsOf: examples)
             } catch {
                 onLog?("  -> ⚠️ Could not generate cuisine palette for '\(c)': \(error.localizedDescription)")
             }
         }
+        
         if !cuisineAdds.isEmpty {
             var seen = Set(includedFoods.map { $0.lowercased() })
-            for n in cuisineAdds { if seen.insert(n.lowercased()).inserted { includedFoods.append(n) } }
+            for n in cuisineAdds {
+                if seen.insert(n.lowercased()).inserted {
+                    includedFoods.append(n)
+                }
+            }
             emitLog("[Specialize] Enriched included foods with cuisineAdds (\(cuisineAdds.count))", onLog: onLog)
         }
         
+        // --- Пренаписване на structuralRequests ---
         let pattern = #"^\s*On Day\s+(\d+),\s+include\s+(.+?)\s+at\s+(Breakfast|Lunch|Dinner)\s*$"#
         guard let regex = try? NSRegularExpression(pattern: pattern, options: [.caseInsensitive]) else { return }
         
@@ -1165,21 +1193,28 @@ public final class USDAWeeklyMealPlanner: Sendable {
         }
         
         var newRequests: [String] = []
+        
         for sr in structuralRequests {
             let range = NSRange(sr.startIndex..<sr.endIndex, in: sr)
-            if let m = regex.firstMatch(in: sr, options: [], range: range), m.numberOfRanges >= 4,
+            if let m = regex.firstMatch(in: sr, options: [], range: range),
+               m.numberOfRanges >= 4,
                let dayR = Range(m.range(at: 1), in: sr),
                let topicR = Range(m.range(at: 2), in: sr),
                let mealR = Range(m.range(at: 3), in: sr) {
+                
                 let day = String(sr[dayR])
                 let topicRaw = String(sr[topicR]).trimmingCharacters(in: .whitespaces)
                 let meal = String(sr[mealR])
                 let key = topicRaw.lowercased()
+                
                 if let asset = assets[key] {
-                    // NOTE: This logic is a fallback; the 'wantsDifferentTypes' flow is more robust for variety.
-                    // This picks a random variant to avoid always using the same one.
+                    // NOTE: Това е fallback логика; основният flow за variety е през wantsDifferentTypes
                     let variant = asset.variants.randomElement() ?? topicRaw
-                    let combo = chooseCombo(from: asset.complements, avoiding: [key, variant.lowercased()], count: 6)
+                    let combo = chooseCombo(
+                        from: asset.complements,
+                        avoiding: [key, variant.lowercased()],
+                        count: 6
+                    )
                     let comboQuoted = combo.map { "\"\($0)\"" }.joined(separator: ", ")
                     let rewritten = "On Day \(day), include \(topicRaw) at \(meal) combined with some of \(comboQuoted)"
                     newRequests.append(rewritten)
@@ -1191,8 +1226,10 @@ public final class USDAWeeklyMealPlanner: Sendable {
                 newRequests.append(sr)
             }
         }
+        
         structuralRequests = newRequests
     }
+
     
     @available(iOS 26.0, *)
     private func aiGenerateFoodPaletteForCuisine(
@@ -1247,6 +1284,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
         profile: Profile,
         headword: String,
         includeHeadword: Bool = false,
+        smartSearch: SmartFoodSearch3, // Added parameter
         onLog: (@Sendable (String) -> Void)?
     ) async throws -> (foods: [String], inferredCuisine: String) {
         let complementaryFoodSession = LanguageModelSession(instructions: Instructions {
@@ -1311,7 +1349,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
                 OUTPUT RULES:
                 - Return 4-7 standalone item names.
                 - **CRITICAL**: Do NOT invent hybrid names by combining the headword with generic dish types unless they are real, well-known dishes. Focus on variations in filling, shape, or traditional preparation.
-                - Do NOT include the original headword itself in the results.
+                - Do NOT include the original headword itself.
                 - The items must be plausible USDA-like names.
                 - Return only the schema with the food examples. The 'inferredCuisine' field can be the cuisine of the headword.
                 """
@@ -1346,12 +1384,55 @@ public final class USDAWeeklyMealPlanner: Sendable {
             }
         }
         
-        onLog?("[HeadwordPalette] headword='\(headword)' → items=\(out.count)")
+        // --- NEW: Validate against DB using SmartFoodSearch3 ---
+        let groundingContext = "Grounding food palette items for headword: \(headword)"
+        var final: [String] = []
+        var validatedSeen = Set<String>()
+
+        for name in out {
+            try Task.checkCancellation()
+            let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
+            guard !trimmed.isEmpty else { continue }
+            let key = trimmed.lowercased()
+            guard validatedSeen.insert(key).inserted else { continue }
+
+            let tokenizedWords = FoodItem.makeTokens(from: trimmed)
+            try Task.checkCancellation()
+            
+            // Use the passed instance of SmartFoodSearch3
+            let ids = await smartSearch.searchFoodsAI(
+                query: trimmed,
+                limit: 1,
+                context: groundingContext,
+                requiredHeadwords: tokenizedWords
+            )
+            try Task.checkCancellation()
+            
+            if !ids.isEmpty { final.append(trimmed) }
+            if final.count >= 30 { break }
+        }
+        
+        // Fallback if too few items found
+        if final.count < 12 {
+            for name in out where final.count < 30 {
+                 try Task.checkCancellation()
+                 let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
+                 guard !trimmed.isEmpty else { continue }
+                 let key = trimmed.lowercased()
+                 if !validatedSeen.contains(key) { // Add if not already added
+                      validatedSeen.insert(key)
+                      final.append(trimmed)
+                 }
+            }
+        }
+        // -------------------------------------------------------
+        
+        onLog?("[HeadwordPalette] headword='\(headword)' → items=\(final.count)")
         
         let inferredCuisine = complementaryFoodResp.content.inferredCuisine.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-        onLog?("  -> Palette(headword:\(headword)) • \(out.count) items (inferred cuisine='\(inferredCuisine)'): \(out)")
+        onLog?("  -> Palette(headword:\(headword)) • \(final.count) items (inferred cuisine='\(inferredCuisine)'): \(final)")
         
-        return (out, inferredCuisine)
+        return (final, inferredCuisine)
     }
     
     private func rebalanceMealCalories(
@@ -1496,7 +1577,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
         component: ConceptualComponent,
         mealContext: ConceptualMeal,
         relevantPrompts: [String],
-        smartSearch: SmartFoodSearch,
+        smartSearch: SmartFoodSearch3, // Updated Type
         onLog: (@Sendable (String) -> Void)?
     ) async -> MealPlanPreviewItem? {
         let resolvedInfo = await self.resolveFoodConcept(
@@ -1533,7 +1614,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
         includedFoods: [String],
         excludedFoods: [String],
         daysAndMeals: [Int: [String]],
-        smartSearch: SmartFoodSearch,
+        smartSearch: SmartFoodSearch3, // Updated Type
         onLog: (@Sendable (String) -> Void)?
     ) async -> InterpretedPrompts {
         guard !prompts.isEmpty else { return InterpretedPrompts() }
@@ -1680,7 +1761,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
         into interpreted: inout InterpretedPrompts,
         daysAndMeals: [Int: [String]],
         excludedFoods: [String],
-        smartSearch: SmartFoodSearch,
+        smartSearch: SmartFoodSearch3, // Updated Type
         onLog: (@Sendable (String) -> Void)?
     ) async {
         func containsExcluded(_ text: String?) -> String? {
@@ -1840,14 +1921,11 @@ public final class USDAWeeklyMealPlanner: Sendable {
         }
     }
     
-    private func isConcreteFoodName(_ name: String, smartSearch: SmartFoodSearch) async -> Bool {
-        let tokenizedWords = FoodItem.makeTokens(from: name)
-        
+    private func isConcreteFoodName(_ name: String, smartSearch: SmartFoodSearch3) async -> Bool {
         let ids = await smartSearch.searchFoodsAI(
             query: name,
             limit: 3,
-            context: "Validating if '\(name)' is a concrete, standalone food item.",
-            requiredHeadwords: tokenizedWords
+            context: "Validating if '\(name)' is a concrete, standalone food item."
         )
         return !ids.isEmpty
     }
@@ -2022,7 +2100,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
         structuralRequests: [String] = [],
         mustContainRules: [MustContainRule] = [],
         relatedTopics: [String] = [],
-        smartSearch: SmartFoodSearch,
+        smartSearch: SmartFoodSearch3, // Updated Type
         onLog: (@Sendable (String) -> Void)?
     ) async throws -> [String] {
         onLog?("  -> Generating a dynamic food palette...")
@@ -2137,6 +2215,8 @@ public final class USDAWeeklyMealPlanner: Sendable {
             guard seen.insert(key).inserted else { continue }
             let tokenizedWords = FoodItem.makeTokens(from: trimmed)
             try Task.checkCancellation()
+            
+            // Using local smartSearch
             let ids = await smartSearch.searchFoodsAI(
                 query: trimmed,
                 limit: 1,
@@ -2585,7 +2665,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
         wantVariants: Bool,
         excludedFoods: [String],
         daysAndMeals: [Int: [String]],
-        smartSearch: SmartFoodSearch,
+        smartSearch: SmartFoodSearch3, // Updated Type
         onLog: (@Sendable (String) -> Void)?
     ) async -> AIConceptualPlanResponse {
         guard !includedFoods.isEmpty else { return plan }
@@ -2759,7 +2839,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
     
     @MainActor
     private func resolveFoodConcept(
-        smartSearch: SmartFoodSearch,
+        smartSearch: SmartFoodSearch3, // Updated Type
         conceptName: String,
         mealContext: ConceptualMeal,
         relevantPrompts: [String],
@@ -3119,7 +3199,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
         rules: [MustContainRule],
         excludedFoods: [String],
         foodPalette: [String],
-        smartSearch: SmartFoodSearch,
+        smartSearch: SmartFoodSearch3, // Updated Type
         onLog: (@Sendable (String) -> Void)?
     ) async -> AIConceptualPlanResponse {
         var polishedPlan = plan
@@ -3661,7 +3741,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
         variantIdeas: [String],
         baseFood: String,
         count: Int,
-        smartSearch: SmartFoodSearch,
+        smartSearch: SmartFoodSearch3, // Updated Type
         onLog: (@Sendable (String) -> Void)?
     ) async -> [String] {
         guard !variantIdeas.isEmpty else { return [] }
