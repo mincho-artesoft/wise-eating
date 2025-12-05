@@ -51,7 +51,7 @@ enum PermissionType {
             **Sharing > Apps > Wise Eating**
             """
         case .camera:
-            return "Wise Eating needs access to your camera to scan barcodes. Please grant permission in Settings to use this feature."
+            return "Wise Eating needs camera access to scan barcodes and take photos for your foods and exercises. Please grant permission in Settings to use these features."
         case .network:
             return "An active internet connection is required to look up products and create new items. Turn on Wi-Fi or Cellular data."
         }
