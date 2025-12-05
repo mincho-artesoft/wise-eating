@@ -927,7 +927,7 @@ struct RootView: View {
     private enum DraggableMenuTab: String, CaseIterable, Identifiable {
         case nutrients = "Nutrients"
         case settings = "Settings"
-        case subscriptions = "Subs"
+        case subscriptions = "Plans"
         case moreApps = "More Apps"
 
         var id: String { rawValue }
