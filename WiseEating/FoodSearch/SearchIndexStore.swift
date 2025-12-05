@@ -6,7 +6,7 @@ final class SearchIndexStore {
     static let shared = SearchIndexStore()
 
     /// Bump this when the structure of CompactFoodItem / tokens changes
-    private let currentIndexVersion: Int = 2
+    private let currentIndexVersion: Int = 3
 
     // MARK: - In-Memory Cache
     private(set) var compactFoods: [CompactFoodItem] = []
@@ -352,6 +352,13 @@ final class SearchIndexStore {
         // FIX: Remove tokens that appear after exclusion keywords in the food name.
         // Example: "chicken salad excluding tomato" should NOT index "tomato".
         let lowerName = food.name.lowercased()
+
+        // Ensure "or" is indexed as a token if it appears in the name.
+        // This supports literal phrase searches like "chicken or turkey".
+        if lowerName.contains(" or ") {
+            tokenSet.insert("or")
+        }
+
         let exclusionKeywords = [" excluding ", " without ", " no ", " except "]
 
         for keyword in exclusionKeywords {

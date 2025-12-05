@@ -196,29 +196,51 @@ class SmartFoodSearch3: ObservableObject {
                 try? await Task.sleep(nanoseconds: 50_000_000) // 50ms debounce
                 if Task.isCancelled { return }
                 
-                print("🚀 [SmartSearch] Task started for: '\(canonicalQuery)'")
+                // Expand dynamic OR variants based on the canonical query.
+                let queryVariants = SmartFoodSearch3.expandOrVariants(canonicalQuery)
+                print("🚀 [SmartSearch] Task started for canonical query: '\(canonicalQuery)' | variants: \(queryVariants)")
                 
-                let (resultIDs, intent, _, forceShowPH) = await self.runSearchLogic(
-                    query: canonicalQuery,
-                    activeFilters: activeFilters,
-                    compactMap: snapshotMap,
-                    allFoods: snapshotAllFoods,
-                    maxValues: snapshotMaxValues,
-                    availableDiets: snapshotAvailableDiets,
-                    invertedIndex: snapshotIndex,
-                    vocabulary: snapshotVocab,
-                    nutrientRankings: snapshotRankings,
-                    quickAgeMonths: quickAgeMonths,
-                    forcePhDisplay: forcePhDisplay,
-                    isFavoritesOnly: isFavoritesOnly,
-                    isRecipesOnly: isRecipesOnly,
-                    isMenusOnly: isMenusOnly,
-                    searchMode: searchMode,
-                    profileConstraints: profileConstraints,
-                    excludedFoodIDs: snapshotExcludedIDs,
-                    phSortOrder: phSortOrder, // ✅ Подаваме надолу
-                    container: self.container
-                )
+                var aggregatedIDs = Set<Int>()
+                var orderedResultIDs: [Int] = []
+                var primaryIntent: SearchIntent?
+                var primaryForceShowPH = false
+                
+                for (index, variantQuery) in queryVariants.enumerated() {
+                    if Task.isCancelled { return }
+                    
+                    let (resultIDs, intent, _, forceShowPH) = await self.runSearchLogic(
+                        query: variantQuery,
+                        activeFilters: activeFilters,
+                        compactMap: snapshotMap,
+                        allFoods: snapshotAllFoods,
+                        maxValues: snapshotMaxValues,
+                        availableDiets: snapshotAvailableDiets,
+                        invertedIndex: snapshotIndex,
+                        vocabulary: snapshotVocab,
+                        nutrientRankings: snapshotRankings,
+                        quickAgeMonths: quickAgeMonths,
+                        forcePhDisplay: forcePhDisplay,
+                        isFavoritesOnly: isFavoritesOnly,
+                        isRecipesOnly: isRecipesOnly,
+                        isMenusOnly: isMenusOnly,
+                        searchMode: searchMode,
+                        profileConstraints: profileConstraints,
+                        excludedFoodIDs: snapshotExcludedIDs,
+                        phSortOrder: phSortOrder,
+                        container: self.container
+                    )
+                    
+                    if index == 0 {
+                        primaryIntent = intent
+                        primaryForceShowPH = forceShowPH
+                    }
+                    
+                    for id in resultIDs {
+                        if aggregatedIDs.insert(id).inserted {
+                            orderedResultIDs.append(id)
+                        }
+                    }
+                }
                 
                 if Task.isCancelled {
                     print("🛑 [SmartSearch] Task cancelled before UI update.")
@@ -226,12 +248,15 @@ class SmartFoodSearch3: ObservableObject {
                 }
                 
                 await MainActor.run {
-                    print("✅ [SmartSearch] Updating UI on MainActor. Found IDs: \(resultIDs.count)")
+                    print("✅ [SmartSearch] Updating UI on MainActor. Aggregated IDs: \(orderedResultIDs.count)")
                     
-                    self.fullResultIDs = resultIDs
-                    self.updateContext(intent: intent,
-                                       activeFilters: activeFilters,
-                                       forceShowPH: forceShowPH)
+                    self.fullResultIDs = orderedResultIDs
+                    
+                    if let intent = primaryIntent {
+                        self.updateContext(intent: intent,
+                                           activeFilters: activeFilters,
+                                           forceShowPH: primaryForceShowPH)
+                    }
                     
                     if self.fullResultIDs.isEmpty {
                         self.displayedResults = []
@@ -431,8 +456,12 @@ class SmartFoodSearch3: ObservableObject {
             if simplePHToggle {
                 textTokens = textTokens.filter { $0.caseInsensitiveCompare("ph") != .orderedSame }
             }
+
+            // Remove standalone "or" tokens – logical OR is handled at a higher level.
+            textTokens = textTokens.filter { $0.caseInsensitiveCompare("or") != .orderedSame }
             
             let combinedAge = quickAgeMonths ?? parsed.targetConsumerAge
+            
             let forceShowPH = simplePHToggle || (rawPhCount >= 2 && parsed.phConstraint == nil) || forcePhDisplay
             
             // --- ПРИОРИТЕТИ ---
@@ -1711,6 +1740,50 @@ class SmartFoodSearch3: ObservableObject {
             .filter { !$0.isEmpty }
         return parts.joined(separator: " ")
     }
+    
+    // MARK: - Dynamic "OR" Variant Expansion
+    /// Breaks down a query containing "or" into logical sub-queries.
+    /// Example: "pork with rice or tomatoes" ->
+    /// ["pork with rice or tomatoes", "pork with rice", "pork with tomatoes"]
+    nonisolated private static func expandOrVariants(_ query: String) -> [String] {
+        let lower = query.lowercased()
+        
+        // Always try the original query first so literal matches (e.g. USDA names)
+        // are highly ranked if they exist.
+        var variants: [String] = [lower]
+        
+        let words = lower
+            .components(separatedBy: .whitespacesAndNewlines)
+            .filter { !$0.isEmpty }
+        
+        guard let orIndex = words.firstIndex(of: "or"),
+              orIndex > 0,
+              orIndex < words.count - 1 else {
+            return variants
+        }
+        
+        let wordBefore = words[orIndex - 1]
+        let wordAfter  = words[orIndex + 1]
+        
+        let prefixTokens = words[0..<(orIndex - 1)]
+        let suffixTokens = words[(orIndex + 2)...]
+        
+        let prefixStr = prefixTokens.joined(separator: " ")
+        let suffixStr = suffixTokens.joined(separator: " ")
+        
+        func build(middle: String) -> String {
+            var parts: [String] = []
+            if !prefixStr.isEmpty { parts.append(prefixStr) }
+            parts.append(middle)
+            if !suffixStr.isEmpty { parts.append(suffixStr) }
+            return parts.joined(separator: " ")
+        }
+        
+        variants.append(build(middle: wordBefore))
+        variants.append(build(middle: wordAfter))
+        
+        return variants
+    }
 }
 
 extension SearchKnowledgeBase {
@@ -1972,3 +2045,4 @@ extension SmartFoodSearch3 {
         return candidates.prefix(limit).map { $0.persistentModelID }
     }
 }
+

@@ -43,7 +43,7 @@ class SearchKnowledgeBase: @unchecked Sendable {
 
     let stopWords: Set<String> = [
         "with", "and", "of", "in", "style", "type", "ns", "nfs",
-        "based", "added", "to", "or", "a", "an", "the", "contain", "containing",
+        "based", "added", "to", "a", "an", "the", "contain", "containing",
         "source", "content", "amount", "for", "old", "my", "safe", "can", "eat",
         "is", "are", "was", "were", "be", "being", "been",
         "strictly", "exactly", "roughly", "approximately", "around", "about",
