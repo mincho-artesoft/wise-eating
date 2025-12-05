@@ -45,16 +45,16 @@ struct PermissionDeniedView: View {
                         .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.9))
                         .padding(.horizontal)
                     
-                    if type != .network{
-                        Button(action: { PermissionManager.shared.openAppSettings(for: type) }) {
-                            Text(type == .allTrainingFeatures ? "Open Health App" : "Open Settings")
-                                .fontWeight(.semibold)
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .foregroundColor(effectManager.currentGlobalAccentColor)
-                        }
-                        .glassCardStyle(cornerRadius: 20)
-                    }
+//                    if type != .network{
+//                        Button(action: { PermissionManager.shared.openAppSettings(for: type) }) {
+//                            Text(type == .allTrainingFeatures ? "Open Health App" : "Open Settings")
+//                                .fontWeight(.semibold)
+//                                .frame(maxWidth: .infinity)
+//                                .padding()
+//                                .foregroundColor(effectManager.currentGlobalAccentColor)
+//                        }
+//                        .glassCardStyle(cornerRadius: 20)
+//                    }
                 }
                 .padding(30)
                 .glassCardStyle(cornerRadius: 30)
