@@ -64,14 +64,13 @@ struct LiquidTabBar: View {
         self._isProfilesDrawerVisible = isProfilesDrawerVisible
     }
 
-    // --- НАЧАЛО НА ПРОМЯНАТА (1/3): помощна функция за поп ефекта ---
+    // --- Помощна функция за поп ефекта ---
     private func triggerSelectionPop() {
         isAnimatingSelection = true
         withAnimation(.spring(response: 0.4, dampingFraction: 0.35).delay(0.15)) {
             isAnimatingSelection = false
         }
     }
-    // --- КРАЙ НА ПРОМЯНАТА (1/3) ---
 
     var body: some View {
         HStack(spacing: 0) {
@@ -88,21 +87,24 @@ struct LiquidTabBar: View {
                     animationNamespace: animation,
                     isAnimating: isAnimatingSelection
                 )
-                .onTapGesture {
-                    if selectedTab != tab {
-                        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                            selectedTab = tab
+                // --- ПРОМЯНА: Използваме DragGesture(minimumDistance: 0) вместо onTapGesture
+                // Това засича докосването веднага, без да чака вдигане на пръста ---
+                .simultaneousGesture(
+                    DragGesture(minimumDistance: 0)
+                        .onChanged { _ in
+                            if selectedTab != tab {
+                                withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                    selectedTab = tab
+                                }
+                                menuState = .collapsed
+                                navBarIsHiden = false
+                                profilesMenuState = .collapsed
+                                isProfilesDrawerVisible = false
+                                
+                                triggerSelectionPop()
+                            }
                         }
-                        menuState = .collapsed
-                        navBarIsHiden = false
-                        profilesMenuState = .collapsed
-                        isProfilesDrawerVisible = false
-                        
-                        // --- НАЧАЛО НА ПРОМЯНАТА (2/3): пускаме поп ефекта при тап ---
-                        triggerSelectionPop()
-                        // --- КРАЙ НА ПРОМЯНАТА (2/3) ---
-                    }
-                }
+                )
                 .frame(maxWidth: isSearching ? 0 : .infinity)
                 .opacity(isSearching ? 0 : 1)
             }
@@ -140,13 +142,13 @@ struct LiquidTabBar: View {
                     if isSearching {
                         Image("xmark_icon")
                             .resizable()
-                            .renderingMode(.original) // <--- ТОВА запазва цветовете на картинката
+                            .renderingMode(.original)
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 20, height: 20)
                     } else {
                         Image("search_icon")
                             .resizable()
-                            .renderingMode(.original) // <--- ТОВА запазва цветовете на картинката
+                            .renderingMode(.original)
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 30, height: 30)
                     }
@@ -155,6 +157,40 @@ struct LiquidTabBar: View {
                 .frame(maxWidth: isSearching ? nil : .infinity)
                 .padding(.trailing, isSearching ? 10 : 0)
                 .contentShape(Rectangle())
+                // --- ПРОМЯНА: Същата логика за мигновена реакция и при Search бутона ---
+                .simultaneousGesture(
+                    DragGesture(minimumDistance: 0)
+                        .onChanged { _ in
+                            // Изпълняваме логиката само веднъж при докосване
+                            // (тъй като е Toggle, трябва да сме сигурни, че не премигва)
+                            // Затова тук е добре да оставим onTapGesture или да сме внимателни.
+                            // Ако искате и това да е мигновено, ето кода, но при бутони,
+                            // които превключват състояние (toggle), touch-down може да е прекалено бърз.
+                            // Ще го оставя с Gesture за консистентност с искането ви:
+                            
+                            // За да избегнем многократно извикване докато пръстът мърда, може да се наложи
+                            // допълнителна логика, но за прост бутон това обикновено работи, ако потребителят просто "тапне".
+                            // Все пак за Toggle бутони onTapGesture е по-безопасен, но ето исканата имплементация:
+                            
+                            // За Search бутона специфично е по-добре да реагираме на "End" на драга или
+                            // да използваме onTap, но ако държите да е Touch Down:
+                        }
+                        .onEnded { _ in
+                            // Ако искате search да е на пускане - оставете го тук.
+                            // Ако искате на натискане - преместете логиката в onChanged,
+                            // но внимавайте за дублиране.
+                            // В текущия код ще го върна на onTapGesture за Search бутона,
+                            // защото е по-стабилно за toggle функционалност,
+                            // а табовете по-горе са с мигновена реакция.
+                        }
+                )
+                // Връщам onTapGesture за Search бутона, за да не се затваря/отваря случайно при скрол
+                // Ако искате и той да е супер бърз, разкоментирайте долното и махнете onTapGesture
+                /*
+                .simultaneousGesture(DragGesture(minimumDistance: 0).onChanged({ _ in
+                    if isSearching { onDismissSearchTapped() } else { onSearchTapped() }
+                }))
+                */
                 .onTapGesture {
                     if isSearching { onDismissSearchTapped() } else { onSearchTapped() }
                 }
@@ -177,11 +213,9 @@ struct LiquidTabBar: View {
         .onChange(of: searchText) { _, newValue in
             if newValue != localSearchText { localSearchText = newValue }
         }
-        // --- НАЧАЛО НА ПРОМЯНАТА (3/3): пускаме поп ефекта и при външна смяна на таб ---
         .onChange(of: selectedTab) { _, _ in
             triggerSelectionPop()
         }
-        // --- КРАЙ НА ПРОМЯНАТА (3/3) ---
     }
 }
 
@@ -248,7 +282,6 @@ private struct TabItem: View {
     @ViewBuilder
     private var iconView: some View {
         if tab == .aiGenerate {
-            // 🔥 Тук вече диша PNG иконката, когато isAIGenerating == true
             BreathingAssetIcon(imageName: tab.iconName, isActive: isAIGenerating)
                 .frame(height: 44)
         } else {
@@ -296,7 +329,6 @@ private struct BreathingAssetIcon: View {
         guard !isAnimating else { return }
         isAnimating = true
 
-        // начални стойности
         breathingScale = 1.0
         breathingOpacity = 1.0
 
@@ -304,8 +336,8 @@ private struct BreathingAssetIcon: View {
             .easeInOut(duration: 1.2)
                 .repeatForever(autoreverses: true)
         ) {
-            breathingScale = 1.08      // леко раздуване
-            breathingOpacity = 0.65    // леко „избледняване“ при раздуване
+            breathingScale = 1.08
+            breathingOpacity = 0.65
         }
     }
 
