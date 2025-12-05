@@ -3,7 +3,7 @@ import SwiftUI
 struct LiquidTabBar: View {
     @ObservedObject private var effectManager = EffectManager.shared
     
-    // Bindings от Parent View
+    // Bindings
     @Binding var menuState: MenuState
     @Binding var selectedTab: AppTab
     @Binding var isSearching: Bool
@@ -20,19 +20,18 @@ struct LiquidTabBar: View {
     var onDismissSearchTapped: () -> Void
     @FocusState.Binding var isSearchFieldFocused: Bool
 
-    // Animation Namespace
     @Namespace private var animation
 
-    // Profile Menu Bindings
     @Binding var profilesMenuState: MenuState
     @Binding var isProfilesDrawerVisible: Bool
     
-    // Local State
     @State private var localSearchText: String = ""
     @State private var isAnimatingSelection = false
     
-    // --- НОВО: Следи върху кой таб е пръста по време на драг ---
+    // --- State за Жестовете ---
     @State private var draggingTab: AppTab? = nil
+    @State private var isDragging: Bool = false
+    @State private var dragStartTime: Date? = nil // Следим кога е започнал натискът
     
     let standardTabs: [AppTab]
 
@@ -72,7 +71,6 @@ struct LiquidTabBar: View {
         self._isProfilesDrawerVisible = isProfilesDrawerVisible
     }
 
-    // Помощна анимация за иконките
     private func triggerSelectionPop() {
         isAnimatingSelection = true
         withAnimation(.spring(response: 0.4, dampingFraction: 0.35).delay(0.15)) {
@@ -80,7 +78,6 @@ struct LiquidTabBar: View {
         }
     }
     
-    // Помощна функция за намиране на таб спрямо позицията на пръста
     private func getTab(at location: CGPoint, totalWidth: CGFloat) -> AppTab? {
         guard totalWidth > 0, !standardTabs.isEmpty else { return nil }
         let tabWidth = totalWidth / CGFloat(standardTabs.count)
@@ -90,6 +87,20 @@ struct LiquidTabBar: View {
             return standardTabs[index]
         }
         return nil
+    }
+    
+    private func selectTab(_ tab: AppTab) {
+        if selectedTab != tab {
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                selectedTab = tab
+            }
+            triggerSelectionPop()
+            
+            menuState = .collapsed
+            navBarIsHiden = false
+            profilesMenuState = .collapsed
+            isProfilesDrawerVisible = false
+        }
     }
 
     var body: some View {
@@ -102,11 +113,11 @@ struct LiquidTabBar: View {
                     .fill(effectManager.currentGlobalAccentColor.opacity(0.4))
                     .glassCardStyle(cornerRadius: 25)
                     .padding(.horizontal, 5)
-                    // Визуално показваме draggingTab ако има такъв, иначе selectedTab
-                    .matchedGeometryEffect(id: draggingTab ?? selectedTab, in: animation, isSource: false)
+                    // Показваме draggingTab (ако влачим) или selectedTab
+                    .matchedGeometryEffect(id: (isDragging ? draggingTab : selectedTab) ?? selectedTab, in: animation, isSource: false)
                     .frame(height: 44)
-                    // Бърза анимация, за да следва пръста плътно
                     .animation(.interactiveSpring(response: 0.3, dampingFraction: 0.7), value: draggingTab)
+                    .animation(.interactiveSpring(response: 0.3, dampingFraction: 0.7), value: selectedTab)
                     .transition(.opacity)
             }
             
@@ -130,64 +141,88 @@ struct LiquidTabBar: View {
                                 isAnimating: isAnimatingSelection
                             )
                             .frame(maxWidth: .infinity)
+                            // ВАЖНО: Вече не използваме .onTapGesture тук, всичко е в DragGesture
                         }
                     }
-                    .contentShape(Rectangle()) // Прави цялата зона активна за жестове
+                    .contentShape(Rectangle())
                     .gesture(
-                        DragGesture(minimumDistance: 0)
+                        DragGesture(minimumDistance: 0, coordinateSpace: .local)
                             .onChanged { value in
-                                // 1. Намираме кой таб е под пръста
-                                guard let currentTab = getTab(at: value.location, totalWidth: geo.size.width) else { return }
-                                
-                                // 2. Обновяваме визуалната позиция на балона (draggingTab)
-                                if draggingTab != currentTab {
-                                    withAnimation(.interactiveSpring(response: 0.3, dampingFraction: 0.7)) {
-                                        draggingTab = currentTab
+                                // 1. Инициализация на времето при първи допир
+                                if dragStartTime == nil {
+                                    dragStartTime = Date()
+                                    
+                                    // --- НОВО: Добавяме проверка след 0.25 секунди ---
+                                    let currentStart = dragStartTime
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                                        // Проверяваме дали жестът все още е активен (не е пуснат пръста)
+                                        // и дали вече не сме в режим на влачене
+                                        if self.dragStartTime == currentStart && !self.isDragging {
+                                            withAnimation(.interactiveSpring(response: 0.3, dampingFraction: 0.7)) {
+                                                self.isDragging = true
+                                                // Взимаме таба под текущата позиция на пръста
+                                                self.draggingTab = getTab(at: value.location, totalWidth: geo.size.width)
+                                            }
+                                            // Вибрация
+                                            let generator = UIImpactFeedbackGenerator(style: .medium)
+                                            generator.impactOccurred()
+                                        }
                                     }
-                                    // Лека вибрация при преминаване през таб
-                                    let generator = UIImpactFeedbackGenerator(style: .light)
-                                    generator.impactOccurred()
+                                    // ------------------------------------------------
                                 }
                                 
-                                // 3. Логика за TAP: Ако движението е минимално, сменяме веднага
-                                if abs(value.translation.width) < 10 {
-                                    if selectedTab != currentTab {
-                                        selectedTab = currentTab
-                                        triggerSelectionPop()
+                                let currentTab = getTab(at: value.location, totalWidth: geo.size.width)
+                                let timeElapsed = Date().timeIntervalSince(dragStartTime!)
+                                let distance = abs(value.translation.width)
+                                
+                                // 2. Логика за активиране на "Drag" режим (при движение)
+                                if !isDragging {
+                                    // Ако потребителят мръдне пръста преди да изтече таймера
+                                    if distance > 0 { // Махаме timeElapsed проверката от тук, таймерът горе ще я поеме
+                                        withAnimation(.interactiveSpring(response: 0.3, dampingFraction: 0.7)) {
+                                            isDragging = true
+                                            draggingTab = currentTab
+                                        }
+                                        let generator = UIImpactFeedbackGenerator(style: .medium)
+                                        generator.impactOccurred()
+                                    }
+                                }
+                                
+                                // 3. Ако вече сме в Drag режим, обновяваме позицията
+                                if isDragging {
+                                    if let validTab = currentTab, draggingTab != validTab {
+                                        withAnimation(.interactiveSpring(response: 0.3, dampingFraction: 0.7)) {
+                                            draggingTab = validTab
+                                        }
+                                        let generator = UIImpactFeedbackGenerator(style: .light)
+                                        generator.impactOccurred()
                                     }
                                 }
                             }
                             .onEnded { value in
-                                // 4. Логика за КРАЙ НА DRAG: Потвърждаваме избора
-                                if let finalTab = getTab(at: value.location, totalWidth: geo.size.width) {
-                                    if selectedTab != finalTab {
-                                        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                                            selectedTab = finalTab
-                                        }
-                                        triggerSelectionPop()
-                                        
-                                        // Скриване на UI елементи
-                                        menuState = .collapsed
-                                        navBarIsHiden = false
-                                        profilesMenuState = .collapsed
-                                        isProfilesDrawerVisible = false
-                                    }
+                                let finalTab = getTab(at: value.location, totalWidth: geo.size.width)
+                                
+                                if isDragging {
+                                    if let finalTab { selectTab(finalTab) }
+                                } else {
+                                    // Стандартен Tap
+                                    if let finalTab { selectTab(finalTab) }
                                 }
                                 
-                                // 5. Нулираме draggingTab
+                                // 4. Нулиране на всички състояния
+                                isDragging = false
                                 draggingTab = nil
+                                dragStartTime = nil // Това ще спре таймера да активира dragging, ако пръстът е вдигнат бързо
                             }
                     )
                 }
                 .frame(height: 44)
-                // Скриваме табовете при търсене
                 .frame(maxWidth: isSearching ? 0 : .infinity)
                 .opacity(isSearching ? 0 : 1)
-                // Layout Priority: Табовете взимат всичкото налично място, оставено от бутона
                 .layoutPriority(1)
 
                 
-                // --- B. ПОЛЕ ЗА ТЪРСЕНЕ (SEARCH FIELD) ---
+                // --- B. ПОЛЕ ЗА ТЪРСЕНЕ ---
                 if isSearching {
                    ZStack(alignment: .leading) {
                        if localSearchText.isEmpty {
@@ -195,7 +230,6 @@ struct LiquidTabBar: View {
                                .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.9))
                                .padding(.leading, 4)
                        }
-                       
                        TextField("", text: $localSearchText)
                            .foregroundColor(effectManager.currentGlobalAccentColor)
                            .tint(effectManager.currentGlobalAccentColor)
@@ -213,7 +247,6 @@ struct LiquidTabBar: View {
                 // --- C. БУТОН ЗА ТЪРСЕНЕ ---
                 if isSearchButtonVisible && !navBarIsHiden {
                     ZStack {
-                        // Котва за анимацията
                         if !isSearching {
                              Color.clear
                                 .frame(height: 44)
@@ -234,7 +267,6 @@ struct LiquidTabBar: View {
                                 .frame(width: 30, height: 30)
                         }
                     }
-                    // Фиксирана ширина, за да не "бута" табовете
                     .frame(width: 50, height: 44)
                     .contentShape(Rectangle())
                     .onTapGesture {
@@ -252,7 +284,6 @@ struct LiquidTabBar: View {
         .glassCardStyle(cornerRadius: 50)
         .padding(.horizontal)
         .padding(.bottom, 8)
-        // Анимации за UI промените
         .animation(.interactiveSpring(response: 0.4, dampingFraction: 0.8), value: selectedTab)
         .animation(.interactiveSpring(response: 0.4, dampingFraction: 0.8), value: isSearching)
         .animation(.interactiveSpring(response: 0.4, dampingFraction: 0.8), value: isSearchButtonVisible)
