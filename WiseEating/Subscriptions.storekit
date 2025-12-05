@@ -24,7 +24,7 @@
     "_developerTeamID" : "8293TNMX6S",
     "_disableDialogs" : false,
     "_failTransactionsEnabled" : false,
-    "_lastSynchronizedDate" : 786370825.53259301,
+    "_lastSynchronizedDate" : 786610834.52965999,
     "_locale" : "en_US",
     "_renewalBillingIssuesEnabled" : false,
     "_storefront" : "USA",
@@ -70,183 +70,6 @@
   },
   "subscriptionGroups" : [
     {
-      "id" : "21768675",
-      "localizations" : [
-
-      ],
-      "name" : "Wise.Eating.Group",
-      "subscriptions" : [
-        {
-          "adHocOffers" : [
-
-          ],
-          "codeOffers" : [
-
-          ],
-          "displayPrice" : "3.99",
-          "familyShareable" : false,
-          "groupNumber" : 4,
-          "internalID" : "6751720695",
-          "introductoryOffer" : null,
-          "localizations" : [
-            {
-              "description" : "Remove adds and ulock up to 4 profiles, monthly",
-              "displayName" : "Advanced Monthly",
-              "locale" : "en_US"
-            }
-          ],
-          "productID" : "Wise.Eating.Advanced.Monthly",
-          "recurringSubscriptionPeriod" : "P1M",
-          "referenceName" : "Advanced Monthly",
-          "subscriptionGroupID" : "21768675",
-          "type" : "RecurringSubscription",
-          "winbackOffers" : [
-
-          ]
-        },
-        {
-          "adHocOffers" : [
-
-          ],
-          "codeOffers" : [
-
-          ],
-          "displayPrice" : "39.99",
-          "familyShareable" : false,
-          "groupNumber" : 3,
-          "internalID" : "6751720715",
-          "introductoryOffer" : null,
-          "localizations" : [
-            {
-              "description" : "Remove adds and ulock up to 4 profiles, yearly",
-              "displayName" : "Advanced Yearly",
-              "locale" : "en_US"
-            }
-          ],
-          "productID" : "Wise.Eating.Advanced.Yearly",
-          "recurringSubscriptionPeriod" : "P1Y",
-          "referenceName" : "Advanced Yearly",
-          "subscriptionGroupID" : "21768675",
-          "type" : "RecurringSubscription",
-          "winbackOffers" : [
-
-          ]
-        },
-        {
-          "adHocOffers" : [
-
-          ],
-          "codeOffers" : [
-
-          ],
-          "displayPrice" : "6.99",
-          "familyShareable" : false,
-          "groupNumber" : 2,
-          "internalID" : "6751720597",
-          "introductoryOffer" : null,
-          "localizations" : [
-            {
-              "description" : "Remove adds and ulock up to 12 profiles, monthly",
-              "displayName" : "Premium Monthly",
-              "locale" : "en_US"
-            }
-          ],
-          "productID" : "Wise.Eating.Premium.Monthly",
-          "recurringSubscriptionPeriod" : "P1M",
-          "referenceName" : "Premium Monthly",
-          "subscriptionGroupID" : "21768675",
-          "type" : "RecurringSubscription",
-          "winbackOffers" : [
-
-          ]
-        },
-        {
-          "adHocOffers" : [
-
-          ],
-          "codeOffers" : [
-
-          ],
-          "displayPrice" : "69.99",
-          "familyShareable" : false,
-          "groupNumber" : 1,
-          "internalID" : "6751720247",
-          "introductoryOffer" : null,
-          "localizations" : [
-            {
-              "description" : "Remove adds and ulock up to 12 profiles, yearly",
-              "displayName" : "Premium Yearly ",
-              "locale" : "en_US"
-            }
-          ],
-          "productID" : "Wise.Eating.Premium.Yearly",
-          "recurringSubscriptionPeriod" : "P1Y",
-          "referenceName" : "Premium Yearly",
-          "subscriptionGroupID" : "21768675",
-          "type" : "RecurringSubscription",
-          "winbackOffers" : [
-
-          ]
-        },
-        {
-          "adHocOffers" : [
-
-          ],
-          "codeOffers" : [
-
-          ],
-          "displayPrice" : "2.99",
-          "familyShareable" : false,
-          "groupNumber" : 6,
-          "internalID" : "6751720440",
-          "introductoryOffer" : null,
-          "localizations" : [
-            {
-              "description" : "Enjoy a clean interface without ads, monthly",
-              "displayName" : "Remove Ads Monthly",
-              "locale" : "en_US"
-            }
-          ],
-          "productID" : "Wise.Eating.Remove.Ads.Monthly",
-          "recurringSubscriptionPeriod" : "P1M",
-          "referenceName" : "Remove Ads Monthly",
-          "subscriptionGroupID" : "21768675",
-          "type" : "RecurringSubscription",
-          "winbackOffers" : [
-
-          ]
-        },
-        {
-          "adHocOffers" : [
-
-          ],
-          "codeOffers" : [
-
-          ],
-          "displayPrice" : "29.99",
-          "familyShareable" : false,
-          "groupNumber" : 5,
-          "internalID" : "6751719854",
-          "introductoryOffer" : null,
-          "localizations" : [
-            {
-              "description" : "Enjoy a clean interface without ads, yearly",
-              "displayName" : "Remove Ads Yearly",
-              "locale" : "en_US"
-            }
-          ],
-          "productID" : "Wise.Eating.Remove.Ads.Yearly",
-          "recurringSubscriptionPeriod" : "P1Y",
-          "referenceName" : "Remove Ads Yearly",
-          "subscriptionGroupID" : "21768675",
-          "type" : "RecurringSubscription",
-          "winbackOffers" : [
-
-          ]
-        }
-      ]
-    },
-    {
       "id" : "21847766",
       "localizations" : [
 
@@ -267,7 +90,7 @@
           "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "Remove adds and ulock up to 12 profiles, monthly",
+              "description" : "12profiles monthly for dietitians coaches pediatricians",
               "displayName" : "Premium Monthly",
               "locale" : "en_US"
             }
@@ -295,7 +118,7 @@
           "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "Remove adds and ulock up to 4 profiles, monthly",
+              "description" : "4 profiles monthly: couples and small families",
               "displayName" : "Advanced Monthly",
               "locale" : "en_US"
             }
@@ -323,7 +146,7 @@
           "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "Remove adds and ulock up to 4 profiles, yearly",
+              "description" : "4 profiles yearly: couples and small families",
               "displayName" : "Advanced Yearly",
               "locale" : "en_US"
             }
@@ -351,7 +174,7 @@
           "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "Remove adds and ulock up to 12 profiles, yearly",
+              "description" : "12profiles yearly for dietitians coaches pediatricians",
               "displayName" : "Premium Yearly",
               "locale" : "en_US"
             }
