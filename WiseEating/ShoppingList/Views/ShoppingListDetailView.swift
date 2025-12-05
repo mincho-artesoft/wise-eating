@@ -438,23 +438,10 @@ struct ShoppingListDetailView: View {
                         HStack {
                             Text("Reminder")
                             Spacer()
-                            Button(action: {
-                                PermissionManager.shared.openAppSettings(for: .notifications)
-                            }) {
-                                HStack(spacing: 4) {
-                                    Text("Enable in Settings")
-                                }
-                                .font(.caption.weight(.bold))
+                            Text("Notifications are disabled. Please enable them in Settings.")
+                                .font(.subheadline.weight(.semibold))
                                 .foregroundColor(effectManager.currentGlobalAccentColor)
-                                .padding(7)
-                                .glassCardStyle(cornerRadius: 20)
-                            }
-                            .buttonStyle(.plain)
                         }
-                        
-                        Text("Notifications are disabled. Please enable them in Settings.")
-                            .font(.caption2)
-                            .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.7))
                     }
                 } else {
                     HStack {

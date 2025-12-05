@@ -102,24 +102,9 @@ struct MealEditorView: View {
                             HStack {
                                 Text("Reminder")
                                 Spacer()
-                                Button(action: {
-                                    PermissionManager.shared.openAppSettings(for: .notifications)
-                                }) {
-                                    HStack(spacing: 4) {
-                                        Text("Enable in Settings")
-                                    }
-                                    .font(.caption.weight(.bold))
-                                    .foregroundColor(effectManager.currentGlobalAccentColor)
-                                    .padding(7)
-                                    .glassCardStyle(cornerRadius: 20)
-                                }
-                                .buttonStyle(.plain)
-                            }
-                            
-                            // --- ПРОМЕНЕН ТЕКСТ ЗА ХРАНЕНЕ ---
-                            Text("Notifications are disabled. Please enable them in Settings if you want to use reminders for your meals.")
-                                .font(.caption2)
-                                .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.7))
+                                Text("Notifications are disabled. Please enable them in Settings if you want to use reminders for your meals.")
+                                    .font(.subheadline.weight(.semibold))
+                                    .foregroundColor(effectManager.currentGlobalAccentColor)                            }
                         }
                     } else {
                         // Ако са разрешени или не са определени

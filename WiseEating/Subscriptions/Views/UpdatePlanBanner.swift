@@ -22,7 +22,7 @@ struct UpdatePlanBanner: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 24, height: 24)
                         
-                        Text("Update Plan")
+                        Text("Upgrade Plan")
                             .font(.subheadline.weight(.semibold))
                     }
                     .padding(.vertical, 6)
