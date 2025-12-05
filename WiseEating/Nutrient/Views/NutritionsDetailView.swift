@@ -444,7 +444,7 @@ struct NutritionsDetailView: View {
             }
             DraggableMenuView(
                 menuState: $mealActionMenuState,
-                customTopGap: (mealActionContent == .scanBarcodes) ? UIScreen.main.bounds.height * 0.05 : UIScreen.main.bounds.height * 0.2,
+                customTopGap: (mealActionContent == .scanBarcodes) ? UIScreen.main.bounds.height * 0.08 : UIScreen.main.bounds.height * 0.2,
                 horizontalContent: { EmptyView() },
                 verticalContent: {
                     // +++ НАЧАЛО НА ПРОМЯНАТА (4/5) +++
@@ -1111,7 +1111,7 @@ struct NutritionsDetailView: View {
             
             DraggableMenuView(
                 menuState: $mealPlanMenuState,
-                customTopGap: (mealActionContent == .scanBarcodes) ? UIScreen.main.bounds.height * 0.05 : UIScreen.main.bounds.height * 0.2,
+                customTopGap: (mealActionContent == .scanBarcodes) ? UIScreen.main.bounds.height * 0.08 : UIScreen.main.bounds.height * 0.2,
                 horizontalContent: { EmptyView() },
                 verticalContent: {
                     if let plan = selectedPlanForPreview {
@@ -1228,7 +1228,7 @@ struct NutritionsDetailView: View {
             
             DraggableMenuView(
                 menuState: $ringDetailMenuState,
-                customTopGap: (mealActionContent == .scanBarcodes) ? UIScreen.main.bounds.height * 0.05 : UIScreen.main.bounds.height * 0.2,
+                customTopGap: (mealActionContent == .scanBarcodes) ? UIScreen.main.bounds.height * 0.8 : UIScreen.main.bounds.height * 0.2,
                 horizontalContent: { EmptyView() },
                 verticalContent: {
                     if let detailType = showingRingDetail {
