@@ -3,6 +3,7 @@ import SwiftUI
 struct LiquidTabBar: View {
     @ObservedObject private var effectManager = EffectManager.shared
     
+    // Bindings от Parent View
     @Binding var menuState: MenuState
     @Binding var selectedTab: AppTab
     @Binding var isSearching: Bool
@@ -14,21 +15,27 @@ struct LiquidTabBar: View {
     @Binding var isSearchButtonVisible: Bool
     @Binding var isAIGenerating: Bool
    
+    // Actions
     var onSearchTapped: () -> Void
     var onDismissSearchTapped: () -> Void
     @FocusState.Binding var isSearchFieldFocused: Bool
 
+    // Animation Namespace
     @Namespace private var animation
 
+    // Profile Menu Bindings
     @Binding var profilesMenuState: MenuState
     @Binding var isProfilesDrawerVisible: Bool
     
+    // Local State
     @State private var localSearchText: String = ""
     @State private var isAnimatingSelection = false
     
+    // --- НОВО: Следи върху кой таб е пръста по време на драг ---
+    @State private var draggingTab: AppTab? = nil
+    
     let standardTabs: [AppTab]
 
-    // ... (init методът остава същият) ...
     init(
         menuState: Binding<MenuState>,
         selectedTab: Binding<AppTab>,
@@ -65,67 +72,122 @@ struct LiquidTabBar: View {
         self._isProfilesDrawerVisible = isProfilesDrawerVisible
     }
 
+    // Помощна анимация за иконките
     private func triggerSelectionPop() {
         isAnimatingSelection = true
         withAnimation(.spring(response: 0.4, dampingFraction: 0.35).delay(0.15)) {
             isAnimatingSelection = false
         }
     }
+    
+    // Помощна функция за намиране на таб спрямо позицията на пръста
+    private func getTab(at location: CGPoint, totalWidth: CGFloat) -> AppTab? {
+        guard totalWidth > 0, !standardTabs.isEmpty else { return nil }
+        let tabWidth = totalWidth / CGFloat(standardTabs.count)
+        let index = Int(location.x / tabWidth)
+        
+        if index >= 0 && index < standardTabs.count {
+            return standardTabs[index]
+        }
+        return nil
+    }
 
     var body: some View {
         ZStack {
-            // --- ПРОМЯНА: Проверяваме дали избраният таб е един от видимите ---
             let isTabVisible = standardTabs.contains(selectedTab)
             
             // --- 1. ПЛЪЗГАЩОТО СЕ БАЛОНЧЕ (BACKGROUND) ---
-            // Показваме го САМО ако не търсим И ако табът е в списъка
             if !isSearching && isTabVisible {
                 Capsule()
                     .fill(effectManager.currentGlobalAccentColor.opacity(0.4))
                     .glassCardStyle(cornerRadius: 25)
                     .padding(.horizontal, 5)
-                    .matchedGeometryEffect(id: selectedTab, in: animation, isSource: false)
+                    // Визуално показваме draggingTab ако има такъв, иначе selectedTab
+                    .matchedGeometryEffect(id: draggingTab ?? selectedTab, in: animation, isSource: false)
                     .frame(height: 44)
-                    // Добавяме транзишън, за да изчезва плавно, а не рязко
+                    // Бърза анимация, за да следва пръста плътно
+                    .animation(.interactiveSpring(response: 0.3, dampingFraction: 0.7), value: draggingTab)
                     .transition(.opacity)
             }
             
-            // --- 2. СЪДЪРЖАНИЕТО (HSTACK) ---
+            // --- 2. СЪДЪРЖАНИЕТО ---
             HStack(spacing: 0) {
-                ForEach(standardTabs) { tab in
-                    TabItem(
-                        tab: tab,
-                        selectedTab: $selectedTab,
-                        hasNewNutrition: $hasNewNutrition,
-                        hasNewTraining: $hasNewTraining,
-                        hasUnreadAINotifications: $hasUnreadAINotifications,
-                        isAIGenerating: isAIGenerating,
-                        accentColor: effectManager.currentGlobalAccentColor,
-                        isAccentColorLight: effectManager.isLightRowTextColor,
-                        animationNamespace: animation,
-                        isAnimating: isAnimatingSelection
-                    )
-                    .simultaneousGesture(
+                
+                // --- A. ТАБОВЕ ---
+                GeometryReader { geo in
+                    HStack(spacing: 0) {
+                        ForEach(standardTabs) { tab in
+                            TabItem(
+                                tab: tab,
+                                selectedTab: $selectedTab,
+                                hasNewNutrition: $hasNewNutrition,
+                                hasNewTraining: $hasNewTraining,
+                                hasUnreadAINotifications: $hasUnreadAINotifications,
+                                isAIGenerating: isAIGenerating,
+                                accentColor: effectManager.currentGlobalAccentColor,
+                                isAccentColorLight: effectManager.isLightRowTextColor,
+                                animationNamespace: animation,
+                                isAnimating: isAnimatingSelection
+                            )
+                            .frame(maxWidth: .infinity)
+                        }
+                    }
+                    .contentShape(Rectangle()) // Прави цялата зона активна за жестове
+                    .gesture(
                         DragGesture(minimumDistance: 0)
-                            .onChanged { _ in
-                                if selectedTab != tab {
-                                    withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                                        selectedTab = tab
+                            .onChanged { value in
+                                // 1. Намираме кой таб е под пръста
+                                guard let currentTab = getTab(at: value.location, totalWidth: geo.size.width) else { return }
+                                
+                                // 2. Обновяваме визуалната позиция на балона (draggingTab)
+                                if draggingTab != currentTab {
+                                    withAnimation(.interactiveSpring(response: 0.3, dampingFraction: 0.7)) {
+                                        draggingTab = currentTab
                                     }
-                                    menuState = .collapsed
-                                    navBarIsHiden = false
-                                    profilesMenuState = .collapsed
-                                    isProfilesDrawerVisible = false
-                                    
-                                    triggerSelectionPop()
+                                    // Лека вибрация при преминаване през таб
+                                    let generator = UIImpactFeedbackGenerator(style: .light)
+                                    generator.impactOccurred()
+                                }
+                                
+                                // 3. Логика за TAP: Ако движението е минимално, сменяме веднага
+                                if abs(value.translation.width) < 10 {
+                                    if selectedTab != currentTab {
+                                        selectedTab = currentTab
+                                        triggerSelectionPop()
+                                    }
                                 }
                             }
+                            .onEnded { value in
+                                // 4. Логика за КРАЙ НА DRAG: Потвърждаваме избора
+                                if let finalTab = getTab(at: value.location, totalWidth: geo.size.width) {
+                                    if selectedTab != finalTab {
+                                        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                            selectedTab = finalTab
+                                        }
+                                        triggerSelectionPop()
+                                        
+                                        // Скриване на UI елементи
+                                        menuState = .collapsed
+                                        navBarIsHiden = false
+                                        profilesMenuState = .collapsed
+                                        isProfilesDrawerVisible = false
+                                    }
+                                }
+                                
+                                // 5. Нулираме draggingTab
+                                draggingTab = nil
+                            }
                     )
-                    .frame(maxWidth: isSearching ? 0 : .infinity)
-                    .opacity(isSearching ? 0 : 1)
                 }
+                .frame(height: 44)
+                // Скриваме табовете при търсене
+                .frame(maxWidth: isSearching ? 0 : .infinity)
+                .opacity(isSearching ? 0 : 1)
+                // Layout Priority: Табовете взимат всичкото налично място, оставено от бутона
+                .layoutPriority(1)
 
-                // Логика за Search полето
+                
+                // --- B. ПОЛЕ ЗА ТЪРСЕНЕ (SEARCH FIELD) ---
                 if isSearching {
                    ZStack(alignment: .leading) {
                        if localSearchText.isEmpty {
@@ -148,10 +210,10 @@ struct LiquidTabBar: View {
                    .transition(.opacity.animation(.easeIn(duration: 0.2).delay(0.1)))
                 }
                 
-                // Бутон за търсене
+                // --- C. БУТОН ЗА ТЪРСЕНЕ ---
                 if isSearchButtonVisible && !navBarIsHiden {
                     ZStack {
-                        // Котва за анимацията при търсене (ако се ползва като таб)
+                        // Котва за анимацията
                         if !isSearching {
                              Color.clear
                                 .frame(height: 44)
@@ -172,9 +234,8 @@ struct LiquidTabBar: View {
                                 .frame(width: 30, height: 30)
                         }
                     }
-                    .frame(width: isSearching ? 50 : nil, alignment: .center)
-                    .frame(maxWidth: isSearching ? nil : .infinity)
-                    .padding(.trailing, isSearching ? 10 : 0)
+                    // Фиксирана ширина, за да не "бута" табовете
+                    .frame(width: 50, height: 44)
                     .contentShape(Rectangle())
                     .onTapGesture {
                         if isSearching { onDismissSearchTapped() } else { onSearchTapped() }
@@ -191,7 +252,7 @@ struct LiquidTabBar: View {
         .glassCardStyle(cornerRadius: 50)
         .padding(.horizontal)
         .padding(.bottom, 8)
-        // Тези анимации са важни за плавния ефект при изчезване
+        // Анимации за UI промените
         .animation(.interactiveSpring(response: 0.4, dampingFraction: 0.8), value: selectedTab)
         .animation(.interactiveSpring(response: 0.4, dampingFraction: 0.8), value: isSearching)
         .animation(.interactiveSpring(response: 0.4, dampingFraction: 0.8), value: isSearchButtonVisible)
@@ -206,7 +267,7 @@ struct LiquidTabBar: View {
     }
 }
 
-// --- Обновен TabItem ---
+// --- TabItem Component ---
 private struct TabItem: View {
     let tab: AppTab
     @Binding var selectedTab: AppTab
@@ -218,47 +279,33 @@ private struct TabItem: View {
     
     let accentColor: Color
     let isAccentColorLight: Bool
-    let animationNamespace: Namespace.ID // Получаваме namespace
+    let animationNamespace: Namespace.ID
     let isAnimating: Bool
-    
-    private var selectedColor: Color { isAccentColorLight ? .black : .white }
     
     var body: some View {
         VStack {
             ZStack(alignment: .topTrailing) {
                 iconView
                 
+                // Notification Dots
                 if hasNewNutrition && tab == .nutrition && selectedTab != .nutrition {
-                    Circle()
-                        .fill(Color.orange)
-                        .frame(width: 8, height: 8)
-                        .offset(x: 1, y: 5)
-                        .transition(.scale.animation(.spring()))
+                    Circle().fill(Color.orange).frame(width: 8, height: 8).offset(x: 1, y: 5)
                 }
                 if hasNewTraining && tab == .training && selectedTab != .training {
-                    Circle()
-                        .fill(Color.orange)
-                        .frame(width: 8, height: 8)
-                        .offset(x: 1, y: 5)
-                        .transition(.scale.animation(.spring()))
+                    Circle().fill(Color.orange).frame(width: 8, height: 8).offset(x: 1, y: 5)
                 }
                 if hasUnreadAINotifications && tab == .aiGenerate && selectedTab != .aiGenerate {
-                    Circle()
-                        .fill(Color.orange)
-                        .frame(width: 8, height: 8)
-                        .offset(x: 1, y: 5)
-                        .transition(.scale.animation(.spring()))
+                    Circle().fill(Color.orange).frame(width: 8, height: 8).offset(x: 1, y: 5)
                 }
             }
         }
         .frame(maxWidth: .infinity)
-        // --- ПРОМЯНА: Тук вече не рисуваме капсулата условно.
-        // Вместо това слагаме "Котва" (Anchor) на заден план ---
+        .frame(height: 44)
         .background(
-            Color.clear // Невидим view, който определя размера и позицията
+            Color.clear
                 .matchedGeometryEffect(id: tab, in: animationNamespace, isSource: true)
         )
-        .contentShape(Rectangle())
+        // Мащабиране само при селекция и анимация
         .scaleEffect(selectedTab == tab && isAnimating ? 1.2 : 1.0)
     }
     
@@ -278,6 +325,7 @@ private struct TabItem: View {
     }
 }
 
+// --- Breathing Icon for AI ---
 private struct BreathingAssetIcon: View {
     let imageName: String
     let isActive: Bool
@@ -295,30 +343,20 @@ private struct BreathingAssetIcon: View {
             .scaleEffect(breathingScale)
             .opacity(breathingOpacity)
             .onAppear {
-                if isActive {
-                    startBreathing()
-                }
+                if isActive { startBreathing() }
             }
             .onChange(of: isActive) { _, newValue in
-                if newValue {
-                    startBreathing()
-                } else {
-                    stopBreathing()
-                }
+                if newValue { startBreathing() } else { stopBreathing() }
             }
     }
 
     private func startBreathing() {
         guard !isAnimating else { return }
         isAnimating = true
-
         breathingScale = 1.0
         breathingOpacity = 1.0
 
-        withAnimation(
-            .easeInOut(duration: 1.2)
-                .repeatForever(autoreverses: true)
-        ) {
+        withAnimation(.easeInOut(duration: 1.2).repeatForever(autoreverses: true)) {
             breathingScale = 1.08
             breathingOpacity = 0.65
         }
