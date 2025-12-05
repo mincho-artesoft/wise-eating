@@ -300,6 +300,8 @@ struct RootView: View {
                 
                 // ✅ ДОБАВЕНО: Логика за отваряне на менюто с абонаменти
                 onOpenSubscriptionFlow: {
+                    dismissSearch()
+                    
                     selectedDraggableMenuTab = .subscriptions
 
                     // 👇 Тук приемам, че имаш case .removeAds в SubscriptionCategory
