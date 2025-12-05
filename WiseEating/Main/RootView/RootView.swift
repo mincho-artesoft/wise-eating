@@ -1008,7 +1008,7 @@ struct RootView: View {
         selectedTab = .search
         menuState = .collapsed
         isSearching = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) { isSearchFieldFocused = true }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) { isSearchFieldFocused = true }
     }
 
     private func dismissSearch() {
