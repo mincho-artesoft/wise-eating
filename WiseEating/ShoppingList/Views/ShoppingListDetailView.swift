@@ -237,7 +237,7 @@ struct ShoppingListDetailView: View {
                     DraggableMenuView(
                         menuState: $scanMenuState,
                         removeBottomPading: true,
-                        customTopGap: UIScreen.main.bounds.height * 0.05,
+                        customTopGap: UIScreen.main.bounds.height * 0.08,
                         horizontalContent: { EmptyView() },
                         verticalContent: {
                             BarcodeScannerView(
