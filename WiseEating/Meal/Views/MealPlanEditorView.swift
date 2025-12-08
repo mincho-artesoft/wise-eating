@@ -979,47 +979,15 @@ struct MealPlanEditorView: View {
     private func formatIngredientText(for entryID: MealPlanEntry.ID) {}
 
     
-    private func handleAITap() {
-        
-        guard ensureAIAvailableOrShowMessage() else { return }
-
-        let mealsToGenerate = days.reduce(into: [Int: [String]]()) { result, day in
-            let emptyMealNames = day.meals.filter { $0.entries.isEmpty }.map { $0.mealName }
-            if !emptyMealNames.isEmpty {
-                result[day.dayIndex] = emptyMealNames
-            }
-        }
-
-        guard !mealsToGenerate.isEmpty else {
-            alertMessage = "All meals for all days already have items. Clear some meals if you want to generate new ones."
-            showAlert = true
-            return
-        }
-
-        let existingMeals = days.reduce(into: [Int: [MealPlanPreviewMeal]]()) { result, day in
-            let populatedMeals = day.meals.filter { !$0.entries.isEmpty }
-
-            if !populatedMeals.isEmpty {
-                result[day.dayIndex] = populatedMeals.map { meal in
-                    let items = meal.entries.compactMap { entry -> MealPlanPreviewItem? in
-                        guard let food = entry.food else { return nil }
-                        return MealPlanPreviewItem(
-                            name: food.name,
-                            grams: entry.grams,
-                            kcal: food.calories(for: entry.grams)
-                        )
-                    }
-                    return MealPlanPreviewMeal(
-                        name: meal.mealName,
-                        descriptiveTitle: meal.descriptiveAIName,
-                        items: items, startTime: nil
-                    )
-                }
-            }
-        }
-
-        let selectedPrompts = allPrompts.filter { selectedPromptIDs.contains($0.id) }.map { $0.text }
-        
+    /// Стартира същинската AI генерация на хранителен план.
+    /// Извиква се САМО след като потребителят вече е "платил"
+    /// (абонамент или чрез реклама).
+    private func startMealPlanAIGeneration(
+        mealsToGenerate: [Int: [String]],
+        existingMeals: [Int: [MealPlanPreviewMeal]],
+        selectedPrompts: [String]
+    ) {
+        // Toast логика (както беше в стария handleAITap)
         toastTimer?.invalidate()
         toastProgress = 0.0
         withAnimation {
@@ -1051,6 +1019,7 @@ struct MealPlanEditorView: View {
             jobType: .mealPlan
         ) {
             self.runningGenerationJobID = newJob.id
+            self.hasUserMadeEdits = false
         } else {
             alertMessage = "Could not start AI generation job."
             showAlert = true
@@ -1060,9 +1029,112 @@ struct MealPlanEditorView: View {
                 showAIGenerationToast = false
             }
         }
-        
-        hasUserMadeEdits = false
     }
+
+    private func handleAITap() {
+        // 1. Проверка за наличност на AI (Apple Intelligence статус)
+        guard ensureAIAvailableOrShowMessage() else { return }
+
+        // 2. Събираме кои ястия трябва да се генерират (както досега)
+        let mealsToGenerate = days.reduce(into: [Int: [String]]()) { result, day in
+            let emptyMealNames = day.meals
+                .filter { $0.entries.isEmpty }
+                .map { $0.mealName }
+            if !emptyMealNames.isEmpty {
+                result[day.dayIndex] = emptyMealNames
+            }
+        }
+
+        guard !mealsToGenerate.isEmpty else {
+            alertMessage = "All meals for all days already have items. Clear some meals if you want to generate new ones."
+            showAlert = true
+            return
+        }
+
+        // 3. Попълнени вече ястия (existingMeals) – както досега
+        let existingMeals = days.reduce(into: [Int: [MealPlanPreviewMeal]]()) { result, day in
+            let populatedMeals = day.meals.filter { !$0.entries.isEmpty }
+
+            if !populatedMeals.isEmpty {
+                result[day.dayIndex] = populatedMeals.map { meal in
+                    let items = meal.entries.compactMap { entry -> MealPlanPreviewItem? in
+                        guard let food = entry.food else { return nil }
+                        return MealPlanPreviewItem(
+                            name: food.name,
+                            grams: entry.grams,
+                            kcal: food.calories(for: entry.grams)
+                        )
+                    }
+                    return MealPlanPreviewMeal(
+                        name: meal.mealName,
+                        descriptiveTitle: meal.descriptiveAIName,
+                        items: items,
+                        startTime: nil
+                    )
+                }
+            }
+        }
+
+        // 4. Промптове
+        let selectedPrompts = allPrompts
+            .filter { selectedPromptIDs.contains($0.id) }
+            .map { $0.text }
+
+        // 5. Абонамент / реклами gateway
+
+        // 5.1 Платен план – без реклами
+        if SubscriptionManager.shared.subscriptionStatus != .base {
+            print("💎 Premium user: Skipping ad for meal plan generation.")
+            startMealPlanAIGeneration(
+                mealsToGenerate: mealsToGenerate,
+                existingMeals: existingMeals,
+                selectedPrompts: selectedPrompts
+            )
+            return
+        }
+
+        // 5.2 Безплатен план – Rewarded → Interstitial → fallback
+        print("📺 Free user: Checking for ads for meal plan generation...")
+
+        if RewardedAdManager.shared.isReady {
+            print("📺 Showing Rewarded Ad for meal plan generation...")
+            RewardedAdManager.shared.showIfAvailable { amount, type in
+                // Влиза се тук САМО ако рекламата е изгледана докрай
+                print("✅ Ad watched! Starting meal plan generation.")
+                self.startMealPlanAIGeneration(
+                    mealsToGenerate: mealsToGenerate,
+                    existingMeals: existingMeals,
+                    selectedPrompts: selectedPrompts
+                )
+            }
+        } else if InterstitialAdManager.shared.isReady {
+            print("⚠️ Rewarded not ready. Showing Interstitial fallback for meal plan generation...")
+            InterstitialAdManager.shared.showIfAvailable {
+                // Изпълнява се, когато потребителят затвори interstitial-а
+                print("✅ Interstitial closed. Starting meal plan generation.")
+                self.startMealPlanAIGeneration(
+                    mealsToGenerate: mealsToGenerate,
+                    existingMeals: existingMeals,
+                    selectedPrompts: selectedPrompts
+                )
+            }
+        } else {
+            print("⚠️ No ads available. Proceeding graciously with meal plan generation.")
+            // Няма реклами – пускаме AI, за да не дразним потребителя
+            startMealPlanAIGeneration(
+                mealsToGenerate: mealsToGenerate,
+                existingMeals: existingMeals,
+                selectedPrompts: selectedPrompts
+            )
+
+            // Подготвяме реклами за следващия път
+            Task {
+                await RewardedAdManager.shared.loadAd()
+                await InterstitialAdManager.shared.loadAd()
+            }
+        }
+    }
+
     
     private func saveAIButtonPosition() {
         let d = UserDefaults.standard

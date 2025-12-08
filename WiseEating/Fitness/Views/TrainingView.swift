@@ -1071,44 +1071,18 @@ struct TrainingView: View {
                 self.aiIsDragging = false
             }
     }
-    
-    private func handleAITap() {
-        guard ensureAIAvailableOrShowMessage() else { return }
-        
-        let workoutsToGenerate = dailyTrainings.reduce(into: [Int: [String]]()) { result, training in
-            if training.exercises(using: ctx).isEmpty {
-                let dayIndex = 1
-                result[dayIndex, default: []].append(training.name)
-            }
-        }
-        
-        guard !workoutsToGenerate.isEmpty else {
-            alertMsg = "All workouts for this day already have exercises. Clear some if you want the AI to generate new ones."
-            showAlert = true
-            return
-        }
-        
-        let existingWorkouts = dailyTrainings.reduce(into: [Int: [TrainingPlanWorkoutDraft]]()) { result, training in
-            let exercises = training.exercises(using: ctx)
-            if !exercises.isEmpty {
-                let dayIndex = 1
-                let exerciseDrafts = exercises.map { (item, duration) in
-                    TrainingPlanExerciseDraft(exerciseName: item.name, durationMinutes: duration)
-                }
-                let workoutDraft = TrainingPlanWorkoutDraft(workoutName: training.name, exercises: exerciseDrafts)
-                result[dayIndex, default: []].append(workoutDraft)
-            }
-        }
-        
-        let selectedPrompts = allPrompts
-            .filter { selectedPromptIDs.contains($0.id) && $0.type == .trainingViewМealPlan }
-            .map { $0.text }
-        
+    /// Стартира същинското AI генериране на дневния тренировъчен план.
+    /// Извиква се САМО след като потребителят вече е "платил" (абонамент или реклама).
+    private func startTrainingPlanAIGeneration(
+        workoutsToGenerate: [Int: [String]],
+        existingWorkouts: [Int: [TrainingPlanWorkoutDraft]],
+        selectedPrompts: [String]
+    ) {
         triggerAIGenerationToast()
         
         if let newJob = aiManager.startTrainingPlanGeneration(
             for: profile,
-            prompts: selectedPrompts.isEmpty ? [] : selectedPrompts,
+            prompts: selectedPrompts, // вече е почистен списък
             workoutsToFill: workoutsToGenerate,
             existingWorkouts: existingWorkouts.isEmpty ? nil : existingWorkouts,
             jobType: .trainingViewDailyPlan
@@ -1122,6 +1096,106 @@ struct TrainingView: View {
             withAnimation { showAIGenerationToast = false }
         }
     }
+
+    private func handleAITap() {
+        // 1. Проверка за наличност на AI (като при ExerciseItemEditorView)
+        guard ensureAIAvailableOrShowMessage() else { return }
+        
+        // 2. Подготовка на данните за генериране (ПРЕДИ рекламите)
+        let workoutsToGenerate = dailyTrainings.reduce(into: [Int: [String]]()) { result, training in
+            if training.exercises(using: ctx).isEmpty {
+                let dayIndex = 1 // ако имаш реален индекс за деня – сложи него
+                result[dayIndex, default: []].append(training.name)
+            }
+        }
+        
+        guard !workoutsToGenerate.isEmpty else {
+            alertMsg = "All workouts for this day already have exercises. Clear some if you want the AI to generate new ones."
+            showAlert = true
+            return
+        }
+        
+        let existingWorkouts = dailyTrainings.reduce(into: [Int: [TrainingPlanWorkoutDraft]]()) { result, training in
+            let exercises = training.exercises(using: ctx)
+            if !exercises.isEmpty {
+                let dayIndex = 1 // същото тук – ако имаш истински dayIndex, ползвай него
+                let exerciseDrafts = exercises.map { (item, duration) in
+                    TrainingPlanExerciseDraft(
+                        exerciseName: item.name,
+                        durationMinutes: duration
+                    )
+                }
+                let workoutDraft = TrainingPlanWorkoutDraft(
+                    workoutName: training.name,
+                    exercises: exerciseDrafts
+                )
+                result[dayIndex, default: []].append(workoutDraft)
+            }
+        }
+        
+        let rawPrompts = allPrompts
+            .filter { selectedPromptIDs.contains($0.id) && $0.type == .trainingViewМealPlan }
+            .map { $0.text }
+        
+        // Нормализираме, за да не се занимаваме после в helper-а
+        let promptsForGeneration = rawPrompts.isEmpty ? [] : rawPrompts
+        let existingForGeneration = existingWorkouts
+        
+        // 3. Логика за АБОНАМЕНТ / РЕКЛАМИ (копи/пейст от ExerciseItemEditorView)
+
+        // 3.1 Платен план – без реклами
+        if SubscriptionManager.shared.subscriptionStatus != .base {
+            print("💎 Premium user: Skipping ad.")
+            startTrainingPlanAIGeneration(
+                workoutsToGenerate: workoutsToGenerate,
+                existingWorkouts: existingForGeneration,
+                selectedPrompts: promptsForGeneration
+            )
+            return
+        }
+        
+        // 3.2 Безплатен план – първо пробваме Rewarded, после Interstitial, накрая без реклами
+        print("📺 Free user: Checking for ads...")
+        
+        if RewardedAdManager.shared.isReady {
+            print("📺 Showing Rewarded Ad...")
+            RewardedAdManager.shared.showIfAvailable { amount, type in
+                // Изпълнява се само ако видеото е изгледано докрай
+                print("✅ Ad watched! Starting training plan generation.")
+                startTrainingPlanAIGeneration(
+                    workoutsToGenerate: workoutsToGenerate,
+                    existingWorkouts: existingForGeneration,
+                    selectedPrompts: promptsForGeneration
+                )
+            }
+        } else if InterstitialAdManager.shared.isReady {
+            print("⚠️ Rewarded not ready. Showing Interstitial fallback...")
+            InterstitialAdManager.shared.showIfAvailable {
+                // Изпълнява се когато потребителят затвори interstitial-а
+                print("✅ Interstitial closed. Starting training plan generation.")
+                startTrainingPlanAIGeneration(
+                    workoutsToGenerate: workoutsToGenerate,
+                    existingWorkouts: existingForGeneration,
+                    selectedPrompts: promptsForGeneration
+                )
+            }
+        } else {
+            print("⚠️ No ads available. Proceeding graciously.")
+            // Няма никакви реклами – пускаме AI, за да не дразним потребителя
+            startTrainingPlanAIGeneration(
+                workoutsToGenerate: workoutsToGenerate,
+                existingWorkouts: existingForGeneration,
+                selectedPrompts: promptsForGeneration
+            )
+            
+            // Подготвяме реклами за следващия път (background)
+            Task {
+                await RewardedAdManager.shared.loadAd()
+                await InterstitialAdManager.shared.loadAd()
+            }
+        }
+    }
+
     
     private func saveAIButtonPosition() {
         let d = UserDefaults.standard

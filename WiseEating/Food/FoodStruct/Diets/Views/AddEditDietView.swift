@@ -563,19 +563,12 @@ struct AddEditDietView: View {
             }
     }
     
-    private func handleAITap() {
-        guard ensureAIAvailableOrShowMessage() else { return }
-        
-        guard !selectedPromptIDs.isEmpty else {
-            alertMessage = "Please select at least one prompt for the AI."
-            showAlert = true
-            return
-        }
-        
+    /// Стартира същинската AI генерация на диета.
+    /// Извиква се САМО след като потребителят вече е "платил"
+    /// (с абонамент или чрез гледане на реклама).
+    private func startDietAIGeneration(promptTexts: [String]) {
         hasUserMadeEdits = false
         triggerAIGenerationToast()
-        
-        let promptTexts = allPrompts.filter { selectedPromptIDs.contains($0.id) }.map { $0.text }
         
         if let newJob = aiManager.startDietGeneration(
             for: self.profile,
@@ -591,6 +584,62 @@ struct AddEditDietView: View {
             withAnimation { showAIGenerationToast = false }
         }
     }
+
+    
+    private func handleAITap() {
+        // 1. Проверка за наличност на AI
+        guard ensureAIAvailableOrShowMessage() else { return }
+        
+        // 2. Проверка за избрани промптове (преди да караме потребителя да гледа реклами)
+        guard !selectedPromptIDs.isEmpty else {
+            alertMessage = "Please select at least one prompt for the AI."
+            showAlert = true
+            return
+        }
+        
+        let promptTexts = allPrompts
+            .filter { selectedPromptIDs.contains($0.id) }
+            .map { $0.text }
+        
+        // 3. Логика за АБОНАМЕНТ / РЕКЛАМИ (както при ExerciseItemEditorView)
+        
+        // 3.1 Платен план – без реклами
+        if SubscriptionManager.shared.subscriptionStatus != .base {
+            print("💎 Premium user: Skipping ad.")
+            startDietAIGeneration(promptTexts: promptTexts)
+            return
+        }
+        
+        // 3.2 Безплатен план – Rewarded → Interstitial → fallback
+        print("📺 Free user: Checking for ads...")
+        
+        if RewardedAdManager.shared.isReady {
+            print("📺 Showing Rewarded Ad for diet generation...")
+            RewardedAdManager.shared.showIfAvailable { amount, type in
+                // Тук влизаме САМО ако рекламата е изгледана докрай
+                print("✅ Ad watched! Starting diet generation.")
+                self.startDietAIGeneration(promptTexts: promptTexts)
+            }
+        } else if InterstitialAdManager.shared.isReady {
+            print("⚠️ Rewarded not ready. Showing Interstitial fallback for diet generation...")
+            InterstitialAdManager.shared.showIfAvailable {
+                // Изпълнява се, когато потребителят затвори interstitial-а
+                print("✅ Interstitial closed. Starting diet generation.")
+                self.startDietAIGeneration(promptTexts: promptTexts)
+            }
+        } else {
+            print("⚠️ No ads available. Proceeding graciously with diet generation.")
+            // Няма реклами – пускаме AI, за да не дразним потребителя
+            startDietAIGeneration(promptTexts: promptTexts)
+            
+            // Подготвяме реклами за следващия път
+            Task {
+                await RewardedAdManager.shared.loadAd()
+                await InterstitialAdManager.shared.loadAd()
+            }
+        }
+    }
+
     
     private func saveAIButtonPosition() {
         let d = UserDefaults.standard

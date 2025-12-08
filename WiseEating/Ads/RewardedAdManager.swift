@@ -4,6 +4,10 @@ import UIKit
 @MainActor
 final class RewardedAdManager: NSObject, FullScreenContentDelegate {
 
+    var isReady: Bool {
+           return rewardedAd != nil
+       }
+    
     static let shared = RewardedAdManager()
 
     private var rewardedAd: RewardedAd?

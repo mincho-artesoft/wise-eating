@@ -1931,41 +1931,92 @@ struct FoodItemReceptEditorView: View {
                 self.aiIsDragging = false
             }
     }
+    /// Стартира същинската AI генерация на рецепта.
+    /// Извиква се САМО след като потребителят вече е "платил"
+    /// (абонамент или реклама).
+    private func startRecipeAIGeneration(for profile: Profile) {
+        focusedField = nil
+        hasUserMadeEdits = false // Reset edit tracking before starting AI job
+        
+        if #available(iOS 26.0, *) {
+            triggerAIGenerationToast()
+
+            if let newJob = aiManager.startRecipeGeneration(
+                for: profile,
+                recipeName: self.name,
+                jobType: .recipeGeneration
+            ) {
+                self.runningGenerationJobID = newJob.id
+            } else {
+                alertMsg = "Could not start AI recipe generation job."
+                showAlert = true
+                toastTimer?.invalidate()
+                toastTimer = nil
+                withAnimation { showAIGenerationToast = false }
+            }
+        } else {
+            alertMsg = "AI recipe generation requires iOS 26 or newer."
+            showAlert = true
+        }
+    }
 
     private func handleAITap() {
-        
+        // 1. Проверка за AI наличност (Apple Intelligence статус и т.н.)
         guard ensureAIAvailableOrShowMessage() else { return }
 
-          guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-              alertMsg = "Please enter a name for the recipe first."
-              showAlert = true
-              return
-          }
-          
-          focusedField = nil
-          hasUserMadeEdits = false // Reset edit tracking before starting AI job
-          
-          if #available(iOS 26.0, *) {
-              triggerAIGenerationToast()
+        // 2. Трябва име на рецептата
+        guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            alertMsg = "Please enter a name for the recipe first."
+            showAlert = true
+            return
+        }
+        
+        // 3. Трябва профил
+        guard let profile = self.profile else {
+            alertMsg = "A profile is required for AI recipe generation."
+            showAlert = true
+            return
+        }
 
-              if let newJob = aiManager.startRecipeGeneration(
-                  for: self.profile!,
-                  recipeName: self.name,
-                  jobType: .recipeGeneration
-              ) {
-                  self.runningGenerationJobID = newJob.id
-              } else {
-                  alertMsg = "Could not start AI recipe generation job."
-                  showAlert = true
-                  toastTimer?.invalidate()
-                  toastTimer = nil
-                  withAnimation { showAIGenerationToast = false }
-              }
-          } else {
-              alertMsg = "AI recipe generation requires iOS 26 or newer."
-              showAlert = true
-          }
-      }
+        // 4. Логика за АБОНАМЕНТ / РЕКЛАМИ
+
+        // 4.1 Платен план – без реклами
+        if SubscriptionManager.shared.subscriptionStatus != .base {
+            print("💎 Premium user: Skipping ad for recipe generation.")
+            startRecipeAIGeneration(for: profile)
+            return
+        }
+
+        // 4.2 Безплатен план – Rewarded → Interstitial → fallback
+        print("📺 Free user: Checking for ads for recipe generation...")
+
+        if RewardedAdManager.shared.isReady {
+            print("📺 Showing Rewarded Ad for recipe generation...")
+            RewardedAdManager.shared.showIfAvailable { amount, type in
+                // Влиза се тук САМО ако рекламата е изгледана докрай
+                print("✅ Ad watched! Starting recipe generation.")
+                self.startRecipeAIGeneration(for: profile)
+            }
+        } else if InterstitialAdManager.shared.isReady {
+            print("⚠️ Rewarded not ready. Showing Interstitial fallback for recipe generation...")
+            InterstitialAdManager.shared.showIfAvailable {
+                // Изпълнява се, когато потребителят затвори interstitial-а
+                print("✅ Interstitial closed. Starting recipe generation.")
+                self.startRecipeAIGeneration(for: profile)
+            }
+        } else {
+            print("⚠️ No ads available. Proceeding graciously with recipe generation.")
+            // Няма реклами – пускаме AI, за да не дразним потребителя
+            startRecipeAIGeneration(for: profile)
+
+            // Подготвяме реклами за следващия път
+            Task {
+                await RewardedAdManager.shared.loadAd()
+                await InterstitialAdManager.shared.loadAd()
+            }
+        }
+    }
+
 
     private func saveAIButtonPosition() {
         let d = UserDefaults.standard

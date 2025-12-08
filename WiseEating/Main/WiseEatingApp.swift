@@ -34,6 +34,8 @@ struct WiseEatingApp: App {
     
     private var notificationDelegate = NotificationDelegate()
 
+    // В WiseEatingApp.swift
+
     init() {
         GlobalState.modelContext = container.mainContext
 
@@ -47,10 +49,13 @@ struct WiseEatingApp: App {
             await CalendarViewModel.shared.ensureSharedShoppingListCalendarExists()
         }
         
-        // Зареждаме рекламата, за да е готова за по-късно (дори да не я покажем веднага)
+        // --- ПРОМЯНА: Зареждаме ВСИЧКИ видове реклами тук ---
         Task { @MainActor in
-            await AppOpenAdManager.shared.loadAd()
+            await AppOpenAdManager.shared.loadAd()      // Open Ad
+            await RewardedAdManager.shared.loadAd()     // Video Reward
+            await InterstitialAdManager.shared.loadAd() // Fallback Interstitial
         }
+        // ----------------------------------------------------
     }
  
     var body: some Scene {

@@ -729,40 +729,97 @@ struct ExerciseItemEditorView: View {
         )
     }
     
-    // MARK: - AI
-    private func handleAITap() {
-        guard ensureAIAvailableOrShowMessage() else { return }
-        
-        guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-            alertMessage = "Please enter a name for the exercise first."
-            showAlert = true
-            return
-        }
-        
-        focusedField = nil
-        hasUserMadeEdits = false
+    // MARK: - AI & Ads Logic
 
-        if #available(iOS 26.0, *) {
-            triggerAIGenerationToast()
-
-            if let newJob = aiManager.startExerciseDetailGeneration(
-                for: self.profile,
-                exerciseName: self.name,
-                jobType: .exerciseDetail
-            ) {
-                self.runningGenerationJobID = newJob.id
-            } else {
-                alertMessage = "Could not start AI generation job."
+        /// Тази функция стартира същинската работа на AI.
+        /// Извиква се само когато потребителят е "платил" (с пари или с гледане на реклама).
+        private func startAIGeneration() {
+            guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+                alertMsg = "Please enter a name for the exercise first."
                 showAlert = true
-                toastTimer?.invalidate()
-                toastTimer = nil
-                withAnimation { showAIGenerationToast = false }
+                return
             }
-        } else {
-            alertMessage = "AI data generation requires iOS 17 or newer."
-            showAlert = true
+
+            focusedField = nil
+            hasUserMadeEdits = false
+
+            if #available(iOS 26.0, *) {
+                triggerAIGenerationToast()
+
+                if let newJob = aiManager.startExerciseDetailGeneration(
+                    for: self.profile,
+                    exerciseName: self.name,
+                    jobType: .exerciseDetail
+                ) {
+                    self.runningGenerationJobID = newJob.id
+                } else {
+                    alertMsg = "Could not start AI generation job."
+                    showAlert = true
+                    toastTimer?.invalidate()
+                    toastTimer = nil
+                    withAnimation { showAIGenerationToast = false }
+                }
+            } else {
+                alertMsg = "AI data generation requires iOS 26 or newer."
+                showAlert = true
+            }
         }
-    }
+
+        /// Основният handler на бутона.
+        private func handleAITap() {
+            // 1. Проверка за наличност на AI
+            guard ensureAIAvailableOrShowMessage() else { return }
+            
+            // 2. Валидация на името (преди рекламите)
+            guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+                alertMsg = "Please enter a name for the exercise first."
+                showAlert = true
+                return
+            }
+
+            // 3. Проверка за АБОНАМЕНТ
+            // Ако потребителят е на платен план (не е Base), пропускаме рекламите.
+            if SubscriptionManager.shared.subscriptionStatus != .base {
+                print("💎 Premium user: Skipping ad.")
+                startAIGeneration()
+                return
+            }
+
+            // 4. Логика за реклами (Base Plan)
+            print("📺 Free user: Checking for ads...")
+
+            // Опит 1: Видео с награда (Rewarded) - Приоритет
+            if RewardedAdManager.shared.isReady {
+                print("📺 Showing Rewarded Ad...")
+                RewardedAdManager.shared.showIfAvailable { amount, type in
+                    // Този код се изпълнява САМО ако рекламата е изгледана докрай
+                    print("✅ Ad watched! Starting generation.")
+                    self.startAIGeneration()
+                }
+                // Ако потребителят затвори видеото преждевременно, startAIGeneration НЯМА да се извика.
+            }
+            // Опит 2: Цял екран (Interstitial) - Резервен вариант
+            else if InterstitialAdManager.shared.isReady {
+                print("⚠️ Rewarded not ready. Showing Interstitial fallback...")
+                InterstitialAdManager.shared.showIfAvailable {
+                    // Извиква се, когато потребителят затвори рекламата (хиксчето)
+                    print("✅ Interstitial closed. Starting generation.")
+                    self.startAIGeneration()
+                }
+            }
+            // Опит 3: Няма никакви реклами (Graceful degradation)
+            else {
+                print("⚠️ No ads available. Proceeding graciously.")
+                // Пускаме услугата, за да не ядосваме потребителя, че няма реклами
+                startAIGeneration()
+                
+                // Опитваме да заредим за следващия път
+                Task {
+                    await RewardedAdManager.shared.loadAd()
+                    await InterstitialAdManager.shared.loadAd()
+                }
+            }
+        }
     
     @available(iOS 26.0, *)
     private func populateFromCompletedJob(jobID: UUID) async {

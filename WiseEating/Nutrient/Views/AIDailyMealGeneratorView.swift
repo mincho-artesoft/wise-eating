@@ -395,8 +395,46 @@ struct AIDailyMealGeneratorView: View {
     }
     
     private func handleAITap() {
-        generateAndDismiss()
+        // Ако няма избрани хранения – няма какво да генерираме
+        guard !selectedMealNames.isEmpty else { return }
+
+        // 1) Платен план – без реклами
+        if SubscriptionManager.shared.subscriptionStatus != .base {
+            print("💎 Premium user: Skipping ad for daily meal generation.")
+            generateAndDismiss()
+            return
+        }
+
+        // 2) Безплатен план – Rewarded → Interstitial → fallback
+        print("📺 Free user: Checking for ads for daily meal generation...")
+
+        if RewardedAdManager.shared.isReady {
+            print("📺 Showing Rewarded Ad for daily meal generation...")
+            RewardedAdManager.shared.showIfAvailable { amount, type in
+                // Влизаме тук САМО ако рекламата е изгледана докрай
+                print("✅ Ad watched! Starting daily meal generation.")
+                self.generateAndDismiss()
+            }
+        } else if InterstitialAdManager.shared.isReady {
+            print("⚠️ Rewarded not ready. Showing Interstitial fallback for daily meal generation...")
+            InterstitialAdManager.shared.showIfAvailable {
+                // Изпълнява се, когато потребителят затвори interstitial-а
+                print("✅ Interstitial closed. Starting daily meal generation.")
+                self.generateAndDismiss()
+            }
+        } else {
+            print("⚠️ No ads available. Proceeding graciously with daily meal generation.")
+            // Няма реклами – да не дразним потребителя
+            generateAndDismiss()
+
+            // Зареждаме реклами за следващия път
+            Task {
+                await RewardedAdManager.shared.loadAd()
+                await InterstitialAdManager.shared.loadAd()
+            }
+        }
     }
+
     
     private func saveAIButtonPosition() {
         let d = UserDefaults.standard
