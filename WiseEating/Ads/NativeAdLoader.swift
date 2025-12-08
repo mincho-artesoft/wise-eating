@@ -60,12 +60,8 @@ struct NativeAdContainerView: UIViewRepresentable {
     @ObservedObject var loader: NativeAdLoader
 
     func makeUIView(context: Context) -> SimpleNativeAdView {
-        let nib = UINib(nibName: "SimpleNativeAdView", bundle: nil)
-        guard let view = nib.instantiate(withOwner: nil, options: nil).first as? SimpleNativeAdView
-        else {
-            return SimpleNativeAdView()
-        }
-        return view
+        // ✅ ПРОМЯНА: Директна инстанциация, без XIB/NIB
+        return SimpleNativeAdView(frame: .zero)
     }
 
     func updateUIView(_ uiView: SimpleNativeAdView, context: Context) {
