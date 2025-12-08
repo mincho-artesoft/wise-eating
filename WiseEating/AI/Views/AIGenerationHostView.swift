@@ -106,30 +106,43 @@ struct AIGenerationHostView: View {
                 .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
             } else {
                 List {
-                    ForEach(jobs) { job in
-                        jobRow(for: job)
-                            .listRowBackground(Color.clear)
-                            .listRowSeparator(.hidden)
-                            .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
-                    }
-                    Color.clear.frame(height: 150)
-                        .listRowBackground(Color.clear)
-                        .listRowSeparator(.hidden)
-                }
-                .listStyle(.plain)
-                .scrollContentBackground(.hidden)
-                .mask(
-                    LinearGradient(
-                        gradient: Gradient(stops: [
-                            .init(color: .clear, location: 0),
-                            .init(color: .black, location: 0.01),
-                            .init(color: .black, location: 0.9),
-                            .init(color: .clear, location: 0.95)
-                        ]),
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                )
+                       let items = jobs
+                       
+                       ForEach(Array(items.enumerated()), id: \.element.id) { index, job in
+                           // 👉 Реклама по ритъм, както на другите екрани
+                           if shouldShowAd(at: index) {
+                               AdRowView()
+                                   .listRowBackground(Color.clear)
+                                   .listRowSeparator(.hidden)
+                                   .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 0, trailing: 16))
+                                   .padding(.bottom, 4)
+                           }
+                           
+                           jobRow(for: job)
+                               .listRowBackground(Color.clear)
+                               .listRowSeparator(.hidden)
+                               .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                       }
+                       
+                       Color.clear
+                           .frame(height: 150)
+                           .listRowBackground(Color.clear)
+                           .listRowSeparator(.hidden)
+                   }
+                   .listStyle(.plain)
+                   .scrollContentBackground(.hidden)
+                   .mask(
+                       LinearGradient(
+                           gradient: Gradient(stops: [
+                               .init(color: .clear, location: 0),
+                               .init(color: effectManager.currentGlobalAccentColor, location: 0.01),
+                               .init(color: effectManager.currentGlobalAccentColor, location: 0.9),
+                               .init(color: .clear, location: 0.95)
+                           ]),
+                           startPoint: .top,
+                           endPoint: .bottom
+                       )
+                   )
             }
         }
         .padding(.top, headerTopPadding)
@@ -642,5 +655,18 @@ struct AIGenerationHostView: View {
         .glassCardStyle(cornerRadius: 16)
     }
     
+    private func shouldShowAd(at index: Int) -> Bool {
+        // Платените планове – без реклами
+        if SubscriptionManager.shared.subscriptionStatus != .base {
+            return false
+        }
+        
+        // Да не почваме с реклама на първите редове
+        if index < 2 { return false }
+        
+        // Същият ритъм: 2, 5, 9, 12, 16, 19...
+        let remainder = index % 7
+        return remainder == 2 || remainder == 5
+    }
    
 }

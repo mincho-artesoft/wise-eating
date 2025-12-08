@@ -399,7 +399,19 @@ struct ShoppingListView: View {
                 ContentUnavailableView.search(text: globalSearchText)
             } else {
                 List {
-                    ForEach(filteredLists) { list in
+                    let lists = filteredLists
+                    
+                    ForEach(Array(lists.enumerated()), id: \.element.id) { index, list in
+                        
+                        // 👉 Вмъкваме реклама по индекс, преди самия ред
+                        if shouldShowAd(at: index) {
+                            AdRowView()
+                                .listRowBackground(Color.clear)
+                                .listRowSeparator(.hidden)
+                                .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 0, trailing: 16))
+                                .padding(.bottom, 4)
+                        }
+                        
                         Button {
                             present(list: list)
                         } label: { row(for: list) }
@@ -409,13 +421,10 @@ struct ShoppingListView: View {
                         .listRowSeparator(.hidden)
                         .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                            // --- НАЧАЛО НА ПРОМЯНАТА ---
                             Button(role: .destructive) {
-                                // За iOS 26 и по-нови версии, изтриваме директно.
                                 if #available(iOS 26.0, *) {
                                     withAnimation { viewModel.delete(list: list) }
                                 } else {
-                                    // За по-стари версии, показваме алерт за потвърждение.
                                     self.listToDelete = list
                                     self.isShowingDeleteListConfirmation = true
                                 }
@@ -425,8 +434,7 @@ struct ShoppingListView: View {
                                     .foregroundStyle(effectManager.currentGlobalAccentColor)
                             }
                             .tint(.clear)
-                            // --- КРАЙ НА ПРОМЯНАТА ---
-
+                            
                             Button {
                                 let originalList = list
                                 let copy = viewModel.duplicate(list: originalList)
@@ -439,7 +447,11 @@ struct ShoppingListView: View {
                             .tint(.clear)
                         }
                     }
-                    Color.clear.frame(height: 150).listRowBackground(Color.clear).listRowSeparator(.hidden)
+                    
+                    Color.clear
+                        .frame(height: 150)
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
                 }
                 .listStyle(.plain)
                 .scrollContentBackground(.hidden)
@@ -455,6 +467,7 @@ struct ShoppingListView: View {
                         endPoint: .bottom
                     )
                 )
+
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: .shoppingListDidChange)) { _ in
@@ -657,4 +670,20 @@ struct ShoppingListView: View {
         let height = defaults.double(forKey: "\(buttonPositionKey)_height")
         self.buttonOffset = CGSize(width: width, height: height)
     }
+    
+    private func shouldShowAd(at index: Int) -> Bool {
+        // Платен абонамент – без реклами
+        if SubscriptionManager.shared.subscriptionStatus != .base {
+            return false
+        }
+        
+        // Пропускаме първите 2 реда, за да не е най-отгоре
+        if index < 2 { return false }
+        
+        // Същият ритъм като в другите екрани:
+        // Индекси с реклами: 2, 5, 9, 12, 16, 19...
+        let remainder = index % 7
+        return remainder == 2 || remainder == 5
+    }
+
 }

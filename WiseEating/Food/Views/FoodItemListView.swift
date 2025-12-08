@@ -631,20 +631,35 @@ struct FoodItemListView: View {
     
     private var foodItemsList: some View {
         List {
-            ForEach(vm.items.filter { vm.filter != .favorites || $0.isFavorite }) { item in
-                FoodRow(
-                    item: item,
-                    textColor: effectManager.currentGlobalAccentColor,
-                    onItemTapped: {
-                        present(item: .detail(item))
+            // Използваме enumerated() + филтър за favorites, за да имаме индекс за shouldShowAd
+            ForEach(
+                Array(vm.items.enumerated())
+                    .filter { vm.filter != .favorites || $0.element.isFavorite },
+                id: \.element.id
+            ) { index, item in
+                VStack(spacing: 0) {
+                    FoodRow(
+                        item: item,
+                        textColor: effectManager.currentGlobalAccentColor,
+                        onItemTapped: {
+                            present(item: .detail(item))
+                        }
+                    )
+                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                        swipeActions(for: item)
                     }
-                )
-                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                    swipeActions(for: item)
+                    .padding(.vertical, 6) // padding върху реда, както при ExerciseListView
+                    
+                    if shouldShowAd(at: index) {
+                        AdRowView()
+                            .padding(.top, 8)
+                            .padding(.bottom, 8)
+                            .transition(.opacity)
+                    }
                 }
                 .listRowBackground(Color.clear)
                 .listRowSeparator(.hidden)
-                .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
+                .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
             }
             
             if vm.hasMore {
@@ -676,6 +691,7 @@ struct FoodItemListView: View {
         )
         .ignoresSafeArea(.all)
     }
+
     
     private var dietsManagementSection: some View {
         Group {
@@ -683,71 +699,82 @@ struct FoodItemListView: View {
                 ContentUnavailableView.search(text: globalSearchText)
             } else {
                 List {
-                    ForEach(filteredDiets) { diet in
-                        HStack {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(diet.name)
-                                    .foregroundColor(effectManager.currentGlobalAccentColor)
-                                if diet.isDefault {
-                                    Text("Default")
-                                        .font(.caption2)
-                                        .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.7))
-                                }
-                            }
-                            Spacer()
-                            profileIconsPreview(for: diet)
-                            Button(action: {
-                                if isSearching {
-                                    onDismissSearch()
-                                }
-                                withAnimation {
-                                    editingDietProfilesFor = diet
-                                    navBarIsHiden = true
-                                    isProfilesDrawerVisible = false
-                                }
-                            }) {
-                                Image(systemName: "person.2.fill")
-                                    .font(.title3)
-                                    .foregroundColor(effectManager.currentGlobalAccentColor)
-                                    .padding(10)
-                                    .glassCardStyle(cornerRadius: 20)
-                            }
-                            .buttonStyle(.plain)
-                        }
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            present(item: .detailDiet(diet))
-                        }
-                        .padding()
-                        .glassCardStyle(cornerRadius: 20)
-                        .swipeActions(allowsFullSwipe: false) {
-                            if !diet.isDefault {
-                                Button(role: .destructive) {
-                                    if #available(iOS 26.0, *) {
-                                        deleteDiet(diet)
-                                    } else {
-                                        dietToDelete = diet
-                                        isShowingDeleteDietAlert = true
+                    ForEach(Array(filteredDiets.enumerated()), id: \.element.id) { index, diet in
+                        VStack(spacing: 0) {
+                            HStack {
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(diet.name)
+                                        .foregroundColor(effectManager.currentGlobalAccentColor)
+                                    if diet.isDefault {
+                                        Text("Default")
+                                            .font(.caption2)
+                                            .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.7))
                                     }
+                                }
+                                Spacer()
+                                profileIconsPreview(for: diet)
+                                Button(action: {
+                                    if isSearching {
+                                        onDismissSearch()
+                                    }
+                                    withAnimation {
+                                        editingDietProfilesFor = diet
+                                        navBarIsHiden = true
+                                        isProfilesDrawerVisible = false
+                                    }
+                                }) {
+                                    Image(systemName: "person.2.fill")
+                                        .font(.title3)
+                                        .foregroundColor(effectManager.currentGlobalAccentColor)
+                                        .padding(10)
+                                        .glassCardStyle(cornerRadius: 20)
+                                }
+                                .buttonStyle(.plain)
+                            }
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                present(item: .detailDiet(diet))
+                            }
+                            .padding()
+                            .glassCardStyle(cornerRadius: 20)
+                            .swipeActions(allowsFullSwipe: false) {
+                                if !diet.isDefault {
+                                    Button(role: .destructive) {
+                                        if #available(iOS 26.0, *) {
+                                            deleteDiet(diet)
+                                        } else {
+                                            dietToDelete = diet
+                                            isShowingDeleteDietAlert = true
+                                        }
+                                    } label: {
+                                        Image(systemName: "trash.fill")
+                                            .symbolRenderingMode(.palette)
+                                            .foregroundStyle(effectManager.currentGlobalAccentColor)
+                                    }
+                                    .tint(.clear)
+                                }
+                                Button {
+                                    present(item: .editDiet(diet))
                                 } label: {
-                                    Image(systemName: "trash.fill")
+                                    Image(systemName: "pencil")
                                         .symbolRenderingMode(.palette)
                                         .foregroundStyle(effectManager.currentGlobalAccentColor)
                                 }
                                 .tint(.clear)
                             }
-                            Button {
-                                present(item: .editDiet(diet))
-                            } label: {
-                                Image(systemName: "pencil")
-                                    .symbolRenderingMode(.palette)
-                                    .foregroundStyle(effectManager.currentGlobalAccentColor)
+                            .padding(.vertical, 6) // вертикален padding върху картата
+
+                            // 👇 Реклама след някои диети, по същата логика
+                            if shouldShowAd(at: index) {
+                                AdRowView()
+                                    .padding(.top, 8)
+                                    .padding(.bottom, 8)
+                                    .transition(.opacity)
                             }
-                            .tint(.clear)
                         }
                         .listRowBackground(Color.clear)
                         .listRowSeparator(.hidden)
-                        .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
+                        .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
                     }
                     
                     Color.clear.frame(height: 150)
@@ -771,61 +798,77 @@ struct FoodItemListView: View {
             }
         }
     }
+
     
     @ViewBuilder
     private var mealPlansSection: some View {
         if mealPlanVM.plans.isEmpty && globalSearchText.isEmpty {
-            ContentUnavailableView("No Meal Plans", systemImage: "calendar.badge.plus", description: Text("Create your first meal plan by tapping the '+' button below."))
-                .foregroundStyle(effectManager.currentGlobalAccentColor)
+            ContentUnavailableView(
+                "No Meal Plans",
+                systemImage: "calendar.badge.plus",
+                description: Text("Create your first meal plan by tapping the '+' button below.")
+            )
+            .foregroundStyle(effectManager.currentGlobalAccentColor)
         } else if mealPlanVM.plans.isEmpty {
             ContentUnavailableView.search(text: globalSearchText)
         } else {
             List {
-                ForEach(mealPlanVM.plans) { plan in
-                    VStack(alignment: .leading, spacing: 6) {
-                        Text(plan.name)
-                            .font(.headline)
-                            .foregroundColor(effectManager.currentGlobalAccentColor)
-                        
-                        HStack {
-                            Text("\(plan.days.count) day\(plan.days.count == 1 ? "" : "s")")
-                            Text("•")
-                            Text("Created: \(plan.creationDate.formatted(date: .abbreviated, time: .omitted))")
+                ForEach(Array(mealPlanVM.plans.enumerated()), id: \.element.id) { index, plan in
+                    VStack(spacing: 0) {
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text(plan.name)
+                                .font(.headline)
+                                .foregroundColor(effectManager.currentGlobalAccentColor)
+                            
+                            HStack {
+                                Text("\(plan.days.count) day\(plan.days.count == 1 ? "" : "s")")
+                                Text("•")
+                                Text("Created: \(plan.creationDate.formatted(date: .abbreviated, time: .omitted))")
+                            }
+                            .font(.caption)
+                            .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
                         }
-                        .font(.caption)
-                        .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding()
-                    .glassCardStyle(cornerRadius: 20)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        present(item: .detailPlan(plan))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding()
+                        .glassCardStyle(cornerRadius: 20)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            present(item: .detailPlan(plan))
+                        }
+                        .swipeActions {
+                            Button(role: .destructive) {
+                                self.planToDelete = plan
+                                self.isShowingDeletePlanConfirmation = true
+                            } label: {
+                                Image(systemName: "trash.fill")
+                                    .symbolRenderingMode(.palette)
+                                    .foregroundStyle(effectManager.currentGlobalAccentColor)
+                            }
+                            .tint(.clear)
+                            
+                            Button {
+                                present(item: .editPlan(plan))
+                            } label: {
+                                Image(systemName: "pencil")
+                                    .symbolRenderingMode(.palette)
+                                    .foregroundStyle(effectManager.currentGlobalAccentColor)
+                            }
+                            .tint(.clear)
+                        }
+                        .padding(.vertical, 6)
+                        
+                        if shouldShowAd(at: index) {
+                            AdRowView()
+                                .padding(.top, 8)
+                                .padding(.bottom, 8)
+                                .transition(.opacity)
+                        }
                     }
                     .listRowBackground(Color.clear)
                     .listRowSeparator(.hidden)
-                    .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
-                    .swipeActions {
-                        Button(role: .destructive) {
-                            self.planToDelete = plan
-                            self.isShowingDeletePlanConfirmation = true
-                        } label: {
-                            Image(systemName: "trash.fill")
-                                .symbolRenderingMode(.palette)
-                                .foregroundStyle(effectManager.currentGlobalAccentColor)
-                        }
-                        .tint(.clear)
-                        
-                        Button {
-                            present(item: .editPlan(plan))
-                        } label: {
-                            Image(systemName: "pencil")
-                                .symbolRenderingMode(.palette)
-                                .foregroundStyle(effectManager.currentGlobalAccentColor)
-                        }
-                        .tint(.clear)
-                    }
+                    .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
                 }
+                
                 Color.clear.frame(height: 150)
                     .listRowBackground(Color.clear)
                     .listRowSeparator(.hidden)
@@ -846,6 +889,7 @@ struct FoodItemListView: View {
             )
         }
     }
+
     
     @ViewBuilder
     private func profileIconsPreview(for diet: Diet) -> some View {
@@ -1268,6 +1312,28 @@ struct FoodItemListView: View {
                 .contentShape(Rectangle())
                 .onTapGesture { onItemTapped() }
         }
+    }
+
+    // MARK: - Ad Logic
+    private func shouldShowAd(at index: Int) -> Bool {
+        // Проверка за Premium абонамент - ако е платен, не показваме реклами
+        if SubscriptionManager.shared.subscriptionStatus != .base {
+            return false
+        }
+        
+        // Пропускаме само първите 2 реда (0 и 1), за да не е най-горе
+        if index < 2 { return false }
+        
+        // Алгоритъм за минимум 2 елемента разстояние:
+        // Използваме цикъл от 7. Рекламите се падат на остатък 2 и 5.
+        // Това създава ритъм: Реклама -> (2 елемента) -> Реклама -> (3 елемента) -> Реклама...
+        // Индекси с реклами: 2, 5, 9, 12, 16, 19...
+        let remainder = index % 7
+        if remainder == 2 || remainder == 5 {
+            return true
+        }
+        
+        return false
     }
 
 }

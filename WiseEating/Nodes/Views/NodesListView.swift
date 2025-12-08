@@ -168,7 +168,19 @@ struct NodesListView: View {
 
                         if !dateFilteredNodes.isEmpty {
                             List {
-                                ForEach(dateFilteredNodes) { node in
+                                let nodes = dateFilteredNodes
+                                
+                                ForEach(Array(nodes.enumerated()), id: \.element.id) { index, node in
+                                    
+                                    // 👉 Реклама по ритъм, както на другите екрани
+                                    if shouldShowAd(at: index) {
+                                        AdRowView()
+                                            .listRowBackground(Color.clear)
+                                            .listRowSeparator(.hidden)
+                                            .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 0, trailing: 16))
+                                            .padding(.bottom, 4)
+                                    }
+                                    
                                     NodeRowView(node: node)
                                         .listRowBackground(Color.clear)
                                         .listRowSeparator(.hidden)
@@ -195,7 +207,9 @@ struct NodesListView: View {
                                             .tint(.clear)
                                         }
                                 }
-                                Color.clear.frame(height: 150)
+                                
+                                Color.clear
+                                    .frame(height: 150)
                                     .listRowBackground(Color.clear)
                                     .listRowSeparator(.hidden)
                             }
@@ -498,4 +512,19 @@ struct NodesListView: View {
         }
         nodeToDelete = nil
     }
+    
+    private func shouldShowAd(at index: Int) -> Bool {
+        // Ако юзърът не е на base план – скриваме рекламите
+        if SubscriptionManager.shared.subscriptionStatus != .base {
+            return false
+        }
+        
+        // Пропускаме първите 2 реда, за да не е реклама най-отгоре
+        if index < 2 { return false }
+        
+        // Същият ритъм: 2, 5, 9, 12, 16, 19...
+        let remainder = index % 7
+        return remainder == 2 || remainder == 5
+    }
+
 }
