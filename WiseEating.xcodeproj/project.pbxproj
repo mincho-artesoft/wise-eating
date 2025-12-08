@@ -40,22 +40,9 @@
 		C843A40D2E7E7C66000B1F28 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		5054A89F2E2F9BE00016ADAC /* Exceptions for "WiseEating" folder in "WiseEating" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 508496242DE5D05D0038A7D5 /* WiseEating */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		508496272DE5D05D0038A7D5 /* WiseEating */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				5054A89F2E2F9BE00016ADAC /* Exceptions for "WiseEating" folder in "WiseEating" target */,
-			);
 			path = WiseEating;
 			sourceTree = "<group>";
 		};
