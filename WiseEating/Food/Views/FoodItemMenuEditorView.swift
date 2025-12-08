@@ -2078,24 +2078,16 @@ struct FoodItemMenuEditorView: View {
             }
     }
 
-    private func handleAITap() {
-        
-        guard ensureAIAvailableOrShowMessage() else { return }
-
-        guard let profile = self.profile else {
-            alertMsg = "A profile is required for AI generation."
-            showAlert = true
-            return
-        }
-
+    /// Стартира същинската AI генерация на меню.
+    /// Извиква се САМО след като потребителят вече е "платил"
+    /// (абонамент или реклама).
+    private func startMenuAIGeneration(profile: Profile, promptTexts: [String]) {
         focusedField = nil
         hasUserMadeEdits = false // Reset edit tracking
-
+        
         if #available(iOS 26.0, *) {
             triggerAIGenerationToast()
             
-            let promptTexts = allPrompts.filter { selectedPromptIDs.contains($0.id) }.map { $0.text }
-
             if let newJob = aiManager.startMenuGeneration(
                 for: profile,
                 selectedPrompts: promptTexts,
@@ -2114,7 +2106,61 @@ struct FoodItemMenuEditorView: View {
             showAlert = true
         }
     }
-    // --- КРАЙ НА ПРОМЯНАТА (3/4) ---
+
+    private func handleAITap() {
+        // 1. Проверка за наличност на AI (Apple Intelligence статус)
+        guard ensureAIAvailableOrShowMessage() else { return }
+
+        // 2. Трябва да има профил
+        guard let profile = self.profile else {
+            alertMsg = "A profile is required for AI generation."
+            showAlert = true
+            return
+        }
+        
+        // 3. Събираме промптовете (може да са и празни, ако така ти е логиката)
+        let promptTexts = allPrompts
+            .filter { selectedPromptIDs.contains($0.id) }
+            .map { $0.text }
+
+        // 4. Логика за АБОНАМЕНТ / РЕКЛАМИ
+        // 4.1 Платен план – без реклами
+        if SubscriptionManager.shared.subscriptionStatus != .base {
+            print("💎 Premium user: Skipping ad for menu generation.")
+            startMenuAIGeneration(profile: profile, promptTexts: promptTexts)
+            return
+        }
+
+        // 4.2 Безплатен план – Rewarded → Interstitial → fallback
+        print("📺 Free user: Checking for ads for menu generation...")
+
+        if RewardedAdManager.shared.isReady {
+            print("📺 Showing Rewarded Ad for menu generation...")
+            RewardedAdManager.shared.showIfAvailable { amount, type in
+                // Тук влизаме САМО ако рекламата е изгледана докрай
+                print("✅ Ad watched! Starting menu generation.")
+                self.startMenuAIGeneration(profile: profile, promptTexts: promptTexts)
+            }
+        } else if InterstitialAdManager.shared.isReady {
+            print("⚠️ Rewarded not ready. Showing Interstitial fallback for menu generation...")
+            InterstitialAdManager.shared.showIfAvailable {
+                // Изпълнява се, когато потребителят затвори interstitial-а
+                print("✅ Interstitial closed. Starting menu generation.")
+                self.startMenuAIGeneration(profile: profile, promptTexts: promptTexts)
+            }
+        } else {
+            print("⚠️ No ads available. Proceeding graciously with menu generation.")
+            // Няма реклами – пускаме AI, за да не дразним потребителя
+            startMenuAIGeneration(profile: profile, promptTexts: promptTexts)
+
+            // Подготвяме реклами за следващия път
+            Task {
+                await RewardedAdManager.shared.loadAd()
+                await InterstitialAdManager.shared.loadAd()
+            }
+        }
+    }
+
 
 
     // --- НАЧАЛО НА ПРОМЯНАТА (4/4): Добавете тези нови функции ---

@@ -1573,41 +1573,86 @@ extension FoodItemEditorView {
             }
     }
 
+    /// Стартира същинската AI генерация на детайли за храната.
+    /// Извиква се САМО след като потребителят вече е "платил"
+    /// (абонамент или реклама).
+    private func startFoodDetailAIGeneration() {
+        focusedField = nil
+        hasUserMadeEdits = false // позволяваме AI да попълни полетата
+
+        if #available(iOS 26.0, *) {
+            triggerAIGenerationToast()
+
+            if let newJob = aiManager.startFoodDetailGeneration(
+                for: self.profile,
+                foodName: self.name,
+                jobType: .foodItemDetail
+            ) {
+                self.runningGenerationJobID = newJob.id
+            } else {
+                alertMsg = "Could not start AI generation job."
+                showAlert = true
+                toastTimer?.invalidate()
+                toastTimer = nil
+                withAnimation { showAIGenerationToast = false }
+            }
+        } else {
+            alertMsg = "AI data generation requires iOS 26 or newer."
+            showAlert = true
+        }
+    }
+
+    
     private func handleAITap() {
-        
+        // 1. Проверка за наличност на AI (Apple Intelligence статуси и т.н.)
         guard ensureAIAvailableOrShowMessage() else { return }
 
-        
-           guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-               alertMsg = "Please enter a name for the food first."
-               showAlert = true
-               return
-           }
-           
-           focusedField = nil
-           hasUserMadeEdits = false // Mark as edited to prevent overwrites from other AI processes
+        // 2. Валидация на името (преди да караме потребителя да гледа реклами)
+        guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            alertMsg = "Please enter a name for the food first."
+            showAlert = true
+            return
+        }
 
-           if #available(iOS 26.0, *) {
-               triggerAIGenerationToast()
+        // 3. Логика за АБОНАМЕНТ / РЕКЛАМИ (същата схема като при упражненията)
 
-               if let newJob = aiManager.startFoodDetailGeneration(
-                   for: self.profile,
-                   foodName: self.name,
-                   jobType: .foodItemDetail
-               ) {
-                   self.runningGenerationJobID = newJob.id
-               } else {
-                   alertMsg = "Could not start AI generation job."
-                   showAlert = true
-                   toastTimer?.invalidate()
-                   toastTimer = nil
-                   withAnimation { showAIGenerationToast = false }
-               }
-           } else {
-               alertMsg = "AI data generation requires iOS 26 or newer."
-               showAlert = true
-           }
-       }
+        // 3.1 Платен план – без реклами
+        if SubscriptionManager.shared.subscriptionStatus != .base {
+            print("💎 Premium user: Skipping ad for food detail generation.")
+            startFoodDetailAIGeneration()
+            return
+        }
+
+        // 3.2 Безплатен план – Rewarded → Interstitial → fallback
+        print("📺 Free user: Checking for ads for food detail generation...")
+
+        if RewardedAdManager.shared.isReady {
+            print("📺 Showing Rewarded Ad for food detail generation...")
+            RewardedAdManager.shared.showIfAvailable { amount, type in
+                // Тук влизаме САМО ако рекламата е изгледана докрай
+                print("✅ Ad watched! Starting food detail generation.")
+                self.startFoodDetailAIGeneration()
+            }
+        } else if InterstitialAdManager.shared.isReady {
+            print("⚠️ Rewarded not ready. Showing Interstitial fallback for food detail generation...")
+            InterstitialAdManager.shared.showIfAvailable {
+                // Изпълнява се, когато потребителят затвори interstitial-а
+                print("✅ Interstitial closed. Starting food detail generation.")
+                self.startFoodDetailAIGeneration()
+            }
+        } else {
+            print("⚠️ No ads available. Proceeding graciously with food detail generation.")
+            // Няма реклами – пускаме AI, за да не дразним потребителя
+            startFoodDetailAIGeneration()
+
+            // Подготвяме реклами за следващия път
+            Task {
+                await RewardedAdManager.shared.loadAd()
+                await InterstitialAdManager.shared.loadAd()
+            }
+        }
+    }
+
 
     private func triggerAIGenerationToast() {
            toastTimer?.invalidate()

@@ -318,42 +318,6 @@ struct AIDailyTrainingGeneratorView: View {
         }
     }
 
-    private func generateAndDismiss() {
-             guard !selectedTrainingNames.isEmpty else { return }
-             
-             let workoutsToFill: [Int: [String]] = [1: Array(selectedTrainingNames)]
-             let selectedPrompts = allPrompts.filter { selectedPromptIDs.contains($0.id) }.map { $0.text }
-
-             let existingWorkouts = trainingsForDay
-                 .filter { !$0.exercises(using: modelContext).isEmpty }
-                 .map { training -> TrainingPlanWorkoutDraft in
-                     let exercises = training.exercises(using: modelContext).map { (item, duration) in
-                         TrainingPlanExerciseDraft(exerciseName: item.name, durationMinutes: duration)
-                     }
-                     return TrainingPlanWorkoutDraft(workoutName: training.name, exercises: exercises)
-                 }
-             let existingWorkoutsDict: [Int: [TrainingPlanWorkoutDraft]]? = existingWorkouts.isEmpty ? nil : [1: existingWorkouts]
-
-             // --- ПРОМЯНА ТУК ---
-             // Променяме jobType на .dailyTreiningPlan, за да го разграничим.
-             if aiManager.startTrainingPlanGeneration(
-                 for: profile,
-                 prompts: selectedPrompts.isEmpty ? [] : selectedPrompts,
-                 workoutsToFill: workoutsToFill,
-                 existingWorkouts: existingWorkoutsDict,
-                 jobType: .dailyTreiningPlan // <--- ПРОМЯНАТА
-             ) != nil {
-                 triggerAIGenerationToast()
-                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                     onJobScheduled()
-                     onDismiss()
-                 }
-             } else {
-                 print("❌ Failed to start AI training generation job from daily generator.")
-                 onDismiss()
-             }
-         }
-
     private func aiBottomPadding(for geometry: GeometryProxy) -> CGFloat {
         let size = geometry.size
         guard size.width > 0 else { return 75 }
@@ -397,9 +361,92 @@ struct AIDailyTrainingGeneratorView: View {
             }
     }
     
-    private func handleAITap() {
-        generateAndDismiss()
-    }
+    // MARK: - AI & Ads Logic
+
+        /// Тази функция стартира същинската работа на AI за генериране на дневен план.
+        /// Извиква се само след успешна проверка на абонамент или изгледана реклама.
+        private func startAIGeneration() {
+             guard !selectedTrainingNames.isEmpty else { return }
+             
+             let workoutsToFill: [Int: [String]] = [1: Array(selectedTrainingNames)]
+             let selectedPrompts = allPrompts.filter { selectedPromptIDs.contains($0.id) }.map { $0.text }
+
+             let existingWorkouts = trainingsForDay
+                 .filter { !$0.exercises(using: modelContext).isEmpty }
+                 .map { training -> TrainingPlanWorkoutDraft in
+                     let exercises = training.exercises(using: modelContext).map { (item, duration) in
+                         TrainingPlanExerciseDraft(exerciseName: item.name, durationMinutes: duration)
+                     }
+                     return TrainingPlanWorkoutDraft(workoutName: training.name, exercises: exercises)
+                 }
+             let existingWorkoutsDict: [Int: [TrainingPlanWorkoutDraft]]? = existingWorkouts.isEmpty ? nil : [1: existingWorkouts]
+
+             if aiManager.startTrainingPlanGeneration(
+                 for: profile,
+                 prompts: selectedPrompts.isEmpty ? [] : selectedPrompts,
+                 workoutsToFill: workoutsToFill,
+                 existingWorkouts: existingWorkoutsDict,
+                 jobType: .dailyTreiningPlan
+             ) != nil {
+                 triggerAIGenerationToast()
+                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                     onJobScheduled()
+                     onDismiss()
+                 }
+             } else {
+                 print("❌ Failed to start AI training generation job from daily generator.")
+                 onDismiss()
+             }
+        }
+
+        /// Основният handler на бутона. Управлява потокa: Абонамент -> Реклама -> AI.
+        private func handleAITap() {
+            // 1. Проверка дали има избрани тренировки (преди рекламите, за да не ги хабим напразно)
+            guard !selectedTrainingNames.isEmpty else { return }
+            
+            // 2. Проверка за АБОНАМЕНТ
+            // Ако потребителят е на платен план (не е Base), пропускаме рекламите.
+            if SubscriptionManager.shared.subscriptionStatus != .base {
+                print("💎 Premium user: Skipping ad.")
+                startAIGeneration()
+                return
+            }
+
+            // 3. Логика за реклами (Base Plan)
+            print("📺 Free user: Checking for ads...")
+
+            // Опит 1: Видео с награда (Rewarded) - Приоритет
+            if RewardedAdManager.shared.isReady {
+                print("📺 Showing Rewarded Ad...")
+                RewardedAdManager.shared.showIfAvailable { amount, type in
+                    // Този код се изпълнява САМО ако рекламата е изгледана докрай и наградата е получена
+                    print("✅ Ad watched! Starting generation.")
+                    self.startAIGeneration()
+                }
+                // Ако потребителят затвори видеото преждевременно, startAIGeneration НЯМА да се извика.
+            }
+            // Опит 2: Цял екран (Interstitial) - Резервен вариант
+            else if InterstitialAdManager.shared.isReady {
+                print("⚠️ Rewarded not ready. Showing Interstitial fallback...")
+                InterstitialAdManager.shared.showIfAvailable {
+                    // Извиква се, когато потребителят затвори рекламата (хиксчето)
+                    print("✅ Interstitial closed. Starting generation.")
+                    self.startAIGeneration()
+                }
+            }
+            // Опит 3: Няма никакви реклами (Graceful degradation)
+            else {
+                print("⚠️ No ads available. Proceeding graciously.")
+                // Пускаме услугата, за да не ядосваме потребителя, че няма реклами
+                startAIGeneration()
+                
+                // Опитваме да заредим за следващия път
+                Task {
+                    await RewardedAdManager.shared.loadAd()
+                    await InterstitialAdManager.shared.loadAd()
+                }
+            }
+        }
     
     private func saveAIButtonPosition() {
         let d = UserDefaults.standard

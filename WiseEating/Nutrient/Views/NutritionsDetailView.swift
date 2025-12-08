@@ -2511,9 +2511,40 @@ struct NutritionsDetailView: View {
         return false
     }
     
+    /// Стартира същинската AI генерация за дневния нутришън детайл.
+    /// Извиква се САМО след като потребителят вече е "платил"
+    /// (абонамент или чрез реклама).
+    private func startDailyNutritionDetailAIGeneration(
+        mealsToGenerate: [Int: [String]],
+        existingMeals: [Int: [MealPlanPreviewMeal]],
+        selectedPrompts: [String]?
+    ) {
+        triggerAIGenerationToast()
+        
+        if let newJob = aiManager.startPlanFill(
+            for: profile,
+            daysAndMeals: mealsToGenerate,
+            existingMeals: existingMeals,
+            selectedPrompts: selectedPrompts,
+            jobType: .nutritionsDetailDailyMealPlan
+        ) {
+            self.runningGenerationJobID = newJob.id
+        } else {
+            alertMsg = "Could not start AI generation job."
+            showAlert = true
+            toastTimer?.invalidate()
+            toastTimer = nil
+            withAnimation {
+                showAIGenerationToast = false
+            }
+        }
+    }
+
     private func handleAITap() {
+        // 1. Проверка за наличност на AI (Apple Intelligence статус)
         guard ensureAIAvailableOrShowMessage() else { return }
         
+        // 2. Кои хранения са празни / попълнени – както досега
         let emptyMeals = dailyMeals.filter { meal in
             foodsByMeal[meal.id]?.isEmpty ?? true
         }
@@ -2528,30 +2559,34 @@ struct NutritionsDetailView: View {
             !(foodsByMeal[meal.id]?.isEmpty ?? true)
         }
         
-        let mealsToGenerate: [Int: [String]] = [1: emptyMeals.map { $0.name }]
+        let mealsToGenerate: [Int: [String]] = [
+            1: emptyMeals.map { $0.name }
+        ]
         
-        let existingMeals: [Int: [MealPlanPreviewMeal]] = [1: populatedMeals.map { meal -> MealPlanPreviewMeal in
-            let items: [MealPlanPreviewItem] = (foodsByMeal[meal.id] ?? [:]).compactMap { (food, grams) -> MealPlanPreviewItem? in
-                MealPlanPreviewItem(
-                    name: food.name,
-                    grams: grams,
-                    kcal: food.calories(for: grams)
+        let existingMeals: [Int: [MealPlanPreviewMeal]] = [
+            1: populatedMeals.map { meal -> MealPlanPreviewMeal in
+                let items: [MealPlanPreviewItem] = (foodsByMeal[meal.id] ?? [:]).compactMap { (food, grams) -> MealPlanPreviewItem? in
+                    MealPlanPreviewItem(
+                        name: food.name,
+                        grams: grams,
+                        kcal: food.calories(for: grams)
+                    )
+                }
+                return MealPlanPreviewMeal(
+                    name: meal.name,
+                    descriptiveTitle: meal.descriptiveAIName,
+                    items: items,
+                    startTime: nil
                 )
             }
-            return MealPlanPreviewMeal(name: meal.name, descriptiveTitle: meal.descriptiveAIName, items: items, startTime: nil)
-        }]
+        ]
         
-        // --- НАЧАЛО НА ПРОМЯНАТА ---
-        // 1. Дефинираме ключа, който използваме и в AIDailyMealGeneratorView.
+        // 3. Четем избраните промптове от UserDefaults (както беше)
         let selectedPromptsKey = "AIDailyMealGenerator_SelectedPrompts"
-        
-        // 2. Извличаме запазените ID-та (като стрингове) от UserDefaults.
         let savedPromptIDStrings = UserDefaults.standard.stringArray(forKey: selectedPromptsKey) ?? []
         let selectedPromptIDs = savedPromptIDStrings.compactMap { UUID(uuidString: $0) }
         
         var selectedPromptsText: [String]? = nil
-        
-        // 3. Ако имаме ID-та, извличаме съответните текстове от SwiftData.
         if !selectedPromptIDs.isEmpty {
             let predicate = #Predicate<Prompt> { prompt in
                 selectedPromptIDs.contains(prompt.id)
@@ -2564,28 +2599,61 @@ struct NutritionsDetailView: View {
             }
         }
         
-        triggerAIGenerationToast()
+        // 4. Абонамент / реклами gateway
         
-        // 4. Подаваме извлечените текстове към AIManager.
-        if let newJob = aiManager.startPlanFill(
-            for: profile,
-            daysAndMeals: mealsToGenerate,
-            existingMeals: existingMeals,
-            selectedPrompts: selectedPromptsText, // <-- ПРОМЯНАТА Е ТУК
-            jobType: .nutritionsDetailDailyMealPlan
-        ) {
-            self.runningGenerationJobID = newJob.id
+        // 4.1 Платен план – без реклами
+        if SubscriptionManager.shared.subscriptionStatus != .base {
+            print("💎 Premium user: Skipping ad for daily nutrition detail generation.")
+            startDailyNutritionDetailAIGeneration(
+                mealsToGenerate: mealsToGenerate,
+                existingMeals: existingMeals,
+                selectedPrompts: selectedPromptsText
+            )
+            return
+        }
+        
+        // 4.2 Безплатен план – Rewarded → Interstitial → fallback
+        print("📺 Free user: Checking for ads for daily nutrition detail generation...")
+        
+        if RewardedAdManager.shared.isReady {
+            print("📺 Showing Rewarded Ad for daily nutrition detail generation...")
+            RewardedAdManager.shared.showIfAvailable { amount, type in
+                // Влиза се тук САМО ако рекламата е изгледана докрай
+                print("✅ Ad watched! Starting daily nutrition detail generation.")
+                self.startDailyNutritionDetailAIGeneration(
+                    mealsToGenerate: mealsToGenerate,
+                    existingMeals: existingMeals,
+                    selectedPrompts: selectedPromptsText
+                )
+            }
+        } else if InterstitialAdManager.shared.isReady {
+            print("⚠️ Rewarded not ready. Showing Interstitial fallback for daily nutrition detail generation...")
+            InterstitialAdManager.shared.showIfAvailable {
+                // Изпълнява се, когато потребителят затвори interstitial-а
+                print("✅ Interstitial closed. Starting daily nutrition detail generation.")
+                self.startDailyNutritionDetailAIGeneration(
+                    mealsToGenerate: mealsToGenerate,
+                    existingMeals: existingMeals,
+                    selectedPrompts: selectedPromptsText
+                )
+            }
         } else {
-            alertMsg = "Could not start AI generation job."
-            showAlert = true
-            toastTimer?.invalidate()
-            toastTimer = nil
-            withAnimation {
-                showAIGenerationToast = false
+            print("⚠️ No ads available. Proceeding graciously with daily nutrition detail generation.")
+            // Няма реклами – пускаме AI, за да не дразним потребителя
+            startDailyNutritionDetailAIGeneration(
+                mealsToGenerate: mealsToGenerate,
+                existingMeals: existingMeals,
+                selectedPrompts: selectedPromptsText
+            )
+            
+            // Зареждаме реклами за следващия път
+            Task {
+                await RewardedAdManager.shared.loadAd()
+                await InterstitialAdManager.shared.loadAd()
             }
         }
-        // --- КРАЙ НА ПРОМЯНАТА ---
     }
+
     
     private func saveAIButtonPosition() {
         let d = UserDefaults.standard
