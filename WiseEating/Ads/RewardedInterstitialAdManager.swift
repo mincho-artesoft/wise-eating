@@ -1,11 +1,3 @@
-//
-//  RewardedInterstitialAdManager.swift
-//  WiseEating
-//
-//  Created by Aleksandar Svinarov on 8/12/25.
-//
-
-
 @preconcurrency import GoogleMobileAds
 import UIKit
 
