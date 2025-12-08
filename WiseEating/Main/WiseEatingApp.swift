@@ -51,6 +51,8 @@ struct WiseEatingApp: App {
                 .onChange(of: scenePhase) { _, newPhase in
                     switch newPhase {
                     case .active:
+                        // ⭐ ТУК: регистрираме стартиране за ReviewManager
+                        ReviewManager.appLaunched()
                         
                         print("🚀 [App Launch] Current Subscription Status: \(subscriptionManager.subscriptionStatus.rawValue.uppercased())")
                         
@@ -101,7 +103,7 @@ struct WiseEatingApp: App {
                         if let currencyCode = locale.currency?.identifier {
                             GlobalState.currencyCode = currencyCode
                         }
-                        // +++ НАЧАЛО НА ПРОМЯНАТА: Добавяме логика за проследяване на активността +++
+
                         Task { @MainActor in
                             let context = container.mainContext
                             let settingsDescriptor = FetchDescriptor<UserSettings>()
@@ -112,7 +114,7 @@ struct WiseEatingApp: App {
                                 await BadgeManager.shared.checkAndAwardBadges(for: lastProfile, using: context)
                             }
                         }
-                        // +++ КРАЙ НА ПРОМЯНАТА +++
+
                     case .background:
                         print("App in background. Stop sync timers.")
                         
