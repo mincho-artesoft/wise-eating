@@ -16,6 +16,50 @@ struct GlobalState {
     private static let numberFormatKey     = "GlobalNumberFormat"
     private static let currencyCodeKey     = "GlobalCurrencyCode"
     
+    
+    static func refreshSystemSettings() {
+          let locale = Locale.current
+          let calendar = Calendar.current
+          
+          // 1. Region
+          if let regionCode = locale.region?.identifier {
+              self.region = regionCode
+          }
+          
+          // 2. Calendar Identifier
+          self.calendar = String(describing: calendar.identifier)
+          
+          // 3. Temperature Unit (чрез симулация на форматиране)
+          let temp = Measurement(value: 9, unit: UnitTemperature.celsius)
+          let formattedTemp = temp.formatted(.measurement(width: .abbreviated, usage: .person, numberFormatStyle: .number))
+          let unit = formattedTemp.contains("F") ? UnitTemperature.fahrenheit : UnitTemperature.celsius
+          self.temperatureUnit = unit.symbol
+          
+          // 4. Measurement System (Metric/Imperial)
+          self.measurementSystem = (locale.measurementSystem == .metric) ? "Metric" : "Imperial"
+          
+          // 5. First Weekday
+          self.firstWeekday = calendar.firstWeekday
+          
+          // 6. Date Format
+          let df = DateFormatter()
+          df.locale = locale
+          df.dateStyle = .short
+          self.dateFormat = df.dateFormat ?? ""
+          
+          // 7. Number Format (примерно 1,234,567.89)
+          let nf = NumberFormatter()
+          nf.locale = locale
+          nf.numberStyle = .decimal
+          let num = 1234567.89 as NSNumber
+          self.numberFormat = nf.string(from: num) ?? ""
+          
+          // 8. Currency Code
+          if let currencyCode = locale.currency?.identifier {
+              self.currencyCode = currencyCode
+          }
+      }
+    
     nonisolated(unsafe) static var email: String = {
         UserDefaults.standard.string(forKey: emailKey) ?? ""
     }() {

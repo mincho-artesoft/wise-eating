@@ -25,7 +25,11 @@ struct WiseEatingApp: App {
     @Environment(\.scenePhase) private var scenePhase
     @ObservedObject private var subscriptionManager = SubscriptionManager.shared
 
-    // Инициализираме контейнера чрез изнесената логика
+    // ✅ НОВО: Запазваме състояние дали това е първото стартиране някога
+    // При първа инсталация ще е true. След това ще го направим false завинаги.
+    @AppStorage("isFirstAppLaunch") private var isFirstAppLaunch: Bool = true
+    @State private var coldStart: Bool = true
+
     let container: ModelContainer = DatabaseSetup.createContainer()
     
     private var notificationDelegate = NotificationDelegate()
@@ -33,7 +37,6 @@ struct WiseEatingApp: App {
     init() {
         GlobalState.modelContext = container.mainContext
 
-        // ⬇️ Първоначална проверка (ако iOS < 26 -> автоматично става unavailable)
         Task { @MainActor in
             GlobalState.updateAIAvailability()
         }
@@ -43,67 +46,66 @@ struct WiseEatingApp: App {
         Task { @MainActor in
             await CalendarViewModel.shared.ensureSharedShoppingListCalendarExists()
         }
+        
+        // Зареждаме рекламата, за да е готова за по-късно (дори да не я покажем веднага)
+        Task { @MainActor in
+            await AppOpenAdManager.shared.loadAd()
+        }
     }
-
+ 
     var body: some Scene {
         WindowGroup {
             RootLauncher(container: container)
                 .onChange(of: scenePhase) { _, newPhase in
                     switch newPhase {
                     case .active:
-                        // ⭐ ТУК: регистрираме стартиране за ReviewManager
+                        // 1. Ревюта
                         ReviewManager.appLaunched()
                         
-                        print("🚀 [App Launch] Current Subscription Status: \(subscriptionManager.subscriptionStatus.rawValue.uppercased())")
+                        // --- ПРОМЯНА: Логика за рекламите ---
+                        if isFirstAppLaunch {
+                            print("🚀 Първо стартиране на приложението: Рекламата е пропусната.")
+                            // Маркираме, че вече не е първо стартиране.
+                            // При следващо влизане (дори след минимизиране), ще влезе в else блока.
+                            isFirstAppLaunch = false
+                        } else {
+                            print("🔄 Връщане в приложението: Ще се опита показване на реклама след 3 сек.")
+
+                            if coldStart {
+                                // отбелязваме веднага, че студеното стартиране вече е минало
+                                coldStart = false
+                                
+                                Task { @MainActor in
+                                    try? await Task.sleep(nanoseconds: 3 * 1_000_000_000)
+                                    AppOpenAdManager.shared.showAdIfAvailable()
+                                }
+                            } else {
+                                Task { @MainActor in
+                                    AppOpenAdManager.shared.showAdIfAvailable()
+                                }
+                            }
+
+                        }
+                        // -------------------------------------
                         
-                        // Опресняваме статуса от Apple сървърите
+                        // 2. Абонаменти
+                        print("🚀 [App Launch] Current Subscription Status: \(subscriptionManager.subscriptionStatus.rawValue.uppercased())")
                         Task { @MainActor in
                             await subscriptionManager.updatePurchasedStatus()
                         }
                         
+                        // 3. AI Jobs & Status
                         Task { @MainActor in
-                            print("🔄 ScenePhase .active — updating AI availability…")
                             GlobalState.updateAIAvailability()
-                            print("🧠 Current AI availability: \(GlobalState.aiAvailability.rawValue)")
                         }
-
                         Task { @MainActor in
                             await AIManager.shared.fetchJobs()
                         }
                         
-                        let locale = Locale.current
-                        let calendar = Calendar.current
-                        
-                        if let regionCode = locale.region?.identifier {
-                            GlobalState.region = regionCode
-                        }
-                        
-                        GlobalState.calendar = String(describing: calendar.identifier)
-                        
-                        let temp = Measurement(value: 9, unit: UnitTemperature.celsius)
-                        let formattedTemp = temp.formatted(.measurement(width: .abbreviated, usage: .person, numberFormatStyle: .number))
-                        let unit = formattedTemp.contains("F") ? UnitTemperature.fahrenheit : UnitTemperature.celsius
-                        GlobalState.temperatureUnit = unit.symbol
-                        
-                        GlobalState.measurementSystem = (locale.measurementSystem == .metric) ? "Metric" : "Imperial"
-                        
-                        GlobalState.firstWeekday = calendar.firstWeekday
-                        
-                        let df = DateFormatter()
-                        df.locale = locale
-                        df.dateStyle = .short
-                        GlobalState.dateFormat = df.dateFormat ?? ""
-                        
-                        let nf = NumberFormatter()
-                        nf.locale = locale
-                        nf.numberStyle = .decimal
-                        let num = 1234567.89 as NSNumber
-                        GlobalState.numberFormat = nf.string(from: num) ?? ""
-                        
-                        if let currencyCode = locale.currency?.identifier {
-                            GlobalState.currencyCode = currencyCode
-                        }
+                        // 4. Системни настройки
+                        GlobalState.refreshSystemSettings()
 
+                        // 5. Usage & Badges
                         Task { @MainActor in
                             let context = container.mainContext
                             let settingsDescriptor = FetchDescriptor<UserSettings>()
@@ -117,6 +119,10 @@ struct WiseEatingApp: App {
 
                     case .background:
                         print("App in background. Stop sync timers.")
+                        // Зареждаме нова реклама, докато сме в бекграунд, за да е готова за следващия път
+                        Task { @MainActor in
+                            await AppOpenAdManager.shared.loadAd()
+                        }
                         
                     case .inactive:
                         print("App is inactive.")
