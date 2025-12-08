@@ -459,7 +459,18 @@ struct TrainingView: View {
                             .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                             
                             let exercises = currentExercises.keys.sorted { $0.name < $1.name }
-                            ForEach(exercises) { exercise in
+
+                            ForEach(Array(exercises.enumerated()), id: \.element.id) { index, exercise in
+                                // 👉 Рекламният ред преди упражнението, според индекса
+                                if shouldShowAd(at: index) {
+                                    // Сложи тук твоя конкретен view за native реклама,
+                                    // напр. NativeAdRowView() / TrainingNativeAdRow() и т.н.
+                                    AdRowView()
+                                        .listRowBackground(Color.clear)
+                                        .listRowSeparator(.hidden)
+                                        .listRowInsets(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
+                                }
+                                
                                 // +++ НАЧАЛО НА ПРОМЯНАТА (2/2) +++
                                 // Подаваме байндинга към SelectedExerciseRowView
                                 SelectedExerciseRowView(
@@ -2069,4 +2080,25 @@ struct TrainingView: View {
             try? ctx.save()
         }
     }
+    
+    private func shouldShowAd(at index: Int) -> Bool {
+            // Проверка за Premium абонамент - ако е платен, не показваме реклами
+            if SubscriptionManager.shared.subscriptionStatus != .base {
+                return false
+            }
+            
+            // Пропускаме само първите 2 реда (0 и 1), за да не е най-горе
+            if index < 2 { return false }
+            
+            // Алгоритъм за минимум 2 елемента разстояние:
+            // Използваме цикъл от 7. Рекламите се падат на остатък 2 и 5.
+            // Това създава ритъм: Реклама -> (2 елемента) -> Реклама -> (3 елемента) -> Реклама...
+            // Индекси с реклами: 2, 5, 9, 12, 16, 19...
+            let remainder = index % 7
+            if remainder == 2 || remainder == 5 {
+                return true
+            }
+            
+            return false
+        }
 }

@@ -354,106 +354,42 @@ struct ExerciseListView: View {
     
     // MARK: - Lists
     private var exerciseItemsList: some View {
-        List {
-            ForEach(vm.items, id: \.id) { item in
-                ExerciseRowView(item: item)
-                    .id(item.id)
-                    .contentShape(Rectangle())
-                    .onTapGesture { present(item: .detail(item)) }
-                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                        swipeActions(for: item)
-                    }
-                    .listRowBackground(Color.clear)
-                    .listRowSeparator(.hidden)
-                    .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
-            }
-            
-            if vm.hasMore {
-                ProgressView()
-                    .onAppear { vm.loadNextPage() }
-                    .padding(.vertical, 12)
-                    .listRowBackground(Color.clear)
-                    .listRowSeparator(.hidden)
-                    .progressViewStyle(CircularProgressViewStyle(tint: effectManager.currentGlobalAccentColor))
-            }
-            
-            Color.clear
-                .frame(height: 150)
-                .listRowBackground(Color.clear)
-                .listRowSeparator(.hidden)
-        }
-        .listStyle(.plain)
-        .scrollContentBackground(.hidden)
-        .mask(
-            LinearGradient(
-                gradient: Gradient(stops: [
-                    .init(color: .clear, location: 0),
-                    .init(color: effectManager.currentGlobalAccentColor, location: 0.01),
-                    .init(color: effectManager.currentGlobalAccentColor, location: 0.9),
-                    .init(color: .clear, location: 0.95)
-                ]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-        )
-        .ignoresSafeArea(.all)
-    }
-    
-    @ViewBuilder
-    private var trainingPlansSection: some View {
-        if trainingPlanVM.plans.isEmpty && globalSearchText.isEmpty {
-            ContentUnavailableView("No Training Plans", systemImage: "calendar.badge.plus", description: Text("Create your first training plan by tapping the '+' button below."))
-                .foregroundStyle(effectManager.currentGlobalAccentColor)
-        } else if trainingPlanVM.plans.isEmpty {
-            ContentUnavailableView.search(text: globalSearchText)
-        } else {
             List {
-                ForEach(trainingPlanVM.plans) { plan in
-                    VStack(alignment: .leading, spacing: 6) {
-                        Text(plan.name)
-                            .font(.headline)
-                            .foregroundColor(effectManager.currentGlobalAccentColor)
+                // ✅ ПРОМЯНА: Използваме Array(vm.items.enumerated()), за да имаме индекс
+                ForEach(Array(vm.items.enumerated()), id: \.element.id) { index, item in
+                    VStack(spacing: 0) {
+                        // 1. Показване на самата упражнение
+                        ExerciseRowView(item: item)
+                            .id(item.id)
+                            .contentShape(Rectangle())
+                            .onTapGesture { present(item: .detail(item)) }
+                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                swipeActions(for: item)
+                            }
+                            .padding(.vertical, 6) // Местим padding-а тук вместо в listRowInsets
                         
-                        HStack {
-                            Text("\(plan.days.count) day\(plan.days.count == 1 ? "" : "s")")
-                            Text("•")
-                            Text("Created: \(plan.creationDate.formatted(date: .abbreviated, time: .omitted))")
+                        // 2. Проверка дали трябва да се покаже реклама СЛЕД този елемент
+                        if shouldShowAd(at: index) {
+                            AdRowView()
+                                .padding(.top, 8)
+                                .padding(.bottom, 8)
+                                .transition(.opacity)
                         }
-                        .font(.caption)
-                        .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding()
-                    .glassCardStyle(cornerRadius: 20)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        present(item: .detailPlan(plan))
                     }
                     .listRowBackground(Color.clear)
                     .listRowSeparator(.hidden)
-                    .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
-                    .swipeActions {
-                        Button(role: .destructive) {
-                            self.planToDelete = plan
-                            self.isShowingDeletePlanConfirmation = true
-                        } label: {
-                            Image(systemName: "trash.fill")
-                                .symbolRenderingMode(.palette)
-                                .foregroundStyle(effectManager.currentGlobalAccentColor)
-                        }
-                        .tint(.clear)
-
-                        Button {
-                            present(item: .editPlan(plan))
-                        } label: {
-                            Image(systemName: "pencil")
-                                .symbolRenderingMode(.palette)
-                                .foregroundStyle(effectManager.currentGlobalAccentColor)
-                        }
-                        .tint(.clear)
-                    }
-
+                    .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
                 }
+                
+                if vm.hasMore {
+                    ProgressView()
+                        .onAppear { vm.loadNextPage() }
+                        .padding(.vertical, 12)
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
+                        .progressViewStyle(CircularProgressViewStyle(tint: effectManager.currentGlobalAccentColor))
+                }
+                
                 Color.clear.frame(height: 150)
                     .listRowBackground(Color.clear)
                     .listRowSeparator(.hidden)
@@ -472,8 +408,98 @@ struct ExerciseListView: View {
                     endPoint: .bottom
                 )
             )
+            .ignoresSafeArea(.all)
         }
-    }
+    
+    @ViewBuilder
+        private var trainingPlansSection: some View {
+            if trainingPlanVM.plans.isEmpty && globalSearchText.isEmpty {
+                ContentUnavailableView("No Training Plans", systemImage: "calendar.badge.plus", description: Text("Create your first training plan by tapping the '+' button below."))
+                    .foregroundStyle(effectManager.currentGlobalAccentColor)
+            } else if trainingPlanVM.plans.isEmpty {
+                ContentUnavailableView.search(text: globalSearchText)
+            } else {
+                List {
+                    // ✅ ПРОМЯНА: Използваме enumerated(), за да вземем индекса за shouldShowAd
+                    ForEach(Array(trainingPlanVM.plans.enumerated()), id: \.element.id) { index, plan in
+                        VStack(spacing: 0) {
+                            // 1. Самият Training Plan (съдържанието)
+                            VStack(alignment: .leading, spacing: 6) {
+                                Text(plan.name)
+                                    .font(.headline)
+                                    .foregroundColor(effectManager.currentGlobalAccentColor)
+                                
+                                HStack {
+                                    Text("\(plan.days.count) day\(plan.days.count == 1 ? "" : "s")")
+                                    Text("•")
+                                    Text("Created: \(plan.creationDate.formatted(date: .abbreviated, time: .omitted))")
+                                }
+                                .font(.caption)
+                                .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding()
+                            .glassCardStyle(cornerRadius: 20)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                present(item: .detailPlan(plan))
+                            }
+                            .swipeActions {
+                                Button(role: .destructive) {
+                                    self.planToDelete = plan
+                                    self.isShowingDeletePlanConfirmation = true
+                                } label: {
+                                    Image(systemName: "trash.fill")
+                                        .symbolRenderingMode(.palette)
+                                        .foregroundStyle(effectManager.currentGlobalAccentColor)
+                                }
+                                .tint(.clear)
+
+                                Button {
+                                    present(item: .editPlan(plan))
+                                } label: {
+                                    Image(systemName: "pencil")
+                                        .symbolRenderingMode(.palette)
+                                        .foregroundStyle(effectManager.currentGlobalAccentColor)
+                                }
+                                .tint(.clear)
+                            }
+                            .padding(.vertical, 6) // Местим вертикалния padding тук
+                            
+                            // 2. Реклама (ако индексът съвпада с логиката)
+                            if shouldShowAd(at: index) {
+                                AdRowView()
+                                    .padding(.top, 8)
+                                    .padding(.bottom, 8)
+                                    .transition(.opacity)
+                            }
+                        }
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
+                        // Нулираме insets, за да контролираме padding-а вътре във VStack
+                        .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+                    }
+                    
+                    Color.clear.frame(height: 150)
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
+                }
+                .listStyle(.plain)
+                .scrollContentBackground(.hidden)
+                .mask(
+                    LinearGradient(
+                        gradient: Gradient(stops: [
+                            .init(color: .clear, location: 0),
+                            .init(color: effectManager.currentGlobalAccentColor, location: 0.01),
+                            .init(color: effectManager.currentGlobalAccentColor, location: 0.9),
+                            .init(color: .clear, location: 0.95)
+                        ]),
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                )
+            }
+        }
     
     @ViewBuilder
     private func swipeActions(for item: ExerciseItem) -> some View {
@@ -809,4 +835,26 @@ struct ExerciseListView: View {
         .gesture(dragGesture(geometry: geometry))
         .transition(.scale.combined(with: .opacity))
     }
+    
+    // MARK: - Ad Logic
+    private func shouldShowAd(at index: Int) -> Bool {
+            // Проверка за Premium абонамент - ако е платен, не показваме реклами
+            if SubscriptionManager.shared.subscriptionStatus != .base {
+                return false
+            }
+            
+            // Пропускаме само първите 2 реда (0 и 1), за да не е най-горе
+            if index < 2 { return false }
+            
+            // Алгоритъм за минимум 2 елемента разстояние:
+            // Използваме цикъл от 7. Рекламите се падат на остатък 2 и 5.
+            // Това създава ритъм: Реклама -> (2 елемента) -> Реклама -> (3 елемента) -> Реклама...
+            // Индекси с реклами: 2, 5, 9, 12, 16, 19...
+            let remainder = index % 7
+            if remainder == 2 || remainder == 5 {
+                return true
+            }
+            
+            return false
+        }
 }

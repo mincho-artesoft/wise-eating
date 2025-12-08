@@ -431,11 +431,22 @@ struct StorageListView: View {
                             .foregroundColor(effectManager.currentGlobalAccentColor)
                     } else {
                         List {
-                            ForEach(viewModel.filteredItems) { item in
+                            let items = viewModel.filteredItems
+                            
+                            ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
                                 if let food = item.food {
                                     let isExpired = item.firstExpirationDate.map {
                                         Calendar.current.startOfDay(for: $0) <= Calendar.current.startOfDay(for: Date())
                                     } ?? false
+                                    
+                                    // 👉 Рекламен ред преди елемента, според индекса
+                                    if shouldShowAd(at: index) {
+                                        AdRowView() // 👈 използваме твоя AdRowView
+                                            .listRowBackground(Color.clear)
+                                            .listRowSeparator(.hidden)
+                                            .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 0, trailing: 16))
+                                            .padding(.bottom, 4)
+                                    }
 
                                     FoodItemRowStorageView(
                                         item: food,
@@ -453,9 +464,9 @@ struct StorageListView: View {
                                             detailMenuState = .full
                                             navBarIsHiden = true
                                             if isSearching {
-                                                print("SIsSearching1",SIsSearching)
+                                                print("SIsSearching1", SIsSearching)
                                                 SIsSearching = isSearching
-                                                print("SIsSearching2",SIsSearching)
+                                                print("SIsSearching2", SIsSearching)
                                                 SglobalSearchText = globalSearchText
                                                 onShouldDismissGlobalSearch()
                                             }
@@ -465,7 +476,6 @@ struct StorageListView: View {
                                     .listRowSeparator(.hidden)
                                     .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
                                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                                        // --- НАЧАЛО НА ПРОМЯНАТА ---
                                         Button(role: .destructive) {
                                             if #available(iOS 26.0, *) {
                                                 withAnimation {
@@ -481,7 +491,6 @@ struct StorageListView: View {
                                                 .foregroundStyle(effectManager.currentGlobalAccentColor)
                                         }
                                         .tint(.clear)
-                                        // --- КРАЙ НА ПРОМЯНАТА ---
                                     }
                                 }
                             }
@@ -514,4 +523,25 @@ struct StorageListView: View {
         .onAppear(perform: loadButtonPosition)
         .navigationBarHidden(true)
     }
+    
+    private func shouldShowAd(at index: Int) -> Bool {
+        // 👑 Premium / платен план – не показваме реклами
+        if SubscriptionManager.shared.subscriptionStatus != .base {
+            return false
+        }
+        
+        // Пропускаме първите 2 реда, за да не е реклама най-отгоре
+        if index < 2 { return false }
+        
+        // Същият ритъм както в TrainingView / NodesListView:
+        // цикъл от 7 – реклами на остатък 2 и 5
+        // Индекси: 2, 5, 9, 12, 16, 19, ...
+        let remainder = index % 7
+        if remainder == 2 || remainder == 5 {
+            return true
+        }
+        
+        return false
+    }
+
 }

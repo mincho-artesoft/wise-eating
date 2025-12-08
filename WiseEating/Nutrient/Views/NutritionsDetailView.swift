@@ -982,8 +982,14 @@ struct NutritionsDetailView: View {
                             .listRowSeparator(.hidden)
                             .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 8, trailing: 16))
                             
-                            ForEach(Array(currentFoods.wrappedValue.keys.sorted(by: { $0.name < $1.name })), id: \.self) { item in
-                                let isSufficient = isStockSufficient(for: item, requestedGrams: currentFoods.wrappedValue[item] ?? 0)
+                            ForEach(
+                                Array(currentFoods.wrappedValue.keys.sorted(by: { $0.name < $1.name }).enumerated()),
+                                id: \.element.id
+                            ) { index, item in
+                                let isSufficient = isStockSufficient(
+                                    for: item,
+                                    requestedGrams: currentFoods.wrappedValue[item] ?? 0
+                                )
                                 
                                 VStack(spacing: 0) {
                                     SelectedFoodRowView(
@@ -994,9 +1000,16 @@ struct NutritionsDetailView: View {
                                             updateStorageAndMeal(for: item, newGrams: newGrams)
                                         },
                                         focusedField: $focusedGramsField,
-                                        expandedItemID: $expandedFoodItemID // Подаваме байндинг
+                                        expandedItemID: $expandedFoodItemID
                                     )
                                     
+                                    // 👇 Добавяме реклама след определени редове
+                                    if shouldShowAd(at: index) {
+                                        AdRowView()
+                                            .padding(.top, 8)
+                                            .padding(.bottom, 8)
+                                            .transition(.opacity)
+                                    }
                                 }
                                 .id(item.id)
                                 .padding(.bottom, 4)
@@ -1022,6 +1035,7 @@ struct NutritionsDetailView: View {
                                     .tint(.clear)
                                 }
                             }
+
                             
                             Color.clear
                                 .frame(height: 150)
@@ -2813,5 +2827,25 @@ struct NutritionsDetailView: View {
         }
     }
     
+    private func shouldShowAd(at index: Int) -> Bool {
+            // Проверка за Premium абонамент - ако е платен, не показваме реклами
+            if SubscriptionManager.shared.subscriptionStatus != .base {
+                return false
+            }
+            
+            // Пропускаме само първите 2 реда (0 и 1), за да не е най-горе
+            if index < 2 { return false }
+            
+            // Алгоритъм за минимум 2 елемента разстояние:
+            // Използваме цикъл от 7. Рекламите се падат на остатък 2 и 5.
+            // Това създава ритъм: Реклама -> (2 елемента) -> Реклама -> (3 елемента) -> Реклама...
+            // Индекси с реклами: 2, 5, 9, 12, 16, 19...
+            let remainder = index % 7
+            if remainder == 2 || remainder == 5 {
+                return true
+            }
+            
+            return false
+        }
 }
 
