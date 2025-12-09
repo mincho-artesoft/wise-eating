@@ -1,3 +1,4 @@
+// ==== FILE: /Users/aleksandarsvinarov/Desktop/as/vitahealth-clean/WiseEating/Main/DBSeed/DatabaseSetup.swift ====
 import SwiftData
 import Foundation
 
@@ -27,7 +28,8 @@ struct DatabaseSetup {
         ])
         
         do {
-            let applicationSupportURL = try FileManager.default.url(
+            let fileManager = FileManager.default
+            let applicationSupportURL = try fileManager.url(
                 for: .applicationSupportDirectory,
                 in: .userDomainMask,
                 appropriateFor: nil,
@@ -35,43 +37,48 @@ struct DatabaseSetup {
             )
             print("🚀 SwiftData Path: \(applicationSupportURL.path())")
             
-            let storeURL = applicationSupportURL.appendingPathComponent("default.store")
-            let configuration = ModelConfiguration(schema: schema, url: storeURL)
+            // 1. Основна (потребителска) база данни - Writable
+            let writableStoreURL = applicationSupportURL.appendingPathComponent("default.store")
+            let writableConfiguration = ModelConfiguration("Default", schema: schema, url: writableStoreURL, allowsSave: true)
             
-            let usePreSeededDatabaseCopy = true
-            let didCopyDatabaseKey = "didCopyPreSeededDatabase_v1"
-
-            if usePreSeededDatabaseCopy && !UserDefaults.standard.bool(forKey: didCopyDatabaseKey) {
-                print("🏁 First launch with pre-seed logic. Preparing to copy database…")
-
-                // Ensure a clean destination (store + -wal + -shm)
-                let dir = storeURL.deletingLastPathComponent()
-                let base = storeURL.lastPathComponent
-                let walURL = dir.appendingPathComponent(base + "-wal")
-                let shmURL = dir.appendingPathComponent(base + "-shm")
-                for fileURL in [storeURL, walURL, shmURL] {
-                    if FileManager.default.fileExists(atPath: fileURL.path) {
-                        do {
-                            try FileManager.default.removeItem(at: fileURL)
-                            print("🧹 Removed existing file: \(fileURL.lastPathComponent)")
-                        } catch {
-                            fatalError("❌ Failed to remove existing database file \(fileURL.lastPathComponent): \(error)")
-                        }
+            let usePreSeededDatabaseCopy = false
+            
+            if usePreSeededDatabaseCopy {
+                print("🏁 Using Pre-Seeded Logic: Attempting Separate Read-Only Store strategy.")
+                
+                let readOnlyStoreURL = applicationSupportURL.appendingPathComponent("preseeded_reference.store")
+                
+                if !fileManager.fileExists(atPath: readOnlyStoreURL.path) {
+                    print("📦 Preparing reference database...")
+                    do {
+                        try PreseedLoader.preparePreseededStore(to: readOnlyStoreURL)
+                        print("✅ Reference database prepared.")
+                    } catch {
+                        print("❌ Failed to prepare reference DB: \(error). Fallback to Single Store.")
+                        return try ModelContainer(for: schema, configurations: [writableConfiguration])
                     }
                 }
-
+                
+                // ПРОМЯНА ТУК: Слагаме allowsSave: true
+                // SwiftData има нужда от права за писане, за да управлява WAL/SHM файловете при отваряне.
+                // Ние логически няма да пишем нови данни там (SeedManager ще ги пропусне).
+                let referenceConfiguration = ModelConfiguration("Reference", schema: schema, url: readOnlyStoreURL, allowsSave: true)
+                
                 do {
-                    try PreseedLoader.preparePreseededStore(to: storeURL)
-                    print("✅ Successfully prepared (combined + decompressed) pre-seeded database.")
-                    UserDefaults.standard.set(true, forKey: didCopyDatabaseKey)
+                    // Опитваме да заредим и двете
+                    let container = try ModelContainer(for: schema, configurations: [writableConfiguration, referenceConfiguration])
+                    print("✅ Dual-Store Container loaded successfully.")
+                    return container
                 } catch {
-                    fatalError("❌ Failed to prepare pre-seeded database: \(error)")
+                    print("⚠️ CRITICAL: Dual-Store load failed: \(error).")
+                    print("🔄 FALLBACK: Loading Single Writable Store (Legacy Mode).")
+                    return try ModelContainer(for: schema, configurations: [writableConfiguration])
                 }
-            } else if usePreSeededDatabaseCopy {
-                print("🏁 Database already pre-seeded. Skipping copy.")
+                
+            } else {
+                print("🏁 Logic: Single Writable Store (Flag is false).")
+                return try ModelContainer(for: schema, configurations: [writableConfiguration])
             }
-            
-            return try ModelContainer(for: schema, configurations: [configuration])
             
         } catch {
             fatalError("Failed to create model container: \(error)")
