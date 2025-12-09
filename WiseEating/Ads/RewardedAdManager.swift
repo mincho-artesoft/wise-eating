@@ -13,7 +13,7 @@ final class RewardedAdManager: NSObject, FullScreenContentDelegate {
     private var rewardedAd: RewardedAd?
     private var isLoading = false
 
-    private let adUnitID = "ca-app-pub-3940256099942544/1712485313"
+    private let adUnitID = "ca-app-pub-3759868960530173/7620553844"
 
     // MARK: - Load
 

@@ -22,7 +22,7 @@ struct WorkoutEditorView: View {
     @GestureState private var aiGestureDragOffset: CGSize = .zero
     @State private var aiIsPressed: Bool = false
     private let aiButtonPositionKey = "floatingWorkoutAIButtonPosition"
-    
+    @State private var isBannerAdLoaded: Bool = false
     // MARK: - Environment & Dependencies
     @ObservedObject private var effectManager = EffectManager.shared
     @Environment(\.modelContext) private var modelContext
@@ -400,7 +400,8 @@ struct WorkoutEditorView: View {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 24) {
                     generalSection
-                    
+                    bannerAdSection
+                        .frame(height: isBannerAdLoaded ? 120 : 0)
                     gallerySection
                     detailsSection
                     muscleGroupSection
@@ -1510,6 +1511,18 @@ struct WorkoutEditorView: View {
         showAlert = true
         return false
     }
+    
+    @ViewBuilder
+       private var bannerAdSection: some View {
+           // Показваме банер само за free (Base) потребители
+           if SubscriptionManager.shared.subscriptionStatus == .base {
+               BannerAdView(adsBool: $isBannerAdLoaded, bucket: .large)
+                   .frame(height: 120)
+                   .opacity(isBannerAdLoaded ? 1 : 0)
+                   .animation(.easeInOut(duration: 0.25), value: isBannerAdLoaded)
+                   .padding(.horizontal)
+           }
+       }
 }
 
 private extension WorkoutEditorView.OpenMenu {
@@ -1596,4 +1609,5 @@ fileprivate struct EditableExerciseRow: View {
             }
         }
     }
+    
 }

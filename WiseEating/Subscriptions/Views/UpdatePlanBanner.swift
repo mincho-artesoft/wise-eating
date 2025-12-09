@@ -135,7 +135,7 @@ struct UpdatePlanBanner: View {
             
             // Стандартна височина за банер (обикновено 50),
             // за да не става прекалено голям контейнера.
-            BannerAdView(adsBool: $isAdLoaded)
+            BannerAdView(adsBool: $isAdLoaded, bucket: .small)
                 .frame(height: 50)
                 .clipShape(RoundedRectangle(cornerRadius: 15))
             

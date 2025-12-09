@@ -17,7 +17,7 @@ class AppOpenAdManager: NSObject, FullScreenContentDelegate {
     private var shouldShowNextAd = true
 
     // MARK: - Ad Unit ID
-    private let adUnitID = "ca-app-pub-3940256099942544/5575463023"
+    private let adUnitID = "ca-app-pub-3759868960530173/2316256277"
 
     // MARK: - Load
 

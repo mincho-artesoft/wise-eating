@@ -82,17 +82,28 @@ struct DietDetailView: View {
                     .foregroundColor(effectManager.currentGlobalAccentColor)
             } else {
                 List {
-                    ForEach(displayItems) { item in
-                        FoodItemRowView(item: item)
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                withAnimation(.easeInOut(duration: 0.3)) {
-                                    itemForDetailView = item
+                    // ⬇️ добавяме index + реклами, както във FoodItemListView
+                    ForEach(Array(displayItems.enumerated()), id: \.element.id) { index, item in
+                        VStack(spacing: 0) {
+                            FoodItemRowView(item: item)
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    withAnimation(.easeInOut(duration: 0.3)) {
+                                        itemForDetailView = item
+                                    }
                                 }
+                                .padding(.vertical, 6)
+
+                            if shouldShowAd(at: index) {
+                                AdRowView()
+                                    .padding(.top, 8)
+                                    .padding(.bottom, 8)
+                                    .transition(.opacity)
                             }
-                            .listRowBackground(Color.clear)
-                            .listRowSeparator(.hidden)
-                            .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
+                        }
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
+                        .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
                     }
 
                     Color.clear.frame(height: 120)
@@ -165,5 +176,24 @@ struct DietDetailView: View {
 
     private func normalized(_ s: String) -> String {
         s.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: .current)
+    }
+
+    // MARK: - Ad Logic (същата като във FoodItemListView)
+    private func shouldShowAd(at index: Int) -> Bool {
+        // Premium → без реклами
+        if SubscriptionManager.shared.subscriptionStatus != .base {
+            return false
+        }
+
+        // Пропускаме първите 2 реда
+        if index < 2 { return false }
+
+        // Същият pattern: индекси 2, 5, 9, 12, 16, 19...
+        let remainder = index % 7
+        if remainder == 2 || remainder == 5 {
+            return true
+        }
+
+        return false
     }
 }

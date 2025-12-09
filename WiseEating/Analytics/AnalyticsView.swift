@@ -265,20 +265,49 @@ struct AnalyticsView: View {
     }
 
     private var chartsSection: some View {
-        ForEach(Array(selectedNutrientIDs.sorted(by: { nutrientName(for: $0) < nutrientName(for: $1) })), id: \.self) { nutrientID in
-            AnalyticsChartView(
-                nutrientID: nutrientID,
-                points: viewModel.chartData[nutrientID] ?? [],
-                profile: profile,
-                onDeselect: {
-                    withAnimation {
-                        selectedNutrientIDs.remove(nutrientID)
-                        saveSelection()
-                    }
+        // Сортираме ID-тата по име (както и преди)
+        let sortedIDs = Array(
+            selectedNutrientIDs.sorted { nutrientName(for: $0) < nutrientName(for: $1) }
+        )
+        
+        return VStack(spacing: 20) {
+            ForEach(Array(sortedIDs.enumerated()), id: \.element) { index, nutrientID in
+                // 👇 Реклама над първата графика и след това между всеки 2
+                if shouldShowBannerAd(beforeChartAt: index) {
+                    BannerAdRowView()
+                        .padding(.bottom, 8)
+                        .transition(.opacity)
                 }
-            )
+                
+                AnalyticsChartView(
+                    nutrientID: nutrientID,
+                    points: viewModel.chartData[nutrientID] ?? [],
+                    profile: profile,
+                    onDeselect: {
+                        withAnimation {
+                            selectedNutrientIDs.remove(nutrientID)
+                            saveSelection()
+                        }
+                    }
+                )
+            }
         }
     }
+
+    private func shouldShowBannerAd(beforeChartAt index: Int) -> Bool {
+        // Без реклами за платени абонаменти
+        if SubscriptionManager.shared.subscriptionStatus != .base {
+            return false
+        }
+        
+        // Над първата графика
+        if index == 0 { return true }
+        
+        // След това между всеки 2:
+        // layout става: Banner, Chart0, Chart1, Banner, Chart2, Chart3, Banner, ...
+        return index % 2 == 0
+    }
+
 
     @ViewBuilder
     private var bottomSheetPanel: some View {

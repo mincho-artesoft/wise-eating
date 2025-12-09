@@ -11,7 +11,7 @@ final class NativeAdLoader: NSObject,
     @Published private(set) var nativeAd: NativeAd?
 
     private var adLoader: AdLoader?
-    private let adUnitID = "ca-app-pub-3940256099942544/3986624511"
+    private let adUnitID = "ca-app-pub-3759868960530173/3629337942"
 
     func loadAd() {
         let options: [GADAdLoaderOptions] = [NativeAdViewAdOptions()]

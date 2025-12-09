@@ -58,14 +58,25 @@ struct StorageEditorView: View {
                 ScrollViewReader { proxy in
                     ScrollView(showsIndicators: false) {
                         LazyVStack(spacing: 16) {
-                            ForEach($productsToAdd) { $product in
+                            ForEach(Array(productsToAdd.enumerated()), id: \.element.id) { index, product in
                                 if !product.isMarkedForDeletion {
+
+                                    // 👇 Банер над първия и след това между всеки 2 продукта
+                                    if shouldShowBannerAd(beforeProductAt: index) {
+                                        BannerAdRowView()
+                                            .padding(.horizontal, 4)
+                                            .transition(.opacity)
+                                        
+                                    }
+
                                     ProductCard(
-                                        product: $product,
+                                        product: $productsToAdd[index],
                                         focusedBatchID: $focusedBatchID,
                                         onDeleteProduct: { deleteProduct(withId: product.id) },
-                                        onAddBatch: { addBatch(to: $product) },
-                                        onDeleteBatch: { batchId in deleteBatch(withId: batchId, fromProductWithId: product.id) },
+                                        onAddBatch: { addBatch(to: $productsToAdd[index]) },
+                                        onDeleteBatch: { batchId in
+                                            deleteBatch(withId: batchId, fromProductWithId: product.id)
+                                        },
                                         onShouldDismissGlobalSearch: onShouldDismissGlobalSearch
                                     )
                                     .id(product.id)
@@ -324,4 +335,19 @@ struct StorageEditorView: View {
         )
         focusedBatchID = nil
     }
+    
+    private func shouldShowBannerAd(beforeProductAt index: Int) -> Bool {
+        // Без реклами за платени абонаменти
+        if SubscriptionManager.shared.subscriptionStatus != .base {
+            return false
+        }
+
+        // Над първия продукт
+        if index == 0 { return true }
+
+        // След това между всеки 2:
+        // Banner, Product0, Product1, Banner, Product2, Product3, Banner, ...
+        return index % 2 == 0
+    }
+
 }

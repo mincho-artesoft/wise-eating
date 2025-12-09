@@ -1009,6 +1009,7 @@ struct NutritionsDetailView: View {
                                             .padding(.top, 8)
                                             .padding(.bottom, 8)
                                             .transition(.opacity)
+                                        
                                     }
                                 }
                                 .id(item.id)

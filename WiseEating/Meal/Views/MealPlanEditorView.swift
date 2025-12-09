@@ -4,6 +4,7 @@ import SwiftData
 @MainActor
 struct MealPlanEditorView: View {
     
+    @State private var isBannerAdLoaded: Bool = false
     // MARK: - AI & Prompts State
     @Query(sort: \Prompt.creationDate, order: .reverse) private var allPrompts: [Prompt]
     @State private var selectedPromptIDs: Set<Prompt.ID> = []
@@ -472,6 +473,9 @@ struct MealPlanEditorView: View {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 16) {
                     nameCard
+                    
+                    bannerAdSection
+                        .frame(height: isBannerAdLoaded ? 120 : 0)
                     
                     ForEach(Array(sortedDays.enumerated()), id: \.element.id) { index, day in
                         daySection(for: day, dayIndex: index + 1)
@@ -1401,4 +1405,15 @@ struct MealPlanEditorView: View {
         return false
     }
 
+    @ViewBuilder
+          private var bannerAdSection: some View {
+              // Показваме банер само за free (Base) потребители
+              if SubscriptionManager.shared.subscriptionStatus == .base {
+                  BannerAdView(adsBool: $isBannerAdLoaded, bucket: .large)
+                      .frame(height: 120)
+                      .opacity(isBannerAdLoaded ? 1 : 0)
+                      .animation(.easeInOut(duration: 0.25), value: isBannerAdLoaded)
+                      .padding(.horizontal)
+              }
+          }
 }
