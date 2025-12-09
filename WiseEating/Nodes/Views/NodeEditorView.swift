@@ -5,6 +5,8 @@ import EventKit
 
 @MainActor
 struct NodeEditorView: View {
+    @State private var isBannerAdLoaded: Bool = false
+
     // MARK: - Dependencies
     @Environment(\.modelContext) private var modelContext
     @ObservedObject private var effectManager = EffectManager.shared
@@ -86,6 +88,10 @@ struct NodeEditorView: View {
                 ScrollView {
                     VStack(spacing: 24) {
                         generalSection
+                        
+                        bannerAdSection
+                                                   .frame(height: isBannerAdLoaded ? 120 : 0)
+                        
                         foodsSection
                         exercisesSection
                     }
@@ -347,4 +353,16 @@ struct NodeEditorView: View {
         }
     }
     // --- КРАЙ НА ПРОМЯНАТА ---
+    
+    @ViewBuilder
+          private var bannerAdSection: some View {
+              // Показваме банер само за free (Base) потребители
+              if SubscriptionManager.shared.subscriptionStatus == .base {
+                  BannerAdView(adsBool: $isBannerAdLoaded, bucket: .large)
+                      .frame(height: 120)
+                      .opacity(isBannerAdLoaded ? 1 : 0)
+                      .animation(.easeInOut(duration: 0.25), value: isBannerAdLoaded)
+                      .padding(.horizontal)
+              }
+          }
 }

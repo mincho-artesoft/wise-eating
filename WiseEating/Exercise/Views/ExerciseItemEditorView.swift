@@ -11,6 +11,7 @@ struct ExerciseItemEditorView: View {
     @State private var toastTimer: Timer? = nil
     @State private var toastProgress: Double = 0.0
     @State private var alertMsg = ""
+    @State private var isBannerAdLoaded: Bool = false
 
     // --- Photo source state (като при FoodItemReceptEditorView) ---
     private enum PhotoSourceTarget {
@@ -275,6 +276,8 @@ struct ExerciseItemEditorView: View {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 24) {
                     generalSection
+                    bannerAdSection
+                        .frame(height: isBannerAdLoaded ? 120 : 0)
                     gallerySection
                     detailsSection
                     muscleGroupSection
@@ -306,6 +309,7 @@ struct ExerciseItemEditorView: View {
             .background(Color.clear)
         }
     }
+
     
     // MARK: - Sections
     private var generalSection: some View {
@@ -1037,6 +1041,19 @@ struct ExerciseItemEditorView: View {
         hasUserMadeEdits = true
         currentPhotoTarget = nil
     }
+    
+    @ViewBuilder
+    private var bannerAdSection: some View {
+        // Показваме банер само за free (Base) потребители
+        if SubscriptionManager.shared.subscriptionStatus == .base {
+            BannerAdView(adsBool: $isBannerAdLoaded, bucket: .large)
+                .frame(height: 120)
+                .opacity(isBannerAdLoaded ? 1 : 0)
+                .animation(.easeInOut(duration: 0.25), value: isBannerAdLoaded)
+                .padding(.horizontal)
+        }
+    }
+
 }
 
 fileprivate extension ExerciseItemEditorView.OpenMenu {

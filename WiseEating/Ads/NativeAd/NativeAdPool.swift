@@ -15,7 +15,7 @@ final class NativeAdPool: NSObject, ObservableObject {
     
     // Настройки
     private let poolSize = 3
-    private let adUnitID = "ca-app-pub-3940256099942544/3986624511" // Тестов ID, сменете с вашия
+    private let adUnitID = "ca-app-pub-3759868960530173/3629337942" // Тестов ID, сменете с вашия
     
     // Кеш с готови реклами
     @Published var availableAds: [NativeAd] = []

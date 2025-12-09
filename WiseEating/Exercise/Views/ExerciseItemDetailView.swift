@@ -6,6 +6,7 @@ struct ExerciseItemDetailView: View {
     // MARK: - Managers and Environment
     @ObservedObject private var effectManager = EffectManager.shared
     @Environment(\.modelContext) private var modelContext
+    @State private var isBannerAdLoaded: Bool = false
 
     // MARK: - Input
     let item: ExerciseItem
@@ -76,6 +77,8 @@ struct ExerciseItemDetailView: View {
 
                     VStack(alignment: .leading, spacing: 24) {
                         textInfoSection
+                        bannerAdSection
+                            .frame(height: isBannerAdLoaded ? 120 : 0)
                         workoutExercisesSection
                         muscleGroupSection
                         sportsSection
@@ -491,6 +494,18 @@ struct ExerciseItemDetailView: View {
             .glassCardStyle(cornerRadius: 20)
         }
     }
+    
+    @ViewBuilder
+       private var bannerAdSection: some View {
+           // Показваме банер само за free (Base) потребители
+           if SubscriptionManager.shared.subscriptionStatus == .base {
+               BannerAdView(adsBool: $isBannerAdLoaded, bucket: .large)
+                   .frame(height: 120)
+                   .opacity(isBannerAdLoaded ? 1 : 0)
+                   .animation(.easeInOut(duration: 0.25), value: isBannerAdLoaded)
+                   .padding(.horizontal)
+           }
+       }
 }
 
 fileprivate struct AsyncImageView<Placeholder: View>: View {

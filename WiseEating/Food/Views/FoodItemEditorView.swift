@@ -7,6 +7,7 @@ struct FoodItemEditorView: View {
     @State private var showPhotoSourceDialog = false
     @State private var isShowingCameraPicker = false
     @State private var isShowingPhotoLibraryPicker = false
+    @State private var isBannerAdLoaded: Bool = false
 
     @ObservedObject private var aiManager = AIManager.shared // Add this
        @State private var hasUserMadeEdits: Bool = true // Add this
@@ -406,6 +407,8 @@ struct FoodItemEditorView: View {
               ScrollView(showsIndicators: false) {
                   VStack {
                       basicSection
+                      bannerAdSection
+                        .frame(height: isBannerAdLoaded ? 120 : 0)
                       macroSection
                       vitaminSection
                       mineralSection
@@ -1428,7 +1431,19 @@ struct FoodItemEditorView: View {
         showAlert = true
         return false
     }
-
+    
+    
+    @ViewBuilder
+       private var bannerAdSection: some View {
+           // Показваме банер само за free (Base) потребители
+           if SubscriptionManager.shared.subscriptionStatus == .base {
+               BannerAdView(adsBool: $isBannerAdLoaded, bucket: .large)
+                   .frame(height: 120)
+                   .opacity(isBannerAdLoaded ? 1 : 0)
+                   .animation(.easeInOut(duration: 0.25), value: isBannerAdLoaded)
+                   .padding(.horizontal)
+           }
+       }
 }
 
 // Unchanged helper extensions

@@ -446,6 +446,7 @@ struct StorageListView: View {
                                             .listRowSeparator(.hidden)
                                             .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 0, trailing: 16))
                                             .padding(.bottom, 4)
+                                        
                                     }
 
                                     FoodItemRowStorageView(

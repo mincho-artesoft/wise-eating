@@ -3,6 +3,7 @@ import SwiftData
 
 struct TrainingPlanDetailView: View {
     @ObservedObject private var effectManager = EffectManager.shared
+    @State private var isBannerAdLoaded: Bool = false
 
     // MARK: - Input
     let plan: TrainingPlan
@@ -59,6 +60,9 @@ struct TrainingPlanDetailView: View {
                         .glassCardStyle(cornerRadius: 20)
                     }
                     // --- КРАЙ НА ПРОМЯНАТА ---
+                    
+                    bannerAdSection
+                        .frame(height: isBannerAdLoaded ? 120 : 0)
                     
                     ForEach(Array(sortedDays.enumerated()), id: \.element.id) { index, day in
                         daySection(for: day, dayIndex: index + 1)
@@ -228,4 +232,17 @@ struct TrainingPlanDetailView: View {
         }
         .contentShape(Rectangle())
     }
+    
+    
+    @ViewBuilder
+           private var bannerAdSection: some View {
+               // Показваме банер само за free (Base) потребители
+               if SubscriptionManager.shared.subscriptionStatus == .base {
+                   BannerAdView(adsBool: $isBannerAdLoaded, bucket: .large)
+                       .frame(height: 120)
+                       .opacity(isBannerAdLoaded ? 1 : 0)
+                       .animation(.easeInOut(duration: 0.25), value: isBannerAdLoaded)
+                       .padding(.horizontal)
+               }
+           }
 }

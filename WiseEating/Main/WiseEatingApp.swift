@@ -37,6 +37,7 @@ struct WiseEatingApp: App {
     // В WiseEatingApp.swift
 
     init() {
+        
         GlobalState.modelContext = container.mainContext
 
         Task { @MainActor in
@@ -54,6 +55,7 @@ struct WiseEatingApp: App {
             await AppOpenAdManager.shared.loadAd()      // Open Ad
             await RewardedAdManager.shared.loadAd()     // Video Reward
             await InterstitialAdManager.shared.loadAd() // Fallback Interstitial
+            BannerAdPool.shared.warmUp()
         }
         // ----------------------------------------------------
     }

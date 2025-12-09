@@ -13,7 +13,8 @@ struct AddEditDietView: View {
     @State private var showAIGenerationToast = false
     @State private var toastTimer: Timer? = nil
     @State private var toastProgress: Double = 0.0
-    
+    @State private var isBannerAdLoaded: Bool = false
+
     @Query(sort: \Prompt.creationDate, order: .reverse) private var allPrompts: [Prompt]
     @State private var selectedPromptIDs: Set<Prompt.ID> = []
     
@@ -155,7 +156,8 @@ struct AddEditDietView: View {
                     ScrollView(showsIndicators: false) {
                         VStack(spacing: 16) {
                             nameCard
-                            
+                            bannerAdSection
+                                                    .frame(height: isBannerAdLoaded ? 120 : 0)
                             // Секция за промптове
                             VStack(spacing: 12) {
                                 let dietPrompts = allPrompts.filter { $0.type == .diet }
@@ -953,4 +955,16 @@ struct AddEditDietView: View {
         showAlert = true
         return false
     }
+    
+    @ViewBuilder
+       private var bannerAdSection: some View {
+           // Показваме банер само за free (Base) потребители
+           if SubscriptionManager.shared.subscriptionStatus == .base {
+               BannerAdView(adsBool: $isBannerAdLoaded, bucket: .large)
+                   .frame(height: 120)
+                   .opacity(isBannerAdLoaded ? 1 : 0)
+                   .animation(.easeInOut(duration: 0.25), value: isBannerAdLoaded)
+                   .padding(.horizontal)
+           }
+       }
 }

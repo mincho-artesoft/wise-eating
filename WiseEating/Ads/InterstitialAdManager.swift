@@ -12,7 +12,7 @@ final class InterstitialAdManager: NSObject, FullScreenContentDelegate {
     // ✅ ВАЖНО: Тази променлива липсваше. Трябва да е тук, в началото на класа.
     private var onAdDismissed: (() -> Void)?
 
-    private let adUnitID = "ca-app-pub-3940256099942544/4411468910"
+    private let adUnitID = "ca-app-pub-3759868960530173/8136285513"
 
     // MARK: - Load
     func loadAd() async {

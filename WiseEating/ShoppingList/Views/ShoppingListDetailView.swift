@@ -7,7 +7,8 @@ import UserNotifications
 
 struct ShoppingListDetailView: View {
     @Binding var navBarIsHiden: Bool
-    
+    @State private var isBannerAdLoaded: Bool = false
+
     // --- Floating Scan Button state ---
     @State private var isScanDragging: Bool = false
     @GestureState private var scanGestureOffset: CGSize = .zero
@@ -319,6 +320,8 @@ struct ShoppingListDetailView: View {
             ScrollViewReader { proxy in
                 List {
                     listInfoSection
+                    bannerAdSection
+                        .frame(height: isBannerAdLoaded ? 120 : 0)
                     itemsSection
                     suggestionsSection
                         .disabled(areAllItemsBought)
@@ -878,4 +881,16 @@ struct ShoppingListDetailView: View {
         let height = defaults.double(forKey: "\(scanButtonPositionKey)_height")
         self.scanButtonOffset = CGSize(width: width, height: height)
     }
+    
+    @ViewBuilder
+        private var bannerAdSection: some View {
+            // Показваме банер само за free (Base) потребители
+            if SubscriptionManager.shared.subscriptionStatus == .base {
+                BannerAdView(adsBool: $isBannerAdLoaded, bucket: .large)
+                    .frame(height: 120)
+                    .opacity(isBannerAdLoaded ? 1 : 0)
+                    .animation(.easeInOut(duration: 0.25), value: isBannerAdLoaded)
+                    .padding(.horizontal)
+            }
+        }
 }

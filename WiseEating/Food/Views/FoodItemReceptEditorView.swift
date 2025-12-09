@@ -5,6 +5,7 @@ import PhotosUI
 @MainActor
 struct FoodItemReceptEditorView: View {
     // MARK: - Photo source state
+    @State private var isBannerAdLoaded: Bool = false
 
     private enum PhotoSourceTarget {
         case main
@@ -406,6 +407,8 @@ struct FoodItemReceptEditorView: View {
                ScrollView(showsIndicators: false) {
                    VStack(spacing: 0) {
                        basicSection
+                       bannerAdSection
+                        .frame(height: isBannerAdLoaded ? 120 : 0)
                        gallerySection
                        if !selectedIng.isEmpty {
                            ingredientsSection
@@ -2239,4 +2242,15 @@ struct FoodItemReceptEditorView: View {
         currentPhotoTarget = nil
     }
 
+    @ViewBuilder
+        private var bannerAdSection: some View {
+            // Показваме банер само за free (Base) потребители
+            if SubscriptionManager.shared.subscriptionStatus == .base {
+                BannerAdView(adsBool: $isBannerAdLoaded, bucket: .large)
+                    .frame(height: 120)
+                    .opacity(isBannerAdLoaded ? 1 : 0)
+                    .animation(.easeInOut(duration: 0.25), value: isBannerAdLoaded)
+                    .padding(.horizontal)
+            }
+        }
 }

@@ -5,6 +5,7 @@ import UIKit
 struct FoodItemDetailView: View {
     @Environment(\.modelContext) private var modelContext
     @ObservedObject private var effectManager = EffectManager.shared
+    @State private var isBannerAdLoaded: Bool = false
 
     let food: FoodItem
     let profile: Profile?
@@ -96,6 +97,8 @@ struct FoodItemDetailView: View {
 
                     VStack(alignment: .leading, spacing: 24) {
                         textInfoSection
+                        bannerAdSection
+                          .frame(height: isBannerAdLoaded ? 120 : 0)
                         categorySection
                         dietsSection
                         macrosSection
@@ -616,6 +619,18 @@ struct FoodItemDetailView: View {
             }
         }
     }
+    
+    @ViewBuilder
+       private var bannerAdSection: some View {
+           // Показваме банер само за free (Base) потребители
+           if SubscriptionManager.shared.subscriptionStatus == .base {
+               BannerAdView(adsBool: $isBannerAdLoaded, bucket: .large)
+                   .frame(height: 120)
+                   .opacity(isBannerAdLoaded ? 1 : 0)
+                   .animation(.easeInOut(duration: 0.25), value: isBannerAdLoaded)
+                   .padding(.horizontal)
+           }
+       }
 }
 fileprivate struct AsyncImageView<Placeholder: View>: View {
     let imageData: Data?

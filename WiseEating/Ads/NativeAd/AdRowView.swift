@@ -41,3 +41,4 @@ struct NativeAdViewWrapper: UIViewRepresentable {
         // Няма нужда от update, рекламата е статична за клетката
     }
 }
+
