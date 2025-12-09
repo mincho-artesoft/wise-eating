@@ -1,26 +1,46 @@
 import SwiftUI
 import GoogleMobileAds
 
-// MARK: - Ad Row View
 struct AdRowView: View {
     @State private var nativeAd: NativeAd?
+    @State private var hasAttemptedLoad: Bool = false
     
     var body: some View {
         VStack {
             if let ad = nativeAd {
-                // Използваме Wrapper за твоя SimpleNativeAdView
                 NativeAdViewWrapper(nativeAd: ad)
-                    .frame(height: 140) // Приблизителна височина за native ad
+                    .frame(height: 140)
                     .glassCardStyle(cornerRadius: 20)
+                    .transition(.opacity) // Плавен преход при поява
             } else {
-                // Placeholder докато зарежда или ако няма реклама (скрит)
+                // Placeholder, докато зареди или ако няма реклама
                 Color.clear.frame(height: 1)
             }
         }
         .onAppear {
-            // Взимаме реклама от пула само ако още нямаме
-            if nativeAd == nil {
-                nativeAd = NativeAdPool.shared.popAd()
+            loadAdIfNeeded()
+        }
+    }
+    
+    private func loadAdIfNeeded() {
+        // Ако вече имаме реклама, не правим нищо (запазваме я стабилна при скрол)
+        if nativeAd != nil { return }
+        
+        // Опитваме да изтеглим реклама от пула
+        if let ad = NativeAdPool.shared.popAd() {
+            withAnimation {
+                self.nativeAd = ad
+            }
+        } else {
+            // Ако пулът е празен, опитваме пак след кратък интервал (retry logic)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                if self.nativeAd == nil {
+                     if let retryAd = NativeAdPool.shared.popAd() {
+                         withAnimation {
+                             self.nativeAd = retryAd
+                         }
+                     }
+                }
             }
         }
     }

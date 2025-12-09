@@ -43,39 +43,40 @@ final class BannerAdPool: NSObject, BannerViewDelegate {
     /// - Ако има предварително зареден: връщаме него.
     /// - Ако няма: създаваме нов и го зареждаме (без да чакаме).
     func dequeueBanner(
-        for bucket: BannerBucket,
-        rootViewController: UIViewController?,
-        delegate: BannerViewDelegate?
-    ) -> BannerView {
-        // Уверяваме се, че пулът се допълва
-        ensurePoolFilled(for: bucket)
-        
-        let banner: BannerView
-        
-        switch bucket {
-        case .small:
-            if !readySmall.isEmpty {
-                banner = readySmall.removeFirst()
-            } else {
-                banner = makeAndLoadFreshBanner(for: bucket)
+            for bucket: BannerBucket,
+            rootViewController: UIViewController?,
+            delegate: BannerViewDelegate?
+        ) -> BannerView {
+            
+            // 1. Стартираме зареждане на нови банери, за да запълним дупката, която ще направим
+            defer { ensurePoolFilled(for: bucket) }
+            
+            let banner: BannerView
+            
+            switch bucket {
+            case .small:
+                if !readySmall.isEmpty {
+                    // ВАЖНО: removeFirst() гарантира, че този банер вече не е в пула
+                    // и следващото извикване ще вземе следващия (различен) банер.
+                    banner = readySmall.removeFirst()
+                    print("📤 [BannerPool] Dequeued SMALL banner. Remaining: \(readySmall.count)")
+                } else {
+                    banner = makeAndLoadFreshBanner(for: bucket)
+                }
+            case .large:
+                if !readyLarge.isEmpty {
+                    banner = readyLarge.removeFirst()
+                    print("📤 [BannerPool] Dequeued LARGE banner. Remaining: \(readyLarge.count)")
+                } else {
+                    banner = makeAndLoadFreshBanner(for: bucket)
+                }
             }
-        case .large:
-            if !readyLarge.isEmpty {
-                banner = readyLarge.removeFirst()
-            } else {
-                banner = makeAndLoadFreshBanner(for: bucket)
-            }
+            
+            banner.rootViewController = rootViewController
+            banner.delegate = delegate
+            
+            return banner
         }
-        
-        // Този банер вече ще се показва в UI, затова му задаваме координатора на конкретния View
-        banner.rootViewController = rootViewController
-        banner.delegate = delegate
-        
-        // И пак допълваме пула, защото взехме един
-        ensurePoolFilled(for: bucket)
-        
-        return banner
-    }
     
     // MARK: - Internal helpers
     

@@ -1,20 +1,10 @@
-// ==== FILE: /Users/aleksandarsvinarov/Desktop/as/vitahealth-clean/WiseEating/Ads/SimpleNativeAdView.swift ====
+// ==== FILE: /Users/aleksandarsvinarov/Desktop/as/vitahealth-clean/WiseEating/Ads/NativeAd/SimpleNativeAdView.swift ====
 import GoogleMobileAds
 import UIKit
 
-// ✅ ПРОМЯНА: GADNativeAdView -> NativeAdView
 final class SimpleNativeAdView: NativeAdView {
 
-    // Създаваме UI елементите програмно
-    private let headlineLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 15)
-        label.textColor = .label
-        label.numberOfLines = 1
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
+    // MARK: - UI Elements
     private let iconImageView: UIImageView = {
         let img = UIImageView()
         img.contentMode = .scaleAspectFit
@@ -22,6 +12,15 @@ final class SimpleNativeAdView: NativeAdView {
         img.clipsToBounds = true
         img.translatesAutoresizingMaskIntoConstraints = false
         return img
+    }()
+    
+    private let headlineLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.textColor = .label
+        label.numberOfLines = 2 // Позволяваме 2 реда, защото ширината намалява
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private let bodyLabel: UILabel = {
@@ -40,14 +39,17 @@ final class SimpleNativeAdView: NativeAdView {
         btn.layer.cornerRadius = 14
         btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 13)
         btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.isUserInteractionEnabled = false
         return btn
     }()
     
-    // Специален View за медия (видео/снимка)
-    // ✅ ПРОМЯНА: GADMediaView -> MediaView
+    // ✅ ПРОМЯНА: MediaView заема по-голяма площ (за видео изискванията)
     private let mediaViewOutlet: MediaView = {
         let v = MediaView()
+        v.contentMode = .scaleAspectFill
         v.translatesAutoresizingMaskIntoConstraints = false
+        v.layer.cornerRadius = 8
+        v.clipsToBounds = true
         return v
     }()
     
@@ -64,6 +66,7 @@ final class SimpleNativeAdView: NativeAdView {
         return label
     }()
 
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
@@ -79,58 +82,72 @@ final class SimpleNativeAdView: NativeAdView {
         self.layer.cornerRadius = 12
         self.clipsToBounds = true
         
-        // 1. Добавяме елементите към view-то
         addSubview(iconImageView)
         addSubview(headlineLabel)
         addSubview(adBadgeLabel)
         addSubview(bodyLabel)
         addSubview(callToActionButton)
+        addSubview(mediaViewOutlet)
         
-        // 2. Свързваме NativeAdView properties
         self.iconView = iconImageView
         self.headlineView = headlineLabel
         self.bodyView = bodyLabel
         self.callToActionView = callToActionButton
+        self.mediaView = mediaViewOutlet
         
-        // 3. Auto Layout Constraints
+        // MARK: - Layout Logic
+        // Тъй като MediaView трябва да е поне 120x120, а височината на реда е 140,
+        // най-добре е MediaView да е квадрат вдясно, а текстът да е вляво.
+        
         NSLayoutConstraint.activate([
-            // Икона: Горе ляво
+            // 1. MediaView (Дясно) - Фиксиран размер 120x120 за да махнем warning-а
+            mediaViewOutlet.centerYAnchor.constraint(equalTo: centerYAnchor),
+            mediaViewOutlet.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            mediaViewOutlet.widthAnchor.constraint(equalToConstant: 120),
+            mediaViewOutlet.heightAnchor.constraint(equalToConstant: 120),
+            
+            // 2. Икона (Горе Ляво)
             iconImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             iconImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             iconImageView.widthAnchor.constraint(equalToConstant: 40),
             iconImageView.heightAnchor.constraint(equalToConstant: 40),
             
-            // Заглавие: Вдясно от иконата
+            // 3. Заглавие (Вдясно от иконата, Вляво от MediaView)
             headlineLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 8),
             headlineLabel.topAnchor.constraint(equalTo: iconImageView.topAnchor),
-            headlineLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            // Важно: Закотвяме го за mediaView, не за края на екрана
+            headlineLabel.trailingAnchor.constraint(equalTo: mediaViewOutlet.leadingAnchor, constant: -8),
             
-            // Ad Badge: Под заглавието
-            adBadgeLabel.leadingAnchor.constraint(equalTo: headlineLabel.leadingAnchor),
-            adBadgeLabel.topAnchor.constraint(equalTo: headlineLabel.bottomAnchor, constant: 2),
-            adBadgeLabel.widthAnchor.constraint(equalToConstant: 20),
-            adBadgeLabel.heightAnchor.constraint(equalToConstant: 12),
+            // 4. Ad Badge (Под иконата)
+            adBadgeLabel.leadingAnchor.constraint(equalTo: iconImageView.leadingAnchor),
+            adBadgeLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 4),
+            adBadgeLabel.widthAnchor.constraint(equalToConstant: 22),
+            adBadgeLabel.heightAnchor.constraint(equalToConstant: 14),
             
-            // Body: Под значката
+            // 5. Body (Под заглавието, вляво от MediaView)
             bodyLabel.leadingAnchor.constraint(equalTo: headlineLabel.leadingAnchor),
-            bodyLabel.topAnchor.constraint(equalTo: adBadgeLabel.bottomAnchor, constant: 2),
-            bodyLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            bodyLabel.topAnchor.constraint(equalTo: headlineLabel.bottomAnchor, constant: 2),
+            bodyLabel.trailingAnchor.constraint(equalTo: mediaViewOutlet.leadingAnchor, constant: -8),
             
-            // Бутон: Долу вдясно
-            callToActionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            // 6. Бутон (Долу Ляво, под Body)
+            callToActionButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             callToActionButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            callToActionButton.heightAnchor.constraint(equalToConstant: 28),
-            callToActionButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 80)
+            // Бутонът стига до медията, но не я застъпва
+            callToActionButton.trailingAnchor.constraint(equalTo: mediaViewOutlet.leadingAnchor, constant: -8),
+            callToActionButton.heightAnchor.constraint(equalToConstant: 30)
         ])
     }
 
     func populate(with nativeAd: NativeAd) {
         self.nativeAd = nativeAd
 
-        // Заглавие
         (headlineView as? UILabel)?.text = nativeAd.headline
+        (bodyView as? UILabel)?.text = nativeAd.body
+        bodyView?.isHidden = nativeAd.body == nil
         
-        // Икона
+        (callToActionView as? UIButton)?.setTitle(nativeAd.callToAction, for: .normal)
+        callToActionView?.isHidden = nativeAd.callToAction == nil
+        
         if let icon = nativeAd.icon?.image {
             (iconView as? UIImageView)?.image = icon
             iconView?.isHidden = false
@@ -138,15 +155,9 @@ final class SimpleNativeAdView: NativeAdView {
             iconView?.isHidden = true
         }
         
-        // Текст (Body)
-        (bodyView as? UILabel)?.text = nativeAd.body
-        bodyView?.isHidden = nativeAd.body == nil
-        
-        // Бутон
-        (callToActionView as? UIButton)?.setTitle(nativeAd.callToAction, for: .normal)
-        callToActionView?.isHidden = nativeAd.callToAction == nil
-        
-        // Регистрираме view-то за интеракция
-        callToActionView?.isUserInteractionEnabled = false // NativeAdView хендълва кликовете
+        // Зареждане на медията
+        mediaView?.mediaContent = nativeAd.mediaContent
+        // Показваме MediaView, ако има съдържание
+        mediaView?.isHidden = false
     }
 }
