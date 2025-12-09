@@ -1,4 +1,3 @@
-// ==== FILE: /Users/aleksandarsvinarov/Desktop/as/vitahealth-clean/WiseEating/Main/DBSeed/SeedManager.swift ====
 import SwiftData
 import Foundation
 import UIKit
@@ -8,34 +7,8 @@ enum SeedManager {
 
     // MARK: – Public entry point
     static func seedIfNeeded(container: ModelContainer) async {
-        print("🚀 Starting database seed check...")
+        print("🚀 Starting database seed process if needed...")
         let ctx = GlobalState.modelContext!
-        
-        // 1. Проверка: Имаме ли успешно заредена Read-Only (Reference) база?
-        // Името "Reference" идва от DatabaseSetup.swift -> ModelConfiguration("Reference", ...)
-        let hasReferenceStore = container.configurations.contains { $0.name == "Reference" }
-        
-        if hasReferenceStore {
-            print("✨ SeedManager: 'Reference' store detected. Skipping data injection to avoid duplication.")
-            
-            // В този сценарий данните (Храни, Витамини и т.н.) идват от read-only файла.
-            // НЕ ги вкарваме (insert) отново, за да не напълним default.store с дубликати.
-            
-            // НО! Трябва да се уверим, че индексът за търсене е наличен.
-            // Той се записва в потребителската (writable) база.
-            await buildIndexOnly(context: ctx)
-            return
-        }
-
-        // ========================================================================
-        // FALLBACK / LEGACY MODE
-        // Ако сме тук, значи или сме нов потребител без preseed, или preseed-ът е гръмнал
-        // и сме се върнали към старата логика (само default.store).
-        // Трябва да налеем данните ръчно, както преди.
-        // ========================================================================
-        
-        print("⚠️ SeedManager: No reference store found (Legacy/Fallback mode). Checking if seeding is needed...")
-        
         ctx.autosaveEnabled = false
 
         // 1. Извикване на методите за зареждане
@@ -53,28 +26,19 @@ enum SeedManager {
                 print("💾 Final save of all seeded data successful.")
             }
             
-            // 3. Генериране на индекса
+            // 3. ⚠️ ГЕНЕРИРАНЕ НА ИНДЕКСА
+            // След като всичко е записано, форсираме изграждането на search cache.
+            // Това ще създаде SearchIndexCache в базата.
             try SearchIndexStore.shared.rebuildIndexIfNeeded(context: ctx)
             
         } catch {
             print("❌ Final save or indexing after seeding failed: \(error)")
         }
 
+        // ✅ Върни autosave за нормалната работа на UI след сеенето
         ctx.autosaveEnabled = true
-        print("✅ Seeding process completed (Legacy Mode).")
-    }
-    
-    // MARK: - Helper for Reference Mode
-    private static func buildIndexOnly(context ctx: ModelContext) async {
-        print("🔎 SeedManager: Building/Verifying Search Index from Reference store...")
-        do {
-            // Това ще прочете данните от Reference store-а (чрез контекста)
-            // и ще запише индекса в Writable store-а (където е SearchIndexCache).
-            try SearchIndexStore.shared.rebuildIndexIfNeeded(context: ctx)
-            print("✅ Search Index ready.")
-        } catch {
-            print("❌ Failed to build search index in Reference mode: \(error)")
-        }
+
+        print("✅ Seeding process completed.")
     }
 
     // MARK: - Barcodes
@@ -88,8 +52,7 @@ enum SeedManager {
 
         print("   Seeding Vocabulary from vocabulary.json...")
         guard let vocabURL = Bundle.main.url(forResource: "vocabulary", withExtension: "json") else {
-            // Не спираме с fatal error, за да не крашва в production, ако файлът липсва случайно
-            print("⚠️ vocabulary.json not found"); return
+            assertionFailure("vocabulary.json not found"); return
         }
         
         do {
@@ -109,7 +72,7 @@ enum SeedManager {
 
         print("   Seeding Product Buckets from product_buckets.json...")
         guard let bucketsURL = Bundle.main.url(forResource: "product_buckets", withExtension: "json") else {
-            print("⚠️ product_buckets.json not found"); return
+            assertionFailure("product_buckets.json not found"); return
         }
 
         do {
@@ -139,7 +102,7 @@ enum SeedManager {
 
         print("   Seeding Foods from foods.json...")
         guard let url = Bundle.main.url(forResource: "foods", withExtension: "json") else {
-            print("⚠️ foods.json not found"); return
+            assertionFailure("foods.json not found"); return
         }
 
         do {
@@ -182,7 +145,7 @@ enum SeedManager {
 
         print("   Seeding Exercises from sports.json...")
         guard let url = Bundle.main.url(forResource: "sports", withExtension: "json") else {
-            print("⚠️ sports.json not found"); return
+            assertionFailure("sports.json not found"); return
         }
 
         do {

@@ -1,6 +1,4 @@
-// ==== FILE: /Users/aleksandarsvinarov/Desktop/as/vitahealth-clean/WiseEating/Main/DBSeed/PreseedLoader.swift ====
 import Foundation
-import Compression
 
 enum PreseedLoader {
     enum PreseedError: Error { case missingBundleResources, combineFailed }
@@ -30,7 +28,7 @@ enum PreseedLoader {
             // Stream-append each part (1MB chunks)
             let outHandle = try FileHandle(forWritingTo: combinedGZ)
             defer { try? outHandle.close() }
-            for p in partURLs {
+            for p in partURLs { // keep declared order aa -> ab -> ac
                 let inHandle = try FileHandle(forReadingFrom: p)
                 defer { try? inHandle.close() }
                 while true {
@@ -49,35 +47,24 @@ enum PreseedLoader {
             gzURL = Bundle.main.url(forResource: "preseeded_db", withExtension: "store.gz")
         }
 
-        // 3) Fallback to a plain .store in bundle
+        // 3) Fallback to a plain .store in bundle (legacy path)
         let plainStoreURL = Bundle.main.url(forResource: "preseeded_db", withExtension: "store")
 
         if let gzURL {
-            // Decompress
+            // Decompress the gzip file using existing ZlibGzip utility.
             let gzData = try Data(contentsOf: gzURL, options: .mappedIfSafe)
             let decompressed = try ZlibGzip.decompress(data: gzData)
-            let tmpStore = tmpDir.appendingPathComponent("temp_preseeded.store")
-            
+            let tmpStore = tmpDir.appendingPathComponent("preseeded_db.store")
             try? fm.removeItem(at: tmpStore)
             try decompressed.write(to: tmpStore, options: .atomic)
 
             // Ensure destination directory exists
             try fm.createDirectory(at: storeURL.deletingLastPathComponent(), withIntermediateDirectories: true)
-            
-            // Clean up existing destination files (store, wal, shm) before copying
-            let walURL = storeURL.deletingPathExtension().appendingPathExtension("store-wal")
-            let shmURL = storeURL.deletingPathExtension().appendingPathExtension("store-shm")
-            
-            for url in [storeURL, walURL, shmURL] {
-                if fm.fileExists(atPath: url.path) {
-                    try fm.removeItem(at: url)
-                }
-            }
-
-            // Copy the new store
+            // Remove any existing files at destination (store, wal, shm will be handled by caller)
+            if fm.fileExists(atPath: storeURL.path) { try fm.removeItem(at: storeURL) }
             try fm.copyItem(at: tmpStore, to: storeURL)
 
-            // Cleanup temps
+            // Cleanup combined .gz temp if we created it
             if let combinedURL { try? fm.removeItem(at: combinedURL) }
             try? fm.removeItem(at: tmpStore)
             return
