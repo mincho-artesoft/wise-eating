@@ -1,8 +1,8 @@
+// ==== FILE: /Users/aleksandarsvinarov/Desktop/as/vitahealth-clean/WiseEating/Main/WiseEatingApp.swift ====
 import SwiftUI
 import SwiftData
 
 // Можем да изнесем и ODR в отделен файл, но ако е малък, може и тук.
-// За пълна чистота, ето го отделно (може да го сложите в ODRHelpers.swift):
 final class ODRDevPrefetch {
     nonisolated(unsafe) private static var req: NSBundleResourceRequest?
 
@@ -26,7 +26,6 @@ struct WiseEatingApp: App {
     @ObservedObject private var subscriptionManager = SubscriptionManager.shared
 
     // ✅ НОВО: Запазваме състояние дали това е първото стартиране някога
-    // При първа инсталация ще е true. След това ще го направим false завинаги.
     @AppStorage("isFirstAppLaunch") private var isFirstAppLaunch: Bool = true
     @State private var coldStart: Bool = true
 
@@ -35,7 +34,6 @@ struct WiseEatingApp: App {
     private var notificationDelegate = NotificationDelegate()
 
     // В WiseEatingApp.swift
-
     init() {
         
         GlobalState.modelContext = container.mainContext
@@ -50,12 +48,16 @@ struct WiseEatingApp: App {
             await CalendarViewModel.shared.ensureSharedShoppingListCalendarExists()
         }
         
-        // --- ПРОМЯНА: Зареждаме ВСИЧКИ видове реклами тук ---
+        // --- ПРОМЯНА: Зареждаме ВСИЧКИ видове реклами и ПУЛОВЕ тук ---
         Task { @MainActor in
+            // 1. Единични формати (цял екран)
             await AppOpenAdManager.shared.loadAd()      // Open Ad
             await RewardedAdManager.shared.loadAd()     // Video Reward
             await InterstitialAdManager.shared.loadAd() // Fallback Interstitial
-            BannerAdPool.shared.warmUp()
+            
+            // 2. Пулове (списъци) - стартираме ги да се пълнят веднага
+            BannerAdPool.shared.warmUp()       // Банери
+            NativeAdPool.shared.refreshPool()  // ✅ Native Ads (за разнообразни реклами в списъците)
         }
         // ----------------------------------------------------
     }
@@ -72,8 +74,6 @@ struct WiseEatingApp: App {
                         // --- ПРОМЯНА: Логика за рекламите ---
                         if isFirstAppLaunch {
                             print("🚀 Първо стартиране на приложението: Рекламата е пропусната.")
-                            // Маркираме, че вече не е първо стартиране.
-                            // При следващо влизане (дори след минимизиране), ще влезе в else блока.
                             isFirstAppLaunch = false
                         } else {
                             print("🔄 Връщане в приложението: Ще се опита показване на реклама след 3 сек.")
