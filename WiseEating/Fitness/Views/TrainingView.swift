@@ -4,6 +4,7 @@ import EventKit
 
 struct TrainingView: View {
     @State private var isShowingDeleteNodeConfirmation = false
+    @State private var exerciseItemToView: ExerciseItem? = nil
     @State private var nodeToDelete: Node? = nil
     @State private var nodesForDay: [Node] = []
     @State private var presentedNode: PresentedNode? = nil
@@ -182,6 +183,7 @@ struct TrainingView: View {
         if trainingPlanDraftForEditor != nil { return false }
         if isShowingDailyAIGenerator { return false }
         if presentedNode != nil { return false }
+        if exerciseItemToView != nil { return false }
         return true
     }
     
@@ -231,6 +233,22 @@ struct TrainingView: View {
                 viewWithLifeCycle
                     .opacity(trainingPlanDraftForEditor == nil ? 1 : 0)
                 
+                if let exerciseToView = exerciseItemToView {
+                    ExerciseItemDetailView(
+                        item: exerciseToView,
+                        profile: profile,
+                        onDismiss: {
+                            withAnimation(.easeInOut) {
+                                exerciseItemToView = nil
+                                navBarIsHiden = false
+                            }
+                        }
+                    )
+                    .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                    .zIndex(20)
+                    .onAppear { navBarIsHiden = true }
+                }
+                
                 if let draft = trainingPlanDraftForEditor {
                     TrainingPlanEditorView(
                         profile: profile,
@@ -242,7 +260,9 @@ struct TrainingView: View {
                                 trainingPlanDraftForEditor = nil
                                 navBarIsHiden = false
                             }
-                        }
+                        },
+                        navBarIsHiden: $navBarIsHiden,
+                        onDismissSearch: onInternalFieldFocused
                     )
                     .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                     .zIndex(10)
@@ -461,18 +481,14 @@ struct TrainingView: View {
                             let exercises = currentExercises.keys.sorted { $0.name < $1.name }
 
                             ForEach(Array(exercises.enumerated()), id: \.element.id) { index, exercise in
-                                // 👉 Рекламният ред преди упражнението, според индекса
+                                // 👉 Рекламният ред преди упражнението
                                 if shouldShowAd(at: index) {
-                                    // Сложи тук твоя конкретен view за native реклама,
-                                    // напр. NativeAdRowView() / TrainingNativeAdRow() и т.н.
                                     AdRowView()
                                         .listRowBackground(Color.clear)
                                         .listRowSeparator(.hidden)
                                         .listRowInsets(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
                                 }
                                 
-                                // +++ НАЧАЛО НА ПРОМЯНАТА (2/2) +++
-                                // Подаваме байндинга към SelectedExerciseRowView
                                 SelectedExerciseRowView(
                                     exercise: exercise,
                                     duration: currentExercises[exercise] ?? 15.0,
@@ -485,9 +501,32 @@ struct TrainingView: View {
                                     },
                                     focusedField: $focusedField,
                                     focusCase: .exerciseDuration(id: exercise.id),
-                                    expandedExerciseID: $expandedExerciseID // Подаваме байндинг
+                                    expandedExerciseID: $expandedExerciseID
                                 )
-                                // +++ КРАЙ НА ПРОМЯНАТА (2/2) +++
+                                // +++ ДОБАВЕТЕ ТОВА (Context Menu) +++
+                                .contextMenu {
+                                    Button {
+                                        withAnimation(.easeInOut) {
+                                            onInternalFieldFocused()
+                                            exerciseItemToView = exercise
+                                            navBarIsHiden = true
+                                        }
+                                    } label: {
+                                        Label("View Details", systemImage: "info.circle")
+                                    }
+                                    
+                                    Button(role: .destructive) {
+                                        if #available(iOS 26.0, *) {
+                                            delete(exercise: exercise)
+                                        } else {
+                                            self.exerciseToDelete = exercise
+                                            self.isShowingDeleteExerciseConfirmation = true
+                                        }
+                                    } label: {
+                                        Label("Remove from Workout", systemImage: "trash")
+                                    }
+                                }
+                                // +++ КРАЙ НА ДОБАВКАТА +++
                                 .id(exercise.id)
                                 .listRowBackground(Color.clear)
                                 .listRowSeparator(.hidden)

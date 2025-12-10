@@ -3,6 +3,10 @@ import SwiftData
 
 @MainActor
 struct TrainingPlanEditorView: View {
+    let onDismissSearch: () -> Void
+    @Binding var navBarIsHiden: Bool
+
+    @State private var exerciseItemToView: ExerciseItem? = nil
     @State private var pendingAIJobIDToDeleteOnSave: UUID? = nil
     @State private var isBannerAdLoaded: Bool = false
     @ObservedObject private var aiManager = AIManager.shared
@@ -80,7 +84,9 @@ struct TrainingPlanEditorView: View {
           planDraft: TrainingPlanDraft? = nil,
           globalSearchText: Binding<String>,
           isSearchFieldFocused: FocusState<Bool>.Binding,
-          onDismiss: @escaping (TrainingPlan?) -> Void
+          onDismiss: @escaping (TrainingPlan?) -> Void,
+          navBarIsHiden: Binding<Bool>,
+          onDismissSearch: @escaping () -> Void
     ) {
         self.profile = profile
         self.planToEdit = planToEdit
@@ -88,7 +94,9 @@ struct TrainingPlanEditorView: View {
         self.onDismiss = onDismiss
         self._globalSearchText = globalSearchText
         self._isSearchFieldFocused = isSearchFieldFocused
-        
+        self._navBarIsHiden = navBarIsHiden
+        self.onDismissSearch = onDismissSearch
+
         if let plan = planToEdit {
             _name = State(initialValue: plan.name)
             _days = State(initialValue: plan.days.map { day in
@@ -210,6 +218,21 @@ struct TrainingPlanEditorView: View {
                 .blur(radius: isSaving ? 1.5 : 0)
                 .disabled(isSaving)
                 
+                if let exerciseToView = exerciseItemToView {
+                    ExerciseItemDetailView(
+                        item: exerciseToView,
+                        profile: profile,
+                        onDismiss: {
+                            withAnimation(.easeInOut) {
+                                exerciseItemToView = nil
+                                navBarIsHiden = false
+                            }
+                        }
+                    )
+                    .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                    .zIndex(20)
+                }
+                
                 if isSearchFieldFocused {
                     fullScreenSearchResultsView
                         .transition(.opacity.animation(.easeInOut(duration: 0.2)))
@@ -247,6 +270,7 @@ struct TrainingPlanEditorView: View {
                             !isSaving &&
                             !showAlert &&
                             openMenu == .none &&
+                            exerciseItemToView == nil &&
                             GlobalState.aiAvailability != .deviceNotEligible { // ⬅️ ново
                             AIButton(geometry: geometry)
                         }
@@ -623,6 +647,27 @@ struct TrainingPlanEditorView: View {
                             focusCase: .exerciseDuration(id: exerciseLink.id),
                             onDelete: { removeExercise(exerciseLink, from: workout) }
                         )
+                        // +++ ДОБАВЕТЕ ТОВА +++
+                        .contextMenu {
+                            if let exercise = exerciseLink.exercise {
+                                Button {
+                                    withAnimation(.easeInOut) {
+                                        onDismissSearch()
+                                        exerciseItemToView = exercise
+                                        navBarIsHiden = true
+                                    }
+                                } label: {
+                                    Label("View Details", systemImage: "info.circle")
+                                }
+                            }
+                            
+                            Button(role: .destructive) {
+                                removeExercise(exerciseLink, from: workout)
+                            } label: {
+                                Label("Remove", systemImage: "trash")
+                            }
+                        }
+                        // +++ КРАЙ НА ДОБАВКАТА +++
                         .id(exerciseLink.id)
                     }
                 }

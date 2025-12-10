@@ -27,57 +27,61 @@ struct TrainingPlanExerciseRowView: View {
     }
 
     var body: some View {
-        HStack {
-            Text(item?.name ?? "Unknown")
-                .foregroundStyle(effectManager.currentGlobalAccentColor)
-                .lineLimit(2)
-                .frame(maxWidth: .infinity, alignment: .leading)
+           HStack {
+               Text(item?.name ?? "Unknown")
+                   .foregroundStyle(effectManager.currentGlobalAccentColor)
+                   .lineLimit(2)
+                   .frame(maxWidth: .infinity, alignment: .leading)
 
-            HStack(spacing: 4) {
-                ConfigurableTextField(
-                    title: "min",
-                    value: $textValue,
-                    type: .integer,
-                    placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
-                    focused: $focusedField,
-                    fieldIdentifier: focusCase
-                )
-                .multilineTextAlignment(.trailing)
-                .fixedSize()
-                .foregroundStyle(effectManager.currentGlobalAccentColor)
+               HStack(spacing: 4) {
+                   ConfigurableTextField(
+                       title: "min",
+                       value: $textValue,
+                       type: .integer,
+                       placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
+                       focused: $focusedField,
+                       fieldIdentifier: focusCase
+                   )
+                   .multilineTextAlignment(.trailing)
+                   .fixedSize()
+                   .foregroundStyle(effectManager.currentGlobalAccentColor)
 
-                Text("min")
-                    .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
+                   Text("min")
+                       .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
 
-                Button(role: .destructive, action: onDelete) {
-                    Image(systemName: "trash")
-                        .foregroundStyle(effectManager.currentGlobalAccentColor)
-                }
-                .buttonStyle(.borderless)
-                .tint(.red)
-            }
-        }
-        .padding(12)
-        .glassCardStyle(cornerRadius: 20)
-        .onChange(of: textValue) { _, newText in
-            if let newDuration = Double(newText) {
-                link.durationMinutes = newDuration
-            } else if newText.isEmpty {
-                link.durationMinutes = 0
-            }
-        }
-        .onChange(of: link.durationMinutes) { _, newDuration in
-            let currentTextAsDouble = Double(textValue) ?? 0.0
-            if abs(currentTextAsDouble - newDuration) > 0.1 {
-                textValue = String(format: "%.0f", newDuration)
-            }
-        }
-        .onChange(of: focusedField) { _, newFocus in
-            if newFocus != focusCase {
-                let clampedDuration = max(1, min(link.durationMinutes, 999))
-                textValue = String(format: "%.0f", clampedDuration)
-                link.durationMinutes = clampedDuration
-            }
-        }
-    }
+                   Button(role: .destructive, action: onDelete) {
+                       Image(systemName: "trash")
+                           .foregroundStyle(effectManager.currentGlobalAccentColor)
+                   }
+                   .buttonStyle(.borderless)
+                   .tint(.red)
+               }
+           }
+           .padding(12)
+           .glassCardStyle(cornerRadius: 20)
+           // 👇 ДОБАВЕТЕ ТОВА ТУК:
+           .contentShape(RoundedRectangle(cornerRadius: 20))
+           // 👆 Това прави целия ред активен за жестове, не само текста
+           
+           .onChange(of: textValue) { _, newText in
+               if let newDuration = Double(newText) {
+                   link.durationMinutes = newDuration
+               } else if newText.isEmpty {
+                   link.durationMinutes = 0
+               }
+           }
+           .onChange(of: link.durationMinutes) { _, newDuration in
+               let currentTextAsDouble = Double(textValue) ?? 0.0
+               if abs(currentTextAsDouble - newDuration) > 0.1 {
+                   textValue = String(format: "%.0f", newDuration)
+               }
+           }
+           .onChange(of: focusedField) { _, newFocus in
+               if newFocus != focusCase {
+                   let clampedDuration = max(1, min(link.durationMinutes, 999))
+                   textValue = String(format: "%.0f", clampedDuration)
+                   link.durationMinutes = clampedDuration
+               }
+           }
+       }
 }

@@ -367,7 +367,8 @@ struct RootView: View {
                         navBarIsHiden: $navBarIsHiden,
                         globalSearchText: $searchText,
                         isSearchFieldFocused: $isSearchFieldFocused,
-                        onDismiss: dismissAction
+                        onDismiss: dismissAction,
+                        onDismissSearch: dismissSearch
                     )
                     .onAppear {
                         profilesMenuState = .collapsed
@@ -1514,7 +1515,9 @@ extension RootView {
                        planDraft: draft,
                        globalSearchText: $searchText,
                        isSearchFieldFocused: self.$isSearchFieldFocused,
-                       onDismiss: editorDismissAction
+                       onDismiss: editorDismissAction,
+                       navBarIsHiden: $navBarIsHiden,
+                       onDismissSearch: dismissSearch
                    )
                    .onAppear {
                        dismissSearch()

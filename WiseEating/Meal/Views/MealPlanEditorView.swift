@@ -3,8 +3,9 @@ import SwiftData
 
 @MainActor
 struct MealPlanEditorView: View {
+    let onDismissSearch: () -> Void
     @State private var pendingAIJobIDToDeleteOnSave: UUID? = nil
-
+    @State private var foodItemToView: FoodItem? = nil
     @State private var isBannerAdLoaded: Bool = false
     // MARK: - AI & Prompts State
     @Query(sort: \Prompt.creationDate, order: .reverse) private var allPrompts: [Prompt]
@@ -107,7 +108,8 @@ struct MealPlanEditorView: View {
         navBarIsHiden: Binding<Bool>,
         globalSearchText: Binding<String>,
         isSearchFieldFocused: FocusState<Bool>.Binding,
-        onDismiss: @escaping () -> Void
+        onDismiss: @escaping () -> Void,
+        onDismissSearch: @escaping () -> Void
     ) {
         self.profile = profile
         self.planToEdit = planToEdit
@@ -118,6 +120,7 @@ struct MealPlanEditorView: View {
         self._isSearchFieldFocused = isSearchFieldFocused
         self._planPreviewToLoad = State(initialValue: planPreview)
         self.sourceAIGenerationJobID = sourceAIGenerationJobID
+        self.onDismissSearch = onDismissSearch
 
         if let plan = planToEdit {
             _name = State(initialValue: plan.name)
@@ -177,6 +180,21 @@ struct MealPlanEditorView: View {
                    .blur(radius: loadingOperation != .none ? 1.5 : 0)
                    .disabled(loadingOperation != .none)
                    
+                if let foodToView = foodItemToView {
+                    FoodItemDetailView(
+                        food: foodToView,
+                        profile: profile,
+                        onDismiss: {
+                            withAnimation(.easeInOut) {
+                                foodItemToView = nil
+                                navBarIsHiden = false
+                            }
+                        }
+                    )
+                    .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                    .zIndex(20)
+                    .onAppear { navBarIsHiden = true }
+                }
                    // +++ НАЧАЛО НА ПРОМЯНАТА: FoodSearchPanelView +++
                    if isSearchFieldFocused {
                        let focusBinding = Binding<Bool>(
@@ -244,6 +262,7 @@ struct MealPlanEditorView: View {
                         if !isSearchFieldFocused &&
                             loadingOperation == .none &&
                             !showAlert, openMenu == .none &&
+                            foodItemToView == nil &&
                             GlobalState.aiAvailability != .deviceNotEligible {
                             AIButton(geometry: geometry)
                         }
@@ -732,7 +751,7 @@ struct MealPlanEditorView: View {
             if !meal.entries.isEmpty {
                 if let dayIndex = days.firstIndex(where: { $0.id == day.id }),
                    let mealIndex = days[dayIndex].meals.firstIndex(where: { $0.id == meal.id }) {
-
+                    
                     ForEach($days[dayIndex].meals[mealIndex].entries) { $entry in
                         MealPlanEntryRowView(
                             entry: $entry,
@@ -742,6 +761,27 @@ struct MealPlanEditorView: View {
                                 removeEntry(entry, from: meal)
                             }
                         )
+                        // +++ ДОБАВЕТЕ ТОВА +++
+                        .contextMenu {
+                            if let food = entry.food {
+                                Button {
+                                    withAnimation(.easeInOut) {
+                                        onDismissSearch()
+                                        foodItemToView = food
+                                        navBarIsHiden = true
+                                    }
+                                } label: {
+                                    Label("View Details", systemImage: "info.circle")
+                                }
+                            }
+                            
+                            Button(role: .destructive) {
+                                removeEntry(entry, from: meal)
+                            } label: {
+                                Label("Remove", systemImage: "trash")
+                            }
+                        }
+                        // +++ КРАЙ НА ДОБАВКАТА +++
                         .id(entry.id)
                     }
                 }
