@@ -1,8 +1,6 @@
 import Foundation
 import SwiftData
 
-// FILE: /Users/aleksandarsvinarov/Desktop/Repo/vitahealth2/WiseEating/Meal/Models/MealPlanMeal.swift
-
 @Model
 public final class MealPlanMeal: Identifiable {
     @Attribute(.unique) public var id: UUID

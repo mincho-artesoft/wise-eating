@@ -23,7 +23,12 @@ struct DatabaseSetup {
             TrainingPlan.self, TrainingPlanDay.self,
             TrainingPlanWorkout.self, TrainingPlanExercise.self,
             ProductBucket.self, VocabularyEntry.self,
-            Node.self, SearchIndexCache.self
+            Node.self, SearchIndexCache.self,
+            Prompt.self, Requirement.self,
+            FoodPhoto.self,IngredientLink.self,
+            LipidsData.self, MacronutrientsData.self,
+            MineralsData.self, OtherCompoundsData.self,
+            VitaminsData.self, Batch.self
         ])
         
         do {

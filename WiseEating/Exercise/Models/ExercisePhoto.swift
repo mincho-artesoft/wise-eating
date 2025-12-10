@@ -1,11 +1,3 @@
-//
-//  ExercisePhoto.swift
-//  WiseEating
-//
-//  Created by Aleksandar Svinarov on 15/9/25.
-//
-
-
 import SwiftData
 import Foundation
 

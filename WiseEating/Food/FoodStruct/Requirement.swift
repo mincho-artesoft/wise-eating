@@ -1,7 +1,7 @@
 import SwiftData
 import Foundation
 
-@Model                               // 👈 tells SwiftData to synthesize PersistentModel conformance
+@Model
 public final class Requirement: Identifiable, Hashable {
     @Attribute(.unique) public var id = UUID()          // primary key
     public var demographic: String
