@@ -5,7 +5,7 @@ import PhotosUI
 
 @MainActor
 struct AddEditDietView: View {
-    
+    @State private var pendingAIJobIDToDeleteOnSave: UUID? = nil
     // MARK: - AI State
     @ObservedObject private var aiManager = AIManager.shared
     @State private var hasUserMadeEdits: Bool = false
@@ -459,6 +459,7 @@ struct AddEditDietView: View {
                 diet.foods = stagingFoods
                 do {
                     try modelContext.save()
+                    cleanupPendingAIJobIfNeeded()
                     dismissKeyboardAndSearch()
                     onDismiss(diet)
                 } catch {
@@ -467,6 +468,7 @@ struct AddEditDietView: View {
                 }
                 return
             }
+
             // CUSTOM DIET: rename + update foods
             guard !trimmedName.isEmpty else {
                 alertMessage = "The diet name cannot be empty."
@@ -488,6 +490,7 @@ struct AddEditDietView: View {
                 diet.id   = trimmedName
                 diet.foods = stagingFoods
                 try modelContext.save()
+                cleanupPendingAIJobIfNeeded()
                 dismissKeyboardAndSearch()
                 onDismiss(diet)
             } catch {
@@ -512,6 +515,7 @@ struct AddEditDietView: View {
                 newDiet.foods = stagingFoods
                 modelContext.insert(newDiet)
                 try modelContext.save()
+                cleanupPendingAIJobIfNeeded()
                 dismissKeyboardAndSearch()
                 onDismiss(newDiet)
             } catch {
@@ -520,7 +524,20 @@ struct AddEditDietView: View {
             }
         }
     }
-    
+    private func cleanupPendingAIJobIfNeeded() {
+        guard let pendingID = pendingAIJobIDToDeleteOnSave,
+              let job = aiManager.jobs.first(where: { $0.id == pendingID }) else {
+            return
+        }
+
+        // Изтриваме job-а асинхронно, за да не правим saveDiet() async
+        Task {
+            await aiManager.deleteJob(job)
+        }
+
+        pendingAIJobIDToDeleteOnSave = nil
+    }
+
     // --- AI Floating Button: Helpers ---
     private func aiBottomPadding(for geometry: GeometryProxy) -> CGFloat {
         let size = geometry.size
@@ -818,7 +835,7 @@ struct AddEditDietView: View {
             alertMessage = "The AI job finished without data."
             showAlert = true
             runningGenerationJobID = nil
-            await aiManager.deleteJob(job)
+            await aiManager.deleteJob(job)   // при този кейс все още трием веднага
             return
         }
         
@@ -834,7 +851,7 @@ struct AddEditDietView: View {
             alertMessage = "Could not decode the generated diet data. \(error.localizedDescription)"
             showAlert = true
             runningGenerationJobID = nil
-            await aiManager.deleteJob(job)
+            await aiManager.deleteJob(job)   // при decode грешка – пак чистим
             return
         }
         
@@ -847,7 +864,7 @@ struct AddEditDietView: View {
             alertMessage = "Failed to load foods for the generated diet. \(error.localizedDescription)"
             showAlert = true
             runningGenerationJobID = nil
-            await aiManager.deleteJob(job)
+            await aiManager.deleteJob(job)   // при fetch грешка – чистим
             return
         }
         
@@ -859,16 +876,20 @@ struct AddEditDietView: View {
         
         withAnimation(.easeInOut) {
             self.name = payload.suggestedName
-            self.stagingFoods = fetched.sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
+            self.stagingFoods = fetched.sorted {
+                $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending
+            }
         }
         
         toastTimer?.invalidate()
         toastTimer = nil
         withAnimation { showAIGenerationToast = false }
         
-        await aiManager.deleteJob(job)
+        // ❗️ТУК ВЕЧЕ НЕ ТРИЕМ job-а веднага
+        pendingAIJobIDToDeleteOnSave = jobID
         runningGenerationJobID = nil
     }
+
     
     private func triggerAIGenerationToast() {
         toastTimer?.invalidate()

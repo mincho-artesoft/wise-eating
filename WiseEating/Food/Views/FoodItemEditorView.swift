@@ -4,6 +4,7 @@ import PhotosUI
 
 @MainActor
 struct FoodItemEditorView: View {
+    @State private var pendingAIJobIDToDeleteOnSave: UUID? = nil
     @State private var showPhotoSourceDialog = false
     @State private var isShowingCameraPicker = false
     @State private var isShowingPhotoLibraryPicker = false
@@ -315,54 +316,57 @@ struct FoodItemEditorView: View {
     }
     
     private func populateFromCompletedJob(jobID: UUID) async {
-           guard let job = (aiManager.jobs.first { $0.id == jobID }),
-                 let resultData = job.resultData else {
-               alertMsg = "Could not find completed job data."
-               showAlert = true
-               runningGenerationJobID = nil
-               return
-           }
+        guard let job = (aiManager.jobs.first { $0.id == jobID }),
+              let resultData = job.resultData else {
+            alertMsg = "Could not find completed job data."
+            showAlert = true
+            runningGenerationJobID = nil
+            return
+        }
 
-           if #available(iOS 26.0, *) {
-               do {
-                   let response = try JSONDecoder().decode(FoodItemDTO.self, from: resultData)
-                   let generator = AIFoodDetailGenerator(container: ctx.container)
-                   let mapped = try generator.mapResponseToState(dto: response, ctx: ctx)
+        if #available(iOS 26.0, *) {
+            do {
+                let response = try JSONDecoder().decode(FoodItemDTO.self, from: resultData)
+                let generator = AIFoodDetailGenerator(container: ctx.container)
+                let mapped = try generator.mapResponseToState(dto: response, ctx: ctx)
 
-                   withAnimation(.easeInOut) {
-                       self.itemDescription    = mapped.description
-                       self.minAgeMonthsTxt    = mapped.minAgeMonthsTxt
-                       self.selectedCategories = mapped.categories
-                       self.selectedAllergens  = mapped.allergens
-                       self.macros             = mapped.macros
-                       self.others             = mapped.others
-                       self.vitamins           = mapped.vitamins
-                       self.minerals           = mapped.minerals
-                       self.lipids             = mapped.lipids
-                       self.aminoAcids         = mapped.aminoAcids
-                       self.carbDetails        = mapped.carbDetails
-                       self.sterols            = mapped.sterols
-                       self.selectedDiets      = mapped.diets
+                withAnimation(.easeInOut) {
+                    self.itemDescription    = mapped.description
+                    self.minAgeMonthsTxt    = mapped.minAgeMonthsTxt
+                    self.selectedCategories = mapped.categories
+                    self.selectedAllergens  = mapped.allergens
+                    self.macros             = mapped.macros
+                    self.others             = mapped.others
+                    self.vitamins           = mapped.vitamins
+                    self.minerals           = mapped.minerals
+                    self.lipids             = mapped.lipids
+                    self.aminoAcids         = mapped.aminoAcids
+                    self.carbDetails        = mapped.carbDetails
+                    self.sterols            = mapped.sterols
+                    self.selectedDiets      = mapped.diets
 
-                       if let weightGrams = mapped.others.weightG?.value {
-                           let displayValue = isImperial ? UnitConversion.gToOz(weightGrams) : weightGrams
-                           self.servingWeightString = GlobalState.formatDecimalString(String(displayValue))
-                       } else {
-                           self.servingWeightString = ""
-                       }
-                   }
-                   
-                   await aiManager.deleteJob(job)
-                   runningGenerationJobID = nil
+                    if let weightGrams = mapped.others.weightG?.value {
+                        let displayValue = isImperial ? UnitConversion.gToOz(weightGrams) : weightGrams
+                        self.servingWeightString = GlobalState.formatDecimalString(String(displayValue))
+                    } else {
+                        self.servingWeightString = ""
+                    }
+                }
 
-               } catch {
-                   alertMsg = "Failed to process AI data: \(error.localizedDescription)"
-                   showAlert = true
-                   runningGenerationJobID = nil
-                   await aiManager.deleteJob(job)
-               }
-           }
-       }
+                // ❗️ВЕЧЕ НЕ ТРИЕМ job-а тук
+                runningGenerationJobID = nil
+                pendingAIJobIDToDeleteOnSave = jobID
+
+            } catch {
+                alertMsg = "Failed to process AI data: \(error.localizedDescription)"
+                showAlert = true
+                runningGenerationJobID = nil
+                // При грешка все още чистим
+                await aiManager.deleteJob(job)
+            }
+        }
+    }
+
     @ViewBuilder
     private var customToolbar: some View {
         HStack {
@@ -936,6 +940,8 @@ struct FoodItemEditorView: View {
                 // Тези два реда са ключови и трябва да са СЛЕД ctx.save()
                 SearchIndexStore.shared.updateItem(item, context: ctx)
                 
+                cleanupPendingAIJobIfNeeded()
+
                 onDismiss(item)
             } catch {
                 let nsErr = error as NSError
@@ -1731,6 +1737,21 @@ extension FoodItemEditorView {
             .gesture(aiDragGesture(geometry: geometry))
             .transition(.scale.combined(with: .opacity))
     }
+    
+    private func cleanupPendingAIJobIfNeeded() {
+        guard let pendingID = pendingAIJobIDToDeleteOnSave,
+              let job = aiManager.jobs.first(where: { $0.id == pendingID }) else {
+            return
+        }
+
+        // Трием асинхронно, за да не правим save() async
+        Task {
+            await aiManager.deleteJob(job)
+        }
+
+        pendingAIJobIDToDeleteOnSave = nil
+    }
+
 }
 
 extension FoodItemEditorView.OpenMenu {

@@ -12,6 +12,7 @@ struct ExerciseItemEditorView: View {
     @State private var toastProgress: Double = 0.0
     @State private var alertMsg = ""
     @State private var isBannerAdLoaded: Bool = false
+    @State private var pendingAIJobIDToDeleteOnSave: UUID? = nil
 
     // --- Photo source state (като при FoodItemReceptEditorView) ---
     private enum PhotoSourceTarget {
@@ -692,12 +693,21 @@ struct ExerciseItemEditorView: View {
 
             do {
                 try ctx.save()
+
+                // ✅ Ако има завършен AI job, го трием чак сега – при успешно Save
+                if let pendingID = pendingAIJobIDToDeleteOnSave,
+                   let job = aiManager.jobs.first(where: { $0.id == pendingID }) {
+                    await aiManager.deleteJob(job)
+                    pendingAIJobIDToDeleteOnSave = nil
+                }
+
                 onDismiss(itemToSave)
             } catch {
                 alertMessage = "Failed to save exercise: \(error.localizedDescription)"
                 showAlert = true
                 isSaving = false
             }
+
         }
     }
     
@@ -841,23 +851,27 @@ struct ExerciseItemEditorView: View {
             let mapped = generator.mapResponseToState(dto: response)
 
             withAnimation(.easeInOut) {
-                self.description = mapped.description
-                self.metValueString = mapped.metValueString
+                self.description         = mapped.description
+                self.metValueString      = mapped.metValueString
                 self.selectedMuscleGroups = mapped.selectedMuscleGroups
-                self.selectedSports = mapped.selectedSports
-                self.minAgeMonthsTxt = mapped.minAgeMonthsTxt
+                self.selectedSports      = mapped.selectedSports
+                self.minAgeMonthsTxt     = mapped.minAgeMonthsTxt
             }
-            
-            await aiManager.deleteJob(job)
+
+            // ❗️Не трием job-а тук – само отбелязваме, че трябва да се изтрие при Save
             runningGenerationJobID = nil
+            pendingAIJobIDToDeleteOnSave = jobID
 
         } catch {
             alertMessage = "Failed to process AI data: \(error.localizedDescription)"
             showAlert = true
             runningGenerationJobID = nil
+
+            // При грешка все пак чистим job-а
             await aiManager.deleteJob(job)
         }
     }
+
 
     @ViewBuilder
     private var aiGenerationToast: some View {

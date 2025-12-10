@@ -3,6 +3,7 @@ import SwiftData
 
 @MainActor
 struct TrainingPlanEditorView: View {
+    @State private var pendingAIJobIDToDeleteOnSave: UUID? = nil
     @State private var isBannerAdLoaded: Bool = false
     @ObservedObject private var aiManager = AIManager.shared
     @State private var hasUserMadeEdits: Bool = false
@@ -955,6 +956,11 @@ struct TrainingPlanEditorView: View {
             
             do {
                 try modelContext.save()
+                if let pendingID = pendingAIJobIDToDeleteOnSave,
+                   let job = aiManager.jobs.first(where: { $0.id == pendingID }) {
+                    await aiManager.deleteJob(job)
+                    pendingAIJobIDToDeleteOnSave = nil
+                }
                 onDismiss(planToSave)
             } catch {
                 alertMessage = "Failed to save plan. Error: \(error.localizedDescription)"
@@ -1463,7 +1469,7 @@ struct TrainingPlanEditorView: View {
         toastTimer?.invalidate(); toastTimer = nil
         withAnimation { showAIGenerationToast = false }
         
-        await aiManager.deleteJob(byID: jobID)
+        pendingAIJobIDToDeleteOnSave = jobID
         runningGenerationJobID = nil
     }
     

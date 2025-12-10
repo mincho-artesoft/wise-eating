@@ -3,7 +3,8 @@ import SwiftData
 
 @MainActor
 struct MealPlanEditorView: View {
-    
+    @State private var pendingAIJobIDToDeleteOnSave: UUID? = nil
+
     @State private var isBannerAdLoaded: Bool = false
     // MARK: - AI & Prompts State
     @Query(sort: \Prompt.creationDate, order: .reverse) private var allPrompts: [Prompt]
@@ -274,22 +275,27 @@ struct MealPlanEditorView: View {
                    recalculateAndValidateMinAge()
                }
             .onReceive(NotificationCenter.default.publisher(for: .aiJobCompletedMealPlan)) { notification in
-                       guard !hasUserMadeEdits,
-                             let userInfo = notification.userInfo,
-                             let completedJobID = userInfo["jobID"] as? UUID else {
-                           return
-                       }
+                guard let userInfo = notification.userInfo,
+                      let completedJobID = userInfo["jobID"] as? UUID else {
+                    return
+                }
 
-                       print("▶️ MealPlanEditorView: Received .aiJobCompletedMealPlan for job \(completedJobID).")
-                       
-                       let descriptor = FetchDescriptor<AIGenerationJob>(predicate: #Predicate { $0.id == completedJobID })
-                       if let job = (try? modelContext.fetch(descriptor))?.first, let preview = job.result {
-                           Task {
-                               await populateFromPreview(preview)
-                               await aiManager.deleteJob(job)
-                           }
-                       }
-                   }
+                // 🔑 Запомняме го, за да го изтрием при Save
+                pendingAIJobIDToDeleteOnSave = completedJobID
+
+                // Ако потребителят вече е пипал плана, не пипаме UI-то
+                guard !hasUserMadeEdits else { return }
+
+                print("▶️ MealPlanEditorView: Received .aiJobCompletedMealPlan for job \(completedJobID).")
+
+                let descriptor = FetchDescriptor<AIGenerationJob>(predicate: #Predicate { $0.id == completedJobID })
+                if let job = (try? modelContext.fetch(descriptor))?.first,
+                   let preview = job.result {
+                    Task {
+                        await populateFromPreview(preview)
+                    }
+                }
+            }
                    .onChange(of: name) { _, _ in hasUserMadeEdits = true }
                    .onChange(of: minAgeMonthsTxt) { _, _ in hasUserMadeEdits = true }
                    .task(id: planPreviewToLoad?.id) {
@@ -301,24 +307,34 @@ struct MealPlanEditorView: View {
                    .onChange(of: aiManager.jobs) { _, newJobs in
                        guard let runningID = runningGenerationJobID,
                              let completedJob = newJobs.first(where: { $0.id == runningID }) else { return }
-                       
+
                        loadingOperation = .none
 
-                       if completedJob.status == .completed {
+                       switch completedJob.status {
+                       case .completed:
+                           // 🔑 Отбелязваме job-а за изтриване при Save
+                           pendingAIJobIDToDeleteOnSave = completedJob.id
+                           runningGenerationJobID = nil
+
                            if !hasUserMadeEdits, let preview = completedJob.result {
                                Task {
                                    await populateFromPreview(preview)
-                                   await aiManager.deleteJob(completedJob)
-                                   runningGenerationJobID = nil
                                }
                            }
-                       } else if completedJob.status == .failed {
+
+                       case .failed:
                            alertMessage = "AI generation failed: \(completedJob.failureReason ?? "Unknown error")"
                            showAlert = true
+
+                           // По желание: можем пак да го маркираме за чистене при Save
+                           pendingAIJobIDToDeleteOnSave = completedJob.id
                            runningGenerationJobID = nil
-                           Task { await aiManager.deleteJob(completedJob) }
+
+                       default:
+                           break
                        }
                    }
+
             .onChange(of: selectedPromptIDs) { _, newSelection in
                            saveSelectedPromptIDs(newSelection)
                        }
@@ -813,6 +829,12 @@ struct MealPlanEditorView: View {
             do {
                 try modelContext.save()
 
+                if let pendingID = pendingAIJobIDToDeleteOnSave,
+                                 let job = aiManager.jobs.first(where: { $0.id == pendingID }) {
+                                  await aiManager.deleteJob(job)
+                                  pendingAIJobIDToDeleteOnSave = nil
+                              }
+                
                 if let jobID = sourceAIGenerationJobID {
                     let predicate = #Predicate<AIGenerationJob> { $0.id == jobID }
                     let descriptor = FetchDescriptor(predicate: predicate)
