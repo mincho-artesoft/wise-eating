@@ -4,6 +4,8 @@ import PhotosUI
 
 @MainActor
 struct FoodItemReceptEditorView: View {
+    @State private var pendingAIJobIDToDeleteOnSave: UUID? = nil
+
     // MARK: - Photo source state
     @State private var isBannerAdLoaded: Bool = false
 
@@ -1106,6 +1108,11 @@ struct FoodItemReceptEditorView: View {
             do {
                 try ctx.save()
                 SearchIndexStore.shared.updateItem(recipe, context: ctx)
+                if let pendingID = pendingAIJobIDToDeleteOnSave,
+                                  let job = aiManager.jobs.first(where: { $0.id == pendingID }) {
+                                   await aiManager.deleteJob(job)
+                                   pendingAIJobIDToDeleteOnSave = nil
+                               }
                 onDismiss(recipe)
             } catch {
                 alertMsg = error.localizedDescription
@@ -2078,7 +2085,7 @@ struct FoodItemReceptEditorView: View {
             alertMsg = "Could not decode the generated recipe data."
             showAlert = true
             runningGenerationJobID = nil
-            await aiManager.deleteJob(job)
+            pendingAIJobIDToDeleteOnSave = jobID
             return
         }
         // --- КРАЙ НА ПРОМЯНАТА (1/2) ---

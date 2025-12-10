@@ -4,6 +4,7 @@ import PhotosUI
 
 @MainActor
 struct WorkoutEditorView: View {
+    @State private var pendingAIJobIDToDeleteOnSave: UUID? = nil
     private enum PhotoSourceTarget { case main, gallery, galleryReplace(index: Int) }
     @State private var showPhotoSourceDialog = false
     @State private var showCameraPicker = false
@@ -1180,6 +1181,11 @@ struct WorkoutEditorView: View {
             
             do {
                 try modelContext.save()
+                if let pendingID = pendingAIJobIDToDeleteOnSave,
+                   let job = aiManager.jobs.first(where: { $0.id == pendingID }) {
+                    await aiManager.deleteJob(job)
+                    pendingAIJobIDToDeleteOnSave = nil
+                }
                 onDismiss(itemToSave)
             } catch {
                 alertMessage = "Failed to save workout: \(error.localizedDescription)"
@@ -1397,7 +1403,7 @@ struct WorkoutEditorView: View {
         toastTimer = nil
         withAnimation { showAIGenerationToast = false }
         
-        await aiManager.deleteJob(byID: jobID)
+        pendingAIJobIDToDeleteOnSave = jobID
         runningGenerationJobID = nil
     }
     
