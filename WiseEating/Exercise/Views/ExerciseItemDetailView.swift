@@ -101,6 +101,7 @@ struct ExerciseItemDetailView: View {
                     )
                 )
             }
+            .background(ThemeBackgroundView().ignoresSafeArea())
             .opacity(isShowingLinkedNodes ? 0 : 1)
             .allowsHitTesting(!isShowingLinkedNodes)
 

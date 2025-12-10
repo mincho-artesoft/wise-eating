@@ -160,6 +160,8 @@ struct MealPlanEntryRowView: View {
         .padding(.vertical, 5)
         .padding(.horizontal, 10)
         .glassCardStyle(cornerRadius: 20)
+        .contentShape(RoundedRectangle(cornerRadius: 20))
+
         .onChange(of: textValue) { _, newText in
             processChange(newText: newText)
         }

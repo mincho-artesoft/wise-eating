@@ -583,7 +583,8 @@ struct FoodItemListView: View {
                 navBarIsHiden: $navBarIsHiden,
                 globalSearchText: $globalSearchText,
                 isSearchFieldFocused: self.$isSearchFieldFocused,
-                onDismiss: onPlanEditorDismiss
+                onDismiss: onPlanEditorDismiss,
+                onDismissSearch: onDismissSearch
             )
         case .editPlan(let plan):
             MealPlanEditorView(
@@ -592,7 +593,8 @@ struct FoodItemListView: View {
                 navBarIsHiden: $navBarIsHiden,
                 globalSearchText: $globalSearchText,
                 isSearchFieldFocused: self.$isSearchFieldFocused,
-                onDismiss: onPlanEditorDismiss
+                onDismiss: onPlanEditorDismiss,
+                onDismissSearch: onDismissSearch
             )
         case .detailPlan(let plan):
             MealPlanDetailView(plan: plan, profile: self.profile!, onDismiss: onPlanEditorDismiss, navBarIsHiden: $navBarIsHiden)

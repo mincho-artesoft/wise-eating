@@ -687,7 +687,9 @@ struct ExerciseListView: View {
                 profile: profile!,
                 globalSearchText: $globalSearchText,
                 isSearchFieldFocused: self.$isSearchFieldFocused,
-                onDismiss: onPlanEditorDismiss
+                onDismiss: onPlanEditorDismiss,
+                navBarIsHiden: $navBarIsHiden,
+                onDismissSearch: onDismissSearch
             )
         case .editPlan(let plan):
             TrainingPlanEditorView(
@@ -695,7 +697,9 @@ struct ExerciseListView: View {
                 planToEdit: plan,
                 globalSearchText: $globalSearchText,
                 isSearchFieldFocused: self.$isSearchFieldFocused,
-                onDismiss: onPlanEditorDismiss
+                onDismiss: onPlanEditorDismiss,
+                navBarIsHiden: $navBarIsHiden,
+                onDismissSearch: onDismissSearch
             )
         case .detailPlan(let plan):
             TrainingPlanDetailView(plan: plan, profile: profile!, onDismiss: onPlanDetailDismiss, navBarIsHiden: $navBarIsHiden)

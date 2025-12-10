@@ -4,7 +4,8 @@ import Combine
 import EventKit
 
 struct NutritionsDetailView: View {
-    
+    @State private var foodItemToView: FoodItem? = nil
+
     @State private var isShowingDeleteNodeConfirmation = false
     @State private var nodeToDelete: Node? = nil
     @State private var nodesForDay: [Node] = []
@@ -209,6 +210,8 @@ struct NutritionsDetailView: View {
         if mealPlanDraftForEditor != nil { return false }
         if isShowingDailyAIGenerator { return false }
         if presentedNode != nil { return false }
+        if foodItemToView != nil { return false }
+
         return true
     }
     
@@ -250,6 +253,22 @@ struct NutritionsDetailView: View {
                     viewWithLifeCycle
                 }
                 
+                if let foodToView = foodItemToView {
+                    FoodItemDetailView(
+                        food: foodToView,
+                        profile: profile,
+                        onDismiss: {
+                            withAnimation(.easeInOut) {
+                                foodItemToView = nil
+                                navBarIsHiden = false
+                            }
+                        }
+                    )
+                    .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                    .zIndex(20)
+                    .onAppear { navBarIsHiden = true }
+                }
+                    
                 if let plan = mealPlanForEditor {
                     MealPlanEditorView(
                         profile: self.profile,
@@ -262,7 +281,8 @@ struct NutritionsDetailView: View {
                                 mealPlanForEditor = nil
                                 navBarIsHiden = false
                             }
-                        }
+                        },
+                        onDismissSearch: onInternalFieldFocused
                     )
                     .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                     .zIndex(10)
@@ -284,7 +304,8 @@ struct NutritionsDetailView: View {
                                     globalSearchText = ""
                                 }
                             }
-                        }
+                        },
+                        onDismissSearch: onInternalFieldFocused
                     )
                     .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                     .zIndex(10)
@@ -991,35 +1012,52 @@ struct NutritionsDetailView: View {
                                     requestedGrams: currentFoods.wrappedValue[item] ?? 0
                                 )
                                 
-                                VStack(spacing: 0) {
-                                    SelectedFoodRowView(
-                                        item: item,
-                                        grams: currentFoods.wrappedValue[item] ?? 0,
-                                        isStockSufficient: isSufficient,
-                                        onGramsChanged: { newGrams in
-                                            updateStorageAndMeal(for: item, newGrams: newGrams)
-                                        },
-                                        focusedField: $focusedGramsField,
-                                        expandedItemID: $expandedFoodItemID
-                                    )
-                                    
-                                    // 👇 Добавяме реклама след определени редове
-                                    if shouldShowAd(at: index) {
-                                        AdRowView()
-                                            .padding(.top, 8)
-                                            .padding(.bottom, 8)
-                                            .transition(.opacity)
-                                        
-                                    }
-                                }
-                                .id(item.id)
-                                .padding(.bottom, 4)
+                                // 1. Първи "Ред": Самата храна (Извадена от VStack)
+                                SelectedFoodRowView(
+                                    item: item,
+                                    grams: currentFoods.wrappedValue[item] ?? 0,
+                                    isStockSufficient: isSufficient,
+                                    onGramsChanged: { newGrams in
+                                        updateStorageAndMeal(for: item, newGrams: newGrams)
+                                    },
+                                    focusedField: $focusedGramsField,
+                                    expandedItemID: $expandedFoodItemID
+                                )
+                                .id(item.id) // ID-то отива тук
+                                .padding(.bottom, 4) // Падингът отива тук
                                 .listRowBackground(Color.clear)
                                 .listRowSeparator(.hidden)
                                 .listRowInsets(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
+                                // Context Menu е само за този ред
+                                .contextMenu {
+                                    Button {
+                                        withAnimation(.easeInOut) {
+                                            onInternalFieldFocused()
+                                            foodItemToView = item
+                                            navBarIsHiden = true
+                                        }
+                                    } label: {
+                                        Label("View Details", systemImage: "info.circle")
+                                    }
+                                    
+                                    Button(role: .destructive) {
+                                        if #available(iOS 26.0, *) {
+                                            withAnimation {
+                                                deleteFoodFromMeal(item)
+                                                scheduleAutosave()
+                                            }
+                                        } else {
+                                            self.itemToDelete = item
+                                            self.isShowingDeleteItemConfirmation = true
+                                        }
+                                    } label: {
+                                        Label("Remove from Meal", systemImage: "trash")
+                                    }
+                                }
+                                // Swipe Actions са само за този ред
                                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                                     Button(role: .destructive) {
-                                        if #available(iOS 16.0, *) {
+                                        if #available(iOS 26.0, *) {
                                             withAnimation {
                                                 deleteFoodFromMeal(item)
                                                 scheduleAutosave()
@@ -1035,9 +1073,20 @@ struct NutritionsDetailView: View {
                                     }
                                     .tint(.clear)
                                 }
+
+                                // 2. Втори "Ред": Реклама (ако е необходимо)
+                                // Тъй като не са в общ VStack, List ги възприема като два последователни реда.
+                                if shouldShowAd(at: index) {
+                                    AdRowView()
+                                        .padding(.top, 8)
+                                        .padding(.bottom, 8)
+                                        .transition(.opacity)
+                                        .listRowBackground(Color.clear)
+                                        .listRowSeparator(.hidden)
+                                        .listRowInsets(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
+                                }
                             }
 
-                            
                             Color.clear
                                 .frame(height: 150)
                                 .listRowBackground(Color.clear)
