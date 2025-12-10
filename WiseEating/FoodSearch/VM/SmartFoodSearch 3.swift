@@ -13,8 +13,8 @@ fileprivate struct ProfileSearchConstraints: Sendable {
 }
 
 @MainActor
-class SmartFoodSearch3: ObservableObject {
-    
+final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
+
     // MARK: - Public Enums
     public enum SearchMode: String, CaseIterable, Identifiable, Sendable {
         case nutrients = "Nutrients"
@@ -192,8 +192,20 @@ class SmartFoodSearch3: ObservableObject {
                 return names
             }()
             
-            searchTask = Task(priority: .userInitiated) {
-                try? await Task.sleep(nanoseconds: 50_000_000) // 50ms debounce
+            searchTask = Task.detached(
+                priority: .userInitiated
+            ) { [weak self,
+                 snapshotAllFoods,
+                 snapshotMap,
+                 snapshotIndex,
+                 snapshotVocab,
+                 snapshotMaxValues,
+                 snapshotRankings,
+                 snapshotExcludedIDs] in
+                
+                // 🛑 Ако вече сме деинициализирани – спираме
+                guard let self else { return }
+                
                 if Task.isCancelled { return }
                 
                 // Expand dynamic OR variants based on the canonical query.
@@ -247,7 +259,9 @@ class SmartFoodSearch3: ObservableObject {
                     return
                 }
                 
-                await MainActor.run {
+                await MainActor.run { [weak self] in
+                    guard let self else { return }
+                    
                     print("✅ [SmartSearch] Updating UI on MainActor. Aggregated IDs: \(orderedResultIDs.count)")
                     
                     self.fullResultIDs = orderedResultIDs
@@ -266,6 +280,7 @@ class SmartFoodSearch3: ObservableObject {
                     }
                 }
             }
+
         }
     
     private func showDefaultResultsIfPossible() {
