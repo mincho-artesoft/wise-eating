@@ -242,11 +242,24 @@ struct Tokenizer {
         var activeOperator: OpToken? = nil
         var activeContext: ActiveContext = .none
 
-        var pendingConstraints: [(OpToken, Double)] = []
-        var pendingImplicitValue: Double? = nil
+        var pendingConstraints: [(op: OpToken, value: Double, unit: String?)] = []
+        var pendingImplicitValue: (value: Double, unit: String?)? = nil
 
         var i = 0
         while i < words.count {
+            func extractUnit(after index: Int) -> (String?, Int) {
+                guard index + 1 < words.count else { return (nil, 0) }
+                let candidate = words[index + 1].lowercased()
+                let knownUnits: Set<String> = [
+                    "mg", "g", "kg", "mcg", "ug", "µg",
+                    "ng", "ml", "l", "oz", "lb", "lbs",
+                    "kcal", "kj"
+                ]
+                if knownUnits.contains(candidate) {
+                    return (candidate, 1)
+                }
+                return (nil, 0)
+            }
             let word = words[i]
             var consumed = false
 
@@ -325,8 +338,8 @@ struct Tokenizer {
             else if SearchKnowledgeBase.shared.phKeywords.contains(word) {
                 // If we have pending constraints waiting, apply them to PH
                 if !pendingConstraints.isEmpty {
-                    for (op, val) in pendingConstraints {
-                        phGoal = convertToPhConstraint(op: op, val: val)
+                    for pending in pendingConstraints {
+                        phGoal = convertToPhConstraint(op: pending.op, val: pending.value)
                     }
                     pendingConstraints.removeAll()
                 }
@@ -342,18 +355,24 @@ struct Tokenizer {
 
             // F. Number
             else if let val = percentValue ?? Double(word) {
+                let (explicitUnit, skipCount) = extractUnit(after: i)
+                if skipCount > 0 {
+                    i += skipCount
+                }
                 // Apply to active context
                 switch activeContext {
                 case .nutrient(let nut):
+                    let normalizedVal = SmartFoodSearch3.normalizedNumericValue(val, unitString: explicitUnit, for: nut)
+
                     if let op = activeOperator {
-                        applyGoal(nutrient: nut, op: op, val: val, goals: &goals)
+                        applyGoal(nutrient: nut, op: op, val: normalizedVal, goals: &goals)
                         activeOperator = nil
                     } else {
-                        // e.g. "Protein 50" -> Range
                         goals.append(
                             NutrientGoal(
                                 nutrient: nut,
-                                constraint: .range(val - 0.5, val + 0.5)
+                                constraint: .range(normalizedVal - (normalizedVal * 0.01),
+                                                   normalizedVal + (normalizedVal * 0.01))
                             )
                         )
                         activeContext = .none
@@ -373,10 +392,10 @@ struct Tokenizer {
 
                 case .none:
                     if let op = activeOperator {
-                        pendingConstraints.append((op, val))
+                        pendingConstraints.append((op: op, value: val, unit: explicitUnit))
                         activeOperator = nil
                     } else {
-                        pendingImplicitValue = val
+                        pendingImplicitValue = (value: val, unit: explicitUnit)
                     }
                     if wasPercent { textTokens.insert(word) }
                     consumed = true
@@ -386,18 +405,26 @@ struct Tokenizer {
             // G. Nutrient
             else if let nutrient = resolveNutrient(word) {
                 if !pendingConstraints.isEmpty {
-                    for (op, val) in pendingConstraints {
+                    for pending in pendingConstraints {
+                        let normalizedVal = SmartFoodSearch3.normalizedNumericValue(
+                            pending.value,
+                            unitString: pending.unit,
+                            for: nutrient
+                        )
                         applyGoal(
                             nutrient: nutrient,
-                            op: op,
-                            val: val,
+                            op: pending.op,
+                            val: normalizedVal,
                             goals: &goals
                         )
                     }
                     pendingConstraints.removeAll()
                 }
 
-                if let val = pendingImplicitValue {
+                if let implicit = pendingImplicitValue {
+                    let val = implicit.value
+                    let unit = implicit.unit
+
                     var postFixOp: OpToken? = nil
                     if i + 1 < words.count,
                        let nextOp = getOp(words[i + 1]) {
@@ -405,18 +432,25 @@ struct Tokenizer {
                     }
                     let opToUse = postFixOp ?? activeOperator ?? .eq
 
+                    let normalizedVal = SmartFoodSearch3.normalizedNumericValue(
+                        val,
+                        unitString: unit,
+                        for: nutrient
+                    )
+
                     if opToUse == .eq {
                         goals.append(
                             NutrientGoal(
                                 nutrient: nutrient,
-                                constraint: .range(val - 0.1, val + 0.1)
+                                constraint: .range(normalizedVal - (normalizedVal * 0.01),
+                                                   normalizedVal + (normalizedVal * 0.01))
                             )
                         )
                     } else {
                         applyGoal(
                             nutrient: nutrient,
                             op: opToUse,
-                            val: val,
+                            val: normalizedVal,
                             goals: &goals
                         )
                     }
@@ -598,7 +632,13 @@ struct Tokenizer {
         case .gte:
             goals.append(NutrientGoal(nutrient: nutrient, constraint: .min(val)))
         case .eq:
-            goals.append(NutrientGoal(nutrient: nutrient, constraint: .range(val - 0.1, val + 0.1)))
+            let epsilon = max(0.0001, abs(val) * 0.01)
+            goals.append(
+                NutrientGoal(
+                    nutrient: nutrient,
+                    constraint: .range(val - epsilon, val + epsilon)
+                )
+            )
         case .neq:
             goals.append(NutrientGoal(nutrient: nutrient, constraint: .notEqual(val)))
         }
