@@ -1,4 +1,3 @@
-// ==== FILE: /Users/aleksandarsvinarov/Desktop/as/vitahealth-clean/WiseEating/Main/WiseEatingApp.swift ====
 import SwiftUI
 import SwiftData
 
@@ -54,6 +53,7 @@ struct WiseEatingApp: App {
             await AppOpenAdManager.shared.loadAd()      // Open Ad
             await RewardedAdManager.shared.loadAd()     // Video Reward
             await InterstitialAdManager.shared.loadAd() // Fallback Interstitial
+            await RewardedInterstitialAdManager.shared.loadAd() 
             
             // 2. Пулове (списъци) - стартираме ги да се пълнят веднага
             BannerAdPool.shared.warmUp()       // Банери
@@ -84,25 +84,28 @@ struct WiseEatingApp: App {
                             let hasSelectedProfile = settings?.lastSelectedProfile != nil
                             
                             if hasSelectedProfile {
-                                print("🔄 Връщане в приложението (Profile Found): Ще се опита показване на реклама.")
+                                print("🔄 Връщане в приложението (Profile Found).")
 
                                 if coldStart {
-                                    // отбелязваме веднага, че студеното стартиране вече е минало
+                                    // СТУДЕН СТАРТ:
+                                    // Изчакваме 3 секунди и форсираме показването (forceShow: true)
+                                    // защото user-ът иска винаги при старт да има реклама.
                                     coldStart = false
                                     
                                     Task { @MainActor in
                                         try? await Task.sleep(nanoseconds: 3 * 1_000_000_000)
-                                        AppOpenAdManager.shared.showAdIfAvailable()
+                                        AppOpenAdManager.shared.showAdIfAvailable(forceShow: true)
                                     }
                                 } else {
+                                    // ТОПЪЛ СТАРТ (връщане от background):
+                                    // Тук НЕ форсираме, оставяме логиката "на всеки 10-ти" да работи.
                                     Task { @MainActor in
-                                        AppOpenAdManager.shared.showAdIfAvailable()
+                                        AppOpenAdManager.shared.showAdIfAvailable(forceShow: false)
                                     }
                                 }
                             } else {
                                 print("🔕 Връщане в приложението: НЯМА селектиран профил. Рекламата се пропуска.")
-                                // Все пак маркираме coldStart като преминал, за да не се забави рекламата,
-                                // ако потребителят създаде профил и веднага излезе/влезе пак.
+                                // Все пак маркираме coldStart като преминал
                                 coldStart = false
                             }
                         }
