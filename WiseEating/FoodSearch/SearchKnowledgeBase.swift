@@ -49,7 +49,7 @@ class SearchKnowledgeBase: @unchecked Sendable {
         "strictly", "exactly", "roughly", "approximately", "around", "about",
         "just", "almost", "nearly", "virtually",
         "value", "values", "level", "levels", "scale", "balance",
-        "than", "then", "g", "mg", "ug", "kcal", "diet", "diets"
+        "than", "then", "g", "mg", "ug", "mcg", "µg", "kcal", "diet", "diets"
     ]
 
     let negationTerms: Set<String> = [
@@ -378,7 +378,9 @@ class SearchKnowledgeBase: @unchecked Sendable {
     ]
 
     let operatorPhraseMap: [(pattern: String, token: String)] = [
+        // Inclusive "≤" forms (user-friendly)
         ("less than or equal to", "_op_lte_"),
+        ("less than or equal", "_op_lte_"),
         ("no more than", "_op_lte_"),
         ("at most", "_op_lte_"),
         ("max", "_op_lte_"),
@@ -386,10 +388,18 @@ class SearchKnowledgeBase: @unchecked Sendable {
         ("limit", "_op_lte_"),
 
         ("greater than or equal to", "_op_gte_"),
+        ("greater than or equal", "_op_gte_"),
+        ("more than or equal to", "_op_gte_"),
         ("at least", "_op_gte_"),
+        ("no less than", "_op_gte_"),
         ("min", "_op_gte_"),
         ("minimum", "_op_gte_"),
 
+        // Strict forms: only when user explicitly says "strictly"
+        ("strictly less than", "_op_lt_"),
+        ("strictly more than", "_op_gt_"),
+
+        // Plain comparative phrases → inclusive semantics
         ("less than", "_op_lt_"),
         ("lower than", "_op_lt_"),
         ("under", "_op_lt_"),
@@ -400,11 +410,13 @@ class SearchKnowledgeBase: @unchecked Sendable {
         ("over", "_op_gt_"),
         ("above", "_op_gt_"),
 
+        // Equality / inequality
         ("equal to", "_op_eq_"),
         ("not equal", "_op_neq_")
     ]
 
     let comparativeAdjectives: [String: String] = [
+        // Natural language comparatives using strict < / >
         "less": "_op_lt_",
         "lower": "_op_lt_",
         "low": "_op_lt_",

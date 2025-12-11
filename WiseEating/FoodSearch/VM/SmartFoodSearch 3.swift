@@ -1,3 +1,102 @@
+// MARK: - Unit Normalization Helper
+
+extension SmartFoodSearch3 {
+    nonisolated static func normalizedNumericValue(
+        _ value: Double,
+        unitString: String?,
+        for nutrient: NutrientType
+    ) -> Double {
+        // Canonical unit for this nutrient (per 100 g in the DB)
+        let defaultUnitRaw = SearchKnowledgeBase.shared.defaultUnit(for: nutrient)
+        let defaultUnit = defaultUnitRaw
+            .filter { $0.isLetter || $0 == "µ" }
+            .lowercased()
+
+        enum CanonicalKind {
+            case energyKcal
+            case energyKj
+            case grams
+            case milligrams
+            case micrograms
+            case other
+        }
+
+        let canonical: CanonicalKind
+        switch defaultUnit {
+        case "kj":
+            canonical = .energyKj
+        case "kcal", "cal", "calorie", "calories":
+            canonical = .energyKcal
+        case "kg", "gram", "grams", "g":
+            canonical = .grams
+        case "mg", "milligram", "milligrams":
+            canonical = .milligrams
+        case "µg", "ug", "mcg", "microgram", "micrograms":
+            canonical = .micrograms
+        default:
+            canonical = .other
+        }
+
+        var inputUnit = unitString?
+            .filter { $0.isLetter || $0 == "µ" }
+            .lowercased() ?? ""
+
+        if inputUnit.isEmpty {
+            inputUnit = defaultUnit
+        }
+
+        switch canonical {
+        case .energyKcal:
+            switch inputUnit {
+            case "kj":
+                return value / 4.184
+            default:
+                return value
+            }
+
+        case .energyKj:
+            switch inputUnit {
+            case "kcal", "cal", "calorie", "calories":
+                return value * 4.184
+            default:
+                return value
+            }
+
+        case .grams, .milligrams, .micrograms:
+            // First convert input to grams
+            var grams: Double
+            switch inputUnit {
+            case "kg", "kilogram", "kilograms":
+                grams = value * 1000.0
+            case "g", "gram", "grams":
+                grams = value
+            case "mg", "milligram", "milligrams":
+                grams = value / 1000.0
+            case "µg", "ug", "mcg", "microgram", "micrograms":
+                grams = value / 1_000_000.0
+            case "ng":
+                grams = value / 1_000_000_000.0
+            default:
+                grams = value
+            }
+
+            switch canonical {
+            case .grams:
+                return grams
+            case .milligrams:
+                return grams * 1000.0
+            case .micrograms:
+                return grams * 1_000_000.0
+            default:
+                return value
+            }
+
+        case .other:
+            // For dimensionless / percent-type nutrients, just return the raw value
+            return value
+        }
+    }
+}
 import Foundation
 import Combine
 @preconcurrency import NaturalLanguage
@@ -935,9 +1034,14 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                 
                 var passesNutrients = true
                 for goal in intent.nutrientGoals {
-                    let val: Double = (item.referenceWeightG > 0)
+                    // raw per-100 g value from the index
+                    let rawVal: Double = (item.referenceWeightG > 0)
                         ? (item.value(for: goal.nutrient) / item.referenceWeightG) * 100.0
                         : 0.0
+
+                    // 🔢 Round everything to a single decimal place so that
+                    // 45.49 -> 45.5 and comparisons are always done at 0.1 precision.
+                    let val = SmartFoodSearch3.roundToSingleDecimal(rawVal)
 
                     // 🔎 Трактуваме 0 като "липсва данни" при ЧИСЛОВИ ограничения,
                     // за да не минават храни с 0 витамин C при "vitamin c < 2mcg".
@@ -945,26 +1049,49 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                     switch goal.constraint {
                     case .min, .max, .strictMin, .strictMax, .range, .notEqual:
                         isNumericConstraint = true
-                    case .high, .low, .lowest, .highest: // Добавяме новите кейсове и тук за пълнота, макар че не се използват за нутриенти
+                    case .high, .low, .lowest, .highest:
                         isNumericConstraint = false
                     }
 
                     if isNumericConstraint && val == 0 {
                         passesNutrients = false
-                        print("🧪 [SmartSearch] Excluding '\(item.lowercasedName)' for \(goal.nutrient) – numeric constraint \(goal.constraint) but value is exactly 0")
+                        print("🧪 [SmartSearch] Excluding '\\(item.lowercasedName)' for \\(goal.nutrient) – numeric constraint \\(goal.constraint) but rounded value is 0.0")
                         break
                     }
 
+                    // DEBUG: see exactly what we're comparing
+                    print("⚖️ [SmartSearch] Checking \(goal.nutrient) for '\(item.lowercasedName)': valuePer100g(raw=\(rawVal), rounded=\(val)), constraint=\(goal.constraint)")
+
                     switch goal.constraint {
-                    case .min(let v):       if val < v { passesNutrients = false }
-                    case .max(let v):       if val > v { passesNutrients = false }
-                    case .strictMin(let v): if val <= v { passesNutrients = false }
-                    case .strictMax(let v): if val >= v { passesNutrients = false }
-                    case .range(let l, let h): if val < l || val > h { passesNutrients = false }
-                    case .notEqual(let v):  if abs(val - v) < 0.01 { passesNutrients = false }
+                    case .min(let v):
+                        let t = SmartFoodSearch3.roundToSingleDecimal(v)
+                        if val < t { passesNutrients = false }
+
+                    case .max(let v):
+                        let t = SmartFoodSearch3.roundToSingleDecimal(v)
+                        if val > t { passesNutrients = false }
+
+                    case .strictMin(let v):
+                        let t = SmartFoodSearch3.roundToSingleDecimal(v)
+                        if val <= t { passesNutrients = false }
+
+                    case .strictMax(let v):
+                        let t = SmartFoodSearch3.roundToSingleDecimal(v)
+                        if val >= t { passesNutrients = false }
+
+                    case .range(let l, let h):
+                        let lo = SmartFoodSearch3.roundToSingleDecimal(l)
+                        let hi = SmartFoodSearch3.roundToSingleDecimal(h)
+                        if val < lo || val > hi { passesNutrients = false }
+
+                    case .notEqual(let v):
+                        let t = SmartFoodSearch3.roundToSingleDecimal(v)
+                        if val == t { passesNutrients = false }
+
                     case .high:
                         // "high X" – 0 не минава така или иначе
                         if val <= 0 { passesNutrients = false }
+
                     case .low, .lowest, .highest:
                         // "low X" – позволяваме и 0 тук
                         break
@@ -1186,6 +1313,11 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
         return result
     }
     
+    // MARK: - Numeric rounding helper (single decimal place)
+    nonisolated private static func roundToSingleDecimal(_ x: Double) -> Double {
+        (x * 10).rounded() / 10
+    }
+
     // MARK: - Numeric Constraint Parsing (regex engine)
     
     nonisolated private static func parseNumericNutrientConstraints(from query: String) -> [NutrientGoal] {
@@ -1533,115 +1665,6 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
         }
         
         return goals
-    }
-    
-    // MARK: - Unit Normalisation
-    
-    nonisolated private static func normalizedNumericValue(
-        _ value: Double,
-        unitString: String?,
-        for nutrient: NutrientType
-    ) -> Double {
-        // Decide canonical unit based on your data model (default unit for this nutrient)
-        let defaultUnitRaw = SearchKnowledgeBase.shared.defaultUnit(for: nutrient)
-        let defaultUnit = defaultUnitRaw.filter { $0.isLetter || $0 == "µ" }.lowercased()
-        
-        // Classify canonical target
-        enum CanonicalMassUnit {
-            case grams, milligrams, micrograms
-        }
-        
-        let isEnergy: Bool
-        let canonicalMass: CanonicalMassUnit?
-        
-        switch defaultUnit {
-        case "kcal", "cal", "calorie", "calories", "kj":
-            isEnergy = true
-            canonicalMass = nil
-        case "kg", "g", "gram", "grams":
-            isEnergy = false
-            canonicalMass = .grams
-        case "µg", "mcg", "ug", "microgram", "micrograms", "ng":
-            isEnergy = false
-            canonicalMass = .micrograms
-        case "mg", "milligram", "milligrams":
-            fallthrough
-        default:
-            isEnergy = false
-            canonicalMass = .milligrams
-        }
-        
-        print("⚖️ [UnitCheck] Converting \(value) \(unitString ?? "n/a") for \(nutrient)")
-        print("⚖️ [UnitCheck] Default data unit for \(nutrient): '\(defaultUnitRaw)' (canonical: \(canonicalMass.map { "\($0)" } ?? (isEnergy ? "energy" : "unknown")))")
-        
-        // Normalize incoming unit text
-        var inputUnit = ""
-        if let us = unitString {
-            inputUnit = us.filter { $0.isLetter || $0 == "µ" }.lowercased()
-        }
-        
-        // If no unit was provided in the query, assume the default data unit
-        if inputUnit.isEmpty {
-            inputUnit = defaultUnit
-            print("⚖️ [UnitCheck] No unit provided, assuming default data unit '\(inputUnit)' for \(nutrient)")
-        }
-        
-        // Handle energy separately
-        if isEnergy {
-            var energyKcal: Double?
-            switch inputUnit {
-            case "kcal", "cal", "calorie", "calories":
-                energyKcal = value
-            case "kj":
-                energyKcal = value / 4.184
-            default:
-                // If someone typed mg/g etc. for energy, treat the number as already kcal
-                energyKcal = value
-                print("⚖️ [UnitCheck] Unexpected mass unit '\(inputUnit)' for energy; treating \(value) as kcal")
-            }
-            let result = energyKcal ?? value
-            print("🔍 [SmartSearch] Normalizing \(value) [\(inputUnit)] for \(nutrient.rawValue) -> Result: \(result) (kcal)")
-            return result
-        }
-        
-        // Convert any mass-like unit to grams first
-        var grams: Double
-        switch inputUnit {
-        case "kg", "kilogram", "kilograms":
-            grams = value * 1000.0
-            print("⚖️ [UnitCheck] Step 1: \(value) kg -> \(grams) grams")
-        case "g", "gram", "grams":
-            grams = value
-            print("⚖️ [UnitCheck] Step 1: \(value) g -> \(grams) grams")
-        case "mg", "milligram", "milligrams":
-            grams = value / 1000.0
-            print("⚖️ [UnitCheck] Step 1: \(value) mg -> \(grams) grams")
-        case "µg", "mcg", "ug", "microgram", "micrograms":
-            grams = value / 1_000_000.0
-            print("⚖️ [UnitCheck] Step 1: \(value) µg -> \(grams) grams")
-        case "ng":
-            grams = value / 1_000_000_000.0
-            print("⚖️ [UnitCheck] Step 1: \(value) ng -> \(grams) grams")
-        default:
-            grams = value
-            print("⚖️ [UnitCheck] Step 1: Unknown unit '\(inputUnit)', assuming grams/raw: \(grams)")
-        }
-        
-        // Now convert from grams to the canonical mass unit
-        let result: Double
-        switch canonicalMass ?? .milligrams {
-        case .grams:
-            result = grams
-        case .milligrams:
-            result = grams * 1000.0
-            print("⚖️ [UnitCheck] Step 2: \(grams) grams -> \(result) mg")
-        case .micrograms:
-            result = grams * 1_000_000.0
-            print("⚖️ [UnitCheck] Step 2: \(grams) grams -> \(result) µg")
-        }
-        
-        print("🔍 [SmartSearch] Normalizing \(value) [\(inputUnit)] for \(nutrient.rawValue) -> Result: \(result)")
-        return result
     }
     
     
