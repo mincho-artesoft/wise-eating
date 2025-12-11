@@ -199,7 +199,7 @@ struct AIGenerationHostView: View {
     
     private var toolbar: some View {
         HStack {
-            Text("AI Generation Jobs")
+            Text("AI Generation Jobs (Demo)")
                 .font(.title.bold())
                 .foregroundColor(effectManager.currentGlobalAccentColor)
             
@@ -215,18 +215,33 @@ struct AIGenerationHostView: View {
               VStack(alignment: .leading, spacing: 10) {
                   HStack {
                       statusIcon(for: job.status)
-                      VStack(alignment: .leading) {
+                      
+                      // --- НАЧАЛО НА ПРОМЯНАТА ---
+                      VStack(alignment: .leading, spacing: 4) {
+                          // 1. Тип на задачата
                           Text("\(job.jobType.rawValue) for \(job.profile?.name ?? "Deleted Profile")")
                               .font(.headline)
+                          
+                          // 2. Името на генерирания обект (или промпта)
+                          if let contentName = jobContentName(for: job) {
+                              Text(contentName)
+                                  .font(.subheadline)
+                                  .fontWeight(.semibold)
+                                  .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.9))
+                                  .lineLimit(1) // Ограничаваме до 1 ред, за да не разпъва клетката твърде много
+                                  .truncationMode(.tail)
+                          }
+
+                          // 3. Дата на създаване
                           Text("Created: \(job.creationDate.formatted(date: .abbreviated, time: .shortened))")
                               .font(.caption)
                               .opacity(0.8)
                       }
+                      // --- КРАЙ НА ПРОМЯНАТА ---
+                      
                       Spacer()
 
-                      // --- START OF CHANGE ---
                       if job.status == .running && activeJobsCount > 1 {
-                      // --- END OF CHANGE ---
                           Button(action: {
                               Task { await aiManager.pauseJob(job) }
                           }) {
@@ -250,6 +265,7 @@ struct AIGenerationHostView: View {
                   }
                 
                 if job.status == .completed {
+                    // ... (rest of the completed button logic remains unchanged) ...
                     switch job.jobType {
                     case .mealPlan:
                         Button {
@@ -516,6 +532,21 @@ struct AIGenerationHostView: View {
                 .tint(.clear)
             }
         }
+    }
+
+    // --- НОВА ПОМОЩНА ФУНКЦИЯ ЗА ИЗВЛИЧАНЕ НА ИМЕТО ---
+    private func jobContentName(for job: AIGenerationJob) -> String? {
+        // 1. Ако има директно зададено име за генериране (Храни, Рецепти, Упражнения, Менюта)
+        if let name = job.inputParameters?.foodNameToGenerate, !name.isEmpty {
+            return name
+        }
+        
+        // 2. Ако е генериране на база промптове (Планове, Диети, Тренировки), показваме първия промпт
+        if let prompts = job.inputParameters?.selectedPrompts, !prompts.isEmpty {
+            return prompts.joined(separator: ", ")
+        }
+        
+        return nil
     }
 
     @ViewBuilder
