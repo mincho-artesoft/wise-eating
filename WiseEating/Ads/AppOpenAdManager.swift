@@ -11,10 +11,15 @@ class AppOpenAdManager: NSObject, FullScreenContentDelegate {
     private var isShowingAd = false
     private var loadTime: Date?
     
-    /// Флаг, който определя дали следващото налично показване трябва да се случи.
-    /// true = показвай, false = пропускай (за логиката "през път").
-    /// Започваме с true, за да се покаже при първа възможност.
-    private var shouldShowNextAd = true
+    // ✅ НАСТРОЙКИ ЗА ЧЕСТОТА
+    // На всеки колко пъти да се показва при връщане от background (10)
+    private let adFrequency = 10
+    
+    // Запазваме брояча в UserDefaults, за да се помни между сесиите
+    private var presentationCounter: Int {
+        get { UserDefaults.standard.integer(forKey: "app_open_ad_count") }
+        set { UserDefaults.standard.set(newValue, forKey: "app_open_ad_count") }
+    }
 
     // MARK: - Ad Unit ID
     private let adUnitID = "ca-app-pub-3759868960530173/2316256277"
@@ -52,8 +57,10 @@ class AppOpenAdManager: NSObject, FullScreenContentDelegate {
 
     // MARK: - Show
 
-    func showAdIfAvailable() {
-        print("🎬 [AppOpenAd] Опит за показване...")
+    /// forceShow: Ако е true, рекламата се показва задължително (за студен старт).
+    /// Ако е false, се проверява брояча (на всеки 10-ти път).
+    func showAdIfAvailable(forceShow: Bool = false) {
+        print("🎬 [AppOpenAd] Опит за показване (Force: \(forceShow))...")
 
         // 1. Проверка на абонамент
         guard SubscriptionManager.shared.subscriptionStatus == .base else {
@@ -67,33 +74,27 @@ class AppOpenAdManager: NSObject, FullScreenContentDelegate {
         // 3. Проверка дали има готова реклама
         guard isAdAvailable() else {
             print("ℹ️ [AppOpenAd] Няма готова реклама. Опитваме зареждане за следващия път.")
-            // ВАЖНО: Не променяме shouldShowNextAd. Ако сега не успеем,
-            // искаме да се покаже веднага щом е налична (при следващото отваряне).
             Task { await loadAd() }
             return
         }
 
-        // 4. Логика "През път"
-        // Тук влизаме само ако ИМА готова реклама.
-        if shouldShowNextAd {
-            // Показваме рекламата
+        // 4. Логика за честота
+        // Увеличаваме брояча при всяко потенциално показване (влизане в app-a)
+        presentationCounter += 1
+        print("🔢 [AppOpenAd] Брояч на влизания: \(presentationCounter). Честота: \(adFrequency)")
+
+        // Условие: ИЛИ е насилствено показване (Cold Start), ИЛИ броячът се дели на 10
+        if forceShow || (presentationCounter % adFrequency == 0) {
+            
             if let root = getRootViewController() {
-                print("▶️ [AppOpenAd] Показваме реклама.")
+                print("▶️ [AppOpenAd] Показваме реклама (Force: \(forceShow) или Брояч % 10 == 0).")
                 isShowingAd = true
                 appOpenAd?.present(from: root)
-                
-                // Следващият път трябва да пропуснем
-                shouldShowNextAd = false
             }
         } else {
-            // Пропускаме рекламата (логика "през път")
-            print("⏭️ [AppOpenAd] Пропускаме този път (логика 'през път').")
-            
-            // Следващият път трябва да покажем
-            shouldShowNextAd = true
-            
-            // Тъй като не я изгорихме, тя си стои заредена за следващия път,
-            // освен ако не изтече (4 часа).
+            // Пропускаме рекламата
+            print("⏭️ [AppOpenAd] Пропускаме този път (Остават \(adFrequency - (presentationCounter % adFrequency)) до следващата реклама от background).")
+            // Тъй като не я изгорихме, тя си стои заредена за следващия път.
         }
     }
 

@@ -5,6 +5,8 @@ import NaturalLanguage
 
 struct RootView: View {
     @AppStorage("hasShownInitialSubscription") private var hasShownInitialSubscription: Bool = false
+    @State private var adLoopTask: Task<Void, Never>? = nil
+    @State private var adRotationIndex: Int = 0
 
     @Environment(\.safeAreaInsets) private var safeAreaInsets
     private var headerTopPadding: CGFloat { safeAreaInsets.top }
@@ -155,7 +157,8 @@ struct RootView: View {
         .onChange(of: selectedTab) { _, newTab in
             if newTab == .nutrition { hasNewNutrition = false }
             if newTab == .training { hasNewTraining = false }
-            
+            trackInteractionAndShowAdIfNeeded()
+
             if newTab == .aiGenerate {
                 if hasUnreadAINotifications {
                     Task {
@@ -1005,6 +1008,8 @@ struct RootView: View {
     }
 
     private func activateSearch() {
+        trackInteractionAndShowAdIfNeeded()
+
         previousTab = selectedTab
         selectedTab = .search
         menuState = .collapsed
@@ -1044,7 +1049,11 @@ struct RootView: View {
         } else {
             isSearchButtonVisible = true
         }
+        
         updateBackgroundSnapshot()
+        
+        startRecurringAdLoop()
+
         Task { @MainActor in
             CalendarViewModel.shared.reloadCalendars()
 
@@ -1268,6 +1277,181 @@ struct RootView: View {
         let unreadAI = await NotificationManager.shared.getUnreadAINotifications()
         self.hasUnreadAINotifications = !unreadAI.isEmpty
     }
+    
+    private func startRecurringAdLoop() {
+        // Гарантираме, че цикълът се стартира само веднъж
+        guard adLoopTask == nil else { return }
+
+        adLoopTask = Task { @MainActor in
+            print("⏱️ [Ad Loop] Стартиране на цикъла за реклами.")
+
+            // --- 1. Първоначално изчакване (30 секунди) ---
+            try? await Task.sleep(nanoseconds: 60 * 1_000_000_000)
+            
+            // Проверка и показване
+            tryShowAd()
+
+            // --- 2. Безкраен цикъл на всеки 10 минути ---
+            while !Task.isCancelled {
+                print("⏱️ [Ad Loop] Изчакване на 10 минути до следващата проверка...")
+                
+                // 10 минути * 60 секунди * 1 милиард наносекунди
+                try? await Task.sleep(nanoseconds: 10 * 60 * 1_000_000_000)
+                
+                // Проверка и показване
+                tryShowAd()
+            }
+        }
+    }
+
+    private func tryShowAd() {
+            // Проверка 1: Има ли селектиран профил?
+            guard selectedProfile != nil else {
+                print("⚠️ [Ad Loop] Времето дойде, но НЯМА избран профил. Скипваме.")
+                return
+            }
+
+            // Проверка 2: Потребителят на безплатен (Base) план ли е?
+            guard SubscriptionManager.shared.subscriptionStatus == .base else {
+                print("💎 [Ad Loop] Потребителят е Premium. Скипваме рекламата.")
+                return
+            }
+
+            print("🎬 [Ad Loop] Опит за показване (Индекс: \(adRotationIndex % 3))...")
+
+            // Изчисляваме кой е на ред (0, 1 или 2)
+            let cycle = adRotationIndex % 3
+            
+            // Помощна функция за презареждане, ако нищо не е готово
+            func reloadAll() {
+                print("❌ [Ad Loop] Нито една реклама не е готова. Опит за презареждане.")
+                Task {
+                    await RewardedAdManager.shared.loadAd()
+                    await RewardedInterstitialAdManager.shared.loadAd()
+                    await InterstitialAdManager.shared.loadAd()
+                }
+            }
+
+            // --- ЛОГИКА НА РЕДУВАНЕ С FALLBACK ---
+            
+            switch cycle {
+            case 0:
+                // ПРИОРИТЕТ: Rewarded Video
+                if RewardedAdManager.shared.isReady {
+                    print("▶️ [Ad Loop] Пускане на REWARDED (Priority).")
+                    RewardedAdManager.shared.showIfAvailable { amount, type in
+                        print("🎁 [Rewarded] Награда: \(amount) \(type)")
+                    }
+                }
+                // Fallback 1
+                else if RewardedInterstitialAdManager.shared.isReady {
+                    print("⚠️ [Ad Loop] Rewarded не е готова. Fallback -> Rewarded Interstitial.")
+                    RewardedInterstitialAdManager.shared.showIfAvailable { amount, type in
+                        print("🎁 [Rew-Int] Награда: \(amount) \(type)")
+                    }
+                }
+                // Fallback 2
+                else if InterstitialAdManager.shared.isReady {
+                    print("⚠️ [Ad Loop] Rewarded видео не са готови. Fallback -> Interstitial.")
+                    InterstitialAdManager.shared.showIfAvailable {
+                        print("✅ [Interstitial] Затворена.")
+                    }
+                } else {
+                    reloadAll()
+                }
+
+            case 1:
+                // ПРИОРИТЕТ: Rewarded Interstitial
+                if RewardedInterstitialAdManager.shared.isReady {
+                    print("▶️ [Ad Loop] Пускане на REWARDED INTERSTITIAL (Priority).")
+                    RewardedInterstitialAdManager.shared.showIfAvailable { amount, type in
+                        print("🎁 [Rew-Int] Награда: \(amount) \(type)")
+                    }
+                }
+                // Fallback 1
+                else if RewardedAdManager.shared.isReady {
+                    print("⚠️ [Ad Loop] Rew-Int не е готова. Fallback -> Rewarded.")
+                    RewardedAdManager.shared.showIfAvailable { amount, type in
+                        print("🎁 [Rewarded] Награда: \(amount) \(type)")
+                    }
+                }
+                // Fallback 2
+                else if InterstitialAdManager.shared.isReady {
+                    print("⚠️ [Ad Loop] Видео форматите не са готови. Fallback -> Interstitial.")
+                    InterstitialAdManager.shared.showIfAvailable {
+                        print("✅ [Interstitial] Затворена.")
+                    }
+                } else {
+                    reloadAll()
+                }
+
+            case 2:
+                // ПРИОРИТЕТ: Standard Interstitial
+                if InterstitialAdManager.shared.isReady {
+                    print("▶️ [Ad Loop] Пускане на INTERSTITIAL (Priority).")
+                    InterstitialAdManager.shared.showIfAvailable {
+                        print("✅ [Interstitial] Затворена.")
+                    }
+                }
+                // Fallback 1
+                else if RewardedInterstitialAdManager.shared.isReady {
+                    print("⚠️ [Ad Loop] Interstitial не е готова. Fallback -> Rew-Int.")
+                    RewardedInterstitialAdManager.shared.showIfAvailable { amount, type in
+                        print("🎁 [Rew-Int] Награда: \(amount) \(type)")
+                    }
+                }
+                // Fallback 2
+                else if RewardedAdManager.shared.isReady {
+                    print("⚠️ [Ad Loop] Другите не са готови. Fallback -> Rewarded.")
+                    RewardedAdManager.shared.showIfAvailable { amount, type in
+                        print("🎁 [Rewarded] Награда: \(amount) \(type)")
+                    }
+                } else {
+                    reloadAll()
+                }
+                
+            default: break
+            }
+
+            // Увеличаваме индекса за следващия път (0 -> 1 -> 2 -> 3(0) ...)
+            adRotationIndex += 1
+        }
+    // MARK: - Interaction Ad Logic
+        private func trackInteractionAndShowAdIfNeeded() {
+            // 1. Ако потребителят е Premium, не правим нищо
+            guard SubscriptionManager.shared.subscriptionStatus == .base else { return }
+
+            let key = "interaction_count_for_interstitial"
+            let threshold = 30
+
+            // 2. Взимаме текущия брой и увеличаваме
+            var count = UserDefaults.standard.integer(forKey: key)
+            count += 1
+
+            if count >= threshold {
+                print("🎬 [Ad Logic] Interaction count reached \(count). Triggering Interstitial.")
+                
+                // 3. Нулираме брояча веднага (за да не се пуска пак на 16-тия път, ако рекламата не зареди)
+                UserDefaults.standard.set(0, forKey: key)
+
+                // 4. Показваме рекламата
+                Task { @MainActor in
+                    // Проверяваме дали има заредена, ако не - опитваме да заредим за следващия път
+                    if InterstitialAdManager.shared.isReady {
+                        InterstitialAdManager.shared.showIfAvailable {
+                            print("✅ Interstitial dismissed after interaction trigger.")
+                        }
+                    } else {
+                        print("⚠️ Interstitial not ready. Loading for next time.")
+                        await InterstitialAdManager.shared.loadAd()
+                    }
+                }
+            } else {
+                // Запазваме новия брой
+                UserDefaults.standard.set(count, forKey: key)
+                print("ℹ️ [Ad Logic] Count: \(count)/\(threshold)")
+            }
+        }
 }
 
 extension RootView {

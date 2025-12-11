@@ -677,8 +677,10 @@ struct ProfileWizardView: View {
                     VStack(spacing: 16) {
                         Toggle("Pregnant", isOn: $data.isPregnant)
                             .foregroundColor(effectManager.currentGlobalAccentColor)
+                            .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light)
                         Toggle("Lactating", isOn: $data.isLactating)
                             .foregroundColor(effectManager.currentGlobalAccentColor)
+                            .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light)
                     }
                     .padding(.top, 30)
                     .transition(.opacity.animation(.easeInOut))
@@ -978,6 +980,7 @@ struct ProfileWizardView: View {
                         .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
                 }
             }
+            .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light)
             .foregroundColor(effectManager.currentGlobalAccentColor)
             .padding(.vertical)
             
@@ -1023,6 +1026,7 @@ struct ProfileWizardView: View {
                         .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
                 }
             }
+            .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light)
             .foregroundColor(effectManager.currentGlobalAccentColor)
             .padding(.vertical)
 
