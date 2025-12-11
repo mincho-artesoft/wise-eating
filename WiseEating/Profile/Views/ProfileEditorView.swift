@@ -415,7 +415,11 @@ struct ProfileEditorView: View {
                        if ageInYears ?? 2 >= 14 {
                            if gender.lowercased().hasPrefix("f") {
                                Toggle("Pregnant", isOn: $isPregnant).padding(.horizontal, 4).foregroundColor(effectManager.currentGlobalAccentColor)
+                                   .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light)
+
                                Toggle("Lactating", isOn: $isLactating).padding(.horizontal, 4).foregroundColor(effectManager.currentGlobalAccentColor)
+                                   .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light)
+
                            }
                        }
                    }
@@ -472,6 +476,7 @@ struct ProfileEditorView: View {
                          .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
                  }
              }
+             .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light)
              .padding(.horizontal, 4)
              .foregroundColor(effectManager.currentGlobalAccentColor)
          }
