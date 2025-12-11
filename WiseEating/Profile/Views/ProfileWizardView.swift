@@ -123,31 +123,33 @@ struct ProfileWizardView: View {
     // MARK: - Picker State & Helpers
     // Two-wheel pickers (whole + decimal) for height & weight
     // For babies (< 2y), the whole-number ranges are narrowed to age‑specific min/max (see helpers below).
+    // MARK: - Picker State & Helpers
+
+    // Универсален обхват за Ръст (от бебета до високи възрастни)
     private var heightWholeRange: [Int] {
-        if ageInYears < 2 {
-            let r = babyWholeRange(for: .height)
-            return Array(r)
+        if isImperial {
+            return Array(10...100) // Инчове: ~25см до 254см
         } else {
-            return isImperial ? Array(12...98) : Array(30...250)
+            return Array(30...250) // Сантиметри
         }
     }
 
+    // Универсален обхват за Тегло
     private var weightWholeRange: [Int] {
-        if ageInYears < 2 {
-            let r = babyWholeRange(for: .weight)
-            return Array(r)
+        if isImperial {
+            return Array(4...660) // Паунди
         } else {
-            return isImperial ? Array(5...551) : Array(2...250)
+            return Array(2...300) // Килограми
         }
     }
 
-    // MARK: - Head Circumference Picker Helpers
+    // Универсален обхват за Обиколка на главата
+    // Покрива от новородени (~30см) до големи глави (~65-70см)
     private var headWholeRange: [Int] {
-        if ageInYears < 2 {
-            let r = babyWholeRange(for: .head)
-            return Array(r)
+        if isImperial {
+            return Array(10...30) // Инчове
         } else {
-            return isImperial ? Array(8...25) : Array(30...55)
+            return Array(20...80) // Сантиметри (достатъчно широко, за да позволиш 61)
         }
     }
 
@@ -162,98 +164,6 @@ struct ProfileWizardView: View {
 
     // Metrics we support for baby ranges
     private enum BabyMetric { case height, weight, head }
-
-    /// Returns an inclusive ClosedRange<Int> for the WHOLE number wheel, using month-specific min/max.
-    private func babyWholeRange(for metric: BabyMetric) -> ClosedRange<Int> {
-        let months = max(0, min(24, ageInMonths))
-        let base = babyBoundsBase(forMonths: months, metric: metric) // (min,max) in cm (height/head) or kg (weight)
-
-        let (minVal, maxVal) = base
-        if isImperial {
-            switch metric {
-            case .height, .head:
-                let minIn = cmToInches(minVal)
-                let maxIn = cmToInches(maxVal)
-                let minWhole = max(0, Int(floor(minIn)))
-                let maxWhole = max(minWhole, Int(ceil(maxIn)))
-                return minWhole...maxWhole
-            case .weight:
-                let minLb = kgToLbs(minVal)
-                let maxLb = kgToLbs(maxVal)
-                let minWhole = max(0, Int(floor(minLb)))
-                let maxWhole = max(minWhole, Int(ceil(maxLb)))
-                return minWhole...maxWhole
-            }
-        } else {
-            // Metric: use cm for height/head, kg for weight
-            let minWhole = max(0, Int(floor(minVal)))
-            let maxWhole = max(minWhole, Int(ceil(maxVal)))
-            return minWhole...maxWhole
-        }
-    }
-
-    /// Core bounds table (cm for height/head, kg for weight). Interpolates linearly between known month anchors.
-    /// If you have a `BabyData` table already, replace the `fallbackAnchors` with your lookup and keep the signature.
-    private func babyBoundsBase(forMonths months: Int, metric: BabyMetric) -> (min: Double, max: Double) {
-        // Fallback WHO-like anchors for 0, 1, 3, 6, 9, 12, 18, 24 months.
-        // Values are intentionally conservative and should be replaced with your BabyData if available.
-        typealias R = (min: Double, max: Double)
-        let fallbackAnchors: [Int: R]
-        switch metric {
-        case .height:
-            // centimeters
-            fallbackAnchors = [
-                0:  (45, 55),
-                1:  (49, 58),
-                3:  (54, 64),
-                6:  (60, 72),
-                9:  (65, 76),
-                12: (70, 82),
-                18: (77, 89),
-                24: (80, 95),
-            ]
-        case .weight:
-            // kilograms
-            fallbackAnchors = [
-                0:  (2.5, 4.5),
-                1:  (3.0, 5.5),
-                3:  (4.5, 7.5),
-                6:  (6.0, 9.5),
-                9:  (7.0, 11.0),
-                12: (8.0, 12.5),
-                18: (9.0, 14.0),
-                24: (10.0, 16.0),
-            ]
-        case .head:
-            // centimeters (occipitofrontal circumference)
-            fallbackAnchors = [
-                0:  (32, 37),
-                1:  (34, 39),
-                3:  (38, 43),
-                6:  (41, 46),
-                9:  (43, 47),
-                12: (44, 48),
-                18: (46, 50),
-                24: (47, 51),
-            ]
-        }
-
-        if let exact = fallbackAnchors[months] { return exact }
-
-        // Find surrounding anchors for linear interpolation
-        let sortedKeys = fallbackAnchors.keys.sorted()
-        let lowerKey = sortedKeys.last(where: { $0 <= months }) ?? 0
-        let upperKey = sortedKeys.first(where: { $0 >= months }) ?? 24
-        guard lowerKey != upperKey, let low = fallbackAnchors[lowerKey], let up = fallbackAnchors[upperKey] else {
-            return fallbackAnchors[lowerKey] ?? fallbackAnchors[24]! // safe fallback
-        }
-
-        // Linear interpolation
-        let t = Double(months - lowerKey) / Double(upperKey - lowerKey)
-        let minV = low.min + (up.min - low.min) * t
-        let maxV = low.max + (up.max - low.max) * t
-        return (minV, maxV)
-    }
 
     private func currentHeadParts() -> (whole: Int, dec: Int) {
         let raw = UnitConversion.parseDecimal(data.headCircumference) ?? (isImperial ? 16.0 : 40.0)
@@ -868,11 +778,12 @@ struct ProfileWizardView: View {
             Spacer()
             StyledLabeledPicker(label: "Head Circumference (\(isImperial ? "in" : "cm"))", isFixedHeight: false, isRequired: true) {
                 HStack(spacing: 8) {
-                    // Whole number wheel – безкраен
-                    Picker("Whole", selection: heightWholeBinding) {
-                        ForEach(heightWholeRange, id: \.self) { v in
-                            Text("\(v)")
-                                .tag(v)
+                    
+                    // ПРОМЯНА 1: Използваме headWholeBinding (беше heightWholeBinding)
+                    // ПРОМЯНА 2: Използваме headWholeRange (беше heightWholeRange)
+                    Picker("Whole", selection: headWholeBinding) {
+                        ForEach(headWholeRange, id: \.self) { v in
+                            Text("\(v)").tag(v)
                         }
                     }
                     .pickerStyle(.wheel)
@@ -881,18 +792,13 @@ struct ProfileWizardView: View {
                     Text(decimalSeparator)
                         .font(.title2.weight(.bold))
 
-                    // Decimal wheel – безкраен
                     if isImperial {
-                        // 00–99 с водеща нула
                         InfiniteWheelPicker(
                             values: decimalRangeInches,
                             selection: headDecimalBinding,
-                            labelForValue: { value in
-                                String(format: "%02d", value)
-                            }
+                            labelForValue: { String(format: "%02d", $0) }
                         )
                     } else {
-                        // 0–9 нормално
                         InfiniteWheelPicker(
                             values: decimalRange,
                             selection: headDecimalBinding
@@ -909,7 +815,8 @@ struct ProfileWizardView: View {
             }
             .onAppear {
                 if data.headCircumference.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                    data.headCircumference = composeHeadString(whole: isImperial ? 16 : 40, dec: 0)
+                    // Задаваме стойност по подразбиране, която е валидна за новите широки обхвати
+                    data.headCircumference = composeHeadString(whole: isImperial ? 20 : 50, dec: 0)
                 }
             }
             Spacer()
