@@ -76,22 +76,35 @@ struct WiseEatingApp: App {
                             print("🚀 Първо стартиране на приложението: Рекламата е пропусната.")
                             isFirstAppLaunch = false
                         } else {
-                            print("🔄 Връщане в приложението: Ще се опита показване на реклама след 3 сек.")
+                            // ✅ ПРОВЕРКА: Има ли селектиран профил?
+                            let context = container.mainContext
+                            let descriptor = FetchDescriptor<UserSettings>()
+                            // Взимаме първия (и единствен) UserSettings запис
+                            let settings = (try? context.fetch(descriptor))?.first
+                            let hasSelectedProfile = settings?.lastSelectedProfile != nil
+                            
+                            if hasSelectedProfile {
+                                print("🔄 Връщане в приложението (Profile Found): Ще се опита показване на реклама.")
 
-                            if coldStart {
-                                // отбелязваме веднага, че студеното стартиране вече е минало
-                                coldStart = false
-                                
-                                Task { @MainActor in
-                                    try? await Task.sleep(nanoseconds: 3 * 1_000_000_000)
-                                    AppOpenAdManager.shared.showAdIfAvailable()
+                                if coldStart {
+                                    // отбелязваме веднага, че студеното стартиране вече е минало
+                                    coldStart = false
+                                    
+                                    Task { @MainActor in
+                                        try? await Task.sleep(nanoseconds: 3 * 1_000_000_000)
+                                        AppOpenAdManager.shared.showAdIfAvailable()
+                                    }
+                                } else {
+                                    Task { @MainActor in
+                                        AppOpenAdManager.shared.showAdIfAvailable()
+                                    }
                                 }
                             } else {
-                                Task { @MainActor in
-                                    AppOpenAdManager.shared.showAdIfAvailable()
-                                }
+                                print("🔕 Връщане в приложението: НЯМА селектиран профил. Рекламата се пропуска.")
+                                // Все пак маркираме coldStart като преминал, за да не се забави рекламата,
+                                // ако потребителят създаде профил и веднага излезе/влезе пак.
+                                coldStart = false
                             }
-
                         }
                         // -------------------------------------
                         
