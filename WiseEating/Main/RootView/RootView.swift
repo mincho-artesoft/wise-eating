@@ -5,7 +5,8 @@ import NaturalLanguage
 
 struct RootView: View {
     @AppStorage("hasShownInitialSubscription") private var hasShownInitialSubscription: Bool = false
-
+    @State private var adLoopTask: Task<Void, Never>? = nil
+    
     @Environment(\.safeAreaInsets) private var safeAreaInsets
     private var headerTopPadding: CGFloat { safeAreaInsets.top }
     @State private var hasUnreadBadgeNotifications: Bool = false
@@ -1044,7 +1045,11 @@ struct RootView: View {
         } else {
             isSearchButtonVisible = true
         }
+        
         updateBackgroundSnapshot()
+        
+        startRecurringAdLoop()
+
         Task { @MainActor in
             CalendarViewModel.shared.reloadCalendars()
 
@@ -1267,6 +1272,53 @@ struct RootView: View {
     private func checkForUnreadAINotifications() async {
         let unreadAI = await NotificationManager.shared.getUnreadAINotifications()
         self.hasUnreadAINotifications = !unreadAI.isEmpty
+    }
+    
+    private func startRecurringAdLoop() {
+        // Гарантираме, че цикълът се стартира само веднъж
+        guard adLoopTask == nil else { return }
+
+        adLoopTask = Task { @MainActor in
+            print("⏱️ [Ad Loop] Стартиране на цикъла за реклами.")
+
+            // --- 1. Първоначално изчакване (30 секунди) ---
+            try? await Task.sleep(nanoseconds: 60 * 1_000_000_000)
+            
+            // Проверка и показване
+            tryShowAd()
+
+            // --- 2. Безкраен цикъл на всеки 10 минути ---
+            while !Task.isCancelled {
+                print("⏱️ [Ad Loop] Изчакване на 10 минути до следващата проверка...")
+                
+                // 10 минути * 60 секунди * 1 милиард наносекунди
+                try? await Task.sleep(nanoseconds: 10 * 60 * 1_000_000_000)
+                
+                // Проверка и показване
+                tryShowAd()
+            }
+        }
+    }
+
+    private func tryShowAd() {
+        // Проверка 1: Има ли селектиран профил?
+        // Ако няма, просто излизаме (return), но цикълът горе (while) продължава да се върти
+        guard selectedProfile != nil else {
+            print("⚠️ [Ad Loop] Времето дойде, но НЯМА избран профил. Скипваме показването (цикълът продължава).")
+            return
+        }
+
+        // Проверка 2: Потребителят на безплатен (Base) план ли е?
+        guard SubscriptionManager.shared.subscriptionStatus == .base else {
+            print("💎 [Ad Loop] Потребителят е Premium. Скипваме рекламата.")
+            return
+        }
+
+        // Ако всичко е наред -> Показваме
+        print("🎬 [Ad Loop] Условията са изпълнени. Пускане на Rewarded Ad.")
+        RewardedAdManager.shared.showIfAvailable { amount, type in
+            print("🎁 [Ad Loop] Награда получена: \(amount) \(type)")
+        }
     }
 }
 
