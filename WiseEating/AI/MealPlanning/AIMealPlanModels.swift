@@ -22,7 +22,7 @@ public struct MealPlanPreviewItem: Sendable, Codable, Identifiable {
 }
 
 public struct MealPlanPreviewMeal: Sendable, Hashable, Codable, Identifiable {
-    public let id = UUID()
+    public var id = UUID()
     public let name: String
     public let descriptiveTitle: String?
     public var items: [MealPlanPreviewItem]
@@ -353,3 +353,43 @@ struct AIAtomsAndFoodsFixResponse: Codable {
     let excludedFoods: [String]
 }
 
+
+// MARK: - Portion Control Models
+
+@available(iOS 26.0, *)
+@Generable
+public enum AIFoodPortionCategory: String, Codable, CaseIterable, Sendable {
+    case protein = "Protein"
+    case starchyCarb = "Starchy carb (grains, potatoes, legumes, bread)"
+    case dairyDrink = "Dairy drink (milk, kefir, liquid yogurt)"
+    case cheeseOrYogurt = "Cheese or thick yogurt"
+    case nutOrSeed = "Nut or seed"
+    case fruit = "Fruit"
+    case salad = "Salad / mixed greens"
+    case veg = "Non-starchy vegetable"
+    case soup = "Soup / broth"
+    
+    // Специфични категории
+    case fatOrOil = "Cooking fat or oil (butter, oil, ghee, lard)"
+    case sauceOrDressing = "Sauce, dip, or dressing (ketchup, mayo, pesto)"
+    case spiceOrHerb = "Spice or dry herb (salt, pepper, turmeric, oregano)"
+    case sweetener = "Sweetener (honey, sugar, maple syrup, agave)" 
+    case compositeDish = "Composite prepared dish (lasagna, pizza, burger, stew)"
+    
+    case other = "Other / unidentified"
+}
+
+@available(iOS 26.0, *)
+@Generable
+struct AIFoodClassificationItem: Codable {
+    @Guide(description: "The exact name of the food from the input list.")
+    let foodName: String
+    @Guide(description: "The nutritional category for portion control.")
+    let category: AIFoodPortionCategory
+}
+
+@available(iOS 26.0, *)
+@Generable
+struct AIBatchFoodClassificationResponse: Codable {
+    let classifications: [AIFoodClassificationItem]
+}

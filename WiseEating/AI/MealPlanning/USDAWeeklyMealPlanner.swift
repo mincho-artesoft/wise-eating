@@ -3192,216 +3192,222 @@ public final class USDAWeeklyMealPlanner: Sendable {
     
     // **MODIFIED**: This is the new, consolidated polishing function with context-aware trimming.
     @MainActor
-    private func polishConceptualPlan(
-        plan: AIConceptualPlanResponse,
-        profile: Profile,
-        daysAndMeals: [Int: [String]],
-        rules: [MustContainRule],
-        excludedFoods: [String],
-        foodPalette: [String],
-        smartSearch: SmartFoodSearch3, // Updated Type
-        onLog: (@Sendable (String) -> Void)?
-    ) async -> AIConceptualPlanResponse {
-        var polishedPlan = plan
-        onLog?(" polishing conceptual plan...")
-        
-        // --- Start Helper Functions (scoped to polishing) ---
-        let excludedSet = Set(excludedFoods.map { $0.lowercased() })
-        func isExcluded(_ name: String) -> Bool {
-            let lower = name.lowercased()
-            return excludedSet.contains { lower.contains($0) }
-        }
-        
-        func isProtein(_ n: String) -> Bool {
-            let keys = ["chicken", "pork", "beef", "turkey", "salmon", "tuna", "fish", "lamb", "loin", "breast", "steak", "ham", "shrimp", "egg", "tofu", "tempeh", "lentil", "bean"]
-            return keys.contains { n.lowercased().contains($0) }
-        }
-        
-        func coreProteinKey(_ name: String) -> String {
-            let keys = ["chicken", "turkey", "salmon", "tuna", "fish", "shrimp", "pork", "beef", "lamb", "egg", "tofu", "tempeh", "lentil", "bean"]
-            for k in keys { if name.lowercased().contains(k) { return k } }
-            return name.lowercased()
-        }
-        
-        func isSalad(_ n: String) -> Bool { let l = n.lowercased(); return l.contains("salad") || l.contains("greens") }
-        func isFruit(_ n: String) -> Bool { n.lowercased().contains("fruit") }
-        
-        var sideCandidates: [String] = {
-            var candidates: [String] = []
-            let paletteSides = foodPalette.filter { isSalad($0) || isFruit($0) }
-            var seen = Set<String>()
-            for side in paletteSides {
-                if seen.insert(side.lowercased()).inserted && !isExcluded(side) {
-                    candidates.append(side)
-                }
+        private func polishConceptualPlan(
+            plan: AIConceptualPlanResponse,
+            profile: Profile,
+            daysAndMeals: [Int: [String]],
+            rules: [MustContainRule],
+            excludedFoods: [String],
+            foodPalette: [String],
+            smartSearch: SmartFoodSearch3,
+            onLog: (@Sendable (String) -> Void)?
+        ) async -> AIConceptualPlanResponse {
+            var polishedPlan = plan
+            onLog?("✨ Polishing conceptual plan (Rules, Trimming & AI Portion Control)...")
+            
+            // --- Start Helper Functions (scoped to polishing) ---
+            let excludedSet = Set(excludedFoods.map { $0.lowercased() })
+            
+            func isExcluded(_ name: String) -> Bool {
+                let lower = name.lowercased()
+                return excludedSet.contains { lower.contains($0) }
             }
-            return candidates
-        }()
-        
-        if sideCandidates.isEmpty {
-            let ctx = ModelContext(self.container)
-            let descriptor = FetchDescriptor<FoodItem>()
-            if let all = try? ctx.fetch(descriptor) {
-                for f in all {
-                    if (isSalad(f.name) || isFruit(f.name)) && !isExcluded(f.name) {
-                        sideCandidates.append(f.name)
+            
+            func isProtein(_ n: String) -> Bool {
+                let keys = ["chicken", "pork", "beef", "turkey", "salmon", "tuna", "fish", "lamb", "loin", "breast", "steak", "ham", "shrimp", "egg", "tofu", "tempeh", "lentil", "bean", "seitan"]
+                return keys.contains { n.lowercased().contains($0) }
+            }
+            
+            func coreProteinKey(_ name: String) -> String {
+                let keys = ["chicken", "turkey", "salmon", "tuna", "fish", "shrimp", "pork", "beef", "lamb", "egg", "tofu", "tempeh", "lentil", "bean", "seitan"]
+                for k in keys { if name.lowercased().contains(k) { return k } }
+                return name.lowercased()
+            }
+            
+            func isSalad(_ n: String) -> Bool { let l = n.lowercased(); return l.contains("salad") || l.contains("greens") }
+            func isFruit(_ n: String) -> Bool { let l = n.lowercased(); return l.contains("fruit") || l.contains("berry") || l.contains("melon") || l.contains("apple") || l.contains("banana") }
+            
+            // --- Prepare Side Candidates ---
+            var sideCandidates: [String] = {
+                var candidates: [String] = []
+                let paletteSides = foodPalette.filter { isSalad($0) || isFruit($0) }
+                var seen = Set<String>()
+                for side in paletteSides {
+                    if seen.insert(side.lowercased()).inserted && !isExcluded(side) {
+                        candidates.append(side)
                     }
                 }
-            }
-        }
-        
-        // --- End Helper Functions ---
-        
-        var seenSignatures: [String: Set<String>] = [:]
-        var usedDinnerProteins = Set<String>()
-        
-        var protectedByDayMeal: [Int: [String: Set<String>]] = [:]
-        for r in rules {
-            let keyMeal = (r.meal?.lowercased()) ?? "*"
-            var meals = protectedByDayMeal[r.day] ?? [:]
-            var set = meals[keyMeal] ?? Set()
-            set.insert(r.topic.lowercased())
-            meals[keyMeal] = set
-            protectedByDayMeal[r.day] = meals
-        }
-        
-        let orderedDayIndices = polishedPlan.days.indices.sorted(by: { polishedPlan.days[$0].day < polishedPlan.days[$1].day })
-        
-        for dayIndex in orderedDayIndices {
-            let dayNumber = polishedPlan.days[dayIndex].day
-            var dayHasSaladOrFruit = false
+                return candidates
+            }()
             
-            for mealIndex in 0..<polishedPlan.days[dayIndex].meals.count {
-                var meal = polishedPlan.days[dayIndex].meals[mealIndex]
-                
-                // --- Rule 1: Purge Excluded Foods ---
-                let beforeCount = meal.components.count
-                meal.components.removeAll { isExcluded($0.name) }
-                if meal.components.count < beforeCount {
-                    onLog?("🧹 Day \(dayNumber) • \(meal.name): Removed \(beforeCount - meal.components.count) excluded component(s).")
-                }
-                if meal.components.isEmpty {
-                    meal.components.append(ConceptualComponent(name: "Mixed Greens", grams: 80))
-                }
-                
-                // --- Rule 2: Enforce Must-Contain ---
-                let relevantRules = rules.filter { $0.day == dayNumber }
-                for rule in relevantRules {
-                    let mealMatches = (rule.meal == nil) || (rule.meal?.caseInsensitiveCompare(meal.name) == .orderedSame)
-                    if mealMatches && !meal.components.contains(where: { $0.name.range(of: rule.topic, options: .caseInsensitive) != nil }) {
-                        if let proteinIdx = meal.components.firstIndex(where: { isProtein($0.name) }) {
-                            let old = meal.components[proteinIdx].name
-                            meal.components[proteinIdx] = ConceptualComponent(name: rule.topic, grams: 120)
-                            onLog?("✅ Enforced: Day \(dayNumber) • \(meal.name) now has '\(rule.topic)' (replaced '\(old)').")
-                        } else {
-                            meal.components.append(ConceptualComponent(name: rule.topic, grams: 120))
-                            onLog?("✅ Enforced: Day \(dayNumber) • \(meal.name) now has '\(rule.topic)' (added).")
+            if sideCandidates.isEmpty {
+                let ctx = ModelContext(self.container)
+                let descriptor = FetchDescriptor<FoodItem>()
+                if let all = try? ctx.fetch(descriptor) {
+                    for f in all {
+                        if (isSalad(f.name) || isFruit(f.name)) && !isExcluded(f.name) {
+                            sideCandidates.append(f.name)
                         }
                     }
                 }
+            }
+            
+            // --- Prepare Rules Lookup ---
+            var seenSignatures: [String: Set<String>] = [:]
+            var usedDinnerProteins = Set<String>()
+            
+            var protectedByDayMeal: [Int: [String: Set<String>]] = [:]
+            for r in rules {
+                let keyMeal = (r.meal?.lowercased()) ?? "*"
+                var meals = protectedByDayMeal[r.day] ?? [:]
+                var set = meals[keyMeal] ?? Set()
+                set.insert(r.topic.lowercased())
+                meals[keyMeal] = set
+                protectedByDayMeal[r.day] = meals
+            }
+            
+            let orderedDayIndices = polishedPlan.days.indices.sorted(by: { polishedPlan.days[$0].day < polishedPlan.days[$1].day })
+            
+            // --- Iterate Days & Meals (Structural Polish) ---
+            for dayIndex in orderedDayIndices {
+                let dayNumber = polishedPlan.days[dayIndex].day
+                var dayHasSaladOrFruit = false
                 
-                // --- Rule 3: Diversify Dinner & Enforce Single Main Course ---
-                var proteinIndices = meal.components.indices.filter { isProtein(meal.components[$0].name) }
-                
-                if meal.name.caseInsensitiveCompare("Dinner") == .orderedSame {
-                    if let mainProteinIdx = proteinIndices.first {
-                        let currentKey = coreProteinKey(meal.components[mainProteinIdx].name)
-                        if usedDinnerProteins.contains(currentKey) {
-                            let isProtectedByRule = protectedByDayMeal[dayNumber]?[meal.name.lowercased()]?.contains(where: { currentKey.contains($0) }) ?? false
-                            if !isProtectedByRule {
-                                let replacementOptions = foodPalette.filter { isProtein($0) && !isExcluded($0) }
-                                if let replacement = replacementOptions.first(where: { !usedDinnerProteins.contains(coreProteinKey($0)) }) {
-                                    let oldName = meal.components[mainProteinIdx].name
-                                    meal.components[mainProteinIdx].name = replacement
-                                    onLog?("🔁 Diversified Dinner on Day \(dayNumber): replaced '\(oldName)' with '\(replacement)'.")
-                                    usedDinnerProteins.insert(coreProteinKey(replacement))
-                                }
+                for mealIndex in 0..<polishedPlan.days[dayIndex].meals.count {
+                    var meal = polishedPlan.days[dayIndex].meals[mealIndex]
+                    
+                    // --- Rule 1: Purge Excluded Foods ---
+                    let beforeCount = meal.components.count
+                    meal.components.removeAll { isExcluded($0.name) }
+                    if meal.components.count < beforeCount {
+                        onLog?("🧹 Day \(dayNumber) • \(meal.name): Removed \(beforeCount - meal.components.count) excluded component(s).")
+                    }
+                    if meal.components.isEmpty {
+                        meal.components.append(ConceptualComponent(name: "Mixed Greens", grams: 80))
+                    }
+                    
+                    // --- Rule 2: Enforce Must-Contain Rules ---
+                    let relevantRules = rules.filter { $0.day == dayNumber }
+                    for rule in relevantRules {
+                        let mealMatches = (rule.meal == nil) || (rule.meal?.caseInsensitiveCompare(meal.name) == .orderedSame)
+                        if mealMatches && !meal.components.contains(where: { $0.name.range(of: rule.topic, options: .caseInsensitive) != nil }) {
+                            if let proteinIdx = meal.components.firstIndex(where: { isProtein($0.name) }) {
+                                let old = meal.components[proteinIdx].name
+                                meal.components[proteinIdx] = ConceptualComponent(name: rule.topic, grams: 120)
+                                onLog?("✅ Enforced: Day \(dayNumber) • \(meal.name) now has '\(rule.topic)' (replaced '\(old)').")
+                            } else {
+                                meal.components.append(ConceptualComponent(name: rule.topic, grams: 120))
+                                onLog?("✅ Enforced: Day \(dayNumber) • \(meal.name) now has '\(rule.topic)' (added).")
                             }
-                        } else {
-                            usedDinnerProteins.insert(currentKey)
                         }
+                    }
+                    
+                    // --- Rule 3: Diversify Dinner & Enforce Single Main Course ---
+                    var proteinIndices = meal.components.indices.filter { isProtein(meal.components[$0].name) }
+                    
+                    // 3a. Avoid repeating the same main protein at dinner across the week
+                    if meal.name.caseInsensitiveCompare("Dinner") == .orderedSame {
+                        if let mainProteinIdx = proteinIndices.first {
+                            let currentKey = coreProteinKey(meal.components[mainProteinIdx].name)
+                            if usedDinnerProteins.contains(currentKey) {
+                                let isProtectedByRule = protectedByDayMeal[dayNumber]?[meal.name.lowercased()]?.contains(where: { currentKey.contains($0) }) ?? false
+                                if !isProtectedByRule {
+                                    let replacementOptions = foodPalette.filter { isProtein($0) && !isExcluded($0) }
+                                    if let replacement = replacementOptions.first(where: { !usedDinnerProteins.contains(coreProteinKey($0)) }) {
+                                        let oldName = meal.components[mainProteinIdx].name
+                                        meal.components[mainProteinIdx].name = replacement
+                                        onLog?("🔁 Diversified Dinner on Day \(dayNumber): replaced '\(oldName)' with '\(replacement)'.")
+                                        usedDinnerProteins.insert(coreProteinKey(replacement))
+                                    }
+                                }
+                            } else {
+                                usedDinnerProteins.insert(currentKey)
+                            }
+                        }
+                    }
+                    
+                    // 3b. Ensure only one main protein per meal (unless explicitly requested)
+                    proteinIndices = meal.components.indices.filter { isProtein(meal.components[$0].name) }
+                    if proteinIndices.count > 1 {
+                        for extraIdx in proteinIndices.dropFirst().reversed() {
+                            let old = meal.components[extraIdx].name
+                            if let replacement = sideCandidates.randomElement() {
+                                meal.components[extraIdx] = ConceptualComponent(name: replacement, grams: 100)
+                                onLog?("✅ Single Main: Day \(dayNumber) • \(meal.name) replaced extra protein '\(old)' with '\(replacement)'.")
+                            } else {
+                                meal.components.remove(at: extraIdx)
+                            }
+                        }
+                    }
+                    
+                    // --- Rule 4: Inter-day Variety Check (Signature) ---
+                    let signature = mealSignature(meal)
+                    if seenSignatures[meal.name, default: []].contains(signature) {
+                        onLog?("‼️ Duplicate meal signature detected for \(meal.name) on Day \(dayNumber). Attempting to vary.")
+                        var varied = false
+                        // Try to vary a side component first
+                        if let sideIdx = meal.components.firstIndex(where: { !isProtein($0.name) }) {
+                            if let newSide = sideCandidates.first(where: { !meal.components.map({$0.name}).contains($0) }) {
+                                let oldSide = meal.components[sideIdx].name
+                                meal.components[sideIdx].name = newSide
+                                onLog?("🔀 Varied side in Day \(dayNumber) • \(meal.name): '\(oldSide)' → '\(newSide)'.")
+                                varied = true
+                            }
+                        }
+                        // If no side could be varied, try the main
+                        if !varied, let mainIdx = meal.components.firstIndex(where: { isProtein($0.name) }) {
+                            let currentMain = meal.components[mainIdx].name
+                            let variants = await aiGenerateVariants(for: currentMain, count: 2, mealName: meal.name, excludedFoods: excludedFoods, onLog: onLog)
+                            if let replacement = variants.first(where: { $0.lowercased() != currentMain.lowercased() }) {
+                                meal.components[mainIdx].name = replacement
+                                onLog?("🔀 Varied main in Day \(dayNumber) • \(meal.name): '\(currentMain)' → '\(replacement)'.")
+                            }
+                        }
+                    }
+                    seenSignatures[meal.name, default: []].insert(mealSignature(meal))
+                    
+                    // --- Rule 5: Component Limits (Context-Aware) ---
+                    let cuisine = inferCuisineFromMeal(meal: meal)
+                    let maxCount = maxComponents(for: cuisine)
+                    if meal.components.count > maxCount {
+                        let originalCount = meal.components.count
+                        meal.components = trimComponents(
+                            components: meal.components,
+                            maxCount: maxCount,
+                            cuisine: cuisine,
+                            onLog: onLog
+                        )
+                        onLog?("✂️ Trimmed components for Day \(dayNumber) • \(meal.name) from \(originalCount) to \(meal.components.count) (Cuisine: \(cuisine)).")
+                    }
+                    
+                    // NOTE: Old heuristic clamping removed from here.
+                    
+                    // --- Update State & Final Meal ---
+                    polishedPlan.days[dayIndex].meals[mealIndex] = meal
+                    if meal.components.contains(where: { isSalad($0.name) || isFruit($0.name) }) {
+                        dayHasSaladOrFruit = true
                     }
                 }
                 
-                proteinIndices = meal.components.indices.filter { isProtein(meal.components[$0].name) }
-                if proteinIndices.count > 1 {
-                    for extraIdx in proteinIndices.dropFirst().reversed() {
-                        let old = meal.components[extraIdx].name
-                        if let replacement = sideCandidates.randomElement() {
-                            meal.components[extraIdx] = ConceptualComponent(name: replacement, grams: 100)
-                            onLog?("✅ Single Main: Day \(dayNumber) • \(meal.name) replaced extra protein '\(old)' with '\(replacement)'.")
-                        } else {
-                            meal.components.remove(at: extraIdx)
-                        }
+                // --- Rule 7: Sprinkle Salads/Fruits (Day-level check) ---
+                if !dayHasSaladOrFruit {
+                    if let lunchIndex = polishedPlan.days[dayIndex].meals.firstIndex(where: { $0.name.caseInsensitiveCompare("Lunch") == .orderedSame }),
+                       let pick = sideCandidates.randomElement() {
+                        polishedPlan.days[dayIndex].meals[lunchIndex].components.append(ConceptualComponent(name: pick, grams: isFruit(pick) ? 150 : 120))
+                        onLog?("🥗 Sprinkled '\(pick)' into Day \(dayNumber) Lunch.")
                     }
-                }
-                
-                // --- Rule 4: Inter-day Variety Check ---
-                let signature = mealSignature(meal)
-                if seenSignatures[meal.name, default: []].contains(signature) {
-                    onLog?("‼️ Duplicate meal signature detected for \(meal.name) on Day \(dayNumber). Attempting to vary.")
-                    var varied = false
-                    // Try to vary a side component first
-                    if let sideIdx = meal.components.firstIndex(where: { !isProtein($0.name) }) {
-                        if let newSide = sideCandidates.first(where: { !meal.components.map({$0.name}).contains($0) }) {
-                            let oldSide = meal.components[sideIdx].name
-                            meal.components[sideIdx].name = newSide
-                            onLog?("🔀 Varied side in Day \(dayNumber) • \(meal.name): '\(oldSide)' → '\(newSide)'.")
-                            varied = true
-                        }
-                    }
-                    // If no side could be varied, try the main
-                    if !varied, let mainIdx = meal.components.firstIndex(where: { isProtein($0.name) }) {
-                        let currentMain = meal.components[mainIdx].name
-                        let variants = await aiGenerateVariants(for: currentMain, count: 2, mealName: meal.name, excludedFoods: excludedFoods, onLog: onLog)
-                        if let replacement = variants.first(where: { $0.lowercased() != currentMain.lowercased() }) {
-                            meal.components[mainIdx].name = replacement
-                            onLog?("🔀 Varied main in Day \(dayNumber) • \(meal.name): '\(currentMain)' → '\(replacement)'.")
-                        }
-                    }
-                }
-                seenSignatures[meal.name, default: []].insert(mealSignature(meal))
-                
-                // **MODIFIED**: This rule is now context-aware.
-                // --- Rule 5: Component Limits (Context-Aware) ---
-                let cuisine = inferCuisineFromMeal(meal: meal)
-                let maxCount = maxComponents(for: cuisine)
-                if meal.components.count > maxCount {
-                    let originalCount = meal.components.count
-                    meal.components = trimComponents(
-                        components: meal.components,
-                        maxCount: maxCount,
-                        cuisine: cuisine,
-                        onLog: onLog
-                    )
-                    onLog?("✂️ Trimmed components for Day \(dayNumber) • \(meal.name) from \(originalCount) to \(meal.components.count) (Cuisine: \(cuisine)).")
-                }
-                
-                
-                // --- Rule 6: Portion Clamping ---
-                meal = clampPortionsHeuristically(for: meal, profile: profile, onLog: onLog)
-                
-                // --- Update State & Final Meal ---
-                polishedPlan.days[dayIndex].meals[mealIndex] = meal
-                if meal.components.contains(where: { isSalad($0.name) || isFruit($0.name) }) {
-                    dayHasSaladOrFruit = true
                 }
             }
             
-            // --- Rule 7: Sprinkle Salads/Fruits (Day-level check) ---
-            if !dayHasSaladOrFruit {
-                if let lunchIndex = polishedPlan.days[dayIndex].meals.firstIndex(where: { $0.name.caseInsensitiveCompare("Lunch") == .orderedSame }),
-                   let pick = sideCandidates.randomElement() {
-                    polishedPlan.days[dayIndex].meals[lunchIndex].components.append(ConceptualComponent(name: pick, grams: isFruit(pick) ? 150 : 120))
-                    onLog?("🥗 Sprinkled '\(pick)' into Day \(dayNumber) Lunch.")
-                }
-            }
+            // --- Rule 6: Portion Clamping (Global AI Batch Pass) ---
+            // Извикваме новия метод върху целия план наведнъж
+            polishedPlan = await aiApplyPortionClamping(plan: polishedPlan, profile: profile, onLog: onLog)
+            
+            // --- Final: Polish Titles ---
+            let finalPolishedPlan = await diversifyDescriptiveTitlesIfNeeded(plan: polishedPlan, onLog: onLog)
+            
+            return finalPolishedPlan
         }
-        
-        let finalPolishedPlan = await diversifyDescriptiveTitlesIfNeeded(plan: polishedPlan, onLog: onLog)
-        
-        return finalPolishedPlan
-    }
     
     // **NEW**: Helper for `polishConceptualPlan` to infer cuisine
     private func inferCuisineFromMeal(meal: ConceptualMeal) -> String {
@@ -3491,76 +3497,6 @@ public final class USDAWeeklyMealPlanner: Sendable {
         }
         
         return finalComponents
-    }
-    
-    // Helper function for polishConceptualPlan to handle portion clamping for a single meal
-    private func clampPortionsHeuristically(
-        for meal: ConceptualMeal,
-        profile: Profile,
-        onLog: (@Sendable (String) -> Void)?
-    ) -> ConceptualMeal {
-        var newMeal = meal
-        // This logic is identical to the original, just scoped to a single meal
-        func clamp(_ x: Double, _ lo: Double, _ hi: Double) -> Double { max(lo, min(hi, x)) }
-        func round5(_ x: Double) -> Double { (x / 5.0).rounded() * 5.0 }
-        
-        let goal = profile.goal
-        let (preferLower, preferHighProtein, preferHigherCarb) = (
-            goal == .weightLoss,
-            [.muscleGain, .strength, .injuryRecovery].contains(goal),
-            [.endurance, .sportPerformance].contains(goal)
-        )
-        
-        func has(_ n: String, _ keys: [String]) -> Bool { let l = n.lowercased(); return keys.contains { l.contains($0) } }
-        func isProtein(_ n: String) -> Bool { has(n, ["chicken","turkey","salmon","tuna","fish","shrimp","pork","beef","lamb","loin","breast","steak","ham","egg","eggs","tofu","tempeh","lentil","lentils","bean","beans"]) }
-        func isStarchy(_ n: String) -> Bool { has(n, ["potato","sweet potato","yuca","cassava","corn","peas","rice","quinoa","pasta","noodle","oat","oatmeal","bread","toast","couscous","bulgur","barley","tortilla","pita","wrap"]) }
-        func isDairyDrink(_ n: String) -> Bool { let l = n.lowercased(); return (l.contains("milk") || l.contains("kefir") || l.contains("yogurt drink") || l.contains("smoothie")) && !l.contains("powder") }
-        func isCheeseOrYogurt(_ n: String) -> Bool { has(n, ["cheese","mozzarella","cheddar","feta","ricotta","cottage","yogurt","yoghurt","skyr","quark"]) }
-        func isNutOrSeed(_ n: String) -> Bool { has(n, ["almond","walnut","hazelnut","peanut","pistachio","cashew","pecan","chia","flax","linseed","sunflower seed","pumpkin seed","sesame"]) }
-        func isFruit(_ n: String) -> Bool { has(n, ["apple","banana","orange","grape","grapes","kiwi","pear","berries","berry","blueberry","strawberry","raspberry","mango","pineapple","peach","plum","apricot","watermelon","melon","cherry"]) }
-        func isSalad(_ n: String) -> Bool { let l = n.lowercased(); return l.contains("salad") || l.contains("greens") }
-        func isVeg(_ n: String) -> Bool { has(n, ["broccoli","spinach","tomato","cucumber","carrot","pepper","bell pepper","capsicum","zucchini","courgette","eggplant","aubergine","lettuce","arugula","rocket","cabbage","cauliflower","asparagus","mushroom","onion","leek"]) }
-        func isSoup(_ n: String) -> Bool { let l = n.lowercased(); return l.contains("soup") || l.contains("broth") }
-        func isSweetenerOrCondiment(_ n: String) -> Bool { has(n, ["honey","sugar","maple","syrup","jam","jelly","ketchup","mustard","mayo","dressing","sauce","pesto","butter","ghee","cream"]) }
-        
-        let proteinMax = preferHighProtein ? 220.0 : (preferLower ? 150.0 : 180.0)
-        let starchHi = preferHigherCarb ? 240.0 : (preferLower ? 150.0 : 180.0)
-        
-        for c in 0..<newMeal.components.count {
-            let name = newMeal.components[c].name
-            var g = newMeal.components[c].grams
-            let lower = name.lowercased()
-            
-            if isSweetenerOrCondiment(lower) { g = clamp(g, 5.0, preferLower ? 15.0 : 20.0) }
-            else if isProtein(lower) { g = clamp(g, 90.0, proteinMax) }
-            else if isStarchy(lower) { g = clamp(g, preferLower ? 80.0 : 90.0, starchHi) }
-            else if isDairyDrink(lower) { g = clamp(g, 200.0, 300.0) }
-            else if isCheeseOrYogurt(lower) { g = clamp(g, preferLower ? 20.0 : 25.0, preferLower ? 50.0 : 60.0) }
-            else if isNutOrSeed(lower) { g = clamp(g, preferLower ? 15.0 : 20.0, preferLower ? 30.0 : 40.0) }
-            else if isSoup(lower) { g = clamp(g, 250.0, 400.0) }
-            else if isSalad(lower) { g = clamp(g, 90.0, 180.0) }
-            else if isFruit(lower) { g = clamp(g, preferLower ? 100.0 : 120.0, preferLower ? 160.0 : 180.0) }
-            else if isVeg(lower) { g = clamp(g, preferLower ? 60.0 : 70.0, preferLower ? 160.0 : 200.0) }
-            else { g = clamp(g, preferLower ? 50.0 : 60.0, preferLower ? 180.0 : 200.0) }
-            
-            newMeal.components[c].grams = round5(g)
-        }
-        return newMeal
-    }
-    
-    private func clampPortionsHeuristically(
-        plan: AIConceptualPlanResponse,
-        profile: Profile,
-        onLog: (@Sendable (String) -> Void)?
-    ) -> AIConceptualPlanResponse {
-        var newPlan = plan
-        for d in 0..<newPlan.days.count {
-            for m in 0..<newPlan.days[d].meals.count {
-                newPlan.days[d].meals[m] = clampPortionsHeuristically(for: newPlan.days[d].meals[m], profile: profile, onLog: onLog)
-            }
-        }
-        onLog?("✅ Applied heuristic portion clamping across the plan.")
-        return newPlan
     }
     
     @MainActor
@@ -3968,6 +3904,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
             return gender == "female" ? Demographic.adultWomen19_50y : Demographic.adultMen19_50y
         }
     }
+    
 }
 
 
@@ -4001,3 +3938,186 @@ fileprivate func filterMetaDirectives(_ items: [String]) -> [String] {
     items.filter { !isMetaDirective($0) }
 }
 
+
+@available(iOS 26.0, *)
+extension USDAWeeklyMealPlanner {
+    
+    @available(iOS 26.0, *)
+        @MainActor
+        private func aiBatchClassifyFoods(
+            names: [String],
+            onLog: (@Sendable (String) -> Void)?
+        ) async -> [String: AIFoodPortionCategory] {
+            guard !names.isEmpty else { return [:] }
+            
+            let uniqueNames = Array(Set(names)).sorted()
+            
+            let session = LanguageModelSession(instructions: Instructions {
+                """
+                You are a nutritional data assistant. Classify food items for portion control.
+                
+                CATEGORIES:
+                1. **Protein**: Meat, fish, eggs, tofu, seitan.
+                2. **Starchy Carb**: Rice, pasta, bread, potatoes, corn, oats, beans/lentils.
+                3. **Fat/Oil**: Pure fats like Butter, Olive Oil, Ghee, Coconut Oil.
+                4. **Spice/Herb**: Dry spices, dry herbs, salt, pepper, baking powder.
+                5. **Sauce/Dressing**: Ketchup, Mayo, Mustard, Salsa, Soy Sauce, Vinegar.
+                6. **Sweetener**: Honey, Maple Syrup, Sugar, Agave, Molasses.
+                7. **Composite Dish**: A full meal item like "Lasagna", "Pizza Slice", "Burrito".
+                8. **Veg**: Raw/cooked vegetables (Spinach, Carrot, Tomato).
+                9. **Salad**: Leafy greens mixes.
+                10. **Dairy**: Milk (Drink), Cheese/Yogurt (Solid).
+                
+                Return a JSON map of Name -> Category.
+                """
+            })
+            
+            let prompt = """
+            Classify these foods:
+            \(uniqueNames.map { "- \($0)" }.joined(separator: "\n"))
+            """
+            
+            do {
+                try Task.checkCancellation()
+                let response = try await session.respond(
+                    to: prompt,
+                    generating: AIBatchFoodClassificationResponse.self,
+                    includeSchemaInPrompt: true,
+                    options: GenerationOptions(sampling: .greedy)
+                )
+                
+                var map: [String: AIFoodPortionCategory] = [:]
+                for item in response.content.classifications {
+                    map[item.foodName.lowercased()] = item.category
+                }
+                
+                // Fallback
+                for name in uniqueNames {
+                    if map[name.lowercased()] == nil { map[name.lowercased()] = .other }
+                }
+                return map
+                
+            } catch {
+                onLog?("⚠️ AI Classification failed. Defaults applied.")
+                return [:]
+            }
+        }
+    
+    @available(iOS 26.0, *)
+        @MainActor
+        private func aiApplyPortionClamping(
+            plan: AIConceptualPlanResponse,
+            profile: Profile,
+            onLog: (@Sendable (String) -> Void)?
+        ) async -> AIConceptualPlanResponse {
+            var newPlan = plan
+            
+            // 1. Събиране на имената
+            var allFoodNames = Set<String>()
+            for day in newPlan.days {
+                for meal in day.meals {
+                    for component in meal.components {
+                        allFoodNames.insert(component.name)
+                    }
+                }
+            }
+            
+            // 2. Класификация
+            let categoryMap = await aiBatchClassifyFoods(names: Array(allFoodNames), onLog: onLog)
+            
+            // 3. Helpers
+            func clamp(_ x: Double, _ lo: Double, _ hi: Double) -> Double { max(lo, min(hi, x)) }
+            func round5(_ x: Double) -> Double { (x / 5.0).rounded() * 5.0 }
+            
+            // Profile logic
+            let goal = profile.goal
+            let (preferLower, preferHighProtein, preferHigherCarb) = (
+                goal == .weightLoss,
+                [.muscleGain, .strength, .injuryRecovery].contains(goal),
+                [.endurance, .sportPerformance].contains(goal)
+            )
+            
+            let proteinMax = preferHighProtein ? 220.0 : (preferLower ? 150.0 : 180.0)
+            let starchHi   = preferHigherCarb ? 240.0 : (preferLower ? 150.0 : 180.0)
+            
+            // 4. Обхождане и обновяване
+            for d in 0..<newPlan.days.count {
+                for m in 0..<newPlan.days[d].meals.count {
+                    for c in 0..<newPlan.days[d].meals[m].components.count {
+                        let component = newPlan.days[d].meals[m].components[c]
+                        let key = component.name.lowercased()
+                        let category = categoryMap[key] ?? .other
+                        
+                        var g = component.grams
+                        
+                        switch category {
+                        case .protein:
+                            g = clamp(g, 90.0, proteinMax)
+                            
+                        case .starchyCarb:
+                            g = clamp(g, preferLower ? 80.0 : 90.0, starchHi)
+                            
+                        case .dairyDrink:
+                            g = clamp(g, 200.0, 300.0)
+                            
+                        case .cheeseOrYogurt:
+                            if key.contains("yogurt") || key.contains("skyr") || key.contains("quark") {
+                                g = clamp(g, 120.0, 200.0)
+                            } else {
+                                g = clamp(g, preferLower ? 20.0 : 30.0, 60.0)
+                            }
+                            
+                        case .nutOrSeed:
+                            g = clamp(g, preferLower ? 10.0 : 15.0, 40.0)
+                            
+                        case .fruit:
+                            g = clamp(g, 100.0, 180.0)
+                            
+                        case .salad:
+                            g = clamp(g, 60.0, 150.0)
+                            
+                        case .veg:
+                            g = clamp(g, 100.0, 250.0)
+                            
+                        case .soup:
+                            g = clamp(g, 250.0, 400.0)
+                            
+                        case .fatOrOil:
+                            g = clamp(g, 5.0, 15.0)
+                            
+                        case .sauceOrDressing:
+                            g = clamp(g, 15.0, 40.0)
+                            
+                        case .spiceOrHerb:
+                            if key.contains("fresh") || key.contains("leaves") {
+                                g = clamp(g, 5.0, 20.0) // пресни билки
+                            } else {
+                                g = clamp(g, 0.5, 3.0)  // сухи подправки
+                            }
+
+                        case .sweetener: // <-- ТУК Е ПРОМЯНАТА (Замества sweetenerOrCondiment)
+                            // Мед, кленов сироп, захар.
+                            // Малко по-щедро от олиото, но все пак ограничено.
+                            g = clamp(g, 5.0, 25.0)
+                            
+                        case .compositeDish:
+                            g = clamp(g, 250.0, 450.0)
+                            
+                        case .other:
+                            g = clamp(g, 50.0, 200.0)
+                        }
+                        
+                        // Закръгляме, но за сухите подправки запазваме прецизност
+                        if category == .spiceOrHerb && g < 5.0 {
+                            newPlan.days[d].meals[m].components[c].grams = (g * 2).rounded() / 2
+                        } else {
+                            newPlan.days[d].meals[m].components[c].grams = round5(g)
+                        }
+                    }
+                }
+            }
+            
+            onLog?("✅ Applied AI-based portion clamping with extended categories.")
+            return newPlan
+        }
+}
