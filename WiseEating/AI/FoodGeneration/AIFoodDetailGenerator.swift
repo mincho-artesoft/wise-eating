@@ -14,6 +14,17 @@ class AIFoodDetailGenerator {
         self.foodSearcher = SmartFoodSearch3(container: container)
     }
     
+    private func loadUserSettings(from ctx: ModelContext) -> UserSettings? {
+        do {
+            let descriptor = FetchDescriptor<UserSettings>()
+            return try ctx.fetch(descriptor).first
+        } catch {
+            print("⚠️ Failed to fetch UserSettings: \(error)")
+            return nil
+        }
+    }
+
+    
     @available(iOS 26.0, *)
     func generateDetails(
         for foodName: String,
@@ -125,6 +136,17 @@ class AIFoodDetailGenerator {
         let greedyOptions = GenerationOptions(sampling: .greedy, maximumResponseTokens: 64)
         let allowedDiets = try dbDietNames(in: ctx)
         
+        // 🔧 UserSettings → кои „тежки“ детайли да се генерират
+        let settings = loadUserSettings(from: ctx)
+
+        // Ако няма UserSettings, можеш да решиш какъв да е default.
+        // Аз слагам `true`, за да не счупим текущото поведение.
+        // Ако искаш по default да НЯМА детайлни полета – смени на `false`.
+        let shouldGenerateLipids       = settings?.generateLipids       ?? true
+        let shouldGenerateAminoAcids   = settings?.generateAminoAcids   ?? true
+        let shouldGenerateCarbDetails  = settings?.generateCarbDetails  ?? true
+        let shouldGenerateSterols      = settings?.generateSterols      ?? true
+
         @Sendable func shortPause() async { try? await Task.sleep(nanoseconds: 300_000_000) }
         
         /// Универсален helper с retry, експоненциален бекоф и **fresh session при всеки опит**.
@@ -1009,6 +1031,10 @@ class AIFoodDetailGenerator {
         )
         let minerals = AIMineralsResponse(minerals: mineralsMerged)
         
+        var lipids: AILipidsResponse
+
+        if shouldGenerateLipids {
+            
         let totalSaturatedPrompt = createPromptWithReference(
             basePrompt: "Food: \(foodName). Return ONLY the field 'totalSaturated' as JSON with { value: <number>, unit: 'g' } for **per 100 g exactly**. No prose. No other keys.",
             referenceValue: similarFood?.lipids?.totalSaturated
@@ -1442,7 +1468,6 @@ class AIFoodDetailGenerator {
         try Task.checkCancellation()
         
         
-        // ... (Lipids assembly remains the same)
         
         let lipidsMerged = AILipids(
             totalSaturated: totalSaturated.totalSaturated,
@@ -1466,13 +1491,39 @@ class AIFoodDetailGenerator {
             pufa20_5: pufa20_5.pufa20_5, pufa21_5: pufa21_5.pufa21_5, pufa22_4: pufa22_4.pufa22_4,
             pufa22_5: pufa22_5.pufa22_5, pufa22_6: pufa22_6.pufa22_6, pufa2_4:  pufa2_4.pufa2_4
         )
-        let lipids = AILipidsResponse(lipids: lipidsMerged)
-        
+            lipids = AILipidsResponse(lipids: lipidsMerged)
+        } else {
+            // ❌ Не генерираме – връщаме всичко 0 g, за да не чупим DTO-то.
+            let zeroG = AINutrient(value: 0, unit: "g")
+            let lipidsMerged = AILipids(
+                totalSaturated: zeroG,
+                totalMonounsaturated: zeroG,
+                totalPolyunsaturated: zeroG,
+                totalTrans: zeroG,
+                totalTransMonoenoic: zeroG,
+                totalTransPolyenoic: zeroG,
+                sfa4_0: zeroG,  sfa6_0: zeroG,  sfa8_0: zeroG,
+                sfa10_0: zeroG, sfa12_0: zeroG, sfa13_0: zeroG,
+                sfa14_0: zeroG, sfa15_0: zeroG, sfa16_0: zeroG,
+                sfa17_0: zeroG, sfa18_0: zeroG, sfa20_0: zeroG,
+                sfa22_0: zeroG, sfa24_0: zeroG,
+                mufa14_1: zeroG, mufa15_1: zeroG, mufa16_1: zeroG,
+                mufa17_1: zeroG, mufa18_1: zeroG, mufa20_1: zeroG,
+                mufa22_1: zeroG, mufa24_1: zeroG,
+                tfa16_1_t: zeroG, tfa18_1_t: zeroG,
+                tfa22_1_t: zeroG, tfa18_2_t: zeroG,
+                pufa18_2: zeroG, pufa18_3: zeroG, pufa18_4: zeroG,
+                pufa20_2: zeroG, pufa20_3: zeroG, pufa20_4: zeroG,
+                pufa20_5: zeroG, pufa21_5: zeroG, pufa22_4: zeroG,
+                pufa22_5: zeroG, pufa22_6: zeroG, pufa2_4: zeroG
+            )
+            lipids = AILipidsResponse(lipids: lipidsMerged)
+        }
         // MARK: 11) Amino Acids - PARALLEL BATCH 10, 11
         
-        // BATCH 10 (Amino Acids A-L)
-        // --- BATCH 10 (Amino Acids A–L) — FIXED SNAPSHOTS & TASKS ---
-        
+        var aminoAcids: AIAminoAcidsResponse
+
+        if shouldGenerateAminoAcids {
         // 1) Prompts up front
         let alaninePrompt      = createPromptWithReference(basePrompt: "Food: \(foodName). Return ONLY the field 'alanine' as JSON with { value: <number>, unit: 'g' } for **per 100 g exactly**. No prose. No other keys.",      referenceValue: similarFood?.aminoAcids?.alanine)
         let argininePrompt     = createPromptWithReference(basePrompt: "Food: \(foodName). Return ONLY the field 'arginine' as JSON with { value: <number>, unit: 'g' } for **per 100 g exactly**. No prose. No other keys.",     referenceValue: similarFood?.aminoAcids?.arginine)
@@ -1653,9 +1704,7 @@ class AIFoodDetailGenerator {
         let hydroxyproline: AIHydroxyproline_Resp = await hydroxyprolineTask.value ?? AIHydroxyproline_Resp(hydroxyproline: AINutrient(value: 0, unit: "g"))
         try Task.checkCancellation()
         
-        
-        // ... (Amino Acids assembly remains the same)
-        
+            
         let aminoMerged = AIAminoAcids(
             alanine: alanine.alanine, arginine: arginine.arginine, asparticAcid: asparticAcid.asparticAcid,
             cystine: cystine.cystine, glutamicAcid: glutamicAcid.glutamicAcid, glycine: glycine.glycine,
@@ -1665,8 +1714,24 @@ class AIFoodDetailGenerator {
             tyrosine: tyrosine.tyrosine, valine: valine.valine, serine: serine.serine,
             hydroxyproline: hydroxyproline.hydroxyproline
         )
-        let aminoAcids = AIAminoAcidsResponse(aminoAcids: aminoMerged)
+            aminoAcids = AIAminoAcidsResponse(aminoAcids: aminoMerged)
+        } else {
+            let zeroG = AINutrient(value: 0, unit: "g")
+            let aminoMerged = AIAminoAcids(
+                alanine: zeroG, arginine: zeroG, asparticAcid: zeroG,
+                cystine: zeroG, glutamicAcid: zeroG, glycine: zeroG,
+                histidine: zeroG, isoleucine: zeroG, leucine: zeroG,
+                lysine: zeroG, methionine: zeroG, phenylalanine: zeroG,
+                proline: zeroG, threonine: zeroG, tryptophan: zeroG,
+                tyrosine: zeroG, valine: zeroG, serine: zeroG,
+                hydroxyproline: zeroG
+            )
+            aminoAcids = AIAminoAcidsResponse(aminoAcids: aminoMerged)
+        }
         
+        var carbDetails: AICarbDetailsResponse
+
+        if shouldGenerateCarbDetails {
         // MARK: 12) Carb Details - PARALLEL BATCH 12
         // --- BATCH 12 (Carb Details) — FIXED SNAPSHOTS & TASKS ---
         
@@ -1764,8 +1829,22 @@ class AIFoodDetailGenerator {
             fructose: fructose.fructose, lactose: lactose.lactose, maltose: maltose.maltose,
             galactose: galactose.galactose
         )
-        let carbDetails = AICarbDetailsResponse(carbDetails: carbMerged)
+            
+        carbDetails = AICarbDetailsResponse(carbDetails: carbMerged)
+            
+        } else {
+            let zeroG = AINutrient(value: 0, unit: "g")
+            let carbMerged = AICarbDetails(
+                starch: zeroG, sucrose: zeroG, glucose: zeroG,
+                fructose: zeroG, lactose: zeroG, maltose: zeroG,
+                galactose: zeroG
+            )
+            carbDetails = AICarbDetailsResponse(carbDetails: carbMerged)
+        }
         
+        var sterols: AISterolsResponse
+
+        if shouldGenerateSterols {
         // --- BATCH 13 (Sterols) — FIXED SNAPSHOTS & TASKS ---
         
         // 1) Prompts up front
@@ -1830,7 +1909,19 @@ class AIFoodDetailGenerator {
             campesterol:    campesterol.campesterol,
             stigmasterol:   stigmasterol.stigmasterol
         )
-        let sterols = AISterolsResponse(sterols: sterolsMerged)
+            
+            sterols = AISterolsResponse(sterols: sterolsMerged)
+            
+        } else {
+            let zeroMg = AINutrient(value: 0, unit: "mg")
+            let sterolsMerged = AISterols(
+                phytosterols:   zeroMg,
+                betaSitosterol: zeroMg,
+                campesterol:    zeroMg,
+                stigmasterol:   zeroMg
+            )
+            sterols = AISterolsResponse(sterols: sterolsMerged)
+        }
         
         
         // --- Final assembly -> FoodItemDTO (остава непроменено) ---

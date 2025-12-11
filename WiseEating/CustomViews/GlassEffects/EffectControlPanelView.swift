@@ -34,8 +34,10 @@ struct EffectControlPanelView: View {
                     }
                 }
                 Toggle("Use Apple Material", isOn: $effectManager.config.useAppleMaterial.animation())
+                    .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light)
 
                 Toggle("Contrast Scrim", isOn: $effectManager.config.useScrim)
+                    .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light)
 
             }
         }

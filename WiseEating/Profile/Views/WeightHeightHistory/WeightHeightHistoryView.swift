@@ -258,6 +258,8 @@ struct WeightHeightHistoryView: View {
                 Text("Metric Trends").font(.headline).foregroundStyle(effectManager.currentGlobalAccentColor)
                 Spacer()
                 Toggle("", isOn: $isHiden).padding(.horizontal, 4).foregroundColor(effectManager.currentGlobalAccentColor)
+                    .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light)
+
             }.padding(.bottom, 8)
             
             if filteredHistory.count < 2 {
