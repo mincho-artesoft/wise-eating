@@ -1296,7 +1296,7 @@ struct RootView: View {
                 print("⏱️ [Ad Loop] Изчакване на 10 минути до следващата проверка...")
                 
                 // 10 минути * 60 секунди * 1 милиард наносекунди
-                try? await Task.sleep(nanoseconds: 1 * 60 * 1_000_000_000)
+                try? await Task.sleep(nanoseconds: 10 * 60 * 1_000_000_000)
                 
                 // Проверка и показване
                 tryShowAd()
