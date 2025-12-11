@@ -6,6 +6,11 @@ final class RewardedInterstitialAdManager: NSObject, FullScreenContentDelegate {
 
     static let shared = RewardedInterstitialAdManager()
 
+    // ✅ ДОБАВЕНО: Свойството isReady, което RootView търси
+    var isReady: Bool {
+        return rewardedInterstitial != nil
+    }
+
     private var rewardedInterstitial: RewardedInterstitialAd?
     private var isLoading = false
 

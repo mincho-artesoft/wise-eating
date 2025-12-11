@@ -50,6 +50,7 @@ struct BatchEditRow: View {
                 Text("Has Expiration Date")
                     .foregroundColor(effectManager.currentGlobalAccentColor)
             }
+            .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light)
             .onChange(of: batch.hasExpiration) { _, _ in
                 onInteract()
             }
