@@ -80,16 +80,20 @@ final class FoodListVM: ObservableObject {
     
     /// Fetches items. Delegates to SmartSearch if query exists, otherwise uses standard DB fetch.
     private func loadPage(isReset: Bool) {
-        if !isReset && isLoading { return }
-        
-        guard let container, let searchEngine else {
-            if isReset { self.isLoading = false }
-            return
-        }
-        
-        isLoading = true
-        
-        let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+          if !isReset && isLoading { return }
+          
+          guard let container, let searchEngine else {
+              if isReset { self.isLoading = false }
+              return
+          }
+          
+          // ✅ ДОБАВЕНО: Опресняваме индекса на търсачката преди търсене
+          // Това гарантира, че току-що добавени храни/рецепти (като R1) ще бъдат намерени.
+          searchEngine.refreshData()
+          
+          isLoading = true
+          
+          let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         let currentFilter = self.filter
         
         // --- 1. SMART SEARCH MODE (Query exists) ---
