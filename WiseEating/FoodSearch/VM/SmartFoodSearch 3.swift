@@ -1055,7 +1055,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
 
                     if isNumericConstraint && val == 0 {
                         passesNutrients = false
-                        print("🧪 [SmartSearch] Excluding '\\(item.lowercasedName)' for \\(goal.nutrient) – numeric constraint \\(goal.constraint) but rounded value is 0.0")
+                        print("🧪 [SmartSearch] Excluding '\(item.lowercasedName)' for \(goal.nutrient) – numeric constraint \(goal.constraint) but rounded value is 0.0")
                         break
                     }
 
@@ -1325,7 +1325,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
         
         // REPLACEMENT LOGIC:
         let regexReplacements: [(String, String)] = [
-            // 1. Longest phrases
+            // 1. Longest phrases – explicitly inclusive
             (#"\bless\s+than\s+or\s+equal\s+to\b"#, " <= "),
             (#"\bno\s+more\s+than\b"#, " <= "),
             (#"\bat\s+most\b"#, " <= "),
@@ -1334,28 +1334,31 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             (#"\bat\s+least\b"#, " >= "),
             (#"\bminimum\b"#, " >= "),
             
-            // 2. Standard phrases
-            (#"\bless\s+than\b"#, " <= "),
-            (#"\bfewer\s+than\b"#, " <= "),
-            (#"\blower\s+than\b"#, " <= "),
-            (#"\bmore\s+than\b"#, " >= "),
-            (#"\bgreater\s+than\b"#, " >= "),
-            (#"\bhigher\s+than\b"#, " >= "),
+            // 2. Standard phrases – plain "less than"/"more than" are STRICT
+            (#"\bless\s+than\b"#, " < "),
+            (#"\bfewer\s+than\b"#, " < "),
+            (#"\blower\s+than\b"#, " < "),
+            (#"\bmore\s+than\b"#, " > "),
+            (#"\bgreater\s+than\b"#, " > "),
+            (#"\bhigher\s+than\b"#, " > "),
             
             // 3. Short colloquialisms
-            (#"\bunder\b"#, " <= "),
-            (#"\bbelow\b"#, " <= "),
-            (#"\bless\b"#, " <= "),
-            (#"\bfewer\b"#, " <= "),
-            (#"\blower\b"#, " <= "),
+            // "under/below/less/fewer/lower" → strict "<"
+            (#"\bunder\b"#, " < "),
+            (#"\bbelow\b"#, " < "),
+            (#"\bless\b"#, " < "),
+            (#"\bfewer\b"#, " < "),
+            (#"\blower\b"#, " < "),
+            // "min" / "max" keep inclusive meaning
             (#"\bmin\b"#, " >= "),
             (#"\bmax\b"#, " <= "),
-            (#"\bover\b"#, " >= "),
-            (#"\babove\b"#, " >= "),
-            (#"\bexceeds\b"#, " >= "),
-            (#"\bmore\b"#, " >= "),
-            (#"\bgreater\b"#, " >= "),
-            (#"\bhigher\b"#, " >= ")
+            // "over/above/exceeds/more/greater/higher" → strict ">"
+            (#"\bover\b"#, " > "),
+            (#"\babove\b"#, " > "),
+            (#"\bexceeds\b"#, " > "),
+            (#"\bmore\b"#, " > "),
+            (#"\bgreater\b"#, " > "),
+            (#"\bhigher\b"#, " > ")
         ]
         
         for (pattern, template) in regexReplacements {
