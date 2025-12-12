@@ -1,4 +1,3 @@
-// ==== FILE: /Users/aleksandarsvinarov/Desktop/as/vitahealth-clean/WiseEating/Ads/NativeAd/NativeAdPool.swift ====
 import SwiftUI
 import GoogleMobileAds
 
@@ -6,38 +5,42 @@ import GoogleMobileAds
 final class NativeAdPool: NSObject, ObservableObject {
     static let shared = NativeAdPool()
     
-    // Увеличаваме размера на пула, за да имаме резерв при бързо скролване
-    private let poolSize = 5
+    // 👇 ПРОМЯНА: Намаляваме от 5 на 3, за да облекчим WebKit процеса
+    private let poolSize = 3
     private let adUnitID = "ca-app-pub-3759868960530173/3629337942"
     
-    // Кеш с готови реклами
     @Published var availableAds: [NativeAd] = []
     
-    // Лоудъри (множество, за да не се блокираме взаимно)
     private var activeLoaders: Set<AdLoader> = []
     
     override private init() {
         super.init()
-        // Първоначално зареждане
-        refreshPool()
     }
     
-    /// Основен метод за пълнене на басейна
     func refreshPool() {
-        // Колко реклами ни трябват още?
         let needed = poolSize - (availableAds.count + activeLoaders.count)
-        
         guard needed > 0 else { return }
         
-        print("📥 [NativeAdPool] Need \(needed) more ads. Starting loading batch...")
+        print("📥 [NativeAdPool] Need \(needed) more ads. Staggering loads...")
         
-        for _ in 0..<needed {
-            loadSingleAd()
+        // 👇 ПРОМЯНА: Увеличаваме паузата на 2.5 секунди между заявките
+        for i in 0..<needed {
+            let delay = Double(i) * 2.5
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
+                self?.loadSingleAd()
+            }
         }
     }
     
     private func loadSingleAd() {
-        let rootVC = UIApplication.shared.topMostViewController
+        let currentCount = availableAds.count + activeLoaders.count
+        if currentCount >= poolSize { return }
+        
+        // Важно: Проверка за активен контролер
+        guard let rootVC = UIApplication.shared.topMostViewController else {
+            print("⚠️ [NativeAdPool] No root VC found, skipping load.")
+            return
+        }
         
         let loader = AdLoader(
             adUnitID: adUnitID,
@@ -47,43 +50,44 @@ final class NativeAdPool: NSObject, ObservableObject {
         )
         
         loader.delegate = self
-        
-        // Запазваме референция към лоудъра, за да не бъде deallocated
         activeLoaders.insert(loader)
         
+        print("📥 [NativeAdPool] Requesting single ad...")
         loader.load(Request())
     }
     
-    // Взимане на реклама за показване
     func popAd() -> NativeAd? {
-        // Винаги проверяваме дали имаме нужда от още реклами
-        defer { refreshPool() }
+        // Зареждаме нови, само ако имаме поне една, за да не останем без.
+        // Но с по-голямо закъснение (5 сек), за да не пречим на UI скролирането.
+        defer {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                self.refreshPool()
+            }
+        }
         
         if !availableAds.isEmpty {
             let ad = availableAds.removeFirst()
             print("📤 [NativeAdPool] Ad popped. Remaining in pool: \(availableAds.count)")
             return ad
         } else {
-            print("⚠️ [NativeAdPool] Pool is empty! Returns nil, waiting for loaders.")
             return nil
         }
     }
 }
 
-// Делегат за зареждането
 extension NativeAdPool: @preconcurrency NativeAdLoaderDelegate {
     func adLoader(_ adLoader: AdLoader, didReceive nativeAd: NativeAd) {
         print("✅ [NativeAdPool] Ad received!")
         self.availableAds.append(nativeAd)
-        self.activeLoaders.remove(adLoader) // Освобождаваме лоудъра
+        self.activeLoaders.remove(adLoader)
     }
     
     func adLoader(_ adLoader: AdLoader, didFailToReceiveAdWithError error: Error) {
         print("❌ [NativeAdPool] Failed: \(error.localizedDescription)")
-        self.activeLoaders.remove(adLoader) // Освобождаваме лоудъра
+        self.activeLoaders.remove(adLoader)
         
-        // Опитваме отново след малко закъснение, за да не "удавим" AdMob
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
+        // При грешка чакаме много повече (15 сек), преди да пробваме пак
+        DispatchQueue.main.asyncAfter(deadline: .now() + 15) { [weak self] in
             self?.refreshPool()
         }
     }

@@ -47,17 +47,35 @@ struct WiseEatingApp: App {
             await CalendarViewModel.shared.ensureSharedShoppingListCalendarExists()
         }
         
-        // --- ПРОМЯНА: Зареждаме ВСИЧКИ видове реклами и ПУЛОВЕ тук ---
+        // --- ПРОМЯНА: Оптимизирано зареждане на реклами (Staggered Load) ---
+        
+        // 1. Зареждаме САМО App Open Ad веднага, защото ни трябва за студения старт
         Task { @MainActor in
-            // 1. Единични формати (цял екран)
-            await AppOpenAdManager.shared.loadAd()      // Open Ad
-            await RewardedAdManager.shared.loadAd()     // Video Reward
-            await InterstitialAdManager.shared.loadAd() // Fallback Interstitial
-            await RewardedInterstitialAdManager.shared.loadAd() 
+            await AppOpenAdManager.shared.loadAd()
+        }
+        
+        // 2. Всички останали ("тежки") реклами зареждаме със закъснение,
+        // за да оставим ресурси за UI-то и базата данни.
+        Task.detached(priority: .background) {
+            // Изчакваме 3 секунди, за да може приложението да "изгрее" спокойно
+            try? await Task.sleep(nanoseconds: 3 * 1_000_000_000)
             
-            // 2. Пулове (списъци) - стартираме ги да се пълнят веднага
-            BannerAdPool.shared.warmUp()       // Банери
-            NativeAdPool.shared.refreshPool()  // ✅ Native Ads (за разнообразни реклами в списъците)
+            await MainActor.run {
+                print("🚀 [AdOptimization] Starting delayed heavy ad loading...")
+                
+//                // Зареждаме единичните формати
+                Task { await RewardedAdManager.shared.loadAd() }
+                Task { await InterstitialAdManager.shared.loadAd() }
+                Task { await RewardedInterstitialAdManager.shared.loadAd() }
+                
+                // Зареждаме пула за банери
+                BannerAdPool.shared.warmUp()
+                
+                // Native ads са най-тежки (заради WebViews), пускаме ги последни с още малко буфер
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    NativeAdPool.shared.refreshPool()
+                }
+            }
         }
         // ----------------------------------------------------
     }
@@ -93,7 +111,7 @@ struct WiseEatingApp: App {
                                     coldStart = false
                                     
                                     Task { @MainActor in
-                                        try? await Task.sleep(nanoseconds: 3 * 1_000_000_000)
+                                        try? await Task.sleep(nanoseconds: 10 * 1_000_000_000)
                                         AppOpenAdManager.shared.showAdIfAvailable(forceShow: true)
                                     }
                                 } else {
