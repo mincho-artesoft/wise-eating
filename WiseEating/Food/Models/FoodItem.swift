@@ -765,13 +765,17 @@ extension FoodItem {
     }
     
     func foodImage(variant: String) -> UIImage? {
+           // ✅ FIX: Проверка за isDeleted И дали има контекст.
+           // Ако контекстът е nil, обектът е detached и достъпът до .photo ще гръмне.
+           if self.isDeleted || self.modelContext == nil { return nil }
+
            // 1) Check DB (User added photos)
-           if let data = self.photo, let img = UIImage(data: data) {
+            if let data = self.photo, let img = UIImage(data: data) {
                return img
            }
 
            let original = self.name
-           // Sanitize filenames
+           // ... (надолу кодът остава същият)
            let sanitizedName = original
                .replacingOccurrences(of: "\"", with: "_")
                .replacingOccurrences(of: "/", with: "_")
