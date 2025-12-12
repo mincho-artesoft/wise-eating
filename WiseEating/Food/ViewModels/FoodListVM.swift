@@ -82,19 +82,18 @@ final class FoodListVM: ObservableObject {
     private func loadPage(isReset: Bool) {
           if !isReset && isLoading { return }
           
-          guard let container, let searchEngine else {
+          guard let container, let searchEngine, let mainCtx = self.context else {
               if isReset { self.isLoading = false }
               return
           }
           
-          // ✅ ДОБАВЕНО: Опресняваме индекса на търсачката преди търсене
-          // Това гарантира, че току-що добавени храни/рецепти (като R1) ще бъдат намерени.
+          // Refresh search engine index
           searchEngine.refreshData()
           
           isLoading = true
           
           let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
-        let currentFilter = self.filter
+          let currentFilter = self.filter
         
         // --- 1. SMART SEARCH MODE (Query exists) ---
         if !query.isEmpty {
@@ -109,16 +108,13 @@ final class FoodListVM: ObservableObject {
                 case .menus:     isMenus = true
                 case .favorites: isFavorites = true
                 case .foods, .default, .diets, .plans:
-                    // For these, we search everything and filter in memory below
                     break
                 }
                 
                 // Perform the search using the engine
-                // We request a higher limit (e.g. 200) to cover "one page" of ranked results.
-                // Smart search ranks by relevance, so page 2+ is rarely needed.
                 let results = await searchEngine.searchResults(
                     query: query,
-                    activeFilters: [], // Pass UI nutrient filters here if FoodListVM supported them
+                    activeFilters: [],
                     isFavoritesOnly: isFavorites,
                     isRecipesOnly: isRecipes,
                     isMenusOnly: isMenus,
@@ -130,32 +126,27 @@ final class FoodListVM: ObservableObject {
                     return
                 }
                 
-                // Post-process results based on specific list filters that the engine
-                // might not handle strictly (like "User Added Only" or "Ingredients Only")
+                // Post-process results based on specific list filters
                 let filteredResults = results.filter { item in
                     switch currentFilter {
                     case .foods:
-                        // "Foods" usually means ingredients (not recipes/menus)
                         return !item.isRecipe && !item.isMenu && item.isUserAdded
                     case .default:
-                        // "Default" usually means System foods
                         return !item.isUserAdded
                     case .diets, .plans:
-                        return false // logic placeholders
+                        return false
                     case .recipes:
-                        // ✅ FIX: Strict check for recipes
                         return item.isUserAdded && item.isRecipe
                     case .menus:
-                        // ✅ FIX: Strict check for menus
                         return item.isUserAdded && item.isMenu
                     case .favorites:
-                        return true // Already handled by engine
+                        return true
                     }
                 }
                 
                 await MainActor.run {
                     self.items = filteredResults
-                    self.hasMore = false // Disable pagination for search results
+                    self.hasMore = false
                     self.isLoading = false
                 }
             }
@@ -163,15 +154,15 @@ final class FoodListVM: ObservableObject {
         }
         
         // --- 2. BROWSE MODE (Empty Query) ---
-        // Use efficient database offsets for infinite scrolling alphabetical lists
+        // ✅ FIX: Използваме директно mainCtx, за да избегнем проблеми със синхронизацията
+        // между нишките при бързо изтриване/добавяне.
         
         let offset = isReset ? 0 : self.currentOffset
         let limit = self.pageSize
         
+        // Не използваме Task.detached тук, за да гарантираме работа с Main Context
+        // Въпреки че сме в Task, ние сме на @MainActor, така че кодът е безопасен.
         currentTask = Task {
-            let bgContext = ModelContext(container)
-            bgContext.autosaveEnabled = false
-            
             let predicate = makeEmptyStatePredicate(filter: currentFilter)
             var descriptor = FetchDescriptor<FoodItem>(
                 predicate: predicate,
@@ -181,48 +172,33 @@ final class FoodListVM: ObservableObject {
             descriptor.fetchLimit = limit
             
             do {
-                let fetchedObjects = try bgContext.fetch(descriptor)
-                let fetchedIDs = fetchedObjects.map { $0.id }
+                // Директен fetch от главния контекст
+                let displayItems = try mainCtx.fetch(descriptor)
                 
                 if Task.isCancelled {
-                    await MainActor.run { self.isLoading = false }
+                    self.isLoading = false
                     return
                 }
                 
-                await MainActor.run {
-                    guard let mainCtx = self.context else { return }
-                    
-                    // Re-fetch objects on main context to ensure UI safety and faulting
-                    var displayItems: [FoodItem] = []
-                    if !fetchedIDs.isEmpty {
-                        let idSet = Set(fetchedIDs)
-                        let mainDescriptor = FetchDescriptor<FoodItem>(predicate: #Predicate { idSet.contains($0.id) })
-                        if let objs = try? mainCtx.fetch(mainDescriptor) {
-                            // Re-sort because ID fetch doesn't guarantee order
-                            displayItems = objs.sorted { $0.name.localizedCompare($1.name) == .orderedAscending }
-                        }
-                    }
-                    
-                    if isReset {
-                        self.items = displayItems
-                    } else {
-                        self.items.append(contentsOf: displayItems)
-                    }
-                    
-                    self.currentOffset = offset + displayItems.count
-                    self.hasMore = displayItems.count == limit
-                    self.isLoading = false
+                if isReset {
+                    self.items = displayItems
+                } else {
+                    self.items.append(contentsOf: displayItems)
                 }
+                
+                self.currentOffset = offset + displayItems.count
+                self.hasMore = displayItems.count == limit
+                self.isLoading = false
+                
             } catch {
                 print("❌ Browse fetch failed: \(error)")
-                await MainActor.run { self.isLoading = false }
+                self.isLoading = false
             }
         }
     }
     
     // MARK: - Predicate Builder (Empty State Only)
     
-    /// Used only when searchText is empty to show the full database list.
     private func makeEmptyStatePredicate(filter: FoodItemListView.Filter) -> Predicate<FoodItem> {
         switch filter {
         case .foods:     return #Predicate<FoodItem> { $0.isUserAdded && !$0.isRecipe && !$0.isMenu }
@@ -318,68 +294,59 @@ final class FoodListVM: ObservableObject {
         
         let foodID = item.id
         
-        // 1) Remove row from UI
+        // 1) Remove row from UI immediately
         if let index = items.firstIndex(of: item) {
             items.remove(at: index)
         }
         
-        // 2) Delete logic
-        DispatchQueue.main.async { [weak self, weak item] in
-            guard let self,
-                  let ctx = self.context,
-                  let item = item
-            else { return }
-            
-            if item.modelContext == nil { return }
-            
-            // --- Logic for menus ---
-            if item.isMenu {
-                print("🗑️ Deleting a menu item: \(item.name). Checking for linked meal plans...")
-                let menuIDToDelete = item.id
-                let descriptor = FetchDescriptor<MealPlanMeal>(
-                    predicate: #Predicate { $0.linkedMenuID == menuIDToDelete }
-                )
-                do {
-                    let linkedMeals = try ctx.fetch(descriptor)
-                    if !linkedMeals.isEmpty {
-                        for meal in linkedMeals {
-                            for entry in meal.entries {
-                                ctx.delete(entry)
-                            }
-                            meal.entries.removeAll()
-                            meal.linkedMenuID = nil
-                        }
-                    }
-                } catch {
-                    print("   - ❌ Failed to fetch linked meal plan meals: \(error)")
-                }
-            }
-            
-            // 3) Cleanup Metadata
-            self.cleanupShoppingMetadata(for: item)
-            self.cleanupPantryHistory(for: item)
-            
-            // 4) Update Search Index (Remove from In-Memory Cache)
-            SearchIndexStore.shared.removeItem(id: foodID, context: ctx)
-
-            // 5) Nullify relations
-            item.macronutrients = nil
-            item.lipids         = nil
-            item.vitamins       = nil
-            item.minerals       = nil
-            item.other          = nil
-            item.aminoAcids     = nil
-            item.carbDetails    = nil
-            item.sterols        = nil
-            
-            // 6) Delete
-            ctx.delete(item)
-            
+        // 2) Delete logic directly on MainActor to ensure consistency
+        // --- Logic for menus ---
+        if item.isMenu {
+            print("🗑️ Deleting a menu item: \(item.name). Checking for linked meal plans...")
+            let menuIDToDelete = item.id
+            let descriptor = FetchDescriptor<MealPlanMeal>(
+                predicate: #Predicate { $0.linkedMenuID == menuIDToDelete }
+            )
             do {
-                try ctx.save()
+                let linkedMeals = try ctx.fetch(descriptor)
+                if !linkedMeals.isEmpty {
+                    for meal in linkedMeals {
+                        for entry in meal.entries {
+                            ctx.delete(entry)
+                        }
+                        meal.entries.removeAll()
+                        meal.linkedMenuID = nil
+                    }
+                }
             } catch {
-                print("❌ Failed to save context after deleting food '\(item.name)': \(error)")
+                print("   - ❌ Failed to fetch linked meal plan meals: \(error)")
             }
+        }
+        
+        // 3) Cleanup Metadata
+        self.cleanupShoppingMetadata(for: item)
+        self.cleanupPantryHistory(for: item)
+        
+        // 4) Update Search Index (Remove from In-Memory Cache)
+        SearchIndexStore.shared.removeItem(id: foodID, context: ctx)
+
+        // 5) Nullify relations
+        item.macronutrients = nil
+        item.lipids         = nil
+        item.vitamins       = nil
+        item.minerals       = nil
+        item.other          = nil
+        item.aminoAcids     = nil
+        item.carbDetails    = nil
+        item.sterols        = nil
+        
+        // 6) Delete
+        ctx.delete(item)
+        
+        do {
+            try ctx.save()
+        } catch {
+            print("❌ Failed to save context after deleting food '\(item.name)': \(error)")
         }
     }
     

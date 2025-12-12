@@ -888,6 +888,16 @@ struct FoodItemEditorView: View {
            .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
        }
     
+    private func nextFoodId() -> Int {
+            var desc = FetchDescriptor<FoodItem>()
+            desc.sortBy = [SortDescriptor(\.id, order: .reverse)] // Сортираме низходящо
+            desc.fetchLimit = 1 // Взимаме само първия (най-големия)
+            
+            // Ако няма записи връща 0, иначе най-голямото ID
+            let maxId = (try? ctx.fetch(desc))?.first?.id ?? 0
+            return maxId + 1
+        }
+    
     // MARK: - Save Logic
     private func save() {
         let totalWeight: Double = others.weightG?.value ?? 0
@@ -917,10 +927,11 @@ struct FoodItemEditorView: View {
             defer { isSaving = false }
             
             let item: FoodItem = food ?? {
-                let nextID = (try? ctx.fetchCount(FetchDescriptor<FoodItem>())) ?? 0
-                let new = FoodItem(id: nextID + 1, name: name, isUserAdded: true)
-                ctx.insert(new)
-                return new
+                           // ✅ FIX: Използваме новата логика тук
+                           let newId = nextFoodId()
+                           let new = FoodItem(id: newId, name: name, isUserAdded: true)
+                           ctx.insert(new)
+                           return new
             }()
             
             // Тук се присвоява новото име
