@@ -914,8 +914,8 @@ struct RootView: View {
             if let profile = selectedProfile {
                 ProfileBadgesView(profile: profile).id(profile)
             }
-        case .test:
-                TestView()
+//        case .test:
+//                TestView()
         }
       
     }
