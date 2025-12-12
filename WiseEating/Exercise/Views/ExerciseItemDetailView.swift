@@ -7,12 +7,12 @@ struct ExerciseItemDetailView: View {
     @ObservedObject private var effectManager = EffectManager.shared
     @Environment(\.modelContext) private var modelContext
     @State private var isBannerAdLoaded: Bool = false
-
+    @State private var isShowingFullScreenImage = false
     // MARK: - Input
     let item: ExerciseItem
     let profile: Profile?
     let onDismiss: () -> Void
-
+    
     // MARK: - UI State
     @State private var selectedImageData: Data?
     @State private var mainUIImage: UIImage?
@@ -21,7 +21,7 @@ struct ExerciseItemDetailView: View {
     // +++ НАЧАЛО НА ПРОМЯНАТА (1/5) +++
     @State private var nodeToEdit: Node? = nil
     // +++ КРАЙ НА ПРОМЯНАТА (1/5) +++
-
+    
     // MARK: - Computed Properties for data display
     private var galleryImages: [Data] {
         var images = [Data]()
@@ -38,7 +38,7 @@ struct ExerciseItemDetailView: View {
         }
         return images
     }
-
+    
     private var caloriesBurnedPer30Min: Double? {
         guard let profile = profile, let met = item.metValue else { return nil }
         let cpm = (met * 3.5 * profile.weight) / 200.0 // Calories per minute
@@ -50,18 +50,18 @@ struct ExerciseItemDetailView: View {
             return nil
         }
         if urlString.contains("youtube.com") || urlString.contains("youtu.be") || urlString.contains("vimeo.com") {
-             return url
+            return url
         }
         return nil
     }
-
+    
     // MARK: - Body
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
                 customToolbar
                     .padding(.horizontal)
-
+                
                 ScrollView(showsIndicators: false) {
                     if item.photo != nil {
                         mainImageSection
@@ -74,7 +74,7 @@ struct ExerciseItemDetailView: View {
                             .padding(.top, 5)
                             .padding(.horizontal)
                     }
-
+                    
                     VStack(alignment: .leading, spacing: 24) {
                         textInfoSection
                         bannerAdSection
@@ -85,7 +85,7 @@ struct ExerciseItemDetailView: View {
                         videoSection
                     }
                     .padding()
-
+                    
                     Spacer(minLength: 150)
                 }
                 .mask(
@@ -104,7 +104,7 @@ struct ExerciseItemDetailView: View {
             .background(ThemeBackgroundView().ignoresSafeArea())
             .opacity(isShowingLinkedNodes ? 0 : 1)
             .allowsHitTesting(!isShowingLinkedNodes)
-
+            
             if isShowingLinkedNodes {
                 linkedNodesView
                     .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
@@ -134,8 +134,17 @@ struct ExerciseItemDetailView: View {
         .task(id: selectedImageData) {
             await loadImage(data: selectedImageData)
         }
+        .fullScreenCover(isPresented: $isShowingFullScreenImage) {
+            if let image = mainUIImage {
+                FullscreenImageView(image: image) {
+                    isShowingFullScreenImage = false
+                }
+            } else {
+                Color.black.ignoresSafeArea()
+            }
+        }
     }
-
+    
     private var customToolbar: some View {
         HStack {
             HStack{
@@ -150,7 +159,7 @@ struct ExerciseItemDetailView: View {
             Text("Exercise Details").font(.headline)
             
             Spacer()
-
+            
             if (item.nodes?.count ?? 0) > 0 {
                 Button {
                     withAnimation { isShowingLinkedNodes = true }
@@ -160,7 +169,7 @@ struct ExerciseItemDetailView: View {
                         .frame(width: 28, height: 28)
                 }
             }
-
+            
             Button {
                 withAnimation { item.isFavorite.toggle() }
                 try? modelContext.save()
@@ -174,31 +183,38 @@ struct ExerciseItemDetailView: View {
         }
         .foregroundColor(effectManager.currentGlobalAccentColor)
     }
-
+    
     @ViewBuilder
-   private var mainImageSection: some View {
-       if let image = mainUIImage {
-           Color.clear
-               .frame(maxWidth: .infinity)
-               .frame(height: 250)
-               .overlay(
-                   Image(uiImage: image)
-                       .resizable()
-                       .aspectRatio(contentMode: .fill)
-               )
-               .clipped()
-               .glassCardStyle(cornerRadius: 20)
-               .transition(.opacity.animation(.easeInOut))
-       } else {
-           Rectangle()
-               .fill(effectManager.currentGlobalAccentColor.opacity(0.8))
-               .overlay(ProgressView()
-               .opacity(selectedImageData != nil ? 1 : 0))
-               .frame(height: 250)
-               .clipped()
-               .glassCardStyle(cornerRadius: 20)
-       }
-   }
+    private var mainImageSection: some View {
+        if let image = mainUIImage {
+            Color.clear
+                .frame(maxWidth: .infinity)
+                .frame(height: 250)
+                .overlay(
+                    Image(uiImage: image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                )
+                .clipped()
+                .glassCardStyle(cornerRadius: 20)
+                .transition(.opacity.animation(.easeInOut))
+                .onTapGesture {
+                    // 👇 Показваме снимката на цял екран
+                    isShowingFullScreenImage = true
+                }
+        } else {
+            Rectangle()
+                .fill(effectManager.currentGlobalAccentColor.opacity(0.8))
+                .overlay(
+                    ProgressView()
+                        .opacity(selectedImageData != nil ? 1 : 0)
+                )
+                .frame(height: 250)
+                .clipped()
+                .glassCardStyle(cornerRadius: 20)
+        }
+    }
+    
     
     private func loadImage(data: Data?) async {
         guard let data = data, !data.isEmpty else {
@@ -228,7 +244,7 @@ struct ExerciseItemDetailView: View {
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10, style: .continuous)
                                     .stroke(selectedImageData == imageData ? effectManager.currentGlobalAccentColor : Color.clear, lineWidth: 2))
-                                    .onTapGesture { if selectedImageData != imageData { selectedImageData = imageData } }
+                            .onTapGesture { if selectedImageData != imageData { selectedImageData = imageData } }
                         }
                     }
                     .padding(.horizontal)
@@ -290,7 +306,7 @@ struct ExerciseItemDetailView: View {
         .glassCardStyle(cornerRadius: 20)
         .frame(height: 250)
     }
-
+    
     private var textInfoSection: some View {
         VStack(spacing: 16) {
             Text(item.name)
@@ -299,7 +315,7 @@ struct ExerciseItemDetailView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.top, item.photo != nil ? 0 : 16)
                 .foregroundStyle(effectManager.currentGlobalAccentColor)
-
+            
             if let desc = item.exerciseDescription?.trimmingCharacters(in: .whitespacesAndNewlines), !desc.isEmpty {
                 Text(desc)
                     .font(.callout)
@@ -307,14 +323,14 @@ struct ExerciseItemDetailView: View {
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
             }
-
+            
             if item.photo != nil {
                 summaryInfoRow
             }
         }
         .frame(maxWidth: .infinity)
     }
-
+    
     private var summaryInfoRow: some View {
         HStack(spacing: 24) {
             if let met = item.metValue {
@@ -332,8 +348,8 @@ struct ExerciseItemDetailView: View {
             if let calories = caloriesBurnedPer30Min {
                 VStack(spacing: 2) {
                     Label { Text("Burn (30 min)") } icon: { Image(systemName: "flame.fill").foregroundColor(.orange) }
-                    .font(.caption)
-                    .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
+                        .font(.caption)
+                        .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
                     Text("\(calories, specifier: "%.0f") kcal")
                         .font(.headline)
                         .foregroundColor(effectManager.currentGlobalAccentColor)
@@ -347,7 +363,7 @@ struct ExerciseItemDetailView: View {
                     }
                     .font(.caption)
                     .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
-
+                    
                     Text("\(item.minimalAgeMonths) mo")
                         .font(.headline)
                         .foregroundColor(effectManager.currentGlobalAccentColor)
@@ -356,7 +372,7 @@ struct ExerciseItemDetailView: View {
         }
         .frame(maxWidth: .infinity).padding(.top, 10)
     }
-
+    
     @ViewBuilder
     private var workoutExercisesSection: some View {
         if item.isWorkout, let exercises = item.exercises, !exercises.isEmpty {
@@ -383,17 +399,17 @@ struct ExerciseItemDetailView: View {
             .glassCardStyle(cornerRadius: 20)
         }
     }
-
+    
     private var muscleGroupSection: some View {
         let items = item.muscleGroups.map { StaticTag(label: $0.rawValue, color: .purple) }
         return tagSectionView(title: "Primary Muscles", tags: items)
     }
-
+    
     private var sportsSection: some View {
         let items = (item.sports ?? []).map { StaticTag(label: $0.rawValue, color: .blue) }
         return tagSectionView(title: "Related Sports", tags: items)
     }
-
+    
     @ViewBuilder
     private var videoSection: some View {
         if let url = videoURL {
@@ -406,12 +422,12 @@ struct ExerciseItemDetailView: View {
             .glassCardStyle(cornerRadius: 20)
         }
     }
-
+    
     // +++ НАЧАЛО НА ПРОМЯНАТА (4/5) +++
     @ViewBuilder
     private var linkedNodesView: some View {
         let linkedNodes = item.nodes?.sorted { $0.date > $1.date } ?? []
-
+        
         VStack(spacing: 0) {
             HStack {
                 Button(action: {
@@ -424,7 +440,7 @@ struct ExerciseItemDetailView: View {
                 }
                 .padding(.horizontal, 10).padding(.vertical, 5)
                 .glassCardStyle(cornerRadius: 20)
-
+                
                 Spacer()
                 Text("Linked Notes")
                     .font(.headline)
@@ -435,7 +451,7 @@ struct ExerciseItemDetailView: View {
             }
             .foregroundColor(effectManager.currentGlobalAccentColor)
             .padding()
-
+            
             if linkedNodes.isEmpty {
                 ContentUnavailableView(
                     "No Linked Notes",
@@ -497,16 +513,16 @@ struct ExerciseItemDetailView: View {
     }
     
     @ViewBuilder
-       private var bannerAdSection: some View {
-           // Показваме банер само за free (Base) потребители
-           if SubscriptionManager.shared.subscriptionStatus == .base {
-               BannerAdView(adsBool: $isBannerAdLoaded, bucket: .large)
-                   .frame(height: 120)
-                   .opacity(isBannerAdLoaded ? 1 : 0)
-                   .animation(.easeInOut(duration: 0.25), value: isBannerAdLoaded)
-                   .padding(.horizontal)
-           }
-       }
+    private var bannerAdSection: some View {
+        // Показваме банер само за free (Base) потребители
+        if SubscriptionManager.shared.subscriptionStatus == .base {
+            BannerAdView(adsBool: $isBannerAdLoaded, bucket: .large)
+                .frame(height: 120)
+                .opacity(isBannerAdLoaded ? 1 : 0)
+                .animation(.easeInOut(duration: 0.25), value: isBannerAdLoaded)
+                .padding(.horizontal)
+        }
+    }
 }
 
 fileprivate struct AsyncImageView<Placeholder: View>: View {
