@@ -34,7 +34,7 @@ struct FullscreenImageView: View {
                     }
                     // Прилагаме стъкления стил
                     .glassCardStyle(cornerRadius: 50)
-                    .padding(.top, 30)
+                    .padding(.top, 10)
                     .padding(.trailing, 30)
                 }
                 Spacer()
