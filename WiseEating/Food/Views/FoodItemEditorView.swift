@@ -8,6 +8,7 @@ struct FoodItemEditorView: View {
     @State private var showPhotoSourceDialog = false
     @State private var isShowingCameraPicker = false
     @State private var isShowingPhotoLibraryPicker = false
+    @State private var isShowingVideoGallery = false
     @State private var isBannerAdLoaded: Bool = false
 
     @ObservedObject private var aiManager = AIManager.shared // Add this
@@ -663,8 +664,12 @@ struct FoodItemEditorView: View {
             Button("Photo Library") {
                 isShowingPhotoLibraryPicker = true
             }
+            Button("Image Gallery") {
+                isShowingVideoGallery = true
+            }
             Button("Cancel", role: .cancel) { }
         }
+
         .sheet(isPresented: $isShowingCameraPicker) {
             CameraPicker { image in
                 if let data = image.jpegData(compressionQuality: 0.9) {
@@ -683,6 +688,22 @@ struct FoodItemEditorView: View {
             }
             .presentationCornerRadius(20)
         }
+        .sheet(isPresented: $isShowingVideoGallery) {     // 👈 НОВО
+            VideoGalleryFoodSheet { selectedFood in
+                // Взимаме снимката на избрания FoodItem като нова снимка
+                if let image = selectedFood.foodImage(variant: "1024"),
+                   let data = image.jpegData(compressionQuality: 0.9) {
+                    photoData = data
+                    hasUserMadeEdits = true
+                } else {
+                    // Ако някой запис има само видео и няма photo,
+                    // можеш тук по-късно да добавиш логика за thumbnail от видео.
+                    print("⚠️ Selected food from video gallery has no photo data.")
+                }
+            }
+            .presentationDetents([.large]) // по желание
+        }
+
     }
 
     private var descriptionEditor: some View {
