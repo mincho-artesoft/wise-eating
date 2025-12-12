@@ -19,6 +19,7 @@ struct FoodItemReceptEditorView: View {
     @State private var showCameraPicker = false
     @State private var showPhotoLibraryPicker = false
     @State private var currentPhotoTarget: PhotoSourceTarget? = nil
+    @State private var isShowingVideoGallery = false
 
     
     @State private var selectedNutrientID: String? = nil
@@ -349,23 +350,57 @@ struct FoodItemReceptEditorView: View {
                }
                .presentationCornerRadius(20)
            }
+           .sheet(isPresented: $isShowingVideoGallery) {   // 👈 НОВО
+               VideoGalleryFoodSheet { selectedFood in
+                   // Взимаме снимката от избрания FoodItem
+                   if let image = selectedFood.foodImage(variant: "1024"),
+                      let data = image.jpegData(compressionQuality: 0.9) {
+
+                       switch currentPhotoTarget ?? .main {
+                       case .main:
+                           photoData = data
+                       case .gallery:
+                           galleryData.append(data)
+                       case .galleryReplace(let index):
+                           if galleryData.indices.contains(index) {
+                               galleryData[index] = data
+                           }
+                       }
+
+                       hasUserMadeEdits = true
+                   } else {
+                       // Ако някой запис има само видео и няма photo,
+                       // по-късно може да добавиш генерация на thumbnail от видеото.
+                       print("⚠️ Selected food from video gallery has no photo data.")
+                   }
+
+                   // Накрая чистим таргета
+                   currentPhotoTarget = nil
+               }
+               .presentationDetents([.large])
+           }
            .confirmationDialog(
                "Select photo source",
-               isPresented: $showPhotoSourceDialog,
+               isPresented: $showPhotoSourceDialog
            ) {
                Button("Take Photo") {
                    showPhotoSourceDialog = false
                    showCameraPicker = true
                }
-               Button("Choose from Library") {
+               Button("Photo Library") {                // 👈 промяна на текста
                    showPhotoSourceDialog = false
                    showPhotoLibraryPicker = true
+               }
+               Button("Image Gallery") {                // 👈 НОВО – трети избор
+                   showPhotoSourceDialog = false
+                   isShowingVideoGallery = true
                }
                Button("Cancel", role: .cancel) {
                    showPhotoSourceDialog = false
                    currentPhotoTarget = nil
                }
            }
+
        }
 
     @ViewBuilder
