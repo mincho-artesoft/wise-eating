@@ -1,6 +1,7 @@
 import Combine
 import Foundation
 import SwiftData
+import SwiftUI
 
 @MainActor
 final class FoodListVM: ObservableObject {
@@ -10,20 +11,20 @@ final class FoodListVM: ObservableObject {
     @Published var filter: FoodItemListView.Filter = .foods
     @Published private(set) var items: [FoodItem] = []
     @Published private(set) var hasMore: Bool = false
+    @Published private(set) var isLoading: Bool = false
     
     // MARK: - Private State
     private var context: ModelContext!
     private var container: ModelContainer?
     private var cancellables = Set<AnyCancellable>()
-    private let pageSize = 30
-    @Published private(set) var isLoading: Bool = false
-    private var currentTask: Task<Void, Never>?
     
-    // Two-phase search
-    private enum SearchPhase { case startsWith, contains, finished }
-    private var searchPhase: SearchPhase = .startsWith
-    private var startsWithOffset = 0
-    private var containsOffset = 0
+    // Smart Search Engine
+    private var searchEngine: SmartFoodSearch3?
+    
+    // Pagination (Only used when searchText is empty)
+    private let pageSize = 50
+    private var currentOffset = 0
+    private var currentTask: Task<Void, Never>?
     
     // MARK: - Init
     init() {
@@ -39,17 +40,31 @@ final class FoodListVM: ObservableObject {
         .store(in: &cancellables)
     }
     
-    /// Attaches the real `ModelContext` (called from the View).
+    /// Attaches the real `ModelContext` and initializes the Search Engine.
     func attach(context: ModelContext) {
         guard self.context !== context else { return }
         self.context = context
         self.container = context.container
+        
+        // Initialize the Smart Search Engine with the container
+        if let container = self.container {
+            self.searchEngine = SmartFoodSearch3(container: container)
+            
+            // Pre-load data in background so search is snappy later
+            Task {
+                await self.searchEngine?.loadData()
+            }
+        }
     }
     
     // MARK: - Loading Logic
     
     func loadNextPage() {
-        // Explicitly state this is not a reset, but loading the next page.
+        // If we are performing a Smart Search (text is not empty),
+        // we essentially return all relevant ranked results in one go (top 100-200),
+        // so we disable infinite scroll to avoid complexity with ranking vs offsetting.
+        if !searchText.isEmpty { return }
+        
         loadPage(isReset: false)
     }
     
@@ -58,214 +73,163 @@ final class FoodListVM: ObservableObject {
         currentTask?.cancel()
         currentTask = nil
         
-        // Show the loading indicator, but DO NOT clear `items`.
         isLoading = true
         
-        // Call loadPage with a flag to indicate a fresh load.
         loadPage(isReset: true)
     }
     
-    /// Fetches a page of items. Can either reset the list or append to it.
+    /// Fetches items. Delegates to SmartSearch if query exists, otherwise uses standard DB fetch.
     private func loadPage(isReset: Bool) {
-        // If already loading and it's not a reset request, do nothing.
         if !isReset && isLoading { return }
         
-        guard let container else {
-            // If the context is not yet available, stop the indicator.
+        guard let container, let searchEngine else {
             if isReset { self.isLoading = false }
             return
         }
         
         isLoading = true
         
-        let search = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
-        let startsPredicate   = makePredicate(for: .startsWith, search: search)
-        let containsPredicate = makePredicate(for: .contains,   search: search)
+        let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        let currentFilter = self.filter
         
-        // If it's a reset, start from the beginning. Otherwise, use current values.
-        let startsOff   = isReset ? 0 : self.startsWithOffset
-        let containsOff = isReset ? 0 : self.containsOffset
-        let phase0      = isReset ? SearchPhase.startsWith : self.searchPhase
-        let pageSize    = self.pageSize
-        
-        // Cancel the previous task to avoid race conditions.
-        currentTask?.cancel()
-        currentTask = Task.detached { [weak self] in
-            guard let self else { return }
-            let bg = ModelContext(container)
-            bg.autosaveEnabled = false
-            
-            var resultsIDs: [Int] = []
-            var nextStarts   = startsOff
-            var nextContains = containsOff
-            var phase        = phase0
-            
-            if phase == .startsWith {
-                var d = FetchDescriptor<FoodItem>(
-                    predicate: startsPredicate,
-                    sortBy: [SortDescriptor(\.name)]
-                )
-                d.fetchOffset = startsOff
-                d.fetchLimit  = pageSize
+        // --- 1. SMART SEARCH MODE (Query exists) ---
+        if !query.isEmpty {
+            currentTask = Task {
+                // Determine engine constraints based on current UI filter
+                var isRecipes = false
+                var isMenus = false
+                var isFavorites = false
                 
-                let page = (try? bg.fetch(d)) ?? []
-                resultsIDs.append(contentsOf: page.map(\.id))
-                nextStarts += page.count
-                
-                if search.isEmpty {
-                    if page.count < pageSize { phase = .finished }
-                } else {
-                    if page.count < pageSize { phase = .contains }
+                switch currentFilter {
+                case .recipes:   isRecipes = true
+                case .menus:     isMenus = true
+                case .favorites: isFavorites = true
+                case .foods, .default, .diets, .plans:
+                    // For these, we search everything and filter in memory below
+                    break
                 }
-            }
-            
-            if !search.isEmpty, phase == .contains, resultsIDs.count < pageSize {
-                let needed = pageSize - resultsIDs.count
-                var d = FetchDescriptor<FoodItem>(
-                    predicate: containsPredicate,
-                    sortBy: [SortDescriptor(\.name)]
+                
+                // Perform the search using the engine
+                // We request a higher limit (e.g. 200) to cover "one page" of ranked results.
+                // Smart search ranks by relevance, so page 2+ is rarely needed.
+                let results = await searchEngine.searchResults(
+                    query: query,
+                    activeFilters: [], // Pass UI nutrient filters here if FoodListVM supported them
+                    isFavoritesOnly: isFavorites,
+                    isRecipesOnly: isRecipes,
+                    isMenusOnly: isMenus,
+                    limit: 200
                 )
-                d.fetchOffset = containsOff
-                d.fetchLimit  = needed
                 
-                let page = (try? bg.fetch(d)) ?? []
-                resultsIDs.append(contentsOf: page.map(\.id))
-                nextContains += page.count
+                if Task.isCancelled {
+                    await MainActor.run { self.isLoading = false }
+                    return
+                }
                 
-                if page.count < needed { phase = .finished }
-            }
-            
-            // Check if the task was cancelled before updating the UI.
-            if Task.isCancelled {
-                await MainActor.run { [weak self] in self?.isLoading = false }
-                return
-            }
-            
-            await MainActor.run { [weak self] in
-                guard let self, let ctx = self.context else { return }
-                
-                var fetchedItems: [FoodItem] = []
-                if !resultsIDs.isEmpty {
-                    let idSet = Set(resultsIDs)
-                    let d = FetchDescriptor<FoodItem>(predicate: #Predicate { idSet.contains($0.id) })
-                    if let objs = try? ctx.fetch(d) {
-                        var sorted = objs
-                        sorted.sort { $0.name.localizedCompare($1.name) == .orderedAscending }
-                        fetchedItems = sorted
+                // Post-process results based on specific list filters that the engine
+                // might not handle strictly (like "User Added Only" or "Ingredients Only")
+                let filteredResults = results.filter { item in
+                    switch currentFilter {
+                    case .foods:
+                        // "Foods" usually means ingredients (not recipes/menus)
+                        return !item.isRecipe && !item.isMenu && item.isUserAdded
+                    case .default:
+                        // "Default" usually means System foods
+                        return !item.isUserAdded
+                    case .diets, .plans:
+                        return false // logic placeholders
+                    case .recipes:
+                        return item.isUserAdded // Ensure we strictly show user added recipes if required
+                    case .menus:
+                        return item.isUserAdded
+                    case .favorites:
+                        return true // Already handled by engine
                     }
                 }
                 
-                if isReset {
-                    // For a reset, replace the entire array.
-                    self.items = fetchedItems
-                } else {
-                    // For a next page, append to the existing array.
-                    self.items.append(contentsOf: fetchedItems)
+                await MainActor.run {
+                    self.items = filteredResults
+                    self.hasMore = false // Disable pagination for search results
+                    self.isLoading = false
+                }
+            }
+            return
+        }
+        
+        // --- 2. BROWSE MODE (Empty Query) ---
+        // Use efficient database offsets for infinite scrolling alphabetical lists
+        
+        let offset = isReset ? 0 : self.currentOffset
+        let limit = self.pageSize
+        
+        currentTask = Task {
+            let bgContext = ModelContext(container)
+            bgContext.autosaveEnabled = false
+            
+            let predicate = makeEmptyStatePredicate(filter: currentFilter)
+            var descriptor = FetchDescriptor<FoodItem>(
+                predicate: predicate,
+                sortBy: [SortDescriptor(\.name, order: .forward)]
+            )
+            descriptor.fetchOffset = offset
+            descriptor.fetchLimit = limit
+            
+            do {
+                let fetchedObjects = try bgContext.fetch(descriptor)
+                let fetchedIDs = fetchedObjects.map { $0.id }
+                
+                if Task.isCancelled {
+                    await MainActor.run { self.isLoading = false }
+                    return
                 }
                 
-                self.startsWithOffset = nextStarts
-                self.containsOffset   = nextContains
-                self.searchPhase      = phase
-                self.hasMore          = (self.searchPhase != .finished)
-                self.isLoading        = false
+                await MainActor.run {
+                    guard let mainCtx = self.context else { return }
+                    
+                    // Re-fetch objects on main context to ensure UI safety and faulting
+                    var displayItems: [FoodItem] = []
+                    if !fetchedIDs.isEmpty {
+                        let idSet = Set(fetchedIDs)
+                        let mainDescriptor = FetchDescriptor<FoodItem>(predicate: #Predicate { idSet.contains($0.id) })
+                        if let objs = try? mainCtx.fetch(mainDescriptor) {
+                            // Re-sort because ID fetch doesn't guarantee order
+                            displayItems = objs.sorted { $0.name.localizedCompare($1.name) == .orderedAscending }
+                        }
+                    }
+                    
+                    if isReset {
+                        self.items = displayItems
+                    } else {
+                        self.items.append(contentsOf: displayItems)
+                    }
+                    
+                    self.currentOffset = offset + displayItems.count
+                    self.hasMore = displayItems.count == limit
+                    self.isLoading = false
+                }
+            } catch {
+                print("❌ Browse fetch failed: \(error)")
+                await MainActor.run { self.isLoading = false }
             }
         }
     }
     
-    // MARK: - Predicate Builder
-    private func makePredicate(for phase: SearchPhase, search: String) -> Predicate<FoodItem> {
-        let normalizedSearch = search.lowercased()
-        
-        if search.isEmpty {
-            switch filter {
-            case .foods:     return #Predicate<FoodItem> { $0.isUserAdded && !$0.isRecipe && !$0.isMenu }
-            case .recipes:   return #Predicate<FoodItem> { $0.isUserAdded && $0.isRecipe }
-            case .menus:     return #Predicate<FoodItem> { $0.isUserAdded && $0.isMenu }
-            case .favorites: return #Predicate<FoodItem> { $0.isFavorite }
-            case .default:   return #Predicate<FoodItem> { !$0.isUserAdded }
-            case .diets:     return #Predicate<FoodItem> { _ in false }
-            case .plans:     return #Predicate<FoodItem> { _ in false }
-            }
-        }
-        
+    // MARK: - Predicate Builder (Empty State Only)
+    
+    /// Used only when searchText is empty to show the full database list.
+    private func makeEmptyStatePredicate(filter: FoodItemListView.Filter) -> Predicate<FoodItem> {
         switch filter {
-        case .foods:
-            if phase == .startsWith {
-                return #Predicate<FoodItem> { item in
-                    item.nameNormalized.starts(with: normalizedSearch) &&
-                    item.isUserAdded && !item.isRecipe && !item.isMenu
-                }
-            } else {
-                return #Predicate<FoodItem> { item in
-                    item.name.localizedStandardContains(search) &&
-                    !item.nameNormalized.starts(with: normalizedSearch) &&
-                    item.isUserAdded && !item.isRecipe && !item.isMenu
-                }
-            }
-            
-        case .recipes:
-            if phase == .startsWith {
-                return #Predicate<FoodItem> { item in
-                    item.nameNormalized.starts(with: normalizedSearch) &&
-                    item.isUserAdded && item.isRecipe
-                }
-            } else {
-                return #Predicate<FoodItem> { item in
-                    item.name.localizedStandardContains(search) &&
-                    !item.nameNormalized.starts(with: normalizedSearch) &&
-                    item.isUserAdded && item.isRecipe
-                }
-            }
-            
-        case .menus:
-            if phase == .startsWith {
-                return #Predicate<FoodItem> { item in
-                    item.nameNormalized.starts(with: normalizedSearch) &&
-                    item.isUserAdded && item.isMenu
-                }
-            } else {
-                return #Predicate<FoodItem> { item in
-                    item.name.localizedStandardContains(search) &&
-                    !item.nameNormalized.starts(with: normalizedSearch) &&
-                    item.isUserAdded && item.isMenu
-                }
-            }
-            
-        case .favorites:
-            if phase == .startsWith {
-                return #Predicate<FoodItem> { item in
-                    item.nameNormalized.starts(with: normalizedSearch) && item.isFavorite
-                }
-            } else {
-                return #Predicate<FoodItem> { item in
-                    item.name.localizedStandardContains(search) &&
-                    !item.nameNormalized.starts(with: normalizedSearch) &&
-                    item.isFavorite
-                }
-            }
-            
-        case .default:
-            if phase == .startsWith {
-                return #Predicate<FoodItem> { item in
-                    item.nameNormalized.starts(with: normalizedSearch) && !item.isUserAdded
-                }
-            } else {
-                return #Predicate<FoodItem> { item in
-                    item.name.localizedStandardContains(search) &&
-                    !item.nameNormalized.starts(with: normalizedSearch) &&
-                    !item.isUserAdded
-                }
-            }
-            
-        case .diets:
-            return #Predicate<FoodItem> { _ in false }
-            
-        case .plans:
-            return #Predicate<FoodItem> { _ in false }
+        case .foods:     return #Predicate<FoodItem> { $0.isUserAdded && !$0.isRecipe && !$0.isMenu }
+        case .recipes:   return #Predicate<FoodItem> { $0.isUserAdded && $0.isRecipe }
+        case .menus:     return #Predicate<FoodItem> { $0.isUserAdded && $0.isMenu }
+        case .favorites: return #Predicate<FoodItem> { $0.isFavorite }
+        case .default:   return #Predicate<FoodItem> { !$0.isUserAdded }
+        case .diets:     return #Predicate<FoodItem> { _ in false }
+        case .plans:     return #Predicate<FoodItem> { _ in false }
         }
     }
     
-    // MARK: - Delete Helpers
+    // MARK: - Delete Helpers (Kept Intact)
     
     func ingredientUsageCount(for item: FoodItem) -> Int {
         guard let ctx = context else { return 0 }
@@ -348,12 +312,12 @@ final class FoodListVM: ObservableObject {
         
         let foodID = item.id
         
-        // 1) Първо махаме реда от UI
+        // 1) Remove row from UI
         if let index = items.firstIndex(of: item) {
             items.remove(at: index)
         }
         
-        // 2) Изчакваме, за да се обнови UI
+        // 2) Delete logic
         DispatchQueue.main.async { [weak self, weak item] in
             guard let self,
                   let ctx = self.context,
@@ -362,7 +326,7 @@ final class FoodListVM: ObservableObject {
             
             if item.modelContext == nil { return }
             
-            // --- логика за менюта ---
+            // --- Logic for menus ---
             if item.isMenu {
                 print("🗑️ Deleting a menu item: \(item.name). Checking for linked meal plans...")
                 let menuIDToDelete = item.id
@@ -385,18 +349,14 @@ final class FoodListVM: ObservableObject {
                 }
             }
             
-            // 3) Чистим RecentlyAddedFood / DismissedFoodID / ShoppingListItem
+            // 3) Cleanup Metadata
             self.cleanupShoppingMetadata(for: item)
-            
-            // 4) Чистим история (MealLogStorageLink / StorageTransaction)
             self.cleanupPantryHistory(for: item)
             
-            // 5) (ПРЕМАХНАТО) Вече не викаме cleanupIndexes(for:), тъй като моделите са изтрити.
-            
-            // 6) Обновяваме In-Memory Search Cache (важно за търсачката)
+            // 4) Update Search Index (Remove from In-Memory Cache)
             SearchIndexStore.shared.removeItem(id: foodID, context: ctx)
 
-            // 7) Нулираме релациите (optional)
+            // 5) Nullify relations
             item.macronutrients = nil
             item.lipids         = nil
             item.vitamins       = nil
@@ -406,7 +366,7 @@ final class FoodListVM: ObservableObject {
             item.carbDetails    = nil
             item.sterols        = nil
             
-            // 8) Трием FoodItem
+            // 6) Delete
             ctx.delete(item)
             
             do {
@@ -426,7 +386,6 @@ final class FoodListVM: ObservableObject {
 
     private func cleanupPantryHistory(for item: FoodItem) {
         guard let ctx = context else { return }
-        
         let targetPID = item.persistentModelID
         
         do {
@@ -455,7 +414,6 @@ final class FoodListVM: ObservableObject {
 
     private func cleanupShoppingMetadata(for item: FoodItem) {
         guard let ctx = context else { return }
-        
         let targetID  = item.id
         let targetPID = item.persistentModelID
         
