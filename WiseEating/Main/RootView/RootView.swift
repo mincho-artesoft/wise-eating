@@ -1279,31 +1279,32 @@ struct RootView: View {
     }
     
     private func startRecurringAdLoop() {
-        // Гарантираме, че цикълът се стартира само веднъж
         guard adLoopTask == nil else { return }
 
-        adLoopTask = Task { @MainActor in
-            print("⏱️ [Ad Loop] Стартиране на цикъла за реклами.")
+        adLoopTask = Task.detached(priority: .background) {
+            print("⏱️ [Ad Loop] Стартиране на цикъла за реклами (background).")
 
-            // --- 1. Първоначално изчакване (30 секунди) ---
+            // 1. Първоначално изчакване (60 секунди)
             try? await Task.sleep(nanoseconds: 60 * 1_000_000_000)
-            
-            // Проверка и показване
-            tryShowAd()
 
-            // --- 2. Безкраен цикъл на всеки 10 минути ---
-            while !Task.isCancelled {
-                print("⏱️ [Ad Loop] Изчакване на 10 минути до следващата проверка...")
-                
-                // 10 минути * 60 секунди * 1 милиард наносекунди
-                try? await Task.sleep(nanoseconds: 10 * 60 * 1_000_000_000)
-                
-                // Проверка и показване
+            // 2. Първа проверка/показване – на main
+            await MainActor.run {
                 tryShowAd()
+            }
+
+            // 3. Безкраен цикъл
+            while !Task.isCancelled {
+                print("⏱️ [Ad Loop] Изчакване на 10 минути до следващата проверка (background)...")
+                try? await Task.sleep(nanoseconds: 10 * 60 * 1_000_000_000)
+
+                await MainActor.run {
+                    tryShowAd()
+                }
             }
         }
     }
 
+    @MainActor
     private func tryShowAd() {
             // Проверка 1: Има ли селектиран профил?
             guard selectedProfile != nil else {
