@@ -424,12 +424,12 @@ struct ProfileWizardView: View {
                         .transition(.opacity.animation(.easeInOut))
                 }
             }
-            .if(currentStep == .sports ||
-                currentStep == .vitamins ||
-                currentStep == .minerals ||
-                currentStep == .diets ||
-                currentStep == .allergens
-            ) { $0.ignoresSafeArea(.keyboard, edges: .bottom)}
+//            .if(currentStep == .sports ||
+//                currentStep == .vitamins ||
+//                currentStep == .minerals ||
+//                currentStep == .diets ||
+//                currentStep == .allergens
+//            ) { $0.ignoresSafeArea(.keyboard, edges: .bottom)}
 
             .ignoresSafeArea(.container, edges: .bottom)
             .alert("Error", isPresented: $showAlert) {
@@ -911,63 +911,76 @@ struct ProfileWizardView: View {
     }
 
     @ViewBuilder private var vitaminsStep: some View {
-           VStack {
-               // Заменете IconMultiSelectGridView с ColorTextMultiSelectGridView
-               ColorTextMultiSelectGridView(
-                   items: allVitamins,
-                   selection: $data.selectedVitIDs,
-                   searchPrompt: "Search vitamins...",
-                   itemContentSize: CGSize(width: 48, height: 48) // Задаваме размер за съдържанието
-               )
-
-               Spacer()
-               navigationButtons
-           }
-       }
-       
-       @ViewBuilder private var mineralsStep: some View {
-           VStack {
-               // Заменете IconMultiSelectGridView с ColorTextMultiSelectGridView
-               ColorTextMultiSelectGridView(
-                   items: allMinerals,
-                   selection: $data.selectedMinIDs,
-                   searchPrompt: "Search minerals...",
-                   itemContentSize: CGSize(width: 48, height: 48) // Задаваме размер за съдържанието
-               )
-               Spacer()
-               navigationButtons
-           }
-       }
-    
-    private var dietsStep: some View {
         VStack {
             ColorTextMultiSelectGridView(
-                items: allDiets,                             // [Diet]
-                selection: $data.selectedDiets,             // Set<Diet.ID> (String)
-                searchPrompt: "Search diets...",
-                itemContentSize: CGSize(width: 0, height: 56) // височина на реда
+                items: allVitamins,
+                selection: $data.selectedVitIDs,
+                searchPrompt: "Search vitamins...",
+                itemContentSize: CGSize(width: 48, height: 48)
             )
-
             Spacer()
             navigationButtons
         }
+        .ignoresSafeArea(.keyboard, edges: .bottom) // ✅ ДОБАВЕНО
+    }
+
+    @ViewBuilder private var mineralsStep: some View {
+        VStack {
+            ColorTextMultiSelectGridView(
+                items: allMinerals,
+                selection: $data.selectedMinIDs,
+                searchPrompt: "Search minerals...",
+                itemContentSize: CGSize(width: 48, height: 48)
+            )
+            Spacer()
+            navigationButtons
+        }
+        .ignoresSafeArea(.keyboard, edges: .bottom) // ✅ ДОБАВЕНО
+    }
+
+    @ViewBuilder private var dietsStep: some View {
+        VStack {
+            ColorTextMultiSelectGridView(
+                items: allDiets,
+                selection: $data.selectedDiets,
+                searchPrompt: "Search diets...",
+                itemContentSize: CGSize(width: 0, height: 56)
+            )
+            Spacer()
+            navigationButtons
+        }
+        .ignoresSafeArea(.keyboard, edges: .bottom) // ✅ ДОБАВЕНО
     }
 
     @ViewBuilder private var allergensStep: some View {
         VStack {
-            IconMultiSelectGridView(items: Allergen.allCases.sorted { $0.rawValue < $1.rawValue }, selection: $data.selectedAllergens, searchPrompt:  "Search allergens...", iconSize: CGSize(width: 120, height: 120), useIconColor: true, dissableText: true)
-
+            IconMultiSelectGridView(
+                items: Allergen.allCases.sorted { $0.rawValue < $1.rawValue },
+                selection: $data.selectedAllergens,
+                searchPrompt: "Search allergens...",
+                iconSize: CGSize(width: 120, height: 120),
+                useIconColor: true,
+                dissableText: true
+            )
             Spacer()
             navigationButtons
         }
+        .ignoresSafeArea(.keyboard, edges: .bottom) // ✅ ДОБАВЕНО
     }
     
     @ViewBuilder private var sportsStep: some View {
         VStack {
-            IconMultiSelectGridView(items: Sport.allCases.sorted { $0.rawValue < $1.rawValue }, selection: $data.selectedSports, searchPrompt:  "Search sports...", iconSize: CGSize(width: 48, height: 48), useIconColor: false)
+            IconMultiSelectGridView(
+                items: Sport.allCases.sorted { $0.rawValue < $1.rawValue },
+                selection: $data.selectedSports,
+                searchPrompt: "Search sports...",
+                iconSize: CGSize(width: 48, height: 48),
+                useIconColor: false
+            )
             Spacer()
             navigationButtons
         }
+        .ignoresSafeArea(.keyboard, edges: .bottom) // ✅ ДОБАВЕНО
     }
     
     @ViewBuilder private var settingsStep: some View {
