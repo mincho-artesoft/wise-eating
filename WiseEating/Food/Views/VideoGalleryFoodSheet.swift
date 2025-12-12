@@ -6,6 +6,9 @@ struct VideoGalleryFoodSheet: View {
     @Environment(\.modelContext) var modelContext
     @ObservedObject private var effectManager = EffectManager.shared
     
+    // ✅ Callback: Когато потребителят натисне "Use", връщаме избрания продукт
+    var onSelect: ((FoodItem) -> Void)?
+    
     // ✅ 1. Смарт търсачката
     @State private var smartSearch: SmartFoodSearch3?
     
@@ -16,6 +19,9 @@ struct VideoGalleryFoodSheet: View {
     @State private var searchText: String = ""
     @State private var searchTask: Task<Void, Never>? = nil
     @State private var isLoading: Bool = true
+    
+    // ✅ State за избрания елемент (за Full Screen)
+    @State private var selectedItemForDetail: FoodItem?
     
     // Пагинация
     private let batchSize = 50
@@ -106,6 +112,10 @@ struct VideoGalleryFoodSheet: View {
                                                     loadMore()
                                                 }
                                             }
+                                            // ✅ Натискане върху клетката
+                                            .onTapGesture {
+                                                selectedItemForDetail = item
+                                            }
                                     }
                                     
                                     if displayedItems.count < allMatchingItems.count {
@@ -126,6 +136,15 @@ struct VideoGalleryFoodSheet: View {
         .onAppear {
             setupEngine()
             loadInitialData()
+        }
+        // ✅ Full Screen Cover
+        .fullScreenCover(item: $selectedItemForDetail) { item in
+            FoodFullScreenDetailView(item: item) { confirmedItem in
+                // Действие при натискане на USE
+                selectedItemForDetail = nil // Затваряме детайлния екран
+                onSelect?(confirmedItem)    // Връщаме резултата
+                dismiss()                   // Затваряме цялата галерия
+            }
         }
     }
     
@@ -163,10 +182,8 @@ struct VideoGalleryFoodSheet: View {
         let limit = query.isEmpty ? 2000 : 500
         let results = await engine.searchResults(query: query, limit: limit)
         
-        // Филтрираме (на Main Thread, защото четем SwiftData свойства)
         await MainActor.run {
             let filtered = results.filter { item in
-                // Има снимка (от потребител) ИЛИ има видео в базата
                 (item.photo != nil) || FoodVideoSource.shared.hasVideo(for: item.name)
             }
             
@@ -182,68 +199,5 @@ struct VideoGalleryFoodSheet: View {
         let nextCount = min(currentCount + batchSize, allMatchingItems.count)
         let nextBatch = allMatchingItems[currentCount..<nextCount]
         displayedItems.append(contentsOf: nextBatch)
-    }
-}
-
-// MARK: - GalleryFoodItemCell (Използва item.foodImage)
-private struct GalleryFoodItemCell: View {
-    let item: FoodItem
-    @ObservedObject private var effectManager = EffectManager.shared
-    
-    @State private var image: UIImage? = nil
-    @State private var loadFailed: Bool = false
-    
-    var body: some View {
-        VStack(spacing: 8) {
-            ZStack {
-                if let img = image {
-                    Image(uiImage: img)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 100, height: 100)
-                        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-                } else if loadFailed {
-                    Rectangle()
-                        .fill(effectManager.currentGlobalAccentColor.opacity(0.1))
-                        .frame(width: 100, height: 100)
-                        .overlay(Image(systemName: "photo.badge.exclamationmark").foregroundStyle(.red.opacity(0.5)))
-                        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-                } else {
-                    Rectangle()
-                        .fill(effectManager.currentGlobalAccentColor.opacity(0.1))
-                        .frame(width: 100, height: 100)
-                        .overlay(ProgressView().tint(effectManager.currentGlobalAccentColor))
-                        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-                }
-            }
-            .glassCardStyle(cornerRadius: 16)
-            
-            Text(item.name)
-                .font(.caption)
-                .fontWeight(.medium)
-                .foregroundStyle(effectManager.currentGlobalAccentColor)
-                .lineLimit(2)
-                .multilineTextAlignment(.center)
-                .frame(height: 32, alignment: .top)
-        }
-        .task {
-            await loadImage()
-        }
-    }
-    
-    private func loadImage() async {
-        guard image == nil && !loadFailed else { return }
-        
-        // ✅ Използваме директно метода от модела
-        // Тъй като работим с SwiftData обект, това трябва да се случи на MainActor.
-        // `foodImage` е достатъчно оптимизиран (връща веднага за потребителски снимки
-        // и прави бързо извличане за видео), така че няма да блокира UI значително в .task.
-        if let loadedImage = item.foodImage(variant: "144") {
-            withAnimation(.easeIn(duration: 0.2)) {
-                self.image = loadedImage
-            }
-        } else {
-            self.loadFailed = true
-        }
     }
 }

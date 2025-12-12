@@ -21,9 +21,11 @@ struct TestView: View {
             .buttonStyle(.borderedProminent)
             .controlSize(.large)
         }
-        // Attaching the sheet to the view
         .sheet(isPresented: $showGallerySheet) {
-            VideoGalleryFoodSheet()
+            VideoGalleryFoodSheet { selectedFood in
+                print("Избрана храна: \(selectedFood.name)")
+                // Тук запазете избраната храна във вашия модел
+            }
         }
     }
 }
