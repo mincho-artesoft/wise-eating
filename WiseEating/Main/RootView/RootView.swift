@@ -1306,117 +1306,77 @@ struct RootView: View {
 
     @MainActor
     private func tryShowAd() {
-            // Проверка 1: Има ли селектиран профил?
-            guard selectedProfile != nil else {
-                print("⚠️ [Ad Loop] Времето дойде, но НЯМА избран профил. Скипваме.")
-                return
-            }
-
-            // Проверка 2: Потребителят на безплатен (Base) план ли е?
-            guard SubscriptionManager.shared.subscriptionStatus == .base else {
-                print("💎 [Ad Loop] Потребителят е Premium. Скипваме рекламата.")
-                return
-            }
-
-            print("🎬 [Ad Loop] Опит за показване (Индекс: \(adRotationIndex % 3))...")
-
-            // Изчисляваме кой е на ред (0, 1 или 2)
-            let cycle = adRotationIndex % 3
-            
-            // Помощна функция за презареждане, ако нищо не е готово
-            func reloadAll() {
-                print("❌ [Ad Loop] Нито една реклама не е готова. Опит за презареждане.")
-                Task {
-                    await RewardedAdManager.shared.loadAd()
-                    await RewardedInterstitialAdManager.shared.loadAd()
-                    await InterstitialAdManager.shared.loadAd()
-                }
-            }
-
-            // --- ЛОГИКА НА РЕДУВАНЕ С FALLBACK ---
-            
-            switch cycle {
-            case 0:
-                // ПРИОРИТЕТ: Rewarded Video
-                if RewardedAdManager.shared.isReady {
-                    print("▶️ [Ad Loop] Пускане на REWARDED (Priority).")
-                    RewardedAdManager.shared.showIfAvailable { amount, type in
-                        print("🎁 [Rewarded] Награда: \(amount) \(type)")
-                    }
-                }
-                // Fallback 1
-                else if RewardedInterstitialAdManager.shared.isReady {
-                    print("⚠️ [Ad Loop] Rewarded не е готова. Fallback -> Rewarded Interstitial.")
-                    RewardedInterstitialAdManager.shared.showIfAvailable { amount, type in
-                        print("🎁 [Rew-Int] Награда: \(amount) \(type)")
-                    }
-                }
-                // Fallback 2
-                else if InterstitialAdManager.shared.isReady {
-                    print("⚠️ [Ad Loop] Rewarded видео не са готови. Fallback -> Interstitial.")
-                    InterstitialAdManager.shared.showIfAvailable {
-                        print("✅ [Interstitial] Затворена.")
-                    }
-                } else {
-                    reloadAll()
-                }
-
-            case 1:
-                // ПРИОРИТЕТ: Rewarded Interstitial
-                if RewardedInterstitialAdManager.shared.isReady {
-                    print("▶️ [Ad Loop] Пускане на REWARDED INTERSTITIAL (Priority).")
-                    RewardedInterstitialAdManager.shared.showIfAvailable { amount, type in
-                        print("🎁 [Rew-Int] Награда: \(amount) \(type)")
-                    }
-                }
-                // Fallback 1
-                else if RewardedAdManager.shared.isReady {
-                    print("⚠️ [Ad Loop] Rew-Int не е готова. Fallback -> Rewarded.")
-                    RewardedAdManager.shared.showIfAvailable { amount, type in
-                        print("🎁 [Rewarded] Награда: \(amount) \(type)")
-                    }
-                }
-                // Fallback 2
-                else if InterstitialAdManager.shared.isReady {
-                    print("⚠️ [Ad Loop] Видео форматите не са готови. Fallback -> Interstitial.")
-                    InterstitialAdManager.shared.showIfAvailable {
-                        print("✅ [Interstitial] Затворена.")
-                    }
-                } else {
-                    reloadAll()
-                }
-
-            case 2:
-                // ПРИОРИТЕТ: Standard Interstitial
-                if InterstitialAdManager.shared.isReady {
-                    print("▶️ [Ad Loop] Пускане на INTERSTITIAL (Priority).")
-                    InterstitialAdManager.shared.showIfAvailable {
-                        print("✅ [Interstitial] Затворена.")
-                    }
-                }
-                // Fallback 1
-                else if RewardedInterstitialAdManager.shared.isReady {
-                    print("⚠️ [Ad Loop] Interstitial не е готова. Fallback -> Rew-Int.")
-                    RewardedInterstitialAdManager.shared.showIfAvailable { amount, type in
-                        print("🎁 [Rew-Int] Награда: \(amount) \(type)")
-                    }
-                }
-                // Fallback 2
-                else if RewardedAdManager.shared.isReady {
-                    print("⚠️ [Ad Loop] Другите не са готови. Fallback -> Rewarded.")
-                    RewardedAdManager.shared.showIfAvailable { amount, type in
-                        print("🎁 [Rewarded] Награда: \(amount) \(type)")
-                    }
-                } else {
-                    reloadAll()
-                }
-                
-            default: break
-            }
-
-            // Увеличаваме индекса за следващия път (0 -> 1 -> 2 -> 3(0) ...)
-            adRotationIndex += 1
+        // Проверка 1: Има ли селектиран профил?
+        guard selectedProfile != nil else {
+            print("⚠️ [Ad Loop] Времето дойде, но НЯМА избран профил. Скипваме.")
+            return
         }
+
+        // Проверка 2: Потребителят на безплатен (Base) план ли е?
+        guard SubscriptionManager.shared.subscriptionStatus == .base else {
+            print("💎 [Ad Loop] Потребителят е Premium. Скипваме рекламата.")
+            return
+        }
+
+        print("🎬 [Ad Loop] Опит за показване (Индекс: \(adRotationIndex % 2))...")
+
+        // Ротираме само между 2 формата: Rewarded Interstitial и Interstitial
+        let cycle = adRotationIndex % 2
+
+        // Помощна функция за презареждане, ако нищо не е готово
+        func reloadAll() {
+            print("❌ [Ad Loop] Нито една реклама не е готова. Опит за презареждане (Rew-Int + Interstitial).")
+            Task {
+                await RewardedInterstitialAdManager.shared.loadAd()
+                await InterstitialAdManager.shared.loadAd()
+            }
+        }
+
+        switch cycle {
+        case 0:
+            // ПРИОРИТЕТ: Rewarded Interstitial
+            if RewardedInterstitialAdManager.shared.isReady {
+                print("▶️ [Ad Loop] Пускане на REWARDED INTERSTITIAL (Priority).")
+                RewardedInterstitialAdManager.shared.showIfAvailable { amount, type in
+                    print("🎁 [Rew-Int] Награда: \(amount) \(type)")
+                }
+            }
+            // Fallback: стандартен Interstitial
+            else if InterstitialAdManager.shared.isReady {
+                print("⚠️ [Ad Loop] Rew-Int не е готова. Fallback -> Interstitial.")
+                InterstitialAdManager.shared.showIfAvailable {
+                    print("✅ [Interstitial] Затворена.")
+                }
+            } else {
+                reloadAll()
+            }
+
+        case 1:
+            // ПРИОРИТЕТ: стандартен Interstitial
+            if InterstitialAdManager.shared.isReady {
+                print("▶️ [Ad Loop] Пускане на INTERSTITIAL (Priority).")
+                InterstitialAdManager.shared.showIfAvailable {
+                    print("✅ [Interstitial] Затворена.")
+                }
+            }
+            // Fallback: Rewarded Interstitial
+            else if RewardedInterstitialAdManager.shared.isReady {
+                print("⚠️ [Ad Loop] Interstitial не е готова. Fallback -> Rew-Int.")
+                RewardedInterstitialAdManager.shared.showIfAvailable { amount, type in
+                    print("🎁 [Rew-Int] Награда: \(amount) \(type)")
+                }
+            } else {
+                reloadAll()
+            }
+
+        default:
+            break
+        }
+
+        // Увеличаваме индекса за следващия път (0 -> 1 -> 2(=0) ...)
+        adRotationIndex += 1
+    }
+
     // MARK: - Interaction Ad Logic
         private func trackInteractionAndShowAdIfNeeded() {
             // 1. Ако потребителят е Premium, не правим нищо
