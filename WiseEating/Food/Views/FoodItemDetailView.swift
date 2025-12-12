@@ -6,6 +6,7 @@ struct FoodItemDetailView: View {
     @Environment(\.modelContext) private var modelContext
     @ObservedObject private var effectManager = EffectManager.shared
     @State private var isBannerAdLoaded: Bool = false
+    @State private var isShowingFullScreenImage = false
 
     let food: FoodItem
     let profile: Profile?
@@ -171,7 +172,18 @@ struct FoodItemDetailView: View {
         .task(id: selectedImageData) {
             await loadImage(data: selectedImageData)
         }
+        // 🔥 ЕТО ТУК ДОБАВЯМЕ fullscreen-а
+        .fullScreenCover(isPresented: $isShowingFullScreenImage) {
+            if let image = mainUIImage {
+                FullscreenImageView(image: image) {
+                    isShowingFullScreenImage = false
+                }
+            } else {
+                Color.black.ignoresSafeArea()
+            }
+        }
     }
+
     
     private func loadImage(data: Data?) async {
         if self.mainUIImage == nil, let prefill = food.foodImage(variant: "1024") {
@@ -253,6 +265,10 @@ struct FoodItemDetailView: View {
                .clipped()
                .glassCardStyle(cornerRadius: 20)
                .transition(.opacity.animation(.easeInOut))
+               .onTapGesture {
+                   // Показваме снимката на цял екран
+                   isShowingFullScreenImage = true
+               }
        } else {
            Rectangle()
                .fill(effectManager.currentGlobalAccentColor.opacity(0.8))
@@ -262,7 +278,8 @@ struct FoodItemDetailView: View {
                .clipped()
                .glassCardStyle(cornerRadius: 20)
        }
-   }
+    }
+
     
     @ViewBuilder
     private var noImageInfoSection: some View {
