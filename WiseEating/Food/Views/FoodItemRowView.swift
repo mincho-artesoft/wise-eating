@@ -71,83 +71,88 @@ struct FoodItemRowView: View {
     }
 
     var body: some View {
-        let chartInfo = chartDisplayInformation
+            // ✅ FIX: Използваме if-else, за да изолираме напълно логиката за изтрит обект
+            if item.isDeleted || item.modelContext == nil {
+                EmptyView()
+            } else {
+                // Този код се изпълнява само ако item съществува
+                let chartInfo = chartDisplayInformation
 
-        VStack(alignment: .leading, spacing: 12) {
-            HStack(alignment: .top, spacing: 12) {
-                NutrientProportionDonutChartView(
-                    proportions: chartInfo.proportions,
-                    centralImageUIImage: item.foodImage(variant: "480"),
-                    imagePlaceholderSystemName: "fork.knife.circle.fill",
-                    centralContentDiameter: 60,
-                    donutRingThickness: 5,
-                    canalRingThickness: 5,
-                    adaptiveTextColor: effectManager.currentGlobalAccentColor,
-                    ringTrackColor: effectManager.currentGlobalAccentColor.opacity(0.1),
-                    totalEnergyKcal: chartInfo.centralKcalDisplay,
-                    totalReferenceValue: chartInfo.totalReferenceForChart
-                )
-                .frame(width: 80, height: 80)
-                .padding(.top, 2)
-               
-                VStack(alignment: .leading, spacing: 4) {
-                    HStack(alignment: .top) {
-                        Text(item.name)
-                            .font(.headline.weight(.bold))
-                            .foregroundColor(effectManager.currentGlobalAccentColor)
-                            .lineLimit(2)
-                        
-                        Spacer()
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack(alignment: .top, spacing: 12) {
+                        NutrientProportionDonutChartView(
+                            proportions: chartInfo.proportions,
+                            centralImageUIImage: item.foodImage(variant: "480"),
+                            imagePlaceholderSystemName: "fork.knife.circle.fill",
+                            centralContentDiameter: 60,
+                            donutRingThickness: 5,
+                            canalRingThickness: 5,
+                            adaptiveTextColor: effectManager.currentGlobalAccentColor,
+                            ringTrackColor: effectManager.currentGlobalAccentColor.opacity(0.1),
+                            totalEnergyKcal: chartInfo.centralKcalDisplay,
+                            totalReferenceValue: chartInfo.totalReferenceForChart
+                        )
+                        .frame(width: 80, height: 80)
+                        .padding(.top, 2)
+                       
+                        VStack(alignment: .leading, spacing: 4) {
+                            HStack(alignment: .top) {
+                                Text(item.name)
+                                    .font(.headline.weight(.bold))
+                                    .foregroundColor(effectManager.currentGlobalAccentColor)
+                                    .lineLimit(2)
+                                
+                                Spacer()
 
-                        Button(action: {
-                            withAnimation(.spring()) {
-                                item.isFavorite.toggle()
+                                Button(action: {
+                                    withAnimation(.spring()) {
+                                        item.isFavorite.toggle()
+                                    }
+                                    try? modelContext.save()
+                                    SearchIndexStore.shared.updateFavoriteStatus(for: item.id, isFavorite: item.isFavorite)
+                                    NotificationCenter.default.post(name: .foodFavoriteToggled, object: item)
+                                }) {
+                                    Image(systemName: item.isFavorite ? "star.fill" : "star")
+                                        .foregroundColor(.yellow)
+                                        .font(.title3)
+                                        .padding(4)
+                                }
+                                .buttonStyle(.plain)
+                                .contentShape(Rectangle())
                             }
-                            // ✅ Запази и съобщи
-                            try? modelContext.save()
-                            SearchIndexStore.shared.updateFavoriteStatus(for: item.id, isFavorite: item.isFavorite)
-                            NotificationCenter.default.post(name: .foodFavoriteToggled, object: item)
-                        }) {
-                            Image(systemName: item.isFavorite ? "star.fill" : "star")
-                                .foregroundColor(.yellow)
-                                .font(.title3)
-                                .padding(4)
+                            .animation(.spring(), value: item.isFavorite)
+
+                            if let txt = descriptionOrIngredientsText, !txt.isEmpty {
+                                Text(txt)
+                                    .font(.caption)
+                                    .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
+                                    .lineLimit(2)
+                            }
+
+                            if displayWeightG != nil || displayKcal != nil {
+                                weightAndCaloriesText()
+                                    .font(.caption2)
+                                    .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
+                                    .padding(.top, 2)
+                            }
                         }
-                        .buttonStyle(.plain)
-                        .contentShape(Rectangle())
-                    }
-                    .animation(.spring(), value: item.isFavorite)
-
-                    if let txt = descriptionOrIngredientsText, !txt.isEmpty {
-                        Text(txt)
-                            .font(.caption)
-                            .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
-                            .lineLimit(2)
+                        .layoutPriority(1)
                     }
 
-                    if displayWeightG != nil || displayKcal != nil {
-                        weightAndCaloriesText()
-                            .font(.caption2)
-                            .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
-                            .padding(.top, 2)
+                    let nutrients = topVitamins + topMinerals
+                    let allergens = item.allergens ?? []
+                    
+                    if !nutrients.isEmpty || !allergens.isEmpty {
+                        VStack(alignment: .leading, spacing: 8) {
+                            ChipScrollView(title: "Top Nutrients", items: nutrients, textColor: effectManager.currentGlobalAccentColor)
+                            ChipScrollView(title: "Allergens", items: allergens, textColor: effectManager.currentGlobalAccentColor, isAlertSection: true)
+                        }
                     }
                 }
-                .layoutPriority(1)
-            }
-
-            let nutrients = topVitamins + topMinerals
-            let allergens = item.allergens ?? []
-            
-            if !nutrients.isEmpty || !allergens.isEmpty {
-                VStack(alignment: .leading, spacing: 8) {
-                    ChipScrollView(title: "Top Nutrients", items: nutrients, textColor: effectManager.currentGlobalAccentColor)
-                    ChipScrollView(title: "Allergens", items: allergens, textColor: effectManager.currentGlobalAccentColor, isAlertSection: true)
-                }
+                .padding()
+                .glassCardStyle(cornerRadius: 20)
             }
         }
-        .padding()
-        .glassCardStyle(cornerRadius: 20)
-    }
     
     @ViewBuilder
     private func weightAndCaloriesText() -> some View {
