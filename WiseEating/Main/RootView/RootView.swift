@@ -914,12 +914,8 @@ struct RootView: View {
             if let profile = selectedProfile {
                 ProfileBadgesView(profile: profile).id(profile)
             }
-//        case .test:
-//            if #available(iOS 26.0, *) {
-//                FoodSearchView(profile: selectedProfile)
-//            } else {
-//               EmptyView()
-//            }
+        case .test:
+                TestView()
         }
       
     }

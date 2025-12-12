@@ -1,7 +1,7 @@
 import Foundation
 
 enum AppTab: Int, CaseIterable, Identifiable {
-    case nutrition, training, foods, calendar, storage, shoppingList, aiGenerate, search, analytics, exercises, nodes, badges//, test
+    case nutrition, training, foods, calendar, storage, shoppingList, aiGenerate, search, analytics, exercises, nodes, badges, test
 
     var id: Int { self.rawValue }
 
@@ -19,7 +19,7 @@ enum AppTab: Int, CaseIterable, Identifiable {
         case .aiGenerate: "Generate"
         case .nodes: "Notes"
         case .badges: "Badges"
-//        case .test: "test"
+        case .test: "test"
         }
     }
 
@@ -37,7 +37,7 @@ enum AppTab: Int, CaseIterable, Identifiable {
         case .aiGenerate: "aiGenerate_icon"
         case .nodes: "shareplay"
         case .badges: "rosette"
-//        case .test: "search_icon"
+        case .test: "search_icon"
         }
     }
 }
