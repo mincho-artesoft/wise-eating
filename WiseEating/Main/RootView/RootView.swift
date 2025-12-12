@@ -1285,7 +1285,7 @@ struct RootView: View {
             print("⏱️ [Ad Loop] Стартиране на цикъла за реклами (background).")
 
             // 1. Първоначално изчакване (60 секунди)
-            try? await Task.sleep(nanoseconds: 60 * 1_000_000_000)
+            try? await Task.sleep(nanoseconds: 70 * 1_000_000_000)
 
             // 2. Първа проверка/показване – на main
             await MainActor.run {
