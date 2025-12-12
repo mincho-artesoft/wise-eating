@@ -1,102 +1,3 @@
-// MARK: - Unit Normalization Helper
-
-extension SmartFoodSearch3 {
-    nonisolated static func normalizedNumericValue(
-        _ value: Double,
-        unitString: String?,
-        for nutrient: NutrientType
-    ) -> Double {
-        // Canonical unit for this nutrient (per 100 g in the DB)
-        let defaultUnitRaw = SearchKnowledgeBase.shared.defaultUnit(for: nutrient)
-        let defaultUnit = defaultUnitRaw
-            .filter { $0.isLetter || $0 == "µ" }
-            .lowercased()
-
-        enum CanonicalKind {
-            case energyKcal
-            case energyKj
-            case grams
-            case milligrams
-            case micrograms
-            case other
-        }
-
-        let canonical: CanonicalKind
-        switch defaultUnit {
-        case "kj":
-            canonical = .energyKj
-        case "kcal", "cal", "calorie", "calories":
-            canonical = .energyKcal
-        case "kg", "gram", "grams", "g":
-            canonical = .grams
-        case "mg", "milligram", "milligrams":
-            canonical = .milligrams
-        case "µg", "ug", "mcg", "microgram", "micrograms":
-            canonical = .micrograms
-        default:
-            canonical = .other
-        }
-
-        var inputUnit = unitString?
-            .filter { $0.isLetter || $0 == "µ" }
-            .lowercased() ?? ""
-
-        if inputUnit.isEmpty {
-            inputUnit = defaultUnit
-        }
-
-        switch canonical {
-        case .energyKcal:
-            switch inputUnit {
-            case "kj":
-                return value / 4.184
-            default:
-                return value
-            }
-
-        case .energyKj:
-            switch inputUnit {
-            case "kcal", "cal", "calorie", "calories":
-                return value * 4.184
-            default:
-                return value
-            }
-
-        case .grams, .milligrams, .micrograms:
-            // First convert input to grams
-            var grams: Double
-            switch inputUnit {
-            case "kg", "kilogram", "kilograms":
-                grams = value * 1000.0
-            case "g", "gram", "grams":
-                grams = value
-            case "mg", "milligram", "milligrams":
-                grams = value / 1000.0
-            case "µg", "ug", "mcg", "microgram", "micrograms":
-                grams = value / 1_000_000.0
-            case "ng":
-                grams = value / 1_000_000_000.0
-            default:
-                grams = value
-            }
-
-            switch canonical {
-            case .grams:
-                return grams
-            case .milligrams:
-                return grams * 1000.0
-            case .micrograms:
-                return grams * 1_000_000.0
-            default:
-                return value
-            }
-
-        case .other:
-            // For dimensionless / percent-type nutrients, just return the raw value
-            return value
-        }
-    }
-}
 import Foundation
 import Combine
 @preconcurrency import NaturalLanguage
@@ -2087,3 +1988,117 @@ extension SmartFoodSearch3 {
     }
 }
 
+
+
+extension SmartFoodSearch3 {
+    nonisolated static func normalizedNumericValue(
+        _ value: Double,
+        unitString: String?,
+        for nutrient: NutrientType
+    ) -> Double {
+        // Canonical unit for this nutrient (per 100 g in the DB)
+        let defaultUnitRaw = SearchKnowledgeBase.shared.defaultUnit(for: nutrient)
+        let defaultUnit = defaultUnitRaw
+            .filter { $0.isLetter || $0 == "µ" }
+            .lowercased()
+
+        enum CanonicalKind {
+            case energyKcal
+            case energyKj
+            case grams
+            case milligrams
+            case micrograms
+            case other
+        }
+
+        let canonical: CanonicalKind
+        switch defaultUnit {
+        case "kj":
+            canonical = .energyKj
+        case "kcal", "cal", "calorie", "calories":
+            canonical = .energyKcal
+        case "kg", "gram", "grams", "g":
+            canonical = .grams
+        case "mg", "milligram", "milligrams":
+            canonical = .milligrams
+        case "µg", "ug", "mcg", "microgram", "micrograms":
+            canonical = .micrograms
+        default:
+            canonical = .other
+        }
+
+        var inputUnit = unitString?
+            .filter { $0.isLetter || $0 == "µ" }
+            .lowercased() ?? ""
+
+        if inputUnit.isEmpty {
+            inputUnit = defaultUnit
+        }
+
+        switch canonical {
+        case .energyKcal:
+            switch inputUnit {
+            case "kj":
+                return value / 4.184
+            default:
+                return value
+            }
+
+        case .energyKj:
+            switch inputUnit {
+            case "kcal", "cal", "calorie", "calories":
+                return value * 4.184
+            default:
+                return value
+            }
+
+        case .grams, .milligrams, .micrograms:
+            // First convert input to grams
+            var grams: Double
+            switch inputUnit {
+            case "kg", "kilogram", "kilograms":
+                grams = value * 1000.0
+            case "g", "gram", "grams":
+                grams = value
+            case "mg", "milligram", "milligrams":
+                grams = value / 1000.0
+            case "µg", "ug", "mcg", "microgram", "micrograms":
+                grams = value / 1_000_000.0
+            case "ng":
+                grams = value / 1_000_000_000.0
+            default:
+                grams = value
+            }
+
+            switch canonical {
+            case .grams:
+                return grams
+            case .milligrams:
+                return grams * 1000.0
+            case .micrograms:
+                return grams * 1_000_000.0
+            default:
+                return value
+            }
+
+        case .other:
+            // For dimensionless / percent-type nutrients, just return the raw value
+            return value
+        }
+    }
+    
+    func refreshData() {
+           let store = SearchIndexStore.shared
+           // Ако Store-ът има по-нови данни (различен брой), обновяваме нашите
+           if store.compactFoods.count != self.allFoods.count {
+               print("🔄 [SmartSearch] Refreshing internal cache from Store (Old: \(self.allFoods.count), New: \(store.compactFoods.count))")
+               self.allFoods = store.compactFoods
+               self.compactMap = store.compactMap
+               self.invertedIndex = store.invertedIndex
+               self.vocabulary = store.vocabulary
+               self.maxNutrientValues = store.maxNutrientValues
+               self.cachedKnownDiets = store.knownDiets
+               self.nutrientRankings = store.nutrientRankings
+           }
+       }
+}
