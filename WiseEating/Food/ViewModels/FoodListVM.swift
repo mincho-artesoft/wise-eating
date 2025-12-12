@@ -139,9 +139,11 @@ final class FoodListVM: ObservableObject {
                     case .diets, .plans:
                         return false // logic placeholders
                     case .recipes:
-                        return item.isUserAdded // Ensure we strictly show user added recipes if required
+                        // ✅ FIX: Strict check for recipes
+                        return item.isUserAdded && item.isRecipe
                     case .menus:
-                        return item.isUserAdded
+                        // ✅ FIX: Strict check for menus
+                        return item.isUserAdded && item.isMenu
                     case .favorites:
                         return true // Already handled by engine
                     }
