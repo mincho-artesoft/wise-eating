@@ -192,7 +192,10 @@ struct ExerciseItemEditorView: View {
             }
             GeometryReader { geometry in
                 Group {
-                    if !isSaving && !showAlert && GlobalState.aiAvailability != .deviceNotEligible {
+                    if !isSaving &&
+                       !showAlert &&
+                       GlobalState.aiAvailability != .deviceNotEligible &&
+                       openMenu == .none {
                         AIButton(geometry: geometry)
                     }
                 }

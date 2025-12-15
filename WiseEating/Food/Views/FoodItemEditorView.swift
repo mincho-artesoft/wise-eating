@@ -244,7 +244,8 @@ struct FoodItemEditorView: View {
                    Group {
                        if !isSaving &&
                           !showAlert &&
-                          GlobalState.aiAvailability != .deviceNotEligible { // ⬅️ НОВО
+                          GlobalState.aiAvailability != .deviceNotEligible &&
+                          openMenu == .none { 
                            AIButton(geometry: geometry)
                        }
                    }
