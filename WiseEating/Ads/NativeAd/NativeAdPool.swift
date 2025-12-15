@@ -7,7 +7,7 @@ final class NativeAdPool: NSObject, ObservableObject {
     
     // 👇 ПРОМЯНА: Намаляваме от 5 на 3, за да облекчим WebKit процеса
     private let poolSize = 3
-    private let adUnitID = "ca-app-pub-2322123786875027/7272690555"
+    private let adUnitID = "ca-app-pub-3759868960530173/3629337942"
     
     @Published var availableAds: [NativeAd] = []
     

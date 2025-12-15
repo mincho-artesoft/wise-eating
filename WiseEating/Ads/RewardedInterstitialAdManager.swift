@@ -14,7 +14,7 @@ final class RewardedInterstitialAdManager: NSObject, FullScreenContentDelegate {
     private var rewardedInterstitial: RewardedInterstitialAd?
     private var isLoading = false
 
-    private let adUnitID = "ca-app-pub-2322123786875027/7743463842"
+    private let adUnitID = "ca-app-pub-3759868960530173/8933635514"
 
     // MARK: - Load
 

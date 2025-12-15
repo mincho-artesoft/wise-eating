@@ -17,7 +17,7 @@ final class BannerAdPool: NSObject, BannerViewDelegate {
     nonisolated(unsafe) static let shared = BannerAdPool()
     
     // MARK: - Config
-    private let adUnitID = "ca-app-pub-2322123786875027/6263054739" // тестов
+    private let adUnitID = "ca-app-pub-3759868960530173/9640938872" // тестов
     private let targetPreloadedCount = 3
     
     // MARK: - State
