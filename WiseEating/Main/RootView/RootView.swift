@@ -1280,7 +1280,7 @@ struct RootView: View {
         adLoopTask = Task.detached(priority: .background) {
             print("⏱️ [Ad Loop] Стартиране на цикъла за реклами (background).")
 
-            // 1. Първоначално изчакване (60 секунди)
+            // 1. Първоначално изчакване (70 секунди)
             try? await Task.sleep(nanoseconds: 70 * 1_000_000_000)
 
             // 2. Първа проверка/показване – на main
