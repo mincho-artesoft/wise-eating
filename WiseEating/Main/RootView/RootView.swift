@@ -7,11 +7,12 @@ struct RootView: View {
     @AppStorage("hasShownInitialSubscription") private var hasShownInitialSubscription: Bool = false
     @State private var adLoopTask: Task<Void, Never>? = nil
     @State private var adRotationIndex: Int = 0
-
+    @State private var nextAdRunDate: Date = Date().addingTimeInterval(70) // Първоначално след 70 сек
+    
     @Environment(\.safeAreaInsets) private var safeAreaInsets
     private var headerTopPadding: CGFloat { safeAreaInsets.top }
     @State private var hasUnreadBadgeNotifications: Bool = false
-
+    
     enum ProfilesDrawerContent { case profiles, notifications }
     
     // ПРОМЯНА 1: Премахваме .notificationsDenied от enum-а, тъй като вече не блокираме приложението за това.
@@ -23,42 +24,42 @@ struct RootView: View {
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.modelContext) private var modelContext
     @State private var navBarIsHiden: Bool = false
-
+    
     @Query private var allVitamins: [Vitamin]
     @Query private var allMinerals: [Mineral]
-
+    
     @State private var hasNewNutrition: Bool = false
     @State private var launchDate: Date? = nil
     @State private var launchMealName: String? = nil
     @State private var hasNewTraining: Bool = false
     @State private var launchTrainingName: String? = nil
     let timer = Timer.publish(every: 20, on: .main, in: .common).autoconnect()
-
+    
     @State private var nutritionChosenDate: Date = Date()
     @State private var trainingChosenDate: Date = Date()
     @State private var nutritionSelectedMealID: Meal.ID? = nil
-
+    
     @State private var pinnedFromDateSingle: Date = Date()
     @State private var pinnedEventsSingle: [EventDescriptor] = []
-
+    
     @AppStorage("lastSelectedTabRoot") private var selectedTab: AppTab = .nutrition
     @AppStorage("lastPreviousTabRoot") private var previousTab: AppTab = .nutrition
     @State private var isSearching = false
     @State private var searchText = ""
     @State private var menuState: MenuState = .collapsed
     @State private var selectedTabDraggableMenuView = 0
-
+    
     @State private var selectedNutrientTab = 0
-
+    
     @FocusState private var isSearchFieldFocused: Bool
     @State private var keyboardHeight: CGFloat = 0
-
+    
     @State private var isPresentingNewProfile = false
     @State private var editingProfile: Profile? = nil
     @State private var profileForHistoryView: Profile?
-
+    
     @State private var editorState: ThemeEditorState? = nil
-
+    
     @State private var isPresentingNewFood = false
     @State private var editingFood: FoodItem? = nil
     @State private var dublicateFood: FoodItemCopy? = nil
@@ -66,38 +67,38 @@ struct RootView: View {
     @State private var isPresentingNewRecipe = false
     @State private var editingRecipe: FoodItem? = nil
     @State private var detailedFood: FoodItem? = nil
-
+    
     @AppStorage("showMultiSelection") private var showMultiSelection: Bool = false
-
+    
     @Query private var profiles: [Profile]
     @Query private var settings: [UserSettings]
-
+    
     @State private var selectedProfile: Profile?
     @State private var selectedProfiles: [Profile] = []
-
+    
     @StateObject private var coordinator = NavigationCoordinator.shared
-
+    
     @StateObject private var foodListVM = FoodListVM()
     @StateObject private var exerciseListVM = ExerciseListVM()
-
+    
     private let localSearchTabs: [AppTab] = [.storage, .foods, .nutrition]
-
+    
     @ObservedObject var effectManager = EffectManager.shared
     @ObservedObject private var subscriptionManager = SubscriptionManager.shared
     @State private var isProfilesDrawerVisible: Bool = false
     @State private var profilesMenuState: MenuState = .collapsed
     @State private var profilesDrawerContent: ProfilesDrawerContent = .profiles
     @State private var isSearchButtonVisible: Bool = true
-
+    
     @State private var isPresentingProfileWizard = false
-
+    
     @State private var aiGenerationMenuState: MenuState = .collapsed
-
+    
     @State private var hasUnreadAINotifications: Bool = false
     
     // Novo: opening daily AI generator
     @State private var isShowingDailyAIGenerator = false
-
+    
     // Helper variables
     private var isMealPlanEditorPresented: Bool { coordinator.pendingAIPlanPreview != nil }
     private var isRecipeEditorPresented: Bool { coordinator.pendingAIRecipe != nil }
@@ -109,16 +110,16 @@ struct RootView: View {
     private var isWorkoutEditorPresented: Bool { coordinator.pendingAIWorkout != nil }
     
     private var isAnyAIEditorPresented: Bool {
-           isMealPlanEditorPresented || isRecipeEditorPresented || isMenuEditorPresented || isFoodDetailEditorPresented || isDietEditorPresented || isExerciseDetailEditorPresented || isTrainingPlanEditorPresented || isWorkoutEditorPresented
-       }
-
+        isMealPlanEditorPresented || isRecipeEditorPresented || isMenuEditorPresented || isFoodDetailEditorPresented || isDietEditorPresented || isExerciseDetailEditorPresented || isTrainingPlanEditorPresented || isWorkoutEditorPresented
+    }
+    
     private func hideSearchButton() { withAnimation { isSearchButtonVisible = false } }
     private func showSearchButton() { withAnimation { isSearchButtonVisible = true } }
-
+    
     private var visibleTabs: [AppTab] {
         AppTab.allCases.filter { $0 != .search && $0 != .analytics && $0 != .foods && $0 != .exercises && $0 != .nodes && $0 != .badges }
     }
-
+    
     var body: some View {
         ZStack {
             switch permissionState {
@@ -154,11 +155,24 @@ struct RootView: View {
                 // ПРОМЯНА 2: Случаят .notificationsDenied е премахнат, защото вече не блокираме.
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: .snoozeAds)) { _ in
+            print("⏳ Ad Snoozed! Adding 3 minutes to the timer.")
+            // Ако следващата реклама е в миналото (трябва да се пусне сега) или в бъдещето,
+            // добавяме 3 минути (180 секунди) към текущото планирано време.
+            let now = Date()
+            if nextAdRunDate < now {
+                // Ако е трябвало да се пусне вече, но още не е, я отлагаме от 'сега' + 3 мин
+                nextAdRunDate = now.addingTimeInterval(180)
+            } else {
+                // Ако е в бъдещето, просто удължаваме
+                nextAdRunDate = nextAdRunDate.addingTimeInterval(180)
+            }
+        }
         .onChange(of: selectedTab) { _, newTab in
             if newTab == .nutrition { hasNewNutrition = false }
             if newTab == .training { hasNewTraining = false }
             trackInteractionAndShowAdIfNeeded()
-
+            
             if newTab == .aiGenerate {
                 if hasUnreadAINotifications {
                     Task {
@@ -306,11 +320,11 @@ struct RootView: View {
                     dismissSearch()
                     
                     selectedDraggableMenuTab = .subscriptions
-
+                    
                     // 👇 Тук приемам, че имаш case .removeAds в SubscriptionCategory
                     // Ако името е друго – смени го с твоето.
                     selectedSubscriptionCategory = .removeAds
-
+                    
                     withAnimation {
                         profilesMenuState = .collapsed
                         menuState = .full
@@ -319,7 +333,7 @@ struct RootView: View {
             )
         )
     }
-
+    
     private func checkForUnreadBadgeNotifications() async {
         let unread = await NotificationManager.shared.getUnreadBadgeNotifications()
         if self.hasUnreadBadgeNotifications != !unread.isEmpty {
@@ -343,9 +357,9 @@ struct RootView: View {
                         .onChange(of: themeManager.currentTheme) { _, _ in updateBackgroundSnapshot() }
                 }
             }
-
+            
             let showEditor = isPresentingNewProfile || editingProfile != nil
-
+            
             if let preview = coordinator.pendingAIPlanPreview,
                let profile = coordinator.profileForPendingAIPlan,
                let jobType = coordinator.pendingAIPlanJobType {
@@ -360,7 +374,7 @@ struct RootView: View {
                         dismissSearch()
                     }
                 }
-
+                
                 switch jobType {
                 case .mealPlan:
                     MealPlanEditorView(
@@ -403,7 +417,7 @@ struct RootView: View {
                 default:
                     EmptyView()
                 }
-         
+                
             }
             
             dietEditorLayer
@@ -416,63 +430,63 @@ struct RootView: View {
             
             if showEditor {
                 ProfileEditorView(
-                       profile: editingProfile,
-                       navBarIsHiden: $navBarIsHiden,
-                       isProfilesDrawerVisible: $isProfilesDrawerVisible,
-                       menuState: $menuState,
-                       onDismiss: { newOrUpdatedProfile in
-                           let wasEditingExisting = (editingProfile != nil)
-
-                           withAnimation {
-                               isPresentingNewProfile = false
-                               isProfilesDrawerVisible = true
-                               editingProfile = nil
-                               profilesMenuState = .full
-                           }
-
-                           guard let profile = newOrUpdatedProfile else { return }
-
-                           if wasEditingExisting {
-                               self.selectedProfile = profile
-                               if let userSettings = settings.first {
-                                   userSettings.lastSelectedProfile = profile
-                                   if !showMultiSelection {
-                                       self.selectedProfiles = [profile]
-                                       userSettings.lastSelectedProfiles = [profile]
-                                   }
-                                   try? modelContext.save()
-                               }
-                           } else {
-                               let allProfiles: [Profile]
-                               if profiles.contains(where: { $0.id == profile.id }) {
-                                   allProfiles = profiles
-                               } else {
-                                   allProfiles = profiles + [profile]
-                               }
-
-                               let activeIDs = subscriptionManager.activeProfileIDs(from: allProfiles)
-                               let isUnlocked = activeIDs.contains(profile.id)
-
-                               if !isUnlocked {
-                                   if let _ = settings.first {
-                                       try? modelContext.save()
-                                   }
-                                   openSubscriptionUpgradeFlow()
-                                   return
-                               }
-
-                               self.selectedProfile = profile
-                               if let userSettings = settings.first {
-                                   userSettings.lastSelectedProfile = profile
-                                   if !showMultiSelection {
-                                       self.selectedProfiles = [profile]
-                                       userSettings.lastSelectedProfiles = [profile]
-                                   }
-                                   try? modelContext.save()
-                               }
-                           }
-                       }
-                   )
+                    profile: editingProfile,
+                    navBarIsHiden: $navBarIsHiden,
+                    isProfilesDrawerVisible: $isProfilesDrawerVisible,
+                    menuState: $menuState,
+                    onDismiss: { newOrUpdatedProfile in
+                        let wasEditingExisting = (editingProfile != nil)
+                        
+                        withAnimation {
+                            isPresentingNewProfile = false
+                            isProfilesDrawerVisible = true
+                            editingProfile = nil
+                            profilesMenuState = .full
+                        }
+                        
+                        guard let profile = newOrUpdatedProfile else { return }
+                        
+                        if wasEditingExisting {
+                            self.selectedProfile = profile
+                            if let userSettings = settings.first {
+                                userSettings.lastSelectedProfile = profile
+                                if !showMultiSelection {
+                                    self.selectedProfiles = [profile]
+                                    userSettings.lastSelectedProfiles = [profile]
+                                }
+                                try? modelContext.save()
+                            }
+                        } else {
+                            let allProfiles: [Profile]
+                            if profiles.contains(where: { $0.id == profile.id }) {
+                                allProfiles = profiles
+                            } else {
+                                allProfiles = profiles + [profile]
+                            }
+                            
+                            let activeIDs = subscriptionManager.activeProfileIDs(from: allProfiles)
+                            let isUnlocked = activeIDs.contains(profile.id)
+                            
+                            if !isUnlocked {
+                                if let _ = settings.first {
+                                    try? modelContext.save()
+                                }
+                                openSubscriptionUpgradeFlow()
+                                return
+                            }
+                            
+                            self.selectedProfile = profile
+                            if let userSettings = settings.first {
+                                userSettings.lastSelectedProfile = profile
+                                if !showMultiSelection {
+                                    self.selectedProfiles = [profile]
+                                    userSettings.lastSelectedProfiles = [profile]
+                                }
+                                try? modelContext.save()
+                            }
+                        }
+                    }
+                )
                 .onAppear {
                     isProfilesDrawerVisible = false
                     profilesMenuState = .collapsed
@@ -480,7 +494,7 @@ struct RootView: View {
                 .onDisappear { navBarIsHiden = false }
                 .transition(.move(edge: .bottom).combined(with: .opacity))
             }
-
+            
             if isPresentingProfileWizard {
                 ProfileWizardView(
                     isInit: false,
@@ -490,19 +504,19 @@ struct RootView: View {
                             isProfilesDrawerVisible = true
                             profilesMenuState = .full
                         }
-
+                        
                         guard let profile = newlyCreatedProfile else { return }
-
+                        
                         let allProfiles: [Profile]
                         if profiles.contains(where: { $0.id == profile.id }) {
                             allProfiles = profiles
                         } else {
                             allProfiles = profiles + [profile]
                         }
-
+                        
                         let activeIDs = subscriptionManager.activeProfileIDs(from: allProfiles)
                         let isUnlocked = activeIDs.contains(profile.id)
-
+                        
                         if !isUnlocked {
                             if let _ = settings.first {
                                 try? modelContext.save()
@@ -510,7 +524,7 @@ struct RootView: View {
                             openSubscriptionUpgradeFlow()
                             return
                         }
-
+                        
                         self.selectedProfile = profile
                         if let userSettings = settings.first {
                             userSettings.lastSelectedProfile = profile
@@ -521,7 +535,7 @@ struct RootView: View {
                             try? modelContext.save()
                         }
                     }
-
+                    
                 )
                 .onAppear {
                     isProfilesDrawerVisible = false
@@ -530,7 +544,7 @@ struct RootView: View {
                 .onDisappear { navBarIsHiden = false }
                 .transition(.move(edge: .bottom).combined(with: .opacity))
             }
-
+            
             if let profile = profileForHistoryView {
                 WeightHeightHistoryView(
                     profile: profile,
@@ -566,7 +580,7 @@ struct RootView: View {
                 )
                 .transition(.move(edge: .bottom).combined(with: .opacity))
             }
-
+            
             if let state = editorState {
                 switch state {
                 case .new:
@@ -593,7 +607,7 @@ struct RootView: View {
                         navBarIsHiden = false
                     }
                     .transition(.move(edge: .bottom).combined(with: .opacity))
-
+                    
                 case .edit(let theme):
                     ThemeEditorView(
                         themeToEdit: theme,
@@ -620,7 +634,7 @@ struct RootView: View {
                     .transition(.move(edge: .bottom).combined(with: .opacity))
                 }
             }
-
+            
             ZStack(alignment: .bottom) {
                 if profilesMenuState == .full {
                     (effectManager.isLightRowTextColor ? Color.black.opacity(0.4) : Color.white.opacity(0.4))
@@ -735,33 +749,33 @@ struct RootView: View {
             .ignoresSafeArea(.keyboard)
         }
     }
-
+    
     private func openSubscriptionUpgradeFlow() {
         guard let targetCategory = subscriptionManager.nextTierForProfileLimit else {
             print("ℹ️ Already at highest subscription tier; cannot upgrade further.")
             return
         }
-
+        
         selectedSubscriptionCategory = targetCategory
         pendingUpgradeCategory = targetCategory
-
+        
         selectedDraggableMenuTab = .subscriptions
         withAnimation {
             profilesMenuState = .collapsed
             menuState = .full
         }
     }
-
+    
     
     @ViewBuilder
     private var backgroundSourceView: some View {
         ThemeBackgroundView().ignoresSafeArea()
     }
-
+    
     private func updateBackgroundSnapshot() {
         let viewToRender = backgroundSourceView
         effectManager.snapshot = viewToRender.renderAsImage(size: UIScreen.main.bounds.size)
-
+        
         guard let snapshot = effectManager.snapshot else {
             effectManager.currentGlobalAccentColor = (colorScheme == .dark ? .white : .black)
             return
@@ -772,8 +786,8 @@ struct RootView: View {
             effectManager.isLightRowTextColor = calculatedColor.isLight()
         }
     }
-
-
+    
+    
     @ViewBuilder
     private var tabContent: some View {
         let tabToDisplay = isSearching ? previousTab : selectedTab
@@ -914,43 +928,43 @@ struct RootView: View {
             if let profile = selectedProfile {
                 ProfileBadgesView(profile: profile).id(profile)
             }
-//        case .test:
-//                TestView()
+            //        case .test:
+            //                TestView()
         }
-      
+        
     }
-
+    
     // ─────────────────────────────────────────────────────────────────────────────
     // MARK: - Draggable Menu (Segments + Content)
     // ─────────────────────────────────────────────────────────────────────────────
-
+    
     private enum DraggableMenuTab: String, CaseIterable, Identifiable {
         case nutrients = "Nutrients"
         case settings = "Settings"
         case subscriptions = "Plans"
         case moreApps = "More Apps"
-
+        
         var id: String { rawValue }
     }
-
+    
     private enum NutrientSubTab: String, CaseIterable, Identifiable {
         case vitamins = "Vitamins"
         case minerals = "Minerals"
-
+        
         var id: String { rawValue }
     }
-
+    
     @State private var selectedDraggableMenuTab: DraggableMenuTab = .nutrients
     @State private var selectedNutrientSubTab: NutrientSubTab = .vitamins
     @State private var selectedSubscriptionCategory: SubscriptionCategory = .base
     @State private var pendingUpgradeCategory: SubscriptionCategory? = nil
-
+    
     @ViewBuilder
     private var menuHorizontalContent: some View {
         WrappingSegmentedControl(selection: $selectedDraggableMenuTab, layoutMode: .wrap)
             .padding(.bottom, 8)
     }
-
+    
     @ViewBuilder
     private var menuVerticalContent: some View {
         switch selectedDraggableMenuTab {
@@ -958,7 +972,7 @@ struct RootView: View {
             VStack {
                 WrappingSegmentedControl(selection: $selectedNutrientSubTab, layoutMode: .wrap)
                     .padding(.horizontal)
-
+                
                 switch selectedNutrientSubTab {
                 case .vitamins:
                     VitaminListView(profile: selectedProfile)
@@ -966,10 +980,10 @@ struct RootView: View {
                     MineralListView(profile: selectedProfile)
                 }
             }
-
+            
         case .settings:
             SettingsView(editorState: $editorState)
-
+            
         case .subscriptions:
             SubscriptionView(
                 selectedCategory: $selectedSubscriptionCategory,
@@ -988,7 +1002,7 @@ struct RootView: View {
                 calendarStatus = await CalendarViewModel.shared.requestCalendarAccessIfNeeded()
             }
             guard calendarStatus else { permissionState = .calendarDenied; return }
-
+            
             var notificationStatus = await NotificationManager.shared.getAuthorizationStatus()
             // ПРОМЯНА 3: Ако статусът е notDetermined, питаме потребителя.
             if notificationStatus == .notDetermined {
@@ -1002,17 +1016,17 @@ struct RootView: View {
             permissionState = .granted
         }
     }
-
+    
     private func activateSearch() {
         trackInteractionAndShowAdIfNeeded()
-
+        
         previousTab = selectedTab
         selectedTab = .search
         menuState = .collapsed
         isSearching = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) { isSearchFieldFocused = true }
     }
-
+    
     private func dismissSearch() {
         isSearchFieldFocused = false
         searchText = ""
@@ -1023,25 +1037,25 @@ struct RootView: View {
             }
         }
     }
-
+    
     private func dismissKeyboard() { isSearchFieldFocused = false }
-
+    
     
     private func setup() {
         print("selectedTab", selectedTab, previousTab)
         EmbeddingWarmup.prewarm()
         if selectedTab == .search{
-           
+            
             selectedTab = previousTab
         }
         
         let isSheetPresentedAfterDismissal = isPresentingNewProfile || editingProfile != nil || profileForHistoryView != nil || editorState != nil || isPresentingProfileWizard
-
+        
         if selectedTab == .calendar || selectedTab == .analytics || selectedTab == .aiGenerate || selectedTab == .nodes || selectedTab == .badges || isSheetPresentedAfterDismissal {
             if !isAnyAIEditorPresented {
-                  isSearchButtonVisible = false
+                isSearchButtonVisible = false
             }
-                  
+            
         } else {
             isSearchButtonVisible = true
         }
@@ -1049,17 +1063,17 @@ struct RootView: View {
         updateBackgroundSnapshot()
         
         startRecurringAdLoop()
-
+        
         Task { @MainActor in
             CalendarViewModel.shared.reloadCalendars()
-
+            
             if settings.isEmpty {
                 let newSettings = UserSettings()
                 modelContext.insert(newSettings)
                 try? modelContext.save()
             }
             guard let userSettings = settings.first else { return }
-
+            
             if let last = userSettings.lastSelectedProfile,
                profiles.contains(where: { $0.id == last.id }) {
                 selectedProfile = last
@@ -1067,21 +1081,21 @@ struct RootView: View {
                 selectedProfile = profiles.first
                 userSettings.lastSelectedProfile = selectedProfile
             }
-
+            
             selectedProfiles = userSettings.lastSelectedProfiles.filter { stored in
                 profiles.contains(where: { $0.id == stored.id })
             }
-
+            
             if selectedProfiles.isEmpty, let primary = selectedProfile {
                 selectedProfiles = [primary]
                 userSettings.lastSelectedProfiles = selectedProfiles
             }
-
+            
             try? modelContext.save()
             CalendarViewModel.shared.updateSelectedCalendars(for: selectedProfiles)
         }
     }
-
+    
     private func handleProfileCountChange(_ newCount: Int) {
         guard newCount > 0 else { return }
         if selectedProfile == nil {
@@ -1102,23 +1116,23 @@ struct RootView: View {
             try? modelContext.save()
         }
     }
-
+    
     private func handleProfileChange(_ newProfile: Profile?) {
         if let new = newProfile, let userSettings = settings.first {
             userSettings.lastSelectedProfile = new
             try? modelContext.save()
         }
     }
-
+    
     @State private var dayProgress: [DateComponents : Double] = [:]
     private func key(for d: Date) -> DateComponents {
         Calendar.current.dateComponents([.year, .month, .day], from: d)
     }
-
+    
     private func goalProgress(on date: Date) -> Double? {
         let k = key(for: date)
         if let ready = dayProgress[k] { return ready }
-
+        
         Task {
             if let profile = selectedProfile,
                let fresh = await computeProgress(for: date, profile: profile) {
@@ -1127,43 +1141,43 @@ struct RootView: View {
         }
         return nil
     }
-
+    
     private func computeProgress(for date: Date, profile: Profile) async -> Double? {
         let template = profile.meals(for: date)
         let calendarEvents = await CalendarViewModel.shared.meals(forProfile: profile, on: date)
         let meals = mergedMeals(template: template, calendar: calendarEvents)
-
+        
         let foodsByMeal = Dictionary(uniqueKeysWithValues: meals.map { ($0.id, $0.foods(using: modelContext)) })
         let foods = mergedFoods(foodsByMeal)
         guard !foods.isEmpty else { return nil }
-
+        
         let totals = nutrientTotals(for: foods)
         let demo = demographicString(for: profile)
-
+        
         let items =
-            profile.priorityMinerals.map {
-                var it = NutriItem(mineral: $0, demographic: demo)
-                if let mg = totals[it.nutrientID ?? ""] { it.amount = fromMg(mg, to: it.unit) }
-                return it
-            } +
-            profile.priorityVitamins.map {
-                var it = NutriItem(vitamin: $0, demographic: demo)
-                if let mg = totals[it.nutrientID ?? ""] { it.amount = fromMg(mg, to: it.unit) }
-                return it
-            }
-
+        profile.priorityMinerals.map {
+            var it = NutriItem(mineral: $0, demographic: demo)
+            if let mg = totals[it.nutrientID ?? ""] { it.amount = fromMg(mg, to: it.unit) }
+            return it
+        } +
+        profile.priorityVitamins.map {
+            var it = NutriItem(vitamin: $0, demographic: demo)
+            if let mg = totals[it.nutrientID ?? ""] { it.amount = fromMg(mg, to: it.unit) }
+            return it
+        }
+        
         guard !items.isEmpty else { return nil }
         let met = items.filter(isGoalMet).count
         return Double(met) / Double(items.count)
     }
-
+    
     @MainActor
     private func preloadProgress(weeksRange range: Int) async {
         guard let profile = selectedProfile else { return }
         let cal = Calendar.current
         let today = cal.startOfDay(for: Date())
         var cache: [DateComponents : Double] = [:]
-
+        
         for w in -range...range {
             if let week = cal.date(byAdding: .day, value: w * 7, to: today) {
                 for i in 0..<7 {
@@ -1176,25 +1190,25 @@ struct RootView: View {
         }
         dayProgress = cache
     }
-
+    
     private func showInitialSubscriptionIfNeeded() {
         // Показваме само веднъж – при първо стартиране на приложението
         guard !hasShownInitialSubscription else { return }
         hasShownInitialSubscription = true
-
+        
         // Отваряме долното меню на таб "Subscriptions"
         selectedDraggableMenuTab = .subscriptions
-
+        
         // 👇 Тук приемам, че имаш case .removeAds в SubscriptionCategory
         // Ако името е друго – смени го с твоето.
         selectedSubscriptionCategory = .removeAds
-
+        
         withAnimation {
             profilesMenuState = .collapsed
             menuState = .full
         }
     }
-
+    
     
     func mergedMeals(template: [Meal], calendar events: [Meal]) -> [Meal] {
         var merged = template
@@ -1209,7 +1223,7 @@ struct RootView: View {
         }
         return merged.sorted { $0.startTime < $1.startTime }
     }
-
+    
     func mergedFoods(_ meals: [Meal.ID : [FoodItem : Double]]) -> [FoodItem : Double] {
         var merged: [FoodItem : Double] = [:]
         for (_, foods) in meals {
@@ -1219,12 +1233,12 @@ struct RootView: View {
         }
         return merged
     }
-
+    
     func nutrientTotals(for foods: [FoodItem : Double]) -> [String : Double] {
         var sumsMg: [String : Double] = [:]
         let vitIDs = vitaminLabelById.keys.map { "vit_\($0)" }
         let minIDs = mineralLabelById.keys.map { "min_\($0)" }
-
+        
         for (food, grams) in foods {
             let ref = food.referenceWeightG
             guard ref > 0 else { continue }
@@ -1238,7 +1252,7 @@ struct RootView: View {
         }
         return sumsMg
     }
-
+    
     func demographicString(for p: Profile) -> String {
         let isF = p.gender.lowercased().hasPrefix("f")
         if isF {
@@ -1253,53 +1267,64 @@ struct RootView: View {
         case 4..<9:   return Demographic.children4_8y
         case 9..<14:  return Demographic.children9_13y
         case 14..<19: return isF ? Demographic.adolescentFemales14_18y
-                                 : Demographic.adolescentMales14_18y
+            : Demographic.adolescentMales14_18y
         default:
             return isF
-                ? (p.age <= 50 ? Demographic.adultWomen19_50y
-                               : Demographic.adultWomen51plusY)
-                : (p.age <= 50 ? Demographic.adultMen19_50y
-                               : Demographic.adultMen51plusY)
+            ? (p.age <= 50 ? Demographic.adultWomen19_50y
+               : Demographic.adultWomen51plusY)
+            : (p.age <= 50 ? Demographic.adultMen19_50y
+               : Demographic.adultMen51plusY)
         }
     }
-
+    
     func isGoalMet(_ i: NutriItem) -> Bool {
         if let dn = i.dailyNeed,  i.amount < dn { return false }
         if let ul = i.upperLimit, i.amount > ul { return false }
         return true
     }
-
+    
     private func checkForUnreadAINotifications() async {
         let unreadAI = await NotificationManager.shared.getUnreadAINotifications()
         self.hasUnreadAINotifications = !unreadAI.isEmpty
     }
     
     private func startRecurringAdLoop() {
-        guard adLoopTask == nil else { return }
-
-        adLoopTask = Task.detached(priority: .background) {
-            print("⏱️ [Ad Loop] Стартиране на цикъла за реклами (background).")
-
-            // 1. Първоначално изчакване (70 секунди)
-            try? await Task.sleep(nanoseconds: 70 * 1_000_000_000)
-
-            // 2. Първа проверка/показване – на main
-            await MainActor.run {
-                tryShowAd()
-            }
-
-            // 3. Безкраен цикъл
-            while !Task.isCancelled {
-                print("⏱️ [Ad Loop] Изчакване на 10 минути до следващата проверка (background)...")
-                try? await Task.sleep(nanoseconds: 10 * 60 * 1_000_000_000)
-
-                await MainActor.run {
-                    tryShowAd()
+            guard adLoopTask == nil else { return }
+            
+            // Инициализираме времето за първата реклама (70 секунди от сега)
+            nextAdRunDate = Date().addingTimeInterval(70)
+            
+            adLoopTask = Task.detached(priority: .background) {
+                print("⏱️ [Ad Loop] Стартиране на интелигентния цикъл за реклами.")
+                
+                while !Task.isCancelled {
+                    // Проверяваме на всеки 5 секунди дали е дошло времето
+                    try? await Task.sleep(nanoseconds: 5 * 1_000_000_000)
+                    
+                    let now = Date()
+                    
+                    // ✅ ПОПРАВКА: Първо взимаме стойността с await
+                    let targetDate = await self.getNextAdRunDate()
+                    
+                    // След това правим сравнението
+                    if now >= targetDate {
+                        
+                        await MainActor.run {
+                            tryShowAd()
+                            // След опит за реклама, насрочваме следващата след 10 минути
+                            self.nextAdRunDate = Date().addingTimeInterval(10 * 60)
+                        }
+                    }
                 }
             }
         }
+    
+    // Помощна функция за безопасно четене на State променливата от background task-а
+    @MainActor
+    private func getNextAdRunDate() -> Date {
+        return nextAdRunDate
     }
-
+    
     @MainActor
     private func tryShowAd() {
         // Проверка 1: Има ли селектиран профил?
@@ -1307,18 +1332,18 @@ struct RootView: View {
             print("⚠️ [Ad Loop] Времето дойде, но НЯМА избран профил. Скипваме.")
             return
         }
-
+        
         // Проверка 2: Потребителят на безплатен (Base) план ли е?
         guard SubscriptionManager.shared.subscriptionStatus == .base else {
             print("💎 [Ad Loop] Потребителят е Premium. Скипваме рекламата.")
             return
         }
-
+        
         print("🎬 [Ad Loop] Опит за показване (Индекс: \(adRotationIndex % 2))...")
-
+        
         // Ротираме само между 2 формата: Rewarded Interstitial и Interstitial
         let cycle = adRotationIndex % 2
-
+        
         // Помощна функция за презареждане, ако нищо не е готово
         func reloadAll() {
             print("❌ [Ad Loop] Нито една реклама не е готова. Опит за презареждане (Rew-Int + Interstitial).")
@@ -1327,7 +1352,7 @@ struct RootView: View {
                 await InterstitialAdManager.shared.loadAd()
             }
         }
-
+        
         switch cycle {
         case 0:
             // ПРИОРИТЕТ: Rewarded Interstitial
@@ -1346,7 +1371,7 @@ struct RootView: View {
             } else {
                 reloadAll()
             }
-
+            
         case 1:
             // ПРИОРИТЕТ: стандартен Interstitial
             if InterstitialAdManager.shared.isReady {
@@ -1364,51 +1389,51 @@ struct RootView: View {
             } else {
                 reloadAll()
             }
-
+            
         default:
             break
         }
-
+        
         // Увеличаваме индекса за следващия път (0 -> 1 -> 2(=0) ...)
         adRotationIndex += 1
     }
-
+    
     // MARK: - Interaction Ad Logic
-        private func trackInteractionAndShowAdIfNeeded() {
-            // 1. Ако потребителят е Premium, не правим нищо
-            guard SubscriptionManager.shared.subscriptionStatus == .base else { return }
-
-            let key = "interaction_count_for_interstitial"
-            let threshold = 30
-
-            // 2. Взимаме текущия брой и увеличаваме
-            var count = UserDefaults.standard.integer(forKey: key)
-            count += 1
-
-            if count >= threshold {
-                print("🎬 [Ad Logic] Interaction count reached \(count). Triggering Interstitial.")
-                
-                // 3. Нулираме брояча веднага (за да не се пуска пак на 16-тия път, ако рекламата не зареди)
-                UserDefaults.standard.set(0, forKey: key)
-
-                // 4. Показваме рекламата
-                Task { @MainActor in
-                    // Проверяваме дали има заредена, ако не - опитваме да заредим за следващия път
-                    if InterstitialAdManager.shared.isReady {
-                        InterstitialAdManager.shared.showIfAvailable {
-                            print("✅ Interstitial dismissed after interaction trigger.")
-                        }
-                    } else {
-                        print("⚠️ Interstitial not ready. Loading for next time.")
-                        await InterstitialAdManager.shared.loadAd()
+    private func trackInteractionAndShowAdIfNeeded() {
+        // 1. Ако потребителят е Premium, не правим нищо
+        guard SubscriptionManager.shared.subscriptionStatus == .base else { return }
+        
+        let key = "interaction_count_for_interstitial"
+        let threshold = 30
+        
+        // 2. Взимаме текущия брой и увеличаваме
+        var count = UserDefaults.standard.integer(forKey: key)
+        count += 1
+        
+        if count >= threshold {
+            print("🎬 [Ad Logic] Interaction count reached \(count). Triggering Interstitial.")
+            
+            // 3. Нулираме брояча веднага (за да не се пуска пак на 16-тия път, ако рекламата не зареди)
+            UserDefaults.standard.set(0, forKey: key)
+            
+            // 4. Показваме рекламата
+            Task { @MainActor in
+                // Проверяваме дали има заредена, ако не - опитваме да заредим за следващия път
+                if InterstitialAdManager.shared.isReady {
+                    InterstitialAdManager.shared.showIfAvailable {
+                        print("✅ Interstitial dismissed after interaction trigger.")
                     }
+                } else {
+                    print("⚠️ Interstitial not ready. Loading for next time.")
+                    await InterstitialAdManager.shared.loadAd()
                 }
-            } else {
-                // Запазваме новия брой
-                UserDefaults.standard.set(count, forKey: key)
-                print("ℹ️ [Ad Logic] Count: \(count)/\(threshold)")
             }
+        } else {
+            // Запазваме новия брой
+            UserDefaults.standard.set(count, forKey: key)
+            print("ℹ️ [Ad Logic] Count: \(count)/\(threshold)")
         }
+    }
 }
 
 extension RootView {

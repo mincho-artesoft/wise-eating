@@ -2040,6 +2040,8 @@ struct FoodItemReceptEditorView: View {
     }
 
     private func handleAITap() {
+        NotificationCenter.default.post(name: .snoozeAds, object: nil)
+
         // 1. Проверка за AI наличност (Apple Intelligence статус и т.н.)
         guard ensureAIAvailableOrShowMessage() else { return }
 

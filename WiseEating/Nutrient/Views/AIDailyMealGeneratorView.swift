@@ -430,6 +430,8 @@ struct AIDailyMealGeneratorView: View {
        }
     
     private func handleAITap() {
+        NotificationCenter.default.post(name: .snoozeAds, object: nil)
+
         // Ако няма избрани хранения – няма какво да генерираме
         guard !selectedMealNames.isEmpty else { return }
 

@@ -2666,6 +2666,8 @@ struct NutritionsDetailView: View {
     }
 
     private func handleAITap() {
+        NotificationCenter.default.post(name: .snoozeAds, object: nil)
+
         // 1. Проверка за наличност на AI (Apple Intelligence статус)
         guard ensureAIAvailableOrShowMessage() else { return }
         
