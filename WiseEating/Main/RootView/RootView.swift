@@ -1303,10 +1303,20 @@ struct RootView: View {
                     
                     let now = Date()
                     
-                    // ✅ ПОПРАВКА: Първо взимаме стойността с await
+                    // Взимаме целевата дата
                     let targetDate = await self.getNextAdRunDate()
                     
-                    // След това правим сравнението
+                    // --- НОВО: Изчисляваме и логваме оставащото време ---
+                    let remainingSeconds = targetDate.timeIntervalSince(now)
+                    
+                    if remainingSeconds > 0 {
+                        print("⏳ [Ad Loop] Оставащо време до следващата реклама: \(Int(remainingSeconds)) сек.")
+                    } else {
+                        print("⏳ [Ad Loop] Времето настъпи (или е преминало с \(abs(Int(remainingSeconds))) сек). Започвам показване...")
+                    }
+                    // ----------------------------------------------------
+                    
+                    // Правим проверката
                     if now >= targetDate {
                         
                         await MainActor.run {
