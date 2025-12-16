@@ -93,7 +93,9 @@ struct ProfileWizardView: View {
     private let calVM = CalendarViewModel.shared
     let isInit: Bool
     let onDismiss: (Profile?) -> Void
-
+    @State private var showPhotoSourceDialog = false
+    @State private var isShowingCameraPicker = false
+    @State private var isShowingPhotoLibraryPicker = false
     // MARK: - Data Queries
     @Query(sort: \Vitamin.name) private var allVitamins: [Vitamin]
     @Query(sort: \Mineral.name) private var allMinerals: [Mineral]
@@ -120,6 +122,8 @@ struct ProfileWizardView: View {
     @State private var newlyCreatedProfile: Profile? = nil
     @State private var showAIGenerationView = false
 
+    @State private var isShowingFullScreenPhoto = false
+    @State private var fullScreenUIImage: UIImage? = nil
     // MARK: - Picker State & Helpers
     // Two-wheel pickers (whole + decimal) for height & weight
     // For babies (< 2y), the whole-number ranges are narrowed to age‑specific min/max (see helpers below).
@@ -557,19 +561,49 @@ struct ProfileWizardView: View {
             Spacer()
             let imageData = data.photoData
             let color = effectManager.currentGlobalAccentColor.opacity(0.6)
+
             ZStack {
-                VStack{}
+                // Фон / glass кръг
+                VStack { }
                     .frame(width: 252, height: 252)
                     .glassCardStyle(cornerRadius: 126)
-                PhotosPicker(selection: $data.selectedPhoto, matching: .images) {
-                    if let imageData = imageData, let uiImage = UIImage(data: imageData) {
-                        Image(uiImage: uiImage)
+
+                if let imageData,
+                   let uiImage = UIImage(data: imageData) {
+
+                    // 👉 Tap на аватара = fullscreen
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 250, height: 250)
+                        .clipShape(Circle())
+                        .onTapGesture {
+                            fullScreenUIImage = uiImage
+                            isShowingFullScreenPhoto = true
+                        }
+
+                    // 📷 Малък бутон долу-дясно = избор на източник
+                    Button {
+                        showPhotoSourceDialog = true
+                    } label: {
+                        Image(systemName: "camera.fill")
                             .resizable()
-                            .scaledToFill()
-                            .frame(width: 250, height: 250)
+                            .scaledToFit()
+                            .symbolRenderingMode(.hierarchical)
+                            .foregroundColor(effectManager.currentGlobalAccentColor)
+                            .padding(14)
+                            .background(.ultraThinMaterial)
                             .clipShape(Circle())
-                        
-                    } else {
+                            .shadow(radius: 3)
+                    }
+                    .buttonStyle(.plain)
+                    .offset(x: 90, y: 90)
+
+                } else {
+                    // Нямаме снимка – целият кръг отваря диалог за източник
+                    Button {
+                        showPhotoSourceDialog = true
+                    } label: {
                         ZStack {
                             Image(systemName: "person.crop.circle.fill")
                                 .resizable()
@@ -577,6 +611,7 @@ struct ProfileWizardView: View {
                                 .symbolRenderingMode(.hierarchical)
                                 .foregroundColor(color)
                                 .frame(width: 250, height: 250)
+
                             Image(systemName: "camera.fill")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
@@ -587,22 +622,44 @@ struct ProfileWizardView: View {
                                 .padding(.leading, 155)
                         }
                     }
-                }
-                .buttonStyle(.plain)
-                .onChange(of: data.selectedPhoto) { _, newItem in
-                    Task {
-                        if let data = try? await newItem?.loadTransferable(type: Data.self) {
-                            await MainActor.run {
-                                self.data.photoData = data
-                            }
-                        }
-                    }
+                    .buttonStyle(.plain)
                 }
             }
+            // 🔽 ТУК Е ДИАЛОГЪТ – САМО 2 ОПЦИИ + Cancel
+            .confirmationDialog("Select photo source", isPresented: $showPhotoSourceDialog) {
+                Button("Take Photo") {
+                    isShowingCameraPicker = true
+                }
+                Button("Photo Library") {
+                    isShowingPhotoLibraryPicker = true
+                }
+                Button("Cancel", role: .cancel) { }
+            }
+            // 📷 Камера
+            .sheet(isPresented: $isShowingCameraPicker) {
+                CameraPicker { image in
+                    if let data = image.jpegData(compressionQuality: 0.9) {
+                        self.data.photoData = data
+                    }
+                }
+                .presentationCornerRadius(20)
+            }
+            // 🖼 Фото библиотека
+            .sheet(isPresented: $isShowingPhotoLibraryPicker) {
+                PhotoLibraryPicker { image in
+                    if let data = image.jpegData(compressionQuality: 0.9) {
+                        self.data.photoData = data
+                    }
+                }
+                .presentationCornerRadius(20)
+            }
+
             Spacer()
             navigationButtons
         }
     }
+
+
     
     @ViewBuilder private var birthdayStep: some View {
         VStack {
