@@ -11,9 +11,13 @@ struct GoalsDetailRingView: View {
     let allConsumedFoods: [FoodItem: Double]
 
     @State private var localSelectedNutrientID: String?
+    @Environment(\.horizontalSizeClass) private var sizeClass
 
     // Константи за оформление
-    private let ringsPerRow:   Int     = 6
+    private var ringsPerRow: Int {
+           // 6 за телефони, 12 за таблети/landscape
+           sizeClass == .regular ? 12 : 6
+       }
     private let ringSize:      CGFloat = 40
     private let ringSpacing:   CGFloat = 10
     private let labelSpacing:  CGFloat = 6
@@ -144,40 +148,43 @@ struct GoalsDetailRingView: View {
     private func buildRingGrid() -> some View {
         switch items {
         case .some(let nutrientItems) where !nutrientItems.isEmpty:
-            let pages = stride(from: 0, to: nutrientItems.count, by: ringsPerRow)
-                .map { Array(nutrientItems[$0 ..< min($0 + ringsPerRow, nutrientItems.count)]) }
-
-            GeometryReader { geo in
-                let pageWidth = geo.size.width
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 0) { // Оставяме spacing: 0, за да работи правилно paging-а
-                        ForEach(pages.indices, id: \.self) { idx in
-                            let cols = Array(repeating: GridItem(.flexible(), spacing: ringSpacing), count: ringsPerRow)
-                            
-                            LazyVGrid(columns: cols, spacing: ringSpacing) {
-                                ForEach(pages[idx]) { item in
-                                    ringButton(for: item)
-                                }
+            // 3. Взимаме динамичната стойност
+            let currentRingsPerRow = self.ringsPerRow
+            
+            let pages = stride(from: 0, to: nutrientItems.count, by: currentRingsPerRow)
+                .map { Array(nutrientItems[$0 ..< min($0 + currentRingsPerRow, nutrientItems.count)]) }
+            
+            // Премахваме GeometryReader
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 0) {
+                    ForEach(pages.indices, id: \.self) { idx in
+                        // Използваме .fixed, за да запазим размера на иконите консистентен
+                        let cols = Array(
+                            repeating: GridItem(.fixed(ringCellWidth), spacing: ringSpacing),
+                            count: currentRingsPerRow
+                        )
+                        
+                        LazyVGrid(columns: cols, spacing: ringSpacing) {
+                            ForEach(pages[idx]) { item in
+                                ringButton(for: item)
                             }
-                            // --- НАЧАЛО НА ПРОМЯНАТА ---
-                            // Добавяме хоризонтален padding, за да създадем разстояние
-                            .padding(.horizontal, 10)
-                            // --- КРАЙ НА ПРОМЯНАТА ---
-                            .frame(width: pageWidth, height: ringCellHeight)
-                            .contentShape(Rectangle())
                         }
+                        .padding(.horizontal, 10)
+                        .frame(height: ringCellHeight)
+                        // 4. Използваме containerRelativeFrame вместо pageWidth от GeometryReader
+                        .containerRelativeFrame(.horizontal)
+                        .contentShape(Rectangle())
                     }
-                    .scrollTargetLayout()
                 }
-                .scrollIndicators(.hidden)
-                .scrollTargetBehavior(.paging)
+                .scrollTargetLayout()
             }
+            .scrollIndicators(.hidden)
+            .scrollTargetBehavior(.paging)
             .frame(height: ringCellHeight + ringPadding * 2)
             .padding(.top, 6)
-
+            
         case .some: EmptyView()
         case .none: ProgressView().frame(height: ringCellHeight + ringPadding * 2).progressViewStyle(CircularProgressViewStyle(tint: effectManager.currentGlobalAccentColor))
-
         }
     }
 

@@ -125,9 +125,11 @@ struct TotalBurnedDetailRingView: View {
             .foregroundStyle(effectManager.currentGlobalAccentColor)
             .frame(maxWidth: .infinity, alignment: .leading)
     }
-
     // --- START OF MODIFICATION: Copied helper properties and views from TrainingView ---
-    private let ringsPerRow:   Int     = 4
+    @Environment(\.horizontalSizeClass) private var sizeClass
+    private var ringsPerRow: Int {
+           sizeClass == .regular ? 8 : 4
+       }
     private let ringSize:      CGFloat = 40
     private let ringSpacing:   CGFloat = 10
     private let labelSpacing:  CGFloat = 6
@@ -189,33 +191,39 @@ struct TotalBurnedDetailRingView: View {
     }
 
     @ViewBuilder
-    private var collapsedMuscleGroups: some View {
-        let items = allMuscleGroups
-        let pages: [[MuscleGroup]] = stride(from: 0, to: items.count, by: ringsPerRow)
-            .map { Array(items[$0 ..< min($0 + ringsPerRow, items.count)]) }
+        private var collapsedMuscleGroups: some View {
+            let items = allMuscleGroups
+            
+            // 3. Взимаме динамичната стойност тук
+            let currentRingsPerRow = self.ringsPerRow
+            
+            // Използваме currentRingsPerRow за страницирането
+            let pages: [[MuscleGroup]] = stride(from: 0, to: items.count, by: currentRingsPerRow)
+                .map { Array(items[$0 ..< min($0 + currentRingsPerRow, items.count)]) }
 
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: pageGap) {
-                ForEach(pages.indices, id: \.self) { idx in
-                    let cols = Array(
-                        repeating: GridItem(.fixed(ringCellWidth), spacing: ringSpacing),
-                        count: ringsPerRow
-                    )
-                    LazyVGrid(columns: cols, spacing: ringSpacing) {
-                        ForEach(pages[idx]) { group in
-                            muscleCardButton(for: group)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: pageGap) {
+                    ForEach(pages.indices, id: \.self) { idx in
+                        // Използваме currentRingsPerRow за колоните
+                        let cols = Array(
+                            repeating: GridItem(.fixed(ringCellWidth), spacing: ringSpacing),
+                            count: currentRingsPerRow
+                        )
+                        
+                        LazyVGrid(columns: cols, spacing: ringSpacing) {
+                            ForEach(pages[idx]) { group in
+                                muscleCardButton(for: group)
+                            }
                         }
+                        .frame(height: ringCellHeight)
+                        .containerRelativeFrame(.horizontal)
+                        .contentShape(Rectangle())
                     }
-                    .frame(height: ringCellHeight)
-                    .containerRelativeFrame(.horizontal)
-                    .contentShape(Rectangle())
                 }
+                .scrollTargetLayout()
             }
-            .scrollTargetLayout()
+            .scrollIndicators(.hidden)
+            .scrollTargetBehavior(.paging)
+            .frame(height: ringCellHeight)
         }
-        .scrollIndicators(.hidden)
-        .scrollTargetBehavior(.paging)
-        .frame(height: ringCellHeight)
-    }
-    // --- END OF MODIFICATION ---
 }

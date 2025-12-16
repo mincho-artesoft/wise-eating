@@ -921,6 +921,7 @@ struct NutritionsDetailView: View {
                             onIncrementWater: incrementWater,
                             onDecrementWater: decrementWater
                         )
+                        .padding(.horizontal,10)
                         .padding(.top, -40)
                     }
                     ScrollViewReader { proxy in
@@ -941,7 +942,7 @@ struct NutritionsDetailView: View {
                                 .listRowSeparator(.hidden)
                                 .listRowBackground(Color.clear)
                                 .listRowInsets(EdgeInsets())
-                                .padding(.horizontal, -10)
+//                                .padding(.horizontal, -10)
                                 .padding(.top, 4)
                             }
                             
@@ -1496,7 +1497,14 @@ struct NutritionsDetailView: View {
         }
     }
     
-    private let ringsPerRow:   Int     = 6
+    @Environment(\.horizontalSizeClass) private var sizeClass
+
+    // 2. Променяме ringsPerRow да бъде изчисляема променлива
+    private var ringsPerRow: Int {
+        // За телефони оставяме 6 (както беше), за iPad/Landscape увеличаваме на 12
+        sizeClass == .regular ? 12 : 6
+    }
+    
     private let ringSize:      CGFloat = 40
     private let ringSpacing:   CGFloat = 10
     private let labelSpacing:  CGFloat = 6
@@ -1567,33 +1575,41 @@ struct NutritionsDetailView: View {
         )
         .animation(.easeInOut, value: isSelected)
     }
+    
     @ViewBuilder
     private var collapsedRings: some View {
         switch collapsedItemsState {
         case .some(let items) where !items.isEmpty:
-            let pages = stride(from: 0, to: items.count, by: ringsPerRow)
-                .map { Array(items[$0 ..< min($0 + ringsPerRow, items.count)]) }
+            // 3. Взимаме динамичния брой колони
+            let currentRingsPerRow = self.ringsPerRow
             
-            GeometryReader { geo in
-                let pageWidth = geo.size.width
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 0) {
-                        ForEach(pages.indices, id: \.self) { idx in
-                            let cols = Array(repeating: GridItem(.fixed(ringCellWidth), spacing: ringSpacing), count: ringsPerRow)
-                            LazyVGrid(columns: cols, spacing: ringSpacing) {
-                                ForEach(pages[idx]) { item in
-                                    ringButton(for: item, animate: true, useGlass: true)
-                                }
+            // Разделяне на страници
+            let pages = stride(from: 0, to: items.count, by: currentRingsPerRow)
+                .map { Array(items[$0 ..< min($0 + currentRingsPerRow, items.count)]) }
+            
+            // Премахваме GeometryReader и използваме containerRelativeFrame
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 0) {
+                    ForEach(pages.indices, id: \.self) { idx in
+                        let cols = Array(
+                            repeating: GridItem(.fixed(ringCellWidth), spacing: ringSpacing),
+                            count: currentRingsPerRow
+                        )
+                        
+                        LazyVGrid(columns: cols, spacing: ringSpacing) {
+                            ForEach(pages[idx]) { item in
+                                ringButton(for: item, animate: true, useGlass: true)
                             }
-                            .frame(width: pageWidth, height: ringCellHeight)
-                            .contentShape(Rectangle())
                         }
+                        .frame(height: ringCellHeight)
+                        .containerRelativeFrame(.horizontal) // Това разпъва грида по ширината на контейнера
+                        .contentShape(Rectangle())
                     }
-                    .scrollTargetLayout()
                 }
-                .scrollIndicators(.hidden)
-                .scrollTargetBehavior(.paging)
+                .scrollTargetLayout()
             }
+            .scrollIndicators(.hidden)
+            .scrollTargetBehavior(.paging)
             .frame(height: ringCellHeight + ringPadding * 2)
             .padding(.top, 6)
             
@@ -1610,7 +1626,13 @@ struct NutritionsDetailView: View {
     private var expandedRings: some View {
         Group {
             if let items = allItemsState {
-                let cols = Array(repeating: GridItem(.fixed(ringCellWidth), spacing: ringSpacing), count: ringsPerRow)
+                // 4. Използваме динамичната променлива
+                let currentRingsPerRow = self.ringsPerRow
+                
+                let cols = Array(
+                    repeating: GridItem(.fixed(ringCellWidth), spacing: ringSpacing),
+                    count: currentRingsPerRow
+                )
                 
                 LazyVGrid(columns: cols, spacing: ringSpacing) {
                     ForEach(items) { item in

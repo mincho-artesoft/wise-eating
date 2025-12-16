@@ -22,31 +22,22 @@ struct RingsSummaryRow<CalorieRing: View, MacroRing: View>: View {
     var body: some View {
         ZStack(alignment: .top) {
             HStack(alignment: .top) {
-                Spacer()
+                Spacer() // 1. Spacer в началото
 
+                // --- 1. Water View ---
                 VStack(spacing: 4) {
-//                    if(showGlassWaterTrackerView) {
-                        ZStack() {
-                            GlassWaterTrackerView(
-                                consumed: $waterConsumed,
-                                goal: waterGoal,
-                                onIncrement: onIncrementWater,
-                                onDecrement: onDecrementWater
-                            )
-                            Text("\(waterConsumed) / \(waterGoal)")
-                                .font(.caption)
-                                .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
-                        }
-//                    } else {
-//                        WaterTrackerView(
-//                            consumed: $waterConsumed,
-//                            goal: waterGoal,
-//                            onIncrement: onIncrementWater,
-//                            onDecrement: onDecrementWater
-//                        )
-//                    }
+                    ZStack() {
+                        GlassWaterTrackerView(
+                            consumed: $waterConsumed,
+                            goal: waterGoal,
+                            onIncrement: onIncrementWater,
+                            onDecrement: onDecrementWater
+                        )
+                        Text("\(waterConsumed) / \(waterGoal)")
+                            .font(.caption)
+                            .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
+                    }
 
-                    // 3) Етикетът
                     Text("Water")
                         .font(.caption)
                         .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
@@ -60,6 +51,9 @@ struct RingsSummaryRow<CalorieRing: View, MacroRing: View>: View {
                 .padding(.bottom, 10)
                 .glassCardStyle(cornerRadius: 20)
                 
+                Spacer() // <--- 2. ДОБАВЕН SPACER ТУК
+
+                // --- 2. Goals Button ---
                 Button(action: { onTap(.goals) }) {
                     VStack(spacing: 4) {
                         GoalRingView(achieved: goalsAchieved, total: totalGoals, diameter: 60)
@@ -74,7 +68,9 @@ struct RingsSummaryRow<CalorieRing: View, MacroRing: View>: View {
                 .padding(10)
                 .glassCardStyle(cornerRadius: 20)
 
+                Spacer() // <--- 3. ДОБАВЕН SPACER ТУК
 
+                // --- 3. Calories Button ---
                 Button(action: { onTap(.calories) }) {
                     VStack(spacing: 4) {
                         calorieRing()
@@ -88,6 +84,9 @@ struct RingsSummaryRow<CalorieRing: View, MacroRing: View>: View {
                 .padding(10)
                 .glassCardStyle(cornerRadius: 20)
 
+                Spacer() // <--- 4. ДОБАВЕН SPACER ТУК
+
+                // --- 4. Macros Button ---
                 Button(action: { onTap(.macros) }) {
                     VStack(spacing: 4) {
                         macroRing()
@@ -101,9 +100,7 @@ struct RingsSummaryRow<CalorieRing: View, MacroRing: View>: View {
                 .padding(10)
                 .glassCardStyle(cornerRadius: 20)
 
-             
-
-                Spacer()
+                Spacer() // 5. Spacer в края
             }
             .padding(.horizontal, 6)
             .padding(.bottom, 2)
