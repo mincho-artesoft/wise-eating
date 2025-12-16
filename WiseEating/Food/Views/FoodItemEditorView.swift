@@ -10,14 +10,17 @@ struct FoodItemEditorView: View {
     @State private var isShowingPhotoLibraryPicker = false
     @State private var isShowingVideoGallery = false
     @State private var isBannerAdLoaded: Bool = false
-
+    @Query private var userSettingsArray: [UserSettings]
     @ObservedObject private var aiManager = AIManager.shared // Add this
-       @State private var hasUserMadeEdits: Bool = true // Add this
-       @State private var runningGenerationJobID: UUID? = nil // Add this
-       @State private var showAIGenerationToast = false // Add this
-       @State private var toastTimer: Timer? = nil // Add this
-       @State private var toastProgress: Double = 0.0 // Add this
+    @State private var hasUserMadeEdits: Bool = true // Add this
+    @State private var runningGenerationJobID: UUID? = nil // Add this
+    @State private var showAIGenerationToast = false // Add this
+    @State private var toastTimer: Timer? = nil // Add this
+    @State private var toastProgress: Double = 0.0 // Add this
     
+    private var isAIButtonEnabledGlobally: Bool {
+            userSettingsArray.first?.isAIButtonEnabled ?? true
+        }
     // --- AI Floating Button: State ---
     @State private var isAIButtonVisible: Bool = true
     @State private var aiButtonOffset: CGSize = .zero
@@ -245,7 +248,8 @@ struct FoodItemEditorView: View {
                        if !isSaving &&
                           !showAlert &&
                           GlobalState.aiAvailability != .deviceNotEligible &&
-                          openMenu == .none { 
+                          openMenu == .none &&
+                          isAIButtonEnabledGlobally{ 
                            AIButton(geometry: geometry)
                        }
                    }

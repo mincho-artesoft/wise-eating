@@ -125,6 +125,7 @@ struct NutritionsDetailView: View {
     @Query(sort: \Mineral.name)  private var minerals: [Mineral]
     @Query(sort: \Vitamin.name)  private var vitamins: [Vitamin]
     @Query private var mealPlans: [MealPlan]
+    @Query private var userSettings: [UserSettings]
     
     private var currentFoods: Binding<[FoodItem: Double]> {
         Binding(
@@ -201,7 +202,15 @@ struct NutritionsDetailView: View {
         return max(4, numberOfGlasses)
     }
     
+    private var currentUserSettings: UserSettings? {
+        userSettings.first
+    }
+
     private var isAIButtonCurrentlyVisible: Bool {
+        if let settings = currentUserSettings, settings.isAIButtonEnabled == false {
+            return false
+        }
+        
         if isSearchFieldFocused { return false }
         if showingRingDetail != nil { return false }
         if isShowingMealActionMenu { return false }
@@ -214,6 +223,7 @@ struct NutritionsDetailView: View {
 
         return true
     }
+
     
     private func checkForUnreadNotifications() async {
         let unread = await NotificationManager.shared.getUnreadNotifications()

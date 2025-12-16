@@ -1,9 +1,14 @@
 import SwiftUI
+import SwiftData
 
 // MARK: - MealActionMenuView.swift
 
+@MainActor
 struct MealActionMenuView: View {
     @ObservedObject private var effectManager = EffectManager.shared
+    
+    // SwiftData – взимаме UserSettings
+    @Query private var userSettings: [UserSettings]
     
     // Callbacks
     let onDismiss: () -> Void
@@ -11,13 +16,17 @@ struct MealActionMenuView: View {
     let onAddToExistingPlan: () -> Void
     let onGenerateWithAI: () -> Void
     let onScanBarcode: () -> Void
-    let onNodesTapped: () -> Void // <-- ДОБАВЕТЕ ТОВА
+    let onNodesTapped: () -> Void // <-- ДОБАВЕНО
 
     @State private var showAIAlert = false
     @State private var aiAlertText = ""
+    
+    // Ако няма запис в UserSettings – по подразбиране позволяваме AI бутона
+    private var isAIEnabledInSettings: Bool {
+        userSettings.first?.isAIButtonEnabled ?? true
+    }
 
     private func message(for status: GlobalState.AIAvailabilityStatus) -> String {
-        // ... (без промяна)
         switch status {
         case .available:
             return ""
@@ -35,91 +44,96 @@ struct MealActionMenuView: View {
     }
 
     var body: some View {
-            VStack(spacing: 0) {
-                // MARK: - Toolbar
-                HStack {
-                    Button("Cancel", action: onDismiss)
-                        .padding(.horizontal, 10).padding(.vertical, 5)
-                        .glassCardStyle(cornerRadius: 20)
-
-                    Spacer()
-                    Text("Meal Actions").font(.headline)
-                    Spacer()
-
-                    Button("Cancel") {}.hidden()
-                        .padding(.horizontal, 10).padding(.vertical, 5)
-                }
-                .foregroundColor(effectManager.currentGlobalAccentColor)
-                .padding()
-
-                // MARK: - Action Buttons
-                VStack(spacing: 12) {
-                    
-                    Button(action: { onScanBarcode() }) {
-                        Label("Scan Barcode", systemImage: "barcode.viewfinder")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                    }
-                    .padding()
+        VStack(spacing: 0) {
+            // MARK: - Toolbar
+            HStack {
+                Button("Cancel", action: onDismiss)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 5)
                     .glassCardStyle(cornerRadius: 20)
-                    .foregroundColor(effectManager.currentGlobalAccentColor)
-                    
-                    // +++ НАЧАЛО НА ПРОМЯНАТА +++
-                    Button(action: { onNodesTapped() }) {
-                        Label("Notes", systemImage: "list.clipboard")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                    }
-                    .padding()
-                    .glassCardStyle(cornerRadius: 20)
-                    .foregroundColor(effectManager.currentGlobalAccentColor)
-                    // +++ КРАЙ НА ПРОМЯНАТА +++
 
-                    if GlobalState.aiAvailability != .deviceNotEligible {
-                        Button(action: {
-                            let status = GlobalState.aiAvailability
-                            if status == .available {
-                                onGenerateWithAI()
-                            } else {
-                                aiAlertText = message(for: status)
-                                showAIAlert = true
-                            }
-                        }) {
-                            Label("Generate with AI", systemImage: "sparkles")
-                                .font(.headline)
-                                .frame(maxWidth: .infinity)
-                        }
-                        .padding()
-                        .glassCardStyle(cornerRadius: 20)
-                        .foregroundColor(effectManager.currentGlobalAccentColor)
-                    }
-
-                    Button(action: { onCopyToNewPlan() }) {
-                        Label("Copy to New Meal Plan", systemImage: "doc.on.doc")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                    }
-                    .padding()
-                    .glassCardStyle(cornerRadius: 20)
-                    .foregroundColor(effectManager.currentGlobalAccentColor)
-
-                    Button(action: { onAddToExistingPlan() }) {
-                        Label("Add to Existing Meal Plan", systemImage: "plus.rectangle.on.rectangle")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                    }
-                    .padding()
-                    .glassCardStyle(cornerRadius: 20)
-                    .foregroundColor(effectManager.currentGlobalAccentColor)
-                }
-                .padding(.horizontal)
-                
                 Spacer()
+                Text("Meal Actions").font(.headline)
+                Spacer()
+
+                Button("Cancel") {}.hidden()
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 5)
             }
-            .alert("Error", isPresented: $showAIAlert) {
-                Button("OK", role: .cancel) {}
-            } message: {
-                Text(aiAlertText)
+            .foregroundColor(effectManager.currentGlobalAccentColor)
+            .padding()
+
+            // MARK: - Action Buttons
+            VStack(spacing: 12) {
+                
+                Button(action: { onScanBarcode() }) {
+                    Label("Scan Barcode", systemImage: "barcode.viewfinder")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                }
+                .padding()
+                .glassCardStyle(cornerRadius: 20)
+                .foregroundColor(effectManager.currentGlobalAccentColor)
+                
+                Button(action: { onNodesTapped() }) {
+                    Label("Notes", systemImage: "list.clipboard")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                }
+                .padding()
+                .glassCardStyle(cornerRadius: 20)
+                .foregroundColor(effectManager.currentGlobalAccentColor)
+
+                // ТУК Е ПРОМЯНАТА:
+                // Показваме бутона само ако:
+                // 1) устройството не е .deviceNotEligible
+                // 2) isAIButtonEnabled в UserSettings е true
+                if GlobalState.aiAvailability != .deviceNotEligible,
+                   isAIEnabledInSettings {
+                    Button(action: {
+                        let status = GlobalState.aiAvailability
+                        if status == .available {
+                            onGenerateWithAI()
+                        } else {
+                            aiAlertText = message(for: status)
+                            showAIAlert = true
+                        }
+                    }) {
+                        Label("Generate with AI", systemImage: "sparkles")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity)
+                    }
+                    .padding()
+                    .glassCardStyle(cornerRadius: 20)
+                    .foregroundColor(effectManager.currentGlobalAccentColor)
+                }
+
+                Button(action: { onCopyToNewPlan() }) {
+                    Label("Copy to New Meal Plan", systemImage: "doc.on.doc")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                }
+                .padding()
+                .glassCardStyle(cornerRadius: 20)
+                .foregroundColor(effectManager.currentGlobalAccentColor)
+
+                Button(action: { onAddToExistingPlan() }) {
+                    Label("Add to Existing Meal Plan", systemImage: "plus.rectangle.on.rectangle")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                }
+                .padding()
+                .glassCardStyle(cornerRadius: 20)
+                .foregroundColor(effectManager.currentGlobalAccentColor)
             }
+            .padding(.horizontal)
+            
+            Spacer()
         }
+        .alert("Error", isPresented: $showAIAlert) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(aiAlertText)
+        }
+    }
 }

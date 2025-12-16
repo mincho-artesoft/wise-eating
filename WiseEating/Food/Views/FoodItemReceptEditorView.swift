@@ -50,7 +50,8 @@ struct FoodItemReceptEditorView: View {
     // MARK: - Data Queries
     @Query(sort: \Vitamin.name)  private var allVitamins:  [Vitamin]
     @Query(sort: \Mineral.name)  private var allMinerals:  [Mineral]
-    @Query(sort: \Diet.name) private var allDiets: [Diet]
+    @Query(sort: \Diet.name)     private var allDiets: [Diet]
+    @Query private var userSettingsArray: [UserSettings]   // 👈 НОВО
 
     // MARK: - Input Properties
     let food: FoodItem?
@@ -122,7 +123,18 @@ struct FoodItemReceptEditorView: View {
     @State private var calculatedMinAge: Int = 0
     
     private let isReadOnly = true
+    private var isAIButtonEnabledGlobally: Bool {
+          userSettingsArray.first?.isAIButtonEnabled ?? true
+      }
 
+    private var isAIButtonCurrentlyVisible: Bool {
+        !isSearchFieldFocused &&
+        !isSaving &&
+        !showPopover &&
+        !showReplacePicker &&
+        GlobalState.aiAvailability != .deviceNotEligible &&
+        isAIButtonEnabledGlobally
+    }
     @State private var isSaving = false
     @State private var isAIInit = false
 
@@ -307,11 +319,7 @@ struct FoodItemReceptEditorView: View {
                }
                GeometryReader { geometry in
                    Group {
-                       if !isSearchFieldFocused &&
-                            !isSaving &&
-                            !showPopover &&
-                            !showReplacePicker &&
-                            GlobalState.aiAvailability != .deviceNotEligible {
+                       if isAIButtonCurrentlyVisible {
                            AIButton(geometry: geometry)
                        }
                    }

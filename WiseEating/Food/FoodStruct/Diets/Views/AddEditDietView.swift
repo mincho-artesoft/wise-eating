@@ -14,10 +14,12 @@ struct AddEditDietView: View {
     @State private var toastTimer: Timer? = nil
     @State private var toastProgress: Double = 0.0
     @State private var isBannerAdLoaded: Bool = false
-
+    @Query private var userSettingsArray: [UserSettings]   // 👈 ДОБАВИ ТОВА
     @Query(sort: \Prompt.creationDate, order: .reverse) private var allPrompts: [Prompt]
     @State private var selectedPromptIDs: Set<Prompt.ID> = []
-    
+    private var isAIButtonEnabledGlobally: Bool {
+          userSettingsArray.first?.isAIButtonEnabled ?? true
+      }
     private enum OpenMenu { case none, promptSelector }
     @State private var openMenu: OpenMenu = .none
     
@@ -157,29 +159,30 @@ struct AddEditDietView: View {
                         VStack(spacing: 16) {
                             nameCard
                             bannerAdSection
-                                                    .frame(height: isBannerAdLoaded ? 120 : 0)
+                            .frame(height: isBannerAdLoaded ? 120 : 0)
                             // Секция за промптове
-                            VStack(spacing: 12) {
-                                let dietPrompts = allPrompts.filter { $0.type == .diet }
-                                if !dietPrompts.isEmpty {
-                                    promptsSection
-                                        .padding(.horizontal)
+                            if GlobalState.aiAvailability != .deviceNotEligible && isAIButtonEnabledGlobally{
+                                VStack(spacing: 12) {
+                                    let dietPrompts = allPrompts.filter { $0.type == .diet }
+                                    if !dietPrompts.isEmpty {
+                                        promptsSection
+                                            .padding(.horizontal)
+                                    }
+                                    Button {
+                                        path.append(NavigationTarget.promptEditor)
+                                    } label: {
+                                        Label("New Prompt", systemImage: "plus.bubble")
+                                            .font(.subheadline.weight(.semibold))
+                                            .frame(maxWidth: .infinity, alignment: .center)
+                                    }
+                                    .padding(.vertical, 10)
+                                    .glassCardStyle(cornerRadius: 20)
+                                    .foregroundColor(effectManager.currentGlobalAccentColor)
+                                    .padding(.horizontal)
                                 }
-                                Button {
-                                    path.append(NavigationTarget.promptEditor)
-                                } label: {
-                                    Label("New Prompt", systemImage: "plus.bubble")
-                                        .font(.subheadline.weight(.semibold))
-                                        .frame(maxWidth: .infinity, alignment: .center)
-                                }
-                                .padding(.vertical, 10)
+                                .padding(.vertical)
                                 .glassCardStyle(cornerRadius: 20)
-                                .foregroundColor(effectManager.currentGlobalAccentColor)
-                                .padding(.horizontal)
                             }
-                            .padding(.vertical)
-                            .glassCardStyle(cornerRadius: 20)
-                            
                             foodsCard
                         }
                         .padding()
@@ -231,7 +234,8 @@ struct AddEditDietView: View {
                         if !isSearchFieldFocused &&
                             !showAlert &&
                             openMenu == .none &&
-                            GlobalState.aiAvailability != .deviceNotEligible {
+                            GlobalState.aiAvailability != .deviceNotEligible &&
+                            isAIButtonEnabledGlobally{
                             AIButton(geometry: geometry)
                         }
                     }

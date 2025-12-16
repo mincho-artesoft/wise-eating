@@ -107,7 +107,6 @@ struct ObserversHub: View {
           onUpdateBackgroundSnapshot: @escaping () -> Void,
           onCheckUnreadAI: @escaping () async -> Void,
           onCheckUnreadBadges: @escaping () async -> Void,
-          // ✅ ДОБАВЕНО в init
           onOpenSubscriptionFlow: @escaping () -> Void
       ) {
           self.profiles = profiles
@@ -151,7 +150,6 @@ struct ObserversHub: View {
           self.onUpdateBackgroundSnapshot = onUpdateBackgroundSnapshot
           self.onCheckUnreadAI = onCheckUnreadAI
           self.onCheckUnreadBadges = onCheckUnreadBadges
-          // ✅ Присвояване
           self.onOpenSubscriptionFlow = onOpenSubscriptionFlow
       }
     

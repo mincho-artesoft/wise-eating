@@ -1,4 +1,3 @@
-// ==== FILE: /Users/aleksandarsvinarov/Desktop/as/vitahealth-clean/WiseEating/AI/Views/AIGenerationHostView.swift ====
 import SwiftUI
 import SwiftData
 import UIKit
@@ -177,10 +176,26 @@ struct AIGenerationHostView: View {
     }
     
     // ✅ АКТУАЛИЗИРАНО: Съдържанието на AI Settings таба с новите полета
-    @ViewBuilder
+        @ViewBuilder
     private var settingsContent: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 24) {
+                
+                // --- General Settings (НОВА СЕКЦИЯ) ---
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("General")
+                        .font(.headline)
+                        .foregroundStyle(effectManager.currentGlobalAccentColor)
+                    
+                    VStack(spacing: 0) {
+                        settingToggleRow(
+                            title: "Show AI Assistant Button",
+                            isOn: binding(for: \.isAIButtonEnabled)
+                        )
+                    }
+                    .padding()
+                    .glassCardStyle(cornerRadius: 20)
+                }
                 
                 // --- Advanced Nutrition Generation ---
                 VStack(alignment: .leading, spacing: 12) {
@@ -226,6 +241,7 @@ struct AIGenerationHostView: View {
                 }
             }
             .padding()
+            
             Color.clear
                 .frame(height: 150)
                 .listRowBackground(Color.clear)
@@ -244,7 +260,8 @@ struct AIGenerationHostView: View {
                 startPoint: .top,
                 endPoint: .bottom
             )
-        )    }
+        )
+    }
     
     // Помощна функция за създаване на Binding към UserSettings
     private func binding(for keyPath: ReferenceWritableKeyPath<UserSettings, Bool>) -> Binding<Bool> {

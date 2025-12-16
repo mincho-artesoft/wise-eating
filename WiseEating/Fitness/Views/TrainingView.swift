@@ -8,7 +8,10 @@ struct TrainingView: View {
     @State private var nodeToDelete: Node? = nil
     @State private var nodesForDay: [Node] = []
     @State private var presentedNode: PresentedNode? = nil
-    
+    @Query private var userSettingsArray: [UserSettings]   // 👈 ДОБАВИ ТОВА
+    private var isAIButtonEnabledGlobally: Bool {
+           userSettingsArray.first?.isAIButtonEnabled ?? true
+       }
     @State private var refreshTrigger = 0
     
     // MARK: - AI State
@@ -311,7 +314,8 @@ struct TrainingView: View {
                             !isShowingTrainingPlanPicker &&
                             trainingPlanDraftForEditor == nil &&
                             !isShowingDailyAIGenerator &&
-                            GlobalState.aiAvailability != .deviceNotEligible {
+                            GlobalState.aiAvailability != .deviceNotEligible &&
+                            isAIButtonEnabledGlobally{
                             AIButton(geometry: geometry)
                         }
                     }

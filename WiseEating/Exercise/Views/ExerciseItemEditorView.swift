@@ -13,7 +13,10 @@ struct ExerciseItemEditorView: View {
     @State private var alertMsg = ""
     @State private var isBannerAdLoaded: Bool = false
     @State private var pendingAIJobIDToDeleteOnSave: UUID? = nil
-
+    @Query private var userSettingsArray: [UserSettings]   // 👈 ДОБАВИ ТОВА
+    private var isAIButtonEnabledGlobally: Bool {
+           userSettingsArray.first?.isAIButtonEnabled ?? true
+       }
     // --- Photo source state (като при FoodItemReceptEditorView) ---
     private enum PhotoSourceTarget {
         case main
@@ -195,7 +198,8 @@ struct ExerciseItemEditorView: View {
                     if !isSaving &&
                        !showAlert &&
                        GlobalState.aiAvailability != .deviceNotEligible &&
-                       openMenu == .none {
+                       openMenu == .none &&
+                       isAIButtonEnabledGlobally{
                         AIButton(geometry: geometry)
                     }
                 }
