@@ -1,10 +1,14 @@
 import SwiftUI
+import SwiftData
 
 // MARK: - TrainingActionMenuView.swift
 
 struct TrainingActionMenuView: View {
     @ObservedObject private var effectManager = EffectManager.shared
-    
+    @Query private var userSettings: [UserSettings]
+        private var isAIEnabledInSettings: Bool {
+            userSettings.first?.isAIButtonEnabled ?? true
+        }
     // Callbacks
     let onDismiss: () -> Void
     let onCopyToNewPlan: () -> Void
@@ -64,7 +68,7 @@ struct TrainingActionMenuView: View {
                 .foregroundColor(effectManager.currentGlobalAccentColor)
                 // +++ КРАЙ НА ПРОМЯНАТА +++
 
-                if GlobalState.aiAvailability != .deviceNotEligible {
+                if GlobalState.aiAvailability != .deviceNotEligible && isAIEnabledInSettings{
                     Button(action: {
                         let status = GlobalState.aiAvailability
                         if status == .available {

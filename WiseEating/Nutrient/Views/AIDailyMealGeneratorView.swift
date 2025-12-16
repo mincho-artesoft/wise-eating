@@ -5,6 +5,10 @@ struct AIDailyMealGeneratorView: View {
     @Environment(\.modelContext) private var modelContext
     @ObservedObject private var effectManager = EffectManager.shared
     @ObservedObject private var aiManager = AIManager.shared
+    @Query private var userSettingsArray: [UserSettings]   // 👈 ДОБАВИ ТОВА
+    private var isAIButtonEnabledGlobally: Bool {
+        userSettingsArray.first?.isAIButtonEnabled ?? true
+    }
 
     // MARK: - Input
     let profile: Profile
@@ -61,8 +65,11 @@ struct AIDailyMealGeneratorView: View {
     }
 
     private var isAIButtonCurrentlyVisible: Bool {
-        return !showAIGenerationToast && openMenu == .none
+        !showAIGenerationToast &&
+        openMenu == .none &&
+        isAIButtonEnabledGlobally          // 👈 ГЛОБАЛЕН ФЛАГ
     }
+
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -151,27 +158,27 @@ struct AIDailyMealGeneratorView: View {
     private var mainContent: some View {
         VStack(spacing: 20) {
             let mealPlanPrompts = allPrompts.filter { $0.type == .nutritionsDetailМealPlan }
-           
-            VStack(spacing: 12) {
-                if !mealPlanPrompts.isEmpty {
-                    promptsSection
-                        .padding(.horizontal)
+            if GlobalState.aiAvailability != .deviceNotEligible && isAIButtonEnabledGlobally{
+                VStack(spacing: 12) {
+                    if !mealPlanPrompts.isEmpty {
+                        promptsSection
+                            .padding(.horizontal)
+                    }
+                    Button {
+                        path.append(NavigationTarget.promptEditor)
+                    } label: {
+                        Label("New Prompt", systemImage: "plus.bubble")
+                            .font(.subheadline.weight(.semibold))
+                            .frame(maxWidth: .infinity, alignment: .center)
+                    }
+                    .padding(.vertical, 10)
+                    .glassCardStyle(cornerRadius: 20)
+                    .foregroundColor(effectManager.currentGlobalAccentColor)
+                    .padding(.horizontal)
                 }
-                Button {
-                    path.append(NavigationTarget.promptEditor)
-                } label: {
-                    Label("New Prompt", systemImage: "plus.bubble")
-                        .font(.subheadline.weight(.semibold))
-                        .frame(maxWidth: .infinity, alignment: .center)
-                }
-                .padding(.vertical, 10)
+                .padding(.vertical)
                 .glassCardStyle(cornerRadius: 20)
-                .foregroundColor(effectManager.currentGlobalAccentColor)
-                .padding(.horizontal)
             }
-            .padding(.vertical)
-            .glassCardStyle(cornerRadius: 20)
-            
             VStack(spacing: 12) {
                 ForEach(mealsForDay) { meal in
                     mealSelectionCard(for: meal)

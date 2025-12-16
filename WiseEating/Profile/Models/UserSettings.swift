@@ -14,8 +14,10 @@ class UserSettings: ObservableObject {
     @Relationship(deleteRule: .nullify)
     var lastSelectedProfiles: [Profile] = []
     
+    // MARK: - General Settings
+    var isAIButtonEnabled: Bool = true
+    
     // MARK: - AI Generation Settings
-    // Тези полета контролират дали AI да генерира детайлните нутриенти
     var generateLipids: Bool = false
     var generateAminoAcids: Bool = false
     var generateCarbDetails: Bool = false
@@ -24,6 +26,7 @@ class UserSettings: ObservableObject {
     init(
         lastSelectedProfile: Profile? = nil,
         lastSelectedProfiles: [Profile] = [],
+        isAIButtonEnabled: Bool = true,
         generateLipids: Bool = false,
         generateAminoAcids: Bool = false,
         generateCarbDetails: Bool = false,
@@ -31,6 +34,7 @@ class UserSettings: ObservableObject {
     ) {
         self.lastSelectedProfile   = lastSelectedProfile
         self.lastSelectedProfiles  = lastSelectedProfiles
+        self.isAIButtonEnabled     = isAIButtonEnabled 
         self.generateLipids = generateLipids
         self.generateAminoAcids = generateAminoAcids
         self.generateCarbDetails = generateCarbDetails

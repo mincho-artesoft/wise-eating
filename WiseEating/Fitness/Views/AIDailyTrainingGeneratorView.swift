@@ -5,7 +5,10 @@ struct AIDailyTrainingGeneratorView: View {
     @Environment(\.modelContext) private var modelContext
     @ObservedObject private var effectManager = EffectManager.shared
     @ObservedObject private var aiManager = AIManager.shared
-
+    @Query private var userSettingsArray: [UserSettings]   // 👈 ДОБАВИ ТОВА
+    private var isAIButtonEnabledGlobally: Bool {
+          userSettingsArray.first?.isAIButtonEnabled ?? true
+      }
     // MARK: - Input
     let profile: Profile
     let date: Date
@@ -56,7 +59,9 @@ struct AIDailyTrainingGeneratorView: View {
     }
 
     private var isAIButtonCurrentlyVisible: Bool {
-        return !showAIGenerationToast && openMenu == .none
+        return !showAIGenerationToast &&
+        openMenu == .none &&
+        isAIButtonEnabledGlobally
     }
 
     var body: some View {
@@ -146,26 +151,27 @@ struct AIDailyTrainingGeneratorView: View {
         VStack(spacing: 20) {
             let planPrompts = allPrompts.filter { $0.type == .trainingViewМealPlan }
            
-            VStack(spacing: 12) {
-                if !planPrompts.isEmpty {
-                    promptsSection
-                        .padding(.horizontal)
+            if GlobalState.aiAvailability != .deviceNotEligible && isAIButtonEnabledGlobally{
+                VStack(spacing: 12) {
+                    if !planPrompts.isEmpty {
+                        promptsSection
+                            .padding(.horizontal)
+                    }
+                    Button {
+                        path.append(NavigationTarget.promptEditor)
+                    } label: {
+                        Label("New Prompt", systemImage: "plus.bubble")
+                            .font(.subheadline.weight(.semibold))
+                            .frame(maxWidth: .infinity, alignment: .center)
+                    }
+                    .padding(.vertical, 10)
+                    .glassCardStyle(cornerRadius: 20)
+                    .foregroundColor(effectManager.currentGlobalAccentColor)
+                    .padding(.horizontal)
                 }
-                Button {
-                    path.append(NavigationTarget.promptEditor)
-                } label: {
-                    Label("New Prompt", systemImage: "plus.bubble")
-                        .font(.subheadline.weight(.semibold))
-                        .frame(maxWidth: .infinity, alignment: .center)
-                }
-                .padding(.vertical, 10)
+                .padding(.vertical)
                 .glassCardStyle(cornerRadius: 20)
-                .foregroundColor(effectManager.currentGlobalAccentColor)
-                .padding(.horizontal)
             }
-            .padding(.vertical)
-            .glassCardStyle(cornerRadius: 20)
-            
             VStack(spacing: 12) {
                 ForEach(trainingsForDay) { training in
                     trainingSelectionCard(for: training)

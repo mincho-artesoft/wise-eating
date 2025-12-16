@@ -22,7 +22,8 @@ struct MealPlanEditorView: View {
     @State private var aiIsPressed: Bool = false
     private let aiButtonPositionKey = "floatingMealPlanAIButtonPosition"
     private let selectedPromptsKey = "MealPlanEditor_SelectedPromptIDs"
-    
+    @Query private var userSettingsArray: [UserSettings]   // 👈 ДОБАВИ ТОВА
+
     // MARK: - Environment & Dependencies
     @Environment(\.modelContext) private var modelContext
     @ObservedObject private var effectManager = EffectManager.shared
@@ -167,6 +168,20 @@ struct MealPlanEditorView: View {
         }
     }
 
+    private var isAIButtonEnabledGlobally: Bool {
+        userSettingsArray.first?.isAIButtonEnabled ?? true
+    }
+
+    private var isAIButtonCurrentlyVisible: Bool {
+        !isSearchFieldFocused &&
+        loadingOperation == .none &&
+        !showAlert &&
+        openMenu == .none &&
+        foodItemToView == nil &&
+        GlobalState.aiAvailability != .deviceNotEligible &&
+        isAIButtonEnabledGlobally
+    }
+
     // MARK: - Body
     var body: some View {
         NavigationStack(path: $path) {
@@ -259,11 +274,7 @@ struct MealPlanEditorView: View {
                 }
                 GeometryReader { geometry in
                     Group {
-                        if !isSearchFieldFocused &&
-                            loadingOperation == .none &&
-                            !showAlert, openMenu == .none &&
-                            foodItemToView == nil &&
-                            GlobalState.aiAvailability != .deviceNotEligible {
+                        if isAIButtonCurrentlyVisible {
                             AIButton(geometry: geometry)
                         }
                     }
@@ -602,23 +613,24 @@ struct MealPlanEditorView: View {
                 )
             }
             .id(FocusableField.minAge)
-            
-            let mealPlanPrompts = allPrompts.filter { $0.type == .mealPlan }
-
-            if !mealPlanPrompts.isEmpty {
-                promptsSection
+            if GlobalState.aiAvailability != .deviceNotEligible && isAIButtonEnabledGlobally{
+                let mealPlanPrompts = allPrompts.filter { $0.type == .mealPlan }
+                
+                if !mealPlanPrompts.isEmpty {
+                    promptsSection
+                }
+                
+                Button {
+                    path.append(NavigationTarget.promptEditor)
+                } label: {
+                    Label("New Prompt", systemImage: "plus.bubble")
+                        .font(.subheadline.weight(.semibold))
+                        .frame(maxWidth: .infinity, alignment: .center)
+                }
+                .padding(.vertical, 10)
+                .glassCardStyle(cornerRadius: 20)
+                .foregroundColor(effectManager.currentGlobalAccentColor)
             }
-           
-            Button {
-                   path.append(NavigationTarget.promptEditor)
-               } label: {
-                   Label("New Prompt", systemImage: "plus.bubble")
-                       .font(.subheadline.weight(.semibold))
-                       .frame(maxWidth: .infinity, alignment: .center)
-               }
-               .padding(.vertical, 10)
-               .glassCardStyle(cornerRadius: 20)
-               .foregroundColor(effectManager.currentGlobalAccentColor)
         }
         .padding()
         .glassCardStyle(cornerRadius: 20)

@@ -26,7 +26,12 @@ struct TrainingPlanEditorView: View {
     // MARK: - Environment & Dependencies
     @Environment(\.modelContext) private var modelContext
     @ObservedObject private var effectManager = EffectManager.shared
-    
+    @Query private var userSettingsArray: [UserSettings]   // 👈 ДОБАВИ ТОВА
+
+    private var isAIButtonEnabledGlobally: Bool {
+        userSettingsArray.first?.isAIButtonEnabled ?? true
+    }
+
     // MARK: - Input
     let profile: Profile
     let onDismiss: (TrainingPlan?) -> Void
@@ -271,7 +276,8 @@ struct TrainingPlanEditorView: View {
                             !showAlert &&
                             openMenu == .none &&
                             exerciseItemToView == nil &&
-                            GlobalState.aiAvailability != .deviceNotEligible { // ⬅️ ново
+                            GlobalState.aiAvailability != .deviceNotEligible &&
+                            isAIButtonEnabledGlobally {            // 👈 ДОБАВЕНО УСЛОВИЕ
                             AIButton(geometry: geometry)
                         }
                     }
@@ -462,21 +468,23 @@ struct TrainingPlanEditorView: View {
                 )
             }
             .id(FocusableField.minAge)
-            let workoutPrompts = allPrompts.filter { $0.type == .trainingPlan }
-            
-            if !workoutPrompts.isEmpty {
-                promptsSection
+            if GlobalState.aiAvailability != .deviceNotEligible && isAIButtonEnabledGlobally{
+                let workoutPrompts = allPrompts.filter { $0.type == .trainingPlan }
+                
+                if !workoutPrompts.isEmpty {
+                    promptsSection
+                }
+                Button {
+                    path.append(NavigationTarget.promptEditor)
+                } label: {
+                    Label("New Prompt", systemImage: "plus.bubble")
+                        .font(.subheadline.weight(.semibold))
+                        .frame(maxWidth: .infinity, alignment: .center)
+                }
+                .padding(.vertical, 10)
+                .glassCardStyle(cornerRadius: 20)
+                .foregroundColor(effectManager.currentGlobalAccentColor)
             }
-            Button {
-                path.append(NavigationTarget.promptEditor)
-            } label: {
-                Label("New Prompt", systemImage: "plus.bubble")
-                    .font(.subheadline.weight(.semibold))
-                    .frame(maxWidth: .infinity, alignment: .center)
-            }
-            .padding(.vertical, 10)
-            .glassCardStyle(cornerRadius: 20)
-            .foregroundColor(effectManager.currentGlobalAccentColor)
         }
         .padding()
         .glassCardStyle(cornerRadius: 20)

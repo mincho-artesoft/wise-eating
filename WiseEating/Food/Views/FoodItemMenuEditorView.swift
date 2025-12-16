@@ -5,9 +5,13 @@ import PhotosUI
 @MainActor
 struct FoodItemMenuEditorView: View {
     @State private var pendingAIJobIDToDeleteOnSave: UUID? = nil
+    @Query private var userSettingsArray: [UserSettings]   // 👈 ДОБАВИ ТОВА
 
     @State private var isBannerAdLoaded: Bool = false
 
+    private var isAIButtonEnabledGlobally: Bool {
+         userSettingsArray.first?.isAIButtonEnabled ?? true
+     }
     // MARK: - Photo source state
 
     private enum PhotoSourceTarget {
@@ -415,7 +419,8 @@ struct FoodItemMenuEditorView: View {
                        if !isSearchFieldFocused &&
                             !isSaving &&
                             !showPopover &&
-                            GlobalState.aiAvailability != .deviceNotEligible {
+                            GlobalState.aiAvailability != .deviceNotEligible &&
+                            isAIButtonEnabledGlobally{
                            AIButton(geometry: geometry)
                        }
                    }
@@ -667,23 +672,24 @@ struct FoodItemMenuEditorView: View {
                            }
                        
                        // +++ ПРОМЯНА: секция за Menu prompts +++
-                       let menuPrompts = allPrompts.filter { $0.type == .menu }
-
-                       if !menuPrompts.isEmpty {
-                           promptsSection
+                       if GlobalState.aiAvailability != .deviceNotEligible && isAIButtonEnabledGlobally{
+                           let menuPrompts = allPrompts.filter { $0.type == .menu }
+                           
+                           if !menuPrompts.isEmpty {
+                               promptsSection
+                           }
+                           
+                           Button {
+                               path.append(NavigationTarget.promptEditor)
+                           } label: {
+                               Label("New Prompt", systemImage: "plus.bubble")
+                                   .font(.subheadline.weight(.semibold))
+                                   .frame(maxWidth: .infinity, alignment: .center)
+                           }
+                           .padding(.vertical, 10)
+                           .glassCardStyle(cornerRadius: 20)
+                           .foregroundColor(effectManager.currentGlobalAccentColor)
                        }
-
-                       Button {
-                           path.append(NavigationTarget.promptEditor)
-                       } label: {
-                           Label("New Prompt", systemImage: "plus.bubble")
-                               .font(.subheadline.weight(.semibold))
-                               .frame(maxWidth: .infinity, alignment: .center)
-                       }
-                       .padding(.vertical, 10)
-                       .glassCardStyle(cornerRadius: 20)
-                       .foregroundColor(effectManager.currentGlobalAccentColor)
-
                        
                        tagPicker(
                            label: "Category",
