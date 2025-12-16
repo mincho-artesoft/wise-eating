@@ -64,7 +64,7 @@ struct VitaminListView: View {
             }
             .padding(.horizontal) // Добавяме хоризонтално отстояние за картите
             .padding(.top, 8)       // Малко отстояние от горния край
-            Spacer(minLength: 150)
+            Spacer(minLength: 200)
         }
         .mask(
             LinearGradient(

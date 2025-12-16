@@ -47,7 +47,9 @@ struct ProfileEditorView: View {
     // MARK: – Photo
     @State private var selectedPhoto: PhotosPickerItem? = nil
     @State private var photoData: Data?
-
+    @State private var showPhotoSourceDialog = false
+    @State private var isShowingCameraPicker = false
+    @State private var isShowingPhotoLibraryPicker = false
     // MARK: – Error
     @State private var errorMessage: String?
     @State private var showErrorAlert = false
@@ -569,32 +571,58 @@ struct ProfileEditorView: View {
      .onChange(of: meals) { _,_ in sortMealsIfNeeded() }
  }
  
- private var photoPicker: some View {
-     let imageData = photoData
-     let color = effectManager.currentGlobalAccentColor.opacity(0.6)
+    private var photoPicker: some View {
+        let imageData = photoData
+        let color = effectManager.currentGlobalAccentColor.opacity(0.6)
 
-     return PhotosPicker(selection: $selectedPhoto, matching: .images) {
-         Group {
-             if let data = imageData, let ui = UIImage(data: data) {
-                 Image(uiImage: ui).resizable().scaledToFill()
-             } else {
-                 Image(systemName: "person.crop.circle.fill")
-                     .resizable()
-                     .aspectRatio(contentMode: .fit)
-                     .symbolRenderingMode(.hierarchical)
-                     .foregroundColor(color)
-             }
-         }
-         .frame(width: 120, height: 120).clipShape(Circle())
-     }
-     .buttonStyle(.plain)
-     .onChange(of: selectedPhoto) { _, newItem in Task {
-         if let data = try? await newItem?.loadTransferable(type: Data.self) {
-             await MainActor.run { photoData = data }
-         }
-     }}
-     .padding(.leading, -4)
- }
+        return Button {
+            showPhotoSourceDialog = true
+        } label: {
+            Group {
+                if let data = imageData, let ui = UIImage(data: data) {
+                    Image(uiImage: ui)
+                        .resizable()
+                        .scaledToFill()
+                } else {
+                    Image(systemName: "person.crop.circle.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .symbolRenderingMode(.hierarchical)
+                        .foregroundColor(color)
+                }
+            }
+            .frame(width: 120, height: 120)
+            .clipShape(Circle())
+        }
+        .buttonStyle(.plain)
+        .confirmationDialog("Select photo source", isPresented: $showPhotoSourceDialog) {
+            Button("Take Photo") {
+                isShowingCameraPicker = true
+            }
+            Button("Photo Library") {
+                isShowingPhotoLibraryPicker = true
+            }
+            Button("Cancel", role: .cancel) { }
+        }
+        .sheet(isPresented: $isShowingCameraPicker) {
+            CameraPicker { image in
+                if let data = image.jpegData(compressionQuality: 0.9) {
+                    photoData = data
+                }
+            }
+            .presentationCornerRadius(20)
+        }
+        .sheet(isPresented: $isShowingPhotoLibraryPicker) {
+            PhotoLibraryPicker { image in
+                if let data = image.jpegData(compressionQuality: 0.9) {
+                    photoData = data
+                }
+            }
+            .presentationCornerRadius(20)
+        }
+        .padding(.leading, -4)
+    }
+
  
  private var birthdayPicker: some View {
      StyledLabeledPicker(label: "Birthday", isRequired: true) {

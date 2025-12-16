@@ -71,7 +71,7 @@ struct MineralListView: View {
             }
             .padding(.horizontal)
             .padding(.top, 8)
-            Spacer(minLength: 150)
+            Spacer(minLength: 200)
 
         }
         .mask(
