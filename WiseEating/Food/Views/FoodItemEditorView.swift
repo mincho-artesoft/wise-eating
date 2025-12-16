@@ -1690,6 +1690,8 @@ extension FoodItemEditorView {
 
     
     private func handleAITap() {
+        NotificationCenter.default.post(name: .snoozeAds, object: nil)
+
         // 1. Проверка за наличност на AI (Apple Intelligence статуси и т.н.)
         guard ensureAIAvailableOrShowMessage() else { return }
 

@@ -31,6 +31,7 @@ extension Notification.Name {
     static let aiJobStatusDidChange = Notification.Name("aiJobStatusDidChange")
     static let aiAvailabilityDidChange = Notification.Name("AIAvailabilityDidChange")
     static let openSubscriptionFlow = Notification.Name("openSubscriptionFlow")
+    static let snoozeAds = Notification.Name("snoozeAds")
 }
 
 struct EditNutritionPayload {

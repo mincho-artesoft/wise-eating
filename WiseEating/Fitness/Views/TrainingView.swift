@@ -1184,6 +1184,8 @@ struct TrainingView: View {
     }
 
     private func handleAITap() {
+        NotificationCenter.default.post(name: .snoozeAds, object: nil)
+
         // 1. Проверка за наличност на AI (като при ExerciseItemEditorView)
         guard ensureAIAvailableOrShowMessage() else { return }
         

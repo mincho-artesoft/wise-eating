@@ -788,6 +788,8 @@ struct ExerciseItemEditorView: View {
 
         /// Основният handler на бутона.
         private func handleAITap() {
+            NotificationCenter.default.post(name: .snoozeAds, object: nil)
+
             // 1. Проверка за наличност на AI
             guard ensureAIAvailableOrShowMessage() else { return }
             
