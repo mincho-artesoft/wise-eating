@@ -780,65 +780,123 @@ struct ExerciseListView: View {
         return Text(text)
     }
     
-    // MARK: - Floating Add Button
-    private func dragGesture(geometry: GeometryProxy) -> some Gesture {
-        DragGesture(minimumDistance: 0)
-            .updating($gestureDragOffset) { value, state, _ in
-                state = value.translation
-                DispatchQueue.main.async { self.isPressed = true }
-            }
-            .onChanged { value in
-                if abs(value.translation.width) > 10 || abs(value.translation.height) > 10 {
-                    self.isDragging = true
-                }
-            }
-            .onEnded { value in
-                self.isPressed = false
-                if isDragging {
-                    var newOffset = self.buttonOffset
-                    newOffset.width += value.translation.width
-                    newOffset.height += value.translation.height
-                    
-                    let buttonRadius: CGFloat = 40
-                    let viewSize = geometry.size
-                    let safeArea = geometry.safeAreaInsets
-                    let minY = -viewSize.height + buttonRadius + safeArea.top
-                    let maxY = -25 + safeArea.bottom
-                    newOffset.height = min(maxY, max(minY, newOffset.height))
-                    
-                    self.buttonOffset = newOffset
-                    self.saveButtonPosition()
-                } else {
-                    self.handleButtonTap()
-                }
-                self.isDragging = false
-            }
-    }
-    
-    private func addButton(geometry: GeometryProxy) -> some View {
-        let currentOffset = CGSize(
-            width: buttonOffset.width + gestureDragOffset.width,
-            height: buttonOffset.height + gestureDragOffset.height
-        )
-        let scale = isDragging ? 1.15 : (isPressed ? 0.9 : 1.0)
+    // MARK: - Updated Floating Button Logic
         
-        return ZStack {
-            Image(systemName: "plus")
-                .font(.title3)
-                .foregroundColor(effectManager.currentGlobalAccentColor)
+        private func bottomPadding(for geometry: GeometryProxy) -> CGFloat {
+            let size = geometry.size
+            guard size.width > 0 else { return 75 }
+            let aspectRatio = size.height / size.width
+            return aspectRatio > 1.9 ? 75 : 95
         }
-        .frame(width: 60, height: 60)
-        .glassCardStyle(cornerRadius: 32)
-        .scaleEffect(scale)
-        .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isDragging)
-        .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isPressed)
-        .contentShape(Rectangle())
-        .padding(.trailing, 45)
-        .padding(.bottom, (geometry.size.height / geometry.size.width) > 1.9 ? 75 : 95)
-        .offset(currentOffset)
-        .gesture(dragGesture(geometry: geometry))
-        .transition(.scale.combined(with: .opacity))
-    }
+        
+        private func trailingPadding(for geometry: GeometryProxy) -> CGFloat { 45 }
+        
+        private func dragGesture(geometry: GeometryProxy) -> some Gesture {
+            let buttonSize: CGFloat = 60
+            let radius = buttonSize / 2
+            
+            return DragGesture(minimumDistance: 0)
+                .updating($gestureDragOffset) { value, state, _ in
+                    // Жив превод по време на drag – без анимация
+                    state = value.translation
+                }
+                .onChanged { value in
+                    let distance = max(abs(value.translation.width), abs(value.translation.height))
+                    
+                    if distance > 6 {
+                        // Вече влачим – махаме "pressed" и маркираме "dragging"
+                        if !isDragging {
+                            isDragging = true
+                            isPressed = false
+                        }
+                    } else {
+                        // Малко мърдане = натиснат бутон
+                        isPressed = true
+                    }
+                }
+                .onEnded { value in
+                    let safeArea = geometry.safeAreaInsets
+                    let size = geometry.size
+                    
+                    // Базова позиция (дясно-долу) спрямо размера + паддингите
+                    let baseX = size.width  - trailingPadding(for: geometry) - radius
+                    let baseY = size.height - bottomPadding(for: geometry)   - radius
+                    
+                    // Центърът, ако приложим текущия offset + преместеното
+                    let rawCenterX = baseX + buttonOffset.width  + value.translation.width
+                    let rawCenterY = baseY + buttonOffset.height + value.translation.height
+                    
+                    // Ограничаваме центъра ВЪТРЕ в екрана
+                    let minX = radius
+                    let maxX = size.width  - radius
+                    let minY = radius + safeArea.top
+                    // -80 допълнителен буфер отдолу, както при AI бутона
+                    let maxY = size.height - radius - safeArea.bottom - 80
+                    
+                    let clampedCenterX = min(max(rawCenterX, minX), maxX)
+                    let clampedCenterY = min(max(rawCenterY, minY), maxY)
+                    
+                    // Новият offset е просто разлика спрямо базовата позиция
+                    let newOffset = CGSize(
+                        width:  clampedCenterX - baseX,
+                        height: clampedCenterY - baseY
+                    )
+                    
+                    if isDragging {
+                        buttonOffset = newOffset
+                        saveButtonPosition()
+                    } else {
+                        // Тап (без реален drag)
+                        handleButtonTap()
+                    }
+                    
+                    isDragging = false
+                    isPressed = false
+                }
+        }
+        
+        private func addButton(geometry: GeometryProxy) -> some View {
+            let buttonSize: CGFloat = 60
+            let radius = buttonSize / 2
+            let safeArea = geometry.safeAreaInsets
+            let size = geometry.size
+            
+            // Базова позиция (дясно-долу)
+            let baseX = size.width  - trailingPadding(for: geometry) - radius
+            let baseY = size.height - bottomPadding(for: geometry)   - radius
+            
+            // Център със запазения offset + текущия drag
+            let rawCenterX = baseX + buttonOffset.width  + gestureDragOffset.width
+            let rawCenterY = baseY + buttonOffset.height + gestureDragOffset.height
+            
+            // Ограничаваме центъра ВЪТРЕ в екрана (и safe area)
+            let minX = radius
+            let maxX = size.width  - radius
+            let minY = radius + safeArea.top
+            let maxY = size.height - radius - safeArea.bottom
+            
+            let centerX = min(max(rawCenterX, minX), maxX)
+            let centerY = min(max(rawCenterY, minY), maxY)
+            
+            let scale = isDragging ? 1.05 : (isPressed ? 0.92 : 1.0)
+            
+            return ZStack {
+                Image(systemName: "plus")
+                    .font(.title3)
+                    .foregroundColor(effectManager.currentGlobalAccentColor)
+            }
+            .frame(width: buttonSize, height: buttonSize)
+            .glassCardStyle(cornerRadius: radius)
+            .scaleEffect(scale)
+            .animation(.spring(response: 0.25, dampingFraction: 0.8), value: isPressed)
+            .animation(.spring(response: 0.25, dampingFraction: 0.8), value: isDragging)
+            .contentShape(Circle())
+            .position(x: centerX, y: centerY) // Използваме position вместо offset
+            .opacity(isAddButtonVisible ? 1 : 0)
+            .disabled(!isAddButtonVisible)
+            .gesture(dragGesture(geometry: geometry))
+            .transition(.scale.combined(with: .opacity))
+        }
     
     // MARK: - Ad Logic
     private func shouldShowAd(at index: Int) -> Bool {

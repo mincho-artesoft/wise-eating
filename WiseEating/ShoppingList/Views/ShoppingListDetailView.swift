@@ -783,73 +783,119 @@ struct ShoppingListDetailView: View {
     
     // MARK: - Floating Scan Button & Gestures
 
-    private func scanDragGesture(geometry: GeometryProxy) -> some Gesture {
-        DragGesture(minimumDistance: 0)
-            .updating($scanGestureOffset) { value, state, _ in
-                state = value.translation
-                DispatchQueue.main.async { self.isScanPressed = true }
-            }
-            .onChanged { value in
-                if abs(value.translation.width) > 10 || abs(value.translation.height) > 10 {
-                    self.isScanDragging = true
-                }
-            }
-            .onEnded { value in
-                self.isScanPressed = false
-                if isScanDragging {
-                    var newOffset = self.scanButtonOffset
-                    newOffset.width += value.translation.width
-                    newOffset.height += value.translation.height
+    // MARK: - Updated Floating Scan Button Logic
 
-                    let buttonRadius: CGFloat = 40
-                    let viewSize = geometry.size
-                    let safeArea = geometry.safeAreaInsets
-                    let minY = -viewSize.height + buttonRadius + safeArea.top
-                    let maxY = -25 + safeArea.bottom
-                    newOffset.height = min(maxY, max(minY, newOffset.height))
-
-                    self.scanButtonOffset = newOffset
-                    self.saveScanButtonPosition()
-                } else {
-                    self.handleScanButtonTap()
-                }
-                self.isScanDragging = false
-            }
-    }
-
-    private func scanBottomPadding(for geometry: GeometryProxy) -> CGFloat {
-        let size = geometry.size
-        guard size.width > 0 else { return 75 }
-        let aspectRatio = size.height / size.width
-        return aspectRatio > 1.9 ? 75 : 95
-    }
-
-    private func scanTrailingPadding(for geometry: GeometryProxy) -> CGFloat { 45 }
-
-    @ViewBuilder
-    private func scanButton(geometry: GeometryProxy) -> some View {
-        let currentOffset = CGSize(
-            width: scanButtonOffset.width + scanGestureOffset.width,
-            height: scanButtonOffset.height + scanGestureOffset.height
-        )
-        let scale = isScanDragging ? 1.15 : (isScanPressed ? 0.9 : 1.0)
-
-        ZStack {
-            Image(systemName: "barcode.viewfinder")
-                .font(.title3)
-                .foregroundColor(effectManager.currentGlobalAccentColor)
+        private func scanBottomPadding(for geometry: GeometryProxy) -> CGFloat {
+            let size = geometry.size
+            guard size.width > 0 else { return 75 }
+            let aspectRatio = size.height / size.width
+            return aspectRatio > 1.9 ? 75 : 95
         }
-        .frame(width: 60, height: 60)
-        .glassCardStyle(cornerRadius: 32)
-        .scaleEffect(scale)
-        .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isScanDragging)
-        .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isScanPressed)
-        .contentShape(Rectangle())
-        .offset(currentOffset)
-        .gesture(scanDragGesture(geometry: geometry))
-        .transition(.scale.combined(with: .opacity))
-        .onAppear { loadScanButtonPosition() }
-    }
+
+        private func scanTrailingPadding(for geometry: GeometryProxy) -> CGFloat { 45 }
+
+        private func scanDragGesture(geometry: GeometryProxy) -> some Gesture {
+            let buttonSize: CGFloat = 60
+            let radius = buttonSize / 2
+            
+            return DragGesture(minimumDistance: 0)
+                .updating($scanGestureOffset) { value, state, _ in
+                    // Жив превод по време на drag
+                    state = value.translation
+                }
+                .onChanged { value in
+                    let distance = max(abs(value.translation.width), abs(value.translation.height))
+                    
+                    if distance > 6 {
+                        if !isScanDragging {
+                            isScanDragging = true
+                            isScanPressed = false
+                        }
+                    } else {
+                        isScanPressed = true
+                    }
+                }
+                .onEnded { value in
+                    let safeArea = geometry.safeAreaInsets
+                    let size = geometry.size
+                    
+                    // 1. Базова позиция (дясно-долу)
+                    let baseX = size.width  - scanTrailingPadding(for: geometry) - radius
+                    let baseY = size.height - scanBottomPadding(for: geometry)   - radius
+                    
+                    // 2. Център с текущия offset + транслация
+                    let rawCenterX = baseX + scanButtonOffset.width  + value.translation.width
+                    let rawCenterY = baseY + scanButtonOffset.height + value.translation.height
+                    
+                    // 3. Ограничаване (Clamping)
+                    let minX = radius
+                    let maxX = size.width  - radius
+                    let minY = radius + safeArea.top
+                    let maxY = size.height - radius - safeArea.bottom - 80
+                    
+                    let clampedCenterX = min(max(rawCenterX, minX), maxX)
+                    let clampedCenterY = min(max(rawCenterY, minY), maxY)
+                    
+                    // 4. Нов offset спрямо базовата позиция
+                    let newOffset = CGSize(
+                        width:  clampedCenterX - baseX,
+                        height: clampedCenterY - baseY
+                    )
+                    
+                    if isScanDragging {
+                        scanButtonOffset = newOffset
+                        saveScanButtonPosition()
+                    } else {
+                        handleScanButtonTap()
+                    }
+                    
+                    isScanDragging = false
+                    isScanPressed = false
+                }
+        }
+
+        @ViewBuilder
+        private func scanButton(geometry: GeometryProxy) -> some View {
+            let buttonSize: CGFloat = 60
+            let radius = buttonSize / 2
+            let safeArea = geometry.safeAreaInsets
+            let size = geometry.size
+
+            // Базова позиция (дясно-долу)
+            let baseX = size.width  - scanTrailingPadding(for: geometry) - radius
+            let baseY = size.height - scanBottomPadding(for: geometry)   - radius
+
+            // Изчисляване на центъра
+            let rawCenterX = baseX + scanButtonOffset.width  + scanGestureOffset.width
+            let rawCenterY = baseY + scanButtonOffset.height + scanGestureOffset.height
+
+            // Ограничаване (Clamping)
+            let minX = radius
+            let maxX = size.width  - radius
+            let minY = radius + safeArea.top
+            let maxY = size.height - radius - safeArea.bottom 
+
+            let centerX = min(max(rawCenterX, minX), maxX)
+            let centerY = min(max(rawCenterY, minY), maxY)
+
+            let scale = isScanDragging ? 1.05 : (isScanPressed ? 0.92 : 1.0)
+
+            ZStack {
+                Image(systemName: "barcode.viewfinder")
+                    .font(.title3)
+                    .foregroundColor(effectManager.currentGlobalAccentColor)
+            }
+            .frame(width: buttonSize, height: buttonSize)
+            .glassCardStyle(cornerRadius: radius)
+            .scaleEffect(scale)
+            .animation(.spring(response: 0.25, dampingFraction: 0.8), value: isScanPressed)
+            .animation(.spring(response: 0.25, dampingFraction: 0.8), value: isScanDragging)
+            .contentShape(Circle())
+            .position(x: centerX, y: centerY) // Използваме position
+            .gesture(scanDragGesture(geometry: geometry))
+            .transition(.scale.combined(with: .opacity))
+            .onAppear { loadScanButtonPosition() }
+        }
 
     private func handleScanButtonTap() {
         if isSearchFieldFocused {
