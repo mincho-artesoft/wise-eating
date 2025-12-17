@@ -221,7 +221,7 @@ struct ExerciseLogEntryView: View {
             // 🔹 ВТОРИ РЕД: голям бутон "To Failure" под целия ред
             HStack {
                 Text("To Failure")
-                    .font(.caption)
+                    .font(.subheadline)
                     .foregroundStyle(effectManager.currentGlobalAccentColor)
                 
                 Spacer()

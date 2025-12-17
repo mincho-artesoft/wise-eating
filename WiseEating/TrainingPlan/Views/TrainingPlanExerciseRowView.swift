@@ -49,15 +49,13 @@ struct TrainingPlanExerciseRowView: View {
                             .foregroundStyle(effectManager.currentGlobalAccentColor)
                             .font(.headline)
                             .lineLimit(2)
-                            .multilineTextAlignment(.leading) // Подравняване на текста
+                            .multilineTextAlignment(.leading)
                         
                         Text("\(link.sets.count) sets planned")
                             .font(.caption)
                             .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading) // Заема свободното място вляво
-
-                    // Spacer() - не е нужен тук, защото VStack по-горе има maxWidth: .infinity
+                    .frame(maxWidth: .infinity, alignment: .leading)
 
                     HStack(spacing: 4) {
                         ConfigurableTextField(
@@ -98,13 +96,25 @@ struct TrainingPlanExerciseRowView: View {
                 VStack(spacing: 8) {
                     Divider().padding(.vertical, 4)
                     
-                    ForEach($link.sets.sorted(by: { ($0.wrappedValue.id.uuidString) < ($1.wrappedValue.id.uuidString) })) { $set in
-                        setRow(for: $set)
+                    // ✅ FIX START: Стабилна итерация за предотвратяване на краш при Picker
+                    // 1. Сортираме стойностите, за да определим реда
+                    let sortedSets = link.sets.sorted { $0.orderIndex < $1.orderIndex }
+                    
+                    // 2. Итерираме през стойностите
+                    ForEach(sortedSets) { set in
+                        // 3. Намираме индекса в оригиналния масив, за да създадем Binding
+                        if let index = link.sets.firstIndex(where: { $0.id == set.id }) {
+                            setRow(for: $link.sets[index])
+                                .id(set.id) // Важно: Уникално ID за View-то
+                        }
                     }
+                    // ✅ FIX END
                     
                     Button(action: {
                        withAnimation {
-                           let newSet = TrainingPlanSet(reps: 10, weight: 0)
+                           // Присвояваме orderIndex = текущия брой (накрая)
+                           let nextIndex = link.sets.count
+                           let newSet = TrainingPlanSet(reps: 10, weight: 0, orderIndex: nextIndex)
                            link.sets.append(newSet)
                        }
                     }) {
@@ -125,7 +135,6 @@ struct TrainingPlanExerciseRowView: View {
                 .transition(.opacity)
             }
         }
-        // ✅ ВАЖНО: Това кара контейнера да заеме ширината на родителя и предотвратява "подскачането" при разгъване
         .frame(maxWidth: .infinity)
         .padding(12)
         .glassCardStyle(cornerRadius: 20)
@@ -156,18 +165,19 @@ struct TrainingPlanExerciseRowView: View {
     // MARK: - Set Row View
     private func setRow(for setBinding: Binding<TrainingPlanSet>) -> some View {
         let pickerColorScheme: ColorScheme = effectManager.isLightRowTextColor ? .dark : .light
-        let setIndex = link.sets.firstIndex(where: { $0.id == setBinding.wrappedValue.id }) ?? 0
+        // Използваме orderIndex за етикета
+        let displayIndex = setBinding.wrappedValue.orderIndex + 1
 
         return VStack(spacing: 6) {
-            // 🔹 ПЪРВИ РЕД: Reps/Failure + Weight + Delete
+            // 🔹 ПЪРВИ РЕД
             HStack(alignment: .center, spacing: 8) {
                 // Label
-                Text("Set \(setIndex + 1)")
+                Text("Set \(displayIndex)")
                     .font(.subheadline)
                     .foregroundStyle(effectManager.currentGlobalAccentColor)
                     .frame(width: 45, height: 80, alignment: .leading)
 
-                // MARK: - Reps OR Failure
+                // Reps OR Failure
                 VStack(spacing: 4) {
                     Text("Reps")
                         .font(.caption)
@@ -247,7 +257,15 @@ struct TrainingPlanExerciseRowView: View {
                 // Delete Set
                 Button(action: {
                     withAnimation {
-                        link.sets.removeAll { $0.id == setBinding.wrappedValue.id }
+                        let idToDelete = setBinding.wrappedValue.id
+                        // 1. Изтриваме
+                        link.sets.removeAll { $0.id == idToDelete }
+                        
+                        // 2. Пренареждаме индексите
+                        let sorted = link.sets.sorted { $0.orderIndex < $1.orderIndex }
+                        for (newIndex, set) in sorted.enumerated() {
+                            set.orderIndex = newIndex
+                        }
                     }
                 }) {
                     Image(systemName: "xmark.circle.fill")
@@ -257,10 +275,10 @@ struct TrainingPlanExerciseRowView: View {
                 .padding(.top, 8)
             }
 
-            // 🔹 ВТОРИ РЕД: бутон "To Failure" под целия ред
+            // 🔹 ВТОРИ РЕД
             HStack {
                 Text("To Failure")
-                    .font(.caption)
+                    .font(.subheadline)
                     .foregroundStyle(effectManager.currentGlobalAccentColor)
                 
                 Spacer()

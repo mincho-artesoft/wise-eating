@@ -96,7 +96,8 @@ struct TrainingPlanExerciseDetailRow: View {
                             .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.6))
                             .padding(.bottom, 4)
                     } else {
-                        let sortedSets = link.sets.sorted { $0.id.uuidString < $1.id.uuidString }
+                        // ✅ FIX: Сортираме по orderIndex преди да ги покажем
+                        let sortedSets = link.sets.sorted { $0.orderIndex < $1.orderIndex }
                         
                         ForEach(Array(sortedSets.enumerated()), id: \.element.id) { index, set in
                             HStack {
@@ -107,7 +108,7 @@ struct TrainingPlanExerciseDetailRow: View {
                                 
                                 Spacer()
                                 
-                                // ✅ REPS OR FAILURE TEXT
+                                // REPS OR FAILURE TEXT
                                 if set.isToFailure {
                                     HStack(spacing: 4) {
                                         Image(systemName: "exclamationmark.triangle.fill")
