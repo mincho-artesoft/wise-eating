@@ -28,7 +28,8 @@ struct DatabaseSetup {
             FoodPhoto.self,IngredientLink.self,
             LipidsData.self, MacronutrientsData.self,
             MineralsData.self, OtherCompoundsData.self,
-            VitaminsData.self, Batch.self
+            VitaminsData.self, Batch.self,
+            TrainingPlanSet.self
         ])
         
         do {

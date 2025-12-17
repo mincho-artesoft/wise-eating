@@ -5,7 +5,6 @@ struct MealPlanDetailView: View {
     @ObservedObject private var effectManager = EffectManager.shared
     @State private var isBannerAdLoaded: Bool = false
 
-    // --- НАЧАЛО НА ПРОМЯНАТА (1/3): Добавяме safeAreaInsets ---
     @Environment(\.safeAreaInsets) private var safeAreaInsets
     
     let plan: MealPlan
@@ -17,6 +16,9 @@ struct MealPlanDetailView: View {
     // MARK: - State for UI
     @State private var selectedDayID: MealPlanDay.ID? = nil
     @State private var selectedMealID: MealPlanMeal.ID? = nil
+    
+    // 👇 1. НОВО: Състояние за избраната храна за преглед
+    @State private var foodItemToView: FoodItem? = nil
     
     init(plan: MealPlan, profile: Profile, onDismiss: @escaping () -> Void, navBarIsHiden: Binding<Bool>) {
         self.plan = plan
@@ -30,59 +32,77 @@ struct MealPlanDetailView: View {
     }
 
     var body: some View {
-        VStack(spacing: 0) {
-            toolbar
-                   
-            ScrollView(showsIndicators: false) {
-                VStack(spacing: 16) {
-                    // --- НАЧАЛО НА ПРОМЯНАТА ---
-                    // Преместеното заглавие, вече е тук и е центрирано
-                    Text(plan.name)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .foregroundColor(effectManager.currentGlobalAccentColor)
+        // 👇 2. НОВО: Обвиваме всичко в ZStack
+        ZStack {
+            ThemeBackgroundView().ignoresSafeArea()
+            
+            VStack(spacing: 0) {
+                toolbar
+                       
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 16) {
+                        Text(plan.name)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .foregroundColor(effectManager.currentGlobalAccentColor)
 
 
-                    if plan.minAgeMonths > 0 {
-                        HStack {
-                            Text("Minimum Age:")
-                                .font(.headline)
-                            Spacer()
-                            Text("\(plan.minAgeMonths) months")
-                                .font(.headline.weight(.semibold))
+                        if plan.minAgeMonths > 0 {
+                            HStack {
+                                Text("Minimum Age:")
+                                    .font(.headline)
+                                Spacer()
+                                Text("\(plan.minAgeMonths) months")
+                                    .font(.headline.weight(.semibold))
+                            }
+                            .foregroundColor(effectManager.currentGlobalAccentColor)
+                            .padding()
+                            .glassCardStyle(cornerRadius: 20)
                         }
-                        .foregroundColor(effectManager.currentGlobalAccentColor)
-                        .padding()
-                        .glassCardStyle(cornerRadius: 20)
+                        
+                        bannerAdSection
+                            .frame(height: isBannerAdLoaded ? 120 : 0)
+                        
+                        ForEach(Array(sortedDays.enumerated()), id: \.element.id) { index, day in
+                            daySection(for: day, dayIndex: index + 1)
+                        }
                     }
-                    // --- КРАЙ НА ПРОМЯНАТА ---
+                    .padding()
                     
-                    bannerAdSection
-                        .frame(height: isBannerAdLoaded ? 120 : 0)
-                    
-                    ForEach(Array(sortedDays.enumerated()), id: \.element.id) { index, day in
-                        daySection(for: day, dayIndex: index + 1)
-                    }
+                    Color.clear
+                        .frame(height: 150)
                 }
-                .padding()
-                
-                Color.clear
-                    .frame(height: 150)
-            }
-            .mask(
-                LinearGradient(
-                    gradient: Gradient(stops: [
-                        .init(color: .clear, location: 0),
-                        .init(color: effectManager.currentGlobalAccentColor, location: 0.01),
-                        .init(color: effectManager.currentGlobalAccentColor, location: 0.9),
-                        .init(color: .clear, location: 0.95)
-                    ]),
-                    startPoint: .top,
-                    endPoint: .bottom
+                .mask(
+                    LinearGradient(
+                        gradient: Gradient(stops: [
+                            .init(color: .clear, location: 0),
+                            .init(color: effectManager.currentGlobalAccentColor, location: 0.01),
+                            .init(color: effectManager.currentGlobalAccentColor, location: 0.9),
+                            .init(color: .clear, location: 0.95)
+                        ]),
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
                 )
-            )
+            }
+            // Добавяме blur, ако има отворен детайл
+            .blur(radius: foodItemToView != nil ? 1.5 : 0)
+            
+            // 👇 3. НОВО: Показваме FoodItemDetailView, ако има избрана храна
+            if let foodToView = foodItemToView {
+                FoodItemDetailView(
+                    food: foodToView,
+                    profile: profile,
+                    onDismiss: {
+                        withAnimation(.easeInOut) {
+                            foodItemToView = nil
+                            // navBarIsHiden вече се управлява от lifecycle-а на DetailView
+                        }
+                    }
+                )
+                .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                .zIndex(20)
+            }
         }
-        // --- НАЧАЛО НА ПРОМЯНАТА (3/3): Прилагаме отстоянието към целия изглед ---
-        .background(ThemeBackgroundView().ignoresSafeArea())
         .onAppear {
             navBarIsHiden = true
             if selectedDayID == nil, let firstDay = sortedDays.first {
@@ -110,10 +130,6 @@ struct MealPlanDetailView: View {
             
             Spacer()
             
-            // --- НАЧАЛО НА ПРОМЯНАТА ---
-            // Text(plan.name) беше премахнато от тук
-            // --- КРАЙ НА ПРОМЯНАТА ---
-            
             Spacer()
             
             Button("Back", action: {})
@@ -122,7 +138,6 @@ struct MealPlanDetailView: View {
                 .hidden()
         }
         .foregroundColor(effectManager.currentGlobalAccentColor)
-        // Премахваме .top и добавяме .bottom за по-добро разстояние
         .padding(.horizontal)
     }
     
@@ -130,7 +145,7 @@ struct MealPlanDetailView: View {
         .orange, .pink, .green, .indigo, .purple, .blue, .red, Color(hex: "#00ffff")
     ]
 
-    private var colorFor: [String: Color] { // Keyed by Meal Name
+    private var colorFor: [String: Color] {
         let sortedTemplates = profile.meals.sorted {
             $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending
         }
@@ -175,66 +190,63 @@ struct MealPlanDetailView: View {
     }
     
     @ViewBuilder
-        private func mealTabButton(for mealTemplate: Meal, in day: MealPlanDay) -> some View {
-            let meal = day.meals.first { $0.mealName == mealTemplate.name }
-            
-            let isSelected = selectedMealID == meal?.id && selectedDayID == day.id
-            let baseColor = colorFor[mealTemplate.name] ?? effectManager.currentGlobalAccentColor
+    private func mealTabButton(for mealTemplate: Meal, in day: MealPlanDay) -> some View {
+        let meal = day.meals.first { $0.mealName == mealTemplate.name }
+        
+        let isSelected = selectedMealID == meal?.id && selectedDayID == day.id
+        let baseColor = colorFor[mealTemplate.name] ?? effectManager.currentGlobalAccentColor
 
-            Button {
-                withAnimation {
-                    selectedDayID = day.id
-                    selectedMealID = meal?.id
-                }
-            } label: {
-                ZStack(alignment: .topTrailing) {
-                    Text(mealTemplate.name)
-                        .font(.caption.weight(.semibold))
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 6)
-                        .background(
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 20)
-                                    .fill(isSelected ? baseColor.opacity(0.8) : baseColor.opacity(0.3))
-                            }
-                        )
-                        .glassCardStyle(cornerRadius: 20)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 20)
-                                .stroke(baseColor, lineWidth: isSelected ? 2 : 0)
-                        )
-                        .foregroundColor(effectManager.currentGlobalAccentColor)
-                    
-                    if let meal = meal, !meal.entries.isEmpty {
-                        ZStack {
-                            Circle()
-                                .fill(baseColor)
-                            Text("\(meal.entries.count)")
-                                .font(.system(size: 10, weight: .bold))
-                            .foregroundColor(effectManager.currentGlobalAccentColor)
-                        }
-                        .frame(width: 16, height: 16)
-                        .offset(x: 6, y: -6)
-                    }else{
-                        ZStack {
-                            Circle()
-                                .fill(baseColor)
-                            Text("\(0)")
-                                .font(.system(size: 10, weight: .bold))
-                            .foregroundColor(effectManager.currentGlobalAccentColor)
-                        }
-                        .frame(width: 16, height: 16)
-                        .offset(x: 6, y: -6)
-                    }
-                }
-                // --- НАЧАЛО НА ПРОМЯНАТА ---
-                // Добавяме padding, за да осигурим място за отместения индикатор
-                .padding(.top, 10)
-                .padding(.trailing, 10)
-                // --- КРАЙ НА ПРОМЯНАТА ---
+        Button {
+            withAnimation {
+                selectedDayID = day.id
+                selectedMealID = meal?.id
             }
-            .buttonStyle(.plain)
+        } label: {
+            ZStack(alignment: .topTrailing) {
+                Text(mealTemplate.name)
+                    .font(.caption.weight(.semibold))
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 6)
+                    .background(
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(isSelected ? baseColor.opacity(0.8) : baseColor.opacity(0.3))
+                        }
+                    )
+                    .glassCardStyle(cornerRadius: 20)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(baseColor, lineWidth: isSelected ? 2 : 0)
+                    )
+                    .foregroundColor(effectManager.currentGlobalAccentColor)
+                
+                if let meal = meal, !meal.entries.isEmpty {
+                    ZStack {
+                        Circle()
+                            .fill(baseColor)
+                        Text("\(meal.entries.count)")
+                            .font(.system(size: 10, weight: .bold))
+                        .foregroundColor(effectManager.currentGlobalAccentColor)
+                    }
+                    .frame(width: 16, height: 16)
+                    .offset(x: 6, y: -6)
+                }else{
+                    ZStack {
+                        Circle()
+                            .fill(baseColor)
+                        Text("\(0)")
+                            .font(.system(size: 10, weight: .bold))
+                        .foregroundColor(effectManager.currentGlobalAccentColor)
+                    }
+                    .frame(width: 16, height: 16)
+                    .offset(x: 6, y: -6)
+                }
+            }
+            .padding(.top, 10)
+            .padding(.trailing, 10)
         }
+        .buttonStyle(.plain)
+    }
     
     @ViewBuilder
     private func mealContent(for meal: MealPlanMeal) -> some View {
@@ -243,6 +255,19 @@ struct MealPlanDetailView: View {
                 let sortedEntries = meal.entries.sorted { ($0.food?.name ?? "") < ($1.food?.name ?? "") }
                 ForEach(sortedEntries) { entry in
                     MealPlanEntryDetailRowView(entry: entry)
+                        .frame(maxWidth: .infinity, alignment: .leading) // 1. Разпъва реда до края
+                        .contentShape(Rectangle())
+                        .contextMenu {
+                            if let food = entry.food {
+                                Button {
+                                    withAnimation(.easeInOut) {
+                                        foodItemToView = food
+                                    }
+                                } label: {
+                                    Label("View Details", systemImage: "info.circle")
+                                }
+                            }
+                        }
                 }
             } else {
                 Text("No items planned for this meal.")
@@ -256,14 +281,13 @@ struct MealPlanDetailView: View {
     }
     
     @ViewBuilder
-          private var bannerAdSection: some View {
-              // Показваме банер само за free (Base) потребители
-              if SubscriptionManager.shared.subscriptionStatus == .base {
-                  BannerAdView(adsBool: $isBannerAdLoaded, bucket: .large)
-                      .frame(height: 120)
-                      .opacity(isBannerAdLoaded ? 1 : 0)
-                      .animation(.easeInOut(duration: 0.25), value: isBannerAdLoaded)
-                      .padding(.horizontal)
-              }
-          }
+    private var bannerAdSection: some View {
+        if SubscriptionManager.shared.subscriptionStatus == .base {
+            BannerAdView(adsBool: $isBannerAdLoaded, bucket: .large)
+                .frame(height: 120)
+                .opacity(isBannerAdLoaded ? 1 : 0)
+                .animation(.easeInOut(duration: 0.25), value: isBannerAdLoaded)
+                .padding(.horizontal)
+        }
+    }
 }

@@ -15,12 +15,15 @@ struct TrainingPlanDetailView: View {
     @State private var selectedDayID: TrainingPlanDay.ID? = nil
     @State private var selectedWorkoutID: TrainingPlanWorkout.ID? = nil
     
+    // 👇 1. НОВО: Състояние за избраното упражнение за преглед
+    @State private var exerciseItemToView: ExerciseItem? = nil
+    
     // MARK: - Computed
     private var sortedDays: [TrainingPlanDay] {
         plan.days.sorted { $0.dayIndex < $1.dayIndex }
     }
     
-    private var colorFor: [String: Color] { // Keyed by Workout Name
+    private var colorFor: [String: Color] {
         let sortedTemplates = profile.trainings.sorted {
             $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending
         }
@@ -35,56 +38,76 @@ struct TrainingPlanDetailView: View {
 
     // MARK: - Body
     var body: some View {
-        VStack(spacing: 0) {
-            toolbar
+        // 👇 2. НОВО: Обвиваме всичко в ZStack, за да може ExerciseItemDetailView да се покаже отгоре
+        ZStack {
+            ThemeBackgroundView().ignoresSafeArea()
             
-            ScrollView(showsIndicators: false) {
-                VStack(spacing: 16) {
-                    // --- НАЧАЛО НА ПРОМЯНАТА ---
-                    // Преместеното заглавие, вече е тук и е центрирано
-                    Text(plan.name)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .foregroundColor(effectManager.currentGlobalAccentColor)
+            VStack(spacing: 0) {
+                toolbar
+                
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 16) {
+                        Text(plan.name)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .foregroundColor(effectManager.currentGlobalAccentColor)
 
-                    // Добавяме показване на минималната възраст, ако е зададена
-                    if plan.minAgeMonths > 0 {
-                        HStack {
-                            Text("Minimum Age:")
-                                .font(.headline)
-                            Spacer()
-                            Text("\(plan.minAgeMonths) months")
-                                .font(.headline.weight(.semibold))
+                        if plan.minAgeMonths > 0 {
+                            HStack {
+                                Text("Minimum Age:")
+                                    .font(.headline)
+                                Spacer()
+                                Text("\(plan.minAgeMonths) months")
+                                    .font(.headline.weight(.semibold))
+                            }
+                            .foregroundColor(effectManager.currentGlobalAccentColor)
+                            .padding()
+                            .glassCardStyle(cornerRadius: 20)
                         }
-                        .foregroundColor(effectManager.currentGlobalAccentColor)
-                        .padding()
-                        .glassCardStyle(cornerRadius: 20)
+                        
+                        bannerAdSection
+                            .frame(height: isBannerAdLoaded ? 120 : 0)
+                        
+                        ForEach(Array(sortedDays.enumerated()), id: \.element.id) { index, day in
+                            daySection(for: day, dayIndex: index + 1)
+                        }
                     }
-                    // --- КРАЙ НА ПРОМЯНАТА ---
-                    
-                    bannerAdSection
-                        .frame(height: isBannerAdLoaded ? 120 : 0)
-                    
-                    ForEach(Array(sortedDays.enumerated()), id: \.element.id) { index, day in
-                        daySection(for: day, dayIndex: index + 1)
-                    }
+                    .padding()
+                    Color.clear.frame(height: 150)
                 }
-                .padding()
-                Color.clear.frame(height: 150)
-            }
-            .mask(
-                LinearGradient(
-                    gradient: Gradient(stops: [
-                        .init(color: .clear, location: 0),
-                        .init(color: .black, location: 0.01),
-                        .init(color: .black, location: 0.9),
-                        .init(color: .clear, location: 0.95)
-                    ]),
-                    startPoint: .top,
-                    endPoint: .bottom
+                .mask(
+                    LinearGradient(
+                        gradient: Gradient(stops: [
+                            .init(color: .clear, location: 0),
+                            .init(color: .black, location: 0.01),
+                            .init(color: .black, location: 0.9),
+                            .init(color: .clear, location: 0.95)
+                        ]),
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
                 )
-            )
+            }
+            // Добавяме малко blur на задния фон, ако е отворен детайлът (по желание, както е в Editor-а)
+            .blur(radius: exerciseItemToView != nil ? 1.5 : 0)
+            
+            // 👇 3. НОВО: Показваме ExerciseItemDetailView, ако има избрано упражнение
+            if let exerciseToView = exerciseItemToView {
+                ExerciseItemDetailView(
+                    item: exerciseToView,
+                    profile: profile,
+                    onDismiss: {
+                        withAnimation(.easeInOut) {
+                            exerciseItemToView = nil
+                            // Възстановяваме състоянието на навигацията, ако е нужно
+                            // Тъй като DetailView по подразбиране крие навигацията, тук може да не е нужно да се пипа navBarIsHiden,
+                            // но за консистенция с Editor-а:
+                        }
+                    }
+                )
+                .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                .zIndex(20)
+            }
         }
-        .background(ThemeBackgroundView().ignoresSafeArea())
         .onAppear {
             navBarIsHiden = true
             if selectedDayID == nil, let firstDay = sortedDays.first {
@@ -105,7 +128,6 @@ struct TrainingPlanDetailView: View {
             
             Spacer()
 
-            
             Button("Back") {}.hidden()
                 .padding(.horizontal, 10).padding(.vertical, 5)
         }
@@ -116,18 +138,14 @@ struct TrainingPlanDetailView: View {
     private func daySection(for day: TrainingPlanDay, dayIndex: Int) -> some View {
         VStack(alignment: .leading, spacing: 12) {
             
-            // ПРОМЯНА: Слагаме текста в HStack със Spacer, за да го "избутаме" вляво.
             HStack {
                 Text(day.isRestDay ? "Day \(dayIndex): Rest Day" : "Day \(dayIndex)")
                     .font(.headline)
                     .foregroundColor(effectManager.currentGlobalAccentColor)
                 
-                // Този Spacer ще заеме цялото останало място и ще гарантира,
-                // че текстът остава плътно вляво.
                 Spacer()
             }
             
-            // Ако денят НЕ е за почивка, показваме стандартното съдържание с тренировки
             if !day.isRestDay {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 8) {
@@ -217,10 +235,30 @@ struct TrainingPlanDetailView: View {
     private func workoutContent(for workout: TrainingPlanWorkout) -> some View {
         VStack {
             if !workout.exercises.isEmpty {
-                let sortedExercises = workout.exercises.sorted { ($0.exercise?.name ?? "") < ($1.exercise?.name ?? "") }
+                let sortedExercises = workout.exercises.sorted {
+                    ($0.exercise?.name ?? "") < ($1.exercise?.name ?? "")
+                }
+                
                 ForEach(sortedExercises) { entry in
-                    if let exercise = entry.exercise {
-                        ExerciseCalorieRowView(exercise: exercise, duration: entry.durationMinutes, profile: profile)
+                    if entry.exercise != nil {
+                        TrainingPlanExerciseDetailRow(
+                            link: entry,
+                            profile: profile
+                        )
+                        // 👇 4. НОВО: Добавяме контекстно меню
+                        .contextMenu {
+                            if let exercise = entry.exercise {
+                                Button {
+                                    withAnimation(.easeInOut) {
+                                        exerciseItemToView = exercise
+                                        // Тук не скриваме навбара изрично, защото той вече е скрит в този View,
+                                        // но ако имате друга логика, можете да сложите navBarIsHiden = true
+                                    }
+                                } label: {
+                                    Label("View Details", systemImage: "info.circle")
+                                }
+                            }
+                        }
                     }
                 }
             } else {
@@ -233,16 +271,14 @@ struct TrainingPlanDetailView: View {
         .contentShape(Rectangle())
     }
     
-    
     @ViewBuilder
-           private var bannerAdSection: some View {
-               // Показваме банер само за free (Base) потребители
-               if SubscriptionManager.shared.subscriptionStatus == .base {
-                   BannerAdView(adsBool: $isBannerAdLoaded, bucket: .large)
-                       .frame(height: 120)
-                       .opacity(isBannerAdLoaded ? 1 : 0)
-                       .animation(.easeInOut(duration: 0.25), value: isBannerAdLoaded)
-                       .padding(.horizontal)
-               }
-           }
+    private var bannerAdSection: some View {
+        if SubscriptionManager.shared.subscriptionStatus == .base {
+            BannerAdView(adsBool: $isBannerAdLoaded, bucket: .large)
+                .frame(height: 120)
+                .opacity(isBannerAdLoaded ? 1 : 0)
+                .animation(.easeInOut(duration: 0.25), value: isBannerAdLoaded)
+                .padding(.horizontal)
+        }
+    }
 }
