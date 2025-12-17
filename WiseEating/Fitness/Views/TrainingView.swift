@@ -1018,103 +1018,105 @@ struct TrainingView: View {
     }
     
     private func processTrainingPlanAddition(mode: TrainingAddMode) {
-                guard let daysToAdd = trainingPlanDaysToAdd else { return }
-                self.trainingPlanDaysToAdd = nil
-                isSavingPlanToCalendar = true
+            guard let daysToAdd = trainingPlanDaysToAdd else { return }
+            self.trainingPlanDaysToAdd = nil
+            isSavingPlanToCalendar = true
+            
+            Task(priority: .userInitiated) {
+                let calendar = Calendar.current
+                let startDate = chosenDate
                 
-                Task(priority: .userInitiated) {
-                    let calendar = Calendar.current
-                    let startDate = chosenDate
+                for (index, planDay) in daysToAdd.enumerated() {
+                    guard let targetDate = calendar.date(byAdding: .day, value: index, to: startDate) else { continue }
                     
-                    for (index, planDay) in daysToAdd.enumerated() {
-                        guard let targetDate = calendar.date(byAdding: .day, value: index, to: startDate) else { continue }
+                    let existingTrainingsForTargetDate = await CalendarViewModel.shared.trainings(forProfile: profile, on: targetDate)
+                    
+                    for planWorkout in planDay.workouts {
+                        guard let workoutTemplate = profile.trainings.first(where: { $0.name == planWorkout.workoutName }) else { continue }
                         
-                        let existingTrainingsForTargetDate = await CalendarViewModel.shared.trainings(forProfile: profile, on: targetDate)
+                        let targetTraining = workoutTemplate.detached(for: targetDate)
+                        let existingTrainingEvent = existingTrainingsForTargetDate.first { $0.name == targetTraining.name }
                         
-                        for planWorkout in planDay.workouts {
-                            guard let workoutTemplate = profile.trainings.first(where: { $0.name == planWorkout.workoutName }) else { continue }
-                            
-                            let targetTraining = workoutTemplate.detached(for: targetDate)
-                            let existingTrainingEvent = existingTrainingsForTargetDate.first { $0.name == targetTraining.name }
-                            
-                            var finalExercises: [ExerciseItem: Double] = [:]
-                            
-                            // --- НАЧАЛО НА ПРОМЯНАТА: Подготовка за Detailed Log ---
-                            var detailedLogHelper: [ExerciseLog] = []
-                            
-                            // Ако добавяме към съществуваща (append), взимаме текущите логове
-                            if mode == .append, let existing = existingTrainingEvent, let existingLog = existing.detailedLog(using: ctx) {
-                                finalExercises = existing.exercises(using: ctx)
-                                detailedLogHelper = existingLog.logs
-                            }
-                            
-                            for entry in planWorkout.exercises {
-                                guard let exercise = entry.exercise else { continue }
-                                
-                                // 1. Добавяме/Актуализираме продължителността
-                                finalExercises[exercise, default: 0.0] += entry.durationMinutes
-                                
-                                // 2. Конвертираме TrainingPlanSet -> WorkoutSet
-                                // ✅ FIX: Сортираме по UUID string, за да съвпадне с визуализацията в TrainingPlanExerciseRowView
-                                let workoutSets: [WorkoutSet] = entry.sets
-                                    .sorted { $0.id.uuidString < $1.id.uuidString }
-                                    .map { planSet in
-                                        WorkoutSet(reps: planSet.reps, weight: planSet.weight)
-                                    }
-                                
-                                if !workoutSets.isEmpty {
-                                    // Проверяваме дали вече има лог за това упражнение (при append)
-                                    if let existingLogIndex = detailedLogHelper.firstIndex(where: { $0.exerciseID == exercise.id }) {
-                                        detailedLogHelper[existingLogIndex].sets.append(contentsOf: workoutSets)
-                                    } else {
-                                        let newLog = ExerciseLog(exerciseID: exercise.id, sets: workoutSets)
-                                        detailedLogHelper.append(newLog)
-                                    }
-                                }
-                            }
-                            // --- КРАЙ НА ПРОМЯНАТА ---
-                            
-                            if finalExercises.isEmpty {
-                                if let idToDelete = existingTrainingEvent?.calendarEventID {
-                                    _ = await CalendarViewModel.shared.deleteEvent(withIdentifier: idToDelete)
-                                }
-                                continue
-                            }
-                            
-                            targetTraining.calendarEventID = existingTrainingEvent?.calendarEventID
-                            
-                            // Създаваме payload с упражненията И детайлния лог
-                            let tempTrainingForPayload = Training(name: "", startTime: Date(), endTime: Date())
-                            let finalDetailedLog = detailedLogHelper.isEmpty ? nil : DetailedTrainingLog(logs: detailedLogHelper)
-                            
-                            tempTrainingForPayload.updateNotes(exercises: finalExercises, detailedLog: finalDetailedLog)
-                            
-                            let payload = OptimizedInvisibleCoder.encode(from: tempTrainingForPayload.notes ?? "")
-                            
-                            _ = await CalendarViewModel.shared.createOrUpdateTrainingEvent(
-                                forProfile: profile,
-                                training: targetTraining,
-                                exercisesPayload: payload
-                            )
+                        var finalExercises: [ExerciseItem: Double] = [:]
+                        
+                        // --- Подготовка за Detailed Log ---
+                        var detailedLogHelper: [ExerciseLog] = []
+                        
+                        // Ако добавяме към съществуваща (append), взимаме текущите логове
+                        if mode == .append, let existing = existingTrainingEvent, let existingLog = existing.detailedLog(using: ctx) {
+                            finalExercises = existing.exercises(using: ctx)
+                            detailedLogHelper = existingLog.logs
                         }
                         
-                        if mode == .overwrite {
-                            let workoutNamesInPlan = Set(planDay.workouts.map { $0.workoutName })
-                            let eventsToDelete = existingTrainingsForTargetDate.filter { !workoutNamesInPlan.contains($0.name) }
-                            for event in eventsToDelete {
-                                if let id = event.calendarEventID {
-                                    _ = await CalendarViewModel.shared.deleteEvent(withIdentifier: id)
+                        for entry in planWorkout.exercises {
+                            guard let exercise = entry.exercise else { continue }
+                            
+                            // 1. Добавяме/Актуализираме продължителността
+                            finalExercises[exercise, default: 0.0] += entry.durationMinutes
+                            
+                            // 2. Конвертираме TrainingPlanSet -> WorkoutSet
+                            // ⚠️ КОРЕКЦИЯ: Премахнато е сортирането по UUID (.sorted { ... }).
+                            // Сега взимаме сетовете в реда, в който са добавени в плана.
+                            let workoutSets: [WorkoutSet] = entry.sets.map { planSet in
+                                WorkoutSet(
+                                    reps: planSet.reps,
+                                    weight: planSet.weight,
+                                    isToFailure: planSet.isToFailure
+                                )
+                            }
+                            
+                            if !workoutSets.isEmpty {
+                                // Проверяваме дали вече има лог за това упражнение (при append)
+                                if let existingLogIndex = detailedLogHelper.firstIndex(where: { $0.exerciseID == exercise.id }) {
+                                    detailedLogHelper[existingLogIndex].sets.append(contentsOf: workoutSets)
+                                } else {
+                                    let newLog = ExerciseLog(exerciseID: exercise.id, sets: workoutSets)
+                                    detailedLogHelper.append(newLog)
                                 }
                             }
                         }
+                        
+                        if finalExercises.isEmpty {
+                            if let idToDelete = existingTrainingEvent?.calendarEventID {
+                                _ = await CalendarViewModel.shared.deleteEvent(withIdentifier: idToDelete)
+                            }
+                            continue
+                        }
+                        
+                        targetTraining.calendarEventID = existingTrainingEvent?.calendarEventID
+                        
+                        // Създаваме payload с упражненията И детайлния лог
+                        let tempTrainingForPayload = Training(name: "", startTime: Date(), endTime: Date())
+                        let finalDetailedLog = detailedLogHelper.isEmpty ? nil : DetailedTrainingLog(logs: detailedLogHelper)
+                        
+                        tempTrainingForPayload.updateNotes(exercises: finalExercises, detailedLog: finalDetailedLog)
+                        
+                        let payload = OptimizedInvisibleCoder.encode(from: tempTrainingForPayload.notes ?? "")
+                        
+                        _ = await CalendarViewModel.shared.createOrUpdateTrainingEvent(
+                            forProfile: profile,
+                            training: targetTraining,
+                            exercisesPayload: payload
+                        )
                     }
                     
-                    await MainActor.run {
-                        self.isSavingPlanToCalendar = false
-                        self.refreshTrigger += 1
+                    if mode == .overwrite {
+                        let workoutNamesInPlan = Set(planDay.workouts.map { $0.workoutName })
+                        let eventsToDelete = existingTrainingsForTargetDate.filter { !workoutNamesInPlan.contains($0.name) }
+                        for event in eventsToDelete {
+                            if let id = event.calendarEventID {
+                                _ = await CalendarViewModel.shared.deleteEvent(withIdentifier: id)
+                            }
+                        }
                     }
                 }
+                
+                await MainActor.run {
+                    self.isSavingPlanToCalendar = false
+                    self.refreshTrigger += 1
+                }
             }
+        }
     
     private func aiBottomPadding(for geometry: GeometryProxy) -> CGFloat {
         let size = geometry.size

@@ -104,47 +104,51 @@ struct TrainingPlanEditorView: View {
         self.onDismissSearch = onDismissSearch
 
         if let plan = planToEdit {
-            // 1. ЗАРЕЖДАНЕ НА СЪЩЕСТВУВАЩ ПЛАН
-            _name = State(initialValue: plan.name)
-            
-            // Дълбоко копиране: Plan -> Days -> Workouts -> Exercises -> Sets
-            _days = State(initialValue: plan.days.map { day in
-                let newDay = TrainingPlanDay(dayIndex: day.dayIndex, isRestDay: day.isRestDay)
-                newDay.id = day.id // Запазваме ID за синхронизация
-                
-                newDay.workouts = day.workouts.map { workout in
-                    let newWorkout = TrainingPlanWorkout(workoutName: workout.workoutName)
-                    newWorkout.linkedWorkoutID = workout.linkedWorkoutID
-                    newWorkout.day = newDay
+                    // 1. ЗАРЕЖДАНЕ НА СЪЩЕСТВУВАЩ ПЛАН
+                    _name = State(initialValue: plan.name)
                     
-                    let validExercises = workout.exercises.compactMap { link -> TrainingPlanExercise? in
-                        guard let ex = link.exercise else { return nil }
+                    // Дълбоко копиране: Plan -> Days -> Workouts -> Exercises -> Sets
+                    _days = State(initialValue: plan.days.map { day in
+                        let newDay = TrainingPlanDay(dayIndex: day.dayIndex, isRestDay: day.isRestDay)
+                        newDay.id = day.id // Запазваме ID за синхронизация
                         
-                        let newExerciseLink = TrainingPlanExercise(
-                            exercise: ex,
-                            durationMinutes: link.durationMinutes,
-                            workout: newWorkout
-                        )
-                        
-                        // ✅ FIX: Копираме сетовете и изрично задаваме родителя
-                        newExerciseLink.sets = link.sets.map { set in
-                            let newSet = TrainingPlanSet(reps: set.reps, weight: set.weight)
-                            newSet.exercise = newExerciseLink // Свързване с упражнението
-                            return newSet
+                        newDay.workouts = day.workouts.map { workout in
+                            let newWorkout = TrainingPlanWorkout(workoutName: workout.workoutName)
+                            newWorkout.linkedWorkoutID = workout.linkedWorkoutID
+                            newWorkout.day = newDay
+                            
+                            let validExercises = workout.exercises.compactMap { link -> TrainingPlanExercise? in
+                                guard let ex = link.exercise else { return nil }
+                                
+                                let newExerciseLink = TrainingPlanExercise(
+                                    exercise: ex,
+                                    durationMinutes: link.durationMinutes,
+                                    workout: newWorkout
+                                )
+                                
+                                // ✅ FIX: Копираме isToFailure при зареждане
+                                newExerciseLink.sets = link.sets.map { set in
+                                    let newSet = TrainingPlanSet(
+                                        reps: set.reps,
+                                        weight: set.weight,
+                                        isToFailure: set.isToFailure // <--- ВАЖНО
+                                    )
+                                    newSet.exercise = newExerciseLink
+                                    return newSet
+                                }
+                                
+                                return newExerciseLink
+                            }
+                            
+                            newWorkout.exercises = validExercises
+                            return newWorkout
                         }
-                        
-                        return newExerciseLink
-                    }
+                        return newDay
+                    })
                     
-                    newWorkout.exercises = validExercises
-                    return newWorkout
-                }
-                return newDay
-            })
-            
-            _minAgeMonthsTxt = State(initialValue: plan.minAgeMonths > 0 ? String(plan.minAgeMonths) : "")
-            
-        } else if let draft = planDraft {
+                    _minAgeMonthsTxt = State(initialValue: plan.minAgeMonths > 0 ? String(plan.minAgeMonths) : "")
+                    
+                } else if let draft = planDraft {
             // 2. ЗАРЕЖДАНЕ ОТ DRAFT (AI)
             _name = State(initialValue: draft.name)
             _minAgeMonthsTxt = State(initialValue: "")
@@ -1033,71 +1037,84 @@ struct TrainingPlanEditorView: View {
     }
     
     private func createOrUpdateWorkouts(for plan: TrainingPlan) async {
-        for day in days {
-            for workout in day.workouts {
-                guard !workout.exercises.isEmpty else {
-                    // ... твоята логика за чистене на oldWorkoutItem ...
-                    if let oldWorkoutID = workout.linkedWorkoutID {
-                        if let oldWorkoutItem = try? modelContext.fetch(
-                            FetchDescriptor<ExerciseItem>(predicate: #Predicate { $0.id == oldWorkoutID })
-                        ).first {
-                            modelContext.delete(oldWorkoutItem)
+            for day in days {
+                for workout in day.workouts {
+                    guard !workout.exercises.isEmpty else {
+                        if let oldWorkoutID = workout.linkedWorkoutID {
+                            if let oldWorkoutItem = try? modelContext.fetch(
+                                FetchDescriptor<ExerciseItem>(predicate: #Predicate { $0.id == oldWorkoutID })
+                            ).first {
+                                modelContext.delete(oldWorkoutItem)
+                            }
+                            workout.linkedWorkoutID = nil
                         }
-                        workout.linkedWorkoutID = nil
+                        continue
                     }
-                    continue
+                    
+                    let workoutName = "\(plan.name) - Day \(day.dayIndex) - \(workout.workoutName)"
+                    let workoutToUpdate: ExerciseItem
+                    
+                    if let existingID = workout.linkedWorkoutID,
+                       let found = try? modelContext.fetch(
+                            FetchDescriptor<ExerciseItem>(predicate: #Predicate { $0.id == existingID })
+                       ).first {
+                        workoutToUpdate = found
+                    } else {
+                        let newID = nextExerciseId()
+                        workoutToUpdate = ExerciseItem(id: newID, name: workoutName, muscleGroups: [], isWorkout: true)
+                        modelContext.insert(workoutToUpdate)
+                        workout.linkedWorkoutID = newID
+                    }
+                    
+                    workoutToUpdate.name = workoutName
+                    workoutToUpdate.isWorkout = true
+                    
+                    // 👉 Вземаме само валидните TrainingPlanExercise
+                    let validLinks = workout.exercises.filter { $0.exercise != nil }
+                    
+                    // Изчистваме старите ExerciseLink от Workout-а в ExerciseItem
+                    workoutToUpdate.exercises?.forEach { modelContext.delete($0) }
+                    
+                    // Създаваме нови ExerciseLink само за валидните упражнения (за ExerciseItem)
+                    workoutToUpdate.exercises = validLinks.map { exerciseLink in
+                        ExerciseLink(
+                            exercise: exerciseLink.exercise!,
+                            durationMinutes: exerciseLink.durationMinutes,
+                            owner: workoutToUpdate
+                        )
+                    }
+                    
+                    // Запазваме сетовете в TrainingPlan структурата
+                    // Първо трием старите сетове за безопасност (SwiftData понякога прави дубликати при update на релации)
+                    // Тук обаче работим директно върху `workout` от state-а, който ще бъде записан чрез контекста.
+                    // Всъщност `validLinks` са обектите от нашия state `days`. Те трябва да бъдат правилно свързани.
+                    // В `days` масива, обектите са вече в контекста (ако са insert-нати).
+                    
+                    // Тъй като `days` е @State обект, който държи PersistentModels (или свързани с тях),
+                    // просто трябва да сме сигурни, че `sets` са правилни.
+                    
+                    // Заб: В текущата логика на savePlan(), `workout` е част от `days`.
+                    // Самите `sets` вече са в паметта на `workout.exercises`.
+                    // Тази функция главно обновява свързания `ExerciseItem` (за календара/търсачката).
+                    // Но ако искаш да си сигурен, че сетовете са 1:1, логиката е в `syncWorkouts`.
+                    
+                    let aggregatedMuscles = Array(Set(validLinks.flatMap { $0.exercise?.muscleGroups ?? [] }))
+                    let aggregatedSports  = Array(Set(validLinks.flatMap { $0.exercise?.sports ?? [] }))
+                    
+                    workoutToUpdate.muscleGroups = aggregatedMuscles
+                    workoutToUpdate.sports       = aggregatedSports
+                    
+                    let totalDuration = validLinks.reduce(0) { $0 + $1.durationMinutes }
+                    workoutToUpdate.durationMinutes = Int(totalDuration)
+                    
+                    let metValues   = validLinks.compactMap { $0.exercise?.metValue }
+                    workoutToUpdate.metValue = metValues.isEmpty ? nil : metValues.reduce(0, +) / Double(metValues.count)
+                    
+                    let requiredAge = validLinks.compactMap { $0.exercise?.minimalAgeMonths }.max() ?? 0
+                    workoutToUpdate.minimalAgeMonths = requiredAge
                 }
-                
-                let workoutName = "\(plan.name) - Day \(day.dayIndex) - \(workout.workoutName)"
-                let workoutToUpdate: ExerciseItem
-                
-                if let existingID = workout.linkedWorkoutID,
-                   let found = try? modelContext.fetch(
-                        FetchDescriptor<ExerciseItem>(predicate: #Predicate { $0.id == existingID })
-                   ).first {
-                    workoutToUpdate = found
-                } else {
-                    let newID = nextExerciseId()
-                    workoutToUpdate = ExerciseItem(id: newID, name: workoutName, muscleGroups: [], isWorkout: true)
-                    modelContext.insert(workoutToUpdate)
-                    workout.linkedWorkoutID = newID
-                }
-                
-                workoutToUpdate.name = workoutName
-                workoutToUpdate.isWorkout = true
-                
-                // 👉 Вземаме само валидните TrainingPlanExercise, които имат exercise
-                let validLinks = workout.exercises.filter { $0.exercise != nil }
-                
-                // Изчистваме старите ExerciseLink от Workout-а в ExerciseItem
-                workoutToUpdate.exercises?.forEach { modelContext.delete($0) }
-                
-                // Създаваме нови ExerciseLink само за валидните упражнения
-                workoutToUpdate.exercises = validLinks.map { exerciseLink in
-                    ExerciseLink(
-                        exercise: exerciseLink.exercise!,
-                        durationMinutes: exerciseLink.durationMinutes,
-                        owner: workoutToUpdate
-                    )
-                }
-                
-                let aggregatedMuscles = Array(Set(validLinks.flatMap { $0.exercise?.muscleGroups ?? [] }))
-                let aggregatedSports  = Array(Set(validLinks.flatMap { $0.exercise?.sports ?? [] }))
-                
-                workoutToUpdate.muscleGroups = aggregatedMuscles
-                workoutToUpdate.sports       = aggregatedSports
-                
-                let totalDuration = validLinks.reduce(0) { $0 + $1.durationMinutes }
-                workoutToUpdate.durationMinutes = Int(totalDuration)
-                
-                let metValues   = validLinks.compactMap { $0.exercise?.metValue }
-                workoutToUpdate.metValue = metValues.isEmpty ? nil : metValues.reduce(0, +) / Double(metValues.count)
-                
-                let requiredAge = validLinks.compactMap { $0.exercise?.minimalAgeMonths }.max() ?? 0
-                workoutToUpdate.minimalAgeMonths = requiredAge
             }
         }
-    }
 
     
     private func nextExerciseId() -> Int {
@@ -1145,41 +1162,45 @@ struct TrainingPlanEditorView: View {
     }
     
     private func syncWorkouts(of persistedDay: TrainingPlanDay, from stateDay: TrainingPlanDay) {
-        // 1. Групираме за бърз достъп
-        let stateWorkoutsByName = Dictionary(grouping: stateDay.workouts, by: { $0.workoutName }).compactMapValues { $0.first }
-        
-        // 2. Изтриваме премахнатите тренировки
-        for workout in persistedDay.workouts where stateWorkoutsByName[workout.workoutName] == nil {
-            modelContext.delete(workout)
-        }
-        
-        // 3. Синхронизираме
-        for (name, stateWorkout) in stateWorkoutsByName {
-            let persistedWorkout = getOrCreateWorkout(for: name, in: persistedDay)
-            persistedWorkout.linkedWorkoutID = stateWorkout.linkedWorkoutID
+            // 1. Групираме за бърз достъп
+            let stateWorkoutsByName = Dictionary(grouping: stateDay.workouts, by: { $0.workoutName }).compactMapValues { $0.first }
             
-            // 4. Изтриваме старите упражнения (и каскадно техните сетове), за да запишем чисто
-            persistedWorkout.exercises.forEach { modelContext.delete($0) }
+            // 2. Изтриваме премахнатите тренировки
+            for workout in persistedDay.workouts where stateWorkoutsByName[workout.workoutName] == nil {
+                modelContext.delete(workout)
+            }
             
-            // 5. Създаваме новите упражнения и сетове
-            persistedWorkout.exercises = stateWorkout.exercises.map { entry in
-                let newEntry = TrainingPlanExercise(
-                    exercise: entry.exercise!,
-                    durationMinutes: entry.durationMinutes,
-                    workout: persistedWorkout
-                )
+            // 3. Синхронизираме
+            for (name, stateWorkout) in stateWorkoutsByName {
+                let persistedWorkout = getOrCreateWorkout(for: name, in: persistedDay)
+                persistedWorkout.linkedWorkoutID = stateWorkout.linkedWorkoutID
                 
-                // ✅ FIX: Изрично създаваме сетовете и задаваме inverse relationship
-                newEntry.sets = entry.sets.map { set in
-                    let newSet = TrainingPlanSet(reps: set.reps, weight: set.weight)
-                    newSet.exercise = newEntry // Важно за SwiftData persistence!
-                    return newSet
+                // 4. Изтриваме старите упражнения (и каскадно техните сетове), за да запишем чисто
+                persistedWorkout.exercises.forEach { modelContext.delete($0) }
+                
+                // 5. Създаваме новите упражнения и сетове
+                persistedWorkout.exercises = stateWorkout.exercises.map { entry in
+                    let newEntry = TrainingPlanExercise(
+                        exercise: entry.exercise!,
+                        durationMinutes: entry.durationMinutes,
+                        workout: persistedWorkout
+                    )
+                    
+                    // ✅ FIX: Изрично създаваме сетовете и прехвърляме isToFailure
+                    newEntry.sets = entry.sets.map { set in
+                        let newSet = TrainingPlanSet(
+                            reps: set.reps,
+                            weight: set.weight,
+                            isToFailure: set.isToFailure // <--- ВАЖНО
+                        )
+                        newSet.exercise = newEntry // Важно за SwiftData persistence!
+                        return newSet
+                    }
+                    
+                    return newEntry
                 }
-                
-                return newEntry
             }
         }
-    }
     
     private func addDay() {
         withAnimation {
