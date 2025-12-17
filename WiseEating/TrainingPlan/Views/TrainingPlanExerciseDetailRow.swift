@@ -108,7 +108,7 @@ struct TrainingPlanExerciseDetailRow: View {
                                 
                                 Spacer()
                                 
-                                // REPS OR FAILURE TEXT
+                                // REPS OR FAILURE OR TIME TEXT
                                 if set.isToFailure {
                                     HStack(spacing: 4) {
                                         Image(systemName: "exclamationmark.triangle.fill")
@@ -118,12 +118,13 @@ struct TrainingPlanExerciseDetailRow: View {
                                     }
                                     .foregroundStyle(.orange)
                                 } else {
-                                    if let reps = set.reps {
-                                        Text("\(reps) reps")
+                                    if let val = set.reps {
+                                        // ✅ ПРОМЯНА: Проверка за isTimeBased
+                                        Text("\(val) \(set.isTimeBased ? "sec" : "reps")")
                                             .font(.subheadline)
                                             .foregroundStyle(effectManager.currentGlobalAccentColor)
                                     } else {
-                                        Text("- reps")
+                                        Text("-")
                                             .font(.caption)
                                             .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.5))
                                     }

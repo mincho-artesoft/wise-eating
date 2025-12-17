@@ -6,14 +6,41 @@ public struct WorkoutSet: Codable, Hashable, Identifiable {
     public var reps: Int?
     public var weight: Double?
     
-    // ✅ НОВО: Флаг за отказ
+    // Флаг за отказ
     public var isToFailure: Bool = false
     
-    public init(id: UUID = UUID(), reps: Int? = nil, weight: Double? = nil, isToFailure: Bool = false) {
+    // ✅ НОВО: Флаг за време
+    public var isTimeBased: Bool = false
+    
+    public init(id: UUID = UUID(), reps: Int? = nil, weight: Double? = nil, isToFailure: Bool = false, isTimeBased: Bool = false) {
         self.id = id
         self.reps = reps
         self.weight = weight
         self.isToFailure = isToFailure
+        self.isTimeBased = isTimeBased
+    }
+    
+    // Трябва да обновим и CodingKeys, ако искаме да се запазва правилно в JSON (в Training.notes)
+    enum CodingKeys: String, CodingKey {
+        case id, reps, weight, isToFailure, isTimeBased
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(UUID.self, forKey: .id)
+        reps = try container.decodeIfPresent(Int.self, forKey: .reps)
+        weight = try container.decodeIfPresent(Double.self, forKey: .weight)
+        isToFailure = try container.decodeIfPresent(Bool.self, forKey: .isToFailure) ?? false
+        isTimeBased = try container.decodeIfPresent(Bool.self, forKey: .isTimeBased) ?? false
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(reps, forKey: .reps)
+        try container.encode(weight, forKey: .weight)
+        try container.encode(isToFailure, forKey: .isToFailure)
+        try container.encode(isTimeBased, forKey: .isTimeBased)
     }
 }
 
