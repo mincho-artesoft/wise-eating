@@ -13,13 +13,44 @@ class SubscriptionManager: ObservableObject {
     @Published var isPlanBannerDismissed: Bool = false
     // --- КРАЙ НА НОВОТО ---
 
-    var subscriptionStatus: SubscriptionStatus {
-        get { SubscriptionStatus(rawValue: subscriptionStatusRaw) ?? .base }
-        set {
-            subscriptionStatusRaw = newValue.rawValue
-            objectWillChange.send()
+    static let promoEndDate: Date = {
+            var comps = DateComponents()
+            comps.year = 2026
+            comps.month = 1
+            comps.day = 17
+            comps.hour = 23
+            comps.minute = 59
+            return Calendar.current.date(from: comps) ?? Date.distantFuture
+        }()
+        
+        // Помощна променлива
+        var isPromoActive: Bool {
+            return Date() < Self.promoEndDate
         }
-    }
+
+        // ✅ 2. ПРОМЕНИ GETTER-А НА subscriptionStatus
+        var subscriptionStatus: SubscriptionStatus {
+            get {
+                // Взимаме реалния статус от базата/покупките
+                let realStatus = SubscriptionStatus(rawValue: subscriptionStatusRaw) ?? .base
+                
+                // Ако потребителят вече си е платил за Advanced или Premium, не го "понижаваме" до Remove Ads.
+                if realStatus == .advance || realStatus == .premium {
+                    return realStatus
+                }
+                
+                // Ако е на Base план, но промоцията е активна -> даваме му Remove Ads безплатно
+                if isPromoActive {
+                    return .removeAds
+                }
+                
+                return realStatus
+            }
+            set {
+                subscriptionStatusRaw = newValue.rawValue
+                objectWillChange.send()
+            }
+        }
 
     @Published var products: [Product] = []
     @Published var purchasedProductIDs: Set<String> = [] {

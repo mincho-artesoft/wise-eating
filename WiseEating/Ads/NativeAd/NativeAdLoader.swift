@@ -11,7 +11,16 @@ final class NativeAdLoader: NSObject,
     @Published private(set) var nativeAd: NativeAd?
 
     private var adLoader: AdLoader?
-    private let adUnitID = "ca-app-pub-3759868960530173/3629337942"
+    // MARK: - Config
+    private var adUnitID: String {
+        #if DEBUG
+        // Официален Google Test ID за Native Advanced
+        return "ca-app-pub-3940256099942544/3986624511"
+        #else
+        // Твоят реален ID
+        return "ca-app-pub-3759868960530173/3629337942"
+        #endif
+    }
 
     func loadAd() {
         let options: [GADAdLoaderOptions] = [NativeAdViewAdOptions()]

@@ -14,8 +14,17 @@ final class RewardedInterstitialAdManager: NSObject, FullScreenContentDelegate {
     private var rewardedInterstitial: RewardedInterstitialAd?
     private var isLoading = false
 
-    private let adUnitID = "ca-app-pub-3759868960530173/8933635514"
-
+    // MARK: - Config
+        private var adUnitID: String {
+            #if DEBUG
+            // Официален Google Test ID за Rewarded Interstitial
+            return "ca-app-pub-3940256099942544/6978759866"
+            #else
+            // Твоят реален ID
+            return "ca-app-pub-3759868960530173/8933635514"
+            #endif
+        }
+    
     // MARK: - Load
 
     func loadAd() async {
