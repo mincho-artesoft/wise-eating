@@ -22,8 +22,15 @@ class AppOpenAdManager: NSObject, FullScreenContentDelegate {
     }
 
     // MARK: - Ad Unit ID
-    private let adUnitID = "ca-app-pub-3759868960530173/2316256277"
-
+    private var adUnitID: String {
+          #if DEBUG
+          // Официален Google Test ID за App Open Ads
+          return "ca-app-pub-3940256099942544/5575463023"
+          #else
+          // Твоят реален ID
+          return "ca-app-pub-3759868960530173/2316256277"
+          #endif
+      }
     // MARK: - Load
 
     func loadAd() async {

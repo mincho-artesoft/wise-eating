@@ -13,8 +13,16 @@ final class RewardedAdManager: NSObject, FullScreenContentDelegate {
     private var rewardedAd: RewardedAd?
     private var isLoading = false
 
-    private let adUnitID = "ca-app-pub-3759868960530173/7620553844"
-
+    // MARK: - Config
+        private var adUnitID: String {
+            #if DEBUG
+            // Официален Google Test ID за Rewarded Ads
+            return "ca-app-pub-3940256099942544/1712485313"
+            #else
+            // Твоят реален ID
+            return "ca-app-pub-3759868960530173/7620553844"
+            #endif
+        }
     // MARK: - Load
 
     func loadAd() async {
