@@ -111,132 +111,147 @@ struct ExerciseLogEntryView: View {
         let setIndex = exerciseLog.sets.firstIndex(where: { $0.id == set.id }) ?? 0
         let pickerColorScheme: ColorScheme = effectManager.isLightRowTextColor ? .dark : .light
 
-        return HStack(alignment: .center, spacing: 12) {
-            // MARK: - Set label
-            Text("Set \(setIndex + 1)")
-                .font(.subheadline)
-                .foregroundStyle(effectManager.currentGlobalAccentColor)
-                .frame(width: 50, height: 80, alignment: .leading)
+        return VStack(spacing: 6) {
+            // 🔹 ПЪРВИ РЕД: всичко както досега (Set + Reps/Failure + Weight + Delete)
+            HStack(alignment: .center, spacing: 12) {
+                // MARK: - Set label
+                Text("Set \(setIndex + 1)")
+                    .font(.subheadline)
+                    .foregroundStyle(effectManager.currentGlobalAccentColor)
+                    .frame(width: 50, height: 80, alignment: .leading)
 
-            // MARK: - Reps OR Failure
-            VStack(spacing: 4) {
-                // Header + Toggle
-                HStack(spacing: 4) {
+                // MARK: - Reps OR Failure
+                VStack(spacing: 4) {
+                    // Само заглавие
                     Text("Reps")
                         .font(.caption)
-                    
-                    // ✅ TOGGLE BUTTON ЗА FAILURE
-                    Button(action: {
-                        withAnimation(.easeInOut(duration: 0.2)) {
-                            setBinding.wrappedValue.isToFailure.toggle()
-                            // Ако се включи Failure, зануляваме повторенията
-                            if setBinding.wrappedValue.isToFailure {
-                                setBinding.wrappedValue.reps = nil
+                        .foregroundStyle(effectManager.currentGlobalAccentColor)
+                        .frame(width: 80, alignment: .center)
+
+                    if set.isToFailure {
+                        // "To Failure" вместо picker
+                        VStack {
+                            Spacer()
+                            Text("To Failure")
+                                .font(.system(size: 14, weight: .bold))
+                                .foregroundColor(.orange)
+                                .multilineTextAlignment(.center)
+                                .padding(4)
+                                .background(Color.orange.opacity(0.1))
+                                .cornerRadius(6)
+                            Spacer()
+                        }
+                        .frame(width: 80, height: 80)
+                        .offset(y: -7)
+                    } else {
+                        Picker("Reps", selection: repsBinding(for: setBinding)) {
+                            ForEach(repsRange, id: \.self) { rep in
+                                Text("\(rep)").tag(rep)
                             }
                         }
-                    }) {
-                        Image(systemName: set.isToFailure ? "exclamationmark.triangle.fill" : "circle")
-                            .font(.caption)
-                            .foregroundColor(set.isToFailure ? .orange : effectManager.currentGlobalAccentColor.opacity(0.5))
+                        .pickerStyle(.wheel)
+                        .frame(width: 80, height: 80)
+                        .clipped()
+                        .tint(effectManager.currentGlobalAccentColor)
+                        .environment(\.colorScheme, pickerColorScheme)
+                        .offset(y: -7)
                     }
-                    .buttonStyle(.plain)
                 }
-                .foregroundStyle(effectManager.currentGlobalAccentColor)
-                .frame(width: 80, alignment: .center)
 
-                if set.isToFailure {
-                    // ✅ TEKST "TO FAILURE" ВМЕСТО PICKER
-                    VStack {
-                        Spacer()
-                        Text("To Failure")
-                            .font(.system(size: 14, weight: .bold))
-                            .foregroundColor(.orange)
-                            .multilineTextAlignment(.center)
-                            .padding(4)
-                            .background(Color.orange.opacity(0.1))
-                            .cornerRadius(6)
-                        Spacer()
+                // MARK: - Weight колонка
+                VStack(spacing: 4) {
+                    HStack(spacing: 2) {
+                        Text("Weight")
+                        Text(weightUnit)
                     }
-                    .frame(width: 80, height: 80)
-                    .offset(y: -7)
-                } else {
-                    // ✅ NORMAL PICKER
-                    Picker("Reps", selection: repsBinding(for: setBinding)) {
-                        ForEach(repsRange, id: \.self) { rep in
-                            Text("\(rep)").tag(rep)
+                    .font(.caption)
+                    .foregroundStyle(effectManager.currentGlobalAccentColor)
+                    .frame(width: 158, alignment: .center)
+
+                    HStack(spacing: 0) {
+                        Picker("Weight Whole", selection: weightWholeBinding(for: setBinding)) {
+                            ForEach(weightWholeRange, id: \.self) { value in
+                                Text("\(value)").tag(value)
+                            }
                         }
+                        .pickerStyle(.wheel)
+                        .frame(width: 80, height: 80)
+                        .clipped()
+
+                        Text(decimalSeparator)
+                            .font(.title3.weight(.bold))
+                            .foregroundStyle(effectManager.currentGlobalAccentColor)
+                            .frame(width: 18, alignment: .center)
+
+                        Picker("Weight Decimal", selection: weightDecimalBinding(for: setBinding)) {
+                            if isImperial {
+                                ForEach(weightDecimalRangeImperial, id: \.self) { value in
+                                    Text(String(format: "%02d", value)).tag(value)
+                                }
+                            } else {
+                                ForEach(weightDecimalRange, id: \.self) { value in
+                                    Text(String(format: "%02d", value)).tag(value)
+                                }
+                            }
+                        }
+                        .pickerStyle(.wheel)
+                        .frame(width: 60, height: 80)
+                        .clipped()
                     }
-                    .pickerStyle(.wheel)
-                    .frame(width: 80, height: 80)
-                    .clipped()
+                    .offset(y: -7)
                     .tint(effectManager.currentGlobalAccentColor)
                     .environment(\.colorScheme, pickerColorScheme)
-                    .offset(y: -7)
                 }
-            }
 
-            // MARK: - Weight колонка
-            VStack(spacing: 4) {
-                HStack(spacing: 2) {
-                    Text("Weight")
-                    Text(weightUnit)
-                }
-                .font(.caption)
-                .foregroundStyle(effectManager.currentGlobalAccentColor)
-                .frame(width: 158, alignment: .center)
+                Spacer(minLength: 0)
 
-                HStack(spacing: 0) {
-                    Picker("Weight Whole", selection: weightWholeBinding(for: setBinding)) {
-                        ForEach(weightWholeRange, id: \.self) { value in
-                            Text("\(value)").tag(value)
-                        }
+                // MARK: - Delete бутон
+                Button(action: {
+                    withAnimation {
+                        exerciseLog.sets.removeAll { $0.id == set.id }
                     }
-                    .pickerStyle(.wheel)
-                    .frame(width: 80, height: 80)
-                    .clipped()
+                }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.5))
+                }
+                .buttonStyle(.plain)
+                .padding(.top, 8)
+            }
 
-                    Text(decimalSeparator)
-                        .font(.title3.weight(.bold))
-                        .foregroundStyle(effectManager.currentGlobalAccentColor)
-                        .frame(width: 18, alignment: .center)
-
-                    Picker("Weight Decimal", selection: weightDecimalBinding(for: setBinding)) {
-                        if isImperial {
-                            ForEach(weightDecimalRangeImperial, id: \.self) { value in
-                                Text(String(format: "%02d", value)).tag(value)
-                            }
-                        } else {
-                            ForEach(weightDecimalRange, id: \.self) { value in
-                                Text(String(format: "%02d", value)).tag(value)
+            // 🔹 ВТОРИ РЕД: голям бутон "To Failure" под целия ред
+            HStack {
+                Text("To Failure")
+                    .font(.caption)
+                    .foregroundStyle(effectManager.currentGlobalAccentColor)
+                
+                Spacer()
+                
+                Toggle(
+                    "",
+                    isOn: Binding(
+                        get: { setBinding.wrappedValue.isToFailure },
+                        set: { newValue in
+                            withAnimation(.easeInOut(duration: 0.2)) {
+                                setBinding.wrappedValue.isToFailure = newValue
+                                if newValue {
+                                    // при включване чистим повторенията
+                                    setBinding.wrappedValue.reps = nil
+                                }
                             }
                         }
-                    }
-                    .pickerStyle(.wheel)
-                    .frame(width: 60, height: 80)
-                    .clipped()
-                }
-                .offset(y: -7)
-                .tint(effectManager.currentGlobalAccentColor)
-                .environment(\.colorScheme, pickerColorScheme)
+                    )
+                )
+                .labelsHidden()
+                .environment(\.colorScheme, effectManager.isLightRowTextColor ? .dark : .light)
             }
+            .padding(.vertical, 8)
 
-            Spacer(minLength: 0)
-
-            // MARK: - Delete бутон
-            Button(action: {
-                withAnimation {
-                    exerciseLog.sets.removeAll { $0.id == set.id }
-                }
-            }) {
-                Image(systemName: "xmark.circle.fill")
-                    .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.5))
-            }
-            .buttonStyle(.plain)
-            .padding(.top, 8)
         }
         .padding(6)
         .glassCardStyle(cornerRadius: 10)
     }
+
+
 
     private func repsBinding(for setBinding: Binding<WorkoutSet>) -> Binding<Int> {
         Binding<Int>(
