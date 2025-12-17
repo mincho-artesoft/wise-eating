@@ -8,7 +8,8 @@ struct RootView: View {
     @State private var adLoopTask: Task<Void, Never>? = nil
     @State private var adRotationIndex: Int = 0
     @State private var nextAdRunDate: Date = Date().addingTimeInterval(70) // Първоначално след 70 сек
-    
+    @AppStorage("hasSeenPromoMessage_Jan17") private var hasSeenPromoMessage: Bool = false
+    @State private var showPromoAlert: Bool = false
     @Environment(\.safeAreaInsets) private var safeAreaInsets
     private var headerTopPadding: CGFloat { safeAreaInsets.top }
     @State private var hasUnreadBadgeNotifications: Bool = false
@@ -133,20 +134,30 @@ struct RootView: View {
                 
             case .granted:
                 if profiles.isEmpty {
+                    // 🔹 СЦЕНАРИЙ 1: НОВ ПОТРЕБИТЕЛ (Няма профил)
                     ProfileWizardView(isInit: true, onDismiss: { newlyCreatedProfile in
                         if let profile = newlyCreatedProfile {
                             self.selectedProfile = profile
+                            
+                            // Тук е моментът! Потребителят току-що създаде профил.
+                            // 1. Показваме Subscription екрана (стандартната логика)
+                            showInitialSubscriptionIfNeeded()
+                            
+                            // 2. ✅ Показваме съобщението за подаръка
+                            checkPromoMessage()
                         }
-                        // 👇 След приключване на първоначалния wizard – отваряме Subscriptions (Remove Ads)
-                        showInitialSubscriptionIfNeeded()
                     })
                     .transition(.move(edge: .bottom).combined(with: .opacity))
                 } else {
+                    // 🔹 СЦЕНАРИЙ 2: СЪЩЕСТВУВАЩ ПОТРЕБИТЕЛ (Има профил)
                     rootViewHierarchy
                         .onAppear {
                             setup()
-                            // 👇 Ако wizard не се е отворил (има профили), пак показваме началния Subscription екран
+                            // Показваме стандартния абонаментен екран (ако не е видян)
                             showInitialSubscriptionIfNeeded()
+                            
+                            // ✅ Показваме съобщението за подаръка (ако не е видяно)
+                            checkPromoMessage()
                         }
                 }
             case .calendarDenied:
@@ -154,6 +165,11 @@ struct RootView: View {
                 
                 // ПРОМЯНА 2: Случаят .notificationsDenied е премахнат, защото вече не блокираме.
             }
+        }
+        .alert("🎁 Holiday Gift!", isPresented: $showPromoAlert) {
+            Button("Awesome, thanks!", role: .cancel) { }
+        } message: {
+            Text("Enjoy an ad-free experience as a gift from us until January 17th! Happy Holidays!")
         }
         .onReceive(NotificationCenter.default.publisher(for: .snoozeAds)) { _ in
             print("⏳ Ad Snoozed! Adding 3 minutes to the timer.")
@@ -338,6 +354,19 @@ struct RootView: View {
         let unread = await NotificationManager.shared.getUnreadBadgeNotifications()
         if self.hasUnreadBadgeNotifications != !unread.isEmpty {
             self.hasUnreadBadgeNotifications = !unread.isEmpty
+        }
+    }
+    
+    private func checkPromoMessage() {
+        // Проверяваме дали промоцията е активна И дали вече не сме показали съобщението
+        if SubscriptionManager.shared.isPromoActive && !hasSeenPromoMessage {
+            
+            // Малко закъснение (1.5 - 2 секунди), за да не изскочи веднага,
+            // докато UI-то още се намества след wizard-а.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                showPromoAlert = true
+                hasSeenPromoMessage = true
+            }
         }
     }
     
@@ -1289,45 +1318,45 @@ struct RootView: View {
     }
     
     private func startRecurringAdLoop() {
-            guard adLoopTask == nil else { return }
+        guard adLoopTask == nil else { return }
+        
+        // Инициализираме времето за първата реклама (70 секунди от сега)
+        nextAdRunDate = Date().addingTimeInterval(70)
+        
+        adLoopTask = Task.detached(priority: .background) {
+            print("⏱️ [Ad Loop] Стартиране на интелигентния цикъл за реклами.")
             
-            // Инициализираме времето за първата реклама (70 секунди от сега)
-            nextAdRunDate = Date().addingTimeInterval(70)
-            
-            adLoopTask = Task.detached(priority: .background) {
-                print("⏱️ [Ad Loop] Стартиране на интелигентния цикъл за реклами.")
+            while !Task.isCancelled {
+                // Проверяваме на всеки 5 секунди дали е дошло времето
+                try? await Task.sleep(nanoseconds: 5 * 1_000_000_000)
                 
-                while !Task.isCancelled {
-                    // Проверяваме на всеки 5 секунди дали е дошло времето
-                    try? await Task.sleep(nanoseconds: 5 * 1_000_000_000)
+                let now = Date()
+                
+                // Взимаме целевата дата
+                let targetDate = await self.getNextAdRunDate()
+                
+                // --- НОВО: Изчисляваме и логваме оставащото време ---
+                let remainingSeconds = targetDate.timeIntervalSince(now)
+                
+                if remainingSeconds > 0 {
+                    print("⏳ [Ad Loop] Оставащо време до следващата реклама: \(Int(remainingSeconds)) сек.")
+                } else {
+                    print("⏳ [Ad Loop] Времето настъпи (или е преминало с \(abs(Int(remainingSeconds))) сек). Започвам показване...")
+                }
+                // ----------------------------------------------------
+                
+                // Правим проверката
+                if now >= targetDate {
                     
-                    let now = Date()
-                    
-                    // Взимаме целевата дата
-                    let targetDate = await self.getNextAdRunDate()
-                    
-                    // --- НОВО: Изчисляваме и логваме оставащото време ---
-                    let remainingSeconds = targetDate.timeIntervalSince(now)
-                    
-                    if remainingSeconds > 0 {
-                        print("⏳ [Ad Loop] Оставащо време до следващата реклама: \(Int(remainingSeconds)) сек.")
-                    } else {
-                        print("⏳ [Ad Loop] Времето настъпи (или е преминало с \(abs(Int(remainingSeconds))) сек). Започвам показване...")
-                    }
-                    // ----------------------------------------------------
-                    
-                    // Правим проверката
-                    if now >= targetDate {
-                        
-                        await MainActor.run {
-                            tryShowAd()
-                            // След опит за реклама, насрочваме следващата след 10 минути
-                            self.nextAdRunDate = Date().addingTimeInterval(10 * 60)
-                        }
+                    await MainActor.run {
+                        tryShowAd()
+                        // След опит за реклама, насрочваме следващата след 10 минути
+                        self.nextAdRunDate = Date().addingTimeInterval(10 * 60)
                     }
                 }
             }
         }
+    }
     
     // Помощна функция за безопасно четене на State променливата от background task-а
     @MainActor
@@ -1349,63 +1378,23 @@ struct RootView: View {
             return
         }
         
-        print("🎬 [Ad Loop] Опит за показване (Индекс: \(adRotationIndex % 2))...")
+        print("🎬 [Ad Loop] Опит за показване на Interstitial...")
         
-        // Ротираме само между 2 формата: Rewarded Interstitial и Interstitial
-        let cycle = adRotationIndex % 2
-        
-        // Помощна функция за презареждане, ако нищо не е готово
-        func reloadAll() {
-            print("❌ [Ad Loop] Нито една реклама не е готова. Опит за презареждане (Rew-Int + Interstitial).")
+        // ЛОГИКА: Използваме само InterstitialAdManager
+        if InterstitialAdManager.shared.isReady {
+            print("▶️ [Ad Loop] Пускане на INTERSTITIAL.")
+            InterstitialAdManager.shared.showIfAvailable {
+                print("✅ [Interstitial] Затворена.")
+            }
+        } else {
+            // Ако не е готова, опитваме да я заредим за следващия път
+            print("❌ [Ad Loop] Interstitial рекламата не е готова. Опит за презареждане.")
             Task {
-                await RewardedInterstitialAdManager.shared.loadAd()
                 await InterstitialAdManager.shared.loadAd()
             }
         }
         
-        switch cycle {
-        case 0:
-            // ПРИОРИТЕТ: Rewarded Interstitial
-            if RewardedInterstitialAdManager.shared.isReady {
-                print("▶️ [Ad Loop] Пускане на REWARDED INTERSTITIAL (Priority).")
-                RewardedInterstitialAdManager.shared.showIfAvailable { amount, type in
-                    print("🎁 [Rew-Int] Награда: \(amount) \(type)")
-                }
-            }
-            // Fallback: стандартен Interstitial
-            else if InterstitialAdManager.shared.isReady {
-                print("⚠️ [Ad Loop] Rew-Int не е готова. Fallback -> Interstitial.")
-                InterstitialAdManager.shared.showIfAvailable {
-                    print("✅ [Interstitial] Затворена.")
-                }
-            } else {
-                reloadAll()
-            }
-            
-        case 1:
-            // ПРИОРИТЕТ: стандартен Interstitial
-            if InterstitialAdManager.shared.isReady {
-                print("▶️ [Ad Loop] Пускане на INTERSTITIAL (Priority).")
-                InterstitialAdManager.shared.showIfAvailable {
-                    print("✅ [Interstitial] Затворена.")
-                }
-            }
-            // Fallback: Rewarded Interstitial
-            else if RewardedInterstitialAdManager.shared.isReady {
-                print("⚠️ [Ad Loop] Interstitial не е готова. Fallback -> Rew-Int.")
-                RewardedInterstitialAdManager.shared.showIfAvailable { amount, type in
-                    print("🎁 [Rew-Int] Награда: \(amount) \(type)")
-                }
-            } else {
-                reloadAll()
-            }
-            
-        default:
-            break
-        }
-        
-        // Увеличаваме индекса за следващия път (0 -> 1 -> 2(=0) ...)
-        adRotationIndex += 1
+        // Премахнахме adRotationIndex и логиката за Rewarded, тъй като вече не са нужни.
     }
     
     // MARK: - Interaction Ad Logic
