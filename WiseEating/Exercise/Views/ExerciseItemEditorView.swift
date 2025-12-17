@@ -4,6 +4,7 @@ import PhotosUI
 
 @MainActor
 struct ExerciseItemEditorView: View {
+    @State private var isAITapOnCooldown: Bool = false
     @ObservedObject private var aiManager = AIManager.shared
     @State private var hasUserMadeEdits: Bool = true
     @State private var runningGenerationJobID: UUID? = nil
@@ -15,20 +16,20 @@ struct ExerciseItemEditorView: View {
     @State private var pendingAIJobIDToDeleteOnSave: UUID? = nil
     @Query private var userSettingsArray: [UserSettings]   // 👈 ДОБАВИ ТОВА
     private var isAIButtonEnabledGlobally: Bool {
-           userSettingsArray.first?.isAIButtonEnabled ?? true
-       }
+        userSettingsArray.first?.isAIButtonEnabled ?? true
+    }
     // --- Photo source state (като при FoodItemReceptEditorView) ---
     private enum PhotoSourceTarget {
         case main
         case gallery
         case galleryReplace(index: Int)
     }
-
+    
     @State private var showPhotoSourceDialog = false
     @State private var showCameraPicker = false
     @State private var showPhotoLibraryPicker = false
     @State private var currentPhotoTarget: PhotoSourceTarget? = nil
-
+    
     // --- AI Floating Button: State ---
     @State private var isAIButtonVisible: Bool = true
     @State private var aiButtonOffset: CGSize = .zero
@@ -37,7 +38,7 @@ struct ExerciseItemEditorView: View {
     @State private var aiIsPressed: Bool = false
     private let aiButtonPositionKey = "floatingFoodAIButtonPosition"
     @State private var isGeneratingAIData = false
-
+    
     @ObservedObject private var effectManager = EffectManager.shared
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.modelContext) private var ctx
@@ -48,19 +49,19 @@ struct ExerciseItemEditorView: View {
     @FocusState private var focusedField: FocusableField?
     
     let onDismiss: (ExerciseItem?) -> Void
-
+    
     private let exerciseToEdit: ExerciseItem?
     private let dubExercise: ExerciseItemCopy?
     private let isAIInit: Bool
     var profile: Profile?
-
+    
     @State private var name: String
     @State private var description: String
     @State private var videoURL: String
     @State private var metValueString: String
     @State private var durationMinutesString: String
     @State private var minAgeMonthsTxt: String
-
+    
     // Вече не ползваме PhotosPicker директно, но може да оставим това състояние ако искаш
     @State private var selectedPhoto: PhotosPickerItem?
     @State private var photoData: Data?
@@ -75,14 +76,14 @@ struct ExerciseItemEditorView: View {
     @State private var replaceAtIndex: Int?
     @State private var tappedIndex: Int? = nil
     @State private var showPopover = false
-
+    
     @State private var showAlert = false
     @State private var alertMessage = ""
     @State private var isSaving = false
     
     fileprivate enum OpenMenu { case none, muscle, sport }
     @State private var openMenu: OpenMenu = .none
-
+    
     init(
         item: ExerciseListView.PresentedItem? = nil,
         dubExercise: ExerciseItemCopy? = nil,
@@ -94,7 +95,7 @@ struct ExerciseItemEditorView: View {
         self.profile = profile
         self.dubExercise = dubExercise
         self.isAIInit = isAIInit
-
+        
         var initialExercise: ExerciseItem? = nil
         if let item = item {
             if case .edit(let exercise) = item {
@@ -102,7 +103,7 @@ struct ExerciseItemEditorView: View {
             }
         }
         self.exerciseToEdit = initialExercise
-
+        
         if let copy = dubExercise {
             _name = State(initialValue: isAIInit ? copy.name : "Copy of \(copy.name)")
             _description = State(initialValue: copy.exerciseDescription ?? "")
@@ -139,7 +140,7 @@ struct ExerciseItemEditorView: View {
         }
     }
     
-
+    
     // MARK: - Computed Properties
     private var isSaveDisabled: Bool {
         name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || isSaving
@@ -148,7 +149,7 @@ struct ExerciseItemEditorView: View {
     private var navigationTitle: String {
         exerciseToEdit == nil && dubExercise == nil ? "Add Exercise" : "Edit Exercise"
     }
-
+    
     // MARK: - Body
     var body: some View {
         ZStack {
@@ -165,7 +166,7 @@ struct ExerciseItemEditorView: View {
             .presentationDetents([.medium, .large])
             .disabled(isSaving)
             .blur(radius: isSaving ? 1.5 : 0)
-
+            
             if openMenu != .none {
                 bottomSheetPanel
                     .transition(.move(edge: .bottom).animation(.easeInOut(duration: 0.3)))
@@ -196,10 +197,10 @@ struct ExerciseItemEditorView: View {
             GeometryReader { geometry in
                 Group {
                     if !isSaving &&
-                       !showAlert &&
-                       GlobalState.aiAvailability != .deviceNotEligible &&
-                       openMenu == .none &&
-                       isAIButtonEnabledGlobally{
+                        !showAlert &&
+                        GlobalState.aiAvailability != .deviceNotEligible &&
+                        openMenu == .none &&
+                        isAIButtonEnabledGlobally{
                         AIButton(geometry: geometry)
                     }
                 }
@@ -213,7 +214,7 @@ struct ExerciseItemEditorView: View {
                   completedJobID == self.runningGenerationJobID else {
                 return
             }
-
+            
             print("▶️ ExerciseItemEditorView: Received .aiExerciseDetailJobCompleted for job \(completedJobID). Populating data.")
             
             Task {
@@ -317,7 +318,7 @@ struct ExerciseItemEditorView: View {
             .background(Color.clear)
         }
     }
-
+    
     
     // MARK: - Sections
     private var generalSection: some View {
@@ -326,7 +327,7 @@ struct ExerciseItemEditorView: View {
                 .font(.headline)
                 .foregroundStyle(effectManager.currentGlobalAccentColor)
                 .padding(.bottom, -4)
-
+            
             VStack(spacing: 16) {
                 StyledLabeledPicker(label: "Exercise Name", isRequired: true) {
                     ConfigurableTextField(
@@ -343,7 +344,7 @@ struct ExerciseItemEditorView: View {
                 
                 HStack(alignment: .center, spacing: 16) {
                     photoPicker
-
+                    
                     VStack(alignment: .leading, spacing: 12) {
                         StyledLabeledPicker(label: "Default Duration (min)") {
                             ConfigurableTextField(
@@ -412,7 +413,7 @@ struct ExerciseItemEditorView: View {
             VStack { galleryGrid }
                 .padding()
                 .glassCardStyle(cornerRadius: 20)
-                // като при FoodItemReceptEditorView – PhotosPicker остава само за legacy replace по желание
+            // като при FoodItemReceptEditorView – PhotosPicker остава само за legacy replace по желание
                 .photosPicker(isPresented: $showReplacePicker, selection: $replacementItem, matching: .images)
                 .onChange(of: replacementItem, handleReplacementItemChange)
         }
@@ -456,7 +457,7 @@ struct ExerciseItemEditorView: View {
             .buttonStyle(.plain)
         }
     }
-
+    
     private func galleryPopoverContent(for index: Int, data: Data) -> some View {
         HStack(spacing: 0) {
             Button("Set as main") {
@@ -491,7 +492,7 @@ struct ExerciseItemEditorView: View {
         .frame(minWidth: 300)
         .presentationCompactAdaptation(.none)
     }
-
+    
     private var detailsSection: some View {
         VStack(spacing: 16) {
             StyledLabeledPicker(label: "Video URL (optional)") {
@@ -563,7 +564,7 @@ struct ExerciseItemEditorView: View {
             .glassCardStyle(cornerRadius: 20)
         }
     }
-
+    
     // MARK: - UI Components
     private var photoPicker: some View {
         let imageData = photoData
@@ -602,7 +603,7 @@ struct ExerciseItemEditorView: View {
             (effectManager.isLightRowTextColor ? Color.black.opacity(0.4) : Color.white.opacity(0.4))
                 .ignoresSafeArea()
                 .onTapGesture { withAnimation { openMenu = .none } }
-
+            
             VStack(spacing: 8) {
                 HStack {
                     Text("Select \(openMenu.title)")
@@ -651,7 +652,7 @@ struct ExerciseItemEditorView: View {
         .ignoresSafeArea(.container, edges: .bottom)
         .zIndex(1)
     }
-
+    
     // MARK: - Logic
     private func save() {
         let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -688,7 +689,7 @@ struct ExerciseItemEditorView: View {
             itemToSave.sports = selectedSports.compactMap { Sport(rawValue: $0) }
             itemToSave.durationMinutes = Int(durationMinutesString)
             itemToSave.minimalAgeMonths = Int(minAgeMonthsTxt) ?? 0
-
+            
             if itemToSave.gallery == nil { itemToSave.gallery = [] }
             itemToSave.gallery?.removeAll { photo in !galleryData.contains(photo.data) }
             for data in galleryData {
@@ -697,24 +698,24 @@ struct ExerciseItemEditorView: View {
                     itemToSave.gallery?.append(newPhoto)
                 }
             }
-
+            
             do {
                 try ctx.save()
-
+                
                 // ✅ Ако има завършен AI job, го трием чак сега – при успешно Save
                 if let pendingID = pendingAIJobIDToDeleteOnSave,
                    let job = aiManager.jobs.first(where: { $0.id == pendingID }) {
                     await aiManager.deleteJob(job)
                     pendingAIJobIDToDeleteOnSave = nil
                 }
-
+                
                 onDismiss(itemToSave)
             } catch {
                 alertMessage = "Failed to save exercise: \(error.localizedDescription)"
                 showAlert = true
                 isSaving = false
             }
-
+            
         }
     }
     
@@ -729,7 +730,7 @@ struct ExerciseItemEditorView: View {
             await MainActor.run { newGalleryItems.removeAll() }
         }
     }
-
+    
     private func handleReplacementItemChange(_: PhotosPickerItem?, item: PhotosPickerItem?) {
         guard let idx = replaceAtIndex, let item else { return }
         Task {
@@ -742,7 +743,7 @@ struct ExerciseItemEditorView: View {
             }
         }
     }
-
+    
     private func popoverBinding(for index: Int) -> Binding<Bool> {
         Binding(
             get: { showPopover && tappedIndex == index },
@@ -751,98 +752,110 @@ struct ExerciseItemEditorView: View {
     }
     
     // MARK: - AI & Ads Logic
-
-        /// Тази функция стартира същинската работа на AI.
-        /// Извиква се само когато потребителят е "платил" (с пари или с гледане на реклама).
-        private func startAIGeneration() {
-            guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-                alertMsg = "Please enter a name for the exercise first."
-                showAlert = true
-                return
-            }
-
-            focusedField = nil
-            hasUserMadeEdits = false
-
-            if #available(iOS 26.0, *) {
-                triggerAIGenerationToast()
-
-                if let newJob = aiManager.startExerciseDetailGeneration(
-                    for: self.profile,
-                    exerciseName: self.name,
-                    jobType: .exerciseDetail
-                ) {
-                    self.runningGenerationJobID = newJob.id
-                } else {
-                    alertMsg = "Could not start AI generation job."
-                    showAlert = true
-                    toastTimer?.invalidate()
-                    toastTimer = nil
-                    withAnimation { showAIGenerationToast = false }
-                }
-            } else {
-                alertMsg = "AI data generation requires iOS 26 or newer."
-                showAlert = true
-            }
+    
+    /// Тази функция стартира същинската работа на AI.
+    /// Извиква се само когато потребителят е "платил" (с пари или с гледане на реклама).
+    private func startAIGeneration() {
+        guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            alertMsg = "Please enter a name for the exercise first."
+            showAlert = true
+            return
         }
-
-        /// Основният handler на бутона.
-        private func handleAITap() {
-            NotificationCenter.default.post(name: .snoozeAds, object: nil)
-
-            // 1. Проверка за наличност на AI
-            guard ensureAIAvailableOrShowMessage() else { return }
+        
+        focusedField = nil
+        hasUserMadeEdits = false
+        
+        if #available(iOS 26.0, *) {
+            triggerAIGenerationToast()
             
-            // 2. Валидация на името (преди рекламите)
-            guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-                alertMsg = "Please enter a name for the exercise first."
+            if let newJob = aiManager.startExerciseDetailGeneration(
+                for: self.profile,
+                exerciseName: self.name,
+                jobType: .exerciseDetail
+            ) {
+                self.runningGenerationJobID = newJob.id
+            } else {
+                alertMsg = "Could not start AI generation job."
                 showAlert = true
-                return
+                toastTimer?.invalidate()
+                toastTimer = nil
+                withAnimation { showAIGenerationToast = false }
             }
-
-            // 3. Проверка за АБОНАМЕНТ
-            // Ако потребителят е на платен план (не е Base), пропускаме рекламите.
-            if SubscriptionManager.shared.subscriptionStatus != .base {
-                print("💎 Premium user: Skipping ad.")
-                startAIGeneration()
-                return
+        } else {
+            alertMsg = "AI data generation requires iOS 26 or newer."
+            showAlert = true
+        }
+    }
+    
+    /// Основният handler на бутона.
+    private func handleAITap() {
+        if isAITapOnCooldown {
+            return
+        }
+        
+        // 1. Веднага активираме cooldown за да предотвратим спам/двойни кликове
+        isAITapOnCooldown = true
+        Task { @MainActor in
+            // Тук можеш да смениш 1.5 на 1.0 или 2.0 според това, което искаш
+            try? await Task.sleep(for: .seconds(1.5))
+            isAITapOnCooldown = false
+        }
+        
+        NotificationCenter.default.post(name: .snoozeAds, object: nil)
+        
+        // 1. Проверка за наличност на AI
+        guard ensureAIAvailableOrShowMessage() else { return }
+        
+        // 2. Валидация на името (преди рекламите)
+        guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            alertMsg = "Please enter a name for the exercise first."
+            showAlert = true
+            return
+        }
+        
+        // 3. Проверка за АБОНАМЕНТ
+        // Ако потребителят е на платен план (не е Base), пропускаме рекламите.
+        if SubscriptionManager.shared.subscriptionStatus != .base {
+            print("💎 Premium user: Skipping ad.")
+            startAIGeneration()
+            return
+        }
+        
+        // 4. Логика за реклами (Base Plan)
+        print("📺 Free user: Checking for ads...")
+        
+        // Опит 1: Видео с награда (Rewarded) - Приоритет
+        if RewardedAdManager.shared.isReady {
+            print("📺 Showing Rewarded Ad...")
+            RewardedAdManager.shared.showIfAvailable { amount, type in
+                // Този код се изпълнява САМО ако рекламата е изгледана докрай
+                print("✅ Ad watched! Starting generation.")
+                self.startAIGeneration()
             }
-
-            // 4. Логика за реклами (Base Plan)
-            print("📺 Free user: Checking for ads...")
-
-            // Опит 1: Видео с награда (Rewarded) - Приоритет
-            if RewardedAdManager.shared.isReady {
-                print("📺 Showing Rewarded Ad...")
-                RewardedAdManager.shared.showIfAvailable { amount, type in
-                    // Този код се изпълнява САМО ако рекламата е изгледана докрай
-                    print("✅ Ad watched! Starting generation.")
-                    self.startAIGeneration()
-                }
-                // Ако потребителят затвори видеото преждевременно, startAIGeneration НЯМА да се извика.
-            }
-            // Опит 2: Цял екран (Interstitial) - Резервен вариант
-            else if InterstitialAdManager.shared.isReady {
-                print("⚠️ Rewarded not ready. Showing Interstitial fallback...")
-                InterstitialAdManager.shared.showIfAvailable {
-                    // Извиква се, когато потребителят затвори рекламата (хиксчето)
-                    print("✅ Interstitial closed. Starting generation.")
-                    self.startAIGeneration()
-                }
-            }
-            // Опит 3: Няма никакви реклами (Graceful degradation)
-            else {
-                print("⚠️ No ads available. Proceeding graciously.")
-                // Пускаме услугата, за да не ядосваме потребителя, че няма реклами
-                startAIGeneration()
-                
-                // Опитваме да заредим за следващия път
-                Task {
-                    await RewardedAdManager.shared.loadAd()
-                    await InterstitialAdManager.shared.loadAd()
-                }
+            // Ако потребителят затвори видеото преждевременно, startAIGeneration НЯМА да се извика.
+        }
+        // Опит 2: Цял екран (Interstitial) - Резервен вариант
+        else if InterstitialAdManager.shared.isReady {
+            print("⚠️ Rewarded not ready. Showing Interstitial fallback...")
+            InterstitialAdManager.shared.showIfAvailable {
+                // Извиква се, когато потребителят затвори рекламата (хиксчето)
+                print("✅ Interstitial closed. Starting generation.")
+                self.startAIGeneration()
             }
         }
+        // Опит 3: Няма никакви реклами (Graceful degradation)
+        else {
+            print("⚠️ No ads available. Proceeding graciously.")
+            // Пускаме услугата, за да не ядосваме потребителя, че няма реклами
+            startAIGeneration()
+            
+            // Опитваме да заредим за следващия път
+            Task {
+                await RewardedAdManager.shared.loadAd()
+                await InterstitialAdManager.shared.loadAd()
+            }
+        }
+    }
     
     @available(iOS 26.0, *)
     private func populateFromCompletedJob(jobID: UUID) async {
@@ -853,12 +866,12 @@ struct ExerciseItemEditorView: View {
             runningGenerationJobID = nil
             return
         }
-
+        
         do {
             let response = try JSONDecoder().decode(ExerciseItemDTO.self, from: resultData)
             let generator = AIExerciseDetailGenerator(container: ctx.container)
             let mapped = generator.mapResponseToState(dto: response)
-
+            
             withAnimation(.easeInOut) {
                 self.description         = mapped.description
                 self.metValueString      = mapped.metValueString
@@ -866,22 +879,22 @@ struct ExerciseItemEditorView: View {
                 self.selectedSports      = mapped.selectedSports
                 self.minAgeMonthsTxt     = mapped.minAgeMonthsTxt
             }
-
+            
             // ❗️Не трием job-а тук – само отбелязваме, че трябва да се изтрие при Save
             runningGenerationJobID = nil
             pendingAIJobIDToDeleteOnSave = jobID
-
+            
         } catch {
             alertMessage = "Failed to process AI data: \(error.localizedDescription)"
             showAlert = true
             runningGenerationJobID = nil
-
+            
             // При грешка все пак чистим job-а
             await aiManager.deleteJob(job)
         }
     }
-
-
+    
+    
     @ViewBuilder
     private var aiGenerationToast: some View {
         VStack {
@@ -906,22 +919,22 @@ struct ExerciseItemEditorView: View {
             .foregroundStyle(effectManager.currentGlobalAccentColor).padding()
             .glassCardStyle(cornerRadius: 20).padding()
             .transition(.move(edge: .top).combined(with: .opacity))
-
+            
             Spacer()
         }
         .frame(maxHeight: .infinity, alignment: .top)
         .ignoresSafeArea(.keyboard)
     }
-
+    
     private func triggerAIGenerationToast() {
         toastTimer?.invalidate()
         toastProgress = 0.0
         withAnimation { showAIGenerationToast = true }
-
+        
         let totalDuration = 5.0
         let updateInterval = 0.1
         let progressIncrement = updateInterval / totalDuration
-
+        
         toastTimer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { timer in
             DispatchQueue.main.async {
                 self.toastProgress += progressIncrement
@@ -942,83 +955,83 @@ struct ExerciseItemEditorView: View {
         return aspect > 1.9 ? 75 : 95
     }
     private func aiTrailingPadding(for geometry: GeometryProxy) -> CGFloat { 45 }
-
+    
     private func aiDragGesture(geometry: GeometryProxy) -> some Gesture {
-           let buttonSize: CGFloat = 60
-           let radius = buttonSize / 2
-           
-           return DragGesture(minimumDistance: 0)
-               .updating($aiGestureDragOffset) { value, state, _ in
-                   // Жив превод по време на drag – без анимация
-                   state = value.translation
-               }
-               .onChanged { value in
-                   let distance = max(abs(value.translation.width), abs(value.translation.height))
-                   
-                   if distance > 6 {
-                       // Вече влачим – махаме "pressed" и маркираме "dragging"
-                       if !aiIsDragging {
-                           aiIsDragging = true
-                           aiIsPressed = false
-                       }
-                   } else {
-                       // Малко мърдане = натиснат бутон
-                       aiIsPressed = true
-                   }
-               }
-               .onEnded { value in
-                   let safeArea = geometry.safeAreaInsets
-                   let size = geometry.size
-                   
-                   // Базова позиция (дясно-долу) спрямо размера + твоите padding-и
-                   let baseX = size.width  - aiTrailingPadding(for: geometry) - radius
-                   let baseY = size.height - aiBottomPadding(for: geometry)   - radius
-                   
-                   // Центърът, ако приложим текущия offset + преместеното
-                   let rawCenterX = baseX + aiButtonOffset.width  + value.translation.width
-                   let rawCenterY = baseY + aiButtonOffset.height + value.translation.height
-                   
-                   // Ограничаваме центъра ВЪТРЕ в екрана
-                   let minX = radius
-                   let maxX = size.width  - radius
-                   let minY = radius + safeArea.top
-                   let maxY = size.height - radius - safeArea.bottom - 80
-                   
-                   let clampedCenterX = min(max(rawCenterX, minX), maxX)
-                   let clampedCenterY = min(max(rawCenterY, minY), maxY)
-                   
-                   // Новият offset е просто разлика спрямо базовата позиция
-                   let newOffset = CGSize(
-                       width:  clampedCenterX - baseX,
-                       height: clampedCenterY - baseY
-                   )
-                   
-                   if aiIsDragging {
-                       aiButtonOffset = newOffset
-                       saveAIButtonPosition()
-                   } else {
-                       // Тап (без реален drag)
-                       handleAITap()
-                   }
-                   
-                   aiIsDragging = false
-                   aiIsPressed = false
-               }
-       }
+        let buttonSize: CGFloat = 60
+        let radius = buttonSize / 2
+        
+        return DragGesture(minimumDistance: 0)
+            .updating($aiGestureDragOffset) { value, state, _ in
+                // Жив превод по време на drag – без анимация
+                state = value.translation
+            }
+            .onChanged { value in
+                let distance = max(abs(value.translation.width), abs(value.translation.height))
+                
+                if distance > 6 {
+                    // Вече влачим – махаме "pressed" и маркираме "dragging"
+                    if !aiIsDragging {
+                        aiIsDragging = true
+                        aiIsPressed = false
+                    }
+                } else {
+                    // Малко мърдане = натиснат бутон
+                    aiIsPressed = true
+                }
+            }
+            .onEnded { value in
+                let safeArea = geometry.safeAreaInsets
+                let size = geometry.size
+                
+                // Базова позиция (дясно-долу) спрямо размера + твоите padding-и
+                let baseX = size.width  - aiTrailingPadding(for: geometry) - radius
+                let baseY = size.height - aiBottomPadding(for: geometry)   - radius
+                
+                // Центърът, ако приложим текущия offset + преместеното
+                let rawCenterX = baseX + aiButtonOffset.width  + value.translation.width
+                let rawCenterY = baseY + aiButtonOffset.height + value.translation.height
+                
+                // Ограничаваме центъра ВЪТРЕ в екрана
+                let minX = radius
+                let maxX = size.width  - radius
+                let minY = radius + safeArea.top
+                let maxY = size.height - radius - safeArea.bottom - 80
+                
+                let clampedCenterX = min(max(rawCenterX, minX), maxX)
+                let clampedCenterY = min(max(rawCenterY, minY), maxY)
+                
+                // Новият offset е просто разлика спрямо базовата позиция
+                let newOffset = CGSize(
+                    width:  clampedCenterX - baseX,
+                    height: clampedCenterY - baseY
+                )
+                
+                if aiIsDragging {
+                    aiButtonOffset = newOffset
+                    saveAIButtonPosition()
+                } else {
+                    // Тап (без реален drag)
+                    handleAITap()
+                }
+                
+                aiIsDragging = false
+                aiIsPressed = false
+            }
+    }
     
     private func saveAIButtonPosition() {
         let d = UserDefaults.standard
         d.set(aiButtonOffset.width,  forKey: "\(aiButtonPositionKey)_width")
         d.set(aiButtonOffset.height, forKey: "\(aiButtonPositionKey)_height")
     }
-
+    
     private func loadAIButtonPosition() {
         let d = UserDefaults.standard
         let w = d.double(forKey: "\(aiButtonPositionKey)_width")
         let h = d.double(forKey: "\(aiButtonPositionKey)_height")
         self.aiButtonOffset = CGSize(width: w, height: h)
     }
-
+    
     @ViewBuilder
     private func AIButton(geometry: GeometryProxy) -> some View {
         let buttonSize: CGFloat = 60
@@ -1057,8 +1070,8 @@ struct ExerciseItemEditorView: View {
         .animation(.spring(response: 0.25, dampingFraction: 0.8), value: aiIsDragging)
         .contentShape(Circle())                     // само кръгчето е кликаемо
         .position(x: centerX, y: centerY)           // абсолютна позиция, вече clamp-ната
-        .opacity(isAIButtonVisible ? 1 : 0)
-        .disabled(!isAIButtonVisible)
+        .opacity(isAIButtonVisible ? (isAITapOnCooldown ? 0.5 : 1.0) : 0)
+        .disabled(!isAIButtonVisible || isAITapOnCooldown)
         .gesture(aiDragGesture(geometry: geometry)) // жестът е върху 60x60, не върху цял екран
         .transition(.scale.combined(with: .opacity))
     }
@@ -1081,32 +1094,32 @@ struct ExerciseItemEditorView: View {
         showAlert = true
         return false
     }
-
+    
     // MARK: - Photo source helpers (същите като при FoodItemReceptEditorView)
     private func presentPhotoSource(for target: PhotoSourceTarget) {
         currentPhotoTarget = target
         showPhotoSourceDialog = true
     }
-
+    
     private func handlePickedUIImage(_ image: UIImage) {
         guard let data = image.jpegData(compressionQuality: 0.9) else { return }
-
+        
         switch currentPhotoTarget {
         case .main:
             photoData = data
-
+            
         case .gallery:
             galleryData.append(data)
-
+            
         case .galleryReplace(let index):
             if galleryData.indices.contains(index) {
                 galleryData[index] = data
             }
-
+            
         case .none:
             break
         }
-
+        
         hasUserMadeEdits = true
         currentPhotoTarget = nil
     }
@@ -1122,7 +1135,6 @@ struct ExerciseItemEditorView: View {
                 .padding(.horizontal)
         }
     }
-
 }
 
 fileprivate extension ExerciseItemEditorView.OpenMenu {

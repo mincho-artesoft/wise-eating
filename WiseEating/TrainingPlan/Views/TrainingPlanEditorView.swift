@@ -5,6 +5,7 @@ import SwiftData
 struct TrainingPlanEditorView: View {
     let onDismissSearch: () -> Void
     @Binding var navBarIsHiden: Bool
+    @State private var isAITapOnCooldown: Bool = false
 
     @State private var exerciseItemToView: ExerciseItem? = nil
     @State private var pendingAIJobIDToDeleteOnSave: UUID? = nil
@@ -1296,6 +1297,18 @@ struct TrainingPlanEditorView: View {
     }
 
     private func handleAITap() {
+        if isAITapOnCooldown {
+                   return
+               }
+               
+               // 1. Веднага активираме cooldown за да предотвратим спам/двойни кликове
+               isAITapOnCooldown = true
+               Task { @MainActor in
+                   // Тук можеш да смениш 1.5 на 1.0 или 2.0 според това, което искаш
+                   try? await Task.sleep(for: .seconds(1.5))
+                   isAITapOnCooldown = false
+               }
+        
         NotificationCenter.default.post(name: .snoozeAds, object: nil)
 
         // 1. Проверка за AI наличност (Apple Intelligence статус)
@@ -1537,8 +1550,8 @@ struct TrainingPlanEditorView: View {
            .animation(.spring(response: 0.25, dampingFraction: 0.8), value: aiIsDragging)
            .contentShape(Circle())                     // само кръгчето е кликаемо
            .position(x: centerX, y: centerY)           // абсолютна позиция, вече clamp-ната
-           .opacity(isAIButtonVisible ? 1 : 0)
-           .disabled(!isAIButtonVisible)
+           .opacity(isAIButtonVisible ? (isAITapOnCooldown ? 0.5 : 1.0) : 0)
+           .disabled(!isAIButtonVisible || isAITapOnCooldown)
            .gesture(aiDragGesture(geometry: geometry)) // жестът е върху 60x60, не върху цял екран
            .transition(.scale.combined(with: .opacity))
        }

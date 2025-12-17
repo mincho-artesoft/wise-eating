@@ -11,10 +11,10 @@ struct MealPlanEditorView: View {
     @Query(sort: \Prompt.creationDate, order: .reverse) private var allPrompts: [Prompt]
     @State private var selectedPromptIDs: Set<Prompt.ID> = []
     @State private var hasUserMadeEdits: Bool = false
-
+    
     private enum OpenMenu { case none, promptSelector }
     @State private var openMenu: OpenMenu = .none
-    
+    @State private var isAITapOnCooldown: Bool = false
     @State private var isAIButtonVisible: Bool = true
     @State private var aiButtonOffset: CGSize = .zero
     @State private var aiIsDragging: Bool = false
@@ -23,7 +23,7 @@ struct MealPlanEditorView: View {
     private let aiButtonPositionKey = "floatingMealPlanAIButtonPosition"
     private let selectedPromptsKey = "MealPlanEditor_SelectedPromptIDs"
     @Query private var userSettingsArray: [UserSettings]   // 👈 ДОБАВИ ТОВА
-
+    
     // MARK: - Environment & Dependencies
     @Environment(\.modelContext) private var modelContext
     @ObservedObject private var effectManager = EffectManager.shared
@@ -53,44 +53,44 @@ struct MealPlanEditorView: View {
         case promptEditor
         case editPrompt(Prompt)
     }
-
+    
     @State private var showAlert = false
     @State private var alertMessage = ""
-
+    
     @State private var selectedDayID: MealPlanDay.ID? = nil
     @State private var selectedMealID: MealPlanMeal.ID? = nil
-
+    
     private enum LoadingOperation { case none, saving, generating }
     @State private var loadingOperation: LoadingOperation = .none
     
     @State private var showAIGenerationToast = false
     @State private var toastTimer: Timer? = nil
     @State private var toastProgress: Double = 0.0
-
+    
     @State private var generationTask: Task<Void, Never>? = nil
-
+    
     // MARK: - Focus State
     enum FocusableField: Hashable {
         case name, minAge
         case ingredientGrams(id: MealPlanEntry.ID)
     }
     @FocusState private var focusedField: FocusableField?
-
+    
     @State private var runningGenerationJobID: UUID? = nil
     @State private var promptToDelete: Prompt? = nil
     @State private var isShowingDeletePromptConfirmation = false
     @State private var scrollToExerciseID: TrainingPlanExercise.ID?
     
     private let maxIngredientGrams: Double = 30000.0
-
+    
     private var isSaveDisabled: Bool {
         name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || (loadingOperation != .none)
     }
-
+    
     private var sortedDays: [MealPlanDay] {
         days.sorted { $0.dayIndex < $1.dayIndex }
     }
-
+    
     private var currentlySelectedMeal: MealPlanMeal? {
         guard let day = days.first(where: { $0.id == selectedDayID }),
               let meal = day.meals.first(where: { $0.id == selectedMealID }) else {
@@ -98,7 +98,7 @@ struct MealPlanEditorView: View {
         }
         return meal
     }
-
+    
     // MARK: - Initializer
     init(
         profile: Profile,
@@ -122,7 +122,7 @@ struct MealPlanEditorView: View {
         self._planPreviewToLoad = State(initialValue: planPreview)
         self.sourceAIGenerationJobID = sourceAIGenerationJobID
         self.onDismissSearch = onDismissSearch
-
+        
         if let plan = planToEdit {
             _name = State(initialValue: plan.name)
             _days = State(initialValue: plan.days.map { day in
@@ -143,7 +143,7 @@ struct MealPlanEditorView: View {
         } else if let draft = planDraft {
             _name = State(initialValue: draft.name)
             _minAgeMonthsTxt = State(initialValue: "")
-
+            
             let newDay = MealPlanDay(dayIndex: 1)
             var newMeals: [MealPlanMeal] = []
             for meal in draft.meals {
@@ -159,7 +159,7 @@ struct MealPlanEditorView: View {
             newDay.meals = newMeals
             _days = State(initialValue: [newDay])
             recalculateAndValidateMinAge()
-
+            
         } else {
             _name = State(initialValue: "")
             _days = State(initialValue: [MealPlanDay(dayIndex: 1)])
@@ -167,11 +167,11 @@ struct MealPlanEditorView: View {
             recalculateAndValidateMinAge()
         }
     }
-
+    
     private var isAIButtonEnabledGlobally: Bool {
         userSettingsArray.first?.isAIButtonEnabled ?? true
     }
-
+    
     private var isAIButtonCurrentlyVisible: Bool {
         !isSearchFieldFocused &&
         loadingOperation == .none &&
@@ -181,20 +181,20 @@ struct MealPlanEditorView: View {
         GlobalState.aiAvailability != .deviceNotEligible &&
         isAIButtonEnabledGlobally
     }
-
+    
     // MARK: - Body
     var body: some View {
         NavigationStack(path: $path) {
             ZStack {
-                   ThemeBackgroundView().ignoresSafeArea()
-                   
-                   VStack(spacing: 0) {
-                       toolbar
-                       mainContent
-                   }
-                   .blur(radius: loadingOperation != .none ? 1.5 : 0)
-                   .disabled(loadingOperation != .none)
-                   
+                ThemeBackgroundView().ignoresSafeArea()
+                
+                VStack(spacing: 0) {
+                    toolbar
+                    mainContent
+                }
+                .blur(radius: loadingOperation != .none ? 1.5 : 0)
+                .disabled(loadingOperation != .none)
+                
                 if let foodToView = foodItemToView {
                     FoodItemDetailView(
                         food: foodToView,
@@ -210,64 +210,64 @@ struct MealPlanEditorView: View {
                     .zIndex(20)
                     .onAppear { navBarIsHiden = true }
                 }
-                   // +++ НАЧАЛО НА ПРОМЯНАТА: FoodSearchPanelView +++
-                   if isSearchFieldFocused {
-                       let focusBinding = Binding<Bool>(
-                           get: { isSearchFieldFocused },
-                           set: { isSearchFieldFocused = $0 }
-                       )
-                       
-                       // Изчисляваме кои ID-та да скрием (тези, които вече са добавени в текущото хранене)
-                       let excludedIDs: Set<Int> = {
-                           if let meal = currentlySelectedMeal {
-                               return Set(meal.entries.compactMap { $0.food?.id })
-                           }
-                           return []
-                       }()
-                       
-                       FoodSearchPanelView(
-                           globalSearchText: $globalSearchText,
-                           isSearchFieldFocused: focusBinding,
-                           profile: profile,
-                           // Може да е .foods, .recipes, .menus или nil за всичко
-                           searchMode: .mealPlans,
-                           showFavoritesFilter: true,
-                           showRecipesFilter: true,
-                           showMenusFilter: true,
-                           headerRightText: currentlySelectedMeal?.mealName,
-                           excludedFoodIDs: excludedIDs,
-                           onSelectFood: { foodItem in
-                               addFoodItem(foodItem)
-                           },
-                           onDismiss: {
-                               dismissKeyboardAndSearch()
-                           }
-                       )
-                       .transition(.opacity.animation(.easeInOut(duration: 0.2)))
-                       .zIndex(1)
-                   }
-                   // +++ КРАЙ НА ПРОМЯНАТА +++
-                   
-                   if openMenu != .none {
-                      bottomSheetPanel
-                  }
-                   
-                   if loadingOperation == .saving {
-                       VStack(spacing: 16) {
-                           ProgressView()
-                               .progressViewStyle(CircularProgressViewStyle(tint: effectManager.currentGlobalAccentColor))
-                               .scaleEffect(1.5)
-                           Text("Saving…")
-                               .foregroundStyle(effectManager.currentGlobalAccentColor)
-                               .font(.headline)
-                       }
-                       .padding(30)
-                       .glassCardStyle(cornerRadius: 20)
-                       .transition(.scale.combined(with: .opacity))
-                       .accessibilityLabel("Saving")
-                       .zIndex(1000)
-                   }
-               }
+                // +++ НАЧАЛО НА ПРОМЯНАТА: FoodSearchPanelView +++
+                if isSearchFieldFocused {
+                    let focusBinding = Binding<Bool>(
+                        get: { isSearchFieldFocused },
+                        set: { isSearchFieldFocused = $0 }
+                    )
+                    
+                    // Изчисляваме кои ID-та да скрием (тези, които вече са добавени в текущото хранене)
+                    let excludedIDs: Set<Int> = {
+                        if let meal = currentlySelectedMeal {
+                            return Set(meal.entries.compactMap { $0.food?.id })
+                        }
+                        return []
+                    }()
+                    
+                    FoodSearchPanelView(
+                        globalSearchText: $globalSearchText,
+                        isSearchFieldFocused: focusBinding,
+                        profile: profile,
+                        // Може да е .foods, .recipes, .menus или nil за всичко
+                        searchMode: .mealPlans,
+                        showFavoritesFilter: true,
+                        showRecipesFilter: true,
+                        showMenusFilter: true,
+                        headerRightText: currentlySelectedMeal?.mealName,
+                        excludedFoodIDs: excludedIDs,
+                        onSelectFood: { foodItem in
+                            addFoodItem(foodItem)
+                        },
+                        onDismiss: {
+                            dismissKeyboardAndSearch()
+                        }
+                    )
+                    .transition(.opacity.animation(.easeInOut(duration: 0.2)))
+                    .zIndex(1)
+                }
+                // +++ КРАЙ НА ПРОМЯНАТА +++
+                
+                if openMenu != .none {
+                    bottomSheetPanel
+                }
+                
+                if loadingOperation == .saving {
+                    VStack(spacing: 16) {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: effectManager.currentGlobalAccentColor))
+                            .scaleEffect(1.5)
+                        Text("Saving…")
+                            .foregroundStyle(effectManager.currentGlobalAccentColor)
+                            .font(.headline)
+                    }
+                    .padding(30)
+                    .glassCardStyle(cornerRadius: 20)
+                    .transition(.scale.combined(with: .opacity))
+                    .accessibilityLabel("Saving")
+                    .zIndex(1000)
+                }
+            }
             .overlay {
                 if showAIGenerationToast {
                     aiGenerationToast
@@ -282,42 +282,42 @@ struct MealPlanEditorView: View {
                 }
             }
             .onAppear {
-                   loadAIButtonPosition()
-                   loadSelectedPromptIDs()
-                   if planPreviewToLoad == nil {
-                       Task {
-                           await syncStateFromLinkedMenus()
-                       }
-                   }
-                   
-                   if selectedDayID == nil {
-                       DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                           guard let firstDay = sortedDays.first else {
-                               return
-                           }
-                           selectedDayID = firstDay.id
-                           if let firstMealTemplate = profile.meals.sorted(by: { $0.startTime < $1.startTime }).first {
-                               let firstMeal = getOrCreateMeal(for: firstMealTemplate.name, in: firstDay)
-                               selectedMealID = firstMeal.id
-                           }
-                       }
-                   }
-                   recalculateAndValidateMinAge()
-               }
+                loadAIButtonPosition()
+                loadSelectedPromptIDs()
+                if planPreviewToLoad == nil {
+                    Task {
+                        await syncStateFromLinkedMenus()
+                    }
+                }
+                
+                if selectedDayID == nil {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                        guard let firstDay = sortedDays.first else {
+                            return
+                        }
+                        selectedDayID = firstDay.id
+                        if let firstMealTemplate = profile.meals.sorted(by: { $0.startTime < $1.startTime }).first {
+                            let firstMeal = getOrCreateMeal(for: firstMealTemplate.name, in: firstDay)
+                            selectedMealID = firstMeal.id
+                        }
+                    }
+                }
+                recalculateAndValidateMinAge()
+            }
             .onReceive(NotificationCenter.default.publisher(for: .aiJobCompletedMealPlan)) { notification in
                 guard let userInfo = notification.userInfo,
                       let completedJobID = userInfo["jobID"] as? UUID else {
                     return
                 }
-
+                
                 // 🔑 Запомняме го, за да го изтрием при Save
                 pendingAIJobIDToDeleteOnSave = completedJobID
-
+                
                 // Ако потребителят вече е пипал плана, не пипаме UI-то
                 guard !hasUserMadeEdits else { return }
-
+                
                 print("▶️ MealPlanEditorView: Received .aiJobCompletedMealPlan for job \(completedJobID).")
-
+                
                 let descriptor = FetchDescriptor<AIGenerationJob>(predicate: #Predicate { $0.id == completedJobID })
                 if let job = (try? modelContext.fetch(descriptor))?.first,
                    let preview = job.result {
@@ -326,48 +326,48 @@ struct MealPlanEditorView: View {
                     }
                 }
             }
-                   .onChange(of: name) { _, _ in hasUserMadeEdits = true }
-                   .onChange(of: minAgeMonthsTxt) { _, _ in hasUserMadeEdits = true }
-                   .task(id: planPreviewToLoad?.id) {
-                       if let preview = planPreviewToLoad {
-                           await populateFromPreview(preview)
-                           planPreviewToLoad = nil
-                       }
-                   }
-                   .onChange(of: aiManager.jobs) { _, newJobs in
-                       guard let runningID = runningGenerationJobID,
-                             let completedJob = newJobs.first(where: { $0.id == runningID }) else { return }
-
-                       loadingOperation = .none
-
-                       switch completedJob.status {
-                       case .completed:
-                           // 🔑 Отбелязваме job-а за изтриване при Save
-                           pendingAIJobIDToDeleteOnSave = completedJob.id
-                           runningGenerationJobID = nil
-
-                           if !hasUserMadeEdits, let preview = completedJob.result {
-                               Task {
-                                   await populateFromPreview(preview)
-                               }
-                           }
-
-                       case .failed:
-                           alertMessage = "AI generation failed: \(completedJob.failureReason ?? "Unknown error")"
-                           showAlert = true
-
-                           // По желание: можем пак да го маркираме за чистене при Save
-                           pendingAIJobIDToDeleteOnSave = completedJob.id
-                           runningGenerationJobID = nil
-
-                       default:
-                           break
-                       }
-                   }
-
+            .onChange(of: name) { _, _ in hasUserMadeEdits = true }
+            .onChange(of: minAgeMonthsTxt) { _, _ in hasUserMadeEdits = true }
+            .task(id: planPreviewToLoad?.id) {
+                if let preview = planPreviewToLoad {
+                    await populateFromPreview(preview)
+                    planPreviewToLoad = nil
+                }
+            }
+            .onChange(of: aiManager.jobs) { _, newJobs in
+                guard let runningID = runningGenerationJobID,
+                      let completedJob = newJobs.first(where: { $0.id == runningID }) else { return }
+                
+                loadingOperation = .none
+                
+                switch completedJob.status {
+                case .completed:
+                    // 🔑 Отбелязваме job-а за изтриване при Save
+                    pendingAIJobIDToDeleteOnSave = completedJob.id
+                    runningGenerationJobID = nil
+                    
+                    if !hasUserMadeEdits, let preview = completedJob.result {
+                        Task {
+                            await populateFromPreview(preview)
+                        }
+                    }
+                    
+                case .failed:
+                    alertMessage = "AI generation failed: \(completedJob.failureReason ?? "Unknown error")"
+                    showAlert = true
+                    
+                    // По желание: можем пак да го маркираме за чистене при Save
+                    pendingAIJobIDToDeleteOnSave = completedJob.id
+                    runningGenerationJobID = nil
+                    
+                default:
+                    break
+                }
+            }
+            
             .onChange(of: selectedPromptIDs) { _, newSelection in
-                           saveSelectedPromptIDs(newSelection)
-                       }
+                saveSelectedPromptIDs(newSelection)
+            }
             .onDisappear { navBarIsHiden = false }
             .toolbar(.hidden, for: .navigationBar)
             .alert("Error", isPresented: $showAlert) { Button("OK", role: .cancel) {} } message: { Text(alertMessage) }
@@ -409,18 +409,18 @@ struct MealPlanEditorView: View {
                     }
                     
                 case .editPrompt(let prompt):
-                       PromptEditorView(promptType: .mealPlan, promptToEdit: prompt) { editedPrompt in
-                           if let editedPrompt = editedPrompt {
-                               if !selectedPromptIDs.contains(editedPrompt.id) {
-                                   selectedPromptIDs.insert(editedPrompt.id)
-                                   saveSelectedPromptIDs(selectedPromptIDs)
-
-                               }
-                           }
-                           
-                           path.removeLast()
-                       }
-                   }
+                    PromptEditorView(promptType: .mealPlan, promptToEdit: prompt) { editedPrompt in
+                        if let editedPrompt = editedPrompt {
+                            if !selectedPromptIDs.contains(editedPrompt.id) {
+                                selectedPromptIDs.insert(editedPrompt.id)
+                                saveSelectedPromptIDs(selectedPromptIDs)
+                                
+                            }
+                        }
+                        
+                        path.removeLast()
+                    }
+                }
             }
             .confirmationDialog(
                 "Delete Prompt?",
@@ -440,28 +440,28 @@ struct MealPlanEditorView: View {
             }
         }
     }
-
+    
     private func saveSelectedPromptIDs(_ ids: Set<UUID>) {
         let idStrings = ids.map { $0.uuidString }
         UserDefaults.standard.set(idStrings, forKey: selectedPromptsKey)
     }
-
+    
     private func loadSelectedPromptIDs() {
         guard let idStrings = UserDefaults.standard.stringArray(forKey: selectedPromptsKey) else { return }
         let ids = idStrings.compactMap { UUID(uuidString: $0) }
         self.selectedPromptIDs = Set(ids)
     }
-
+    
     private var toolbar: some View {
         HStack {
             Button("Cancel", action: onDismiss)
                 .padding(.horizontal, 10).padding(.vertical, 5)
                 .glassCardStyle(cornerRadius: 20)
-
+            
             Spacer()
             Text(planToEdit == nil && sourceAIGenerationJobID == nil ? "New Meal Plan" : "Edit Meal Plan").font(.headline)
             Spacer()
-
+            
             Button("Save", action: savePlan)
                 .disabled(isSaveDisabled)
                 .padding(.horizontal, 10).padding(.vertical, 5)
@@ -471,27 +471,27 @@ struct MealPlanEditorView: View {
         .foregroundColor(effectManager.currentGlobalAccentColor)
         .padding([.horizontal, .top])
     }
-
+    
     @ViewBuilder
     private var aiGenerationToast: some View {
         VStack {
             HStack(spacing: 12) {
                 Image(systemName: "sparkles")
                     .font(.title2)
-
+                
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Generation Scheduled")
                         .fontWeight(.bold)
                     Text("You'll be notified when your plan is ready.")
                         .font(.caption)
-
+                    
                     ProgressView(value: min(max(toastProgress, 0.0), 1.0), total: 1.0)
                         .progressViewStyle(LinearProgressViewStyle(tint: effectManager.currentGlobalAccentColor))
                         .animation(.linear, value: toastProgress)
                 }
-
+                
                 Spacer()
-
+                
                 Button("OK") {
                     toastTimer?.invalidate()
                     toastTimer = nil
@@ -507,13 +507,13 @@ struct MealPlanEditorView: View {
             .glassCardStyle(cornerRadius: 20)
             .padding()
             .transition(.move(edge: .top).combined(with: .opacity))
-
+            
             Spacer()
         }
         .frame(maxHeight: .infinity, alignment: .top)
         .ignoresSafeArea(.keyboard)
     }
-
+    
     private var mainContent: some View {
         ScrollViewReader { proxy in
             ScrollView(showsIndicators: false) {
@@ -552,9 +552,9 @@ struct MealPlanEditorView: View {
                         break
                     }
                 }
-
+                
                 guard let focus = newValue else { return }
-
+                
                 let idToScroll: AnyHashable
                 switch focus {
                 case .name, .minAge:
@@ -562,7 +562,7 @@ struct MealPlanEditorView: View {
                 case .ingredientGrams(let entryID):
                     idToScroll = entryID
                 }
-
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
                     withAnimation(.easeInOut) {
                         proxy.scrollTo(idToScroll, anchor: .top)
@@ -592,7 +592,7 @@ struct MealPlanEditorView: View {
             )
         }
     }
-
+    
     private var nameCard: some View {
         VStack(spacing: 12) {
             StyledLabeledPicker(label: "Plan Name", isRequired: true) {
@@ -635,16 +635,16 @@ struct MealPlanEditorView: View {
         .padding()
         .glassCardStyle(cornerRadius: 20)
     }
-
+    
     private func daySection(for day: MealPlanDay, dayIndex: Int) -> some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Text("Day \(dayIndex)")
                     .font(.headline)
                     .foregroundColor(effectManager.currentGlobalAccentColor)
-
+                
                 Spacer()
-
+                
                 if days.count > 1 {
                     Button(action: { deleteDay(day) }) {
                         Image(systemName: "minus.circle.fill")
@@ -654,7 +654,7 @@ struct MealPlanEditorView: View {
                     .buttonStyle(.plain)
                 }
             }
-
+            
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
                     ForEach(profile.meals.sorted(by: { $0.startTime < $1.startTime })) { mealTemplate in
@@ -664,7 +664,7 @@ struct MealPlanEditorView: View {
                 }
                 .padding(.vertical, 4)
             }
-
+            
             ForEach(day.meals) { meal in
                 if meal.id == selectedMealID {
                     workoutContent(for: meal, in: day)
@@ -675,22 +675,22 @@ struct MealPlanEditorView: View {
         .padding()
         .glassCardStyle(cornerRadius: 20)
     }
-
+    
     private static let palette: [Color] = [
         .orange, .pink, .green, .indigo, .purple, .blue, .red, Color(hex: "#00ffff")
     ]
-
+    
     private var colorFor: [MealPlanMeal.ID: Color] {
         let sortedTemplates = profile.meals.sorted {
             $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending
         }
         let n = Self.palette.count
-
+        
         let colorByName = Dictionary(uniqueKeysWithValues:
-            sortedTemplates.enumerated().map { idx, mealTemplate in
-                (mealTemplate.name, Self.palette[idx % n])
-            })
-
+                                        sortedTemplates.enumerated().map { idx, mealTemplate in
+            (mealTemplate.name, Self.palette[idx % n])
+        })
+        
         var finalMap: [MealPlanMeal.ID: Color] = [:]
         for day in days {
             for meal in day.meals {
@@ -704,7 +704,7 @@ struct MealPlanEditorView: View {
     private func mealTabButton(for meal: MealPlanMeal, in day: MealPlanDay) -> some View {
         let isSelected = selectedMealID == meal.id && selectedDayID == day.id
         let baseColor = colorFor[meal.id] ?? effectManager.currentGlobalAccentColor
-
+        
         Button {
             withAnimation {
                 selectedDayID = day.id
@@ -728,14 +728,14 @@ struct MealPlanEditorView: View {
                             .stroke(baseColor, lineWidth: isSelected ? 2 : 0)
                     )
                     .foregroundColor(effectManager.currentGlobalAccentColor)
-
+                
                 if !meal.entries.isEmpty {
                     ZStack {
                         Circle()
                             .fill(baseColor)
                         Text("\(meal.entries.count)")
                             .font(.system(size: 10, weight: .bold))
-                        .foregroundColor(effectManager.currentGlobalAccentColor)
+                            .foregroundColor(effectManager.currentGlobalAccentColor)
                     }
                     .frame(width: 16, height: 16)
                     .offset(x: 6, y: -6)
@@ -745,7 +745,7 @@ struct MealPlanEditorView: View {
                             .fill(baseColor)
                         Text("\(0)")
                             .font(.system(size: 10, weight: .bold))
-                        .foregroundColor(effectManager.currentGlobalAccentColor)
+                            .foregroundColor(effectManager.currentGlobalAccentColor)
                     }
                     .frame(width: 16, height: 16)
                     .offset(x: 6, y: -6)
@@ -756,7 +756,7 @@ struct MealPlanEditorView: View {
         }
         .buttonStyle(.plain)
     }
-
+    
     @ViewBuilder
     private func workoutContent(for meal: MealPlanMeal, in day: MealPlanDay) -> some View {
         VStack {
@@ -827,7 +827,7 @@ struct MealPlanEditorView: View {
         dismissKeyboardAndSearch()
         recalculateAndValidateMinAge()
     }
-
+    
     private func removeEntry(_ entry: MealPlanEntry, from meal: MealPlanMeal) {
         withAnimation {
             if let dayIndex = days.firstIndex(where: { $0.id == meal.day?.id }),
@@ -838,12 +838,12 @@ struct MealPlanEditorView: View {
         hasUserMadeEdits = true
         recalculateAndValidateMinAge()
     }
-
+    
     private func dismissKeyboardAndSearch() {
         isSearchFieldFocused = false
         globalSearchText = ""
     }
-
+    
     private func getOrCreateMeal(for mealName: String, in day: MealPlanDay) -> MealPlanMeal {
         if let existingMeal = day.meals.first(where: { $0.mealName == mealName }) {
             return existingMeal
@@ -856,36 +856,36 @@ struct MealPlanEditorView: View {
             return newMeal
         }
     }
-
+    
     private func savePlan() {
         Task { @MainActor in
             loadingOperation = .saving
             await Task.yield()
             defer { loadingOperation = .none }
-
+            
             let planToSave: MealPlan
-
+            
             if let existingPlan = planToEdit {
                 planToSave = existingPlan
             } else {
                 planToSave = MealPlan(name: name, profile: profile)
                 modelContext.insert(planToSave)
             }
-
+            
             planToSave.name = name
             planToSave.minAgeMonths = Int(minAgeMonthsTxt) ?? 0
-
+            
             await createOrUpdateMenus(for: planToSave)
             syncDays(of: planToSave, from: self.days)
-
+            
             do {
                 try modelContext.save()
-
+                
                 if let pendingID = pendingAIJobIDToDeleteOnSave,
-                                 let job = aiManager.jobs.first(where: { $0.id == pendingID }) {
-                                  await aiManager.deleteJob(job)
-                                  pendingAIJobIDToDeleteOnSave = nil
-                              }
+                   let job = aiManager.jobs.first(where: { $0.id == pendingID }) {
+                    await aiManager.deleteJob(job)
+                    pendingAIJobIDToDeleteOnSave = nil
+                }
                 
                 if let jobID = sourceAIGenerationJobID {
                     let predicate = #Predicate<AIGenerationJob> { $0.id == jobID }
@@ -894,7 +894,7 @@ struct MealPlanEditorView: View {
                         await aiManager.deleteJob(jobToDelete)
                     }
                 }
-
+                
                 onDismiss()
             } catch {
                 alertMessage = "Failed to save the plan. Error: \(error.localizedDescription)"
@@ -902,14 +902,14 @@ struct MealPlanEditorView: View {
             }
         }
     }
-
+    
     private func syncDays(of plan: MealPlan, from stateDays: [MealPlanDay]) {
         let stateDaysByIndex = Dictionary(grouping: stateDays, by: { $0.dayIndex }).compactMapValues { $0.first }
-
+        
         for day in plan.days where stateDaysByIndex[day.dayIndex] == nil {
             modelContext.delete(day)
         }
-
+        
         for (index, stateDay) in stateDaysByIndex {
             if let persistedDay = plan.days.first(where: { $0.dayIndex == index }) {
                 syncMeals(of: persistedDay, from: stateDay)
@@ -921,14 +921,14 @@ struct MealPlanEditorView: View {
             }
         }
     }
-
+    
     private func syncMeals(of persistedDay: MealPlanDay, from stateDay: MealPlanDay) {
         let stateMealsByName = Dictionary(grouping: stateDay.meals, by: { $0.mealName }).compactMapValues { $0.first }
-
+        
         for meal in persistedDay.meals where stateMealsByName[meal.mealName] == nil {
             modelContext.delete(meal)
         }
-
+        
         for (name, stateMeal) in stateMealsByName {
             let persistedMeal = getOrCreateMeal(for: name, in: persistedDay)
             persistedMeal.entries.forEach { modelContext.delete($0) }
@@ -939,7 +939,7 @@ struct MealPlanEditorView: View {
             persistedMeal.linkedMenuID = stateMeal.linkedMenuID
         }
     }
-
+    
     private func createOrUpdateMenus(for plan: MealPlan) async {
         for (dayIndex, day) in sortedDays.enumerated() {
             for meal in day.meals {
@@ -963,7 +963,7 @@ struct MealPlanEditorView: View {
             }
         }
     }
-
+    
     private func nextFoodId() -> Int {
         var desc = FetchDescriptor<FoodItem>()
         desc.sortBy = [SortDescriptor(\.id, order: .reverse)]
@@ -971,11 +971,11 @@ struct MealPlanEditorView: View {
         let maxId = ((try? modelContext.fetch(desc))?.first?.id) ?? 0
         return maxId + 1
     }
-
+    
     private var allFoodsInPlan: [FoodItem] {
         days.flatMap { $0.meals }.flatMap { $0.entries }.compactMap { $0.food }
     }
-
+    
     private func recalculateAndValidateMinAge() {
         let requiredMinAge = allFoodsInPlan.map { $0.minAgeMonths }.max() ?? 0
         self.calculatedMinAge = requiredMinAge
@@ -984,14 +984,14 @@ struct MealPlanEditorView: View {
             minAgeMonthsTxt = String(requiredMinAge)
         }
     }
-
+    
     private func validateMinAgeOnBlur() {
         let currentUserAge = Int(minAgeMonthsTxt) ?? 0
         if currentUserAge < calculatedMinAge {
             minAgeMonthsTxt = String(calculatedMinAge)
         }
     }
-
+    
     private func addDay() {
         withAnimation {
             let nextIndex = (days.map { $0.dayIndex }.max() ?? 0) + 1
@@ -1005,7 +1005,7 @@ struct MealPlanEditorView: View {
         }
         hasUserMadeEdits = true
     }
-
+    
     private func deleteDay(_ dayToDelete: MealPlanDay) {
         withAnimation {
             days.removeAll { $0.id == dayToDelete.id }
@@ -1027,7 +1027,7 @@ struct MealPlanEditorView: View {
         }
         hasUserMadeEdits = true
     }
-
+    
     private func syncStateFromLinkedMenus() async {
         let context = self.modelContext
         for day in days {
@@ -1055,7 +1055,7 @@ struct MealPlanEditorView: View {
     }
     
     private func formatIngredientText(for entryID: MealPlanEntry.ID) {}
-
+    
     
     /// Стартира същинската AI генерация на хранителен план.
     /// Извиква се САМО след като потребителят вече е "платил"
@@ -1065,17 +1065,16 @@ struct MealPlanEditorView: View {
         existingMeals: [Int: [MealPlanPreviewMeal]],
         selectedPrompts: [String]
     ) {
-        // Toast логика (както беше в стария handleAITap)
         toastTimer?.invalidate()
         toastProgress = 0.0
         withAnimation {
             showAIGenerationToast = true
         }
-
+        
         let totalDuration = 5.0
         let updateInterval = 0.1
         let progressIncrement = updateInterval / totalDuration
-
+        
         toastTimer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { timer in
             DispatchQueue.main.async {
                 self.toastProgress = min(1.0, self.toastProgress + progressIncrement)
@@ -1088,7 +1087,7 @@ struct MealPlanEditorView: View {
                 }
             }
         }
-
+        
         if let newJob = aiManager.startPlanFill(
             for: profile,
             daysAndMeals: mealsToGenerate,
@@ -1108,13 +1107,25 @@ struct MealPlanEditorView: View {
             }
         }
     }
-
+    
     private func handleAITap() {
+        if isAITapOnCooldown {
+            return
+        }
+        
+        // 1. Веднага активираме cooldown за да предотвратим спам/двойни кликове
+        isAITapOnCooldown = true
+        Task { @MainActor in
+            // Тук можеш да смениш 1.5 на 1.0 или 2.0 според това, което искаш
+            try? await Task.sleep(for: .seconds(1.5))
+            isAITapOnCooldown = false
+        }
+        
         NotificationCenter.default.post(name: .snoozeAds, object: nil)
-
+        
         // 1. Проверка за наличност на AI (Apple Intelligence статус)
         guard ensureAIAvailableOrShowMessage() else { return }
-
+        
         // 2. Събираме кои ястия трябва да се генерират (както досега)
         let mealsToGenerate = days.reduce(into: [Int: [String]]()) { result, day in
             let emptyMealNames = day.meals
@@ -1124,17 +1135,17 @@ struct MealPlanEditorView: View {
                 result[day.dayIndex] = emptyMealNames
             }
         }
-
+        
         guard !mealsToGenerate.isEmpty else {
             alertMessage = "All meals for all days already have items. Clear some meals if you want to generate new ones."
             showAlert = true
             return
         }
-
+        
         // 3. Попълнени вече ястия (existingMeals) – както досега
         let existingMeals = days.reduce(into: [Int: [MealPlanPreviewMeal]]()) { result, day in
             let populatedMeals = day.meals.filter { !$0.entries.isEmpty }
-
+            
             if !populatedMeals.isEmpty {
                 result[day.dayIndex] = populatedMeals.map { meal in
                     let items = meal.entries.compactMap { entry -> MealPlanPreviewItem? in
@@ -1154,14 +1165,14 @@ struct MealPlanEditorView: View {
                 }
             }
         }
-
+        
         // 4. Промптове
         let selectedPrompts = allPrompts
             .filter { selectedPromptIDs.contains($0.id) }
             .map { $0.text }
-
+        
         // 5. Абонамент / реклами gateway
-
+        
         // 5.1 Платен план – без реклами
         if SubscriptionManager.shared.subscriptionStatus != .base {
             print("💎 Premium user: Skipping ad for meal plan generation.")
@@ -1172,10 +1183,10 @@ struct MealPlanEditorView: View {
             )
             return
         }
-
+        
         // 5.2 Безплатен план – Rewarded → Interstitial → fallback
         print("📺 Free user: Checking for ads for meal plan generation...")
-
+        
         if RewardedAdManager.shared.isReady {
             print("📺 Showing Rewarded Ad for meal plan generation...")
             RewardedAdManager.shared.showIfAvailable { amount, type in
@@ -1206,7 +1217,7 @@ struct MealPlanEditorView: View {
                 existingMeals: existingMeals,
                 selectedPrompts: selectedPrompts
             )
-
+            
             // Подготвяме реклами за следващия път
             Task {
                 await RewardedAdManager.shared.loadAd()
@@ -1214,94 +1225,94 @@ struct MealPlanEditorView: View {
             }
         }
     }
-
+    
     
     private func saveAIButtonPosition() {
         let d = UserDefaults.standard
         d.set(aiButtonOffset.width,  forKey: "\(aiButtonPositionKey)_width")
         d.set(aiButtonOffset.height, forKey: "\(aiButtonPositionKey)_height")
     }
-
+    
     private func loadAIButtonPosition() {
         let d = UserDefaults.standard
         let w = d.double(forKey: "\(aiButtonPositionKey)_width")
         let h = d.double(forKey: "\(aiButtonPositionKey)_height")
         self.aiButtonOffset = CGSize(width: w, height: h)
     }
-
+    
     private func aiBottomPadding(for geometry: GeometryProxy) -> CGFloat {
         let size = geometry.size
         guard size.width > 0 else { return 75 }
         let aspect = size.height / size.width
         return aspect > 1.9 ? 75 : 95
     }
-
+    
     private func aiTrailingPadding(for geometry: GeometryProxy) -> CGFloat { 45 }
-
+    
     private func aiDragGesture(geometry: GeometryProxy) -> some Gesture {
-            let buttonSize: CGFloat = 60
-            let radius = buttonSize / 2
-            
-            return DragGesture(minimumDistance: 0)
-                .updating($aiGestureDragOffset) { value, state, _ in
-                    // Жив превод по време на drag – без анимация
-                    state = value.translation
-                }
-                .onChanged { value in
-                    let distance = max(abs(value.translation.width), abs(value.translation.height))
-                    
-                    if distance > 6 {
-                        // Вече влачим – махаме "pressed" и маркираме "dragging"
-                        if !aiIsDragging {
-                            aiIsDragging = true
-                            aiIsPressed = false
-                        }
-                    } else {
-                        // Малко мърдане = натиснат бутон
-                        aiIsPressed = true
+        let buttonSize: CGFloat = 60
+        let radius = buttonSize / 2
+        
+        return DragGesture(minimumDistance: 0)
+            .updating($aiGestureDragOffset) { value, state, _ in
+                // Жив превод по време на drag – без анимация
+                state = value.translation
+            }
+            .onChanged { value in
+                let distance = max(abs(value.translation.width), abs(value.translation.height))
+                
+                if distance > 6 {
+                    // Вече влачим – махаме "pressed" и маркираме "dragging"
+                    if !aiIsDragging {
+                        aiIsDragging = true
+                        aiIsPressed = false
                     }
+                } else {
+                    // Малко мърдане = натиснат бутон
+                    aiIsPressed = true
                 }
-                .onEnded { value in
-                    let safeArea = geometry.safeAreaInsets
-                    let size = geometry.size
-                    
-                    // Базова позиция (дясно-долу) спрямо размера + твоите padding-и
-                    let baseX = size.width  - aiTrailingPadding(for: geometry) - radius
-                    let baseY = size.height - aiBottomPadding(for: geometry)   - radius
-                    
-                    // Центърът, ако приложим текущия offset + преместеното
-                    let rawCenterX = baseX + aiButtonOffset.width  + value.translation.width
-                    let rawCenterY = baseY + aiButtonOffset.height + value.translation.height
-                    
-                    // Ограничаваме центъра ВЪТРЕ в екрана
-                    let minX = radius
-                    let maxX = size.width  - radius
-                    let minY = radius + safeArea.top
-                    let maxY = size.height - radius - safeArea.bottom - 80
-                    
-                    let clampedCenterX = min(max(rawCenterX, minX), maxX)
-                    let clampedCenterY = min(max(rawCenterY, minY), maxY)
-                    
-                    // Новият offset е просто разлика спрямо базовата позиция
-                    let newOffset = CGSize(
-                        width:  clampedCenterX - baseX,
-                        height: clampedCenterY - baseY
-                    )
-                    
-                    if aiIsDragging {
-                        aiButtonOffset = newOffset
-                        saveAIButtonPosition()
-                    } else {
-                        // Тап (без реален drag)
-                        handleAITap()
-                    }
-                    
-                    aiIsDragging = false
-                    aiIsPressed = false
+            }
+            .onEnded { value in
+                let safeArea = geometry.safeAreaInsets
+                let size = geometry.size
+                
+                // Базова позиция (дясно-долу) спрямо размера + твоите padding-и
+                let baseX = size.width  - aiTrailingPadding(for: geometry) - radius
+                let baseY = size.height - aiBottomPadding(for: geometry)   - radius
+                
+                // Центърът, ако приложим текущия offset + преместеното
+                let rawCenterX = baseX + aiButtonOffset.width  + value.translation.width
+                let rawCenterY = baseY + aiButtonOffset.height + value.translation.height
+                
+                // Ограничаваме центъра ВЪТРЕ в екрана
+                let minX = radius
+                let maxX = size.width  - radius
+                let minY = radius + safeArea.top
+                let maxY = size.height - radius - safeArea.bottom - 80
+                
+                let clampedCenterX = min(max(rawCenterX, minX), maxX)
+                let clampedCenterY = min(max(rawCenterY, minY), maxY)
+                
+                // Новият offset е просто разлика спрямо базовата позиция
+                let newOffset = CGSize(
+                    width:  clampedCenterX - baseX,
+                    height: clampedCenterY - baseY
+                )
+                
+                if aiIsDragging {
+                    aiButtonOffset = newOffset
+                    saveAIButtonPosition()
+                } else {
+                    // Тап (без реален drag)
+                    handleAITap()
                 }
-        }
-
-
+                
+                aiIsDragging = false
+                aiIsPressed = false
+            }
+    }
+    
+    
     @ViewBuilder
     private func AIButton(geometry: GeometryProxy) -> some View {
         let buttonSize: CGFloat = 60
@@ -1340,8 +1351,8 @@ struct MealPlanEditorView: View {
         .animation(.spring(response: 0.25, dampingFraction: 0.8), value: aiIsDragging)
         .contentShape(Circle())                     // само кръгчето е кликаемо
         .position(x: centerX, y: centerY)           // абсолютна позиция, вече clamp-ната
-        .opacity(isAIButtonVisible ? 1 : 0)
-        .disabled(!isAIButtonVisible)
+        .opacity(isAIButtonVisible ? (isAITapOnCooldown ? 0.5 : 1.0) : 0)
+        .disabled(!isAIButtonVisible || isAITapOnCooldown)
         .gesture(aiDragGesture(geometry: geometry)) // жестът е върху 60x60, не върху цял екран
         .transition(.scale.combined(with: .opacity))
     }
@@ -1357,7 +1368,7 @@ struct MealPlanEditorView: View {
                 let newMealPlanMeal = MealPlanMeal(mealName: previewMeal.name)
                 newMealPlanMeal.descriptiveAIName = previewMeal.descriptiveTitle
                 newMealPlanMeal.startTime = previewMeal.startTime
-
+                
                 for item in previewMeal.items {
                     let itemName = item.name
                     let descriptor = FetchDescriptor<FoodItem>(predicate: #Predicate { $0.name == itemName })
@@ -1372,7 +1383,7 @@ struct MealPlanEditorView: View {
             newDays.append(newDay)
         }
         self.days = newDays
-
+        
         if let firstDay = self.days.sorted(by: { $0.dayIndex < $1.dayIndex }).first {
             self.selectedDayID = firstDay.id
             
@@ -1387,7 +1398,7 @@ struct MealPlanEditorView: View {
             self.selectedDayID = nil
             self.selectedMealID = nil
         }
-
+        
         recalculateAndValidateMinAge()
         self.hasUserMadeEdits = false
     }
@@ -1420,7 +1431,7 @@ struct MealPlanEditorView: View {
             .glassCardStyle(cornerRadius: 20)
         }
     }
-
+    
     @ViewBuilder
     private var bottomSheetPanel: some View {
         ZStack(alignment: .bottom) {
@@ -1453,7 +1464,7 @@ struct MealPlanEditorView: View {
                 }
                 .padding(.horizontal)
                 .frame(height: 35)
-                    
+                
                 dropDownLayer
                 
             }
@@ -1470,7 +1481,7 @@ struct MealPlanEditorView: View {
         .zIndex(1)
         .transition(.move(edge: .bottom).animation(.easeInOut(duration: 0.3)))
     }
-
+    
     @ViewBuilder
     private var dropDownLayer: some View {
         Group {
@@ -1525,16 +1536,16 @@ struct MealPlanEditorView: View {
         showAlert = true
         return false
     }
-
+    
     @ViewBuilder
-          private var bannerAdSection: some View {
-              // Показваме банер само за free (Base) потребители
-              if SubscriptionManager.shared.subscriptionStatus == .base {
-                  BannerAdView(adsBool: $isBannerAdLoaded, bucket: .large)
-                      .frame(height: 120)
-                      .opacity(isBannerAdLoaded ? 1 : 0)
-                      .animation(.easeInOut(duration: 0.25), value: isBannerAdLoaded)
-                      .padding(.horizontal)
-              }
-          }
+    private var bannerAdSection: some View {
+        // Показваме банер само за free (Base) потребители
+        if SubscriptionManager.shared.subscriptionStatus == .base {
+            BannerAdView(adsBool: $isBannerAdLoaded, bucket: .large)
+                .frame(height: 120)
+                .opacity(isBannerAdLoaded ? 1 : 0)
+                .animation(.easeInOut(duration: 0.25), value: isBannerAdLoaded)
+                .padding(.horizontal)
+        }
+    }
 }

@@ -10,10 +10,10 @@ struct TrainingView: View {
     @State private var presentedNode: PresentedNode? = nil
     @Query private var userSettingsArray: [UserSettings]   // 👈 ДОБАВИ ТОВА
     private var isAIButtonEnabledGlobally: Bool {
-           userSettingsArray.first?.isAIButtonEnabled ?? true
-       }
+        userSettingsArray.first?.isAIButtonEnabled ?? true
+    }
     @State private var refreshTrigger = 0
-    
+    @State private var isAITapOnCooldown: Bool = false
     // MARK: - AI State
     @ObservedObject private var aiManager = AIManager.shared
     @State private var runningGenerationJobID: UUID? = nil
@@ -40,11 +40,11 @@ struct TrainingView: View {
     
     private let pageGap: CGFloat = 0
     @Environment(\.horizontalSizeClass) private var sizeClass
-
+    
     private var ringsPerRow: Int {
-           // Ако е Regular (iPad/Landscape Max), показваме 8, иначе 4 за телефони
-           return sizeClass == .regular ? 8 : 4
-       }
+        // Ако е Regular (iPad/Landscape Max), показваме 8, иначе 4 за телефони
+        return sizeClass == .regular ? 8 : 4
+    }
     private let ringSize:      CGFloat = 40
     private let ringSpacing:   CGFloat = 10
     private let labelSpacing:  CGFloat = 6
@@ -381,8 +381,8 @@ struct TrainingView: View {
                     }else: { view in
                         view.padding(.top, 8)
                     }
-                 
-
+                
+                
                 WeekCarouselRepresentable(
                     selectedDate: $chosenDate,
                     progressProvider: { date in goalProgress(on: date) }
@@ -487,7 +487,7 @@ struct TrainingView: View {
                             .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                             
                             let exercises = currentExercises.keys.sorted { $0.name < $1.name }
-
+                            
                             ForEach(Array(exercises.enumerated()), id: \.element.id) { index, exercise in
                                 // 👉 Рекламният ред преди упражнението
                                 if shouldShowAd(at: index) {
@@ -1182,10 +1182,22 @@ struct TrainingView: View {
             withAnimation { showAIGenerationToast = false }
         }
     }
-
+    
     private func handleAITap() {
+        if isAITapOnCooldown {
+            return
+        }
+        
+        // 1. Веднага активираме cooldown за да предотвратим спам/двойни кликове
+        isAITapOnCooldown = true
+        Task { @MainActor in
+            // Тук можеш да смениш 1.5 на 1.0 или 2.0 според това, което искаш
+            try? await Task.sleep(for: .seconds(1.5))
+            isAITapOnCooldown = false
+        }
+        
         NotificationCenter.default.post(name: .snoozeAds, object: nil)
-
+        
         // 1. Проверка за наличност на AI (като при ExerciseItemEditorView)
         guard ensureAIAvailableOrShowMessage() else { return }
         
@@ -1230,7 +1242,7 @@ struct TrainingView: View {
         let existingForGeneration = existingWorkouts
         
         // 3. Логика за АБОНАМЕНТ / РЕКЛАМИ (копи/пейст от ExerciseItemEditorView)
-
+        
         // 3.1 Платен план – без реклами
         if SubscriptionManager.shared.subscriptionStatus != .base {
             print("💎 Premium user: Skipping ad.")
@@ -1283,7 +1295,7 @@ struct TrainingView: View {
             }
         }
     }
-
+    
     
     private func saveAIButtonPosition() {
         let d = UserDefaults.standard
@@ -1336,8 +1348,8 @@ struct TrainingView: View {
         .animation(.spring(response: 0.25, dampingFraction: 0.8), value: aiIsDragging)
         .contentShape(Circle())                     // само кръгчето е кликаемо
         .position(x: centerX, y: centerY)           // абсолютна позиция, вече clamp-ната
-        .opacity(isAIButtonVisible ? 1 : 0)
-        .disabled(!isAIButtonVisible)
+        .opacity(isAIButtonVisible ? (isAITapOnCooldown ? 0.5 : 1.0) : 0)
+        .disabled(!isAIButtonVisible || isAITapOnCooldown)
         .gesture(aiDragGesture(geometry: geometry)) // жестът е върху 60x60, не върху цял екран
         .transition(.scale.combined(with: .opacity))
     }
@@ -1644,57 +1656,57 @@ struct TrainingView: View {
     }
     
     @ViewBuilder
-        private var collapsedMuscleGroups: some View {
-            let items = allMuscleGroups
-            // Използваме динамичната променлива тук
-            let currentRingsPerRow = self.ringsPerRow
-            
-            // Разделяме на страници спрямо ширината на екрана
-            let pages: [[MuscleGroup]] = stride(from: 0, to: items.count, by: currentRingsPerRow)
-                .map { Array(items[$0 ..< min($0 + currentRingsPerRow, items.count)]) }
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: pageGap) {
-                    ForEach(pages.indices, id: \.self) { idx in
-                        let cols = Array(
-                            repeating: GridItem(.fixed(ringCellWidth), spacing: ringSpacing),
-                            count: currentRingsPerRow
-                        )
-                        
-                        LazyVGrid(columns: cols, spacing: ringSpacing) {
-                            ForEach(pages[idx]) { group in
-                                muscleCardButton(for: group)
-                            }
+    private var collapsedMuscleGroups: some View {
+        let items = allMuscleGroups
+        // Използваме динамичната променлива тук
+        let currentRingsPerRow = self.ringsPerRow
+        
+        // Разделяме на страници спрямо ширината на екрана
+        let pages: [[MuscleGroup]] = stride(from: 0, to: items.count, by: currentRingsPerRow)
+            .map { Array(items[$0 ..< min($0 + currentRingsPerRow, items.count)]) }
+        
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: pageGap) {
+                ForEach(pages.indices, id: \.self) { idx in
+                    let cols = Array(
+                        repeating: GridItem(.fixed(ringCellWidth), spacing: ringSpacing),
+                        count: currentRingsPerRow
+                    )
+                    
+                    LazyVGrid(columns: cols, spacing: ringSpacing) {
+                        ForEach(pages[idx]) { group in
+                            muscleCardButton(for: group)
                         }
-                        .frame(height: ringCellHeight)
-                        // Това гарантира, че групата заема правилната ширина на контейнера
-                        .containerRelativeFrame(.horizontal)
-                        .contentShape(Rectangle())
                     }
+                    .frame(height: ringCellHeight)
+                    // Това гарантира, че групата заема правилната ширина на контейнера
+                    .containerRelativeFrame(.horizontal)
+                    .contentShape(Rectangle())
                 }
-                .scrollTargetLayout()
             }
-            .scrollIndicators(.hidden)
-            .scrollTargetBehavior(.paging)
-            .frame(height: ringCellHeight)
+            .scrollTargetLayout()
         }
+        .scrollIndicators(.hidden)
+        .scrollTargetBehavior(.paging)
+        .frame(height: ringCellHeight)
+    }
     
     @ViewBuilder
-        private var expandedMuscleGroups: some View {
-            // Използваме динамичната променлива
-            let currentRingsPerRow = self.ringsPerRow
-            
-            let cols = Array(
-                repeating: GridItem(.fixed(ringCellWidth), spacing: ringSpacing),
-                count: currentRingsPerRow
-            )
-            
-            LazyVGrid(columns: cols, spacing: ringSpacing) {
-                ForEach(allMuscleGroups) { group in
-                    muscleCardButton(for: group)
-                }
+    private var expandedMuscleGroups: some View {
+        // Използваме динамичната променлива
+        let currentRingsPerRow = self.ringsPerRow
+        
+        let cols = Array(
+            repeating: GridItem(.fixed(ringCellWidth), spacing: ringSpacing),
+            count: currentRingsPerRow
+        )
+        
+        LazyVGrid(columns: cols, spacing: ringSpacing) {
+            ForEach(allMuscleGroups) { group in
+                muscleCardButton(for: group)
             }
         }
+    }
     
     @ViewBuilder
     private var fullScreenSearchResultsView: some View {
@@ -2187,23 +2199,23 @@ struct TrainingView: View {
     }
     
     private func shouldShowAd(at index: Int) -> Bool {
-            // Проверка за Premium абонамент - ако е платен, не показваме реклами
-            if SubscriptionManager.shared.subscriptionStatus != .base {
-                return false
-            }
-            
-            // Пропускаме само първите 2 реда (0 и 1), за да не е най-горе
-            if index < 2 { return false }
-            
-            // Алгоритъм за минимум 2 елемента разстояние:
-            // Използваме цикъл от 7. Рекламите се падат на остатък 2 и 5.
-            // Това създава ритъм: Реклама -> (2 елемента) -> Реклама -> (3 елемента) -> Реклама...
-            // Индекси с реклами: 2, 5, 9, 12, 16, 19...
-            let remainder = index % 7
-            if remainder == 2 || remainder == 5 {
-                return true
-            }
-            
+        // Проверка за Premium абонамент - ако е платен, не показваме реклами
+        if SubscriptionManager.shared.subscriptionStatus != .base {
             return false
         }
+        
+        // Пропускаме само първите 2 реда (0 и 1), за да не е най-горе
+        if index < 2 { return false }
+        
+        // Алгоритъм за минимум 2 елемента разстояние:
+        // Използваме цикъл от 7. Рекламите се падат на остатък 2 и 5.
+        // Това създава ритъм: Реклама -> (2 елемента) -> Реклама -> (3 елемента) -> Реклама...
+        // Индекси с реклами: 2, 5, 9, 12, 16, 19...
+        let remainder = index % 7
+        if remainder == 2 || remainder == 5 {
+            return true
+        }
+        
+        return false
+    }
 }
