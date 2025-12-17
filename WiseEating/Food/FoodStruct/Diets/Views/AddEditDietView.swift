@@ -18,11 +18,11 @@ struct AddEditDietView: View {
     @Query(sort: \Prompt.creationDate, order: .reverse) private var allPrompts: [Prompt]
     @State private var selectedPromptIDs: Set<Prompt.ID> = []
     private var isAIButtonEnabledGlobally: Bool {
-          userSettingsArray.first?.isAIButtonEnabled ?? true
-      }
+        userSettingsArray.first?.isAIButtonEnabled ?? true
+    }
     private enum OpenMenu { case none, promptSelector }
     @State private var openMenu: OpenMenu = .none
-    
+    @State private var isAITapOnCooldown: Bool = false
     @State private var promptToDelete: Prompt? = nil
     @State private var isShowingDeletePromptConfirmation = false
     
@@ -159,7 +159,7 @@ struct AddEditDietView: View {
                         VStack(spacing: 16) {
                             nameCard
                             bannerAdSection
-                            .frame(height: isBannerAdLoaded ? 120 : 0)
+                                .frame(height: isBannerAdLoaded ? 120 : 0)
                             // Секция за промптове
                             if GlobalState.aiAvailability != .deviceNotEligible && isAIButtonEnabledGlobally{
                                 VStack(spacing: 12) {
@@ -472,7 +472,7 @@ struct AddEditDietView: View {
                 }
                 return
             }
-
+            
             // CUSTOM DIET: rename + update foods
             guard !trimmedName.isEmpty else {
                 alertMessage = "The diet name cannot be empty."
@@ -533,15 +533,15 @@ struct AddEditDietView: View {
               let job = aiManager.jobs.first(where: { $0.id == pendingID }) else {
             return
         }
-
+        
         // Изтриваме job-а асинхронно, за да не правим saveDiet() async
         Task {
             await aiManager.deleteJob(job)
         }
-
+        
         pendingAIJobIDToDeleteOnSave = nil
     }
-
+    
     // --- AI Floating Button: Helpers ---
     private func aiBottomPadding(for geometry: GeometryProxy) -> CGFloat {
         let size = geometry.size
@@ -552,67 +552,67 @@ struct AddEditDietView: View {
     private func aiTrailingPadding(for geometry: GeometryProxy) -> CGFloat { 45 }
     
     private func aiDragGesture(geometry: GeometryProxy) -> some Gesture {
-           let buttonSize: CGFloat = 60
-           let radius = buttonSize / 2
-           
-           return DragGesture(minimumDistance: 0)
-               .updating($aiGestureDragOffset) { value, state, _ in
-                   // Жив превод по време на drag – без анимация
-                   state = value.translation
-               }
-               .onChanged { value in
-                   let distance = max(abs(value.translation.width), abs(value.translation.height))
-                   
-                   if distance > 6 {
-                       // Вече влачим – махаме "pressed" и маркираме "dragging"
-                       if !aiIsDragging {
-                           aiIsDragging = true
-                           aiIsPressed = false
-                       }
-                   } else {
-                       // Малко мърдане = натиснат бутон
-                       aiIsPressed = true
-                   }
-               }
-               .onEnded { value in
-                   let safeArea = geometry.safeAreaInsets
-                   let size = geometry.size
-                   
-                   // Базова позиция (дясно-долу) спрямо размера + твоите padding-и
-                   let baseX = size.width  - aiTrailingPadding(for: geometry) - radius
-                   let baseY = size.height - aiBottomPadding(for: geometry)   - radius
-                   
-                   // Центърът, ако приложим текущия offset + преместеното
-                   let rawCenterX = baseX + aiButtonOffset.width  + value.translation.width
-                   let rawCenterY = baseY + aiButtonOffset.height + value.translation.height
-                   
-                   // Ограничаваме центъра ВЪТРЕ в екрана
-                   let minX = radius
-                   let maxX = size.width  - radius
-                   let minY = radius + safeArea.top
-                   let maxY = size.height - radius - safeArea.bottom - 80
-                   
-                   let clampedCenterX = min(max(rawCenterX, minX), maxX)
-                   let clampedCenterY = min(max(rawCenterY, minY), maxY)
-                   
-                   // Новият offset е просто разлика спрямо базовата позиция
-                   let newOffset = CGSize(
-                       width:  clampedCenterX - baseX,
-                       height: clampedCenterY - baseY
-                   )
-                   
-                   if aiIsDragging {
-                       aiButtonOffset = newOffset
-                       saveAIButtonPosition()
-                   } else {
-                       // Тап (без реален drag)
-                       handleAITap()
-                   }
-                   
-                   aiIsDragging = false
-                   aiIsPressed = false
-               }
-       }
+        let buttonSize: CGFloat = 60
+        let radius = buttonSize / 2
+        
+        return DragGesture(minimumDistance: 0)
+            .updating($aiGestureDragOffset) { value, state, _ in
+                // Жив превод по време на drag – без анимация
+                state = value.translation
+            }
+            .onChanged { value in
+                let distance = max(abs(value.translation.width), abs(value.translation.height))
+                
+                if distance > 6 {
+                    // Вече влачим – махаме "pressed" и маркираме "dragging"
+                    if !aiIsDragging {
+                        aiIsDragging = true
+                        aiIsPressed = false
+                    }
+                } else {
+                    // Малко мърдане = натиснат бутон
+                    aiIsPressed = true
+                }
+            }
+            .onEnded { value in
+                let safeArea = geometry.safeAreaInsets
+                let size = geometry.size
+                
+                // Базова позиция (дясно-долу) спрямо размера + твоите padding-и
+                let baseX = size.width  - aiTrailingPadding(for: geometry) - radius
+                let baseY = size.height - aiBottomPadding(for: geometry)   - radius
+                
+                // Центърът, ако приложим текущия offset + преместеното
+                let rawCenterX = baseX + aiButtonOffset.width  + value.translation.width
+                let rawCenterY = baseY + aiButtonOffset.height + value.translation.height
+                
+                // Ограничаваме центъра ВЪТРЕ в екрана
+                let minX = radius
+                let maxX = size.width  - radius
+                let minY = radius + safeArea.top
+                let maxY = size.height - radius - safeArea.bottom - 80
+                
+                let clampedCenterX = min(max(rawCenterX, minX), maxX)
+                let clampedCenterY = min(max(rawCenterY, minY), maxY)
+                
+                // Новият offset е просто разлика спрямо базовата позиция
+                let newOffset = CGSize(
+                    width:  clampedCenterX - baseX,
+                    height: clampedCenterY - baseY
+                )
+                
+                if aiIsDragging {
+                    aiButtonOffset = newOffset
+                    saveAIButtonPosition()
+                } else {
+                    // Тап (без реален drag)
+                    handleAITap()
+                }
+                
+                aiIsDragging = false
+                aiIsPressed = false
+            }
+    }
     
     /// Стартира същинската AI генерация на диета.
     /// Извиква се САМО след като потребителят вече е "платил"
@@ -635,11 +635,23 @@ struct AddEditDietView: View {
             withAnimation { showAIGenerationToast = false }
         }
     }
-
+    
     
     private func handleAITap() {
+        if isAITapOnCooldown {
+            return
+        }
+        
+        // 1. Веднага активираме cooldown за да предотвратим спам/двойни кликове
+        isAITapOnCooldown = true
+        Task { @MainActor in
+            // Тук можеш да смениш 1.5 на 1.0 или 2.0 според това, което искаш
+            try? await Task.sleep(for: .seconds(1.5))
+            isAITapOnCooldown = false
+        }
+        
         NotificationCenter.default.post(name: .snoozeAds, object: nil)
-
+        
         // 1. Проверка за наличност на AI
         guard ensureAIAvailableOrShowMessage() else { return }
         
@@ -692,7 +704,7 @@ struct AddEditDietView: View {
             }
         }
     }
-
+    
     
     private func saveAIButtonPosition() {
         let d = UserDefaults.standard
@@ -744,8 +756,8 @@ struct AddEditDietView: View {
         .animation(.spring(response: 0.25, dampingFraction: 0.8), value: aiIsDragging)
         .contentShape(Circle())                     // само кръгчето е кликаемо
         .position(x: centerX, y: centerY)           // абсолютна позиция, вече clamp-ната
-        .opacity(isAIButtonVisible ? 1 : 0)
-        .disabled(!isAIButtonVisible)
+        .opacity(isAIButtonVisible ? (isAITapOnCooldown ? 0.5 : 1.0) : 0)
+        .disabled(!isAIButtonVisible || isAITapOnCooldown)
         .gesture(aiDragGesture(geometry: geometry)) // жестът е върху 60x60, не върху цял екран
         .transition(.scale.combined(with: .opacity))
     }
@@ -940,7 +952,7 @@ struct AddEditDietView: View {
         pendingAIJobIDToDeleteOnSave = jobID
         runningGenerationJobID = nil
     }
-
+    
     
     private func triggerAIGenerationToast() {
         toastTimer?.invalidate()
@@ -1029,14 +1041,14 @@ struct AddEditDietView: View {
     }
     
     @ViewBuilder
-       private var bannerAdSection: some View {
-           // Показваме банер само за free (Base) потребители
-           if SubscriptionManager.shared.subscriptionStatus == .base {
-               BannerAdView(adsBool: $isBannerAdLoaded, bucket: .large)
-                   .frame(height: 120)
-                   .opacity(isBannerAdLoaded ? 1 : 0)
-                   .animation(.easeInOut(duration: 0.25), value: isBannerAdLoaded)
-                   .padding(.horizontal)
-           }
-       }
+    private var bannerAdSection: some View {
+        // Показваме банер само за free (Base) потребители
+        if SubscriptionManager.shared.subscriptionStatus == .base {
+            BannerAdView(adsBool: $isBannerAdLoaded, bucket: .large)
+                .frame(height: 120)
+                .opacity(isBannerAdLoaded ? 1 : 0)
+                .animation(.easeInOut(duration: 0.25), value: isBannerAdLoaded)
+                .padding(.horizontal)
+        }
+    }
 }

@@ -7,18 +7,17 @@ struct AIDailyTrainingGeneratorView: View {
     @ObservedObject private var aiManager = AIManager.shared
     @Query private var userSettingsArray: [UserSettings]   // 👈 ДОБАВИ ТОВА
     private var isAIButtonEnabledGlobally: Bool {
-          userSettingsArray.first?.isAIButtonEnabled ?? true
-      }
+        userSettingsArray.first?.isAIButtonEnabled ?? true
+    }
     // MARK: - Input
     let profile: Profile
     let date: Date
     let onJobScheduled: () -> Void
     let onDismiss: () -> Void
-
-    // MARK: - State
+    @State private var isAITapOnCooldown: Bool = false
     @State private var selectedTrainingNames: Set<String>
     @State private var trainingsForDay: [Training]
-
+    
     // MARK: - Prompt State & Navigation
     @Query(sort: \Prompt.creationDate, order: .reverse) private var allPrompts: [Prompt]
     @State private var selectedPromptIDs: Set<Prompt.ID> = []
@@ -32,7 +31,7 @@ struct AIDailyTrainingGeneratorView: View {
     @State private var promptToDelete: Prompt? = nil
     @State private var isShowingDeletePromptConfirmation = false
     private let selectedPromptsKey = "AIDailyTrainingGenerator_SelectedPrompts"
-
+    
     // --- AI Floating Button State ---
     @State private var isAIButtonVisible: Bool = true
     @State private var aiButtonOffset: CGSize = .zero
@@ -40,12 +39,12 @@ struct AIDailyTrainingGeneratorView: View {
     @GestureState private var aiGestureDragOffset: CGSize = .zero
     @State private var aiIsPressed: Bool = false
     private let aiButtonPositionKey = "floatingDailyTrainingAIGenButtonPosition"
-
+    
     // --- Toast Notification State ---
     @State private var showAIGenerationToast = false
     @State private var toastTimer: Timer? = nil
     @State private var toastProgress: Double = 0.0
-
+    
     init(profile: Profile, date: Date, trainings: [Training], onJobScheduled: @escaping () -> Void, onDismiss: @escaping () -> Void) {
         self.profile = profile
         self.date = date
@@ -57,18 +56,18 @@ struct AIDailyTrainingGeneratorView: View {
         self._trainingsForDay = State(initialValue: trainingsForDisplay)
         self._selectedTrainingNames = State(initialValue: Set(trainingsForDisplay.map { $0.name }))
     }
-
+    
     private var isAIButtonCurrentlyVisible: Bool {
         return !showAIGenerationToast &&
         openMenu == .none &&
         isAIButtonEnabledGlobally
     }
-
+    
     var body: some View {
         NavigationStack(path: $path) {
             ZStack {
                 ThemeBackgroundView().ignoresSafeArea()
-
+                
                 VStack(spacing: 0) {
                     toolbar
                     ScrollView(showsIndicators: false) {
@@ -108,13 +107,13 @@ struct AIDailyTrainingGeneratorView: View {
                     }
                     
                 case .editPrompt(let prompt):
-                       PromptEditorView(promptType: .trainingViewМealPlan, promptToEdit: prompt) { editedPrompt in
-                           if let editedPrompt = editedPrompt, !selectedPromptIDs.contains(editedPrompt.id) {
-                               selectedPromptIDs.insert(editedPrompt.id)
-                           }
-                           path.removeLast()
-                       }
-                   }
+                    PromptEditorView(promptType: .trainingViewМealPlan, promptToEdit: prompt) { editedPrompt in
+                        if let editedPrompt = editedPrompt, !selectedPromptIDs.contains(editedPrompt.id) {
+                            selectedPromptIDs.insert(editedPrompt.id)
+                        }
+                        path.removeLast()
+                    }
+                }
             }
             .confirmationDialog(
                 "Delete Prompt?", isPresented: $isShowingDeletePromptConfirmation, presenting: promptToDelete
@@ -135,11 +134,11 @@ struct AIDailyTrainingGeneratorView: View {
             Button("Cancel", action: onDismiss)
                 .padding(.horizontal, 10).padding(.vertical, 5)
                 .glassCardStyle(cornerRadius: 20)
-
+            
             Spacer()
             Text("Generate Daily Workouts").font(.headline)
             Spacer()
-
+            
             Button("Cancel") {}.hidden()
                 .padding(.horizontal, 10).padding(.vertical, 5)
         }
@@ -150,7 +149,7 @@ struct AIDailyTrainingGeneratorView: View {
     private var mainContent: some View {
         VStack(spacing: 20) {
             let planPrompts = allPrompts.filter { $0.type == .trainingViewМealPlan }
-           
+            
             if GlobalState.aiAvailability != .deviceNotEligible && isAIButtonEnabledGlobally{
                 VStack(spacing: 12) {
                     if !planPrompts.isEmpty {
@@ -181,7 +180,7 @@ struct AIDailyTrainingGeneratorView: View {
         }
         .padding()
     }
-
+    
     @ViewBuilder
     private var promptsSection: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -242,7 +241,7 @@ struct AIDailyTrainingGeneratorView: View {
                     .glassCardStyle(cornerRadius: 20)
                 }
                 .padding(.horizontal).frame(height: 35)
-                    
+                
                 dropDownLayer
             }
             .padding(.top)
@@ -323,181 +322,193 @@ struct AIDailyTrainingGeneratorView: View {
             }
         }
     }
-
+    
     private func aiBottomPadding(for geometry: GeometryProxy) -> CGFloat {
         let size = geometry.size
         guard size.width > 0 else { return 75 }
         let aspectRatio = size.height / size.width
         return aspectRatio > 1.9 ? 75 : 95
     }
-
+    
     private func aiTrailingPadding(for geometry: GeometryProxy) -> CGFloat { 45 }
-
+    
     private func aiDragGesture(geometry: GeometryProxy) -> some Gesture {
-           let buttonSize: CGFloat = 60
-           let radius = buttonSize / 2
-           
-           return DragGesture(minimumDistance: 0)
-               .updating($aiGestureDragOffset) { value, state, _ in
-                   // Жив превод по време на drag – без анимация
-                   state = value.translation
-               }
-               .onChanged { value in
-                   let distance = max(abs(value.translation.width), abs(value.translation.height))
-                   
-                   if distance > 6 {
-                       // Вече влачим – махаме "pressed" и маркираме "dragging"
-                       if !aiIsDragging {
-                           aiIsDragging = true
-                           aiIsPressed = false
-                       }
-                   } else {
-                       // Малко мърдане = натиснат бутон
-                       aiIsPressed = true
-                   }
-               }
-               .onEnded { value in
-                   let safeArea = geometry.safeAreaInsets
-                   let size = geometry.size
-                   
-                   // Базова позиция (дясно-долу) спрямо размера + твоите padding-и
-                   let baseX = size.width  - aiTrailingPadding(for: geometry) - radius
-                   let baseY = size.height - aiBottomPadding(for: geometry)   - radius
-                   
-                   // Центърът, ако приложим текущия offset + преместеното
-                   let rawCenterX = baseX + aiButtonOffset.width  + value.translation.width
-                   let rawCenterY = baseY + aiButtonOffset.height + value.translation.height
-                   
-                   // Ограничаваме центъра ВЪТРЕ в екрана
-                   let minX = radius
-                   let maxX = size.width  - radius
-                   let minY = radius + safeArea.top
-                   let maxY = size.height - radius - safeArea.bottom - 80
-                   
-                   let clampedCenterX = min(max(rawCenterX, minX), maxX)
-                   let clampedCenterY = min(max(rawCenterY, minY), maxY)
-                   
-                   // Новият offset е просто разлика спрямо базовата позиция
-                   let newOffset = CGSize(
-                       width:  clampedCenterX - baseX,
-                       height: clampedCenterY - baseY
-                   )
-                   
-                   if aiIsDragging {
-                       aiButtonOffset = newOffset
-                       saveAIButtonPosition()
-                   } else {
-                       // Тап (без реален drag)
-                       handleAITap()
-                   }
-                   
-                   aiIsDragging = false
-                   aiIsPressed = false
-               }
-       }
+        let buttonSize: CGFloat = 60
+        let radius = buttonSize / 2
+        
+        return DragGesture(minimumDistance: 0)
+            .updating($aiGestureDragOffset) { value, state, _ in
+                // Жив превод по време на drag – без анимация
+                state = value.translation
+            }
+            .onChanged { value in
+                let distance = max(abs(value.translation.width), abs(value.translation.height))
+                
+                if distance > 6 {
+                    // Вече влачим – махаме "pressed" и маркираме "dragging"
+                    if !aiIsDragging {
+                        aiIsDragging = true
+                        aiIsPressed = false
+                    }
+                } else {
+                    // Малко мърдане = натиснат бутон
+                    aiIsPressed = true
+                }
+            }
+            .onEnded { value in
+                let safeArea = geometry.safeAreaInsets
+                let size = geometry.size
+                
+                // Базова позиция (дясно-долу) спрямо размера + твоите padding-и
+                let baseX = size.width  - aiTrailingPadding(for: geometry) - radius
+                let baseY = size.height - aiBottomPadding(for: geometry)   - radius
+                
+                // Центърът, ако приложим текущия offset + преместеното
+                let rawCenterX = baseX + aiButtonOffset.width  + value.translation.width
+                let rawCenterY = baseY + aiButtonOffset.height + value.translation.height
+                
+                // Ограничаваме центъра ВЪТРЕ в екрана
+                let minX = radius
+                let maxX = size.width  - radius
+                let minY = radius + safeArea.top
+                let maxY = size.height - radius - safeArea.bottom - 80
+                
+                let clampedCenterX = min(max(rawCenterX, minX), maxX)
+                let clampedCenterY = min(max(rawCenterY, minY), maxY)
+                
+                // Новият offset е просто разлика спрямо базовата позиция
+                let newOffset = CGSize(
+                    width:  clampedCenterX - baseX,
+                    height: clampedCenterY - baseY
+                )
+                
+                if aiIsDragging {
+                    aiButtonOffset = newOffset
+                    saveAIButtonPosition()
+                } else {
+                    // Тап (без реален drag)
+                    handleAITap()
+                }
+                
+                aiIsDragging = false
+                aiIsPressed = false
+            }
+    }
     
     // MARK: - AI & Ads Logic
-
-        /// Тази функция стартира същинската работа на AI за генериране на дневен план.
-        /// Извиква се само след успешна проверка на абонамент или изгледана реклама.
-        private func startAIGeneration() {
-             guard !selectedTrainingNames.isEmpty else { return }
-             
-             let workoutsToFill: [Int: [String]] = [1: Array(selectedTrainingNames)]
-             let selectedPrompts = allPrompts.filter { selectedPromptIDs.contains($0.id) }.map { $0.text }
-
-             let existingWorkouts = trainingsForDay
-                 .filter { !$0.exercises(using: modelContext).isEmpty }
-                 .map { training -> TrainingPlanWorkoutDraft in
-                     let exercises = training.exercises(using: modelContext).map { (item, duration) in
-                         TrainingPlanExerciseDraft(exerciseName: item.name, durationMinutes: duration)
-                     }
-                     return TrainingPlanWorkoutDraft(workoutName: training.name, exercises: exercises)
-                 }
-             let existingWorkoutsDict: [Int: [TrainingPlanWorkoutDraft]]? = existingWorkouts.isEmpty ? nil : [1: existingWorkouts]
-
-             if aiManager.startTrainingPlanGeneration(
-                 for: profile,
-                 prompts: selectedPrompts.isEmpty ? [] : selectedPrompts,
-                 workoutsToFill: workoutsToFill,
-                 existingWorkouts: existingWorkoutsDict,
-                 jobType: .dailyTreiningPlan
-             ) != nil {
-                 triggerAIGenerationToast()
-                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                     onJobScheduled()
-                     onDismiss()
-                 }
-             } else {
-                 print("❌ Failed to start AI training generation job from daily generator.")
-                 onDismiss()
-             }
+    
+    /// Тази функция стартира същинската работа на AI за генериране на дневен план.
+    /// Извиква се само след успешна проверка на абонамент или изгледана реклама.
+    private func startAIGeneration() {
+        guard !selectedTrainingNames.isEmpty else { return }
+        
+        let workoutsToFill: [Int: [String]] = [1: Array(selectedTrainingNames)]
+        let selectedPrompts = allPrompts.filter { selectedPromptIDs.contains($0.id) }.map { $0.text }
+        
+        let existingWorkouts = trainingsForDay
+            .filter { !$0.exercises(using: modelContext).isEmpty }
+            .map { training -> TrainingPlanWorkoutDraft in
+                let exercises = training.exercises(using: modelContext).map { (item, duration) in
+                    TrainingPlanExerciseDraft(exerciseName: item.name, durationMinutes: duration)
+                }
+                return TrainingPlanWorkoutDraft(workoutName: training.name, exercises: exercises)
+            }
+        let existingWorkoutsDict: [Int: [TrainingPlanWorkoutDraft]]? = existingWorkouts.isEmpty ? nil : [1: existingWorkouts]
+        
+        if aiManager.startTrainingPlanGeneration(
+            for: profile,
+            prompts: selectedPrompts.isEmpty ? [] : selectedPrompts,
+            workoutsToFill: workoutsToFill,
+            existingWorkouts: existingWorkoutsDict,
+            jobType: .dailyTreiningPlan
+        ) != nil {
+            triggerAIGenerationToast()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                onJobScheduled()
+                onDismiss()
+            }
+        } else {
+            print("❌ Failed to start AI training generation job from daily generator.")
+            onDismiss()
         }
-
-        /// Основният handler на бутона. Управлява потокa: Абонамент -> Реклама -> AI.
-        private func handleAITap() {
-            NotificationCenter.default.post(name: .snoozeAds, object: nil)
-
-            // 1. Проверка дали има избрани тренировки (преди рекламите, за да не ги хабим напразно)
-            guard !selectedTrainingNames.isEmpty else { return }
+    }
+    
+    /// Основният handler на бутона. Управлява потокa: Абонамент -> Реклама -> AI.
+    private func handleAITap() {
+        if isAITapOnCooldown {
+            return
+        }
+        
+        // 1. Веднага активираме cooldown за да предотвратим спам/двойни кликове
+        isAITapOnCooldown = true
+        Task { @MainActor in
+            // Тук можеш да смениш 1.5 на 1.0 или 2.0 според това, което искаш
+            try? await Task.sleep(for: .seconds(1.5))
+            isAITapOnCooldown = false
+        }
+        
+        NotificationCenter.default.post(name: .snoozeAds, object: nil)
+        
+        // 1. Проверка дали има избрани тренировки (преди рекламите, за да не ги хабим напразно)
+        guard !selectedTrainingNames.isEmpty else { return }
+        
+        // 2. Проверка за АБОНАМЕНТ
+        // Ако потребителят е на платен план (не е Base), пропускаме рекламите.
+        if SubscriptionManager.shared.subscriptionStatus != .base {
+            print("💎 Premium user: Skipping ad.")
+            startAIGeneration()
+            return
+        }
+        
+        // 3. Логика за реклами (Base Plan)
+        print("📺 Free user: Checking for ads...")
+        
+        // Опит 1: Видео с награда (Rewarded) - Приоритет
+        if RewardedAdManager.shared.isReady {
+            print("📺 Showing Rewarded Ad...")
+            RewardedAdManager.shared.showIfAvailable { amount, type in
+                // Този код се изпълнява САМО ако рекламата е изгледана докрай и наградата е получена
+                print("✅ Ad watched! Starting generation.")
+                self.startAIGeneration()
+            }
+            // Ако потребителят затвори видеото преждевременно, startAIGeneration НЯМА да се извика.
+        }
+        // Опит 2: Цял екран (Interstitial) - Резервен вариант
+        else if InterstitialAdManager.shared.isReady {
+            print("⚠️ Rewarded not ready. Showing Interstitial fallback...")
+            InterstitialAdManager.shared.showIfAvailable {
+                // Извиква се, когато потребителят затвори рекламата (хиксчето)
+                print("✅ Interstitial closed. Starting generation.")
+                self.startAIGeneration()
+            }
+        }
+        // Опит 3: Няма никакви реклами (Graceful degradation)
+        else {
+            print("⚠️ No ads available. Proceeding graciously.")
+            // Пускаме услугата, за да не ядосваме потребителя, че няма реклами
+            startAIGeneration()
             
-            // 2. Проверка за АБОНАМЕНТ
-            // Ако потребителят е на платен план (не е Base), пропускаме рекламите.
-            if SubscriptionManager.shared.subscriptionStatus != .base {
-                print("💎 Premium user: Skipping ad.")
-                startAIGeneration()
-                return
-            }
-
-            // 3. Логика за реклами (Base Plan)
-            print("📺 Free user: Checking for ads...")
-
-            // Опит 1: Видео с награда (Rewarded) - Приоритет
-            if RewardedAdManager.shared.isReady {
-                print("📺 Showing Rewarded Ad...")
-                RewardedAdManager.shared.showIfAvailable { amount, type in
-                    // Този код се изпълнява САМО ако рекламата е изгледана докрай и наградата е получена
-                    print("✅ Ad watched! Starting generation.")
-                    self.startAIGeneration()
-                }
-                // Ако потребителят затвори видеото преждевременно, startAIGeneration НЯМА да се извика.
-            }
-            // Опит 2: Цял екран (Interstitial) - Резервен вариант
-            else if InterstitialAdManager.shared.isReady {
-                print("⚠️ Rewarded not ready. Showing Interstitial fallback...")
-                InterstitialAdManager.shared.showIfAvailable {
-                    // Извиква се, когато потребителят затвори рекламата (хиксчето)
-                    print("✅ Interstitial closed. Starting generation.")
-                    self.startAIGeneration()
-                }
-            }
-            // Опит 3: Няма никакви реклами (Graceful degradation)
-            else {
-                print("⚠️ No ads available. Proceeding graciously.")
-                // Пускаме услугата, за да не ядосваме потребителя, че няма реклами
-                startAIGeneration()
-                
-                // Опитваме да заредим за следващия път
-                Task {
-                    await RewardedAdManager.shared.loadAd()
-                    await InterstitialAdManager.shared.loadAd()
-                }
+            // Опитваме да заредим за следващия път
+            Task {
+                await RewardedAdManager.shared.loadAd()
+                await InterstitialAdManager.shared.loadAd()
             }
         }
+    }
     
     private func saveAIButtonPosition() {
         let d = UserDefaults.standard
         d.set(aiButtonOffset.width, forKey: "\(aiButtonPositionKey)_width")
         d.set(aiButtonOffset.height, forKey: "\(aiButtonPositionKey)_height")
     }
-
+    
     private func loadAIButtonPosition() {
         let d = UserDefaults.standard
         let w = d.double(forKey: "\(aiButtonPositionKey)_width")
         let h = d.double(forKey: "\(aiButtonPositionKey)_height")
         self.aiButtonOffset = CGSize(width: w, height: h)
     }
-
+    
     @ViewBuilder
     private func AIButton(geometry: GeometryProxy) -> some View {
         let buttonSize: CGFloat = 60
@@ -536,8 +547,8 @@ struct AIDailyTrainingGeneratorView: View {
         .animation(.spring(response: 0.25, dampingFraction: 0.8), value: aiIsDragging)
         .contentShape(Circle())                     // само кръгчето е кликаемо
         .position(x: centerX, y: centerY)           // абсолютна позиция, вече clamp-ната
-        .opacity(isAIButtonVisible ? 1 : 0)
-        .disabled(!isAIButtonVisible)
+        .opacity(isAIButtonVisible ? (isAITapOnCooldown ? 0.5 : 1.0) : 0)
+        .disabled(!isAIButtonVisible || isAITapOnCooldown)
         .gesture(aiDragGesture(geometry: geometry)) // жестът е върху 60x60, не върху цял екран
         .transition(.scale.combined(with: .opacity))
     }
@@ -548,20 +559,20 @@ struct AIDailyTrainingGeneratorView: View {
             HStack(spacing: 12) {
                 Image(systemName: "sparkles")
                     .font(.title2)
-
+                
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Generation Scheduled")
                         .fontWeight(.bold)
                     Text("You'll be notified when your plan is ready.")
                         .font(.caption)
-
+                    
                     ProgressView(value: min(max(toastProgress, 0.0), 1.0), total: 1.0)
                         .progressViewStyle(LinearProgressViewStyle(tint: effectManager.currentGlobalAccentColor))
                         .animation(.linear, value: toastProgress)
                 }
-
+                
                 Spacer()
-
+                
                 Button("OK") {
                     toastTimer?.invalidate()
                     toastTimer = nil
@@ -577,24 +588,24 @@ struct AIDailyTrainingGeneratorView: View {
             .glassCardStyle(cornerRadius: 20)
             .padding()
             .transition(.move(edge: .top).combined(with: .opacity))
-
+            
             Spacer()
         }
         .frame(maxHeight: .infinity, alignment: .top)
         .ignoresSafeArea(.keyboard)
     }
-
+    
     private func triggerAIGenerationToast() {
         toastTimer?.invalidate()
         toastProgress = 0.0
         withAnimation {
             showAIGenerationToast = true
         }
-
+        
         let totalDuration = 5.0
         let updateInterval = 0.1
         let progressIncrement = updateInterval / totalDuration
-
+        
         toastTimer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { timer in
             DispatchQueue.main.async {
                 self.toastProgress = min(1.0, self.toastProgress + progressIncrement)
@@ -613,7 +624,7 @@ struct AIDailyTrainingGeneratorView: View {
         let idStrings = ids.map { $0.uuidString }
         UserDefaults.standard.set(idStrings, forKey: selectedPromptsKey)
     }
-
+    
     private func loadSelectedPromptIDs() {
         guard let idStrings = UserDefaults.standard.stringArray(forKey: selectedPromptsKey) else { return }
         let ids = idStrings.compactMap { UUID(uuidString: $0) }

@@ -6,20 +6,21 @@ import PhotosUI
 struct FoodItemMenuEditorView: View {
     @State private var pendingAIJobIDToDeleteOnSave: UUID? = nil
     @Query private var userSettingsArray: [UserSettings]   // 👈 ДОБАВИ ТОВА
-
+    @State private var isAITapOnCooldown: Bool = false
+    
     @State private var isBannerAdLoaded: Bool = false
-
+    
     private var isAIButtonEnabledGlobally: Bool {
-         userSettingsArray.first?.isAIButtonEnabled ?? true
-     }
+        userSettingsArray.first?.isAIButtonEnabled ?? true
+    }
     // MARK: - Photo source state
-
+    
     private enum PhotoSourceTarget {
         case main
         case gallery
         case galleryReplace(index: Int)
     }
-
+    
     @State private var showPhotoSourceDialog = false
     @State private var showCameraPicker = false
     @State private var showPhotoLibraryPicker = false
@@ -35,15 +36,15 @@ struct FoodItemMenuEditorView: View {
     
     @Query(sort: \Prompt.creationDate, order: .reverse) private var allPrompts: [Prompt]
     @State private var selectedPromptIDs: Set<Prompt.ID> = []
-
+    
     private enum OpenMenu { case none, promptSelector }
     @State private var openMenu: OpenMenu = .none
-
+    
     @State private var promptToDelete: Prompt? = nil
     @State private var isShowingDeletePromptConfirmation = false
-
+    
     private let selectedPromptsKey = "MenuEditor_SelectedPromptIDs"
-
+    
     // навигация към PromptEditorView
     @State private var path = NavigationPath()
     private enum NavigationTarget: Hashable {
@@ -58,27 +59,27 @@ struct FoodItemMenuEditorView: View {
     @GestureState private var aiGestureDragOffset: CGSize = .zero
     @State private var aiIsPressed: Bool = false
     private let aiButtonPositionKey = "floatingFoodMenuAIButtonPosition"
-
+    
     
     @FocusState.Binding var isSearchFieldFocused: Bool
-
+    
     // MARK: - Managers and Environment
     @ObservedObject private var effectManager = EffectManager.shared
     @Environment(\.modelContext) private var ctx
     @Environment(\.colorScheme)  private var colorScheme
     let onDismiss: (FoodItem?) -> Void
-
+    
     // MARK: - Data Queries
     @Query(sort: \Vitamin.name)  private var allVitamins:  [Vitamin]
     @Query(sort: \Mineral.name)  private var allMinerals:  [Mineral]
     @Query(sort: \Diet.name) private var allDiets: [Diet] // <-- ADDED QUERY
-
+    
     // MARK: - Input Properties
     let food: FoodItem?
     let profile: Profile?
     private let dubFood: FoodItemCopy?
     @State private var origRecipe: FoodItem? = nil
-
+    
     // MARK: - State Variables
     @State private var name: String
     @State private var itemDescription: String
@@ -86,11 +87,11 @@ struct FoodItemMenuEditorView: View {
     @State private var photoData: Data?
     @State private var prepTimeTxt: String
     @State private var minAgeMonthsTxt: String
-
+    
     // Ingredients
     @State private var selectedIng: [FoodItem: Double] = [:] // FoodItem → grams
     @State private var ingredientTextValues: [FoodItem.ID: String] = [:]
-
+    
     enum FocusableField: Hashable {
         case name, description, prepTime, minAge
         case ingredientGrams(FoodItem.ID)
@@ -131,7 +132,7 @@ struct FoodItemMenuEditorView: View {
     @State private var scrollToIngredientID: FoodItem.ID? = nil
     // Global Search Integration
     @Binding var globalSearchText: String
-
+    
     // Nutrient Forms (Read-Only)
     @State private var macros: MacroForm
     @State private var lipids: LipidForm
@@ -145,7 +146,7 @@ struct FoodItemMenuEditorView: View {
     @State private var calculatedMinAge: Int = 0
     
     private let isReadOnly = true
-
+    
     @State private var isSaving = false
     @State private var isAIInit = false
     // MARK: - Initializer
@@ -210,7 +211,7 @@ struct FoodItemMenuEditorView: View {
             initialAminoAcids = AminoAcidsForm(from: totals.aminoAcids)
             initialCarbDetails = CarbDetailsForm(from: totals.carbDetails)
             initialSterols = SterolsForm(from: totals.sterols)
-
+            
             let (categories, diets, allergens) = Self.aggregatedTags(for: f, allDiets: [])
             initialSelectedCategories = categories
             initialSelectedDiets = diets
@@ -244,10 +245,10 @@ struct FoodItemMenuEditorView: View {
         _selectedAllergens = State(initialValue: initialSelectedAllergens)
         _galleryData = State(initialValue: initialGalleryData)
     }
-
+    
     // MARK: - Body & Toolbar
     // ==== ФАЙЛ: FoodItemMenuEditorView.swift ====
-
+    
     var body: some View {
         NavigationStack(path: $path) {
             ZStack {
@@ -268,7 +269,7 @@ struct FoodItemMenuEditorView: View {
                         return (item.id, GlobalState.formatDecimalString(String(displayValue)))
                     })
                     recalculateAndValidateMinAge()
-
+                    
                     // Prompts selection restore + AI button pos
                     loadSelectedPromptIDs()
                     loadAIButtonPosition()
@@ -344,7 +345,7 @@ struct FoodItemMenuEditorView: View {
                         showPhotoSourceDialog = false
                         showPhotoLibraryPicker = true
                     }
-                    Button("Image Gallery") {               
+                    Button("Image Gallery") {
                         showPhotoSourceDialog = false
                         isShowingVideoGallery = true
                     }
@@ -384,7 +385,7 @@ struct FoodItemMenuEditorView: View {
                     .transition(.opacity.animation(.easeInOut(duration: 0.2)))
                     .zIndex(1)
                 }
-
+                
                 // Saving overlay
                 if isSaving {
                     VStack(spacing: 16) {
@@ -401,7 +402,7 @@ struct FoodItemMenuEditorView: View {
                     .accessibilityLabel("Saving")
                     .zIndex(1000)
                 }
-
+                
                 // Bottom sheet for prompts
                 if openMenu != .none {
                     bottomSheetPanel
@@ -411,21 +412,21 @@ struct FoodItemMenuEditorView: View {
             .background(ThemeBackgroundView().ignoresSafeArea())
             // Floating AI button and Toast overlay
             .overlay {
-               if showAIGenerationToast {
-                   aiGenerationToast
-               }
-               GeometryReader { geometry in
-                   Group {
-                       if !isSearchFieldFocused &&
+                if showAIGenerationToast {
+                    aiGenerationToast
+                }
+                GeometryReader { geometry in
+                    Group {
+                        if !isSearchFieldFocused &&
                             !isSaving &&
                             !showPopover &&
                             GlobalState.aiAvailability != .deviceNotEligible &&
                             isAIButtonEnabledGlobally{
-                           AIButton(geometry: geometry)
-                       }
-                   }
-                   .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-               }
+                            AIButton(geometry: geometry)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                }
             }
             .onReceive(NotificationCenter.default.publisher(for: .aiMenuJobCompleted)) { notification in
                 guard !hasUserMadeEdits,
@@ -434,7 +435,7 @@ struct FoodItemMenuEditorView: View {
                       completedJobID == self.runningGenerationJobID else {
                     return
                 }
-
+                
                 print("▶️ FoodItemMenuEditorView: Received .aiRecipeJobCompleted for job \(completedJobID). Populating data.")
                 
                 Task {
@@ -487,8 +488,8 @@ struct FoodItemMenuEditorView: View {
             }
         }
     }
-
-
+    
+    
     @ViewBuilder
     private var customToolbar: some View {
         let title = (food == nil) ? "Add Menu" : "Edit Menu"
@@ -498,13 +499,13 @@ struct FoodItemMenuEditorView: View {
                 .padding(.vertical, 5)
                 .glassCardStyle(cornerRadius: 20)
             Spacer()
-
+            
             Text(title)
                 .font(.headline)
                 .foregroundStyle(effectManager.currentGlobalAccentColor)
-
+            
             Spacer()
-
+            
             let isSaveDisabled = name.trimmingCharacters(in: .whitespaces).isEmpty || isSaving
             HStack {
                 Button(action: save) {
@@ -526,282 +527,282 @@ struct FoodItemMenuEditorView: View {
     
     // MARK: - Form Body
     private var mainForm: some View {
-           // --- НАЧАЛО НА ПРОМЯНАТА (Стъпка 2): Добавяме ScrollViewReader ---
-           ScrollViewReader { proxy in
-               ScrollView(showsIndicators: false) {
-                   VStack(spacing: 0) {
-                       basicSection
-                       bannerAdSection
+        // --- НАЧАЛО НА ПРОМЯНАТА (Стъпка 2): Добавяме ScrollViewReader ---
+        ScrollViewReader { proxy in
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 0) {
+                    basicSection
+                    bannerAdSection
                         .frame(height: isBannerAdLoaded ? 120 : 0)
-                       gallerySection
-                       if !selectedIng.isEmpty {
-                           ingredientsSection
-                       }
-                       macroSection
-                       vitaminSection
-                       mineralSection
-                       lipidSection
-                       aminoAcidsSection
-                       carbDetailsSection
-                       sterolsSection
-                       otherSection
-                       
-                       Color.clear.frame(height: 150)
-                   }
-               }
-               // --- НАЧАЛО НА ПРОМЯНАТА (Стъпка 4): Добавяме onChange модификатори ---
-               .onChange(of: focusedField) { oldValue, newValue in
-                   // 1. Форматираме полето, което е загубило фокус
-                   if let oldID = oldValue, newValue != oldID {
-                       switch oldID {
-                       case .ingredientGrams(let foodItemID):
-                           formatIngredientText(for: foodItemID)
-                       case .minAge:
-                           validateMinAgeOnBlur()
-                       default:
-                           break
-                       }
-                   }
-
-                   // 2. Скролираме до новото фокусирано поле
-                   guard let focus = newValue else { return }
-
-                   let idToScroll: AnyHashable
-                   switch focus {
-                   case .name, .description, .prepTime, .minAge:
-                       idToScroll = focus
-                   case .ingredientGrams(let foodItemID):
-                       idToScroll = foodItemID
-                   }
-
-                   DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-                       withAnimation(.easeInOut(duration: 0.3)) {
-                           proxy.scrollTo(idToScroll, anchor: .top)
-                       }
-                   }
-               }
-               .onChange(of: scrollToIngredientID) { _, newID in
-                   guard let id = newID else { return }
-                   DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                       withAnimation(.easeInOut) {
-                           proxy.scrollTo(id, anchor: .top)
-                       }
-                       scrollToIngredientID = nil
-                   }
-               }
-               // --- КРАЙ НА ПРОМЯНАТА (Стъпка 4) ---
-               .mask(
-                   LinearGradient(
-                       gradient: Gradient(stops: [
-                           .init(color: .clear, location: 0),
-                           .init(color: effectManager.currentGlobalAccentColor, location: 0.01),
-                           .init(color: effectManager.currentGlobalAccentColor, location: 0.9),
-                           .init(color: .clear, location: 0.95)
-                       ]),
-                       startPoint: .top,
-                       endPoint: .bottom
-                   )
-               )
-               .background(Color.clear)
-           } // --- КРАЙ НА ПРОМЯНАТА: Край на ScrollViewReader ---
-       }
-
+                    gallerySection
+                    if !selectedIng.isEmpty {
+                        ingredientsSection
+                    }
+                    macroSection
+                    vitaminSection
+                    mineralSection
+                    lipidSection
+                    aminoAcidsSection
+                    carbDetailsSection
+                    sterolsSection
+                    otherSection
+                    
+                    Color.clear.frame(height: 150)
+                }
+            }
+            // --- НАЧАЛО НА ПРОМЯНАТА (Стъпка 4): Добавяме onChange модификатори ---
+            .onChange(of: focusedField) { oldValue, newValue in
+                // 1. Форматираме полето, което е загубило фокус
+                if let oldID = oldValue, newValue != oldID {
+                    switch oldID {
+                    case .ingredientGrams(let foodItemID):
+                        formatIngredientText(for: foodItemID)
+                    case .minAge:
+                        validateMinAgeOnBlur()
+                    default:
+                        break
+                    }
+                }
+                
+                // 2. Скролираме до новото фокусирано поле
+                guard let focus = newValue else { return }
+                
+                let idToScroll: AnyHashable
+                switch focus {
+                case .name, .description, .prepTime, .minAge:
+                    idToScroll = focus
+                case .ingredientGrams(let foodItemID):
+                    idToScroll = foodItemID
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        proxy.scrollTo(idToScroll, anchor: .top)
+                    }
+                }
+            }
+            .onChange(of: scrollToIngredientID) { _, newID in
+                guard let id = newID else { return }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    withAnimation(.easeInOut) {
+                        proxy.scrollTo(id, anchor: .top)
+                    }
+                    scrollToIngredientID = nil
+                }
+            }
+            // --- КРАЙ НА ПРОМЯНАТА (Стъпка 4) ---
+            .mask(
+                LinearGradient(
+                    gradient: Gradient(stops: [
+                        .init(color: .clear, location: 0),
+                        .init(color: effectManager.currentGlobalAccentColor, location: 0.01),
+                        .init(color: effectManager.currentGlobalAccentColor, location: 0.9),
+                        .init(color: .clear, location: 0.95)
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            )
+            .background(Color.clear)
+        } // --- КРАЙ НА ПРОМЯНАТА: Край на ScrollViewReader ---
+    }
+    
     // MARK: - Sections
     private var basicSection: some View {
-           VStack(alignment: .leading, spacing: 12) {
-               Text("General")
-                   .font(.headline)
-                   .foregroundStyle(effectManager.currentGlobalAccentColor)
-                   .padding(.bottom, -4)
-               
-               VStack(spacing: 12) {
-                   let prompt = "Menu Name"
-                   StyledLabeledPicker(label: "Name", isRequired: true) {
-                       TextField(prompt, text: $name, prompt: Text(prompt).foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.6)))
-                           .font(.system(size: 16))
-                           .focused($focusedField, equals: .name)
-                           .disableAutocorrection(true)
-                   }
-                   .id(FocusableField.name) // <-- ID за скролиране (Стъпка 3)
-
-                   HStack(spacing: 16) {
-                       photoPicker
-                       
-                       VStack(alignment: .leading, spacing: 12) {
-                           StyledLabeledPicker(label: "Prep time (min)") {
-                               ConfigurableTextField(
-                                   title: "e.g. 45",
-                                   value: $prepTimeTxt,
-                                   type: .integer,
-                                   placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
-                                   textAlignment: .leading,
-                                   focused: $focusedField,
-                                   fieldIdentifier: .prepTime
-                               )
-                               .font(.system(size: 16))
-                           }
-                           .id(FocusableField.prepTime) // <-- ID за скролиране (Стъпка 3)
-
-                           StyledLabeledPicker(label: "Description", height: 120) {
-                               descriptionEditor
-                                   .focused($focusedField, equals: .description) // <-- Уверете се, че .focused е тук
-                           }
-                           .id(FocusableField.description) // <-- ID за скролиране (Стъпка 3)
-                       }
-                   }
-                   VStack(spacing: 12) {
-                       StyledLabeledPicker(label: "Minimum Age (months)") {
-                           ConfigurableTextField(
-                               title: "e.g. 6",
-                               value: $minAgeMonthsTxt,
-                               type: .integer,
-                               placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
-                               textAlignment: .leading,
-                               focused: $focusedField,
-                               fieldIdentifier: .minAge
-                           )
-                           .font(.system(size: 16))
-                       }
-                       .id(FocusableField.minAge) // <-- ID за скролиране (Стъпка 3)
-                       
-                       if let sourceText = minAgeSourceDescription {
-                               Text(sourceText)
-                                   .font(.caption)
-                                   .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
-                                   .frame(maxWidth: .infinity, alignment: .leading)
-                           }
-                       
-                       // +++ ПРОМЯНА: секция за Menu prompts +++
-                       if GlobalState.aiAvailability != .deviceNotEligible && isAIButtonEnabledGlobally{
-                           let menuPrompts = allPrompts.filter { $0.type == .menu }
-                           
-                           if !menuPrompts.isEmpty {
-                               promptsSection
-                           }
-                           
-                           Button {
-                               path.append(NavigationTarget.promptEditor)
-                           } label: {
-                               Label("New Prompt", systemImage: "plus.bubble")
-                                   .font(.subheadline.weight(.semibold))
-                                   .frame(maxWidth: .infinity, alignment: .center)
-                           }
-                           .padding(.vertical, 10)
-                           .glassCardStyle(cornerRadius: 20)
-                           .foregroundColor(effectManager.currentGlobalAccentColor)
-                       }
-                       
-                       tagPicker(
-                           label: "Category",
-                           selection: $selectedCategories,
-                           items: FoodCategory.allCases.sorted { $0.rawValue < $1.rawValue },
-                           itemLabel: { $0.rawValue }
-                       )
-                       
-                       // --- DIETS + DETAILS ---
-                       VStack(alignment: .leading, spacing: 4) {
-                           tagPicker(
-                               label: "Diets",
-                               selection: $selectedDiets,
-                               items: allDiets,
-                               itemLabel: { $0.name }
-                           )
-                           
-                           if showsDietMismatchWarning {
-                               VStack(alignment: .leading, spacing: 2) {
-                                   Text("⚠️ This recipe does not match any of the user's diets.")
-                                       .font(.caption)
-                                       .foregroundStyle(.orange)
-                                   
-                                   if !selectedDietNames.isEmpty {
-                                       Text("Menu diets: \(selectedDietNames)")
-                                           .font(.caption2)
-                                           .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
-                                   }
-                                   
-                                   if !userDietNames.isEmpty {
-                                       Text("User diets: \(userDietNames)")
-                                           .font(.caption2)
-                                           .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
-                                   }
-                               }
-                               .fixedSize(horizontal: false, vertical: true)
-                           }
-                       }
-                       
-                       // --- ALLERGENS + DETAILS ---
-                       VStack(alignment: .leading, spacing: 4) {
-                           tagPicker(
-                               label: "Allergens",
-                               selection: $selectedAllergens,
-                               items: Allergen.allCases,
-                               itemLabel: { $0.rawValue }
-                           )
-                           
-                           if !matchingProfileAllergens.isEmpty {
-                               VStack(alignment: .leading, spacing: 2) {
-                                   Text("⚠️ This recipe contains allergens the user is sensitive to.")
-                                       .font(.caption)
-                                       .foregroundStyle(.red)
-                                   
-                                   if !foodAllergenNames.isEmpty {
-                                       Text("Menu allergens: \(foodAllergenNames)")
-                                           .font(.caption2)
-                                           .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
-                                   }
-                                   
-                                   if !userAllergenNames.isEmpty {
-                                       Text("User allergens: \(userAllergenNames)")
-                                           .font(.caption2)
-                                           .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
-                                   }
-                               }
-                               .fixedSize(horizontal: false, vertical: true)
-                           }
-                       }
-                   }
-                   
-               }
-               .padding()
-               .glassCardStyle(cornerRadius: 20)
-           }
-           .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
-       }
+        VStack(alignment: .leading, spacing: 12) {
+            Text("General")
+                .font(.headline)
+                .foregroundStyle(effectManager.currentGlobalAccentColor)
+                .padding(.bottom, -4)
+            
+            VStack(spacing: 12) {
+                let prompt = "Menu Name"
+                StyledLabeledPicker(label: "Name", isRequired: true) {
+                    TextField(prompt, text: $name, prompt: Text(prompt).foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.6)))
+                        .font(.system(size: 16))
+                        .focused($focusedField, equals: .name)
+                        .disableAutocorrection(true)
+                }
+                .id(FocusableField.name) // <-- ID за скролиране (Стъпка 3)
+                
+                HStack(spacing: 16) {
+                    photoPicker
+                    
+                    VStack(alignment: .leading, spacing: 12) {
+                        StyledLabeledPicker(label: "Prep time (min)") {
+                            ConfigurableTextField(
+                                title: "e.g. 45",
+                                value: $prepTimeTxt,
+                                type: .integer,
+                                placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
+                                textAlignment: .leading,
+                                focused: $focusedField,
+                                fieldIdentifier: .prepTime
+                            )
+                            .font(.system(size: 16))
+                        }
+                        .id(FocusableField.prepTime) // <-- ID за скролиране (Стъпка 3)
+                        
+                        StyledLabeledPicker(label: "Description", height: 120) {
+                            descriptionEditor
+                                .focused($focusedField, equals: .description) // <-- Уверете се, че .focused е тук
+                        }
+                        .id(FocusableField.description) // <-- ID за скролиране (Стъпка 3)
+                    }
+                }
+                VStack(spacing: 12) {
+                    StyledLabeledPicker(label: "Minimum Age (months)") {
+                        ConfigurableTextField(
+                            title: "e.g. 6",
+                            value: $minAgeMonthsTxt,
+                            type: .integer,
+                            placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
+                            textAlignment: .leading,
+                            focused: $focusedField,
+                            fieldIdentifier: .minAge
+                        )
+                        .font(.system(size: 16))
+                    }
+                    .id(FocusableField.minAge) // <-- ID за скролиране (Стъпка 3)
+                    
+                    if let sourceText = minAgeSourceDescription {
+                        Text(sourceText)
+                            .font(.caption)
+                            .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    
+                    // +++ ПРОМЯНА: секция за Menu prompts +++
+                    if GlobalState.aiAvailability != .deviceNotEligible && isAIButtonEnabledGlobally{
+                        let menuPrompts = allPrompts.filter { $0.type == .menu }
+                        
+                        if !menuPrompts.isEmpty {
+                            promptsSection
+                        }
+                        
+                        Button {
+                            path.append(NavigationTarget.promptEditor)
+                        } label: {
+                            Label("New Prompt", systemImage: "plus.bubble")
+                                .font(.subheadline.weight(.semibold))
+                                .frame(maxWidth: .infinity, alignment: .center)
+                        }
+                        .padding(.vertical, 10)
+                        .glassCardStyle(cornerRadius: 20)
+                        .foregroundColor(effectManager.currentGlobalAccentColor)
+                    }
+                    
+                    tagPicker(
+                        label: "Category",
+                        selection: $selectedCategories,
+                        items: FoodCategory.allCases.sorted { $0.rawValue < $1.rawValue },
+                        itemLabel: { $0.rawValue }
+                    )
+                    
+                    // --- DIETS + DETAILS ---
+                    VStack(alignment: .leading, spacing: 4) {
+                        tagPicker(
+                            label: "Diets",
+                            selection: $selectedDiets,
+                            items: allDiets,
+                            itemLabel: { $0.name }
+                        )
+                        
+                        if showsDietMismatchWarning {
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text("⚠️ This recipe does not match any of the user's diets.")
+                                    .font(.caption)
+                                    .foregroundStyle(.orange)
+                                
+                                if !selectedDietNames.isEmpty {
+                                    Text("Menu diets: \(selectedDietNames)")
+                                        .font(.caption2)
+                                        .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
+                                }
+                                
+                                if !userDietNames.isEmpty {
+                                    Text("User diets: \(userDietNames)")
+                                        .font(.caption2)
+                                        .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
+                                }
+                            }
+                            .fixedSize(horizontal: false, vertical: true)
+                        }
+                    }
+                    
+                    // --- ALLERGENS + DETAILS ---
+                    VStack(alignment: .leading, spacing: 4) {
+                        tagPicker(
+                            label: "Allergens",
+                            selection: $selectedAllergens,
+                            items: Allergen.allCases,
+                            itemLabel: { $0.rawValue }
+                        )
+                        
+                        if !matchingProfileAllergens.isEmpty {
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text("⚠️ This recipe contains allergens the user is sensitive to.")
+                                    .font(.caption)
+                                    .foregroundStyle(.red)
+                                
+                                if !foodAllergenNames.isEmpty {
+                                    Text("Menu allergens: \(foodAllergenNames)")
+                                        .font(.caption2)
+                                        .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
+                                }
+                                
+                                if !userAllergenNames.isEmpty {
+                                    Text("User allergens: \(userAllergenNames)")
+                                        .font(.caption2)
+                                        .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
+                                }
+                            }
+                            .fixedSize(horizontal: false, vertical: true)
+                        }
+                    }
+                }
+                
+            }
+            .padding()
+            .glassCardStyle(cornerRadius: 20)
+        }
+        .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
+    }
     
     // MARK: - Profile Diet & Allergen Helpers
-
+    
     private var profileDietIDs: Set<Diet.ID> {
         guard let profile else { return [] }
         return Set(profile.diets.map(\.id))
     }
-
+    
     private var profileAllergenIDs: Set<Allergen.ID> {
         guard let profile else { return [] }
         return Set(profile.allergens.map(\.id))
     }
-
+    
     private var selectedDietModels: [Diet] {
         allDiets.filter { selectedDiets.contains($0.id) }
     }
-
+    
     private var selectedDietNames: String {
         let names = selectedDietModels.map(\.name).sorted()
         return names.joined(separator: ", ")
     }
-
+    
     private var userDietNames: String {
         guard let profile else { return "" }
         let names = profile.diets.map(\.name).sorted()
         return names.joined(separator: ", ")
     }
-
+    
     private var matchingProfileAllergens: [Allergen] {
         guard !profileAllergenIDs.isEmpty else { return [] }
         return Allergen.allCases.filter {
             selectedAllergens.contains($0.id) && profileAllergenIDs.contains($0.id)
         }
     }
-
+    
     private var foodAllergenNames: String {
         let names = Allergen.allCases
             .filter { selectedAllergens.contains($0.id) }
@@ -809,7 +810,7 @@ struct FoodItemMenuEditorView: View {
             .sorted()
         return names.joined(separator: ", ")
     }
-
+    
     private var userAllergenNames: String {
         guard let profile else { return "" }
         let names = profile.allergens
@@ -817,7 +818,7 @@ struct FoodItemMenuEditorView: View {
             .sorted()
         return names.joined(separator: ", ")
     }
-
+    
     private var showsDietMismatchWarning: Bool {
         // Need both: user has diets AND recipe has diets
         guard !profileDietIDs.isEmpty else { return false }
@@ -825,20 +826,20 @@ struct FoodItemMenuEditorView: View {
         // Show warning when there is no overlap
         return selectedDiets.isDisjoint(with: profileDietIDs)
     }
-
+    
     /// Returns a human-readable description of which ingredients determine the minimum age.
     private var minAgeSourceDescription: String? {
         guard calculatedMinAge > 0 else { return nil }
-
+        
         // Foods that require exactly this minimum age
         let sourceFoods = selectedIng.keys
             .filter { $0.minAgeMonths == calculatedMinAge }
             .sorted { $0.name < $1.name }
-
+        
         guard !sourceFoods.isEmpty else { return nil }
-
+        
         let names = sourceFoods.map(\.name)
-
+        
         if names.count == 1 {
             return "Minimum age is determined by: \(names[0]) (\(calculatedMinAge) months)."
         } else if names.count == 2 {
@@ -848,7 +849,7 @@ struct FoodItemMenuEditorView: View {
             return "Minimum age is determined by: \(firstTwo) and \(names.count - 2) more (\(calculatedMinAge) months)."
         }
     }
-
+    
     
     private var gallerySection: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -864,7 +865,7 @@ struct FoodItemMenuEditorView: View {
         }
         .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
     }
-
+    
     private var ingredientsSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             let title = "Foods in Menu"
@@ -899,18 +900,18 @@ struct FoodItemMenuEditorView: View {
     }
     
     private var macroSection: some View {
-       VStack(alignment: .leading, spacing: 8) {
-           collapsibleHeader("Macronutrients", isExpanded: $showMacros)
-           if showMacros {
-               VStack(spacing: 12) { macroGrid }
-                   .padding()
-                   .glassCardStyle(cornerRadius: 20)
-                   .padding(.top, 4)
-           }
-       }
-       .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
-   }
-
+        VStack(alignment: .leading, spacing: 8) {
+            collapsibleHeader("Macronutrients", isExpanded: $showMacros)
+            if showMacros {
+                VStack(spacing: 12) { macroGrid }
+                    .padding()
+                    .glassCardStyle(cornerRadius: 20)
+                    .padding(.top, 4)
+            }
+        }
+        .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+    }
+    
     private var lipidSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             collapsibleHeader("Lipids", isExpanded: $showLipids)
@@ -923,7 +924,7 @@ struct FoodItemMenuEditorView: View {
                 .padding()
                 .glassCardStyle(cornerRadius: 20)
                 .padding(.top, 4)
-
+                
                 VStack(spacing: 12) {
                     lipidSFAGrid
                         .foregroundStyle(effectManager.currentGlobalAccentColor)
@@ -931,7 +932,7 @@ struct FoodItemMenuEditorView: View {
                 .padding()
                 .glassCardStyle(cornerRadius: 20)
                 .padding(.top, 4)
-
+                
                 VStack(spacing: 12) {
                     lipidMUFAGrid
                         .foregroundStyle(effectManager.currentGlobalAccentColor)
@@ -939,7 +940,7 @@ struct FoodItemMenuEditorView: View {
                 .padding()
                 .glassCardStyle(cornerRadius: 20)
                 .padding(.top, 4)
-
+                
                 VStack(spacing: 12) {
                     lipidTFAGrid
                         .foregroundStyle(effectManager.currentGlobalAccentColor)
@@ -947,7 +948,7 @@ struct FoodItemMenuEditorView: View {
                 .padding()
                 .glassCardStyle(cornerRadius: 20)
                 .padding(.top, 4)
-
+                
                 VStack(spacing: 12) {
                     lipidPUFAGrid
                         .foregroundStyle(effectManager.currentGlobalAccentColor)
@@ -959,19 +960,19 @@ struct FoodItemMenuEditorView: View {
         }
         .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
     }
-
+    
     private var otherSection: some View {
-       VStack(alignment: .leading, spacing: 8) {
-           collapsibleHeader("Other", isExpanded: $showOther)
-           if showOther {
-               VStack(spacing: 12) { otherGrid }
-                   .padding()
-                   .glassCardStyle(cornerRadius: 20)
-                   .padding(.top, 4)
-           }
-       }
-       .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
-   }
+        VStack(alignment: .leading, spacing: 8) {
+            collapsibleHeader("Other", isExpanded: $showOther)
+            if showOther {
+                VStack(spacing: 12) { otherGrid }
+                    .padding()
+                    .glassCardStyle(cornerRadius: 20)
+                    .padding(.top, 4)
+            }
+        }
+        .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+    }
     
     private var vitaminSection: some View {
         let allRows = vitaminRows()
@@ -1028,7 +1029,7 @@ struct FoodItemMenuEditorView: View {
         }
         .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
     }
-
+    
     private var carbDetailsSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             collapsibleHeader("Carbohydrate Details", isExpanded: $showCarbDetails)
@@ -1065,7 +1066,7 @@ struct FoodItemMenuEditorView: View {
     private var photoPicker: some View {
         let imageData = photoData
         let color = effectManager.currentGlobalAccentColor.opacity(0.6)
-
+        
         return Button {
             presentPhotoSource(for: .main)
         } label: {
@@ -1088,7 +1089,7 @@ struct FoodItemMenuEditorView: View {
         .buttonStyle(.plain)
         .padding(.leading, -4)
     }
-
+    
     private var descriptionEditor: some View {
         ZStack(alignment: .topLeading) {
             if itemDescription.isEmpty {
@@ -1105,7 +1106,7 @@ struct FoodItemMenuEditorView: View {
                 .foregroundStyle(effectManager.currentGlobalAccentColor)
         }
     }
-        
+    
     private var galleryGrid: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 80), spacing: 8)], spacing: 8) {
             ForEach(Array(galleryData.enumerated()), id: \.offset) { index, data in
@@ -1129,7 +1130,7 @@ struct FoodItemMenuEditorView: View {
                         }
                 }
             }
-
+            
             let color = effectManager.currentGlobalAccentColor
             Button {
                 presentPhotoSource(for: .gallery)
@@ -1146,7 +1147,7 @@ struct FoodItemMenuEditorView: View {
             .buttonStyle(.plain)
         }
     }
-
+    
     
     @ViewBuilder
     private func collapsibleHeader(_ title: String, isExpanded: Binding<Bool>, hasOtherItems: Bool = true) -> some View {
@@ -1170,7 +1171,7 @@ struct FoodItemMenuEditorView: View {
         .buttonStyle(.plain)
         .disabled(!hasOtherItems)
     }
-
+    
     private func nutrientGrid(_ rows: [NutrientRow]) -> some View {
         ForEach(rows.indices, id: \.self) { i in
             let row = rows[i]
@@ -1201,13 +1202,13 @@ struct FoodItemMenuEditorView: View {
                 }
             }
         )
-
+        
         HStack {
             Text(item.name)
                 .foregroundColor(effectManager.currentGlobalAccentColor)
-
+            
             Spacer()
-
+            
             ConfigurableTextField(
                 title: ingredientUnit,
                 value: gramsStringBinding,
@@ -1219,10 +1220,10 @@ struct FoodItemMenuEditorView: View {
             .multilineTextAlignment(.trailing)
             .frame(width: 60)
             .foregroundStyle(effectManager.currentGlobalAccentColor)
-
+            
             Text(ingredientUnit)
                 .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
-
+            
             Button(role: .destructive) {
                 selectedIng.removeValue(forKey: item)
             } label: {
@@ -1259,7 +1260,7 @@ struct FoodItemMenuEditorView: View {
         var desc = FetchDescriptor<FoodItem>()
         desc.sortBy = [SortDescriptor(\FoodItem.id, order: .reverse)]
         desc.fetchLimit = 1
-
+        
         let maxId = ((try? ctx.fetch(desc))?.first?.id) ?? 0
         return maxId + 1
     }
@@ -1294,7 +1295,7 @@ struct FoodItemMenuEditorView: View {
             menu.itemDescription = itemDescription.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty()
             menu.prepTimeMinutes = Int(prepTimeTxt)
             menu.minAgeMonths    = Int(minAgeMonthsTxt) ?? 0
-
+            
             menu.category  = idsToEnums(selectedCategories, of: FoodCategory.self)
             
             let chosenDiets = allDiets.filter { selectedDiets.contains($0.id) }
@@ -1304,7 +1305,7 @@ struct FoodItemMenuEditorView: View {
             menu.isMenu        = true
             menu.isRecipe      = false
             menu.isUserAdded   = true
-
+            
             if menu.gallery == nil { menu.gallery = [] }
             menu.gallery?.removeAll { photo in !galleryData.contains(photo.data) }
             for data in galleryData {
@@ -1317,20 +1318,20 @@ struct FoodItemMenuEditorView: View {
                 for link in existingLinks { ctx.delete(link) }
             }
             menu.ingredients = []
-
+            
             for (foodItem, grams) in selectedIng where grams > 0 {
                 let newLink = IngredientLink(food: foodItem, grams: grams, owner: menu)
                 menu.ingredients?.append(newLink)
             }
-
+            
             do {
                 try ctx.save()
                 SearchIndexStore.shared.updateItem(menu, context: ctx)
                 if let pendingID = pendingAIJobIDToDeleteOnSave,
-                                  let job = aiManager.jobs.first(where: { $0.id == pendingID }) {
-                                   await aiManager.deleteJob(job)
-                                   pendingAIJobIDToDeleteOnSave = nil
-                               }
+                   let job = aiManager.jobs.first(where: { $0.id == pendingID }) {
+                    await aiManager.deleteJob(job)
+                    pendingAIJobIDToDeleteOnSave = nil
+                }
                 onDismiss(menu)
             } catch {
                 alertMsg = error.localizedDescription
@@ -1368,7 +1369,7 @@ struct FoodItemMenuEditorView: View {
             galleryData = copy.gallery?.map(\.data) ?? []
         }
     }
-
+    
     private func galleryPopoverContent(for index: Int, data: Data) -> some View {
         HStack(spacing: 0) {
             Button("Set as main") {
@@ -1376,17 +1377,17 @@ struct FoodItemMenuEditorView: View {
                 showPopover = false
             }
             .frame(maxWidth: .infinity)
-
+            
             Divider()
-
+            
             Button("Change") {
                 showPopover = false
                 presentPhotoSource(for: .galleryReplace(index: index))
             }
             .frame(maxWidth: .infinity)
-
+            
             Divider()
-
+            
             Button(role: .destructive) {
                 galleryData.remove(at: index)
                 showPopover = false
@@ -1401,8 +1402,8 @@ struct FoodItemMenuEditorView: View {
         .frame(minWidth: 300)
         .presentationCompactAdaptation(.none)
     }
-
-
+    
+    
     private func handleNewPhotoSelection(_: PhotosPickerItem?, newItem: PhotosPickerItem?) {
         Task {
             if let data = try? await newItem?.loadTransferable(type: Data.self) {
@@ -1441,16 +1442,16 @@ struct FoodItemMenuEditorView: View {
             set: { showPopover = $0 }
         )
     }
-
+    
     private func selectIngredient(_ item: FoodItem) {
-           let defaultGrams = isImperial ? UnitConversion.ozToG(4.0) : 100.0
-           selectedIng[item, default: 0] += defaultGrams
-           globalSearchText = ""
-           dismissKeyboardAndSearch()
-           
-           // Задействаме скролирането до новодобавения елемент
-           scrollToIngredientID = item.id
-       }
+        let defaultGrams = isImperial ? UnitConversion.ozToG(4.0) : 100.0
+        selectedIng[item, default: 0] += defaultGrams
+        globalSearchText = ""
+        dismissKeyboardAndSearch()
+        
+        // Задействаме скролирането до новодобавения елемент
+        scrollToIngredientID = item.id
+    }
     
     private func idsToEnums<E: CaseIterable & Identifiable>(_ ids: Set<E.ID>, of _: E.Type) -> [E]? where E.ID == String {
         let all = E.allCases as! [E]
@@ -1494,9 +1495,9 @@ struct FoodItemMenuEditorView: View {
     private func recalculateAndValidateMinAge() {
         let requiredMinAge = selectedIng.keys.map { $0.minAgeMonths }.max() ?? 0
         self.calculatedMinAge = requiredMinAge
-
+        
         let currentUserAge = Int(minAgeMonthsTxt) ?? 0
-
+        
         if currentUserAge < requiredMinAge || (minAgeMonthsTxt.isEmpty && requiredMinAge > 0) {
             minAgeMonthsTxt = String(requiredMinAge)
         }
@@ -1508,13 +1509,13 @@ struct FoodItemMenuEditorView: View {
             minAgeMonthsTxt = String(calculatedMinAge)
         }
     }
-     
+    
     @inline(__always) private func nv(_ n: Nutrient?) -> Double { n?.value ?? 0 }
     @inline(__always) private func n(_ x: Double, _ unit: String) -> Nutrient? { x > 0 ? Nutrient(value: x, unit: unit) : nil }
-
+    
     private func recalcTotals() {
         var totalGrams: Double = 0
-
+        
         // Macros
         var sumCarbs = 0.0, sumProtein = 0.0, sumFat = 0.0, sumFiber = 0.0, sumSugars = 0.0
         // Other
@@ -1532,7 +1533,7 @@ struct FoodItemMenuEditorView: View {
         // PUFA
         var pufa18_2 = 0.0, pufa18_3 = 0.0, pufa18_4 = 0.0, pufa20_2 = 0.0, pufa20_3 = 0.0, pufa20_4 = 0.0
         var pufa20_5 = 0.0, pufa21_5 = 0.0, pufa22_4 = 0.0, pufa22_5 = 0.0, pufa22_6 = 0.0, pufa2_4 = 0.0
-
+        
         // Vitamins
         var vA = 0.0, retinol = 0.0, carotAlpha = 0.0, carotBeta = 0.0, cryptoxBeta = 0.0, lutein = 0.0, lycopene = 0.0
         var b1 = 0.0, b2 = 0.0, b3 = 0.0, b5 = 0.0, b6 = 0.0
@@ -1548,25 +1549,25 @@ struct FoodItemMenuEditorView: View {
         var starch = 0.0, sucrose = 0.0, glucose = 0.0, fructose = 0.0, lactose = 0.0, maltose = 0.0, galactose = 0.0
         // Sterols
         var phytosterols = 0.0, betaSitosterol = 0.0, campesterol = 0.0, stigmasterol = 0.0
-
+        
         // --- НОВО: агрегиране на pH логаритмично ---
         var hPlusSum = 0.0       // Σ [H+] * маса
         var hPlusWeight = 0.0    // Σ маса (g) за които имаме pH
-
+        
         for (food, grams) in selectedIng {
             guard grams > 0 else { continue }
             let base = food.other?.weightG?.value ?? 100.0
             guard base > 0 else { continue }
             let f = grams / base
             totalGrams += grams
-
+            
             // Macros
             sumCarbs     += f * nv(food.macronutrients?.carbohydrates)
             sumProtein   += f * nv(food.macronutrients?.protein)
             sumFat       += f * nv(food.macronutrients?.fat)
             sumFiber     += f * nv(food.macronutrients?.fiber)
             sumSugars    += f * nv(food.macronutrients?.totalSugars)
-
+            
             // Other
             sumEnergy      += f * nv(food.other?.energyKcal)
             sumAlcohol     += f * nv(food.other?.alcoholEthyl)
@@ -1577,7 +1578,7 @@ struct FoodItemMenuEditorView: View {
             sumWater       += waterForThisFood
             sumAsh         += f * nv(food.other?.ash)
             sumBetaine     += f * nv(food.other?.betaine)
-
+            
             // --- НОВО: pH от отделната храна ---
             if let phValue = food.other?.alkalinityPH?.value, phValue > 0 {
                 let h = pow(10.0, -phValue)  // [H+] за тази храна
@@ -1586,8 +1587,8 @@ struct FoodItemMenuEditorView: View {
                 hPlusSum += h * weight
                 hPlusWeight += weight
             }
-
-
+            
+            
             // Lipids totals
             sumSat      += f * nv(food.lipids?.totalSaturated)
             sumMono     += f * nv(food.lipids?.totalMonounsaturated)
@@ -1595,7 +1596,7 @@ struct FoodItemMenuEditorView: View {
             sumTrans    += f * nv(food.lipids?.totalTrans)
             sumTransMono += f * nv(food.lipids?.totalTransMonoenoic)
             sumTransPoly += f * nv(food.lipids?.totalTransPolyenoic)
-
+            
             // SFA
             sfa4  += f * nv(food.lipids?.sfa4_0);   sfa6  += f * nv(food.lipids?.sfa6_0)
             sfa8  += f * nv(food.lipids?.sfa8_0);   sfa10 += f * nv(food.lipids?.sfa10_0)
@@ -1604,17 +1605,17 @@ struct FoodItemMenuEditorView: View {
             sfa16 += f * nv(food.lipids?.sfa16_0);  sfa17 += f * nv(food.lipids?.sfa17_0)
             sfa18 += f * nv(food.lipids?.sfa18_0);  sfa20 += f * nv(food.lipids?.sfa20_0)
             sfa22 += f * nv(food.lipids?.sfa22_0);  sfa24 += f * nv(food.lipids?.sfa24_0)
-
+            
             // MUFA
             mufa14_1 += f * nv(food.lipids?.mufa14_1); mufa15_1 += f * nv(food.lipids?.mufa15_1)
             mufa16_1 += f * nv(food.lipids?.mufa16_1); mufa17_1 += f * nv(food.lipids?.mufa17_1)
             mufa18_1 += f * nv(food.lipids?.mufa18_1); mufa20_1 += f * nv(food.lipids?.mufa20_1)
             mufa22_1 += f * nv(food.lipids?.mufa22_1); mufa24_1 += f * nv(food.lipids?.mufa24_1)
-
+            
             // TFA
             tfa16_1_t += f * nv(food.lipids?.tfa16_1_t); tfa18_1_t += f * nv(food.lipids?.tfa18_1_t)
             tfa22_1_t += f * nv(food.lipids?.tfa22_1_t); tfa18_2_t += f * nv(food.lipids?.tfa18_2_t)
-
+            
             // PUFA
             pufa18_2 += f * nv(food.lipids?.pufa18_2); pufa18_3 += f * nv(food.lipids?.pufa18_3)
             pufa18_4 += f * nv(food.lipids?.pufa18_4); pufa20_2 += f * nv(food.lipids?.pufa20_2)
@@ -1622,7 +1623,7 @@ struct FoodItemMenuEditorView: View {
             pufa20_5 += f * nv(food.lipids?.pufa20_5); pufa21_5 += f * nv(food.lipids?.pufa21_5)
             pufa22_4 += f * nv(food.lipids?.pufa22_4); pufa22_5 += f * nv(food.lipids?.pufa22_5)
             pufa22_6 += f * nv(food.lipids?.pufa22_6); pufa2_4  += f * nv(food.lipids?.pufa2_4)
-
+            
             // Vitamins
             vA        += f * nv(food.vitamins?.vitaminA_RAE)
             retinol   += f * nv(food.vitamins?.retinol)
@@ -1646,7 +1647,7 @@ struct FoodItemMenuEditorView: View {
             vE        += f * nv(food.vitamins?.vitaminE)
             vK        += f * nv(food.vitamins?.vitaminK)
             choline   += f * nv(food.vitamins?.choline)
-
+            
             // Minerals
             calcium   += f * nv(food.minerals?.calcium)
             phosphorus += f * nv(food.minerals?.phosphorus)
@@ -1659,7 +1660,7 @@ struct FoodItemMenuEditorView: View {
             manganese += f * nv(food.minerals?.manganese)
             selenium  += f * nv(food.minerals?.selenium)
             fluoride  += f * nv(food.minerals?.fluoride)
-
+            
             // Amino acids
             alanine   += f * nv(food.aminoAcids?.alanine)
             arginine  += f * nv(food.aminoAcids?.arginine)
@@ -1680,7 +1681,7 @@ struct FoodItemMenuEditorView: View {
             valine    += f * nv(food.aminoAcids?.valine)
             serine    += f * nv(food.aminoAcids?.serine)
             hydroxyproline += f * nv(food.aminoAcids?.hydroxyproline)
-
+            
             // Carb details
             starch    += f * nv(food.carbDetails?.starch)
             sucrose   += f * nv(food.carbDetails?.sucrose)
@@ -1689,14 +1690,14 @@ struct FoodItemMenuEditorView: View {
             lactose   += f * nv(food.carbDetails?.lactose)
             maltose   += f * nv(food.carbDetails?.maltose)
             galactose += f * nv(food.carbDetails?.galactose)
-
+            
             // Sterols
             phytosterols  += f * nv(food.sterols?.phytosterols)
             betaSitosterol += f * nv(food.sterols?.betaSitosterol)
             campesterol   += f * nv(food.sterols?.campesterol)
             stigmasterol  += f * nv(food.sterols?.stigmasterol)
         }
-
+        
         // --- pH на сместа ---
         var mixedPH: Nutrient? = nil
         if hPlusWeight > 0, hPlusSum > 0 {
@@ -1704,7 +1705,7 @@ struct FoodItemMenuEditorView: View {
             let phValue = -log10(hConc)
             mixedPH = Nutrient(value: phValue, unit: "")
         }
-
+        
         macros = MacroForm(
             carbohydrates: n(sumCarbs, "g"),
             protein:       n(sumProtein, "g"),
@@ -1712,7 +1713,7 @@ struct FoodItemMenuEditorView: View {
             fiber:         n(sumFiber, "g"),
             totalSugars:   n(sumSugars, "g")
         )
-
+        
         others = OtherForm(
             alcoholEthyl:  n(sumAlcohol, "g"),
             caffeine:      n(sumCaffeine, "mg"),
@@ -1725,7 +1726,7 @@ struct FoodItemMenuEditorView: View {
             betaine:       n(sumBetaine, "mg"),
             alkalinityPH:  mixedPH    // <-- ТУК ВЕЧЕ Е СМЕСЕНИЯТ pH
         )
-
+        
         lipids = LipidForm(
             totalSaturated:       n(sumSat, "g"),
             totalMonounsaturated: n(sumMono,"g"),
@@ -1749,7 +1750,7 @@ struct FoodItemMenuEditorView: View {
             pufa22_4: n(pufa22_4,"g"), pufa22_5: n(pufa22_5,"g"), pufa22_6: n(pufa22_6,"g"),
             pufa2_4:  n(pufa2_4,"g")
         )
-
+        
         vitamins = VitaminForm(
             vitaminA_RAE: n(vA,"µg"),
             retinol: n(retinol,"µg"),
@@ -1774,7 +1775,7 @@ struct FoodItemMenuEditorView: View {
             vitaminK: n(vK,"µg"),
             choline: n(choline,"mg")
         )
-
+        
         minerals = MineralForm(
             calcium: n(calcium,"mg"),
             phosphorus: n(phosphorus,"mg"),
@@ -1788,7 +1789,7 @@ struct FoodItemMenuEditorView: View {
             selenium: n(selenium,"µg"),
             fluoride: n(fluoride,"µg")
         )
-
+        
         aminoAcids = AminoAcidsForm(
             alanine: n(alanine,"g"), arginine: n(arginine,"g"), asparticAcid: n(aspartic,"g"),
             cystine: n(cystine,"g"), glutamicAcid: n(glutamic,"g"), glycine: n(glycine,"g"),
@@ -1798,13 +1799,13 @@ struct FoodItemMenuEditorView: View {
             tyrosine: n(tyrosine,"g"), valine: n(valine,"g"), serine: n(serine,"g"),
             hydroxyproline: n(hydroxyproline,"g")
         )
-
+        
         carbDetails = CarbDetailsForm(
             starch: n(starch,"g"), sucrose: n(sucrose,"g"), glucose: n(glucose,"g"),
             fructose: n(fructose,"g"), lactose: n(lactose,"g"), maltose: n(maltose,"g"),
             galactose: n(galactose,"g")
         )
-
+        
         sterols = SterolsForm(
             phytosterols: n(phytosterols,"mg"),
             betaSitosterol: n(betaSitosterol,"mg"),
@@ -1812,7 +1813,7 @@ struct FoodItemMenuEditorView: View {
             stigmasterol: n(stigmasterol,"mg")
         )
     }
-
+    
     
     private func recalcTags() {
         guard !selectedIng.isEmpty else {
@@ -1822,7 +1823,7 @@ struct FoodItemMenuEditorView: View {
         var catUnion = Set<FoodCategory.ID>()
         var dietsIntersection: Set<Diet.ID>? = nil
         var allUnion = Set<Allergen.ID>()
-
+        
         for item in selectedIng.keys {
             let itemDiets = Set(item.diets?.map(\.id) ?? [])
             catUnion.formUnion(item.category?.map(\.id) ?? [])
@@ -1837,7 +1838,7 @@ struct FoodItemMenuEditorView: View {
         selectedDiets = dietsIntersection ?? []
         selectedAllergens = allUnion
     }
-
+    
     static func aggregatedTags(for item: FoodItem, allDiets: [Diet]) -> (categories: Set<FoodCategory.ID>, diets: Set<Diet.ID>, allergens: Set<Allergen.ID>) {
         guard let links = item.ingredients, !links.isEmpty else {
             return (Set(item.category?.map(\.id) ?? []), Set(item.diets?.map(\.id) ?? []), Set(item.allergens?.map(\.id) ?? []))
@@ -1845,7 +1846,7 @@ struct FoodItemMenuEditorView: View {
         var catUnion = Set<FoodCategory.ID>()
         var dietsIntersection: Set<Diet.ID>? = nil
         var allUnion = Set<Allergen.ID>()
-
+        
         for link in links {
             guard let food = link.food else { continue }
             let itemDiets = Set(food.diets?.map(\.id) ?? [])
@@ -1859,7 +1860,7 @@ struct FoodItemMenuEditorView: View {
         }
         return (catUnion, dietsIntersection ?? [], allUnion)
     }
-
+    
     // MARK: - Nutrient Row Generation
     private var macroGrid: some View {
         let editableRows: [NutrientRow] = [
@@ -1978,7 +1979,7 @@ struct FoodItemMenuEditorView: View {
             ])
         }
     }
-
+    
     private var otherGrid: some View {
         nutrientGrid([
             .init(label: "Alcohol", unit: "g",  field: nutBinding(\.alcoholEthyl, state: $others, unit: "g")),
@@ -1999,7 +2000,7 @@ struct FoodItemMenuEditorView: View {
     }
     private func label(for vitamin: Vitamin) -> String { vitaminLabelById[vitamin.id] ?? vitamin.name }
     private func label(for mineral: Mineral) -> String { mineralLabelById[mineral.id] ?? mineral.name }
-
+    
     private func vitaminRows() -> [NutrientRow] {
         [.init(label: "Vit A", unit: "µg RAE", field: nutBinding(\.vitaminA_RAE, state: $vitamins, unit: "µg")),
          .init(label: "Retinol", unit: "µg", field: nutBinding(\.retinol, state: $vitamins, unit: "µg")),
@@ -2024,7 +2025,7 @@ struct FoodItemMenuEditorView: View {
          .init(label: "Vit K", unit: "µg", field: nutBinding(\.vitaminK, state: $vitamins, unit: "µg")),
          .init(label: "Choline", unit: "mg", field: nutBinding(\.choline, state: $vitamins, unit: "mg"))]
     }
-
+    
     private func mineralRows() -> [NutrientRow] {
         [.init(label: "Calcium", unit: "mg", field: nutBinding(\.calcium, state: $minerals, unit: "mg")),
          .init(label: "Phosphorus", unit: "mg", field: nutBinding(\.phosphorus, state: $minerals, unit: "mg")),
@@ -2091,70 +2092,70 @@ struct FoodItemMenuEditorView: View {
         return aspect > 1.9 ? 75 : 95
     }
     private func aiTrailingPadding(for geometry: GeometryProxy) -> CGFloat { 45 }
-
+    
     private func aiDragGesture(geometry: GeometryProxy) -> some Gesture {
-           let buttonSize: CGFloat = 60
-           let radius = buttonSize / 2
-           
-           return DragGesture(minimumDistance: 0)
-               .updating($aiGestureDragOffset) { value, state, _ in
-                   // Жив превод по време на drag – без анимация
-                   state = value.translation
-               }
-               .onChanged { value in
-                   let distance = max(abs(value.translation.width), abs(value.translation.height))
-                   
-                   if distance > 6 {
-                       // Вече влачим – махаме "pressed" и маркираме "dragging"
-                       if !aiIsDragging {
-                           aiIsDragging = true
-                           aiIsPressed = false
-                       }
-                   } else {
-                       // Малко мърдане = натиснат бутон
-                       aiIsPressed = true
-                   }
-               }
-               .onEnded { value in
-                   let safeArea = geometry.safeAreaInsets
-                   let size = geometry.size
-                   
-                   // Базова позиция (дясно-долу) спрямо размера + твоите padding-и
-                   let baseX = size.width  - aiTrailingPadding(for: geometry) - radius
-                   let baseY = size.height - aiBottomPadding(for: geometry)   - radius
-                   
-                   // Центърът, ако приложим текущия offset + преместеното
-                   let rawCenterX = baseX + aiButtonOffset.width  + value.translation.width
-                   let rawCenterY = baseY + aiButtonOffset.height + value.translation.height
-                   
-                   // Ограничаваме центъра ВЪТРЕ в екрана
-                   let minX = radius
-                   let maxX = size.width  - radius
-                   let minY = radius + safeArea.top
-                   let maxY = size.height - radius - safeArea.bottom - 80
-                   
-                   let clampedCenterX = min(max(rawCenterX, minX), maxX)
-                   let clampedCenterY = min(max(rawCenterY, minY), maxY)
-                   
-                   // Новият offset е просто разлика спрямо базовата позиция
-                   let newOffset = CGSize(
-                       width:  clampedCenterX - baseX,
-                       height: clampedCenterY - baseY
-                   )
-                   
-                   if aiIsDragging {
-                       aiButtonOffset = newOffset
-                       saveAIButtonPosition()
-                   } else {
-                       // Тап (без реален drag)
-                       handleAITap()
-                   }
-                   
-                   aiIsDragging = false
-                   aiIsPressed = false
-               }
-       }
-
+        let buttonSize: CGFloat = 60
+        let radius = buttonSize / 2
+        
+        return DragGesture(minimumDistance: 0)
+            .updating($aiGestureDragOffset) { value, state, _ in
+                // Жив превод по време на drag – без анимация
+                state = value.translation
+            }
+            .onChanged { value in
+                let distance = max(abs(value.translation.width), abs(value.translation.height))
+                
+                if distance > 6 {
+                    // Вече влачим – махаме "pressed" и маркираме "dragging"
+                    if !aiIsDragging {
+                        aiIsDragging = true
+                        aiIsPressed = false
+                    }
+                } else {
+                    // Малко мърдане = натиснат бутон
+                    aiIsPressed = true
+                }
+            }
+            .onEnded { value in
+                let safeArea = geometry.safeAreaInsets
+                let size = geometry.size
+                
+                // Базова позиция (дясно-долу) спрямо размера + твоите padding-и
+                let baseX = size.width  - aiTrailingPadding(for: geometry) - radius
+                let baseY = size.height - aiBottomPadding(for: geometry)   - radius
+                
+                // Центърът, ако приложим текущия offset + преместеното
+                let rawCenterX = baseX + aiButtonOffset.width  + value.translation.width
+                let rawCenterY = baseY + aiButtonOffset.height + value.translation.height
+                
+                // Ограничаваме центъра ВЪТРЕ в екрана
+                let minX = radius
+                let maxX = size.width  - radius
+                let minY = radius + safeArea.top
+                let maxY = size.height - radius - safeArea.bottom - 80
+                
+                let clampedCenterX = min(max(rawCenterX, minX), maxX)
+                let clampedCenterY = min(max(rawCenterY, minY), maxY)
+                
+                // Новият offset е просто разлика спрямо базовата позиция
+                let newOffset = CGSize(
+                    width:  clampedCenterX - baseX,
+                    height: clampedCenterY - baseY
+                )
+                
+                if aiIsDragging {
+                    aiButtonOffset = newOffset
+                    saveAIButtonPosition()
+                } else {
+                    // Тап (без реален drag)
+                    handleAITap()
+                }
+                
+                aiIsDragging = false
+                aiIsPressed = false
+            }
+    }
+    
     /// Стартира същинската AI генерация на меню.
     /// Извиква се САМО след като потребителят вече е "платил"
     /// (абонамент или реклама).
@@ -2183,13 +2184,24 @@ struct FoodItemMenuEditorView: View {
             showAlert = true
         }
     }
-
+    
     private func handleAITap() {
+        if isAITapOnCooldown {
+            return
+        }
+        
+        // 1. Веднага активираме cooldown за да предотвратим спам/двойни кликове
+        isAITapOnCooldown = true
+        Task { @MainActor in
+            // Тук можеш да смениш 1.5 на 1.0 или 2.0 според това, което искаш
+            try? await Task.sleep(for: .seconds(1.5))
+            isAITapOnCooldown = false
+        }
         NotificationCenter.default.post(name: .snoozeAds, object: nil)
-
+        
         // 1. Проверка за наличност на AI (Apple Intelligence статус)
         guard ensureAIAvailableOrShowMessage() else { return }
-
+        
         // 2. Трябва да има профил
         guard let profile = self.profile else {
             alertMsg = "A profile is required for AI generation."
@@ -2201,7 +2213,7 @@ struct FoodItemMenuEditorView: View {
         let promptTexts = allPrompts
             .filter { selectedPromptIDs.contains($0.id) }
             .map { $0.text }
-
+        
         // 4. Логика за АБОНАМЕНТ / РЕКЛАМИ
         // 4.1 Платен план – без реклами
         if SubscriptionManager.shared.subscriptionStatus != .base {
@@ -2209,10 +2221,10 @@ struct FoodItemMenuEditorView: View {
             startMenuAIGeneration(profile: profile, promptTexts: promptTexts)
             return
         }
-
+        
         // 4.2 Безплатен план – Rewarded → Interstitial → fallback
         print("📺 Free user: Checking for ads for menu generation...")
-
+        
         if RewardedAdManager.shared.isReady {
             print("📺 Showing Rewarded Ad for menu generation...")
             RewardedAdManager.shared.showIfAvailable { amount, type in
@@ -2231,7 +2243,7 @@ struct FoodItemMenuEditorView: View {
             print("⚠️ No ads available. Proceeding graciously with menu generation.")
             // Няма реклами – пускаме AI, за да не дразним потребителя
             startMenuAIGeneration(profile: profile, promptTexts: promptTexts)
-
+            
             // Подготвяме реклами за следващия път
             Task {
                 await RewardedAdManager.shared.loadAd()
@@ -2239,9 +2251,9 @@ struct FoodItemMenuEditorView: View {
             }
         }
     }
-
-
-
+    
+    
+    
     // --- НАЧАЛО НА ПРОМЯНАТА (4/4): Добавете тези нови функции ---
     @available(iOS 26.0, *)
     private func populateFromCompletedJob(jobID: UUID) async {
@@ -2252,7 +2264,7 @@ struct FoodItemMenuEditorView: View {
             runningGenerationJobID = nil
             return
         }
-
+        
         let decoder = JSONDecoder()
         guard let payload = try? decoder.decode(ResolvedRecipeResponseDTO.self, from: resultData) else {
             alertMsg = "Could not decode the generated menu data."
@@ -2261,24 +2273,24 @@ struct FoodItemMenuEditorView: View {
             pendingAIJobIDToDeleteOnSave = jobID
             return
         }
-
+        
         print("🧭 populateFromCompletedJob (MENU): decoded DTO")
         print("   • Name: \(payload.name ?? "(n/a)")")
         print("   • Description preview: \(payload.description.prefix(120))\(payload.description.count > 120 ? "..." : "")")
         print("   • Prep time: \(payload.prepTimeMinutes) min")
         print("   • Ingredients (DTO): \(payload.ingredients.count)")
-
+        
         // Резолвваме FoodItem ID → FoodItem и акумулираме грамовете.
         var newIngredients: [FoodItem: Double] = [:]
         var unresolvedCount = 0
-
+        
         do {
             let foodItemIDs = payload.ingredients.map { $0.foodItemID }
             if !foodItemIDs.isEmpty {
                 let descriptor = FetchDescriptor<FoodItem>(predicate: #Predicate { foodItemIDs.contains($0.id) })
                 let fetchedItems = (try? ctx.fetch(descriptor)) ?? []
                 let itemMap = Dictionary(uniqueKeysWithValues: fetchedItems.map { ($0.id, $0) })
-
+                
                 for entry in payload.ingredients {
                     if let fi = itemMap[entry.foodItemID] {
                         newIngredients[fi, default: 0.0] += entry.grams
@@ -2288,12 +2300,12 @@ struct FoodItemMenuEditorView: View {
                 }
             }
         }
-
+        
         print("   • Resolved FoodItems: \(newIngredients.count)")
         if unresolvedCount > 0 {
             print("   • Unresolved entries: \(unresolvedCount)")
         }
-
+        
         await MainActor.run {
             withAnimation(.easeInOut) {
                 // Име (ако е върнато)
@@ -2301,14 +2313,14 @@ struct FoodItemMenuEditorView: View {
                    !newName.isEmpty {
                     self.name = newName
                 }
-
+                
                 // Описание + време
                 self.itemDescription = payload.description
                 self.prepTimeTxt = String(max(10, min(360, payload.prepTimeMinutes)))
-
+                
                 // Попълваме съставките (вече НЕ е празно)
                 self.selectedIng = newIngredients
-
+                
                 // Текстови стойности за UI (според системата единици)
                 self.ingredientTextValues = Dictionary(
                     uniqueKeysWithValues: newIngredients.map { (item, grams) in
@@ -2319,29 +2331,29 @@ struct FoodItemMenuEditorView: View {
             }
         }
     }
-
-
-
+    
+    
+    
     @ViewBuilder
     private var aiGenerationToast: some View {
         VStack {
             HStack(spacing: 12) {
                 Image(systemName: "sparkles")
                     .font(.title2)
-
+                
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Generation Scheduled")
                         .fontWeight(.bold)
                     Text("You'll be notified when your menu is ready.")
                         .font(.caption)
-
+                    
                     ProgressView(value: min(max(toastProgress, 0.0), 1.0), total: 1.0)
                         .progressViewStyle(LinearProgressViewStyle(tint: effectManager.currentGlobalAccentColor))
                         .animation(.linear, value: toastProgress)
                 }
-
+                
                 Spacer()
-
+                
                 Button("OK") {
                     toastTimer?.invalidate()
                     toastTimer = nil
@@ -2357,24 +2369,24 @@ struct FoodItemMenuEditorView: View {
             .glassCardStyle(cornerRadius: 20)
             .padding()
             .transition(.move(edge: .top).combined(with: .opacity))
-
+            
             Spacer()
         }
         .frame(maxHeight: .infinity, alignment: .top)
         .ignoresSafeArea(.keyboard)
     }
-
+    
     private func triggerAIGenerationToast() {
         toastTimer?.invalidate()
         toastProgress = 0.0
         withAnimation {
             showAIGenerationToast = true
         }
-
+        
         let totalDuration = 5.0
         let updateInterval = 0.1
         let progressIncrement = updateInterval / totalDuration
-
+        
         toastTimer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { timer in
             DispatchQueue.main.async {
                 self.toastProgress = min(1.0, self.toastProgress + progressIncrement)
@@ -2388,20 +2400,20 @@ struct FoodItemMenuEditorView: View {
             }
         }
     }
-
+    
     private func saveAIButtonPosition() {
         let d = UserDefaults.standard
         d.set(aiButtonOffset.width,  forKey: "\(aiButtonPositionKey)_width")
         d.set(aiButtonOffset.height, forKey: "\(aiButtonPositionKey)_height")
     }
-
+    
     private func loadAIButtonPosition() {
         let d = UserDefaults.standard
         let w = d.double(forKey: "\(aiButtonPositionKey)_width")
         let h = d.double(forKey: "\(aiButtonPositionKey)_height")
         self.aiButtonOffset = CGSize(width: w, height: h)
     }
-
+    
     @ViewBuilder
     private func AIButton(geometry: GeometryProxy) -> some View {
         let buttonSize: CGFloat = 60
@@ -2440,21 +2452,21 @@ struct FoodItemMenuEditorView: View {
         .animation(.spring(response: 0.25, dampingFraction: 0.8), value: aiIsDragging)
         .contentShape(Circle())                     // само кръгчето е кликаемо
         .position(x: centerX, y: centerY)           // абсолютна позиция, вече clamp-ната
-        .opacity(isAIButtonVisible ? 1 : 0)
-        .disabled(!isAIButtonVisible)
+        .opacity(isAIButtonVisible ? (isAITapOnCooldown ? 0.5 : 1.0) : 0)
+        .disabled(!isAIButtonVisible || isAITapOnCooldown)
         .gesture(aiDragGesture(geometry: geometry)) // жестът е върху 60x60, не върху цял екран
         .transition(.scale.combined(with: .opacity))
     }
-
+    
     @ViewBuilder
     private var promptsSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Prompts")
                 .font(.headline)
                 .foregroundStyle(effectManager.currentGlobalAccentColor)
-
+            
             let menuPrompts = allPrompts.filter { $0.type == .menu }
-
+            
             MultiSelectButton(
                 selection: $selectedPromptIDs,
                 items: menuPrompts,
@@ -2474,7 +2486,7 @@ struct FoodItemMenuEditorView: View {
             .glassCardStyle(cornerRadius: 20)
         }
     }
-
+    
     // +++ НОВО: долен панел за избор/редакция/изтриване +++
     @ViewBuilder
     private var bottomSheetPanel: some View {
@@ -2488,7 +2500,7 @@ struct FoodItemMenuEditorView: View {
                     .transition(.opacity)
                     .onTapGesture { withAnimation { openMenu = .none } }
             }
-
+            
             VStack(spacing: 8) {
                 HStack {
                     Text("Select Prompts")
@@ -2504,7 +2516,7 @@ struct FoodItemMenuEditorView: View {
                 }
                 .padding(.horizontal)
                 .frame(height: 35)
-
+                
                 dropDownLayer
             }
             .padding(.top)
@@ -2520,7 +2532,7 @@ struct FoodItemMenuEditorView: View {
         .zIndex(1)
         .transition(.move(edge: .bottom).animation(.easeInOut(duration: 0.3)))
     }
-
+    
     @ViewBuilder
     private var dropDownLayer: some View {
         Group {
@@ -2556,13 +2568,13 @@ struct FoodItemMenuEditorView: View {
             }
         }
     }
-
+    
     // +++ НОВО: persist на избора +++
     private func saveSelectedPromptIDs(_ ids: Set<UUID>) {
         let idStrings = ids.map { $0.uuidString }
         UserDefaults.standard.set(idStrings, forKey: selectedPromptsKey)
     }
-
+    
     private func loadSelectedPromptIDs() {
         guard let idStrings = UserDefaults.standard.stringArray(forKey: selectedPromptsKey) else { return }
         let ids = idStrings.compactMap { UUID(uuidString: $0) }
@@ -2587,44 +2599,44 @@ struct FoodItemMenuEditorView: View {
         showAlert = true
         return false
     }
-
+    
     private func presentPhotoSource(for target: PhotoSourceTarget) {
         currentPhotoTarget = target
         showPhotoSourceDialog = true
     }
-
+    
     private func handlePickedUIImage(_ image: UIImage) {
         guard let data = image.jpegData(compressionQuality: 0.9) else { return }
-
+        
         switch currentPhotoTarget {
         case .main:
             photoData = data
-
+            
         case .gallery:
             galleryData.append(data)
-
+            
         case .galleryReplace(let index):
             if galleryData.indices.contains(index) {
                 galleryData[index] = data
             }
-
+            
         case .none:
             break
         }
-
+        
         // след успешен избор – чистим таргета
         currentPhotoTarget = nil
     }
-
+    
     @ViewBuilder
-       private var bannerAdSection: some View {
-           // Показваме банер само за free (Base) потребители
-           if SubscriptionManager.shared.subscriptionStatus == .base {
-               BannerAdView(adsBool: $isBannerAdLoaded, bucket: .large)
-                   .frame(height: 120)
-                   .opacity(isBannerAdLoaded ? 1 : 0)
-                   .animation(.easeInOut(duration: 0.25), value: isBannerAdLoaded)
-                   .padding(.horizontal)
-           }
-       }
+    private var bannerAdSection: some View {
+        // Показваме банер само за free (Base) потребители
+        if SubscriptionManager.shared.subscriptionStatus == .base {
+            BannerAdView(adsBool: $isBannerAdLoaded, bucket: .large)
+                .frame(height: 120)
+                .opacity(isBannerAdLoaded ? 1 : 0)
+                .animation(.easeInOut(duration: 0.25), value: isBannerAdLoaded)
+                .padding(.horizontal)
+        }
+    }
 }

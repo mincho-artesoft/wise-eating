@@ -17,7 +17,8 @@ struct FoodItemEditorView: View {
     @State private var showAIGenerationToast = false // Add this
     @State private var toastTimer: Timer? = nil // Add this
     @State private var toastProgress: Double = 0.0 // Add this
-    
+    @State private var isAITapOnCooldown: Bool = false
+
     private var isAIButtonEnabledGlobally: Bool {
             userSettingsArray.first?.isAIButtonEnabled ?? true
         }
@@ -1493,45 +1494,45 @@ struct FoodItemEditorView: View {
 extension FoodItemEditorView {
     fileprivate func MacronutrientsData(from form: MacroForm) -> MacronutrientsData { .init(carbohydrates: form.carbohydrates, protein: form.protein, fat: form.fat, fiber: form.fiber, totalSugars: form.totalSugars) }
     fileprivate func LipidsData(from form: LipidForm) -> LipidsData {
-            .init(
-                totalSaturated: form.totalSaturated,
-                totalMonounsaturated: form.totalMonounsaturated,
-                totalPolyunsaturated: form.totalPolyunsaturated,
-                totalTrans: form.totalTrans,
-                totalTransMonoenoic: form.totalTransMonoenoic,
-                totalTransPolyenoic: form.totalTransPolyenoic,
-                sfa4_0: form.sfa4_0, sfa6_0: form.sfa6_0, sfa8_0: form.sfa8_0,
-                sfa10_0: form.sfa10_0, sfa12_0: form.sfa12_0, sfa13_0: form.sfa13_0,
-                sfa14_0: form.sfa14_0, sfa15_0: form.sfa15_0, sfa16_0: form.sfa16_0,
-                sfa17_0: form.sfa17_0, sfa18_0: form.sfa18_0, sfa20_0: form.sfa20_0,
-                sfa22_0: form.sfa22_0, sfa24_0: form.sfa24_0,
-                mufa14_1: form.mufa14_1, mufa15_1: form.mufa15_1, mufa16_1: form.mufa16_1,
-                mufa17_1: form.mufa17_1, mufa18_1: form.mufa18_1, mufa20_1: form.mufa20_1,
-                mufa22_1: form.mufa22_1, mufa24_1: form.mufa24_1,
-                tfa16_1_t: form.tfa16_1_t, tfa18_1_t: form.tfa18_1_t, tfa22_1_t: form.tfa22_1_t,
-                tfa18_2_t: form.tfa18_2_t,
-                pufa18_2: form.pufa18_2, pufa18_3: form.pufa18_3, pufa18_4: form.pufa18_4,
-                pufa20_2: form.pufa20_2, pufa20_3: form.pufa20_3, pufa20_4: form.pufa20_4,
-                pufa20_5: form.pufa20_5, pufa21_5: form.pufa21_5, pufa22_4: form.pufa22_4,
-                pufa22_5: form.pufa22_5, pufa22_6: form.pufa22_6, pufa2_4: form.pufa2_4
-            )
-        }
+        .init(
+            totalSaturated: form.totalSaturated,
+            totalMonounsaturated: form.totalMonounsaturated,
+            totalPolyunsaturated: form.totalPolyunsaturated,
+            totalTrans: form.totalTrans,
+            totalTransMonoenoic: form.totalTransMonoenoic,
+            totalTransPolyenoic: form.totalTransPolyenoic,
+            sfa4_0: form.sfa4_0, sfa6_0: form.sfa6_0, sfa8_0: form.sfa8_0,
+            sfa10_0: form.sfa10_0, sfa12_0: form.sfa12_0, sfa13_0: form.sfa13_0,
+            sfa14_0: form.sfa14_0, sfa15_0: form.sfa15_0, sfa16_0: form.sfa16_0,
+            sfa17_0: form.sfa17_0, sfa18_0: form.sfa18_0, sfa20_0: form.sfa20_0,
+            sfa22_0: form.sfa22_0, sfa24_0: form.sfa24_0,
+            mufa14_1: form.mufa14_1, mufa15_1: form.mufa15_1, mufa16_1: form.mufa16_1,
+            mufa17_1: form.mufa17_1, mufa18_1: form.mufa18_1, mufa20_1: form.mufa20_1,
+            mufa22_1: form.mufa22_1, mufa24_1: form.mufa24_1,
+            tfa16_1_t: form.tfa16_1_t, tfa18_1_t: form.tfa18_1_t, tfa22_1_t: form.tfa22_1_t,
+            tfa18_2_t: form.tfa18_2_t,
+            pufa18_2: form.pufa18_2, pufa18_3: form.pufa18_3, pufa18_4: form.pufa18_4,
+            pufa20_2: form.pufa20_2, pufa20_3: form.pufa20_3, pufa20_4: form.pufa20_4,
+            pufa20_5: form.pufa20_5, pufa21_5: form.pufa21_5, pufa22_4: form.pufa22_4,
+            pufa22_5: form.pufa22_5, pufa22_6: form.pufa22_6, pufa2_4: form.pufa2_4
+        )
+    }
     fileprivate func VitaminsData(from form: VitaminForm) -> VitaminsData { .init(vitaminA_RAE: form.vitaminA_RAE, retinol: form.retinol, caroteneAlpha: form.caroteneAlpha, caroteneBeta: form.caroteneBeta, cryptoxanthinBeta: form.cryptoxanthinBeta, luteinZeaxanthin: form.luteinZeaxanthin, lycopene: form.lycopene, vitaminB1_Thiamin: form.vitaminB1_Thiamin, vitaminB2_Riboflavin: form.vitaminB2_Riboflavin, vitaminB3_Niacin: form.vitaminB3_Niacin, vitaminB5_PantothenicAcid: form.vitaminB5_PantothenicAcid, vitaminB6: form.vitaminB6, folateDFE: form.folateDFE, folateFood: form.folateFood, folateTotal: form.folateTotal, folicAcid: form.folicAcid, vitaminB12: form.vitaminB12, vitaminC: form.vitaminC, vitaminD: form.vitaminD, vitaminE: form.vitaminE, vitaminK: form.vitaminK, choline: form.choline) }
     fileprivate func MineralsData(from form: MineralForm) -> MineralsData { .init(calcium: form.calcium, iron: form.iron, magnesium: form.magnesium, phosphorus: form.phosphorus, potassium: form.potassium, sodium: form.sodium, selenium: form.selenium, zinc: form.zinc, copper: form.copper, manganese: form.manganese, fluoride: form.fluoride) }
     fileprivate func OtherCompoundsData(from form: OtherForm) -> OtherCompoundsData {
-            .init(
-                alcoholEthyl: form.alcoholEthyl,
-                caffeine: form.caffeine,
-                theobromine: form.theobromine,
-                cholesterol: form.cholesterol,
-                energyKcal: form.energyKcal,
-                water: form.water,
-                weightG: form.weightG,
-                ash: form.ash,
-                betaine: form.betaine,
-                alkalinityPH: form.alkalinityPH
-            )
-        }
+        .init(
+            alcoholEthyl: form.alcoholEthyl,
+            caffeine: form.caffeine,
+            theobromine: form.theobromine,
+            cholesterol: form.cholesterol,
+            energyKcal: form.energyKcal,
+            water: form.water,
+            weightG: form.weightG,
+            ash: form.ash,
+            betaine: form.betaine,
+            alkalinityPH: form.alkalinityPH
+        )
+    }
     fileprivate func AminoAcidsData(from form: AminoAcidsForm) -> AminoAcidsData { .init(alanine: form.alanine, arginine: form.arginine, asparticAcid: form.asparticAcid, cystine: form.cystine, glutamicAcid: form.glutamicAcid, glycine: form.glycine, histidine: form.histidine, isoleucine: form.isoleucine, leucine: form.leucine, lysine: form.lysine, methionine: form.methionine, phenylalanine: form.phenylalanine, proline: form.proline, threonine: form.threonine, tryptophan: form.tryptophan, tyrosine: form.tyrosine, valine: form.valine, serine: form.serine, hydroxyproline: form.hydroxyproline) }
     fileprivate func CarbDetailsData(from form: CarbDetailsForm) -> CarbDetailsData { .init(starch: form.starch, sucrose: form.sucrose, glucose: form.glucose, fructose: form.fructose, lactose: form.lactose, maltose: form.maltose, galactose: form.galactose) }
     fileprivate func SterolsData(from form: SterolsForm) -> SterolsData { .init(phytosterols: form.phytosterols, betaSitosterol: form.betaSitosterol, campesterol: form.campesterol, stigmasterol: form.stigmasterol) }
@@ -1541,7 +1542,7 @@ extension FoodItemEditorView {
         var focusState: FocusState<FocusableField?>.Binding
         let focusID: FocusableField
         @ObservedObject private var effectManager = EffectManager.shared
-
+        
         var body: some View {
             HStack {
                 Text(row.label)
@@ -1562,7 +1563,7 @@ extension FoodItemEditorView {
                         // позволяваме празно (триене), но ограничаваме числата
                         guard !newValue.isEmpty,
                               let number = GlobalState.double(from: newValue) else { return }
-
+                        
                         if focusID == .alkalinityPH {
                             // ограничение 0–14
                             if number < 0 {
@@ -1576,7 +1577,7 @@ extension FoodItemEditorView {
                         }
                         // --- КРАЙ НА ПРОМЯНАТА ---
                     }
-
+                    
                     Text(row.unit)
                         .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
                 }
@@ -1584,7 +1585,7 @@ extension FoodItemEditorView {
             .id(focusID)
         }
     }
-
+    
     
     // --- НАЧАЛО: Помощни функции за AIButton ---
     // --- AI Floating Button: Helpers ---
@@ -1595,80 +1596,80 @@ extension FoodItemEditorView {
         return aspect > 1.9 ? 75 : 95
     }
     private func aiTrailingPadding(for geometry: GeometryProxy) -> CGFloat { 45 }
-
+    
     private func aiDragGesture(geometry: GeometryProxy) -> some Gesture {
-            let buttonSize: CGFloat = 60
-            let radius = buttonSize / 2
-            
-            return DragGesture(minimumDistance: 0)
-                .updating($aiGestureDragOffset) { value, state, _ in
-                    // Жив превод по време на drag – без анимация
-                    state = value.translation
-                }
-                .onChanged { value in
-                    let distance = max(abs(value.translation.width), abs(value.translation.height))
-                    
-                    if distance > 6 {
-                        // Вече влачим – махаме "pressed" и маркираме "dragging"
-                        if !aiIsDragging {
-                            aiIsDragging = true
-                            aiIsPressed = false
-                        }
-                    } else {
-                        // Малко мърдане = натиснат бутон
-                        aiIsPressed = true
+        let buttonSize: CGFloat = 60
+        let radius = buttonSize / 2
+        
+        return DragGesture(minimumDistance: 0)
+            .updating($aiGestureDragOffset) { value, state, _ in
+                // Жив превод по време на drag – без анимация
+                state = value.translation
+            }
+            .onChanged { value in
+                let distance = max(abs(value.translation.width), abs(value.translation.height))
+                
+                if distance > 6 {
+                    // Вече влачим – махаме "pressed" и маркираме "dragging"
+                    if !aiIsDragging {
+                        aiIsDragging = true
+                        aiIsPressed = false
                     }
+                } else {
+                    // Малко мърдане = натиснат бутон
+                    aiIsPressed = true
                 }
-                .onEnded { value in
-                    let safeArea = geometry.safeAreaInsets
-                    let size = geometry.size
-                    
-                    // Базова позиция (дясно-долу) спрямо размера + твоите padding-и
-                    let baseX = size.width  - aiTrailingPadding(for: geometry) - radius
-                    let baseY = size.height - aiBottomPadding(for: geometry)   - radius
-                    
-                    // Центърът, ако приложим текущия offset + преместеното
-                    let rawCenterX = baseX + aiButtonOffset.width  + value.translation.width
-                    let rawCenterY = baseY + aiButtonOffset.height + value.translation.height
-                    
-                    // Ограничаваме центъра ВЪТРЕ в екрана
-                    let minX = radius
-                    let maxX = size.width  - radius
-                    let minY = radius + safeArea.top
-                    let maxY = size.height - radius - safeArea.bottom - 80
-                    
-                    let clampedCenterX = min(max(rawCenterX, minX), maxX)
-                    let clampedCenterY = min(max(rawCenterY, minY), maxY)
-                    
-                    // Новият offset е просто разлика спрямо базовата позиция
-                    let newOffset = CGSize(
-                        width:  clampedCenterX - baseX,
-                        height: clampedCenterY - baseY
-                    )
-                    
-                    if aiIsDragging {
-                        aiButtonOffset = newOffset
-                        saveAIButtonPosition()
-                    } else {
-                        // Тап (без реален drag)
-                        handleAITap()
-                    }
-                    
-                    aiIsDragging = false
-                    aiIsPressed = false
+            }
+            .onEnded { value in
+                let safeArea = geometry.safeAreaInsets
+                let size = geometry.size
+                
+                // Базова позиция (дясно-долу) спрямо размера + твоите padding-и
+                let baseX = size.width  - aiTrailingPadding(for: geometry) - radius
+                let baseY = size.height - aiBottomPadding(for: geometry)   - radius
+                
+                // Центърът, ако приложим текущия offset + преместеното
+                let rawCenterX = baseX + aiButtonOffset.width  + value.translation.width
+                let rawCenterY = baseY + aiButtonOffset.height + value.translation.height
+                
+                // Ограничаваме центъра ВЪТРЕ в екрана
+                let minX = radius
+                let maxX = size.width  - radius
+                let minY = radius + safeArea.top
+                let maxY = size.height - radius - safeArea.bottom - 80
+                
+                let clampedCenterX = min(max(rawCenterX, minX), maxX)
+                let clampedCenterY = min(max(rawCenterY, minY), maxY)
+                
+                // Новият offset е просто разлика спрямо базовата позиция
+                let newOffset = CGSize(
+                    width:  clampedCenterX - baseX,
+                    height: clampedCenterY - baseY
+                )
+                
+                if aiIsDragging {
+                    aiButtonOffset = newOffset
+                    saveAIButtonPosition()
+                } else {
+                    // Тап (без реален drag)
+                    handleAITap()
                 }
-        }
-
+                
+                aiIsDragging = false
+                aiIsPressed = false
+            }
+    }
+    
     /// Стартира същинската AI генерация на детайли за храната.
     /// Извиква се САМО след като потребителят вече е "платил"
     /// (абонамент или реклама).
     private func startFoodDetailAIGeneration() {
         focusedField = nil
         hasUserMadeEdits = false // позволяваме AI да попълни полетата
-
+        
         if #available(iOS 26.0, *) {
             triggerAIGenerationToast()
-
+            
             if let newJob = aiManager.startFoodDetailGeneration(
                 for: self.profile,
                 foodName: self.name,
@@ -1687,33 +1688,45 @@ extension FoodItemEditorView {
             showAlert = true
         }
     }
-
+    
     
     private func handleAITap() {
+        if isAITapOnCooldown {
+            return
+        }
+        
+        // 1. Веднага активираме cooldown за да предотвратим спам/двойни кликове
+        isAITapOnCooldown = true
+        Task { @MainActor in
+            // Тук можеш да смениш 1.5 на 1.0 или 2.0 според това, което искаш
+            try? await Task.sleep(for: .seconds(1.5))
+            isAITapOnCooldown = false
+        }
+        
         NotificationCenter.default.post(name: .snoozeAds, object: nil)
-
+        
         // 1. Проверка за наличност на AI (Apple Intelligence статуси и т.н.)
         guard ensureAIAvailableOrShowMessage() else { return }
-
+        
         // 2. Валидация на името (преди да караме потребителя да гледа реклами)
         guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             alertMsg = "Please enter a name for the food first."
             showAlert = true
             return
         }
-
+        
         // 3. Логика за АБОНАМЕНТ / РЕКЛАМИ (същата схема като при упражненията)
-
+        
         // 3.1 Платен план – без реклами
         if SubscriptionManager.shared.subscriptionStatus != .base {
             print("💎 Premium user: Skipping ad for food detail generation.")
             startFoodDetailAIGeneration()
             return
         }
-
+        
         // 3.2 Безплатен план – Rewarded → Interstitial → fallback
         print("📺 Free user: Checking for ads for food detail generation...")
-
+        
         if RewardedAdManager.shared.isReady {
             print("📺 Showing Rewarded Ad for food detail generation...")
             RewardedAdManager.shared.showIfAvailable { amount, type in
@@ -1732,7 +1745,7 @@ extension FoodItemEditorView {
             print("⚠️ No ads available. Proceeding graciously with food detail generation.")
             // Няма реклами – пускаме AI, за да не дразним потребителя
             startFoodDetailAIGeneration()
-
+            
             // Подготвяме реклами за следващия път
             Task {
                 await RewardedAdManager.shared.loadAd()
@@ -1740,46 +1753,46 @@ extension FoodItemEditorView {
             }
         }
     }
-
-
+    
+    
     private func triggerAIGenerationToast() {
-           toastTimer?.invalidate()
-           toastProgress = 0.0
-           withAnimation {
-               showAIGenerationToast = true
-           }
-
-           let totalDuration = 5.0 // Give it a longer timeout
-           let updateInterval = 0.1
-           let progressIncrement = updateInterval / totalDuration
-
-           toastTimer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { timer in
-               DispatchQueue.main.async {
-                   self.toastProgress += progressIncrement
-                   if self.toastProgress >= 1.0 {
-                       timer.invalidate()
-                       self.toastTimer = nil
-                       withAnimation {
-                           self.showAIGenerationToast = false
-                       }
-                   }
-               }
-           }
-       }
+        toastTimer?.invalidate()
+        toastProgress = 0.0
+        withAnimation {
+            showAIGenerationToast = true
+        }
+        
+        let totalDuration = 5.0 // Give it a longer timeout
+        let updateInterval = 0.1
+        let progressIncrement = updateInterval / totalDuration
+        
+        toastTimer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { timer in
+            DispatchQueue.main.async {
+                self.toastProgress += progressIncrement
+                if self.toastProgress >= 1.0 {
+                    timer.invalidate()
+                    self.toastTimer = nil
+                    withAnimation {
+                        self.showAIGenerationToast = false
+                    }
+                }
+            }
+        }
+    }
     
     private func saveAIButtonPosition() {
         let d = UserDefaults.standard
         d.set(aiButtonOffset.width,  forKey: "\(aiButtonPositionKey)_width")
         d.set(aiButtonOffset.height, forKey: "\(aiButtonPositionKey)_height")
     }
-
+    
     private func loadAIButtonPosition() {
         let d = UserDefaults.standard
         let w = d.double(forKey: "\(aiButtonPositionKey)_width")
         let h = d.double(forKey: "\(aiButtonPositionKey)_height")
         self.aiButtonOffset = CGSize(width: w, height: h)
     }
-
+    
     @ViewBuilder
     private func AIButton(geometry: GeometryProxy) -> some View {
         let buttonSize: CGFloat = 60
@@ -1818,27 +1831,26 @@ extension FoodItemEditorView {
         .animation(.spring(response: 0.25, dampingFraction: 0.8), value: aiIsDragging)
         .contentShape(Circle())                     // само кръгчето е кликаемо
         .position(x: centerX, y: centerY)           // абсолютна позиция, вече clamp-ната
-        .opacity(isAIButtonVisible ? 1 : 0)
-        .disabled(!isAIButtonVisible)
+        .opacity(isAIButtonVisible ? (isAITapOnCooldown ? 0.5 : 1.0) : 0)
+        .disabled(!isAIButtonVisible || isAITapOnCooldown)
         .gesture(aiDragGesture(geometry: geometry)) // жестът е върху 60x60, не върху цял екран
         .transition(.scale.combined(with: .opacity))
     }
-
+    
     
     private func cleanupPendingAIJobIfNeeded() {
         guard let pendingID = pendingAIJobIDToDeleteOnSave,
               let job = aiManager.jobs.first(where: { $0.id == pendingID }) else {
             return
         }
-
+        
         // Трием асинхронно, за да не правим save() async
         Task {
             await aiManager.deleteJob(job)
         }
-
+        
         pendingAIJobIDToDeleteOnSave = nil
     }
-
 }
 
 extension FoodItemEditorView.OpenMenu {

@@ -5,7 +5,7 @@ import EventKit
 
 struct NutritionsDetailView: View {
     @State private var foodItemToView: FoodItem? = nil
-
+    @State private var isAITapOnCooldown: Bool = false   // <--- НОВО
     @State private var isShowingDeleteNodeConfirmation = false
     @State private var nodeToDelete: Node? = nil
     @State private var nodesForDay: [Node] = []
@@ -2666,12 +2666,26 @@ struct NutritionsDetailView: View {
     }
 
     private func handleAITap() {
+        // 0. Ако сме в cooldown – игнорирай тап-а
+        if isAITapOnCooldown {
+            return
+        }
+        
+        // 1. Веднага активираме cooldown за да предотвратим спам/двойни кликове
+        isAITapOnCooldown = true
+        Task { @MainActor in
+            // Тук можеш да смениш 1.5 на 1.0 или 2.0 според това, което искаш
+            try? await Task.sleep(for: .seconds(1.5))
+            isAITapOnCooldown = false
+        }
+        
+        // 2. Snooze на рекламите
         NotificationCenter.default.post(name: .snoozeAds, object: nil)
 
-        // 1. Проверка за наличност на AI (Apple Intelligence статус)
+        // 3. Проверка за наличност на AI (Apple Intelligence статус)
         guard ensureAIAvailableOrShowMessage() else { return }
         
-        // 2. Кои хранения са празни / попълнени – както досега
+        // 4. Кои хранения са празни / попълнени – както досега
         let emptyMeals = dailyMeals.filter { meal in
             foodsByMeal[meal.id]?.isEmpty ?? true
         }
@@ -2708,7 +2722,7 @@ struct NutritionsDetailView: View {
             }
         ]
         
-        // 3. Четем избраните промптове от UserDefaults (както беше)
+        // 5. Четем избраните промптове от UserDefaults (както беше)
         let selectedPromptsKey = "AIDailyMealGenerator_SelectedPrompts"
         let savedPromptIDStrings = UserDefaults.standard.stringArray(forKey: selectedPromptsKey) ?? []
         let selectedPromptIDs = savedPromptIDStrings.compactMap { UUID(uuidString: $0) }
@@ -2726,9 +2740,9 @@ struct NutritionsDetailView: View {
             }
         }
         
-        // 4. Абонамент / реклами gateway
+        // 6. Абонамент / реклами gateway (не променяме логиката ти)
         
-        // 4.1 Платен план – без реклами
+        // 6.1 Платен план – без реклами
         if SubscriptionManager.shared.subscriptionStatus != .base {
             print("💎 Premium user: Skipping ad for daily nutrition detail generation.")
             startDailyNutritionDetailAIGeneration(
@@ -2739,13 +2753,12 @@ struct NutritionsDetailView: View {
             return
         }
         
-        // 4.2 Безплатен план – Rewarded → Interstitial → fallback
+        // 6.2 Безплатен план – Rewarded → Interstitial → fallback
         print("📺 Free user: Checking for ads for daily nutrition detail generation...")
         
         if RewardedAdManager.shared.isReady {
             print("📺 Showing Rewarded Ad for daily nutrition detail generation...")
             RewardedAdManager.shared.showIfAvailable { amount, type in
-                // Влиза се тук САМО ако рекламата е изгледана докрай
                 print("✅ Ad watched! Starting daily nutrition detail generation.")
                 self.startDailyNutritionDetailAIGeneration(
                     mealsToGenerate: mealsToGenerate,
@@ -2756,7 +2769,6 @@ struct NutritionsDetailView: View {
         } else if InterstitialAdManager.shared.isReady {
             print("⚠️ Rewarded not ready. Showing Interstitial fallback for daily nutrition detail generation...")
             InterstitialAdManager.shared.showIfAvailable {
-                // Изпълнява се, когато потребителят затвори interstitial-а
                 print("✅ Interstitial closed. Starting daily nutrition detail generation.")
                 self.startDailyNutritionDetailAIGeneration(
                     mealsToGenerate: mealsToGenerate,
@@ -2766,14 +2778,12 @@ struct NutritionsDetailView: View {
             }
         } else {
             print("⚠️ No ads available. Proceeding graciously with daily nutrition detail generation.")
-            // Няма реклами – пускаме AI, за да не дразним потребителя
             startDailyNutritionDetailAIGeneration(
                 mealsToGenerate: mealsToGenerate,
                 existingMeals: existingMeals,
                 selectedPrompts: selectedPromptsText
             )
             
-            // Зареждаме реклами за следващия път
             Task {
                 await RewardedAdManager.shared.loadAd()
                 await InterstitialAdManager.shared.loadAd()
@@ -2781,7 +2791,6 @@ struct NutritionsDetailView: View {
         }
     }
 
-    
     private func saveAIButtonPosition() {
         let d = UserDefaults.standard
         d.set(aiButtonOffset.width, forKey: "\(aiButtonPositionKey)_width")
@@ -2833,8 +2842,8 @@ struct NutritionsDetailView: View {
         .animation(.spring(response: 0.25, dampingFraction: 0.8), value: aiIsDragging)
         .contentShape(Circle())                     // само кръгчето е кликаемо
         .position(x: centerX, y: centerY)           // абсолютна позиция, вече clamp-ната
-        .opacity(isAIButtonVisible ? 1 : 0)
-        .disabled(!isAIButtonVisible)
+        .opacity(isAIButtonVisible ? (isAITapOnCooldown ? 0.5 : 1.0) : 0)
+        .disabled(!isAIButtonVisible || isAITapOnCooldown)
         .gesture(aiDragGesture(geometry: geometry)) // жестът е върху 60x60, не върху цял екран
         .transition(.scale.combined(with: .opacity))
     }

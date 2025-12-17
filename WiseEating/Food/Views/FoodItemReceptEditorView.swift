@@ -5,22 +5,22 @@ import PhotosUI
 @MainActor
 struct FoodItemReceptEditorView: View {
     @State private var pendingAIJobIDToDeleteOnSave: UUID? = nil
-
+    @State private var isAITapOnCooldown: Bool = false
     // MARK: - Photo source state
     @State private var isBannerAdLoaded: Bool = false
-
+    
     private enum PhotoSourceTarget {
         case main
         case gallery
         case galleryReplace(index: Int)
     }
-
+    
     @State private var showPhotoSourceDialog = false
     @State private var showCameraPicker = false
     @State private var showPhotoLibraryPicker = false
     @State private var currentPhotoTarget: PhotoSourceTarget? = nil
     @State private var isShowingVideoGallery = false
-
+    
     
     @State private var selectedNutrientID: String? = nil
     @State private var aiIsPressed: Bool = false
@@ -30,7 +30,7 @@ struct FoodItemReceptEditorView: View {
     @State private var showAIGenerationToast = false
     @State private var toastTimer: Timer? = nil
     @State private var toastProgress: Double = 0.0
-       
+    
     @State private var isAIButtonVisible: Bool = true
     @State private var aiButtonOffset: CGSize = .zero
     @State private var aiIsDragging: Bool = false
@@ -39,26 +39,26 @@ struct FoodItemReceptEditorView: View {
     private let aiButtonPositionKey = "floatingRecipeAIButtonPosition"
     
     @FocusState.Binding var isSearchFieldFocused: Bool
-
+    
     // MARK: - Managers and Environment
     @ObservedObject private var effectManager = EffectManager.shared
     @Environment(\.modelContext) private var ctx
     @Environment(\.colorScheme)  private var colorScheme
     let onDismiss: (FoodItem?) -> Void
     @State private var scrollToIngredientID: FoodItem.ID? = nil
-
+    
     // MARK: - Data Queries
     @Query(sort: \Vitamin.name)  private var allVitamins:  [Vitamin]
     @Query(sort: \Mineral.name)  private var allMinerals:  [Mineral]
     @Query(sort: \Diet.name)     private var allDiets: [Diet]
     @Query private var userSettingsArray: [UserSettings]   // 👈 НОВО
-
+    
     // MARK: - Input Properties
     let food: FoodItem?
     let profile: Profile?
     private let dubFood: FoodItemCopy?
     @State private var origRecipe: FoodItem? = nil
-
+    
     // MARK: - State Variables
     @State private var name: String
     @State private var itemDescription: String
@@ -66,10 +66,10 @@ struct FoodItemReceptEditorView: View {
     @State private var photoData: Data?
     @State private var prepTimeTxt: String
     @State private var minAgeMonthsTxt: String
-
+    
     @State private var selectedIng: [FoodItem: Double] = [:] // FoodItem → grams
     @State private var ingredientTextValues: [FoodItem.ID: String] = [:]
-
+    
     enum FocusableField: Hashable {
         case name, description, prepTime, minAge
         case ingredientGrams(FoodItem.ID)
@@ -109,7 +109,7 @@ struct FoodItemReceptEditorView: View {
     
     // Global Search Integration
     @Binding var globalSearchText: String
-
+    
     // Nutrient Forms (Read-Only)
     @State private var macros: MacroForm
     @State private var lipids: LipidForm
@@ -124,9 +124,9 @@ struct FoodItemReceptEditorView: View {
     
     private let isReadOnly = true
     private var isAIButtonEnabledGlobally: Bool {
-          userSettingsArray.first?.isAIButtonEnabled ?? true
-      }
-
+        userSettingsArray.first?.isAIButtonEnabled ?? true
+    }
+    
     private var isAIButtonCurrentlyVisible: Bool {
         !isSearchFieldFocused &&
         !isSaving &&
@@ -137,7 +137,7 @@ struct FoodItemReceptEditorView: View {
     }
     @State private var isSaving = false
     @State private var isAIInit = false
-
+    
     // MARK: - Initializer
     init(
         dubFood: FoodItemCopy? = nil,
@@ -200,7 +200,7 @@ struct FoodItemReceptEditorView: View {
             initialAminoAcids = AminoAcidsForm(from: totals.aminoAcids)
             initialCarbDetails = CarbDetailsForm(from: totals.carbDetails)
             initialSterols = SterolsForm(from: totals.sterols)
-
+            
             let tags = Self.aggregatedTags(for: f)
             initialSelectedCategories = tags.categories
             initialSelectedDiets = tags.diets
@@ -234,183 +234,183 @@ struct FoodItemReceptEditorView: View {
         _selectedAllergens = State(initialValue: initialSelectedAllergens)
         _galleryData = State(initialValue: initialGalleryData)
     }
-
+    
     // MARK: - Body & Toolbar
     var body: some View {
-           ZStack {
-               VStack(spacing: 0) {
-                   customToolbar
-                   mainForm
-               }
-               .alert("Error", isPresented: $showAlert) {
-                   Button("OK", role: .cancel) { }.foregroundColor(effectManager.currentGlobalAccentColor)
-               } message: { Text(alertMsg) }
-               .presentationDetents([.medium, .large])
-               .onAppear {
-                   ingredientTextValues = Dictionary(uniqueKeysWithValues: selectedIng.map { (item, grams) in
-                       let displayValue = isImperial ? UnitConversion.gToOz(grams) : grams
-                       return (item.id, GlobalState.formatDecimalString(String(displayValue)))
-                   })
-                   recalculateAndValidateMinAge()
-               }
-               .onChange(of: selectedIng) { _, newIngredients in
+        ZStack {
+            VStack(spacing: 0) {
+                customToolbar
+                mainForm
+            }
+            .alert("Error", isPresented: $showAlert) {
+                Button("OK", role: .cancel) { }.foregroundColor(effectManager.currentGlobalAccentColor)
+            } message: { Text(alertMsg) }
+                .presentationDetents([.medium, .large])
+                .onAppear {
+                    ingredientTextValues = Dictionary(uniqueKeysWithValues: selectedIng.map { (item, grams) in
+                        let displayValue = isImperial ? UnitConversion.gToOz(grams) : grams
+                        return (item.id, GlobalState.formatDecimalString(String(displayValue)))
+                    })
+                    recalculateAndValidateMinAge()
+                }
+                .onChange(of: selectedIng) { _, newIngredients in
                     recalcTotals()
                     recalcTags()
                     recalculateAndValidateMinAge()
                 }
-               .task(id: dubFood?.id) {
-                   await loadFromDubFood()
-               }
-               .disabled(isSaving)
-               .blur(radius: isSaving ? 1.5 : 0)
-               
-               // +++ НАЧАЛО НА ПРОМЯНАТА: Замяна с FoodSearchPanelView +++
-               if isSearchFieldFocused {
-                   let focusBinding = Binding<Bool>(
-                       get: { isSearchFieldFocused },
-                       set: { isSearchFieldFocused = $0 }
-                   )
-                   
-                   // Изчисляваме ID-тата, които да скрием (тези, които вече са добавени)
-                   let excludedIDs = Set(selectedIng.keys.map { $0.id })
-                   
-                   FoodSearchPanelView(
-                       globalSearchText: $globalSearchText,
-                       isSearchFieldFocused: focusBinding,
-                       profile: profile,
-                       searchMode: .recipes, // nil позволява търсене и на храни, и на други рецепти
-                       showFavoritesFilter: true,
-                       showRecipesFilter: false,
-                       showMenusFilter: false, // За рецепти обикновено не добавяме менюта като съставки
-                       headerRightText: nil,
-                       excludedFoodIDs: excludedIDs,
-                       onSelectFood: { foodItem in
-                           selectIngredient(foodItem)
-                       },
-                       onDismiss: {
-                           dismissKeyboardAndSearch()
-                       }
-                   )
-                   .transition(.opacity.animation(.easeInOut(duration: 0.2)))
-                   .zIndex(1)
-               }
-               // +++ КРАЙ НА ПРОМЯНАТА +++
-
-               if isSaving {
-                   VStack(spacing: 16) {
-                       ProgressView()
-                           .progressViewStyle(CircularProgressViewStyle(tint: effectManager.currentGlobalAccentColor))
-                           .scaleEffect(1.5)
-                       Text("Saving…")
-                           .foregroundStyle(effectManager.currentGlobalAccentColor)
-                           .font(.headline)
-                   }
-                   .padding(30)
-                   .glassCardStyle(cornerRadius: 20)
-                   .transition(.scale.combined(with: .opacity))
-                   .accessibilityLabel("Saving")
-                   .zIndex(1000)
-               }
-           }
-           .background(ThemeBackgroundView().ignoresSafeArea())
-           .overlay {
-               if showAIGenerationToast {
-                   aiGenerationToast
-               }
-               GeometryReader { geometry in
-                   Group {
-                       if isAIButtonCurrentlyVisible {
-                           AIButton(geometry: geometry)
-                       }
-                   }
-                   .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-               }
-           }
-           .onReceive(NotificationCenter.default.publisher(for: .aiRecipeJobCompleted)) { notification in
-               guard !hasUserMadeEdits,
-                     let userInfo = notification.userInfo,
-                     let completedJobID = userInfo["jobID"] as? UUID,
-                     completedJobID == self.runningGenerationJobID else {
-                   return
-               }
-
-               print("▶️ FoodItemReceptEditorView: Received .aiRecipeJobCompleted for job \(completedJobID). Populating data.")
-               
-               Task {
-                   if #available(iOS 26.0, *) {
-                       await populateFromCompletedJob(jobID: completedJobID)
-                   }
-               }
-           }
-           .onChange(of: name) { _, _ in hasUserMadeEdits = true }
-           .onChange(of: itemDescription) { _, _ in hasUserMadeEdits = true }
-           .onChange(of: selectedIng) { _, _ in hasUserMadeEdits = true }
-           .onAppear { loadAIButtonPosition() }
-           .sheet(isPresented: $showCameraPicker) {
-               CameraPicker { image in
-                   handlePickedUIImage(image)
-               }
-               .presentationCornerRadius(20)
-           }
-           .sheet(isPresented: $showPhotoLibraryPicker) {
-               PhotoLibraryPicker { image in
-                   handlePickedUIImage(image)
-               }
-               .presentationCornerRadius(20)
-           }
-           .sheet(isPresented: $isShowingVideoGallery) {   // 👈 НОВО
-               VideoGalleryFoodSheet { selectedFood in
-                   // Взимаме снимката от избрания FoodItem
-                   if let image = selectedFood.foodImage(variant: "1024"),
-                      let data = image.jpegData(compressionQuality: 0.9) {
-
-                       switch currentPhotoTarget ?? .main {
-                       case .main:
-                           photoData = data
-                       case .gallery:
-                           galleryData.append(data)
-                       case .galleryReplace(let index):
-                           if galleryData.indices.contains(index) {
-                               galleryData[index] = data
-                           }
-                       }
-
-                       hasUserMadeEdits = true
-                   } else {
-                       // Ако някой запис има само видео и няма photo,
-                       // по-късно може да добавиш генерация на thumbnail от видеото.
-                       print("⚠️ Selected food from video gallery has no photo data.")
-                   }
-
-                   // Накрая чистим таргета
-                   currentPhotoTarget = nil
-               }
-               .presentationDetents([.large])
-           }
-           .confirmationDialog(
-               "Select photo source",
-               isPresented: $showPhotoSourceDialog
-           ) {
-               Button("Take Photo") {
-                   showPhotoSourceDialog = false
-                   showCameraPicker = true
-               }
-               Button("Photo Library") {                // 👈 промяна на текста
-                   showPhotoSourceDialog = false
-                   showPhotoLibraryPicker = true
-               }
-               Button("Image Gallery") {                // 👈 НОВО – трети избор
-                   showPhotoSourceDialog = false
-                   isShowingVideoGallery = true
-               }
-               Button("Cancel", role: .cancel) {
-                   showPhotoSourceDialog = false
-                   currentPhotoTarget = nil
-               }
-           }
-
-       }
-
+                .task(id: dubFood?.id) {
+                    await loadFromDubFood()
+                }
+                .disabled(isSaving)
+                .blur(radius: isSaving ? 1.5 : 0)
+            
+            // +++ НАЧАЛО НА ПРОМЯНАТА: Замяна с FoodSearchPanelView +++
+            if isSearchFieldFocused {
+                let focusBinding = Binding<Bool>(
+                    get: { isSearchFieldFocused },
+                    set: { isSearchFieldFocused = $0 }
+                )
+                
+                // Изчисляваме ID-тата, които да скрием (тези, които вече са добавени)
+                let excludedIDs = Set(selectedIng.keys.map { $0.id })
+                
+                FoodSearchPanelView(
+                    globalSearchText: $globalSearchText,
+                    isSearchFieldFocused: focusBinding,
+                    profile: profile,
+                    searchMode: .recipes, // nil позволява търсене и на храни, и на други рецепти
+                    showFavoritesFilter: true,
+                    showRecipesFilter: false,
+                    showMenusFilter: false, // За рецепти обикновено не добавяме менюта като съставки
+                    headerRightText: nil,
+                    excludedFoodIDs: excludedIDs,
+                    onSelectFood: { foodItem in
+                        selectIngredient(foodItem)
+                    },
+                    onDismiss: {
+                        dismissKeyboardAndSearch()
+                    }
+                )
+                .transition(.opacity.animation(.easeInOut(duration: 0.2)))
+                .zIndex(1)
+            }
+            // +++ КРАЙ НА ПРОМЯНАТА +++
+            
+            if isSaving {
+                VStack(spacing: 16) {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: effectManager.currentGlobalAccentColor))
+                        .scaleEffect(1.5)
+                    Text("Saving…")
+                        .foregroundStyle(effectManager.currentGlobalAccentColor)
+                        .font(.headline)
+                }
+                .padding(30)
+                .glassCardStyle(cornerRadius: 20)
+                .transition(.scale.combined(with: .opacity))
+                .accessibilityLabel("Saving")
+                .zIndex(1000)
+            }
+        }
+        .background(ThemeBackgroundView().ignoresSafeArea())
+        .overlay {
+            if showAIGenerationToast {
+                aiGenerationToast
+            }
+            GeometryReader { geometry in
+                Group {
+                    if isAIButtonCurrentlyVisible {
+                        AIButton(geometry: geometry)
+                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .aiRecipeJobCompleted)) { notification in
+            guard !hasUserMadeEdits,
+                  let userInfo = notification.userInfo,
+                  let completedJobID = userInfo["jobID"] as? UUID,
+                  completedJobID == self.runningGenerationJobID else {
+                return
+            }
+            
+            print("▶️ FoodItemReceptEditorView: Received .aiRecipeJobCompleted for job \(completedJobID). Populating data.")
+            
+            Task {
+                if #available(iOS 26.0, *) {
+                    await populateFromCompletedJob(jobID: completedJobID)
+                }
+            }
+        }
+        .onChange(of: name) { _, _ in hasUserMadeEdits = true }
+        .onChange(of: itemDescription) { _, _ in hasUserMadeEdits = true }
+        .onChange(of: selectedIng) { _, _ in hasUserMadeEdits = true }
+        .onAppear { loadAIButtonPosition() }
+        .sheet(isPresented: $showCameraPicker) {
+            CameraPicker { image in
+                handlePickedUIImage(image)
+            }
+            .presentationCornerRadius(20)
+        }
+        .sheet(isPresented: $showPhotoLibraryPicker) {
+            PhotoLibraryPicker { image in
+                handlePickedUIImage(image)
+            }
+            .presentationCornerRadius(20)
+        }
+        .sheet(isPresented: $isShowingVideoGallery) {   // 👈 НОВО
+            VideoGalleryFoodSheet { selectedFood in
+                // Взимаме снимката от избрания FoodItem
+                if let image = selectedFood.foodImage(variant: "1024"),
+                   let data = image.jpegData(compressionQuality: 0.9) {
+                    
+                    switch currentPhotoTarget ?? .main {
+                    case .main:
+                        photoData = data
+                    case .gallery:
+                        galleryData.append(data)
+                    case .galleryReplace(let index):
+                        if galleryData.indices.contains(index) {
+                            galleryData[index] = data
+                        }
+                    }
+                    
+                    hasUserMadeEdits = true
+                } else {
+                    // Ако някой запис има само видео и няма photo,
+                    // по-късно може да добавиш генерация на thumbnail от видеото.
+                    print("⚠️ Selected food from video gallery has no photo data.")
+                }
+                
+                // Накрая чистим таргета
+                currentPhotoTarget = nil
+            }
+            .presentationDetents([.large])
+        }
+        .confirmationDialog(
+            "Select photo source",
+            isPresented: $showPhotoSourceDialog
+        ) {
+            Button("Take Photo") {
+                showPhotoSourceDialog = false
+                showCameraPicker = true
+            }
+            Button("Photo Library") {                // 👈 промяна на текста
+                showPhotoSourceDialog = false
+                showPhotoLibraryPicker = true
+            }
+            Button("Image Gallery") {                // 👈 НОВО – трети избор
+                showPhotoSourceDialog = false
+                isShowingVideoGallery = true
+            }
+            Button("Cancel", role: .cancel) {
+                showPhotoSourceDialog = false
+                currentPhotoTarget = nil
+            }
+        }
+        
+    }
+    
     @ViewBuilder
     private var customToolbar: some View {
         let title = food?.isMenu == true ? (food == nil ? "Add Menu" : "Edit Menu") : (food == nil ? "Add Recipe" : "Edit Recipe")
@@ -420,13 +420,13 @@ struct FoodItemReceptEditorView: View {
                 .padding(.vertical, 5)
                 .glassCardStyle(cornerRadius: 20)
             Spacer()
-
+            
             Text(title)
                 .font(.headline)
                 .foregroundStyle(effectManager.currentGlobalAccentColor)
-
+            
             Spacer()
-
+            
             let isSaveDisabled = name.trimmingCharacters(in: .whitespaces).isEmpty || isSaving
             HStack {
                 Button(action: save) {
@@ -448,81 +448,81 @@ struct FoodItemReceptEditorView: View {
     
     // MARK: - Form Body
     private var mainForm: some View {
-           ScrollViewReader { proxy in
-               ScrollView(showsIndicators: false) {
-                   VStack(spacing: 0) {
-                       basicSection
-                       bannerAdSection
+        ScrollViewReader { proxy in
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 0) {
+                    basicSection
+                    bannerAdSection
                         .frame(height: isBannerAdLoaded ? 120 : 0)
-                       gallerySection
-                       if !selectedIng.isEmpty {
-                           ingredientsSection
-                       }
-                       macroSection
-                       vitaminSection
-                       mineralSection
-                       lipidSection
-                       aminoAcidsSection
-                       carbDetailsSection
-                       sterolsSection
-                       otherSection
-                       
-                       Color.clear.frame(height: 150)
-                   }
-               }
-               .onChange(of: focusedField) { oldValue, newValue in
-                   if let oldID = oldValue, newValue != oldID {
-                       switch oldID {
-                       case .ingredientGrams(let foodItemID):
-                           formatIngredientText(for: foodItemID)
-                       case .minAge:
-                           validateMinAgeOnBlur()
-                       default:
-                           break
-                       }
-                   }
-
-                   guard let focus = newValue else { return }
-
-                   let idToScroll: AnyHashable
-                   switch focus {
-                   case .name, .description, .prepTime, .minAge:
-                       idToScroll = focus
-                   case .ingredientGrams(let foodItemID):
-                       idToScroll = foodItemID
-                   }
-
-                   DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-                       withAnimation(.easeInOut(duration: 0.3)) {
-                           proxy.scrollTo(idToScroll, anchor: .top)
-                       }
-                   }
-               }
-               .onChange(of: scrollToIngredientID) { _, newID in
-                   guard let id = newID else { return }
-                   DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                       withAnimation(.easeInOut) {
-                           proxy.scrollTo(id, anchor: .top)
-                       }
-                       scrollToIngredientID = nil
-                   }
-               }
-               .mask(
-                   LinearGradient(
-                       gradient: Gradient(stops: [
-                           .init(color: .clear, location: 0),
-                           .init(color: effectManager.currentGlobalAccentColor, location: 0.01),
-                           .init(color: effectManager.currentGlobalAccentColor, location: 0.9),
-                           .init(color: .clear, location: 0.95)
-                       ]),
-                       startPoint: .top,
-                       endPoint: .bottom
-                   )
-               )
-               .background(Color.clear)
-           }
-       }
-
+                    gallerySection
+                    if !selectedIng.isEmpty {
+                        ingredientsSection
+                    }
+                    macroSection
+                    vitaminSection
+                    mineralSection
+                    lipidSection
+                    aminoAcidsSection
+                    carbDetailsSection
+                    sterolsSection
+                    otherSection
+                    
+                    Color.clear.frame(height: 150)
+                }
+            }
+            .onChange(of: focusedField) { oldValue, newValue in
+                if let oldID = oldValue, newValue != oldID {
+                    switch oldID {
+                    case .ingredientGrams(let foodItemID):
+                        formatIngredientText(for: foodItemID)
+                    case .minAge:
+                        validateMinAgeOnBlur()
+                    default:
+                        break
+                    }
+                }
+                
+                guard let focus = newValue else { return }
+                
+                let idToScroll: AnyHashable
+                switch focus {
+                case .name, .description, .prepTime, .minAge:
+                    idToScroll = focus
+                case .ingredientGrams(let foodItemID):
+                    idToScroll = foodItemID
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        proxy.scrollTo(idToScroll, anchor: .top)
+                    }
+                }
+            }
+            .onChange(of: scrollToIngredientID) { _, newID in
+                guard let id = newID else { return }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    withAnimation(.easeInOut) {
+                        proxy.scrollTo(id, anchor: .top)
+                    }
+                    scrollToIngredientID = nil
+                }
+            }
+            .mask(
+                LinearGradient(
+                    gradient: Gradient(stops: [
+                        .init(color: .clear, location: 0),
+                        .init(color: effectManager.currentGlobalAccentColor, location: 0.01),
+                        .init(color: effectManager.currentGlobalAccentColor, location: 0.9),
+                        .init(color: .clear, location: 0.95)
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            )
+            .background(Color.clear)
+        }
+    }
+    
     // MARK: - Sections
     private var basicSection: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -673,41 +673,41 @@ struct FoodItemReceptEditorView: View {
         }
         .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
     }
-
+    
     // MARK: - Profile Diet & Allergen Helpers
-
+    
     private var profileDietIDs: Set<Diet.ID> {
         guard let profile else { return [] }
         return Set(profile.diets.map(\.id))
     }
-
+    
     private var profileAllergenIDs: Set<Allergen.ID> {
         guard let profile else { return [] }
         return Set(profile.allergens.map(\.id))
     }
-
+    
     private var selectedDietModels: [Diet] {
         allDiets.filter { selectedDiets.contains($0.id) }
     }
-
+    
     private var selectedDietNames: String {
         let names = selectedDietModels.map(\.name).sorted()
         return names.joined(separator: ", ")
     }
-
+    
     private var userDietNames: String {
         guard let profile else { return "" }
         let names = profile.diets.map(\.name).sorted()
         return names.joined(separator: ", ")
     }
-
+    
     private var matchingProfileAllergens: [Allergen] {
         guard !profileAllergenIDs.isEmpty else { return [] }
         return Allergen.allCases.filter {
             selectedAllergens.contains($0.id) && profileAllergenIDs.contains($0.id)
         }
     }
-
+    
     private var foodAllergenNames: String {
         let names = Allergen.allCases
             .filter { selectedAllergens.contains($0.id) }
@@ -715,7 +715,7 @@ struct FoodItemReceptEditorView: View {
             .sorted()
         return names.joined(separator: ", ")
     }
-
+    
     private var userAllergenNames: String {
         guard let profile else { return "" }
         let names = profile.allergens
@@ -723,7 +723,7 @@ struct FoodItemReceptEditorView: View {
             .sorted()
         return names.joined(separator: ", ")
     }
-
+    
     private var showsDietMismatchWarning: Bool {
         // Need both: user has diets AND recipe has diets
         guard !profileDietIDs.isEmpty else { return false }
@@ -731,7 +731,7 @@ struct FoodItemReceptEditorView: View {
         // Show warning when there is no overlap
         return selectedDiets.isDisjoint(with: profileDietIDs)
     }
-
+    
     private var minAgeSourceDescription: String? {
         guard calculatedMinAge > 0 else { return nil }
         let sourceFoods = selectedIng.keys.filter { $0.minAgeMonths == calculatedMinAge }.sorted { $0.name < $1.name }
@@ -746,7 +746,7 @@ struct FoodItemReceptEditorView: View {
             return "Minimum age is determined by: \(firstTwo) and \(names.count - 2) more (\(calculatedMinAge) months)."
         }
     }
-
+    
     
     private var gallerySection: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -762,52 +762,52 @@ struct FoodItemReceptEditorView: View {
         }
         .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
     }
-
+    
     private var ingredientsSection: some View {
-              VStack(alignment: .leading, spacing: 8) {
-                  let title = food?.isMenu == true ? "Foods in Menu" : "Ingredients"
-                  Text(title)
-                      .font(.headline)
-                      .foregroundStyle(effectManager.currentGlobalAccentColor)
-                  
-                  VStack(spacing: 12) {
-                      ForEach(Array(selectedIng.keys.sorted(by: { $0.name < $1.name })), id: \.self) { item in
-                          let gramsBinding = Binding<Double>(
-                              get: { selectedIng[item] ?? 0.0 },
-                              set: { selectedIng[item] = $0 }
-                          )
-                          
-                          IngredientRowView(
-                              grams: gramsBinding,
-                              item: item,
-                              focusedField: $focusedField,
-                              focusCase: .ingredientGrams(item.id),
-                              onDelete: {
-                                  selectedIng.removeValue(forKey: item)
-                              }
-                          )
-                          .id(item.id)
-                      }
-                  }
-                  .padding()
-                  .glassCardStyle(cornerRadius: 20)
-              }
-              .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
-          }
+        VStack(alignment: .leading, spacing: 8) {
+            let title = food?.isMenu == true ? "Foods in Menu" : "Ingredients"
+            Text(title)
+                .font(.headline)
+                .foregroundStyle(effectManager.currentGlobalAccentColor)
+            
+            VStack(spacing: 12) {
+                ForEach(Array(selectedIng.keys.sorted(by: { $0.name < $1.name })), id: \.self) { item in
+                    let gramsBinding = Binding<Double>(
+                        get: { selectedIng[item] ?? 0.0 },
+                        set: { selectedIng[item] = $0 }
+                    )
+                    
+                    IngredientRowView(
+                        grams: gramsBinding,
+                        item: item,
+                        focusedField: $focusedField,
+                        focusCase: .ingredientGrams(item.id),
+                        onDelete: {
+                            selectedIng.removeValue(forKey: item)
+                        }
+                    )
+                    .id(item.id)
+                }
+            }
+            .padding()
+            .glassCardStyle(cornerRadius: 20)
+        }
+        .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+    }
     
     private var macroSection: some View {
-       VStack(alignment: .leading, spacing: 8) {
-           collapsibleHeader("Macronutrients", isExpanded: $showMacros)
-           if showMacros {
-               VStack(spacing: 12) { macroGrid }
-                   .padding()
-                   .glassCardStyle(cornerRadius: 20)
-                   .padding(.top, 4)
-           }
-       }
-       .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
-   }
-
+        VStack(alignment: .leading, spacing: 8) {
+            collapsibleHeader("Macronutrients", isExpanded: $showMacros)
+            if showMacros {
+                VStack(spacing: 12) { macroGrid }
+                    .padding()
+                    .glassCardStyle(cornerRadius: 20)
+                    .padding(.top, 4)
+            }
+        }
+        .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+    }
+    
     private var lipidSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             collapsibleHeader("Lipids", isExpanded: $showLipids)
@@ -816,19 +816,19 @@ struct FoodItemReceptEditorView: View {
                 VStack(spacing: 12) {
                     lipidTotalsGrid.foregroundStyle(effectManager.currentGlobalAccentColor)
                 }.padding().glassCardStyle(cornerRadius: 20).padding(.top, 4)
-
+                
                 VStack(spacing: 12) {
                     lipidSFAGrid.foregroundStyle(effectManager.currentGlobalAccentColor)
                 }.padding().glassCardStyle(cornerRadius: 20).padding(.top, 4)
-
+                
                 VStack(spacing: 12) {
                     lipidMUFAGrid.foregroundStyle(effectManager.currentGlobalAccentColor)
                 }.padding().glassCardStyle(cornerRadius: 20).padding(.top, 4)
-
+                
                 VStack(spacing: 12) {
                     lipidTFAGrid.foregroundStyle(effectManager.currentGlobalAccentColor)
                 }.padding().glassCardStyle(cornerRadius: 20).padding(.top, 4)
-
+                
                 VStack(spacing: 12) {
                     lipidPUFAGrid.foregroundStyle(effectManager.currentGlobalAccentColor)
                 }.padding().glassCardStyle(cornerRadius: 20).padding(.top, 4)
@@ -836,19 +836,19 @@ struct FoodItemReceptEditorView: View {
         }
         .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
     }
-
+    
     private var otherSection: some View {
-       VStack(alignment: .leading, spacing: 8) {
-           collapsibleHeader("Other", isExpanded: $showOther)
-           if showOther {
-               VStack(spacing: 12) { otherGrid }
-                   .padding()
-                   .glassCardStyle(cornerRadius: 20)
-                   .padding(.top, 4)
-           }
-       }
-       .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
-   }
+        VStack(alignment: .leading, spacing: 8) {
+            collapsibleHeader("Other", isExpanded: $showOther)
+            if showOther {
+                VStack(spacing: 12) { otherGrid }
+                    .padding()
+                    .glassCardStyle(cornerRadius: 20)
+                    .padding(.top, 4)
+            }
+        }
+        .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+    }
     
     private var vitaminSection: some View {
         let allRows = vitaminRows()
@@ -905,7 +905,7 @@ struct FoodItemReceptEditorView: View {
         }
         .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
     }
-
+    
     private var carbDetailsSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             collapsibleHeader("Carbohydrate Details", isExpanded: $showCarbDetails)
@@ -942,7 +942,7 @@ struct FoodItemReceptEditorView: View {
     private var photoPicker: some View {
         let imageData = photoData
         let color = effectManager.currentGlobalAccentColor.opacity(0.6)
-
+        
         return Button {
             presentPhotoSource(for: .main)
         } label: {
@@ -965,7 +965,7 @@ struct FoodItemReceptEditorView: View {
         .buttonStyle(.plain)
         .padding(.leading, -4)
     }
-
+    
     private var descriptionEditor: some View {
         ZStack(alignment: .topLeading) {
             if itemDescription.isEmpty {
@@ -982,7 +982,7 @@ struct FoodItemReceptEditorView: View {
                 .foregroundStyle(effectManager.currentGlobalAccentColor)
         }
     }
-        
+    
     private var galleryGrid: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 80), spacing: 8)], spacing: 8) {
             ForEach(Array(galleryData.enumerated()), id: \.offset) { index, data in
@@ -1006,7 +1006,7 @@ struct FoodItemReceptEditorView: View {
                         }
                 }
             }
-
+            
             let color = effectManager.currentGlobalAccentColor
             Button {
                 presentPhotoSource(for: .gallery)
@@ -1023,7 +1023,7 @@ struct FoodItemReceptEditorView: View {
             .buttonStyle(.plain)
         }
     }
-
+    
     
     @ViewBuilder
     private func collapsibleHeader(_ title: String, isExpanded: Binding<Bool>, hasOtherItems: Bool = true) -> some View {
@@ -1047,7 +1047,7 @@ struct FoodItemReceptEditorView: View {
         .buttonStyle(.plain)
         .disabled(!hasOtherItems)
     }
-
+    
     private func nutrientGrid(_ rows: [NutrientRow]) -> some View {
         ForEach(rows.indices, id: \.self) { i in
             let row = rows[i]
@@ -1089,7 +1089,7 @@ struct FoodItemReceptEditorView: View {
         var desc = FetchDescriptor<FoodItem>()
         desc.sortBy = [SortDescriptor(\FoodItem.id, order: .reverse)]
         desc.fetchLimit = 1
-
+        
         let maxId = ((try? ctx.fetch(desc))?.first?.id) ?? 0
         return maxId + 1
     }
@@ -1102,13 +1102,13 @@ struct FoodItemReceptEditorView: View {
             defer { isSaving = false }
             let recipe: FoodItem
             if isAIInit{
-                 recipe = food ?? origRecipe ?? {
+                recipe = food ?? origRecipe ?? {
                     let r = FoodItem(id: nextFoodId(), name: name, isRecipe: true, isUserAdded: true)
                     ctx.insert(r)
                     return r
                 }()
             }else{
-                 recipe = food ?? {
+                recipe = food ?? {
                     let r = FoodItem(id: nextFoodId(), name: name, isRecipe: true, isUserAdded: true)
                     ctx.insert(r)
                     return r
@@ -1120,7 +1120,7 @@ struct FoodItemReceptEditorView: View {
             recipe.itemDescription = itemDescription.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty()
             recipe.prepTimeMinutes = Int(prepTimeTxt)
             recipe.minAgeMonths    = Int(minAgeMonthsTxt) ?? 0
-
+            
             recipe.category  = idsToEnums(selectedCategories, of: FoodCategory.self)
             
             let chosenDiets = allDiets.filter { selectedDiets.contains($0.id) }
@@ -1142,20 +1142,20 @@ struct FoodItemReceptEditorView: View {
                 for link in existingLinks { ctx.delete(link) }
             }
             recipe.ingredients = []
-
+            
             for (foodItem, grams) in selectedIng where grams > 0 {
                 let newLink = IngredientLink(food: foodItem, grams: grams, owner: recipe)
                 recipe.ingredients?.append(newLink)
             }
-
+            
             do {
                 try ctx.save()
                 SearchIndexStore.shared.updateItem(recipe, context: ctx)
                 if let pendingID = pendingAIJobIDToDeleteOnSave,
-                                  let job = aiManager.jobs.first(where: { $0.id == pendingID }) {
-                                   await aiManager.deleteJob(job)
-                                   pendingAIJobIDToDeleteOnSave = nil
-                               }
+                   let job = aiManager.jobs.first(where: { $0.id == pendingID }) {
+                    await aiManager.deleteJob(job)
+                    pendingAIJobIDToDeleteOnSave = nil
+                }
                 onDismiss(recipe)
             } catch {
                 alertMsg = error.localizedDescription
@@ -1189,7 +1189,7 @@ struct FoodItemReceptEditorView: View {
             galleryData = copy.gallery?.map(\.data) ?? []
         }
     }
-
+    
     private func galleryPopoverContent(for index: Int, data: Data) -> some View {
         HStack(spacing: 0) {
             Button("Set as main") {
@@ -1197,17 +1197,17 @@ struct FoodItemReceptEditorView: View {
                 showPopover = false
             }
             .frame(maxWidth: .infinity)
-
+            
             Divider()
-
+            
             Button("Change") {
                 showPopover = false
                 presentPhotoSource(for: .galleryReplace(index: index))
             }
             .frame(maxWidth: .infinity)
-
+            
             Divider()
-
+            
             Button(role: .destructive) {
                 galleryData.remove(at: index)
                 showPopover = false
@@ -1222,8 +1222,8 @@ struct FoodItemReceptEditorView: View {
         .frame(minWidth: 300)
         .presentationCompactAdaptation(.none)
     }
-
-
+    
+    
     private func handleNewPhotoSelection(_: PhotosPickerItem?, newItem: PhotosPickerItem?) {
         Task {
             if let data = try? await newItem?.loadTransferable(type: Data.self) {
@@ -1262,14 +1262,14 @@ struct FoodItemReceptEditorView: View {
             set: { showPopover = $0 }
         )
     }
-
+    
     private func selectIngredient(_ item: FoodItem) {
-          let defaultGrams = isImperial ? UnitConversion.ozToG(4.0) : 100.0
-          selectedIng[item, default: 0] += defaultGrams
-          globalSearchText = ""
-          dismissKeyboardAndSearch()
-          scrollToIngredientID = item.id
-      }
+        let defaultGrams = isImperial ? UnitConversion.ozToG(4.0) : 100.0
+        selectedIng[item, default: 0] += defaultGrams
+        globalSearchText = ""
+        dismissKeyboardAndSearch()
+        scrollToIngredientID = item.id
+    }
     
     private func idsToEnums<E: CaseIterable & Identifiable>(_ ids: Set<E.ID>, of _: E.Type) -> [E]? where E.ID == String {
         let all = E.allCases as! [E]
@@ -1302,7 +1302,7 @@ struct FoodItemReceptEditorView: View {
         guard let id = selectedNutrientID, let nutrient = allNutrients.first(where: { $0.id == id }) else { return "None" }
         return nutrient.name
     }
-
+    
     private func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
@@ -1319,9 +1319,9 @@ struct FoodItemReceptEditorView: View {
     private func recalculateAndValidateMinAge() {
         let requiredMinAge = selectedIng.keys.map { $0.minAgeMonths }.max() ?? 0
         self.calculatedMinAge = requiredMinAge
-
+        
         let currentUserAge = Int(minAgeMonthsTxt) ?? 0
-
+        
         if currentUserAge < requiredMinAge || (minAgeMonthsTxt.isEmpty && requiredMinAge > 0) {
             minAgeMonthsTxt = String(requiredMinAge)
         }
@@ -1336,10 +1336,10 @@ struct FoodItemReceptEditorView: View {
     
     @inline(__always) private func nv(_ n: Nutrient?) -> Double { n?.value ?? 0 }
     @inline(__always) private func n(_ x: Double, _ unit: String) -> Nutrient? { x > 0 ? Nutrient(value: x, unit: unit) : nil }
-
+    
     private func recalcTotals() {
         var totalGrams: Double = 0
-
+        
         // Macros
         var sumCarbs = 0.0, sumProtein = 0.0, sumFat = 0.0, sumFiber = 0.0, sumSugars = 0.0
         // Other
@@ -1357,7 +1357,7 @@ struct FoodItemReceptEditorView: View {
         // PUFA
         var pufa18_2 = 0.0, pufa18_3 = 0.0, pufa18_4 = 0.0, pufa20_2 = 0.0, pufa20_3 = 0.0, pufa20_4 = 0.0
         var pufa20_5 = 0.0, pufa21_5 = 0.0, pufa22_4 = 0.0, pufa22_5 = 0.0, pufa22_6 = 0.0, pufa2_4 = 0.0
-
+        
         // Vitamins
         var vA = 0.0, retinol = 0.0, carotAlpha = 0.0, carotBeta = 0.0, cryptoxBeta = 0.0, lutein = 0.0, lycopene = 0.0
         var b1 = 0.0, b2 = 0.0, b3 = 0.0, b5 = 0.0, b6 = 0.0
@@ -1373,25 +1373,25 @@ struct FoodItemReceptEditorView: View {
         var starch = 0.0, sucrose = 0.0, glucose = 0.0, fructose = 0.0, lactose = 0.0, maltose = 0.0, galactose = 0.0
         // Sterols
         var phytosterols = 0.0, betaSitosterol = 0.0, campesterol = 0.0, stigmasterol = 0.0
-
+        
         // --- НОВО: агрегиране на pH логаритмично ---
         var hPlusSum = 0.0       // Σ [H+] * маса
         var hPlusWeight = 0.0    // Σ маса (g) за които имаме pH
-
+        
         for (food, grams) in selectedIng {
             guard grams > 0 else { continue }
             let base = food.other?.weightG?.value ?? 100.0
             guard base > 0 else { continue }
             let f = grams / base
             totalGrams += grams
-
+            
             // Macros
             sumCarbs     += f * nv(food.macronutrients?.carbohydrates)
             sumProtein   += f * nv(food.macronutrients?.protein)
             sumFat       += f * nv(food.macronutrients?.fat)
             sumFiber     += f * nv(food.macronutrients?.fiber)
             sumSugars    += f * nv(food.macronutrients?.totalSugars)
-
+            
             // Other
             sumEnergy      += f * nv(food.other?.energyKcal)
             sumAlcohol     += f * nv(food.other?.alcoholEthyl)
@@ -1402,7 +1402,7 @@ struct FoodItemReceptEditorView: View {
             sumWater       += waterForThisFood
             sumAsh         += f * nv(food.other?.ash)
             sumBetaine     += f * nv(food.other?.betaine)
-
+            
             // --- НОВО: pH от отделната храна ---
             if let phValue = food.other?.alkalinityPH?.value, phValue > 0 {
                 let h = pow(10.0, -phValue)  // [H+] за тази храна
@@ -1411,8 +1411,8 @@ struct FoodItemReceptEditorView: View {
                 hPlusSum += h * weight
                 hPlusWeight += weight
             }
-
-
+            
+            
             // Lipids totals
             sumSat      += f * nv(food.lipids?.totalSaturated)
             sumMono     += f * nv(food.lipids?.totalMonounsaturated)
@@ -1420,7 +1420,7 @@ struct FoodItemReceptEditorView: View {
             sumTrans    += f * nv(food.lipids?.totalTrans)
             sumTransMono += f * nv(food.lipids?.totalTransMonoenoic)
             sumTransPoly += f * nv(food.lipids?.totalTransPolyenoic)
-
+            
             // SFA
             sfa4  += f * nv(food.lipids?.sfa4_0);   sfa6  += f * nv(food.lipids?.sfa6_0)
             sfa8  += f * nv(food.lipids?.sfa8_0);   sfa10 += f * nv(food.lipids?.sfa10_0)
@@ -1429,17 +1429,17 @@ struct FoodItemReceptEditorView: View {
             sfa16 += f * nv(food.lipids?.sfa16_0);  sfa17 += f * nv(food.lipids?.sfa17_0)
             sfa18 += f * nv(food.lipids?.sfa18_0);  sfa20 += f * nv(food.lipids?.sfa20_0)
             sfa22 += f * nv(food.lipids?.sfa22_0);  sfa24 += f * nv(food.lipids?.sfa24_0)
-
+            
             // MUFA
             mufa14_1 += f * nv(food.lipids?.mufa14_1); mufa15_1 += f * nv(food.lipids?.mufa15_1)
             mufa16_1 += f * nv(food.lipids?.mufa16_1); mufa17_1 += f * nv(food.lipids?.mufa17_1)
             mufa18_1 += f * nv(food.lipids?.mufa18_1); mufa20_1 += f * nv(food.lipids?.mufa20_1)
             mufa22_1 += f * nv(food.lipids?.mufa22_1); mufa24_1 += f * nv(food.lipids?.mufa24_1)
-
+            
             // TFA
             tfa16_1_t += f * nv(food.lipids?.tfa16_1_t); tfa18_1_t += f * nv(food.lipids?.tfa18_1_t)
             tfa22_1_t += f * nv(food.lipids?.tfa22_1_t); tfa18_2_t += f * nv(food.lipids?.tfa18_2_t)
-
+            
             // PUFA
             pufa18_2 += f * nv(food.lipids?.pufa18_2); pufa18_3 += f * nv(food.lipids?.pufa18_3)
             pufa18_4 += f * nv(food.lipids?.pufa18_4); pufa20_2 += f * nv(food.lipids?.pufa20_2)
@@ -1447,7 +1447,7 @@ struct FoodItemReceptEditorView: View {
             pufa20_5 += f * nv(food.lipids?.pufa20_5); pufa21_5 += f * nv(food.lipids?.pufa21_5)
             pufa22_4 += f * nv(food.lipids?.pufa22_4); pufa22_5 += f * nv(food.lipids?.pufa22_5)
             pufa22_6 += f * nv(food.lipids?.pufa22_6); pufa2_4  += f * nv(food.lipids?.pufa2_4)
-
+            
             // Vitamins
             vA        += f * nv(food.vitamins?.vitaminA_RAE)
             retinol   += f * nv(food.vitamins?.retinol)
@@ -1471,7 +1471,7 @@ struct FoodItemReceptEditorView: View {
             vE        += f * nv(food.vitamins?.vitaminE)
             vK        += f * nv(food.vitamins?.vitaminK)
             choline   += f * nv(food.vitamins?.choline)
-
+            
             // Minerals
             calcium   += f * nv(food.minerals?.calcium)
             phosphorus += f * nv(food.minerals?.phosphorus)
@@ -1484,7 +1484,7 @@ struct FoodItemReceptEditorView: View {
             manganese += f * nv(food.minerals?.manganese)
             selenium  += f * nv(food.minerals?.selenium)
             fluoride  += f * nv(food.minerals?.fluoride)
-
+            
             // Amino acids
             alanine   += f * nv(food.aminoAcids?.alanine)
             arginine  += f * nv(food.aminoAcids?.arginine)
@@ -1505,7 +1505,7 @@ struct FoodItemReceptEditorView: View {
             valine    += f * nv(food.aminoAcids?.valine)
             serine    += f * nv(food.aminoAcids?.serine)
             hydroxyproline += f * nv(food.aminoAcids?.hydroxyproline)
-
+            
             // Carb details
             starch    += f * nv(food.carbDetails?.starch)
             sucrose   += f * nv(food.carbDetails?.sucrose)
@@ -1514,14 +1514,14 @@ struct FoodItemReceptEditorView: View {
             lactose   += f * nv(food.carbDetails?.lactose)
             maltose   += f * nv(food.carbDetails?.maltose)
             galactose += f * nv(food.carbDetails?.galactose)
-
+            
             // Sterols
             phytosterols  += f * nv(food.sterols?.phytosterols)
             betaSitosterol += f * nv(food.sterols?.betaSitosterol)
             campesterol   += f * nv(food.sterols?.campesterol)
             stigmasterol  += f * nv(food.sterols?.stigmasterol)
         }
-
+        
         // --- pH на сместа ---
         var mixedPH: Nutrient? = nil
         if hPlusWeight > 0, hPlusSum > 0 {
@@ -1529,7 +1529,7 @@ struct FoodItemReceptEditorView: View {
             let phValue = -log10(hConc)
             mixedPH = Nutrient(value: phValue, unit: "")
         }
-
+        
         macros = MacroForm(
             carbohydrates: n(sumCarbs, "g"),
             protein:       n(sumProtein, "g"),
@@ -1537,7 +1537,7 @@ struct FoodItemReceptEditorView: View {
             fiber:         n(sumFiber, "g"),
             totalSugars:   n(sumSugars, "g")
         )
-
+        
         others = OtherForm(
             alcoholEthyl:  n(sumAlcohol, "g"),
             caffeine:      n(sumCaffeine, "mg"),
@@ -1550,7 +1550,7 @@ struct FoodItemReceptEditorView: View {
             betaine:       n(sumBetaine, "mg"),
             alkalinityPH:  mixedPH    // <-- ТУК ВЕЧЕ Е СМЕСЕНИЯТ pH
         )
-
+        
         lipids = LipidForm(
             totalSaturated:       n(sumSat, "g"),
             totalMonounsaturated: n(sumMono,"g"),
@@ -1574,7 +1574,7 @@ struct FoodItemReceptEditorView: View {
             pufa22_4: n(pufa22_4,"g"), pufa22_5: n(pufa22_5,"g"), pufa22_6: n(pufa22_6,"g"),
             pufa2_4:  n(pufa2_4,"g")
         )
-
+        
         vitamins = VitaminForm(
             vitaminA_RAE: n(vA,"µg"),
             retinol: n(retinol,"µg"),
@@ -1599,7 +1599,7 @@ struct FoodItemReceptEditorView: View {
             vitaminK: n(vK,"µg"),
             choline: n(choline,"mg")
         )
-
+        
         minerals = MineralForm(
             calcium: n(calcium,"mg"),
             phosphorus: n(phosphorus,"mg"),
@@ -1613,7 +1613,7 @@ struct FoodItemReceptEditorView: View {
             selenium: n(selenium,"µg"),
             fluoride: n(fluoride,"µg")
         )
-
+        
         aminoAcids = AminoAcidsForm(
             alanine: n(alanine,"g"), arginine: n(arginine,"g"), asparticAcid: n(aspartic,"g"),
             cystine: n(cystine,"g"), glutamicAcid: n(glutamic,"g"), glycine: n(glycine,"g"),
@@ -1623,13 +1623,13 @@ struct FoodItemReceptEditorView: View {
             tyrosine: n(tyrosine,"g"), valine: n(valine,"g"), serine: n(serine,"g"),
             hydroxyproline: n(hydroxyproline,"g")
         )
-
+        
         carbDetails = CarbDetailsForm(
             starch: n(starch,"g"), sucrose: n(sucrose,"g"), glucose: n(glucose,"g"),
             fructose: n(fructose,"g"), lactose: n(lactose,"g"), maltose: n(maltose,"g"),
             galactose: n(galactose,"g")
         )
-
+        
         sterols = SterolsForm(
             phytosterols: n(phytosterols,"mg"),
             betaSitosterol: n(betaSitosterol,"mg"),
@@ -1637,7 +1637,7 @@ struct FoodItemReceptEditorView: View {
             stigmasterol: n(stigmasterol,"mg")
         )
     }
-
+    
     
     private func recalcTags() {
         guard !selectedIng.isEmpty else {
@@ -1647,7 +1647,7 @@ struct FoodItemReceptEditorView: View {
         var catUnion = Set<FoodCategory.ID>()
         var dietsIntersection: Set<Diet.ID>? = nil
         var allUnion = Set<Allergen.ID>()
-
+        
         for item in selectedIng.keys {
             let itemDiets = Set(item.diets?.map(\.id) ?? [])
             catUnion.formUnion(item.category?.map(\.id) ?? [])
@@ -1662,7 +1662,7 @@ struct FoodItemReceptEditorView: View {
         selectedDiets = dietsIntersection ?? []
         selectedAllergens = allUnion
     }
-
+    
     static func aggregatedTags(for item: FoodItem) -> (categories: Set<FoodCategory.ID>, diets: Set<Diet.ID>, allergens: Set<Allergen.ID>) {
         guard let links = item.ingredients, !links.isEmpty else {
             return (Set(item.category?.map(\.id) ?? []), Set(item.diets?.map(\.id) ?? []), Set(item.allergens?.map(\.id) ?? []))
@@ -1670,7 +1670,7 @@ struct FoodItemReceptEditorView: View {
         var catUnion = Set<FoodCategory.ID>()
         var dietsIntersection: Set<Diet.ID>? = nil
         var allUnion = Set<Allergen.ID>()
-
+        
         for link in links {
             guard let food = link.food else { continue }
             let itemDiets = Set(food.diets?.map(\.id) ?? [])
@@ -1684,7 +1684,7 @@ struct FoodItemReceptEditorView: View {
         }
         return (catUnion, dietsIntersection ?? [], allUnion)
     }
-
+    
     // MARK: - Nutrient Row Generation
     private var macroGrid: some View {
         let editableRows: [NutrientRow] = [
@@ -1803,7 +1803,7 @@ struct FoodItemReceptEditorView: View {
             ])
         }
     }
-
+    
     private var otherGrid: some View {
         nutrientGrid([
             .init(label: "Alcohol", unit: "g",  field: nutBinding(\.alcoholEthyl, state: $others, unit: "g")),
@@ -1824,7 +1824,7 @@ struct FoodItemReceptEditorView: View {
     }
     private func label(for vitamin: Vitamin) -> String { vitaminLabelById[vitamin.id] ?? vitamin.name }
     private func label(for mineral: Mineral) -> String { mineralLabelById[mineral.id] ?? mineral.name }
-
+    
     private func vitaminRows() -> [NutrientRow] {
         [.init(label: "Vit A", unit: "µg RAE", field: nutBinding(\.vitaminA_RAE, state: $vitamins, unit: "µg")),
          .init(label: "Retinol", unit: "µg", field: nutBinding(\.retinol, state: $vitamins, unit: "µg")),
@@ -1849,7 +1849,7 @@ struct FoodItemReceptEditorView: View {
          .init(label: "Vit K", unit: "µg", field: nutBinding(\.vitaminK, state: $vitamins, unit: "µg")),
          .init(label: "Choline", unit: "mg", field: nutBinding(\.choline, state: $vitamins, unit: "mg"))]
     }
-
+    
     private func mineralRows() -> [NutrientRow] {
         [.init(label: "Calcium", unit: "mg", field: nutBinding(\.calcium, state: $minerals, unit: "mg")),
          .init(label: "Phosphorus", unit: "mg", field: nutBinding(\.phosphorus, state: $minerals, unit: "mg")),
@@ -1918,7 +1918,7 @@ struct FoodItemReceptEditorView: View {
         let priorityVitIDs = Set(profile.priorityVitamins.map { "vit_" + $0.id })
         let priorityMinIDs = Set(profile.priorityMinerals.map { "min_" + $0.id })
         let allPriorityIDs = priorityVitIDs.union(priorityMinIDs)
-
+        
         let (priority, other) = allSelectableNutrients.reduce(into: ([SelectableNutrient](), [SelectableNutrient]())) { result, nutrient in
             if allPriorityIDs.contains(nutrient.id) { result.0.append(nutrient) }
             else { result.1.append(nutrient) }
@@ -1932,7 +1932,7 @@ struct FoodItemReceptEditorView: View {
         items.append(contentsOf: allMinerals.map { SelectableNutrient(id: "min_\($0.id)", label: $0.symbol) })
         return items.sorted { $0.label < $1.label }
     }
-
+    
     private func nutrientColor(for id: String) -> Color {
         if id.starts(with: "vit_"), let vitamin = allVitamins.first(where: { "vit_\($0.id)" == id }) { return Color(hex: vitamin.colorHex) }
         if id.starts(with: "min_"), let mineral = allMinerals.first(where: { "min_\($0.id)" == id }) { return Color(hex: mineral.colorHex) }
@@ -1947,69 +1947,69 @@ struct FoodItemReceptEditorView: View {
         return aspect > 1.9 ? 75 : 95
     }
     private func aiTrailingPadding(for geometry: GeometryProxy) -> CGFloat { 45 }
-
+    
     private func aiDragGesture(geometry: GeometryProxy) -> some Gesture {
-           let buttonSize: CGFloat = 60
-           let radius = buttonSize / 2
-           
-           return DragGesture(minimumDistance: 0)
-               .updating($aiGestureDragOffset) { value, state, _ in
-                   // Жив превод по време на drag – без анимация
-                   state = value.translation
-               }
-               .onChanged { value in
-                   let distance = max(abs(value.translation.width), abs(value.translation.height))
-                   
-                   if distance > 6 {
-                       // Вече влачим – махаме "pressed" и маркираме "dragging"
-                       if !aiIsDragging {
-                           aiIsDragging = true
-                           aiIsPressed = false
-                       }
-                   } else {
-                       // Малко мърдане = натиснат бутон
-                       aiIsPressed = true
-                   }
-               }
-               .onEnded { value in
-                   let safeArea = geometry.safeAreaInsets
-                   let size = geometry.size
-                   
-                   // Базова позиция (дясно-долу) спрямо размера + твоите padding-и
-                   let baseX = size.width  - aiTrailingPadding(for: geometry) - radius
-                   let baseY = size.height - aiBottomPadding(for: geometry)   - radius
-                   
-                   // Центърът, ако приложим текущия offset + преместеното
-                   let rawCenterX = baseX + aiButtonOffset.width  + value.translation.width
-                   let rawCenterY = baseY + aiButtonOffset.height + value.translation.height
-                   
-                   // Ограничаваме центъра ВЪТРЕ в екрана
-                   let minX = radius
-                   let maxX = size.width  - radius
-                   let minY = radius + safeArea.top
-                   let maxY = size.height - radius - safeArea.bottom - 80
-                   
-                   let clampedCenterX = min(max(rawCenterX, minX), maxX)
-                   let clampedCenterY = min(max(rawCenterY, minY), maxY)
-                   
-                   // Новият offset е просто разлика спрямо базовата позиция
-                   let newOffset = CGSize(
-                       width:  clampedCenterX - baseX,
-                       height: clampedCenterY - baseY
-                   )
-                   
-                   if aiIsDragging {
-                       aiButtonOffset = newOffset
-                       saveAIButtonPosition()
-                   } else {
-                       // Тап (без реален drag)
-                       handleAITap()
-                   }
-                   
-                   aiIsDragging = false
-                   aiIsPressed = false
-               }
-       }
+        let buttonSize: CGFloat = 60
+        let radius = buttonSize / 2
+        
+        return DragGesture(minimumDistance: 0)
+            .updating($aiGestureDragOffset) { value, state, _ in
+                // Жив превод по време на drag – без анимация
+                state = value.translation
+            }
+            .onChanged { value in
+                let distance = max(abs(value.translation.width), abs(value.translation.height))
+                
+                if distance > 6 {
+                    // Вече влачим – махаме "pressed" и маркираме "dragging"
+                    if !aiIsDragging {
+                        aiIsDragging = true
+                        aiIsPressed = false
+                    }
+                } else {
+                    // Малко мърдане = натиснат бутон
+                    aiIsPressed = true
+                }
+            }
+            .onEnded { value in
+                let safeArea = geometry.safeAreaInsets
+                let size = geometry.size
+                
+                // Базова позиция (дясно-долу) спрямо размера + твоите padding-и
+                let baseX = size.width  - aiTrailingPadding(for: geometry) - radius
+                let baseY = size.height - aiBottomPadding(for: geometry)   - radius
+                
+                // Центърът, ако приложим текущия offset + преместеното
+                let rawCenterX = baseX + aiButtonOffset.width  + value.translation.width
+                let rawCenterY = baseY + aiButtonOffset.height + value.translation.height
+                
+                // Ограничаваме центъра ВЪТРЕ в екрана
+                let minX = radius
+                let maxX = size.width  - radius
+                let minY = radius + safeArea.top
+                let maxY = size.height - radius - safeArea.bottom - 80
+                
+                let clampedCenterX = min(max(rawCenterX, minX), maxX)
+                let clampedCenterY = min(max(rawCenterY, minY), maxY)
+                
+                // Новият offset е просто разлика спрямо базовата позиция
+                let newOffset = CGSize(
+                    width:  clampedCenterX - baseX,
+                    height: clampedCenterY - baseY
+                )
+                
+                if aiIsDragging {
+                    aiButtonOffset = newOffset
+                    saveAIButtonPosition()
+                } else {
+                    // Тап (без реален drag)
+                    handleAITap()
+                }
+                
+                aiIsDragging = false
+                aiIsPressed = false
+            }
+    }
     /// Стартира същинската AI генерация на рецепта.
     /// Извиква се САМО след като потребителят вече е "платил"
     /// (абонамент или реклама).
@@ -2019,7 +2019,7 @@ struct FoodItemReceptEditorView: View {
         
         if #available(iOS 26.0, *) {
             triggerAIGenerationToast()
-
+            
             if let newJob = aiManager.startRecipeGeneration(
                 for: profile,
                 recipeName: self.name,
@@ -2038,13 +2038,25 @@ struct FoodItemReceptEditorView: View {
             showAlert = true
         }
     }
-
+    
     private func handleAITap() {
+        if isAITapOnCooldown {
+            return
+        }
+        
+        // 1. Веднага активираме cooldown за да предотвратим спам/двойни кликове
+        isAITapOnCooldown = true
+        Task { @MainActor in
+            // Тук можеш да смениш 1.5 на 1.0 или 2.0 според това, което искаш
+            try? await Task.sleep(for: .seconds(1.5))
+            isAITapOnCooldown = false
+        }
+        
         NotificationCenter.default.post(name: .snoozeAds, object: nil)
-
+        
         // 1. Проверка за AI наличност (Apple Intelligence статус и т.н.)
         guard ensureAIAvailableOrShowMessage() else { return }
-
+        
         // 2. Трябва име на рецептата
         guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             alertMsg = "Please enter a name for the recipe first."
@@ -2058,19 +2070,19 @@ struct FoodItemReceptEditorView: View {
             showAlert = true
             return
         }
-
+        
         // 4. Логика за АБОНАМЕНТ / РЕКЛАМИ
-
+        
         // 4.1 Платен план – без реклами
         if SubscriptionManager.shared.subscriptionStatus != .base {
             print("💎 Premium user: Skipping ad for recipe generation.")
             startRecipeAIGeneration(for: profile)
             return
         }
-
+        
         // 4.2 Безплатен план – Rewarded → Interstitial → fallback
         print("📺 Free user: Checking for ads for recipe generation...")
-
+        
         if RewardedAdManager.shared.isReady {
             print("📺 Showing Rewarded Ad for recipe generation...")
             RewardedAdManager.shared.showIfAvailable { amount, type in
@@ -2089,7 +2101,7 @@ struct FoodItemReceptEditorView: View {
             print("⚠️ No ads available. Proceeding graciously with recipe generation.")
             // Няма реклами – пускаме AI, за да не дразним потребителя
             startRecipeAIGeneration(for: profile)
-
+            
             // Подготвяме реклами за следващия път
             Task {
                 await RewardedAdManager.shared.loadAd()
@@ -2097,21 +2109,21 @@ struct FoodItemReceptEditorView: View {
             }
         }
     }
-
-
+    
+    
     private func saveAIButtonPosition() {
         let d = UserDefaults.standard
         d.set(aiButtonOffset.width,  forKey: "\(aiButtonPositionKey)_width")
         d.set(aiButtonOffset.height, forKey: "\(aiButtonPositionKey)_height")
     }
-
+    
     private func loadAIButtonPosition() {
         let d = UserDefaults.standard
         let w = d.double(forKey: "\(aiButtonPositionKey)_width")
         let h = d.double(forKey: "\(aiButtonPositionKey)_height")
         self.aiButtonOffset = CGSize(width: w, height: h)
     }
-
+    
     @ViewBuilder
     private func AIButton(geometry: GeometryProxy) -> some View {
         let buttonSize: CGFloat = 60
@@ -2150,12 +2162,12 @@ struct FoodItemReceptEditorView: View {
         .animation(.spring(response: 0.25, dampingFraction: 0.8), value: aiIsDragging)
         .contentShape(Circle())                     // само кръгчето е кликаемо
         .position(x: centerX, y: centerY)           // абсолютна позиция, вече clamp-ната
-        .opacity(isAIButtonVisible ? 1 : 0)
-        .disabled(!isAIButtonVisible)
+        .opacity(isAIButtonVisible ? (isAITapOnCooldown ? 0.5 : 1.0) : 0)
+        .disabled(!isAIButtonVisible || isAITapOnCooldown)
         .gesture(aiDragGesture(geometry: geometry)) // жестът е върху 60x60, не върху цял екран
         .transition(.scale.combined(with: .opacity))
     }
-
+    
     @available(iOS 26.0, *)
     private func populateFromCompletedJob(jobID: UUID) async {
         guard let job = (aiManager.jobs.first { $0.id == jobID }),
@@ -2165,7 +2177,7 @@ struct FoodItemReceptEditorView: View {
             runningGenerationJobID = nil
             return
         }
-
+        
         let decoder = JSONDecoder()
         // --- НАЧАЛО НА ПРОМЯНАТА (1/2) ---
         guard let payload = try? decoder.decode(ResolvedRecipeResponseDTO.self, from: resultData) else {
@@ -2176,15 +2188,15 @@ struct FoodItemReceptEditorView: View {
             return
         }
         // --- КРАЙ НА ПРОМЯНАТА (1/2) ---
-
+        
         print("🧭 populateFromCompletedJob: decoded DTO")
         print("   • Description preview: \(payload.description.prefix(120))\(payload.description.count > 120 ? "..." : "")")
         print("   • Prep time: \(payload.prepTimeMinutes) min")
         print("   • Ingredients (DTO): \(payload.ingredients.count)")
-
+        
         var newIngredients: [FoodItem: Double] = [:]
         var unresolvedCount = 0
-
+        
         // --- НАЧАЛО НА ПРОМЯНАТА (2/2) ---
         // Извличаме всички нужни елементи наведнъж
         let foodItemIDs = payload.ingredients.map { $0.foodItemID }
@@ -2200,12 +2212,12 @@ struct FoodItemReceptEditorView: View {
             }
         }
         // --- КРАЙ НА ПРОМЯНАТА (2/2) ---
-
+        
         print("   • Resolved FoodItems: \(newIngredients.count)")
         if unresolvedCount > 0 {
             print("   • Unresolved entries: \(unresolvedCount)")
         }
-
+        
         await MainActor.run {
             withAnimation(.easeInOut) {
                 self.itemDescription = payload.description
@@ -2220,7 +2232,7 @@ struct FoodItemReceptEditorView: View {
             }
         }
     }
-
+    
     
     @ViewBuilder
     private var aiGenerationToast: some View {
@@ -2228,20 +2240,20 @@ struct FoodItemReceptEditorView: View {
             HStack(spacing: 12) {
                 Image(systemName: "sparkles")
                     .font(.title2)
-
+                
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Generation Scheduled")
                         .fontWeight(.bold)
                     Text("You'll be notified when your food is ready.")
                         .font(.caption)
-
+                    
                     ProgressView(value: min(max(toastProgress, 0.0), 1.0), total: 1.0)
                         .progressViewStyle(LinearProgressViewStyle(tint: effectManager.currentGlobalAccentColor))
                         .animation(.linear, value: toastProgress)
                 }
-
+                
                 Spacer()
-
+                
                 Button("OK") {
                     toastTimer?.invalidate()
                     toastTimer = nil
@@ -2257,7 +2269,7 @@ struct FoodItemReceptEditorView: View {
             .glassCardStyle(cornerRadius: 20)
             .padding()
             .transition(.move(edge: .top).combined(with: .opacity))
-
+            
             Spacer()
         }
         .frame(maxHeight: .infinity, alignment: .top)
@@ -2270,11 +2282,11 @@ struct FoodItemReceptEditorView: View {
         withAnimation {
             showAIGenerationToast = true
         }
-
+        
         let totalDuration = 5.0
         let updateInterval = 0.1
         let progressIncrement = updateInterval / totalDuration
-
+        
         toastTimer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { timer in
             DispatchQueue.main.async {
                 self.toastProgress = min(1.0, self.toastProgress + progressIncrement)
@@ -2307,44 +2319,44 @@ struct FoodItemReceptEditorView: View {
         showAlert = true
         return false
     }
-
+    
     private func presentPhotoSource(for target: PhotoSourceTarget) {
         currentPhotoTarget = target
         showPhotoSourceDialog = true
     }
-
+    
     private func handlePickedUIImage(_ image: UIImage) {
         guard let data = image.jpegData(compressionQuality: 0.9) else { return }
-
+        
         switch currentPhotoTarget {
         case .main:
             photoData = data
-
+            
         case .gallery:
             galleryData.append(data)
-
+            
         case .galleryReplace(let index):
             if galleryData.indices.contains(index) {
                 galleryData[index] = data
             }
-
+            
         case .none:
             break
         }
-
+        
         // след успешен избор – чистим таргета
         currentPhotoTarget = nil
     }
-
+    
     @ViewBuilder
-        private var bannerAdSection: some View {
-            // Показваме банер само за free (Base) потребители
-            if SubscriptionManager.shared.subscriptionStatus == .base {
-                BannerAdView(adsBool: $isBannerAdLoaded, bucket: .large)
-                    .frame(height: 120)
-                    .opacity(isBannerAdLoaded ? 1 : 0)
-                    .animation(.easeInOut(duration: 0.25), value: isBannerAdLoaded)
-                    .padding(.horizontal)
-            }
+    private var bannerAdSection: some View {
+        // Показваме банер само за free (Base) потребители
+        if SubscriptionManager.shared.subscriptionStatus == .base {
+            BannerAdView(adsBool: $isBannerAdLoaded, bucket: .large)
+                .frame(height: 120)
+                .opacity(isBannerAdLoaded ? 1 : 0)
+                .animation(.easeInOut(duration: 0.25), value: isBannerAdLoaded)
+                .padding(.horizontal)
         }
+    }
 }
