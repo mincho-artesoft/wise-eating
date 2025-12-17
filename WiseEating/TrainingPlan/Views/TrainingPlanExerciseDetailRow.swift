@@ -63,8 +63,6 @@ struct TrainingPlanExerciseDetailRow: View {
                     
                     Spacer(minLength: 8)
                     
-                    // --- ПРОМЯНАТА Е ТУК ---
-                    // Вече всичко е в един ред (HStack), а не във VStack
                     HStack(spacing: 6) {
                         Text(String(format: "%.0f", duration))
                             .font(.subheadline)
@@ -73,16 +71,14 @@ struct TrainingPlanExerciseDetailRow: View {
                         Text("min")
                             .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
                         
-                        // Стрелката вече е вдясно, с малко отстояние
                         Image(systemName: "chevron.down")
                             .font(.caption)
                             .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.6))
                             .rotationEffect(.degrees(isExpanded ? 180 : 0))
                             .padding(.leading, 4)
                     }
-                    // -----------------------
                 }
-                .contentShape(Rectangle()) // Цялата ширина да е активна
+                .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
             
@@ -100,7 +96,6 @@ struct TrainingPlanExerciseDetailRow: View {
                             .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.6))
                             .padding(.bottom, 4)
                     } else {
-                        // Сортираме за консистентност (по ID или създаване)
                         let sortedSets = link.sets.sorted { $0.id.uuidString < $1.id.uuidString }
                         
                         ForEach(Array(sortedSets.enumerated()), id: \.element.id) { index, set in
@@ -112,15 +107,25 @@ struct TrainingPlanExerciseDetailRow: View {
                                 
                                 Spacer()
                                 
-                                // Reps
-                                if let reps = set.reps {
-                                    Text("\(reps) reps")
-                                        .font(.subheadline)
-                                        .foregroundStyle(effectManager.currentGlobalAccentColor)
+                                // ✅ REPS OR FAILURE TEXT
+                                if set.isToFailure {
+                                    HStack(spacing: 4) {
+                                        Image(systemName: "exclamationmark.triangle.fill")
+                                            .font(.caption2)
+                                        Text("To Failure")
+                                            .font(.subheadline.weight(.medium))
+                                    }
+                                    .foregroundStyle(.orange)
                                 } else {
-                                    Text("- reps")
-                                        .font(.caption)
-                                        .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.5))
+                                    if let reps = set.reps {
+                                        Text("\(reps) reps")
+                                            .font(.subheadline)
+                                            .foregroundStyle(effectManager.currentGlobalAccentColor)
+                                    } else {
+                                        Text("- reps")
+                                            .font(.caption)
+                                            .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.5))
+                                    }
                                 }
                                 
                                 Spacer()

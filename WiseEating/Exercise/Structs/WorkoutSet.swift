@@ -1,4 +1,3 @@
-// ==== FILE: /Users/aleksandarsvinarov/Desktop/Repo/vitahealth/WiseEating/Fitness/Models/DetailedTrainingLog.swift ====
 import Foundation
 
 /// Represents a single set of an exercise (e.g., 10 reps with 50 kg).
@@ -7,10 +6,14 @@ public struct WorkoutSet: Codable, Hashable, Identifiable {
     public var reps: Int?
     public var weight: Double?
     
-    public init(id: UUID = UUID(), reps: Int? = nil, weight: Double? = nil) {
+    // ✅ НОВО: Флаг за отказ
+    public var isToFailure: Bool = false
+    
+    public init(id: UUID = UUID(), reps: Int? = nil, weight: Double? = nil, isToFailure: Bool = false) {
         self.id = id
         self.reps = reps
         self.weight = weight
+        self.isToFailure = isToFailure
     }
 }
 

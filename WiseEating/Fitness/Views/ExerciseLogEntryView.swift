@@ -23,13 +23,11 @@ struct ExerciseLogEntryView: View {
     private var weightUnit: String { isImperial ? "lbs" : "kg" }
     
     // MARK: - Picker Ranges
-    // --- НАЧАЛО НА ПРОМЯНАТА ---
     private let repsRange = Array(0...999)
     private let weightWholeRange = Array(0...999)
     private let weightDecimalRange = Array(0...99)
-    private let weightDecimalRangeImperial = Array(0...99) // За два знака
+    private let weightDecimalRangeImperial = Array(0...99)
     private var decimalSeparator: String { Locale.current.decimalSeparator ?? "." }
-    // --- КРАЙ НА ПРОМЯНАТА ---
 
     var body: some View {
         VStack(spacing: 0) {
@@ -71,10 +69,11 @@ struct ExerciseLogEntryView: View {
                     .rotationEffect(.degrees(isExpanded ? 180 : 0))
                     .foregroundStyle(effectManager.currentGlobalAccentColor)
             }
-            .contentShape(Rectangle()) // <-- ДОБАВЕТЕ ТОЗИ РЕД
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
     }
+    
     private var addSetRow: some View {
         HStack {
             Spacer()
@@ -86,13 +85,13 @@ struct ExerciseLogEntryView: View {
         .padding()
         .glassCardStyle(cornerRadius: 15)
         .padding(.top, 4)
-        .contentShape(Rectangle())              // цялата карта е hit-area
+        .contentShape(Rectangle())
         .onTapGesture {
             withAnimation {
                 exerciseLog.sets.append(WorkoutSet(reps: nil, weight: nil))
             }
         }
-        .accessibilityAddTraits(.isButton)       // за VoiceOver – да се държи като бутон
+        .accessibilityAddTraits(.isButton)
     }
 
     private var setsList: some View {
@@ -105,7 +104,6 @@ struct ExerciseLogEntryView: View {
 
             addSetRow
         }
-
     }
     
     private func setRow(for setBinding: Binding<WorkoutSet>) -> some View {
@@ -113,43 +111,79 @@ struct ExerciseLogEntryView: View {
         let setIndex = exerciseLog.sets.firstIndex(where: { $0.id == set.id }) ?? 0
         let pickerColorScheme: ColorScheme = effectManager.isLightRowTextColor ? .dark : .light
 
-        return HStack(alignment: .center, spacing: 12) {          // центриране по вертикала
+        return HStack(alignment: .center, spacing: 12) {
             // MARK: - Set label
             Text("Set \(setIndex + 1)")
                 .font(.subheadline)
                 .foregroundStyle(effectManager.currentGlobalAccentColor)
-                .frame(width: 50, height: 80, alignment: .leading) // същата височина като picker-ите
+                .frame(width: 50, height: 80, alignment: .leading)
 
-            // MARK: - Reps колонка
+            // MARK: - Reps OR Failure
             VStack(spacing: 4) {
-                Text("Repetitions")
-                    .font(.caption)
-                    .foregroundStyle(effectManager.currentGlobalAccentColor)
-                    .frame(width: 80, alignment: .center) 
-
-                Picker("Reps", selection: repsBinding(for: setBinding)) {
-                    ForEach(repsRange, id: \.self) { rep in
-                        Text("\(rep)").tag(rep)
+                // Header + Toggle
+                HStack(spacing: 4) {
+                    Text("Reps")
+                        .font(.caption)
+                    
+                    // ✅ TOGGLE BUTTON ЗА FAILURE
+                    Button(action: {
+                        withAnimation(.easeInOut(duration: 0.2)) {
+                            setBinding.wrappedValue.isToFailure.toggle()
+                            // Ако се включи Failure, зануляваме повторенията
+                            if setBinding.wrappedValue.isToFailure {
+                                setBinding.wrappedValue.reps = nil
+                            }
+                        }
+                    }) {
+                        Image(systemName: set.isToFailure ? "exclamationmark.triangle.fill" : "circle")
+                            .font(.caption)
+                            .foregroundColor(set.isToFailure ? .orange : effectManager.currentGlobalAccentColor.opacity(0.5))
                     }
+                    .buttonStyle(.plain)
                 }
-                .pickerStyle(.wheel)
-                .frame(width: 80, height: 80)
-                .clipped()
-                .tint(effectManager.currentGlobalAccentColor)
-                .environment(\.colorScheme, pickerColorScheme)
-                .offset(y: -7)
+                .foregroundStyle(effectManager.currentGlobalAccentColor)
+                .frame(width: 80, alignment: .center)
+
+                if set.isToFailure {
+                    // ✅ TEKST "TO FAILURE" ВМЕСТО PICKER
+                    VStack {
+                        Spacer()
+                        Text("To Failure")
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundColor(.orange)
+                            .multilineTextAlignment(.center)
+                            .padding(4)
+                            .background(Color.orange.opacity(0.1))
+                            .cornerRadius(6)
+                        Spacer()
+                    }
+                    .frame(width: 80, height: 80)
+                    .offset(y: -7)
+                } else {
+                    // ✅ NORMAL PICKER
+                    Picker("Reps", selection: repsBinding(for: setBinding)) {
+                        ForEach(repsRange, id: \.self) { rep in
+                            Text("\(rep)").tag(rep)
+                        }
+                    }
+                    .pickerStyle(.wheel)
+                    .frame(width: 80, height: 80)
+                    .clipped()
+                    .tint(effectManager.currentGlobalAccentColor)
+                    .environment(\.colorScheme, pickerColorScheme)
+                    .offset(y: -7)
+                }
             }
 
             // MARK: - Weight колонка
             VStack(spacing: 4) {
-                // Обща ширина = 80 (whole) + 18 (точка) + 60 (decimal) = 158
                 HStack(spacing: 2) {
                     Text("Weight")
                     Text(weightUnit)
                 }
                 .font(.caption)
                 .foregroundStyle(effectManager.currentGlobalAccentColor)
-                .frame(width: 158, alignment: .center)   // <- центрирано над трите колелца
+                .frame(width: 158, alignment: .center)
 
                 HStack(spacing: 0) {
                     Picker("Weight Whole", selection: weightWholeBinding(for: setBinding)) {
@@ -204,8 +238,6 @@ struct ExerciseLogEntryView: View {
         .glassCardStyle(cornerRadius: 10)
     }
 
-
-
     private func repsBinding(for setBinding: Binding<WorkoutSet>) -> Binding<Int> {
         Binding<Int>(
             get: {
@@ -217,22 +249,20 @@ struct ExerciseLogEntryView: View {
         )
     }
     
-    // --- НАЧАЛО НА ПРОМЯНАТА: Актуализирани binding функции за тежест ---
     private func currentWeightParts(for set: WorkoutSet) -> (whole: Int, dec: Int) {
         let rawValue = set.weight ?? 0.0
         let displayValue = isImperial ? UnitConversion.kgToLbs(rawValue) : rawValue
         
-        // Винаги работим с две десетични места
-        let scaled = (displayValue * 100).rounded()        // 1.12 -> 112
+        let scaled = (displayValue * 100).rounded()
         let intScaled = Int(scaled)
         
-        let whole = intScaled / 100                        // 112 / 100 = 1
-        let dec = intScaled % 100                          // 112 % 100 = 12
+        let whole = intScaled / 100
+        let dec = intScaled % 100
         
         return (whole, dec)
     }
 
-    private var decimalDivisor: Double { 100.0 } // две десетични места за kg и lbs
+    private var decimalDivisor: Double { 100.0 }
 
     private func weightWholeBinding(for setBinding: Binding<WorkoutSet>) -> Binding<Int> {
         Binding<Int>(
@@ -245,7 +275,6 @@ struct ExerciseLogEntryView: View {
             }
         )
     }
-
     
     private func weightDecimalBinding(for setBinding: Binding<WorkoutSet>) -> Binding<Int> {
         Binding<Int>(
@@ -258,7 +287,6 @@ struct ExerciseLogEntryView: View {
             }
         )
     }
-
 
     @ViewBuilder
     private var exerciseImage: some View {

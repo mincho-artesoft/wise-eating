@@ -9,7 +9,7 @@ struct TrainingPlanExerciseRowView: View {
     var onDelete: () -> Void
 
     @State private var textValue: String
-    @State private var isExpanded: Bool = false // За разгъване на сетовете
+    @State private var isExpanded: Bool = false
 
     private var item: ExerciseItem? { link.exercise }
     private var duration: Double { link.durationMinutes }
@@ -97,12 +97,10 @@ struct TrainingPlanExerciseRowView: View {
                 VStack(spacing: 8) {
                     Divider().padding(.vertical, 4)
                     
-                    // List of Sets
                     ForEach($link.sets.sorted(by: { ($0.wrappedValue.id.uuidString) < ($1.wrappedValue.id.uuidString) })) { $set in
                         setRow(for: $set)
                     }
                     
-                    // Add Set Button
                     Button(action: {
                        withAnimation {
                            let newSet = TrainingPlanSet(reps: 10, weight: 0)
@@ -116,7 +114,7 @@ struct TrainingPlanExerciseRowView: View {
                                 .foregroundColor(effectManager.currentGlobalAccentColor)
                             Spacer()
                         }
-                        .frame(height: 40) // <--- ПРОМЯНАТА Е ТУК (сложете 40, 44 или 50)
+                        .frame(height: 40)
                         .glassCardStyle(cornerRadius: 15)
                         .contentShape(Rectangle())
                     }
@@ -155,8 +153,6 @@ struct TrainingPlanExerciseRowView: View {
     // MARK: - Set Row View
     private func setRow(for setBinding: Binding<TrainingPlanSet>) -> some View {
         let pickerColorScheme: ColorScheme = effectManager.isLightRowTextColor ? .dark : .light
-        
-        // Find index safely
         let setIndex = link.sets.firstIndex(where: { $0.id == setBinding.wrappedValue.id }) ?? 0
 
         return HStack(alignment: .center, spacing: 12) {
@@ -166,24 +162,60 @@ struct TrainingPlanExerciseRowView: View {
                 .foregroundStyle(effectManager.currentGlobalAccentColor)
                 .frame(width: 50, height: 80, alignment: .leading)
 
-            // Reps
+            // MARK: - Reps OR Failure
             VStack(spacing: 4) {
-                Text("Repetitions")
-                    .font(.caption)
-                    .foregroundStyle(effectManager.currentGlobalAccentColor)
-                    .frame(width: 80, alignment: .center)
-
-                Picker("Reps", selection: repsBinding(for: setBinding)) {
-                    ForEach(repsRange, id: \.self) { rep in
-                        Text("\(rep)").tag(rep)
+                // Header + Toggle
+                HStack(spacing: 4) {
+                    Text("Reps")
+                        .font(.caption)
+                    
+                    // ✅ TOGGLE BUTTON
+                    Button(action: {
+                        withAnimation(.easeInOut(duration: 0.2)) {
+                            setBinding.wrappedValue.isToFailure.toggle()
+                            if setBinding.wrappedValue.isToFailure {
+                                setBinding.wrappedValue.reps = nil
+                            }
+                        }
+                    }) {
+                        Image(systemName: setBinding.wrappedValue.isToFailure ? "exclamationmark.triangle.fill" : "circle")
+                            .font(.caption)
+                            .foregroundColor(setBinding.wrappedValue.isToFailure ? .orange : effectManager.currentGlobalAccentColor.opacity(0.5))
                     }
+                    .buttonStyle(.plain)
                 }
-                .pickerStyle(.wheel)
-                .frame(width: 80, height: 80)
-                .clipped()
-                .tint(effectManager.currentGlobalAccentColor)
-                .environment(\.colorScheme, pickerColorScheme)
-                .offset(y: -7)
+                .foregroundStyle(effectManager.currentGlobalAccentColor)
+                .frame(width: 80, alignment: .center)
+
+                if setBinding.wrappedValue.isToFailure {
+                    // ✅ TEKST "TO FAILURE"
+                    VStack {
+                        Spacer()
+                        Text("To Failure")
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundColor(.orange)
+                            .multilineTextAlignment(.center)
+                            .padding(4)
+                            .background(Color.orange.opacity(0.1))
+                            .cornerRadius(6)
+                        Spacer()
+                    }
+                    .frame(width: 80, height: 80)
+                    .offset(y: -7)
+                } else {
+                    // ✅ NORMAL PICKER
+                    Picker("Reps", selection: repsBinding(for: setBinding)) {
+                        ForEach(repsRange, id: \.self) { rep in
+                            Text("\(rep)").tag(rep)
+                        }
+                    }
+                    .pickerStyle(.wheel)
+                    .frame(width: 80, height: 80)
+                    .clipped()
+                    .tint(effectManager.currentGlobalAccentColor)
+                    .environment(\.colorScheme, pickerColorScheme)
+                    .offset(y: -7)
+                }
             }
 
             // Weight
@@ -230,9 +262,6 @@ struct TrainingPlanExerciseRowView: View {
             // Delete Set
             Button(action: {
                 withAnimation {
-                    // SwiftData delete is implicit when removed from array if cascade is set,
-                    // but cleaner to be explicit if possible or just rely on array manipulation
-                    // Since it's binding, we manipulate parent's array
                     link.sets.removeAll { $0.id == setBinding.wrappedValue.id }
                 }
             }) {
@@ -246,7 +275,7 @@ struct TrainingPlanExerciseRowView: View {
         .glassCardStyle(cornerRadius: 10)
     }
     
-    // Bindings Logic (Copied from LogView but adapted for TrainingPlanSet)
+    // Bindings Logic
     private func repsBinding(for setBinding: Binding<TrainingPlanSet>) -> Binding<Int> {
         Binding<Int>(
             get: { setBinding.wrappedValue.reps ?? 0 },
