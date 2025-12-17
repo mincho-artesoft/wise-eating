@@ -466,6 +466,27 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             let parsed = await Tokenizer.parse(query, availableDiets: availableDiets)
             let hasDigits = query.rangeOfCharacter(from: .decimalDigits) != nil
             var textTokens = parsed.textTokens
+            
+            // --- 🟢 BUG FIX START: FORCE RAW TOKENS ---
+            // If the user types "rice", and Tokenizer converts it to "grain",
+            // but the DB only has "rice", we must ensure "rice" is searched.
+            let rawQueryTokens = simpleRawQuery
+                .components(separatedBy: CharacterSet.alphanumerics.inverted)
+                .filter { !$0.isEmpty }
+            
+            for rawToken in rawQueryTokens {
+                // Check if this raw token actually exists in our DB index.
+                if invertedIndex[rawToken] != nil {
+                    // If it exists in DB, add it to search tokens even if Tokenizer removed/changed it.
+                    // But skip common stop words to avoid noise (e.g. "with").
+                    let isStopWord = SearchKnowledgeBase.shared.stopWords.contains(rawToken)
+                    if !isStopWord && !textTokens.contains(rawToken) {
+                        textTokens.insert(rawToken)
+                    }
+                }
+            }
+            // --- 🟢 BUG FIX END ---
+            
             let simplePHToggle = (rawPhCount >= 1 && !hasDigits)
             
             if simplePHToggle {
