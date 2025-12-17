@@ -41,7 +41,8 @@ struct WiseEatingApp: App {
             "9DD38651-791A-4B28-84CD-DB22E51DBAF4",  // Wife iPhone
             "83168461-56E7-4160-B4D2-8CA539FEBB1B",
             "560CA1A2-1EC6-4BDA-8F0A-0B41839EE3EB",
-            "69FE353C-01C9-4BA5-8861-67355A140C56"
+            "69FE353C-01C9-4BA5-8861-67355A140C56",
+            "027E2BBC-9DD1-4BBA-9C6C-79E8F1BE7351"
         ]
         
         // 2. Конфигурация (MobileAds.shared)
