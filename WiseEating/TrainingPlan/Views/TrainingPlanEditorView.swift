@@ -85,14 +85,14 @@ struct TrainingPlanEditorView: View {
     // (+++ КРАЙ НА ПРОМЯНАТА +++)
     
     init(
-          profile: Profile,
-          planToEdit: TrainingPlan? = nil,
-          planDraft: TrainingPlanDraft? = nil,
-          globalSearchText: Binding<String>,
-          isSearchFieldFocused: FocusState<Bool>.Binding,
-          onDismiss: @escaping (TrainingPlan?) -> Void,
-          navBarIsHiden: Binding<Bool>,
-          onDismissSearch: @escaping () -> Void
+        profile: Profile,
+        planToEdit: TrainingPlan? = nil,
+        planDraft: TrainingPlanDraft? = nil,
+        globalSearchText: Binding<String>,
+        isSearchFieldFocused: FocusState<Bool>.Binding,
+        onDismiss: @escaping (TrainingPlan?) -> Void,
+        navBarIsHiden: Binding<Bool>,
+        onDismissSearch: @escaping () -> Void
     ) {
         self.profile = profile
         self.planToEdit = planToEdit
@@ -104,27 +104,38 @@ struct TrainingPlanEditorView: View {
         self.onDismissSearch = onDismissSearch
 
         if let plan = planToEdit {
+            // 1. ЗАРЕЖДАНЕ НА СЪЩЕСТВУВАЩ ПЛАН
             _name = State(initialValue: plan.name)
+            
+            // Дълбоко копиране: Plan -> Days -> Workouts -> Exercises -> Sets
             _days = State(initialValue: plan.days.map { day in
                 let newDay = TrainingPlanDay(dayIndex: day.dayIndex, isRestDay: day.isRestDay)
-                newDay.id = day.id
+                newDay.id = day.id // Запазваме ID за синхронизация
                 
                 newDay.workouts = day.workouts.map { workout in
                     let newWorkout = TrainingPlanWorkout(workoutName: workout.workoutName)
                     newWorkout.linkedWorkoutID = workout.linkedWorkoutID
+                    newWorkout.day = newDay
                     
-                    // ВАЖНО: взимаме само упражненията, които все още имат exercise
                     let validExercises = workout.exercises.compactMap { link -> TrainingPlanExercise? in
-                        guard let ex = link.exercise else {
-                            // тук имало е изтрит ExerciseItem → пропускаме
-                            return nil
-                        }
-                        return TrainingPlanExercise(
+                        guard let ex = link.exercise else { return nil }
+                        
+                        let newExerciseLink = TrainingPlanExercise(
                             exercise: ex,
                             durationMinutes: link.durationMinutes,
                             workout: newWorkout
                         )
+                        
+                        // ✅ FIX: Копираме сетовете и изрично задаваме родителя
+                        newExerciseLink.sets = link.sets.map { set in
+                            let newSet = TrainingPlanSet(reps: set.reps, weight: set.weight)
+                            newSet.exercise = newExerciseLink // Свързване с упражнението
+                            return newSet
+                        }
+                        
+                        return newExerciseLink
                     }
+                    
                     newWorkout.exercises = validExercises
                     return newWorkout
                 }
@@ -132,32 +143,31 @@ struct TrainingPlanEditorView: View {
             })
             
             _minAgeMonthsTxt = State(initialValue: plan.minAgeMonths > 0 ? String(plan.minAgeMonths) : "")
+            
         } else if let draft = planDraft {
-            // --- НАЧАЛО НА ФИНАЛНАТА КОРЕКЦИЯ ---
+            // 2. ЗАРЕЖДАНЕ ОТ DRAFT (AI)
             _name = State(initialValue: draft.name)
-            _minAgeMonthsTxt = State(initialValue: "") // Започваме с празно, onAppear ще го изчисли
+            _minAgeMonthsTxt = State(initialValue: "")
             
             var tempDays: [TrainingPlanDay] = []
             let context = GlobalState.modelContext!
             
-            // 1. Създаваме карта (dictionary) на дните от черновата за бърз достъп
             let draftDaysMap = Dictionary(grouping: draft.days, by: { $0.dayIndex }).compactMapValues { $0.first }
-            
-            // 2. Намираме максималния ден, който трябва да съществува в плана
             let maxDayIndex = draft.days.map { $0.dayIndex }.max() ?? 1
             
-            // 3. Итерираме от 1 до максималния ден, за да създадем пълна последователност
             for index in 1...maxDayIndex {
-                // 4. Проверяваме дали имаме генериран ден за този индекс
                 if let dayDraft = draftDaysMap[index] {
-                    // Ако да, създаваме ден с тренировки
                     let newDay = TrainingPlanDay(dayIndex: index, isRestDay: false)
                     var newWorkouts: [TrainingPlanWorkout] = []
+                    
                     for training in dayDraft.trainings {
                         let newWorkout = TrainingPlanWorkout(workoutName: training.name)
                         let exercises = training.exercises(using: context)
+                        
                         for (item, duration) in exercises {
-                            newWorkout.exercises.append(TrainingPlanExercise(exercise: item, durationMinutes: duration, workout: newWorkout))
+                            let newExercise = TrainingPlanExercise(exercise: item, durationMinutes: duration, workout: newWorkout)
+                            // При Draft обикновено няма сетове, но ако имаше, тук трябваше да се добавят
+                            newWorkout.exercises.append(newExercise)
                         }
                         newWorkout.day = newDay
                         newWorkouts.append(newWorkout)
@@ -165,15 +175,14 @@ struct TrainingPlanEditorView: View {
                     newDay.workouts = newWorkouts
                     tempDays.append(newDay)
                 } else {
-                    // Ако не, създаваме ден за почивка (isRestDay = true)
                     let restDay = TrainingPlanDay(dayIndex: index, isRestDay: true)
                     tempDays.append(restDay)
                 }
             }
-            
             _days = State(initialValue: tempDays)
-            // --- КРАЙ НА ФИНАЛНАТА КОРЕКЦИЯ ---
+            
         } else {
+            // 3. НОВ ПЛАН
             _name = State(initialValue: "")
             _days = State(initialValue: [TrainingPlanDay(dayIndex: 1)])
             _minAgeMonthsTxt = State(initialValue: "")
@@ -1136,19 +1145,39 @@ struct TrainingPlanEditorView: View {
     }
     
     private func syncWorkouts(of persistedDay: TrainingPlanDay, from stateDay: TrainingPlanDay) {
+        // 1. Групираме за бърз достъп
         let stateWorkoutsByName = Dictionary(grouping: stateDay.workouts, by: { $0.workoutName }).compactMapValues { $0.first }
         
+        // 2. Изтриваме премахнатите тренировки
         for workout in persistedDay.workouts where stateWorkoutsByName[workout.workoutName] == nil {
             modelContext.delete(workout)
         }
         
+        // 3. Синхронизираме
         for (name, stateWorkout) in stateWorkoutsByName {
             let persistedWorkout = getOrCreateWorkout(for: name, in: persistedDay)
-            persistedWorkout.exercises.forEach { modelContext.delete($0) }
-            persistedWorkout.exercises = stateWorkout.exercises.map { entry in
-                TrainingPlanExercise(exercise: entry.exercise!, durationMinutes: entry.durationMinutes, workout: persistedWorkout)
-            }
             persistedWorkout.linkedWorkoutID = stateWorkout.linkedWorkoutID
+            
+            // 4. Изтриваме старите упражнения (и каскадно техните сетове), за да запишем чисто
+            persistedWorkout.exercises.forEach { modelContext.delete($0) }
+            
+            // 5. Създаваме новите упражнения и сетове
+            persistedWorkout.exercises = stateWorkout.exercises.map { entry in
+                let newEntry = TrainingPlanExercise(
+                    exercise: entry.exercise!,
+                    durationMinutes: entry.durationMinutes,
+                    workout: persistedWorkout
+                )
+                
+                // ✅ FIX: Изрично създаваме сетовете и задаваме inverse relationship
+                newEntry.sets = entry.sets.map { set in
+                    let newSet = TrainingPlanSet(reps: set.reps, weight: set.weight)
+                    newSet.exercise = newEntry // Важно за SwiftData persistence!
+                    return newSet
+                }
+                
+                return newEntry
+            }
         }
     }
     
@@ -1249,24 +1278,52 @@ struct TrainingPlanEditorView: View {
     
     private func syncStateFromLinkedWorkouts() async {
         let context = self.modelContext
+        
         for day in days {
             for workout in day.workouts {
+                // 1) Ако няма linkedWorkoutID → няма какво да синкваме
                 guard let workoutID = workout.linkedWorkoutID else { continue }
-                let descriptor = FetchDescriptor<ExerciseItem>(predicate: #Predicate { $0.id == workoutID })
-                if let workoutItem = (try? context.fetch(descriptor))?.first {
-                    
-                    var newExercises: [TrainingPlanExercise] = []
-                    for link in workoutItem.exercises ?? [] {
-                        if let exercise = link.exercise {
-                            let newExercise = TrainingPlanExercise(exercise: exercise, durationMinutes: link.durationMinutes, workout: workout)
-                            newExercises.append(newExercise)
-                        }
-                    }
-                    workout.exercises = newExercises
+                
+                // 2) ⚠️ ВАЖНО: ако тренировката вече има упражнения / сетове,
+                // не я презаписваме, за да НЕ изчезват сетовете при зареждане.
+                //
+                // Вариант A (по-прост): не бараме тренировки, които изобщо имат упражнения
+                // guard workout.exercises.isEmpty else { continue }
+                //
+                // Вариант B (по-консервативен): не бараме,
+                // ако има поне едно упражнение със сетове
+                let hasCustomSets = workout.exercises.contains { !$0.sets.isEmpty }
+                if hasCustomSets {
+                    continue
                 }
+                
+                let descriptor = FetchDescriptor<ExerciseItem>(
+                    predicate: #Predicate { $0.id == workoutID }
+                )
+                
+                guard let workoutItem = (try? context.fetch(descriptor))?.first else {
+                    continue
+                }
+                
+                var newExercises: [TrainingPlanExercise] = []
+                for link in workoutItem.exercises ?? [] {
+                    guard let exercise = link.exercise else { continue }
+                    
+                    let newExercise = TrainingPlanExercise(
+                        exercise: exercise,
+                        durationMinutes: link.durationMinutes,
+                        workout: workout
+                    )
+                    // Тук НЕ слагаме сетове, защото ExerciseItem няма такива –
+                    // сетовете се правят само в TrainingPlanEditorView.
+                    newExercises.append(newExercise)
+                }
+                
+                workout.exercises = newExercises
             }
         }
     }
+
     
     /// Стартира същинската AI генерация на тренировъчен план.
     /// Извиква се САМО след като потребителят вече е "платил"
