@@ -49,14 +49,15 @@ struct TrainingPlanExerciseRowView: View {
                             .foregroundStyle(effectManager.currentGlobalAccentColor)
                             .font(.headline)
                             .lineLimit(2)
+                            .multilineTextAlignment(.leading) // Подравняване на текста
                         
                         Text("\(link.sets.count) sets planned")
                             .font(.caption)
                             .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(maxWidth: .infinity, alignment: .leading) // Заема свободното място вляво
 
-                    Spacer()
+                    // Spacer() - не е нужен тук, защото VStack по-горе има maxWidth: .infinity
 
                     HStack(spacing: 4) {
                         ConfigurableTextField(
@@ -124,6 +125,8 @@ struct TrainingPlanExerciseRowView: View {
                 .transition(.opacity)
             }
         }
+        // ✅ ВАЖНО: Това кара контейнера да заеме ширината на родителя и предотвратява "подскачането" при разгъване
+        .frame(maxWidth: .infinity)
         .padding(12)
         .glassCardStyle(cornerRadius: 20)
         .contentShape(RoundedRectangle(cornerRadius: 20))
@@ -155,12 +158,13 @@ struct TrainingPlanExerciseRowView: View {
         let pickerColorScheme: ColorScheme = effectManager.isLightRowTextColor ? .dark : .light
         let setIndex = link.sets.firstIndex(where: { $0.id == setBinding.wrappedValue.id }) ?? 0
 
-        return HStack(alignment: .center, spacing: 12) {
+        // ✅ Намален spacing, за да се събере на по-тесни екрани
+        return HStack(alignment: .center, spacing: 8) {
             // Label
             Text("Set \(setIndex + 1)")
                 .font(.subheadline)
                 .foregroundStyle(effectManager.currentGlobalAccentColor)
-                .frame(width: 50, height: 80, alignment: .leading)
+                .frame(width: 45, height: 80, alignment: .leading) // Леко намалена ширина
 
             // MARK: - Reps OR Failure
             VStack(spacing: 4) {
@@ -185,14 +189,14 @@ struct TrainingPlanExerciseRowView: View {
                     .buttonStyle(.plain)
                 }
                 .foregroundStyle(effectManager.currentGlobalAccentColor)
-                .frame(width: 80, alignment: .center)
+                .frame(width: 75, alignment: .center) // Леко намалена ширина
 
                 if setBinding.wrappedValue.isToFailure {
-                    // ✅ TEKST "TO FAILURE"
+                    // ✅ TEXT "TO FAILURE"
                     VStack {
                         Spacer()
                         Text("To Failure")
-                            .font(.system(size: 14, weight: .bold))
+                            .font(.system(size: 13, weight: .bold)) // Леко намален шрифт
                             .foregroundColor(.orange)
                             .multilineTextAlignment(.center)
                             .padding(4)
@@ -200,7 +204,7 @@ struct TrainingPlanExerciseRowView: View {
                             .cornerRadius(6)
                         Spacer()
                     }
-                    .frame(width: 80, height: 80)
+                    .frame(width: 75, height: 80)
                     .offset(y: -7)
                 } else {
                     // ✅ NORMAL PICKER
@@ -210,7 +214,7 @@ struct TrainingPlanExerciseRowView: View {
                         }
                     }
                     .pickerStyle(.wheel)
-                    .frame(width: 80, height: 80)
+                    .frame(width: 75, height: 80)
                     .clipped()
                     .tint(effectManager.currentGlobalAccentColor)
                     .environment(\.colorScheme, pickerColorScheme)
@@ -226,7 +230,7 @@ struct TrainingPlanExerciseRowView: View {
                 }
                 .font(.caption)
                 .foregroundStyle(effectManager.currentGlobalAccentColor)
-                .frame(width: 158, alignment: .center)
+                .frame(width: 140, alignment: .center) // Намалено от 158
 
                 HStack(spacing: 0) {
                     Picker("Weight Whole", selection: weightWholeBinding(for: setBinding)) {
@@ -235,13 +239,13 @@ struct TrainingPlanExerciseRowView: View {
                         }
                     }
                     .pickerStyle(.wheel)
-                    .frame(width: 80, height: 80)
+                    .frame(width: 70, height: 80) // Намалено
                     .clipped()
 
                     Text(decimalSeparator)
                         .font(.title3.weight(.bold))
                         .foregroundStyle(effectManager.currentGlobalAccentColor)
-                        .frame(width: 18, alignment: .center)
+                        .frame(width: 10, alignment: .center)
 
                     Picker("Weight Decimal", selection: weightDecimalBinding(for: setBinding)) {
                         ForEach(weightDecimalRange, id: \.self) { value in
@@ -249,7 +253,7 @@ struct TrainingPlanExerciseRowView: View {
                         }
                     }
                     .pickerStyle(.wheel)
-                    .frame(width: 60, height: 80)
+                    .frame(width: 50, height: 80) // Намалено
                     .clipped()
                 }
                 .offset(y: -7)
@@ -275,7 +279,7 @@ struct TrainingPlanExerciseRowView: View {
         .glassCardStyle(cornerRadius: 10)
     }
     
-    // Bindings Logic
+    // Bindings Logic (непроменена)
     private func repsBinding(for setBinding: Binding<TrainingPlanSet>) -> Binding<Int> {
         Binding<Int>(
             get: { setBinding.wrappedValue.reps ?? 0 },
