@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import GoogleMobileAds
 
 // Можем да изнесем и ODR в отделен файл, но ако е малък, може и тук.
 final class ODRDevPrefetch {
@@ -23,63 +24,71 @@ struct WiseEatingApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     @Environment(\.scenePhase) private var scenePhase
     @ObservedObject private var subscriptionManager = SubscriptionManager.shared
-
+    
     // ✅ НОВО: Запазваме състояние дали това е първото стартиране някога
     @AppStorage("isFirstAppLaunch") private var isFirstAppLaunch: Bool = true
     @State private var coldStart: Bool = true
-
+    
     let container: ModelContainer = DatabaseSetup.createContainer()
     
     private var notificationDelegate = NotificationDelegate()
-
+    
     // В WiseEatingApp.swift
     init() {
+        // 1. Дефиниране на тестовите устройства
+        let testDevices = [
+            "7F2105B5-5CC4-436C-88C1-28BA71BD949C", // Wife iPad
+            "9DD38651-791A-4B28-84CD-DB22E51DBAF4",  // Wife iPhone
+            "83168461-56E7-4160-B4D2-8CA539FEBB1B",
+            "560CA1A2-1EC6-4BDA-8F0A-0B41839EE3EB",
+            "69FE353C-01C9-4BA5-8861-67355A140C56"
+        ]
         
+        // 2. Конфигурация (MobileAds.shared)
+        MobileAds.shared.requestConfiguration.testDeviceIdentifiers = testDevices
+        
+        // 3. Стартиране
+        MobileAds.shared.start(completionHandler: nil)
+        
+        
+        // --- Останалата логика (без промяна) ---
         GlobalState.modelContext = container.mainContext
-
+        
         Task { @MainActor in
             GlobalState.updateAIAvailability()
         }
-
+        
         UNUserNotificationCenter.current().delegate = notificationDelegate
         AIManager.shared.setup(container: container)
         Task { @MainActor in
             await CalendarViewModel.shared.ensureSharedShoppingListCalendarExists()
         }
         
-        // --- ПРОМЯНА: Оптимизирано зареждане на реклами (Staggered Load) ---
-        
-        // 1. Зареждаме САМО App Open Ad веднага, защото ни трябва за студения старт
+        // 1. Зареждаме САМО App Open Ad веднага
         Task { @MainActor in
             await AppOpenAdManager.shared.loadAd()
         }
         
-        // 2. Всички останали ("тежки") реклами зареждаме със закъснение,
-        // за да оставим ресурси за UI-то и базата данни.
+        // 2. Всички останали реклами зареждаме със закъснение
         Task.detached(priority: .background) {
-            // Изчакваме 3 секунди, за да може приложението да "изгрее" спокойно
             try? await Task.sleep(nanoseconds: 3 * 1_000_000_000)
             
             await MainActor.run {
                 print("🚀 [AdOptimization] Starting delayed heavy ad loading...")
                 
-//                // Зареждаме единичните формати
                 Task { await RewardedAdManager.shared.loadAd() }
                 Task { await InterstitialAdManager.shared.loadAd() }
                 Task { await RewardedInterstitialAdManager.shared.loadAd() }
                 
-                // Зареждаме пула за банери
                 BannerAdPool.shared.warmUp()
                 
-                // Native ads са най-тежки (заради WebViews), пускаме ги последни с още малко буфер
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                     NativeAdPool.shared.refreshPool()
                 }
             }
         }
-        // ----------------------------------------------------
     }
- 
+    
     var body: some Scene {
         WindowGroup {
             RootLauncher(container: container)
@@ -103,7 +112,7 @@ struct WiseEatingApp: App {
                             
                             if hasSelectedProfile {
                                 print("🔄 Връщане в приложението (Profile Found).")
-
+                                
                                 if coldStart {
                                     // СТУДЕН СТАРТ:
                                     // Изчакваме 3 секунди и форсираме показването (forceShow: true)
@@ -145,7 +154,7 @@ struct WiseEatingApp: App {
                         
                         // 4. Системни настройки
                         GlobalState.refreshSystemSettings()
-
+                        
                         // 5. Usage & Badges
                         Task { @MainActor in
                             let context = container.mainContext
@@ -157,7 +166,7 @@ struct WiseEatingApp: App {
                                 await BadgeManager.shared.checkAndAwardBadges(for: lastProfile, using: context)
                             }
                         }
-
+                        
                     case .background:
                         print("App in background. Stop sync timers.")
                         // Зареждаме нова реклама, докато сме в бекграунд, за да е готова за следващия път
