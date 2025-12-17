@@ -1,9 +1,7 @@
-// WiseEating/Main/Notification/BadgeManager.swift
 import Foundation
 import SwiftData
 import UserNotifications
 
-// +++ НАЧАЛО НА ПРОМЯНАТА (1/3): Добавяме нов мениджър за проследяване на активността +++
 @MainActor
 class UsageTrackingManager {
     static let shared = UsageTrackingManager()

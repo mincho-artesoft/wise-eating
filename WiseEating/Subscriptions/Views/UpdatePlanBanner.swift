@@ -1,8 +1,6 @@
-// ==== FILE: /Users/aleksandarsvinarov/Desktop/as/vitahealth-clean/WiseEating/Main/RootView/UpdatePlanBanner.swift ====
 import SwiftUI
 
 // Мениджър за ротацията (Upgrade -> Ad -> Upgrade...).
-// Гарантира, че състоянието се помни глобално.
 @MainActor
 final class BannerRotationManager: ObservableObject {
     static let shared = BannerRotationManager()
@@ -12,21 +10,15 @@ final class BannerRotationManager: ObservableObject {
         case ad
     }
     
-    // Започваме с .upgrade според изискването
     private var nextType: BannerType = .upgrade
     
-    /// Връща текущия тип, който трябва да се покаже, и веднага завърта
-    /// състоянието за *следващото* извикване.
     func getAndCycle() -> BannerType {
         let typeToShow = nextType
-        
-        // Подготвяме следващия тип
         if nextType == .upgrade {
             nextType = .ad
         } else {
             nextType = .upgrade
         }
-        
         return typeToShow
     }
 }
@@ -35,52 +27,56 @@ struct UpdatePlanBanner: View {
     @ObservedObject private var subscriptionManager = SubscriptionManager.shared
     @ObservedObject private var effectManager = EffectManager.shared
     
-    // Следим състоянието на приложението (Active/Background)
     @Environment(\.scenePhase) private var scenePhase
     
-    // Локално състояние за текущия изглед
     @State private var currentBannerType: BannerRotationManager.BannerType = .upgrade
     @State private var isVisible: Bool = true
-    
-    // Състояние за BannerAdView
     @State private var isAdLoaded: Bool = true
-    
-    // Флаг за избягване на двойно извикване при старт (onAppear + scenePhase)
     @State private var hasAppeared: Bool = false
     
     var body: some View {
-        // Показваме само ако е Base план и локално трябва да е видимо
-        if subscriptionManager.subscriptionStatus == .base && isVisible {
-            Group {
-                switch currentBannerType {
-                case .upgrade:
+        VStack {
+            // ✅ СЦЕНАРИЙ 1: ПРОМОЦИЯ (До 17 Януари)
+            if subscriptionManager.isPromoActive {
+                // По време на промоцията, Base потребителите "изглеждат" като .removeAds.
+                // Показваме им САМО Upgrade банера, без да го редуваме с реклами.
+                // (Ако са Advanced/Premium, този if няма да се изпълни и няма да виждат нищо).
+                if subscriptionManager.subscriptionStatus == .removeAds && isVisible {
                     upgradePlanContent
-                case .ad:
-                    adBannerContent
+                        .transition(.opacity.combined(with: .move(edge: .top)))
                 }
             }
-            .transition(.opacity.combined(with: .move(edge: .top)))
-            .onAppear {
-                if !hasAppeared {
-                    refreshContent()
-                    hasAppeared = true
+            
+            // ✅ СЦЕНАРИЙ 2: СТАНДАРТЕН РЕЖИМ (След 17 Януари)
+            else if subscriptionManager.subscriptionStatus == .base && isVisible {
+                // Тук си работи старата логика с редуването
+                Group {
+                    switch currentBannerType {
+                    case .upgrade:
+                        upgradePlanContent
+                    case .ad:
+                        adBannerContent
+                    }
                 }
-            }
-            .onChange(of: scenePhase) { _, newPhase in
-                // "Следващо извикване" -> когато приложението стане активно отново
-                if newPhase == .active && hasAppeared {
-                    refreshContent()
+                .transition(.opacity.combined(with: .move(edge: .top)))
+                .onAppear {
+                    if !hasAppeared {
+                        refreshContent()
+                        hasAppeared = true
+                    }
+                }
+                .onChange(of: scenePhase) { _, newPhase in
+                    if newPhase == .active && hasAppeared {
+                        refreshContent()
+                    }
                 }
             }
         }
     }
     
-    /// Изтегля следващия тип от мениджъра и прави банера видим
     private func refreshContent() {
         withAnimation {
-            // Взимаме следващия подред (Plan -> Ad -> Plan...)
             currentBannerType = BannerRotationManager.shared.getAndCycle()
-            // Винаги го правим видим при ново извикване/рестарт на view-то
             isVisible = true
         }
     }
@@ -128,37 +124,29 @@ struct UpdatePlanBanner: View {
         .padding(.bottom, 8)
     }
     
-    // MARK: - Ad Banner (Updated)
+    // MARK: - Ad Banner
     private var adBannerContent: some View {
         HStack {
             Spacer()
-            
-            // Стандартна височина за банер (обикновено 50),
-            // за да не става прекалено голям контейнера.
             BannerAdView(adsBool: $isAdLoaded, bucket: .small)
                 .frame(height: 50)
                 .clipShape(RoundedRectangle(cornerRadius: 15))
-            
             closeButton
         }
-        // Малък вертикален padding, за да пасне на височината на upgradePlanContent
         .padding(.vertical, 6)
         .background(
             RoundedRectangle(cornerRadius: 20)
                 .fill(.ultraThinMaterial)
                 .environment(\.colorScheme, effectManager.isLightRowTextColor ? .dark : .light)
         )
-
         .padding(.horizontal)
         .padding(.bottom, 8)
     }
     
-    // MARK: - Shared Close Button
+    // MARK: - Close Button
     private var closeButton: some View {
         Button(action: {
             withAnimation {
-                // Само скриваме текущия.
-                // Типът за следващия път вече е подготвен от getAndCycle() при показването.
                 isVisible = false
             }
         }) {

@@ -1,4 +1,3 @@
-// ==== FILE: /Users/aleksandarsvinarov/Desktop/as/vitahealth-clean/WiseEating/Ads/NativeAd/SimpleNativeAdView.swift ====
 import GoogleMobileAds
 import UIKit
 
