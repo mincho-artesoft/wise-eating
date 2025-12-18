@@ -271,6 +271,7 @@ struct ExerciseLogEntryView: View {
                                 .labelsHidden()
                                 .fixedSize()
                                 .padding(.leading, 8)
+                                .environment(\.colorScheme, effectManager.isLightRowTextColor ? .dark : .light)
                             }
                             
                             Spacer()
