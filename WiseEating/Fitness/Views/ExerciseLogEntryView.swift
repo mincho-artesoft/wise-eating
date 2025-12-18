@@ -107,187 +107,200 @@ struct ExerciseLogEntryView: View {
     }
     
     private func setRow(for setBinding: Binding<WorkoutSet>) -> some View {
-            let set = setBinding.wrappedValue
-            let setIndex = exerciseLog.sets.firstIndex(where: { $0.id == set.id }) ?? 0
-            let pickerColorScheme: ColorScheme = effectManager.isLightRowTextColor ? .dark : .light
+                let set = setBinding.wrappedValue
+                let setIndex = exerciseLog.sets.firstIndex(where: { $0.id == set.id }) ?? 0
+                let pickerColorScheme: ColorScheme = effectManager.isLightRowTextColor ? .dark : .light
 
-            return VStack(spacing: 6) {
-                // 🔹 ПЪРВИ РЕД: (Set + Reps/Min + Weight + Delete)
-                HStack(alignment: .center, spacing: 12) {
-                    // MARK: - Set label
-                    Text("Set \(setIndex + 1)")
-                        .font(.subheadline)
-                        .foregroundStyle(effectManager.currentGlobalAccentColor)
-                        .frame(width: 50, height: 80, alignment: .leading)
-
-                    // MARK: - Reps OR Failure OR Time
-                    VStack(spacing: 4) {
-                        // ✅ ПРОМЯНА: Динамичен етикет
-                        Text(set.isTimeBased ? "Sec" : "Reps")
-                            .font(.caption)
-                            .foregroundStyle(effectManager.currentGlobalAccentColor)
-                            .frame(width: 80, alignment: .center)
-
-                        if set.isToFailure {
-                            // "To Failure" вместо picker
-                            VStack {
-                                Spacer()
-                                Text("To Failure")
-                                    .font(.system(size: 14, weight: .bold))
-                                    .foregroundColor(.orange)
-                                    .multilineTextAlignment(.center)
-                                    .padding(4)
-                                    .background(Color.orange.opacity(0.1))
-                                    .cornerRadius(6)
-                                Spacer()
-                            }
-                            .frame(width: 80, height: 80)
-                            .offset(y: -7)
-                        } else {
-                            Picker(set.isTimeBased ? "Sec" : "Reps", selection: repsBinding(for: setBinding)) {
-                                ForEach(repsRange, id: \.self) { rep in
-                                    Text("\(rep)").tag(rep)
-                                }
-                            }
-                            .pickerStyle(.wheel)
-                            .frame(width: 80, height: 80)
-                            .clipped()
-                            .tint(effectManager.currentGlobalAccentColor)
-                            .environment(\.colorScheme, pickerColorScheme)
-                            .offset(y: -7)
-                        }
-                    }
-
-                    // MARK: - Weight колонка
-                    VStack(spacing: 4) {
-                        HStack(spacing: 2) {
-                            Text("Weight")
-                            Text(weightUnit)
-                        }
-                        .font(.caption)
-                        .foregroundStyle(effectManager.currentGlobalAccentColor)
-                        .frame(width: 158, alignment: .center)
-
-                        HStack(spacing: 0) {
-                            Picker("Weight Whole", selection: weightWholeBinding(for: setBinding)) {
-                                ForEach(weightWholeRange, id: \.self) { value in
-                                    Text("\(value)").tag(value)
-                                }
-                            }
-                            .pickerStyle(.wheel)
-                            .frame(width: 80, height: 80)
-                            .clipped()
-
-                            Text(decimalSeparator)
-                                .font(.title3.weight(.bold))
-                                .foregroundStyle(effectManager.currentGlobalAccentColor)
-                                .frame(width: 18, alignment: .center)
-
-                            Picker("Weight Decimal", selection: weightDecimalBinding(for: setBinding)) {
-                                if isImperial {
-                                    ForEach(weightDecimalRangeImperial, id: \.self) { value in
-                                        Text(String(format: "%02d", value)).tag(value)
-                                    }
-                                } else {
-                                    ForEach(weightDecimalRange, id: \.self) { value in
-                                        Text(String(format: "%02d", value)).tag(value)
-                                    }
-                                }
-                            }
-                            .pickerStyle(.wheel)
-                            .frame(width: 60, height: 80)
-                            .clipped()
-                        }
-                        .offset(y: -7)
-                        .tint(effectManager.currentGlobalAccentColor)
-                        .environment(\.colorScheme, pickerColorScheme)
-                    }
-
-                    Spacer(minLength: 0)
-
-                    // MARK: - Delete бутон
-                    Button(action: {
-                        withAnimation {
-                            exerciseLog.sets.removeAll { $0.id == set.id }
-                        }
-                    }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.5))
-                    }
-                    .buttonStyle(.plain)
-                    .padding(.top, 8)
-                }
-
-                // 🔹 ВТОРИ РЕД: Toggle опции
-                VStack(spacing: 0) {
-                    // Toggle: To Failure
-                    HStack {
-                        Text("To Failure")
+                return VStack(spacing: 6) {
+                    // 🔹 ПЪРВИ РЕД: (Set + Reps/Min + Weight + Delete)
+                    HStack(alignment: .center, spacing: 12) {
+                        // MARK: - Set label
+                        Text("Set \(setIndex + 1)")
                             .font(.subheadline)
                             .foregroundStyle(effectManager.currentGlobalAccentColor)
-                        
-                        Spacer()
-                        
-                        Toggle(
-                            "",
-                            isOn: Binding(
-                                get: { setBinding.wrappedValue.isToFailure },
-                                set: { newValue in
-                                    withAnimation(.easeInOut(duration: 0.2)) {
-                                        setBinding.wrappedValue.isToFailure = newValue
-                                        if newValue {
-                                            setBinding.wrappedValue.reps = nil
-                                            setBinding.wrappedValue.isTimeBased = false // Изключваме Time Based
+                            .frame(width: 50, height: 80, alignment: .leading)
+
+                        // MARK: - Reps OR Failure OR Time
+                        VStack(spacing: 4) {
+                            // ✅ Динамичен етикет: Sec / Min / Reps
+                            let unitLabel: String = {
+                                if set.isTimeBased {
+                                    return set.timeUnit == .minutes ? "Min" : "Sec"
+                                }
+                                return "Reps"
+                            }()
+                            
+                            Text(unitLabel)
+                                .font(.caption)
+                                .foregroundStyle(effectManager.currentGlobalAccentColor)
+                                .frame(width: 80, alignment: .center)
+
+                            if set.isToFailure {
+                                VStack {
+                                    Spacer()
+                                    Text("To Failure")
+                                        .font(.system(size: 14, weight: .bold))
+                                        .foregroundColor(.orange)
+                                        .multilineTextAlignment(.center)
+                                        .padding(4)
+                                        .background(Color.orange.opacity(0.1))
+                                        .cornerRadius(6)
+                                    Spacer()
+                                }
+                                .frame(width: 80, height: 80)
+                                .offset(y: -7)
+                            } else {
+                                Picker(unitLabel, selection: repsBinding(for: setBinding)) {
+                                    ForEach(repsRange, id: \.self) { rep in
+                                        Text("\(rep)").tag(rep)
+                                    }
+                                }
+                                .pickerStyle(.wheel)
+                                .frame(width: 80, height: 80)
+                                .clipped()
+                                .tint(effectManager.currentGlobalAccentColor)
+                                .environment(\.colorScheme, pickerColorScheme)
+                                .offset(y: -7)
+                            }
+                        }
+
+                        // MARK: - Weight колонка
+                        VStack(spacing: 4) {
+                            HStack(spacing: 2) {
+                                Text("Weight")
+                                Text(weightUnit)
+                            }
+                            .font(.caption)
+                            .foregroundStyle(effectManager.currentGlobalAccentColor)
+                            .frame(width: 158, alignment: .center)
+
+                            HStack(spacing: 0) {
+                                Picker("Weight Whole", selection: weightWholeBinding(for: setBinding)) {
+                                    ForEach(weightWholeRange, id: \.self) { value in
+                                        Text("\(value)").tag(value)
+                                    }
+                                }
+                                .pickerStyle(.wheel)
+                                .frame(width: 80, height: 80)
+                                .clipped()
+
+                                Text(decimalSeparator)
+                                    .font(.title3.weight(.bold))
+                                    .foregroundStyle(effectManager.currentGlobalAccentColor)
+                                    .frame(width: 18, alignment: .center)
+
+                                Picker("Weight Decimal", selection: weightDecimalBinding(for: setBinding)) {
+                                    if isImperial {
+                                        ForEach(weightDecimalRangeImperial, id: \.self) { value in
+                                            Text(String(format: "%02d", value)).tag(value)
+                                        }
+                                    } else {
+                                        ForEach(weightDecimalRange, id: \.self) { value in
+                                            Text(String(format: "%02d", value)).tag(value)
                                         }
                                     }
                                 }
-                            )
-                        )
-                        .labelsHidden()
-                        .environment(\.colorScheme, effectManager.isLightRowTextColor ? .dark : .light)
+                                .pickerStyle(.wheel)
+                                .frame(width: 60, height: 80)
+                                .clipped()
+                            }
+                            .offset(y: -7)
+                            .tint(effectManager.currentGlobalAccentColor)
+                            .environment(\.colorScheme, pickerColorScheme)
+                        }
+
+                        Spacer(minLength: 0)
+
+                        // MARK: - Delete бутон
+                        Button(action: {
+                            withAnimation {
+                                exerciseLog.sets.removeAll { $0.id == set.id }
+                            }
+                        }) {
+                            Image(systemName: "xmark.circle.fill")
+                                .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.5))
+                        }
+                        .buttonStyle(.plain)
+                        .padding(.top, 8)
                     }
-                    .padding(.vertical, 8)
-                    
-                    Divider().background(effectManager.currentGlobalAccentColor.opacity(0.2))
-                    
-                    // ✅ НОВО: Toggle: Time Based
-                    HStack {
-                        Text("Time Based (Seconds)")
-                            .font(.subheadline)
-                            .foregroundStyle(effectManager.currentGlobalAccentColor)
-                        
-                        Spacer()
-                        
-                        Toggle(
-                            "",
-                            isOn: Binding(
-                                get: { setBinding.wrappedValue.isTimeBased },
-                                set: { newValue in
-                                    withAnimation(.easeInOut(duration: 0.2)) {
-                                        setBinding.wrappedValue.isTimeBased = newValue
-                                        if newValue {
-                                            setBinding.wrappedValue.isToFailure = false // Изключваме Failure
-                                            // Уверяваме се, че има стойност, за да се покаже в Pickera
-                                            if setBinding.wrappedValue.reps == nil {
-                                                setBinding.wrappedValue.reps = 1
+
+                    // 🔹 ВТОРИ РЕД: Toggle опции
+                    VStack(spacing: 0) {
+                        // Toggle: To Failure
+                        HStack {
+                            Text("To Failure")
+                                .font(.subheadline)
+                                .foregroundStyle(effectManager.currentGlobalAccentColor)
+                            
+                            Spacer()
+                            
+                            Toggle(
+                                "",
+                                isOn: Binding(
+                                    get: { setBinding.wrappedValue.isToFailure },
+                                    set: { newValue in
+                                        withAnimation(.easeInOut(duration: 0.2)) {
+                                            setBinding.wrappedValue.isToFailure = newValue
+                                            if newValue {
+                                                setBinding.wrappedValue.reps = nil
                                             }
                                         }
                                     }
-                                }
+                                )
                             )
-                        )
-                        .labelsHidden()
-                        .environment(\.colorScheme, effectManager.isLightRowTextColor ? .dark : .light)
+                            .labelsHidden()
+                            .environment(\.colorScheme, effectManager.isLightRowTextColor ? .dark : .light)
+                        }
+                        .padding(.vertical, 8)
+                        
+                        Divider().background(effectManager.currentGlobalAccentColor.opacity(0.2))
+                        
+                        // ✅ Toggle: Time Based + Picker
+                        HStack {
+                            Text("Time Based")
+                                .font(.subheadline)
+                                .foregroundStyle(effectManager.currentGlobalAccentColor)
+                            
+                            // ПИКЪР ЗА СЕКУНДИ/МИНУТИ
+                            if setBinding.wrappedValue.isTimeBased {
+                                Picker("", selection: setBinding.timeUnit) {
+                                    Text("Sec").tag(TimeUnit.seconds)
+                                    Text("Min").tag(TimeUnit.minutes)
+                                }
+                                .pickerStyle(.segmented)
+                                .labelsHidden()
+                                .fixedSize()
+                                .padding(.leading, 8)
+                            }
+                            
+                            Spacer()
+                            
+                            Toggle(
+                                "",
+                                isOn: Binding(
+                                    get: { setBinding.wrappedValue.isTimeBased },
+                                    set: { newValue in
+                                        withAnimation(.easeInOut(duration: 0.2)) {
+                                            setBinding.wrappedValue.isTimeBased = newValue
+                                            if newValue {
+                                                if setBinding.wrappedValue.reps == nil && !setBinding.wrappedValue.isToFailure {
+                                                    setBinding.wrappedValue.reps = 1
+                                                }
+                                            }
+                                        }
+                                    }
+                                )
+                            )
+                            .labelsHidden()
+                            .environment(\.colorScheme, effectManager.isLightRowTextColor ? .dark : .light)
+                        }
+                        .padding(.vertical, 8)
                     }
-                    .padding(.vertical, 8)
+
                 }
-
+                .padding(6)
+                .glassCardStyle(cornerRadius: 10)
             }
-            .padding(6)
-            .glassCardStyle(cornerRadius: 10)
-        }
-
-
 
     private func repsBinding(for setBinding: Binding<WorkoutSet>) -> Binding<Int> {
         Binding<Int>(

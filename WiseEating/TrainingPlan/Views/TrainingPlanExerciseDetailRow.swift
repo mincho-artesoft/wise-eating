@@ -96,7 +96,7 @@ struct TrainingPlanExerciseDetailRow: View {
                             .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.6))
                             .padding(.bottom, 4)
                     } else {
-                        // ✅ FIX: Сортираме по orderIndex преди да ги покажем
+                        // Сортираме по orderIndex
                         let sortedSets = link.sets.sorted { $0.orderIndex < $1.orderIndex }
                         
                         ForEach(Array(sortedSets.enumerated()), id: \.element.id) { index, set in
@@ -110,26 +110,29 @@ struct TrainingPlanExerciseDetailRow: View {
                                 
                                 // REPS OR FAILURE OR TIME TEXT
                                 if set.isToFailure {
-                                    HStack(spacing: 4) {
-                                        Image(systemName: "exclamationmark.triangle.fill")
-                                            .font(.caption2)
-                                        Text("To Failure")
-                                            .font(.subheadline.weight(.medium))
-                                    }
-                                    .foregroundStyle(.orange)
-                                } else {
-                                    if let val = set.reps {
-                                        // ✅ ПРОМЯНА: Проверка за isTimeBased
-                                        Text("\(val) \(set.isTimeBased ? "sec" : "reps")")
-                                            .font(.subheadline)
-                                            .foregroundStyle(effectManager.currentGlobalAccentColor)
-                                    } else {
-                                        Text("-")
-                                            .font(.caption)
-                                            .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.5))
-                                    }
-                                }
-                                
+                                      HStack(spacing: 4) {
+                                          Text("To Failure")
+                                      }
+                                      .foregroundStyle(.orange)
+                                  } else {
+                                      if let val = set.reps {
+                                          // ✅ ПРОМЯНА: Проверка за isTimeBased и timeUnit
+                                          let unitText: String = {
+                                              if set.isTimeBased {
+                                                  return set.timeUnit == .minutes ? "min" : "sec"
+                                              }
+                                              return "reps"
+                                          }()
+                                          
+                                          Text("\(val) \(unitText)")
+                                              .font(.subheadline)
+                                              .foregroundStyle(effectManager.currentGlobalAccentColor)
+                                      } else {
+                                          Text("-")
+                                              .font(.caption)
+                                              .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.5))
+                                      }
+                                  }
                                 Spacer()
                                 
                                 // Weight

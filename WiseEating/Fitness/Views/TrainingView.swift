@@ -1057,7 +1057,7 @@ struct TrainingView: View {
                             finalExercises[exercise, default: 0.0] += entry.durationMinutes
                             
                             // 2. Конвертираме TrainingPlanSet -> WorkoutSet
-                            // ✅ FIX: Сортираме по orderIndex и прехвърляме isTimeBased
+                            // ✅ FIX: Сортираме по orderIndex и прехвърляме isTimeBased И timeUnit
                             let workoutSets: [WorkoutSet] = entry.sets
                                 .sorted { $0.orderIndex < $1.orderIndex }
                                 .map { planSet in
@@ -1065,7 +1065,8 @@ struct TrainingView: View {
                                         reps: planSet.reps,
                                         weight: planSet.weight,
                                         isToFailure: planSet.isToFailure,
-                                        isTimeBased: planSet.isTimeBased // ✅ ДОБАВЕНО
+                                        isTimeBased: planSet.isTimeBased,
+                                        timeUnit: planSet.timeUnit // 👈 ДОБАВЕНО: Прехвърляме единицата
                                     )
                                 }
                             
