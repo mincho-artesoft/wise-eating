@@ -134,7 +134,8 @@ struct TrainingPlanEditorView: View {
                                         reps: set.reps,
                                         weight: set.weight,
                                         isToFailure: set.isToFailure,
-                                        isTimeBased: set.isTimeBased, // ✅ ДОБАВЕНО
+                                        isTimeBased: set.isTimeBased,
+                                        timeUnit: set.timeUnit, // 👈 ДОБАВЕНО: Зареждаме запазената единица
                                         orderIndex: set.orderIndex
                                     )
                                     newSet.exercise = newExerciseLink
@@ -1196,7 +1197,8 @@ struct TrainingPlanEditorView: View {
                             reps: set.reps,
                             weight: set.weight,
                             isToFailure: set.isToFailure,
-                            isTimeBased: set.isTimeBased, // ✅ ДОБАВЕНО
+                            isTimeBased: set.isTimeBased,
+                            timeUnit: set.timeUnit, // 👈 ДОБАВЕНО: Запазваме единицата в базата
                             orderIndex: index
                         )
                         newSet.exercise = newEntry

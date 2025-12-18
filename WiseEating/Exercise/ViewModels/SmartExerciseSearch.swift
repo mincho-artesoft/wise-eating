@@ -1,4 +1,3 @@
-// ==== FILE: /Users/aleksandarsvinarov/Desktop/Repo/vitahealth2/WiseEating/AI/SmartExerciseSearch.swift ====
 import Foundation
 import SwiftData
 import FoundationModels
