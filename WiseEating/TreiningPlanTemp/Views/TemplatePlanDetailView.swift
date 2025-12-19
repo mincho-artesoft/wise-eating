@@ -9,16 +9,16 @@ struct TemplatePlanDetailView: View {
     let planWrapper: TrainingPlanListVM.DisplayPlan
     let profile: Profile
     let onDismiss: () -> Void
-    
-    // ✅ ПРОМЯНА: onGet приема String? (името на тренировката, или nil за оригиналното)
+
+    /// onGet приема String? (името на тренировката, или nil за оригиналното)
     let onGet: (String?) -> Void
 
     // MARK: - State
     @State private var selectedDayKey: String? = nil
     @State private var selectedWorkoutKey: String? = nil
     @State private var exerciseItemToView: ExerciseItem? = nil
-    
-    // ✅ НОВО: Състояние за показване на диалога
+
+    // Диалог за избор на име на тренировка
     @State private var showTrainingSelectionDialog = false
 
     // MARK: - Real object
@@ -54,6 +54,9 @@ struct TemplatePlanDetailView: View {
                             .frame(maxWidth: .infinity, alignment: .center)
                             .foregroundColor(effectManager.currentGlobalAccentColor)
 
+                        // ✅ ЕДНО към ЕДНО с TrainingPlanDetailView:
+                        // - dayIndex = enumerated index + 1
+                        // - rest day = само заглавие "Day X: Rest Day"
                         ForEach(Array(sortedDays.enumerated()), id: \.offset) { index, day in
                             daySection(for: day, dayIndex: index + 1)
                         }
@@ -94,21 +97,20 @@ struct TemplatePlanDetailView: View {
             }
         }
         .onAppear {
+            // ✅ ЕДНО към ЕДНО с TrainingPlanDetailView: взимаме първия ден
             if selectedDayKey == nil, let firstDay = sortedDays.first {
                 selectedDayKey = dayKey(for: firstDay)
                 if let firstWorkout = firstDay.workouts.first {
                     selectedWorkoutKey = workoutKey(for: firstWorkout, day: firstDay)
+                } else {
+                    selectedWorkoutKey = nil
                 }
             }
         }
-        // ✅ НОВО: Диалог за избор на име на тренировка
+        // Диалог за избор на име на тренировка
         .confirmationDialog("Import Plan To...", isPresented: $showTrainingSelectionDialog, titleVisibility: .visible) {
-            
-            // 1. Опции от профила (напр. Morning Workout, Evening Gym)
             ForEach(profile.trainings) { training in
-                Button(training.name) {
-                    onGet(training.name)
-                }
+                Button(training.name) { onGet(training.name) }
             }
             Button("Cancel", role: .cancel) { }
         } message: {
@@ -126,7 +128,6 @@ struct TemplatePlanDetailView: View {
 
             Spacer()
 
-            // ✅ ПРОМЯНА: Бутонът GET отваря диалога
             Button("GET") {
                 showTrainingSelectionDialog = true
             }
@@ -143,38 +144,45 @@ struct TemplatePlanDetailView: View {
         let dKey = dayKey(for: day)
 
         return VStack(alignment: .leading, spacing: 12) {
+
+            // ✅ ЕДНО към ЕДНО с TrainingPlanDetailView:
+            // - Day X: Rest Day (ако е rest)
             HStack {
-                Text("Day \(dayIndex)")
+                Text(day.isRestDay ? "Day \(dayIndex): Rest Day" : "Day \(dayIndex)")
                     .font(.headline)
                     .foregroundColor(effectManager.currentGlobalAccentColor)
 
                 Spacer()
             }
 
-            // Tabs for workouts
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 8) {
-                    let sortedWorkouts = day.workouts.sorted {
-                        $0.workoutName.localizedCaseInsensitiveCompare($1.workoutName) == .orderedAscending
-                    }
+            // ✅ Ако е почивен ден — НЕ показваме нищо друго (tabs/exercises/extra text)
+            if !day.isRestDay {
 
-                    ForEach(sortedWorkouts) { workout in
-                        workoutTabButton(for: workout, in: day)
+                // Tabs for workouts
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 8) {
+                        let sortedWorkouts = day.workouts.sorted {
+                            $0.workoutName.localizedCaseInsensitiveCompare($1.workoutName) == .orderedAscending
+                        }
+
+                        ForEach(sortedWorkouts) { workout in
+                            workoutTabButton(for: workout, in: day)
+                        }
                     }
+                    .padding(.vertical, 4)
                 }
-                .padding(.vertical, 4)
-            }
 
-            // Selected workout content
-            if selectedDayKey == dKey,
-               let wKey = selectedWorkoutKey,
-               let workout = day.workouts.first(where: { workoutKey(for: $0, day: day) == wKey }) {
-                workoutContent(for: workout)
-            } else if selectedDayKey == dKey {
-                Text("No workout selected.")
-                    .font(.caption).italic()
-                    .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.7))
-                    .frame(maxWidth: .infinity, minHeight: 50, alignment: .center)
+                // Selected workout content
+                if selectedDayKey == dKey,
+                   let wKey = selectedWorkoutKey,
+                   let workout = day.workouts.first(where: { workoutKey(for: $0, day: day) == wKey }) {
+                    workoutContent(for: workout)
+                } else if selectedDayKey == dKey {
+                    Text("No workout selected.")
+                        .font(.caption).italic()
+                        .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.7))
+                        .frame(maxWidth: .infinity, minHeight: 50, alignment: .center)
+                }
             }
         }
         .frame(maxWidth: .infinity)
