@@ -642,183 +642,189 @@ struct ExerciseListView: View {
     
     // MARK: - Presented Content
     @ViewBuilder
-        private func presentedItemView(for item: PresentedItem) -> some View {
-            // Callback за затваряне на редактори (запазване + опресняване)
-            let onDismissItemView: (ExerciseItem?) -> Void = { savedItem in
-                onDismissSearch()
-                withAnimation(.easeInOut) {
-                    presentedItem = nil
-                    isAddButtonVisible = true
-                    self.navBarIsHiden = false
-                    if SIsSearching {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                            onActivateSearch()
-                            globalSearchText = SglobalSearchText
-                            SIsSearching = false
-                        }
-                    } else {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                            onDismissSearch()
-                            globalSearchText = ""
-                        }
+    private func presentedItemView(for item: PresentedItem) -> some View {
+        // Callback за затваряне на редактори (запазване + опресняване)
+        let onDismissItemView: (ExerciseItem?) -> Void = { savedItem in
+            onDismissSearch()
+            withAnimation(.easeInOut) {
+                presentedItem = nil
+                isAddButtonVisible = true
+                self.navBarIsHiden = false
+                if SIsSearching {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                        onActivateSearch()
+                        globalSearchText = SglobalSearchText
+                        SIsSearching = false
+                    }
+                } else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                        onDismissSearch()
+                        globalSearchText = ""
                     }
                 }
-                if savedItem != nil {
-                    vm.resetAndLoad()
-                }
             }
-            
-            let onWorkoutEditorDismiss: (ExerciseItem?) -> Void = { savedItem in
-                onDismissSearch()
-                withAnimation(.easeInOut) {
-                    presentedItem = nil
-                    isAddButtonVisible = true
-                    self.navBarIsHiden = false
-                    if SIsSearching {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                            onActivateSearch()
-                            globalSearchText = SglobalSearchText
-                            SIsSearching = false
-                        }
-                    } else {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                            onDismissSearch()
-                            globalSearchText = ""
-                        }
+            if savedItem != nil {
+                vm.resetAndLoad()
+            }
+        }
+        
+        let onWorkoutEditorDismiss: (ExerciseItem?) -> Void = { savedItem in
+            onDismissSearch()
+            withAnimation(.easeInOut) {
+                presentedItem = nil
+                isAddButtonVisible = true
+                self.navBarIsHiden = false
+                if SIsSearching {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                        onActivateSearch()
+                        globalSearchText = SglobalSearchText
+                        SIsSearching = false
+                    }
+                } else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                        onDismissSearch()
+                        globalSearchText = ""
                     }
                 }
-                if savedItem != nil {
-                    vm.resetAndLoad()
-                }
             }
-            
-            let onPlanEditorDismiss: (TrainingPlan?) -> Void = { savedPlan in
-                onDismissSearch()
-                withAnimation(.easeInOut(duration: 0.3)) {
-                    self.presentedItem = nil
-                    self.isAddButtonVisible = true
-                    self.navBarIsHiden = false
-                    if SIsSearching {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                            onActivateSearch()
-                            globalSearchText = SglobalSearchText
-                            SIsSearching = false
-                        }
-                    } else {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                            onDismissSearch()
-                            globalSearchText = ""
-                        }
+            if savedItem != nil {
+                vm.resetAndLoad()
+            }
+        }
+        
+        let onPlanEditorDismiss: (TrainingPlan?) -> Void = { savedPlan in
+            onDismissSearch()
+            withAnimation(.easeInOut(duration: 0.3)) {
+                self.presentedItem = nil
+                self.isAddButtonVisible = true
+                self.navBarIsHiden = false
+                if SIsSearching {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                        onActivateSearch()
+                        globalSearchText = SglobalSearchText
+                        SIsSearching = false
+                    }
+                } else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                        onDismissSearch()
+                        globalSearchText = ""
                     }
                 }
-                trainingPlanVM.fetchPlans()
             }
-            
-            // Simple Dismiss: Само затваря прозореца (за детайли)
-            let onSimpleDismiss: () -> Void = {
-                onDismissSearch()
-                withAnimation(.easeInOut(duration: 0.3)) {
-                    self.presentedItem = nil
-                    self.isAddButtonVisible = true
-                    self.navBarIsHiden = false
-                    if SIsSearching {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                            onActivateSearch()
-                            globalSearchText = SglobalSearchText
-                            SIsSearching = false
-                        }
-                    } else {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                            onDismissSearch()
-                            globalSearchText = ""
-                        }
+            trainingPlanVM.fetchPlans()
+        }
+        
+        // Simple Dismiss: Само затваря прозореца (за детайли)
+        let onSimpleDismiss: () -> Void = {
+            onDismissSearch()
+            withAnimation(.easeInOut(duration: 0.3)) {
+                self.presentedItem = nil
+                self.isAddButtonVisible = true
+                self.navBarIsHiden = false
+                if SIsSearching {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                        onActivateSearch()
+                        globalSearchText = SglobalSearchText
+                        SIsSearching = false
+                    }
+                } else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                        onDismissSearch()
+                        globalSearchText = ""
                     }
                 }
-                // Опресняваме плановете при затваряне на детайл, в случай че нещо се е променило
-                trainingPlanVM.fetchPlans()
             }
+            // Опресняваме плановете при затваряне на детайл, в случай че нещо се е променило
+            trainingPlanVM.fetchPlans()
+        }
+        
+        switch item {
+        case .new:
+            ExerciseItemEditorView(profile: profile, onDismiss: onDismissItemView)
+        case .edit(let exerciseItem):
+            ExerciseItemEditorView(item: .edit(exerciseItem), profile: profile, onDismiss: onDismissItemView)
+        case .newWorkout:
+            WorkoutEditorView(
+                profile: profile,
+                globalSearchText: $globalSearchText,
+                isSearchFieldFocused: $isSearchFieldFocused,
+                onDismissSearch: onDismissSearch,
+                onDismiss: onWorkoutEditorDismiss
+            )
+        case .editWorkout(let workout):
+            WorkoutEditorView(
+                itemToEdit: workout,
+                profile: profile,
+                globalSearchText: $globalSearchText,
+                isSearchFieldFocused: $isSearchFieldFocused,
+                onDismissSearch: onDismissSearch,
+                onDismiss: onWorkoutEditorDismiss
+            )
+        case .detail(let exerciseItem):
+            ExerciseItemDetailView(
+                item: exerciseItem,
+                profile: self.profile,
+                onDismiss: { onDismissItemView(nil) }
+            )
+        case .newPlan:
+            TrainingPlanEditorView(
+                profile: profile!,
+                globalSearchText: $globalSearchText,
+                isSearchFieldFocused: self.$isSearchFieldFocused,
+                onDismiss: onPlanEditorDismiss,
+                navBarIsHiden: $navBarIsHiden,
+                onDismissSearch: onDismissSearch
+            )
+        case .editPlan(let plan):
+            TrainingPlanEditorView(
+                profile: profile!,
+                planToEdit: plan,
+                globalSearchText: $globalSearchText,
+                isSearchFieldFocused: self.$isSearchFieldFocused,
+                onDismiss: onPlanEditorDismiss,
+                navBarIsHiden: $navBarIsHiden,
+                onDismissSearch: onDismissSearch
+            )
+        case .detailPlan(let plan):
+            TrainingPlanDetailView(
+                plan: plan,
+                profile: profile!,
+                onDismiss: onSimpleDismiss,
+                navBarIsHiden: $navBarIsHiden
+            )
             
-            switch item {
-            case .new:
-                ExerciseItemEditorView(profile: profile, onDismiss: onDismissItemView)
-            case .edit(let exerciseItem):
-                ExerciseItemEditorView(item: .edit(exerciseItem), profile: profile, onDismiss: onDismissItemView)
-            case .newWorkout:
-                WorkoutEditorView(
-                    profile: profile,
-                    globalSearchText: $globalSearchText,
-                    isSearchFieldFocused: $isSearchFieldFocused,
-                    onDismissSearch: onDismissSearch,
-                    onDismiss: onWorkoutEditorDismiss
-                )
-            case .editWorkout(let workout):
-                WorkoutEditorView(
-                    itemToEdit: workout,
-                    profile: profile,
-                    globalSearchText: $globalSearchText,
-                    isSearchFieldFocused: $isSearchFieldFocused,
-                    onDismissSearch: onDismissSearch,
-                    onDismiss: onWorkoutEditorDismiss
-                )
-            case .detail(let exerciseItem):
-                ExerciseItemDetailView(
-                    item: exerciseItem,
-                    profile: self.profile,
-                    onDismiss: { onDismissItemView(nil) }
-                )
-            case .newPlan:
-                TrainingPlanEditorView(
-                    profile: profile!,
-                    globalSearchText: $globalSearchText,
-                    isSearchFieldFocused: self.$isSearchFieldFocused,
-                    onDismiss: onPlanEditorDismiss,
-                    navBarIsHiden: $navBarIsHiden,
-                    onDismissSearch: onDismissSearch
-                )
-            case .editPlan(let plan):
-                TrainingPlanEditorView(
-                    profile: profile!,
-                    planToEdit: plan,
-                    globalSearchText: $globalSearchText,
-                    isSearchFieldFocused: self.$isSearchFieldFocused,
-                    onDismiss: onPlanEditorDismiss,
-                    navBarIsHiden: $navBarIsHiden,
-                    onDismissSearch: onDismissSearch
-                )
-            case .detailPlan(let plan):
-                TrainingPlanDetailView(
-                    plan: plan,
-                    profile: profile!,
-                    onDismiss: onSimpleDismiss,
-                    navBarIsHiden: $navBarIsHiden
-                )
-                
-                // ✅ НОВИЯТ CASE: Детайли за темплейт
-            case .detailTemplate(let planWrapper):
-                TemplatePlanDetailView(
-                    planWrapper: planWrapper,
-                    profile: profile!,
-                    onDismiss: onSimpleDismiss,
-                    // ✅ ПРОМЯНА: onGet вече приема selectedWorkoutName
-                    onGet: { selectedWorkoutName in
-                        onSimpleDismiss()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-                            withAnimation {
-                                // Подаваме избраното име към VM
-                                trainingPlanVM.copyTemplateToMyPlans(
-                                    planWrapper,
-                                    targetWorkoutName: selectedWorkoutName
-                                )
+            // ✅ НОВИЯТ CASE: Детайли за темплейт
+        case .detailTemplate(let planWrapper):
+            TemplatePlanDetailView(
+                planWrapper: planWrapper,
+                profile: profile!,
+                onDismiss: onSimpleDismiss,
+                // ✅ ПРОМЯНА: onGet вече приема selectedWorkoutName
+                onGet: { selectedWorkoutName in
+                    // 1. Затваряме текущия прозорец (детайлите)
+                    onSimpleDismiss()
+                    
+                    // 2. Изчакваме малко анимацията да приключи и изпълняваме копирането + отварянето
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        withAnimation {
+                            // Копираме плана и взимаме резултата
+                            if let newPlan = trainingPlanVM.copyTemplateToMyPlans(
+                                planWrapper,
+                                targetWorkoutName: selectedWorkoutName
+                            ) {
+                                // 3. Отваряме редактора с новия план
+                                present(item: .editPlan(newPlan))
                             }
                         }
                     }
-                )
-                .onAppear {
-                    navBarIsHiden = true
-                    isAddButtonVisible = false
                 }
+            )
+            .onAppear {
+                navBarIsHiden = true
+                isAddButtonVisible = false
             }
         }
+    }
     
     // MARK: - Helpers
     private var headerTopPadding: CGFloat { -safeAreaInsets.top + 10 }
