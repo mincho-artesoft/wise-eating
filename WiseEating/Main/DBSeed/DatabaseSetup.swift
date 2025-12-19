@@ -59,14 +59,10 @@ struct DatabaseSetup {
             )
             print("🚀 SwiftData Path: \(appSupportURL.path())")
             
-            // ---------------------------------------------------------------------
-            // ✅ КОРЕКЦИЯТА Е ТУК: Добавяме име ("Default") и ("Templates")
-            // ---------------------------------------------------------------------
-            
             // Конфигурация 1: Основна база
             let mainStoreURL = appSupportURL.appendingPathComponent("default.store")
             let mainConfig = ModelConfiguration(
-                "Default", // <--- ВАЖНО: Име на конфигурацията
+                "Default",
                 schema: mainSchema,
                 url: mainStoreURL
             )
@@ -74,38 +70,79 @@ struct DatabaseSetup {
             // Конфигурация 2: Темплейти
             let templateStoreURL = appSupportURL.appendingPathComponent("templates.store")
             let templateConfig = ModelConfiguration(
-                "Templates", // <--- ВАЖНО: Име на конфигурацията
+                "Templates",
                 schema: templateSchema,
                 url: templateStoreURL
             )
             
-            // --- Логика за копиране на Pre-seeded база (само за main store) ---
+            // --- Логика за копиране на Pre-seeded база ---
             let usePreSeededDatabaseCopy = true
+            
+            // Използваме ключ, за да копираме само веднъж при първо стартиране на тази версия
             let didCopyDatabaseKey = "didCopyPreSeededDatabase_v1"
 
             if usePreSeededDatabaseCopy && !UserDefaults.standard.bool(forKey: didCopyDatabaseKey) {
-                print("🏁 First launch with pre-seed logic. Preparing to copy database…")
+                print("🏁 First launch with pre-seed logic. Preparing to copy databases…")
+                let fm = FileManager.default
 
-                // Ensure a clean destination for main store
-                let dir = mainStoreURL.deletingLastPathComponent()
-                let base = mainStoreURL.lastPathComponent
-                let walURL = dir.appendingPathComponent(base + "-wal")
-                let shmURL = dir.appendingPathComponent(base + "-shm")
-                for fileURL in [mainStoreURL, walURL, shmURL] {
-                    if FileManager.default.fileExists(atPath: fileURL.path) {
-                        try? FileManager.default.removeItem(at: fileURL)
+                // =====================================================
+                // 1. MAIN STORE COPY (Архивирана или обикновена)
+                // =====================================================
+                // Почистване на дестинацията за Main Store
+                let mainDir = mainStoreURL.deletingLastPathComponent()
+                let mainBase = mainStoreURL.lastPathComponent
+                let mainWal = mainDir.appendingPathComponent(mainBase + "-wal")
+                let mainShm = mainDir.appendingPathComponent(mainBase + "-shm")
+                
+                for fileURL in [mainStoreURL, mainWal, mainShm] {
+                    if fm.fileExists(atPath: fileURL.path) {
+                        try? fm.removeItem(at: fileURL)
                     }
                 }
 
                 do {
+                    // PreseedLoader се грижи за default.store (обикновено .gz)
                     try PreseedLoader.preparePreseededStore(to: mainStoreURL)
-                    print("✅ Successfully prepared pre-seeded database.")
-                    UserDefaults.standard.set(true, forKey: didCopyDatabaseKey)
+                    print("✅ Successfully prepared pre-seeded MAIN database.")
                 } catch {
-                    print("❌ Failed to prepare pre-seeded database: \(error). Using empty DB.")
+                    print("❌ Failed to prepare pre-seeded MAIN database: \(error). Using empty DB.")
                 }
+                
+                // =====================================================
+                // 2. TEMPLATES STORE COPY (Директно копиране)
+                // =====================================================
+                // Търсим файл "templates.store" в Bundle-а на приложението
+                if let bundleTemplateURL = Bundle.main.url(forResource: "templates", withExtension: "store") {
+                    print("📄 Found pre-seeded 'templates.store' in Bundle. Copying...")
+                    
+                    // Почистване на дестинацията за Templates Store
+                    // Важно е да изтрием и WAL/SHM файловете, за да не се получи корупция
+                    let tBase = templateStoreURL.lastPathComponent
+                    let tWal = appSupportURL.appendingPathComponent(tBase + "-wal")
+                    let tShm = appSupportURL.appendingPathComponent(tBase + "-shm")
+                    
+                    for fileURL in [templateStoreURL, tWal, tShm] {
+                        if fm.fileExists(atPath: fileURL.path) {
+                            try? fm.removeItem(at: fileURL)
+                        }
+                    }
+                    
+                    do {
+                        // Директно копиране
+                        try fm.copyItem(at: bundleTemplateURL, to: templateStoreURL)
+                        print("✅ Successfully copied pre-seeded TEMPLATES database.")
+                    } catch {
+                        print("❌ Failed to copy templates.store: \(error)")
+                    }
+                } else {
+                    print("⚠️ 'templates.store' not found in Bundle resources. Skipping templates seed.")
+                }
+
+                // Маркираме, че сме приключили с първоначалното зареждане
+                UserDefaults.standard.set(true, forKey: didCopyDatabaseKey)
+                
             } else if usePreSeededDatabaseCopy {
-                print("🏁 Database already pre-seeded. Skipping copy.")
+                print("🏁 Database already pre-seeded in a previous launch. Skipping copy.")
             }
             
             // Създаваме контейнера с двете именувани конфигурации

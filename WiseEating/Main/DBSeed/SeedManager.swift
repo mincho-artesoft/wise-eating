@@ -248,7 +248,8 @@ enum SeedManager {
     // MARK: - Validation Logic
         private static func validateExercisesIntegrity(context ctx: ModelContext) {
             print("🔍 Validating Template Exercises against Main Database...")
-
+            let planCount = (try? ctx.fetchCount(FetchDescriptor<TemplatePlan>())) ?? 0
+              print("📊 [SeedManager] Total Template Plans in Database: \(planCount)")
             // 1. Извличаме всички реални упражнения (от Main Database)
             // Оптимизация: Взимаме само имената
             var exerciseDescriptor = FetchDescriptor<ExerciseItem>()
