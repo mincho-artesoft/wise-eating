@@ -5,17 +5,18 @@ import SwiftData
 public final class TrainingPlanDay: Identifiable {
     @Attribute(.unique) public var id: UUID
     public var dayIndex: Int
-    public var isRestDay: Bool // <-- НОВО СВОЙСТВО
+    public var isRestDay: Bool
 
     @Relationship(deleteRule: .cascade, inverse: \TrainingPlanWorkout.day)
     public var workouts: [TrainingPlanWorkout] = []
 
+    // ✅ оставяме to-one като нормален var (без @Relationship)
     public var plan: TrainingPlan?
 
-    // Актуализиран инициализатор
-    public init(dayIndex: Int, isRestDay: Bool = false) {
+    public init(dayIndex: Int, isRestDay: Bool = false, plan: TrainingPlan? = nil) {
         self.id = UUID()
         self.dayIndex = dayIndex
         self.isRestDay = isRestDay
+        self.plan = plan
     }
 }
