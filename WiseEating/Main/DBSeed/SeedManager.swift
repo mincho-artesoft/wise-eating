@@ -11,7 +11,6 @@ enum SeedManager {
         let ctx = GlobalState.modelContext!
         ctx.autosaveEnabled = false
 
-        // 1. Извикване на методите за зареждане
         await seedBarcodesIfNeeded(context: ctx)
         await seedReferenceVitaminsIfNeeded(context: ctx)
         await seedReferenceMineralsIfNeeded(context: ctx)
@@ -19,28 +18,24 @@ enum SeedManager {
         await seedFoodsIfNeeded(context: ctx)
         await seedExercisesIfNeeded(context: ctx)
         await seedTrainingPlansIfNeeded(context: ctx)
-        // 2. Финален запис на всички данни
+
         await MainActor.run {
-                   validateExercisesIntegrity(context: ctx)
-               }
+            validateExercisesIntegrity(context: ctx)
+        }
+
         do {
             if ctx.hasChanges {
                 try ctx.save()
                 print("💾 Final save of all seeded data successful.")
             }
-            
-            // 3. ⚠️ ГЕНЕРИРАНЕ НА ИНДЕКСА
-            // След като всичко е записано, форсираме изграждането на search cache.
-            // Това ще създаде SearchIndexCache в базата.
+
             try SearchIndexStore.shared.rebuildIndexIfNeeded(context: ctx)
-            
+
         } catch {
             print("❌ Final save or indexing after seeding failed: \(error)")
         }
 
-        // ✅ Върни autosave за нормалната работа на UI след сеенето
         ctx.autosaveEnabled = true
-
         print("✅ Seeding process completed.")
     }
 
@@ -57,7 +52,7 @@ enum SeedManager {
         guard let vocabURL = Bundle.main.url(forResource: "vocabulary", withExtension: "json") else {
             assertionFailure("vocabulary.json not found"); return
         }
-        
+
         do {
             let vocabData = try Data(contentsOf: vocabURL)
             let decodedVocab = try JSONDecoder().decode([String: String].self, from: vocabData)
@@ -81,7 +76,7 @@ enum SeedManager {
         do {
             let bucketsData = try Data(contentsOf: bucketsURL)
             let decodedBuckets = try JSONDecoder().decode([String: String].self, from: bucketsData)
-            
+
             for (key, data) in decodedBuckets {
                 if let keyAsInt = Int64(key) {
                     let bucket = ProductBucket(bucketKey: keyAsInt, compressedData: data)
@@ -93,7 +88,6 @@ enum SeedManager {
             print("   ❌ Product bucket seeding failed: \(error)")
         }
     }
-
 
     // MARK: – Foods
     private static func seedFoodsIfNeeded(context ctx: ModelContext) async {
@@ -137,7 +131,7 @@ enum SeedManager {
             print("   ❌ Food seeding failed: \(error)")
         }
     }
-    
+
     // MARK: – Exercises
     private static func seedExercisesIfNeeded(context ctx: ModelContext) async {
         print("-> Checking for Exercises...")
@@ -206,20 +200,20 @@ enum SeedManager {
         }
     }
 
-    // В SeedManager.swift
+    // MARK: – Training Plans (Templates)
     private static func seedTrainingPlansIfNeeded(context ctx: ModelContext) async {
-        // Проверка дали има шаблони
-        let descriptor = FetchDescriptor<TrainingPlan>(predicate: #Predicate { $0.profile == nil })
-        if (try? ctx.fetchCount(descriptor)) ?? 0 > 0 {
-            return // Вече са импортирани
+        // ✅ FIX: проверяваме TemplatePlan (а не TrainingPlan)
+        let desc = FetchDescriptor<TemplatePlan>()
+        if ((try? ctx.fetchCount(desc)) ?? 0) > 0 {
+            return
         }
-        
+
         print("   Seeding Training Plans from workouts.json...")
         guard let url = Bundle.main.url(forResource: "workouts", withExtension: "json") else {
             print("   ⚠️ workouts.json not found.")
             return
         }
-        
+
         do {
             let data = try Data(contentsOf: url)
             try await TrainingPlanImporter.shared.importTemplates(jsonData: data, context: ctx)
@@ -227,7 +221,6 @@ enum SeedManager {
             print("   ❌ Failed to import training plans: \(error)")
         }
     }
-    
 
     // MARK: – Helpers
     private static func databaseIsEmpty<T: PersistentModel>(
@@ -244,56 +237,50 @@ enum SeedManager {
         default:             return value
         }
     }
-    
+
     // MARK: - Validation Logic
-        private static func validateExercisesIntegrity(context ctx: ModelContext) {
-            print("🔍 Validating Template Exercises against Main Database...")
-            let planCount = (try? ctx.fetchCount(FetchDescriptor<TemplatePlan>())) ?? 0
-              print("📊 [SeedManager] Total Template Plans in Database: \(planCount)")
-            // 1. Извличаме всички реални упражнения (от Main Database)
-            // Оптимизация: Взимаме само имената
-            var exerciseDescriptor = FetchDescriptor<ExerciseItem>()
-            exerciseDescriptor.propertiesToFetch = [\.name]
+    private static func validateExercisesIntegrity(context ctx: ModelContext) {
+        print("🔍 Validating Template Exercises against Main Database...")
+        let planCount = (try? ctx.fetchCount(FetchDescriptor<TemplatePlan>())) ?? 0
+        print("📊 [SeedManager] Total Template Plans in Database: \(planCount)")
 
-            guard let allExercises = try? ctx.fetch(exerciseDescriptor) else {
-                print("   ❌ Failed to fetch ExerciseItems for validation.")
-                return
-            }
+        var exerciseDescriptor = FetchDescriptor<ExerciseItem>()
+        exerciseDescriptor.propertiesToFetch = [\.name]
 
-            // Нормализираме имената (lowercase + trim), за да избегнем фалшиви грешки от главни букви
-            let existingNames = Set(allExercises.map { $0.name.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() })
+        guard let allExercises = try? ctx.fetch(exerciseDescriptor) else {
+            print("   ❌ Failed to fetch ExerciseItems for validation.")
+            return
+        }
 
-            // 2. Извличаме всички упражнения от Темплейтите
-            var templateDescriptor = FetchDescriptor<TemplateExercise>()
-            templateDescriptor.propertiesToFetch = [\.exerciseName]
+        let existingNames = Set(allExercises.map { $0.name.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() })
 
-            guard let allTemplateExercises = try? ctx.fetch(templateDescriptor) else {
-                print("   ❌ Failed to fetch TemplateExercises for validation.")
-                return
-            }
+        var templateDescriptor = FetchDescriptor<TemplateExercise>()
+        templateDescriptor.propertiesToFetch = [\.exerciseName]
 
-            // 3. Сравняваме
-            var missingNames = Set<String>()
+        guard let allTemplateExercises = try? ctx.fetch(templateDescriptor) else {
+            print("   ❌ Failed to fetch TemplateExercises for validation.")
+            return
+        }
 
-            for tex in allTemplateExercises {
-                let targetName = tex.exerciseName.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-                
-                if !existingNames.contains(targetName) {
-                    missingNames.insert(tex.exerciseName)
-                }
-            }
+        var missingNames = Set<String>()
 
-            // 4. Докладваме резултата
-            if missingNames.isEmpty {
-                print("   ✅ INTEGRITY CHECK PASSED: All template exercises exist in the main database.")
-            } else {
-                print("   ⚠️ INTEGRITY WARNING: Found \(missingNames.count) exercises in Templates that are MISSING from the main DB:")
-                print("   ---------------------------------------------------")
-                for name in missingNames.sorted() {
-                    print("      ❌ \"\(name)\"")
-                }
-                print("   ---------------------------------------------------")
-                print("   👉 Action: Add these to 'sports.json' or fix the spelling in 'workouts.json'.")
+        for tex in allTemplateExercises {
+            let targetName = tex.exerciseName.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+            if !existingNames.contains(targetName) {
+                missingNames.insert(tex.exerciseName)
             }
         }
+
+        if missingNames.isEmpty {
+            print("   ✅ INTEGRITY CHECK PASSED: All template exercises exist in the main database.")
+        } else {
+            print("   ⚠️ INTEGRITY WARNING: Found \(missingNames.count) exercises in Templates that are MISSING from the main DB:")
+            print("   ---------------------------------------------------")
+            for name in missingNames.sorted() {
+                print("      ❌ \"\(name)\"")
+            }
+            print("   ---------------------------------------------------")
+            print("   👉 Action: Add these to 'sports.json' or fix the spelling in 'workouts.json'.")
+        }
+    }
 }

@@ -5557,7 +5557,7 @@
       {
         "name": "HM Plank",
         "sets": 3,
-        "reps": 10,
+        "reps": 3,
         "duration": 9,
         "is_time_based": true,
         "to_failure": false,
@@ -5720,7 +5720,7 @@
       {
         "name": "HM Plank",
         "sets": 3,
-        "reps": 10,
+        "reps": 3,
         "duration": 9,
         "is_time_based": true,
         "to_failure": false,
@@ -5883,7 +5883,7 @@
       {
         "name": "HM Plank",
         "sets": 3,
-        "reps": 10,
+        "reps": 3,
         "duration": 9,
         "is_time_based": true,
         "to_failure": false,
@@ -8414,7 +8414,7 @@
       {
         "name": "Barbell Deadlift",
         "sets": 4,
-        "reps": 10,
+        "reps": 3,
         "duration": 12,
         "is_time_based": false,
         "to_failure": false,
@@ -8473,7 +8473,7 @@
       {
         "name": "Bench press",
         "sets": 4,
-        "reps": 10,
+        "reps": 3,
         "duration": 12,
         "is_time_based": false,
         "to_failure": false,
@@ -8532,7 +8532,7 @@
       {
         "name": "Barbell Squat",
         "sets": 4,
-        "reps": 10,
+        "reps": 3,
         "duration": 12,
         "is_time_based": false,
         "to_failure": false,
@@ -10078,7 +10078,7 @@
       {
         "name": "Single-arm inverted row",
         "sets": 4,
-        "reps": 10,
+        "reps": 2,
         "duration": 12,
         "is_time_based": false,
         "to_failure": false,
@@ -10087,7 +10087,7 @@
       {
         "name": "Running lunge",
         "sets": 3,
-        "reps": 10,
+        "reps": 4,
         "duration": 9,
         "is_time_based": false,
         "to_failure": false,
@@ -10677,7 +10677,7 @@
       {
         "name": "Plank Walk",
         "sets": 3,
-        "reps": 10,
+        "reps": 1,
         "duration": 9,
         "is_time_based": true,
         "to_failure": false,
@@ -18484,7 +18484,7 @@
       {
         "name": "Jumping rope",
         "sets": 20,
-        "reps": 10,
+        "reps": 1,
         "duration": 60,
         "is_time_based": true,
         "to_failure": false,
@@ -37401,7 +37401,7 @@
       {
         "name": "Leg Press",
         "sets": 3,
-        "reps": 10,
+        "reps": 4,
         "duration": 9,
         "is_time_based": false,
         "to_failure": false,
@@ -37410,7 +37410,7 @@
       {
         "name": "AM Ab Machine",
         "sets": 3,
-        "reps": 10,
+        "reps": 4,
         "duration": 9,
         "is_time_based": false,
         "to_failure": false,
@@ -37419,7 +37419,7 @@
       {
         "name": "Hyperextensions With No Hyperextension Bench",
         "sets": 3,
-        "reps": 10,
+        "reps": 4,
         "duration": 9,
         "is_time_based": false,
         "to_failure": false,
@@ -37428,7 +37428,7 @@
       {
         "name": "Lat pull-down",
         "sets": 3,
-        "reps": 10,
+        "reps": 4,
         "duration": 9,
         "is_time_based": false,
         "to_failure": false,
@@ -39446,7 +39446,7 @@
       {
         "name": "Weighted pull-up",
         "sets": 2,
-        "reps": 10,
+        "reps": 4,
         "duration": 6,
         "is_time_based": false,
         "to_failure": false,
@@ -39455,7 +39455,7 @@
       {
         "name": "Bent Over Barbell Row",
         "sets": 4,
-        "reps": 10,
+        "reps": 4,
         "duration": 12,
         "is_time_based": false,
         "to_failure": false,
@@ -39464,7 +39464,7 @@
       {
         "name": "Band bent-over row",
         "sets": 2,
-        "reps": 10,
+        "reps": 4,
         "duration": 6,
         "is_time_based": false,
         "to_failure": false,
@@ -39473,7 +39473,7 @@
       {
         "name": "Military press",
         "sets": 4,
-        "reps": 10,
+        "reps": 4,
         "duration": 12,
         "is_time_based": false,
         "to_failure": false,
@@ -39482,7 +39482,7 @@
       {
         "name": "Incline dumbbell bench press",
         "sets": 4,
-        "reps": 10,
+        "reps": 4,
         "duration": 12,
         "is_time_based": false,
         "to_failure": false,
@@ -39491,7 +39491,7 @@
       {
         "name": "Weighted sit-up",
         "sets": 2,
-        "reps": 10,
+        "reps": 4,
         "duration": 6,
         "is_time_based": false,
         "to_failure": false,
@@ -39500,7 +39500,7 @@
       {
         "name": "EZ-Bar Skullcrusher",
         "sets": 2,
-        "reps": 10,
+        "reps": 4,
         "duration": 6,
         "is_time_based": false,
         "to_failure": false,
@@ -39509,7 +39509,7 @@
       {
         "name": "EZ-Bar Curl",
         "sets": 2,
-        "reps": 10,
+        "reps": 4,
         "duration": 6,
         "is_time_based": false,
         "to_failure": false,
@@ -39523,7 +39523,7 @@
       {
         "name": "Barbell Squat",
         "sets": 4,
-        "reps": 10,
+        "reps": 4,
         "duration": 12,
         "is_time_based": false,
         "to_failure": false,
@@ -39532,7 +39532,7 @@
       {
         "name": "Hack Squat",
         "sets": 2,
-        "reps": 10,
+        "reps": 4,
         "duration": 6,
         "is_time_based": false,
         "to_failure": false,
@@ -39541,7 +39541,7 @@
       {
         "name": "Barbell Deadlift",
         "sets": 4,
-        "reps": 10,
+        "reps": 4,
         "duration": 12,
         "is_time_based": false,
         "to_failure": false,
@@ -39550,7 +39550,7 @@
       {
         "name": "Lying Leg Curls",
         "sets": 2,
-        "reps": 10,
+        "reps": 4,
         "duration": 6,
         "is_time_based": false,
         "to_failure": false,
@@ -39559,7 +39559,7 @@
       {
         "name": "Smith Machine Calf Raise",
         "sets": 4,
-        "reps": 10,
+        "reps": 4,
         "duration": 12,
         "is_time_based": false,
         "to_failure": false,
@@ -39568,7 +39568,7 @@
       {
         "name": "Seated Calf Raise",
         "sets": 2,
-        "reps": 10,
+        "reps": 4,
         "duration": 6,
         "is_time_based": false,
         "to_failure": false,
@@ -42603,7 +42603,7 @@
       {
         "name": "Total Fitness Dumbbell Farmer's Carry",
         "sets": 3,
-        "reps": 10,
+        "reps": 3,
         "duration": 9,
         "is_time_based": false,
         "to_failure": false,
@@ -44836,7 +44836,7 @@
       {
         "name": "Band front squat",
         "sets": 6,
-        "reps": 10,
+        "reps": 3,
         "duration": 18,
         "is_time_based": false,
         "to_failure": false,
@@ -44845,7 +44845,7 @@
       {
         "name": "Barbell Squat",
         "sets": 6,
-        "reps": 10,
+        "reps": 3,
         "duration": 18,
         "is_time_based": false,
         "to_failure": false,
@@ -44854,7 +44854,7 @@
       {
         "name": "Leg Press",
         "sets": 4,
-        "reps": 10,
+        "reps": 4,
         "duration": 12,
         "is_time_based": false,
         "to_failure": false,
@@ -44886,7 +44886,7 @@
       {
         "name": "Military press",
         "sets": 6,
-        "reps": 10,
+        "reps": 3,
         "duration": 18,
         "is_time_based": false,
         "to_failure": false,
@@ -44895,7 +44895,7 @@
       {
         "name": "ACFT Low-handle trap bar deadlift",
         "sets": 6,
-        "reps": 10,
+        "reps": 3,
         "duration": 18,
         "is_time_based": false,
         "to_failure": false,
@@ -44904,7 +44904,7 @@
       {
         "name": "Dumbbell lateral raise",
         "sets": 4,
-        "reps": 10,
+        "reps": 4,
         "duration": 12,
         "is_time_based": false,
         "to_failure": false,
@@ -47725,7 +47725,7 @@
       {
         "name": "Speed Box Squat",
         "sets": 3,
-        "reps": 10,
+        "reps": 3,
         "duration": 9,
         "is_time_based": false,
         "to_failure": false,
@@ -47734,7 +47734,7 @@
       {
         "name": "Hex-bar deadlift",
         "sets": 3,
-        "reps": 10,
+        "reps": 3,
         "duration": 9,
         "is_time_based": false,
         "to_failure": false,
@@ -47775,7 +47775,7 @@
       {
         "name": "Dumbbell Bench Press",
         "sets": 3,
-        "reps": 10,
+        "reps": 3,
         "duration": 9,
         "is_time_based": false,
         "to_failure": false,
@@ -47784,7 +47784,7 @@
       {
         "name": "One-Arm Dumbbell Row",
         "sets": 3,
-        "reps": 10,
+        "reps": 3,
         "duration": 9,
         "is_time_based": false,
         "to_failure": false,
@@ -47793,7 +47793,7 @@
       {
         "name": "Military press",
         "sets": 3,
-        "reps": 10,
+        "reps": 3,
         "duration": 9,
         "is_time_based": false,
         "to_failure": false,
@@ -54232,7 +54232,7 @@
       {
         "name": "HM Turkish Get-Up",
         "sets": 1,
-        "reps": 10,
+        "reps": 3,
         "duration": 3,
         "is_time_based": false,
         "to_failure": false,
@@ -59376,7 +59376,7 @@
       {
         "name": "Incline bench press",
         "sets": 4,
-        "reps": 10,
+        "reps": 4,
         "duration": 12,
         "is_time_based": false,
         "to_failure": false,
@@ -59385,7 +59385,7 @@
       {
         "name": "Bench press",
         "sets": 4,
-        "reps": 10,
+        "reps": 4,
         "duration": 12,
         "is_time_based": false,
         "to_failure": false,
@@ -59394,7 +59394,7 @@
       {
         "name": "30 Arms Close-Grip Push-Up",
         "sets": 4,
-        "reps": 10,
+        "reps": 4,
         "duration": 12,
         "is_time_based": false,
         "to_failure": false,
@@ -59403,7 +59403,7 @@
       {
         "name": "Bent Over Barbell Row",
         "sets": 4,
-        "reps": 10,
+        "reps": 4,
         "duration": 12,
         "is_time_based": false,
         "to_failure": false,
@@ -59462,7 +59462,7 @@
       {
         "name": "Barbell Squat",
         "sets": 4,
-        "reps": 10,
+        "reps": 4,
         "duration": 12,
         "is_time_based": false,
         "to_failure": false,
@@ -59480,7 +59480,7 @@
       {
         "name": "Barbell Curl",
         "sets": 4,
-        "reps": 10,
+        "reps": 4,
         "duration": 12,
         "is_time_based": false,
         "to_failure": false,
@@ -59489,7 +59489,7 @@
       {
         "name": "Close-grip bench press",
         "sets": 4,
-        "reps": 10,
+        "reps": 4,
         "duration": 12,
         "is_time_based": false,
         "to_failure": false,
@@ -63635,7 +63635,7 @@
       {
         "name": "Bench press",
         "sets": 6,
-        "reps": 10,
+        "reps": 3,
         "duration": 18,
         "is_time_based": false,
         "to_failure": false,
@@ -63644,7 +63644,7 @@
       {
         "name": "Bent Over Barbell Row",
         "sets": 5,
-        "reps": 10,
+        "reps": 3,
         "duration": 15,
         "is_time_based": false,
         "to_failure": false,
@@ -63694,7 +63694,7 @@
       {
         "name": "Barbell Squat",
         "sets": 6,
-        "reps": 10,
+        "reps": 3,
         "duration": 18,
         "is_time_based": false,
         "to_failure": false,
@@ -70266,7 +70266,7 @@
       {
         "name": "Military press",
         "sets": 4,
-        "reps": 10,
+        "reps": 2,
         "duration": 12,
         "is_time_based": false,
         "to_failure": false,
@@ -70284,7 +70284,7 @@
       {
         "name": "Floor Press",
         "sets": 3,
-        "reps": 10,
+        "reps": 4,
         "duration": 9,
         "is_time_based": false,
         "to_failure": false,
@@ -71205,7 +71205,7 @@
       {
         "name": "Cable Crossover",
         "sets": 15,
-        "reps": 10,
+        "reps": 4,
         "duration": 75,
         "is_time_based": true,
         "to_failure": false,
@@ -71214,7 +71214,7 @@
       {
         "name": "Seated dumbbell lateral raise",
         "sets": 15,
-        "reps": 10,
+        "reps": 4,
         "duration": 75,
         "is_time_based": true,
         "to_failure": false,
@@ -71246,7 +71246,7 @@
       {
         "name": "Leg extension",
         "sets": 15,
-        "reps": 10,
+        "reps": 4,
         "duration": 75,
         "is_time_based": true,
         "to_failure": false,
@@ -71255,7 +71255,7 @@
       {
         "name": "Lying cable front raise",
         "sets": 15,
-        "reps": 10,
+        "reps": 4,
         "duration": 75,
         "is_time_based": true,
         "to_failure": false,
@@ -71264,7 +71264,7 @@
       {
         "name": "Weighted Crunches",
         "sets": 15,
-        "reps": 10,
+        "reps": 4,
         "duration": 75,
         "is_time_based": true,
         "to_failure": false,
@@ -71296,7 +71296,7 @@
       {
         "name": "Machine seated row",
         "sets": 15,
-        "reps": 10,
+        "reps": 4,
         "duration": 75,
         "is_time_based": true,
         "to_failure": false,
@@ -71305,7 +71305,7 @@
       {
         "name": "Machine rear delt fly",
         "sets": 15,
-        "reps": 10,
+        "reps": 4,
         "duration": 75,
         "is_time_based": true,
         "to_failure": false,
@@ -71314,7 +71314,7 @@
       {
         "name": "30 Shoulders Dumbbell Shrug",
         "sets": 15,
-        "reps": 10,
+        "reps": 4,
         "duration": 75,
         "is_time_based": true,
         "to_failure": false,
@@ -71355,7 +71355,7 @@
       {
         "name": "Seated triceps push-down",
         "sets": 12,
-        "reps": 10,
+        "reps": 4,
         "duration": 60,
         "is_time_based": true,
         "to_failure": false,
@@ -71378,7 +71378,7 @@
       {
         "name": "Lying leg curl",
         "sets": 12,
-        "reps": 10,
+        "reps": 4,
         "duration": 60,
         "is_time_based": true,
         "to_failure": false,
@@ -71387,7 +71387,7 @@
       {
         "name": "Seated Calf Raise",
         "sets": 15,
-        "reps": 10,
+        "reps": 4,
         "duration": 75,
         "is_time_based": true,
         "to_failure": false,
@@ -71396,7 +71396,7 @@
       {
         "name": "Calf Press",
         "sets": 15,
-        "reps": 10,
+        "reps": 4,
         "duration": 75,
         "is_time_based": true,
         "to_failure": false,
@@ -75290,7 +75290,7 @@
       {
         "name": "Hex-bar deadlift",
         "sets": 2,
-        "reps": 10,
+        "reps": 4,
         "duration": 6,
         "is_time_based": false,
         "to_failure": false,
@@ -75299,7 +75299,7 @@
       {
         "name": "Single-arm dumbbell floor press",
         "sets": 2,
-        "reps": 10,
+        "reps": 4,
         "duration": 6,
         "is_time_based": false,
         "to_failure": false,
@@ -75308,7 +75308,7 @@
       {
         "name": "Lat pull-down",
         "sets": 2,
-        "reps": 10,
+        "reps": 4,
         "duration": 6,
         "is_time_based": false,
         "to_failure": false,
@@ -76723,7 +76723,7 @@
       {
         "name": "Barbell Deadlift",
         "sets": 5,
-        "reps": 10,
+        "reps": 3,
         "duration": 15,
         "is_time_based": false,
         "to_failure": false,
@@ -76782,7 +76782,7 @@
       {
         "name": "Dumbbell Bench Press",
         "sets": 3,
-        "reps": 10,
+        "reps": 3,
         "duration": 9,
         "is_time_based": false,
         "to_failure": false,
@@ -76918,7 +76918,7 @@
       {
         "name": "UN Barbell Box Squat",
         "sets": 5,
-        "reps": 10,
+        "reps": 3,
         "duration": 15,
         "is_time_based": false,
         "to_failure": false,
@@ -76927,7 +76927,7 @@
       {
         "name": "Barbell Deadlift",
         "sets": 5,
-        "reps": 10,
+        "reps": 4,
         "duration": 15,
         "is_time_based": false,
         "to_failure": false,
@@ -76977,7 +76977,7 @@
       {
         "name": "Bench press",
         "sets": 5,
-        "reps": 10,
+        "reps": 3,
         "duration": 15,
         "is_time_based": false,
         "to_failure": false,
@@ -76986,7 +76986,7 @@
       {
         "name": "Floor Press",
         "sets": 5,
-        "reps": 10,
+        "reps": 4,
         "duration": 15,
         "is_time_based": false,
         "to_failure": false,
@@ -77086,7 +77086,7 @@
       {
         "name": "Bench press",
         "sets": 8,
-        "reps": 10,
+        "reps": 3,
         "duration": 24,
         "is_time_based": false,
         "to_failure": false,
@@ -86507,7 +86507,7 @@
       {
         "name": "TBS Incline Dumbbell Curl",
         "sets": 5,
-        "reps": 10,
+        "reps": 4,
         "duration": 15,
         "is_time_based": true,
         "to_failure": false,
