@@ -9,14 +9,17 @@ struct TemplatePlanDetailView: View {
     let planWrapper: TrainingPlanListVM.DisplayPlan
     let profile: Profile
     let onDismiss: () -> Void
-    let onGet: () -> Void
+    
+    // ✅ ПРОМЯНА: onGet приема String? (името на тренировката, или nil за оригиналното)
+    let onGet: (String?) -> Void
 
-    // MARK: - State (selection)
+    // MARK: - State
     @State private var selectedDayKey: String? = nil
     @State private var selectedWorkoutKey: String? = nil
-
-    // MARK: - Overlay (View Exercise Details like TrainingPlanDetailView)
     @State private var exerciseItemToView: ExerciseItem? = nil
+    
+    // ✅ НОВО: Състояние за показване на диалога
+    @State private var showTrainingSelectionDialog = false
 
     // MARK: - Real object
     private var templatePlan: TemplatePlan? {
@@ -72,10 +75,9 @@ struct TemplatePlanDetailView: View {
                     )
                 )
             }
-            // like TrainingPlanDetailView
             .blur(radius: exerciseItemToView != nil ? 1.5 : 0)
 
-            // Overlay ExerciseItemDetailView (1:1)
+            // Overlay ExerciseItemDetailView
             if let exerciseToView = exerciseItemToView {
                 ExerciseItemDetailView(
                     item: exerciseToView,
@@ -92,7 +94,6 @@ struct TemplatePlanDetailView: View {
             }
         }
         .onAppear {
-            // Auto select first day/workout like TrainingPlanDetailView
             if selectedDayKey == nil, let firstDay = sortedDays.first {
                 selectedDayKey = dayKey(for: firstDay)
                 if let firstWorkout = firstDay.workouts.first {
@@ -100,9 +101,22 @@ struct TemplatePlanDetailView: View {
                 }
             }
         }
+        // ✅ НОВО: Диалог за избор на име на тренировка
+        .confirmationDialog("Import Plan To...", isPresented: $showTrainingSelectionDialog, titleVisibility: .visible) {
+            
+            // 1. Опции от профила (напр. Morning Workout, Evening Gym)
+            ForEach(profile.trainings) { training in
+                Button(training.name) {
+                    onGet(training.name)
+                }
+            }
+            Button("Cancel", role: .cancel) { }
+        } message: {
+            Text("Select which of your profile workouts this plan should map to, or keep the template's original names.")
+        }
     }
 
-    // MARK: - Toolbar (same style, but has GET)
+    // MARK: - Toolbar
     private var toolbar: some View {
         HStack {
             Button("Back", action: onDismiss)
@@ -112,16 +126,19 @@ struct TemplatePlanDetailView: View {
 
             Spacer()
 
-            Button("GET", action: onGet)
-                .padding(.horizontal, 10)
-                .padding(.vertical, 5)
-                .glassCardStyle(cornerRadius: 20)
+            // ✅ ПРОМЯНА: Бутонът GET отваря диалога
+            Button("GET") {
+                showTrainingSelectionDialog = true
+            }
+            .padding(.horizontal, 10)
+            .padding(.vertical, 5)
+            .glassCardStyle(cornerRadius: 20)
         }
         .foregroundColor(effectManager.currentGlobalAccentColor)
         .padding(.horizontal)
     }
 
-    // MARK: - Day section (same structure)
+    // MARK: - Day section
     private func daySection(for day: TemplateDay, dayIndex: Int) -> some View {
         let dKey = dayKey(for: day)
 
@@ -166,7 +183,7 @@ struct TemplatePlanDetailView: View {
         .glassCardStyle(cornerRadius: 20)
     }
 
-    // MARK: - Workout tab (same style)
+    // MARK: - Workout tab
     @ViewBuilder
     private func workoutTabButton(for workout: TemplateWorkout, in day: TemplateDay) -> some View {
         let dKey = dayKey(for: day)
@@ -196,7 +213,7 @@ struct TemplatePlanDetailView: View {
                     )
                     .foregroundColor(effectManager.currentGlobalAccentColor)
 
-                // Badge count (same)
+                // Badge count
                 ZStack {
                     Circle().fill(baseColor)
                     Text("\(workout.exercises.count)")
@@ -212,7 +229,7 @@ struct TemplatePlanDetailView: View {
         .buttonStyle(.plain)
     }
 
-    // MARK: - Workout content (uses the 1:1 row)
+    // MARK: - Workout content
     @ViewBuilder
     private func workoutContent(for workout: TemplateWorkout) -> some View {
         VStack {
@@ -227,7 +244,6 @@ struct TemplatePlanDetailView: View {
                         profile: profile
                     )
                     .contextMenu {
-                        // Same as TrainingPlanDetailView: View Details overlay (if we can resolve ExerciseItem)
                         if let real = findExerciseItem(named: ex.exerciseName) {
                             Button {
                                 withAnimation(.easeInOut) {
@@ -249,7 +265,7 @@ struct TemplatePlanDetailView: View {
         .contentShape(Rectangle())
     }
 
-    // MARK: - Keys (stable selection)
+    // MARK: - Keys
     private func dayKey(for day: TemplateDay) -> String {
         "day-\(day.dayIndex)"
     }
