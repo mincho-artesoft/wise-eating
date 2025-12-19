@@ -19,9 +19,9 @@ enum SeedManager {
         await seedExercisesIfNeeded(context: ctx)
         await seedTrainingPlansIfNeeded(context: ctx)
 
-        await MainActor.run {
-            validateExercisesIntegrity(context: ctx)
-        }
+//        await MainActor.run {
+//            validateExercisesIntegrity(context: ctx)
+//        }
 
         do {
             if ctx.hasChanges {

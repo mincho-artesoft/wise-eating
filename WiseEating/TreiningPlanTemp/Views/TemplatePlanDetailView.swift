@@ -128,7 +128,7 @@ struct TemplatePlanDetailView: View {
 
             Spacer()
 
-            Button("GET") {
+            Button("Import Plan") {
                 showTrainingSelectionDialog = true
             }
             .padding(.horizontal, 10)
@@ -192,12 +192,15 @@ struct TemplatePlanDetailView: View {
     }
 
     // MARK: - Workout tab
+    // MARK: - Workout tab
     @ViewBuilder
     private func workoutTabButton(for workout: TemplateWorkout, in day: TemplateDay) -> some View {
         let dKey = dayKey(for: day)
         let wKey = workoutKey(for: workout, day: day)
         let isSelected = (selectedWorkoutKey == wKey && selectedDayKey == dKey)
-        let baseColor = colorFor(workoutName: workout.workoutName)
+
+        // ✅ Always the same orange
+        let baseColor: Color = .orange
 
         Button {
             withAnimation {
@@ -206,7 +209,9 @@ struct TemplatePlanDetailView: View {
             }
         } label: {
             ZStack(alignment: .topTrailing) {
-                Text(workout.workoutName)
+
+                // ✅ Always "Workout"
+                Text("Workout")
                     .font(.caption.weight(.semibold))
                     .padding(.horizontal, 12)
                     .padding(.vertical, 6)
@@ -221,7 +226,7 @@ struct TemplatePlanDetailView: View {
                     )
                     .foregroundColor(effectManager.currentGlobalAccentColor)
 
-                // Badge count
+                // Badge count (оставяме го)
                 ZStack {
                     Circle().fill(baseColor)
                     Text("\(workout.exercises.count)")
@@ -236,6 +241,7 @@ struct TemplatePlanDetailView: View {
         }
         .buttonStyle(.plain)
     }
+
 
     // MARK: - Workout content
     @ViewBuilder
