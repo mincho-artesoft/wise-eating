@@ -18,7 +18,7 @@ enum SeedManager {
         await seedReferenceDietsIfNeeded(context: ctx)
         await seedFoodsIfNeeded(context: ctx)
         await seedExercisesIfNeeded(context: ctx)
-
+        await seedTrainingPlansIfNeeded(context: ctx)
         // 2. Финален запис на всички данни
         do {
             if ctx.hasChanges {
@@ -203,6 +203,28 @@ enum SeedManager {
         }
     }
 
+    // В SeedManager.swift
+    private static func seedTrainingPlansIfNeeded(context ctx: ModelContext) async {
+        // Проверка дали има шаблони
+        let descriptor = FetchDescriptor<TrainingPlan>(predicate: #Predicate { $0.profile == nil })
+        if (try? ctx.fetchCount(descriptor)) ?? 0 > 0 {
+            return // Вече са импортирани
+        }
+        
+        print("   Seeding Training Plans from workouts.json...")
+        guard let url = Bundle.main.url(forResource: "workouts", withExtension: "json") else {
+            print("   ⚠️ workouts.json not found.")
+            return
+        }
+        
+        do {
+            let data = try Data(contentsOf: url)
+            try await TrainingPlanImporter.shared.importTemplates(jsonData: data, context: ctx)
+        } catch {
+            print("   ❌ Failed to import training plans: \(error)")
+        }
+    }
+    
 
     // MARK: – Helpers
     private static func databaseIsEmpty<T: PersistentModel>(
