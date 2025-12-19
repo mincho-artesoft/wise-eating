@@ -397,6 +397,7 @@ struct ShoppingListView: View {
                 ContentUnavailableView("No Shopping Lists", systemImage: "cart.badge.plus", description: Text("Create your first list by tapping the “+” button below.")).foregroundStyle(effectManager.currentGlobalAccentColor)
             } else if filteredLists.isEmpty && !globalSearchText.isEmpty {
                 ContentUnavailableView.search(text: globalSearchText)
+                    .foregroundColor(effectManager.currentGlobalAccentColor)
             } else {
                 List {
                     let lists = filteredLists

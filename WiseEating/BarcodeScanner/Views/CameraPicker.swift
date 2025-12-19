@@ -5,7 +5,8 @@ import AVFoundation
 struct CameraPicker: View {
     var onImagePicked: (UIImage) -> Void
     @Environment(\.presentationMode) private var presentationMode
-    
+    @ObservedObject var effectManager = EffectManager.shared
+
     // Следим статуса на правата
     @State private var permissionStatus: AVAuthorizationStatus = .notDetermined
     
@@ -46,6 +47,7 @@ struct CameraPicker: View {
                 
             @unknown default:
                 ContentUnavailableView("Unknown Camera Error", systemImage: "camera.badge.ellipsis")
+                    .foregroundColor(effectManager.currentGlobalAccentColor)
             }
         }
         .onAppear {

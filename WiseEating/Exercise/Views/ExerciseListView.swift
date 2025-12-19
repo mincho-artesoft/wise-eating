@@ -29,24 +29,28 @@ struct ExerciseListView: View {
     @State private var isAddButtonVisible = true
     
     enum PresentedItem: Identifiable {
-        case new, edit(ExerciseItem), detail(ExerciseItem)
-        case newWorkout, editWorkout(ExerciseItem)
-        case newPlan, editPlan(TrainingPlan), detailPlan(TrainingPlan)
-        
-        var id: String {
-            switch self {
-            case .new: "new"
-            case .edit(let item): "edit-\(item.id)"
-            case .detail(let item): "detail-\(item.id)"
-            case .newWorkout: "newWorkout"
-            case .editWorkout(let item): "editWorkout-\(item.id)"
-            case .newPlan: "newPlan"
-            case .editPlan(let plan): "editPlan-\(plan.id)"
-            case .detailPlan(let plan): "detailPlan-\(plan.id)"
-            }
-        }
-    }
-    
+         case new, edit(ExerciseItem), detail(ExerciseItem)
+         case newWorkout, editWorkout(ExerciseItem)
+         case newPlan, editPlan(TrainingPlan), detailPlan(TrainingPlan)
+         // ✅ НОВО: Case за детайли на темплейт
+         case detailTemplate(TrainingPlanListVM.DisplayPlan)
+         
+         var id: String {
+             switch self {
+             // ... (старите остават) ...
+             case .new: "new"
+             case .edit(let item): "edit-\(item.id)"
+             case .detail(let item): "detail-\(item.id)"
+             case .newWorkout: "newWorkout"
+             case .editWorkout(let item): "editWorkout-\(item.id)"
+             case .newPlan: "newPlan"
+             case .editPlan(let plan): "editPlan-\(plan.id)"
+             case .detailPlan(let plan): "detailPlan-\(plan.id)"
+             // ✅ НОВО
+             case .detailTemplate(let plan): "detailTemplate-\(plan.id)"
+             }
+         }
+     }
     // MARK: - Floating Button Drag
     @State private var buttonOffset: CGSize = .zero
     @State private var isDragging: Bool = false
@@ -115,7 +119,11 @@ struct ExerciseListView: View {
                     
                 }
                 
-                if !isSearching && (vm.filter != .default && vm.filter != .favorites) && isAddButtonVisible && !navBarIsHiden {
+                if !isSearching &&
+                (vm.filter != .default && vm.filter != .favorites) &&
+                !(vm.filter == .plans && trainingPlanVM.selectedScope == .templates) &&
+                isAddButtonVisible &&
+                !navBarIsHiden {
                     addButton(geometry: geometry)
                 }
             }
@@ -192,6 +200,7 @@ struct ExerciseListView: View {
                     Spacer()
                     ContentUnavailableView {
                         Label(emptyStateTitle, systemImage: "dumbbell")
+                            .foregroundStyle(effectManager.currentGlobalAccentColor)
                     } description: {
                         emptyStateDescription
                     }
@@ -411,93 +420,171 @@ struct ExerciseListView: View {
             .ignoresSafeArea(.all)
         }
     
-    @ViewBuilder
-        private var trainingPlansSection: some View {
-            if trainingPlanVM.plans.isEmpty && globalSearchText.isEmpty {
-                ContentUnavailableView("No Training Plans", systemImage: "calendar.badge.plus", description: Text("Create your first training plan by tapping the '+' button below."))
-                    .foregroundStyle(effectManager.currentGlobalAccentColor)
-            } else if trainingPlanVM.plans.isEmpty {
-                ContentUnavailableView.search(text: globalSearchText)
-            } else {
-                List {
-                    // ✅ ПРОМЯНА: Използваме enumerated(), за да вземем индекса за shouldShowAd
-                    ForEach(Array(trainingPlanVM.plans.enumerated()), id: \.element.id) { index, plan in
-                        VStack(spacing: 0) {
-                            // 1. Самият Training Plan (съдържанието)
-                            VStack(alignment: .leading, spacing: 6) {
-                                Text(plan.name)
-                                    .font(.headline)
-                                    .foregroundColor(effectManager.currentGlobalAccentColor)
-                                
-                                HStack {
-                                    Text("\(plan.days.count) day\(plan.days.count == 1 ? "" : "s")")
-                                    Text("•")
-                                    Text("Created: \(plan.creationDate.formatted(date: .abbreviated, time: .omitted))")
+    private var trainingPlansSection: some View {
+            VStack(spacing: 0) {
+                // --- ЗАМЕНЕН Picker С WrappingSegmentedControl ---
+                WrappingSegmentedControl(
+                    selection: $trainingPlanVM.selectedScope,
+                    layoutMode: .wrap
+                )
+                .padding(.horizontal)
+                .padding(.bottom, 10)
+                // -------------------------------------------------
+
+                // 2. Съдържание
+                if trainingPlanVM.displayPlans.isEmpty {
+                    if globalSearchText.isEmpty {
+                        let title = trainingPlanVM.selectedScope == .myPlans ? "No Training Plans" : "No Templates"
+                        let desc = trainingPlanVM.selectedScope == .myPlans
+                            ? "Create your first training plan manually or copy one from the Templates tab."
+                            : "No template plans are available at the moment."
+                        
+                        VStack(spacing: 16) {
+                            ContentUnavailableView(title, systemImage: "calendar.badge.clock", description: Text(desc))
+                                .foregroundStyle(effectManager.currentGlobalAccentColor)
+                            
+                            // Бутон за зареждане на шаблони
+                            if trainingPlanVM.selectedScope == .templates {
+                                Button("Load Default Templates") {
+                                    Task {
+                                        if let jsonURL = Bundle.main.url(forResource: "workouts", withExtension: "json"),
+                                           let data = try? Data(contentsOf: jsonURL) {
+                                            do {
+                                                try await TrainingPlanImporter.shared.importTemplates(jsonData: data, context: modelContext)
+                                                trainingPlanVM.fetchPlans()
+                                            } catch {
+                                                print("❌ Error importing templates: \(error)")
+                                            }
+                                        }
+                                    }
                                 }
                                 .font(.caption)
-                                .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
-                            }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding()
-                            .glassCardStyle(cornerRadius: 20)
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                present(item: .detailPlan(plan))
-                            }
-                            .swipeActions {
-                                Button(role: .destructive) {
-                                    self.planToDelete = plan
-                                    self.isShowingDeletePlanConfirmation = true
-                                } label: {
-                                    Image(systemName: "trash.fill")
-                                        .symbolRenderingMode(.palette)
-                                        .foregroundStyle(effectManager.currentGlobalAccentColor)
-                                }
-                                .tint(.clear)
-
-                                Button {
-                                    present(item: .editPlan(plan))
-                                } label: {
-                                    Image(systemName: "pencil")
-                                        .symbolRenderingMode(.palette)
-                                        .foregroundStyle(effectManager.currentGlobalAccentColor)
-                                }
-                                .tint(.clear)
-                            }
-                            .padding(.vertical, 6) // Местим вертикалния padding тук
-                            
-                            // 2. Реклама (ако индексът съвпада с логиката)
-                            if shouldShowAd(at: index) {
-                                AdRowView()
-                                    .padding(.top, 8)
-                                    .padding(.bottom, 8)
-                                    .transition(.opacity)
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 8)
+                                .glassCardStyle(cornerRadius: 12)
+                                .foregroundColor(effectManager.currentGlobalAccentColor)
                             }
                         }
-                        .listRowBackground(Color.clear)
-                        .listRowSeparator(.hidden)
-                        // Нулираме insets, за да контролираме padding-а вътре във VStack
-                        .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+                    } else {
+                        ContentUnavailableView {
+                               Label("No Results for \"\(globalSearchText)\"", systemImage: "magnifyingglass")
+                                   .foregroundStyle(effectManager.currentGlobalAccentColor)
+                           } description: {
+                               Text("Check the spelling or try a new search.")
+                                   .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
+                           }
                     }
-                    
-                    Color.clear.frame(height: 150)
-                        .listRowBackground(Color.clear)
-                        .listRowSeparator(.hidden)
-                }
-                .listStyle(.plain)
-                .scrollContentBackground(.hidden)
-                .mask(
-                    LinearGradient(
-                        gradient: Gradient(stops: [
-                            .init(color: .clear, location: 0),
-                            .init(color: effectManager.currentGlobalAccentColor, location: 0.01),
-                            .init(color: effectManager.currentGlobalAccentColor, location: 0.9),
-                            .init(color: .clear, location: 0.95)
-                        ]),
-                        startPoint: .top,
-                        endPoint: .bottom
+                } else {
+                    List {
+                        // Итерираме през displayPlans (wrapper-ите)
+                        ForEach(Array(trainingPlanVM.displayPlans.enumerated()), id: \.element.id) { index, planWrapper in
+                            VStack(spacing: 0) {
+                                
+                                // Визуализация на реда
+                                VStack(alignment: .leading, spacing: 6) {
+                                    HStack(alignment: .top) {
+                                        Text(planWrapper.name)
+                                            .font(.headline)
+                                            .foregroundColor(effectManager.currentGlobalAccentColor)
+                                            .lineLimit(2)
+                                            .multilineTextAlignment(.leading)
+                                        
+                                        Spacer()
+                                        
+                                        // ❌ ПРЕМАХНАТО: Тук преди беше бутонът "GET". Сега редът е чист.
+                                    }
+                                    
+                                    HStack {
+                                        Text("\(planWrapper.dayCount) day\(planWrapper.dayCount == 1 ? "" : "s")")
+                                        Text("•")
+                                        
+                                        if !planWrapper.isTemplate, let date = planWrapper.creationDate {
+                                            Text("Created: \(date.formatted(date: .abbreviated, time: .omitted))")
+                                        } else {
+                                            Text("Template")
+                                        }
+                                        
+                                        if planWrapper.minAgeMonths > 0 {
+                                            Text("•")
+                                            Text("\(Int(planWrapper.minAgeMonths / 12))y+")
+                                        }
+                                    }
+                                    .font(.caption)
+                                    .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding()
+                                .glassCardStyle(cornerRadius: 20)
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    // ✅ ПРОМЯНА: Логика за отваряне на съответния детайл
+                                    if planWrapper.isTemplate {
+                                        // Отваряме преглед на темплейта (където е GET бутона)
+                                        present(item: .detailTemplate(planWrapper))
+                                    } else if let realPlan = planWrapper.originalObject as? TrainingPlan {
+                                        // Отваряме стандартния детайл за моите планове
+                                        present(item: .detailPlan(realPlan))
+                                    }
+                                }
+                                // Swipe Actions - Само за My Plans
+                                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                    if !planWrapper.isTemplate,
+                                       let realPlan = planWrapper.originalObject as? TrainingPlan {
+                                        
+                                        Button(role: .destructive) {
+                                            self.planToDelete = realPlan
+                                            self.isShowingDeletePlanConfirmation = true
+                                        } label: {
+                                            Image(systemName: "trash.fill")
+                                                .symbolRenderingMode(.palette)
+                                                .foregroundStyle(effectManager.currentGlobalAccentColor)
+                                        }
+                                        .tint(.clear)
+
+                                        Button {
+                                            present(item: .editPlan(realPlan))
+                                        } label: {
+                                            Image(systemName: "pencil")
+                                                .symbolRenderingMode(.palette)
+                                                .foregroundStyle(effectManager.currentGlobalAccentColor)
+                                        }
+                                        .tint(.clear)
+                                    }
+                                }
+                                .padding(.vertical, 6)
+                                
+                                // Реклама
+                                if shouldShowAd(at: index) {
+                                    AdRowView()
+                                        .padding(.top, 8)
+                                        .padding(.bottom, 8)
+                                        .transition(.opacity)
+                                }
+                            }
+                            .listRowBackground(Color.clear)
+                            .listRowSeparator(.hidden)
+                            .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+                        }
+                        
+                        Color.clear.frame(height: 150)
+                            .listRowBackground(Color.clear)
+                            .listRowSeparator(.hidden)
+                    }
+                    .listStyle(.plain)
+                    .scrollContentBackground(.hidden)
+                    .mask(
+                        LinearGradient(
+                            gradient: Gradient(stops: [
+                                .init(color: .clear, location: 0),
+                                .init(color: effectManager.currentGlobalAccentColor, location: 0.01),
+                                .init(color: effectManager.currentGlobalAccentColor, location: 0.9),
+                                .init(color: .clear, location: 0.95)
+                            ]),
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
                     )
-                )
+                }
             }
         }
     
@@ -555,156 +642,178 @@ struct ExerciseListView: View {
     
     // MARK: - Presented Content
     @ViewBuilder
-    private func presentedItemView(for item: PresentedItem) -> some View {
-        let onDismissItemView: (ExerciseItem?) -> Void = { savedItem in
-            onDismissSearch()
-            withAnimation(.easeInOut) {
-                presentedItem = nil
-                isAddButtonVisible = true
-                self.navBarIsHiden = false
-                if SIsSearching{
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                        onActivateSearch()
-                        globalSearchText = SglobalSearchText
-                        SIsSearching = false
-                    }
-                }else{
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                        onDismissSearch()
-                        globalSearchText = ""
-                    }
-                }
-            }
-            if savedItem != nil {
-                vm.resetAndLoad()
-            }
-        }
-        
-        // --- НАЧАЛО НА КОРЕКЦИЯТА (1/2) ---
-        // Променяме сигнатурата на onWorkoutEditorDismiss, за да приема (ExerciseItem?)
-        let onWorkoutEditorDismiss: (ExerciseItem?) -> Void = { savedItem in
-            onDismissSearch()
-            withAnimation(.easeInOut) {
-                presentedItem = nil
-                isAddButtonVisible = true
-                self.navBarIsHiden = false
-                if SIsSearching{
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                        onActivateSearch()
-                        globalSearchText = SglobalSearchText
-                        SIsSearching = false
-                    }
-                }else{
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                        onDismissSearch()
-                        globalSearchText = ""
+        private func presentedItemView(for item: PresentedItem) -> some View {
+            // Callback за затваряне на редактори (запазване + опресняване)
+            let onDismissItemView: (ExerciseItem?) -> Void = { savedItem in
+                onDismissSearch()
+                withAnimation(.easeInOut) {
+                    presentedItem = nil
+                    isAddButtonVisible = true
+                    self.navBarIsHiden = false
+                    if SIsSearching {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                            onActivateSearch()
+                            globalSearchText = SglobalSearchText
+                            SIsSearching = false
+                        }
+                    } else {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                            onDismissSearch()
+                            globalSearchText = ""
+                        }
                     }
                 }
-            }
-            // Презареждаме само ако има запазен елемент
-            if savedItem != nil {
-                vm.resetAndLoad()
-            }
-        }
-        // --- КРАЙ НА КОРЕКЦИЯТА (1/2) ---
-        
-        let onPlanEditorDismiss: (TrainingPlan?) -> Void = { savedPlan in
-            onDismissSearch()
-            withAnimation(.easeInOut(duration: 0.3)) {
-                self.presentedItem = nil
-                self.isAddButtonVisible = true
-                self.navBarIsHiden = false
-                if SIsSearching{
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                        onActivateSearch()
-                        globalSearchText = SglobalSearchText
-                        SIsSearching = false
-                    }
-                }else{
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                        onDismissSearch()
-                        globalSearchText = ""
-                    }
+                if savedItem != nil {
+                    vm.resetAndLoad()
                 }
             }
-            trainingPlanVM.fetchPlans()
-        }
-        
-        let onPlanDetailDismiss: () -> Void = {
-            onDismissSearch()
-            withAnimation(.easeInOut(duration: 0.3)) {
-                self.presentedItem = nil
-                self.isAddButtonVisible = true
-                self.navBarIsHiden = false
-                if SIsSearching{
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                        onActivateSearch()
-                        globalSearchText = SglobalSearchText
-                        SIsSearching = false
-                    }
-                }else{
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                        onDismissSearch()
-                        globalSearchText = ""
+            
+            let onWorkoutEditorDismiss: (ExerciseItem?) -> Void = { savedItem in
+                onDismissSearch()
+                withAnimation(.easeInOut) {
+                    presentedItem = nil
+                    isAddButtonVisible = true
+                    self.navBarIsHiden = false
+                    if SIsSearching {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                            onActivateSearch()
+                            globalSearchText = SglobalSearchText
+                            SIsSearching = false
+                        }
+                    } else {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                            onDismissSearch()
+                            globalSearchText = ""
+                        }
                     }
                 }
+                if savedItem != nil {
+                    vm.resetAndLoad()
+                }
             }
-            trainingPlanVM.fetchPlans()
+            
+            let onPlanEditorDismiss: (TrainingPlan?) -> Void = { savedPlan in
+                onDismissSearch()
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    self.presentedItem = nil
+                    self.isAddButtonVisible = true
+                    self.navBarIsHiden = false
+                    if SIsSearching {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                            onActivateSearch()
+                            globalSearchText = SglobalSearchText
+                            SIsSearching = false
+                        }
+                    } else {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                            onDismissSearch()
+                            globalSearchText = ""
+                        }
+                    }
+                }
+                trainingPlanVM.fetchPlans()
+            }
+            
+            // Simple Dismiss: Само затваря прозореца (за детайли)
+            let onSimpleDismiss: () -> Void = {
+                onDismissSearch()
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    self.presentedItem = nil
+                    self.isAddButtonVisible = true
+                    self.navBarIsHiden = false
+                    if SIsSearching {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                            onActivateSearch()
+                            globalSearchText = SglobalSearchText
+                            SIsSearching = false
+                        }
+                    } else {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                            onDismissSearch()
+                            globalSearchText = ""
+                        }
+                    }
+                }
+                // Опресняваме плановете при затваряне на детайл, в случай че нещо се е променило
+                trainingPlanVM.fetchPlans()
+            }
+            
+            switch item {
+            case .new:
+                ExerciseItemEditorView(profile: profile, onDismiss: onDismissItemView)
+            case .edit(let exerciseItem):
+                ExerciseItemEditorView(item: .edit(exerciseItem), profile: profile, onDismiss: onDismissItemView)
+            case .newWorkout:
+                WorkoutEditorView(
+                    profile: profile,
+                    globalSearchText: $globalSearchText,
+                    isSearchFieldFocused: $isSearchFieldFocused,
+                    onDismissSearch: onDismissSearch,
+                    onDismiss: onWorkoutEditorDismiss
+                )
+            case .editWorkout(let workout):
+                WorkoutEditorView(
+                    itemToEdit: workout,
+                    profile: profile,
+                    globalSearchText: $globalSearchText,
+                    isSearchFieldFocused: $isSearchFieldFocused,
+                    onDismissSearch: onDismissSearch,
+                    onDismiss: onWorkoutEditorDismiss
+                )
+            case .detail(let exerciseItem):
+                ExerciseItemDetailView(
+                    item: exerciseItem,
+                    profile: self.profile,
+                    onDismiss: { onDismissItemView(nil) }
+                )
+            case .newPlan:
+                TrainingPlanEditorView(
+                    profile: profile!,
+                    globalSearchText: $globalSearchText,
+                    isSearchFieldFocused: self.$isSearchFieldFocused,
+                    onDismiss: onPlanEditorDismiss,
+                    navBarIsHiden: $navBarIsHiden,
+                    onDismissSearch: onDismissSearch
+                )
+            case .editPlan(let plan):
+                TrainingPlanEditorView(
+                    profile: profile!,
+                    planToEdit: plan,
+                    globalSearchText: $globalSearchText,
+                    isSearchFieldFocused: self.$isSearchFieldFocused,
+                    onDismiss: onPlanEditorDismiss,
+                    navBarIsHiden: $navBarIsHiden,
+                    onDismissSearch: onDismissSearch
+                )
+            case .detailPlan(let plan):
+                TrainingPlanDetailView(
+                    plan: plan,
+                    profile: profile!,
+                    onDismiss: onSimpleDismiss,
+                    navBarIsHiden: $navBarIsHiden
+                )
+                
+                // ✅ НОВИЯТ CASE: Детайли за темплейт
+            case .detailTemplate(let planWrapper):
+                TemplatePlanDetailView(
+                    planWrapper: planWrapper,
+                    profile: profile!,     // ✅ важно за kcal + units + 1:1
+                    onDismiss: onSimpleDismiss,
+                    onGet: {
+                        onSimpleDismiss()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                            withAnimation {
+                                trainingPlanVM.copyTemplateToMyPlans(planWrapper)
+                            }
+                        }
+                    }
+                )
+                .onAppear {
+                    navBarIsHiden = true
+                    isAddButtonVisible = false
+                }
+            }
         }
-        
-        switch item {
-            // --- НАЧАЛО НА КОРЕКЦИЯТА (2/2) ---
-        case .new:
-            ExerciseItemEditorView(profile: profile, onDismiss: onDismissItemView)
-        case .edit(let exerciseItem):
-            ExerciseItemEditorView(item: .edit(exerciseItem), profile: profile, onDismiss: onDismissItemView)
-        case .newWorkout:
-            WorkoutEditorView(
-                profile: profile,
-                globalSearchText: $globalSearchText,
-                isSearchFieldFocused: $isSearchFieldFocused,
-                onDismissSearch: onDismissSearch,
-                onDismiss: onWorkoutEditorDismiss
-            )
-        case .editWorkout(let workout):
-            WorkoutEditorView(
-                itemToEdit: workout,
-                profile: profile,
-                globalSearchText: $globalSearchText,
-                isSearchFieldFocused: $isSearchFieldFocused,
-                onDismissSearch: onDismissSearch,
-                onDismiss: onWorkoutEditorDismiss
-            )
-            // --- КРАЙ НА КОРЕКЦИЯТА (2/2) ---
-        case .detail(let exerciseItem):
-            ExerciseItemDetailView(
-                item: exerciseItem,
-                profile: self.profile,
-                onDismiss: { onDismissItemView(nil) }
-            )
-        case .newPlan:
-            TrainingPlanEditorView(
-                profile: profile!,
-                globalSearchText: $globalSearchText,
-                isSearchFieldFocused: self.$isSearchFieldFocused,
-                onDismiss: onPlanEditorDismiss,
-                navBarIsHiden: $navBarIsHiden,
-                onDismissSearch: onDismissSearch
-            )
-        case .editPlan(let plan):
-            TrainingPlanEditorView(
-                profile: profile!,
-                planToEdit: plan,
-                globalSearchText: $globalSearchText,
-                isSearchFieldFocused: self.$isSearchFieldFocused,
-                onDismiss: onPlanEditorDismiss,
-                navBarIsHiden: $navBarIsHiden,
-                onDismissSearch: onDismissSearch
-            )
-        case .detailPlan(let plan):
-            TrainingPlanDetailView(plan: plan, profile: profile!, onDismiss: onPlanDetailDismiss, navBarIsHiden: $navBarIsHiden)
-        }
-    }
     
     // MARK: - Helpers
     private var headerTopPadding: CGFloat { -safeAreaInsets.top + 10 }

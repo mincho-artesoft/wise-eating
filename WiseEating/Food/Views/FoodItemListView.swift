@@ -699,6 +699,7 @@ struct FoodItemListView: View {
         Group {
             if filteredDiets.isEmpty && !globalSearchText.isEmpty {
                 ContentUnavailableView.search(text: globalSearchText)
+                    .foregroundColor(effectManager.currentGlobalAccentColor)
             } else {
                 List {
                     ForEach(Array(filteredDiets.enumerated()), id: \.element.id) { index, diet in
@@ -813,6 +814,8 @@ struct FoodItemListView: View {
             .foregroundStyle(effectManager.currentGlobalAccentColor)
         } else if mealPlanVM.plans.isEmpty {
             ContentUnavailableView.search(text: globalSearchText)
+                .foregroundColor(effectManager.currentGlobalAccentColor)
+
         } else {
             List {
                 ForEach(Array(mealPlanVM.plans.enumerated()), id: \.element.id) { index, plan in
