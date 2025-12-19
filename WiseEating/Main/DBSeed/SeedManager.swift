@@ -20,6 +20,9 @@ enum SeedManager {
         await seedExercisesIfNeeded(context: ctx)
         await seedTrainingPlansIfNeeded(context: ctx)
         // 2. Финален запис на всички данни
+        await MainActor.run {
+                   validateExercisesIntegrity(context: ctx)
+               }
         do {
             if ctx.hasChanges {
                 try ctx.save()
@@ -241,4 +244,55 @@ enum SeedManager {
         default:             return value
         }
     }
+    
+    // MARK: - Validation Logic
+        private static func validateExercisesIntegrity(context ctx: ModelContext) {
+            print("🔍 Validating Template Exercises against Main Database...")
+
+            // 1. Извличаме всички реални упражнения (от Main Database)
+            // Оптимизация: Взимаме само имената
+            var exerciseDescriptor = FetchDescriptor<ExerciseItem>()
+            exerciseDescriptor.propertiesToFetch = [\.name]
+
+            guard let allExercises = try? ctx.fetch(exerciseDescriptor) else {
+                print("   ❌ Failed to fetch ExerciseItems for validation.")
+                return
+            }
+
+            // Нормализираме имената (lowercase + trim), за да избегнем фалшиви грешки от главни букви
+            let existingNames = Set(allExercises.map { $0.name.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() })
+
+            // 2. Извличаме всички упражнения от Темплейтите
+            var templateDescriptor = FetchDescriptor<TemplateExercise>()
+            templateDescriptor.propertiesToFetch = [\.exerciseName]
+
+            guard let allTemplateExercises = try? ctx.fetch(templateDescriptor) else {
+                print("   ❌ Failed to fetch TemplateExercises for validation.")
+                return
+            }
+
+            // 3. Сравняваме
+            var missingNames = Set<String>()
+
+            for tex in allTemplateExercises {
+                let targetName = tex.exerciseName.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+                
+                if !existingNames.contains(targetName) {
+                    missingNames.insert(tex.exerciseName)
+                }
+            }
+
+            // 4. Докладваме резултата
+            if missingNames.isEmpty {
+                print("   ✅ INTEGRITY CHECK PASSED: All template exercises exist in the main database.")
+            } else {
+                print("   ⚠️ INTEGRITY WARNING: Found \(missingNames.count) exercises in Templates that are MISSING from the main DB:")
+                print("   ---------------------------------------------------")
+                for name in missingNames.sorted() {
+                    print("      ❌ \"\(name)\"")
+                }
+                print("   ---------------------------------------------------")
+                print("   👉 Action: Add these to 'sports.json' or fix the spelling in 'workouts.json'.")
+            }
+        }
 }
