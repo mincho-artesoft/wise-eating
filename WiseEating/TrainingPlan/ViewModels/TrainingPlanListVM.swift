@@ -119,22 +119,15 @@ final class TrainingPlanListVM: ObservableObject {
         context.insert(newPlan)
 
         for tDay in template.days.sorted(by: { $0.dayIndex < $1.dayIndex }) {
-            // ✅ КОПИРАМЕ isRestDay
-            let newDay = TrainingPlanDay(dayIndex: tDay.dayIndex, isRestDay: tDay.isRestDay)
-            newDay.plan = newPlan
+            let newDay = TrainingPlanDay(dayIndex: tDay.dayIndex, isRestDay: tDay.isRestDay, plan: newPlan)
             context.insert(newDay)
             newPlan.days.append(newDay)
 
-            // ✅ Ако е почивен ден — не правим workouts
-            if tDay.isRestDay {
-                continue
-            }
+            if tDay.isRestDay { continue }
 
             for tWorkout in tDay.workouts {
                 let finalWorkoutName = targetWorkoutName ?? tWorkout.workoutName
-
-                let newWorkout = TrainingPlanWorkout(workoutName: finalWorkoutName)
-                newWorkout.day = newDay
+                let newWorkout = TrainingPlanWorkout(workoutName: finalWorkoutName, day: newDay)
                 context.insert(newWorkout)
                 newDay.workouts.append(newWorkout)
 
@@ -151,7 +144,6 @@ final class TrainingPlanListVM: ObservableObject {
 
                 if let existingItem = try? context.fetch(descriptor).first {
                     workoutItem = existingItem
-                    print("♻️ Reusing existing workout: \(uniqueWorkoutName)")
                 } else {
                     let newWorkoutItemID = nextExerciseId()
                     workoutItem = ExerciseItem(
@@ -163,7 +155,6 @@ final class TrainingPlanListVM: ObservableObject {
                     )
                     context.insert(workoutItem)
                     isNewWorkoutItem = true
-                    print("✨ Creating new workout: \(uniqueWorkoutName)")
                 }
 
                 newWorkout.linkedWorkoutID = workoutItem.id
@@ -176,10 +167,10 @@ final class TrainingPlanListVM: ObservableObject {
                     let targetName = tEx.exerciseName
                     var exerciseItem: ExerciseItem?
 
-                    var desc = FetchDescriptor<ExerciseItem>(predicate: #Predicate { $0.name == targetName })
-                    desc.fetchLimit = 1
+                    var exDesc = FetchDescriptor<ExerciseItem>(predicate: #Predicate { $0.name == targetName })
+                    exDesc.fetchLimit = 1
 
-                    if let found = (try? context.fetch(desc))?.first {
+                    if let found = (try? context.fetch(exDesc))?.first {
                         exerciseItem = found
                     } else {
                         let newItem = ExerciseItem(id: nextExerciseId(), name: targetName, muscleGroups: [])
@@ -238,35 +229,42 @@ final class TrainingPlanListVM: ObservableObject {
         return newPlan
     }
 
-    func delete(plan: TrainingPlan, alsoDeleteLinkedWorkouts: Bool) {
+    /// ✅ Безопасно изтриване по UUID (без да държим TrainingPlan reference в UI state)
+    func deletePlan(planID: UUID, alsoDeleteLinkedWorkouts: Bool) {
         guard let context = modelContext else { return }
 
-        if alsoDeleteLinkedWorkouts {
-            let linkedIDs = Set(
-                plan.days
-                    .flatMap { $0.workouts }
-                    .compactMap { $0.linkedWorkoutID }
-            )
+        do {
+            var desc = FetchDescriptor<TrainingPlan>(predicate: #Predicate { $0.id == planID })
+            desc.fetchLimit = 1
 
-            if !linkedIDs.isEmpty {
-                do {
-                    let descriptor = FetchDescriptor<ExerciseItem>(
-                        predicate: #Predicate { $0.isWorkout == true }
-                    )
-                    let allWorkouts = try context.fetch(descriptor)
-                    let toDelete = allWorkouts.filter { linkedIDs.contains($0.id) }
+            guard let plan = try context.fetch(desc).first else {
+                // вече е изтрит или не съществува
+                fetchPlans()
+                return
+            }
 
-                    for w in toDelete {
+            if alsoDeleteLinkedWorkouts {
+                let linkedIDs = Set(
+                    plan.days
+                        .flatMap { $0.workouts }
+                        .compactMap { $0.linkedWorkoutID }
+                )
+
+                if !linkedIDs.isEmpty {
+                    let wDesc = FetchDescriptor<ExerciseItem>(predicate: #Predicate { $0.isWorkout == true })
+                    let allWorkouts = try context.fetch(wDesc)
+
+                    for w in allWorkouts where linkedIDs.contains(w.id) {
                         context.delete(w)
                     }
-                } catch {
-                    print("❌ Failed to delete linked workouts: \(error)")
                 }
             }
-        }
 
-        context.delete(plan)
-        try? context.save()
-        fetchPlans()
+            context.delete(plan)
+            try context.save()
+            fetchPlans()
+        } catch {
+            print("❌ Failed to delete plan: \(error)")
+        }
     }
 }

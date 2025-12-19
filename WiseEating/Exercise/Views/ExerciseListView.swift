@@ -7,7 +7,7 @@ struct ExerciseListView: View {
     @ObservedObject private var effectManager = EffectManager.shared
     @Environment(\.modelContext) private var modelContext
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    
+
     // MARK: - Inputs
     let profile: Profile?
     @Binding var globalSearchText: String
@@ -19,67 +19,65 @@ struct ExerciseListView: View {
     let onActivateSearch: () -> Void
     let onDismissSearch: () -> Void
     @FocusState.Binding var isSearchFieldFocused: Bool
-    
+
     // MARK: - VM
     @ObservedObject var vm: ExerciseListVM
     @StateObject var trainingPlanVM: TrainingPlanListVM
-    
+
     // MARK: - Presentation
     @State private var presentedItem: PresentedItem? = nil
     @State private var isAddButtonVisible = true
-    
+
     enum PresentedItem: Identifiable {
-         case new, edit(ExerciseItem), detail(ExerciseItem)
-         case newWorkout, editWorkout(ExerciseItem)
-         case newPlan, editPlan(TrainingPlan), detailPlan(TrainingPlan)
-         // ✅ НОВО: Case за детайли на темплейт
-         case detailTemplate(TrainingPlanListVM.DisplayPlan)
-         
-         var id: String {
-             switch self {
-             // ... (старите остават) ...
-             case .new: "new"
-             case .edit(let item): "edit-\(item.id)"
-             case .detail(let item): "detail-\(item.id)"
-             case .newWorkout: "newWorkout"
-             case .editWorkout(let item): "editWorkout-\(item.id)"
-             case .newPlan: "newPlan"
-             case .editPlan(let plan): "editPlan-\(plan.id)"
-             case .detailPlan(let plan): "detailPlan-\(plan.id)"
-             // ✅ НОВО
-             case .detailTemplate(let plan): "detailTemplate-\(plan.id)"
-             }
-         }
-     }
+        case new, edit(ExerciseItem), detail(ExerciseItem)
+        case newWorkout, editWorkout(ExerciseItem)
+        case newPlan, editPlan(TrainingPlan), detailPlan(TrainingPlan)
+        case detailTemplate(TrainingPlanListVM.DisplayPlan)
+
+        var id: String {
+            switch self {
+            case .new: "new"
+            case .edit(let item): "edit-\(item.id)"
+            case .detail(let item): "detail-\(item.id)"
+            case .newWorkout: "newWorkout"
+            case .editWorkout(let item): "editWorkout-\(item.id)"
+            case .newPlan: "newPlan"
+            case .editPlan(let plan): "editPlan-\(plan.id)"
+            case .detailPlan(let plan): "detailPlan-\(plan.id)"
+            case .detailTemplate(let plan): "detailTemplate-\(plan.id)"
+            }
+        }
+    }
+
     // MARK: - Floating Button Drag
     @State private var buttonOffset: CGSize = .zero
     @State private var isDragging: Bool = false
     @GestureState private var gestureDragOffset: CGSize = .zero
     @State private var isPressed: Bool = false
     private let buttonPositionKey = "exerciseFloatingButtonPosition"
-    
+
     // MARK: - Deleting
     @State private var isShowingDeleteItemConfirmation = false
     @State private var itemToDelete: ExerciseItem? = nil
     @State private var itemUsageCount: Int = 0
+
+    // ✅ FIX: НЕ държим TrainingPlan reference в state за delete!
     @State private var isShowingDeletePlanConfirmation = false
-    @State private var planToDelete: TrainingPlan? = nil
-    
+    @State private var planToDeleteID: UUID? = nil
+    @State private var planToDeleteName: String = ""
+    @State private var planToDeleteLinkedWorkoutCount: Int = 0
+
     // MARK: - Time / Notifications
     @State private var currentTimeString: String = ""
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     private static let tFmt = DateFormatter.shortTime
     @State private var hasUnreadNotifications: Bool = false
-    
-    // --- НАЧАЛО НА ПРОМЯНАТА ---
-    // Преместваме енумерацията тук, за да е ясно, че е за този изглед.
-    // Вече включва "Training Plans".
+
     typealias Filter = ExerciseListVM.Filter
-    // --- КРАЙ НА ПРОМЯНАТА ---
-    
+
     // MARK: - Init
     init(
-        vm: ExerciseListVM, // <-- Added
+        vm: ExerciseListVM,
         profile: Profile?,
         globalSearchText: Binding<String>,
         isSearching: Binding<Bool>,
@@ -89,7 +87,7 @@ struct ExerciseListView: View {
         onDismissSearch: @escaping () -> Void,
         isSearchFieldFocused: FocusState<Bool>.Binding
     ) {
-        self.vm = vm // <-- Added
+        self.vm = vm
         self.profile = profile
         self._globalSearchText = globalSearchText
         self._isSearching = isSearching
@@ -100,7 +98,7 @@ struct ExerciseListView: View {
         self._isSearchFieldFocused = isSearchFieldFocused
         _trainingPlanVM = StateObject(wrappedValue: TrainingPlanListVM(profile: profile))
     }
-    
+
     // MARK: - Body
     var body: some View {
         GeometryReader { geometry in
@@ -110,20 +108,19 @@ struct ExerciseListView: View {
                         .opacity(presentedItem == nil ? 1 : 0)
                         .allowsHitTesting(presentedItem == nil)
                         .zIndex(0)
-                    
+
                     if let item = presentedItem {
                         presentedItemView(for: item)
                             .transition(.move(edge: .trailing))
                             .zIndex(10)
                     }
-                    
                 }
-                
+
                 if !isSearching &&
-                (vm.filter != .default && vm.filter != .favorites) &&
-                !(vm.filter == .plans && trainingPlanVM.selectedScope == .templates) &&
-                isAddButtonVisible &&
-                !navBarIsHiden {
+                    (vm.filter != .default && vm.filter != .favorites) &&
+                    !(vm.filter == .plans && trainingPlanVM.selectedScope == .templates) &&
+                    isAddButtonVisible &&
+                    !navBarIsHiden {
                     addButton(geometry: geometry)
                 }
             }
@@ -153,24 +150,22 @@ struct ExerciseListView: View {
         .onReceive(NotificationCenter.default.publisher(for: .exerciseFavoriteToggled)) { notification in
             vm.updateItemAndPruneFavorites(notification: notification)
         }
-        // --- НАЧАЛО НА КОРЕКЦИЯТА ---
         .onChange(of: vm.filter) { newFilter in
             if newFilter == .plans {
                 trainingPlanVM.fetchPlans()
             }
         }
-        // --- КРАЙ НА КОРЕКЦИЯТА ---
         .onChange(of: modelContext) { _, new in
             vm.attach(context: new)
             trainingPlanVM.attach(context: new)
         }
     }
-    
+
     private func checkForUnreadNotifications() async {
         let unread = await NotificationManager.shared.getUnreadNotifications()
         self.hasUnreadNotifications = !unread.isEmpty
     }
-    
+
     // MARK: - Main Content
     private var mainContent: some View {
         ZStack {
@@ -182,18 +177,19 @@ struct ExerciseListView: View {
                         .padding(.horizontal, -20)
                         .padding(.bottom, 8)
                 }
-                
+
                 UpdatePlanBanner()
-                
+
                 customToolbar
                     .padding(.horizontal)
                     .padding(.bottom, 8)
-                
+
                 let layoutMode: WrappingSegmentedControl<Filter>.LayoutMode =
                 (horizontalSizeClass == .regular) ? .wrap : .scrollable
-                
+
                 WrappingSegmentedControl(selection: $vm.filter, layoutMode: layoutMode)
                     .padding(.bottom, 5)
+
                 if vm.filter == .plans {
                     trainingPlansSection
                 } else if vm.items.isEmpty && !vm.isLoading {
@@ -211,15 +207,15 @@ struct ExerciseListView: View {
                 }
             }
             .padding(.top, headerTopPadding)
+
+            // Delete Exercise alert (не е променян)
             .alert("Delete Exercise", isPresented: $isShowingDeleteItemConfirmation) {
                 Button("Delete", role: .destructive) {
                     if let item = itemToDelete {
                         withAnimation {
                             if itemUsageCount > 0 {
-                                // Ако упражнението се използва – първо махаме връзките
                                 vm.deleteDetachingFromWorkoutsAndPlans(item)
                             } else {
-                                // Нормално изтриване
                                 vm.delete(item)
                             }
                         }
@@ -235,11 +231,11 @@ struct ExerciseListView: View {
                 if let item = itemToDelete {
                     if itemUsageCount > 0 {
                         Text("""
-            This exercise is used in \(itemUsageCount) workouts or training plans.
-            If you delete it, it will be removed from those workouts and plans.
+This exercise is used in \(itemUsageCount) workouts or training plans.
+If you delete it, it will be removed from those workouts and plans.
 
-            Are you sure you want to continue?
-            """)
+Are you sure you want to continue?
+""")
                     } else {
                         Text("Are you sure you want to delete '\(item.name)'? This action cannot be undone.")
                     }
@@ -247,52 +243,54 @@ struct ExerciseListView: View {
                     Text("")
                 }
             }
-            .alert("Delete Training Plan", isPresented: $isShowingDeletePlanConfirmation) {
+
+            // ✅ FIX: Delete Training Plan alert (без достъп до plan.days след delete)
+            .alert(
+                planToDeleteName.isEmpty ? "Delete Training Plan" : "Delete \"\(planToDeleteName)\"",
+                isPresented: $isShowingDeletePlanConfirmation
+            ) {
                 Button("Delete Plan Only", role: .destructive) {
-                    if let plan = planToDelete {
-                        trainingPlanVM.delete(plan: plan, alsoDeleteLinkedWorkouts: false)
+                    if let id = planToDeleteID {
+                        trainingPlanVM.deletePlan(planID: id, alsoDeleteLinkedWorkouts: false)
                     }
-                    planToDelete = nil
+                    planToDeleteID = nil
+                    planToDeleteName = ""
+                    planToDeleteLinkedWorkoutCount = 0
                 }
-                
+
                 Button("Delete Plan & Workouts", role: .destructive) {
-                    if let plan = planToDelete {
-                        trainingPlanVM.delete(plan: plan, alsoDeleteLinkedWorkouts: true)
+                    if let id = planToDeleteID {
+                        trainingPlanVM.deletePlan(planID: id, alsoDeleteLinkedWorkouts: true)
                     }
-                    planToDelete = nil
+                    planToDeleteID = nil
+                    planToDeleteName = ""
+                    planToDeleteLinkedWorkoutCount = 0
                 }
-                
+
                 Button("Cancel", role: .cancel) {
-                    planToDelete = nil
+                    planToDeleteID = nil
+                    planToDeleteName = ""
+                    planToDeleteLinkedWorkoutCount = 0
                 }
             } message: {
-                if let plan = planToDelete {
-                    let linkedWorkoutCount = plan.days
-                        .flatMap { $0.workouts }
-                        .compactMap { $0.linkedWorkoutID }
-                        .count
-                    
-                    if linkedWorkoutCount > 0 {
-                        Text("""
-            This training plan has \(linkedWorkoutCount) linked workout(s).
+                if planToDeleteLinkedWorkoutCount > 0 {
+                    Text("""
+This training plan has \(planToDeleteLinkedWorkoutCount) linked workout(s).
 
-            • "Delete Plan Only" will remove the plan but keep the workouts in your exercise library.
-            • "Delete Plan & Workouts" will delete the plan and those linked workouts as well.
+• "Delete Plan Only" will remove the plan but keep the workouts in your exercise library.
+• "Delete Plan & Workouts" will delete the plan and those linked workouts as well.
 
-            What would you like to do?
-            """)
-                    } else {
-                        Text("Are you sure you want to delete the training plan '\(plan.name)'? This action cannot be undone.")
-                    }
+What would you like to do?
+""")
                 } else {
-                    Text("Are you sure you want to delete this training plan?")
+                    Text("Are you sure you want to delete this training plan? This action cannot be undone.")
                 }
             }
 
             if vm.isLoading && vm.items.isEmpty {
                 Color.black.opacity(0.05)
                     .ignoresSafeArea()
-                
+
                 ProgressView()
                     .scaleEffect(1.2)
                     .progressViewStyle(CircularProgressViewStyle(tint: effectManager.currentGlobalAccentColor))
@@ -300,14 +298,14 @@ struct ExerciseListView: View {
                     .background {
                         RoundedRectangle(cornerRadius: 16)
                             .fill(.ultraThinMaterial)
-                            .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light) // 👈 Това принуждава материала да е тъмен
+                            .environment(\.colorScheme, effectManager.isLightRowTextColor ? .dark : .light)
                     }
                     .shadow(radius: 6)
                     .transition(.opacity)
             }
         }
     }
-    
+
     // MARK: - Toolbars
     @ViewBuilder
     private func userToolbar(for profile: Profile) -> some View {
@@ -316,9 +314,9 @@ struct ExerciseListView: View {
                 .font(.system(size: 16)).fontWeight(.medium)
                 .foregroundColor(effectManager.currentGlobalAccentColor)
                 .onAppear { self.currentTimeString = Self.tFmt.string(from: Date()) }
-            
+
             Spacer()
-            
+
             Button(action: { NotificationCenter.default.post(name: .openProfilesDrawer, object: nil) }) {
                 ZStack(alignment: .topTrailing) {
                     if let photoData = profile.photoData, let uiImage = UIImage(data: photoData) {
@@ -343,7 +341,7 @@ struct ExerciseListView: View {
             .buttonStyle(.plain)
         }
     }
-    
+
     private var customToolbar: some View {
         HStack {
             Group {
@@ -354,244 +352,231 @@ struct ExerciseListView: View {
                 else if vm.filter == .plans { Text("Training Plans").font(.title.bold()) }
             }
             .foregroundColor(effectManager.currentGlobalAccentColor)
-            
+
             Spacer()
-            
-            
         }
     }
-    
+
     // MARK: - Lists
     private var exerciseItemsList: some View {
-            List {
-                // ✅ ПРОМЯНА: Използваме Array(vm.items.enumerated()), за да имаме индекс
-                ForEach(Array(vm.items.enumerated()), id: \.element.id) { index, item in
-                    VStack(spacing: 0) {
-                        // 1. Показване на самата упражнение
-                        ExerciseRowView(item: item)
-                            .id(item.id)
-                            .contentShape(Rectangle())
-                            .onTapGesture { present(item: .detail(item)) }
-                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                                swipeActions(for: item)
+        List {
+            ForEach(Array(vm.items.enumerated()), id: \.element.id) { index, item in
+                VStack(spacing: 0) {
+                    ExerciseRowView(item: item)
+                        .id(item.id)
+                        .contentShape(Rectangle())
+                        .onTapGesture { present(item: .detail(item)) }
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            swipeActions(for: item)
+                        }
+                        .padding(.vertical, 6)
+
+                    if shouldShowAd(at: index) {
+                        AdRowView()
+                            .padding(.top, 8)
+                            .padding(.bottom, 8)
+                            .transition(.opacity)
+                    }
+                }
+                .listRowBackground(Color.clear)
+                .listRowSeparator(.hidden)
+                .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+            }
+
+            if vm.hasMore {
+                ProgressView()
+                    .onAppear { vm.loadNextPage() }
+                    .padding(.vertical, 12)
+                    .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
+                    .progressViewStyle(CircularProgressViewStyle(tint: effectManager.currentGlobalAccentColor))
+            }
+
+            Color.clear.frame(height: 150)
+                .listRowBackground(Color.clear)
+                .listRowSeparator(.hidden)
+        }
+        .listStyle(.plain)
+        .scrollContentBackground(.hidden)
+        .mask(
+            LinearGradient(
+                gradient: Gradient(stops: [
+                    .init(color: .clear, location: 0),
+                    .init(color: effectManager.currentGlobalAccentColor, location: 0.01),
+                    .init(color: effectManager.currentGlobalAccentColor, location: 0.9),
+                    .init(color: .clear, location: 0.95)
+                ]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+        )
+        .ignoresSafeArea(.all)
+    }
+
+    private var trainingPlansSection: some View {
+        VStack(spacing: 0) {
+            WrappingSegmentedControl(
+                selection: $trainingPlanVM.selectedScope,
+                layoutMode: .wrap
+            )
+            .padding(.horizontal)
+            .padding(.bottom, 10)
+
+            if trainingPlanVM.displayPlans.isEmpty {
+                if globalSearchText.isEmpty {
+                    let title = trainingPlanVM.selectedScope == .myPlans ? "No Training Plans" : "No Templates"
+                    let desc = trainingPlanVM.selectedScope == .myPlans
+                    ? "Create your first training plan manually or copy one from the Templates tab."
+                    : "No template plans are available at the moment."
+
+                    VStack(spacing: 16) {
+                        ContentUnavailableView(title, systemImage: "calendar.badge.clock", description: Text(desc))
+                            .foregroundStyle(effectManager.currentGlobalAccentColor)
+
+                        if trainingPlanVM.selectedScope == .templates {
+                            Button("Load Default Templates") {
+                                Task {
+                                    if let jsonURL = Bundle.main.url(forResource: "workouts", withExtension: "json"),
+                                       let data = try? Data(contentsOf: jsonURL) {
+                                        do {
+                                            try await TrainingPlanImporter.shared.importTemplates(jsonData: data, context: modelContext)
+                                            trainingPlanVM.fetchPlans()
+                                        } catch {
+                                            print("❌ Error importing templates: \(error)")
+                                        }
+                                    }
+                                }
                             }
-                            .padding(.vertical, 6) // Местим padding-а тук вместо в listRowInsets
-                        
-                        // 2. Проверка дали трябва да се покаже реклама СЛЕД този елемент
-                        if shouldShowAd(at: index) {
-                            AdRowView()
-                                .padding(.top, 8)
-                                .padding(.bottom, 8)
-                                .transition(.opacity)
+                            .font(.caption)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
+                            .glassCardStyle(cornerRadius: 12)
+                            .foregroundColor(effectManager.currentGlobalAccentColor)
                         }
                     }
-                    .listRowBackground(Color.clear)
-                    .listRowSeparator(.hidden)
-                    .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+                } else {
+                    ContentUnavailableView {
+                        Label("No Results for \"\(globalSearchText)\"", systemImage: "magnifyingglass")
+                            .foregroundStyle(effectManager.currentGlobalAccentColor)
+                    } description: {
+                        Text("Check the spelling or try a new search.")
+                            .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
+                    }
                 }
-                
-                if vm.hasMore {
-                    ProgressView()
-                        .onAppear { vm.loadNextPage() }
-                        .padding(.vertical, 12)
-                        .listRowBackground(Color.clear)
-                        .listRowSeparator(.hidden)
-                        .progressViewStyle(CircularProgressViewStyle(tint: effectManager.currentGlobalAccentColor))
-                }
-                
-                Color.clear.frame(height: 150)
-                    .listRowBackground(Color.clear)
-                    .listRowSeparator(.hidden)
-            }
-            .listStyle(.plain)
-            .scrollContentBackground(.hidden)
-            .mask(
-                LinearGradient(
-                    gradient: Gradient(stops: [
-                        .init(color: .clear, location: 0),
-                        .init(color: effectManager.currentGlobalAccentColor, location: 0.01),
-                        .init(color: effectManager.currentGlobalAccentColor, location: 0.9),
-                        .init(color: .clear, location: 0.95)
-                    ]),
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-            )
-            .ignoresSafeArea(.all)
-        }
-    
-    private var trainingPlansSection: some View {
-            VStack(spacing: 0) {
-                // --- ЗАМЕНЕН Picker С WrappingSegmentedControl ---
-                WrappingSegmentedControl(
-                    selection: $trainingPlanVM.selectedScope,
-                    layoutMode: .wrap
-                )
-                .padding(.horizontal)
-                .padding(.bottom, 10)
-                // -------------------------------------------------
+            } else {
+                List {
+                    ForEach(Array(trainingPlanVM.displayPlans.enumerated()), id: \.element.id) { index, planWrapper in
+                        VStack(spacing: 0) {
+                            VStack(alignment: .leading, spacing: 6) {
+                                HStack(alignment: .top) {
+                                    Text(planWrapper.name)
+                                        .font(.headline)
+                                        .foregroundColor(effectManager.currentGlobalAccentColor)
+                                        .lineLimit(2)
+                                        .multilineTextAlignment(.leading)
 
-                // 2. Съдържание
-                if trainingPlanVM.displayPlans.isEmpty {
-                    if globalSearchText.isEmpty {
-                        let title = trainingPlanVM.selectedScope == .myPlans ? "No Training Plans" : "No Templates"
-                        let desc = trainingPlanVM.selectedScope == .myPlans
-                            ? "Create your first training plan manually or copy one from the Templates tab."
-                            : "No template plans are available at the moment."
-                        
-                        VStack(spacing: 16) {
-                            ContentUnavailableView(title, systemImage: "calendar.badge.clock", description: Text(desc))
-                                .foregroundStyle(effectManager.currentGlobalAccentColor)
-                            
-                            // Бутон за зареждане на шаблони
-                            if trainingPlanVM.selectedScope == .templates {
-                                Button("Load Default Templates") {
-                                    Task {
-                                        if let jsonURL = Bundle.main.url(forResource: "workouts", withExtension: "json"),
-                                           let data = try? Data(contentsOf: jsonURL) {
-                                            do {
-                                                try await TrainingPlanImporter.shared.importTemplates(jsonData: data, context: modelContext)
-                                                trainingPlanVM.fetchPlans()
-                                            } catch {
-                                                print("❌ Error importing templates: \(error)")
-                                            }
-                                        }
+                                    Spacer()
+                                }
+
+                                HStack {
+                                    Text("\(planWrapper.dayCount) day\(planWrapper.dayCount == 1 ? "" : "s")")
+                                    Text("•")
+
+                                    if !planWrapper.isTemplate, let date = planWrapper.creationDate {
+                                        Text("Created: \(date.formatted(date: .abbreviated, time: .omitted))")
+                                    } else {
+                                        Text("Template")
+                                    }
+
+                                    if planWrapper.minAgeMonths > 0 {
+                                        Text("•")
+                                        Text("\(Int(planWrapper.minAgeMonths / 12))y+")
                                     }
                                 }
                                 .font(.caption)
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 8)
-                                .glassCardStyle(cornerRadius: 12)
-                                .foregroundColor(effectManager.currentGlobalAccentColor)
+                                .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
                             }
-                        }
-                    } else {
-                        ContentUnavailableView {
-                               Label("No Results for \"\(globalSearchText)\"", systemImage: "magnifyingglass")
-                                   .foregroundStyle(effectManager.currentGlobalAccentColor)
-                           } description: {
-                               Text("Check the spelling or try a new search.")
-                                   .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
-                           }
-                    }
-                } else {
-                    List {
-                        // Итерираме през displayPlans (wrapper-ите)
-                        ForEach(Array(trainingPlanVM.displayPlans.enumerated()), id: \.element.id) { index, planWrapper in
-                            VStack(spacing: 0) {
-                                
-                                // Визуализация на реда
-                                VStack(alignment: .leading, spacing: 6) {
-                                    HStack(alignment: .top) {
-                                        Text(planWrapper.name)
-                                            .font(.headline)
-                                            .foregroundColor(effectManager.currentGlobalAccentColor)
-                                            .lineLimit(2)
-                                            .multilineTextAlignment(.leading)
-                                        
-                                        Spacer()
-                                        
-                                        // ❌ ПРЕМАХНАТО: Тук преди беше бутонът "GET". Сега редът е чист.
-                                    }
-                                    
-                                    HStack {
-                                        Text("\(planWrapper.dayCount) day\(planWrapper.dayCount == 1 ? "" : "s")")
-                                        Text("•")
-                                        
-                                        if !planWrapper.isTemplate, let date = planWrapper.creationDate {
-                                            Text("Created: \(date.formatted(date: .abbreviated, time: .omitted))")
-                                        } else {
-                                            Text("Template")
-                                        }
-                                        
-                                        if planWrapper.minAgeMonths > 0 {
-                                            Text("•")
-                                            Text("\(Int(planWrapper.minAgeMonths / 12))y+")
-                                        }
-                                    }
-                                    .font(.caption)
-                                    .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding()
+                            .glassCardStyle(cornerRadius: 20)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                if planWrapper.isTemplate {
+                                    present(item: .detailTemplate(planWrapper))
+                                } else if let realPlan = planWrapper.originalObject as? TrainingPlan {
+                                    present(item: .detailPlan(realPlan))
                                 }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding()
-                                .glassCardStyle(cornerRadius: 20)
-                                .contentShape(Rectangle())
-                                .onTapGesture {
-                                    // ✅ ПРОМЯНА: Логика за отваряне на съответния детайл
-                                    if planWrapper.isTemplate {
-                                        // Отваряме преглед на темплейта (където е GET бутона)
-                                        present(item: .detailTemplate(planWrapper))
-                                    } else if let realPlan = planWrapper.originalObject as? TrainingPlan {
-                                        // Отваряме стандартния детайл за моите планове
-                                        present(item: .detailPlan(realPlan))
-                                    }
-                                }
-                                // Swipe Actions - Само за My Plans
-                                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                    if !planWrapper.isTemplate,
-                                       let realPlan = planWrapper.originalObject as? TrainingPlan {
-                                        
-                                        Button(role: .destructive) {
-                                            self.planToDelete = realPlan
-                                            self.isShowingDeletePlanConfirmation = true
-                                        } label: {
-                                            Image(systemName: "trash.fill")
-                                                .symbolRenderingMode(.palette)
-                                                .foregroundStyle(effectManager.currentGlobalAccentColor)
-                                        }
-                                        .tint(.clear)
+                            }
+                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                if !planWrapper.isTemplate,
+                                   let realPlan = planWrapper.originalObject as? TrainingPlan {
 
-                                        Button {
-                                            present(item: .editPlan(realPlan))
-                                        } label: {
-                                            Image(systemName: "pencil")
-                                                .symbolRenderingMode(.palette)
-                                                .foregroundStyle(effectManager.currentGlobalAccentColor)
-                                        }
-                                        .tint(.clear)
+                                    Button(role: .destructive) {
+                                        // ✅ FIX: взимаме всичко докато plan е валиден
+                                        self.planToDeleteID = realPlan.id
+                                        self.planToDeleteName = realPlan.name
+                                        self.planToDeleteLinkedWorkoutCount = realPlan.days
+                                            .flatMap { $0.workouts }
+                                            .compactMap { $0.linkedWorkoutID }
+                                            .count
+
+                                        self.isShowingDeletePlanConfirmation = true
+                                    } label: {
+                                        Image(systemName: "trash.fill")
+                                            .symbolRenderingMode(.palette)
+                                            .foregroundStyle(effectManager.currentGlobalAccentColor)
                                     }
-                                }
-                                .padding(.vertical, 6)
-                                
-                                // Реклама
-                                if shouldShowAd(at: index) {
-                                    AdRowView()
-                                        .padding(.top, 8)
-                                        .padding(.bottom, 8)
-                                        .transition(.opacity)
+                                    .tint(.clear)
+
+                                    Button {
+                                        present(item: .editPlan(realPlan))
+                                    } label: {
+                                        Image(systemName: "pencil")
+                                            .symbolRenderingMode(.palette)
+                                            .foregroundStyle(effectManager.currentGlobalAccentColor)
+                                    }
+                                    .tint(.clear)
                                 }
                             }
-                            .listRowBackground(Color.clear)
-                            .listRowSeparator(.hidden)
-                            .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+                            .padding(.vertical, 6)
+
+                            if shouldShowAd(at: index) {
+                                AdRowView()
+                                    .padding(.top, 8)
+                                    .padding(.bottom, 8)
+                                    .transition(.opacity)
+                            }
                         }
-                        
-                        Color.clear.frame(height: 150)
-                            .listRowBackground(Color.clear)
-                            .listRowSeparator(.hidden)
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
+                        .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
                     }
-                    .listStyle(.plain)
-                    .scrollContentBackground(.hidden)
-                    .mask(
-                        LinearGradient(
-                            gradient: Gradient(stops: [
-                                .init(color: .clear, location: 0),
-                                .init(color: effectManager.currentGlobalAccentColor, location: 0.01),
-                                .init(color: effectManager.currentGlobalAccentColor, location: 0.9),
-                                .init(color: .clear, location: 0.95)
-                            ]),
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
-                    )
+
+                    Color.clear.frame(height: 150)
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.hidden)
                 }
+                .listStyle(.plain)
+                .scrollContentBackground(.hidden)
+                .mask(
+                    LinearGradient(
+                        gradient: Gradient(stops: [
+                            .init(color: .clear, location: 0),
+                            .init(color: effectManager.currentGlobalAccentColor, location: 0.01),
+                            .init(color: effectManager.currentGlobalAccentColor, location: 0.9),
+                            .init(color: .clear, location: 0.95)
+                        ]),
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                )
             }
         }
-    
+    }
+
     @ViewBuilder
     private func swipeActions(for item: ExerciseItem) -> some View {
         if item.isUserAdded {
-            // DELETE
             Button(role: .destructive) {
                 if #available(iOS 26.0, *) {
                     let usage = vm.trainingUsageCount(for: item)
@@ -600,9 +585,7 @@ struct ExerciseListView: View {
                         self.itemUsageCount = usage
                         self.isShowingDeleteItemConfirmation = true
                     } else {
-                        withAnimation {
-                            vm.delete(item)
-                        }
+                        withAnimation { vm.delete(item) }
                     }
                 } else {
                     self.itemToDelete = item
@@ -615,8 +598,7 @@ struct ExerciseListView: View {
                     .foregroundStyle(effectManager.currentGlobalAccentColor)
             }
             .tint(.clear)
-            
-            // EDIT
+
             Button {
                 if item.isWorkout {
                     present(item: .editWorkout(item))
@@ -632,18 +614,9 @@ struct ExerciseListView: View {
         }
     }
 
-    
-    // MARK: - Deletion Logic
-    private func delete(exercise: ExerciseItem) {
-        withAnimation {
-            vm.delete(exercise)
-        }
-    }
-    
     // MARK: - Presented Content
     @ViewBuilder
     private func presentedItemView(for item: PresentedItem) -> some View {
-        // Callback за затваряне на редактори (запазване + опресняване)
         let onDismissItemView: (ExerciseItem?) -> Void = { savedItem in
             onDismissSearch()
             withAnimation(.easeInOut) {
@@ -667,7 +640,7 @@ struct ExerciseListView: View {
                 vm.resetAndLoad()
             }
         }
-        
+
         let onWorkoutEditorDismiss: (ExerciseItem?) -> Void = { savedItem in
             onDismissSearch()
             withAnimation(.easeInOut) {
@@ -691,8 +664,8 @@ struct ExerciseListView: View {
                 vm.resetAndLoad()
             }
         }
-        
-        let onPlanEditorDismiss: (TrainingPlan?) -> Void = { savedPlan in
+
+        let onPlanEditorDismiss: (TrainingPlan?) -> Void = { _ in
             onDismissSearch()
             withAnimation(.easeInOut(duration: 0.3)) {
                 self.presentedItem = nil
@@ -713,8 +686,7 @@ struct ExerciseListView: View {
             }
             trainingPlanVM.fetchPlans()
         }
-        
-        // Simple Dismiss: Само затваря прозореца (за детайли)
+
         let onSimpleDismiss: () -> Void = {
             onDismissSearch()
             withAnimation(.easeInOut(duration: 0.3)) {
@@ -734,10 +706,9 @@ struct ExerciseListView: View {
                     }
                 }
             }
-            // Опресняваме плановете при затваряне на детайл, в случай че нещо се е променило
             trainingPlanVM.fetchPlans()
         }
-        
+
         switch item {
         case .new:
             ExerciseItemEditorView(profile: profile, onDismiss: onDismissItemView)
@@ -792,27 +763,19 @@ struct ExerciseListView: View {
                 onDismiss: onSimpleDismiss,
                 navBarIsHiden: $navBarIsHiden
             )
-            
-            // ✅ НОВИЯТ CASE: Детайли за темплейт
         case .detailTemplate(let planWrapper):
             TemplatePlanDetailView(
                 planWrapper: planWrapper,
                 profile: profile!,
                 onDismiss: onSimpleDismiss,
-                // ✅ ПРОМЯНА: onGet вече приема selectedWorkoutName
                 onGet: { selectedWorkoutName in
-                    // 1. Затваряме текущия прозорец (детайлите)
                     onSimpleDismiss()
-                    
-                    // 2. Изчакваме малко анимацията да приключи и изпълняваме копирането + отварянето
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         withAnimation {
-                            // Копираме плана и взимаме резултата
                             if let newPlan = trainingPlanVM.copyTemplateToMyPlans(
                                 planWrapper,
                                 targetWorkoutName: selectedWorkoutName
                             ) {
-                                // 3. Отваряме редактора с новия план
                                 present(item: .editPlan(newPlan))
                             }
                         }
@@ -825,21 +788,21 @@ struct ExerciseListView: View {
             }
         }
     }
-    
+
     // MARK: - Helpers
     private var headerTopPadding: CGFloat { -safeAreaInsets.top + 10 }
-    
+
     private func present(item: PresentedItem) {
         if isSearching {
             SIsSearching = isSearching
             SglobalSearchText = globalSearchText
             onDismissSearch()
         }
-        
+
         withAnimation(.easeInOut) {
             presentedItem = item
             isAddButtonVisible = false
-            
+
             switch item {
             case .newWorkout, .editWorkout, .newPlan, .editPlan:
                 break
@@ -849,7 +812,7 @@ struct ExerciseListView: View {
             isProfilesDrawerVisible = false
         }
     }
-    
+
     private func handleButtonTap() {
         switch vm.filter {
         case .all:
@@ -862,18 +825,18 @@ struct ExerciseListView: View {
             break
         }
     }
-    
+
     private func saveButtonPosition() {
         UserDefaults.standard.set(buttonOffset.width, forKey: "\(buttonPositionKey)_width")
         UserDefaults.standard.set(buttonOffset.height, forKey: "\(buttonPositionKey)_height")
     }
-    
+
     private func loadButtonPosition() {
         let width = UserDefaults.standard.double(forKey: "\(buttonPositionKey)_width")
         let height = UserDefaults.standard.double(forKey: "\(buttonPositionKey)_height")
         self.buttonOffset = CGSize(width: width, height: height)
     }
-    
+
     private var emptyStateTitle: String {
         if !vm.searchText.isEmpty { return "No Results for \"\(vm.searchText)\"" }
         switch vm.filter {
@@ -884,7 +847,7 @@ struct ExerciseListView: View {
         case .plans: return "No Training Plans"
         }
     }
-    
+
     private var emptyStateDescription: Text {
         let text: String
         if !vm.searchText.isEmpty { text = "Try a different search term or change the filter." }
@@ -899,144 +862,117 @@ struct ExerciseListView: View {
         }
         return Text(text)
     }
-    
+
     // MARK: - Updated Floating Button Logic
-        
-        private func bottomPadding(for geometry: GeometryProxy) -> CGFloat {
-            let size = geometry.size
-            guard size.width > 0 else { return 75 }
-            let aspectRatio = size.height / size.width
-            return aspectRatio > 1.9 ? 75 : 95
-        }
-        
-        private func trailingPadding(for geometry: GeometryProxy) -> CGFloat { 45 }
-        
-        private func dragGesture(geometry: GeometryProxy) -> some Gesture {
-            let buttonSize: CGFloat = 60
-            let radius = buttonSize / 2
-            
-            return DragGesture(minimumDistance: 0)
-                .updating($gestureDragOffset) { value, state, _ in
-                    // Жив превод по време на drag – без анимация
-                    state = value.translation
-                }
-                .onChanged { value in
-                    let distance = max(abs(value.translation.width), abs(value.translation.height))
-                    
-                    if distance > 6 {
-                        // Вече влачим – махаме "pressed" и маркираме "dragging"
-                        if !isDragging {
-                            isDragging = true
-                            isPressed = false
-                        }
-                    } else {
-                        // Малко мърдане = натиснат бутон
-                        isPressed = true
-                    }
-                }
-                .onEnded { value in
-                    let safeArea = geometry.safeAreaInsets
-                    let size = geometry.size
-                    
-                    // Базова позиция (дясно-долу) спрямо размера + паддингите
-                    let baseX = size.width  - trailingPadding(for: geometry) - radius
-                    let baseY = size.height - bottomPadding(for: geometry)   - radius
-                    
-                    // Центърът, ако приложим текущия offset + преместеното
-                    let rawCenterX = baseX + buttonOffset.width  + value.translation.width
-                    let rawCenterY = baseY + buttonOffset.height + value.translation.height
-                    
-                    // Ограничаваме центъра ВЪТРЕ в екрана
-                    let minX = radius
-                    let maxX = size.width  - radius
-                    let minY = radius + safeArea.top
-                    // -80 допълнителен буфер отдолу, както при AI бутона
-                    let maxY = size.height - radius - safeArea.bottom - 80
-                    
-                    let clampedCenterX = min(max(rawCenterX, minX), maxX)
-                    let clampedCenterY = min(max(rawCenterY, minY), maxY)
-                    
-                    // Новият offset е просто разлика спрямо базовата позиция
-                    let newOffset = CGSize(
-                        width:  clampedCenterX - baseX,
-                        height: clampedCenterY - baseY
-                    )
-                    
-                    if isDragging {
-                        buttonOffset = newOffset
-                        saveButtonPosition()
-                    } else {
-                        // Тап (без реален drag)
-                        handleButtonTap()
-                    }
-                    
-                    isDragging = false
-                    isPressed = false
-                }
-        }
-        
-        private func addButton(geometry: GeometryProxy) -> some View {
-            let buttonSize: CGFloat = 60
-            let radius = buttonSize / 2
-            let safeArea = geometry.safeAreaInsets
-            let size = geometry.size
-            
-            // Базова позиция (дясно-долу)
-            let baseX = size.width  - trailingPadding(for: geometry) - radius
-            let baseY = size.height - bottomPadding(for: geometry)   - radius
-            
-            // Център със запазения offset + текущия drag
-            let rawCenterX = baseX + buttonOffset.width  + gestureDragOffset.width
-            let rawCenterY = baseY + buttonOffset.height + gestureDragOffset.height
-            
-            // Ограничаваме центъра ВЪТРЕ в екрана (и safe area)
-            let minX = radius
-            let maxX = size.width  - radius
-            let minY = radius + safeArea.top
-            let maxY = size.height - radius - safeArea.bottom
-            
-            let centerX = min(max(rawCenterX, minX), maxX)
-            let centerY = min(max(rawCenterY, minY), maxY)
-            
-            let scale = isDragging ? 1.05 : (isPressed ? 0.92 : 1.0)
-            
-            return ZStack {
-                Image(systemName: "plus")
-                    .font(.title3)
-                    .foregroundColor(effectManager.currentGlobalAccentColor)
+    private func bottomPadding(for geometry: GeometryProxy) -> CGFloat {
+        let size = geometry.size
+        guard size.width > 0 else { return 75 }
+        let aspectRatio = size.height / size.width
+        return aspectRatio > 1.9 ? 75 : 95
+    }
+
+    private func trailingPadding(for geometry: GeometryProxy) -> CGFloat { 45 }
+
+    private func dragGesture(geometry: GeometryProxy) -> some Gesture {
+        let buttonSize: CGFloat = 60
+        let radius = buttonSize / 2
+
+        return DragGesture(minimumDistance: 0)
+            .updating($gestureDragOffset) { value, state, _ in
+                state = value.translation
             }
-            .frame(width: buttonSize, height: buttonSize)
-            .glassCardStyle(cornerRadius: radius)
-            .scaleEffect(scale)
-            .animation(.spring(response: 0.25, dampingFraction: 0.8), value: isPressed)
-            .animation(.spring(response: 0.25, dampingFraction: 0.8), value: isDragging)
-            .contentShape(Circle())
-            .position(x: centerX, y: centerY) // Използваме position вместо offset
-            .opacity(isAddButtonVisible ? 1 : 0)
-            .disabled(!isAddButtonVisible)
-            .gesture(dragGesture(geometry: geometry))
-            .transition(.scale.combined(with: .opacity))
+            .onChanged { value in
+                let distance = max(abs(value.translation.width), abs(value.translation.height))
+
+                if distance > 6 {
+                    if !isDragging {
+                        isDragging = true
+                        isPressed = false
+                    }
+                } else {
+                    isPressed = true
+                }
+            }
+            .onEnded { value in
+                let safeArea = geometry.safeAreaInsets
+                let size = geometry.size
+
+                let baseX = size.width  - trailingPadding(for: geometry) - radius
+                let baseY = size.height - bottomPadding(for: geometry)   - radius
+
+                let rawCenterX = baseX + buttonOffset.width  + value.translation.width
+                let rawCenterY = baseY + buttonOffset.height + value.translation.height
+
+                let minX = radius
+                let maxX = size.width  - radius
+                let minY = radius + safeArea.top
+                let maxY = size.height - radius - safeArea.bottom - 80
+
+                let clampedCenterX = min(max(rawCenterX, minX), maxX)
+                let clampedCenterY = min(max(rawCenterY, minY), maxY)
+
+                let newOffset = CGSize(
+                    width:  clampedCenterX - baseX,
+                    height: clampedCenterY - baseY
+                )
+
+                if isDragging {
+                    buttonOffset = newOffset
+                    saveButtonPosition()
+                } else {
+                    handleButtonTap()
+                }
+
+                isDragging = false
+                isPressed = false
+            }
+    }
+
+    private func addButton(geometry: GeometryProxy) -> some View {
+        let buttonSize: CGFloat = 60
+        let radius = buttonSize / 2
+        let safeArea = geometry.safeAreaInsets
+        let size = geometry.size
+
+        let baseX = size.width  - trailingPadding(for: geometry) - radius
+        let baseY = size.height - bottomPadding(for: geometry)   - radius
+
+        let rawCenterX = baseX + buttonOffset.width  + gestureDragOffset.width
+        let rawCenterY = baseY + buttonOffset.height + gestureDragOffset.height
+
+        let minX = radius
+        let maxX = size.width  - radius
+        let minY = radius + safeArea.top
+        let maxY = size.height - radius - safeArea.bottom
+
+        let centerX = min(max(rawCenterX, minX), maxX)
+        let centerY = min(max(rawCenterY, minY), maxY)
+
+        let scale = isDragging ? 1.05 : (isPressed ? 0.92 : 1.0)
+
+        return ZStack {
+            Image(systemName: "plus")
+                .font(.title3)
+                .foregroundColor(effectManager.currentGlobalAccentColor)
         }
-    
+        .frame(width: buttonSize, height: buttonSize)
+        .glassCardStyle(cornerRadius: radius)
+        .scaleEffect(scale)
+        .animation(.spring(response: 0.25, dampingFraction: 0.8), value: isPressed)
+        .animation(.spring(response: 0.25, dampingFraction: 0.8), value: isDragging)
+        .contentShape(Circle())
+        .position(x: centerX, y: centerY)
+        .opacity(isAddButtonVisible ? 1 : 0)
+        .disabled(!isAddButtonVisible)
+        .gesture(dragGesture(geometry: geometry))
+        .transition(.scale.combined(with: .opacity))
+    }
+
     // MARK: - Ad Logic
     private func shouldShowAd(at index: Int) -> Bool {
-            // Проверка за Premium абонамент - ако е платен, не показваме реклами
-            if SubscriptionManager.shared.subscriptionStatus != .base {
-                return false
-            }
-            
-            // Пропускаме само първите 2 реда (0 и 1), за да не е най-горе
-            if index < 2 { return false }
-            
-            // Алгоритъм за минимум 2 елемента разстояние:
-            // Използваме цикъл от 7. Рекламите се падат на остатък 2 и 5.
-            // Това създава ритъм: Реклама -> (2 елемента) -> Реклама -> (3 елемента) -> Реклама...
-            // Индекси с реклами: 2, 5, 9, 12, 16, 19...
-            let remainder = index % 7
-            if remainder == 2 || remainder == 5 {
-                return true
-            }
-            
-            return false
-        }
+        if SubscriptionManager.shared.subscriptionStatus != .base { return false }
+        if index < 2 { return false }
+        let remainder = index % 7
+        return remainder == 2 || remainder == 5
+    }
 }
