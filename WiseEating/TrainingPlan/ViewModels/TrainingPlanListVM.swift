@@ -70,6 +70,7 @@ final class TrainingPlanListVM: ObservableObject {
             }
         } else {
             let descriptor = FetchDescriptor<TemplatePlan>(sortBy: [SortDescriptor(\.name)])
+
             if let templates = try? context.fetch(descriptor) {
                 allFetchedPlans = templates.map { template in
                     DisplayPlan(
@@ -114,22 +115,20 @@ final class TrainingPlanListVM: ObservableObject {
               let context = modelContext,
               let profile = profile else { return nil }
 
-        // 1) Нов план
         let newPlan = TrainingPlan(name: template.name, profile: profile, minAgeMonths: 0)
         context.insert(newPlan)
 
-        // ✅ Важно: подреди дните по dayIndex, за да е стабилно
-        let sortedDays = template.days.sorted { $0.dayIndex < $1.dayIndex }
-
-        for tDay in sortedDays {
-            // ✅ Пренасяме rest day флага
+        for tDay in template.days.sorted(by: { $0.dayIndex < $1.dayIndex }) {
+            // ✅ КОПИРАМЕ isRestDay
             let newDay = TrainingPlanDay(dayIndex: tDay.dayIndex, isRestDay: tDay.isRestDay)
             newDay.plan = newPlan
             context.insert(newDay)
             newPlan.days.append(newDay)
 
-            // Ако е rest day — не копираме workouts
-            if tDay.isRestDay { continue }
+            // ✅ Ако е почивен ден — не правим workouts
+            if tDay.isRestDay {
+                continue
+            }
 
             for tWorkout in tDay.workouts {
                 let finalWorkoutName = targetWorkoutName ?? tWorkout.workoutName
@@ -144,9 +143,8 @@ final class TrainingPlanListVM: ObservableObject {
                 var workoutItem: ExerciseItem!
                 var isNewWorkoutItem = false
 
-                // ✅ FIX: трябва да търсим isWorkout == true (ти беше сложил false)
                 let predicate = #Predicate<ExerciseItem> {
-                    $0.name == uniqueWorkoutName && $0.isWorkout == true
+                    $0.name == uniqueWorkoutName && $0.isWorkout == false
                 }
                 var descriptor = FetchDescriptor(predicate: predicate)
                 descriptor.fetchLimit = 1
@@ -178,10 +176,10 @@ final class TrainingPlanListVM: ObservableObject {
                     let targetName = tEx.exerciseName
                     var exerciseItem: ExerciseItem?
 
-                    var exDesc = FetchDescriptor<ExerciseItem>(predicate: #Predicate { $0.name == targetName })
-                    exDesc.fetchLimit = 1
+                    var desc = FetchDescriptor<ExerciseItem>(predicate: #Predicate { $0.name == targetName })
+                    desc.fetchLimit = 1
 
-                    if let found = (try? context.fetch(exDesc))?.first {
+                    if let found = (try? context.fetch(desc))?.first {
                         exerciseItem = found
                     } else {
                         let newItem = ExerciseItem(id: nextExerciseId(), name: targetName, muscleGroups: [])
@@ -196,7 +194,6 @@ final class TrainingPlanListVM: ObservableObject {
                     if let s = validEx.sports { allSports.formUnion(s) }
                     totalDuration += tEx.durationMinutes
 
-                    // Добавяме ExerciseLinks само ако workoutItem е нов, за да не дублираме
                     if isNewWorkoutItem {
                         let exerciseLink = ExerciseLink(
                             exercise: validEx,
@@ -212,10 +209,7 @@ final class TrainingPlanListVM: ObservableObject {
                     context.insert(newLink)
                     newWorkout.exercises.append(newLink)
 
-                    // ✅ Подреди сетовете стабилно
-                    let sortedSets = tEx.sets.sorted { $0.orderIndex < $1.orderIndex }
-
-                    for tSet in sortedSets {
+                    for tSet in tEx.sets {
                         let unit = TimeUnit(rawValue: tSet.timeUnitString) ?? .seconds
                         let newSet = TrainingPlanSet(
                             reps: tSet.reps,
@@ -240,7 +234,6 @@ final class TrainingPlanListVM: ObservableObject {
         }
 
         try? context.save()
-
         selectedScope = .myPlans
         return newPlan
     }
