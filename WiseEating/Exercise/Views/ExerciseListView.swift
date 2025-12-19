@@ -797,13 +797,18 @@ struct ExerciseListView: View {
             case .detailTemplate(let planWrapper):
                 TemplatePlanDetailView(
                     planWrapper: planWrapper,
-                    profile: profile!,     // ✅ важно за kcal + units + 1:1
+                    profile: profile!,
                     onDismiss: onSimpleDismiss,
-                    onGet: {
+                    // ✅ ПРОМЯНА: onGet вече приема selectedWorkoutName
+                    onGet: { selectedWorkoutName in
                         onSimpleDismiss()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
                             withAnimation {
-                                trainingPlanVM.copyTemplateToMyPlans(planWrapper)
+                                // Подаваме избраното име към VM
+                                trainingPlanVM.copyTemplateToMyPlans(
+                                    planWrapper,
+                                    targetWorkoutName: selectedWorkoutName
+                                )
                             }
                         }
                     }
