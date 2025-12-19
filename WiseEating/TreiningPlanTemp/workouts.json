@@ -146,7 +146,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -514,7 +514,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -668,7 +668,7 @@
         "name": "Side plank",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -795,7 +795,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -1552,7 +1552,7 @@
         "name": "HM Plank",
         "sets": 5,
         "reps": 20,
-        "duration": 15,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -1638,7 +1638,7 @@
         "name": "HM Plank",
         "sets": 5,
         "reps": 20,
-        "duration": 15,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -1724,7 +1724,7 @@
         "name": "HM Plank",
         "sets": 5,
         "reps": 20,
-        "duration": 15,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -1833,7 +1833,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -2137,7 +2137,7 @@
         "name": "HM Plank",
         "sets": 2,
         "reps": 30,
-        "duration": 6,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -2446,7 +2446,7 @@
         "name": "Kettlebell Hang Clean",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -2455,7 +2455,7 @@
         "name": "Push-up",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -2464,7 +2464,7 @@
         "name": "Kettlebell swing",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -2473,7 +2473,7 @@
         "name": "Lying cable front raise",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -2482,7 +2482,7 @@
         "name": "Bent Over Barbell Row",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -2491,7 +2491,7 @@
         "name": "Crunch",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -2500,7 +2500,7 @@
         "name": "FYR2 Kettlebell Goblet Squat",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -2509,7 +2509,7 @@
         "name": "Bodyweight squat",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -2518,7 +2518,7 @@
         "name": "Kettlebell One-Legged Deadlift",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -2527,7 +2527,7 @@
         "name": "Side lunge cross-body heel-touch",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -3710,7 +3710,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -3896,7 +3896,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -4624,7 +4624,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -4751,7 +4751,7 @@
         "name": "Superman",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -4824,7 +4824,7 @@
         "name": "Smith Machine Calf Raise",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -4833,7 +4833,7 @@
         "name": "Dumbbell stiff-legged deadlift",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -4842,7 +4842,7 @@
         "name": "Bodyweight squat",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -4851,7 +4851,7 @@
         "name": "Lying cable front raise",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -4860,7 +4860,7 @@
         "name": "HM Plank",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -4869,7 +4869,7 @@
         "name": "Dumbbell pull-over",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -4878,7 +4878,7 @@
         "name": "Push-up",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -4887,7 +4887,7 @@
         "name": "Arnold press",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -4896,7 +4896,7 @@
         "name": "FYR Dumbbell Curl",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -5046,7 +5046,7 @@
         "name": "Rower",
         "sets": 6,
         "reps": 30,
-        "duration": 18,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -5137,7 +5137,7 @@
         "name": "Treadmill walking",
         "sets": 2,
         "reps": 30,
-        "duration": 6,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -5395,7 +5395,7 @@
         "name": "Jumping rope",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -5557,7 +5557,7 @@
       {
         "name": "HM Plank",
         "sets": 3,
-        "reps": 3,
+        "reps": 180,
         "duration": 9,
         "is_time_based": true,
         "to_failure": false,
@@ -5567,7 +5567,7 @@
         "name": "Shuttle run",
         "sets": 1,
         "reps": 180,
-        "duration": 4,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -5635,7 +5635,7 @@
         "name": "Shuttle run",
         "sets": 1,
         "reps": 180,
-        "duration": 4,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -5720,7 +5720,7 @@
       {
         "name": "HM Plank",
         "sets": 3,
-        "reps": 3,
+        "reps": 180,
         "duration": 9,
         "is_time_based": true,
         "to_failure": false,
@@ -5730,7 +5730,7 @@
         "name": "Shuttle run",
         "sets": 1,
         "reps": 180,
-        "duration": 4,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -5798,7 +5798,7 @@
         "name": "Shuttle run",
         "sets": 1,
         "reps": 180,
-        "duration": 4,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -5883,7 +5883,7 @@
       {
         "name": "HM Plank",
         "sets": 3,
-        "reps": 3,
+        "reps": 180,
         "duration": 9,
         "is_time_based": true,
         "to_failure": false,
@@ -5893,7 +5893,7 @@
         "name": "Shuttle run",
         "sets": 1,
         "reps": 180,
-        "duration": 4,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -5961,7 +5961,7 @@
         "name": "Shuttle run",
         "sets": 1,
         "reps": 180,
-        "duration": 4,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -6556,7 +6556,7 @@
         "name": "Side Hop-Sprint",
         "sets": 1,
         "reps": 15,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -6619,7 +6619,7 @@
         "name": "Arm circle",
         "sets": 1,
         "reps": 15,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -6628,7 +6628,7 @@
         "name": "Shadow boxing",
         "sets": 1,
         "reps": 15,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -6642,7 +6642,7 @@
         "name": "Side Hop-Sprint",
         "sets": 1,
         "reps": 15,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -6705,7 +6705,7 @@
         "name": "Arm circle",
         "sets": 1,
         "reps": 15,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -6714,7 +6714,7 @@
         "name": "Shadow boxing",
         "sets": 1,
         "reps": 15,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -7167,7 +7167,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -7348,7 +7348,7 @@
         "name": "Side plank",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -8156,7 +8156,7 @@
         "name": "Jumping rope",
         "sets": 3,
         "reps": 180,
-        "duration": 12,
+        "duration": 9,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -8206,7 +8206,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -8274,7 +8274,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -8769,7 +8769,7 @@
         "name": "HM Plank",
         "sets": 4,
         "reps": 30,
-        "duration": 12,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -9117,7 +9117,7 @@
         "name": "Total Fitness Dumbbell Farmer's Carry",
         "sets": 4,
         "reps": 60,
-        "duration": 12,
+        "duration": 4,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -9126,7 +9126,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -9135,7 +9135,7 @@
         "name": "Side plank",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -9221,7 +9221,7 @@
         "name": "Total Fitness Dumbbell Farmer's Carry",
         "sets": 4,
         "reps": 60,
-        "duration": 12,
+        "duration": 4,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -9334,7 +9334,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -9511,7 +9511,7 @@
         "name": "Side lunge cross-body heel-touch",
         "sets": 1,
         "reps": 40,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -9520,7 +9520,7 @@
         "name": "Bodyweight squat",
         "sets": 1,
         "reps": 40,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -9529,7 +9529,7 @@
         "name": "Mountain climber",
         "sets": 1,
         "reps": 40,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -9538,7 +9538,7 @@
         "name": "Running lunge",
         "sets": 1,
         "reps": 40,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -9547,7 +9547,7 @@
         "name": "Burpee",
         "sets": 1,
         "reps": 40,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -9556,7 +9556,7 @@
         "name": "High Kick",
         "sets": 1,
         "reps": 40,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -9565,7 +9565,7 @@
         "name": "Holman Hip Raise with Chest Press",
         "sets": 1,
         "reps": 40,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -9574,7 +9574,7 @@
         "name": "Sit-up",
         "sets": 1,
         "reps": 40,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -9583,7 +9583,7 @@
         "name": "Hanging leg raise",
         "sets": 1,
         "reps": 40,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -10677,38 +10677,38 @@
       {
         "name": "Plank Walk",
         "sets": 3,
-        "reps": 1,
-        "duration": 9,
+        "reps": 60,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
-        "unit": "min"
+        "unit": "sec"
       },
       {
         "name": "Burpee",
-        "sets": 90,
-        "reps": 10,
-        "duration": 270,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 90,
+        "duration": 2,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Mountain climber",
-        "sets": 180,
-        "reps": 10,
-        "duration": 540,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 180,
+        "duration": 3,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "FYR Jumping Lunge",
-        "sets": 270,
-        "reps": 10,
-        "duration": 810,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 270,
+        "duration": 5,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       }
     ]
   },
@@ -11114,7 +11114,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -11123,7 +11123,7 @@
         "name": "Burpee over kettlebell",
         "sets": 8,
         "reps": 20,
-        "duration": 24,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -11555,7 +11555,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -11564,7 +11564,7 @@
         "name": "Burpee over kettlebell",
         "sets": 8,
         "reps": 20,
-        "duration": 24,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -12243,48 +12243,48 @@
       },
       {
         "name": "Pullups",
-        "sets": 25,
-        "reps": 10,
-        "duration": 75,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 25,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "FYR2 Plyo Split Squat",
-        "sets": 30,
-        "reps": 10,
-        "duration": 90,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 30,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Feet-elevated push-up",
-        "sets": 30,
-        "reps": 10,
-        "duration": 90,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 30,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Hanging leg raise",
-        "sets": 40,
-        "reps": 10,
-        "duration": 120,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 40,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Kettlebell swing",
-        "sets": 40,
-        "reps": 10,
-        "duration": 120,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 40,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       }
     ]
   },
@@ -12311,12 +12311,12 @@
       },
       {
         "name": "Box jump",
-        "sets": 30,
-        "reps": 10,
-        "duration": 90,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 30,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Dumbbell renegade row",
@@ -12329,12 +12329,12 @@
       },
       {
         "name": "Mountain climber",
-        "sets": 30,
-        "reps": 10,
-        "duration": 90,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 30,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Goblet Squat",
@@ -12370,12 +12370,12 @@
       },
       {
         "name": "Chin-Up",
-        "sets": 25,
-        "reps": 10,
-        "duration": 75,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 25,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Walking lunge",
@@ -12388,30 +12388,30 @@
       },
       {
         "name": "Close push-up",
-        "sets": 30,
-        "reps": 10,
-        "duration": 90,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 30,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Barbell floor wiper",
-        "sets": 40,
-        "reps": 10,
-        "duration": 120,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 40,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Barbell upright row",
-        "sets": 40,
-        "reps": 10,
-        "duration": 120,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 40,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       }
     ]
   },
@@ -12438,12 +12438,12 @@
       },
       {
         "name": "Step-up with knee raise",
-        "sets": 30,
-        "reps": 10,
-        "duration": 90,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 30,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Smith machine upright row",
@@ -12490,7 +12490,7 @@
         "name": "Kettlebell swing",
         "sets": 1,
         "reps": 20,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -12499,7 +12499,7 @@
         "name": "Goblet Squats",
         "sets": 1,
         "reps": 20,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -12508,7 +12508,7 @@
         "name": "Jumping rope",
         "sets": 1,
         "reps": 20,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -12517,7 +12517,7 @@
         "name": "Burpee over barbell",
         "sets": 1,
         "reps": 20,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -12526,7 +12526,7 @@
         "name": "HM Plank",
         "sets": 1,
         "reps": 20,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -12540,7 +12540,7 @@
         "name": "Kettlebell swing",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -12549,7 +12549,7 @@
         "name": "Goblet Squats",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -12558,7 +12558,7 @@
         "name": "Jumping rope",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -12567,7 +12567,7 @@
         "name": "Burpee over barbell",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -12576,7 +12576,7 @@
         "name": "HM Plank",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -12590,7 +12590,7 @@
         "name": "Kettlebell swing",
         "sets": 1,
         "reps": 40,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -12599,7 +12599,7 @@
         "name": "Goblet Squats",
         "sets": 1,
         "reps": 40,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -12608,7 +12608,7 @@
         "name": "Jumping rope",
         "sets": 1,
         "reps": 40,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -12617,7 +12617,7 @@
         "name": "Burpee over barbell",
         "sets": 1,
         "reps": 40,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -12626,7 +12626,7 @@
         "name": "HM Plank",
         "sets": 1,
         "reps": 40,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -12640,7 +12640,7 @@
         "name": "Kettlebell swing",
         "sets": 1,
         "reps": 45,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -12649,7 +12649,7 @@
         "name": "Goblet Squats",
         "sets": 1,
         "reps": 45,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -12658,7 +12658,7 @@
         "name": "Jumping rope",
         "sets": 1,
         "reps": 45,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -12667,7 +12667,7 @@
         "name": "Burpee over barbell",
         "sets": 1,
         "reps": 45,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -12676,7 +12676,7 @@
         "name": "HM Plank",
         "sets": 1,
         "reps": 45,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -13343,7 +13343,7 @@
         "name": "Burpee",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -13361,7 +13361,7 @@
         "name": "Shadow boxing",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -13379,7 +13379,7 @@
         "name": "Battle ropes",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -13397,7 +13397,7 @@
         "name": "Kettlebell swing",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -13415,7 +13415,7 @@
         "name": "Running lunge",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -13438,7 +13438,7 @@
         "name": "Bodyweight squat",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -13456,7 +13456,7 @@
         "name": "Jumping rope",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -13474,7 +13474,7 @@
         "name": "Jumping Jack",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -13492,7 +13492,7 @@
         "name": "Mountain climber",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -13510,7 +13510,7 @@
         "name": "Stationary bike",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -13533,7 +13533,7 @@
         "name": "Dip Machine",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -13551,7 +13551,7 @@
         "name": "Battle ropes",
         "sets": 6,
         "reps": 30,
-        "duration": 18,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -13578,7 +13578,7 @@
         "name": "Shadow boxing",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -13596,7 +13596,7 @@
         "name": "Burpee",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -14082,7 +14082,7 @@
         "name": "Treadmill walking",
         "sets": 1,
         "reps": 15,
-        "duration": 16,
+        "duration": 15,
         "is_time_based": true,
         "to_failure": false,
         "unit": "min"
@@ -14144,8 +14144,8 @@
       {
         "name": "Jumping rope",
         "sets": 1,
-        "reps": 10,
-        "duration": 11,
+        "reps": 5,
+        "duration": 10,
         "is_time_based": true,
         "to_failure": false,
         "unit": "min"
@@ -14199,10 +14199,10 @@
         "name": "Lat pull-down",
         "sets": 1,
         "reps": 5,
-        "duration": 6,
-        "is_time_based": true,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       }
     ]
   },
@@ -14263,7 +14263,7 @@
         "name": "Treadmill walking",
         "sets": 1,
         "reps": 15,
-        "duration": 16,
+        "duration": 15,
         "is_time_based": true,
         "to_failure": false,
         "unit": "min"
@@ -14317,7 +14317,7 @@
         "name": "Rower",
         "sets": 1,
         "reps": 10,
-        "duration": 11,
+        "duration": 10,
         "is_time_based": true,
         "to_failure": false,
         "unit": "min"
@@ -14371,10 +14371,10 @@
         "name": "Lat pull-down",
         "sets": 1,
         "reps": 5,
-        "duration": 6,
-        "is_time_based": true,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       }
     ]
   },
@@ -14385,7 +14385,7 @@
         "name": "Slow Jog",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -14529,7 +14529,7 @@
         "name": "Pushups",
         "sets": 1,
         "reps": 120,
-        "duration": 3,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -14561,7 +14561,7 @@
         "name": "Wall shoulder tap",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -14674,7 +14674,7 @@
         "name": "Barbell Squat",
         "sets": 5,
         "reps": 20,
-        "duration": 15,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -14859,7 +14859,7 @@
         "name": "Shoulder tap",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -15048,7 +15048,7 @@
         "name": "Pushups",
         "sets": 5,
         "reps": 120,
-        "duration": 15,
+        "duration": 10,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -15071,7 +15071,7 @@
         "name": "Jumping Jack",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -15269,7 +15269,7 @@
         "name": "HM Plank",
         "sets": 1,
         "reps": 120,
-        "duration": 3,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -15283,7 +15283,7 @@
         "name": "Lateral Squats",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -15463,7 +15463,7 @@
         "name": "High knees",
         "sets": 4,
         "reps": 120,
-        "duration": 12,
+        "duration": 8,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -16759,7 +16759,7 @@
         "name": "Holman Weighted Cross Punch",
         "sets": 2,
         "reps": 20,
-        "duration": 6,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -16768,7 +16768,7 @@
         "name": "Jumping Jack",
         "sets": 2,
         "reps": 20,
-        "duration": 6,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -16777,7 +16777,7 @@
         "name": "Mountain climber",
         "sets": 2,
         "reps": 20,
-        "duration": 6,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -16786,7 +16786,7 @@
         "name": "Pushups",
         "sets": 2,
         "reps": 20,
-        "duration": 6,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -16800,7 +16800,7 @@
         "name": "Holman Weighted Cross Punch",
         "sets": 2,
         "reps": 20,
-        "duration": 6,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -16809,7 +16809,7 @@
         "name": "Jumping Jack",
         "sets": 2,
         "reps": 20,
-        "duration": 6,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -16818,7 +16818,7 @@
         "name": "Mountain climber",
         "sets": 2,
         "reps": 20,
-        "duration": 6,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -16827,7 +16827,7 @@
         "name": "Pushups",
         "sets": 2,
         "reps": 20,
-        "duration": 6,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -16859,7 +16859,7 @@
         "name": "Stomach Vacuum",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -16868,10 +16868,10 @@
         "name": "Shuttle run training",
         "sets": 5,
         "reps": 10,
-        "duration": 15,
+        "duration": 50,
         "is_time_based": true,
         "to_failure": false,
-        "unit": "sec"
+        "unit": "min"
       }
     ]
   },
@@ -17873,7 +17873,7 @@
         "name": "Shadow boxing",
         "sets": 5,
         "reps": 180,
-        "duration": 20,
+        "duration": 15,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -17882,7 +17882,7 @@
         "name": "Jumping rope",
         "sets": 5,
         "reps": 180,
-        "duration": 20,
+        "duration": 15,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -17946,7 +17946,7 @@
         "name": "Mountain climber",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -17964,7 +17964,7 @@
         "name": "Plank Walk",
         "sets": 1,
         "reps": 15,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -18000,7 +18000,7 @@
         "name": "Jumping rope",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -18014,7 +18014,7 @@
         "name": "Plank up-down",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -18082,7 +18082,7 @@
         "name": "Jumping rope",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -18127,7 +18127,7 @@
         "name": "Dumbbell Walking Lunge",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -18166,12 +18166,12 @@
       },
       {
         "name": "Hanging Leg Raises",
-        "sets": 25,
-        "reps": 10,
-        "duration": 75,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 25,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Alternating hanging knee raise",
@@ -18184,18 +18184,18 @@
       },
       {
         "name": "Seated Leg Curl",
-        "sets": 45,
-        "reps": 10,
-        "duration": 135,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 45,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Mountain climber",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -18204,7 +18204,7 @@
         "name": "Plank Walk",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -18213,7 +18213,7 @@
         "name": "Side plank hip dip",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -18272,7 +18272,7 @@
         "name": "Treadmill walking",
         "sets": 5,
         "reps": 120,
-        "duration": 15,
+        "duration": 10,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -18290,16 +18290,16 @@
         "name": "Glute bridge",
         "sets": 3,
         "reps": 10,
-        "duration": 9,
+        "duration": 30,
         "is_time_based": true,
         "to_failure": false,
-        "unit": "sec"
+        "unit": "min"
       },
       {
         "name": "HM Plank",
         "sets": 1,
         "reps": 6,
-        "duration": 7,
+        "duration": 6,
         "is_time_based": true,
         "to_failure": false,
         "unit": "min"
@@ -18385,7 +18385,7 @@
         "name": "Stationary bike",
         "sets": 5,
         "reps": 180,
-        "duration": 35,
+        "duration": 15,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -18394,7 +18394,7 @@
         "name": "Recumbent Bike",
         "sets": 1,
         "reps": 12,
-        "duration": 13,
+        "duration": 12,
         "is_time_based": true,
         "to_failure": false,
         "unit": "min"
@@ -18444,7 +18444,7 @@
         "name": "JM Press",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -18484,11 +18484,11 @@
       {
         "name": "Jumping rope",
         "sets": 20,
-        "reps": 1,
-        "duration": 60,
+        "reps": 60,
+        "duration": 20,
         "is_time_based": true,
         "to_failure": false,
-        "unit": "min"
+        "unit": "sec"
       },
       {
         "name": "Dumbbell front raise",
@@ -18562,7 +18562,7 @@
         "name": "Recumbent Bike",
         "sets": 1,
         "reps": 120,
-        "duration": 3,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -18589,7 +18589,7 @@
         "name": "Treadmill walking",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -18673,12 +18673,12 @@
       },
       {
         "name": "Slow Jog",
-        "sets": 25,
-        "reps": 10,
-        "duration": 75,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 25,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       }
     ]
   },
@@ -18766,7 +18766,7 @@
         "name": "Swiss Ball Ab Roll-Out",
         "sets": 5,
         "reps": 30,
-        "duration": 15,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -19029,7 +19029,7 @@
         "name": "Swiss Ball Ab Roll-Out",
         "sets": 4,
         "reps": 45,
-        "duration": 12,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -19283,7 +19283,7 @@
         "name": "Swiss Ball Ab Roll-Out",
         "sets": 4,
         "reps": 45,
-        "duration": 12,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -19750,7 +19750,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -20217,7 +20217,7 @@
         "name": "HM Plank",
         "sets": 5,
         "reps": 60,
-        "duration": 15,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -20344,7 +20344,7 @@
         "name": "HM Plank",
         "sets": 5,
         "reps": 60,
-        "duration": 15,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -20887,7 +20887,7 @@
       {
         "name": "HM Plank",
         "sets": 5,
-        "reps": 60,
+        "reps": 0,
         "duration": 15,
         "is_time_based": true,
         "to_failure": true,
@@ -22604,7 +22604,7 @@
         "name": "Internal Rotation with Band",
         "sets": 1,
         "reps": 180,
-        "duration": 4,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -22654,7 +22654,7 @@
         "name": "Standing Cable Wood Chop",
         "sets": 1,
         "reps": 180,
-        "duration": 4,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -22695,10 +22695,10 @@
         "name": "Standing dumbbell shoulder press",
         "sets": 3,
         "reps": 6,
-        "duration": 9,
+        "duration": 18,
         "is_time_based": true,
         "to_failure": false,
-        "unit": "sec"
+        "unit": "min"
       },
       {
         "name": "Banded crunch",
@@ -22713,7 +22713,7 @@
         "name": "Internal Rotation with Band",
         "sets": 1,
         "reps": 180,
-        "duration": 4,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -22763,7 +22763,7 @@
         "name": "Standing Cable Wood Chop",
         "sets": 1,
         "reps": 180,
-        "duration": 4,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -23386,21 +23386,21 @@
       },
       {
         "name": "Diamond push-up",
-        "sets": 30,
-        "reps": 60,
-        "duration": 150,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 30,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Chin-Up",
-        "sets": 30,
-        "reps": 60,
-        "duration": 150,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 30,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Barbell Squat",
@@ -23427,30 +23427,30 @@
     "exercises": [
       {
         "name": "Pushups",
-        "sets": 40,
-        "reps": 60,
-        "duration": 200,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 40,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Pullups",
-        "sets": 40,
-        "reps": 60,
-        "duration": 200,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 40,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Smith machine upright row",
-        "sets": 40,
-        "reps": 60,
-        "duration": 200,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 40,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "AM Upright Row",
@@ -23504,21 +23504,21 @@
       },
       {
         "name": "Chin-Up",
-        "sets": 40,
-        "reps": 60,
-        "duration": 200,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 40,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Diamond push-up",
-        "sets": 40,
-        "reps": 60,
-        "duration": 200,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 40,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Band front squat",
@@ -23545,21 +23545,21 @@
     "exercises": [
       {
         "name": "Pushups",
-        "sets": 50,
-        "reps": 60,
-        "duration": 250,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 50,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Chest dip",
-        "sets": 50,
-        "reps": 60,
-        "duration": 250,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 50,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "High Cable Curls",
@@ -23592,7 +23592,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -23613,21 +23613,21 @@
       },
       {
         "name": "Pull-up",
-        "sets": 50,
-        "reps": 60,
-        "duration": 250,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 50,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "UNS Inverted row",
-        "sets": 50,
-        "reps": 60,
-        "duration": 250,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 50,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Box jump",
@@ -23672,21 +23672,21 @@
     "exercises": [
       {
         "name": "Push-up",
-        "sets": 50,
-        "reps": 60,
-        "duration": 450,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 50,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Chest dip",
-        "sets": 50,
-        "reps": 60,
-        "duration": 250,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 50,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Kettlebell Hang Clean",
@@ -23719,7 +23719,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -23778,7 +23778,7 @@
         "name": "Rower",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24459,7 +24459,7 @@
         "name": "Plank Walk",
         "sets": 10,
         "reps": 45,
-        "duration": 30,
+        "duration": 8,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24468,7 +24468,7 @@
         "name": "Lying cable front raise",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24477,7 +24477,7 @@
         "name": "Barbell reverse lunge",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24486,7 +24486,7 @@
         "name": "Alternating lunge jump",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24495,7 +24495,7 @@
         "name": "Seated cable shoulder press",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24504,7 +24504,7 @@
         "name": "Bent Over Barbell Row",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24513,7 +24513,7 @@
         "name": "Close push-up",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24522,7 +24522,7 @@
         "name": "Bodyweight squat",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24531,7 +24531,7 @@
         "name": "Burpee to pull-up",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24540,7 +24540,7 @@
         "name": "Mountain climber",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24554,7 +24554,7 @@
         "name": "Natural Glute Ham Raise with Stability Ball",
         "sets": 10,
         "reps": 45,
-        "duration": 30,
+        "duration": 8,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24563,7 +24563,7 @@
         "name": "Single-arm stiff-legged deadlift",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24572,7 +24572,7 @@
         "name": "Medicine ball slam",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24581,7 +24581,7 @@
         "name": "Weighted Squat",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24590,7 +24590,7 @@
         "name": "Single-leg glute bridge",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24599,7 +24599,7 @@
         "name": "Dumbbell row to triceps kick-back",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24608,7 +24608,7 @@
         "name": "Band front squat",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24617,7 +24617,7 @@
         "name": "Alternating biceps curl",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24626,7 +24626,7 @@
         "name": "Side Lateral Raise",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24635,7 +24635,7 @@
         "name": "Russian twist",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24649,7 +24649,7 @@
         "name": "Side plank",
         "sets": 10,
         "reps": 45,
-        "duration": 30,
+        "duration": 8,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24658,7 +24658,7 @@
         "name": "Hanging leg raise",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24667,7 +24667,7 @@
         "name": "Kettlebell swing",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24676,7 +24676,7 @@
         "name": "Walking lunge",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24685,7 +24685,7 @@
         "name": "Dumbbell Flyes",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24694,7 +24694,7 @@
         "name": "Dumbbell squat",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24703,7 +24703,7 @@
         "name": "Barbell front raise",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24712,7 +24712,7 @@
         "name": "UN Barbell Box Squat",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24721,7 +24721,7 @@
         "name": "1.5-rep push-up",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -24730,7 +24730,7 @@
         "name": "Reverse Lunge Rotation",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -25124,7 +25124,7 @@
         "name": "Treadmill running",
         "sets": 4,
         "reps": 20,
-        "duration": 12,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -25244,21 +25244,21 @@
       },
       {
         "name": "FYR2 Dumbbell Sit-Up Reach",
-        "sets": 25,
-        "reps": 10,
-        "duration": 75,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 25,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Scissor Kick",
-        "sets": 25,
-        "reps": 10,
-        "duration": 75,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 25,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       }
     ]
   },
@@ -25269,7 +25269,7 @@
         "name": "Speed skater",
         "sets": 15,
         "reps": 60,
-        "duration": 45,
+        "duration": 15,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -25278,7 +25278,7 @@
         "name": "Dumbbell Lunges",
         "sets": 5,
         "reps": 60,
-        "duration": 15,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -25287,7 +25287,7 @@
         "name": "Dumbbell lateral raise",
         "sets": 5,
         "reps": 60,
-        "duration": 15,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -25296,7 +25296,7 @@
         "name": "Rusin Banded Face Pull",
         "sets": 5,
         "reps": 60,
-        "duration": 15,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -25310,19 +25310,19 @@
         "name": "Side lunge cross-body heel-touch",
         "sets": 3,
         "reps": 5,
-        "duration": 18,
-        "is_time_based": true,
+        "duration": 9,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Barbell Squat",
         "sets": 3,
         "reps": 5,
-        "duration": 18,
-        "is_time_based": true,
+        "duration": 9,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       }
     ]
   },
@@ -25350,8 +25350,8 @@
       {
         "name": "Treadmill walking",
         "sets": 3,
-        "reps": 600,
-        "duration": 603,
+        "reps": 10,
+        "duration": 30,
         "is_time_based": true,
         "to_failure": false,
         "unit": "min"
@@ -25360,10 +25360,10 @@
         "name": "Windmills",
         "sets": 3,
         "reps": 10,
-        "duration": 33,
-        "is_time_based": true,
+        "duration": 9,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       }
     ]
   },
@@ -25374,7 +25374,7 @@
         "name": "Jumping rope",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -25442,7 +25442,7 @@
         "name": "Treadmill walking",
         "sets": 3,
         "reps": 5,
-        "duration": 18,
+        "duration": 15,
         "is_time_based": true,
         "to_failure": false,
         "unit": "min"
@@ -25451,7 +25451,7 @@
         "name": "Pushups",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -25460,7 +25460,7 @@
         "name": "Dumbbell lateral raise",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -25469,7 +25469,7 @@
         "name": "Bicep Curls \"\"21s\"\"\"",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -25478,7 +25478,7 @@
         "name": "Tricep Dumbbell Kickback",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -25487,7 +25487,7 @@
         "name": "Banded crunch",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -27029,7 +27029,7 @@
         "name": "Battle ropes",
         "sets": 8,
         "reps": 30,
-        "duration": 24,
+        "duration": 4,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -27038,7 +27038,7 @@
         "name": "Burpee",
         "sets": 8,
         "reps": 30,
-        "duration": 24,
+        "duration": 4,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -27079,7 +27079,7 @@
         "name": "Shuttle run",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -27133,7 +27133,7 @@
         "name": "FYR Running Lunge",
         "sets": 8,
         "reps": 60,
-        "duration": 24,
+        "duration": 8,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -27187,7 +27187,7 @@
         "name": "Medicine ball slam",
         "sets": 5,
         "reps": 30,
-        "duration": 15,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -27246,7 +27246,7 @@
         "name": "Side Hop-Sprint",
         "sets": 9,
         "reps": 30,
-        "duration": 27,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -27282,7 +27282,7 @@
         "name": "Lying cable front raise",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -27291,7 +27291,7 @@
         "name": "Lateral Band Walk",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -27318,7 +27318,7 @@
         "name": "Single-Arm Dumbbell Snatch",
         "sets": 16,
         "reps": 30,
-        "duration": 48,
+        "duration": 8,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -27359,7 +27359,7 @@
         "name": "Elliptical trainer",
         "sets": 5,
         "reps": 5,
-        "duration": 30,
+        "duration": 25,
         "is_time_based": true,
         "to_failure": false,
         "unit": "min"
@@ -27458,7 +27458,7 @@
         "name": "Jumping rope",
         "sets": 1,
         "reps": 90,
-        "duration": 3,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -27526,7 +27526,7 @@
         "name": "Elliptical trainer",
         "sets": 5,
         "reps": 5,
-        "duration": 30,
+        "duration": 25,
         "is_time_based": true,
         "to_failure": false,
         "unit": "min"
@@ -27562,7 +27562,7 @@
         "name": "Reach crunch",
         "sets": 1,
         "reps": 90,
-        "duration": 3,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -28654,7 +28654,7 @@
         "name": "Heavy Bag Thrust",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -28704,7 +28704,7 @@
         "name": "Burpee over kettlebell",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -28745,7 +28745,7 @@
         "name": "Burpee over kettlebell",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -28786,7 +28786,7 @@
         "name": "Burpee over kettlebell",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -28827,7 +28827,7 @@
         "name": "Burpee over kettlebell",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -28868,7 +28868,7 @@
         "name": "Burpee over kettlebell",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -28909,7 +28909,7 @@
         "name": "Burpee over kettlebell",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -28950,7 +28950,7 @@
         "name": "Burpee over kettlebell",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -28973,7 +28973,7 @@
         "name": "Treadmill walking",
         "sets": 10,
         "reps": 30,
-        "duration": 30,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -28991,7 +28991,7 @@
         "name": "Treadmill running",
         "sets": 10,
         "reps": 30,
-        "duration": 30,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -29009,7 +29009,7 @@
         "name": "HM Plank",
         "sets": 2,
         "reps": 30,
-        "duration": 6,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -29027,7 +29027,7 @@
         "name": "Lying cable front raise",
         "sets": 2,
         "reps": 20,
-        "duration": 6,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -29242,12 +29242,12 @@
       },
       {
         "name": "Bodyweight squat",
-        "sets": 25,
-        "reps": 10,
-        "duration": 75,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 25,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Drop Push",
@@ -29269,12 +29269,12 @@
       },
       {
         "name": "Sit-up",
-        "sets": 30,
-        "reps": 10,
-        "duration": 90,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 30,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Burpee",
@@ -29305,21 +29305,21 @@
       },
       {
         "name": "Back extension",
-        "sets": 25,
-        "reps": 10,
-        "duration": 75,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 25,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Hanging leg raise",
-        "sets": 30,
-        "reps": 10,
-        "duration": 90,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 30,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Inchworm",
@@ -29400,12 +29400,12 @@
       },
       {
         "name": "FYR Tuck Jump",
-        "sets": 25,
-        "reps": 10,
-        "duration": 75,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 25,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Knee Across The Body",
@@ -29418,12 +29418,12 @@
       },
       {
         "name": "Jump Squat",
-        "sets": 25,
-        "reps": 10,
-        "duration": 75,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 25,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "HM Plank",
@@ -30042,7 +30042,7 @@
         "name": "Treadmill jogging",
         "sets": 5,
         "reps": 90,
-        "duration": 15,
+        "duration": 8,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -30069,7 +30069,7 @@
         "name": "Treadmill running",
         "sets": 5,
         "reps": 60,
-        "duration": 15,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -30114,7 +30114,7 @@
         "name": "Treadmill walking",
         "sets": 5,
         "reps": 120,
-        "duration": 15,
+        "duration": 10,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -30185,30 +30185,30 @@
     "exercises": [
       {
         "name": "Kettlebell swing",
-        "sets": 60,
-        "reps": 3,
-        "duration": 180,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 60,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Pullups",
-        "sets": 60,
-        "reps": 5,
-        "duration": 180,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 60,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Pushups",
-        "sets": 60,
-        "reps": 8,
-        "duration": 180,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 60,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       }
     ]
   },
@@ -30482,7 +30482,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -30591,7 +30591,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -31499,7 +31499,7 @@
         "name": "Pull-up",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -31508,7 +31508,7 @@
         "name": "Push-up",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -31517,7 +31517,7 @@
         "name": "HM Bent-Over Dumbbell Row",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -31526,7 +31526,7 @@
         "name": "Standing dumbbell shoulder press",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -31540,7 +31540,7 @@
         "name": "Dumbbell stiff-legged deadlift",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -31549,16 +31549,16 @@
         "name": "Goblet Squat",
         "sets": 3,
         "reps": 60,
-        "duration": 63,
-        "is_time_based": true,
+        "duration": 9,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Side lunge cross-body heel-touch",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -31567,7 +31567,7 @@
         "name": "Bodyweight Reverse Lunge",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -31581,7 +31581,7 @@
         "name": "Bent Over Barbell Row",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -31590,7 +31590,7 @@
         "name": "Bench press",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -31599,7 +31599,7 @@
         "name": "UNS Inverted row",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -31608,7 +31608,7 @@
         "name": "Military press",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -31622,7 +31622,7 @@
         "name": "Barbell Deadlift",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -31631,7 +31631,7 @@
         "name": "Barbell Squat",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -31640,7 +31640,7 @@
         "name": "HM Alternating Lunge Reach",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -31649,7 +31649,7 @@
         "name": "Stiff-Legged Deadlift",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -31976,7 +31976,7 @@
         "name": "Lateral Band Walk",
         "sets": 1,
         "reps": 180,
-        "duration": 4,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -31985,7 +31985,7 @@
         "name": "Foot-SMR",
         "sets": 1,
         "reps": 15,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -32021,7 +32021,7 @@
         "name": "Side plank",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -32039,7 +32039,7 @@
         "name": "UNS Lat stretch",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -32053,7 +32053,7 @@
         "name": "Lateral Band Walk",
         "sets": 1,
         "reps": 180,
-        "duration": 4,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -32071,7 +32071,7 @@
         "name": "UNS Foam Roll",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -32098,7 +32098,7 @@
         "name": "Superman",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -32107,7 +32107,7 @@
         "name": "HM Plank",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -32130,7 +32130,7 @@
         "name": "Lateral Band Walk",
         "sets": 1,
         "reps": 180,
-        "duration": 4,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -32533,7 +32533,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -32660,7 +32660,7 @@
         "name": "Rower",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -33427,7 +33427,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -33441,7 +33441,7 @@
         "name": "Weighted Crunches",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -33450,7 +33450,7 @@
         "name": "Twisting Mountain Climbers",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -33459,7 +33459,7 @@
         "name": "HM Seated Twist",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -33468,7 +33468,7 @@
         "name": "Lying cable front raise",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -33477,7 +33477,7 @@
         "name": "HM Plank",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -34525,7 +34525,7 @@
         "name": "Rower",
         "sets": 4,
         "reps": 60,
-        "duration": 12,
+        "duration": 4,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -34870,7 +34870,7 @@
         "name": "Russian twist",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -35065,7 +35065,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -35201,7 +35201,7 @@
         "name": "Side plank",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -36394,55 +36394,55 @@
         "name": "Goblet Squat",
         "sets": 3,
         "reps": 5,
-        "duration": 18,
-        "is_time_based": true,
+        "duration": 9,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Dumbbell Lunges",
         "sets": 3,
         "reps": 5,
-        "duration": 18,
-        "is_time_based": true,
+        "duration": 9,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Dumbbell floor press",
         "sets": 3,
         "reps": 5,
-        "duration": 18,
-        "is_time_based": true,
+        "duration": 9,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Dumbbell pull-over",
         "sets": 3,
         "reps": 5,
-        "duration": 18,
-        "is_time_based": true,
+        "duration": 9,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Hammer curl",
         "sets": 3,
         "reps": 5,
-        "duration": 18,
-        "is_time_based": true,
+        "duration": 9,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Hanging leg raise",
         "sets": 3,
         "reps": 5,
-        "duration": 18,
-        "is_time_based": true,
+        "duration": 9,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       }
     ]
   },
@@ -36498,7 +36498,7 @@
         "name": "Banded crunch",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -37051,7 +37051,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -37129,7 +37129,7 @@
         "name": "Negative pull-up",
         "sets": 5,
         "reps": 30,
-        "duration": 15,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -37143,7 +37143,7 @@
         "name": "Superman Push-Up",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -37152,7 +37152,7 @@
         "name": "Chin-Up",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -37161,7 +37161,7 @@
         "name": "Band Pull Apart",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -37170,7 +37170,7 @@
         "name": "Close push-up",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -37179,7 +37179,7 @@
         "name": "Hammer Curls",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -38390,7 +38390,7 @@
         "name": "Rower",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -38448,11 +38448,11 @@
       {
         "name": "Machine seated row",
         "sets": 1,
-        "reps": 5,
-        "duration": 6,
-        "is_time_based": true,
+        "reps": 0,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": true,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "EZ-bar preacher curl",
@@ -38475,11 +38475,11 @@
       {
         "name": "Seated Barbell Curl",
         "sets": 1,
-        "reps": 5,
-        "duration": 6,
-        "is_time_based": true,
+        "reps": 0,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": true,
-        "unit": "min"
+        "unit": null
       }
     ]
   },
@@ -38525,11 +38525,11 @@
       {
         "name": "Hammer Grip Incline DB Bench Press",
         "sets": 1,
-        "reps": 5,
-        "duration": 6,
-        "is_time_based": true,
+        "reps": 0,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": true,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "EZ-Bar Skullcrusher",
@@ -38552,11 +38552,11 @@
       {
         "name": "Seated triceps push-down",
         "sets": 1,
-        "reps": 5,
-        "duration": 6,
-        "is_time_based": true,
+        "reps": 0,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": true,
-        "unit": "min"
+        "unit": null
       }
     ]
   },
@@ -38593,11 +38593,11 @@
       {
         "name": "Leg extension",
         "sets": 1,
-        "reps": 5,
-        "duration": 6,
-        "is_time_based": true,
+        "reps": 0,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": true,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Stiff-Legged Deadlift",
@@ -38611,11 +38611,11 @@
       {
         "name": "Leg curl",
         "sets": 1,
-        "reps": 5,
-        "duration": 6,
-        "is_time_based": true,
+        "reps": 0,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": true,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Barbell Seated Calf Raise",
@@ -38629,11 +38629,11 @@
       {
         "name": "Seated Calf Raise",
         "sets": 1,
-        "reps": 5,
-        "duration": 6,
-        "is_time_based": true,
+        "reps": 0,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": true,
-        "unit": "min"
+        "unit": null
       }
     ]
   },
@@ -38670,11 +38670,11 @@
       {
         "name": "Smith machine shoulder press",
         "sets": 1,
-        "reps": 5,
-        "duration": 6,
-        "is_time_based": true,
+        "reps": 0,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": true,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "AM Upright Row",
@@ -38688,11 +38688,11 @@
       {
         "name": "Barbell shrug",
         "sets": 1,
-        "reps": 5,
-        "duration": 6,
-        "is_time_based": true,
+        "reps": 0,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": true,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Barbell Curl",
@@ -38706,11 +38706,11 @@
       {
         "name": "Barbell seal row",
         "sets": 1,
-        "reps": 5,
-        "duration": 6,
-        "is_time_based": true,
+        "reps": 0,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": true,
-        "unit": "min"
+        "unit": null
       }
     ]
   },
@@ -40217,7 +40217,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -40594,10 +40594,10 @@
         "name": "Active hang from bar",
         "sets": 3,
         "reps": 5,
-        "duration": 9,
+        "duration": 15,
         "is_time_based": true,
         "to_failure": false,
-        "unit": "sec"
+        "unit": "min"
       },
       {
         "name": "Triceps dip",
@@ -42373,7 +42373,7 @@
         "name": "Boss Everline 10-Yard Sprints",
         "sets": 1,
         "reps": 180,
-        "duration": 4,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -42477,7 +42477,7 @@
         "name": "Holman Alternating Side Squat Overhead Press",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -42536,7 +42536,7 @@
         "name": "Hanging leg raise",
         "sets": 3,
         "reps": 15,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -43404,7 +43404,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -44673,7 +44673,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -45204,7 +45204,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -45426,7 +45426,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -45571,7 +45571,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -45671,7 +45671,7 @@
         "name": "Push-up",
         "sets": 4,
         "reps": 20,
-        "duration": 12,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -45680,7 +45680,7 @@
         "name": "Pull-up",
         "sets": 4,
         "reps": 20,
-        "duration": 12,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -45689,7 +45689,7 @@
         "name": "Bodyweight squat",
         "sets": 4,
         "reps": 20,
-        "duration": 12,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -45698,7 +45698,7 @@
         "name": "Side lunge cross-body heel-touch",
         "sets": 4,
         "reps": 20,
-        "duration": 12,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -45707,7 +45707,7 @@
         "name": "Hyperextensions With No Hyperextension Bench",
         "sets": 4,
         "reps": 20,
-        "duration": 12,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -45716,7 +45716,7 @@
         "name": "Crunch",
         "sets": 4,
         "reps": 20,
-        "duration": 12,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -45725,7 +45725,7 @@
         "name": "HM Plank",
         "sets": 4,
         "reps": 20,
-        "duration": 12,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -46278,7 +46278,7 @@
         "name": "Rower",
         "sets": 2,
         "reps": 60,
-        "duration": 6,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -48102,7 +48102,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -48211,7 +48211,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -48220,7 +48220,7 @@
         "name": "Side plank",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -48388,7 +48388,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -48397,7 +48397,7 @@
         "name": "Side plank",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -48483,7 +48483,7 @@
         "name": "HM Plank",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -48637,7 +48637,7 @@
         "name": "HM Plank",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -48809,7 +48809,7 @@
         "name": "HM Plank",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -51256,7 +51256,7 @@
         "name": "Bench press",
         "sets": 4,
         "reps": 60,
-        "duration": 12,
+        "duration": 4,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -51265,7 +51265,7 @@
         "name": "Weighted sit-up",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -51292,7 +51292,7 @@
         "name": "Cable Crossover",
         "sets": 3,
         "reps": 90,
-        "duration": 9,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -51310,7 +51310,7 @@
         "name": "Weighted Crunches",
         "sets": 4,
         "reps": 90,
-        "duration": 16,
+        "duration": 6,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -51324,7 +51324,7 @@
         "name": "Barbell Squat",
         "sets": 4,
         "reps": 180,
-        "duration": 16,
+        "duration": 12,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -51333,7 +51333,7 @@
         "name": "Single-Leg Press",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -51360,7 +51360,7 @@
         "name": "Band split squat",
         "sets": 3,
         "reps": 90,
-        "duration": 9,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -51383,7 +51383,7 @@
         "name": "TBS Chin-Up",
         "sets": 4,
         "reps": 180,
-        "duration": 16,
+        "duration": 12,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -51392,7 +51392,7 @@
         "name": "T-Bar Row",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -51419,7 +51419,7 @@
         "name": "UP Cable Face Pull",
         "sets": 3,
         "reps": 90,
-        "duration": 9,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -51437,7 +51437,7 @@
         "name": "Weighted Crunches",
         "sets": 4,
         "reps": 90,
-        "duration": 16,
+        "duration": 6,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -51451,7 +51451,7 @@
         "name": "Barbell Deadlift",
         "sets": 4,
         "reps": 180,
-        "duration": 16,
+        "duration": 12,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -51460,7 +51460,7 @@
         "name": "Standing dumbbell shoulder press",
         "sets": 5,
         "reps": 60,
-        "duration": 15,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -51487,7 +51487,7 @@
         "name": "Dumbbell lateral raise",
         "sets": 3,
         "reps": 90,
-        "duration": 9,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -51505,7 +51505,7 @@
         "name": "Bench dip",
         "sets": 3,
         "reps": 90,
-        "duration": 12,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -51958,7 +51958,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -52080,7 +52080,7 @@
         "name": "Dumbbell split squat",
         "sets": 5,
         "reps": 30,
-        "duration": 15,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -52089,7 +52089,7 @@
         "name": "Wall sit",
         "sets": 5,
         "reps": 30,
-        "duration": 15,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -52347,109 +52347,109 @@
         "name": "Bench press",
         "sets": 1,
         "reps": 5,
-        "duration": 11,
-        "is_time_based": true,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Pullups",
         "sets": 1,
         "reps": 5,
-        "duration": 11,
-        "is_time_based": true,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Feet-elevated push-up",
         "sets": 1,
         "reps": 5,
-        "duration": 11,
-        "is_time_based": true,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "One-Arm Dumbbell Row",
         "sets": 1,
         "reps": 5,
-        "duration": 21,
-        "is_time_based": true,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Standing dumbbell shoulder press",
         "sets": 1,
         "reps": 5,
-        "duration": 11,
-        "is_time_based": true,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Barbell Squat",
         "sets": 1,
         "reps": 5,
-        "duration": 11,
-        "is_time_based": true,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Dumbbell front raise to lateral raise",
         "sets": 1,
         "reps": 5,
-        "duration": 11,
-        "is_time_based": true,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Dumbbell reverse lunge",
         "sets": 1,
         "reps": 5,
-        "duration": 21,
-        "is_time_based": true,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Barbell Curl",
         "sets": 1,
         "reps": 5,
-        "duration": 11,
-        "is_time_based": true,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "30 Arms Machine Triceps Dip",
         "sets": 1,
         "reps": 5,
-        "duration": 11,
-        "is_time_based": true,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Hammer Curls",
         "sets": 1,
         "reps": 5,
-        "duration": 11,
-        "is_time_based": true,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Tricep Dumbbell Kickback",
         "sets": 1,
         "reps": 5,
-        "duration": 11,
-        "is_time_based": true,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       }
     ]
   },
@@ -52460,7 +52460,7 @@
         "name": "Slow Jog",
         "sets": 5,
         "reps": 5,
-        "duration": 55,
+        "duration": 25,
         "is_time_based": true,
         "to_failure": false,
         "unit": "min"
@@ -53263,7 +53263,7 @@
         "name": "HM Plank",
         "sets": 4,
         "reps": 60,
-        "duration": 12,
+        "duration": 4,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -53408,7 +53408,7 @@
         "name": "Side plank",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -53956,7 +53956,7 @@
         "name": "Seated Barbell Curl",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -54015,7 +54015,7 @@
         "name": "Side plank",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -54754,7 +54754,7 @@
         "name": "Total Fitness Dumbbell Farmer's Carry",
         "sets": 3,
         "reps": 45,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -55539,7 +55539,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -55698,7 +55698,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -57427,7 +57427,7 @@
         "name": "Rower",
         "sets": 4,
         "reps": 60,
-        "duration": 12,
+        "duration": 4,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -58621,7 +58621,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -58630,7 +58630,7 @@
         "name": "Mountain climber",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -58752,7 +58752,7 @@
         "name": "Side Hop-Sprint",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -58761,7 +58761,7 @@
         "name": "HM Hollow Hold",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -58770,7 +58770,7 @@
         "name": "Holman Knee Pull-In Crunch",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -58788,7 +58788,7 @@
         "name": "Shuttle run",
         "sets": 3,
         "reps": 20,
-        "duration": 23,
+        "duration": 60,
         "is_time_based": true,
         "to_failure": false,
         "unit": "min"
@@ -58811,7 +58811,7 @@
         "name": "Treadmill walking",
         "sets": 10,
         "reps": 30,
-        "duration": 30,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -58820,43 +58820,43 @@
         "name": "Slow Jog",
         "sets": 10,
         "reps": 60,
-        "duration": 70,
+        "duration": 10,
         "is_time_based": true,
         "to_failure": false,
-        "unit": "min"
+        "unit": "sec"
       },
       {
         "name": "Side Hop-Sprint",
         "sets": 10,
         "reps": 30,
-        "duration": 30,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
       },
       {
         "name": "HM Plank",
-        "sets": 20,
+        "sets": 1,
         "reps": 30,
-        "duration": 60,
+        "duration": 30,
         "is_time_based": true,
         "to_failure": false,
         "unit": "min"
       },
       {
         "name": "Plank leg raise",
-        "sets": 20,
+        "sets": 1,
         "reps": 30,
-        "duration": 60,
+        "duration": 30,
         "is_time_based": true,
         "to_failure": false,
         "unit": "min"
       },
       {
         "name": "Plank reach",
-        "sets": 20,
+        "sets": 1,
         "reps": 30,
-        "duration": 60,
+        "duration": 30,
         "is_time_based": true,
         "to_failure": false,
         "unit": "min"
@@ -59109,7 +59109,7 @@
         "name": "Jumping rope",
         "sets": 10,
         "reps": 60,
-        "duration": 30,
+        "duration": 10,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -59118,7 +59118,7 @@
         "name": "Star Jump",
         "sets": 10,
         "reps": 30,
-        "duration": 30,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -59141,10 +59141,10 @@
         "name": "Barbell Squat",
         "sets": 3,
         "reps": 5,
-        "duration": 18,
-        "is_time_based": true,
+        "duration": 9,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "TRX Squat Jump",
@@ -59849,7 +59849,7 @@
         "name": "Bench press",
         "sets": 1,
         "reps": 180,
-        "duration": 7,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -59890,7 +59890,7 @@
         "name": "Pull-up",
         "sets": 1,
         "reps": 180,
-        "duration": 7,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -59972,7 +59972,7 @@
         "name": "Medicine ball slam",
         "sets": 1,
         "reps": 180,
-        "duration": 7,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -59995,7 +59995,7 @@
         "name": "Military press",
         "sets": 1,
         "reps": 180,
-        "duration": 7,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -60706,7 +60706,7 @@
         "name": "Total Fitness Dumbbell Farmer's Carry",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -60756,7 +60756,7 @@
         "name": "Dumbbell suitcase carry",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -61110,7 +61110,7 @@
         "name": "Rower",
         "sets": 2,
         "reps": 60,
-        "duration": 6,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -61323,7 +61323,7 @@
         "name": "Jumping rope",
         "sets": 1,
         "reps": 12,
-        "duration": 13,
+        "duration": 12,
         "is_time_based": true,
         "to_failure": false,
         "unit": "min"
@@ -61654,7 +61654,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -61690,7 +61690,7 @@
         "name": "Side plank",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -61758,7 +61758,7 @@
         "name": "Jumping rope",
         "sets": 1,
         "reps": 5,
-        "duration": 11,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "min"
@@ -61790,7 +61790,7 @@
         "name": "Rower",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -61894,7 +61894,7 @@
         "name": "Total Fitness Dumbbell Farmer's Carry",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -61903,7 +61903,7 @@
         "name": "Jumping rope",
         "sets": 1,
         "reps": 5,
-        "duration": 11,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "min"
@@ -65024,7 +65024,7 @@
         "name": "HM Plank",
         "sets": 2,
         "reps": 60,
-        "duration": 6,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -65735,7 +65735,7 @@
         "name": "Rower",
         "sets": 4,
         "reps": 60,
-        "duration": 12,
+        "duration": 4,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -67627,7 +67627,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -68088,7 +68088,7 @@
       {
         "name": "UN Barbell Box Squat",
         "sets": 3,
-        "reps": 10,
+        "reps": 0,
         "duration": 9,
         "is_time_based": false,
         "to_failure": true,
@@ -68143,7 +68143,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -68987,7 +68987,7 @@
         "name": "Push-up to side plank",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -69908,10 +69908,10 @@
         "name": "Walking lunge",
         "sets": 1,
         "reps": 5,
-        "duration": 11,
-        "is_time_based": true,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       }
     ]
   },
@@ -70716,7 +70716,7 @@
         "name": "Single-cone sprint drill",
         "sets": 1,
         "reps": 120,
-        "duration": 3,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -70793,7 +70793,7 @@
         "name": "Single-cone sprint drill",
         "sets": 1,
         "reps": 120,
-        "duration": 3,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -70852,7 +70852,7 @@
         "name": "Single-cone sprint drill",
         "sets": 1,
         "reps": 120,
-        "duration": 3,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -70911,7 +70911,7 @@
         "name": "Sprinter burpee",
         "sets": 1,
         "reps": 120,
-        "duration": 3,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -70970,7 +70970,7 @@
         "name": "Single-cone sprint drill",
         "sets": 1,
         "reps": 120,
-        "duration": 3,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -71056,7 +71056,7 @@
         "name": "Single-cone sprint drill",
         "sets": 1,
         "reps": 120,
-        "duration": 3,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -71124,7 +71124,7 @@
         "name": "Single-cone sprint drill",
         "sets": 1,
         "reps": 120,
-        "duration": 3,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -71188,7 +71188,7 @@
         "name": "Smith machine bench press",
         "sets": 8,
         "reps": 180,
-        "duration": 32,
+        "duration": 24,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -71197,7 +71197,7 @@
         "name": "Dumbbell Bench Press",
         "sets": 12,
         "reps": 180,
-        "duration": 48,
+        "duration": 36,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -71206,19 +71206,19 @@
         "name": "Cable Crossover",
         "sets": 15,
         "reps": 4,
-        "duration": 75,
-        "is_time_based": true,
+        "duration": 45,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Seated dumbbell lateral raise",
         "sets": 15,
         "reps": 4,
-        "duration": 75,
-        "is_time_based": true,
+        "duration": 45,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       }
     ]
   },
@@ -71229,7 +71229,7 @@
         "name": "Hack Squat",
         "sets": 8,
         "reps": 180,
-        "duration": 32,
+        "duration": 24,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -71238,7 +71238,7 @@
         "name": "Leg Press",
         "sets": 12,
         "reps": 180,
-        "duration": 48,
+        "duration": 36,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -71247,28 +71247,28 @@
         "name": "Leg extension",
         "sets": 15,
         "reps": 4,
-        "duration": 75,
-        "is_time_based": true,
+        "duration": 45,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Lying cable front raise",
         "sets": 15,
         "reps": 4,
-        "duration": 75,
-        "is_time_based": true,
+        "duration": 45,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Weighted Crunches",
         "sets": 15,
         "reps": 4,
-        "duration": 75,
-        "is_time_based": true,
+        "duration": 45,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       }
     ]
   },
@@ -71279,7 +71279,7 @@
         "name": "T-Bar Row",
         "sets": 8,
         "reps": 180,
-        "duration": 32,
+        "duration": 24,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -71288,7 +71288,7 @@
         "name": "AM Wide-Grip Pull-Down",
         "sets": 12,
         "reps": 180,
-        "duration": 48,
+        "duration": 36,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -71297,28 +71297,28 @@
         "name": "Machine seated row",
         "sets": 15,
         "reps": 4,
-        "duration": 75,
-        "is_time_based": true,
+        "duration": 45,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Machine rear delt fly",
         "sets": 15,
         "reps": 4,
-        "duration": 75,
-        "is_time_based": true,
+        "duration": 45,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "30 Shoulders Dumbbell Shrug",
         "sets": 15,
         "reps": 4,
-        "duration": 75,
-        "is_time_based": true,
+        "duration": 45,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       }
     ]
   },
@@ -71329,7 +71329,7 @@
         "name": "Preacher Curl",
         "sets": 8,
         "reps": 180,
-        "duration": 32,
+        "duration": 24,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -71338,7 +71338,7 @@
         "name": "TBS Incline Dumbbell Curl",
         "sets": 12,
         "reps": 180,
-        "duration": 48,
+        "duration": 36,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -71347,19 +71347,19 @@
         "name": "Smith Machine Close-Grip Bench Press",
         "sets": 8,
         "reps": 10,
-        "duration": 40,
-        "is_time_based": true,
+        "duration": 24,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Seated triceps push-down",
         "sets": 12,
         "reps": 4,
-        "duration": 60,
-        "is_time_based": true,
+        "duration": 36,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       }
     ]
   },
@@ -71370,7 +71370,7 @@
         "name": "Dumbbell stiff-legged deadlift",
         "sets": 8,
         "reps": 180,
-        "duration": 32,
+        "duration": 24,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -71379,28 +71379,28 @@
         "name": "Lying leg curl",
         "sets": 12,
         "reps": 4,
-        "duration": 60,
-        "is_time_based": true,
+        "duration": 36,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Seated Calf Raise",
         "sets": 15,
         "reps": 4,
-        "duration": 75,
-        "is_time_based": true,
+        "duration": 45,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Calf Press",
         "sets": 15,
         "reps": 4,
-        "duration": 75,
-        "is_time_based": true,
+        "duration": 45,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       }
     ]
   },
@@ -72137,7 +72137,7 @@
         "name": "Jumping rope",
         "sets": 1,
         "reps": 5,
-        "duration": 11,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "min"
@@ -72463,7 +72463,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -72958,7 +72958,7 @@
         "name": "Rower",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -73248,7 +73248,7 @@
         "name": "HM Plank",
         "sets": 5,
         "reps": 30,
-        "duration": 15,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -74211,7 +74211,7 @@
         "name": "Rower",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -74273,12 +74273,12 @@
     "exercises": [
       {
         "name": "Barbell Deadlift",
-        "sets": 85,
-        "reps": 10,
-        "duration": 255,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 85,
+        "duration": 2,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Dumbbell Lunges",
@@ -74291,21 +74291,21 @@
       },
       {
         "name": "Wide-Grip Rear Pull-Up",
-        "sets": 80,
-        "reps": 5,
-        "duration": 240,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 80,
+        "duration": 2,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Dumbbell Bench Press",
-        "sets": 80,
-        "reps": 5,
-        "duration": 240,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 80,
+        "duration": 2,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       }
     ]
   },
@@ -74314,12 +74314,12 @@
     "exercises": [
       {
         "name": "Incline bench press",
-        "sets": 75,
-        "reps": 8,
-        "duration": 225,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 75,
+        "duration": 2,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Incline Dumbbell Flyes",
@@ -74332,12 +74332,12 @@
       },
       {
         "name": "Standing dumbbell shoulder press",
-        "sets": 70,
-        "reps": 8,
-        "duration": 210,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 70,
+        "duration": 2,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Dumbbell lateral raise",
@@ -74364,12 +74364,12 @@
     "exercises": [
       {
         "name": "Bent Over Barbell Row",
-        "sets": 75,
-        "reps": 8,
-        "duration": 225,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 75,
+        "duration": 2,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Lat pull-down",
@@ -74382,12 +74382,12 @@
       },
       {
         "name": "UN Chest Supported Row",
-        "sets": 70,
-        "reps": 8,
-        "duration": 210,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 70,
+        "duration": 2,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "30 Shoulders Dumbbell Shrug",
@@ -74414,21 +74414,21 @@
     "exercises": [
       {
         "name": "Barbell back squat",
-        "sets": 65,
-        "reps": 6,
-        "duration": 195,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 65,
+        "duration": 2,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Barbell stiff-legged deadlift",
-        "sets": 80,
-        "reps": 6,
-        "duration": 240,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 80,
+        "duration": 2,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Leg Press",
@@ -74464,30 +74464,30 @@
     "exercises": [
       {
         "name": "Bench press",
-        "sets": 185,
-        "reps": 8,
-        "duration": 555,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 180,
+        "duration": 3,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Bent Over Barbell Row",
-        "sets": 185,
-        "reps": 8,
-        "duration": 555,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 180,
+        "duration": 4,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Standing dumbbell shoulder press",
-        "sets": 30,
-        "reps": 8,
-        "duration": 90,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 30,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Chin-Up",
@@ -74874,7 +74874,7 @@
         "name": "Smith Machine Calf Raise",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -75404,7 +75404,7 @@
         "name": "Total Fitness Dumbbell Farmer's Carry",
         "sets": 2,
         "reps": 30,
-        "duration": 6,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -75758,7 +75758,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -76348,10 +76348,10 @@
         "name": "Speed skater",
         "sets": 3,
         "reps": 20,
-        "duration": 63,
-        "is_time_based": true,
+        "duration": 9,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       }
     ]
   },
@@ -76425,10 +76425,10 @@
         "name": "HM Chair Dip",
         "sets": 3,
         "reps": 16,
-        "duration": 51,
-        "is_time_based": true,
+        "duration": 9,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       }
     ]
   },
@@ -76502,10 +76502,10 @@
         "name": "Speed skater",
         "sets": 3,
         "reps": 20,
-        "duration": 63,
-        "is_time_based": true,
+        "duration": 9,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       }
     ]
   },
@@ -76579,10 +76579,10 @@
         "name": "HM Chair Dip",
         "sets": 3,
         "reps": 16,
-        "duration": 51,
-        "is_time_based": true,
+        "duration": 9,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       }
     ]
   },
@@ -76769,7 +76769,7 @@
         "name": "HM Plank",
         "sets": 1,
         "reps": 6,
-        "duration": 7,
+        "duration": 6,
         "is_time_based": true,
         "to_failure": false,
         "unit": "min"
@@ -76846,10 +76846,10 @@
         "name": "Hanging leg raise",
         "sets": 3,
         "reps": 5,
-        "duration": 9,
+        "duration": 15,
         "is_time_based": true,
         "to_failure": false,
-        "unit": "sec"
+        "unit": "min"
       }
     ]
   },
@@ -77127,7 +77127,7 @@
       {
         "name": "UN Barbell Box Squat",
         "sets": 3,
-        "reps": 8,
+        "reps": 0,
         "duration": 9,
         "is_time_based": false,
         "to_failure": true,
@@ -77291,10 +77291,10 @@
         "name": "Sled Drag - Harness",
         "sets": 3,
         "reps": 5,
-        "duration": 33,
-        "is_time_based": true,
+        "duration": 9,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       }
     ]
   },
@@ -77359,7 +77359,7 @@
         "name": "Side plank",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -77418,7 +77418,7 @@
         "name": "Swiss Ball Ab Roll-Out",
         "sets": 4,
         "reps": 60,
-        "duration": 12,
+        "duration": 4,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -77613,7 +77613,7 @@
         "name": "Standing dumbbell upright row",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -77749,7 +77749,7 @@
         "name": "Push-up",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -77758,7 +77758,7 @@
         "name": "Band overhead triceps extension",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -77767,7 +77767,7 @@
         "name": "Seated hammer curl",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -77944,7 +77944,7 @@
         "name": "HM Plank",
         "sets": 4,
         "reps": 90,
-        "duration": 12,
+        "duration": 6,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -78361,7 +78361,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -78533,7 +78533,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -78928,7 +78928,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -79491,7 +79491,7 @@
         "name": "Dumbbell Bench Press",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -79500,7 +79500,7 @@
         "name": "30 Back Leaning V-Bar Pull-Down",
         "sets": 3,
         "reps": 30,
-        "duration": 9,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -79509,7 +79509,7 @@
         "name": "Band overhead triceps extension",
         "sets": 6,
         "reps": 30,
-        "duration": 18,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -79758,7 +79758,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -79894,10 +79894,10 @@
         "name": "Sled Drag - Harness",
         "sets": 3,
         "reps": 10,
-        "duration": 33,
-        "is_time_based": true,
+        "duration": 9,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       }
     ]
   },
@@ -80012,7 +80012,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -80053,7 +80053,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -80379,7 +80379,7 @@
         "name": "King Maker Dumbbell Farmer's Carry",
         "sets": 2,
         "reps": 45,
-        "duration": 6,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -80651,7 +80651,7 @@
         "name": "World's greatest stretch",
         "sets": 2,
         "reps": 30,
-        "duration": 6,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -80660,7 +80660,7 @@
         "name": "Squats - With Bands",
         "sets": 2,
         "reps": 30,
-        "duration": 6,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -80687,7 +80687,7 @@
         "name": "Peroneals Stretch",
         "sets": 2,
         "reps": 30,
-        "duration": 6,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -80696,7 +80696,7 @@
         "name": "Superman",
         "sets": 2,
         "reps": 30,
-        "duration": 6,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -80714,7 +80714,7 @@
         "name": "Arm circle",
         "sets": 4,
         "reps": 30,
-        "duration": 12,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -80732,7 +80732,7 @@
         "name": "HM Dead Bug",
         "sets": 2,
         "reps": 30,
-        "duration": 6,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -80741,7 +80741,7 @@
         "name": "HM Plank",
         "sets": 2,
         "reps": 60,
-        "duration": 6,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -80750,7 +80750,7 @@
         "name": "Side plank",
         "sets": 2,
         "reps": 60,
-        "duration": 6,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -81267,7 +81267,7 @@
         "name": "HM Plank",
         "sets": 4,
         "reps": 20,
-        "duration": 12,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -84233,7 +84233,7 @@
         "name": "Barbell glute bridge",
         "sets": 3,
         "reps": 15,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -85648,7 +85648,7 @@
         "name": "Burpee",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -85657,7 +85657,7 @@
         "name": "30 Arms Standing Overhand EZ-Bar Curl",
         "sets": 1,
         "reps": 100,
-        "duration": 3,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -86507,8 +86507,8 @@
       {
         "name": "TBS Incline Dumbbell Curl",
         "sets": 5,
-        "reps": 4,
-        "duration": 15,
+        "reps": 240,
+        "duration": 20,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -86948,10 +86948,10 @@
         "name": "Walking lunge",
         "sets": 1,
         "reps": 10,
-        "duration": 11,
-        "is_time_based": true,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       }
     ]
   },
@@ -87277,12 +87277,12 @@
       },
       {
         "name": "Leg curl",
-        "sets": 30,
-        "reps": 10,
-        "duration": 90,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 30,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Seated Calf Raise",
@@ -87940,7 +87940,7 @@
         "name": "Jumping rope",
         "sets": 4,
         "reps": 120,
-        "duration": 12,
+        "duration": 8,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -87948,7 +87948,7 @@
       {
         "name": "Double Under",
         "sets": 4,
-        "reps": 50,
+        "reps": 0,
         "duration": 16,
         "is_time_based": false,
         "to_failure": true,
@@ -92115,7 +92115,7 @@
         "name": "HM Plank",
         "sets": 4,
         "reps": 60,
-        "duration": 12,
+        "duration": 4,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -92419,7 +92419,7 @@
         "name": "HM Plank",
         "sets": 1,
         "reps": 60,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -92850,10 +92850,10 @@
         "name": "Leg Press",
         "sets": 1,
         "reps": 5,
-        "duration": 6,
-        "is_time_based": true,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Barbell Squat",
@@ -92936,10 +92936,10 @@
         "name": "Bench press",
         "sets": 1,
         "reps": 5,
-        "duration": 6,
-        "is_time_based": true,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Incline dumbbell bench press",
@@ -93022,10 +93022,10 @@
         "name": "Barbell Deadlift",
         "sets": 1,
         "reps": 5,
-        "duration": 6,
-        "is_time_based": true,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "TBS Hack Squat",
@@ -93847,7 +93847,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -94024,7 +94024,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -95357,7 +95357,7 @@
       {
         "name": "Dumbbell lateral raise",
         "sets": 6,
-        "reps": 15,
+        "reps": 0,
         "duration": 18,
         "is_time_based": false,
         "to_failure": true,
@@ -98638,7 +98638,7 @@
         "name": "30 Shoulders Dumbbell Shrug",
         "sets": 4,
         "reps": 60,
-        "duration": 12,
+        "duration": 4,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -98647,7 +98647,7 @@
         "name": "Seated Barbell Curl",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -98747,7 +98747,7 @@
         "name": "Shuttle run",
         "sets": 5,
         "reps": 30,
-        "duration": 15,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -98756,7 +98756,7 @@
         "name": "Burpee",
         "sets": 5,
         "reps": 30,
-        "duration": 15,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -98765,7 +98765,7 @@
         "name": "Jump Squat",
         "sets": 5,
         "reps": 30,
-        "duration": 15,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -98774,7 +98774,7 @@
         "name": "Sprinter burpee",
         "sets": 5,
         "reps": 30,
-        "duration": 15,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -98783,7 +98783,7 @@
         "name": "Kettlebell swing",
         "sets": 5,
         "reps": 30,
-        "duration": 15,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -98792,7 +98792,7 @@
         "name": "HM Plank",
         "sets": 5,
         "reps": 30,
-        "duration": 15,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -100281,7 +100281,7 @@
         "name": "HM Plank",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -102174,57 +102174,57 @@
     "exercises": [
       {
         "name": "Kettlebell swing",
-        "sets": 30,
-        "reps": 5,
-        "duration": 330,
+        "sets": 1,
+        "reps": 30,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
-        "unit": "min"
+        "unit": "sec"
       },
       {
         "name": "HM Turkish Get-Up",
         "sets": 1,
         "reps": 0,
         "duration": 3,
-        "is_time_based": true,
+        "is_time_based": false,
         "to_failure": true,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Zercher squat",
         "sets": 1,
         "reps": 0,
         "duration": 3,
-        "is_time_based": true,
+        "is_time_based": false,
         "to_failure": true,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Atlas Stones",
         "sets": 1,
         "reps": 0,
         "duration": 3,
-        "is_time_based": true,
+        "is_time_based": false,
         "to_failure": true,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "TBS Chin-Up",
         "sets": 1,
         "reps": 0,
         "duration": 3,
-        "is_time_based": true,
+        "is_time_based": false,
         "to_failure": true,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Push-up",
         "sets": 1,
         "reps": 0,
         "duration": 3,
-        "is_time_based": true,
+        "is_time_based": false,
         "to_failure": true,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Side Leg Raises",
@@ -102290,36 +102290,36 @@
         "sets": 1,
         "reps": 0,
         "duration": 3,
-        "is_time_based": true,
+        "is_time_based": false,
         "to_failure": true,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "One-Arm Dumbbell Row",
         "sets": 1,
         "reps": 0,
         "duration": 3,
-        "is_time_based": true,
+        "is_time_based": false,
         "to_failure": true,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Sandbag Load",
         "sets": 1,
         "reps": 0,
         "duration": 3,
-        "is_time_based": true,
+        "is_time_based": false,
         "to_failure": true,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Atlas Stones",
         "sets": 2,
         "reps": 0,
         "duration": 6,
-        "is_time_based": true,
+        "is_time_based": false,
         "to_failure": true,
-        "unit": "min"
+        "unit": null
       }
     ]
   },
@@ -102328,57 +102328,57 @@
     "exercises": [
       {
         "name": "Kettlebell swing",
-        "sets": 30,
-        "reps": 10,
-        "duration": 330,
+        "sets": 1,
+        "reps": 30,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
-        "unit": "min"
+        "unit": "sec"
       },
       {
         "name": "Double Kettlebell Swing",
         "sets": 1,
         "reps": 0,
         "duration": 3,
-        "is_time_based": true,
+        "is_time_based": false,
         "to_failure": true,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Pushups",
         "sets": 1,
         "reps": 0,
         "duration": 3,
-        "is_time_based": true,
+        "is_time_based": false,
         "to_failure": true,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "FYR2 Kettlebell Clean and Press",
         "sets": 1,
         "reps": 0,
         "duration": 3,
-        "is_time_based": true,
+        "is_time_based": false,
         "to_failure": true,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Chin-Up",
         "sets": 1,
         "reps": 0,
         "duration": 3,
-        "is_time_based": true,
+        "is_time_based": false,
         "to_failure": true,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Sandbag Load",
         "sets": 1,
         "reps": 0,
         "duration": 3,
-        "is_time_based": true,
+        "is_time_based": false,
         "to_failure": true,
-        "unit": "min"
+        "unit": null
       }
     ]
   },
@@ -102442,11 +102442,11 @@
       {
         "name": "Side Hop-Sprint",
         "sets": 3,
-        "reps": 20,
-        "duration": 63,
+        "reps": 1200,
+        "duration": 60,
         "is_time_based": true,
         "to_failure": false,
-        "unit": "min"
+        "unit": "sec"
       }
     ]
   },
@@ -102457,10 +102457,10 @@
         "name": "Rotator cuff warm-up",
         "sets": 1,
         "reps": 5,
-        "duration": 6,
-        "is_time_based": true,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "HM Squat Jump",
@@ -102511,7 +102511,7 @@
         "name": "Boss Everline 10-Yard Sprints",
         "sets": 1,
         "reps": 180,
-        "duration": 4,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -102578,11 +102578,11 @@
       {
         "name": "Side Hop-Sprint",
         "sets": 3,
-        "reps": 20,
-        "duration": 63,
+        "reps": 1200,
+        "duration": 60,
         "is_time_based": true,
         "to_failure": false,
-        "unit": "min"
+        "unit": "sec"
       }
     ]
   },
@@ -102593,10 +102593,10 @@
         "name": "Rotator cuff warm-up",
         "sets": 1,
         "reps": 5,
-        "duration": 6,
-        "is_time_based": true,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Barbell Squat",
@@ -102647,7 +102647,7 @@
         "name": "Boss Everline 10-Yard Sprints",
         "sets": 1,
         "reps": 180,
-        "duration": 4,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -105527,7 +105527,7 @@
         "name": "Rower",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -106220,16 +106220,16 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 10,
-        "duration": 9,
+        "duration": 30,
         "is_time_based": true,
         "to_failure": false,
-        "unit": "sec"
+        "unit": "min"
       },
       {
         "name": "Sprinter burpee",
         "sets": 1,
         "reps": 120,
-        "duration": 3,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -106442,10 +106442,10 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 10,
-        "duration": 9,
+        "duration": 30,
         "is_time_based": true,
         "to_failure": false,
-        "unit": "sec"
+        "unit": "min"
       },
       {
         "name": "Diamond push-up",
@@ -106460,7 +106460,7 @@
         "name": "Sprinter burpee",
         "sets": 1,
         "reps": 120,
-        "duration": 3,
+        "duration": 2,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -106578,10 +106578,10 @@
         "name": "Holman In-Out Straight Plank",
         "sets": 3,
         "reps": 10,
-        "duration": 9,
+        "duration": 30,
         "is_time_based": true,
         "to_failure": false,
-        "unit": "sec"
+        "unit": "min"
       },
       {
         "name": "Atlas Stone Trainer",
@@ -106700,7 +106700,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 15,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -106768,7 +106768,7 @@
         "name": "Walking lunge",
         "sets": 3,
         "reps": 180,
-        "duration": 12,
+        "duration": 9,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -107654,7 +107654,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -108711,7 +108711,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -108952,7 +108952,7 @@
         "name": "Goblet Squat",
         "sets": 10,
         "reps": 30,
-        "duration": 30,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -108961,7 +108961,7 @@
         "name": "HM Squat Jump",
         "sets": 20,
         "reps": 30,
-        "duration": 60,
+        "duration": 10,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -108970,7 +108970,7 @@
         "name": "Dumbbell stiff-legged deadlift",
         "sets": 10,
         "reps": 30,
-        "duration": 30,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -108979,7 +108979,7 @@
         "name": "Dumbbell Lunges",
         "sets": 10,
         "reps": 30,
-        "duration": 30,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -108988,7 +108988,7 @@
         "name": "Smith Machine Calf Raise",
         "sets": 1,
         "reps": 30,
-        "duration": 30,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -108997,7 +108997,7 @@
         "name": "HM Plank",
         "sets": 6,
         "reps": 30,
-        "duration": 18,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -109006,7 +109006,7 @@
         "name": "Dumbbell floor press",
         "sets": 10,
         "reps": 30,
-        "duration": 30,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -109015,7 +109015,7 @@
         "name": "Dumbbell Flyes",
         "sets": 20,
         "reps": 30,
-        "duration": 60,
+        "duration": 10,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -109024,7 +109024,7 @@
         "name": "HM Bent-Over Dumbbell Row",
         "sets": 10,
         "reps": 30,
-        "duration": 30,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -109033,7 +109033,7 @@
         "name": "Dumbbell pull-over",
         "sets": 20,
         "reps": 30,
-        "duration": 60,
+        "duration": 10,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -109042,7 +109042,7 @@
         "name": "Arnold press",
         "sets": 10,
         "reps": 30,
-        "duration": 30,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -109051,7 +109051,7 @@
         "name": "Dumbbell lateral raise",
         "sets": 20,
         "reps": 30,
-        "duration": 60,
+        "duration": 10,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -109060,7 +109060,7 @@
         "name": "FYR Dumbbell Curl",
         "sets": 10,
         "reps": 30,
-        "duration": 30,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -109069,7 +109069,7 @@
         "name": "Band overhead triceps extension",
         "sets": 20,
         "reps": 30,
-        "duration": 60,
+        "duration": 10,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -109078,7 +109078,7 @@
         "name": "Lying cable front raise",
         "sets": 10,
         "reps": 30,
-        "duration": 30,
+        "duration": 5,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -109087,7 +109087,7 @@
         "name": "Crunch",
         "sets": 20,
         "reps": 30,
-        "duration": 60,
+        "duration": 10,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -109096,7 +109096,7 @@
         "name": "Side-lying leg lift",
         "sets": 20,
         "reps": 30,
-        "duration": 60,
+        "duration": 10,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -109328,7 +109328,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -110148,7 +110148,7 @@
         "name": "HM Plank",
         "sets": 2,
         "reps": 30,
-        "duration": 6,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -110189,7 +110189,7 @@
         "name": "Elbow plank",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -110289,10 +110289,10 @@
         "name": "Upper Back Stretch",
         "sets": 1,
         "reps": 5,
-        "duration": 6,
-        "is_time_based": true,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "HM Dead Bug",
@@ -110352,7 +110352,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 60,
-        "duration": 9,
+        "duration": 3,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -110366,10 +110366,10 @@
         "name": "Lower Back Curl",
         "sets": 1,
         "reps": 5,
-        "duration": 6,
-        "is_time_based": true,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Pulsing goblet squat",
@@ -110425,10 +110425,10 @@
         "name": "Hollow-body abduction",
         "sets": 1,
         "reps": 5,
-        "duration": 6,
-        "is_time_based": true,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Barbell Deadlift",
@@ -110493,10 +110493,10 @@
         "name": "Hollow-body abduction",
         "sets": 1,
         "reps": 5,
-        "duration": 6,
-        "is_time_based": true,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       },
       {
         "name": "Sit Squats",
@@ -111774,10 +111774,10 @@
         "name": "Glute bridge",
         "sets": 5,
         "reps": 10,
-        "duration": 15,
+        "duration": 50,
         "is_time_based": true,
         "to_failure": false,
-        "unit": "sec"
+        "unit": "min"
       },
       {
         "name": "Bodyweight squat",
@@ -111792,7 +111792,7 @@
         "name": "Treadmill walking",
         "sets": 8,
         "reps": 60,
-        "duration": 24,
+        "duration": 8,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -111801,10 +111801,10 @@
         "name": "Hamstring slide",
         "sets": 4,
         "reps": 5,
-        "duration": 12,
+        "duration": 20,
         "is_time_based": true,
         "to_failure": false,
-        "unit": "sec"
+        "unit": "min"
       }
     ]
   },
@@ -111824,10 +111824,10 @@
         "name": "KV Bulgarian Split Squat",
         "sets": 5,
         "reps": 5,
-        "duration": 15,
+        "duration": 25,
         "is_time_based": true,
         "to_failure": false,
-        "unit": "sec"
+        "unit": "min"
       },
       {
         "name": "Pop squat",
@@ -111860,10 +111860,10 @@
         "name": "Stairmaster",
         "sets": 1,
         "reps": 20,
-        "duration": 21,
-        "is_time_based": true,
+        "duration": 3,
+        "is_time_based": false,
         "to_failure": false,
-        "unit": "min"
+        "unit": null
       }
     ]
   },
@@ -112186,7 +112186,7 @@
         "name": "HM Plank",
         "sets": 3,
         "reps": 20,
-        "duration": 9,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -112678,12 +112678,12 @@
       },
       {
         "name": "Crunch",
-        "sets": 25,
-        "reps": 10,
-        "duration": 75,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 25,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Leg extension",
@@ -112766,7 +112766,7 @@
         "name": "HM Plank",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -113025,7 +113025,7 @@
         "name": "HM Wide Jump Squat",
         "sets": 2,
         "reps": 30,
-        "duration": 6,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -113043,7 +113043,7 @@
         "name": "MetaBurn Lateral Bounding Hop",
         "sets": 2,
         "reps": 30,
-        "duration": 6,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -113061,7 +113061,7 @@
         "name": "Holman Alternating Lunge Jump",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -113097,7 +113097,7 @@
         "name": "HM Alternating Jump Lunge",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -113292,7 +113292,7 @@
         "name": "Walking High Knees",
         "sets": 1,
         "reps": 20,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -113465,7 +113465,7 @@
         "name": "Jumping Jack",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -113483,7 +113483,7 @@
         "name": "High knees",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -113501,7 +113501,7 @@
         "name": "Mountain climber",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -113519,7 +113519,7 @@
         "name": "Lateral box jump",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -113537,7 +113537,7 @@
         "name": "HM Plank",
         "sets": 1,
         "reps": 30,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -113558,12 +113558,12 @@
       },
       {
         "name": "Burpee",
-        "sets": 50,
-        "reps": 10,
-        "duration": 150,
-        "is_time_based": false,
+        "sets": 1,
+        "reps": 50,
+        "duration": 1,
+        "is_time_based": true,
         "to_failure": false,
-        "unit": null
+        "unit": "sec"
       },
       {
         "name": "Dumbbell floor press",
@@ -113637,7 +113637,7 @@
         "name": "Barbell Squat",
         "sets": 1,
         "reps": 20,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -113646,7 +113646,7 @@
         "name": "FYR Dumbbell Curl",
         "sets": 1,
         "reps": 20,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -113655,7 +113655,7 @@
         "name": "Side lunge cross-body heel-touch",
         "sets": 1,
         "reps": 20,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -113664,7 +113664,7 @@
         "name": "Standing dumbbell shoulder press",
         "sets": 1,
         "reps": 20,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -113673,7 +113673,7 @@
         "name": "Bench dip",
         "sets": 1,
         "reps": 20,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -113682,7 +113682,7 @@
         "name": "Hanging leg raise",
         "sets": 1,
         "reps": 20,
-        "duration": 3,
+        "duration": 1,
         "is_time_based": true,
         "to_failure": false,
         "unit": "sec"
@@ -113908,7 +113908,7 @@
         "duration": 9,
         "is_time_based": true,
         "to_failure": true,
-        "unit": "min"
+        "unit": "sec"
       },
       {
         "name": "Lying cable front raise",
@@ -114017,7 +114017,7 @@
         "duration": 9,
         "is_time_based": true,
         "to_failure": true,
-        "unit": "min"
+        "unit": "sec"
       },
       {
         "name": "Exercise ball crunch",
