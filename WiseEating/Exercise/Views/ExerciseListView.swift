@@ -415,24 +415,44 @@ What would you like to do?
 
     private var trainingPlansSection: some View {
         VStack(spacing: 0) {
+            // 1. Табовете (My Plans / Templates)
             WrappingSegmentedControl(
                 selection: $trainingPlanVM.selectedScope,
                 layoutMode: .wrap
             )
             .padding(.horizontal)
-            .padding(.bottom, 10)
-
+            
+            // ✅ НОВО: Събтайтъл над целия списък, само ако сме в Templates
+            if trainingPlanVM.selectedScope == .templates {
+                HStack() {
+                    Image(systemName: "sparkles")
+                        .symbolRenderingMode(.hierarchical)
+                    Text("AI-assisted fitness training plans")
+                    Spacer()
+                }
+                .font(.title3)
+                .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
+                .padding(.top, 8)
+                .padding(.bottom, 2)
+                .padding(.horizontal, 12)
+                .transition(.opacity)
+            } else {
+                // Добавяме малко разстояние, когато няма събтайтъл, за да не залепва списъкът
+                Color.clear.frame(height: 10)
+            }
+            
+            // 2. Съдържанието (Списък или Empty State)
             if trainingPlanVM.displayPlans.isEmpty {
                 if globalSearchText.isEmpty {
                     let title = trainingPlanVM.selectedScope == .myPlans ? "No Training Plans" : "No Templates"
                     let desc = trainingPlanVM.selectedScope == .myPlans
                     ? "Create your first training plan manually or copy one from the Templates tab."
                     : "No template plans are available at the moment."
-
+                    
                     VStack(spacing: 16) {
                         ContentUnavailableView(title, systemImage: "calendar.badge.clock", description: Text(desc))
                             .foregroundStyle(effectManager.currentGlobalAccentColor)
-
+                        
                         if trainingPlanVM.selectedScope == .templates {
                             Button("Load Default Templates") {
                                 Task {
@@ -454,6 +474,7 @@ What would you like to do?
                             .foregroundColor(effectManager.currentGlobalAccentColor)
                         }
                     }
+                    .padding(.top, 20) // Малко отстояние от табовете при empty state
                 } else {
                     ContentUnavailableView {
                         Label("No Results for \"\(globalSearchText)\"", systemImage: "magnifyingglass")
@@ -462,6 +483,7 @@ What would you like to do?
                         Text("Check the spelling or try a new search.")
                             .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
                     }
+                    .padding(.top, 20)
                 }
             } else {
                 List {
@@ -474,20 +496,20 @@ What would you like to do?
                                         .foregroundColor(effectManager.currentGlobalAccentColor)
                                         .lineLimit(2)
                                         .multilineTextAlignment(.leading)
-
+                                    
                                     Spacer()
                                 }
-
+                                
                                 HStack {
                                     Text("\(planWrapper.dayCount) day\(planWrapper.dayCount == 1 ? "" : "s")")
                                     Text("•")
-
+                                    
                                     if !planWrapper.isTemplate, let date = planWrapper.creationDate {
                                         Text("Created: \(date.formatted(date: .abbreviated, time: .omitted))")
                                     } else {
                                         Text("Template")
                                     }
-
+                                    
                                     if planWrapper.minAgeMonths > 0 {
                                         Text("•")
                                         Text("\(Int(planWrapper.minAgeMonths / 12))y+")
@@ -510,16 +532,15 @@ What would you like to do?
                             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                 if !planWrapper.isTemplate,
                                    let realPlan = planWrapper.originalObject as? TrainingPlan {
-
+                                    
                                     Button(role: .destructive) {
-                                        // ✅ FIX: взимаме всичко докато plan е валиден
                                         self.planToDeleteID = realPlan.id
                                         self.planToDeleteName = realPlan.name
                                         self.planToDeleteLinkedWorkoutCount = realPlan.days
                                             .flatMap { $0.workouts }
                                             .compactMap { $0.linkedWorkoutID }
                                             .count
-
+                                        
                                         self.isShowingDeletePlanConfirmation = true
                                     } label: {
                                         Image(systemName: "trash.fill")
@@ -527,7 +548,7 @@ What would you like to do?
                                             .foregroundStyle(effectManager.currentGlobalAccentColor)
                                     }
                                     .tint(.clear)
-
+                                    
                                     Button {
                                         present(item: .editPlan(realPlan))
                                     } label: {
@@ -539,7 +560,7 @@ What would you like to do?
                                 }
                             }
                             .padding(.vertical, 6)
-
+                            
                             if shouldShowAd(at: index) {
                                 AdRowView()
                                     .padding(.top, 8)
@@ -551,7 +572,7 @@ What would you like to do?
                         .listRowSeparator(.hidden)
                         .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
                     }
-
+                    
                     Color.clear.frame(height: 150)
                         .listRowBackground(Color.clear)
                         .listRowSeparator(.hidden)

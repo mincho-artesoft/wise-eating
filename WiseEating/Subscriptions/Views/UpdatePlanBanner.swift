@@ -72,6 +72,7 @@ struct UpdatePlanBanner: View {
                 }
             }
         }
+        .padding(.top)
     }
     
     private func refreshContent() {
