@@ -1167,45 +1167,68 @@ struct TrainingPlanEditorView: View {
     }
     
     private func syncWorkouts(of persistedDay: TrainingPlanDay, from stateDay: TrainingPlanDay) {
-            // 1. Групираме за бърз достъп
-            let stateWorkoutsByName = Dictionary(grouping: stateDay.workouts, by: { $0.workoutName }).compactMapValues { $0.first }
+            // 1. Събираме имената на тренировките от State (актуалното състояние)
+            // Използваме Set за бързо търсене кои трябва да останат
+            let stateWorkoutNames = Set(stateDay.workouts.map { $0.workoutName })
             
-            // 2. Изтриваме премахнатите тренировки
-            for workout in persistedDay.workouts where stateWorkoutsByName[workout.workoutName] == nil {
-                modelContext.delete(workout)
+            // 2. ИЗТРИВАНЕ: Махаме от базата тези, които вече ги няма в State
+            // (Обикаляме копие на масива, за да можем да трием безопасно)
+            for workout in persistedDay.workouts {
+                if !stateWorkoutNames.contains(workout.workoutName) {
+                    modelContext.delete(workout)
+                }
             }
             
-            // 3. Синхронизираме
-            for (name, stateWorkout) in stateWorkoutsByName {
-                let persistedWorkout = getOrCreateWorkout(for: name, in: persistedDay)
+            // 3. СЪЗДАВАНЕ или ОБНОВЯВАНЕ
+            for stateWorkout in stateDay.workouts {
+                // Търсим дали вече има такава тренировка в базата за този ден
+                let persistedWorkout: TrainingPlanWorkout
+                
+                if let existing = persistedDay.workouts.first(where: { $0.workoutName == stateWorkout.workoutName }) {
+                    persistedWorkout = existing
+                } else {
+                    // Ако няма - създаваме нова и я закачаме
+                    persistedWorkout = TrainingPlanWorkout(workoutName: stateWorkout.workoutName)
+                    persistedWorkout.day = persistedDay
+                    modelContext.insert(persistedWorkout)
+                    persistedDay.workouts.append(persistedWorkout)
+                }
+                
+                // Синхронизираме данните
                 persistedWorkout.linkedWorkoutID = stateWorkout.linkedWorkoutID
                 
-                // 4. Изтриваме старите упражнения
+                // 4. Синхронизиране на упражненията (Exercises)
+                // Първо изчистваме старите упражнения в базата
                 persistedWorkout.exercises.forEach { modelContext.delete($0) }
+                persistedWorkout.exercises.removeAll()
                 
-                // 5. Създаваме новите упражнения и сетове
-                persistedWorkout.exercises = stateWorkout.exercises.map { entry in
+                // Създаваме наново упражненията и сетовете от State
+                for entry in stateWorkout.exercises {
+                    // Защита: упражнението трябва да е валидно
+                    guard let exItem = entry.exercise else { continue }
+                    
                     let newEntry = TrainingPlanExercise(
-                        exercise: entry.exercise!,
+                        exercise: exItem,
                         durationMinutes: entry.durationMinutes,
                         workout: persistedWorkout
                     )
+                    modelContext.insert(newEntry)
+                    persistedWorkout.exercises.append(newEntry)
                     
-                    // ✅ FIX: Запазваме сетовете с правилен orderIndex според текущата им подредба в масива
-                    newEntry.sets = entry.sets.enumerated().map { (index, set) in
+                    // Запазваме сетовете с правилния индекс
+                    for (index, set) in entry.sets.enumerated() {
                         let newSet = TrainingPlanSet(
                             reps: set.reps,
                             weight: set.weight,
                             isToFailure: set.isToFailure,
                             isTimeBased: set.isTimeBased,
-                            timeUnit: set.timeUnit, // 👈 ДОБАВЕНО: Запазваме единицата в базата
+                            timeUnit: set.timeUnit,
                             orderIndex: index
                         )
                         newSet.exercise = newEntry
-                        return newSet
+                        modelContext.insert(newSet)
+                        newEntry.sets.append(newSet)
                     }
-                    
-                    return newEntry
                 }
             }
         }
@@ -1232,17 +1255,21 @@ struct TrainingPlanEditorView: View {
     }
     
     private func getOrCreateWorkout(for workoutName: String, in day: TrainingPlanDay) -> TrainingPlanWorkout {
-        if let existing = day.workouts.first(where: { $0.workoutName == workoutName }) {
-            return existing
-        } else {
-            let newWorkout = TrainingPlanWorkout(workoutName: workoutName)
-            newWorkout.day = day
-            if let dayIndex = days.firstIndex(where: { $0.id == day.id }) {
-                days[dayIndex].workouts.append(newWorkout)
+            // Търсим в текущия ден (който е @State обект в View-то)
+            if let existing = day.workouts.first(where: { $0.workoutName == workoutName }) {
+                return existing
+            } else {
+                let newWorkout = TrainingPlanWorkout(workoutName: workoutName)
+                newWorkout.day = day // Закачаме релацията
+                
+                // Добавяме го към масива на деня
+                // Тъй като 'day' е елемент от 'days', трябва да сме сигурни, че обновяваме правилния индекс в @State масива 'days'
+                if let dayIndex = days.firstIndex(where: { $0.id == day.id }) {
+                    days[dayIndex].workouts.append(newWorkout)
+                }
+                return newWorkout
             }
-            return newWorkout
         }
-    }
     
     private func addExerciseToSelectedWorkout(_ item: ExerciseItem) {
         guard let dayIndex = days.firstIndex(where: { $0.id == selectedDayID }),
