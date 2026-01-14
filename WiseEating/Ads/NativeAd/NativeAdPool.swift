@@ -90,7 +90,7 @@ final class NativeAdPool: NSObject, ObservableObject {
 }
 
 // MARK: - Delegate (iOS Only)
-extension NativeAdPool: AdLoaderDelegate, NativeAdLoaderDelegate {
+extension NativeAdPool: @MainActor AdLoaderDelegate, @MainActor NativeAdLoaderDelegate {
     func adLoader(_ adLoader: AdLoader, didReceive nativeAd: NativeAd) {
         print("✅ [NativeAdPool] Ad received!")
         self.availableAds.append(nativeAd)

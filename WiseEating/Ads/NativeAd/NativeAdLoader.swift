@@ -14,8 +14,8 @@ import GoogleMobileAds
 @MainActor
 final class NativeAdLoader: NSObject,
                             ObservableObject,
-                            AdLoaderDelegate,
-                            NativeAdLoaderDelegate {
+                            @MainActor AdLoaderDelegate,
+                            @MainActor NativeAdLoaderDelegate {
 
     @Published private(set) var nativeAd: NativeAd?
     private var adLoader: AdLoader?
