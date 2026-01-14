@@ -1,31 +1,36 @@
-@preconcurrency import GoogleMobileAds
 import UIKit
 
+// Зареждаме GoogleMobileAds само ако не сме на Mac
+#if canImport(GoogleMobileAds)
+@preconcurrency import GoogleMobileAds
+#endif
+
 @MainActor
-final class RewardedInterstitialAdManager: NSObject, FullScreenContentDelegate {
+final class RewardedInterstitialAdManager: NSObject {
 
     static let shared = RewardedInterstitialAdManager()
+    
+    // Флаг за зареждане (общ)
+    private var isLoading = false
+    
+    // MARK: - Config
+    private var adUnitID: String {
+        #if DEBUG
+        return "ca-app-pub-3940256099942544/6978759866"
+        #else
+        return "ca-app-pub-3759868960530173/8933635514"
+        #endif
+    }
 
-    // ✅ ДОБАВЕНО: Свойството isReady, което RootView търси
+// MARK: - 📱 iOS IMPLEMENTATION
+#if !targetEnvironment(macCatalyst)
+
+    // Свойството isReady, което RootView търси
     var isReady: Bool {
         return rewardedInterstitial != nil
     }
 
     private var rewardedInterstitial: RewardedInterstitialAd?
-    private var isLoading = false
-
-    // MARK: - Config
-        private var adUnitID: String {
-            #if DEBUG
-            // Официален Google Test ID за Rewarded Interstitial
-            return "ca-app-pub-3940256099942544/6978759866"
-            #else
-            // Твоят реален ID
-            return "ca-app-pub-3759868960530173/8933635514"
-            #endif
-        }
-    
-    // MARK: - Load
 
     func loadAd() async {
         guard !isLoading, rewardedInterstitial == nil else {
@@ -50,8 +55,6 @@ final class RewardedInterstitialAdManager: NSObject, FullScreenContentDelegate {
         }
     }
 
-    // MARK: - Show
-
     func showIfAvailable(onReward: @escaping (_ amount: NSDecimalNumber, _ type: String) -> Void) {
         print("🎬 [RewInt] showIfAvailable()")
 
@@ -61,8 +64,8 @@ final class RewardedInterstitialAdManager: NSObject, FullScreenContentDelegate {
             return
         }
 
-        guard let root = UIApplication.shared
-            .connectedScenes
+        // Helper function to get root VC (defined in other files or here locally if needed)
+        guard let root = UIApplication.shared.connectedScenes
             .compactMap({ $0 as? UIWindowScene })
             .flatMap({ $0.windows })
             .first(where: { $0.isKeyWindow })?
@@ -92,7 +95,49 @@ final class RewardedInterstitialAdManager: NSObject, FullScreenContentDelegate {
         }
     }
 
-    // MARK: - FullScreenContentDelegate
+#else
+
+// MARK: - 🖥️ MAC CATALYST IMPLEMENTATION
+
+    // На Mac винаги сме "готови", защото зареждаме HTML в реално време
+    var isReady: Bool {
+        return true
+    }
+
+    // No-op на Mac
+    func loadAd() async {
+        // Може да заредиш WebView предварително тук ако искаш, но не е задължително
+    }
+
+    func showIfAvailable(onReward: @escaping (_ amount: NSDecimalNumber, _ type: String) -> Void) {
+        print("🎬 [RewInt] Mac Catalyst Show Request")
+        
+        guard let root = UIApplication.shared.connectedScenes
+            .compactMap({ $0 as? UIWindowScene })
+            .flatMap({ $0.windows })
+            .first(where: { $0.isKeyWindow })?
+            .rootViewController
+        else { return }
+        
+        // Използваме контролера от AdSenseSupport.swift
+        let macAdVC = MacFullScreenAdViewController()
+        macAdVC.modalPresentationStyle = .overFullScreen
+        
+        // Когато потребителят затвори рекламата, даваме наградата
+        macAdVC.onDismiss = {
+            print("🏅 [RewInt] Mac User earned reward (Simulated)")
+            onReward(1, "Coins")
+        }
+        
+        root.present(macAdVC, animated: true)
+    }
+
+#endif
+}
+
+// MARK: - Delegate Extension (iOS Only)
+#if !targetEnvironment(macCatalyst)
+extension RewardedInterstitialAdManager: FullScreenContentDelegate {
 
     func adWillPresentFullScreenContent(_ ad: any FullScreenPresentingAd) {
         print("📺 [RewInt] adWillPresentFullScreenContent")
@@ -112,3 +157,4 @@ final class RewardedInterstitialAdManager: NSObject, FullScreenContentDelegate {
         Task { await loadAd() }
     }
 }
+#endif

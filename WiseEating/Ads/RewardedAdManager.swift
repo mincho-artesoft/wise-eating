@@ -1,113 +1,78 @@
-@preconcurrency import GoogleMobileAds
 import UIKit
+#if canImport(GoogleMobileAds)
+import GoogleMobileAds
+#endif
 
 @MainActor
-final class RewardedAdManager: NSObject, FullScreenContentDelegate {
+final class RewardedAdManager: NSObject {
 
-    var isReady: Bool {
-           return rewardedAd != nil
-       }
-    
     static let shared = RewardedAdManager()
-
-    private var rewardedAd: RewardedAd?
     private var isLoading = false
 
-    // MARK: - Config
-        private var adUnitID: String {
-            #if DEBUG
-            // Официален Google Test ID за Rewarded Ads
-            return "ca-app-pub-3940256099942544/1712485313"
-            #else
-            // Твоят реален ID
-            return "ca-app-pub-3759868960530173/7620553844"
-            #endif
-        }
-    // MARK: - Load
+#if !targetEnvironment(macCatalyst)
+    private var rewardedAd: RewardedAd?
+    var isReady: Bool { return rewardedAd != nil }
+    
+    private var adUnitID: String {
+        #if DEBUG
+        return "ca-app-pub-3940256099942544/1712485313"
+        #else
+        return "ca-app-pub-3759868960530173/7620553844"
+        #endif
+    }
 
     func loadAd() async {
-        guard !isLoading, rewardedAd == nil else {
-            print("🟡 [Rewarded] Пропуск loadAd() – вече има/зарежда се.")
-            return
-        }
-
+        guard !isLoading, rewardedAd == nil else { return }
         isLoading = true
         defer { isLoading = false }
 
-        print("⬇️ [Rewarded] Зареждаме… \(adUnitID)")
         do {
-            rewardedAd = try await RewardedAd.load(
-                with: adUnitID,
-                request: Request()
-            )
+            rewardedAd = try await RewardedAd.load(with: adUnitID, request: Request())
             rewardedAd?.fullScreenContentDelegate = self
-            print("✅ [Rewarded] Успешно заредена")
         } catch {
-            print("❌ [Rewarded] Грешка при зареждане: \(error.localizedDescription)")
-            rewardedAd = nil
+            print("❌ [Rewarded] Error: \(error.localizedDescription)")
         }
     }
 
-    // MARK: - Show
-
-    /// `onReward` – тук кредитираш потребителя (coins, premium действие и т.н.)
     func showIfAvailable(onReward: @escaping (_ amount: NSDecimalNumber, _ type: String) -> Void) {
-        print("🎬 [Rewarded] showIfAvailable()")
-
-        guard let ad = rewardedAd else {
-            print("ℹ️ [Rewarded] Няма готова реклама → опитваме да заредим.")
+        guard let ad = rewardedAd, let root = keyWindowRootViewController() else {
             Task { await loadAd() }
             return
         }
-
-        guard let root = UIApplication.shared
-            .connectedScenes
-            .compactMap({ $0 as? UIWindowScene })
-            .flatMap({ $0.windows })
-            .first(where: { $0.isKeyWindow })?
-            .rootViewController
-        else {
-            print("⚠️ [Rewarded] Няма rootViewController.")
-            return
-        }
-
-        do {
-            try ad.canPresent(from: root)
-        } catch {
-            print("⚠️ [Rewarded] Не може да се покаже: \(error.localizedDescription)")
-            rewardedAd = nil
-            Task { await loadAd() }
-            return
-        }
-
-        print("▶️ [Rewarded] Показваме…")
+        
         ad.present(from: root) { [weak self] in
-            guard let self, let reward = self.rewardedAd?.adReward else {
-                print("ℹ️ [Rewarded] Няма reward обект.")
-                return
-            }
-            print("🏅 [Rewarded] User earned reward: \(reward.amount) \(reward.type)")
+            guard let reward = self?.rewardedAd?.adReward else { return }
             onReward(reward.amount, reward.type)
         }
     }
 
-    // MARK: - FullScreenContentDelegate
+#else
+    // --- MAC VERSION (Simulated) ---
+    var isReady: Bool { true }
+    func loadAd() async {}
 
-    func adWillPresentFullScreenContent(_ ad: any FullScreenPresentingAd) {
-        print("📺 [Rewarded] adWillPresentFullScreenContent")
+    func showIfAvailable(onReward: @escaping (_ amount: NSDecimalNumber, _ type: String) -> Void) {
+        guard let root = keyWindowRootViewController() else { return }
+        
+        let macAdVC = MacFullScreenAdViewController()
+        macAdVC.modalPresentationStyle = .overFullScreen
+        macAdVC.onDismiss = {
+            // На Mac даваме наградата веднага след затваряне
+            onReward(1, "Coins")
+        }
+        root.present(macAdVC, animated: true)
     }
+#endif
+}
 
-    func ad(
-        _ ad: any FullScreenPresentingAd,
-        didFailToPresentFullScreenContentWithError error: any Error
-    ) {
-        print("❌ [Rewarded] didFailToPresent: \(error.localizedDescription)")
+#if !targetEnvironment(macCatalyst)
+extension RewardedAdManager: FullScreenContentDelegate {
+    func ad(_ ad: any FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: any Error) {
         rewardedAd = nil
     }
-
     func adDidDismissFullScreenContent(_ ad: any FullScreenPresentingAd) {
-        print("🙋‍♂️ [Rewarded] adDidDismissFullScreenContent → чистим и презареждаме")
         rewardedAd = nil
         Task { await loadAd() }
     }
 }
+#endif

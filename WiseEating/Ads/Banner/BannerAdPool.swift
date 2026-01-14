@@ -1,7 +1,9 @@
 import UIKit
+#if canImport(GoogleMobileAds)
 import GoogleMobileAds
+#endif
 
-/// Хелпър за rootViewController (може и като private func в класа)
+/// Хелпър за rootViewController
 func keyWindowRootViewController() -> UIViewController? {
     UIApplication
         .shared
@@ -12,105 +14,70 @@ func keyWindowRootViewController() -> UIViewController? {
         .rootViewController
 }
 
-/// Пул за банери – поддържа по 3 предварително заредени за всеки размер
+#if !targetEnvironment(macCatalyst)
+/// ИСТИНСКИЯТ ПУЛ (САМО ЗА iOS)
 final class BannerAdPool: NSObject, BannerViewDelegate {
     nonisolated(unsafe) static let shared = BannerAdPool()
     
-    // MARK: - Config
     private var adUnitID: String {
-            #if DEBUG
-            return "ca-app-pub-3940256099942544/2934735716"
-            #else
-            return "ca-app-pub-3759868960530173/9640938872"
-            #endif
-        }
+        #if DEBUG
+        return "ca-app-pub-3940256099942544/2934735716"
+        #else
+        return "ca-app-pub-3759868960530173/9640938872"
+        #endif
+    }
     private let targetPreloadedCount = 3
     
-    // MARK: - State
     private var readySmall: [BannerView] = []
     private var readyLarge: [BannerView] = []
-    
-    /// Кои банери в момента се зареждат и към кой bucket принадлежат
     private var loading: [ObjectIdentifier: BannerBucket] = [:]
     
-    private override init() {
-        super.init()
-    }
+    private override init() { super.init() }
     
-    // MARK: - Public API
-    
-    /// Добре е да се извика още при старта на app-а (напр. в App / AppDelegate)
     func warmUp() {
         ensurePoolFilled(for: .small)
         ensurePoolFilled(for: .large)
     }
     
-    /// Взимаме банер за даден bucket.
-    /// - Ако има предварително зареден: връщаме него.
-    /// - Ако няма: създаваме нов и го зареждаме (без да чакаме).
-    func dequeueBanner(
-            for bucket: BannerBucket,
-            rootViewController: UIViewController?,
-            delegate: BannerViewDelegate?
-        ) -> BannerView {
-            
-            // 1. Стартираме зареждане на нови банери, за да запълним дупката, която ще направим
-            defer { ensurePoolFilled(for: bucket) }
-            
-            let banner: BannerView
-            
-            switch bucket {
-            case .small:
-                if !readySmall.isEmpty {
-                    // ВАЖНО: removeFirst() гарантира, че този банер вече не е в пула
-                    // и следващото извикване ще вземе следващия (различен) банер.
-                    banner = readySmall.removeFirst()
-                    print("📤 [BannerPool] Dequeued SMALL banner. Remaining: \(readySmall.count)")
-                } else {
-                    banner = makeAndLoadFreshBanner(for: bucket)
-                }
-            case .large:
-                if !readyLarge.isEmpty {
-                    banner = readyLarge.removeFirst()
-                    print("📤 [BannerPool] Dequeued LARGE banner. Remaining: \(readyLarge.count)")
-                } else {
-                    banner = makeAndLoadFreshBanner(for: bucket)
-                }
-            }
-            
-            banner.rootViewController = rootViewController
-            banner.delegate = delegate
-            
-            return banner
-        }
-    
-    // MARK: - Internal helpers
-    
-    /// Уверяваме се, че за даден bucket има targetPreloadedCount банера (ready + loading)
-    private func ensurePoolFilled(for bucket: BannerBucket) {
-        let readyCount: Int
+    func dequeueBanner(for bucket: BannerBucket, rootViewController: UIViewController?, delegate: BannerViewDelegate?) -> BannerView {
+        defer { ensurePoolFilled(for: bucket) }
+        let banner: BannerView
+        
         switch bucket {
-        case .small: readyCount = readySmall.count
-        case .large: readyCount = readyLarge.count
+        case .small:
+            if !readySmall.isEmpty {
+                banner = readySmall.removeFirst()
+            } else {
+                banner = makeAndLoadFreshBanner(for: bucket)
+            }
+        case .large:
+            if !readyLarge.isEmpty {
+                banner = readyLarge.removeFirst()
+            } else {
+                banner = makeAndLoadFreshBanner(for: bucket)
+            }
         }
         
+        banner.rootViewController = rootViewController
+        banner.delegate = delegate
+        return banner
+    }
+    
+    private func ensurePoolFilled(for bucket: BannerBucket) {
+        let readyCount = (bucket == .small) ? readySmall.count : readyLarge.count
         let loadingCount = loading.values.filter { $0 == bucket }.count
         let total = readyCount + loadingCount
         
         guard total < targetPreloadedCount else { return }
-        
-        let missing = targetPreloadedCount - total
-        for _ in 0..<missing {
+        for _ in 0..<(targetPreloadedCount - total) {
             _ = makeAndLoadHiddenBanner(for: bucket)
         }
     }
     
-    /// Създава банер, който няма да се показва веднага, а само ще попълни пула.
     @discardableResult
     private func makeAndLoadHiddenBanner(for bucket: BannerBucket) -> BannerView {
         let width  = UIScreen.main.bounds.width
         let adSize = currentOrientationAnchoredAdaptiveBanner(width: width)
-        
         let banner = BannerView(adSize: adSize)
         banner.adUnitID = adUnitID
         banner.rootViewController = keyWindowRootViewController()
@@ -118,64 +85,43 @@ final class BannerAdPool: NSObject, BannerViewDelegate {
         
         let id = ObjectIdentifier(banner)
         loading[id] = bucket
-        
-        print("⬇️ [BannerAdPool] Start loading hidden banner for \(bucket)")
         banner.load(Request())
-        
         return banner
     }
     
-    /// Създава банер за директно използване (ако пулът е празен)
     private func makeAndLoadFreshBanner(for bucket: BannerBucket) -> BannerView {
         let width  = UIScreen.main.bounds.width
         let adSize = currentOrientationAnchoredAdaptiveBanner(width: width)
-        
         let banner = BannerView(adSize: adSize)
         banner.adUnitID = adUnitID
         banner.rootViewController = keyWindowRootViewController()
-        
-        // В този случай вече координаторът на конкретния BannerAdView ще стане delegate,
-        // така че тук не записваме в loading и не следим този банер в пула.
-        
-        print("⬇️ [BannerAdPool] Fresh banner for UI (bucket: \(bucket))")
         banner.load(Request())
         return banner
     }
     
-    // MARK: - BannerViewDelegate (за hidden банерите)
-    
     func bannerViewDidReceiveAd(_ bannerView: BannerView) {
         let id = ObjectIdentifier(bannerView)
-        guard let bucket = loading.removeValue(forKey: id) else {
-            // Този банер не е от пула (fresh), игнорираме
-            return
-        }
+        guard let bucket = loading.removeValue(forKey: id) else { return }
         
         switch bucket {
-        case .small:
-            readySmall.append(bannerView)
-        case .large:
-            readyLarge.append(bannerView)
+        case .small: readySmall.append(bannerView)
+        case .large: readyLarge.append(bannerView)
         }
-        
-        print("✅ [BannerAdPool] Hidden banner loaded for \(bucket). ReadySmall=\(readySmall.count), ReadyLarge=\(readyLarge.count)")
-        
-        // След като един се е заредил, може пак да допълним ако трябва
         ensurePoolFilled(for: bucket)
     }
     
-    func bannerView(
-        _ bannerView: BannerView,
-        didFailToReceiveAdWithError error: Error
-    ) {
+    func bannerView(_ bannerView: BannerView, didFailToReceiveAdWithError error: Error) {
         let id = ObjectIdentifier(bannerView)
         let bucket = loading.removeValue(forKey: id)
-        
-        print("❌ [BannerAdPool] Hidden banner failed (\(bucket.map { "\($0)" } ?? "nil")): \(error.localizedDescription)")
-        
-        // Опитваме да допълним пула отново (може да добавиш backoff ако искаш)
-        if let bucket {
-            ensurePoolFilled(for: bucket)
-        }
+        if let bucket { ensurePoolFilled(for: bucket) }
     }
 }
+
+#else
+// MARK: - MAC CATALYST STUB
+// На Mac пулът не прави нищо, защото WebViews се зареждат на момента.
+final class BannerAdPool: NSObject {
+    @MainActor static let shared = BannerAdPool()
+    func warmUp() {}
+}
+#endif

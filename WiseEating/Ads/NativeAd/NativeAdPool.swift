@@ -1,19 +1,24 @@
 import SwiftUI
+import UIKit
+
+// Зареждаме SDK само ако не сме на Mac
+#if canImport(GoogleMobileAds)
 import GoogleMobileAds
+#endif
+
+// MARK: - 1. iOS IMPLEMENTATION (Real Logic)
+#if !targetEnvironment(macCatalyst)
 
 @MainActor
 final class NativeAdPool: NSObject, ObservableObject {
     static let shared = NativeAdPool()
     
-    // Намаляваме Pool-a, за да пестим памет. 2 е напълно достатъчно за скролване.
+    // Намаляваме Pool-a, за да пестим памет.
     private let poolSize = 2
     
     @Published var availableAds: [NativeAd] = []
     
-    // ПАЗИ СИЛНА РЕФЕРЕНЦИЯ към текущия лоудър, но само един!
     private var currentLoader: AdLoader?
-    
-    // Флаг, за да не се викат няколко зареждания едновременно
     private var isLoading = false
     
     private var adUnitID: String {
@@ -30,19 +35,16 @@ final class NativeAdPool: NSObject, ObservableObject {
     
     /// Публичен метод: Извиква се при старт или когато се консумира реклама
     func refreshPool() {
-        // Ако вече зареждаме нещо, не правим нищо. Чакаме то да свърши.
         guard !isLoading else { return }
-        
-        // Ако имаме достатъчно реклами, спираме.
         guard availableAds.count < poolSize else { return }
         
         startLoadingOne()
     }
     
     private func startLoadingOne() {
+        // UIApplication.shared.topMostViewController е твоят extension
         guard let rootVC = UIApplication.shared.topMostViewController else {
             print("⚠️ [NativeAdPool] No root VC found.")
-            // Пробваме пак след малко, ако няма VC
             retryLoad(after: 2.0)
             return
         }
@@ -50,7 +52,6 @@ final class NativeAdPool: NSObject, ObservableObject {
         print("📥 [NativeAdPool] Requesting single ad... (Pool: \(availableAds.count)/\(poolSize))")
         isLoading = true
         
-        // Създаваме нов лоудър за тази конкретна заявка
         let loader = AdLoader(
             adUnitID: adUnitID,
             rootViewController: rootVC,
@@ -58,7 +59,7 @@ final class NativeAdPool: NSObject, ObservableObject {
             options: [NativeAdViewAdOptions()]
         )
         loader.delegate = self
-        self.currentLoader = loader // Важно: Retain на лоудъра
+        self.currentLoader = loader
         
         loader.load(Request())
     }
@@ -68,15 +69,12 @@ final class NativeAdPool: NSObject, ObservableObject {
             let ad = availableAds.removeFirst()
             print("📤 [NativeAdPool] Ad popped. Remaining: \(availableAds.count)")
             
-            // След като вземем реклама, проверяваме дали трябва да заредим нова
-            // С малко закъснение, за да не натоварваме UI thread-a веднага
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
                 self?.refreshPool()
             }
             return ad
         }
         
-        // Ако нямаме реклама, форсираме опит за зареждане
         refreshPool()
         return nil
     }
@@ -91,51 +89,76 @@ final class NativeAdPool: NSObject, ObservableObject {
     }
 }
 
-extension NativeAdPool: @preconcurrency NativeAdLoaderDelegate {
+// MARK: - Delegate (iOS Only)
+extension NativeAdPool: AdLoaderDelegate, NativeAdLoaderDelegate {
     func adLoader(_ adLoader: AdLoader, didReceive nativeAd: NativeAd) {
         print("✅ [NativeAdPool] Ad received!")
         self.availableAds.append(nativeAd)
         
-        // Освобождаваме текущия лоудър и флага
         self.currentLoader = nil
         self.isLoading = false
         
-        // Веднага проверяваме дали трябва още една (рекурсия чрез refreshPool)
-        // Това гарантира последователност: Зареди 1 -> Успех -> Провери за 2 -> Зареди 2...
+        // Рекурсия за зареждане на следващата, ако има нужда
         self.refreshPool()
     }
     
     func adLoader(_ adLoader: AdLoader, didFailToReceiveAdWithError error: Error) {
-            let nsError = error as NSError
-            print("❌ [NativeAdPool] Failed: \(error.localizedDescription) (Code: \(nsError.code))")
-            
-            // Умно управление на грешките
-            var delayTime = 5.0
-            
-            // Проверяваме дали грешката е от Google Ads домейна
-            if nsError.domain == GADErrorDomain {
-                // В Swift GADErrorCode е заменено с GADError
-                switch nsError.code {
-                case RequestError.noFill.rawValue:
-                    delayTime = 30.0 // Няма реклами, няма смисъл да спамим
-                case RequestError.networkError.rawValue:
-                    delayTime = 10.0 // Проблем с мрежата
-                // 13 често е свързано с лимити, но не винаги е в enum-а, затова го оставяме като magic number или използваме default
-                case 13:
-                    delayTime = 60.0 // Наказани сме (Too many requests), чакаме дълго
-                default:
-                    delayTime = 10.0
-                }
-            }
-            
-            print("⏳ [NativeAdPool] Waiting \(Int(delayTime))s before retry...")
-            
-            // Нулираме флаговете ЧАК след изтичане на наказанието
-            self.currentLoader = nil
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + delayTime) { [weak self] in
-                self?.isLoading = false
-                self?.refreshPool()
+        let nsError = error as NSError
+        print("❌ [NativeAdPool] Failed: \(error.localizedDescription) (Code: \(nsError.code))")
+        
+        var delayTime = 5.0
+        
+        // Проверяваме дали грешката е от Google Ads
+        if nsError.domain == GADErrorDomain {
+            // Mapping GADError codes (safe logic using raw values)
+            switch nsError.code {
+            case 1: // No Fill
+                delayTime = 30.0
+            case 2: // Network Error
+                delayTime = 10.0
+            case 13: // Too many requests (Limit Exceeded)
+                delayTime = 60.0
+            default:
+                delayTime = 10.0
             }
         }
+        
+        print("⏳ [NativeAdPool] Waiting \(Int(delayTime))s before retry...")
+        
+        self.currentLoader = nil
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + delayTime) { [weak self] in
+            self?.isLoading = false
+            self?.refreshPool()
+        }
+    }
 }
+
+#else
+
+// MARK: - 2. MAC CATALYST STUB (Placeholder)
+// Този код се изпълнява само на Mac. Създаваме фалшиви типове, за да не гърми компилаторът.
+
+// 1. Дефинираме фалшив NativeAd, защото GoogleMobileAds липсва
+class NativeAd {}
+
+@MainActor
+final class NativeAdPool: NSObject, ObservableObject {
+    static let shared = NativeAdPool()
+    
+    // Празен масив с фалшивия тип
+    @Published var availableAds: [NativeAd] = []
+    
+    override private init() { super.init() }
+    
+    // Празни методи, които не правят нищо
+    func refreshPool() {
+        print("🖥️ [NativeAdPool] Mac Catalyst: Refresh ignored (Using AdSense).")
+    }
+    
+    func popAd() -> NativeAd? {
+        return nil // На Mac никога нямаме native ads в пула
+    }
+}
+
+#endif
