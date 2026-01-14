@@ -3,10 +3,7 @@ import SwiftData
 
 struct MealPlanDetailView: View {
     @ObservedObject private var effectManager = EffectManager.shared
-    @State private var isBannerAdLoaded: Bool = false
-
-    @Environment(\.safeAreaInsets) private var safeAreaInsets
-    
+    @State private var isBannerAdLoaded: Bool = false    
     let plan: MealPlan
     let profile: Profile
     let onDismiss: () -> Void

@@ -24,7 +24,11 @@ struct ProfileBadgesView: View {
     // +++ КРАЙ НА ПРОМЯНАТА (1/5) +++
     
     private var headerTopPadding: CGFloat {
+#if targetEnvironment(macCatalyst)
+        10
+#else
         -safeAreaInsets.top + 10
+#endif
     }
     
     // MARK: - Data Structures

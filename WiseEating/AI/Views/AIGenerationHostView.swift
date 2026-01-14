@@ -30,7 +30,11 @@ struct AIGenerationHostView: View {
     @State private var hasUnreadNotifications: Bool = false
     
     private var headerTopPadding: CGFloat {
+#if targetEnvironment(macCatalyst)
+        10
+#else
         -safeAreaInsets.top + 10
+#endif
     }
     
     private var activeJobsCount: Int {

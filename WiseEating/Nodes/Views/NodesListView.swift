@@ -59,8 +59,13 @@ struct NodesListView: View {
     @State private var hasUnreadNotifications: Bool = false
 
     @Environment(\.safeAreaInsets) private var safeAreaInsets
-    private var headerTopPadding: CGFloat { -safeAreaInsets.top + 10 }
-
+    private var headerTopPadding: CGFloat {
+#if targetEnvironment(macCatalyst)
+        10
+#else
+        -safeAreaInsets.top + 10
+#endif
+    }
     // --- НАЧАЛО НА ПРОМЯНАТА (1/8): Състояния за филтъра по дата ---
     @State private var filterStartDate: Date? = nil
     @State private var filterEndDate: Date? = nil

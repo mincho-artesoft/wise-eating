@@ -60,11 +60,13 @@ struct StorageListView: View {
     }
 
 
-    // --- НАЧАЛО НА ПРОМЯНА 2: Добавяме изчисляемо свойство за горното отстояние ---
     private var headerTopPadding: CGFloat {
-        return -safeAreaInsets.top + 10
+#if targetEnvironment(macCatalyst)
+        10
+#else
+        -safeAreaInsets.top + 10
+#endif
     }
-    // --- КРАЙ НА ПРОМЯНА 2 ---
 
     var body: some View {
         GeometryReader { geometry in
