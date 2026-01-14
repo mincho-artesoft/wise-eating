@@ -266,19 +266,29 @@ class SubscriptionManager: ObservableObject {
               print("💎 [SubscriptionManager] Status updated: BASE (Fallback)")
           }
       }
+    
     @MainActor
-    func openManageSubscriptions() async {
-        guard let windowScene = UIApplication.shared.connectedScenes
-            .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene
-        else { return }
+        func openManageSubscriptions() async {
+            #if targetEnvironment(macCatalyst)
+            // 🖥️ Mac Catalyst: Системният прозорец често не сработва коректно.
+            // Отваряме директния линк към управление на абонаменти в App Store/System Settings.
+            if let url = URL(string: "https://apps.apple.com/account/subscriptions") {
+                await UIApplication.shared.open(url)
+            }
+            #else
+            // 📱 iOS/iPadOS: Използваме native StoreKit API
+            guard let windowScene = UIApplication.shared.connectedScenes
+                .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene
+            else { return }
 
-        do {
-            try await AppStore.showManageSubscriptions(in: windowScene)
-            await updatePurchasedStatus()
-        } catch {
-            print("Failed to show subscription management: \(error)")
+            do {
+                try await AppStore.showManageSubscriptions(in: windowScene)
+                await updatePurchasedStatus()
+            } catch {
+                print("Failed to show subscription management: \(error)")
+            }
+            #endif
         }
-    }
 
     @MainActor
     func restorePurchases() async {

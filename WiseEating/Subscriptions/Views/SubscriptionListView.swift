@@ -17,14 +17,12 @@ struct SubscriptionListView: View {
     @StateObject private var manager = SubscriptionManager.shared
     @State private var presentedURL: URL?
     
-    // Добавяме EffectManager
     @ObservedObject private var effectManager = EffectManager.shared
 
     var body: some View {
         ScrollView(showsIndicators: false) {
-            // ПРОМЯНА: Добавяме padding към основния VStack
             VStack(spacing: 20) {
-                // Show the corresponding feature view based on the title
+                // 1. Feature Info Views
                 if title == "Ads" {
                     RemoveAdsSubscriptionView()
                 } else if title == "Advanced" {
@@ -33,7 +31,7 @@ struct SubscriptionListView: View {
                     PremiumSubscriptionView()
                 }
                 
-                // ПРОМЯНА: Картите с продукти вече са в отделна секция
+                // 2. Subscription Cards Section
                 VStack(spacing: 12) {
                     HStack(spacing: 10) {
                         ForEach(products) { product in
@@ -66,9 +64,9 @@ struct SubscriptionListView: View {
                     }
                 }
                 .padding()
-                .glassCardStyle(cornerRadius: 20) // Прилагаме стил
+                .glassCardStyle(cornerRadius: 20)
                 
-                // ПРОМЯНА: Линковете също са в отделна секция
+                // 3. Links Section (Оправена за Mac Catalyst)
                 VStack(spacing: 16) {
                     HStack {
                         Button { Task { await manager.openManageSubscriptions() } } label: {
@@ -84,10 +82,12 @@ struct SubscriptionListView: View {
                         }
                         .font(.footnote)
                         .foregroundStyle(effectManager.currentGlobalAccentColor)
-
                     }
+                    
                     HStack {
-                        Button { presentedURL = URL(string: "https://www.wise-eating.com/privacy")! } label: {
+                        Button {
+                            openLink(URL(string: "https://www.wise-eating.com/privacy")!)
+                        } label: {
                             Label("Privacy Policy", systemImage: "lock.shield")
                         }
                         .font(.footnote)
@@ -96,21 +96,20 @@ struct SubscriptionListView: View {
                         Spacer()
                         
                         Button {
-                            presentedURL = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!
+                            openLink(URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!)
                         } label: {
                             Label("Terms of Use (EULA)", systemImage: "doc.text")
                         }
                         .font(.footnote)
                         .foregroundStyle(effectManager.currentGlobalAccentColor)
-
-
                     }
                 }
                 .padding()
-                .glassCardStyle(cornerRadius: 20) // Прилагаме стила
+                .glassCardStyle(cornerRadius: 20)
             }
             .padding(.top, 10)
-            .padding(.horizontal) // Padding за целия ScrollView
+            .padding(.horizontal)
+            // Sheet-ът се активира само ако presentedURL не е nil (т.е. само на iOS)
             .sheet(item: $presentedURL) { url in
                 SafariView(url: url)
             }
@@ -129,6 +128,17 @@ struct SubscriptionListView: View {
             )
         )
     }
+    
+    // Помощна функция за отваряне на линкове
+    private func openLink(_ url: URL) {
+        #if targetEnvironment(macCatalyst)
+        UIApplication.shared.open(url)
+        #else
+        presentedURL = url
+        #endif
+    }
+    
+    // ... (ActiveSubscriptionStatusView и PurchaseSectionView остават същите като в твоя код)
     
     @ViewBuilder
     private func ActiveSubscriptionStatusView() -> some View {
@@ -171,8 +181,7 @@ struct SubscriptionListView: View {
                         .background(effectManager.currentGlobalAccentColor)
                         .cornerRadius(10)
                 }
-
-                // ✅ Инфо за абонамента – title, length, price, auto-renew
+                
                 if let subscription = product.subscription {
                     let period = subscription.subscriptionPeriod
                     let periodDescription: String = {
@@ -188,17 +197,14 @@ struct SubscriptionListView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("\(product.displayName) – \(periodDescription) subscription.")
                         Text("Price: \(product.displayPrice). The subscription renews automatically unless cancelled at least 24 hours before the end of the current period.")
-                        Text("Payment will be charged to your Apple ID account. You can manage or cancel your subscription in Settings > Apple ID > Subscriptions.")
-                        Text("You can also manage or cancel your subscription using the “Manage Subscription” button below.")
+                        Text("Payment will be charged to your Apple ID account.")
                     }
                     .font(.footnote)
                     .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
-
             }
             .padding(.vertical)
         }
     }
-
 }
