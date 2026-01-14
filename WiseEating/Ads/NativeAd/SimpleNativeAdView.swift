@@ -1,5 +1,12 @@
-import GoogleMobileAds
 import UIKit
+
+// Зареждаме GoogleMobileAds само ако не сме на Mac
+#if canImport(GoogleMobileAds)
+import GoogleMobileAds
+#endif
+
+// MARK: - 1. REAL IMPLEMENTATION (iOS Only)
+#if !targetEnvironment(macCatalyst)
 
 final class SimpleNativeAdView: NativeAdView {
 
@@ -17,7 +24,7 @@ final class SimpleNativeAdView: NativeAdView {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 15)
         label.textColor = .label
-        label.numberOfLines = 2 // Позволяваме 2 реда, защото ширината намалява
+        label.numberOfLines = 2
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -42,7 +49,7 @@ final class SimpleNativeAdView: NativeAdView {
         return btn
     }()
     
-    // ✅ ПРОМЯНА: MediaView заема по-голяма площ (за видео изискванията)
+    // MediaView заема по-голяма площ
     private let mediaViewOutlet: MediaView = {
         let v = MediaView()
         v.contentMode = .scaleAspectFill
@@ -88,18 +95,15 @@ final class SimpleNativeAdView: NativeAdView {
         addSubview(callToActionButton)
         addSubview(mediaViewOutlet)
         
+        // Свързване с GADNativeAdView properties
         self.iconView = iconImageView
         self.headlineView = headlineLabel
         self.bodyView = bodyLabel
         self.callToActionView = callToActionButton
         self.mediaView = mediaViewOutlet
         
-        // MARK: - Layout Logic
-        // Тъй като MediaView трябва да е поне 120x120, а височината на реда е 140,
-        // най-добре е MediaView да е квадрат вдясно, а текстът да е вляво.
-        
         NSLayoutConstraint.activate([
-            // 1. MediaView (Дясно) - Фиксиран размер 120x120 за да махнем warning-а
+            // 1. MediaView (Дясно)
             mediaViewOutlet.centerYAnchor.constraint(equalTo: centerYAnchor),
             mediaViewOutlet.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             mediaViewOutlet.widthAnchor.constraint(equalToConstant: 120),
@@ -111,27 +115,25 @@ final class SimpleNativeAdView: NativeAdView {
             iconImageView.widthAnchor.constraint(equalToConstant: 40),
             iconImageView.heightAnchor.constraint(equalToConstant: 40),
             
-            // 3. Заглавие (Вдясно от иконата, Вляво от MediaView)
+            // 3. Заглавие
             headlineLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 8),
             headlineLabel.topAnchor.constraint(equalTo: iconImageView.topAnchor),
-            // Важно: Закотвяме го за mediaView, не за края на екрана
             headlineLabel.trailingAnchor.constraint(equalTo: mediaViewOutlet.leadingAnchor, constant: -8),
             
-            // 4. Ad Badge (Под иконата)
+            // 4. Ad Badge
             adBadgeLabel.leadingAnchor.constraint(equalTo: iconImageView.leadingAnchor),
             adBadgeLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 4),
             adBadgeLabel.widthAnchor.constraint(equalToConstant: 22),
             adBadgeLabel.heightAnchor.constraint(equalToConstant: 14),
             
-            // 5. Body (Под заглавието, вляво от MediaView)
+            // 5. Body
             bodyLabel.leadingAnchor.constraint(equalTo: headlineLabel.leadingAnchor),
             bodyLabel.topAnchor.constraint(equalTo: headlineLabel.bottomAnchor, constant: 2),
             bodyLabel.trailingAnchor.constraint(equalTo: mediaViewOutlet.leadingAnchor, constant: -8),
             
-            // 6. Бутон (Долу Ляво, под Body)
+            // 6. Бутон
             callToActionButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             callToActionButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            // Бутонът стига до медията, но не я застъпва
             callToActionButton.trailingAnchor.constraint(equalTo: mediaViewOutlet.leadingAnchor, constant: -8),
             callToActionButton.heightAnchor.constraint(equalToConstant: 30)
         ])
@@ -154,9 +156,22 @@ final class SimpleNativeAdView: NativeAdView {
             iconView?.isHidden = true
         }
         
-        // Зареждане на медията
         mediaView?.mediaContent = nativeAd.mediaContent
-        // Показваме MediaView, ако има съдържание
         mediaView?.isHidden = false
     }
 }
+
+#else
+
+// MARK: - 2. MAC CATALYST STUB (Placeholder)
+// Този клас съществува само за да не гърми компилацията на Mac, ако някой се опита да създаде инстанция.
+// Реално той никога няма да се покаже, защото NativeAdContainerView ще покаже AdSenseBannerView.
+
+final class SimpleNativeAdView: UIView {
+    // Празен метод, който приема "нещо" (Any), защото NativeAd не съществува тук
+    func populate(with nativeAd: Any) {
+        // No-op
+    }
+}
+
+#endif
