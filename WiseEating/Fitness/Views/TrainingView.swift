@@ -194,8 +194,13 @@ struct TrainingView: View {
         return true
     }
     
-    private var headerTopPadding: CGFloat { -safeAreaInsets.top + 10 }
-    
+    private var headerTopPadding: CGFloat {
+#if targetEnvironment(macCatalyst)
+        10
+#else
+        -safeAreaInsets.top + 10
+#endif
+    }
     private var currentExercises: [ExerciseItem: Double] {
         guard let id = selectedTrainingID,
               let training = dailyTrainings.first(where: { $0.id == id })

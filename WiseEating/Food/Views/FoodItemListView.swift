@@ -12,7 +12,11 @@ struct FoodItemListView: View {
     
     @Environment(\.safeAreaInsets) private var safeAreaInsets
     private var headerTopPadding: CGFloat {
-        return -safeAreaInsets.top + 10
+#if targetEnvironment(macCatalyst)
+        10
+#else
+        -safeAreaInsets.top + 10
+#endif
     }
     
     // MARK: - Filter Enum (with "Plans")

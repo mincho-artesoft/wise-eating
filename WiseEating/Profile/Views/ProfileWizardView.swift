@@ -88,7 +88,6 @@ fileprivate enum WizardStep: Int, Identifiable {
 struct ProfileWizardView: View {
     // MARK: - Environment & Dependencies
     @Environment(\.modelContext) private var modelContext
-    @Environment(\.safeAreaInsets) private var safeAreaInsets
     @ObservedObject private var effectManager = EffectManager.shared
     private let calVM = CalendarViewModel.shared
     let isInit: Bool
