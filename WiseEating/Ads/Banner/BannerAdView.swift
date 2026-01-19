@@ -1,3 +1,4 @@
+// ==== FILE: /Ads/Banner/BannerAdView.swift ====
 import SwiftUI
 #if canImport(GoogleMobileAds)
 import GoogleMobileAds
@@ -7,43 +8,67 @@ struct BannerAdView: UIViewRepresentable {
     @Binding var adsBool: Bool
     let bucket: BannerBucket
     
-    // MARK: - UIViewRepresentable
-    
+    // ID-тата от твоя код
+    private var adUnitID: String {
+        #if DEBUG
+        return "ca-app-pub-3940256099942544/2934735716"
+        #else
+        return "ca-app-pub-3759868960530173/9640938872"
+        #endif
+    }
+
 #if !targetEnvironment(macCatalyst)
     // --- iOS VERSION ---
-    func makeUIView(context: Context) -> BannerView {
-        let rootVC = keyWindowRootViewController()
-        let banner = BannerAdPool.shared.dequeueBanner(
-            for: bucket,
-            rootViewController: rootVC,
-            delegate: context.coordinator
-        )
+    func makeUIView(context: Context) -> GADBannerView {
+        // 1. Създаваме стандартен банер
+        let banner = GADBannerView(adSize: GADAdSizeBanner) // или GADCurrentOrientationAnchoredAdaptiveBanner
+        banner.adUnitID = adUnitID
+        
+        // 2. Намираме root controller
+        if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let root = scene.windows.first?.rootViewController {
+            banner.rootViewController = root
+        }
+        
+        banner.delegate = context.coordinator
+        
+        // 3. Зареждаме веднага (Lazy load - само когато това View се създаде от SwiftUI)
+        banner.load(GADRequest())
+        
         return banner
     }
     
-    func updateUIView(_ uiView: BannerView, context: Context) {}
+    func updateUIView(_ uiView: GADBannerView, context: Context) {}
     
-    func makeCoordinator() -> Coordinator { Coordinator(adsBool: $adsBool) }
+    func makeCoordinator() -> Coordinator { Coordinator(self) }
     
-    final class Coordinator: NSObject, BannerViewDelegate {
-        @Binding var adsBool: Bool
-        init(adsBool: Binding<Bool>) { _adsBool = adsBool }
+    class Coordinator: NSObject, GADBannerViewDelegate {
+        let parent: BannerAdView
+        init(_ parent: BannerAdView) { self.parent = parent }
         
-        func bannerViewDidReceiveAd(_ bannerView: BannerView) { adsBool = true }
-        func bannerView(_ bannerView: BannerView, didFailToReceiveAdWithError error: Error) { adsBool = false }
+        func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+            print("✅ Banner loaded")
+            withAnimation {
+                parent.adsBool = true
+            }
+        }
+        
+        func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+            print("❌ Banner failed: \(error.localizedDescription)")
+            withAnimation {
+                parent.adsBool = false
+            }
+        }
     }
 
 #else
     // --- MAC CATALYST VERSION ---
-    // Използваме helper-а от AdSenseSupport.swift
     func makeUIView(context: Context) -> some UIView {
         let controller = UIHostingController(rootView: AdSenseBannerView())
         controller.view.backgroundColor = .clear
         return controller.view
     }
-    
     func updateUIView(_ uiView: UIViewType, context: Context) {}
-    
-    func makeCoordinator() -> () { }
+    func makeCoordinator() -> () {}
 #endif
 }
