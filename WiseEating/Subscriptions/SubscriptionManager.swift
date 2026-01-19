@@ -14,14 +14,14 @@ class SubscriptionManager: ObservableObject {
     // --- КРАЙ НА НОВОТО ---
 
     static let promoEndDate: Date = {
-            var comps = DateComponents()
-            comps.year = 2026
-            comps.month = 1
-            comps.day = 17
-            comps.hour = 23
-            comps.minute = 59
-            return Calendar.current.date(from: comps) ?? Date.distantFuture
-        }()
+               var comps = DateComponents()
+               comps.year = 2026
+               comps.month = 4  // Април
+               comps.day = 1    // 1-ви
+               comps.hour = 23
+               comps.minute = 59
+               return Calendar.current.date(from: comps) ?? Date.distantFuture
+           }()
         
         // Помощна променлива
         var isPromoActive: Bool {

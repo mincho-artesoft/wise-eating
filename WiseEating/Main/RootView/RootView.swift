@@ -8,8 +8,6 @@ struct RootView: View {
     @State private var adLoopTask: Task<Void, Never>? = nil
     @State private var adRotationIndex: Int = 0
     @State private var nextAdRunDate: Date = Date().addingTimeInterval(70) // Първоначално след 70 сек
-    @AppStorage("hasSeenPromoMessage_Jan17") private var hasSeenPromoMessage: Bool = false
-    @State private var showPromoAlert: Bool = false
     @Environment(\.safeAreaInsets) private var safeAreaInsets
     private var headerTopPadding: CGFloat { safeAreaInsets.top }
     @State private var hasUnreadBadgeNotifications: Bool = false
@@ -142,9 +140,6 @@ struct RootView: View {
                             // Тук е моментът! Потребителят току-що създаде профил.
                             // 1. Показваме Subscription екрана (стандартната логика)
                             showInitialSubscriptionIfNeeded()
-                            
-                            // 2. ✅ Показваме съобщението за подаръка
-                            checkPromoMessage()
                         }
                     })
                     .transition(.move(edge: .bottom).combined(with: .opacity))
@@ -155,9 +150,6 @@ struct RootView: View {
                             setup()
                             // Показваме стандартния абонаментен екран (ако не е видян)
                             showInitialSubscriptionIfNeeded()
-                            
-                            // ✅ Показваме съобщението за подаръка (ако не е видяно)
-                            checkPromoMessage()
                         }
                 }
             case .calendarDenied:
@@ -165,11 +157,6 @@ struct RootView: View {
                 
                 // ПРОМЯНА 2: Случаят .notificationsDenied е премахнат, защото вече не блокираме.
             }
-        }
-        .alert("🎁 Holiday Gift!", isPresented: $showPromoAlert) {
-            Button("Awesome, thanks!", role: .cancel) { }
-        } message: {
-            Text("Enjoy an ad-free experience as a gift from us until January 17th! Happy Holidays!")
         }
         .onReceive(NotificationCenter.default.publisher(for: .snoozeAds)) { _ in
             print("⏳ Ad Snoozed! Adding 3 minutes to the timer.")
@@ -354,19 +341,6 @@ struct RootView: View {
         let unread = await NotificationManager.shared.getUnreadBadgeNotifications()
         if self.hasUnreadBadgeNotifications != !unread.isEmpty {
             self.hasUnreadBadgeNotifications = !unread.isEmpty
-        }
-    }
-    
-    private func checkPromoMessage() {
-        // Проверяваме дали промоцията е активна И дали вече не сме показали съобщението
-        if SubscriptionManager.shared.isPromoActive && !hasSeenPromoMessage {
-            
-            // Малко закъснение (1.5 - 2 секунди), за да не изскочи веднага,
-            // докато UI-то още се намества след wizard-а.
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                showPromoAlert = true
-                hasSeenPromoMessage = true
-            }
         }
     }
     
