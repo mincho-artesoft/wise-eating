@@ -16,3 +16,14 @@ extension UIApplication {
         return top
     }
 }
+
+// ✅ ДОБАВИ ТОВА НАЙ-ДОЛУ (извън extension UIApplication)
+// Тази глобална функция се използва от Ad мениджърите
+@MainActor
+func keyWindowRootViewController() -> UIViewController? {
+    return UIApplication.shared.connectedScenes
+        .compactMap { $0 as? UIWindowScene }
+        .flatMap { $0.windows }
+        .first { $0.isKeyWindow }?
+        .rootViewController
+}
