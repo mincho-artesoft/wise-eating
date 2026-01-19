@@ -1,11 +1,10 @@
-// ==== FILE: /Ads/NativeAd/AdRowView.swift ====
+// ==== FILE: /WiseEating/Ads/NativeAd/AdRowView.swift ====
 import SwiftUI
 #if canImport(GoogleMobileAds)
 import GoogleMobileAds
 #endif
 
 struct AdRowView: View {
-    // Използваме StateObject - loader-ът живее само докато този ред е на екрана (или в паметта на List-а)
     @StateObject private var loader = NativeAdLoader()
     @State private var hasLoaded = false
     
@@ -18,20 +17,17 @@ struct AdRowView: View {
                 .cornerRadius(12)
             #else
             
-            // Ако имаме заредена реклама -> показваме я
             if let nativeAd = loader.nativeAd {
+                // ✅ FIX: Използваме Wrapper-а (дефиниран по-долу)
                 NativeAdViewWrapper(nativeAd: nativeAd)
                     .frame(height: 140)
                     .glassCardStyle(cornerRadius: 20)
-                    .transition(.opacity)
+                    .transition(.opacity) // ✅ FIX: Добавен transition
             }
-            // Ако няма, но пробваме да зареждаме -> празно място (или нищо)
             else {
                 Color.clear
-                    .frame(height: 1) // Минимална височина докато зареди
+                    .frame(height: 1)
                     .onAppear {
-                        // ТОВА Е КЛЮЧЪТ ЗА ADMOB POLICY:
-                        // Зареждаме само когато View-то се появи на екрана.
                         if !hasLoaded {
                             loader.loadAd()
                             hasLoaded = true
@@ -43,3 +39,19 @@ struct AdRowView: View {
         .padding(.vertical, 4)
     }
 }
+
+// ✅ FIX: Добавяме Wrapper-а тук, за да е видим за AdRowView
+#if !targetEnvironment(macCatalyst)
+struct NativeAdViewWrapper: UIViewRepresentable {
+    let nativeAd: NativeAd
+    
+    func makeUIView(context: Context) -> SimpleNativeAdView {
+        // Използваме твоя къстъм клас SimpleNativeAdView (от SimpleNativeAdView.swift)
+        return SimpleNativeAdView(frame: .zero)
+    }
+    
+    func updateUIView(_ uiView: SimpleNativeAdView, context: Context) {
+        uiView.populate(with: nativeAd)
+    }
+}
+#endif

@@ -1,4 +1,4 @@
-// ==== FILE: /Ads/Banner/BannerAdView.swift ====
+// ==== FILE: /WiseEating/Ads/Banner/BannerAdView.swift ====
 import SwiftUI
 #if canImport(GoogleMobileAds)
 import GoogleMobileAds
@@ -8,7 +8,6 @@ struct BannerAdView: UIViewRepresentable {
     @Binding var adsBool: Bool
     let bucket: BannerBucket
     
-    // ID-тата от твоя код
     private var adUnitID: String {
         #if DEBUG
         return "ca-app-pub-3940256099942544/2934735716"
@@ -19,12 +18,11 @@ struct BannerAdView: UIViewRepresentable {
 
 #if !targetEnvironment(macCatalyst)
     // --- iOS VERSION ---
-    func makeUIView(context: Context) -> GADBannerView {
-        // 1. Създаваме стандартен банер
-        let banner = GADBannerView(adSize: GADAdSizeBanner) // или GADCurrentOrientationAnchoredAdaptiveBanner
+    func makeUIView(context: Context) -> BannerView {
+        // ✅ FIX: Използваме "AdSizeBanner" вместо "AdSize.banner"
+        let banner = BannerView(adSize: AdSizeBanner)
         banner.adUnitID = adUnitID
         
-        // 2. Намираме root controller
         if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let root = scene.windows.first?.rootViewController {
             banner.rootViewController = root
@@ -32,28 +30,27 @@ struct BannerAdView: UIViewRepresentable {
         
         banner.delegate = context.coordinator
         
-        // 3. Зареждаме веднага (Lazy load - само когато това View се създаде от SwiftUI)
-        banner.load(GADRequest())
+        banner.load(Request())
         
         return banner
     }
     
-    func updateUIView(_ uiView: GADBannerView, context: Context) {}
+    func updateUIView(_ uiView: BannerView, context: Context) {}
     
     func makeCoordinator() -> Coordinator { Coordinator(self) }
     
-    class Coordinator: NSObject, GADBannerViewDelegate {
+    class Coordinator: NSObject, BannerViewDelegate {
         let parent: BannerAdView
         init(_ parent: BannerAdView) { self.parent = parent }
         
-        func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        func bannerViewDidReceiveAd(_ bannerView: BannerView) {
             print("✅ Banner loaded")
             withAnimation {
                 parent.adsBool = true
             }
         }
         
-        func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+        func bannerView(_ bannerView: BannerView, didFailToReceiveAdWithError error: Error) {
             print("❌ Banner failed: \(error.localizedDescription)")
             withAnimation {
                 parent.adsBool = false
