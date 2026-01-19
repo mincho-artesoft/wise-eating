@@ -1,4 +1,4 @@
-// ==== FILE: /Ads/NativeAd/NativeAdLoader.swift ====
+// ==== FILE: /WiseEating/Ads/NativeAd/NativeAdLoader.swift ====
 import SwiftUI
 import UIKit
 #if canImport(GoogleMobileAds)
@@ -6,10 +6,16 @@ import GoogleMobileAds
 #endif
 
 #if !targetEnvironment(macCatalyst)
+
+// ✅ FIX: Помощна структура за прехвърляне на non-Sendable обекти към MainActor
+private struct UnsafeSendableAd: @unchecked Sendable {
+    let ad: NativeAd
+}
+
 @MainActor
-final class NativeAdLoader: NSObject, ObservableObject, GADNativeAdLoaderDelegate {
-    @Published var nativeAd: GADNativeAd?
-    private var adLoader: GADAdLoader?
+final class NativeAdLoader: NSObject, ObservableObject, AdLoaderDelegate, NativeAdLoaderDelegate {
+    @Published var nativeAd: NativeAd?
+    private var adLoader: AdLoader?
     
     private var adUnitID: String {
         #if DEBUG
@@ -20,15 +26,14 @@ final class NativeAdLoader: NSObject, ObservableObject, GADNativeAdLoaderDelegat
     }
     
     func loadAd() {
-        // Проверка за абонамент преди заявка, за да не генерираме трафик напразно
         guard SubscriptionManager.shared.subscriptionStatus == .base else { return }
 
-        let rootVC = UIApplication.shared.topMostViewController
+        guard let rootVC = UIApplication.shared.topMostViewController else { return }
         
-        let multipleAdsOptions = GADMultipleAdsAdLoaderOptions()
-        multipleAdsOptions.numberOfAds = 1 // ТЕГЛИМ САМО ЕДНА!
+        let multipleAdsOptions = MultipleAdsAdLoaderOptions()
+        multipleAdsOptions.numberOfAds = 1
         
-        adLoader = GADAdLoader(
+        adLoader = AdLoader(
             adUnitID: adUnitID,
             rootViewController: rootVC,
             adTypes: [.native],
@@ -36,18 +41,28 @@ final class NativeAdLoader: NSObject, ObservableObject, GADNativeAdLoaderDelegat
         )
         adLoader?.delegate = self
         
-        adLoader?.load(GADRequest())
+        adLoader?.load(Request())
     }
     
-    func adLoader(_ adLoader: GADAdLoader, didReceive nativeAd: GADNativeAd) {
-        print("✅ [Native] Ad received directly.")
-        withAnimation {
-            self.nativeAd = nativeAd
+    // MARK: - Delegates
+    
+    nonisolated func adLoader(_ adLoader: AdLoader, didReceive nativeAd: NativeAd) {
+        // ✅ FIX: Опаковаме рекламата в Sendable кутия
+        let safeAd = UnsafeSendableAd(ad: nativeAd)
+        
+        Task { @MainActor in
+            print("✅ [Native] Ad received directly.")
+            withAnimation {
+                // Разопаковаме я на главната нишка
+                self.nativeAd = safeAd.ad
+            }
         }
     }
     
-    func adLoader(_ adLoader: GADAdLoader, didFailToReceiveAdWithError error: Error) {
-        print("❌ [Native] Failed to load: \(error.localizedDescription)")
+    nonisolated func adLoader(_ adLoader: AdLoader, didFailToReceiveAdWithError error: Error) {
+        Task { @MainActor in
+            print("❌ [Native] Failed to load: \(error.localizedDescription)")
+        }
     }
 }
 #else
