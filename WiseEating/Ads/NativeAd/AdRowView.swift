@@ -1,4 +1,3 @@
-// ==== FILE: /WiseEating/Ads/NativeAd/AdRowView.swift ====
 import SwiftUI
 #if canImport(GoogleMobileAds)
 import GoogleMobileAds
@@ -10,19 +9,13 @@ struct AdRowView: View {
     
     var body: some View {
         VStack {
-            #if targetEnvironment(macCatalyst)
-            AdSenseBannerView()
-                .frame(height: 140)
-                .background(Color.black.opacity(0.1))
-                .cornerRadius(12)
-            #else
-            
+            #if !targetEnvironment(macCatalyst)
+            // iOS логика
             if let nativeAd = loader.nativeAd {
-                // ✅ FIX: Използваме Wrapper-а (дефиниран по-долу)
                 NativeAdViewWrapper(nativeAd: nativeAd)
                     .frame(height: 140)
                     .glassCardStyle(cornerRadius: 20)
-                    .transition(.opacity) // ✅ FIX: Добавен transition
+                    .transition(.opacity)
             }
             else {
                 Color.clear
@@ -40,13 +33,11 @@ struct AdRowView: View {
     }
 }
 
-// ✅ FIX: Добавяме Wrapper-а тук, за да е видим за AdRowView
 #if !targetEnvironment(macCatalyst)
 struct NativeAdViewWrapper: UIViewRepresentable {
     let nativeAd: NativeAd
     
     func makeUIView(context: Context) -> SimpleNativeAdView {
-        // Използваме твоя къстъм клас SimpleNativeAdView (от SimpleNativeAdView.swift)
         return SimpleNativeAdView(frame: .zero)
     }
     

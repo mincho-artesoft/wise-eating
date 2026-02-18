@@ -46,22 +46,6 @@ final class RewardedAdManager: NSObject {
         }
     }
 
-#else
-    // --- MAC VERSION (Simulated) ---
-    var isReady: Bool { true }
-    func loadAd() async {}
-
-    func showIfAvailable(onReward: @escaping (_ amount: NSDecimalNumber, _ type: String) -> Void) {
-        guard let root = keyWindowRootViewController() else { return }
-        
-        let macAdVC = MacFullScreenAdViewController()
-        macAdVC.modalPresentationStyle = .overFullScreen
-        macAdVC.onDismiss = {
-            // На Mac даваме наградата веднага след затваряне
-            onReward(1, "Coins")
-        }
-        root.present(macAdVC, animated: true)
-    }
 #endif
 }
 

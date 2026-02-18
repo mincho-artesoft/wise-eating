@@ -11,7 +11,6 @@ class AppOpenAdManager: NSObject {
     private var isShowingAd = false
     private var loadTime: Date?
     
-    // Frequency
     private let adFrequency = 10
     private var presentationCounter: Int {
         get { UserDefaults.standard.integer(forKey: "app_open_ad_count") }
@@ -67,28 +66,6 @@ class AppOpenAdManager: NSObject {
         }
     }
 
-#else
-    // --- MAC VERSION ---
-    func loadAd() async {} // No-op
-    
-    func showAdIfAvailable(forceShow: Bool = false) {
-        guard SubscriptionManager.shared.subscriptionStatus == .base else { return }
-        if isShowingAd { return }
-        
-        presentationCounter += 1
-        
-        if forceShow || (presentationCounter % adFrequency == 0) {
-            guard let root = keyWindowRootViewController() else { return }
-            isShowingAd = true
-            
-            let macAdVC = MacFullScreenAdViewController()
-            macAdVC.modalPresentationStyle = .overFullScreen
-            macAdVC.onDismiss = { [weak self] in
-                self?.isShowingAd = false
-            }
-            root.present(macAdVC, animated: true)
-        }
-    }
 #endif
 }
 
