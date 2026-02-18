@@ -823,7 +823,7 @@ struct ExerciseItemEditorView: View {
         
         // 4. Логика за реклами (Base Plan)
         print("📺 Free user: Checking for ads...")
-        
+        #if !targetEnvironment(macCatalyst)
         // Опит 1: Видео с награда (Rewarded) - Приоритет
         if RewardedAdManager.shared.isReady {
             print("📺 Showing Rewarded Ad...")
@@ -855,6 +855,9 @@ struct ExerciseItemEditorView: View {
                 await InterstitialAdManager.shared.loadAd()
             }
         }
+        #else
+        startAIGeneration()
+        #endif
     }
     
     @available(iOS 26.0, *)

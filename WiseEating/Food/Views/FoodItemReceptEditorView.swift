@@ -2083,6 +2083,7 @@ struct FoodItemReceptEditorView: View {
         // 4.2 Безплатен план – Rewarded → Interstitial → fallback
         print("📺 Free user: Checking for ads for recipe generation...")
         
+        #if !targetEnvironment(macCatalyst)
         if RewardedAdManager.shared.isReady {
             print("📺 Showing Rewarded Ad for recipe generation...")
             RewardedAdManager.shared.showIfAvailable { amount, type in
@@ -2108,6 +2109,9 @@ struct FoodItemReceptEditorView: View {
                 await InterstitialAdManager.shared.loadAd()
             }
         }
+        #else
+        startRecipeAIGeneration(for: profile)
+        #endif
     }
     
     

@@ -1727,6 +1727,7 @@ extension FoodItemEditorView {
         // 3.2 Безплатен план – Rewarded → Interstitial → fallback
         print("📺 Free user: Checking for ads for food detail generation...")
         
+        #if !targetEnvironment(macCatalyst)
         if RewardedAdManager.shared.isReady {
             print("📺 Showing Rewarded Ad for food detail generation...")
             RewardedAdManager.shared.showIfAvailable { amount, type in
@@ -1752,6 +1753,9 @@ extension FoodItemEditorView {
                 await InterstitialAdManager.shared.loadAd()
             }
         }
+        #else
+        startFoodDetailAIGeneration()
+        #endif
     }
     
     

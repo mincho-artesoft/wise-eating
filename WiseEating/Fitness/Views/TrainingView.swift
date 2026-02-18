@@ -1297,7 +1297,7 @@ struct TrainingView: View {
         
         // 3.2 Безплатен план – първо пробваме Rewarded, после Interstitial, накрая без реклами
         print("📺 Free user: Checking for ads...")
-        
+        #if !targetEnvironment(macCatalyst)
         if RewardedAdManager.shared.isReady {
             print("📺 Showing Rewarded Ad...")
             RewardedAdManager.shared.showIfAvailable { amount, type in
@@ -1335,6 +1335,13 @@ struct TrainingView: View {
                 await InterstitialAdManager.shared.loadAd()
             }
         }
+        #else
+            startTrainingPlanAIGeneration(
+                workoutsToGenerate: workoutsToGenerate,
+                existingWorkouts: existingForGeneration,
+                selectedPrompts: promptsForGeneration
+            )
+        #endif
     }
     
     

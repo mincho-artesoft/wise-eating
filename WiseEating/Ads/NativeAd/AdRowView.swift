@@ -8,8 +8,8 @@ struct AdRowView: View {
     @State private var hasLoaded = false
     
     var body: some View {
+    #if !targetEnvironment(macCatalyst)
         VStack {
-            #if !targetEnvironment(macCatalyst)
             // iOS логика
             if let nativeAd = loader.nativeAd {
                 NativeAdViewWrapper(nativeAd: nativeAd)
@@ -27,9 +27,10 @@ struct AdRowView: View {
                         }
                     }
             }
-            #endif
+          
         }
         .padding(.vertical, 4)
+    #endif
     }
 }
 

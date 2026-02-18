@@ -16,7 +16,8 @@ struct BannerAdView: UIViewRepresentable {
     }
 
 #if !targetEnvironment(macCatalyst)
-    // --- iOS VERSION ---
+    // MARK: - iOS IMPLEMENTATION
+    
     func makeUIView(context: Context) -> BannerView {
         let banner = BannerView(adSize: AdSizeBanner)
         banner.adUnitID = adUnitID
@@ -52,5 +53,19 @@ struct BannerAdView: UIViewRepresentable {
             }
         }
     }
+
+#else
+    // MARK: - MAC CATALYST STUB (Empty Implementation)
+    // Това е нужно, за да се спази протокола UIViewRepresentable, дори и да не искаме реклами.
+    
+    func makeUIView(context: Context) -> UIView {
+        return UIView() // Връща празен, невидим View
+    }
+    
+    func updateUIView(_ uiView: UIView, context: Context) {
+        // Няма нужда от обновяване
+    }
+    
+    // Coordinator не е задължителен тук, SwiftUI ще ползва Void по подразбиране
 #endif
 }

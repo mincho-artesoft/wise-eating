@@ -4,14 +4,14 @@ import SwiftUI
 @MainActor
 final class BannerRotationManager: ObservableObject {
     static let shared = BannerRotationManager()
-    
+
     enum BannerType {
         case upgrade
         case ad
     }
-    
+
     private var nextType: BannerType = .upgrade
-    
+
     func getAndCycle() -> BannerType {
         let typeToShow = nextType
         if nextType == .upgrade {
@@ -26,37 +26,40 @@ final class BannerRotationManager: ObservableObject {
 struct UpdatePlanBanner: View {
     @ObservedObject private var subscriptionManager = SubscriptionManager.shared
     @ObservedObject private var effectManager = EffectManager.shared
-    
+
     @Environment(\.scenePhase) private var scenePhase
-    
+
     @State private var currentBannerType: BannerRotationManager.BannerType = .upgrade
     @State private var isVisible: Bool = true
     @State private var isAdLoaded: Bool = true
     @State private var hasAppeared: Bool = false
-    
+
     var body: some View {
         VStack {
             // ✅ СЦЕНАРИЙ 1: ПРОМОЦИЯ (До 17 Януари)
             if subscriptionManager.isPromoActive {
-                // По време на промоцията, Base потребителите "изглеждат" като .removeAds.
-                // Показваме им САМО Upgrade банера, без да го редуваме с реклами.
-                // (Ако са Advanced/Premium, този if няма да се изпълни и няма да виждат нищо).
                 if subscriptionManager.subscriptionStatus == .removeAds && isVisible {
                     upgradePlanContent
                         .transition(.opacity.combined(with: .move(edge: .top)))
                 }
             }
-            
+
             // ✅ СЦЕНАРИЙ 2: СТАНДАРТЕН РЕЖИМ (След 17 Януари)
             else if subscriptionManager.subscriptionStatus == .base && isVisible {
-                // Тук си работи старата логика с редуването
                 Group {
+                    // Проверка дали приложението работи на Mac Catalyst
+                    #if targetEnvironment(macCatalyst)
+                    // На Mac Catalyst винаги показваме само upgrade съдържанието
+                    upgradePlanContent
+                    #else
+                    // На iOS продължаваме със старата логика за редуване
                     switch currentBannerType {
                     case .upgrade:
                         upgradePlanContent
                     case .ad:
                         adBannerContent
                     }
+                    #endif
                 }
                 .transition(.opacity.combined(with: .move(edge: .top)))
                 .onAppear {
@@ -74,19 +77,24 @@ struct UpdatePlanBanner: View {
         }
         .padding(.top)
     }
-    
+
     private func refreshContent() {
         withAnimation {
+            // Проверка и тук, за да сме сигурни, че на Catalyst типът никога не се сменя на .ad
+            #if targetEnvironment(macCatalyst)
+            currentBannerType = .upgrade
+            #else
             currentBannerType = BannerRotationManager.shared.getAndCycle()
+            #endif
             isVisible = true
         }
     }
-    
+
     // MARK: - Original Upgrade Banner
     private var upgradePlanContent: some View {
         HStack {
             Spacer()
-            
+
             Button(action: {
                 NotificationCenter.default.post(name: .openSubscriptionFlow, object: nil)
             }) {
@@ -96,7 +104,7 @@ struct UpdatePlanBanner: View {
                         .renderingMode(.original)
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 24, height: 24)
-                    
+
                     Text("Upgrade plan & Support Us")
                         .font(.subheadline.weight(.semibold))
                 }
@@ -107,7 +115,7 @@ struct UpdatePlanBanner: View {
             }
             .buttonStyle(.plain)
             .foregroundColor(effectManager.currentGlobalAccentColor)
-            
+
             Spacer()
         }
         .padding(.vertical, 10)
@@ -124,7 +132,7 @@ struct UpdatePlanBanner: View {
         .padding(.horizontal)
         .padding(.bottom, 8)
     }
-    
+
     // MARK: - Ad Banner
     private var adBannerContent: some View {
         HStack {
@@ -143,7 +151,7 @@ struct UpdatePlanBanner: View {
         .padding(.horizontal)
         .padding(.bottom, 8)
     }
-    
+
     // MARK: - Close Button
     private var closeButton: some View {
         Button(action: {

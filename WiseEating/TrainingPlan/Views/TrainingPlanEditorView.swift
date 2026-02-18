@@ -1486,7 +1486,7 @@ struct TrainingPlanEditorView: View {
         
         // 4.2 Безплатен план – Rewarded → Interstitial → fallback
         print("📺 Free user: Checking for ads for training plan generation...")
-        
+        #if !targetEnvironment(macCatalyst)
         if RewardedAdManager.shared.isReady {
             print("📺 Showing Rewarded Ad for training plan generation...")
             RewardedAdManager.shared.showIfAvailable { amount, type in
@@ -1524,6 +1524,13 @@ struct TrainingPlanEditorView: View {
                 await InterstitialAdManager.shared.loadAd()
             }
         }
+        #else
+        startTrainingPlanAIGeneration(
+            workoutsToGenerate: workoutsToGenerate,
+            existingWorkouts: existingWorkouts,
+            selectedPrompts: selectedPrompts
+        )
+        #endif
     }
 
     

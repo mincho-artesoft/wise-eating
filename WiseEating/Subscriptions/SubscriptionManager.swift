@@ -15,7 +15,7 @@ class SubscriptionManager: ObservableObject {
 
     static let promoEndDate: Date = {
                var comps = DateComponents()
-               comps.year = 2026
+               comps.year = 2021
                comps.month = 4  // Април
                comps.day = 1    // 1-ви
                comps.hour = 23
