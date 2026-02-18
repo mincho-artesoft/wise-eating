@@ -11,11 +11,6 @@ class AppOpenAdManager: NSObject {
     private var isShowingAd = false
     private var loadTime: Date?
     
-    private let adFrequency = 10
-    private var presentationCounter: Int {
-        get { UserDefaults.standard.integer(forKey: "app_open_ad_count") }
-        set { UserDefaults.standard.set(newValue, forKey: "app_open_ad_count") }
-    }
 
 #if !targetEnvironment(macCatalyst)
     private var appOpenAd: AppOpenAd?
@@ -48,7 +43,7 @@ class AppOpenAdManager: NSObject {
         return appOpenAd != nil && Date().timeIntervalSince(loadTime) < (4 * 3600)
     }
 
-    func showAdIfAvailable(forceShow: Bool = false) {
+    func showAdIfAvailable(forceShow: Bool = false) { // Параметърът forceShow вече не е нужен, но можем да го оставим за съвместимост
         guard SubscriptionManager.shared.subscriptionStatus == .base else { return }
         if isShowingAd { return }
         
@@ -57,12 +52,11 @@ class AppOpenAdManager: NSObject {
             return
         }
 
-        presentationCounter += 1
-        if forceShow || (presentationCounter % adFrequency == 0) {
-            if let root = keyWindowRootViewController() {
-                isShowingAd = true
-                appOpenAd?.present(from: root)
-            }
+        // Премахваме брояча и проверката за честота.
+        // Рекламата се показва винаги, когато е налична.
+        if let root = keyWindowRootViewController() {
+            isShowingAd = true
+            appOpenAd?.present(from: root)
         }
     }
 
