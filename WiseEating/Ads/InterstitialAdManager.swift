@@ -4,7 +4,7 @@ import GoogleMobileAds
 #endif
 
 @MainActor
-final class InterstitialAdManager: NSObject { // Махаме FullScreenContentDelegate от тук, ще го сложим в extension
+final class InterstitialAdManager: NSObject {
 
     static let shared = InterstitialAdManager()
     
@@ -47,30 +47,9 @@ final class InterstitialAdManager: NSObject { // Махаме FullScreenContentD
         self.onAdDismissed = onDismiss
         ad.present(from: root)
     }
-
-#else
-    // --- MAC CATALYST VERSION ---
-    var isReady: Bool { return true } // Винаги "готов" (HTML)
-
-    func loadAd() async { } // Webview зарежда в реално време
-
-    func showIfAvailable(onDismiss: @escaping () -> Void) {
-        guard let root = keyWindowRootViewController() else {
-            onDismiss()
-            return
-        }
-        
-        let macAdVC = MacFullScreenAdViewController()
-        macAdVC.modalPresentationStyle = .overFullScreen
-        macAdVC.onDismiss = {
-            onDismiss()
-        }
-        root.present(macAdVC, animated: true)
-    }
 #endif
 }
 
-// Delegate само за iOS
 #if !targetEnvironment(macCatalyst)
 extension InterstitialAdManager: FullScreenContentDelegate {
     func ad(_ ad: any FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: any Error) {

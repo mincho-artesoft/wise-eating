@@ -1,4 +1,3 @@
-// ==== FILE: /WiseEating/Ads/Banner/BannerAdView.swift ====
 import SwiftUI
 #if canImport(GoogleMobileAds)
 import GoogleMobileAds
@@ -19,7 +18,6 @@ struct BannerAdView: UIViewRepresentable {
 #if !targetEnvironment(macCatalyst)
     // --- iOS VERSION ---
     func makeUIView(context: Context) -> BannerView {
-        // ✅ FIX: Използваме "AdSizeBanner" вместо "AdSize.banner"
         let banner = BannerView(adSize: AdSizeBanner)
         banner.adUnitID = adUnitID
         
@@ -29,7 +27,6 @@ struct BannerAdView: UIViewRepresentable {
         }
         
         banner.delegate = context.coordinator
-        
         banner.load(Request())
         
         return banner
@@ -44,28 +41,16 @@ struct BannerAdView: UIViewRepresentable {
         init(_ parent: BannerAdView) { self.parent = parent }
         
         func bannerViewDidReceiveAd(_ bannerView: BannerView) {
-            print("✅ Banner loaded")
             withAnimation {
                 parent.adsBool = true
             }
         }
         
         func bannerView(_ bannerView: BannerView, didFailToReceiveAdWithError error: Error) {
-            print("❌ Banner failed: \(error.localizedDescription)")
             withAnimation {
                 parent.adsBool = false
             }
         }
     }
-
-#else
-    // --- MAC CATALYST VERSION ---
-    func makeUIView(context: Context) -> some UIView {
-        let controller = UIHostingController(rootView: AdSenseBannerView())
-        controller.view.backgroundColor = .clear
-        return controller.view
-    }
-    func updateUIView(_ uiView: UIViewType, context: Context) {}
-    func makeCoordinator() -> () {}
 #endif
 }
