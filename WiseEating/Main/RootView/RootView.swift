@@ -945,7 +945,7 @@ struct RootView: View {
         case nutrients = "Nutrients"
         case settings = "Settings"
         case subscriptions = "Plans"
-        case moreApps = "More Apps"
+        case moreApps = "Apps"
         
         var id: String { rawValue }
     }

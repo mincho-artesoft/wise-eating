@@ -85,6 +85,7 @@ struct WiseEatingApp: App {
                                     }
                                 } else {
                                     Task { @MainActor in
+                                        try? await Task.sleep(nanoseconds: 2 * 1_000_000_000)
                                         #if !targetEnvironment(macCatalyst)
                                         AppOpenAdManager.shared.showAdIfAvailable(forceShow: false)
                                         #endif
