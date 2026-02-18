@@ -463,6 +463,7 @@ struct AIDailyTrainingGeneratorView: View {
         // 3. Логика за реклами (Base Plan)
         print("📺 Free user: Checking for ads...")
         
+        #if !targetEnvironment(macCatalyst)
         // Опит 1: Видео с награда (Rewarded) - Приоритет
         if RewardedAdManager.shared.isReady {
             print("📺 Showing Rewarded Ad...")
@@ -494,6 +495,9 @@ struct AIDailyTrainingGeneratorView: View {
                 await InterstitialAdManager.shared.loadAd()
             }
         }
+        #else
+        startAIGeneration()
+        #endif
     }
     
     private func saveAIButtonPosition() {

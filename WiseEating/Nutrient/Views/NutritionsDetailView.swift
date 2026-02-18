@@ -2759,7 +2759,7 @@ struct NutritionsDetailView: View {
         
         // 6.2 Безплатен план – Rewarded → Interstitial → fallback
         print("📺 Free user: Checking for ads for daily nutrition detail generation...")
-        
+        #if !targetEnvironment(macCatalyst)
         if RewardedAdManager.shared.isReady {
             print("📺 Showing Rewarded Ad for daily nutrition detail generation...")
             RewardedAdManager.shared.showIfAvailable { amount, type in
@@ -2793,6 +2793,13 @@ struct NutritionsDetailView: View {
                 await InterstitialAdManager.shared.loadAd()
             }
         }
+        #else
+            startDailyNutritionDetailAIGeneration(
+                mealsToGenerate: mealsToGenerate,
+                existingMeals: existingMeals,
+                selectedPrompts: selectedPromptsText
+            )
+        #endif
     }
 
     private func saveAIButtonPosition() {

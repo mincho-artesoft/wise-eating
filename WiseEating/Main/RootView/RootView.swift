@@ -1353,7 +1353,7 @@ struct RootView: View {
         }
         
         print("🎬 [Ad Loop] Опит за показване на Interstitial...")
-        
+        #if !targetEnvironment(macCatalyst)
         // ЛОГИКА: Използваме само InterstitialAdManager
         if InterstitialAdManager.shared.isReady {
             print("▶️ [Ad Loop] Пускане на INTERSTITIAL.")
@@ -1367,8 +1367,7 @@ struct RootView: View {
                 await InterstitialAdManager.shared.loadAd()
             }
         }
-        
-        // Премахнахме adRotationIndex и логиката за Rewarded, тъй като вече не са нужни.
+        #endif
     }
     
     // MARK: - Interaction Ad Logic
@@ -1390,7 +1389,9 @@ struct RootView: View {
             UserDefaults.standard.set(0, forKey: key)
             
             // 4. Показваме рекламата
+            #if !targetEnvironment(macCatalyst)
             Task { @MainActor in
+                
                 // Проверяваме дали има заредена, ако не - опитваме да заредим за следващия път
                 if InterstitialAdManager.shared.isReady {
                     InterstitialAdManager.shared.showIfAvailable {
@@ -1401,6 +1402,7 @@ struct RootView: View {
                     await InterstitialAdManager.shared.loadAd()
                 }
             }
+            #endif
         } else {
             // Запазваме новия брой
             UserDefaults.standard.set(count, forKey: key)

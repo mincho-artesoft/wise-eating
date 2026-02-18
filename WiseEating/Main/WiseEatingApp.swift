@@ -33,7 +33,7 @@ struct WiseEatingApp: App {
                 #if !targetEnvironment(macCatalyst)
                 // Инициализация на SDK
                 MobileAds.shared.start(completionHandler: nil)
-                #endif
+               
                 
                 // App Open Ad е OK да се зареди, защото се показва веднага при отваряне
                 Task { @MainActor in await AppOpenAdManager.shared.loadAd() }
@@ -50,6 +50,7 @@ struct WiseEatingApp: App {
                         }
                     }
                 }
+                #endif
             } else {
                 // ✅ ТУК Е ДОБАВЕНИЯТ ЛОГ
                 print("💎 [AdOptimization] User has Premium/Promo active. Skipping ALL ad initialization.")
@@ -78,11 +79,15 @@ struct WiseEatingApp: App {
                                     coldStart = false
                                     Task { @MainActor in
                                         try? await Task.sleep(nanoseconds: 2 * 1_000_000_000)
+                                        #if !targetEnvironment(macCatalyst)
                                         AppOpenAdManager.shared.showAdIfAvailable(forceShow: true)
+                                        #endif
                                     }
                                 } else {
                                     Task { @MainActor in
+                                        #if !targetEnvironment(macCatalyst)
                                         AppOpenAdManager.shared.showAdIfAvailable(forceShow: false)
+                                        #endif
                                     }
                                 }
                             } else { coldStart = false }
@@ -95,7 +100,9 @@ struct WiseEatingApp: App {
                         
                     case .background:
                         if subscriptionManager.subscriptionStatus == .base {
+                            #if !targetEnvironment(macCatalyst)
                             Task { @MainActor in await AppOpenAdManager.shared.loadAd() }
+                            #endif
                         }
                     default: break
                     }

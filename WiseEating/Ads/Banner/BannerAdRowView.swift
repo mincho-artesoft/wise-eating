@@ -5,11 +5,13 @@ struct BannerAdRowView: View {
     private let id = UUID()
 
     var body: some View {
+    #if !targetEnvironment(macCatalyst)
         BannerAdView(adsBool: $isAdLoaded, bucket: .large)
             .frame(maxWidth: .infinity)
             .frame(height: 120) // Височината за банера
             .opacity(isAdLoaded ? 1 : 0)
             .animation(.easeInOut(duration: 0.25), value: isAdLoaded)
             .id(id)
+    #endif
     }
 }
