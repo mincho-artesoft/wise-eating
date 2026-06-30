@@ -31,7 +31,6 @@ class SubscriptionManager: ObservableObject {
         // ✅ 2. ПРОМЕНИ GETTER-А НА subscriptionStatus
         var subscriptionStatus: SubscriptionStatus {
             get {
-                return .removeAds
                 // Взимаме реалния статус от базата/покупките
                 let realStatus = SubscriptionStatus(rawValue: subscriptionStatusRaw) ?? .base
                 
