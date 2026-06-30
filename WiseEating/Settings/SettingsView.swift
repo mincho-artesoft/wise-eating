@@ -38,12 +38,13 @@ struct SettingsView: View {
                             )
                         }
                         
-                        // --- НОВО: Sequoia Theme (Вградена) ---
-                        // Показваме я само ако изображението съществува в Assets
-                        if let sequoiaImg = backgroundManager.sequoiaImage {
+                        // Вградени background-и
+                        ForEach(backgroundManager.builtInBackgrounds, id: \.name) { background in
+                            let isSelected = backgroundManager.selectedImage == background.image
+
                             VStack(spacing: 8) {
                                 ZStack {
-                                    Image(uiImage: sequoiaImg)
+                                    Image(uiImage: background.image)
                                         .resizable()
                                         .scaledToFill()
                                         .frame(width: 60, height: 60)
@@ -56,7 +57,7 @@ struct SettingsView: View {
                                 .shadow(radius: 3, y: 2)
                                 .overlay(
                                     Group {
-                                        if backgroundManager.selectedImage == sequoiaImg {
+                                        if isSelected {
                                             Circle()
                                                 .stroke(effectManager.currentGlobalAccentColor, lineWidth: 4)
                                                 .transition(.asymmetric(insertion: .scale.combined(with: .opacity), removal: .opacity))
@@ -64,20 +65,18 @@ struct SettingsView: View {
                                     }
                                 )
                                 .frame(width: 68, height: 68)
-                                .scaleEffect(backgroundManager.selectedImage == sequoiaImg ? 1.1 : 1.0)
+                                .scaleEffect(isSelected ? 1.1 : 1.0)
 
-                                Text("Sequoia")
+                                Text(background.name)
                                     .font(.caption)
-                                    .fontWeight(backgroundManager.selectedImage == sequoiaImg ? .bold : .medium)
+                                    .fontWeight(isSelected ? .bold : .medium)
                             }
                             .onTapGesture {
                                 withAnimation(.easeInOut(duration: 0.3)) {
-                                    backgroundManager.selectSequoia()
+                                    backgroundManager.selectBuiltInBackground(background.image)
                                 }
                             }
-                            // Тук НЕ добавяме .contextMenu с опция за триене
                         }
-                        // --- КРАЙ НА НОВОТО ---
                         
                         // Списък с последни изображения (User added)
                         ForEach(backgroundManager.recentImages, id: \.self) { image in

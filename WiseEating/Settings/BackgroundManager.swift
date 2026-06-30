@@ -8,26 +8,49 @@ final class BackgroundManager: ObservableObject {
 
     private let isImageActiveKey = "isBackgroundImageActive_v1"
     private let selectedImageIndexKey = "selectedImageIndex_v1"
-    // Ключ за проследяване дали сме задали Sequoia при първия старт
+    private let selectedBuiltInBackgroundNameKey = "selectedBuiltInBackgroundName_v1"
+    // Ключ за проследяване дали сме минали първоначалната настройка на background-а.
     private let hasSetDefaultSequoiaKey = "hasSetDefaultSequoia_v1"
     
     private let recentImagesLimit = 2
     private let filePrefix = "recent_background_"
 
     // Достъп до вграденото изображение
+    let morningBreathImage: UIImage? = UIImage(named: "Morning Breath")
+    let nightBreathImage: UIImage? = UIImage(named: "Night Breath")
     let sequoiaImage: UIImage? = UIImage(named: "sequoia")
+
+    var builtInBackgrounds: [(name: String, image: UIImage)] {
+        [
+            (name: "Morning Breath", image: morningBreathImage),
+            (name: "Night Breath", image: nightBreathImage),
+            (name: "Sequoia", image: sequoiaImage)
+        ].compactMap { option in
+            guard let image = option.image else { return nil }
+            return (option.name, image)
+        }
+    }
 
     @Published var selectedImage: UIImage? {
         didSet {
             let isImageSelected = selectedImage != nil
             UserDefaults.standard.set(isImageSelected, forKey: isImageActiveKey)
 
-            // Запазваме индекса САМО ако изображението е от списъка с "Recent".
-            // Ако е Sequoia (което не е в recentImages), не пипаме индекса или го махаме.
-            if isImageSelected, let image = selectedImage, let index = recentImages.firstIndex(of: image) {
-                UserDefaults.standard.set(index, forKey: selectedImageIndexKey)
+            // Запазваме built-in background по име, а потребителски image - по recent индекс.
+            if isImageSelected, let image = selectedImage {
+                if let builtInName = builtInBackgroundName(for: image) {
+                    UserDefaults.standard.set(builtInName, forKey: selectedBuiltInBackgroundNameKey)
+                    UserDefaults.standard.removeObject(forKey: selectedImageIndexKey)
+                } else if let index = recentImages.firstIndex(of: image) {
+                    UserDefaults.standard.set(index, forKey: selectedImageIndexKey)
+                    UserDefaults.standard.removeObject(forKey: selectedBuiltInBackgroundNameKey)
+                } else {
+                    UserDefaults.standard.removeObject(forKey: selectedImageIndexKey)
+                    UserDefaults.standard.removeObject(forKey: selectedBuiltInBackgroundNameKey)
+                }
             } else {
                 UserDefaults.standard.removeObject(forKey: selectedImageIndexKey)
+                UserDefaults.standard.removeObject(forKey: selectedBuiltInBackgroundNameKey)
             }
             
             NotificationCenter.default.post(name: .backGroundChanged, object: nil)
@@ -46,14 +69,25 @@ final class BackgroundManager: ObservableObject {
         // --- ЛОГИКА ЗА ПЪРВО СТАРТИРАНЕ ---
         let hasSetDefault = UserDefaults.standard.bool(forKey: hasSetDefaultSequoiaKey)
         let wasImageActive = UserDefaults.standard.bool(forKey: isImageActiveKey)
+        let selectedBuiltInBackgroundName = UserDefaults.standard.string(forKey: selectedBuiltInBackgroundNameKey)
         
         if !hasSetDefault {
             // Първо стартиране на приложението (или на тази версия):
-            // Задаваме Sequoia като избрана по подразбиране.
-            if let sequoia = sequoiaImage {
-                self.selectedImage = sequoia
-                print("First Launch: Setting 'Sequoia' as default background.")
+            // Задаваме Morning Breath като избран background по подразбиране.
+            if let morningBreathImage {
+                self.selectedImage = morningBreathImage
+                UserDefaults.standard.set(true, forKey: isImageActiveKey)
+                UserDefaults.standard.set("Morning Breath", forKey: selectedBuiltInBackgroundNameKey)
+                UserDefaults.standard.removeObject(forKey: selectedImageIndexKey)
+                print("First Launch: Setting 'Morning Breath' as default background.")
+            } else {
+                self.selectedImage = nil
+                UserDefaults.standard.set(false, forKey: isImageActiveKey)
+                UserDefaults.standard.removeObject(forKey: selectedImageIndexKey)
+                UserDefaults.standard.removeObject(forKey: selectedBuiltInBackgroundNameKey)
+                print("First Launch: Morning Breath background is missing.")
             }
+
             // Маркираме, че сме го направили, за да не презаписваме избора на потребителя в бъдеще.
             UserDefaults.standard.set(true, forKey: hasSetDefaultSequoiaKey)
             
@@ -61,11 +95,13 @@ final class BackgroundManager: ObservableObject {
             // Стандартна логика за възстановяване
             let selectedIndex = UserDefaults.standard.integer(forKey: selectedImageIndexKey)
             
-            if recentImages.indices.contains(selectedIndex) {
+            if let selectedBuiltInBackgroundName,
+               let builtInBackground = builtInBackgrounds.first(where: { $0.name == selectedBuiltInBackgroundName }) {
+                self.selectedImage = builtInBackground.image
+            } else if recentImages.indices.contains(selectedIndex) {
                 self.selectedImage = recentImages[selectedIndex]
             } else {
-                // Ако е било активно изображение, но не е в recent (значи е Sequoia),
-                // или индексът е счупен -> възстановяваме Sequoia ако е възможно
+                // Legacy fallback за стари инсталации, в които built-in изборът не е пазен по име.
                 self.selectedImage = sequoiaImage ?? recentImages.first
             }
         } else {
@@ -73,13 +109,17 @@ final class BackgroundManager: ObservableObject {
         }
     }
     
-    // Метод за избор на Sequoia (без да я мести в Recent)
+    // Legacy helper за избор на Sequoia (без да я мести в Recent).
     func selectSequoia() {
         if let img = sequoiaImage {
             self.selectedImage = img
         }
     }
     
+    func selectBuiltInBackground(_ image: UIImage) {
+        self.selectedImage = image
+    }
+
     func selectImage(_ image: UIImage) {
         if let index = recentImages.firstIndex(of: image) {
             recentImages.remove(at: index)
@@ -175,5 +215,9 @@ final class BackgroundManager: ObservableObject {
                 recentImages.append(image)
             }
         }
+    }
+
+    private func builtInBackgroundName(for image: UIImage) -> String? {
+        builtInBackgrounds.first(where: { $0.image == image })?.name
     }
 }
