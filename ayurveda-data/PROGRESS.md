@@ -8,9 +8,12 @@ All validated (`validate.py --store`), viruddha-flagged where required,
 qualityState aiDraft pending expert review. Task packets and reports in
 `recipes/TASK-R*.md`, `recipes/REPORT-R*.md`.
 
-## Dravyas
+## Dravyas: COMPLETE ✅ (714 authored; 750 target reachable via review top-up)
 
-Target: 750 full-facet dravyas. **Done: 633 (batches 01–26), all validated + committed.**
+**All 30 predrafts promoted to `dravyas/batch-01..30.json`, validator green at
+714 dravyas + 1,500 recipes.** ~15 predraft items were skipped as duplicates of
+already-authored dravyas (documented in batch commit messages and reviewNotes).
+A final ~36-item batch-31 can be selected during expert review to hit 750.
 
 | Batch | Contents | Items |
 |---|---|---|
@@ -31,66 +34,44 @@ Target: 750 full-facet dravyas. **Done: 633 (batches 01–26), all validated + c
 | 15 | Fruits I (mango, banana, draksha, bael, jamun, phalsa…) | 25 |
 | 16 | Fruits II & dry fruits (fig, dadima, ikshu, makhana, munakka…) | 24 |
 | 17 | Rices, millets, flours, mung (rakta shali, navara, kodrava…) | 24 |
+| 18 | Regional specials (ker-sangri, mahua, tulsi/nettle, vinegars, betel nut⚠) | 25 |
+| 19 | Regional dairy + classical beverages (yak dairy, ushnodaka, sherbets, chai) | 25 |
+| 20 | Juices, spice waters, regional ferments (kanji, pakhala, gundruk, neera) | 25 |
+| 21 | Regional preparations I (idli batter, aranala, mamsa rasa, dadhyodana) | 25 |
+| 22 | Snacks, festival sweets, medicinals (vataka, shrikhand, shilajit, gulkand) | 25 |
+| 23 | Cooling roots & murabbas (sariva, ushira, five murabbas) | 25 |
+| 24 | Legume varga (masha, chanas, kulattha, saktu, rasona) | 25 |
+| 25 | Legumes II + spice blends (trikatu, chaturjata, panch phoron, shahi jeera) | 25 |
+| 26 | Rare spices & aromatics (betel leaf, karpura, tumburu, goda masala) | 25 |
+| 27 | Spices II + leafy greens (hingvastak, bathua, gongura, moringa leaf) | 22 |
+| 28 | Greens II, dry fruits, char magaz seeds (upodika, chhuara, krishna tila) | 21 |
+| 29 | Dairy varga + specialty oils (mahisha/ushtra milk, mastu, khoya, eranda) | 19 |
+| 30 | Oils II, sweetener ladder, salts & gums (nolen gur, purana madhu, vark, vanaspati⚠) | 19 |
 
-**DRAVYA AUTHORING COMPLETE: 714/750 — all 30 predrafts promoted to batches
-01–30, validator green.** 15 predraft items were skipped as duplicates of
-already-authored dravyas (documented in batch commit messages). The 750 target
-can be topped up with a final ~36-item batch-31 chosen during expert review.
-Engine-exclusion items (display with warning, never recommend): betel nut
-(batch 18), vanaspati (batch 30).
+⚠ Engine-exclusion items (display with health warning, NEVER recommend):
+**betel nut** (batch 18, carcinogen) and **vanaspati** (batch 30, trans fats).
 
-- 21: regional preparations I — fermented staples (idli batter, aranala kanji), meat broths (mamsa rasa, paya), breads & rice dishes (dadhyodana curd rice, puliyodarai)
-- 22: snacks, festival sweets (vataka/medu vada, shikharini/shrikhand, tila modaka), chutneys, medicinals (shilajit, musta, gulkand, amla juice)
-- 23: cooling roots (sariva, ushira), murabbas (amla/haritaki/bael/ginger/petha), fresh regional vegetables
-- 24: legume varga — dals, chanas, sprouts, saktu/sattu, garlic (rasona, full cautions)
-- 25: legumes II + spice blends (trikatu, chaturjata, panch phoron); black-cumin authored as shahi jeera (Krishna Jiraka, fdcId 12366) to avoid duplicating kalonji (dravya.onion-seed)
-- 26: rare spices & aromatics — betel LEAF (leaf-only entry, additives excluded; cross-ref batch-18 betel nut), edible camphor (pinch-dose cautions), tumburu, goda/chaat masala. reviewNotes flag khus/galangal near-duplicates with batch-23 for reviewer cross-linking.
+Notes: predraft-16's langsat placeholder dropped per D10 review; scaffold
+servings corrected to realistic per-piece grams during authoring; reviewNotes
+mark every place classical sources disagree or near-duplicates need reviewer
+cross-linking.
 
-Note: predraft-16's langsat placeholder was dropped per the D10 reviewer note
-(non-Indian, low confidence); batch-16 has 24 items. Some scaffold servings
-(e.g. "1 cup / 200 g" for puri, papad, modak) were corrected to realistic
-per-piece grams during facet authoring.
+## Validation
 
-## NEW: predrafts ready (D10 approved)
+`python3 ayurveda-data/validate.py --store /tmp/pre` (store from
+`cat WiseEating/preseeded_db.store.gz.part-aa WiseEating/preseeded_db.store.gz.part-ab > /tmp/pre.gz && gunzip -f /tmp/pre.gz`).
+Current status: **714 dravyas, 1,500 recipes — all checks pass.**
 
-`dravyas/predraft/predraft-10..30.json` — 524 items with verified identity,
-category, USDA bindings and servings (Codex-produced, director-verified).
-Facet authoring now works from these: for each predraft item, author the
-Ayurvedic fields (rasa, virya, vipaka, gunas, prabhava, dosha, agniEffect,
-digestibility, seasons, timeOfDay, combinations, viruddha, contraindications,
-preparation, provenance, confidence), drop `canonHints`/`_facetsPending`/
-`usdaNote`, and emit into a real `dravyas/batch-NN.json` (validator must pass).
-Use canonHints.vpk/virya as starting points but correct them where classical
-sources say otherwise.
+## Next milestones
 
-## Remaining (524 items, batches 10–~30)
+1. **D3 crosswalk** — USDA fdcId → dravya mapping (name-match script + review file).
+2. **D4 category rules** — estimated-tier dosha values for unmatched processed foods.
+3. **D6 Swift** — `AyurvedaProfile` SwiftData model (additive), recipes seeded as
+   `FoodItem(isRecipe)` + `IngredientLink`, one-time seeder from bundled
+   `ayurveda_seed.json.gz`. Design by director, implementation dispatchable to Codex.
+4. **Expert review** — work through aiDraft content, resolve reviewNotes, promote
+   to reviewed; optional batch-31 top-up to 750.
 
-Work from the canon worklist in `canon/` (631 stubs, minus ~140 already covered
-above) plus `canon/DRAVYA-CANON-LIST-V1.md` (125 more names). Suggested order:
-
-- 10: animal foods (meats, fish, eggs — canon-11)
-- 11: classical preparations (kitchari, kanji/peya, panchamrit, chyawanprash-style — canon-10)
-- 12: remaining spices & medicinal foods (canon-05: triphala trio, ashwagandha, shatavari…)
-- 13–14: remaining vegetables & gourds (canon-07: parwal, suran, tindora, snake gourd…)
-- 15–16: remaining fruits (canon-08: bael, amla, phalsa, ber, custard apple…)
-- 17: remaining grains/legumes (canon-06: navara, kuttu forms, sattu, horse gram…)
-- 18+: regional specials, remaining beverages, fermented (canon-10/11)
-
-## Workflow per batch (proven)
-
-1. Decompress store once per session:
-   `cat WiseEating/preseeded_db.store.gz.part-aa WiseEating/preseeded_db.store.gz.part-ab > /tmp/pre.gz && gunzip -f /tmp/pre.gz`
-2. Look up USDA IDs: `select ZID, ZNAME from ZFOODITEM where ZNAME like ?` (SQLite, table ZFOODITEM).
-   Store contains many Indian items (search Hindi + English names). No match → bind `near` to closest, or omit binding.
-3. Write `dravyas/batch-NN.json` per the 16-field spec in `README.md` (25 items/batch).
-   `qualityState: aiDraft`; add `reviewNote` where classical sources disagree.
-4. Validate: `python3 ayurveda-data/validate.py --store /tmp/pre` — must pass.
-5. Commit. NOTE: stale git locks exist (`.git/index.lock`, `.git/HEAD.lock` — sandbox
-   can't delete them). Workaround that works: use `GIT_INDEX_FILE=/tmp/ayur_index`
-   (copy of real index), `git add` → `git write-tree` → `git commit-tree` → write SHA
-   directly to `.git/refs/heads/main`. On the Mac: `rm -f .git/*.lock .git/refs/heads/main.lock && git reset` fixes everything.
-
-## After dravyas
-
-- Crosswalk generation (D3), category rules (D4), recipes 1,500 (D5 — wait for quota reset),
-  Swift models + seeder (D6). See RESTART-PLAN.md.
+Git note (sandbox sessions): stale locks workaround — `GIT_INDEX_FILE=/tmp/ayur_index`,
+`git add` → `write-tree` → `commit-tree` → write SHA to `.git/refs/heads/main`.
+On the Mac: `rm -f .git/*.lock .git/refs/heads/main.lock && git reset`.
