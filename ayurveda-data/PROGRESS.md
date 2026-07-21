@@ -10,7 +10,7 @@ qualityState aiDraft pending expert review. Task packets and reports in
 
 ## Dravyas
 
-Target: 750 full-facet dravyas. **Done: 408 (batches 01–17), all validated + committed.**
+Target: 750 full-facet dravyas. **Done: 633 (batches 01–26), all validated + committed.**
 
 | Batch | Contents | Items |
 |---|---|---|
@@ -32,11 +32,19 @@ Target: 750 full-facet dravyas. **Done: 408 (batches 01–17), all validated + c
 | 16 | Fruits II & dry fruits (fig, dadima, ikshu, makhana, munakka…) | 24 |
 | 17 | Rices, millets, flours, mung (rakta shali, navara, kodrava…) | 24 |
 
-**Facet authoring from predrafts: 483/750 done (through batch-20: regional
-specials incl. betel-nut engine-exclusion note, regional dairy + classical
-beverages, juices/spice-waters/regional ferments). Next is predraft-21.**
+**Facet authoring from predrafts: 633/750 done (through batch-26). Next is predraft-27.**
+
+- 21: regional preparations I — fermented staples (idli batter, aranala kanji), meat broths (mamsa rasa, paya), breads & rice dishes (dadhyodana curd rice, puliyodarai)
+- 22: snacks, festival sweets (vataka/medu vada, shikharini/shrikhand, tila modaka), chutneys, medicinals (shilajit, musta, gulkand, amla juice)
+- 23: cooling roots (sariva, ushira), murabbas (amla/haritaki/bael/ginger/petha), fresh regional vegetables
+- 24: legume varga — dals, chanas, sprouts, saktu/sattu, garlic (rasona, full cautions)
+- 25: legumes II + spice blends (trikatu, chaturjata, panch phoron); black-cumin authored as shahi jeera (Krishna Jiraka, fdcId 12366) to avoid duplicating kalonji (dravya.onion-seed)
+- 26: rare spices & aromatics — betel LEAF (leaf-only entry, additives excluded; cross-ref batch-18 betel nut), edible camphor (pinch-dose cautions), tumburu, goda/chaat masala. reviewNotes flag khus/galangal near-duplicates with batch-23 for reviewer cross-linking.
+
 Note: predraft-16's langsat placeholder was dropped per the D10 reviewer note
-(non-Indian, low confidence); batch-16 has 24 items.
+(non-Indian, low confidence); batch-16 has 24 items. Some scaffold servings
+(e.g. "1 cup / 200 g" for puri, papad, modak) were corrected to realistic
+per-piece grams during facet authoring.
 
 ## NEW: predrafts ready (D10 approved)
 
