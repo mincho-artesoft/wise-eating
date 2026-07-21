@@ -84,7 +84,70 @@ def main():
             if not (0 <= cf.get("ayur", -1) <= 1 and 0 <= cf.get("sci", -1) <= 1):
                 errs.append(f"{b}/{i}: confidence out of range")
 
-    print(f"Checked {total} items across {len(glob.glob(os.path.join(here, 'dravyas', 'batch-*.json')))} batches"
+    # ---- recipes ----
+    dravya_ids = set(seen.keys())
+    r_total, r_seen = 0, {}
+    MEAL = {"breakfast", "lunch", "dinner", "snack", "drink", "dessert"}
+    RCAT = {"classical", "everyday", "international"}
+    R_REQUIRED = ["id", "name", "category", "meal", "servings", "prepMinutes",
+                  "cookMinutes", "ingredients", "steps", "dosha", "seasons",
+                  "timeOfDay", "viruddhaFlags", "guidance", "provenance", "confidence"]
+    for path in sorted(glob.glob(os.path.join(here, "recipes", "batch-*.json"))):
+        b = os.path.basename("recipes/" + os.path.basename(path))
+        try:
+            data = json.load(open(path))
+        except Exception as e:
+            errs.append(f"{b}: JSON parse error: {e}")
+            continue
+        for r in data.get("items", []):
+            r_total += 1
+            i = r.get("id", "?")
+            for f in R_REQUIRED:
+                if f not in r:
+                    errs.append(f"{b}/{i}: missing field '{f}'")
+            if i in r_seen:
+                errs.append(f"{b}/{i}: duplicate recipe id")
+            r_seen[i] = b
+            if r.get("category") not in RCAT:
+                errs.append(f"{b}/{i}: invalid category {r.get('category')}")
+            if r.get("meal") not in MEAL:
+                errs.append(f"{b}/{i}: invalid meal {r.get('meal')}")
+            ings = r.get("ingredients", [])
+            if len(ings) < 2:
+                errs.append(f"{b}/{i}: fewer than 2 ingredients")
+            linked = 0
+            for ing in ings:
+                d, f_ = ing.get("dravyaId"), ing.get("fdcId")
+                if d:
+                    linked += 1
+                    if d not in dravya_ids:
+                        errs.append(f"{b}/{i}: unknown dravyaId {d}")
+                elif f_:
+                    if fdc_ids is not None and f_ not in fdc_ids:
+                        errs.append(f"{b}/{i}: fdcId {f_} not in store")
+                else:
+                    errs.append(f"{b}/{i}: ingredient '{ing.get('name')}' has no dravyaId or fdcId")
+                if not (isinstance(ing.get("grams"), (int, float)) and ing["grams"] > 0):
+                    errs.append(f"{b}/{i}: ingredient '{ing.get('name')}' bad grams")
+            if ings and linked / len(ings) < 0.5:
+                errs.append(f"{b}/{i}: under 50% of ingredients linked to dravyas ({linked}/{len(ings)})")
+            steps = r.get("steps", [])
+            if not 3 <= len(steps) <= 15:
+                errs.append(f"{b}/{i}: steps count {len(steps)} outside 3-15")
+            for k, v in r.get("dosha", {}).items():
+                if k not in ("vata", "pitta", "kapha") or not -2 <= v <= 2:
+                    errs.append(f"{b}/{i}: bad dosha {k}={v}")
+            if set(r.get("seasons", [])) - RITU:
+                errs.append(f"{b}/{i}: invalid season")
+            if set(r.get("timeOfDay", [])) - TIME:
+                errs.append(f"{b}/{i}: invalid timeOfDay")
+            if not (isinstance(r.get("servings"), (int, float)) and r["servings"] > 0):
+                errs.append(f"{b}/{i}: bad servings")
+            cf = r.get("confidence", {})
+            if not (0 <= cf.get("ayur", -1) <= 1):
+                errs.append(f"{b}/{i}: confidence out of range")
+
+    print(f"Checked {total} dravyas, {r_total} recipes"
           + ("" if fdc_ids else " (store not checked — pass --store)"))
     if errs:
         print(f"\n{len(errs)} ERRORS:")
