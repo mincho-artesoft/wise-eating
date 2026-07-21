@@ -621,3 +621,342 @@ git status --short --branch
 - Migration/crash checks and the expected 14,484 total `FoodItem` count.
 
 All were skipped solely because Run 2 Phase 1 failed and the packet explicitly forbids continuing or fixing after that failure.
+
+---
+
+# Run 3 — full Mac verification after fix commit 1cdcf12
+
+Date: 2026-07-22 (Europe/Sofia)
+
+## Run 3 summary
+
+| Gate | Result | Evidence |
+|---|---|---|
+| Preflight and plain push | PASS | Clean `ayurveda-app` at `1cdcf12`; branch was one commit ahead and pushed without force. |
+| Informational `main` clean baseline | PASS | `main` at `9a5429d`; clean build exit 0. No ObserversHub type-check timeout. `main` was not moved. |
+| Phase 1 — `ayurveda-app` simulator build | PASS | Scheme `WiseEating`; iPhone 17 destination; build exit 0. |
+| Phase 2 — fresh install | PASS | First launch remained alive for at least 60 seconds, Ayurveda seeded without failure, SQLite counts `2214 / 336 / 383 / 1500`. |
+| Phase 3 — idempotency | PASS | Both relaunches took the “Ayurveda data already seeded, skipping” path; both retained `2214 / 336 / 383 / 1500 / 14484`. |
+| Phase 4 — upgrade path | PASS | Original app created a 12,601-food store; install-over preserved it, migration launched without error, Ayurveda seeded exactly once, and final count was 14,484 foods. |
+
+No source file was modified. The only repository edit in Run 3 is this appended report section. No force-push was used, and checkout ended on `ayurveda-app`.
+
+## Run 3 environment
+
+```text
+Xcode 26.2
+Build version 17C52
+simctl: CoreSimulator-1051.17.7
+iOS runtime: iOS 26.2 (23C54)
+Project: WiseEating.xcodeproj
+Scheme: WiseEating
+Destination: iPhone 17, iOS 26.2
+Simulator UDID: FA7BDA24-C986-4B66-96B5-68A79AD42865
+Bundle identifier: WiseEating.Arte-Soft
+App product: /Users/minchomilev/Library/Developer/Xcode/DerivedData/WiseEating-fexkmqhzbnixxpgmsoaslnjfaees/Build/Products/Debug-iphonesimulator/WiseEating.app
+```
+
+## Run 3 step 0 — preflight and push: PASS
+
+### Commands run
+
+```sh
+sed -n '1,360p' ayurveda-data/TASK-D6-VERIFY.md
+git status --short --branch
+git branch -vv
+git log --oneline -5 ayurveda-app
+git rev-parse --abbrev-ref HEAD
+git rev-parse HEAD
+git merge-base --is-ancestor 1cdcf12 HEAD
+print "RUN3_FIX_ANCESTOR_EXIT=$?"
+git show -s --format='author=%an <%ae>%ncommitter=%cn <%ce>%nsubject=%s' 1cdcf12
+git push origin ayurveda-app
+git status --short --branch
+git branch -vv
+```
+
+### Key output
+
+```text
+## ayurveda-app...origin/ayurveda-app [ahead 1]
+* ayurveda-app 1cdcf12 [origin/ayurveda-app: ahead 1] D6 fix 2: split ObserversHub.body into six sub-views (compiler type-check timeout)
+  main         9a5429d [origin/main] ...
+ayurveda-app
+1cdcf128bc70cfc0d72c839331f63059fae05aee
+RUN3_FIX_ANCESTOR_EXIT=0
+author=Mincho Milev <mincho.milev@gmail.com>
+committer=Mincho Milev <mincho.milev@gmail.com>
+subject=D6 fix 2: split ObserversHub.body into six sub-views (compiler type-check timeout)
+To github.com:mincho-artesoft/wise-eating.git
+   11d57ec..1cdcf12  ayurveda-app -> ayurveda-app
+## ayurveda-app...origin/ayurveda-app
+```
+
+## Run 3 informational baseline — clean build on `main`: PASS
+
+### Commands run
+
+```sh
+git checkout main
+git rev-parse --abbrev-ref HEAD
+git rev-parse HEAD
+git status --short --branch
+xcodebuild -project WiseEating.xcodeproj -scheme WiseEating -destination 'platform=iOS Simulator,name=iPhone 17' -configuration Debug clean build > /tmp/d6_run3_main_baseline_build.log 2>&1
+d6_run3_main_status=$?
+rg -n -C 4 'error:' /tmp/d6_run3_main_baseline_build.log || true
+tail -40 /tmp/d6_run3_main_baseline_build.log
+git checkout ayurveda-app
+git rev-parse --abbrev-ref HEAD
+git status --short --branch
+print "D6_RUN3_MAIN_BASELINE_EXIT_CODE=$d6_run3_main_status"
+```
+
+Read-only progress checks while the clean build ran:
+
+```sh
+tail -20 /tmp/d6_run3_main_baseline_build.log
+stat -f 'lines/check via size=%z modified=%Sm' -t '%Y-%m-%d %H:%M:%S' /tmp/d6_run3_main_baseline_build.log
+ps -axo pid,etime,%cpu,state,command | rg 'xcodebuild|swift-frontend' | head -30
+tail -12 /tmp/d6_run3_main_baseline_build.log
+stat -f 'size=%z modified=%Sm' -t '%Y-%m-%d %H:%M:%S' /tmp/d6_run3_main_baseline_build.log
+wc -l /tmp/d6_run3_main_baseline_build.log
+```
+
+### Key output
+
+```text
+Switched to branch 'main'
+main
+9a5429d92f89f496378cb4b2d893187414c5c644
+## main...origin/main
+** BUILD SUCCEEDED **
+Switched to branch 'ayurveda-app'
+ayurveda-app
+## ayurveda-app...origin/ayurveda-app
+D6_RUN3_MAIN_BASELINE_EXIT_CODE=0
+```
+
+`rg` found no `ObserversHub.swift:156:25` timeout. Its only `error:` match was the literal text `Final save error` inside an unrelated warning, not a compiler error.
+
+## Run 3 Phase 1 — `ayurveda-app` build: PASS
+
+### Commands run
+
+```sh
+xcodebuild -list -project WiseEating.xcodeproj
+xcrun simctl list devices available
+xcodebuild -project WiseEating.xcodeproj -scheme WiseEating -destination 'platform=iOS Simulator,name=iPhone 17' -configuration Debug build > /tmp/d6_run3_phase1_build.log 2>&1
+d6_run3_phase1_status=$?
+tail -40 /tmp/d6_run3_phase1_build.log
+print "D6_RUN3_PHASE1_EXIT_CODE=$d6_run3_phase1_status"
+```
+
+### Key output
+
+```text
+Schemes:
+    WiseEating
+** BUILD SUCCEEDED **
+D6_RUN3_PHASE1_EXIT_CODE=0
+```
+
+## Run 3 Phase 2 — fresh-install seeding: PASS
+
+### Commands run
+
+```sh
+xcrun simctl shutdown FA7BDA24-C986-4B66-96B5-68A79AD42865 2>/dev/null || true
+xcrun simctl erase FA7BDA24-C986-4B66-96B5-68A79AD42865
+xcrun simctl boot FA7BDA24-C986-4B66-96B5-68A79AD42865
+xcrun simctl bootstatus FA7BDA24-C986-4B66-96B5-68A79AD42865 -b
+plutil -extract CFBundleIdentifier raw /Users/minchomilev/Library/Developer/Xcode/DerivedData/WiseEating-fexkmqhzbnixxpgmsoaslnjfaees/Build/Products/Debug-iphonesimulator/WiseEating.app/Info.plist
+xcrun simctl install FA7BDA24-C986-4B66-96B5-68A79AD42865 /Users/minchomilev/Library/Developer/Xcode/DerivedData/WiseEating-fexkmqhzbnixxpgmsoaslnjfaees/Build/Products/Debug-iphonesimulator/WiseEating.app
+xcrun simctl launch --console-pty FA7BDA24-C986-4B66-96B5-68A79AD42865 WiseEating.Arte-Soft 2>&1 | tee /tmp/d6_run3_fresh.log
+```
+
+The console process was polled for at least 60 seconds. Store discovery and gates:
+
+```sh
+xcrun simctl get_app_container FA7BDA24-C986-4B66-96B5-68A79AD42865 WiseEating.Arte-Soft data
+find "$d6_run3_data_container" -name 'default.store' -print
+xcrun simctl spawn FA7BDA24-C986-4B66-96B5-68A79AD42865 pgrep -fl WiseEating || true
+rg -a 'Checking for Ayurveda data|Seeded 714|seeding failed|already seeded|already applied|BUILD|Starting full index' /tmp/d6_run3_fresh.log || true
+sqlite3 "$d6_run3_store" "select count(*) as profiles from ZAYURVEDAPROFILE;"
+sqlite3 "$d6_run3_store" "select count(*) as links from ZAYURVEDALINK;"
+sqlite3 "$d6_run3_store" "select count(*) as placeholders from ZFOODITEM where ZID between 900001 and 900383;"
+sqlite3 "$d6_run3_store" "select count(*) as recipes from ZFOODITEM where ZISRECIPE=1;"
+sqlite3 "$d6_run3_store" "select count(*) as total_foods from ZFOODITEM;"
+xcrun simctl terminate FA7BDA24-C986-4B66-96B5-68A79AD42865 WiseEating.Arte-Soft
+```
+
+The simulator image did not provide `pgrep`; that auxiliary process check returned `NSPOSIXErrorDomain code=2`. The required `--console-pty` process remained attached until the intentional terminate after the observation interval, establishing that the app had not crashed.
+
+### Fresh-launch key log lines
+
+```text
+🏁 First launch with pre-seed logic. Preparing to copy databases…
+🚀 Starting database seed process if needed...
+-> Checking for Ayurveda data...
+   ✅ Seeded 714 dravya profiles, 1500 recipe profiles, and 336 Ayurveda links.
+⚠️ SearchIndexStore: Index outdated (Cache: 12601, DB: 14484). Rebuilding...
+```
+
+No `seeding failed` line appeared.
+
+### Fresh-install SQLite output
+
+Store:
+
+```text
+/Users/minchomilev/Library/Developer/CoreSimulator/Devices/FA7BDA24-C986-4B66-96B5-68A79AD42865/data/Containers/Data/Application/834743C3-D832-47F1-AD2B-C61EF02F2FF9/Library/Application Support/default.store
+```
+
+```text
+ZAYURVEDAPROFILE: 2214
+ZAYURVEDALINK: 336
+placeholder FoodItems 900001...900383: 383
+recipe FoodItems: 1500
+total FoodItems: 14484
+```
+
+## Run 3 Phase 3 — idempotency: PASS
+
+### Relaunch 1 commands and output
+
+```sh
+xcrun simctl launch --console-pty FA7BDA24-C986-4B66-96B5-68A79AD42865 WiseEating.Arte-Soft 2>&1 | tee /tmp/d6_run3_idempotency_1.log
+rg -a 'Checking for Ayurveda data|Ayurveda data already seeded|already applied|seeding failed' /tmp/d6_run3_idempotency_1.log || true
+sqlite3 "$d6_run3_store" "select (select count(*) from ZAYURVEDAPROFILE),(select count(*) from ZAYURVEDALINK),(select count(*) from ZFOODITEM where ZID between 900001 and 900383),(select count(*) from ZFOODITEM where ZISRECIPE=1),(select count(*) from ZFOODITEM);"
+xcrun simctl terminate FA7BDA24-C986-4B66-96B5-68A79AD42865 WiseEating.Arte-Soft
+```
+
+```text
+-> Checking for Ayurveda data...
+   Ayurveda data already seeded, skipping.
+2214|336|383|1500|14484
+```
+
+### Relaunch 2 commands and output
+
+```sh
+xcrun simctl launch --console-pty FA7BDA24-C986-4B66-96B5-68A79AD42865 WiseEating.Arte-Soft 2>&1 | tee /tmp/d6_run3_idempotency_2.log
+rg -a 'Checking for Ayurveda data|Ayurveda data already seeded|already applied|seeding failed' /tmp/d6_run3_idempotency_2.log || true
+sqlite3 "$d6_run3_store" "select (select count(*) from ZAYURVEDAPROFILE),(select count(*) from ZAYURVEDALINK),(select count(*) from ZFOODITEM where ZID between 900001 and 900383),(select count(*) from ZFOODITEM where ZISRECIPE=1),(select count(*) from ZFOODITEM);"
+xcrun simctl terminate FA7BDA24-C986-4B66-96B5-68A79AD42865 WiseEating.Arte-Soft
+```
+
+```text
+-> Checking for Ayurveda data...
+   Ayurveda data already seeded, skipping.
+2214|336|383|1500|14484
+```
+
+## Run 3 Phase 4 — upgrade path: PASS
+
+The prior D6 test app was uninstalled, without erasing the simulator, to establish a genuine original-app starting state. No optional scripted user data was added; the original app's normal first-launch flow created one `ZPROFILE` row.
+
+### Original app commands
+
+```sh
+xcrun simctl uninstall FA7BDA24-C986-4B66-96B5-68A79AD42865 WiseEating.Arte-Soft
+git checkout main
+git rev-parse --abbrev-ref HEAD
+git rev-parse HEAD
+git status --short --branch
+xcodebuild -project WiseEating.xcodeproj -scheme WiseEating -destination 'platform=iOS Simulator,name=iPhone 17' -configuration Debug build > /tmp/d6_run3_upgrade_main_build.log 2>&1
+d6_run3_upgrade_main_build_status=$?
+tail -40 /tmp/d6_run3_upgrade_main_build.log
+print "D6_RUN3_UPGRADE_MAIN_BUILD_EXIT_CODE=$d6_run3_upgrade_main_build_status"
+plutil -extract CFBundleIdentifier raw "$d6_run3_app/Info.plist"
+xcrun simctl install FA7BDA24-C986-4B66-96B5-68A79AD42865 "$d6_run3_app"
+xcrun simctl launch --console-pty FA7BDA24-C986-4B66-96B5-68A79AD42865 WiseEating.Arte-Soft 2>&1 | tee /tmp/d6_run3_upgrade_main_launch.log
+xcrun simctl get_app_container FA7BDA24-C986-4B66-96B5-68A79AD42865 WiseEating.Arte-Soft data
+sqlite3 "$d6_run3_main_store" "select count(*) from ZFOODITEM;"
+sqlite3 "$d6_run3_main_store" "select count(*) from sqlite_master where type='table' and name in ('ZAYURVEDAPROFILE','ZAYURVEDALINK');"
+xcrun simctl terminate FA7BDA24-C986-4B66-96B5-68A79AD42865 WiseEating.Arte-Soft
+```
+
+### Original app evidence
+
+```text
+D6_RUN3_UPGRADE_MAIN_BUILD_EXIT_CODE=0
+** BUILD SUCCEEDED **
+🏁 First launch with pre-seed logic. Preparing to copy databases…
+✅ Successfully prepared pre-seeded MAIN database.
+🚀 Starting database seed process if needed...
+✅ Seeding process completed.
+ZFOODITEM: 12601
+Ayurveda tables present: 0
+```
+
+### Upgrade app commands
+
+```sh
+git checkout ayurveda-app
+git rev-parse --abbrev-ref HEAD
+git status --short --branch
+xcodebuild -project WiseEating.xcodeproj -scheme WiseEating -destination 'platform=iOS Simulator,name=iPhone 17' -configuration Debug build > /tmp/d6_run3_upgrade_ayurveda_build.log 2>&1
+d6_run3_upgrade_ayurveda_build_status=$?
+tail -40 /tmp/d6_run3_upgrade_ayurveda_build.log
+print "D6_RUN3_UPGRADE_AYURVEDA_BUILD_EXIT_CODE=$d6_run3_upgrade_ayurveda_build_status"
+xcrun simctl get_app_container FA7BDA24-C986-4B66-96B5-68A79AD42865 WiseEating.Arte-Soft data
+xcrun simctl install FA7BDA24-C986-4B66-96B5-68A79AD42865 "$d6_run3_app"
+xcrun simctl get_app_container FA7BDA24-C986-4B66-96B5-68A79AD42865 WiseEating.Arte-Soft data
+find "$d6_run3_after" -maxdepth 4 -name 'default.store' -print
+sqlite3 "$d6_run3_upgrade_store" "select count(*) from ZFOODITEM;"
+plutil -p "$d6_run3_after/Library/Preferences/WiseEating.Arte-Soft.plist" | rg 'didCopyPreSeededDatabase|ayurvedaSeedVersion' || true
+xcrun simctl launch --console-pty FA7BDA24-C986-4B66-96B5-68A79AD42865 WiseEating.Arte-Soft 2>&1 | tee /tmp/d6_run3_upgrade_ayurveda_launch.log
+```
+
+The over-install changed the simulator's data-container UUID. An auxiliary UUID-equality assertion therefore returned nonzero, but the new container held the same 12,601-row store and `didCopyPreSeededDatabase_v1 = true` before launch. The required content-preservation check passed.
+
+Final gates:
+
+```sh
+rg -a 'Database already pre-seeded|Checking for Ayurveda data|Seeded 714|seeding failed|migration|Migration|fatal|Fatal|crash|Crash' /tmp/d6_run3_upgrade_ayurveda_launch.log || true
+rg -a -c 'Checking for Ayurveda data' /tmp/d6_run3_upgrade_ayurveda_launch.log
+rg -a -c 'Seeded 714 dravya profiles, 1500 recipe profiles, and 336 Ayurveda links' /tmp/d6_run3_upgrade_ayurveda_launch.log
+sqlite3 "$d6_run3_upgrade_store" "select (select count(*) from ZAYURVEDAPROFILE),(select count(*) from ZAYURVEDALINK),(select count(*) from ZFOODITEM where ZID between 900001 and 900383),(select count(*) from ZFOODITEM where ZISRECIPE=1),(select count(*) from ZFOODITEM);"
+sqlite3 "$d6_run3_upgrade_store" "select count(*) from ZFOODITEM where ZID between 1 and 12601;"
+sqlite3 "$d6_run3_upgrade_store" "select count(*) from ZPROFILE;"
+plutil -p "$d6_run3_after/Library/Preferences/WiseEating.Arte-Soft.plist" | rg 'didCopyPreSeededDatabase|ayurvedaSeedVersion' || true
+xcrun simctl terminate FA7BDA24-C986-4B66-96B5-68A79AD42865 WiseEating.Arte-Soft
+git rev-parse --abbrev-ref HEAD
+git status --short --branch
+```
+
+### Upgrade key output
+
+```text
+D6_RUN3_UPGRADE_AYURVEDA_BUILD_EXIT_CODE=0
+** BUILD SUCCEEDED **
+🏁 Database already pre-seeded in a previous launch. Skipping copy.
+-> Checking for Ayurveda data...
+   ✅ Seeded 714 dravya profiles, 1500 recipe profiles, and 336 Ayurveda links.
+seed-path occurrences: 1
+seed-success occurrences: 1
+SQLite: 2214|336|383|1500|14484
+original FoodItems retained (IDs 1...12601): 12601
+ZPROFILE rows retained: 1
+ayurvedaSeedVersion: 1
+didCopyPreSeededDatabase_v1: true
+checkout: ayurveda-app
+```
+
+No migration, seeding-failure, fatal, or crash line appeared during the upgrade launch. The app remained attached until intentionally terminated after the observation interval.
+
+## Run 3 report finalization
+
+```sh
+git add ayurveda-data/REPORT-D6-VERIFY.md
+git -c user.name='Mincho Milev' -c user.email='mincho.milev@gmail.com' commit -m "D6-VERIFY: Mac execution report"
+git push origin ayurveda-app
+git rev-parse --abbrev-ref HEAD
+git status --short --branch
+```
+
+## Run 3 honest not-done list
+
+- Optional scripted user-data creation was skipped. The original app's normal launch created one profile row, which remained after upgrade.
+
+All required Run 3 build, fresh-install, SQLite, idempotency, and upgrade-path gates were executed.
