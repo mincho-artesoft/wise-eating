@@ -1,0 +1,3827 @@
+{
+  "formatVersion": "1.0",
+  "batch": "recipe-batch-r22",
+  "qualityState": "aiDraft",
+  "items": [
+    {
+      "id": "recipe.vata-soft-rice-root-mung-bowl",
+      "name": "Vata Soft Rice Root Mung Bowl",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed until clear",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, peeled and cut into small cubes",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, peeled and cut into small cubes",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1250
+        }
+      ],
+      "steps": [
+        "Prepare 1250 ml (about 5 1/4 cups) hot water before starting Vata Soft Rice Root Mung Bowl; keep one small ladle in reserve in case the base tightens early.",
+        "Warm cumin in ghee and coat the rinsed rice and split mung in the fragrant fat. Give the spices about 30 seconds before adding the larger pieces, then continue over medium-low heat for 3–4 minutes, moving the pan often, until the raw aroma is gone.",
+        "Add both kinds of root cubes and hot water, then cook under a lid until the grains and vegetables are very soft. Maintain gentle medium heat for 20–22 minutes, stirring every 5 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Stir the bowl to a cohesive, moist texture, season it, and rest it covered before serving. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Fluff or stir Vata Soft Rice Root Mung Bowl once after its off-heat rest, check the final consistency, and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vata Soft Rice Root Mung Bowl is composed as a warm, moist, complete meal for calming vata Vata: serve immediately while soft and warm, with the stated ghee. Pitta: keep the warming aromatics gentle and favor fennel if needed. Kapha: use a smaller bowl and reduce the added fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vata-oat-sweet-potato-dal-bowl",
+      "name": "Vata Oat Sweet Potato Dal Bowl",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats, sorted and rinsed",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, peeled and diced",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Bring 1150 ml (about 4 3/4 cups) water to a boil in a separate kettle and hold it hot, covered, so Vata Oat Sweet Potato Dal Bowl never loses its simmer.",
+        "Simmer the red lentils with the sweet-potato dice until both begin to soften into the broth. Maintain moderate heat for 12–14 minutes, stirring every 3 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Stir in the rolled oats and crushed fennel, then cook slowly while scraping the base from time to time. Aim for an even 2–3 mm thickness; repair cracks before the piece reaches the hot surface.",
+        "For Vata Oat Sweet Potato Dal Bowl, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Season the thick bowl, draw it from the heat, and melt the ghee over the surface before serving. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Vata Oat Sweet Potato Dal Bowl 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vata Oat Sweet Potato Dal Bowl is composed as a warm, moist, complete meal for calming vata Vata: serve immediately while soft and warm, with the stated ghee. Pitta: keep the warming aromatics gentle and favor fennel if needed. Kapha: use a smaller bowl and reduce the added fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vata-sesame-pumpkin-khichdi",
+      "name": "Vata Sesame Pumpkin Khichdi",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed until clear",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and cut into chunks",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds, toasted and ground",
+          "grams": 25
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1300
+        }
+      ],
+      "steps": [
+        "Set aside 1300 ml (about 5 1/2 cups) freshly boiled water for Vata Sesame Pumpkin Khichdi, reserving about 60 ml to correct the final consistency.",
+        "Toast cumin in ghee, then turn the rice and mung through the pot until every grain glistens. Give the spices about 30 seconds before adding the larger pieces, then continue over steady low heat for 2–3 minutes, moving the pan often, until the raw aroma is gone.",
+        "Add pumpkin and hot water, cover, and cook until the chunks collapse at the touch of a spoon. Maintain moderate heat for 19–21 minutes, stirring every 3 minutes, until a thin knife slides through the largest piece without resistance.",
+        "For Vata Sesame Pumpkin Khichdi, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Beat in the ground sesame, season the khichdi, and loosen it to a flowing consistency before serving. Whisk for 40 seconds, scraping the bottom and corners until no dry pockets or lumps remain.",
+        "Rest Vata Sesame Pumpkin Khichdi 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vata Sesame Pumpkin Khichdi is composed as a warm, moist, complete meal for calming vata Vata: serve immediately while soft and warm, with the stated ghee. Pitta: keep the warming aromatics gentle and favor fennel if needed. Kapha: use a smaller bowl and reduce the added fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vata-carrot-masoor-rice-stew",
+      "name": "Vata Carrot Masoor Rice Stew",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice, rinsed and soaked",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, peeled and cut into coins",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1350
+        }
+      ],
+      "steps": [
+        "Set aside 1350 ml (about 5 3/4 cups) freshly boiled water for Vata Carrot Masoor Rice Stew, reserving about 60 ml to correct the final consistency.",
+        "Cover the brown rice with at least three times its volume of cool water and soak for 40 minutes; drain for 2 minutes before the first heated step.",
+        "Simmer the soaked brown rice until partly tender before adding the red lentils and carrot coins. Maintain gentle medium heat for 12–14 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Crush the fennel over the bubbling stew and continue cooking until the rice is soft and the lentils dissolve. Maintain low heat for 12–14 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Mash several carrot pieces into the broth, add salt and ghee, and let the covered pot settle. Keep the pan over steady low heat for 1–2 minutes after the final addition, folding from the bottom so the main pieces remain intact.",
+        "Rest Vata Carrot Masoor Rice Stew 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vata Carrot Masoor Rice Stew is composed as a warm, moist, complete meal for calming vata Vata: serve immediately while soft and warm, with the stated ghee. Pitta: keep the warming aromatics gentle and favor fennel if needed. Kapha: use a smaller bowl and reduce the added fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vata-spinach-paneer-rice-pot",
+      "name": "Vata Spinach Paneer Rice Pot",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach leaves, washed and chopped",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.paneer",
+          "name": "Paneer, cut into small cubes",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 700
+        }
+      ],
+      "steps": [
+        "Measure 700 ml (about 3 cups) water for Vata Spinach Paneer Rice Pot; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Wilt the chopped spinach in ghee with crushed fennel until the leaves become silky. Allow 6–8 minutes at moderate heat, checking whether a grain pressed between two fingers has no chalky center.",
+        "Fold in the rice, pour over hot water, and cook gently until the grains are almost tender. Maintain medium-low heat for 11–13 minutes, stirring every 5 minutes, until a grain pressed between two fingers has no chalky center.",
+        "For Vata Spinach Paneer Rice Pot, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Nestle the paneer cubes into the moist rice, steam them through without stirring hard, and season. Maintain a steady steam for 6–8 minutes and check until a grain pressed between two fingers has no chalky center.",
+        "Rest Vata Spinach Paneer Rice Pot 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vata Spinach Paneer Rice Pot is composed as a warm, moist, complete meal for calming vata Vata: serve immediately while soft and warm, with the stated ghee. Pitta: keep the warming aromatics gentle and favor fennel if needed. Kapha: use a smaller bowl and reduce the added fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vata-squash-tofu-rice-bowl",
+      "name": "Vata Squash Tofu Rice Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.butternut-squash",
+          "name": "Butternut squash, peeled and cubed",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, drained and cut into cubes",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil, for the pan",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 680
+        }
+      ],
+      "steps": [
+        "Heat 680 ml (about 2 3/4 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Soften the squash cubes in sesame oil with grated ginger until their edges begin to round. Work over steady low heat for 10–12 minutes; continue once a thin knife slides through the largest piece without resistance.",
+        "Add the rice and hot water, cover, and cook until the grains are tender and the squash is creamy. Maintain moderate heat for 19–21 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "For Vata Squash Tofu Rice Bowl, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Fold in the tofu cubes for the final steaming, season the complete bowl, and keep it moist. Leave the pan off the flame for 5 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Vata Squash Tofu Rice Bowl 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vata Squash Tofu Rice Bowl is composed as a warm, moist, complete meal for calming vata Vata: serve immediately while soft and warm, with the stated ghee. Pitta: keep the warming aromatics gentle and favor fennel if needed. Kapha: use a smaller bowl and reduce the added fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vata-urad-rice-porridge-meal",
+      "name": "Vata Urad Rice Porridge Meal",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed until clear",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.urad",
+          "name": "Black gram, split and soaked",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.bottle-gourd",
+          "name": "Bottle gourd, peeled and finely diced",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1450
+        }
+      ],
+      "steps": [
+        "Measure 1450 ml (about 6 cups) water for Vata Urad Rice Porridge Meal; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Cover the black gram with at least three times its volume of cool water and soak for 40 minutes; drain for 2 minutes before the first heated step.",
+        "Cook the soaked black gram until it begins to split, then add the rice and diced bottle gourd. Maintain steady low heat for 11–13 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Simmer slowly with hot water until all three components merge into a smooth, thick porridge. Maintain moderate heat for 20–22 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Bloom cumin in ghee, stir it through the meal, and season before a five-minute rest. Give the spices about 30 seconds before adding the larger pieces, then continue over medium-low heat for 4–5 minutes, moving the pan often, until the raw aroma is gone.",
+        "Fluff or stir Vata Urad Rice Porridge Meal once after its off-heat rest, check the final consistency, and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vata Urad Rice Porridge Meal is composed as a warm, moist, complete meal for calming vata Vata: serve immediately while soft and warm, with the stated ghee. Pitta: keep the warming aromatics gentle and favor fennel if needed. Kapha: use a smaller bowl and reduce the added fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vata-beet-mung-rice-bowl",
+      "name": "Vata Beet Mung Rice Bowl",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, peeled and cut into small cubes",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Set aside 1200 ml (about 5 cups) freshly boiled water for Vata Beet Mung Rice Bowl, reserving about 60 ml to correct the final consistency.",
+        "Coat the rice and mung in warm ghee with ground coriander. Work over low heat for 7–9 minutes; continue once a grain pressed between two fingers has no chalky center.",
+        "Add the beet cubes and hot water, then cook beneath a lid until the roots and grains are tender. Maintain steady low heat for 20–22 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "For Vata Beet Mung Rice Bowl, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Stir the rosy bowl into a soft consistency, season, and serve before it loses its warmth. Leave the pan off the flame for 5 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Vata Beet Mung Rice Bowl 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vata Beet Mung Rice Bowl is composed as a warm, moist, complete meal for calming vata Vata: serve immediately while soft and warm, with the stated ghee. Pitta: keep the warming aromatics gentle and favor fennel if needed. Kapha: use a smaller bowl and reduce the added fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vata-coconut-chana-rice-bowl",
+      "name": "Vata Coconut Chana Rice Bowl",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.chana-dal",
+          "name": "Chana dal, soaked and drained",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, peeled and finely diced",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, ground fresh",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Heat 1100 ml (about 4 1/2 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Cover the chana dal with at least three times its volume of cool water and soak for 20 minutes; drain for 2 minutes before the first heated step.",
+        "Cook the soaked chana dal until nearly tender, then add the rice and carrot dice. Maintain gentle medium heat for 11–13 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Grind the coconut with fennel and some hot broth, and stir the paste into the softening grains. Work in 3 short pulses, pausing between them so the mixture stays cool and retains the intended texture.",
+        "Continue until the bowl is moist and cohesive, add ghee and salt, and rest it covered. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Fluff or stir Vata Coconut Chana Rice Bowl once after its off-heat rest, check the final consistency, and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vata Coconut Chana Rice Bowl is composed as a warm, moist, complete meal for calming vata Vata: serve immediately while soft and warm, with the stated ghee. Pitta: keep the warming aromatics gentle and favor fennel if needed. Kapha: use a smaller bowl and reduce the added fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vata-gentle-kadhi-rice-meal",
+      "name": "Vata Gentle Kadhi Rice Meal",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.yogurt",
+          "name": "Whole-milk yogurt, whisked smooth",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.besan",
+          "name": "Chickpea flour, sifted",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.bottle-gourd",
+          "name": "Bottle gourd, peeled and finely diced",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for tempering",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1050
+        }
+      ],
+      "steps": [
+        "Set aside 1050 ml (about 4 1/2 cups) freshly boiled water for Vata Gentle Kadhi Rice Meal, reserving about 60 ml to correct the final consistency.",
+        "Cook the rice until soft and keep it covered while the mild kadhi is prepared. Maintain gentle medium heat for 20–22 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Whisk the yogurt and chickpea flour with hot water, add the bottle-gourd dice, and simmer until thoroughly cooked. Whisk for 40 seconds, scraping the bottom and corners until no dry pockets or lumps remain.",
+        "For Vata Gentle Kadhi Rice Meal, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Temper cumin in ghee, stir it into the kadhi, and ladle the warm sauce generously over the rice. Keep the pan over steady low heat for 1–2 minutes after the final addition, folding from the bottom so the main pieces remain intact.",
+        "Rest Vata Gentle Kadhi Rice Meal 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vata Gentle Kadhi Rice Meal is composed as a warm, moist, complete meal for calming vata Vata: serve immediately while soft and warm, with the stated ghee. Pitta: keep the warming aromatics gentle and favor fennel if needed. Kapha: use a smaller bowl and reduce the added fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vata-quinoa-squash-complete-bowl",
+      "name": "Vata Quinoa Squash Complete Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.butternut-squash",
+          "name": "Butternut squash, peeled and cubed",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1050
+        }
+      ],
+      "steps": [
+        "Bring 1050 ml (about 4 1/2 cups) water to a boil in a separate kettle and hold it hot, covered, so Vata Quinoa Squash Complete Bowl never loses its simmer.",
+        "Simmer the split mung until half tender, then add the rinsed quinoa and squash cubes. Maintain gentle medium heat for 12–14 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Crush the fennel into the pot, cover, and cook until the quinoa opens and the squash softens. Maintain low heat for 18–20 minutes, stirring every 5 minutes, until a grain pressed between two fingers has no chalky center.",
+        "For Vata Quinoa Squash Complete Bowl, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Fold in the ghee, season the moist bowl, and add hot water if the grains look at all dry. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Vata Quinoa Squash Complete Bowl 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vata Quinoa Squash Complete Bowl is composed as a warm, moist, complete meal for calming vata Vata: serve immediately while soft and warm, with the stated ghee. Pitta: keep the warming aromatics gentle and favor fennel if needed. Kapha: use a smaller bowl and reduce the added fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vata-amaranth-root-one-pot",
+      "name": "Vata Amaranth Root One-Pot",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, rinsed in a fine sieve",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, peeled and diced",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Bring 1200 ml (about 5 cups) water to a boil in a separate kettle and hold it hot, covered, so Vata Amaranth Root One-Pot never loses its simmer.",
+        "Warm cumin in ghee, then add the split mung and tiny amaranth grains to the pot. Give the spices about 30 seconds before adding the larger pieces, then continue over steady low heat for 2–3 minutes, moving the pan often, until the raw aroma is gone.",
+        "Pour in hot water and the sweet-potato dice, simmering until the grains form a thick matrix. Work over moderate heat for 12–14 minutes; continue once a grain pressed between two fingers has no chalky center.",
+        "For Vata Amaranth Root One-Pot, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Mash a few root pieces through the one-pot meal, season it, and serve at a soft spoonable consistency. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Vata Amaranth Root One-Pot 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vata Amaranth Root One-Pot is composed as a warm, moist, complete meal for calming vata Vata: serve immediately while soft and warm, with the stated ghee. Pitta: keep the warming aromatics gentle and favor fennel if needed. Kapha: use a smaller bowl and reduce the added fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vata-corn-mung-pumpkin-bowl",
+      "name": "Vata Corn Mung Pumpkin Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.corn",
+          "name": "Cornmeal, finely ground",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and cut into chunks",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, ground fresh",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1250
+        }
+      ],
+      "steps": [
+        "Bring 1250 ml (about 5 1/4 cups) water to a boil in a separate kettle and hold it hot, covered, so Vata Corn Mung Pumpkin Bowl never loses its simmer.",
+        "Cook the split mung with the pumpkin chunks until both are tender enough to mash. Maintain low heat for 18–20 minutes, stirring every 3 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Whisk in the fine cornmeal a little at a time, keeping the pot moving as the meal thickens. Whisk for 30 seconds, scraping the bottom and corners until no dry pockets or lumps remain.",
+        "For Vata Corn Mung Pumpkin Bowl, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Season the creamy bowl with ground fennel, take it off the heat, and melt ghee across the top. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Vata Corn Mung Pumpkin Bowl 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vata Corn Mung Pumpkin Bowl is composed as a warm, moist, complete meal for calming vata Vata: serve immediately while soft and warm, with the stated ghee. Pitta: keep the warming aromatics gentle and favor fennel if needed. Kapha: use a smaller bowl and reduce the added fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vata-pumpkin-rajma-rice-bowl",
+      "name": "Vata Pumpkin Rajma Rice Bowl",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.rajma",
+          "name": "Kidney beans, soaked overnight and drained",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and cut into chunks",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Prepare 1150 ml (about 4 3/4 cups) hot water before starting Vata Pumpkin Rajma Rice Bowl; keep one small ladle in reserve in case the base tightens early.",
+        "Cover the kidney beans with at least three times its volume of cool water and soak for 8–12 hours; drain for 2 minutes before the first heated step.",
+        "Cook the soaked kidney beans until very soft and crush several into their broth. Use a pressure cooker at steady pressure for 25–30 minutes, or keep a covered pot at a gentle simmer for 60–75 minutes, until one bean mashes completely between two fingers.",
+        "Warm cumin in ghee, add the rice and pumpkin, and pour in the beans with enough hot liquid. Give the spices about 30 seconds before adding the larger pieces, then continue over low heat for 3–4 minutes, moving the pan often, until the raw aroma is gone.",
+        "Simmer until the grains are tender and the pumpkin rounds the bean gravy, then season the bowl. Maintain steady low heat for 19–21 minutes, stirring every 5 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Rest Vata Pumpkin Rajma Rice Bowl 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vata Pumpkin Rajma Rice Bowl is composed as a warm, moist, complete meal for calming vata Vata: serve immediately while soft and warm, with the stated ghee. Pitta: keep the warming aromatics gentle and favor fennel if needed. Kapha: use a smaller bowl and reduce the added fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vata-soft-chickpea-barley-stew",
+      "name": "Vata Soft Chickpea Barley Stew",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley, soaked and drained",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Chickpeas, soaked overnight and drained",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, peeled and cut into small cubes",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1400
+        }
+      ],
+      "steps": [
+        "Bring 1400 ml (about 5 3/4 cups) water to a boil in a separate kettle and hold it hot, covered, so Vata Soft Chickpea Barley Stew never loses its simmer.",
+        "Cover the pearled barley and chickpeas with at least three times its volume of cool water and soak for 8–12 hours; drain for 2 minutes before the first heated step.",
+        "Simmer the chickpeas until almost creamy before adding the soaked barley and carrot cubes. Use a pressure cooker at steady pressure for 25–30 minutes, or keep a covered pot at a gentle simmer for 60–75 minutes, until one bean mashes completely between two fingers.",
+        "Crush the fennel over the stew and cook slowly until the barley is plump and the broth thick. Maintain moderate heat for 19–21 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Mash a few chickpeas for body, add ghee and salt, and serve the stew with ample liquid. Leave the pan off the flame for 5 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Vata Soft Chickpea Barley Stew 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vata Soft Chickpea Barley Stew is composed as a warm, moist, complete meal for calming vata Vata: serve immediately while soft and warm, with the stated ghee. Pitta: keep the warming aromatics gentle and favor fennel if needed. Kapha: use a smaller bowl and reduce the added fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vata-pea-paneer-rice-meal",
+      "name": "Vata Pea Paneer Rice Meal",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, thawed",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.paneer",
+          "name": "Paneer, cut into small cubes",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, finely diced",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 720
+        }
+      ],
+      "steps": [
+        "Bring 720 ml (about 3 cups) water to a boil in a separate kettle and hold it hot, covered, so Vata Pea Paneer Rice Meal never loses its simmer.",
+        "Soften the diced fennel bulb in ghee, then stir the rice through the pale aromatic base. Keep the pan over steady low heat for 2–3 minutes after the final addition, folding from the bottom so the main pieces remain intact.",
+        "Add hot water and cook until the grains are nearly tender before scattering in the peas. Maintain moderate heat for 13–15 minutes, stirring every 5 minutes, until a grain pressed between two fingers has no chalky center.",
+        "For Vata Pea Paneer Rice Meal, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Nestle the paneer cubes into the rice, steam them until warm, and season the complete meal gently. Maintain a steady steam for 4–6 minutes and check until a grain pressed between two fingers has no chalky center.",
+        "Rest Vata Pea Paneer Rice Meal 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vata Pea Paneer Rice Meal is composed as a warm, moist, complete meal for calming vata Vata: serve immediately while soft and warm, with the stated ghee. Pitta: keep the warming aromatics gentle and favor fennel if needed. Kapha: use a smaller bowl and reduce the added fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vata-yam-mung-stew",
+      "name": "Vata Yam Mung Stew",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.yam",
+          "name": "Yam, peeled and cut into chunks",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1350
+        }
+      ],
+      "steps": [
+        "Heat 1350 ml (about 5 3/4 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Toast cumin in ghee and coat the yam chunks before adding the split mung and rice. Give the spices about 30 seconds before adding the larger pieces, then continue over medium-low heat for 4–5 minutes, moving the pan often, until the raw aroma is gone.",
+        "Pour in hot water, cover, and cook until the yam yields and the grains merge into the broth. Maintain gentle medium heat for 19–21 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "For Vata Yam Mung Stew, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Break several yam pieces with the ladle, season the stew, and keep it loose enough to sip from a spoon. Leave the pan off the flame for 3 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Vata Yam Mung Stew 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vata Yam Mung Stew is composed as a warm, moist, complete meal for calming vata Vata: serve immediately while soft and warm, with the stated ghee. Pitta: keep the warming aromatics gentle and favor fennel if needed. Kapha: use a smaller bowl and reduce the added fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vata-taro-red-lentil-pot",
+      "name": "Vata Taro Red Lentil Pot",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.taro",
+          "name": "Taro root, peeled and cut into chunks",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1250
+        }
+      ],
+      "steps": [
+        "Bring 1250 ml (about 5 1/4 cups) water to a boil in a separate kettle and hold it hot, covered, so Vata Taro Red Lentil Pot never loses its simmer.",
+        "Parboil the taro chunks, drain them, and return them to a clean pot with the rice and red lentils. Let it drain for 1 minute without pressing harder than the recipe's texture requires.",
+        "Add crushed fennel and hot water, then simmer until the roots are tender and the lentils dissolve. Maintain gentle medium heat for 20–22 minutes, stirring every 3 minutes, until a thin knife slides through the largest piece without resistance.",
+        "For Vata Taro Red Lentil Pot, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Stir in ghee and salt without crushing every taro piece, and rest the complete pot before serving. Leave the pan off the flame for 3 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Fluff or stir Vata Taro Red Lentil Pot once after its off-heat rest, check the final consistency, and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vata Taro Red Lentil Pot is composed as a warm, moist, complete meal for calming vata Vata: serve immediately while soft and warm, with the stated ghee. Pitta: keep the warming aromatics gentle and favor fennel if needed. Kapha: use a smaller bowl and reduce the added fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vata-zucchini-tofu-quinoa-bowl",
+      "name": "Vata Zucchini Tofu Quinoa Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, cut into small cubes",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, drained and cut into cubes",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil, for the pot",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 720
+        }
+      ],
+      "steps": [
+        "Heat 720 ml (about 3 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Soften the zucchini and grated ginger in sesame oil until the cubes release some moisture. Keep this stage to 7–9 minutes over medium-low heat and stop when a grain pressed between two fingers has no chalky center.",
+        "Stir in the quinoa and hot water, cover, and cook until the grains open into spirals. Maintain gentle medium heat for 20–22 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "For Vata Zucchini Tofu Quinoa Bowl, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Fold the tofu through the still-moist bowl, steam it until warm, and season before serving. Leave the pan off the flame for 3 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Vata Zucchini Tofu Quinoa Bowl 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vata Zucchini Tofu Quinoa Bowl is composed as a warm, moist, complete meal for calming vata Vata: serve immediately while soft and warm, with the stated ghee. Pitta: keep the warming aromatics gentle and favor fennel if needed. Kapha: use a smaller bowl and reduce the added fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vata-fennel-paneer-millet-pot",
+      "name": "Vata Fennel Paneer Millet Pot",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet, rinsed and soaked",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.paneer",
+          "name": "Paneer, cut into small cubes",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, finely diced",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 780
+        }
+      ],
+      "steps": [
+        "Measure 780 ml (about 3 1/4 cups) water for Vata Fennel Paneer Millet Pot; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Cover the proso millet with at least three times its volume of cool water and soak for 20 minutes; drain for 2 minutes before the first heated step.",
+        "Sweat the diced fennel bulb and crushed seeds in ghee until sweet and translucent. Take 8–10 minutes over moderate heat, using the stated texture and aroma as the final guide.",
+        "Add the soaked millet and hot water, then cook under a lid until the grains are very tender. Maintain medium-low heat for 18–20 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Fold in the paneer cubes for the last steaming, season the moist pot, and serve promptly. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Vata Fennel Paneer Millet Pot 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vata Fennel Paneer Millet Pot is composed as a warm, moist, complete meal for calming vata Vata: serve immediately while soft and warm, with the stated ghee. Pitta: keep the warming aromatics gentle and favor fennel if needed. Kapha: use a smaller bowl and reduce the added fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vata-sweet-potato-black-bean-rice",
+      "name": "Vata Sweet Potato Black Bean Rice",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.black-beans",
+          "name": "Black beans, soaked overnight and drained",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, peeled and diced",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, ground fresh",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "For Vata Sweet Potato Black Bean Rice, heat 1100 ml (about 4 1/2 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Cover the black beans with at least three times its volume of cool water and soak for 8–12 hours; drain for 2 minutes before the first heated step.",
+        "Cook the soaked black beans until very soft and reserve their dark broth. Use a pressure cooker at steady pressure for 25–30 minutes, or keep a covered pot at a gentle simmer for 60–75 minutes, until one bean mashes completely between two fingers.",
+        "Simmer the rice and sweet-potato dice in the bean broth with ground cumin until both are tender. Maintain low heat for 19–21 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Fold the beans back into the moist rice, season it, and finish the warm bowl with olive oil. Leave the pan off the flame for 5 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Vata Sweet Potato Black Bean Rice 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vata Sweet Potato Black Bean Rice is composed as a warm, moist, complete meal for calming vata Vata: serve immediately while soft and warm, with the stated ghee. Pitta: keep the warming aromatics gentle and favor fennel if needed. Kapha: use a smaller bowl and reduce the added fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vata-carrot-cashew-rice-dal",
+      "name": "Vata Carrot Cashew Rice Dal",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, peeled and cut into small cubes",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.cashew",
+          "name": "Cashews, soaked and blended smooth",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, ground fresh",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Measure 1200 ml (about 5 cups) water for Vata Carrot Cashew Rice Dal; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Cover the cashews with at least three times its volume of cool water and soak for 20 minutes; drain for 2 minutes before the first heated step.",
+        "Cook the rice, split mung, and carrot cubes together until all three become very soft. Maintain low heat for 20–22 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Blend the soaked cashews with hot broth and ground fennel, then stir the cream back into the pot. Blend for 25–35 seconds, stop to scrape the sides, and leave the texture described rather than aerating it.",
+        "Season the complete meal, add ghee, and loosen it with hot water until it flows from the ladle. Leave the pan off the flame for 5 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Vata Carrot Cashew Rice Dal 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vata Carrot Cashew Rice Dal is composed as a warm, moist, complete meal for calming vata Vata: serve immediately while soft and warm, with the stated ghee. Pitta: keep the warming aromatics gentle and favor fennel if needed. Kapha: use a smaller bowl and reduce the added fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vata-pumpkin-urad-rice-pot",
+      "name": "Vata Pumpkin Urad Rice Pot",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.urad",
+          "name": "Black gram, split and soaked",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and cut into chunks",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1350
+        }
+      ],
+      "steps": [
+        "Bring 1350 ml (about 5 3/4 cups) water to a boil in a separate kettle and hold it hot, covered, so Vata Pumpkin Urad Rice Pot never loses its simmer.",
+        "Cover the black gram with at least three times its volume of cool water and soak for 30 minutes; drain for 2 minutes before the first heated step.",
+        "Simmer the soaked black gram until partly softened, then add the rice and pumpkin chunks. Maintain gentle medium heat for 11–13 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Cook with hot water under a lid until the dal and grains merge and the pumpkin begins to collapse. Maintain low heat for 12–14 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Bloom cumin in ghee, stir it through the thick pot, and season before a covered rest. Give the spices about 30 seconds before adding the larger pieces, then continue over steady low heat for 4–5 minutes, moving the pan often, until the raw aroma is gone.",
+        "Fluff or stir Vata Pumpkin Urad Rice Pot once after its off-heat rest, check the final consistency, and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vata Pumpkin Urad Rice Pot is composed as a warm, moist, complete meal for calming vata Vata: serve immediately while soft and warm, with the stated ghee. Pitta: keep the warming aromatics gentle and favor fennel if needed. Kapha: use a smaller bowl and reduce the added fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vata-rice-noodle-tofu-broth",
+      "name": "Vata Rice Noodle Tofu Broth",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "fdcId": 7163,
+          "name": "Rice noodles, dry and narrow",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, drained and cut into cubes",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, peeled and cut into thin ribbons",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, cut into thin half-moons",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil, for finishing",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, cut into fine slivers",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1300
+        }
+      ],
+      "steps": [
+        "Measure 1300 ml (about 5 1/2 cups) water for Vata Rice Noodle Tofu Broth; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Simmer the carrot ribbons and ginger slivers until the broth becomes fragrant and the roots soften. Maintain gentle medium heat for 8–10 minutes, stirring every 3 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Add the zucchini and tofu, then slip in the dry noodles and separate them gently with tongs. Keep the pan over low heat for 1–2 minutes after the final addition, folding from the bottom so the main pieces remain intact.",
+        "For Vata Rice Noodle Tofu Broth, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Cook until the strands are tender, season the generous broth, and finish each warm bowl with sesame oil. Maintain steady low heat for 4–6 minutes, stirring every 4 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Rest Vata Rice Noodle Tofu Broth 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vata Rice Noodle Tofu Broth is composed as a warm, moist, complete meal for calming vata Vata: serve immediately while soft and warm, with the stated ghee. Pitta: keep the warming aromatics gentle and favor fennel if needed. Kapha: use a smaller bowl and reduce the added fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vata-bottle-gourd-chana-rice-bowl",
+      "name": "Vata Bottle Gourd Chana Rice Bowl",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.chana-dal",
+          "name": "Chana dal, soaked and drained",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.bottle-gourd",
+          "name": "Bottle gourd, peeled and finely diced",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Set aside 1200 ml (about 5 cups) freshly boiled water for Vata Bottle Gourd Chana Rice Bowl, reserving about 60 ml to correct the final consistency.",
+        "Cover the chana dal with at least three times its volume of cool water and soak for 40 minutes; drain for 2 minutes before the first heated step.",
+        "Cook the soaked chana dal until nearly tender, then add the rice and fine bottle-gourd dice. Maintain gentle medium heat for 11–13 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Crush the fennel over the pot and simmer until the vegetable disappears partly into the soft grains. Maintain low heat for 11–13 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Season the moist bowl, fold in the ghee, and serve it before the rice absorbs the remaining broth. Leave the pan off the flame for 5 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Vata Bottle Gourd Chana Rice Bowl 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vata Bottle Gourd Chana Rice Bowl is composed as a warm, moist, complete meal for calming vata Vata: serve immediately while soft and warm, with the stated ghee. Pitta: keep the warming aromatics gentle and favor fennel if needed. Kapha: use a smaller bowl and reduce the added fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.pitta-cucumber-mung-rice-bowl",
+      "name": "Pitta Cucumber Mung Rice Bowl",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, peeled and cut into chunks",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Heat 1200 ml (about 5 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Simmer the rice and split mung until partly soft before adding the cucumber chunks and coriander. Maintain gentle medium heat for 10–12 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Continue gently until the cooked cucumber turns translucent and the grains become tender. Continue over low heat for 13–15 minutes, stopping when a grain pressed between two fingers has no chalky center.",
+        "For Pitta Cucumber Mung Rice Bowl, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Season the mild bowl, stir in ghee away from fierce heat, and serve it warm rather than steaming. Leave the pan off the flame for 5 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Pitta Cucumber Mung Rice Bowl 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pitta Cucumber Mung Rice Bowl is a mild complete meal designed to settle excess pitta Vata: serve warm rather than cool and add a little ghee if dryness appears. Pitta: keep chilies, strong sourness, and hard browning out of the preparation. Kapha: reduce the grain portion and add black pepper only if tolerated.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.pitta-coconut-cilantro-rice-dal",
+      "name": "Pitta Coconut Cilantro Rice Dal",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 65
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Cilantro leaves, roughly chopped",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, ground fresh",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Prepare 1200 ml (about 5 cups) hot water before starting Pitta Coconut Cilantro Rice Dal; keep one small ladle in reserve in case the base tightens early.",
+        "Cook the rice and split mung together until soft and cohesive. Maintain low heat for 19–21 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Grind the coconut with fennel and a ladle of hot broth, then fold the pale paste through the pot. Work in 3 short pulses, pausing between them so the mixture stays cool and retains the intended texture.",
+        "For Pitta Coconut Cilantro Rice Dal, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Season, add ghee, and scatter chopped cilantro over the complete meal after removing it from heat. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Pitta Coconut Cilantro Rice Dal 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pitta Coconut Cilantro Rice Dal is a mild complete meal designed to settle excess pitta Vata: serve warm rather than cool and add a little ghee if dryness appears. Pitta: keep chilies, strong sourness, and hard browning out of the preparation. Kapha: reduce the grain portion and add black pepper only if tolerated.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.pitta-fennel-chickpea-quinoa",
+      "name": "Pitta Fennel Chickpea Quinoa",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Chickpeas, soaked overnight and drained",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, finely diced",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Bring 950 ml (about 4 cups) water to a boil in a separate kettle and hold it hot, covered, so Pitta Fennel Chickpea Quinoa never loses its simmer.",
+        "Cover the chickpeas with at least three times its volume of cool water and soak for 8–12 hours; drain for 2 minutes before the first heated step.",
+        "Cook the soaked chickpeas until tender and reserve enough broth for the quinoa. Use a pressure cooker at steady pressure for 25–30 minutes, or keep a covered pot at a gentle simmer for 60–75 minutes, until one bean mashes completely between two fingers.",
+        "Soften the diced fennel bulb in a covered pot, add the rinsed quinoa and crushed seeds, and pour in the bean broth. Keep the pan over moderate heat for 2–3 minutes after the final addition, folding from the bottom so the main pieces remain intact.",
+        "Fold the chickpeas through the opened grains, season the bowl, and finish with olive oil. Leave the pan off the flame for 5 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Pitta Fennel Chickpea Quinoa 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pitta Fennel Chickpea Quinoa is a mild complete meal designed to settle excess pitta Vata: serve warm rather than cool and add a little ghee if dryness appears. Pitta: keep chilies, strong sourness, and hard browning out of the preparation. Kapha: reduce the grain portion and add black pepper only if tolerated.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.pitta-zucchini-mung-millet",
+      "name": "Pitta Zucchini Mung Millet",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet, rinsed and soaked",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, cut into small cubes",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, ground fresh",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1050
+        }
+      ],
+      "steps": [
+        "Prepare 1050 ml (about 4 1/2 cups) hot water before starting Pitta Zucchini Mung Millet; keep one small ladle in reserve in case the base tightens early.",
+        "For Pitta Zucchini Mung Millet, cover the proso millet with at least three times its volume of cool water and soak for 20 minutes; drain for 2 minutes before the first heated step.",
+        "Simmer the split mung until halfway tender, then add the soaked millet and zucchini cubes. Maintain medium-low heat for 11–13 minutes, stirring every 5 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Stir in the ground fennel and cook under a lid until the grains are soft and the vegetable is silky. Maintain gentle medium heat for 20–22 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Season the moist meal and melt the ghee through it just before serving. Leave the pan off the flame for 3 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Pitta Zucchini Mung Millet 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pitta Zucchini Mung Millet is a mild complete meal designed to settle excess pitta Vata: serve warm rather than cool and add a little ghee if dryness appears. Pitta: keep chilies, strong sourness, and hard browning out of the preparation. Kapha: reduce the grain portion and add black pepper only if tolerated.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.pitta-asparagus-pea-rice-meal",
+      "name": "Pitta Asparagus Pea Rice Meal",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, thawed",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.asparagus",
+          "name": "Asparagus, trimmed and cut into short pieces",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill, leaves finely chopped",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Set aside 950 ml (about 4 cups) freshly boiled water for Pitta Asparagus Pea Rice Meal, reserving about 60 ml to correct the final consistency.",
+        "Cook the rice and split mung until almost tender, keeping enough liquid for a soft finish. Maintain gentle medium heat for 11–13 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Add the asparagus pieces and peas, cover briefly, and stop cooking while their green color remains clear. Maintain low heat for 8–10 minutes, stirring every 3 minutes, until a knife tip enters the thickest stem with only slight resistance.",
+        "For Pitta Asparagus Pea Rice Meal, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Season the meal, fold in olive oil, and scatter the chopped dill over it after the heat is off. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Pitta Asparagus Pea Rice Meal 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pitta Asparagus Pea Rice Meal is a mild complete meal designed to settle excess pitta Vata: serve warm rather than cool and add a little ghee if dryness appears. Pitta: keep chilies, strong sourness, and hard browning out of the preparation. Kapha: reduce the grain portion and add black pepper only if tolerated.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.pitta-broccoli-tofu-rice-bowl",
+      "name": "Pitta Broccoli Tofu Rice Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice, rinsed and soaked",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, drained and cut into cubes",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.broccoli",
+          "name": "Broccoli, separated into small florets",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 820
+        }
+      ],
+      "steps": [
+        "Prepare 820 ml (about 3 1/2 cups) hot water before starting Pitta Broccoli Tofu Rice Bowl; keep one small ladle in reserve in case the base tightens early.",
+        "Cover the brown rice with at least three times its volume of cool water and soak for 20 minutes; drain for 2 minutes before the first heated step.",
+        "Cook the soaked brown rice with ground coriander until the grains are nearly tender. Give the spices about 30 seconds before adding the larger pieces, then continue over steady low heat for 4–5 minutes, moving the pan often, until the raw aroma is gone.",
+        "Set the broccoli florets and tofu cubes over the rice, cover, and let the trapped steam cook them gently. Maintain moderate heat for 6–8 minutes, stirring every 3 minutes, until the vegetables are hot through and bend without tasting raw.",
+        "Fold the complete bowl without crushing the florets, season it, and finish with coconut oil. Leave the pan off the flame for 3 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Pitta Broccoli Tofu Rice Bowl 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pitta Broccoli Tofu Rice Bowl is a mild complete meal designed to settle excess pitta Vata: serve warm rather than cool and add a little ghee if dryness appears. Pitta: keep chilies, strong sourness, and hard browning out of the preparation. Kapha: reduce the grain portion and add black pepper only if tolerated.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.pitta-chayote-paneer-rice",
+      "name": "Pitta Chayote Paneer Rice",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.chayote",
+          "name": "Chayote, peeled and finely diced",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.paneer",
+          "name": "Paneer, cut into small cubes",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Prepare 760 ml (about 3 1/4 cups) hot water before starting Pitta Chayote Paneer Rice; keep one small ladle in reserve in case the base tightens early.",
+        "Soften the chayote dice with crushed fennel in ghee until the pieces become translucent. Keep this stage to 8–10 minutes over gentle medium heat and stop when a thin knife slides through the largest piece without resistance.",
+        "Add the rice and hot water, then cook gently until the grains are nearly tender. Maintain low heat for 11–13 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "For Pitta Chayote Paneer Rice, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Nestle the paneer cubes into the moist rice, steam them through, and season the mild complete meal. Maintain a steady steam for 5–7 minutes and check until a grain pressed between two fingers has no chalky center.",
+        "Rest Pitta Chayote Paneer Rice 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pitta Chayote Paneer Rice is a mild complete meal designed to settle excess pitta Vata: serve warm rather than cool and add a little ghee if dryness appears. Pitta: keep chilies, strong sourness, and hard browning out of the preparation. Kapha: reduce the grain portion and add black pepper only if tolerated.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.pitta-cauliflower-mung-bowl",
+      "name": "Pitta Cauliflower Mung Bowl",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower, separated into small florets",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Bring 1150 ml (about 4 3/4 cups) water to a boil in a separate kettle and hold it hot, covered, so Pitta Cauliflower Mung Bowl never loses its simmer.",
+        "Simmer the rice and split mung with ground coriander until halfway soft. Maintain moderate heat for 11–13 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Add the cauliflower florets and continue gently until their stems yield and the grains are tender. Continue over medium-low heat for 14–16 minutes, stopping when a knife tip enters the thickest stem with only slight resistance.",
+        "For Pitta Cauliflower Mung Bowl, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Stir the bowl carefully, season it, and melt ghee through the moist base before serving. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Pitta Cauliflower Mung Bowl 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pitta Cauliflower Mung Bowl is a mild complete meal designed to settle excess pitta Vata: serve warm rather than cool and add a little ghee if dryness appears. Pitta: keep chilies, strong sourness, and hard browning out of the preparation. Kapha: reduce the grain portion and add black pepper only if tolerated.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.pitta-pumpkin-quinoa-mung-bowl",
+      "name": "Pitta Pumpkin Quinoa Mung Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and cut into small cubes",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, ground fresh",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1050
+        }
+      ],
+      "steps": [
+        "Heat 1050 ml (about 4 1/2 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Cook the split mung until half tender, then add the quinoa and pumpkin cubes. Maintain low heat for 12–14 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Season the simmering pot with ground fennel and continue until the grains open and the pumpkin softens. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "For Pitta Pumpkin Quinoa Mung Bowl, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Fold in coconut oil, adjust the salt, and keep the complete bowl pleasantly moist. Mix for 1 minute with the heat off, stopping when the seasonings are even and a pressed spoonful holds together without crumbling.",
+        "Rest Pitta Pumpkin Quinoa Mung Bowl 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pitta Pumpkin Quinoa Mung Bowl is a mild complete meal designed to settle excess pitta Vata: serve warm rather than cool and add a little ghee if dryness appears. Pitta: keep chilies, strong sourness, and hard browning out of the preparation. Kapha: reduce the grain portion and add black pepper only if tolerated.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.pitta-green-bean-coconut-rice",
+      "name": "Pitta Green Bean Coconut Rice",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, cut into small diamonds",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 65
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, for finishing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, ground fresh",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Bring 950 ml (about 4 cups) water to a boil in a separate kettle and hold it hot, covered, so Pitta Green Bean Coconut Rice never loses its simmer.",
+        "Cook the rice and split mung until nearly tender, then scatter in the bean diamonds. Maintain steady low heat for 12–14 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Grind the coconut with fennel and hot broth, and fold the paste through the pot while the beans soften. Work in 5 short pulses, pausing between them so the mixture stays cool and retains the intended texture.",
+        "For Pitta Green Bean Coconut Rice, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Season the complete rice meal and finish it off the heat with coconut oil. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Pitta Green Bean Coconut Rice 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pitta Green Bean Coconut Rice is a mild complete meal designed to settle excess pitta Vata: serve warm rather than cool and add a little ghee if dryness appears. Pitta: keep chilies, strong sourness, and hard browning out of the preparation. Kapha: reduce the grain portion and add black pepper only if tolerated.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.pitta-beet-fennel-lentil-bowl",
+      "name": "Pitta Beet Fennel Lentil Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice, rinsed and soaked",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.brown-lentil",
+          "name": "Brown lentils, rinsed and drained",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, peeled and cut into small cubes",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, finely diced",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Measure 1200 ml (about 5 cups) water for Pitta Beet Fennel Lentil Bowl; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "For Pitta Beet Fennel Lentil Bowl, cover the brown rice with at least three times its volume of cool water and soak for 20 minutes; drain for 2 minutes before the first heated step.",
+        "Simmer the soaked brown rice and lentils until partly tender, then add the beet and fennel dice. Maintain moderate heat for 11–13 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Cook slowly until the roots soften and the broth turns a deep ruby color. Maintain medium-low heat for 21–23 minutes, stirring every 4 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Season the complete bowl, fold in olive oil, and serve it warm with enough cooking liquid. Maintain gentle medium heat for 6–8 minutes, stirring every 5 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Rest Pitta Beet Fennel Lentil Bowl 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pitta Beet Fennel Lentil Bowl is a mild complete meal designed to settle excess pitta Vata: serve warm rather than cool and add a little ghee if dryness appears. Pitta: keep chilies, strong sourness, and hard browning out of the preparation. Kapha: reduce the grain portion and add black pepper only if tolerated.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.pitta-spinach-mung-rice-pot",
+      "name": "Pitta Spinach Mung Rice Pot",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach leaves, washed and chopped",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, ground fresh",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Measure 1150 ml (about 4 3/4 cups) water for Pitta Spinach Mung Rice Pot; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Cook the rice and split mung with ground fennel until soft enough to stir together. Maintain low heat for 18–20 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Fold the chopped spinach through the bubbling pot and simmer only until the leaves are tender. Maintain steady low heat for 5–7 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "For Pitta Spinach Mung Rice Pot, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Season the green meal, remove it from fierce heat, and melt the ghee through before serving. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Pitta Spinach Mung Rice Pot 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pitta Spinach Mung Rice Pot is a mild complete meal designed to settle excess pitta Vata: serve warm rather than cool and add a little ghee if dryness appears. Pitta: keep chilies, strong sourness, and hard browning out of the preparation. Kapha: reduce the grain portion and add black pepper only if tolerated.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.pitta-barley-pea-dill-stew",
+      "name": "Pitta Barley Pea Dill Stew",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley, soaked and drained",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, thawed",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill, leaves finely chopped",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1350
+        }
+      ],
+      "steps": [
+        "Measure 1350 ml (about 5 3/4 cups) water for Pitta Barley Pea Dill Stew; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Cover the pearled barley with at least three times its volume of cool water and soak for 20 minutes; drain for 2 minutes before the first heated step.",
+        "Simmer the soaked barley and split mung until both are tender and the broth gains body. Maintain steady low heat for 20–22 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Add the peas for the last few minutes, keeping their color while they soften. Keep the pan over moderate heat for 1–2 minutes after the final addition, folding from the bottom so the main pieces remain intact.",
+        "Season the stew, stir in olive oil, and fold the chopped dill through only after turning off the heat. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Pitta Barley Pea Dill Stew 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pitta Barley Pea Dill Stew is a mild complete meal designed to settle excess pitta Vata: serve warm rather than cool and add a little ghee if dryness appears. Pitta: keep chilies, strong sourness, and hard browning out of the preparation. Kapha: reduce the grain portion and add black pepper only if tolerated.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.pitta-amaranth-chayote-meal",
+      "name": "Pitta Amaranth Chayote Meal",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, rinsed in a fine sieve",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.chayote",
+          "name": "Chayote, peeled and finely diced",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Set aside 1200 ml (about 5 cups) freshly boiled water for Pitta Amaranth Chayote Meal, reserving about 60 ml to correct the final consistency.",
+        "Cook the split mung until partly tender before adding the tiny amaranth grains and chayote dice. Maintain steady low heat for 11–13 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Season with ground coriander and simmer until the grains thicken around the translucent vegetable. Maintain moderate heat for 20–22 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "For Pitta Amaranth Chayote Meal, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Fold in ghee and salt, then loosen the complete meal with hot water if it sets too firmly. Mix for 2 minutes with the heat off, stopping when the seasonings are even and a pressed spoonful holds together without crumbling.",
+        "Rest Pitta Amaranth Chayote Meal 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pitta Amaranth Chayote Meal is a mild complete meal designed to settle excess pitta Vata: serve warm rather than cool and add a little ghee if dryness appears. Pitta: keep chilies, strong sourness, and hard browning out of the preparation. Kapha: reduce the grain portion and add black pepper only if tolerated.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.pitta-dill-tofu-brown-rice",
+      "name": "Pitta Dill Tofu Brown Rice",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice, rinsed and soaked",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, drained and cut into cubes",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, cut into small cubes",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill, leaves finely chopped",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 800
+        }
+      ],
+      "steps": [
+        "Bring 800 ml (about 3 1/4 cups) water to a boil in a separate kettle and hold it hot, covered, so Pitta Dill Tofu Brown Rice never loses its simmer.",
+        "Cover the brown rice with at least three times its volume of cool water and soak for 30 minutes; drain for 2 minutes before the first heated step.",
+        "Cook the soaked brown rice until nearly tender, then spread the zucchini and tofu over the surface. Give the spices about 30 seconds before adding the larger pieces, then continue over steady low heat for 4–5 minutes, moving the pan often, until the raw aroma is gone.",
+        "Cover again and let the steam soften the vegetable and warm the tofu without browning either. Maintain moderate heat for 4–6 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Fold in olive oil and salt, then scatter chopped dill over the complete bowl after the heat is off. Leave the pan off the flame for 3 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Pitta Dill Tofu Brown Rice 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pitta Dill Tofu Brown Rice is a mild complete meal designed to settle excess pitta Vata: serve warm rather than cool and add a little ghee if dryness appears. Pitta: keep chilies, strong sourness, and hard browning out of the preparation. Kapha: reduce the grain portion and add black pepper only if tolerated.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.pitta-cooked-sprout-rice-bowl",
+      "name": "Pitta Cooked Sprout Rice Bowl",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.mung-sprouts",
+          "name": "Mung sprouts, rinsed and drained",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, peeled and cut into fine matchsticks",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, for finishing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 720
+        }
+      ],
+      "steps": [
+        "Bring 720 ml (about 3 cups) water to a boil in a separate kettle and hold it hot, covered, so Pitta Cooked Sprout Rice Bowl never loses its simmer.",
+        "Cook the rice with ground coriander until the grains are almost tender. Maintain moderate heat for 12–14 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Lay the carrot matchsticks and mung sprouts over the rice, cover, and steam them until fully cooked but still distinct. Maintain a steady steam for 4–6 minutes and check until the vegetables are hot through and bend without tasting raw.",
+        "For Pitta Cooked Sprout Rice Bowl, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Fold in the grated coconut, coconut oil, and salt, and serve the complete bowl warm. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Pitta Cooked Sprout Rice Bowl 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pitta Cooked Sprout Rice Bowl is a mild complete meal designed to settle excess pitta Vata: serve warm rather than cool and add a little ghee if dryness appears. Pitta: keep chilies, strong sourness, and hard browning out of the preparation. Kapha: reduce the grain portion and add black pepper only if tolerated.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.pitta-fennel-masoor-rice-bowl",
+      "name": "Pitta Fennel Masoor Rice Bowl",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, finely diced",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1120
+        }
+      ],
+      "steps": [
+        "Bring 1120 ml (about 4 3/4 cups) water to a boil in a separate kettle and hold it hot, covered, so Pitta Fennel Masoor Rice Bowl never loses its simmer.",
+        "Simmer the rice and red lentils until partly soft, then add the diced fennel bulb and crushed seeds. Maintain steady low heat for 11–13 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Continue until the lentils dissolve and the fennel becomes silky within the grains. Continue over moderate heat for 14–16 minutes, stopping when a grain pressed between two fingers has no chalky center.",
+        "For Pitta Fennel Masoor Rice Bowl, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Season the mild bowl and stir in ghee away from direct heat before serving. Leave the pan off the flame for 5 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Pitta Fennel Masoor Rice Bowl 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pitta Fennel Masoor Rice Bowl is a mild complete meal designed to settle excess pitta Vata: serve warm rather than cool and add a little ghee if dryness appears. Pitta: keep chilies, strong sourness, and hard browning out of the preparation. Kapha: reduce the grain portion and add black pepper only if tolerated.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.pitta-coconut-tofu-rice-noodles",
+      "name": "Pitta Coconut Tofu Rice Noodles",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "fdcId": 7163,
+          "name": "Rice noodles, dry and narrow",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, drained and cut into cubes",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 75
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, cut into thin half-moons",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, ground fresh",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, for finishing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Measure 1150 ml (about 4 3/4 cups) water for Pitta Coconut Tofu Rice Noodles; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Simmer the zucchini in hot water with ground fennel until the half-moons become tender. Maintain moderate heat for 19–21 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Blend the coconut with some broth, return the pale liquid to the pot, and add the tofu and noodles. Blend for 25–35 seconds, stop to scrape the sides, and leave the texture described rather than aerating it.",
+        "For Pitta Coconut Tofu Rice Noodles, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Separate the strands gently as they soften, season the meal, and finish off the heat with coconut oil. Leave the pan off the flame for 5 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Pitta Coconut Tofu Rice Noodles 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pitta Coconut Tofu Rice Noodles is a mild complete meal designed to settle excess pitta Vata: serve warm rather than cool and add a little ghee if dryness appears. Pitta: keep chilies, strong sourness, and hard browning out of the preparation. Kapha: reduce the grain portion and add black pepper only if tolerated.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.pitta-artichoke-chickpea-barley",
+      "name": "Pitta Artichoke Chickpea Barley",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley, soaked and drained",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Chickpeas, soaked overnight and drained",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.artichoke",
+          "name": "Artichoke hearts, trimmed and quartered",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, finely diced",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill, leaves finely chopped",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1300
+        }
+      ],
+      "steps": [
+        "Heat 1300 ml (about 5 1/2 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "For Pitta Artichoke Chickpea Barley, cover the pearled barley and chickpeas with at least three times its volume of cool water and soak for 8–12 hours; drain for 2 minutes before the first heated step.",
+        "Cook the soaked chickpeas until almost tender, then add the barley and diced fennel bulb. Use a pressure cooker at steady pressure for 25–30 minutes, or keep a covered pot at a gentle simmer for 60–75 minutes, until one bean mashes completely between two fingers.",
+        "Lower in the artichoke quarters once the grains begin to soften, and simmer until every component is tender. Maintain moderate heat for 12–14 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Season the complete stew, fold in olive oil, and finish with chopped dill away from the flame. Leave the pan off the flame for 5 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Pitta Artichoke Chickpea Barley 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pitta Artichoke Chickpea Barley is a mild complete meal designed to settle excess pitta Vata: serve warm rather than cool and add a little ghee if dryness appears. Pitta: keep chilies, strong sourness, and hard browning out of the preparation. Kapha: reduce the grain portion and add black pepper only if tolerated.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.pitta-celery-brown-lentil-rice",
+      "name": "Pitta Celery Brown Lentil Rice",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice, rinsed and soaked",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.brown-lentil",
+          "name": "Brown lentils, rinsed and drained",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.celery",
+          "name": "Celery stalks, cut into small crescents",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Bring 1200 ml (about 5 cups) water to a boil in a separate kettle and hold it hot, covered, so Pitta Celery Brown Lentil Rice never loses its simmer.",
+        "For Pitta Celery Brown Lentil Rice, cover the brown rice with at least three times its volume of cool water and soak for 20 minutes; drain for 2 minutes before the first heated step.",
+        "Simmer the soaked rice and brown lentils until halfway tender. Maintain medium-low heat for 12–14 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Add the celery crescents and crushed fennel, then continue cooking until the grains soften and the stems become mild. Maintain gentle medium heat for 12–14 minutes, stirring every 3 minutes, until a knife tip enters the thickest stem with only slight resistance.",
+        "Season the complete meal, fold in olive oil, and keep a little broth around the grains. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Pitta Celery Brown Lentil Rice 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pitta Celery Brown Lentil Rice is a mild complete meal designed to settle excess pitta Vata: serve warm rather than cool and add a little ghee if dryness appears. Pitta: keep chilies, strong sourness, and hard browning out of the preparation. Kapha: reduce the grain portion and add black pepper only if tolerated.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.pitta-cabbage-pea-rice-pot",
+      "name": "Pitta Cabbage Pea Rice Pot",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, thinly shredded",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, thawed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, ground fresh",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Bring 950 ml (about 4 cups) water to a boil in a separate kettle and hold it hot, covered, so Pitta Cabbage Pea Rice Pot never loses its simmer.",
+        "Cook the rice and split mung until partly tender, then spread the shredded cabbage over the surface. Maintain gentle medium heat for 9–11 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Cover until the cabbage softens, add the peas and ground fennel, and steam for a few minutes more. Maintain a steady steam for 4–6 minutes and check until the vegetables are hot through and bend without tasting raw.",
+        "For Pitta Cabbage Pea Rice Pot, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Fold the layers together with ghee and salt, keeping the complete pot moist and mild. Keep the pan over steady low heat for 2–3 minutes after the final addition, folding from the bottom so the main pieces remain intact.",
+        "Rest Pitta Cabbage Pea Rice Pot 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pitta Cabbage Pea Rice Pot is a mild complete meal designed to settle excess pitta Vata: serve warm rather than cool and add a little ghee if dryness appears. Pitta: keep chilies, strong sourness, and hard browning out of the preparation. Kapha: reduce the grain portion and add black pepper only if tolerated.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.pitta-sweet-potato-mung-rice",
+      "name": "Pitta Sweet Potato Mung Rice",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, peeled and cut into small cubes",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, for finishing",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Prepare 1150 ml (about 4 3/4 cups) hot water before starting Pitta Sweet Potato Mung Rice; keep one small ladle in reserve in case the base tightens early.",
+        "Simmer the rice and split mung with ground coriander until the grains begin to soften. Maintain steady low heat for 12–14 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Add the sweet-potato cubes and cook gently until their centers are tender and the broth thickens. Maintain moderate heat for 18–20 minutes, stirring every 5 minutes, until a thin knife slides through the largest piece without resistance.",
+        "For Pitta Sweet Potato Mung Rice, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Season the complete meal and fold in coconut oil after taking the pot off direct heat. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Pitta Sweet Potato Mung Rice 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pitta Sweet Potato Mung Rice is a mild complete meal designed to settle excess pitta Vata: serve warm rather than cool and add a little ghee if dryness appears. Pitta: keep chilies, strong sourness, and hard browning out of the preparation. Kapha: reduce the grain portion and add black pepper only if tolerated.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.pitta-fennel-paneer-quinoa",
+      "name": "Pitta Fennel Paneer Quinoa",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.paneer",
+          "name": "Paneer, cut into small cubes",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, finely diced",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, thawed",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 720
+        }
+      ],
+      "steps": [
+        "Bring 720 ml (about 3 cups) water to a boil in a separate kettle and hold it hot, covered, so Pitta Fennel Paneer Quinoa never loses its simmer.",
+        "Soften the diced fennel bulb in ghee, then add the rinsed quinoa and hot water. Keep the pan over steady low heat for 2–3 minutes after the final addition, folding from the bottom so the main pieces remain intact.",
+        "Scatter in the peas once the grains begin to open, and cook until the quinoa is tender. Maintain moderate heat for 12–14 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "For Pitta Fennel Paneer Quinoa, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Fold the paneer cubes through the moist bowl, steam them until warm, and season gently. Maintain a steady steam for 4–6 minutes and check until a grain pressed between two fingers has no chalky center.",
+        "Rest Pitta Fennel Paneer Quinoa 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pitta Fennel Paneer Quinoa is a mild complete meal designed to settle excess pitta Vata: serve warm rather than cool and add a little ghee if dryness appears. Pitta: keep chilies, strong sourness, and hard browning out of the preparation. Kapha: reduce the grain portion and add black pepper only if tolerated.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.pitta-coriander-pumpkin-khichdi",
+      "name": "Pitta Coriander Pumpkin Khichdi",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed until clear",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and cut into chunks",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Cilantro leaves, roughly chopped",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1250
+        }
+      ],
+      "steps": [
+        "Measure 1250 ml (about 5 1/4 cups) water for Pitta Coriander Pumpkin Khichdi; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Cook the rice, split mung, pumpkin, and ground coriander together until the grains become very soft. Maintain low heat for 20–22 minutes, stirring every 5 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Press a few pumpkin chunks into the broth while leaving the rest visible in the khichdi. Aim for an even 3–4 mm thickness; repair cracks before the piece reaches the hot surface.",
+        "For Pitta Coriander Pumpkin Khichdi, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Season, fold in ghee, and scatter chopped cilantro over the meal after removing it from heat. Leave the pan off the flame for 3 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Pitta Coriander Pumpkin Khichdi 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pitta Coriander Pumpkin Khichdi is a mild complete meal designed to settle excess pitta Vata: serve warm rather than cool and add a little ghee if dryness appears. Pitta: keep chilies, strong sourness, and hard browning out of the preparation. Kapha: reduce the grain portion and add black pepper only if tolerated.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.pitta-asparagus-tofu-millet",
+      "name": "Pitta Asparagus Tofu Millet",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet, rinsed and soaked",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, drained and cut into cubes",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.asparagus",
+          "name": "Asparagus, trimmed and cut into short pieces",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill, leaves finely chopped",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Bring 760 ml (about 3 1/4 cups) water to a boil in a separate kettle and hold it hot, covered, so Pitta Asparagus Tofu Millet never loses its simmer.",
+        "For Pitta Asparagus Tofu Millet, cover the proso millet with at least three times its volume of cool water and soak for 20 minutes; drain for 2 minutes before the first heated step.",
+        "Cook the soaked millet until nearly tender and keep a little moisture between the grains. Maintain gentle medium heat for 11–13 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Set the asparagus and tofu over the surface, cover, and steam until the vegetable stems yield. Maintain a steady steam for 5–7 minutes and check until a knife tip enters the thickest stem with only slight resistance.",
+        "Fold in olive oil and salt, then add chopped dill once the complete meal leaves the heat. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Pitta Asparagus Tofu Millet 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pitta Asparagus Tofu Millet is a mild complete meal designed to settle excess pitta Vata: serve warm rather than cool and add a little ghee if dryness appears. Pitta: keep chilies, strong sourness, and hard browning out of the preparation. Kapha: reduce the grain portion and add black pepper only if tolerated.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    }
+  ]
+}
