@@ -1,0 +1,3507 @@
+{
+  "formatVersion": "1.0",
+  "batch": "recipe-batch-r27",
+  "qualityState": "aiDraft",
+  "items": [
+    {
+      "id": "recipe.summer-cucumber-fennel-salad",
+      "name": "Summer Cucumber Fennel Salad",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, cut into thin half-moons",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, sliced paper-thin",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint leaves, finely sliced",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Fan the cucumber and fennel across a wide platter.",
+        "Scatter mint and crushed fennel seed between the crisp slices.",
+        "Whisk the oil, citrus, and salt and spoon it over just before eating."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Cucumber Fennel Salad is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-zucchini-carrot-ribbon-salad",
+      "name": "Summer Zucchini Carrot Ribbon Salad",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, shaved into ribbons",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, peeled and grated coarse",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Cilantro leaves, roughly chopped",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, toasted and crushed",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Lime juice, freshly squeezed",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Curl the zucchini ribbons loosely with the grated carrot.",
+        "Tuck cilantro and crushed coriander through the vegetables.",
+        "Dress lightly with oil, lime, and salt immediately before serving."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Zucchini Carrot Ribbon Salad is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-beet-fennel-slaw",
+      "name": "Summer Beet Fennel Slaw",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, peeled and grated coarse",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, sliced paper-thin",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill, leaves finely chopped",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Toss the grated beet with the delicate fennel slices.",
+        "Fold chopped dill and crushed fennel seed through the ruby slaw.",
+        "Add the oil, lemon, and salt and let the plate stand five minutes."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Beet Fennel Slaw is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-radish-cucumber-mint-salad",
+      "name": "Summer Radish Cucumber Mint Salad",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.radish",
+          "name": "Radishes, sliced paper-thin",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, cut into thin half-moons",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint leaves, finely sliced",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Lime juice, freshly squeezed",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Layer the radish slices among the cucumber half-moons.",
+        "Rub sliced mint and crushed coriander between your palms over the bowl.",
+        "Season with oil, lime, and salt only when ready to eat."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Radish Cucumber Mint Salad is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-cabbage-fennel-slaw",
+      "name": "Summer Cabbage Fennel Slaw",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, cut into fine ribbons",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, sliced paper-thin",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill, leaves finely chopped",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Lift the cabbage ribbons repeatedly to separate and aerate them.",
+        "Mix in the fennel slices, dill, and toasted seed crumbs.",
+        "Massage briefly with oil, lemon, and salt without making the slaw limp."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Cabbage Fennel Slaw is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-romaine-cucumber-dill",
+      "name": "Summer Romaine Cucumber Dill Salad",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.romaine-lettuce",
+          "name": "Romaine leaves, washed and torn",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, cut into thin half-moons",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill, leaves finely chopped",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Tear the romaine into broad pieces and add the cucumber.",
+        "Distribute chopped dill and crushed fennel over the leaves.",
+        "Toss once with oil, lemon, and salt and carry the bowl straight to the table."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Romaine Cucumber Dill Salad is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-arugula-pear-fennel",
+      "name": "Summer Arugula Pear Fennel Salad",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.arugula",
+          "name": "Arugula leaves, washed and dried",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.pear",
+          "name": "Pear, cored and cut into thin slices",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, sliced paper-thin",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Spread the arugula loosely and interleave the pear and fennel slices.",
+        "Dust the surface with crushed fennel seed.",
+        "Drizzle sparingly with oil and lemon, season, and serve at once."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Arugula Pear Fennel Salad is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-purslane-cucumber-tomato",
+      "name": "Summer Purslane Cucumber Tomato Salad",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.purslane",
+          "name": "Purslane leaves, washed and dried",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, cut into thin half-moons",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, cut into small wedges",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint leaves, finely sliced",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Pinch the purslane into short sprigs and combine it with the vegetables.",
+        "Thread sliced mint through the bowl without bruising the leaves.",
+        "Add oil, lemon, and salt lightly so the juices do not pool."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Purslane Cucumber Tomato Salad is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-watercress-apple-radish",
+      "name": "Summer Watercress Apple Radish Salad",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.watercress",
+          "name": "Watercress leaves, washed and dried",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.apple",
+          "name": "Apple, cored and cut into thin slices",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.radish",
+          "name": "Radishes, sliced paper-thin",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Nest the apple and radish slices among the watercress sprigs.",
+        "Sprinkle crushed fennel over the peppery leaves.",
+        "Dress with oil, lemon, and salt and eat before the fruit darkens."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Watercress Apple Radish Salad is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-celery-cucumber-dill",
+      "name": "Summer Celery Cucumber Dill Salad",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.celery",
+          "name": "Celery stalks, sliced on a diagonal",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, cut into thin half-moons",
+          "grams": 330
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill, leaves finely chopped",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Combine the celery crescents with the cucumber in a shallow bowl.",
+        "Fold through dill and crushed coriander without pressing the vegetables.",
+        "Season with oil, lemon, and salt and serve at room temperature."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Celery Cucumber Dill Salad is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-avocado-cucumber-cilantro",
+      "name": "Summer Avocado Cucumber Cilantro Salad",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.avocado",
+          "name": "Avocado, peeled and cut into cubes",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, cut into thin half-moons",
+          "grams": 330
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Cilantro leaves, roughly chopped",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 10
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Lime juice, freshly squeezed",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Arrange the avocado cubes and cucumber with as little handling as possible.",
+        "Scatter cilantro and crushed coriander over the green surface.",
+        "Spoon on lime, oil, and salt and turn the salad only once."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Avocado Cucumber Cilantro Salad is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-tomato-fennel-cilantro",
+      "name": "Summer Tomato Fennel Cilantro Salad",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, cut into small wedges",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, sliced paper-thin",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Cilantro leaves, roughly chopped",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Lay the tomato wedges over the fennel slices so their juices mingle.",
+        "Add cilantro and crushed fennel seed in an even layer.",
+        "Season with oil, a little lemon, and salt immediately before lunch."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Tomato Fennel Cilantro Salad is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-carrot-cabbage-mint-slaw",
+      "name": "Summer Carrot Cabbage Mint Slaw",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, peeled and grated coarse",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, cut into fine ribbons",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint leaves, finely sliced",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Lime juice, freshly squeezed",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Toss the carrot through the fine cabbage ribbons until evenly mixed.",
+        "Fold in mint and crushed coriander with two light turns.",
+        "Massage briefly with oil, lime, and salt and stop while still crisp."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Carrot Cabbage Mint Slaw is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-beet-cucumber-dill",
+      "name": "Summer Beet Cucumber Dill Salad",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, peeled and grated coarse",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, cut into thin half-moons",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill, leaves finely chopped",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Place the cucumber over the grated beet without stirring at first.",
+        "Scatter dill and fennel seed across the contrasting layers.",
+        "Add oil, lemon, and salt and fold just enough to marble the colors."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Beet Cucumber Dill Salad is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-zucchini-fennel-arugula",
+      "name": "Summer Zucchini Fennel Arugula",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, shaved into ribbons",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, sliced paper-thin",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.arugula",
+          "name": "Arugula leaves, washed and dried",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Twist the zucchini and fennel ribbons into loose bundles.",
+        "Tuck arugula and crushed fennel among the curls.",
+        "Drizzle with oil and lemon, season, and leave the texture airy."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Zucchini Fennel Arugula is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-quinoa-cucumber-mint-bowl",
+      "name": "Summer Quinoa Cucumber Mint Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, cooked and cooled to room temperature",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, cut into thin half-moons",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint leaves, finely sliced",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Fluff the room-temperature quinoa until no clumps remain.",
+        "Fold in cucumber, mint, and crushed fennel with a fork.",
+        "Season with oil and lemon and eat the bowl at midday."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Quinoa Cucumber Mint Bowl is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-barley-fennel-dill-bowl",
+      "name": "Summer Barley Fennel Dill Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley, cooked and cooled to room temperature",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, sliced paper-thin",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill, leaves finely chopped",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Separate the cooked barley grains and spread them in a shallow dish.",
+        "Mix in fennel, dill, and crushed seed while the grain is room temperature.",
+        "Add oil, lemon, and salt and let the bowl stand briefly."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Barley Fennel Dill Bowl is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-rice-cucumber-cilantro-bowl",
+      "name": "Summer Rice Cucumber Cilantro Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice, cooked and cooled to room temperature",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, cut into thin half-moons",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Cilantro leaves, roughly chopped",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, toasted and crushed",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Lime juice, freshly squeezed",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Loosen the cooled brown rice thoroughly with a fork.",
+        "Turn in cucumber, cilantro, and crushed coriander without compressing the grains.",
+        "Dress with oil, lime, and salt just before lunch."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Rice Cucumber Cilantro Bowl is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-chickpea-cucumber-fennel",
+      "name": "Summer Chickpea Cucumber Fennel Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Chickpeas, cooked until tender and cooled",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, cut into thin half-moons",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, sliced paper-thin",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint leaves, finely sliced",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Pat the tender chickpeas dry and combine them with the crisp vegetables.",
+        "Fold sliced mint throughout the bowl so every portion is fragrant.",
+        "Add oil, lemon, and salt and rest for five minutes."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Chickpea Cucumber Fennel Bowl is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-mung-zucchini-cilantro",
+      "name": "Summer Mung Zucchini Cilantro Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, cooked until tender and cooled",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, shaved into ribbons",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Cilantro leaves, roughly chopped",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, toasted and crushed",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Lime juice, freshly squeezed",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Spread the cooked mung to room temperature before adding the ribbons.",
+        "Scatter cilantro and crushed coriander over the beans and zucchini.",
+        "Dress with oil, lime, and salt and fold gently."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Mung Zucchini Cilantro Bowl is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-cucumber-mint-cold-soup",
+      "name": "Summer Cucumber Mint Cold Soup",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, cut into thin half-moons",
+          "grams": 520
+        },
+        {
+          "dravyaId": "dravya.yogurt",
+          "name": "Whole-milk yogurt, whisked smooth",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint leaves, finely sliced",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Blend the cucumber with yogurt until the soup is lightly textured.",
+        "Pulse in mint and crushed fennel without turning them bitter.",
+        "Season, bring the bowl toward room temperature, and stir in the oil."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Cucumber Mint Cold Soup is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-cucumber-dill-cold-soup",
+      "name": "Summer Cucumber Dill Cold Soup",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, cut into thin half-moons",
+          "grams": 520
+        },
+        {
+          "dravyaId": "dravya.yogurt",
+          "name": "Whole-milk yogurt, whisked smooth",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill, leaves finely chopped",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Puree most of the cucumber with yogurt and leave a few pieces aside.",
+        "Stir in the reserved pieces, dill, and crushed coriander.",
+        "Season the soup, temper its chill, and add the oil before serving."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Cucumber Dill Cold Soup is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-zucchini-fennel-cold-soup",
+      "name": "Summer Zucchini Fennel Cold Soup",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, shaved into ribbons",
+          "grams": 460
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, sliced paper-thin",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.yogurt",
+          "name": "Whole-milk yogurt, whisked smooth",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Blend the zucchini and fennel bulb with yogurt until smooth.",
+        "Crush the toasted fennel seed and whisk it through the pale soup.",
+        "Season, let the bowl lose its refrigerator chill, and finish with oil."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Zucchini Fennel Cold Soup is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-avocado-cucumber-cold-soup",
+      "name": "Summer Avocado Cucumber Cold Soup",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.avocado",
+          "name": "Avocado, peeled and cut into cubes",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, cut into thin half-moons",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint leaves, finely sliced",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 10
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Lime juice, freshly squeezed",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Blend avocado and cucumber with a little water until silky.",
+        "Pulse in mint and coriander, keeping tiny green flecks visible.",
+        "Season with lime and oil and serve only lightly cool."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Avocado Cucumber Cold Soup is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-tomato-cucumber-cold-soup",
+      "name": "Summer Tomato Cucumber Cold Soup",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, cut into small wedges",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, cut into thin half-moons",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Cilantro leaves, roughly chopped",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, toasted and crushed",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Blend the tomato and cucumber to a lightly pulpy consistency.",
+        "Stir in cilantro and crushed coriander after the motor stops.",
+        "Season with oil and salt and let the soup approach room temperature."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Tomato Cucumber Cold Soup is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-carrot-cucumber-cold-soup",
+      "name": "Summer Carrot Cucumber Cold Soup",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, peeled and grated coarse",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, cut into thin half-moons",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.yogurt",
+          "name": "Whole-milk yogurt, whisked smooth",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint leaves, finely sliced",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Blend grated carrot and cucumber with yogurt until evenly speckled.",
+        "Whisk in crushed fennel and sliced mint by hand.",
+        "Season the soup and take off its chill before eating."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Carrot Cucumber Cold Soup is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-beet-fennel-cold-soup",
+      "name": "Summer Beet Fennel Cold Soup",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, peeled and grated coarse",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, sliced paper-thin",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.yogurt",
+          "name": "Whole-milk yogurt, whisked smooth",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill, leaves finely chopped",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Puree the beet and fennel bulb with yogurt to a vivid soup.",
+        "Fold in chopped dill and crushed fennel without blending again.",
+        "Season and stand the bowl at room temperature for ten minutes."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Beet Fennel Cold Soup is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-melon-mint-cold-soup",
+      "name": "Summer Melon Mint Cold Soup",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.muskmelon",
+          "name": "Muskmelon, peeled and cut into cubes",
+          "grams": 560
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint leaves, finely sliced",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Lime juice, freshly squeezed",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Blend the melon until smooth but not frothy.",
+        "Pulse in mint and crushed fennel for only a moment.",
+        "Add lime and serve the dairy-free soup mildly cool."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Melon Mint Cold Soup is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-watermelon-mint-cold-soup",
+      "name": "Summer Watermelon Mint Cold Soup",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.watermelon",
+          "name": "Watermelon, peeled and cut into cubes",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint leaves, finely sliced",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Lime juice, freshly squeezed",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Blend most of the watermelon and reserve a handful of tiny cubes.",
+        "Stir in the reserved fruit, mint, and crushed fennel.",
+        "Add a little lime and serve without dairy or ice."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Watermelon Mint Cold Soup is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-papaya-fennel-cold-soup",
+      "name": "Summer Papaya Fennel Cold Soup",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.papaya",
+          "name": "Papaya, peeled and cut into cubes",
+          "grams": 560
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, sliced paper-thin",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint leaves, finely sliced",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Lime juice, freshly squeezed",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Blend papaya and fennel bulb to a thick dairy-free soup.",
+        "Pulse in mint and crushed fennel while retaining fine flecks.",
+        "Add lime sparingly and serve near room temperature."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Papaya Fennel Cold Soup is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-quinoa-romaine-tofu-plate",
+      "name": "Summer Quinoa Romaine Tofu Plate",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, cooked and cooled to room temperature",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.romaine-lettuce",
+          "name": "Romaine leaves, washed and torn",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, steamed and cooled to room temperature",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, cut into thin half-moons",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Mound the quinoa beside the torn romaine rather than mixing them fully.",
+        "Arrange tofu and cucumber across the boundary between warm grain and greens.",
+        "Spoon over oil, lemon, and salt and eat at midday."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Quinoa Romaine Tofu Plate is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-barley-arugula-chickpea-plate",
+      "name": "Summer Barley Arugula Chickpea Plate",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley, cooked and cooled to room temperature",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.arugula",
+          "name": "Arugula leaves, washed and dried",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Chickpeas, cooked until tender and cooled",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, sliced paper-thin",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Spread the barley over one half of each plate.",
+        "Pile arugula, chickpeas, and fennel loosely beside the grain.",
+        "Dress both sides lightly with oil, lemon, and salt."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Barley Arugula Chickpea Plate is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-rice-purslane-mung-plate",
+      "name": "Summer Rice Purslane Mung Plate",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice, cooked and cooled to room temperature",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.purslane",
+          "name": "Purslane leaves, washed and dried",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, cooked until tender and cooled",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, cut into thin half-moons",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Lime juice, freshly squeezed",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Fluff the brown rice and place it in a shallow arc.",
+        "Fill the center with purslane, mung, and cucumber.",
+        "Season the composed plate with oil and lime immediately before eating."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Rice Purslane Mung Plate is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-quinoa-watercress-tofu-plate",
+      "name": "Summer Quinoa Watercress Tofu Plate",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, cooked and cooled to room temperature",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.watercress",
+          "name": "Watercress leaves, washed and dried",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, steamed and cooled to room temperature",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.radish",
+          "name": "Radishes, sliced paper-thin",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Spoon the quinoa onto plates while it remains at room temperature.",
+        "Set watercress, tofu, and radish around the grain without compacting them.",
+        "Finish with oil, lemon, and salt and serve promptly."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Quinoa Watercress Tofu Plate is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-barley-romaine-mung-plate",
+      "name": "Summer Barley Romaine Mung Plate",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley, cooked and cooled to room temperature",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.romaine-lettuce",
+          "name": "Romaine leaves, washed and torn",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, cooked until tender and cooled",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, sliced paper-thin",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Loosen the barley and cooked mung in separate sections of the plate.",
+        "Add romaine and fennel between the two soft components.",
+        "Drizzle with oil and lemon, season, and leave the arrangement distinct."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Barley Romaine Mung Plate is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-rice-arugula-chickpea-plate",
+      "name": "Summer Rice Arugula Chickpea Plate",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice, cooked and cooled to room temperature",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.arugula",
+          "name": "Arugula leaves, washed and dried",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Chickpeas, cooked until tender and cooled",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, cut into thin half-moons",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Lime juice, freshly squeezed",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Form a low bed of brown rice on each plate.",
+        "Scatter arugula, chickpeas, and cucumber over only part of the grain.",
+        "Add oil, lime, and salt and eat before the leaves wilt."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Rice Arugula Chickpea Plate is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-quinoa-cabbage-tofu-plate",
+      "name": "Summer Quinoa Cabbage Tofu Plate",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, cooked and cooled to room temperature",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, cut into fine ribbons",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, steamed and cooled to room temperature",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, peeled and grated coarse",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Place the quinoa and tofu in two broad bands.",
+        "Toss cabbage and carrot lightly and mound them between the bands.",
+        "Season the full plate with oil and lemon without soaking the slaw."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Quinoa Cabbage Tofu Plate is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-barley-cucumber-chickpea-plate",
+      "name": "Summer Barley Cucumber Chickpea Plate",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley, cooked and cooled to room temperature",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, cut into thin half-moons",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Chickpeas, cooked until tender and cooled",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill, leaves finely chopped",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Spread the barley and chickpeas across a shallow serving dish.",
+        "Tuck cucumber and dill into the gaps between the grains and beans.",
+        "Dress sparingly with oil, lemon, and salt before serving."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Barley Cucumber Chickpea Plate is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-rice-fennel-tofu-plate",
+      "name": "Summer Rice Fennel Tofu Plate",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice, cooked and cooled to room temperature",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, sliced paper-thin",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, steamed and cooled to room temperature",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.romaine-lettuce",
+          "name": "Romaine leaves, washed and torn",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Divide the rice among plates and place the tofu alongside it.",
+        "Fan fennel and romaine across the remaining space.",
+        "Finish every section with oil, lemon, and a little salt."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Rice Fennel Tofu Plate is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-quinoa-radish-mung-plate",
+      "name": "Summer Quinoa Radish Mung Plate",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, cooked and cooled to room temperature",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.radish",
+          "name": "Radishes, sliced paper-thin",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, cooked until tender and cooled",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.watercress",
+          "name": "Watercress leaves, washed and dried",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Lime juice, freshly squeezed",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Mound quinoa and mung in adjacent portions.",
+        "Fill the open side with radish and watercress.",
+        "Spoon over oil, lime, and salt without stirring the composed plate."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Quinoa Radish Mung Plate is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-mango-cucumber-mint-plate",
+      "name": "Summer Mango Cucumber Mint Plate",
+      "category": "international",
+      "meal": "snack",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mango-ripe",
+          "name": "Ripe mango, peeled and cut into cubes",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, cut into thin half-moons",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint leaves, finely sliced",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Lime juice, freshly squeezed",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Arrange mango and cucumber in alternating rows.",
+        "Scatter sliced mint and crushed fennel across the rows.",
+        "Add lime sparingly and serve the dairy-free plate alone."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Mango Cucumber Mint Plate is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-papaya-pomegranate-mint-plate",
+      "name": "Summer Papaya Pomegranate Mint Plate",
+      "category": "international",
+      "meal": "snack",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.papaya",
+          "name": "Papaya, peeled and cut into cubes",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.pomegranate",
+          "name": "Pomegranate arils, freshly separated",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint leaves, finely sliced",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Lime juice, freshly squeezed",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Spread papaya cubes across a broad plate.",
+        "Sprinkle pomegranate, mint, and crushed fennel over the fruit.",
+        "Add a trace of lime and serve without dairy."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Papaya Pomegranate Mint Plate is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-melon-cucumber-fennel-plate",
+      "name": "Summer Melon Cucumber Fennel Plate",
+      "category": "international",
+      "meal": "snack",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.muskmelon",
+          "name": "Muskmelon, peeled and cut into cubes",
+          "grams": 400
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, cut into thin half-moons",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, sliced paper-thin",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint leaves, finely sliced",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Lime juice, freshly squeezed",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Lay melon and cucumber pieces in separate loose clusters.",
+        "Tuck fennel and mint between the cool components.",
+        "Finish with a little lime and eat the plate by itself."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Melon Cucumber Fennel Plate is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-watermelon-pomegranate-mint-plate",
+      "name": "Summer Watermelon Pomegranate Mint Plate",
+      "category": "international",
+      "meal": "snack",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.watermelon",
+          "name": "Watermelon, peeled and cut into cubes",
+          "grams": 460
+        },
+        {
+          "dravyaId": "dravya.pomegranate",
+          "name": "Pomegranate arils, freshly separated",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint leaves, finely sliced",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Lime juice, freshly squeezed",
+          "grams": 10
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Spread watermelon cubes in a single uncrowded layer.",
+        "Scatter pomegranate, mint, and crushed fennel over them.",
+        "Add only a few drops of lime and omit dairy."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Watermelon Pomegranate Mint Plate is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-orange-fennel-pomegranate-plate",
+      "name": "Summer Orange Fennel Pomegranate Plate",
+      "category": "international",
+      "meal": "snack",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.orange",
+          "name": "Orange segments, membrane removed",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, sliced paper-thin",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.pomegranate",
+          "name": "Pomegranate arils, freshly separated",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint leaves, finely sliced",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Arrange the orange segments around a central mound of fennel.",
+        "Sprinkle pomegranate and sliced mint over the circular plate.",
+        "Serve immediately without oil, salt, or dairy."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Orange Fennel Pomegranate Plate is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-apple-cucumber-mint-plate",
+      "name": "Summer Apple Cucumber Mint Plate",
+      "category": "international",
+      "meal": "snack",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.apple",
+          "name": "Apple, cored and cut into thin slices",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, cut into thin half-moons",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint leaves, finely sliced",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Alternate apple and cucumber slices across a flat plate.",
+        "Scatter mint and crushed fennel between the overlapping edges.",
+        "Brush with a little lemon and serve the fruit plate alone."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Apple Cucumber Mint Plate is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-pear-fennel-pomegranate-plate",
+      "name": "Summer Pear Fennel Pomegranate Plate",
+      "category": "international",
+      "meal": "snack",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pear",
+          "name": "Pear, cored and cut into thin slices",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, sliced paper-thin",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.pomegranate",
+          "name": "Pomegranate arils, freshly separated",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint leaves, finely sliced",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Fan the pear slices around the thin fennel.",
+        "Add pomegranate and mint to the center of the plate.",
+        "Serve promptly as a dairy-free summer fruit course."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Pear Fennel Pomegranate Plate is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-avocado-tomato-cucumber-plate",
+      "name": "Summer Avocado Tomato Cucumber Plate",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.avocado",
+          "name": "Avocado, peeled and cut into cubes",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, cut into small wedges",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, cut into thin half-moons",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Cilantro leaves, roughly chopped",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Lime juice, freshly squeezed",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Arrange avocado, tomato, and cucumber in distinct sections.",
+        "Scatter cilantro over all three without mixing them heavily.",
+        "Season with a little oil, lime, and salt just before lunch."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Avocado Tomato Cucumber Plate is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-beet-carrot-cucumber-plate",
+      "name": "Summer Beet Carrot Cucumber Plate",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, peeled and grated coarse",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, peeled and grated coarse",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, cut into thin half-moons",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint leaves, finely sliced",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Place the grated roots in separate bright mounds.",
+        "Add cucumber and mint between them as a cool divider.",
+        "Drizzle with oil and lemon, season, and serve at room temperature."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Beet Carrot Cucumber Plate is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.summer-zucchini-cabbage-fennel-plate",
+      "name": "Summer Zucchini Cabbage Fennel Plate",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 5,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, shaved into ribbons",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, cut into fine ribbons",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, sliced paper-thin",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill, leaves finely chopped",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, measured for dressing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Twist the zucchini ribbons beside the cabbage mound.",
+        "Layer fennel and dill over the join between them.",
+        "Add oil, lemon, and salt and keep the textures distinct."
+      ],
+      "dosha": {
+        "vata": 2,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Summer Zucchini Cabbage Fennel Plate is a cooling summer preparation with an explicit raw-food caution for vata Vata: bring the portion to room temperature, eat it at midday, and choose the gently warmed variant if digestion feels variable. Pitta: keep sour dressing modest and favor mint, fennel, or cilantro. Kapha: use little oil and make greens or crisp vegetables the largest portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    }
+  ]
+}
