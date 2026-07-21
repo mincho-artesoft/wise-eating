@@ -1,0 +1,693 @@
+{
+  "predraftVersion": "1.0",
+  "batch": "predraft-15",
+  "items": [
+    {
+      "id": "dravya.ripe-mango",
+      "name": "Ripe mango",
+      "sanskrit": "Amra (pakva)",
+      "aliases": [],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          1
+        ],
+        "virya": "cooling",
+        "note": "ripe nourishes; unripe aggravates pitta — stage matters"
+      },
+      "usda": [
+        {
+          "fdcId": 7297,
+          "name": "Mangos, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.alphonso-mango",
+      "name": "Alphonso mango",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 7297,
+          "name": "Mangos, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.ripe-banana",
+      "name": "Ripe banana",
+      "sanskrit": "Kadali Phala",
+      "aliases": [],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          2
+        ],
+        "virya": "cooling",
+        "note": "heavy; avoid with milk per viruddha lists"
+      },
+      "usda": [
+        {
+          "fdcId": 10677,
+          "name": "Bananas, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.red-banana",
+      "name": "Red banana",
+      "sanskrit": "Rakta Kadali",
+      "aliases": [],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 10677,
+          "name": "Bananas, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.elaichi-banana",
+      "name": "Elaichi banana (small)",
+      "sanskrit": null,
+      "aliases": [
+        "small"
+      ],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 10677,
+          "name": "Bananas, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.ripe-papaya",
+      "name": "Ripe papaya",
+      "sanskrit": "Erandakarkati",
+      "aliases": [],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 7313,
+          "name": "Papayas, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.apricot-fresh",
+      "name": "Apricot (fresh)",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          0
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 3647,
+          "name": "Apricot, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.green-grapes",
+      "name": "Green grapes",
+      "sanskrit": "Draksha",
+      "aliases": [],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling",
+        "note": "draksha — most praised classical fruit"
+      },
+      "usda": [
+        {
+          "fdcId": 11330,
+          "name": "Grapes, red or green (European type, such as Thompson seedless), raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.black-grapes",
+      "name": "Black grapes",
+      "sanskrit": "Krishna Draksha",
+      "aliases": [],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 11330,
+          "name": "Grapes, red or green (European type, such as Thompson seedless), raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.sweet-lime",
+      "name": "Sweet lime (mosambi)",
+      "sanskrit": "Madhukarkatika",
+      "aliases": [
+        "mosambi"
+      ],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          0
+        ],
+        "virya": "cooling",
+        "note": "convalescent staple"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 fruit",
+          "grams": 60
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: sweet lime; madhukarkatika."
+    },
+    {
+      "id": "dravya.citron",
+      "name": "Citron (bijora)",
+      "sanskrit": "Matulunga",
+      "aliases": [
+        "bijora"
+      ],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -2,
+          0,
+          -1
+        ],
+        "virya": "heating",
+        "note": "classical digestive citrus"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: citron; matulunga."
+    },
+    {
+      "id": "dravya.pomelo",
+      "name": "Pomelo (chakotra)",
+      "sanskrit": "Madhukarkati",
+      "aliases": [
+        "chakotra"
+      ],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 5352,
+          "name": "Pummelo, raw",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.amla-fresh",
+      "name": "Fresh amla",
+      "sanskrit": "Amalaki",
+      "aliases": [],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          -1
+        ],
+        "virya": "cooling",
+        "note": "tridoshic rasayana fruit"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: fresh amla; amalaki; amla fresh."
+    },
+    {
+      "id": "dravya.bael-fruit",
+      "name": "Bael fruit",
+      "sanskrit": "Bilva",
+      "aliases": [],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          -1
+        ],
+        "virya": "heating",
+        "note": "ripe laxative-mild, unripe binding — classical distinction"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: bael fruit; bilva."
+    },
+    {
+      "id": "dravya.jamun",
+      "name": "Jamun (java plum)",
+      "sanskrit": "Jambu",
+      "aliases": [
+        "java plum"
+      ],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          1,
+          -1,
+          -2
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: jamun; jambu."
+    },
+    {
+      "id": "dravya.ber",
+      "name": "Indian jujube (ber)",
+      "sanskrit": "Badara",
+      "aliases": [
+        "ber"
+      ],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: indian jujube; badara; ber."
+    },
+    {
+      "id": "dravya.karonda-ripe",
+      "name": "Ripe karonda",
+      "sanskrit": "Karamarda",
+      "aliases": [],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          0
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: ripe karonda; karamarda; karonda ripe."
+    },
+    {
+      "id": "dravya.phalsa",
+      "name": "Phalsa",
+      "sanskrit": "Parushaka",
+      "aliases": [],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -2,
+          0
+        ],
+        "virya": "cooling",
+        "note": "classical summer sherbet fruit"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: phalsa; parushaka."
+    },
+    {
+      "id": "dravya.ripe-jackfruit",
+      "name": "Ripe jackfruit",
+      "sanskrit": "Panasa (pakva)",
+      "aliases": [],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          2
+        ],
+        "virya": "cooling",
+        "note": "heavy; slow digestion"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: ripe jackfruit; panasa."
+    },
+    {
+      "id": "dravya.custard-apple",
+      "name": "Custard apple (sitaphal)",
+      "sanskrit": "Sitaphala",
+      "aliases": [
+        "sitaphal"
+      ],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          2
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 8851,
+          "name": "Custard-apple, (bullock's-heart), raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.ramphal",
+      "name": "Ramphal (bullock's heart)",
+      "sanskrit": "Ramaphala",
+      "aliases": [
+        "bullock's heart"
+      ],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: ramphal; ramaphala."
+    },
+    {
+      "id": "dravya.sapota",
+      "name": "Sapota (chikoo)",
+      "sanskrit": null,
+      "aliases": [
+        "chikoo"
+      ],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: sapota."
+    },
+    {
+      "id": "dravya.litchi",
+      "name": "Litchi",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 6542,
+          "name": "Litchis, raw",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.sarda-melon",
+      "name": "Sarda melon",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: sarda melon."
+    },
+    {
+      "id": "dravya.tender-coconut-flesh",
+      "name": "Tender coconut flesh",
+      "sanskrit": "Narikela (bala)",
+      "aliases": [],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -2,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: tender coconut flesh; narikela."
+    }
+  ]
+}
