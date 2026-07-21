@@ -1,0 +1,3755 @@
+{
+  "formatVersion": "1.0",
+  "batch": "recipe-batch-r15",
+  "qualityState": "aiDraft",
+  "items": [
+    {
+      "id": "recipe.breakfast-oat-apple-almond-porridge",
+      "name": "Warm Apple Almond Oat Porridge",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.apple",
+          "name": "Apple, diced",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 35
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 420
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the rolled oats as appropriate.",
+        "Combine it with the water and simmer until the grain begins to soften.",
+        "Add the unsweetened almond milk and apple, diced, almonds, chopped; continue cooking gently.",
+        "Stir in the cinnamon and sweetener when the porridge is tender and creamy.",
+        "Rest for two minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Apple Almond Oat Porridge is cooked and served warm, with fruit cooked into the grain when included. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-porridge adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-oat-pear-porridge",
+      "name": "Warm Pear Oat Porridge",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Unsweetened oat milk",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.pear",
+          "name": "Pear, diced",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 420
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the rolled oats as appropriate.",
+        "Combine it with the water and simmer until the grain begins to soften.",
+        "Add the unsweetened oat milk and pear, diced, fennel seeds; continue cooking gently.",
+        "Stir in the cinnamon and sweetener when the porridge is tender and creamy.",
+        "Rest for two minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Pear Oat Porridge is cooked and served warm, with fruit cooked into the grain when included. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-porridge adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-oat-blueberry-porridge",
+      "name": "Warm Blueberry Oat Porridge",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.blueberry",
+          "name": "Blueberries",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 420
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the rolled oats as appropriate.",
+        "Combine it with the water and simmer until the grain begins to soften.",
+        "Add the unsweetened almond milk and blueberries, almonds, chopped; continue cooking gently.",
+        "Stir in the cinnamon and sweetener when the porridge is tender and creamy.",
+        "Rest for two minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Blueberry Oat Porridge is cooked and served warm, with fruit cooked into the grain when included. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-porridge adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-barley-raisin-almond-porridge",
+      "name": "Barley Raisin Almond Porridge",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Cracked barley",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.raisins",
+          "name": "Raisins",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 35
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 520
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the cracked barley as appropriate.",
+        "Combine it with the water and simmer until the grain begins to soften.",
+        "Add the unsweetened almond milk and raisins, almonds, chopped; continue cooking gently.",
+        "Stir in the cinnamon and sweetener when the porridge is tender and creamy.",
+        "Rest for two minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Barley Raisin Almond Porridge is cooked and served warm, with fruit cooked into the grain when included. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-porridge adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-barley-apple-porridge",
+      "name": "Barley Apple Cinnamon Porridge",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 36,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Cracked barley",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Unsweetened oat milk",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.apple",
+          "name": "Apple, diced",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.walnut",
+          "name": "Walnuts, chopped",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 520
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the cracked barley as appropriate.",
+        "Combine it with the water and simmer until the grain begins to soften.",
+        "Add the unsweetened oat milk and apple, diced, walnuts, chopped; continue cooking gently.",
+        "Stir in the cinnamon and sweetener when the porridge is tender and creamy.",
+        "Rest for two minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Barley Apple Cinnamon Porridge is cooked and served warm, with fruit cooked into the grain when included. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-porridge adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-quinoa-pear-porridge",
+      "name": "Quinoa Pear Porridge",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 600
+        },
+        {
+          "dravyaId": "dravya.pear",
+          "name": "Pear, diced",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 420
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the quinoa as appropriate.",
+        "Combine it with the water and simmer until the grain begins to soften.",
+        "Add the unsweetened almond milk and pear, diced, almonds, chopped; continue cooking gently.",
+        "Stir in the cinnamon and sweetener when the porridge is tender and creamy.",
+        "Rest for two minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Quinoa Pear Porridge is cooked and served warm, with fruit cooked into the grain when included. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-porridge adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-quinoa-blueberry-porridge",
+      "name": "Quinoa Blueberry Porridge",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Unsweetened oat milk",
+          "grams": 600
+        },
+        {
+          "dravyaId": "dravya.blueberry",
+          "name": "Blueberries",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 420
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the quinoa as appropriate.",
+        "Combine it with the water and simmer until the grain begins to soften.",
+        "Add the unsweetened oat milk and blueberries, fennel seeds; continue cooking gently.",
+        "Stir in the cinnamon and sweetener when the porridge is tender and creamy.",
+        "Rest for two minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Quinoa Blueberry Porridge is cooked and served warm, with fruit cooked into the grain when included. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-porridge adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-millet-apple-porridge",
+      "name": "Millet Apple Porridge",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.apple",
+          "name": "Apple, diced",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.walnut",
+          "name": "Walnuts, chopped",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 480
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the proso millet as appropriate.",
+        "Combine it with the water and simmer until the grain begins to soften.",
+        "Add the unsweetened almond milk and apple, diced, walnuts, chopped; continue cooking gently.",
+        "Stir in the cinnamon and sweetener when the porridge is tender and creamy.",
+        "Rest for two minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Millet Apple Porridge is cooked and served warm, with fruit cooked into the grain when included. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-porridge adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-millet-peach-porridge",
+      "name": "Millet Peach Porridge",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Unsweetened oat milk",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.peach",
+          "name": "Peach, diced",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 480
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the proso millet as appropriate.",
+        "Combine it with the water and simmer until the grain begins to soften.",
+        "Add the unsweetened oat milk and peach, diced, almonds, chopped; continue cooking gently.",
+        "Stir in the cinnamon and sweetener when the porridge is tender and creamy.",
+        "Rest for two minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Millet Peach Porridge is cooked and served warm, with fruit cooked into the grain when included. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-porridge adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-amaranth-pear-porridge",
+      "name": "Amaranth Pear Porridge",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.pear",
+          "name": "Pear, diced",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.pistachio",
+          "name": "Pistachios, chopped",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 480
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the amaranth grain as appropriate.",
+        "Combine it with the water and simmer until the grain begins to soften.",
+        "Add the unsweetened almond milk and pear, diced, pistachios, chopped; continue cooking gently.",
+        "Stir in the cinnamon and sweetener when the porridge is tender and creamy.",
+        "Rest for two minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Amaranth Pear Porridge is cooked and served warm, with fruit cooked into the grain when included. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-porridge adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-amaranth-date-porridge",
+      "name": "Amaranth Date Porridge",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Unsweetened oat milk",
+          "grams": 600
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates, chopped",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 8
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 480
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the amaranth grain as appropriate.",
+        "Combine it with the water and simmer until the grain begins to soften.",
+        "Add the unsweetened oat milk and soft dates, chopped, almonds, chopped; continue cooking gently.",
+        "Stir in the cinnamon and sweetener when the porridge is tender and creamy.",
+        "Rest for two minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Amaranth Date Porridge is cooked and served warm, with fruit cooked into the grain when included. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-porridge adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-buckwheat-apple-porridge",
+      "name": "Buckwheat Apple Porridge",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Buckwheat groats",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.apple",
+          "name": "Apple, diced",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.walnut",
+          "name": "Walnuts, chopped",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 480
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the buckwheat groats as appropriate.",
+        "Combine it with the water and simmer until the grain begins to soften.",
+        "Add the unsweetened almond milk and apple, diced, walnuts, chopped; continue cooking gently.",
+        "Stir in the cinnamon and sweetener when the porridge is tender and creamy.",
+        "Rest for two minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Buckwheat Apple Porridge is cooked and served warm, with fruit cooked into the grain when included. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-porridge adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-buckwheat-prune-porridge",
+      "name": "Buckwheat Prune Porridge",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Buckwheat groats",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Unsweetened oat milk",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.prunes",
+          "name": "Prunes, chopped",
+          "grams": 85
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 480
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the buckwheat groats as appropriate.",
+        "Combine it with the water and simmer until the grain begins to soften.",
+        "Add the unsweetened oat milk and prunes, chopped, almonds, chopped; continue cooking gently.",
+        "Stir in the cinnamon and sweetener when the porridge is tender and creamy.",
+        "Rest for two minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Buckwheat Prune Porridge is cooked and served warm, with fruit cooked into the grain when included. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-porridge adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-ragi-date-porridge",
+      "name": "Ragi Date Almond Porridge",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.ragi",
+          "name": "Finger millet flour",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates, chopped",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 520
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the finger millet flour as appropriate.",
+        "Combine it with the water and simmer until the grain begins to soften.",
+        "Add the unsweetened almond milk and soft dates, chopped, almonds, chopped; continue cooking gently.",
+        "Stir in the cinnamon and sweetener when the porridge is tender and creamy.",
+        "Rest for two minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ragi Date Almond Porridge is cooked and served warm, with fruit cooked into the grain when included. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-porridge adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-brown-rice-raisin-porridge",
+      "name": "Brown Rice Raisin Porridge",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Unsweetened oat milk",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.raisins",
+          "name": "Raisins",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.walnut",
+          "name": "Walnuts, chopped",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 600
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the brown rice as appropriate.",
+        "Combine it with the water and simmer until the grain begins to soften.",
+        "Add the unsweetened oat milk and raisins, walnuts, chopped; continue cooking gently.",
+        "Stir in the cinnamon and sweetener when the porridge is tender and creamy.",
+        "Rest for two minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Brown Rice Raisin Porridge is cooked and served warm, with fruit cooked into the grain when included. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-porridge adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-chia-apple-warm-porridge",
+      "name": "Warm Chia Apple Porridge",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 18,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chia",
+          "name": "Chia seeds",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.apple",
+          "name": "Apple, diced small",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 300
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the chia seeds as appropriate.",
+        "Combine it with the water and simmer until the grain begins to soften.",
+        "Add the unsweetened almond milk and apple, diced small, rolled oats; continue cooking gently.",
+        "Stir in the cinnamon and sweetener when the porridge is tender and creamy.",
+        "Rest for two minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Chia Apple Porridge is cooked and served warm, with fruit cooked into the grain when included. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-porridge adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-banana-dairy-oat-porridge",
+      "name": "Banana Dairy Oat Porridge",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.banana-ripe",
+          "name": "Ripe banana, sliced",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 420
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the rolled oats as appropriate.",
+        "Combine it with the water and simmer until the grain begins to soften.",
+        "Add the whole cow milk and ripe banana, sliced; continue cooking gently.",
+        "Stir in the cinnamon and sweetener when the porridge is tender and creamy.",
+        "Rest for two minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [
+        "fruit combined with dairy (traditional viruddha)"
+      ],
+      "guidance": "This modern banana-milk porridge is flagged for combining fruit with dairy. Vata: serve warm and keep the oats soft. Pitta: use little cinnamon. Kapha: take a smaller portion. Compliant variant: use unsweetened almond milk instead of cow milk.",
+      "provenance": [
+        "original international warm-porridge adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-strawberry-dairy-rice-porridge",
+      "name": "Strawberry Dairy Rice Porridge",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 650
+        },
+        {
+          "dravyaId": "dravya.strawberry",
+          "name": "Strawberries, sliced",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 480
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the white rice as appropriate.",
+        "Combine it with the water and simmer until the grain begins to soften.",
+        "Add the whole cow milk and strawberries, sliced; continue cooking gently.",
+        "Stir in the cinnamon and sweetener when the porridge is tender and creamy.",
+        "Rest for two minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [
+        "fruit combined with dairy (traditional viruddha)"
+      ],
+      "guidance": "This strawberry rice porridge is flagged because fresh fruit is cooked with cow milk. Vata: serve warm and well cooked. Pitta: keep sweetener minimal. Kapha: take a small portion. Compliant variant: replace cow milk with unsweetened oat milk.",
+      "provenance": [
+        "original international warm-porridge adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-mango-dairy-millet-porridge",
+      "name": "Mango Dairy Millet Porridge",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.mango-ripe",
+          "name": "Ripe mango, diced",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 460
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the proso millet as appropriate.",
+        "Combine it with the water and simmer until the grain begins to soften.",
+        "Add the whole cow milk and ripe mango, diced; continue cooking gently.",
+        "Stir in the cinnamon and sweetener when the porridge is tender and creamy.",
+        "Rest for two minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [
+        "fruit combined with dairy (traditional viruddha)"
+      ],
+      "guidance": "This mango-milk porridge is flagged for its fruit-and-dairy combination. Vata: serve warm and soft. Pitta: use little sweetener. Kapha: take a smaller bowl. Compliant variant: replace cow milk with unsweetened almond milk.",
+      "provenance": [
+        "original international warm-porridge adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-oat-apricot-porridge",
+      "name": "Warm Apricot Oat Porridge",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Unsweetened oat milk",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.apricot",
+          "name": "Apricots, diced",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 420
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the rolled oats as appropriate.",
+        "Combine it with the water and simmer until the grain begins to soften.",
+        "Add the unsweetened oat milk and apricots, diced, almonds, chopped; continue cooking gently.",
+        "Stir in the cinnamon and sweetener when the porridge is tender and creamy.",
+        "Rest for two minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Apricot Oat Porridge is cooked and served warm, with fruit cooked into the grain when included. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-porridge adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-oat-apple-pancakes",
+      "name": "Oat Apple Pancakes",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Oat flour",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.apple",
+          "name": "Apple, finely grated",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 24
+        }
+      ],
+      "steps": [
+        "Whisk the oat flour, cinnamon, and unsweetened almond milk into a thick, pourable batter.",
+        "Fold in the apple, finely grated and rest for ten minutes.",
+        "Heat a griddle and brush it lightly with ghee.",
+        "Cook small pancakes until bubbles set at the surface, then turn and finish the second side.",
+        "Serve warm with only a light drizzle of maple syrup."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Oat Apple Pancakes is served warm in small pancakes with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian pancake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-buckwheat-pear-pancakes",
+      "name": "Buckwheat Pear Pancakes",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Buckwheat flour",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.pear",
+          "name": "Pear, finely diced",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 24
+        }
+      ],
+      "steps": [
+        "Whisk the buckwheat flour, cinnamon, and unsweetened almond milk into a thick, pourable batter.",
+        "Fold in the pear, finely diced and rest for ten minutes.",
+        "Heat a griddle and brush it lightly with ghee.",
+        "Cook small pancakes until bubbles set at the surface, then turn and finish the second side.",
+        "Serve warm with only a light drizzle of maple syrup."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Buckwheat Pear Pancakes is served warm in small pancakes with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian pancake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-ragi-banana-pancakes",
+      "name": "Ragi Banana Pancakes",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.ragi",
+          "name": "Finger millet flour",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.banana-ripe",
+          "name": "Ripe banana, mashed",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 24
+        }
+      ],
+      "steps": [
+        "Whisk the finger millet flour, cinnamon, and Unsweetened almond milk into a thick, pourable batter.",
+        "Fold in the ripe banana, mashed and rest for ten minutes.",
+        "Heat a griddle and brush it lightly with ghee.",
+        "Cook small pancakes until bubbles set at the surface, then turn and finish the second side.",
+        "Serve warm with only a light drizzle of maple syrup."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ragi Banana Pancakes is served warm in small pancakes with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian pancake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-amaranth-blueberry-pancakes",
+      "name": "Amaranth Blueberry Pancakes",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth flour",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.blueberry",
+          "name": "Blueberries",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 24
+        }
+      ],
+      "steps": [
+        "Whisk the amaranth flour, cinnamon, and unsweetened almond milk into a thick, pourable batter.",
+        "Fold in the blueberries and rest for ten minutes.",
+        "Heat a griddle and brush it lightly with ghee.",
+        "Cook small pancakes until bubbles set at the surface, then turn and finish the second side.",
+        "Serve warm with only a light drizzle of maple syrup."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Amaranth Blueberry Pancakes is served warm in small pancakes with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian pancake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-whole-wheat-carrot-pancakes",
+      "name": "Whole-Wheat Carrot Pancakes",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, finely grated",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 24
+        }
+      ],
+      "steps": [
+        "Whisk the whole-wheat flour, cinnamon, and unsweetened almond milk into a thick, pourable batter.",
+        "Fold in the carrot, finely grated and rest for ten minutes.",
+        "Heat a griddle and brush it lightly with ghee.",
+        "Cook small pancakes until bubbles set at the surface, then turn and finish the second side.",
+        "Serve warm with only a light drizzle of maple syrup."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Whole-Wheat Carrot Pancakes is served warm in small pancakes with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian pancake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-barley-apple-pancakes",
+      "name": "Barley Apple Pancakes",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Barley flour",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.apple",
+          "name": "Apple, finely grated",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 24
+        }
+      ],
+      "steps": [
+        "Whisk the barley flour, cinnamon, and unsweetened almond milk into a thick, pourable batter.",
+        "Fold in the apple, finely grated and rest for ten minutes.",
+        "Heat a griddle and brush it lightly with ghee.",
+        "Cook small pancakes until bubbles set at the surface, then turn and finish the second side.",
+        "Serve warm with only a light drizzle of maple syrup."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Barley Apple Pancakes is served warm in small pancakes with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian pancake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-besan-pear-pancakes",
+      "name": "Chickpea Pear Pancakes",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.besan",
+          "name": "Chickpea flour",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.pear",
+          "name": "Pear, finely diced",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 24
+        }
+      ],
+      "steps": [
+        "Whisk the chickpea flour, cinnamon, and unsweetened almond milk into a thick, pourable batter.",
+        "Fold in the pear, finely diced and rest for ten minutes.",
+        "Heat a griddle and brush it lightly with ghee.",
+        "Cook small pancakes until bubbles set at the surface, then turn and finish the second side.",
+        "Serve warm with only a light drizzle of maple syrup."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chickpea Pear Pancakes is served warm in small pancakes with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian pancake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-quinoa-peach-pancakes",
+      "name": "Quinoa Peach Pancakes",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa flour",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.peach",
+          "name": "Peach, finely diced",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 24
+        }
+      ],
+      "steps": [
+        "Whisk the quinoa flour, cinnamon, and unsweetened almond milk into a thick, pourable batter.",
+        "Fold in the peach, finely diced and rest for ten minutes.",
+        "Heat a griddle and brush it lightly with ghee.",
+        "Cook small pancakes until bubbles set at the surface, then turn and finish the second side.",
+        "Serve warm with only a light drizzle of maple syrup."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Quinoa Peach Pancakes is served warm in small pancakes with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian pancake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-corn-blueberry-pancakes",
+      "name": "Corn Blueberry Pancakes",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.corn",
+          "name": "Fine cornmeal",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.blueberry",
+          "name": "Blueberries",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 24
+        }
+      ],
+      "steps": [
+        "Whisk the fine cornmeal, cinnamon, and unsweetened almond milk into a thick, pourable batter.",
+        "Fold in the blueberries and whole-wheat flour and rest for ten minutes.",
+        "Heat a griddle and brush it lightly with ghee.",
+        "Cook small pancakes until bubbles set at the surface, then turn and finish the second side.",
+        "Serve warm with only a light drizzle of maple syrup."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Corn Blueberry Pancakes is served warm in small pancakes with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian pancake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-rice-banana-pancakes",
+      "name": "Rice Banana Pancakes",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "Rice flour",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.banana-ripe",
+          "name": "Ripe banana, mashed",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 24
+        }
+      ],
+      "steps": [
+        "Whisk the rice flour, cinnamon, and unsweetened almond milk into a thick, pourable batter.",
+        "Fold in the ripe banana, mashed and rest for ten minutes.",
+        "Heat a griddle and brush it lightly with ghee.",
+        "Cook small pancakes until bubbles set at the surface, then turn and finish the second side.",
+        "Serve warm with only a light drizzle of maple syrup."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Rice Banana Pancakes is served warm in small pancakes with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian pancake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-millet-pumpkin-pancakes",
+      "name": "Millet Pumpkin Pancakes",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Millet flour",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, cooked and mashed",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 24
+        }
+      ],
+      "steps": [
+        "Whisk the millet flour, cinnamon, and unsweetened almond milk into a thick, pourable batter.",
+        "Fold in the pumpkin, cooked and mashed and rest for ten minutes.",
+        "Heat a griddle and brush it lightly with ghee.",
+        "Cook small pancakes until bubbles set at the surface, then turn and finish the second side.",
+        "Serve warm with only a light drizzle of maple syrup."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Millet Pumpkin Pancakes is served warm in small pancakes with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian pancake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-oat-strawberry-pancakes",
+      "name": "Oat Strawberry Pancakes",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Oat flour",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.strawberry",
+          "name": "Strawberries, diced small",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 24
+        }
+      ],
+      "steps": [
+        "Whisk the oat flour, cinnamon, and unsweetened almond milk into a thick, pourable batter.",
+        "Fold in the strawberries, diced small and rest for ten minutes.",
+        "Heat a griddle and brush it lightly with ghee.",
+        "Cook small pancakes until bubbles set at the surface, then turn and finish the second side.",
+        "Serve warm with only a light drizzle of maple syrup."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Oat Strawberry Pancakes is served warm in small pancakes with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian pancake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-banana-dairy-wheat-pancakes",
+      "name": "Banana Dairy Wheat Pancakes",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.banana-ripe",
+          "name": "Ripe banana, mashed",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 24
+        }
+      ],
+      "steps": [
+        "Whisk the whole-wheat flour, cinnamon, and Whole cow milk into a thick, pourable batter.",
+        "Fold in the ripe banana, mashed and rest for ten minutes.",
+        "Heat a griddle and brush it lightly with ghee.",
+        "Cook small pancakes until bubbles set at the surface, then turn and finish the second side.",
+        "Serve warm with only a light drizzle of maple syrup."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [
+        "fruit combined with dairy (traditional viruddha)"
+      ],
+      "guidance": "These pancakes are flagged because banana is mixed with cow milk. Vata: serve warm and soft. Pitta: keep cinnamon modest. Kapha: take a small stack. Compliant variant: use unsweetened almond milk instead of cow milk.",
+      "provenance": [
+        "original international lacto-vegetarian pancake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-blueberry-dairy-buckwheat-pancakes",
+      "name": "Blueberry Dairy Buckwheat Pancakes",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Buckwheat flour",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.blueberry",
+          "name": "Blueberries",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 24
+        }
+      ],
+      "steps": [
+        "Whisk the buckwheat flour, cinnamon, and Whole cow milk into a thick, pourable batter.",
+        "Fold in the blueberries and rest for ten minutes.",
+        "Heat a griddle and brush it lightly with ghee.",
+        "Cook small pancakes until bubbles set at the surface, then turn and finish the second side.",
+        "Serve warm with only a light drizzle of maple syrup."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [
+        "fruit combined with dairy (traditional viruddha)"
+      ],
+      "guidance": "These pancakes are flagged because blueberries are combined with cow milk. Vata: serve warm with a little ghee. Pitta: keep sweetener low. Kapha: serve a smaller portion. Compliant variant: use unsweetened oat milk instead of cow milk.",
+      "provenance": [
+        "original international lacto-vegetarian pancake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-mango-dairy-ragi-pancakes",
+      "name": "Mango Dairy Ragi Pancakes",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.ragi",
+          "name": "Finger millet flour",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.mango-ripe",
+          "name": "Ripe mango, mashed",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 24
+        }
+      ],
+      "steps": [
+        "Whisk the finger millet flour, cinnamon, and Whole cow milk into a thick, pourable batter.",
+        "Fold in the ripe mango, mashed and rest for ten minutes.",
+        "Heat a griddle and brush it lightly with ghee.",
+        "Cook small pancakes until bubbles set at the surface, then turn and finish the second side.",
+        "Serve warm with only a light drizzle of maple syrup."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [
+        "fruit combined with dairy (traditional viruddha)"
+      ],
+      "guidance": "These ragi pancakes are flagged because mango is combined with cow milk. Vata: serve warm and soft. Pitta: use little cinnamon. Kapha: take a small portion. Compliant variant: use unsweetened almond milk instead of cow milk.",
+      "provenance": [
+        "original international lacto-vegetarian pancake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-oat-almond-raisin-granola",
+      "name": "Oat Almond Raisin Granola",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 8,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.raisins",
+          "name": "Raisins",
+          "grams": 65
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 48
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        }
+      ],
+      "steps": [
+        "Combine the rolled oats, cinnamon, and almonds, chopped, raisins.",
+        "Warm the ghee with the maple syrup just until fluid.",
+        "Fold the warm mixture through the dry ingredients until lightly coated.",
+        "Spread on a tray and bake, stirring twice, until dry and gently toasted.",
+        "Cool completely before storing; serve a small portion with warm plant milk."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Oat Almond Raisin Granola is a baked breakfast topping; serve it in a small portion with warm liquid. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international granola adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-oat-walnut-date-granola",
+      "name": "Oat Walnut Date Granola",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 8,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.walnut",
+          "name": "Walnuts, chopped",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Dates, chopped",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 48
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        }
+      ],
+      "steps": [
+        "Combine the rolled oats, cinnamon, and walnuts, chopped, dates, chopped.",
+        "Warm the ghee with the maple syrup just until fluid.",
+        "Fold the warm mixture through the dry ingredients until lightly coated.",
+        "Spread on a tray and bake, stirring twice, until dry and gently toasted.",
+        "Cool completely before storing; serve a small portion with warm plant milk."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Oat Walnut Date Granola is a baked breakfast topping; serve it in a small portion with warm liquid. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international granola adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-oat-pumpkin-seed-granola",
+      "name": "Oat Pumpkin Seed Granola",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 8,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.pumpkin-seed",
+          "name": "Pumpkin seeds",
+          "grams": 85
+        },
+        {
+          "dravyaId": "dravya.sunflower-seed",
+          "name": "Sunflower seeds",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 48
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        }
+      ],
+      "steps": [
+        "Combine the rolled oats, cinnamon, and pumpkin seeds, sunflower seeds.",
+        "Warm the ghee with the maple syrup just until fluid.",
+        "Fold the warm mixture through the dry ingredients until lightly coated.",
+        "Spread on a tray and bake, stirring twice, until dry and gently toasted.",
+        "Cool completely before storing; serve a small portion with warm plant milk."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Oat Pumpkin Seed Granola is a baked breakfast topping; serve it in a small portion with warm liquid. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international granola adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-barley-almond-granola",
+      "name": "Barley Almond Granola",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 8,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Rolled barley",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 85
+        },
+        {
+          "dravyaId": "dravya.raisins",
+          "name": "Raisins",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 48
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        }
+      ],
+      "steps": [
+        "Combine the rolled barley, cinnamon, and almonds, chopped, raisins.",
+        "Warm the ghee with the maple syrup just until fluid.",
+        "Fold the warm mixture through the dry ingredients until lightly coated.",
+        "Spread on a tray and bake, stirring twice, until dry and gently toasted.",
+        "Cool completely before storing; serve a small portion with warm plant milk."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Barley Almond Granola is a baked breakfast topping; serve it in a small portion with warm liquid. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international granola adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-amaranth-pistachio-granola",
+      "name": "Amaranth Pistachio Granola",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 8,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Popped amaranth",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.pistachio",
+          "name": "Pistachios, chopped",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.sunflower-seed",
+          "name": "Sunflower seeds",
+          "grams": 50
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 48
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        }
+      ],
+      "steps": [
+        "Combine the popped amaranth, cinnamon, and pistachios, chopped, sunflower seeds.",
+        "Warm the ghee with the maple syrup just until fluid.",
+        "Fold the warm mixture through the dry ingredients until lightly coated.",
+        "Spread on a tray and bake, stirring twice, until dry and gently toasted.",
+        "Cool completely before storing; serve a small portion with warm plant milk."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Amaranth Pistachio Granola is a baked breakfast topping; serve it in a small portion with warm liquid. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international granola adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-buckwheat-walnut-granola",
+      "name": "Buckwheat Walnut Granola",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 8,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Buckwheat groats",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.walnut",
+          "name": "Walnuts, chopped",
+          "grams": 85
+        },
+        {
+          "dravyaId": "dravya.raisins",
+          "name": "Raisins",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 48
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        }
+      ],
+      "steps": [
+        "Combine the buckwheat groats, cinnamon, and walnuts, chopped, raisins.",
+        "Warm the ghee with the maple syrup just until fluid.",
+        "Fold the warm mixture through the dry ingredients until lightly coated.",
+        "Spread on a tray and bake, stirring twice, until dry and gently toasted.",
+        "Cool completely before storing; serve a small portion with warm plant milk."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Buckwheat Walnut Granola is a baked breakfast topping; serve it in a small portion with warm liquid. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international granola adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-ragi-coconut-granola",
+      "name": "Ragi Coconut Granola Clusters",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 8,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.ragi",
+          "name": "Finger millet flakes or coarse meal",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.coconut-dried",
+          "name": "Dried coconut",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 48
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        }
+      ],
+      "steps": [
+        "Combine the finger millet flakes or coarse meal, cinnamon, and dried coconut, almonds, chopped.",
+        "Warm the ghee with the maple syrup just until fluid.",
+        "Fold the warm mixture through the dry ingredients until lightly coated.",
+        "Spread on a tray and bake, stirring twice, until dry and gently toasted.",
+        "Cool completely before storing; serve a small portion with warm plant milk."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ragi Coconut Granola Clusters is a baked breakfast topping; serve it in a small portion with warm liquid. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international granola adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-quinoa-seed-granola",
+      "name": "Quinoa Seed Granola",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 8,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa flakes or cooked-dry quinoa",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.pumpkin-seed",
+          "name": "Pumpkin seeds",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.sunflower-seed",
+          "name": "Sunflower seeds",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 48
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        }
+      ],
+      "steps": [
+        "Combine the quinoa flakes or cooked-dry quinoa, cinnamon, and pumpkin seeds, sunflower seeds.",
+        "Warm the ghee with the maple syrup just until fluid.",
+        "Fold the warm mixture through the dry ingredients until lightly coated.",
+        "Spread on a tray and bake, stirring twice, until dry and gently toasted.",
+        "Cool completely before storing; serve a small portion with warm plant milk."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Quinoa Seed Granola is a baked breakfast topping; serve it in a small portion with warm liquid. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international granola adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-millet-peanut-granola",
+      "name": "Millet Peanut Granola",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 8,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Puffed or cooked-dry millet",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.peanut",
+          "name": "Peanuts, chopped",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery",
+          "grams": 48
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        }
+      ],
+      "steps": [
+        "Combine the puffed or cooked-dry millet, cinnamon, and peanuts, chopped, sesame seeds.",
+        "Warm the ghee with the jaggery just until fluid.",
+        "Fold the warm mixture through the dry ingredients until lightly coated.",
+        "Spread on a tray and bake, stirring twice, until dry and gently toasted.",
+        "Cool completely before storing; serve a small portion with warm plant milk."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Millet Peanut Granola is a baked breakfast topping; serve it in a small portion with warm liquid. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international granola adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-oat-apricot-granola",
+      "name": "Oat Apricot Granola",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 8,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.dried-apricot",
+          "name": "Dried apricots, chopped",
+          "grams": 75
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 48
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        }
+      ],
+      "steps": [
+        "Combine the rolled oats, cinnamon, and dried apricots, chopped, almonds, chopped.",
+        "Warm the ghee with the maple syrup just until fluid.",
+        "Fold the warm mixture through the dry ingredients until lightly coated.",
+        "Spread on a tray and bake, stirring twice, until dry and gently toasted.",
+        "Cool completely before storing; serve a small portion with warm plant milk."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Oat Apricot Granola is a baked breakfast topping; serve it in a small portion with warm liquid. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international granola adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-savory-quinoa-spinach",
+      "name": "Savory Quinoa Spinach Breakfast",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the quinoa as appropriate for the grain.",
+        "Warm the Olive oil and bloom the cumin and ginger.",
+        "Add the grain and spinach, chopped, fresh parsley; stir for one minute.",
+        "Pour in the water and cook at a steady simmer until tender and cohesive.",
+        "Season with rock salt, rest covered briefly, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Savory Quinoa Spinach Breakfast is a freshly cooked warm breakfast rather than a chilled cereal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary warm-breakfast cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-savory-barley-mushroom",
+      "name": "Savory Barley Mushroom Breakfast",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Cracked barley",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.white-mushroom",
+          "name": "White mushrooms, sliced",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 900
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the cracked barley as appropriate for the grain.",
+        "Warm the Olive oil and bloom the cumin and ginger.",
+        "Add the grain and white mushrooms, sliced, fresh thyme; stir for one minute.",
+        "Pour in the water and cook at a steady simmer until tender and cohesive.",
+        "Season with rock salt, rest covered briefly, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Savory Barley Mushroom Breakfast is a freshly cooked warm breakfast rather than a chilled cereal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary warm-breakfast cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-savory-millet-pumpkin",
+      "name": "Savory Millet Pumpkin Breakfast",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the proso millet as appropriate for the grain.",
+        "Warm the Olive oil and bloom the cumin and ginger.",
+        "Add the grain and pumpkin, diced, fennel seeds; stir for one minute.",
+        "Pour in the water and cook at a steady simmer until tender and cohesive.",
+        "Season with rock salt, rest covered briefly, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Savory Millet Pumpkin Breakfast is a freshly cooked warm breakfast rather than a chilled cereal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary warm-breakfast cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-savory-oat-carrot",
+      "name": "Savory Oat Carrot Breakfast",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Steel-cut oats",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 820
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the steel-cut oats as appropriate for the grain.",
+        "Warm the Olive oil and bloom the cumin and ginger.",
+        "Add the grain and carrot, diced, fresh dill; stir for one minute.",
+        "Pour in the water and cook at a steady simmer until tender and cohesive.",
+        "Season with rock salt, rest covered briefly, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Savory Oat Carrot Breakfast is a freshly cooked warm breakfast rather than a chilled cereal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary warm-breakfast cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.breakfast-savory-brown-rice-pea",
+      "name": "Savory Brown Rice Pea Breakfast",
+      "category": "international",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the brown rice as appropriate for the grain.",
+        "Warm the Olive oil and bloom the cumin and ginger.",
+        "Add the grain and green peas, fresh parsley; stir for one minute.",
+        "Pour in the water and cook at a steady simmer until tender and cohesive.",
+        "Season with rock salt, rest covered briefly, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Savory Brown Rice Pea Breakfast is a freshly cooked warm breakfast rather than a chilled cereal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary warm-breakfast cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    }
+  ]
+}
