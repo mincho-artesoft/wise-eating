@@ -23,6 +23,10 @@ Target: 750 full-facet dravyas. **Done: 210 (batches 01–09), all validated + c
 | 07 | Nuts, seeds, dry fruits (tila, walnut, makhana, char magaz…) | 24 |
 | 08 | Dairy, oils, sweeteners, plant milks (takra, mustard oil, mishri…) | 25 |
 | 09 | Beverages & fermented (teas, coffee, coconut water, miso…) | 12 |
+| 10 | Animal foods (eggs, meats, fish — mamsa varga) | 25 |
+| 11 | Classical preparations (kitchari, takra, CCF tea, chyawanprash…) | 25 |
+
+**Facet authoring from predrafts: next is predraft-12 (medicinal). 260/750 done.**
 
 ## NEW: predrafts ready (D10 approved)
 
