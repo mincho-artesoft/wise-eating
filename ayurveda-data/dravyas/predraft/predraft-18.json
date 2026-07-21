@@ -1,0 +1,666 @@
+{
+  "predraftVersion": "1.0",
+  "batch": "predraft-18",
+  "items": [
+    {
+      "id": "dravya.morel-mushroom",
+      "name": "Morel mushroom (gucchi)",
+      "sanskrit": null,
+      "aliases": [
+        "gucchi"
+      ],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          0,
+          0,
+          1
+        ],
+        "virya": "heating",
+        "note": "Kashmiri prized"
+      },
+      "usda": [
+        {
+          "fdcId": 5953,
+          "name": "Mushrooms, morel, raw",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.ker-berry",
+      "name": "Ker (desert caper berry)",
+      "sanskrit": "Karira",
+      "aliases": [
+        "desert caper berry"
+      ],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          0,
+          1,
+          -2
+        ],
+        "virya": "heating",
+        "note": "classical karira; Rajasthani"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: ker; karira; ker berry."
+    },
+    {
+      "id": "dravya.sangri",
+      "name": "Sangri (desert bean)",
+      "sanskrit": "Shami Phali",
+      "aliases": [
+        "desert bean"
+      ],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          1,
+          -1,
+          -1
+        ],
+        "virya": "cooling",
+        "note": "ker-sangri pair"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: sangri; shami phali."
+    },
+    {
+      "id": "dravya.gunda-dry",
+      "name": "Gunda (dried lasora)",
+      "sanskrit": "Shleshmataka (shushka)",
+      "aliases": [
+        "dried lasora"
+      ],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: gunda; shleshmataka; gunda dry."
+    },
+    {
+      "id": "dravya.mahua-flower-fresh",
+      "name": "Mahua flower (fresh)",
+      "sanskrit": "Madhuka Pushpa",
+      "aliases": [],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling",
+        "note": "tribal staple; nourishing sweet flower"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: mahua flower; madhuka pushpa; mahua flower fresh."
+    },
+    {
+      "id": "dravya.mahua-flower-dry",
+      "name": "Mahua flower (dried)",
+      "sanskrit": "Madhuka (shushka)",
+      "aliases": [
+        "dried"
+      ],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: mahua flower; madhuka; mahua flower dry."
+    },
+    {
+      "id": "dravya.bhatt-soybean",
+      "name": "Black soybean (bhatt)",
+      "sanskrit": null,
+      "aliases": [
+        "bhatt"
+      ],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          1,
+          0,
+          -1
+        ],
+        "virya": "heating",
+        "note": "Kumaoni"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: black soybean; bhatt soybean."
+    },
+    {
+      "id": "dravya.buransh-juice",
+      "name": "Rhododendron juice (buransh)",
+      "sanskrit": null,
+      "aliases": [
+        "buransh"
+      ],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          0,
+          -2,
+          0
+        ],
+        "virya": "cooling",
+        "note": "Uttarakhand heart-cooling drink"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: rhododendron juice; buransh juice."
+    },
+    {
+      "id": "dravya.stinging-nettle",
+      "name": "Stinging nettle greens (sisnu)",
+      "sanskrit": null,
+      "aliases": [
+        "sisnu"
+      ],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          0,
+          1,
+          -2
+        ],
+        "virya": "heating",
+        "note": "Himalayan; cooked only"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: stinging nettle greens; stinging nettle."
+    },
+    {
+      "id": "dravya.fiddlehead-fern",
+      "name": "Fiddlehead fern (lingda)",
+      "sanskrit": null,
+      "aliases": [
+        "lingda"
+      ],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          1,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: fiddlehead fern."
+    },
+    {
+      "id": "dravya.taro-stem-regional",
+      "name": "Taro stem (regional curry)",
+      "sanskrit": null,
+      "aliases": [
+        "regional curry"
+      ],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          1,
+          0,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: taro stem; taro stem regional."
+    },
+    {
+      "id": "dravya.nendran-banana",
+      "name": "Nendran banana",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling",
+        "note": "Kerala; steamed breakfast"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: nendran banana."
+    },
+    {
+      "id": "dravya.joha-rice",
+      "name": "Joha rice",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          0
+        ],
+        "virya": "cooling",
+        "note": "Assamese aromatic"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: joha rice."
+    },
+    {
+      "id": "dravya.bhut-jolokia",
+      "name": "Bhut jolokia (ghost chili)",
+      "sanskrit": null,
+      "aliases": [
+        "ghost chili"
+      ],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          -1,
+          2,
+          -2
+        ],
+        "virya": "heating",
+        "note": "extreme heat; trace use"
+      },
+      "usda": [
+        {
+          "fdcId": 12386,
+          "name": "Bhut jolokia (dried)",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.gondhoraj-lime",
+      "name": "Gondhoraj lime",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          0
+        ],
+        "virya": "heating",
+        "note": "Bengali aromatic"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: gondhoraj lime."
+    },
+    {
+      "id": "dravya.kaji-nemu",
+      "name": "Kaji nemu (Assam lemon)",
+      "sanskrit": null,
+      "aliases": [
+        "Assam lemon"
+      ],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          -2,
+          1,
+          0
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: kaji nemu."
+    },
+    {
+      "id": "dravya.thekera",
+      "name": "Thekera (Assam garcinia)",
+      "sanskrit": null,
+      "aliases": [
+        "Assam garcinia"
+      ],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "cooling",
+        "note": "souring agent"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: thekera."
+    },
+    {
+      "id": "dravya.kachampuli",
+      "name": "Kachampuli vinegar",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "heating",
+        "note": "Coorg dark vinegar"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: kachampuli vinegar; kachampuli."
+    },
+    {
+      "id": "dravya.sugarcane-vinegar",
+      "name": "Sugarcane vinegar (sirka)",
+      "sanskrit": "Shukta",
+      "aliases": [
+        "sirka"
+      ],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "heating",
+        "note": "classical shukta family"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: sugarcane vinegar; shukta."
+    },
+    {
+      "id": "dravya.coconut-vinegar",
+      "name": "Coconut vinegar",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: coconut vinegar."
+    },
+    {
+      "id": "dravya.jamun-vinegar",
+      "name": "Jamun vinegar",
+      "sanskrit": "Jambu Shukta",
+      "aliases": [],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: jamun vinegar; jambu shukta."
+    },
+    {
+      "id": "dravya.betel-nut",
+      "name": "Betel nut (supari)",
+      "sanskrit": "Puga",
+      "aliases": [
+        "supari"
+      ],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          0,
+          0,
+          -2
+        ],
+        "virya": "heating",
+        "note": "classical tambula; modern carcinogenicity caution — trace/avoid"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 nut",
+          "grams": 5
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: betel nut; puga."
+    },
+    {
+      "id": "dravya.catechu",
+      "name": "Catechu (katha)",
+      "sanskrit": "Khadira",
+      "aliases": [
+        "katha"
+      ],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -2
+        ],
+        "virya": "cooling",
+        "note": "tambula component"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: catechu; khadira."
+    },
+    {
+      "id": "dravya.mukhwas",
+      "name": "Mukhwas (fennel mouth-freshener)",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          -1
+        ],
+        "virya": "cooling",
+        "note": "post-meal digestive tradition"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: mukhwas."
+    },
+    {
+      "id": "dravya.tender-tamarind-leaf",
+      "name": "Tender tamarind leaf",
+      "sanskrit": "Amlika Patra",
+      "aliases": [],
+      "category": "regional",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "heating",
+        "note": "seasonal chutney green"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: tender tamarind leaf; amlika patra."
+    }
+  ]
+}
