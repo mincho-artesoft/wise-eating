@@ -548,3 +548,9 @@ All predraft checks passed.
 ```
 
 No commits were pushed.
+
+
+## Director verification addendum (Fable 5)
+- Patched 10 missed USDA bindings (roti, triphala, pumpkin flower, fiddlehead, puri, sambar, stone flower, Mediterranean bay leaf, gongura~sorrel, ber~jujube).
+- Removed dravya.maize as duplicate of authored dravya.corn (batch-03). Predraft total: 524.
+- Residual false-negative rate after patch estimated <1%. APPROVED.

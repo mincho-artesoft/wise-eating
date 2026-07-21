@@ -228,33 +228,6 @@
       "usdaNote": "No suitable USDA-store row after searches for: water chestnut flour; shringataka churna."
     },
     {
-      "id": "dravya.maize",
-      "name": "Maize (dry corn)",
-      "sanskrit": "Makka",
-      "aliases": [
-        "dry corn"
-      ],
-      "category": "grain",
-      "canonHints": {
-        "vpk": [
-          1,
-          0,
-          -1
-        ],
-        "virya": "heating"
-      },
-      "usda": [],
-      "servings": [
-        {
-          "label": "1/4 cup dry",
-          "grams": 45
-        }
-      ],
-      "_facetsPending": true,
-      "usdaNote": "No suitable USDA-store row after searches for: maize; makka.",
-      "_duplicateOf": "dravya.corn"
-    },
-    {
       "id": "dravya.navara-rice",
       "name": "Navara rice",
       "sanskrit": "Shashtika Shali",
