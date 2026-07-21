@@ -1,0 +1,485 @@
+{
+  "predraftVersion": "1.0",
+  "batch": "predraft-11",
+  "items": [
+    {
+      "id": "dravya.kitchari-mung-rice",
+      "name": "Mung and rice kitchari",
+      "sanskrit": "Mudga Khichadi",
+      "aliases": [
+        "khichdi"
+      ],
+      "category": "preparation",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: mung and rice kitchari; khichdi; mudga khichadi; kitchari mung rice."
+    },
+    {
+      "id": "dravya.kitchari-tridoshic",
+      "name": "Tridoshic kitchari",
+      "sanskrit": "Khichadi",
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: tridoshic kitchari; khichadi; kitchari tridoshic."
+    },
+    {
+      "id": "dravya.ghee-cultured",
+      "name": "Cultured ghee",
+      "sanskrit": "Ghrita",
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: cultured ghee; ghrita; ghee cultured."
+    },
+    {
+      "id": "dravya.ghee-spiced",
+      "name": "Spiced ghee",
+      "sanskrit": "Ghrita",
+      "aliases": [
+        "trikatu ghrita"
+      ],
+      "category": "preparation",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: spiced ghee; trikatu ghrita; ghrita; ghee spiced."
+    },
+    {
+      "id": "dravya.ccf-tea",
+      "name": "Cumin-coriander-fennel tea",
+      "sanskrit": null,
+      "aliases": [
+        "CCF tea"
+      ],
+      "category": "preparation",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: cumin coriander fennel tea; ccf tea."
+    },
+    {
+      "id": "dravya.golden-milk",
+      "name": "Golden milk",
+      "sanskrit": "Haridra Ksheera",
+      "aliases": [
+        "turmeric milk"
+      ],
+      "category": "preparation",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: golden milk; turmeric milk; haridra ksheera."
+    },
+    {
+      "id": "dravya.lassi-sweet",
+      "name": "Sweet lassi",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: sweet lassi; lassi; lassi sweet."
+    },
+    {
+      "id": "dravya.lassi-digestive",
+      "name": "Cumin lassi",
+      "sanskrit": null,
+      "aliases": [
+        "jeera lassi"
+      ],
+      "category": "preparation",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: cumin lassi; jeera lassi; lassi digestive."
+    },
+    {
+      "id": "dravya.takra",
+      "name": "Spiced buttermilk",
+      "sanskrit": "Takra",
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 8107,
+          "name": "Milk, buttermilk, fluid, cultured, lowfat",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.panchamrita",
+      "name": "Panchamrita",
+      "sanskrit": "Panchamrita",
+      "aliases": [
+        "panchamrit"
+      ],
+      "category": "preparation",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: panchamrita; panchamrit."
+    },
+    {
+      "id": "dravya.dal-tadka-mung",
+      "name": "Mung dal tadka",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: mung dal tadka; dal tadka mung."
+    },
+    {
+      "id": "dravya.upma",
+      "name": "Semolina upma",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 3554,
+          "name": "Upma",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.pongal-ven",
+      "name": "Ven pongal",
+      "sanskrit": null,
+      "aliases": [
+        "khara pongal"
+      ],
+      "category": "preparation",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: ven pongal; khara pongal; pongal ven."
+    },
+    {
+      "id": "dravya.pongal-sweet",
+      "name": "Sweet pongal",
+      "sanskrit": null,
+      "aliases": [
+        "sakkarai pongal"
+      ],
+      "category": "preparation",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: sweet pongal; sakkarai pongal; pongal sweet."
+    },
+    {
+      "id": "dravya.idli",
+      "name": "Idli",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 2782,
+          "name": "Idli",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 piece",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.dosa",
+      "name": "Dosa",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 2783,
+          "name": "Dosa, plain",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 piece",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.khichadi-vegetable",
+      "name": "Vegetable khichadi",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: vegetable khichadi; khichadi vegetable."
+    },
+    {
+      "id": "dravya.halwa-carrot",
+      "name": "Carrot halwa",
+      "sanskrit": null,
+      "aliases": [
+        "gajar halwa"
+      ],
+      "category": "preparation",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: carrot halwa; gajar halwa; halwa carrot."
+    },
+    {
+      "id": "dravya.kheer-rice",
+      "name": "Rice kheer",
+      "sanskrit": null,
+      "aliases": [
+        "payasam"
+      ],
+      "category": "preparation",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 239,
+          "name": "Pudding, rice",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.payasam-mung",
+      "name": "Mung payasam",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: mung payasam; payasam mung."
+    },
+    {
+      "id": "dravya.chyawanprash",
+      "name": "Chyawanprash",
+      "sanskrit": "Chyavanaprasha",
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: chyawanprash; chyavanaprasha."
+    },
+    {
+      "id": "dravya.sattu-drink",
+      "name": "Sattu drink",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: sattu drink."
+    },
+    {
+      "id": "dravya.barley-water",
+      "name": "Barley water",
+      "sanskrit": "Yavagu Jala",
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: barley water; yavagu jala."
+    },
+    {
+      "id": "dravya.rice-gruel",
+      "name": "Rice gruel",
+      "sanskrit": "Peya / Manda",
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: rice gruel; peya; manda."
+    },
+    {
+      "id": "dravya.roti",
+      "name": "Roti (chapati)",
+      "sanskrit": "Rotika",
+      "aliases": [
+        "chapati"
+      ],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          0,
+          0,
+          0
+        ],
+        "virya": "neutral"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 piece",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: roti; rotika."
+    }
+  ]
+}
