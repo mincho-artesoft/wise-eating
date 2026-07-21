@@ -1,0 +1,3982 @@
+{
+  "formatVersion": "1.0",
+  "batch": "recipe-batch-r08",
+  "qualityState": "aiDraft",
+  "items": [
+    {
+      "id": "recipe.everyday-carrot-paratha",
+      "name": "Carrot Cumin Paratha",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, finely grated",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Additional cumin seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ajwain",
+          "name": "Ajwain seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 260
+        }
+      ],
+      "steps": [
+        "Combine the whole-wheat flour, ajwain, rock salt, and carrot, finely grated, additional cumin seeds.",
+        "Add the water gradually and knead a soft dough; cover and rest for 15 minutes.",
+        "Divide the dough into equal portions and roll or pat each one evenly.",
+        "Cook on a hot griddle, turning until both faces are set and dotted with brown spots.",
+        "Brush lightly with the ghee and serve while flexible and warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Carrot Cumin Paratha is a freshly griddled bread with a modest amount of finishing fat. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian tiffin flatbread tradition"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-spinach-paratha",
+      "name": "Spinach Coriander Paratha",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, finely chopped",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ajwain",
+          "name": "Ajwain seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 260
+        }
+      ],
+      "steps": [
+        "Combine the whole-wheat flour, ajwain, rock salt, and spinach, finely chopped, coriander seeds.",
+        "Add the water gradually and knead a soft dough; cover and rest for 15 minutes.",
+        "Divide the dough into equal portions and roll or pat each one evenly.",
+        "Cook on a hot griddle, turning until both faces are set and dotted with brown spots.",
+        "Brush lightly with the ghee and serve while flexible and warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Spinach Coriander Paratha is a freshly griddled bread with a modest amount of finishing fat. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian tiffin flatbread tradition"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-beetroot-paratha",
+      "name": "Beetroot Fennel Paratha",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, finely grated",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ajwain",
+          "name": "Ajwain seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 260
+        }
+      ],
+      "steps": [
+        "Combine the whole-wheat flour, ajwain, rock salt, and beetroot, finely grated, fennel seeds.",
+        "Add the water gradually and knead a soft dough; cover and rest for 15 minutes.",
+        "Divide the dough into equal portions and roll or pat each one evenly.",
+        "Cook on a hot griddle, turning until both faces are set and dotted with brown spots.",
+        "Brush lightly with the ghee and serve while flexible and warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Beetroot Fennel Paratha is a freshly griddled bread with a modest amount of finishing fat. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian tiffin flatbread tradition"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-radish-paratha",
+      "name": "Radish Ajwain Paratha",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.radish",
+          "name": "Radish, grated and squeezed",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.ajwain",
+          "name": "Ajwain seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 260
+        }
+      ],
+      "steps": [
+        "Combine the whole-wheat flour, ajwain, rock salt, and radish, grated and squeezed.",
+        "Add the water gradually and knead a soft dough; cover and rest for 15 minutes.",
+        "Divide the dough into equal portions and roll or pat each one evenly.",
+        "Cook on a hot griddle, turning until both faces are set and dotted with brown spots.",
+        "Brush lightly with the ghee and serve while flexible and warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Radish Ajwain Paratha is a freshly griddled bread with a modest amount of finishing fat. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian tiffin flatbread tradition"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-cauliflower-paratha",
+      "name": "Cauliflower Coriander Paratha",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower, finely grated",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ajwain",
+          "name": "Ajwain seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 260
+        }
+      ],
+      "steps": [
+        "Combine the whole-wheat flour, ajwain, rock salt, and cauliflower, finely grated, coriander seeds.",
+        "Add the water gradually and knead a soft dough; cover and rest for 15 minutes.",
+        "Divide the dough into equal portions and roll or pat each one evenly.",
+        "Cook on a hot griddle, turning until both faces are set and dotted with brown spots.",
+        "Brush lightly with the ghee and serve while flexible and warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cauliflower Coriander Paratha is a freshly griddled bread with a modest amount of finishing fat. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian tiffin flatbread tradition"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-sweet-potato-paratha",
+      "name": "Sweet Potato Paratha",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 330
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, cooked and mashed",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ajwain",
+          "name": "Ajwain seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 260
+        }
+      ],
+      "steps": [
+        "Combine the whole-wheat flour, ajwain, rock salt, and sweet potato, cooked and mashed, coriander seeds.",
+        "Add the water gradually and knead a soft dough; cover and rest for 15 minutes.",
+        "Divide the dough into equal portions and roll or pat each one evenly.",
+        "Cook on a hot griddle, turning until both faces are set and dotted with brown spots.",
+        "Brush lightly with the ghee and serve while flexible and warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sweet Potato Paratha is a freshly griddled bread with a modest amount of finishing fat. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian tiffin flatbread tradition"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-green-pea-paratha",
+      "name": "Green Pea Paratha",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 330
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, cooked and mashed",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.ajwain",
+          "name": "Ajwain seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 260
+        }
+      ],
+      "steps": [
+        "Combine the whole-wheat flour, ajwain, rock salt, and green peas, cooked and mashed, fresh cilantro.",
+        "Add the water gradually and knead a soft dough; cover and rest for 15 minutes.",
+        "Divide the dough into equal portions and roll or pat each one evenly.",
+        "Cook on a hot griddle, turning until both faces are set and dotted with brown spots.",
+        "Brush lightly with the ghee and serve while flexible and warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Green Pea Paratha is a freshly griddled bread with a modest amount of finishing fat. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian tiffin flatbread tradition"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-pumpkin-paratha",
+      "name": "Pumpkin Paratha",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 330
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, cooked and mashed",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.ginger-dry",
+          "name": "Dry ginger",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.ajwain",
+          "name": "Ajwain seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 260
+        }
+      ],
+      "steps": [
+        "Combine the whole-wheat flour, ajwain, rock salt, and pumpkin, cooked and mashed, dry ginger.",
+        "Add the water gradually and knead a soft dough; cover and rest for 15 minutes.",
+        "Divide the dough into equal portions and roll or pat each one evenly.",
+        "Cook on a hot griddle, turning until both faces are set and dotted with brown spots.",
+        "Brush lightly with the ghee and serve while flexible and warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pumpkin Paratha is a freshly griddled bread with a modest amount of finishing fat. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian tiffin flatbread tradition"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-sesame-paratha",
+      "name": "Sesame Whole-Wheat Paratha",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 350
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 38
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ajwain",
+          "name": "Ajwain seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 260
+        }
+      ],
+      "steps": [
+        "Combine the whole-wheat flour, ajwain, rock salt, and sesame seeds, coriander seeds.",
+        "Add the water gradually and knead a soft dough; cover and rest for 15 minutes.",
+        "Divide the dough into equal portions and roll or pat each one evenly.",
+        "Cook on a hot griddle, turning until both faces are set and dotted with brown spots.",
+        "Brush lightly with the ghee and serve while flexible and warm."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 1,
+        "kapha": 0
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sesame Whole-Wheat Paratha is a freshly griddled bread with a modest amount of finishing fat. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian tiffin flatbread tradition"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-amaranth-leaf-paratha",
+      "name": "Amaranth Leaf Paratha",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.amaranth-leaves",
+          "name": "Amaranth leaves, finely chopped",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.ajwain",
+          "name": "Ajwain seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 260
+        }
+      ],
+      "steps": [
+        "Combine the whole-wheat flour, ajwain, rock salt, and amaranth leaves, finely chopped.",
+        "Add the water gradually and knead a soft dough; cover and rest for 15 minutes.",
+        "Divide the dough into equal portions and roll or pat each one evenly.",
+        "Cook on a hot griddle, turning until both faces are set and dotted with brown spots.",
+        "Brush lightly with the ghee and serve while flexible and warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Amaranth Leaf Paratha is a freshly griddled bread with a modest amount of finishing fat. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian tiffin flatbread tradition"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-dill-paratha",
+      "name": "Dill Seeded Paratha",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 350
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill, chopped",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.ajwain",
+          "name": "Ajwain seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 260
+        }
+      ],
+      "steps": [
+        "Combine the whole-wheat flour, ajwain, rock salt, and fresh dill, chopped, sesame seeds.",
+        "Add the water gradually and knead a soft dough; cover and rest for 15 minutes.",
+        "Divide the dough into equal portions and roll or pat each one evenly.",
+        "Cook on a hot griddle, turning until both faces are set and dotted with brown spots.",
+        "Brush lightly with the ghee and serve while flexible and warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Dill Seeded Paratha is a freshly griddled bread with a modest amount of finishing fat. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian tiffin flatbread tradition"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-zucchini-paratha",
+      "name": "Zucchini Paratha",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, grated and squeezed",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ajwain",
+          "name": "Ajwain seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 190
+        }
+      ],
+      "steps": [
+        "Combine the whole-wheat flour, ajwain, rock salt, and zucchini, grated and squeezed, coriander seeds.",
+        "Add the water gradually and knead a soft dough; cover and rest for 15 minutes.",
+        "Divide the dough into equal portions and roll or pat each one evenly.",
+        "Cook on a hot griddle, turning until both faces are set and dotted with brown spots.",
+        "Brush lightly with the ghee and serve while flexible and warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Zucchini Paratha is a freshly griddled bread with a modest amount of finishing fat. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian tiffin flatbread tradition"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-besan-wheat-flatbread",
+      "name": "Besan Wheat Breakfast Roti",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.besan",
+          "name": "Chickpea flour",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.ajwain",
+          "name": "Ajwain seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 260
+        }
+      ],
+      "steps": [
+        "Combine the chickpea flour, ajwain, rock salt, and whole-wheat flour, fresh cilantro.",
+        "Add the water gradually and knead a soft dough; cover and rest for 15 minutes.",
+        "Divide the dough into equal portions and roll or pat each one evenly.",
+        "Cook on a hot griddle, turning until both faces are set and dotted with brown spots.",
+        "Brush lightly with the ghee and serve while flexible and warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Besan Wheat Breakfast Roti is a freshly griddled bread with a modest amount of finishing fat. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian tiffin flatbread tradition"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-jowar-methi-flatbread",
+      "name": "Jowar Methi Flatbread",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.jowar",
+          "name": "Sorghum flour",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.methi-leaves",
+          "name": "Fresh fenugreek leaves",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.ajwain",
+          "name": "Ajwain seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 300
+        }
+      ],
+      "steps": [
+        "Combine the sorghum flour, ajwain, rock salt, and whole-wheat flour, fresh fenugreek leaves.",
+        "Add the water gradually and knead a soft dough; cover and rest for 15 minutes.",
+        "Divide the dough into equal portions and roll or pat each one evenly.",
+        "Cook on a hot griddle, turning until both faces are set and dotted with brown spots.",
+        "Brush lightly with the ghee and serve while flexible and warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Jowar Methi Flatbread is a freshly griddled bread with a modest amount of finishing fat. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian tiffin flatbread tradition"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-bajra-cumin-flatbread",
+      "name": "Bajra Cumin Flatbread",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.bajra",
+          "name": "Pearl millet flour",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Additional cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ajwain",
+          "name": "Ajwain seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 20
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 310
+        }
+      ],
+      "steps": [
+        "Combine the pearl millet flour, ajwain, rock salt, and additional cumin seeds.",
+        "Add the water gradually and knead a soft dough; cover and rest for 15 minutes.",
+        "Divide the dough into equal portions and roll or pat each one evenly.",
+        "Cook on a hot griddle, turning until both faces are set and dotted with brown spots.",
+        "Brush lightly with the ghee and serve while flexible and warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Bajra Cumin Flatbread is a freshly griddled bread with a modest amount of finishing fat. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian tiffin flatbread tradition"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-besan-carrot-chilla",
+      "name": "Besan Carrot Chilla",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.besan",
+          "name": "Chickpea flour",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, finely grated",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 430
+        }
+      ],
+      "steps": [
+        "Prepare the chickpea flour as a smooth batter, soaking and grinding it first when the ingredient is whole.",
+        "Fold in the cumin, ginger, rock salt, and carrot, finely grated, fresh cilantro; rest for 15 minutes.",
+        "Heat a heavy griddle and spread a thin film of ghee.",
+        "Pour and spread each cake; cook until the top loses its wet sheen, then turn and finish the second side.",
+        "Serve immediately while the center remains tender."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Besan Carrot Chilla is a warm griddle breakfast made from a rested grain or pulse batter. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian chilla and dosa cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-mung-beet-chilla",
+      "name": "Mung Beetroot Chilla",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 35,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, finely grated",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 430
+        }
+      ],
+      "steps": [
+        "Prepare the split mung dal as a smooth batter, soaking and grinding it first when the ingredient is whole.",
+        "Fold in the cumin, ginger, rock salt, and beetroot, finely grated; rest for 15 minutes.",
+        "Heat a heavy griddle and spread a thin film of ghee.",
+        "Pour and spread each cake; cook until the top loses its wet sheen, then turn and finish the second side.",
+        "Serve immediately while the center remains tender."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mung Beetroot Chilla is a warm griddle breakfast made from a rested grain or pulse batter. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian chilla and dosa cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-masoor-spinach-chilla",
+      "name": "Masoor Spinach Chilla",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 35,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, finely chopped",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 430
+        }
+      ],
+      "steps": [
+        "Prepare the red lentils as a smooth batter, soaking and grinding it first when the ingredient is whole.",
+        "Fold in the cumin, ginger, rock salt, and spinach, finely chopped; rest for 15 minutes.",
+        "Heat a heavy griddle and spread a thin film of ghee.",
+        "Pour and spread each cake; cook until the top loses its wet sheen, then turn and finish the second side.",
+        "Serve immediately while the center remains tender."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Masoor Spinach Chilla is a warm griddle breakfast made from a rested grain or pulse batter. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian chilla and dosa cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-oat-zucchini-chilla",
+      "name": "Oat Zucchini Chilla",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Oat flour",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, grated and squeezed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 430
+        }
+      ],
+      "steps": [
+        "Prepare the oat flour as a smooth batter, soaking and grinding it first when the ingredient is whole.",
+        "Fold in the cumin, ginger, rock salt, and zucchini, grated and squeezed, fresh cilantro; rest for 15 minutes.",
+        "Heat a heavy griddle and spread a thin film of ghee.",
+        "Pour and spread each cake; cook until the top loses its wet sheen, then turn and finish the second side.",
+        "Serve immediately while the center remains tender."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Oat Zucchini Chilla is a warm griddle breakfast made from a rested grain or pulse batter. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian chilla and dosa cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-ragi-carrot-dosa",
+      "name": "Ragi Carrot Dosa",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.ragi",
+          "name": "Finger millet flour",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, finely grated",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 520
+        }
+      ],
+      "steps": [
+        "Prepare the finger millet flour as a smooth batter, soaking and grinding it first when the ingredient is whole.",
+        "Fold in the cumin, ginger, rock salt, and carrot, finely grated, curry leaves; rest for 15 minutes.",
+        "Heat a heavy griddle and spread a thin film of ghee.",
+        "Pour and spread each cake; cook until the top loses its wet sheen, then turn and finish the second side.",
+        "Serve immediately while the center remains tender."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ragi Carrot Dosa is a warm griddle breakfast made from a rested grain or pulse batter. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian chilla and dosa cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-jowar-spinach-dosa",
+      "name": "Jowar Spinach Dosa",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.jowar",
+          "name": "Sorghum flour",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, finely chopped",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 520
+        }
+      ],
+      "steps": [
+        "Prepare the sorghum flour as a smooth batter, soaking and grinding it first when the ingredient is whole.",
+        "Fold in the cumin, ginger, rock salt, and spinach, finely chopped; rest for 15 minutes.",
+        "Heat a heavy griddle and spread a thin film of ghee.",
+        "Pour and spread each cake; cook until the top loses its wet sheen, then turn and finish the second side.",
+        "Serve immediately while the center remains tender."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Jowar Spinach Dosa is a warm griddle breakfast made from a rested grain or pulse batter. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian chilla and dosa cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-rice-lentil-dosa",
+      "name": "Rice Lentil Tiffin Dosa",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 40,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, soaked",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.urad",
+          "name": "Urad dal, soaked",
+          "grams": 75
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 430
+        }
+      ],
+      "steps": [
+        "Prepare the white rice, soaked as a smooth batter, soaking and grinding it first when the ingredient is whole.",
+        "Fold in the cumin, ginger, rock salt, and urad dal, soaked, curry leaves; rest for 45 minutes after grinding.",
+        "Heat a heavy griddle and spread a thin film of ghee.",
+        "Pour and spread each cake; cook until the top loses its wet sheen, then turn and finish the second side.",
+        "Serve immediately while the center remains tender."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Rice Lentil Tiffin Dosa is a warm griddle breakfast made from a rested grain or pulse batter. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian chilla and dosa cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-quinoa-cilantro-pancake",
+      "name": "Quinoa Cilantro Pancake",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa flour",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 430
+        }
+      ],
+      "steps": [
+        "Prepare the quinoa flour as a smooth batter, soaking and grinding it first when the ingredient is whole.",
+        "Fold in the cumin, ginger, rock salt, and fresh cilantro, coriander seeds; rest for 15 minutes.",
+        "Heat a heavy griddle and spread a thin film of ghee.",
+        "Pour and spread each cake; cook until the top loses its wet sheen, then turn and finish the second side.",
+        "Serve immediately while the center remains tender."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Quinoa Cilantro Pancake is a warm griddle breakfast made from a rested grain or pulse batter. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian chilla and dosa cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-amaranth-fennel-pancake",
+      "name": "Amaranth Fennel Pancake",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth flour",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 15
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 430
+        }
+      ],
+      "steps": [
+        "Prepare the amaranth flour as a smooth batter, soaking and grinding it first when the ingredient is whole.",
+        "Fold in the cumin, ginger, rock salt, and fennel seeds, fresh cilantro; rest for 15 minutes.",
+        "Heat a heavy griddle and spread a thin film of ghee.",
+        "Pour and spread each cake; cook until the top loses its wet sheen, then turn and finish the second side.",
+        "Serve immediately while the center remains tender."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Amaranth Fennel Pancake is a warm griddle breakfast made from a rested grain or pulse batter. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian chilla and dosa cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-buckwheat-potato-pancake",
+      "name": "Buckwheat Potato Pancake",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Buckwheat flour",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potato, cooked and mashed",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 15
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 350
+        }
+      ],
+      "steps": [
+        "Prepare the buckwheat flour as a smooth batter, soaking and grinding it first when the ingredient is whole.",
+        "Fold in the cumin, ginger, rock salt, and potato, cooked and mashed, fresh cilantro; rest for 15 minutes.",
+        "Heat a heavy griddle and spread a thin film of ghee.",
+        "Pour and spread each cake; cook until the top loses its wet sheen, then turn and finish the second side.",
+        "Serve immediately while the center remains tender."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Buckwheat Potato Pancake is a warm griddle breakfast made from a rested grain or pulse batter. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian chilla and dosa cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-barley-cumin-pancake",
+      "name": "Barley Cumin Pancake",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Barley flour",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 450
+        }
+      ],
+      "steps": [
+        "Prepare the barley flour as a smooth batter, soaking and grinding it first when the ingredient is whole.",
+        "Fold in the cumin, ginger, rock salt, and coriander seeds; rest for 15 minutes.",
+        "Heat a heavy griddle and spread a thin film of ghee.",
+        "Pour and spread each cake; cook until the top loses its wet sheen, then turn and finish the second side.",
+        "Serve immediately while the center remains tender."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Barley Cumin Pancake is a warm griddle breakfast made from a rested grain or pulse batter. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian chilla and dosa cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-corn-cilantro-pancake",
+      "name": "Corn Cilantro Pancake",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.corn",
+          "name": "Fine cornmeal",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, lightly mashed",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 480
+        }
+      ],
+      "steps": [
+        "Prepare the fine cornmeal as a smooth batter, soaking and grinding it first when the ingredient is whole.",
+        "Fold in the cumin, ginger, rock salt, and fresh cilantro, green peas, lightly mashed; rest for 15 minutes.",
+        "Heat a heavy griddle and spread a thin film of ghee.",
+        "Pour and spread each cake; cook until the top loses its wet sheen, then turn and finish the second side.",
+        "Serve immediately while the center remains tender."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Corn Cilantro Pancake is a warm griddle breakfast made from a rested grain or pulse batter. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian chilla and dosa cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-pea-besan-chilla",
+      "name": "Green Pea Besan Chilla",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.besan",
+          "name": "Chickpea flour",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, cooked and mashed",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 430
+        }
+      ],
+      "steps": [
+        "Prepare the chickpea flour as a smooth batter, soaking and grinding it first when the ingredient is whole.",
+        "Fold in the cumin, ginger, rock salt, and green peas, cooked and mashed, fresh cilantro; rest for 15 minutes.",
+        "Heat a heavy griddle and spread a thin film of ghee.",
+        "Pour and spread each cake; cook until the top loses its wet sheen, then turn and finish the second side.",
+        "Serve immediately while the center remains tender."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Green Pea Besan Chilla is a warm griddle breakfast made from a rested grain or pulse batter. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian chilla and dosa cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-tofu-rice-pancake",
+      "name": "Tofu Rice Breakfast Pancake",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "Rice flour",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, crumbled",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 400
+        }
+      ],
+      "steps": [
+        "Prepare the rice flour as a smooth batter, soaking and grinding it first when the ingredient is whole.",
+        "Fold in the cumin, ginger, rock salt, and firm tofu, crumbled, fresh cilantro; rest for 15 minutes.",
+        "Heat a heavy griddle and spread a thin film of ghee.",
+        "Pour and spread each cake; cook until the top loses its wet sheen, then turn and finish the second side.",
+        "Serve immediately while the center remains tender."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tofu Rice Breakfast Pancake is a warm griddle breakfast made from a rested grain or pulse batter. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian chilla and dosa cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-pumpkin-semolina-pancake",
+      "name": "Pumpkin Semolina Pancake",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.semolina",
+          "name": "Semolina",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, cooked and mashed",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 390
+        }
+      ],
+      "steps": [
+        "Prepare the semolina as a smooth batter, soaking and grinding it first when the ingredient is whole.",
+        "Fold in the cumin, ginger, rock salt, and pumpkin, cooked and mashed, fennel seeds; rest for 15 minutes.",
+        "Heat a heavy griddle and spread a thin film of ghee.",
+        "Pour and spread each cake; cook until the top loses its wet sheen, then turn and finish the second side.",
+        "Serve immediately while the center remains tender."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pumpkin Semolina Pancake is a warm griddle breakfast made from a rested grain or pulse batter. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian chilla and dosa cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-carrot-uttapam",
+      "name": "Carrot Cilantro Uttapam",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, soaked",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.urad",
+          "name": "Urad dal, soaked",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, finely grated",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 380
+        }
+      ],
+      "steps": [
+        "Grind the soaked rice and urad dal with enough water to make a thick, smooth batter.",
+        "Fold in the cumin and rock salt; rest the batter for 45 minutes.",
+        "Heat a griddle, brush it with ghee, and spread a small ladle of batter into a thick round.",
+        "Scatter the carrot, finely grated and fresh cilantro over the wet surface and press them in lightly.",
+        "Cook both sides over medium-low heat until set and golden, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Carrot Cilantro Uttapam is kept thick, softly cooked, and topped with finely cut vegetables. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary South Indian uttapam cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-spinach-uttapam",
+      "name": "Spinach Uttapam",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, soaked",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.urad",
+          "name": "Urad dal, soaked",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, finely chopped",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 380
+        }
+      ],
+      "steps": [
+        "Grind the soaked rice and urad dal with enough water to make a thick, smooth batter.",
+        "Fold in the cumin and rock salt; rest the batter for 45 minutes.",
+        "Heat a griddle, brush it with ghee, and spread a small ladle of batter into a thick round.",
+        "Scatter the spinach, finely chopped and coriander seeds over the wet surface and press them in lightly.",
+        "Cook both sides over medium-low heat until set and golden, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Spinach Uttapam is kept thick, softly cooked, and topped with finely cut vegetables. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary South Indian uttapam cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-beetroot-uttapam",
+      "name": "Beetroot Fennel Uttapam",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, soaked",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.urad",
+          "name": "Urad dal, soaked",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, finely grated",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 380
+        }
+      ],
+      "steps": [
+        "Grind the soaked rice and urad dal with enough water to make a thick, smooth batter.",
+        "Fold in the cumin and rock salt; rest the batter for 45 minutes.",
+        "Heat a griddle, brush it with ghee, and spread a small ladle of batter into a thick round.",
+        "Scatter the beetroot, finely grated and fennel seeds over the wet surface and press them in lightly.",
+        "Cook both sides over medium-low heat until set and golden, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Beetroot Fennel Uttapam is kept thick, softly cooked, and topped with finely cut vegetables. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary South Indian uttapam cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-zucchini-uttapam",
+      "name": "Zucchini Dill Uttapam",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, soaked",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.urad",
+          "name": "Urad dal, soaked",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, finely grated",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 380
+        }
+      ],
+      "steps": [
+        "Grind the soaked rice and urad dal with enough water to make a thick, smooth batter.",
+        "Fold in the cumin and rock salt; rest the batter for 45 minutes.",
+        "Heat a griddle, brush it with ghee, and spread a small ladle of batter into a thick round.",
+        "Scatter the zucchini, finely grated and fresh dill over the wet surface and press them in lightly.",
+        "Cook both sides over medium-low heat until set and golden, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Zucchini Dill Uttapam is kept thick, softly cooked, and topped with finely cut vegetables. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary South Indian uttapam cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-cabbage-uttapam",
+      "name": "Cabbage Cumin Uttapam",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, soaked",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.urad",
+          "name": "Urad dal, soaked",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, finely shredded",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Additional cumin seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 380
+        }
+      ],
+      "steps": [
+        "Grind the soaked rice and urad dal with enough water to make a thick, smooth batter.",
+        "Fold in the cumin and rock salt; rest the batter for 45 minutes.",
+        "Heat a griddle, brush it with ghee, and spread a small ladle of batter into a thick round.",
+        "Scatter the cabbage, finely shredded and additional cumin seeds over the wet surface and press them in lightly.",
+        "Cook both sides over medium-low heat until set and golden, then serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cabbage Cumin Uttapam is kept thick, softly cooked, and topped with finely cut vegetables. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary South Indian uttapam cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-green-pea-uttapam",
+      "name": "Green Pea Uttapam",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, soaked",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.urad",
+          "name": "Urad dal, soaked",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, lightly crushed",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 380
+        }
+      ],
+      "steps": [
+        "Grind the soaked rice and urad dal with enough water to make a thick, smooth batter.",
+        "Fold in the cumin and rock salt; rest the batter for 45 minutes.",
+        "Heat a griddle, brush it with ghee, and spread a small ladle of batter into a thick round.",
+        "Scatter the green peas, lightly crushed and fresh cilantro over the wet surface and press them in lightly.",
+        "Cook both sides over medium-low heat until set and golden, then serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Green Pea Uttapam is kept thick, softly cooked, and topped with finely cut vegetables. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary South Indian uttapam cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-mushroom-uttapam",
+      "name": "Mushroom Coriander Uttapam",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, soaked",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.urad",
+          "name": "Urad dal, soaked",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.white-mushroom",
+          "name": "White mushrooms, finely chopped",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 380
+        }
+      ],
+      "steps": [
+        "Grind the soaked rice and urad dal with enough water to make a thick, smooth batter.",
+        "Fold in the cumin and rock salt; rest the batter for 45 minutes.",
+        "Heat a griddle, brush it with ghee, and spread a small ladle of batter into a thick round.",
+        "Scatter the white mushrooms, finely chopped and coriander seeds over the wet surface and press them in lightly.",
+        "Cook both sides over medium-low heat until set and golden, then serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mushroom Coriander Uttapam is kept thick, softly cooked, and topped with finely cut vegetables. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary South Indian uttapam cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-sweet-corn-uttapam",
+      "name": "Sweet Corn Uttapam",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, soaked",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.urad",
+          "name": "Urad dal, soaked",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.corn",
+          "name": "Sweet corn kernels",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 380
+        }
+      ],
+      "steps": [
+        "Grind the soaked rice and urad dal with enough water to make a thick, smooth batter.",
+        "Fold in the cumin and rock salt; rest the batter for 45 minutes.",
+        "Heat a griddle, brush it with ghee, and spread a small ladle of batter into a thick round.",
+        "Scatter the sweet corn kernels and fresh cilantro over the wet surface and press them in lightly.",
+        "Cook both sides over medium-low heat until set and golden, then serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sweet Corn Uttapam is kept thick, softly cooked, and topped with finely cut vegetables. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary South Indian uttapam cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-tomato-onion-uttapam",
+      "name": "Tomato Onion Uttapam",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, soaked",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.urad",
+          "name": "Urad dal, soaked",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomato, seeded and finely chopped",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.onion",
+          "name": "Onion, finely chopped",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 380
+        }
+      ],
+      "steps": [
+        "Grind the soaked rice and urad dal with enough water to make a thick, smooth batter.",
+        "Fold in the cumin and rock salt; rest the batter for 45 minutes.",
+        "Heat a griddle, brush it with ghee, and spread a small ladle of batter into a thick round.",
+        "Scatter the tomato, seeded and finely chopped and onion, finely chopped over the wet surface and press them in lightly.",
+        "Cook both sides over medium-low heat until set and golden, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tomato Onion Uttapam is kept thick, softly cooked, and topped with finely cut vegetables. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary South Indian uttapam cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-paneer-tomato-uttapam",
+      "name": "Paneer Tomato Uttapam",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 25,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, soaked",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.urad",
+          "name": "Urad dal, soaked",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.paneer",
+          "name": "Paneer, finely crumbled",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomato, seeded and finely chopped",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 380
+        }
+      ],
+      "steps": [
+        "Grind the soaked rice and urad dal with enough water to make a thick, smooth batter.",
+        "Fold in the cumin and rock salt; rest the batter for 45 minutes.",
+        "Heat a griddle, brush it with ghee, and spread a small ladle of batter into a thick round.",
+        "Scatter the paneer, finely crumbled and tomato, seeded and finely chopped over the wet surface and press them in lightly.",
+        "Cook both sides over medium-low heat until set and golden, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [
+        "cheese combined with tomato (traditional viruddha)"
+      ],
+      "guidance": "This modern paneer-tomato uttapam is flagged for its cheese-and-tomato topping. Vata: serve warm with a little ghee. Pitta: reduce tomato and ginger. Kapha: use less paneer and a smaller cake. Compliant variant: replace paneer with crumbled firm tofu.",
+      "provenance": [
+        "contemporary South Indian uttapam cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-semolina-pea-upma",
+      "name": "Semolina Pea Upma",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.semolina",
+          "name": "Semolina",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the semolina as appropriate for the grain.",
+        "Warm the ghee and bloom the cumin and ginger.",
+        "Add the grain and green peas, curry leaves; stir for one minute.",
+        "Pour in the water and cook at a steady simmer until tender and cohesive.",
+        "Season with rock salt, rest covered briefly, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Semolina Pea Upma is a freshly cooked warm breakfast rather than a chilled cereal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary warm-breakfast cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-millet-carrot-pongal",
+      "name": "Millet Carrot Pongal",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 110
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced small",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 980
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the proso millet as appropriate for the grain.",
+        "Warm the ghee and bloom the cumin and ginger.",
+        "Add the grain and split mung dal, carrot, diced small, black pepper; stir for one minute.",
+        "Pour in the water and cook at a steady simmer until tender and cohesive.",
+        "Season with rock salt, rest covered briefly, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Millet Carrot Pongal is a freshly cooked warm breakfast rather than a chilled cereal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary warm-breakfast cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-savory-oat-tiffin",
+      "name": "Savory Oat Tiffin Bowl",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced small",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 720
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the rolled oats as appropriate for the grain.",
+        "Warm the ghee and bloom the cumin and ginger.",
+        "Add the grain and carrot, diced small, spinach, chopped; stir for one minute.",
+        "Pour in the water and cook at a steady simmer until tender and cohesive.",
+        "Season with rock salt, rest covered briefly, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Savory Oat Tiffin Bowl is a freshly cooked warm breakfast rather than a chilled cereal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary warm-breakfast cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-savory-barley-tiffin",
+      "name": "Savory Barley Tiffin Bowl",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Cracked barley",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 110
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 900
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the cracked barley as appropriate for the grain.",
+        "Warm the ghee and bloom the cumin and ginger.",
+        "Add the grain and carrot, diced, green peas; stir for one minute.",
+        "Pour in the water and cook at a steady simmer until tender and cohesive.",
+        "Season with rock salt, rest covered briefly, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Savory Barley Tiffin Bowl is a freshly cooked warm breakfast rather than a chilled cereal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary warm-breakfast cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-ragi-cardamom-breakfast",
+      "name": "Ragi Cardamom Breakfast Bowl",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.ragi",
+          "name": "Finger millet flour",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 24
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the finger millet flour as appropriate for the grain.",
+        "Warm the ghee and bloom the cardamom.",
+        "Add the grain and almonds, chopped; stir for one minute.",
+        "Pour in the water and cook at a steady simmer until tender and cohesive.",
+        "Season with rock sugar, rest covered briefly, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ragi Cardamom Breakfast Bowl is a freshly cooked warm breakfast rather than a chilled cereal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary warm-breakfast cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-amaranth-fennel-breakfast",
+      "name": "Amaranth Fennel Breakfast Bowl",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.raisins",
+          "name": "Raisins",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 24
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the amaranth grain as appropriate for the grain.",
+        "Warm the ghee and bloom the cardamom.",
+        "Add the grain and fennel seeds, raisins; stir for one minute.",
+        "Pour in the water and cook at a steady simmer until tender and cohesive.",
+        "Season with rock sugar, rest covered briefly, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Amaranth Fennel Breakfast Bowl is a freshly cooked warm breakfast rather than a chilled cereal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary warm-breakfast cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-brown-rice-breakfast-pot",
+      "name": "Brown Rice Breakfast Pot",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced small",
+          "grams": 110
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the brown rice as appropriate for the grain.",
+        "Warm the ghee and bloom the cumin and ginger.",
+        "Add the grain and carrot, diced small, green peas; stir for one minute.",
+        "Pour in the water and cook at a steady simmer until tender and cohesive.",
+        "Season with rock salt, rest covered briefly, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Brown Rice Breakfast Pot is a freshly cooked warm breakfast rather than a chilled cereal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary warm-breakfast cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-quinoa-vegetable-tiffin",
+      "name": "Quinoa Vegetable Tiffin",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, diced small",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced small",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 720
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the quinoa as appropriate for the grain.",
+        "Warm the ghee and bloom the cumin and ginger.",
+        "Add the grain and zucchini, diced small, carrot, diced small; stir for one minute.",
+        "Pour in the water and cook at a steady simmer until tender and cohesive.",
+        "Season with rock salt, rest covered briefly, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Quinoa Vegetable Tiffin is a freshly cooked warm breakfast rather than a chilled cereal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary warm-breakfast cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-coconut-rice-sevai",
+      "name": "Coconut Rice Sevai",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 14,
+      "ingredients": [
+        {
+          "fdcId": 7163,
+          "name": "Dry rice noodles (sevai)",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 900
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the dry rice noodles (sevai) as appropriate for the grain.",
+        "Warm the ghee and bloom the cumin and ginger.",
+        "Add the grain and fresh coconut, grated, curry leaves, mustard seeds; stir for one minute.",
+        "Pour in the water and cook at a steady simmer until tender and cohesive.",
+        "Season with rock salt, rest covered briefly, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Coconut Rice Sevai is a freshly cooked warm breakfast rather than a chilled cereal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary warm-breakfast cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.everyday-barley-mung-pongal",
+      "name": "Barley Mung Breakfast Pongal",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.cashew",
+          "name": "Cashews",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Rinse or dry-toast the pearled barley as appropriate for the grain.",
+        "Warm the ghee and bloom the cumin and ginger.",
+        "Add the grain and split mung dal, black pepper, cashews; stir for one minute.",
+        "Pour in the water and cook at a steady simmer until tender and cohesive.",
+        "Season with rock salt, rest covered briefly, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Barley Mung Breakfast Pongal is a freshly cooked warm breakfast rather than a chilled cereal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary warm-breakfast cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    }
+  ]
+}
