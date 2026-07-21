@@ -24,7 +24,19 @@ Target: 750 full-facet dravyas. **Done: 210 (batches 01–09), all validated + c
 | 08 | Dairy, oils, sweeteners, plant milks (takra, mustard oil, mishri…) | 25 |
 | 09 | Beverages & fermented (teas, coffee, coconut water, miso…) | 12 |
 
-## Remaining (540 items, batches 10–~30)
+## NEW: predrafts ready (D10 approved)
+
+`dravyas/predraft/predraft-10..30.json` — 524 items with verified identity,
+category, USDA bindings and servings (Codex-produced, director-verified).
+Facet authoring now works from these: for each predraft item, author the
+Ayurvedic fields (rasa, virya, vipaka, gunas, prabhava, dosha, agniEffect,
+digestibility, seasons, timeOfDay, combinations, viruddha, contraindications,
+preparation, provenance, confidence), drop `canonHints`/`_facetsPending`/
+`usdaNote`, and emit into a real `dravyas/batch-NN.json` (validator must pass).
+Use canonHints.vpk/virya as starting points but correct them where classical
+sources say otherwise.
+
+## Remaining (524 items, batches 10–~30)
 
 Work from the canon worklist in `canon/` (631 stubs, minus ~140 already covered
 above) plus `canon/DRAVYA-CANON-LIST-V1.md` (125 more names). Suggested order:
