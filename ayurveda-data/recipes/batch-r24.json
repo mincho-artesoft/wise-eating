@@ -1,0 +1,3577 @@
+{
+  "formatVersion": "1.0",
+  "batch": "recipe-batch-r24",
+  "qualityState": "aiDraft",
+  "items": [
+    {
+      "id": "recipe.vasanta-barley-mung-cabbage",
+      "name": "Vasanta Barley Mung Cabbage Pot",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley, soaked and drained",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, thinly shredded",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.mustard-oil",
+          "name": "Mustard oil, for the pot",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Simmer the soaked barley and split mung until their centers soften.",
+        "Add the cabbage and ginger, leaving the lid ajar while the ribbons become tender.",
+        "Season with pepper and a light mustard-oil finish so the spring meal stays lean."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vasanta Barley Mung Cabbage Pot is composed for vasanta with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vasanta-quinoa-kale-masoor",
+      "name": "Vasanta Quinoa Kale Masoor Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 205
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 175
+        },
+        {
+          "dravyaId": "dravya.kale",
+          "name": "Kale leaves, stemmed and chopped",
+          "grams": 310
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the red lentils until half tender before adding the rinsed quinoa.",
+        "Fold in the chopped kale and coriander as the grains open.",
+        "Season the green bowl and add a measured thread of olive oil off the heat."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vasanta Quinoa Kale Masoor Bowl is composed for vasanta with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vasanta-jowar-broccoli-mung",
+      "name": "Vasanta Jowar Broccoli Mung Meal",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.jowar",
+          "name": "Sorghum grains, soaked and drained",
+          "grams": 195
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.broccoli",
+          "name": "Broccoli, separated into small florets",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the sorghum and split mung until nearly tender.",
+        "Steam the broccoli over the grains with grated ginger beneath the lid.",
+        "Fold in cumin warmed with a little ghee, season, and serve promptly."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vasanta Jowar Broccoli Mung Meal is composed for vasanta with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vasanta-brown-rice-mustard-greens",
+      "name": "Vasanta Mustard Greens Brown Rice",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice, rinsed and soaked",
+          "grams": 195
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.mustard-greens",
+          "name": "Mustard greens, washed and chopped",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.mustard-oil",
+          "name": "Mustard oil, for the pot",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Simmer the soaked rice and split mung until soft but not waterlogged.",
+        "Press the mustard greens into the pot and cook away their raw edge.",
+        "Finish with cumin, pepper, salt, and a restrained spoon of mustard oil."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vasanta Mustard Greens Brown Rice is composed for vasanta with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vasanta-millet-radish-dal",
+      "name": "Vasanta Millet Radish Dal",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet, rinsed and soaked",
+          "grams": 205
+        },
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Pigeon pea, rinsed and drained",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.radish",
+          "name": "Radishes, cut into small cubes",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the pigeon pea until partly tender before adding the soaked millet.",
+        "Add the radish and ginger and simmer until the roots turn mild.",
+        "Stir in coriander, salt, and only a small amount of ghee."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vasanta Millet Radish Dal is composed for vasanta with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vasanta-barley-asparagus-pea",
+      "name": "Vasanta Barley Asparagus Pea Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley, soaked and drained",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, thawed",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.asparagus",
+          "name": "Asparagus, trimmed and cut into short pieces",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the soaked barley until the grains are almost plump and tender.",
+        "Add the asparagus and peas for a short final steaming.",
+        "Season with cracked pepper and olive oil while the vegetables remain vivid."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vasanta Barley Asparagus Pea Bowl is composed for vasanta with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vasanta-bajra-turnip-mung",
+      "name": "Vasanta Bajra Turnip Mung Stew",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.bajra",
+          "name": "Pearl millet, soaked and drained",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.turnip",
+          "name": "Turnips, peeled and cut into small cubes",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.mustard-oil",
+          "name": "Mustard oil, for the pot",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Simmer the pearl millet and split mung until their textures begin to merge.",
+        "Add the turnip cubes and ginger and cook until the roots yield.",
+        "Bloom cumin in mustard oil, stir it through the stew, and season."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vasanta Bajra Turnip Mung Stew is composed for vasanta with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vasanta-oat-spinach-masoor",
+      "name": "Vasanta Oat Spinach Masoor Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats, sorted and rinsed",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach leaves, washed and chopped",
+          "grams": 330
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 13
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the red lentils until they start to dissolve into the broth.",
+        "Stir in the rolled oats, spinach, and ginger and simmer until cohesive.",
+        "Season with pepper and a light olive-oil finish before serving."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vasanta Oat Spinach Masoor Bowl is composed for vasanta with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vasanta-quinoa-cauliflower-mung",
+      "name": "Vasanta Quinoa Cauliflower Mung",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 205
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower, separated into small florets",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Simmer the split mung until halfway soft and stir in the quinoa.",
+        "Add the cauliflower and coriander once the grains begin to open.",
+        "Season with a modest amount of ghee and keep the florets intact."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Vasanta Quinoa Cauliflower Mung is composed for vasanta with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.grishma-rice-cucumber-mung",
+      "name": "Grishma Cooked Cucumber Rice Mung",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, peeled and cut into chunks",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the rice and split mung until partly tender.",
+        "Add the cucumber chunks and coriander and simmer until translucent.",
+        "Season the mild summer meal and fold in ghee after lowering the heat."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Grishma Cooked Cucumber Rice Mung is composed for grishma with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.grishma-quinoa-zucchini-tofu",
+      "name": "Grishma Quinoa Zucchini Tofu Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, drained and cut into cubes",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, cut into small cubes",
+          "grams": 310
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 15
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the quinoa until its rings begin to open.",
+        "Steam the zucchini and tofu over the grains with crushed fennel.",
+        "Fold in olive oil and salt and serve the bowl warm rather than chilled."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Grishma Quinoa Zucchini Tofu Bowl is composed for grishma with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.grishma-rice-chayote-pea",
+      "name": "Grishma Chayote Pea Rice",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, thawed",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.chayote",
+          "name": "Chayote, peeled and finely diced",
+          "grams": 310
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Soften the chayote dice with crushed fennel in a covered pot.",
+        "Add the rice and hot water, then scatter in the peas near tenderness.",
+        "Season, fold in ghee, and rest the pale summer rice before serving."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Grishma Chayote Pea Rice is composed for grishma with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.grishma-barley-fennel-mung",
+      "name": "Grishma Barley Fennel Mung Stew",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley, soaked and drained",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, finely diced",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 15
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Simmer the barley and split mung until the grains become tender.",
+        "Add the diced fennel bulb and coriander and cook until sweet and soft.",
+        "Season the brothy stew and finish with olive oil away from the flame."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Grishma Barley Fennel Mung Stew is composed for grishma with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.grishma-millet-bottle-gourd",
+      "name": "Grishma Millet Bottle Gourd Pot",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet, rinsed and soaked",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.bottle-gourd",
+          "name": "Bottle gourd, peeled and finely diced",
+          "grams": 330
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the split mung until half tender, then add the soaked millet.",
+        "Stir in the bottle-gourd dice and fennel and simmer until soft.",
+        "Season the moist summer pot and melt ghee through it before serving."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Grishma Millet Bottle Gourd Pot is composed for grishma with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.grishma-rice-asparagus-mung",
+      "name": "Grishma Asparagus Mung Rice",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.asparagus",
+          "name": "Asparagus, trimmed and cut into short pieces",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Simmer the rice and mung until the grains are nearly soft.",
+        "Add the asparagus and coriander and cover only until the stems yield.",
+        "Season the meal and fold in ghee without dulling the green pieces."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Grishma Asparagus Mung Rice is composed for grishma with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.grishma-quinoa-cucumber-pea",
+      "name": "Grishma Quinoa Cooked Cucumber Pea",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, thawed",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, peeled and cut into chunks",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 15
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the quinoa with crushed fennel until the grains open.",
+        "Add the cucumber chunks and peas and steam them until fully cooked.",
+        "Season the complete summer bowl and finish lightly with olive oil."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Grishma Quinoa Cooked Cucumber Pea is composed for grishma with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.grishma-rice-zucchini-masoor",
+      "name": "Grishma Zucchini Masoor Rice",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 205
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, cut into small cubes",
+          "grams": 310
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the rice and red lentils together until the lentils begin to soften.",
+        "Fold in the zucchini and coriander and simmer until the cubes turn silky.",
+        "Season and add ghee after drawing the summer pot from strong heat."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Grishma Zucchini Masoor Rice is composed for grishma with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.grishma-barley-chayote-dill",
+      "name": "Grishma Barley Chayote Dill Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley, soaked and drained",
+          "grams": 205
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 155
+        },
+        {
+          "dravyaId": "dravya.chayote",
+          "name": "Chayote, peeled and finely diced",
+          "grams": 310
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 15
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the soaked barley and split mung until both become tender.",
+        "Add the chayote and crushed fennel and simmer until translucent.",
+        "Season with olive oil and fold in fresh dill after the flame is off."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Grishma Barley Chayote Dill Bowl is composed for grishma with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.varsha-ginger-rice-mung-khichdi",
+      "name": "Varsha Ginger Rice Mung Khichdi",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 175
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, peeled and cut into small cubes",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 9
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Warm cumin and ginger in ghee and coat the rice and mung.",
+        "Add the carrot and hot water and cook until every component is very soft.",
+        "Season the rainy-season khichdi and serve it steaming and fluid."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Varsha Ginger Rice Mung Khichdi is composed for varsha with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.varsha-bajra-pumpkin-dal",
+      "name": "Varsha Bajra Pumpkin Dal Pot",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.bajra",
+          "name": "Pearl millet, soaked and drained",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Pigeon pea, rinsed and drained",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and cut into small cubes",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 9
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the pigeon pea until partly soft before adding the soaked millet.",
+        "Add the pumpkin, ginger, and pepper and simmer until the roots yield.",
+        "Season the thick pot, fold in ghee, and keep it warm under a lid."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Varsha Bajra Pumpkin Dal Pot is composed for varsha with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.varsha-oat-carrot-masoor",
+      "name": "Varsha Oat Carrot Masoor Bowl",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats, sorted and rinsed",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, peeled and cut into small cubes",
+          "grams": 290
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 9
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Simmer the red lentils and carrot cubes until both soften.",
+        "Stir in the oats, ginger, and cumin and cook to a creamy texture.",
+        "Season, add ghee, and serve the warming bowl without delay."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Varsha Oat Carrot Masoor Bowl is composed for varsha with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.varsha-jowar-turnip-mung",
+      "name": "Varsha Jowar Turnip Mung Stew",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.jowar",
+          "name": "Sorghum grains, soaked and drained",
+          "grams": 195
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.turnip",
+          "name": "Turnips, peeled and cut into small cubes",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 9
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the sorghum and split mung until their centers lose firmness.",
+        "Add the turnip, ginger, and pepper and simmer beneath a lid.",
+        "Season the tender stew and finish it with ghee while still bubbling."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Varsha Jowar Turnip Mung Stew is composed for varsha with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.varsha-rice-yam-toor",
+      "name": "Varsha Yam Toor Rice Pot",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Pigeon pea, rinsed and drained",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.yam",
+          "name": "Yam, peeled and cut into small cubes",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 9
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the pigeon pea until half tender and add the rice and yam.",
+        "Stir in ginger and hot water and simmer until the root becomes soft.",
+        "Bloom cumin in ghee, fold it through the pot, and season."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Varsha Yam Toor Rice Pot is composed for varsha with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.varsha-brown-rice-squash-mung",
+      "name": "Varsha Squash Brown Rice Mung",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice, rinsed and soaked",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.butternut-squash",
+          "name": "Butternut squash, peeled and cubed",
+          "grams": 310
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 9
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Simmer the soaked rice and mung until nearly tender.",
+        "Add the squash, ginger, and coriander and cook until creamy at the edges.",
+        "Season the moist meal and fold in ghee before a covered rest."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Varsha Squash Brown Rice Mung is composed for varsha with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.varsha-millet-beet-masoor",
+      "name": "Varsha Millet Beet Masoor",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet, rinsed and soaked",
+          "grams": 195
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 175
+        },
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, peeled and cut into small cubes",
+          "grams": 290
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 9
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the millet and red lentils until the grains begin to soften.",
+        "Add the beet and ginger and simmer until the pot turns ruby.",
+        "Finish with cumin warmed in ghee, season, and serve hot."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Varsha Millet Beet Masoor is composed for varsha with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.varsha-amaranth-sweet-potato-mung",
+      "name": "Varsha Amaranth Sweet Potato Mung",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, rinsed in a fine sieve",
+          "grams": 195
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, peeled and cut into small cubes",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 9
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 19
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Simmer the split mung until partly soft before adding the amaranth.",
+        "Add the sweet-potato cubes, ginger, and pepper and cook until thick.",
+        "Season, fold in ghee, and loosen the rainy-season meal with hot water."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Varsha Amaranth Sweet Potato Mung is composed for varsha with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.sharad-fennel-rice-mung",
+      "name": "Sharad Fennel Rice Mung Bowl",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 205
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, finely diced",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the rice and mung until the grains begin to merge.",
+        "Add the diced fennel bulb and crushed seeds and simmer until sweet.",
+        "Season the autumn bowl and stir in ghee away from high heat."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sharad Fennel Rice Mung Bowl is composed for sharad with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.sharad-quinoa-chayote-coriander",
+      "name": "Sharad Quinoa Chayote Coriander",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 155
+        },
+        {
+          "dravyaId": "dravya.chayote",
+          "name": "Chayote, peeled and finely diced",
+          "grams": 310
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 15
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Simmer the split mung until half tender before adding quinoa.",
+        "Fold in the chayote and coriander as the grains open.",
+        "Season the mild bowl and finish with olive oil after cooking."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sharad Quinoa Chayote Coriander is composed for sharad with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.sharad-barley-zucchini-dill",
+      "name": "Sharad Barley Zucchini Dill",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley, soaked and drained",
+          "grams": 205
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, thawed",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, cut into small cubes",
+          "grams": 310
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 15
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the soaked barley until almost tender and add the peas.",
+        "Fold in the zucchini and fennel and simmer until the cubes soften.",
+        "Season with olive oil and chopped dill after removing the pot from heat."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sharad Barley Zucchini Dill is composed for sharad with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.sharad-rice-bottle-gourd-mung",
+      "name": "Sharad Bottle Gourd Rice Mung",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 205
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.bottle-gourd",
+          "name": "Bottle gourd, peeled and finely diced",
+          "grams": 330
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the rice and split mung until partly soft.",
+        "Add the bottle-gourd dice and coriander and simmer until translucent.",
+        "Season the gentle meal and melt ghee through it before serving."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sharad Bottle Gourd Rice Mung is composed for sharad with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.sharad-millet-asparagus-pea",
+      "name": "Sharad Millet Asparagus Pea Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet, rinsed and soaked",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, thawed",
+          "grams": 185
+        },
+        {
+          "dravyaId": "dravya.asparagus",
+          "name": "Asparagus, trimmed and cut into short pieces",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 15
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the soaked millet until the grains are almost tender.",
+        "Add asparagus, peas, and crushed fennel and cover briefly.",
+        "Season the bowl and finish with olive oil while the vegetables remain green."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sharad Millet Asparagus Pea Bowl is composed for sharad with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.sharad-amaranth-pumpkin-mung",
+      "name": "Sharad Amaranth Pumpkin Mung",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, rinsed in a fine sieve",
+          "grams": 195
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and cut into small cubes",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Simmer the mung until half tender and stir in the tiny amaranth grains.",
+        "Add the pumpkin and coriander and cook until a soft base forms.",
+        "Season the meal and add ghee once it leaves fierce heat."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sharad Amaranth Pumpkin Mung is composed for sharad with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.sharad-rice-cucumber-toor",
+      "name": "Sharad Cooked Cucumber Toor Rice",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 205
+        },
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Pigeon pea, rinsed and drained",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, peeled and cut into chunks",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the pigeon pea until partly tender before adding the rice.",
+        "Add cucumber and fennel and simmer until the chunks turn translucent.",
+        "Season the soft meal and fold in ghee before a short rest."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sharad Cooked Cucumber Toor Rice is composed for sharad with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.sharad-quinoa-fennel-tofu",
+      "name": "Sharad Quinoa Fennel Tofu",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, drained and cut into cubes",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, finely diced",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 15
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Soften the diced fennel bulb before stirring in the quinoa and hot water.",
+        "Steam the tofu over the opened grains until warmed through.",
+        "Fold in coriander, salt, and olive oil and serve the bowl gently warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sharad Quinoa Fennel Tofu is composed for sharad with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.hemanta-bajra-urad-pumpkin",
+      "name": "Hemanta Bajra Urad Pumpkin Pot",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.bajra",
+          "name": "Pearl millet, soaked and drained",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Pigeon pea, rinsed and drained",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and cut into small cubes",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 9
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the pigeon pea until partly soft before adding the soaked pearl millet.",
+        "Add the pumpkin and ginger and simmer until the winter pot becomes thick.",
+        "Season generously enough for the grains and fold in warm ghee."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "hemanta"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Hemanta Bajra Urad Pumpkin Pot is composed for hemanta with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.hemanta-brown-rice-rajma-squash",
+      "name": "Hemanta Brown Rice Rajma Squash",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice, rinsed and soaked",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.brown-lentil",
+          "name": "Brown lentils, rinsed and drained",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.butternut-squash",
+          "name": "Butternut squash, peeled and cubed",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Simmer the brown lentils and soaked rice until nearly tender.",
+        "Add the squash and cumin and cook until the cubes become creamy.",
+        "Season the hearty winter meal and finish with ghee before serving."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "hemanta"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Hemanta Brown Rice Rajma Squash is composed for hemanta with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.hemanta-oat-sweet-potato-dal",
+      "name": "Hemanta Oat Sweet Potato Dal",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats, sorted and rinsed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 185
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, peeled and cut into small cubes",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 9
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the red lentils and sweet potato until both are soft.",
+        "Stir in the oats and ginger and simmer until the bowl turns velvety.",
+        "Season the dense winter meal and melt ghee through the surface."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "hemanta"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Hemanta Oat Sweet Potato Dal is composed for hemanta with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.hemanta-jowar-yam-mung",
+      "name": "Hemanta Jowar Yam Mung Stew",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.jowar",
+          "name": "Sorghum grains, soaked and drained",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.yam",
+          "name": "Yam, peeled and cut into small cubes",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 23
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the sorghum and mung together until their centers soften.",
+        "Add the yam and cumin and simmer until the root is completely tender.",
+        "Season the winter stew, fold in ghee, and serve it steaming."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "hemanta"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Hemanta Jowar Yam Mung Stew is composed for hemanta with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.hemanta-quinoa-beet-tofu",
+      "name": "Hemanta Quinoa Beet Tofu Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 215
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, drained and cut into cubes",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, peeled and cut into small cubes",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Simmer the beet cubes until partly tender before adding the quinoa.",
+        "Set the tofu over the ruby grains and steam until warmed through.",
+        "Fold in coriander, salt, and olive oil and serve the substantial bowl."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "hemanta"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Hemanta Quinoa Beet Tofu Bowl is composed for hemanta with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.hemanta-rice-chana-carrot",
+      "name": "Hemanta Rice Chana Carrot Meal",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.chana-dal",
+          "name": "Chana dal, soaked and drained",
+          "grams": 175
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, peeled and cut into small cubes",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 23
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the soaked chana dal until almost tender before adding rice.",
+        "Add the carrot and cumin and simmer until the grains become soft.",
+        "Season the golden winter meal and fold in warm ghee."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "hemanta"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Hemanta Rice Chana Carrot Meal is composed for hemanta with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.hemanta-barley-pumpkin-lentil",
+      "name": "Hemanta Barley Pumpkin Lentil",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley, soaked and drained",
+          "grams": 205
+        },
+        {
+          "dravyaId": "dravya.brown-lentil",
+          "name": "Brown lentils, rinsed and drained",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and cut into small cubes",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 9
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the soaked barley and brown lentils until nearly tender.",
+        "Add pumpkin and ginger and simmer until the broth gains body.",
+        "Season the winter stew and finish with olive oil before serving."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "hemanta"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Hemanta Barley Pumpkin Lentil is composed for hemanta with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.hemanta-amaranth-squash-mung",
+      "name": "Hemanta Amaranth Squash Mung",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, rinsed in a fine sieve",
+          "grams": 205
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.butternut-squash",
+          "name": "Butternut squash, peeled and cubed",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Simmer the mung until partly soft and stir in the amaranth grains.",
+        "Add the squash and cumin and cook until the pot becomes creamy.",
+        "Season, fold in ghee, and loosen the winter meal if needed."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "hemanta"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Hemanta Amaranth Squash Mung is composed for hemanta with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.shishira-bajra-sweet-potato-mung",
+      "name": "Shishira Bajra Sweet Potato Mung",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.bajra",
+          "name": "Pearl millet, soaked and drained",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 175
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, peeled and cut into small cubes",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 9
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the pearl millet and mung until the grains begin to merge.",
+        "Add sweet potato and ginger and simmer until the roots soften.",
+        "Season the late-winter pot and stir in warm ghee before serving."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Shishira Bajra Sweet Potato Mung is composed for shishira with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.shishira-brown-rice-turnip-toor",
+      "name": "Shishira Brown Rice Turnip Toor",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice, rinsed and soaked",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Pigeon pea, rinsed and drained",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.turnip",
+          "name": "Turnips, peeled and cut into small cubes",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 23
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Simmer the soaked rice and pigeon pea until half tender.",
+        "Add turnip and cumin and cook until the roots become mild and soft.",
+        "Season the complete meal and finish with ghee under a warm lid."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Shishira Brown Rice Turnip Toor is composed for shishira with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.shishira-oat-pumpkin-masoor",
+      "name": "Shishira Oat Pumpkin Masoor",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats, sorted and rinsed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 185
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and cut into small cubes",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 9
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the red lentils and pumpkin until both begin to break down.",
+        "Stir in oats and ginger and simmer until the base turns creamy.",
+        "Season the late-winter bowl and melt ghee through it off the heat."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Shishira Oat Pumpkin Masoor is composed for shishira with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.shishira-jowar-carrot-mung",
+      "name": "Shishira Jowar Carrot Mung",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.jowar",
+          "name": "Sorghum grains, soaked and drained",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 175
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, peeled and cut into small cubes",
+          "grams": 310
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 23
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the sorghum and mung together until their centers yield.",
+        "Add carrot and cumin and simmer beneath a snug lid.",
+        "Season the warming meal, fold in ghee, and serve promptly."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Shishira Jowar Carrot Mung is composed for shishira with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.shishira-barley-beet-lentil",
+      "name": "Shishira Barley Beet Lentil Stew",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley, soaked and drained",
+          "grams": 205
+        },
+        {
+          "dravyaId": "dravya.brown-lentil",
+          "name": "Brown lentils, rinsed and drained",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, peeled and cut into small cubes",
+          "grams": 310
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 9
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Simmer the soaked barley and brown lentils until nearly tender.",
+        "Add beet and ginger and cook until the broth becomes ruby and thick.",
+        "Season the stew and finish with olive oil while it remains hot."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Shishira Barley Beet Lentil Stew is composed for shishira with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.shishira-rice-yam-chana",
+      "name": "Shishira Rice Yam Chana Pot",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 205
+        },
+        {
+          "dravyaId": "dravya.chana-dal",
+          "name": "Chana dal, soaked and drained",
+          "grams": 175
+        },
+        {
+          "dravyaId": "dravya.yam",
+          "name": "Yam, peeled and cut into small cubes",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 23
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Bring the soaked chana dal close to tenderness, then stir the rice into its broth.",
+        "Add yam and cumin and simmer until the root pieces yield easily.",
+        "Season the pot and fold in ghee for a warming late-winter finish."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Shishira Rice Yam Chana Pot is composed for shishira with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.shishira-quinoa-squash-mung",
+      "name": "Shishira Quinoa Squash Mung Bowl",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 215
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.butternut-squash",
+          "name": "Butternut squash, peeled and cubed",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 9
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the mung until partly soft before stirring in the quinoa.",
+        "Add squash and ginger and simmer until the grains open fully.",
+        "Season the winter bowl and finish with olive oil before serving."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Shishira Quinoa Squash Mung Bowl is composed for shishira with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.shishira-amaranth-carrot-toor",
+      "name": "Shishira Amaranth Carrot Toor",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, rinsed in a fine sieve",
+          "grams": 205
+        },
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Pigeon pea, rinsed and drained",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, peeled and cut into small cubes",
+          "grams": 310
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Cook the pigeon pea until half tender before adding amaranth.",
+        "Add carrot and cumin and simmer as the tiny grains thicken.",
+        "Season, fold in ghee, and keep the late-winter meal moist."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Shishira Amaranth Carrot Toor is composed for shishira with seasonal texture, produce, and seasoning Vata: serve warm and keep enough moisture in the grains. Pitta: moderate pungency and avoid hard browning. Kapha: favor the vegetable portion and use only the stated fat.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    }
+  ]
+}
