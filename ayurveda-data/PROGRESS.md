@@ -10,7 +10,7 @@ qualityState aiDraft pending expert review. Task packets and reports in
 
 ## Dravyas
 
-Target: 750 full-facet dravyas. **Done: 408 (batches 01–17), all validated + committed.**
+Target: 750 full-facet dravyas. **Done: 210 (batches 01–09), all validated + committed.**
 
 | Batch | Contents | Items |
 |---|---|---|
@@ -25,16 +25,8 @@ Target: 750 full-facet dravyas. **Done: 408 (batches 01–17), all validated + c
 | 09 | Beverages & fermented (teas, coffee, coconut water, miso…) | 12 |
 | 10 | Animal foods (eggs, meats, fish — mamsa varga) | 25 |
 | 11 | Classical preparations (kitchari, takra, CCF tea, chyawanprash…) | 25 |
-| 12 | Medicinal rasayanas & bitters (triphala trio, ashwagandha, neem…) | 25 |
-| 13 | Vegetables & gourds (parwal, suran, mooli, brinjal, raw banana…) | 25 |
-| 14 | Vegetables II — pods, flowers, tubers, shoots (sem, bamboo, kachnar…) | 25 |
-| 15 | Fruits I (mango, banana, draksha, bael, jamun, phalsa…) | 25 |
-| 16 | Fruits II & dry fruits (fig, dadima, ikshu, makhana, munakka…) | 24 |
-| 17 | Rices, millets, flours, mung (rakta shali, navara, kodrava…) | 24 |
 
-**Facet authoring from predrafts: next is predraft-18. 408/750 done.**
-Note: predraft-16's langsat placeholder was dropped per the D10 reviewer note
-(non-Indian, low confidence); batch-16 has 24 items.
+**Facet authoring from predrafts: next is predraft-12 (medicinal). 260/750 done.**
 
 ## NEW: predrafts ready (D10 approved)
 
