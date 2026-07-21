@@ -1,4 +1,14 @@
-# Dravya authoring progress
+# Content authoring progress
+
+## Recipes: COMPLETE ✅
+
+**1,500 recipes done and director-verified** (batches r01–r30): 300 classical
+(R1), 600 everyday/international (R2), 600 completion tier (R3 + R3-FIX).
+All validated (`validate.py --store`), viruddha-flagged where required,
+qualityState aiDraft pending expert review. Task packets and reports in
+`recipes/TASK-R*.md`, `recipes/REPORT-R*.md`.
+
+## Dravyas
 
 Target: 750 full-facet dravyas. **Done: 210 (batches 01–09), all validated + committed.**
 
