@@ -1,0 +1,3985 @@
+{
+  "formatVersion": "1.0",
+  "batch": "recipe-batch-r11",
+  "qualityState": "aiDraft",
+  "items": [
+    {
+      "id": "recipe.med-chickpea-spinach-tomato",
+      "name": "Mediterranean Chickpea Spinach Pot",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, chopped",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 450
+        }
+      ],
+      "steps": [
+        "Rinse the cooked chickpeas and prepare the spinach, chopped and tomatoes, chopped.",
+        "Warm the olive oil, bloom the cumin, and cook the vegetables until they begin to soften.",
+        "Add the beans and dried oregano; turn everything through the seasoned oil.",
+        "Pour in the water, add rock salt, and simmer until the flavors combine and the beans are very tender.",
+        "Mash a small portion to thicken the sauce naturally, then serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mediterranean Chickpea Spinach Pot is a thoroughly cooked bean main with a moist sauce. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original Mediterranean chickpea adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-lentil-eggplant-tomato",
+      "name": "Mediterranean Lentil Eggplant Pot",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-lentil",
+          "name": "Cooked brown lentils",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.eggplant",
+          "name": "Eggplant, diced",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, chopped",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.basil-sweet",
+          "name": "Fresh basil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 450
+        }
+      ],
+      "steps": [
+        "Rinse the cooked brown lentils and prepare the eggplant, diced and tomatoes, chopped.",
+        "Warm the olive oil, bloom the cumin, and cook the vegetables until they begin to soften.",
+        "Add the beans and fresh basil; turn everything through the seasoned oil.",
+        "Pour in the water, add rock salt, and simmer until the flavors combine and the beans are very tender.",
+        "Mash a small portion to thicken the sauce naturally, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mediterranean Lentil Eggplant Pot is a thoroughly cooked bean main with a moist sauce. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international bean-dish adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-kidney-bean-zucchini-herb",
+      "name": "Kidney Bean Zucchini Herb Pot",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.rajma",
+          "name": "Cooked kidney beans",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, diced",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 450
+        }
+      ],
+      "steps": [
+        "Rinse the cooked kidney beans and prepare the zucchini, diced and carrot, diced.",
+        "Warm the olive oil, bloom the cumin, and cook the vegetables until they begin to soften.",
+        "Add the beans and fresh parsley; turn everything through the seasoned oil.",
+        "Pour in the water, add rock salt, and simmer until the flavors combine and the beans are very tender.",
+        "Mash a small portion to thicken the sauce naturally, then serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kidney Bean Zucchini Herb Pot is a thoroughly cooked bean main with a moist sauce. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international bean-dish adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-chickpea-artichoke-pot",
+      "name": "Chickpea Artichoke Pot",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.artichoke",
+          "name": "Artichoke hearts, quartered",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.leek",
+          "name": "Leek, sliced",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 450
+        }
+      ],
+      "steps": [
+        "Rinse the cooked chickpeas and prepare the artichoke hearts, quartered and leek, sliced.",
+        "Warm the olive oil, bloom the cumin, and cook the vegetables until they begin to soften.",
+        "Add the beans and fresh dill; turn everything through the seasoned oil.",
+        "Pour in the water, add rock salt, and simmer until the flavors combine and the beans are very tender.",
+        "Mash a small portion to thicken the sauce naturally, then serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chickpea Artichoke Pot is a thoroughly cooked bean main with a moist sauce. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international bean-dish adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-lentil-fennel-pot",
+      "name": "Lentil Fennel Herb Pot",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-lentil",
+          "name": "Cooked brown lentils",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, sliced",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 450
+        }
+      ],
+      "steps": [
+        "Rinse the cooked brown lentils and prepare the fennel bulb, sliced and carrot, diced.",
+        "Warm the olive oil, bloom the cumin, and cook the vegetables until they begin to soften.",
+        "Add the beans and fennel seeds; turn everything through the seasoned oil.",
+        "Pour in the water, add rock salt, and simmer until the flavors combine and the beans are very tender.",
+        "Mash a small portion to thicken the sauce naturally, then serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Lentil Fennel Herb Pot is a thoroughly cooked bean main with a moist sauce. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international bean-dish adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-chickpea-red-pepper-tomato",
+      "name": "Chickpea Red Pepper Tomato Pot",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.red-bell-pepper",
+          "name": "Red bell pepper, diced",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, chopped",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 450
+        }
+      ],
+      "steps": [
+        "Rinse the cooked chickpeas and prepare the red bell pepper, diced and tomatoes, chopped.",
+        "Warm the olive oil, bloom the cumin, and cook the vegetables until they begin to soften.",
+        "Add the beans and dried oregano; turn everything through the seasoned oil.",
+        "Pour in the water, add rock salt, and simmer until the flavors combine and the beans are very tender.",
+        "Mash a small portion to thicken the sauce naturally, then serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 2,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chickpea Red Pepper Tomato Pot is a thoroughly cooked bean main with a moist sauce. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international bean-dish adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-lentil-kale-herb",
+      "name": "Lentil Kale Herb Pot",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-lentil",
+          "name": "Cooked brown lentils",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.kale",
+          "name": "Kale, chopped",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 450
+        }
+      ],
+      "steps": [
+        "Rinse the cooked brown lentils and prepare the kale, chopped and carrot, diced.",
+        "Warm the olive oil, bloom the cumin, and cook the vegetables until they begin to soften.",
+        "Add the beans and fresh thyme; turn everything through the seasoned oil.",
+        "Pour in the water, add rock salt, and simmer until the flavors combine and the beans are very tender.",
+        "Mash a small portion to thicken the sauce naturally, then serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Lentil Kale Herb Pot is a thoroughly cooked bean main with a moist sauce. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international bean-dish adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-chickpea-zucchini-dill",
+      "name": "Chickpea Zucchini Dill Pot",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, diced",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 450
+        }
+      ],
+      "steps": [
+        "Rinse the cooked chickpeas and prepare the zucchini, diced.",
+        "Warm the olive oil, bloom the cumin, and cook the vegetables until they begin to soften.",
+        "Add the beans and fresh dill, fresh parsley; turn everything through the seasoned oil.",
+        "Pour in the water, add rock salt, and simmer until the flavors combine and the beans are very tender.",
+        "Mash a small portion to thicken the sauce naturally, then serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chickpea Zucchini Dill Pot is a thoroughly cooked bean main with a moist sauce. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international bean-dish adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-kidney-bean-eggplant",
+      "name": "Kidney Bean Eggplant Herb Pot",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.rajma",
+          "name": "Cooked kidney beans",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.eggplant",
+          "name": "Eggplant, diced",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 450
+        }
+      ],
+      "steps": [
+        "Rinse the cooked kidney beans and prepare the eggplant, diced and carrot, diced.",
+        "Warm the olive oil, bloom the cumin, and cook the vegetables until they begin to soften.",
+        "Add the beans and dried oregano; turn everything through the seasoned oil.",
+        "Pour in the water, add rock salt, and simmer until the flavors combine and the beans are very tender.",
+        "Mash a small portion to thicken the sauce naturally, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kidney Bean Eggplant Herb Pot is a thoroughly cooked bean main with a moist sauce. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international bean-dish adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-black-bean-parsley-pepper",
+      "name": "Black Bean Parsley Pepper Pot",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.black-beans",
+          "name": "Cooked black beans",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.bell-pepper",
+          "name": "Green bell pepper, diced",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 450
+        }
+      ],
+      "steps": [
+        "Rinse the cooked black beans and prepare the green bell pepper, diced and carrot, diced.",
+        "Warm the olive oil, bloom the cumin, and cook the vegetables until they begin to soften.",
+        "Add the beans and fresh parsley; turn everything through the seasoned oil.",
+        "Pour in the water, add rock salt, and simmer until the flavors combine and the beans are very tender.",
+        "Mash a small portion to thicken the sauce naturally, then serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Black Bean Parsley Pepper Pot is a thoroughly cooked bean main with a moist sauce. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international bean-dish adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-adzuki-carrot-herb",
+      "name": "Adzuki Carrot Herb Pot",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.adzuki",
+          "name": "Cooked adzuki beans",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, diced",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.celery",
+          "name": "Celery, sliced",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 450
+        }
+      ],
+      "steps": [
+        "Rinse the cooked adzuki beans and prepare the carrots, diced and celery, sliced.",
+        "Warm the olive oil, bloom the cumin, and cook the vegetables until they begin to soften.",
+        "Add the beans and fresh thyme; turn everything through the seasoned oil.",
+        "Pour in the water, add rock salt, and simmer until the flavors combine and the beans are very tender.",
+        "Mash a small portion to thicken the sauce naturally, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Adzuki Carrot Herb Pot is a thoroughly cooked bean main with a moist sauce. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international bean-dish adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-mung-spinach-parsley",
+      "name": "Mung Spinach Parsley Pot",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Cooked mung beans",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 450
+        }
+      ],
+      "steps": [
+        "Rinse the cooked mung beans and prepare the spinach, chopped.",
+        "Warm the olive oil, bloom the cumin, and cook the vegetables until they begin to soften.",
+        "Add the beans and fresh parsley, fennel seeds; turn everything through the seasoned oil.",
+        "Pour in the water, add rock salt, and simmer until the flavors combine and the beans are very tender.",
+        "Mash a small portion to thicken the sauce naturally, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mung Spinach Parsley Pot is a thoroughly cooked bean main with a moist sauce. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international bean-dish adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-chickpea-cauliflower-oregano",
+      "name": "Chickpea Cauliflower Oregano Pot",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower florets",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 450
+        }
+      ],
+      "steps": [
+        "Rinse the cooked chickpeas and prepare the cauliflower florets.",
+        "Warm the olive oil, bloom the cumin, and cook the vegetables until they begin to soften.",
+        "Add the beans and dried oregano, fresh parsley; turn everything through the seasoned oil.",
+        "Pour in the water, add rock salt, and simmer until the flavors combine and the beans are very tender.",
+        "Mash a small portion to thicken the sauce naturally, then serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chickpea Cauliflower Oregano Pot is a thoroughly cooked bean main with a moist sauce. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international bean-dish adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-lentil-mushroom-thyme",
+      "name": "Lentil Mushroom Thyme Pot",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-lentil",
+          "name": "Cooked brown lentils",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.white-mushroom",
+          "name": "White mushrooms, sliced",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 450
+        }
+      ],
+      "steps": [
+        "Rinse the cooked brown lentils and prepare the white mushrooms, sliced.",
+        "Warm the olive oil, bloom the cumin, and cook the vegetables until they begin to soften.",
+        "Add the beans and fresh thyme; turn everything through the seasoned oil.",
+        "Pour in the water, add rock salt, and simmer until the flavors combine and the beans are very tender.",
+        "Mash a small portion to thicken the sauce naturally, then serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Lentil Mushroom Thyme Pot is a thoroughly cooked bean main with a moist sauce. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international bean-dish adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-chickpea-pumpkin-rosemary",
+      "name": "Chickpea Pumpkin Rosemary Pot",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.rosemary",
+          "name": "Fresh rosemary",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 450
+        }
+      ],
+      "steps": [
+        "Rinse the cooked chickpeas and prepare the pumpkin, diced.",
+        "Warm the olive oil, bloom the cumin, and cook the vegetables until they begin to soften.",
+        "Add the beans and fresh rosemary; turn everything through the seasoned oil.",
+        "Pour in the water, add rock salt, and simmer until the flavors combine and the beans are very tender.",
+        "Mash a small portion to thicken the sauce naturally, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chickpea Pumpkin Rosemary Pot is a thoroughly cooked bean main with a moist sauce. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international bean-dish adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-bulgur-tomato-herb-pilaf",
+      "name": "Bulgur Tomato Herb Pilaf",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "fdcId": 7988,
+          "name": "Dry bulgur",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomato, diced",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the dry bulgur until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the Olive oil in a heavy pot and bloom the cumin.",
+        "Add the tomato, diced, fresh parsley, fresh mint and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Bulgur Tomato Herb Pilaf is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original Mediterranean bulgur pilaf adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-couscous-zucchini-pilaf",
+      "name": "Couscous Zucchini Herb Pilaf",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 16,
+      "ingredients": [
+        {
+          "fdcId": 7120,
+          "name": "Dry couscous",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, diced small",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 620
+        }
+      ],
+      "steps": [
+        "Rinse the dry couscous until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the Olive oil in a heavy pot and bloom the cumin.",
+        "Add the zucchini, diced small, fresh parsley and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Couscous Zucchini Herb Pilaf is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original Mediterranean couscous adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-barley-artichoke-pilaf",
+      "name": "Barley Artichoke Pilaf",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.artichoke",
+          "name": "Artichoke hearts, chopped",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1050
+        }
+      ],
+      "steps": [
+        "Rinse the pearled barley until the draining water is mostly clear; soak for 30 minutes and drain.",
+        "Warm the Olive oil in a heavy pot and bloom the cumin.",
+        "Add the artichoke hearts, chopped, fresh dill and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Barley Artichoke Pilaf is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-quinoa-parsley-chickpea-pilaf",
+      "name": "Quinoa Parsley Chickpea Pilaf",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the quinoa until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the Olive oil in a heavy pot and bloom the cumin.",
+        "Add the cooked chickpeas, fresh parsley and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Quinoa Parsley Chickpea Pilaf is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-rice-tomato-pepper-pilaf",
+      "name": "Rice Tomato Pepper Pilaf",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White basmati rice",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomato, diced",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.red-bell-pepper",
+          "name": "Red bell pepper, diced",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 780
+        }
+      ],
+      "steps": [
+        "Rinse the white basmati rice until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the Olive oil in a heavy pot and bloom the cumin.",
+        "Add the tomato, diced, red bell pepper, diced, dried oregano and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 2,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Rice Tomato Pepper Pilaf is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-brown-rice-spinach-pilaf",
+      "name": "Brown Rice Spinach Pilaf",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 980
+        }
+      ],
+      "steps": [
+        "Rinse the brown rice until the draining water is mostly clear; soak for 35 minutes and drain.",
+        "Warm the Olive oil in a heavy pot and bloom the cumin.",
+        "Add the spinach, chopped, fresh dill and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Brown Rice Spinach Pilaf is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-millet-eggplant-pilaf",
+      "name": "Millet Eggplant Pilaf",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.eggplant",
+          "name": "Eggplant, diced",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 860
+        }
+      ],
+      "steps": [
+        "Rinse the proso millet until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the Olive oil in a heavy pot and bloom the cumin.",
+        "Add the eggplant, diced, fresh mint and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Millet Eggplant Pilaf is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-amaranth-carrot-pilaf",
+      "name": "Amaranth Carrot Herb Pilaf",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 880
+        }
+      ],
+      "steps": [
+        "Rinse the amaranth grain until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the Olive oil in a heavy pot and bloom the cumin.",
+        "Add the carrot, diced, fresh parsley and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Amaranth Carrot Herb Pilaf is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-buckwheat-mushroom-pilaf",
+      "name": "Buckwheat Mushroom Pilaf",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Buckwheat groats",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.white-mushroom",
+          "name": "White mushrooms, sliced",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 820
+        }
+      ],
+      "steps": [
+        "Rinse the buckwheat groats until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the Olive oil in a heavy pot and bloom the cumin.",
+        "Add the white mushrooms, sliced, fresh thyme and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Buckwheat Mushroom Pilaf is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-sorghum-zucchini-pilaf",
+      "name": "Sorghum Zucchini Pilaf",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.jowar",
+          "name": "Sorghum grain",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, diced",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1050
+        }
+      ],
+      "steps": [
+        "Rinse the sorghum grain until the draining water is mostly clear; soak for 35 minutes and drain.",
+        "Warm the Olive oil in a heavy pot and bloom the cumin.",
+        "Add the zucchini, diced, fresh dill and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sorghum Zucchini Pilaf is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-zucchini-chickpea-bake",
+      "name": "Herbed Zucchini Chickpea Bake",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 22,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, sliced",
+          "grams": 480
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, sliced",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Cut the zucchini, sliced and carrot, sliced into even pieces and place them in a wide bowl.",
+        "Add the olive oil, oregano, and rock salt; toss until every piece is lightly coated.",
+        "Arrange the mixture in a shallow baking dish and distribute the cooked chickpeas and fresh parsley evenly.",
+        "Bake until the vegetables are tender and the top is lightly browned without becoming dry.",
+        "Rest for five minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Herbed Zucchini Chickpea Bake is baked until tender and served warm in a moderate portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-bake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-cauliflower-tahini-bake",
+      "name": "Cauliflower Sesame Bake",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 22,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower florets",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds, ground",
+          "grams": 75
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Cut the cauliflower florets into even pieces and place them in a wide bowl.",
+        "Add the olive oil, oregano, and rock salt; toss until every piece is lightly coated.",
+        "Arrange the mixture in a shallow baking dish and distribute the sesame seeds, ground and fresh lemon juice evenly.",
+        "Bake until the vegetables are tender and the top is lightly browned without becoming dry.",
+        "Rest for five minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cauliflower Sesame Bake is baked until tender and served warm in a moderate portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-bake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-pumpkin-lentil-bake",
+      "name": "Pumpkin Lentil Herb Bake",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 22,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 520
+        },
+        {
+          "dravyaId": "dravya.brown-lentil",
+          "name": "Cooked brown lentils",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.rosemary",
+          "name": "Fresh rosemary",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Cut the pumpkin, diced into even pieces and place them in a wide bowl.",
+        "Add the olive oil, oregano, and rock salt; toss until every piece is lightly coated.",
+        "Arrange the mixture in a shallow baking dish and distribute the cooked brown lentils and fresh rosemary evenly.",
+        "Bake until the vegetables are tender and the top is lightly browned without becoming dry.",
+        "Rest for five minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pumpkin Lentil Herb Bake is baked until tender and served warm in a moderate portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-bake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-artichoke-potato-bake",
+      "name": "Artichoke Potato Herb Bake",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 22,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.artichoke",
+          "name": "Artichoke hearts, quartered",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potatoes, sliced",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Cut the artichoke hearts, quartered and potatoes, sliced into even pieces and place them in a wide bowl.",
+        "Add the olive oil, oregano, and rock salt; toss until every piece is lightly coated.",
+        "Arrange the mixture in a shallow baking dish and distribute the fresh parsley evenly.",
+        "Bake until the vegetables are tender and the top is lightly browned without becoming dry.",
+        "Rest for five minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Artichoke Potato Herb Bake is baked until tender and served warm in a moderate portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-bake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-broccoli-tofu-bake",
+      "name": "Broccoli Tofu Herb Bake",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 22,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.broccoli",
+          "name": "Broccoli florets",
+          "grams": 480
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, sliced",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, crumbled",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Cut the broccoli florets and carrot, sliced into even pieces and place them in a wide bowl.",
+        "Add the olive oil, oregano, and rock salt; toss until every piece is lightly coated.",
+        "Arrange the mixture in a shallow baking dish and distribute the firm tofu, crumbled and fresh dill evenly.",
+        "Bake until the vegetables are tender and the top is lightly browned without becoming dry.",
+        "Rest for five minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Broccoli Tofu Herb Bake is baked until tender and served warm in a moderate portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-bake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-tomato-zucchini-cheese-bake",
+      "name": "Tomato Zucchini Cheese Bake",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 22,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, sliced",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, sliced",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.aged-cheese",
+          "name": "Aged cheese, finely grated",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Cut the tomatoes, sliced and zucchini, sliced into even pieces and place them in a wide bowl.",
+        "Add the olive oil, oregano, and rock salt; toss until every piece is lightly coated.",
+        "Arrange the mixture in a shallow baking dish and distribute the aged cheese, finely grated evenly.",
+        "Bake until the vegetables are tender and the top is lightly browned without becoming dry.",
+        "Rest for five minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 2,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [
+        "cheese combined with tomato (traditional viruddha)"
+      ],
+      "guidance": "This Mediterranean-style bake is flagged because aged cheese is layered with tomato. Vata: serve warm and keep the zucchini tender. Pitta: reduce tomato and oregano. Kapha: use less cheese and a smaller portion. Compliant variant: omit the cheese and top with ground sesame and toasted chickpeas.",
+      "provenance": [
+        "original international vegetable-bake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-eggplant-tomato-cheese-bake",
+      "name": "Eggplant Tomato Cheese Bake",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 22,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.eggplant",
+          "name": "Eggplant, sliced",
+          "grams": 440
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, sliced",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.aged-cheese",
+          "name": "Aged cheese, finely grated",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.basil-sweet",
+          "name": "Fresh basil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Cut the eggplant, sliced and tomatoes, sliced into even pieces and place them in a wide bowl.",
+        "Add the olive oil, oregano, and rock salt; toss until every piece is lightly coated.",
+        "Arrange the mixture in a shallow baking dish and distribute the aged cheese, finely grated and fresh basil evenly.",
+        "Bake until the vegetables are tender and the top is lightly browned without becoming dry.",
+        "Rest for five minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 2,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [
+        "cheese combined with tomato (traditional viruddha)"
+      ],
+      "guidance": "This eggplant bake is flagged because it combines tomato with aged cheese. Vata: cook the eggplant very soft. Pitta: reduce tomato and omit pepper. Kapha: reduce cheese and oil. Compliant variant: replace the cheese with crumbled tofu and ground sesame.",
+      "provenance": [
+        "original international vegetable-bake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-cauliflower-tomato-cottage-bake",
+      "name": "Cauliflower Tomato Cottage Cheese Bake",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 22,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower florets",
+          "grams": 460
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, chopped",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.cottage-cheese",
+          "name": "Cottage cheese",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Cut the cauliflower florets and tomatoes, chopped into even pieces and place them in a wide bowl.",
+        "Add the olive oil, oregano, and rock salt; toss until every piece is lightly coated.",
+        "Arrange the mixture in a shallow baking dish and distribute the cottage cheese and fresh parsley evenly.",
+        "Bake until the vegetables are tender and the top is lightly browned without becoming dry.",
+        "Rest for five minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 2,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [
+        "cheese combined with tomato (traditional viruddha)"
+      ],
+      "guidance": "This cauliflower bake is flagged because cottage cheese and tomato are baked together. Vata: serve warm and fully tender. Pitta: reduce tomato and oregano. Kapha: use less cottage cheese. Compliant variant: replace cottage cheese with mashed chickpeas or firm tofu.",
+      "provenance": [
+        "original international vegetable-bake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-pepper-tomato-paneer-bake",
+      "name": "Pepper Tomato Paneer Bake",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 22,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.red-bell-pepper",
+          "name": "Red bell peppers, sliced",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, chopped",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.paneer",
+          "name": "Paneer, crumbled",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Additional oregano",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Cut the red bell peppers, sliced and tomatoes, chopped into even pieces and place them in a wide bowl.",
+        "Add the olive oil, oregano, and rock salt; toss until every piece is lightly coated.",
+        "Arrange the mixture in a shallow baking dish and distribute the paneer, crumbled and additional oregano evenly.",
+        "Bake until the vegetables are tender and the top is lightly browned without becoming dry.",
+        "Rest for five minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 2,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [
+        "cheese combined with tomato (traditional viruddha)"
+      ],
+      "guidance": "This pepper bake is flagged because paneer is combined with tomato. Vata: serve warm with a moist grain. Pitta: reduce both peppers and tomato. Kapha: use less paneer. Compliant variant: replace paneer with crumbled firm tofu.",
+      "provenance": [
+        "original international vegetable-bake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-spinach-potato-cottage-bake",
+      "name": "Spinach Potato Cottage Cheese Bake",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 22,
+      "cookMinutes": 38,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potatoes, sliced thin",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.cottage-cheese",
+          "name": "Cottage cheese",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        }
+      ],
+      "steps": [
+        "Cut the spinach, chopped and potatoes, sliced thin into even pieces and place them in a wide bowl.",
+        "Add the olive oil, oregano, and rock salt; toss until every piece is lightly coated.",
+        "Arrange the mixture in a shallow baking dish and distribute the cottage cheese and fresh dill evenly.",
+        "Bake until the vegetables are tender and the top is lightly browned without becoming dry.",
+        "Rest for five minutes and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Spinach Potato Cottage Cheese Bake is baked until tender and served warm in a moderate portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-bake adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-classic-sesame-hummus",
+      "name": "Classic Sesame Chickpea Hummus",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 15,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds, ground",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.garlic",
+          "name": "Garlic",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, toasted",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cook or warm the cooked chickpeas until fully tender, then let it cool from hot to warm.",
+        "Prepare the sesame seeds, ground and garlic and fresh parsley.",
+        "Blend the base with the olive oil, cumin, rock salt, and enough water for a spoonable texture.",
+        "Add the lemon juice and remaining ingredients and pulse until combined.",
+        "Serve a small spoonful at room temperature with warm bread or vegetables."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Classic Sesame Chickpea Hummus is a concentrated dip intended as a small accompaniment. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original Mediterranean hummus adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-beet-chickpea-hummus",
+      "name": "Beet Chickpea Hummus",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 15,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Cooked beetroot",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds, ground",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, toasted",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cook or warm the cooked chickpeas until fully tender, then let it cool from hot to warm.",
+        "Prepare the cooked beetroot and sesame seeds, ground.",
+        "Blend the base with the olive oil, cumin, rock salt, and enough water for a spoonable texture.",
+        "Add the lemon juice and remaining ingredients and pulse until combined.",
+        "Serve a small spoonful at room temperature with warm bread or vegetables."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Beet Chickpea Hummus is a concentrated dip intended as a small accompaniment. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian dip adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-carrot-chickpea-dip",
+      "name": "Carrot Chickpea Dip",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 15,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, cooked",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds, ground",
+          "grams": 50
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, toasted",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cook or warm the cooked chickpeas until fully tender, then let it cool from hot to warm.",
+        "Prepare the carrots, cooked and sesame seeds, ground and fennel seeds.",
+        "Blend the base with the olive oil, cumin, rock salt, and enough water for a spoonable texture.",
+        "Add the lemon juice and remaining ingredients and pulse until combined.",
+        "Serve a small spoonful at room temperature with warm bread or vegetables."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Carrot Chickpea Dip is a concentrated dip intended as a small accompaniment. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian dip adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-roasted-eggplant-dip",
+      "name": "Roasted Eggplant Sesame Dip",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 15,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.eggplant",
+          "name": "Roasted eggplant flesh",
+          "grams": 480
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds, ground",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.garlic",
+          "name": "Garlic",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, toasted",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cook or warm the roasted eggplant flesh until fully tender, then let it cool from hot to warm.",
+        "Prepare the sesame seeds, ground and garlic and fresh parsley.",
+        "Blend the base with the olive oil, cumin, rock salt, and enough water for a spoonable texture.",
+        "Add the lemon juice and remaining ingredients and pulse until combined.",
+        "Serve a small spoonful at room temperature with warm bread or vegetables."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Roasted Eggplant Sesame Dip is a concentrated dip intended as a small accompaniment. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian dip adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-red-pepper-walnut-dip",
+      "name": "Roasted Red Pepper Walnut Dip",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 15,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.red-bell-pepper",
+          "name": "Roasted red bell pepper",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.walnut",
+          "name": "Walnuts",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.pomegranate",
+          "name": "Pomegranate arils",
+          "grams": 50
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Additional cumin",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, toasted",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cook or warm the roasted red bell pepper until fully tender, then let it cool from hot to warm.",
+        "Prepare the walnuts and pomegranate arils and additional cumin.",
+        "Blend the base with the olive oil, cumin, rock salt, and enough water for a spoonable texture.",
+        "Add the lemon juice and remaining ingredients and pulse until combined.",
+        "Serve a small spoonful at room temperature with warm bread or vegetables."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Roasted Red Pepper Walnut Dip is a concentrated dip intended as a small accompaniment. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian dip adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-lentil-herb-dip",
+      "name": "Warm Lentil Herb Dip",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 15,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-lentil",
+          "name": "Cooked brown lentils",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, toasted",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cook or warm the cooked brown lentils until fully tender, then let it cool from hot to warm.",
+        "Prepare the fresh parsley and fresh thyme.",
+        "Blend the base with the olive oil, cumin, rock salt, and enough water for a spoonable texture.",
+        "Add the lemon juice and remaining ingredients and pulse until combined.",
+        "Serve a small spoonful at room temperature with warm bread or vegetables."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Lentil Herb Dip is a concentrated dip intended as a small accompaniment. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian dip adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-artichoke-chickpea-dip",
+      "name": "Artichoke Chickpea Dip",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 15,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.artichoke",
+          "name": "Cooked artichoke hearts",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, toasted",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cook or warm the cooked chickpeas until fully tender, then let it cool from hot to warm.",
+        "Prepare the cooked artichoke hearts and fresh dill.",
+        "Blend the base with the olive oil, cumin, rock salt, and enough water for a spoonable texture.",
+        "Add the lemon juice and remaining ingredients and pulse until combined.",
+        "Serve a small spoonful at room temperature with warm bread or vegetables."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Artichoke Chickpea Dip is a concentrated dip intended as a small accompaniment. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian dip adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-green-pea-mint-dip",
+      "name": "Green Pea Mint Dip",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 15,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, cooked",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds, ground",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, toasted",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cook or warm the green peas, cooked until fully tender, then let it cool from hot to warm.",
+        "Prepare the fresh mint and sesame seeds, ground.",
+        "Blend the base with the olive oil, cumin, rock salt, and enough water for a spoonable texture.",
+        "Add the lemon juice and remaining ingredients and pulse until combined.",
+        "Serve a small spoonful at room temperature with warm bread or vegetables."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Green Pea Mint Dip is a concentrated dip intended as a small accompaniment. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian dip adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-whole-wheat-pocket-flatbread",
+      "name": "Whole-Wheat Pocket Flatbread",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 30,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 300
+        }
+      ],
+      "steps": [
+        "Combine the whole-wheat flour, rock salt, and sesame seeds.",
+        "Add the water and half the olive oil and knead until the dough is smooth; cover and rest for 20 minutes.",
+        "Divide and shape the dough according to the bread style, keeping the pieces even.",
+        "Brush with the remaining olive oil and bake or griddle until cooked through and lightly browned.",
+        "Wrap briefly in a clean cloth and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Whole-Wheat Pocket Flatbread is a simple freshly cooked bread with measured oil. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international flatbread adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-sesame-herb-flatbread",
+      "name": "Sesame Herb Flatbread",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 30,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 400
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 38
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 310
+        }
+      ],
+      "steps": [
+        "Combine the whole-wheat flour, rock salt, and sesame seeds, dried oregano.",
+        "Add the water and half the olive oil and knead until the dough is smooth; cover and rest for 20 minutes.",
+        "Divide and shape the dough according to the bread style, keeping the pieces even.",
+        "Brush with the remaining olive oil and bake or griddle until cooked through and lightly browned.",
+        "Wrap briefly in a clean cloth and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sesame Herb Flatbread is a simple freshly cooked bread with measured oil. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international flatbread adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-rosemary-sheet-flatbread",
+      "name": "Rosemary Sheet Flatbread",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 30,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.rosemary",
+          "name": "Fresh rosemary, chopped",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 320
+        }
+      ],
+      "steps": [
+        "Combine the whole-wheat flour, rock salt, and fresh rosemary, chopped.",
+        "Add the water and half the olive oil and knead until the dough is smooth; cover and rest for 20 minutes.",
+        "Divide and shape the dough according to the bread style, keeping the pieces even.",
+        "Brush with the remaining olive oil and bake or griddle until cooked through and lightly browned.",
+        "Wrap briefly in a clean cloth and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Rosemary Sheet Flatbread is a simple freshly cooked bread with measured oil. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international flatbread adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-barley-dill-flatbread",
+      "name": "Barley Dill Flatbread",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 30,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Barley flour",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 330
+        }
+      ],
+      "steps": [
+        "Combine the barley flour, rock salt, and whole-wheat flour, fresh dill.",
+        "Add the water and half the olive oil and knead until the dough is smooth; cover and rest for 20 minutes.",
+        "Divide and shape the dough according to the bread style, keeping the pieces even.",
+        "Brush with the remaining olive oil and bake or griddle until cooked through and lightly browned.",
+        "Wrap briefly in a clean cloth and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Barley Dill Flatbread is a simple freshly cooked bread with measured oil. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international flatbread adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-chickpea-parsley-flatbread",
+      "name": "Chickpea Parsley Flatbread",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 30,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.besan",
+          "name": "Chickpea flour",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 330
+        }
+      ],
+      "steps": [
+        "Combine the chickpea flour, rock salt, and whole-wheat flour, fresh parsley.",
+        "Add the water and half the olive oil and knead until the dough is smooth; cover and rest for 20 minutes.",
+        "Divide and shape the dough according to the bread style, keeping the pieces even.",
+        "Brush with the remaining olive oil and bake or griddle until cooked through and lightly browned.",
+        "Wrap briefly in a clean cloth and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chickpea Parsley Flatbread is a simple freshly cooked bread with measured oil. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international flatbread adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-buckwheat-thyme-flatbread",
+      "name": "Buckwheat Thyme Flatbread",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 30,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Buckwheat flour",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 110
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 330
+        }
+      ],
+      "steps": [
+        "Combine the buckwheat flour, rock salt, and whole-wheat flour, fresh thyme.",
+        "Add the water and half the olive oil and knead until the dough is smooth; cover and rest for 20 minutes.",
+        "Divide and shape the dough according to the bread style, keeping the pieces even.",
+        "Brush with the remaining olive oil and bake or griddle until cooked through and lightly browned.",
+        "Wrap briefly in a clean cloth and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Buckwheat Thyme Flatbread is a simple freshly cooked bread with measured oil. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international flatbread adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.med-corn-rosemary-flatbread",
+      "name": "Corn Rosemary Flatbread",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 30,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.corn",
+          "name": "Fine cornmeal",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.rosemary",
+          "name": "Fresh rosemary",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 350
+        }
+      ],
+      "steps": [
+        "Combine the fine cornmeal, rock salt, and whole-wheat flour, fresh rosemary.",
+        "Add the water and half the olive oil and knead until the dough is smooth; cover and rest for 20 minutes.",
+        "Divide and shape the dough according to the bread style, keeping the pieces even.",
+        "Brush with the remaining olive oil and bake or griddle until cooked through and lightly browned.",
+        "Wrap briefly in a clean cloth and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Corn Rosemary Flatbread is a simple freshly cooked bread with measured oil. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international flatbread adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    }
+  ]
+}
