@@ -1,0 +1,628 @@
+{
+  "predraftVersion": "1.0",
+  "batch": "predraft-22",
+  "items": [
+    {
+      "id": "dravya.medu-vada",
+      "name": "Medu vada",
+      "sanskrit": "Vataka",
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          2
+        ],
+        "virya": "heating",
+        "note": "urad-fried; heavy"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 piece",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: medu vada; vataka."
+    },
+    {
+      "id": "dravya.besan-pakora",
+      "name": "Besan pakora",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          0,
+          1,
+          1
+        ],
+        "virya": "heating",
+        "note": "fried; occasional"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: besan pakora."
+    },
+    {
+      "id": "dravya.sooji-halwa",
+      "name": "Sooji halwa (sheera)",
+      "sanskrit": null,
+      "aliases": [
+        "sheera"
+      ],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          -2,
+          0,
+          1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: sooji halwa."
+    },
+    {
+      "id": "dravya.moong-dal-halwa",
+      "name": "Moong dal halwa",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          -2,
+          -1,
+          2
+        ],
+        "virya": "heating",
+        "note": "winter strengthener; very heavy"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: moong dal halwa."
+    },
+    {
+      "id": "dravya.besan-ladoo",
+      "name": "Besan ladoo",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 piece",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: besan ladoo."
+    },
+    {
+      "id": "dravya.til-ladoo",
+      "name": "Til-gud ladoo",
+      "sanskrit": "Tila Modaka",
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          -2,
+          1,
+          -1
+        ],
+        "virya": "heating",
+        "note": "classical winter/sankranti sweet"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 piece",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: til gud ladoo; tila modaka; til ladoo."
+    },
+    {
+      "id": "dravya.peanut-chikki",
+      "name": "Peanut chikki",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          0
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: peanut chikki."
+    },
+    {
+      "id": "dravya.steamed-modak",
+      "name": "Steamed modak",
+      "sanskrit": "Modaka",
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: steamed modak; modaka."
+    },
+    {
+      "id": "dravya.puran-poli",
+      "name": "Puran poli",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "neutral"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: puran poli."
+    },
+    {
+      "id": "dravya.shrikhand",
+      "name": "Shrikhand",
+      "sanskrit": "Shikharini",
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          2
+        ],
+        "virya": "cooling",
+        "note": "classical shikharini"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: shrikhand; shikharini."
+    },
+    {
+      "id": "dravya.basundi",
+      "name": "Basundi",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          -2,
+          -1,
+          2
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: basundi."
+    },
+    {
+      "id": "dravya.rabri",
+      "name": "Rabri",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          -2,
+          -1,
+          2
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: rabri."
+    },
+    {
+      "id": "dravya.coconut-chutney",
+      "name": "Coconut chutney",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: coconut chutney."
+    },
+    {
+      "id": "dravya.mint-chutney",
+      "name": "Mint chutney",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: mint chutney."
+    },
+    {
+      "id": "dravya.mango-pickle",
+      "name": "Mango pickle (achar)",
+      "sanskrit": "Amra Sandhita",
+      "aliases": [
+        "achar"
+      ],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          -1,
+          2,
+          -1
+        ],
+        "virya": "heating",
+        "note": "condiment quantity only"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: mango pickle; amra sandhita."
+    },
+    {
+      "id": "dravya.urad-papad",
+      "name": "Urad papad",
+      "sanskrit": "Parpata",
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          0,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: urad papad; parpata."
+    },
+    {
+      "id": "dravya.musta",
+      "name": "Nutgrass tuber",
+      "sanskrit": "Musta",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: nutgrass tuber; musta."
+    },
+    {
+      "id": "dravya.hibiscus-dry",
+      "name": "Dried hibiscus",
+      "sanskrit": "Japa",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          0,
+          -2,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 12513,
+          "name": "Dried hibiscus (bissap, aromatic use)",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.gulkand",
+      "name": "Rose petal preserve",
+      "sanskrit": "Gulkand",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -2,
+          0
+        ],
+        "virya": "cooling",
+        "note": "classical cooling rasayana"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 piece",
+          "grams": 30
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: rose petal preserve; gulkand."
+    },
+    {
+      "id": "dravya.bael-leaf",
+      "name": "Bael leaf",
+      "sanskrit": "Bilva Patra",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: bael leaf; bilva patra."
+    },
+    {
+      "id": "dravya.jamun-seed-powder",
+      "name": "Jamun seed powder",
+      "sanskrit": "Jambu Beeja Churna",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          1,
+          -1,
+          -2
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: jamun seed powder; jambu beeja churna."
+    },
+    {
+      "id": "dravya.shilajit",
+      "name": "Shilajit",
+      "sanskrit": "Shilajatu",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          -1
+        ],
+        "virya": "heating",
+        "note": "mineral rasayana; purified form only"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: shilajit; shilajatu."
+    },
+    {
+      "id": "dravya.amla-juice",
+      "name": "Amla juice",
+      "sanskrit": "Amalaki Svarasa",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: amla juice; amalaki svarasa."
+    },
+    {
+      "id": "dravya.fenugreek-sprouted",
+      "name": "Sprouted fenugreek",
+      "sanskrit": "Methika (ankurita)",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -2
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: sprouted fenugreek; methika; fenugreek sprouted."
+    },
+    {
+      "id": "dravya.turmeric-fresh",
+      "name": "Fresh turmeric root",
+      "sanskrit": "Ardra Haridra",
+      "aliases": [],
+      "category": "medicinal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 12213,
+          "name": "Turmeric (Holud)",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true
+    }
+  ]
+}
