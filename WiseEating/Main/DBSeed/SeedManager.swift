@@ -16,6 +16,7 @@ enum SeedManager {
         await seedReferenceMineralsIfNeeded(context: ctx)
         await seedReferenceDietsIfNeeded(context: ctx)
         await seedFoodsIfNeeded(context: ctx)
+        await seedAyurvedaIfNeeded(context: ctx)
         await seedExercisesIfNeeded(context: ctx)
         await seedTrainingPlansIfNeeded(context: ctx)
 
@@ -86,6 +87,28 @@ enum SeedManager {
             print("   ✅ Seeded \(decodedBuckets.count) product buckets.")
         } catch {
             print("   ❌ Product bucket seeding failed: \(error)")
+        }
+    }
+
+    // MARK: – Ayurveda
+    private static func seedAyurvedaIfNeeded(context ctx: ModelContext) async {
+        print("-> Checking for Ayurveda data...")
+        guard databaseIsEmpty(entity: AyurvedaProfile.self, context: ctx) else {
+            print("   Ayurveda data already seeded, skipping.")
+            return
+        }
+
+        do {
+            let seedVersion = try AyurvedaSeeder.bundleSeedVersion()
+            guard UserDefaults.standard.integer(forKey: "ayurvedaSeedVersion") < seedVersion else {
+                print("   Ayurveda seed version already applied, skipping.")
+                return
+            }
+            try AyurvedaSeeder.run(context: ctx)
+            UserDefaults.standard.set(seedVersion, forKey: "ayurvedaSeedVersion")
+        } catch {
+            ctx.rollback()
+            print("   ❌ Ayurveda seeding failed; continuing without Ayurveda data: \(error)")
         }
     }
 

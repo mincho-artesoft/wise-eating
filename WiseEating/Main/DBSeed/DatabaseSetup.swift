@@ -31,7 +31,8 @@ struct DatabaseSetup {
             LipidsData.self, MacronutrientsData.self,
             MineralsData.self, OtherCompoundsData.self,
             VitaminsData.self, Batch.self,
-            TrainingPlanSet.self
+            TrainingPlanSet.self,
+            AyurvedaProfile.self, AyurvedaLink.self
         ]
         
         // 2. Дефинираме типовете за ТЕМПЛЕЙТНАТА база (templates.store)
