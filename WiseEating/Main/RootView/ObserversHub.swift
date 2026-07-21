@@ -155,7 +155,17 @@ struct ObserversHub: View {
     
     var body: some View {
         Group {
-            
+            aiStatusObserver
+            tabChangeObserver
+            notificationsObserver
+            coordinatorObserver
+            profilesDrawerObserver
+            keyboardObserver
+        }
+        .hidden()
+    }
+
+    private var aiStatusObserver: some View {
             Color.clear
                 .onChange(of: aiManager.jobs) { _, newJobs in
                     let isGenerating = newJobs.contains { $0.status == .pending || $0.status == .running }
@@ -175,7 +185,9 @@ struct ObserversHub: View {
                         self.isAIGenerating = isGenerating
                     }
                 }
-            
+    }
+
+    private var tabChangeObserver: some View {
             TabChangeObserver(
                 selectedTab: $selectedTab,
                 hasNewNutrition: $hasNewNutrition,
@@ -191,7 +203,9 @@ struct ObserversHub: View {
                 isProfilesDrawerVisible: $isProfilesDrawerVisible,
                 hasUnreadAINotifications: $hasUnreadAINotifications
             )
+    }
 
+    private var notificationsObserver: some View {
             NotificationsObserver(
                 profiles: profiles,
                 onEditNutrition: { payload in
@@ -257,7 +271,9 @@ struct ObserversHub: View {
                 // ✅ ДОБАВЕНО: Подаваме callback-а към NotificationsObserver
                 onOpenSubscriptionFlow: onOpenSubscriptionFlow
             )
-            
+    }
+
+    private var coordinatorObserver: some View {
             CoordinatorObserver(
                 coordinator: coordinator,
                 profiles: profiles,
@@ -278,7 +294,9 @@ struct ObserversHub: View {
                 isShowingDailyAIGenerator: $isShowingDailyAIGenerator,
                 onDismissSearch: onDismissSearch
             )
+    }
 
+    private var profilesDrawerObserver: some View {
             ProfilesDrawerObserver(
                 profilesMenuState: $profilesMenuState,
                 isPresentingNewProfile: $isPresentingNewProfile,
@@ -289,11 +307,12 @@ struct ObserversHub: View {
                 isProfilesDrawerVisible: $isProfilesDrawerVisible,
                 onDismissSearch: onDismissSearch
             )
-
-            KeyboardObserver(keyboardHeight: $keyboardHeight)
-        }
-        .hidden()
     }
+
+    private var keyboardObserver: some View {
+            KeyboardObserver(keyboardHeight: $keyboardHeight)
+    }
+
 }
 
 // MARK: - Small, focused observers
