@@ -1,0 +1,3522 @@
+{
+  "formatVersion": "1.0",
+  "batch": "recipe-batch-r18",
+  "qualityState": "aiDraft",
+  "items": [
+    {
+      "id": "recipe.dessert-apple-oat-crumble",
+      "name": "Warm Apple Oat Crumble",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.apple",
+          "name": "Apples, sliced",
+          "grams": 700
+        },
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 42
+        }
+      ],
+      "steps": [
+        "Prepare the apples, sliced and spread them in a shallow baking dish.",
+        "Dot with half the ghee and sprinkle over the cinnamon and sweetener.",
+        "Combine the rolled oats and almonds, chopped with the remaining ghee and scatter them evenly.",
+        "Bake until the fruit is soft and bubbling and the topping is gently browned.",
+        "Rest for ten minutes and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Apple Oat Crumble is a warm fruit dessert with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international baked-fruit dessert adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-pear-walnut-crumble",
+      "name": "Warm Pear Walnut Crumble",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pear",
+          "name": "Pears, sliced",
+          "grams": 700
+        },
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.walnut",
+          "name": "Walnuts, chopped",
+          "grams": 65
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 42
+        }
+      ],
+      "steps": [
+        "Prepare the pears, sliced and spread them in a shallow baking dish.",
+        "Dot with half the ghee and sprinkle over the cinnamon and sweetener.",
+        "Combine the rolled oats and walnuts, chopped with the remaining ghee and scatter them evenly.",
+        "Bake until the fruit is soft and bubbling and the topping is gently browned.",
+        "Rest for ten minutes and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Pear Walnut Crumble is a warm fruit dessert with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international baked-fruit dessert adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-peach-almond-crisp",
+      "name": "Warm Peach Almond Crisp",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.peach",
+          "name": "Peaches, sliced",
+          "grams": 680
+        },
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 65
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 42
+        }
+      ],
+      "steps": [
+        "Prepare the peaches, sliced and spread them in a shallow baking dish.",
+        "Dot with half the ghee and sprinkle over the cinnamon and sweetener.",
+        "Combine the rolled oats and almonds, chopped with the remaining ghee and scatter them evenly.",
+        "Bake until the fruit is soft and bubbling and the topping is gently browned.",
+        "Rest for ten minutes and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Peach Almond Crisp is a warm fruit dessert with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international baked-fruit dessert adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-plum-oat-crisp",
+      "name": "Warm Plum Oat Crisp",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.plum",
+          "name": "Plums, pitted and sliced",
+          "grams": 680
+        },
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 50
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 42
+        }
+      ],
+      "steps": [
+        "Prepare the plums, pitted and sliced and spread them in a shallow baking dish.",
+        "Dot with half the ghee and sprinkle over the cinnamon and sweetener.",
+        "Combine the rolled oats and almonds, chopped with the remaining ghee and scatter them evenly.",
+        "Bake until the fruit is soft and bubbling and the topping is gently browned.",
+        "Rest for ten minutes and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Plum Oat Crisp is a warm fruit dessert with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international baked-fruit dessert adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-apricot-pistachio-crisp",
+      "name": "Warm Apricot Pistachio Crisp",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.apricot",
+          "name": "Apricots, halved",
+          "grams": 680
+        },
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.pistachio",
+          "name": "Pistachios, chopped",
+          "grams": 65
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 42
+        }
+      ],
+      "steps": [
+        "Prepare the apricots, halved and spread them in a shallow baking dish.",
+        "Dot with half the ghee and sprinkle over the cinnamon and sweetener.",
+        "Combine the rolled oats and pistachios, chopped with the remaining ghee and scatter them evenly.",
+        "Bake until the fruit is soft and bubbling and the topping is gently browned.",
+        "Rest for ten minutes and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Apricot Pistachio Crisp is a warm fruit dessert with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international baked-fruit dessert adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-blueberry-oat-crumble",
+      "name": "Warm Blueberry Oat Crumble",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.blueberry",
+          "name": "Blueberries",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.apple",
+          "name": "Apple, diced",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 50
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 42
+        }
+      ],
+      "steps": [
+        "Prepare the blueberries and apple, diced and spread them in a shallow baking dish.",
+        "Dot with half the ghee and sprinkle over the cinnamon and sweetener.",
+        "Combine the rolled oats and almonds, chopped with the remaining ghee and scatter them evenly.",
+        "Bake until the fruit is soft and bubbling and the topping is gently browned.",
+        "Rest for ten minutes and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Blueberry Oat Crumble is a warm fruit dessert with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international baked-fruit dessert adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-cherry-almond-crisp",
+      "name": "Warm Cherry Almond Crisp",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cherry",
+          "name": "Sweet cherries, pitted",
+          "grams": 650
+        },
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 42
+        }
+      ],
+      "steps": [
+        "Prepare the sweet cherries, pitted and spread them in a shallow baking dish.",
+        "Dot with half the ghee and sprinkle over the cinnamon and sweetener.",
+        "Combine the rolled oats and almonds, chopped with the remaining ghee and scatter them evenly.",
+        "Bake until the fruit is soft and bubbling and the topping is gently browned.",
+        "Rest for ten minutes and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Cherry Almond Crisp is a warm fruit dessert with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international baked-fruit dessert adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-pineapple-coconut-bake",
+      "name": "Warm Pineapple Coconut Bake",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pineapple",
+          "name": "Pineapple, diced",
+          "grams": 680
+        },
+        {
+          "dravyaId": "dravya.coconut-dried",
+          "name": "Dried coconut",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 42
+        }
+      ],
+      "steps": [
+        "Prepare the pineapple, diced and spread them in a shallow baking dish.",
+        "Dot with half the ghee and sprinkle over the cinnamon and sweetener.",
+        "Combine the dried coconut and rolled oats with the remaining ghee and scatter them evenly.",
+        "Bake until the fruit is soft and bubbling and the topping is gently browned.",
+        "Rest for ten minutes and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Pineapple Coconut Bake is a warm fruit dessert with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international baked-fruit dessert adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-mango-coconut-bake",
+      "name": "Warm Mango Coconut Bake",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mango-ripe",
+          "name": "Ripe mango, diced",
+          "grams": 680
+        },
+        {
+          "dravyaId": "dravya.coconut-dried",
+          "name": "Dried coconut",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 42
+        }
+      ],
+      "steps": [
+        "Prepare the ripe mango, diced and spread them in a shallow baking dish.",
+        "Dot with half the ghee and sprinkle over the cinnamon and sweetener.",
+        "Combine the dried coconut and rolled oats with the remaining ghee and scatter them evenly.",
+        "Bake until the fruit is soft and bubbling and the topping is gently browned.",
+        "Rest for ten minutes and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Mango Coconut Bake is a warm fruit dessert with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international baked-fruit dessert adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-banana-oat-bake",
+      "name": "Warm Banana Oat Bake",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.banana-ripe",
+          "name": "Ripe bananas, sliced",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.walnut",
+          "name": "Walnuts, chopped",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 30
+        }
+      ],
+      "steps": [
+        "Prepare the ripe bananas, sliced and spread them in a shallow baking dish.",
+        "Dot with half the ghee and sprinkle over the cinnamon and sweetener.",
+        "Combine the rolled oats and walnuts, chopped with the remaining ghee and scatter them evenly.",
+        "Bake until the fruit is soft and bubbling and the topping is gently browned.",
+        "Rest for ten minutes and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Banana Oat Bake is a warm fruit dessert with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international baked-fruit dessert adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-fig-walnut-bake",
+      "name": "Warm Fig Walnut Bake",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.fig-fresh",
+          "name": "Fresh figs, halved",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.walnut",
+          "name": "Walnuts, chopped",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 42
+        }
+      ],
+      "steps": [
+        "Prepare the fresh figs, halved and spread them in a shallow baking dish.",
+        "Dot with half the ghee and sprinkle over the cinnamon and sweetener.",
+        "Combine the walnuts, chopped and rolled oats with the remaining ghee and scatter them evenly.",
+        "Bake until the fruit is soft and bubbling and the topping is gently browned.",
+        "Rest for ten minutes and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Fig Walnut Bake is a warm fruit dessert with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international baked-fruit dessert adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-date-apple-bake",
+      "name": "Warm Date Apple Bake",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.apple",
+          "name": "Apples, sliced",
+          "grams": 600
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates, chopped",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 50
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 20
+        }
+      ],
+      "steps": [
+        "Prepare the apples, sliced and soft dates, chopped and spread them in a shallow baking dish.",
+        "Dot with half the ghee and sprinkle over the cinnamon and sweetener.",
+        "Combine the rolled oats and almonds, chopped with the remaining ghee and scatter them evenly.",
+        "Bake until the fruit is soft and bubbling and the topping is gently browned.",
+        "Rest for ten minutes and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Date Apple Bake is a warm fruit dessert with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international baked-fruit dessert adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-pomegranate-pear-bake",
+      "name": "Warm Pomegranate Pear Bake",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pear",
+          "name": "Pears, sliced",
+          "grams": 560
+        },
+        {
+          "dravyaId": "dravya.pomegranate",
+          "name": "Pomegranate arils",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.pistachio",
+          "name": "Pistachios, chopped",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 42
+        }
+      ],
+      "steps": [
+        "Prepare the pears, sliced and pomegranate arils and spread them in a shallow baking dish.",
+        "Dot with half the ghee and sprinkle over the cinnamon and sweetener.",
+        "Combine the rolled oats and pistachios, chopped with the remaining ghee and scatter them evenly.",
+        "Bake until the fruit is soft and bubbling and the topping is gently browned.",
+        "Rest for ten minutes and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Pomegranate Pear Bake is a warm fruit dessert with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international baked-fruit dessert adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-pumpkin-apple-crumble",
+      "name": "Pumpkin Apple Crumble",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced small",
+          "grams": 400
+        },
+        {
+          "dravyaId": "dravya.apple",
+          "name": "Apple, diced",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.walnut",
+          "name": "Walnuts, chopped",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 42
+        }
+      ],
+      "steps": [
+        "Prepare the pumpkin, diced small and apple, diced and spread them in a shallow baking dish.",
+        "Dot with half the ghee and sprinkle over the cinnamon and sweetener.",
+        "Combine the rolled oats and walnuts, chopped with the remaining ghee and scatter them evenly.",
+        "Bake until the fruit is soft and bubbling and the topping is gently browned.",
+        "Rest for ten minutes and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pumpkin Apple Crumble is a warm fruit dessert with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international baked-fruit dessert adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-sweet-potato-pear-crumble",
+      "name": "Sweet Potato Pear Crumble",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, diced small",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.pear",
+          "name": "Pear, diced",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 42
+        }
+      ],
+      "steps": [
+        "Prepare the sweet potato, diced small and pear, diced and spread them in a shallow baking dish.",
+        "Dot with half the ghee and sprinkle over the cinnamon and sweetener.",
+        "Combine the rolled oats and almonds, chopped with the remaining ghee and scatter them evenly.",
+        "Bake until the fruit is soft and bubbling and the topping is gently browned.",
+        "Rest for ten minutes and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sweet Potato Pear Crumble is a warm fruit dessert with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international baked-fruit dessert adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-carrot-apple-bake",
+      "name": "Carrot Apple Dessert Bake",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, grated",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.apple",
+          "name": "Apple, diced",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.walnut",
+          "name": "Walnuts, chopped",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 42
+        }
+      ],
+      "steps": [
+        "Prepare the carrot, grated and apple, diced and spread them in a shallow baking dish.",
+        "Dot with half the ghee and sprinkle over the cinnamon and sweetener.",
+        "Combine the rolled oats and walnuts, chopped with the remaining ghee and scatter them evenly.",
+        "Bake until the fruit is soft and bubbling and the topping is gently browned.",
+        "Rest for ten minutes and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Carrot Apple Dessert Bake is a warm fruit dessert with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international baked-fruit dessert adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-beet-pear-bake",
+      "name": "Beet Pear Dessert Bake",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, grated",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.pear",
+          "name": "Pear, diced",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 42
+        }
+      ],
+      "steps": [
+        "Prepare the beetroot, grated and pear, diced and spread them in a shallow baking dish.",
+        "Dot with half the ghee and sprinkle over the cinnamon and sweetener.",
+        "Combine the rolled oats and almonds, chopped with the remaining ghee and scatter them evenly.",
+        "Bake until the fruit is soft and bubbling and the topping is gently browned.",
+        "Rest for ten minutes and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Beet Pear Dessert Bake is a warm fruit dessert with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international baked-fruit dessert adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-strawberry-apple-crisp",
+      "name": "Strawberry Apple Crisp",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.strawberry",
+          "name": "Strawberries, halved",
+          "grams": 400
+        },
+        {
+          "dravyaId": "dravya.apple",
+          "name": "Apple, diced",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 42
+        }
+      ],
+      "steps": [
+        "Prepare the strawberries, halved and apple, diced and spread them in a shallow baking dish.",
+        "Dot with half the ghee and sprinkle over the cinnamon and sweetener.",
+        "Combine the rolled oats and almonds, chopped with the remaining ghee and scatter them evenly.",
+        "Bake until the fruit is soft and bubbling and the topping is gently browned.",
+        "Rest for ten minutes and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Strawberry Apple Crisp is a warm fruit dessert with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international baked-fruit dessert adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-blueberry-peach-crisp",
+      "name": "Blueberry Peach Crisp",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.blueberry",
+          "name": "Blueberries",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.peach",
+          "name": "Peaches, sliced",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.pistachio",
+          "name": "Pistachios, chopped",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 42
+        }
+      ],
+      "steps": [
+        "Prepare the blueberries and peaches, sliced and spread them in a shallow baking dish.",
+        "Dot with half the ghee and sprinkle over the cinnamon and sweetener.",
+        "Combine the rolled oats and pistachios, chopped with the remaining ghee and scatter them evenly.",
+        "Bake until the fruit is soft and bubbling and the topping is gently browned.",
+        "Rest for ten minutes and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Blueberry Peach Crisp is a warm fruit dessert with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international baked-fruit dessert adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-grape-pear-bake",
+      "name": "Warm Grape Pear Bake",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 18,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.grapes",
+          "name": "Sweet grapes",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.pear",
+          "name": "Pears, sliced",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.walnut",
+          "name": "Walnuts, chopped",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup",
+          "grams": 42
+        }
+      ],
+      "steps": [
+        "Prepare the sweet grapes and pears, sliced and spread them in a shallow baking dish.",
+        "Dot with half the ghee and sprinkle over the cinnamon and sweetener.",
+        "Combine the rolled oats and walnuts, chopped with the remaining ghee and scatter them evenly.",
+        "Bake until the fruit is soft and bubbling and the topping is gently browned.",
+        "Rest for ten minutes and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Grape Pear Bake is a warm fruit dessert with restrained sweetener. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international baked-fruit dessert adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-almond-rice-pudding",
+      "name": "Almond-Milk Rice Pudding",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 10,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 1000
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 35
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 50
+        }
+      ],
+      "steps": [
+        "Prepare the white rice and combine it with the unsweetened almond milk in a heavy pan.",
+        "Bring to a gentle simmer, stirring frequently across the base of the pan.",
+        "Add the almonds, chopped and continue until the mixture thickens.",
+        "Stir in the sweetener and cardamom and cook only until dissolved.",
+        "Rest for five minutes and serve warm or at room temperature."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Almond-Milk Rice Pudding is a softly cooked pudding served in a small portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian pudding adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-oat-quinoa-pudding",
+      "name": "Oat-Milk Quinoa Pudding",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 10,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Unsweetened oat milk",
+          "grams": 950
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Additional cinnamon",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 48
+        }
+      ],
+      "steps": [
+        "Prepare the quinoa and combine it with the unsweetened oat milk in a heavy pan.",
+        "Bring to a gentle simmer, stirring frequently across the base of the pan.",
+        "Add the additional cinnamon and continue until the mixture thickens.",
+        "Stir in the sweetener and cardamom and cook only until dissolved.",
+        "Rest for five minutes and serve warm or at room temperature."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Oat-Milk Quinoa Pudding is a softly cooked pudding served in a small portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian pudding adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-almond-millet-date-pudding",
+      "name": "Almond-Milk Millet Date Pudding",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 10,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 950
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates, chopped",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 25
+        }
+      ],
+      "steps": [
+        "Prepare the proso millet and combine it with the unsweetened almond milk in a heavy pan.",
+        "Bring to a gentle simmer, stirring frequently across the base of the pan.",
+        "Add the soft dates, chopped and continue until the mixture thickens.",
+        "Stir in the sweetener and cardamom and cook only until dissolved.",
+        "Rest for five minutes and serve warm or at room temperature."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Almond-Milk Millet Date Pudding is a softly cooked pudding served in a small portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian pudding adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-oat-amaranth-fig-pudding",
+      "name": "Oat-Milk Amaranth Fig Pudding",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 10,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Unsweetened oat milk",
+          "grams": 950
+        },
+        {
+          "dravyaId": "dravya.dried-fig",
+          "name": "Dried figs, chopped",
+          "grams": 75
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 25
+        }
+      ],
+      "steps": [
+        "Prepare the amaranth grain and combine it with the unsweetened oat milk in a heavy pan.",
+        "Bring to a gentle simmer, stirring frequently across the base of the pan.",
+        "Add the dried figs, chopped and continue until the mixture thickens.",
+        "Stir in the sweetener and cardamom and cook only until dissolved.",
+        "Rest for five minutes and serve warm or at room temperature."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Oat-Milk Amaranth Fig Pudding is a softly cooked pudding served in a small portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian pudding adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-almond-chia-pear-pudding",
+      "name": "Warm Almond Chia Pear Pudding",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 10,
+      "cookMinutes": 20,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chia",
+          "name": "Chia seeds",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 850
+        },
+        {
+          "dravyaId": "dravya.pear",
+          "name": "Pear, diced small",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 35
+        }
+      ],
+      "steps": [
+        "Prepare the chia seeds and combine it with the unsweetened almond milk in a heavy pan.",
+        "Bring to a gentle simmer, stirring frequently across the base of the pan.",
+        "Add the pear, diced small and rolled oats and continue until the mixture thickens.",
+        "Stir in the sweetener and cardamom and cook only until dissolved.",
+        "Rest for five minutes and serve warm or at room temperature."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Almond Chia Pear Pudding is a softly cooked pudding served in a small portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian pudding adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-almond-tapioca-pudding",
+      "name": "Almond-Milk Tapioca Pudding",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 10,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "fdcId": 7138,
+          "name": "Dry tapioca pearls",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 950
+        },
+        {
+          "dravyaId": "dravya.saffron",
+          "name": "Saffron strands",
+          "grams": 0.15
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 50
+        }
+      ],
+      "steps": [
+        "Prepare the dry tapioca pearls and combine it with the unsweetened almond milk in a heavy pan.",
+        "Bring to a gentle simmer, stirring frequently across the base of the pan.",
+        "Add the saffron strands and continue until the mixture thickens.",
+        "Stir in the sweetener and cardamom and cook only until dissolved.",
+        "Rest for five minutes and serve warm or at room temperature."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Almond-Milk Tapioca Pudding is a softly cooked pudding served in a small portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian pudding adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-oat-ragi-date-pudding",
+      "name": "Oat-Milk Ragi Date Pudding",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 10,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.ragi",
+          "name": "Finger millet flour",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Unsweetened oat milk",
+          "grams": 900
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates, chopped",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 20
+        }
+      ],
+      "steps": [
+        "Prepare the finger millet flour and combine it with the unsweetened oat milk in a heavy pan.",
+        "Bring to a gentle simmer, stirring frequently across the base of the pan.",
+        "Add the soft dates, chopped and continue until the mixture thickens.",
+        "Stir in the sweetener and cardamom and cook only until dissolved.",
+        "Rest for five minutes and serve warm or at room temperature."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Oat-Milk Ragi Date Pudding is a softly cooked pudding served in a small portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian pudding adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-almond-barley-raisin-pudding",
+      "name": "Almond-Milk Barley Raisin Pudding",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 10,
+      "cookMinutes": 44,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 1000
+        },
+        {
+          "dravyaId": "dravya.raisins",
+          "name": "Raisins",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 35
+        }
+      ],
+      "steps": [
+        "Prepare the pearled barley and combine it with the unsweetened almond milk in a heavy pan.",
+        "Bring to a gentle simmer, stirring frequently across the base of the pan.",
+        "Add the raisins and continue until the mixture thickens.",
+        "Stir in the sweetener and cardamom and cook only until dissolved.",
+        "Rest for five minutes and serve warm or at room temperature."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Almond-Milk Barley Raisin Pudding is a softly cooked pudding served in a small portion. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian pudding adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-apple-dairy-rice-pudding",
+      "name": "Apple Dairy Rice Pudding",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 10,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 1000
+        },
+        {
+          "dravyaId": "dravya.apple",
+          "name": "Apple, diced",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 55
+        }
+      ],
+      "steps": [
+        "Prepare the white rice and combine it with the whole cow milk in a heavy pan.",
+        "Bring to a gentle simmer, stirring frequently across the base of the pan.",
+        "Add the apple, diced and continue until the mixture thickens.",
+        "Stir in the sweetener and cardamom and cook only until dissolved.",
+        "Rest for five minutes and serve warm or at room temperature."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [
+        "fruit combined with dairy (traditional viruddha)"
+      ],
+      "guidance": "This apple rice pudding is flagged because fruit is cooked with cow milk. Vata: serve warm and soft. Pitta: keep sweetener modest. Kapha: take a small portion. Compliant variant: replace cow milk with unsweetened almond milk.",
+      "provenance": [
+        "original international lacto-vegetarian pudding adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-banana-dairy-oat-pudding",
+      "name": "Banana Dairy Oat Pudding",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 10,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 950
+        },
+        {
+          "dravyaId": "dravya.banana-ripe",
+          "name": "Ripe banana, sliced",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 55
+        }
+      ],
+      "steps": [
+        "Prepare the rolled oats and combine it with the whole cow milk in a heavy pan.",
+        "Bring to a gentle simmer, stirring frequently across the base of the pan.",
+        "Add the ripe banana, sliced and continue until the mixture thickens.",
+        "Stir in the sweetener and cardamom and cook only until dissolved.",
+        "Rest for five minutes and serve warm or at room temperature."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [
+        "fruit combined with dairy (traditional viruddha)"
+      ],
+      "guidance": "This banana oat pudding is flagged for combining banana with cow milk. Vata: serve warm and soft. Pitta: use little cinnamon. Kapha: take a small bowl. Compliant variant: replace cow milk with unsweetened oat milk.",
+      "provenance": [
+        "original international lacto-vegetarian pudding adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-strawberry-dairy-tapioca-pudding",
+      "name": "Strawberry Dairy Tapioca Pudding",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 10,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "fdcId": 7138,
+          "name": "Dry tapioca pearls",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 950
+        },
+        {
+          "dravyaId": "dravya.strawberry",
+          "name": "Strawberries, sliced",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 55
+        }
+      ],
+      "steps": [
+        "Prepare the dry tapioca pearls and combine it with the whole cow milk in a heavy pan.",
+        "Bring to a gentle simmer, stirring frequently across the base of the pan.",
+        "Add the strawberries, sliced and continue until the mixture thickens.",
+        "Stir in the sweetener and cardamom and cook only until dissolved.",
+        "Rest for five minutes and serve warm or at room temperature."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [
+        "fruit combined with dairy (traditional viruddha)"
+      ],
+      "guidance": "This tapioca pudding is flagged because strawberries are combined with cow milk. Vata: serve at room temperature. Pitta: keep sugar low. Kapha: take a small portion. Compliant variant: replace cow milk with unsweetened almond milk.",
+      "provenance": [
+        "original international lacto-vegetarian pudding adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-mango-dairy-millet-pudding",
+      "name": "Mango Dairy Millet Pudding",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 10,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 950
+        },
+        {
+          "dravyaId": "dravya.mango-ripe",
+          "name": "Ripe mango, diced",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 55
+        }
+      ],
+      "steps": [
+        "Prepare the proso millet and combine it with the whole cow milk in a heavy pan.",
+        "Bring to a gentle simmer, stirring frequently across the base of the pan.",
+        "Add the ripe mango, diced and continue until the mixture thickens.",
+        "Stir in the sweetener and cardamom and cook only until dissolved.",
+        "Rest for five minutes and serve warm or at room temperature."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [
+        "fruit combined with dairy (traditional viruddha)"
+      ],
+      "guidance": "This millet pudding is flagged because mango is combined with cow milk. Vata: serve warm and soft. Pitta: keep sweetener modest. Kapha: take a small serving. Compliant variant: replace cow milk with unsweetened almond milk.",
+      "provenance": [
+        "original international lacto-vegetarian pudding adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-blueberry-dairy-quinoa-pudding",
+      "name": "Blueberry Dairy Quinoa Pudding",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 10,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 950
+        },
+        {
+          "dravyaId": "dravya.blueberry",
+          "name": "Blueberries",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 55
+        }
+      ],
+      "steps": [
+        "Prepare the quinoa and combine it with the whole cow milk in a heavy pan.",
+        "Bring to a gentle simmer, stirring frequently across the base of the pan.",
+        "Add the blueberries and continue until the mixture thickens.",
+        "Stir in the sweetener and cardamom and cook only until dissolved.",
+        "Rest for five minutes and serve warm or at room temperature."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [
+        "fruit combined with dairy (traditional viruddha)"
+      ],
+      "guidance": "This quinoa pudding is flagged because blueberries are combined with cow milk. Vata: serve warm with a soft texture. Pitta: keep cinnamon low. Kapha: take a small bowl. Compliant variant: replace cow milk with unsweetened oat milk.",
+      "provenance": [
+        "original international lacto-vegetarian pudding adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-pineapple-dairy-rice-pudding",
+      "name": "Pineapple Dairy Rice Pudding",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 10,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 950
+        },
+        {
+          "dravyaId": "dravya.pineapple",
+          "name": "Pineapple, diced",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 55
+        }
+      ],
+      "steps": [
+        "Prepare the white rice and combine it with the whole cow milk in a heavy pan.",
+        "Bring to a gentle simmer, stirring frequently across the base of the pan.",
+        "Add the pineapple, diced and continue until the mixture thickens.",
+        "Stir in the sweetener and cardamom and cook only until dissolved.",
+        "Rest for five minutes and serve warm or at room temperature."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 2,
+        "kapha": 2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [
+        "fruit combined with dairy (traditional viruddha)"
+      ],
+      "guidance": "This rice pudding is flagged because sour pineapple is combined with cow milk. Vata: serve warm and well cooked. Pitta: reduce pineapple. Kapha: take a small portion. Compliant variant: replace cow milk with unsweetened coconut water and almond milk.",
+      "provenance": [
+        "original international lacto-vegetarian pudding adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-peach-dairy-millet-pudding",
+      "name": "Peach Dairy Millet Pudding",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 10,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 950
+        },
+        {
+          "dravyaId": "dravya.peach",
+          "name": "Peach, diced",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 55
+        }
+      ],
+      "steps": [
+        "Prepare the proso millet and combine it with the whole cow milk in a heavy pan.",
+        "Bring to a gentle simmer, stirring frequently across the base of the pan.",
+        "Add the peach, diced and continue until the mixture thickens.",
+        "Stir in the sweetener and cardamom and cook only until dissolved.",
+        "Rest for five minutes and serve warm or at room temperature."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [
+        "fruit combined with dairy (traditional viruddha)"
+      ],
+      "guidance": "This millet pudding is flagged because peach is combined with cow milk. Vata: serve warm and soft. Pitta: keep sweetener low. Kapha: take a small serving. Compliant variant: replace cow milk with unsweetened oat milk.",
+      "provenance": [
+        "original international lacto-vegetarian pudding adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-almond-date-truffles",
+      "name": "Almond Date Dessert Truffles",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 18,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.coconut-dried",
+          "name": "Dried coconut",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the almonds and dried coconut gently, then cool.",
+        "Grind the toasted ingredients to a coarse meal.",
+        "Work in the soft dates, ghee, and cardamom until the mixture holds when pressed.",
+        "Shape into 12 small pieces with clean hands.",
+        "Rest until set and serve one piece per portion."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Almond Date Dessert Truffles is a compact sweet intended as one small piece. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international no-egg confection adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-walnut-fig-truffles",
+      "name": "Walnut Fig Dessert Truffles",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 18,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.walnut",
+          "name": "Walnuts",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.dried-fig",
+          "name": "Dried figs",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the walnuts and dried figs gently, then cool.",
+        "Grind the toasted ingredients to a coarse meal.",
+        "Work in the soft dates, ghee, and cardamom until the mixture holds when pressed.",
+        "Shape into 12 small pieces with clean hands.",
+        "Rest until set and serve one piece per portion."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Walnut Fig Dessert Truffles is a compact sweet intended as one small piece. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international no-egg confection adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-pistachio-apricot-truffles",
+      "name": "Pistachio Apricot Truffles",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 18,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pistachio",
+          "name": "Pistachios",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.dried-apricot",
+          "name": "Dried apricots",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the pistachios and dried apricots gently, then cool.",
+        "Grind the toasted ingredients to a coarse meal.",
+        "Work in the soft dates, ghee, and cardamom until the mixture holds when pressed.",
+        "Shape into 12 small pieces with clean hands.",
+        "Rest until set and serve one piece per portion."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pistachio Apricot Truffles is a compact sweet intended as one small piece. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international no-egg confection adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-sesame-prune-truffles",
+      "name": "Sesame Prune Truffles",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 18,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.prunes",
+          "name": "Prunes",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the sesame seeds and prunes gently, then cool.",
+        "Grind the toasted ingredients to a coarse meal.",
+        "Work in the soft dates, ghee, and cardamom until the mixture holds when pressed.",
+        "Shape into 12 small pieces with clean hands.",
+        "Rest until set and serve one piece per portion."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sesame Prune Truffles is a compact sweet intended as one small piece. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international no-egg confection adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-coconut-date-truffles",
+      "name": "Coconut Date Dessert Truffles",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 18,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.coconut-dried",
+          "name": "Dried coconut",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the dried coconut and almonds gently, then cool.",
+        "Grind the toasted ingredients to a coarse meal.",
+        "Work in the soft dates, ghee, and cardamom until the mixture holds when pressed.",
+        "Shape into 12 small pieces with clean hands.",
+        "Rest until set and serve one piece per portion."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Coconut Date Dessert Truffles is a compact sweet intended as one small piece. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international no-egg confection adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-peanut-raisin-truffles",
+      "name": "Peanut Raisin Dessert Truffles",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 18,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.peanut",
+          "name": "Peanuts",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.raisins",
+          "name": "Raisins",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the peanuts and raisins gently, then cool.",
+        "Grind the toasted ingredients to a coarse meal.",
+        "Work in the soft dates, ghee, and cardamom until the mixture holds when pressed.",
+        "Shape into 12 small pieces with clean hands.",
+        "Rest until set and serve one piece per portion."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Peanut Raisin Dessert Truffles is a compact sweet intended as one small piece. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international no-egg confection adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-cashew-fig-truffles",
+      "name": "Cashew Fig Dessert Truffles",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 18,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cashew",
+          "name": "Cashews",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.dried-fig",
+          "name": "Dried figs",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the cashews and dried figs gently, then cool.",
+        "Grind the toasted ingredients to a coarse meal.",
+        "Work in the soft dates, ghee, and cardamom until the mixture holds when pressed.",
+        "Shape into 12 small pieces with clean hands.",
+        "Rest until set and serve one piece per portion."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cashew Fig Dessert Truffles is a compact sweet intended as one small piece. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international no-egg confection adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-pumpkin-seed-date-truffles",
+      "name": "Pumpkin Seed Date Truffles",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 18,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pumpkin-seed",
+          "name": "Pumpkin seeds",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.sunflower-seed",
+          "name": "Sunflower seeds",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the pumpkin seeds and sunflower seeds gently, then cool.",
+        "Grind the toasted ingredients to a coarse meal.",
+        "Work in the soft dates, ghee, and cardamom until the mixture holds when pressed.",
+        "Shape into 12 small pieces with clean hands.",
+        "Rest until set and serve one piece per portion."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pumpkin Seed Date Truffles is a compact sweet intended as one small piece. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international no-egg confection adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-sunflower-apricot-truffles",
+      "name": "Sunflower Apricot Truffles",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 18,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.sunflower-seed",
+          "name": "Sunflower seeds",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.dried-apricot",
+          "name": "Dried apricots",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the sunflower seeds and dried apricots gently, then cool.",
+        "Grind the toasted ingredients to a coarse meal.",
+        "Work in the soft dates, ghee, and cardamom until the mixture holds when pressed.",
+        "Shape into 12 small pieces with clean hands.",
+        "Rest until set and serve one piece per portion."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sunflower Apricot Truffles is a compact sweet intended as one small piece. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international no-egg confection adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-amaranth-jaggery-squares",
+      "name": "Amaranth Jaggery Dessert Squares",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 18,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Popped amaranth",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery",
+          "grams": 155
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the popped amaranth and sesame seeds gently, then cool.",
+        "Grind the toasted ingredients to a coarse meal.",
+        "Work in the jaggery, ghee, and cardamom until the mixture holds when pressed.",
+        "Shape into 12 small pieces with clean hands.",
+        "Rest until set and serve one piece per portion."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Amaranth Jaggery Dessert Squares is a compact sweet intended as one small piece. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international no-egg confection adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-oat-date-truffles",
+      "name": "Oat Date Dessert Truffles",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 18,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the rolled oats and almonds gently, then cool.",
+        "Grind the toasted ingredients to a coarse meal.",
+        "Work in the soft dates, ghee, and cardamom until the mixture holds when pressed.",
+        "Shape into 12 small pieces with clean hands.",
+        "Rest until set and serve one piece per portion."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Oat Date Dessert Truffles is a compact sweet intended as one small piece. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international no-egg confection adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-walnut-prune-truffles",
+      "name": "Walnut Prune Dessert Truffles",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 18,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.walnut",
+          "name": "Walnuts",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.prunes",
+          "name": "Prunes",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the walnuts and prunes gently, then cool.",
+        "Grind the toasted ingredients to a coarse meal.",
+        "Work in the soft dates, ghee, and cardamom until the mixture holds when pressed.",
+        "Shape into 12 small pieces with clean hands.",
+        "Rest until set and serve one piece per portion."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Walnut Prune Dessert Truffles is a compact sweet intended as one small piece. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international no-egg confection adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-almond-apricot-truffles",
+      "name": "Almond Apricot Dessert Truffles",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 18,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.dried-apricot",
+          "name": "Dried apricots",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the almonds and dried apricots gently, then cool.",
+        "Grind the toasted ingredients to a coarse meal.",
+        "Work in the soft dates, ghee, and cardamom until the mixture holds when pressed.",
+        "Shape into 12 small pieces with clean hands.",
+        "Rest until set and serve one piece per portion."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Almond Apricot Dessert Truffles is a compact sweet intended as one small piece. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international no-egg confection adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-coconut-fig-truffles",
+      "name": "Coconut Fig Dessert Truffles",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 18,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.coconut-dried",
+          "name": "Dried coconut",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.dried-fig",
+          "name": "Dried figs",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the dried coconut and dried figs gently, then cool.",
+        "Grind the toasted ingredients to a coarse meal.",
+        "Work in the soft dates, ghee, and cardamom until the mixture holds when pressed.",
+        "Shape into 12 small pieces with clean hands.",
+        "Rest until set and serve one piece per portion."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Coconut Fig Dessert Truffles is a compact sweet intended as one small piece. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international no-egg confection adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.dessert-sesame-date-truffles",
+      "name": "Sesame Date Dessert Truffles",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 18,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the sesame seeds and almonds gently, then cool.",
+        "Grind the toasted ingredients to a coarse meal.",
+        "Work in the soft dates, ghee, and cardamom until the mixture holds when pressed.",
+        "Shape into 12 small pieces with clean hands.",
+        "Rest until set and serve one piece per portion."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sesame Date Dessert Truffles is a compact sweet intended as one small piece. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international no-egg confection adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    }
+  ]
+}
