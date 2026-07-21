@@ -1,0 +1,3483 @@
+{
+  "formatVersion": "1.0",
+  "batch": "recipe-batch-r05",
+  "qualityState": "aiDraft",
+  "items": [
+    {
+      "id": "recipe.sabudana-kheer-fasting",
+      "name": "Sabudana Kheer",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 10,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "fdcId": 7138,
+          "name": "Dry tapioca pearls (sabudana)",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 1200
+        },
+        {
+          "dravyaId": "dravya.saffron",
+          "name": "Saffron strands",
+          "grams": 0.2
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 8
+        }
+      ],
+      "steps": [
+        "Rinse or wipe the dry tapioca pearls (sabudana) as appropriate and coat it with the ghee in a heavy pan.",
+        "Pour in the milk and bring it slowly to a simmer, stirring across the base of the pan.",
+        "Cook gently until the dry tapioca pearls (sabudana) is fully tender and the milk lightly thickens.",
+        "Add the rock sugar and saffron strands; simmer only until dissolved.",
+        "Crush in the cardamom, rest for five minutes, and serve warm or at room temperature."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sabudana Kheer is a rich milk sweet intended as a small, freshly prepared portion. Vata: serve warm with the stated ghee. Pitta: use less sugar and favor cardamom or saffron. Kapha: take only a small portion and do not serve chilled.",
+      "provenance": [
+        "Indian fasting-food kheer tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.carrot-halwa-classic",
+      "name": "Gajar Halwa (Ghee-Milk)",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, finely grated",
+          "grams": 760
+        },
+        {
+          "dravyaId": "dravya.raisins",
+          "name": "Raisins",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 35
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 75
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 700
+        }
+      ],
+      "steps": [
+        "Prepare the carrot, finely grated finely so it cooks to an even texture.",
+        "Warm half the ghee in a heavy pan and cook the main ingredient slowly until its raw aroma fades.",
+        "Add the milk and raisins, almonds, chopped; simmer, stirring often, until absorbed.",
+        "Stir in the jaggery and remaining ghee; cook until the mixture gathers softly from the pan.",
+        "Finish with crushed cardamom and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Gajar Halwa (Ghee-Milk) is a slow-cooked festive sweet, best treated as a modest accompaniment rather than a main meal. Vata: serve warm and soft. Pitta: reduce sweetener and emphasize cardamom. Kapha: take the smallest portion and reduce ghee if preparing at home.",
+      "provenance": [
+        "North Indian gajar halwa tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.beet-halwa",
+      "name": "Beetroot Halwa",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, finely grated",
+          "grams": 700
+        },
+        {
+          "dravyaId": "dravya.raisins",
+          "name": "Raisins",
+          "grams": 40
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 65
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery",
+          "grams": 85
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 650
+        }
+      ],
+      "steps": [
+        "Prepare the beetroot, finely grated finely so it cooks to an even texture.",
+        "Warm half the ghee in a heavy pan and cook the main ingredient slowly until its raw aroma fades.",
+        "Add the milk and raisins; simmer, stirring often, until absorbed.",
+        "Stir in the jaggery and remaining ghee; cook until the mixture gathers softly from the pan.",
+        "Finish with crushed cardamom and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Beetroot Halwa is a slow-cooked festive sweet, best treated as a modest accompaniment rather than a main meal. Vata: serve warm and soft. Pitta: reduce sweetener and emphasize cardamom. Kapha: take the smallest portion and reduce ghee if preparing at home.",
+      "provenance": [
+        "Indian halwa and sheera tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.lauki-halwa",
+      "name": "Lauki Halwa",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.bottle-gourd",
+          "name": "Bottle gourd, grated and squeezed",
+          "grams": 760
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 35
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery",
+          "grams": 85
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 650
+        }
+      ],
+      "steps": [
+        "Prepare the bottle gourd, grated and squeezed finely so it cooks to an even texture.",
+        "Warm half the ghee in a heavy pan and cook the main ingredient slowly until its raw aroma fades.",
+        "Add the milk and almonds, chopped; simmer, stirring often, until absorbed.",
+        "Stir in the jaggery and remaining ghee; cook until the mixture gathers softly from the pan.",
+        "Finish with crushed cardamom and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Lauki Halwa is a slow-cooked festive sweet, best treated as a modest accompaniment rather than a main meal. Vata: serve warm and soft. Pitta: reduce sweetener and emphasize cardamom. Kapha: take the smallest portion and reduce ghee if preparing at home.",
+      "provenance": [
+        "Indian halwa and sheera tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.besan-sheera-postpartum",
+      "name": "Besan Sheera",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.besan",
+          "name": "Chickpea flour",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.ginger-dry",
+          "name": "Dry ginger",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 35
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 95
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1.5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 520
+        }
+      ],
+      "steps": [
+        "Prepare the chickpea flour finely so it cooks to an even texture.",
+        "Warm half the ghee in a heavy pan and cook the main ingredient slowly until its raw aroma fades.",
+        "Add the water and dry ginger, almonds, chopped; simmer, stirring often, until absorbed.",
+        "Stir in the jaggery and remaining ghee; cook until the mixture gathers softly from the pan.",
+        "Finish with crushed cardamom and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Besan sheera is a warming, energy-dense household sweet; this recipe makes no postpartum or therapeutic claim. Vata: serve warm and soft. Pitta: reduce dry ginger. Kapha: take a very small portion.",
+      "provenance": [
+        "North Indian besan sheera tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.dry-fruit-ladoo",
+      "name": "Dry Fruit Ladoo (No Sugar)",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 14,
+      "prepMinutes": 18,
+      "cookMinutes": 18,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.walnut",
+          "name": "Walnuts",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.dried-fig",
+          "name": "Dried figs, chopped",
+          "grams": 110
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates, pitted",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the almonds over low heat until aromatic, then cool slightly.",
+        "Grind or crush it to the texture specified by the style, leaving a little body rather than making a paste.",
+        "Warm the ghee with cardamom and combine it with the soft dates and walnuts, dried figs, chopped.",
+        "Mix with the toasted base until the mixture holds when pressed; let it cool enough to handle.",
+        "Shape into 14 small balls and allow them to set before serving."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Dry Fruit Ladoo (No Sugar) is a compact traditional sweet; one small piece is the intended serving. Vata: take it warm or at room temperature. Pitta: use the lower sweetener amount and cooling cardamom. Kapha: reserve for occasional use and keep the pieces small.",
+      "provenance": [
+        "Indian laddu tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.rajgira-ladoo",
+      "name": "Rajgira Ladoo",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 18,
+      "cookMinutes": 18,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Popped amaranth",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the popped amaranth over low heat until aromatic, then cool slightly.",
+        "Grind or crush it to the texture specified by the style, leaving a little body rather than making a paste.",
+        "Warm the ghee with cardamom and combine it with the jaggery.",
+        "Mix with the toasted base until the mixture holds when pressed; let it cool enough to handle.",
+        "Shape into 12 small balls and allow them to set before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Rajgira Ladoo is a compact traditional sweet; one small piece is the intended serving. Vata: take it warm or at room temperature. Pitta: use the lower sweetener amount and cooling cardamom. Kapha: reserve for occasional use and keep the pieces small.",
+      "provenance": [
+        "Indian laddu tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.murmura-chikki",
+      "name": "Murmura Chikki",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 15,
+      "cookMinutes": 16,
+      "ingredients": [
+        {
+          "fdcId": 10657,
+          "name": "Plain puffed rice",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery",
+          "grams": 135
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 12
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 35
+        }
+      ],
+      "steps": [
+        "Toast the plain puffed rice separately until aromatic, then set aside.",
+        "Grease a flat tray lightly with part of the ghee.",
+        "Melt the jaggery with the water over low heat and cook until a drop firms when placed in cool water.",
+        "Remove from the heat, quickly fold in the toasted ingredients and remaining ghee, and spread the mixture on the tray.",
+        "Mark into 12 small pieces while warm, then cool completely before separating the bars."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Murmura Chikki is a crisp jaggery-bound sweet; one small piece is sufficient. Vata: choose a freshly made piece and avoid a very hard texture. Pitta: use the smallest piece and do not add warming spice. Kapha: reserve for occasional use despite the light crisp texture.",
+      "provenance": [
+        "Indian chikki and jaggery-bar tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.coconut-ladoo",
+      "name": "Coconut Ladoo",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 18,
+      "cookMinutes": 18,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.coconut-dried",
+          "name": "Unsweetened dried coconut",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.cashew",
+          "name": "Cashews, chopped",
+          "grams": 35
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the unsweetened dried coconut over low heat until aromatic, then cool slightly.",
+        "Grind or crush it to the texture specified by the style, leaving a little body rather than making a paste.",
+        "Warm the ghee with cardamom and combine it with the jaggery and cashews, chopped.",
+        "Mix with the toasted base until the mixture holds when pressed; let it cool enough to handle.",
+        "Shape into 12 small balls and allow them to set before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Coconut Ladoo is a compact traditional sweet; one small piece is the intended serving. Vata: take it warm or at room temperature. Pitta: use the lower sweetener amount and cooling cardamom. Kapha: reserve for occasional use and keep the pieces small.",
+      "provenance": [
+        "Indian laddu tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      },
+      "reviewNote": "Modern coconut ladoo often uses condensed milk; this classical-leaning version uses jaggery and ghee, both with verified dravya links."
+    },
+    {
+      "id": "recipe.sesame-jaggery-bar",
+      "name": "Til-Gud Bar",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 15,
+      "cookMinutes": 16,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "White sesame seeds",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 12
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 35
+        }
+      ],
+      "steps": [
+        "Toast the white sesame seeds separately until aromatic, then set aside.",
+        "Grease a flat tray lightly with part of the ghee.",
+        "Melt the jaggery with the water over low heat and cook until a drop firms when placed in cool water.",
+        "Remove from the heat, quickly fold in the toasted ingredients and remaining ghee, and spread the mixture on the tray.",
+        "Mark into 12 small pieces while warm, then cool completely before separating the bars."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Til-Gud Bar is a crisp jaggery-bound sweet; one small piece is sufficient. Vata: choose a freshly made piece and avoid a very hard texture. Pitta: use the smallest piece and do not add warming spice. Kapha: reserve for occasional use despite the light crisp texture.",
+      "provenance": [
+        "Indian chikki and jaggery-bar tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.makhana-kheer",
+      "name": "Makhana Kheer",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 10,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.lotus-seed",
+          "name": "Lotus seeds (makhana)",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 1250
+        },
+        {
+          "dravyaId": "dravya.pistachio",
+          "name": "Pistachios, chopped",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 8
+        }
+      ],
+      "steps": [
+        "Rinse or wipe the lotus seeds (makhana) as appropriate and coat it with the ghee in a heavy pan.",
+        "Pour in the milk and bring it slowly to a simmer, stirring across the base of the pan.",
+        "Cook gently until the lotus seeds (makhana) is fully tender and the milk lightly thickens.",
+        "Add the rock sugar and pistachios, chopped; simmer only until dissolved.",
+        "Crush in the cardamom, rest for five minutes, and serve warm or at room temperature."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Makhana Kheer is a rich milk sweet intended as a small, freshly prepared portion. Vata: serve warm with the stated ghee. Pitta: use less sugar and favor cardamom or saffron. Kapha: take only a small portion and do not serve chilled.",
+      "provenance": [
+        "Indian kheer and payasam tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.vermicelli-kheer",
+      "name": "Seviyan Kheer",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 10,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.semolina",
+          "name": "Semolina vermicelli",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 1200
+        },
+        {
+          "dravyaId": "dravya.raisins",
+          "name": "Raisins",
+          "grams": 35
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 75
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 8
+        }
+      ],
+      "steps": [
+        "Rinse or wipe the semolina vermicelli as appropriate and coat it with the ghee in a heavy pan.",
+        "Pour in the milk and bring it slowly to a simmer, stirring across the base of the pan.",
+        "Cook gently until the semolina vermicelli is fully tender and the milk lightly thickens.",
+        "Add the rock sugar and raisins; simmer only until dissolved.",
+        "Crush in the cardamom, rest for five minutes, and serve warm or at room temperature."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Seviyan Kheer is a rich milk sweet intended as a small, freshly prepared portion. Vata: serve warm with the stated ghee. Pitta: use less sugar and favor cardamom or saffron. Kapha: take only a small portion and do not serve chilled.",
+      "provenance": [
+        "Indian kheer and payasam tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.paal-payasam",
+      "name": "Paal Payasam",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 10,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 1400
+        },
+        {
+          "dravyaId": "dravya.saffron",
+          "name": "Saffron strands",
+          "grams": 0.2
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 8
+        }
+      ],
+      "steps": [
+        "Rinse or wipe the white rice as appropriate and coat it with the ghee in a heavy pan.",
+        "Pour in the milk and bring it slowly to a simmer, stirring across the base of the pan.",
+        "Cook gently until the white rice is fully tender and the milk lightly thickens.",
+        "Add the rock sugar and saffron strands; simmer only until dissolved.",
+        "Crush in the cardamom, rest for five minutes, and serve warm or at room temperature."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Paal Payasam is a rich milk sweet intended as a small, freshly prepared portion. Vata: serve warm with the stated ghee. Pitta: use less sugar and favor cardamom or saffron. Kapha: take only a small portion and do not serve chilled.",
+      "provenance": [
+        "South Indian paal payasam tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.fruit-custard-light",
+      "name": "Stewed Fruit Bowl",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 18,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.apple",
+          "name": "Apple, peeled and diced",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.pear",
+          "name": "Pear, peeled and diced",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 16
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 180
+        }
+      ],
+      "steps": [
+        "Warm the ghee in a small heavy pan and add the apple and pear.",
+        "Turn the fruit gently for two minutes, then add the water and cinnamon.",
+        "Cover and cook on low heat until the fruit is tender but still holds some shape.",
+        "Stir in the rock sugar and cook uncovered for two minutes until the juices lightly glaze the fruit.",
+        "Serve warm on its own, without dairy."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "sharad",
+        "hemanta"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Apples and pears are gently stewed and served without dairy in this warm fruit sweet. Vata: cook until very soft and retain the ghee. Pitta: use little rock sugar. Kapha: omit the rock sugar and take a small bowl.",
+      "provenance": [
+        "Ayurvedic stewed-fruit household tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.baked-sweet-potato-cinnamon",
+      "name": "Cinnamon Sweet Potato",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 32,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, cut into wedges",
+          "grams": 700
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar, finely ground",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Steam the sweet-potato wedges for eight minutes so the centers begin to soften.",
+        "Arrange them on a warm baking tray and brush with ghee.",
+        "Mix the cinnamon, cardamom, and rock sugar and dust the mixture lightly over the wedges.",
+        "Bake until the edges color and the centers are completely tender.",
+        "Serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pre-steaming keeps these cinnamon sweet-potato wedges soft while a brief bake colors the edges. Vata: retain the ghee and serve warm. Pitta: use half the cinnamon. Kapha: omit the rock sugar and keep the serving small.",
+      "provenance": [
+        "Indian sweet-potato household sweet tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.kesar-shrikhand-light",
+      "name": "Kesar Shrikhand (Light)",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 25,
+      "cookMinutes": 3,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.yogurt",
+          "name": "Plain yogurt, drained until thick",
+          "grams": 700
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar, finely ground",
+          "grams": 65
+        },
+        {
+          "dravyaId": "dravya.saffron",
+          "name": "Saffron strands",
+          "grams": 0.25
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.pistachio",
+          "name": "Pistachios, finely chopped",
+          "grams": 22
+        }
+      ],
+      "steps": [
+        "Drain the yogurt in a clean cloth until thick but still creamy.",
+        "Warm one spoonful of the drained whey and steep the saffron in it for five minutes.",
+        "Whisk the thick yogurt until smooth, then fold in the rock sugar and saffron liquid.",
+        "Add the cardamom and pistachios and mix gently.",
+        "Serve a small portion at cool room temperature rather than ice-cold."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "This shrikhand uses restrained rock sugar and is served in small portions. Vata: serve closer to room temperature. Pitta: retain the saffron and modest sweetness. Kapha: take only a spoonful because the yogurt remains dense.",
+      "provenance": [
+        "Western Indian shrikhand tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.panchamrit-classic",
+      "name": "Panchamrita",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 8,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.yogurt",
+          "name": "Plain yogurt",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.honey",
+          "name": "Raw honey",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 16
+        }
+      ],
+      "steps": [
+        "Bring all ingredients to a similar cool room temperature.",
+        "Whisk the yogurt smooth in a clean bowl.",
+        "Add the milk and ghee and stir until evenly dispersed.",
+        "Fold in the rock sugar and raw honey without heating the mixture.",
+        "Offer or serve immediately in one small spoonful per person."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Panchamrita is a ritual preparation served by the spoonful, not as a beverage. Vata: take it at room temperature and in the stated tiny portion. Pitta: keep the serving minimal. Kapha: reserve it for ritual use and do not enlarge the portion.",
+      "provenance": [
+        "classical panchamrita ritual tradition"
+      ],
+      "confidence": {
+        "ayur": 0.86
+      },
+      "reviewNote": "Ritual proportions vary. This version keeps honey and ghee unequal by weight and is intended only as a small ceremonial food portion."
+    },
+    {
+      "id": "recipe.modak-ukadiche",
+      "name": "Ukadiche Modak",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 35,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "fdcId": 7135,
+          "name": "White rice flour",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery, grated",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 330
+        }
+      ],
+      "steps": [
+        "Cook the coconut and jaggery over low heat until the filling is moist but no longer runny; finish with cardamom.",
+        "Bring the water and half the ghee to a boil, stir in the rice flour, cover, and rest off the heat for five minutes.",
+        "Knead the warm rice dough until smooth and divide it into twelve portions.",
+        "Shape each portion into a cup, add a small spoonful of filling, pleat the rim, and seal the top.",
+        "Steam the modak until the shells turn slightly glossy; brush with the remaining ghee and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "varsha"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ukadiche modak are steamed rice-flour dumplings with coconut-jaggery filling. Vata: serve warm with the light ghee brushing. Pitta: keep the jaggery filling modest. Kapha: take one small modak.",
+      "provenance": [
+        "Maharashtrian ukadiche modak tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.til-laddu-sankranti",
+      "name": "Sankranti Til Laddu",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 14,
+      "prepMinutes": 18,
+      "cookMinutes": 18,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "White sesame seeds",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.peanut",
+          "name": "Peanuts, toasted",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery",
+          "grams": 155
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the white sesame seeds over low heat until aromatic, then cool slightly.",
+        "Grind or crush it to the texture specified by the style, leaving a little body rather than making a paste.",
+        "Warm the ghee with cardamom and combine it with the jaggery and peanuts, toasted.",
+        "Mix with the toasted base until the mixture holds when pressed; let it cool enough to handle.",
+        "Shape into 14 small balls and allow them to set before serving."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sankranti Til Laddu is a compact traditional sweet; one small piece is the intended serving. Vata: take it warm or at room temperature. Pitta: use the lower sweetener amount and cooling cardamom. Kapha: reserve for occasional use and keep the pieces small.",
+      "provenance": [
+        "Sankranti til-laddu tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.masala-doodh",
+      "name": "Masala Doodh",
+      "category": "classical",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 7,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, soaked and ground",
+          "grams": 35
+        },
+        {
+          "dravyaId": "dravya.saffron",
+          "name": "Saffron strands",
+          "grams": 0.15
+        },
+        {
+          "dravyaId": "dravya.nutmeg",
+          "name": "Nutmeg",
+          "grams": 0.3
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Place the milk in a small heavy pan and bring it slowly to a gentle simmer.",
+        "Add the almonds, soaked and ground, saffron strands, nutmeg and cook on low heat for five minutes.",
+        "Stir in the rock sugar and continue only until the flavor is integrated.",
+        "Crush in the cardamom, strain if a smooth drink is desired, and pour into warmed cups.",
+        "Serve warm and freshly prepared."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Masala Doodh is a rich warm milk preparation for an occasional small serving. Vata: serve warm and retain the full milk richness. Pitta: favor saffron or cardamom and use little sweetener. Kapha: take a half portion and avoid serving it cold.",
+      "provenance": [
+        "Ayurvedic spiced-milk tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.saffron-milk",
+      "name": "Saffron Milk",
+      "category": "classical",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 7,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.saffron",
+          "name": "Saffron strands",
+          "grams": 0.18
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Place the milk in a small heavy pan and bring it slowly to a gentle simmer.",
+        "Add the saffron strands and cook on low heat for five minutes.",
+        "Stir in the rock sugar and continue only until the flavor is integrated.",
+        "Crush in the cardamom, strain if a smooth drink is desired, and pour into warmed cups.",
+        "Serve warm and freshly prepared."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Saffron Milk is a rich warm milk preparation for an occasional small serving. Vata: serve warm and retain the full milk richness. Pitta: favor saffron or cardamom and use little sweetener. Kapha: take a half portion and avoid serving it cold.",
+      "provenance": [
+        "Ayurvedic spiced-milk tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.dry-fruit-shake",
+      "name": "Panchmeva Milk Shake",
+      "category": "classical",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 7,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, soaked",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.walnut",
+          "name": "Walnuts, soaked",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.dried-fig",
+          "name": "Dried figs, soaked and chopped",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.raisins",
+          "name": "Raisins",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.cashew",
+          "name": "Cashews, soaked",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Place the milk in a small heavy pan and bring it slowly to a gentle simmer.",
+        "Add the almonds, soaked, walnuts, soaked, dried figs, soaked and chopped, raisins, cashews, soaked and cook on low heat for five minutes.",
+        "Stir in the rock sugar and continue only until the flavor is integrated.",
+        "Crush in the cardamom, strain if a smooth drink is desired, and pour into warmed cups.",
+        "Serve warm and freshly prepared."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "This panchmeva milk is served warm and uses soaked dried fruits and nuts, not fresh sour fruit. Vata: retain the warm, smooth texture. Pitta: favor the smaller nut portion. Kapha: take only half a cup.",
+      "provenance": [
+        "Ayurvedic spiced-milk tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.fig-milk",
+      "name": "Fig Milk",
+      "category": "classical",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 7,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.dried-fig",
+          "name": "Dried figs, soaked and chopped",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Place the milk in a small heavy pan and bring it slowly to a gentle simmer.",
+        "Add the dried figs, soaked and chopped and cook on low heat for five minutes.",
+        "Stir in the rock sugar and continue only until the flavor is integrated.",
+        "Crush in the cardamom, strain if a smooth drink is desired, and pour into warmed cups.",
+        "Serve warm and freshly prepared."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Fig Milk is a rich warm milk preparation for an occasional small serving. Vata: serve warm and retain the full milk richness. Pitta: favor saffron or cardamom and use little sweetener. Kapha: take a half portion and avoid serving it cold.",
+      "provenance": [
+        "Ayurvedic spiced-milk tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.date-milk",
+      "name": "Date Milk",
+      "category": "classical",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 7,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Place the milk in a small heavy pan and bring it slowly to a gentle simmer.",
+        "Add the cardamom and cook on low heat for five minutes.",
+        "Stir in the soft dates and continue only until the flavor is integrated.",
+        "Crush in the cardamom, strain if a smooth drink is desired, and pour into warmed cups.",
+        "Serve warm and freshly prepared."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Date Milk is a rich warm milk preparation for an occasional small serving. Vata: serve warm and retain the full milk richness. Pitta: favor saffron or cardamom and use little sweetener. Kapha: take a half portion and avoid serving it cold.",
+      "provenance": [
+        "Ayurvedic spiced-milk tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.moon-milk",
+      "name": "Nutmeg Moon Milk",
+      "category": "classical",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 7,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.nutmeg",
+          "name": "Nutmeg, freshly grated",
+          "grams": 0.3
+        },
+        {
+          "dravyaId": "dravya.saffron",
+          "name": "Saffron strands",
+          "grams": 0.1
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Place the milk in a small heavy pan and bring it slowly to a gentle simmer.",
+        "Add the nutmeg, freshly grated, saffron strands and cook on low heat for five minutes.",
+        "Stir in the rock sugar and continue only until the flavor is integrated.",
+        "Crush in the cardamom, strain if a smooth drink is desired, and pour into warmed cups.",
+        "Serve warm and freshly prepared."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "night"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Nutmeg moon milk is a culinary bedtime drink with only a small pinch of nutmeg; it is not a sleep treatment. Vata: serve warm in a small cup. Pitta: keep nutmeg to the stated pinch. Kapha: take a half portion and omit extra sweetener.",
+      "provenance": [
+        "Ayurvedic spiced-milk tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.golden-milk",
+      "name": "Golden Milk",
+      "category": "classical",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 7,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper",
+          "grams": 0.2
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 10
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Place the milk in a small heavy pan and bring it slowly to a gentle simmer.",
+        "Add the turmeric, cinnamon, black pepper, ghee and cook on low heat for five minutes.",
+        "Stir in the rock sugar and continue only until the flavor is integrated.",
+        "Crush in the cardamom, strain if a smooth drink is desired, and pour into warmed cups.",
+        "Serve warm and freshly prepared."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Golden milk is a warm culinary turmeric drink; the recipe makes no medicinal or disease claim. Vata: retain the ghee and warm serving. Pitta: reduce pepper and cinnamon. Kapha: use no extra sweetener and take a small cup.",
+      "provenance": [
+        "Ayurvedic spiced-milk tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.barley-kheer",
+      "name": "Barley Kheer",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 10,
+      "cookMinutes": 52,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 1250
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 65
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 8
+        }
+      ],
+      "steps": [
+        "Rinse or wipe the pearled barley as appropriate and coat it with the ghee in a heavy pan.",
+        "Pour in the milk and bring it slowly to a simmer, stirring across the base of the pan.",
+        "Cook gently until the pearled barley is fully tender and the milk lightly thickens.",
+        "Add the rock sugar and almonds, chopped; simmer only until dissolved.",
+        "Crush in the cardamom, rest for five minutes, and serve warm or at room temperature."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Barley Kheer is a rich milk sweet intended as a small, freshly prepared portion. Vata: serve warm with the stated ghee. Pitta: use less sugar and favor cardamom or saffron. Kapha: take only a small portion and do not serve chilled.",
+      "provenance": [
+        "Indian kheer and payasam tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.ragi-kheer",
+      "name": "Ragi Kheer",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 10,
+      "cookMinutes": 48,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.ragi",
+          "name": "Finger millet grain",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 1200
+        },
+        {
+          "dravyaId": "dravya.saffron",
+          "name": "Saffron strands",
+          "grams": 0.15
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 65
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 8
+        }
+      ],
+      "steps": [
+        "Rinse or wipe the finger millet grain as appropriate and coat it with the ghee in a heavy pan.",
+        "Pour in the milk and bring it slowly to a simmer, stirring across the base of the pan.",
+        "Cook gently until the finger millet grain is fully tender and the milk lightly thickens.",
+        "Add the rock sugar and saffron strands; simmer only until dissolved.",
+        "Crush in the cardamom, rest for five minutes, and serve warm or at room temperature."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ragi Kheer is a rich milk sweet intended as a small, freshly prepared portion. Vata: serve warm with the stated ghee. Pitta: use less sugar and favor cardamom or saffron. Kapha: take only a small portion and do not serve chilled.",
+      "provenance": [
+        "Indian kheer and payasam tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.amaranth-kheer",
+      "name": "Amaranth Kheer",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 10,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 1200
+        },
+        {
+          "dravyaId": "dravya.pistachio",
+          "name": "Pistachios, chopped",
+          "grams": 25
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 65
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 8
+        }
+      ],
+      "steps": [
+        "Rinse or wipe the amaranth grain as appropriate and coat it with the ghee in a heavy pan.",
+        "Pour in the milk and bring it slowly to a simmer, stirring across the base of the pan.",
+        "Cook gently until the amaranth grain is fully tender and the milk lightly thickens.",
+        "Add the rock sugar and pistachios, chopped; simmer only until dissolved.",
+        "Crush in the cardamom, rest for five minutes, and serve warm or at room temperature."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Amaranth Kheer is a rich milk sweet intended as a small, freshly prepared portion. Vata: serve warm with the stated ghee. Pitta: use less sugar and favor cardamom or saffron. Kapha: take only a small portion and do not serve chilled.",
+      "provenance": [
+        "Indian kheer and payasam tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.oats-cardamom-kheer",
+      "name": "Oats Cardamom Kheer",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 10,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 1150
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 8
+        }
+      ],
+      "steps": [
+        "Rinse or wipe the rolled oats as appropriate and coat it with the ghee in a heavy pan.",
+        "Pour in the milk and bring it slowly to a simmer, stirring across the base of the pan.",
+        "Cook gently until the rolled oats is fully tender and the milk lightly thickens.",
+        "Add the rock sugar and almonds, chopped; simmer only until dissolved.",
+        "Crush in the cardamom, rest for five minutes, and serve warm or at room temperature."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Oats Cardamom Kheer is a rich milk sweet intended as a small, freshly prepared portion. Vata: serve warm with the stated ghee. Pitta: use less sugar and favor cardamom or saffron. Kapha: take only a small portion and do not serve chilled.",
+      "provenance": [
+        "Indian kheer and payasam tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.pistachio-makhana-kheer",
+      "name": "Pistachio Makhana Kheer",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 10,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.lotus-seed",
+          "name": "Lotus seeds (makhana)",
+          "grams": 155
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 1200
+        },
+        {
+          "dravyaId": "dravya.pistachio",
+          "name": "Pistachios, chopped",
+          "grams": 40
+        },
+        {
+          "dravyaId": "dravya.saffron",
+          "name": "Saffron strands",
+          "grams": 0.15
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 62
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 8
+        }
+      ],
+      "steps": [
+        "Rinse or wipe the lotus seeds (makhana) as appropriate and coat it with the ghee in a heavy pan.",
+        "Pour in the milk and bring it slowly to a simmer, stirring across the base of the pan.",
+        "Cook gently until the lotus seeds (makhana) is fully tender and the milk lightly thickens.",
+        "Add the rock sugar and pistachios, chopped, saffron strands; simmer only until dissolved.",
+        "Crush in the cardamom, rest for five minutes, and serve warm or at room temperature."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pistachio Makhana Kheer is a rich milk sweet intended as a small, freshly prepared portion. Vata: serve warm with the stated ghee. Pitta: use less sugar and favor cardamom or saffron. Kapha: take only a small portion and do not serve chilled.",
+      "provenance": [
+        "Indian kheer and payasam tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.besan-laddu",
+      "name": "Besan Laddu",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 14,
+      "prepMinutes": 18,
+      "cookMinutes": 18,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.besan",
+          "name": "Chickpea flour",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 35
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 105
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery",
+          "grams": 125
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the chickpea flour over low heat until aromatic, then cool slightly.",
+        "Grind or crush it to the texture specified by the style, leaving a little body rather than making a paste.",
+        "Warm the ghee with cardamom and combine it with the jaggery and almonds, chopped.",
+        "Mix with the toasted base until the mixture holds when pressed; let it cool enough to handle.",
+        "Shape into 14 small balls and allow them to set before serving."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Besan Laddu is a compact traditional sweet; one small piece is the intended serving. Vata: take it warm or at room temperature. Pitta: use the lower sweetener amount and cooling cardamom. Kapha: reserve for occasional use and keep the pieces small.",
+      "provenance": [
+        "Indian laddu tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.mung-laddu",
+      "name": "Mung Dal Laddu",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 14,
+      "prepMinutes": 18,
+      "cookMinutes": 18,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal, dry roasted",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.cashew",
+          "name": "Cashews, chopped",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 85
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the split mung dal, dry roasted over low heat until aromatic, then cool slightly.",
+        "Grind or crush it to the texture specified by the style, leaving a little body rather than making a paste.",
+        "Warm the ghee with cardamom and combine it with the jaggery and cashews, chopped.",
+        "Mix with the toasted base until the mixture holds when pressed; let it cool enough to handle.",
+        "Shape into 14 small balls and allow them to set before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mung Dal Laddu is a compact traditional sweet; one small piece is the intended serving. Vata: take it warm or at room temperature. Pitta: use the lower sweetener amount and cooling cardamom. Kapha: reserve for occasional use and keep the pieces small.",
+      "provenance": [
+        "Indian laddu tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.peanut-jaggery-laddu",
+      "name": "Peanut Jaggery Laddu",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 14,
+      "prepMinutes": 18,
+      "cookMinutes": 18,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.peanut",
+          "name": "Peanuts",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery",
+          "grams": 135
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the peanuts over low heat until aromatic, then cool slightly.",
+        "Grind or crush it to the texture specified by the style, leaving a little body rather than making a paste.",
+        "Warm the ghee with cardamom and combine it with the jaggery and sesame seeds.",
+        "Mix with the toasted base until the mixture holds when pressed; let it cool enough to handle.",
+        "Shape into 14 small balls and allow them to set before serving."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Peanut Jaggery Laddu is a compact traditional sweet; one small piece is the intended serving. Vata: take it warm or at room temperature. Pitta: use the lower sweetener amount and cooling cardamom. Kapha: reserve for occasional use and keep the pieces small.",
+      "provenance": [
+        "Indian laddu tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.walnut-date-laddu",
+      "name": "Walnut Date Laddu",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 14,
+      "prepMinutes": 18,
+      "cookMinutes": 18,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.walnut",
+          "name": "Walnuts",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates, pitted",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the walnuts over low heat until aromatic, then cool slightly.",
+        "Grind or crush it to the texture specified by the style, leaving a little body rather than making a paste.",
+        "Warm the ghee with cardamom and combine it with the soft dates and almonds.",
+        "Mix with the toasted base until the mixture holds when pressed; let it cool enough to handle.",
+        "Shape into 14 small balls and allow them to set before serving."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Walnut Date Laddu is a compact traditional sweet; one small piece is the intended serving. Vata: take it warm or at room temperature. Pitta: use the lower sweetener amount and cooling cardamom. Kapha: reserve for occasional use and keep the pieces small.",
+      "provenance": [
+        "Indian laddu tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.almond-sesame-laddu",
+      "name": "Almond Sesame Laddu",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 14,
+      "prepMinutes": 18,
+      "cookMinutes": 18,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the almonds over low heat until aromatic, then cool slightly.",
+        "Grind or crush it to the texture specified by the style, leaving a little body rather than making a paste.",
+        "Warm the ghee with cardamom and combine it with the jaggery and sesame seeds.",
+        "Mix with the toasted base until the mixture holds when pressed; let it cool enough to handle.",
+        "Shape into 14 small balls and allow them to set before serving."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Almond Sesame Laddu is a compact traditional sweet; one small piece is the intended serving. Vata: take it warm or at room temperature. Pitta: use the lower sweetener amount and cooling cardamom. Kapha: reserve for occasional use and keep the pieces small.",
+      "provenance": [
+        "Indian laddu tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.pumpkin-halwa",
+      "name": "Pumpkin Halwa",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, grated",
+          "grams": 760
+        },
+        {
+          "dravyaId": "dravya.raisins",
+          "name": "Raisins",
+          "grams": 35
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 500
+        }
+      ],
+      "steps": [
+        "Prepare the pumpkin, grated finely so it cooks to an even texture.",
+        "Warm half the ghee in a heavy pan and cook the main ingredient slowly until its raw aroma fades.",
+        "Add the milk and raisins; simmer, stirring often, until absorbed.",
+        "Stir in the jaggery and remaining ghee; cook until the mixture gathers softly from the pan.",
+        "Finish with crushed cardamom and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pumpkin Halwa is a slow-cooked festive sweet, best treated as a modest accompaniment rather than a main meal. Vata: serve warm and soft. Pitta: reduce sweetener and emphasize cardamom. Kapha: take the smallest portion and reduce ghee if preparing at home.",
+      "provenance": [
+        "Indian halwa and sheera tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.sweet-potato-halwa",
+      "name": "Sweet Potato Halwa",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, cooked and mashed",
+          "grams": 700
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 65
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1.5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 520
+        }
+      ],
+      "steps": [
+        "Prepare the sweet potato, cooked and mashed finely so it cooks to an even texture.",
+        "Warm half the ghee in a heavy pan and cook the main ingredient slowly until its raw aroma fades.",
+        "Add the water and almonds, chopped; simmer, stirring often, until absorbed.",
+        "Stir in the jaggery and remaining ghee; cook until the mixture gathers softly from the pan.",
+        "Finish with crushed cardamom and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sweet Potato Halwa is a slow-cooked festive sweet, best treated as a modest accompaniment rather than a main meal. Vata: serve warm and soft. Pitta: reduce sweetener and emphasize cardamom. Kapha: take the smallest portion and reduce ghee if preparing at home.",
+      "provenance": [
+        "Indian halwa and sheera tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.suji-halwa",
+      "name": "Suji Halwa",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.semolina",
+          "name": "Semolina",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.raisins",
+          "name": "Raisins",
+          "grams": 35
+        },
+        {
+          "dravyaId": "dravya.cashew",
+          "name": "Cashews, chopped",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery",
+          "grams": 115
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1.5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 520
+        }
+      ],
+      "steps": [
+        "Prepare the semolina finely so it cooks to an even texture.",
+        "Warm half the ghee in a heavy pan and cook the main ingredient slowly until its raw aroma fades.",
+        "Add the water and raisins, cashews, chopped; simmer, stirring often, until absorbed.",
+        "Stir in the jaggery and remaining ghee; cook until the mixture gathers softly from the pan.",
+        "Finish with crushed cardamom and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Suji Halwa is a slow-cooked festive sweet, best treated as a modest accompaniment rather than a main meal. Vata: serve warm and soft. Pitta: reduce sweetener and emphasize cardamom. Kapha: take the smallest portion and reduce ghee if preparing at home.",
+      "provenance": [
+        "Indian halwa and sheera tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.whole-wheat-halwa",
+      "name": "Whole Wheat Halwa",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 35
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 105
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery",
+          "grams": 110
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1.5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 520
+        }
+      ],
+      "steps": [
+        "Prepare the whole-wheat flour finely so it cooks to an even texture.",
+        "Warm half the ghee in a heavy pan and cook the main ingredient slowly until its raw aroma fades.",
+        "Add the water and almonds, chopped; simmer, stirring often, until absorbed.",
+        "Stir in the jaggery and remaining ghee; cook until the mixture gathers softly from the pan.",
+        "Finish with crushed cardamom and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Whole Wheat Halwa is a slow-cooked festive sweet, best treated as a modest accompaniment rather than a main meal. Vata: serve warm and soft. Pitta: reduce sweetener and emphasize cardamom. Kapha: take the smallest portion and reduce ghee if preparing at home.",
+      "provenance": [
+        "Indian halwa and sheera tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.mung-dal-halwa",
+      "name": "Mung Dal Halwa",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal, soaked and ground",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.saffron",
+          "name": "Saffron strands",
+          "grams": 0.15
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 110
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery",
+          "grams": 105
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 450
+        }
+      ],
+      "steps": [
+        "Prepare the split mung dal, soaked and ground finely so it cooks to an even texture.",
+        "Warm half the ghee in a heavy pan and cook the main ingredient slowly until its raw aroma fades.",
+        "Add the milk and saffron strands; simmer, stirring often, until absorbed.",
+        "Stir in the jaggery and remaining ghee; cook until the mixture gathers softly from the pan.",
+        "Finish with crushed cardamom and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mung Dal Halwa is a slow-cooked festive sweet, best treated as a modest accompaniment rather than a main meal. Vata: serve warm and soft. Pitta: reduce sweetener and emphasize cardamom. Kapha: take the smallest portion and reduce ghee if preparing at home.",
+      "provenance": [
+        "Indian halwa and sheera tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.ragi-halwa",
+      "name": "Ragi Halwa",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 6,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.ragi",
+          "name": "Finger millet flour",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 75
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery",
+          "grams": 95
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1.5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 520
+        }
+      ],
+      "steps": [
+        "Prepare the finger millet flour finely so it cooks to an even texture.",
+        "Warm half the ghee in a heavy pan and cook the main ingredient slowly until its raw aroma fades.",
+        "Add the water and fresh coconut, grated; simmer, stirring often, until absorbed.",
+        "Stir in the jaggery and remaining ghee; cook until the mixture gathers softly from the pan.",
+        "Finish with crushed cardamom and serve warm in small portions."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ragi Halwa is a slow-cooked festive sweet, best treated as a modest accompaniment rather than a main meal. Vata: serve warm and soft. Pitta: reduce sweetener and emphasize cardamom. Kapha: take the smallest portion and reduce ghee if preparing at home.",
+      "provenance": [
+        "Indian halwa and sheera tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.whole-wheat-panjiri",
+      "name": "Whole Wheat Panjiri",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 10,
+      "prepMinutes": 12,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 40
+        },
+        {
+          "dravyaId": "dravya.ginger-dry",
+          "name": "Dry ginger",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery, grated",
+          "grams": 85
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Warm the ghee in a heavy pan and add the whole-wheat flour.",
+        "Roast over low heat, stirring continuously, until the mixture becomes aromatic and evenly golden.",
+        "Add the almonds, chopped, dry ginger and cook for two more minutes.",
+        "Remove from the heat, cool until merely warm, and mix in the jaggery and cardamom.",
+        "Break up any clumps and serve one small spoonful at a time."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Whole Wheat Panjiri is a dry roasted flour-and-ghee sweet traditionally served in small spoonfuls. Vata: take with warm milk if suitable. Pitta: moderate ghee and warming spice. Kapha: use a very small portion and reduce sweetener.",
+      "provenance": [
+        "North Indian panjiri tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.besan-panjiri",
+      "name": "Besan Panjiri",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 10,
+      "prepMinutes": 12,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.besan",
+          "name": "Chickpea flour",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.cashew",
+          "name": "Cashews, chopped",
+          "grams": 40
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Additional cardamom",
+          "grams": 0.5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery, grated",
+          "grams": 82
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Warm the ghee in a heavy pan and add the chickpea flour.",
+        "Roast over low heat, stirring continuously, until the mixture becomes aromatic and evenly golden.",
+        "Add the cashews, chopped, additional cardamom and cook for two more minutes.",
+        "Remove from the heat, cool until merely warm, and mix in the jaggery and cardamom.",
+        "Break up any clumps and serve one small spoonful at a time."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Besan Panjiri is a dry roasted flour-and-ghee sweet traditionally served in small spoonfuls. Vata: take with warm milk if suitable. Pitta: moderate ghee and warming spice. Kapha: use a very small portion and reduce sweetener.",
+      "provenance": [
+        "North Indian panjiri tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.mung-panjiri",
+      "name": "Mung Panjiri",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 10,
+      "prepMinutes": 12,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung dal flour",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped",
+          "grams": 35
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 78
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery, grated",
+          "grams": 78
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Warm the ghee in a heavy pan and add the mung dal flour.",
+        "Roast over low heat, stirring continuously, until the mixture becomes aromatic and evenly golden.",
+        "Add the almonds, chopped, fennel seeds and cook for two more minutes.",
+        "Remove from the heat, cool until merely warm, and mix in the jaggery and cardamom.",
+        "Break up any clumps and serve one small spoonful at a time."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mung Panjiri is a dry roasted flour-and-ghee sweet traditionally served in small spoonfuls. Vata: take with warm milk if suitable. Pitta: moderate ghee and warming spice. Kapha: use a very small portion and reduce sweetener.",
+      "provenance": [
+        "North Indian panjiri tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.sesame-almond-panjiri",
+      "name": "Sesame Almond Panjiri",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 10,
+      "prepMinutes": 12,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds, ground",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almond meal",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.ginger-dry",
+          "name": "Dry ginger",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 65
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery, grated",
+          "grams": 75
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Warm the ghee in a heavy pan and add the sesame seeds, ground.",
+        "Roast over low heat, stirring continuously, until the mixture becomes aromatic and evenly golden.",
+        "Add the almond meal, dry ginger and cook for two more minutes.",
+        "Remove from the heat, cool until merely warm, and mix in the jaggery and cardamom.",
+        "Break up any clumps and serve one small spoonful at a time."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 1,
+        "kapha": 0
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sesame Almond Panjiri is a dry roasted flour-and-ghee sweet traditionally served in small spoonfuls. Vata: take with warm milk if suitable. Pitta: moderate ghee and warming spice. Kapha: use a very small portion and reduce sweetener.",
+      "provenance": [
+        "North Indian panjiri tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.amaranth-panjiri",
+      "name": "Amaranth Panjiri",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 10,
+      "prepMinutes": 12,
+      "cookMinutes": 22,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth flour",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.pistachio",
+          "name": "Pistachios, chopped",
+          "grams": 35
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 72
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery, grated",
+          "grams": 75
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Warm the ghee in a heavy pan and add the amaranth flour.",
+        "Roast over low heat, stirring continuously, until the mixture becomes aromatic and evenly golden.",
+        "Add the pistachios, chopped, fennel seeds and cook for two more minutes.",
+        "Remove from the heat, cool until merely warm, and mix in the jaggery and cardamom.",
+        "Break up any clumps and serve one small spoonful at a time."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Amaranth Panjiri is a dry roasted flour-and-ghee sweet traditionally served in small spoonfuls. Vata: take with warm milk if suitable. Pitta: moderate ghee and warming spice. Kapha: use a very small portion and reduce sweetener.",
+      "provenance": [
+        "North Indian panjiri tradition"
+      ],
+      "confidence": {
+        "ayur": 0.82
+      }
+    },
+    {
+      "id": "recipe.apple-spice-avaleha",
+      "name": "Apple Spice Avaleha-Style Preserve",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 16,
+      "prepMinutes": 20,
+      "cookMinutes": 48,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.apple",
+          "name": "Apples, peeled and chopped",
+          "grams": 700
+        },
+        {
+          "dravyaId": "dravya.raisins",
+          "name": "Raisins",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.ginger-dry",
+          "name": "Dry ginger",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 500
+        }
+      ],
+      "steps": [
+        "Wash and chop the apples, peeled and chopped, removing any hard seeds or stems.",
+        "Simmer it with the water until completely soft, then press or blend to a smooth pulp.",
+        "Return the pulp to a heavy pan, add the jaggery, and cook slowly while stirring.",
+        "When the mixture becomes glossy and jamlike, stir in the ghee and raisins, dry ginger.",
+        "Finish with cardamom and cinnamon, cool completely, and portion with a clean dry spoon."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Apple Spice Avaleha-Style Preserve is a food-style fruit preserve inspired by the avaleha preparation method; it is not a medicinal formulation. Vata: take a small spoonful with a warm meal. Pitta: keep the spice gentle and portion modest. Kapha: use sparingly because the preparation is concentrated and sweet.",
+      "provenance": [
+        "household avaleha-style preserve tradition"
+      ],
+      "confidence": {
+        "ayur": 0.72
+      }
+    },
+    {
+      "id": "recipe.date-raisin-avaleha",
+      "name": "Date-Raisin Avaleha-Style Preserve",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 16,
+      "prepMinutes": 20,
+      "cookMinutes": 48,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates, pitted and chopped",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.raisins",
+          "name": "Raisins",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.ginger-dry",
+          "name": "Dry ginger",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.pippali",
+          "name": "Long pepper",
+          "grams": 0.5
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 500
+        }
+      ],
+      "steps": [
+        "Wash and chop the soft dates, pitted and chopped, removing any hard seeds or stems.",
+        "Simmer it with the water until completely soft, then press or blend to a smooth pulp.",
+        "Return the pulp to a heavy pan, add the jaggery, and cook slowly while stirring.",
+        "When the mixture becomes glossy and jamlike, stir in the ghee and raisins, dry ginger, long pepper.",
+        "Finish with cardamom and cinnamon, cool completely, and portion with a clean dry spoon."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Date-Raisin Avaleha-Style Preserve is a food-style fruit preserve inspired by the avaleha preparation method; it is not a medicinal formulation. Vata: take a small spoonful with a warm meal. Pitta: keep the spice gentle and portion modest. Kapha: use sparingly because the preparation is concentrated and sweet.",
+      "provenance": [
+        "household avaleha-style preserve tradition"
+      ],
+      "confidence": {
+        "ayur": 0.72
+      }
+    },
+    {
+      "id": "recipe.fig-cardamom-avaleha",
+      "name": "Fig Cardamom Avaleha-Style Preserve",
+      "category": "classical",
+      "meal": "dessert",
+      "servings": 16,
+      "prepMinutes": 20,
+      "cookMinutes": 48,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.dried-fig",
+          "name": "Dried figs, chopped",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.raisins",
+          "name": "Raisins",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 500
+        }
+      ],
+      "steps": [
+        "Wash and chop the dried figs, chopped, removing any hard seeds or stems.",
+        "Simmer it with the water until completely soft, then press or blend to a smooth pulp.",
+        "Return the pulp to a heavy pan, add the rock sugar, and cook slowly while stirring.",
+        "When the mixture becomes glossy and jamlike, stir in the ghee and raisins, fennel seeds.",
+        "Finish with cardamom and cinnamon, cool completely, and portion with a clean dry spoon."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Fig Cardamom Avaleha-Style Preserve is a food-style fruit preserve inspired by the avaleha preparation method; it is not a medicinal formulation. Vata: take a small spoonful with a warm meal. Pitta: keep the spice gentle and portion modest. Kapha: use sparingly because the preparation is concentrated and sweet.",
+      "provenance": [
+        "household avaleha-style preserve tradition"
+      ],
+      "confidence": {
+        "ayur": 0.72
+      }
+    }
+  ]
+}
