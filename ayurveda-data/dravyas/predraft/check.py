@@ -50,6 +50,7 @@ def main():
     here = os.path.dirname(os.path.abspath(__file__))
     authored_dir = os.path.dirname(here)
     errors = []
+    warnings = []
 
     if not os.path.exists(args.store):
         errors.append(f"store not found: {args.store}")
@@ -122,7 +123,10 @@ def main():
                     pairs = ", ".join(f"{row[0]} ({row[2]})" for row in authored_names[normalized])
                     errors.append(f"{where}: exact normalized name already authored as {pairs}")
                 if normalized in seen_names:
-                    errors.append(f"{where}: duplicate normalized predraft name (also {seen_names[normalized]})")
+                    warnings.append(
+                        f"{where}: normalized predraft name also used by {seen_names[normalized]} "
+                        "(retain as canon alias ambiguity for report)"
+                    )
                 seen_names[normalized] = item_id
             else:
                 errors.append(f"{where}: name must be a non-empty string")
@@ -190,6 +194,9 @@ def main():
         print(f"{basename}: items={count} exact={exact} near={near} none={none}")
     print(f"Predraft files checked: {len(paths)}")
     print(f"Predraft items checked: {total_items}")
+    print(f"Warnings: {len(warnings)}")
+    for warning in warnings:
+        print(f"WARNING: {warning}")
 
     if errors:
         print(f"Errors: {len(errors)}")
