@@ -1,0 +1,4405 @@
+{
+  "formatVersion": "1.0",
+  "batch": "recipe-batch-r19",
+  "qualityState": "aiDraft",
+  "items": [
+    {
+      "id": "recipe.kerala-ash-gourd-mung-olan",
+      "name": "Kerala Ash Gourd Mung Olan",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.ash-gourd",
+          "name": "Ash gourd, cut into batons",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, soaked and drained",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Measure 850 ml (about 3 1/2 cups) water for Kerala Ash Gourd Mung Olan; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Cover the mung beans with at least three times their volume of cool water and soak for 30 minutes; drain for 2 minutes before the first heated step.",
+        "Simmer the soaked mung until it begins to soften. Maintain low heat for 9–11 minutes, stirring every 3 minutes, until the pulses crush easily against the side of the pot.",
+        "Slide in the ash-gourd batons without breaking them. Allow 3 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Grind the grated coconut with a ladle of hot cooking liquid and fold the pale cream into the tender vegetables. Work in 5 short pulses, pausing between them so the mixture stays cool and retains the intended texture.",
+        "Draw the pot from the heat, season gently, and perfume the surface with torn curry leaves and coconut oil. Wait 6 minutes, taste once the heat settles, and adjust only then before serving at the stated temperature.",
+        "Rest Kerala Ash Gourd Mung Olan 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "This mild, moist Kerala-style olan is especially gentle when served freshly cooked Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kerala-pumpkin-pea-olan",
+      "name": "Kerala Pumpkin and Pea Olan",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and cubed",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, thawed",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 85
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, for drizzling",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 620
+        }
+      ],
+      "steps": [
+        "Measure 620 ml (about 2 1/2 cups) water for Kerala Pumpkin and Pea Olan; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Cook the pumpkin cubes with the crushed cumin until their edges are soft but their centers still hold shape. Maintain moderate heat for 9–11 minutes, stirring every 4 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Add the peas and a smooth coconut paste. Keep the heat medium-low and work for 3 minutes so the addition disperses without breaking the main pieces.",
+        "Simmer quietly so the vegetables take up the creamy broth. Maintain gentle medium heat for 8–10 minutes, stirring every 3 minutes, until a spoon drawn across the base leaves a trail that closes slowly.",
+        "Turn off the flame before drizzling over the coconut oil and scattering the torn curry leaves. Keep the layer loose and even, with no pooled liquid, so every portion receives the same balance.",
+        "Rest Kerala Pumpkin and Pea Olan 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sweet pumpkin and coconut make this olan soothing but naturally substantial Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kerala-cabbage-carrot-thoran",
+      "name": "Kerala Cabbage Carrot Thoran",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, thinly shredded",
+          "grams": 330
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, cut into fine matchsticks",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 65
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds, ready for tempering",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, for the pan",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Complete the listed rinsing, cutting, and draining for the cabbage, carrot, and fresh coconut before heating the pan; keep the pieces even so they reach doneness together.",
+        "Crackle the mustard in coconut oil. Use gentle medium heat for 3–4 minutes, moving the pan often, until aromatic without scorching.",
+        "Wake the curry leaves and turmeric in the fragrant pan. Allow 4 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Toss in the shredded cabbage and carrot matchsticks, cover briefly. Keep the heat steady low and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Let their own steam soften them. Maintain a steady steam for 4–6 minutes and check until the aroma is rounded and the stated texture is reached.",
+        "Uncover while the vegetables remain bright, fold through the grated coconut. Keep the heat medium-low and work for 2 minutes so the addition disperses without breaking the main pieces.",
+        "Season before serving. Wait 5 minutes, taste once the heat settles, and adjust only then before serving at the stated temperature.",
+        "Rest Kerala Cabbage Carrot Thoran 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "A quick, lightly steamed thoran keeps the vegetables lively and the coconut modest Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kerala-beet-coconut-thoran",
+      "name": "Kerala Beet Coconut Thoran",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, peeled and finely diced",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds, ready for tempering",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, lightly crushed",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.green-chili",
+          "name": "Green chili, slit lengthwise",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, for the pan",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Measure 70 ml (about 1/4 cup) water for Kerala Beet Coconut Thoran; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Bloom the mustard and cumin in coconut oil. Use moderate heat for 2–3 minutes, moving the pan often, until aromatic without scorching.",
+        "Add the slit chili and curry leaves for a brief sizzle. Use steady low heat for 3–4 minutes, moving the pan often, until aromatic without scorching.",
+        "Stir the tiny beet pieces through the tempering, splash in a little hot water. Keep the heat moderate and work for 3 minutes so the addition disperses without breaking the main pieces.",
+        "Cover until just tender. Allow 2 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Let any remaining moisture evaporate before turning the grated coconut and salt through the ruby vegetables. Allow 2 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Rest Kerala Beet Coconut Thoran 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Finely cut beet cooks evenly in this earthy, gently sweet thoran Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kerala-green-bean-thoran",
+      "name": "Kerala Green Bean Thoran",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, sliced into small rounds",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 75
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds, ready for tempering",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.urad",
+          "name": "Black gram, split and dry",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, for the pan",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 60
+        }
+      ],
+      "steps": [
+        "Prepare 60 ml (about 1/4 cup) hot water before starting Kerala Green Bean Thoran; keep one small ladle in reserve in case the base tightens early.",
+        "Toast the split black gram in warm coconut oil until golden. Use moderate heat for 2–3 minutes, moving the pan often, until aromatic without scorching.",
+        "Let the mustard pop around it. Allow 3 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Add the bean rounds with turmeric and a small splash of hot water. Keep the heat gentle medium and work for 3 minutes so the addition disperses without breaking the main pieces.",
+        "Cover only until the green color deepens. Allow 2 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Finish uncovered with the coconut and torn curry leaves, stirring until the thoran is moist rather than wet. Keep the heat gentle medium and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Rest Kerala Green Bean Thoran 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Beans and a crisp lentil tempering give this thoran a light, satisfying texture Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kerala-root-vegetable-avial",
+      "name": "Kerala Root Vegetable Avial",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, cut into long batons",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.plantain-green",
+          "name": "Green plantain, peeled and cut long",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.yam",
+          "name": "Yam, peeled and cut into sticks",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, halved crosswise",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.yogurt",
+          "name": "Whole-milk yogurt, whisked smooth",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 85
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, ground fresh",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 450
+        }
+      ],
+      "steps": [
+        "Measure 450 ml (about 2 cups) water for Kerala Root Vegetable Avial; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Layer the firm yam and plantain beneath the quicker-cooking carrot and beans. Keep the layer loose and even, with no pooled liquid, so every portion receives the same balance.",
+        "Steam them with enough hot water to stay succulent. Maintain a steady steam for 6–8 minutes and check until the aroma is rounded and the stated texture is reached.",
+        "Crush the cumin with the grated coconut, loosen the paste with cooking liquid, and ease it among the tender batons. Allow 2 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Lower the heat before folding in the whisked yogurt. Keep the heat steady low and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Warm without boiling, season. Use moderate heat for 3–4 minutes, moving the pan often, until aromatic without scorching.",
+        "Finish with curry leaves and coconut oil. Wait 5 minutes, taste once the heat settles, and adjust only then before serving at the stated temperature.",
+        "Rest Kerala Root Vegetable Avial 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "This substantial avial balances firm roots with a gently tangy coconut coating Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: omit the chili and use mildly sour yogurt. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kerala-eggplant-theeyal",
+      "name": "Kerala Eggplant Theeyal",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.eggplant",
+          "name": "Eggplant, cut into thick wedges",
+          "grams": 450
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, whole",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.fenugreek-seed",
+          "name": "Fenugreek seeds, whole",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp, diluted",
+          "grams": 32
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds, ready for tempering",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, divided",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 520
+        }
+      ],
+      "steps": [
+        "Bring 520 ml (about 2 1/4 cups) water to a boil in a separate kettle and hold it hot, covered, so Kerala Eggplant Theeyal never loses its simmer.",
+        "Brown the coconut slowly with coriander and fenugreek until nutty. Use gentle medium heat for 4–5 minutes, moving the pan often, until aromatic without scorching.",
+        "Grind the cooled mixture with a little hot water. Work in 6 short pulses, pausing between them so the mixture stays cool and retains the intended texture.",
+        "Sear the eggplant wedges in part of the oil, pour in the diluted tamarind. Allow 2 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Simmer until the flesh yields. Maintain moderate heat for 5–7 minutes, stirring every 4 minutes, until the aroma is rounded and the stated texture is reached.",
+        "Stir in the roasted paste, reduce to a glossy gravy, and crown it with mustard and curry leaves crackled in the remaining oil. Use medium-low heat for 4–5 minutes, moving the pan often, until aromatic without scorching.",
+        "Rest Kerala Eggplant Theeyal 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 1,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Roasted coconut and tamarind make theeyal deep and warming rather than light Vata: serve a small portion beside soft rice and add a spoon of ghee. Pitta: reduce the tamarind and omit extra chilies. Kapha: keep the coconut portion modest and emphasize black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kerala-pumpkin-mung-erissery",
+      "name": "Kerala Pumpkin Mung Erissery",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and cut into chunks",
+          "grams": 480
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, soaked and drained",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 85
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, ground fresh",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, for tempering",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds, ready for tempering",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Set aside 760 ml (about 3 1/4 cups) freshly boiled water for Kerala Pumpkin Mung Erissery, reserving about 60 ml to correct the final consistency.",
+        "Cover the mung beans with at least three times their volume of cool water and soak for 30 minutes; drain for 2 minutes before the first heated step. Cook the mung until nearly creamy. Maintain moderate heat for 4–6 minutes, stirring every 5 minutes, until the pulses crush easily against the side of the pot.",
+        "Add the pumpkin chunks and turmeric so they soften without disappearing. Keep the heat medium-low and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Blend most of the coconut with cumin and hot broth. Blend for 20–30 seconds, stop to scrape the sides, and leave the texture described rather than aerating it.",
+        "Stir this paste into the pot until the lentils coat the pumpkin. Keep the heat low and work for 2 minutes so the addition disperses without breaking the main pieces.",
+        "Toast the reserved coconut in coconut oil with mustard and curry leaves. Use steady low heat for 4–5 minutes, moving the pan often, until aromatic without scorching.",
+        "Spoon the bronze tempering over the erissery. Allow 2 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Rest Kerala Pumpkin Mung Erissery 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Soft mung and pumpkin give this erissery a nourishing, naturally sweet body Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kerala-plantain-mung-erissery",
+      "name": "Kerala Green Plantain Erissery",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.plantain-green",
+          "name": "Green plantain, peeled and cubed",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, soaked and drained",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, ground fresh",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, coarsely crushed",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, for tempering",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds, ready for tempering",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 780
+        }
+      ],
+      "steps": [
+        "Set aside 780 ml (about 3 1/4 cups) freshly boiled water for Kerala Green Plantain Erissery, reserving about 60 ml to correct the final consistency.",
+        "Cover the mung beans with at least three times their volume of cool water and soak for 40 minutes; drain for 2 minutes before the first heated step.",
+        "Boil the soaked mung until tender, add the plantain cubes. Maintain moderate heat for 6–8 minutes, stirring every 4 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Continue cooking until a spoon enters them easily. Allow 4 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Work the cumin and most of the coconut into a paste. Allow 2 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Stir it through the thick lentil base without crushing every cube. Keep the heat low and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Fry the remaining coconut with mustard, pepper, and curry leaves. Allow 3 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue. Spread this crisp tempering across the finished dish. Keep the layer loose and even, with no pooled liquid, so every portion receives the same balance.",
+        "Rest Kerala Green Plantain Erissery 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Plantain makes this erissery grounding, while pepper prevents the finish from feeling dull Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kerala-chayote-coconut-stew",
+      "name": "Kerala Chayote Coconut Stew",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chayote",
+          "name": "Chayote, peeled and cut into cubes",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, thawed",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, cut into thin slivers",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, for finishing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 650
+        }
+      ],
+      "steps": [
+        "Heat 650 ml (about 2 3/4 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Simmer the chayote with ginger slivers until the cubes become translucent at their edges. Maintain moderate heat for 7–9 minutes, stirring every 3 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Add the peas. Keep the heat medium-low and work for 2 minutes so the addition disperses without breaking the main pieces.",
+        "Press a smooth coconut paste through the broth and cook just long enough to unite the flavors. Aim for an even 2–3 mm thickness; repair cracks before the piece reaches the hot surface.",
+        "Season off the heat and leave the torn curry leaves to soften beneath a final sheen of coconut oil. Wait 6 minutes, taste once the heat settles, and adjust only then before serving at the stated temperature.",
+        "Inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Rest Kerala Chayote Coconut Stew 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Delicate chayote and coconut form a quiet stew suited to warm-weather lunches Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kerala-spinach-mung-molagootal",
+      "name": "Kerala Spinach Mung Molagootal",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach leaves, washed and chopped",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, soaked and drained",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, ground fresh",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, for tempering",
+          "grams": 15
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds, ready for tempering",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 800
+        }
+      ],
+      "steps": [
+        "Prepare 800 ml (about 3 1/4 cups) hot water before starting Kerala Spinach Mung Molagootal; keep one small ladle in reserve in case the base tightens early.",
+        "For Kerala Spinach Mung Molagootal, cover the mung beans with at least three times their volume of cool water and soak for 40 minutes; drain for 2 minutes before the first heated step.",
+        "Cook the mung with turmeric until soft enough to mash against the side of the pot. Maintain steady low heat for 6–8 minutes, stirring every 4 minutes, until the pulses crush easily against the side of the pot.",
+        "Wilt the chopped spinach into the lentils. Allow 4 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Thicken the green mixture with coconut ground together with cumin. Keep the heat medium-low and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Let mustard and curry leaves sputter in coconut oil, pour the tempering over the molagootal. Allow 2 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Rest it covered for two minutes. Wait 4 minutes, taste once the heat settles, and adjust only then before serving at the stated temperature.",
+        "Rest Kerala Spinach Mung Molagootal 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mung softens the mineral character of spinach in this spoonable Kerala preparation Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kerala-taro-pepper-curry",
+      "name": "Kerala Taro Pepper Curry",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.taro",
+          "name": "Taro root, peeled and cut into rounds",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, for roasting",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 520
+        }
+      ],
+      "steps": [
+        "Measure 520 ml (about 2 1/4 cups) water for Kerala Taro Pepper Curry; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Parboil the taro rounds until their surfaces lose their raw firmness. Allow 2 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Drain them without rinsing away the starch. Let it drain for 2 minutes without pressing harder than the recipe's texture requires.",
+        "Heat coconut oil with cumin, turmeric, and cracked pepper before arranging the rounds in a broad pan. Allow 4 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Turn the pieces carefully as they bronze, add the curry leaves near the end. Keep the heat gentle medium and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Season once the edges are crisp. Wait 3 minutes, taste once the heat settles, and adjust only then before serving at the stated temperature.",
+        "Rest Kerala Taro Pepper Curry 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 1,
+        "kapha": 1
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pepper and roasting offset taro's heaviness in this dry Kerala curry Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: halve the pepper and serve with a cooling green vegetable. Kapha: roast thoroughly and keep the oil and portion restrained.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kerala-ridge-gourd-coconut-curry",
+      "name": "Kerala Ridge Gourd Coconut Curry",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.ridge-gourd",
+          "name": "Ridge gourd, peeled in stripes and sliced",
+          "grams": 520
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 85
+        },
+        {
+          "dravyaId": "dravya.chana-dal",
+          "name": "Chana dal, soaked and drained",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, ground fresh",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, for tempering",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds, ready for tempering",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 650
+        }
+      ],
+      "steps": [
+        "Set aside 650 ml (about 2 3/4 cups) freshly boiled water for Kerala Ridge Gourd Coconut Curry, reserving about 60 ml to correct the final consistency.",
+        "Cover the chana dal with at least three times their volume of cool water and soak for 30 minutes; drain for 2 minutes before the first heated step.",
+        "Simmer the soaked chana dal until almost tender. Maintain moderate heat for 5–7 minutes, stirring every 5 minutes, until the pulses crush easily against the side of the pot.",
+        "Add the ridge-gourd slices and turmeric. Keep the heat medium-low and work for 1 minute so the addition disperses without breaking the main pieces. Grind the grated coconut with cumin and a spoonful of broth. Work in 3 short pulses, pausing between them so the mixture stays cool and retains the intended texture.",
+        "Fold the paste into the vegetables once they are soft. Keep the heat low and work for 2 minutes so the addition disperses without breaking the main pieces.",
+        "Temper mustard and curry leaves in coconut oil, stir them through the curry. Keep the heat steady low and work for 3 minutes so the addition disperses without breaking the main pieces.",
+        "Let the pot settle before serving. Allow 2 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Rest Kerala Ridge Gourd Coconut Curry 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Watery ridge gourd keeps this coconut-and-lentil curry lighter than it first appears Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tamil-chayote-chana-kootu",
+      "name": "Tamil Chayote Chana Kootu",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chayote",
+          "name": "Chayote, peeled and finely cubed",
+          "grams": 450
+        },
+        {
+          "dravyaId": "dravya.chana-dal",
+          "name": "Chana dal, soaked and drained",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 65
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, ground fresh",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, for tempering",
+          "grams": 15
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds, ready for tempering",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Heat 760 ml (about 3 1/4 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "For Tamil Chayote Chana Kootu, cover the chana dal with at least three times their volume of cool water and soak for 30 minutes; drain for 2 minutes before the first heated step.",
+        "Cook the soaked chana dal with turmeric until tender yet distinct. Maintain medium-low heat for 6–8 minutes, stirring every 5 minutes, until the pulses crush easily against the side of the pot.",
+        "Add the small chayote cubes. Keep the heat gentle medium and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Grind coconut and cumin to a soft paste and stir it into the pot when the vegetable turns translucent. Work in 3 short pulses, pausing between them so the mixture stays cool and retains the intended texture.",
+        "Sizzle mustard and curry leaves in coconut oil, fold the tempering through the kootu. Use steady low heat for 3–4 minutes, moving the pan often, until aromatic without scorching.",
+        "Serve it thick rather than soupy. Wait 5 minutes, taste once the heat settles, and adjust only then before serving at the stated temperature.",
+        "Rest Tamil Chayote Chana Kootu 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "This Tamil kootu pairs mild chayote with substantial but well-cooked chana dal Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tamil-bottle-gourd-mung-kootu",
+      "name": "Tamil Bottle Gourd Mung Kootu",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.bottle-gourd",
+          "name": "Bottle gourd, peeled and cut into cubes",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, soaked and drained",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, ground fresh",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, coarsely crushed",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for tempering",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 800
+        }
+      ],
+      "steps": [
+        "Set aside 800 ml (about 3 1/4 cups) freshly boiled water for Tamil Bottle Gourd Mung Kootu, reserving about 60 ml to correct the final consistency.",
+        "For Tamil Bottle Gourd Mung Kootu, cover the mung beans with at least three times their volume of cool water and soak for 30 minutes; drain for 2 minutes before the first heated step.",
+        "Boil the mung until it yields to gentle pressure. Aim for an even 3–4 mm thickness; repair cracks before the piece reaches the hot surface.",
+        "Introduce the bottle-gourd cubes and cook them until glassy. Maintain moderate heat for 6–8 minutes, stirring every 5 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Stir in coconut ground with cumin and pepper, keeping enough broth for a soft, ladleable consistency. Keep the heat medium-low and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Warm the ghee with torn curry leaves, pour it over the kootu. Use gentle medium heat for 2–3 minutes, moving the pan often, until aromatic without scorching.",
+        "Cover briefly to hold the aroma. Allow 3 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Rest Tamil Bottle Gourd Mung Kootu 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Bottle gourd and mung make a notably soft kootu with a mild pepper lift Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tamil-drumstick-pepper-kuzhambu",
+      "name": "Tamil Drumstick Pepper Kuzhambu",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.drumstick",
+          "name": "Drumstick pods, cut into finger lengths",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp, diluted",
+          "grams": 40
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, lightly toasted",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, lightly toasted",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil, for the pot",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 720
+        }
+      ],
+      "steps": [
+        "Set aside 720 ml (about 3 cups) freshly boiled water for Tamil Drumstick Pepper Kuzhambu, reserving about 60 ml to correct the final consistency.",
+        "Toast coriander and cumin, crush them with the pepper, and set the coarse spice mixture beside the stove. Use steady low heat for 3–4 minutes, moving the pan often, until aromatic without scorching.",
+        "Sauté the drumstick lengths in sesame oil, pour over the diluted tamarind. Allow 4 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Simmer until the inner flesh is tender. Maintain medium-low heat for 7–9 minutes, stirring every 3 minutes, until a spoon drawn across the base leaves a trail that closes slowly.",
+        "Stir in the crushed spices and turmeric, reduce the kuzhambu until glossy. Maintain gentle medium heat for 5–7 minutes, stirring every 3 minutes, until a spoon drawn across the base leaves a trail that closes slowly.",
+        "Finish with torn curry leaves. Wait 4 minutes, taste once the heat settles, and adjust only then before serving at the stated temperature.",
+        "Rest Tamil Drumstick Pepper Kuzhambu 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Peppery tamarind gravy makes this drumstick kuzhambu penetrating and distinctly warming Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: reduce both pepper and tamarind and pair the dish with plain rice. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tamil-eggplant-tomato-gothsu",
+      "name": "Tamil Eggplant Tomato Gothsu",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.eggplant",
+          "name": "Eggplant, roasted and peeled",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, chopped with juices",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds, ready for tempering",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.asafoetida",
+          "name": "Asafoetida, finely powdered",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil, for tempering",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 480
+        }
+      ],
+      "steps": [
+        "Prepare 480 ml (about 2 cups) hot water before starting Tamil Eggplant Tomato Gothsu; keep one small ladle in reserve in case the base tightens early.",
+        "Cook the split mung until soft while the roasted eggplant cools enough to peel and mash. Use low heat for 2–3 minutes, moving the pan often, until aromatic without scorching.",
+        "Collapse the chopped tomatoes in sesame oil with turmeric. Allow 3 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Work in the mashed eggplant and cooked lentils. Allow 4 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Temper mustard, asafoetida, and curry leaves separately, fold them through the gothsu, and adjust it to a spoonable texture. Keep the heat medium-low and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "For Tamil Eggplant Tomato Gothsu, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Rest Tamil Eggplant Tomato Gothsu 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Smoky eggplant gives body to this tangy Tamil gothsu Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: use fewer tomatoes and omit any added chili. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tamil-okra-mor-kuzhambu",
+      "name": "Tamil Okra Mor Kuzhambu",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.okra",
+          "name": "Okra, trimmed and cut into lengths",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.yogurt",
+          "name": "Whole-milk yogurt, whisked smooth",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, ground fresh",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds, ready for tempering",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, divided",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 220
+        }
+      ],
+      "steps": [
+        "Measure 220 ml (about 1 cup) water for Tamil Okra Mor Kuzhambu; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Sauté the okra in part of the coconut oil until the cut surfaces are dry and lightly colored. Allow 4 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Blend coconut and cumin with a little hot water, add the paste to the pan. Blend for 35–45 seconds, stop to scrape the sides, and leave the texture described rather than aerating it.",
+        "Simmer until the pieces are tender. Maintain low heat for 4–6 minutes, stirring every 3 minutes, until a spoon drawn across the base leaves a trail that closes slowly.",
+        "Lower the flame before stirring in the whisked yogurt. Keep the heat steady low and work for 2 minutes so the addition disperses without breaking the main pieces.",
+        "Warm gently. Use moderate heat for 4–5 minutes, moving the pan often, until aromatic without scorching.",
+        "Finish with mustard and curry leaves crackled in the remaining oil. Use medium-low heat for 2–3 minutes, moving the pan often, until aromatic without scorching.",
+        "Rest Tamil Okra Mor Kuzhambu 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "A carefully warmed yogurt gravy softens okra's drying quality Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: choose a modest serving and increase the mustard and ginger.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tamil-cabbage-chana-usili",
+      "name": "Tamil Cabbage Chana Usili",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, finely shredded",
+          "grams": 400
+        },
+        {
+          "dravyaId": "dravya.chana-dal",
+          "name": "Chana dal, soaked and drained",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.red-chili",
+          "name": "Dried red chili, broken",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.asafoetida",
+          "name": "Asafoetida, finely powdered",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil, for the pan",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 80
+        }
+      ],
+      "steps": [
+        "Heat 80 ml (about 1/4 cup) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "For Tamil Cabbage Chana Usili, cover the chana dal with at least three times their volume of cool water and soak for 30 minutes; drain for 2 minutes before the first heated step.",
+        "Pulse the soaked chana dal with cumin and the broken chili until crumbly rather than smooth. Work in 5 short pulses, pausing between them so the mixture stays cool and retains the intended texture.",
+        "Steam the lentil mixture in a shallow layer, cool it briefly, and break it into tender granules with your fingers. Maintain a steady steam for 8–10 minutes and check until the pulses crush easily against the side of the pot.",
+        "Stir-fry the cabbage with asafoetida and curry leaves. Keep the heat gentle medium and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Toss in the lentil crumbs and season once the moisture has cooked away. Keep the heat low and work for 2 minutes so the addition disperses without breaking the main pieces.",
+        "Rest Tamil Cabbage Chana Usili 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 1,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Steamed lentil crumbs turn simple cabbage into a protein-rich usili Vata: cook the cabbage thoroughly and add a little extra oil. Pitta: omit the red chili and season with coriander. Kapha: keep the oil light and retain the warming spices.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tamil-green-bean-chana-usili",
+      "name": "Tamil Green Bean Chana Usili",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, sliced into tiny rounds",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.chana-dal",
+          "name": "Chana dal, soaked and drained",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.green-chili",
+          "name": "Green chili, roughly chopped",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.asafoetida",
+          "name": "Asafoetida, finely powdered",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil, for the pan",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 100
+        }
+      ],
+      "steps": [
+        "Heat 100 ml (about 1/2 cup) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Cover the chana dal with at least three times their volume of cool water and soak for 20 minutes; drain for 2 minutes before the first heated step.",
+        "Grind the soaked dal coarsely with fennel and chili, leaving enough texture for distinct crumbs. Work in 4 short pulses, pausing between them so the mixture stays cool and retains the intended texture.",
+        "Steam the coarse paste until firm, let it lose its surface heat, and crumble it without compacting the pieces. Maintain a steady steam for 7–9 minutes and check until the aroma is rounded and the stated texture is reached.",
+        "Cook the bean rounds with asafoetida and curry leaves. Maintain medium-low heat for 8–10 minutes, stirring every 3 minutes, until the pulses crush easily against the side of the pot.",
+        "Fold in the steamed lentils and toss until the pan is dry. Keep the heat gentle medium and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Rest Tamil Green Bean Chana Usili 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Green beans bring freshness to this dry Tamil lentil-and-vegetable preparation Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tamil-fennel-lemon-rice",
+      "name": "Tamil Fennel Lemon Rice",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, cooked and cooled slightly",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 42
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds, ready for tempering",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.urad",
+          "name": "Black gram, split and dry",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil, for tempering",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Complete the listed rinsing, cutting, and draining for the white rice, lemon juice, and fennel seeds before heating the pan; keep the pieces even so they reach doneness together.",
+        "Spread the cooked grains so their steam can escape while you prepare the tempering. Maintain a steady steam for 5–7 minutes and check until a grain pressed between two fingers has no chalky center.",
+        "Toast the split black gram in sesame oil. Use gentle medium heat for 2–3 minutes, moving the pan often, until aromatic without scorching.",
+        "Add mustard, fennel, turmeric, and torn curry leaves in quick succession. Keep the heat low and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Fold the fragrant oil through the rice, remove the pan from direct heat. Keep the heat steady low and work for 2 minutes so the addition disperses without breaking the main pieces.",
+        "Mix in the lemon juice and salt. Keep the heat moderate and work for 3 minutes so the addition disperses without breaking the main pieces.",
+        "Rest Tamil Fennel Lemon Rice 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Fennel rounds the bright acidity of this Tamil lemon rice Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: use less citrus and allow the rice to cool to warm before eating. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tamil-tamarind-sesame-rice",
+      "name": "Tamil Tamarind Sesame Rice",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, cooked and cooled slightly",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp, diluted",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds, toasted and ground",
+          "grams": 25
+        },
+        {
+          "dravyaId": "dravya.peanut",
+          "name": "Peanuts, dry-roasted",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds, ready for tempering",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.fenugreek-seed",
+          "name": "Fenugreek seeds, whole",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil, for the pan",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Complete the listed rinsing, cutting, and draining for the white rice, tamarind pulp, and sesame seeds before heating the pan; keep the pieces even so they reach doneness together.",
+        "Reduce the diluted tamarind with fenugreek until its raw aroma fades and the liquid becomes syrupy. Maintain moderate heat for 7–9 minutes, stirring every 4 minutes, until the aroma is rounded and the stated texture is reached.",
+        "Pop mustard in sesame oil, add the peanuts and curry leaves. Keep the heat medium-low and work for 3 minutes so the addition disperses without breaking the main pieces.",
+        "Stir the darkened tamarind reduction into the pan. Keep the heat gentle medium and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Coat the separate rice grains with the sour paste, sprinkle over the ground sesame. Allow 2 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Rest the mixture before serving. Keep the heat steady low and work for 2 minutes so the addition disperses without breaking the main pieces.",
+        "Rest Tamil Tamarind Sesame Rice 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 2,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tamarind and sesame make this travel-friendly rice concentrated and sour Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: use a smaller amount of tamarind and serve beside a mild vegetable. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tamil-coconut-cumin-rice",
+      "name": "Tamil Coconut Cumin Rice",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, cooked and cooled slightly",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.cashew",
+          "name": "Cashews, roughly broken",
+          "grams": 40
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.urad",
+          "name": "Black gram, split and dry",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, for the pan",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Complete the listed rinsing, cutting, and draining for the white rice, fresh coconut, and cashews before heating the pan; keep the pieces even so they reach doneness together.",
+        "Fluff the cooked rice onto a wide tray and separate any clumps while it remains warm. Use moderate heat for 4–5 minutes, moving the pan often, until aromatic without scorching.",
+        "Brown the split gram and cashew pieces in coconut oil. Use medium-low heat for 2–3 minutes, moving the pan often, until aromatic without scorching.",
+        "Add cumin and curry leaves until aromatic. Keep the heat gentle medium and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Turn in the grated coconut for less than a minute, fold the tempering through the rice. Keep the heat low and work for 2 minutes so the addition disperses without breaking the main pieces.",
+        "Season gently. Wait 5 minutes, taste once the heat settles, and adjust only then before serving at the stated temperature.",
+        "Rest Tamil Coconut Cumin Rice 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Coconut and cashew make this fragrant rice softening and comparatively rich Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tamil-black-pepper-sesame-rice",
+      "name": "Tamil Black Pepper Sesame Rice",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice, cooked until tender",
+          "grams": 650
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds, toasted and ground",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, lightly toasted",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, warmed for mixing",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Complete the listed rinsing, cutting, and draining for the brown rice, sesame seeds, and black pepper before heating the pan; keep the pieces even so they reach doneness together.",
+        "Let the tender brown rice stand uncovered until excess steam no longer dampens the grains. Use moderate heat for 2–3 minutes, moving the pan often, until aromatic without scorching.",
+        "Pound the toasted sesame with cumin and cracked pepper, keeping the seasoning slightly coarse. Use medium-low heat for 2–3 minutes, moving the pan often, until aromatic without scorching.",
+        "Massage the warm ghee and spice powder through the rice, add torn curry leaves, and taste for salt. Use gentle medium heat for 3–4 minutes, moving the pan often, until aromatic without scorching.",
+        "For Tamil Black Pepper Sesame Rice, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Rest Tamil Black Pepper Sesame Rice 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "A coarse sesame-pepper powder gives brown rice a warming Tamil finish Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: halve the pepper and replace part of it with fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tamil-spinach-garlic-masiyal",
+      "name": "Tamil Spinach Garlic Masiyal",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach leaves, washed and chopped",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.garlic",
+          "name": "Garlic cloves, thinly sliced",
+          "grams": 10
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for tempering",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, coarsely crushed",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 520
+        }
+      ],
+      "steps": [
+        "Measure 520 ml (about 2 1/4 cups) water for Tamil Spinach Garlic Masiyal; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Simmer the split mung until soft. Maintain low heat for 7–9 minutes, stirring every 3 minutes, until the pulses crush easily against the side of the pot.",
+        "Heap the chopped spinach over it and cover until the leaves collapse. Allow 3 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Mash the greens and lentils together with a wooden spoon, leaving a few leafy streaks for texture. Allow 4 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Brown the sliced garlic and cumin in ghee, add the crushed pepper. Use medium-low heat for 2–3 minutes, moving the pan often, until aromatic without scorching.",
+        "Stir this tempering into the masiyal. Keep the heat gentle medium and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Rest Tamil Spinach Garlic Masiyal 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Soft mung rounds out spinach in this rustic Tamil mash Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tamil-bottle-gourd-poricha-kuzhambu",
+      "name": "Tamil Bottle Gourd Poricha Kuzhambu",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.bottle-gourd",
+          "name": "Bottle gourd, peeled and diced",
+          "grams": 520
+        },
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Pigeon pea, rinsed and drained",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 65
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, ground fresh",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, coarsely crushed",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds, ready for tempering",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, for tempering",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Bring 850 ml (about 3 1/2 cups) water to a boil in a separate kettle and hold it hot, covered, so Tamil Bottle Gourd Poricha Kuzhambu never loses its simmer.",
+        "Pressure-cook or simmer the pigeon pea until creamy while the bottle-gourd dice soften in a separate shallow pot. Aim for an even 3–4 mm thickness; repair cracks before the piece reaches the hot surface.",
+        "Combine the two. Keep the heat low and work for 3 minutes so the addition disperses without breaking the main pieces.",
+        "Stir in coconut ground with cumin and pepper until the gravy becomes cohesive. Keep the heat steady low and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Finish with mustard and curry leaves sputtered in coconut oil. Wait 3 minutes, taste once the heat settles, and adjust only then before serving at the stated temperature.",
+        "Let the kuzhambu stand covered before ladling. Allow 3 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Rest Tamil Bottle Gourd Poricha Kuzhambu 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Creamy pigeon pea gives mild bottle gourd enough body for a complete midday dish Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.andhra-tomato-toor-pappu",
+      "name": "Andhra Tomato Toor Pappu",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Pigeon pea, rinsed and drained",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, cut into wedges",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.green-chili",
+          "name": "Green chili, slit lengthwise",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds, ready for tempering",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for tempering",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 900
+        }
+      ],
+      "steps": [
+        "Measure 900 ml (about 3 3/4 cups) water for Andhra Tomato Toor Pappu; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Cook the pigeon pea with turmeric until it can be whisked into a thick, smooth base. Maintain steady low heat for 7–9 minutes, stirring every 4 minutes, until the aroma is rounded and the stated texture is reached.",
+        "Stew the tomato wedges and slit chili separately until pulpy. Maintain moderate heat for 5–7 minutes, stirring every 5 minutes, until a spoon drawn across the base leaves a trail that closes slowly.",
+        "Beat them into the cooked dal. Whisk for 60 seconds, scraping the bottom and corners until no dry pockets or lumps remain.",
+        "Crackle mustard and curry leaves in ghee, pour the tempering over the pappu. Use gentle medium heat for 2–3 minutes, moving the pan often, until aromatic without scorching.",
+        "Season after one final simmer. Maintain low heat for 5–7 minutes, stirring every 4 minutes, until the aroma is rounded and the stated texture is reached.",
+        "Rest Andhra Tomato Toor Pappu 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tangy tomato gives this Andhra pappu its direct, home-style character Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: omit the chili and replace some tomato with bottle gourd. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.andhra-spinach-masoor-pappu",
+      "name": "Andhra Spinach Masoor Pappu",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach leaves, washed and chopped",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.garlic",
+          "name": "Garlic cloves, lightly crushed",
+          "grams": 10
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for tempering",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.red-chili",
+          "name": "Dried red chili, broken",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 880
+        }
+      ],
+      "steps": [
+        "Heat 880 ml (about 3 3/4 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Simmer the red lentils with turmeric until they lose their shape and become silky. Maintain moderate heat for 8–10 minutes, stirring every 3 minutes, until the pulses crush easily against the side of the pot.",
+        "Fold in the chopped spinach and cook uncovered just until the greens turn tender and the pot thickens again. Maintain medium-low heat for 9–11 minutes, stirring every 4 minutes, until the aroma is rounded and the stated texture is reached.",
+        "Brown the crushed garlic with cumin and broken chili in ghee. Use gentle medium heat for 4–5 minutes, moving the pan often, until aromatic without scorching.",
+        "Stir the fragrant tempering through the pappu. Keep the heat low and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "For Andhra Spinach Masoor Pappu, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Rest Andhra Spinach Masoor Pappu 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Quick-cooking red lentils support the mineral depth of spinach in this pappu Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: leave out the dried chili and soften the garlic without browning it deeply. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.andhra-cucumber-mung-pappu",
+      "name": "Andhra Cucumber Mung Pappu",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, peeled and cut into chunks",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for tempering",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 820
+        }
+      ],
+      "steps": [
+        "Heat 820 ml (about 3 1/2 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Cook the split mung until nearly tender. Maintain steady low heat for 5–7 minutes, stirring every 5 minutes, until the pulses crush easily against the side of the pot.",
+        "Add the cucumber chunks and turmeric for the final simmer. Maintain moderate heat for 6–8 minutes, stirring every 3 minutes, until the aroma is rounded and the stated texture is reached.",
+        "Mash only a portion of the dal so the softened cucumber remains visible in the pale base. Allow 2 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Bloom cumin and ground coriander in ghee, add the curry leaves. Use gentle medium heat for 3–4 minutes, moving the pan often, until aromatic without scorching.",
+        "Fold the tempering through the finished pappu. Keep the heat low and work for 3 minutes so the addition disperses without breaking the main pieces.",
+        "Rest Andhra Cucumber Mung Pappu 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cooked cucumber makes this mung pappu cooling without serving the vegetable raw Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.andhra-purslane-toor-pappu",
+      "name": "Andhra Purslane Toor Pappu",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Pigeon pea, rinsed and drained",
+          "grams": 185
+        },
+        {
+          "dravyaId": "dravya.purslane",
+          "name": "Purslane leaves, washed and roughly chopped",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp, diluted",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds, ready for tempering",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for tempering",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Prepare 850 ml (about 3 1/2 cups) hot water before starting Andhra Purslane Toor Pappu; keep one small ladle in reserve in case the base tightens early.",
+        "Cook the pigeon pea with turmeric until creamy enough to take a vigorous whisking. Maintain low heat for 6–8 minutes, stirring every 3 minutes, until the aroma is rounded and the stated texture is reached.",
+        "Wilt the chopped purslane in a separate pan, add the diluted tamarind. Keep the heat steady low and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Simmer away its raw sour edge. Maintain moderate heat for 5–7 minutes, stirring every 4 minutes, until the aroma is rounded and the stated texture is reached.",
+        "Combine greens and dal. Keep the heat medium-low and work for 3 minutes so the addition disperses without breaking the main pieces.",
+        "Finish with mustard and curry leaves crackled in ghee before adjusting the salt. Use gentle medium heat for 2–3 minutes, moving the pan often, until aromatic without scorching.",
+        "Rest Andhra Purslane Toor Pappu 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Purslane contributes a gentle natural tang to this substantial Andhra dal Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.andhra-eggplant-peanut-kura",
+      "name": "Andhra Eggplant Peanut Kura",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.eggplant",
+          "name": "Eggplant, cut into small wedges",
+          "grams": 480
+        },
+        {
+          "dravyaId": "dravya.peanut",
+          "name": "Peanuts, roasted and ground coarse",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds, toasted and ground",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.peanut-oil",
+          "name": "Peanut oil, for the pan",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp, diluted",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 240
+        }
+      ],
+      "steps": [
+        "Heat 240 ml (about 1 cup) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Sear the eggplant wedges in peanut oil until their cut faces color and their skins begin to soften. Allow 3 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Sprinkle in coriander and turmeric, pour over the diluted tamarind. Allow 4 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Cover until the flesh is tender. Allow 2 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Fold in the coarse peanut-and-sesame powder, add enough hot water to prevent scorching. Keep the heat gentle medium and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Reduce to a clinging kura. Maintain low heat for 7–9 minutes, stirring every 4 minutes, until the aroma is rounded and the stated texture is reached.",
+        "Rest Andhra Eggplant Peanut Kura 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 1,
+        "pitta": 1,
+        "kapha": 1
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Peanut and sesame make this Andhra eggplant curry dense and warming Vata: eat a small portion with soft rice and ensure the eggplant is fully tender. Pitta: reduce tamarind and use coriander in place of chili. Kapha: halve the nut mixture and serve with abundant greens.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.andhra-ridge-gourd-chana-dal",
+      "name": "Andhra Ridge Gourd Chana Dal",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.ridge-gourd",
+          "name": "Ridge gourd, peeled in stripes and chopped",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.chana-dal",
+          "name": "Chana dal, soaked and drained",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.green-chili",
+          "name": "Green chili, slit lengthwise",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for tempering",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 720
+        }
+      ],
+      "steps": [
+        "Prepare 720 ml (about 3 cups) hot water before starting Andhra Ridge Gourd Chana Dal; keep one small ladle in reserve in case the base tightens early.",
+        "For Andhra Ridge Gourd Chana Dal, cover the chana dal with at least three times their volume of cool water and soak for 20 minutes; drain for 2 minutes before the first heated step.",
+        "Simmer the soaked chana dal until its centers are tender while the grains remain separate. Maintain moderate heat for 6–8 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Add the chopped ridge gourd, turmeric, and slit chili. Keep the heat medium-low and work for 2 minutes so the addition disperses without breaking the main pieces.",
+        "Cook uncovered as the vegetable releases its liquid. Maintain gentle medium heat for 5–7 minutes, stirring every 5 minutes, until the aroma is rounded and the stated texture is reached.",
+        "Warm cumin and curry leaves in ghee, stir the tempering into the thickened dal. Use low heat for 2–3 minutes, moving the pan often, until aromatic without scorching.",
+        "Season at the table. Wait 3 minutes, taste once the heat settles, and adjust only then before serving at the stated temperature.",
+        "Rest Andhra Ridge Gourd Chana Dal 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Juicy ridge gourd lightens chana dal in this simple Andhra combination Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.andhra-okra-sesame-kura",
+      "name": "Andhra Okra Sesame Kura",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.okra",
+          "name": "Okra, wiped dry and sliced",
+          "grams": 480
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds, toasted and ground",
+          "grams": 36
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.peanut-oil",
+          "name": "Peanut oil, for the pan",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.amchur",
+          "name": "Amchur powder, finely sifted",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Complete the listed rinsing, cutting, and draining for the okra, sesame seeds, and coriander seeds before heating the pan; keep the pieces even so they reach doneness together.",
+        "Warm cumin in peanut oil, add the dry okra slices. Use moderate heat for 3–4 minutes, moving the pan often, until aromatic without scorching.",
+        "Spread them so steam can escape. Maintain a steady steam for 6–8 minutes and check until the aroma is rounded and the stated texture is reached.",
+        "Turn the pieces only occasionally until their surfaces are no longer sticky. Allow 2 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Dust with turmeric and coriander. Allow 2 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Toss through the ground sesame and amchur, season. Keep the heat steady low and work for 2 minutes so the addition disperses without breaking the main pieces.",
+        "Remove the pan once the coating smells toasted. Use moderate heat for 4–5 minutes, moving the pan often, until aromatic without scorching.",
+        "Rest Andhra Okra Sesame Kura 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Dry cooking and sesame give this Andhra okra kura a nutty finish Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: reduce the amchur and accompany the dish with a mild grain. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.andhra-cabbage-chili-fry",
+      "name": "Andhra Cabbage Chili Fry",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, cut into short ribbons",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, thawed",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.green-chili",
+          "name": "Green chili, finely chopped",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds, ready for tempering",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.peanut-oil",
+          "name": "Peanut oil, for the wok",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Complete the listed rinsing, cutting, and draining for the cabbage, green peas, and green chili before heating the pan; keep the pieces even so they reach doneness together.",
+        "Pop the mustard in peanut oil. Allow 4 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Stir in the chopped chili, curry leaves, and turmeric for a few breaths. Keep the heat steady low and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Add the cabbage ribbons and peas, toss over lively heat. Keep the heat moderate and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Cover only long enough to soften the thickest pieces. Allow 3 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Uncover and keep the vegetables moving until the pan is dry. Allow 4 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Season and serve while their texture remains distinct. Wait 6 minutes, taste once the heat settles, and adjust only then before serving at the stated temperature.",
+        "Rest Andhra Cabbage Chili Fry 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "A brisk Andhra-style fry keeps cabbage light and deliberately spicy Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: omit the chili and add crushed fennel instead. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.andhra-pumpkin-tamarind-pulusu",
+      "name": "Andhra Pumpkin Tamarind Pulusu",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and cut into large cubes",
+          "grams": 520
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp, diluted",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery, finely grated",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.fenugreek-seed",
+          "name": "Fenugreek seeds, whole",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds, ready for tempering",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil, for the pot",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 580
+        }
+      ],
+      "steps": [
+        "Set aside 580 ml (about 2 1/2 cups) freshly boiled water for Andhra Pumpkin Tamarind Pulusu, reserving about 60 ml to correct the final consistency.",
+        "Fry fenugreek and mustard in sesame oil. Allow 3 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Add turmeric and the pumpkin cubes before the spices darken. Keep the heat low and work for 3 minutes so the addition disperses without breaking the main pieces.",
+        "Pour in the diluted tamarind and simmer uncovered until the pumpkin is tender but still angular. Maintain steady low heat for 6–8 minutes, stirring every 3 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Balance the sour broth with grated jaggery, add the curry leaves and salt. Keep the heat moderate and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Reduce the pulusu until lightly glossy. Maintain medium-low heat for 5–7 minutes, stirring every 4 minutes, until a spoon drawn across the base leaves a trail that closes slowly.",
+        "Rest Andhra Pumpkin Tamarind Pulusu 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pumpkin, tamarind, and a restrained sweetness create the characteristic balance of pulusu Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: use less tamarind and omit the chili entirely. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.andhra-lemon-proso-pulihora",
+      "name": "Andhra Lemon Proso Pulihora",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet, cooked and cooled",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 40
+        },
+        {
+          "dravyaId": "dravya.peanut",
+          "name": "Peanuts, dry-roasted",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds, ready for tempering",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.chana-dal",
+          "name": "Chana dal, dry and sorted",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.peanut-oil",
+          "name": "Peanut oil, for tempering",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Complete the listed rinsing, cutting, and draining for the proso millet, lemon juice, and peanuts before heating the pan; keep the pieces even so they reach doneness together.",
+        "Rake the cooked millet across a tray so the tiny grains cool without clumping. Wait 4 minutes, taste once the heat settles, and adjust only then before serving at the stated temperature.",
+        "Brown the dry chana dal and peanuts in peanut oil. Use gentle medium heat for 4–5 minutes, moving the pan often, until aromatic without scorching.",
+        "Pop the mustard and add turmeric with torn curry leaves. Keep the heat low and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Fold this tempering through the millet, remove it from the heat, and distribute the lemon juice and salt evenly. Keep the heat steady low and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Rest Andhra Lemon Proso Pulihora 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Proso millet gives familiar pulihora flavors a lighter, drier base Vata: add a spoon of ghee and eat the millet warm. Pitta: reduce the lemon and leave out fresh chili. Kapha: keep the nut portion small and enjoy a moderate serving.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.andhra-sesame-eggplant-pulusu",
+      "name": "Andhra Sesame Eggplant Pulusu",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.eggplant",
+          "name": "Eggplant, quartered lengthwise",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp, diluted",
+          "grams": 38
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds, toasted and ground",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.fenugreek-seed",
+          "name": "Fenugreek seeds, whole",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil, for the pot",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 480
+        }
+      ],
+      "steps": [
+        "Heat 480 ml (about 2 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Brown the eggplant quarters in sesame oil, turning them gently so the skins stay attached. Use low heat for 3–4 minutes, moving the pan often, until aromatic without scorching.",
+        "Add fenugreek, coriander, and turmeric. Keep the heat steady low and work for 3 minutes so the addition disperses without breaking the main pieces.",
+        "Pour in the diluted tamarind and simmer until the flesh is silky. Maintain moderate heat for 6–8 minutes, stirring every 3 minutes, until a spoon drawn across the base leaves a trail that closes slowly.",
+        "Shake in the ground sesame, reduce the gravy around the vegetables. Maintain medium-low heat for 7–9 minutes, stirring every 3 minutes, until a spoon drawn across the base leaves a trail that closes slowly.",
+        "Season only after tasting the concentrated broth. Wait 4 minutes, taste once the heat settles, and adjust only then before serving at the stated temperature.",
+        "Rest Andhra Sesame Eggplant Pulusu 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 1,
+        "pitta": 1,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sesame thickens this tangy Andhra eggplant pulusu without dairy Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: lower the tamarind and serve it with a cooling gourd side. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.andhra-drumstick-peanut-kura",
+      "name": "Andhra Drumstick Peanut Kura",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.drumstick",
+          "name": "Drumstick pods, cut into short lengths",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.peanut",
+          "name": "Peanuts, roasted and ground coarse",
+          "grams": 65
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, finely chopped",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.peanut-oil",
+          "name": "Peanut oil, for the pan",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 520
+        }
+      ],
+      "steps": [
+        "Heat 520 ml (about 2 1/4 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Toast the cumin in peanut oil, add the drumstick lengths. Use gentle medium heat for 3–4 minutes, moving the pan often, until aromatic without scorching.",
+        "Turn them until their green skins brighten. Allow 4 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Stir in the chopped tomatoes, coriander, and turmeric. Keep the heat steady low and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Cover with hot water and simmer until the inner pulp softens. Maintain moderate heat for 5–7 minutes, stirring every 3 minutes, until the aroma is rounded and the stated texture is reached.",
+        "Thicken the remaining gravy with the coarse peanut meal, season. Wait 4 minutes, taste once the heat settles, and adjust only then before serving at the stated temperature.",
+        "Rest the kura so the pods absorb the sauce. Wait 5 minutes, taste once the heat settles, and adjust only then before serving at the stated temperature.",
+        "Rest Andhra Drumstick Peanut Kura 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "A peanut-thickened tomato gravy clings well to fibrous drumstick pods Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: replace half the tomato with bottle gourd and keep chilies out. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.karnataka-brown-rice-bisi-bele",
+      "name": "Karnataka Brown Rice Bisi Bele",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice, rinsed and soaked",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Pigeon pea, rinsed and soaked",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, cut into small cubes",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, cut into short pieces",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp, diluted",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, toasted and ground",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1250
+        }
+      ],
+      "steps": [
+        "Prepare 1250 ml (about 5 1/4 cups) hot water before starting Karnataka Brown Rice Bisi Bele; keep one small ladle in reserve in case the base tightens early.",
+        "Cover the brown rice and pigeon pea with at least three times their volume of cool water and soak for 30 minutes; drain for 2 minutes before the first heated step.",
+        "Cook the soaked rice and pigeon pea together until both are soft enough to merge under a spoon. Maintain gentle medium heat for 7–9 minutes, stirring every 5 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Simmer the carrot and beans with coriander, cinnamon, and diluted tamarind until the vegetables are tender. Maintain low heat for 8–10 minutes, stirring every 3 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Combine the two pots, loosen the mixture to a flowing consistency. Keep the heat steady low and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Finish the bisi bele with salt and warm ghee. Use moderate heat for 3–4 minutes, moving the pan often, until aromatic without scorching.",
+        "Rest Karnataka Brown Rice Bisi Bele 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Long-cooked brown rice and dal make this bisi bele substantial but soft Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: reduce tamarind and cinnamon while favoring coriander. Kapha: serve a smaller bowl and use less ghee.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.karnataka-dill-lentil-saaru",
+      "name": "Karnataka Dill Lentil Saaru",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-lentil",
+          "name": "Brown lentils, rinsed and drained",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill, leaves finely chopped",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, chopped with juices",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for tempering",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1050
+        }
+      ],
+      "steps": [
+        "Set aside 1050 ml (about 4 1/2 cups) freshly boiled water for Karnataka Dill Lentil Saaru, reserving about 60 ml to correct the final consistency.",
+        "Simmer the brown lentils with turmeric until tender. Use gentle medium heat for 2–3 minutes, moving the pan often, until aromatic without scorching.",
+        "Whisk a small portion to give the broth body. Whisk for 40 seconds, scraping the bottom and corners until no dry pockets or lumps remain.",
+        "Add the chopped tomatoes and cracked pepper, cooking until their sharp raw scent disappears. Keep the heat steady low and work for 3 minutes so the addition disperses without breaking the main pieces.",
+        "Bloom cumin in ghee, stir it into the saaru with the chopped dill, and stop cooking while the herb remains fragrant. Use moderate heat for 2–3 minutes, moving the pan often, until aromatic without scorching.",
+        "For Karnataka Dill Lentil Saaru, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Rest Karnataka Dill Lentil Saaru 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Fresh dill lends a green, aromatic finish to this light Karnataka lentil broth Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.karnataka-chayote-majjige-huli",
+      "name": "Karnataka Chayote Majjige Huli",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chayote",
+          "name": "Chayote, peeled and cut into chunks",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.yogurt",
+          "name": "Whole-milk yogurt, whisked smooth",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.chana-dal",
+          "name": "Chana dal, soaked and drained",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, ground fresh",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds, ready for tempering",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, for tempering",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 400
+        }
+      ],
+      "steps": [
+        "Measure 400 ml (about 1 3/4 cups) water for Karnataka Chayote Majjige Huli; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "For Karnataka Chayote Majjige Huli, cover the chana dal with at least three times their volume of cool water and soak for 30 minutes; drain for 2 minutes before the first heated step.",
+        "Cook the chayote chunks with turmeric until tender enough to cut with the edge of a spoon. Maintain moderate heat for 5–7 minutes, stirring every 4 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Grind the soaked chana dal with coconut and cumin, simmer this paste around the vegetable. Work in 5 short pulses, pausing between them so the mixture stays cool and retains the intended texture.",
+        "Let it lose its raw taste. Allow 2 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Lower the heat before folding in the whisked yogurt. Keep the heat low and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Finish without boiling with mustard and curry leaves tempered in coconut oil. Wait 4 minutes, taste once the heat settles, and adjust only then before serving at the stated temperature.",
+        "Rest Karnataka Chayote Majjige Huli 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chayote keeps this yogurt-based Karnataka huli mild and moist Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: take a smaller portion and make the tempering more pungent.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.karnataka-green-bean-coconut-palya",
+      "name": "Karnataka Green Bean Coconut Palya",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, cut on a fine diagonal",
+          "grams": 470
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 65
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds, ready for tempering",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.urad",
+          "name": "Black gram, split and dry",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, for the pan",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Heat 70 ml (about 1/4 cup) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Brown the split black gram in coconut oil and wait for the mustard to pop before adding turmeric and curry leaves. Use moderate heat for 3–4 minutes, moving the pan often, until aromatic without scorching.",
+        "Toss in the diagonally cut beans with a splash of hot water. Keep the heat medium-low and work for 3 minutes so the addition disperses without breaking the main pieces.",
+        "Cover until they are tender but still green. Allow 2 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Cook off the remaining moisture, fold in the grated coconut. Maintain low heat for 7–9 minutes, stirring every 3 minutes, until the aroma is rounded and the stated texture is reached.",
+        "Season the palya while it is hot. Wait 4 minutes, taste once the heat settles, and adjust only then before serving at the stated temperature.",
+        "Rest Karnataka Green Bean Coconut Palya 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Fine cutting and brief steaming keep this Karnataka bean palya light Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.karnataka-beet-sesame-palya",
+      "name": "Karnataka Beet Sesame Palya",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, peeled and grated coarse",
+          "grams": 450
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds, toasted and ground",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds, ready for tempering",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, for the pan",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 60
+        }
+      ],
+      "steps": [
+        "Set aside 60 ml (about 1/4 cup) freshly boiled water for Karnataka Beet Sesame Palya, reserving about 60 ml to correct the final consistency.",
+        "Crackle mustard and cumin in coconut oil. Use steady low heat for 2–3 minutes, moving the pan often, until aromatic without scorching.",
+        "Add the torn curry leaves without letting them scorch. Keep the heat moderate and work for 2 minutes so the addition disperses without breaking the main pieces.",
+        "Scatter in the coarse beet shreds, splash the pan with hot water. Keep the layer loose and even, with no pooled liquid, so every portion receives the same balance.",
+        "Cover until the raw crunch softens. Allow 2 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Uncover, toss with the ground sesame. Keep the heat low and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Cook until the palya is moist but no liquid pools beneath it. Maintain steady low heat for 6–8 minutes, stirring every 4 minutes, until the aroma is rounded and the stated texture is reached.",
+        "Rest Karnataka Beet Sesame Palya 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sesame complements the earthy sweetness of beet in this simple palya Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.karnataka-cabbage-pea-palya",
+      "name": "Karnataka Cabbage Pea Palya",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, thinly sliced",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, thawed",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds, ready for tempering",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.green-chili",
+          "name": "Green chili, slit lengthwise",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, for the pan",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Complete the listed rinsing, cutting, and draining for the cabbage, green peas, and fresh coconut before heating the pan; keep the pieces even so they reach doneness together.",
+        "Pop the mustard in coconut oil. Allow 3 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Add the slit chili and curry leaves for a short aromatic burst. Keep the heat low and work for 3 minutes so the addition disperses without breaking the main pieces.",
+        "Tumble in the cabbage and peas, cover for a few minutes. Allow 2 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Let the vegetables soften in their own steam. Maintain a steady steam for 6–8 minutes and check until the aroma is rounded and the stated texture is reached.",
+        "Remove the lid while some bite remains, stir through the coconut and salt. Keep the heat medium-low and work for 2 minutes so the addition disperses without breaking the main pieces.",
+        "Serve the palya promptly. Wait 5 minutes, taste once the heat settles, and adjust only then before serving at the stated temperature.",
+        "Rest Karnataka Cabbage Pea Palya 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cabbage and peas make a quick everyday palya with a fresh coconut finish Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.karnataka-methi-brown-rice-bath",
+      "name": "Karnataka Methi Brown Rice Bath",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice, rinsed and soaked",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.methi-leaves",
+          "name": "Fenugreek leaves, washed and chopped",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, thawed",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 700
+        }
+      ],
+      "steps": [
+        "Prepare 700 ml (about 3 cups) hot water before starting Karnataka Methi Brown Rice Bath; keep one small ladle in reserve in case the base tightens early.",
+        "Cover the brown rice with at least three times their volume of cool water and soak for 30 minutes; drain for 2 minutes before the first heated step.",
+        "Soften the chopped fenugreek leaves in ghee with cumin until their raw bitterness mellows. Allow 3 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Stir in the soaked rice, peas, coriander, and turmeric, coating every grain in the green mixture. Keep the heat steady low and work for 3 minutes so the addition disperses without breaking the main pieces.",
+        "Pour in hot water, cover. Allow 2 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Cook gently until the rice is tender. Maintain medium-low heat for 5–7 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Rest the bath before fluffing and seasoning. Wait 4 minutes, taste once the heat settles, and adjust only then before serving at the stated temperature.",
+        "Rest Karnataka Methi Brown Rice Bath 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Fenugreek leaves bring a pleasant bitterness to this hearty brown-rice bath Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.karnataka-lemon-jowar-chitranna",
+      "name": "Karnataka Lemon Jowar Chitranna",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.jowar",
+          "name": "Sorghum grains, cooked and cooled",
+          "grams": 650
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 40
+        },
+        {
+          "dravyaId": "dravya.peanut",
+          "name": "Peanuts, dry-roasted",
+          "grams": 40
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds, ready for tempering",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.urad",
+          "name": "Black gram, split and dry",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil, for tempering",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Complete the listed rinsing, cutting, and draining for the sorghum grains, lemon juice, and peanuts before heating the pan; keep the pieces even so they reach doneness together.",
+        "Separate the cooked sorghum grains on a platter and allow their surface moisture to evaporate. Allow 3 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Toast the split black gram in sesame oil. Use steady low heat for 4–5 minutes, moving the pan often, until aromatic without scorching.",
+        "Add mustard, peanuts, turmeric, and curry leaves. Keep the heat moderate and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Fold the hot tempering into the sorghum, take the pan off the flame. Keep the heat medium-low and work for 1 minute so the addition disperses without breaking the main pieces.",
+        "Mix in the lemon juice and salt. Keep the heat gentle medium and work for 2 minutes so the addition disperses without breaking the main pieces.",
+        "Rest Karnataka Lemon Jowar Chitranna 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 1,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chewy sorghum gives lemon chitranna a deliberately dry, rustic texture Vata: serve it warm with extra ghee and a moist vegetable. Pitta: reduce the lemon and omit chilies. Kapha: keep the oil and peanuts modest.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.karnataka-coconut-sesame-rice-bath",
+      "name": "Karnataka Coconut Sesame Rice Bath",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice, cooked until tender",
+          "grams": 650
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 75
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds, toasted and ground",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.cashew",
+          "name": "Cashews, roughly broken",
+          "grams": 35
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pan",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Complete the listed rinsing, cutting, and draining for the brown rice, fresh coconut, and sesame seeds before heating the pan; keep the pieces even so they reach doneness together.",
+        "Loosen the tender brown rice with a fork and keep it covered while the flavoring is prepared. Use moderate heat for 2–3 minutes, moving the pan often, until aromatic without scorching.",
+        "Brown the cashew pieces in ghee, add cumin and curry leaves. Use medium-low heat for 2–3 minutes, moving the pan often, until aromatic without scorching.",
+        "Stir in the coconut just until fragrant. Keep the heat gentle medium and work for 2 minutes so the addition disperses without breaking the main pieces.",
+        "Fold the warm mixture and ground sesame through the rice, season. Use low heat for 4–5 minutes, moving the pan often, until aromatic without scorching.",
+        "Rest the bath for five minutes before serving. Wait 6 minutes, taste once the heat settles, and adjust only then before serving at the stated temperature.",
+        "Rest Karnataka Coconut Sesame Rice Bath 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Coconut, sesame, and cashew turn brown rice into a rich Karnataka-style bath Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: halve the nuts and coconut and choose a small portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.karnataka-pumpkin-peanut-gojju",
+      "name": "Karnataka Pumpkin Peanut Gojju",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and cut into cubes",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.peanut",
+          "name": "Peanuts, roasted and ground coarse",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.tamarind",
+          "name": "Tamarind pulp, diluted",
+          "grams": 34
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery, finely grated",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.mustard-seed",
+          "name": "Mustard seeds, ready for tempering",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.fenugreek-seed",
+          "name": "Fenugreek seeds, whole",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil, for the pot",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 520
+        }
+      ],
+      "steps": [
+        "Measure 520 ml (about 2 1/4 cups) water for Karnataka Pumpkin Peanut Gojju; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Sputter mustard and fenugreek in sesame oil. Allow 2 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Turn the pumpkin cubes through the aromatic fat. Allow 2 minutes for this stage and use the texture and aroma cues, rather than the clock alone, to decide when to continue.",
+        "Add the diluted tamarind and simmer until the pumpkin yields while retaining its shape. Maintain gentle medium heat for 7–9 minutes, stirring every 4 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Stir in the coarse peanuts and grated jaggery, reduce the gojju to a clinging sauce. Maintain low heat for 5–7 minutes, stirring every 5 minutes, until a spoon drawn across the base leaves a trail that closes slowly.",
+        "Finish with curry leaves. Wait 6 minutes, taste once the heat settles, and adjust only then before serving at the stated temperature.",
+        "Rest Karnataka Pumpkin Peanut Gojju 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sweet, sour, and nutty notes meet in this substantial pumpkin gojju Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: use less tamarind and keep the tempering mild. Kapha: reduce both peanut and jaggery and emphasize fenugreek.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.karnataka-ridge-gourd-toor-tovve",
+      "name": "Karnataka Ridge Gourd Toor Tovve",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.ridge-gourd",
+          "name": "Ridge gourd, peeled in stripes and diced",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Pigeon pea, rinsed and drained",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for tempering",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.green-chili",
+          "name": "Green chili, slit lengthwise",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves, torn",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Heat 850 ml (about 3 1/2 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Cook the pigeon pea with turmeric until creamy, crushing a few remaining grains against the pot. Maintain moderate heat for 6–8 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Add the diced ridge gourd and slit chili. Keep the heat medium-low and work for 2 minutes so the addition disperses without breaking the main pieces.",
+        "Simmer until the vegetable becomes soft and the tovve thickens. Maintain gentle medium heat for 5–7 minutes, stirring every 5 minutes, until the aroma is rounded and the stated texture is reached.",
+        "Bloom cumin and curry leaves in ghee, stir this tempering through the dal. Use low heat for 2–3 minutes, moving the pan often, until aromatic without scorching.",
+        "Season just before serving. Wait 3 minutes, taste once the heat settles, and adjust only then before serving at the stated temperature.",
+        "Rest Karnataka Ridge Gourd Toor Tovve 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ridge gourd adds moisture and lightness to this Karnataka pigeon-pea tovve Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.karnataka-spinach-mung-bassaru",
+      "name": "Karnataka Spinach Mung Bassaru",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, soaked and drained",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach leaves, washed and chopped",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, finely chopped",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for tempering",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1050
+        }
+      ],
+      "steps": [
+        "Prepare 1050 ml (about 4 1/2 cups) hot water before starting Karnataka Spinach Mung Bassaru; keep one small ladle in reserve in case the base tightens early.",
+        "For Karnataka Spinach Mung Bassaru, cover the mung beans with at least three times their volume of cool water and soak for 40 minutes; drain for 2 minutes before the first heated step.",
+        "Cook the soaked mung until tender, add the spinach. Maintain medium-low heat for 5–7 minutes, stirring every 4 minutes, until the pulses crush easily against the side of the pot.",
+        "Drain off most of the green cooking broth into a second pot. Let it drain for 1 minutes without pressing harder than the recipe's texture requires.",
+        "Simmer the reserved broth with chopped tomato, cumin, and pepper until it becomes a fragrant, light saaru. Maintain low heat for 7–9 minutes, stirring every 3 minutes, until a spoon drawn across the base leaves a trail that closes slowly.",
+        "Mash the remaining beans and greens coarsely, season both preparations. Wait 3 minutes, taste once the heat settles, and adjust only then before serving at the stated temperature.",
+        "Finish the broth with warm ghee before serving them together. Use moderate heat for 3–4 minutes, moving the pan often, until aromatic without scorching.",
+        "Rest Karnataka Spinach Mung Bassaru 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "This bassaru yields both a light spinach broth and a hearty mung side Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: use fewer tomatoes and soften the pepper with coriander. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    }
+  ]
+}
