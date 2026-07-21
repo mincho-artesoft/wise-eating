@@ -1,0 +1,4184 @@
+{
+  "formatVersion": "1.0",
+  "batch": "recipe-batch-r12",
+  "qualityState": "aiDraft",
+  "items": [
+    {
+      "id": "recipe.asia-tofu-broccoli-stir-fry",
+      "name": "Ginger Tofu Broccoli Stir-Fry",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 16,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.broccoli",
+          "name": "Broccoli florets",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, julienned",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 80
+        }
+      ],
+      "steps": [
+        "Cut the firm tofu, cubed and broccoli florets into small, even pieces and keep them close to the stove.",
+        "Heat the sesame oil in a wide pan and cook the ginger until aromatic.",
+        "Add the ingredients in order from firmest to softest, tossing after each addition.",
+        "Sprinkle in the water and rock salt with the sesame seeds; cover for three minutes.",
+        "Uncover and toss over lively heat until tender-crisp and glossy, then serve immediately."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ginger Tofu Broccoli Stir-Fry is quickly cooked but served hot, with vegetables kept tender rather than raw. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original East or Southeast Asian stir-fry adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-tofu-green-bean-stir-fry",
+      "name": "Tofu Green Bean Stir-Fry",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 16,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, cut",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, julienned",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 80
+        }
+      ],
+      "steps": [
+        "Cut the firm tofu, cubed and green beans, cut into small, even pieces and keep them close to the stove.",
+        "Heat the sesame oil in a wide pan and cook the ginger until aromatic.",
+        "Add the ingredients in order from firmest to softest, tossing after each addition.",
+        "Sprinkle in the water and rock salt with the coriander seeds; cover for three minutes.",
+        "Uncover and toss over lively heat until tender-crisp and glossy, then serve immediately."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tofu Green Bean Stir-Fry is quickly cooked but served hot, with vegetables kept tender rather than raw. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original East or Southeast Asian stir-fry adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-tofu-cabbage-carrot-stir-fry",
+      "name": "Tofu Cabbage Carrot Stir-Fry",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 16,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, sliced",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, cut thin",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, julienned",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 80
+        }
+      ],
+      "steps": [
+        "Cut the firm tofu, cubed and cabbage, sliced and carrot, cut thin into small, even pieces and keep them close to the stove.",
+        "Heat the sesame oil in a wide pan and cook the ginger until aromatic.",
+        "Add the ingredients in order from firmest to softest, tossing after each addition.",
+        "Sprinkle in the water and rock salt with the sesame seeds; cover for three minutes.",
+        "Uncover and toss over lively heat until tender-crisp and glossy, then serve immediately."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tofu Cabbage Carrot Stir-Fry is quickly cooked but served hot, with vegetables kept tender rather than raw. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original East or Southeast Asian stir-fry adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-tofu-mushroom-stir-fry",
+      "name": "Tofu Mushroom Stir-Fry",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 16,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.white-mushroom",
+          "name": "White mushrooms, sliced",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.spring-onion",
+          "name": "Spring onion, sliced",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, julienned",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 80
+        }
+      ],
+      "steps": [
+        "Cut the firm tofu, cubed and white mushrooms, sliced into small, even pieces and keep them close to the stove.",
+        "Heat the sesame oil in a wide pan and cook the ginger until aromatic.",
+        "Add the ingredients in order from firmest to softest, tossing after each addition.",
+        "Sprinkle in the water and rock salt with the spring onion, sliced; cover for three minutes.",
+        "Uncover and toss over lively heat until tender-crisp and glossy, then serve immediately."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tofu Mushroom Stir-Fry is quickly cooked but served hot, with vegetables kept tender rather than raw. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original East or Southeast Asian stir-fry adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-tofu-asparagus-stir-fry",
+      "name": "Tofu Asparagus Stir-Fry",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 16,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.asparagus",
+          "name": "Asparagus, cut",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, julienned",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 80
+        }
+      ],
+      "steps": [
+        "Cut the firm tofu, cubed and asparagus, cut into small, even pieces and keep them close to the stove.",
+        "Heat the sesame oil in a wide pan and cook the ginger until aromatic.",
+        "Add the ingredients in order from firmest to softest, tossing after each addition.",
+        "Sprinkle in the water and rock salt with the sesame seeds; cover for three minutes.",
+        "Uncover and toss over lively heat until tender-crisp and glossy, then serve immediately."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tofu Asparagus Stir-Fry is quickly cooked but served hot, with vegetables kept tender rather than raw. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original East or Southeast Asian stir-fry adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-tempeh-zucchini-stir-fry",
+      "name": "Tempeh Zucchini Stir-Fry",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 16,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.tempeh",
+          "name": "Tempeh, cubed",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, cut into half-moons",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.spring-onion",
+          "name": "Spring onion, sliced",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, julienned",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 80
+        }
+      ],
+      "steps": [
+        "Cut the tempeh, cubed and zucchini, cut into half-moons into small, even pieces and keep them close to the stove.",
+        "Heat the sesame oil in a wide pan and cook the ginger until aromatic.",
+        "Add the ingredients in order from firmest to softest, tossing after each addition.",
+        "Sprinkle in the water and rock salt with the spring onion, sliced; cover for three minutes.",
+        "Uncover and toss over lively heat until tender-crisp and glossy, then serve immediately."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tempeh Zucchini Stir-Fry is quickly cooked but served hot, with vegetables kept tender rather than raw. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original East or Southeast Asian stir-fry adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-tempeh-cabbage-stir-fry",
+      "name": "Tempeh Cabbage Stir-Fry",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 16,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.tempeh",
+          "name": "Tempeh, cubed",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, sliced",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, julienned",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 80
+        }
+      ],
+      "steps": [
+        "Cut the tempeh, cubed and cabbage, sliced into small, even pieces and keep them close to the stove.",
+        "Heat the sesame oil in a wide pan and cook the ginger until aromatic.",
+        "Add the ingredients in order from firmest to softest, tossing after each addition.",
+        "Sprinkle in the water and rock salt with the sesame seeds; cover for three minutes.",
+        "Uncover and toss over lively heat until tender-crisp and glossy, then serve immediately."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tempeh Cabbage Stir-Fry is quickly cooked but served hot, with vegetables kept tender rather than raw. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original East or Southeast Asian stir-fry adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-tempeh-broccoli-stir-fry",
+      "name": "Tempeh Broccoli Stir-Fry",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 16,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.tempeh",
+          "name": "Tempeh, cubed",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.broccoli",
+          "name": "Broccoli florets",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.spring-onion",
+          "name": "Spring onion, sliced",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, julienned",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 80
+        }
+      ],
+      "steps": [
+        "Cut the tempeh, cubed and broccoli florets into small, even pieces and keep them close to the stove.",
+        "Heat the sesame oil in a wide pan and cook the ginger until aromatic.",
+        "Add the ingredients in order from firmest to softest, tossing after each addition.",
+        "Sprinkle in the water and rock salt with the spring onion, sliced; cover for three minutes.",
+        "Uncover and toss over lively heat until tender-crisp and glossy, then serve immediately."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tempeh Broccoli Stir-Fry is quickly cooked but served hot, with vegetables kept tender rather than raw. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original East or Southeast Asian stir-fry adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-tempeh-eggplant-stir-fry",
+      "name": "Tempeh Eggplant Stir-Fry",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 16,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.tempeh",
+          "name": "Tempeh, cubed",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.eggplant",
+          "name": "Eggplant, diced",
+          "grams": 390
+        },
+        {
+          "dravyaId": "dravya.basil-sweet",
+          "name": "Fresh basil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, julienned",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 80
+        }
+      ],
+      "steps": [
+        "Cut the tempeh, cubed and eggplant, diced into small, even pieces and keep them close to the stove.",
+        "Heat the sesame oil in a wide pan and cook the ginger until aromatic.",
+        "Add the ingredients in order from firmest to softest, tossing after each addition.",
+        "Sprinkle in the water and rock salt with the fresh basil; cover for three minutes.",
+        "Uncover and toss over lively heat until tender-crisp and glossy, then serve immediately."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tempeh Eggplant Stir-Fry is quickly cooked but served hot, with vegetables kept tender rather than raw. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original East or Southeast Asian stir-fry adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-tempeh-pepper-stir-fry",
+      "name": "Tempeh Bell Pepper Stir-Fry",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 16,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.tempeh",
+          "name": "Tempeh, cubed",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.red-bell-pepper",
+          "name": "Red bell pepper, sliced",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.bell-pepper",
+          "name": "Green bell pepper, sliced",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.spring-onion",
+          "name": "Spring onion",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, julienned",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 80
+        }
+      ],
+      "steps": [
+        "Cut the tempeh, cubed and red bell pepper, sliced and green bell pepper, sliced into small, even pieces and keep them close to the stove.",
+        "Heat the sesame oil in a wide pan and cook the ginger until aromatic.",
+        "Add the ingredients in order from firmest to softest, tossing after each addition.",
+        "Sprinkle in the water and rock salt with the spring onion; cover for three minutes.",
+        "Uncover and toss over lively heat until tender-crisp and glossy, then serve immediately."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 2,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tempeh Bell Pepper Stir-Fry is quickly cooked but served hot, with vegetables kept tender rather than raw. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original East or Southeast Asian stir-fry adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-mushroom-spinach-stir-fry",
+      "name": "Mushroom Spinach Stir-Fry",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 16,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-mushroom",
+          "name": "White mushrooms, sliced",
+          "grams": 400
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, julienned",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 80
+        }
+      ],
+      "steps": [
+        "Cut the white mushrooms, sliced and spinach, chopped and firm tofu, cubed into small, even pieces and keep them close to the stove.",
+        "Heat the sesame oil in a wide pan and cook the ginger until aromatic.",
+        "Add the ingredients in order from firmest to softest, tossing after each addition.",
+        "Sprinkle in the water and rock salt with the sesame seeds; cover for three minutes.",
+        "Uncover and toss over lively heat until tender-crisp and glossy, then serve immediately."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mushroom Spinach Stir-Fry is quickly cooked but served hot, with vegetables kept tender rather than raw. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original East or Southeast Asian stir-fry adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-cauliflower-pea-stir-fry",
+      "name": "Cauliflower Pea Stir-Fry",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 16,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower florets",
+          "grams": 480
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.spring-onion",
+          "name": "Spring onion",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, julienned",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 80
+        }
+      ],
+      "steps": [
+        "Cut the cauliflower florets and green peas into small, even pieces and keep them close to the stove.",
+        "Heat the sesame oil in a wide pan and cook the ginger until aromatic.",
+        "Add the ingredients in order from firmest to softest, tossing after each addition.",
+        "Sprinkle in the water and rock salt with the spring onion; cover for three minutes.",
+        "Uncover and toss over lively heat until tender-crisp and glossy, then serve immediately."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cauliflower Pea Stir-Fry is quickly cooked but served hot, with vegetables kept tender rather than raw. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original East or Southeast Asian stir-fry adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-green-bean-carrot-sesame-stir-fry",
+      "name": "Green Bean Carrot Sesame Stir-Fry",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 16,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, cut",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, cut thin",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, julienned",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 80
+        }
+      ],
+      "steps": [
+        "Cut the green beans, cut and carrot, cut thin into small, even pieces and keep them close to the stove.",
+        "Heat the sesame oil in a wide pan and cook the ginger until aromatic.",
+        "Add the ingredients in order from firmest to softest, tossing after each addition.",
+        "Sprinkle in the water and rock salt with the sesame seeds; cover for three minutes.",
+        "Uncover and toss over lively heat until tender-crisp and glossy, then serve immediately."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Green Bean Carrot Sesame Stir-Fry is quickly cooked but served hot, with vegetables kept tender rather than raw. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original East or Southeast Asian stir-fry adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-zucchini-peanut-stir-fry",
+      "name": "Zucchini Peanut Stir-Fry",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 16,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, cut into half-moons",
+          "grams": 440
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.peanut",
+          "name": "Peanuts, toasted",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, julienned",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 80
+        }
+      ],
+      "steps": [
+        "Cut the zucchini, cut into half-moons and firm tofu, cubed into small, even pieces and keep them close to the stove.",
+        "Heat the sesame oil in a wide pan and cook the ginger until aromatic.",
+        "Add the ingredients in order from firmest to softest, tossing after each addition.",
+        "Sprinkle in the water and rock salt with the peanuts, toasted; cover for three minutes.",
+        "Uncover and toss over lively heat until tender-crisp and glossy, then serve immediately."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Zucchini Peanut Stir-Fry is quickly cooked but served hot, with vegetables kept tender rather than raw. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original East or Southeast Asian stir-fry adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-cabbage-mung-sprout-stir-fry",
+      "name": "Cabbage Mung Sprout Stir-Fry",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 16,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, sliced",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.mung-sprouts",
+          "name": "Mung bean sprouts",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, cut thin",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, julienned",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 80
+        }
+      ],
+      "steps": [
+        "Cut the cabbage, sliced and mung bean sprouts and carrot, cut thin into small, even pieces and keep them close to the stove.",
+        "Heat the sesame oil in a wide pan and cook the ginger until aromatic.",
+        "Add the ingredients in order from firmest to softest, tossing after each addition.",
+        "Sprinkle in the water and rock salt with the sesame seeds; cover for three minutes.",
+        "Uncover and toss over lively heat until tender-crisp and glossy, then serve immediately."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cabbage Mung Sprout Stir-Fry is quickly cooked but served hot, with vegetables kept tender rather than raw. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original East or Southeast Asian stir-fry adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-tofu-pumpkin-coconut-curry",
+      "name": "Tofu Pumpkin Coconut Curry",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.basil-sweet",
+          "name": "Fresh basil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 620
+        }
+      ],
+      "steps": [
+        "Blend the fresh coconut with half the water and strain or leave it fine-textured for a rustic coconut base.",
+        "Warm the coconut oil and bloom the ginger and coriander.",
+        "Add the firm tofu, cubed and pumpkin, diced with the turmeric and fresh basil; turn for two minutes.",
+        "Pour in the coconut mixture and remaining water, add rock salt, and simmer gently until everything is tender.",
+        "Keep the final boil brief so the coconut sauce stays smooth, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tofu Pumpkin Coconut Curry uses freshly blended coconut for a warm, dairy-free curry. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original Southeast Asian coconut-curry adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-tofu-spinach-coconut-curry",
+      "name": "Tofu Spinach Coconut Curry",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 620
+        }
+      ],
+      "steps": [
+        "Blend the fresh coconut with half the water and strain or leave it fine-textured for a rustic coconut base.",
+        "Warm the coconut oil and bloom the ginger and coriander.",
+        "Add the firm tofu, cubed and spinach, chopped with the turmeric; turn for two minutes.",
+        "Pour in the coconut mixture and remaining water, add rock salt, and simmer gently until everything is tender.",
+        "Keep the final boil brief so the coconut sauce stays smooth, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tofu Spinach Coconut Curry uses freshly blended coconut for a warm, dairy-free curry. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original Southeast Asian coconut-curry adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-tempeh-sweet-potato-curry",
+      "name": "Tempeh Sweet Potato Coconut Curry",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.tempeh",
+          "name": "Tempeh, cubed",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, diced",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Lime peel strips",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 620
+        }
+      ],
+      "steps": [
+        "Blend the fresh coconut with half the water and strain or leave it fine-textured for a rustic coconut base.",
+        "Warm the coconut oil and bloom the ginger and coriander.",
+        "Add the tempeh, cubed and sweet potato, diced with the turmeric and lime peel strips; turn for two minutes.",
+        "Pour in the coconut mixture and remaining water, add rock salt, and simmer gently until everything is tender.",
+        "Keep the final boil brief so the coconut sauce stays smooth, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tempeh Sweet Potato Coconut Curry uses freshly blended coconut for a warm, dairy-free curry. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original Southeast Asian coconut-curry adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-chickpea-cauliflower-curry",
+      "name": "Chickpea Cauliflower Coconut Curry",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower florets",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 620
+        }
+      ],
+      "steps": [
+        "Blend the fresh coconut with half the water and strain or leave it fine-textured for a rustic coconut base.",
+        "Warm the coconut oil and bloom the ginger and coriander.",
+        "Add the cooked chickpeas and cauliflower florets with the turmeric; turn for two minutes.",
+        "Pour in the coconut mixture and remaining water, add rock salt, and simmer gently until everything is tender.",
+        "Keep the final boil brief so the coconut sauce stays smooth, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chickpea Cauliflower Coconut Curry uses freshly blended coconut for a warm, dairy-free curry. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original Southeast Asian coconut-curry adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-mung-zucchini-curry",
+      "name": "Mung Zucchini Coconut Curry",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Cooked mung beans",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, diced",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 620
+        }
+      ],
+      "steps": [
+        "Blend the fresh coconut with half the water and strain or leave it fine-textured for a rustic coconut base.",
+        "Warm the coconut oil and bloom the ginger and coriander.",
+        "Add the cooked mung beans and zucchini, diced with the turmeric and fresh mint; turn for two minutes.",
+        "Pour in the coconut mixture and remaining water, add rock salt, and simmer gently until everything is tender.",
+        "Keep the final boil brief so the coconut sauce stays smooth, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mung Zucchini Coconut Curry uses freshly blended coconut for a warm, dairy-free curry. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original Southeast Asian coconut-curry adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-lentil-eggplant-curry",
+      "name": "Lentil Eggplant Coconut Curry",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.eggplant",
+          "name": "Eggplant, diced",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.basil-sweet",
+          "name": "Fresh basil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 620
+        }
+      ],
+      "steps": [
+        "Blend the fresh coconut with half the water and strain or leave it fine-textured for a rustic coconut base.",
+        "Warm the coconut oil and bloom the ginger and coriander.",
+        "Add the red lentils and eggplant, diced with the turmeric and fresh basil; turn for two minutes.",
+        "Pour in the coconut mixture and remaining water, add rock salt, and simmer gently until everything is tender.",
+        "Keep the final boil brief so the coconut sauce stays smooth, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Lentil Eggplant Coconut Curry uses freshly blended coconut for a warm, dairy-free curry. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original Southeast Asian coconut-curry adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-black-bean-pumpkin-curry",
+      "name": "Black Bean Pumpkin Coconut Curry",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.black-beans",
+          "name": "Cooked black beans",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 620
+        }
+      ],
+      "steps": [
+        "Blend the fresh coconut with half the water and strain or leave it fine-textured for a rustic coconut base.",
+        "Warm the coconut oil and bloom the ginger and coriander.",
+        "Add the cooked black beans and pumpkin, diced with the turmeric; turn for two minutes.",
+        "Pour in the coconut mixture and remaining water, add rock salt, and simmer gently until everything is tender.",
+        "Keep the final boil brief so the coconut sauce stays smooth, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Black Bean Pumpkin Coconut Curry uses freshly blended coconut for a warm, dairy-free curry. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original Southeast Asian coconut-curry adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-tofu-mushroom-coconut-curry",
+      "name": "Tofu Mushroom Coconut Curry",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.white-mushroom",
+          "name": "White mushrooms, sliced",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.basil-sweet",
+          "name": "Fresh basil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 620
+        }
+      ],
+      "steps": [
+        "Blend the fresh coconut with half the water and strain or leave it fine-textured for a rustic coconut base.",
+        "Warm the coconut oil and bloom the ginger and coriander.",
+        "Add the firm tofu, cubed and white mushrooms, sliced with the turmeric and fresh basil; turn for two minutes.",
+        "Pour in the coconut mixture and remaining water, add rock salt, and simmer gently until everything is tender.",
+        "Keep the final boil brief so the coconut sauce stays smooth, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tofu Mushroom Coconut Curry uses freshly blended coconut for a warm, dairy-free curry. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original Southeast Asian coconut-curry adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-green-pea-broccoli-curry",
+      "name": "Green Pea Broccoli Coconut Curry",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.broccoli",
+          "name": "Broccoli florets",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 620
+        }
+      ],
+      "steps": [
+        "Blend the fresh coconut with half the water and strain or leave it fine-textured for a rustic coconut base.",
+        "Warm the coconut oil and bloom the ginger and coriander.",
+        "Add the green peas and broccoli florets with the turmeric; turn for two minutes.",
+        "Pour in the coconut mixture and remaining water, add rock salt, and simmer gently until everything is tender.",
+        "Keep the final boil brief so the coconut sauce stays smooth, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Green Pea Broccoli Coconut Curry uses freshly blended coconut for a warm, dairy-free curry. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original Southeast Asian coconut-curry adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-chickpea-plantain-curry",
+      "name": "Chickpea Plantain Coconut Curry",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.plantain-green",
+          "name": "Green plantain, diced",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 620
+        }
+      ],
+      "steps": [
+        "Blend the fresh coconut with half the water and strain or leave it fine-textured for a rustic coconut base.",
+        "Warm the coconut oil and bloom the ginger and coriander.",
+        "Add the cooked chickpeas and green plantain, diced with the turmeric and curry leaves; turn for two minutes.",
+        "Pour in the coconut mixture and remaining water, add rock salt, and simmer gently until everything is tender.",
+        "Keep the final boil brief so the coconut sauce stays smooth, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chickpea Plantain Coconut Curry uses freshly blended coconut for a warm, dairy-free curry. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original Southeast Asian coconut-curry adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-rice-noodle-tofu-broccoli",
+      "name": "Rice Noodles with Tofu and Broccoli",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 18,
+      "ingredients": [
+        {
+          "fdcId": 7163,
+          "name": "Dry rice noodles",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.broccoli",
+          "name": "Broccoli florets",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, cut thin",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Fresh lime juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 900
+        }
+      ],
+      "steps": [
+        "Cook the dry rice noodles in the water until just tender, then drain and rinse briefly with warm water.",
+        "Warm the sesame oil in a wide pan and cook the ginger until fragrant.",
+        "Add the firm tofu, cubed, broccoli florets, carrot, cut thin in order of cooking time and stir-fry until tender.",
+        "Fold in the drained noodles and rock salt, tossing until evenly hot.",
+        "Remove from the heat, add the lime juice, and serve immediately."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Rice Noodles with Tofu and Broccoli is served hot with vegetables and a light sesame-lime finish. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original East or Southeast Asian noodle adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-rice-noodle-tempeh-cabbage",
+      "name": "Rice Noodles with Tempeh and Cabbage",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 18,
+      "ingredients": [
+        {
+          "fdcId": 7163,
+          "name": "Dry rice noodles",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.tempeh",
+          "name": "Tempeh, cubed",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, sliced",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, cut thin",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Fresh lime juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 900
+        }
+      ],
+      "steps": [
+        "Cook the dry rice noodles in the water until just tender, then drain and rinse briefly with warm water.",
+        "Warm the sesame oil in a wide pan and cook the ginger until fragrant.",
+        "Add the tempeh, cubed, cabbage, sliced, carrot, cut thin in order of cooking time and stir-fry until tender.",
+        "Fold in the drained noodles and rock salt, tossing until evenly hot.",
+        "Remove from the heat, add the lime juice, and serve immediately."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Rice Noodles with Tempeh and Cabbage is served hot with vegetables and a light sesame-lime finish. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original East or Southeast Asian noodle adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-rice-noodle-mushroom-spinach",
+      "name": "Rice Noodles with Mushroom and Spinach",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 18,
+      "ingredients": [
+        {
+          "fdcId": 7163,
+          "name": "Dry rice noodles",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.white-mushroom",
+          "name": "White mushrooms, sliced",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Fresh lime juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 900
+        }
+      ],
+      "steps": [
+        "Cook the dry rice noodles in the water until just tender, then drain and rinse briefly with warm water.",
+        "Warm the sesame oil in a wide pan and cook the ginger until fragrant.",
+        "Add the firm tofu, cubed, white mushrooms, sliced, spinach, chopped in order of cooking time and stir-fry until tender.",
+        "Fold in the drained noodles and rock salt, tossing until evenly hot.",
+        "Remove from the heat, add the lime juice, and serve immediately."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Rice Noodles with Mushroom and Spinach is served hot with vegetables and a light sesame-lime finish. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original East or Southeast Asian noodle adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-rice-noodle-peanut-zucchini",
+      "name": "Peanut Zucchini Rice Noodles",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 18,
+      "ingredients": [
+        {
+          "fdcId": 7163,
+          "name": "Dry rice noodles",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.peanut",
+          "name": "Peanuts, toasted",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, cut thin",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, cut thin",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Fresh lime juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 900
+        }
+      ],
+      "steps": [
+        "Cook the dry rice noodles in the water until just tender, then drain and rinse briefly with warm water.",
+        "Warm the sesame oil in a wide pan and cook the ginger until fragrant.",
+        "Add the peanuts, toasted, zucchini, cut thin, carrot, cut thin in order of cooking time and stir-fry until tender.",
+        "Fold in the drained noodles and rock salt, tossing until evenly hot.",
+        "Remove from the heat, add the lime juice, and serve immediately."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Peanut Zucchini Rice Noodles is served hot with vegetables and a light sesame-lime finish. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original East or Southeast Asian noodle adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-rice-noodle-cauliflower-pea",
+      "name": "Rice Noodles with Cauliflower and Peas",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 18,
+      "ingredients": [
+        {
+          "fdcId": 7163,
+          "name": "Dry rice noodles",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower florets, small",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.spring-onion",
+          "name": "Spring onion",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Fresh lime juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 900
+        }
+      ],
+      "steps": [
+        "Cook the dry rice noodles in the water until just tender, then drain and rinse briefly with warm water.",
+        "Warm the sesame oil in a wide pan and cook the ginger until fragrant.",
+        "Add the green peas, cauliflower florets, small, spring onion in order of cooking time and stir-fry until tender.",
+        "Fold in the drained noodles and rock salt, tossing until evenly hot.",
+        "Remove from the heat, add the lime juice, and serve immediately."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Rice Noodles with Cauliflower and Peas is served hot with vegetables and a light sesame-lime finish. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original East or Southeast Asian noodle adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-soba-tofu-carrot",
+      "name": "Soba with Tofu and Carrot",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 18,
+      "ingredients": [
+        {
+          "fdcId": 6401,
+          "name": "Dry soba noodles",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, cut thin",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Fresh lime juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 900
+        }
+      ],
+      "steps": [
+        "Cook the dry soba noodles in the water until just tender, then drain and rinse briefly with warm water.",
+        "Warm the sesame oil in a wide pan and cook the ginger until fragrant.",
+        "Add the firm tofu, cubed, carrot, cut thin, spinach, chopped in order of cooking time and stir-fry until tender.",
+        "Fold in the drained noodles and rock salt, tossing until evenly hot.",
+        "Remove from the heat, add the lime juice, and serve immediately."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Soba with Tofu and Carrot is served hot with vegetables and a light sesame-lime finish. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original East or Southeast Asian noodle adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-soba-tempeh-green-bean",
+      "name": "Soba with Tempeh and Green Beans",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 18,
+      "ingredients": [
+        {
+          "fdcId": 6401,
+          "name": "Dry soba noodles",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.tempeh",
+          "name": "Tempeh, cubed",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, cut",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, cut thin",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Fresh lime juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 900
+        }
+      ],
+      "steps": [
+        "Cook the dry soba noodles in the water until just tender, then drain and rinse briefly with warm water.",
+        "Warm the sesame oil in a wide pan and cook the ginger until fragrant.",
+        "Add the tempeh, cubed, green beans, cut, carrot, cut thin in order of cooking time and stir-fry until tender.",
+        "Fold in the drained noodles and rock salt, tossing until evenly hot.",
+        "Remove from the heat, add the lime juice, and serve immediately."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Soba with Tempeh and Green Beans is served hot with vegetables and a light sesame-lime finish. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original East or Southeast Asian noodle adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-soba-mushroom-kale",
+      "name": "Soba with Mushroom and Kale",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 18,
+      "ingredients": [
+        {
+          "fdcId": 6401,
+          "name": "Dry soba noodles",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.white-mushroom",
+          "name": "White mushrooms, sliced",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.kale",
+          "name": "Kale, chopped",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Fresh lime juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 900
+        }
+      ],
+      "steps": [
+        "Cook the dry soba noodles in the water until just tender, then drain and rinse briefly with warm water.",
+        "Warm the sesame oil in a wide pan and cook the ginger until fragrant.",
+        "Add the firm tofu, cubed, white mushrooms, sliced, kale, chopped in order of cooking time and stir-fry until tender.",
+        "Fold in the drained noodles and rock salt, tossing until evenly hot.",
+        "Remove from the heat, add the lime juice, and serve immediately."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Soba with Mushroom and Kale is served hot with vegetables and a light sesame-lime finish. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original East or Southeast Asian noodle adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-soy-vermicelli-tofu-cabbage",
+      "name": "Soy Vermicelli with Tofu and Cabbage",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 18,
+      "ingredients": [
+        {
+          "fdcId": 7271,
+          "name": "Dry soy vermicelli",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, sliced",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, cut thin",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Fresh lime juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 900
+        }
+      ],
+      "steps": [
+        "Cook the dry soy vermicelli in the water until just tender, then drain and rinse briefly with warm water.",
+        "Warm the sesame oil in a wide pan and cook the ginger until fragrant.",
+        "Add the firm tofu, cubed, cabbage, sliced, carrot, cut thin in order of cooking time and stir-fry until tender.",
+        "Fold in the drained noodles and rock salt, tossing until evenly hot.",
+        "Remove from the heat, add the lime juice, and serve immediately."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Soy Vermicelli with Tofu and Cabbage is served hot with vegetables and a light sesame-lime finish. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original East or Southeast Asian noodle adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-soy-vermicelli-sprout-vegetable",
+      "name": "Soy Vermicelli with Mung Sprouts",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 20,
+      "cookMinutes": 18,
+      "ingredients": [
+        {
+          "fdcId": 7271,
+          "name": "Dry soy vermicelli",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.mung-sprouts",
+          "name": "Mung bean sprouts",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, cut thin",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, cut thin",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Fresh lime juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 900
+        }
+      ],
+      "steps": [
+        "Cook the dry soy vermicelli in the water until just tender, then drain and rinse briefly with warm water.",
+        "Warm the sesame oil in a wide pan and cook the ginger until fragrant.",
+        "Add the mung bean sprouts, zucchini, cut thin, carrot, cut thin in order of cooking time and stir-fry until tender.",
+        "Fold in the drained noodles and rock salt, tossing until evenly hot.",
+        "Remove from the heat, add the lime juice, and serve immediately."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Soy Vermicelli with Mung Sprouts is served hot with vegetables and a light sesame-lime finish. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original East or Southeast Asian noodle adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-ginger-tofu-rice",
+      "name": "Ginger Tofu Rice",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed small",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Additional fresh ginger",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.spring-onion",
+          "name": "Spring onion",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the white rice until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the Sesame oil in a heavy pot and bloom the cumin.",
+        "Add the firm tofu, cubed small, additional fresh ginger, spring onion and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ginger Tofu Rice is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-tempeh-vegetable-rice",
+      "name": "Tempeh Vegetable Rice",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.tempeh",
+          "name": "Tempeh, cubed small",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, cut",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the white rice until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the Sesame oil in a heavy pot and bloom the cumin.",
+        "Add the tempeh, cubed small, carrot, diced, green beans, cut and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tempeh Vegetable Rice is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-coconut-pumpkin-rice",
+      "name": "Coconut Pumpkin Rice",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, grated",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.curry-leaf",
+          "name": "Curry leaves",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the white rice until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the Coconut oil in a heavy pot and bloom the cumin.",
+        "Add the pumpkin, diced, fresh coconut, grated, curry leaves and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Coconut Pumpkin Rice is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-sesame-mushroom-rice",
+      "name": "Sesame Mushroom Rice",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.white-mushroom",
+          "name": "White mushrooms, sliced",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.spring-onion",
+          "name": "Spring onion",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the white rice until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the Sesame oil in a heavy pot and bloom the cumin.",
+        "Add the white mushrooms, sliced, sesame seeds, spring onion and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sesame Mushroom Rice is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-brown-rice-broccoli-tofu",
+      "name": "Brown Rice Broccoli Tofu Pot",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.broccoli",
+          "name": "Broccoli florets",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Rinse the brown rice until the draining water is mostly clear; soak for 35 minutes and drain.",
+        "Warm the Sesame oil in a heavy pot and bloom the cumin.",
+        "Add the broccoli florets, firm tofu, cubed and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Brown Rice Broccoli Tofu Pot is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-quinoa-ginger-vegetable-pot",
+      "name": "Ginger Quinoa Vegetable Pot",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, diced",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Additional fresh ginger",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the quinoa until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the Sesame oil in a heavy pot and bloom the cumin.",
+        "Add the carrot, diced, zucchini, diced, additional fresh ginger and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ginger Quinoa Vegetable Pot is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-millet-ginger-vegetable-pot",
+      "name": "Ginger Millet Vegetable Pot",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, chopped",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Additional fresh ginger",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Rinse the proso millet until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the Sesame oil in a heavy pot and bloom the cumin.",
+        "Add the carrot, diced, cabbage, chopped, additional fresh ginger and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ginger Millet Vegetable Pot is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-red-pepper-tofu-rice",
+      "name": "Red Pepper Tofu Rice",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.red-bell-pepper",
+          "name": "Red bell pepper, diced",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the white rice until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the Sesame oil in a heavy pot and bloom the cumin.",
+        "Add the red bell pepper, diced, firm tofu, cubed and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Red Pepper Tofu Rice is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-cabbage-pea-rice",
+      "name": "Cabbage Pea Rice",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, chopped",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the white rice until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the Sesame oil in a heavy pot and bloom the cumin.",
+        "Add the cabbage, chopped, green peas and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cabbage Pea Rice is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-eggplant-tempeh-rice",
+      "name": "Eggplant Tempeh Rice",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.eggplant",
+          "name": "Eggplant, diced",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.tempeh",
+          "name": "Tempeh, cubed",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.basil-sweet",
+          "name": "Fresh basil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the white rice until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the Sesame oil in a heavy pot and bloom the cumin.",
+        "Add the eggplant, diced, tempeh, cubed, fresh basil and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Eggplant Tempeh Rice is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-spinach-mushroom-rice",
+      "name": "Spinach Mushroom Rice",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.white-mushroom",
+          "name": "White mushrooms, sliced",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the white rice until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the Sesame oil in a heavy pot and bloom the cumin.",
+        "Add the spinach, chopped, white mushrooms, sliced and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Spinach Mushroom Rice is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-sweet-potato-black-bean-rice",
+      "name": "Sweet Potato Black Bean Rice",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, diced",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.black-beans",
+          "name": "Cooked black beans",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Rinse the brown rice until the draining water is mostly clear; soak for 35 minutes and drain.",
+        "Warm the Sesame oil in a heavy pot and bloom the cumin.",
+        "Add the sweet potato, diced, cooked black beans and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sweet Potato Black Bean Rice is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-asparagus-tofu-rice",
+      "name": "Asparagus Tofu Rice",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.asparagus",
+          "name": "Asparagus, cut",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the white rice until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the Sesame oil in a heavy pot and bloom the cumin.",
+        "Add the asparagus, cut, firm tofu, cubed and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Asparagus Tofu Rice is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-green-bean-peanut-rice",
+      "name": "Green Bean Peanut Rice",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, cut",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.peanut",
+          "name": "Peanuts, toasted",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the white rice until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the Sesame oil in a heavy pot and bloom the cumin.",
+        "Add the green beans, cut, peanuts, toasted and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Green Bean Peanut Rice is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.asia-cauliflower-mung-rice",
+      "name": "Cauliflower Mung Rice",
+      "category": "international",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 16,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower florets",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Cooked mung beans",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Rinse the white rice until the draining water is mostly clear; soak for 15 minutes and drain.",
+        "Warm the Sesame oil in a heavy pot and bloom the cumin.",
+        "Add the cauliflower florets, cooked mung beans and drained grain; stir for one minute.",
+        "Pour in the water and add the rock salt; cover and cook on low heat until the grain is tender and the liquid is absorbed.",
+        "Rest off the heat for eight minutes, then lift the grains gently and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cauliflower Mung Rice is a lightly seasoned one-pot grain dish intended for a warm midday meal. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "contemporary Indian grain-pot cooking"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    }
+  ]
+}
