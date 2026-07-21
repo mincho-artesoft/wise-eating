@@ -360,3 +360,264 @@ git status --short --branch
 - Migration/crash checks and the expected 14,484 total `FoodItem` count.
 
 These were skipped solely because the Phase 1 build failed and the packet explicitly forbids continuing or fixing after that failure.
+
+---
+
+# Run 2 — rerun after fix commit a978600
+
+Date: 2026-07-22 (Europe/Sofia)
+
+## Run 2 summary
+
+| Phase | Result | Notes |
+|---|---|---|
+| Preflight | PASS | Clean worktree; checkout `ayurveda-app` at `a978600`, tracking `origin/ayurveda-app`. Phase 0 push was skipped as directed. |
+| 1 — Simulator build | FAIL | `xcodebuild` exited 65. The prior `#Predicate` failure was absent; compilation stopped at `ObserversHub.swift:156` because the compiler could not type-check `body` in reasonable time. No fix was attempted. |
+| 2 — Fresh-install seeding | NOT DONE | Stopped because Run 2 Phase 1 failed, as required. |
+| 3 — Idempotency | NOT DONE | Stopped because Run 2 Phase 1 failed, as required. |
+| 4 — Upgrade path | NOT DONE | Stopped because Run 2 Phase 1 failed, as required. `main` was not checked out or moved. |
+
+No source file was modified during Run 2.
+
+## Run 2 preflight: PASS
+
+### Commands run
+
+```sh
+sed -n '1,360p' ayurveda-data/TASK-D6-VERIFY.md
+tail -80 ayurveda-data/REPORT-D6-VERIFY.md
+git status --short --branch
+git branch -vv
+git log --oneline -5 ayurveda-app
+git rev-parse --abbrev-ref HEAD
+git rev-parse HEAD
+git show -s --format='author=%an <%ae>%ncommitter=%cn <%ce>%nsubject=%s' a978600
+```
+
+The long report output obscured the final Git lines in the command result, so the required preflight was repeated explicitly:
+
+```sh
+git status --short --branch
+git branch -vv
+git log --oneline -5 ayurveda-app
+git rev-parse --abbrev-ref HEAD
+git rev-parse HEAD
+git merge-base --is-ancestor a978600 HEAD
+print "FIX_ANCESTOR_EXIT=$?"
+```
+
+### Key output
+
+```text
+## ayurveda-app...origin/ayurveda-app
+* ayurveda-app a978600 [origin/ayurveda-app] D6 fix: import Foundation in AyurvedaResolver (#Predicate macro requires Foundation)
+  main         9a5429d [origin/main] ...
+a978600 D6 fix: import Foundation in AyurvedaResolver (#Predicate macro requires Foundation)
+a0c8b8e D6-VERIFY: Mac execution report
+e2723eb D6-VERIFY task packet: Mac-side git/push/build/boot gates for Codex execution
+cb87e9c D6: Ayurveda schema + seeder (models, seed bundle, SeedManager hook)
+38c9c8a D6 design: schema+seeder architecture (DESIGN-D6) + Codex dispatch packet (TASK-D6); PROGRESS updated
+ayurveda-app
+a978600b20c231954cfc1b95a729ba29857a2af7
+FIX_ANCESTOR_EXIT=0
+```
+
+The absence of any short-status entries after the branch header verifies a clean worktree.
+
+## Run 2 Phase 1 — Simulator build: FAIL
+
+### Environment
+
+```text
+Xcode 26.2
+Build version 17C52
+simctl: CoreSimulator-1051.17.7
+iOS runtime: iOS 26.2 (23C54)
+Project: WiseEating.xcodeproj
+Scheme: WiseEating
+Selected destination: iPhone 17, iOS 26.2
+Selected simulator UDID: FA7BDA24-C986-4B66-96B5-68A79AD42865
+```
+
+### Commands run
+
+```sh
+xcodebuild -version
+xcrun simctl --version
+xcodebuild -list -project WiseEating.xcodeproj
+xcrun simctl list devices available
+xcrun simctl list runtimes
+```
+
+No iPhone 16 simulator was available, so the available iPhone 17 was selected.
+
+```sh
+xcodebuild -project WiseEating.xcodeproj -scheme WiseEating -destination 'platform=iOS Simulator,name=iPhone 17' -configuration Debug build > /tmp/d6_run2_phase1_build.log 2>&1
+d6_run2_phase1_status=$?
+tail -40 /tmp/d6_run2_phase1_build.log
+print "D6_RUN2_PHASE1_EXIT_CODE=$d6_run2_phase1_status"
+exit $d6_run2_phase1_status
+```
+
+The long-running build was polled without input until completion. Diagnostic capture after failure:
+
+```sh
+rg -n -C 6 'error:' /tmp/d6_run2_phase1_build.log
+wc -l /tmp/d6_run2_phase1_build.log
+tail -100 /tmp/d6_run2_phase1_build.log
+git rev-parse --abbrev-ref HEAD
+git status --short --branch
+```
+
+### Result and compiler diagnostic
+
+```text
+D6_RUN2_PHASE1_EXIT_CODE=65
+/Users/minchomilev/work/wise-eating/WiseEating/Main/RootView/ObserversHub.swift:156:25: error: the compiler is unable to type-check this expression in reasonable time; try breaking up the expression into distinct sub-expressions
+    var body: some View {
+                        ^
+```
+
+The full Run 2 build log contains 1,577 lines at `/tmp/d6_run2_phase1_build.log` on the execution machine.
+
+### Run 2 last 100 build-log lines, verbatim
+
+```text
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/ShoppingList/Models/ShoppingListModel.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/ShoppingList/Structs/SafeAreaInsetsKey.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/ShoppingList/Structs/SelectableNutrient.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/ShoppingList/Structs/ShoppingListItemPayload.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/ShoppingList/Structs/ShoppingListPayload.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/ShoppingList/ViewModels/ShoppingListVM.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/ShoppingList/Views/ShoppingItemEditableField.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/ShoppingList/Views/ShoppingListAnalyticsView.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/ShoppingList/Views/ShoppingListDetailView.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/ShoppingList/Views/ShoppingListView.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/Storage/Models/Batch.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/Storage/Models/MealLogStorageLink.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/Storage/Models/StorageItem.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/Storage/Models/StorageTransaction.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/Storage/Structs/EditableBatch.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/Storage/Structs/EditableProduct.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/Storage/Structs/TransactionType.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/Storage/ViewModels/StorageListVM.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/Storage/Views/BatchCardView.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/Storage/Views/BatchEditRow.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/Storage/Views/ConsumeStockViewContent.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+LinkAssetCatalog /Users/minchomilev/work/wise-eating/WiseEating/Assets.xcassets /Users/minchomilev/work/wise-eating/WiseEating/WiseEating.icon (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    builtin-linkAssetCatalog --thinned /Users/minchomilev/Library/Developer/Xcode/DerivedData/WiseEating-fexkmqhzbnixxpgmsoaslnjfaees/Build/Intermediates.noindex/WiseEating.build/Debug-iphonesimulator/WiseEating.build/assetcatalog_output/thinned --thinned-dependencies /Users/minchomilev/Library/Developer/Xcode/DerivedData/WiseEating-fexkmqhzbnixxpgmsoaslnjfaees/Build/Intermediates.noindex/WiseEating.build/Debug-iphonesimulator/WiseEating.build/assetcatalog_dependencies_thinned --thinned-info-plist-content /Users/minchomilev/Library/Developer/Xcode/DerivedData/WiseEating-fexkmqhzbnixxpgmsoaslnjfaees/Build/Intermediates.noindex/WiseEating.build/Debug-iphonesimulator/WiseEating.build/assetcatalog_generated_info.plist_thinned --unthinned /Users/minchomilev/Library/Developer/Xcode/DerivedData/WiseEating-fexkmqhzbnixxpgmsoaslnjfaees/Build/Intermediates.noindex/WiseEating.build/Debug-iphonesimulator/WiseEating.build/assetcatalog_output/unthinned --unthinned-dependencies /Users/minchomilev/Library/Developer/Xcode/DerivedData/WiseEating-fexkmqhzbnixxpgmsoaslnjfaees/Build/Intermediates.noindex/WiseEating.build/Debug-iphonesimulator/WiseEating.build/assetcatalog_dependencies_unthinned --unthinned-info-plist-content /Users/minchomilev/Library/Developer/Xcode/DerivedData/WiseEating-fexkmqhzbnixxpgmsoaslnjfaees/Build/Intermediates.noindex/WiseEating.build/Debug-iphonesimulator/WiseEating.build/assetcatalog_generated_info.plist_unthinned --output /Users/minchomilev/Library/Developer/Xcode/DerivedData/WiseEating-fexkmqhzbnixxpgmsoaslnjfaees/Build/Products/Debug-iphonesimulator/WiseEating.app --plist-output /Users/minchomilev/Library/Developer/Xcode/DerivedData/WiseEating-fexkmqhzbnixxpgmsoaslnjfaees/Build/Intermediates.noindex/WiseEating.build/Debug-iphonesimulator/WiseEating.build/assetcatalog_generated_info.plist
+note: Emplaced /Users/minchomilev/Library/Developer/Xcode/DerivedData/WiseEating-fexkmqhzbnixxpgmsoaslnjfaees/Build/Products/Debug-iphonesimulator/WiseEating.app/WiseEating60x60@2x.png (in target 'WiseEating' from project 'WiseEating')
+note: Emplaced /Users/minchomilev/Library/Developer/Xcode/DerivedData/WiseEating-fexkmqhzbnixxpgmsoaslnjfaees/Build/Products/Debug-iphonesimulator/WiseEating.app/WiseEating76x76@2x~ipad.png (in target 'WiseEating' from project 'WiseEating')
+note: Emplaced /Users/minchomilev/Library/Developer/Xcode/DerivedData/WiseEating-fexkmqhzbnixxpgmsoaslnjfaees/Build/Products/Debug-iphonesimulator/WiseEating.app/Assets.car (in target 'WiseEating' from project 'WiseEating')
+
+** BUILD FAILED **
+
+
+The following build commands failed:
+	SwiftCompile normal arm64 Compiling\ NavigationCoordinator.swift,\ NotificationDelegate.swift,\ NotificationHistoryView.swift,\ NotificationManager.swift,\ NetworkMonitor.swift,\ PermissionDeniedView.swift,\ PermissionManager.swift,\ ObserversHub.swift,\ OnChangeDebouncedModifier.swift,\ RootView.swift,\ AppDelegate.swift,\ AppTab.swift,\ GlobalState.swift,\ RootLauncher.swift,\ UnitConversion.swift,\ WiseEatingApp.swift,\ Meal.swift,\ MealPlan.swift,\ MealPlanDay.swift,\ MealPlanEntry.swift,\ MealPlanMeal.swift,\ MealPlanListVM.swift,\ DailyMealPlanView.swift,\ MealEditorView.swift,\ MealPlanDetailView.swift /Users/minchomilev/work/wise-eating/WiseEating/Main/Notification/NavigationCoordinator.swift /Users/minchomilev/work/wise-eating/WiseEating/Main/Notification/NotificationDelegate.swift /Users/minchomilev/work/wise-eating/WiseEating/Main/Notification/NotificationHistoryView.swift /Users/minchomilev/work/wise-eating/WiseEating/Main/Notification/NotificationManager.swift /Users/minchomilev/work/wise-eating/WiseEating/Main/Permissions/NetworkMonitor.swift /Users/minchomilev/work/wise-eating/WiseEating/Main/Permissions/PermissionDeniedView.swift /Users/minchomilev/work/wise-eating/WiseEating/Main/Permissions/PermissionManager.swift /Users/minchomilev/work/wise-eating/WiseEating/Main/RootView/ObserversHub.swift /Users/minchomilev/work/wise-eating/WiseEating/Main/RootView/OnChangeDebouncedModifier.swift /Users/minchomilev/work/wise-eating/WiseEating/Main/RootView/RootView.swift /Users/minchomilev/work/wise-eating/WiseEating/Main/AppDelegate.swift /Users/minchomilev/work/wise-eating/WiseEating/Main/AppTab.swift /Users/minchomilev/work/wise-eating/WiseEating/Main/GlobalState.swift /Users/minchomilev/work/wise-eating/WiseEating/Main/RootLauncher.swift /Users/minchomilev/work/wise-eating/WiseEating/Main/UnitConversion.swift /Users/minchomilev/work/wise-eating/WiseEating/Main/WiseEatingApp.swift /Users/minchomilev/work/wise-eating/WiseEating/Meal/Models/Meal.swift /Users/minchomilev/work/wise-eating/WiseEating/Meal/Models/MealPlan.swift /Users/minchomilev/work/wise-eating/WiseEating/Meal/Models/MealPlanDay.swift /Users/minchomilev/work/wise-eating/WiseEating/Meal/Models/MealPlanEntry.swift /Users/minchomilev/work/wise-eating/WiseEating/Meal/Models/MealPlanMeal.swift /Users/minchomilev/work/wise-eating/WiseEating/Meal/ViewModels/MealPlanListVM.swift /Users/minchomilev/work/wise-eating/WiseEating/Meal/Views/DailyMealPlanView.swift /Users/minchomilev/work/wise-eating/WiseEating/Meal/Views/MealEditorView.swift /Users/minchomilev/work/wise-eating/WiseEating/Meal/Views/MealPlanDetailView.swift (in target 'WiseEating' from project 'WiseEating')
+	SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/Main/RootView/ObserversHub.swift (in target 'WiseEating' from project 'WiseEating')
+	Building project WiseEating with scheme WiseEating and configuration Debug
+(3 failures)
+```
+
+Per the task packet, the Run 2 Phase 1 failure stopped Run 2 Phases 2–4. No source change or repair was attempted.
+
+## Run 2 Phase 2 — Fresh-install seeding gate: NOT DONE
+
+No commands were run. No app was installed or launched, so the fresh-seed log path, 60-second crash observation, and SQLite counts `2214 / 336 / 383 / 1500` were not measured.
+
+## Run 2 Phase 3 — Idempotency gate: NOT DONE
+
+No commands were run. No relaunches occurred and no skip-path or unchanged-count evidence was collected.
+
+## Run 2 Phase 4 — Upgrade-path gate: NOT DONE
+
+No commands were run. `main` was not checked out, built, installed, or moved. The expected total `ZFOODITEM` count of 14,484 was not measured. Checkout remained `ayurveda-app`.
+
+## Run 2 report finalization
+
+Commands used to finalize Run 2:
+
+```sh
+git add ayurveda-data/REPORT-D6-VERIFY.md
+git -c user.name='Mincho Milev' -c user.email='mincho.milev@gmail.com' commit -m "D6-VERIFY: Mac execution report"
+git push origin ayurveda-app
+git rev-parse --abbrev-ref HEAD
+git status --short --branch
+```
+
+## Run 2 honest not-done list
+
+- Fresh-install boot and 60-second crash observation.
+- Fresh-install Ayurveda seeding console checks.
+- SQLite counts for 2,214 profiles, 336 links, 383 placeholders, and 1,500 recipes.
+- Two idempotency relaunches and skip-path verification.
+- Upgrade-path install from `main` to `ayurveda-app`.
+- Migration/crash checks and the expected 14,484 total `FoodItem` count.
+
+All were skipped solely because Run 2 Phase 1 failed and the packet explicitly forbids continuing or fixing after that failure.
