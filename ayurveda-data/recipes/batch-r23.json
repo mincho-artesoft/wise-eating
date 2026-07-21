@@ -1,0 +1,3962 @@
+{
+  "formatVersion": "1.0",
+  "batch": "recipe-batch-r23",
+  "qualityState": "aiDraft",
+  "items": [
+    {
+      "id": "recipe.kapha-barley-mung-cabbage-meal",
+      "name": "Kapha Barley Mung Cabbage Meal",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley, soaked and drained",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, thinly shredded",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.mustard-oil",
+          "name": "Mustard oil, for the pot",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Set aside 1150 ml (about 4 3/4 cups) freshly boiled water for Kapha Barley Mung Cabbage Meal, reserving about 60 ml to correct the final consistency.",
+        "Cover the pearled barley with at least three times its volume of cool water and soak for 20 minutes; drain for 2 minutes before the first heated step.",
+        "Simmer the soaked barley and split mung until the grains begin to soften. Maintain steady low heat for 11–13 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Add the shredded cabbage and grated ginger, then cook uncovered as the broth reduces. Maintain moderate heat for 9–11 minutes, stirring every 5 minutes, until the leaves wilt but still retain their color.",
+        "Season with cracked pepper and a light mustard-oil finish, keeping the meal loose rather than heavy. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Kapha Barley Mung Cabbage Meal 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kapha Barley Mung Cabbage Meal is a light, warming complete meal composed to calm kapha Vata: add a little ghee and keep the serving moist if dryness appears. Pitta: reduce pepper and ginger while retaining coriander. Kapha: retain the lean portion, warming spices, and abundant vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kapha-quinoa-masoor-kale-bowl",
+      "name": "Kapha Quinoa Masoor Kale Bowl",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.kale",
+          "name": "Kale leaves, stemmed and chopped",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Bring 1150 ml (about 4 3/4 cups) water to a boil in a separate kettle and hold it hot, covered, so Kapha Quinoa Masoor Kale Bowl never loses its simmer.",
+        "Cook the red lentils until partly tender before adding the rinsed quinoa. Maintain gentle medium heat for 11–13 minutes, stirring every 5 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Fold in the chopped kale and grated ginger once the quinoa opens into small spirals. Mix for 2 minutes with the heat off, stopping when the seasonings are even and a pressed spoonful holds together without crumbling.",
+        "Inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Finish the green bowl with cumin, salt, and a restrained thread of olive oil. Leave the pan off the flame for 3 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Fluff or stir Kapha Quinoa Masoor Kale Bowl once after its off-heat rest, check the final consistency, and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kapha Quinoa Masoor Kale Bowl is a light, warming complete meal composed to calm kapha Vata: add a little ghee and keep the serving moist if dryness appears. Pitta: reduce pepper and ginger while retaining coriander. Kapha: retain the lean portion, warming spices, and abundant vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kapha-jowar-chana-broccoli-pot",
+      "name": "Kapha Jowar Chana Broccoli Pot",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.jowar",
+          "name": "Sorghum grains, soaked and drained",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.chana-dal",
+          "name": "Chana dal, soaked and drained",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.broccoli",
+          "name": "Broccoli, separated into small florets",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Prepare 1150 ml (about 4 3/4 cups) hot water before starting Kapha Jowar Chana Broccoli Pot; keep one small ladle in reserve in case the base tightens early.",
+        "Cover the sorghum grains and chana dal with at least three times their combined volume of cool water and soak for 30 minutes; drain for 2 minutes before the first heated step.",
+        "Cook the soaked chana dal until almost tender, then add the sorghum grains. Maintain medium-low heat for 10–12 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Set the broccoli florets over the simmering pot and cover only until their stems yield. Maintain gentle medium heat for 5–7 minutes, stirring every 5 minutes, until a knife tip enters the thickest stem with only slight resistance.",
+        "Stir in coriander and pepper, season, and use just enough ghee to carry the spices. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Kapha Jowar Chana Broccoli Pot 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kapha Jowar Chana Broccoli Pot is a light, warming complete meal composed to calm kapha Vata: add a little ghee and keep the serving moist if dryness appears. Pitta: reduce pepper and ginger while retaining coriander. Kapha: retain the lean portion, warming spices, and abundant vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kapha-bajra-mung-turnip-stew",
+      "name": "Kapha Bajra Mung Turnip Stew",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.bajra",
+          "name": "Pearl millet, soaked and drained",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.turnip",
+          "name": "Turnips, peeled and cut into small cubes",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.mustard-oil",
+          "name": "Mustard oil, for the pot",
+          "grams": 15
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Measure 1150 ml (about 4 3/4 cups) water for Kapha Bajra Mung Turnip Stew; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Cover the pearl millet with at least three times its volume of cool water and soak for 20 minutes; drain for 2 minutes before the first heated step.",
+        "Simmer the pearl millet and split mung until their textures begin to merge. Maintain moderate heat for 11–13 minutes, stirring every 3 minutes, until every pearl is translucent with no opaque pin at its center.",
+        "Add the turnip cubes and grated ginger, then cook until the roots are completely tender. Maintain medium-low heat for 20–22 minutes, stirring every 3 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Bloom cumin in mustard oil, stir it through the stew, and leave plenty of vegetables in each bowl. Give the spices about 30 seconds before adding the larger pieces, then continue over gentle medium heat for 3–4 minutes, moving the pan often, until the raw aroma is gone.",
+        "Rest Kapha Bajra Mung Turnip Stew 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kapha Bajra Mung Turnip Stew is a light, warming complete meal composed to calm kapha Vata: add a little ghee and keep the serving moist if dryness appears. Pitta: reduce pepper and ginger while retaining coriander. Kapha: retain the lean portion, warming spices, and abundant vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kapha-buckwheat-masoor-radish-bowl",
+      "name": "Kapha Buckwheat Masoor Radish Bowl",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Buckwheat groats, rinsed and drained",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.radish",
+          "name": "Radishes, cut into small cubes",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 15
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Set aside 1150 ml (about 4 3/4 cups) freshly boiled water for Kapha Buckwheat Masoor Radish Bowl, reserving about 60 ml to correct the final consistency.",
+        "Cook the red lentils until halfway soft and stir in the buckwheat groats. Maintain medium-low heat for 10–12 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Add the radish cubes and ground coriander as the grains begin to split. Keep the pan over gentle medium heat for 1–2 minutes after the final addition, folding from the bottom so the main pieces remain intact.",
+        "For Kapha Buckwheat Masoor Radish Bowl, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Season with pepper and olive oil once the bowl is tender but not overly thick. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Kapha Buckwheat Masoor Radish Bowl 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kapha Buckwheat Masoor Radish Bowl is a light, warming complete meal composed to calm kapha Vata: add a little ghee and keep the serving moist if dryness appears. Pitta: reduce pepper and ginger while retaining coriander. Kapha: retain the lean portion, warming spices, and abundant vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kapha-brown-rice-mung-mustard-greens",
+      "name": "Kapha Brown Rice Mustard Greens Meal",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice, rinsed and soaked",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.mustard-greens",
+          "name": "Mustard greens, washed and chopped",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Heat 1150 ml (about 4 3/4 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Cover the brown rice with at least three times its volume of cool water and soak for 20 minutes; drain for 2 minutes before the first heated step.",
+        "Simmer the soaked rice and split mung together until almost tender. Maintain steady low heat for 12–14 minutes, stirring every 5 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Press the chopped mustard greens and grated ginger into the pot and cook them thoroughly. Aim for an even 3–4 mm thickness; repair cracks before the piece reaches the hot surface.",
+        "Add cumin warmed in a small amount of ghee, season, and serve a vegetable-forward portion. Leave the pan off the flame for 3 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Kapha Brown Rice Mustard Greens Meal 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kapha Brown Rice Mustard Greens Meal is a light, warming complete meal composed to calm kapha Vata: add a little ghee and keep the serving moist if dryness appears. Pitta: reduce pepper and ginger while retaining coriander. Kapha: retain the lean portion, warming spices, and abundant vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kapha-amaranth-toor-cauliflower",
+      "name": "Kapha Amaranth Toor Cauliflower Pot",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, rinsed in a fine sieve",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Pigeon pea, rinsed and drained",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower, separated into small florets",
+          "grams": 310
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.mustard-oil",
+          "name": "Mustard oil, for the pot",
+          "grams": 15
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Bring 1150 ml (about 4 3/4 cups) water to a boil in a separate kettle and hold it hot, covered, so Kapha Amaranth Toor Cauliflower Pot never loses its simmer.",
+        "Cook the pigeon pea until it starts to soften before stirring in the tiny amaranth grains. Maintain gentle medium heat for 18–20 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Add the cauliflower florets and simmer until their stems yield without turning mushy. Maintain low heat for 19–21 minutes, stirring every 3 minutes, until a knife tip enters the thickest stem with only slight resistance.",
+        "For Kapha Amaranth Toor Cauliflower Pot, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Temper cumin and pepper in mustard oil, fold them through the thick pot, and season. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Kapha Amaranth Toor Cauliflower Pot 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kapha Amaranth Toor Cauliflower Pot is a light, warming complete meal composed to calm kapha Vata: add a little ghee and keep the serving moist if dryness appears. Pitta: reduce pepper and ginger while retaining coriander. Kapha: retain the lean portion, warming spices, and abundant vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kapha-oat-masoor-spinach-stew",
+      "name": "Kapha Oat Masoor Spinach Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats, sorted and rinsed",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach leaves, washed and chopped",
+          "grams": 330
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Prepare 1150 ml (about 4 3/4 cups) hot water before starting Kapha Oat Masoor Spinach Stew; keep one small ladle in reserve in case the base tightens early.",
+        "Simmer the red lentils until they begin to dissolve into the broth. Maintain low heat for 11–13 minutes, stirring every 4 minutes, until a spoon drawn across the base leaves a trail that closes slowly.",
+        "Stir in the rolled oats and chopped spinach, keeping the pot moving as it thickens. Aim for an even 2–3 mm thickness; repair cracks before the piece reaches the hot surface.",
+        "For Kapha Oat Masoor Spinach Stew, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Add grated ginger, pepper, salt, and a scant olive-oil finish before serving. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Kapha Oat Masoor Spinach Stew 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kapha Oat Masoor Spinach Stew is a light, warming complete meal composed to calm kapha Vata: add a little ghee and keep the serving moist if dryness appears. Pitta: reduce pepper and ginger while retaining coriander. Kapha: retain the lean portion, warming spices, and abundant vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kapha-barley-chickpea-chard",
+      "name": "Kapha Barley Chickpea Chard Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley, soaked and drained",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Chickpeas, soaked overnight and drained",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.swiss-chard",
+          "name": "Swiss chard, stemmed and chopped",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 15
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Prepare 1150 ml (about 4 3/4 cups) hot water before starting Kapha Barley Chickpea Chard Stew; keep one small ladle in reserve in case the base tightens early.",
+        "Cover the pearled barley and chickpeas with at least three times their combined volume of cool water and soak for 8–12 hours; drain for 2 minutes before the first heated step.",
+        "Cook the soaked chickpeas until tender, then add the barley to their broth. Use a pressure cooker at steady pressure for 25–30 minutes, or keep a covered pot at a gentle simmer for 60–75 minutes, until one bean mashes completely between two fingers.",
+        "Fold in the chopped chard when the barley is plump and let the stems soften fully. Mix for 1 minute with the heat off, stopping when the seasonings are even and a pressed spoonful holds together without crumbling.",
+        "Season with cumin and pepper, finish lightly with olive oil, and serve the stew brothy. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Kapha Barley Chickpea Chard Stew 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kapha Barley Chickpea Chard Stew is a light, warming complete meal composed to calm kapha Vata: add a little ghee and keep the serving moist if dryness appears. Pitta: reduce pepper and ginger while retaining coriander. Kapha: retain the lean portion, warming spices, and abundant vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kapha-millet-mung-asparagus-bowl",
+      "name": "Kapha Millet Mung Asparagus Bowl",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet, rinsed and soaked",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.asparagus",
+          "name": "Asparagus, trimmed and cut into short pieces",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 15
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Measure 1150 ml (about 4 3/4 cups) water for Kapha Millet Mung Asparagus Bowl; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Cover the proso millet with at least three times its volume of cool water and soak for 20 minutes; drain for 2 minutes before the first heated step.",
+        "Cook the split mung until half tender, then add the soaked millet. Maintain steady low heat for 12–14 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Scatter the asparagus pieces and grated ginger over the pot once the grains swell. Keep the layer loose and even, with no pooled liquid, so every portion receives the same balance.",
+        "Fold in coriander, salt, and olive oil, stopping before the green vegetable loses its color. Mix for 1 minute with the heat off, stopping when the seasonings are even and a pressed spoonful holds together without crumbling.",
+        "Rest Kapha Millet Mung Asparagus Bowl 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kapha Millet Mung Asparagus Bowl is a light, warming complete meal composed to calm kapha Vata: add a little ghee and keep the serving moist if dryness appears. Pitta: reduce pepper and ginger while retaining coriander. Kapha: retain the lean portion, warming spices, and abundant vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kapha-jowar-brown-lentil-zucchini",
+      "name": "Kapha Jowar Lentil Zucchini Meal",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.jowar",
+          "name": "Sorghum grains, soaked and drained",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.brown-lentil",
+          "name": "Brown lentils, rinsed and drained",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, cut into small cubes",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.mustard-oil",
+          "name": "Mustard oil, for the pot",
+          "grams": 15
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Prepare 1150 ml (about 4 3/4 cups) hot water before starting Kapha Jowar Lentil Zucchini Meal; keep one small ladle in reserve in case the base tightens early.",
+        "Cover the sorghum grains with at least three times its volume of cool water and soak for 20 minutes; drain for 2 minutes before the first heated step.",
+        "Simmer the sorghum and brown lentils together until both are tender. Maintain medium-low heat for 19–21 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Add the zucchini cubes and cook uncovered so their released moisture can reduce. Maintain gentle medium heat for 14–16 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Finish with cumin and pepper bloomed in mustard oil, then season the lean meal. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Kapha Jowar Lentil Zucchini Meal 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kapha Jowar Lentil Zucchini Meal is a light, warming complete meal composed to calm kapha Vata: add a little ghee and keep the serving moist if dryness appears. Pitta: reduce pepper and ginger while retaining coriander. Kapha: retain the lean portion, warming spices, and abundant vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kapha-quinoa-tofu-broccoli-bowl",
+      "name": "Kapha Quinoa Tofu Broccoli Bowl",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, drained and cut into cubes",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.broccoli",
+          "name": "Broccoli, separated into small florets",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil, for finishing",
+          "grams": 15
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Measure 1150 ml (about 4 3/4 cups) water for Kapha Quinoa Tofu Broccoli Bowl; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Cook the quinoa until its rings open while keeping the grains slightly moist. Maintain low heat for 19–21 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Steam the broccoli and tofu over the grains with grated ginger beneath the lid. Maintain a steady steam for 6–8 minutes and check until a knife tip enters the thickest stem with only slight resistance.",
+        "For Kapha Quinoa Tofu Broccoli Bowl, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Fold in cracked pepper, salt, and a measured sesame-oil finish before serving. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Kapha Quinoa Tofu Broccoli Bowl 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kapha Quinoa Tofu Broccoli Bowl is a light, warming complete meal composed to calm kapha Vata: add a little ghee and keep the serving moist if dryness appears. Pitta: reduce pepper and ginger while retaining coriander. Kapha: retain the lean portion, warming spices, and abundant vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kapha-barley-black-bean-celery",
+      "name": "Kapha Barley Black Bean Celery Bowl",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley, soaked and drained",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.black-beans",
+          "name": "Black beans, soaked overnight and drained",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.celery",
+          "name": "Celery stalks, cut into small crescents",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Set aside 1150 ml (about 4 3/4 cups) freshly boiled water for Kapha Barley Black Bean Celery Bowl, reserving about 60 ml to correct the final consistency.",
+        "Cover the pearled barley and black beans with at least three times their combined volume of cool water and soak for 8–12 hours; drain for 2 minutes before the first heated step.",
+        "Cook the soaked black beans until soft and reserve their dark broth. Use a pressure cooker at steady pressure for 25–30 minutes, or keep a covered pot at a gentle simmer for 60–75 minutes, until one bean mashes completely between two fingers.",
+        "Simmer the barley and celery crescents in that broth until both become tender. Maintain gentle medium heat for 20–22 minutes, stirring every 5 minutes, until a knife tip enters the thickest stem with only slight resistance.",
+        "Return the beans, season with cumin and pepper, and finish with very little olive oil. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Kapha Barley Black Bean Celery Bowl 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kapha Barley Black Bean Celery Bowl is a light, warming complete meal composed to calm kapha Vata: add a little ghee and keep the serving moist if dryness appears. Pitta: reduce pepper and ginger while retaining coriander. Kapha: retain the lean portion, warming spices, and abundant vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kapha-bajra-masoor-cabbage-pot",
+      "name": "Kapha Bajra Masoor Cabbage Pot",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.bajra",
+          "name": "Pearl millet, soaked and drained",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, thinly shredded",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.mustard-oil",
+          "name": "Mustard oil, for the pot",
+          "grams": 15
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Bring 1150 ml (about 4 3/4 cups) water to a boil in a separate kettle and hold it hot, covered, so Kapha Bajra Masoor Cabbage Pot never loses its simmer.",
+        "Cover the pearl millet with at least three times its volume of cool water and soak for 40 minutes; drain for 2 minutes before the first heated step.",
+        "Cook the pearl millet until partly tender before adding the quick-cooking red lentils. Maintain low heat for 11–13 minutes, stirring every 3 minutes, until every pearl is translucent with no opaque pin at its center.",
+        "Heap in the cabbage and ginger, then simmer uncovered until the ribbons become soft. Maintain steady low heat for 20–22 minutes, stirring every 4 minutes, until the leaves wilt but still retain their color.",
+        "Bloom cumin in mustard oil, fold it through the pot, and season without adding richness. Give the spices about 30 seconds before adding the larger pieces, then continue over moderate heat for 4–5 minutes, moving the pan often, until the raw aroma is gone.",
+        "Rest Kapha Bajra Masoor Cabbage Pot 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kapha Bajra Masoor Cabbage Pot is a light, warming complete meal composed to calm kapha Vata: add a little ghee and keep the serving moist if dryness appears. Pitta: reduce pepper and ginger while retaining coriander. Kapha: retain the lean portion, warming spices, and abundant vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kapha-buckwheat-mung-green-bean",
+      "name": "Kapha Buckwheat Mung Green Bean Meal",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Buckwheat groats, rinsed and drained",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, cut into small diamonds",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Prepare 1150 ml (about 4 3/4 cups) hot water before starting Kapha Buckwheat Mung Green Bean Meal; keep one small ladle in reserve in case the base tightens early.",
+        "Simmer the split mung until halfway tender and add the buckwheat groats. Maintain gentle medium heat for 12–14 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Stir in the bean diamonds and ground coriander once the grains begin to soften. Keep the pan over low heat for 1–2 minutes after the final addition, folding from the bottom so the main pieces remain intact.",
+        "For Kapha Buckwheat Mung Green Bean Meal, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Season the dry-leaning meal with pepper and a small spoonful of olive oil. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Kapha Buckwheat Mung Green Bean Meal 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kapha Buckwheat Mung Green Bean Meal is a light, warming complete meal composed to calm kapha Vata: add a little ghee and keep the serving moist if dryness appears. Pitta: reduce pepper and ginger while retaining coriander. Kapha: retain the lean portion, warming spices, and abundant vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kapha-amaranth-masoor-kale-pot",
+      "name": "Kapha Amaranth Masoor Kale Pot",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, rinsed in a fine sieve",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 175
+        },
+        {
+          "dravyaId": "dravya.kale",
+          "name": "Kale leaves, stemmed and chopped",
+          "grams": 310
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.mustard-oil",
+          "name": "Mustard oil, for the pot",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Prepare 1150 ml (about 4 3/4 cups) hot water before starting Kapha Amaranth Masoor Kale Pot; keep one small ladle in reserve in case the base tightens early.",
+        "Cook the red lentils until partly dissolved, then rain the amaranth grains into the broth. Maintain gentle medium heat for 12–14 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Fold in the chopped kale and grated ginger as the tiny grains begin to thicken. Mix for 2 minutes with the heat off, stopping when the seasonings are even and a pressed spoonful holds together without crumbling.",
+        "For Kapha Amaranth Masoor Kale Pot, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Add pepper and mustard oil, season, and keep the vegetable proportion generous. Leave the pan off the flame for 5 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Kapha Amaranth Masoor Kale Pot 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kapha Amaranth Masoor Kale Pot is a light, warming complete meal composed to calm kapha Vata: add a little ghee and keep the serving moist if dryness appears. Pitta: reduce pepper and ginger while retaining coriander. Kapha: retain the lean portion, warming spices, and abundant vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kapha-brown-rice-toor-broccoli",
+      "name": "Kapha Brown Rice Toor Broccoli Meal",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice, rinsed and soaked",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Pigeon pea, rinsed and drained",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.broccoli",
+          "name": "Broccoli, separated into small florets",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Set aside 1150 ml (about 4 3/4 cups) freshly boiled water for Kapha Brown Rice Toor Broccoli Meal, reserving about 60 ml to correct the final consistency.",
+        "For Kapha Brown Rice Toor Broccoli Meal, cover the brown rice with at least three times its volume of cool water and soak for 20 minutes; drain for 2 minutes before the first heated step.",
+        "Simmer the soaked rice and pigeon pea until both are nearly tender. Maintain medium-low heat for 11–13 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Add the broccoli and grated ginger, covering the pot only long enough to soften the stems. Keep the pan at gentle medium heat for 4–6 minutes, stopping when a knife tip enters the thickest stem with only slight resistance.",
+        "Finish with cumin warmed in a little ghee, season, and serve a restrained grain portion. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Fluff or stir Kapha Brown Rice Toor Broccoli Meal once after its off-heat rest, check the final consistency, and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kapha Brown Rice Toor Broccoli Meal is a light, warming complete meal composed to calm kapha Vata: add a little ghee and keep the serving moist if dryness appears. Pitta: reduce pepper and ginger while retaining coriander. Kapha: retain the lean portion, warming spices, and abundant vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kapha-quinoa-chickpea-radish",
+      "name": "Kapha Quinoa Chickpea Radish Bowl",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Chickpeas, soaked overnight and drained",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.radish",
+          "name": "Radishes, cut into small cubes",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "For Kapha Quinoa Chickpea Radish Bowl, heat 1150 ml (about 4 3/4 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Cover the chickpeas with at least three times its volume of cool water and soak for 8–12 hours; drain for 2 minutes before the first heated step.",
+        "Cook the soaked chickpeas until soft and reserve their cooking liquid. Use a pressure cooker at steady pressure for 25–30 minutes, or keep a covered pot at a gentle simmer for 60–75 minutes, until one bean mashes completely between two fingers.",
+        "Simmer the quinoa and radish cubes in the reserved broth with ground coriander. Maintain medium-low heat for 14–16 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Fold the chickpeas back in, season with pepper, and finish with a trace of olive oil. Leave the pan off the flame for 3 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Kapha Quinoa Chickpea Radish Bowl 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kapha Quinoa Chickpea Radish Bowl is a light, warming complete meal composed to calm kapha Vata: add a little ghee and keep the serving moist if dryness appears. Pitta: reduce pepper and ginger while retaining coriander. Kapha: retain the lean portion, warming spices, and abundant vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kapha-jowar-mung-cauliflower",
+      "name": "Kapha Jowar Mung Cauliflower Pot",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.jowar",
+          "name": "Sorghum grains, soaked and drained",
+          "grams": 195
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower, separated into small florets",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.mustard-oil",
+          "name": "Mustard oil, for the pot",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Prepare 1150 ml (about 4 3/4 cups) hot water before starting Kapha Jowar Mung Cauliflower Pot; keep one small ladle in reserve in case the base tightens early.",
+        "Cover the sorghum grains with at least three times its volume of cool water and soak for 40 minutes; drain for 2 minutes before the first heated step.",
+        "Cook the sorghum and split mung together until the grains become tender. Maintain low heat for 18–20 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Add the cauliflower and ginger during the final simmer, leaving the pot partly uncovered. Maintain steady low heat for 11–13 minutes, stirring every 5 minutes, until a knife tip enters the thickest stem with only slight resistance.",
+        "Stir in cumin bloomed in mustard oil, season, and stop before the vegetables collapse. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Kapha Jowar Mung Cauliflower Pot 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kapha Jowar Mung Cauliflower Pot is a light, warming complete meal composed to calm kapha Vata: add a little ghee and keep the serving moist if dryness appears. Pitta: reduce pepper and ginger while retaining coriander. Kapha: retain the lean portion, warming spices, and abundant vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kapha-barley-masoor-asparagus",
+      "name": "Kapha Barley Masoor Asparagus Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley, soaked and drained",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 175
+        },
+        {
+          "dravyaId": "dravya.asparagus",
+          "name": "Asparagus, trimmed and cut into short pieces",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill, leaves finely chopped",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Measure 1150 ml (about 4 3/4 cups) water for Kapha Barley Masoor Asparagus Stew; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "For Kapha Barley Masoor Asparagus Stew, cover the pearled barley with at least three times its volume of cool water and soak for 20 minutes; drain for 2 minutes before the first heated step.",
+        "Simmer the soaked barley until it begins to plump, then add the red lentils. Maintain medium-low heat for 10–12 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Slide in the asparagus pieces as the lentils soften and keep the broth lively. Keep this stage to 7–9 minutes over gentle medium heat and stop when a knife tip enters the thickest stem with only slight resistance.",
+        "Season with pepper, olive oil, and chopped dill after removing the stew from heat. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Kapha Barley Masoor Asparagus Stew 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kapha Barley Masoor Asparagus Stew is a light, warming complete meal composed to calm kapha Vata: add a little ghee and keep the serving moist if dryness appears. Pitta: reduce pepper and ginger while retaining coriander. Kapha: retain the lean portion, warming spices, and abundant vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kapha-millet-chana-mustard-greens",
+      "name": "Kapha Millet Chana Mustard Greens",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet, rinsed and soaked",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.chana-dal",
+          "name": "Chana dal, soaked and drained",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.mustard-greens",
+          "name": "Mustard greens, washed and chopped",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "For Kapha Millet Chana Mustard Greens, heat 1150 ml (about 4 3/4 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Cover the proso millet and chana dal with at least three times their combined volume of cool water and soak for 20 minutes; drain for 2 minutes before the first heated step.",
+        "Cook the soaked chana dal until nearly tender before adding the millet. Maintain gentle medium heat for 11–13 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Press in the mustard greens and grated ginger as the grains absorb their broth. Aim for an even 2–3 mm thickness; repair cracks before the piece reaches the hot surface.",
+        "Season with cracked pepper and only a small amount of ghee, keeping the greens prominent. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Kapha Millet Chana Mustard Greens 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kapha Millet Chana Mustard Greens is a light, warming complete meal composed to calm kapha Vata: add a little ghee and keep the serving moist if dryness appears. Pitta: reduce pepper and ginger while retaining coriander. Kapha: retain the lean portion, warming spices, and abundant vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kapha-oat-mung-turnip-bowl",
+      "name": "Kapha Oat Mung Turnip Bowl",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats, sorted and rinsed",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.turnip",
+          "name": "Turnips, peeled and cut into small cubes",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.mustard-oil",
+          "name": "Mustard oil, for the pot",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Prepare 1150 ml (about 4 3/4 cups) hot water before starting Kapha Oat Mung Turnip Bowl; keep one small ladle in reserve in case the base tightens early.",
+        "Simmer the split mung and turnip cubes until both are almost tender. Maintain moderate heat for 10–12 minutes, stirring every 3 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Stir in the rolled oats and grated ginger, then cook until the meal becomes cohesive. Aim for an even 3–4 mm thickness; repair cracks before the piece reaches the hot surface.",
+        "For Kapha Oat Mung Turnip Bowl, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Bloom cumin in mustard oil, fold it through the bowl, and season before serving. Give the spices about 30 seconds before adding the larger pieces, then continue over gentle medium heat for 4–5 minutes, moving the pan often, until the raw aroma is gone.",
+        "Rest Kapha Oat Mung Turnip Bowl 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kapha Oat Mung Turnip Bowl is a light, warming complete meal composed to calm kapha Vata: add a little ghee and keep the serving moist if dryness appears. Pitta: reduce pepper and ginger while retaining coriander. Kapha: retain the lean portion, warming spices, and abundant vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kapha-buckwheat-tofu-kale-bowl",
+      "name": "Kapha Buckwheat Tofu Kale Bowl",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Buckwheat groats, rinsed and drained",
+          "grams": 205
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, drained and cut into cubes",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.kale",
+          "name": "Kale leaves, stemmed and chopped",
+          "grams": 310
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil, for finishing",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Prepare 1150 ml (about 4 3/4 cups) hot water before starting Kapha Buckwheat Tofu Kale Bowl; keep one small ladle in reserve in case the base tightens early.",
+        "Cook the buckwheat groats until tender while leaving a little liquid in the pot. Maintain medium-low heat for 19–21 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Steam the tofu and chopped kale over the grains with grated ginger beneath the lid. Maintain a steady steam for 6–8 minutes and check until a grain pressed between two fingers has no chalky center.",
+        "For Kapha Buckwheat Tofu Kale Bowl, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Fold in pepper, salt, and a light sesame-oil finish without making the bowl greasy. Leave the pan off the flame for 5 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Kapha Buckwheat Tofu Kale Bowl 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kapha Buckwheat Tofu Kale Bowl is a light, warming complete meal composed to calm kapha Vata: add a little ghee and keep the serving moist if dryness appears. Pitta: reduce pepper and ginger while retaining coriander. Kapha: retain the lean portion, warming spices, and abundant vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kapha-barley-rajma-cabbage",
+      "name": "Kapha Barley Rajma Cabbage Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley, soaked and drained",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.rajma",
+          "name": "Kidney beans, soaked overnight and drained",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, thinly shredded",
+          "grams": 330
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Prepare 1150 ml (about 4 3/4 cups) hot water before starting Kapha Barley Rajma Cabbage Stew; keep one small ladle in reserve in case the base tightens early.",
+        "Cover the pearled barley and kidney beans with at least three times their combined volume of cool water and soak for 8–12 hours; drain for 2 minutes before the first heated step.",
+        "Bring the soaked kidney beans to a very soft texture and mash a few into the dark broth. Allow 7–9 minutes at gentle medium heat, checking whether a spoon drawn across the base leaves a trail that closes slowly.",
+        "Add the barley and cabbage, then simmer until the grain plumps and the ribbons soften. Maintain low heat for 20–22 minutes, stirring every 5 minutes, until the leaves wilt but still retain their color.",
+        "Season with cumin and pepper, finish with little olive oil, and choose a modest bowl. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Kapha Barley Rajma Cabbage Stew 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kapha Barley Rajma Cabbage Stew is a light, warming complete meal composed to calm kapha Vata: add a little ghee and keep the serving moist if dryness appears. Pitta: reduce pepper and ginger while retaining coriander. Kapha: retain the lean portion, warming spices, and abundant vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.kapha-amaranth-mung-broccoli",
+      "name": "Kapha Amaranth Mung Broccoli Meal",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, rinsed in a fine sieve",
+          "grams": 195
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.broccoli",
+          "name": "Broccoli, separated into small florets",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.mustard-oil",
+          "name": "Mustard oil, for the pot",
+          "grams": 13
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Set aside 1150 ml (about 4 3/4 cups) freshly boiled water for Kapha Amaranth Mung Broccoli Meal, reserving about 60 ml to correct the final consistency.",
+        "Cook the split mung until half tender before stirring in the amaranth grains. Maintain medium-low heat for 12–14 minutes, stirring every 5 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Add the broccoli and ginger as the pot thickens, keeping the florets intact. Keep the pan at gentle medium heat for 5–7 minutes, stopping when a knife tip enters the thickest stem with only slight resistance.",
+        "For Kapha Amaranth Mung Broccoli Meal, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Finish with coriander, mustard oil, and salt, and serve while the meal remains hot. Leave the pan off the flame for 3 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Kapha Amaranth Mung Broccoli Meal 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kapha Amaranth Mung Broccoli Meal is a light, warming complete meal composed to calm kapha Vata: add a little ghee and keep the serving moist if dryness appears. Pitta: reduce pepper and ginger while retaining coriander. Kapha: retain the lean portion, warming spices, and abundant vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tridoshic-rice-mung-chayote-meal",
+      "name": "Tridoshic Rice Mung Chayote Meal",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.chayote",
+          "name": "Chayote, peeled and finely diced",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "For Tridoshic Rice Mung Chayote Meal, heat 1150 ml (about 4 3/4 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Cook the rice and split mung until partly soft, then add the chayote dice. Maintain gentle medium heat for 10–12 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Crush fennel over the pot and simmer until the vegetable turns translucent. Maintain low heat for 19–21 minutes, stirring every 5 minutes, until a thin knife slides through the largest piece without resistance.",
+        "For Tridoshic Rice Mung Chayote Meal, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Season the moist meal, fold in ghee, and let it settle beneath a lid. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Tridoshic Rice Mung Chayote Meal 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tridoshic Rice Mung Chayote Meal uses soft grains, legumes, vegetables, and moderate seasoning for a tridoshic complete meal Vata: serve warm with enough cooking liquid. Pitta: keep the seasoning mild and free of sharp sourness. Kapha: use less grain and fat while adding ginger if desired.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tridoshic-quinoa-mung-zucchini",
+      "name": "Tridoshic Quinoa Mung Zucchini Bowl",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, cut into small cubes",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Set aside 1150 ml (about 4 3/4 cups) freshly boiled water for Tridoshic Quinoa Mung Zucchini Bowl, reserving about 60 ml to correct the final consistency.",
+        "Simmer the split mung until halfway tender before adding the rinsed quinoa. Maintain low heat for 12–14 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Fold in the zucchini cubes and coriander as the quinoa begins to open. Mix for 1 minute with the heat off, stopping when the seasonings are even and a pressed spoonful holds together without crumbling.",
+        "For Tridoshic Quinoa Mung Zucchini Bowl, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Season the soft bowl and add olive oil after removing it from direct heat. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Tridoshic Quinoa Mung Zucchini Bowl 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tridoshic Quinoa Mung Zucchini Bowl uses soft grains, legumes, vegetables, and moderate seasoning for a tridoshic complete meal Vata: serve warm with enough cooking liquid. Pitta: keep the seasoning mild and free of sharp sourness. Kapha: use less grain and fat while adding ginger if desired.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tridoshic-brown-rice-mung-pumpkin",
+      "name": "Tridoshic Brown Rice Mung Pumpkin Pot",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice, rinsed and soaked",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and cut into small cubes",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Prepare 1150 ml (about 4 3/4 cups) hot water before starting Tridoshic Brown Rice Mung Pumpkin Pot; keep one small ladle in reserve in case the base tightens early.",
+        "For Tridoshic Brown Rice Mung Pumpkin Pot, cover the brown rice with at least three times its volume of cool water and soak for 20 minutes; drain for 2 minutes before the first heated step.",
+        "Cook the soaked brown rice and split mung together until nearly tender. Give the spices about 30 seconds before adding the larger pieces, then continue over gentle medium heat for 3–4 minutes, moving the pan often, until the raw aroma is gone.",
+        "Add the pumpkin cubes and crushed fennel, then simmer until the roots soften. Maintain low heat for 20–22 minutes, stirring every 5 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Stir in ghee and salt without mashing every pumpkin piece, and rest the pot. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Fluff or stir Tridoshic Brown Rice Mung Pumpkin Pot once after its off-heat rest, check the final consistency, and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tridoshic Brown Rice Mung Pumpkin Pot uses soft grains, legumes, vegetables, and moderate seasoning for a tridoshic complete meal Vata: serve warm with enough cooking liquid. Pitta: keep the seasoning mild and free of sharp sourness. Kapha: use less grain and fat while adding ginger if desired.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tridoshic-millet-mung-bottle-gourd",
+      "name": "Tridoshic Millet Mung Bottle Gourd",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet, rinsed and soaked",
+          "grams": 205
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.bottle-gourd",
+          "name": "Bottle gourd, peeled and finely diced",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Set aside 1150 ml (about 4 3/4 cups) freshly boiled water for Tridoshic Millet Mung Bottle Gourd, reserving about 60 ml to correct the final consistency.",
+        "Cover the proso millet with at least three times its volume of cool water and soak for 30 minutes; drain for 2 minutes before the first heated step.",
+        "Simmer the split mung until partly tender and stir in the soaked millet. Maintain gentle medium heat for 12–14 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Add the bottle-gourd dice and ground coriander, then cook until the meal is soft. Maintain low heat for 18–20 minutes, stirring every 4 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Season and fold in ghee, leaving enough liquid to keep the millet moist. Leave the pan off the flame for 5 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Tridoshic Millet Mung Bottle Gourd 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tridoshic Millet Mung Bottle Gourd uses soft grains, legumes, vegetables, and moderate seasoning for a tridoshic complete meal Vata: serve warm with enough cooking liquid. Pitta: keep the seasoning mild and free of sharp sourness. Kapha: use less grain and fat while adding ginger if desired.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tridoshic-barley-mung-fennel",
+      "name": "Tridoshic Barley Mung Fennel Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley, soaked and drained",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, finely diced",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Measure 1150 ml (about 4 3/4 cups) water for Tridoshic Barley Mung Fennel Stew; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Cover the pearled barley with at least three times its volume of cool water and soak for 30 minutes; drain for 2 minutes before the first heated step.",
+        "Cook the soaked barley and split mung until the grains begin to soften. Maintain gentle medium heat for 10–12 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Add the diced fennel bulb and crushed seeds, then simmer until sweet and tender. Maintain low heat for 19–21 minutes, stirring every 4 minutes, until a spoon drawn across the base leaves a trail that closes slowly.",
+        "Season the stew and finish with olive oil while plenty of broth remains. Leave the pan off the flame for 5 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Tridoshic Barley Mung Fennel Stew 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tridoshic Barley Mung Fennel Stew uses soft grains, legumes, vegetables, and moderate seasoning for a tridoshic complete meal Vata: serve warm with enough cooking liquid. Pitta: keep the seasoning mild and free of sharp sourness. Kapha: use less grain and fat while adding ginger if desired.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tridoshic-amaranth-mung-carrot",
+      "name": "Tridoshic Amaranth Mung Carrot Meal",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, rinsed in a fine sieve",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, peeled and cut into small cubes",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Measure 1150 ml (about 4 3/4 cups) water for Tridoshic Amaranth Mung Carrot Meal; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Cook the split mung until half tender before raining in the tiny amaranth grains. Maintain moderate heat for 10–12 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Add the carrot cubes and coriander, then simmer as the grains thicken the broth. Maintain medium-low heat for 13–15 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "For Tridoshic Amaranth Mung Carrot Meal, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Fold in ghee and salt and loosen the complete meal if it becomes too firm. Mix for 1 minute with the heat off, stopping when the seasonings are even and a pressed spoonful holds together without crumbling.",
+        "Rest Tridoshic Amaranth Mung Carrot Meal 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tridoshic Amaranth Mung Carrot Meal uses soft grains, legumes, vegetables, and moderate seasoning for a tridoshic complete meal Vata: serve warm with enough cooking liquid. Pitta: keep the seasoning mild and free of sharp sourness. Kapha: use less grain and fat while adding ginger if desired.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tridoshic-oat-mung-pumpkin-bowl",
+      "name": "Tridoshic Oat Mung Pumpkin Bowl",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats, sorted and rinsed",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and cut into small cubes",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Measure 1150 ml (about 4 3/4 cups) water for Tridoshic Oat Mung Pumpkin Bowl; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Simmer the split mung with pumpkin until both are soft enough to mash lightly. Maintain moderate heat for 20–22 minutes, stirring every 5 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Stir in the rolled oats and crushed fennel and cook until creamy. Aim for an even 3–4 mm thickness; repair cracks before the piece reaches the hot surface.",
+        "For Tridoshic Oat Mung Pumpkin Bowl, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Season the bowl, remove it from the flame, and melt ghee across the surface. Leave the pan off the flame for 3 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Tridoshic Oat Mung Pumpkin Bowl 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tridoshic Oat Mung Pumpkin Bowl uses soft grains, legumes, vegetables, and moderate seasoning for a tridoshic complete meal Vata: serve warm with enough cooking liquid. Pitta: keep the seasoning mild and free of sharp sourness. Kapha: use less grain and fat while adding ginger if desired.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tridoshic-rice-masoor-zucchini",
+      "name": "Tridoshic Rice Masoor Zucchini Meal",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 205
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, cut into small cubes",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Measure 1150 ml (about 4 3/4 cups) water for Tridoshic Rice Masoor Zucchini Meal; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Cook the rice and red lentils together until the lentils begin to dissolve. Maintain gentle medium heat for 12–14 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Add the zucchini cubes and ground coriander and simmer until the vegetable softens. Maintain low heat for 18–20 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "For Tridoshic Rice Masoor Zucchini Meal, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Season the cohesive meal and fold in ghee just before serving. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Tridoshic Rice Masoor Zucchini Meal 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tridoshic Rice Masoor Zucchini Meal uses soft grains, legumes, vegetables, and moderate seasoning for a tridoshic complete meal Vata: serve warm with enough cooking liquid. Pitta: keep the seasoning mild and free of sharp sourness. Kapha: use less grain and fat while adding ginger if desired.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tridoshic-quinoa-tofu-chayote",
+      "name": "Tridoshic Quinoa Tofu Chayote Bowl",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, drained and cut into cubes",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.chayote",
+          "name": "Chayote, peeled and finely diced",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "For Tridoshic Quinoa Tofu Chayote Bowl, heat 1150 ml (about 4 3/4 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Soften the chayote dice in a covered pot, then add the quinoa and hot water. Keep the pan over medium-low heat for 1–2 minutes after the final addition, folding from the bottom so the main pieces remain intact.",
+        "Set the tofu cubes over the opening grains and steam them beneath the lid. Maintain a steady steam for 5–7 minutes and check until a grain pressed between two fingers has no chalky center.",
+        "For Tridoshic Quinoa Tofu Chayote Bowl, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Fold the layers together with crushed fennel, olive oil, and salt. Mix for 1 minute with the heat off, stopping when the seasonings are even and a pressed spoonful holds together without crumbling.",
+        "Rest Tridoshic Quinoa Tofu Chayote Bowl 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tridoshic Quinoa Tofu Chayote Bowl uses soft grains, legumes, vegetables, and moderate seasoning for a tridoshic complete meal Vata: serve warm with enough cooking liquid. Pitta: keep the seasoning mild and free of sharp sourness. Kapha: use less grain and fat while adding ginger if desired.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tridoshic-rice-pea-fennel-pot",
+      "name": "Tridoshic Rice Pea Fennel Pot",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 215
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, thawed",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, finely diced",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Prepare 1150 ml (about 4 3/4 cups) hot water before starting Tridoshic Rice Pea Fennel Pot; keep one small ladle in reserve in case the base tightens early.",
+        "Soften the diced fennel bulb in ghee and stir the rice through the aromatic base. Keep the pan over medium-low heat for 2–3 minutes after the final addition, folding from the bottom so the main pieces remain intact.",
+        "Add hot water and cook until almost tender before scattering in the peas. Maintain gentle medium heat for 10–12 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "For Tridoshic Rice Pea Fennel Pot, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Crush fennel seed over the pot, season, and rest the rice before serving. Work in 4 short pulses, pausing between them so the mixture stays cool and retains the intended texture.",
+        "Fluff or stir Tridoshic Rice Pea Fennel Pot once after its off-heat rest, check the final consistency, and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tridoshic Rice Pea Fennel Pot uses soft grains, legumes, vegetables, and moderate seasoning for a tridoshic complete meal Vata: serve warm with enough cooking liquid. Pitta: keep the seasoning mild and free of sharp sourness. Kapha: use less grain and fat while adding ginger if desired.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tridoshic-brown-rice-tofu-zucchini",
+      "name": "Tridoshic Brown Rice Tofu Zucchini",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice, rinsed and soaked",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, drained and cut into cubes",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, cut into small cubes",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Prepare 1150 ml (about 4 3/4 cups) hot water before starting Tridoshic Brown Rice Tofu Zucchini; keep one small ladle in reserve in case the base tightens early.",
+        "Cover the brown rice with at least three times its volume of cool water and soak for 30 minutes; drain for 2 minutes before the first heated step.",
+        "Cook the soaked brown rice until almost tender with ground coriander in the broth. Give the spices about 30 seconds before adding the larger pieces, then continue over medium-low heat for 3–4 minutes, moving the pan often, until the raw aroma is gone.",
+        "Steam the zucchini and tofu over the grains until the vegetable becomes silky. Maintain a steady steam for 5–7 minutes and check until a grain pressed between two fingers has no chalky center.",
+        "Fold in olive oil and salt while retaining a little moisture between the grains. Mix for 2 minutes with the heat off, stopping when the seasonings are even and a pressed spoonful holds together without crumbling.",
+        "Rest Tridoshic Brown Rice Tofu Zucchini 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tridoshic Brown Rice Tofu Zucchini uses soft grains, legumes, vegetables, and moderate seasoning for a tridoshic complete meal Vata: serve warm with enough cooking liquid. Pitta: keep the seasoning mild and free of sharp sourness. Kapha: use less grain and fat while adding ginger if desired.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tridoshic-millet-mung-green-bean",
+      "name": "Tridoshic Millet Mung Green Bean Meal",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet, rinsed and soaked",
+          "grams": 205
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, cut into small diamonds",
+          "grams": 290
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Set aside 1150 ml (about 4 3/4 cups) freshly boiled water for Tridoshic Millet Mung Green Bean Meal, reserving about 60 ml to correct the final consistency.",
+        "For Tridoshic Millet Mung Green Bean Meal, cover the proso millet with at least three times its volume of cool water and soak for 20 minutes; drain for 2 minutes before the first heated step.",
+        "Simmer the split mung until half tender and add the soaked millet. Maintain steady low heat for 10–12 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Scatter in the bean diamonds and crushed fennel as the grains soften. Keep the layer loose and even, with no pooled liquid, so every portion receives the same balance.",
+        "Season the complete meal and fold in ghee without crushing the vegetables. Leave the pan off the flame for 5 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Tridoshic Millet Mung Green Bean Meal 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tridoshic Millet Mung Green Bean Meal uses soft grains, legumes, vegetables, and moderate seasoning for a tridoshic complete meal Vata: serve warm with enough cooking liquid. Pitta: keep the seasoning mild and free of sharp sourness. Kapha: use less grain and fat while adding ginger if desired.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tridoshic-rice-toor-bottle-gourd",
+      "name": "Tridoshic Rice Toor Bottle Gourd",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Pigeon pea, rinsed and drained",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.bottle-gourd",
+          "name": "Bottle gourd, peeled and finely diced",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "For Tridoshic Rice Toor Bottle Gourd, heat 1150 ml (about 4 3/4 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Cook the pigeon pea until partly soft before adding the rice and bottle-gourd dice. Maintain low heat for 12–14 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Stir in coriander and simmer until the vegetable becomes translucent and the grains tender. Maintain steady low heat for 18–20 minutes, stirring every 5 minutes, until a grain pressed between two fingers has no chalky center.",
+        "For Tridoshic Rice Toor Bottle Gourd, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Season the soft pot and add ghee after the cooking liquid has thickened. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Tridoshic Rice Toor Bottle Gourd 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tridoshic Rice Toor Bottle Gourd uses soft grains, legumes, vegetables, and moderate seasoning for a tridoshic complete meal Vata: serve warm with enough cooking liquid. Pitta: keep the seasoning mild and free of sharp sourness. Kapha: use less grain and fat while adding ginger if desired.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tridoshic-quinoa-chickpea-fennel",
+      "name": "Tridoshic Quinoa Chickpea Fennel Bowl",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 205
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Chickpeas, soaked overnight and drained",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, finely diced",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Prepare 1150 ml (about 4 3/4 cups) hot water before starting Tridoshic Quinoa Chickpea Fennel Bowl; keep one small ladle in reserve in case the base tightens early.",
+        "For Tridoshic Quinoa Chickpea Fennel Bowl, cover the chickpeas with at least three times its volume of cool water and soak for 8–12 hours; drain for 2 minutes before the first heated step.",
+        "Cook the soaked chickpeas until tender and reserve their pale broth. Use a pressure cooker at steady pressure for 25–30 minutes, or keep a covered pot at a gentle simmer for 60–75 minutes, until one bean mashes completely between two fingers.",
+        "Simmer the quinoa and diced fennel bulb in the broth with crushed fennel seed. Maintain moderate heat for 14–16 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Return the chickpeas, season the bowl, and finish with olive oil. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Tridoshic Quinoa Chickpea Fennel Bowl 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tridoshic Quinoa Chickpea Fennel Bowl uses soft grains, legumes, vegetables, and moderate seasoning for a tridoshic complete meal Vata: serve warm with enough cooking liquid. Pitta: keep the seasoning mild and free of sharp sourness. Kapha: use less grain and fat while adding ginger if desired.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tridoshic-barley-mung-chayote",
+      "name": "Tridoshic Barley Mung Chayote Stew",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley, soaked and drained",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.chayote",
+          "name": "Chayote, peeled and finely diced",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Bring 1150 ml (about 4 3/4 cups) water to a boil in a separate kettle and hold it hot, covered, so Tridoshic Barley Mung Chayote Stew never loses its simmer.",
+        "For Tridoshic Barley Mung Chayote Stew, cover the pearled barley with at least three times its volume of cool water and soak for 30 minutes; drain for 2 minutes before the first heated step.",
+        "Bring the barley and split mung to tenderness together in a generous measure of hot water. Allow 8–10 minutes at medium-low heat, checking whether a grain pressed between two fingers has no chalky center.",
+        "Add the chayote dice and coriander and simmer until the stew becomes cohesive. Maintain gentle medium heat for 18–20 minutes, stirring every 5 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Season and stir in ghee, leaving enough broth for a moist serving. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Tridoshic Barley Mung Chayote Stew 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tridoshic Barley Mung Chayote Stew uses soft grains, legumes, vegetables, and moderate seasoning for a tridoshic complete meal Vata: serve warm with enough cooking liquid. Pitta: keep the seasoning mild and free of sharp sourness. Kapha: use less grain and fat while adding ginger if desired.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tridoshic-amaranth-mung-pumpkin",
+      "name": "Tridoshic Amaranth Mung Pumpkin",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, rinsed in a fine sieve",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and cut into small cubes",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Prepare 1150 ml (about 4 3/4 cups) hot water before starting Tridoshic Amaranth Mung Pumpkin; keep one small ladle in reserve in case the base tightens early.",
+        "Simmer the split mung until partly tender and stir in the amaranth grains. Maintain moderate heat for 12–14 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Add pumpkin and crushed fennel, then cook until the tiny grains form a soft base. Maintain medium-low heat for 18–20 minutes, stirring every 5 minutes, until a grain pressed between two fingers has no chalky center.",
+        "For Tridoshic Amaranth Mung Pumpkin, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Season the complete pot, fold in ghee, and rest it before ladling. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Fluff or stir Tridoshic Amaranth Mung Pumpkin once after its off-heat rest, check the final consistency, and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tridoshic Amaranth Mung Pumpkin uses soft grains, legumes, vegetables, and moderate seasoning for a tridoshic complete meal Vata: serve warm with enough cooking liquid. Pitta: keep the seasoning mild and free of sharp sourness. Kapha: use less grain and fat while adding ginger if desired.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tridoshic-rice-paneer-chayote",
+      "name": "Tridoshic Rice Paneer Chayote",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 215
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, thawed",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.chayote",
+          "name": "Chayote, peeled and finely diced",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Prepare 1150 ml (about 4 3/4 cups) hot water before starting Tridoshic Rice Paneer Chayote; keep one small ladle in reserve in case the base tightens early.",
+        "Soften the chayote dice in ghee and add the rice with hot water. Keep the pan over medium-low heat for 2–3 minutes after the final addition, folding from the bottom so the main pieces remain intact.",
+        "Scatter the peas over the grains as they approach tenderness and cover again. Maintain gentle medium heat for 8–10 minutes, stirring every 5 minutes, until a grain pressed between two fingers has no chalky center.",
+        "For Tridoshic Rice Paneer Chayote, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Crush fennel over the pot, season, and fold the layers together gently. Work in 6 short pulses, pausing between them so the mixture stays cool and retains the intended texture.",
+        "Rest Tridoshic Rice Paneer Chayote 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tridoshic Rice Paneer Chayote uses soft grains, legumes, vegetables, and moderate seasoning for a tridoshic complete meal Vata: serve warm with enough cooking liquid. Pitta: keep the seasoning mild and free of sharp sourness. Kapha: use less grain and fat while adding ginger if desired.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tridoshic-oat-masoor-carrot",
+      "name": "Tridoshic Oat Masoor Carrot Bowl",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats, sorted and rinsed",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 175
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, peeled and cut into small cubes",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Bring 1150 ml (about 4 3/4 cups) water to a boil in a separate kettle and hold it hot, covered, so Tridoshic Oat Masoor Carrot Bowl never loses its simmer.",
+        "Cook the red lentils and carrot cubes until the roots become tender. Maintain gentle medium heat for 20–22 minutes, stirring every 5 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Stir in the rolled oats and coriander and simmer until the broth turns creamy. Aim for an even 3–4 mm thickness; repair cracks before the piece reaches the hot surface.",
+        "For Tridoshic Oat Masoor Carrot Bowl, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Season the bowl, remove it from direct heat, and add ghee before serving. Leave the pan off the flame for 3 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Tridoshic Oat Masoor Carrot Bowl 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tridoshic Oat Masoor Carrot Bowl uses soft grains, legumes, vegetables, and moderate seasoning for a tridoshic complete meal Vata: serve warm with enough cooking liquid. Pitta: keep the seasoning mild and free of sharp sourness. Kapha: use less grain and fat while adding ginger if desired.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tridoshic-millet-tofu-zucchini",
+      "name": "Tridoshic Millet Tofu Zucchini",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet, rinsed and soaked",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, drained and cut into cubes",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, cut into small cubes",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Measure 1150 ml (about 4 3/4 cups) water for Tridoshic Millet Tofu Zucchini; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "For Tridoshic Millet Tofu Zucchini, cover the proso millet with at least three times its volume of cool water and soak for 30 minutes; drain for 2 minutes before the first heated step.",
+        "Cook the soaked millet until nearly tender while keeping the grains moist. Maintain gentle medium heat for 11–13 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Steam the zucchini and tofu over the millet with crushed fennel beneath the lid. Maintain a steady steam for 5–7 minutes and check until a grain pressed between two fingers has no chalky center.",
+        "Fold in olive oil and salt, and serve the complete bowl warm. Leave the pan off the flame for 5 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Tridoshic Millet Tofu Zucchini 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tridoshic Millet Tofu Zucchini uses soft grains, legumes, vegetables, and moderate seasoning for a tridoshic complete meal Vata: serve warm with enough cooking liquid. Pitta: keep the seasoning mild and free of sharp sourness. Kapha: use less grain and fat while adding ginger if desired.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tridoshic-brown-rice-mung-beet",
+      "name": "Tridoshic Brown Rice Mung Beet Pot",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice, rinsed and soaked",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, peeled and cut into small cubes",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Measure 1150 ml (about 4 3/4 cups) water for Tridoshic Brown Rice Mung Beet Pot; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "For Tridoshic Brown Rice Mung Beet Pot, cover the brown rice with at least three times its volume of cool water and soak for 20 minutes; drain for 2 minutes before the first heated step.",
+        "Simmer the soaked brown rice and split mung until they begin to soften. Maintain medium-low heat for 10–12 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Add the beet cubes and coriander and cook until the pot becomes ruby and tender. Maintain gentle medium heat for 19–21 minutes, stirring every 5 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Season the meal and fold in ghee while leaving the root pieces visible. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Tridoshic Brown Rice Mung Beet Pot 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tridoshic Brown Rice Mung Beet Pot uses soft grains, legumes, vegetables, and moderate seasoning for a tridoshic complete meal Vata: serve warm with enough cooking liquid. Pitta: keep the seasoning mild and free of sharp sourness. Kapha: use less grain and fat while adding ginger if desired.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tridoshic-quinoa-mung-asparagus",
+      "name": "Tridoshic Quinoa Mung Asparagus",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 155
+        },
+        {
+          "dravyaId": "dravya.asparagus",
+          "name": "Asparagus, trimmed and cut into short pieces",
+          "grams": 290
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill, leaves finely chopped",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Set aside 1150 ml (about 4 3/4 cups) freshly boiled water for Tridoshic Quinoa Mung Asparagus, reserving about 60 ml to correct the final consistency.",
+        "Cook the split mung until half tender before adding the rinsed quinoa. Maintain gentle medium heat for 10–12 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Scatter in the asparagus pieces when the grains open and cover briefly. Maintain low heat for 7–9 minutes, stirring every 5 minutes, until a knife tip enters the thickest stem with only slight resistance.",
+        "For Tridoshic Quinoa Mung Asparagus, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Season with olive oil and chopped dill after removing the meal from heat. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Tridoshic Quinoa Mung Asparagus 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tridoshic Quinoa Mung Asparagus uses soft grains, legumes, vegetables, and moderate seasoning for a tridoshic complete meal Vata: serve warm with enough cooking liquid. Pitta: keep the seasoning mild and free of sharp sourness. Kapha: use less grain and fat while adding ginger if desired.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tridoshic-rice-chana-pumpkin",
+      "name": "Tridoshic Rice Chana Pumpkin Meal",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.chana-dal",
+          "name": "Chana dal, soaked and drained",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and cut into small cubes",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Prepare 1150 ml (about 4 3/4 cups) hot water before starting Tridoshic Rice Chana Pumpkin Meal; keep one small ladle in reserve in case the base tightens early.",
+        "Cover the chana dal with at least three times its volume of cool water and soak for 30 minutes; drain for 2 minutes before the first heated step.",
+        "Cook the soaked chana dal until almost tender before adding the rice. Maintain steady low heat for 12–14 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Set the pumpkin cubes over the grains with crushed fennel and simmer until soft. Maintain moderate heat for 18–20 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Fold in ghee and salt and adjust the complete meal to a moist consistency. Mix for 1 minute with the heat off, stopping when the seasonings are even and a pressed spoonful holds together without crumbling.",
+        "Rest Tridoshic Rice Chana Pumpkin Meal 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tridoshic Rice Chana Pumpkin Meal uses soft grains, legumes, vegetables, and moderate seasoning for a tridoshic complete meal Vata: serve warm with enough cooking liquid. Pitta: keep the seasoning mild and free of sharp sourness. Kapha: use less grain and fat while adding ginger if desired.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tridoshic-barley-pea-zucchini",
+      "name": "Tridoshic Barley Pea Zucchini Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley, soaked and drained",
+          "grams": 205
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, thawed",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, cut into small cubes",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for finishing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Bring 1150 ml (about 4 3/4 cups) water to a boil in a separate kettle and hold it hot, covered, so Tridoshic Barley Pea Zucchini Stew never loses its simmer.",
+        "Cover the pearled barley with at least three times its volume of cool water and soak for 40 minutes; drain for 2 minutes before the first heated step.",
+        "Simmer the soaked barley until the grains are plump and almost tender. Maintain gentle medium heat for 10–12 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Add the zucchini and peas with ground coriander and cook until just soft. Maintain low heat for 19–21 minutes, stirring every 4 minutes, until a spoon drawn across the base leaves a trail that closes slowly.",
+        "Season the stew, finish with olive oil, and preserve some broth for serving. Leave the pan off the flame for 5 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Tridoshic Barley Pea Zucchini Stew 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tridoshic Barley Pea Zucchini Stew uses soft grains, legumes, vegetables, and moderate seasoning for a tridoshic complete meal Vata: serve warm with enough cooking liquid. Pitta: keep the seasoning mild and free of sharp sourness. Kapha: use less grain and fat while adding ginger if desired.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tridoshic-amaranth-mung-fennel",
+      "name": "Tridoshic Amaranth Mung Fennel",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, rinsed in a fine sieve",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, finely diced",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Bring 1150 ml (about 4 3/4 cups) water to a boil in a separate kettle and hold it hot, covered, so Tridoshic Amaranth Mung Fennel never loses its simmer.",
+        "Cook the split mung until halfway soft and stir in the tiny amaranth grains. Maintain gentle medium heat for 12–14 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Add the diced fennel bulb and crushed seeds and simmer until naturally sweet. Maintain low heat for 18–20 minutes, stirring every 5 minutes, until a grain pressed between two fingers has no chalky center.",
+        "For Tridoshic Amaranth Mung Fennel, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Season the meal and fold in ghee before the amaranth sets too firmly. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Tridoshic Amaranth Mung Fennel 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tridoshic Amaranth Mung Fennel uses soft grains, legumes, vegetables, and moderate seasoning for a tridoshic complete meal Vata: serve warm with enough cooking liquid. Pitta: keep the seasoning mild and free of sharp sourness. Kapha: use less grain and fat while adding ginger if desired.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.tridoshic-rice-mung-carrot-spinach",
+      "name": "Tridoshic Rice Mung Carrot Spinach",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 195
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, peeled and cut into small cubes",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach leaves, washed and chopped",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "For Tridoshic Rice Mung Carrot Spinach, heat 1150 ml (about 4 3/4 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Cook the rice, split mung, and carrot cubes until all are nearly tender. Maintain gentle medium heat for 11–13 minutes, stirring every 5 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Fold in the chopped spinach and coriander and simmer only until the leaves soften. Maintain low heat for 5–7 minutes, stirring every 3 minutes, until the leaves wilt but still retain their color.",
+        "For Tridoshic Rice Mung Carrot Spinach, inspect the main component at minute 17; rotate the pot and add 30–60 ml hot water only if the base is tightening before it is tender.",
+        "Season the colorful complete meal and melt ghee through it off the heat. Leave the pan off the flame for 3 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Tridoshic Rice Mung Carrot Spinach 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tridoshic Rice Mung Carrot Spinach uses soft grains, legumes, vegetables, and moderate seasoning for a tridoshic complete meal Vata: serve warm with enough cooking liquid. Pitta: keep the seasoning mild and free of sharp sourness. Kapha: use less grain and fat while adding ginger if desired.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    }
+  ]
+}
