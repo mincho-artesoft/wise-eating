@@ -1,0 +1,3480 @@
+{
+  "formatVersion": "1.0",
+  "batch": "recipe-batch-r21",
+  "qualityState": "aiDraft",
+  "items": [
+    {
+      "id": "recipe.vrat-cumin-sabudana-khichdi",
+      "name": "Vrat Cumin Sabudana Khichdi",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "fdcId": 7138,
+          "name": "Tapioca pearls, rinsed and soaked",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potatoes, boiled and cut into cubes",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.peanut",
+          "name": "Peanuts, roasted and ground coarse",
+          "grams": 65
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pan",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Drain the soaked pearls thoroughly and rub the coarse peanut meal through them so they separate.",
+        "Toast cumin in ghee, brown the potato cubes, and fold in the coated pearls over moderate heat.",
+        "Cover only until the centers turn translucent, then uncover, season, and add the lemon juice away from the flame."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Careful soaking keeps this fasting khichdi separate rather than gummy Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use fewer peanuts and potatoes and choose a small portion.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-baked-sabudana-vada",
+      "name": "Vrat Baked Sabudana Vada",
+      "category": "everyday",
+      "meal": "snack",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "fdcId": 7138,
+          "name": "Tapioca pearls, rinsed and soaked",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potatoes, boiled and mashed",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.peanut",
+          "name": "Peanuts, roasted and ground coarse",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Cilantro leaves, finely chopped",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, melted for brushing",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Mix the drained pearls with the mashed potato, coarse peanuts, crushed cumin, chopped cilantro, and salt.",
+        "Shape compact patties with damp hands, arrange them on a warmed tray, and brush their surfaces lightly with melted ghee.",
+        "Bake until the bases are firm, turn each patty once, and continue until both faces are evenly golden."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Baking gives fasting sabudana patties a crisp surface with less fat Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: eat one small patty and increase cumin while reducing peanut.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-sabudana-potato-thalipeeth",
+      "name": "Vrat Sabudana Potato Thalipeeth",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "fdcId": 7138,
+          "name": "Tapioca pearls, rinsed and soaked",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potatoes, boiled and grated",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.peanut",
+          "name": "Peanuts, roasted and ground fine",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, divided for the griddle",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Knead the drained pearls, grated potato, fine peanut meal, cumin, and salt into a soft fasting dough.",
+        "Press one portion between damp palms, transfer it to a warm greased griddle, and thin it gently with wet fingertips.",
+        "Cook until the lower face releases, turn with a wide spatula, and brown the second side with only a trace more ghee."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "A thin shape makes this sabudana thalipeeth crisper and easier to digest Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: keep the cake thin, use little ghee, and eat a modest serving.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-cardamom-sabudana-kheer",
+      "name": "Vrat Cardamom Sabudana Kheer",
+      "category": "everyday",
+      "meal": "dessert",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "fdcId": 7138,
+          "name": "Tapioca pearls, rinsed and soaked",
+          "grams": 110
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk, warmed",
+          "grams": 850
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar, finely crushed",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom, freshly ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.pistachio",
+          "name": "Pistachios, thinly sliced",
+          "grams": 25
+        }
+      ],
+      "steps": [
+        "Simmer the soaked pearls in part of the warmed milk until their centers become clear.",
+        "Pour in the remaining milk gradually and stir often as the kheer thickens around the translucent pearls.",
+        "Remove the pot from direct heat, dissolve the crushed rock sugar, and finish with cardamom and sliced pistachios."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "This festival kheer is cooling and rich, so a small warm portion is sufficient Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: take only a few spoonfuls and reduce both sweetener and nuts.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-pumpkin-sabudana-pot",
+      "name": "Vrat Pumpkin Sabudana Pot",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "fdcId": 7138,
+          "name": "Tapioca pearls, rinsed and soaked",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and cut into tiny cubes",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 240
+        }
+      ],
+      "steps": [
+        "Soften cumin and grated ginger in ghee, then add the tiny pumpkin cubes and turn them until glossy.",
+        "Splash in hot water, cover until the pumpkin is nearly tender, and spread the drained pearls across the surface.",
+        "Cook gently until the pearls clear, folding only twice so the pumpkin remains visible, then season."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pumpkin adds moisture to this fasting sabudana main Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: reduce the pearl portion and add more ginger.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-sweet-potato-sabudana-pilaf",
+      "name": "Vrat Sweet Potato Sabudana Pilaf",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "fdcId": 7138,
+          "name": "Tapioca pearls, rinsed and soaked",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, peeled and cut into small cubes",
+          "grams": 330
+        },
+        {
+          "dravyaId": "dravya.peanut",
+          "name": "Peanuts, roasted and chopped",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pan",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Brown the sweet-potato cubes slowly in ghee with crushed fennel until their edges caramelize.",
+        "Add the drained pearls and chopped peanuts, cover briefly, and shake the pan as the centers turn translucent.",
+        "Uncover to release steam, season the pilaf, and sprinkle in the lemon juice once it leaves the heat."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Fennel balances the sweetness of this root-and-sabudana fasting pilaf Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-chayote-sabudana-upma",
+      "name": "Vrat Chayote Sabudana Upma",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "fdcId": 7138,
+          "name": "Tapioca pearls, rinsed and soaked",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.chayote",
+          "name": "Chayote, peeled and finely diced",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, cut into fine slivers",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pan",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Cilantro leaves, finely chopped",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Toast cumin and ginger slivers in ghee, then sauté the chayote dice until their edges turn translucent.",
+        "Spread the drained pearls over the vegetable, cover for a few minutes, and lift them gently from below rather than stirring hard.",
+        "Stop cooking when the pearls are clear, season the upma, and scatter chopped cilantro over the loose mixture."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Juicy chayote keeps this fasting upma lighter than a potato version Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-lotus-sabudana-khichdi",
+      "name": "Vrat Lotus Seed Sabudana Khichdi",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "fdcId": 7138,
+          "name": "Tapioca pearls, rinsed and soaked",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.lotus-seed",
+          "name": "Lotus seeds, dry-roasted and halved",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potatoes, boiled and cut into cubes",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pan",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Dry-roast the lotus seeds until crisp and break the larger ones into halves after they cool.",
+        "Bloom cumin and pepper in ghee, brown the potato cubes, and fold in the drained tapioca pearls.",
+        "Add the roasted seed halves when the pearls become translucent, toss gently, and season before serving warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Crisp lotus seeds contrast with soft pearls in this festival khichdi Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: reduce both potato and ghee and keep the bowl small.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-coconut-lemon-sabudana",
+      "name": "Vrat Coconut Lemon Sabudana",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "fdcId": 7138,
+          "name": "Tapioca pearls, rinsed and soaked",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 65
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, for the pan",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Lemon juice, freshly squeezed",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Cilantro leaves, finely chopped",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Warm cumin in coconut oil and add the drained pearls in an even layer.",
+        "Cover briefly, then lift the pearls from the edges until they turn translucent without clumping.",
+        "Fold through the grated coconut and salt, remove the pan from heat, and finish with lemon juice and cilantro."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Coconut and lemon give sabudana a bright festival finish Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: use less lemon and eat the dish only warm, not hot. Kapha: keep coconut and oil light.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-soft-sabudana-porridge",
+      "name": "Vrat Soft Savory Sabudana Porridge",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "fdcId": 7138,
+          "name": "Tapioca pearls, rinsed and soaked",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Almond milk, unsweetened and warmed",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, ground fresh",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for finishing",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 350
+        }
+      ],
+      "steps": [
+        "Simmer the soaked pearls in hot water until they begin to lose their opaque centers.",
+        "Add the warmed almond drink, ground cumin, and grated ginger, then stir gently as the porridge becomes silky.",
+        "Season the soft mixture, draw it off the heat, and melt a little ghee across the surface before serving."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Extra liquid turns sabudana into a soft fasting breakfast rather than a dry pilaf Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-amaranth-pumpkin-khichdi",
+      "name": "Vrat Amaranth Pumpkin Khichdi",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, rinsed in a fine sieve",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and cut into small cubes",
+          "grams": 350
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Warm cumin and grated ginger in ghee, then stir the tiny amaranth grains through the fragrant pot.",
+        "Add the pumpkin cubes and hot water, bring to a boil, and lower the heat under a partly covered lid.",
+        "Cook until the grains swell into a soft mass and the pumpkin yields, then season and rest the khichdi."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pumpkin softens the earthy character of amaranth in this fasting khichdi Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-amaranth-fennel-porridge",
+      "name": "Vrat Amaranth Fennel Porridge",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, rinsed in a fine sieve",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Oat milk, unsweetened and warmed",
+          "grams": 520
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, ground fresh",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom, freshly ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar, finely crushed",
+          "grams": 28
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 450
+        }
+      ],
+      "steps": [
+        "Simmer the rinsed amaranth in hot water until the grains swell and the liquid looks glossy.",
+        "Pour in the warmed oat drink, add ground fennel, and continue stirring until the porridge is creamy.",
+        "Take the pot off the flame before dissolving the crushed rock sugar and scattering in the cardamom."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Fennel makes this amaranth fasting porridge gently aromatic Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-amaranth-potato-flatbread",
+      "name": "Vrat Amaranth Potato Flatbread",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, milled into flour",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potatoes, boiled and mashed",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Cilantro leaves, finely chopped",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, divided for the griddle",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 90
+        }
+      ],
+      "steps": [
+        "Combine the amaranth flour with mashed potato, crushed cumin, cilantro, and salt, adding hot water only as needed.",
+        "Pat a dough portion into a thin round between oiled sheets and peel away the upper sheet carefully.",
+        "Transfer the round to a warm griddle, cook until firm, and brown both faces with a light brushing of ghee."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mashed potato makes gluten-free amaranth dough pliable enough for a fasting flatbread Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: make the breads thin and limit both potato and ghee.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-amaranth-pumpkin-pancake",
+      "name": "Vrat Amaranth Pumpkin Pancake",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, milled into flour",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, steamed and mashed",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, ground fresh",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Almond milk, unsweetened and warmed",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, divided for the griddle",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Whisk the amaranth flour with mashed pumpkin, ground fennel, salt, and enough warm almond drink for a thick batter.",
+        "Rest the mixture briefly, then spoon small rounds onto a greased griddle and spread them without pressing.",
+        "Wait until the edges dry before turning each pancake, and cook the second face until the center feels set."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pumpkin keeps these fasting amaranth pancakes tender without eggs Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-amaranth-sesame-laddoo",
+      "name": "Vrat Amaranth Sesame Laddoo",
+      "category": "everyday",
+      "meal": "dessert",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, dry-popped",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds, toasted and ground coarse",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery, finely grated",
+          "grams": 110
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, warmed for binding",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom, freshly ground",
+          "grams": 2
+        }
+      ],
+      "steps": [
+        "Toast the popped amaranth and coarse sesame together until the mixture smells nutty.",
+        "Melt the grated jaggery with a spoonful of water, cook it to a sticky syrup, and stir in the warm ghee.",
+        "Work the hot syrup and cardamom through the grains, then shape small balls with lightly greased palms before the mixture cools."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 2
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "These dense festival sweets combine popped amaranth with sesame and jaggery Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: eat only one small ball and reduce the sweetener.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-amaranth-cardamom-kheer",
+      "name": "Vrat Amaranth Cardamom Kheer",
+      "category": "everyday",
+      "meal": "dessert",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, rinsed in a fine sieve",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk, warmed",
+          "grams": 850
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar, finely crushed",
+          "grams": 50
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom, freshly ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, blanched and sliced",
+          "grams": 28
+        }
+      ],
+      "steps": [
+        "Cook the rinsed amaranth in a portion of the warmed milk until the grains bloom and soften.",
+        "Add the remaining milk in stages, stirring the base so it thickens without catching on the pot.",
+        "Remove the kheer from direct heat, dissolve the crushed rock sugar, and finish with cardamom and sliced almonds."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Amaranth gives this fasting milk pudding a fine, bead-like texture Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: choose a small warm portion with less sweetener and fewer almonds.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-amaranth-chayote-pot",
+      "name": "Vrat Amaranth Chayote Pot",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, rinsed in a fine sieve",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.chayote",
+          "name": "Chayote, peeled and finely diced",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, cut into fine slivers",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 900
+        }
+      ],
+      "steps": [
+        "Bloom cumin and ginger slivers in ghee, then add the chayote dice and turn them until glossy.",
+        "Stir in the rinsed amaranth and hot water, bring the pot to a boil, and lower the heat.",
+        "Cook partly covered until the grains thicken around the tender vegetable, then season and rest before serving."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chayote adds welcome moisture to a simple amaranth fasting meal Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-amaranth-potato-pilaf",
+      "name": "Vrat Amaranth Potato Pilaf",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, rinsed in a fine sieve",
+          "grams": 215
+        },
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potatoes, peeled and cut into small cubes",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 780
+        }
+      ],
+      "steps": [
+        "Brown the potato cubes in ghee with cumin until their edges develop a light crust.",
+        "Add the amaranth, cracked pepper, and hot water, then cover as soon as the pot returns to a boil.",
+        "Cook until the grains are tender and the liquid is absorbed, loosen the pilaf gently, and season."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Potato makes this amaranth pilaf particularly grounding Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: reduce the potato and ghee and increase black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-amaranth-sesame-brittle",
+      "name": "Vrat Amaranth Sesame Brittle",
+      "category": "everyday",
+      "meal": "dessert",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, dry-popped",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds, toasted",
+          "grams": 65
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery, finely grated",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for greasing",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom, freshly ground",
+          "grams": 2
+        }
+      ],
+      "steps": [
+        "Combine the popped amaranth, toasted sesame, and ground cardamom in a warm bowl.",
+        "Melt the grated jaggery with a spoonful of water and cook until a drop firms quickly in cool water.",
+        "Stir in the grain mixture, spread it thinly on a greased tray, and score small pieces before the brittle hardens."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 2
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "A thin sheet keeps this concentrated festival brittle appropriately portioned Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: limit the serving to one small piece.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-apple-amaranth-bake",
+      "name": "Vrat Apple Amaranth Bake",
+      "category": "everyday",
+      "meal": "dessert",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.apple",
+          "name": "Apples, peeled and cut into wedges",
+          "grams": 600
+        },
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, dry-popped",
+          "grams": 110
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, chopped coarse",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon, ground",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.maple-syrup",
+          "name": "Maple syrup, measured for drizzling",
+          "grams": 38
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, melted for the dish",
+          "grams": 18
+        }
+      ],
+      "steps": [
+        "Arrange the apple wedges in a greased baking dish and dust them evenly with ground cinnamon.",
+        "Mix the popped amaranth with chopped almonds and melted ghee, then scatter the rough topping over the fruit.",
+        "Drizzle lightly with maple syrup and bake until the apples soften and the topping becomes crisp at the edges."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Baking makes fruit appropriate for a warm festival dessert without combining it with milk Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-buckwheat-cumin-khichdi",
+      "name": "Vrat Buckwheat Cumin Khichdi",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Buckwheat groats, rinsed and drained",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potatoes, peeled and cut into small cubes",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 760
+        }
+      ],
+      "steps": [
+        "Warm cumin and grated ginger in ghee, then brown the potato cubes lightly in the aromatic pot.",
+        "Stir in the buckwheat groats and hot water, cover, and cook gently until the grains split and soften.",
+        "Rest the khichdi off the heat, fluff it without crushing the potato, and season before serving."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Buckwheat makes this fasting khichdi warming and comparatively light Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-buckwheat-potato-roti",
+      "name": "Vrat Buckwheat Potato Roti",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Buckwheat groats, milled into flour",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potatoes, boiled and mashed",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, divided for the griddle",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 90
+        }
+      ],
+      "steps": [
+        "Mix the buckwheat flour with mashed potato, crushed cumin, and salt, adding warm water until the dough holds.",
+        "Pat a small portion between greased sheets into an even round and peel back the upper sheet.",
+        "Lay the roti on a hot griddle, wait until it firms before turning, and brown both sides with a trace of ghee."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Potato binds fragile buckwheat flour for a practical fasting roti Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-buckwheat-fennel-dosa",
+      "name": "Vrat Buckwheat Fennel Dosa",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Buckwheat groats, milled into flour",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.yogurt",
+          "name": "Whole-milk yogurt, whisked smooth",
+          "grams": 110
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, ground fresh",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, divided for the griddle",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 360
+        }
+      ],
+      "steps": [
+        "Whisk the buckwheat flour with yogurt, ground fennel, ginger, salt, and enough water for a flowing batter.",
+        "Rest the batter briefly, then pour a thin spiral onto a hot griddle and fill the gaps with the back of the ladle.",
+        "Drizzle a little ghee around the edge, turn when the surface dries, and cook the second side only until set."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Fennel and a short yogurt rest soften the earthy flavor of buckwheat dosa Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-buckwheat-pumpkin-chilla",
+      "name": "Vrat Buckwheat Pumpkin Chilla",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Buckwheat groats, milled into flour",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, steamed and mashed",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Cilantro leaves, finely chopped",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, divided for the griddle",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 260
+        }
+      ],
+      "steps": [
+        "Whisk the buckwheat flour with mashed pumpkin, crushed cumin, cilantro, salt, and enough water for a thick batter.",
+        "Spoon a modest round onto a greased griddle and spread it gently so the pumpkin remains evenly distributed.",
+        "Turn after the lower face releases cleanly, then cook the second side until the center no longer feels damp."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pumpkin keeps this fasting buckwheat chilla moist and naturally sweet Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-buckwheat-dumpling-kadhi",
+      "name": "Vrat Buckwheat Dumpling Kadhi",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Buckwheat groats, milled into flour",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.yogurt",
+          "name": "Whole-milk yogurt, whisked smooth",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potatoes, boiled and mashed",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, divided",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 820
+        }
+      ],
+      "steps": [
+        "Knead buckwheat flour and mashed potato with salt, then roll the soft dough into small fasting dumplings.",
+        "Poach the dumplings until they rise and firm, lift them out, and whisk the yogurt into the warm cooking liquid.",
+        "Simmer the kadhi gently with cumin bloomed in ghee, return the dumplings, and warm them until they absorb the tangy broth."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Poached buckwheat dumplings make this fasting kadhi satisfying without deep frying Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: serve fewer dumplings and use a thinner, well-spiced broth.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-buckwheat-sweet-potato-cakes",
+      "name": "Vrat Buckwheat Sweet Potato Cakes",
+      "category": "everyday",
+      "meal": "snack",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Buckwheat groats, milled into flour",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, steamed and mashed",
+          "grams": 330
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, melted for brushing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Work the buckwheat flour, mashed sweet potato, crushed fennel, and salt into a soft, non-sticky mixture.",
+        "Shape small flat cakes, place them on a warm tray, and brush both exposed surfaces sparingly with melted ghee.",
+        "Bake until the bottoms set, turn each cake, and continue until the edges are dry and lightly browned."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sweet potato binds these baked buckwheat fasting cakes Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: choose one small cake and keep the brushing very light.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-buckwheat-pumpkin-stew",
+      "name": "Vrat Buckwheat Pumpkin Stew",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Buckwheat groats, rinsed and drained",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and cut into chunks",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, cut into fine slivers",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 1000
+        }
+      ],
+      "steps": [
+        "Toast cumin and ginger slivers in ghee, then stir the buckwheat groats until they smell nutty.",
+        "Pour in hot water and simmer until the grains begin to soften before adding the pumpkin chunks.",
+        "Cook the stew until the pumpkin thickens the broth naturally, season it, and rest the pot for five minutes."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "A brothier preparation balances the dry, warming nature of buckwheat Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-buckwheat-almond-porridge",
+      "name": "Vrat Buckwheat Almond Porridge",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Buckwheat groats, rinsed and drained",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Almond milk, unsweetened and warmed",
+          "grams": 520
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom, freshly ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar, finely crushed",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, blanched and sliced",
+          "grams": 24
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 420
+        }
+      ],
+      "steps": [
+        "Simmer the buckwheat groats in hot water until they split and become tender.",
+        "Add the warmed almond drink and continue cooking until the mixture reaches a loose porridge consistency.",
+        "Remove the pot from heat, stir in the crushed rock sugar and cardamom, and garnish with sliced almonds."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Plant milk keeps this sweet buckwheat fasting porridge gentle and dairy-free Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-buckwheat-jaggery-halwa",
+      "name": "Vrat Buckwheat Jaggery Halwa",
+      "category": "everyday",
+      "meal": "dessert",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Buckwheat groats, milled into flour",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for roasting",
+          "grams": 65
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery, finely grated",
+          "grams": 110
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom, freshly ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.cashew",
+          "name": "Cashews, roughly broken",
+          "grams": 30
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 520
+        }
+      ],
+      "steps": [
+        "Roast the buckwheat flour in ghee over low heat until its color deepens and the aroma turns nutty.",
+        "Pour in hot water gradually while stirring firmly, and cook until the paste leaves the sides of the pan.",
+        "Fold in the grated jaggery away from fierce heat, then finish the halwa with cardamom and broken cashews."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 2
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "This concentrated fasting halwa is best treated as a small festival portion Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: limit the serving to two spoonfuls and reduce ghee and jaggery.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-buckwheat-chayote-pilaf",
+      "name": "Vrat Buckwheat Chayote Pilaf",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Buckwheat groats, rinsed and drained",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.chayote",
+          "name": "Chayote, peeled and cut into small cubes",
+          "grams": 330
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 720
+        }
+      ],
+      "steps": [
+        "Warm cumin and crushed fennel in ghee, then sauté the chayote cubes until their edges turn translucent.",
+        "Add the buckwheat groats and hot water, cover the pot, and cook gently until the grains are tender.",
+        "Let the pilaf stand off the heat, fluff it carefully so the chayote remains intact, and season."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Moist chayote moderates buckwheat in this simple fasting pilaf Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-chestnut-potato-flatbread",
+      "name": "Vrat Chestnut Potato Flatbread",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chestnut",
+          "name": "Chestnuts, roasted and milled fine",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potatoes, boiled and mashed",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, divided for the griddle",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 80
+        }
+      ],
+      "steps": [
+        "Combine the chestnut meal with mashed potato, crushed cumin, and salt to form a soft fasting dough.",
+        "Press a portion between greased sheets into a small even round and lift away the upper sheet.",
+        "Cook the flatbread on a warm griddle until firm enough to turn, then brown the second face with a little ghee."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chestnut and potato create a naturally sweet singhara-style fasting bread Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-chestnut-fennel-crepes",
+      "name": "Vrat Chestnut Fennel Crepes",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chestnut",
+          "name": "Chestnuts, roasted and milled fine",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Almond milk, unsweetened and warmed",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, ground fresh",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, divided for the griddle",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 160
+        }
+      ],
+      "steps": [
+        "Whisk the chestnut meal with ground fennel, salt, warm almond drink, and enough water for a thin batter.",
+        "Pour a small ladleful onto a greased griddle and tilt the pan so the batter forms a delicate round.",
+        "Loosen the edge once dry, turn the crepe carefully, and cook the second face for less than a minute."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Thin cooking keeps these sweet chestnut fasting crepes light Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-chestnut-pumpkin-dumplings",
+      "name": "Vrat Chestnut Pumpkin Dumplings",
+      "category": "everyday",
+      "meal": "snack",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chestnut",
+          "name": "Chestnuts, roasted and milled fine",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, steamed and mashed",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, melted for brushing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Mix the chestnut meal with mashed pumpkin, crushed cumin, and salt until the soft dough holds a shape.",
+        "Roll small dumplings with damp hands, arrange them in a steamer, and cook until their surfaces become firm.",
+        "Transfer them to a warm tray, brush with melted ghee, and bake briefly to dry the outer layer."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Steaming before baking gives these fasting dumplings a tender center Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-chestnut-potato-cakes",
+      "name": "Vrat Chestnut Potato Cakes",
+      "category": "everyday",
+      "meal": "snack",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chestnut",
+          "name": "Chestnuts, roasted and milled fine",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potatoes, boiled and grated",
+          "grams": 330
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Cilantro leaves, finely chopped",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, melted for brushing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Toss the grated potato with chestnut meal, cracked pepper, chopped cilantro, and salt without overworking it.",
+        "Compress the mixture into small cakes and brush their tops with a thin sheen of melted ghee.",
+        "Bake until the bases brown, turn each cake once, and continue until the edges become crisp."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chestnut meal helps these fasting potato cakes hold together without eggs Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: eat one small cake and use little ghee.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-chestnut-cardamom-halwa",
+      "name": "Vrat Chestnut Cardamom Halwa",
+      "category": "everyday",
+      "meal": "dessert",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chestnut",
+          "name": "Chestnuts, roasted and milled fine",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for roasting",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar, finely crushed",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom, freshly ground",
+          "grams": 2
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 460
+        }
+      ],
+      "steps": [
+        "Roast the chestnut meal in ghee until the mixture becomes fragrant and slightly darker.",
+        "Add hot water in a steady stream while stirring, then cook until the paste becomes glossy and thick.",
+        "Draw the pan from high heat, dissolve the crushed rock sugar, and finish with ground cardamom."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 2
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chestnut makes a naturally sweet fasting halwa that needs only modest added sugar Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: serve two small spoonfuls and reduce the ghee.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-chestnut-oat-milk-porridge",
+      "name": "Vrat Chestnut Oat-Milk Porridge",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chestnut",
+          "name": "Chestnuts, roasted and milled fine",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Oat milk, unsweetened and warmed",
+          "grams": 600
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, ground fresh",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar, finely crushed",
+          "grams": 24
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 280
+        }
+      ],
+      "steps": [
+        "Whisk the chestnut meal into hot water in a thin stream so it disperses without lumps.",
+        "Add the warmed oat drink and ground fennel, then simmer while stirring until the porridge coats the spoon.",
+        "Take the pot off the flame, dissolve the crushed rock sugar, and serve the porridge warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Plant milk keeps this singhara-style fasting porridge free of fruit-dairy concerns Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-chestnut-pumpkin-pancakes",
+      "name": "Vrat Chestnut Pumpkin Pancakes",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chestnut",
+          "name": "Chestnuts, roasted and milled fine",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, steamed and mashed",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Almond milk, unsweetened and warmed",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon, ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, divided for the griddle",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Whisk the chestnut meal, mashed pumpkin, cinnamon, salt, and warm almond drink into a thick batter.",
+        "Drop small rounds onto a lightly greased griddle and let their edges dry before moving them.",
+        "Turn each pancake with a broad spatula and cook until the second side browns and the center sets."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pumpkin and chestnut produce tender egg-free fasting pancakes Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-chestnut-sweet-potato-roti",
+      "name": "Vrat Chestnut Sweet Potato Roti",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chestnut",
+          "name": "Chestnuts, roasted and milled fine",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, steamed and mashed",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, divided for the griddle",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Knead the chestnut meal with mashed sweet potato, crushed fennel, and salt until the mixture forms a pliable dough.",
+        "Pat each portion between greased sheets into a thin round, repairing any cracks with damp fingertips.",
+        "Cook the roti on a hot griddle, turn only after the first side firms, and finish with a sparse brushing of ghee."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sweet potato binds chestnut meal in this soft fasting roti Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-steamed-chestnut-cakes",
+      "name": "Vrat Steamed Chestnut Cakes",
+      "category": "everyday",
+      "meal": "snack",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chestnut",
+          "name": "Chestnuts, roasted and milled fine",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.yogurt",
+          "name": "Whole-milk yogurt, whisked smooth",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for greasing",
+          "grams": 10
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Beat the chestnut meal with yogurt, crushed cumin, ginger, salt, and enough water for a thick spoonable batter.",
+        "Rest the mixture while greasing shallow cups, then divide it evenly without packing it down.",
+        "Steam until the centers feel firm, let the cakes settle briefly, and release them while still warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Steam keeps these singhara-style fasting cakes moist without frying Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-chestnut-milk-pudding",
+      "name": "Vrat Chestnut Milk Pudding",
+      "category": "everyday",
+      "meal": "dessert",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chestnut",
+          "name": "Chestnuts, roasted and milled fine",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk, warmed",
+          "grams": 780
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar, finely crushed",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom, freshly ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.pistachio",
+          "name": "Pistachios, thinly sliced",
+          "grams": 22
+        }
+      ],
+      "steps": [
+        "Whisk the chestnut meal into a small portion of warmed milk until perfectly smooth.",
+        "Pour the slurry into the remaining milk and simmer slowly, stirring the base as it thickens.",
+        "Remove the pudding from direct heat, dissolve the crushed rock sugar, and garnish with cardamom and pistachios."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chestnut thickens this fruit-free festival milk pudding naturally Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: take a small portion and use less sweetener.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-fennel-lotus-seed-curry",
+      "name": "Vrat Fennel Lotus Seed Curry",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.lotus-seed",
+          "name": "Lotus seeds, dry-roasted",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.yogurt",
+          "name": "Whole-milk yogurt, whisked smooth",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, finely diced",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, ground fresh",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 460
+        }
+      ],
+      "steps": [
+        "Dry-roast the lotus seeds until crisp, cool them, and crack the largest pieces in half.",
+        "Soften the diced fennel bulb in ghee, add ground fennel and hot water, and simmer until the broth is fragrant.",
+        "Lower the heat before folding in the yogurt and roasted seeds, then warm gently without letting the curry boil."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Fennel keeps this fasting lotus-seed yogurt curry mild Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use less yogurt and ghee and choose a small bowl.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-pepper-roasted-lotus-seeds",
+      "name": "Vrat Pepper Roasted Lotus Seeds",
+      "category": "everyday",
+      "meal": "snack",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.lotus-seed",
+          "name": "Lotus seeds, dry-roasted",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, melted for coating",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, ground fresh",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Warm the dry-roasted lotus seeds in a broad pan until their centers become crisp.",
+        "Drizzle over the melted ghee and toss continuously so every seed receives only a light coating.",
+        "Sprinkle in cracked pepper, ground cumin, and salt, then cool the snack in a single layer."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "A light ghee coating carries pepper and cumin across these crisp fasting seeds Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-lotus-seed-saffron-kheer",
+      "name": "Vrat Lotus Seed Saffron Kheer",
+      "category": "everyday",
+      "meal": "dessert",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.lotus-seed",
+          "name": "Lotus seeds, dry-roasted and crushed",
+          "grams": 110
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk, warmed",
+          "grams": 850
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar, finely crushed",
+          "grams": 48
+        },
+        {
+          "dravyaId": "dravya.saffron",
+          "name": "Saffron threads, soaked warm",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom, freshly ground",
+          "grams": 2
+        }
+      ],
+      "steps": [
+        "Crush the roasted lotus seeds into a mixture of coarse crumbs and small pieces.",
+        "Simmer them in the warmed milk until the crumbs thicken the liquid and the larger pieces soften.",
+        "Remove the kheer from fierce heat, dissolve the crushed rock sugar, and add the soaked saffron and cardamom."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Lotus-seed crumbs give this festival kheer body without grain Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: serve a small warm portion with less sweetener.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-cumin-potato-curry",
+      "name": "Vrat Cumin Potato Curry",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potatoes, boiled and broken into chunks",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, chopped with juices",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, cut into fine slivers",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Cilantro leaves, roughly chopped",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 560
+        }
+      ],
+      "steps": [
+        "Toast cumin and ginger slivers in ghee, then reduce the chopped tomatoes until their raw scent fades.",
+        "Add the broken potato chunks and hot water, crush a few pieces into the broth, and simmer until thick.",
+        "Season the fasting curry and scatter chopped cilantro over it after turning off the flame."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Broken potatoes naturally thicken this simple cumin fasting curry Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: replace part of the tomato with pumpkin and reduce ginger. Kapha: choose a small serving and reduce ghee.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-pumpkin-coconut-stew",
+      "name": "Vrat Pumpkin Coconut Stew",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and cut into chunks",
+          "grams": 540
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, ground fresh",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, cut into fine slivers",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, for finishing",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 620
+        }
+      ],
+      "steps": [
+        "Simmer the pumpkin chunks with ginger slivers until they are tender but still hold their corners.",
+        "Grind the coconut with cumin and hot broth, then fold the smooth paste through the pot.",
+        "Season the stew, remove it from direct heat, and finish the surface with a restrained drizzle of coconut oil."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "A mild coconut broth makes pumpkin suitable for a quiet fasting main Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: use a smaller portion and sharpen the seasoning with ginger or black pepper.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-baked-yam-patties",
+      "name": "Vrat Baked Yam Patties",
+      "category": "everyday",
+      "meal": "snack",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.yam",
+          "name": "Yam, steamed and mashed",
+          "grams": 520
+        },
+        {
+          "dravyaId": "dravya.chestnut",
+          "name": "Chestnuts, roasted and milled fine",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Cilantro leaves, finely chopped",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, melted for brushing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Mix the mashed yam with chestnut meal, crushed cumin, chopped cilantro, and salt.",
+        "Shape broad thin patties, arrange them on a warmed tray, and brush the tops sparingly with melted ghee.",
+        "Bake until the lower surfaces brown, turn each patty, and continue until the edges feel firm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chestnut meal gives these festival yam patties structure without grain Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: eat one thin patty and use little ghee.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-baked-plantain-cutlets",
+      "name": "Vrat Baked Green Plantain Cutlets",
+      "category": "everyday",
+      "meal": "snack",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.plantain-green",
+          "name": "Green plantain, steamed and mashed",
+          "grams": 520
+        },
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, dry-popped and crushed",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper, freshly cracked",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, melted for brushing",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Work the mashed plantain with crushed popped amaranth, cumin, pepper, and salt until evenly combined.",
+        "Form small oval cutlets, place them on a greased tray, and brush their exposed sides lightly with ghee.",
+        "Bake until set, turn the cutlets carefully, and finish when both surfaces are dry and golden."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Popped amaranth gives baked plantain cutlets a delicate crust Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: limit the portion and keep the ghee light.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-warm-papaya-pomegranate-plate",
+      "name": "Vrat Warm Papaya Pomegranate Plate",
+      "category": "everyday",
+      "meal": "breakfast",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.papaya",
+          "name": "Papaya, peeled and cut into thick slices",
+          "grams": 520
+        },
+        {
+          "dravyaId": "dravya.pomegranate",
+          "name": "Pomegranate arils, freshly separated",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.lime",
+          "name": "Lime juice, freshly squeezed",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, toasted and crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint leaves, finely sliced",
+          "grams": 12
+        }
+      ],
+      "steps": [
+        "Warm the papaya slices briefly in a covered pan until their chill is gone but their shape remains firm.",
+        "Arrange the softened fruit on plates and scatter the pomegranate arils over the surface.",
+        "Finish with crushed fennel, sliced mint, and a light squeeze of lime immediately before serving."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "sharad"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Serving fruit without dairy keeps this fasting plate simple and traditionally compatible Vata: warm the papaya thoroughly and use little lime. Pitta: omit the lime if the fruit is already tart. Kapha: keep the portion moderate.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-almond-date-laddoo",
+      "name": "Vrat Almond Date Laddoo",
+      "category": "everyday",
+      "meal": "dessert",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Dates, pitted and finely chopped",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, toasted and ground coarse",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.coconut-dried",
+          "name": "Dried coconut, finely shredded",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom, freshly ground",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil, warmed for binding",
+          "grams": 14
+        }
+      ],
+      "steps": [
+        "Warm the chopped dates in a dry pan until they soften into a sticky mass.",
+        "Fold in the coarse almonds, shredded coconut, cardamom, and warmed coconut oil until evenly distributed.",
+        "Cool the mixture just enough to handle, then roll small festival balls and let them firm uncovered."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 2
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Dates bind these dairy-free fasting sweets without added sugar Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: eat only one small ball.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.vrat-taro-lotus-seed-pot",
+      "name": "Vrat Taro Lotus Seed Pot",
+      "category": "everyday",
+      "meal": "lunch",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 30,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.taro",
+          "name": "Taro root, peeled and cut into chunks",
+          "grams": 480
+        },
+        {
+          "dravyaId": "dravya.lotus-seed",
+          "name": "Lotus seeds, dry-roasted and halved",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, cut into fine slivers",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 580
+        }
+      ],
+      "steps": [
+        "Parboil the taro chunks until their surfaces soften, drain them carefully, and leave them intact.",
+        "Toast cumin and ginger slivers in ghee, add the taro, and turn the pieces until their edges take on color.",
+        "Pour in hot water and the roasted lotus-seed halves, simmer until the broth thickens, and season the fasting pot."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "varsha",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ginger and crisp lotus seeds balance the grounding weight of taro Vata: serve it warm and add a little ghee if the meal feels dry. Pitta: keep the sharp spices modest and favor coriander or fennel. Kapha: choose a small portion and use less ghee.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    }
+  ]
+}
