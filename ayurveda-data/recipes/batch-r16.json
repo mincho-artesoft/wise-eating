@@ -1,0 +1,3647 @@
+{
+  "formatVersion": "1.0",
+  "batch": "recipe-batch-r16",
+  "qualityState": "aiDraft",
+  "items": [
+    {
+      "id": "recipe.snack-cumin-roasted-chickpeas",
+      "name": "Cumin Roasted Chickpeas",
+      "category": "international",
+      "meal": "snack",
+      "servings": 6,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas, dried well",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Prepare the cooked chickpeas, dried well and dry the surfaces well.",
+        "Toss with the olive oil, cumin seeds, and rock salt.",
+        "Spread in one layer on a wide tray.",
+        "Roast until hot and lightly crisp, turning midway so the edges color evenly.",
+        "Serve warm in a modest portion."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cumin Roasted Chickpeas is roasted rather than deep-fried and is best served warm. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-snack adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-chili-coriander-chickpeas",
+      "name": "Chili Coriander Roasted Chickpeas",
+      "category": "international",
+      "meal": "snack",
+      "servings": 6,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas, dried well",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.red-chili",
+          "name": "Dried red chili",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Prepare the cooked chickpeas, dried well and coriander seeds and dry the surfaces well.",
+        "Toss with the olive oil, Dried red chili, and rock salt.",
+        "Spread in one layer on a wide tray.",
+        "Roast until hot and lightly crisp, turning midway so the edges color evenly.",
+        "Serve warm in a modest portion."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 2,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chili Coriander Roasted Chickpeas is roasted rather than deep-fried and is best served warm. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-snack adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-fennel-roasted-chickpeas",
+      "name": "Fennel Roasted Chickpeas",
+      "category": "international",
+      "meal": "snack",
+      "servings": 6,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas, dried well",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Prepare the cooked chickpeas, dried well and dry the surfaces well.",
+        "Toss with the olive oil, Fennel seeds, and rock salt.",
+        "Spread in one layer on a wide tray.",
+        "Roast until hot and lightly crisp, turning midway so the edges color evenly.",
+        "Serve warm in a modest portion."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Fennel Roasted Chickpeas is roasted rather than deep-fried and is best served warm. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-snack adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-rosemary-roasted-makhana",
+      "name": "Rosemary Roasted Makhana",
+      "category": "international",
+      "meal": "snack",
+      "servings": 6,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.lotus-seed",
+          "name": "Lotus seeds (makhana)",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rosemary",
+          "name": "Fresh rosemary, minced",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Prepare the lotus seeds (makhana) and dry the surfaces well.",
+        "Toss with the Ghee, Fresh rosemary, minced, and rock salt.",
+        "Spread in one layer on a wide tray.",
+        "Roast until hot and lightly crisp, turning midway so the edges color evenly.",
+        "Serve warm in a modest portion."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Rosemary Roasted Makhana is roasted rather than deep-fried and is best served warm. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-snack adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-cumin-pumpkin-seeds",
+      "name": "Cumin Roasted Pumpkin Seeds",
+      "category": "international",
+      "meal": "snack",
+      "servings": 6,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pumpkin-seed",
+          "name": "Pumpkin seeds",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Prepare the pumpkin seeds and dry the surfaces well.",
+        "Toss with the olive oil, cumin seeds, and rock salt.",
+        "Spread in one layer on a wide tray.",
+        "Roast until hot and lightly crisp, turning midway so the edges color evenly.",
+        "Serve warm in a modest portion."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cumin Roasted Pumpkin Seeds is roasted rather than deep-fried and is best served warm. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-snack adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-peanut-sesame-mix",
+      "name": "Warm Peanut Sesame Snack Mix",
+      "category": "international",
+      "meal": "snack",
+      "servings": 6,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.peanut",
+          "name": "Peanuts",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Prepare the peanuts and sesame seeds and dry the surfaces well.",
+        "Toss with the olive oil, Coriander seeds, and rock salt.",
+        "Spread in one layer on a wide tray.",
+        "Roast until hot and lightly crisp, turning midway so the edges color evenly.",
+        "Serve warm in a modest portion."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Peanut Sesame Snack Mix is roasted rather than deep-fried and is best served warm. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-snack adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-sweet-potato-wedges",
+      "name": "Cumin Sweet Potato Wedges",
+      "category": "international",
+      "meal": "snack",
+      "servings": 6,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, cut into wedges",
+          "grams": 680
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Prepare the sweet potato, cut into wedges and coriander seeds and dry the surfaces well.",
+        "Toss with the olive oil, cumin seeds, and rock salt.",
+        "Spread in one layer on a wide tray.",
+        "Roast until hot and lightly crisp, turning midway so the edges color evenly.",
+        "Serve warm in a modest portion."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cumin Sweet Potato Wedges is roasted rather than deep-fried and is best served warm. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-snack adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-carrot-sesame-fries",
+      "name": "Carrot Sesame Oven Fries",
+      "category": "international",
+      "meal": "snack",
+      "servings": 6,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, cut into batons",
+          "grams": 650
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Prepare the carrots, cut into batons and sesame seeds and dry the surfaces well.",
+        "Toss with the olive oil, cumin seeds, and rock salt.",
+        "Spread in one layer on a wide tray.",
+        "Roast until hot and lightly crisp, turning midway so the edges color evenly.",
+        "Serve warm in a modest portion."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Carrot Sesame Oven Fries is roasted rather than deep-fried and is best served warm. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-snack adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-cauliflower-cumin-bites",
+      "name": "Cauliflower Cumin Bites",
+      "category": "international",
+      "meal": "snack",
+      "servings": 6,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower florets",
+          "grams": 650
+        },
+        {
+          "dravyaId": "dravya.besan",
+          "name": "Chickpea flour",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Prepare the cauliflower florets and chickpea flour and dry the surfaces well.",
+        "Toss with the olive oil, cumin seeds, and rock salt.",
+        "Spread in one layer on a wide tray.",
+        "Roast until hot and lightly crisp, turning midway so the edges color evenly.",
+        "Serve warm in a modest portion."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cauliflower Cumin Bites is roasted rather than deep-fried and is best served warm. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-snack adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-broccoli-almond-bites",
+      "name": "Broccoli Almond Bites",
+      "category": "international",
+      "meal": "snack",
+      "servings": 6,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.broccoli",
+          "name": "Broccoli florets",
+          "grams": 600
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almond meal",
+          "grams": 65
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Prepare the broccoli florets and almond meal and dry the surfaces well.",
+        "Toss with the olive oil, Coriander seeds, and rock salt.",
+        "Spread in one layer on a wide tray.",
+        "Roast until hot and lightly crisp, turning midway so the edges color evenly.",
+        "Serve warm in a modest portion."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Broccoli Almond Bites is roasted rather than deep-fried and is best served warm. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-snack adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-sesame-tofu-cubes",
+      "name": "Sesame Roasted Tofu Cubes",
+      "category": "international",
+      "meal": "snack",
+      "servings": 6,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 520
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 35
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-dry",
+          "name": "Dry ginger",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Prepare the firm tofu, cubed and sesame seeds and dry the surfaces well.",
+        "Toss with the Sesame oil, Dry ginger, and rock salt.",
+        "Spread in one layer on a wide tray.",
+        "Roast until hot and lightly crisp, turning midway so the edges color evenly.",
+        "Serve warm in a modest portion."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sesame Roasted Tofu Cubes is roasted rather than deep-fried and is best served warm. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-snack adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-ginger-tempeh-bites",
+      "name": "Ginger Roasted Tempeh Bites",
+      "category": "international",
+      "meal": "snack",
+      "servings": 6,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.tempeh",
+          "name": "Tempeh, cubed",
+          "grams": 480
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.ginger-dry",
+          "name": "Dry ginger",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Prepare the tempeh, cubed and sesame seeds and dry the surfaces well.",
+        "Toss with the Sesame oil, Dry ginger, and rock salt.",
+        "Spread in one layer on a wide tray.",
+        "Roast until hot and lightly crisp, turning midway so the edges color evenly.",
+        "Serve warm in a modest portion."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ginger Roasted Tempeh Bites is roasted rather than deep-fried and is best served warm. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-snack adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-crisp-black-beans",
+      "name": "Crisp Cumin Black Beans",
+      "category": "international",
+      "meal": "snack",
+      "servings": 6,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.black-beans",
+          "name": "Cooked black beans, dried well",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Prepare the cooked black beans, dried well and coriander seeds and dry the surfaces well.",
+        "Toss with the olive oil, cumin seeds, and rock salt.",
+        "Spread in one layer on a wide tray.",
+        "Roast until hot and lightly crisp, turning midway so the edges color evenly.",
+        "Serve warm in a modest portion."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Crisp Cumin Black Beans is roasted rather than deep-fried and is best served warm. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-snack adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-warm-roasted-corn",
+      "name": "Warm Roasted Corn Kernels",
+      "category": "international",
+      "meal": "snack",
+      "servings": 6,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.corn",
+          "name": "Corn kernels, cooked and dried",
+          "grams": 520
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro, chopped",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Prepare the corn kernels, cooked and dried and fresh cilantro, chopped and dry the surfaces well.",
+        "Toss with the olive oil, Black pepper, and rock salt.",
+        "Spread in one layer on a wide tray.",
+        "Roast until hot and lightly crisp, turning midway so the edges color evenly.",
+        "Serve warm in a modest portion."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Roasted Corn Kernels is roasted rather than deep-fried and is best served warm. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-snack adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-roasted-green-peas",
+      "name": "Roasted Green Pea Snack",
+      "category": "international",
+      "meal": "snack",
+      "servings": 6,
+      "prepMinutes": 12,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, cooked and dried",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        }
+      ],
+      "steps": [
+        "Prepare the green peas, cooked and dried and fennel seeds and dry the surfaces well.",
+        "Toss with the olive oil, cumin seeds, and rock salt.",
+        "Spread in one layer on a wide tray.",
+        "Roast until hot and lightly crisp, turning midway so the edges color evenly.",
+        "Serve warm in a modest portion."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Roasted Green Pea Snack is roasted rather than deep-fried and is best served warm. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international roasted-snack adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-date-almond-energy-balls",
+      "name": "Date Almond Energy Balls",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 18,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.coconut-dried",
+          "name": "Dried coconut",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the almonds and dried coconut gently, then cool.",
+        "Grind the toasted ingredients to a coarse meal.",
+        "Work in the soft dates, ghee, and cardamom until the mixture holds when pressed.",
+        "Shape into 12 small pieces with clean hands.",
+        "Rest until set and serve one piece per portion."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Date Almond Energy Balls is a compact sweet intended as one small piece. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international no-egg confection adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-fig-walnut-energy-balls",
+      "name": "Fig Walnut Energy Balls",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 18,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.walnut",
+          "name": "Walnuts",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.dried-fig",
+          "name": "Dried figs, chopped",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the walnuts and dried figs, chopped gently, then cool.",
+        "Grind the toasted ingredients to a coarse meal.",
+        "Work in the soft dates, ghee, and cardamom until the mixture holds when pressed.",
+        "Shape into 12 small pieces with clean hands.",
+        "Rest until set and serve one piece per portion."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Fig Walnut Energy Balls is a compact sweet intended as one small piece. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international no-egg confection adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-apricot-pistachio-energy-balls",
+      "name": "Apricot Pistachio Energy Balls",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 18,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pistachio",
+          "name": "Pistachios",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.dried-apricot",
+          "name": "Dried apricots, chopped",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the pistachios and dried apricots, chopped gently, then cool.",
+        "Grind the toasted ingredients to a coarse meal.",
+        "Work in the soft dates, ghee, and cardamom until the mixture holds when pressed.",
+        "Shape into 12 small pieces with clean hands.",
+        "Rest until set and serve one piece per portion."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Apricot Pistachio Energy Balls is a compact sweet intended as one small piece. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international no-egg confection adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-prune-sesame-energy-balls",
+      "name": "Prune Sesame Energy Balls",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 18,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.prunes",
+          "name": "Prunes, chopped",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the sesame seeds and prunes, chopped gently, then cool.",
+        "Grind the toasted ingredients to a coarse meal.",
+        "Work in the soft dates, ghee, and cardamom until the mixture holds when pressed.",
+        "Shape into 12 small pieces with clean hands.",
+        "Rest until set and serve one piece per portion."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Prune Sesame Energy Balls is a compact sweet intended as one small piece. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international no-egg confection adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-raisin-peanut-energy-balls",
+      "name": "Raisin Peanut Energy Balls",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 18,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.peanut",
+          "name": "Peanuts",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.raisins",
+          "name": "Raisins",
+          "grams": 110
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the peanuts and raisins gently, then cool.",
+        "Grind the toasted ingredients to a coarse meal.",
+        "Work in the soft dates, ghee, and cardamom until the mixture holds when pressed.",
+        "Shape into 12 small pieces with clean hands.",
+        "Rest until set and serve one piece per portion."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Raisin Peanut Energy Balls is a compact sweet intended as one small piece. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international no-egg confection adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-oat-date-energy-balls",
+      "name": "Oat Date Energy Balls",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 18,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the rolled oats and almonds gently, then cool.",
+        "Grind the toasted ingredients to a coarse meal.",
+        "Work in the soft dates, ghee, and cardamom until the mixture holds when pressed.",
+        "Shape into 12 small pieces with clean hands.",
+        "Rest until set and serve one piece per portion."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Oat Date Energy Balls is a compact sweet intended as one small piece. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international no-egg confection adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-amaranth-jaggery-bites",
+      "name": "Amaranth Jaggery Snack Bites",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 18,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Popped amaranth",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.jaggery",
+          "name": "Jaggery",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the popped amaranth and sesame seeds gently, then cool.",
+        "Grind the toasted ingredients to a coarse meal.",
+        "Work in the jaggery, ghee, and cardamom until the mixture holds when pressed.",
+        "Shape into 12 small pieces with clean hands.",
+        "Rest until set and serve one piece per portion."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Amaranth Jaggery Snack Bites is a compact sweet intended as one small piece. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international no-egg confection adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-coconut-date-bites",
+      "name": "Coconut Date Snack Bites",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 18,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.coconut-dried",
+          "name": "Dried coconut",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds",
+          "grams": 70
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the dried coconut and almonds gently, then cool.",
+        "Grind the toasted ingredients to a coarse meal.",
+        "Work in the soft dates, ghee, and cardamom until the mixture holds when pressed.",
+        "Shape into 12 small pieces with clean hands.",
+        "Rest until set and serve one piece per portion."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Coconut Date Snack Bites is a compact sweet intended as one small piece. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international no-egg confection adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-pumpkin-seed-date-bites",
+      "name": "Pumpkin Seed Date Bites",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 18,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pumpkin-seed",
+          "name": "Pumpkin seeds",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.sunflower-seed",
+          "name": "Sunflower seeds",
+          "grams": 60
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the pumpkin seeds and sunflower seeds gently, then cool.",
+        "Grind the toasted ingredients to a coarse meal.",
+        "Work in the soft dates, ghee, and cardamom until the mixture holds when pressed.",
+        "Shape into 12 small pieces with clean hands.",
+        "Rest until set and serve one piece per portion."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pumpkin Seed Date Bites is a compact sweet intended as one small piece. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international no-egg confection adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-sunflower-raisin-bites",
+      "name": "Sunflower Raisin Snack Bites",
+      "category": "international",
+      "meal": "dessert",
+      "servings": 12,
+      "prepMinutes": 18,
+      "cookMinutes": 12,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.sunflower-seed",
+          "name": "Sunflower seeds",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.raisins",
+          "name": "Raisins",
+          "grams": 110
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Toast the sunflower seeds and raisins gently, then cool.",
+        "Grind the toasted ingredients to a coarse meal.",
+        "Work in the soft dates, ghee, and cardamom until the mixture holds when pressed.",
+        "Shape into 12 small pieces with clean hands.",
+        "Rest until set and serve one piece per portion."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sunflower Raisin Snack Bites is a compact sweet intended as one small piece. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international no-egg confection adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-cumin-chickpea-dip",
+      "name": "Cumin Chickpea Dip",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 15,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds, ground",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, toasted",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cook or warm the cooked chickpeas until fully tender, then let it cool from hot to warm.",
+        "Prepare the sesame seeds, ground and fresh parsley.",
+        "Blend the base with the olive oil, cumin, rock salt, and enough water for a spoonable texture.",
+        "Add the lemon juice and remaining ingredients and pulse until combined.",
+        "Serve a small spoonful at room temperature with warm bread or vegetables."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cumin Chickpea Dip is a concentrated dip intended as a small accompaniment. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian dip adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-lentil-thyme-dip",
+      "name": "Lentil Thyme Dip",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 15,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-lentil",
+          "name": "Cooked brown lentils",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, toasted",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cook or warm the cooked brown lentils until fully tender, then let it cool from hot to warm.",
+        "Prepare the fresh thyme and fresh parsley.",
+        "Blend the base with the olive oil, cumin, rock salt, and enough water for a spoonable texture.",
+        "Add the lemon juice and remaining ingredients and pulse until combined.",
+        "Serve a small spoonful at room temperature with warm bread or vegetables."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Lentil Thyme Dip is a concentrated dip intended as a small accompaniment. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian dip adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-black-bean-cilantro-dip",
+      "name": "Black Bean Cilantro Dip",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 15,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.black-beans",
+          "name": "Cooked black beans",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.green-chili",
+          "name": "Green chili",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, toasted",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cook or warm the cooked black beans until fully tender, then let it cool from hot to warm.",
+        "Prepare the fresh cilantro and green chili.",
+        "Blend the base with the olive oil, cumin, rock salt, and enough water for a spoonable texture.",
+        "Add the lemon juice and remaining ingredients and pulse until combined.",
+        "Serve a small spoonful at room temperature with warm bread or vegetables."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Black Bean Cilantro Dip is a concentrated dip intended as a small accompaniment. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian dip adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-mung-mint-dip",
+      "name": "Mung Mint Dip",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 15,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Cooked mung beans",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, toasted",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cook or warm the cooked mung beans until fully tender, then let it cool from hot to warm.",
+        "Prepare the fresh mint and fennel seeds.",
+        "Blend the base with the olive oil, cumin, rock salt, and enough water for a spoonable texture.",
+        "Add the lemon juice and remaining ingredients and pulse until combined.",
+        "Serve a small spoonful at room temperature with warm bread or vegetables."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mung Mint Dip is a concentrated dip intended as a small accompaniment. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian dip adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-adzuki-parsley-dip",
+      "name": "Adzuki Parsley Dip",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 15,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.adzuki",
+          "name": "Cooked adzuki beans",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, toasted",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cook or warm the cooked adzuki beans until fully tender, then let it cool from hot to warm.",
+        "Prepare the fresh parsley and coriander seeds.",
+        "Blend the base with the olive oil, cumin, rock salt, and enough water for a spoonable texture.",
+        "Add the lemon juice and remaining ingredients and pulse until combined.",
+        "Serve a small spoonful at room temperature with warm bread or vegetables."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Adzuki Parsley Dip is a concentrated dip intended as a small accompaniment. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian dip adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-beet-walnut-dip",
+      "name": "Beet Walnut Dip",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 15,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Cooked beetroot",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.walnut",
+          "name": "Walnuts",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, toasted",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cook or warm the cooked beetroot until fully tender, then let it cool from hot to warm.",
+        "Prepare the walnuts and fresh dill.",
+        "Blend the base with the olive oil, cumin, rock salt, and enough water for a spoonable texture.",
+        "Add the lemon juice and remaining ingredients and pulse until combined.",
+        "Serve a small spoonful at room temperature with warm bread or vegetables."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Beet Walnut Dip is a concentrated dip intended as a small accompaniment. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian dip adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-carrot-almond-dip",
+      "name": "Carrot Almond Dip",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 15,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, cooked",
+          "grams": 400
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, soaked",
+          "grams": 90
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, toasted",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cook or warm the carrots, cooked until fully tender, then let it cool from hot to warm.",
+        "Prepare the almonds, soaked and fennel seeds.",
+        "Blend the base with the olive oil, cumin, rock salt, and enough water for a spoonable texture.",
+        "Add the lemon juice and remaining ingredients and pulse until combined.",
+        "Serve a small spoonful at room temperature with warm bread or vegetables."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Carrot Almond Dip is a concentrated dip intended as a small accompaniment. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian dip adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-pumpkin-seed-dip",
+      "name": "Pumpkin Seed Herb Dip",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 15,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pumpkin-seed",
+          "name": "Pumpkin seeds, toasted",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 40
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, toasted",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 150
+        }
+      ],
+      "steps": [
+        "Cook or warm the pumpkin seeds, toasted until fully tender, then let it cool from hot to warm.",
+        "Prepare the fresh parsley and coriander seeds.",
+        "Blend the base with the olive oil, cumin, rock salt, and enough water for a spoonable texture.",
+        "Add the lemon juice and remaining ingredients and pulse until combined.",
+        "Serve a small spoonful at room temperature with warm bread or vegetables."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pumpkin Seed Herb Dip is a concentrated dip intended as a small accompaniment. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian dip adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-sweet-potato-sesame-dip",
+      "name": "Sweet Potato Sesame Dip",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 15,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, cooked",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds, ground",
+          "grams": 65
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, toasted",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cook or warm the sweet potato, cooked until fully tender, then let it cool from hot to warm.",
+        "Prepare the sesame seeds, ground and coriander seeds.",
+        "Blend the base with the olive oil, cumin, rock salt, and enough water for a spoonable texture.",
+        "Add the lemon juice and remaining ingredients and pulse until combined.",
+        "Serve a small spoonful at room temperature with warm bread or vegetables."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sweet Potato Sesame Dip is a concentrated dip intended as a small accompaniment. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian dip adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-cauliflower-herb-dip",
+      "name": "Cauliflower Herb Dip",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 15,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower, cooked",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, soaked",
+          "grams": 65
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, toasted",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cook or warm the cauliflower, cooked until fully tender, then let it cool from hot to warm.",
+        "Prepare the fresh parsley and almonds, soaked.",
+        "Blend the base with the olive oil, cumin, rock salt, and enough water for a spoonable texture.",
+        "Add the lemon juice and remaining ingredients and pulse until combined.",
+        "Serve a small spoonful at room temperature with warm bread or vegetables."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cauliflower Herb Dip is a concentrated dip intended as a small accompaniment. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian dip adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-broccoli-almond-dip",
+      "name": "Broccoli Almond Dip",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 15,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.broccoli",
+          "name": "Broccoli, cooked",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, soaked",
+          "grams": 75
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, toasted",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cook or warm the broccoli, cooked until fully tender, then let it cool from hot to warm.",
+        "Prepare the almonds, soaked and fresh dill.",
+        "Blend the base with the olive oil, cumin, rock salt, and enough water for a spoonable texture.",
+        "Add the lemon juice and remaining ingredients and pulse until combined.",
+        "Serve a small spoonful at room temperature with warm bread or vegetables."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Broccoli Almond Dip is a concentrated dip intended as a small accompaniment. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian dip adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-zucchini-sesame-dip",
+      "name": "Zucchini Sesame Dip",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 15,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, cooked",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds, ground",
+          "grams": 65
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, toasted",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cook or warm the zucchini, cooked until fully tender, then let it cool from hot to warm.",
+        "Prepare the sesame seeds, ground and fresh mint.",
+        "Blend the base with the olive oil, cumin, rock salt, and enough water for a spoonable texture.",
+        "Add the lemon juice and remaining ingredients and pulse until combined.",
+        "Serve a small spoonful at room temperature with warm bread or vegetables."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Zucchini Sesame Dip is a concentrated dip intended as a small accompaniment. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian dip adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-green-pea-mint-dip",
+      "name": "Green Pea Mint Snack Dip",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 15,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, cooked",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, soaked",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, toasted",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cook or warm the green peas, cooked until fully tender, then let it cool from hot to warm.",
+        "Prepare the fresh mint and almonds, soaked.",
+        "Blend the base with the olive oil, cumin, rock salt, and enough water for a spoonable texture.",
+        "Add the lemon juice and remaining ingredients and pulse until combined.",
+        "Serve a small spoonful at room temperature with warm bread or vegetables."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Green Pea Mint Snack Dip is a concentrated dip intended as a small accompaniment. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian dip adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-tofu-herb-dip",
+      "name": "Warm Tofu Herb Dip",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 15,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu",
+          "grams": 400
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, toasted",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cook or warm the firm tofu until fully tender, then let it cool from hot to warm.",
+        "Prepare the fresh parsley and fresh dill.",
+        "Blend the base with the olive oil, cumin, rock salt, and enough water for a spoonable texture.",
+        "Add the lemon juice and remaining ingredients and pulse until combined.",
+        "Serve a small spoonful at room temperature with warm bread or vegetables."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Warm Tofu Herb Dip is a concentrated dip intended as a small accompaniment. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian dip adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-mushroom-walnut-dip",
+      "name": "Mushroom Walnut Dip",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 15,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-mushroom",
+          "name": "Mushrooms, cooked",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.walnut",
+          "name": "Walnuts",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.lemon",
+          "name": "Fresh lemon juice",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, toasted",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 70
+        }
+      ],
+      "steps": [
+        "Cook or warm the mushrooms, cooked until fully tender, then let it cool from hot to warm.",
+        "Prepare the walnuts and fresh thyme.",
+        "Blend the base with the olive oil, cumin, rock salt, and enough water for a spoonable texture.",
+        "Add the lemon juice and remaining ingredients and pulse until combined.",
+        "Serve a small spoonful at room temperature with warm bread or vegetables."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mushroom Walnut Dip is a concentrated dip intended as a small accompaniment. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian dip adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-whole-wheat-sesame-bread",
+      "name": "Whole-Wheat Sesame Side Bread",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 30,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 36
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 310
+        }
+      ],
+      "steps": [
+        "Combine the whole-wheat flour, rock salt, and sesame seeds.",
+        "Add the water and half the olive oil and knead until the dough is smooth; cover and rest for 20 minutes.",
+        "Divide and shape the dough according to the bread style, keeping the pieces even.",
+        "Brush with the remaining olive oil and bake or griddle until cooked through and lightly browned.",
+        "Wrap briefly in a clean cloth and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Whole-Wheat Sesame Side Bread is a simple freshly cooked bread with measured oil. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international flatbread adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-oat-herb-flatbread",
+      "name": "Oat Herb Flatbread",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 30,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Oat flour",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 340
+        }
+      ],
+      "steps": [
+        "Combine the oat flour, rock salt, and whole-wheat flour, fresh parsley.",
+        "Add the water and half the olive oil and knead until the dough is smooth; cover and rest for 20 minutes.",
+        "Divide and shape the dough according to the bread style, keeping the pieces even.",
+        "Brush with the remaining olive oil and bake or griddle until cooked through and lightly browned.",
+        "Wrap briefly in a clean cloth and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Oat Herb Flatbread is a simple freshly cooked bread with measured oil. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international flatbread adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-barley-thyme-flatbread",
+      "name": "Barley Thyme Flatbread",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 30,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Barley flour",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 340
+        }
+      ],
+      "steps": [
+        "Combine the barley flour, rock salt, and whole-wheat flour, fresh thyme.",
+        "Add the water and half the olive oil and knead until the dough is smooth; cover and rest for 20 minutes.",
+        "Divide and shape the dough according to the bread style, keeping the pieces even.",
+        "Brush with the remaining olive oil and bake or griddle until cooked through and lightly browned.",
+        "Wrap briefly in a clean cloth and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Barley Thyme Flatbread is a simple freshly cooked bread with measured oil. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international flatbread adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-buckwheat-dill-flatbread",
+      "name": "Buckwheat Dill Flatbread",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 30,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Buckwheat flour",
+          "grams": 310
+        },
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 110
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 340
+        }
+      ],
+      "steps": [
+        "Combine the buckwheat flour, rock salt, and whole-wheat flour, fresh dill.",
+        "Add the water and half the olive oil and knead until the dough is smooth; cover and rest for 20 minutes.",
+        "Divide and shape the dough according to the bread style, keeping the pieces even.",
+        "Brush with the remaining olive oil and bake or griddle until cooked through and lightly browned.",
+        "Wrap briefly in a clean cloth and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Buckwheat Dill Flatbread is a simple freshly cooked bread with measured oil. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international flatbread adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-corn-cilantro-flatbread",
+      "name": "Corn Cilantro Side Bread",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 30,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.corn",
+          "name": "Fine cornmeal",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.cilantro",
+          "name": "Fresh cilantro",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 360
+        }
+      ],
+      "steps": [
+        "Combine the fine cornmeal, rock salt, and whole-wheat flour, fresh cilantro.",
+        "Add the water and half the olive oil and knead until the dough is smooth; cover and rest for 20 minutes.",
+        "Divide and shape the dough according to the bread style, keeping the pieces even.",
+        "Brush with the remaining olive oil and bake or griddle until cooked through and lightly browned.",
+        "Wrap briefly in a clean cloth and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Corn Cilantro Side Bread is a simple freshly cooked bread with measured oil. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international flatbread adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-ragi-sesame-flatbread",
+      "name": "Ragi Sesame Flatbread",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 30,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.ragi",
+          "name": "Finger millet flour",
+          "grams": 310
+        },
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds",
+          "grams": 32
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 350
+        }
+      ],
+      "steps": [
+        "Combine the finger millet flour, rock salt, and whole-wheat flour, sesame seeds.",
+        "Add the water and half the olive oil and knead until the dough is smooth; cover and rest for 20 minutes.",
+        "Divide and shape the dough according to the bread style, keeping the pieces even.",
+        "Brush with the remaining olive oil and bake or griddle until cooked through and lightly browned.",
+        "Wrap briefly in a clean cloth and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ragi Sesame Flatbread is a simple freshly cooked bread with measured oil. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international flatbread adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-quinoa-parsley-flatbread",
+      "name": "Quinoa Parsley Flatbread",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 30,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa flour",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 340
+        }
+      ],
+      "steps": [
+        "Combine the quinoa flour, rock salt, and whole-wheat flour, fresh parsley.",
+        "Add the water and half the olive oil and knead until the dough is smooth; cover and rest for 20 minutes.",
+        "Divide and shape the dough according to the bread style, keeping the pieces even.",
+        "Brush with the remaining olive oil and bake or griddle until cooked through and lightly browned.",
+        "Wrap briefly in a clean cloth and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Quinoa Parsley Flatbread is a simple freshly cooked bread with measured oil. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international flatbread adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-amaranth-herb-flatbread",
+      "name": "Amaranth Herb Flatbread",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 30,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth flour",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 340
+        }
+      ],
+      "steps": [
+        "Combine the amaranth flour, rock salt, and whole-wheat flour, dried oregano.",
+        "Add the water and half the olive oil and knead until the dough is smooth; cover and rest for 20 minutes.",
+        "Divide and shape the dough according to the bread style, keeping the pieces even.",
+        "Brush with the remaining olive oil and bake or griddle until cooked through and lightly browned.",
+        "Wrap briefly in a clean cloth and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Amaranth Herb Flatbread is a simple freshly cooked bread with measured oil. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international flatbread adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-chickpea-cumin-flatbread",
+      "name": "Chickpea Cumin Flatbread",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 30,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.besan",
+          "name": "Chickpea flour",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 130
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 340
+        }
+      ],
+      "steps": [
+        "Combine the chickpea flour, rock salt, and whole-wheat flour, cumin seeds.",
+        "Add the water and half the olive oil and knead until the dough is smooth; cover and rest for 20 minutes.",
+        "Divide and shape the dough according to the bread style, keeping the pieces even.",
+        "Brush with the remaining olive oil and bake or griddle until cooked through and lightly browned.",
+        "Wrap briefly in a clean cloth and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chickpea Cumin Flatbread is a simple freshly cooked bread with measured oil. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international flatbread adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.snack-sweet-potato-wheat-flatbread",
+      "name": "Sweet Potato Wheat Flatbread",
+      "category": "international",
+      "meal": "snack",
+      "servings": 8,
+      "prepMinutes": 30,
+      "cookMinutes": 24,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.whole-wheat",
+          "name": "Whole-wheat flour",
+          "grams": 350
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, cooked and mashed",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 24
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 250
+        }
+      ],
+      "steps": [
+        "Combine the whole-wheat flour, rock salt, and sweet potato, cooked and mashed, coriander seeds.",
+        "Add the water and half the olive oil and knead until the dough is smooth; cover and rest for 20 minutes.",
+        "Divide and shape the dough according to the bread style, keeping the pieces even.",
+        "Brush with the remaining olive oil and bake or griddle until cooked through and lightly browned.",
+        "Wrap briefly in a clean cloth and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sweet Potato Wheat Flatbread is a simple freshly cooked bread with measured oil. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international flatbread adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    }
+  ]
+}
