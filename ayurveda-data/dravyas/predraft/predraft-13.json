@@ -1,0 +1,691 @@
+{
+  "predraftVersion": "1.0",
+  "batch": "predraft-13",
+  "items": [
+    {
+      "id": "dravya.sponge-gourd",
+      "name": "Sponge gourd (gilki)",
+      "sanskrit": "Rajakoshataki",
+      "aliases": [
+        "gilki"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: sponge gourd; rajakoshataki."
+    },
+    {
+      "id": "dravya.snake-gourd",
+      "name": "Snake gourd",
+      "sanskrit": "Patola (chichinda)",
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: snake gourd; patola."
+    },
+    {
+      "id": "dravya.pointed-gourd",
+      "name": "Pointed gourd (parwal)",
+      "sanskrit": "Patola",
+      "aliases": [
+        "parwal"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          -1
+        ],
+        "virya": "heating",
+        "note": "classical tridoshic; praised for convalescence"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: pointed gourd; patola."
+    },
+    {
+      "id": "dravya.ivy-gourd",
+      "name": "Ivy gourd (tindora)",
+      "sanskrit": "Bimbi",
+      "aliases": [
+        "tindora"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: ivy gourd; bimbi."
+    },
+    {
+      "id": "dravya.tinda",
+      "name": "Round gourd (tinda)",
+      "sanskrit": null,
+      "aliases": [
+        "tinda"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: round gourd; tinda."
+    },
+    {
+      "id": "dravya.pumpkin-red",
+      "name": "Red pumpkin (kaddu)",
+      "sanskrit": "Kushmandi",
+      "aliases": [
+        "kaddu"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: red pumpkin; kushmandi; pumpkin red."
+    },
+    {
+      "id": "dravya.summer-squash",
+      "name": "Summer squash",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 4201,
+          "name": "Summer squash, green, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.long-cucumber",
+      "name": "Long cucumber (kakri)",
+      "sanskrit": "Ervaru",
+      "aliases": [
+        "kakri"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          -2,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: long cucumber; ervaru."
+    },
+    {
+      "id": "dravya.spine-gourd",
+      "name": "Spine gourd (kantola)",
+      "sanskrit": "Karkotaka",
+      "aliases": [
+        "kantola"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -2
+        ],
+        "virya": "heating",
+        "note": "monsoon delicacy"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: spine gourd; karkotaka."
+    },
+    {
+      "id": "dravya.purple-yam",
+      "name": "Purple yam (kand)",
+      "sanskrit": "Alukam",
+      "aliases": [
+        "kand"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: purple yam; alukam."
+    },
+    {
+      "id": "dravya.elephant-foot-yam",
+      "name": "Elephant foot yam (suran)",
+      "sanskrit": "Surana",
+      "aliases": [
+        "suran"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -2
+        ],
+        "virya": "heating",
+        "note": "classical for digestive strength; itch caution raw"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: elephant foot yam; surana."
+    },
+    {
+      "id": "dravya.white-radish",
+      "name": "White radish (mooli)",
+      "sanskrit": "Mulaka",
+      "aliases": [
+        "mooli"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -2
+        ],
+        "virya": "heating",
+        "note": "young pacifies, mature aggravates — texts note stage"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: white radish; mulaka."
+    },
+    {
+      "id": "dravya.red-radish",
+      "name": "Red radish",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: red radish."
+    },
+    {
+      "id": "dravya.red-onion",
+      "name": "Red onion",
+      "sanskrit": "Palandu",
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          -1,
+          2,
+          -1
+        ],
+        "virya": "heating",
+        "note": "rajasic; cooked milder"
+      },
+      "usda": [
+        {
+          "fdcId": 7387,
+          "name": "Onions, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.white-onion",
+      "name": "White onion",
+      "sanskrit": "Shveta Palandu",
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 7387,
+          "name": "Onions, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.lotus-root",
+      "name": "Lotus root (kamal kakdi)",
+      "sanskrit": "Bisa",
+      "aliases": [
+        "kamal kakdi"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 6706,
+          "name": "Lotus root, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.fresh-water-chestnut",
+      "name": "Fresh water chestnut (singhara)",
+      "sanskrit": "Shringataka",
+      "aliases": [
+        "singhara"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: fresh water chestnut; shringataka."
+    },
+    {
+      "id": "dravya.long-brinjal",
+      "name": "Brinjal (long purple)",
+      "sanskrit": "Vartaka",
+      "aliases": [
+        "long purple"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 6684,
+          "name": "Eggplant, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.small-brinjal",
+      "name": "Brinjal (small round)",
+      "sanskrit": "Vrintaka",
+      "aliases": [
+        "small round"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 6684,
+          "name": "Eggplant, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.green-tomato",
+      "name": "Green tomato",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          2,
+          0
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 7773,
+          "name": "Tomatoes, green, raw",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.raw-banana",
+      "name": "Raw banana (plantain)",
+      "sanskrit": "Kadali (apakva)",
+      "aliases": [
+        "plantain"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          1,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 5749,
+          "name": "Plantains, green, raw",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.raw-papaya",
+      "name": "Raw papaya",
+      "sanskrit": "Erandakarkati (apakva)",
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          1,
+          -2
+        ],
+        "virya": "heating",
+        "note": "avoid in pregnancy — classical and modern concord"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: raw papaya; erandakarkati."
+    },
+    {
+      "id": "dravya.raw-jackfruit",
+      "name": "Raw jackfruit (kathal)",
+      "sanskrit": "Panasa (apakva)",
+      "aliases": [
+        "kathal"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          1,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 11334,
+          "name": "Jackfruit, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.french-bean",
+      "name": "French bean",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "neutral"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: french bean."
+    },
+    {
+      "id": "dravya.cluster-bean",
+      "name": "Cluster bean (gawar)",
+      "sanskrit": "Gorakshaphalini",
+      "aliases": [
+        "gawar"
+      ],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          1,
+          0,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: cluster bean; gorakshaphalini."
+    }
+  ]
+}
