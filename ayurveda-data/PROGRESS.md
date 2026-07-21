@@ -66,9 +66,10 @@ Current status: **714 dravyas, 1,500 recipes — all checks pass.**
 
 1. **D3 crosswalk** — USDA fdcId → dravya mapping (name-match script + review file).
 2. **D4 category rules** — estimated-tier dosha values for unmatched processed foods.
-3. **D6 Swift** — `AyurvedaProfile` SwiftData model (additive), recipes seeded as
-   `FoodItem(isRecipe)` + `IngredientLink`, one-time seeder from bundled
-   `ayurveda_seed.json.gz`. Design by director, implementation dispatchable to Codex.
+3. **D6 Swift** — DESIGNED & DISPATCHABLE: `DESIGN-D6.md` (director design) +
+   `TASK-D6.md` (Codex packet). `AyurvedaProfile` + `AyurvedaLink` models (additive),
+   recipes as `FoodItem(isRecipe)` + `IngredientLink`, one-time versioned seeder from
+   bundled `ayurveda_seed.json.gz`. Say "verify D6" when Codex reports.
 4. **Expert review** — work through aiDraft content, resolve reviewNotes, promote
    to reviewed; optional batch-31 top-up to 750.
 
