@@ -1,0 +1,3883 @@
+{
+  "formatVersion": "1.0",
+  "batch": "recipe-batch-r26",
+  "qualityState": "aiDraft",
+  "items": [
+    {
+      "id": "recipe.weeknight-carrot-mung-rice",
+      "name": "Weeknight Carrot Mung Rice",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, peeled and finely diced",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Measure 850 ml (about 3 1/2 cups) water for Weeknight Carrot Mung Rice; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Toast cumin in ghee and coat the rice and mung. Give the spices about 30 seconds before adding the larger pieces, then continue over medium-low heat for 2–3 minutes, moving the pan often, until the raw aroma is gone.",
+        "Add carrot and hot water, then cover the boiling pot. Bring the pot to a brisk simmer over medium-high heat for 4–6 minutes, then cover as bubbles reach the center and continue with the timed cook below.",
+        "Cook until soft, season, and rest the dinner briefly. Maintain low heat for 16–18 minutes, stirring every 5 minutes, until a thin knife slides through the largest piece without resistance.",
+        "At minute 14, scrape the base with a flat spoon and rotate the pot; add 30 ml hot water only if the grains begin to catch.",
+        "Fluff or stir Weeknight Carrot Mung Rice once after its off-heat rest, check the final consistency, and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Carrot Mung Rice is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-pumpkin-masoor-rice",
+      "name": "Weeknight Pumpkin Masoor Rice",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 205
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and finely diced",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Heat 850 ml (about 3 1/2 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Stir the rice and red lentils through warm ghee and coriander. Keep the pan over steady low heat for 2–3 minutes after the final addition, folding from the bottom so the main pieces remain intact.",
+        "Tip in the pumpkin and hot water and lower the heat. Work over moderate heat for 11–13 minutes; continue once a thin knife slides through the largest piece without resistance.",
+        "Fold the softened cubes through the grains and season. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Weeknight Pumpkin Masoor Rice 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Pumpkin Masoor Rice is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-zucchini-mung-quinoa",
+      "name": "Weeknight Zucchini Mung Quinoa",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, cut into small cubes",
+          "grams": 290
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for the pot",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "For Weeknight Zucchini Mung Quinoa, heat 850 ml (about 3 1/2 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Bring the mung to a head start in the covered pot. Work over moderate heat for 8–10 minutes; continue once a grain pressed between two fingers has no chalky center.",
+        "Add quinoa, zucchini, fennel, and enough hot water. Keep the pan over medium-low heat for 2–3 minutes after the final addition, folding from the bottom so the main pieces remain intact.",
+        "Finish when the grains open, then season with olive oil. Leave the pan off the flame for 5 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "For Weeknight Zucchini Mung Quinoa, at minute 14, scrape the base with a flat spoon and rotate the pot; add 30 ml hot water only if the grains begin to catch.",
+        "Rest Weeknight Zucchini Mung Quinoa 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Zucchini Mung Quinoa is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-chayote-masoor-quinoa",
+      "name": "Weeknight Chayote Masoor Quinoa",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.chayote",
+          "name": "Chayote, peeled and finely diced",
+          "grams": 290
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for the pot",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "For Weeknight Chayote Masoor Quinoa, heat 850 ml (about 3 1/2 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Soften the chayote briefly in olive oil and coriander. Keep this stage to 7–9 minutes over steady low heat and stop when a thin knife slides through the largest piece without resistance.",
+        "Pour in quinoa, red lentils, and hot water together. Take 6–8 minutes over moderate heat, using the stated texture and aroma as the final guide.",
+        "Simmer under a lid, then season the tender one-pot. Keep the pot covered over medium-low heat for 17–19 minutes; check once at the midpoint and continue until a grain pressed between two fingers has no chalky center.",
+        "At minute 18, scrape the base with a flat spoon and rotate the pot; add 30 ml hot water only if the grains begin to catch.",
+        "Rest Weeknight Chayote Masoor Quinoa 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Chayote Masoor Quinoa is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-bottle-gourd-mung-rice",
+      "name": "Weeknight Bottle Gourd Mung Rice",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 205
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.bottle-gourd",
+          "name": "Bottle gourd, peeled and finely diced",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "For Weeknight Bottle Gourd Mung Rice, heat 850 ml (about 3 1/2 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Bloom cumin in ghee and stir in the rinsed grains. Give the spices about 30 seconds before adding the larger pieces, then continue over steady low heat for 3–4 minutes, moving the pan often, until the raw aroma is gone.",
+        "Cover them with bottle-gourd dice and hot water. Bring the pot to a brisk simmer over medium-high heat for 5–7 minutes, then cover as bubbles reach the center and continue with the timed cook below.",
+        "Cook until translucent and soft, then add salt. Maintain medium-low heat for 16–18 minutes, stirring every 3 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Rest Weeknight Bottle Gourd Mung Rice 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Bottle Gourd Mung Rice is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-cabbage-masoor-rice",
+      "name": "Weeknight Cabbage Masoor Rice",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 205
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, thinly shredded",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Set aside 850 ml (about 3 1/2 cups) freshly boiled water for Weeknight Cabbage Masoor Rice, reserving about 60 ml to correct the final consistency.",
+        "Warm grated ginger in ghee and add the rice and lentils. Give the spices about 30 seconds before adding the larger pieces, then continue over moderate heat for 2–3 minutes, moving the pan often, until the raw aroma is gone.",
+        "Heap the cabbage over them, pour in water, and cover. Keep the pot covered over medium-low heat for 5–7 minutes; check once at the midpoint and continue until the leaves wilt but still retain their color.",
+        "Fold the softened ribbons through the pot and season. Leave the pan off the flame for 5 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "For Weeknight Cabbage Masoor Rice, at minute 14, scrape the base with a flat spoon and rotate the pot; add 30 ml hot water only if the grains begin to catch.",
+        "Rest Weeknight Cabbage Masoor Rice 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Cabbage Masoor Rice is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-spinach-mung-rice",
+      "name": "Weeknight Spinach Mung Rice",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 205
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach leaves, washed and chopped",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Measure 850 ml (about 3 1/2 cups) water for Weeknight Spinach Mung Rice; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Cook the rice and mung with crushed fennel until nearly tender. Maintain moderate heat for 10–12 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Press the spinach into the remaining steam and close the lid. Aim for an even 2–3 mm thickness; repair cracks before the piece reaches the hot surface.",
+        "Stir the wilted greens through, season, and serve. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Weeknight Spinach Mung Rice 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Spinach Mung Rice is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-broccoli-masoor-quinoa",
+      "name": "Weeknight Broccoli Masoor Quinoa",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.broccoli",
+          "name": "Broccoli, separated into small florets",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for the pot",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Bring 850 ml (about 3 1/2 cups) water to a boil in a separate kettle and hold it hot, covered, so Weeknight Broccoli Masoor Quinoa never loses its simmer.",
+        "Simmer quinoa and red lentils until their centers soften. Maintain steady low heat for 17–19 minutes, stirring every 5 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Set the broccoli over the grains and cover for steaming. Keep the pot covered over moderate heat for 5–7 minutes; check once at the midpoint and continue until a knife tip enters the thickest stem with only slight resistance.",
+        "Fold in coriander, olive oil, and salt at the end. Mix for 1 minute with the heat off, stopping when the seasonings are even and a pressed spoonful holds together without crumbling.",
+        "For Weeknight Broccoli Masoor Quinoa, at minute 18, scrape the base with a flat spoon and rotate the pot; add 30 ml hot water only if the grains begin to catch.",
+        "Rest Weeknight Broccoli Masoor Quinoa 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Broccoli Masoor Quinoa is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-cauliflower-mung-millet",
+      "name": "Weeknight Cauliflower Mung Millet",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet, soaked and drained",
+          "grams": 205
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower, separated into small florets",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Measure 850 ml (about 3 1/2 cups) water for Weeknight Cauliflower Mung Millet; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Cover the proso millet with at least three times its volume of cool water and soak for 20 minutes; drain for 2 minutes before the first heated step.",
+        "Toast cumin in ghee before adding millet and mung. Give the spices about 30 seconds before adding the larger pieces, then continue over moderate heat for 4–5 minutes, moving the pan often, until the raw aroma is gone.",
+        "Arrange cauliflower over the grains and pour in hot water. Keep the layer loose and even, with no pooled liquid, so every portion receives the same balance.",
+        "Cook under a lid, then season without crushing the florets. Keep the pot covered over moderate heat for 17–19 minutes; check once at the midpoint and continue until a grain pressed between two fingers has no chalky center.",
+        "Rest Weeknight Cauliflower Mung Millet 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Cauliflower Mung Millet is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-green-bean-masoor-rice",
+      "name": "Weeknight Green Bean Masoor Rice",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, cut into small diamonds",
+          "grams": 290
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Prepare 850 ml (about 3 1/2 cups) hot water before starting Weeknight Green Bean Masoor Rice; keep one small ladle in reserve in case the base tightens early.",
+        "Coat the rice and lentils with coriander in warm ghee. Keep the pot over medium-low heat for 2–3 minutes, stirring continuously, until the grains look glossy and smell lightly nutty.",
+        "Add the bean diamonds and hot water and cover promptly. Keep the pot covered over gentle medium heat for 16–18 minutes; check once at the midpoint and continue until a grain pressed between two fingers has no chalky center.",
+        "Rest the tender pot, fluff it gently, and season. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Fluff or stir Weeknight Green Bean Masoor Rice once after its off-heat rest, check the final consistency, and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Green Bean Masoor Rice is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-asparagus-mung-quinoa",
+      "name": "Weeknight Asparagus Mung Quinoa",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.asparagus",
+          "name": "Asparagus, trimmed and cut into short pieces",
+          "grams": 290
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for the pot",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "For Weeknight Asparagus Mung Quinoa, heat 850 ml (about 3 1/2 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Give the mung a brief simmer before adding quinoa. Maintain medium-low heat for 13–15 minutes, stirring every 5 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Scatter asparagus and fennel across the bubbling grains. Keep the layer loose and even, with no pooled liquid, so every portion receives the same balance.",
+        "Cover until tender, then finish with olive oil and salt. Keep the pot covered over low heat for 17–19 minutes; check once at the midpoint and continue until a grain pressed between two fingers has no chalky center.",
+        "For Weeknight Asparagus Mung Quinoa, at minute 18, scrape the base with a flat spoon and rotate the pot; add 30 ml hot water only if the grains begin to catch.",
+        "Rest Weeknight Asparagus Mung Quinoa 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Asparagus Mung Quinoa is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-fennel-pea-rice",
+      "name": "Weeknight Fennel Pea Rice",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, thawed",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, finely diced",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "For Weeknight Fennel Pea Rice, heat 850 ml (about 3 1/2 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Soften diced fennel and crushed seeds in ghee. Work over steady low heat for 5–7 minutes; continue once a grain pressed between two fingers has no chalky center.",
+        "Stir in rice, peas, and hot water and cover. Keep the pot covered over moderate heat for 17–19 minutes; check once at the midpoint and continue until a grain pressed between two fingers has no chalky center.",
+        "Rest the cooked grains before fluffing and seasoning. Leave the pan off the flame for 5 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "For Weeknight Fennel Pea Rice, at minute 14, scrape the base with a flat spoon and rotate the pot; add 30 ml hot water only if the grains begin to catch.",
+        "Fluff or stir Weeknight Fennel Pea Rice once after its off-heat rest, check the final consistency, and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Fennel Pea Rice is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-tofu-pumpkin-quinoa",
+      "name": "Weeknight Tofu Pumpkin Quinoa",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, drained and cut into cubes",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and finely diced",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for the pot",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Bring 850 ml (about 3 1/2 cups) water to a boil in a separate kettle and hold it hot, covered, so Weeknight Tofu Pumpkin Quinoa never loses its simmer.",
+        "Sauté the pumpkin with coriander until its edges soften. Continue over gentle medium heat for 11–13 minutes, stopping when a thin knife slides through the largest piece without resistance.",
+        "Add quinoa and water, then place tofu over the surface. Keep the pan over low heat for 2–3 minutes after the final addition, folding from the bottom so the main pieces remain intact.",
+        "Cover until cooked and fold the cubes through gently. Keep the pot covered over steady low heat for 16–18 minutes; check once at the midpoint and continue until a grain pressed between two fingers has no chalky center.",
+        "For Weeknight Tofu Pumpkin Quinoa, at minute 18, scrape the base with a flat spoon and rotate the pot; add 30 ml hot water only if the grains begin to catch.",
+        "Rest Weeknight Tofu Pumpkin Quinoa 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Tofu Pumpkin Quinoa is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-paneer-chayote-rice",
+      "name": "Weeknight Paneer Chayote Rice",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 215
+        },
+        {
+          "dravyaId": "dravya.paneer",
+          "name": "Paneer, cut into small cubes",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.chayote",
+          "name": "Chayote, peeled and finely diced",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Set aside 850 ml (about 3 1/2 cups) freshly boiled water for Weeknight Paneer Chayote Rice, reserving about 60 ml to correct the final consistency.",
+        "Warm chayote and fennel in ghee until translucent. Give the spices about 30 seconds before adding the larger pieces, then continue over moderate heat for 4–5 minutes, moving the pan often, until the raw aroma is gone.",
+        "Add rice and water and cook almost to tenderness. Maintain medium-low heat for 8–10 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Steam paneer over the grains, then fold and season. Maintain a steady steam for 4–6 minutes and check until the center of a test cube is hot with no cool core.",
+        "For Weeknight Paneer Chayote Rice, at minute 18, scrape the base with a flat spoon and rotate the pot; add 30 ml hot water only if the grains begin to catch.",
+        "Rest Weeknight Paneer Chayote Rice 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Paneer Chayote Rice is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-tofu-zucchini-rice",
+      "name": "Weeknight Tofu Zucchini Rice",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 215
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, drained and cut into cubes",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, cut into small cubes",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil, for the pot",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Set aside 850 ml (about 3 1/2 cups) freshly boiled water for Weeknight Tofu Zucchini Rice, reserving about 60 ml to correct the final consistency.",
+        "Soften zucchini and ginger in sesame oil. Allow 5–7 minutes at low heat, checking whether a grain pressed between two fingers has no chalky center.",
+        "Add rice and hot water and cover the pot. Keep the pot covered over steady low heat for 17–19 minutes; check once at the midpoint and continue until a grain pressed between two fingers has no chalky center.",
+        "Nestle in tofu near the end, steam, and season. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Weeknight Tofu Zucchini Rice 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Tofu Zucchini Rice is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-paneer-pumpkin-millet",
+      "name": "Weeknight Paneer Pumpkin Millet",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet, soaked and drained",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.paneer",
+          "name": "Paneer, cut into small cubes",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and finely diced",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Bring 850 ml (about 3 1/2 cups) water to a boil in a separate kettle and hold it hot, covered, so Weeknight Paneer Pumpkin Millet never loses its simmer.",
+        "For Weeknight Paneer Pumpkin Millet, cover the proso millet with at least three times its volume of cool water and soak for 20 minutes; drain for 2 minutes before the first heated step.",
+        "Toast cumin in ghee and turn the millet through it. Give the spices about 30 seconds before adding the larger pieces, then continue over medium-low heat for 3–4 minutes, moving the pan often, until the raw aroma is gone.",
+        "Add pumpkin and hot water and cook beneath a lid. Keep the pot covered over gentle medium heat for 10–12 minutes; check once at the midpoint and continue until a grain pressed between two fingers has no chalky center.",
+        "Fold in paneer for the final steaming and season. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Weeknight Paneer Pumpkin Millet 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Paneer Pumpkin Millet is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-tofu-broccoli-brown-rice",
+      "name": "Weeknight Tofu Broccoli Brown Rice",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-rice",
+          "name": "Brown rice, parboiled and drained",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, drained and cut into cubes",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.broccoli",
+          "name": "Broccoli, separated into small florets",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for the pot",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "For Weeknight Tofu Broccoli Brown Rice, heat 850 ml (about 3 1/2 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Bring the parboiled rice back to a simmer with coriander. Maintain medium-low heat for 13–15 minutes, stirring every 5 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Steam tofu and broccoli over it under a snug lid. Maintain a steady steam for 4–6 minutes and check until the center of a test cube is hot with no cool core.",
+        "Fold in olive oil and salt once the stems yield. Mix for 1 minute with the heat off, stopping when the seasonings are even and a pressed spoonful holds together without crumbling.",
+        "For Weeknight Tofu Broccoli Brown Rice, at minute 18, scrape the base with a flat spoon and rotate the pot; add 30 ml hot water only if the grains begin to catch.",
+        "Rest Weeknight Tofu Broccoli Brown Rice 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Tofu Broccoli Brown Rice is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-paneer-spinach-quinoa",
+      "name": "Weeknight Paneer Spinach Quinoa",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.paneer",
+          "name": "Paneer, cut into small cubes",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach leaves, washed and chopped",
+          "grams": 290
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Prepare 850 ml (about 3 1/2 cups) hot water before starting Weeknight Paneer Spinach Quinoa; keep one small ladle in reserve in case the base tightens early.",
+        "Cook quinoa with crushed fennel until its rings open. Maintain moderate heat for 17–19 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Layer spinach and paneer over the grains and cover. Keep the pot covered over medium-low heat for 5–7 minutes; check once at the midpoint and continue until the leaves wilt but still retain their color.",
+        "Fold the wilted greens through carefully and season. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Weeknight Paneer Spinach Quinoa 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Paneer Spinach Quinoa is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-tofu-cabbage-millet",
+      "name": "Weeknight Tofu Cabbage Millet",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet, soaked and drained",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, drained and cut into cubes",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, thinly shredded",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.sesame-oil",
+          "name": "Sesame oil, for the pot",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Prepare 850 ml (about 3 1/2 cups) hot water before starting Weeknight Tofu Cabbage Millet; keep one small ladle in reserve in case the base tightens early.",
+        "Cover the proso millet with at least three times its volume of cool water and soak for 30 minutes; drain for 2 minutes before the first heated step.",
+        "Warm ginger in sesame oil and add the soaked millet. Give the spices about 30 seconds before adding the larger pieces, then continue over moderate heat for 3–4 minutes, moving the pan often, until the raw aroma is gone.",
+        "Heap cabbage and tofu over the grains with hot water. Keep this stage to 8–10 minutes over medium-low heat and stop when the leaves wilt but still retain their color.",
+        "Cover until tender, then turn the layers together. Keep the pot covered over gentle medium heat for 16–18 minutes; check once at the midpoint and continue until a grain pressed between two fingers has no chalky center.",
+        "Rest Weeknight Tofu Cabbage Millet 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Tofu Cabbage Millet is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-paneer-fennel-rice",
+      "name": "Weeknight Paneer Fennel Rice",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 215
+        },
+        {
+          "dravyaId": "dravya.paneer",
+          "name": "Paneer, cut into small cubes",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, finely diced",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Measure 850 ml (about 3 1/2 cups) water for Weeknight Paneer Fennel Rice; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Sweat the fennel bulb and seeds in ghee. Use medium-low heat for 4–6 minutes, stirring every minute, until the cut vegetable is translucent at the edges without browning.",
+        "Add rice and water and simmer beneath a lid. Keep the pot covered over low heat for 17–19 minutes; check once at the midpoint and continue until a grain pressed between two fingers has no chalky center.",
+        "Steam paneer over the tender grains and season softly. Maintain a steady steam for 6–8 minutes and check until the center of a test cube is hot with no cool core.",
+        "Rest Weeknight Paneer Fennel Rice 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Paneer Fennel Rice is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-carrot-masoor-oats",
+      "name": "Weeknight Carrot Masoor Oat Pot",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats, sorted and rinsed",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, peeled and finely diced",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, finely grated",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Set aside 850 ml (about 3 1/2 cups) freshly boiled water for Weeknight Carrot Masoor Oat Pot, reserving about 60 ml to correct the final consistency.",
+        "Simmer the red lentils and carrots with grated ginger. Maintain moderate heat for 13–15 minutes, stirring every 5 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Stir in oats once the roots begin to soften. Keep the pan over medium-low heat for 2–3 minutes after the final addition, folding from the bottom so the main pieces remain intact.",
+        "Cook until creamy, season, and finish with ghee. Maintain gentle medium heat for 17–19 minutes, stirring every 3 minutes, until a thin knife slides through the largest piece without resistance.",
+        "For Weeknight Carrot Masoor Oat Pot, at minute 18, scrape the base with a flat spoon and rotate the pot; add 30 ml hot water only if the grains begin to catch.",
+        "Rest Weeknight Carrot Masoor Oat Pot 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Carrot Masoor Oat Pot is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-pumpkin-mung-oats",
+      "name": "Weeknight Pumpkin Mung Oat Pot",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats, sorted and rinsed",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 175
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and finely diced",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Bring 850 ml (about 3 1/2 cups) water to a boil in a separate kettle and hold it hot, covered, so Weeknight Pumpkin Mung Oat Pot never loses its simmer.",
+        "Cook the mung and pumpkin until nearly tender. Maintain medium-low heat for 12–14 minutes, stirring every 4 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Fold in oats and fennel and keep the pot moving. Keep the pan over gentle medium heat for 1–2 minutes after the final addition, folding from the bottom so the main pieces remain intact.",
+        "Season the creamy dinner and add ghee off heat. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Weeknight Pumpkin Mung Oat Pot 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Pumpkin Mung Oat Pot is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-zucchini-masoor-oats",
+      "name": "Weeknight Zucchini Masoor Oat Pot",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats, sorted and rinsed",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 175
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, cut into small cubes",
+          "grams": 290
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for the pot",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Bring 850 ml (about 3 1/2 cups) water to a boil in a separate kettle and hold it hot, covered, so Weeknight Zucchini Masoor Oat Pot never loses its simmer.",
+        "Bring the red lentils and zucchini to a steady simmer. Maintain gentle medium heat for 12–14 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Stir the oats and coriander into the released vegetable liquid. Keep the pan over low heat for 2–3 minutes after the final addition, folding from the bottom so the main pieces remain intact.",
+        "Cook until cohesive, then add olive oil and salt. Maintain steady low heat for 16–18 minutes, stirring every 5 minutes, until a grain pressed between two fingers has no chalky center.",
+        "For Weeknight Zucchini Masoor Oat Pot, at minute 14, scrape the base with a flat spoon and rotate the pot; add 30 ml hot water only if the grains begin to catch.",
+        "Rest Weeknight Zucchini Masoor Oat Pot 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Zucchini Masoor Oat Pot is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-spinach-mung-oats",
+      "name": "Weeknight Spinach Mung Oat Pot",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats, sorted and rinsed",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 175
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach leaves, washed and chopped",
+          "grams": 290
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Set aside 850 ml (about 3 1/2 cups) freshly boiled water for Weeknight Spinach Mung Oat Pot, reserving about 60 ml to correct the final consistency.",
+        "Simmer the mung until soft enough to mash lightly. Maintain steady low heat for 16–18 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Add oats, spinach, and fennel and stir until tender. Continue over moderate heat for 7–9 minutes, stopping when the leaves wilt but still retain their color.",
+        "Season the green one-pot and melt in ghee. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Weeknight Spinach Mung Oat Pot 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Spinach Mung Oat Pot is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-chayote-masoor-oats",
+      "name": "Weeknight Chayote Masoor Oat Pot",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats, sorted and rinsed",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 175
+        },
+        {
+          "dravyaId": "dravya.chayote",
+          "name": "Chayote, peeled and finely diced",
+          "grams": 290
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for the pot",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Set aside 850 ml (about 3 1/2 cups) freshly boiled water for Weeknight Chayote Masoor Oat Pot, reserving about 60 ml to correct the final consistency.",
+        "Cook chayote and red lentils together until soft. Maintain steady low heat for 18–20 minutes, stirring every 3 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Rain in the oats and coriander while stirring steadily. Allow 6–8 minutes at moderate heat, checking whether a grain pressed between two fingers has no chalky center.",
+        "Finish the thick pot with olive oil and salt. Leave the pan off the flame for 5 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "For Weeknight Chayote Masoor Oat Pot, at minute 14, scrape the base with a flat spoon and rotate the pot; add 30 ml hot water only if the grains begin to catch.",
+        "Rest Weeknight Chayote Masoor Oat Pot 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Chayote Masoor Oat Pot is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-carrot-mung-semolina",
+      "name": "Weeknight Carrot Mung Semolina",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.semolina",
+          "name": "Semolina, dry and fine",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, peeled and finely diced",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Set aside 850 ml (about 3 1/2 cups) freshly boiled water for Weeknight Carrot Mung Semolina, reserving about 60 ml to correct the final consistency.",
+        "Cook the mung and carrots until tender in the pot. Maintain low heat for 16–18 minutes, stirring every 4 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Whisk in semolina gradually with cumin to prevent lumps. Whisk for 50 seconds, scraping the bottom and corners until no dry pockets or lumps remain.",
+        "Season the soft dinner and fold in ghee. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Weeknight Carrot Mung Semolina 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Carrot Mung Semolina is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-pumpkin-masoor-semolina",
+      "name": "Weeknight Pumpkin Masoor Semolina",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.semolina",
+          "name": "Semolina, dry and fine",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 155
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and finely diced",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Bring 850 ml (about 3 1/2 cups) water to a boil in a separate kettle and hold it hot, covered, so Weeknight Pumpkin Masoor Semolina never loses its simmer.",
+        "Simmer pumpkin and red lentils until they begin to merge. Maintain steady low heat for 10–12 minutes, stirring every 3 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Sprinkle in semolina and coriander while whisking the broth. Allow 4–6 minutes at moderate heat, checking whether a thin knife slides through the largest piece without resistance.",
+        "Cook until smooth, then season and add ghee. Maintain medium-low heat for 18–20 minutes, stirring every 5 minutes, until a thin knife slides through the largest piece without resistance.",
+        "For Weeknight Pumpkin Masoor Semolina, at minute 14, scrape the base with a flat spoon and rotate the pot; add 30 ml hot water only if the grains begin to catch.",
+        "Rest Weeknight Pumpkin Masoor Semolina 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Pumpkin Masoor Semolina is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-zucchini-mung-semolina",
+      "name": "Weeknight Zucchini Mung Semolina",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.semolina",
+          "name": "Semolina, dry and fine",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, cut into small cubes",
+          "grams": 290
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for the pot",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "For Weeknight Zucchini Mung Semolina, heat 850 ml (about 3 1/2 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Cook mung and zucchini until the cubes turn silky. Maintain gentle medium heat for 18–20 minutes, stirring every 3 minutes, until the pulses crush easily against the side of the pot.",
+        "Whisk semolina and fennel into the simmering liquid. Whisk for 30 seconds, scraping the bottom and corners until no dry pockets or lumps remain.",
+        "Season the set but soft pot and add olive oil. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Weeknight Zucchini Mung Semolina 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Zucchini Mung Semolina is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-spinach-masoor-semolina",
+      "name": "Weeknight Spinach Masoor Semolina",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.semolina",
+          "name": "Semolina, dry and fine",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 155
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach leaves, washed and chopped",
+          "grams": 290
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Measure 850 ml (about 3 1/2 cups) water for Weeknight Spinach Masoor Semolina; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Simmer the red lentils until they start to dissolve. Maintain gentle medium heat for 18–20 minutes, stirring every 5 minutes, until the pulses crush easily against the side of the pot.",
+        "Add spinach, then whisk in semolina and coriander. Whisk for 60 seconds, scraping the bottom and corners until no dry pockets or lumps remain.",
+        "Cook the green pot through, season, and finish with ghee. Maintain steady low heat for 7–9 minutes, stirring every 3 minutes, until the pulses crush easily against the side of the pot.",
+        "For Weeknight Spinach Masoor Semolina, at minute 18, scrape the base with a flat spoon and rotate the pot; add 30 ml hot water only if the grains begin to catch.",
+        "Rest Weeknight Spinach Masoor Semolina 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Spinach Masoor Semolina is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-bottle-gourd-mung-semolina",
+      "name": "Weeknight Bottle Gourd Mung Semolina",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.semolina",
+          "name": "Semolina, dry and fine",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.bottle-gourd",
+          "name": "Bottle gourd, peeled and finely diced",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Set aside 850 ml (about 3 1/2 cups) freshly boiled water for Weeknight Bottle Gourd Mung Semolina, reserving about 60 ml to correct the final consistency.",
+        "Cook the mung and bottle gourd until translucent and tender. Maintain moderate heat for 17–19 minutes, stirring every 5 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Rain in semolina and cumin while moving the spoon continuously. Take 5–7 minutes over medium-low heat, using the stated texture and aroma as the final guide.",
+        "Season the soft one-pot and stir in ghee. Leave the pan off the flame for 3 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "For Weeknight Bottle Gourd Mung Semolina, at minute 18, scrape the base with a flat spoon and rotate the pot; add 30 ml hot water only if the grains begin to catch.",
+        "Rest Weeknight Bottle Gourd Mung Semolina 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Bottle Gourd Mung Semolina is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-carrot-mung-amaranth",
+      "name": "Weeknight Carrot Mung Amaranth",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, rinsed in a fine sieve",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, peeled and finely diced",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Prepare 850 ml (about 3 1/2 cups) hot water before starting Weeknight Carrot Mung Amaranth; keep one small ladle in reserve in case the base tightens early.",
+        "Give the mung a brief simmer before adding amaranth. Maintain steady low heat for 12–14 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Add carrots and cumin and cook until the tiny grains thicken. Maintain moderate heat for 18–20 minutes, stirring every 5 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Season, fold in ghee, and loosen if necessary. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Weeknight Carrot Mung Amaranth 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Carrot Mung Amaranth is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-pumpkin-masoor-amaranth",
+      "name": "Weeknight Pumpkin Masoor Amaranth",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, rinsed in a fine sieve",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and finely diced",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Prepare 850 ml (about 3 1/2 cups) hot water before starting Weeknight Pumpkin Masoor Amaranth; keep one small ladle in reserve in case the base tightens early.",
+        "Cook red lentils and pumpkin until halfway tender. Maintain moderate heat for 11–13 minutes, stirring every 3 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Stir in amaranth and fennel and simmer until glossy. Maintain medium-low heat for 18–20 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Season the quick pot and add ghee after cooking. Leave the pan off the flame for 5 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "For Weeknight Pumpkin Masoor Amaranth, at minute 14, scrape the base with a flat spoon and rotate the pot; add 30 ml hot water only if the grains begin to catch.",
+        "Rest Weeknight Pumpkin Masoor Amaranth 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Pumpkin Masoor Amaranth is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-zucchini-mung-amaranth",
+      "name": "Weeknight Zucchini Mung Amaranth",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, rinsed in a fine sieve",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, cut into small cubes",
+          "grams": 290
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for the pot",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Measure 850 ml (about 3 1/2 cups) water for Weeknight Zucchini Mung Amaranth; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Simmer mung and amaranth together until they begin to thicken. Maintain medium-low heat for 10–12 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Fold in zucchini and coriander and cover briefly. Keep the pot covered over gentle medium heat for 4–6 minutes; check once at the midpoint and continue until a grain pressed between two fingers has no chalky center.",
+        "Finish with olive oil and salt while still moist. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Weeknight Zucchini Mung Amaranth 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Zucchini Mung Amaranth is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-chayote-masoor-amaranth",
+      "name": "Weeknight Chayote Masoor Amaranth",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, rinsed in a fine sieve",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 165
+        },
+        {
+          "dravyaId": "dravya.chayote",
+          "name": "Chayote, peeled and finely diced",
+          "grams": 290
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for the pot",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Measure 850 ml (about 3 1/2 cups) water for Weeknight Chayote Masoor Amaranth; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Cook chayote and red lentils in the measured water. Maintain gentle medium heat for 6–8 minutes, stirring every 4 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Add amaranth and fennel and stir as the base thickens. Keep the pan over low heat for 1–2 minutes after the final addition, folding from the bottom so the main pieces remain intact.",
+        "Season the tender one-pot and finish with olive oil. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Weeknight Chayote Masoor Amaranth 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Chayote Masoor Amaranth is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-spinach-mung-amaranth",
+      "name": "Weeknight Spinach Mung Amaranth",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain, rinsed in a fine sieve",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach leaves, washed and chopped",
+          "grams": 290
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "For Weeknight Spinach Mung Amaranth, heat 850 ml (about 3 1/2 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Simmer mung and amaranth until the grains are tender. Maintain moderate heat for 18–20 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Fold in spinach and coriander for the final minutes. Mix for 2 minutes with the heat off, stopping when the seasonings are even and a pressed spoonful holds together without crumbling.",
+        "Season the green pot and melt ghee through it. Leave the pan off the flame for 5 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "For Weeknight Spinach Mung Amaranth, at minute 14, scrape the base with a flat spoon and rotate the pot; add 30 ml hot water only if the grains begin to catch.",
+        "Rest Weeknight Spinach Mung Amaranth 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Spinach Mung Amaranth is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-tomato-masoor-rice",
+      "name": "Weeknight Tomato Masoor Rice",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 205
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 175
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, finely chopped",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Prepare 850 ml (about 3 1/2 cups) hot water before starting Weeknight Tomato Masoor Rice; keep one small ladle in reserve in case the base tightens early.",
+        "Reduce chopped tomato with coriander in the cooking pot. Maintain steady low heat for 12–14 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Add rice, lentils, and hot water and close the lid. Keep the pan over moderate heat for 1–2 minutes after the final addition, folding from the bottom so the main pieces remain intact.",
+        "Cook until tender, season, and fluff the red grains. Maintain medium-low heat for 16–18 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Rest Weeknight Tomato Masoor Rice 5 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Tomato Masoor Rice is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-tomato-mung-quinoa",
+      "name": "Weeknight Tomato Mung Quinoa",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans, split and rinsed",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, finely chopped",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for the pot",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "For Weeknight Tomato Mung Quinoa, heat 850 ml (about 3 1/2 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Soften tomato and fennel in olive oil. Take 7–9 minutes over moderate heat, using the stated texture and aroma as the final guide.",
+        "Stir in mung, quinoa, and water and cover. Keep the pot covered over medium-low heat for 3–5 minutes; check once at the midpoint and continue until a grain pressed between two fingers has no chalky center.",
+        "Finish when the quinoa opens and season the pot. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Weeknight Tomato Mung Quinoa 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Tomato Mung Quinoa is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-tomato-tofu-rice",
+      "name": "Weeknight Tomato Tofu Rice",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 215
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, drained and cut into cubes",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, finely chopped",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for the pot",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Set aside 850 ml (about 3 1/2 cups) freshly boiled water for Weeknight Tomato Tofu Rice, reserving about 60 ml to correct the final consistency.",
+        "Cook chopped tomato and coriander until pulpy. Maintain low heat for 17–19 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Add rice and water and set tofu over the surface. Keep the pan over steady low heat for 2–3 minutes after the final addition, folding from the bottom so the main pieces remain intact.",
+        "Cover until tender, fold gently, and season. Keep the pot covered over moderate heat for 16–18 minutes; check once at the midpoint and continue until a grain pressed between two fingers has no chalky center.",
+        "For Weeknight Tomato Tofu Rice, at minute 14, scrape the base with a flat spoon and rotate the pot; add 30 ml hot water only if the grains begin to catch.",
+        "Rest Weeknight Tomato Tofu Rice 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Tomato Tofu Rice is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-tomato-pea-millet",
+      "name": "Weeknight Tomato Pea Millet",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet, soaked and drained",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, thawed",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, finely chopped",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Prepare 850 ml (about 3 1/2 cups) hot water before starting Weeknight Tomato Pea Millet; keep one small ladle in reserve in case the base tightens early.",
+        "For Weeknight Tomato Pea Millet, cover the proso millet with at least three times its volume of cool water and soak for 30 minutes; drain for 2 minutes before the first heated step.",
+        "Warm cumin and chopped tomato until the juices reduce. Give the spices about 30 seconds before adding the larger pieces, then continue over medium-low heat for 2–3 minutes, moving the pan often, until the raw aroma is gone.",
+        "Add millet, peas, and water and cover the pot. Keep the pot covered over gentle medium heat for 3–5 minutes; check once at the midpoint and continue until a grain pressed between two fingers has no chalky center.",
+        "Rest the tender grains, then fluff and season. Leave the pan off the flame for 5 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Fluff or stir Weeknight Tomato Pea Millet once after its off-heat rest, check the final consistency, and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Tomato Pea Millet is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-tomato-masoor-oats",
+      "name": "Weeknight Tomato Masoor Oats",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats, sorted and rinsed",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils, rinsed until clear",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, finely chopped",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for the pot",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Bring 850 ml (about 3 1/2 cups) water to a boil in a separate kettle and hold it hot, covered, so Weeknight Tomato Masoor Oats never loses its simmer.",
+        "Simmer tomato and red lentils until both soften. Maintain low heat for 17–19 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Stir in oats and coriander and cook until creamy. Maintain steady low heat for 6–8 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Season the dinner and add olive oil before serving. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Weeknight Tomato Masoor Oats 7 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Tomato Masoor Oats is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-carrot-pea-quinoa",
+      "name": "Weeknight Carrot Pea Quinoa",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 215
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, thawed",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, peeled and finely diced",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for the pot",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "For Weeknight Carrot Pea Quinoa, heat 850 ml (about 3 1/2 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Soften carrot and fennel briefly in the pot. Allow 6–8 minutes at moderate heat, checking whether a thin knife slides through the largest piece without resistance.",
+        "Add quinoa, peas, and water and cover tightly. Keep the pot covered over medium-low heat for 5–7 minutes; check once at the midpoint and continue until a grain pressed between two fingers has no chalky center.",
+        "Fluff the opened grains with olive oil and salt. Take 6–8 minutes over gentle medium heat, using the stated texture and aroma as the final guide.",
+        "Rest Weeknight Carrot Pea Quinoa 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Carrot Pea Quinoa is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-pumpkin-pea-rice",
+      "name": "Weeknight Pumpkin Pea Rice",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, thawed",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, peeled and finely diced",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "For Weeknight Pumpkin Pea Rice, heat 850 ml (about 3 1/2 cups) water until vigorously boiling, then lower it to a bare simmer beside the main pot for measured additions.",
+        "Toast cumin in ghee and add the pumpkin dice. Give the spices about 30 seconds before adding the larger pieces, then continue over gentle medium heat for 2–3 minutes, moving the pan often, until the raw aroma is gone.",
+        "Stir in rice, peas, and water and cover. Keep the pot covered over low heat for 3–5 minutes; check once at the midpoint and continue until a grain pressed between two fingers has no chalky center.",
+        "Rest the tender pot, fluff, and season gently. Leave the pan off the flame for 5 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "For Weeknight Pumpkin Pea Rice, at minute 14, scrape the base with a flat spoon and rotate the pot; add 30 ml hot water only if the grains begin to catch.",
+        "Fluff or stir Weeknight Pumpkin Pea Rice once after its off-heat rest, check the final consistency, and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Pumpkin Pea Rice is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-zucchini-pea-millet",
+      "name": "Weeknight Zucchini Pea Millet",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet, soaked and drained",
+          "grams": 215
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, thawed",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, cut into small cubes",
+          "grams": 290
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for the pot",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Bring 850 ml (about 3 1/2 cups) water to a boil in a separate kettle and hold it hot, covered, so Weeknight Zucchini Pea Millet never loses its simmer.",
+        "For Weeknight Zucchini Pea Millet, cover the proso millet with at least three times its volume of cool water and soak for 30 minutes; drain for 2 minutes before the first heated step.",
+        "Turn zucchini through olive oil and coriander. Allow 7–9 minutes at low heat, checking whether a grain pressed between two fingers has no chalky center.",
+        "Add millet, peas, and water and cover at once. Keep the pot covered over steady low heat for 5–7 minutes; check once at the midpoint and continue until a grain pressed between two fingers has no chalky center.",
+        "Cook until tender, rest, and loosen the grains. Maintain moderate heat for 16–18 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Fluff or stir Weeknight Zucchini Pea Millet once after its off-heat rest, check the final consistency, and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Zucchini Pea Millet is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-chayote-pea-rice",
+      "name": "Weeknight Chayote Pea Rice",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, thawed",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.chayote",
+          "name": "Chayote, peeled and finely diced",
+          "grams": 290
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Prepare 850 ml (about 3 1/2 cups) hot water before starting Weeknight Chayote Pea Rice; keep one small ladle in reserve in case the base tightens early.",
+        "Soften chayote and fennel lightly in ghee. Allow 7–9 minutes at steady low heat, checking whether a thin knife slides through the largest piece without resistance.",
+        "Add rice, peas, and hot water and close the pot. Keep the pan over moderate heat for 1–2 minutes after the final addition, folding from the bottom so the main pieces remain intact.",
+        "Cook until tender, then season and rest. Maintain medium-low heat for 17–19 minutes, stirring every 3 minutes, until a thin knife slides through the largest piece without resistance.",
+        "Fluff or stir Weeknight Chayote Pea Rice once after its off-heat rest, check the final consistency, and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Chayote Pea Rice is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-broccoli-pea-quinoa",
+      "name": "Weeknight Broccoli Pea Quinoa",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 215
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, thawed",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.broccoli",
+          "name": "Broccoli, separated into small florets",
+          "grams": 290
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds, ground",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for the pot",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Measure 850 ml (about 3 1/2 cups) water for Weeknight Broccoli Pea Quinoa; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Start quinoa and coriander in the measured water. Take 6–8 minutes over low heat, using the stated texture and aroma as the final guide.",
+        "Layer broccoli and peas over the half-cooked grains. Keep the layer loose and even, with no pooled liquid, so every portion receives the same balance.",
+        "Steam until green and tender, then add olive oil. Maintain a steady steam for 6–8 minutes and check until a knife tip enters the thickest stem with only slight resistance.",
+        "Rest Weeknight Broccoli Pea Quinoa 3 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Broccoli Pea Quinoa is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-cauliflower-pea-rice",
+      "name": "Weeknight Cauliflower Pea Rice",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas, thawed",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower, separated into small florets",
+          "grams": 290
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 17
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Set aside 850 ml (about 3 1/2 cups) freshly boiled water for Weeknight Cauliflower Pea Rice, reserving about 60 ml to correct the final consistency.",
+        "Bloom cumin in ghee and coat the rice. Give the spices about 30 seconds before adding the larger pieces, then continue over low heat for 3–4 minutes, moving the pan often, until the raw aroma is gone.",
+        "Add cauliflower, peas, and water and cover. Keep the pot covered over steady low heat for 4–6 minutes; check once at the midpoint and continue until a knife tip enters the thickest stem with only slight resistance.",
+        "Rest the cooked pot before folding and seasoning. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Fluff or stir Weeknight Cauliflower Pea Rice once after its off-heat rest, check the final consistency, and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Cauliflower Pea Rice is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-asparagus-tofu-quinoa",
+      "name": "Weeknight Asparagus Tofu Quinoa",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa, rinsed until free of foam",
+          "grams": 215
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, drained and cut into cubes",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.asparagus",
+          "name": "Asparagus, trimmed and cut into short pieces",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for the pot",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Bring 850 ml (about 3 1/2 cups) water to a boil in a separate kettle and hold it hot, covered, so Weeknight Asparagus Tofu Quinoa never loses its simmer.",
+        "Bring quinoa and fennel to a covered simmer. Maintain low heat for 13–15 minutes, stirring every 4 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Set asparagus and tofu over the opening grains. Keep this stage to 6–8 minutes over steady low heat and stop when a knife tip enters the thickest stem with only slight resistance.",
+        "Steam until tender and finish with olive oil and salt. Maintain a steady steam for 5–7 minutes and check until a knife tip enters the thickest stem with only slight resistance.",
+        "Rest Weeknight Asparagus Tofu Quinoa 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Asparagus Tofu Quinoa is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-green-bean-paneer-rice",
+      "name": "Weeknight Green Bean Paneer Rice",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.paneer",
+          "name": "Paneer, cut into small cubes",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, cut into small diamonds",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds, whole",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Measure 850 ml (about 3 1/2 cups) water for Weeknight Green Bean Paneer Rice; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Warm cumin in ghee and stir through the rice. Give the spices about 30 seconds before adding the larger pieces, then continue over moderate heat for 3–4 minutes, moving the pan often, until the raw aroma is gone.",
+        "Add beans and water and cook almost to tenderness. Maintain medium-low heat for 6–8 minutes, stirring every 5 minutes, until a knife tip enters the thickest stem with only slight resistance.",
+        "Nestle the paneer among the beans, finish the steaming, and add salt. Leave the pan off the flame for 6 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Weeknight Green Bean Paneer Rice 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Green Bean Paneer Rice is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-fennel-tofu-millet",
+      "name": "Weeknight Fennel Tofu Millet",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet, soaked and drained",
+          "grams": 215
+        },
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, drained and cut into cubes",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, finely diced",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil, for the pot",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Measure 850 ml (about 3 1/2 cups) water for Weeknight Fennel Tofu Millet; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "For Weeknight Fennel Tofu Millet, cover the proso millet with at least three times its volume of cool water and soak for 20 minutes; drain for 2 minutes before the first heated step.",
+        "Soften fennel bulb and seeds in olive oil. Work over medium-low heat for 6–8 minutes; continue once a grain pressed between two fingers has no chalky center.",
+        "Add millet and water and cover until nearly cooked. Keep the pot covered over gentle medium heat for 12–14 minutes; check once at the midpoint and continue until a grain pressed between two fingers has no chalky center.",
+        "Fold in tofu for the final steaming and season. Leave the pan off the flame for 5 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Weeknight Fennel Tofu Millet 4 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Fennel Tofu Millet is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    },
+    {
+      "id": "recipe.weeknight-spinach-paneer-rice",
+      "name": "Weeknight Spinach Paneer Rice",
+      "category": "everyday",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 12,
+      "cookMinutes": 28,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-rice",
+          "name": "White rice, rinsed and drained",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.paneer",
+          "name": "Paneer, cut into small cubes",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach leaves, washed and chopped",
+          "grams": 290
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, lightly crushed",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.ghee",
+          "name": "Ghee, for the pot",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt, finely ground",
+          "grams": 4
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water, freshly boiled",
+          "grams": 850
+        }
+      ],
+      "steps": [
+        "Measure 850 ml (about 3 1/2 cups) water for Weeknight Spinach Paneer Rice; bring it to a full boil, then keep it covered and hot for the additions below.",
+        "Cook rice with fennel until the grains are nearly tender. Maintain medium-low heat for 10–12 minutes, stirring every 3 minutes, until a grain pressed between two fingers has no chalky center.",
+        "Layer spinach and paneer over the surface and cover. Keep the pot covered over gentle medium heat for 4–6 minutes; check once at the midpoint and continue until the leaves wilt but still retain their color.",
+        "Fold the wilted greens through and season the dinner. Leave the pan off the flame for 4 minutes, then taste and correct the final balance before serving at the stated temperature.",
+        "Rest Weeknight Spinach Paneer Rice 6 minutes covered off the burner; check the final consistency and serve it warm without prolonged holding."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Weeknight Spinach Paneer Rice is a practical one-pot dinner designed to finish within thirty minutes Vata: serve it moist and warm with the stated fat. Pitta: keep the seasoning mild and reduce tomato where present. Kapha: use a smaller grain portion and emphasize vegetables.",
+      "provenance": [
+        "original lacto-vegetarian recipe developed for the R3 regional and practical cooking collection"
+      ],
+      "confidence": {
+        "ayur": 0.8
+      }
+    }
+  ]
+}
