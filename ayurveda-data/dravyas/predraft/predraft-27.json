@@ -1,0 +1,672 @@
+{
+  "predraftVersion": "1.0",
+  "batch": "predraft-27",
+  "items": [
+    {
+      "id": "dravya.kashmiri-chili",
+      "name": "Kashmiri chili",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          0,
+          1,
+          -1
+        ],
+        "virya": "heating",
+        "note": "mild heat, color-forward"
+      },
+      "usda": [
+        {
+          "fdcId": 12367,
+          "name": "Kashmiri chili",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.byadgi-chili",
+      "name": "Byadgi chili",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          0,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: byadgi chili."
+    },
+    {
+      "id": "dravya.pippali-root",
+      "name": "Long pepper root",
+      "sanskrit": "Pippalimula",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: long pepper root; pippalimula; pippali root."
+    },
+    {
+      "id": "dravya.cassia-bark",
+      "name": "Cassia bark",
+      "sanskrit": "Tvak (cassia)",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: cassia bark; tvak."
+    },
+    {
+      "id": "dravya.bay-leaf-mediterranean",
+      "name": "Bay leaf (Mediterranean)",
+      "sanskrit": null,
+      "aliases": [
+        "Mediterranean"
+      ],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "heating",
+        "note": "distinct from tejpatta"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: bay leaf; bay leaf mediterranean."
+    },
+    {
+      "id": "dravya.sage",
+      "name": "Sage",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          0,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 12249,
+          "name": "Sage (dried)",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.sweet-basil",
+      "name": "Sweet basil",
+      "sanskrit": "Barbari",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 9278,
+          "name": "Basil, fresh",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.marjoram",
+      "name": "Marjoram",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 12235,
+          "name": "Marjoram (dried)",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.vanilla",
+      "name": "Vanilla",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          0
+        ],
+        "virya": "neutral"
+      },
+      "usda": [
+        {
+          "fdcId": 12258,
+          "name": "Vanilla (dried)",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.dried-mint",
+      "name": "Dried mint",
+      "sanskrit": "Pudina (shushka)",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 12409,
+          "name": "Dried mint",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.curry-leaf-powder",
+      "name": "Curry leaf powder",
+      "sanskrit": "Kadi Patta Churna",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          -1
+        ],
+        "virya": "neutral"
+      },
+      "usda": [
+        {
+          "fdcId": 12542,
+          "name": "Curry leaf powder (you included whole/dried, not powdered)",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.idli-podi",
+      "name": "Idli podi (gunpowder)",
+      "sanskrit": null,
+      "aliases": [
+        "gunpowder"
+      ],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: idli podi."
+    },
+    {
+      "id": "dravya.mustard-powder",
+      "name": "Mustard powder",
+      "sanskrit": "Sarshapa Churna",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          -1,
+          2,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 12426,
+          "name": "Mustard powder",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.achar-masala",
+      "name": "Pickle masala",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          -1,
+          2,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: pickle masala; achar masala."
+    },
+    {
+      "id": "dravya.chaas-masala",
+      "name": "Buttermilk masala",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          -1
+        ],
+        "virya": "neutral"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: buttermilk masala; chaas masala."
+    },
+    {
+      "id": "dravya.thandai-masala",
+      "name": "Thandai masala",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: thandai masala."
+    },
+    {
+      "id": "dravya.hingvastak-churna",
+      "name": "Hingvastak churna",
+      "sanskrit": "Hingvashtaka",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          -2,
+          0,
+          -1
+        ],
+        "virya": "heating",
+        "note": "classical digestive eight-spice blend"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: hingvastak churna; hingvashtaka."
+    },
+    {
+      "id": "dravya.fenugreek-greens",
+      "name": "Fenugreek greens (methi)",
+      "sanskrit": "Methika Shaka",
+      "aliases": [
+        "methi"
+      ],
+      "category": "leafy-green",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -2
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 11885,
+          "name": "Fenugreek Leaves (Dried)",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 35
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.red-amaranth-greens",
+      "name": "Red amaranth greens (lal chaulai)",
+      "sanskrit": "Marisha (rakta)",
+      "aliases": [
+        "lal chaulai"
+      ],
+      "category": "leafy-green",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 35
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: red amaranth greens; marisha."
+    },
+    {
+      "id": "dravya.green-amaranth-greens",
+      "name": "Green amaranth greens",
+      "sanskrit": "Marisha",
+      "aliases": [],
+      "category": "leafy-green",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 35
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: green amaranth greens; marisha."
+    },
+    {
+      "id": "dravya.bathua",
+      "name": "Bathua (chenopodium)",
+      "sanskrit": "Vastuka",
+      "aliases": [
+        "chenopodium"
+      ],
+      "category": "leafy-green",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          -1
+        ],
+        "virya": "neutral",
+        "note": "classical tridoshic green"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 35
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: bathua; vastuka."
+    },
+    {
+      "id": "dravya.colocasia-leaf",
+      "name": "Colocasia leaf (arbi patta)",
+      "sanskrit": "Pindalu Patra",
+      "aliases": [
+        "arbi patta"
+      ],
+      "category": "leafy-green",
+      "canonHints": {
+        "vpk": [
+          1,
+          0,
+          1
+        ],
+        "virya": "cooling",
+        "note": "needs souring agent to cut itch"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 35
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: colocasia leaf; pindalu patra."
+    },
+    {
+      "id": "dravya.drumstick-leaf",
+      "name": "Drumstick leaf (fresh)",
+      "sanskrit": "Shigru Patra",
+      "aliases": [],
+      "category": "leafy-green",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -2
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 35
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: drumstick leaf; shigru patra."
+    },
+    {
+      "id": "dravya.gongura",
+      "name": "Gongura (sorrel)",
+      "sanskrit": "Amlashaka",
+      "aliases": [
+        "sorrel"
+      ],
+      "category": "leafy-green",
+      "canonHints": {
+        "vpk": [
+          -1,
+          2,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 35
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: gongura; amlashaka."
+    },
+    {
+      "id": "dravya.water-spinach",
+      "name": "Water spinach (kalmi)",
+      "sanskrit": "Kalambi",
+      "aliases": [
+        "kalmi"
+      ],
+      "category": "leafy-green",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 35
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: water spinach; kalambi."
+    }
+  ]
+}
