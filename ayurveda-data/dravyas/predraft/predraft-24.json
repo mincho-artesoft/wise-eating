@@ -1,0 +1,618 @@
+{
+  "predraftVersion": "1.0",
+  "batch": "predraft-24",
+  "items": [
+    {
+      "id": "dravya.lotus-seed-fresh",
+      "name": "Fresh lotus seed",
+      "sanskrit": "Kamala Beeja",
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: fresh lotus seed; kamala beeja; lotus seed fresh."
+    },
+    {
+      "id": "dravya.turnip-greens-root",
+      "name": "Baby turnip with greens",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          0,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: baby turnip with greens; turnip greens root."
+    },
+    {
+      "id": "dravya.parwal-sweet",
+      "name": "Sweet parwal variant",
+      "sanskrit": "Madhura Patola",
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          -1
+        ],
+        "virya": "neutral"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: sweet parwal variant; madhura patola; parwal sweet."
+    },
+    {
+      "id": "dravya.masoor-dal",
+      "name": "Split red lentil",
+      "sanskrit": "Masura Dal",
+      "aliases": [
+        "masoor dal"
+      ],
+      "category": "legume",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 10990,
+          "name": "Lentils, pink or red, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.chickpea-white",
+      "name": "White chickpea",
+      "sanskrit": "Kabuli Chana",
+      "aliases": [],
+      "category": "legume",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 10547,
+          "name": "Chickpeas (garbanzo beans, bengal gram), mature seeds, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.chickpea-black",
+      "name": "Black chickpea",
+      "sanskrit": "Kala Chana",
+      "aliases": [
+        "Bengal gram whole"
+      ],
+      "category": "legume",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 10547,
+          "name": "Chickpeas (garbanzo beans, bengal gram), mature seeds, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.urad-dal",
+      "name": "Split black gram",
+      "sanskrit": "Masha Dal",
+      "aliases": [
+        "urad dal"
+      ],
+      "category": "legume",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: split black gram; urad dal; masha dal; black gram raw."
+    },
+    {
+      "id": "dravya.urad-whole",
+      "name": "Whole black gram",
+      "sanskrit": "Masha",
+      "aliases": [
+        "whole urad"
+      ],
+      "category": "legume",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: whole black gram; whole urad; masha; black gram raw; urad whole."
+    },
+    {
+      "id": "dravya.garlic-fresh-bulb",
+      "name": "Garlic (fresh bulb)",
+      "sanskrit": "Rasona",
+      "aliases": [],
+      "category": "vegetable",
+      "canonHints": {
+        "vpk": [
+          -2,
+          2,
+          -2
+        ],
+        "virya": "heating",
+        "note": "five rasas (no sour); classical rasayana with cautions"
+      },
+      "usda": [
+        {
+          "fdcId": 6686,
+          "name": "Garlic, raw",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup chopped",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.black-eyed-pea",
+      "name": "Black-eyed pea",
+      "sanskrit": "Lobia",
+      "aliases": [
+        "cowpea"
+      ],
+      "category": "legume",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 10549,
+          "name": "Cowpeas, common (blackeyes, crowder, southern), mature seeds, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.moth-bean",
+      "name": "Moth bean",
+      "sanskrit": "Matki",
+      "aliases": [],
+      "category": "legume",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: moth bean; matki."
+    },
+    {
+      "id": "dravya.horse-gram",
+      "name": "Horse gram",
+      "sanskrit": "Kulthi",
+      "aliases": [],
+      "category": "legume",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: horse gram; kulthi; horse gram raw."
+    },
+    {
+      "id": "dravya.peas-dry",
+      "name": "Dry field peas",
+      "sanskrit": "Vatana",
+      "aliases": [
+        "dried peas"
+      ],
+      "category": "legume",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 9435,
+          "name": "Peas, green, split, mature seeds, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.val-bean",
+      "name": "Hyacinth bean",
+      "sanskrit": "Val",
+      "aliases": [
+        "lablab bean"
+      ],
+      "category": "legume",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 11803,
+          "name": "Hyacinth beans, mature seeds, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.green-pea-fresh",
+      "name": "Fresh green pea",
+      "sanskrit": "Kalaya",
+      "aliases": [],
+      "category": "legume",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 7736,
+          "name": "Peas, green, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.lentil-brown",
+      "name": "Brown lentil",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "legume",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 9427,
+          "name": "Lentils, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.fava",
+      "name": "Fava bean",
+      "sanskrit": null,
+      "aliases": [
+        "broad bean"
+      ],
+      "category": "legume",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 1879,
+          "name": "Fava beans, cooked",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.sprouted-mung",
+      "name": "Sprouted mung",
+      "sanskrit": "Mudga (ankurita)",
+      "aliases": [],
+      "category": "legume",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 7344,
+          "name": "Mung beans, mature seeds, sprouted, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.sprouted-chana",
+      "name": "Sprouted black chickpea",
+      "sanskrit": "Chanaka (ankurita)",
+      "aliases": [],
+      "category": "legume",
+      "canonHints": {
+        "vpk": [
+          1,
+          -1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: sprouted black chickpea; chanaka; sprouted chana."
+    },
+    {
+      "id": "dravya.sattu-flour",
+      "name": "Roasted gram flour (sattu)",
+      "sanskrit": "Saktu",
+      "aliases": [
+        "sattu"
+      ],
+      "category": "legume",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling",
+        "note": "classical saktu; summer staple"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 cup",
+          "grams": 30
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: roasted gram flour; saktu; sattu flour."
+    },
+    {
+      "id": "dravya.roasted-chana",
+      "name": "Roasted chana (bhuna)",
+      "sanskrit": "Bhrishta Chanaka",
+      "aliases": [
+        "bhuna"
+      ],
+      "category": "legume",
+      "canonHints": {
+        "vpk": [
+          1,
+          -1,
+          -2
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: roasted chana; bhrishta chanaka."
+    },
+    {
+      "id": "dravya.peanut-raw",
+      "name": "Peanut (raw)",
+      "sanskrit": "Bhuchanaka",
+      "aliases": [
+        "raw"
+      ],
+      "category": "legume",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 9437,
+          "name": "Peanuts, all types, raw",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.peanut-roasted",
+      "name": "Peanut (roasted)",
+      "sanskrit": null,
+      "aliases": [
+        "roasted"
+      ],
+      "category": "legume",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 2028,
+          "name": "Peanuts, dry roasted, unsalted",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.lima-bean",
+      "name": "Lima bean",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "legume",
+      "canonHints": {
+        "vpk": [
+          1,
+          0,
+          -1
+        ],
+        "virya": "neutral"
+      },
+      "usda": [
+        {
+          "fdcId": 10958,
+          "name": "Lima beans, large, mature seeds, raw",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.white-peas",
+      "name": "White peas (safed vatana)",
+      "sanskrit": "Kalaya",
+      "aliases": [
+        "safed vatana"
+      ],
+      "category": "legume",
+      "canonHints": {
+        "vpk": [
+          1,
+          0,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 9435,
+          "name": "Peas, green, split, mature seeds, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 cup dry",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true
+    }
+  ]
+}
