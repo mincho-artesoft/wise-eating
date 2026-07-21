@@ -1,0 +1,626 @@
+{
+  "predraftVersion": "1.0",
+  "batch": "predraft-21",
+  "items": [
+    {
+      "id": "dravya.idli-dosa-batter",
+      "name": "Fermented idli-dosa batter",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "fermented",
+      "canonHints": {
+        "vpk": [
+          0,
+          0,
+          0
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: fermented idli dosa batter; idli dosa batter."
+    },
+    {
+      "id": "dravya.fermented-rice-kanji",
+      "name": "Rice kanji (fermented gruel)",
+      "sanskrit": "Aranala",
+      "aliases": [
+        "fermented gruel"
+      ],
+      "category": "fermented",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "heating",
+        "note": "classical aranala/sour gruel family"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/2 cup",
+          "grams": 100
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: rice kanji; aranala; fermented rice kanji."
+    },
+    {
+      "id": "dravya.mamsa-rasa",
+      "name": "Meat broth (mamsa rasa)",
+      "sanskrit": "Mamsa Rasa",
+      "aliases": [],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -2,
+          0,
+          0
+        ],
+        "virya": "heating",
+        "note": "THE classical convalescent preparation"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: meat broth; mamsa rasa."
+    },
+    {
+      "id": "dravya.goat-liver",
+      "name": "Goat liver",
+      "sanskrit": "Yakrit",
+      "aliases": [],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          0
+        ],
+        "virya": "heating",
+        "note": "classical for blood nourishment"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "3 oz",
+          "grams": 85
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: goat liver; yakrit."
+    },
+    {
+      "id": "dravya.paya-soup",
+      "name": "Trotters soup (paya)",
+      "sanskrit": null,
+      "aliases": [
+        "paya"
+      ],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -2,
+          0,
+          1
+        ],
+        "virya": "heating",
+        "note": "joint-nourishing traditional broth"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: trotters soup; paya soup."
+    },
+    {
+      "id": "dravya.keema",
+      "name": "Minced mutton (keema)",
+      "sanskrit": null,
+      "aliases": [
+        "keema"
+      ],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -2,
+          1,
+          1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "3 oz",
+          "grams": 85
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: minced mutton; keema."
+    },
+    {
+      "id": "dravya.egg-bhurji",
+      "name": "Egg bhurji",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "animal",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          0
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "3 oz",
+          "grams": 85
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: egg bhurji."
+    },
+    {
+      "id": "dravya.paratha-plain",
+      "name": "Plain paratha",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          1
+        ],
+        "virya": "neutral"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 piece",
+          "grams": 50
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: plain paratha; paratha plain."
+    },
+    {
+      "id": "dravya.puri",
+      "name": "Puri",
+      "sanskrit": "Purika",
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          2
+        ],
+        "virya": "heating",
+        "note": "deep-fried; occasional"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: puri; purika."
+    },
+    {
+      "id": "dravya.jowar-bhakri",
+      "name": "Jowar bhakri",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          1,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: jowar bhakri."
+    },
+    {
+      "id": "dravya.thepla",
+      "name": "Methi thepla",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: methi thepla; thepla."
+    },
+    {
+      "id": "dravya.khakhra",
+      "name": "Khakhra",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          1,
+          0,
+          -1
+        ],
+        "virya": "neutral"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: khakhra."
+    },
+    {
+      "id": "dravya.sambar",
+      "name": "Sambar",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: sambar."
+    },
+    {
+      "id": "dravya.rasam",
+      "name": "Rasam",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -2
+        ],
+        "virya": "heating",
+        "note": "digestive pepper-tamarind soup"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: rasam."
+    },
+    {
+      "id": "dravya.kadhi",
+      "name": "Kadhi",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          -1
+        ],
+        "virya": "heating",
+        "note": "takra-besan classical lineage"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: kadhi."
+    },
+    {
+      "id": "dravya.dal-fry-toor",
+      "name": "Dal fry (toor)",
+      "sanskrit": null,
+      "aliases": [
+        "toor"
+      ],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "neutral"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: dal fry; dal fry toor."
+    },
+    {
+      "id": "dravya.curd-rice",
+      "name": "Curd rice",
+      "sanskrit": "Dadhyodana",
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling",
+        "note": "classical dadhyodana"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: curd rice; dadhyodana."
+    },
+    {
+      "id": "dravya.lemon-rice",
+      "name": "Lemon rice",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: lemon rice."
+    },
+    {
+      "id": "dravya.tamarind-rice",
+      "name": "Tamarind rice (puliyodarai)",
+      "sanskrit": null,
+      "aliases": [
+        "puliyodarai"
+      ],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          0
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: tamarind rice."
+    },
+    {
+      "id": "dravya.coconut-rice",
+      "name": "Coconut rice",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: coconut rice."
+    },
+    {
+      "id": "dravya.veg-pulao",
+      "name": "Vegetable pulao",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          0
+        ],
+        "virya": "neutral"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: vegetable pulao; veg pulao."
+    },
+    {
+      "id": "dravya.sabudana-khichdi",
+      "name": "Sabudana khichdi",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          1
+        ],
+        "virya": "neutral",
+        "note": "fasting dish"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: sabudana khichdi."
+    },
+    {
+      "id": "dravya.kanda-poha",
+      "name": "Kanda poha",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          0,
+          0,
+          -1
+        ],
+        "virya": "neutral"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: kanda poha."
+    },
+    {
+      "id": "dravya.dhokla",
+      "name": "Dhokla",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "neutral",
+        "note": "fermented-steamed; light"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: dhokla."
+    },
+    {
+      "id": "dravya.uttapam",
+      "name": "Uttapam",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "preparation",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          0
+        ],
+        "virya": "neutral"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 200
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: uttapam."
+    }
+  ]
+}
