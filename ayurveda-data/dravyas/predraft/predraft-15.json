@@ -445,15 +445,20 @@
         ],
         "virya": "cooling"
       },
-      "usda": [],
+      "usda": [
+        {
+          "fdcId": 5690,
+          "name": "Jujube, raw",
+          "tier": "near"
+        }
+      ],
       "servings": [
         {
           "label": "1 cup pieces",
           "grams": 150
         }
       ],
-      "_facetsPending": true,
-      "usdaNote": "No suitable USDA-store row after searches for: indian jujube; badara; ber."
+      "_facetsPending": true
     },
     {
       "id": "dravya.karonda-ripe",

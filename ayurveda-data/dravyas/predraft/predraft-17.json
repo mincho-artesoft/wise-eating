@@ -251,7 +251,8 @@
         }
       ],
       "_facetsPending": true,
-      "usdaNote": "No suitable USDA-store row after searches for: maize; makka."
+      "usdaNote": "No suitable USDA-store row after searches for: maize; makka.",
+      "_duplicateOf": "dravya.corn"
     },
     {
       "id": "dravya.navara-rice",

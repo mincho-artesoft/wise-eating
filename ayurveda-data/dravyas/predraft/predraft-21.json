@@ -219,15 +219,20 @@
         "virya": "heating",
         "note": "deep-fried; occasional"
       },
-      "usda": [],
+      "usda": [
+        {
+          "fdcId": 2218,
+          "name": "Bread, puri",
+          "tier": "exact"
+        }
+      ],
       "servings": [
         {
           "label": "1 cup",
           "grams": 200
         }
       ],
-      "_facetsPending": true,
-      "usdaNote": "No suitable USDA-store row after searches for: puri; purika."
+      "_facetsPending": true
     },
     {
       "id": "dravya.jowar-bhakri",
@@ -315,15 +320,20 @@
         ],
         "virya": "heating"
       },
-      "usda": [],
+      "usda": [
+        {
+          "fdcId": 1942,
+          "name": "Sambar, vegetable stew",
+          "tier": "exact"
+        }
+      ],
       "servings": [
         {
           "label": "1 cup",
           "grams": 200
         }
       ],
-      "_facetsPending": true,
-      "usdaNote": "No suitable USDA-store row after searches for: sambar."
+      "_facetsPending": true
     },
     {
       "id": "dravya.rasam",

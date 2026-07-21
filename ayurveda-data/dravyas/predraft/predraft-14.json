@@ -611,15 +611,20 @@
         ],
         "virya": "cooling"
       },
-      "usda": [],
+      "usda": [
+        {
+          "fdcId": 6726,
+          "name": "Pumpkin flowers, raw",
+          "tier": "exact"
+        }
+      ],
       "servings": [
         {
           "label": "1 cup chopped",
           "grams": 100
         }
       ],
-      "_facetsPending": true,
-      "usdaNote": "No suitable USDA-store row after searches for: pumpkin flower."
+      "_facetsPending": true
     },
     {
       "id": "dravya.agathi-flower",

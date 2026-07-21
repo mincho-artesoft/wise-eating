@@ -95,15 +95,20 @@
         "virya": "neutral",
         "note": "amla+haritaki+bibhitaki"
       },
-      "usda": [],
+      "usda": [
+        {
+          "fdcId": 12391,
+          "name": "Triphala powder",
+          "tier": "exact"
+        }
+      ],
       "servings": [
         {
           "label": "1 tsp",
           "grams": 3
         }
       ],
-      "_facetsPending": true,
-      "usdaNote": "No suitable USDA-store row after searches for: triphala; triphala churna."
+      "_facetsPending": true
     },
     {
       "id": "dravya.ashwagandha-powder",

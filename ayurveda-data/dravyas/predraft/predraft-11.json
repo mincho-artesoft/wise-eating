@@ -471,15 +471,20 @@
         ],
         "virya": "neutral"
       },
-      "usda": [],
+      "usda": [
+        {
+          "fdcId": 8965,
+          "name": "Bread, chapati or roti, plain, commercially prepared",
+          "tier": "exact"
+        }
+      ],
       "servings": [
         {
           "label": "1 piece",
           "grams": 50
         }
       ],
-      "_facetsPending": true,
-      "usdaNote": "No suitable USDA-store row after searches for: roti; rotika."
+      "_facetsPending": true
     }
   ]
 }

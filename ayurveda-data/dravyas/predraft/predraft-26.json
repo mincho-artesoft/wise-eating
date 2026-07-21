@@ -297,15 +297,20 @@
         ],
         "virya": "neutral"
       },
-      "usda": [],
+      "usda": [
+        {
+          "fdcId": 12562,
+          "name": "Kalpasi / Dagad phool",
+          "tier": "exact"
+        }
+      ],
       "servings": [
         {
           "label": "1 tsp",
           "grams": 2
         }
       ],
-      "_facetsPending": true,
-      "usdaNote": "No suitable USDA-store row after searches for: stone flower; dagad phool; kalpasi."
+      "_facetsPending": true
     },
     {
       "id": "dravya.nagkesar",

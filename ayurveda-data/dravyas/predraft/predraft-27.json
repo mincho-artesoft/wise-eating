@@ -121,15 +121,20 @@
         "virya": "heating",
         "note": "distinct from tejpatta"
       },
-      "usda": [],
+      "usda": [
+        {
+          "fdcId": 8142,
+          "name": "Spices, bay leaf",
+          "tier": "exact"
+        }
+      ],
       "servings": [
         {
           "label": "1 tbsp",
           "grams": 2
         }
       ],
-      "_facetsPending": true,
-      "usdaNote": "No suitable USDA-store row after searches for: bay leaf; bay leaf mediterranean."
+      "_facetsPending": true
     },
     {
       "id": "dravya.sage",
@@ -632,15 +637,20 @@
         ],
         "virya": "heating"
       },
-      "usda": [],
+      "usda": [
+        {
+          "fdcId": 12164,
+          "name": "Sorrel",
+          "tier": "near"
+        }
+      ],
       "servings": [
         {
           "label": "1 cup chopped",
           "grams": 35
         }
       ],
-      "_facetsPending": true,
-      "usdaNote": "No suitable USDA-store row after searches for: gongura; amlashaka."
+      "_facetsPending": true
     },
     {
       "id": "dravya.water-spinach",

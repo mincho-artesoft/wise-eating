@@ -262,15 +262,20 @@
         ],
         "virya": "cooling"
       },
-      "usda": [],
+      "usda": [
+        {
+          "fdcId": 6860,
+          "name": "Fiddlehead ferns, raw",
+          "tier": "exact"
+        }
+      ],
       "servings": [
         {
           "label": "1/2 cup",
           "grams": 100
         }
       ],
-      "_facetsPending": true,
-      "usdaNote": "No suitable USDA-store row after searches for: fiddlehead fern."
+      "_facetsPending": true
     },
     {
       "id": "dravya.taro-stem-regional",
