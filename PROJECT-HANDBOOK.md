@@ -2,7 +2,7 @@
 **Read this first. It is the knowledge-transfer document for anyone (human or AI)
 taking over direction of this project. Update it at the end of every milestone —
 that is a standing rule baked into all task packets.**
-Last updated: 2026-07-22 (D34 complete; D8 next).
+Last updated: 2026-07-22 (D8 complete — Ayurveda visible end to end; next: expert review + D9 engine enforcement).
 
 ## 1. Mission and the two applications
 
@@ -120,7 +120,7 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | D6 models+seeder | ✅ done; Mac gates green (Run 3) |
 | Branch split main/ayurveda-app + author normalization | ✅ done |
 | D34 crosswalk+rules (all 12,601 classified) | ✅ COMPLETE — Mac founder gates green (Run 6, report `15cb1b2`): build, fresh install 2214/2305/383/1500/14484, idempotency, v1→v2 top-up 336→2305. Fixes: Sendable (`b96c014`), ObserversHub splits (`1159729`, `1bc94fc`) |
-| D8 Ayurveda UI | 🚀 DESIGN DISPATCHED 2026-07-22 — `DESIGN-D8.md` (U1–U12) + `TASK-D8.md` (gates G1–G6, 31-assertion math check, 9 runtime spot foods) + `DISPATCH-D8.md` (Codex prompt). Editability policy RATIFIED by founder 2026-07-22: user-added foods fully editable → `AyurvedaProfile` kind/tier "user" (resolver gains `.user` case); catalog foods read-only (already structurally enforced — editor only reachable for `isUserAdded`); override-with-provenance deferred. Tier display mapping: link exact/near → "Classical", link derived → "Derived". Awaiting Codex run → director re-verification |
+| D8 Ayurveda UI (incl. D8.1 computed tier, D8.2 live editor preview) | ✅ COMPLETE (67e6983, pushed) — Ayurveda card on all food/recipe details (tier chip, center-zero dosha bars, ±/% toggle, rasa/virya/vipaka/guna chips, viruddha + contraindication warnings, engineExcluded banner, aiDraft disclaimer); computed tier for user recipes/menus (grams-weighted, coverage-gated, math-gated); editors: Add Food manual (neutral defaults), recipe/menu = live computed preview + optional manual override → kind "user". Fixes en route: render-node bug (empty Group killed .task), FoodItemCopy id type, banner-ad gating (real prod bug), -uiTestNoAds flag. Residuals: final Computed/User card screenshots skipped by founder decision; VoiceOver + dark-mode smoke deferred; catalog override-with-provenance deferred |
 | Expert review pass | ⏳ pending human reviewer: work aiDraft→reviewed, resolve reviewNotes, optional batch-31 top-up to 750 |
 | Later roadmap | media (yoga/meditation content), recommendation engine, dosha assessment — see ayurveda-data/RESTART-PLAN.md history |
 
