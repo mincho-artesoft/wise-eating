@@ -64,8 +64,13 @@ Current status: **714 dravyas, 1,500 recipes — all checks pass.**
 
 ## Next milestones
 
-1. **D3 crosswalk** — USDA fdcId → dravya mapping (name-match script + review file).
-2. **D4 category rules** — estimated-tier dosha values for unmatched processed foods.
+1. **D3+D4 — DESIGNED, READY FOR DISPATCH (2026-07-22).** `DESIGN-D34.md` +
+   `TASK-D34.md` authored; director-simulated against the real store:
+   336 classical + 1,969 derived (67 contested, adjudication ladder O1,R1–R4)
+   + 10,296 estimated = all 12,601 foods. Director-authored inputs committed:
+   `rules/category-rules.json` (187 categories), `rules/modifiers.json` (14),
+   `crosswalk/overrides.json` (2 denies). Executor builds matcher, seed v2
+   (2,305 links), resolver `.estimated`, seeder top-up.
 3. **D6 Swift — COMPLETE ✅ (verified on device simulator).** Models + seeder
    implemented, all gates green on Mac (Run 3): build PASS, fresh install seeds
    2214 profiles / 336 links / 383 placeholders / 1500 recipes, idempotent across

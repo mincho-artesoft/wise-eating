@@ -1,0 +1,16 @@
+{
+ "overridesVersion": 1,
+ "purpose": "Curated corrections applied by match_crosswalk.py after rule-based matching; expert review appends here instead of hand-editing crosswalk.csv",
+ "force": {},
+ "deny": [
+  8244,
+  12546
+ ],
+ "denyNotes": {
+  "8244": "Oil, apricot kernel - a pressed oil, not the fruit; falls back to Fats and Oils rule",
+  "12546": "Avocado leaf (dried, Mexico) - culinary leaf, not the fruit; falls back to Spices and Herbs rule"
+ },
+ "denyPairs": [],
+ "stopKeys": [],
+ "extraKeys": {}
+}
