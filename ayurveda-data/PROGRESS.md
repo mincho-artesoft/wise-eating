@@ -66,10 +66,16 @@ Current status: **714 dravyas, 1,500 recipes — all checks pass.**
 
 1. **D3 crosswalk** — USDA fdcId → dravya mapping (name-match script + review file).
 2. **D4 category rules** — estimated-tier dosha values for unmatched processed foods.
-3. **D6 Swift** — DESIGNED & DISPATCHABLE: `DESIGN-D6.md` (director design) +
-   `TASK-D6.md` (Codex packet). `AyurvedaProfile` + `AyurvedaLink` models (additive),
-   recipes as `FoodItem(isRecipe)` + `IngredientLink`, one-time versioned seeder from
-   bundled `ayurveda_seed.json.gz`. Say "verify D6" when Codex reports.
+3. **D6 Swift — COMPLETE ✅ (verified on device simulator).** Models + seeder
+   implemented, all gates green on Mac (Run 3): build PASS, fresh install seeds
+   2214 profiles / 336 links / 383 placeholders / 1500 recipes, idempotent across
+   relaunches, upgrade path preserves the 12,601-food store (final 14,484).
+   Fixes applied on ayurveda-app only: Foundation import (a978600), ObserversHub
+   body split (1cdcf12 — D6-triggered type-check budget; main builds clean as-is).
+   Branch layout: `main` = pristine original app (9a5429d); `ayurveda-app` = full
+   Ayurveda app, single-author history (mincho.milev@gmail.com).
+   NEXT: **D8 — Ayurveda UI** (dosha display on food/recipe screens via
+   AyurvedaResolver; engineExcluded warnings; viruddha badges).
 4. **Expert review** — work through aiDraft content, resolve reviewNotes, promote
    to reviewed; optional batch-31 top-up to 750.
 
