@@ -263,8 +263,11 @@ final class AIDietGenerator {
         }
         
         // Зареждаме всички храни от базата данни.
-        var fd = FetchDescriptor<FoodItem>(sortBy: [SortDescriptor(\FoodItem.name, order: .forward)])
-        let allFoodsRaw = try ctx.fetch(fd)
+        let fd = FetchDescriptor<FoodItem>(sortBy: [SortDescriptor(\FoodItem.name, order: .forward)])
+        let fetchedFoods = try ctx.fetch(fd)
+        let excludedFoodIds = AyurvedaRecommendationGate.excludedFoodIds(context: ctx)
+        let allFoodsRaw = fetchedFoods.filter { !excludedFoodIds.contains($0.id) }
+        emitLog("🚫 AyurvedaGate: AyurvedaGate active, \(fetchedFoods.count - allFoodsRaw.count) candidates filtered", onLog: onLog)
         emitLog("📚 Заредени са \(allFoodsRaw.count) храни", onLog: onLog)
         guard !allFoodsRaw.isEmpty else { return .init(suggestedName: suggestedName, foodItemIDs: []) }
         
@@ -298,6 +301,7 @@ final class AIDietGenerator {
             let scoredFoodItemIDs = Set(progress.scoredResults.keys)
             if !scoredFoodItemIDs.isEmpty {
                 let scoredItems = try ctx.fetch(FetchDescriptor<FoodItem>(predicate: #Predicate { scoredFoodItemIDs.contains($0.id) }))
+                    .filter { !excludedFoodIds.contains($0.id) }
                 scored = scoredItems.compactMap { item in
                     guard let score = progress.scoredResults[item.id] else { return nil }
                     return (id: item.persistentModelID, score: score)
@@ -336,7 +340,7 @@ final class AIDietGenerator {
             let ids = scored.map { $0.id }
             let scoreMap = Dictionary(uniqueKeysWithValues: scored.map { ($0.id, $0.score) })
             let finalFD = FetchDescriptor<FoodItem>(predicate: #Predicate { ids.contains($0.persistentModelID) })
-            let finalItems = try ctx.fetch(finalFD)
+            let finalItems = try ctx.fetch(finalFD).filter { !excludedFoodIds.contains($0.id) }
             let top = finalItems.sorted { a, b in
                 let sa = scoreMap[a.persistentModelID] ?? 0
                 let sb = scoreMap[b.persistentModelID] ?? 0
@@ -521,7 +525,7 @@ final class AIDietGenerator {
         let ids = scored.map { $0.id }
         let scoreMap = Dictionary(uniqueKeysWithValues: scored.map { ($0.id, $0.score) })
         let finalFD = FetchDescriptor<FoodItem>(predicate: #Predicate { ids.contains($0.persistentModelID) })
-        let finalItems = try ctx.fetch(finalFD)
+        let finalItems = try ctx.fetch(finalFD).filter { !excludedFoodIds.contains($0.id) }
         let top = finalItems.sorted { a, b in
             let sa = scoreMap[a.persistentModelID] ?? 0
             let sb = scoreMap[b.persistentModelID] ?? 0

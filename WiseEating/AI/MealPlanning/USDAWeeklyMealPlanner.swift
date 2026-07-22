@@ -279,9 +279,14 @@ public final class USDAWeeklyMealPlanner: Sendable {
         emitLog("createMissingIngredient('\(name)', \(grams) g) – START", onLog: onLog)
         
         let ctx = ModelContext(self.container)
+        guard !AyurvedaRecommendationGate.nameIsExcluded(name, context: ctx) else {
+            emitLog("🚫 AyurvedaGate: dropped excluded generated ingredient '\(name)'", onLog: onLog)
+            return nil
+        }
+        let excludedFoodIds = AyurvedaRecommendationGate.excludedFoodIds(context: ctx)
         
         let exactPredicate = #Predicate<FoodItem> { $0.name == name }
-        if let existing = try ctx.fetch(FetchDescriptor(predicate: exactPredicate)).first {
+        if let existing = try ctx.fetch(FetchDescriptor(predicate: exactPredicate)).first(where: { !excludedFoodIds.contains($0.id) }) {
             emitLog("  • Found existing by exact name: '\(existing.name)' [\(existing.id)] – reuse", onLog: onLog)
             return FoodItemCandidate(id: existing.id, name: existing.name)
         }
@@ -300,9 +305,13 @@ public final class USDAWeeklyMealPlanner: Sendable {
         let finalName = dto.name.isEmpty ? name : dto.name
         dto.name = finalName
         emitLog("  • AIFoodDetailGenerator output name: '\(finalName)'", onLog: onLog)
+        guard !AyurvedaRecommendationGate.nameIsExcluded(finalName, context: ctx) else {
+            emitLog("🚫 AyurvedaGate: dropped excluded generated ingredient '\(finalName)'", onLog: onLog)
+            return nil
+        }
         
         let finalPredicate = #Predicate<FoodItem> { $0.name == finalName }
-        if let existing = try ctx.fetch(FetchDescriptor(predicate: finalPredicate)).first {
+        if let existing = try ctx.fetch(FetchDescriptor(predicate: finalPredicate)).first(where: { !excludedFoodIds.contains($0.id) }) {
             emitLog("  • Found existing by final name after DTO generation: '\(existing.name)' [\(existing.id)] – reuse", onLog: onLog)
             return FoodItemCandidate(id: existing.id, name: existing.name)
         }
@@ -330,7 +339,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
         } catch {
             emitLog("  • ❌ Failed to save new FoodItem: \(error.localizedDescription)", onLog: onLog)
             
-            if let existing = try ctx.fetch(FetchDescriptor(predicate: finalPredicate)).first {
+            if let existing = try ctx.fetch(FetchDescriptor(predicate: finalPredicate)).first(where: { !excludedFoodIds.contains($0.id) }) {
                 emitLog("  • Found existing item after save failed (likely race condition): '\(existing.name)' [\(existing.id)] – reuse", onLog: onLog)
                 return FoodItemCandidate(id: existing.id, name: existing.name)
             }
@@ -533,6 +542,8 @@ public final class USDAWeeklyMealPlanner: Sendable {
         
         // --- START OF CHANGE (2/3): Load or initialize progress ---
         let ctx = ModelContext(self.container)
+        let excludedFoodIds = AyurvedaRecommendationGate.excludedFoodIds(context: ctx)
+        emitLog("🚫 AyurvedaGate: AyurvedaGate active, 0 candidates filtered", onLog: onLog)
         guard let job = ctx.model(for: jobID) as? AIGenerationJob else {
             throw NSError(domain: "MealPlannerError", code: 404, userInfo: [NSLocalizedDescriptionKey: "AIGenerationJob not found."])
         }
@@ -792,7 +803,8 @@ public final class USDAWeeklyMealPlanner: Sendable {
                 
                 if let cachedItems = progress.resolvedItems?[conceptualDay.day]?[mealName]?.compactMap({ info in
                     let component = conceptualMeal.components.first(where: { $0.name.lowercased() == info.resolvedName.lowercased() || info.resolvedName.lowercased().contains($0.name.lowercased()) })
-                    if let food = ctx.model(for: info.persistentID) as? FoodItem {
+                    if let food = ctx.model(for: info.persistentID) as? FoodItem,
+                       !excludedFoodIds.contains(food.id) {
                         let grams = component?.grams ?? 100.0
                         return MealPlanPreviewItem(name: food.name, grams: grams, kcal: food.calories(for: grams))
                     }
@@ -1095,6 +1107,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
     }
     
     @available(iOS 26.0, *)
+    @MainActor
     private func specializeStructuralRequestsWithHeadwords(
         profile: Profile,
         structuralRequests: inout [String],
@@ -1232,6 +1245,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
 
     
     @available(iOS 26.0, *)
+    @MainActor
     private func aiGenerateFoodPaletteForCuisine(
         profile: Profile,
         cuisineTag: String,
@@ -1280,6 +1294,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
     }
     
     @available(iOS 26.0, *)
+    @MainActor
     private func aiGenerateFoodPaletteForHeadword(
         profile: Profile,
         headword: String,
@@ -2846,6 +2861,11 @@ public final class USDAWeeklyMealPlanner: Sendable {
         onLog: (@Sendable (String) -> Void)?
     ) async -> ResolvedFoodInfo? {
         onLog?("    - Resolving '\(conceptName)' in context of '\(mealContext.descriptiveTitle)'...")
+        let ctx = ModelContext(self.container)
+        guard !AyurvedaRecommendationGate.nameIsExcluded(conceptName, context: ctx) else {
+            emitLog("🚫 AyurvedaGate: dropped excluded generated ingredient '\(conceptName)'", onLog: onLog)
+            return nil
+        }
         
         let searchLimit = 50
         
@@ -2898,12 +2918,17 @@ public final class USDAWeeklyMealPlanner: Sendable {
             return nil
         }
         
-        let ctx = ModelContext(self.container)
         let descriptor = FetchDescriptor<FoodItem>(predicate: #Predicate { candidateIDs.contains($0.persistentModelID) })
         guard var candidates = try? ctx.fetch(descriptor), !candidates.isEmpty else {
             onLog?("    - ⚠️ Could not fetch FoodItem models for candidates.")
             return nil
         }
+
+        let excludedFoodIds = AyurvedaRecommendationGate.excludedFoodIds(context: ctx)
+        let ayurvedaCandidateCount = candidates.count
+        candidates.removeAll { excludedFoodIds.contains($0.id) }
+        emitLog("🚫 AyurvedaGate: AyurvedaGate active, \(ayurvedaCandidateCount - candidates.count) candidates filtered", onLog: onLog)
+        guard !candidates.isEmpty else { return nil }
         
         let beforeFilterCount = candidates.count
         let filtered = filterCandidates(candidates, banned: banned)
@@ -3226,6 +3251,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
             
             func isSalad(_ n: String) -> Bool { let l = n.lowercased(); return l.contains("salad") || l.contains("greens") }
             func isFruit(_ n: String) -> Bool { let l = n.lowercased(); return l.contains("fruit") || l.contains("berry") || l.contains("melon") || l.contains("apple") || l.contains("banana") }
+            let gateContext = ModelContext(self.container)
             
             // --- Prepare Side Candidates ---
             var sideCandidates: [String] = {
@@ -3233,7 +3259,8 @@ public final class USDAWeeklyMealPlanner: Sendable {
                 let paletteSides = foodPalette.filter { isSalad($0) || isFruit($0) }
                 var seen = Set<String>()
                 for side in paletteSides {
-                    if seen.insert(side.lowercased()).inserted && !isExcluded(side) {
+                    if seen.insert(side.lowercased()).inserted && !isExcluded(side)
+                        && !AyurvedaRecommendationGate.nameIsExcluded(side, context: gateContext) {
                         candidates.append(side)
                     }
                 }
@@ -3242,10 +3269,12 @@ public final class USDAWeeklyMealPlanner: Sendable {
             
             if sideCandidates.isEmpty {
                 let ctx = ModelContext(self.container)
+                let excludedFoodIds = AyurvedaRecommendationGate.excludedFoodIds(context: ctx)
                 let descriptor = FetchDescriptor<FoodItem>()
                 if let all = try? ctx.fetch(descriptor) {
                     for f in all {
-                        if (isSalad(f.name) || isFruit(f.name)) && !isExcluded(f.name) {
+                        if (isSalad(f.name) || isFruit(f.name)) && !isExcluded(f.name)
+                            && !excludedFoodIds.contains(f.id) {
                             sideCandidates.append(f.name)
                         }
                     }
@@ -3682,9 +3711,16 @@ public final class USDAWeeklyMealPlanner: Sendable {
     ) async -> [String] {
         guard !variantIdeas.isEmpty else { return [] }
         var validatedVariants: [String] = []
+        let ctx = ModelContext(self.container)
+        let excludedFoodIds = AyurvedaRecommendationGate.excludedFoodIds(context: ctx)
         
         for idea in variantIdeas {
-            if let existing = try? ModelContext(self.container).fetch(FetchDescriptor<FoodItem>(predicate: #Predicate { $0.name == idea })).first {
+            if AyurvedaRecommendationGate.nameIsExcluded(idea, context: ctx) {
+                emitLog("🚫 AyurvedaGate: dropped excluded generated ingredient '\(idea)'", onLog: onLog)
+                continue
+            }
+            if let existing = try? ctx.fetch(FetchDescriptor<FoodItem>(predicate: #Predicate { $0.name == idea }))
+                .first(where: { !excludedFoodIds.contains($0.id) }) {
                 validatedVariants.append(existing.name)
                 onLog?("    - ✅ Validated variant by exact match: '\(existing.name)'")
                 continue
@@ -3698,7 +3734,8 @@ public final class USDAWeeklyMealPlanner: Sendable {
                 requiredHeadwords: tokenizedWords
             )
             
-            if let bestCandidateID = ids.first, let foodItem = fetchFoodItem(by: bestCandidateID) {
+            if let bestCandidateID = ids.first, let foodItem = fetchFoodItem(by: bestCandidateID),
+               !excludedFoodIds.contains(foodItem.id) {
                 validatedVariants.append(foodItem.name)
                 onLog?("    - ✅ Validated variant by smart search: '\(idea)' -> '\(foodItem.name)'")
             } else {

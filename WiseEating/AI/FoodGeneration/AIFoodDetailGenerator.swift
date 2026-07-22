@@ -36,6 +36,11 @@ class AIFoodDetailGenerator {
             let diff = CFAbsoluteTimeGetCurrent() - start
             print("⏱️ Завърши за \(diff) секунди")
         }
+
+        guard !AyurvedaRecommendationGate.nameIsExcluded(foodName, context: ctx) else {
+            onLog?("🚫 AyurvedaGate: dropped excluded generated food '\(foodName)'")
+            throw NSError(domain: "AyurvedaRecommendationGate", code: 1, userInfo: [NSLocalizedDescriptionKey: "This food is not available for recommendations."])
+        }
         
         onLog?("🚀 Starting AI data generation for '\(foodName)' (PARALLEL, FRESH session per step, with retries)…")
         
@@ -65,10 +70,13 @@ class AIFoodDetailGenerator {
         onLog?("  🔎 Fetching up to 20 potential reference foods…")
         
         // 2. Търсим кандидати
-        let candidates = await foodSearcher.searchResults(
+        let fetchedCandidates = await foodSearcher.searchResults(
             query: foodName,
             limit: 20
         )
+        let excludedFoodIds = AyurvedaRecommendationGate.excludedFoodIds(context: ctx)
+        let candidates = fetchedCandidates.filter { !excludedFoodIds.contains($0.id) }
+        onLog?("🚫 AyurvedaGate: AyurvedaGate active, \(fetchedCandidates.count - candidates.count) candidates filtered")
         
         var similarFood: FoodItem?
         

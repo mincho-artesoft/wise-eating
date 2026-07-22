@@ -332,6 +332,10 @@ class AIRecipeGenerator {
         guard let job = ctx.model(for: jobID) as? AIGenerationJob else {
             throw NSError(domain: "RecipeGenerator", code: 404, userInfo: [NSLocalizedDescriptionKey: "AIGenerationJob not found."])
         }
+        guard !AyurvedaRecommendationGate.nameIsExcluded(recipeName, context: ctx) else {
+            emitLog("🚫 AyurvedaGate: dropped excluded generated recipe '\(recipeName)'", onLog: onLog)
+            throw NSError(domain: "AyurvedaRecommendationGate", code: 1, userInfo: [NSLocalizedDescriptionKey: "This food is not available for recommendations."])
+        }
         
         var progress: RecipeGenerationProgress
         if let data = job.intermediateResultData, let loaded = try? JSONDecoder().decode(RecipeGenerationProgress.self, from: data) {
@@ -399,12 +403,16 @@ class AIRecipeGenerator {
             emitLog("   • Generated new items: \(smart.generatedNames.joined(separator: ", "))", onLog: onLog)
         }
         try Task.checkCancellation()
+
+        let excludedFoodIds = AyurvedaRecommendationGate.excludedFoodIds(context: ctx)
+        let allowedResolved = smart.resolved.filter { !excludedFoodIds.contains($0.foodItemID) }
+        emitLog("🚫 AyurvedaGate: AyurvedaGate active, \(smart.resolved.count - allowedResolved.count) candidates filtered", onLog: onLog)
         
         // --- Step 3: Description reconciliation (fast, no checkpoint needed) ---
         emitLog("Step 3/3: Description reconciliation (if needed)…", onLog: onLog)
         var finalDescription = conceptual.description
-        if !smart.replacements.isEmpty || !smart.generatedNames.isEmpty {
-            let finalNamesWithGrams: [(String, Double)] = smart.resolved
+        if !smart.replacements.isEmpty || !smart.generatedNames.isEmpty || allowedResolved.count != smart.resolved.count {
+            let finalNamesWithGrams: [(String, Double)] = allowedResolved
                 .compactMap { rid in
                     guard let name = smart.nameByID[rid.foodItemID] else { return nil }
                     return (name, rid.grams)
@@ -425,7 +433,7 @@ class AIRecipeGenerator {
         let dto = ResolvedRecipeResponseDTO(
             description: finalDescription,
             prepTimeMinutes: clampedPrep,
-            ingredients: smart.resolved.sorted { $0.grams > $1.grams }
+            ingredients: allowedResolved.sorted { $0.grams > $1.grams }
         )
         try Task.checkCancellation()
         
@@ -561,6 +569,14 @@ class AIRecipeGenerator {
         unresolved: [String]
     ) {
         emitLog("🔎 resolveIngredientsSmartly – START (\(conceptual.ingredients.count) conceptual ingredient(s))", onLog: onLog)
+
+        let gateContext = ModelContext(self.container)
+        let allowedIngredients = conceptual.ingredients.filter { ingredient in
+            let excluded = AyurvedaRecommendationGate.nameIsExcluded(ingredient.name, context: gateContext)
+            if excluded { emitLog("🚫 AyurvedaGate: dropped excluded generated ingredient '\(ingredient.name)'", onLog: onLog) }
+            return !excluded
+        }
+        emitLog("🚫 AyurvedaGate: AyurvedaGate active, \(conceptual.ingredients.count - allowedIngredients.count) candidates filtered", onLog: onLog)
         
         // ПРОМЯНА: Използваме SmartFoodSearch3
         let smartSearch = SmartFoodSearch3(container: self.container)
@@ -569,7 +585,7 @@ class AIRecipeGenerator {
         
         try Task.checkCancellation()
         
-        let otherNames = Set(conceptual.ingredients.map { $0.name })
+        let otherNames = Set(allowedIngredients.map { $0.name })
         try Task.checkCancellation()
         
         var outResolved: [ResolvedIngredient] = []
@@ -585,7 +601,7 @@ class AIRecipeGenerator {
             try await withThrowingTaskGroup(
                 of: (ResolvedIngredient?, (String, String)?, (Int, String)?, String?).self
             ) { group in
-                for ing in conceptual.ingredients {
+                for ing in allowedIngredients {
                     group.addTask { [weak self] in
                         guard let self else { return (nil, nil, nil, ing.name) }
                         
@@ -627,7 +643,7 @@ class AIRecipeGenerator {
                             return (nil, nil, nil, ing.name)
                         }
                         
-                        let candItems = await self.fetchFoodCandidates(for: candIDs)
+                        let candItems = await self.fetchFoodCandidates(for: candIDs, onLog: onLog)
                         
                         let filteredCandItems = await self.filterCandidates(
                             candItems,
@@ -1044,11 +1060,16 @@ class AIRecipeGenerator {
         
         // Use one ModelContext for the entire operation to ensure consistency.
         let ctx = ModelContext(self.container)
+        guard !AyurvedaRecommendationGate.nameIsExcluded(name, context: ctx) else {
+            emitLog("🚫 AyurvedaGate: dropped excluded generated ingredient '\(name)'", onLog: onLog)
+            return nil
+        }
+        let excludedFoodIds = AyurvedaRecommendationGate.excludedFoodIds(context: ctx)
         try Task.checkCancellation()
         
         // Check 1: By original name (fast path)
         let exactPredicate = #Predicate<FoodItem> { $0.name == name }
-        if let existing = try ctx.fetch(FetchDescriptor(predicate: exactPredicate)).first {
+        if let existing = try ctx.fetch(FetchDescriptor(predicate: exactPredicate)).first(where: { !excludedFoodIds.contains($0.id) }) {
             emitLog("  • Found existing by exact name: '\(existing.name)' [\(existing.id)] – reuse", onLog: onLog)
             return FoodItemCandidate(id: existing.id, name: existing.name)
         }
@@ -1086,11 +1107,15 @@ class AIRecipeGenerator {
         let finalName = dto.name.isEmpty ? name : dto.name
         dto.name = finalName
         emitLog("  • AIFoodDetailGenerator output name: '\(finalName)'", onLog: onLog)
+        guard !AyurvedaRecommendationGate.nameIsExcluded(finalName, context: ctx) else {
+            emitLog("🚫 AyurvedaGate: dropped excluded generated ingredient '\(finalName)'", onLog: onLog)
+            return nil
+        }
         try Task.checkCancellation()
         
         // Check 2: By final name from DTO
         let finalPredicate = #Predicate<FoodItem> { $0.name == finalName }
-        if let existing = try ctx.fetch(FetchDescriptor(predicate: finalPredicate)).first {
+        if let existing = try ctx.fetch(FetchDescriptor(predicate: finalPredicate)).first(where: { !excludedFoodIds.contains($0.id) }) {
             emitLog("  • Found existing by final name after DTO generation: '\(existing.name)' [\(existing.id)] – reuse", onLog: onLog)
             return FoodItemCandidate(id: existing.id, name: existing.name)
         }
@@ -1121,7 +1146,7 @@ class AIRecipeGenerator {
         } catch {
             emitLog("  • ❌ Failed to save new FoodItem: \(error.localizedDescription)", onLog: onLog)
             
-            if let existing = try ctx.fetch(FetchDescriptor(predicate: finalPredicate)).first {
+            if let existing = try ctx.fetch(FetchDescriptor(predicate: finalPredicate)).first(where: { !excludedFoodIds.contains($0.id) }) {
                 emitLog("  • Found existing item after save failed (likely race condition): '\(existing.name)' [\(existing.id)] – reuse", onLog: onLog)
                 return FoodItemCandidate(id: existing.id, name: existing.name)
             }
@@ -1232,7 +1257,10 @@ class AIRecipeGenerator {
     }
     
     @MainActor
-    private func fetchFoodCandidates(for ids: [PersistentIdentifier]) -> [FoodItemCandidate] {
+    private func fetchFoodCandidates(
+        for ids: [PersistentIdentifier],
+        onLog: (@Sendable (String) -> Void)?
+    ) -> [FoodItemCandidate] {
         emitLog("fetchFoodCandidates – START (\(ids.count) id(s))", onLog: nil)
         guard !ids.isEmpty else {
             emitLog("fetchFoodCandidates – END (empty)", onLog: nil)
@@ -1241,7 +1269,10 @@ class AIRecipeGenerator {
         let ctx = ModelContext(self.container)
         let descriptor = FetchDescriptor<FoodItem>(predicate: #Predicate { ids.contains($0.persistentModelID) })
         let fetched = (try? ctx.fetch(descriptor)) ?? []
-        let result = fetched.map { FoodItemCandidate(id: $0.id, name: $0.name) }
+        let excludedFoodIds = AyurvedaRecommendationGate.excludedFoodIds(context: ctx)
+        let allowed = fetched.filter { !excludedFoodIds.contains($0.id) }
+        emitLog("🚫 AyurvedaGate: AyurvedaGate active, \(fetched.count - allowed.count) candidates filtered", onLog: onLog)
+        let result = allowed.map { FoodItemCandidate(id: $0.id, name: $0.name) }
         emitLog("fetchFoodCandidates – END (fetched \(result.count))", onLog: nil)
         return result
     }

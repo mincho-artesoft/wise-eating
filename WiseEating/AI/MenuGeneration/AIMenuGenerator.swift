@@ -234,18 +234,27 @@ final class AIMenuGenerator {
         _ items: [MealPlanPreviewItem],
         onLog: (@Sendable (String) -> Void)?
     ) async -> [ResolvedIngredient] {
-        guard !items.isEmpty else { return [] }
         let ctx = ModelContext(self.container)
+        let excludedFoodIds = AyurvedaRecommendationGate.excludedFoodIds(context: ctx)
         var out: [ResolvedIngredient] = []
+        var filteredCount = 0
 
         for it in items {
+            if AyurvedaRecommendationGate.nameIsExcluded(it.name, context: ctx) {
+                filteredCount += 1
+                emitLog("🚫 AyurvedaGate: dropped excluded generated ingredient '\(it.name)'", onLog: onLog)
+                continue
+            }
             let descriptor = FetchDescriptor<FoodItem>(predicate: #Predicate<FoodItem> {
                 $0.name == it.name && !$0.isUserAdded
             })
             
             do {
                 try Task.checkCancellation()
-                if let food = try ctx.fetch(descriptor).first {
+                let matches = try ctx.fetch(descriptor)
+                let allowedMatches = matches.filter { !excludedFoodIds.contains($0.id) }
+                filteredCount += matches.count - allowedMatches.count
+                if let food = allowedMatches.first {
                     out.append(ResolvedIngredient(foodItemID: food.id, grams: it.grams))
                 } else {
                     onLog?("    - ⚠️ Can't resolve '\(it.name)' to FoodItem; skipping.")
@@ -254,6 +263,7 @@ final class AIMenuGenerator {
                 onLog?("    - ⚠️ Fetch error for '\(it.name)': \(error.localizedDescription)")
             }
         }
+        emitLog("🚫 AyurvedaGate: AyurvedaGate active, \(filteredCount) candidates filtered", onLog: onLog)
         return out
     }
 
