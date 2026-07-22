@@ -31,6 +31,12 @@ class SubscriptionManager: ObservableObject {
         // ✅ 2. ПРОМЕНИ GETTER-А НА subscriptionStatus
         var subscriptionStatus: SubscriptionStatus {
             get {
+                // UI-test support: processes launched with -uiTestNoAds behave as
+                // Remove Ads plan (disables all ad paths). Never persisted; only
+                // affects that launch. Used by simulator automation (D8 gates).
+                if ProcessInfo.processInfo.arguments.contains("-uiTestNoAds") {
+                    return .removeAds
+                }
                 // Взимаме реалния статус от базата/покупките
                 let realStatus = SubscriptionStatus(rawValue: subscriptionStatusRaw) ?? .base
                 
