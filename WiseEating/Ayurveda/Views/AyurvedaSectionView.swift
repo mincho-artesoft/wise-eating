@@ -47,15 +47,19 @@ struct AyurvedaSectionView: View {
       }
       tierRow(display)
       DoshaBarsView(vata: display.vata, pitta: display.pitta, kapha: display.kapha)
-      AyurvedaChipRow(title: "Rasa (taste)", values: display.rasa)
-      AyurvedaChipRow(title: "Virya (energy)", values: optionalValue(display.virya))
-      AyurvedaChipRow(title: "Vipaka (post-digestive)", values: optionalValue(display.vipaka))
-      AyurvedaChipRow(title: "Gunas (qualities)", values: display.gunas)
-      AyurvedaChipRow(
-        title: "Preparation modifiers",
-        values: display.modifierLabels,
-        color: Color(hex: "FCC934")
-      )
+      if display.tierLabel == "Computed" {
+        AyurvedaChipRow(title: "Virya (energy)", values: optionalValue(display.virya))
+      } else {
+        AyurvedaChipRow(title: "Rasa (taste)", values: display.rasa)
+        AyurvedaChipRow(title: "Virya (energy)", values: optionalValue(display.virya))
+        AyurvedaChipRow(title: "Vipaka (post-digestive)", values: optionalValue(display.vipaka))
+        AyurvedaChipRow(title: "Gunas (qualities)", values: display.gunas)
+        AyurvedaChipRow(
+          title: "Preparation modifiers",
+          values: display.modifierLabels,
+          color: Color(hex: "FCC934")
+        )
+      }
       AyurvedaWarningsView(
         viruddha: display.viruddha,
         contraindications: display.contraindications
@@ -107,6 +111,8 @@ struct AyurvedaSectionView: View {
     case "Classical":
       return Color(hex: "34A853")
     case "Derived":
+      return Color(hex: "4A86E8")
+    case "Computed":
       return Color(hex: "4A86E8")
     case "Estimated":
       return Color(hex: "FCC934")

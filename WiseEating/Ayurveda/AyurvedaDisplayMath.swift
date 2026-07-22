@@ -5,8 +5,40 @@ public enum AyurvedaDisplayMath {
     case classical
     case recipe
     case derived(linkTier: String)
+    case computed
     case estimated
     case user
+  }
+
+  public struct WeightedIngredient: Sendable {
+    public let vata: Int
+    public let pitta: Int
+    public let kapha: Int
+    public let grams: Double
+    public let virya: String?
+
+    public init(
+      vata: Int,
+      pitta: Int,
+      kapha: Int,
+      grams: Double,
+      virya: String? = nil
+    ) {
+      self.vata = vata
+      self.pitta = pitta
+      self.kapha = kapha
+      self.grams = grams
+      self.virya = virya
+    }
+  }
+
+  public struct Computed: Sendable {
+    public let vata: Int
+    public let pitta: Int
+    public let kapha: Int
+    public let virya: String
+    public let coverage: Double
+    public let confidence: Double
   }
 
   public static func tierLabel(_ tier: TierInput) -> String {
@@ -17,6 +49,8 @@ public enum AyurvedaDisplayMath {
       return "Recipe"
     case .derived(let linkTier):
       return linkTier == "exact" || linkTier == "near" ? "Classical" : "Derived"
+    case .computed:
+      return "Computed"
     case .estimated:
       return "Estimated"
     case .user:
@@ -77,5 +111,58 @@ public enum AyurvedaDisplayMath {
       orderIndex = (orderIndex + 1) % order.count
     }
     return (result[0], result[1], result[2])
+  }
+
+  public static func computed(
+    totalGrams: Double,
+    resolved ingredients: [WeightedIngredient]
+  ) -> Computed? {
+    guard totalGrams.isFinite, totalGrams > 0 else {
+      return nil
+    }
+
+    let ingredients = ingredients.filter { ingredient in
+      ingredient.grams.isFinite && ingredient.grams > 0
+    }
+    let resolvedGrams = ingredients.reduce(0.0) { $0 + $1.grams }
+    guard resolvedGrams > 0 else {
+      return nil
+    }
+
+    let coverage = resolvedGrams / totalGrams
+    guard coverage >= 0.5 else {
+      return nil
+    }
+
+    let vataTotal = ingredients.reduce(0.0) { $0 + Double($1.vata) * $1.grams }
+    let pittaTotal = ingredients.reduce(0.0) { $0 + Double($1.pitta) * $1.grams }
+    let kaphaTotal = ingredients.reduce(0.0) { $0 + Double($1.kapha) * $1.grams }
+    let heatingGrams = ingredients
+      .filter { $0.virya == "heating" }
+      .reduce(0.0) { $0 + $1.grams }
+    let coolingGrams = ingredients
+      .filter { $0.virya == "cooling" }
+      .reduce(0.0) { $0 + $1.grams }
+    let viryaMargin = abs(heatingGrams - coolingGrams)
+    let virya: String
+    if viryaMargin < resolvedGrams * 0.15 {
+      virya = "neutral"
+    } else {
+      virya = heatingGrams > coolingGrams ? "heating" : "cooling"
+    }
+
+    return Computed(
+      vata: roundedDosha(vataTotal / resolvedGrams),
+      pitta: roundedDosha(pittaTotal / resolvedGrams),
+      kapha: roundedDosha(kaphaTotal / resolvedGrams),
+      virya: virya,
+      coverage: coverage,
+      confidence: min(0.5 * coverage, 0.6)
+    )
+  }
+
+  private static func roundedDosha(_ value: Double) -> Int {
+    let rounded = Int(value.rounded(.toNearestOrAwayFromZero))
+    return min(2, max(-2, rounded))
   }
 }

@@ -56,6 +56,25 @@ struct AyurvedaDisplay: Sendable {
         vpk: vpk,
         modifierLabels: modifierLabels
       )
+    case .computed(let computed):
+      return AyurvedaDisplay(
+        tierLabel: AyurvedaDisplayMath.tierLabel(.computed),
+        tierDetail: "computed from your ingredients",
+        vata: computed.vata,
+        pitta: computed.pitta,
+        kapha: computed.kapha,
+        rasa: [],
+        virya: computed.virya,
+        vipaka: nil,
+        gunas: [],
+        modifierLabels: [],
+        viruddha: [],
+        contraindications: [],
+        engineExcluded: false,
+        confidence: resolution.confidence,
+        qualityCaption: "AI-drafted Ayurvedic details, pending expert review. Informational only — not medical advice.",
+        sanskrit: nil
+      )
     case .estimated(let estimate):
       return AyurvedaDisplay(
         tierLabel: AyurvedaDisplayMath.tierLabel(.estimated),

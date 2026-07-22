@@ -42,7 +42,33 @@ struct D8MathCheck {
     check(AyurvedaDisplayMath.barFraction(2) == 1.0, "bar +2")
     check(AyurvedaDisplayMath.barFraction(-2) == 1.0, "bar -2")
 
-    guard total == 31, passed == total else {
+    checkComputed(
+      totalGrams: 200,
+      ingredients: [
+        .init(vata: -2, pitta: -2, kapha: 1, grams: 100),
+        .init(vata: 0, pitta: 2, kapha: -1, grams: 100)
+      ],
+      expected: (-1, 0, 0),
+      label: "computed equal-weight mean"
+    )
+    checkComputed(
+      totalGrams: 400,
+      ingredients: [
+        .init(vata: -1, pitta: 1, kapha: -1, grams: 300),
+        .init(vata: 2, pitta: 2, kapha: 2, grams: 100)
+      ],
+      expected: (0, 1, 0),
+      label: "computed weighted mean"
+    )
+    check(
+      AyurvedaDisplayMath.computed(
+        totalGrams: 200,
+        resolved: [.init(vata: -1, pitta: 1, kapha: 0, grams: 80)]
+      ) == nil,
+      "computed coverage below 0.5"
+    )
+
+    guard total == 34, passed == total else {
       print("D8 MATH CHECK: \(passed)/\(total) FAIL")
       exit(1)
     }
@@ -59,6 +85,24 @@ struct D8MathCheck {
     check(
       actual.v == expected.0 && actual.p == expected.1 && actual.k == expected.2,
       "percentages \(vata),\(pitta),\(kapha)"
+    )
+  }
+
+  private static func checkComputed(
+    totalGrams: Double,
+    ingredients: [AyurvedaDisplayMath.WeightedIngredient],
+    expected: (Int, Int, Int),
+    label: String
+  ) {
+    let actual = AyurvedaDisplayMath.computed(
+      totalGrams: totalGrams,
+      resolved: ingredients
+    )
+    check(
+      actual?.vata == expected.0
+        && actual?.pitta == expected.1
+        && actual?.kapha == expected.2,
+      label
     )
   }
 
