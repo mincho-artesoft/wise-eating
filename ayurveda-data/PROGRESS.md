@@ -68,22 +68,19 @@ Current status: **714 dravyas, 1,500 recipes — all checks pass.**
 
 ## Next milestones
 
-1. **D3+D4 (D34) — COMPLETE ✅ (Run 6 founder gates green).** All 12,601
-   foods classified: 336 classical + 1,969 derived + 10,296 estimated. Seed v2
-   (2,305 links), rules bundle, resolver `.estimated`. Sandbox gates verified by
-   director; Mac fixes so far: Sendable (b96c014), ObserversHub split (1159729).
-3. **D6 Swift — COMPLETE ✅ (verified on device simulator).** Models + seeder
-   implemented, all gates green on Mac (Run 3): build PASS, fresh install seeds
-   2214 profiles / 336 links / 383 placeholders / 1500 recipes, idempotent across
-   relaunches, upgrade path preserves the 12,601-food store (final 14,484).
-   Fixes applied on ayurveda-app only: Foundation import (a978600), ObserversHub
-   body split (1cdcf12 — D6-triggered type-check budget; main builds clean as-is).
-   Branch layout: `main` = pristine original app (9a5429d); `ayurveda-app` = full
-   Ayurveda app, single-author history (mincho.milev@gmail.com).
-   NEXT: **D8 — Ayurveda UI** (dosha display on food/recipe screens via
-   AyurvedaResolver; engineExcluded warnings; viruddha badges).
-4. **Expert review** — work through aiDraft content, resolve reviewNotes, promote
-   to reviewed; optional batch-31 top-up to 750.
+1. **Engineering track COMPLETE** — D6 (models+seeder), D34 (all 12,601 foods
+   classified), D8/D8.1/D8.2 (UI end to end incl. computed tier + editors),
+   D9 (engineExcluded enforcement). See PROJECT-HANDBOOK.md §6 ledger for
+   details, commits, and residuals.
+2. **Expert review — the remaining item.** Work aiDraft→reviewed across
+   dravyas/recipes/rules, resolve all reviewNote flags, optional batch-31
+   top-up to 750. Director can generate a reviewer packet on request.
+3. **Residual founder checks** (minutes, not milestones): physical-device AI
+   generation run (D9 G3 environmental residual), Computed/User card
+   screenshots, VoiceOver + dark-mode smoke.
+4. **Optional future scope** (new product decisions, not leftovers): dosha-based
+   search filters, prakriti assessment/personalization — best after expert review.
+
 
 Git note (sandbox sessions): stale locks workaround — `GIT_INDEX_FILE=/tmp/ayur_index`,
 `git add` → `write-tree` → `commit-tree` → write SHA to `.git/refs/heads/main`.

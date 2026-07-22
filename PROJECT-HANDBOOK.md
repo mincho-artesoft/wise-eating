@@ -47,8 +47,23 @@ is the gatekeeper (content integrity + full resolver simulation; must always pas
   tiers exact/near/derived).
 - `WiseEating/Ayurveda/AyurvedaRules.swift`: Sendable value types; loads
   ayurveda_rules.json; computes estimated-tier VPK.
-- `WiseEating/Ayurveda/AyurvedaResolver.swift`: single read API →
-  `.classical / .recipe / .derived / .estimated` for any FoodItem.
+- `WiseEating/Ayurveda/AyurvedaResolver.swift`: single read API for any FoodItem →
+  `.classical / .recipe / .user / .derived / .estimated / computed` (computed =
+  grams-weighted aggregation over ingredients for user recipes/menus; coverage-
+  gated ≥0.5; precedence: direct profile > link > computed > estimated > none).
+- `WiseEating/Ayurveda/Views/`: D8 UI — AyurvedaSectionView (detail card: tier
+  chip, center-zero dosha bars with ±/% toggle, chips, viruddha/contraindication
+  warnings, engineExcluded banner, aiDraft disclaimer), DoshaBarsView,
+  AyurvedaDisplay(+Math), AyurvedaEditorSection (manual form; recipe/menu editors
+  show live computed preview + optional "Set manually" override → kind "user").
+  ⚠ SwiftUI gotcha fixed in D8: an empty Group = EmptyView = no render node, so
+  .task never fires — always anchor conditional sections with Color.clear.
+- `WiseEating/Ayurveda/AyurvedaRecommendationGate.swift` (D9): set-driven
+  never-recommend enforcement (engineExcluded profiles + linked fdcIds + AI
+  free-text name screen) wired into all AI generation paths and the Siri intent;
+  search deliberately NOT filtered (decision 3).
+- Test/automation support: launch argument `-uiTestNoAds` (SubscriptionManager
+  returns .removeAds for that launch); banner ads gated on plan (was a real bug).
 - `WiseEating/Main/DBSeed/AyurvedaSeeder.swift` + hooks in `SeedManager.swift`
   (after `seedFoodsIfNeeded`) and `DatabaseSetup.swift` (mainTypes): versioned
   (UserDefaults `ayurvedaSeedVersion`), idempotent, fail-open; seeds 383
