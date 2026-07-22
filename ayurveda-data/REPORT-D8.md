@@ -281,3 +281,181 @@ director-authorized retry.
 - Founder visual approval of bar/chip styling on device.
 - Dark/light theme sanity check.
 - VoiceOver labels smoke test.
+
+## Run 4 / D8.1 — founder evidence and pre-implementation record
+
+### Original visibility diagnosis (recorded before D8.1 implementation)
+
+The app was built from the `2bf56ed` line with the director-provided
+`Color.clear` render anchor in `AyurvedaSectionView`, installed into the erased
+iPhone 16 simulator, and launched with `-uiTestNoAds`. The seed completed with
+714 dravyas, 1,500 recipe profiles, and 2,305 links.
+
+The founder, not Codex, performed all UI navigation. Opening food ID 4558 and
+recipe ID 1000847 produced these console diagnostics (repeated on a second
+open), with no red failure text:
+
+```text
+🕉️ Ayurveda resolve foodId=4558: ok
+🕉️ Ayurveda resolve foodId=1000847: ok
+```
+
+SQLite independently confirmed that data was present for both items:
+
+```text
+dravya.ghee                     kind=dravya  foodId=4558     V=-2 P=-2 K=+1 confidence=0.90
+recipe.latin-adzuki-pepper-pot  kind=recipe  foodId=1000847 V=-1 P=+1 K=-1 confidence=0.78
+```
+
+The founder screenshots supplied on 2026-07-22 confirm that both detail cards
+render, including the expected dosha values and tier presentation. They also
+show the D8.1 gaps: Add Food exposes the Ayurveda editor, Add Recipe and Add
+Menu do not, and the fresh Add Food Ayurveda state is non-neutral. Screenshot
+SHA-256 values, in chronological filename order, are:
+
+```text
+16.55.47  29e40d67aa5b6c6d53cf954072ae813688983af92dc93ef7044939a477917b8b
+16.56.11  791f102383fec97b5b7d7e6a96745ebaa4d71dd84f7922c59d1007b5bbe07725
+16.57.56  52a2995005456b12bd4e05dbca055a6dc7cf645460b65a6600a835ee2728b4a1
+16.58.38  e4696400a20f3b97eb6d131f766cc2e043d927db84efc7eaf6f369719ef7e106
+16.59.04  104a2cfdb0f570ff003c9916a81f1aa722f319284093d761b9b77f988efa22b5
+```
+
+Pre-D8.1 SQLite counts were green:
+
+```text
+ZAYURVEDAPROFILE = 2214
+ZAYURVEDALINK    = 2305
+placeholders     = 383
+recipes          = 1500
+ZFOODITEM total  = 14484
+```
+
+Cause split: data was present, the SwiftData queries resolved successfully,
+and the view was reached. The previously invisible card was caused by the
+empty `Group` producing `EmptyView`, which left no render node on which its
+`.task` could run. The director-provided transparent anchor removed that
+failure mode without changing visible layout.
+
+### D8.1 implementation and gates
+
+D8.1 added the runtime **Computed** tier after direct-profile and link lookup
+and before estimated fallback. Ingredient resolution is recursive to depth 3
+with a visited-food-ID cycle guard. Resolved V/P/K values use grams-weighted
+means, half-away-from-zero rounding, and the signed −2...+2 clamp. Coverage
+below 0.5 falls through to estimated; confidence is `0.5 * coverage` (capped at
+0.6), and virya uses the required heating/cooling weighted vote.
+
+The Computed detail card uses the text `computed from your ingredients`, shows
+confidence and the existing signed/percentage dosha display, carries the
+aiDraft disclaimer, and deliberately omits rasa/vipaka/guna rows.
+
+The standalone math harness was extended by exactly the three D8.1 reference
+cases. Result:
+
+```text
+D8 MATH CHECK: 34/34 PASS
+```
+
+### D8.2 — live recipe/menu editor computation
+
+The D8.2 founder correction replaced the recipe/menu manual-first UI with an
+automatic live preview. Both editors pass their current unsaved
+`(foodId, grams)` values to `AyurvedaResolver.computeIngredients`; that public
+entry point and saved `IngredientLink` resolution share the same private
+recursive aggregation path and pure math.
+
+Automatic mode is the default and writes no profile. With no positive-weight
+ingredients it asks the user to add ingredients. With coverage below 0.5 it
+shows `Not enough recognizable ingredients yet.` Otherwise it renders the
+live dosha bars under `Computed from your ingredients — updates automatically`.
+
+`Set manually` reveals the existing controls and prefills V/P/K and virya from
+the current computed result. Saving in manual mode writes the `user.<foodId>`
+profile. Saving after turning manual mode off deletes that user override so the
+detail resolver returns to Computed. Existing user overrides reopen in manual
+mode. Add Food remains manual-only; all three forms now initialize explicitly
+from a neutral `AyurvedaForm` (V/P/K zero, empty rasa/gunas, nil virya/vipaka).
+
+#### G2 — math: PASS
+
+```text
+swiftc -o /tmp/d8check WiseEating/Ayurveda/AyurvedaDisplayMath.swift ayurveda-data/tools/d8_math_check.swift
+/tmp/d8check
+D8 MATH CHECK: 34/34 PASS
+```
+
+#### G3 — simulator build and warning delta: PASS
+
+The D8.1 clean build and final D8.2 rebuild both passed:
+
+```text
+/tmp/d81_post_build.log: ** BUILD SUCCEEDED **
+/tmp/d82_rebuild.log:    ** BUILD SUCCEEDED **
+```
+
+The prior clean D8 baseline contained 143 warning lines and 58 normalized
+warning texts. The D8.1 clean build contained 141 lines with the same 58 texts.
+The final incremental D8.2 build contained four pre-existing warning texts,
+all present in the clean baseline. New normalized warnings: **0**.
+
+#### G4/G5 — founder-operated UI and persistence: PENDING
+
+Codex performed no simulator navigation or screenshots. The final D8.2 build
+was installed and launched with `-uiTestNoAds`; startup and the versioned seed
+skip path completed without a crash. Before founder interaction SQLite showed:
+
+```text
+ZAYURVEDAPROFILE total = 2214
+kind="user" profiles   = 0
+ZAYURVEDALINK          = 2305
+ZFOODITEM total        = 14484
+```
+
+The founder requested commit and push before completing the requested D8.2
+screenshots and user-profile round trip. Therefore these items remain open and
+are not reported as passed:
+
+- live Add Recipe preview with two or three ingredients;
+- visible recomputation after adding ghee;
+- manual toggle controls prefilled from the live computation;
+- untouched recipe detail = Computed and manual recipe detail = User;
+- SQLite `kind="user"` row verification and relaunch persistence;
+- remaining original G4 spot screenshots and fdcId 2655 percentage toggle.
+
+#### G6 — validator and immutable data: PASS
+
+```text
+python3 ayurveda-data/validate.py --store /tmp/pre
+Checked 714 dravyas, 1500 recipes
+All checks passed.
+```
+
+The resolver simulation remained exactly classical 336 / derived 1,969 /
+estimated 10,296 = 12,601. Only `REPORT-D8.md` and
+`tools/d8_math_check.swift` changed under `ayurveda-data/`. Bundle hashes are
+unchanged from HEAD:
+
+```text
+ayurveda_seed.json.gz  b20f45715c2b000f1d06dacb59377e5c799c84a45e0593779528f5872c8990b3
+ayurveda_rules.json    e92ad29fda7616a011090bd3674f9653d33b9553357c49f43ffd87f850c0364c
+```
+
+### D8.1/D8.2 files changed before commits
+
+```text
+WiseEating/Ayurveda/AyurvedaDisplayMath.swift
+WiseEating/Ayurveda/AyurvedaResolver.swift
+WiseEating/Ayurveda/Views/AyurvedaDisplay.swift
+WiseEating/Ayurveda/Views/AyurvedaEditorSection.swift
+WiseEating/Ayurveda/Views/AyurvedaSectionView.swift
+WiseEating/Food/Views/FoodItemEditorView.swift
+WiseEating/Food/Views/FoodItemMenuEditorView.swift
+WiseEating/Food/Views/FoodItemReceptEditorView.swift
+ayurveda-data/tools/d8_math_check.swift
+ayurveda-data/REPORT-D8.md
+```
+
+The original D8 packet did not authorize recipe/menu editors. Their changes
+were explicitly authorized by the founder's D8.1 and D8.2 addenda. No model,
+seed, rule, store, seeder, SeedManager, or validator file changed.
