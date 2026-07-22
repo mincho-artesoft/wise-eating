@@ -4,7 +4,6 @@ import Combine
 
 struct ObserversHub: View {
     
-    @ObservedObject private var aiManager = AIManager.shared
     @Binding var isAIGenerating: Bool
     
     // MARK: – Входни данни
@@ -166,22 +165,7 @@ struct ObserversHub: View {
     }
 
     private var aiStatusObserver: some View {
-        Color.clear
-            .onChange(of: aiManager.jobs) { _, newJobs in
-                syncAIGenerating(newJobs.contains { $0.status == .pending || $0.status == .running })
-            }
-            .onAppear {
-                syncAIGenerating(aiManager.isGenerating)
-            }
-            .onReceive(NotificationCenter.default.publisher(for: .aiJobStatusDidChange)) { _ in
-                syncAIGenerating(aiManager.isGenerating)
-            }
-    }
-
-    private func syncAIGenerating(_ newValue: Bool) {
-        if isAIGenerating != newValue {
-            isAIGenerating = newValue
-        }
+        AIStatusObserver(isAIGenerating: $isAIGenerating)
     }
 
     private var tabChangeObserver: some View {
@@ -313,6 +297,54 @@ struct ObserversHub: View {
 }
 
 // MARK: - Small, focused observers
+
+private struct AIStatusObserver: View {
+    @ObservedObject private var aiManager = AIManager.shared
+    @Binding var isAIGenerating: Bool
+
+    var body: some View {
+        Group {
+            jobsObserver
+            appearanceObserver
+            notificationObserver
+        }
+    }
+
+    private var jobsObserver: some View {
+        Color.clear
+            .onChange(of: hasActiveJobs) { _, newValue in
+                syncAIGenerating(newValue)
+            }
+    }
+
+    private var appearanceObserver: some View {
+        Color.clear
+            .onAppear {
+                syncAIGenerating(aiManager.isGenerating)
+            }
+    }
+
+    private var notificationObserver: some View {
+        Color.clear
+            .onReceive(NotificationCenter.default.publisher(for: .aiJobStatusDidChange)) { _ in
+                syncAIGenerating(aiManager.isGenerating)
+            }
+    }
+
+    private func syncAIGenerating(_ newValue: Bool) {
+        if isAIGenerating != newValue {
+            isAIGenerating = newValue
+        }
+    }
+
+    private var hasActiveJobs: Bool {
+        aiManager.jobs.contains(where: isActiveJob)
+    }
+
+    private func isActiveJob(_ job: AIGenerationJob) -> Bool {
+        job.status == .pending || job.status == .running
+    }
+}
 
 private struct TabChangeObserver: View {
     @Binding var selectedTab: AppTab
