@@ -2,13 +2,49 @@ import SwiftData
 import SwiftUI
 
 struct AyurvedaForm: Sendable {
-  var vata = 0
-  var pitta = 0
-  var kapha = 0
-  var rasa: Set<String> = []
+  var vata: Int
+  var pitta: Int
+  var kapha: Int
+  var rasa: Set<String>
   var virya: String?
   var vipaka: String?
-  var gunas: Set<String> = []
+  var gunas: Set<String>
+
+  init(
+    vata: Int = 0,
+    pitta: Int = 0,
+    kapha: Int = 0,
+    rasa: Set<String> = [],
+    virya: String? = nil,
+    vipaka: String? = nil,
+    gunas: Set<String> = []
+  ) {
+    self.vata = vata
+    self.pitta = pitta
+    self.kapha = kapha
+    self.rasa = rasa
+    self.virya = virya
+    self.vipaka = vipaka
+    self.gunas = gunas
+  }
+
+  static var neutral: AyurvedaForm {
+    AyurvedaForm()
+  }
+
+  static func prefilled(
+    from computed: AyurvedaDisplayMath.Computed?
+  ) -> AyurvedaForm {
+    guard let computed else {
+      return .neutral
+    }
+    return AyurvedaForm(
+      vata: computed.vata,
+      pitta: computed.pitta,
+      kapha: computed.kapha,
+      virya: computed.virya
+    )
+  }
 
   var isEmpty: Bool {
     vata == 0
@@ -136,6 +172,58 @@ struct AyurvedaEditorSection: View {
   }
 }
 
+struct AyurvedaRecipeEditorSection: View {
+  @Binding var isManualOverride: Bool
+  @Binding var form: AyurvedaForm
+
+  let computation: AyurvedaIngredientComputation
+
+  var body: some View {
+    VStack(alignment: .leading, spacing: 14) {
+      Toggle("Set manually", isOn: $isManualOverride)
+        .onChange(of: isManualOverride) { wasManual, isManual in
+          if isManual && !wasManual {
+            form = .prefilled(from: computation.computed)
+          }
+        }
+      if isManualOverride {
+        AyurvedaEditorSection(form: $form)
+      } else {
+        AyurvedaAutomaticPreview(computation: computation)
+      }
+    }
+  }
+}
+
+private struct AyurvedaAutomaticPreview: View {
+  let computation: AyurvedaIngredientComputation
+
+  var body: some View {
+    VStack(alignment: .leading, spacing: 10) {
+      if !computation.hasIngredients {
+        Text("Add ingredients to see a live Ayurveda preview.")
+          .font(.caption)
+          .foregroundStyle(.secondary)
+      } else {
+        Text("Computed from your ingredients — updates automatically")
+          .font(.caption)
+          .foregroundStyle(.secondary)
+        if let computed = computation.computed {
+          DoshaBarsView(
+            vata: computed.vata,
+            pitta: computed.pitta,
+            kapha: computed.kapha
+          )
+        } else {
+          Text("Not enough recognizable ingredients yet.")
+            .font(.caption)
+            .foregroundStyle(.secondary)
+        }
+      }
+    }
+  }
+}
+
 @MainActor
 enum AyurvedaUserProfileStore {
   static func form(foodId: Int, context: ModelContext) -> AyurvedaForm? {
@@ -168,6 +256,13 @@ enum AyurvedaUserProfileStore {
     if existing == nil {
       context.insert(profile)
     }
+  }
+
+  static func remove(foodId: Int, context: ModelContext) {
+    guard let existing = profile(foodId: foodId, context: context) else {
+      return
+    }
+    context.delete(existing)
   }
 
   private static func profile(

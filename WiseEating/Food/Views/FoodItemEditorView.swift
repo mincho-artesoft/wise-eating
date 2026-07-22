@@ -94,7 +94,7 @@ struct FoodItemEditorView: View {
     @State private var aminoAcids: AminoAcidsForm
     @State private var carbDetails: CarbDetailsForm
     @State private var sterols: SterolsForm
-    @State private var ayurForm = AyurvedaForm()
+    @State private var ayurForm = AyurvedaForm.neutral
     @State private var didPrefillAyurveda = false
     
     @State private var showAlert = false
@@ -181,6 +181,8 @@ struct FoodItemEditorView: View {
         _aminoAcids = State(initialValue: initialAminoAcids)
         _carbDetails = State(initialValue: initialCarbDetails)
         _sterols = State(initialValue: initialSterols)
+        _ayurForm = State(initialValue: .neutral)
+        _didPrefillAyurveda = State(initialValue: false)
 
         let initialServingWeightG = initialOthers.weightG?.value
         var initialDisplayWeightString = ""
@@ -919,9 +921,14 @@ struct FoodItemEditorView: View {
         didPrefillAyurveda = true
         // Prefill only for existing foods: a duplicated (dubFood) item has no
         // persisted id yet, so no stored user Ayurveda form can exist for it.
-        guard let foodId = food?.id else { return }
+        guard let foodId = food?.id else {
+            ayurForm = .neutral
+            return
+        }
         if let storedForm = AyurvedaUserProfileStore.form(foodId: foodId, context: ctx) {
             ayurForm = storedForm
+        } else {
+            ayurForm = .neutral
         }
     }
     

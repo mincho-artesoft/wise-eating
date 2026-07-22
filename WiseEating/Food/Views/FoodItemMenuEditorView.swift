@@ -120,6 +120,7 @@ struct FoodItemMenuEditorView: View {
     @State private var showMacros       = true
     @State private var showLipids       = false
     @State private var showOther        = false
+    @State private var showAyurveda     = false
     @State private var showMoreVitamins = false
     @State private var showMoreMinerals = false
     @State private var showAminoAcids = false
@@ -142,6 +143,10 @@ struct FoodItemMenuEditorView: View {
     @State private var aminoAcids: AminoAcidsForm
     @State private var carbDetails: CarbDetailsForm
     @State private var sterols: SterolsForm
+    @State private var ayurForm = AyurvedaForm.neutral
+    @State private var didPrefillAyurveda = false
+    @State private var isManualAyurvedaOverride = false
+    @State private var ayurvedaComputation = AyurvedaIngredientComputation.empty
     
     @State private var calculatedMinAge: Int = 0
     
@@ -244,6 +249,10 @@ struct FoodItemMenuEditorView: View {
         _selectedDiets = State(initialValue: initialSelectedDiets)
         _selectedAllergens = State(initialValue: initialSelectedAllergens)
         _galleryData = State(initialValue: initialGalleryData)
+        _ayurForm = State(initialValue: .neutral)
+        _didPrefillAyurveda = State(initialValue: false)
+        _isManualAyurvedaOverride = State(initialValue: false)
+        _ayurvedaComputation = State(initialValue: .empty)
     }
     
     // MARK: - Body & Toolbar
@@ -269,6 +278,7 @@ struct FoodItemMenuEditorView: View {
                         return (item.id, GlobalState.formatDecimalString(String(displayValue)))
                     })
                     recalculateAndValidateMinAge()
+                    refreshAyurvedaPreview()
                     
                     // Prompts selection restore + AI button pos
                     loadSelectedPromptIDs()
@@ -278,6 +288,7 @@ struct FoodItemMenuEditorView: View {
                     recalcTotals()
                     recalcTags()
                     recalculateAndValidateMinAge()
+                    refreshAyurvedaPreview()
                 }
                 .onChange(of: focusedField) { oldValue, _ in
                     if case .ingredientGrams(let oldId) = oldValue {
@@ -289,6 +300,9 @@ struct FoodItemMenuEditorView: View {
                 }
                 .task(id: dubFood?.id) {
                     await loadFromDubFood()
+                }
+                .task {
+                    prefillAyurvedaIfNeeded()
                 }
                 .disabled(isSaving)
                 .blur(radius: isSaving ? 1.5 : 0)
@@ -546,6 +560,7 @@ struct FoodItemMenuEditorView: View {
                     carbDetailsSection
                     sterolsSection
                     otherSection
+                    ayurvedaSection
                     
                     Color.clear.frame(height: 150)
                 }
@@ -973,6 +988,23 @@ struct FoodItemMenuEditorView: View {
         }
         .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
     }
+
+    private var ayurvedaSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            collapsibleHeader("Ayurveda", isExpanded: $showAyurveda)
+            if showAyurveda {
+                AyurvedaRecipeEditorSection(
+                    isManualOverride: $isManualAyurvedaOverride,
+                    form: $ayurForm,
+                    computation: ayurvedaComputation
+                )
+                    .padding()
+                    .glassCardStyle(cornerRadius: 20)
+                    .padding(.top, 4)
+            }
+        }
+        .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+    }
     
     private var vitaminSection: some View {
         let allRows = vitaminRows()
@@ -1264,6 +1296,50 @@ struct FoodItemMenuEditorView: View {
         let maxId = ((try? ctx.fetch(desc))?.first?.id) ?? 0
         return maxId + 1
     }
+
+    private func prefillAyurvedaIfNeeded() {
+        guard !didPrefillAyurveda else { return }
+        didPrefillAyurveda = true
+        guard let foodId = food?.id else {
+            ayurForm = .neutral
+            isManualAyurvedaOverride = false
+            return
+        }
+        if let storedForm = AyurvedaUserProfileStore.form(foodId: foodId, context: ctx) {
+            ayurForm = storedForm
+            isManualAyurvedaOverride = true
+        } else {
+            ayurForm = .neutral
+            isManualAyurvedaOverride = false
+        }
+    }
+
+    private func refreshAyurvedaPreview() {
+        let ingredients = selectedIng.map { food, grams in
+            AyurvedaIngredientAmount(foodId: food.id, grams: grams)
+        }
+        do {
+            ayurvedaComputation = try AyurvedaResolver.computeIngredients(
+                ingredients,
+                context: ctx
+            )
+        } catch {
+            ayurvedaComputation = .empty
+            print("Ayurveda draft preview failed: \(error)")
+        }
+    }
+
+    private func saveAyurveda(for menu: FoodItem) {
+        if isManualAyurvedaOverride {
+            AyurvedaUserProfileStore.upsert(
+                form: ayurForm,
+                for: menu,
+                context: ctx
+            )
+        } else {
+            AyurvedaUserProfileStore.remove(foodId: menu.id, context: ctx)
+        }
+    }
     
     // MARK: - Logic & Actions
     private func save() {
@@ -1323,6 +1399,8 @@ struct FoodItemMenuEditorView: View {
                 let newLink = IngredientLink(food: foodItem, grams: grams, owner: menu)
                 menu.ingredients?.append(newLink)
             }
+
+            saveAyurveda(for: menu)
             
             do {
                 try ctx.save()
