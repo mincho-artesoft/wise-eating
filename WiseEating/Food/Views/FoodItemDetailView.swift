@@ -104,6 +104,7 @@ struct FoodItemDetailView: View {
                         dietsSection
                         macrosSection
                         phSection
+                        ayurvedaSection
                         ingredientsSection
                         vitaminsSection
                         mineralsSection
@@ -636,6 +637,10 @@ struct FoodItemDetailView: View {
                 .glassCardStyle(cornerRadius: 20)
             }
         }
+    }
+
+    private var ayurvedaSection: some View {
+        AyurvedaSectionView(food: food)
     }
     
     @ViewBuilder

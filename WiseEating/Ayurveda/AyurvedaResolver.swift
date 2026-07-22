@@ -4,6 +4,7 @@ import SwiftData
 public enum AyurvedaResolution {
   case classical(AyurvedaProfile)
   case recipe(AyurvedaProfile)
+  case user(AyurvedaProfile)
   case derived(
     AyurvedaProfile,
     via: AyurvedaLink,
@@ -15,7 +16,7 @@ public enum AyurvedaResolution {
 
   public var confidence: Double? {
     switch self {
-    case .classical(let profile), .recipe(let profile):
+    case .classical(let profile), .recipe(let profile), .user(let profile):
       return profile.confidenceAyur
     case .derived(let profile, let link, _, _):
       if link.tier == "derived" {
@@ -42,6 +43,8 @@ public enum AyurvedaResolver {
         return .classical(direct)
       case "recipe":
         return .recipe(direct)
+      case "user":
+        return .user(direct)
       default:
         return .none
       }
