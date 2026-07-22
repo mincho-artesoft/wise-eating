@@ -166,25 +166,22 @@ struct ObserversHub: View {
     }
 
     private var aiStatusObserver: some View {
-            Color.clear
-                .onChange(of: aiManager.jobs) { _, newJobs in
-                    let isGenerating = newJobs.contains { $0.status == .pending || $0.status == .running }
-                    if self.isAIGenerating != isGenerating {
-                        self.isAIGenerating = isGenerating
-                    }
-                }
-                .onAppear {
-                    let isGenerating = aiManager.isGenerating
-                    if self.isAIGenerating != isGenerating {
-                        self.isAIGenerating = isGenerating
-                    }
-                }
-                .onReceive(NotificationCenter.default.publisher(for: .aiJobStatusDidChange)) { _ in
-                    let isGenerating = aiManager.isGenerating
-                    if self.isAIGenerating != isGenerating {
-                        self.isAIGenerating = isGenerating
-                    }
-                }
+        Color.clear
+            .onChange(of: aiManager.jobs) { _, newJobs in
+                syncAIGenerating(newJobs.contains { $0.status == .pending || $0.status == .running })
+            }
+            .onAppear {
+                syncAIGenerating(aiManager.isGenerating)
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .aiJobStatusDidChange)) { _ in
+                syncAIGenerating(aiManager.isGenerating)
+            }
+    }
+
+    private func syncAIGenerating(_ newValue: Bool) {
+        if isAIGenerating != newValue {
+            isAIGenerating = newValue
+        }
     }
 
     private var tabChangeObserver: some View {
