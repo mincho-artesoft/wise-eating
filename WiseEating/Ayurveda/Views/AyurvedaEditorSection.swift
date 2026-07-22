@@ -61,113 +61,222 @@ struct AyurvedaEditorSection: View {
   private static let rasaValues = [
     "sweet", "sour", "salty", "pungent", "bitter", "astringent"
   ]
-  private static let viryaValues = ["heating", "cooling", "neutral"]
-  private static let vipakaValues = ["sweet", "sour", "pungent"]
   private static let gunaValues = [
     "dense", "dry", "heavy", "light", "liquid",
-    "oily", "rough", "sharp", "smooth", "soft"
+    "oily", "penetrating", "rough", "sharp", "slimy", "smooth", "soft"
+  ]
+  private static let viryaOptions = [
+    EffectSegmentOption(
+      value: "cooling", title: "Cooling", systemImage: "snowflake", tone: .cooling
+    ),
+    EffectSegmentOption(
+      value: "neutral", title: "Neutral", systemImage: "minus", tone: .neutral
+    ),
+    EffectSegmentOption(
+      value: "heating", title: "Heating", systemImage: "flame", tone: .heating
+    )
+  ]
+  private static let vipakaOptions = [
+    EffectSegmentOption(value: "sweet", title: "Sweet", systemImage: nil, tone: .accent),
+    EffectSegmentOption(value: "sour", title: "Sour", systemImage: nil, tone: .accent),
+    EffectSegmentOption(value: "pungent", title: "Pungent", systemImage: nil, tone: .accent)
   ]
 
+  @Environment(\.colorScheme) private var colorScheme
   @ObservedObject private var effectManager = EffectManager.shared
   @Binding var form: AyurvedaForm
 
   var body: some View {
-    VStack(alignment: .leading, spacing: 14) {
-      doshaSteppers
-      toggleGroup(title: "Rasa (taste)", values: Self.rasaValues, selection: $form.rasa)
-      optionalPicker(title: "Virya (energy)", values: Self.viryaValues, selection: $form.virya)
-      optionalPicker(title: "Vipaka (post-digestive)", values: Self.vipakaValues, selection: $form.vipaka)
-      toggleGroup(title: "Gunas (qualities)", values: Self.gunaValues, selection: $form.gunas)
-      Text("Saved as tier 'User' — shown in the food's Ayurveda section.")
-        .font(.caption)
-        .foregroundStyle(.secondary)
+    VStack(alignment: .leading, spacing: 16) {
+      header
+      doshaGroup
+      rasaGroup
+      viryaGroup
+      vipakaGroup
+      gunaGroup
+      footer
     }
   }
 
-  private var doshaSteppers: some View {
+  private var header: some View {
+    HStack(alignment: .top, spacing: 12) {
+      VStack(alignment: .leading, spacing: 4) {
+        Text("Dosha Effects")
+          .font(.title3.weight(.semibold))
+        Text("Adjust how this food affects the doshas")
+          .font(.caption)
+          .foregroundStyle(.secondary)
+      }
+      Spacer(minLength: 8)
+      Button(action: resetAll) {
+        Label("Reset all", systemImage: "arrow.counterclockwise")
+          .font(.caption.weight(.medium))
+          .frame(minHeight: 44)
+      }
+      .buttonStyle(.plain)
+      .foregroundStyle(effectManager.currentGlobalAccentColor)
+      .accessibilityHint("Resets every Ayurveda field to neutral or unset")
+    }
+  }
+
+  private var doshaGroup: some View {
+    VStack(alignment: .leading, spacing: 18) {
+      DoshaScaleSelector(
+        value: $form.vata,
+        name: "Vata",
+        subtitle: "Movement & Air",
+        systemImage: "wind",
+        tint: .blue
+      )
+      Divider()
+      DoshaScaleSelector(
+        value: $form.pitta,
+        name: "Pitta",
+        subtitle: "Fire & Transformation",
+        systemImage: "flame",
+        tint: .orange
+      )
+      Divider()
+      DoshaScaleSelector(
+        value: $form.kapha,
+        name: "Kapha",
+        subtitle: "Structure & Water",
+        systemImage: "leaf",
+        tint: .green
+      )
+    }
+    .padding(14)
+    .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+    .overlay(groupBorder)
+  }
+
+  private var rasaGroup: some View {
+    editorGroup(title: "Rasa (taste)") {
+      ChipGrid {
+        ForEach(Self.rasaValues, id: \.self) { value in
+          AyurvedaChip(
+            title: value.capitalized,
+            systemImage: rasaIcon(value),
+            tint: rasaTint(value),
+            isSelected: form.rasa.contains(value),
+            action: { toggleRasa(value) }
+          )
+        }
+      }
+    }
+  }
+
+  private var viryaGroup: some View {
+    editorGroup(title: "Virya (energy)") {
+      EffectSegmentPicker(
+        selection: $form.virya,
+        title: "Virya energy",
+        options: Self.viryaOptions
+      )
+    }
+  }
+
+  private var vipakaGroup: some View {
+    editorGroup(title: "Vipaka (post-digestive)") {
+      EffectSegmentPicker(
+        selection: $form.vipaka,
+        title: "Vipaka post-digestive effect",
+        options: Self.vipakaOptions
+      )
+    }
+  }
+
+  private var gunaGroup: some View {
+    editorGroup(title: "Gunas (qualities)") {
+      ChipGrid {
+        ForEach(Self.gunaValues, id: \.self) { value in
+          AyurvedaChip(
+            title: value.capitalized,
+            systemImage: nil,
+            tint: effectManager.currentGlobalAccentColor,
+            isSelected: form.gunas.contains(value),
+            action: { toggleGuna(value) }
+          )
+        }
+      }
+    }
+  }
+
+  private var footer: some View {
+    HStack(alignment: .top, spacing: 10) {
+      Image(systemName: "info.circle.fill")
+        .foregroundStyle(effectManager.currentGlobalAccentColor)
+        .accessibilityHidden(true)
+      Text("Saved as tier 'User' — shown in this food's Ayurveda section.")
+        .font(.caption)
+        .foregroundStyle(.secondary)
+    }
+    .padding(12)
+    .frame(maxWidth: .infinity, alignment: .leading)
+    .background(
+      effectManager.currentGlobalAccentColor.opacity(colorScheme == .dark ? 0.18 : 0.10),
+      in: RoundedRectangle(cornerRadius: 14, style: .continuous)
+    )
+  }
+
+  private var groupBorder: some View {
+    RoundedRectangle(cornerRadius: 18, style: .continuous)
+      .stroke(Color.primary.opacity(colorScheme == .dark ? 0.18 : 0.08))
+  }
+
+  private func editorGroup<Content: View>(
+    title: String,
+    @ViewBuilder content: () -> Content
+  ) -> some View {
     VStack(alignment: .leading, spacing: 10) {
-      Text("Dosha effects")
-        .font(.caption)
-        .foregroundStyle(.secondary)
-      doshaStepper(title: "Vata", value: $form.vata)
-      doshaStepper(title: "Pitta", value: $form.pitta)
-      doshaStepper(title: "Kapha", value: $form.kapha)
-    }
-  }
-
-  private func doshaStepper(title: String, value: Binding<Int>) -> some View {
-    Stepper(value: value, in: -2...2) {
-      HStack {
-        Text(title)
-        Spacer()
-        Text(
-          AyurvedaDisplayMath.valueString(value.wrappedValue)
-            + " "
-            + AyurvedaDisplayMath.effectLabel(value.wrappedValue)
-        )
-        .font(.caption)
-        .foregroundStyle(.secondary)
-      }
-    }
-  }
-
-  private func toggleGroup(
-    title: String,
-    values: [String],
-    selection: Binding<Set<String>>
-  ) -> some View {
-    VStack(alignment: .leading, spacing: 6) {
       Text(title)
-        .font(.caption)
-        .foregroundStyle(.secondary)
-      CustomFlowLayout(horizontalSpacing: 6, verticalSpacing: 6) {
-        ForEach(values, id: \.self) { value in
-          Button {
-            toggle(value, in: selection)
-          } label: {
-            Text(value)
-              .font(.caption)
-              .padding(.horizontal, 9)
-              .padding(.vertical, 5)
-              .foregroundStyle(effectManager.currentGlobalAccentColor)
-              .background(
-                effectManager.currentGlobalAccentColor.opacity(
-                  selection.wrappedValue.contains(value) ? 0.35 : 0.12
-                ),
-                in: Capsule()
-              )
-          }
-          .buttonStyle(.plain)
-        }
-      }
+        .font(.headline)
+      content()
     }
+    .padding(14)
+    .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+    .overlay(groupBorder)
   }
 
-  private func optionalPicker(
-    title: String,
-    values: [String],
-    selection: Binding<String?>
-  ) -> some View {
-    HStack {
-      Text(title)
-        .font(.caption)
-        .foregroundStyle(.secondary)
-      Spacer()
-      Picker(title, selection: selection) {
-        Text("—").tag(String?.none)
-        ForEach(values, id: \.self) { value in
-          Text(value).tag(String?.some(value))
-        }
-      }
-      .pickerStyle(.menu)
-    }
-  }
-
-  private func toggle(_ value: String, in selection: Binding<Set<String>>) {
-    if selection.wrappedValue.contains(value) {
-      selection.wrappedValue.remove(value)
+  private func toggleRasa(_ value: String) {
+    if form.rasa.contains(value) {
+      form.rasa.remove(value)
     } else {
-      selection.wrappedValue.insert(value)
+      form.rasa.insert(value)
+    }
+  }
+
+  private func toggleGuna(_ value: String) {
+    if form.gunas.contains(value) {
+      form.gunas.remove(value)
+    } else {
+      form.gunas.insert(value)
+    }
+  }
+
+  private func resetAll() {
+    form = .neutral
+  }
+
+  private func rasaIcon(_ value: String) -> String {
+    switch value {
+    case "sweet": return "sparkles"
+    case "sour": return "drop.fill"
+    case "salty": return "water.waves"
+    case "pungent": return "flame.fill"
+    case "bitter": return "leaf.fill"
+    default: return "circle.grid.3x3.fill"
+    }
+  }
+
+  private func rasaTint(_ value: String) -> Color {
+    switch value {
+    case "sweet": return .purple
+    case "sour": return .yellow
+    case "salty": return .teal
+    case "pungent": return .red
+    case "bitter": return .green
+    default: return .indigo
     }
   }
 }
