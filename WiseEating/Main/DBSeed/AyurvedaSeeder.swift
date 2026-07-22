@@ -14,6 +14,16 @@ enum AyurvedaSeeder {
     do {
       let seed = try loadSeed()
       try validate(seed: seed)
+
+      if try context.fetchCount(FetchDescriptor<AyurvedaProfile>()) > 0 {
+        let inserted = try topUpLinks(seed.links, context: context)
+        print(
+          "   ✅ Ayurveda v\(seed.seedVersion) link top-up inserted "
+            + "\(inserted) missing links."
+        )
+        return
+      }
+
       try verifyReservedBandIsFree(context: context)
 
       try insertInBatches(
@@ -108,11 +118,15 @@ enum AyurvedaSeeder {
   private static func validate(seed: AyurvedaSeedDTO) throws {
     guard seed.counts.dravyas == 714,
       seed.counts.recipes == 1_500,
-      seed.counts.links == 336,
+      seed.counts.links == 2_305,
+      seed.counts.derivedLinks == 1_969,
       seed.counts.placeholders == 383,
+      seed.counts.categoryRules == 187,
+      seed.counts.modifiers == 14,
       seed.dravyas.count == seed.counts.dravyas,
       seed.recipes.count == seed.counts.recipes,
       seed.links.count == seed.counts.links,
+      seed.links.filter({ $0.tier == "derived" }).count == seed.counts.derivedLinks,
       seed.dravyas.filter(\.foodIsPlaceholder).count == seed.counts.placeholders
     else {
       throw AyurvedaSeederError.invalidCounts
@@ -120,6 +134,25 @@ enum AyurvedaSeeder {
     guard seed.recipes.allSatisfy({ !$0.ingredients.isEmpty }) else {
       throw AyurvedaSeederError.emptyRecipeIngredients
     }
+  }
+
+  private static func topUpLinks(
+    _ links: [AyurvedaLinkDTO],
+    context: ModelContext
+  ) throws -> Int {
+    let existingLinks = try context.fetch(FetchDescriptor<AyurvedaLink>())
+    let existingFdcIds = Set(existingLinks.map(\.fdcId))
+    let missingLinks = links.filter { !existingFdcIds.contains($0.fdcId) }
+    try insertInBatches(missingLinks, context: context) { link in
+      context.insert(
+        AyurvedaLink(
+          fdcId: link.fdcId,
+          dravyaProfileId: link.dravyaId,
+          tier: link.tier
+        )
+      )
+    }
+    return missingLinks.count
   }
 
   private static func verifyReservedBandIsFree(context: ModelContext) throws {
@@ -305,7 +338,7 @@ private enum AyurvedaSeederError: Error, LocalizedError {
     case .missingBundle:
       return "ayurveda_seed.json.gz is missing from the app bundle"
     case .invalidCounts:
-      return "the Ayurveda seed counts do not match the approved D6 counts"
+      return "the Ayurveda seed counts do not match the approved D34 counts"
     case .emptyRecipeIngredients:
       return "the Ayurveda seed contains a recipe without ingredients"
     case .reservedBandCollision(let foodId):
@@ -335,7 +368,10 @@ private struct AyurvedaSeedCountsDTO: Decodable {
   let dravyas: Int
   let recipes: Int
   let links: Int
+  let derivedLinks: Int
   let placeholders: Int
+  let categoryRules: Int
+  let modifiers: Int
 }
 
 private struct DoshaDTO: Decodable {

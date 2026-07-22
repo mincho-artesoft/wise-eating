@@ -93,11 +93,6 @@ enum SeedManager {
     // MARK: – Ayurveda
     private static func seedAyurvedaIfNeeded(context ctx: ModelContext) async {
         print("-> Checking for Ayurveda data...")
-        guard databaseIsEmpty(entity: AyurvedaProfile.self, context: ctx) else {
-            print("   Ayurveda data already seeded, skipping.")
-            return
-        }
-
         do {
             let seedVersion = try AyurvedaSeeder.bundleSeedVersion()
             guard UserDefaults.standard.integer(forKey: "ayurvedaSeedVersion") < seedVersion else {

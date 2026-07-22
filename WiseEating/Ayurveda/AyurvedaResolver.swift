@@ -4,8 +4,30 @@ import SwiftData
 public enum AyurvedaResolution {
   case classical(AyurvedaProfile)
   case recipe(AyurvedaProfile)
-  case derived(AyurvedaProfile, via: AyurvedaLink)
+  case derived(
+    AyurvedaProfile,
+    via: AyurvedaLink,
+    modifiers: [AppliedModifier],
+    vpk: DoshaVPK
+  )
+  case estimated(EstimatedAyurveda)
   case none
+
+  public var confidence: Double? {
+    switch self {
+    case .classical(let profile), .recipe(let profile):
+      return profile.confidenceAyur
+    case .derived(let profile, let link, _, _):
+      if link.tier == "derived" {
+        return max(profile.confidenceAyur - 0.15, 0.1)
+      }
+      return profile.confidenceAyur
+    case .estimated(let estimate):
+      return estimate.confidence
+    case .none:
+      return nil
+    }
+  }
 }
 
 @MainActor
@@ -28,7 +50,21 @@ public enum AyurvedaResolver {
     if let link = try link(fdcId: foodItem.id, context: context),
       let profile = try profile(id: link.dravyaProfileId, context: context)
     {
-      return .derived(profile, via: link)
+      let baseVPK: DoshaVPK = (
+        profile.doshaVata,
+        profile.doshaPitta,
+        profile.doshaKapha
+      )
+      guard link.tier == "derived" else {
+        return .derived(profile, via: link, modifiers: [], vpk: baseVPK)
+      }
+      let modifiers = AyurvedaRules.shared.modifiers(forName: foodItem.name)
+      return .derived(
+        profile,
+        via: link,
+        modifiers: modifiers,
+        vpk: AyurvedaRules.adjustedVPK(base: baseVPK, modifiers: modifiers)
+      )
     }
 
     return estimated(for: foodItem)
@@ -73,9 +109,12 @@ public enum AyurvedaResolver {
     return try context.fetch(descriptor).first
   }
 
-  /// D4 will add category-based estimation. Until then, unlinked foods resolve to `.none`.
   private static func estimated(for foodItem: FoodItem) -> AyurvedaResolution {
-    _ = foodItem
-    return .none
+    guard let category = foodItem.category?.first?.rawValue else {
+      return .none
+    }
+    return .estimated(
+      AyurvedaRules.shared.estimated(category: category, name: foodItem.name)
+    )
   }
 }
