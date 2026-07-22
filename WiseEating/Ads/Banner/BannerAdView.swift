@@ -20,6 +20,11 @@ struct BannerAdView: UIViewRepresentable {
     
     func makeUIView(context: Context) -> BannerView {
         let banner = BannerView(adSize: AdSizeBanner)
+        // Respect subscription plan (and -uiTestNoAds automation flag): only the
+        // Base plan loads banners — same gate as native/app-open ads.
+        guard SubscriptionManager.shared.subscriptionStatus == .base else {
+            return banner
+        }
         banner.adUnitID = adUnitID
         
         if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
