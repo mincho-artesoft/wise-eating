@@ -960,3 +960,278 @@ git status --short --branch
 - Optional scripted user-data creation was skipped. The original app's normal launch created one profile row, which remained after upgrade.
 
 All required Run 3 build, fresh-install, SQLite, idempotency, and upgrade-path gates were executed.
+
+## Run 4 — D34 founder gates
+
+Date: 2026-07-22 (Europe/Sofia)  
+Starting commit: `5fb7945b484c33ccb0f4e9dab5eaf39603d9912a`  
+Required finishing branch: `ayurveda-app`
+
+### Run 4 summary
+
+| Phase | Result | Notes |
+|---|---|---|
+| 0 — Preflight and plain push | PASS | On `ayurveda-app` at `5fb7945`; only packet-tolerated `.DS_Store` noise; plain push advanced the remote to the same tip. |
+| 1 — Clean simulator build | FAIL | `xcodebuild` exited 65 on a Swift 6 concurrency-safety error in `AyurvedaRules.swift`. No fix was attempted. |
+| 2 — Fresh-install seeding | NOT DONE | Stopped because Phase 1 failed. No app was installed or launched; SQLite gates were not measured. |
+| 3 — Idempotency | NOT DONE | Stopped because Phase 1 failed. No relaunches occurred. |
+| 4 — v1→v2 top-up | NOT DONE | Stopped because Phase 1 failed. Commit `6800a1a` was not checked out or built. |
+| 5 — Report | PASS | Run 4 was appended on `ayurveda-app`; only this report is committed and pushed. |
+
+No source file was modified, no force-push was used, and `main` was neither checked out nor moved.
+
+### Run 4 environment
+
+```text
+Xcode 26.2
+Build version 17C52
+simctl: CoreSimulator-1051.17.7
+iOS runtime: iOS 26.2 (23C54)
+Project: WiseEating.xcodeproj
+Scheme: WiseEating
+Selected destination: iPhone 17 Pro, iOS 26.2
+Selected simulator UDID: 76DCB533-2487-4BD3-B9D5-1087CADC5625
+Dedicated derived-data path: /tmp/wise-eating-d34-run4-derived
+```
+
+### Run 4 Phase 0 — preflight and push: PASS
+
+Commands run:
+
+```sh
+sed -n '1,360p' ayurveda-data/TASK-D6-VERIFY.md
+git branch --show-current
+git rev-parse --short HEAD
+git status --short
+git log -1 --format='%H%n%ae%n%s'
+git branch -v
+git log --oneline -3 ayurveda-app
+git status --short
+git push origin ayurveda-app
+git status --short --branch
+git branch -vv
+git rev-parse --short origin/ayurveda-app
+git rev-parse --short ayurveda-app
+```
+
+Preflight output:
+
+```text
+ayurveda-app
+5fb7945
+ M .DS_Store
+5fb7945b484c33ccb0f4e9dab5eaf39603d9912a
+mincho.milev@gmail.com
+D34: USDA crosswalk + category rules — all 12,601 foods classified (derived + estimated tiers)
+```
+
+The existing `.DS_Store` modification is the report packet's permitted worktree noise. No source/report change existed at preflight.
+
+Plain push output:
+
+```text
+To github.com:mincho-artesoft/wise-eating.git
+   080b937..5fb7945  ayurveda-app -> ayurveda-app
+```
+
+Post-push confirmation:
+
+```text
+## ayurveda-app...origin/ayurveda-app
+ M .DS_Store
+* ayurveda-app 5fb7945 [origin/ayurveda-app] D34: USDA crosswalk + category rules — all 12,601 foods classified (derived + estimated tiers)
+  main         9a5429d [origin/main] ...
+origin/ayurveda-app: 5fb7945
+ayurveda-app:        5fb7945
+```
+
+### Run 4 Phase 1 — clean simulator build: FAIL
+
+Discovery commands:
+
+```sh
+xcodebuild -version
+xcrun simctl --version
+xcrun simctl list devices available
+xcrun simctl list runtimes
+xcodebuild -list -project WiseEating.xcodeproj
+```
+
+The requested iPhone 16 was absent. The available shutdown iPhone 17 Pro at `76DCB533-2487-4BD3-B9D5-1087CADC5625` was selected.
+
+Build command:
+
+```sh
+set -o pipefail
+xcodebuild -project WiseEating.xcodeproj -scheme WiseEating -destination 'platform=iOS Simulator,id=76DCB533-2487-4BD3-B9D5-1087CADC5625' -configuration Debug -derivedDataPath /tmp/wise-eating-d34-run4-derived clean build 2>&1 | tee /tmp/d34_run4_build.log
+```
+
+Result:
+
+```text
+** CLEAN SUCCEEDED **
+** BUILD FAILED **
+exit code: 65
+build log: /tmp/d34_run4_build.log (2,049 lines)
+```
+
+Compiler diagnostic, verbatim:
+
+```text
+/Users/minchomilev/work/wise-eating/WiseEating/Ayurveda/AyurvedaRules.swift:31:21: error: static property 'shared' is not concurrency-safe because non-'Sendable' type 'AyurvedaRules' may have shared mutable state
+  public static let shared: AyurvedaRules = {
+                    ^
+/Users/minchomilev/work/wise-eating/WiseEating/Ayurveda/AyurvedaRules.swift:30:15: note: consider making struct 'AyurvedaRules' conform to the 'Sendable' protocol
+public struct AyurvedaRules {
+              ^
+                            : Sendable
+/Users/minchomilev/work/wise-eating/WiseEating/Ayurveda/AyurvedaRules.swift:31:21: note: add '@MainActor' to make static property 'shared' part of global actor 'MainActor'
+  public static let shared: AyurvedaRules = {
+                    ^
+  @MainActor 
+/Users/minchomilev/work/wise-eating/WiseEating/Ayurveda/AyurvedaRules.swift:31:21: note: disable concurrency-safety checks if accesses are protected by an external synchronization mechanism
+```
+
+Last 100 build-log lines, verbatim:
+
+```text
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/AI/Views/AIGenerationHostView.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/AI/Views/AIPlanGenerationView.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/AI/WorkoutGenerator/AIWorkoutGenerator.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/AI/WorkoutGenerator/AIWorkoutModels.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/AI/AIGenerationJob.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/AI/AIManager.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/AI/GlobalTaskManager.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/Analytics/AnalyticsChartView.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/Analytics/AnalyticsToolbarView.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/Analytics/AnalyticsView.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/Analytics/AnalyticsViewModel.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/AppRef/OtherAppsView.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/Ayurveda/AyurvedaProfile.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/Ayurveda/AyurvedaResolver.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/Ayurveda/AyurvedaRules.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/BarcodeScanner/Camera/CameraController.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/BarcodeScanner/Camera/LiveCameraView.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/BarcodeScanner/Services/DetectedObjectStore.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/BarcodeScanner/Services/ProductDataManager.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/BarcodeScanner/Services/ProductLookupService.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/BarcodeScanner/Services/VisualExplainService.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftCompile normal arm64 /Users/minchomilev/work/wise-eating/WiseEating/BarcodeScanner/Structs/DetectedObjectEntity.swift (in target 'WiseEating' from project 'WiseEating')
+    cd /Users/minchomilev/work/wise-eating
+    
+
+SwiftDriverJobDiscovery normal arm64 Compiling NutrientGoal.swift, NutrientType.swift, SearchContext.swift, SearchIntent.swift, SearchSignature.swift, Tokenizer.swift, SmartFoodSearch 3.swift, FoodSearchView.swift, SearchIndexStore.swift, SearchKnowledgeBase.swift, SemanticEntry.swift, ContentView.swift, FoodSearchVM.swift, IndexingJob.swift, IndexingQueueManager.swift, NameIndex.swift, NutrientIndex.swift, SmartFoodSearch.swift, SmartFoodSearch 2.swift, SmartSearchView.swift, AyurvedaSeeder.swift, DatabaseSetup.swift, PreseedLoader.swift, SeedManager.swift, Zlib.swift (in target 'WiseEating' from project 'WiseEating')
+
+SwiftCompile normal arm64 Compiling\ TrainingPlanEditorView.swift,\ TrainingPlanExerciseDetailRow.swift,\ TrainingPlanExerciseRowView.swift,\ TemplateDay.swift,\ TemplateExercise.swift,\ TemplatePlan.swift,\ TemplateSet.swift,\ TemplateWorkout.swift,\ ImportedExerciseJSON.swift,\ ImportedWorkoutJSON.swift,\ TemplatePlanDetailView.swift,\ TemplatePlanExerciseDetailRow.swift,\ TrainingPlanImporter.swift,\ Array+Extension.swift,\ Calendar+Еxtension.swift,\ CGImagePropertyOrientation+Extension.swift,\ CGRect+Extension.swift,\ CGSize+Extension.swift,\ Collection+Extension.swift,\ Color+Extension.swift,\ Comparable+Еxtension.swift,\ Date+Еxtension.swift,\ DateFormatter+Extension.swift,\ Double+Extension.swift /Users/minchomilev/work/wise-eating/WiseEating/TrainingPlan/Views/TrainingPlanEditorView.swift /Users/minchomilev/work/wise-eating/WiseEating/TrainingPlan/Views/TrainingPlanExerciseDetailRow.swift /Users/minchomilev/work/wise-eating/WiseEating/TrainingPlan/Views/TrainingPlanExerciseRowView.swift /Users/minchomilev/work/wise-eating/WiseEating/TreiningPlanTemp/Models/TemplateDay.swift /Users/minchomilev/work/wise-eating/WiseEating/TreiningPlanTemp/Models/TemplateExercise.swift /Users/minchomilev/work/wise-eating/WiseEating/TreiningPlanTemp/Models/TemplatePlan.swift /Users/minchomilev/work/wise-eating/WiseEating/TreiningPlanTemp/Models/TemplateSet.swift /Users/minchomilev/work/wise-eating/WiseEating/TreiningPlanTemp/Models/TemplateWorkout.swift /Users/minchomilev/work/wise-eating/WiseEating/TreiningPlanTemp/Structs/ImportedExerciseJSON.swift /Users/minchomilev/work/wise-eating/WiseEating/TreiningPlanTemp/Structs/ImportedWorkoutJSON.swift /Users/minchomilev/work/wise-eating/WiseEating/TreiningPlanTemp/Views/TemplatePlanDetailView.swift /Users/minchomilev/work/wise-eating/WiseEating/TreiningPlanTemp/Views/TemplatePlanExerciseDetailRow.swift /Users/minchomilev/work/wise-eating/WiseEating/TreiningPlanTemp/TrainingPlanImporter.swift /Users/minchomilev/work/wise-eating/WiseEating/Еxtensions/Array+Extension.swift /Users/minchomilev/work/wise-eating/WiseEating/Еxtensions/Calendar+Еxtension.swift /Users/minchomilev/work/wise-eating/WiseEating/Еxtensions/CGImagePropertyOrientation+Extension.swift /Users/minchomilev/work/wise-eating/WiseEating/Еxtensions/CGRect+Extension.swift /Users/minchomilev/work/wise-eating/WiseEating/Еxtensions/CGSize+Extension.swift /Users/minchomilev/work/wise-eating/WiseEating/Еxtensions/Collection+Extension.swift /Users/minchomilev/work/wise-eating/WiseEating/Еxtensions/Color+Extension.swift /Users/minchomilev/work/wise-eating/WiseEating/Еxtensions/Comparable+Еxtension.swift /Users/minchomilev/work/wise-eating/WiseEating/Еxtensions/Date+Еxtension.swift /Users/minchomilev/work/wise-eating/WiseEating/Еxtensions/DateFormatter+Extension.swift /Users/minchomilev/work/wise-eating/WiseEating/Еxtensions/Double+Extension.swift (in target 'WiseEating' from project 'WiseEating')
+
+** BUILD FAILED **
+
+
+The following build commands failed:
+	SwiftEmitModule normal arm64 Emitting\ module\ for\ WiseEating (in target 'WiseEating' from project 'WiseEating')
+	EmitSwiftModule normal arm64 (in target 'WiseEating' from project 'WiseEating')
+	Building project WiseEating with scheme WiseEating and configuration Debug
+(3 failures)
+```
+
+Per the execution-only rule, this Phase 1 failure stopped Phases 2–4. No source diagnosis or repair was attempted beyond recording the compiler output.
+
+### Run 4 Phase 2 — fresh-install seeding: NOT DONE
+
+No commands were run. The failed build produced no installable Run 4 app. The seeding log gate and SQLite counts were not measured:
+
+- `ZAYURVEDAPROFILE = 2214`: not measured.
+- `ZAYURVEDALINK = 2305`: not measured.
+- Placeholder IDs `900001...900383 = 383`: not measured.
+- `ZISRECIPE=1 = 1500`: not measured.
+- Total `ZFOODITEM = 14484`: not measured.
+
+### Run 4 Phase 3 — idempotency: NOT DONE
+
+No commands were run. Neither relaunch occurred, so no skip-path logs or unchanged SQLite counts were captured.
+
+### Run 4 Phase 4 — v1→v2 top-up: NOT DONE
+
+No commands were run. Commit `6800a1a` was not checked out, the simulator was not erased or seeded with v1, and no over-install/top-up was attempted. The checkout remained on `ayurveda-app`; `main` was never moved.
+
+### Run 4 report finalization
+
+```sh
+git add ayurveda-data/REPORT-D6-VERIFY.md
+git -c user.name='Mincho Milev' -c user.email='mincho.milev@gmail.com' commit -m "D6-VERIFY: Run 4 D34 founder gate report"
+git push origin ayurveda-app
+git branch --show-current
+git status --short --branch
+```
+
+### Run 4 honest not-done list
+
+- Fresh-install launch and all five SQLite gates.
+- Two idempotency relaunches and skip-path checks.
+- v1 build/install at `6800a1a`.
+- v2 over-install, 1,969-link top-up, profile-preservation, and crash checks.
+
+These items were skipped solely because the required clean build failed.
