@@ -2,7 +2,7 @@ import Foundation
 
 public typealias DoshaVPK = (vata: Int, pitta: Int, kapha: Int)
 
-public struct CategoryRule {
+public struct CategoryRule: Sendable {
   public let category: String?
   public let vpk: DoshaVPK
   public let virya: String
@@ -10,7 +10,7 @@ public struct CategoryRule {
   public let note: String?
 }
 
-public struct AppliedModifier {
+public struct AppliedModifier: Sendable {
   public let id: String
   public let label: String
   public let vpk: DoshaVPK
@@ -18,7 +18,7 @@ public struct AppliedModifier {
   public let note: String?
 }
 
-public struct EstimatedAyurveda {
+public struct EstimatedAyurveda: Sendable {
   public let vpk: DoshaVPK
   public let virya: String
   public let gunas: [String]
@@ -27,7 +27,7 @@ public struct EstimatedAyurveda {
   public let confidence: Double
 }
 
-public struct AyurvedaRules {
+public struct AyurvedaRules: Sendable {
   public static let shared: AyurvedaRules = {
     do {
       return try AyurvedaRules()
@@ -176,7 +176,7 @@ private extension CategoryRule {
   }
 }
 
-private struct ModifierRule {
+private struct ModifierRule: Sendable {
   let applied: AppliedModifier
   let phrases: [[String]]
 
