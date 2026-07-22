@@ -2,7 +2,7 @@
 **Read this first. It is the knowledge-transfer document for anyone (human or AI)
 taking over direction of this project. Update it at the end of every milestone —
 that is a standing rule baked into all task packets.**
-Last updated: 2026-07-22 (during D34 founder-gate runs).
+Last updated: 2026-07-22 (D34 complete; D8 next).
 
 ## 1. Mission and the two applications
 
@@ -119,8 +119,8 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | D10 predrafts (Codex) | ✅ done, director-verified |
 | D6 models+seeder | ✅ done; Mac gates green (Run 3) |
 | Branch split main/ayurveda-app + author normalization | ✅ done |
-| D34 crosswalk+rules (all 12,601 classified) | ✅ implemented, sandbox gates green; **Mac founder gates pending (Run 6)** — fixes so far: Sendable (`b96c014`), ObserversHub:169 split (`1159729`) |
-| D8 Ayurveda UI | ⏳ next: design not started. Scope: dosha display via AyurvedaResolver (signed bars + optional derived % view), tier labels, viruddha badges, engineExcluded warnings, dravya/recipe browsing |
+| D34 crosswalk+rules (all 12,601 classified) | ✅ COMPLETE — Mac founder gates green (Run 6, report `15cb1b2`): build, fresh install 2214/2305/383/1500/14484, idempotency, v1→v2 top-up 336→2305. Fixes: Sendable (`b96c014`), ObserversHub splits (`1159729`, `1bc94fc`) |
+| D8 Ayurveda UI | ⏳ NEXT — design not started. Founder requirements (2026-07-22): integrate into the EXISTING FoodItemDetailView pattern — Ayurveda section alongside nutrition, dosha shown as progress-bar rows like the app's nutrient bars (signed −2…+2, optional derived % view), tier label always visible, rasa/virya/vipaka/guna chips, viruddha badges, engineExcluded warnings. Preview + update fields "like the rest of FoodItem": Ayurveda attributes editable in FoodItemEditorView — DESIGN DECISION NEEDED: editability policy (proposal: user-added foods fully editable → tier "user"; catalog foods read-only or override-with-provenance). Remember §4: small sub-views, extracted handlers (type-checker budget) |
 | Expert review pass | ⏳ pending human reviewer: work aiDraft→reviewed, resolve reviewNotes, optional batch-31 top-up to 750 |
 | Later roadmap | media (yoga/meditation content), recommendation engine, dosha assessment — see ayurveda-data/RESTART-PLAN.md history |
 

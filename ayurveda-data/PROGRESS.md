@@ -68,7 +68,7 @@ Current status: **714 dravyas, 1,500 recipes — all checks pass.**
 
 ## Next milestones
 
-1. **D3+D4 (D34) — IMPLEMENTED; Mac founder gates pending (Run 6).** All 12,601
+1. **D3+D4 (D34) — COMPLETE ✅ (Run 6 founder gates green).** All 12,601
    foods classified: 336 classical + 1,969 derived + 10,296 estimated. Seed v2
    (2,305 links), rules bundle, resolver `.estimated`. Sandbox gates verified by
    director; Mac fixes so far: Sendable (b96c014), ObserversHub split (1159729).
