@@ -76,6 +76,7 @@ struct FoodItemEditorView: View {
     @State private var showMacros = true
     @State private var showLipids = false
     @State private var showOther = false
+    @State private var showAyurveda = false
     @State private var showMoreVitamins  = false
     @State private var showMoreMinerals = false
     @State private var showAminoAcids = false
@@ -93,6 +94,8 @@ struct FoodItemEditorView: View {
     @State private var aminoAcids: AminoAcidsForm
     @State private var carbDetails: CarbDetailsForm
     @State private var sterols: SterolsForm
+    @State private var ayurForm = AyurvedaForm()
+    @State private var didPrefillAyurveda = false
     
     @State private var showAlert = false
     @State private var alertMsg = ""
@@ -278,6 +281,9 @@ struct FoodItemEditorView: View {
            .onAppear {
                loadAIButtonPosition()
            }
+           .task {
+               prefillAyurvedaIfNeeded()
+           }
        }
     
     @ViewBuilder
@@ -428,6 +434,7 @@ struct FoodItemEditorView: View {
                       carbDetailsSection
                       sterolsSection
                       otherSection
+                      ayurvedaSection
                       
                       Color.clear.frame(height: 150)
                   }
@@ -893,6 +900,30 @@ struct FoodItemEditorView: View {
            }
            .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
        }
+
+       private var ayurvedaSection: some View {
+           VStack(alignment: .leading, spacing: 8) {
+               collapsibleHeader("Ayurveda", isExpanded: $showAyurveda)
+               if showAyurveda {
+                   AyurvedaEditorSection(form: $ayurForm)
+                       .padding()
+                       .glassCardStyle(cornerRadius: 20)
+                       .padding(.top, 4)
+               }
+           }
+           .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+       }
+
+    private func prefillAyurvedaIfNeeded() {
+        guard !didPrefillAyurveda else { return }
+        didPrefillAyurveda = true
+        // Prefill only for existing foods: a duplicated (dubFood) item has no
+        // persisted id yet, so no stored user Ayurveda form can exist for it.
+        guard let foodId = food?.id else { return }
+        if let storedForm = AyurvedaUserProfileStore.form(foodId: foodId, context: ctx) {
+            ayurForm = storedForm
+        }
+    }
     
     private func nextFoodId() -> Int {
             var desc = FetchDescriptor<FoodItem>()
@@ -971,6 +1002,8 @@ struct FoodItemEditorView: View {
             item.aminoAcids?.foodItem     = item
             item.carbDetails?.foodItem    = item
             item.sterols?.foodItem        = item
+
+            AyurvedaUserProfileStore.upsert(form: ayurForm, for: item, context: ctx)
             
             do {
                 try ctx.save()
@@ -1867,4 +1900,3 @@ extension FoodItemEditorView.OpenMenu {
         }
     }
 }
-
