@@ -88,7 +88,7 @@ enum AyurvedaSeeder {
       }
 
       try insertInBatches(seed.recipes, context: context) { recipe in
-        context.insert(makeRecipeProfile(recipe, seedVersion: seed.seedVersion))
+        context.insert(try makeRecipeProfile(recipe, seedVersion: seed.seedVersion))
       }
 
       print(
@@ -123,6 +123,9 @@ enum AyurvedaSeeder {
       seed.counts.placeholders == 383,
       seed.counts.categoryRules == 187,
       seed.counts.modifiers == 14,
+      seed.counts.nutrition.full
+        + seed.counts.nutrition.estimated
+        + seed.counts.nutrition.none == seed.counts.recipes,
       seed.dravyas.count == seed.counts.dravyas,
       seed.recipes.count == seed.counts.recipes,
       seed.links.count == seed.counts.links,
@@ -133,6 +136,14 @@ enum AyurvedaSeeder {
     }
     guard seed.recipes.allSatisfy({ !$0.ingredients.isEmpty }) else {
       throw AyurvedaSeederError.emptyRecipeIngredients
+    }
+    let validNutritionStates = Set(["full", "estimated", "none"])
+    guard seed.recipes.allSatisfy({
+      validNutritionStates.contains($0.nutrition.status)
+        && ($0.nutrition.status != "full" || $0.nutrition.missingIngredients.isEmpty)
+        && $0.nutrition.totalWeightG > 0
+    }) else {
+      throw AyurvedaSeederError.invalidNutrition
     }
   }
 
@@ -272,8 +283,25 @@ enum AyurvedaSeeder {
   private static func makeRecipeProfile(
     _ recipe: RecipeDTO,
     seedVersion: Int
-  ) -> AyurvedaProfile {
-    AyurvedaProfile(
+  ) throws -> AyurvedaProfile {
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = [.sortedKeys]
+    let perServing = try encodeNutritionJSON(
+      recipe.nutrition.perServing,
+      recipeId: recipe.id,
+      encoder: encoder
+    )
+    let per100g = try encodeNutritionJSON(
+      recipe.nutrition.per100g,
+      recipeId: recipe.id,
+      encoder: encoder
+    )
+    let units = try encodeNutritionJSON(
+      recipe.nutrition.units,
+      recipeId: recipe.id,
+      encoder: encoder
+    )
+    return AyurvedaProfile(
       id: recipe.id,
       kind: "recipe",
       foodId: recipe.foodId,
@@ -311,8 +339,26 @@ enum AyurvedaSeeder {
       prepMinutes: recipe.prepMinutes,
       cookMinutes: recipe.cookMinutes,
       steps: recipe.steps,
-      guidance: recipe.guidance
+      guidance: recipe.guidance,
+      nutritionStatus: recipe.nutrition.status,
+      nutritionMissingIngredients: recipe.nutrition.missingIngredients,
+      nutritionTotalWeightG: recipe.nutrition.totalWeightG,
+      nutritionPerServingJSON: perServing,
+      nutritionPer100gJSON: per100g,
+      nutritionUnitsJSON: units
     )
+  }
+
+  private static func encodeNutritionJSON<Value: Encodable>(
+    _ value: Value,
+    recipeId: String,
+    encoder: JSONEncoder
+  ) throws -> String {
+    let data = try encoder.encode(value)
+    guard let encoded = String(data: data, encoding: .utf8) else {
+      throw AyurvedaSeederError.invalidNutritionJSON(recipeId)
+    }
+    return encoded
   }
 
   private static func recipeDescription(_ recipe: RecipeDTO) -> String {
@@ -332,6 +378,8 @@ private enum AyurvedaSeederError: Error, LocalizedError {
   case missingIngredientFood(recipeId: String, foodId: Int)
   case recipeIngredientReference(recipeId: String, foodId: Int)
   case invalidServings(String)
+  case invalidNutrition
+  case invalidNutritionJSON(String)
 
   var errorDescription: String? {
     switch self {
@@ -351,6 +399,10 @@ private enum AyurvedaSeederError: Error, LocalizedError {
       return "recipe \(recipeId) references recipe FoodItem \(foodId) as an ingredient"
     case .invalidServings(let dravyaId):
       return "dravya \(dravyaId) has servings that cannot be encoded as JSON"
+    case .invalidNutrition:
+      return "the Ayurveda seed contains invalid recipe nutrition"
+    case .invalidNutritionJSON(let recipeId):
+      return "recipe \(recipeId) nutrition cannot be encoded as JSON"
     }
   }
 }
@@ -372,6 +424,13 @@ private struct AyurvedaSeedCountsDTO: Decodable {
   let placeholders: Int
   let categoryRules: Int
   let modifiers: Int
+  let nutrition: RecipeNutritionCountsDTO
+}
+
+private struct RecipeNutritionCountsDTO: Decodable {
+  let full: Int
+  let estimated: Int
+  let none: Int
 }
 
 private struct DoshaDTO: Decodable {
@@ -446,6 +505,16 @@ private struct RecipeDTO: Decodable {
   let qualityState: String
   let reviewNote: String?
   let foodId: Int
+  let nutrition: RecipeNutritionDTO
+}
+
+private struct RecipeNutritionDTO: Decodable {
+  let status: String
+  let missingIngredients: [String]
+  let totalWeightG: Double
+  let perServing: [String: Double]
+  let per100g: [String: Double]
+  let units: [String: String]
 }
 
 private struct AyurvedaLinkDTO: Decodable {

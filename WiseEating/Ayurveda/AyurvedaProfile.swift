@@ -41,6 +41,12 @@ import SwiftData
   public var cookMinutes: Int?
   public var steps: [String] = []
   public var guidance: String?
+  public var nutritionStatus: String?
+  public var nutritionMissingIngredients: [String] = []
+  public var nutritionTotalWeightG: Double?
+  public var nutritionPerServingJSON: String?
+  public var nutritionPer100gJSON: String?
+  public var nutritionUnitsJSON: String?
 
   public init(
     id: String,
@@ -80,7 +86,13 @@ import SwiftData
     prepMinutes: Int?,
     cookMinutes: Int?,
     steps: [String] = [],
-    guidance: String?
+    guidance: String?,
+    nutritionStatus: String? = nil,
+    nutritionMissingIngredients: [String] = [],
+    nutritionTotalWeightG: Double? = nil,
+    nutritionPerServingJSON: String? = nil,
+    nutritionPer100gJSON: String? = nil,
+    nutritionUnitsJSON: String? = nil
   ) {
     self.id = id
     self.kind = kind
@@ -120,6 +132,12 @@ import SwiftData
     self.cookMinutes = cookMinutes
     self.steps = steps
     self.guidance = guidance
+    self.nutritionStatus = nutritionStatus
+    self.nutritionMissingIngredients = nutritionMissingIngredients
+    self.nutritionTotalWeightG = nutritionTotalWeightG
+    self.nutritionPerServingJSON = nutritionPerServingJSON
+    self.nutritionPer100gJSON = nutritionPer100gJSON
+    self.nutritionUnitsJSON = nutritionUnitsJSON
   }
 }
 

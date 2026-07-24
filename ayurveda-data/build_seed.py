@@ -15,8 +15,8 @@ from pathlib import Path
 from typing import Any
 
 
-SEED_VERSION = 2
-GENERATED_AT = "2026-07-21T00:00:00Z"
+SEED_VERSION = 3
+GENERATED_AT = "2026-07-24T00:00:00Z"
 EXPECTED_COUNTS = {
     "dravyas": 714,
     "recipes": 1500,
@@ -33,6 +33,47 @@ PLACEHOLDER_BASE = 900_000
 RECIPE_BASE = 1_000_000
 RESERVED_BAND_END = 1_002_000
 TIER_RANK = {"exact": 0, "near": 1}
+NUTRIENT_CATALOG = {
+    "energyKcal": ("other", "kcal"),
+    "carbohydrates": ("macronutrients", "g"),
+    "protein": ("macronutrients", "g"),
+    "fat": ("macronutrients", "g"),
+    "fiber": ("macronutrients", "g"),
+    "totalSugars": ("macronutrients", "g"),
+    "vitaminA_RAE": ("vitamins", "µg"),
+    "retinol": ("vitamins", "µg"),
+    "caroteneAlpha": ("vitamins", "µg"),
+    "caroteneBeta": ("vitamins", "µg"),
+    "cryptoxanthinBeta": ("vitamins", "µg"),
+    "luteinZeaxanthin": ("vitamins", "µg"),
+    "lycopene": ("vitamins", "µg"),
+    "vitaminB1_Thiamin": ("vitamins", "mg"),
+    "vitaminB2_Riboflavin": ("vitamins", "mg"),
+    "vitaminB3_Niacin": ("vitamins", "mg"),
+    "vitaminB5_PantothenicAcid": ("vitamins", "mg"),
+    "vitaminB6": ("vitamins", "mg"),
+    "folateDFE": ("vitamins", "µg"),
+    "folateFood": ("vitamins", "µg"),
+    "folateTotal": ("vitamins", "µg"),
+    "folicAcid": ("vitamins", "µg"),
+    "vitaminB12": ("vitamins", "µg"),
+    "vitaminC": ("vitamins", "mg"),
+    "vitaminD": ("vitamins", "µg"),
+    "vitaminE": ("vitamins", "mg"),
+    "vitaminK": ("vitamins", "µg"),
+    "choline": ("vitamins", "mg"),
+    "calcium": ("minerals", "mg"),
+    "iron": ("minerals", "mg"),
+    "magnesium": ("minerals", "mg"),
+    "phosphorus": ("minerals", "mg"),
+    "potassium": ("minerals", "mg"),
+    "sodium": ("minerals", "mg"),
+    "selenium": ("minerals", "µg"),
+    "zinc": ("minerals", "mg"),
+    "copper": ("minerals", "mg"),
+    "manganese": ("minerals", "mg"),
+    "fluoride": ("minerals", "µg"),
+}
 
 
 class BuildError(RuntimeError):
@@ -59,6 +100,12 @@ def parse_args() -> argparse.Namespace:
         type=Path,
         default=repo_root / "WiseEating" / "ayurveda_rules.json",
         help="Destination category-rule bundle",
+    )
+    parser.add_argument(
+        "--foods",
+        type=Path,
+        default=repo_root / "WiseEating" / "Legacy" / "foods.json",
+        help="USDA-backed per-100g nutrient source used to build the shipped store",
     )
     return parser.parse_args()
 
@@ -108,6 +155,148 @@ def load_store_ids(path: Path) -> set[int]:
     except sqlite3.Error as error:
         raise BuildError(f"cannot query ZFOODITEM.ZID in {path}: {error}") from error
     return {int(row[0]) for row in rows}
+
+
+def load_food_nutrition(
+    path: Path, store_ids: set[int]
+) -> dict[int, dict[str, float]]:
+    try:
+        foods = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise BuildError(f"cannot load USDA nutrient source {path}: {error}") from error
+    if not isinstance(foods, list):
+        raise BuildError(f"{path}: expected a top-level array")
+
+    nutrition_by_id: dict[int, dict[str, float]] = {}
+    for food in foods:
+        if not isinstance(food, dict) or not isinstance(food.get("id"), int):
+            raise BuildError(f"{path}: food has no integer id")
+        food_id = food["id"]
+        if food_id in nutrition_by_id:
+            raise BuildError(f"{path}: duplicate food id {food_id}")
+
+        panel: dict[str, float] = {}
+        for nutrient, (section, expected_unit) in NUTRIENT_CATALOG.items():
+            entry = food.get(section, {}).get(nutrient)
+            if not isinstance(entry, dict):
+                raise BuildError(f"{path}: food {food_id} is missing {section}.{nutrient}")
+            unit = entry.get("unit")
+            if unit != expected_unit:
+                raise BuildError(
+                    f"{path}: food {food_id} {nutrient} uses {unit!r}, "
+                    f"expected {expected_unit!r}"
+                )
+            value = entry.get("value")
+            if value is not None:
+                if not isinstance(value, (int, float)) or value < 0:
+                    raise BuildError(
+                        f"{path}: food {food_id} {nutrient} has invalid value {value!r}"
+                    )
+                panel[nutrient] = float(value)
+        nutrition_by_id[food_id] = panel
+
+    missing_source_ids = sorted(nutrition_by_id.keys() - store_ids)
+    if missing_source_ids:
+        preview = ", ".join(str(food_id) for food_id in missing_source_ids[:10])
+        raise BuildError(f"{path}: nutrient source food ids are absent from store: {preview}")
+    return nutrition_by_id
+
+
+def preferred_nutrition_bindings(
+    bindings_by_dravya: dict[str, list[tuple[int, str, int]]],
+) -> dict[str, int]:
+    preferred: dict[str, int] = {}
+    for dravya_id, bindings in bindings_by_dravya.items():
+        ordered = sorted(
+            bindings,
+            key=lambda binding: (TIER_RANK[binding[1]], binding[2]),
+        )
+        if ordered:
+            preferred[dravya_id] = ordered[0][0]
+    return preferred
+
+
+def rounded(value: float) -> float:
+    return round(value, 12)
+
+
+def derive_recipe_nutrition(
+    recipe: dict[str, Any],
+    nutrition_by_id: dict[int, dict[str, float]],
+    preferred_bindings: dict[str, int],
+) -> tuple[dict[str, Any], list[int | None]]:
+    servings = recipe.get("servings")
+    if not isinstance(servings, (int, float)) or servings <= 0:
+        raise BuildError(f"{recipe['id']}: servings must be greater than zero")
+
+    totals: dict[str, float] = defaultdict(float)
+    observed: set[str] = set()
+    missing_slugs: list[str] = []
+    nutrition_source_ids: list[int | None] = []
+    total_weight = 0.0
+
+    for ingredient in recipe.get("ingredients", []):
+        grams = ingredient.get("grams")
+        if not isinstance(grams, (int, float)) or grams < 0:
+            raise BuildError(f"{recipe['id']}: invalid ingredient grams {grams!r}")
+        total_weight += float(grams)
+
+        nutrition_id: int | None
+        missing_slug: str
+        if "dravyaId" in ingredient:
+            missing_slug = str(ingredient["dravyaId"])
+            nutrition_id = preferred_bindings.get(missing_slug)
+        else:
+            candidate = ingredient.get("fdcId")
+            nutrition_id = candidate if isinstance(candidate, int) else None
+            missing_slug = f"fdc.{candidate}" if candidate is not None else ingredient["name"]
+
+        panel = nutrition_by_id.get(nutrition_id) if nutrition_id is not None else None
+        if panel is None:
+            missing_slugs.append(missing_slug)
+            nutrition_source_ids.append(None)
+            continue
+
+        nutrition_source_ids.append(nutrition_id)
+        factor = float(grams) / 100.0
+        for nutrient, value in panel.items():
+            totals[nutrient] += factor * value
+            observed.add(nutrient)
+
+    if total_weight <= 0:
+        raise BuildError(f"{recipe['id']}: total ingredient weight must be greater than zero")
+
+    if not totals:
+        status = "none"
+    elif missing_slugs:
+        status = "estimated"
+    else:
+        status = "full"
+
+    per_serving = {
+        nutrient: rounded(totals[nutrient] / float(servings))
+        for nutrient in NUTRIENT_CATALOG
+        if nutrient in observed
+    }
+    per_100g = {
+        nutrient: rounded(totals[nutrient] * 100.0 / total_weight)
+        for nutrient in NUTRIENT_CATALOG
+        if nutrient in observed
+    }
+    return (
+        {
+            "status": status,
+            "missingIngredients": sorted(set(missing_slugs)),
+            "totalWeightG": rounded(total_weight),
+            "perServing": per_serving,
+            "per100g": per_100g,
+            "units": {
+                nutrient: unit
+                for nutrient, (_section, unit) in NUTRIENT_CATALOG.items()
+            },
+        },
+        nutrition_source_ids,
+    )
 
 
 def load_crosswalk_links(
@@ -264,6 +453,8 @@ def build_envelope(
     recipes: list[dict[str, Any]],
     store_ids: set[int],
     derived_links: list[dict[str, Any]],
+    nutrition_by_id: dict[int, dict[str, float]],
+    preferred_bindings: dict[str, int],
 ) -> tuple[dict[str, Any], list[tuple[int, str, str, list[str]]], list[str]]:
     assert_reserved_band_free(store_ids)
     assignments, links, contested, placeholder_ids = resolve_primary_foods(dravyas, store_ids)
@@ -287,8 +478,13 @@ def build_envelope(
     for ordinal, recipe in enumerate(sorted(recipes, key=lambda item: item["id"]), start=1):
         output = dict(recipe)
         output["foodId"] = RECIPE_BASE + ordinal
+        nutrition, nutrition_source_ids = derive_recipe_nutrition(
+            recipe, nutrition_by_id, preferred_bindings
+        )
         resolved_ingredients: list[dict[str, Any]] = []
-        for ingredient in recipe.get("ingredients", []):
+        for ingredient, nutrition_source_id in zip(
+            recipe.get("ingredients", []), nutrition_source_ids, strict=True
+        ):
             food_id: int | None = None
             if "dravyaId" in ingredient:
                 assignment = assignments.get(ingredient["dravyaId"])
@@ -301,14 +497,16 @@ def build_envelope(
             if food_id is None:
                 unresolved.append(f"{recipe['id']}: {ingredient!r}")
                 continue
-            resolved_ingredients.append(
-                {
-                    "foodId": food_id,
-                    "grams": ingredient["grams"],
-                    "name": ingredient["name"],
-                }
-            )
+            resolved = {
+                "foodId": food_id,
+                "grams": ingredient["grams"],
+                "name": ingredient["name"],
+            }
+            if nutrition_source_id is not None:
+                resolved["nutritionFdcId"] = nutrition_source_id
+            resolved_ingredients.append(resolved)
         output["ingredients"] = resolved_ingredients
+        output["nutrition"] = nutrition
         output_recipes.append(output)
 
     if unresolved:
@@ -348,6 +546,13 @@ def build_envelope(
             "placeholders": actual_counts["placeholders"],
             "categoryRules": actual_counts["categoryRules"],
             "modifiers": actual_counts["modifiers"],
+            "nutrition": {
+                status: sum(
+                    recipe["nutrition"]["status"] == status
+                    for recipe in output_recipes
+                )
+                for status in ("full", "estimated", "none")
+            },
         },
         "dravyas": output_dravyas,
         "recipes": output_recipes,
@@ -385,6 +590,13 @@ def print_summary(
     print(f"dravyas: {counts['dravyas']}")
     print(f"recipes: {counts['recipes']}")
     print(
+        "recipe nutrition: "
+        + ", ".join(
+            f"{status}={counts['nutrition'][status]}"
+            for status in ("full", "estimated", "none")
+        )
+    )
+    print(
         f"links: {counts['links']} "
         + f"({V1_LINK_COUNT} v1 + {counts['derivedLinks']} derived)"
     )
@@ -412,10 +624,12 @@ def main() -> int:
     try:
         actual_store_path = store_path(args.store)
         store_ids = load_store_ids(actual_store_path)
+        nutrition_by_id = load_food_nutrition(args.foods, store_ids)
         dravyas = load_batches(data_root / "dravyas", "batch-*.json", "items")
         recipes = load_batches(data_root / "recipes", "batch-r*.json", "items")
         dravya_ids = {dravya["id"] for dravya in dravyas}
         _claims, bindings_by_dravya = validate_bindings(dravyas, store_ids)
+        preferred_bindings = preferred_nutrition_bindings(bindings_by_dravya)
         v1_fdc_ids = {
             fdc_id
             for bindings in bindings_by_dravya.values()
@@ -429,7 +643,12 @@ def main() -> int:
         )
         rules_bundle = load_rules_bundle(data_root)
         envelope, contested, placeholder_ids = build_envelope(
-            dravyas, recipes, store_ids, derived_links
+            dravyas,
+            recipes,
+            store_ids,
+            derived_links,
+            nutrition_by_id,
+            preferred_bindings,
         )
         compressed = encode_deterministic_gzip(envelope)
         args.output.parent.mkdir(parents=True, exist_ok=True)

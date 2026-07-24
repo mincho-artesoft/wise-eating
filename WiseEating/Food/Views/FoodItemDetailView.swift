@@ -106,6 +106,7 @@ struct FoodItemDetailView: View {
                         phSection
                         ayurvedaSection
                         ingredientsSection
+                        recipeNutritionSection
                         vitaminsSection
                         mineralsSection
                         lipidsSection
@@ -641,6 +642,10 @@ struct FoodItemDetailView: View {
 
     private var ayurvedaSection: some View {
         AyurvedaSectionView(food: food)
+    }
+
+    private var recipeNutritionSection: some View {
+        RecipeNutritionPanelView(food: food)
     }
     
     @ViewBuilder

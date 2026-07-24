@@ -7,6 +7,8 @@ Run from the ayurveda-data directory (or pass paths). Exits non-zero on errors.
 import csv, glob, gzip, json, os, re, sqlite3, sys
 from collections import Counter
 
+import build_seed
+
 RASA = {"sweet", "sour", "salty", "pungent", "bitter", "astringent"}
 GUNA = {"heavy", "light", "oily", "dry", "sharp", "soft", "smooth", "rough",
         "penetrating", "dense", "liquid", "slimy"}
@@ -253,13 +255,14 @@ def d34_validate(here, store, errs):
     except Exception as error:
         errs.append(f"D34/ayurveda_seed.json.gz: cannot read: {error}")
         return
-    if seed.get("seedVersion") != 2:
-        errs.append(f"D34/seed: expected seedVersion 2, got {seed.get('seedVersion')}")
+    if seed.get("seedVersion") != 3:
+        errs.append(f"D34/seed: expected seedVersion 3, got {seed.get('seedVersion')}")
     counts = seed.get("counts", {})
     expected_counts = {
         "dravyas": 714, "recipes": 1500, "links": 2305,
         "derivedLinks": 1969, "placeholders": 383,
         "categoryRules": 187, "modifiers": 14,
+        "nutrition": {"full": 1500, "estimated": 0, "none": 0},
     }
     if counts != expected_counts:
         errs.append(f"D34/seed: counts block differs: {counts}")
@@ -287,6 +290,69 @@ def d34_validate(here, store, errs):
         )
     if set(seed_derived) != set(crosswalk):
         errs.append("D34/seed: derived fdcIds differ from crosswalk.csv")
+
+    nutrition_counts = Counter()
+    nutrient_keys = set(build_seed.NUTRIENT_CATALOG)
+    kitchari_energy = None
+    for recipe in seed.get("recipes", []):
+        recipe_id = recipe.get("id", "?")
+        nutrition = recipe.get("nutrition")
+        if not isinstance(nutrition, dict):
+            errs.append(f"WE2/seed/{recipe_id}: missing nutrition panel")
+            continue
+        status = nutrition.get("status")
+        nutrition_counts[status] += 1
+        if status not in {"full", "estimated", "none"}:
+            errs.append(f"WE2/seed/{recipe_id}: invalid nutrition status {status!r}")
+        missing = nutrition.get("missingIngredients")
+        if not isinstance(missing, list) or any(not isinstance(item, str) for item in missing):
+            errs.append(f"WE2/seed/{recipe_id}: invalid missing ingredient slugs")
+        elif status == "full" and missing:
+            errs.append(f"WE2/seed/{recipe_id}: full panel lists missing ingredients")
+        total_weight = nutrition.get("totalWeightG")
+        ingredient_weight = sum(
+            ingredient.get("grams", 0) for ingredient in recipe.get("ingredients", [])
+        )
+        if not isinstance(total_weight, (int, float)) or total_weight <= 0:
+            errs.append(f"WE2/seed/{recipe_id}: invalid total weight")
+            continue
+        if abs(total_weight - ingredient_weight) > 1e-9:
+            errs.append(
+                f"WE2/seed/{recipe_id}: total weight {total_weight} "
+                f"differs from ingredients {ingredient_weight}"
+            )
+        units = nutrition.get("units", {})
+        if set(units) != nutrient_keys:
+            errs.append(f"WE2/seed/{recipe_id}: nutrient unit catalog differs")
+        per_serving = nutrition.get("perServing", {})
+        per_100g = nutrition.get("per100g", {})
+        if not isinstance(per_serving, dict) or not isinstance(per_100g, dict):
+            errs.append(f"WE2/seed/{recipe_id}: invalid nutrient value dictionaries")
+            continue
+        if set(per_serving) != set(per_100g) or set(per_serving) - nutrient_keys:
+            errs.append(f"WE2/seed/{recipe_id}: nutrient panel keys differ")
+        servings = recipe.get("servings")
+        if not isinstance(servings, (int, float)) or servings <= 0:
+            continue
+        for nutrient in per_serving:
+            expected_serving = per_100g[nutrient] * total_weight / (100 * servings)
+            if abs(per_serving[nutrient] - expected_serving) > 1e-8:
+                errs.append(
+                    f"WE2/seed/{recipe_id}: {nutrient} serving/100g math differs"
+                )
+                break
+        if recipe_id == "recipe.classic-mung-kitchari":
+            kitchari_energy = per_serving.get("energyKcal")
+
+    expected_nutrition_counts = Counter({"full": 1500, "estimated": 0, "none": 0})
+    if nutrition_counts != expected_nutrition_counts:
+        errs.append(f"WE2/seed: nutrition coverage differs: {dict(nutrition_counts)}")
+    if nutrition_counts["none"] > 375:
+        errs.append(
+            f"WE2/seed: no-nutrition coverage exceeds 25%: {nutrition_counts['none']}"
+        )
+    if not isinstance(kitchari_energy, (int, float)) or abs(kitchari_energy - 379.67) > 0.5:
+        errs.append(f"WE2/seed: kitchari energy gate differs: {kitchari_energy}")
 
     tier_counts = Counter()
     modifier_histogram = Counter()
