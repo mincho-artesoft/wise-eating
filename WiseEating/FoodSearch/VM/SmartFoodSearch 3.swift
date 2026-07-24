@@ -420,12 +420,21 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
     private func updateContext(intent: SearchIntent,
                                activeFilters: Set<NutrientType>,
                                forceShowPH: Bool) {
-        var display = intent.nutrientGoals.map { $0.nutrient }
-        for f in activeFilters where !display.contains(f) {
+        var display = intent.displayNutrients
+        for goal in intent.nutrientGoals where !display.contains(goal.nutrient) {
+            display.append(goal.nutrient)
+        }
+        for f in activeFilters.sorted(by: { $0.rawValue < $1.rawValue })
+        where !display.contains(f) {
             display.append(f)
         }
         var seen = Set<NutrientType>()
         let uniqueDisplay = display.filter { seen.insert($0).inserted }
+        let activeConstraint = intent.nutrientGoals.isEmpty
+            ? nil
+            : intent.nutrientGoals
+                .map(\.searchContextDescription)
+                .joined(separator: ", ")
         var ageStr: String? = nil
         if let age = intent.targetConsumerAge {
             ageStr = age >= 12 ? "\(Int(age / 12))y+" : "\(Int(age))m+"
@@ -433,7 +442,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
         searchContext = SearchContext(
             displayNutrients: uniqueDisplay,
             activeDiet: intent.dietFilter,    // 👈 важно – dietFilter от SearchIntent
-            activeConstraint: nil,
+            activeConstraint: activeConstraint,
             activeAgeLimit: ageStr,
             isPhActive: forceShowPH || intent.phConstraint != nil
         )
@@ -573,7 +582,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             var mergedGoals: [NutrientGoal] = []
             
             // 1. Филтри от UI
-            for filter in activeFilters {
+            for filter in activeFilters.sorted(by: { $0.rawValue < $1.rawValue }) {
                 mergedGoals.append(NutrientGoal(nutrient: filter, constraint: .high))
             }
             
@@ -622,6 +631,14 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             
             // Merge numeric goals into our prioritized list
             mergedGoals = SmartFoodSearch3.mergeNumericGoals(numericGoals, into: mergedGoals)
+            let displayNutrients = SmartFoodSearch3.orderedDisplayNutrients(
+                in: searchQuery,
+                goalGroups: [
+                    parsed.nutrientGoals,
+                    mappedConstraints.nutrientGoals,
+                    fallbackGoals,
+                ]
+            )
             
             // --- Diets ---
             let baseExcludedDiets = parsed.excludedDiets.union(
@@ -657,6 +674,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                     textTokens: textTokens,
                     negativeTokens: parsed.negativeTokens,
                     nutrientGoals: mergedGoals,
+                    displayNutrients: displayNutrients,
                     diets: combinedDiets,
                     dietFilter: parsed.dietFilter,
                     excludedDiets: excludedDietNames,
@@ -1703,6 +1721,86 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
         result.append(contentsOf: numericGoals)
         
         return result
+    }
+
+    nonisolated private static func orderedDisplayNutrients(
+        in query: String,
+        goalGroups: [[NutrientGoal]]
+    ) -> [NutrientType] {
+        var seen = Set<NutrientType>()
+        let candidates = goalGroups
+            .flatMap { $0 }
+            .map(\.nutrient)
+            .filter { seen.insert($0).inserted }
+        guard candidates.count > 1 else { return candidates }
+
+        let lowerQuery = query.lowercased()
+        let aliases = SearchKnowledgeBase.shared.nutrientMap
+
+        func isWordCharacter(_ character: Character) -> Bool {
+            character.unicodeScalars.allSatisfy {
+                CharacterSet.alphanumerics.contains($0)
+            }
+        }
+
+        func firstBoundaryPosition(of phrase: String) -> Int? {
+            var searchStart = lowerQuery.startIndex
+            while searchStart < lowerQuery.endIndex,
+                  let range = lowerQuery.range(
+                    of: phrase.lowercased(),
+                    range: searchStart..<lowerQuery.endIndex
+                  ) {
+                let startsAtBoundary =
+                    range.lowerBound == lowerQuery.startIndex
+                    || !isWordCharacter(
+                        lowerQuery[lowerQuery.index(before: range.lowerBound)]
+                    )
+                let endsAtBoundary =
+                    range.upperBound == lowerQuery.endIndex
+                    || !isWordCharacter(lowerQuery[range.upperBound])
+                if startsAtBoundary, endsAtBoundary {
+                    return lowerQuery.distance(
+                        from: lowerQuery.startIndex,
+                        to: range.lowerBound
+                    )
+                }
+                searchStart = range.upperBound
+            }
+            return nil
+        }
+
+        var positions: [NutrientType: Int] = [:]
+        for nutrient in candidates {
+            let position = aliases
+                .lazy
+                .filter { $0.value == nutrient }
+                .compactMap { firstBoundaryPosition(of: $0.key) }
+                .min()
+            if let position {
+                positions[nutrient] = position
+            }
+        }
+        let fallbackOrder = Dictionary(
+            uniqueKeysWithValues: candidates.enumerated().map {
+                ($0.element, $0.offset)
+            }
+        )
+
+        return candidates.sorted { left, right in
+            switch (positions[left], positions[right]) {
+            case let (.some(leftPosition), .some(rightPosition)):
+                if leftPosition != rightPosition {
+                    return leftPosition < rightPosition
+                }
+            case (.some, .none):
+                return true
+            case (.none, .some):
+                return false
+            case (.none, .none):
+                break
+            }
+            return fallbackOrder[left, default: 0] < fallbackOrder[right, default: 0]
+        }
     }
     
     // MARK: - Numeric constraint splitting helper

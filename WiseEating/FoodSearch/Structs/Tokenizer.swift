@@ -590,6 +590,7 @@ struct Tokenizer {
             textTokens: textTokens,
             negativeTokens: negativeTokens,
             nutrientGoals: goals,
+            displayNutrients: goals.map(\.nutrient),
             diets: detectedDiets,
             dietFilter: dietFilter,
             excludedDiets: dietExclusions,           // ⬅️ NEW

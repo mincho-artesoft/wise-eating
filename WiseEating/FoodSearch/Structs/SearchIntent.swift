@@ -2,6 +2,7 @@ struct SearchIntent {
     let textTokens: Set<String>
     let negativeTokens: Set<String>
     let nutrientGoals: [NutrientGoal]
+    let displayNutrients: [NutrientType]
     let diets: Set<String>
     let dietFilter: DietType?
     let excludedDiets: Set<String>   // ⬅️ NEW
