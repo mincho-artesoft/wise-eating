@@ -596,7 +596,8 @@ struct Tokenizer {
             targetConsumerAge: detectedAge,
             allergenExclusions: allergenExclusions,
             excludeAllAllergens: excludeAllAllergens,
-            phConstraint: phGoal
+            phConstraint: phGoal,
+            ayurvedaFacetConstraints: []
         )
     }
 

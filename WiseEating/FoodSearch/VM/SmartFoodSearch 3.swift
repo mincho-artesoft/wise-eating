@@ -38,6 +38,9 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
     
     /// token -> set of CompactFoodItem IDs
     private var invertedIndex: [String: Set<Int>] = [:]
+
+    /// canonical Ayurveda facet key -> seeded dravya/recipe FoodItem IDs
+    private var ayurvedaFacetIndex: [String: Set<Int>] = [:]
     
     /// id -> CompactFoodItem
     private var compactMap: [Int: CompactFoodItem] = [:]
@@ -178,6 +181,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             let snapshotAllFoods = allFoods
             let snapshotMap = compactMap
             let snapshotIndex = invertedIndex
+            let snapshotFacetIndex = ayurvedaFacetIndex
             let snapshotVocab = vocabulary
             let snapshotMaxValues = maxNutrientValues
             let snapshotDietsFromDB = cachedKnownDiets
@@ -198,6 +202,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                  snapshotAllFoods,
                  snapshotMap,
                  snapshotIndex,
+                 snapshotFacetIndex,
                  snapshotVocab,
                  snapshotMaxValues,
                  snapshotRankings,
@@ -228,6 +233,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                         maxValues: snapshotMaxValues,
                         availableDiets: snapshotAvailableDiets,
                         invertedIndex: snapshotIndex,
+                        ayurvedaFacetIndex: snapshotFacetIndex,
                         vocabulary: snapshotVocab,
                         nutrientRankings: snapshotRankings,
                         quickAgeMonths: quickAgeMonths,
@@ -435,6 +441,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             maxValues: [NutrientType: Double],
             availableDiets: Set<String>,
             invertedIndex: [String: Set<Int>],
+            ayurvedaFacetIndex: [String: Set<Int>],
             vocabulary: [String],
             nutrientRankings: [NutrientType: [Int]],
             quickAgeMonths: Double?,
@@ -449,7 +456,28 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             container: ModelContainer
         ) async -> (resultIDs: [Int], intent: SearchIntent, effectiveTokens: [String], forceShowPH: Bool) {
             
-            let simpleRawQuery = query.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+            let originalSimpleRawQuery = query
+                .lowercased()
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+            let parsedFacets = CanonicalFacetParser.parse(
+                query,
+                synonyms: SearchKnowledgeBase.shared.synonyms
+            )
+            let facetParse: AyurvedaFacetParseResult
+            if parsedFacets.constraints.isEmpty {
+                facetParse = parsedFacets
+            } else {
+                let exactNameMatch = allFoods.contains {
+                    $0.lowercasedName == originalSimpleRawQuery
+                }
+                facetParse = exactNameMatch
+                    ? AyurvedaFacetParseResult.passthrough(query)
+                    : parsedFacets
+            }
+            let searchQuery = facetParse.remainingQuery
+            let simpleRawQuery = searchQuery
+                .lowercased()
+                .trimmingCharacters(in: .whitespacesAndNewlines)
             
             let hasNonLatinLetters: Bool = simpleRawQuery.unicodeScalars.contains { scalar in
                 if scalar.isASCII { return false }
@@ -459,13 +487,30 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             }
             
             let rawPhCount: Int = {
-                let parts = query.lowercased().components(separatedBy: CharacterSet.alphanumerics.inverted)
+                let parts = searchQuery
+                    .lowercased()
+                    .components(separatedBy: CharacterSet.alphanumerics.inverted)
                 return parts.filter { $0 == "ph" }.count
             }()
             
-            let parsed = await Tokenizer.parse(query, availableDiets: availableDiets)
-            let hasDigits = query.rangeOfCharacter(from: .decimalDigits) != nil
+            let parsed = await Tokenizer.parse(
+                searchQuery,
+                availableDiets: availableDiets
+            )
+            let hasDigits = searchQuery.rangeOfCharacter(from: .decimalDigits) != nil
             var textTokens = parsed.textTokens
+
+            if !facetParse.constraints.isEmpty, !parsed.nutrientGoals.isEmpty {
+                let nutrientModifiers: Set<String> = [
+                    "high",
+                    "higher",
+                    "low",
+                    "lower",
+                    "rich",
+                    "poor",
+                ]
+                textTokens.subtract(nutrientModifiers)
+            }
             
             // --- 🟢 BUG FIX START: FORCE RAW TOKENS ---
             // If the user types "rice", and Tokenizer converts it to "grain",
@@ -480,7 +525,23 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                     // If it exists in DB, add it to search tokens even if Tokenizer removed/changed it.
                     // But skip common stop words to avoid noise (e.g. "with").
                     let isStopWord = SearchKnowledgeBase.shared.stopWords.contains(rawToken)
-                    if !isStopWord && !textTokens.contains(rawToken) {
+                    let isFacetNutrientModifier =
+                        !facetParse.constraints.isEmpty
+                        && !parsed.nutrientGoals.isEmpty
+                        && ["high", "higher", "low", "lower", "rich", "poor"]
+                            .contains(rawToken)
+                    let isFacetNutrientToken =
+                        !facetParse.constraints.isEmpty
+                        && SearchKnowledgeBase.shared.nutrientMap[rawToken]
+                            .map { nutrient in
+                                parsed.nutrientGoals.contains {
+                                    $0.nutrient == nutrient
+                                }
+                            } == true
+                    if !isStopWord
+                        && !isFacetNutrientModifier
+                        && !isFacetNutrientToken
+                        && !textTokens.contains(rawToken) {
                         textTokens.insert(rawToken)
                     }
                 }
@@ -517,7 +578,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             
             // --- Constraint Engine ---
             let mappedConstraints: ConstraintMapperResult
-            let lowerQuery = query.lowercased()
+            let lowerQuery = searchQuery.lowercased()
             let shouldUseConstraintEngine: Bool = {
                 if lowerQuery.rangeOfCharacter(from: .decimalDigits) != nil { return true }
                 if lowerQuery.contains("ph") || lowerQuery.contains("acid") || lowerQuery.contains("alkaline") { return true }
@@ -530,9 +591,9 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             }()
             
             if shouldUseConstraintEngine {
-                print("🧮 [Constraints] Using constraint engine for query: \(query)")
+                print("🧮 [Constraints] Using constraint engine for query: \(searchQuery)")
                 mappedConstraints = await MainActor.run {
-                    let rawConstraints = ConstraintExtractor.extract(from: query)
+                    let rawConstraints = ConstraintExtractor.extract(from: searchQuery)
                     return ConstraintMapper.map(rawConstraints)
                 }
             } else {
@@ -540,7 +601,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             }
             
             var numericGoals = mappedConstraints.nutrientGoals
-            let fallbackGoals = SmartFoodSearch3.parseNumericNutrientConstraintsFromQuery(query)
+            let fallbackGoals = SmartFoodSearch3.parseNumericNutrientConstraintsFromQuery(searchQuery)
             if !fallbackGoals.isEmpty {
                 for goal in fallbackGoals {
                     if let index = numericGoals.firstIndex(where: { $0.nutrient == goal.nutrient }) {
@@ -594,7 +655,8 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                     targetConsumerAge: combinedAge,
                     allergenExclusions: combinedAllergenExclusions,
                     excludeAllAllergens: parsed.excludeAllAllergens,
-                    phConstraint: phConstraintForIntent
+                    phConstraint: phConstraintForIntent,
+                    ayurvedaFacetConstraints: facetParse.constraints
                 )
             }
             
@@ -715,7 +777,8 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             
             var candidateIDs: Set<Int>? = nil
             var effectiveTextTokens: [String] = []
-            let trimmedNumericQuery = query.trimmingCharacters(in: .whitespacesAndNewlines)
+            let trimmedNumericQuery = searchQuery
+                .trimmingCharacters(in: .whitespacesAndNewlines)
             let isPureNumericQuery = !trimmedNumericQuery.isEmpty && trimmedNumericQuery.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
             
             if isPureNumericQuery {
@@ -806,6 +869,28 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             
             let intent = makeIntent()
             var finalCandidateIDs = candidateIDs
+
+            if !intent.ayurvedaFacetConstraints.isEmpty {
+                var facetCandidateIDs: Set<Int>?
+                for constraint in intent.ayurvedaFacetConstraints {
+                    var alternatives = Set<Int>()
+                    for key in constraint.acceptedKeys {
+                        alternatives.formUnion(ayurvedaFacetIndex[key] ?? [])
+                    }
+                    if let current = facetCandidateIDs {
+                        facetCandidateIDs = current.intersection(alternatives)
+                    } else {
+                        facetCandidateIDs = alternatives
+                    }
+                }
+                if let facetCandidateIDs {
+                    if let current = finalCandidateIDs {
+                        finalCandidateIDs = current.intersection(facetCandidateIDs)
+                    } else {
+                        finalCandidateIDs = facetCandidateIDs
+                    }
+                }
+            }
             
             // Ако няма текстови кандидати, зареждаме кандидатите за първата (най-приоритетна) цел
             if finalCandidateIDs == nil, let primaryGoal = intent.nutrientGoals.first, let rankedIDs = nutrientRankings[primaryGoal.nutrient] {
@@ -1028,7 +1113,10 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             
             let allowedChars = CharacterSet.alphanumerics.union(CharacterSet(charactersIn: "_"))
             let simpleRawIsSingleWord = !simpleRawQuery.contains(" ")
-            let rawWords = query.lowercased().components(separatedBy: allowedChars.inverted).filter { !$0.isEmpty }
+            let rawWords = searchQuery
+                .lowercased()
+                .components(separatedBy: allowedChars.inverted)
+                .filter { !$0.isEmpty }
             let validRawWords: [String] = rawWords.filter { raw in effectiveTextTokens.contains(Tokenizer.processWord(raw)) }
             let rawCleanQuery = validRawWords.joined(separator: " ")
             let rawPaddedQuery = " " + rawCleanQuery + " "
@@ -1184,6 +1272,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                 self.allFoods = store.compactFoods
                 self.compactMap = store.compactMap
                 self.invertedIndex = store.invertedIndex
+                self.ayurvedaFacetIndex = store.ayurvedaFacetIndex
                 self.vocabulary = store.vocabulary
                 self.maxNutrientValues = store.maxNutrientValues
                 self.cachedKnownDiets = store.knownDiets
@@ -1206,6 +1295,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                     self.allFoods = store.compactFoods
                     self.compactMap = store.compactMap
                     self.invertedIndex = store.invertedIndex
+                    self.ayurvedaFacetIndex = store.ayurvedaFacetIndex
                     self.vocabulary = store.vocabulary
                     self.maxNutrientValues = store.maxNutrientValues
                     self.cachedKnownDiets = store.knownDiets
@@ -1842,6 +1932,7 @@ extension SmartFoodSearch3 {
         let snapshotAllFoods = allFoods
         let snapshotMap = compactMap
         let snapshotIndex = invertedIndex
+        let snapshotFacetIndex = ayurvedaFacetIndex
         let snapshotVocab = vocabulary
         let snapshotMaxValues = maxNutrientValues
         let snapshotDietsFromDB = cachedKnownDiets
@@ -1865,6 +1956,7 @@ extension SmartFoodSearch3 {
             maxValues: snapshotMaxValues,
             availableDiets: snapshotAvailableDiets,
             invertedIndex: snapshotIndex,
+            ayurvedaFacetIndex: snapshotFacetIndex,
             vocabulary: snapshotVocab,
             nutrientRankings: snapshotRankings,
             quickAgeMonths: quickAgeMonths,
@@ -1922,6 +2014,7 @@ extension SmartFoodSearch3 {
         let snapshotAllFoods = allFoods
         let snapshotMap = compactMap
         let snapshotIndex = invertedIndex
+        let snapshotFacetIndex = ayurvedaFacetIndex
         let snapshotVocab = vocabulary
         let snapshotMaxValues = maxNutrientValues
         let snapshotRankings = nutrientRankings
@@ -1943,6 +2036,7 @@ extension SmartFoodSearch3 {
             maxValues: snapshotMaxValues,
             availableDiets: snapshotAvailableDiets,
             invertedIndex: snapshotIndex,
+            ayurvedaFacetIndex: snapshotFacetIndex,
             vocabulary: snapshotVocab,
             nutrientRankings: snapshotRankings,
             quickAgeMonths: nil,
@@ -2116,6 +2210,7 @@ extension SmartFoodSearch3 {
                self.allFoods = store.compactFoods
                self.compactMap = store.compactMap
                self.invertedIndex = store.invertedIndex
+               self.ayurvedaFacetIndex = store.ayurvedaFacetIndex
                self.vocabulary = store.vocabulary
                self.maxNutrientValues = store.maxNutrientValues
                self.cachedKnownDiets = store.knownDiets

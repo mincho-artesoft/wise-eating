@@ -9,4 +9,5 @@ struct SearchIntent {
     let allergenExclusions: Set<Allergen>   // or AllergenType in the demo
     let excludeAllAllergens: Bool
     let phConstraint: ConstraintValue?
+    let ayurvedaFacetConstraints: [AyurvedaFacetConstraint]
 }

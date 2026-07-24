@@ -90,5 +90,8 @@
   "capsicum": "pepper",
   "prawns": "shrimp",
   "calamari": "squid",
-  "lox": "salmon"
+  "lox": "salmon",
+  "ushna": "heating",
+  "sheeta": "cooling",
+  "deepana": "kindles agni"
 }

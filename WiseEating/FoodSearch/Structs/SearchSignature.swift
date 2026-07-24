@@ -12,6 +12,7 @@ struct SearchSignature: Equatable {
     let allergens: Set<Allergen>
     let excludeAllAllergens: Bool
     let ph: ConstraintValue?
+    let ayurvedaFacetConstraints: [AyurvedaFacetConstraint]
     
     init(effectiveTokens: [String], intent: SearchIntent) {
         self.effectiveTokens = effectiveTokens
@@ -23,5 +24,6 @@ struct SearchSignature: Equatable {
         self.allergens = intent.allergenExclusions
         self.excludeAllAllergens = intent.excludeAllAllergens
         self.ph = intent.phConstraint
+        self.ayurvedaFacetConstraints = intent.ayurvedaFacetConstraints
     }
 }
