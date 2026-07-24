@@ -8,8 +8,34 @@ struct AyurvedaChip: View {
   let tint: Color
   let isSelected: Bool
   let action: () -> Void
+  let isReadOnly: Bool
 
+  init(
+    title: String,
+    systemImage: String?,
+    tint: Color,
+    isSelected: Bool,
+    action: @escaping () -> Void,
+    isReadOnly: Bool = false
+  ) {
+    self.title = title
+    self.systemImage = systemImage
+    self.tint = tint
+    self.isSelected = isSelected
+    self.action = action
+    self.isReadOnly = isReadOnly
+  }
+
+  @ViewBuilder
   var body: some View {
+    if isReadOnly {
+      readOnlyChip
+    } else {
+      editorChip
+    }
+  }
+
+  private var editorChip: some View {
     Button(action: action) {
       HStack(spacing: 7) {
         if let systemImage {
@@ -59,5 +85,30 @@ struct AyurvedaChip: View {
     .accessibilityValue(isSelected ? "Selected" : "Not selected")
     .accessibilityHint(isSelected ? "Double tap to deselect" : "Double tap to select")
     .accessibilityAddTraits(isSelected ? .isSelected : [])
+  }
+
+  private var readOnlyChip: some View {
+    HStack(spacing: 7) {
+      if let systemImage {
+        Image(systemName: systemImage)
+          .accessibilityHidden(true)
+      }
+      Text(title)
+        .fixedSize(horizontal: false, vertical: true)
+    }
+    .font(.caption.weight(.medium))
+    .foregroundStyle(tint)
+    .padding(.horizontal, 11)
+    .padding(.vertical, 7)
+    .frame(minHeight: 34)
+    .background {
+      RoundedRectangle(cornerRadius: 13, style: .continuous)
+        .fill(tint.opacity(colorScheme == .dark ? 0.22 : 0.11))
+    }
+    .overlay {
+      RoundedRectangle(cornerRadius: 13, style: .continuous)
+        .stroke(tint.opacity(colorScheme == .dark ? 0.50 : 0.32), lineWidth: 1)
+    }
+    .accessibilityElement(children: .combine)
   }
 }

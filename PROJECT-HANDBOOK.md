@@ -2,7 +2,7 @@
 **Read this first. It is the knowledge-transfer document for anyone (human or AI)
 taking over direction of this project. Update it at the end of every milestone —
 that is a standing rule baked into all task packets.**
-Last updated: 2026-07-24 (WE-2 complete — full recipe nutrition and build-time seed/index ship; next: expert review).
+Last updated: 2026-07-24 (WE-3 complete — founder-approved accessible Ayurveda display card; next: expert review).
 
 ## 1. Mission and the two applications
 
@@ -56,9 +56,11 @@ simulation; must always pass).
   `.classical / .recipe / .user / .derived / .estimated / computed` (computed =
   grams-weighted aggregation over ingredients for user recipes/menus; coverage-
   gated ≥0.5; precedence: direct profile > link > computed > estimated > none).
-- `WiseEating/Ayurveda/Views/`: D8 UI — AyurvedaSectionView (detail card: tier
-  chip, center-zero dosha bars with ±/% toggle, chips, viruddha/contraindication
-  warnings, engineExcluded banner, aiDraft disclaimer), DoshaBarsView,
+- `WiseEating/Ayurveda/Views/`: D8 + WE-3 UI — AyurvedaSectionView (detail card:
+  tier/source/confidence, accessible center-zero dosha scales with ±/% toggle,
+  semantic light/dark tokens, glyph-bearing wrapping chips, always-visible
+  viruddha/contraindication warnings, engineExcluded banner, plain aiDraft
+  disclaimer), DoshaBarsView,
   AyurvedaDisplay(+Math), AyurvedaEditorSection (manual form; recipe/menu editors
   show live computed preview + optional "Set manually" override → kind "user").
   ⚠ SwiftUI gotcha fixed in D8: an empty Group = EmptyView = no render node, so
@@ -150,6 +152,7 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | D8 Ayurveda UI (incl. D8.1 computed tier, D8.2 live editor preview) | ✅ COMPLETE (67e6983, pushed) — Ayurveda card on all food/recipe details (tier chip, center-zero dosha bars, ±/% toggle, rasa/virya/vipaka/guna chips, viruddha + contraindication warnings, engineExcluded banner, aiDraft disclaimer); computed tier for user recipes/menus (grams-weighted, coverage-gated, math-gated); editors: Add Food manual (neutral defaults), recipe/menu = live computed preview + optional manual override → kind "user". Fixes en route: render-node bug (empty Group killed .task), FoodItemCopy id type, banner-ad gating (real prod bug), -uiTestNoAds flag. Residuals: final Computed/User card screenshots skipped by founder decision; VoiceOver + dark-mode smoke deferred; catalog override-with-provenance deferred |
 | D9 engineExcluded recommendation enforcement | ✅ COMPLETE (`2a5dccf`, `f9394dc`) — data-driven gate excludes effective seed-v2 set `{900039, 900360}` across active meal-plan, diet, menu, recipe, and food generation; resolved IDs plus AI free-text aliases are screened; search remains visible. G1/G2/G4 green and G3 generation-path gate proven under the director amendment. Residual: on-device AI generation unverifiable on simulator; physical-device check pending — same residual class as prior founder gates. See `ayurveda-data/REPORT-D9.md` |
 | WE-2 recipe nutrition + build-time seed/index | ✅ COMPLETE — T1 `f545569`; all 1,500 recipes have USDA-component panels; final artifact is 14,484 foods / 2,214 profiles / 2,305 links with matching search cache; fresh install logs zero Ayurveda inserts/updates and no rebuild; first index-ready launch 499.74s→15.65s. See `ayurveda-data/REPORT-WE2.md` |
+| WE-3 Ayurveda display card redesign | ✅ COMPLETE — founder-approved warm read-only card; signed word/value dosha rows, semantic center-zero scales, wrapping glyph chips, always-visible warnings, plain disclaimer, Reduce Motion, and one-element dosha accessibility. Four light/dark × default/largest-type snapshots pass; minimum measured contrast 5.52:1. Editor behavior and lifecycle/claims boundaries unchanged. See `ayurveda-data/REPORT-WE3.md` |
 | Expert review pass | ⏳ pending human reviewer: work aiDraft→reviewed, resolve reviewNotes, optional batch-31 top-up to 750 |
 | Later roadmap | media (yoga/meditation content), recommendation engine, dosha assessment — see ayurveda-data/RESTART-PLAN.md history |
 

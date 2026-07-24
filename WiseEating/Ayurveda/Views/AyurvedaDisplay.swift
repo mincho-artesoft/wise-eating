@@ -1,5 +1,75 @@
 import Foundation
 
+enum AyurvedaDoshaTone: Sendable {
+  case pacify
+  case neutral
+  case aggravate
+}
+
+struct AyurvedaDoshaEffectPresentation: Sendable {
+  let value: Int
+
+  private var boundedValue: Int {
+    min(2, max(-2, value))
+  }
+
+  var tone: AyurvedaDoshaTone {
+    if boundedValue < 0 { return .pacify }
+    if boundedValue > 0 { return .aggravate }
+    return .neutral
+  }
+
+  var effectWord: String {
+    switch boundedValue {
+    case -2:
+      return "Strongly pacifies"
+    case -1:
+      return "Pacifies"
+    case 1:
+      return "Aggravates"
+    case 2:
+      return "Strongly aggravates"
+    default:
+      return "Neutral"
+    }
+  }
+
+  var signedValue: String {
+    if boundedValue < 0 { return "−\(abs(boundedValue))" }
+    if boundedValue > 0 { return "+\(boundedValue)" }
+    return "0"
+  }
+
+  var primaryText: String {
+    "\(effectWord) \(signedValue)"
+  }
+
+  var systemImage: String {
+    switch tone {
+    case .pacify:
+      return "leaf.fill"
+    case .neutral:
+      return "minus.circle.fill"
+    case .aggravate:
+      return "sun.max.fill"
+    }
+  }
+
+  func accessibilityLabel(dosha name: String) -> String {
+    "\(name): \(effectWord.lowercased()), \(spokenValue) of two"
+  }
+
+  private var spokenValue: String {
+    switch boundedValue {
+    case -2: return "minus two"
+    case -1: return "minus one"
+    case 1: return "plus one"
+    case 2: return "plus two"
+    default: return "zero"
+    }
+  }
+}
+
 struct AyurvedaDisplay: Sendable {
   let tierLabel: String
   let tierDetail: String?

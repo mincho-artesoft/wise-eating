@@ -76,19 +76,27 @@ foods, 2,214 seed-v3 canonical profiles, 2,305 links, 1,500 full recipe panels,
 and a version-3 search cache for exactly 14,484 foods. Fresh install performs
 zero Ayurveda inserts/updates and no index rebuild. See `REPORT-WE2.md`.
 
+WE-3 restyles the read-only Ayurveda card with semantic center-zero dosha
+scales, wrapping property chips, always-visible warning rows, explicit
+light/dark tokens, and largest-Dynamic-Type layouts. The four deterministic
+light/dark × default/accessibility snapshots and all contrast evidence are in
+`REPORT-WE3.md`; editor behavior and content remain unchanged.
+
 ## Next milestones
 
 1. **Engineering track COMPLETE** — D6 (models+seeder), D34 (all 12,601 foods
    classified), D8/D8.1/D8.2 (UI end to end incl. computed tier + editors),
    D9 (engineExcluded enforcement), WE-2 (full recipe nutrition + build-time
-   projection/search cache). See PROJECT-HANDBOOK.md §6 ledger and
-   `REPORT-WE2.md` for gates and timing.
+   projection/search cache), and WE-3 (founder-approved read-only display card).
+   See PROJECT-HANDBOOK.md §6 ledger and `REPORT-WE2.md` / `REPORT-WE3.md` for
+   gates, timing, screenshots, and accessibility evidence.
 2. **Expert review — the remaining item.** Work aiDraft→reviewed across
    dravyas/recipes/rules, resolve all reviewNote flags, optional batch-31
    top-up to 750. Director can generate a reviewer packet on request.
 3. **Residual founder checks** (minutes, not milestones): physical-device AI
    generation run (D9 G3 environmental residual), Computed/User card
-   screenshots, VoiceOver + dark-mode smoke.
+   screenshots, and physical-device VoiceOver smoke. WE-3's deterministic
+   default/largest-type light/dark matrix is complete.
 4. **Optional future scope** (new product decisions, not leftovers): dosha-based
    search filters, prakriti assessment/personalization, and profiling the
    measured +1.34s cold cached-index load — best after expert review.

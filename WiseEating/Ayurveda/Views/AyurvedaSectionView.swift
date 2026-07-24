@@ -3,7 +3,6 @@ import SwiftUI
 
 struct AyurvedaSectionView: View {
   @Environment(\.modelContext) private var modelContext
-  @ObservedObject private var effectManager = EffectManager.shared
   @State private var display: AyurvedaDisplay?
   @State private var debugFailure: String?
 
@@ -23,103 +22,13 @@ struct AyurvedaSectionView: View {
       }
       #endif
       if let display {
-        VStack(alignment: .leading, spacing: 12) {
-          Text("Ayurveda")
-            .font(.title2.weight(.semibold))
-            .foregroundStyle(effectManager.currentGlobalAccentColor)
-          content(display)
-        }
-        .padding()
-        .glassCardStyle(cornerRadius: 20)
+        AyurvedaDisplayCard(display: display)
+          .padding()
+          .glassCardStyle(cornerRadius: 20)
       }
     }
     .task(id: food.id) {
       resolveDisplay()
-    }
-  }
-
-  private func content(_ display: AyurvedaDisplay) -> some View {
-    VStack(alignment: .leading, spacing: 12) {
-      if display.engineExcluded {
-        Text("⚠️ Health warning: traditional sources and modern evidence advise against consuming this. Shown for reference only — never recommended.")
-          .font(.caption)
-          .foregroundStyle(.red)
-      }
-      tierRow(display)
-      DoshaBarsView(vata: display.vata, pitta: display.pitta, kapha: display.kapha)
-      if display.tierLabel == "Computed" {
-        AyurvedaChipRow(title: "Virya (energy)", values: optionalValue(display.virya))
-      } else {
-        AyurvedaChipRow(title: "Rasa (taste)", values: display.rasa)
-        AyurvedaChipRow(title: "Virya (energy)", values: optionalValue(display.virya))
-        AyurvedaChipRow(title: "Vipaka (post-digestive)", values: optionalValue(display.vipaka))
-        AyurvedaChipRow(title: "Gunas (qualities)", values: display.gunas)
-        AyurvedaChipRow(
-          title: "Preparation modifiers",
-          values: display.modifierLabels,
-          color: Color(hex: "FCC934")
-        )
-      }
-      AyurvedaWarningsView(
-        viruddha: display.viruddha,
-        contraindications: display.contraindications
-      )
-      if let caption = display.qualityCaption {
-        Text(caption)
-          .font(.caption2)
-          .foregroundStyle(.secondary)
-      }
-    }
-  }
-
-  private func tierRow(_ display: AyurvedaDisplay) -> some View {
-    HStack(alignment: .firstTextBaseline, spacing: 8) {
-      Text(display.tierLabel)
-        .font(.caption.weight(.semibold))
-        .foregroundStyle(tierColor(display.tierLabel))
-        .padding(.horizontal, 9)
-        .padding(.vertical, 5)
-        .background(tierColor(display.tierLabel).opacity(0.25), in: Capsule())
-      if let detail = detailText(display) {
-        Text(detail)
-          .font(.caption)
-          .foregroundStyle(.secondary)
-      }
-    }
-  }
-
-  private func detailText(_ display: AyurvedaDisplay) -> String? {
-    var parts: [String] = []
-    if let detail = display.tierDetail {
-      parts.append(detail)
-    }
-    if display.tierLabel != "User", let confidence = display.confidence {
-      parts.append("confidence \(String(format: "%.2f", confidence))")
-    }
-    return parts.isEmpty ? nil : parts.joined(separator: " · ")
-  }
-
-  private func optionalValue(_ value: String?) -> [String] {
-    guard let value, !value.isEmpty else {
-      return []
-    }
-    return [value]
-  }
-
-  private func tierColor(_ label: String) -> Color {
-    switch label {
-    case "Classical":
-      return Color(hex: "34A853")
-    case "Derived":
-      return Color(hex: "4A86E8")
-    case "Computed":
-      return Color(hex: "4A86E8")
-    case "Estimated":
-      return Color(hex: "FCC934")
-    case "Recipe":
-      return Color(hex: "9C6ADE")
-    default:
-      return Color(hex: "999999")
     }
   }
 
@@ -140,5 +49,412 @@ struct AyurvedaSectionView: View {
       print("🕉️ Ayurveda resolver FAILED foodId=\(food.id): \(error)")
       #endif
     }
+  }
+}
+
+struct AyurvedaDisplayCard: View {
+  @Environment(\.accessibilityReduceMotion) private var reduceMotion
+  @Environment(\.colorScheme) private var colorScheme
+  @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+  let display: AyurvedaDisplay
+
+  var body: some View {
+    VStack(alignment: .leading, spacing: 16) {
+      header
+      if display.engineExcluded {
+        AyurvedaDisplayWarningRow(
+          title: "Health warning",
+          text: "Traditional sources and modern evidence advise against consuming this. Shown for reference only — never recommended.",
+          tone: .warning
+        )
+      }
+      DoshaBarsView(
+        vata: display.vata,
+        pitta: display.pitta,
+        kapha: display.kapha
+      )
+      if !propertyGroups.isEmpty {
+        Divider()
+        properties
+      }
+      warnings
+      if let caption = display.qualityCaption {
+        Divider()
+        Text(caption)
+          .font(.caption)
+          .foregroundStyle(.secondary)
+          .fixedSize(horizontal: false, vertical: true)
+          .accessibilityLabel(caption)
+      }
+    }
+    .transaction { transaction in
+      if reduceMotion {
+        transaction.animation = nil
+      }
+    }
+  }
+
+  private var header: some View {
+    ViewThatFits(in: .horizontal) {
+      HStack(alignment: .firstTextBaseline, spacing: 10) {
+        title
+        tierBadge
+        if let detail = detailText {
+          Text(detail)
+            .font(.caption)
+            .foregroundStyle(.secondary)
+            .fixedSize(horizontal: false, vertical: true)
+        }
+      }
+
+      VStack(alignment: .leading, spacing: 7) {
+        ViewThatFits(in: .horizontal) {
+          HStack(alignment: .firstTextBaseline, spacing: 10) {
+            title
+            tierBadge
+          }
+          VStack(alignment: .leading, spacing: 7) {
+            title
+            tierBadge
+          }
+        }
+        if let detail = detailText {
+          Text(detail)
+            .font(.caption)
+            .foregroundStyle(.secondary)
+            .fixedSize(horizontal: false, vertical: true)
+        }
+      }
+    }
+  }
+
+  private var title: some View {
+    Text("Ayurveda")
+      .font(.title2.weight(.semibold))
+      .foregroundStyle(.primary)
+  }
+
+  private var tierBadge: some View {
+    Text(display.tierLabel)
+      .font(.caption.weight(.semibold))
+      .foregroundStyle(tierColor)
+      .padding(.horizontal, 9)
+      .padding(.vertical, 5)
+      .background(
+        tierColor.opacity(colorScheme == .dark ? 0.24 : 0.12),
+        in: Capsule()
+      )
+      .overlay {
+        Capsule()
+          .stroke(tierColor.opacity(colorScheme == .dark ? 0.48 : 0.28), lineWidth: 1)
+      }
+  }
+
+  private var detailText: String? {
+    var parts: [String] = []
+    if let detail = display.tierDetail {
+      parts.append(detail)
+    }
+    if display.tierLabel != "User", let confidence = display.confidence {
+      parts.append("confidence \(String(format: "%.2f", confidence))")
+    }
+    return parts.isEmpty ? nil : parts.joined(separator: " · ")
+  }
+
+  private var tierColor: Color {
+    switch display.tierLabel {
+    case "Classical":
+      return Color("AyurvedaPacify")
+    case "Derived", "Computed":
+      return .blue
+    case "Estimated":
+      return Color("AyurvedaAggravate")
+    case "Recipe":
+      return .purple
+    default:
+      return Color("AyurvedaNeutral")
+    }
+  }
+
+  private var properties: some View {
+    let primaryGroups = propertyGroups.filter { $0.kind != .modifier }
+    let modifierGroups = propertyGroups.filter { $0.kind == .modifier }
+
+    return VStack(alignment: .leading, spacing: 14) {
+      if dynamicTypeSize.isAccessibilitySize {
+        propertyStack(primaryGroups)
+      } else {
+        ViewThatFits(in: .horizontal) {
+          HStack(alignment: .top, spacing: 16) {
+            ForEach(primaryGroups) { group in
+              AyurvedaPropertyGroupView(group: group)
+                .frame(maxWidth: .infinity, alignment: .topLeading)
+            }
+          }
+          propertyStack(primaryGroups)
+        }
+      }
+      propertyStack(modifierGroups)
+    }
+  }
+
+  private func propertyStack(
+    _ groups: [AyurvedaPropertyGroup]
+  ) -> some View {
+    VStack(alignment: .leading, spacing: 12) {
+      ForEach(groups) { group in
+        AyurvedaPropertyGroupView(group: group)
+      }
+    }
+  }
+
+  private var propertyGroups: [AyurvedaPropertyGroup] {
+    if display.tierLabel == "Computed" {
+      return group(
+        title: "Virya (energy)",
+        systemImage: "bolt.fill",
+        kind: .virya,
+        values: optionalValue(display.virya)
+      )
+    }
+
+    var groups: [AyurvedaPropertyGroup] = []
+    groups += group(
+      title: "Rasa (taste)",
+      systemImage: "leaf.fill",
+      kind: .rasa,
+      values: display.rasa
+    )
+    groups += group(
+      title: "Virya (energy)",
+      systemImage: "bolt.fill",
+      kind: .virya,
+      values: optionalValue(display.virya)
+    )
+    groups += group(
+      title: "Vipaka (post-digestive)",
+      systemImage: "arrow.triangle.2.circlepath",
+      kind: .vipaka,
+      values: optionalValue(display.vipaka)
+    )
+    groups += group(
+      title: "Gunas (qualities)",
+      systemImage: "circle.grid.2x2.fill",
+      kind: .guna,
+      values: display.gunas
+    )
+    groups += group(
+      title: "Preparation modifiers",
+      systemImage: "slider.horizontal.3",
+      kind: .modifier,
+      values: display.modifierLabels
+    )
+    return groups
+  }
+
+  private func group(
+    title: String,
+    systemImage: String,
+    kind: AyurvedaPropertyKind,
+    values: [String]
+  ) -> [AyurvedaPropertyGroup] {
+    guard !values.isEmpty else { return [] }
+    return [
+      AyurvedaPropertyGroup(
+        title: title,
+        systemImage: systemImage,
+        kind: kind,
+        values: values
+      )
+    ]
+  }
+
+  private func optionalValue(_ value: String?) -> [String] {
+    guard let value, !value.isEmpty else { return [] }
+    return [value]
+  }
+
+  @ViewBuilder
+  private var warnings: some View {
+    if !display.viruddha.isEmpty || !display.contraindications.isEmpty {
+      VStack(alignment: .leading, spacing: 8) {
+        ForEach(Array(display.viruddha.enumerated()), id: \.offset) { _, value in
+          AyurvedaDisplayWarningRow(
+            title: "Viruddha — incompatible combination",
+            text: value,
+            tone: .caution
+          )
+        }
+        ForEach(
+          Array(display.contraindications.enumerated()),
+          id: \.offset
+        ) { _, value in
+          AyurvedaDisplayWarningRow(
+            title: "Contraindication",
+            text: value,
+            tone: .warning
+          )
+        }
+      }
+    }
+  }
+}
+
+private enum AyurvedaPropertyKind: Equatable {
+  case rasa
+  case virya
+  case vipaka
+  case guna
+  case modifier
+}
+
+private struct AyurvedaPropertyGroup: Identifiable {
+  let title: String
+  let systemImage: String
+  let kind: AyurvedaPropertyKind
+  let values: [String]
+
+  var id: String { title }
+}
+
+private struct AyurvedaPropertyGroupView: View {
+  let group: AyurvedaPropertyGroup
+
+  var body: some View {
+    VStack(alignment: .leading, spacing: 7) {
+      Label(group.title, systemImage: group.systemImage)
+        .font(.caption)
+        .foregroundStyle(.secondary)
+        .fixedSize(horizontal: false, vertical: true)
+
+      ChipGrid {
+        ForEach(Array(group.values.enumerated()), id: \.offset) { _, value in
+          AyurvedaChip(
+            title: value.capitalized,
+            systemImage: icon(for: value),
+            tint: tint(for: value),
+            isSelected: true,
+            action: {},
+            isReadOnly: true
+          )
+        }
+      }
+    }
+  }
+
+  private func icon(for value: String) -> String? {
+    let value = value.lowercased()
+    switch group.kind {
+    case .rasa:
+      switch value {
+      case "sweet": return "sparkles"
+      case "sour": return "drop.fill"
+      case "salty": return "water.waves"
+      case "pungent": return "flame.fill"
+      case "bitter": return "leaf.fill"
+      default: return "circle.grid.3x3.fill"
+      }
+    case .virya:
+      switch value {
+      case "cooling": return "snowflake"
+      case "heating": return "flame.fill"
+      default: return "minus.circle.fill"
+      }
+    case .vipaka:
+      switch value {
+      case "sweet": return "sparkles"
+      case "sour": return "drop.fill"
+      case "pungent": return "flame.fill"
+      default: return "arrow.triangle.2.circlepath"
+      }
+    case .guna:
+      switch value {
+      case "dense": return "circle.grid.3x3.fill"
+      case "dry": return "wind"
+      case "heavy": return "scalemass.fill"
+      case "light": return "leaf"
+      case "liquid": return "drop.fill"
+      case "oily": return "drop.circle.fill"
+      case "penetrating": return "scope"
+      case "rough": return "circle.dotted"
+      case "sharp": return "bolt.fill"
+      case "slimy": return "water.waves"
+      case "smooth": return "waveform.path"
+      case "soft": return "cloud.fill"
+      default: return "circle.fill"
+      }
+    case .modifier:
+      return "wand.and.stars"
+    }
+  }
+
+  private func tint(for value: String) -> Color {
+    switch group.kind {
+    case .virya:
+      switch value.lowercased() {
+      case "cooling":
+        return Color("AyurvedaPacify")
+      case "heating":
+        return Color("AyurvedaAggravate")
+      default:
+        return Color("AyurvedaNeutral")
+      }
+    case .guna:
+      return Color("AyurvedaPacify")
+    case .modifier:
+      return Color("AyurvedaAggravate")
+    default:
+      return Color("AyurvedaChipTint")
+    }
+  }
+}
+
+private enum AyurvedaDisplayWarningTone {
+  case caution
+  case warning
+}
+
+private struct AyurvedaDisplayWarningRow: View {
+  @Environment(\.colorScheme) private var colorScheme
+
+  let title: String
+  let text: String
+  let tone: AyurvedaDisplayWarningTone
+
+  private var color: Color {
+    switch tone {
+    case .caution:
+      return Color("AyurvedaAggravate")
+    case .warning:
+      return Color("AyurvedaWarning")
+    }
+  }
+
+  var body: some View {
+    HStack(alignment: .top, spacing: 10) {
+      Image(systemName: "exclamationmark.triangle.fill")
+        .foregroundStyle(color)
+        .accessibilityHidden(true)
+      VStack(alignment: .leading, spacing: 3) {
+        Text(title)
+          .font(.caption.weight(.semibold))
+        Text(text)
+          .font(.caption)
+      }
+      .foregroundStyle(color)
+      .fixedSize(horizontal: false, vertical: true)
+    }
+    .padding(11)
+    .frame(maxWidth: .infinity, alignment: .leading)
+    .background(
+      color.opacity(colorScheme == .dark ? 0.18 : 0.09),
+      in: RoundedRectangle(cornerRadius: 13, style: .continuous)
+    )
+    .overlay {
+      RoundedRectangle(cornerRadius: 13, style: .continuous)
+        .stroke(color.opacity(colorScheme == .dark ? 0.45 : 0.24), lineWidth: 1)
+    }
+    .accessibilityElement(children: .combine)
   }
 }

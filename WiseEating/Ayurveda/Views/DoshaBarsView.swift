@@ -14,35 +14,68 @@ struct DoshaBarsView: View {
   @State private var mode: Mode = .signed
 
   var body: some View {
-    VStack(alignment: .leading, spacing: 10) {
-      HStack {
-        Text("Doshas")
-          .font(.caption)
-          .foregroundStyle(.secondary)
-        Spacer()
-        Picker("Dosha display", selection: $mode) {
-          ForEach(Mode.allCases) { mode in
-            Text(mode.rawValue).tag(mode)
-          }
+    VStack(alignment: .leading, spacing: 12) {
+      ViewThatFits(in: .horizontal) {
+        HStack {
+          Text("Doshas")
+            .font(.headline)
+          Spacer(minLength: 12)
+          modePicker
         }
-        .pickerStyle(.segmented)
-        .frame(width: 88)
+        VStack(alignment: .leading, spacing: 8) {
+          Text("Doshas")
+            .font(.headline)
+          modePicker
+        }
       }
 
       if mode == .signed {
         signedBars
+        legend
       } else {
         percentageBars
       }
     }
   }
 
-  private var signedBars: some View {
-    VStack(spacing: 10) {
-      DoshaBarRowView(name: "Vata", value: vata)
-      DoshaBarRowView(name: "Pitta", value: pitta)
-      DoshaBarRowView(name: "Kapha", value: kapha)
+  private var modePicker: some View {
+    Picker("Dosha display", selection: $mode) {
+      ForEach(Mode.allCases) { mode in
+        Text(mode.rawValue).tag(mode)
+      }
     }
+    .pickerStyle(.segmented)
+    .frame(width: 88)
+  }
+
+  private var signedBars: some View {
+    VStack(spacing: 14) {
+      DoshaScaleSelector(readOnlyValue: vata, name: "Vata")
+      DoshaScaleSelector(readOnlyValue: pitta, name: "Pitta")
+      DoshaScaleSelector(readOnlyValue: kapha, name: "Kapha")
+    }
+  }
+
+  private var legend: some View {
+    ChipGrid {
+      DoshaLegendItem(
+        title: "Pacifies",
+        detail: "(calms, reduces)",
+        color: Color("AyurvedaPacify")
+      )
+      DoshaLegendItem(
+        title: "Neutral",
+        detail: "(no effect)",
+        color: Color("AyurvedaNeutral")
+      )
+      DoshaLegendItem(
+        title: "Aggravates",
+        detail: "(increases)",
+        color: Color("AyurvedaAggravate")
+      )
+    }
+    .accessibilityElement(children: .contain)
+    .accessibilityLabel("Dosha effect legend")
   }
 
   private var percentageBars: some View {
@@ -54,67 +87,35 @@ struct DoshaBarsView: View {
     return VStack(alignment: .leading, spacing: 8) {
       DoshaPercentageBar(
         values: [
-          .init(label: "Vata", value: percentages.v, color: Color(hex: "8E7CC3")),
-          .init(label: "Pitta", value: percentages.p, color: Color(hex: "E06666")),
-          .init(label: "Kapha", value: percentages.k, color: Color(hex: "6AA84F"))
+          .init(label: "Vata", value: percentages.v, color: .purple),
+          .init(label: "Pitta", value: percentages.p, color: .red),
+          .init(label: "Kapha", value: percentages.k, color: Color("AyurvedaPacify"))
         ]
       )
     }
   }
 }
 
-struct DoshaBarRowView: View {
-  @ObservedObject private var effectManager = EffectManager.shared
-
-  let name: String
-  let value: Int
+private struct DoshaLegendItem: View {
+  let title: String
+  let detail: String
+  let color: Color
 
   var body: some View {
-    HStack(spacing: 8) {
-      Text(name)
-        .frame(width: 56, alignment: .leading)
-      signedTrack
-      Text(valueText)
-        .frame(width: 132, alignment: .trailing)
-        .font(.caption)
+    HStack(alignment: .firstTextBaseline, spacing: 5) {
+      Circle()
+        .fill(color)
+        .frame(width: 8, height: 8)
+        .accessibilityHidden(true)
+      Text(title)
+        .fontWeight(.semibold)
+        .foregroundStyle(color)
+      Text(detail)
+        .foregroundStyle(.secondary)
     }
-    .accessibilityElement(children: .ignore)
-    .accessibilityLabel("\(name), \(valueText)")
-  }
-
-  private var valueText: String {
-    AyurvedaDisplayMath.valueString(value)
-      + " "
-      + AyurvedaDisplayMath.effectLabel(value)
-  }
-
-  private var signedTrack: some View {
-    GeometryReader { proxy in
-      let width = proxy.size.width
-      let midpoint = width / 2
-      let fillWidth = midpoint * AyurvedaDisplayMath.barFraction(value)
-      ZStack(alignment: .leading) {
-        Capsule()
-          .fill(effectManager.currentGlobalAccentColor.opacity(0.12))
-        Rectangle()
-          .fill(effectManager.currentGlobalAccentColor.opacity(0.4))
-          .frame(width: 1, height: 12)
-          .offset(x: midpoint - 0.5)
-        if value < 0 {
-          Capsule()
-            .fill(Color(hex: "34A853"))
-            .frame(width: fillWidth, height: 12)
-            .offset(x: midpoint - fillWidth)
-        } else if value > 0 {
-          Capsule()
-            .fill(Color(hex: "E8710A"))
-            .frame(width: fillWidth, height: 12)
-            .offset(x: midpoint)
-        }
-      }
-      .clipShape(Capsule())
-    }
-    .frame(height: 12)
+    .font(.caption)
+    .fixedSize(horizontal: false, vertical: true)
+    .accessibilityElement(children: .combine)
   }
 }
 
@@ -142,7 +143,7 @@ private struct DoshaPercentageBar: View {
       }
       .frame(height: 12)
 
-      HStack(spacing: 14) {
+      ChipGrid {
         ForEach(values) { item in
           HStack(spacing: 4) {
             Circle()
