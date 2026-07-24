@@ -221,11 +221,18 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                 var orderedResultIDs: [Int] = []
                 var primaryIntent: SearchIntent?
                 var primaryForceShowPH = false
+                var primaryFoodsWithoutPhExcluded = 0
                 
                 for (index, variantQuery) in queryVariants.enumerated() {
                     if Task.isCancelled { return }
                     
-                    let (resultIDs, intent, _, forceShowPH) = await self.runSearchLogic(
+                    let (
+                        resultIDs,
+                        intent,
+                        _,
+                        forceShowPH,
+                        foodsWithoutPhExcluded
+                    ) = await self.runSearchLogic(
                         query: variantQuery,
                         activeFilters: activeFilters,
                         compactMap: snapshotMap,
@@ -251,6 +258,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                     if index == 0 {
                         primaryIntent = intent
                         primaryForceShowPH = forceShowPH
+                        primaryFoodsWithoutPhExcluded = foodsWithoutPhExcluded
                     }
                     
                     for id in resultIDs {
@@ -273,9 +281,12 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                     self.fullResultIDs = orderedResultIDs
                     
                     if let intent = primaryIntent {
-                        self.updateContext(intent: intent,
-                                           activeFilters: activeFilters,
-                                           forceShowPH: primaryForceShowPH)
+                        self.updateContext(
+                            intent: intent,
+                            activeFilters: activeFilters,
+                            forceShowPH: primaryForceShowPH,
+                            foodsWithoutPhExcluded: primaryFoodsWithoutPhExcluded
+                        )
                     }
                     
                     if self.fullResultIDs.isEmpty {
@@ -419,7 +430,8 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
     
     private func updateContext(intent: SearchIntent,
                                activeFilters: Set<NutrientType>,
-                               forceShowPH: Bool) {
+                               forceShowPH: Bool,
+                               foodsWithoutPhExcluded: Int) {
         var display = intent.displayNutrients
         for goal in intent.nutrientGoals where !display.contains(goal.nutrient) {
             display.append(goal.nutrient)
@@ -444,7 +456,8 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             activeDiet: intent.dietFilter,    // 👈 важно – dietFilter от SearchIntent
             activeConstraint: activeConstraint,
             activeAgeLimit: ageStr,
-            isPhActive: forceShowPH || intent.phConstraint != nil
+            isPhActive: forceShowPH || intent.phConstraint != nil,
+            foodsWithoutPhExcluded: foodsWithoutPhExcluded
         )
     }
     
@@ -471,7 +484,13 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             excludedFoodIDs: Set<Int>,
             phSortOrder: PhSortOrder?, // ✅ НОВ ПАРАМЕТЪР
             container: ModelContainer
-        ) async -> (resultIDs: [Int], intent: SearchIntent, effectiveTokens: [String], forceShowPH: Bool) {
+        ) async -> (
+            resultIDs: [Int],
+            intent: SearchIntent,
+            effectiveTokens: [String],
+            forceShowPH: Bool,
+            foodsWithoutPhExcluded: Int
+        ) {
             
             let originalSimpleRawQuery = query
                 .lowercased()
@@ -659,7 +678,10 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             case .highToLow:
                 explicitPhConstraint = .highest
             case .neutral:
-                explicitPhConstraint = .range(6.5, 7.5) // ✅ НОВО: Връща само храни с pH между 6.5 и 7.5
+                explicitPhConstraint = .range(
+                    PhSearchSemantics.neutralLowerBound,
+                    PhSearchSemantics.neutralUpperBound
+                )
             case nil:
                 explicitPhConstraint = nil
             }
@@ -891,7 +913,9 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                 }
             }
             
-            if Task.isCancelled { return ([], makeIntent(), [], forceShowPH) }
+            if Task.isCancelled {
+                return ([], makeIntent(), [], forceShowPH, 0)
+            }
             
             let intent = makeIntent()
             var finalCandidateIDs = candidateIDs
@@ -930,10 +954,19 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             
             let sequence: [CompactFoodItem] = finalCandidateIDs?.compactMap { compactMap[$0] } ?? allFoods
             var itemsToRank: [CompactFoodItem] = []
+            var foodsWithoutPhExcluded = 0
             
             for (index, item) in sequence.enumerated() {
                 if hasNonLatinLetters && (simpleRawQuery.isEmpty || !item.lowercasedName.contains(simpleRawQuery)) { continue }
-                if index % 500 == 0 && Task.isCancelled { return ([], intent, [], forceShowPH) }
+                if index % 500 == 0 && Task.isCancelled {
+                    return (
+                        [],
+                        intent,
+                        [],
+                        forceShowPH,
+                        foodsWithoutPhExcluded
+                    )
+                }
                 if excludedFoodIDs.contains(item.id) { continue }
                 
                 if let mode = searchMode {
@@ -1046,23 +1079,13 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                 }
                 
                 if let phLimit = intent.phConstraint {
-                    if item.ph == 0.0 { continue }
-                    var passesPh = true
-                    switch phLimit {
-                    case .min(let v):       if item.ph < v { passesPh = false }
-                    case .max(let v):       if item.ph > v { passesPh = false }
-                    case .strictMin(let v): if item.ph <= v { passesPh = false }
-                    case .strictMax(let v): if item.ph >= v { passesPh = false }
-                    case .range(let l, let h): if item.ph < l || item.ph > h { passesPh = false }
-                    case .notEqual(let v):  if abs(item.ph - v) < 0.1 { passesPh = false }
-                    case .high:             if item.ph < 7.0 { passesPh = false }
-                    case .low:              if item.ph > 7.0 { passesPh = false }
-                        
-                    // ✅ ПРОМЯНА: Новите кейсове не филтрират нищо, само позволяват сортиране по-долу
-                    case .lowest, .highest:
-                        break
+                    if !PhSearchSemantics.hasData(item.ph) {
+                        foodsWithoutPhExcluded += 1
+                        continue
                     }
-                    if !passesPh { continue }
+                    if !PhSearchSemantics.matches(item.ph, constraint: phLimit) {
+                        continue
+                    }
                 }
                 
                 var passesNutrients = true
@@ -1149,7 +1172,15 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             var rankedItems: [(item: CompactFoodItem, score: Double)] = []
             
             for (index, item) in itemsToRank.enumerated() {
-                if index % 500 == 0 && Task.isCancelled { return ([], intent, [], forceShowPH) }
+                if index % 500 == 0 && Task.isCancelled {
+                    return (
+                        [],
+                        intent,
+                        [],
+                        forceShowPH,
+                        foodsWithoutPhExcluded
+                    )
+                }
                 var score = 100.0
                 let nameLower = item.lowercasedName
                 let paddedName = item.paddedLowercasedName
@@ -1193,14 +1224,8 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             let finalResults: [Int]
             if let phLimit = intent.phConstraint {
                 // Тук се случва сортирането по pH!
-                let preferLowPH: Bool = {
-                    switch phLimit {
-                    // ✅ ПРОМЯНА: Добавяме .lowest тук (възходящо сортиране: 1 -> 14)
-                    case .max, .strictMax, .low, .lowest: return true
-                    // .highest отива в default (false), което значи низходящо (14 -> 1)
-                    default: return false
-                    }
-                }()
+                let preferLowPH =
+                    PhSearchSemantics.prefersLowValues(for: phLimit)
                 let primaryGoal = intent.nutrientGoals.first
                 finalResults = rankedItems.sorted { lhs, rhs in
                     // 1. pH Сортиране
@@ -1243,7 +1268,13 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                 }.map { $0.item.id }
             }
             
-            return (finalResults, intent, effectiveTextTokens, forceShowPH)
+            return (
+                finalResults,
+                intent,
+                effectiveTextTokens,
+                forceShowPH,
+                foodsWithoutPhExcluded
+            )
         }
     // MARK: - Fuzzy / Semantic Helpers
     
@@ -2054,7 +2085,7 @@ extension SmartFoodSearch3 {
         }()
 
         // Run the full search logic pipeline (constraints, nutrients, pH, diets, scoring, sorting, etc.)
-        let (resultIDs, _, _, _) = await self.runSearchLogic(
+        let (resultIDs, _, _, _, _) = await self.runSearchLogic(
             query: canonicalQuery,
             activeFilters: activeFilters,
             compactMap: snapshotMap,
@@ -2134,7 +2165,7 @@ extension SmartFoodSearch3 {
         }()
 
         // Run search logic
-        let (resultIDs, _, _, _) = await self.runSearchLogic(
+        let (resultIDs, _, _, _, _) = await self.runSearchLogic(
             query: canonicalQuery,
             activeFilters: [],
             compactMap: snapshotMap,

@@ -460,8 +460,35 @@ private struct FoodRowView: View {
                     if let age = engine.searchContext.activeAgeLimit {
                         Text("Age: \(age)").font(.caption2).padding(4).background(Color.green.opacity(0.1)).cornerRadius(4).foregroundColor(.green)
                     }
-                    if engine.searchContext.isPhActive && food.ph > 0 {
-                        Text("pH: \(String(format: "%.1f", food.ph))").font(.caption2).padding(4).background(phColor(food.ph).opacity(0.1)).cornerRadius(4).foregroundColor(phColor(food.ph))
+                    if engine.searchContext.isPhActive {
+                        HStack(spacing: 2) {
+                            Text("pH:")
+                            if PhSearchSemantics.hasData(food.ph) {
+                                Text(String(format: "%.1f", food.ph))
+                                    .fontWeight(.bold)
+                            } else {
+                                Text("—")
+                                    .fontWeight(.bold)
+                                    .accessibilityLabel("no data")
+                            }
+                        }
+                        .font(.caption2)
+                        .padding(4)
+                        .background(
+                            (
+                                PhSearchSemantics.hasData(food.ph)
+                                    ? phColor(food.ph)
+                                    : Color.secondary
+                            )
+                            .opacity(0.1)
+                        )
+                        .cornerRadius(4)
+                        .foregroundColor(
+                            PhSearchSemantics.hasData(food.ph)
+                                ? phColor(food.ph)
+                                : .secondary
+                        )
+                        .accessibilityElement(children: .combine)
                     }
                 }
                 

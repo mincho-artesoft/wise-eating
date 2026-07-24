@@ -319,7 +319,10 @@ struct Tokenizer {
                 } else if word == "_ph_alkaline_" {
                     phGoal = .high
                 } else if word == "_ph_neutral_" {
-                    phGoal = .range(6.5, 7.5)
+                    phGoal = .range(
+                        PhSearchSemantics.neutralLowerBound,
+                        PhSearchSemantics.neutralUpperBound
+                    )
                 }
                 consumed = true
             }
@@ -329,7 +332,11 @@ struct Tokenizer {
                 switch phType {
                 case .acidic:   phGoal = .low
                 case .alkaline: phGoal = .high
-                case .neutral:  phGoal = .range(6.5, 7.5)
+                case .neutral:
+                    phGoal = .range(
+                        PhSearchSemantics.neutralLowerBound,
+                        PhSearchSemantics.neutralUpperBound
+                    )
                 }
                 consumed = true
             }

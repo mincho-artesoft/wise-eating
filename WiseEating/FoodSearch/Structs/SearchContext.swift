@@ -4,6 +4,12 @@ struct SearchContext {
     var activeConstraint: String?
     var activeAgeLimit: String?
     var isPhActive: Bool = false
+    var foodsWithoutPhExcluded: Int = 0
+
+    var phDataExclusionMessage: String? {
+        guard foodsWithoutPhExcluded > 0 else { return nil }
+        return "\(foodsWithoutPhExcluded) foods without pH data excluded"
+    }
 }
 
 extension NutrientGoal {

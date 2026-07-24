@@ -141,7 +141,16 @@ class NumberRangeParser {
         // 2. Map Abstract Terms to Values
         if finalVal == nil {
             if ["neutral", "balanced", "normal"].contains(where: { opText.contains($0) }) {
-                return [DietaryConstraint(originalText: originalText, subject: "ph", comparison: .greaterThanOrEqual, value: 6.8, value2: 7.2, unit: nil)]
+                return [
+                    DietaryConstraint(
+                        originalText: originalText,
+                        subject: "ph",
+                        comparison: .greaterThanOrEqual,
+                        value: PhSearchSemantics.neutralLowerBound,
+                        value2: PhSearchSemantics.neutralUpperBound,
+                        unit: nil
+                    )
+                ]
             }
             
             // "High Alkaline" / "High pH"
