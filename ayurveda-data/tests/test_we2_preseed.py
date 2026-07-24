@@ -48,11 +48,16 @@ class PreseedArtifactTests(unittest.TestCase):
                 "profiles": 2_214,
                 "links": 2_305,
                 "cacheFoods": 14_484,
-                "cacheVersion": 3,
+                "cacheVersion": 4,
+                "facetFoods": 2_214,
+                "facetKeys": self.audit["facetKeys"],
+                "facetAssignments": self.audit["facetAssignments"],
                 "payloadBytes": self.audit["payloadBytes"],
             },
         )
         self.assertGreater(self.audit["payloadBytes"], 0)
+        self.assertGreater(self.audit["facetKeys"], 0)
+        self.assertGreater(self.audit["facetAssignments"], 2_214)
 
     def test_fresh_store_seed_run_has_zero_inserts(self):
         profile_rows = self.connection.execute(
@@ -145,8 +150,14 @@ class PreseedArtifactTests(unittest.TestCase):
             """
         ).fetchone()
         self.assertEqual(cache_count, food_count)
-        self.assertEqual(version, 3)
-        self.assertEqual(len(json.loads(payload)["compactFoods"]), food_count)
+        self.assertEqual(version, 4)
+        decoded = json.loads(payload)
+        self.assertEqual(len(decoded["compactFoods"]), food_count)
+        self.assertEqual(
+            sum(bool(food["ayurvedaFacets"]) for food in decoded["compactFoods"]),
+            2_214,
+        )
+        self.assertIn("virya:cooling", decoded["ayurvedaFacetIndex"])
 
 
 if __name__ == "__main__":

@@ -6,7 +6,7 @@ final class SearchIndexStore {
     static let shared = SearchIndexStore()
 
     /// Bump this when the structure of CompactFoodItem / tokens changes
-    private let currentIndexVersion: Int = 3
+    private let currentIndexVersion: Int = 4
 
     // MARK: - In-Memory Cache
     private(set) var compactFoods: [CompactFoodItem] = []
@@ -16,6 +16,7 @@ final class SearchIndexStore {
     private(set) var maxNutrientValues: [NutrientType: Double] = [:]
     private(set) var knownDiets: Set<String> = []
     private(set) var nutrientRankings: [NutrientType: [Int]] = [:]
+    private(set) var ayurvedaFacetIndex: [String: Set<Int>] = [:]
 
     // MARK: - Async Save Infra
     /// Таймер за debounce на тежкия запис на кеша
@@ -57,8 +58,9 @@ final class SearchIndexStore {
         
         // Извличаме само храните. Вече не ни трябва NutrientIndex.
         let foods = try context.fetch(FetchDescriptor<FoodItem>())
+        let facetMap = try AyurvedaFacet.canonicalMapFromBundledSeed()
         
-        buildInMemory(foods: foods) // <-- Промяна тук
+        buildInMemory(foods: foods, facetMap: facetMap)
         try saveCache(context: context)
         
         print("🔎 SearchIndexStore: Index build complete & saved (\(foods.count) items).")
@@ -100,9 +102,10 @@ final class SearchIndexStore {
         print("🔎 SearchIndexStore: Starting full index rebuild...")
 
         let foods = try context.fetch(FetchDescriptor<FoodItem>())
+        let facetMap = try AyurvedaFacet.canonicalMapFromBundledSeed()
         // Премахнато извличането на NutrientIndex
         
-        buildInMemory(foods: foods) // <-- Промяна тук
+        buildInMemory(foods: foods, facetMap: facetMap)
 
         try saveCache(context: context)
         
@@ -122,6 +125,7 @@ final class SearchIndexStore {
                 minAgeMonths: item.minAgeMonths, diets: item.diets, allergens: item.allergens,
                 ph: item.ph, referenceWeightG: item.referenceWeightG,
                 isRecipe: item.isRecipe, isMenu: item.isMenu, isFavorite: isFavorite,
+                ayurvedaFacets: item.ayurvedaFacets,
                 nutrientValues: item.nutrientValues
             )
         }
@@ -132,6 +136,7 @@ final class SearchIndexStore {
                 minAgeMonths: item.minAgeMonths, diets: item.diets, allergens: item.allergens,
                 ph: item.ph, referenceWeightG: item.referenceWeightG,
                 isRecipe: item.isRecipe, isMenu: item.isMenu, isFavorite: isFavorite,
+                ayurvedaFacets: item.ayurvedaFacets,
                 nutrientValues: item.nutrientValues
             )
         }
@@ -144,13 +149,23 @@ final class SearchIndexStore {
         let startTime = CFAbsoluteTimeGetCurrent()
 
         guard let oldCompactItem = compactMap[food.id] else {
-            let newCompactItem = makeCompactItem(from: food)
+            let facets = canonicalFacetKeys(
+                foodID: food.id,
+                context: context
+            )
+            let newCompactItem = makeCompactItem(
+                from: food,
+                ayurvedaFacets: facets
+            )
             for token in newCompactItem.searchTokens {
                 invertedIndex[token, default: []].insert(newCompactItem.id)
                 if !vocabulary.contains(token) { vocabulary.append(token) }
             }
             compactFoods.append(newCompactItem)
             compactMap[newCompactItem.id] = newCompactItem
+            for facet in newCompactItem.ayurvedaFacets {
+                ayurvedaFacetIndex[facet, default: []].insert(newCompactItem.id)
+            }
             newCompactItem.diets.forEach { knownDiets.insert($0) }
             scheduleCacheSave(context: context)
             print("🔎 SearchIndexStore: Inserted new item '\(food.name)' during update call.")
@@ -159,13 +174,24 @@ final class SearchIndexStore {
 
         // Rebuild the compact item first so we can compare searchTokens,
         // which already include any exclusion rules.
-        let newCompactItem = makeCompactItem(from: food)
+        let refreshedFacets = canonicalFacetKeys(
+            foodID: food.id,
+            context: context
+        )
+        let newCompactItem = makeCompactItem(
+            from: food,
+            ayurvedaFacets: refreshedFacets
+        )
 
         let oldTokens = oldCompactItem.searchTokens
         let newTokens = newCompactItem.searchTokens
 
         let tokensToRemove = oldTokens.subtracting(newTokens)
         let tokensToAdd = newTokens.subtracting(oldTokens)
+        let facetsToRemove = oldCompactItem.ayurvedaFacets
+            .subtracting(newCompactItem.ayurvedaFacets)
+        let facetsToAdd = newCompactItem.ayurvedaFacets
+            .subtracting(oldCompactItem.ayurvedaFacets)
 
         for token in tokensToRemove {
             invertedIndex[token]?.remove(food.id)
@@ -178,6 +204,15 @@ final class SearchIndexStore {
             if !vocabulary.contains(token) {
                 vocabulary.append(token)
             }
+        }
+        for facet in facetsToRemove {
+            ayurvedaFacetIndex[facet]?.remove(food.id)
+            if ayurvedaFacetIndex[facet]?.isEmpty == true {
+                ayurvedaFacetIndex.removeValue(forKey: facet)
+            }
+        }
+        for facet in facetsToAdd {
+            ayurvedaFacetIndex[facet, default: []].insert(food.id)
         }
 
         if let idx = compactFoods.firstIndex(where: { $0.id == newCompactItem.id }) {
@@ -199,6 +234,7 @@ final class SearchIndexStore {
 
         guard let compact = compactMap[id] else { return }
         let tokens = compact.searchTokens
+        let facets = compact.ayurvedaFacets
 
         compactFoods.removeAll { $0.id == id }
         compactMap.removeValue(forKey: id)
@@ -210,6 +246,12 @@ final class SearchIndexStore {
                 invertedIndex.removeValue(forKey: token)
             } else {
                 invertedIndex[token] = ids
+            }
+        }
+        for facet in facets {
+            ayurvedaFacetIndex[facet]?.remove(id)
+            if ayurvedaFacetIndex[facet]?.isEmpty == true {
+                ayurvedaFacetIndex.removeValue(forKey: facet)
             }
         }
         
@@ -238,16 +280,23 @@ final class SearchIndexStore {
 
     /// ✅ ПРОМЯНА: Премахнахме `nutrientIndexes`.
     /// Сега `tmpRankings` се генерира динамично от `tmpFoods`.
-    private func buildInMemory(foods: [FoodItem]) {
+    private func buildInMemory(
+        foods: [FoodItem],
+        facetMap: [Int: Set<String>]
+    ) {
         var tmpFoods: [CompactFoodItem] = []
         var tmpMap: [Int: CompactFoodItem] = [:]
         var tmpInverted: [String: Set<Int>] = [:]
         var vocabSet = Set<String>()
         var dietsSet = Set<String>()
+        var tmpFacetIndex: [String: Set<Int>] = [:]
 
         // 1. Build Compact Items & Index
         for food in foods {
-            let compact = makeCompactItem(from: food)
+            let compact = makeCompactItem(
+                from: food,
+                ayurvedaFacets: facetMap[food.id] ?? []
+            )
             tmpFoods.append(compact)
             tmpMap[compact.id] = compact
 
@@ -258,6 +307,10 @@ final class SearchIndexStore {
             
             for d in compact.diets {
                 dietsSet.insert(d)
+            }
+
+            for facet in compact.ayurvedaFacets {
+                tmpFacetIndex[facet, default: []].insert(compact.id)
             }
         }
 
@@ -299,6 +352,7 @@ final class SearchIndexStore {
         self.maxNutrientValues = tmpMaxValues
         self.knownDiets = dietsSet
         self.nutrientRankings = tmpRankings
+        self.ayurvedaFacetIndex = tmpFacetIndex
     }
 
     private func saveCache(context: ModelContext) throws {
@@ -308,7 +362,8 @@ final class SearchIndexStore {
             vocabulary: vocabulary,
             maxNutrientValues: encodeMaxNutrientValues(maxNutrientValues),
             knownDiets: Array(knownDiets),
-            nutrientRankings: encodeNutrientRankings(nutrientRankings)
+            nutrientRankings: encodeNutrientRankings(nutrientRankings),
+            ayurvedaFacetIndex: ayurvedaFacetIndex.mapValues { Array($0) }
         )
 
         let data = try JSONEncoder().encode(payload)
@@ -337,9 +392,15 @@ final class SearchIndexStore {
         self.maxNutrientValues = decodeMaxNutrientValues(payload.maxNutrientValues)
         self.knownDiets = Set(payload.knownDiets)
         self.nutrientRankings = decodeNutrientRankings(payload.nutrientRankings)
+        self.ayurvedaFacetIndex = payload.ayurvedaFacetIndex.reduce(into: [:]) {
+            $0[$1.key] = Set($1.value)
+        }
     }
     
-    private func makeCompactItem(from food: FoodItem) -> CompactFoodItem {
+    private func makeCompactItem(
+        from food: FoodItem,
+        ayurvedaFacets: Set<String>
+    ) -> CompactFoodItem {
         var tokenSet: Set<String>
         if !food.searchTokens.isEmpty {
             tokenSet = Set(food.searchTokens)
@@ -408,8 +469,22 @@ final class SearchIndexStore {
             isRecipe: food.isRecipe,
             isMenu: food.isMenu,
             isFavorite: food.isFavorite,
+            ayurvedaFacets: ayurvedaFacets,
             nutrientValues: nutrientDict
         )
+    }
+
+    private func canonicalFacetKeys(
+        foodID: Int,
+        context: ModelContext
+    ) -> Set<String> {
+        let descriptor = FetchDescriptor<AyurvedaProfile>(
+            predicate: #Predicate { $0.foodId == foodID }
+        )
+        guard let profiles = try? context.fetch(descriptor) else { return [] }
+        return profiles.reduce(into: []) { result, profile in
+            result.formUnion(AyurvedaFacet.canonicalKeys(from: profile))
+        }
     }
 }
 
@@ -428,6 +503,7 @@ private struct SearchIndexPayload: Codable {
         let isRecipe: Bool
         let isMenu: Bool
         let isFavorite: Bool
+        let ayurvedaFacets: [String]
         let nutrientValues: [String: Double]
     }
 
@@ -437,6 +513,7 @@ private struct SearchIndexPayload: Codable {
     let maxNutrientValues: [String: Double]
     let knownDiets: [String]
     let nutrientRankings: [String: [Int]]
+    let ayurvedaFacetIndex: [String: [Int]]
 }
 
 // MARK: - Extensions for Encoding/Decoding Maps
@@ -455,6 +532,7 @@ private extension CompactFoodItem {
             isRecipe: isRecipe,
             isMenu: isMenu,
             isFavorite: isFavorite,
+            ayurvedaFacets: Array(ayurvedaFacets),
             nutrientValues: Dictionary(uniqueKeysWithValues: nutrientValues.map { ($0.key.rawValue, $0.value) })
         )
     }
@@ -475,6 +553,7 @@ private extension CompactFoodItem {
             isRecipe: codable.isRecipe,
             isMenu: codable.isMenu,
             isFavorite: codable.isFavorite,
+            ayurvedaFacets: Set(codable.ayurvedaFacets),
             nutrientValues: nutrientDict
         )
     }

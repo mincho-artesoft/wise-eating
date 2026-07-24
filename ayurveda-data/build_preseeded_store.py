@@ -19,7 +19,8 @@ EXPECTED = {
     "recipes": 1_500,
     "links": 2_305,
     "cacheFoods": 14_484,
-    "cacheVersion": 3,
+    "cacheVersion": 4,
+    "facetFoods": 2_214,
     "seedVersion": 3,
 }
 PART_SIZE = 70 * 1024 * 1024
@@ -220,12 +221,88 @@ def audit_store(path: Path) -> dict[str, int]:
             len(compact_foods) - len({food["id"] for food in compact_foods}),
             0,
         )
+        profile_food_ids = {
+            row[0]
+            for row in connection.execute(
+                """
+                SELECT ZFOODID FROM ZAYURVEDAPROFILE
+                WHERE (ZKIND = 'dravya' AND ZID LIKE 'dravya.%')
+                   OR (ZKIND = 'recipe' AND ZID LIKE 'recipe.%')
+                """
+            )
+        }
+        require_equal(
+            "canonical profile food ids",
+            len(profile_food_ids),
+            EXPECTED["facetFoods"],
+        )
+        compact_by_id = {food["id"]: food for food in compact_foods}
+        faceted_food_ids = {
+            food_id
+            for food_id, food in compact_by_id.items()
+            if food.get("ayurvedaFacets")
+        }
+        require_equal(
+            "faceted compact foods",
+            faceted_food_ids,
+            profile_food_ids,
+        )
+        require_equal(
+            "non-profile foods with Ayurveda facets",
+            sum(
+                bool(food.get("ayurvedaFacets"))
+                for food_id, food in compact_by_id.items()
+                if food_id not in profile_food_ids
+            ),
+            0,
+        )
+        facet_index = payload.get("ayurvedaFacetIndex")
+        if not isinstance(facet_index, dict):
+            raise PreseedBuildError("search payload ayurvedaFacetIndex is not an object")
+        allowed_facet_kinds = {
+            "virya",
+            "pacifies",
+            "aggravates",
+            "agni",
+            "digestibility",
+            "season",
+            "category",
+            "concept",
+        }
+        invalid_facet_keys = {
+            key
+            for key in facet_index
+            if ":" not in key or key.split(":", 1)[0] not in allowed_facet_kinds
+        }
+        require_equal("invalid Ayurveda facet keys", invalid_facet_keys, set())
+        expected_facet_index: dict[str, set[int]] = {}
+        for food in compact_foods:
+            for facet in food.get("ayurvedaFacets", []):
+                expected_facet_index.setdefault(facet, set()).add(food["id"])
+        actual_facet_index = {
+            key: set(food_ids) for key, food_ids in facet_index.items()
+        }
+        require_equal(
+            "Ayurveda facet inverted index",
+            actual_facet_index,
+            expected_facet_index,
+        )
+        require_equal(
+            "Ayurveda facets leaked into text index",
+            set(facet_index).intersection(payload.get("invertedIndex", {})),
+            set(),
+        )
         return {
             "foods": EXPECTED["foods"],
             "profiles": EXPECTED["profiles"],
             "links": EXPECTED["links"],
             "cacheFoods": cache_foods,
             "cacheVersion": cache_version,
+            "facetFoods": len(faceted_food_ids),
+            "facetKeys": len(facet_index),
+            "facetAssignments": sum(
+                len(food.get("ayurvedaFacets", [])) for food in compact_foods
+            ),
             "payloadBytes": len(payload_data),
         }
 
