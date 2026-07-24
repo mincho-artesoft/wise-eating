@@ -317,7 +317,15 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
     func normalizedAndScaledValue(for food: FoodItem, nutrient: NutrientType) -> (value: Double, unit: String)? {
         let (totalValue, calculatedUnit) = food.calculatedNutrition(for: nutrient)
         let referenceWeight = food.referenceWeightG
-        guard referenceWeight > 0 else { return nil }
+        guard referenceWeight > 0, totalValue.isFinite else { return nil }
+
+        // FoodItem's legacy accessors use 0.0 for both a stored zero and an
+        // absent relationship. A stored Nutrient still carries its unit, so
+        // preserve that real zero while treating the unitless sentinel as
+        // missing. Non-zero values can safely use the canonical unit fallback.
+        guard calculatedUnit != nil || abs(totalValue) > 0.000001 else {
+            return nil
+        }
         
         let valuePer100g = (totalValue / referenceWeight) * 100.0
         

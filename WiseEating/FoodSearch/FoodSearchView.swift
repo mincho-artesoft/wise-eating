@@ -496,12 +496,25 @@ private struct FoodRowView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 12) {
                         ForEach(engine.searchContext.displayNutrients, id: \.self) { nutrient in
-                            if let result = engine.normalizedAndScaledValue(for: food, nutrient: nutrient) {
-                                HStack(spacing: 2) {
-                                    Text(formatName(nutrient) + ":").font(.caption).foregroundColor(.secondary)
-                                    Text("\(String(format: "%.1f", result.value)) \(result.unit)").font(.caption).fontWeight(.bold).foregroundColor(.blue)
+                            HStack(spacing: 2) {
+                                Text(formatName(nutrient) + ":")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+
+                                if let result = engine.normalizedAndScaledValue(for: food, nutrient: nutrient) {
+                                    Text("\(String(format: "%.1f", result.value)) \(result.unit)")
+                                        .font(.caption)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.blue)
+                                } else {
+                                    Text("—")
+                                        .font(.caption)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.secondary)
+                                        .accessibilityLabel("no data")
                                 }
                             }
+                            .accessibilityElement(children: .combine)
                         }
                     }
                 }
