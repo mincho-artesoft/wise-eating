@@ -90,16 +90,27 @@ virya, dosha, agni/digestibility, season/ritu, and category speech plus
 All 25 legacy golden queries remain exact; plain USDA rows have no facets;
 fresh install still performs zero inserts and no rebuild. See `REPORT-WE4.md`.
 
+WE-5 closes the bounded FoodSearch display/parser edges without changing the
+index or content. Searched nutrient columns now always render with distinct
+missing (`—`) and stored-zero (`0.0`) states; Tokenizer and ConstraintMapper
+nutrients share query-ordered display context; pH boundary, unknown-data
+exclusion counting, and sort-only visibility are centralized; and command
+heuristics require word/token boundaries. All 25 WE-4 goldens remain exact and
+the WE-4 median-latency budget remains green. The active engine source is
+`WiseEating/FoodSearch/VM/SmartFoodSearchEngine.swift`; `WiseEating/Legacy/`
+was not touched. See `REPORT-WE5.md`.
+
 ## Next milestones
 
 1. **Engineering track COMPLETE** — D6 (models+seeder), D34 (all 12,601 foods
    classified), D8/D8.1/D8.2 (UI end to end incl. computed tier + editors),
    D9 (engineExcluded enforcement), WE-2 (full recipe nutrition + build-time
    projection/search cache), WE-3 (founder-approved read-only display card),
-   and WE-4 (canonical indexed Ayurveda search facets).
+   WE-4 (canonical indexed Ayurveda search facets), and WE-5 (FoodSearch
+   border-case closure).
    See PROJECT-HANDBOOK.md §6 ledger and `REPORT-WE2.md` / `REPORT-WE3.md` /
-   `REPORT-WE4.md` for gates, timing, screenshots, accessibility, and search
-   evidence.
+   `REPORT-WE4.md` / `REPORT-WE5.md` for gates, timing, screenshots,
+   accessibility, and search evidence.
 2. **Expert review — the remaining item.** Work aiDraft→reviewed across
    dravyas/recipes/rules, resolve all reviewNote flags, optional batch-31
    top-up to 750. Director can generate a reviewer packet on request.

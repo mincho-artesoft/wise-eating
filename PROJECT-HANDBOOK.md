@@ -2,7 +2,7 @@
 **Read this first. It is the knowledge-transfer document for anyone (human or AI)
 taking over direction of this project. Update it at the end of every milestone —
 that is a standing rule baked into all task packets.**
-Last updated: 2026-07-24 (WE-3 complete — founder-approved accessible Ayurveda display card; next: expert review).
+Last updated: 2026-07-24 (WE-5 complete — FoodSearch border cases closed; next: expert review).
 
 ## 1. Mission and the two applications
 
@@ -68,11 +68,17 @@ simulation; must always pass).
 - `RecipeNutritionPanelView` (WE-2): existing glass-card/flow-layout language;
   switches per serving/per 100g and displays the full 39-field nutrient catalog,
   coverage state, and honest missing-slug evidence.
-- `WiseEating/FoodSearch/` (WE-4): version-4 compact cache persists canonical
+- `WiseEating/FoodSearch/` (WE-4/WE-5): version-4 compact cache persists canonical
   virya/dosha/agni/digestibility/season/category/concept facet sets and a
   separate inverted facet index on exactly the 2,214 seeded profiles.
   `CanonicalFacetParser` removes only validated natural/explicit facet speech
-  before the existing tokenizer; plain USDA rows remain un-faceted.
+  before the existing tokenizer; plain USDA rows remain un-faceted. Constrained
+  nutrient columns are always visible (`—` means no data; stored zero remains
+  `0.0`), both constraint parsers feed query-ordered display context, and pH
+  uses one exclusive boundary definition (`low < 7`, `high > 7`, neutral
+  6.5…7.5). Unknown-pH filtered rows are counted, pH sort-only mode exposes its
+  column, and command heuristics use token boundaries so phosphorus/sulphate/
+  phyllo/freeze do not accidentally activate pH or negation modes.
 - `WiseEating/Ayurveda/AyurvedaRecommendationGate.swift` (D9): set-driven
   never-recommend enforcement (engineExcluded profiles + linked fdcIds + AI
   free-text name screen) wired into all AI generation paths and the Siri intent;
@@ -159,6 +165,7 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | WE-2 recipe nutrition + build-time seed/index | ✅ COMPLETE — T1 `f545569`; all 1,500 recipes have USDA-component panels; final artifact is 14,484 foods / 2,214 profiles / 2,305 links with matching search cache; fresh install logs zero Ayurveda inserts/updates and no rebuild; first index-ready launch 499.74s→15.65s. See `ayurveda-data/REPORT-WE2.md` |
 | WE-3 Ayurveda display card redesign | ✅ COMPLETE — founder-approved warm read-only card; signed word/value dosha rows, semantic center-zero scales, wrapping glyph chips, always-visible warnings, plain disclaimer, Reduce Motion, and one-element dosha accessibility. Four light/dark × default/largest-type snapshots pass; minimum measured contrast 5.52:1. Editor behavior and lifecycle/claims boundaries unchanged. See `ayurveda-data/REPORT-WE3.md` |
 | WE-4 Ayurvedic FoodSearch facets | ✅ COMPLETE — version-4 prebuilt index carries 64 canonical keys / 20,114 assignments on exactly 2,214 seeded dravya/recipe rows; natural virya/dosha/agni/digestibility/season/category queries and three conservative Sanskrit aliases compose with existing search. All 25 legacy goldens are unchanged; worst pure-text median delta +0.3%; fresh install still performs zero inserts and no rebuild. See `ayurveda-data/REPORT-WE4.md` |
+| WE-5 FoodSearch border cases | ✅ COMPLETE — constrained nutrient and pH columns now remain visible with honest missing/zero semantics; Tokenizer + ConstraintMapper display provenance is unified; pH boundary/sentinel/count/sort behavior is centralized; command heuristics are token-boundary safe. All 25 WE-4 goldens remain exact, 34/34 repository tests pass, and pure-text median latency stays within the WE-4 +10% budget. Engine source is `VM/SmartFoodSearchEngine.swift`; `Legacy/` is untouched. See `ayurveda-data/REPORT-WE5.md` |
 | Expert review pass | ⏳ pending human reviewer: work aiDraft→reviewed, resolve reviewNotes, optional batch-31 top-up to 750 |
 | Later roadmap | media (yoga/meditation content), recommendation engine, dosha assessment — see ayurveda-data/RESTART-PLAN.md history |
 
