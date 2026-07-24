@@ -16,7 +16,7 @@ enum SeedManager {
         await seedReferenceMineralsIfNeeded(context: ctx)
         await seedReferenceDietsIfNeeded(context: ctx)
         await seedFoodsIfNeeded(context: ctx)
-        await seedAyurvedaIfNeeded(context: ctx)
+        let ayurvedaChangedSearchableFoods = await seedAyurvedaIfNeeded(context: ctx)
         await seedExercisesIfNeeded(context: ctx)
         await seedTrainingPlansIfNeeded(context: ctx)
 
@@ -30,7 +30,10 @@ enum SeedManager {
                 print("💾 Final save of all seeded data successful.")
             }
 
-            try SearchIndexStore.shared.rebuildIndexIfNeeded(context: ctx)
+            try SearchIndexStore.shared.rebuildIndexIfNeeded(
+                context: ctx,
+                force: ayurvedaChangedSearchableFoods
+            )
 
         } catch {
             print("❌ Final save or indexing after seeding failed: \(error)")
@@ -91,19 +94,24 @@ enum SeedManager {
     }
 
     // MARK: – Ayurveda
-    private static func seedAyurvedaIfNeeded(context ctx: ModelContext) async {
+    private static func seedAyurvedaIfNeeded(context ctx: ModelContext) async -> Bool {
         print("-> Checking for Ayurveda data...")
         do {
             let seedVersion = try AyurvedaSeeder.bundleSeedVersion()
             guard UserDefaults.standard.integer(forKey: "ayurvedaSeedVersion") < seedVersion else {
                 print("   Ayurveda seed version already applied, skipping.")
-                return
+                return false
             }
-            try AyurvedaSeeder.run(context: ctx)
+            let result = try AyurvedaSeeder.run(context: ctx)
+            if ctx.hasChanges {
+                try ctx.save()
+            }
             UserDefaults.standard.set(seedVersion, forKey: "ayurvedaSeedVersion")
+            return result.changedSearchableFoods
         } catch {
             ctx.rollback()
             print("   ❌ Ayurveda seeding failed; continuing without Ayurveda data: \(error)")
+            return false
         }
     }
 

@@ -36,7 +36,7 @@ final class SearchIndexStore {
             
             if let existingCache = try context.fetch(cacheDescriptor).first {
                 if existingCache.version == currentIndexVersion {
-                    if abs(existingCache.foodsCount - currentFoodCount) <= 5 {
+                    if existingCache.foodsCount == currentFoodCount {
                         print("✅ SearchIndexStore: Index is up-to-date (version: \(existingCache.version), DB: \(currentFoodCount)). Skipping rebuild.")
                         return
                     } else {

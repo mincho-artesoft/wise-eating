@@ -12,6 +12,11 @@ All validated (`validate.py --store`), viruddha-flagged where required,
 qualityState aiDraft pending expert review. Task packets and reports in
 `recipes/TASK-R*.md`, `recipes/REPORT-R*.md`.
 
+WE-2 adds build-derived nutrition without changing authored content: all 1,500
+recipes resolve to full ingredient coverage (0 estimated, 0 none) across energy,
+macros/fiber/sugars, 22 vitamins, and 11 minerals, stored per serving and per
+100g. The Classic Mung Kitchari independent gate is 379.67 kcal/serving.
+
 ## Dravyas: COMPLETE ✅ (714 authored; 750 target reachable via review top-up)
 
 **All 30 predrafts promoted to `dravyas/batch-01..30.json`, validator green at
@@ -66,12 +71,18 @@ cross-linking.
 `cat WiseEating/preseeded_db.store.gz.part-aa WiseEating/preseeded_db.store.gz.part-ab > /tmp/pre.gz && gunzip -f /tmp/pre.gz`).
 Current status: **714 dravyas, 1,500 recipes — all checks pass.**
 
+The reconstructed shipped store is now the full build-time artifact: 14,484
+foods, 2,214 seed-v3 canonical profiles, 2,305 links, 1,500 full recipe panels,
+and a version-3 search cache for exactly 14,484 foods. Fresh install performs
+zero Ayurveda inserts/updates and no index rebuild. See `REPORT-WE2.md`.
+
 ## Next milestones
 
 1. **Engineering track COMPLETE** — D6 (models+seeder), D34 (all 12,601 foods
    classified), D8/D8.1/D8.2 (UI end to end incl. computed tier + editors),
-   D9 (engineExcluded enforcement). See PROJECT-HANDBOOK.md §6 ledger for
-   details, commits, and residuals.
+   D9 (engineExcluded enforcement), WE-2 (full recipe nutrition + build-time
+   projection/search cache). See PROJECT-HANDBOOK.md §6 ledger and
+   `REPORT-WE2.md` for gates and timing.
 2. **Expert review — the remaining item.** Work aiDraft→reviewed across
    dravyas/recipes/rules, resolve all reviewNote flags, optional batch-31
    top-up to 750. Director can generate a reviewer packet on request.
@@ -79,7 +90,8 @@ Current status: **714 dravyas, 1,500 recipes — all checks pass.**
    generation run (D9 G3 environmental residual), Computed/User card
    screenshots, VoiceOver + dark-mode smoke.
 4. **Optional future scope** (new product decisions, not leftovers): dosha-based
-   search filters, prakriti assessment/personalization — best after expert review.
+   search filters, prakriti assessment/personalization, and profiling the
+   measured +1.34s cold cached-index load — best after expert review.
 
 
 Git note (sandbox sessions): stale locks workaround — `GIT_INDEX_FILE=/tmp/ayur_index`,

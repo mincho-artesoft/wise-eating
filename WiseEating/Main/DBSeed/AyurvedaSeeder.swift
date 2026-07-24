@@ -3,98 +3,183 @@ import SwiftData
 
 @MainActor
 enum AyurvedaSeeder {
-  private static let batchSize = 200
   private static let reservedBand = 900_000..<1_002_000
+
+  struct RunResult {
+    var insertedFoods = 0
+    var insertedProfiles = 0
+    var updatedProfiles = 0
+    var insertedLinks = 0
+    var updatedLinks = 0
+    var replacedIngredientSets = 0
+    var updatedRecipeFoods = 0
+
+    var insertedRows: Int {
+      insertedFoods + insertedProfiles + insertedLinks
+    }
+
+    var changedSearchableFoods: Bool {
+      insertedFoods > 0 || updatedRecipeFoods > 0 || replacedIngredientSets > 0
+    }
+
+    var isNoOp: Bool {
+      insertedRows == 0
+        && updatedProfiles == 0
+        && updatedLinks == 0
+        && replacedIngredientSets == 0
+        && updatedRecipeFoods == 0
+    }
+  }
 
   static func bundleSeedVersion() throws -> Int {
     try loadSeed().seedVersion
   }
 
-  static func run(context: ModelContext) throws {
+  static func run(context: ModelContext) throws -> RunResult {
     do {
       let seed = try loadSeed()
       try validate(seed: seed)
 
-      if try context.fetchCount(FetchDescriptor<AyurvedaProfile>()) > 0 {
-        let inserted = try topUpLinks(seed.links, context: context)
+      let existingProfiles = try context.fetch(FetchDescriptor<AyurvedaProfile>())
+      let profileByID = try makeProfileMap(existingProfiles)
+      let existingLinks = try context.fetch(FetchDescriptor<AyurvedaLink>())
+      let linkByFdcID = try makeLinkMap(existingLinks)
+      let allFoods = try context.fetch(FetchDescriptor<FoodItem>())
+      var foodByID = try makeFoodMap(allFoods)
+
+      try validateCanonicalOwnership(
+        seed: seed,
+        profileByID: profileByID,
+        foodByID: foodByID
+      )
+
+      if storeHasCurrentSeed(
+        seed: seed,
+        profileByID: profileByID,
+        linkByFdcID: linkByFdcID,
+        foodByID: foodByID
+      ) {
         print(
-          "   ✅ Ayurveda v\(seed.seedVersion) link top-up inserted "
-            + "\(inserted) missing links."
+          "   ✅ Ayurveda v\(seed.seedVersion) preseed stamp verified; "
+            + "no inserts or updates."
         )
-        return
+        return RunResult()
       }
 
-      try verifyReservedBandIsFree(context: context)
+      var result = RunResult()
 
-      try insertInBatches(
-        seed.dravyas.filter(\.foodIsPlaceholder),
-        context: context
-      ) { dravya in
-        context.insert(
-          FoodItem(
+      for dravya in seed.dravyas where dravya.foodIsPlaceholder {
+        if foodByID[dravya.foodId] == nil {
+          let food = FoodItem(
             id: dravya.foodId,
             name: dravya.name,
             isRecipe: false,
             isUserAdded: false
           )
-        )
+          context.insert(food)
+          foodByID[dravya.foodId] = food
+          result.insertedFoods += 1
+        }
       }
-
-      let allFoods = try context.fetch(FetchDescriptor<FoodItem>())
-      let foodByID = try makeFoodMap(allFoods)
       try validateIngredientTargets(seed.recipes, foodByID: foodByID)
 
-      try insertInBatches(seed.dravyas, context: context) { dravya in
-        context.insert(try makeDravyaProfile(dravya, seedVersion: seed.seedVersion))
-      }
-
-      try insertInBatches(seed.links, context: context) { link in
-        context.insert(
-          AyurvedaLink(
-            fdcId: link.fdcId,
-            dravyaProfileId: link.dravyaId,
-            tier: link.tier
-          )
-        )
-      }
-
-      try insertInBatches(seed.recipes, context: context) { recipe in
-        let recipeFood = FoodItem(
-          id: recipe.foodId,
-          name: recipe.name,
-          isRecipe: true,
-          isUserAdded: false,
-          prepTimeMinutes: recipe.prepMinutes + recipe.cookMinutes,
-          itemDescription: recipeDescription(recipe)
-        )
-        let ingredients = try recipe.ingredients.map { ingredient in
-          guard let ingredientFood = foodByID[ingredient.foodId] else {
-            throw AyurvedaSeederError.missingIngredientFood(
-              recipeId: recipe.id,
-              foodId: ingredient.foodId
+      for dravya in seed.dravyas {
+        if let profile = profileByID[dravya.id] {
+          if profile.seedVersion < seed.seedVersion {
+            try apply(
+              dravya: dravya,
+              seedVersion: seed.seedVersion,
+              to: profile
             )
+            result.updatedProfiles += 1
           }
-          return IngredientLink(
-            food: ingredientFood,
-            grams: ingredient.grams,
-            owner: recipeFood
-          )
-        }
-        recipeFood.ingredients = ingredients
-        context.insert(recipeFood)
-        for ingredient in ingredients {
-          context.insert(ingredient)
+        } else {
+          context.insert(try makeDravyaProfile(dravya, seedVersion: seed.seedVersion))
+          result.insertedProfiles += 1
         }
       }
 
-      try insertInBatches(seed.recipes, context: context) { recipe in
-        context.insert(try makeRecipeProfile(recipe, seedVersion: seed.seedVersion))
+      for link in seed.links {
+        if let existing = linkByFdcID[link.fdcId] {
+          if existing.dravyaProfileId != link.dravyaId || existing.tier != link.tier {
+            existing.dravyaProfileId = link.dravyaId
+            existing.tier = link.tier
+            result.updatedLinks += 1
+          }
+        } else {
+          context.insert(
+            AyurvedaLink(
+              fdcId: link.fdcId,
+              dravyaProfileId: link.dravyaId,
+              tier: link.tier
+            )
+          )
+          result.insertedLinks += 1
+        }
+      }
+
+      for recipe in seed.recipes {
+        let recipeFood: FoodItem
+        if let existing = foodByID[recipe.foodId] {
+          recipeFood = existing
+          if updateRecipeFoodMetadata(recipe, food: recipeFood) {
+            result.updatedRecipeFoods += 1
+          }
+          if !ingredientSetMatches(recipe, food: recipeFood) {
+            try replaceIngredients(
+              for: recipe,
+              food: recipeFood,
+              foodByID: foodByID,
+              context: context
+            )
+            result.replacedIngredientSets += 1
+          }
+        } else {
+          recipeFood = FoodItem(
+            id: recipe.foodId,
+            name: recipe.name,
+            isRecipe: true,
+            isUserAdded: false,
+            prepTimeMinutes: recipe.prepMinutes + recipe.cookMinutes,
+            itemDescription: recipeDescription(recipe)
+          )
+          context.insert(recipeFood)
+          try replaceIngredients(
+            for: recipe,
+            food: recipeFood,
+            foodByID: foodByID,
+            context: context
+          )
+          foodByID[recipe.foodId] = recipeFood
+          result.insertedFoods += 1
+        }
+      }
+
+      for recipe in seed.recipes {
+        if let profile = profileByID[recipe.id] {
+          if profile.seedVersion < seed.seedVersion || profile.nutritionStatus == nil {
+            try apply(
+              recipe: recipe,
+              seedVersion: seed.seedVersion,
+              to: profile
+            )
+            result.updatedProfiles += 1
+          }
+        } else {
+          context.insert(try makeRecipeProfile(recipe, seedVersion: seed.seedVersion))
+          result.insertedProfiles += 1
+        }
       }
 
       print(
-        "   ✅ Seeded \(seed.dravyas.count) dravya profiles, "
-          + "\(seed.recipes.count) recipe profiles, and \(seed.links.count) Ayurveda links."
+        "   ✅ Ayurveda v\(seed.seedVersion) slug-keyed delta: "
+          + "inserted \(result.insertedRows) rows "
+          + "(\(result.insertedFoods) foods, \(result.insertedProfiles) profiles, "
+          + "\(result.insertedLinks) links); updated \(result.updatedProfiles) profiles, "
+          + "\(result.updatedLinks) links, \(result.updatedRecipeFoods) recipe foods; "
+          + "replaced \(result.replacedIngredientSets) ingredient sets."
       )
+      return result
     } catch {
       context.rollback()
       throw error
@@ -147,40 +232,6 @@ enum AyurvedaSeeder {
     }
   }
 
-  private static func topUpLinks(
-    _ links: [AyurvedaLinkDTO],
-    context: ModelContext
-  ) throws -> Int {
-    let existingLinks = try context.fetch(FetchDescriptor<AyurvedaLink>())
-    let existingFdcIds = Set(existingLinks.map(\.fdcId))
-    let missingLinks = links.filter { !existingFdcIds.contains($0.fdcId) }
-    try insertInBatches(missingLinks, context: context) { link in
-      context.insert(
-        AyurvedaLink(
-          fdcId: link.fdcId,
-          dravyaProfileId: link.dravyaId,
-          tier: link.tier
-        )
-      )
-    }
-    return missingLinks.count
-  }
-
-  private static func verifyReservedBandIsFree(context: ModelContext) throws {
-    let lowerBound = reservedBand.lowerBound
-    let upperBound = reservedBand.upperBound
-    var descriptor = FetchDescriptor<FoodItem>(
-      predicate: #Predicate<FoodItem> { food in
-        food.id >= lowerBound && food.id < upperBound
-      }
-    )
-    descriptor.fetchLimit = 1
-    if let collision = try context.fetch(descriptor).first {
-      print("   ⚠️ Ayurveda seed id band collision at FoodItem \(collision.id).")
-      throw AyurvedaSeederError.reservedBandCollision(collision.id)
-    }
-  }
-
   private static func makeFoodMap(_ foods: [FoodItem]) throws -> [Int: FoodItem] {
     var foodByID: [Int: FoodItem] = [:]
     foodByID.reserveCapacity(foods.count)
@@ -190,6 +241,112 @@ enum AyurvedaSeeder {
       }
     }
     return foodByID
+  }
+
+  private static func makeProfileMap(
+    _ profiles: [AyurvedaProfile]
+  ) throws -> [String: AyurvedaProfile] {
+    var profileByID: [String: AyurvedaProfile] = [:]
+    profileByID.reserveCapacity(profiles.count)
+    for profile in profiles {
+      guard profileByID.updateValue(profile, forKey: profile.id) == nil else {
+        throw AyurvedaSeederError.duplicateProfileId(profile.id)
+      }
+    }
+    return profileByID
+  }
+
+  private static func makeLinkMap(
+    _ links: [AyurvedaLink]
+  ) throws -> [Int: AyurvedaLink] {
+    var linkByFdcID: [Int: AyurvedaLink] = [:]
+    linkByFdcID.reserveCapacity(links.count)
+    for link in links {
+      guard linkByFdcID.updateValue(link, forKey: link.fdcId) == nil else {
+        throw AyurvedaSeederError.duplicateLinkFdcId(link.fdcId)
+      }
+    }
+    return linkByFdcID
+  }
+
+  private static func validateCanonicalOwnership(
+    seed: AyurvedaSeedDTO,
+    profileByID: [String: AyurvedaProfile],
+    foodByID: [Int: FoodItem]
+  ) throws {
+    for dravya in seed.dravyas {
+      if let profile = profileByID[dravya.id] {
+        guard profile.kind == "dravya", profile.foodId == dravya.foodId else {
+          throw AyurvedaSeederError.canonicalOwnershipConflict(dravya.id)
+        }
+      } else if dravya.foodIsPlaceholder, foodByID[dravya.foodId] != nil {
+        throw AyurvedaSeederError.reservedBandCollision(dravya.foodId)
+      }
+    }
+    for recipe in seed.recipes {
+      if let profile = profileByID[recipe.id] {
+        guard profile.kind == "recipe", profile.foodId == recipe.foodId else {
+          throw AyurvedaSeederError.canonicalOwnershipConflict(recipe.id)
+        }
+      } else if foodByID[recipe.foodId] != nil {
+        throw AyurvedaSeederError.reservedBandCollision(recipe.foodId)
+      }
+    }
+
+    let expectedReservedFoodIDs = Set(
+      seed.dravyas.lazy.filter(\.foodIsPlaceholder).map(\.foodId)
+    ).union(seed.recipes.map(\.foodId))
+    for foodID in foodByID.keys where reservedBand.contains(foodID) {
+      guard expectedReservedFoodIDs.contains(foodID) else {
+        throw AyurvedaSeederError.reservedBandCollision(foodID)
+      }
+    }
+  }
+
+  private static func storeHasCurrentSeed(
+    seed: AyurvedaSeedDTO,
+    profileByID: [String: AyurvedaProfile],
+    linkByFdcID: [Int: AyurvedaLink],
+    foodByID: [Int: FoodItem]
+  ) -> Bool {
+    let dravyasAreCurrent = seed.dravyas.allSatisfy { dravya in
+      guard let profile = profileByID[dravya.id] else {
+        return false
+      }
+      return profile.kind == "dravya"
+        && profile.foodId == dravya.foodId
+        && profile.seedVersion >= seed.seedVersion
+        && foodByID[dravya.foodId] != nil
+    }
+    guard dravyasAreCurrent else {
+      return false
+    }
+
+    let recipesAreCurrent = seed.recipes.allSatisfy { recipe in
+      guard
+        let profile = profileByID[recipe.id],
+        let food = foodByID[recipe.foodId]
+      else {
+        return false
+      }
+      return profile.kind == "recipe"
+        && profile.foodId == recipe.foodId
+        && profile.seedVersion >= seed.seedVersion
+        && profile.nutritionStatus != nil
+        && food.isRecipe
+        && !food.isUserAdded
+    }
+    guard recipesAreCurrent else {
+      return false
+    }
+
+    return seed.links.allSatisfy { link in
+      guard let existing = linkByFdcID[link.fdcId] else {
+        return false
+      }
+      return existing.dravyaProfileId == link.dravyaId
+        && existing.tier == link.tier
+    }
   }
 
   private static func validateIngredientTargets(
@@ -215,19 +372,147 @@ enum AyurvedaSeeder {
     }
   }
 
-  private static func insertInBatches<Element>(
-    _ elements: [Element],
-    context: ModelContext,
-    insert: (Element) throws -> Void
-  ) throws {
-    for start in stride(from: 0, to: elements.count, by: batchSize) {
-      let end = min(start + batchSize, elements.count)
-      try context.transaction {
-        for element in elements[start..<end] {
-          try insert(element)
-        }
-      }
+  private static func recipeFoodMetadataMatches(
+    _ recipe: RecipeDTO,
+    food: FoodItem
+  ) -> Bool {
+    food.name == recipe.name
+      && food.isRecipe
+      && !food.isMenu
+      && !food.isUserAdded
+      && food.prepTimeMinutes == recipe.prepMinutes + recipe.cookMinutes
+      && food.itemDescription == recipeDescription(recipe)
+  }
+
+  private static func updateRecipeFoodMetadata(
+    _ recipe: RecipeDTO,
+    food: FoodItem
+  ) -> Bool {
+    guard !recipeFoodMetadataMatches(recipe, food: food) else {
+      return false
     }
+    food.name = recipe.name
+    food.isRecipe = true
+    food.isMenu = false
+    food.isUserAdded = false
+    food.prepTimeMinutes = recipe.prepMinutes + recipe.cookMinutes
+    food.itemDescription = recipeDescription(recipe)
+    return true
+  }
+
+  private static func ingredientSetMatches(
+    _ recipe: RecipeDTO,
+    food: FoodItem
+  ) -> Bool {
+    let expected = recipe.ingredients.map {
+      "\($0.foodId):\($0.grams.bitPattern)"
+    }.sorted()
+    let actual = (food.ingredients ?? []).compactMap { link -> String? in
+      guard let foodID = link.food?.id else {
+        return nil
+      }
+      return "\(foodID):\(link.grams.bitPattern)"
+    }.sorted()
+    return expected == actual && actual.count == (food.ingredients ?? []).count
+  }
+
+  private static func replaceIngredients(
+    for recipe: RecipeDTO,
+    food: FoodItem,
+    foodByID: [Int: FoodItem],
+    context: ModelContext
+  ) throws {
+    for existing in food.ingredients ?? [] {
+      context.delete(existing)
+    }
+    let ingredients = try recipe.ingredients.map { ingredient in
+      guard let ingredientFood = foodByID[ingredient.foodId] else {
+        throw AyurvedaSeederError.missingIngredientFood(
+          recipeId: recipe.id,
+          foodId: ingredient.foodId
+        )
+      }
+      return IngredientLink(
+        food: ingredientFood,
+        grams: ingredient.grams,
+        owner: food
+      )
+    }
+    food.ingredients = ingredients
+    for ingredient in ingredients {
+      context.insert(ingredient)
+    }
+  }
+
+  private static func apply(
+    dravya: DravyaDTO,
+    seedVersion: Int,
+    to profile: AyurvedaProfile
+  ) throws {
+    copyProfile(
+      from: try makeDravyaProfile(dravya, seedVersion: seedVersion),
+      to: profile
+    )
+  }
+
+  private static func apply(
+    recipe: RecipeDTO,
+    seedVersion: Int,
+    to profile: AyurvedaProfile
+  ) throws {
+    copyProfile(
+      from: try makeRecipeProfile(recipe, seedVersion: seedVersion),
+      to: profile
+    )
+  }
+
+  private static func copyProfile(
+    from source: AyurvedaProfile,
+    to destination: AyurvedaProfile
+  ) {
+    destination.kind = source.kind
+    destination.foodId = source.foodId
+    destination.foodIsPlaceholder = source.foodIsPlaceholder
+    destination.name = source.name
+    destination.category = source.category
+    destination.doshaVata = source.doshaVata
+    destination.doshaPitta = source.doshaPitta
+    destination.doshaKapha = source.doshaKapha
+    destination.seasons = source.seasons
+    destination.timeOfDay = source.timeOfDay
+    destination.viruddha = source.viruddha
+    destination.provenance = source.provenance
+    destination.confidenceAyur = source.confidenceAyur
+    destination.confidenceSci = source.confidenceSci
+    destination.qualityState = source.qualityState
+    destination.reviewNote = source.reviewNote
+    destination.engineExcluded = source.engineExcluded
+    destination.seedVersion = source.seedVersion
+    destination.sanskrit = source.sanskrit
+    destination.aliases = source.aliases
+    destination.rasa = source.rasa
+    destination.virya = source.virya
+    destination.vipaka = source.vipaka
+    destination.gunas = source.gunas
+    destination.prabhava = source.prabhava
+    destination.agniEffect = source.agniEffect
+    destination.digestibility = source.digestibility
+    destination.combinations = source.combinations
+    destination.contraindications = source.contraindications
+    destination.preparation = source.preparation
+    destination.servingsJSON = source.servingsJSON
+    destination.meal = source.meal
+    destination.servingsCount = source.servingsCount
+    destination.prepMinutes = source.prepMinutes
+    destination.cookMinutes = source.cookMinutes
+    destination.steps = source.steps
+    destination.guidance = source.guidance
+    destination.nutritionStatus = source.nutritionStatus
+    destination.nutritionMissingIngredients = source.nutritionMissingIngredients
+    destination.nutritionTotalWeightG = source.nutritionTotalWeightG
+    destination.nutritionPerServingJSON = source.nutritionPerServingJSON
+    destination.nutritionPer100gJSON = source.nutritionPer100gJSON
+    destination.nutritionUnitsJSON = source.nutritionUnitsJSON
   }
 
   private static func makeDravyaProfile(
@@ -375,6 +660,9 @@ private enum AyurvedaSeederError: Error, LocalizedError {
   case emptyRecipeIngredients
   case reservedBandCollision(Int)
   case duplicateFoodId(Int)
+  case duplicateProfileId(String)
+  case duplicateLinkFdcId(Int)
+  case canonicalOwnershipConflict(String)
   case missingIngredientFood(recipeId: String, foodId: Int)
   case recipeIngredientReference(recipeId: String, foodId: Int)
   case invalidServings(String)
@@ -393,6 +681,12 @@ private enum AyurvedaSeederError: Error, LocalizedError {
       return "the reserved Ayurveda FoodItem band collides at id \(foodId)"
     case .duplicateFoodId(let foodId):
       return "the FoodItem store contains duplicate id \(foodId)"
+    case .duplicateProfileId(let profileId):
+      return "the Ayurveda store contains duplicate profile slug \(profileId)"
+    case .duplicateLinkFdcId(let fdcId):
+      return "the Ayurveda store contains duplicate link fdcId \(fdcId)"
+    case .canonicalOwnershipConflict(let profileId):
+      return "canonical profile ownership conflicts at slug \(profileId)"
     case .missingIngredientFood(let recipeId, let foodId):
       return "recipe \(recipeId) references missing FoodItem \(foodId)"
     case .recipeIngredientReference(let recipeId, let foodId):

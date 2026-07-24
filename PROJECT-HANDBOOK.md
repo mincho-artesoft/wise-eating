@@ -2,7 +2,7 @@
 **Read this first. It is the knowledge-transfer document for anyone (human or AI)
 taking over direction of this project. Update it at the end of every milestone —
 that is a standing rule baked into all task packets.**
-Last updated: 2026-07-22 (D9 complete — engineExcluded recommendation enforcement is live; next: expert review).
+Last updated: 2026-07-24 (WE-2 complete — full recipe nutrition and build-time seed/index ship; next: expert review).
 
 ## 1. Mission and the two applications
 
@@ -25,6 +25,8 @@ One repository, two products:
 - **1,500 recipes** (`recipes/batch-r01..r30.json`): 300 classical + 1,200
   everyday/international; ingredients link to dravyas/fdcIds; computed dosha;
   viruddha-flagged where a modern dish breaks a rule (with compliant variant).
+  The seed build derives honest per-serving and per-100g panels from bound
+  ingredient nutrition: energy, macros, fiber, sugars, 22 vitamins, 11 minerals.
 - **Classification rules** (`rules/category-rules.json` 187 categories,
   `rules/modifiers.json` 14 name-modifiers, `crosswalk/overrides.json`).
 - **Crosswalk** (`crosswalk/crosswalk.csv`): 1,969 deterministic USDA→dravya
@@ -36,9 +38,12 @@ estimated 10,296 (category rules × modifiers) = 12,601. Tier is always stored
 and must always be shown in UI.
 
 **Build pipeline:** `ayurveda-data/build_seed.py` → deterministic
-`WiseEating/ayurveda_seed.json.gz` (seedVersion 2; sha-verifiable) +
-`WiseEating/ayurveda_rules.json`. `ayurveda-data/validate.py --store /tmp/pre`
-is the gatekeeper (content integrity + full resolver simulation; must always pass).
+`WiseEating/ayurveda_seed.json.gz` (seedVersion 3; sha-verifiable) +
+`WiseEating/ayurveda_rules.json`. `ayurveda-data/build_preseeded_store.py`
+audits/compacts a completed 14,484-row store and emits the two bundled gzip
+parts, including the version-3 search cache. `ayurveda-data/validate.py --store
+/tmp/pre` is the gatekeeper (content integrity + full resolver and preseed
+simulation; must always pass).
 
 **App layer (Swift, additive only — `FoodItem` untouched):**
 - `WiseEating/Ayurveda/AyurvedaProfile.swift`: `@Model AyurvedaProfile`
@@ -58,6 +63,9 @@ is the gatekeeper (content integrity + full resolver simulation; must always pas
   show live computed preview + optional "Set manually" override → kind "user").
   ⚠ SwiftUI gotcha fixed in D8: an empty Group = EmptyView = no render node, so
   .task never fires — always anchor conditional sections with Color.clear.
+- `RecipeNutritionPanelView` (WE-2): existing glass-card/flow-layout language;
+  switches per serving/per 100g and displays the full 39-field nutrient catalog,
+  coverage state, and honest missing-slug evidence.
 - `WiseEating/Ayurveda/AyurvedaRecommendationGate.swift` (D9): set-driven
   never-recommend enforcement (engineExcluded profiles + linked fdcIds + AI
   free-text name screen) wired into all AI generation paths and the Siri intent;
@@ -65,11 +73,13 @@ is the gatekeeper (content integrity + full resolver simulation; must always pas
 - Test/automation support: launch argument `-uiTestNoAds` (SubscriptionManager
   returns .removeAds for that launch); banner ads gated on plan (was a real bug).
 - `WiseEating/Main/DBSeed/AyurvedaSeeder.swift` + hooks in `SeedManager.swift`
-  (after `seedFoodsIfNeeded`) and `DatabaseSetup.swift` (mainTypes): versioned
-  (UserDefaults `ayurvedaSeedVersion`), idempotent, fail-open; seeds 383
-  placeholder FoodItems (reserved ID band **900001–900383**) for dravyas with no
-  USDA analogue, and recipes as `FoodItem(isRecipe=true)` + `IngredientLink`
-  (nutrition aggregation and search work unchanged). Post-seed food total: 14,484.
+  (after `seedFoodsIfNeeded`) and `DatabaseSetup.swift` (mainTypes): the shipped
+  store already contains 383 placeholder FoodItems (reserved ID band
+  **900001–900383**), 1,500 recipe FoodItems/IngredientLinks, 2,214 profiles,
+  2,305 links, and the final search cache. Fresh install verifies the version-3
+  profile stamps and is a zero-insert/zero-update no-op. Existing stores use a
+  canonical-slug/fdcId upsert delta; ownership ambiguity aborts without touching
+  user data. Post-seed food total: 14,484.
 
 ## 3. Fixed decisions (do not relitigate without the founder)
 
@@ -118,13 +128,15 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | Thing | Count |
 |---|---|
 | Dravyas / recipes / profiles | 714 / 1,500 / 2,214 |
-| AyurvedaLink rows (v2) | 2,305 = 278 exact + 58 near + 1,969 derived |
+| AyurvedaLink rows (v3) | 2,305 = 278 exact + 58 near + 1,969 derived |
 | Tier coverage | classical 336 · derived 1,969 · estimated 10,296 = 12,601 |
 | Placeholder FoodItems | 383 (IDs 900001–900383) |
 | Post-seed ZFOODITEM total | 14,484 (12,601 + 383 + 1,500) |
 | Category rules / modifiers | 187 / 14 (modifiers fire on 6,357 foods) |
 | Crosswalk distinct dravyas | 166; contested 67; curated denies 2 |
-| Seed | seedVersion 2, deterministic sha-verifiable |
+| Recipe nutrition | 1,500 full · 0 estimated · 0 none; 39 fields × two bases |
+| Search cache | version 3 · 14,484 DB rows · 14,484 compact rows |
+| Seed | seedVersion 3, deterministic SHA-256 `1830a191…509b6` |
 
 ## 6. Milestone ledger (update after every task)
 
@@ -137,6 +149,7 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | D34 crosswalk+rules (all 12,601 classified) | ✅ COMPLETE — Mac founder gates green (Run 6, report `15cb1b2`): build, fresh install 2214/2305/383/1500/14484, idempotency, v1→v2 top-up 336→2305. Fixes: Sendable (`b96c014`), ObserversHub splits (`1159729`, `1bc94fc`) |
 | D8 Ayurveda UI (incl. D8.1 computed tier, D8.2 live editor preview) | ✅ COMPLETE (67e6983, pushed) — Ayurveda card on all food/recipe details (tier chip, center-zero dosha bars, ±/% toggle, rasa/virya/vipaka/guna chips, viruddha + contraindication warnings, engineExcluded banner, aiDraft disclaimer); computed tier for user recipes/menus (grams-weighted, coverage-gated, math-gated); editors: Add Food manual (neutral defaults), recipe/menu = live computed preview + optional manual override → kind "user". Fixes en route: render-node bug (empty Group killed .task), FoodItemCopy id type, banner-ad gating (real prod bug), -uiTestNoAds flag. Residuals: final Computed/User card screenshots skipped by founder decision; VoiceOver + dark-mode smoke deferred; catalog override-with-provenance deferred |
 | D9 engineExcluded recommendation enforcement | ✅ COMPLETE (`2a5dccf`, `f9394dc`) — data-driven gate excludes effective seed-v2 set `{900039, 900360}` across active meal-plan, diet, menu, recipe, and food generation; resolved IDs plus AI free-text aliases are screened; search remains visible. G1/G2/G4 green and G3 generation-path gate proven under the director amendment. Residual: on-device AI generation unverifiable on simulator; physical-device check pending — same residual class as prior founder gates. See `ayurveda-data/REPORT-D9.md` |
+| WE-2 recipe nutrition + build-time seed/index | ✅ COMPLETE — T1 `f545569`; all 1,500 recipes have USDA-component panels; final artifact is 14,484 foods / 2,214 profiles / 2,305 links with matching search cache; fresh install logs zero Ayurveda inserts/updates and no rebuild; first index-ready launch 499.74s→15.65s. See `ayurveda-data/REPORT-WE2.md` |
 | Expert review pass | ⏳ pending human reviewer: work aiDraft→reviewed, resolve reviewNotes, optional batch-31 top-up to 750 |
 | Later roadmap | media (yoga/meditation content), recommendation engine, dosha assessment — see ayurveda-data/RESTART-PLAN.md history |
 

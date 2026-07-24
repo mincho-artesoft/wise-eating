@@ -8,6 +8,7 @@ import csv, glob, gzip, json, os, re, sqlite3, sys
 from collections import Counter
 
 import build_seed
+import build_preseeded_store
 
 RASA = {"sweet", "sour", "salty", "pungent", "bitter", "astringent"}
 GUNA = {"heavy", "light", "oily", "dry", "sharp", "soft", "smooth", "rough",
@@ -167,8 +168,15 @@ def d34_validate(here, store, errs):
 
     try:
         connection = sqlite3.connect(store)
+        total_store_foods = connection.execute(
+            "SELECT COUNT(*) FROM ZFOODITEM"
+        ).fetchone()[0]
         store_rows = connection.execute(
-            "SELECT ZID, ZNAME, ZCATEGORY FROM ZFOODITEM ORDER BY ZID"
+            """
+            SELECT ZID, ZNAME, ZCATEGORY FROM ZFOODITEM
+            WHERE ZID BETWEEN 1 AND 12601
+            ORDER BY ZID
+            """
         ).fetchall()
         connection.close()
     except sqlite3.Error as error:
@@ -181,6 +189,16 @@ def d34_validate(here, store, errs):
     store_ids = set(foods)
     if len(store_ids) != 12601:
         errs.append(f"D34/store: expected 12601 foods, got {len(store_ids)}")
+    if total_store_foods == 14484:
+        try:
+            build_preseeded_store.audit_store(os.path.abspath(store))
+        except (build_preseeded_store.PreseedBuildError, sqlite3.Error) as error:
+            errs.append(f"WE2/preseed: {error}")
+    elif total_store_foods != 12601:
+        errs.append(
+            f"WE2/preseed: expected 12601 base or 14484 projected foods, "
+            f"got {total_store_foods}"
+        )
     missing_crosswalk_ids = sorted(set(crosswalk) - store_ids)
     if missing_crosswalk_ids:
         errs.append(f"D34/crosswalk.csv: fdcIds absent from store {missing_crosswalk_ids[:10]}")
