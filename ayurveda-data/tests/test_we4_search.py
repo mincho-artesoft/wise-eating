@@ -16,7 +16,7 @@ PARSER = (
     / "Constraints"
     / "CanonicalFacetParser.swift"
 )
-SEARCH_ENGINE = ROOT / "WiseEating" / "FoodSearch" / "VM" / "SmartFoodSearch 3.swift"
+SEARCH_ENGINE = ROOT / "WiseEating" / "FoodSearch" / "VM" / "SmartFoodSearchEngine.swift"
 INDEX_STORE = ROOT / "WiseEating" / "FoodSearch" / "SearchIndexStore.swift"
 SYNONYMS = ROOT / "WiseEating" / "FoodSearch" / "food_synonyms.json"
 SEED = ROOT / "WiseEating" / "ayurveda_seed.json.gz"
