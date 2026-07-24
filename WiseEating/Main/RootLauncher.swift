@@ -16,6 +16,12 @@ struct RootLauncher: View {
                 RootView()
                     .modelContainer(container)
                     .transition(.opacity.animation(.easeInOut))
+                    .onAppear {
+                        WE6LaunchProbe.event("root-view-appeared")
+                        DispatchQueue.main.async {
+                            WE6LaunchProbe.event("first-interactive-frame")
+                        }
+                    }
             } else {
                 ZStack {
                     ThemeBackgroundView()
@@ -40,6 +46,7 @@ struct RootLauncher: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
         .task(priority: .userInitiated) {
+            WE6LaunchProbe.event("root-task-begin")
             // 1. Намиране на цветове (Theme)
             let viewToRender = ThemeBackgroundView()
             let snapshot = viewToRender.renderAsImage(size: UIScreen.main.bounds.size)
@@ -53,16 +60,18 @@ struct RootLauncher: View {
                 effectManager.isLightRowTextColor = false
             }
             print("🎨 RootLauncher: Initial snapshot taken and accent color set.")
+            WE6LaunchProbe.event("theme-snapshot-end")
 
             // 2. Seeding (Попълване на базата и създаване на Cache Blob)
             await SeedManager.seedIfNeeded(container: container)
             
-            // ✅ ТУК Е ПРОМЯНАТА:
-            // Зареждаме индекса от базата в RAM паметта сега, за да не чакаме в търсачката.
-            print("🔎 RootLauncher: Preloading Search Index into memory...")
-            await SearchIndexStore.shared.ensureLoaded(container: container)
+            // FoodSearch performs the same version-checked load when its view opens.
+            // Keeping the 28 MB cache decode off the launch path makes first render
+            // independent of a feature the user may not open in this session.
+            WE6LaunchProbe.event("search-index-load-deferred")
                         
             let modelContext = container.mainContext
+            WE6LaunchProbe.event("calendar-load-begin")
             let calendarAccessGranted = await CalendarViewModel.shared.requestCalendarAccessIfNeeded()
             
             if calendarAccessGranted {
@@ -78,12 +87,14 @@ struct RootLauncher: View {
             } else {
                 print("Calendar access not granted. Skipping profile reconstruction from calendars.")
             }
+            WE6LaunchProbe.event("calendar-load-end")
 
             // 4. Готово - показваме UI
             if !isReady {
                 withAnimation {
                     isReady = true
                 }
+                WE6LaunchProbe.event("root-ready-set")
             }
         }
     }

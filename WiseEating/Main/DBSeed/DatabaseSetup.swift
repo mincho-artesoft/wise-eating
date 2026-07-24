@@ -1,11 +1,32 @@
 // ==== FILE: /Users/aleksandarsvinarov/Desktop/as/vitahealth-clean/WiseEating/Main/DBSeed/DatabaseSetup.swift ====
 import SwiftData
 import Foundation
+import os
+
+enum WE6LaunchProbe {
+    private static let signpostLog = OSLog(
+        subsystem: "WiseEating.Arte-Soft",
+        category: .pointsOfInterest
+    )
+    private static let isEnabled = ProcessInfo.processInfo.arguments.contains(
+        "-we6LaunchProfile"
+    )
+
+    static func event(_ name: StaticString) {
+        guard isEnabled else { return }
+        os_signpost(.event, log: signpostLog, name: name)
+        print(
+            "WE6_PROFILE|\(name)|"
+                + String(format: "%.6f", ProcessInfo.processInfo.systemUptime)
+        )
+    }
+}
 
 @MainActor
 struct DatabaseSetup {
     
     static func createContainer() -> ModelContainer {
+        WE6LaunchProbe.event("database-setup-begin")
         // 1. Дефинираме типовете за ОСНОВНАТА база (default.store)
         let mainTypes: [any PersistentModel.Type] = [
             Profile.self, UserSettings.self,
@@ -82,6 +103,7 @@ struct DatabaseSetup {
             // Използваме ключ, за да копираме само веднъж при първо стартиране на тази версия
             let didCopyDatabaseKey = "didCopyPreSeededDatabase_v1"
 
+            WE6LaunchProbe.event("preseed-check-begin")
             if usePreSeededDatabaseCopy && !UserDefaults.standard.bool(forKey: didCopyDatabaseKey) {
                 print("🏁 First launch with pre-seed logic. Preparing to copy databases…")
                 let fm = FileManager.default
@@ -145,9 +167,16 @@ struct DatabaseSetup {
             } else if usePreSeededDatabaseCopy {
                 print("🏁 Database already pre-seeded in a previous launch. Skipping copy.")
             }
+            WE6LaunchProbe.event("preseed-check-end")
             
             // Създаваме контейнера с двете именувани конфигурации
-            return try ModelContainer(for: fullSchema, configurations: [mainConfig, templateConfig])
+            WE6LaunchProbe.event("model-container-open-begin")
+            let container = try ModelContainer(
+                for: fullSchema,
+                configurations: [mainConfig, templateConfig]
+            )
+            WE6LaunchProbe.event("model-container-open-end")
+            return container
             
         } catch {
             fatalError("Failed to create model container: \(error)")

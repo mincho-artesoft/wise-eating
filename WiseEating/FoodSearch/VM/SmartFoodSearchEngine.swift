@@ -1316,62 +1316,40 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
     }
     
     // MARK: - Data Loading
-        @MainActor
-        func loadData() {
-            // 1. Ако локалният инстанс вече има данни - не правим нищо
-            if !allFoods.isEmpty {
-                if lastCanonicalQuery.isEmpty,
-                   lastActiveFilters.isEmpty,
-                   displayedResults.isEmpty {
-                    showDefaultResultsIfPossible()
-                }
-                return
-            }
-            
-            // 2. ⚡️ FAST PATH: Проверка дали Singleton Store вече има данни в паметта
-            // Тъй като и двете са @MainActor, можем да четем директно без await.
-            let store = SearchIndexStore.shared
-            if !store.compactFoods.isEmpty {
-                // Копираме референциите веднага (синхронно)
-                self.allFoods = store.compactFoods
-                self.compactMap = store.compactMap
-                self.invertedIndex = store.invertedIndex
-                self.ayurvedaFacetIndex = store.ayurvedaFacetIndex
-                self.vocabulary = store.vocabulary
-                self.maxNutrientValues = store.maxNutrientValues
-                self.cachedKnownDiets = store.knownDiets
-                self.nutrientRankings = store.nutrientRankings
-                
-                // Данните са готови веднага.
-                // Ако няма активно търсене, показваме дефолтните резултати.
-                if self.lastCanonicalQuery.isEmpty, self.lastActiveFilters.isEmpty {
-                    self.showDefaultResultsIfPossible()
-                }
-                return
-            }
+    @MainActor
+    func loadData() {
+        Task { await loadDataAndWait() }
+    }
 
-            // 3. SLOW PATH: Ако Store е празен, зареждаме асинхронно от базата
+    @MainActor
+    private func loadDataAndWait() async {
+        if allFoods.isEmpty {
             isLoading = true
-            Task {
-                await SearchIndexStore.shared.ensureLoaded(container: container)
-                await MainActor.run {
-                    let store = SearchIndexStore.shared
-                    self.allFoods = store.compactFoods
-                    self.compactMap = store.compactMap
-                    self.invertedIndex = store.invertedIndex
-                    self.ayurvedaFacetIndex = store.ayurvedaFacetIndex
-                    self.vocabulary = store.vocabulary
-                    self.maxNutrientValues = store.maxNutrientValues
-                    self.cachedKnownDiets = store.knownDiets
-                    self.nutrientRankings = store.nutrientRankings
-                    self.isLoading = false
-                    
-                    if self.lastCanonicalQuery.isEmpty, self.lastActiveFilters.isEmpty {
-                        self.showDefaultResultsIfPossible()
-                    }
-                }
-            }
+            await SearchIndexStore.shared.ensureLoaded(container: container)
+            applyLoadedIndex()
+            isLoading = false
         }
+
+        if lastCanonicalQuery.isEmpty,
+           lastActiveFilters.isEmpty,
+           displayedResults.isEmpty {
+            showDefaultResultsIfPossible()
+        }
+
+    }
+
+    @MainActor
+    private func applyLoadedIndex() {
+        let store = SearchIndexStore.shared
+        allFoods = store.compactFoods
+        compactMap = store.compactMap
+        invertedIndex = store.invertedIndex
+        ayurvedaFacetIndex = store.ayurvedaFacetIndex
+        vocabulary = store.vocabulary
+        maxNutrientValues = store.maxNutrientValues
+        cachedKnownDiets = store.knownDiets
+        nutrientRankings = store.nutrientRankings
+    }
     
     // MARK: - Diet Derivation
     
@@ -2059,7 +2037,7 @@ extension SmartFoodSearch3 {
     ) async -> [FoodItem] {
         // Make sure index is loaded (this may populate allFoods / invertedIndex / etc.)
         if allFoods.isEmpty {
-            await loadData()
+            await loadDataAndWait()
         }
 
         let canonicalQuery = SmartFoodSearch3.canonicalQuery(from: rawQuery)
@@ -2151,7 +2129,7 @@ extension SmartFoodSearch3 {
     ) async -> [CompactFoodItem] {
         // Ensure index is loaded
         if allFoods.isEmpty {
-            await loadData()
+            await loadDataAndWait()
         }
 
         let canonicalQuery = SmartFoodSearch3.canonicalQuery(from: rawQuery)

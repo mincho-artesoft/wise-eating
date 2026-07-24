@@ -7,6 +7,7 @@ enum SeedManager {
 
     // MARK: – Public entry point
     static func seedIfNeeded(container: ModelContainer) async {
+        WE6LaunchProbe.event("seed-checks-begin")
         print("🚀 Starting database seed process if needed...")
         let ctx = GlobalState.modelContext!
         ctx.autosaveEnabled = false
@@ -16,7 +17,9 @@ enum SeedManager {
         await seedReferenceMineralsIfNeeded(context: ctx)
         await seedReferenceDietsIfNeeded(context: ctx)
         await seedFoodsIfNeeded(context: ctx)
+        WE6LaunchProbe.event("ayurveda-check-begin")
         let ayurvedaChangedSearchableFoods = await seedAyurvedaIfNeeded(context: ctx)
+        WE6LaunchProbe.event("ayurveda-check-end")
         await seedExercisesIfNeeded(context: ctx)
         await seedTrainingPlansIfNeeded(context: ctx)
 
@@ -41,6 +44,7 @@ enum SeedManager {
 
         ctx.autosaveEnabled = true
         print("✅ Seeding process completed.")
+        WE6LaunchProbe.event("seed-checks-end")
     }
 
     // MARK: - Barcodes
