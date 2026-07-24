@@ -522,12 +522,8 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                 return true
             }
             
-            let rawPhCount: Int = {
-                let parts = searchQuery
-                    .lowercased()
-                    .components(separatedBy: CharacterSet.alphanumerics.inverted)
-                return parts.filter { $0 == "ph" }.count
-            }()
+            let queryBoundary = ConstraintQueryBoundary(searchQuery)
+            let rawPhCount = queryBoundary.count(of: "ph")
             
             let parsed = await Tokenizer.parse(
                 searchQuery,
@@ -617,12 +613,23 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             let lowerQuery = searchQuery.lowercased()
             let shouldUseConstraintEngine: Bool = {
                 if lowerQuery.rangeOfCharacter(from: .decimalDigits) != nil { return true }
-                if lowerQuery.contains("ph") || lowerQuery.contains("acid") || lowerQuery.contains("alkaline") { return true }
-                if lowerQuery.contains("free") || lowerQuery.contains("without") || lowerQuery.contains("no ") { return true }
-                if lowerQuery.contains("less than") || lowerQuery.contains("more than") ||
-                    lowerQuery.contains("at least") || lowerQuery.contains("at most") ||
-                    lowerQuery.contains("between") || lowerQuery.contains("from ") { return true }
-                if lowerQuery.contains("low ") || lowerQuery.contains("high ") || lowerQuery.contains("rich ") || lowerQuery.contains("poor ") { return true }
+                if queryBoundary.containsAnyToken(["ph", "acid", "alkaline"]) {
+                    return true
+                }
+                if queryBoundary.containsFreeConstraint()
+                    || queryBoundary.containsAnyToken(["without", "no"]) {
+                    return true
+                }
+                if queryBoundary.containsPhrase(["less", "than"])
+                    || queryBoundary.containsPhrase(["more", "than"])
+                    || queryBoundary.containsPhrase(["at", "least"])
+                    || queryBoundary.containsPhrase(["at", "most"])
+                    || queryBoundary.containsAnyToken(["between", "from"]) {
+                    return true
+                }
+                if queryBoundary.containsAnyToken(["low", "high", "rich", "poor"]) {
+                    return true
+                }
                 return false
             }()
             
@@ -1456,7 +1463,9 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
         func appendGoal(nutrientPhrase: String, opString: String?, value: Double, unitString: String?) -> Bool {
             let trimmedName = nutrientPhrase.trimmingCharacters(in: .whitespacesAndNewlines)
             guard !trimmedName.isEmpty else { return false }
-            if trimmedName.contains("ph") { return false }
+            if ConstraintQueryBoundary(trimmedName).containsToken("ph") {
+                return false
+            }
             guard let nutrient = SearchKnowledgeBase.shared.bestNutrientMatch(in: trimmedName) else { return false }
             
             let normalizedValue = normalizedNumericValue(value, unitString: unitString, for: nutrient)
