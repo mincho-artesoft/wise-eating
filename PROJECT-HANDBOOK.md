@@ -2,7 +2,7 @@
 **Read this first. It is the knowledge-transfer document for anyone (human or AI)
 taking over direction of this project. Update it at the end of every milestone —
 that is a standing rule baked into all task packets.**
-Last updated: 2026-07-25 (WE-6 complete — cold launch 1.662s median; next: expert review).
+Last updated: 2026-07-25 (WE-7 complete — dead Legacy Swift cluster removed; next: expert review).
 
 ## 1. Mission and the two applications
 
@@ -99,6 +99,11 @@ simulation; must always pass).
   seed-v3 profile stamps and is a zero-insert/zero-update no-op. Existing stores
   use a canonical-slug/fdcId upsert delta; ownership ambiguity aborts without
   touching user data. Post-seed food total: 14,484.
+- `WiseEating/Legacy/` after WE-7 contains only five live JSON fallback
+  resources (`foods`, `product_buckets`, `sports`, `vocabulary`, `workouts`).
+  The nine former Swift compiler inputs were entirely commented, had no inbound
+  references, and were removed as one proven-dead cluster. The synchronized
+  Xcode group now contributes zero Legacy Swift sources.
 
 ## 3. Fixed decisions (do not relitigate without the founder)
 
@@ -156,7 +161,8 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | Recipe nutrition | 1,500 full · 0 estimated · 0 none; 39 fields × two bases |
 | Search cache | version 4 · 14,484 DB/compact rows · 2,214 canonical faceted rows · 64 keys / 20,114 assignments |
 | Seed | seedVersion 3, deterministic SHA-256 `1830a191…509b6` |
-| Cold launch (WE-6, Debug simulator) | 3.405s → 1.662s median (−51.2%); first on-demand load + query 1.691s |
+| Cold launch (WE-6/WE-7, Debug simulator) | 3.405s → 1.662s; WE-7 rerun 1.504s median; first on-demand load + query 1.701s |
+| Legacy target (WE-7) | 9 dead Swift inputs removed · 5 live JSON fallback resources retained |
 
 ## 6. Milestone ledger (update after every task)
 
@@ -174,6 +180,7 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | WE-4 Ayurvedic FoodSearch facets | ✅ COMPLETE — version-4 prebuilt index carries 64 canonical keys / 20,114 assignments on exactly 2,214 seeded dravya/recipe rows; natural virya/dosha/agni/digestibility/season/category queries and three conservative Sanskrit aliases compose with existing search. All 25 legacy goldens are unchanged; worst pure-text median delta +0.3%; fresh install still performs zero inserts and no rebuild. See `ayurveda-data/REPORT-WE4.md` |
 | WE-5 FoodSearch border cases | ✅ COMPLETE — constrained nutrient and pH columns now remain visible with honest missing/zero semantics; Tokenizer + ConstraintMapper display provenance is unified; pH boundary/sentinel/count/sort behavior is centralized; command heuristics are token-boundary safe. All 25 WE-4 goldens remain exact, 34/34 repository tests pass, and pure-text median latency stays within the WE-4 +10% budget. Engine source is `VM/SmartFoodSearchEngine.swift`; `Legacy/` is untouched. See `ayurveda-data/REPORT-WE5.md` |
 | WE-6 cold-launch profiling | ✅ COMPLETE — opt-in signposts account for the full launch path; re-established baseline 3.405s, persisted-index phase 1.591s, final median 1.662s (−51.2%). Index version/count and rebuild rules are unchanged; awaited lazy loading preserves programmatic search, 25/25 goldens remain exact, worst latency delta +3.4%, and fresh install remains zero-insert/no-rebuild. See `ayurveda-data/REPORT-WE6.md` |
+| WE-7 Legacy target audit | ✅ COMPLETE — all 14 files classified before removal. Nine comment-only Swift compiler inputs formed one closed dead cluster and were removed; five JSON fallback resources remain live. Debug/Release builds, 38/38 tests, 25/25 goldens, 15/15 WE-5 border methods, fresh no-insert/no-rebuild, search latency, and 1.504s median cold launch are green. Release executable −416 bytes. See `ayurveda-data/REPORT-WE7.md` |
 | Expert review pass | ⏳ pending human reviewer: work aiDraft→reviewed, resolve reviewNotes, optional batch-31 top-up to 750 |
 | Later roadmap | media (yoga/meditation content), recommendation engine, dosha assessment — see ayurveda-data/RESTART-PLAN.md history |
 

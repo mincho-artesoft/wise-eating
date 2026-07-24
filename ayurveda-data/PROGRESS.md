@@ -108,6 +108,15 @@ load-plus-query returns real results in 1.691s, all 25 goldens remain exact, and
 the worst warm-query median delta is +3.4%. Fresh install remains zero Ayurveda
 inserts/updates and no search rebuild. See `REPORT-WE6.md`.
 
+WE-7 audited every shipping member under `WiseEating/Legacy/`. Nine Swift files
+were compiler inputs but consisted entirely of 2,288 commented lines, declared
+no compiled symbols, and had no static, interface, Objective-C runtime, selector,
+or string-based inbound reference; that single dead cluster was removed. The
+five JSON resources remain live runtime fallback inputs. Debug and Release
+builds, 38/38 tests, 25/25 goldens, all 15 WE-5 border methods, the latency
+budget, and fresh-install gates remain green; cold launch remeasured at 1.504s
+median. See `REPORT-WE7.md`.
+
 ## Next milestones
 
 1. **Engineering track COMPLETE** — D6 (models+seeder), D34 (all 12,601 foods
@@ -115,10 +124,12 @@ inserts/updates and no search rebuild. See `REPORT-WE6.md`.
    D9 (engineExcluded enforcement), WE-2 (full recipe nutrition + build-time
    projection/search cache), WE-3 (founder-approved read-only display card),
    WE-4 (canonical indexed Ayurveda search facets), and WE-5 (FoodSearch
-   border-case closure), and WE-6 (cold-launch profiling + lazy index load).
+   border-case closure), WE-6 (cold-launch profiling + lazy index load), and
+   WE-7 (legacy target audit + proven-dead Swift cluster removal).
    See PROJECT-HANDBOOK.md §6 ledger and `REPORT-WE2.md` / `REPORT-WE3.md` /
    `REPORT-WE4.md` / `REPORT-WE5.md` / `REPORT-WE6.md` for gates, timing,
-   screenshots, accessibility, and search evidence.
+   screenshots, accessibility, search, and `REPORT-WE7.md` for legacy audit
+   evidence.
 2. **Expert review — the remaining item.** Work aiDraft→reviewed across
    dravyas/recipes/rules, resolve all reviewNote flags, optional batch-31
    top-up to 750. Director can generate a reviewer packet on request.
