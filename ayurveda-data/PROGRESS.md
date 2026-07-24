@@ -73,8 +73,9 @@ Current status: **714 dravyas, 1,500 recipes — all checks pass.**
 
 The reconstructed shipped store is now the full build-time artifact: 14,484
 foods, 2,214 seed-v3 canonical profiles, 2,305 links, 1,500 full recipe panels,
-and a version-3 search cache for exactly 14,484 foods. Fresh install performs
-zero Ayurveda inserts/updates and no index rebuild. See `REPORT-WE2.md`.
+and a version-4 search cache for exactly 14,484 foods, including canonical
+facets on 2,214 rows. Fresh install performs zero Ayurveda inserts/updates and
+no index rebuild. See `REPORT-WE2.md` and `REPORT-WE4.md`.
 
 WE-3 restyles the read-only Ayurveda card with semantic center-zero dosha
 scales, wrapping property chips, always-visible warning rows, explicit
@@ -82,14 +83,23 @@ light/dark tokens, and largest-Dynamic-Type layouts. The four deterministic
 light/dark × default/accessibility snapshots and all contrast evidence are in
 `REPORT-WE3.md`; editor behavior and content remain unchanged.
 
+WE-4 upgrades the shipped search cache to version 4 with 64 canonical Ayurveda
+facet keys / 20,114 assignments on exactly the 2,214 seeded profiles. Natural
+virya, dosha, agni/digestibility, season/ritu, and category speech plus
+`ushna`, `sheeta`, and `deepana` compose with existing text/nutrient queries.
+All 25 legacy golden queries remain exact; plain USDA rows have no facets;
+fresh install still performs zero inserts and no rebuild. See `REPORT-WE4.md`.
+
 ## Next milestones
 
 1. **Engineering track COMPLETE** — D6 (models+seeder), D34 (all 12,601 foods
    classified), D8/D8.1/D8.2 (UI end to end incl. computed tier + editors),
    D9 (engineExcluded enforcement), WE-2 (full recipe nutrition + build-time
-   projection/search cache), and WE-3 (founder-approved read-only display card).
-   See PROJECT-HANDBOOK.md §6 ledger and `REPORT-WE2.md` / `REPORT-WE3.md` for
-   gates, timing, screenshots, and accessibility evidence.
+   projection/search cache), WE-3 (founder-approved read-only display card),
+   and WE-4 (canonical indexed Ayurveda search facets).
+   See PROJECT-HANDBOOK.md §6 ledger and `REPORT-WE2.md` / `REPORT-WE3.md` /
+   `REPORT-WE4.md` for gates, timing, screenshots, accessibility, and search
+   evidence.
 2. **Expert review — the remaining item.** Work aiDraft→reviewed across
    dravyas/recipes/rules, resolve all reviewNote flags, optional batch-31
    top-up to 750. Director can generate a reviewer packet on request.
@@ -97,8 +107,8 @@ light/dark × default/accessibility snapshots and all contrast evidence are in
    generation run (D9 G3 environmental residual), Computed/User card
    screenshots, and physical-device VoiceOver smoke. WE-3's deterministic
    default/largest-type light/dark matrix is complete.
-4. **Optional future scope** (new product decisions, not leftovers): dosha-based
-   search filters, prakriti assessment/personalization, and profiling the
+4. **Optional future scope** (new product decisions, not leftovers): visible
+   search facet chips, prakriti assessment/personalization, and profiling the
    measured +1.34s cold cached-index load — best after expert review.
 
 

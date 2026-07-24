@@ -41,7 +41,7 @@ and must always be shown in UI.
 `WiseEating/ayurveda_seed.json.gz` (seedVersion 3; sha-verifiable) +
 `WiseEating/ayurveda_rules.json`. `ayurveda-data/build_preseeded_store.py`
 audits/compacts a completed 14,484-row store and emits the two bundled gzip
-parts, including the version-3 search cache. `ayurveda-data/validate.py --store
+parts, including the version-4 search cache. `ayurveda-data/validate.py --store
 /tmp/pre` is the gatekeeper (content integrity + full resolver and preseed
 simulation; must always pass).
 
@@ -68,6 +68,11 @@ simulation; must always pass).
 - `RecipeNutritionPanelView` (WE-2): existing glass-card/flow-layout language;
   switches per serving/per 100g and displays the full 39-field nutrient catalog,
   coverage state, and honest missing-slug evidence.
+- `WiseEating/FoodSearch/` (WE-4): version-4 compact cache persists canonical
+  virya/dosha/agni/digestibility/season/category/concept facet sets and a
+  separate inverted facet index on exactly the 2,214 seeded profiles.
+  `CanonicalFacetParser` removes only validated natural/explicit facet speech
+  before the existing tokenizer; plain USDA rows remain un-faceted.
 - `WiseEating/Ayurveda/AyurvedaRecommendationGate.swift` (D9): set-driven
   never-recommend enforcement (engineExcluded profiles + linked fdcIds + AI
   free-text name screen) wired into all AI generation paths and the Siri intent;
@@ -78,10 +83,10 @@ simulation; must always pass).
   (after `seedFoodsIfNeeded`) and `DatabaseSetup.swift` (mainTypes): the shipped
   store already contains 383 placeholder FoodItems (reserved ID band
   **900001–900383**), 1,500 recipe FoodItems/IngredientLinks, 2,214 profiles,
-  2,305 links, and the final search cache. Fresh install verifies the version-3
-  profile stamps and is a zero-insert/zero-update no-op. Existing stores use a
-  canonical-slug/fdcId upsert delta; ownership ambiguity aborts without touching
-  user data. Post-seed food total: 14,484.
+  2,305 links, and the final version-4 search cache. Fresh install verifies the
+  seed-v3 profile stamps and is a zero-insert/zero-update no-op. Existing stores
+  use a canonical-slug/fdcId upsert delta; ownership ambiguity aborts without
+  touching user data. Post-seed food total: 14,484.
 
 ## 3. Fixed decisions (do not relitigate without the founder)
 
@@ -137,7 +142,7 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | Category rules / modifiers | 187 / 14 (modifiers fire on 6,357 foods) |
 | Crosswalk distinct dravyas | 166; contested 67; curated denies 2 |
 | Recipe nutrition | 1,500 full · 0 estimated · 0 none; 39 fields × two bases |
-| Search cache | version 3 · 14,484 DB rows · 14,484 compact rows |
+| Search cache | version 4 · 14,484 DB/compact rows · 2,214 canonical faceted rows · 64 keys / 20,114 assignments |
 | Seed | seedVersion 3, deterministic SHA-256 `1830a191…509b6` |
 
 ## 6. Milestone ledger (update after every task)
@@ -153,6 +158,7 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | D9 engineExcluded recommendation enforcement | ✅ COMPLETE (`2a5dccf`, `f9394dc`) — data-driven gate excludes effective seed-v2 set `{900039, 900360}` across active meal-plan, diet, menu, recipe, and food generation; resolved IDs plus AI free-text aliases are screened; search remains visible. G1/G2/G4 green and G3 generation-path gate proven under the director amendment. Residual: on-device AI generation unverifiable on simulator; physical-device check pending — same residual class as prior founder gates. See `ayurveda-data/REPORT-D9.md` |
 | WE-2 recipe nutrition + build-time seed/index | ✅ COMPLETE — T1 `f545569`; all 1,500 recipes have USDA-component panels; final artifact is 14,484 foods / 2,214 profiles / 2,305 links with matching search cache; fresh install logs zero Ayurveda inserts/updates and no rebuild; first index-ready launch 499.74s→15.65s. See `ayurveda-data/REPORT-WE2.md` |
 | WE-3 Ayurveda display card redesign | ✅ COMPLETE — founder-approved warm read-only card; signed word/value dosha rows, semantic center-zero scales, wrapping glyph chips, always-visible warnings, plain disclaimer, Reduce Motion, and one-element dosha accessibility. Four light/dark × default/largest-type snapshots pass; minimum measured contrast 5.52:1. Editor behavior and lifecycle/claims boundaries unchanged. See `ayurveda-data/REPORT-WE3.md` |
+| WE-4 Ayurvedic FoodSearch facets | ✅ COMPLETE — version-4 prebuilt index carries 64 canonical keys / 20,114 assignments on exactly 2,214 seeded dravya/recipe rows; natural virya/dosha/agni/digestibility/season/category queries and three conservative Sanskrit aliases compose with existing search. All 25 legacy goldens are unchanged; worst pure-text median delta +0.3%; fresh install still performs zero inserts and no rebuild. See `ayurveda-data/REPORT-WE4.md` |
 | Expert review pass | ⏳ pending human reviewer: work aiDraft→reviewed, resolve reviewNotes, optional batch-31 top-up to 750 |
 | Later roadmap | media (yoga/meditation content), recommendation engine, dosha assessment — see ayurveda-data/RESTART-PLAN.md history |
 
