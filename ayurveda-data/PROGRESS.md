@@ -100,6 +100,14 @@ the WE-4 median-latency budget remains green. The active engine source is
 `WiseEating/FoodSearch/VM/SmartFoodSearchEngine.swift`; `WiseEating/Legacy/`
 was not touched. See `REPORT-WE5.md`.
 
+WE-6 signpost profiling re-established the cold-process baseline at 3.405s and
+identified the persisted search-index decode as the dominant 1.591s launch
+phase. The same version-checked cache now loads on first FoodSearch use instead
+of before the root view. Median launch is 1.662s (−51.2%); the first lazy
+load-plus-query returns real results in 1.691s, all 25 goldens remain exact, and
+the worst warm-query median delta is +3.4%. Fresh install remains zero Ayurveda
+inserts/updates and no search rebuild. See `REPORT-WE6.md`.
+
 ## Next milestones
 
 1. **Engineering track COMPLETE** — D6 (models+seeder), D34 (all 12,601 foods
@@ -107,10 +115,10 @@ was not touched. See `REPORT-WE5.md`.
    D9 (engineExcluded enforcement), WE-2 (full recipe nutrition + build-time
    projection/search cache), WE-3 (founder-approved read-only display card),
    WE-4 (canonical indexed Ayurveda search facets), and WE-5 (FoodSearch
-   border-case closure).
+   border-case closure), and WE-6 (cold-launch profiling + lazy index load).
    See PROJECT-HANDBOOK.md §6 ledger and `REPORT-WE2.md` / `REPORT-WE3.md` /
-   `REPORT-WE4.md` / `REPORT-WE5.md` for gates, timing, screenshots,
-   accessibility, and search evidence.
+   `REPORT-WE4.md` / `REPORT-WE5.md` / `REPORT-WE6.md` for gates, timing,
+   screenshots, accessibility, and search evidence.
 2. **Expert review — the remaining item.** Work aiDraft→reviewed across
    dravyas/recipes/rules, resolve all reviewNote flags, optional batch-31
    top-up to 750. Director can generate a reviewer packet on request.
@@ -119,8 +127,9 @@ was not touched. See `REPORT-WE5.md`.
    screenshots, and physical-device VoiceOver smoke. WE-3's deterministic
    default/largest-type light/dark matrix is complete.
 4. **Optional future scope** (new product decisions, not leftovers): visible
-   search facet chips, prakriti assessment/personalization, and profiling the
-   measured +1.34s cold cached-index load — best after expert review.
+   search facet chips, prakriti assessment/personalization, physical-device
+   launch signpost capture, and off-main first-search index decoding — best
+   after expert review.
 
 
 Git note (sandbox sessions): stale locks workaround — `GIT_INDEX_FILE=/tmp/ayur_index`,

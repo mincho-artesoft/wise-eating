@@ -2,7 +2,7 @@
 **Read this first. It is the knowledge-transfer document for anyone (human or AI)
 taking over direction of this project. Update it at the end of every milestone —
 that is a standing rule baked into all task packets.**
-Last updated: 2026-07-24 (WE-5 complete — FoodSearch border cases closed; next: expert review).
+Last updated: 2026-07-25 (WE-6 complete — cold launch 1.662s median; next: expert review).
 
 ## 1. Mission and the two applications
 
@@ -78,13 +78,19 @@ simulation; must always pass).
   uses one exclusive boundary definition (`low < 7`, `high > 7`, neutral
   6.5…7.5). Unknown-pH filtered rows are counted, pH sort-only mode exposes its
   column, and command heuristics use token boundaries so phosphorus/sulphate/
-  phyllo/freeze do not accidentally activate pH or negation modes.
+  phyllo/freeze do not accidentally activate pH or negation modes. WE-6 keeps
+  the 28 MB persisted index off the cold-launch path: views start loading it
+  nonblockingly on entry, while programmatic `searchCompact`/`searchResults`
+  await the same version-checked load before taking an index snapshot.
 - `WiseEating/Ayurveda/AyurvedaRecommendationGate.swift` (D9): set-driven
   never-recommend enforcement (engineExcluded profiles + linked fdcIds + AI
   free-text name screen) wired into all AI generation paths and the Siri intent;
   search deliberately NOT filtered (decision 3).
 - Test/automation support: launch argument `-uiTestNoAds` (SubscriptionManager
   returns .removeAds for that launch); banner ads gated on plan (was a real bug).
+  `-we6LaunchProfile` enables opt-in Points of Interest plus monotonic launch
+  timestamps through the first interactive frame; ordinary launches emit no
+  WE-6 probe output.
 - `WiseEating/Main/DBSeed/AyurvedaSeeder.swift` + hooks in `SeedManager.swift`
   (after `seedFoodsIfNeeded`) and `DatabaseSetup.swift` (mainTypes): the shipped
   store already contains 383 placeholder FoodItems (reserved ID band
@@ -150,6 +156,7 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | Recipe nutrition | 1,500 full · 0 estimated · 0 none; 39 fields × two bases |
 | Search cache | version 4 · 14,484 DB/compact rows · 2,214 canonical faceted rows · 64 keys / 20,114 assignments |
 | Seed | seedVersion 3, deterministic SHA-256 `1830a191…509b6` |
+| Cold launch (WE-6, Debug simulator) | 3.405s → 1.662s median (−51.2%); first on-demand load + query 1.691s |
 
 ## 6. Milestone ledger (update after every task)
 
@@ -166,6 +173,7 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | WE-3 Ayurveda display card redesign | ✅ COMPLETE — founder-approved warm read-only card; signed word/value dosha rows, semantic center-zero scales, wrapping glyph chips, always-visible warnings, plain disclaimer, Reduce Motion, and one-element dosha accessibility. Four light/dark × default/largest-type snapshots pass; minimum measured contrast 5.52:1. Editor behavior and lifecycle/claims boundaries unchanged. See `ayurveda-data/REPORT-WE3.md` |
 | WE-4 Ayurvedic FoodSearch facets | ✅ COMPLETE — version-4 prebuilt index carries 64 canonical keys / 20,114 assignments on exactly 2,214 seeded dravya/recipe rows; natural virya/dosha/agni/digestibility/season/category queries and three conservative Sanskrit aliases compose with existing search. All 25 legacy goldens are unchanged; worst pure-text median delta +0.3%; fresh install still performs zero inserts and no rebuild. See `ayurveda-data/REPORT-WE4.md` |
 | WE-5 FoodSearch border cases | ✅ COMPLETE — constrained nutrient and pH columns now remain visible with honest missing/zero semantics; Tokenizer + ConstraintMapper display provenance is unified; pH boundary/sentinel/count/sort behavior is centralized; command heuristics are token-boundary safe. All 25 WE-4 goldens remain exact, 34/34 repository tests pass, and pure-text median latency stays within the WE-4 +10% budget. Engine source is `VM/SmartFoodSearchEngine.swift`; `Legacy/` is untouched. See `ayurveda-data/REPORT-WE5.md` |
+| WE-6 cold-launch profiling | ✅ COMPLETE — opt-in signposts account for the full launch path; re-established baseline 3.405s, persisted-index phase 1.591s, final median 1.662s (−51.2%). Index version/count and rebuild rules are unchanged; awaited lazy loading preserves programmatic search, 25/25 goldens remain exact, worst latency delta +3.4%, and fresh install remains zero-insert/no-rebuild. See `ayurveda-data/REPORT-WE6.md` |
 | Expert review pass | ⏳ pending human reviewer: work aiDraft→reviewed, resolve reviewNotes, optional batch-31 top-up to 750 |
 | Later roadmap | media (yoga/meditation content), recommendation engine, dosha assessment — see ayurveda-data/RESTART-PLAN.md history |
 
