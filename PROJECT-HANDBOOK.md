@@ -130,6 +130,8 @@ simulation; must always pass).
    percentage views are derived in UI, never stored.
 7. No beef dravya (deliberate); ~991 beef foods classify via estimated tier.
 8. Recipes ARE FoodItems (`isRecipe=true`) — not a separate table.
+9. Unresolved safety metadata fails the build rather than defaulting
+   permissively.
 
 ## 4. Working process (the pattern that built all of this)
 
@@ -174,7 +176,7 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | WE-8 safety projection | 2,214 review-required rows · 156 allergen dravyas · 1,182 allergen recipes · 749 Vegan recipes |
 | Search cache | version 4 · 14,484 DB/compact rows · 2,214 canonical faceted rows · 64 keys / 20,114 assignments |
 | Seed | seedVersion 4, deterministic SHA-256 `e4bfcd63…5156` |
-| Cold launch (WE-6/WE-7/WE-8, Debug simulator) | 3.405s → 1.662s; WE-7 1.504s; WE-8 1.592s median; first on-demand load + query 1.701s |
+| Cold launch (WE-6/WE-7/WE-8, Debug simulator) | 3.405s → 1.662s; registry baseline WE-7 1.504s → WE-8 1.592s median (+5.9%), a deliberate safety-metadata trade associated with +478,317 bytes of preseed growth; first on-demand load + query 1.701s |
 | Legacy target (WE-7) | 9 dead Swift inputs removed · 5 live JSON fallback resources retained |
 
 ## 6. Milestone ledger (update after every task)
