@@ -156,7 +156,7 @@ class PreseedArtifactTests(unittest.TestCase):
             """
         ).fetchone()
         self.assertEqual(cache_count, food_count)
-        self.assertEqual(version, 4)
+        self.assertEqual(version, 5)
         decoded = json.loads(payload)
         self.assertEqual(len(decoded["compactFoods"]), food_count)
         self.assertEqual(
