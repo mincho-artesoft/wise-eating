@@ -13,13 +13,17 @@ enum AyurvedaSeeder {
     var updatedLinks = 0
     var replacedIngredientSets = 0
     var updatedRecipeFoods = 0
+    var updatedSafetyFoods = 0
 
     var insertedRows: Int {
       insertedFoods + insertedProfiles + insertedLinks
     }
 
     var changedSearchableFoods: Bool {
-      insertedFoods > 0 || updatedRecipeFoods > 0 || replacedIngredientSets > 0
+      insertedFoods > 0
+        || updatedRecipeFoods > 0
+        || updatedSafetyFoods > 0
+        || replacedIngredientSets > 0
     }
 
     var isNoOp: Bool {
@@ -28,6 +32,7 @@ enum AyurvedaSeeder {
         && updatedLinks == 0
         && replacedIngredientSets == 0
         && updatedRecipeFoods == 0
+        && updatedSafetyFoods == 0
     }
   }
 
@@ -46,12 +51,17 @@ enum AyurvedaSeeder {
       let linkByFdcID = try makeLinkMap(existingLinks)
       let allFoods = try context.fetch(FetchDescriptor<FoodItem>())
       var foodByID = try makeFoodMap(allFoods)
+      let allDiets = try context.fetch(FetchDescriptor<Diet>())
+      let dietByName = Dictionary(
+        uniqueKeysWithValues: allDiets.map { ($0.name, $0) }
+      )
 
       try validateCanonicalOwnership(
         seed: seed,
         profileByID: profileByID,
         foodByID: foodByID
       )
+      try validateSafetyDietTargets(seed: seed, dietByName: dietByName)
 
       if storeHasCurrentSeed(
         seed: seed,
@@ -82,6 +92,22 @@ enum AyurvedaSeeder {
         }
       }
       try validateIngredientTargets(seed.recipes, foodByID: foodByID)
+
+      for dravya in seed.dravyas {
+        guard let food = foodByID[dravya.foodId] else {
+          throw AyurvedaSeederError.missingIngredientFood(
+            recipeId: dravya.id,
+            foodId: dravya.foodId
+          )
+        }
+        if try updateSafetyMetadata(
+          dravya.safety,
+          food: food,
+          dietByName: dietByName
+        ) {
+          result.updatedSafetyFoods += 1
+        }
+      }
 
       for dravya in seed.dravyas {
         if let profile = profileByID[dravya.id] {
@@ -125,6 +151,13 @@ enum AyurvedaSeeder {
           if updateRecipeFoodMetadata(recipe, food: recipeFood) {
             result.updatedRecipeFoods += 1
           }
+          if try updateSafetyMetadata(
+            recipe.safety,
+            food: recipeFood,
+            dietByName: dietByName
+          ) {
+            result.updatedSafetyFoods += 1
+          }
           if !ingredientSetMatches(recipe, food: recipeFood) {
             try replaceIngredients(
               for: recipe,
@@ -144,6 +177,11 @@ enum AyurvedaSeeder {
             itemDescription: recipeDescription(recipe)
           )
           context.insert(recipeFood)
+          _ = try updateSafetyMetadata(
+            recipe.safety,
+            food: recipeFood,
+            dietByName: dietByName
+          )
           try replaceIngredients(
             for: recipe,
             food: recipeFood,
@@ -176,7 +214,8 @@ enum AyurvedaSeeder {
           + "inserted \(result.insertedRows) rows "
           + "(\(result.insertedFoods) foods, \(result.insertedProfiles) profiles, "
           + "\(result.insertedLinks) links); updated \(result.updatedProfiles) profiles, "
-          + "\(result.updatedLinks) links, \(result.updatedRecipeFoods) recipe foods; "
+          + "\(result.updatedLinks) links, \(result.updatedRecipeFoods) recipe foods, "
+          + "\(result.updatedSafetyFoods) safety rows; "
           + "replaced \(result.replacedIngredientSets) ingredient sets."
       )
       return result
@@ -211,6 +250,7 @@ enum AyurvedaSeeder {
       seed.counts.nutrition.full
         + seed.counts.nutrition.estimated
         + seed.counts.nutrition.none == seed.counts.recipes,
+      seed.counts.safety.profiles == seed.counts.dravyas + seed.counts.recipes,
       seed.dravyas.count == seed.counts.dravyas,
       seed.recipes.count == seed.counts.recipes,
       seed.links.count == seed.counts.links,
@@ -226,9 +266,22 @@ enum AyurvedaSeeder {
     guard seed.recipes.allSatisfy({
       validNutritionStates.contains($0.nutrition.status)
         && ($0.nutrition.status != "full" || $0.nutrition.missingIngredients.isEmpty)
-        && $0.nutrition.totalWeightG > 0
+      && $0.nutrition.totalWeightG > 0
     }) else {
       throw AyurvedaSeederError.invalidNutrition
+    }
+    let safetyRows = seed.dravyas.map(\.safety) + seed.recipes.map(\.safety)
+    guard safetyRows.count == seed.counts.safety.profiles,
+      safetyRows.allSatisfy({
+        $0.provenance == "scaffold-default"
+          && $0.reviewRequired
+          && $0.minAgeMonths >= 0
+          && Set($0.allergens).count == $0.allergens.count
+          && Set($0.diets).count == $0.diets.count
+          && !$0.rules.isEmpty
+      })
+    else {
+      throw AyurvedaSeederError.invalidSafetyMetadata
     }
   }
 
@@ -370,6 +423,56 @@ enum AyurvedaSeeder {
         }
       }
     }
+  }
+
+  private static func validateSafetyDietTargets(
+    seed: AyurvedaSeedDTO,
+    dietByName: [String: Diet]
+  ) throws {
+    let safetyRows = seed.dravyas.map(\.safety) + seed.recipes.map(\.safety)
+    for safety in safetyRows {
+      for diet in safety.diets where dietByName[diet] == nil {
+        throw AyurvedaSeederError.missingSafetyDiet(diet)
+      }
+      for allergen in safety.allergens where Allergen(rawValue: allergen) == nil {
+        throw AyurvedaSeederError.invalidSafetyAllergen(allergen)
+      }
+    }
+  }
+
+  private static func safetyMetadataMatches(
+    _ safety: SafetyMetadataDTO,
+    food: FoodItem
+  ) -> Bool {
+    let actualDiets = Set((food.diets ?? []).map(\.name))
+    let actualAllergens = Set((food.allergens ?? []).map(\.rawValue))
+    return actualDiets == Set(safety.diets)
+      && actualAllergens == Set(safety.allergens)
+      && food.minAgeMonths == safety.minAgeMonths
+  }
+
+  private static func updateSafetyMetadata(
+    _ safety: SafetyMetadataDTO,
+    food: FoodItem,
+    dietByName: [String: Diet]
+  ) throws -> Bool {
+    guard !safetyMetadataMatches(safety, food: food) else {
+      return false
+    }
+    food.diets = try safety.diets.map { dietName in
+      guard let diet = dietByName[dietName] else {
+        throw AyurvedaSeederError.missingSafetyDiet(dietName)
+      }
+      return diet
+    }
+    food.allergens = try safety.allergens.map { allergenName in
+      guard let allergen = Allergen(rawValue: allergenName) else {
+        throw AyurvedaSeederError.invalidSafetyAllergen(allergenName)
+      }
+      return allergen
+    }
+    food.minAgeMonths = safety.minAgeMonths
+    return true
   }
 
   private static func recipeFoodMetadataMatches(
@@ -668,6 +771,9 @@ private enum AyurvedaSeederError: Error, LocalizedError {
   case invalidServings(String)
   case invalidNutrition
   case invalidNutritionJSON(String)
+  case invalidSafetyMetadata
+  case missingSafetyDiet(String)
+  case invalidSafetyAllergen(String)
 
   var errorDescription: String? {
     switch self {
@@ -697,6 +803,12 @@ private enum AyurvedaSeederError: Error, LocalizedError {
       return "the Ayurveda seed contains invalid recipe nutrition"
     case .invalidNutritionJSON(let recipeId):
       return "recipe \(recipeId) nutrition cannot be encoded as JSON"
+    case .invalidSafetyMetadata:
+      return "the Ayurveda seed contains invalid scaffold-default safety metadata"
+    case .missingSafetyDiet(let diet):
+      return "the Ayurveda seed references missing Diet \(diet)"
+    case .invalidSafetyAllergen(let allergen):
+      return "the Ayurveda seed references unsupported allergen \(allergen)"
     }
   }
 }
@@ -719,12 +831,31 @@ private struct AyurvedaSeedCountsDTO: Decodable {
   let categoryRules: Int
   let modifiers: Int
   let nutrition: RecipeNutritionCountsDTO
+  let safety: SafetyMetadataCountsDTO
 }
 
 private struct RecipeNutritionCountsDTO: Decodable {
   let full: Int
   let estimated: Int
   let none: Int
+}
+
+private struct SafetyMetadataCountsDTO: Decodable {
+  let profiles: Int
+  let allergenTaggedDravyas: Int
+  let allergenTaggedRecipes: Int
+  let honeyMinAgeDravyas: Int
+  let honeyMinAgeRecipes: Int
+}
+
+private struct SafetyMetadataDTO: Decodable {
+  let allergens: [String]
+  let diets: [String]
+  let minAgeMonths: Int
+  let provenance: String
+  let reviewRequired: Bool
+  let rules: [String]
+  let reviewFlags: [String]
 }
 
 private struct DoshaDTO: Decodable {
@@ -771,6 +902,7 @@ private struct DravyaDTO: Decodable {
   let foodId: Int
   let foodIsPlaceholder: Bool
   let engineExcluded: Bool
+  let safety: SafetyMetadataDTO
 }
 
 private struct RecipeIngredientDTO: Decodable {
@@ -800,6 +932,7 @@ private struct RecipeDTO: Decodable {
   let reviewNote: String?
   let foodId: Int
   let nutrition: RecipeNutritionDTO
+  let safety: SafetyMetadataDTO
 }
 
 private struct RecipeNutritionDTO: Decodable {

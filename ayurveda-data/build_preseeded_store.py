@@ -21,7 +21,11 @@ EXPECTED = {
     "cacheFoods": 14_484,
     "cacheVersion": 4,
     "facetFoods": 2_214,
-    "seedVersion": 3,
+    "seedVersion": 4,
+    "ingredientLinks": 10_571,
+    "ingredientOwners": 1_500,
+    "allergenTaggedDravyas": 156,
+    "allergenTaggedRecipes": 1_182,
 }
 PART_SIZE = 70 * 1024 * 1024
 
@@ -177,6 +181,27 @@ def audit_store(path: Path) -> dict[str, int]:
             EXPECTED["recipes"],
         )
         require_equal(
+            "IngredientLink count",
+            scalar(connection, "SELECT COUNT(*) FROM ZINGREDIENTLINK"),
+            EXPECTED["ingredientLinks"],
+        )
+        require_equal(
+            "IngredientLink recipe owners",
+            scalar(
+                connection,
+                "SELECT COUNT(DISTINCT ZOWNER) FROM ZINGREDIENTLINK",
+            ),
+            EXPECTED["ingredientOwners"],
+        )
+        require_equal(
+            "IngredientLink positive grams",
+            scalar(
+                connection,
+                "SELECT COUNT(*) FROM ZINGREDIENTLINK WHERE ZGRAMS > 0",
+            ),
+            EXPECTED["ingredientLinks"],
+        )
+        require_equal(
             "AyurvedaLink count",
             scalar(connection, "SELECT COUNT(*) FROM ZAYURVEDALINK"),
             EXPECTED["links"],
@@ -237,6 +262,28 @@ def audit_store(path: Path) -> dict[str, int]:
             EXPECTED["facetFoods"],
         )
         compact_by_id = {food["id"]: food for food in compact_foods}
+        dravya_food_ids = {
+            row[0]
+            for row in connection.execute(
+                "SELECT ZFOODID FROM ZAYURVEDAPROFILE WHERE ZKIND = 'dravya'"
+            )
+        }
+        recipe_food_ids = {
+            row[0]
+            for row in connection.execute(
+                "SELECT ZFOODID FROM ZAYURVEDAPROFILE WHERE ZKIND = 'recipe'"
+            )
+        }
+        require_equal(
+            "allergen-tagged canonical dravyas",
+            sum(bool(compact_by_id[food_id]["allergens"]) for food_id in dravya_food_ids),
+            EXPECTED["allergenTaggedDravyas"],
+        )
+        require_equal(
+            "allergen-tagged canonical recipes",
+            sum(bool(compact_by_id[food_id]["allergens"]) for food_id in recipe_food_ids),
+            EXPECTED["allergenTaggedRecipes"],
+        )
         faceted_food_ids = {
             food_id
             for food_id, food in compact_by_id.items()
@@ -296,6 +343,8 @@ def audit_store(path: Path) -> dict[str, int]:
             "foods": EXPECTED["foods"],
             "profiles": EXPECTED["profiles"],
             "links": EXPECTED["links"],
+            "ingredientLinks": EXPECTED["ingredientLinks"],
+            "ingredientOwners": EXPECTED["ingredientOwners"],
             "cacheFoods": cache_foods,
             "cacheVersion": cache_version,
             "facetFoods": len(faceted_food_ids),
@@ -303,6 +352,8 @@ def audit_store(path: Path) -> dict[str, int]:
             "facetAssignments": sum(
                 len(food.get("ayurvedaFacets", [])) for food in compact_foods
             ),
+            "allergenTaggedDravyas": EXPECTED["allergenTaggedDravyas"],
+            "allergenTaggedRecipes": EXPECTED["allergenTaggedRecipes"],
             "payloadBytes": len(payload_data),
         }
 

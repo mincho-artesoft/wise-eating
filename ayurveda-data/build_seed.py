@@ -15,8 +15,8 @@ from pathlib import Path
 from typing import Any
 
 
-SEED_VERSION = 3
-GENERATED_AT = "2026-07-24T00:00:00Z"
+SEED_VERSION = 4
+GENERATED_AT = "2026-07-25T00:00:00Z"
 EXPECTED_COUNTS = {
     "dravyas": 714,
     "recipes": 1500,
@@ -73,6 +73,253 @@ NUTRIENT_CATALOG = {
     "copper": ("minerals", "mg"),
     "manganese": ("minerals", "mg"),
     "fluoride": ("minerals", "µg"),
+}
+SAFETY_PROVENANCE = "scaffold-default"
+SAFETY_REVIEW_REQUIRED = True
+DIET_VOCABULARY = {
+    "Dairy-Free",
+    "Egg-Free",
+    "Fat-Free",
+    "Gluten-Free",
+    "Halal",
+    "High-Protein",
+    "Keto",
+    "Kosher",
+    "Lactose-Free",
+    "Low Sodium",
+    "Low-Carb",
+    "Low-Fat",
+    "Mineral-Rich",
+    "No Added Sugar",
+    "Nut-Free",
+    "Paleo",
+    "Pescatarian",
+    "Soy-Free",
+    "Vegan",
+    "Vegetarian",
+    "Vitamin-Rich",
+}
+COMPOSITION_DIETS = {
+    "Dairy-Free",
+    "Egg-Free",
+    "Gluten-Free",
+    "Lactose-Free",
+    "Nut-Free",
+    "Pescatarian",
+    "Soy-Free",
+    "Vegan",
+    "Vegetarian",
+}
+ALLERGEN_VOCABULARY = {
+    "Celery",
+    "Cereals containing gluten",
+    "Cereals containing gluten (barley)",
+    "Cereals containing gluten (oats)",
+    "Cereals containing gluten (rye)",
+    "Crustaceans",
+    "Eggs",
+    "Fish",
+    "Low Sodium",
+    "Milk",
+    "Molluscs",
+    "Mustard",
+    "Nuts",
+    "Nuts (Brazil nuts)",
+    "Nuts (almonds)",
+    "Nuts (cashews)",
+    "Nuts (chestnuts)",
+    "Nuts (coconut)",
+    "Nuts (hazelnuts)",
+    "Nuts (macadamia nuts)",
+    "Nuts (pecans)",
+    "Nuts (pine nuts)",
+    "Nuts (pistachio nuts)",
+    "Nuts (walnuts)",
+    "Peanuts",
+    "Sesame seeds",
+    "Soybeans",
+    "Sulphur dioxide/sulphites",
+}
+
+# Reviewed, exact-slug rules. Broad substring matching is deliberately forbidden:
+# e.g. buckwheat is not wheat, water chestnut is not a tree nut, and eggplant is
+# not egg. Category rules are used only where the category itself is decisive.
+CATEGORY_ALLERGEN_RULES = {
+    "dairy": {"Milk"},
+}
+ALLERGEN_DRAVYA_RULES = {
+    "Celery": {
+        "dravya.celery",
+        "dravya.celery-seed",
+        "dravya.celery-stalk",
+        "dravya.wild-celery-seed",
+    },
+    "Milk": {
+        "dravya.badam-milk",
+        "dravya.basundi",
+        "dravya.besan-ladoo",
+        "dravya.chhurpi",
+        "dravya.chyawanprash",
+        "dravya.curd-rice",
+        "dravya.filter-coffee",
+        "dravya.ghee",
+        "dravya.ghee-cultured",
+        "dravya.ghee-spiced",
+        "dravya.golden-milk",
+        "dravya.halwa-carrot",
+        "dravya.kadhi",
+        "dravya.kefir",
+        "dravya.kharvas",
+        "dravya.kheer-rice",
+        "dravya.lassi-digestive",
+        "dravya.lassi-sweet",
+        "dravya.masala-chai",
+        "dravya.moong-dal-halwa",
+        "dravya.panchamrita",
+        "dravya.payasam-mung",
+        "dravya.pongal-sweet",
+        "dravya.pongal-ven",
+        "dravya.rabri",
+        "dravya.rose-milk",
+        "dravya.shrikhand",
+        "dravya.sooji-halwa",
+        "dravya.takra",
+        "dravya.thandai",
+        "dravya.yak-butter",
+        "dravya.yak-milk",
+    },
+    "Cereals containing gluten": {
+        "dravya.emmer-wheat",
+        "dravya.khakhra",
+        "dravya.paratha-plain",
+        "dravya.puran-poli",
+        "dravya.puri",
+        "dravya.refined-flour",
+        "dravya.roti",
+        "dravya.semolina",
+        "dravya.sooji-halwa",
+        "dravya.thepla",
+        "dravya.upma",
+        "dravya.vermicelli",
+        "dravya.wheat-broken",
+        "dravya.wheatgrass",
+        "dravya.whole-wheat",
+        "dravya.whole-wheat-flour",
+    },
+    "Cereals containing gluten (barley)": {
+        "dravya.barley",
+        "dravya.barley-water",
+    },
+    "Cereals containing gluten (oats)": {
+        "dravya.oat-milk",
+        "dravya.oats",
+    },
+    "Nuts": {
+        "dravya.chironji",
+        "dravya.panchmeva",
+        "dravya.thandai",
+    },
+    "Nuts (Brazil nuts)": {"dravya.brazil-nut"},
+    "Nuts (almonds)": {
+        "dravya.almond",
+        "dravya.almond-milk",
+        "dravya.almond-oil",
+        "dravya.badam-milk",
+    },
+    "Nuts (cashews)": {
+        "dravya.cashew",
+        "dravya.tender-cashew-fruit",
+    },
+    "Nuts (chestnuts)": {"dravya.chestnut"},
+    "Nuts (coconut)": {
+        "dravya.coconut-chutney",
+        "dravya.coconut-dried",
+        "dravya.coconut-fresh",
+        "dravya.coconut-oil",
+        "dravya.coconut-rice",
+        "dravya.coconut-sugar",
+        "dravya.coconut-vinegar",
+        "dravya.coconut-water",
+        "dravya.desiccated-coconut",
+        "dravya.dry-coconut",
+        "dravya.tender-coconut-flesh",
+    },
+    "Nuts (hazelnuts)": {"dravya.hazelnut"},
+    "Nuts (macadamia nuts)": {"dravya.macadamia"},
+    "Nuts (pecans)": {"dravya.pecan"},
+    "Nuts (pine nuts)": {"dravya.pine-nut"},
+    "Nuts (pistachio nuts)": {"dravya.pistachio"},
+    "Nuts (walnuts)": {
+        "dravya.walnut",
+        "dravya.walnut-oil",
+    },
+    "Peanuts": {
+        "dravya.peanut",
+        "dravya.peanut-chikki",
+        "dravya.peanut-oil",
+        "dravya.peanut-raw",
+        "dravya.peanut-roasted",
+    },
+    "Sesame seeds": {
+        "dravya.black-sesame",
+        "dravya.sesame-oil",
+        "dravya.sesame-seed",
+        "dravya.sesame-spice-blend",
+        "dravya.til-ladoo",
+        "dravya.til-oil-pickle",
+        "dravya.white-sesame",
+    },
+    "Eggs": {
+        "dravya.chicken-egg",
+        "dravya.desi-egg",
+        "dravya.duck-egg",
+        "dravya.egg-bhurji",
+        "dravya.quail-egg",
+    },
+    "Fish": {
+        "dravya.catla",
+        "dravya.dried-fish",
+        "dravya.hilsa",
+        "dravya.mackerel",
+        "dravya.pomfret",
+        "dravya.rohu",
+        "dravya.salmon",
+        "dravya.sardine",
+        "dravya.seer-fish",
+        "dravya.tuna",
+    },
+    "Crustaceans": {
+        "dravya.crab",
+        "dravya.prawn",
+    },
+    "Soybeans": {
+        "dravya.bhatt-soybean",
+        "dravya.hawaijar",
+        "dravya.kinema",
+        "dravya.miso",
+        "dravya.soy-milk",
+        "dravya.soybean",
+        "dravya.soybean-oil",
+        "dravya.tempeh",
+        "dravya.tofu",
+    },
+    "Mustard": {
+        "dravya.mustard-greens",
+        "dravya.mustard-oil",
+        "dravya.mustard-pods",
+        "dravya.mustard-powder",
+        "dravya.mustard-seed",
+        "dravya.mustard-seed-black",
+        "dravya.mustard-seed-yellow",
+        "dravya.panch-phoron",
+        "dravya.wild-mustard",
+    },
+}
+HONEY_DRAVYA_IDS = {
+    "dravya.chyawanprash",
+    "dravya.honey",
+    "dravya.honey-aged",
+    "dravya.panchamrita",
 }
 
 
@@ -202,6 +449,62 @@ def load_food_nutrition(
     return nutrition_by_id
 
 
+def load_food_safety(
+    path: Path, store_ids: set[int]
+) -> dict[int, dict[str, Any]]:
+    try:
+        foods = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise BuildError(f"cannot load USDA safety source {path}: {error}") from error
+    if not isinstance(foods, list):
+        raise BuildError(f"{path}: expected a top-level array")
+
+    safety_by_id: dict[int, dict[str, Any]] = {}
+    for food in foods:
+        if not isinstance(food, dict) or not isinstance(food.get("id"), int):
+            raise BuildError(f"{path}: food has no integer id")
+        food_id = food["id"]
+        if food_id in safety_by_id:
+            raise BuildError(f"{path}: duplicate food id {food_id}")
+
+        allergens = food.get("allergens") or []
+        diets = food.get("diets") or []
+        min_age = food.get("minAgeMonths", 0)
+        if not isinstance(allergens, list) or not all(
+            isinstance(value, str) for value in allergens
+        ):
+            raise BuildError(f"{path}: food {food_id} has invalid allergens")
+        if not isinstance(diets, list) or not all(
+            isinstance(value, str) for value in diets
+        ):
+            raise BuildError(f"{path}: food {food_id} has invalid diets")
+        unknown_allergens = set(allergens) - ALLERGEN_VOCABULARY
+        unknown_diets = set(diets) - DIET_VOCABULARY
+        if unknown_allergens:
+            raise BuildError(
+                f"{path}: food {food_id} has unsupported allergens "
+                + f"{sorted(unknown_allergens)}"
+            )
+        if unknown_diets:
+            raise BuildError(
+                f"{path}: food {food_id} has unsupported diets {sorted(unknown_diets)}"
+            )
+        if not isinstance(min_age, int) or min_age < 0:
+            raise BuildError(f"{path}: food {food_id} has invalid minAgeMonths")
+
+        safety_by_id[food_id] = {
+            "allergens": sorted(set(allergens)),
+            "diets": sorted(set(diets)),
+            "minAgeMonths": min_age,
+        }
+
+    missing_source_ids = sorted(safety_by_id.keys() - store_ids)
+    if missing_source_ids:
+        preview = ", ".join(str(food_id) for food_id in missing_source_ids[:10])
+        raise BuildError(f"{path}: safety source food ids are absent from store: {preview}")
+    return safety_by_id
+
+
 def preferred_nutrition_bindings(
     bindings_by_dravya: dict[str, list[tuple[int, str, int]]],
 ) -> dict[str, int]:
@@ -218,6 +521,189 @@ def preferred_nutrition_bindings(
 
 def rounded(value: float) -> float:
     return round(value, 12)
+
+
+def reviewed_allergens(dravya: dict[str, Any]) -> set[str]:
+    allergens = set(CATEGORY_ALLERGEN_RULES.get(dravya["category"], set()))
+    dravya_id = dravya["id"]
+    for allergen, dravya_ids in ALLERGEN_DRAVYA_RULES.items():
+        if dravya_id in dravya_ids:
+            allergens.add(allergen)
+    return allergens
+
+
+def composition_diets_for_dravya(
+    dravya: dict[str, Any],
+    allergens: set[str],
+) -> set[str]:
+    dravya_id = dravya["id"]
+    is_animal = dravya["category"] == "animal"
+    is_egg = dravya_id in ALLERGEN_DRAVYA_RULES["Eggs"]
+    is_fish_or_shellfish = (
+        dravya_id in ALLERGEN_DRAVYA_RULES["Fish"]
+        or dravya_id in ALLERGEN_DRAVYA_RULES["Crustaceans"]
+    )
+    is_terrestrial_animal = is_animal and not is_egg and not is_fish_or_shellfish
+    contains_honey = dravya_id in HONEY_DRAVYA_IDS
+
+    diets: set[str] = set()
+    if not is_animal and "Milk" not in allergens and not contains_honey:
+        diets.add("Vegan")
+    if not is_animal or is_egg:
+        diets.add("Vegetarian")
+    if not is_terrestrial_animal:
+        diets.add("Pescatarian")
+    if "Milk" not in allergens:
+        diets.update({"Dairy-Free", "Lactose-Free"})
+    if "Eggs" not in allergens:
+        diets.add("Egg-Free")
+    if not any(
+        allergen == "Peanuts"
+        or allergen == "Nuts"
+        or allergen.startswith("Nuts (")
+        for allergen in allergens
+    ):
+        diets.add("Nut-Free")
+    if "Soybeans" not in allergens:
+        diets.add("Soy-Free")
+    if not any(allergen.startswith("Cereals containing gluten") for allergen in allergens):
+        diets.add("Gluten-Free")
+    return diets
+
+
+def derive_dravya_safety(
+    dravya: dict[str, Any],
+    food_id: int,
+    source_safety_by_id: dict[int, dict[str, Any]],
+) -> dict[str, Any]:
+    source = source_safety_by_id.get(
+        food_id,
+        {"allergens": [], "diets": [], "minAgeMonths": 0},
+    )
+    reviewed = reviewed_allergens(dravya)
+    allergens = set(source["allergens"]).union(reviewed)
+    controlled_diets = composition_diets_for_dravya(dravya, allergens)
+    preserved_source_diets = set(source["diets"]) - COMPOSITION_DIETS
+    min_age = int(source["minAgeMonths"])
+    if dravya["id"] in HONEY_DRAVYA_IDS:
+        min_age = max(min_age, 12)
+
+    rules = [f"category:{dravya['category']}"]
+    rules.extend(f"reviewed-allergen:{allergen}" for allergen in sorted(reviewed))
+    if food_id in source_safety_by_id:
+        rules.append(f"existing-usda:{food_id}")
+    if dravya["id"] in HONEY_DRAVYA_IDS:
+        rules.append("honey-min-age:12")
+
+    return {
+        "allergens": sorted(allergens),
+        "diets": sorted(preserved_source_diets.union(controlled_diets)),
+        "minAgeMonths": min_age,
+        "provenance": SAFETY_PROVENANCE,
+        "reviewRequired": SAFETY_REVIEW_REQUIRED,
+        "rules": sorted(rules),
+        "reviewFlags": [],
+    }
+
+
+def normalized_direct_food_safety(source: dict[str, Any]) -> dict[str, Any]:
+    allergens = set(source["allergens"])
+    diets = set(source["diets"])
+    if "Milk" not in allergens:
+        diets.update({"Dairy-Free", "Lactose-Free"})
+    if "Eggs" not in allergens:
+        diets.add("Egg-Free")
+    if not any(
+        allergen == "Peanuts"
+        or allergen == "Nuts"
+        or allergen.startswith("Nuts (")
+        for allergen in allergens
+    ):
+        diets.add("Nut-Free")
+    if "Soybeans" not in allergens:
+        diets.add("Soy-Free")
+    if not any(allergen.startswith("Cereals containing gluten") for allergen in allergens):
+        diets.add("Gluten-Free")
+    if "Vegan" in diets:
+        diets.update({"Vegetarian", "Pescatarian"})
+    elif "Vegetarian" in diets:
+        diets.add("Pescatarian")
+    return {
+        "allergens": sorted(allergens),
+        "diets": sorted(diets),
+        "minAgeMonths": int(source["minAgeMonths"]),
+    }
+
+
+def derive_recipe_safety(
+    recipe: dict[str, Any],
+    dravya_safety: dict[str, dict[str, Any]],
+    source_safety_by_id: dict[int, dict[str, Any]],
+) -> dict[str, Any]:
+    ingredient_safety: list[dict[str, Any]] = []
+    contains_honey = False
+    for ingredient in recipe.get("ingredients", []):
+        if "dravyaId" in ingredient:
+            dravya_id = ingredient["dravyaId"]
+            safety = dravya_safety.get(dravya_id)
+            if safety is None:
+                raise BuildError(
+                    f"{recipe['id']}: no safety metadata for ingredient {dravya_id}"
+                )
+            contains_honey = contains_honey or dravya_id in HONEY_DRAVYA_IDS
+        else:
+            fdc_id = ingredient.get("fdcId")
+            source_safety = source_safety_by_id.get(fdc_id)
+            if source_safety is None:
+                raise BuildError(
+                    f"{recipe['id']}: no USDA safety metadata for ingredient {fdc_id}"
+                )
+            safety = normalized_direct_food_safety(source_safety)
+        ingredient_safety.append(safety)
+
+    if not ingredient_safety:
+        raise BuildError(f"{recipe['id']}: cannot derive safety from no ingredients")
+
+    allergens: set[str] = set()
+    for safety in ingredient_safety:
+        allergens.update(safety["allergens"])
+
+    diets = set(COMPOSITION_DIETS)
+    for safety in ingredient_safety:
+        diets.intersection_update(set(safety["diets"]))
+
+    min_age = max(int(safety["minAgeMonths"]) for safety in ingredient_safety)
+    if contains_honey:
+        min_age = max(min_age, 12)
+
+    rules = [
+        "ingredient-union:allergens",
+        "ingredient-intersection:diets",
+        "ingredient-maximum:minAgeMonths",
+    ]
+    if contains_honey:
+        rules.append("honey-min-age:12")
+    return {
+        "allergens": sorted(allergens),
+        "diets": sorted(diets),
+        "minAgeMonths": min_age,
+        "provenance": SAFETY_PROVENANCE,
+        "reviewRequired": SAFETY_REVIEW_REQUIRED,
+        "rules": sorted(rules),
+        "reviewFlags": [],
+    }
+
+
+def validate_safety_rule_ids(dravyas: list[dict[str, Any]]) -> None:
+    dravya_ids = {dravya["id"] for dravya in dravyas}
+    configured_ids = set(HONEY_DRAVYA_IDS)
+    for allergen, ids in ALLERGEN_DRAVYA_RULES.items():
+        if allergen not in ALLERGEN_VOCABULARY:
+            raise BuildError(f"unsupported reviewed allergen rule: {allergen}")
+        configured_ids.update(ids)
+    unknown_ids = configured_ids - dravya_ids
+    if unknown_ids:
+        raise BuildError(f"safety rules reference unknown dravyas: {sorted(unknown_ids)}")
 
 
 def derive_recipe_nutrition(
@@ -454,8 +940,10 @@ def build_envelope(
     store_ids: set[int],
     derived_links: list[dict[str, Any]],
     nutrition_by_id: dict[int, dict[str, float]],
+    source_safety_by_id: dict[int, dict[str, Any]],
     preferred_bindings: dict[str, int],
 ) -> tuple[dict[str, Any], list[tuple[int, str, str, list[str]]], list[str]]:
+    validate_safety_rule_ids(dravyas)
     assert_reserved_band_free(store_ids)
     assignments, links, contested, placeholder_ids = resolve_primary_foods(dravyas, store_ids)
     if len(links) != V1_LINK_COUNT:
@@ -467,10 +955,17 @@ def build_envelope(
     links.extend(derived_links)
 
     output_dravyas: list[dict[str, Any]] = []
+    dravya_safety: dict[str, dict[str, Any]] = {}
     for dravya in sorted(dravyas, key=lambda item: item["id"]):
         output = dict(dravya)
         output["foodId"], output["foodIsPlaceholder"] = assignments[dravya["id"]]
         output["engineExcluded"] = dravya["id"] in ENGINE_EXCLUDED_IDS
+        output["safety"] = derive_dravya_safety(
+            dravya,
+            output["foodId"],
+            source_safety_by_id,
+        )
+        dravya_safety[dravya["id"]] = output["safety"]
         output_dravyas.append(output)
 
     output_recipes: list[dict[str, Any]] = []
@@ -507,6 +1002,11 @@ def build_envelope(
             resolved_ingredients.append(resolved)
         output["ingredients"] = resolved_ingredients
         output["nutrition"] = nutrition
+        output["safety"] = derive_recipe_safety(
+            recipe,
+            dravya_safety,
+            source_safety_by_id,
+        )
         output_recipes.append(output)
 
     if unresolved:
@@ -553,6 +1053,27 @@ def build_envelope(
                 )
                 for status in ("full", "estimated", "none")
             },
+            "safety": {
+                "profiles": len(output_dravyas) + len(output_recipes),
+                "allergenTaggedDravyas": sum(
+                    bool(dravya["safety"]["allergens"])
+                    for dravya in output_dravyas
+                ),
+                "allergenTaggedRecipes": sum(
+                    bool(recipe["safety"]["allergens"])
+                    for recipe in output_recipes
+                ),
+                "honeyMinAgeDravyas": sum(
+                    dravya["id"] in HONEY_DRAVYA_IDS
+                    and dravya["safety"]["minAgeMonths"] >= 12
+                    for dravya in output_dravyas
+                ),
+                "honeyMinAgeRecipes": sum(
+                    "honey-min-age:12" in recipe["safety"]["rules"]
+                    and recipe["safety"]["minAgeMonths"] >= 12
+                    for recipe in output_recipes
+                ),
+            },
         },
         "dravyas": output_dravyas,
         "recipes": output_recipes,
@@ -597,6 +1118,14 @@ def print_summary(
         )
     )
     print(
+        "safety metadata: "
+        + f"profiles={counts['safety']['profiles']}, "
+        + f"allergen dravyas={counts['safety']['allergenTaggedDravyas']}, "
+        + f"allergen recipes={counts['safety']['allergenTaggedRecipes']}, "
+        + f"honey-age dravyas={counts['safety']['honeyMinAgeDravyas']}, "
+        + f"honey-age recipes={counts['safety']['honeyMinAgeRecipes']}"
+    )
+    print(
         f"links: {counts['links']} "
         + f"({V1_LINK_COUNT} v1 + {counts['derivedLinks']} derived)"
     )
@@ -625,6 +1154,7 @@ def main() -> int:
         actual_store_path = store_path(args.store)
         store_ids = load_store_ids(actual_store_path)
         nutrition_by_id = load_food_nutrition(args.foods, store_ids)
+        source_safety_by_id = load_food_safety(args.foods, store_ids)
         dravyas = load_batches(data_root / "dravyas", "batch-*.json", "items")
         recipes = load_batches(data_root / "recipes", "batch-r*.json", "items")
         dravya_ids = {dravya["id"] for dravya in dravyas}
@@ -648,6 +1178,7 @@ def main() -> int:
             store_ids,
             derived_links,
             nutrition_by_id,
+            source_safety_by_id,
             preferred_bindings,
         )
         compressed = encode_deterministic_gzip(envelope)

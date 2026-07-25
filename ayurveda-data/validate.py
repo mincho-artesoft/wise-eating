@@ -273,14 +273,21 @@ def d34_validate(here, store, errs):
     except Exception as error:
         errs.append(f"D34/ayurveda_seed.json.gz: cannot read: {error}")
         return
-    if seed.get("seedVersion") != 3:
-        errs.append(f"D34/seed: expected seedVersion 3, got {seed.get('seedVersion')}")
+    if seed.get("seedVersion") != 4:
+        errs.append(f"D34/seed: expected seedVersion 4, got {seed.get('seedVersion')}")
     counts = seed.get("counts", {})
     expected_counts = {
         "dravyas": 714, "recipes": 1500, "links": 2305,
         "derivedLinks": 1969, "placeholders": 383,
         "categoryRules": 187, "modifiers": 14,
         "nutrition": {"full": 1500, "estimated": 0, "none": 0},
+        "safety": {
+            "profiles": 2214,
+            "allergenTaggedDravyas": 156,
+            "allergenTaggedRecipes": 1182,
+            "honeyMinAgeDravyas": 4,
+            "honeyMinAgeRecipes": 4,
+        },
     }
     if counts != expected_counts:
         errs.append(f"D34/seed: counts block differs: {counts}")
@@ -308,6 +315,26 @@ def d34_validate(here, store, errs):
         )
     if set(seed_derived) != set(crosswalk):
         errs.append("D34/seed: derived fdcIds differ from crosswalk.csv")
+
+    safety_rows = seed.get("dravyas", []) + seed.get("recipes", [])
+    for item in safety_rows:
+        safety = item.get("safety")
+        item_id = item.get("id", "?")
+        if not isinstance(safety, dict):
+            errs.append(f"WE8/seed/{item_id}: missing safety metadata")
+            continue
+        if safety.get("provenance") != "scaffold-default":
+            errs.append(f"WE8/seed/{item_id}: safety provenance differs")
+        if safety.get("reviewRequired") is not True:
+            errs.append(f"WE8/seed/{item_id}: safety review flag differs")
+        if not isinstance(safety.get("rules"), list) or not safety["rules"]:
+            errs.append(f"WE8/seed/{item_id}: safety rules are empty")
+        if not isinstance(safety.get("minAgeMonths"), int) or safety["minAgeMonths"] < 0:
+            errs.append(f"WE8/seed/{item_id}: invalid minimum age")
+        if set(safety.get("allergens", [])) - build_seed.ALLERGEN_VOCABULARY:
+            errs.append(f"WE8/seed/{item_id}: unsupported allergen")
+        if set(safety.get("diets", [])) - build_seed.DIET_VOCABULARY:
+            errs.append(f"WE8/seed/{item_id}: unsupported diet")
 
     nutrition_counts = Counter()
     nutrient_keys = set(build_seed.NUTRIENT_CATALOG)
