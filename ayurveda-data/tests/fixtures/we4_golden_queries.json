@@ -77,8 +77,13 @@
     {
       "kind": "legacy",
       "query": "vegan curry",
-      "baseline": ["Curry Leaves", "Curry sauce", "Curry leaf (dried)", "Curry leaves (dried)", "Curry powder (as a blend — used worldwide)"],
-      "after": ["Curry Leaves", "Curry sauce", "Curry leaf (dried)", "Curry leaves (dried)", "Curry powder (as a blend — used worldwide)"]
+      "baseline": ["Curry Leaves", "Curry sauce", "Curry leaf (dried)", "Curry Leaf Chutney", "Curry leaves (dried)"],
+      "after": ["Curry Leaves", "Curry sauce", "Curry leaf (dried)", "Curry Leaf Chutney", "Curry leaves (dried)"],
+      "baselineHistory": {
+        "task": "WE-8",
+        "date": "2026-07-25",
+        "reason": "Founder-approved baseline change: derived Vegan metadata correctly makes component-resolved Curry Leaf Chutney eligible; no FoodSearch ranking change."
+      }
     },
     {
       "kind": "legacy",
@@ -151,6 +156,19 @@
       "query": "olive oil",
       "baseline": ["Olive oil", "Olive Oil Wheat Piada", "Chickpea Olive Oil Socca", "Mayonnaise, reduced fat,  with olive oil", "Mayonnaise, reduced fat, with olive oil"],
       "after": ["Olive oil", "Olive Oil Wheat Piada", "Chickpea Olive Oil Socca", "Mayonnaise, reduced fat,  with olive oil", "Mayonnaise, reduced fat, with olive oil"]
+    },
+    {
+      "kind": "safety",
+      "query": "without dairy",
+      "mustExcludeSlugs": ["recipe.amaranth-kheer"],
+      "reason": "WE-8 safety golden: named-allergen exclusion must reject the seeded milk-bearing kheer recipe."
+    },
+    {
+      "kind": "safety",
+      "query": "no allergens",
+      "mustExcludeScope": "allergen-bearing-seeded-recipes",
+      "expectedExcludedCount": 1182,
+      "reason": "WE-8 safety golden: exclude-all must reject every seeded recipe whose derived allergen set is nonempty."
     },
     {
       "kind": "facet",

@@ -22,6 +22,9 @@ class RecipeNutritionTests(unittest.TestCase):
         cls.nutrition_by_id = build_seed.load_food_nutrition(
             foods_path, cls.store_ids
         )
+        cls.source_safety_by_id = build_seed.load_food_safety(
+            foods_path, cls.store_ids
+        )
         cls.dravyas = build_seed.load_batches(
             data_root / "dravyas", "batch-*.json", "items"
         )
@@ -45,6 +48,7 @@ class RecipeNutritionTests(unittest.TestCase):
             cls.store_ids,
             cls.derived_links,
             cls.nutrition_by_id,
+            cls.source_safety_by_id,
             cls.preferred_bindings,
         )
 

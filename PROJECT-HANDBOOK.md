@@ -2,7 +2,7 @@
 **Read this first. It is the knowledge-transfer document for anyone (human or AI)
 taking over direction of this project. Update it at the end of every milestone —
 that is a standing rule baked into all task packets.**
-Last updated: 2026-07-25 (WE-7 complete — dead Legacy Swift cluster removed; next: expert review).
+Last updated: 2026-07-25 (WE-8 complete — conservative seeded safety metadata; next: expert review).
 
 ## 1. Mission and the two applications
 
@@ -38,7 +38,7 @@ estimated 10,296 (category rules × modifiers) = 12,601. Tier is always stored
 and must always be shown in UI.
 
 **Build pipeline:** `ayurveda-data/build_seed.py` → deterministic
-`WiseEating/ayurveda_seed.json.gz` (seedVersion 3; sha-verifiable) +
+`WiseEating/ayurveda_seed.json.gz` (seedVersion 4; sha-verifiable) +
 `WiseEating/ayurveda_rules.json`. `ayurveda-data/build_preseeded_store.py`
 audits/compacts a completed 14,484-row store and emits the two bundled gzip
 parts, including the version-4 search cache. `ayurveda-data/validate.py --store
@@ -96,9 +96,17 @@ simulation; must always pass).
   store already contains 383 placeholder FoodItems (reserved ID band
   **900001–900383**), 1,500 recipe FoodItems/IngredientLinks, 2,214 profiles,
   2,305 links, and the final version-4 search cache. Fresh install verifies the
-  seed-v3 profile stamps and is a zero-insert/zero-update no-op. Existing stores
+  seed-v4 profile stamps and is a zero-insert/zero-update no-op. Existing stores
   use a canonical-slug/fdcId upsert delta; ownership ambiguity aborts without
   touching user data. Post-seed food total: 14,484.
+- WE-8 safety projection is build-time and canonical-only: each of the 2,214
+  seed rows carries `scaffold-default`, review-required provenance; recipe
+  allergens are ingredient unions, composition diets are ingredient
+  intersections, and `minAgeMonths` is the ingredient maximum with a 12-month
+  honey floor. The artifact contains 10,571 positive-gram IngredientLinks for
+  all 1,500 recipes. Ghee remains conservatively `Milk`; unresolved safety
+  inputs abort the build rather than receiving permissive defaults. Plain USDA
+  rows receive no Ayurveda profile, facet, claim, or derived Ayurveda metadata.
 - `WiseEating/Legacy/` after WE-7 contains only five live JSON fallback
   resources (`foods`, `product_buckets`, `sports`, `vocabulary`, `workouts`).
   The nine former Swift compiler inputs were entirely commented, had no inbound
@@ -114,7 +122,10 @@ simulation; must always pass).
 4. **Engine exclusions** (display with health warning, NEVER recommend):
    `dravya.betel-nut` (IARC 1 carcinogen), `dravya.vanaspati` (trans fats).
 5. All content ships `qualityState: aiDraft` until an Ayurveda expert reviews;
-   `reviewNote` fields mark every classical disagreement. No medicinal claims anywhere.
+   `reviewNote` fields mark every classical disagreement. Derived safety fields
+   are conservative `scaffold-default` metadata pending the same expert review;
+   never weaken them merely to preserve search ordering. No medicinal claims
+   anywhere.
 6. Dosha model is signed effects (−2…+2 per dosha), richer than percentages;
    percentage views are derived in UI, never stored.
 7. No beef dravya (deliberate); ~991 beef foods classify via estimated tier.
@@ -152,16 +163,18 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | Thing | Count |
 |---|---|
 | Dravyas / recipes / profiles | 714 / 1,500 / 2,214 |
-| AyurvedaLink rows (v3) | 2,305 = 278 exact + 58 near + 1,969 derived |
+| AyurvedaLink rows (v4 seed) | 2,305 = 278 exact + 58 near + 1,969 derived |
 | Tier coverage | classical 336 · derived 1,969 · estimated 10,296 = 12,601 |
 | Placeholder FoodItems | 383 (IDs 900001–900383) |
 | Post-seed ZFOODITEM total | 14,484 (12,601 + 383 + 1,500) |
 | Category rules / modifiers | 187 / 14 (modifiers fire on 6,357 foods) |
 | Crosswalk distinct dravyas | 166; contested 67; curated denies 2 |
 | Recipe nutrition | 1,500 full · 0 estimated · 0 none; 39 fields × two bases |
+| Recipe IngredientLinks | 10,571 positive-gram rows · 1,500 owners |
+| WE-8 safety projection | 2,214 review-required rows · 156 allergen dravyas · 1,182 allergen recipes · 749 Vegan recipes |
 | Search cache | version 4 · 14,484 DB/compact rows · 2,214 canonical faceted rows · 64 keys / 20,114 assignments |
-| Seed | seedVersion 3, deterministic SHA-256 `1830a191…509b6` |
-| Cold launch (WE-6/WE-7, Debug simulator) | 3.405s → 1.662s; WE-7 rerun 1.504s median; first on-demand load + query 1.701s |
+| Seed | seedVersion 4, deterministic SHA-256 `e4bfcd63…5156` |
+| Cold launch (WE-6/WE-7/WE-8, Debug simulator) | 3.405s → 1.662s; WE-7 1.504s; WE-8 1.592s median; first on-demand load + query 1.701s |
 | Legacy target (WE-7) | 9 dead Swift inputs removed · 5 live JSON fallback resources retained |
 
 ## 6. Milestone ledger (update after every task)
@@ -181,6 +194,7 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | WE-5 FoodSearch border cases | ✅ COMPLETE — constrained nutrient and pH columns now remain visible with honest missing/zero semantics; Tokenizer + ConstraintMapper display provenance is unified; pH boundary/sentinel/count/sort behavior is centralized; command heuristics are token-boundary safe. All 25 WE-4 goldens remain exact, 34/34 repository tests pass, and pure-text median latency stays within the WE-4 +10% budget. Engine source is `VM/SmartFoodSearchEngine.swift`; `Legacy/` is untouched. See `ayurveda-data/REPORT-WE5.md` |
 | WE-6 cold-launch profiling | ✅ COMPLETE — opt-in signposts account for the full launch path; re-established baseline 3.405s, persisted-index phase 1.591s, final median 1.662s (−51.2%). Index version/count and rebuild rules are unchanged; awaited lazy loading preserves programmatic search, 25/25 goldens remain exact, worst latency delta +3.4%, and fresh install remains zero-insert/no-rebuild. See `ayurveda-data/REPORT-WE6.md` |
 | WE-7 Legacy target audit | ✅ COMPLETE — all 14 files classified before removal. Nine comment-only Swift compiler inputs formed one closed dead cluster and were removed; five JSON fallback resources remain live. Debug/Release builds, 38/38 tests, 25/25 goldens, 15/15 WE-5 border methods, fresh no-insert/no-rebuild, search latency, and 1.504s median cold launch are green. Release executable −416 bytes. See `ayurveda-data/REPORT-WE7.md` |
+| WE-8 derived safety/search metadata | ✅ COMPLETE — all 2,214 canonical profiles carry conservative review-required safety provenance; 1,500 recipes derive allergen union, diet intersection, maximum ingredient age/honey floor, and retain exact 10,571 IngredientLinks. Founder-approved `vegan curry` history is auditable; 25/25 production legacy goldens plus 2/2 negative safety goldens pass, worst latency delta +4.3%, fresh install remains zero-insert/no-rebuild, and cold launch is 1.592s median. See `ayurveda-data/REPORT-WE8.md` |
 | Expert review pass | ⏳ pending human reviewer: work aiDraft→reviewed, resolve reviewNotes, optional batch-31 top-up to 750 |
 | Later roadmap | media (yoga/meditation content), recommendation engine, dosha assessment — see ayurveda-data/RESTART-PLAN.md history |
 

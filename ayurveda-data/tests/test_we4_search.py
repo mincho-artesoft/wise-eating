@@ -289,9 +289,29 @@ struct ParserHarness {
         queries = golden["queries"]
         legacy = [entry for entry in queries if entry["kind"] == "legacy"]
         facet = [entry for entry in queries if entry["kind"] == "facet"]
+        safety = [entry for entry in queries if entry["kind"] == "safety"]
         self.assertEqual(len(legacy), 25)
         self.assertGreaterEqual(len(facet), 7)
+        self.assertEqual(len(safety), 2)
         self.assertTrue(all(entry["baseline"] == entry["after"] for entry in legacy))
+        vegan_curry = next(entry for entry in legacy if entry["query"] == "vegan curry")
+        self.assertEqual(vegan_curry["baselineHistory"]["task"], "WE-8")
+        self.assertIn("derived Vegan metadata", vegan_curry["baselineHistory"]["reason"])
+        without_dairy = next(
+            entry for entry in safety if entry["query"] == "without dairy"
+        )
+        self.assertEqual(
+            without_dairy["mustExcludeSlugs"],
+            ["recipe.amaranth-kheer"],
+        )
+        no_allergens = next(
+            entry for entry in safety if entry["query"] == "no allergens"
+        )
+        self.assertEqual(
+            no_allergens["mustExcludeScope"],
+            "allergen-bearing-seeded-recipes",
+        )
+        self.assertEqual(no_allergens["expectedExcludedCount"], 1_182)
         self.assertIn("tomatoes low fat", {entry["query"] for entry in legacy})
         self.assertIn("more iron than spinach", {entry["query"] for entry in legacy})
         self.assertTrue(

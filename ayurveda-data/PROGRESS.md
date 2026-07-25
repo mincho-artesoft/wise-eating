@@ -72,10 +72,11 @@ cross-linking.
 Current status: **714 dravyas, 1,500 recipes — all checks pass.**
 
 The reconstructed shipped store is now the full build-time artifact: 14,484
-foods, 2,214 seed-v3 canonical profiles, 2,305 links, 1,500 full recipe panels,
-and a version-4 search cache for exactly 14,484 foods, including canonical
-facets on 2,214 rows. Fresh install performs zero Ayurveda inserts/updates and
-no index rebuild. See `REPORT-WE2.md` and `REPORT-WE4.md`.
+foods, 2,214 seed-v4 canonical profiles, 2,305 links, 10,571 recipe ingredient
+links, 1,500 full recipe panels, and a version-4 search cache for exactly 14,484
+foods, including canonical facets on 2,214 rows. Fresh install performs zero
+Ayurveda inserts/updates and no index rebuild. See `REPORT-WE2.md`,
+`REPORT-WE4.md`, and `REPORT-WE8.md`.
 
 WE-3 restyles the read-only Ayurveda card with semantic center-zero dosha
 scales, wrapping property chips, always-visible warning rows, explicit
@@ -117,6 +118,17 @@ builds, 38/38 tests, 25/25 goldens, all 15 WE-5 border methods, the latency
 budget, and fresh-install gates remain green; cold launch remeasured at 1.504s
 median. See `REPORT-WE7.md`.
 
+WE-8 derives conservative, expert-reviewable safety/search metadata at build
+time for all 2,214 canonical profiles. The 1,500 recipes now receive ingredient
+union allergens, ingredient intersection diets, maximum ingredient age, and
+the 12-month honey floor; every derivation is `scaffold-default` with mandatory
+review provenance. The final artifact has 1,182 allergen-bearing recipes and
+exactly 10,571 IngredientLinks across all 1,500 owners. The founder-approved
+`vegan curry` golden history is explicit, all 25 updated legacy goldens plus two
+negative safety goldens pass in production, and the worst search-latency delta
+is +4.3%. Fresh install remains zero-insert/no-rebuild and cold launch is 1.592s
+median. See `REPORT-WE8.md`.
+
 ## Next milestones
 
 1. **Engineering track COMPLETE** — D6 (models+seeder), D34 (all 12,601 foods
@@ -125,11 +137,12 @@ median. See `REPORT-WE7.md`.
    projection/search cache), WE-3 (founder-approved read-only display card),
    WE-4 (canonical indexed Ayurveda search facets), and WE-5 (FoodSearch
    border-case closure), WE-6 (cold-launch profiling + lazy index load), and
-   WE-7 (legacy target audit + proven-dead Swift cluster removal).
+   WE-7 (legacy target audit + proven-dead Swift cluster removal), and WE-8
+   (conservative derived safety metadata + IngredientLink parity).
    See PROJECT-HANDBOOK.md §6 ledger and `REPORT-WE2.md` / `REPORT-WE3.md` /
    `REPORT-WE4.md` / `REPORT-WE5.md` / `REPORT-WE6.md` for gates, timing,
-   screenshots, accessibility, search, and `REPORT-WE7.md` for legacy audit
-   evidence.
+   screenshots, accessibility, search, `REPORT-WE7.md` for legacy audit
+   evidence, and `REPORT-WE8.md` for safety derivation/audit evidence.
 2. **Expert review — the remaining item.** Work aiDraft→reviewed across
    dravyas/recipes/rules, resolve all reviewNote flags, optional batch-31
    top-up to 750. Director can generate a reviewer packet on request.
