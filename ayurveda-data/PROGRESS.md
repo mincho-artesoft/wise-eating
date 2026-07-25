@@ -71,12 +71,12 @@ cross-linking.
 `cat WiseEating/preseeded_db.store.gz.part-aa WiseEating/preseeded_db.store.gz.part-ab > /tmp/pre.gz && gunzip -f /tmp/pre.gz`).
 Current status: **714 dravyas, 1,500 recipes — all checks pass.**
 
-The reconstructed shipped store is now the full build-time artifact: 14,484
-foods, 2,214 seed-v4 canonical profiles, 2,305 links, 10,571 recipe ingredient
-links, 1,500 full recipe panels, and a version-4 search cache for exactly 14,484
+The reconstructed candidate store is the full build-time artifact: 14,484
+foods, 2,214 seed-v5 canonical profiles, 2,305 links, 10,571 recipe ingredient
+links, 1,500 full recipe panels, and a version-5 search cache for exactly 14,484
 foods, including canonical facets on 2,214 rows. Fresh install performs zero
-Ayurveda inserts/updates and no index rebuild. See `REPORT-WE2.md`,
-`REPORT-WE4.md`, and `REPORT-WE8.md`.
+Ayurveda inserts/updates and no index rebuild. WE-8c is not pushed because its
+cold-launch gate is red; see `REPORT-WE8c.md`.
 
 WE-3 restyles the read-only Ayurveda card with semantic center-zero dosha
 scales, wrapping property chips, always-visible warning rows, explicit
@@ -129,9 +129,22 @@ negative safety goldens pass in production, and the worst search-latency delta
 is +4.3%. Fresh install remains zero-insert/no-rebuild and cold launch is 1.592s
 median. See `REPORT-WE8.md`.
 
+WE-8c locally implements provenance-gated age enforcement: legacy-import
+ingredient floors remain unchanged for display, while only the authored
+12-month honey floor hard-filters canonical dravyas and recipes. The exact
+recipe visibility gates (1,496/1,500/1,500 at 9/24/60 months), display
+histogram, 25+2 goldens, 62 tests, deterministic v5 artifacts, fresh install,
+and Debug/Release builds pass. The candidate is **BLOCKED and unpushed**:
+1.650s median cold launch is +3.62% over the 1.592s registry baseline, exceeding
+the +2% gate. See `REPORT-WE8c.md`.
+
 ## Next milestones
 
-1. **Engineering track COMPLETE** — D6 (models+seeder), D34 (all 12,601 foods
+1. **WE-8c founder decision required** — the provenance-gated age candidate is
+   locally complete but unpushed because G7 measured 1.650s against a 1.624s
+   ceiling. Do not ship or change the gate without founder direction; see
+   `REPORT-WE8c.md`.
+2. **Engineering track through WE-8 COMPLETE** — D6 (models+seeder), D34 (all 12,601 foods
    classified), D8/D8.1/D8.2 (UI end to end incl. computed tier + editors),
    D9 (engineExcluded enforcement), WE-2 (full recipe nutrition + build-time
    projection/search cache), WE-3 (founder-approved read-only display card),
@@ -143,14 +156,14 @@ median. See `REPORT-WE8.md`.
    `REPORT-WE4.md` / `REPORT-WE5.md` / `REPORT-WE6.md` for gates, timing,
    screenshots, accessibility, search, `REPORT-WE7.md` for legacy audit
    evidence, and `REPORT-WE8.md` for safety derivation/audit evidence.
-2. **Expert review — the remaining item.** Work aiDraft→reviewed across
+3. **Expert review — the remaining content item.** Work aiDraft→reviewed across
    dravyas/recipes/rules, resolve all reviewNote flags, optional batch-31
    top-up to 750. Director can generate a reviewer packet on request.
-3. **Residual founder checks** (minutes, not milestones): physical-device AI
+4. **Residual founder checks** (minutes, not milestones): physical-device AI
    generation run (D9 G3 environmental residual), Computed/User card
    screenshots, and physical-device VoiceOver smoke. WE-3's deterministic
    default/largest-type light/dark matrix is complete.
-4. **Optional future scope** (new product decisions, not leftovers): visible
+5. **Optional future scope** (new product decisions, not leftovers): visible
    search facet chips, prakriti assessment/personalization, physical-device
    launch signpost capture, and off-main first-search index decoding — best
    after expert review.

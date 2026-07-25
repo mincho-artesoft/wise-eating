@@ -2,7 +2,8 @@
 **Read this first. It is the knowledge-transfer document for anyone (human or AI)
 taking over direction of this project. Update it at the end of every milestone —
 that is a standing rule baked into all task packets.**
-Last updated: 2026-07-25 (WE-8 complete — conservative seeded safety metadata; next: expert review).
+Last updated: 2026-07-26 (WE-8c candidate blocked locally on cold-launch G7;
+not pushed — see `ayurveda-data/REPORT-WE8c.md`).
 
 ## 1. Mission and the two applications
 
@@ -38,10 +39,10 @@ estimated 10,296 (category rules × modifiers) = 12,601. Tier is always stored
 and must always be shown in UI.
 
 **Build pipeline:** `ayurveda-data/build_seed.py` → deterministic
-`WiseEating/ayurveda_seed.json.gz` (seedVersion 4; sha-verifiable) +
+`WiseEating/ayurveda_seed.json.gz` (candidate seedVersion 5; sha-verifiable) +
 `WiseEating/ayurveda_rules.json`. `ayurveda-data/build_preseeded_store.py`
 audits/compacts a completed 14,484-row store and emits the two bundled gzip
-parts, including the version-4 search cache. `ayurveda-data/validate.py --store
+parts, including the candidate version-5 search cache. `ayurveda-data/validate.py --store
 /tmp/pre` is the gatekeeper (content integrity + full resolver and preseed
 simulation; must always pass).
 
@@ -68,7 +69,7 @@ simulation; must always pass).
 - `RecipeNutritionPanelView` (WE-2): existing glass-card/flow-layout language;
   switches per serving/per 100g and displays the full 39-field nutrient catalog,
   coverage state, and honest missing-slug evidence.
-- `WiseEating/FoodSearch/` (WE-4/WE-5): version-4 compact cache persists canonical
+- `WiseEating/FoodSearch/` (WE-4/WE-5/WE-8c): the candidate version-5 compact cache persists canonical
   virya/dosha/agni/digestibility/season/category/concept facet sets and a
   separate inverted facet index on exactly the 2,214 seeded profiles.
   `CanonicalFacetParser` removes only validated natural/explicit facet speech
@@ -81,7 +82,9 @@ simulation; must always pass).
   phyllo/freeze do not accidentally activate pH or negation modes. WE-6 keeps
   the 28 MB persisted index off the cold-launch path: views start loading it
   nonblockingly on entry, while programmatic `searchCompact`/`searchResults`
-  await the same version-checked load before taking an index snapshot.
+  await the same version-checked load before taking an index snapshot. The v5
+  candidate also persists display and enforced age floors separately: badges
+  retain the display floor; canonical age filters use only authored floors.
 - `WiseEating/Ayurveda/AyurvedaRecommendationGate.swift` (D9): set-driven
   never-recommend enforcement (engineExcluded profiles + linked fdcIds + AI
   free-text name screen) wired into all AI generation paths and the Siri intent;
@@ -95,15 +98,18 @@ simulation; must always pass).
   (after `seedFoodsIfNeeded`) and `DatabaseSetup.swift` (mainTypes): the shipped
   store already contains 383 placeholder FoodItems (reserved ID band
   **900001–900383**), 1,500 recipe FoodItems/IngredientLinks, 2,214 profiles,
-  2,305 links, and the final version-4 search cache. Fresh install verifies the
-  seed-v4 profile stamps and is a zero-insert/zero-update no-op. Existing stores
+  2,305 links, and the candidate version-5 search cache. Fresh install verifies the
+  seed-v5 profile stamps and is a zero-insert/zero-update no-op. Existing stores
   use a canonical-slug/fdcId upsert delta; ownership ambiguity aborts without
   touching user data. Post-seed food total: 14,484.
-- WE-8 safety projection is build-time and canonical-only: each of the 2,214
+- WE-8/WE-8c safety projection is build-time and canonical-only: each of the 2,214
   seed rows carries `scaffold-default`, review-required provenance; recipe
   allergens are ingredient unions, composition diets are ingredient
-  intersections, and `minAgeMonths` is the ingredient maximum with a 12-month
-  honey floor. The artifact contains 10,571 positive-gram IngredientLinks for
+  intersections, and display `minAgeMonths` is the ingredient maximum with a
+  12-month honey floor. The WE-8c candidate carries per-ingredient
+  `ageProvenance`: cited `authored` rules hard-filter through
+  `enforcedMinAgeMonths`, while values imported from `Legacy/foods.json` remain
+  unchanged display-only badges. The artifact contains 10,571 positive-gram IngredientLinks for
   all 1,500 recipes. Ghee remains conservatively `Milk`; unresolved safety
   inputs abort the build rather than receiving permissive defaults. Plain USDA
   rows receive no Ayurveda profile, facet, claim, or derived Ayurveda metadata.
@@ -132,6 +138,10 @@ simulation; must always pass).
 8. Recipes ARE FoodItems (`isRecipe=true`) — not a separate table.
 9. Unresolved safety metadata fails the build rather than defaulting
    permissively.
+10. Age enforcement is provenance-gated: cited `authored` floors may hard-hide;
+    untraced `legacyImport` values remain display metadata. Today the only
+    authored age rule is honey at 12 months. Ingredient values and max
+    propagation remain unchanged.
 
 ## 4. Working process (the pattern that built all of this)
 
@@ -174,9 +184,10 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | Recipe nutrition | 1,500 full · 0 estimated · 0 none; 39 fields × two bases |
 | Recipe IngredientLinks | 10,571 positive-gram rows · 1,500 owners |
 | WE-8 safety projection | 2,214 review-required rows · 156 allergen dravyas · 1,182 allergen recipes · 749 Vegan recipes |
-| Search cache | version 4 · 14,484 DB/compact rows · 2,214 canonical faceted rows · 64 keys / 20,114 assignments |
-| Seed | seedVersion 4, deterministic SHA-256 `e4bfcd63…5156` |
-| Cold launch (WE-6/WE-7/WE-8, Debug simulator) | 3.405s → 1.662s; registry baseline WE-7 1.504s → WE-8 1.592s median (+5.9%), a deliberate safety-metadata trade associated with +478,317 bytes of preseed growth; first on-demand load + query 1.701s |
+| Search cache | candidate version 5 · 14,484 DB/compact rows · 2,214 canonical faceted rows · 64 keys / 20,114 assignments · separate display/enforced age floors |
+| Seed | candidate seedVersion 5, deterministic SHA-256 `886c6a39…872e` |
+| Age provenance (WE-8c candidate) | dravyas 4 authored / 710 legacyImport · recipes 4 / 1,496 · ingredient contributors 4 / 10,567 |
+| Cold launch (WE-6/WE-7/WE-8/WE-8c, Debug simulator) | registry baseline remains WE-8 1.592s; WE-8c candidate 1.650s (+3.62%) exceeds its +2% / 1.624s gate and is not pushed |
 | Legacy target (WE-7) | 9 dead Swift inputs removed · 5 live JSON fallback resources retained |
 
 ## 6. Milestone ledger (update after every task)
@@ -197,6 +208,7 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | WE-6 cold-launch profiling | ✅ COMPLETE — opt-in signposts account for the full launch path; re-established baseline 3.405s, persisted-index phase 1.591s, final median 1.662s (−51.2%). Index version/count and rebuild rules are unchanged; awaited lazy loading preserves programmatic search, 25/25 goldens remain exact, worst latency delta +3.4%, and fresh install remains zero-insert/no-rebuild. See `ayurveda-data/REPORT-WE6.md` |
 | WE-7 Legacy target audit | ✅ COMPLETE — all 14 files classified before removal. Nine comment-only Swift compiler inputs formed one closed dead cluster and were removed; five JSON fallback resources remain live. Debug/Release builds, 38/38 tests, 25/25 goldens, 15/15 WE-5 border methods, fresh no-insert/no-rebuild, search latency, and 1.504s median cold launch are green. Release executable −416 bytes. See `ayurveda-data/REPORT-WE7.md` |
 | WE-8 derived safety/search metadata | ✅ COMPLETE — all 2,214 canonical profiles carry conservative review-required safety provenance; 1,500 recipes derive allergen union, diet intersection, maximum ingredient age/honey floor, and retain exact 10,571 IngredientLinks. Founder-approved `vegan curry` history is auditable; 25/25 production legacy goldens plus 2/2 negative safety goldens pass, worst latency delta +4.3%, fresh install remains zero-insert/no-rebuild, and cold launch is 1.592s median. See `ayurveda-data/REPORT-WE8.md` |
+| WE-8c provenance-gated age enforcement | ⛔ BLOCKED LOCALLY / NOT PUSHED — B5 correctness is exact: honey protection, 1,496/1,500/1,500 recipe visibility, unchanged display histogram, dravya deltas, 25+2 goldens, 62/62 tests, deterministic v5 artifacts, fresh no-insert/no-rebuild, and Debug/Release builds pass. G7 is red: 1.650s median vs 1.624s ceiling (+3.62% vs allowed +2%). Founder direction required. See `ayurveda-data/REPORT-WE8c.md` |
 | Expert review pass | ⏳ pending human reviewer: work aiDraft→reviewed, resolve reviewNotes, optional batch-31 top-up to 750 |
 | Later roadmap | media (yoga/meditation content), recommendation engine, dosha assessment — see ayurveda-data/RESTART-PLAN.md history |
 
