@@ -3,19 +3,20 @@
 Date: 2026-07-26
 Branch: `ayurveda-app`
 Starting tip: `8b54f87` (one commit ahead of `origin/ayurveda-app`)
-Status: **BLOCKED — G7 cold-launch gate is red; not pushed**
+Status: **COMPLETE — replacement absolute launch gate passed; pushed**
 
 ## Outcome
 
 The B5 enforcement split is implemented and all correctness, safety,
-determinism, search, fresh-install, and build gates are green. The candidate
-does not ship because the final controlled cold-process median is **1.650s**,
-which is **+3.62%** over the recorded 1.592s baseline and exceeds the authorized
-**+2% / 1.624s** limit.
+determinism, search, fresh-install, build, and replacement cold-launch gates
+are green. A same-session, 12-pair ABAB comparison measured the final WE-8c
+median at **1.607s**, below the new **1.700s hard ceiling** and the **1.650s
+profiling-paydown trigger**.
 
 No FoodSearch ranking, ingredient-level age, propagation rule, UI copy, schema,
-or authored content value changed. The implementation and regenerated artifacts
-remain in local commits for founder review; nothing was pushed.
+or authored content value changed. The former per-task percentage gate was
+withdrawn by founder ruling because it ratcheted; its original failure evidence
+is retained below and superseded by the WE-8c-FINAL measurement.
 
 ## Implementation
 
@@ -165,7 +166,8 @@ total bundled seed-plus-store growth is 115,534 bytes.
 
 ## G7 — cold launch
 
-**FAIL — shipment blocker.**
+**WITHDRAWN by founder ruling.** The original failure capture is retained
+verbatim as historical evidence; it is not the completion gate.
 
 Method: final uninstrumented Debug app, `-uiTestNoAds -we6LaunchProfile`,
 process terminated before each run, Calendar permission resolved, simulator
@@ -218,15 +220,138 @@ Its impact is:
 
 WE-8c deliberately does not fix that production-main issue. Noncanonical rows
 on `ayurveda-app` likewise preserve the pre-existing enforcement behavior.
+The separate founder decision record is
+`ayurveda-data/ISSUE-MAIN-AGE-GATING.md`.
 
 ## Commit and push disposition
 
-Local commits created:
+The implementation chain completed by this report is:
 
 1. `bf2624b` — provenance-gated enforcement and tests;
 2. `4d61667` — deterministic v5 seed and prebuilt cache artifacts;
-3. `6e14f5b` — corrected the stale fresh-cache test version literal.
+3. `6e14f5b` — corrected the stale fresh-cache test version literal;
+4. `9cb4206` — retained the original, correctly triggered G7 stop report;
+5. this WE-8c-FINAL completion documentation commit.
 
-Because G7 is red, the report/update phase is recorded locally and **no push is
-authorized or attempted**. Founder direction is required before this candidate
-can ship.
+The branch also includes its already-approved starting WE-8b audit commit
+`8b54f87`. With the replacement gate green, the complete local chain is
+authorized for a normal push to `origin/ayurveda-app`.
+
+## WE-8c-FINAL — Phase 1: same-session cold-launch re-measurement
+
+### Method and quiescence
+
+The retained baseline simulator was used:
+`WiseEating-WE2-Baseline`
+(`AF937668-3BFE-45E8-B42A-A76B914038DD`, iOS 26.2). WE-8b at `8b54f87` and the
+WE-8c working tip at `9cb4206` were built from the same temporary checkout with
+the same Xcode, Debug arm64 simulator configuration, dependency products, and
+compiler settings. Separate bundle identifiers (`WiseEating.Arte-Soft.we8b`
+and `.we8c`) gave each revision an independent application container and
+preseed state.
+
+Each app received one untimed fresh launch first. Calendar permission was
+resolved before measurement. The fresh logs proved cache v4/14,484 and
+v5/14,484 respectively were up to date and skipped rebuilding. The app process
+was terminated before every measured sample; the required simulator stayed
+booted.
+
+The measurement window was quiesced as follows:
+
+- Xcode IDE was closed; no `xcodebuild`, Swift compiler, Maestro, CI, or test
+  process was running;
+- exactly one simulator—the required baseline device—was booted;
+- Spotlight's `mds`/`mdworker` processes were present but measured 0.0% CPU, so
+  no active indexing was accepted into the sample window;
+- unrelated Claude and Chrome processes were temporarily suspended, not
+  terminated, for the measurement and resumed immediately afterward;
+- Codex, Simulator/CoreSimulator, WindowServer, ordinary system services, and
+  a low-CPU background VM/helper remained running; host free-memory pressure
+  was 84%.
+
+Host `time.monotonic()` was captured immediately before each
+`simctl launch --console-pty`. The terminal
+`WE6_PROFILE|first-interactive-frame|<uptime>` timestamp uses the same monotonic
+host clock. Order was strict ABAB: WE-8b then WE-8c, repeated for 12 pairs
+(N=12 per revision). Every one of the 24 launches emitted all 17 expected
+phase markers and the prebuilt-index `Skipping rebuild` line.
+
+### Raw paired series
+
+| Pair | WE-8b | WE-8c | WE-8c − WE-8b |
+|---:|---:|---:|---:|
+| 1 | 1.588892s | 1.610627s | +0.021734s |
+| 2 | 1.546783s | 1.596463s | +0.049680s |
+| 3 | 1.579416s | 1.626161s | +0.046744s |
+| 4 | 1.546557s | 1.575930s | +0.029373s |
+| 5 | 1.545704s | 1.625378s | +0.079673s |
+| 6 | 1.556416s | 1.615385s | +0.058969s |
+| 7 | 1.586173s | 1.598511s | +0.012338s |
+| 8 | 1.544133s | 1.602655s | +0.058522s |
+| 9 | 1.572773s | 1.645319s | +0.072545s |
+| 10 | 1.592086s | 1.582999s | −0.009087s |
+| 11 | 1.586035s | 1.590569s | +0.004533s |
+| 12 | 1.565302s | 1.642104s | +0.076801s |
+
+Quartiles below use the inclusive definition; standard deviation is
+population standard deviation.
+
+| Series | N | Median | IQR (Q1–Q3) | Min | Max | Stddev |
+|---|---:|---:|---:|---:|---:|---:|
+| WE-8b | 12 | **1.569038s** | 0.039343s (1.546726–1.586070) | 1.544133s | 1.592086s | 0.018122s |
+| WE-8c | 12 | **1.606641s** | 0.030584s (1.594990–1.625573) | 1.575930s | 1.645319s | 0.021285s |
+| Paired delta | 12 | **+0.048212s** | 0.042978s (+0.019385–+0.062363) | −0.009087s | +0.079673s | 0.028386s |
+
+The paired mean delta is +0.041819s. The +0.048212s paired median is larger
+than both WE-8b's 0.039343s IQR and WE-8c's 0.030584s IQR. Under the founder's
+specified IQR test, the delta is therefore resolvable in this data; it is not
+being dismissed as within either series' IQR. Its paired dispersion is reported
+without claiming a causal phase.
+
+## WE-8c-FINAL — Phase 2: replacement launch gate
+
+The per-task percentage gate is retired. `PROJECT-HANDBOOK.md` §3 now records:
+
+> Cold launch is governed by an absolute product budget, not a per-task
+> percentage. HARD CEILING 1.700s median. Any task whose measured median exceeds
+> 1.650s must include a profiling paydown in the same task. Per-task deltas are
+> always reported; they are not individually gated. Percentage-of-previous
+> gates are forbidden for launch because they ratchet.
+
+The number registry now records the same-session WE-8c median as **1.607s**.
+It is 0.093s below the hard ceiling and 0.043s below the profiling-paydown
+trigger. No launch-path code was reverted or redesigned.
+
+## WE-8c-FINAL — Phase 3: completion ruling
+
+**PASS.** The Phase 1 median is 1.606641s, which is at or below 1.700s.
+The founder's automatic completion ruling therefore applies. All previously
+green correctness gates remain the accepted WE-8c evidence:
+
+- recipe visibility 1,496 / 1,500 / 1,500 at 9 / 24 / 60 months;
+- all honey protection exact;
+- display histogram unchanged;
+- 62/62 repository tests;
+- 25/25 legacy plus 2/2 safety goldens;
+- deterministic seed/store artifacts;
+- fresh install zero inserts and no rebuild;
+- Debug and Release builds green.
+
+The final documentation-only rerun also passed the complete 62-test repository
+suite, validator/artifact audit, and artifact-hash check. No production code,
+seed artifact, search ranking, lifecycle value, claim, or UI copy changed
+during WE-8c-FINAL.
+
+## WE-8c-FINAL — Phase 4: separate `main` issue
+
+`ayurveda-data/ISSUE-MAIN-AGE-GATING.md` now records the pre-existing shipping
+issue independently of this Ayurveda report. It includes the 4,353 / 11,807 /
+12,243 visible-row counts, the full 12,601-row age histogram, and the exact
+JSON → DTO → compact index → hard-filter code path.
+
+The answer to the additional authored-rule audit is **no**: `main` has no
+auditable authored 12-month honey floor. Its source copies imported ages
+unchanged, contains no infant-botulism rule/citation, and its 36 honey-named
+rows span 6, 12, 24, and 48 months. Thus the shipping app enforces the untraced
+fill while lacking this project's only cited age rule. No `main` file or branch
+was changed.
