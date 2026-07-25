@@ -3,6 +3,7 @@ struct CompactFoodItem: Identifiable, Hashable, Sendable {
     let name: String
     let searchTokens: Set<String>
     let minAgeMonths: Int
+    let enforcedMinAgeMonths: Int
     let diets: Set<String>
     let allergens: Set<String>
     let ph: Double

@@ -6,7 +6,7 @@ final class SearchIndexStore {
     static let shared = SearchIndexStore()
 
     /// Bump this when the structure of CompactFoodItem / tokens changes
-    private let currentIndexVersion: Int = 4
+    private let currentIndexVersion: Int = 5
 
     // MARK: - In-Memory Cache
     private(set) var compactFoods: [CompactFoodItem] = []
@@ -58,9 +58,9 @@ final class SearchIndexStore {
         
         // Извличаме само храните. Вече не ни трябва NutrientIndex.
         let foods = try context.fetch(FetchDescriptor<FoodItem>())
-        let facetMap = try AyurvedaFacet.canonicalMapFromBundledSeed()
+        let canonicalMap = try AyurvedaFacet.canonicalSearchMapFromBundledSeed()
         
-        buildInMemory(foods: foods, facetMap: facetMap)
+        buildInMemory(foods: foods, canonicalMap: canonicalMap)
         try saveCache(context: context)
         
         print("🔎 SearchIndexStore: Index build complete & saved (\(foods.count) items).")
@@ -102,10 +102,10 @@ final class SearchIndexStore {
         print("🔎 SearchIndexStore: Starting full index rebuild...")
 
         let foods = try context.fetch(FetchDescriptor<FoodItem>())
-        let facetMap = try AyurvedaFacet.canonicalMapFromBundledSeed()
+        let canonicalMap = try AyurvedaFacet.canonicalSearchMapFromBundledSeed()
         // Премахнато извличането на NutrientIndex
         
-        buildInMemory(foods: foods, facetMap: facetMap)
+        buildInMemory(foods: foods, canonicalMap: canonicalMap)
 
         try saveCache(context: context)
         
@@ -122,7 +122,9 @@ final class SearchIndexStore {
             
             compactFoods[index] = CompactFoodItem(
                 id: item.id, name: item.name, searchTokens: item.searchTokens,
-                minAgeMonths: item.minAgeMonths, diets: item.diets, allergens: item.allergens,
+                minAgeMonths: item.minAgeMonths,
+                enforcedMinAgeMonths: item.enforcedMinAgeMonths,
+                diets: item.diets, allergens: item.allergens,
                 ph: item.ph, referenceWeightG: item.referenceWeightG,
                 isRecipe: item.isRecipe, isMenu: item.isMenu, isFavorite: isFavorite,
                 ayurvedaFacets: item.ayurvedaFacets,
@@ -133,7 +135,9 @@ final class SearchIndexStore {
             guard item.isFavorite != isFavorite else { return }
             compactMap[foodID] = CompactFoodItem(
                 id: item.id, name: item.name, searchTokens: item.searchTokens,
-                minAgeMonths: item.minAgeMonths, diets: item.diets, allergens: item.allergens,
+                minAgeMonths: item.minAgeMonths,
+                enforcedMinAgeMonths: item.enforcedMinAgeMonths,
+                diets: item.diets, allergens: item.allergens,
                 ph: item.ph, referenceWeightG: item.referenceWeightG,
                 isRecipe: item.isRecipe, isMenu: item.isMenu, isFavorite: isFavorite,
                 ayurvedaFacets: item.ayurvedaFacets,
@@ -180,7 +184,8 @@ final class SearchIndexStore {
         )
         let newCompactItem = makeCompactItem(
             from: food,
-            ayurvedaFacets: refreshedFacets
+            ayurvedaFacets: refreshedFacets,
+            enforcedMinAgeMonths: oldCompactItem.enforcedMinAgeMonths
         )
 
         let oldTokens = oldCompactItem.searchTokens
@@ -282,7 +287,7 @@ final class SearchIndexStore {
     /// Сега `tmpRankings` се генерира динамично от `tmpFoods`.
     private func buildInMemory(
         foods: [FoodItem],
-        facetMap: [Int: Set<String>]
+        canonicalMap: [Int: AyurvedaCanonicalSearchMetadata]
     ) {
         var tmpFoods: [CompactFoodItem] = []
         var tmpMap: [Int: CompactFoodItem] = [:]
@@ -293,9 +298,11 @@ final class SearchIndexStore {
 
         // 1. Build Compact Items & Index
         for food in foods {
+            let canonical = canonicalMap[food.id]
             let compact = makeCompactItem(
                 from: food,
-                ayurvedaFacets: facetMap[food.id] ?? []
+                ayurvedaFacets: canonical?.facets ?? [],
+                enforcedMinAgeMonths: canonical?.enforcedMinAgeMonths
             )
             tmpFoods.append(compact)
             tmpMap[compact.id] = compact
@@ -399,7 +406,8 @@ final class SearchIndexStore {
     
     private func makeCompactItem(
         from food: FoodItem,
-        ayurvedaFacets: Set<String>
+        ayurvedaFacets: Set<String>,
+        enforcedMinAgeMonths: Int? = nil
     ) -> CompactFoodItem {
         var tokenSet: Set<String>
         if !food.searchTokens.isEmpty {
@@ -462,6 +470,7 @@ final class SearchIndexStore {
             name: food.name,
             searchTokens: tokenSet,
             minAgeMonths: food.minAgeMonths,
+            enforcedMinAgeMonths: enforcedMinAgeMonths ?? food.minAgeMonths,
             diets: dietNames,
             allergens: allergenNames,
             ph: phValue,
@@ -496,6 +505,7 @@ private struct SearchIndexPayload: Codable {
         let name: String
         let searchTokens: [String]
         let minAgeMonths: Int
+        let enforcedMinAgeMonths: Int
         let diets: [String]
         let allergens: [String]
         let ph: Double
@@ -525,6 +535,7 @@ private extension CompactFoodItem {
             name: name,
             searchTokens: Array(searchTokens),
             minAgeMonths: minAgeMonths,
+            enforcedMinAgeMonths: enforcedMinAgeMonths,
             diets: Array(diets),
             allergens: Array(allergens),
             ph: ph,
@@ -546,6 +557,7 @@ private extension CompactFoodItem {
             name: codable.name,
             searchTokens: Set(codable.searchTokens),
             minAgeMonths: codable.minAgeMonths,
+            enforcedMinAgeMonths: codable.enforcedMinAgeMonths,
             diets: Set(codable.diets),
             allergens: Set(codable.allergens),
             ph: codable.ph,

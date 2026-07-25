@@ -236,7 +236,7 @@ struct ParserHarness {
                 """
             ).fetchone()
         version, food_count, payload_data = row
-        self.assertEqual((version, food_count), (4, 14_484))
+        self.assertEqual((version, food_count), (5, 14_484))
         payload = json.loads(payload_data)
         compact_by_id = {food["id"]: food for food in payload["compactFoods"]}
 
@@ -278,7 +278,7 @@ struct ParserHarness {
     def test_engine_uses_index_intersection_and_exact_title_escape_hatch(self):
         engine = SEARCH_ENGINE.read_text(encoding="utf-8")
         index_store = INDEX_STORE.read_text(encoding="utf-8")
-        self.assertIn("currentIndexVersion: Int = 4", index_store)
+        self.assertIn("currentIndexVersion: Int = 5", index_store)
         self.assertIn("ayurvedaFacetIndex", index_store)
         self.assertIn("current.intersection(facetCandidateIDs)", engine)
         self.assertIn("AyurvedaFacetParseResult.passthrough(query)", engine)

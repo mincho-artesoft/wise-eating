@@ -53,6 +53,14 @@ struct AyurvedaFacet: Hashable, Sendable {
     static func canonicalMapFromBundledSeed(
         bundle: Bundle = .main
     ) throws -> [Int: Set<String>] {
+        try canonicalSearchMapFromBundledSeed(bundle: bundle).mapValues {
+            $0.facets
+        }
+    }
+
+    static func canonicalSearchMapFromBundledSeed(
+        bundle: Bundle = .main
+    ) throws -> [Int: AyurvedaCanonicalSearchMetadata] {
         guard let url = bundle.url(
             forResource: "ayurveda_seed",
             withExtension: "json.gz"
@@ -70,10 +78,16 @@ struct AyurvedaFacet: Hashable, Sendable {
             throw AyurvedaFacetSeedError.invalidCounts
         }
 
-        return (seed.dravyas + seed.recipes).reduce(into: [:]) {
+        return try (seed.dravyas + seed.recipes).reduce(into: [:]) {
             result,
             profile in
             guard profile.isCanonical else { return }
+            guard profile.safety.enforcedMinAgeMonths >= 0,
+                  profile.safety.enforcedMinAgeMonths <= profile.safety.minAgeMonths,
+                  ["authored", "legacyImport"].contains(profile.safety.ageProvenance)
+            else {
+                throw AyurvedaFacetSeedError.invalidAgeMetadata(profile.id)
+            }
             let facets = canonicalKeys(
                 category: profile.category,
                 doshaVata: profile.dosha.vata,
@@ -85,7 +99,10 @@ struct AyurvedaFacet: Hashable, Sendable {
                 seasons: profile.seasons
             )
             guard !facets.isEmpty else { return }
-            result[profile.foodId, default: []].formUnion(facets)
+            result[profile.foodId] = AyurvedaCanonicalSearchMetadata(
+                facets: facets,
+                enforcedMinAgeMonths: profile.safety.enforcedMinAgeMonths
+            )
         }
     }
 
@@ -204,6 +221,7 @@ struct AyurvedaFacet: Hashable, Sendable {
 private enum AyurvedaFacetSeedError: LocalizedError {
     case missingBundle
     case invalidCounts
+    case invalidAgeMetadata(String)
 
     var errorDescription: String? {
         switch self {
@@ -211,6 +229,8 @@ private enum AyurvedaFacetSeedError: LocalizedError {
             return "ayurveda_seed.json.gz is missing from the app bundle"
         case .invalidCounts:
             return "the Ayurveda facet seed must contain 714 dravyas and 1,500 recipes"
+        case .invalidAgeMetadata(let profileID):
+            return "the Ayurveda seed has invalid age metadata for \(profileID)"
         }
     }
 }
@@ -227,6 +247,12 @@ private struct AyurvedaFacetSeedProfile: Decodable {
         let kapha: Int
     }
 
+    struct Safety: Decodable {
+        let minAgeMonths: Int
+        let enforcedMinAgeMonths: Int
+        let ageProvenance: String
+    }
+
     let id: String
     let category: String
     let dosha: Dosha
@@ -235,8 +261,14 @@ private struct AyurvedaFacetSeedProfile: Decodable {
     let virya: String?
     let agniEffect: Int?
     let digestibility: Int?
+    let safety: Safety
 
     var isCanonical: Bool {
         id.hasPrefix("dravya.") || id.hasPrefix("recipe.")
     }
+}
+
+struct AyurvedaCanonicalSearchMetadata: Sendable {
+    let facets: Set<String>
+    let enforcedMinAgeMonths: Int
 }

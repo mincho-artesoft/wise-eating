@@ -15,7 +15,7 @@ from pathlib import Path
 from typing import Any
 
 
-SEED_VERSION = 4
+SEED_VERSION = 5
 GENERATED_AT = "2026-07-25T00:00:00Z"
 EXPECTED_COUNTS = {
     "dravyas": 714,
@@ -76,6 +76,8 @@ NUTRIENT_CATALOG = {
 }
 SAFETY_PROVENANCE = "scaffold-default"
 SAFETY_REVIEW_REQUIRED = True
+AGE_PROVENANCE_AUTHORED = "authored"
+AGE_PROVENANCE_LEGACY_IMPORT = "legacyImport"
 DIET_VOCABULARY = {
     "Dairy-Free",
     "Egg-Free",
@@ -585,8 +587,12 @@ def derive_dravya_safety(
     controlled_diets = composition_diets_for_dravya(dravya, allergens)
     preserved_source_diets = set(source["diets"]) - COMPOSITION_DIETS
     min_age = int(source["minAgeMonths"])
+    enforced_min_age = 0
+    age_provenance = AGE_PROVENANCE_LEGACY_IMPORT
     if dravya["id"] in HONEY_DRAVYA_IDS:
         min_age = max(min_age, 12)
+        enforced_min_age = 12
+        age_provenance = AGE_PROVENANCE_AUTHORED
 
     rules = [f"category:{dravya['category']}"]
     rules.extend(f"reviewed-allergen:{allergen}" for allergen in sorted(reviewed))
@@ -599,6 +605,16 @@ def derive_dravya_safety(
         "allergens": sorted(allergens),
         "diets": sorted(preserved_source_diets.union(controlled_diets)),
         "minAgeMonths": min_age,
+        "enforcedMinAgeMonths": enforced_min_age,
+        "ageProvenance": age_provenance,
+        "ageContributors": [
+            {
+                "ingredientId": dravya["id"],
+                "minAgeMonths": min_age,
+                "enforcedMinAgeMonths": enforced_min_age,
+                "ageProvenance": age_provenance,
+            }
+        ],
         "provenance": SAFETY_PROVENANCE,
         "reviewRequired": SAFETY_REVIEW_REQUIRED,
         "rules": sorted(rules),
@@ -632,6 +648,8 @@ def normalized_direct_food_safety(source: dict[str, Any]) -> dict[str, Any]:
         "allergens": sorted(allergens),
         "diets": sorted(diets),
         "minAgeMonths": int(source["minAgeMonths"]),
+        "enforcedMinAgeMonths": 0,
+        "ageProvenance": AGE_PROVENANCE_LEGACY_IMPORT,
     }
 
 
@@ -641,6 +659,7 @@ def derive_recipe_safety(
     source_safety_by_id: dict[int, dict[str, Any]],
 ) -> dict[str, Any]:
     ingredient_safety: list[dict[str, Any]] = []
+    age_contributors: list[dict[str, Any]] = []
     contains_honey = False
     for ingredient in recipe.get("ingredients", []):
         if "dravyaId" in ingredient:
@@ -651,6 +670,7 @@ def derive_recipe_safety(
                     f"{recipe['id']}: no safety metadata for ingredient {dravya_id}"
                 )
             contains_honey = contains_honey or dravya_id in HONEY_DRAVYA_IDS
+            ingredient_id = dravya_id
         else:
             fdc_id = ingredient.get("fdcId")
             source_safety = source_safety_by_id.get(fdc_id)
@@ -659,7 +679,17 @@ def derive_recipe_safety(
                     f"{recipe['id']}: no USDA safety metadata for ingredient {fdc_id}"
                 )
             safety = normalized_direct_food_safety(source_safety)
+            ingredient_id = f"fdc:{fdc_id}"
         ingredient_safety.append(safety)
+        age_contributors.append(
+            {
+                "ingredientId": ingredient_id,
+                "grams": ingredient["grams"],
+                "minAgeMonths": int(safety["minAgeMonths"]),
+                "enforcedMinAgeMonths": int(safety["enforcedMinAgeMonths"]),
+                "ageProvenance": safety["ageProvenance"],
+            }
+        )
 
     if not ingredient_safety:
         raise BuildError(f"{recipe['id']}: cannot derive safety from no ingredients")
@@ -673,8 +703,12 @@ def derive_recipe_safety(
         diets.intersection_update(set(safety["diets"]))
 
     min_age = max(int(safety["minAgeMonths"]) for safety in ingredient_safety)
+    enforced_min_age = max(
+        int(safety["enforcedMinAgeMonths"]) for safety in ingredient_safety
+    )
     if contains_honey:
         min_age = max(min_age, 12)
+        enforced_min_age = max(enforced_min_age, 12)
 
     rules = [
         "ingredient-union:allergens",
@@ -687,6 +721,13 @@ def derive_recipe_safety(
         "allergens": sorted(allergens),
         "diets": sorted(diets),
         "minAgeMonths": min_age,
+        "enforcedMinAgeMonths": enforced_min_age,
+        "ageProvenance": (
+            AGE_PROVENANCE_AUTHORED
+            if enforced_min_age > 0
+            else AGE_PROVENANCE_LEGACY_IMPORT
+        ),
+        "ageContributors": age_contributors,
         "provenance": SAFETY_PROVENANCE,
         "reviewRequired": SAFETY_REVIEW_REQUIRED,
         "rules": sorted(rules),
@@ -1065,12 +1106,36 @@ def build_envelope(
                 ),
                 "honeyMinAgeDravyas": sum(
                     dravya["id"] in HONEY_DRAVYA_IDS
-                    and dravya["safety"]["minAgeMonths"] >= 12
+                    and dravya["safety"]["enforcedMinAgeMonths"] >= 12
                     for dravya in output_dravyas
                 ),
                 "honeyMinAgeRecipes": sum(
                     "honey-min-age:12" in recipe["safety"]["rules"]
-                    and recipe["safety"]["minAgeMonths"] >= 12
+                    and recipe["safety"]["enforcedMinAgeMonths"] >= 12
+                    for recipe in output_recipes
+                ),
+                "authoredAgeDravyas": sum(
+                    dravya["safety"]["ageProvenance"]
+                    == AGE_PROVENANCE_AUTHORED
+                    for dravya in output_dravyas
+                ),
+                "legacyImportAgeDravyas": sum(
+                    dravya["safety"]["ageProvenance"]
+                    == AGE_PROVENANCE_LEGACY_IMPORT
+                    for dravya in output_dravyas
+                ),
+                "authoredAgeRecipes": sum(
+                    recipe["safety"]["ageProvenance"]
+                    == AGE_PROVENANCE_AUTHORED
+                    for recipe in output_recipes
+                ),
+                "legacyImportAgeRecipes": sum(
+                    recipe["safety"]["ageProvenance"]
+                    == AGE_PROVENANCE_LEGACY_IMPORT
+                    for recipe in output_recipes
+                ),
+                "ageContributors": sum(
+                    len(recipe["safety"]["ageContributors"])
                     for recipe in output_recipes
                 ),
             },

@@ -168,6 +168,10 @@ class WE8SafetyDerivationTests(unittest.TestCase):
                 self.dravya_safety[dravya_id]["minAgeMonths"],
                 12,
             )
+            self.assertEqual(
+                self.dravya_safety[dravya_id]["enforcedMinAgeMonths"],
+                12,
+            )
         honey_recipes = [
             safety
             for safety in self.recipe_safety.values()
@@ -175,7 +179,11 @@ class WE8SafetyDerivationTests(unittest.TestCase):
         ]
         self.assertEqual(len(honey_recipes), 4)
         self.assertTrue(
-            all(safety["minAgeMonths"] >= 12 for safety in honey_recipes)
+            all(
+                safety["minAgeMonths"] >= 12
+                and safety["enforcedMinAgeMonths"] == 12
+                for safety in honey_recipes
+            )
         )
 
 
@@ -237,6 +245,11 @@ class WE8PreseedSafetyTests(unittest.TestCase):
             self.assertEqual(
                 compact["minAgeMonths"],
                 safety["minAgeMonths"],
+                item["id"],
+            )
+            self.assertEqual(
+                compact["enforcedMinAgeMonths"],
+                safety["enforcedMinAgeMonths"],
                 item["id"],
             )
 
@@ -323,6 +336,11 @@ class WE8PreseedSafetyTests(unittest.TestCase):
         for recipe in honey_recipes:
             self.assertGreaterEqual(
                 self.compact_by_id[recipe["foodId"]]["minAgeMonths"],
+                12,
+                recipe["id"],
+            )
+            self.assertEqual(
+                self.compact_by_id[recipe["foodId"]]["enforcedMinAgeMonths"],
                 12,
                 recipe["id"],
             )

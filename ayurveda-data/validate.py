@@ -273,8 +273,8 @@ def d34_validate(here, store, errs):
     except Exception as error:
         errs.append(f"D34/ayurveda_seed.json.gz: cannot read: {error}")
         return
-    if seed.get("seedVersion") != 4:
-        errs.append(f"D34/seed: expected seedVersion 4, got {seed.get('seedVersion')}")
+    if seed.get("seedVersion") != 5:
+        errs.append(f"D34/seed: expected seedVersion 5, got {seed.get('seedVersion')}")
     counts = seed.get("counts", {})
     expected_counts = {
         "dravyas": 714, "recipes": 1500, "links": 2305,
@@ -287,6 +287,11 @@ def d34_validate(here, store, errs):
             "allergenTaggedRecipes": 1182,
             "honeyMinAgeDravyas": 4,
             "honeyMinAgeRecipes": 4,
+            "authoredAgeDravyas": 4,
+            "legacyImportAgeDravyas": 710,
+            "authoredAgeRecipes": 4,
+            "legacyImportAgeRecipes": 1496,
+            "ageContributors": 10571,
         },
     }
     if counts != expected_counts:
@@ -331,6 +336,41 @@ def d34_validate(here, store, errs):
             errs.append(f"WE8/seed/{item_id}: safety rules are empty")
         if not isinstance(safety.get("minAgeMonths"), int) or safety["minAgeMonths"] < 0:
             errs.append(f"WE8/seed/{item_id}: invalid minimum age")
+        enforced_age = safety.get("enforcedMinAgeMonths")
+        if (
+            not isinstance(enforced_age, int)
+            or enforced_age < 0
+            or enforced_age > safety.get("minAgeMonths", -1)
+        ):
+            errs.append(f"WE8c/seed/{item_id}: invalid enforced minimum age")
+        if safety.get("ageProvenance") not in {
+            build_seed.AGE_PROVENANCE_AUTHORED,
+            build_seed.AGE_PROVENANCE_LEGACY_IMPORT,
+        }:
+            errs.append(f"WE8c/seed/{item_id}: invalid age provenance")
+        contributors = safety.get("ageContributors")
+        if not isinstance(contributors, list) or not contributors:
+            errs.append(f"WE8c/seed/{item_id}: missing age contributors")
+        else:
+            for contributor in contributors:
+                if contributor.get("ageProvenance") not in {
+                    build_seed.AGE_PROVENANCE_AUTHORED,
+                    build_seed.AGE_PROVENANCE_LEGACY_IMPORT,
+                }:
+                    errs.append(
+                        f"WE8c/seed/{item_id}: invalid contributor provenance"
+                    )
+                    break
+                if not isinstance(contributor.get("minAgeMonths"), int):
+                    errs.append(f"WE8c/seed/{item_id}: invalid contributor age")
+                    break
+                if not isinstance(
+                    contributor.get("enforcedMinAgeMonths"), int
+                ):
+                    errs.append(
+                        f"WE8c/seed/{item_id}: invalid contributor enforced age"
+                    )
+                    break
         if set(safety.get("allergens", [])) - build_seed.ALLERGEN_VOCABULARY:
             errs.append(f"WE8/seed/{item_id}: unsupported allergen")
         if set(safety.get("diets", [])) - build_seed.DIET_VOCABULARY:

@@ -982,7 +982,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                     case .menus: if item.isMenu { continue }
                     case .nutrients, .mealPlans:
                         if let cons = profileConstraints {
-                            if Double(item.minAgeMonths) > Double(cons.ageInMonths) { continue }
+                            if Double(item.enforcedMinAgeMonths) > Double(cons.ageInMonths) { continue }
                             if !cons.requiredDiets.isEmpty {
                                 var meetsAll = true
                                 for d in cons.requiredDiets { if !item.fits(dietName: d) { meetsAll = false; break } }
@@ -1073,7 +1073,8 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                     if !meetsAll { continue }
                 }
                 if let uiDiet = intent.dietFilter, !item.fits(dietName: uiDiet.rawValue) { continue }
-                if let age = intent.targetConsumerAge, Double(item.minAgeMonths) > age { continue }
+                if let age = intent.targetConsumerAge,
+                   Double(item.enforcedMinAgeMonths) > age { continue }
                 if intent.excludeAllAllergens && !item.allergens.isEmpty { continue }
                 
                 if !intent.allergenExclusions.isEmpty {

@@ -251,6 +251,11 @@ enum AyurvedaSeeder {
         + seed.counts.nutrition.estimated
         + seed.counts.nutrition.none == seed.counts.recipes,
       seed.counts.safety.profiles == seed.counts.dravyas + seed.counts.recipes,
+      seed.counts.safety.authoredAgeDravyas == 4,
+      seed.counts.safety.legacyImportAgeDravyas == 710,
+      seed.counts.safety.authoredAgeRecipes == 4,
+      seed.counts.safety.legacyImportAgeRecipes == 1_496,
+      seed.counts.safety.ageContributors == 10_571,
       seed.dravyas.count == seed.counts.dravyas,
       seed.recipes.count == seed.counts.recipes,
       seed.links.count == seed.counts.links,
@@ -276,6 +281,16 @@ enum AyurvedaSeeder {
         $0.provenance == "scaffold-default"
           && $0.reviewRequired
           && $0.minAgeMonths >= 0
+          && $0.enforcedMinAgeMonths >= 0
+          && $0.enforcedMinAgeMonths <= $0.minAgeMonths
+          && ["authored", "legacyImport"].contains($0.ageProvenance)
+          && !$0.ageContributors.isEmpty
+          && $0.ageContributors.allSatisfy({
+            $0.minAgeMonths >= 0
+              && $0.enforcedMinAgeMonths >= 0
+              && $0.enforcedMinAgeMonths <= $0.minAgeMonths
+              && ["authored", "legacyImport"].contains($0.ageProvenance)
+          })
           && Set($0.allergens).count == $0.allergens.count
           && Set($0.diets).count == $0.diets.count
           && !$0.rules.isEmpty
@@ -846,16 +861,32 @@ private struct SafetyMetadataCountsDTO: Decodable {
   let allergenTaggedRecipes: Int
   let honeyMinAgeDravyas: Int
   let honeyMinAgeRecipes: Int
+  let authoredAgeDravyas: Int
+  let legacyImportAgeDravyas: Int
+  let authoredAgeRecipes: Int
+  let legacyImportAgeRecipes: Int
+  let ageContributors: Int
 }
 
 private struct SafetyMetadataDTO: Decodable {
   let allergens: [String]
   let diets: [String]
   let minAgeMonths: Int
+  let enforcedMinAgeMonths: Int
+  let ageProvenance: String
+  let ageContributors: [AgeContributorDTO]
   let provenance: String
   let reviewRequired: Bool
   let rules: [String]
   let reviewFlags: [String]
+}
+
+private struct AgeContributorDTO: Decodable {
+  let ingredientId: String
+  let grams: Double?
+  let minAgeMonths: Int
+  let enforcedMinAgeMonths: Int
+  let ageProvenance: String
 }
 
 private struct DoshaDTO: Decodable {

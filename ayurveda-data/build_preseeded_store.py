@@ -19,13 +19,15 @@ EXPECTED = {
     "recipes": 1_500,
     "links": 2_305,
     "cacheFoods": 14_484,
-    "cacheVersion": 4,
+    "cacheVersion": 5,
     "facetFoods": 2_214,
-    "seedVersion": 4,
+    "seedVersion": 5,
     "ingredientLinks": 10_571,
     "ingredientOwners": 1_500,
     "allergenTaggedDravyas": 156,
     "allergenTaggedRecipes": 1_182,
+    "authoredAgeDravyas": 4,
+    "authoredAgeRecipes": 4,
 }
 PART_SIZE = 70 * 1024 * 1024
 
@@ -262,6 +264,30 @@ def audit_store(path: Path) -> dict[str, int]:
             EXPECTED["facetFoods"],
         )
         compact_by_id = {food["id"]: food for food in compact_foods}
+        food_ages = {
+            food_id: min_age
+            for food_id, min_age in connection.execute(
+                "SELECT ZID, ZMINAGEMONTHS FROM ZFOODITEM"
+            )
+        }
+        require_equal(
+            "compact display ages differ from FoodItem",
+            sum(
+                food.get("minAgeMonths") != food_ages[food_id]
+                for food_id, food in compact_by_id.items()
+            ),
+            0,
+        )
+        require_equal(
+            "invalid compact enforced ages",
+            sum(
+                not isinstance(food.get("enforcedMinAgeMonths"), int)
+                or food["enforcedMinAgeMonths"] < 0
+                or food["enforcedMinAgeMonths"] > food["minAgeMonths"]
+                for food in compact_foods
+            ),
+            0,
+        )
         dravya_food_ids = {
             row[0]
             for row in connection.execute(
@@ -283,6 +309,39 @@ def audit_store(path: Path) -> dict[str, int]:
             "allergen-tagged canonical recipes",
             sum(bool(compact_by_id[food_id]["allergens"]) for food_id in recipe_food_ids),
             EXPECTED["allergenTaggedRecipes"],
+        )
+        require_equal(
+            "authored-age canonical dravyas",
+            sum(
+                compact_by_id[food_id]["enforcedMinAgeMonths"] > 0
+                for food_id in dravya_food_ids
+            ),
+            EXPECTED["authoredAgeDravyas"],
+        )
+        require_equal(
+            "authored-age canonical recipes",
+            sum(
+                compact_by_id[food_id]["enforcedMinAgeMonths"] > 0
+                for food_id in recipe_food_ids
+            ),
+            EXPECTED["authoredAgeRecipes"],
+        )
+        require_equal(
+            "canonical enforced floors differ from zero-or-twelve",
+            {
+                compact_by_id[food_id]["enforcedMinAgeMonths"]
+                for food_id in profile_food_ids
+            },
+            {0, 12},
+        )
+        require_equal(
+            "non-profile age enforcement differs from display",
+            sum(
+                food["enforcedMinAgeMonths"] != food["minAgeMonths"]
+                for food_id, food in compact_by_id.items()
+                if food_id not in profile_food_ids
+            ),
+            0,
         )
         faceted_food_ids = {
             food_id
@@ -354,6 +413,8 @@ def audit_store(path: Path) -> dict[str, int]:
             ),
             "allergenTaggedDravyas": EXPECTED["allergenTaggedDravyas"],
             "allergenTaggedRecipes": EXPECTED["allergenTaggedRecipes"],
+            "authoredAgeDravyas": EXPECTED["authoredAgeDravyas"],
+            "authoredAgeRecipes": EXPECTED["authoredAgeRecipes"],
             "payloadBytes": len(payload_data),
         }
 
