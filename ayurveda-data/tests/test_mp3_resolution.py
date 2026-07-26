@@ -681,8 +681,11 @@ struct MP3ResolutionHarness {
 
     def test_mp1_static_site_counts_reflect_removed_resolution_calls(self):
         planner = PLANNER.read_text(encoding="utf-8")
-        self.assertEqual(planner.count("LanguageModelSession("), 18)
-        self.assertEqual(planner.count(".respond("), 23)
+        # MP-4 adds exactly one intent session and one guided response after
+        # MP-3 removed the two per-component resolution model sites.
+        self.assertEqual(planner.count("LanguageModelSession("), 19)
+        self.assertEqual(planner.count(".respond("), 24)
+        self.assertEqual(planner.count('site: "mealPlanIntentParse"'), 2)
 
     def test_mp2_unresolved_counting_and_structure_path_remain(self):
         planner = PLANNER.read_text(encoding="utf-8")

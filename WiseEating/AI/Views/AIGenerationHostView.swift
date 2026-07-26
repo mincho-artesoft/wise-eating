@@ -348,6 +348,16 @@ struct AIGenerationHostView: View {
                         }.buttonStyle(.plain)
                     }
                 }
+
+                if job.status == .completed,
+                   let caveat = job.result?.interpretationCaveat {
+                    Text(caveat)
+                        .font(.caption)
+                        .foregroundStyle(
+                            effectManager.currentGlobalAccentColor.opacity(0.85)
+                        )
+                        .fixedSize(horizontal: false, vertical: true)
+                }
                 
                 // ... (Логика за бутоните Completed - същата) ...
                  if job.status == .completed {

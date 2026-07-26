@@ -804,8 +804,337 @@ enum PlannerDeterministicFoodResolver {
 public final class USDAWeeklyMealPlanner: Sendable {
     private let globalTaskManager = GlobalTaskManager.shared
     private let container: ModelContainer
+
+    @MainActor
+    private static var prewarmedIntentSession: LanguageModelSession?
+
+    @MainActor
+    private static func makeIntentSession() -> LanguageModelSession {
+        LanguageModelSession(instructions: Instructions {
+            """
+            Extract the user's meal-planning intent into the supplied schema.
+            Copy food mentions in the user's own words. Do not suggest foods,
+            database identifiers, gram weights, or calorie values the user did
+            not explicitly provide. Put unsupported requests in `unmapped`.
+            """
+        })
+    }
+
+    /// Called from generation UI appearance so model loading is not paid after
+    /// the user submits. Unavailable devices keep the deterministic fallback.
+    @MainActor
+    public static func prewarmIntentModel() {
+        guard case .available = SystemLanguageModel.default.availability else {
+            return
+        }
+        guard prewarmedIntentSession == nil else { return }
+        let session = makeIntentSession()
+        session.prewarm()
+        prewarmedIntentSession = session
+    }
+
+    @MainActor
+    private static func takeIntentSession() -> LanguageModelSession {
+        let session = prewarmedIntentSession ?? makeIntentSession()
+        prewarmedIntentSession = nil
+        return session
+    }
+
     public init(container: ModelContainer) {
         self.container = container
+    }
+
+    private struct IntentInterpretation {
+        let atomicPrompts: [String]
+        let includedFoods: [String]
+        let excludedFoods: [String]
+        let interpretedPrompts: InterpretedPrompts
+        let caveat: String?
+        let usedFallback: Bool
+    }
+
+    private func mappedDiet(for pattern: DietPattern) -> DietType? {
+        switch pattern {
+        case .omnivore:
+            return nil
+        case .vegetarian, .eggetarian, .jainSattvic:
+            return .vegetarian
+        case .vegan:
+            return .vegan
+        case .pescatarian:
+            return .pescatarian
+        }
+    }
+
+    private func mappedAllergens(for tags: [AllergenTag]) -> Set<Allergen> {
+        Set(tags.flatMap { tag -> [Allergen] in
+            switch tag {
+            case .dairy: return [.milk]
+            case .gluten: return [.cerealsContainingGluten]
+            case .treeNuts: return [.nuts]
+            case .peanuts: return [.peanuts]
+            case .soy: return [.soybeans]
+            case .egg: return [.eggs]
+            case .shellfish: return [.crustaceans, .molluscs]
+            case .fish: return [.fish]
+            case .sesame: return [.sesameSeeds]
+            }
+        })
+    }
+
+    private func allergenExclusionTerms(
+        for allergens: Set<Allergen>
+    ) -> [String] {
+        let expanded = Allergen.expanded(from: allergens)
+        var seen = Set<String>()
+        return expanded
+            .sorted { $0.rawValue < $1.rawValue }
+            .flatMap { SearchKnowledgeBase.shared.allergenKeywords(for: $0) }
+            .filter { seen.insert($0.lowercased()).inserted }
+    }
+
+    private func termIsEnforcedByAllergen(
+        _ term: String,
+        allergens: Set<Allergen>
+    ) -> Bool {
+        guard let mapped = SearchKnowledgeBase.shared
+            .allergenForIngredient(term) else {
+            return false
+        }
+        let enforced = Allergen.expanded(from: allergens)
+        let termFamily = Allergen.expanded(from: [mapped])
+        return !enforced.isDisjoint(with: termFamily)
+    }
+
+    @MainActor
+    private func resolveIntentTerm(
+        _ term: String,
+        smartSearch: SmartFoodSearch3,
+        onLog: (@Sendable (String) -> Void)?
+    ) async -> String? {
+        let canonical = FoodConcepts.shared.canonical(alias: term) ?? term
+        let context = ConceptualMeal(
+            name: "Intent",
+            descriptiveTitle: "User request",
+            components: []
+        )
+        return await resolveFoodConcept(
+            smartSearch: smartSearch,
+            conceptName: canonical,
+            mealContext: context,
+            relevantPrompts: [term],
+            onLog: onLog
+        )?.resolvedName
+    }
+
+    private func interpretationGoals(for request: ParsedRequest) -> InterpretedPrompts {
+        var interpreted = InterpretedPrompts()
+
+        if let diet = mappedDiet(for: request.diet) {
+            switch request.diet {
+            case .eggetarian:
+                interpreted.qualitativeGoals.append(
+                    "Follow the existing \(diet.rawValue) diet while allowing eggs"
+                )
+            case .jainSattvic:
+                interpreted.qualitativeGoals.append(
+                    "Follow the existing \(diet.rawValue) diet with Jain sattvic preferences"
+                )
+            default:
+                interpreted.qualitativeGoals.append(
+                    "Follow the existing \(diet.rawValue) diet"
+                )
+            }
+        }
+
+        switch request.goal {
+        case .maintain:
+            interpreted.qualitativeGoals.append("Maintain current weight")
+        case .weightLoss:
+            interpreted.qualitativeGoals.append("Support gradual weight loss")
+        case .weightGain:
+            interpreted.qualitativeGoals.append("Support gradual weight gain")
+        case .muscleGain:
+            interpreted.qualitativeGoals.append("Support muscle gain")
+        case .digestion:
+            interpreted.qualitativeGoals.append("Prioritize comfortable digestion")
+        case .energy:
+            interpreted.qualitativeGoals.append("Prioritize sustained energy")
+        case .unspecified:
+            break
+        }
+
+        if request.statedKcal > 0 {
+            interpreted.qualitativeGoals.append(
+                "Aim for about \(request.statedKcal) kcal per day"
+            )
+        }
+        if let dosha = request.doshaFocus {
+            interpreted.qualitativeGoals.append(
+                "Use the named \(dosha.rawValue) dosha preference"
+            )
+        }
+        if let agni = request.agni {
+            interpreted.qualitativeGoals.append(
+                "Use the named \(agni.rawValue) digestion preference"
+            )
+        }
+        return interpreted
+    }
+
+    private func caveatLine(
+        unresolved: [String],
+        unmapped: [String],
+        adjustments: [RequestSanitizer.Adjustment]
+    ) -> String? {
+        var clauses: [String] = []
+        if !unresolved.isEmpty {
+            clauses.append(
+                "I could not resolve "
+                    + unresolved.map { "“\($0)”" }.joined(separator: ", ")
+            )
+        }
+        if !unmapped.isEmpty {
+            clauses.append(
+                "I could not apply "
+                    + unmapped.map { "“\($0)”" }.joined(separator: ", ")
+            )
+        }
+        clauses.append(contentsOf: adjustments.map {
+            $0.message.trimmingCharacters(
+                in: .whitespacesAndNewlines.union(.punctuationCharacters)
+            )
+        })
+        guard !clauses.isEmpty else { return nil }
+        return "Planner note: " + clauses.joined(separator: "; ") + "."
+    }
+
+    @MainActor
+    private func interpretIntent(
+        prompts: [String],
+        profile: Profile,
+        smartSearch: SmartFoodSearch3,
+        onLog: (@Sendable (String) -> Void)?
+    ) async -> IntentInterpretation {
+        let availability = SystemLanguageModel.default.availability
+        let modelAvailable: Bool
+        switch availability {
+        case .available:
+            modelAvailable = true
+        case .unavailable(let reason):
+            modelAvailable = false
+            emitLog(
+                "  -> Intent parser fallback: \(String(describing: reason)).",
+                onLog: onLog
+            )
+        @unknown default:
+            modelAvailable = false
+            emitLog(
+                "  -> Intent parser fallback: unknown availability.",
+                onLog: onLog
+            )
+        }
+
+        let outcome = await MealPlanIntentCoordinator.parse(
+            prompts: prompts,
+            modelAvailable: modelAvailable,
+            modelResponse: { combined in
+                let session = Self.takeIntentSession()
+                if PlannerTelemetry.isEnabled {
+                    await PlannerTelemetry.shared.noteSession(
+                        site: "mealPlanIntentParse"
+                    )
+                }
+                let response = try await session.respond(
+                    to: combined,
+                    generating: PlanRequest.self,
+                    includeSchemaInPrompt: true,
+                    options: GenerationOptions(sampling: .greedy)
+                )
+                return ParsedRequest(response.content)
+            },
+            onModelCall: { ok, elapsed in
+                if PlannerTelemetry.isEnabled {
+                    await PlannerTelemetry.shared.noteRespond(
+                        site: "mealPlanIntentParse",
+                        ok: ok,
+                        ms: elapsed
+                    )
+                }
+            }
+        )
+
+        let maintenance = Int(
+            TDEECalculator.calculate(
+                for: profile,
+                activityLevel: profile.activityLevel
+            ).rounded()
+        )
+        let sanitized = RequestSanitizer.sanitize(
+            outcome.request,
+            computedMaintenanceKcal: maintenance
+        )
+        let request = sanitized.request
+        let allergens = mappedAllergens(for: request.allergens)
+        var unresolved: [String] = []
+        var includedFoods: [String] = []
+        var excludedFoods = allergenExclusionTerms(for: allergens)
+
+        for term in request.prefer {
+            if let resolved = await resolveIntentTerm(
+                term,
+                smartSearch: smartSearch,
+                onLog: onLog
+            ) {
+                includedFoods.append(resolved)
+            } else {
+                unresolved.append(term)
+            }
+        }
+        for term in request.avoid {
+            if termIsEnforcedByAllergen(term, allergens: allergens) {
+                continue
+            }
+            if let resolved = await resolveIntentTerm(
+                term,
+                smartSearch: smartSearch,
+                onLog: onLog
+            ) {
+                excludedFoods.append(resolved)
+            } else {
+                unresolved.append(term)
+            }
+        }
+
+        func deduplicated(_ values: [String]) -> [String] {
+            var seen = Set<String>()
+            return values.filter { seen.insert($0.lowercased()).inserted }
+        }
+
+        let cleanPrompts = prompts
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+        let caveat = caveatLine(
+            unresolved: deduplicated(unresolved),
+            unmapped: request.unmapped,
+            adjustments: sanitized.adjustments
+        )
+        emitLog(
+            "  -> Intent parser: "
+                + (outcome.usedFallback ? "deterministic fallback" : "one guided call"),
+            onLog: onLog
+        )
+        if let caveat {
+            emitLog("  -> \(caveat)", onLog: onLog)
+        }
+        return IntentInterpretation(
+            atomicPrompts: cleanPrompts,
+            includedFoods: deduplicated(includedFoods),
+            excludedFoods: deduplicated(excludedFoods),
+            interpretedPrompts: interpretationGoals(for: request),
+            caveat: caveat,
+            usedFallback: outcome.usedFallback
+        )
     }
     
     private func splitIntoAtomicPrompts(_ prompts: [String]) -> [String] {
@@ -1450,35 +1779,35 @@ public final class USDAWeeklyMealPlanner: Sendable {
         var includedFoods: [String]
         let excludedFoods: [String]
         var interpretedPrompts: InterpretedPrompts
+        let interpretationCaveat: String?
         
         if let cached = progress.interpretedPrompts, let atoms = progress.atomicPrompts, let incl = progress.includedFoods, let excl = progress.excludedFoods {
             atomicPrompts = atoms
             includedFoods = incl
             excludedFoods = excl
             interpretedPrompts = cached
+            interpretationCaveat = progress.interpretationCaveat
             emitLog("  -> ✅ Checkpoint 1: Using cached interpretation results.", onLog: onLog)
         } else {
-            let atomicPromptsRaw = await aiSplitIntoAtomicPrompts(prompts ?? [], onLog: onLog)
+            let interpretation = await interpretIntent(
+                prompts: prompts ?? [],
+                profile: profile,
+                smartSearch: smartSearch,
+                onLog: onLog
+            )
             try Task.checkCancellation()
-            
-            emitLog("Atomic prompts (raw) → \(atomicPromptsRaw)", onLog: onLog)
-            let (includedFoods0, excludedFoods0) = await aiExtractRequestedFoods(from: atomicPromptsRaw, onLog: onLog)
-            try Task.checkCancellation()
-            
-            let fix = await aiFixAtomsAndFoods(originalPrompts: prompts ?? [], atoms: atomicPromptsRaw, included: includedFoods0, excluded: excludedFoods0, onLog: onLog)
-            emitLog("Inputs after aiFixAtomsAndFoods → directives=\(fix.directives), included=\(fix.included), excluded=\(fix.excluded)", onLog: onLog)
-            try Task.checkCancellation()
-            
-            atomicPrompts = fix.directives
-            includedFoods = fix.included
-            excludedFoods = fix.excluded
-            interpretedPrompts = await aiInterpretUserPrompts(prompts: atomicPrompts, includedFoods: includedFoods, excludedFoods: excludedFoods, daysAndMeals: daysAndMeals, smartSearch: smartSearch, onLog: onLog)
-            try Task.checkCancellation()
+
+            atomicPrompts = interpretation.atomicPrompts
+            includedFoods = interpretation.includedFoods
+            excludedFoods = interpretation.excludedFoods
+            interpretedPrompts = interpretation.interpretedPrompts
+            interpretationCaveat = interpretation.caveat
             
             progress.atomicPrompts = atomicPrompts
             progress.includedFoods = includedFoods
             progress.excludedFoods = excludedFoods
             progress.interpretedPrompts = interpretedPrompts
+            progress.interpretationCaveat = interpretationCaveat
             await saveProgress(jobID: jobID, progress: progress, onLog: onLog)
             emitLog("  -> ✅ Checkpoint 1: Interpretation complete and saved.", onLog: onLog)
         }
@@ -1543,7 +1872,13 @@ public final class USDAWeeklyMealPlanner: Sendable {
             emitLog("  -> ✅ Checkpoint 2: Context and palettes generated and saved.", onLog: onLog)
         }
         
-        let hardExcludes = deriveHardExcludes(from: interpretedPrompts.structuralRequests)
+        var seenHardExcludes = Set<String>()
+        let hardExcludes = (
+            deriveHardExcludes(from: interpretedPrompts.structuralRequests)
+                + excludedFoods
+        ).filter {
+            seenHardExcludes.insert($0.lowercased()).inserted
+        }
         try Task.checkCancellation()
         if PlannerTelemetry.isEnabled {
             await PlannerTelemetry.shared.endStage("context_palettes")
@@ -1798,7 +2133,8 @@ public final class USDAWeeklyMealPlanner: Sendable {
             startDate: Date(),
             prompt: conceptualPlan.planName,
             days: previewDays,
-            minAgeMonths: conceptualPlan.minAgeMonths
+            minAgeMonths: conceptualPlan.minAgeMonths,
+            interpretationCaveat: interpretationCaveat
         )
         if PlannerTelemetry.isEnabled {
             let telemetrySummary = await PlannerTelemetry.shared.summary()

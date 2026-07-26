@@ -23,6 +23,13 @@ KNOWLEDGE_BASE_PATH = (
     ROOT / "WiseEating" / "FoodSearch" / "SearchKnowledgeBase.swift"
 )
 RUNTIME_PATH = ROOT / "WiseEating" / "Ayurveda" / "FoodConcepts.swift"
+PLANNER_PATH = (
+    ROOT
+    / "WiseEating"
+    / "AI"
+    / "MealPlanning"
+    / "USDAWeeklyMealPlanner.swift"
+)
 
 DIRECTOR_HASHES = {
     ONTOLOGY_PATH: "2755da46ab2621d6ed4acb9204b4953d79eb03e8893f568c748e5abda9a48d24",
@@ -259,7 +266,7 @@ class FoodConceptTests(unittest.TestCase):
             bundled = json.load(source)
         self.assertEqual(bundled, self.artifact)
 
-    def test_runtime_service_is_lazy_sendable_and_has_no_consumer(self):
+    def test_runtime_service_is_lazy_sendable_with_only_mp4_consumer(self):
         source = RUNTIME_PATH.read_text(encoding="utf-8")
         self.assertIn("public struct FoodConcepts: Sendable", source)
         self.assertIn("public func members(of concept: String) -> Set<Int32>", source)
@@ -277,7 +284,12 @@ class FoodConceptTests(unittest.TestCase):
                 errors="ignore",
             ):
                 consumers.append(path)
-        self.assertEqual(consumers, [])
+        self.assertEqual(consumers, [PLANNER_PATH])
+        planner = PLANNER_PATH.read_text(encoding="utf-8")
+        self.assertEqual(
+            planner.count("FoodConcepts.shared.canonical(alias: term)"),
+            1,
+        )
 
 
 if __name__ == "__main__":

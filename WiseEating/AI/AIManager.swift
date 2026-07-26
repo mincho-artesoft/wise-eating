@@ -611,7 +611,8 @@ final class AIManager: ObservableObject {
                             startDate: generatedPreview.startDate,
                             prompt: generatedPreview.prompt,
                             days: mergedDays,
-                            minAgeMonths: generatedPreview.minAgeMonths
+                            minAgeMonths: generatedPreview.minAgeMonths,
+                            interpretationCaveat: generatedPreview.interpretationCaveat
                         )
                         return .success(try JSONEncoder().encode(finalPreview))
                         

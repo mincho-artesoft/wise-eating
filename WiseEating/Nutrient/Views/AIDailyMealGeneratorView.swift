@@ -137,6 +137,11 @@ struct AIDailyMealGeneratorView: View {
                 }
             } message: { _ in Text("Are you sure you want to delete this prompt? This action cannot be undone.") }
         }
+        .task {
+            if #available(iOS 26.0, *) {
+                USDAWeeklyMealPlanner.prewarmIntentModel()
+            }
+        }
     }
     
     private var toolbar: some View {

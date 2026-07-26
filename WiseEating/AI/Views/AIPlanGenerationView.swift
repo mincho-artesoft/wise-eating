@@ -34,6 +34,11 @@ struct AIPlanGenerationView: View {
             }
             .padding()
         }
+        .task {
+            if #available(iOS 26.0, *) {
+                USDAWeeklyMealPlanner.prewarmIntentModel()
+            }
+        }
     }
     
     @ViewBuilder
