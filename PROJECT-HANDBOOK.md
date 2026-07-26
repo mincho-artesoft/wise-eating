@@ -2,10 +2,10 @@
 **Read this first. It is the knowledge-transfer document for anyone (human or AI)
 taking over direction of this project. Update it at the end of every milestone —
 that is a standing rule baked into all task packets.**
-Last updated: 2026-07-26 (FC-1e feature branch wires the rev5 food-concept
-ontology into planner exclusions and deterministic resolution; all authorized
-host/simulator gates pass. The branch is intentionally unmerged and unpushed,
-and the physical-device gates remain explicit in
+Last updated: 2026-07-26 (MP-5 feature branch replaces model-authored plan
+assembly and its repair pipeline with a deterministic, hard-validated solver.
+All host/simulator gates pass. The branch is intentionally unmerged and
+unpushed, and the physical-device gates remain explicit in
 `ayurveda-data/DEFERRED-VALIDATION.md`).
 
 ## 1. Mission and the two applications
@@ -140,6 +140,16 @@ simulation; must always pass).
   exclusion-gated, and makes no model call in the statically proven production
   resolution path. Physical-device generation evidence remains in
   `DEFERRED-VALIDATION.md`.
+- `WiseEating/AI/MealPlanning/DeterministicMealPlanSolver.swift` (MP-5 feature
+  branch): Foundation-only greedy construction plus bounded iterated local
+  search, driven by SplitMix64. Hard FoodConcept/diet/allergen/age/engine/
+  viruddha/placement constraints validate before emit; exact USDA arithmetic,
+  adaptive 2–6 dish counts, rolling rasa, agni, season, variety, and dosha
+  objectives determine safe plans. Structured placements stay typed end to
+  end; infeasibility names the blocking constraint. The
+  `MP5AyurvedicSolverEnabled` flag is off by default and gates only aiDraft
+  Ayurveda scoring; deterministic structural/safety assembly is common to both
+  modes.
 - INT-1 keeps warm seed-version checks off the full 2,214-record decode path:
   `bundleSeedVersion()` decodes a one-field DTO from the authoritative bundle;
   actual seed/delta runs still perform the unchanged full decode and validation.
@@ -177,6 +187,11 @@ simulation; must always pass).
     gates. Only non-contested cases contribute to blocking gate arithmetic;
     executors never silently resolve a contested policy question.
 13. No GIT-TRACKED file may exceed 100 MB (GitHub's hard push limit). Split at 90 MB. Bundled media excluded from version control — currently WiseEating/Food/food_archive_1024.mp4 — is out of scope for this gate; it is governed by App Store bundle limits (4 GB uncompressed, 200 MB cellular download) and is tracked separately under the IMG workstream.
+14. Deterministic meal assembly validates hard constraints before emit and
+    reports named infeasibility; it never silently relaxes safety. Ayurvedic
+    objective authority is `rasa < vipaka < virya < prabhava`. Vikriti is soft,
+    rasa coverage is rolling/habitual, and aiDraft Ayurveda scoring remains
+    behind `MP5AyurvedicSolverEnabled`, off by default until vaidya review.
 
 ## 4. Working process (the pattern that built all of this)
 
@@ -232,6 +247,8 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | Integrated cold launch (INT-1, Debug simulator) | **1.461s** median vs `d393bda` 1.654s, N=10 same-session ABAB; paired median −0.195s. Warm Ayurveda check 0.226s→0.044s |
 | FC-1e feature-branch suite / resolution | **98/98** tests · 25/25 + 2/2 search goldens · resolution training 59/59 · held-out 44/48 with zero wrong-confident matches |
 | FC-1e cold launch (Debug simulator) | candidate **1.433s** median vs `06c767b` 1.425s, N=10 same-session ABAB; paired median +0.010s, smaller than both IQRs and not resolvable |
+| MP-5 feature-branch solver | **108/108** tests · 23/23 hard properties · 13/13 soft properties measured · Y1 pacifying delta **+0.5209** · P10 named infeasible · maximum solve 50.028ms · planner 5,374→3,348 lines |
+| MP-5 cold launch (Debug simulator) | candidate **1.401s** median vs `003bed7` 1.403s, N=10 same-session ABAB; paired median −0.004s, smaller than both IQRs and not resolvable |
 
 ## 6. Milestone ledger (update after every task)
 
@@ -260,6 +277,7 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | FC-1/FC-1b food concept ontology | ✅ COMPLETE / INTEGRATED — 25 concepts / 75 aliases resolve deterministic membership across 14,484 catalogue rows behind an unused lazy runtime service. Non-contested exclusion gates have zero resolved failures; eight contested cases remain separately reported. See `REPORT-FC1.md` |
 | INT-1 branch integration | ✅ AUTHORIZED HOST/SIMULATOR SCOPE COMPLETE — unsquashed MP and FC histories merged in order; 95/95 tests, 25+2 search goldens, validator, Debug/Release with zero new warnings, deterministic rebuilt artifacts, fresh zero-insert/no-rebuild, exact corpora, and 1.461s launch median pass. Device work is preserved in `DEFERRED-VALIDATION.md`; see `REPORT-INT1.md` |
 | FC-1e rev5 ontology + FC-2 wiring | ✅ HOST/SIMULATOR COMPLETE ON FEATURE BRANCH / NOT MERGED OR PUSHED — plural-tolerant `vetoTokens` close coconut 1→0 and veto oyster mushroom in both token orders; planner exclusion is canonical set subtraction with the WE-8/FC-1 authority boundary; the hardcoded alcohol list and exclusion substring paths are removed; resolution is 59/59 training and 44/48 held-out. All 98 tests, 25+2 search goldens, validator, Debug/Release, deterministic artifacts, fresh zero-insert/no-rebuild, tracked-size gate, and 1.433s launch median pass. See `REPORT-FC1e.md` |
+| MP-5 deterministic plan assembly | ✅ HOST/SIMULATOR COMPLETE ON FEATURE BRANCH / NOT MERGED OR PUSHED — Foundation-only deterministic assembly replaces the model-authored plan plus 14 repair targets; 23/23 hard properties pass, all 13 soft objectives are reported, Y1 improves pacification by +0.5209, P10 names allergen infeasibility, and P7/P8 hit exact calorie edges. All 108 tests, 25+2 search goldens, 59/59 + 44/48 resolution, validator, Debug/Release, fresh zero-insert/no-rebuild, tracked-size, and 1.401s launch gates pass. Ayurveda scoring is behind `MP5AyurvedicSolverEnabled`, off by default pending vaidya review. See `REPORT-MP5.md` |
 | Expert review pass | ⏳ pending human reviewer: work aiDraft→reviewed, resolve reviewNotes, optional batch-31 top-up to 750 |
 | Later roadmap | media (yoga/meditation content), recommendation engine, dosha assessment — see ayurveda-data/RESTART-PLAN.md history |
 
