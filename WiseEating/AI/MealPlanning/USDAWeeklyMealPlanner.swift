@@ -51,20 +51,36 @@ public final class USDAWeeklyMealPlanner: Sendable {
                 """
             }
             let session = LanguageModelSession(instructions: instructions)
+            if PlannerTelemetry.isEnabled {
+                await PlannerTelemetry.shared.noteSession(site: "aiSplitSinglePrompt")
+            }
             let prompt = """
             Split the following user text into atomic directives:
             
             \(single)
             """
             
+            var telemetryRespondStartedAt: UInt64?
+            var telemetryRespondRecorded = false
             do {
                 try Task.checkCancellation()
+                if PlannerTelemetry.isEnabled {
+                    telemetryRespondStartedAt = DispatchTime.now().uptimeNanoseconds
+                }
                 let resp = try await session.respond(
                     to: prompt,
                     generating: AIAtomicPromptsResponse.self,
                     includeSchemaInPrompt: true,
                     options: GenerationOptions(sampling: .greedy)
                 )
+                if let startedAt = telemetryRespondStartedAt {
+                    await PlannerTelemetry.shared.noteRespond(
+                        site: "aiSplitSinglePrompt",
+                        ok: true,
+                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                    )
+                    telemetryRespondRecorded = true
+                }
                 try Task.checkCancellation()
                 var atoms = resp.content.directives
                     .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
@@ -83,6 +99,13 @@ public final class USDAWeeklyMealPlanner: Sendable {
                 
                 return filterMetaDirectives(atoms)
             } catch {
+                if let startedAt = telemetryRespondStartedAt, !telemetryRespondRecorded {
+                    await PlannerTelemetry.shared.noteRespond(
+                        site: "aiSplitSinglePrompt",
+                        ok: false,
+                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                    )
+                }
                 onLog?("    - ⚠️ Atomic split via AI failed for prompt: '\(single)'. Falling back to heuristic.")
                 return filterMetaDirectives(splitIntoAtomicPrompts([single]))
             }
@@ -115,6 +138,9 @@ public final class USDAWeeklyMealPlanner: Sendable {
             - Normalize all names to simple USDA-like forms without portions.
             """
         })
+        if PlannerTelemetry.isEnabled {
+            await PlannerTelemetry.shared.noteSession(site: "aiExtractRequestedFoods")
+        }
         
         let prompt = """
         Extract both included and excluded food names the user mentioned.
@@ -123,9 +149,22 @@ public final class USDAWeeklyMealPlanner: Sendable {
         \(prompts.map { "- \($0)" }.joined(separator: "\n"))
         """
         
+        var telemetryRespondStartedAt: UInt64?
+        var telemetryRespondRecorded = false
         do {
             try Task.checkCancellation()
+            if PlannerTelemetry.isEnabled {
+                telemetryRespondStartedAt = DispatchTime.now().uptimeNanoseconds
+            }
             let resp = try await session.respond(to: prompt, generating: AIFoodExtractionResponse.self, includeSchemaInPrompt: true, options: GenerationOptions(sampling: .greedy))
+            if let startedAt = telemetryRespondStartedAt {
+                await PlannerTelemetry.shared.noteRespond(
+                    site: "aiExtractRequestedFoods",
+                    ok: true,
+                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                )
+                telemetryRespondRecorded = true
+            }
             try Task.checkCancellation()
             var seenIncluded = Set<String>()
             let cleanedIncluded: [String] = resp.content.includedFoods.compactMap { raw in
@@ -164,6 +203,13 @@ public final class USDAWeeklyMealPlanner: Sendable {
             return (included: cleanedIncluded, excluded: prunedExcluded)
             
         } catch {
+            if let startedAt = telemetryRespondStartedAt, !telemetryRespondRecorded {
+                await PlannerTelemetry.shared.noteRespond(
+                    site: "aiExtractRequestedFoods",
+                    ok: false,
+                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                )
+            }
             onLog?("    - ⚠️ Food-name extraction failed: \(error.localizedDescription). Falling back to heuristic.")
         }
         
@@ -199,6 +245,9 @@ public final class USDAWeeklyMealPlanner: Sendable {
         }
         
         let session = LanguageModelSession(instructions: instructions)
+        if PlannerTelemetry.isEnabled {
+            await PlannerTelemetry.shared.noteSession(site: "aiFixAtomsAndFoods")
+        }
         let prompt = """
         RAW_PROMPTS:\n\(originalPrompts.map { "- \($0)" }.joined(separator: "\n"))
         
@@ -208,14 +257,27 @@ public final class USDAWeeklyMealPlanner: Sendable {
         CURRENT_EXCLUDED_FOODS:\n\(excluded)
         """
         
+        var telemetryRespondStartedAt: UInt64?
+        var telemetryRespondRecorded = false
         do {
             try Task.checkCancellation()
+            if PlannerTelemetry.isEnabled {
+                telemetryRespondStartedAt = DispatchTime.now().uptimeNanoseconds
+            }
             let resp = try await session.respond(
                 to: prompt,
                 generating: AIAtomsAndFoodsFixResponse.self,
                 includeSchemaInPrompt: true,
                 options: GenerationOptions(sampling: .greedy)
             )
+            if let startedAt = telemetryRespondStartedAt {
+                await PlannerTelemetry.shared.noteRespond(
+                    site: "aiFixAtomsAndFoods",
+                    ok: true,
+                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                )
+                telemetryRespondRecorded = true
+            }
             try Task.checkCancellation()
             var dirs = resp.content.fixedDirectives
                 .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
@@ -254,6 +316,13 @@ public final class USDAWeeklyMealPlanner: Sendable {
             
             return (dirs, inc, exc)
         } catch {
+            if let startedAt = telemetryRespondStartedAt, !telemetryRespondRecorded {
+                await PlannerTelemetry.shared.noteRespond(
+                    site: "aiFixAtomsAndFoods",
+                    ok: false,
+                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                )
+            }
             onLog?("    - ⚠️ Post-fix AI pass failed: \(error.localizedDescription). Keeping previous atoms/foods.")
             return (atoms, included, excluded)
         }
@@ -539,7 +608,14 @@ public final class USDAWeeklyMealPlanner: Sendable {
         mealTimings: [String: Date]?,
         onLog: (@Sendable (String) -> Void)?
     ) async throws -> MealPlanPreview {
-        
+        if PlannerTelemetry.isEnabled {
+            let mealCount = daysAndMeals.values.reduce(0) { $0 + $1.count }
+            let promptLabel = (prompts ?? []).joined(separator: " | ")
+            await PlannerTelemetry.shared.reset(
+                label: "days=\(daysAndMeals.count);meals=\(mealCount);prompts=\(promptLabel)"
+            )
+        }
+        do {
         // --- START OF CHANGE (2/3): Load or initialize progress ---
         let ctx = ModelContext(self.container)
         let excludedFoodIds = AyurvedaRecommendationGate.excludedFoodIds(context: ctx)
@@ -569,6 +645,9 @@ public final class USDAWeeklyMealPlanner: Sendable {
         try Task.checkCancellation()
         
         // --- Checkpoint 1: Interpretation ---
+        if PlannerTelemetry.isEnabled {
+            await PlannerTelemetry.shared.beginStage("interpretation")
+        }
         let atomicPrompts: [String]
         var includedFoods: [String]
         let excludedFoods: [String]
@@ -608,8 +687,14 @@ public final class USDAWeeklyMealPlanner: Sendable {
         
         logInterpretedGoals(interpretedPrompts, onLog: onLog)
         try Task.checkCancellation()
+        if PlannerTelemetry.isEnabled {
+            await PlannerTelemetry.shared.endStage("interpretation")
+        }
         
         // --- Checkpoint 2: Context & Palettes ---
+        if PlannerTelemetry.isEnabled {
+            await PlannerTelemetry.shared.beginStage("context_palettes")
+        }
         var contextTags: [(kind: String, tag: String)]
         var foodPalettesByContext: [(kind: String, tag: String, foods: [String], associatedCuisine: String?)]
         
@@ -662,13 +747,22 @@ public final class USDAWeeklyMealPlanner: Sendable {
         
         let hardExcludes = deriveHardExcludes(from: interpretedPrompts.structuralRequests)
         try Task.checkCancellation()
+        if PlannerTelemetry.isEnabled {
+            await PlannerTelemetry.shared.endStage("context_palettes")
+        }
         
         // --- Checkpoint 3: Conceptual Plan ---
+        if PlannerTelemetry.isEnabled {
+            await PlannerTelemetry.shared.beginStage("conceptual_plan")
+        }
         var conceptualPlan: AIConceptualPlanResponse
         
         if let cachedPlan = progress.conceptualPlan {
             conceptualPlan = cachedPlan
             emitLog("  -> ✅ Checkpoint 3: Using cached conceptual plan.", onLog: onLog)
+            if PlannerTelemetry.isEnabled {
+                await PlannerTelemetry.shared.endStage("conceptual_plan")
+            }
         } else {
             let cuisineTagCSV = contextTags.filter { $0.kind == "cuisine" }.map { $0.tag }.joined(separator: ", ")
             
@@ -767,11 +861,20 @@ public final class USDAWeeklyMealPlanner: Sendable {
                 }
             }
             
+            if PlannerTelemetry.isEnabled {
+                await PlannerTelemetry.shared.endStage("conceptual_plan")
+            }
+            if PlannerTelemetry.isEnabled {
+                await PlannerTelemetry.shared.beginStage("polish")
+            }
             conceptualPlan = await polishConceptualPlan(
                 plan: conceptualPlan, profile: profile, daysAndMeals: daysAndMeals, rules: rules,
                 excludedFoods: hardExcludes, foodPalette: foodPalettesByContext.flatMap { $0.foods },
                 smartSearch: smartSearch, onLog: onLog
             )
+            if PlannerTelemetry.isEnabled {
+                await PlannerTelemetry.shared.endStage("polish")
+            }
             try Task.checkCancellation()
             
             progress.conceptualPlan = conceptualPlan
@@ -791,7 +894,14 @@ public final class USDAWeeklyMealPlanner: Sendable {
         for conceptualDay in conceptualPlan.days.sorted(by: { $0.day < $1.day }) {
             try Task.checkCancellation()
             
+            if PlannerTelemetry.isEnabled {
+                await PlannerTelemetry.shared.beginStage("goal_adjustment")
+            }
             let adjustedDay = await validateAndAdjustDayForGoals(day: conceptualDay, goals: interpretedPrompts.numericalGoals, onLog: onLog)
+            if PlannerTelemetry.isEnabled {
+                await PlannerTelemetry.shared.endStage("goal_adjustment")
+                await PlannerTelemetry.shared.beginStage("resolution")
+            }
             var previewMeals: [MealPlanPreviewMeal] = []
             
             for conceptualMeal in adjustedDay.meals {
@@ -857,6 +967,9 @@ public final class USDAWeeklyMealPlanner: Sendable {
                 try Task.checkCancellation()
             }
             previewDays.append(MealPlanPreviewDay(dayIndex: adjustedDay.day, meals: previewMeals))
+            if PlannerTelemetry.isEnabled {
+                await PlannerTelemetry.shared.endStage("resolution")
+            }
             try Task.checkCancellation()
         }
         
@@ -865,7 +978,24 @@ public final class USDAWeeklyMealPlanner: Sendable {
         job.intermediateResultData = nil
         try ctx.save()
         
-        return MealPlanPreview(startDate: Date(), prompt: conceptualPlan.planName, days: previewDays, minAgeMonths: conceptualPlan.minAgeMonths)
+        let preview = MealPlanPreview(
+            startDate: Date(),
+            prompt: conceptualPlan.planName,
+            days: previewDays,
+            minAgeMonths: conceptualPlan.minAgeMonths
+        )
+        if PlannerTelemetry.isEnabled {
+            let telemetrySummary = await PlannerTelemetry.shared.summary()
+            emitLog(telemetrySummary, onLog: onLog)
+        }
+        return preview
+        } catch {
+            if PlannerTelemetry.isEnabled {
+                let telemetrySummary = await PlannerTelemetry.shared.summary()
+                emitLog(telemetrySummary, onLog: onLog)
+            }
+            throw error
+        }
     }
     
     @inline(__always) private func roundTo5(_ x: Double) -> Double { (x / 5.0).rounded() * 5.0 }
@@ -998,6 +1128,9 @@ public final class USDAWeeklyMealPlanner: Sendable {
         }
         
         let session = LanguageModelSession(instructions: instructions)
+        if PlannerTelemetry.isEnabled {
+            await PlannerTelemetry.shared.noteSession(site: "aiInferContextTags")
+        }
         
         func truncateList(_ arr: [String], maxCount: Int, maxLen: Int) -> [String] {
             return arr.prefix(maxCount).map { $0.count > maxLen ? String($0.prefix(maxLen)) : $0 }
@@ -1021,15 +1154,28 @@ public final class USDAWeeklyMealPlanner: Sendable {
         \(includedSlim.joined(separator: " | "))
         """
         
+        var telemetryRespondStartedAt: UInt64?
+        var telemetryRespondRecorded = false
         do {
             try Task.checkCancellation()
             
+            if PlannerTelemetry.isEnabled {
+                telemetryRespondStartedAt = DispatchTime.now().uptimeNanoseconds
+            }
             let result = try await session.respond(
                 to: promptSummary,
                 generating: AIContextTagsResponse.self,
                 includeSchemaInPrompt: true,
                 options: GenerationOptions(sampling: .greedy)
             )
+            if let startedAt = telemetryRespondStartedAt {
+                await PlannerTelemetry.shared.noteRespond(
+                    site: "aiInferContextTags",
+                    ok: true,
+                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                )
+                telemetryRespondRecorded = true
+            }
             
             try Task.checkCancellation()
             
@@ -1066,6 +1212,13 @@ public final class USDAWeeklyMealPlanner: Sendable {
             }
             
         } catch {
+            if let startedAt = telemetryRespondStartedAt, !telemetryRespondRecorded {
+                await PlannerTelemetry.shared.noteRespond(
+                    site: "aiInferContextTags",
+                    ok: false,
+                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                )
+            }
             onLog?("  -> AI context inference failed: \(error.localizedDescription). Using cuisine:any.")
             return (headwords: [], cuisines: ["any"])
         }
@@ -1086,15 +1239,42 @@ public final class USDAWeeklyMealPlanner: Sendable {
             - Do not add portions or explanations.
             """
         })
+        if PlannerTelemetry.isEnabled {
+            await PlannerTelemetry.shared.noteSession(site: "aiGenerateVariantsOnly")
+        }
         let prompt = "HEADWORD: \"\(headword)\"\nGenerate popular variants only."
         try Task.checkCancellation()
         
-        let resp = try await session.respond(
-            to: prompt,
-            generating: AIHeadwordVariantsResponse.self,
-            includeSchemaInPrompt: true,
-            options: GenerationOptions(sampling: .greedy, maximumResponseTokens: 1024)
-        )
+        let resp = try await {
+            let startedAt = PlannerTelemetry.isEnabled
+                ? DispatchTime.now().uptimeNanoseconds
+                : nil
+            do {
+                let response = try await session.respond(
+                    to: prompt,
+                    generating: AIHeadwordVariantsResponse.self,
+                    includeSchemaInPrompt: true,
+                    options: GenerationOptions(sampling: .greedy, maximumResponseTokens: 1024)
+                )
+                if let startedAt {
+                    await PlannerTelemetry.shared.noteRespond(
+                        site: "aiGenerateVariantsOnly",
+                        ok: true,
+                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                    )
+                }
+                return response
+            } catch {
+                if let startedAt {
+                    await PlannerTelemetry.shared.noteRespond(
+                        site: "aiGenerateVariantsOnly",
+                        ok: false,
+                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                    )
+                }
+                throw error
+            }
+        }()
         try Task.checkCancellation()
         
         var seen = Set<String>()
@@ -1261,6 +1441,9 @@ public final class USDAWeeklyMealPlanner: Sendable {
             - No explanations; return only the schema.
             """
         })
+        if PlannerTelemetry.isEnabled {
+            await PlannerTelemetry.shared.noteSession(site: "aiGenerateFoodPaletteForCuisine")
+        }
         
         let prompt = """
         PROFILE:
@@ -1272,12 +1455,36 @@ public final class USDAWeeklyMealPlanner: Sendable {
         onLog?("Cuisine prompt: \(prompt)")
         try Task.checkCancellation()
         
-        let resp = try await session.respond(
-            to: prompt,
-            generating: AIFoodPaletteResponse.self,
-            includeSchemaInPrompt: true,
-            options: GenerationOptions(sampling: .greedy, maximumResponseTokens: 2048)
-        )
+        let resp = try await {
+            let startedAt = PlannerTelemetry.isEnabled
+                ? DispatchTime.now().uptimeNanoseconds
+                : nil
+            do {
+                let response = try await session.respond(
+                    to: prompt,
+                    generating: AIFoodPaletteResponse.self,
+                    includeSchemaInPrompt: true,
+                    options: GenerationOptions(sampling: .greedy, maximumResponseTokens: 2048)
+                )
+                if let startedAt {
+                    await PlannerTelemetry.shared.noteRespond(
+                        site: "aiGenerateFoodPaletteForCuisine",
+                        ok: true,
+                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                    )
+                }
+                return response
+            } catch {
+                if let startedAt {
+                    await PlannerTelemetry.shared.noteRespond(
+                        site: "aiGenerateFoodPaletteForCuisine",
+                        ok: false,
+                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                    )
+                }
+                throw error
+            }
+        }()
         try Task.checkCancellation()
         
         var seen = Set<String>()
@@ -1320,6 +1527,9 @@ public final class USDAWeeklyMealPlanner: Sendable {
             7.  **Output:** Return only the required schema containing the inferred cuisine and the list of 16-25 food items.
             """
         })
+        if PlannerTelemetry.isEnabled {
+            await PlannerTelemetry.shared.noteSession(site: "aiGenerateFoodPaletteForHeadword")
+        }
         
         let complementaryFoodPrompt = """
         PROFILE:
@@ -1331,12 +1541,36 @@ public final class USDAWeeklyMealPlanner: Sendable {
         onLog?("Complementary food prompt: \(complementaryFoodPrompt)")
         try Task.checkCancellation()
         
-        let complementaryFoodResp = try await complementaryFoodSession.respond(
-            to: complementaryFoodPrompt,
-            generating: AIHeadwordPaletteResponse.self,
-            includeSchemaInPrompt: true,
-            options: GenerationOptions(sampling: .greedy, maximumResponseTokens: 2048)
-        )
+        let complementaryFoodResp = try await {
+            let startedAt = PlannerTelemetry.isEnabled
+                ? DispatchTime.now().uptimeNanoseconds
+                : nil
+            do {
+                let response = try await complementaryFoodSession.respond(
+                    to: complementaryFoodPrompt,
+                    generating: AIHeadwordPaletteResponse.self,
+                    includeSchemaInPrompt: true,
+                    options: GenerationOptions(sampling: .greedy, maximumResponseTokens: 2048)
+                )
+                if let startedAt {
+                    await PlannerTelemetry.shared.noteRespond(
+                        site: "aiGenerateFoodPaletteForHeadword",
+                        ok: true,
+                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                    )
+                }
+                return response
+            } catch {
+                if let startedAt {
+                    await PlannerTelemetry.shared.noteRespond(
+                        site: "aiGenerateFoodPaletteForHeadword",
+                        ok: false,
+                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                    )
+                }
+                throw error
+            }
+        }()
         try Task.checkCancellation()
         
         let headLower = headword.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
@@ -1369,19 +1603,35 @@ public final class USDAWeeklyMealPlanner: Sendable {
                 - Return only the schema with the food examples. The 'inferredCuisine' field can be the cuisine of the headword.
                 """
             })
+            if PlannerTelemetry.isEnabled {
+                await PlannerTelemetry.shared.noteSession(site: "aiGenerateFoodPaletteForHeadword")
+            }
             
             let variantsPrompt = "HEADWORD: \"\(headword)\"\n\nGenerate popular variants for this headword."
             onLog?("Variants prompt: \(variantsPrompt)")
             
+            var telemetryRespondStartedAt: UInt64?
+            var telemetryRespondRecorded = false
             do {
                 try Task.checkCancellation()
                 
+                if PlannerTelemetry.isEnabled {
+                    telemetryRespondStartedAt = DispatchTime.now().uptimeNanoseconds
+                }
                 let variantsResp = try await variantsSession.respond(
                     to: variantsPrompt,
                     generating: AIHeadwordVariantsResponse.self,
                     includeSchemaInPrompt: true,
                     options: GenerationOptions(sampling: .greedy, maximumResponseTokens: 2048)
                 )
+                if let startedAt = telemetryRespondStartedAt {
+                    await PlannerTelemetry.shared.noteRespond(
+                        site: "aiGenerateFoodPaletteForHeadword",
+                        ok: true,
+                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                    )
+                    telemetryRespondRecorded = true
+                }
                 try Task.checkCancellation()
                 
                 let variants = variantsResp.content.foodExamples.compactMap { n -> String? in
@@ -1395,6 +1645,13 @@ public final class USDAWeeklyMealPlanner: Sendable {
                 onLog?("  -> Added \(variants.count) variants.")
                 
             } catch {
+                if let startedAt = telemetryRespondStartedAt, !telemetryRespondRecorded {
+                    await PlannerTelemetry.shared.noteRespond(
+                        site: "aiGenerateFoodPaletteForHeadword",
+                        ok: false,
+                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                    )
+                }
                 onLog?("Could not generate variants for headword '\(headword)': \(error.localizedDescription)")
             }
         }
@@ -1686,6 +1943,9 @@ public final class USDAWeeklyMealPlanner: Sendable {
                              => { "qualitativeGoal": "Prefer low sodium choices" }
                 """
             })
+            if PlannerTelemetry.isEnabled {
+                await PlannerTelemetry.shared.noteSession(site: "aiInterpretUserPrompts")
+            }
             
             let promptForAI = """
             You are an expert prompt analyzer. Analyze ONLY the SINGLE user prompt below and return an object that fits ONE (and only one) of these categories:
@@ -1700,9 +1960,22 @@ public final class USDAWeeklyMealPlanner: Sendable {
             USER PROMPT: "\(prompt)"
             """
             
+            var telemetryRespondStartedAt: UInt64?
+            var telemetryRespondRecorded = false
             do {
                 try Task.checkCancellation()
+                if PlannerTelemetry.isEnabled {
+                    telemetryRespondStartedAt = DispatchTime.now().uptimeNanoseconds
+                }
                 let response = try await session.respond(to: promptForAI, generating: AIInterpretedPrompt.self, includeSchemaInPrompt: true, options: GenerationOptions(sampling: .greedy))
+                if let startedAt = telemetryRespondStartedAt {
+                    await PlannerTelemetry.shared.noteRespond(
+                        site: "aiInterpretUserPrompts",
+                        ok: true,
+                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                    )
+                    telemetryRespondRecorded = true
+                }
                 try Task.checkCancellation()
                 await processSingleAIInterpretation(
                     response.content,
@@ -1714,6 +1987,13 @@ public final class USDAWeeklyMealPlanner: Sendable {
                 )
                 try Task.checkCancellation()
             } catch {
+                if let startedAt = telemetryRespondStartedAt, !telemetryRespondRecorded {
+                    await PlannerTelemetry.shared.noteRespond(
+                        site: "aiInterpretUserPrompts",
+                        ok: false,
+                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                    )
+                }
                 onLog?("    - ⚠️ AI interpretation for prompt '\(prompt)' failed: \(error.localizedDescription). Treating as qualitative goal.")
                 interpreted.qualitativeGoals.append(prompt)
             }
@@ -1979,28 +2259,63 @@ public final class USDAWeeklyMealPlanner: Sendable {
         let count = max(1, min(7, daysAndMeals.keys.count))
         let greedyOptions = GenerationOptions(sampling: .random(top: 50), temperature: 0.7)
         try Task.checkCancellation()
-        switch count {
-        case 1:
-            let r = try await session.respond(to: prompt, generating: AIConceptualPlanResponse1D.self, includeSchemaInPrompt: false, options: greedyOptions)
-            return AIConceptualPlanResponse(planName: r.content.planName, minAgeMonths: r.content.minAgeMonths, days: r.content.days)
-        case 2:
-            let r = try await session.respond(to: prompt, generating: AIConceptualPlanResponse2D.self, includeSchemaInPrompt: false, options: greedyOptions)
-            return AIConceptualPlanResponse(planName: r.content.planName, minAgeMonths: r.content.minAgeMonths, days: r.content.days)
-        case 3:
-            let r = try await session.respond(to: prompt, generating: AIConceptualPlanResponse3D.self, includeSchemaInPrompt: false, options: greedyOptions)
-            return AIConceptualPlanResponse(planName: r.content.planName, minAgeMonths: r.content.minAgeMonths, days: r.content.days)
-        case 4:
-            let r = try await session.respond(to: prompt, generating: AIConceptualPlanResponse4D.self, includeSchemaInPrompt: false, options: greedyOptions)
-            return AIConceptualPlanResponse(planName: r.content.planName, minAgeMonths: r.content.minAgeMonths, days: r.content.days)
-        case 5:
-            let r = try await session.respond(to: prompt, generating: AIConceptualPlanResponse5D.self, includeSchemaInPrompt: false, options: greedyOptions)
-            return AIConceptualPlanResponse(planName: r.content.planName, minAgeMonths: r.content.minAgeMonths, days: r.content.days)
-        case 6:
-            let r = try await session.respond(to: prompt, generating: AIConceptualPlanResponse6D.self, includeSchemaInPrompt: false, options: greedyOptions)
-            return AIConceptualPlanResponse(planName: r.content.planName, minAgeMonths: r.content.minAgeMonths, days: r.content.days)
-        default:
-            let r = try await session.respond(to: prompt, generating: AIConceptualPlanResponse7D.self, includeSchemaInPrompt: false, options: greedyOptions)
-            return AIConceptualPlanResponse(planName: r.content.planName, minAgeMonths: r.content.minAgeMonths, days: r.content.days)
+        let telemetryRespondStartedAt = PlannerTelemetry.isEnabled
+            ? DispatchTime.now().uptimeNanoseconds
+            : nil
+        do {
+            switch count {
+            case 1:
+                let r = try await session.respond(to: prompt, generating: AIConceptualPlanResponse1D.self, includeSchemaInPrompt: false, options: greedyOptions)
+                if let startedAt = telemetryRespondStartedAt {
+                    await PlannerTelemetry.shared.noteRespond(site: "generatePlanViaInterface", ok: true, ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000)
+                }
+                return AIConceptualPlanResponse(planName: r.content.planName, minAgeMonths: r.content.minAgeMonths, days: r.content.days)
+            case 2:
+                let r = try await session.respond(to: prompt, generating: AIConceptualPlanResponse2D.self, includeSchemaInPrompt: false, options: greedyOptions)
+                if let startedAt = telemetryRespondStartedAt {
+                    await PlannerTelemetry.shared.noteRespond(site: "generatePlanViaInterface", ok: true, ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000)
+                }
+                return AIConceptualPlanResponse(planName: r.content.planName, minAgeMonths: r.content.minAgeMonths, days: r.content.days)
+            case 3:
+                let r = try await session.respond(to: prompt, generating: AIConceptualPlanResponse3D.self, includeSchemaInPrompt: false, options: greedyOptions)
+                if let startedAt = telemetryRespondStartedAt {
+                    await PlannerTelemetry.shared.noteRespond(site: "generatePlanViaInterface", ok: true, ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000)
+                }
+                return AIConceptualPlanResponse(planName: r.content.planName, minAgeMonths: r.content.minAgeMonths, days: r.content.days)
+            case 4:
+                let r = try await session.respond(to: prompt, generating: AIConceptualPlanResponse4D.self, includeSchemaInPrompt: false, options: greedyOptions)
+                if let startedAt = telemetryRespondStartedAt {
+                    await PlannerTelemetry.shared.noteRespond(site: "generatePlanViaInterface", ok: true, ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000)
+                }
+                return AIConceptualPlanResponse(planName: r.content.planName, minAgeMonths: r.content.minAgeMonths, days: r.content.days)
+            case 5:
+                let r = try await session.respond(to: prompt, generating: AIConceptualPlanResponse5D.self, includeSchemaInPrompt: false, options: greedyOptions)
+                if let startedAt = telemetryRespondStartedAt {
+                    await PlannerTelemetry.shared.noteRespond(site: "generatePlanViaInterface", ok: true, ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000)
+                }
+                return AIConceptualPlanResponse(planName: r.content.planName, minAgeMonths: r.content.minAgeMonths, days: r.content.days)
+            case 6:
+                let r = try await session.respond(to: prompt, generating: AIConceptualPlanResponse6D.self, includeSchemaInPrompt: false, options: greedyOptions)
+                if let startedAt = telemetryRespondStartedAt {
+                    await PlannerTelemetry.shared.noteRespond(site: "generatePlanViaInterface", ok: true, ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000)
+                }
+                return AIConceptualPlanResponse(planName: r.content.planName, minAgeMonths: r.content.minAgeMonths, days: r.content.days)
+            default:
+                let r = try await session.respond(to: prompt, generating: AIConceptualPlanResponse7D.self, includeSchemaInPrompt: false, options: greedyOptions)
+                if let startedAt = telemetryRespondStartedAt {
+                    await PlannerTelemetry.shared.noteRespond(site: "generatePlanViaInterface", ok: true, ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000)
+                }
+                return AIConceptualPlanResponse(planName: r.content.planName, minAgeMonths: r.content.minAgeMonths, days: r.content.days)
+            }
+        } catch {
+            if let startedAt = telemetryRespondStartedAt {
+                await PlannerTelemetry.shared.noteRespond(
+                    site: "generatePlanViaInterface",
+                    ok: false,
+                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                )
+            }
+            throw error
         }
         
     }
@@ -2061,6 +2376,9 @@ public final class USDAWeeklyMealPlanner: Sendable {
             """
         }
         let session = LanguageModelSession(instructions: instructions)
+        if PlannerTelemetry.isEnabled {
+            await PlannerTelemetry.shared.noteSession(site: "derivePerMealCuisineFocus")
+        }
         let prompt = """
         PLAN STRUCTURE — MEAL NAMES:
         \(structureBlock)
@@ -2074,14 +2392,27 @@ public final class USDAWeeklyMealPlanner: Sendable {
         Return a mapping from meal name → single cuisine tag as an array per the schema.
         """
         
+        var telemetryRespondStartedAt: UInt64?
+        var telemetryRespondRecorded = false
         do {
             try Task.checkCancellation()
+            if PlannerTelemetry.isEnabled {
+                telemetryRespondStartedAt = DispatchTime.now().uptimeNanoseconds
+            }
             let resp = try await session.respond(
                 to: prompt,
                 generating: AIPerMealCuisineFocusResponse.self,
                 includeSchemaInPrompt: true,
                 options: GenerationOptions(sampling: .greedy)
             ).content
+            if let startedAt = telemetryRespondStartedAt {
+                await PlannerTelemetry.shared.noteRespond(
+                    site: "derivePerMealCuisineFocus",
+                    ok: true,
+                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                )
+                telemetryRespondRecorded = true
+            }
             try Task.checkCancellation()
             var out: [String:String] = [:]
             let valid = Set(mealNames.map { $0.lowercased() })
@@ -2099,6 +2430,13 @@ public final class USDAWeeklyMealPlanner: Sendable {
             }
             return out
         } catch {
+            if let startedAt = telemetryRespondStartedAt, !telemetryRespondRecorded {
+                await PlannerTelemetry.shared.noteRespond(
+                    site: "derivePerMealCuisineFocus",
+                    ok: false,
+                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                )
+            }
             var out: [String:String] = [:]
             if globalTag != "any" {
                 for m in mealNames { out[m] = globalTag }
@@ -2169,14 +2507,41 @@ public final class USDAWeeklyMealPlanner: Sendable {
                 • Avoid duplicates and trivial morphological variants.
             """
         })
+        if PlannerTelemetry.isEnabled {
+            await PlannerTelemetry.shared.noteSession(site: "aiGenerateFoodPalette")
+        }
         try Task.checkCancellation()
         let options = GenerationOptions(sampling: .greedy)
-        let response = try await session.respond(
-            to: prompt,
-            generating: AIFoodPaletteResponse.self,
-            includeSchemaInPrompt: true,
-            options: options
-        )
+        let response = try await {
+            let startedAt = PlannerTelemetry.isEnabled
+                ? DispatchTime.now().uptimeNanoseconds
+                : nil
+            do {
+                let response = try await session.respond(
+                    to: prompt,
+                    generating: AIFoodPaletteResponse.self,
+                    includeSchemaInPrompt: true,
+                    options: options
+                )
+                if let startedAt {
+                    await PlannerTelemetry.shared.noteRespond(
+                        site: "aiGenerateFoodPalette",
+                        ok: true,
+                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                    )
+                }
+                return response
+            } catch {
+                if let startedAt {
+                    await PlannerTelemetry.shared.noteRespond(
+                        site: "aiGenerateFoodPalette",
+                        ok: false,
+                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                    )
+                }
+                throw error
+            }
+        }()
         try Task.checkCancellation()
         let raw = response.content.foodExamples
         
@@ -2192,6 +2557,9 @@ public final class USDAWeeklyMealPlanner: Sendable {
             OUTPUT: `foodExamples` as an array of strings using only items from the input list.
             """
         })
+        if PlannerTelemetry.isEnabled {
+            await PlannerTelemetry.shared.noteSession(site: "aiGenerateFoodPalette")
+        }
         try Task.checkCancellation()
         let validationPrompt = """
         CUISINE: \(cuisineTag)
@@ -2201,18 +2569,38 @@ public final class USDAWeeklyMealPlanner: Sendable {
         """
         
         var validatedList: [String]
+        var telemetryRespondStartedAt: UInt64?
+        var telemetryRespondRecorded = false
         do {
             try Task.checkCancellation()
+            if PlannerTelemetry.isEnabled {
+                telemetryRespondStartedAt = DispatchTime.now().uptimeNanoseconds
+            }
             let validatedResp = try await validateSession.respond(
                 to: validationPrompt,
                 generating: AIFoodPaletteResponse.self,
                 includeSchemaInPrompt: true,
                 options: GenerationOptions(sampling: .greedy)
             )
+            if let startedAt = telemetryRespondStartedAt {
+                await PlannerTelemetry.shared.noteRespond(
+                    site: "aiGenerateFoodPalette",
+                    ok: true,
+                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                )
+                telemetryRespondRecorded = true
+            }
             try Task.checkCancellation()
             validatedList = validatedResp.content.foodExamples
             try Task.checkCancellation()
         } catch {
+            if let startedAt = telemetryRespondStartedAt, !telemetryRespondRecorded {
+                await PlannerTelemetry.shared.noteRespond(
+                    site: "aiGenerateFoodPalette",
+                    ok: false,
+                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                )
+            }
             onLog?("  -> ⚠️ Palette validation failed: \(error.localizedDescription). Using raw items.")
             validatedList = raw
         }
@@ -2492,6 +2880,9 @@ public final class USDAWeeklyMealPlanner: Sendable {
             let rules1 = buildRules(palettes: foodPalettesByContext, daysAndMeals: daysAndMeals)
             try Task.checkCancellation()
             let session1 = LanguageModelSession(instructions: Instructions { rules1 })
+            if PlannerTelemetry.isEnabled {
+                await PlannerTelemetry.shared.noteSession(site: "generateFullPlanWithAI")
+            }
             try Task.checkCancellation()
             let prompt1 = buildUserPrompt(excludedLimit: 24)
             try Task.checkCancellation()
@@ -2503,6 +2894,9 @@ public final class USDAWeeklyMealPlanner: Sendable {
             onLog?("  -> ⚠️ Main generation attempt failed: \(error.localizedDescription). Retrying with minimal prompt.")
             let rules2 = buildRules(palettes: [], daysAndMeals: daysAndMeals)
             let session2 = LanguageModelSession(instructions: Instructions { rules2 })
+            if PlannerTelemetry.isEnabled {
+                await PlannerTelemetry.shared.noteSession(site: "generateFullPlanWithAI")
+            }
             let prompt2 = buildUserPrompt(excludedLimit: 12)
             let rawPlan = try await generatePlanViaInterface(session: session2, prompt: prompt2, daysAndMeals: daysAndMeals)
             return rawPlan // Purging is now part of the consolidated polish function
@@ -2600,13 +2994,36 @@ public final class USDAWeeklyMealPlanner: Sendable {
             - Do not add extra items, do not rename items, and do not include units in the numeric fields.
         """
         })
+        if PlannerTelemetry.isEnabled {
+            await PlannerTelemetry.shared.noteSession(site: "aiFetchNutritionData")
+        }
         
+        var telemetryRespondStartedAt: UInt64?
+        var telemetryRespondRecorded = false
         do {
             try Task.checkCancellation()
+            if PlannerTelemetry.isEnabled {
+                telemetryRespondStartedAt = DispatchTime.now().uptimeNanoseconds
+            }
             let response = try await session.respond(to: prompt, generating: AINutritionResponse.self, includeSchemaInPrompt: true, options: GenerationOptions(sampling: .greedy))
+            if let startedAt = telemetryRespondStartedAt {
+                await PlannerTelemetry.shared.noteRespond(
+                    site: "aiFetchNutritionData",
+                    ok: true,
+                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                )
+                telemetryRespondRecorded = true
+            }
             try Task.checkCancellation()
             return response.content.nutritionData
         } catch {
+            if let startedAt = telemetryRespondStartedAt, !telemetryRespondRecorded {
+                await PlannerTelemetry.shared.noteRespond(
+                    site: "aiFetchNutritionData",
+                    ok: false,
+                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                )
+            }
             onLog?("    - ⚠️ AI nutrition data fetch failed: \(error.localizedDescription). Adjustment may be skipped.")
             return []
         }
@@ -3019,6 +3436,9 @@ public final class USDAWeeklyMealPlanner: Sendable {
            """
         }
         let session = LanguageModelSession(instructions: instructions)
+        if PlannerTelemetry.isEnabled {
+            await PlannerTelemetry.shared.noteSession(site: "aiBuildSmartQueries")
+        }
         
         let other = mealContext.map { mc in
             mc.components
@@ -3038,14 +3458,27 @@ public final class USDAWeeklyMealPlanner: Sendable {
        OTHER COMPONENTS IN THIS MEAL: \(other.isEmpty ? "n/a" : other)
        """
         
+        var telemetryRespondStartedAt: UInt64?
+        var telemetryRespondRecorded = false
         do {
             try Task.checkCancellation()
+            if PlannerTelemetry.isEnabled {
+                telemetryRespondStartedAt = DispatchTime.now().uptimeNanoseconds
+            }
             let resp = try await session.respond(
                 to: prompt,
                 generating: AISearchKeywordResponse.self,
                 includeSchemaInPrompt: true,
                 options: GenerationOptions(sampling: .greedy)
             ).content
+            if let startedAt = telemetryRespondStartedAt {
+                await PlannerTelemetry.shared.noteRespond(
+                    site: "aiBuildSmartQueries",
+                    ok: true,
+                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                )
+                telemetryRespondRecorded = true
+            }
             try Task.checkCancellation()
             var queries: [String] = []
             let kw = resp.priorityKeywords
@@ -3111,6 +3544,13 @@ public final class USDAWeeklyMealPlanner: Sendable {
             return (finalQueries, banned)
             
         } catch {
+            if let startedAt = telemetryRespondStartedAt, !telemetryRespondRecorded {
+                await PlannerTelemetry.shared.noteRespond(
+                    site: "aiBuildSmartQueries",
+                    ok: false,
+                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                )
+            }
             onLog?("    - ⚠️ Keyword AI failed: \(error.localizedDescription). Using heuristic tokens.")
             
             let stop: Set<String> = ["of","with","and","or","in","on","for","a","an","the","style","fresh","raw","cooked","very","tasty"]
@@ -3164,8 +3604,35 @@ public final class USDAWeeklyMealPlanner: Sendable {
         """
         try Task.checkCancellation()
         let session = LanguageModelSession()
+        if PlannerTelemetry.isEnabled {
+            await PlannerTelemetry.shared.noteSession(site: "aiChooseBestFoodCandidate")
+        }
         try Task.checkCancellation()
-        let response = try await session.respond(to: prompt, generating: AIBestCandidateChoice.self, includeSchemaInPrompt: true, options: GenerationOptions(sampling: .greedy))
+        let response = try await {
+            let startedAt = PlannerTelemetry.isEnabled
+                ? DispatchTime.now().uptimeNanoseconds
+                : nil
+            do {
+                let response = try await session.respond(to: prompt, generating: AIBestCandidateChoice.self, includeSchemaInPrompt: true, options: GenerationOptions(sampling: .greedy))
+                if let startedAt {
+                    await PlannerTelemetry.shared.noteRespond(
+                        site: "aiChooseBestFoodCandidate",
+                        ok: true,
+                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                    )
+                }
+                return response
+            } catch {
+                if let startedAt {
+                    await PlannerTelemetry.shared.noteRespond(
+                        site: "aiChooseBestFoodCandidate",
+                        ok: false,
+                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                    )
+                }
+                throw error
+            }
+        }()
         try Task.checkCancellation()
         return response.content
     }
@@ -3550,11 +4017,27 @@ public final class USDAWeeklyMealPlanner: Sendable {
         
         Respond with a single improved title string.
         """
+        var telemetryRespondStartedAt: UInt64?
+        var telemetryRespondRecorded = false
         do {
             try Task.checkCancellation()
             let session = LanguageModelSession()
+            if PlannerTelemetry.isEnabled {
+                await PlannerTelemetry.shared.noteSession(site: "aiPolishTitle")
+            }
             try Task.checkCancellation()
+            if PlannerTelemetry.isEnabled {
+                telemetryRespondStartedAt = DispatchTime.now().uptimeNanoseconds
+            }
             let resp = try await session.respond(to: prompt, options: GenerationOptions(sampling: .greedy))
+            if let startedAt = telemetryRespondStartedAt {
+                await PlannerTelemetry.shared.noteRespond(
+                    site: "aiPolishTitle",
+                    ok: true,
+                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                )
+                telemetryRespondRecorded = true
+            }
             try Task.checkCancellation()
             let out = resp.content.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             try Task.checkCancellation()
@@ -3562,6 +4045,13 @@ public final class USDAWeeklyMealPlanner: Sendable {
             onLog?("🖋️ Polished title for Day \(day) • \(meal.name): '\(meal.descriptiveTitle)' → '\(out)'")
             return out
         } catch {
+            if let startedAt = telemetryRespondStartedAt, !telemetryRespondRecorded {
+                await PlannerTelemetry.shared.noteRespond(
+                    site: "aiPolishTitle",
+                    ok: false,
+                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                )
+            }
             onLog?("   - Title polish skipped (\(error.localizedDescription)).")
             return nil
         }
@@ -3674,17 +4164,33 @@ public final class USDAWeeklyMealPlanner: Sendable {
             - **CRITICAL**: Do NOT invent hybrid names by combining the headword with generic dish types unless they are real, well-known dishes. Focus on authentic variations.
             """
         })
+        if PlannerTelemetry.isEnabled {
+            await PlannerTelemetry.shared.noteSession(site: "aiGenerateVariantIdeas")
+        }
         let prompt = """
         Generate \(count) distinct variations of the dish "\(baseFood)" suitable for a \(context) meal.
         """
+        var telemetryRespondStartedAt: UInt64?
+        var telemetryRespondRecorded = false
         do {
             try Task.checkCancellation()
+            if PlannerTelemetry.isEnabled {
+                telemetryRespondStartedAt = DispatchTime.now().uptimeNanoseconds
+            }
             let response = try await session.respond(
                 to: prompt,
                 generating: AIVariantListResponse.self,
                 includeSchemaInPrompt: true,
                 options: GenerationOptions(sampling: .greedy)
             )
+            if let startedAt = telemetryRespondStartedAt {
+                await PlannerTelemetry.shared.noteRespond(
+                    site: "aiGenerateVariantIdeas",
+                    ok: true,
+                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                )
+                telemetryRespondRecorded = true
+            }
             try Task.checkCancellation()
             var seen = Set<String>()
             let variants = response.content.variants.compactMap { variant -> String? in
@@ -3696,6 +4202,13 @@ public final class USDAWeeklyMealPlanner: Sendable {
             onLog?("  -> Generated \(variants.count) variant ideas for '\(baseFood)': \(variants)")
             return variants
         } catch {
+            if let startedAt = telemetryRespondStartedAt, !telemetryRespondRecorded {
+                await PlannerTelemetry.shared.noteRespond(
+                    site: "aiGenerateVariantIdeas",
+                    ok: false,
+                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                )
+            }
             onLog?("  -> ⚠️ AI variant idea generation failed for '\(baseFood)': \(error.localizedDescription)")
             return []
         }
@@ -3781,6 +4294,9 @@ public final class USDAWeeklyMealPlanner: Sendable {
         }
         
         let session = LanguageModelSession(instructions: instructions)
+        if PlannerTelemetry.isEnabled {
+            await PlannerTelemetry.shared.noteSession(site: "aiGenerateVariants")
+        }
         let prompt = """
         BASE DISH: \(baseDish)
         MEAL: \(meal)
@@ -3790,14 +4306,27 @@ public final class USDAWeeklyMealPlanner: Sendable {
         Respond with exactly N variant names as an array according to the provided schema.
         """
         
+        var telemetryRespondStartedAt: UInt64?
+        var telemetryRespondRecorded = false
         do {
             try Task.checkCancellation()
+            if PlannerTelemetry.isEnabled {
+                telemetryRespondStartedAt = DispatchTime.now().uptimeNanoseconds
+            }
             let resp = try await session.respond(
                 to: prompt,
                 generating: AIVariantListResponse.self,
                 includeSchemaInPrompt: true,
                 options: GenerationOptions(sampling: .greedy)
             ).content
+            if let startedAt = telemetryRespondStartedAt {
+                await PlannerTelemetry.shared.noteRespond(
+                    site: "aiGenerateVariants",
+                    ok: true,
+                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                )
+                telemetryRespondRecorded = true
+            }
             try Task.checkCancellation()
             func normalize(_ s: String) -> String {
                 return s
@@ -3853,6 +4382,13 @@ public final class USDAWeeklyMealPlanner: Sendable {
             try Task.checkCancellation()
             return Array(uniq.prefix(cleanCount))
         } catch {
+            if let startedAt = telemetryRespondStartedAt, !telemetryRespondRecorded {
+                await PlannerTelemetry.shared.noteRespond(
+                    site: "aiGenerateVariants",
+                    ok: false,
+                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                )
+            }
             onLog?("    - ⚠️ Variant generation failed for \(baseDish): \(error.localizedDescription). Using generic labels.")
             return (0..<cleanCount).map { "\(baseDish) (variant \($0+1))" }
         }
@@ -4008,20 +4544,36 @@ extension USDAWeeklyMealPlanner {
                 Return a JSON map of Name -> Category.
                 """
             })
+            if PlannerTelemetry.isEnabled {
+                await PlannerTelemetry.shared.noteSession(site: "aiBatchClassifyFoods")
+            }
             
             let prompt = """
             Classify these foods:
             \(uniqueNames.map { "- \($0)" }.joined(separator: "\n"))
             """
             
+            var telemetryRespondStartedAt: UInt64?
+            var telemetryRespondRecorded = false
             do {
                 try Task.checkCancellation()
+                if PlannerTelemetry.isEnabled {
+                    telemetryRespondStartedAt = DispatchTime.now().uptimeNanoseconds
+                }
                 let response = try await session.respond(
                     to: prompt,
                     generating: AIBatchFoodClassificationResponse.self,
                     includeSchemaInPrompt: true,
                     options: GenerationOptions(sampling: .greedy)
                 )
+                if let startedAt = telemetryRespondStartedAt {
+                    await PlannerTelemetry.shared.noteRespond(
+                        site: "aiBatchClassifyFoods",
+                        ok: true,
+                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                    )
+                    telemetryRespondRecorded = true
+                }
                 
                 var map: [String: AIFoodPortionCategory] = [:]
                 for item in response.content.classifications {
@@ -4035,6 +4587,13 @@ extension USDAWeeklyMealPlanner {
                 return map
                 
             } catch {
+                if let startedAt = telemetryRespondStartedAt, !telemetryRespondRecorded {
+                    await PlannerTelemetry.shared.noteRespond(
+                        site: "aiBatchClassifyFoods",
+                        ok: false,
+                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
+                    )
+                }
                 onLog?("⚠️ AI Classification failed. Defaults applied.")
                 return [:]
             }
