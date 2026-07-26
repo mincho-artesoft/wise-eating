@@ -143,7 +143,7 @@ public struct AyurvedaRules: Sendable {
       )
   }
 
-  fileprivate static func modifierTokens(_ value: String) -> [String] {
+  static func modifierTokens(_ value: String) -> [String] {
     let normalizedName = normalized(value)
       .replacingOccurrences(of: ",", with: " ")
       .replacingOccurrences(of: ";", with: " ")

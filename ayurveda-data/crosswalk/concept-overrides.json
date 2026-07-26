@@ -1,0 +1,5 @@
+{
+  "schemaVersion": 1,
+  "description": "Director-reviewed exceptions applied after name matching, hierarchy rollup, and recipe ingredient propagation. Each entry has foodId, add, remove, reason, and provenance. add/remove contain food-concepts.json concept IDs; the two arrays may not overlap. Empty means no exceptions are authorized.",
+  "overrides": []
+}

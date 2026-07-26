@@ -8,6 +8,7 @@ import csv
 import gzip
 import io
 import json
+import re
 import sqlite3
 import sys
 from collections import defaultdict
@@ -33,6 +34,13 @@ PLACEHOLDER_BASE = 900_000
 RECIPE_BASE = 1_000_000
 RESERVED_BAND_END = 1_002_000
 TIER_RANK = {"exact": 0, "near": 1}
+EXPECTED_CATALOG_COUNT = 14_484
+EXPECTED_CONCEPT_COUNT = 25
+EXPECTED_ALIAS_COUNT = 75
+RECIPE_PROPAGATION_DEPTH_CAP = 16
+MODIFIER_PARENTHETICAL = re.compile(r"\([^)]*\)")
+MODIFIER_INVALID = re.compile(r"[^a-z0-9,;'\- ]")
+MODIFIER_TOKEN_SPLIT = re.compile(r"[\s\-'/]+")
 NUTRIENT_CATALOG = {
     "energyKcal": ("other", "kcal"),
     "carbohydrates": ("macronutrients", "g"),
@@ -351,6 +359,12 @@ def parse_args() -> argparse.Namespace:
         help="Destination category-rule bundle",
     )
     parser.add_argument(
+        "--concepts-output",
+        type=Path,
+        default=repo_root / "WiseEating" / "food_concepts.json.gz",
+        help="Destination deterministic food-concept membership bundle",
+    )
+    parser.add_argument(
         "--foods",
         type=Path,
         default=repo_root / "WiseEating" / "Legacy" / "foods.json",
@@ -364,6 +378,16 @@ def store_path(path: Path) -> Path:
     if not candidate.is_file():
         raise BuildError(f"store does not exist: {candidate}")
     return candidate
+
+
+def modifier_normalized_tokens(value: str) -> tuple[str, ...]:
+    """The modifiers.json token contract, shared verbatim with validate.py."""
+    value = value.lower()
+    value = MODIFIER_PARENTHETICAL.sub("", value)
+    value = value.replace("&", " and ")
+    value = MODIFIER_INVALID.sub(" ", value)
+    value = value.replace(",", " ").replace(";", " ")
+    return tuple(token for token in MODIFIER_TOKEN_SPLIT.split(value) if token)
 
 
 def load_batches(directory: Path, pattern: str, collection_key: str) -> list[dict[str, Any]]:
@@ -505,6 +529,441 @@ def load_food_safety(
         preview = ", ".join(str(food_id) for food_id in missing_source_ids[:10])
         raise BuildError(f"{path}: safety source food ids are absent from store: {preview}")
     return safety_by_id
+
+
+def load_food_names(path: Path, store_ids: set[int]) -> dict[int, str]:
+    try:
+        foods = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise BuildError(f"cannot load food names from {path}: {error}") from error
+    if not isinstance(foods, list):
+        raise BuildError(f"{path}: expected a top-level array")
+
+    names: dict[int, str] = {}
+    for food in foods:
+        if (
+            not isinstance(food, dict)
+            or not isinstance(food.get("id"), int)
+            or not isinstance(food.get("name"), str)
+            or not food["name"].strip()
+        ):
+            raise BuildError(f"{path}: food has no integer id and non-empty name")
+        food_id = food["id"]
+        if food_id in names:
+            raise BuildError(f"{path}: duplicate food id {food_id}")
+        names[food_id] = food["name"]
+
+    if set(names) != store_ids:
+        missing = sorted(store_ids - set(names))
+        extra = sorted(set(names) - store_ids)
+        raise BuildError(
+            f"{path}: food-name/store id mismatch; missing={missing[:10]}, extra={extra[:10]}"
+        )
+    return names
+
+
+def load_suffix_negation_terms(path: Path) -> set[str]:
+    try:
+        source = path.read_text(encoding="utf-8")
+    except OSError as error:
+        raise BuildError(f"cannot load suffix-negation vocabulary {path}: {error}") from error
+    match = re.search(
+        r"let suffixNegationTerms:\s*Set<String>\s*=\s*\[([^\]]+)\]",
+        source,
+    )
+    if match is None:
+        raise BuildError(f"{path}: suffixNegationTerms declaration is missing")
+    terms = set(re.findall(r'"([^"]+)"', match.group(1)))
+    if not terms:
+        raise BuildError(f"{path}: suffixNegationTerms is empty")
+    return terms
+
+
+def load_food_concept_sources(
+    ontology_path: Path,
+    overrides_path: Path,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    try:
+        ontology = json.loads(ontology_path.read_text(encoding="utf-8"))
+        overrides = json.loads(overrides_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise BuildError(f"cannot load food-concept sources: {error}") from error
+    validate_food_concept_sources(ontology, overrides)
+    return ontology, overrides
+
+
+def food_concept_ancestors(
+    concepts_by_id: dict[str, dict[str, Any]],
+) -> dict[str, set[str]]:
+    resolved: dict[str, set[str]] = {}
+    visiting: list[str] = []
+
+    def visit(concept_id: str) -> set[str]:
+        if concept_id in resolved:
+            return resolved[concept_id]
+        if concept_id in visiting:
+            start = visiting.index(concept_id)
+            cycle = visiting[start:] + [concept_id]
+            raise BuildError("food-concept hierarchy cycle: " + " -> ".join(cycle))
+        visiting.append(concept_id)
+        ancestors: set[str] = set()
+        for parent in concepts_by_id[concept_id]["parents"]:
+            if parent not in concepts_by_id:
+                raise BuildError(f"{concept_id}: dangling concept parent {parent}")
+            ancestors.add(parent)
+            ancestors.update(visit(parent))
+        visiting.pop()
+        resolved[concept_id] = ancestors
+        return ancestors
+
+    for concept_id in concepts_by_id:
+        visit(concept_id)
+    return resolved
+
+
+def validate_food_concept_sources(
+    ontology: dict[str, Any],
+    overrides: dict[str, Any],
+) -> None:
+    if not isinstance(ontology, dict):
+        raise BuildError("food-concepts.json must contain an object")
+    concepts = ontology.get("concepts")
+    aliases = ontology.get("aliases")
+    if not isinstance(concepts, list) or len(concepts) != EXPECTED_CONCEPT_COUNT:
+        raise BuildError(
+            f"food-concept gate failed: expected {EXPECTED_CONCEPT_COUNT} concepts"
+        )
+    if not isinstance(aliases, list) or len(aliases) != EXPECTED_ALIAS_COUNT:
+        raise BuildError(
+            f"food-concept alias gate failed: expected {EXPECTED_ALIAS_COUNT} aliases"
+        )
+
+    concepts_by_id: dict[str, dict[str, Any]] = {}
+    for concept in concepts:
+        if not isinstance(concept, dict) or not isinstance(concept.get("id"), str):
+            raise BuildError("food concept is missing a string id")
+        concept_id = concept["id"]
+        if concept_id in concepts_by_id:
+            raise BuildError(f"duplicate food concept: {concept_id}")
+        parents = concept.get("parents")
+        phrases = concept.get("phrases")
+        negatives = concept.get("negativePhrases")
+        if not isinstance(parents, list) or not all(
+            isinstance(parent, str) for parent in parents
+        ):
+            raise BuildError(f"{concept_id}: parents must be strings")
+        if not isinstance(phrases, list) or not phrases or not all(
+            isinstance(phrase, str) and modifier_normalized_tokens(phrase)
+            for phrase in phrases
+        ):
+            raise BuildError(f"{concept_id}: phrases must be non-empty strings")
+        if not isinstance(negatives, list) or not all(
+            isinstance(phrase, str) and modifier_normalized_tokens(phrase)
+            for phrase in negatives
+        ):
+            raise BuildError(f"{concept_id}: negativePhrases must be strings")
+        positive_keys = {modifier_normalized_tokens(phrase) for phrase in phrases}
+        negative_keys = {
+            modifier_normalized_tokens(phrase) for phrase in negatives
+        }
+        conflicts = positive_keys.intersection(negative_keys)
+        if conflicts:
+            raise BuildError(
+                f"{concept_id}: phrase/negative self-conflict {sorted(conflicts)}"
+            )
+        concepts_by_id[concept_id] = concept
+    food_concept_ancestors(concepts_by_id)
+
+    alias_map: dict[str, str] = {}
+    for alias in aliases:
+        if (
+            not isinstance(alias, dict)
+            or not isinstance(alias.get("surface"), str)
+            or not isinstance(alias.get("canonical"), str)
+        ):
+            raise BuildError("food-concept alias needs surface and canonical strings")
+        surface = " ".join(modifier_normalized_tokens(alias["surface"]))
+        canonical = " ".join(modifier_normalized_tokens(alias["canonical"]))
+        if not surface or not canonical:
+            raise BuildError("food-concept alias normalizes to an empty value")
+        if surface in alias_map:
+            raise BuildError(f"duplicate normalized alias surface: {surface}")
+        alias_map[surface] = canonical
+
+    for surface in alias_map:
+        seen: list[str] = []
+        current = surface
+        while current in alias_map:
+            if current in seen:
+                start = seen.index(current)
+                cycle = seen[start:] + [current]
+                raise BuildError("food-concept alias cycle: " + " -> ".join(cycle))
+            seen.append(current)
+            current = alias_map[current]
+
+    if not isinstance(overrides, dict) or overrides.get("schemaVersion") != 1:
+        raise BuildError("concept-overrides.json must use schemaVersion 1")
+    entries = overrides.get("overrides")
+    if not isinstance(entries, list):
+        raise BuildError("concept-overrides.json must contain an overrides array")
+    for entry in entries:
+        if (
+            not isinstance(entry, dict)
+            or not isinstance(entry.get("foodId"), int)
+            or not isinstance(entry.get("add"), list)
+            or not isinstance(entry.get("remove"), list)
+            or not all(isinstance(value, str) for value in entry["add"])
+            or not all(isinstance(value, str) for value in entry["remove"])
+        ):
+            raise BuildError("invalid food-concept override entry")
+        unknown = set(entry["add"] + entry["remove"]) - set(concepts_by_id)
+        if unknown:
+            raise BuildError(f"food-concept override uses unknown concepts {sorted(unknown)}")
+        conflicts = set(entry["add"]).intersection(entry["remove"])
+        if conflicts:
+            raise BuildError(
+                f"food-concept override both adds and removes {sorted(conflicts)}"
+            )
+
+
+def _phrase_spans(
+    tokens: tuple[str, ...],
+    phrase_tokens: tuple[str, ...],
+) -> list[tuple[int, int]]:
+    if not phrase_tokens or len(phrase_tokens) > len(tokens):
+        return []
+    width = len(phrase_tokens)
+    return [
+        (start, start + width)
+        for start in range(len(tokens) - width + 1)
+        if tokens[start : start + width] == phrase_tokens
+    ]
+
+
+def _longest_positive_matches(
+    tokens: tuple[str, ...],
+    phrases: list[tuple[str, tuple[str, ...]]],
+    suffix_negation_terms: set[str],
+) -> list[str]:
+    candidates: list[tuple[int, int, int, str]] = []
+    for phrase, phrase_tokens in phrases:
+        for start, end in _phrase_spans(tokens, phrase_tokens):
+            if end < len(tokens) and tokens[end] in suffix_negation_terms:
+                continue
+            candidates.append((-(end - start), start, end, phrase))
+
+    selected: list[str] = []
+    occupied: set[int] = set()
+    for _negative_width, start, end, phrase in sorted(candidates):
+        positions = set(range(start, end))
+        if occupied.intersection(positions):
+            continue
+        selected.append(phrase)
+        occupied.update(positions)
+    return selected
+
+
+def build_food_concepts(
+    envelope: dict[str, Any],
+    source_food_names: dict[int, str],
+    ontology: dict[str, Any],
+    overrides: dict[str, Any],
+    suffix_negation_terms: set[str],
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    validate_food_concept_sources(ontology, overrides)
+    concepts_by_id = {
+        concept["id"]: concept for concept in ontology["concepts"]
+    }
+    ancestors = food_concept_ancestors(concepts_by_id)
+
+    catalog_names = dict(source_food_names)
+    for dravya in envelope["dravyas"]:
+        food_id = dravya["foodId"]
+        if dravya["foodIsPlaceholder"]:
+            if food_id in catalog_names:
+                raise BuildError(f"placeholder food id already exists: {food_id}")
+            catalog_names[food_id] = dravya["name"]
+        elif food_id not in catalog_names:
+            raise BuildError(f"dravya primary food id has no source name: {food_id}")
+    for recipe in envelope["recipes"]:
+        food_id = recipe["foodId"]
+        if food_id in catalog_names:
+            raise BuildError(f"recipe food id already exists: {food_id}")
+        catalog_names[food_id] = recipe["name"]
+    if len(catalog_names) != EXPECTED_CATALOG_COUNT:
+        raise BuildError(
+            f"food-concept catalog gate failed: expected {EXPECTED_CATALOG_COUNT}, "
+            f"got {len(catalog_names)}"
+        )
+
+    compiled: dict[
+        str,
+        tuple[
+            list[tuple[str, tuple[str, ...]]],
+            list[tuple[str, tuple[str, ...]]],
+        ],
+    ] = {}
+    for concept_id, concept in concepts_by_id.items():
+        positives = [
+            (phrase, modifier_normalized_tokens(phrase))
+            for phrase in concept["phrases"]
+        ]
+        negatives = [
+            (phrase, modifier_normalized_tokens(phrase))
+            for phrase in concept["negativePhrases"]
+        ]
+        compiled[concept_id] = (positives, negatives)
+
+    membership = {concept_id: set() for concept_id in concepts_by_id}
+    direct_membership = {concept_id: set() for concept_id in concepts_by_id}
+    ingredient_membership = {concept_id: set() for concept_id in concepts_by_id}
+    reasons: dict[str, dict[int, set[str]]] = {
+        concept_id: defaultdict(set) for concept_id in concepts_by_id
+    }
+    negative_vetoes: dict[str, dict[int, list[str]]] = {
+        concept_id: {} for concept_id in concepts_by_id
+    }
+
+    for food_id, name in sorted(catalog_names.items()):
+        tokens = modifier_normalized_tokens(name)
+        for concept_id, (positives, negatives) in compiled.items():
+            vetoes = [
+                phrase
+                for phrase, phrase_tokens in negatives
+                if _phrase_spans(tokens, phrase_tokens)
+            ]
+            if vetoes:
+                negative_vetoes[concept_id][food_id] = sorted(vetoes)
+                continue
+            matches = _longest_positive_matches(
+                tokens,
+                positives,
+                suffix_negation_terms,
+            )
+            if not matches:
+                continue
+            membership[concept_id].add(food_id)
+            direct_membership[concept_id].add(food_id)
+            reasons[concept_id][food_id].update(
+                f"name:{phrase}" for phrase in matches
+            )
+
+    for child_id, child_members in direct_membership.items():
+        for ancestor_id in ancestors[child_id]:
+            eligible_members = child_members - set(negative_vetoes[ancestor_id])
+            membership[ancestor_id].update(eligible_members)
+            for food_id in eligible_members:
+                reasons[ancestor_id][food_id].add(f"hierarchy:{child_id}")
+
+    recipe_ids = {recipe["foodId"] for recipe in envelope["recipes"]}
+    ingredients_by_recipe: dict[int, list[int]] = {}
+    for recipe in envelope["recipes"]:
+        ingredient_ids = [ingredient["foodId"] for ingredient in recipe["ingredients"]]
+        if not ingredient_ids:
+            raise BuildError(f"{recipe['id']}: no ingredient links for concepts")
+        ingredients_by_recipe[recipe["foodId"]] = ingredient_ids
+    link_count = sum(len(values) for values in ingredients_by_recipe.values())
+    if link_count != 10_571 or len(ingredients_by_recipe) != 1_500:
+        raise BuildError(
+            "IngredientLink coverage insufficient for food-concept propagation: "
+            f"{link_count} links / {len(ingredients_by_recipe)} owners"
+        )
+    nested_links = sum(
+        ingredient_id in recipe_ids
+        for ingredient_ids in ingredients_by_recipe.values()
+        for ingredient_id in ingredient_ids
+    )
+
+    depth_used = 0
+    for depth in range(1, RECIPE_PROPAGATION_DEPTH_CAP + 1):
+        snapshot = {
+            concept_id: set(food_ids)
+            for concept_id, food_ids in membership.items()
+        }
+        additions: dict[str, dict[int, list[int]]] = {
+            concept_id: {} for concept_id in concepts_by_id
+        }
+        for owner_id, ingredient_ids in sorted(ingredients_by_recipe.items()):
+            for concept_id in concepts_by_id:
+                if owner_id in negative_vetoes[concept_id]:
+                    continue
+                matching_ingredients = sorted(
+                    ingredient_id
+                    for ingredient_id in ingredient_ids
+                    if ingredient_id in snapshot[concept_id]
+                )
+                if matching_ingredients:
+                    additions[concept_id][owner_id] = matching_ingredients
+
+        changed = False
+        for concept_id, owners in additions.items():
+            for owner_id, ingredient_ids in owners.items():
+                reasons[concept_id][owner_id].update(
+                    f"ingredient:{ingredient_id}" for ingredient_id in ingredient_ids
+                )
+                ingredient_membership[concept_id].add(owner_id)
+                if owner_id not in membership[concept_id]:
+                    membership[concept_id].add(owner_id)
+                    changed = True
+        depth_used = depth
+        if nested_links == 0 or not changed:
+            break
+    else:
+        raise BuildError(
+            "recipe concept propagation exceeded depth cap "
+            f"{RECIPE_PROPAGATION_DEPTH_CAP}"
+        )
+
+    seen_override_food_ids: set[int] = set()
+    for entry in sorted(overrides["overrides"], key=lambda value: value["foodId"]):
+        food_id = entry["foodId"]
+        if food_id not in catalog_names:
+            raise BuildError(f"food-concept override has unknown foodId {food_id}")
+        if food_id in seen_override_food_ids:
+            raise BuildError(f"duplicate food-concept override foodId {food_id}")
+        seen_override_food_ids.add(food_id)
+        for concept_id in entry["remove"]:
+            membership[concept_id].discard(food_id)
+            reasons[concept_id].pop(food_id, None)
+        for concept_id in entry["add"]:
+            membership[concept_id].add(food_id)
+            reasons[concept_id][food_id].add("override:add")
+
+    alias_map = {
+        " ".join(modifier_normalized_tokens(alias["surface"])): alias["canonical"]
+        for alias in ontology["aliases"]
+    }
+    artifact = {
+        "conceptsVersion": ontology["conceptsVersion"],
+        "catalogCount": len(catalog_names),
+        "conceptCount": len(concepts_by_id),
+        "aliasCount": len(alias_map),
+        "matching": ontology["matching"],
+        "membership": {
+            concept_id: sorted(membership[concept_id])
+            for concept_id in sorted(concepts_by_id)
+        },
+        "aliases": {
+            surface: alias_map[surface] for surface in sorted(alias_map)
+        },
+        "propagation": {
+            "ingredientLinks": link_count,
+            "recipeOwners": len(ingredients_by_recipe),
+            "nestedRecipeLinks": nested_links,
+            "depthCap": RECIPE_PROPAGATION_DEPTH_CAP,
+            "depthUsed": depth_used,
+        },
+    }
+    diagnostics = {
+        "catalogNames": catalog_names,
+        "directMembership": direct_membership,
+        "ingredientMembership": ingredient_membership,
+        "membership": membership,
+        "reasons": reasons,
+        "negativeVetoes": negative_vetoes,
+        "ancestors": ancestors,
+    }
+    return artifact, diagnostics
 
 
 def preferred_nutrition_bindings(
@@ -1168,6 +1627,7 @@ def print_summary(
     envelope: dict[str, Any],
     contested: list[tuple[int, str, str, list[str]]],
     placeholder_ids: list[str],
+    food_concepts: dict[str, Any],
 ) -> None:
     counts = envelope["counts"]
     primaries = len(envelope["dravyas"]) - counts["placeholders"]
@@ -1200,6 +1660,20 @@ def print_summary(
     print(f"modifiers: {counts['modifiers']}")
     print("unresolved ingredients: 0")
     print(f"engineExcluded: {excluded}")
+    print(
+        "food concepts: "
+        + f"{food_concepts['conceptCount']} concepts, "
+        + f"{food_concepts['aliasCount']} aliases, "
+        + f"{food_concepts['catalogCount']} foods"
+    )
+    propagation = food_concepts["propagation"]
+    print(
+        "concept propagation: "
+        + f"{propagation['ingredientLinks']} links / "
+        + f"{propagation['recipeOwners']} recipes, "
+        + f"nested={propagation['nestedRecipeLinks']}, "
+        + f"depth={propagation['depthUsed']}/{propagation['depthCap']}"
+    )
     print()
     print("Contested fdcIds")
     print("fdcId | winner | tier | losers")
@@ -1220,6 +1694,7 @@ def main() -> int:
         store_ids = load_store_ids(actual_store_path)
         nutrition_by_id = load_food_nutrition(args.foods, store_ids)
         source_safety_by_id = load_food_safety(args.foods, store_ids)
+        source_food_names = load_food_names(args.foods, store_ids)
         dravyas = load_batches(data_root / "dravyas", "batch-*.json", "items")
         recipes = load_batches(data_root / "recipes", "batch-r*.json", "items")
         dravya_ids = {dravya["id"] for dravya in dravyas}
@@ -1246,15 +1721,35 @@ def main() -> int:
             source_safety_by_id,
             preferred_bindings,
         )
+        ontology, concept_overrides = load_food_concept_sources(
+            data_root / "rules" / "food-concepts.json",
+            data_root / "crosswalk" / "concept-overrides.json",
+        )
+        suffix_negation_terms = load_suffix_negation_terms(
+            Path(__file__).resolve().parent.parent
+            / "WiseEating"
+            / "FoodSearch"
+            / "SearchKnowledgeBase.swift"
+        )
+        food_concepts, _concept_diagnostics = build_food_concepts(
+            envelope,
+            source_food_names,
+            ontology,
+            concept_overrides,
+            suffix_negation_terms,
+        )
         compressed = encode_deterministic_gzip(envelope)
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_bytes(compressed)
         args.rules_output.parent.mkdir(parents=True, exist_ok=True)
         args.rules_output.write_bytes(encode_deterministic_json(rules_bundle))
-        print_summary(envelope, contested, placeholder_ids)
+        args.concepts_output.parent.mkdir(parents=True, exist_ok=True)
+        args.concepts_output.write_bytes(encode_deterministic_gzip(food_concepts))
+        print_summary(envelope, contested, placeholder_ids, food_concepts)
         print()
         print(f"wrote: {args.output}")
         print(f"wrote: {args.rules_output}")
+        print(f"wrote: {args.concepts_output}")
         return 0
     except (BuildError, KeyError, TypeError, ValueError, OSError) as error:
         print(f"build_seed.py: error: {error}", file=sys.stderr)
