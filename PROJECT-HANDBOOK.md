@@ -2,9 +2,10 @@
 **Read this first. It is the knowledge-transfer document for anyone (human or AI)
 taking over direction of this project. Update it at the end of every milestone —
 that is a standing rule baked into all task packets.**
-Last updated: 2026-07-26 (INT-1 integrated MP-1 through MP-3c and FC-1/FC-1b
-into `ayurveda-app`; all authorized host/simulator gates pass, while the
-physical-device gates remain explicit in
+Last updated: 2026-07-26 (FC-1e feature branch wires the rev5 food-concept
+ontology into planner exclusions and deterministic resolution; all authorized
+host/simulator gates pass. The branch is intentionally unmerged and unpushed,
+and the physical-device gates remain explicit in
 `ayurveda-data/DEFERRED-VALIDATION.md`).
 
 ## 1. Mission and the two applications
@@ -121,12 +122,17 @@ simulation; must always pass).
   references, and were removed as one proven-dead cluster. The synchronized
   Xcode group now contributes zero Legacy Swift sources.
 - `WiseEating/Ayurveda/FoodConcepts.swift` + bundled
-  `food_concepts.json.gz` (FC-1): immutable, lazily loaded concept
+  `food_concepts.json.gz` (FC-1/FC-1e): immutable, lazily loaded concept
   lookup over all 14,484 catalogue rows. The director-owned ontology contains
   25 canonical concepts and 75 aliases; build-time matching applies token
-  phrases, authored negative phrases, hierarchy closure, and one-level recipe
-  IngredientLink propagation. FC-1 adds the service only: no meal-planner,
-  resolver, FoodSearch, or ranking consumer is wired yet.
+  phrases, plural-tolerant unordered `vetoTokens`, authored negative phrases,
+  hierarchy closure, and one-level recipe IngredientLink propagation. On the
+  FC-1e feature branch, planner exclusions resolve to canonical concepts and
+  subtract member-ID sets: WE-8 remains authoritative for the 2,214 seeded
+  rows, while FC-1 covers the 12,601 plain USDA rows. The former hardcoded
+  alcohol list and planner exclusion substring matchers are removed. The 75
+  aliases feed the frozen MP-3 scorer in the authored surface→canonical
+  direction; FoodSearch and ranking remain unchanged.
 - `WiseEating/AI/MealPlanning/` (MP-1 through MP-3c): opt-in planner telemetry
   records stage/model/resolution counts without changing ordinary logging;
   resolved FoodItem/USDA nutrition replaces AI-authored meal macros before goal
@@ -219,11 +225,13 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | Age provenance (WE-8c) | dravyas 4 authored / 710 legacyImport · recipes 4 / 1,496 · ingredient contributors 4 / 10,567 |
 | Cold launch (WE-6/WE-7/WE-8/WE-8c, Debug simulator) | WE-8c registry median **1.607s** (N=12); same-session WE-8b 1.569s, paired median delta +0.048s. Absolute hard ceiling 1.700s; profiling paydown required above 1.650s |
 | Legacy target (WE-7) | 9 dead Swift inputs removed · 5 live JSON fallback resources retained |
-| Food concepts (FC-1) | 25 concepts · 75 aliases · 14,484 catalogue memberships resolved into a 29,740-byte deterministic artifact |
-| FC-1 exclusion corpus | non-contested must-exclude 61/75 pass, 0 fail, 14 unresolved · must-not-exclude 26/34 pass, 0 fail, 8 unresolved · 8 contested reported separately |
+| Food concepts (FC-1e feature branch) | rev5 · 25 concepts · 75 aliases · 14,484 catalogue memberships resolved into a 31,165-byte deterministic artifact |
+| FC-1e exclusion corpus | non-contested must-exclude 62/76 pass, 0 fail, 14 unresolved · must-not-exclude 26/34 pass, 0 fail, 8 unresolved · 7 contested reported separately |
 | FC-1 cold launch (Debug simulator) | candidate **1.584s** median vs branch point 1.584s, N=10 same-session ABAB; paired median −0.003s, delta smaller than both IQRs |
 | Integrated test suite (INT-1) | **95/95** = 62 shared + 23 MP + 9 FC + 1 INT launch regression |
 | Integrated cold launch (INT-1, Debug simulator) | **1.461s** median vs `d393bda` 1.654s, N=10 same-session ABAB; paired median −0.195s. Warm Ayurveda check 0.226s→0.044s |
+| FC-1e feature-branch suite / resolution | **98/98** tests · 25/25 + 2/2 search goldens · resolution training 59/59 · held-out 44/48 with zero wrong-confident matches |
+| FC-1e cold launch (Debug simulator) | candidate **1.433s** median vs `06c767b` 1.425s, N=10 same-session ABAB; paired median +0.010s, smaller than both IQRs and not resolvable |
 
 ## 6. Milestone ledger (update after every task)
 
@@ -251,6 +259,7 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | MP-3c scorer logic fixes | ✅ HOST/SIMULATOR COMPLETE / INTEGRATED — training 59/59 expectations; held-out 40/48 with 8 unresolved, 0 wrong-confident, and 5/5 controls unresolved. MP-3's separate physical-device runtime confirmation remains deferred; see `REPORT-MP3c.md` |
 | FC-1/FC-1b food concept ontology | ✅ COMPLETE / INTEGRATED — 25 concepts / 75 aliases resolve deterministic membership across 14,484 catalogue rows behind an unused lazy runtime service. Non-contested exclusion gates have zero resolved failures; eight contested cases remain separately reported. See `REPORT-FC1.md` |
 | INT-1 branch integration | ✅ AUTHORIZED HOST/SIMULATOR SCOPE COMPLETE — unsquashed MP and FC histories merged in order; 95/95 tests, 25+2 search goldens, validator, Debug/Release with zero new warnings, deterministic rebuilt artifacts, fresh zero-insert/no-rebuild, exact corpora, and 1.461s launch median pass. Device work is preserved in `DEFERRED-VALIDATION.md`; see `REPORT-INT1.md` |
+| FC-1e rev5 ontology + FC-2 wiring | ✅ HOST/SIMULATOR COMPLETE ON FEATURE BRANCH / NOT MERGED OR PUSHED — plural-tolerant `vetoTokens` close coconut 1→0 and veto oyster mushroom in both token orders; planner exclusion is canonical set subtraction with the WE-8/FC-1 authority boundary; the hardcoded alcohol list and exclusion substring paths are removed; resolution is 59/59 training and 44/48 held-out. All 98 tests, 25+2 search goldens, validator, Debug/Release, deterministic artifacts, fresh zero-insert/no-rebuild, tracked-size gate, and 1.433s launch median pass. See `REPORT-FC1e.md` |
 | Expert review pass | ⏳ pending human reviewer: work aiDraft→reviewed, resolve reviewNotes, optional batch-31 top-up to 750 |
 | Later roadmap | media (yoga/meditation content), recommendation engine, dosha assessment — see ayurveda-data/RESTART-PLAN.md history |
 
