@@ -796,11 +796,13 @@ def _matching_veto_token_groups(
     tokens: tuple[str, ...],
     groups: list[tuple[str, ...]],
 ) -> list[str]:
-    token_set = set(tokens)
+    def token_matches(authored_token: str) -> bool:
+        return authored_token in tokens or f"{authored_token}s" in tokens
+
     return [
         " ".join(group)
         for group in groups
-        if set(group).issubset(token_set)
+        if all(token_matches(token) for token in group)
     ]
 
 

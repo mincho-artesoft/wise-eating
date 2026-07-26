@@ -25,8 +25,8 @@ KNOWLEDGE_BASE_PATH = (
 RUNTIME_PATH = ROOT / "WiseEating" / "Ayurveda" / "FoodConcepts.swift"
 
 DIRECTOR_HASHES = {
-    ONTOLOGY_PATH: "e9ab96625bf0abcec1015a633dd1b2adb59dfabfb53d8b9612103df3d4e29913",
-    EXCLUSION_PATH: "db0c331132001543fd4baf18ab83abcd28b5b109b5a66be53a47b19ca8240ec8",
+    ONTOLOGY_PATH: "1f432b23e233f4bece7f3f2ee92d55f99ac6a6d4ad537bd03007a04211e4b095",
+    EXCLUSION_PATH: "fe721b8ef08e5a6f893c26f312245df1725a5a5ebc036f38a8eaa07091a89f42",
     HOLDOUT_PATH: "557fe9cd78e751522310ec520c2a94a8b19366f12c8405814566d38a517a7a9d",
 }
 
@@ -80,7 +80,7 @@ class FoodConceptTests(unittest.TestCase):
             ),
             7,
         )
-        self.assertIn("rev3", self.exclusion_goldens["revision"])
+        self.assertIn("rev4", self.exclusion_goldens["revision"])
 
     def test_non_contested_must_not_exclude_cases_have_no_members(self):
         names = self.diagnostics["catalogNames"]

@@ -545,8 +545,8 @@
     },
     {
       "concept": "tree_nuts",
-      "pattern": "pineapple",
-      "why": "must not collide with 'pine nut'"
+      "pattern": "pineapple, raw",
+      "why": "DIRECTOR CORRECTION (FC-1d): the bare pattern 'pineapple' also matched pineapple-coconut rows that GENUINELY contain coconut, making the case unsatisfiable once coconut became a tree nut. Narrowed to a plain pineapple row. The original intent stands: the 'pine nut' phrase must not collide with the token 'pineapple'."
     },
     {
       "concept": "fish",
@@ -621,5 +621,5 @@
       "why": "seaweed is not shellfish"
     }
   ],
-  "revision": "rev3 (FC-1c): coconut moved to mustExclude, mirroring the chestnut ruling."
+  "revision": "rev4 (FC-1d): pineapple case narrowed to a plain row; it was unsatisfiable against coconut-bearing rows."
 }
