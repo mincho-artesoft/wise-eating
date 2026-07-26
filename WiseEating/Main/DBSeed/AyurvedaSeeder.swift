@@ -37,7 +37,9 @@ enum AyurvedaSeeder {
   }
 
   static func bundleSeedVersion() throws -> Int {
-    try loadSeed().seedVersion
+    try JSONDecoder()
+      .decode(AyurvedaSeedVersionDTO.self, from: loadSeedData())
+      .seedVersion
   }
 
   static func run(context: ModelContext) throws -> RunResult {
@@ -225,7 +227,7 @@ enum AyurvedaSeeder {
     }
   }
 
-  private static func loadSeed() throws -> AyurvedaSeedDTO {
+  private static func loadSeedData() throws -> Data {
     guard
       let url = Bundle.main.url(
         forResource: "ayurveda_seed",
@@ -235,8 +237,11 @@ enum AyurvedaSeeder {
       throw AyurvedaSeederError.missingBundle
     }
     let compressed = try Data(contentsOf: url, options: .mappedIfSafe)
-    let plain = try ZlibGzip.decompress(data: compressed)
-    return try JSONDecoder().decode(AyurvedaSeedDTO.self, from: plain)
+    return try ZlibGzip.decompress(data: compressed)
+  }
+
+  private static func loadSeed() throws -> AyurvedaSeedDTO {
+    try JSONDecoder().decode(AyurvedaSeedDTO.self, from: loadSeedData())
   }
 
   private static func validate(seed: AyurvedaSeedDTO) throws {
@@ -826,6 +831,10 @@ private enum AyurvedaSeederError: Error, LocalizedError {
       return "the Ayurveda seed references unsupported allergen \(allergen)"
     }
   }
+}
+
+private struct AyurvedaSeedVersionDTO: Decodable {
+  let seedVersion: Int
 }
 
 private struct AyurvedaSeedDTO: Decodable {

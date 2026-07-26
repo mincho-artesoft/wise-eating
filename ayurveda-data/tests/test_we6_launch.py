@@ -50,6 +50,21 @@ class WE6LaunchTests(unittest.TestCase):
         self.assertIn('"-we6LaunchProfile"', source)
         self.assertIn("os_signpost(.event", source)
 
+    def test_warm_ayurveda_version_check_avoids_full_seed_decode(self):
+        source = (
+            ROOT
+            / "WiseEating"
+            / "Main"
+            / "DBSeed"
+            / "AyurvedaSeeder.swift"
+        ).read_text(encoding="utf-8")
+        version_check = source.split(
+            "static func bundleSeedVersion() throws -> Int {", 1
+        )[1].split("\n  }", 1)[0]
+        self.assertIn("AyurvedaSeedVersionDTO.self", version_check)
+        self.assertIn("loadSeedData()", version_check)
+        self.assertNotIn("loadSeed()", version_check)
+
 
 if __name__ == "__main__":
     unittest.main()
