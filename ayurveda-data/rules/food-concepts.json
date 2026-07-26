@@ -1,0 +1,1264 @@
+{
+  "conceptsVersion": 1,
+  "author": "director",
+  "appliesTo": "all 14,484 foods (12,601 USDA + 383 placeholder + 1,500 recipes)",
+  "matching": "Reuse the modifiers.json normalization VERBATIM: lowercase, parentheticals stripped, split on whitespace/hyphen/slash/apostrophe, contiguous token-sequence match against the full normalized name. Additions for this file: (1) negativePhrases are evaluated BEFORE phrases and veto the match; (2) longest phrase wins on overlap; (3) suffix negation reuses SearchKnowledgeBase.suffixNegationTerms (free/zero/less) so 'gluten-free' never matches 'gluten'; (4) token-boundary only, NEVER substring.",
+  "authority": {
+    "seededRows": "WE-8 ingredient-intersection derivation is AUTHORITATIVE for the 2,214 seeded rows. This file must NOT re-derive or override them. Its concept membership on those rows is used only for cross-validation (gate G12).",
+    "usdaRows": "This file is the only concept source for the 12,601 plain USDA rows, which WE-8 does not touch.",
+    "provenance": "Every concept and alias carries provenance and qualityState. Allergen concepts require founder/expert sign-off before leaving aiDraft."
+  },
+  "concepts": [
+    {
+      "id": "dairy",
+      "label": "Dairy",
+      "kind": "ingredientClass",
+      "parents": [],
+      "phrases": [
+        "milk",
+        "dairy",
+        "cheese",
+        "butter",
+        "ghee",
+        "paneer",
+        "whey",
+        "casein",
+        "curd",
+        "yogurt",
+        "yoghurt",
+        "kefir",
+        "cream",
+        "khoya",
+        "buttermilk",
+        "custard",
+        "ricotta",
+        "mozzarella",
+        "cheddar",
+        "parmesan",
+        "feta",
+        "mascarpone",
+        "creme fraiche",
+        "half and half",
+        "condensed milk",
+        "evaporated milk",
+        "lactose",
+        "ice cream",
+        "quark",
+        "labneh"
+      ],
+      "negativePhrases": [
+        "milk thistle",
+        "coconut milk",
+        "almond milk",
+        "soy milk",
+        "oat milk",
+        "rice milk",
+        "cashew milk",
+        "hemp milk",
+        "milk of magnesia",
+        "peanut butter",
+        "apple butter",
+        "cocoa butter",
+        "shea butter",
+        "almond butter",
+        "cashew butter",
+        "sunflower butter",
+        "body butter",
+        "cream of tartar",
+        "coconut cream",
+        "creamer, non-dairy",
+        "butternut",
+        "butterfly",
+        "buttercup",
+        "butterhead",
+        "dairy free",
+        "dairy-free",
+        "non-dairy",
+        "nondairy"
+      ],
+      "allergen": "milk",
+      "dietImplications": [
+        "Dairy-Free"
+      ],
+      "provenance": "curated",
+      "confidence": 0.95,
+      "qualityState": "aiDraft"
+    },
+    {
+      "id": "egg",
+      "label": "Egg",
+      "kind": "ingredientClass",
+      "parents": [],
+      "phrases": [
+        "egg",
+        "eggs",
+        "albumen",
+        "egg white",
+        "egg yolk",
+        "meringue",
+        "mayonnaise",
+        "aioli",
+        "hollandaise",
+        "custard",
+        "frittata",
+        "omelet",
+        "omelette"
+      ],
+      "negativePhrases": [
+        "eggplant",
+        "egg free",
+        "egg-free",
+        "egg substitute",
+        "egg replacer",
+        "eggnog-flavored, non-dairy"
+      ],
+      "allergen": "eggs",
+      "dietImplications": [
+        "Egg-Free"
+      ],
+      "provenance": "curated",
+      "confidence": 0.95,
+      "qualityState": "aiDraft"
+    },
+    {
+      "id": "gluten",
+      "label": "Gluten grains",
+      "kind": "ingredientClass",
+      "parents": [],
+      "phrases": [
+        "gluten",
+        "wheat",
+        "barley",
+        "rye",
+        "spelt",
+        "farro",
+        "kamut",
+        "triticale",
+        "semolina",
+        "durum",
+        "couscous",
+        "bulgur",
+        "seitan",
+        "panko",
+        "orzo",
+        "udon",
+        "matzo",
+        "matzoh",
+        "malt",
+        "farina",
+        "atta",
+        "maida",
+        "sooji",
+        "rava"
+      ],
+      "negativePhrases": [
+        "buckwheat",
+        "gluten free",
+        "gluten-free",
+        "wheat free",
+        "wheat-free",
+        "wheatgrass",
+        "water chestnut flour",
+        "rice flour",
+        "corn flour",
+        "malt, corn",
+        "malic"
+      ],
+      "allergen": "cerealsContainingGluten",
+      "dietImplications": [
+        "Gluten-Free"
+      ],
+      "provenance": "curated",
+      "confidence": 0.9,
+      "qualityState": "aiDraft"
+    },
+    {
+      "id": "soy",
+      "label": "Soy",
+      "kind": "ingredientClass",
+      "parents": [],
+      "phrases": [
+        "soy",
+        "soya",
+        "soybean",
+        "tofu",
+        "tempeh",
+        "miso",
+        "edamame",
+        "tamari",
+        "natto",
+        "textured vegetable protein",
+        "tvp"
+      ],
+      "negativePhrases": [
+        "soy free",
+        "soy-free"
+      ],
+      "allergen": "soy",
+      "dietImplications": [
+        "Soy-Free"
+      ],
+      "provenance": "curated",
+      "confidence": 0.92,
+      "qualityState": "aiDraft"
+    },
+    {
+      "id": "sesame",
+      "label": "Sesame",
+      "kind": "ingredientClass",
+      "parents": [],
+      "phrases": [
+        "sesame",
+        "tahini",
+        "halva",
+        "til",
+        "gingelly",
+        "benne"
+      ],
+      "negativePhrases": [
+        "sesame free"
+      ],
+      "allergen": "sesame",
+      "dietImplications": [],
+      "provenance": "curated",
+      "confidence": 0.93,
+      "qualityState": "aiDraft"
+    },
+    {
+      "id": "peanut",
+      "label": "Peanut",
+      "kind": "ingredientClass",
+      "parents": [],
+      "phrases": [
+        "peanut",
+        "peanuts",
+        "groundnut",
+        "arachis",
+        "peanut butter",
+        "peanut oil"
+      ],
+      "negativePhrases": [
+        "peanut free",
+        "peanut-free"
+      ],
+      "allergen": "peanuts",
+      "dietImplications": [],
+      "provenance": "curated",
+      "confidence": 0.97,
+      "qualityState": "aiDraft",
+      "note": "DELIBERATELY NOT a child of tree_nuts. Peanut is a legume; conflating the two is botanically wrong and clinically significant, since tree-nut and peanut allergies are distinct and a person may have one without the other."
+    },
+    {
+      "id": "tree_nuts",
+      "label": "Tree nuts",
+      "kind": "ingredientClass",
+      "parents": [],
+      "phrases": [
+        "almond",
+        "cashew",
+        "walnut",
+        "pecan",
+        "pistachio",
+        "hazelnut",
+        "filbert",
+        "macadamia",
+        "brazil nut",
+        "pine nut",
+        "chestnut",
+        "marzipan",
+        "praline",
+        "nougat",
+        "nut butter",
+        "mixed nuts"
+      ],
+      "negativePhrases": [
+        "nutmeg",
+        "butternut",
+        "water chestnut",
+        "doughnut",
+        "donut",
+        "nutritional yeast",
+        "coconut",
+        "peanut",
+        "nut free",
+        "nut-free",
+        "nutrition",
+        "nutrient"
+      ],
+      "allergen": "nuts",
+      "dietImplications": [
+        "Nut-Free"
+      ],
+      "provenance": "curated",
+      "confidence": 0.88,
+      "qualityState": "aiDraft",
+      "note": "CONTESTED, pending vaidya: coconut is currently EXCLUDED here (94 of 297 nut-flagged recipes are coconut-only per WE-8). FDA classifies coconut as a tree nut; coconut allergy is rare and immunologically distinct. Chestnut is INCLUDED but is low-allergenicity and may warrant separation."
+    },
+    {
+      "id": "fish",
+      "label": "Finfish",
+      "kind": "animalSource",
+      "parents": [],
+      "phrases": [
+        "fish",
+        "salmon",
+        "tuna",
+        "cod",
+        "haddock",
+        "halibut",
+        "mackerel",
+        "sardine",
+        "anchovy",
+        "herring",
+        "trout",
+        "tilapia",
+        "bass",
+        "snapper",
+        "pollock",
+        "surimi",
+        "fish sauce",
+        "worcestershire",
+        "hamachi",
+        "catfish",
+        "swordfish"
+      ],
+      "negativePhrases": [
+        "shellfish",
+        "cuttlefish",
+        "jellyfish",
+        "fish free",
+        "vegetarian fish",
+        "fishless"
+      ],
+      "allergen": "fish",
+      "dietImplications": [],
+      "provenance": "curated",
+      "confidence": 0.9,
+      "qualityState": "aiDraft"
+    },
+    {
+      "id": "shellfish",
+      "label": "Shellfish",
+      "kind": "animalSource",
+      "parents": [],
+      "phrases": [
+        "shellfish"
+      ],
+      "negativePhrases": [],
+      "allergen": "crustaceans",
+      "dietImplications": [],
+      "provenance": "curated",
+      "confidence": 0.9,
+      "qualityState": "aiDraft",
+      "note": "CONTESTED, pending vaidya: does this span molluscs or only crustaceans? Currently spans both via children. Allergen mapping uses crustaceans; mollusc children carry their own tag."
+    },
+    {
+      "id": "crustacean",
+      "label": "Crustacean",
+      "kind": "animalSource",
+      "parents": [
+        "shellfish"
+      ],
+      "phrases": [
+        "shrimp",
+        "prawn",
+        "crab",
+        "lobster",
+        "crayfish",
+        "crawfish",
+        "langoustine",
+        "scampi",
+        "krill"
+      ],
+      "negativePhrases": [
+        "crab apple",
+        "crabgrass"
+      ],
+      "allergen": "crustaceans",
+      "dietImplications": [],
+      "provenance": "curated",
+      "confidence": 0.94,
+      "qualityState": "aiDraft"
+    },
+    {
+      "id": "mollusc",
+      "label": "Mollusc",
+      "kind": "animalSource",
+      "parents": [
+        "shellfish"
+      ],
+      "phrases": [
+        "mussel",
+        "oyster",
+        "clam",
+        "scallop",
+        "squid",
+        "calamari",
+        "octopus",
+        "cuttlefish",
+        "snail",
+        "escargot",
+        "abalone",
+        "whelk"
+      ],
+      "negativePhrases": [
+        "oyster mushroom",
+        "oyster sauce, vegetarian",
+        "clam shell"
+      ],
+      "allergen": "molluscs",
+      "dietImplications": [],
+      "provenance": "curated",
+      "confidence": 0.94,
+      "qualityState": "aiDraft"
+    },
+    {
+      "id": "meat",
+      "label": "Meat",
+      "kind": "animalSource",
+      "parents": [],
+      "phrases": [
+        "meat",
+        "flesh"
+      ],
+      "negativePhrases": [
+        "meatless",
+        "meat free",
+        "meat-free",
+        "nutmeat",
+        "coconut meat",
+        "meat substitute",
+        "meat analog",
+        "mincemeat"
+      ],
+      "dietImplications": [
+        "Vegetarian"
+      ],
+      "provenance": "curated",
+      "confidence": 0.85,
+      "qualityState": "aiDraft"
+    },
+    {
+      "id": "pork",
+      "label": "Pork",
+      "kind": "animalSource",
+      "parents": [
+        "meat"
+      ],
+      "phrases": [
+        "pork",
+        "bacon",
+        "ham",
+        "lard",
+        "chorizo",
+        "prosciutto",
+        "pancetta",
+        "gammon",
+        "speck",
+        "pepperoni",
+        "salami",
+        "bratwurst",
+        "pig"
+      ],
+      "negativePhrases": [
+        "hamburger",
+        "hamachi",
+        "hammered",
+        "turkey bacon",
+        "turkey ham",
+        "beef salami",
+        "vegetarian bacon",
+        "porkfish"
+      ],
+      "dietImplications": [],
+      "provenance": "curated",
+      "confidence": 0.88,
+      "qualityState": "aiDraft",
+      "note": "CONTESTED: salami and pepperoni may have beef variants in the catalogue; the negativePhrases carve those out."
+    },
+    {
+      "id": "beef",
+      "label": "Beef",
+      "kind": "animalSource",
+      "parents": [
+        "meat"
+      ],
+      "phrases": [
+        "beef",
+        "steak",
+        "veal",
+        "brisket",
+        "sirloin",
+        "ribeye",
+        "oxtail",
+        "corned beef",
+        "pastrami"
+      ],
+      "negativePhrases": [
+        "beefsteak tomato",
+        "beef-flavored, vegetarian"
+      ],
+      "dietImplications": [],
+      "provenance": "curated",
+      "confidence": 0.92,
+      "qualityState": "aiDraft",
+      "note": "~991 beef foods classify at estimated tier; there is deliberately no beef dravya (handbook §3.7)."
+    },
+    {
+      "id": "lamb",
+      "label": "Lamb and mutton",
+      "kind": "animalSource",
+      "parents": [
+        "meat"
+      ],
+      "phrases": [
+        "lamb",
+        "mutton",
+        "hogget"
+      ],
+      "negativePhrases": [
+        "lambsquarters",
+        "lamb's lettuce",
+        "lambs ear"
+      ],
+      "dietImplications": [],
+      "provenance": "curated",
+      "confidence": 0.93,
+      "qualityState": "aiDraft"
+    },
+    {
+      "id": "poultry",
+      "label": "Poultry",
+      "kind": "animalSource",
+      "parents": [
+        "meat"
+      ],
+      "phrases": [
+        "poultry",
+        "fowl"
+      ],
+      "negativePhrases": [],
+      "dietImplications": [],
+      "provenance": "curated",
+      "confidence": 0.9,
+      "qualityState": "aiDraft",
+      "note": "The word 'poultry' does not appear in USDA names at all — this concept works ONLY through its children. That is precisely why hierarchy is required."
+    },
+    {
+      "id": "chicken",
+      "label": "Chicken",
+      "kind": "animalSource",
+      "parents": [
+        "poultry"
+      ],
+      "phrases": [
+        "chicken",
+        "broilers or fryers",
+        "capon",
+        "cornish game hen"
+      ],
+      "negativePhrases": [
+        "chicken of the woods",
+        "vegetarian chicken",
+        "chickpea",
+        "chicory"
+      ],
+      "dietImplications": [],
+      "provenance": "curated",
+      "confidence": 0.94,
+      "qualityState": "aiDraft"
+    },
+    {
+      "id": "turkey",
+      "label": "Turkey",
+      "kind": "animalSource",
+      "parents": [
+        "poultry"
+      ],
+      "phrases": [
+        "turkey"
+      ],
+      "negativePhrases": [
+        "turkish",
+        "turkey berry"
+      ],
+      "dietImplications": [],
+      "provenance": "curated",
+      "confidence": 0.95,
+      "qualityState": "aiDraft"
+    },
+    {
+      "id": "duck",
+      "label": "Duck and goose",
+      "kind": "animalSource",
+      "parents": [
+        "poultry"
+      ],
+      "phrases": [
+        "duck",
+        "goose",
+        "foie gras"
+      ],
+      "negativePhrases": [
+        "duckweed",
+        "gooseberry"
+      ],
+      "dietImplications": [],
+      "provenance": "curated",
+      "confidence": 0.93,
+      "qualityState": "aiDraft"
+    },
+    {
+      "id": "game",
+      "label": "Game meat",
+      "kind": "animalSource",
+      "parents": [
+        "meat"
+      ],
+      "phrases": [
+        "venison",
+        "bison",
+        "elk",
+        "boar",
+        "rabbit",
+        "quail",
+        "pheasant",
+        "ostrich",
+        "emu"
+      ],
+      "negativePhrases": [],
+      "dietImplications": [],
+      "provenance": "curated",
+      "confidence": 0.9,
+      "qualityState": "aiDraft"
+    },
+    {
+      "id": "alcohol",
+      "label": "Alcohol",
+      "kind": "ingredientClass",
+      "parents": [],
+      "phrases": [
+        "alcohol",
+        "beer",
+        "wine",
+        "vodka",
+        "whiskey",
+        "whisky",
+        "rum",
+        "gin",
+        "tequila",
+        "brandy",
+        "liqueur",
+        "liquor",
+        "cider, hard",
+        "sake",
+        "soju",
+        "rakia",
+        "ouzo",
+        "vermouth",
+        "champagne",
+        "prosecco",
+        "mead",
+        "port wine",
+        "sherry",
+        "mirin",
+        "ale",
+        "lager",
+        "stout",
+        "pilsner"
+      ],
+      "negativePhrases": [
+        "non-alcoholic",
+        "nonalcoholic",
+        "alcohol free",
+        "alcohol-free",
+        "root beer",
+        "ginger ale",
+        "ginger beer",
+        "wine vinegar",
+        "cider vinegar",
+        "rice wine vinegar",
+        "cooking wine, de-alcoholized"
+      ],
+      "dietImplications": [],
+      "provenance": "curated",
+      "confidence": 0.9,
+      "qualityState": "aiDraft",
+      "note": "CONTESTED: trace alcohol in vanilla extract. Currently NOT captured. Replaces the hardcoded 30-item alcoholKeywords array in USDAWeeklyMealPlanner."
+    },
+    {
+      "id": "caffeine",
+      "label": "Caffeine",
+      "kind": "ingredientClass",
+      "parents": [],
+      "phrases": [
+        "coffee",
+        "espresso",
+        "caffeine",
+        "black tea",
+        "green tea",
+        "matcha",
+        "cola",
+        "energy drink",
+        "guarana",
+        "yerba mate"
+      ],
+      "negativePhrases": [
+        "decaf",
+        "decaffeinated",
+        "caffeine free",
+        "herbal tea",
+        "chamomile",
+        "rooibos",
+        "peppermint tea",
+        "hibiscus"
+      ],
+      "dietImplications": [],
+      "provenance": "curated",
+      "confidence": 0.88,
+      "qualityState": "aiDraft"
+    },
+    {
+      "id": "nightshade",
+      "label": "Nightshade",
+      "kind": "ingredientClass",
+      "parents": [],
+      "phrases": [
+        "tomato",
+        "potato",
+        "eggplant",
+        "aubergine",
+        "bell pepper",
+        "chili pepper",
+        "cayenne",
+        "paprika",
+        "tomatillo",
+        "goji"
+      ],
+      "negativePhrases": [
+        "sweet potato",
+        "black pepper",
+        "peppercorn",
+        "peppermint",
+        "tomato-free"
+      ],
+      "dietImplications": [],
+      "provenance": "curated",
+      "confidence": 0.85,
+      "qualityState": "aiDraft",
+      "note": "Modern dietary category, NOT classical. Nightshades other than kakamaci are New World crops absent from all three samhitas — this must never be presented as an Ayurvedic rule."
+    },
+    {
+      "id": "allium",
+      "label": "Allium",
+      "kind": "ingredientClass",
+      "parents": [],
+      "phrases": [
+        "onion",
+        "garlic",
+        "shallot",
+        "leek",
+        "chive",
+        "scallion",
+        "spring onion",
+        "asafoetida",
+        "hing"
+      ],
+      "negativePhrases": [
+        "onion powder, free",
+        "wild garlic mustard"
+      ],
+      "dietImplications": [
+        "Jain",
+        "Sattvic"
+      ],
+      "provenance": "curated",
+      "confidence": 0.9,
+      "qualityState": "aiDraft",
+      "note": "Required for Jain and strict sattvic diets, which exclude alliums. Asafoetida is the classical substitute AND is itself excluded by some Jain practice — flag for vaidya."
+    },
+    {
+      "id": "honey",
+      "label": "Honey",
+      "kind": "ingredientClass",
+      "parents": [],
+      "phrases": [
+        "honey",
+        "honeycomb",
+        "mead"
+      ],
+      "negativePhrases": [
+        "honeydew",
+        "honey mustard",
+        "honeycomb cereal",
+        "honey graham",
+        "honey-flavored",
+        "honeysuckle",
+        "honey bun"
+      ],
+      "dietImplications": [
+        "Vegan"
+      ],
+      "provenance": "curated",
+      "confidence": 0.95,
+      "qualityState": "reviewed",
+      "note": "AUTHORED SAFETY RULE: carries the 12-month minimum age floor (infant botulism). This is the only age rule in the app with a cited clinical basis — see WE-8c. qualityState is reviewed, not aiDraft."
+    }
+  ],
+  "aliases": [
+    {
+      "surface": "rajma",
+      "canonical": "kidney beans",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "masoor",
+      "canonical": "lentils, red",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "masoor dal",
+      "canonical": "lentils, red",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "moong",
+      "canonical": "mung beans",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "mung dal",
+      "canonical": "mung beans",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "toor",
+      "canonical": "pigeon peas",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "arhar",
+      "canonical": "pigeon peas",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "chana",
+      "canonical": "chickpeas",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "bengal gram",
+      "canonical": "chickpeas",
+      "lang": "en-IN",
+      "provenance": "curated"
+    },
+    {
+      "surface": "urad",
+      "canonical": "black gram",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "besan",
+      "canonical": "chickpea flour",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "gram flour",
+      "canonical": "chickpea flour",
+      "lang": "en-IN",
+      "provenance": "curated"
+    },
+    {
+      "surface": "dahi",
+      "canonical": "yogurt, plain",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "curd",
+      "canonical": "yogurt, plain",
+      "lang": "en-IN",
+      "provenance": "curated"
+    },
+    {
+      "surface": "paneer",
+      "canonical": "cheese, fresh",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "khoya",
+      "canonical": "milk, evaporated",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "ghee",
+      "canonical": "butter, clarified",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "atta",
+      "canonical": "wheat flour, whole grain",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "maida",
+      "canonical": "wheat flour, white",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "sooji",
+      "canonical": "semolina",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "rava",
+      "canonical": "semolina",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "poha",
+      "canonical": "rice, flattened",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "sabudana",
+      "canonical": "tapioca pearls",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "makhana",
+      "canonical": "lotus seeds",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "jaggery",
+      "canonical": "sugar, raw",
+      "lang": "en-IN",
+      "provenance": "curated"
+    },
+    {
+      "surface": "gur",
+      "canonical": "sugar, raw",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "amla",
+      "canonical": "gooseberry, indian",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "imli",
+      "canonical": "tamarind",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "methi",
+      "canonical": "fenugreek leaves",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "kasuri methi",
+      "canonical": "fenugreek leaves, dried",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "ajwain",
+      "canonical": "carom seeds",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "saunf",
+      "canonical": "fennel seed",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "jeera",
+      "canonical": "cumin seed",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "dhania",
+      "canonical": "coriander seed",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "haldi",
+      "canonical": "turmeric",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "dalchini",
+      "canonical": "cinnamon",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "elaichi",
+      "canonical": "cardamom",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "laung",
+      "canonical": "cloves",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "kali mirch",
+      "canonical": "pepper, black",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "hing",
+      "canonical": "asafoetida",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "sarson",
+      "canonical": "mustard seed",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "til",
+      "canonical": "sesame seeds",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "bhindi",
+      "canonical": "okra",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "lauki",
+      "canonical": "gourd, bottle",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "karela",
+      "canonical": "gourd, bitter",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "petha",
+      "canonical": "gourd, ash",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "tori",
+      "canonical": "gourd, ridge",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "palak",
+      "canonical": "spinach",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "gobi",
+      "canonical": "cauliflower",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "matar",
+      "canonical": "peas, green",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "aloo",
+      "canonical": "potato",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "baingan",
+      "canonical": "eggplant",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "adrak",
+      "canonical": "ginger root, raw",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "lasun",
+      "canonical": "garlic",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "nariyal",
+      "canonical": "coconut",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "badam",
+      "canonical": "almonds",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "kaju",
+      "canonical": "cashews",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "pista",
+      "canonical": "pistachios",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "chawal",
+      "canonical": "rice",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "dal",
+      "canonical": "lentils",
+      "lang": "hi",
+      "provenance": "curated"
+    },
+    {
+      "surface": "dhal",
+      "canonical": "lentils",
+      "lang": "en-IN",
+      "provenance": "curated"
+    },
+    {
+      "surface": "chicken stock",
+      "canonical": "chicken broth",
+      "lang": "en",
+      "provenance": "curated"
+    },
+    {
+      "surface": "beef stock",
+      "canonical": "beef broth",
+      "lang": "en",
+      "provenance": "curated"
+    },
+    {
+      "surface": "vegetable stock",
+      "canonical": "vegetable broth",
+      "lang": "en",
+      "provenance": "curated"
+    },
+    {
+      "surface": "nutritional yeast",
+      "canonical": "yeast, nutritional",
+      "lang": "en",
+      "provenance": "curated",
+      "note": "FLAG FOR REVIEW: MP-3b allowed a plain yeast row for this. Nutritional yeast is fortified and nutritionally distinct from baker's or brewer's yeast; the ontology must decide whether that equivalence is safe."
+    },
+    {
+      "surface": "capsicum",
+      "canonical": "bell pepper",
+      "lang": "en-IN",
+      "provenance": "curated"
+    },
+    {
+      "surface": "brinjal",
+      "canonical": "eggplant",
+      "lang": "en-IN",
+      "provenance": "curated"
+    },
+    {
+      "surface": "ladyfinger",
+      "canonical": "okra",
+      "lang": "en-IN",
+      "provenance": "curated"
+    },
+    {
+      "surface": "curd rice",
+      "canonical": "rice with yogurt",
+      "lang": "en-IN",
+      "provenance": "curated"
+    },
+    {
+      "surface": "aubergine",
+      "canonical": "eggplant",
+      "lang": "en-GB",
+      "provenance": "curated"
+    },
+    {
+      "surface": "courgette",
+      "canonical": "zucchini",
+      "lang": "en-GB",
+      "provenance": "curated"
+    },
+    {
+      "surface": "rocket",
+      "canonical": "arugula",
+      "lang": "en-GB",
+      "provenance": "curated"
+    },
+    {
+      "surface": "coriander",
+      "canonical": "coriander seed",
+      "lang": "en-GB",
+      "provenance": "curated",
+      "note": "AMBIGUOUS BY REGION: in British usage 'coriander' usually means the fresh leaf; in American usage the seed. Defaulting to seed matches USDA naming. Flag for founder."
+    },
+    {
+      "surface": "garbanzo",
+      "canonical": "chickpeas",
+      "lang": "es",
+      "provenance": "curated"
+    },
+    {
+      "surface": "cilantro",
+      "canonical": "coriander leaves",
+      "lang": "es",
+      "provenance": "curated",
+      "note": "Canonical direction chosen to match USDA naming 'Coriander (cilantro) leaves, raw'. The reverse mapping was removed in validation — it formed an alias cycle."
+    }
+  ],
+  "revision": "rev2: alias cycle coriander leaves<->cilantro broken; coriander leaves is canonical."
+}

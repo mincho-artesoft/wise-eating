@@ -47,18 +47,7 @@ D34_EXPECTED_MODIFIERS = {
     "fermented-sour": 63,
     "pungent": 26,
 }
-D34_PARENTHETICAL = re.compile(r"\([^)]*\)")
-D34_INVALID = re.compile(r"[^a-z0-9,;'\- ]")
-D34_TOKEN_SPLIT = re.compile(r"[\s\-'/]+")
-
-
-def d34_normalized_tokens(value):
-    value = value.lower()
-    value = D34_PARENTHETICAL.sub("", value)
-    value = value.replace("&", " and ")
-    value = D34_INVALID.sub(" ", value)
-    value = value.replace(",", " ").replace(";", " ")
-    return tuple(token for token in D34_TOKEN_SPLIT.split(value) if token)
+d34_normalized_tokens = build_seed.modifier_normalized_tokens
 
 
 def d34_primary_category(blob, fdc_id, errs):
