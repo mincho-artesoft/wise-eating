@@ -170,6 +170,7 @@ simulation; must always pass).
     reported separately but do not block must-exclude or must-not-exclude
     gates. Only non-contested cases contribute to blocking gate arithmetic;
     executors never silently resolve a contested policy question.
+13. No GIT-TRACKED file may exceed 100 MB (GitHub's hard push limit). Split at 90 MB. Bundled media excluded from version control — currently WiseEating/Food/food_archive_1024.mp4 — is out of scope for this gate; it is governed by App Store bundle limits (4 GB uncompressed, 200 MB cellular download) and is tracked separately under the IMG workstream.
 
 ## 4. Working process (the pattern that built all of this)
 

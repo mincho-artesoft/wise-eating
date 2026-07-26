@@ -25,8 +25,8 @@ KNOWLEDGE_BASE_PATH = (
 RUNTIME_PATH = ROOT / "WiseEating" / "Ayurveda" / "FoodConcepts.swift"
 
 DIRECTOR_HASHES = {
-    ONTOLOGY_PATH: "2755da46ab2621d6ed4acb9204b4953d79eb03e8893f568c748e5abda9a48d24",
-    EXCLUSION_PATH: "4fa5586c63ecb1227e42e501065834cd1897c3f443c920dcc8dde882de2f5a69",
+    ONTOLOGY_PATH: "e9ab96625bf0abcec1015a633dd1b2adb59dfabfb53d8b9612103df3d4e29913",
+    EXCLUSION_PATH: "db0c331132001543fd4baf18ab83abcd28b5b109b5a66be53a47b19ca8240ec8",
     HOLDOUT_PATH: "557fe9cd78e751522310ec520c2a94a8b19366f12c8405814566d38a517a7a9d",
 }
 
@@ -70,17 +70,17 @@ class FoodConceptTests(unittest.TestCase):
                 )
         self.assertEqual(len(self.ontology["concepts"]), 25)
         self.assertEqual(len(self.ontology["aliases"]), 75)
-        self.assertEqual(len(self.exclusion_goldens["mustExclude"]), 80)
-        self.assertEqual(len(self.exclusion_goldens["mustNotExclude"]), 37)
+        self.assertEqual(len(self.exclusion_goldens["mustExclude"]), 81)
+        self.assertEqual(len(self.exclusion_goldens["mustNotExclude"]), 36)
         self.assertEqual(
             sum(
                 bool(case.get("contested"))
                 for key in ("mustExclude", "mustNotExclude")
                 for case in self.exclusion_goldens[key]
             ),
-            8,
+            7,
         )
-        self.assertIn("rev2", self.exclusion_goldens["revision"])
+        self.assertIn("rev3", self.exclusion_goldens["revision"])
 
     def test_non_contested_must_not_exclude_cases_have_no_members(self):
         names = self.diagnostics["catalogNames"]
@@ -167,7 +167,7 @@ class FoodConceptTests(unittest.TestCase):
         ):
             build_seed.food_concept_ancestors(cyclic)
 
-    def test_negative_veto_token_boundaries_and_suffix_negation(self):
+    def test_veto_tokens_negative_boundaries_and_suffix_negation(self):
         names = self.diagnostics["catalogNames"]
         direct = self.diagnostics["directMembership"]
 
@@ -188,8 +188,50 @@ class FoodConceptTests(unittest.TestCase):
             & self.diagnostics["membership"]["meat"]
         )
         self.assertFalse(
-            matching_ids("coconut ladoo")
-            & self.diagnostics["membership"]["tree_nuts"]
+            matching_ids("mushrooms, oyster")
+            & self.diagnostics["membership"]["mollusc"]
+        )
+        self.assertFalse(
+            matching_ids("mushrooms, oyster")
+            & self.diagnostics["membership"]["shellfish"]
+        )
+        self.assertEqual(
+            build_seed._matching_veto_token_groups(
+                build_seed.modifier_normalized_tokens("Oyster mushroom"),
+                [("oyster", "mushroom")],
+            ),
+            ["oyster mushroom"],
+        )
+        self.assertEqual(
+            build_seed._matching_veto_token_groups(
+                build_seed.modifier_normalized_tokens(
+                    "Mushrooms, oyster, raw"
+                ),
+                [("oyster", "mushroom")],
+            ),
+            ["oyster mushroom"],
+        )
+
+        water_chestnuts = {
+            food_id
+            for food_id, name in names.items()
+            if {"water", "chestnut"}.issubset(
+                build_seed.modifier_normalized_tokens(name)
+            )
+        }
+        self.assertTrue(water_chestnuts)
+        self.assertFalse(
+            water_chestnuts & self.diagnostics["membership"]["tree_nuts"]
+        )
+
+        coconut_ids = {
+            food_id
+            for food_id, name in names.items()
+            if "coconut" in build_seed.modifier_normalized_tokens(name)
+        }
+        self.assertTrue(coconut_ids)
+        self.assertTrue(
+            coconut_ids & self.diagnostics["membership"]["tree_nuts"]
         )
 
         gluten_tokens = build_seed.modifier_normalized_tokens(
