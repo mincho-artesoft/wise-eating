@@ -342,8 +342,9 @@ print("PASS \(scenario)")
 
     def test_telemetry_static_nutrition_site_is_removed(self):
         planner = PLANNER.read_text(encoding="utf-8")
-        self.assertEqual(planner.count("LanguageModelSession("), 20)
-        self.assertEqual(planner.count(".respond("), 25)
+        # MP-3 removes the two per-component resolution model sites.
+        self.assertEqual(planner.count("LanguageModelSession("), 18)
+        self.assertEqual(planner.count(".respond("), 23)
         removed_site = "aiFetch" + "NutritionData"
         self.assertNotIn(f'noteSession(site: "{removed_site}")', planner)
         self.assertNotIn(

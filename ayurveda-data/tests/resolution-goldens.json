@@ -1,0 +1,88 @@
+{
+  "goldensVersion": 1,
+  "author": "director",
+  "purpose": "Resolution-quality corpus for MP-3. MP-3 replaces aiBuildSmartQueries + aiChooseBestFoodCandidate with a deterministic scorer over SmartFoodSearch3. Call count is NOT the risk — relevance is. This corpus is the guard: it proves the deterministic scorer picks foods a human would accept, with no model and no device.",
+  "howToUse": "For each case, run the concept name through the MP-3 resolver against the shipped 14,484-row catalogue. The resolved food's name must match at least one pattern in mustMatchAny (case-insensitive substring, all tokens of a multi-token pattern present) and must match NO pattern in mustNotMatch. Report per-case PASS/FAIL/UNRESOLVED. UNRESOLVED means the resolver returned nothing — report it, do not treat it as a pass.",
+  "rules": [
+    "Executors may ADD cases. Executors may NOT delete or weaken a case to make a gate pass.",
+    "A case that cannot be satisfied is a stop-and-report event and a finding about the scorer, not a bad case.",
+    "mustNotMatch is the important half: it encodes the wrong-but-plausible matches a naive lexical scorer will make.",
+    "Where the catalogue genuinely lacks a good match, UNRESOLVED is the correct and honest outcome. Do not force a poor match to avoid it."
+  ],
+
+  "cases": [
+    { "concept": "grilled chicken breast", "mustMatchAny": ["chicken", "breast"], "mustNotMatch": ["soup", "broth", "nugget", "canned", "sausage", "liver"], "why": "USDA names this 'Chicken, broilers or fryers, breast...' — the headword is chicken, the qualifier is breast. Must not drift to a chicken-containing composite." },
+    { "concept": "chicken", "mustMatchAny": ["chicken"], "mustNotMatch": ["chicken of the woods", "soup", "bouillon"], "why": "Bare headword must land on the meat, not a mushroom or a stock cube." },
+    { "concept": "roast turkey", "mustMatchAny": ["turkey"], "mustNotMatch": ["bacon", "sausage", "ham", "soup"], "why": "Species headword dominates the cooking modifier." },
+
+    { "concept": "basmati rice", "mustMatchAny": ["rice"], "mustNotMatch": ["pudding", "cake", "milk", "vinegar", "wine", "noodle", "paper", "bran oil"], "why": "'rice' has many derivative products that are not the grain." },
+    { "concept": "brown rice", "mustMatchAny": ["rice"], "mustNotMatch": ["pudding", "cake", "milk", "syrup"], "why": "same trap set" },
+    { "concept": "rice", "mustMatchAny": ["rice"], "mustNotMatch": ["pudding", "cake", "milk", "vinegar", "wine", "paper"], "why": "bare headword" },
+
+    { "concept": "moong dal", "mustMatchAny": ["mung", "moong"], "mustNotMatch": ["sprout"], "why": "Indian ingredient name must reach the USDA mung bean row. Sprouted is a different food with different nutrition." },
+    { "concept": "split yellow mung dal", "mustMatchAny": ["mung", "moong"], "mustNotMatch": ["sprout", "whole green"], "why": "split vs whole is a real distinction" },
+    { "concept": "toor dal", "mustMatchAny": ["pigeon pea", "toor", "arhar"], "mustNotMatch": ["green pea", "chickpea"], "why": "regional name must reach the right legume" },
+    { "concept": "chana dal", "mustMatchAny": ["chickpea", "bengal gram", "chana", "garbanzo"], "mustNotMatch": ["green pea", "mung"], "why": "regional name" },
+    { "concept": "urad dal", "mustMatchAny": ["black gram", "urad", "urd"], "mustNotMatch": ["black bean", "black eyed"], "why": "black gram is not black bean or black-eyed pea" },
+
+    { "concept": "ghee", "mustMatchAny": ["ghee", "butter oil", "butter, clarified"], "mustNotMatch": ["peanut butter", "cocoa butter", "shea", "apple butter"], "why": "must land on clarified butterfat, not a 'butter'-named non-dairy" },
+    { "concept": "paneer", "mustMatchAny": ["paneer", "cheese"], "mustNotMatch": ["cream cheese spread", "processed"], "why": "fresh cheese; the word paneer may not exist in USDA rows" },
+    { "concept": "yogurt", "mustMatchAny": ["yogurt", "yoghurt", "curd"], "mustNotMatch": ["frozen", "covered", "bar", "drink mix"], "why": "plain yogurt, not a confection" },
+    { "concept": "milk", "mustMatchAny": ["milk"], "mustNotMatch": ["coconut milk", "almond milk", "soy milk", "oat milk", "rice milk", "milk thistle", "chocolate", "condensed", "evaporated", "powder"], "why": "bare 'milk' means dairy milk. The plant milks are the classic wrong match." },
+    { "concept": "coconut milk", "mustMatchAny": ["coconut"], "mustNotMatch": ["milk, whole", "milk, reduced fat", "cow"], "why": "the inverse trap — must NOT resolve to dairy" },
+
+    { "concept": "olive oil", "mustMatchAny": ["olive"], "mustNotMatch": ["olives, ripe", "olives, green", "tapenade"], "why": "the oil, not the fruit" },
+    { "concept": "coconut oil", "mustMatchAny": ["coconut"], "mustNotMatch": ["coconut meat, raw", "coconut water", "milk"], "why": "oil form specifically" },
+    { "concept": "sesame oil", "mustMatchAny": ["sesame"], "mustNotMatch": ["seeds, whole", "tahini", "halva"], "why": "oil, not seed or paste" },
+
+    { "concept": "cumin", "mustMatchAny": ["cumin"], "mustNotMatch": ["black cumin", "caraway"], "why": "cumin and caraway are routinely conflated and are different species" },
+    { "concept": "turmeric", "mustMatchAny": ["turmeric"], "mustNotMatch": ["curry powder", "mustard"], "why": "single spice, not a blend containing it" },
+    { "concept": "coriander seed", "mustMatchAny": ["coriander"], "mustNotMatch": ["leaves", "cilantro"], "why": "seed and leaf are different foods with different nutrition" },
+    { "concept": "cilantro", "mustMatchAny": ["coriander", "cilantro"], "mustNotMatch": ["seed", "ground"], "why": "the inverse — leaf not seed" },
+    { "concept": "cardamom", "mustMatchAny": ["cardamom"], "mustNotMatch": ["curry", "chai mix", "blend"], "why": "single spice" },
+    { "concept": "black pepper", "mustMatchAny": ["pepper, black"], "mustNotMatch": ["bell pepper", "chili", "cayenne", "red pepper", "peppermint"], "why": "'pepper' is the single most overloaded food word in the catalogue" },
+    { "concept": "chilli powder", "mustMatchAny": ["chili", "chilli", "cayenne", "red pepper"], "mustNotMatch": ["black pepper", "bell pepper", "chili con carne", "chili with beans"], "why": "must not resolve to the stew" },
+
+    { "concept": "spinach", "mustMatchAny": ["spinach"], "mustNotMatch": ["creamed", "souffle", "dip"], "why": "vegetable not prepared dish" },
+    { "concept": "tomato", "mustMatchAny": ["tomato"], "mustNotMatch": ["ketchup", "sauce", "paste", "soup", "juice", "sun-dried"], "why": "fresh vegetable, not its many processed forms" },
+    { "concept": "carrot", "mustMatchAny": ["carrot"], "mustNotMatch": ["cake", "juice", "baby food"], "why": "same trap shape" },
+    { "concept": "potato", "mustMatchAny": ["potato"], "mustNotMatch": ["sweet potato", "chips", "crisps", "french fried", "salad", "flour"], "why": "sweet potato is a different species entirely" },
+    { "concept": "sweet potato", "mustMatchAny": ["sweet potato"], "mustNotMatch": ["potato, white", "potatoes, boiled", "fries"], "why": "the inverse — must not collapse to plain potato" },
+    { "concept": "ash gourd", "mustMatchAny": ["gourd", "winter melon", "wax gourd"], "mustNotMatch": ["bitter", "bottle", "ridge"], "why": "gourd varieties are distinct foods" },
+    { "concept": "bitter gourd", "mustMatchAny": ["bitter melon", "bitter gourd", "balsam pear"], "mustNotMatch": ["ash", "bottle", "wax"], "why": "distinct variety" },
+
+    { "concept": "lentils", "mustMatchAny": ["lentil"], "mustNotMatch": ["soup", "canned with", "sprout"], "why": "the pulse itself" },
+    { "concept": "cooked lentils", "mustMatchAny": ["lentil"], "mustNotMatch": ["raw", "dry", "sprout"], "why": "cooked form preferred where the catalogue has both — this is where preferring an already-cooked USDA row matters" },
+    { "concept": "chickpeas", "mustMatchAny": ["chickpea", "garbanzo", "bengal gram"], "mustNotMatch": ["hummus", "falafel", "flour"], "why": "whole pulse not a preparation" },
+
+    { "concept": "almonds", "mustMatchAny": ["almond"], "mustNotMatch": ["milk", "butter", "flour", "extract", "paste", "marzipan"], "why": "the nut, not its derivatives" },
+    { "concept": "walnuts", "mustMatchAny": ["walnut"], "mustNotMatch": ["oil", "black walnut flavor"], "why": "same" },
+    { "concept": "coconut", "mustMatchAny": ["coconut"], "mustNotMatch": ["water", "oil", "milk", "cream"], "why": "the meat by default" },
+
+    { "concept": "honey", "mustMatchAny": ["honey"], "mustNotMatch": ["honeydew", "honey mustard", "honeycomb cereal", "graham"], "why": "'honeydew' and 'honey mustard' are the classic false matches, and honey carries the authored 12-month age floor so a wrong match has a safety consequence" },
+    { "concept": "jaggery", "mustMatchAny": ["jaggery", "gur", "sugar, raw", "palm sugar"], "mustNotMatch": ["white sugar", "brown sugar, packed"], "why": "regional sweetener" },
+
+    { "concept": "whole wheat flour", "mustMatchAny": ["wheat flour", "whole-wheat", "atta"], "mustNotMatch": ["white, all-purpose", "bread", "buckwheat", "self-rising"], "why": "buckwheat is not wheat" },
+    { "concept": "oats", "mustMatchAny": ["oat"], "mustNotMatch": ["cookie", "bar", "milk", "bran cereal, ready"], "why": "the grain" },
+    { "concept": "barley", "mustMatchAny": ["barley"], "mustNotMatch": ["malt", "beer", "water"], "why": "grain not derivative" },
+
+    { "concept": "kitchari", "mustMatchAny": ["kitchari", "khichdi", "kichadi"], "mustNotMatch": [], "why": "composite dish — should resolve to the RECIPE row, not to rice or dal individually. If it resolves to an ingredient, that is a finding.", "expectRecipe": true },
+    { "concept": "dal tadka", "mustMatchAny": ["dal", "dhal", "lentil"], "mustNotMatch": [], "why": "composite dish; recipe preferred over raw pulse", "expectRecipe": true },
+    { "concept": "vegetable curry", "mustMatchAny": ["curry"], "mustNotMatch": ["curry powder", "curry leaves", "curry leaf"], "why": "the DISH, not the spice blend or the leaf. This is the exact confusion that moved the WE-8 golden." },
+    { "concept": "curry leaves", "mustMatchAny": ["curry leaf", "curry leaves"], "mustNotMatch": ["curry powder", "curry sauce", "chicken curry"], "why": "the inverse — the leaf, not the dish or blend" },
+
+    { "concept": "water", "mustMatchAny": ["water"], "mustNotMatch": ["coconut water", "tonic", "flavored", "rose water", "barley water"], "why": "plain water; many named waters are not it" },
+    { "concept": "rock salt", "mustMatchAny": ["salt"], "mustNotMatch": ["salted", "garlic salt", "onion salt", "seasoning"], "why": "the mineral, not a seasoned blend" },
+    { "concept": "ginger", "mustMatchAny": ["ginger"], "mustNotMatch": ["ale", "beer", "snap", "bread", "candied", "pickled"], "why": "fresh root; gingerbread and ginger ale are the classic traps" },
+    { "concept": "garlic", "mustMatchAny": ["garlic"], "mustNotMatch": ["salt", "powder blend", "bread", "sauce"], "why": "the clove" },
+    { "concept": "lemon", "mustMatchAny": ["lemon"], "mustNotMatch": ["lemonade", "lemon grass", "meringue", "curd", "extract", "pepper"], "why": "'lemon grass' and 'lemon pepper' are different foods; lemon curd is a dessert" },
+    { "concept": "lemongrass", "mustMatchAny": ["lemon grass", "lemongrass"], "mustNotMatch": ["lemon, raw", "lemonade", "juice"], "why": "the inverse trap" },
+
+    { "concept": "green tea", "mustMatchAny": ["tea"], "mustNotMatch": ["ice cream", "latte mix", "kombucha", "matcha cookie"], "why": "brewed tea" },
+    { "concept": "chamomile tea", "mustMatchAny": ["chamomile"], "mustNotMatch": ["blend", "cookie"], "why": "carries a 192-month legacy age floor — a wrong match here has a visible consequence" },
+
+    { "concept": "unicorn steak", "mustMatchAny": [], "mustNotMatch": [], "expectUnresolved": true, "why": "control case: a food that does not exist must return UNRESOLVED, not a forced poor match. A scorer that always returns something is broken." },
+    { "concept": "xyzzy", "mustMatchAny": [], "mustNotMatch": [], "expectUnresolved": true, "why": "control case: nonsense input" },
+    { "concept": "", "mustMatchAny": [], "mustNotMatch": [], "expectUnresolved": true, "why": "control case: empty input must not crash and must not resolve" }
+  ]
+}

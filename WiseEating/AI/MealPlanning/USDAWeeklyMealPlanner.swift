@@ -127,6 +127,530 @@ enum PlannerMacroGoalAdjuster {
 }
 // MP2_TESTABLE_END
 
+// MP3_TESTABLE_BEGIN
+enum PlannerResolutionTier: String, Codable, Equatable, Sendable {
+    case estimated
+    case derived
+    case classical
+
+    var rank: Int {
+        switch self {
+        case .estimated: return 0
+        case .derived: return 1
+        case .classical: return 2
+        }
+    }
+}
+
+struct PlannerResolutionCandidate: Codable, Equatable, Sendable {
+    let id: Int
+    let name: String
+    let isRecipe: Bool
+    let tier: PlannerResolutionTier
+}
+
+struct PlannerResolutionDecision: Codable, Equatable, Sendable {
+    let candidate: PlannerResolutionCandidate
+    let score: Double
+    let headMatched: Bool
+    let matchedQualifiers: [String]
+    let missingQualifiers: [String]
+    let extraTokens: [String]
+}
+
+struct PlannerPreparedResolutionCandidate: Sendable {
+    let candidate: PlannerResolutionCandidate
+    let normalizedName: String
+    let tokens: [String]
+    let tokenSet: Set<String>
+}
+
+enum PlannerDeterministicFoodResolver {
+    private struct PreparedConcept {
+        let normalized: String
+        let tokens: [String]
+        let tokenSet: Set<String>
+        let aliases: [String]
+        let headTokenSets: [Set<String>]
+        let qualifiers: [String]
+        let impliedTokens: Set<String>
+        let forms: Set<String>
+        let composite: Bool
+    }
+
+    static let minimumScore = 46.0
+
+    private static let preparationTokens: Set<String> = [
+        "bake", "boil", "cook", "dry", "fresh", "fry", "grill", "ground",
+        "raw", "roast", "split", "steam"
+    ]
+    private static let trailingFormTokens: Set<String> = [
+        "breast", "dal", "flour", "leaf", "milk", "oil", "powder", "seed",
+        "tadka", "tea"
+    ]
+    private static let explicitFormTokens: Set<String> = [
+        "breast", "cook", "dal", "flour", "grill", "leaf", "milk", "oil",
+        "powder", "raw", "roast", "seed", "split", "tea", "whole"
+    ]
+    private static let ignoredExtraTokens: Set<String> = [
+        "all", "boneless", "broiler", "commercial", "common", "domesticated",
+        "enriched", "food", "fryer", "grain", "lean", "long", "mature",
+        "meat", "medium", "nfs", "nut", "only", "plain", "purpose", "regular",
+        "separable", "short", "spice", "standard", "table", "type", "unenriched",
+        "variety", "whole"
+    ]
+    private static let strongExtraTokens: Set<String> = [
+        "ajwain", "ale", "almond", "apple", "baby", "babyfood", "bacon",
+        "badam", "bar", "barley", "bean", "beer", "bell", "bitter", "black",
+        "blend", "bottle", "bouillon", "bread", "breakfast", "breast", "broth",
+        "brown", "butter", "cabbage", "cake", "candied", "canned", "cayenne",
+        "cereal", "chai", "chestnut", "chicken", "chili", "chip", "chocolate",
+        "chutney", "cilantro", "coconut", "condensed", "cookie", "cracker",
+        "cream", "crisp", "curd", "curry", "dip",
+        "dressing", "drink", "drumstick", "evaporated", "extract", "falafel",
+        "fat", "flavor", "flour", "frozen", "garlic", "graham", "gruel", "halva",
+        "halwa", "ham", "honey", "honeydew", "hummus", "ice", "juice",
+        "ketchup", "kombucha", "latte", "leg", "lemonade", "lily", "liquid",
+        "liver", "marzipan", "meatless", "meringue", "milk", "mix", "murabba",
+        "mushroom", "mustard", "neck",
+        "noodle", "nugget", "oat", "oil", "onion", "paper", "paste", "peanut",
+        "peppermint", "pickled", "pie", "pot", "powder", "pudding", "pumpkin",
+        "red", "rice", "ridge", "roll", "salad", "salt", "sauce", "sausage",
+        "seasoning", "skin", "snap", "snack", "soup", "souffle", "soy",
+        "sprout", "syrup", "tahini",
+        "tadka", "tail", "tapenade", "thigh", "tofu", "tonic", "sugar",
+        "vinegar", "water", "wax", "white", "wine", "wing", "woods"
+    ]
+    private static let recipeConceptTokens: Set<String> = [
+        "curry", "kitchari", "khichdi", "kichadi", "stew"
+    ]
+
+    static func queries(for concept: String) -> [String] {
+        let normalizedConcept = normalize(concept)
+        guard !normalizedConcept.isEmpty else { return [] }
+
+        var ordered = [normalizedConcept]
+        ordered.append(contentsOf: aliasPhrases(for: normalizedConcept))
+        if let head = headToken(for: tokenized(normalizedConcept)) {
+            ordered.append(head)
+        }
+
+        var seen = Set<String>()
+        return ordered.filter { query in
+            let normalizedQuery = normalize(query)
+            return !normalizedQuery.isEmpty && seen.insert(normalizedQuery).inserted
+        }
+    }
+
+    static func resolve(
+        concept: String,
+        candidates: [PlannerResolutionCandidate]
+    ) -> PlannerResolutionDecision? {
+        resolve(concept: concept, candidates: prepare(candidates))
+    }
+
+    static func prepare(
+        _ candidates: [PlannerResolutionCandidate]
+    ) -> [PlannerPreparedResolutionCandidate] {
+        candidates.compactMap { candidate in
+            let normalizedName = normalize(candidate.name)
+            let tokens = tokenized(normalizedName)
+            guard !tokens.isEmpty else { return nil }
+            return PlannerPreparedResolutionCandidate(
+                candidate: candidate,
+                normalizedName: normalizedName,
+                tokens: tokens,
+                tokenSet: Set(tokens)
+            )
+        }
+    }
+
+    static func resolve(
+        concept: String,
+        candidates: [PlannerPreparedResolutionCandidate]
+    ) -> PlannerResolutionDecision? {
+        let normalizedConcept = normalize(concept)
+        guard !normalizedConcept.isEmpty, !candidates.isEmpty else { return nil }
+        let conceptTokens = tokenized(normalizedConcept)
+        guard !conceptTokens.isEmpty else { return nil }
+        let aliases = aliasPhrases(for: normalizedConcept)
+        let head = headToken(for: conceptTokens)
+        let qualifiers = Array(
+            Set(conceptTokens.filter { token in
+                token != head
+                    && !preparationTokens.contains(token)
+                    && !trailingFormTokens.contains(token)
+            })
+        ).sorted()
+        let aliasTokenSets = aliases.map { Set(tokenized($0)) }
+        var impliedTokens = Set(conceptTokens)
+        for aliasTokens in aliasTokenSets {
+            impliedTokens.formUnion(aliasTokens)
+        }
+        let preparedConcept = PreparedConcept(
+            normalized: normalizedConcept,
+            tokens: conceptTokens,
+            tokenSet: Set(conceptTokens),
+            aliases: aliases,
+            headTokenSets: headPhrases(
+                for: conceptTokens,
+                aliases: aliases
+            ).map { Set(tokenized($0)) },
+            qualifiers: qualifiers,
+            impliedTokens: impliedTokens,
+            forms: Set(conceptTokens).intersection(explicitFormTokens),
+            composite: isCompositeConcept(normalizedConcept)
+        )
+
+        var best: PlannerResolutionDecision?
+        for candidate in candidates {
+            guard let decision = score(
+                concept: preparedConcept,
+                candidate: candidate
+            ) else {
+                continue
+            }
+            if let incumbent = best {
+                if isPreferred(
+                    decision,
+                    over: incumbent,
+                    composite: preparedConcept.composite
+                ) {
+                    best = decision
+                }
+            } else {
+                best = decision
+            }
+        }
+        guard let best, best.score >= minimumScore else {
+            return nil
+        }
+        return best
+    }
+
+    private static func isPreferred(
+        _ candidate: PlannerResolutionDecision,
+        over incumbent: PlannerResolutionDecision,
+        composite: Bool
+    ) -> Bool {
+        if abs(candidate.score - incumbent.score) > 0.000_001 {
+            return candidate.score > incumbent.score
+        }
+        if candidate.candidate.tier.rank != incumbent.candidate.tier.rank {
+            return candidate.candidate.tier.rank > incumbent.candidate.tier.rank
+        }
+        if composite,
+           candidate.candidate.isRecipe != incumbent.candidate.isRecipe {
+            return candidate.candidate.isRecipe
+        }
+        let candidateName = normalize(candidate.candidate.name)
+        let incumbentName = normalize(incumbent.candidate.name)
+        if candidateName != incumbentName { return candidateName < incumbentName }
+        return candidate.candidate.id < incumbent.candidate.id
+    }
+
+    private static func score(
+        concept: PreparedConcept,
+        candidate: PlannerPreparedResolutionCandidate
+    ) -> PlannerResolutionDecision? {
+        let candidateName = candidate.normalizedName
+        let candidateTokens = candidate.tokens
+        let candidateSet = candidate.tokenSet
+        guard !candidateTokens.isEmpty else { return nil }
+
+        let headMatched = concept.headTokenSets.contains { headTokens in
+            headTokens.isSubset(of: candidateSet)
+        }
+        guard headMatched else { return nil }
+
+        let matchedQualifiers = concept.qualifiers.filter(candidateSet.contains)
+        let missingQualifiers = concept.qualifiers.filter {
+            !candidateSet.contains($0)
+        }
+
+        var extraTokenSet = Set(candidateTokens.filter { token in
+            !concept.impliedTokens.contains(token)
+                && !ignoredExtraTokens.contains(token)
+                && !preparationTokens.contains(token)
+        })
+        if candidateName.contains("without salt") {
+            extraTokenSet.remove("salt")
+        }
+        if candidateName.contains("no added fat") {
+            extraTokenSet.subtract(["added", "fat", "no"])
+        }
+        let extraTokens = Array(extraTokenSet).sorted()
+        let strongExtras = extraTokens.filter(strongExtraTokens.contains)
+        let ordinaryExtraCount = extraTokens.count - strongExtras.count
+
+        var score = 42.0
+        if candidateName == concept.normalized {
+            score += 100
+        } else if concept.aliases.contains(where: {
+            normalize($0) == candidateName
+        }) {
+            score += 80
+        }
+        if containsPhrase(candidateName, phrase: concept.normalized) {
+            score += 26
+        }
+        if concept.aliases.contains(where: {
+            containsPhrase(candidateName, phrase: $0)
+        }) {
+            score += 26
+        }
+        if concept.tokenSet.isSubset(of: candidateSet) {
+            score += 18
+        }
+
+        score += Double(matchedQualifiers.count) * 14
+        score -= Double(missingQualifiers.count) * 24
+
+        for form in concept.forms {
+            if formMatches(form, candidateTokens: candidateSet) {
+                score += 10
+            } else {
+                score -= 14
+            }
+        }
+        score += preparationPreference(
+            conceptTokens: concept.tokenSet,
+            candidateTokens: candidateSet
+        )
+
+        if concept.composite {
+            score += candidate.candidate.isRecipe ? 28 : -10
+        } else if candidate.candidate.isRecipe {
+            score -= 36
+        }
+
+        switch candidate.candidate.tier {
+        case .classical: score += 9
+        case .derived: score += 5
+        case .estimated: break
+        }
+
+        score -= Double(strongExtras.count) * 50
+        score -= Double(ordinaryExtraCount) * 4
+        if let first = candidateTokens.first,
+           !concept.impliedTokens.contains(first),
+           !ignoredExtraTokens.contains(first),
+           !preparationTokens.contains(first) {
+            score -= 20
+        }
+        if extraTokens.isEmpty { score += 6 }
+
+        return PlannerResolutionDecision(
+            candidate: candidate.candidate,
+            score: score,
+            headMatched: headMatched,
+            matchedQualifiers: matchedQualifiers,
+            missingQualifiers: missingQualifiers,
+            extraTokens: extraTokens
+        )
+    }
+
+    private static func isCompositeConcept(_ concept: String) -> Bool {
+        let tokens = Set(tokenized(concept))
+        if !tokens.isDisjoint(with: recipeConceptTokens) {
+            if tokens.contains("curry")
+                && (tokens.contains("leaf") || tokens.contains("powder")) {
+                return false
+            }
+            return true
+        }
+        return tokens.contains("dal") && tokens.contains("tadka")
+    }
+
+    private static func headPhrases(
+        for tokens: [String],
+        aliases: [String]
+    ) -> [String] {
+        var phrases = aliases
+        if let head = headToken(for: tokens) {
+            phrases.insert(head, at: 0)
+        }
+        return phrases
+    }
+
+    private static func headToken(for tokens: [String]) -> String? {
+        guard !tokens.isEmpty else { return nil }
+        guard tokens.count > 1, let last = tokens.last,
+              trailingFormTokens.contains(last) else {
+            return tokens.last
+        }
+
+        let genericModifiers: Set<String> = [
+            "black", "brown", "green", "red", "white", "whole", "yellow"
+        ]
+        for token in tokens.dropLast().reversed()
+            where !preparationTokens.contains(token)
+                && !genericModifiers.contains(token) {
+            return token
+        }
+        return last
+    }
+
+    private static func formMatches(
+        _ form: String,
+        candidateTokens: Set<String>
+    ) -> Bool {
+        switch form {
+        case "cook", "grill", "roast":
+            return !candidateTokens.isDisjoint(
+                with: ["bake", "boil", "cook", "grill", "roast", "steam"]
+            )
+        case "dal":
+            return !candidateTokens.isDisjoint(
+                with: ["bean", "dal", "gram", "lentil", "pea"]
+            )
+        default:
+            return candidateTokens.contains(form)
+        }
+    }
+
+    private static func preparationPreference(
+        conceptTokens: Set<String>,
+        candidateTokens: Set<String>
+    ) -> Double {
+        let cookedForms: Set<String> = [
+            "bake", "boil", "cook", "fry", "grill", "roast", "steam"
+        ]
+        if !conceptTokens.isDisjoint(with: cookedForms) {
+            if candidateTokens.contains("raw") || candidateTokens.contains("dry") {
+                return -28
+            }
+            if !candidateTokens.isDisjoint(with: cookedForms) {
+                return 14
+            }
+        }
+        if conceptTokens.contains("raw")
+            && !candidateTokens.isDisjoint(with: cookedForms) {
+            return -28
+        }
+        return 0
+    }
+
+    private static func aliasPhrases(for concept: String) -> [String] {
+        let tokens = Set(tokenized(concept))
+        var aliases: [String] = []
+
+        if tokens.contains("moong") {
+            aliases.append(contentsOf: ["mung", "mung bean"])
+        }
+        if tokens.contains("basmati") {
+            aliases.append("white basmati rice")
+        }
+        if tokens.contains("toor") || tokens.contains("arhar") {
+            aliases.append(contentsOf: ["pigeon pea", "arhar"])
+        }
+        if tokens.contains("chana") {
+            aliases.append(contentsOf: ["chickpea", "garbanzo", "bengal gram"])
+        }
+        if tokens.contains("urad") || tokens.contains("urd") {
+            aliases.append(contentsOf: ["black gram", "urd"])
+        }
+        if tokens.contains("ghee") {
+            aliases.append(contentsOf: ["butter oil", "clarified butter"])
+        }
+        if tokens.contains("paneer") { aliases.append("cheese") }
+        if tokens.contains("yogurt") {
+            aliases.append(contentsOf: ["yoghurt", "curd"])
+        }
+        if tokens.contains("cilantro") { aliases.append("coriander leaf") }
+        if tokens.contains("chili") {
+            aliases.append(contentsOf: ["cayenne", "red pepper"])
+        }
+        if concept.contains("ash gourd") {
+            aliases.append(contentsOf: ["winter melon", "wax gourd"])
+        }
+        if concept.contains("bitter gourd") {
+            aliases.append(contentsOf: ["bitter melon", "balsam pear"])
+        }
+        if tokens.contains("jaggery") || tokens.contains("gur") {
+            aliases.append(contentsOf: ["raw sugar", "palm sugar", "gur"])
+        }
+        if concept.contains("whole wheat flour") {
+            aliases.append("atta")
+        }
+        if tokens.contains("kitchari") {
+            aliases.append(contentsOf: ["khichdi", "kichadi"])
+        }
+        if concept.contains("dal tadka") {
+            aliases.append(contentsOf: ["dhal tadka", "lentil tadka"])
+        }
+        if tokens.contains("lemongrass") { aliases.append("lemon grass") }
+
+        var seen = Set<String>()
+        return aliases.map(normalize).filter { seen.insert($0).inserted }
+    }
+
+    private static func containsPhrase(_ value: String, phrase: String) -> Bool {
+        let valueTokens = tokenized(value)
+        let phraseTokens = tokenized(phrase)
+        guard !phraseTokens.isEmpty, phraseTokens.count <= valueTokens.count else {
+            return false
+        }
+        if phraseTokens.count == 1 {
+            return valueTokens.contains(phraseTokens[0])
+        }
+        for index in 0...(valueTokens.count - phraseTokens.count) {
+            if Array(valueTokens[index..<(index + phraseTokens.count)])
+                == phraseTokens {
+                return true
+            }
+        }
+        return false
+    }
+
+    private static func tokenized(_ value: String) -> [String] {
+        normalize(value)
+            .split(separator: " ")
+            .map { canonicalToken(String($0)) }
+            .filter { !$0.isEmpty && !stopTokens.contains($0) }
+    }
+
+    private static let stopTokens: Set<String> = [
+        "a", "an", "and", "for", "from", "in", "made", "of", "or", "the",
+        "with", "without"
+    ]
+
+    private static func canonicalToken(_ token: String) -> String {
+        let irregular: [String: String] = [
+            "almonds": "almond", "beans": "bean", "berries": "berry",
+            "cakes": "cake", "chickpeas": "chickpea", "chilies": "chili",
+            "chillies": "chili", "chilli": "chili", "chips": "chip",
+            "cookies": "cookie", "crisps": "crisp", "curries": "curry",
+            "dried": "dry", "foods": "food", "fries": "fry",
+            "grilled": "grill", "leaves": "leaf", "lentils": "lentil",
+            "mixes": "mix", "noodles": "noodle", "nuts": "nut",
+            "oats": "oat", "olives": "olive", "peas": "pea",
+            "potatoes": "potato", "roasted": "roast", "seeds": "seed",
+            "spices": "spice", "sprouted": "sprout", "sprouts": "sprout",
+            "tomatoes": "tomato", "walnuts": "walnut"
+        ]
+        if let canonical = irregular[token] { return canonical }
+        if token.count > 3, token.hasSuffix("s"), !token.hasSuffix("ss") {
+            return String(token.dropLast())
+        }
+        return token
+    }
+
+    private static func normalize(_ value: String) -> String {
+        let folded = value.folding(
+            options: [.caseInsensitive, .diacriticInsensitive],
+            locale: Locale(identifier: "en_US_POSIX")
+        )
+        return folded.unicodeScalars
+            .map { CharacterSet.alphanumerics.contains($0) ? String($0) : " " }
+            .joined()
+            .split(whereSeparator: { $0.isWhitespace })
+            .map(String.init)
+            .joined(separator: " ")
+    }
+}
+// MP3_TESTABLE_END
+
 @available(iOS 26.0, *)
 public final class USDAWeeklyMealPlanner: Sendable {
     private let globalTaskManager = GlobalTaskManager.shared
@@ -3401,380 +3925,109 @@ public final class USDAWeeklyMealPlanner: Sendable {
             emitLog("🚫 AyurvedaGate: dropped excluded generated ingredient '\(conceptName)'", onLog: onLog)
             return nil
         }
-        
-        let searchLimit = 50
-        
-        let otherComponentsText = mealContext.components
-            .filter { $0.name.caseInsensitiveCompare(conceptName) != .orderedSame }
-            .map(\.name)
-            .joined(separator: ", ")
-        
-        let relevantPromptsText = relevantPrompts.isEmpty ? "none" : relevantPrompts.joined(separator: "\n- ")
-        
-        let contextString = """
-        Meal Title: \(mealContext.descriptiveTitle)
-        Meal Slot: \(mealContext.name)
-        Relevant User Prompts for this Meal:
-        - \(relevantPromptsText)
-        Other Components in Meal: \(otherComponentsText.isEmpty ? "none" : otherComponentsText)
-        """
-        
-        let (smartQueries, banned) = await aiBuildSmartQueries(
-            for: conceptName,
-            mealContext: mealContext,
-            relevantPrompts: relevantPrompts,
-            onLog: onLog
-        )
-        
-        let combinedQueries = ([conceptName] + smartQueries).filter { !$0.isEmpty }
-        
-        var candidateIDs: [PersistentIdentifier] = []
-        let tokenizedWords = FoodItem.makeTokens(from: conceptName)
-        
-        var seen = Set<PersistentIdentifier>()
-        onLog?("combinedQueries: \(combinedQueries)\ncontextString: \(contextString) \ntokenizedWords: \(tokenizedWords)")
-        
-        for q in combinedQueries {
-            let ids = await smartSearch.searchFoodsAI(
-                query: q,
-                limit: searchLimit,
-                context: contextString,
-                requiredHeadwords: tokenizedWords
-            )
-            for id in ids where !seen.contains(id) {
-                seen.insert(id)
-                candidateIDs.append(id)
-            }
-        }
-        onLog?("candidate ids \(candidateIDs.count)")
-        
-        guard !candidateIDs.isEmpty else {
-            onLog?("    - ⚠️ No candidates found for '\(conceptName)'.")
+
+        let queries = PlannerDeterministicFoodResolver.queries(for: conceptName)
+        guard !queries.isEmpty else {
+            onLog?("    - ⚠️ Empty deterministic query for '\(conceptName)'.")
             return nil
         }
-        
-        let descriptor = FetchDescriptor<FoodItem>(predicate: #Predicate { candidateIDs.contains($0.persistentModelID) })
-        guard var candidates = try? ctx.fetch(descriptor), !candidates.isEmpty else {
-            onLog?("    - ⚠️ Could not fetch FoodItem models for candidates.")
+
+        var candidatesByID: [Int: CompactFoodItem] = [:]
+        for query in queries {
+            let searchCandidates = await smartSearch.searchCompact(
+                query: query,
+                limit: 120
+            )
+            for candidate in searchCandidates {
+                candidatesByID[candidate.id] = candidate
+            }
+        }
+        onLog?(
+            "    - Deterministic queries \(queries) produced "
+                + "\(candidatesByID.count) unique candidates."
+        )
+
+        guard !candidatesByID.isEmpty else {
+            onLog?("    - ⚠️ No candidates found for '\(conceptName)'.")
             return nil
         }
 
         let excludedFoodIds = AyurvedaRecommendationGate.excludedFoodIds(context: ctx)
-        let ayurvedaCandidateCount = candidates.count
-        candidates.removeAll { excludedFoodIds.contains($0.id) }
-        emitLog("🚫 AyurvedaGate: AyurvedaGate active, \(ayurvedaCandidateCount - candidates.count) candidates filtered", onLog: onLog)
-        guard !candidates.isEmpty else { return nil }
-        
-        let beforeFilterCount = candidates.count
-        let filtered = filterCandidates(candidates, banned: banned)
-        if filtered.count != beforeFilterCount {
-            onLog?("    - Banned filter removed \(beforeFilterCount - filtered.count) candidates. Banned: \(banned)")
+        let beforeExclusionCount = candidatesByID.count
+        candidatesByID = candidatesByID.filter {
+            !excludedFoodIds.contains($0.key)
         }
-        candidates = filtered.isEmpty ? candidates : filtered
-        
-        let smartNames = candidates.map { $0.name }
-        onLog?("    - SMART candidates (after bans) → \(smartNames.count). Top: \(Array(smartNames.prefix(8)))")
-        
-        if candidates.count == 1 {
-            onLog?("    - Found single direct match: '\(candidates[0].name)'")
-            return ResolvedFoodInfo(persistentID: candidates[0].persistentModelID, resolvedName: candidates[0].name)
-        }
-        
-        do {
-            try Task.checkCancellation()
-            let choice = try await aiChooseBestFoodCandidate(
-                conceptName: conceptName,
-                candidates: candidates.map { $0.name },
-                mealContext: mealContext,
-                onLog: onLog
+        emitLog(
+            "🚫 AyurvedaGate: AyurvedaGate active, "
+                + "\(beforeExclusionCount - candidatesByID.count) candidates filtered",
+            onLog: onLog
+        )
+        guard !candidatesByID.isEmpty else { return nil }
+
+        let candidateFoodIDs = Array(candidatesByID.keys)
+        let directProfileIDs: Set<Int> = {
+            let descriptor = FetchDescriptor<AyurvedaProfile>(
+                predicate: #Predicate { candidateFoodIDs.contains($0.foodId) }
             )
-            try Task.checkCancellation()
-            if candidates.indices.contains(choice.bestCandidateIndex) {
-                let chosen = candidates[choice.bestCandidateIndex]
-                onLog?("    - AI refined choice to '\(chosen.name)'. Reason: \(choice.reason)\n Candidates: \(candidates.map(\.name))")
-                return ResolvedFoodInfo(persistentID: chosen.persistentModelID, resolvedName: chosen.name)
-            }
-        } catch {
-            onLog?("    - ⚠️ AI refinement failed: \(error.localizedDescription). Falling back to similarity search.")
-        }
-        
-        onLog?("    - Using fallback similarity search...")
-        let (bestMatch, bestMatchName) = findBestCandidateBySimilarity(conceptName: conceptName, candidates: candidates)
-        if let match = bestMatch {
-            return ResolvedFoodInfo(persistentID: match.persistentModelID, resolvedName: bestMatchName ?? match.name)
-        }
-        return nil
-    }
-    
-    @MainActor
-    private func aiBuildSmartQueries(
-        for conceptName: String,
-        mealContext: ConceptualMeal?,
-        relevantPrompts: [String],
-        onLog: (@Sendable (String) -> Void)?
-    ) async -> (queries: [String], banned: [String]) {
-        let micro = conceptName.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-        let microSet: Set<String> = [
-            "salt","pepper","black pepper","cilantro","coriander","parsley","basil","oregano",
-            "garlic","ginger","cumin","paprika","chili powder","cayenne","lemon","lime"
-        ]
-        if microSet.contains(micro) || (micro.hasSuffix("s") && microSet.contains(String(micro.dropLast()))) {
-            let proteinBan = [
-                "chicken","turkey","salmon","tuna","fish","shrimp","pork","beef","lamb","ham",
-                "egg","eggs","tofu","tempeh","lentil","lentils","bean","beans"
-            ]
-            var finalQueries: [String] = []
-            let conceptTrimmed = conceptName.trimmingCharacters(in: .whitespacesAndNewlines)
-            if !conceptTrimmed.isEmpty {
-                finalQueries.append(conceptTrimmed)
-            }
-            if !finalQueries.contains(where: { $0.caseInsensitiveCompare(micro) == .orderedSame }) {
-                finalQueries.append(micro)
-            }
-            onLog?("    - AI smart queries (concept first, micro): \(finalQueries) | banned: \(proteinBan)")
-            return (finalQueries, proteinBan)
-        }
-        
-        let baseBan = [
-            "powder","dressing","sauce","oil","butter","flour","shake","mix","tots","paste",
-            "topping","toppings","candy","candies","bar","cookie","cookies","cake","pie","dessert",
-            "belly","steelhead","baby food","infant","toddler","gerber","stage 1","stage 2","stage 3",
-            "plavnik"
-        ]
-        
-        let instructions = Instructions {
-           """
-              RULES:
-              - priorityKeywords: 2–4 lowercase tokens, ordered by importance.
-                * token[0] MUST be the headword (core ingredient).
-                * Prefer cuts/methods/dish-type terms (preparation or form), not marketing adjectives.
-                * No quantities, no stopwords, no cuisine adjectives.
-              - bannedKeywords: tokens to exclude that indicate powders, sauces, dressings, shakes, or other non-solid/prepared forms.
-              - headwordSynonyms: up to 3 lowercase synonyms for the headword that commonly appear in USDA-like names.
-           """
-        }
-        let session = LanguageModelSession(instructions: instructions)
-        if PlannerTelemetry.isEnabled {
-            await PlannerTelemetry.shared.noteSession(site: "aiBuildSmartQueries")
-        }
-        
-        let other = mealContext.map { mc in
-            mc.components
-                .filter { $0.name.caseInsensitiveCompare(conceptName) != .orderedSame }
-                .map(\.name)
-                .joined(separator: ", ")
-        } ?? ""
-        
-        let relevantPromptsText = relevantPrompts.isEmpty ? "n/a" : relevantPrompts.joined(separator: " | ")
-        
-        let prompt = """
-       Extract prioritized search tokens for a food concept so they match USDA-like food names.
-       
-       CONCEPT: "\(conceptName)"
-       MEAL CONTEXT: \(mealContext?.name ?? "n/a") — \(mealContext?.descriptiveTitle ?? "n/a")
-       USER REQUIREMENTS FOR THIS MEAL: \(relevantPromptsText)
-       OTHER COMPONENTS IN THIS MEAL: \(other.isEmpty ? "n/a" : other)
-       """
-        
-        var telemetryRespondStartedAt: UInt64?
-        var telemetryRespondRecorded = false
-        do {
-            try Task.checkCancellation()
-            if PlannerTelemetry.isEnabled {
-                telemetryRespondStartedAt = DispatchTime.now().uptimeNanoseconds
-            }
-            let resp = try await session.respond(
-                to: prompt,
-                generating: AISearchKeywordResponse.self,
-                includeSchemaInPrompt: true,
-                options: GenerationOptions(sampling: .greedy)
-            ).content
-            if let startedAt = telemetryRespondStartedAt {
-                await PlannerTelemetry.shared.noteRespond(
-                    site: "aiBuildSmartQueries",
-                    ok: true,
-                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
-                )
-                telemetryRespondRecorded = true
-            }
-            try Task.checkCancellation()
-            var queries: [String] = []
-            let kw = resp.priorityKeywords
-                .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-                .filter { !$0.isEmpty }
-            try Task.checkCancellation()
-            if !kw.isEmpty {
-                let top3 = Array(kw.prefix(3))
-                if top3.count >= 3 { queries.append(top3.joined(separator: " ")) }
-                if top3.count >= 2 { queries.append(top3.prefix(2).joined(separator: " ")) }
-                queries.append(String(top3[0]))
-            }
-            try Task.checkCancellation()
-            if let head = kw.first, !resp.headwordSynonyms.isEmpty, kw.count >= 2 {
-                let tail1 = kw[1]
-                for syn in resp.headwordSynonyms.prefix(3) {
-                    queries.append("\(syn) \(tail1)")
-                    queries.append(syn)
-                }
-            }
-            try Task.checkCancellation()
-            var seen = Set<String>()
-            queries = queries.filter { seen.insert($0).inserted }
-            try Task.checkCancellation()
-            var bannedSet = Set((resp.bannedKeywords + baseBan).map { $0.lowercased() })
-            let cn = conceptName.lowercased()
-            
-            if cn.contains("mixed green") || (cn.contains("salad") && !cn.contains("chicken") && !cn.contains("tuna") && !cn.contains("salmon") && !cn.contains("egg")) {
-                ["chicken","turkey","salmon","tuna","fish","shrimp","pork","beef","lamb","ham"].forEach { bannedSet.insert($0) }
-            }
-            if cn.contains("lemon wedge") || (cn.contains("lemon") && (cn.contains("wedge") || cn.contains("slice"))) {
-                ["fish","salmon","cod","tuna"].forEach { bannedSet.insert($0) }
-            }
-            if cn.contains("berries") || cn.contains("berry") {
-                ["topping","toppings","pie","syrup","jam","jelly","preserves","dessert"].forEach { bannedSet.insert($0) }
-            }
-            if cn.contains("bell pepper") {
-                bannedSet.insert("belly")
-                bannedSet.insert("pork belly")
-            }
-            if cn.contains("steel cut oat") || cn.contains("steel-cut oat") || cn.contains("steelcut oat") {
-                ["steelhead","trout","fish"].forEach { bannedSet.insert($0) }
-            }
-            if !cn.contains("baby ") {
-                ["baby","infant","toddler","formula"].forEach { bannedSet.insert($0) }
-            }
-            
-            let banned = Array(bannedSet)
-            try Task.checkCancellation()
-            var finalQueries = queries
-            let conceptTrimmed = conceptName.trimmingCharacters(in: .whitespacesAndNewlines)
-            if !conceptTrimmed.isEmpty {
-                if let i = finalQueries.firstIndex(where: { $0.caseInsensitiveCompare(conceptTrimmed) == .orderedSame }) {
-                    if i != 0 {
-                        finalQueries.remove(at: i)
-                        finalQueries.insert(conceptTrimmed, at: 0)
-                    }
-                } else {
-                    finalQueries.insert(conceptTrimmed, at: 0)
-                }
-            }
-            onLog?("    - AI smart queries (concept first): \(finalQueries) | banned: \(banned)")
-            return (finalQueries, banned)
-            
-        } catch {
-            if let startedAt = telemetryRespondStartedAt, !telemetryRespondRecorded {
-                await PlannerTelemetry.shared.noteRespond(
-                    site: "aiBuildSmartQueries",
-                    ok: false,
-                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
-                )
-            }
-            onLog?("    - ⚠️ Keyword AI failed: \(error.localizedDescription). Using heuristic tokens.")
-            
-            let stop: Set<String> = ["of","with","and","or","in","on","for","a","an","the","style","fresh","raw","cooked","very","tasty"]
-            let tokens = conceptName
-                .lowercased()
-                .replacingOccurrences(of: "[()\\[\\]{},:;./\\\\\\d]", with: " ", options: .regularExpression)
-                .split(separator: " ")
-                .map(String.init)
-                .filter { !$0.isEmpty && !stop.contains($0) }
-            
-            var queries: [String] = []
-            if !tokens.isEmpty {
-                let head = tokens[0]
-                let rest = Array(tokens.dropFirst())
-                if rest.count >= 2 { queries.append([head, rest[0], rest[1]].joined(separator: " ")) }
-                if rest.count >= 1 { queries.append([head, rest[0]].joined(separator: " ")) }
-                queries.append(head)
-            }
-            
-            var seen = Set<String>()
-            queries = queries.filter { seen.insert($0).inserted }
-            
-            var finalQueries = queries
-            let conceptTrimmed = conceptName.trimmingCharacters(in: .whitespacesAndNewlines)
-            if !conceptTrimmed.isEmpty {
-                if let i = finalQueries.firstIndex(where: { $0.caseInsensitiveCompare(conceptTrimmed) == .orderedSame }) {
-                    if i != 0 {
-                        finalQueries.remove(at: i)
-                        finalQueries.insert(conceptTrimmed, at: 0)
-                    }
-                } else {
-                    finalQueries.insert(conceptTrimmed, at: 0)
-                }
-            }
-            onLog?("    - AI smart queries (concept first, fallback): \(finalQueries) | banned: \(baseBan)")
-            return (finalQueries, baseBan)
-        }
-    }
-    
-    @MainActor
-    private func aiChooseBestFoodCandidate(conceptName: String, candidates: [String], mealContext: ConceptualMeal, onLog: (@Sendable (String) -> Void)?) async throws -> AIBestCandidateChoice {
-        let otherComponents = mealContext.components.filter { $0.name != conceptName }.map { $0.name }.joined(separator: ", ")
-        let prompt = """
-        You are a culinary assistant. Your job is to select the most appropriate preparation for an ingredient to fit a specific meal.
-        **Meal Context:** A '\(mealContext.name)' titled '\(mealContext.descriptiveTitle)' which also contains: \(otherComponents).
-        **Task:**
-        The user wants to add "\(conceptName)". From the following list of specific food preparations, choose the one that makes the most sense in this meal. For example, 'steamed' or 'cooked' is better for a hot dinner than 'raw'.
-        **Candidates (choose one):**
-        \(candidates.enumerated().map { "\($0). \($1)" }.joined(separator: "\n"))
-        including the index and a brief reason in response.
-        """
-        try Task.checkCancellation()
-        let session = LanguageModelSession()
-        if PlannerTelemetry.isEnabled {
-            await PlannerTelemetry.shared.noteSession(site: "aiChooseBestFoodCandidate")
-        }
-        try Task.checkCancellation()
-        let response = try await {
-            let startedAt = PlannerTelemetry.isEnabled
-                ? DispatchTime.now().uptimeNanoseconds
-                : nil
-            do {
-                let response = try await session.respond(to: prompt, generating: AIBestCandidateChoice.self, includeSchemaInPrompt: true, options: GenerationOptions(sampling: .greedy))
-                if let startedAt {
-                    await PlannerTelemetry.shared.noteRespond(
-                        site: "aiChooseBestFoodCandidate",
-                        ok: true,
-                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
-                    )
-                }
-                return response
-            } catch {
-                if let startedAt {
-                    await PlannerTelemetry.shared.noteRespond(
-                        site: "aiChooseBestFoodCandidate",
-                        ok: false,
-                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
-                    )
-                }
-                throw error
-            }
+            return Set((try? ctx.fetch(descriptor))?.map(\.foodId) ?? [])
         }()
-        try Task.checkCancellation()
-        return response.content
-    }
-    
-    private func findBestCandidateBySimilarity(conceptName: String, candidates: [FoodItem]) -> (FoodItem?, String?) {
-        var bestMatch: FoodItem? = nil
-        var lowestDistance = Int.max
-        let penaltyWords = ["milk", "oil", "butter", "flour", "powder", "dressing", "sauce", "paste", "tots", "salad"]
-        let queryContainsPenaltyWord = penaltyWords.contains { conceptName.lowercased().contains($0) }
-        for candidate in candidates {
-            var distance = conceptName.levenshteinDistance(to: candidate.name)
-            if !queryContainsPenaltyWord {
-                for word in penaltyWords {
-                    if candidate.name.lowercased().contains(" \(word)") {
-                        distance += 20; break
-                    }
-                }
+        let linksByFoodID: [Int: String] = {
+            let descriptor = FetchDescriptor<AyurvedaLink>(
+                predicate: #Predicate { candidateFoodIDs.contains($0.fdcId) }
+            )
+            let links = (try? ctx.fetch(descriptor)) ?? []
+            return Dictionary(
+                uniqueKeysWithValues: links.map { ($0.fdcId, $0.tier) }
+            )
+        }()
+
+        let scorerCandidates = candidatesByID.values.map { candidate in
+            let tier: PlannerResolutionTier
+            if directProfileIDs.contains(candidate.id) {
+                tier = .classical
+            } else if let linkTier = linksByFoodID[candidate.id] {
+                tier = linkTier == "derived" ? .derived : .classical
+            } else {
+                tier = .estimated
             }
-            if distance < lowestDistance {
-                lowestDistance = distance
-                bestMatch = candidate
-            }
+            return PlannerResolutionCandidate(
+                id: candidate.id,
+                name: candidate.name,
+                isRecipe: candidate.isRecipe,
+                tier: tier
+            )
         }
-        return (bestMatch, bestMatch?.name)
+
+        guard let decision = PlannerDeterministicFoodResolver.resolve(
+            concept: conceptName,
+            candidates: scorerCandidates
+        ) else {
+            onLog?(
+                "    - ⚠️ Deterministic score below "
+                    + "\(PlannerDeterministicFoodResolver.minimumScore) for "
+                    + "'\(conceptName)'; leaving unresolved."
+            )
+            return nil
+        }
+
+        let chosenID = decision.candidate.id
+        let descriptor = FetchDescriptor<FoodItem>(
+            predicate: #Predicate { $0.id == chosenID }
+        )
+        guard let chosen = (try? ctx.fetch(descriptor))?.first else {
+            onLog?("    - ⚠️ Could not materialize deterministic candidate \(chosenID).")
+            return nil
+        }
+        onLog?(
+            "    - Deterministic choice '\(chosen.name)' score "
+                + "\(String(format: "%.1f", decision.score)); tier "
+                + "\(decision.candidate.tier.rawValue); extras "
+                + "\(decision.extraTokens)."
+        )
+        return ResolvedFoodInfo(
+            persistentID: chosen.persistentModelID,
+            resolvedName: chosen.name
+        )
     }
     
     private func trimToRequestedDaysAndMeals(
@@ -4190,22 +4443,6 @@ public final class USDAWeeklyMealPlanner: Sendable {
             }
         }
         return out
-    }
-    
-    private func filterCandidates(_ candidates: [FoodItem], banned: [String]) -> [FoodItem] {
-        guard !candidates.isEmpty else { return [] }
-        let dynamicBans = banned.map { $0.lowercased() }
-        let hardBans = [
-            "baby food","infant","toddler","gerber",
-            "stage 1","stage 2","stage 3",
-            "steelhead",
-            "dog food","cat food","pet food"
-        ]
-        let allBans = Set(dynamicBans + hardBans)
-        return candidates.filter { f in
-            let name = f.name.lowercased()
-            return !allBans.contains { name.contains($0) }
-        }
     }
     
     private func debugDumpConceptualPlan(
