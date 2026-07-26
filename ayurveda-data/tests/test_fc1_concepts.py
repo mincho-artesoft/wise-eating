@@ -324,6 +324,8 @@ class FoodConceptTests(unittest.TestCase):
         self.assertEqual(
             {path.relative_to(ROOT).as_posix() for path in consumers},
             {
+                "WiseEating/AI/MealPlanning/"
+                "DeterministicMealPlanSolver+WiseEating.swift",
                 "WiseEating/AI/MealPlanning/USDAWeeklyMealPlanner.swift",
                 "WiseEating/AI/ReceptGeneration/AIRecipeGenerator.swift",
             },

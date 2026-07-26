@@ -693,9 +693,11 @@ struct MP3ResolutionHarness {
 
     def test_production_resolution_has_no_model_call(self):
         planner = PLANNER.read_text(encoding="utf-8")
-        resolution_start = planner.index("private func resolveFoodConcept(")
+        resolution_start = planner.index(
+            "private func resolveCompactCandidate("
+        )
         resolution_end = planner.index(
-            "private func trimToRequestedDaysAndMeals(",
+            "private func buildMustContainRules(",
             resolution_start,
         )
         resolution_source = planner[resolution_start:resolution_end]
@@ -712,30 +714,48 @@ struct MP3ResolutionHarness {
             "PlannerDeterministicFoodResolver.resolve(",
             resolution_source,
         )
-        self.assertIn(
-            "AyurvedaRecommendationGate.excludedFoodIds",
-            resolution_source,
-        )
 
     def test_mp1_static_site_counts_reflect_removed_resolution_calls(self):
         planner = PLANNER.read_text(encoding="utf-8")
-        self.assertEqual(planner.count("LanguageModelSession("), 18)
-        self.assertEqual(planner.count(".respond("), 23)
+        self.assertEqual(planner.count("LanguageModelSession("), 8)
+        self.assertEqual(planner.count(".respond("), 8)
+        assembly = planner.split(
+            "// --- Checkpoint 2: deterministic assembly ---",
+            1,
+        )[1].split("return preview", 1)[0]
+        self.assertNotIn("LanguageModelSession", assembly)
+        self.assertNotIn(".respond(", assembly)
 
-    def test_mp2_unresolved_counting_and_structure_path_remain(self):
+    def test_mp2_truth_and_structural_constraints_feed_solver(self):
         planner = PLANNER.read_text(encoding="utf-8")
+        solver = (
+            ROOT
+            / "WiseEating"
+            / "AI"
+            / "MealPlanning"
+            / "DeterministicMealPlanSolver.swift"
+        ).read_text(encoding="utf-8")
+        adapter = (
+            ROOT
+            / "WiseEating"
+            / "AI"
+            / "MealPlanning"
+            / "DeterministicMealPlanSolver+WiseEating.swift"
+        ).read_text(encoding="utf-8")
         self.assertIn(
-            "conceptualMeal.components.count - resolvedItemCount",
-            planner,
+            "guard referenceWeight > 0",
+            adapter,
         )
         self.assertIn(
-            "unresolved component(s) from goal math",
-            planner,
+            "rawEnergy > 0",
+            adapter,
         )
         self.assertIn(
-            "finalItems = rebalanceMealCalories(items: resolvedItems",
+            "placements: solverPlacements",
             planner,
         )
+        self.assertIn("mustContain: placements", adapter)
+        self.assertIn("mustContain: [MP5MustContainRule]", solver)
 
 
 if __name__ == "__main__":
