@@ -301,12 +301,14 @@ class FoodConceptTests(unittest.TestCase):
             bundled = json.load(source)
         self.assertEqual(bundled, self.artifact)
 
-    def test_runtime_service_is_lazy_sendable_and_has_no_consumer(self):
+    def test_runtime_service_is_lazy_sendable_and_has_fc2_consumers(self):
         source = RUNTIME_PATH.read_text(encoding="utf-8")
         self.assertIn("public struct FoodConcepts: Sendable", source)
         self.assertIn("public func members(of concept: String) -> Set<Int32>", source)
         self.assertIn("public func concepts(for foodID: Int32) -> Set<String>", source)
         self.assertIn("public func canonical(alias: String) -> String?", source)
+        self.assertIn("public var resolutionAliases: [String: String]", source)
+        self.assertIn("public func conceptID(for value: String) -> String?", source)
         self.assertIn("public struct Requirement: Codable, Hashable, Sendable", source)
         self.assertIn("public struct Restriction: Codable, Hashable, Sendable", source)
 
@@ -319,7 +321,13 @@ class FoodConceptTests(unittest.TestCase):
                 errors="ignore",
             ):
                 consumers.append(path)
-        self.assertEqual(consumers, [])
+        self.assertEqual(
+            {path.relative_to(ROOT).as_posix() for path in consumers},
+            {
+                "WiseEating/AI/MealPlanning/USDAWeeklyMealPlanner.swift",
+                "WiseEating/AI/ReceptGeneration/AIRecipeGenerator.swift",
+            },
+        )
 
 
 if __name__ == "__main__":

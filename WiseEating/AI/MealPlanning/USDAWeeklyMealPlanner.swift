@@ -238,12 +238,20 @@ enum PlannerDeterministicFoodResolver {
         "curry", "kitchari", "khichdi", "kichadi", "stew"
     ]
 
-    static func queries(for concept: String) -> [String] {
+    static func queries(
+        for concept: String,
+        ontologyAliases: [String: String] = [:]
+    ) -> [String] {
         let normalizedConcept = normalize(concept)
         guard !normalizedConcept.isEmpty else { return [] }
 
         var ordered = [normalizedConcept]
-        ordered.append(contentsOf: aliasPhrases(for: normalizedConcept))
+        ordered.append(
+            contentsOf: aliasPhrases(
+                for: normalizedConcept,
+                ontologyAliases: ontologyAliases
+            )
+        )
         if let head = headToken(for: tokenized(normalizedConcept)) {
             ordered.append(head)
         }
@@ -257,9 +265,14 @@ enum PlannerDeterministicFoodResolver {
 
     static func resolve(
         concept: String,
+        ontologyAliases: [String: String] = [:],
         candidates: [PlannerResolutionCandidate]
     ) -> PlannerResolutionDecision? {
-        resolve(concept: concept, candidates: prepare(candidates))
+        resolve(
+            concept: concept,
+            ontologyAliases: ontologyAliases,
+            candidates: prepare(candidates)
+        )
     }
 
     static func prepare(
@@ -285,13 +298,17 @@ enum PlannerDeterministicFoodResolver {
 
     static func resolve(
         concept: String,
+        ontologyAliases: [String: String] = [:],
         candidates: [PlannerPreparedResolutionCandidate]
     ) -> PlannerResolutionDecision? {
         let normalizedConcept = normalize(concept)
         guard !normalizedConcept.isEmpty, !candidates.isEmpty else { return nil }
         let conceptTokens = tokenized(normalizedConcept)
         guard !conceptTokens.isEmpty else { return nil }
-        let aliases = aliasPhrases(for: normalizedConcept)
+        let aliases = aliasPhrases(
+            for: normalizedConcept,
+            ontologyAliases: ontologyAliases
+        )
         let head = headToken(for: conceptTokens)
         let qualifiers = Array(
             Set(conceptTokens.filter { token in
@@ -676,7 +693,10 @@ enum PlannerDeterministicFoodResolver {
         }
     }
 
-    private static func aliasPhrases(for concept: String) -> [String] {
+    private static func aliasPhrases(
+        for concept: String,
+        ontologyAliases: [String: String]
+    ) -> [String] {
         let tokens = Set(tokenized(concept))
         var aliases: [String] = []
 
@@ -725,6 +745,10 @@ enum PlannerDeterministicFoodResolver {
             aliases.append(contentsOf: ["dhal tadka", "lentil tadka"])
         }
         if tokens.contains("lemongrass") { aliases.append("lemon grass") }
+
+        if let canonical = ontologyAliases[concept] {
+            aliases.append(canonical)
+        }
 
         var seen = Set<String>()
         return aliases.map(normalize).filter { seen.insert($0).inserted }
@@ -799,6 +823,155 @@ enum PlannerDeterministicFoodResolver {
     }
 }
 // MP3_TESTABLE_END
+
+private struct PlannerConceptExclusions: Sendable {
+    static let none = PlannerConceptExclusions(
+        concepts: [],
+        explicitFoodIDs: [],
+        exactTerms: [],
+        seededFoodIDs: [],
+        promptTerms: []
+    )
+
+    let concepts: Set<String>
+    let explicitFoodIDs: Set<Int>
+    let exactTerms: Set<String>
+    let seededFoodIDs: Set<Int>
+    let promptTerms: [String]
+
+    func filtering(_ candidates: [CompactFoodItem]) -> [CompactFoodItem] {
+        let candidateIDs = Set(candidates.map(\.id))
+        let blockedIDs = blockedFoodIDs(in: candidates)
+        let allowedIDs = candidateIDs.subtracting(blockedIDs)
+        return candidates.filter { allowedIDs.contains($0.id) }
+    }
+
+    func excludes(_ food: CompactFoodItem) -> Bool {
+        blockedFoodIDs(in: [food]).contains(food.id)
+    }
+
+    func excludes(
+        foodID: Int,
+        diets: Set<String>,
+        allergens: Set<String>
+    ) -> Bool {
+        if explicitFoodIDs.contains(foodID) {
+            return true
+        }
+        return concepts.contains { concept in
+            isAuthoritativeMember(
+                foodID: foodID,
+                concept: concept,
+                diets: diets,
+                allergens: allergens
+            )
+        }
+    }
+
+    func excludesUnresolvedName(_ value: String) -> Bool {
+        let normalized = AyurvedaRules.modifierTokens(value)
+            .joined(separator: " ")
+        if exactTerms.contains(normalized) {
+            return true
+        }
+        guard let concept = FoodConcepts.shared.conceptID(for: value) else {
+            return false
+        }
+        return concepts.contains(concept)
+    }
+
+    private func blockedFoodIDs(
+        in candidates: [CompactFoodItem]
+    ) -> Set<Int> {
+        let candidateIDs = Set(candidates.map(\.id))
+        var blockedIDs = explicitFoodIDs.intersection(candidateIDs)
+
+        for concept in concepts {
+            let ontologyIDs = Set(
+                FoodConcepts.shared.members(of: concept).map(Int.init)
+            )
+            let plainUSDAIDs = candidateIDs.subtracting(seededFoodIDs)
+            blockedIDs.formUnion(plainUSDAIDs.intersection(ontologyIDs))
+
+            for food in candidates where seededFoodIDs.contains(food.id) {
+                if seededSafetyMatches(food, concept: concept) {
+                    blockedIDs.insert(food.id)
+                }
+            }
+        }
+        return blockedIDs
+    }
+
+    private func isAuthoritativeMember(
+        foodID: Int,
+        concept: String,
+        diets: Set<String>,
+        allergens: Set<String>
+    ) -> Bool {
+        if !seededFoodIDs.contains(foodID) {
+            return FoodConcepts.shared.members(of: concept)
+                .contains(Int32(foodID))
+        }
+        return seededSafetyMatches(
+            diets: diets,
+            allergens: allergens,
+            concept: concept
+        )
+    }
+
+    private func seededSafetyMatches(
+        _ food: CompactFoodItem,
+        concept: String
+    ) -> Bool {
+        seededSafetyMatches(
+            diets: food.diets,
+            allergens: food.allergens,
+            concept: concept
+        )
+    }
+
+    private func seededSafetyMatches(
+        diets: Set<String>,
+        allergens: Set<String>,
+        concept: String
+    ) -> Bool {
+        switch concept {
+        case "dairy":
+            return allergens.contains("Milk")
+        case "egg":
+            return allergens.contains("Eggs")
+        case "gluten":
+            return allergens.contains {
+                $0.hasPrefix("Cereals containing gluten")
+            }
+        case "soy":
+            return allergens.contains("Soybeans")
+        case "sesame":
+            return allergens.contains("Sesame seeds")
+        case "peanut":
+            return allergens.contains("Peanuts")
+        case "tree_nuts":
+            return allergens.contains {
+                $0 == "Nuts" || $0.hasPrefix("Nuts (")
+            }
+        case "fish":
+            return allergens.contains("Fish")
+        case "crustacean":
+            return allergens.contains("Crustaceans")
+        case "mollusc":
+            return allergens.contains("Molluscs")
+        case "shellfish":
+            return !allergens.isDisjoint(
+                with: ["Crustaceans", "Molluscs"]
+            )
+        case "meat":
+            return !diets.contains("Vegetarian")
+        default:
+            // WE-8 has no equivalent canonical predicate for this concept.
+            return false
+        }
+    }
+}
 
 @available(iOS 26.0, *)
 public final class USDAWeeklyMealPlanner: Sendable {
@@ -1221,6 +1394,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
     private func resolveAndCreateItemsForMeal(
         _ conceptualMeal: ConceptualMeal,
         relevantPrompts: [String],
+        exclusions: PlannerConceptExclusions,
         smartSearch: SmartFoodSearch3,
         onLog: (@Sendable (String) -> Void)?
     ) async -> [MealPlanPreviewItem] {
@@ -1243,6 +1417,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
                             conceptName: component.name,
                             mealContext: conceptualMeal,
                             relevantPrompts: relevantPrompts,
+                            exclusions: exclusions,
                             onLog: onLog
                         ) {
                             return .resolved(info: resolvedInfo, component: component)
@@ -1290,6 +1465,14 @@ public final class USDAWeeklyMealPlanner: Sendable {
         if !unresolvedComponents.isEmpty {
             emitLog("--- Meal '\(conceptualMeal.name)': Starting SEQUENTIAL creation for \(unresolvedComponents.count) missing item(s) ---", onLog: onLog)
             for component in unresolvedComponents {
+                if exclusions.excludesUnresolvedName(component.name) {
+                    emitLog(
+                        "   🚫 FoodConcepts: skipped excluded unresolved "
+                            + "component '\(component.name)'.",
+                        onLog: onLog
+                    )
+                    continue
+                }
                 do {
                     try Task.checkCancellation()
                     if let newFoodCandidate = try await self.createMissingIngredient(named: component.name, grams: component.grams, onLog: onLog) {
@@ -1543,7 +1726,13 @@ public final class USDAWeeklyMealPlanner: Sendable {
             emitLog("  -> ✅ Checkpoint 2: Context and palettes generated and saved.", onLog: onLog)
         }
         
-        let hardExcludes = deriveHardExcludes(from: interpretedPrompts.structuralRequests)
+        let hardExclusions = await makePlannerExclusions(
+            extractedTerms: excludedFoods,
+            structuralRequests: interpretedPrompts.structuralRequests,
+            smartSearch: smartSearch,
+            context: ctx
+        )
+        let hardExcludes = hardExclusions.promptTerms
         try Task.checkCancellation()
         if PlannerTelemetry.isEnabled {
             await PlannerTelemetry.shared.endStage("context_palettes")
@@ -1668,7 +1857,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
             conceptualPlan = await polishConceptualPlan(
                 plan: conceptualPlan, profile: profile, daysAndMeals: daysAndMeals, rules: rules,
                 excludedFoods: hardExcludes, foodPalette: foodPalettesByContext.flatMap { $0.foods },
-                smartSearch: smartSearch, onLog: onLog
+                exclusions: hardExclusions, smartSearch: smartSearch, onLog: onLog
             )
             if PlannerTelemetry.isEnabled {
                 await PlannerTelemetry.shared.endStage("polish")
@@ -1709,7 +1898,12 @@ public final class USDAWeeklyMealPlanner: Sendable {
                 if let cachedItems = progress.resolvedItems?[conceptualDay.day]?[mealName]?.compactMap({ info in
                     let component = conceptualMeal.components.first(where: { $0.name.lowercased() == info.resolvedName.lowercased() || info.resolvedName.lowercased().contains($0.name.lowercased()) })
                     if let food = ctx.model(for: info.persistentID) as? FoodItem,
-                       !excludedFoodIds.contains(food.id) {
+                       !excludedFoodIds.contains(food.id),
+                       !hardExclusions.excludes(
+                           foodID: food.id,
+                           diets: Set((food.diets ?? []).map(\.name)),
+                           allergens: Set((food.allergens ?? []).map(\.rawValue))
+                       ) {
                         let grams = component?.grams ?? 100.0
                         return MealPlanPreviewItem(name: food.name, grams: grams, kcal: food.calories(for: grams))
                     }
@@ -1741,7 +1935,13 @@ public final class USDAWeeklyMealPlanner: Sendable {
                         return false
                         
                     } + interpretedPrompts.qualitativeGoals
-                    let resolvedItems = await resolveAndCreateItemsForMeal(conceptualMeal, relevantPrompts: relevantPrompts, smartSearch: smartSearch, onLog: onLog)
+                    let resolvedItems = await resolveAndCreateItemsForMeal(
+                        conceptualMeal,
+                        relevantPrompts: relevantPrompts,
+                        exclusions: hardExclusions,
+                        smartSearch: smartSearch,
+                        onLog: onLog
+                    )
                     try Task.checkCancellation()
                     
                     resolvedItemCount = resolvedItems.count
@@ -2875,20 +3075,6 @@ public final class USDAWeeklyMealPlanner: Sendable {
         smartSearch: SmartFoodSearch3, // Updated Type
         onLog: (@Sendable (String) -> Void)?
     ) async {
-        func containsExcluded(_ text: String?) -> String? {
-            guard let t = text?.lowercased(), !t.isEmpty else { return nil }
-            for raw in excludedFoods {
-                let ex = raw.lowercased()
-                if ex.contains(" ") {
-                    if t.contains(ex) { return raw }
-                } else {
-                    let pattern = "(^|\\W)\(NSRegularExpression.escapedPattern(for: ex))s?(\\W|$)"
-                    if t.range(of: pattern, options: .regularExpression) != nil { return raw }
-                }
-            }
-            return nil
-        }
-        
         func shouldDropMetaInstruction(_ text: String) -> Bool {
             let t = text.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
             if t.isEmpty { return false }
@@ -2955,9 +3141,6 @@ public final class USDAWeeklyMealPlanner: Sendable {
                 onLog?("  -> Skipping meta directive in frequency request: '\(fr.topic)'")
                 return
             }
-            if let banned = containsExcluded(fr.topic) {
-                onLog?("  -> ⚠️ Conflict: frequency request '\(fr.topic)' overlaps with a listed exclusion ('\(banned)'). Preferring the specific frequency for targeted meals and deferring conflict resolution to the global pass.")
-            }
             if await !isConcreteFoodName(fr.topic, smartSearch: smartSearch) {
                 interpreted.qualitativeGoals.append("Prefer \(fr.topic)")
                 return
@@ -3008,11 +3191,6 @@ public final class USDAWeeklyMealPlanner: Sendable {
                 onLog?("  -> Skipping meta directive: '\(sr)'")
                 return
             }
-            if let banned = containsExcluded(sr), sr.lowercased().contains("must contain") {
-                sr = "Exclude \(banned) on all days"
-                interpreted.structuralRequests.append(sr)
-                return
-            }
             if let topic = sr.split(separator: " ").last.map(String.init),
                sr.lowercased().contains("must contain"),
                await !isConcreteFoodName(topic, smartSearch: smartSearch) {
@@ -3041,7 +3219,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
         return !ids.isEmpty
     }
     
-    private func deriveHardExcludes(from structural: [String]) -> [String] {
+    private func hardExclusionTerms(from structural: [String]) -> [String] {
         guard !structural.isEmpty else { return [] }
         var out = Set<String>()
         let patterns: [String] = [
@@ -3063,6 +3241,91 @@ public final class USDAWeeklyMealPlanner: Sendable {
             }
         }
         return Array(out)
+    }
+
+    @MainActor
+    private func makePlannerExclusions(
+        extractedTerms: [String],
+        structuralRequests: [String],
+        smartSearch: SmartFoodSearch3,
+        context: ModelContext
+    ) async -> PlannerConceptExclusions {
+        var orderedTerms = extractedTerms
+        orderedTerms.append(contentsOf: hardExclusionTerms(from: structuralRequests))
+        orderedTerms.append("Alcohol")
+
+        var seenTerms = Set<String>()
+        orderedTerms = orderedTerms.filter { term in
+            let normalized = AyurvedaRules.modifierTokens(term)
+                .joined(separator: " ")
+            return !normalized.isEmpty && seenTerms.insert(normalized).inserted
+        }
+
+        var concepts = Set<String>()
+        var explicitFoodIDs = Set<Int>()
+        var exactTerms = Set<String>()
+        for term in orderedTerms {
+            let normalized = AyurvedaRules.modifierTokens(term)
+                .joined(separator: " ")
+            exactTerms.insert(normalized)
+            if let concept = FoodConcepts.shared.conceptID(for: term) {
+                concepts.insert(concept)
+            } else if let food = await resolveCompactCandidate(
+                named: term,
+                smartSearch: smartSearch
+            ) {
+                explicitFoodIDs.insert(food.id)
+            }
+        }
+
+        let seededFoodIDs = Set(
+            ((try? context.fetch(FetchDescriptor<AyurvedaProfile>())) ?? [])
+                .map(\.foodId)
+        )
+        return PlannerConceptExclusions(
+            concepts: concepts,
+            explicitFoodIDs: explicitFoodIDs,
+            exactTerms: exactTerms,
+            seededFoodIDs: seededFoodIDs,
+            promptTerms: orderedTerms
+        )
+    }
+
+    @MainActor
+    private func resolveCompactCandidate(
+        named name: String,
+        smartSearch: SmartFoodSearch3
+    ) async -> CompactFoodItem? {
+        let ontologyAliases = FoodConcepts.shared.resolutionAliases
+        let queries = PlannerDeterministicFoodResolver.queries(
+            for: name,
+            ontologyAliases: ontologyAliases
+        )
+        var candidatesByID: [Int: CompactFoodItem] = [:]
+        for query in queries {
+            for candidate in await smartSearch.searchCompact(
+                query: query,
+                limit: 120
+            ) {
+                candidatesByID[candidate.id] = candidate
+            }
+        }
+        let scorerCandidates = candidatesByID.values.map {
+            PlannerResolutionCandidate(
+                id: $0.id,
+                name: $0.name,
+                isRecipe: $0.isRecipe,
+                tier: .estimated
+            )
+        }
+        guard let decision = PlannerDeterministicFoodResolver.resolve(
+            concept: name,
+            ontologyAliases: ontologyAliases,
+            candidates: scorerCandidates
+        ) else {
+            return nil
+        }
+        return candidatesByID[decision.candidate.id]
     }
     
     @available(iOS 26.0, *)
@@ -3544,30 +3807,11 @@ public final class USDAWeeklyMealPlanner: Sendable {
         cuisineTag: String,
         onLog: (@Sendable (String) -> Void)?
     ) async throws -> AIConceptualPlanResponse {
-        // ... (кодът за alcoholKeywords и excludedFoodsAugmented остава същият) ...
-        let alcoholKeywords: [String] = [
-            "alcohol","beer","wine","vodka","whiskey","whisky","rum","gin","tequila","brandy",
-            "liqueur","liquor","cider","sake","soju","rakia","rakija","ouzo","vermouth","champagne",
-            "prosecco","cava","mead","port","sherry","cocktail","spritzer","aperitif","digestif",
-            "ale","lager","stout","ipa","pilsner","hard seltzer"
-        ]
-        let excludedFoodsAugmented: [String] = {
-            var seen = Set<String>()
-            var list: [String] = []
-            for x in (excludedFoods + alcoholKeywords) {
-                let key = x.lowercased()
-                if seen.insert(key).inserted { list.append(x) }
-            }
-            return list
-        }()
-        if excludedFoodsAugmented.count != excludedFoods.count {
-            onLog?("  -> Alcohol ban: added \(excludedFoodsAugmented.count - excludedFoods.count) keyword(s) to forbidden foods.")
-        }
         try Task.checkCancellation()
         // --- START OF CHANGE ---
         func buildUserPrompt(excludedLimit: Int) -> String {
             let qualitativeGoalsSection = interpretedPrompts.qualitativeGoals.isEmpty ? "None." : "- " + interpretedPrompts.qualitativeGoals.joined(separator: "\n- ")
-            let excludedFoodsSection = excludedFoodsAugmented.prefix(excludedLimit).isEmpty ? "None." : "- " + excludedFoodsAugmented.prefix(excludedLimit).joined(separator: "\n- ")
+            let excludedFoodsSection = excludedFoods.prefix(excludedLimit).isEmpty ? "None." : "- " + excludedFoods.prefix(excludedLimit).joined(separator: "\n- ")
             
             // 1. Определяме демографската група на потребителя
             let demographic = determineDemographic(for: profile)
@@ -3645,9 +3889,9 @@ public final class USDAWeeklyMealPlanner: Sendable {
             - \(mandatoryPlacements.joined(separator: "\n- "))
             """
             
-            // **NEW**: Always forbid alcohol; also add negative constraints for breakfast-only foods
+            // Alcohol is always present in the FoodConcept exclusion set.
             let breakfastOnly = findBreakfastOnlyTopics(from: mandatoryPlacements)
-            let alcoholBanLine = "- Alcohol is strictly forbidden in all meals. Do NOT include alcoholic beverages or dishes containing alcohol (e.g., \(alcoholKeywords.joined(separator: ", ")))."
+            let alcoholBanLine = "- Alcohol is strictly forbidden in all meals. Do NOT include foods in the canonical alcohol concept."
             let negativeConstraintSection: String
             if !breakfastOnly.isEmpty {
                 negativeConstraintSection = """
@@ -3793,34 +4037,6 @@ public final class USDAWeeklyMealPlanner: Sendable {
         return out
     }
     
-    @MainActor
-    private func removeBannedCuisineKeywords(
-        plan: AIConceptualPlanResponse,
-        bannedKeywords: [String],
-        onLog: (@Sendable (String) -> Void)?
-    ) -> AIConceptualPlanResponse {
-        guard !bannedKeywords.isEmpty else { return plan }
-        var out = plan
-        let bans = bannedKeywords.map { $0.lowercased() }
-        for d in 0..<out.days.count {
-            for m in 0..<out.days[d].meals.count {
-                var comps = out.days[d].meals[m].components
-                let before = comps.count
-                comps.removeAll { c in
-                    let l = c.name.lowercased()
-                    return bans.contains { l.contains($0) }
-                }
-                if comps.count != before {
-                    let removed = before - comps.count
-                    onLog?("🧹 Removed \(removed) off-cuisine component(s) from Day \(out.days[d].day) • \(out.days[d].meals[m].name).")
-                    if comps.isEmpty { comps = [ConceptualComponent(name: "Greek Yogurt", grams: 180)] }
-                }
-                out.days[d].meals[m].components = comps
-            }
-        }
-        return out
-    }
-
     @MainActor
     private func adjustResolvedDayForGoals(
         dayIndex: Int,
@@ -3969,103 +4185,12 @@ public final class USDAWeeklyMealPlanner: Sendable {
     }
     
     @MainActor
-    private func ensureIncludedFoodsPlaced(
-        plan: AIConceptualPlanResponse,
-        includedFoods: [String],
-        targetMealName: String?,
-        wantVariants: Bool,
-        excludedFoods: [String],
-        daysAndMeals: [Int: [String]],
-        smartSearch: SmartFoodSearch3, // Updated Type
-        onLog: (@Sendable (String) -> Void)?
-    ) async -> AIConceptualPlanResponse {
-        guard !includedFoods.isEmpty else { return plan }
-        var out = plan
-        
-        let banned = Set(excludedFoods.map { $0.lowercased() })
-        func violatesExcluded(_ n: String) -> Bool { banned.contains { n.lowercased().contains($0) } }
-        
-        func targetMealIndex(forDay dIdx: Int) -> Int? {
-            let names = out.days[dIdx].meals.map { $0.name }
-            if let t = targetMealName,
-               let ix = names.firstIndex(where: { $0.caseInsensitiveCompare(t) == .orderedSame }) {
-                return ix
-            }
-            return names.indices.first
-        }
-        
-        let dayCount = out.days.count
-        var variantsPerFood: [String: [String]] = [:]
-        for base in includedFoods {
-            let clean = base.trimmingCharacters(in: .whitespacesAndNewlines)
-            guard !clean.isEmpty, !violatesExcluded(clean) else { continue }
-            if wantVariants && dayCount > 1 {
-                let v = await aiGenerateVariants(for: clean, count: dayCount, mealName: targetMealName, excludedFoods: excludedFoods, onLog: onLog)
-                variantsPerFood[clean.lowercased()] = v
-            } else {
-                variantsPerFood[clean.lowercased()] = Array(repeating: clean.capitalized, count: dayCount)
-            }
-        }
-        
-        func indexOfMainComponent(in meal: ConceptualMeal) -> Int? {
-            let candidates = meal.components.enumerated().filter { $0.element.grams >= 90 }
-            return candidates.max(by: { $0.element.grams < $1.element.grams })?.offset
-        }
-        
-        for dIdx in 0..<out.days.count {
-            guard let mIdx = targetMealIndex(forDay: dIdx) else { continue }
-            let dayNum = out.days[dIdx].day
-            
-            if targetMealName != nil {
-                for ix in 0..<out.days[dIdx].meals.count where ix != mIdx {
-                    let before = out.days[dIdx].meals[ix].components.count
-                    out.days[dIdx].meals[ix].components.removeAll { c in
-                        includedFoods.contains { inc in c.name.range(of: inc, options: .caseInsensitive) != nil }
-                    }
-                    let after = out.days[dIdx].meals[ix].components.count
-                    if after < before { onLog?("🧹 Removed included-food duplicates from Day \(dayNum) • \(out.days[dIdx].meals[ix].name).") }
-                }
-            }
-            
-            for (key, labels) in variantsPerFood {
-                let label = labels.indices.contains(dIdx) ? labels[dIdx] : (labels.first ?? key.capitalized)
-                var meal = out.days[dIdx].meals[mIdx]
-                
-                let alreadyThere = meal.components.contains { $0.name.range(of: key, options: .caseInsensitive) != nil }
-                if !alreadyThere {
-                    if await !isConcreteFoodName(label, smartSearch: smartSearch) {
-                        onLog?("⏭️ Skipped non-concrete included-food label ‘\(label)’ for Day \(dayNum) • \(meal.name).")
-                    } else if let mainIdx = indexOfMainComponent(in: meal) {
-                        meal.components[mainIdx] = ConceptualComponent(name: label, grams: max(120, meal.components[mainIdx].grams))
-                        onLog?("✅ Day \(dayNum) • \(meal.name): replaced main with ‘\(label)’.")
-                    } else {
-                        meal.components.append(ConceptualComponent(name: label, grams: 150))
-                        onLog?("✅ Day \(dayNum) • \(meal.name): appended ‘\(label)’.")
-                    }
-                }
-                
-                var seen: Set<String> = []
-                meal.components = meal.components.filter { c in
-                    let k = c.name.lowercased()
-                    if includedFoods.contains(where: { k.contains($0.lowercased()) }) {
-                        return seen.insert(k).inserted
-                    }
-                    return true
-                }
-                
-                out.days[dIdx].meals[mIdx] = meal
-            }
-        }
-        
-        return out
-    }
-    
-    @MainActor
     private func resolveFoodConcept(
         smartSearch: SmartFoodSearch3, // Updated Type
         conceptName: String,
         mealContext: ConceptualMeal,
         relevantPrompts: [String],
+        exclusions: PlannerConceptExclusions = .none,
         onLog: (@Sendable (String) -> Void)?
     ) async -> ResolvedFoodInfo? {
         onLog?("    - Resolving '\(conceptName)' in context of '\(mealContext.descriptiveTitle)'...")
@@ -4075,7 +4200,11 @@ public final class USDAWeeklyMealPlanner: Sendable {
             return nil
         }
 
-        let queries = PlannerDeterministicFoodResolver.queries(for: conceptName)
+        let ontologyAliases = FoodConcepts.shared.resolutionAliases
+        let queries = PlannerDeterministicFoodResolver.queries(
+            for: conceptName,
+            ontologyAliases: ontologyAliases
+        )
         guard !queries.isEmpty else {
             onLog?("    - ⚠️ Empty deterministic query for '\(conceptName)'.")
             return nil
@@ -4109,6 +4238,18 @@ public final class USDAWeeklyMealPlanner: Sendable {
         emitLog(
             "🚫 AyurvedaGate: AyurvedaGate active, "
                 + "\(beforeExclusionCount - candidatesByID.count) candidates filtered",
+            onLog: onLog
+        )
+        guard !candidatesByID.isEmpty else { return nil }
+
+        let beforeConceptExclusionCount = candidatesByID.count
+        let conceptFiltered = exclusions.filtering(Array(candidatesByID.values))
+        candidatesByID = Dictionary(
+            uniqueKeysWithValues: conceptFiltered.map { ($0.id, $0) }
+        )
+        emitLog(
+            "🚫 FoodConcepts: \(beforeConceptExclusionCount - candidatesByID.count) "
+                + "candidates excluded by canonical membership.",
             onLog: onLog
         )
         guard !candidatesByID.isEmpty else { return nil }
@@ -4149,6 +4290,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
 
         guard let decision = PlannerDeterministicFoodResolver.resolve(
             concept: conceptName,
+            ontologyAliases: ontologyAliases,
             candidates: scorerCandidates
         ) else {
             onLog?(
@@ -4211,6 +4353,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
             rules: [MustContainRule],
             excludedFoods: [String],
             foodPalette: [String],
+            exclusions: PlannerConceptExclusions,
             smartSearch: SmartFoodSearch3,
             onLog: (@Sendable (String) -> Void)?
         ) async -> AIConceptualPlanResponse {
@@ -4218,11 +4361,30 @@ public final class USDAWeeklyMealPlanner: Sendable {
             onLog?("✨ Polishing conceptual plan (Rules, Trimming & AI Portion Control)...")
             
             // --- Start Helper Functions (scoped to polishing) ---
-            let excludedSet = Set(excludedFoods.map { $0.lowercased() })
-            
+            var namesToResolve = Set(foodPalette)
+            for day in polishedPlan.days {
+                for meal in day.meals {
+                    namesToResolve.formUnion(meal.components.map(\.name))
+                }
+            }
+            var excludedResolvedNames = Set<String>()
+            for name in namesToResolve.sorted() {
+                let normalized = AyurvedaRules.modifierTokens(name)
+                    .joined(separator: " ")
+                if exclusions.excludesUnresolvedName(name) {
+                    excludedResolvedNames.insert(normalized)
+                } else if let candidate = await resolveCompactCandidate(
+                    named: name,
+                    smartSearch: smartSearch
+                ), exclusions.excludes(candidate) {
+                    excludedResolvedNames.insert(normalized)
+                }
+            }
+
             func isExcluded(_ name: String) -> Bool {
-                let lower = name.lowercased()
-                return excludedSet.contains { lower.contains($0) }
+                excludedResolvedNames.contains(
+                    AyurvedaRules.modifierTokens(name).joined(separator: " ")
+                )
             }
             
             func isProtein(_ n: String) -> Bool {
@@ -4261,6 +4423,11 @@ public final class USDAWeeklyMealPlanner: Sendable {
                 if let all = try? ctx.fetch(descriptor) {
                     for f in all {
                         if (isSalad(f.name) || isFruit(f.name)) && !isExcluded(f.name)
+                            && !exclusions.excludes(
+                                foodID: f.id,
+                                diets: Set((f.diets ?? []).map(\.name)),
+                                allergens: Set((f.allergens ?? []).map(\.rawValue))
+                            )
                             && !excludedFoodIds.contains(f.id) {
                             sideCandidates.append(f.name)
                         }
