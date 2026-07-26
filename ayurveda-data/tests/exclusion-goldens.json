@@ -428,6 +428,12 @@
       "pattern": "chestnut",
       "contested": false,
       "why": "DIRECTOR RULING (FC-1): chestnut IS a tree nut under FDA classification. Previously a contested must-not-exclude, which directly contradicted the ontology listing 'chestnut' as a tree_nuts phrase. Resolved toward allergen protection. 'water chestnut' remains a negativePhrase and must still not be caught."
+    },
+    {
+      "concept": "tree_nuts",
+      "pattern": "coconut",
+      "contested": false,
+      "why": "DIRECTOR RULING (FC-1c): coconut is INCLUDED in tree_nuts, aligning with WE-8 and FDA classification. Previously a contested must-not-exclude. 'water chestnut' must still NOT be caught — that is now enforced by vetoTokens rather than a contiguous negativePhrase."
     }
   ],
   "mustNotExclude": [
@@ -505,12 +511,6 @@
       "concept": "tree_nuts",
       "pattern": "butternut",
       "why": "squash; contains 'nut'"
-    },
-    {
-      "concept": "tree_nuts",
-      "pattern": "coconut",
-      "why": "botanically a drupe; FDA lists it as a tree nut, so this is a founder decision",
-      "contested": true
     },
     {
       "concept": "tree_nuts",
@@ -621,5 +621,5 @@
       "why": "seaweed is not shellfish"
     }
   ],
-  "revision": "rev2 (FC-1): two contested cases resolved. chestnut moved to mustExclude; peanut narrowed to 'peanut butter'. Contested cases must no longer appear in a blocking gate."
+  "revision": "rev3 (FC-1c): coconut moved to mustExclude, mirroring the chestnut ruling."
 }
