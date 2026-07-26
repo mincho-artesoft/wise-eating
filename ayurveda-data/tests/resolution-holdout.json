@@ -1,0 +1,676 @@
+{
+  "goldensVersion": 1,
+  "author": "director",
+  "kind": "HELD-OUT TEST SET",
+  "purpose": "MP-3 scored 56/56 on resolution-goldens.json, but the report shows the resolver's alias table was populated FROM that corpus (mung/moong, toor/arhar, chana, urad, ghee, paneer, cilantro, chilli, gourds, jaggery, atta, kitchari, dal-tadka, basmati, lemongrass — every one maps to a case in it). That makes it a training set, not a test set. This file is the held-out measurement: written after the scorer was frozen at 37552c0, containing concepts the implementation has never seen.",
+  "criticalRule": "RUN THIS AGAINST THE FROZEN SCORER. Do not add aliases, adjust weights, or change the threshold to improve the score. The number this produces IS the finding. A low score is the expected and useful outcome; a high score after tuning is worthless.",
+  "howToUse": "Same protocol as resolution-goldens.json. Report PASS / FAIL / UNRESOLVED per case with the resolved food name and score for every case. UNRESOLVED on a real food is a FAIL for coverage purposes but is far better than a wrong confident match — report the two separately.",
+  "cases": [
+    {
+      "concept": "rajma",
+      "mustMatchAny": [
+        "kidney bean",
+        "rajma"
+      ],
+      "mustNotMatch": [
+        "soup",
+        "chili"
+      ],
+      "why": "common Indian pulse, no alias exists"
+    },
+    {
+      "concept": "masoor dal",
+      "mustMatchAny": [
+        "lentil",
+        "masoor"
+      ],
+      "mustNotMatch": [
+        "mung",
+        "chickpea",
+        "soup"
+      ],
+      "why": "red lentil"
+    },
+    {
+      "concept": "methi",
+      "mustMatchAny": [
+        "fenugreek",
+        "methi"
+      ],
+      "mustNotMatch": [
+        "seed"
+      ],
+      "why": "leaf form by default"
+    },
+    {
+      "concept": "fenugreek seeds",
+      "mustMatchAny": [
+        "fenugreek"
+      ],
+      "mustNotMatch": [
+        "leaves",
+        "greens"
+      ],
+      "why": "inverse of the above — seed explicitly"
+    },
+    {
+      "concept": "hing",
+      "mustMatchAny": [
+        "asafoetida",
+        "asafetida",
+        "hing"
+      ],
+      "mustNotMatch": [],
+      "why": "regional-only name"
+    },
+    {
+      "concept": "besan",
+      "mustMatchAny": [
+        "chickpea flour",
+        "gram flour",
+        "besan",
+        "garbanzo flour"
+      ],
+      "mustNotMatch": [
+        "wheat",
+        "whole chickpea",
+        "rice flour"
+      ],
+      "why": "flour form of a pulse"
+    },
+    {
+      "concept": "dahi",
+      "mustMatchAny": [
+        "yogurt",
+        "yoghurt",
+        "curd",
+        "dahi"
+      ],
+      "mustNotMatch": [
+        "frozen",
+        "drink"
+      ],
+      "why": "regional name for plain yogurt"
+    },
+    {
+      "concept": "bhindi",
+      "mustMatchAny": [
+        "okra",
+        "bhindi",
+        "lady finger"
+      ],
+      "mustNotMatch": [
+        "fried",
+        "pickled"
+      ],
+      "why": "regional vegetable name"
+    },
+    {
+      "concept": "lauki",
+      "mustMatchAny": [
+        "bottle gourd",
+        "calabash",
+        "lauki"
+      ],
+      "mustNotMatch": [
+        "bitter",
+        "ash",
+        "ridge"
+      ],
+      "why": "gourd variety not in the training corpus"
+    },
+    {
+      "concept": "sooji",
+      "mustMatchAny": [
+        "semolina",
+        "sooji",
+        "rava"
+      ],
+      "mustNotMatch": [
+        "whole wheat",
+        "all-purpose",
+        "rice"
+      ],
+      "why": "regional name for semolina"
+    },
+    {
+      "concept": "poha",
+      "mustMatchAny": [
+        "flattened rice",
+        "poha",
+        "beaten rice",
+        "rice, flakes"
+      ],
+      "mustNotMatch": [
+        "puffed",
+        "cooked, nfs"
+      ],
+      "why": "specific rice preparation"
+    },
+    {
+      "concept": "sabudana",
+      "mustMatchAny": [
+        "tapioca",
+        "sago",
+        "sabudana"
+      ],
+      "mustNotMatch": [
+        "pudding",
+        "boba"
+      ],
+      "why": "regional name"
+    },
+    {
+      "concept": "makhana",
+      "mustMatchAny": [
+        "fox nut",
+        "lotus seed",
+        "makhana"
+      ],
+      "mustNotMatch": [
+        "peanut",
+        "cashew"
+      ],
+      "why": "regional ingredient"
+    },
+    {
+      "concept": "amla",
+      "mustMatchAny": [
+        "amla",
+        "gooseberry",
+        "emblic"
+      ],
+      "mustNotMatch": [
+        "jam",
+        "candy"
+      ],
+      "why": "Ayurvedic staple, regional name"
+    },
+    {
+      "concept": "tamarind",
+      "mustMatchAny": [
+        "tamarind"
+      ],
+      "mustNotMatch": [
+        "candy",
+        "soda",
+        "sauce"
+      ],
+      "why": "fruit pulp"
+    },
+    {
+      "concept": "ajwain",
+      "mustMatchAny": [
+        "ajwain",
+        "carom",
+        "bishop"
+      ],
+      "mustNotMatch": [
+        "cumin",
+        "caraway",
+        "fennel"
+      ],
+      "why": "routinely confused with cumin and caraway"
+    },
+    {
+      "concept": "saunf",
+      "mustMatchAny": [
+        "fennel",
+        "saunf",
+        "anise"
+      ],
+      "mustNotMatch": [
+        "star anise",
+        "dill"
+      ],
+      "why": "regional name; star anise is a different species"
+    },
+    {
+      "concept": "dalchini",
+      "mustMatchAny": [
+        "cinnamon",
+        "dalchini",
+        "cassia"
+      ],
+      "mustNotMatch": [
+        "roll",
+        "cereal",
+        "candy"
+      ],
+      "why": "regional name"
+    },
+    {
+      "concept": "sambar",
+      "mustMatchAny": [
+        "sambar",
+        "sambhar"
+      ],
+      "mustNotMatch": [
+        "powder",
+        "masala"
+      ],
+      "why": "the DISH. DIRECTOR CORRECTION (MP-3b): expectRecipe removed. MP-3 returned the correct FOOD for this concept and failed only on row type. Report whether an isRecipe row exists for this dish; if none exists, the original assertion was unsatisfiable and this case is informational.",
+      "reportRowType": true
+    },
+    {
+      "concept": "idli",
+      "mustMatchAny": [
+        "idli"
+      ],
+      "mustNotMatch": [
+        "batter",
+        "mix",
+        "rava"
+      ],
+      "why": "composite dish. DIRECTOR CORRECTION (MP-3b): expectRecipe removed. MP-3 returned the correct FOOD for this concept and failed only on row type. Report whether an isRecipe row exists for this dish; if none exists, the original assertion was unsatisfiable and this case is informational.",
+      "reportRowType": true
+    },
+    {
+      "concept": "fresh ginger",
+      "mustMatchAny": [
+        "ginger"
+      ],
+      "mustNotMatch": [
+        "ground",
+        "spices, ginger",
+        "candied",
+        "pickled",
+        "ale"
+      ],
+      "why": "DIRECTOR CORPUS GAP: bare 'ginger' resolved to 'Spices, ginger, ground' in MP-3, but a recipe means the root. Your own kitchari uses ID 6687 'Ginger root, raw'. Form must be respected."
+    },
+    {
+      "concept": "ground ginger",
+      "mustMatchAny": [
+        "ginger"
+      ],
+      "mustNotMatch": [
+        "root, raw",
+        "fresh",
+        "ale",
+        "bread"
+      ],
+      "why": "inverse of the above"
+    },
+    {
+      "concept": "boiled egg",
+      "mustMatchAny": [
+        "egg"
+      ],
+      "mustNotMatch": [
+        "eggplant",
+        "substitute",
+        "white only",
+        "raw",
+        "powder"
+      ],
+      "why": "cooked form; eggplant is the classic trap"
+    },
+    {
+      "concept": "egg white",
+      "mustMatchAny": [
+        "egg",
+        "white"
+      ],
+      "mustNotMatch": [
+        "eggplant",
+        "whole",
+        "yolk"
+      ],
+      "why": "component of an egg, not the whole egg"
+    },
+    {
+      "concept": "raw spinach",
+      "mustMatchAny": [
+        "spinach"
+      ],
+      "mustNotMatch": [
+        "cooked",
+        "boiled",
+        "creamed",
+        "frozen"
+      ],
+      "why": "raw form explicitly requested"
+    },
+    {
+      "concept": "steamed broccoli",
+      "mustMatchAny": [
+        "broccoli"
+      ],
+      "mustNotMatch": [
+        "raw",
+        "soup",
+        "casserole",
+        "cheese"
+      ],
+      "why": "cooked form preferred"
+    },
+    {
+      "concept": "roasted almonds",
+      "mustMatchAny": [
+        "almond"
+      ],
+      "mustNotMatch": [
+        "raw",
+        "milk",
+        "butter",
+        "flour",
+        "marzipan"
+      ],
+      "why": "form plus derivative traps"
+    },
+    {
+      "concept": "greek yogurt",
+      "mustMatchAny": [
+        "yogurt",
+        "greek"
+      ],
+      "mustNotMatch": [
+        "frozen",
+        "covered",
+        "drink"
+      ],
+      "why": "specific style"
+    },
+    {
+      "concept": "cottage cheese",
+      "mustMatchAny": [
+        "cottage"
+      ],
+      "mustNotMatch": [
+        "cream cheese",
+        "cheddar",
+        "cottage pie"
+      ],
+      "why": "'cottage pie' is the trap"
+    },
+    {
+      "concept": "cheddar",
+      "mustMatchAny": [
+        "cheddar"
+      ],
+      "mustNotMatch": [
+        "soup",
+        "popcorn",
+        "flavored",
+        "sauce"
+      ],
+      "why": "the cheese"
+    },
+    {
+      "concept": "butter",
+      "mustMatchAny": [
+        "butter"
+      ],
+      "mustNotMatch": [
+        "peanut butter",
+        "cocoa butter",
+        "apple butter",
+        "shea",
+        "buttermilk",
+        "butternut",
+        "butterfly"
+      ],
+      "why": "INVERSE of the MP-3 ghee case — bare 'butter' must be dairy butter and must dodge six named traps"
+    },
+    {
+      "concept": "cream",
+      "mustMatchAny": [
+        "cream"
+      ],
+      "mustNotMatch": [
+        "cream of tartar",
+        "ice cream",
+        "sour cream",
+        "coconut cream",
+        "creamer",
+        "creamed corn"
+      ],
+      "why": "inverse trap set"
+    },
+    {
+      "concept": "olives",
+      "mustMatchAny": [
+        "olive"
+      ],
+      "mustNotMatch": [
+        "oil"
+      ],
+      "why": "INVERSE of the MP-3 'olive oil' case — the fruit, not the oil"
+    },
+    {
+      "concept": "peanut butter",
+      "mustMatchAny": [
+        "peanut butter"
+      ],
+      "mustNotMatch": [
+        "peanuts, raw",
+        "peanuts, roasted",
+        "butter, salted",
+        "almond"
+      ],
+      "why": "must not decompose into its headword"
+    },
+    {
+      "concept": "quinoa",
+      "mustMatchAny": [
+        "quinoa"
+      ],
+      "mustNotMatch": [
+        "salad",
+        "chips"
+      ],
+      "why": "plain grain"
+    },
+    {
+      "concept": "sourdough bread",
+      "mustMatchAny": [
+        "bread",
+        "sourdough"
+      ],
+      "mustNotMatch": [
+        "starter",
+        "crackers",
+        "stuffing"
+      ],
+      "why": "the loaf"
+    },
+    {
+      "concept": "avocado",
+      "mustMatchAny": [
+        "avocado"
+      ],
+      "mustNotMatch": [
+        "oil",
+        "guacamole",
+        "toast"
+      ],
+      "why": "the fruit"
+    },
+    {
+      "concept": "ground beef",
+      "mustMatchAny": [
+        "beef",
+        "ground"
+      ],
+      "mustNotMatch": [
+        "corned",
+        "jerky",
+        "broth",
+        "stew"
+      ],
+      "why": "'corned beef' contains beef but is a different food; note the corpus has ~991 estimated-tier beef rows"
+    },
+    {
+      "concept": "salmon",
+      "mustMatchAny": [
+        "salmon"
+      ],
+      "mustNotMatch": [
+        "patty",
+        "spread",
+        "loaf",
+        "cake"
+      ],
+      "why": "the fish"
+    },
+    {
+      "concept": "maple syrup",
+      "mustMatchAny": [
+        "maple",
+        "syrup"
+      ],
+      "mustNotMatch": [
+        "pancake syrup",
+        "flavored",
+        "candy",
+        "sugar"
+      ],
+      "why": "'pancake syrup' is usually not maple"
+    },
+    {
+      "concept": "apple",
+      "mustMatchAny": [
+        "apple"
+      ],
+      "mustNotMatch": [
+        "juice",
+        "sauce",
+        "pie",
+        "cider",
+        "butter",
+        "pineapple",
+        "custard apple"
+      ],
+      "why": "'pineapple' contains 'apple' — the substring trap"
+    },
+    {
+      "concept": "orange",
+      "mustMatchAny": [
+        "orange"
+      ],
+      "mustNotMatch": [
+        "juice",
+        "soda",
+        "marmalade",
+        "orange roughy",
+        "blood orange juice"
+      ],
+      "why": "'orange roughy' is a fish"
+    },
+    {
+      "concept": "dates",
+      "mustMatchAny": [
+        "date"
+      ],
+      "mustNotMatch": [
+        "paste",
+        "sugar",
+        "bar"
+      ],
+      "why": "the fruit; 'date' is also a calendar word and may collide with metadata text"
+    },
+    {
+      "concept": "corn",
+      "mustMatchAny": [
+        "corn"
+      ],
+      "mustNotMatch": [
+        "corned beef",
+        "corn syrup",
+        "cornstarch",
+        "popcorn",
+        "cornbread",
+        "corn flakes"
+      ],
+      "why": "five named traps, all real rows"
+    },
+    {
+      "concept": "kale",
+      "mustMatchAny": [
+        "kale"
+      ],
+      "mustNotMatch": [
+        "chips",
+        "smoothie"
+      ],
+      "why": "plain leafy green"
+    },
+    {
+      "concept": "chicken stock",
+      "mustMatchAny": [
+        "broth",
+        "stock"
+      ],
+      "mustNotMatch": [
+        "breast",
+        "thigh",
+        "meat only",
+        "bouillon cube"
+      ],
+      "why": "INVERSE of the MP-3 chicken cases — here the derivative IS the target and the meat is the wrong answer"
+    },
+    {
+      "concept": "apple cider vinegar",
+      "mustMatchAny": [
+        "vinegar"
+      ],
+      "mustNotMatch": [
+        "juice",
+        "wine vinegar",
+        "balsamic",
+        "rice vinegar"
+      ],
+      "why": "DIRECTOR CORRECTION (MP-3b): the original predicate wrongly trapped 'cider, apple' for a food that legitimately contains the word cider. Relaxed."
+    },
+    {
+      "concept": "nutritional yeast",
+      "mustMatchAny": [
+        "yeast"
+      ],
+      "mustNotMatch": [
+        "baker",
+        "brewer",
+        "extract",
+        "bread"
+      ],
+      "why": "specific product"
+    },
+    {
+      "concept": "glorbnax",
+      "mustMatchAny": [],
+      "mustNotMatch": [],
+      "expectUnresolved": true,
+      "why": "control: nonsense"
+    },
+    {
+      "concept": "asdfgh",
+      "mustMatchAny": [],
+      "mustNotMatch": [],
+      "expectUnresolved": true,
+      "why": "control: keyboard mash"
+    },
+    {
+      "concept": "the",
+      "mustMatchAny": [],
+      "mustNotMatch": [],
+      "expectUnresolved": true,
+      "why": "control: stopword only — must not match on a stopword appearing in food names"
+    },
+    {
+      "concept": "a",
+      "mustMatchAny": [],
+      "mustNotMatch": [],
+      "expectUnresolved": true,
+      "why": "control: single character must not match by prefix"
+    },
+    {
+      "concept": "food",
+      "mustMatchAny": [],
+      "mustNotMatch": [],
+      "expectUnresolved": true,
+      "why": "control: generic word naming no specific food — this is the GENERIC trap from the FC-1 work, and a resolver returning something here would empty a candidate pool downstream"
+    }
+  ],
+  "revision": "rev2 after MP-3b: three director-authored predicate defects corrected (apple cider vinegar, sambar, idli). Scorer was NOT changed."
+}
