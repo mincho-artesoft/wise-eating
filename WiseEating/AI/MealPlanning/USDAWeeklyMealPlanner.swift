@@ -163,6 +163,7 @@ struct PlannerPreparedResolutionCandidate: Sendable {
     let normalizedName: String
     let tokens: [String]
     let tokenSet: Set<String>
+    let nameSegments: [[String]]
 }
 
 enum PlannerDeterministicFoodResolver {
@@ -176,21 +177,31 @@ enum PlannerDeterministicFoodResolver {
         let impliedTokens: Set<String>
         let forms: Set<String>
         let composite: Bool
+        let requiresSubstantiveHeadword: Bool
     }
 
     static let minimumScore = 46.0
 
-    private static let preparationTokens: Set<String> = [
-        "bake", "boil", "cook", "dry", "fresh", "fry", "grill", "ground",
-        "raw", "roast", "split", "steam"
+    static let formVocabulary: Set<String> = [
+        "baby", "bake", "boil", "breast", "can", "cook", "dal", "dry",
+        "flour", "fresh", "freeze", "fry", "grill", "ground", "instant",
+        "leaf", "milk", "oil", "powder", "prepare", "raw", "roast", "seed",
+        "split", "steam", "tadka", "tea", "whip", "whole"
     ]
     private static let trailingFormTokens: Set<String> = [
         "breast", "dal", "flour", "leaf", "milk", "oil", "powder", "seed",
         "tadka", "tea"
     ]
-    private static let explicitFormTokens: Set<String> = [
-        "breast", "cook", "dal", "flour", "grill", "leaf", "milk", "oil",
-        "powder", "raw", "roast", "seed", "split", "tea", "whole"
+    private static let preferenceFormTokens: Set<String> = [
+        "bake", "boil", "can", "cook", "dry", "fresh", "freeze", "fry",
+        "grill", "ground", "powder", "raw", "roast", "steam"
+    ]
+    private static let modifierOnlyFormTokens = preferenceFormTokens.union(
+        ["baby", "instant", "prepare", "whip"]
+    )
+    private static let nonContentFormTokens: Set<String> = [
+        "bake", "boil", "cook", "dry", "fresh", "fry", "grill", "ground",
+        "raw", "roast", "split", "steam"
     ]
     private static let ignoredExtraTokens: Set<String> = [
         "all", "boneless", "broiler", "commercial", "common", "domesticated",
@@ -203,12 +214,14 @@ enum PlannerDeterministicFoodResolver {
         "ajwain", "ale", "almond", "apple", "baby", "babyfood", "bacon",
         "badam", "bar", "barley", "bean", "beer", "bell", "bitter", "black",
         "blend", "bottle", "bouillon", "bread", "breakfast", "breast", "broth",
-        "brown", "butter", "cabbage", "cake", "candied", "canned", "cayenne",
+        "brown", "butter", "cabbage", "cake", "can", "candied", "canned",
+        "cayenne",
         "cereal", "chai", "chestnut", "chicken", "chili", "chip", "chocolate",
         "chutney", "cilantro", "coconut", "condensed", "cookie", "cracker",
         "cream", "crisp", "curd", "curry", "dip",
         "dressing", "drink", "drumstick", "evaporated", "extract", "falafel",
-        "fat", "flavor", "flour", "frozen", "garlic", "graham", "gruel", "halva",
+        "fat", "flavor", "flour", "freeze", "frozen", "garlic", "graham",
+        "gruel", "halva",
         "halwa", "ham", "honey", "honeydew", "hummus", "ice", "juice",
         "ketchup", "kombucha", "latte", "leg", "lemonade", "lily", "liquid",
         "liver", "marzipan", "meatless", "meringue", "milk", "mix", "murabba",
@@ -256,11 +269,16 @@ enum PlannerDeterministicFoodResolver {
             let normalizedName = normalize(candidate.name)
             let tokens = tokenized(normalizedName)
             guard !tokens.isEmpty else { return nil }
+            let nameSegments = candidate.name
+                .split(separator: ",", omittingEmptySubsequences: true)
+                .map { tokenized(String($0)) }
+                .filter { !$0.isEmpty }
             return PlannerPreparedResolutionCandidate(
                 candidate: candidate,
                 normalizedName: normalizedName,
                 tokens: tokens,
-                tokenSet: Set(tokens)
+                tokenSet: Set(tokens),
+                nameSegments: nameSegments
             )
         }
     }
@@ -278,7 +296,7 @@ enum PlannerDeterministicFoodResolver {
         let qualifiers = Array(
             Set(conceptTokens.filter { token in
                 token != head
-                    && !preparationTokens.contains(token)
+                    && !formVocabulary.contains(token)
                     && !trailingFormTokens.contains(token)
             })
         ).sorted()
@@ -287,19 +305,33 @@ enum PlannerDeterministicFoodResolver {
         for aliasTokens in aliasTokenSets {
             impliedTokens.formUnion(aliasTokens)
         }
+        let headTokenSets = headPhrases(
+            for: conceptTokens,
+            aliases: aliases
+        ).map { Set(tokenized($0)) }
+        let matchingHeadCount = candidates.reduce(into: 0) { count, candidate in
+            if headTokenSets.contains(where: {
+                $0.isSubset(of: candidate.tokenSet)
+            }) {
+                count += 1
+            }
+        }
+        let commonHeadFloor = max(
+            64,
+            Int(ceil(Double(candidates.count) * 0.005))
+        )
         let preparedConcept = PreparedConcept(
             normalized: normalizedConcept,
             tokens: conceptTokens,
             tokenSet: Set(conceptTokens),
             aliases: aliases,
-            headTokenSets: headPhrases(
-                for: conceptTokens,
-                aliases: aliases
-            ).map { Set(tokenized($0)) },
+            headTokenSets: headTokenSets,
             qualifiers: qualifiers,
             impliedTokens: impliedTokens,
-            forms: Set(conceptTokens).intersection(explicitFormTokens),
-            composite: isCompositeConcept(normalizedConcept)
+            forms: Set(conceptTokens).intersection(formVocabulary),
+            composite: isCompositeConcept(normalizedConcept),
+            requiresSubstantiveHeadword: conceptTokens.count == 1
+                && matchingHeadCount >= commonHeadFloor
         )
 
         var best: PlannerResolutionDecision?
@@ -362,6 +394,10 @@ enum PlannerDeterministicFoodResolver {
             headTokens.isSubset(of: candidateSet)
         }
         guard headMatched else { return nil }
+        if concept.requiresSubstantiveHeadword,
+           !hasSubstantiveHeadword(concept: concept, candidate: candidate) {
+            return nil
+        }
 
         let matchedQualifiers = concept.qualifiers.filter(candidateSet.contains)
         let missingQualifiers = concept.qualifiers.filter {
@@ -371,7 +407,7 @@ enum PlannerDeterministicFoodResolver {
         var extraTokenSet = Set(candidateTokens.filter { token in
             !concept.impliedTokens.contains(token)
                 && !ignoredExtraTokens.contains(token)
-                && !preparationTokens.contains(token)
+                && !nonContentFormTokens.contains(token)
         })
         if candidateName.contains("without salt") {
             extraTokenSet.remove("salt")
@@ -413,8 +449,8 @@ enum PlannerDeterministicFoodResolver {
                 score -= 14
             }
         }
-        score += preparationPreference(
-            conceptTokens: concept.tokenSet,
+        score += formPreference(
+            requestedForms: concept.forms,
             candidateTokens: candidateSet
         )
 
@@ -422,6 +458,9 @@ enum PlannerDeterministicFoodResolver {
             score += candidate.candidate.isRecipe ? 28 : -10
         } else if candidate.candidate.isRecipe {
             score -= 36
+            if !concept.forms.isDisjoint(with: preferenceFormTokens) {
+                score -= 42
+            }
         }
 
         switch candidate.candidate.tier {
@@ -435,7 +474,7 @@ enum PlannerDeterministicFoodResolver {
         if let first = candidateTokens.first,
            !concept.impliedTokens.contains(first),
            !ignoredExtraTokens.contains(first),
-           !preparationTokens.contains(first) {
+           !nonContentFormTokens.contains(first) {
             score -= 20
         }
         if extraTokens.isEmpty { score += 6 }
@@ -448,6 +487,69 @@ enum PlannerDeterministicFoodResolver {
             missingQualifiers: missingQualifiers,
             extraTokens: extraTokens
         )
+    }
+
+    private static func hasSubstantiveHeadword(
+        concept: PreparedConcept,
+        candidate: PlannerPreparedResolutionCandidate
+    ) -> Bool {
+        if concept.tokenSet.isSubset(of: modifierOnlyFormTokens) {
+            return false
+        }
+
+        func substantiveTokens(_ tokens: [String]) -> [String] {
+            tokens.filter { token in
+                concept.impliedTokens.contains(token)
+                    || (
+                        !ignoredExtraTokens.contains(token)
+                            && !nonContentFormTokens.contains(token)
+                    )
+            }
+        }
+
+        let substantiveSegments = candidate.nameSegments.map(substantiveTokens)
+        guard let firstSegment = substantiveSegments.first else { return false }
+
+        func containsHead(_ tokens: [String]) -> Bool {
+            let tokenSet = Set(tokens)
+            return concept.headTokenSets.contains {
+                !$0.isEmpty && $0.isSubset(of: tokenSet)
+            }
+        }
+
+        let firstIsAnchor = !firstSegment.isEmpty
+            && firstSegment.allSatisfy(concept.impliedTokens.contains)
+            && containsHead(firstSegment)
+        let secondIsWrappedAnchor: Bool = {
+            guard candidate.nameSegments.first?.count == 1,
+                  candidate.nameSegments.count > 1 else {
+                return false
+            }
+            let secondSegment = candidate.nameSegments[1]
+            let secondSet = Set(secondSegment)
+            return !secondSet.isEmpty
+                && secondSet.allSatisfy(concept.impliedTokens.contains)
+                && containsHead(secondSegment)
+                && !secondSet.isSubset(of: formVocabulary)
+                && !secondSet.isSubset(of: ignoredExtraTokens)
+        }()
+        guard firstIsAnchor || secondIsWrappedAnchor else { return false }
+
+        var substantiveSet = Set(substantiveSegments.flatMap { $0 })
+        if secondIsWrappedAnchor {
+            substantiveSet.subtract(firstSegment)
+        }
+        if candidate.normalizedName.contains("without salt") {
+            substantiveSet.remove("salt")
+        }
+        if candidate.normalizedName.contains("no added fat") {
+            substantiveSet.subtract(["added", "fat", "no"])
+        }
+        guard !substantiveSet.isEmpty else { return false }
+        let explainedCount = substantiveSet
+            .intersection(concept.impliedTokens)
+            .count
+        return explainedCount * 2 >= substantiveSet.count
     }
 
     private static func isCompositeConcept(_ concept: String) -> Bool {
@@ -484,7 +586,7 @@ enum PlannerDeterministicFoodResolver {
             "black", "brown", "green", "red", "white", "whole", "yellow"
         ]
         for token in tokens.dropLast().reversed()
-            where !preparationTokens.contains(token)
+            where !formVocabulary.contains(token)
                 && !genericModifiers.contains(token) {
             return token
         }
@@ -496,9 +598,15 @@ enum PlannerDeterministicFoodResolver {
         candidateTokens: Set<String>
     ) -> Bool {
         switch form {
-        case "cook", "grill", "roast":
+        case "fresh", "raw":
+            return !candidateTokens.isDisjoint(with: ["fresh", "raw"])
+        case "ground", "powder":
+            return !candidateTokens.isDisjoint(with: ["ground", "powder"])
+        case "cook":
             return !candidateTokens.isDisjoint(
-                with: ["bake", "boil", "cook", "grill", "roast", "steam"]
+                with: [
+                    "bake", "boil", "cook", "fry", "grill", "roast", "steam"
+                ]
             )
         case "dal":
             return !candidateTokens.isDisjoint(
@@ -509,26 +617,63 @@ enum PlannerDeterministicFoodResolver {
         }
     }
 
-    private static func preparationPreference(
-        conceptTokens: Set<String>,
+    private static func formPreference(
+        requestedForms: Set<String>,
         candidateTokens: Set<String>
     ) -> Double {
-        let cookedForms: Set<String> = [
-            "bake", "boil", "cook", "fry", "grill", "roast", "steam"
-        ]
-        if !conceptTokens.isDisjoint(with: cookedForms) {
-            if candidateTokens.contains("raw") || candidateTokens.contains("dry") {
-                return -28
-            }
-            if !candidateTokens.isDisjoint(with: cookedForms) {
+        for form in requestedForms.sorted()
+            where preferenceFormTokens.contains(form) {
+            if formMatches(form, candidateTokens: candidateTokens) {
                 return 14
             }
-        }
-        if conceptTokens.contains("raw")
-            && !candidateTokens.isDisjoint(with: cookedForms) {
-            return -28
+            if formConflicts(form, candidateTokens: candidateTokens) {
+                return -28
+            }
         }
         return 0
+    }
+
+    private static func formConflicts(
+        _ requested: String,
+        candidateTokens: Set<String>
+    ) -> Bool {
+        let rawForms: Set<String> = ["fresh", "raw"]
+        let dryForms: Set<String> = ["dry", "ground", "powder"]
+        let preservedForms: Set<String> = ["can", "freeze"]
+        let specificCookedForms: Set<String> = [
+            "bake", "boil", "fry", "grill", "roast", "steam"
+        ]
+        let cookedForms = specificCookedForms.union(["cook"])
+
+        switch requested {
+        case "fresh", "raw":
+            return !candidateTokens.isDisjoint(
+                with: dryForms.union(preservedForms).union(cookedForms)
+            )
+        case "dry", "ground", "powder":
+            return !candidateTokens.isDisjoint(with: rawForms)
+        case "can", "freeze":
+            return !candidateTokens.isDisjoint(
+                with: rawForms.union(preservedForms.subtracting([requested]))
+            )
+        case "cook":
+            return !candidateTokens.isDisjoint(with: rawForms)
+        case let method where specificCookedForms.contains(method):
+            return !candidateTokens.isDisjoint(with: rawForms)
+                || !candidateTokens.isDisjoint(
+                    with: specificCookedForms.subtracting([method])
+                )
+        case "whole":
+            return candidateTokens.contains("split")
+        case "split":
+            return candidateTokens.contains("whole")
+        case "seed":
+            return candidateTokens.contains("leaf")
+        case "leaf":
+            return candidateTokens.contains("seed")
+        default:
+            return false
+        }
     }
 
     private static func aliasPhrases(for concept: String) -> [String] {
@@ -618,16 +763,20 @@ enum PlannerDeterministicFoodResolver {
     private static func canonicalToken(_ token: String) -> String {
         let irregular: [String: String] = [
             "almonds": "almond", "beans": "bean", "berries": "berry",
-            "cakes": "cake", "chickpeas": "chickpea", "chilies": "chili",
+            "baked": "bake", "boiled": "boil", "cakes": "cake",
+            "canned": "can", "chickpeas": "chickpea", "chilies": "chili",
             "chillies": "chili", "chilli": "chili", "chips": "chip",
-            "cookies": "cookie", "crisps": "crisp", "curries": "curry",
-            "dried": "dry", "foods": "food", "fries": "fry",
+            "cooked": "cook", "cookies": "cookie", "crisps": "crisp",
+            "curries": "curry", "dried": "dry", "foods": "food",
+            "fried": "fry", "fries": "fry", "frozen": "freeze",
             "grilled": "grill", "leaves": "leaf", "lentils": "lentil",
             "mixes": "mix", "noodles": "noodle", "nuts": "nut",
             "oats": "oat", "olives": "olive", "peas": "pea",
-            "potatoes": "potato", "roasted": "roast", "seeds": "seed",
+            "potatoes": "potato", "powdered": "powder",
+            "prepared": "prepare", "roasted": "roast", "seeds": "seed",
             "spices": "spice", "sprouted": "sprout", "sprouts": "sprout",
-            "tomatoes": "tomato", "walnuts": "walnut"
+            "steamed": "steam", "tomatoes": "tomato",
+            "walnuts": "walnut", "whipped": "whip", "whipping": "whip"
         ]
         if let canonical = irregular[token] { return canonical }
         if token.count > 3, token.hasSuffix("s"), !token.hasSuffix("ss") {

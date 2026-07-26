@@ -16,6 +16,24 @@ PLANNER = (
     / "USDAWeeklyMealPlanner.swift"
 )
 CORPUS = ROOT / "ayurveda-data" / "tests" / "resolution-goldens.json"
+HOLDOUT = ROOT / "ayurveda-data" / "tests" / "resolution-holdout.json"
+INCIDENTAL_TOKENS = [
+    "raw",
+    "cooked",
+    "mix",
+    "salad",
+    "prepared",
+    "canned",
+    "instant",
+    "baby",
+    "nfs",
+    "dry",
+    "fresh",
+    "juice",
+    "home",
+    "restaurant",
+    "food",
+]
 ARTIFACT_PARTS = [
     ROOT / "WiseEating" / "preseeded_db.store.gz.part-aa",
     ROOT / "WiseEating" / "preseeded_db.store.gz.part-ab",
@@ -247,7 +265,7 @@ func syntheticProperties() {
         concept: "grilled chicken breast",
         candidates: [
             candidate(1, "Beef breast, grilled"),
-            candidate(2, "Chicken breast, cooked, roasted"),
+            candidate(2, "Chicken breast, cooked, grilled"),
         ]
     )
     require(chicken?.candidate.id == 2, "headword weighting failed")
@@ -296,6 +314,57 @@ func syntheticProperties() {
         ]
     )
     require(control == nil, "threshold forced a best-of-bad-options match")
+
+    let expectedForms: Set<String> = [
+        "baby", "bake", "boil", "breast", "can", "cook", "dal", "dry",
+        "flour", "fresh", "freeze", "fry", "grill", "ground", "instant",
+        "leaf", "milk", "oil", "powder", "prepare", "raw", "roast", "seed",
+        "split", "steam", "tadka", "tea", "whip", "whole"
+    ]
+    require(
+        PlannerDeterministicFoodResolver.formVocabulary == expectedForms,
+        "catalogue form vocabulary changed unexpectedly"
+    )
+
+    let freshGinger = PlannerDeterministicFoodResolver.resolve(
+        concept: "fresh ginger",
+        candidates: [
+            candidate(13, "Spices, ginger, ground", tier: .classical),
+            candidate(14, "Ginger root, raw", tier: .classical),
+            candidate(15, "Fresh Ginger Achar", recipe: true, tier: .classical),
+        ]
+    )
+    require(freshGinger?.candidate.id == 14, "fresh/ground form conflict failed")
+
+    let roastedAlmond = PlannerDeterministicFoodResolver.resolve(
+        concept: "roasted almonds",
+        candidates: [
+            candidate(16, "Nuts, almonds, raw"),
+            candidate(17, "Nuts, almonds, dry roasted, without salt added"),
+        ]
+    )
+    require(roastedAlmond?.candidate.id == 17, "dry-roasted form match failed")
+
+    let steamedBroccoli = PlannerDeterministicFoodResolver.resolve(
+        concept: "steamed broccoli",
+        candidates: [
+            candidate(18, "Broccoli, raw"),
+            candidate(19, "Broccoli, cooked, boiled"),
+        ]
+    )
+    require(
+        steamedBroccoli == nil,
+        "conflicting cooking methods should remain unresolved"
+    )
+
+    let plantPart = PlannerDeterministicFoodResolver.resolve(
+        concept: "fenugreek seed",
+        candidates: [
+            candidate(20, "Fenugreek leaves"),
+            candidate(21, "Spices, fenugreek seed"),
+        ]
+    )
+    require(plantPart?.candidate.id == 21, "seed/leaf conflict failed")
 }
 
 @main
@@ -359,8 +428,32 @@ struct MP3ResolutionHarness {
                 + compile_result.stderr
             )
 
-        cls.first_output = cls._run_harness()
-        cls.clean_relaunch_output = cls._run_harness()
+        cls.first_output = cls._run_harness(CORPUS)
+        cls.clean_relaunch_output = cls._run_harness(CORPUS)
+        cls.holdout_output = cls._run_harness(HOLDOUT)
+        cls.holdout_clean_relaunch_output = cls._run_harness(HOLDOUT)
+        cls.incidental_corpus = temporary_root / "incidental-tokens.json"
+        cls.incidental_corpus.write_text(
+            json.dumps(
+                {
+                    "cases": [
+                        {
+                            "concept": token,
+                            "mustMatchAny": [],
+                            "mustNotMatch": [],
+                            "expectUnresolved": True,
+                        }
+                        for token in INCIDENTAL_TOKENS
+                    ]
+                },
+                sort_keys=True,
+            ),
+            encoding="utf-8",
+        )
+        cls.incidental_output = cls._run_harness(cls.incidental_corpus)
+        cls.incidental_clean_relaunch_output = cls._run_harness(
+            cls.incidental_corpus
+        )
         Path("/tmp/mp3-resolution-corpus.json").write_text(
             json.dumps(cls.first_output, ensure_ascii=False, sort_keys=True),
             encoding="utf-8",
@@ -373,15 +466,31 @@ struct MP3ResolutionHarness {
             ),
             encoding="utf-8",
         )
+        Path("/tmp/mp3c-resolution-holdout.json").write_text(
+            json.dumps(
+                cls.holdout_output,
+                ensure_ascii=False,
+                sort_keys=True,
+            ),
+            encoding="utf-8",
+        )
+        Path("/tmp/mp3c-incidental-tokens.json").write_text(
+            json.dumps(
+                cls.incidental_output,
+                ensure_ascii=False,
+                sort_keys=True,
+            ),
+            encoding="utf-8",
+        )
 
     @classmethod
     def tearDownClass(cls):
         cls.temporary.cleanup()
 
     @classmethod
-    def _run_harness(cls):
+    def _run_harness(cls, corpus):
         result = subprocess.run(
-            [str(cls.binary), str(cls.catalog), str(CORPUS), "corpus"],
+            [str(cls.binary), str(cls.catalog), str(corpus), "corpus"],
             cwd=ROOT,
             capture_output=True,
             text=True,
@@ -449,6 +558,91 @@ struct MP3ResolutionHarness {
 
     def test_clean_relaunch_is_identical(self):
         self.assertEqual(self.first_output, self.clean_relaunch_output)
+        self.assertEqual(
+            self.holdout_output,
+            self.holdout_clean_relaunch_output,
+        )
+        self.assertEqual(
+            self.incidental_output,
+            self.incidental_clean_relaunch_output,
+        )
+
+    def test_mp3c_held_out_rev2_score_and_failure_modes(self):
+        corpus = json.loads(HOLDOUT.read_text(encoding="utf-8"))
+        self.assertEqual(len(corpus["cases"]), 53)
+        self.assertEqual(
+            [
+                case["concept"]
+                for case in corpus["cases"]
+                if "expectRecipe" in case
+            ],
+            [],
+        )
+        records = self.holdout_output["records"]
+        controls = {
+            case["concept"]
+            for case in corpus["cases"]
+            if case.get("expectUnresolved")
+        }
+        positive_records = [
+            record for record in records if record["concept"] not in controls
+        ]
+        self.assertEqual(
+            sum(record["status"] == "PASS" for record in positive_records),
+            40,
+        )
+        self.assertEqual(
+            sum(
+                record["status"] == "UNRESOLVED"
+                for record in positive_records
+            ),
+            8,
+        )
+        self.assertEqual(
+            [record for record in positive_records if record["status"] == "FAIL"],
+            [],
+        )
+
+    def test_mp3c_all_five_held_out_controls_are_unresolved(self):
+        records = {
+            record["concept"]: record
+            for record in self.holdout_output["records"]
+        }
+        for concept in ("glorbnax", "asdfgh", "the", "a", "food"):
+            with self.subTest(concept=concept):
+                self.assertEqual(records[concept]["status"], "UNRESOLVED")
+                self.assertTrue(records[concept]["expectationMet"])
+
+    def test_mp3c_form_cases_use_compatible_atomic_rows(self):
+        records = {
+            record["concept"]: record
+            for record in self.holdout_output["records"]
+        }
+        self.assertEqual(records["fresh ginger"]["resolvedID"], 6687)
+        self.assertEqual(records["fresh ginger"]["resolvedName"], "Ginger root, raw")
+        self.assertFalse(records["fresh ginger"]["isRecipe"])
+        self.assertEqual(
+            records["ground ginger"]["resolvedName"],
+            "Spices, ginger, ground",
+        )
+        self.assertIn("roasted", records["roasted almonds"]["resolvedName"])
+        self.assertEqual(records["steamed broccoli"]["status"], "UNRESOLVED")
+
+    def test_mp3c_incidental_tokens_are_all_unresolved(self):
+        records = self.incidental_output["records"]
+        self.assertEqual(
+            [record["concept"] for record in records],
+            INCIDENTAL_TOKENS,
+        )
+        self.assertEqual(
+            [
+                record
+                for record in records
+                if record["status"] != "UNRESOLVED"
+                or not record["expectationMet"]
+            ],
+            [],
+        )
 
     def test_recipe_cases_prefer_recipe_rows_when_resolved(self):
         records = {
