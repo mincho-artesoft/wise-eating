@@ -152,9 +152,20 @@ pass. Same-session N=10 ABAB launch is 1.584s median versus 1.584s at the branch
 point. G12's 1,217 WE-8 disagreements reduce to five systematic causes covering
 93.9% of rows. See `REPORT-FC1.md`.
 
+INT-1 integrates the complete MP-1→MP-3c chain and FC-1/FC-1b into
+`ayurveda-app` without rebasing or squashing. The combined suite reconciles at
+95/95 (62 shared + 23 MP + 9 FC + one INT launch regression), all 25+2 search
+goldens remain exact, the validator and resolution/exclusion corpora retain
+their branch-local values, and rebuilt seed/preseed/concept artifacts are
+deterministic. Fresh install remains zero-insert/no-rebuild. The initial
+integrated 1.697s launch median triggered a bounded full-seed-decode paydown;
+final launch is 1.461s median versus 1.654s at `d393bda`. Physical-device
+generation evidence is not waived: every outstanding item and commit endpoint
+is recorded in `DEFERRED-VALIDATION.md`. See `REPORT-INT1.md`.
+
 ## Next milestones
 
-1. **Engineering track through FC-1 COMPLETE** — D6 (models+seeder), D34 (all 12,601 foods
+1. **Host/simulator engineering integration through INT-1 COMPLETE** — D6 (models+seeder), D34 (all 12,601 foods
    classified), D8/D8.1/D8.2 (UI end to end incl. computed tier + editors),
    D9 (engineExcluded enforcement), WE-2 (full recipe nutrition + build-time
    projection/search cache), WE-3 (founder-approved read-only display card),
@@ -163,20 +174,26 @@ point. G12's 1,217 WE-8 disagreements reduce to five systematic causes covering
    WE-7 (legacy target audit + proven-dead Swift cluster removal), and WE-8
    (conservative derived safety metadata + IngredientLink parity), and WE-8c
    (provenance-gated age enforcement), plus FC-1 (deterministic food-concept
-   ontology and unused runtime lookup service).
+   ontology and unused runtime lookup service), and INT-1 (unsquashed MP/FC
+   branch integration, deterministic artifact refresh, and launch paydown).
    See PROJECT-HANDBOOK.md §6 ledger and `REPORT-WE2.md` / `REPORT-WE3.md` /
    `REPORT-WE4.md` / `REPORT-WE5.md` / `REPORT-WE6.md` for gates, timing,
    screenshots, accessibility, search, `REPORT-WE7.md` for legacy audit
    evidence, `REPORT-WE8.md` for safety derivation/audit evidence, and
-   `REPORT-FC1.md` for concept gates and WE-8 disagreement triage.
-2. **Expert review — the remaining content item.** Work aiDraft→reviewed across
+   `REPORT-FC1.md` for concept gates and WE-8 disagreement triage, and
+   `REPORT-INT1.md` for integrated evidence.
+2. **Physical-device validation — explicitly pending.** Run the MP-1 nine-run
+   matrix/G6/G8, MP-2 twenty-food error table/runtime counters, and MP-3 runtime
+   zero-model-call confirmation exactly as registered in
+   `DEFERRED-VALIDATION.md`. Integration did not waive these gates.
+3. **Expert review — the remaining content item.** Work aiDraft→reviewed across
    dravyas/recipes/rules, resolve all reviewNote flags, optional batch-31
    top-up to 750. Director can generate a reviewer packet on request.
-3. **Residual founder checks** (minutes, not milestones): physical-device AI
+4. **Residual founder checks** (minutes, not milestones): physical-device AI
    generation run (D9 G3 environmental residual), Computed/User card
    screenshots, and physical-device VoiceOver smoke. WE-3's deterministic
    default/largest-type light/dark matrix is complete.
-4. **Optional future scope** (new product decisions, not leftovers): visible
+5. **Optional future scope** (new product decisions, not leftovers): visible
    search facet chips, prakriti assessment/personalization, physical-device
    launch signpost capture, and off-main first-search index decoding — best
    after expert review.
