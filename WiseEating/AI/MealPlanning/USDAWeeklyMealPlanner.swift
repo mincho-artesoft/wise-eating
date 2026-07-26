@@ -2,6 +2,131 @@ import SwiftData
 import Foundation
 import FoundationModels
 
+// MP2_TESTABLE_BEGIN
+enum PlannerMacroNutrient: String, Sendable {
+    case protein
+    case fat
+    case carbohydrates
+}
+
+enum PlannerMacroConstraint: String, Sendable {
+    case exactly
+    case lessThan
+    case moreThan
+}
+
+struct PlannerMacroTarget: Sendable {
+    let nutrient: PlannerMacroNutrient
+    let constraint: PlannerMacroConstraint
+    let value: Double
+}
+
+struct PlannerResolvedMacroItem: Sendable {
+    let mealIndex: Int
+    let itemIndex: Int
+    let name: String
+    var grams: Double
+    let caloriesPerGram: Double
+    let referenceWeightGrams: Double
+    let proteinPerReference: Double
+    let fatPerReference: Double
+    let carbohydratesPerReference: Double
+
+    func density(for nutrient: PlannerMacroNutrient) -> Double {
+        guard referenceWeightGrams > 0 else { return 0 }
+        switch nutrient {
+        case .protein:
+            return proteinPerReference / referenceWeightGrams
+        case .fat:
+            return fatPerReference / referenceWeightGrams
+        case .carbohydrates:
+            return carbohydratesPerReference / referenceWeightGrams
+        }
+    }
+}
+
+struct PlannerMacroTotals: Sendable {
+    var protein = 0.0
+    var fat = 0.0
+    var carbohydrates = 0.0
+}
+
+struct PlannerMacroAdjustmentResult: Sendable {
+    let items: [PlannerResolvedMacroItem]
+    let before: PlannerMacroTotals
+    let after: PlannerMacroTotals
+    let unresolvedComponentCount: Int
+}
+
+enum PlannerMacroGoalAdjuster {
+    // Preserve the former adjustment thresholds exactly: >5 g/100 g and 20 g.
+    private static let adjustableDensityFloor = 0.05
+    private static let minimumAdjustedGrams = 20.0
+
+    static func totals(for items: [PlannerResolvedMacroItem]) -> PlannerMacroTotals {
+        items.reduce(into: PlannerMacroTotals()) { totals, item in
+            guard item.grams > 0 else { return }
+            totals.protein += item.density(for: .protein) * item.grams
+            totals.fat += item.density(for: .fat) * item.grams
+            totals.carbohydrates += item.density(for: .carbohydrates) * item.grams
+        }
+    }
+
+    static func adjust(
+        items: [PlannerResolvedMacroItem],
+        targets: [PlannerMacroTarget],
+        unresolvedComponentCount: Int
+    ) -> PlannerMacroAdjustmentResult {
+        let before = totals(for: items)
+        var adjustedItems = items
+
+        for target in targets {
+            let currentTotal = adjustedItems.reduce(0.0) { total, item in
+                guard item.grams > 0 else { return total }
+                return total + item.density(for: target.nutrient) * item.grams
+            }
+            let error = currentTotal - target.value
+
+            let needsAdjustment: Bool
+            switch target.constraint {
+            case .exactly:
+                needsAdjustment = abs(error) > target.value * 0.1
+            case .lessThan:
+                needsAdjustment = currentTotal > target.value
+            case .moreThan:
+                needsAdjustment = currentTotal < target.value
+            }
+            guard needsAdjustment else { continue }
+
+            let adjustableIndices = adjustedItems.indices.filter { index in
+                let item = adjustedItems[index]
+                return item.grams > 0
+                    && item.density(for: target.nutrient) > adjustableDensityFloor
+            }
+            guard !adjustableIndices.isEmpty else { continue }
+
+            let adjustmentPerSource = -error / Double(adjustableIndices.count)
+            for index in adjustableIndices {
+                let item = adjustedItems[index]
+                let density = item.density(for: target.nutrient)
+                let currentNutrientAmount = item.grams * density
+                adjustedItems[index].grams = max(
+                    minimumAdjustedGrams,
+                    (currentNutrientAmount + adjustmentPerSource) / density
+                )
+            }
+        }
+
+        return PlannerMacroAdjustmentResult(
+            items: adjustedItems,
+            before: before,
+            after: totals(for: adjustedItems),
+            unresolvedComponentCount: unresolvedComponentCount
+        )
+    }
+}
+// MP2_TESTABLE_END
+
 @available(iOS 26.0, *)
 public final class USDAWeeklyMealPlanner: Sendable {
     private let globalTaskManager = GlobalTaskManager.shared
@@ -895,21 +1020,18 @@ public final class USDAWeeklyMealPlanner: Sendable {
             try Task.checkCancellation()
             
             if PlannerTelemetry.isEnabled {
-                await PlannerTelemetry.shared.beginStage("goal_adjustment")
-            }
-            let adjustedDay = await validateAndAdjustDayForGoals(day: conceptualDay, goals: interpretedPrompts.numericalGoals, onLog: onLog)
-            if PlannerTelemetry.isEnabled {
-                await PlannerTelemetry.shared.endStage("goal_adjustment")
                 await PlannerTelemetry.shared.beginStage("resolution")
             }
             var previewMeals: [MealPlanPreviewMeal] = []
+            var unresolvedComponentCount = 0
             
-            for conceptualMeal in adjustedDay.meals {
+            for conceptualMeal in conceptualDay.meals {
                 try Task.checkCancellation()
                 if Task.isCancelled { break }
                 
                 let mealName = conceptualMeal.name
                 let finalItems: [MealPlanPreviewItem]
+                let resolvedItemCount: Int
                 
                 if let cachedItems = progress.resolvedItems?[conceptualDay.day]?[mealName]?.compactMap({ info in
                     let component = conceptualMeal.components.first(where: { $0.name.lowercased() == info.resolvedName.lowercased() || info.resolvedName.lowercased().contains($0.name.lowercased()) })
@@ -921,6 +1043,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
                     return nil
                 }) {
                     emitLog("  -> 🔄 Checkpoint 4: Using cached resolved items for Day \(conceptualDay.day) - '\(mealName)'.", onLog: onLog)
+                    resolvedItemCount = cachedItems.count
                     finalItems = rebalanceMealCalories(items: cachedItems, mealName: mealName, dailyCalTarget: estimatedDailyCalories(for: profile), onLog: onLog)
                 } else {
                     let relevantPrompts = interpretedPrompts.structuralRequests.filter { prompt in
@@ -948,6 +1071,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
                     let resolvedItems = await resolveAndCreateItemsForMeal(conceptualMeal, relevantPrompts: relevantPrompts, smartSearch: smartSearch, onLog: onLog)
                     try Task.checkCancellation()
                     
+                    resolvedItemCount = resolvedItems.count
                     finalItems = rebalanceMealCalories(items: resolvedItems, mealName: conceptualMeal.name, dailyCalTarget: estimatedDailyCalories(for: profile), onLog: onLog)
                     try Task.checkCancellation()
                     
@@ -961,15 +1085,34 @@ public final class USDAWeeklyMealPlanner: Sendable {
                     await saveProgress(jobID: jobID, progress: progress, onLog: onLog)
                     emitLog("  -> ✅ Checkpoint 4: Resolved and saved items for Day \(conceptualDay.day) - '\(mealName)'.", onLog: onLog)
                 }
+
+                unresolvedComponentCount += max(
+                    0,
+                    conceptualMeal.components.count - resolvedItemCount
+                )
                 
                 let mealStartTime = mealTimings?.first { $0.key.lowercased() == conceptualMeal.name.lowercased() }?.value
                 previewMeals.append(MealPlanPreviewMeal(name: conceptualMeal.name, descriptiveTitle: conceptualMeal.descriptiveTitle, items: finalItems, startTime: mealStartTime))
                 try Task.checkCancellation()
             }
-            previewDays.append(MealPlanPreviewDay(dayIndex: adjustedDay.day, meals: previewMeals))
             if PlannerTelemetry.isEnabled {
                 await PlannerTelemetry.shared.endStage("resolution")
+                await PlannerTelemetry.shared.beginStage("goal_adjustment")
             }
+            previewMeals = adjustResolvedDayForGoals(
+                dayIndex: conceptualDay.day,
+                meals: previewMeals,
+                goals: interpretedPrompts.numericalGoals,
+                unresolvedComponentCount: unresolvedComponentCount,
+                context: ctx,
+                onLog: onLog
+            )
+            if PlannerTelemetry.isEnabled {
+                await PlannerTelemetry.shared.endStage("goal_adjustment")
+            }
+            previewDays.append(
+                MealPlanPreviewDay(dayIndex: conceptualDay.day, meals: previewMeals)
+            )
             try Task.checkCancellation()
         }
         
@@ -2978,58 +3121,6 @@ public final class USDAWeeklyMealPlanner: Sendable {
     }
     
     @MainActor
-    private func aiFetchNutritionData(for foodNames: [String], onLog: (@Sendable (String) -> Void)?) async -> [AINutritionInfo] {
-        guard !foodNames.isEmpty else { return [] }
-        onLog?("    - Fetching nutrition data from AI for \(foodNames.count) items...")
-        let prompt = """
-        For the following food items, provide typical nutritional values (protein, fat, carbohydrates) in grams per 100g. The names in your response must exactly match the names in this list.
-        FOODS:
-        \(foodNames.map { "- \($0)" }.joined(separator: "\n"))
-        """
-        let session = LanguageModelSession(instructions: Instructions {
-        """
-        TASK:
-            - Return nutrition for the given food names **exactly as listed** (names must match 1:1).
-            - For each item, provide protein, fat, and carbohydrates per 100 g.
-            - Do not add extra items, do not rename items, and do not include units in the numeric fields.
-        """
-        })
-        if PlannerTelemetry.isEnabled {
-            await PlannerTelemetry.shared.noteSession(site: "aiFetchNutritionData")
-        }
-        
-        var telemetryRespondStartedAt: UInt64?
-        var telemetryRespondRecorded = false
-        do {
-            try Task.checkCancellation()
-            if PlannerTelemetry.isEnabled {
-                telemetryRespondStartedAt = DispatchTime.now().uptimeNanoseconds
-            }
-            let response = try await session.respond(to: prompt, generating: AINutritionResponse.self, includeSchemaInPrompt: true, options: GenerationOptions(sampling: .greedy))
-            if let startedAt = telemetryRespondStartedAt {
-                await PlannerTelemetry.shared.noteRespond(
-                    site: "aiFetchNutritionData",
-                    ok: true,
-                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
-                )
-                telemetryRespondRecorded = true
-            }
-            try Task.checkCancellation()
-            return response.content.nutritionData
-        } catch {
-            if let startedAt = telemetryRespondStartedAt, !telemetryRespondRecorded {
-                await PlannerTelemetry.shared.noteRespond(
-                    site: "aiFetchNutritionData",
-                    ok: false,
-                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
-                )
-            }
-            onLog?("    - ⚠️ AI nutrition data fetch failed: \(error.localizedDescription). Adjustment may be skipped.")
-            return []
-        }
-    }
-    
-    @MainActor
     private func removeBannedCuisineKeywords(
         plan: AIConceptualPlanResponse,
         bannedKeywords: [String],
@@ -3056,37 +3147,152 @@ public final class USDAWeeklyMealPlanner: Sendable {
         }
         return out
     }
-    
+
     @MainActor
-    private func validateAndAdjustDayForGoals(
-        day: ConceptualDay,
+    private func adjustResolvedDayForGoals(
+        dayIndex: Int,
+        meals: [MealPlanPreviewMeal],
         goals: [NumericalGoal],
+        unresolvedComponentCount: Int,
+        context: ModelContext,
         onLog: (@Sendable (String) -> Void)?
-    ) async -> ConceptualDay {
-        guard !goals.isEmpty else { return day }
-        
-        let names = Array(Set(day.meals.flatMap { $0.components.map { $0.name } }))
-        let nutritionData = await aiFetchNutritionData(for: names, onLog: onLog)
-        
-        guard !nutritionData.isEmpty else {
-            onLog?("    - Could not fetch nutrition data for Day \(day.day). Skipping day-level adjustments.")
-            return day
+    ) -> [MealPlanPreviewMeal] {
+        if unresolvedComponentCount > 0 {
+            onLog?(
+                "⚠️ MP2 nutrition truth: Day \(dayIndex) excludes "
+                    + "\(unresolvedComponentCount) unresolved component(s) from goal math."
+            )
         }
-        
-        let nutritionMap = Dictionary(uniqueKeysWithValues: nutritionData.map { ($0.name.lowercased(), $0) })
-        
-        let pre = computeDayMacroTotals(day: day, nutritionMap: nutritionMap)
-        onLog?("    - Day \(day.day) PRE totals: Protein \(Int(pre.protein))g • Fat \(Int(pre.fat))g • Carbs \(Int(pre.carbs))g")
-        
-        var adjusted = day
-        for goal in goals {
-            adjusted = adjustDayForGoal(day: adjusted, goal: goal, nutritionMap: nutritionMap, onLog: onLog)
+        guard !goals.isEmpty else { return meals }
+
+        var foodsByName: [String: FoodItem] = [:]
+        var missingFoodNames = Set<String>()
+        var macroItems: [PlannerResolvedMacroItem] = []
+        var unavailableNutritionCount = 0
+
+        for (mealIndex, meal) in meals.enumerated() {
+            for (itemIndex, item) in meal.items.enumerated() {
+                guard item.grams > 0 else {
+                    unavailableNutritionCount += 1
+                    continue
+                }
+
+                let nameKey = item.name.lowercased()
+                let food: FoodItem?
+                if let cached = foodsByName[nameKey] {
+                    food = cached
+                } else if missingFoodNames.contains(nameKey) {
+                    food = nil
+                } else {
+                    let itemName = item.name
+                    let descriptor = FetchDescriptor<FoodItem>(
+                        predicate: #Predicate { $0.name == itemName }
+                    )
+                    let fetched = (try? context.fetch(descriptor))?.first
+                    if let fetched {
+                        foodsByName[nameKey] = fetched
+                    } else {
+                        missingFoodNames.insert(nameKey)
+                    }
+                    food = fetched
+                }
+
+                guard let food else {
+                    unavailableNutritionCount += 1
+                    continue
+                }
+                let referenceWeight = food.referenceWeightG
+                let macros = FoodItem.aggregatedNutrition(for: food).macros
+                guard referenceWeight > 0,
+                      let protein = macros?.protein?.value,
+                      let fat = macros?.fat?.value,
+                      let carbohydrates = macros?.carbohydrates?.value else {
+                    unavailableNutritionCount += 1
+                    continue
+                }
+
+                macroItems.append(
+                    PlannerResolvedMacroItem(
+                        mealIndex: mealIndex,
+                        itemIndex: itemIndex,
+                        name: item.name,
+                        grams: item.grams,
+                        caloriesPerGram: food.calories(for: 1),
+                        referenceWeightGrams: referenceWeight,
+                        proteinPerReference: protein,
+                        fatPerReference: fat,
+                        carbohydratesPerReference: carbohydrates
+                    )
+                )
+            }
         }
-        
-        let post = computeDayMacroTotals(day: adjusted, nutritionMap: nutritionMap)
-        onLog?("    - Day \(day.day) POST totals: Protein \(Int(post.protein))g • Fat \(Int(post.fat))g • Carbs \(Int(post.carbs))g")
-        
-        return adjusted
+
+        if unavailableNutritionCount > 0 {
+            onLog?(
+                "⚠️ MP2 nutrition truth: Day \(dayIndex) excludes "
+                    + "\(unavailableNutritionCount) resolved item(s) without complete "
+                    + "FoodItem macros from goal math."
+            )
+        }
+
+        let targets = goals.map { goal -> PlannerMacroTarget in
+            let nutrient: PlannerMacroNutrient
+            switch goal.nutrient {
+            case .protein:
+                nutrient = .protein
+            case .fat:
+                nutrient = .fat
+            case .carbohydrates:
+                nutrient = .carbohydrates
+            }
+
+            let constraint: PlannerMacroConstraint
+            switch goal.constraint {
+            case .exactly:
+                constraint = .exactly
+            case .lessThan:
+                constraint = .lessThan
+            case .moreThan:
+                constraint = .moreThan
+            }
+            return PlannerMacroTarget(
+                nutrient: nutrient,
+                constraint: constraint,
+                value: goal.value
+            )
+        }
+        let result = PlannerMacroGoalAdjuster.adjust(
+            items: macroItems,
+            targets: targets,
+            unresolvedComponentCount: unresolvedComponentCount
+        )
+
+        onLog?(
+            "    - Day \(dayIndex) PRE resolved totals: Protein "
+                + "\(Int(result.before.protein))g • Fat \(Int(result.before.fat))g "
+                + "• Carbs \(Int(result.before.carbohydrates))g"
+        )
+        onLog?(
+            "    - Day \(dayIndex) POST resolved totals: Protein "
+                + "\(Int(result.after.protein))g • Fat \(Int(result.after.fat))g "
+                + "• Carbs \(Int(result.after.carbohydrates))g"
+        )
+
+        var adjustedMeals = meals
+        for item in result.items {
+            guard adjustedMeals.indices.contains(item.mealIndex),
+                  adjustedMeals[item.mealIndex].items.indices.contains(item.itemIndex) else {
+                continue
+            }
+            let original = adjustedMeals[item.mealIndex].items[item.itemIndex]
+            adjustedMeals[item.mealIndex].items[item.itemIndex] = MealPlanPreviewItem(
+                id: original.id,
+                name: original.name,
+                grams: item.grams,
+                kcal: item.caloriesPerGram * item.grams
+            )
+        }
+        return adjustedMeals
     }
     
     @MainActor
@@ -3179,94 +3385,6 @@ public final class USDAWeeklyMealPlanner: Sendable {
         }
         
         return out
-    }
-    
-    private func validateAndAdjustPlan(plan: AIConceptualPlanResponse, goals: [NumericalGoal], onLog: (@Sendable (String) -> Void)?) async -> AIConceptualPlanResponse {
-        var adjustedPlan = plan
-        onLog?("    - AIConceptualPlanResponse plan: \(adjustedPlan)")
-        let allFoodNames = Array(Set(adjustedPlan.days.flatMap { $0.meals }.flatMap { $0.components }.map { $0.name }))
-        let nutritionData = await aiFetchNutritionData(for: allFoodNames, onLog: onLog)
-        
-        guard !nutritionData.isEmpty else {
-            onLog?("    - Could not fetch nutrition data. Skipping programmatic adjustments.")
-            return plan
-        }
-        
-        let nutritionMap = Dictionary(uniqueKeysWithValues: nutritionData.map { ($0.name.lowercased(), $0) })
-        for dayIndex in 0..<adjustedPlan.days.count {
-            for goal in goals {
-                adjustedPlan.days[dayIndex] = adjustDayForGoal(
-                    day: adjustedPlan.days[dayIndex], goal: goal, nutritionMap: nutritionMap, onLog: onLog
-                )
-            }
-        }
-        return adjustedPlan
-    }
-    
-    private func adjustDayForGoal(day: ConceptualDay, goal: NumericalGoal, nutritionMap: [String: AINutritionInfo], onLog: (@Sendable (String) -> Void)?) -> ConceptualDay {
-        var adjustedDay = day
-        func getNutrientValue(from info: AINutritionInfo, for nutrient: MacronutrientType) -> Double {
-            switch nutrient {
-            case .protein: return info.protein_g
-            case .fat: return info.fat_g
-            case .carbohydrates: return info.carbohydrates_g
-            }
-        }
-        var currentTotal: Double = 0
-        for meal in adjustedDay.meals {
-            for component in meal.components {
-                if let nutritionInfo = nutritionMap[component.name.lowercased()] {
-                    currentTotal += (getNutrientValue(from: nutritionInfo, for: goal.nutrient) / 100.0) * component.grams
-                }
-            }
-        }
-        
-        let error = currentTotal - goal.value
-        onLog?("    - Day \(day.day), Goal (\(goal.nutrient.rawValue) \(goal.constraint) \(Int(goal.value))g): Current value is \(Int(currentTotal))g. Error: \(Int(error))g.")
-        
-        var needsAdjustment = false
-        switch goal.constraint {
-        case .exactly: needsAdjustment = abs(error) > (goal.value * 0.1)
-        case .lessThan: needsAdjustment = currentTotal > goal.value
-        case .moreThan: needsAdjustment = currentTotal < goal.value
-        }
-        
-        guard needsAdjustment else {
-            onLog?("    - Value is within acceptable limits. No adjustment needed.")
-            return adjustedDay
-        }
-        
-        var adjustableComponents: [(mealIdx: Int, compIdx: Int, nutrientDensity: Double)] = []
-        for (mIdx, meal) in adjustedDay.meals.enumerated() {
-            for (cIdx, component) in meal.components.enumerated() {
-                if let nutritionInfo = nutritionMap[component.name.lowercased()], getNutrientValue(from: nutritionInfo, for: goal.nutrient) > 5 {
-                    adjustableComponents.append((mIdx, cIdx, getNutrientValue(from: nutritionInfo, for: goal.nutrient) / 100.0))
-                }
-            }
-        }
-        
-        guard !adjustableComponents.isEmpty else {
-            onLog?("    - No adjustable components found for this nutrient. Cannot adjust.")
-            return adjustedDay
-        }
-        
-        let adjustmentPerSource = -error / Double(adjustableComponents.count)
-        
-        for item in adjustableComponents {
-            let component = adjustedDay.meals[item.mealIdx].components[item.compIdx]
-            let currentNutrientAmount = component.grams * item.nutrientDensity
-            if item.nutrientDensity > 0 {
-                let newGrams = max(20.0, (currentNutrientAmount + adjustmentPerSource) / item.nutrientDensity)
-                adjustedDay.meals[item.mealIdx].components[item.compIdx].grams = newGrams
-            }
-        }
-        
-        let finalTotal = adjustedDay.meals.flatMap { $0.components }.reduce(0.0) { total, component in
-            if let info = nutritionMap[component.name.lowercased()] { return total + (getNutrientValue(from: info, for: goal.nutrient) / 100.0) * component.grams }
-            return total
-        }
-        onLog?("    - Day \(day.day) adjusted for \(goal.nutrient.rawValue). New value: \(Int(finalTotal))g.")
-        return adjustedDay
     }
     
     @MainActor
@@ -4108,22 +4226,6 @@ public final class USDAWeeklyMealPlanner: Sendable {
             }
         }
         onLog?("────────────────────────────")
-    }
-    
-    private func computeDayMacroTotals(
-        day: ConceptualDay,
-        nutritionMap: [String: AINutritionInfo]
-    ) -> (protein: Double, fat: Double, carbs: Double) {
-        var p = 0.0, f = 0.0, c = 0.0
-        for meal in day.meals {
-            for comp in meal.components {
-                guard let info = nutritionMap[comp.name.lowercased()] else { continue }
-                p += (info.protein_g / 100.0) * comp.grams
-                f += (info.fat_g / 100.0) * comp.grams
-                c += (info.carbohydrates_g / 100.0) * comp.grams
-            }
-        }
-        return (p, f, c)
     }
     
     @MainActor

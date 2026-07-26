@@ -114,21 +114,6 @@ struct AIHeadwordVariantsResponse: Codable {
 
 @available(iOS 26.0, *)
 @Generable
-struct AINutritionInfo: Codable {
-    let name: String
-    let protein_g: Double
-    let fat_g: Double
-    let carbohydrates_g: Double
-}
-
-@available(iOS 26.0, *)
-@Generable
-struct AINutritionResponse: Codable {
-    let nutritionData: [AINutritionInfo]
-}
-
-@available(iOS 26.0, *)
-@Generable
 struct AINumericalGoal: Codable {
     let nutrient: String
     let constraint: String
