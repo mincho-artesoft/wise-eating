@@ -2,9 +2,9 @@
 **Read this first. It is the knowledge-transfer document for anyone (human or AI)
 taking over direction of this project. Update it at the end of every milestone —
 that is a standing rule baked into all task packets.**
-Last updated: 2026-07-26 (WE-8c complete; same-session N=12 cold-launch
-median 1.607s under the absolute 1.700s ceiling — see
-`ayurveda-data/REPORT-WE8c.md`).
+Last updated: 2026-07-26 (FC-1 complete on `fc-1-food-concepts`; 25 concepts,
+75 aliases, and deterministic membership for all 14,484 catalogue rows. See
+`ayurveda-data/REPORT-FC1.md`).
 
 ## 1. Mission and the two applications
 
@@ -119,6 +119,13 @@ simulation; must always pass).
   The nine former Swift compiler inputs were entirely commented, had no inbound
   references, and were removed as one proven-dead cluster. The synchronized
   Xcode group now contributes zero Legacy Swift sources.
+- `WiseEating/Ayurveda/FoodConcepts.swift` + bundled
+  `food_concepts_membership.json.gz` (FC-1): immutable, lazily loaded concept
+  lookup over all 14,484 catalogue rows. The director-owned ontology contains
+  25 canonical concepts and 75 aliases; build-time matching applies token
+  phrases, authored negative phrases, hierarchy closure, and one-level recipe
+  IngredientLink propagation. FC-1 adds the service only: no meal-planner,
+  resolver, FoodSearch, or ranking consumer is wired yet.
 
 ## 3. Fixed decisions (do not relitigate without the founder)
 
@@ -148,6 +155,10 @@ simulation; must always pass).
     exceeds 1.650s must include a profiling paydown in the same task. Per-task
     deltas are always reported; they are not individually gated.
     Percentage-of-previous gates are forbidden for launch because they ratchet.
+12. Director-marked `contested` ontology exclusion cases are executed and
+    reported separately but do not block must-exclude or must-not-exclude
+    gates. Only non-contested cases contribute to blocking gate arithmetic;
+    executors never silently resolve a contested policy question.
 
 ## 4. Working process (the pattern that built all of this)
 
@@ -195,6 +206,9 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | Age provenance (WE-8c) | dravyas 4 authored / 710 legacyImport · recipes 4 / 1,496 · ingredient contributors 4 / 10,567 |
 | Cold launch (WE-6/WE-7/WE-8/WE-8c, Debug simulator) | WE-8c registry median **1.607s** (N=12); same-session WE-8b 1.569s, paired median delta +0.048s. Absolute hard ceiling 1.700s; profiling paydown required above 1.650s |
 | Legacy target (WE-7) | 9 dead Swift inputs removed · 5 live JSON fallback resources retained |
+| Food concepts (FC-1) | 25 concepts · 75 aliases · 14,484 catalogue memberships resolved into a 29,740-byte deterministic artifact |
+| FC-1 exclusion corpus | non-contested must-exclude 61/75 pass, 0 fail, 14 unresolved · must-not-exclude 26/34 pass, 0 fail, 8 unresolved · 8 contested reported separately |
+| FC-1 cold launch (Debug simulator) | candidate **1.584s** median vs branch point 1.584s, N=10 same-session ABAB; paired median −0.003s, delta smaller than both IQRs |
 
 ## 6. Milestone ledger (update after every task)
 
@@ -215,6 +229,7 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | WE-7 Legacy target audit | ✅ COMPLETE — all 14 files classified before removal. Nine comment-only Swift compiler inputs formed one closed dead cluster and were removed; five JSON fallback resources remain live. Debug/Release builds, 38/38 tests, 25/25 goldens, 15/15 WE-5 border methods, fresh no-insert/no-rebuild, search latency, and 1.504s median cold launch are green. Release executable −416 bytes. See `ayurveda-data/REPORT-WE7.md` |
 | WE-8 derived safety/search metadata | ✅ COMPLETE — all 2,214 canonical profiles carry conservative review-required safety provenance; 1,500 recipes derive allergen union, diet intersection, maximum ingredient age/honey floor, and retain exact 10,571 IngredientLinks. Founder-approved `vegan curry` history is auditable; 25/25 production legacy goldens plus 2/2 negative safety goldens pass, worst latency delta +4.3%, fresh install remains zero-insert/no-rebuild, and cold launch is 1.592s median. See `ayurveda-data/REPORT-WE8.md` |
 | WE-8c provenance-gated age enforcement | ✅ COMPLETE — authored honey floors alone hard-filter canonical profiles; legacy-import floors remain unchanged display metadata. Honey protection, 1,496/1,500/1,500 recipe visibility, unchanged display histogram, dravya deltas, 25+2 goldens, 62/62 tests, deterministic v5 artifacts, fresh no-insert/no-rebuild, and Debug/Release builds pass. Same-session N=12 ABAB launch median is 1.607s vs WE-8b 1.569s (paired +0.048s), under the absolute 1.700s ceiling and 1.650s paydown trigger. The separate pre-existing `main` USDA issue is recorded in `ayurveda-data/ISSUE-MAIN-AGE-GATING.md`. See `ayurveda-data/REPORT-WE8c.md` |
+| FC-1 food concept ontology | ✅ COMPLETE on `fc-1-food-concepts` — 25 concepts / 75 aliases resolve deterministic membership across 14,484 catalogue rows behind an unused lazy runtime service. Revised non-contested exclusion gates have zero resolved failures; eight contested cases are reported separately. 71/71 tests, validator, 25+2 search goldens, Debug/Release, fresh no-insert/no-rebuild, determinism, and 1.584s median launch pass. G12's 1,217 disagreements are triaged: five causes explain 93.9%. See `ayurveda-data/REPORT-FC1.md` |
 | Expert review pass | ⏳ pending human reviewer: work aiDraft→reviewed, resolve reviewNotes, optional batch-31 top-up to 750 |
 | Later roadmap | media (yoga/meditation content), recommendation engine, dosha assessment — see ayurveda-data/RESTART-PLAN.md history |
 

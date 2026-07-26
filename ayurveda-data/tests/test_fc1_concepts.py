@@ -26,7 +26,7 @@ RUNTIME_PATH = ROOT / "WiseEating" / "Ayurveda" / "FoodConcepts.swift"
 
 DIRECTOR_HASHES = {
     ONTOLOGY_PATH: "2755da46ab2621d6ed4acb9204b4953d79eb03e8893f568c748e5abda9a48d24",
-    EXCLUSION_PATH: "8ab92be44d987aab86e14d69c5933b0eed428efdb7fc31bd7f2a516401c2bf27",
+    EXCLUSION_PATH: "4fa5586c63ecb1227e42e501065834cd1897c3f443c920dcc8dde882de2f5a69",
     HOLDOUT_PATH: "557fe9cd78e751522310ec520c2a94a8b19366f12c8405814566d38a517a7a9d",
 }
 
@@ -50,6 +50,9 @@ class FoodConceptTests(unittest.TestCase):
         cls.suffix_terms = build_seed.load_suffix_negation_terms(
             KNOWLEDGE_BASE_PATH
         )
+        cls.exclusion_goldens = json.loads(
+            EXCLUSION_PATH.read_text(encoding="utf-8")
+        )
         cls.artifact, cls.diagnostics = build_seed.build_food_concepts(
             cls.seed,
             source_names,
@@ -67,6 +70,52 @@ class FoodConceptTests(unittest.TestCase):
                 )
         self.assertEqual(len(self.ontology["concepts"]), 25)
         self.assertEqual(len(self.ontology["aliases"]), 75)
+        self.assertEqual(len(self.exclusion_goldens["mustExclude"]), 80)
+        self.assertEqual(len(self.exclusion_goldens["mustNotExclude"]), 37)
+        self.assertEqual(
+            sum(
+                bool(case.get("contested"))
+                for key in ("mustExclude", "mustNotExclude")
+                for case in self.exclusion_goldens[key]
+            ),
+            8,
+        )
+        self.assertIn("rev2", self.exclusion_goldens["revision"])
+
+    def test_non_contested_must_not_exclude_cases_have_no_members(self):
+        names = self.diagnostics["catalogNames"]
+        membership = self.diagnostics["membership"]
+        failures = []
+
+        for case in self.exclusion_goldens["mustNotExclude"]:
+            if case.get("contested"):
+                continue
+            matching_ids = {
+                food_id
+                for food_id, name in names.items()
+                if case["pattern"] in name.lower()
+            }
+            excluded_ids = matching_ids & membership.get(case["concept"], set())
+            if excluded_ids:
+                failures.append(
+                    {
+                        "concept": case["concept"],
+                        "pattern": case["pattern"],
+                        "foodIds": sorted(excluded_ids),
+                    }
+                )
+
+        self.assertEqual(failures, [])
+
+        tree_nut_members = membership["tree_nuts"]
+        for pattern in ("peanut butter", "water chestnut"):
+            matching_ids = {
+                food_id
+                for food_id, name in names.items()
+                if pattern in name.lower()
+            }
+            self.assertTrue(matching_ids, pattern)
+            self.assertFalse(matching_ids & tree_nut_members, pattern)
 
     def test_modifier_normalization_and_suffix_terms_are_reused(self):
         self.assertEqual(

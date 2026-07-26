@@ -4,338 +4,325 @@
 
 **Branch:** `fc-1-food-concepts`
 
-**Branch point:** `d0dfc38` (the local MP-1 telemetry commit on top of `d393bda`)
+**Branch point:** `d0dfc38` (local MP-1 telemetry commit on top of pushed `d393bda`)
 
-**Disposition:** **STOPPED at FC1-G6; evidence/candidate committed to the isolated branch, not pushed.**
+**Status:** **COMPLETE after FC-1b director corpus correction; committed locally, not pushed.**
 
 ## Executive result
 
-A build-time concept-membership implementation and a lazy runtime lookup candidate were completed and focused-tested, but the director red-team corpus produced two resolved `mustNotExclude` false positives. Neither can be fixed with an existing `negativePhrase` while preserving the mandated token-boundary semantics. FC1-G6 is blocking, so later integration, build, launch, and fresh-install gates were deliberately not run. The stopped candidate and evidence are committed only to this isolated, unpushed branch for inspection.
+FC-1 now completes its local gates. The director’s rev2 exclusion corpus removes the two cross-artifact contradictions that correctly stopped the first run: `chestnut` is now a non-contested tree-nut must-exclude case, and the ambiguous bare `peanut` must-not case is narrowed to `peanut butter`. The ontology and matching machinery were not tuned.
 
-- `tree_nuts` / `peanut`: 13 “mixed nuts” foods are members because `mixed nuts` is a positive phrase. The existing negative is singular `peanut`; it does not token-match `peanuts`. Several affected names explicitly say “without peanuts”, while others actually contain peanuts, so plural stemming would not be a safe general repair.
-- `tree_nuts` / `chestnut`: 10 seeded Vrat Chestnut recipes are members because `chestnut` is an explicit positive ontology phrase. No negative exists. The ontology itself labels chestnut contested, while the golden places it in `mustNotExclude`. This is an authority contradiction, not a machinery defect that the executor may tune away.
+- Non-contested must-exclude: **61/75 PASS, 0 FAIL, 14 UNRESOLVED** catalogue-coverage gaps.
+- Non-contested must-not-exclude: **26/34 PASS, 0 FAIL, 8 UNRESOLVED**; zero resolved false-positive exclusions, so blocking FC1-G6 passes.
+- Eight contested cases are isolated from gates and reported under **Contested — awaiting ruling**.
+- Full repository suite: **71/71**. Validator, 25 legacy + 2 safety search goldens, fresh-install, determinism, Debug, and Release gates pass.
+- Same-session resource-equivalent ABAB launch: candidate median **1.583763s**, branch-point median 1.584221s, paired median delta **-0.002991s**; below the 1.700s ceiling and 1.650s paydown trigger.
+- G12 has 1,217 disagreements, but **1,143 (93.9%) collapse into five systematic causes**. One invalid comparator alone (`not Vegan` as a honey proxy) explains 831 (68.3%).
 
-## Input integrity and authority boundary
+## FC-1b correction and bounded compile fix
 
-| Director artifact | Expected/observed SHA-256 | Status |
+The initial `164312e` stop was accepted as correct. Rev2 changed only `ayurveda-data/tests/exclusion-goldens.json`; `food-concepts.json` stayed byte-identical. Permanent test-side cross-file validation now resolves every non-contested must-not pattern against the built catalogue and asserts that it intersects no concept member. This catches contradictions that isolated JSON schema validation cannot.
+
+The first complete Debug build also exposed a pre-existing target symbol named `Requirement`. The new unused FC-1 value types were nested as `FoodConcepts.Requirement` and `FoodConcepts.Restriction`; matching, persistence, public lookup APIs, and consumers are unchanged. This namespace-only correction removed the invalid redeclaration. No planner, FoodSearch, or ranking source changed.
+
+## Director artifact integrity
+
+| Artifact | SHA-256 | Result |
 |---|---|---|
-| `ayurveda-data/rules/food-concepts.json` | `2755da46ab2621d6ed4acb9204b4953d79eb03e8893f568c748e5abda9a48d24` | Unchanged |
-| `ayurveda-data/tests/exclusion-goldens.json` | `8ab92be44d987aab86e14d69c5933b0eed428efdb7fc31bd7f2a516401c2bf27` | Unchanged |
-| `ayurveda-data/tests/resolution-holdout.json` | `557fe9cd78e751522310ec520c2a94a8b19366f12c8405814566d38a517a7a9d` | Unchanged |
+| Ontology | `2755da46ab2621d6ed4acb9204b4953d79eb03e8893f568c748e5abda9a48d24` | PASS |
+| Exclusion corpus rev2 | `4fa5586c63ecb1227e42e501065834cd1897c3f443c920dcc8dde882de2f5a69` | PASS |
+| Resolution holdout rev2 | `557fe9cd78e751522310ec520c2a94a8b19366f12c8405814566d38a517a7a9d` | PASS |
 
-The candidate does not write WE-8 allergens or diets. On the 2,214-row overlap, its results are diagnostic only (FC1-G12); the 12,601 plain USDA rows use FC-1 concept membership. No planner, SmartFoodSearch engine, or ranking consumer was wired.
-
-## Candidate implementation (uncommitted)
-
-- Extended `ayurveda-data/build_seed.py` to validate the ontology/override schema, reject hierarchy and alias cycles, reuse the validator’s modifier normalization, load the existing suffix-negation vocabulary, match negatives first, select longest positive phrases, roll up the parent DAG, propagate through IngredientLinks, and apply overrides last.
-- Created the empty documented override registry `ayurveda-data/crosswalk/concept-overrides.json`.
-- Added `WiseEating/Ayurveda/FoodConcepts.swift`: immutable `Sendable` lazy lookup with `members(of:)`, `concepts(for:)`, and `canonical(alias:)`, plus unused `Requirement` and `Restriction` value types.
-- Generated `WiseEating/food_concepts.json.gz`: 29,740 bytes, SHA-256 `44716a1990817318c837ef98103e2a3785745a15d27adc6a372a80e4846c6111`.
-- The existing seed and rules artifacts remained byte-identical during generation: seed `886c6a3908b9661ae85223b13cc353326a93ef2ac552129b6a60e529e481872e`; rules `e92ad29fda7616a011090bd3674f9653d33b9553357c49f43ffd87f850c0364c`.
+The exclusion corpus contains 80 must-exclude, 37 must-not-exclude, and exactly 8 contested cases. The ontology remains 25 concepts / 75 aliases and was not edited in FC-1b.
 
 ## Gate ledger
 
 | Gate | Result | Evidence |
 |---|---|---|
-| FC1-G1 Debug + Release | **INCOMPLETE after candidate** | Baseline generic-iOS Debug build succeeded with 46 unique pre-existing warning messages. Candidate Debug/Release was not run after the blocking G6 result. |
-| FC1-G2 full suite | **INCOMPLETE after candidate** | Branch baseline: 62/62 in 17.486s. Candidate-focused FC-1 tests: 8/8 in 8.096s. Full post-change suite not run after stop. |
-| FC1-G3 search goldens | **NOT RUN after candidate** | Search was intentionally untouched; exact 25/25 + 2/2 post-change rerun was withheld after G6 stopped the task. |
-| FC1-G4 validator | **BASELINE PASS / AFTER NOT RUN** | Before: D34 and all validators green, 714 dravyas + 1,500 recipes. Post-candidate validator withheld after stop. |
-| FC1-G5 must-exclude | **64/79 PASS; 1 FAIL; 14 UNRESOLVED** | Full worklist below. |
-| FC1-G6 must-not-exclude | **BLOCKING: 26/38 PASS; 2 FAIL; 10 UNRESOLVED** | Both resolved failures are listed below and cannot be repaired using an existing negative phrase without violating frozen matching or editing director data. |
-| FC1-G7 viaIngredient | **4/13 nominal; only 2 clean ingredient-only proofs** | Six resolved failures, three unresolved. `palak paneer` also matches directly; `lassi` is a raw-golden substring collision with “classic”. Details below. |
-| FC1-G8 size sanity | **PASS WITH FLAG** | No concept exceeds 40%. `meat` is 26.857% and is explicitly explained below. |
-| FC1-G9 cold launch | **NOT RUN** | G6 stopped the task before same-session ABAB measurement; no delta is claimed. |
-| FC1-G10 fresh install | **NOT RUN after candidate** | Baseline permanent suite was green; no candidate no-insert/no-rebuild measurement is claimed. |
-| FC1-G11 determinism | **FOCUSED PASS** | Two independent in-memory builds encoded to byte-identical deterministic gzip; bundled artifact equals the current build. A later end-to-end rerun was not performed after stop. |
-| FC1-G12 cross-validation | **1,217 disagreements measured** | Neither derivation was modified. Every disagreement with both reason trails appears in the exhaustive appendix. |
-| FC1-G13 alias coverage | **7/8** | Alias-only report; no resolver wiring. |
+| FC1-G1 Debug + Release | **PASS** | Clean generic-simulator Debug and Release builds succeeded. Debug reproduced the exact 46-warning branch baseline set; Release also emitted the same 46 unique pre-existing warning messages. No FC-1 warning. |
+| FC1-G2 full suite | **PASS — 71/71** | Final `unittest discover` rerun, 26.574s. Focused FC-1 suite is 9/9 after permanent cross-file G6 coverage. |
+| FC1-G3 search goldens | **PASS — 25/25 + 2/2** | Existing production-golden and safety-golden tests pass; no FoodSearch/ranking source diff. |
+| FC1-G4 validator | **PASS** | D34: classical 336 + derived 1,969 + estimated 10,296 = 12,601/12,601; 714 dravyas and 1,500 recipes; all checks passed. |
+| FC1-G5 non-contested must-exclude | **PASS WITH WORKLIST — 61/75, 0 FAIL, 14 UNRESOLVED** | Unresolved catalogue fixtures are listed below. Contested cases excluded from gate arithmetic. |
+| FC1-G6 non-contested must-not-exclude | **PASS — 26/34, 0 FAIL, 8 UNRESOLVED** | No resolved false positive. `peanut butter` and `water chestnut` have catalogue fixtures and zero `tree_nuts` intersection. |
+| FC1-G7 viaIngredient | **4/13 nominal; 2 clean ingredient-only proofs** | This is a corpus/fixture worklist, not a revised FC-1b stop condition. Full evidence below. |
+| FC1-G8 concept size | **PASS WITH FLAG** | No concept exceeds 40%. `meat` is 3,890 / 14,484 = 26.857%, explained below. |
+| FC1-G9 cold launch | **PASS — 1.583763s median** | Same-session ABAB N=10 vs `d0dfc38`; paired median -0.002991s. Candidate median below 1.700s and 1.650s trigger. |
+| FC1-G10 fresh install | **PASS** | Candidate fresh launch: Ayurveda v5 stamp verified with zero inserts/updates; cache version 5 / DB 14,484 skipped rebuild. Subsequent launches report seed already applied and still skip rebuild. Permanent preseed tests pass 4/4. |
+| FC1-G11 determinism | **PASS** | Two complete builds are byte-identical for seed, rules, and concepts; exact SHAs below. |
+| FC1-G12 cross-validation | **TRIAGED — 1,217 findings, non-blocking** | 1,160 WE-8-only vs 57 FC-1-only. Top five causes explain 1,143 (93.9%); exhaustive rows retained below. Neither authority was altered. |
+| FC1-G13 alias coverage | **7/8** | Seven authored aliases cover MP-3c misses; no resolver wiring in FC-1. |
 
-## FC1-G5 explicit must-exclude worklist
+## FC1-G5 — non-contested must-exclude worklist
 
-| # | Concept | Pattern | Status | Catalogue matches | Concept members | Finding |
-|---:|---|---|---|---:|---:|---|
-| 13 | `dairy` | `condensed milk` | **UNRESOLVED** | 0 | 0 | dairy concentrate |
-| 16 | `dairy` | `butter chicken` | **UNRESOLVED** | 0 | 0 | viaIngredient — cream and butter |
-| 25 | `pork` | `pancetta` | **UNRESOLVED** | 0 | 0 | cured pork belly |
-| 28 | `pork` | `gammon` | **UNRESOLVED** | 0 | 0 | cured pork leg |
-| 37 | `fish` | `caesar` | **FAIL** | 9 | 0 | viaIngredient — anchovy in dressing |
-| 41 | `shellfish` | `prawn` | **UNRESOLVED** | 0 | 0 | crustacean |
-| 48 | `gluten` | `seitan` | **UNRESOLVED** | 0 | 0 | pure wheat gluten; name contains no gluten keyword |
-| 51 | `gluten` | `farro` | **UNRESOLVED** | 0 | 0 | wheat species |
-| 54 | `gluten` | `panko` | **UNRESOLVED** | 0 | 0 | wheat breadcrumb |
-| 55 | `gluten` | `orzo` | **UNRESOLVED** | 0 | 0 | wheat pasta shaped as rice |
-| 56 | `gluten` | `udon` | **UNRESOLVED** | 0 | 0 | wheat noodle |
-| 61 | `egg` | `aioli` | **UNRESOLVED** | 0 | 0 | viaIngredient — egg emulsion |
-| 70 | `tree_nuts` | `marzipan` | **UNRESOLVED** | 0 | 0 | viaIngredient — almond paste |
-| 77 | `alcohol` | `mirin` | **UNRESOLVED** | 0 | 0 | rice wine; planner currently bans by keyword list only |
-| 78 | `alcohol` | `sherry` | **UNRESOLVED** | 0 | 0 | fortified wine |
+There are **no resolved non-contested failures**. The 14 unresolved cases do not occur in the 14,484-name catalogue:
 
-`caesar` is the only resolved false negative: nine plain USDA catalogue names match the substring, but no matching recipe owner/IngredientLink fixture exists and none is a `fish` member. The other 14 patterns do not occur in this 14,484-row catalogue and are recorded as coverage gaps, not silently skipped tests.
+| # | Concept | Pattern | Why |
+|---:|---|---|---|
+| 13 | `dairy` | `condensed milk` | dairy concentrate |
+| 16 | `dairy` | `butter chicken` | viaIngredient — cream and butter |
+| 25 | `pork` | `pancetta` | cured pork belly |
+| 28 | `pork` | `gammon` | cured pork leg |
+| 41 | `shellfish` | `prawn` | crustacean |
+| 48 | `gluten` | `seitan` | pure wheat gluten; name contains no gluten keyword |
+| 51 | `gluten` | `farro` | wheat species |
+| 54 | `gluten` | `panko` | wheat breadcrumb |
+| 55 | `gluten` | `orzo` | wheat pasta shaped as rice |
+| 56 | `gluten` | `udon` | wheat noodle |
+| 61 | `egg` | `aioli` | viaIngredient — egg emulsion |
+| 70 | `tree_nuts` | `marzipan` | viaIngredient — almond paste |
+| 77 | `alcohol` | `mirin` | rice wine; planner currently bans by keyword list only |
+| 78 | `alcohol` | `sherry` | fortified wine |
 
-Resolved `caesar` catalogue rows:
+The director-corrected `chestnut` case is non-contested must-exclude #80: 30 names resolve, 10 are current members, and the case passes. `water chestnut` remains a must-not case and has zero tree-nut members.
 
-- `1345` — Chicken or turkey caesar garden salad, chicken and/or turkey, lettuce, tomato, cheese, no dressing
-- `1346` — Chicken or turkey, breaded, fried, caesar garden salad, chicken and/or turkey, lettuce, tomatoes, cheese, no dressing
-- `4006` — Caesar salad, with romaine, no dressing
-- `4589` — Caesar dressing
-- `4609` — Caesar dressing, light
-- `4620` — Caesar dressing, fat free
-- `6513` — Salad dressing, caesar dressing, regular
-- `7264` — Salad dressing, caesar, low calorie
-- `8255` — Salad dressing, caesar, fat-free
+## FC1-G6 — non-contested must-not result
 
-## FC1-G6 blocking must-not findings
+All 26 resolved cases pass with zero concept-member intersections. Eight patterns are absent and remain honest coverage gaps:
 
-### `tree_nuts` / `peanut`
+| # | Concept | Pattern |
+|---:|---|---|
+| 3 | `pork` | `hamachi` |
+| 9 | `dairy` | `milk thistle` |
+| 11 | `dairy` | `apple butter` |
+| 13 | `dairy` | `shea butter` |
+| 29 | `soy` | `soy free` |
+| 31 | `meat` | `nutmeat` |
+| 32 | `dairy` | `dairy free` |
+| 37 | `shellfish` | `sea vegetable` |
 
-Golden #19: legume; must be its own concept, not a tree nut Matching catalogue rows: 148; incorrectly excluded members: 13.
+- `peanut butter`: 71 catalogue matches, 0 `tree_nuts` members — **PASS**.
+- `water chestnut`: 3 catalogue matches, 0 `tree_nuts` members — **PASS**.
 
-- `2015` — Mixed nuts, with peanuts, salted — FC-1 reason: `name:mixed nuts`
-- `2016` — Mixed nuts, with peanuts, lightly salted — FC-1 reason: `name:mixed nuts`
-- `2017` — Mixed nuts, with peanuts, unsalted — FC-1 reason: `name:mixed nuts`
-- `2018` — Mixed nuts, without peanuts, salted — FC-1 reason: `name:mixed nuts`
-- `2019` — Mixed nuts, without peanuts, unsalted — FC-1 reason: `name:mixed nuts`
-- `6129` — Nuts, mixed nuts, dry roasted, with peanuts, with salt added — FC-1 reason: `name:mixed nuts`
-- `6130` — Nuts, mixed nuts, oil roasted, with peanuts, with salt added — FC-1 reason: `name:mixed nuts`
-- `6878` — Nuts, mixed nuts, oil roasted, without peanuts, with salt added — FC-1 reason: `name:mixed nuts`
-- `6882` — Nuts, mixed nuts, oil roasted, with peanuts, lightly salted — FC-1 reason: `name:mixed nuts`
-- `6883` — Nuts, mixed nuts, oil roasted, without peanuts, lightly salted — FC-1 reason: `name:mixed nuts`
-- `7902` — Nuts, mixed nuts, dry roasted, with peanuts, without salt added — FC-1 reason: `name:mixed nuts`
-- `7903` — Nuts, mixed nuts, oil roasted, with peanuts, without salt added — FC-1 reason: `name:mixed nuts`
-- `7904` — Nuts, mixed nuts, oil roasted, without peanuts, without salt added — FC-1 reason: `name:mixed nuts`
+## Contested — awaiting ruling
 
-### `tree_nuts` / `chestnut`
+These eight rows are executed and reported but excluded from G5/G6 arithmetic by director policy.
 
-Golden #20: true tree nut but low allergenicity; founder decision Matching catalogue rows: 30; incorrectly excluded members: 10.
+| Corpus | # | Concept | Pattern | Current outcome | Matches / members | What the ontology currently does |
+|---|---:|---|---|---|---:|---|
+| mustExclude | 26 | `pork` | `salami` | **PASS** | 18 / 18 | excludes at least one matched row |
+| mustExclude | 27 | `pork` | `pepperoni` | **PASS** | 32 / 32 | excludes at least one matched row |
+| mustExclude | 37 | `fish` | `caesar` | **FAIL** | 9 / 0 | does not exclude matched rows |
+| mustExclude | 45 | `shellfish` | `scallop` | **PASS** | 26 / 7 | excludes at least one matched row |
+| mustExclude | 79 | `alcohol` | `vanilla extract` | **PASS** | 3 / 2 | excludes at least one matched row |
+| mustNotExclude | 16 | `tree_nuts` | `coconut` | **PASS** | 119 / 0 | does not exclude matched rows |
+| mustNotExclude | 25 | `fish` | `fishcake, vegetarian` | **UNRESOLVED** | 0 / 0 | no catalogue fixture |
+| mustNotExclude | 36 | `poultry` | `chicken of the woods` | **UNRESOLVED** | 0 / 0 | no catalogue fixture |
 
-- `1001419` — Vrat Chestnut Cardamom Halwa — FC-1 reason: `name:chestnut`
-- `1001420` — Vrat Chestnut Fennel Crepes — FC-1 reason: `ingredient:27, name:chestnut`
-- `1001421` — Vrat Chestnut Milk Pudding — FC-1 reason: `ingredient:7570, name:chestnut`
-- `1001422` — Vrat Chestnut Oat-Milk Porridge — FC-1 reason: `name:chestnut`
-- `1001423` — Vrat Chestnut Potato Cakes — FC-1 reason: `name:chestnut`
-- `1001424` — Vrat Chestnut Potato Flatbread — FC-1 reason: `name:chestnut`
-- `1001425` — Vrat Chestnut Pumpkin Dumplings — FC-1 reason: `name:chestnut`
-- `1001426` — Vrat Chestnut Pumpkin Pancakes — FC-1 reason: `ingredient:27, name:chestnut`
-- `1001427` — Vrat Chestnut Sweet Potato Roti — FC-1 reason: `name:chestnut`
-- `1001439` — Vrat Steamed Chestnut Cakes — FC-1 reason: `name:chestnut`
+Notable current behavior: `scallop` also catches summer squash rows because they contain the exact token; `vanilla extract` includes an imitation “no alcohol” row because there is no authored veto for that phrase. Both remain non-blocking pending ruling. `caesar` has nine plain USDA matches but no recipe IngredientLink fixture carrying anchovy.
 
-The 10 unresolved must-not patterns are `hamachi`, `milk thistle`, `apple butter`, `shea butter`, `fishcake, vegetarian`, `soy free`, `nutmeat`, `dairy free`, `chicken of the woods`, and `sea vegetable`. They match no catalogue row and therefore do not demonstrate either safety or failure in this corpus.
-
-## Full 117-case corpus, grouped by concept
+## Full 117-case corpus grouped by concept
 
 ### alcohol
 
-| Corpus | # | Pattern | Status | Matches | Members | viaIngredient | Contested |
-|---|---:|---|---|---:|---:|---|---|
-| mustExclude | 77 | `mirin` | UNRESOLVED | 0 | 0 | no | no |
-| mustExclude | 78 | `sherry` | UNRESOLVED | 0 | 0 | no | no |
-| mustExclude | 79 | `vanilla extract` | PASS | 3 | 2 | no | yes |
-| mustNotExclude | 34 | `non-alcoholic` | PASS | 3 | 0 | no | no |
-| mustNotExclude | 35 | `root beer` | PASS | 3 | 0 | no | no |
-| mustNotExclude | 36 | `ginger ale` | PASS | 4 | 0 | no | no |
+| Corpus | # | Pattern | Contested | Status | Catalogue matches | Members |
+|---|---:|---|---|---|---:|---:|
+| mustExclude | 77 | `mirin` | no | UNRESOLVED | 0 | 0 |
+| mustExclude | 78 | `sherry` | no | UNRESOLVED | 0 | 0 |
+| mustExclude | 79 | `vanilla extract` | yes | PASS | 3 | 2 |
+| mustNotExclude | 33 | `non-alcoholic` | no | PASS | 3 | 0 |
+| mustNotExclude | 34 | `root beer` | no | PASS | 3 | 0 |
+| mustNotExclude | 35 | `ginger ale` | no | PASS | 4 | 0 |
 
 ### corn
 
-| Corpus | # | Pattern | Status | Matches | Members | viaIngredient | Contested |
-|---|---:|---|---|---:|---:|---|---|
-| mustNotExclude | 21 | `corned beef` | PASS | 14 | 0 | no | no |
+| Corpus | # | Pattern | Contested | Status | Catalogue matches | Members |
+|---|---:|---|---|---|---:|---:|
+| mustNotExclude | 20 | `corned beef` | no | PASS | 14 | 0 |
 
 ### dairy
 
-| Corpus | # | Pattern | Status | Matches | Members | viaIngredient | Contested |
-|---|---:|---|---|---:|---:|---|---|
-| mustExclude | 1 | `paneer` | PASS | 28 | 28 | no | no |
-| mustExclude | 2 | `ghee` | PASS | 11 | 11 | no | no |
-| mustExclude | 3 | `butter,` | PASS | 67 | 26 | no | no |
-| mustExclude | 4 | `whey` | PASS | 9 | 9 | no | no |
-| mustExclude | 5 | `casein` | PASS | 1 | 1 | no | no |
-| mustExclude | 6 | `kefir` | PASS | 1 | 1 | no | no |
-| mustExclude | 7 | `buttermilk` | PASS | 27 | 23 | no | no |
-| mustExclude | 8 | `ricotta` | PASS | 6 | 6 | no | no |
-| mustExclude | 9 | `mozzarella` | PASS | 15 | 15 | no | no |
-| mustExclude | 10 | `cheddar` | PASS | 21 | 21 | no | no |
-| mustExclude | 11 | `custard` | PASS | 22 | 21 | no | no |
-| mustExclude | 12 | `ice cream` | PASS | 79 | 64 | no | no |
-| mustExclude | 13 | `condensed milk` | UNRESOLVED | 0 | 0 | no | no |
-| mustExclude | 14 | `curd` | PASS | 15 | 13 | no | no |
-| mustExclude | 15 | `palak paneer` | PASS | 3 | 3 | yes | no |
-| mustExclude | 16 | `butter chicken` | UNRESOLVED | 0 | 0 | yes | no |
-| mustExclude | 17 | `raita` | PASS | 13 | 13 | yes | no |
-| mustExclude | 18 | `lassi` | PASS | 22 | 5 | yes | no |
-| mustExclude | 19 | `kheer` | PASS | 11 | 11 | yes | no |
-| mustNotExclude | 4 | `cream of tartar` | PASS | 1 | 0 | no | no |
-| mustNotExclude | 5 | `coconut cream` | PASS | 11 | 0 | no | no |
-| mustNotExclude | 6 | `coconut milk` | PASS | 10 | 0 | no | no |
-| mustNotExclude | 7 | `almond milk` | PASS | 9 | 0 | no | no |
-| mustNotExclude | 8 | `soy milk` | PASS | 3 | 0 | no | no |
-| mustNotExclude | 9 | `milk thistle` | UNRESOLVED | 0 | 0 | no | no |
-| mustNotExclude | 10 | `peanut butter` | PASS | 71 | 0 | no | no |
-| mustNotExclude | 11 | `apple butter` | UNRESOLVED | 0 | 0 | no | no |
-| mustNotExclude | 12 | `cocoa butter` | PASS | 2 | 0 | no | no |
-| mustNotExclude | 13 | `shea butter` | UNRESOLVED | 0 | 0 | no | no |
-| mustNotExclude | 33 | `dairy free` | UNRESOLVED | 0 | 0 | no | no |
+| Corpus | # | Pattern | Contested | Status | Catalogue matches | Members |
+|---|---:|---|---|---|---:|---:|
+| mustExclude | 1 | `paneer` | no | PASS | 28 | 28 |
+| mustExclude | 2 | `ghee` | no | PASS | 11 | 11 |
+| mustExclude | 3 | `butter,` | no | PASS | 67 | 26 |
+| mustExclude | 4 | `whey` | no | PASS | 9 | 9 |
+| mustExclude | 5 | `casein` | no | PASS | 1 | 1 |
+| mustExclude | 6 | `kefir` | no | PASS | 1 | 1 |
+| mustExclude | 7 | `buttermilk` | no | PASS | 27 | 23 |
+| mustExclude | 8 | `ricotta` | no | PASS | 6 | 6 |
+| mustExclude | 9 | `mozzarella` | no | PASS | 15 | 15 |
+| mustExclude | 10 | `cheddar` | no | PASS | 21 | 21 |
+| mustExclude | 11 | `custard` | no | PASS | 22 | 21 |
+| mustExclude | 12 | `ice cream` | no | PASS | 79 | 64 |
+| mustExclude | 13 | `condensed milk` | no | UNRESOLVED | 0 | 0 |
+| mustExclude | 14 | `curd` | no | PASS | 15 | 13 |
+| mustExclude | 15 | `palak paneer` | no | PASS | 3 | 3 |
+| mustExclude | 16 | `butter chicken` | no | UNRESOLVED | 0 | 0 |
+| mustExclude | 17 | `raita` | no | PASS | 13 | 13 |
+| mustExclude | 18 | `lassi` | no | PASS | 22 | 5 |
+| mustExclude | 19 | `kheer` | no | PASS | 11 | 11 |
+| mustNotExclude | 4 | `cream of tartar` | no | PASS | 1 | 0 |
+| mustNotExclude | 5 | `coconut cream` | no | PASS | 11 | 0 |
+| mustNotExclude | 6 | `coconut milk` | no | PASS | 10 | 0 |
+| mustNotExclude | 7 | `almond milk` | no | PASS | 9 | 0 |
+| mustNotExclude | 8 | `soy milk` | no | PASS | 3 | 0 |
+| mustNotExclude | 9 | `milk thistle` | no | UNRESOLVED | 0 | 0 |
+| mustNotExclude | 10 | `peanut butter` | no | PASS | 71 | 0 |
+| mustNotExclude | 11 | `apple butter` | no | UNRESOLVED | 0 | 0 |
+| mustNotExclude | 12 | `cocoa butter` | no | PASS | 2 | 0 |
+| mustNotExclude | 13 | `shea butter` | no | UNRESOLVED | 0 | 0 |
+| mustNotExclude | 32 | `dairy free` | no | UNRESOLVED | 0 | 0 |
 
 ### egg
 
-| Corpus | # | Pattern | Status | Matches | Members | viaIngredient | Contested |
-|---|---:|---|---|---:|---:|---|---|
-| mustExclude | 59 | `mayonnaise` | PASS | 57 | 57 | yes | no |
-| mustExclude | 60 | `meringue` | PASS | 5 | 4 | yes | no |
-| mustExclude | 61 | `aioli` | UNRESOLVED | 0 | 0 | yes | no |
-| mustExclude | 62 | `hollandaise` | PASS | 1 | 1 | yes | no |
-| mustNotExclude | 1 | `eggplant` | PASS | 36 | 0 | no | no |
+| Corpus | # | Pattern | Contested | Status | Catalogue matches | Members |
+|---|---:|---|---|---|---:|---:|
+| mustExclude | 59 | `mayonnaise` | no | PASS | 57 | 57 |
+| mustExclude | 60 | `meringue` | no | PASS | 5 | 4 |
+| mustExclude | 61 | `aioli` | no | UNRESOLVED | 0 | 0 |
+| mustExclude | 62 | `hollandaise` | no | PASS | 1 | 1 |
+| mustNotExclude | 1 | `eggplant` | no | PASS | 36 | 0 |
 
 ### fish
 
-| Corpus | # | Pattern | Status | Matches | Members | viaIngredient | Contested |
-|---|---:|---|---|---:|---:|---|---|
-| mustExclude | 35 | `anchovy` | PASS | 4 | 4 | no | no |
-| mustExclude | 36 | `surimi` | PASS | 4 | 4 | no | no |
-| mustExclude | 37 | `caesar` | FAIL | 9 | 0 | yes | yes |
-| mustExclude | 38 | `worcestershire` | PASS | 2 | 2 | yes | no |
-| mustExclude | 39 | `fish sauce` | PASS | 1 | 1 | no | no |
-| mustNotExclude | 25 | `shellfish` | PASS | 7 | 0 | no | no |
-| mustNotExclude | 26 | `fishcake, vegetarian` | UNRESOLVED | 0 | 0 | no | yes |
+| Corpus | # | Pattern | Contested | Status | Catalogue matches | Members |
+|---|---:|---|---|---|---:|---:|
+| mustExclude | 35 | `anchovy` | no | PASS | 4 | 4 |
+| mustExclude | 36 | `surimi` | no | PASS | 4 | 4 |
+| mustExclude | 37 | `caesar` | yes | FAIL | 9 | 0 |
+| mustExclude | 38 | `worcestershire` | no | PASS | 2 | 2 |
+| mustExclude | 39 | `fish sauce` | no | PASS | 1 | 1 |
+| mustNotExclude | 24 | `shellfish` | no | PASS | 7 | 0 |
+| mustNotExclude | 25 | `fishcake, vegetarian` | yes | UNRESOLVED | 0 | 0 |
 
 ### gluten
 
-| Corpus | # | Pattern | Status | Matches | Members | viaIngredient | Contested |
-|---|---:|---|---|---:|---:|---|---|
-| mustExclude | 48 | `seitan` | UNRESOLVED | 0 | 0 | no | no |
-| mustExclude | 49 | `couscous` | PASS | 4 | 4 | no | no |
-| mustExclude | 50 | `bulgur` | PASS | 6 | 6 | no | no |
-| mustExclude | 51 | `farro` | UNRESOLVED | 0 | 0 | no | no |
-| mustExclude | 52 | `spelt` | PASS | 2 | 2 | no | no |
-| mustExclude | 53 | `semolina` | PASS | 14 | 14 | no | no |
-| mustExclude | 54 | `panko` | UNRESOLVED | 0 | 0 | no | no |
-| mustExclude | 55 | `orzo` | UNRESOLVED | 0 | 0 | no | no |
-| mustExclude | 56 | `udon` | UNRESOLVED | 0 | 0 | no | no |
-| mustExclude | 57 | `malt` | PASS | 20 | 12 | no | no |
-| mustExclude | 58 | `matzo` | PASS | 7 | 7 | no | no |
-| mustNotExclude | 27 | `buckwheat` | PASS | 36 | 0 | no | no |
-| mustNotExclude | 28 | `gluten free` | PASS | 19 | 0 | no | no |
-| mustNotExclude | 29 | `rice flour` | PASS | 13 | 0 | no | no |
+| Corpus | # | Pattern | Contested | Status | Catalogue matches | Members |
+|---|---:|---|---|---|---:|---:|
+| mustExclude | 48 | `seitan` | no | UNRESOLVED | 0 | 0 |
+| mustExclude | 49 | `couscous` | no | PASS | 4 | 4 |
+| mustExclude | 50 | `bulgur` | no | PASS | 6 | 6 |
+| mustExclude | 51 | `farro` | no | UNRESOLVED | 0 | 0 |
+| mustExclude | 52 | `spelt` | no | PASS | 2 | 2 |
+| mustExclude | 53 | `semolina` | no | PASS | 14 | 14 |
+| mustExclude | 54 | `panko` | no | UNRESOLVED | 0 | 0 |
+| mustExclude | 55 | `orzo` | no | UNRESOLVED | 0 | 0 |
+| mustExclude | 56 | `udon` | no | UNRESOLVED | 0 | 0 |
+| mustExclude | 57 | `malt` | no | PASS | 20 | 12 |
+| mustExclude | 58 | `matzo` | no | PASS | 7 | 7 |
+| mustNotExclude | 26 | `buckwheat` | no | PASS | 36 | 0 |
+| mustNotExclude | 27 | `gluten free` | no | PASS | 19 | 0 |
+| mustNotExclude | 28 | `rice flour` | no | PASS | 13 | 0 |
 
 ### grape
 
-| Corpus | # | Pattern | Status | Matches | Members | viaIngredient | Contested |
-|---|---:|---|---|---:|---:|---|---|
-| mustNotExclude | 23 | `grapefruit` | PASS | 25 | 0 | no | no |
+| Corpus | # | Pattern | Contested | Status | Catalogue matches | Members |
+|---|---:|---|---|---|---:|---:|
+| mustNotExclude | 22 | `grapefruit` | no | PASS | 25 | 0 |
 
 ### lamb
 
-| Corpus | # | Pattern | Status | Matches | Members | viaIngredient | Contested |
-|---|---:|---|---|---:|---:|---|---|
-| mustNotExclude | 22 | `lambsquarters` | PASS | 5 | 0 | no | no |
+| Corpus | # | Pattern | Contested | Status | Catalogue matches | Members |
+|---|---:|---|---|---|---:|---:|
+| mustNotExclude | 21 | `lambsquarters` | no | PASS | 5 | 0 |
 
 ### meat
 
-| Corpus | # | Pattern | Status | Matches | Members | viaIngredient | Contested |
-|---|---:|---|---|---:|---:|---|---|
-| mustNotExclude | 31 | `meatless` | PASS | 39 | 0 | no | no |
-| mustNotExclude | 32 | `nutmeat` | UNRESOLVED | 0 | 0 | no | no |
+| Corpus | # | Pattern | Contested | Status | Catalogue matches | Members |
+|---|---:|---|---|---|---:|---:|
+| mustNotExclude | 30 | `meatless` | no | PASS | 39 | 0 |
+| mustNotExclude | 31 | `nutmeat` | no | UNRESOLVED | 0 | 0 |
 
 ### pork
 
-| Corpus | # | Pattern | Status | Matches | Members | viaIngredient | Contested |
-|---|---:|---|---|---:|---:|---|---|
-| mustExclude | 20 | `bacon` | PASS | 58 | 54 | no | no |
-| mustExclude | 21 | `ham,` | PASS | 60 | 59 | no | no |
-| mustExclude | 22 | `lard` | PASS | 27 | 10 | no | no |
-| mustExclude | 23 | `chorizo` | PASS | 2 | 2 | no | no |
-| mustExclude | 24 | `prosciutto` | PASS | 1 | 1 | no | no |
-| mustExclude | 25 | `pancetta` | UNRESOLVED | 0 | 0 | no | no |
-| mustExclude | 26 | `salami` | PASS | 18 | 18 | no | yes |
-| mustExclude | 27 | `pepperoni` | PASS | 32 | 32 | no | yes |
-| mustExclude | 28 | `gammon` | UNRESOLVED | 0 | 0 | no | no |
-| mustNotExclude | 2 | `hamburger` | PASS | 41 | 0 | no | no |
-| mustNotExclude | 3 | `hamachi` | UNRESOLVED | 0 | 0 | no | no |
+| Corpus | # | Pattern | Contested | Status | Catalogue matches | Members |
+|---|---:|---|---|---|---:|---:|
+| mustExclude | 20 | `bacon` | no | PASS | 58 | 54 |
+| mustExclude | 21 | `ham,` | no | PASS | 60 | 59 |
+| mustExclude | 22 | `lard` | no | PASS | 27 | 10 |
+| mustExclude | 23 | `chorizo` | no | PASS | 2 | 2 |
+| mustExclude | 24 | `prosciutto` | no | PASS | 1 | 1 |
+| mustExclude | 25 | `pancetta` | no | UNRESOLVED | 0 | 0 |
+| mustExclude | 26 | `salami` | yes | PASS | 18 | 18 |
+| mustExclude | 27 | `pepperoni` | yes | PASS | 32 | 32 |
+| mustExclude | 28 | `gammon` | no | UNRESOLVED | 0 | 0 |
+| mustNotExclude | 2 | `hamburger` | no | PASS | 41 | 0 |
+| mustNotExclude | 3 | `hamachi` | no | UNRESOLVED | 0 | 0 |
 
 ### poultry
 
-| Corpus | # | Pattern | Status | Matches | Members | viaIngredient | Contested |
-|---|---:|---|---|---:|---:|---|---|
-| mustExclude | 29 | `chicken` | PASS | 730 | 730 | no | no |
-| mustExclude | 30 | `turkey` | PASS | 347 | 347 | no | no |
-| mustExclude | 31 | `duck` | PASS | 21 | 21 | no | no |
-| mustExclude | 32 | `goose` | PASS | 16 | 12 | no | no |
-| mustExclude | 33 | `broilers or fryers` | PASS | 117 | 117 | no | no |
-| mustExclude | 34 | `capon` | PASS | 6 | 6 | no | no |
-| mustNotExclude | 37 | `chicken of the woods` | UNRESOLVED | 0 | 0 | no | yes |
+| Corpus | # | Pattern | Contested | Status | Catalogue matches | Members |
+|---|---:|---|---|---|---:|---:|
+| mustExclude | 29 | `chicken` | no | PASS | 730 | 730 |
+| mustExclude | 30 | `turkey` | no | PASS | 347 | 347 |
+| mustExclude | 31 | `duck` | no | PASS | 21 | 21 |
+| mustExclude | 32 | `goose` | no | PASS | 16 | 12 |
+| mustExclude | 33 | `broilers or fryers` | no | PASS | 117 | 117 |
+| mustExclude | 34 | `capon` | no | PASS | 6 | 6 |
+| mustNotExclude | 36 | `chicken of the woods` | yes | UNRESOLVED | 0 | 0 |
 
 ### shellfish
 
-| Corpus | # | Pattern | Status | Matches | Members | viaIngredient | Contested |
-|---|---:|---|---|---:|---:|---|---|
-| mustExclude | 40 | `shrimp` | PASS | 67 | 67 | no | no |
-| mustExclude | 41 | `prawn` | UNRESOLVED | 0 | 0 | no | no |
-| mustExclude | 42 | `crab` | PASS | 26 | 24 | no | no |
-| mustExclude | 43 | `lobster` | PASS | 11 | 11 | no | no |
-| mustExclude | 44 | `crayfish` | PASS | 6 | 6 | no | no |
-| mustExclude | 45 | `scallop` | PASS | 26 | 7 | no | yes |
-| mustExclude | 46 | `oyster` | PASS | 34 | 23 | no | no |
-| mustExclude | 47 | `mussel` | PASS | 3 | 2 | no | no |
-| mustNotExclude | 38 | `sea vegetable` | UNRESOLVED | 0 | 0 | no | no |
+| Corpus | # | Pattern | Contested | Status | Catalogue matches | Members |
+|---|---:|---|---|---|---:|---:|
+| mustExclude | 40 | `shrimp` | no | PASS | 67 | 67 |
+| mustExclude | 41 | `prawn` | no | UNRESOLVED | 0 | 0 |
+| mustExclude | 42 | `crab` | no | PASS | 26 | 24 |
+| mustExclude | 43 | `lobster` | no | PASS | 11 | 11 |
+| mustExclude | 44 | `crayfish` | no | PASS | 6 | 6 |
+| mustExclude | 45 | `scallop` | yes | PASS | 26 | 7 |
+| mustExclude | 46 | `oyster` | no | PASS | 34 | 23 |
+| mustExclude | 47 | `mussel` | no | PASS | 3 | 2 |
+| mustNotExclude | 37 | `sea vegetable` | no | UNRESOLVED | 0 | 0 |
 
 ### soy
 
-| Corpus | # | Pattern | Status | Matches | Members | viaIngredient | Contested |
-|---|---:|---|---|---:|---:|---|---|
-| mustExclude | 72 | `tofu` | PASS | 80 | 80 | no | no |
-| mustExclude | 73 | `tempeh` | PASS | 16 | 16 | no | no |
-| mustExclude | 74 | `miso` | PASS | 5 | 4 | no | no |
-| mustExclude | 75 | `edamame` | PASS | 3 | 3 | no | no |
-| mustExclude | 76 | `tamari` | PASS | 18 | 1 | no | no |
-| mustNotExclude | 30 | `soy free` | UNRESOLVED | 0 | 0 | no | no |
+| Corpus | # | Pattern | Contested | Status | Catalogue matches | Members |
+|---|---:|---|---|---|---:|---:|
+| mustExclude | 72 | `tofu` | no | PASS | 80 | 80 |
+| mustExclude | 73 | `tempeh` | no | PASS | 16 | 16 |
+| mustExclude | 74 | `miso` | no | PASS | 5 | 4 |
+| mustExclude | 75 | `edamame` | no | PASS | 3 | 3 |
+| mustExclude | 76 | `tamari` | no | PASS | 18 | 1 |
+| mustNotExclude | 29 | `soy free` | no | UNRESOLVED | 0 | 0 |
 
 ### tree_nuts
 
-| Corpus | # | Pattern | Status | Matches | Members | viaIngredient | Contested |
-|---|---:|---|---|---:|---:|---|---|
-| mustExclude | 63 | `almond` | PASS | 101 | 82 | no | no |
-| mustExclude | 64 | `cashew` | PASS | 18 | 12 | no | no |
-| mustExclude | 65 | `walnut` | PASS | 26 | 19 | no | no |
-| mustExclude | 66 | `pecan` | PASS | 14 | 4 | no | no |
-| mustExclude | 67 | `pistachio` | PASS | 15 | 14 | no | no |
-| mustExclude | 68 | `hazelnut` | PASS | 8 | 3 | no | no |
-| mustExclude | 69 | `macadamia` | PASS | 6 | 6 | no | no |
-| mustExclude | 70 | `marzipan` | UNRESOLVED | 0 | 0 | yes | no |
-| mustExclude | 71 | `praline` | PASS | 1 | 1 | yes | no |
-| mustNotExclude | 14 | `nutmeg` | PASS | 9 | 0 | no | no |
-| mustNotExclude | 15 | `butternut` | PASS | 10 | 0 | no | no |
-| mustNotExclude | 16 | `coconut` | PASS | 119 | 0 | no | yes |
-| mustNotExclude | 17 | `water chestnut` | PASS | 3 | 0 | no | no |
-| mustNotExclude | 18 | `doughnut` | PASS | 22 | 0 | no | no |
-| mustNotExclude | 19 | `peanut` | FAIL | 148 | 13 | no | yes |
-| mustNotExclude | 20 | `chestnut` | FAIL | 30 | 10 | no | yes |
-| mustNotExclude | 24 | `pineapple` | PASS | 55 | 0 | no | no |
+| Corpus | # | Pattern | Contested | Status | Catalogue matches | Members |
+|---|---:|---|---|---|---:|---:|
+| mustExclude | 63 | `almond` | no | PASS | 101 | 82 |
+| mustExclude | 64 | `cashew` | no | PASS | 18 | 12 |
+| mustExclude | 65 | `walnut` | no | PASS | 26 | 19 |
+| mustExclude | 66 | `pecan` | no | PASS | 14 | 4 |
+| mustExclude | 67 | `pistachio` | no | PASS | 15 | 14 |
+| mustExclude | 68 | `hazelnut` | no | PASS | 8 | 3 |
+| mustExclude | 69 | `macadamia` | no | PASS | 6 | 6 |
+| mustExclude | 70 | `marzipan` | no | UNRESOLVED | 0 | 0 |
+| mustExclude | 71 | `praline` | no | PASS | 1 | 1 |
+| mustExclude | 80 | `chestnut` | no | PASS | 30 | 10 |
+| mustNotExclude | 14 | `nutmeg` | no | PASS | 9 | 0 |
+| mustNotExclude | 15 | `butternut` | no | PASS | 10 | 0 |
+| mustNotExclude | 16 | `coconut` | yes | PASS | 119 | 0 |
+| mustNotExclude | 17 | `water chestnut` | no | PASS | 3 | 0 |
+| mustNotExclude | 18 | `doughnut` | no | PASS | 22 | 0 |
+| mustNotExclude | 19 | `peanut butter` | no | PASS | 71 | 0 |
+| mustNotExclude | 23 | `pineapple` | no | PASS | 55 | 0 |
 
-## FC1-G7 ingredient propagation corpus
+## FC1-G7 — IngredientLink propagation
 
-| # | Concept | Pattern | Status | Catalogue matches | Recipe matches | Propagated recipe matches | Direct recipe matches |
-|---:|---|---|---|---:|---:|---:|---:|
-| 15 | `dairy` | `palak paneer` | PASS | 3 | 2 | 2 | 2 |
-| 16 | `dairy` | `butter chicken` | UNRESOLVED | 0 | 0 | 0 | 0 |
-| 17 | `dairy` | `raita` | PASS | 13 | 13 | 13 | 0 |
-| 18 | `dairy` | `lassi` | PASS | 22 | 4 | 2 | 0 |
-| 19 | `dairy` | `kheer` | PASS | 11 | 11 | 11 | 0 |
-| 37 | `fish` | `caesar` | FAIL | 9 | 0 | 0 | 0 |
-| 38 | `fish` | `worcestershire` | FAIL | 2 | 0 | 0 | 0 |
-| 59 | `egg` | `mayonnaise` | FAIL | 57 | 0 | 0 | 0 |
-| 60 | `egg` | `meringue` | FAIL | 5 | 0 | 0 | 0 |
-| 61 | `egg` | `aioli` | UNRESOLVED | 0 | 0 | 0 | 0 |
-| 62 | `egg` | `hollandaise` | FAIL | 1 | 0 | 0 | 0 |
-| 70 | `tree_nuts` | `marzipan` | UNRESOLVED | 0 | 0 | 0 | 0 |
-| 71 | `tree_nuts` | `praline` | FAIL | 1 | 0 | 0 | 0 |
+| # | Concept | Pattern | Contested | Status | Catalogue | Recipe | Propagated | Direct |
+|---:|---|---|---|---|---:|---:|---:|---:|
+| 15 | `dairy` | `palak paneer` | no | PASS | 3 | 2 | 2 | 2 |
+| 16 | `dairy` | `butter chicken` | no | UNRESOLVED | 0 | 0 | 0 | 0 |
+| 17 | `dairy` | `raita` | no | PASS | 13 | 13 | 13 | 0 |
+| 18 | `dairy` | `lassi` | no | PASS | 22 | 4 | 2 | 0 |
+| 19 | `dairy` | `kheer` | no | PASS | 11 | 11 | 11 | 0 |
+| 37 | `fish` | `caesar` | yes | FAIL | 9 | 0 | 0 | 0 |
+| 38 | `fish` | `worcestershire` | no | FAIL | 2 | 0 | 0 | 0 |
+| 59 | `egg` | `mayonnaise` | no | FAIL | 57 | 0 | 0 | 0 |
+| 60 | `egg` | `meringue` | no | FAIL | 5 | 0 | 0 | 0 |
+| 61 | `egg` | `aioli` | no | UNRESOLVED | 0 | 0 | 0 | 0 |
+| 62 | `egg` | `hollandaise` | no | FAIL | 1 | 0 | 0 | 0 |
+| 70 | `tree_nuts` | `marzipan` | no | UNRESOLVED | 0 | 0 | 0 | 0 |
+| 71 | `tree_nuts` | `praline` | no | FAIL | 1 | 0 | 0 | 0 |
 
-Only `raita` and `kheer` are clean ingredient-only propagation proofs. `palak paneer` is propagated but also directly matched by the ontology phrase `paneer`, contrary to the golden note that it cannot pass by name. `lassi` nominally passes because the golden resolver uses lowercase substring matching and finds `lassi` inside **classic**; its two propagated rows are Classic Mung Kitchari and Classic Mixed Vegetable Sambar, not lassi recipes. Six patterns resolve only to non-recipe USDA rows (`caesar`, `worcestershire`, `mayonnaise`, `meringue`, `hollandaise`, `praline`) and three are absent (`butter chicken`, `aioli`, `marzipan`).
+The build proves propagation structurally across **10,571 IngredientLinks / 1,500 owners**. No link targets a recipe, so nesting is absent; propagation depth used is 1 with guarded cap 16. `raita` and `kheer` are the two clean ingredient-only golden proofs. `palak paneer` is both direct and propagated. `lassi` nominally passes because the golden substring occurs inside “classic”; that is not semantic lassi evidence. Six patterns resolve only to non-recipe USDA rows and three are absent, so the current 13-case fixture set cannot independently demonstrate 13/13 recipe propagation.
 
-IngredientLink audit: 10,571 links across all 1,500 recipe owners. No IngredientLink targets another recipe (`nestedRecipeLinks = 0`), so recipes do not nest in this corpus. Propagation used depth 1; the guarded cap is 16 for future nested data.
+## FC1-G8 — concept membership
 
-## FC1-G8 concept sizes
-
-| Concept | Members | Share of 14,484 |
+| Concept | Members | Share |
 |---|---:|---:|
 | `alcohol` | 113 | 0.780% |
 | `allium` | 106 | 0.732% |
@@ -363,32 +350,92 @@ IngredientLink audit: 10,571 links across all 1,500 recipe owners. No Ingredient
 | `tree_nuts` | 209 | 1.443% |
 | `turkey` | 347 | 2.396% |
 
-`meat` has 3,890 members (26.857%) because it is the hierarchy parent of beef, pork, lamb, game, and poultry, and also receives propagated recipe membership. It is above the 25% review threshold but below the 40% stop threshold. No other concept exceeds 25%.
+`meat` is 26.857% because it rolls up beef, pork, lamb, game, and poultry and also contains the overly broad direct phrase `flesh`; G12 identifies 48 seeded false positives from that phrase alone. It is below the 40% stop threshold. No other concept exceeds 25%.
 
-## FC1-G12 cross-derivation agreement
+## FC1-G9 — same-session cold launch
 
-| Concept | Disagreements |
-|---|---:|
-| `dairy` | 27 |
-| `egg` | 1 |
-| `gluten` | 120 |
-| `soy` | 4 |
-| `sesame` | 0 |
-| `peanut` | 0 |
-| `tree_nuts` | 163 |
-| `fish` | 4 |
-| `shellfish` | 1 |
-| `crustacean` | 0 |
-| `mollusc` | 1 |
-| `meat` | 65 |
-| `honey` | 831 |
-| **Total** | **1,217** |
+### Method
 
-Interpretation matters: this is an equivalence audit, not a silent merge. For allergen concepts, WE-8 reasons are reviewed category/rule/ingredient derivations while FC-1 reasons are ontology name/hierarchy/ingredient matches. For `meat`, the compared WE-8 condition is non-pescatarian/non-vegetarian diet state. For `honey`, the available WE-8 comparison is non-vegan state, which is not logically equivalent to honey: dairy and other animal-derived ingredients also remove Vegan. That asymmetry accounts for much of the 831-row honey disagreement count and must not be “fixed” by copying either side.
+- Retained iOS 26.2 simulator `WiseEating-WE2-Baseline` (`AF937668-3BFE-45E8-B42A-A76B914038DD`), one booted device.
+- A = branch point `d0dfc38`; B = FC-1b working tree. Both were arm64 Debug builds with separate bundle IDs/containers and identical build settings/package checkout.
+- Both temporary bundles contained the same ignored local `food_archive_1024.mp4`; candidate differed only by FC-1 code/resource and normal plist/metallib build deltas. Candidate temporary Debug bundle was 155,723 bytes larger; the shipped FC-1 artifact itself is 29,740 bytes.
+- Both received untimed fresh/warm setup. Xcode, xcodebuild, Swift compiler, Maestro, and CI were absent. Chrome, Claude, and CleanMyMac HealthMonitor were temporarily suspended and restored immediately afterward. Spotlight `mds` was 0.0% CPU. Codex, CoreSimulator, WindowServer, and ordinary services remained.
+- Host `time.monotonic()` was recorded before `simctl launch --console-pty`; terminal marker was `WE6_PROFILE|first-interactive-frame|<uptime>`. Every app was terminated before each launch. Strict order AB repeated ten times.
+- An earlier 10-pair series was discarded before acceptance because the detached A build lacked the ignored local 285 MB video copied into B. After resource equalization, the complete series below was rerun; no values from the discarded series enter this gate.
 
-### Exhaustive disagreement appendix
+### Raw paired series
 
-Every row below includes both boolean results and both recorded derivation reason trails. No row was reconciled.
+| Pair | Branch point A | FC-1b B | B − A |
+|---:|---:|---:|---:|
+| 1 | 1.594845s | 1.696983s | +0.102138s |
+| 2 | 1.587639s | 1.587143s | -0.000496s |
+| 3 | 1.573040s | 1.566910s | -0.006130s |
+| 4 | 1.568204s | 1.580384s | +0.012180s |
+| 5 | 1.589294s | 1.570145s | -0.019148s |
+| 6 | 1.575847s | 1.589024s | +0.013176s |
+| 7 | 1.559565s | 1.567013s | +0.007447s |
+| 8 | 1.580803s | 1.575316s | -0.005487s |
+| 9 | 1.603665s | 1.590745s | -0.012920s |
+| 10 | 1.596816s | 1.588573s | -0.008243s |
+
+Quartiles use the inclusive definition; standard deviation is population standard deviation.
+
+| Series | N | Median | IQR (Q1–Q3) | Min | Max | Stddev |
+|---|---:|---:|---:|---:|---:|---:|
+| Branch point A | 10 | **1.584221s** | 0.019715s (1.573742–1.593457) | 1.559565s | 1.603665s | 0.013201s |
+| FC-1b B | 10 | **1.583763s** | 0.017473s (1.571438–1.588911) | 1.566910s | 1.696983s | 0.036340s |
+| Paired delta | 10 | **-0.002991s** | 0.018711s (-0.007715–+0.010997) | -0.019148s | +0.102138s | 0.032860s |
+
+Candidate median is **1.583763s**, 0.116s below the 1.700s ceiling and 0.066s below the 1.650s paydown trigger. Its maximum sample is 1.696983s. The paired median delta is -0.002991s. Its magnitude is smaller than both A’s 0.019715s IQR and B’s 0.017473s IQR, so the launch difference is not resolvable from this data. All 20 runs emitted the marker and cache “Skipping rebuild” line.
+
+## FC1-G10 — fresh-install no-op
+
+The candidate’s untimed fresh launch emitted:
+
+```text
+✅ Ayurveda v5 preseed stamp verified; no inserts or updates.
+✅ SearchIndexStore: Index is up-to-date (version: 5, DB: 14484). Skipping rebuild.
+```
+
+A subsequent measured launch emitted `Ayurveda seed version already applied, skipping.` and the same cache skip. Permanent tests independently assert 14,484 foods, 2,214 profiles, 2,305 links, 10,571 IngredientLinks, zero missing/stale rows, second-run idempotence, and no fresh rebuild.
+
+## FC1-G11 — deterministic build
+
+| Artifact | Build A SHA-256 | Build B SHA-256 | Result |
+|---|---|---|---|
+| Seed | `886c6a3908b9661ae85223b13cc353326a93ef2ac552129b6a60e529e481872e` | `886c6a3908b9661ae85223b13cc353326a93ef2ac552129b6a60e529e481872e` | byte-identical |
+| Rules | `e92ad29fda7616a011090bd3674f9653d33b9553357c49f43ffd87f850c0364c` | `e92ad29fda7616a011090bd3674f9653d33b9553357c49f43ffd87f850c0364c` | byte-identical |
+| Concept membership | `44716a1990817318c837ef98103e2a3785745a15d27adc6a372a80e4846c6111` | `44716a1990817318c837ef98103e2a3785745a15d27adc6a372a80e4846c6111` | byte-identical |
+
+The concept artifact is **29,740 bytes**, contains 14,484 catalogue IDs, 25 concepts, and 75 aliases, and matches the bundled resource exactly.
+
+## FC1-G12 — cross-derivation triage
+
+### Direction
+
+| Direction | Rows | Interpretation |
+|---|---:|---|
+| WE-8 flag present; FC-1 concept absent | **1,160** | FC-1 coverage/policy gap or a non-equivalent WE-8 comparator. |
+| FC-1 concept present; WE-8 flag absent | **57** | FC-1 false positive/taxonomy mismatch, or a WE-8 omission. |
+| **Total** | **1,217** | Diagnostic only; WE-8 remains production-authoritative for the 2,214 seeded rows. |
+
+### Top five systematic causes
+
+| Rank | Cause | Rows | Direction | Example | Judgment |
+|---:|---|---:|---|---|---|
+| 1 | Non-Vegan used as a non-equivalent honey proxy | **831** | FC-1 only 0 / WE-8 only 831 | `dravya.aged-cheese` | FC-1 is correct for honey membership; WE-8 is also correct that cheese is non-Vegan. The cross-check itself is invalid because “not Vegan” is not equivalent to “contains honey”. |
+| 2 | Coconut policy divergence | **105** | FC-1 only 0 / WE-8 only 105 | `dravya.coconut-fresh` | WE-8 is the safer current production result: it follows the conservative FDA tree-nut allergen classification. FC-1 intentionally vetoes coconut under its still-contested ontology note, so this is a policy divergence awaiting ruling, not random error. |
+| 3 | Oats absent from FC-1 gluten phrases | **101** | FC-1 only 0 / WE-8 only 101 | `dravya.oat-milk` | WE-8 is preferable for the current conservative allergen filter because the app explicitly carries `Cereals containing gluten (oats)`; FC-1 has no oat phrase and under-flags that established vocabulary. Certified gluten-free oats would need explicit product evidence. |
+| 4 | Tree-nut inflection or regional-name coverage gap | **58** | FC-1 only 0 / WE-8 only 58 | `dravya.almond` | WE-8 is correct. The source catalogue says `Nuts, almonds` while FC-1’s token-boundary phrase is singular `almond`; regional forms such as badam/chironji also miss. This is deterministic name/alias coverage, not a WE-8 safety error. |
+| 5 | Generic meat phrase “flesh” matches potato/coconut and propagates | **48** | FC-1 only 48 / WE-8 only 0 | `dravya.potato` | WE-8 is correct. USDA `Potatoes, flesh and skin, raw` matches FC-1’s generic `flesh`, then propagates to 46 vegetarian recipes. The ontology phrase is overbroad for food names. |
+
+These five causes explain **1,143 / 1,217 = 93.9%**. The invalid honey comparator alone explains **831 / 1,217 = 68.3%**, so the headline count is primarily one measurement-design issue, not 1,217 independent ontology defects.
+
+The remaining 74 rows are: dairy 27, residual gluten 19, residual meat 17, fish 4, soy 4, egg 1, mollusc 1, and shellfish 1. They remain in the exhaustive appendix rather than being silently reconciled. Examples include `custard apple` (FC-1 dairy/egg name false positive), `ragi malt` (FC-1 gluten but no WE-8 flag), `oyster mushroom` (FC-1 mollusc/shellfish name false positive), and seafood species that WE-8 treats as non-Vegetarian while the FC-1 `meat` hierarchy intentionally excludes fish/shellfish.
+
+### Exhaustive disagreements
+
+Every row retains both booleans and both reason trails. No production flag or FC-1 membership was changed by this triage.
 
 #### dairy (27)
 
@@ -1637,9 +1684,9 @@ Every row below includes both boolean results and both recorded derivation reaso
 - `recipe.zucchini-dill-sabzi` / `1001498` — Zucchini Dill Sabzi: FC-1=`false` [no-match]; WE-8=`true` [ingredient-intersection:diets; ingredient-maximum:minAgeMonths; ingredient-union:allergens]
 - `recipe.zucchini-mung-kitchari` / `1001499` — Zucchini Mung Kitchari: FC-1=`false` [no-match]; WE-8=`true` [ingredient-intersection:diets; ingredient-maximum:minAgeMonths; ingredient-union:allergens]
 
-## FC1-G13 alias coverage
+## FC1-G13 — alias coverage
 
-| MP-3c unresolved form | Ontology canonical alias | Covered |
+| MP-3c unresolved form | Canonical alias | Covered |
 |---|---|---|
 | `rajma` | `kidney beans` | yes |
 | `dahi` | `yogurt, plain` | yes |
@@ -1650,25 +1697,20 @@ Every row below includes both boolean results and both recorded derivation reaso
 | `nutritional yeast` | `yeast, nutritional` | yes |
 | `steamed broccoli` | — | no |
 
-Seven of eight held-out misses have an authored ontology alias: rajma, dahi, sooji, saunf, dalchini, chicken stock, and nutritional yeast. `steamed broccoli` has no alias and remains a form/catalogue-resolution gap. Per scope, none were wired into MP-3 resolution.
+Result: **7/8**. Rajma, dahi, sooji, saunf, dalchini, chicken stock, and nutritional yeast have authored aliases. `steamed broccoli` remains a form/catalogue gap. FC-1 deliberately does not wire aliases into the MP-3 resolver; that is FC-2.
 
-## Director-artifact contradictions and corpus findings
+## Remaining authored-input findings
 
-1. `tree_nuts.phrases` explicitly includes `chestnut`, but a contested golden requires chestnut not to be excluded. The ontology note also says chestnut is included but contested. The implementation cannot satisfy both authorities without a director ruling.
-2. `tree_nuts.negativePhrases` has singular `peanut`; the corpus rows use plural `peanuts` and also match positive `mixed nuts`. Token-boundary matching correctly does not stem singular to plural. Moreover, “mixed nuts, with peanuts” is genuinely a tree-nut mixture, while “mixed nuts, without peanuts” is also a tree-nut mixture, so the pattern-level must-not case is semantically broader than its stated intent.
-3. The golden corpus references `corn` and `grape`, but neither is one of the 25 ontology concept IDs. Those rows cannot be evaluated as concept-membership gates without an authored concept.
-4. The ontology authority text says every concept and alias carries `qualityState`; all 25 concepts do, but all 75 alias records omit `qualityState` (they do carry provenance). The executor did not invent values.
-5. The viaIngredient note says all 13 cases cannot pass by name. `palak paneer` directly matches `paneer`, and `lassi` collides with the substring in “classic”. Six patterns exist only as plain USDA rows and three do not exist in this catalogue, so 13/13 cannot be demonstrated by the current fixtures.
+1. The ontology authority text says every alias carries `qualityState`, but all 75 alias records carry provenance without `qualityState`. No value was inferred.
+2. Golden cases reference `corn` and `grape`, which are not among the 25 concept IDs. Their current zero-member must-not outcomes are recorded but cannot validate an authored concept.
+3. The viaIngredient note says all 13 cases cannot pass by name, but `palak paneer` directly matches `paneer`, and raw substring resolution finds `lassi` inside “classic”. Six cases resolve only to plain USDA rows and three are absent.
+4. Contested `scallop` and `vanilla extract` reveal current false-positive surfaces (summer scallop squash; no-alcohol imitation vanilla). They remain isolated from blocking gates exactly as directed.
 
-## Stop disposition and required founder/director decisions
+## Scope and handoff
 
-The stopped implementation candidate and evidence are committed to `fc-1-food-concepts` for inspection, but **nothing was pushed**. The report does not update `PROGRESS.md` or the handbook because FC-1 did not complete its blocking safety gate.
-
-To resume FC-1 without executor tuning, the authored inputs need a ruling on:
-
-- whether the contested chestnut case or the positive chestnut ontology phrase is authoritative;
-- whether the `peanut` must-not case is meant to test pure peanut foods, mixed-nut foods without peanuts, or all names containing the token;
-- concrete recipe fixtures/foodIds for the 13 viaIngredient proofs, avoiding raw-substring collisions and plain-USDA-only matches;
-- whether absent/unknown concepts (`corn`, `grape`) remain report-only cases or receive separately authored ontology entries.
-
-No cold-launch number, artifact-size launch delta, final build result, final search result, or fresh-install result is claimed after the stop.
+- Runtime service stays lazy and `Sendable`; no launch path or consumer reads it.
+- WE-8 remains authoritative for seeded allergens/diets; FC-1 only cross-validates those rows.
+- Plain USDA rows receive concept membership without Ayurvedic claims.
+- Planner, SmartFoodSearch, and ranking remain unchanged.
+- Lifecycle and claims boundaries remain unchanged; no medical copy was added.
+- Branch is committed locally only. It is not merged or pushed.

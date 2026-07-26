@@ -140,9 +140,21 @@ delta. It passes the absolute 1.700s launch ceiling and is below the 1.650s
 profiling-paydown trigger. The pre-existing shipping-`main` USDA age issue is
 recorded separately in `ISSUE-MAIN-AGE-GATING.md`. See `REPORT-WE8c.md`.
 
+FC-1 adds a deterministic food-concept substrate without wiring a product
+consumer: 25 director-authored concepts and 75 aliases are matched at build
+time across all 14,484 catalogue rows, persisted in a 29,740-byte artifact, and
+served by a lazy immutable Swift lookup. After the director's rev2 exclusion
+corpus correction, the non-contested must-exclude and must-not-exclude gates
+have zero resolved failures; eight contested cases are reported separately and
+remain founder/vaidya decisions. All 71 tests, 25+2 search goldens, validator,
+Debug/Release builds, fresh no-insert/no-rebuild, and two-build determinism
+pass. Same-session N=10 ABAB launch is 1.584s median versus 1.584s at the branch
+point. G12's 1,217 WE-8 disagreements reduce to five systematic causes covering
+93.9% of rows. See `REPORT-FC1.md`.
+
 ## Next milestones
 
-1. **Engineering track through WE-8c COMPLETE** — D6 (models+seeder), D34 (all 12,601 foods
+1. **Engineering track through FC-1 COMPLETE** — D6 (models+seeder), D34 (all 12,601 foods
    classified), D8/D8.1/D8.2 (UI end to end incl. computed tier + editors),
    D9 (engineExcluded enforcement), WE-2 (full recipe nutrition + build-time
    projection/search cache), WE-3 (founder-approved read-only display card),
@@ -150,11 +162,13 @@ recorded separately in `ISSUE-MAIN-AGE-GATING.md`. See `REPORT-WE8c.md`.
    border-case closure), WE-6 (cold-launch profiling + lazy index load), and
    WE-7 (legacy target audit + proven-dead Swift cluster removal), and WE-8
    (conservative derived safety metadata + IngredientLink parity), and WE-8c
-   (provenance-gated age enforcement).
+   (provenance-gated age enforcement), plus FC-1 (deterministic food-concept
+   ontology and unused runtime lookup service).
    See PROJECT-HANDBOOK.md §6 ledger and `REPORT-WE2.md` / `REPORT-WE3.md` /
    `REPORT-WE4.md` / `REPORT-WE5.md` / `REPORT-WE6.md` for gates, timing,
    screenshots, accessibility, search, `REPORT-WE7.md` for legacy audit
-   evidence, and `REPORT-WE8.md` for safety derivation/audit evidence.
+   evidence, `REPORT-WE8.md` for safety derivation/audit evidence, and
+   `REPORT-FC1.md` for concept gates and WE-8 disagreement triage.
 2. **Expert review — the remaining content item.** Work aiDraft→reviewed across
    dravyas/recipes/rules, resolve all reviewNote flags, optional batch-31
    top-up to 750. Director can generate a reviewer packet on request.

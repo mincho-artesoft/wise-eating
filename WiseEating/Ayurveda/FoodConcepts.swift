@@ -59,48 +59,48 @@ public struct FoodConcepts: Sendable {
     let key = AyurvedaRules.modifierTokens(alias).joined(separator: " ")
     return aliases[key]
   }
-}
 
-public struct Requirement: Codable, Hashable, Sendable {
-  public let concept: String
-  public let count: Int
-  public let scope: String
-  public let meal: String?
-  public let day: Int?
+  public struct Requirement: Codable, Hashable, Sendable {
+    public let concept: String
+    public let count: Int
+    public let scope: String
+    public let meal: String?
+    public let day: Int?
 
-  public init(
-    concept: String,
-    count: Int,
-    scope: String,
-    meal: String? = nil,
-    day: Int? = nil
-  ) {
-    self.concept = concept
-    self.count = count
-    self.scope = scope
-    self.meal = meal
-    self.day = day
-  }
-}
-
-public struct Restriction: Codable, Hashable, Sendable {
-  public enum Hardness: String, Codable, Sendable {
-    case hard
-    case soft
+    public init(
+      concept: String,
+      count: Int,
+      scope: String,
+      meal: String? = nil,
+      day: Int? = nil
+    ) {
+      self.concept = concept
+      self.count = count
+      self.scope = scope
+      self.meal = meal
+      self.day = day
+    }
   }
 
-  public let concept: String
-  public let hardness: Hardness
-  public let exceptions: [String]
+  public struct Restriction: Codable, Hashable, Sendable {
+    public enum Hardness: String, Codable, Sendable {
+      case hard
+      case soft
+    }
 
-  public init(
-    concept: String,
-    hardness: Hardness,
-    exceptions: [String] = []
-  ) {
-    self.concept = concept
-    self.hardness = hardness
-    self.exceptions = exceptions
+    public let concept: String
+    public let hardness: Hardness
+    public let exceptions: [String]
+
+    public init(
+      concept: String,
+      hardness: Hardness,
+      exceptions: [String] = []
+    ) {
+      self.concept = concept
+      self.hardness = hardness
+      self.exceptions = exceptions
+    }
   }
 }
 
