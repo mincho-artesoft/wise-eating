@@ -74,7 +74,9 @@
         "dairy free",
         "dairy-free",
         "non-dairy",
-        "nondairy"
+        "nondairy",
+        "custard apple",
+        "custard-apple"
       ],
       "allergen": "milk",
       "dietImplications": [
@@ -110,7 +112,9 @@
         "egg-free",
         "egg substitute",
         "egg replacer",
-        "eggnog-flavored, non-dairy"
+        "eggnog-flavored, non-dairy",
+        "custard apple",
+        "custard-apple"
       ],
       "allergen": "eggs",
       "dietImplications": [
@@ -149,7 +153,13 @@
         "atta",
         "maida",
         "sooji",
-        "rava"
+        "rava",
+        "oat",
+        "oats",
+        "oatmeal",
+        "rolled oats",
+        "oat bran",
+        "oat flour"
       ],
       "negativePhrases": [
         "buckwheat",
@@ -162,7 +172,13 @@
         "rice flour",
         "corn flour",
         "malt, corn",
-        "malic"
+        "malic",
+        "gluten free oats",
+        "gluten-free oats",
+        "certified gluten free",
+        "ragi",
+        "ragi malt",
+        "malted milk"
       ],
       "allergen": "cerealsContainingGluten",
       "dietImplications": [
@@ -269,7 +285,22 @@
         "praline",
         "nougat",
         "nut butter",
-        "mixed nuts"
+        "mixed nuts",
+        "almonds",
+        "cashews",
+        "walnuts",
+        "pecans",
+        "pistachios",
+        "hazelnuts",
+        "macadamias",
+        "brazil nuts",
+        "pine nuts",
+        "chestnuts",
+        "badam",
+        "kaju",
+        "pista",
+        "akhrot",
+        "chironji"
       ],
       "negativePhrases": [
         "nutmeg",
@@ -278,7 +309,6 @@
         "doughnut",
         "donut",
         "nutritional yeast",
-        "coconut",
         "peanut",
         "nut free",
         "nut-free",
@@ -292,7 +322,7 @@
       "provenance": "curated",
       "confidence": 0.88,
       "qualityState": "aiDraft",
-      "note": "CONTESTED, pending vaidya: coconut is currently EXCLUDED here (94 of 297 nut-flagged recipes are coconut-only per WE-8). FDA classifies coconut as a tree nut; coconut allergy is rare and immunologically distinct. Chestnut is INCLUDED but is low-allergenicity and may warrant separation."
+      "note": "DIRECTOR RULING (G12 triage): coconut is now INCLUDED, aligning with WE-8 and FDA classification. My original exclusion was the unsafe direction for an allergen — over-flagging costs a user ~94 coconut-only recipes, under-flagging can hurt them. A vaidya may relax this; until then it errs toward protection. Chestnut also included (see exclusion corpus rev2)."
     },
     {
       "id": "fish",
@@ -344,7 +374,11 @@
       "phrases": [
         "shellfish"
       ],
-      "negativePhrases": [],
+      "negativePhrases": [
+        "oyster mushroom",
+        "oyster sauce",
+        "oyster plant"
+      ],
       "allergen": "crustaceans",
       "dietImplications": [],
       "provenance": "curated",
@@ -404,7 +438,9 @@
       "negativePhrases": [
         "oyster mushroom",
         "oyster sauce, vegetarian",
-        "clam shell"
+        "clam shell",
+        "oyster sauce",
+        "oyster plant"
       ],
       "allergen": "molluscs",
       "dietImplications": [],
@@ -418,8 +454,7 @@
       "kind": "animalSource",
       "parents": [],
       "phrases": [
-        "meat",
-        "flesh"
+        "meat"
       ],
       "negativePhrases": [
         "meatless",
@@ -1260,5 +1295,5 @@
       "note": "Canonical direction chosen to match USDA naming 'Coriander (cilantro) leaves, raw'. The reverse mapping was removed in validation — it formed an alias cycle."
     }
   ],
-  "revision": "rev2: alias cycle coriander leaves<->cilantro broken; coriander leaves is canonical."
+  "revision": "rev3 (G12 triage): five systematic causes ruled. Cause 1 (831 rows) discarded as an invalid comparator — 'not Vegan' is not equivalent to 'contains honey'. Causes 2-5 were director defects and are corrected here. FC-1-only cause 5 ('flesh') was the most serious: it flagged 46 vegetarian recipes as meat."
 }
