@@ -4,16 +4,22 @@ Date: 2026-07-27
 
 Branch: `ayurveda-app`
 
-Status: **STOPPED at MP7-G2c forward: 23/566 false ineligible rows; gate is at most 10**
+Status: **STOPPED at MP7-G4 — MP-5 property harness does not compile**
 
 ## Outcome
 
-Rev8 reproduces every director reference total, and the rule-training fixtures
-remain exact. The enlarged forward eligibility census nevertheless exposes a
-blocking over-capture in `X-CONCENTRATED-MILK`: its unordered whole-name token
-groups classify 23 ready-to-eat foods as `ingredientOnly`.
+Rev9 fixes the concentrated-milk eligibility defect found by the rev8 forward
+census. The build-time resolver now applies the director-authored contiguous
+phrases and prepared/negated evaluation, the runtime cache is version 9, and
+the shipped role artifact is deterministic.
 
-The ordered gates reached this result:
+All gates through both directions of G2c are green. G4 is red because
+`mp5_solver_harness.swift` has a non-exhaustive `switch FoodRole`: it does not
+handle `.ingredientOnly`. The full runner executed 138 other tests without a
+failure, but the 11 MP-5 test methods could not start.
+
+Per the packet, work stopped without patching the harness and without entering
+G5–G8.
 
 | Gate | Actual | State |
 |---|---:|---|
@@ -21,66 +27,66 @@ The ordered gates reached this result:
 | Role training fixtures | **71/71** | pass |
 | G1 `other` coverage | **8/589 (1.358%)** | pass |
 | G1b unmapped category rows | **0/12,601** | pass |
-| G2c forward | **23/566 wrong** | **STOP** |
-| G2c reverse | not run | stopped before gate |
+| G2c forward | **0/543 wrong** | pass |
+| G2c reverse | **0/303 wrong** | pass |
 | G2b authored-recipe sample | **39/40 (97.5%)** | retained; recipe mapping unchanged |
 | G2 random holdout | seed 2026072704 is burned | no fourth sample drawn |
 | G3 accepted independent cross-derivation | **4/4 reference populations exact** | retained |
-| G4–G8 | not run | stopped before gates |
-
-No director rule, expected label, threshold, match scope, or veto was changed
-after this finding. In particular, the 60-band was not scoped to the first
-comma segment, and no proxy signal was introduced.
+| G4 full regression | **138 executed tests green; 1 suite setup error** | **STOP** |
+| G5–G8 | not run | stopped before gates |
 
 ## Commit and push ledger
 
 | Work | Commit | State |
 |---|---|---|
-| Rev8 director artifacts, unmodified | `c3d0352` | pushed |
-| Rev8 projection, runtime binding, cache, and burned-fixture marker | `30e9d79` | pushed |
+| Rev9 director rule, unmodified | `42281ac` | pushed |
+| Rev9 projection, prepared-aware matching, tests, and deterministic cache | `a7e67b4` | pushed |
 | This stop report | report commit | committed and pushed after stop |
 
 Artifact SHA-256:
 
-- `food-roles.json`: `5206ff364a02b81cd597c7a226539116b27450992465b5349c87960ef9981cc0`
+- `food-roles.json`: `0a9c19b1ed90bcf1a9cdc126b336afc7a6be6c958b1f8e72dab503973f987cac`
 - `food-role-goldens.json`: `5dae3f4ff44ee904b38dbb207c6a2affa3fbfaaa6ea8b02f62b4765915b337f2`
-- `food_roles.json.gz`: `d6c6125f5dc69ee6676bd6a164cee97ae5b60420693421ee04e5f2056d9b7037`
-- burned seed-2026072704 fixture: `bbb5251643eacfa7067708b2781093b43628e4195c2f178ee8f3414bfc8724e7`
+- `food_roles.json.gz`: `ae131af1425b5ef8815dfe1b2398a7e3e0f57a270d66789e5fd170af5f2cce82`
 
-## Rev8 projection
+## Rev9 implementation
 
-The build-time and runtime readers are bound to `rolesVersion: 8` and 34
-rules. The deterministic artifact contains all 14,484 canonical rows.
+`X-CONCENTRATED-MILK` no longer has positive `tokenGroups`. It uses contiguous
+phrases plus the same prepared-indicator shape used by `X-DRY-MIX`:
 
-The plain USDA catalogue matches the supplied reference exactly:
+1. a contiguous positive phrase must match;
+2. `not reconstituted` preserves the positive result; and
+3. any other prepared indicator suppresses the result.
+
+The build-time matcher previously applied step 3 only when a token group
+matched. It now applies the prepared/negated evaluation when either a
+contiguous phrase or a legacy group matches. No other matching weight,
+priority, scope, or role assignment changed.
+
+The plain catalogue matches every rev9 reference:
 
 | Metric | Actual |
 |---|---:|
-| `other` | **109/12,601 (0.87%)** |
-| ineligible | **566** |
+| `X-CONCENTRATED-MILK` fires | **17** |
+| `other` | **108/12,601 (0.86%)** |
+| ineligible | **543** |
 | `infantProduct` | **322** |
-| `ingredientOnly` | **194** |
+| `ingredientOnly` | **171** |
 | `nonFood` | **30** |
 | `supplement` | **20** |
 | `notReadyToEat` | **304 (2.41%)** |
 
-Recipe references also remain exact:
+Recipe references remain exact:
 
 | Metric | Actual |
 |---|---:|
 | Recipes on an anchor role | **1,039/1,500** |
 | Recipes in a prohibited role | **0/1,500** |
 
-This retains the director-accepted G3 cross-derivation result: the independent
-director derivation and the repo projection agree exactly on catalogue
-`other`, recipe anchors, prohibited recipe roles, and the 71 training
-fixtures. No new 100-row disagreement sample was started at rev8 because the
-ordered run stopped at forward G2c.
-
-Focused MP-7 tests are **21/21 green**. They cover G0, all role fixtures, the
-reference populations, the rev8 corn/egg-roll/staple/concentrated-milk cases,
-the 304-row readiness partition, runtime metadata, and deterministic artifact
-encoding.
+The focused MP-7 rerun is **22/22 green**: 16 role tests plus six C1–C10
+validity tests. It includes deterministic artifact equality, all 71 role
+fixtures, the five must-remain-eligible controls, the four must-be-ineligible
+controls, and the retained rev8 corn/nut/egg-roll corrections.
 
 ## Ordered gate evidence
 
@@ -96,8 +102,7 @@ encoding.
 
 ### Role fixtures
 
-All **71/71** director cases match with zero deviations. The rev3 correction
-for `Milk, dry, whole` resolves to `ingredientOnly`. These cases remain a
+All **71/71** director cases match with zero deviations. They remain a
 training/self-consistency corpus and are not reported as a held-out score.
 
 ### G1 and G1b
@@ -117,96 +122,135 @@ accepted MP-6b plan produces 589 unique rows.
 The eight `other` rows are IDs 5222, 5240, 5577, 5580, 6463, 6469, 7202, and
 12052.
 
-### G2c forward — blocking failure
+### G2c forward — 0/543 wrong
 
-Rev8 increases the forward population from 526 to 566:
+The 543-row population is:
 
 | Role | Rows |
 |---|---:|
 | `infantProduct` | **322** |
-| `ingredientOnly` | **194** |
+| `ingredientOnly` | **171** |
 | `nonFood` | **30** |
 | `supplement` | **20** |
-| **Total** | **566** |
+| **Total** | **543** |
 
-All 40 newly ineligible rows are produced by `X-CONCENTRATED-MILK`. Manual
-review finds 17 genuine concentrated or dry-milk ingredients and **23 false
-ineligible prepared foods**.
+The accepted 526-row rev7 population is an exact subset of rev9. Rev9 adds 17
+rows and removes none. All 17 additions are genuine concentrated, dried, or
+dehydrated ingredients:
 
-The 23 false rows are:
+| Food ID | Catalogue name |
+|---:|---|
+| 15 | Milk, evaporated, NS as to fat content |
+| 16 | Milk, evaporated, whole |
+| 17 | Milk, evaporated, reduced fat (2%) |
+| 18 | Milk, evaporated, fat free (skim) |
+| 19 | Milk, condensed, sweetened |
+| 147 | Milk, dry, not reconstituted |
+| 7426 | Potatoes, mashed, dehydrated, granules without milk, dry form |
+| 7428 | Potatoes, mashed, dehydrated, granules with milk, dry form |
+| 7762 | Potatoes, mashed, dehydrated, flakes without milk, dry form |
+| 8109 | Milk, dry, whole, with added vitamin D |
+| 8110 | Milk, dry, nonfat, regular, without added vitamin A and vitamin D |
+| 8469 | Milk, dry, nonfat, instant, with added vitamin A and vitamin D |
+| 8470 | Milk, dry, nonfat, calcium reduced |
+| 8494 | Milk, evaporated, 2% fat, with added vitamin A and vitamin D |
+| 9246 | Milk, dry, nonfat, regular, with added vitamin A and vitamin D |
+| 9247 | Milk, dry, nonfat, instant, without added vitamin A and vitamin D |
+| 10295 | Milk, dry, whole, without added vitamin D |
 
-| Food ID | Catalogue name | Why it is ready food |
-|---:|---|---|
-| 13 | Milk, dry, reconstituted, nonfat | reconstituted milk |
-| 14 | Milk, dry, reconstituted, whole | reconstituted milk |
-| 99 | Hot chocolate / cocoa, dry mix, made with whole or reduced fat (2%) milk | prepared beverage |
-| 104 | Hot chocolate / cocoa, dry mix, reduced sugar, made with whole or reduced fat (2%) milk | prepared beverage |
-| 6287 | Egg custards, dry mix, prepared with whole milk | prepared custard |
-| 6297 | Puddings, vanilla, dry mix, instant, prepared with whole milk | prepared pudding |
-| 6305 | Rennin, vanilla, dry mix, prepared with whole milk | prepared dessert |
-| 6308 | Flan, caramel custard, dry mix, prepared with whole milk | prepared flan |
-| 6326 | Puddings, banana, dry mix, regular, prepared with whole milk | prepared pudding |
-| 6328 | Puddings, coconut cream, dry mix, instant, prepared with whole milk | prepared pudding |
-| 6330 | Puddings, coconut cream, dry mix, regular, prepared with whole milk | prepared pudding |
-| 6331 | Puddings, lemon, dry mix, instant, prepared with whole milk | prepared pudding |
-| 7044 | Puddings, chocolate, dry mix, instant, prepared with whole milk | prepared pudding |
-| 7048 | Puddings, chocolate, dry mix, regular, prepared with whole milk | prepared pudding |
-| 7049 | Puddings, rice, dry mix, prepared with whole milk | prepared pudding |
-| 7051 | Puddings, tapioca, dry mix, prepared with whole milk | prepared pudding |
-| 7054 | Puddings, vanilla, dry mix, regular, prepared with whole milk | prepared pudding |
-| 7061 | Rennin, chocolate, dry mix, prepared with whole milk | prepared dessert |
-| 7079 | Puddings, banana, dry mix, instant, prepared with whole milk | prepared pudding |
-| 7765 | Potatoes, au gratin, dry mix, prepared with water, whole milk and butter | prepared side |
-| 7767 | Potatoes, scalloped, dry mix, prepared with water, whole milk and butter | prepared side |
-| 8099 | Dessert topping, powdered, 1.5 ounce prepared with 1/2 cup milk | prepared topping |
-| 11540 | Bread, white, prepared from recipe, made with nonfat dry milk | prepared bread |
+Forward-set fingerprint:
+`aa9aaf7e693ba95b2d99003b1be2592a20ca0f20cab0605ba9f61595f9e17ea7`.
 
-The 17 genuine new ingredient rows are IDs 15–19, 8109–8111, 8469, 8470,
-8472, 8473, 8494, 9245–9247, and 10295.
+### G2c reverse — 0/303 wrong
 
-#### Cause
+The marker-bearing, role-eligible, ready population is the exact same 303-row
+set reviewed under rev7: no additions and no removals. Its accepted
+adjudication therefore remains **0/303 wrong**.
 
-`X-CONCENTRATED-MILK` uses eight `tokenGroups` at priority 93 with
-`matchScope: wholeName`. Token-group semantics deliberately require each
-authored token to occur somewhere in the scoped name; they do not require
-adjacency or order. Consequently:
+Reverse-set fingerprint:
+`9a031678b409fe629757f7b93865c2450533694784523f917e8ac43ab2c70137`.
+
+The five must-remain-eligible rev9 controls all pass:
+
+1. Puddings, vanilla, dry mix, instant, prepared with whole milk.
+2. Hot chocolate / cocoa, dry mix, made with whole or reduced fat (2%) milk.
+3. Bread, white, prepared from recipe, made with nonfat dry milk.
+4. Milk, dry, reconstituted, whole.
+5. Potatoes, au gratin, dry mix, prepared with water, whole milk and butter.
+
+The four must-be-ineligible controls also pass:
+
+1. Milk, evaporated, 2% fat, with added vitamin A and vitamin D.
+2. Milk, condensed, sweetened.
+3. Milk, dry, whole, with added vitamin D.
+4. Milk, dry, not reconstituted.
+
+### G2b, G2, and G3
+
+Rev9 does not alter recipe post-pass mapping. The frozen G2b result remains
+**39/40 (97.5%)**, with 1,039 anchor recipes and zero prohibited recipes.
+
+The seed-2026072704 random sample is burned by rev8 and was not rescored or
+quoted as a holdout. Per director instruction, no fourth random sample was
+drawn.
+
+The director-accepted G3 cross-derivation remains exact on all four reference
+populations: catalogue `other`, recipe anchors, prohibited recipe roles, and
+the 71 training fixtures.
+
+## G4 — blocking harness compilation error
+
+Command:
 
 ```text
-["milk", "dry", "whole"]
+python3 -m unittest discover -s ayurveda-data/tests -p 'test_*.py' -v
 ```
 
-matches both the intended `Milk, dry, whole` and unrelated finished products
-whose full names contain separated words such as `dry mix ... prepared with
-whole milk`. The same group also catches reconstituted milk. This is not a
-counting discrepancy: the reference total of 566 is reproduced exactly, but
-23 of its members violate the eligibility boundary.
+Result:
 
-The forward result is therefore **23/566 wrong**, above the gate ceiling of
-10. Per the packet, work stopped immediately. The resolver was not patched
-with ad-hoc vetoes, the director artifact was not edited, and the previously
-rejected first-segment workaround was not reapplied.
+```text
+Ran 138 tests in 436.411s
+FAILED (errors=1)
 
-### G2c reverse and later gates
+ayurveda-data/tests/mp5_solver_harness.swift:867:13:
+error: switch must be exhaustive
+note: add missing case: '.ingredientOnly'
+```
 
-The reverse census was **not run** because the forward direction already
-failed a blocking gate. Rev8 does not alter recipe post-pass mapping, so the
-frozen G2b result remains **39/40 (97.5%)**, with 1,039 anchor recipes and zero
-prohibited recipes. The seed-2026072704 G2 sample is burned by rev8 and was not
-rescored or quoted as a holdout; per director instruction, no fourth random
-sample was drawn. G4, G5, G6, G7, and G8 were not run.
+The failing setup is `MP5DeterministicSolverTests.setUpClass`. Its
+`fixtureCandidates()` function switches over `FoodRole` to assign role
+eligibility and portion ranges. The production enum includes
+`.ingredientOnly`, but the harness switch handles every other role and omits
+that case.
+
+Consequences:
+
+- all 138 tests that executed were green;
+- all 11 `test_mp5_solver.py` methods were skipped because their shared Swift
+  harness did not compile;
+- the 46-property solver gate and the 30-solve/Y1 measurements cannot be
+  asserted from this run; and
+- this is a test-harness exhaustiveness defect, not evidence that solver
+  behavior passed or failed.
+
+The runner did independently execute green resolution, search, narration,
+fresh-install, and tracked-size tests before ending red. They do not override
+the red full-suite gate.
+
+No harness case was added in this task because the standing instruction says
+to stop and report at the first failing gate. G5, G6, G7, and G8 were not run.
 
 The handbook and progress milestone are not advanced while MP-7 is stopped.
 
 ## Burned regression fixtures
 
-The three general role samples are now retained only as labelled regression
-fixtures:
+The three general role samples remain regression fixtures only:
 
 - seed 20260727 — 60 rows;
 - seed 2026072702 — 100 rows;
 - seed 2026072704 — 100 rows, burned by rev8.
 
-None may be quoted as a fresh held-out score.
+None is quoted as a fresh held-out score.
 
 ## Contested — printed, not acted on
 
