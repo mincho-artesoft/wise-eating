@@ -1,3 +1,4 @@
+import gzip
 import json
 import re
 import subprocess
@@ -16,6 +17,11 @@ REQUEST = MEAL_PLANNING / "MealPlanRequest.swift"
 TELEMETRY = MEAL_PLANNING / "PlannerTelemetry.swift"
 PLANNER = MEAL_PLANNING / "USDAWeeklyMealPlanner.swift"
 MODELS = MEAL_PLANNING / "AIMealPlanModels.swift"
+SOLVER = MEAL_PLANNING / "DeterministicMealPlanSolver.swift"
+AYURVEDA_SEED = ROOT / "WiseEating" / "ayurveda_seed.json.gz"
+FOODS = ROOT / "WiseEating" / "Legacy" / "foods.json"
+FOOD_CONCEPTS = ROOT / "WiseEating" / "food_concepts.json.gz"
+AYURVEDA_RULES = ROOT / "WiseEating" / "ayurveda_rules.json"
 
 
 PURE_HARNESS = r'''
@@ -56,7 +62,7 @@ func facts(days: Int) -> [MP6NarrationFact] {
             ["Pumpkin soup", "Whole-wheat flatbread"],
             521.0,
             19.6,
-            ["sweet", "pungent"],
+            ["sweet"],
             "cooling"
         ),
     ]
@@ -123,6 +129,14 @@ struct MP6PureHarness {
                 MP6TemplateNarrator.narrate(supplied) == first
             }
             print(identical ? "PASS determinism" : "FAIL determinism")
+
+        case "frames7":
+            print(
+                facts(days: 7)
+                    .map { MP6TemplateNarrator.frameIndex(for: $0) }
+                    .map(String.init)
+                    .joined(separator: ",")
+            )
 
         case "timeout":
             let supplied = facts(days: 1)
@@ -249,6 +263,504 @@ struct MP6TelemetryHarness {
 }
 '''
 
+REAL_SOLVER_HARNESS = r'''
+import Foundation
+
+private struct RealCandidate: Codable {
+    let candidate: MP5Candidate
+    let thermalCharacter: String
+}
+
+private struct RealMealEvidence: Codable {
+    let day: Int
+    let slotIndex: Int
+    let frameIndex: Int
+    let componentIDs: [Int]
+    let title: String
+}
+
+private struct RealSampleOutput: Codable {
+    let candidateSource: String
+    let sourceCandidateCount: Int
+    let twoDayNoRepeat: Bool
+    let distinctFoodCount: Int
+    let meals: [RealMealEvidence]
+}
+
+@main
+private enum MP6RealSolverHarness {
+    static func main() throws {
+        guard CommandLine.arguments.count == 2 else {
+            fatalError("candidate JSON path required")
+        }
+        let wrappers = try JSONDecoder().decode(
+            [RealCandidate].self,
+            from: Data(contentsOf: URL(
+                fileURLWithPath: CommandLine.arguments[1]
+            ))
+        )
+        let candidates = wrappers.map(\.candidate)
+        let thermalByID = Dictionary(
+            uniqueKeysWithValues: wrappers.map {
+                ($0.candidate.id, $0.thermalCharacter)
+            }
+        )
+        let profile = MP5SolverProfile(
+            dailyKcal: 2_000,
+            dailyProteinTarget: 80,
+            ageInMonths: 360,
+            diet: "vegetarian",
+            allergenConcepts: [],
+            excludedFoodIDs: [],
+            dosha: nil,
+            agni: .balanced,
+            season: "varsha",
+            enableAyurvedicScoring: false
+        )
+        let slots = (1...7).flatMap { day in
+            ["Breakfast", "Lunch", "Dinner"].map {
+                MP5MealSlot(day: day, name: $0)
+            }
+        }
+        let request = MP5SolverRequest(
+            profile: profile,
+            slots: slots,
+            seed: 0x4D50_3662,
+            localSearchIterations: 96
+        )
+        let plan = try DeterministicMealPlanSolver(
+            candidates: candidates
+        ).solve(request)
+        let facts = plan.days.flatMap { day in
+            day.meals.enumerated().map { slotIndex, meal in
+                let thermalValues = Set(
+                    meal.components.compactMap {
+                        thermalByID[$0.foodID]
+                    }.filter { $0 != "unrecorded" }
+                )
+                let thermal: String
+                if thermalValues.isEmpty {
+                    thermal = "unrecorded"
+                } else if thermalValues.count == 1 {
+                    thermal = thermalValues.first ?? "unrecorded"
+                } else {
+                    thermal = "mixed"
+                }
+                return MP6NarrationFact(
+                    day: day.day,
+                    slotIndex: slotIndex,
+                    slotName: meal.name,
+                    dishNames: meal.components.map(\.name),
+                    kcal: meal.kcal,
+                    proteinGrams: meal.protein,
+                    tastes: Set(
+                        meal.components.flatMap(\.rasa)
+                    ).sorted(),
+                    thermalCharacter: thermal,
+                    agni: profile.agni.rawValue
+                )
+            }
+        }
+        let titles = MP6TemplateNarrator.narrate(facts)
+        let titleByKey = Dictionary(
+            uniqueKeysWithValues: titles.map { ($0.key, $0.title) }
+        )
+        let mealByKey = Dictionary(
+            uniqueKeysWithValues: plan.days.flatMap { day in
+                day.meals.enumerated().map {
+                    (
+                        MP6NarrationKey(
+                            day: day.day,
+                            slotIndex: $0.offset
+                        ),
+                        $0.element
+                    )
+                }
+            }
+        )
+        let evidence = facts.map { fact in
+            RealMealEvidence(
+                day: fact.day,
+                slotIndex: fact.slotIndex,
+                frameIndex: MP6TemplateNarrator.frameIndex(for: fact),
+                componentIDs: mealByKey[fact.key]?.components.map(\.foodID)
+                    ?? [],
+                title: titleByKey[fact.key] ?? ""
+            )
+        }
+        let sortedDays = plan.days.sorted { $0.day < $1.day }
+        var twoDayNoRepeat = true
+        for index in sortedDays.indices {
+            let start = max(0, index - request.noRepeatDays)
+            let prior = Set(
+                sortedDays[start..<index]
+                    .flatMap(\.meals)
+                    .flatMap(\.components)
+                    .map(\.foodID)
+            )
+            let current = sortedDays[index]
+                .meals
+                .flatMap(\.components)
+                .map(\.foodID)
+            twoDayNoRepeat = twoDayNoRepeat
+                && prior.isDisjoint(with: current)
+                && Set(current).count == current.count
+        }
+        let output = RealSampleOutput(
+            candidateSource: "shipped foods.json + ayurveda_seed.json.gz",
+            sourceCandidateCount: candidates.count,
+            twoDayNoRepeat: twoDayNoRepeat,
+            distinctFoodCount: Set(plan.components.map(\.foodID)).count,
+            meals: evidence
+        )
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        FileHandle.standardOutput.write(try encoder.encode(output))
+        FileHandle.standardOutput.write(Data([0x0A]))
+    }
+}
+'''
+
+
+def normalized_tokens(value):
+    return re.findall(r"[a-z0-9]+", value.lower())
+
+
+def normalized_term(value):
+    return re.sub(r"[_-]+", " ", (value or "").strip().lower())
+
+
+def contains_phrase(tokens, phrase):
+    phrase_tokens = normalized_tokens(phrase)
+    width = len(phrase_tokens)
+    return any(
+        tokens[index : index + width] == phrase_tokens
+        for index in range(len(tokens) - width + 1)
+    )
+
+
+def safety_concepts(allergens):
+    concepts = set()
+    for allergen in allergens or []:
+        lower = allergen.lower()
+        if "milk" in lower:
+            concepts.add("dairy")
+        if "egg" in lower:
+            concepts.add("egg")
+        if "cereals containing gluten" in lower:
+            concepts.add("gluten")
+        if "soy" in lower:
+            concepts.add("soy")
+        if "sesame" in lower:
+            concepts.add("sesame")
+        if "peanut" in lower:
+            concepts.add("peanut")
+        if lower == "nuts" or lower.startswith("nuts ("):
+            concepts.add("tree_nuts")
+        if "fish" in lower:
+            concepts.add("fish")
+        if "crustacean" in lower:
+            concepts.update(("crustacean", "shellfish"))
+        if "mollusc" in lower:
+            concepts.update(("mollusc", "shellfish"))
+    return concepts
+
+
+def food_role(name, categories, concepts):
+    if concepts.intersection(("meat", "fish", "shellfish", "egg", "soy")):
+        return "main"
+    if "dairy" in concepts:
+        return "dairy"
+    category = categories[0].lower() if categories else ""
+    tokens = set(normalized_tokens(f"{name} {category}"))
+    if tokens.intersection(("rice", "grain", "pasta", "bread", "cereal", "potato")):
+        return "grain"
+    if tokens.intersection(("oil", "fat", "butter", "ghee")):
+        return "fat"
+    if tokens.intersection(("drink", "beverage", "juice", "tea", "water")):
+        return "beverage"
+    if tokens.intersection(
+        ("spice", "herb", "sauce", "dressing", "condiment")
+    ):
+        return "condiment"
+    if tokens.intersection(("fruit", "vegetable", "salad", "greens")):
+        return "produce"
+    return "other"
+
+
+PORTION_LIMITS = {
+    "main": (60, 320),
+    "grain": (50, 350),
+    "produce": (50, 350),
+    "dairy": (40, 300),
+    "fat": (5, 45),
+    "beverage": (120, 400),
+    "condiment": (3, 40),
+    "other": (40, 300),
+}
+
+
+def nutrient_value(food, section, key):
+    value = ((food.get(section) or {}).get(key) or {}).get("value")
+    return float(value) if value is not None else 0.0
+
+
+def profile_heaviness(gunas, digestibility):
+    if digestibility is not None:
+        return min(1, max(0, (5 - float(digestibility)) / 4))
+    normalized = {normalized_term(value) for value in gunas or []}
+    if normalized.intersection(("guru", "heavy")):
+        return 0.85
+    if normalized.intersection(("laghu", "light")):
+        return 0.2
+    return 0.5
+
+
+def normalize_thermal(value):
+    term = normalized_term(value)
+    if term in ("heating", "hot", "ushna"):
+        return "heating"
+    if term in ("cooling", "cold", "sheeta", "shita"):
+        return "cooling"
+    if term in ("neutral", "balanced"):
+        return "neutral"
+    return term or "unrecorded"
+
+
+def make_real_candidate_file(destination):
+    with gzip.open(AYURVEDA_SEED, "rt", encoding="utf-8") as source:
+        seed = json.load(source)
+    with FOODS.open(encoding="utf-8") as source:
+        foods = json.load(source)
+    with gzip.open(FOOD_CONCEPTS, "rt", encoding="utf-8") as source:
+        concept_payload = json.load(source)
+    with AYURVEDA_RULES.open(encoding="utf-8") as source:
+        rule_payload = json.load(source)
+
+    concepts_by_id = {}
+    for concept, food_ids in concept_payload["membership"].items():
+        for food_id in food_ids:
+            concepts_by_id.setdefault(int(food_id), set()).add(concept)
+    dravya_by_id = {item["id"]: item for item in seed["dravyas"]}
+    direct_by_food_id = {
+        int(item["foodId"]): item
+        for item in seed["dravyas"]
+        if item.get("foodId") is not None
+    }
+    link_by_food_id = {
+        int(link["fdcId"]): link
+        for link in seed["links"]
+    }
+    category_rules = {
+        item["category"]: item for item in rule_payload["categories"]
+    }
+    default_rule = rule_payload["default"]
+    wrappers = []
+
+    def resolution(food_id, name, categories):
+        direct = direct_by_food_id.get(food_id)
+        link = link_by_food_id.get(food_id)
+        profile = direct or (
+            dravya_by_id.get(link["dravyaId"]) if link else None
+        )
+        if profile:
+            dosha = profile.get("dosha") or {}
+            tier = "classical"
+            if not direct and link and link.get("tier") == "derived":
+                tier = "derived"
+            return {
+                "doshaVata": int(dosha.get("vata", 0)),
+                "doshaPitta": int(dosha.get("pitta", 0)),
+                "doshaKapha": int(dosha.get("kapha", 0)),
+                "rasa": sorted(
+                    {
+                        normalized_term(value)
+                        for value in profile.get("rasa") or []
+                    }
+                ),
+                "hasVipaka": bool(profile.get("vipaka")),
+                "hasVirya": bool(profile.get("virya")),
+                "hasPrabhava": bool(profile.get("prabhava")),
+                "heaviness": profile_heaviness(
+                    profile.get("gunas"),
+                    profile.get("digestibility"),
+                ),
+                "seasons": sorted(
+                    {
+                        normalized_term(value)
+                        for value in profile.get("seasons") or []
+                    }
+                ),
+                "tier": tier,
+                "thermal": normalize_thermal(profile.get("virya")),
+                "engineExcluded": bool(profile.get("engineExcluded")),
+            }
+
+        category = categories[0] if categories else ""
+        rule = category_rules.get(category, default_rule)
+        name_tokens = normalized_tokens(name)
+        modifier_gunas = []
+        modifier_vpk = [0, 0, 0]
+        for modifier in rule_payload["modifiers"]:
+            if any(
+                contains_phrase(name_tokens, phrase)
+                for phrase in modifier["phrases"]
+            ):
+                modifier_gunas.extend(modifier.get("gunas") or [])
+                modifier_vpk = [
+                    modifier_vpk[index] + modifier["vpk"][index]
+                    for index in range(3)
+                ]
+        vpk = [
+            min(2, max(-2, rule["vpk"][index] + modifier_vpk[index]))
+            for index in range(3)
+        ]
+        return {
+            "doshaVata": vpk[0],
+            "doshaPitta": vpk[1],
+            "doshaKapha": vpk[2],
+            "rasa": [],
+            "hasVipaka": False,
+            "hasVirya": bool(rule.get("virya")),
+            "hasPrabhava": False,
+            "heaviness": profile_heaviness(
+                (rule.get("gunas") or []) + modifier_gunas,
+                None,
+            ),
+            "seasons": [],
+            "tier": "estimated",
+            "thermal": normalize_thermal(rule.get("virya")),
+            "engineExcluded": False,
+        }
+
+    def append_candidate(
+        *,
+        food_id,
+        name,
+        categories,
+        allergens,
+        energy,
+        protein,
+        carbs,
+        fat,
+        fiber,
+        enforced_age,
+        resolved,
+        recipe_dosha=None,
+        recipe_seasons=None,
+    ):
+        if food_id <= 0 or energy <= 0:
+            return
+        concepts = set(concepts_by_id.get(food_id, set()))
+        concepts.update(safety_concepts(allergens))
+        role = food_role(name, categories, concepts)
+        minimum, maximum = PORTION_LIMITS[role]
+        tokens = set(normalized_tokens(name))
+        is_honey = "honey" in concepts or "honey" in tokens
+        is_ghee = "ghee" in tokens or {
+            "clarified",
+            "butter",
+        }.issubset(tokens)
+        heated = bool(
+            tokens.intersection(("heated", "cooked", "baked", "boiled", "warmed"))
+        )
+        if recipe_dosha is not None:
+            resolved = {
+                "doshaVata": int(recipe_dosha.get("vata", 0)),
+                "doshaPitta": int(recipe_dosha.get("pitta", 0)),
+                "doshaKapha": int(recipe_dosha.get("kapha", 0)),
+                "rasa": [],
+                "hasVipaka": False,
+                "hasVirya": False,
+                "hasPrabhava": False,
+                "heaviness": 0.5,
+                "seasons": sorted(
+                    {
+                        normalized_term(value)
+                        for value in recipe_seasons or []
+                    }
+                ),
+                "tier": "classical",
+                "thermal": "unrecorded",
+                "engineExcluded": False,
+            }
+        candidate = {
+            "id": food_id,
+            "name": name,
+            "kcalPer100g": energy,
+            "proteinPer100g": protein,
+            "carbsPer100g": carbs,
+            "fatPer100g": fat,
+            "fiberPer100g": fiber,
+            "concepts": sorted(concepts),
+            "enforcedMinAgeMonths": int(enforced_age or 0),
+            "engineExcluded": resolved["engineExcluded"],
+            "role": role,
+            "minimumGrams": minimum,
+            "maximumGrams": maximum,
+            "doshaVata": resolved["doshaVata"],
+            "doshaPitta": resolved["doshaPitta"],
+            "doshaKapha": resolved["doshaKapha"],
+            "rasa": resolved["rasa"],
+            "hasVipaka": resolved["hasVipaka"],
+            "hasVirya": resolved["hasVirya"],
+            "hasPrabhava": resolved["hasPrabhava"],
+            "heaviness": resolved["heaviness"],
+            "seasons": resolved["seasons"],
+            "tier": resolved["tier"],
+            "isHoney": is_honey,
+            "isGhee": is_ghee,
+            "isHeatedHoney": is_honey and heated,
+        }
+        wrappers.append(
+            {
+                "candidate": candidate,
+                "thermalCharacter": resolved["thermal"],
+            }
+        )
+
+    for food in foods:
+        food_id = int(food["id"])
+        categories = food.get("category") or []
+        append_candidate(
+            food_id=food_id,
+            name=food["name"],
+            categories=categories,
+            allergens=food.get("allergens"),
+            energy=nutrient_value(food, "other", "energyKcal"),
+            protein=nutrient_value(food, "macronutrients", "protein"),
+            carbs=nutrient_value(food, "macronutrients", "carbohydrates"),
+            fat=nutrient_value(food, "macronutrients", "fat"),
+            fiber=nutrient_value(food, "macronutrients", "fiber"),
+            enforced_age=food.get("minAgeMonths"),
+            resolved=resolution(food_id, food["name"], categories),
+        )
+
+    for recipe in seed["recipes"]:
+        nutrition = recipe["nutrition"]["per100g"]
+        safety = recipe.get("safety") or {}
+        append_candidate(
+            food_id=int(recipe["foodId"]),
+            name=recipe["name"],
+            categories=[recipe.get("category", "")],
+            allergens=safety.get("allergens"),
+            energy=float(nutrition.get("energyKcal") or 0),
+            protein=float(nutrition.get("protein") or 0),
+            carbs=float(nutrition.get("carbohydrates") or 0),
+            fat=float(nutrition.get("fat") or 0),
+            fiber=float(nutrition.get("fiber") or 0),
+            enforced_age=safety.get("enforcedMinAgeMonths"),
+            resolved={},
+            recipe_dosha=recipe.get("dosha") or {},
+            recipe_seasons=recipe.get("seasons") or [],
+        )
+
+    destination.write_text(
+        json.dumps(wrappers, sort_keys=True, separators=(",", ":")),
+        encoding="utf-8",
+    )
+    return len(wrappers)
+
 
 class MP6NarrationTests(unittest.TestCase):
     @classmethod
@@ -259,10 +771,19 @@ class MP6NarrationTests(unittest.TestCase):
         temporary_root = Path(cls.temporary.name)
         pure_harness = temporary_root / "MP6PureHarness.swift"
         telemetry_harness = temporary_root / "MP6TelemetryHarness.swift"
+        real_solver_harness = temporary_root / "MP6RealSolverHarness.swift"
+        real_candidates = temporary_root / "real-candidates.json"
         cls.pure_binary = temporary_root / "mp6-pure-harness"
         cls.telemetry_binary = temporary_root / "mp6-telemetry-harness"
+        cls.real_solver_binary = temporary_root / "mp6-real-solver-harness"
         pure_harness.write_text(PURE_HARNESS, encoding="utf-8")
         telemetry_harness.write_text(TELEMETRY_HARNESS, encoding="utf-8")
+        real_solver_harness.write_text(
+            REAL_SOLVER_HARNESS,
+            encoding="utf-8",
+        )
+        cls.real_candidate_count = make_real_candidate_file(real_candidates)
+        cls.real_candidates = real_candidates
 
         pure_compile = subprocess.run(
             [
@@ -309,6 +830,44 @@ class MP6NarrationTests(unittest.TestCase):
                 + telemetry_compile.stdout
                 + telemetry_compile.stderr
             )
+
+        real_solver_compile = subprocess.run(
+            [
+                "xcrun",
+                "swiftc",
+                "-O",
+                "-parse-as-library",
+                str(SOLVER),
+                str(NARRATION),
+                str(real_solver_harness),
+                "-o",
+                str(cls.real_solver_binary),
+            ],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            timeout=180,
+        )
+        if real_solver_compile.returncode != 0:
+            raise AssertionError(
+                "MP-6 real solver harness did not compile:\n"
+                + real_solver_compile.stdout
+                + real_solver_compile.stderr
+            )
+        real_solver_run = subprocess.run(
+            [str(cls.real_solver_binary), str(real_candidates)],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            timeout=180,
+        )
+        if real_solver_run.returncode != 0:
+            raise AssertionError(
+                "MP-6 real solver harness did not complete:\n"
+                + real_solver_run.stdout
+                + real_solver_run.stderr
+            )
+        cls.real_sample = json.loads(real_solver_run.stdout)
 
     @classmethod
     def tearDownClass(cls):
@@ -359,11 +918,63 @@ class MP6NarrationTests(unittest.TestCase):
         self.assertEqual(len(records), 9)
         for record in records:
             copy = record["title"]
-            self.assertGreater(len(copy), 80)
+            self.assertGreater(len(copy), 45)
             self.assertRegex(copy, r"\d+ kcal")
             self.assertRegex(copy, r"\d+\.\d g protein")
-            self.assertIn("Tastes present:", copy)
-            self.assertIn("Traditionally considered", copy)
+            self.assertNotIn("for balanced agni", copy)
+            self.assertNotIn("Traditionally considered mixed", copy)
+
+        by_key = {
+            (record["day"], record["slotIndex"]): record["title"]
+            for record in records
+        }
+        self.assertIn("Recorded tastes:", by_key[(1, 0)])
+        self.assertIn("Traditionally considered warming.", by_key[(1, 0)])
+        self.assertNotIn("agni context", by_key[(1, 0)])
+        self.assertNotIn("Traditionally considered", by_key[(1, 1)])
+        self.assertNotIn("agni context", by_key[(1, 1)])
+        self.assertIn(
+            "with sweet as its recorded taste",
+            by_key[(1, 2)],
+        )
+        self.assertNotIn("Recorded taste", by_key[(1, 2)])
+        self.assertIn("Traditionally considered cooling.", by_key[(1, 2)])
+        self.assertIn("Traditional agni context: slow.", by_key[(2, 1)])
+        self.assertNotIn("mixed", by_key[(2, 1)])
+
+    def test_five_frames_are_deterministic_and_never_repeat_adjacent(self):
+        frames = [int(value) for value in self.run_pure("frames7").split(",")]
+        self.assertEqual(len(frames), 21)
+        self.assertEqual(set(frames), set(range(5)))
+        self.assertTrue(
+            all(left != right for left, right in zip(frames, frames[1:]))
+        )
+        self.assertEqual(
+            {frame: frames.count(frame) for frame in range(5)},
+            {0: 5, 1: 4, 2: 4, 3: 4, 4: 4},
+        )
+
+    def test_real_solver_seven_day_template_sample(self):
+        sample = self.real_sample
+        self.assertEqual(
+            sample["candidateSource"],
+            "shipped foods.json + ayurveda_seed.json.gz",
+        )
+        self.assertEqual(
+            sample["sourceCandidateCount"],
+            self.real_candidate_count,
+        )
+        self.assertGreater(sample["sourceCandidateCount"], 13_500)
+        self.assertTrue(sample["twoDayNoRepeat"])
+        self.assertGreaterEqual(sample["distinctFoodCount"], 25)
+        meals = sample["meals"]
+        self.assertEqual(len(meals), 21)
+        frames = [meal["frameIndex"] for meal in meals]
+        self.assertTrue(
+            all(left != right for left, right in zip(frames, frames[1:]))
+        )
+        self.assertTrue(all(meal["componentIDs"] for meal in meals))
+        self.assertTrue(all(meal["title"].strip() for meal in meals))
 
     def test_title_count_mismatch_falls_back_without_misassignment(self):
         output = self.run_pure("mismatch")

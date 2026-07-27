@@ -38,6 +38,8 @@ struct MP6NarrationOutcome: Equatable, Sendable {
 }
 
 enum MP6TemplateNarrator {
+    static let frameCount = 5
+
     static func narrate(_ facts: [MP6NarrationFact]) -> [MP6NarratedTitle] {
         facts.map { fact in
             MP6NarratedTitle(
@@ -46,6 +48,12 @@ enum MP6TemplateNarrator {
                 title: title(for: fact)
             )
         }
+    }
+
+    static func frameIndex(for fact: MP6NarrationFact) -> Int {
+        let dayOffset = max(0, fact.day - 1) % frameCount
+        let slotOffset = max(0, fact.slotIndex) % frameCount
+        return (dayOffset * 3 + slotOffset) % frameCount
     }
 
     static func title(for fact: MP6NarrationFact) -> String {
@@ -63,24 +71,62 @@ enum MP6TemplateNarrator {
             locale: Locale(identifier: "en_US_POSIX"),
             fact.proteinGrams
         )
-        let tasteCopy: String
         let tastes = uniqueNonempty(fact.tastes).sorted()
-        if tastes.isEmpty {
-            tasteCopy = "Tastes are not recorded."
-        } else {
-            tasteCopy = "Tastes present: "
-                + "\(readableList(tastes, empty: "none recorded"))."
+        let singleTaste = tastes.count == 1 ? tastes[0] : nil
+        let multipleTastes = tastes.count > 1
+            ? readableList(tastes, empty: "")
+            : nil
+        let singleTasteSuffix = singleTaste.map {
+            ", with \($0) as its recorded taste"
+        } ?? ""
+        let tasteSentence: String
+        switch frameIndex(for: fact) {
+        case 0:
+            tasteSentence = multipleTastes.map {
+                " Recorded tastes: \($0)."
+            } ?? ""
+        case 1:
+            tasteSentence = multipleTastes.map {
+                " Its recorded tastes are \($0)."
+            } ?? ""
+        case 2:
+            tasteSentence = multipleTastes.map {
+                " Taste record: \($0)."
+            } ?? ""
+        case 3:
+            tasteSentence = multipleTastes.map {
+                " The recorded tastes are \($0)."
+            } ?? ""
+        default:
+            tasteSentence = multipleTastes.map {
+                " Recorded taste set: \($0)."
+            } ?? ""
         }
-        let thermal = displayTerm(fact.thermalCharacter, empty: "unrecorded")
-        let agni = displayTerm(fact.agni, empty: "balanced")
-        let ayurvedicCopy: String
-        if thermal == "unrecorded" {
-            ayurvedicCopy = "Thermal character is not recorded; agni context: \(agni)."
-        } else {
-            ayurvedicCopy = "Traditionally considered \(thermal) for \(agni) agni."
+        let guidance = traditionalGuidance(
+            thermalCharacter: fact.thermalCharacter,
+            agni: fact.agni
+        )
+        let mainSentence: String
+        switch frameIndex(for: fact) {
+        case 0:
+            mainSentence = "\(dishes) — \(kcal) kcal and \(protein) g protein"
+                + "\(singleTasteSuffix)."
+        case 1:
+            mainSentence = "\(dishes): \(kcal) kcal, \(protein) g protein"
+                + "\(singleTasteSuffix)."
+        case 2:
+            mainSentence = "At \(kcal) kcal, \(dishes) supplies "
+                + "\(protein) g protein\(singleTasteSuffix)."
+        case 3:
+            mainSentence = "\(protein) g protein and \(kcal) kcal come from "
+                + "\(dishes)\(singleTasteSuffix)."
+        default:
+            let slot = displayTerm(fact.slotName, empty: "this meal")
+                .lowercased()
+            mainSentence = "For \(slot), \(dishes) totals \(kcal) kcal with "
+                + "\(protein) g protein\(singleTasteSuffix)."
         }
-        return "\(dishes) — \(kcal) kcal and \(protein) g protein. "
-            + "\(tasteCopy) \(ayurvedicCopy)"
+        return mainSentence + tasteSentence + guidance
     }
 
     private static func uniqueNonempty(_ values: [String]) -> [String] {
@@ -119,6 +165,31 @@ enum MP6TemplateNarrator {
             .trimmingCharacters(in: .whitespacesAndNewlines)
             .replacingOccurrences(of: "_", with: " ")
         return value.isEmpty ? fallback : value
+    }
+
+    private static func traditionalGuidance(
+        thermalCharacter: String,
+        agni: String
+    ) -> String {
+        let thermal = displayTerm(
+            thermalCharacter,
+            empty: "unrecorded"
+        ).lowercased()
+        let agni = displayTerm(agni, empty: "balanced").lowercased()
+        let hasThermal = !["mixed", "unrecorded"].contains(thermal)
+        let hasAgni = agni != "balanced"
+
+        switch (hasThermal, hasAgni) {
+        case (true, true):
+            return " Traditionally considered \(thermal); "
+                + "agni context: \(agni)."
+        case (true, false):
+            return " Traditionally considered \(thermal)."
+        case (false, true):
+            return " Traditional agni context: \(agni)."
+        case (false, false):
+            return ""
+        }
     }
 }
 
