@@ -1,6 +1,6 @@
 # TASK MP-7 — culinary plausibility
 
-Director packet · rev2, 2026-07-27 · branch `ayurveda-app`, base = artifacts commit `6e9f8d0`
+Director packet · rev3, 2026-07-27 · branch `ayurveda-app`, base = `04b0550` (MP-7d)
 Corrective task. Blocks the `MP5AyurvedicSolverEnabled` flag going on.
 
 ---
@@ -33,9 +33,10 @@ New director artifacts are attached and go in as-is; do not rewrite them.
 
 | Path | State |
 |---|---|
-| `ayurveda-data/rules/food-roles.json` | **rev2, replaces the rev1 already committed at `6e9f8d0`** — 14 roles, 28 rules, 615 phrases, 34 token groups, 56 veto groups, plus corrected signal maps (187 categories, 19 dravya categories, 2 recipe rules) |
-| `ayurveda-data/tests/food-role-goldens.json` | rev1, unchanged — already committed at `6e9f8d0` |
-| `ayurveda-data/tests/plan-validity-properties.json` | rev2, unchanged — already committed at `6e9f8d0` |
+| `ayurveda-data/rules/food-roles.json` | **rev4, replaces whatever is committed** — 15 roles, 32 rules, 656 phrases, 94 veto groups, 3-way category split, new `ingredientOnly` role, new `recipePostPass`. See §8. |
+| `ayurveda-data/tests/food-role-goldens.json` | **rev2** — one label corrected (peanut butter → condiment); see §8 |
+| `ayurveda-data/tests/plan-validity-properties.json` | rev2, unchanged — already committed |
+| `ayurveda-data/tools/ref_resolve.py` | **new** — my reference implementation of the same spec, kept deliberately as the second derivation for G3 |
 
 New code:
 
@@ -68,11 +69,9 @@ The three signal-driven rules were **all wrong in rev1 and are corrected in `foo
 On the recipe signal the audit's reasoning was exactly right: `meal` names a *slot*, not a role, and mapping breakfast/lunch/dinner/snack to a role would have been the prohibited proxy substitution. rev2 splits it:
 
 - **`A-RECIPE-MEAL` (priority 85)** maps only `drink → beverage` and `dessert → sweet`. Those two are direct — a recipe whose meal is `drink` *is* a beverage. The other four values are not mapped here at all.
-- **`A-RECIPE-COMPOSED` (priority 45)** is structural, not inferential: a row with **≥2 ingredients and ≥1 preparation step is a prepared dish**, therefore not a raw commodity and not a seasoning. It maps breakfast/lunch/dinner → `main`, snack → `side`. It sits **below** the 60-band name phrases, so it never overrides them — "Bathua Raita" still resolves to `side`, "Dry Fruit Ladoo" to `sweet`, "Cilantro Coriander Herb Salt" to `spice`. Only recipes whose names carry no signal reach it.
+- **`A-RECIPE-COMPOSED` was rev2's answer and is WITHDRAWN in rev4.** Deferring to the commodity name phrases turned out to be exactly backwards: 198 of the 1,500 recipes resolved to `spice` or `herb`. It is replaced by `recipePostPass`, which skips the commodity bands entirely for authored recipes. See §8.
 
-That rule is the weakest in the file and is gated separately at G2b.
-
-Two gaps remain, as gates rather than blockers: roughly 53 of the ~240 live `FoodItem.category` values fall outside the 187 enumerated in `category-rules.json` (G1b), and the `regional` and `fermented` dravya categories are genuinely heterogeneous and mapped conservatively (see `weakEntries` in the file).
+Two gaps remain, as gates rather than blockers: any live `FoodItem.category` values fall outside the 187 enumerated in `category-rules.json` (G1b), and the `regional` and `fermented` dravya categories are genuinely heterogeneous and mapped conservatively (see `weakEntries` in the file).
 
 **Do not invent a proxy for anything still missing.** G12 rev1 used "not Vegan" as a stand-in for honey and produced 831 false disagreements out of 1,217. Report and stop instead — as you did.
 
@@ -136,9 +135,21 @@ Pre-simulated. Each is a number to hit, not a judgement call.
 
 **G1b — category map coverage.** Report every distinct `FoodItem.category[0]` value **not** present in the 187-entry map, with its row count. Unmapped values must account for ≤ **2%** of catalogue rows. Above that, report the list and stop — I will author the missing entries rather than have you guess them.
 
-**G2 — holdout.** Of 60 hand-labelled random rows: wrong-confident (a specific role where the label says a different specific role) ≤ **3**; unresolved (`other`) ≤ **6**. **Any** wrong-confident assignment involving `infantProduct`, `supplement` or `nonFood` is an automatic stop, in either direction.
+**G2 — holdout. REPLACED, see §8.** The 60-row holdout at seed `20260727` has been **burned**: the rev3/rev4 rules were written after seeing its 13 failures, so it is training data now. It stays in the repo as a regression fixture and its score is never again reported as a holdout number.
 
-**G2b — the composed-dish fallback.** `A-RECIPE-COMPOSED` is the weakest rule in the file, so measure it on its own. Take the authored recipes that actually reach it — those whose names fired no 60-band rule — sample **40** at random with a reported seed, hand-label them, and report accuracy. Also report **how many of the 1,500 recipes reach it at all**; if the name rules already resolve most of them, the rule matters less than its weakness suggests. Below **75%** accuracy, report and stop rather than tuning it yourself.
+The replacement is **100 rows, a seed you choose and report, labelled before the resolver runs**, scored by severity:
+
+| Class | Meaning | Gate |
+|---|---|---|
+| eligibility-crossing | expected ineligible, resolved eligible, or the reverse | **0 — automatic stop** |
+| MAJOR | any other cross-family error | ≤ 8 |
+| minor | within anchor pair, within accompaniments, or within the ineligible set | report |
+| unresolved | fell to `other` | ≤ 8 |
+| exact | | ≥ 85 |
+
+Severity replaces the flat wrong-confident count because that count treated "infant formula read as a main course" and "main read as staple" as the same error. They are not: one crosses an eligibility boundary and the other is two anchors.
+
+**G2b — recipe roles. REWRITTEN.** `A-RECIPE-COMPOSED` is **withdrawn** and replaced by `recipePostPass` (§8). Sample **40** authored recipes at random with a reported seed, hand-label, report accuracy — gate **≥ 85%**. Additionally, and this one is absolute: **zero** of the 1,500 recipes may resolve to a role in `recipePostPass.prohibited`. My reference run puts that at 0 and puts 1,039 of 1,500 (69.3%) on an anchor role; if your numbers differ materially from mine, that disagreement is itself the finding — report it before proceeding.
 
 **G3 — cross-derivation.** Derive every row's role twice: name rules with the category map disabled, category map with the name rules disabled. Enumerate all disagreements, report the count, and review a 100-row random sample of them by hand. **Do not auto-resolve.** This is the only technique that found the `flesh` phrase matching 46 vegetarian recipes; no single-source check would have. A large raw count is expected and is not itself a failure.
 
@@ -171,9 +182,9 @@ Stop immediately, commit nothing further, and report if any of these occur:
 
 - G0 fails.
 - G1 coverage above 10%.
-- Any `infantProduct` / `supplement` / `nonFood` wrong-confident in the holdout.
+- Any eligibility-crossing error in the new 100-row holdout.
 - A signal field named in `food-roles.json` rev2 still does not exist in the repo, or its values still do not match the map.
-- G1b unmapped categories above 2% of rows, or G2b composed-dish accuracy below 75%.
+- G1b unmapped categories above 2% of rows, or G2b recipe accuracy below 85%, or any recipe in a prohibited role.
 - Any of the 117 exclusion goldens flips after the FC-1f plural fix.
 - More than 2 of 30 solves become infeasible.
 - Y1 mean delta drops below +0.30.
@@ -199,3 +210,59 @@ Report the delta before and after, per profile, and let the number stand.
 Small commits, one per sub-task, on `ayurveda-app`. Message prefix `MP-7a:` … `MP-7e:`, `FC-1f:`. Push after each. Then a single report containing: every gate above with its measured number, the holdout score and seed, the G3 disagreement count and the reviewed sample, the Y1 before/after table, the ABAB launch and memory arms with N, and any contested cases printed but not acted on.
 
 If a gate fails, report at that point. Do not continue to the next sub-task.
+
+
+---
+
+## 8. rev3 addendum — what the holdout bought
+
+The stop at G2 was correct and the 47/60 was worth more than a pass would have been. Measured against the real 12,601-row catalogue, the three failure shapes it exposed were far larger than 13 rows:
+
+| Defect | Real exposure |
+|---|---:|
+| bare `salt` at priority 80 → `spice` | **592 rows** misclassified |
+| same shape on `sauce` / `cream` / `milk` / `juice` / `water` / `butter` / `oil` | ~**1,900 rows** at risk |
+| all 187 categories running above the name phrases | **7,268 rows** (57.7%) decided by the coarsest available signal |
+| commodity name rules applied to authored recipe titles | **198 of 1,500** recipes (13.2%) resolved to `spice`/`herb`; 79 more to `other` |
+
+The last one is the serious one and the holdout only hinted at it — I found it by running the rules over the whole recipe library afterwards. "Masala Vegetable Khichdi", a 13-ingredient lunch, resolved to `spice`. "Ghee Ven Pongal" resolved to `fat`. Every Mung Kitchari fell to `other`. Since `spice` caps at 2 per meal and 0.3–15 g, those 198 recipes would have been effectively unusable in a plan.
+
+The cause is a category error in rev1–rev3, not a tuning miss: **a dish title is made of ingredient names**, so rules built for USDA commodity rows cannot classify it.
+
+### Four changes
+
+**`matchScope: "firstSegment"`** on the 80-band rules. A phrase only counts inside the first comma segment, where USDA puts the head noun. "Applesauce, canned, sweetened, with salt" no longer reads as salt; "Orange juice, raw" still reads as juice.
+
+**Three-way category split.** `U-CATEGORY-SENSITIVE` at 92 (anything mapping to an ineligible role — it must never lose a tie, or the token "apple" turns an infant product into a side dish), `U-CATEGORY-FINE` at 70 (the granular WWEIA values), `U-CATEGORY-COARSE` at 50 (the 23 SR Legacy top-level buckets, now a floor rather than an override).
+
+**A new `ingredientOnly` role.** rev2's `nonFood` conflated "not nutritive" (baking soda, tap water) with "food that is not a served dish" (pie crust, flour, batter). The labeller meant the second; the taxonomy could only express the first; the disagreement counted as a sensitive-role stop. Both remain ineligible, so nothing about plan safety changes — but the distinction is now sayable.
+
+**`recipePostPass`.** Authored recipes skip the commodity bands entirely. Step 1 maps `meal` drink/dessert directly. Step 2 truncates at a trailing "with" clause and matches a form vocabulary against the **trailing** tokens, because English dish names are head-final — which is why "Coriander Chutney" is a condiment and "Masala Vegetable Khichdi" is not a spice. Step 3 defaults breakfast/lunch/dinner to `main`, snack to `side`. Six roles are prohibited outright: a cooked composed dish is never a seasoning leaf, a medicinal powder, a non-food, an ingredient-only row, a supplement, or an infant product.
+
+### Measured after the changes
+
+| | rev2 as shipped | rev4 |
+|---|---:|---:|
+| 60-row holdout, exact | 47/60 | **56/60** |
+| eligibility-crossing errors | 1 | **0** |
+| training goldens | — | 71/71 |
+| catalogue `other` | 220 (1.52%) | **109 (0.87%)** |
+| recipes on an anchor role | ~29% | **1,039/1,500 (69.3%)** |
+| recipes in a prohibited role | 198 | **0** |
+
+**Read the 56/60 as training, not as a result.** It is the number that says the fixes work, nothing more.
+
+### Four label adjudications
+
+Three holdout labels disagreed with the resolver for reasons that are not resolver defects. Recorded here rather than silently resolved:
+
+1. **Peanut butter → `condiment`.** The labeller was right and I was wrong. My rev1 golden said `side`, which would have given a 40–250 g portion range to something eaten 15 g at a time. The golden is corrected in `food-role-goldens.json` rev2 and a new 80-band rule puts nut butters above the "Nuts and seeds" category. **This is the only label I changed anywhere, and it was changed to agree with the labeller, not to raise a score.**
+2. **Pork bacon → `main`** (label said `side`). Director ruling: animal protein is an anchor. Stands as a disagreement.
+3. **Bacon strip, meatless → `main`** (label said `side`). Same ruling for the same reason.
+4. **Pie crust → `ingredientOnly`** (label said `nonFood`). Resolved by the new role rather than by a ruling.
+
+### What is still open
+
+**"Vasanta Mustard Greens Brown Rice" resolves to `staple`, labelled `main`.** Both are anchors, so no C property is affected, and the post-pass form rule reads the head-final "Rice" correctly by its own logic. Reported as minor; not tuned away.
+
+**The `masala` form is genuinely ambiguous.** "Fennel Coriander Cooling Masala" (5 ingredients) is a spice blend; "Black Bean Sweet Potato Masala" (9) is a curry. Split at 6 ingredients. That threshold is a judgement, not a measurement — flag any case where it looks wrong and it goes to the vaidya.

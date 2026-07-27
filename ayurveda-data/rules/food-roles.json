@@ -1,6 +1,6 @@
 {
-  "rolesVersion": 2,
-  "revision": "rev2 — 2026-07-27. Corrects all three signal-driven rules after the MP-7 signal audit: `recipe.course` did not exist; `usda.foodCategory` was the wrong field name with the wrong 25-value vocabulary; `dravya.classification` supplied Sanskrit keys with zero overlap with the data. All three are now bound to real fields with their real vocabularies, read directly from the repo. rev1 context follows.  Written after MP-6b produced culinarily absurd plans that passed all 23 hard properties: infant formula served to adults three times in one week, a breakfast of four chocolate drinks, and a dinner of six dried herbs beside raw lentils. Nothing in the catalogue said what a row IS FOR. This file says it.",
+  "rolesVersion": 4,
+  "revision": "rev4 — 2026-07-27. Adds `recipePostPass` after measuring the rev3 rules against all 1,500 authored recipes: 198 of them (13.2%) resolved to spice or herb, including a 13-ingredient khichdi, and 79 more fell to `other`. Commodity name rules cannot classify dish titles. rev3 notes follow. Corrects the six defects the MP-7 60-row holdout exposed at 47/60: bare `salt` at priority 80 was misclassifying 592 catalogue rows as spice, and `juice`, `sauce`, `cream`, `milk`, `water`, `butter` and `oil` carried the same shape (~2,000 rows of exposure); all 187 categories ran above the name phrases even though 57.7% of rows sit under a coarse top-level bucket; and `nonFood` conflated non-nutritive rows with ingredient-only rows. Fixes: a firstSegment match scope, a three-way sensitive/fine/coarse category split, and a new `ingredientOnly` role. THE 60-ROW HOLDOUT IS NOW BURNED — these rules were written after seeing its failures, so it is training data from here on and a fresh holdout is mandatory. rev2 notes follow. Corrects all three signal-driven rules after the MP-7 signal audit: `recipe.course` did not exist; `usda.foodCategory` was the wrong field name with the wrong 25-value vocabulary; `dravya.classification` supplied Sanskrit keys with zero overlap with the data. All three are now bound to real fields with their real vocabularies, read directly from the repo. rev1 context follows.  Written after MP-6b produced culinarily absurd plans that passed all 23 hard properties: infant formula served to adults three times in one week, a breakfast of four chocolate drinks, and a dinner of six dried herbs beside raw lentils. Nothing in the catalogue said what a row IS FOR. This file says it.",
   "author": "Director",
   "appliesTo": "Every row of the 14,484-item FoodItem catalogue, plus the 1,500 authored recipes. Consumed by the MP-5 solver as an eligibility and composition constraint, and by properties C1-C9 of plan-validity-properties.json as their vocabulary.",
   "whyThisExists": "minAgeMonths is a FLOOR, not a range. Infant formula carries a floor of 0 and therefore satisfies every adult age check in the system. The catalogue can express 'not before this age' and cannot express 'intended for infants, inappropriate for adults'. It also cannot express 'this is a seasoning, not a dish'. Both failures produced the same symptom in MP-6b. A role is the missing field.",
@@ -185,8 +185,21 @@
       "exception": "Eligible ONLY when the profile age is under 36 months, in which case it may be an anchor."
     },
     {
+      "id": "ingredientOnly",
+      "definition": "Real food that is not a served dish: pie crust, flour, dough, batter, dry mix. Requires further preparation to become a component.",
+      "anchor": false,
+      "minPerMeal": 0,
+      "maxPerMeal": 0,
+      "portionGrams": {
+        "min": 0,
+        "typical": 0,
+        "max": 0
+      },
+      "eligibleAsComponent": false
+    },
+    {
       "id": "nonFood",
-      "definition": "Leavening, thickener, colouring, plain water, ingredient-only rows.",
+      "definition": "Not nutritive: leavening, thickener, colouring, plain water.",
       "anchor": false,
       "minPerMeal": 0,
       "maxPerMeal": 0,
@@ -410,6 +423,38 @@
       ]
     },
     {
+      "id": "X-INGREDIENT-ONLY",
+      "role": "ingredientOnly",
+      "priority": 93,
+      "matchScope": "firstSegment",
+      "phrases": [
+        "pie crust",
+        "pastry shell",
+        "tart shell",
+        "dough",
+        "batter",
+        "breading",
+        "wrapper",
+        "wrappers",
+        "flour",
+        "meal, corn",
+        "cornstarch",
+        "corn starch",
+        "starch",
+        "dry mix",
+        "mix, dry",
+        "cake mix",
+        "pancake mix",
+        "bread crumbs",
+        "breadcrumbs",
+        "phyllo",
+        "puff pastry",
+        "pie shell",
+        "crust"
+      ],
+      "note": "rev3, added after the MP-7 holdout. rev2's `nonFood` conflated two different things: rows that are not nutritive at all (baking soda, tap water, colouring) and rows that ARE food but are not a served dish (pie crust, flour, dry mix, batter). The holdout labeller correctly called an unbaked pie crust ingredient-only; the resolver called it `staple`; and the disagreement counted as a sensitive-role error because my definition had merged the two. Both remain ineligible as components, so nothing about plan safety changes — but the taxonomy can now express what the labeller meant."
+    },
+    {
       "id": "X-NONFOOD",
       "role": "nonFood",
       "priority": 95,
@@ -465,6 +510,7 @@
       "id": "S-JUICE",
       "role": "beverage",
       "priority": 80,
+      "matchScope": "firstSegment",
       "phrases": [
         "juice",
         "nectar",
@@ -484,6 +530,28 @@
           "juice",
           "concentrate",
           "frozen"
+        ],
+        [
+          "jam"
+        ],
+        [
+          "jams"
+        ],
+        [
+          "jelly"
+        ],
+        [
+          "preserve"
+        ],
+        [
+          "preserves"
+        ],
+        [
+          "marmalade"
+        ],
+        [
+          "sweetened",
+          "juice"
         ]
       ],
       "note": "Lemon/lime juice is a condiment-scale ingredient, not a drink; vetoed here and caught by C-LEMONJUICE."
@@ -492,6 +560,7 @@
       "id": "S-LEMONJUICE",
       "role": "condiment",
       "priority": 82,
+      "matchScope": "firstSegment",
       "tokenGroups": [
         [
           "lemon",
@@ -515,6 +584,7 @@
       "id": "S-MILK-DRINK",
       "role": "beverage",
       "priority": 80,
+      "matchScope": "firstSegment",
       "phrases": [
         "milk",
         "chocolate milk",
@@ -530,8 +600,9 @@
         "milk shake",
         "kefir",
         "hot chocolate",
-        "cocoa",
-        "drinking chocolate"
+        "drinking chocolate",
+        "cocoa, hot",
+        "hot cocoa"
       ],
       "vetoTokens": [
         [
@@ -577,6 +648,24 @@
           "curd"
         ],
         [
+          "nibs"
+        ],
+        [
+          "nib"
+        ],
+        [
+          "cocoa",
+          "powder"
+        ],
+        [
+          "cocoa",
+          "butter"
+        ],
+        [
+          "cocoa",
+          "bean"
+        ],
+        [
           "cheese"
         ],
         [
@@ -599,6 +688,7 @@
       "id": "S-BEVERAGE",
       "role": "beverage",
       "priority": 80,
+      "matchScope": "firstSegment",
       "phrases": [
         "tea",
         "green tea",
@@ -626,7 +716,11 @@
         "coconut water",
         "sugarcane juice",
         "panakam",
-        "thandai"
+        "panaka",
+        "thandai",
+        "kanji",
+        "neera",
+        "sattu drink"
       ],
       "vetoTokens": [
         [
@@ -722,6 +816,7 @@
       "id": "S-CREAM-FAT",
       "role": "fat",
       "priority": 80,
+      "matchScope": "firstSegment",
       "phrases": [
         "ghee",
         "clarified butter",
@@ -773,6 +868,7 @@
       "id": "S-OIL",
       "role": "fat",
       "priority": 80,
+      "matchScope": "firstSegment",
       "phrases": [
         "oil",
         "olive oil",
@@ -811,9 +907,27 @@
       "note": "The vetoes stop 'Fish, tuna, canned in oil, drained' from resolving to fat. This is the single most likely place for this file to go wrong, because 'oil' appears as a preparation word across hundreds of rows."
     },
     {
+      "id": "S-NUT-BUTTER",
+      "role": "condiment",
+      "priority": 80,
+      "matchScope": "firstSegment",
+      "phrases": [
+        "peanut butter",
+        "almond butter",
+        "cashew butter",
+        "nut butter",
+        "sunflower butter",
+        "seed butter",
+        "hazelnut spread",
+        "tahini"
+      ],
+      "note": "At 80 rather than 60 because the fine category 'Nuts and seeds' maps to `side` at 70 and would otherwise win, giving a 40-250 g portion range to a spread eaten 15 g at a time. NOTE: this contradicts the rev1 golden case 'Peanut butter, smooth style -> side', which I wrote and which was wrong. The golden is corrected to `condiment` in food-role-goldens rev2; see the disclosure in TASK-MP7 §3."
+    },
+    {
       "id": "S-SALT",
       "role": "spice",
       "priority": 80,
+      "matchScope": "firstSegment",
       "phrases": [
         "salt",
         "table salt",
@@ -827,14 +941,11 @@
       ]
     },
     {
-      "id": "U-CATEGORY",
+      "id": "U-CATEGORY-SENSITIVE",
       "role": "<fromCategoryMap>",
-      "priority": 70,
+      "priority": 92,
       "signal": "FoodItem.category[0]",
       "categoryMap": {
-        "American Indian/Alaska Native Foods": "other",
-        "Apple juice": "beverage",
-        "Apples": "side",
         "Baby Foods": "infantProduct",
         "Baby food: cereals": "infantProduct",
         "Baby food: fruit": "infantProduct",
@@ -845,20 +956,32 @@
         "Baby food: yogurt": "infantProduct",
         "Baby juice": "infantProduct",
         "Baby water": "infantProduct",
+        "Formula": "infantProduct",
+        "Nutrition bars": "supplement",
+        "Nutritional beverages": "supplement",
+        "Protein and nutritional powders": "supplement",
+        "Tap water": "nonFood"
+      },
+      "note": "Any category that maps to an ineligible role sits ABOVE the name phrases and stays there. Demoting 'Baby food: fruit' below a name rule would let the token 'apple' turn an infant product into a side dish. The one rule in this file that must never lose a tie."
+    },
+    {
+      "id": "U-CATEGORY-FINE",
+      "role": "<fromCategoryMap>",
+      "priority": 70,
+      "signal": "FoodItem.category[0]",
+      "categoryMap": {
+        "Apple juice": "beverage",
+        "Apples": "side",
         "Bacon": "main",
         "Bagels and English muffins": "staple",
-        "Baked Products": "staple",
         "Bananas": "side",
         "Bean": "main",
         "Beans": "main",
         "Beef": "main",
-        "Beef Products": "main",
         "Beer": "beverage",
-        "Beverages": "beverage",
         "Biscuits": "staple",
         "Blueberries and other berries": "side",
         "Bottled water": "beverage",
-        "Breakfast Cereals": "staple",
         "Broccoli": "side",
         "Burgers": "main",
         "Burritos and tacos": "main",
@@ -868,7 +991,6 @@
         "Candy containing chocolate": "sweet",
         "Candy not containing chocolate": "sweet",
         "Carrots": "side",
-        "Cereal Grains and Pasta": "staple",
         "Cereal bars": "sweet",
         "Cheese": "side",
         "Cheese sandwiches": "main",
@@ -881,12 +1003,11 @@
         "Cold cuts and cured meats": "main",
         "Coleslaw": "side",
         "Cookies and brownies": "sweet",
-        "Corn": "staple",
+        "Corn": "side",
         "Cottage/ricotta cheese": "side",
         "Crackers": "staple",
         "Cream and cream substitutes": "fat",
         "Cream cheese": "condiment",
-        "Dairy and Egg Products": "side",
         "Deli and cured meat sandwiches": "main",
         "Diet soft drinks": "beverage",
         "Diet sport and energy drinks": "beverage",
@@ -897,28 +1018,22 @@
         "Egg/breakfast sandwiches": "main",
         "Eggs and omelets": "main",
         "Enhanced water": "beverage",
-        "Fast Foods": "main",
-        "Fats and Oils": "fat",
-        "Finfish and Shellfish Products": "main",
         "Fish": "main",
         "Flavored milk": "beverage",
         "Flavored or carbonated water": "beverage",
-        "Formula": "infantProduct",
         "Frankfurter sandwiches": "main",
         "Frankfurters": "main",
         "French fries and other fried white potatoes": "staple",
         "Fried rice and lo/chow mein": "main",
         "Fried vegetables": "side",
         "Fruit drinks": "beverage",
-        "Fruits and Fruit Juices": "side",
         "Gelatins": "sweet",
         "Grapes": "side",
         "Grits and other cooked cereals": "staple",
         "Ground beef": "main",
         "Ice cream and frozen dairy desserts": "sweet",
-        "Jams": "sweet",
+        "Jams": "condiment",
         "Lamb": "main",
-        "Legumes and Legume Products": "main",
         "Lettuce and lettuce salads": "side",
         "Liquor and cocktails": "beverage",
         "Liver and organ meats": "main",
@@ -927,7 +1042,6 @@
         "Margarine": "fat",
         "Mashed potatoes and white potato mixtures": "staple",
         "Mayonnaise": "condiment",
-        "Meals": "main",
         "Meat and BBQ sandwiches": "main",
         "Meat mixed dishes": "main",
         "Melons": "side",
@@ -935,10 +1049,6 @@
         "Milk shakes and other dairy drinks": "beverage",
         "Mustard and other condiments": "condiment",
         "Nachos": "main",
-        "Not included in a food category": "other",
-        "Nut and Seed Products": "side",
-        "Nutrition bars": "supplement",
-        "Nutritional beverages": "supplement",
         "Nuts and seeds": "side",
         "Oatmeal": "staple",
         "Olives": "side",
@@ -964,16 +1074,12 @@
         "Plant-based yogurt": "side",
         "Popcorn": "side",
         "Pork": "main",
-        "Pork Products": "main",
         "Potato chips": "side",
-        "Poultry Products": "main",
         "Poultry mixed dishes": "main",
         "Pretzels/snack mix": "side",
-        "Protein and nutritional powders": "supplement",
         "Pudding": "sweet",
         "Ramen and Asian broth-based soups": "main",
         "Ready-to-eat cereal": "staple",
-        "Restaurant Foods": "main",
         "Rice": "staple",
         "Rice mixed dishes": "main",
         "Rolls and buns": "staple",
@@ -981,17 +1087,14 @@
         "Saltine crackers": "staple",
         "Sauces": "condiment",
         "Sausages": "main",
-        "Sausages and Luncheon Meats": "main",
         "Seafood mixed dishes": "main",
         "Seafood sandwiches": "main",
         "Shellfish": "main",
         "Smoothies and grain drinks": "beverage",
-        "Snacks": "side",
         "Soft drinks": "beverage",
         "Soups": "main",
         "Soy and meat-alternative products": "main",
         "Soy-based condiments": "condiment",
-        "Spices and Herbs": "spice",
         "Spinach": "side",
         "Sport and energy drinks": "beverage",
         "Stir-fry and soy-based sauce mixtures": "main",
@@ -999,8 +1102,6 @@
         "String beans": "side",
         "Sugar substitutes": "sweet",
         "Sugars and honey": "sweet",
-        "Sweets": "sweet",
-        "Tap water": "nonFood",
         "Tea": "beverage",
         "Tomato-based condiments": "condiment",
         "Tomatoes": "side",
@@ -1011,7 +1112,6 @@
         "Vegetable dishes": "side",
         "Vegetable juice": "beverage",
         "Vegetable sandwiches/burgers": "main",
-        "Vegetables and Vegetable Products": "side",
         "Vegetables on a sandwich": "side",
         "White potatoes": "staple",
         "Wine": "beverage",
@@ -1020,8 +1120,40 @@
         "peas": "side",
         "syrups": "sweet"
       },
-      "note": "rev2 CORRECTION. rev1 named `usda.foodCategory` and supplied the 25-value SR Legacy vocabulary. The real field is `FoodItem.category`, an ARRAY whose FIRST entry is the matched category — the same convention ayurveda-data/rules/category-rules.json already uses. The real vocabulary is the finer-grained WWEIA-style set: 187 values are enumerated in category-rules.json and all 187 are mapped here. Codex reported ~240 distinct values in the live store, so roughly 53 remain unmapped; see gate G1b in TASK-MP7.",
-      "unmappedPolicy": "A category absent from this map does not fire the rule. The row falls through to the 60-band name phrases and then to `other`. Report every unmapped value with its row count; do not invent entries."
+      "note": "The granular WWEIA-style values. Specific enough to outrank a name phrase."
+    },
+    {
+      "id": "U-CATEGORY-COARSE",
+      "role": "<fromCategoryMap>",
+      "priority": 50,
+      "signal": "FoodItem.category[0]",
+      "categoryMap": {
+        "American Indian/Alaska Native Foods": "other",
+        "Baked Products": "staple",
+        "Beef Products": "main",
+        "Beverages": "beverage",
+        "Breakfast Cereals": "staple",
+        "Cereal Grains and Pasta": "staple",
+        "Dairy and Egg Products": "side",
+        "Fast Foods": "main",
+        "Fats and Oils": "fat",
+        "Finfish and Shellfish Products": "main",
+        "Fruits and Fruit Juices": "side",
+        "Legumes and Legume Products": "main",
+        "Meals": "main",
+        "Not included in a food category": "other",
+        "Nut and Seed Products": "side",
+        "Pork Products": "main",
+        "Poultry Products": "main",
+        "Restaurant Foods": "main",
+        "Sausages and Luncheon Meats": "main",
+        "Snacks": "side",
+        "Spices and Herbs": "spice",
+        "Sweets": "sweet",
+        "Vegetables and Vegetable Products": "side"
+      },
+      "note": "rev3, added after the MP-7 holdout. rev2 ran ALL 187 categories at priority 70, above the name phrases. But 7,268 of 12,601 rows (57.7%) sit under one of these coarse SR Legacy top-level buckets, so for the MAJORITY of the catalogue the role was being decided by the least specific signal available, overriding a name phrase that knew more. That is why 'Cookies, chocolate chip' resolved to `staple` via 'Baked Products' and 'Fish, halibut, raw' resolved to `other` via 'American Indian/Alaska Native Foods'. These 23 now sit BELOW the 60-band, as a floor rather than an override.",
+      "unmappedPolicy": "A category absent from all three maps does not fire. The row falls through to the name phrases and then to `other`. Report every unmapped value with its row count; do not invent entries."
     },
     {
       "id": "G-SPICE",
@@ -1088,6 +1220,10 @@
         "dried ginger",
         "ground ginger",
         "sonth",
+        "cocoa nib",
+        "cacao nib",
+        "vanilla bean",
+        "vanilla pod",
         "garlic powder",
         "onion powder",
         "pepper, white",
@@ -1228,6 +1364,7 @@
       "id": "G-CONDIMENT",
       "role": "condiment",
       "priority": 60,
+      "matchScope": "firstSegment",
       "phrases": [
         "chutney",
         "pickle",
@@ -1256,6 +1393,11 @@
         "marinade",
         "podi",
         "gunpowder powder",
+        "jam",
+        "jelly",
+        "marmalade",
+        "preserves",
+        "fruit spread",
         "thecha",
         "murabba",
         "papad",
@@ -1266,6 +1408,7 @@
       "id": "G-SWEET",
       "role": "sweet",
       "priority": 60,
+      "matchScope": "firstSegment",
       "phrases": [
         "sugar",
         "jaggery",
@@ -1293,10 +1436,6 @@
         "kheer",
         "payasam",
         "pudding",
-        "jam",
-        "jelly",
-        "marmalade",
-        "preserves",
         "dessert",
         "sweetened condensed",
         "gulab jamun",
@@ -1432,6 +1571,40 @@
         "lupin",
         "split pea"
       ],
+      "vetoTokens": [
+        [
+          "young",
+          "pods"
+        ],
+        [
+          "pods"
+        ],
+        [
+          "pod"
+        ],
+        [
+          "immature"
+        ],
+        [
+          "snap"
+        ],
+        [
+          "snow"
+        ],
+        [
+          "edible",
+          "podded"
+        ],
+        [
+          "sprouted"
+        ],
+        [
+          "leaves"
+        ],
+        [
+          "greens"
+        ]
+      ],
       "note": "Named pulses are listed individually rather than as a bare 'bean', because a bare 'bean' would beat G-SIDE on 'Beans, snap, green, raw' and turn a green vegetable into a main course."
     },
     {
@@ -1501,6 +1674,56 @@
         "cracker",
         "bun",
         "roll, dinner"
+      ],
+      "vetoTokens": [
+        [
+          "leaves"
+        ],
+        [
+          "leaf"
+        ],
+        [
+          "greens"
+        ],
+        [
+          "tops"
+        ],
+        [
+          "shoots"
+        ],
+        [
+          "sprouts"
+        ],
+        [
+          "stem"
+        ],
+        [
+          "stalk"
+        ],
+        [
+          "flower"
+        ],
+        [
+          "chips"
+        ],
+        [
+          "chip"
+        ],
+        [
+          "crisps"
+        ],
+        [
+          "puffs"
+        ],
+        [
+          "extruded"
+        ],
+        [
+          "snack"
+        ],
+        [
+          "snacks"
+        ]
       ],
       "note": "Deliberately carries NO raw/dry veto. Rice is a staple whether or not it is cooked; edibility is the requiresCooking flag's job. rev1-draft had a veto here and it silently demoted 'Potatoes, flesh and skin, raw' and every raw grain row to `other`, which would have re-created the FC-1 `flesh` defect in a new place."
     },
@@ -1821,5 +2044,212 @@
     "Whether ghee should be a component with its own portion, or an attribute of the dish it is cooked in.",
     "Whether buttermilk/chaas at the end of a meal is a beverage or a digestive, which changes the C6 cap.",
     "Whether a spice cap of 2 per meal is compatible with authored recipes that legitimately name a masala plus salt plus a tempering spice."
-  ]
+  ],
+  "recipePostPass": {
+    "purpose": "rev4. Authored recipes cannot be classified by commodity name phrases, because a dish TITLE is made of ingredient names. Measured on the 1,500 authored recipes with the rev3 rules: 108 resolved to `herb` and 90 to `spice` — 13.2% of the recipe library — including 'Masala Vegetable Khichdi' (13 ingredients, lunch) as a spice and 'Ghee Ven Pongal' (10 ingredients) as a fat. `spice` caps at 2 per meal and 0.3-15 g, so those 198 recipes would have been effectively unusable. A further 79 fell to `other`, including every Mung Kitchari. This is a category error in the rev1-3 design, not a tuning miss.",
+    "appliesTo": "rows that are authored recipes with >=2 ingredients and >=1 preparation step (all 1,500 qualify)",
+    "supersedes": "A-RECIPE-COMPOSED, which is withdrawn. A-RECIPE-MEAL is retained as step 1.",
+    "steps": [
+      {
+        "n": 1,
+        "rule": "meal == drink -> beverage; meal == dessert -> sweet. Direct, unchanged from A-RECIPE-MEAL."
+      },
+      {
+        "n": 2,
+        "rule": "truncate the title at a trailing ' with ' clause, strip parentheticals, then match `forms` against the TRAILING tokens, longest match wins. English dish names are head-final — the last content word names the form — which is why 'Coriander Chutney' is a condiment while 'Masala Vegetable Khichdi' is not a spice. The ' with ' truncation exists because 'Bajra Roti with Gud-Ghee' is a bread, not a fat.",
+        "ambiguousForms": {
+          "masala": "a blend when the recipe has <= 6 ingredients, a dish otherwise. 'Fennel Coriander Cooling Masala' (5 ingredients) is a spice blend; 'Black Bean Sweet Potato Masala' (9) is a curry. `churna`, `powder` and `blend` are unconditional — those words are never a dish."
+        }
+      },
+      {
+        "n": 3,
+        "rule": "otherwise meal in {breakfast, lunch, dinner} -> main; meal == snack -> side."
+      }
+    ],
+    "forms": {
+      "condiment": [
+        "chutney",
+        "achar",
+        "pickle",
+        "podi",
+        "thecha",
+        "murabba",
+        "preserve",
+        "relish",
+        "dip",
+        "spread",
+        "pachadi",
+        "gojju",
+        "launji",
+        "sambal",
+        "tadka",
+        "masala paste",
+        "chundo"
+      ],
+      "spice": [
+        "masala",
+        "churna",
+        "powder",
+        "blend",
+        "spice mix",
+        "namak",
+        "gunpowder"
+      ],
+      "fat": [
+        "ghee",
+        "oil",
+        "butter"
+      ],
+      "side": [
+        "raita",
+        "salad",
+        "slaw",
+        "kachumber",
+        "sabzi",
+        "sabji",
+        "poriyal",
+        "thoran",
+        "usili",
+        "kootu",
+        "palya",
+        "bhaji",
+        "koshimbir",
+        "chaat",
+        "makhana",
+        "sundal",
+        "stir fry",
+        "subzi",
+        "foogath"
+      ],
+      "beverage": [
+        "takra",
+        "lassi",
+        "chaas",
+        "tea",
+        "kadha",
+        "kashaya",
+        "water",
+        "milk",
+        "panaka",
+        "panakam",
+        "juice",
+        "smoothie",
+        "shake",
+        "thandai",
+        "sharbat",
+        "doodh",
+        "kanji",
+        "neera",
+        "drink",
+        "infusion",
+        "decoction",
+        "buttermilk",
+        "tonic",
+        "brew"
+      ],
+      "sweet": [
+        "halwa",
+        "halva",
+        "ladoo",
+        "laddu",
+        "barfi",
+        "burfi",
+        "kheer",
+        "payasam",
+        "shrikhand",
+        "pudding",
+        "sheera",
+        "mithai",
+        "jalebi",
+        "peda",
+        "modak",
+        "sandesh",
+        "custard",
+        "sorbet",
+        "toffee",
+        "chikki",
+        "panjiri"
+      ],
+      "staple": [
+        "flatbread",
+        "rice",
+        "roti",
+        "paratha",
+        "chapati",
+        "chapatti",
+        "phulka",
+        "naan",
+        "puri",
+        "poori",
+        "bhakri",
+        "thepla",
+        "dosa",
+        "idli",
+        "uttapam",
+        "upma",
+        "poha",
+        "porridge",
+        "pancake",
+        "waffle",
+        "bread",
+        "toast",
+        "khakhra",
+        "adai",
+        "pesarattu",
+        "appam",
+        "socca",
+        "piada",
+        "tortilla",
+        "vilepi",
+        "gruel",
+        "muffin",
+        "crepe"
+      ],
+      "main": [
+        "kitchari",
+        "khichari",
+        "khichdi",
+        "kitchadi",
+        "yusha",
+        "dal",
+        "daal",
+        "dahl",
+        "curry",
+        "sambar",
+        "rasam",
+        "stew",
+        "soup",
+        "bowl",
+        "plate",
+        "meal",
+        "biryani",
+        "pulao",
+        "pilaf",
+        "korma",
+        "kofta",
+        "kebab",
+        "cutlet",
+        "tikki",
+        "paneer",
+        "bath",
+        "pongal",
+        "risotto",
+        "casserole",
+        "hash",
+        "scramble",
+        "omelette",
+        "omelet"
+      ]
+    },
+    "prohibited": [
+      "herb",
+      "medicinalHerb",
+      "nonFood",
+      "ingredientOnly",
+      "supplement",
+      "infantProduct"
+    ],
+    "prohibitedNote": "A composed, cooked dish is never a raw seasoning leaf, a medicinal powder, a non-food, an ingredient-only row, a supplement or an infant product. `spice` and `fat` remain reachable, but ONLY from step 2 (an authored masala or a cultured ghee is a real preparation) — never from an ingredient token in the title.",
+    "commodityRulesDoNotApply": "For these rows the 95/92/80/70/60/50-band rules are skipped entirely. They were built for USDA commodity names and misfire on dish titles. The exclusionary detectors are not needed here either: an authored recipe is by construction not infant formula."
+  }
 }
