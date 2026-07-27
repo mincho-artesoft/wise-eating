@@ -216,9 +216,21 @@ static host result until the deferred physical-device matrix. All 123 tests,
 fresh zero-insert/no-rebuild, tracked-size, and final 1.616s median launch gates
 pass. See `REPORT-MP6.md`.
 
+MP-6b completes the deterministic fallback copy pass. The repeated three-day
+MP-6 sample is confirmed as a dedicated narration fixture rather than solver
+output. Five day/slot-selected sentence frames now rotate with zero adjacent
+repeats; balanced agni, mixed thermal character, and empty taste filler are
+omitted, while a single taste is folded into the main sentence. The narrator
+still receives finished facts only and the model-call total remains 2. The new
+real-plan gate runs the production solver over 13,993 usable shipped catalogue
+candidates: its seven-day sample selects 91 distinct IDs and passes the
+two-day no-repeat check. All 125 tests, 25+2 search goldens, 23/23 hard
+properties, Debug/Release, flag on/off smoke, tracked-size, and final 1.543s
+median launch gates pass. See `REPORT-MP6b.md`.
+
 ## Next milestones
 
-1. **Host/simulator engineering through MP-6 COMPLETE on `ayurveda-app`** — D6 (models+seeder), D34 (all 12,601 foods
+1. **Host/simulator engineering through MP-6b COMPLETE on `ayurveda-app`** — D6 (models+seeder), D34 (all 12,601 foods
    classified), D8/D8.1/D8.2 (UI end to end incl. computed tier + editors),
    D9 (engineExcluded enforcement), WE-2 (full recipe nutrition + build-time
    projection/search cache), WE-3 (founder-approved read-only display card),
@@ -233,7 +245,8 @@ pass. See `REPORT-MP6.md`.
    resolution), plus MP-5 (deterministic hard-validated plan assembly and
    aiDraft Ayurveda scoring flag), INT-2 Phase 1 (unsquashed MP-4 +
    FC-1e/FC-2 + MP-5 integration), and MP-6 (one-call batched narration plus
-   deterministic Foundation-only fallback).
+   deterministic Foundation-only fallback), plus MP-6b (five-frame
+   conditional fallback copy validated on a real seven-day solver plan).
    See PROJECT-HANDBOOK.md §6 ledger and `REPORT-WE2.md` / `REPORT-WE3.md` /
    `REPORT-WE4.md` / `REPORT-WE5.md` / `REPORT-WE6.md` for gates, timing,
    screenshots, accessibility, search, `REPORT-WE7.md` for legacy audit
@@ -242,7 +255,8 @@ pass. See `REPORT-MP6.md`.
    `REPORT-FC1e.md` for rev5 and FC-2 wiring, `REPORT-MP5.md` for solver
    properties and launch evidence, and
    `REPORT-INT1.md` for integrated evidence, `REPORT-INT2.md` for the Phase-1
-   merge, and `REPORT-MP6.md` for narration and the two-call model topology.
+   merge, `REPORT-MP6.md` for narration and the two-call model topology, and
+   `REPORT-MP6b.md` for the real-plan copy sample and frame distribution.
 2. **Physical-device validation — explicitly pending.** Run the MP-1 nine-run
    matrix/G6/G8, MP-2 twenty-food error table/runtime counters, and MP-3 runtime
    zero-model-call confirmation exactly as registered in
