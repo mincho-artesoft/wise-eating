@@ -1,6 +1,6 @@
 {
-  "rolesVersion": 8,
-  "revision": "rev8 — 2026-07-27. Four fixes from the third holdout: bare `corn` removed from G-STAPLE (sweet corn is a vegetable; corn staples are listed by name), nut/seed vetoes on G-STAPLE, an egg roll is no longer an egg dish and the 'Egg rolls' category maps to side, and evaporated/condensed milk are ingredientOnly. Scoping the whole 60-band to the first comma segment was tried first and REVERTED: it fixed one holdout row and broke four goldens, because USDA puts the head noun in segment 2 as often as segment 1. HOLDOUT #3 (seed 2026072704) IS BURNED by these changes.\nrev7 — 2026-07-27. Replaces the enumerated concentrate groups with the bare `concentrate` token plus a `from concentrate` veto, after the G2c reverse census found 'Raspberry juice concentrate' belonged to none of the enumerated shapes. 40 catalogue rows carry the token; 6 are 'from concentrate' and eligible; the other 34 are the concentrate itself.\nrev6 — generalised `requiresCooking` into `notReadyToEat` after the G2c reverse census found 126 eligible rows that are not food you can put on a plate. The flag went from 100 rows to 302.\nrev5 — added X-DRY-MIX after the second holdout found `Puddings, tapioca, dry mix` resolving to `sweet`.\nrev4 — added `recipePostPass` after 198 of 1,500 authored recipes (13.2%) resolved to spice or herb, including a 13-ingredient khichdi. Commodity name rules cannot classify dish titles.\nrev3 — fixed the six defects the 60-row holdout exposed at 47/60: bare `salt` at priority 80 was misclassifying 592 rows as spice, and juice/sauce/cream/milk/water/butter/oil carried the same shape (~2,000 rows of exposure); all 187 categories ran above the name phrases though 57.7% of rows sit under a coarse bucket; and `nonFood` conflated non-nutritive rows with ingredient-only rows. Both early holdouts are burned and retained only as regression fixtures.\nrev2 — corrected all three signal-driven rules after the MP-7 signal audit: `recipe.course` did not exist, `usda.foodCategory` was the wrong field with the wrong 25-value vocabulary, and `dravya.classification` supplied Sanskrit keys with zero overlap with the data.\nrev1 — written after MP-6b produced culinarily absurd plans that passed all 23 hard properties: infant formula served to adults three times in one week, a breakfast of four chocolate drinks, and a dinner of six dried herbs beside raw lentils. Nothing in the catalogue said what a row IS FOR. This file says it.",
+  "rolesVersion": 9,
+  "revision": "rev9 — 2026-07-27. Repairs the X-CONCENTRATED-MILK rule introduced in rev8, which used order-independent token groups for a POSITIVE assertion and made 23 prepared puddings, drinks and breads falsely ineligible. Order-independent groups are for vetoes, where over-matching fails safe; positive rules use contiguous phrases. 40 rows captured -> 20.\nrev8 — 2026-07-27. Four fixes from the third holdout: bare `corn` removed from G-STAPLE (sweet corn is a vegetable; corn staples are listed by name), nut/seed vetoes on G-STAPLE, an egg roll is no longer an egg dish and the 'Egg rolls' category maps to side, and evaporated/condensed milk are ingredientOnly. Scoping the whole 60-band to the first comma segment was tried first and REVERTED: it fixed one holdout row and broke four goldens, because USDA puts the head noun in segment 2 as often as segment 1. HOLDOUT #3 (seed 2026072704) IS BURNED by these changes.\nrev7 — 2026-07-27. Replaces the enumerated concentrate groups with the bare `concentrate` token plus a `from concentrate` veto, after the G2c reverse census found 'Raspberry juice concentrate' belonged to none of the enumerated shapes. 40 catalogue rows carry the token; 6 are 'from concentrate' and eligible; the other 34 are the concentrate itself.\nrev6 — generalised `requiresCooking` into `notReadyToEat` after the G2c reverse census found 126 eligible rows that are not food you can put on a plate. The flag went from 100 rows to 302.\nrev5 — added X-DRY-MIX after the second holdout found `Puddings, tapioca, dry mix` resolving to `sweet`.\nrev4 — added `recipePostPass` after 198 of 1,500 authored recipes (13.2%) resolved to spice or herb, including a 13-ingredient khichdi. Commodity name rules cannot classify dish titles.\nrev3 — fixed the six defects the 60-row holdout exposed at 47/60: bare `salt` at priority 80 was misclassifying 592 rows as spice, and juice/sauce/cream/milk/water/butter/oil carried the same shape (~2,000 rows of exposure); all 187 categories ran above the name phrases though 57.7% of rows sit under a coarse bucket; and `nonFood` conflated non-nutritive rows with ingredient-only rows. Both early holdouts are burned and retained only as regression fixtures.\nrev2 — corrected all three signal-driven rules after the MP-7 signal audit: `recipe.course` did not exist, `usda.foodCategory` was the wrong field with the wrong 25-value vocabulary, and `dravya.classification` supplied Sanskrit keys with zero overlap with the data.\nrev1 — written after MP-6b produced culinarily absurd plans that passed all 23 hard properties: infant formula served to adults three times in one week, a breakfast of four chocolate drinks, and a dinner of six dried herbs beside raw lentils. Nothing in the catalogue said what a row IS FOR. This file says it.",
   "author": "Director",
   "appliesTo": "Every row of the 14,484-item FoodItem catalogue, plus the 1,500 authored recipes. Consumed by the MP-5 solver as an eligibility and composition constraint, and by properties C1-C9 of plan-validity-properties.json as their vocabulary.",
   "whyThisExists": "minAgeMonths is a FLOOR, not a range. Infant formula carries a floor of 0 and therefore satisfies every adult age check in the system. The catalogue can express 'not before this age' and cannot express 'intended for infants, inappropriate for adults'. It also cannot express 'this is a seasoning, not a dish'. Both failures produced the same symptom in MP-6b. A role is the missing field.",
@@ -493,43 +493,31 @@
       "id": "X-CONCENTRATED-MILK",
       "role": "ingredientOnly",
       "priority": 93,
-      "tokenGroups": [
-        [
-          "evaporated",
-          "milk"
-        ],
-        [
-          "condensed",
-          "milk"
-        ],
-        [
-          "milk",
-          "evaporated"
-        ],
-        [
-          "milk",
-          "condensed"
-        ],
-        [
-          "milk",
-          "powdered"
-        ],
-        [
-          "powdered",
-          "milk"
-        ],
-        [
-          "milk",
-          "dry",
-          "whole"
-        ],
-        [
-          "milk",
-          "dry",
-          "nonfat"
-        ]
+      "phrases": [
+        "evaporated milk",
+        "milk evaporated",
+        "condensed milk",
+        "milk condensed",
+        "sweetened condensed",
+        "powdered milk",
+        "milk powdered",
+        "dry whole milk",
+        "nonfat dry milk",
+        "dry nonfat milk",
+        "milk dry"
       ],
-      "note": "rev8. Evaporated and condensed milk are cooking ingredients, not a serving of milk — the third holdout labelled 'Milk, evaporated, 2% fat, with added vitamins A and D' ingredientOnly and it was right. Deliberately WHOLE-NAME scope rather than firstSegment: USDA writes 'Milk, evaporated, ...' so the qualifier lands in segment 2 and a first-segment rule cannot see it.",
+      "preparedIndicators": [
+        "prepared",
+        "made with",
+        "made from",
+        "reconstituted",
+        "cooked",
+        "baked",
+        "recipe"
+      ],
+      "negatedIndicator": "not reconstituted",
+      "note": "rev9 REPAIRS a defect I introduced in rev8. rev8 expressed this rule as ORDER-INDEPENDENT token groups (['milk','dry','whole'] and friends) on whole-name scope. That captured 40 rows instead of 20 and made 23 of them falsely ineligible: 'Puddings, vanilla, dry mix, instant, prepared with whole milk' contains milk, dry and whole, scattered, and is a dessert. THE LESSON: order-independent token groups are the right mechanism for VETOES, where over-matching fails safe by excluding a concept. Using them for a POSITIVE assertion inverts that — over-matching removes real food from every plan. Positive rules use contiguous phrases. This rule now matches 20 rows, all of them concentrated, dried or condensed milk that requires making up.",
+      "evaluation": "Same shape as X-DRY-MIX: a phrase must hit; `not reconstituted` forces the rule; any other prepared indicator suppresses it.",
       "matchScope": "wholeName"
     },
     {
