@@ -37,6 +37,8 @@ TIER_RANK = {"exact": 0, "near": 1}
 EXPECTED_CATALOG_COUNT = 14_484
 EXPECTED_CONCEPT_COUNT = 25
 EXPECTED_ALIAS_COUNT = 75
+EXPECTED_FOOD_ROLE_COUNT = 14
+EXPECTED_FOOD_ROLE_RULE_COUNT = 28
 RECIPE_PROPAGATION_DEPTH_CAP = 16
 MODIFIER_PARENTHETICAL = re.compile(r"\([^)]*\)")
 MODIFIER_INVALID = re.compile(r"[^a-z0-9,;'\- ]")
@@ -365,6 +367,12 @@ def parse_args() -> argparse.Namespace:
         help="Destination deterministic food-concept membership bundle",
     )
     parser.add_argument(
+        "--roles-output",
+        type=Path,
+        default=repo_root / "WiseEating" / "food_roles.json.gz",
+        help="Destination deterministic food-role resolution bundle",
+    )
+    parser.add_argument(
         "--foods",
         type=Path,
         default=repo_root / "WiseEating" / "Legacy" / "foods.json",
@@ -532,14 +540,23 @@ def load_food_safety(
 
 
 def load_food_names(path: Path, store_ids: set[int]) -> dict[int, str]:
+    return {
+        food_id: record["name"]
+        for food_id, record in load_food_catalog(path, store_ids).items()
+    }
+
+
+def load_food_catalog(
+    path: Path, store_ids: set[int]
+) -> dict[int, dict[str, Any]]:
     try:
         foods = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as error:
-        raise BuildError(f"cannot load food names from {path}: {error}") from error
+        raise BuildError(f"cannot load food catalogue from {path}: {error}") from error
     if not isinstance(foods, list):
         raise BuildError(f"{path}: expected a top-level array")
 
-    names: dict[int, str] = {}
+    catalog: dict[int, dict[str, Any]] = {}
     for food in foods:
         if (
             not isinstance(food, dict)
@@ -549,17 +566,26 @@ def load_food_names(path: Path, store_ids: set[int]) -> dict[int, str]:
         ):
             raise BuildError(f"{path}: food has no integer id and non-empty name")
         food_id = food["id"]
-        if food_id in names:
+        if food_id in catalog:
             raise BuildError(f"{path}: duplicate food id {food_id}")
-        names[food_id] = food["name"]
+        categories = food.get("category") or []
+        if not isinstance(categories, list) or not all(
+            isinstance(value, str) and value for value in categories
+        ):
+            raise BuildError(f"{path}: food {food_id} has invalid category values")
+        catalog[food_id] = {
+            "name": food["name"],
+            "category": categories[0] if categories else None,
+        }
 
-    if set(names) != store_ids:
-        missing = sorted(store_ids - set(names))
-        extra = sorted(set(names) - store_ids)
+    if set(catalog) != store_ids:
+        missing = sorted(store_ids - set(catalog))
+        extra = sorted(set(catalog) - store_ids)
         raise BuildError(
-            f"{path}: food-name/store id mismatch; missing={missing[:10]}, extra={extra[:10]}"
+            f"{path}: food-catalog/store id mismatch; "
+            f"missing={missing[:10]}, extra={extra[:10]}"
         )
-    return names
+    return catalog
 
 
 def load_suffix_negation_terms(path: Path) -> set[str]:
@@ -758,6 +784,9 @@ def validate_food_concept_sources(
 def _phrase_spans(
     tokens: tuple[str, ...],
     phrase_tokens: tuple[str, ...],
+    *,
+    plural_tolerance: str = "exact",
+    irregular_plurals: dict[str, str] | None = None,
 ) -> list[tuple[int, int]]:
     if not phrase_tokens or len(phrase_tokens) > len(tokens):
         return []
@@ -765,18 +794,119 @@ def _phrase_spans(
     return [
         (start, start + width)
         for start in range(len(tokens) - width + 1)
-        if tokens[start : start + width] == phrase_tokens
+        if all(
+            _food_token_matches(
+                authored,
+                observed,
+                plural_tolerance=plural_tolerance,
+                irregular_plurals=irregular_plurals,
+            )
+            for authored, observed in zip(
+                phrase_tokens,
+                tokens[start : start + width],
+            )
+        )
     ]
+
+
+def _plural_forms(
+    token: str,
+    irregular_plurals: dict[str, str] | None = None,
+) -> set[str]:
+    forms = {token, f"{token}s", f"{token}es"}
+    if token.endswith("y") and len(token) > 1:
+        forms.add(f"{token[:-1]}ies")
+    if irregular_plurals and token in irregular_plurals:
+        forms.add(irregular_plurals[token])
+    return forms
+
+
+def _equivalent_token_forms(
+    token: str,
+    irregular_plurals: dict[str, str] | None = None,
+) -> set[str]:
+    forms = _plural_forms(token, irregular_plurals)
+    inverse = {
+        plural: singular
+        for singular, plural in (irregular_plurals or {}).items()
+    }
+    singular: str | None = inverse.get(token)
+    if singular is None and token.endswith("ies") and len(token) > 3:
+        singular = f"{token[:-3]}y"
+    if singular is None and token.endswith("es") and len(token) > 3:
+        candidate = token[:-2]
+        if candidate.endswith(("s", "x", "z", "ch", "sh", "o")):
+            singular = candidate
+    if (
+        singular is None
+        and token.endswith("s")
+        and len(token) > 3
+        and not token.endswith("ss")
+    ):
+        singular = token[:-1]
+    if singular is not None:
+        forms.update(_plural_forms(singular, irregular_plurals))
+    return forms
+
+
+def _food_token_matches(
+    authored_token: str,
+    observed_token: str,
+    *,
+    plural_tolerance: str,
+    irregular_plurals: dict[str, str] | None = None,
+) -> bool:
+    if authored_token == observed_token:
+        return True
+    if plural_tolerance == "exact":
+        return False
+    if plural_tolerance == "trailing_s":
+        return f"{authored_token}s" == observed_token
+    if plural_tolerance != "full":
+        raise BuildError(f"unsupported plural tolerance {plural_tolerance!r}")
+    return observed_token in _equivalent_token_forms(
+        authored_token,
+        irregular_plurals,
+    )
+
+
+def _tokens_contain_group(
+    tokens: tuple[str, ...],
+    group: tuple[str, ...],
+    *,
+    plural_tolerance: str,
+    irregular_plurals: dict[str, str] | None = None,
+) -> bool:
+    return all(
+        any(
+            _food_token_matches(
+                authored,
+                observed,
+                plural_tolerance=plural_tolerance,
+                irregular_plurals=irregular_plurals,
+            )
+            for observed in tokens
+        )
+        for authored in group
+    )
 
 
 def _longest_positive_matches(
     tokens: tuple[str, ...],
     phrases: list[tuple[str, tuple[str, ...]]],
     suffix_negation_terms: set[str],
+    *,
+    plural_tolerance: str = "exact",
+    irregular_plurals: dict[str, str] | None = None,
 ) -> list[str]:
     candidates: list[tuple[int, int, int, str]] = []
     for phrase, phrase_tokens in phrases:
-        for start, end in _phrase_spans(tokens, phrase_tokens):
+        for start, end in _phrase_spans(
+            tokens,
+            phrase_tokens,
+            plural_tolerance=plural_tolerance,
+            irregular_plurals=irregular_plurals,
+        ):
             if end < len(tokens) and tokens[end] in suffix_negation_terms:
                 continue
             candidates.append((-(end - start), start, end, phrase))
@@ -795,14 +925,19 @@ def _longest_positive_matches(
 def _matching_veto_token_groups(
     tokens: tuple[str, ...],
     groups: list[tuple[str, ...]],
+    *,
+    plural_tolerance: str = "trailing_s",
+    irregular_plurals: dict[str, str] | None = None,
 ) -> list[str]:
-    def token_matches(authored_token: str) -> bool:
-        return authored_token in tokens or f"{authored_token}s" in tokens
-
     return [
         " ".join(group)
         for group in groups
-        if all(token_matches(token) for token in group)
+        if _tokens_contain_group(
+            tokens,
+            group,
+            plural_tolerance=plural_tolerance,
+            irregular_plurals=irregular_plurals,
+        )
     ]
 
 
@@ -1019,6 +1154,649 @@ def build_food_concepts(
         "reasons": reasons,
         "negativeVetoes": negative_vetoes,
         "ancestors": ancestors,
+    }
+    return artifact, diagnostics
+
+
+def load_food_role_source(path: Path) -> dict[str, Any]:
+    try:
+        source = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise BuildError(f"cannot load food-role source {path}: {error}") from error
+    validate_food_role_source(source)
+    return source
+
+
+def validate_food_role_source(source: dict[str, Any]) -> None:
+    if not isinstance(source, dict) or source.get("rolesVersion") != 2:
+        raise BuildError("food-roles.json must use rolesVersion 2")
+    roles = source.get("roles")
+    rules = source.get("rules")
+    if not isinstance(roles, list) or len(roles) != EXPECTED_FOOD_ROLE_COUNT:
+        raise BuildError(
+            f"food-role gate failed: expected {EXPECTED_FOOD_ROLE_COUNT} roles"
+        )
+    if not isinstance(rules, list) or len(rules) != EXPECTED_FOOD_ROLE_RULE_COUNT:
+        raise BuildError(
+            f"food-role gate failed: expected {EXPECTED_FOOD_ROLE_RULE_COUNT} rules"
+        )
+
+    role_ids: set[str] = set()
+    for role in roles:
+        if (
+            not isinstance(role, dict)
+            or not isinstance(role.get("id"), str)
+            or not isinstance(role.get("anchor"), bool)
+            or not isinstance(role.get("minPerMeal"), int)
+            or not isinstance(role.get("maxPerMeal"), int)
+            or not isinstance(role.get("portionGrams"), dict)
+        ):
+            raise BuildError("invalid food-role definition")
+        role_id = role["id"]
+        if role_id in role_ids:
+            raise BuildError(f"duplicate food role {role_id}")
+        role_ids.add(role_id)
+        portion = role["portionGrams"]
+        values = [portion.get(key) for key in ("min", "typical", "max")]
+        if not all(isinstance(value, (int, float)) for value in values):
+            raise BuildError(f"{role_id}: invalid portion range")
+        if not float(values[0]) <= float(values[1]) <= float(values[2]):
+            raise BuildError(f"{role_id}: unordered portion range")
+
+    rule_ids: set[str] = set()
+    allowed_dynamic_roles = {"<fromCategoryMap>", "<fromDravyaMap>", "<fromMealMap>"}
+    for rule in rules:
+        if (
+            not isinstance(rule, dict)
+            or not isinstance(rule.get("id"), str)
+            or not isinstance(rule.get("role"), str)
+            or not isinstance(rule.get("priority"), int)
+        ):
+            raise BuildError("invalid food-role rule")
+        rule_id = rule["id"]
+        if rule_id in rule_ids:
+            raise BuildError(f"duplicate food-role rule {rule_id}")
+        rule_ids.add(rule_id)
+        if rule["role"] not in role_ids | allowed_dynamic_roles:
+            raise BuildError(f"{rule_id}: unknown role {rule['role']}")
+        for key in ("phrases",):
+            values = rule.get(key, [])
+            if not isinstance(values, list) or not all(
+                isinstance(value, str) and modifier_normalized_tokens(value)
+                for value in values
+            ):
+                raise BuildError(f"{rule_id}: {key} must contain strings")
+        for key in ("tokenGroups", "vetoTokens"):
+            groups = rule.get(key, [])
+            if (
+                not isinstance(groups, list)
+                or not all(
+                    isinstance(group, list)
+                    and bool(group)
+                    and all(
+                        isinstance(token, str)
+                        and len(modifier_normalized_tokens(token)) == 1
+                        for token in group
+                    )
+                    for group in groups
+                )
+            ):
+                raise BuildError(f"{rule_id}: {key} must contain token groups")
+
+    rules_by_id = {rule["id"]: rule for rule in rules}
+    required = {
+        "A-RECIPE-MEAL",
+        "A-RECIPE-COMPOSED",
+        "U-CATEGORY",
+        "D-DRAVYA-CATEGORY",
+    }
+    if not required.issubset(rules_by_id):
+        raise BuildError(f"food-role rules missing {sorted(required - set(rules_by_id))}")
+    if rules_by_id["A-RECIPE-MEAL"]["priority"] != 85:
+        raise BuildError("A-RECIPE-MEAL must remain priority 85")
+    if rules_by_id["A-RECIPE-COMPOSED"]["priority"] != 45:
+        raise BuildError("A-RECIPE-COMPOSED must remain priority 45")
+    name_priorities = [
+        rule["priority"]
+        for rule in rules
+        if rule.get("phrases") or rule.get("tokenGroups")
+    ]
+    if not name_priorities or min(name_priorities) <= 45:
+        raise BuildError("A-RECIPE-COMPOSED must remain below every name rule")
+
+    plural = source.get("matching", {}).get("pluralTolerance", {})
+    irregular = plural.get("irregularPlurals")
+    if not isinstance(irregular, dict) or not all(
+        isinstance(singular, str)
+        and isinstance(plural_value, str)
+        and len(modifier_normalized_tokens(singular)) == 1
+        and len(modifier_normalized_tokens(plural_value)) == 1
+        for singular, plural_value in irregular.items()
+    ):
+        raise BuildError("food-role irregularPlurals must map individual tokens")
+
+
+def _singularized_food_token(
+    token: str,
+    irregular_plurals: dict[str, str],
+) -> str:
+    inverse = {plural: singular for singular, plural in irregular_plurals.items()}
+    if token in inverse:
+        return inverse[token]
+    if token.endswith("ies") and len(token) > 3:
+        return f"{token[:-3]}y"
+    if token.endswith("es") and len(token) > 3:
+        base = token[:-2]
+        if base.endswith(("s", "x", "z", "ch", "sh", "o")):
+            return base
+    if token.endswith("s") and len(token) > 3 and not token.endswith("ss"):
+        return token[:-1]
+    return token
+
+
+def _food_role_headword(
+    name: str,
+    *,
+    matched_label: str | None,
+    prefix_tokens: set[str],
+    modifier_tokens: set[str],
+    irregular_plurals: dict[str, str],
+) -> str:
+    tokens = list(modifier_normalized_tokens(name))
+    dropped_prefix: str | None = None
+    first_segment = name.split(",", 1)[0]
+    first_tokens = modifier_normalized_tokens(first_segment)
+    if (
+        len(first_tokens) == 1
+        and first_tokens[0] in prefix_tokens
+        and tokens
+        and tokens[0] == first_tokens[0]
+    ):
+        dropped_prefix = tokens.pop(0)
+
+    surviving = [token for token in tokens if token not in modifier_tokens]
+    matched_tokens = [
+        token
+        for token in modifier_normalized_tokens(matched_label or "")
+        if token not in modifier_tokens
+    ]
+    matched_set = set(matched_tokens)
+    if surviving and matched_set and surviving[0] not in matched_set:
+        matched_survivor = next(
+            (token for token in surviving if token in matched_set),
+            None,
+        )
+        if matched_survivor is not None:
+            return _singularized_food_token(
+                matched_survivor,
+                irregular_plurals,
+            )
+    if surviving:
+        return _singularized_food_token(surviving[0], irregular_plurals)
+    return _singularized_food_token(
+        dropped_prefix or (tokens[0] if tokens else "unknown"),
+        irregular_plurals,
+    )
+
+
+def _food_requires_cooking(
+    tokens: tuple[str, ...],
+    source: dict[str, Any],
+    irregular_plurals: dict[str, str],
+) -> bool:
+    flag = source["flags"]["requiresCooking"]
+    veto_tokens = flag["veto"]
+    if any(
+        any(
+            _food_token_matches(
+                authored,
+                observed,
+                plural_tolerance="full",
+                irregular_plurals=irregular_plurals,
+            )
+            for observed in tokens
+        )
+        for authored in veto_tokens
+    ):
+        return False
+
+    groups = [
+        tuple(modifier_normalized_tokens(token)[0] for token in group)
+        for group in flag["positive"]["tokenGroups"]
+    ]
+    if any(
+        _tokens_contain_group(
+            tokens,
+            group,
+            plural_tolerance="full",
+            irregular_plurals=irregular_plurals,
+        )
+        for group in groups
+    ):
+        return True
+
+    headwords = tuple(flag["dryStapleHeadwords"])
+    state_description = flag["positive"]["orAllOf"]["state"]
+    states = tuple(re.findall(r"'([^']+)'", state_description))
+    return (
+        any(
+            any(
+                _food_token_matches(
+                    authored,
+                    observed,
+                    plural_tolerance="full",
+                    irregular_plurals=irregular_plurals,
+                )
+                for observed in tokens
+            )
+            for authored in headwords
+        )
+        and any(state in tokens for state in states)
+    )
+
+
+def _resolve_food_role(
+    record: dict[str, Any],
+    compiled_rules: list[dict[str, Any]],
+    suffix_negation_terms: set[str],
+    irregular_plurals: dict[str, str],
+) -> dict[str, Any]:
+    tokens = modifier_normalized_tokens(record["name"])
+    candidates: list[tuple[int, int, int, str, str, str | None]] = []
+
+    for compiled in compiled_rules:
+        rule = compiled["rule"]
+        token_vetoes = _matching_veto_token_groups(
+            tokens,
+            compiled["vetoGroups"],
+            plural_tolerance="full",
+            irregular_plurals=irregular_plurals,
+        )
+        veto_phrase_candidates = {
+            phrase: (phrase, phrase_tokens)
+            for token in tokens
+            for phrase, phrase_tokens in compiled["vetoPhraseIndex"].get(
+                token,
+                [],
+            )
+        }.values()
+        phrase_vetoes = [
+            phrase
+            for phrase, phrase_tokens in veto_phrase_candidates
+            if _phrase_spans(
+                tokens,
+                phrase_tokens,
+                plural_tolerance="full",
+                irregular_plurals=irregular_plurals,
+            )
+        ]
+        if token_vetoes or phrase_vetoes:
+            continue
+
+        phrase_candidates = list(
+            {
+                phrase: (phrase, phrase_tokens)
+                for token in tokens
+                for phrase, phrase_tokens in compiled["phraseIndex"].get(
+                    token,
+                    [],
+                )
+            }.values()
+        )
+        matches = _longest_positive_matches(
+            tokens,
+            phrase_candidates,
+            suffix_negation_terms,
+            plural_tolerance="full",
+            irregular_plurals=irregular_plurals,
+        )
+        group_matches = [
+            " ".join(group)
+            for group in compiled["tokenGroups"]
+            if _tokens_contain_group(
+                tokens,
+                group,
+                plural_tolerance="full",
+                irregular_plurals=irregular_plurals,
+            )
+        ]
+        matched_labels = matches + group_matches
+        resolved_role: str | None = None
+        signal_label: str | None = None
+
+        signal = rule.get("signal")
+        if signal == "FoodItem.category[0]":
+            category = record.get("category")
+            resolved_role = rule["categoryMap"].get(category)
+            signal_label = f"category:{category}" if resolved_role else None
+        elif signal == "dravya.category":
+            category = record.get("dravyaCategory")
+            resolved_role = rule["dravyaMap"].get(category)
+            signal_label = f"dravya:{category}" if resolved_role else None
+        elif signal == "recipe.meal":
+            meal = record.get("recipeMeal")
+            resolved_role = rule["mealMap"].get(meal)
+            signal_label = f"meal:{meal}" if resolved_role else None
+        elif signal == "recipe.isAuthored":
+            meal = record.get("recipeMeal")
+            if (
+                record.get("isAuthoredRecipe") is True
+                and int(record.get("ingredientCount", 0)) >= 2
+                and int(record.get("stepCount", 0)) >= 1
+            ):
+                resolved_role = rule["mealMap"].get(meal)
+                signal_label = f"composed:{meal}" if resolved_role else None
+        elif signal is not None:
+            raise BuildError(f"{rule['id']}: unsupported food-role signal {signal}")
+
+        if rule["role"].startswith("<"):
+            if resolved_role is None:
+                continue
+        elif matched_labels:
+            resolved_role = rule["role"]
+        else:
+            continue
+
+        longest_label = max(
+            matched_labels,
+            key=lambda value: (
+                len(modifier_normalized_tokens(value)),
+                -matched_labels.index(value),
+            ),
+            default=signal_label,
+        )
+        match_length = len(modifier_normalized_tokens(longest_label or ""))
+        candidates.append(
+            (
+                -rule["priority"],
+                -match_length,
+                compiled["index"],
+                resolved_role,
+                rule["id"],
+                longest_label or signal_label,
+            )
+        )
+
+    if not candidates:
+        return {
+            "role": "other",
+            "ruleId": "default",
+            "matched": None,
+        }
+    _priority, _length, _index, role, rule_id, matched = min(candidates)
+    return {
+        "role": role,
+        "ruleId": rule_id,
+        "matched": matched,
+    }
+
+
+def _compile_food_role_rules(role_source: dict[str, Any]) -> list[dict[str, Any]]:
+    irregular_plurals = role_source["matching"]["pluralTolerance"][
+        "irregularPlurals"
+    ]
+    compiled: list[dict[str, Any]] = []
+    for index, rule in enumerate(role_source["rules"]):
+        phrases = [
+            (phrase, modifier_normalized_tokens(phrase))
+            for phrase in rule.get("phrases", [])
+        ]
+        veto_phrases = [
+            (phrase, modifier_normalized_tokens(phrase))
+            for phrase in rule.get("vetoPhrases", [])
+        ]
+
+        def indexed(
+            values: list[tuple[str, tuple[str, ...]]],
+        ) -> dict[str, list[tuple[str, tuple[str, ...]]]]:
+            result: dict[str, list[tuple[str, tuple[str, ...]]]] = defaultdict(
+                list
+            )
+            for value in values:
+                for token in _equivalent_token_forms(
+                    value[1][0],
+                    irregular_plurals,
+                ):
+                    result[token].append(value)
+            return dict(result)
+
+        compiled.append({
+            "index": index,
+            "rule": rule,
+            "phraseIndex": indexed(phrases),
+            "tokenGroups": [
+                tuple(
+                    modifier_normalized_tokens(token)[0]
+                    for token in group
+                )
+                for group in rule.get("tokenGroups", [])
+            ],
+            "vetoGroups": [
+                tuple(
+                    modifier_normalized_tokens(token)[0]
+                    for token in group
+                )
+                for group in rule.get("vetoTokens", [])
+            ],
+            "vetoPhraseIndex": indexed(veto_phrases),
+        })
+    return compiled
+
+
+def resolve_food_role_fixture(
+    name: str,
+    role_source: dict[str, Any],
+    modifiers: list[dict[str, Any]],
+    suffix_negation_terms: set[str],
+    *,
+    category: str | None = None,
+    dravya_category: str | None = None,
+    recipe_meal: str | None = None,
+    ingredient_count: int = 0,
+    step_count: int = 0,
+) -> dict[str, Any]:
+    irregular_plurals = role_source["matching"]["pluralTolerance"][
+        "irregularPlurals"
+    ]
+    record = {
+        "name": name,
+        "category": category,
+        "dravyaCategory": dravya_category,
+        "recipeMeal": recipe_meal,
+        "isAuthoredRecipe": recipe_meal is not None,
+        "ingredientCount": ingredient_count,
+        "stepCount": step_count,
+    }
+    resolved = _resolve_food_role(
+        record,
+        _compile_food_role_rules(role_source),
+        suffix_negation_terms,
+        irregular_plurals,
+    )
+    modifier_tokens = {
+        token
+        for modifier in modifiers
+        for phrase in modifier["phrases"]
+        for token in modifier_normalized_tokens(phrase)
+    }
+    return {
+        **resolved,
+        "requiresCooking": _food_requires_cooking(
+            modifier_normalized_tokens(name),
+            role_source,
+            irregular_plurals,
+        ),
+        "headword": _food_role_headword(
+            name,
+            matched_label=resolved["matched"],
+            prefix_tokens=set(
+                role_source["flags"]["isNearDuplicateOf"][
+                    "categoryPrefixTokens"
+                ]
+            ),
+            modifier_tokens=modifier_tokens,
+            irregular_plurals=irregular_plurals,
+        ),
+    }
+
+
+def build_food_roles(
+    envelope: dict[str, Any],
+    source_food_catalog: dict[int, dict[str, Any]],
+    role_source: dict[str, Any],
+    modifiers: list[dict[str, Any]],
+    suffix_negation_terms: set[str],
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    validate_food_role_source(role_source)
+    records = {
+        food_id: {
+            "foodId": food_id,
+            "name": source["name"],
+            "category": source["category"],
+        }
+        for food_id, source in source_food_catalog.items()
+    }
+    dravya_categories: set[str] = set()
+    for dravya in envelope["dravyas"]:
+        food_id = dravya["foodId"]
+        if food_id not in records:
+            if not dravya["foodIsPlaceholder"]:
+                raise BuildError(f"{dravya['id']}: role food id is absent")
+            records[food_id] = {
+                "foodId": food_id,
+                "name": dravya["name"],
+                "category": None,
+            }
+        records[food_id]["dravyaCategory"] = dravya["category"]
+        dravya_categories.add(dravya["category"])
+
+    recipe_meals: set[str] = set()
+    for recipe in envelope["recipes"]:
+        food_id = recipe["foodId"]
+        if food_id in records:
+            raise BuildError(f"{recipe['id']}: duplicate role food id {food_id}")
+        records[food_id] = {
+            "foodId": food_id,
+            "name": recipe["name"],
+            "category": None,
+            "isAuthoredRecipe": True,
+            "recipeMeal": recipe["meal"],
+            "ingredientCount": len(recipe["ingredients"]),
+            "stepCount": len(recipe["steps"]),
+        }
+        recipe_meals.add(recipe["meal"])
+
+    if len(records) != EXPECTED_CATALOG_COUNT:
+        raise BuildError(
+            f"food-role catalog gate failed: expected {EXPECTED_CATALOG_COUNT}, "
+            f"got {len(records)}"
+        )
+
+    rules_by_id = {rule["id"]: rule for rule in role_source["rules"]}
+    actual_categories = {
+        record["category"]
+        for record in records.values()
+        if record.get("category") is not None
+    }
+    category_map = set(rules_by_id["U-CATEGORY"]["categoryMap"])
+    if actual_categories != category_map:
+        raise BuildError(
+            "food-role category signal mismatch; "
+            f"missing={sorted(actual_categories - category_map)}, "
+            f"extra={sorted(category_map - actual_categories)}"
+        )
+    dravya_map = set(rules_by_id["D-DRAVYA-CATEGORY"]["dravyaMap"])
+    if dravya_categories != dravya_map:
+        raise BuildError(
+            "food-role dravya signal mismatch; "
+            f"missing={sorted(dravya_categories - dravya_map)}, "
+            f"extra={sorted(dravya_map - dravya_categories)}"
+        )
+    if recipe_meals != {"breakfast", "lunch", "dinner", "snack", "drink", "dessert"}:
+        raise BuildError(f"food-role recipe meal signal mismatch: {sorted(recipe_meals)}")
+
+    irregular_plurals = role_source["matching"]["pluralTolerance"][
+        "irregularPlurals"
+    ]
+    compiled_rules = _compile_food_role_rules(role_source)
+
+    modifier_tokens = {
+        token
+        for modifier in modifiers
+        for phrase in modifier["phrases"]
+        for token in modifier_normalized_tokens(phrase)
+    }
+    duplicate_source = role_source["flags"]["isNearDuplicateOf"]
+    prefix_tokens = set(duplicate_source["categoryPrefixTokens"])
+    items: list[dict[str, Any]] = []
+    reasons: dict[int, dict[str, Any]] = {}
+    membership: dict[str, set[int]] = {
+        role["id"]: set() for role in role_source["roles"]
+    }
+    for food_id, record in sorted(records.items()):
+        resolved = _resolve_food_role(
+            record,
+            compiled_rules,
+            suffix_negation_terms,
+            irregular_plurals,
+        )
+        tokens = modifier_normalized_tokens(record["name"])
+        requires_cooking = _food_requires_cooking(
+            tokens,
+            role_source,
+            irregular_plurals,
+        )
+        headword = _food_role_headword(
+            record["name"],
+            matched_label=resolved["matched"],
+            prefix_tokens=prefix_tokens,
+            modifier_tokens=modifier_tokens,
+            irregular_plurals=irregular_plurals,
+        )
+        item = {
+            "foodId": food_id,
+            "role": resolved["role"],
+            "ruleId": resolved["ruleId"],
+            "requiresCooking": requires_cooking,
+            "headword": headword,
+        }
+        items.append(item)
+        membership[resolved["role"]].add(food_id)
+        reasons[food_id] = {
+            **resolved,
+            "name": record["name"],
+            "category": record.get("category"),
+            "dravyaCategory": record.get("dravyaCategory"),
+            "recipeMeal": record.get("recipeMeal"),
+        }
+
+    definitions = []
+    for role in role_source["roles"]:
+        definitions.append(
+            {
+                "id": role["id"],
+                "anchor": role["anchor"],
+                "minPerMeal": role["minPerMeal"],
+                "maxPerMeal": role["maxPerMeal"],
+                "portionGrams": role["portionGrams"],
+                "eligibleAsComponent": role.get("eligibleAsComponent", True),
+            }
+        )
+    artifact = {
+        "rolesVersion": role_source["rolesVersion"],
+        "catalogCount": len(items),
+        "roleCount": len(definitions),
+        "ruleCount": len(role_source["rules"]),
+        "definitions": definitions,
+        "items": items,
+    }
+    diagnostics = {
+        "records": records,
+        "reasons": reasons,
+        "membership": membership,
+        "categoryValues": actual_categories,
+        "dravyaCategoryValues": dravya_categories,
+        "recipeMealValues": recipe_meals,
     }
     return artifact, diagnostics
 
@@ -1685,6 +2463,7 @@ def print_summary(
     contested: list[tuple[int, str, str, list[str]]],
     placeholder_ids: list[str],
     food_concepts: dict[str, Any],
+    food_roles: dict[str, Any],
 ) -> None:
     counts = envelope["counts"]
     primaries = len(envelope["dravyas"]) - counts["placeholders"]
@@ -1731,6 +2510,18 @@ def print_summary(
         + f"nested={propagation['nestedRecipeLinks']}, "
         + f"depth={propagation['depthUsed']}/{propagation['depthCap']}"
     )
+    role_counts = defaultdict(int)
+    for item in food_roles["items"]:
+        role_counts[item["role"]] += 1
+    print(
+        "food roles: "
+        + f"{food_roles['roleCount']} roles, "
+        + f"{food_roles['ruleCount']} rules, "
+        + f"{food_roles['catalogCount']} foods; "
+        + ", ".join(
+            f"{role}={role_counts[role]}" for role in sorted(role_counts)
+        )
+    )
     print()
     print("Contested fdcIds")
     print("fdcId | winner | tier | losers")
@@ -1751,7 +2542,11 @@ def main() -> int:
         store_ids = load_store_ids(actual_store_path)
         nutrition_by_id = load_food_nutrition(args.foods, store_ids)
         source_safety_by_id = load_food_safety(args.foods, store_ids)
-        source_food_names = load_food_names(args.foods, store_ids)
+        source_food_catalog = load_food_catalog(args.foods, store_ids)
+        source_food_names = {
+            food_id: record["name"]
+            for food_id, record in source_food_catalog.items()
+        }
         dravyas = load_batches(data_root / "dravyas", "batch-*.json", "items")
         recipes = load_batches(data_root / "recipes", "batch-r*.json", "items")
         dravya_ids = {dravya["id"] for dravya in dravyas}
@@ -1795,6 +2590,16 @@ def main() -> int:
             concept_overrides,
             suffix_negation_terms,
         )
+        food_role_source = load_food_role_source(
+            data_root / "rules" / "food-roles.json"
+        )
+        food_roles, _role_diagnostics = build_food_roles(
+            envelope,
+            source_food_catalog,
+            food_role_source,
+            rules_bundle["modifiers"],
+            suffix_negation_terms,
+        )
         compressed = encode_deterministic_gzip(envelope)
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_bytes(compressed)
@@ -1802,11 +2607,20 @@ def main() -> int:
         args.rules_output.write_bytes(encode_deterministic_json(rules_bundle))
         args.concepts_output.parent.mkdir(parents=True, exist_ok=True)
         args.concepts_output.write_bytes(encode_deterministic_gzip(food_concepts))
-        print_summary(envelope, contested, placeholder_ids, food_concepts)
+        args.roles_output.parent.mkdir(parents=True, exist_ok=True)
+        args.roles_output.write_bytes(encode_deterministic_gzip(food_roles))
+        print_summary(
+            envelope,
+            contested,
+            placeholder_ids,
+            food_concepts,
+            food_roles,
+        )
         print()
         print(f"wrote: {args.output}")
         print(f"wrote: {args.rules_output}")
         print(f"wrote: {args.concepts_output}")
+        print(f"wrote: {args.roles_output}")
         return 0
     except (BuildError, KeyError, TypeError, ValueError, OSError) as error:
         print(f"build_seed.py: error: {error}", file=sys.stderr)
