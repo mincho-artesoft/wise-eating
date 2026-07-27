@@ -38,7 +38,7 @@ EXPECTED_CATALOG_COUNT = 14_484
 EXPECTED_CONCEPT_COUNT = 25
 EXPECTED_ALIAS_COUNT = 75
 EXPECTED_FOOD_ROLE_COUNT = 15
-EXPECTED_FOOD_ROLE_RULE_COUNT = 33
+EXPECTED_FOOD_ROLE_RULE_COUNT = 34
 RECIPE_PROPAGATION_DEPTH_CAP = 16
 MODIFIER_PARENTHETICAL = re.compile(r"\([^)]*\)")
 MODIFIER_INVALID = re.compile(r"[^a-z0-9,;'\- ]")
@@ -1188,8 +1188,8 @@ def load_food_role_source(path: Path) -> dict[str, Any]:
 
 
 def validate_food_role_source(source: dict[str, Any]) -> None:
-    if not isinstance(source, dict) or source.get("rolesVersion") != 7:
-        raise BuildError("food-roles.json must use rolesVersion 7")
+    if not isinstance(source, dict) or source.get("rolesVersion") != 8:
+        raise BuildError("food-roles.json must use rolesVersion 8")
     roles = source.get("roles")
     rules = source.get("rules")
     if not isinstance(roles, list) or len(roles) != EXPECTED_FOOD_ROLE_COUNT:

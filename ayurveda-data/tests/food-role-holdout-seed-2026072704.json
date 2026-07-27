@@ -1,7 +1,7 @@
 {
   "fixtureVersion": 1,
   "kind": "food-role-random-holdout",
-  "status": "FROZEN before resolver scoring. This is the third MP-7 holdout and the first unburned generalization measurement.",
+  "status": "BURNED at MP-7 rev8: rev8 was authored after this sample's five real defects were observed. Preserve as the third regression fixture; never report it as a fresh holdout score again.",
   "sampling": {
     "population": "14,484 canonical catalogue rows sorted by foodId",
     "method": "Python random.Random(seed).sample(population, 100)",

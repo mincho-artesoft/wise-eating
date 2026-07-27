@@ -27,7 +27,10 @@ RUNTIME_PATH = (
 )
 
 DIRECTOR_ROLE_SOURCE_SHA256 = (
-    "0bf542cf312ba5584d4fc8188ad013499e2aab4907f6ba903106ab908940e603"
+    "5206ff364a02b81cd597c7a226539116b27450992465b5349c87960ef9981cc0"
+)
+DIRECTOR_GOLDENS_SHA256 = (
+    "5dae3f4ff44ee904b38dbb207c6a2affa3fbfaaa6ea8b02f62b4765915b337f2"
 )
 
 SPEC = importlib.util.spec_from_file_location("build_seed_mp7", BUILD_SEED_PATH)
@@ -70,31 +73,36 @@ class MP7FoodRoleTests(unittest.TestCase):
             **signals,
         )
 
-    def test_director_source_is_unchanged_and_rev7_complete(self):
+    def test_director_sources_are_unchanged_and_rev8_complete(self):
         self.assertEqual(
             hashlib.sha256(ROLE_SOURCE_PATH.read_bytes()).hexdigest(),
             DIRECTOR_ROLE_SOURCE_SHA256,
         )
-        self.assertEqual(self.role_source["rolesVersion"], 7)
+        self.assertEqual(
+            hashlib.sha256(ROLE_GOLDENS_PATH.read_bytes()).hexdigest(),
+            DIRECTOR_GOLDENS_SHA256,
+        )
+        self.assertEqual(self.role_source["rolesVersion"], 8)
+        self.assertEqual(self.goldens["goldensVersion"], 3)
         self.assertEqual(len(self.role_source["roles"]), 15)
-        self.assertEqual(len(self.role_source["rules"]), 33)
+        self.assertEqual(len(self.role_source["rules"]), 34)
         self.assertEqual(
             sum(len(rule.get("phrases", [])) for rule in self.role_source["rules"]),
-            656,
+            659,
         )
         self.assertEqual(
             sum(
                 len(rule.get("tokenGroups", []))
                 for rule in self.role_source["rules"]
             ),
-            38,
+            46,
         )
         self.assertEqual(
             sum(
                 len(rule.get("vetoTokens", []))
                 for rule in self.role_source["rules"]
             ),
-            116,
+            123,
         )
 
     def test_dry_mix_is_ineligible_only_before_preparation(self):
@@ -281,7 +289,7 @@ class MP7FoodRoleTests(unittest.TestCase):
     def test_artifact_is_complete_sorted_and_deterministic(self):
         self.assertEqual(self.artifact["catalogCount"], 14_484)
         self.assertEqual(self.artifact["roleCount"], 15)
-        self.assertEqual(self.artifact["ruleCount"], 33)
+        self.assertEqual(self.artifact["ruleCount"], 34)
         self.assertEqual(
             [item["foodId"] for item in self.artifact["items"]],
             sorted(item["foodId"] for item in self.artifact["items"]),
@@ -298,7 +306,7 @@ class MP7FoodRoleTests(unittest.TestCase):
             build_seed.encode_deterministic_gzip(rebuilt),
         )
 
-    def test_rev6_plain_catalogue_reference_populations(self):
+    def test_rev8_plain_catalogue_reference_populations(self):
         plain_ids = {food["id"] for food in self.foods}
         plain = [
             item for item in self.artifact["items"]
@@ -310,10 +318,10 @@ class MP7FoodRoleTests(unittest.TestCase):
             if not role.get("eligibleAsComponent", True)
         }
         self.assertEqual(len(plain), 12_601)
-        self.assertEqual(sum(item["role"] == "other" for item in plain), 108)
+        self.assertEqual(sum(item["role"] == "other" for item in plain), 109)
         self.assertEqual(
             sum(item["role"] in ineligible for item in plain),
-            526,
+            566,
         )
         self.assertEqual(
             sum(item["notReadyToEat"] for item in plain),
@@ -356,7 +364,41 @@ class MP7FoodRoleTests(unittest.TestCase):
                     expected,
                 )
 
-    def test_rev6_recipe_reference_populations(self):
+    def test_rev8_holdout_corrections_and_whole_name_scope(self):
+        cases = (
+            (
+                "Corn, sweet, yellow, raw",
+                "side",
+                {"category": "Vegetables and Vegetable Products"},
+            ),
+            (
+                "Nuts, formulated, wheat-based, all flavors except macadamia",
+                "side",
+                {},
+            ),
+            ("Egg roll, meatless", "side", {"category": "Egg rolls"}),
+            (
+                "Milk, evaporated, 2% fat, with added vitamins A and D",
+                "ingredientOnly",
+                {},
+            ),
+            ("Milk, dry, whole", "ingredientOnly", {}),
+        )
+        for name, expected, signals in cases:
+            with self.subTest(name=name):
+                self.assertEqual(
+                    self.resolve(name, **signals)["role"],
+                    expected,
+                )
+
+        rules = {rule["id"]: rule for rule in self.role_source["rules"]}
+        self.assertNotIn("matchScope", rules["G-STAPLE"])
+        self.assertEqual(
+            rules["X-CONCENTRATED-MILK"]["matchScope"],
+            "wholeName",
+        )
+
+    def test_rev8_recipe_reference_populations(self):
         recipe_ids = {recipe["foodId"] for recipe in self.seed["recipes"]}
         recipes = [
             item for item in self.artifact["items"]
