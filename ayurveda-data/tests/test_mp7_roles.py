@@ -27,7 +27,7 @@ RUNTIME_PATH = (
 )
 
 DIRECTOR_ROLE_SOURCE_SHA256 = (
-    "72ecd3b4361cac894d107d860079b136105e6d9c638006eb6d1ad5aef9dd628b"
+    "0bf542cf312ba5584d4fc8188ad013499e2aab4907f6ba903106ab908940e603"
 )
 
 SPEC = importlib.util.spec_from_file_location("build_seed_mp7", BUILD_SEED_PATH)
@@ -70,12 +70,12 @@ class MP7FoodRoleTests(unittest.TestCase):
             **signals,
         )
 
-    def test_director_source_is_unchanged_and_rev6_complete(self):
+    def test_director_source_is_unchanged_and_rev7_complete(self):
         self.assertEqual(
             hashlib.sha256(ROLE_SOURCE_PATH.read_bytes()).hexdigest(),
             DIRECTOR_ROLE_SOURCE_SHA256,
         )
-        self.assertEqual(self.role_source["rolesVersion"], 6)
+        self.assertEqual(self.role_source["rolesVersion"], 7)
         self.assertEqual(len(self.role_source["roles"]), 15)
         self.assertEqual(len(self.role_source["rules"]), 33)
         self.assertEqual(
@@ -317,7 +317,7 @@ class MP7FoodRoleTests(unittest.TestCase):
         )
         self.assertEqual(
             sum(item["notReadyToEat"] for item in plain),
-            303,
+            304,
         )
         trigger_counts = Counter(
             trigger
@@ -336,9 +336,25 @@ class MP7FoodRoleTests(unittest.TestCase):
                 "uncooked": 12,
                 "dough": 11,
                 "ready-to-bake": 10,
-                "concentrate": 10,
+                "concentrate": 11,
             },
         )
+
+    def test_rev7_concentrate_token_and_vetoes(self):
+        cases = (
+            ("Raspberry juice concentrate", True),
+            ("Lemon juice from concentrate, canned", False),
+            (
+                "Orange juice, chilled, includes from concentrate",
+                False,
+            ),
+        )
+        for name, expected in cases:
+            with self.subTest(name=name):
+                self.assertEqual(
+                    self.resolve(name)["notReadyToEat"],
+                    expected,
+                )
 
     def test_rev6_recipe_reference_populations(self):
         recipe_ids = {recipe["foodId"] for recipe in self.seed["recipes"]}

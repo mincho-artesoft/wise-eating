@@ -1188,8 +1188,8 @@ def load_food_role_source(path: Path) -> dict[str, Any]:
 
 
 def validate_food_role_source(source: dict[str, Any]) -> None:
-    if not isinstance(source, dict) or source.get("rolesVersion") != 6:
-        raise BuildError("food-roles.json must use rolesVersion 6")
+    if not isinstance(source, dict) or source.get("rolesVersion") != 7:
+        raise BuildError("food-roles.json must use rolesVersion 7")
     roles = source.get("roles")
     rules = source.get("rules")
     if not isinstance(roles, list) or len(roles) != EXPECTED_FOOD_ROLE_COUNT:
@@ -1329,7 +1329,13 @@ def validate_food_role_source(source: dict[str, Any]) -> None:
         or "requiresCooking" in source.get("flags", {})
         or not isinstance(readiness.get("explicitUnready"), list)
         or not isinstance(readiness.get("preparedIndicators"), list)
-        or not isinstance(readiness.get("concentrateGroups"), list)
+        or not isinstance(readiness.get("concentrateTrigger"), str)
+        or not modifier_normalized_tokens(readiness["concentrateTrigger"])
+        or not isinstance(readiness.get("concentrateVeto"), list)
+        or not all(
+            isinstance(value, str) and modifier_normalized_tokens(value)
+            for value in readiness["concentrateVeto"]
+        )
         or not isinstance(readiness.get("doughTokens"), list)
         or not isinstance(readiness.get("readyToBakeGroups"), list)
         or not isinstance(readiness.get("commodityFlours"), list)
@@ -1453,21 +1459,11 @@ def _food_not_ready_trigger(
     if any(contains_phrase(value) for value in flag["preparedIndicators"]):
         return None
 
-    concentrate_groups = [
-        tuple(modifier_normalized_tokens(token)[0] for token in group)
-        for group in flag["concentrateGroups"]
-    ]
     if (
-        any(
-            _tokens_contain_group(
-                tokens,
-                group,
-                plural_tolerance="full",
-                irregular_plurals=irregular_plurals,
-            )
-            for group in concentrate_groups
+        contains_token(flag["concentrateTrigger"])
+        and not any(
+            contains_phrase(value) for value in flag["concentrateVeto"]
         )
-        and not contains_phrase(flag["concentrateVeto"])
     ):
         return "concentrate"
 

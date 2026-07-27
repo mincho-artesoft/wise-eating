@@ -187,7 +187,7 @@ def not_ready_to_eat(name):
         return "unreconstituted"
     if any(seq(t, p) for p in PREPARED):        # a prepared row is ready; stop here
         return None
-    if any(group_hit(t, g) for g in NR["concentrateGroups"]) and not seq(t, NR["concentrateVeto"]):
+    if _w(t, NR["concentrateTrigger"]) and not any(seq(t, v) for v in NR["concentrateVeto"]):
         return "concentrate"
     if any(_w(t, x) for x in NR["doughTokens"]) and not any(_w(t, v) for v in NR["doughVeto"]):
         return "dough"
