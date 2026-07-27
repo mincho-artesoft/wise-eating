@@ -115,16 +115,16 @@ enum MP6TemplateNarrator {
             mainSentence = "\(dishes): \(kcal) kcal, \(protein) g protein"
                 + "\(singleTasteSuffix)."
         case 2:
-            mainSentence = "At \(kcal) kcal, \(dishes) supplies "
-                + "\(protein) g protein\(singleTasteSuffix)."
+            let slot = displayTerm(fact.slotName, empty: "meal").lowercased()
+            mainSentence = "At \(kcal) kcal and \(protein) g protein, this "
+                + "\(slot) includes \(dishes)\(singleTasteSuffix)."
         case 3:
             mainSentence = "\(protein) g protein and \(kcal) kcal come from "
                 + "\(dishes)\(singleTasteSuffix)."
         default:
-            let slot = displayTerm(fact.slotName, empty: "this meal")
-                .lowercased()
-            mainSentence = "For \(slot), \(dishes) totals \(kcal) kcal with "
-                + "\(protein) g protein\(singleTasteSuffix)."
+            let slot = displayTerm(fact.slotName, empty: "This meal")
+            mainSentence = "\(slot) includes \(dishes), totaling \(kcal) kcal "
+                + "and \(protein) g protein\(singleTasteSuffix)."
         }
         return mainSentence + tasteSentence + guidance
     }
