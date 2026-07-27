@@ -4,7 +4,7 @@ Date: 2026-07-27
 
 Branch: `ayurveda-app`
 
-Status: **STOPPED at MP7-G4 — MP-5 property harness does not compile**
+Status: **STOPPED at MP7-G7 — real-catalogue seven-day solve exceeds 150 ms**
 
 ## Outcome
 
@@ -13,13 +13,16 @@ census. The build-time resolver now applies the director-authored contiguous
 phrases and prepared/negated evaluation, the runtime cache is version 9, and
 the shipped role artifact is deterministic.
 
-All gates through both directions of G2c are green. G4 is red because
-`mp5_solver_harness.swift` has a non-exhaustive `switch FoodRole`: it does not
-handle `.ingredientOnly`. The full runner executed 138 other tests without a
-failure, but the 11 MP-5 test methods could not start.
+The founder-authorized G4 harness repair adds `.ingredientOnly` with the same
+ineligible zero-portion shape as `.nonFood`. A new conformance test compares
+all 15 harness roles and every required field against the shipped role
+definitions, preventing another silent drift.
 
-Per the packet, work stopped without patching the harness and without entering
-G5–G8.
+G4 is green at 150/150. G5 produces plans for all 30 real-catalogue
+profile/horizon combinations, and G6 records a +1.5507 mean dosha-pacification
+delta. G7 fails its first absolute arm: optimized seven-day solves over the
+real 13,993-candidate input take 1.138–3.998 seconds, exceeding the 150 ms
+ceiling. Work stopped without narrowing the pool or changing solver behavior.
 
 | Gate | Actual | State |
 |---|---:|---|
@@ -32,8 +35,12 @@ G5–G8.
 | G2b authored-recipe sample | **39/40 (97.5%)** | retained; recipe mapping unchanged |
 | G2 random holdout | seed 2026072704 is burned | no fourth sample drawn |
 | G3 accepted independent cross-derivation | **4/4 reference populations exact** | retained |
-| G4 full regression | **138 executed tests green; 1 suite setup error** | **STOP** |
-| G5–G8 | not run | stopped before gates |
+| G4 full regression | **150/150** | pass |
+| G5 real-catalogue feasibility | **30/30 plans** | pass |
+| G6 Y1 mean delta | **+1.5507** | pass |
+| G7 seven-day solve | **3,998.172 ms max** | **STOP — ceiling 150 ms** |
+| G7 role/launch/memory arms | not run | stopped after first arm |
+| G8 tracked-file gate | not run | stopped before gate |
 
 ## Commit and push ledger
 
@@ -41,6 +48,8 @@ G5–G8.
 |---|---|---|
 | Rev9 director rule, unmodified | `42281ac` | pushed |
 | Rev9 projection, prepared-aware matching, tests, and deterministic cache | `a7e67b4` | pushed |
+| G4 harness repair and shipped-role conformance test | `e98caf6` | pushed |
+| Real-catalogue G5–G7 measurement harness | `d0c27fa` | pushed |
 | This stop report | report commit | committed and pushed after stop |
 
 Artifact SHA-256:
@@ -198,7 +207,7 @@ The director-accepted G3 cross-derivation remains exact on all four reference
 populations: catalogue `other`, recipe anchors, prohibited recipe roles, and
 the 71 training fixtures.
 
-## G4 — blocking harness compilation error
+## G4 — full regression
 
 Command:
 
@@ -209,36 +218,119 @@ python3 -m unittest discover -s ayurveda-data/tests -p 'test_*.py' -v
 Result:
 
 ```text
-Ran 138 tests in 436.411s
-FAILED (errors=1)
-
-ayurveda-data/tests/mp5_solver_harness.swift:867:13:
-error: switch must be exhaustive
-note: add missing case: '.ingredientOnly'
+Ran 150 tests in 345.081s
+OK
 ```
 
-The failing setup is `MP5DeterministicSolverTests.setUpClass`. Its
-`fixtureCandidates()` function switches over `FoodRole` to assign role
-eligibility and portion ranges. The production enum includes
-`.ingredientOnly`, but the harness switch handles every other role and omits
-that case.
+The original G4 compilation error was corrected exactly as authorized:
 
-Consequences:
+- `.ingredientOnly` is non-anchor, `maxPerMeal = 0`,
+  `eligibleAsComponent = false`, and has a `0...0 g` range;
+- the harness exports its entire role table;
+- the Python conformance test loads `food_roles.json.gz`;
+- all 15 role IDs must be present in both sources; and
+- `anchor`, `maxPerMeal`, `eligibleAsComponent`, and portion minimum/maximum
+  must match for every role.
 
-- all 138 tests that executed were green;
-- all 11 `test_mp5_solver.py` methods were skipped because their shared Swift
-  harness did not compile;
-- the 46-property solver gate and the 30-solve/Y1 measurements cannot be
-  asserted from this run; and
-- this is a test-harness exhaustiveness defect, not evidence that solver
-  behavior passed or failed.
+G4 evidence:
 
-The runner did independently execute green resolution, search, narration,
-fresh-install, and tracked-size tests before ending red. They do not override
-the red full-suite gate.
+| Regression arm | Actual |
+|---|---:|
+| Full Python suite | **150/150** |
+| MP-5 hard properties | **30/30** |
+| MP-5 soft properties measured | **16/16** |
+| MP-7 C1–C10 fixture gate | **21/21 known-bad detected** |
+| Role table conformance | **15/15 roles exact** |
+| Resolution training / holdout | **59/59 · 44/48** |
+| Search goldens | **25/25 legacy + 2/2 safety** |
+| Exclusion corpus | **117 cases intact; zero blocking negative-boundary failures** |
+| Narration determinism | **100/100 byte-identical** |
+| End-to-end model calls | **2** |
+| Fresh install | **zero insert / no rebuild tests green** |
 
-No harness case was added in this task because the standing instruction says
-to stop and report at the first failing gate. G5, G6, G7, and G8 were not run.
+## G5 — real-catalogue feasibility
+
+Measurement input:
+
+- 13,993 nutrient-usable real catalogue candidates;
+- 13,460 marked role-eligible;
+- 533 marked role-ineligible within this nutrient-usable subset;
+- 332 marked `notReadyToEat` within this subset;
+- all ten director profiles;
+- horizons 1, 3, and 7 days; and
+- deterministic seed `0x4D503700`.
+
+All **30/30** combinations produce a complete plan. No constraint was relaxed
+and no binding failure occurred.
+
+| Profile | 1-day | 3-day | 7-day | Daily kcal |
+|---|---:|---:|---:|---:|
+| P1 | 1,152.053 ms | 2,110.370 ms | 3,919.314 ms | **2,000 exact** |
+| P2 | 416.504 ms | 707.613 ms | 1,341.298 ms | **2,000 exact** |
+| P3 | 782.523 ms | 1,337.488 ms | 2,644.832 ms | **2,200 exact** |
+| P4 | 1,359.626 ms | 2,214.462 ms | 3,968.620 ms | **2,400 exact** |
+| P5 | 777.706 ms | 1,281.276 ms | 2,410.192 ms | **1,700 exact** |
+| P6 | 686.405 ms | 1,221.064 ms | 2,298.829 ms | **2,000 exact** |
+| P7 | 1,065.785 ms | 2,010.636 ms | 3,850.896 ms | **1,200 exact** |
+| P8 | 1,201.127 ms | 2,104.097 ms | 3,998.172 ms | **3,600 exact** |
+| P9 | 756.098 ms | 1,272.910 ms | 2,392.834 ms | **1,900 exact** |
+| P10 | 336.513 ms | 602.122 ms | 1,138.039 ms | **2,000 exact** |
+
+P7 and P8 remain reachable at all three horizons despite anchor requirements,
+per-role clamps, 543 ineligible catalogue rows, and 304 catalogue
+`notReadyToEat` rows.
+
+## G6 — Y1 survives
+
+TASK-MP7 §6 was reread before evaluating this result. The C3 seasoning cap was
+not changed.
+
+The production-sized seven-day comparison uses the same candidates, seed, and
+profile in each pair; only Ayurvedic scoring is disabled in the cleared arm.
+
+| Profile | Imbalanced scoring | Cleared scoring | Pacification delta |
+|---|---:|---:|---:|
+| P3 — Vata | −1.650794 | −0.017391 | **+1.633402** |
+| P4 — Pitta | −1.352381 | +0.288136 | **+1.640517** |
+| P5 — Kapha | −1.495868 | −0.117647 | **+1.378221** |
+| **Mean** | **−1.499681** | **+0.051032** | **+1.550713** |
+
+The +1.5507 mean is above the +0.30 gate and does not show the spice-cap
+collapse described in §6. It is reported as measured; no parameter was tuned
+to protect it.
+
+## G7 — blocking real-catalogue solve latency
+
+Method:
+
+- `swiftc -O`;
+- production `DeterministicMealPlanSolver`;
+- one decoded 13,993-candidate input;
+- one reused solver instance;
+- ten seven-day runs, one per director profile;
+- `localSearchIterations = 96`; and
+- monotonic time around `solve`.
+
+| N | Median | Min | Max | Ceiling |
+|---:|---:|---:|---:|---:|
+| 10 | **2,527.512 ms** | 1,138.039 ms | **3,998.172 ms** | **150 ms** |
+
+Every measured seven-day solve exceeds the ceiling. The maximum is 26.65× the
+budget. This is not startup compilation or candidate decoding: timing starts
+immediately before the already-constructed solver's `solve` call, and the
+solver instance is reused across all 30 G5 runs.
+
+Per the standing stop rule, no solver optimization, pool reduction, iteration
+reduction, cache, or constraint relaxation was attempted.
+
+The remaining G7 arms were not run:
+
+- full-catalogue role resolution cold/cached;
+- device cold-launch ABAB; and
+- device peak-memory ABAB.
+
+No simulator number was substituted for the required device launch/memory
+measurements. G8 was not run after the G7 stop.
 
 The handbook and progress milestone are not advanced while MP-7 is stopped.
 
