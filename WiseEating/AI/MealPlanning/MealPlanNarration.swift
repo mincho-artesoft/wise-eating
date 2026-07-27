@@ -68,7 +68,8 @@ enum MP6TemplateNarrator {
         if tastes.isEmpty {
             tasteCopy = "Tastes are not recorded."
         } else {
-            tasteCopy = "\(readableList(tastes, empty: "No recorded taste")) tastes."
+            tasteCopy = "Tastes present: "
+                + "\(readableList(tastes, empty: "none recorded"))."
         }
         let thermal = displayTerm(fact.thermalCharacter, empty: "unrecorded")
         let agni = displayTerm(fact.agni, empty: "balanced")

@@ -362,7 +362,7 @@ class MP6NarrationTests(unittest.TestCase):
             self.assertGreater(len(copy), 80)
             self.assertRegex(copy, r"\d+ kcal")
             self.assertRegex(copy, r"\d+\.\d g protein")
-            self.assertIn("tastes.", copy)
+            self.assertIn("Tastes present:", copy)
             self.assertIn("Traditionally considered", copy)
 
     def test_title_count_mismatch_falls_back_without_misassignment(self):
