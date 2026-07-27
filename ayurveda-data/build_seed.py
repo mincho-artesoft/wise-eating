@@ -37,8 +37,8 @@ TIER_RANK = {"exact": 0, "near": 1}
 EXPECTED_CATALOG_COUNT = 14_484
 EXPECTED_CONCEPT_COUNT = 25
 EXPECTED_ALIAS_COUNT = 75
-EXPECTED_FOOD_ROLE_COUNT = 14
-EXPECTED_FOOD_ROLE_RULE_COUNT = 28
+EXPECTED_FOOD_ROLE_COUNT = 15
+EXPECTED_FOOD_ROLE_RULE_COUNT = 32
 RECIPE_PROPAGATION_DEPTH_CAP = 16
 MODIFIER_PARENTHETICAL = re.compile(r"\([^)]*\)")
 MODIFIER_INVALID = re.compile(r"[^a-z0-9,;'\- ]")
@@ -1188,8 +1188,8 @@ def load_food_role_source(path: Path) -> dict[str, Any]:
 
 
 def validate_food_role_source(source: dict[str, Any]) -> None:
-    if not isinstance(source, dict) or source.get("rolesVersion") != 2:
-        raise BuildError("food-roles.json must use rolesVersion 2")
+    if not isinstance(source, dict) or source.get("rolesVersion") != 4:
+        raise BuildError("food-roles.json must use rolesVersion 4")
     roles = source.get("roles")
     rules = source.get("rules")
     if not isinstance(roles, list) or len(roles) != EXPECTED_FOOD_ROLE_COUNT:
@@ -1266,23 +1266,31 @@ def validate_food_role_source(source: dict[str, Any]) -> None:
     rules_by_id = {rule["id"]: rule for rule in rules}
     required = {
         "A-RECIPE-MEAL",
-        "A-RECIPE-COMPOSED",
-        "U-CATEGORY",
+        "U-CATEGORY-SENSITIVE",
+        "U-CATEGORY-FINE",
+        "U-CATEGORY-COARSE",
         "D-DRAVYA-CATEGORY",
     }
     if not required.issubset(rules_by_id):
         raise BuildError(f"food-role rules missing {sorted(required - set(rules_by_id))}")
     if rules_by_id["A-RECIPE-MEAL"]["priority"] != 85:
         raise BuildError("A-RECIPE-MEAL must remain priority 85")
-    if rules_by_id["A-RECIPE-COMPOSED"]["priority"] != 45:
-        raise BuildError("A-RECIPE-COMPOSED must remain priority 45")
-    name_priorities = [
-        rule["priority"]
-        for rule in rules
-        if rule.get("phrases") or rule.get("tokenGroups")
-    ]
-    if not name_priorities or min(name_priorities) <= 45:
-        raise BuildError("A-RECIPE-COMPOSED must remain below every name rule")
+    recipe_post_pass = source.get("recipePostPass")
+    if (
+        not isinstance(recipe_post_pass, dict)
+        or recipe_post_pass.get("supersedes", "").split(",", 1)[0]
+        != "A-RECIPE-COMPOSED"
+        or not isinstance(recipe_post_pass.get("forms"), dict)
+        or not isinstance(recipe_post_pass.get("prohibited"), list)
+    ):
+        raise BuildError("food-role recipePostPass is missing or malformed")
+    form_roles = set(recipe_post_pass["forms"])
+    if not form_roles.issubset(role_ids):
+        raise BuildError(
+            f"recipePostPass has unknown roles {sorted(form_roles - role_ids)}"
+        )
+    if not set(recipe_post_pass["prohibited"]).issubset(role_ids):
+        raise BuildError("recipePostPass has unknown prohibited roles")
 
     plural = source.get("matching", {}).get("pluralTolerance", {})
     irregular = plural.get("irregularPlurals")
@@ -1422,10 +1430,18 @@ def _resolve_food_role(
     irregular_plurals: dict[str, str],
 ) -> dict[str, Any]:
     tokens = modifier_normalized_tokens(record["name"])
+    first_segment_tokens = modifier_normalized_tokens(
+        record["name"].split(",", 1)[0]
+    )
     candidates: list[tuple[int, int, int, str, str, str | None]] = []
 
     for compiled in compiled_rules:
         rule = compiled["rule"]
+        scoped_tokens = (
+            first_segment_tokens
+            if rule.get("matchScope") == "firstSegment"
+            else tokens
+        )
         token_vetoes = _matching_veto_token_groups(
             tokens,
             compiled["vetoGroups"],
@@ -1456,7 +1472,7 @@ def _resolve_food_role(
         phrase_candidates = list(
             {
                 phrase: (phrase, phrase_tokens)
-                for token in tokens
+                for token in scoped_tokens
                 for phrase, phrase_tokens in compiled["phraseIndex"].get(
                     token,
                     [],
@@ -1464,7 +1480,7 @@ def _resolve_food_role(
             }.values()
         )
         matches = _longest_positive_matches(
-            tokens,
+            scoped_tokens,
             phrase_candidates,
             suffix_negation_terms,
             plural_tolerance="full",
@@ -1474,7 +1490,7 @@ def _resolve_food_role(
             " ".join(group)
             for group in compiled["tokenGroups"]
             if _tokens_contain_group(
-                tokens,
+                scoped_tokens,
                 group,
                 plural_tolerance="full",
                 irregular_plurals=irregular_plurals,
@@ -1549,6 +1565,117 @@ def _resolve_food_role(
         "ruleId": rule_id,
         "matched": matched,
     }
+
+
+def _resolve_authored_recipe_role(
+    record: dict[str, Any],
+    role_source: dict[str, Any],
+    irregular_plurals: dict[str, str],
+) -> dict[str, Any] | None:
+    if (
+        record.get("isAuthoredRecipe") is not True
+        or int(record.get("ingredientCount", 0)) < 2
+        or int(record.get("stepCount", 0)) < 1
+    ):
+        return None
+
+    meal = record.get("recipeMeal")
+    if meal == "drink":
+        return {
+            "role": "beverage",
+            "ruleId": "A-RECIPE-MEAL",
+            "matched": "meal:drink",
+        }
+    if meal == "dessert":
+        return {
+            "role": "sweet",
+            "ruleId": "A-RECIPE-MEAL",
+            "matched": "meal:dessert",
+        }
+
+    title = re.split(
+        r"\s+with\s+",
+        record["name"],
+        maxsplit=1,
+        flags=re.IGNORECASE,
+    )[0]
+    title_tokens = modifier_normalized_tokens(title)
+    forms: list[tuple[int, int, str, str, tuple[str, ...]]] = []
+    for role_index, (role, labels) in enumerate(
+        role_source["recipePostPass"]["forms"].items()
+    ):
+        for label_index, label in enumerate(labels):
+            label_tokens = modifier_normalized_tokens(label)
+            forms.append(
+                (
+                    -len(label_tokens),
+                    role_index,
+                    label,
+                    role,
+                    label_tokens,
+                )
+            )
+    for _length, _role_index, label, role, label_tokens in sorted(forms):
+        if len(label_tokens) > len(title_tokens):
+            continue
+        trailing = title_tokens[-len(label_tokens):]
+        if not all(
+            _food_token_matches(
+                authored,
+                observed,
+                plural_tolerance="full",
+                irregular_plurals=irregular_plurals,
+            )
+            for authored, observed in zip(label_tokens, trailing)
+        ):
+            continue
+        if (
+            label_tokens == ("masala",)
+            and int(record.get("ingredientCount", 0)) > 6
+        ):
+            continue
+        return {
+            "role": role,
+            "ruleId": f"recipePostPass-form:{role}",
+            "matched": label,
+        }
+
+    default_roles = {
+        "breakfast": "main",
+        "lunch": "main",
+        "dinner": "main",
+        "snack": "side",
+    }
+    role = default_roles.get(meal)
+    if role is None:
+        raise BuildError(f"recipePostPass cannot resolve meal {meal!r}")
+    return {
+        "role": role,
+        "ruleId": "recipePostPass-default",
+        "matched": f"meal:{meal}",
+    }
+
+
+def _resolve_food_role_record(
+    record: dict[str, Any],
+    role_source: dict[str, Any],
+    compiled_rules: list[dict[str, Any]],
+    suffix_negation_terms: set[str],
+    irregular_plurals: dict[str, str],
+) -> dict[str, Any]:
+    recipe_resolution = _resolve_authored_recipe_role(
+        record,
+        role_source,
+        irregular_plurals,
+    )
+    if recipe_resolution is not None:
+        return recipe_resolution
+    return _resolve_food_role(
+        record,
+        compiled_rules,
+        suffix_negation_terms,
+        irregular_plurals,
+    )
 
 
 def _compile_food_role_rules(role_source: dict[str, Any]) -> list[dict[str, Any]]:
@@ -1627,8 +1754,9 @@ def resolve_food_role_fixture(
         "ingredientCount": ingredient_count,
         "stepCount": step_count,
     }
-    resolved = _resolve_food_role(
+    resolved = _resolve_food_role_record(
         record,
+        role_source,
         _compile_food_role_rules(role_source),
         suffix_negation_terms,
         irregular_plurals,
@@ -1718,7 +1846,16 @@ def build_food_roles(
         for record in records.values()
         if record.get("category") is not None
     }
-    category_map = set(rules_by_id["U-CATEGORY"]["categoryMap"])
+    category_map = set().union(
+        *(
+            set(rules_by_id[rule_id]["categoryMap"])
+            for rule_id in (
+                "U-CATEGORY-SENSITIVE",
+                "U-CATEGORY-FINE",
+                "U-CATEGORY-COARSE",
+            )
+        )
+    )
     if actual_categories != category_map:
         raise BuildError(
             "food-role category signal mismatch; "
@@ -1754,8 +1891,9 @@ def build_food_roles(
         role["id"]: set() for role in role_source["roles"]
     }
     for food_id, record in sorted(records.items()):
-        resolved = _resolve_food_role(
+        resolved = _resolve_food_role_record(
             record,
+            role_source,
             compiled_rules,
             suffix_negation_terms,
             irregular_plurals,

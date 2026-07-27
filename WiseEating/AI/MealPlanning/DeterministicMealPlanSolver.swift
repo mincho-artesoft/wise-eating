@@ -41,6 +41,7 @@ enum FoodRole: String, Codable, CaseIterable, Sendable {
     case sweet
     case supplement
     case infantProduct
+    case ingredientOnly
     case nonFood
     case other
 }

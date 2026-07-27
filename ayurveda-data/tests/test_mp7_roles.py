@@ -26,7 +26,7 @@ RUNTIME_PATH = (
 )
 
 DIRECTOR_ROLE_SOURCE_SHA256 = (
-    "9268efd2244a5c62dddc59b784688ecef7eb3870fb3948c0b03953afcbdd279e"
+    "e6c52660bb8549a7136ac5799d02a9accd6861bfe3af7f2c242b38de1ebb7847"
 )
 
 SPEC = importlib.util.spec_from_file_location("build_seed_mp7", BUILD_SEED_PATH)
@@ -69,17 +69,17 @@ class MP7FoodRoleTests(unittest.TestCase):
             **signals,
         )
 
-    def test_director_source_is_unchanged_and_rev2_complete(self):
+    def test_director_source_is_unchanged_and_rev4_complete(self):
         self.assertEqual(
             hashlib.sha256(ROLE_SOURCE_PATH.read_bytes()).hexdigest(),
             DIRECTOR_ROLE_SOURCE_SHA256,
         )
-        self.assertEqual(self.role_source["rolesVersion"], 2)
-        self.assertEqual(len(self.role_source["roles"]), 14)
-        self.assertEqual(len(self.role_source["rules"]), 28)
+        self.assertEqual(self.role_source["rolesVersion"], 4)
+        self.assertEqual(len(self.role_source["roles"]), 15)
+        self.assertEqual(len(self.role_source["rules"]), 32)
         self.assertEqual(
             sum(len(rule.get("phrases", [])) for rule in self.role_source["rules"]),
-            615,
+            656,
         )
         self.assertEqual(
             sum(
@@ -93,14 +93,24 @@ class MP7FoodRoleTests(unittest.TestCase):
                 len(rule.get("vetoTokens", []))
                 for rule in self.role_source["rules"]
             ),
-            56,
+            94,
         )
 
-    def test_real_signal_vocabularies_are_exact_and_composed_is_fallback(self):
+    def test_real_signal_vocabularies_are_exact_and_recipe_post_pass_wins(self):
         rules = {rule["id"]: rule for rule in self.role_source["rules"]}
+        category_values = set().union(
+            *(
+                set(rules[rule_id]["categoryMap"])
+                for rule_id in (
+                    "U-CATEGORY-SENSITIVE",
+                    "U-CATEGORY-FINE",
+                    "U-CATEGORY-COARSE",
+                )
+            )
+        )
         self.assertEqual(
             self.diagnostics["categoryValues"],
-            set(rules["U-CATEGORY"]["categoryMap"]),
+            category_values,
         )
         self.assertEqual(
             self.diagnostics["dravyaCategoryValues"],
@@ -111,15 +121,6 @@ class MP7FoodRoleTests(unittest.TestCase):
             {"breakfast", "lunch", "dinner", "snack", "drink", "dessert"},
         )
         self.assertEqual(rules["A-RECIPE-MEAL"]["priority"], 85)
-        self.assertEqual(rules["A-RECIPE-COMPOSED"]["priority"], 45)
-        self.assertLess(
-            rules["A-RECIPE-COMPOSED"]["priority"],
-            min(
-                rule["priority"]
-                for rule in self.role_source["rules"]
-                if rule.get("phrases") or rule.get("tokenGroups")
-            ),
-        )
 
         self.assertEqual(
             self.resolve(
@@ -138,6 +139,33 @@ class MP7FoodRoleTests(unittest.TestCase):
                 step_count=1,
             )["role"],
             "side",
+        )
+        self.assertEqual(
+            self.resolve(
+                "Masala Vegetable Khichdi",
+                recipe_meal="lunch",
+                ingredient_count=13,
+                step_count=4,
+            )["role"],
+            "main",
+        )
+        self.assertEqual(
+            self.resolve(
+                "Fennel Coriander Cooling Masala",
+                recipe_meal="lunch",
+                ingredient_count=5,
+                step_count=2,
+            )["role"],
+            "spice",
+        )
+        self.assertEqual(
+            self.resolve(
+                "Bajra Roti with Gud-Ghee",
+                recipe_meal="breakfast",
+                ingredient_count=6,
+                step_count=3,
+            )["role"],
+            "staple",
         )
         self.assertEqual(
             self.resolve(
@@ -201,8 +229,8 @@ class MP7FoodRoleTests(unittest.TestCase):
 
     def test_artifact_is_complete_sorted_and_deterministic(self):
         self.assertEqual(self.artifact["catalogCount"], 14_484)
-        self.assertEqual(self.artifact["roleCount"], 14)
-        self.assertEqual(self.artifact["ruleCount"], 28)
+        self.assertEqual(self.artifact["roleCount"], 15)
+        self.assertEqual(self.artifact["ruleCount"], 32)
         self.assertEqual(
             [item["foodId"] for item in self.artifact["items"]],
             sorted(item["foodId"] for item in self.artifact["items"]),
