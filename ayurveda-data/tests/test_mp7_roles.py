@@ -26,7 +26,7 @@ RUNTIME_PATH = (
 )
 
 DIRECTOR_ROLE_SOURCE_SHA256 = (
-    "e6c52660bb8549a7136ac5799d02a9accd6861bfe3af7f2c242b38de1ebb7847"
+    "ca2a2906b44d0a2762dbafc91c790cdbd38ba6f8e2f282423d00e78b26e09561"
 )
 
 SPEC = importlib.util.spec_from_file_location("build_seed_mp7", BUILD_SEED_PATH)
@@ -69,14 +69,14 @@ class MP7FoodRoleTests(unittest.TestCase):
             **signals,
         )
 
-    def test_director_source_is_unchanged_and_rev4_complete(self):
+    def test_director_source_is_unchanged_and_rev5_complete(self):
         self.assertEqual(
             hashlib.sha256(ROLE_SOURCE_PATH.read_bytes()).hexdigest(),
             DIRECTOR_ROLE_SOURCE_SHA256,
         )
-        self.assertEqual(self.role_source["rolesVersion"], 4)
+        self.assertEqual(self.role_source["rolesVersion"], 5)
         self.assertEqual(len(self.role_source["roles"]), 15)
-        self.assertEqual(len(self.role_source["rules"]), 32)
+        self.assertEqual(len(self.role_source["rules"]), 33)
         self.assertEqual(
             sum(len(rule.get("phrases", [])) for rule in self.role_source["rules"]),
             656,
@@ -86,7 +86,7 @@ class MP7FoodRoleTests(unittest.TestCase):
                 len(rule.get("tokenGroups", []))
                 for rule in self.role_source["rules"]
             ),
-            34,
+            38,
         )
         self.assertEqual(
             sum(
@@ -95,6 +95,23 @@ class MP7FoodRoleTests(unittest.TestCase):
             ),
             94,
         )
+
+    def test_dry_mix_is_ineligible_only_before_preparation(self):
+        cases = (
+            ("Puddings, tapioca, dry mix", "ingredientOnly"),
+            ("Pudding, tapioca, made from dry mix", "sweet"),
+            (
+                "Hot chocolate / cocoa, dry mix, made with water",
+                "beverage",
+            ),
+            (
+                "Milk, malted, dry mix, not reconstituted",
+                "ingredientOnly",
+            ),
+        )
+        for name, expected in cases:
+            with self.subTest(name=name):
+                self.assertEqual(self.resolve(name)["role"], expected)
 
     def test_real_signal_vocabularies_are_exact_and_recipe_post_pass_wins(self):
         rules = {rule["id"]: rule for rule in self.role_source["rules"]}
@@ -230,7 +247,7 @@ class MP7FoodRoleTests(unittest.TestCase):
     def test_artifact_is_complete_sorted_and_deterministic(self):
         self.assertEqual(self.artifact["catalogCount"], 14_484)
         self.assertEqual(self.artifact["roleCount"], 15)
-        self.assertEqual(self.artifact["ruleCount"], 32)
+        self.assertEqual(self.artifact["ruleCount"], 33)
         self.assertEqual(
             [item["foodId"] for item in self.artifact["items"]],
             sorted(item["foodId"] for item in self.artifact["items"]),

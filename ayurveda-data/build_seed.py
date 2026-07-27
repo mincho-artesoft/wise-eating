@@ -38,7 +38,7 @@ EXPECTED_CATALOG_COUNT = 14_484
 EXPECTED_CONCEPT_COUNT = 25
 EXPECTED_ALIAS_COUNT = 75
 EXPECTED_FOOD_ROLE_COUNT = 15
-EXPECTED_FOOD_ROLE_RULE_COUNT = 32
+EXPECTED_FOOD_ROLE_RULE_COUNT = 33
 RECIPE_PROPAGATION_DEPTH_CAP = 16
 MODIFIER_PARENTHETICAL = re.compile(r"\([^)]*\)")
 MODIFIER_INVALID = re.compile(r"[^a-z0-9,;'\- ]")
@@ -1188,8 +1188,8 @@ def load_food_role_source(path: Path) -> dict[str, Any]:
 
 
 def validate_food_role_source(source: dict[str, Any]) -> None:
-    if not isinstance(source, dict) or source.get("rolesVersion") != 4:
-        raise BuildError("food-roles.json must use rolesVersion 4")
+    if not isinstance(source, dict) or source.get("rolesVersion") != 5:
+        raise BuildError("food-roles.json must use rolesVersion 5")
     roles = source.get("roles")
     rules = source.get("rules")
     if not isinstance(roles, list) or len(roles) != EXPECTED_FOOD_ROLE_COUNT:
@@ -1262,6 +1262,21 @@ def validate_food_role_source(source: dict[str, Any]) -> None:
                 )
             ):
                 raise BuildError(f"{rule_id}: {key} must contain token groups")
+        prepared_indicators = rule.get("preparedIndicators")
+        if prepared_indicators is not None:
+            if (
+                not isinstance(prepared_indicators, list)
+                or not prepared_indicators
+                or not all(
+                    isinstance(value, str) and modifier_normalized_tokens(value)
+                    for value in prepared_indicators
+                )
+                or not isinstance(rule.get("negatedIndicator"), str)
+                or not modifier_normalized_tokens(rule["negatedIndicator"])
+            ):
+                raise BuildError(
+                    f"{rule_id}: prepared indicators are malformed"
+                )
 
     rules_by_id = {rule["id"]: rule for rule in rules}
     required = {
@@ -1496,6 +1511,27 @@ def _resolve_food_role(
                 irregular_plurals=irregular_plurals,
             )
         ]
+        if group_matches and compiled["preparedIndicators"]:
+            negated_indicator_matches = _phrase_spans(
+                tokens,
+                compiled["negatedIndicator"],
+                plural_tolerance="full",
+                irregular_plurals=irregular_plurals,
+            )
+            prepared_indicator_matches = any(
+                _phrase_spans(
+                    tokens,
+                    indicator,
+                    plural_tolerance="full",
+                    irregular_plurals=irregular_plurals,
+                )
+                for indicator in compiled["preparedIndicators"]
+            )
+            if (
+                not negated_indicator_matches
+                and prepared_indicator_matches
+            ):
+                group_matches = []
         matched_labels = matches + group_matches
         resolved_role: str | None = None
         signal_label: str | None = None
@@ -1726,6 +1762,13 @@ def _compile_food_role_rules(role_source: dict[str, Any]) -> list[dict[str, Any]
                 for group in rule.get("vetoTokens", [])
             ],
             "vetoPhraseIndex": indexed(veto_phrases),
+            "preparedIndicators": [
+                modifier_normalized_tokens(value)
+                for value in rule.get("preparedIndicators", [])
+            ],
+            "negatedIndicator": modifier_normalized_tokens(
+                rule.get("negatedIndicator", "")
+            ),
         })
     return compiled
 
