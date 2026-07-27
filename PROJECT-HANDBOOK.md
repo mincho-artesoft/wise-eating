@@ -3,9 +3,10 @@
 taking over direction of this project. Update it at the end of every milestone —
 that is a standing rule baked into all task packets.**
 Last updated: 2026-07-27 (INT-2 Phase 1 integrates MP-4's single-call intent
-parse with FC-1e/FC-2 and MP-5's deterministic, hard-validated solver on
-`ayurveda-app`. All authorized host/simulator gates pass; physical-device
-evidence remains explicit in `ayurveda-data/DEFERRED-VALIDATION.md`).
+parse with FC-1e/FC-2 and MP-5's deterministic, hard-validated solver; MP-6
+adds one-call whole-plan narration plus a Foundation-only deterministic
+fallback. All authorized host/simulator gates pass; physical-device evidence
+remains explicit in `ayurveda-data/DEFERRED-VALIDATION.md`).
 
 ## 1. Mission and the two applications
 
@@ -149,6 +150,14 @@ simulation; must always pass).
   `MP5AyurvedicSolverEnabled` flag is off by default and gates only aiDraft
   Ayurveda scoring; deterministic structural/safety assembly is common to both
   modes.
+- `WiseEating/AI/MealPlanning/MealPlanNarration.swift` and
+  `MealPlanNarrator+FoundationModels.swift` (MP-6): narration receives only
+  finished solver facts and cannot choose food or calculate values. The
+  Foundation Models adapter makes one indexed `@Generable` call for the whole
+  plan; count/key mismatch, model unavailability, failure, or timeout returns
+  the complete deterministic Foundation-only template. The model-available
+  planner path is therefore one MP-4 parse plus one MP-6 narration call.
+  Ayurveda wording remains traditional guidance and all content stays aiDraft.
 - INT-1 keeps warm seed-version checks off the full 2,214-record decode path:
   `bundleSeedVersion()` decodes a one-field DTO from the authoritative bundle;
   actual seed/delta runs still perform the unchanged full decode and validation.
@@ -191,6 +200,10 @@ simulation; must always pass).
     objective authority is `rasa < vipaka < virya < prabhava`. Vikriti is soft,
     rasa coverage is rolling/habitual, and aiDraft Ayurveda scoring remains
     behind `MP5AyurvedicSolverEnabled`, off by default until vaidya review.
+15. Meal narration is downstream of validated assembly. It receives finished
+    facts only, never chooses food or computes a figure, uses at most one model
+    call for the complete plan, and must have a complete deterministic
+    Foundation-only fallback.
 
 ## 4. Working process (the pattern that built all of this)
 
@@ -250,6 +263,8 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | MP-5 cold launch (Debug simulator) | candidate **1.401s** median vs `003bed7` 1.403s, N=10 same-session ABAB; paired median −0.004s, smaller than both IQRs and not resolvable |
 | INT-2 Phase 1 integrated suite | **116/116** = 98 shared + 10 MP-5 + 8 MP-4 · 25/25 + 2/2 search goldens · resolution 59/59 + 44/48 · MP-5 hard properties 23/23 |
 | INT-2 Phase 1 cold launch (Debug simulator) | candidate **1.437s** median vs `95da00f` 1.434s, N=10 same-session ABAB; paired median +0.002s, smaller than both IQRs and not resolvable |
+| MP-6 batched narration | **123/123** = 116 integrated + 7 narration · exactly 1 narration call at 1/3/7 days · model-available seven-day total **2** (1 parse + 1 narration; device confirmation pending) · template fallback 9/9 complete |
+| MP-6 cold launch (Debug simulator) | candidate **1.616s** median vs INT-2 Phase 1 1.623s, N=10 same-session ABAB; paired median −0.015s, smaller than both IQRs and not resolvable |
 
 ## 6. Milestone ledger (update after every task)
 
@@ -280,6 +295,7 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | FC-1e rev5 ontology + FC-2 wiring | ✅ HOST/SIMULATOR COMPLETE / INTEGRATED BY INT-2 PHASE 1 — plural-tolerant `vetoTokens` close coconut 1→0 and veto oyster mushroom in both token orders; planner exclusion is canonical set subtraction with the WE-8/FC-1 authority boundary; the hardcoded alcohol list and exclusion substring paths are removed; resolution is 59/59 training and 44/48 held-out. All 98 feature-branch tests, 25+2 search goldens, validator, Debug/Release, deterministic artifacts, fresh zero-insert/no-rebuild, tracked-size gate, and 1.433s launch median passed before integration. See `REPORT-FC1e.md` |
 | MP-5 deterministic plan assembly | ✅ HOST/SIMULATOR COMPLETE / INTEGRATED BY INT-2 PHASE 1 — Foundation-only deterministic assembly replaces the model-authored plan plus 14 repair targets; 23/23 hard properties pass, all 13 soft objectives are reported, Y1 improves pacification by +0.5209, P10 names allergen infeasibility, and P7/P8 hit exact calorie edges. All 108 feature-branch tests, 25+2 search goldens, 59/59 + 44/48 resolution, validator, Debug/Release, fresh zero-insert/no-rebuild, tracked-size, and 1.401s launch gates passed before integration. Ayurveda scoring is behind `MP5AyurvedicSolverEnabled`, off by default pending vaidya review. See `REPORT-MP5.md` |
 | INT-2 MP-4 + FC-1e/FC-2 + MP-5 integration | ✅ PHASE 1 HOST/SIMULATOR COMPLETE — unsquashed histories are integrated; MP-4's one-call typed interpretation feeds MP-5's deterministic assembly with caveat/fallback behavior retained. All 116 tests, 25+2 search goldens, 59/59 + 44/48 resolution, 23/23 MP-5 hard properties, MP-4 one-call/fallback gates, validator, deterministic artifacts, Debug/Release, fresh zero-insert/no-rebuild, tracked-size, and 1.437s launch gates pass. See `REPORT-INT2.md` |
+| MP-6 batched narration | ✅ HOST/SIMULATOR COMPLETE — one indexed whole-plan `@Generable` call replaces per-meal title polishing; the Foundation-only template is complete, deterministic, and has zero Foundation Models linkage. MP-1 telemetry proves one narration call at 1/3/7 days and a model-available seven-day total of 2 with MP-4 parsing. All 123 tests, 25+2 goldens, 23/23 solver properties, validator, Debug/Release, fresh zero-insert/no-rebuild, tracked-size, and 1.616s launch gates pass. The 2-call number remains a static host result until the deferred device matrix. See `REPORT-MP6.md` |
 | Expert review pass | ⏳ pending human reviewer: work aiDraft→reviewed, resolve reviewNotes, optional batch-31 top-up to 750 |
 | Later roadmap | media (yoga/meditation content), recommendation engine, dosha assessment — see ayurveda-data/RESTART-PLAN.md history |
 

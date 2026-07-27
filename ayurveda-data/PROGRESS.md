@@ -204,9 +204,21 @@ and tracked-file gates pass. Same-session N=10 ABAB launch is 1.437s median
 versus 1.434s at `95da00f`; the +0.002s paired median is not resolvable. See
 `REPORT-INT2.md`.
 
+MP-6 completes the host/simulator MP workstream by moving descriptive meal
+copy behind one whole-plan `@Generable` narration call. The model receives only
+finished solver facts and cannot choose food or calculate a value. A
+Foundation-only deterministic template is the complete shipping path when the
+model is absent, fails, times out, or returns mismatched day/slot keys. MP-1
+telemetry proves exactly one narration call at 1/3/7 days and a model-available
+seven-day total of 2 calls including MP-4 interpretation; that total remains a
+static host result until the deferred physical-device matrix. All 123 tests,
+25+2 search goldens, 23/23 MP-5 hard properties, validator, Debug/Release,
+fresh zero-insert/no-rebuild, tracked-size, and final 1.616s median launch gates
+pass. See `REPORT-MP6.md`.
+
 ## Next milestones
 
-1. **Host/simulator engineering through INT-2 Phase 1 COMPLETE on `ayurveda-app`** — D6 (models+seeder), D34 (all 12,601 foods
+1. **Host/simulator engineering through MP-6 COMPLETE on `ayurveda-app`** — D6 (models+seeder), D34 (all 12,601 foods
    classified), D8/D8.1/D8.2 (UI end to end incl. computed tier + editors),
    D9 (engineExcluded enforcement), WE-2 (full recipe nutrition + build-time
    projection/search cache), WE-3 (founder-approved read-only display card),
@@ -219,8 +231,9 @@ versus 1.434s at `95da00f`; the +0.002s paired median is not resolvable. See
    artifact refresh, and launch paydown), and FC-1e/FC-2 (rev5 veto semantics,
    canonical planner exclusion sets, and ontology aliases in deterministic
    resolution), plus MP-5 (deterministic hard-validated plan assembly and
-   aiDraft Ayurveda scoring flag), and INT-2 Phase 1 (unsquashed MP-4 +
-   FC-1e/FC-2 + MP-5 integration).
+   aiDraft Ayurveda scoring flag), INT-2 Phase 1 (unsquashed MP-4 +
+   FC-1e/FC-2 + MP-5 integration), and MP-6 (one-call batched narration plus
+   deterministic Foundation-only fallback).
    See PROJECT-HANDBOOK.md §6 ledger and `REPORT-WE2.md` / `REPORT-WE3.md` /
    `REPORT-WE4.md` / `REPORT-WE5.md` / `REPORT-WE6.md` for gates, timing,
    screenshots, accessibility, search, `REPORT-WE7.md` for legacy audit
@@ -228,7 +241,8 @@ versus 1.434s at `95da00f`; the +0.002s paired median is not resolvable. See
    `REPORT-FC1.md` for the original concept gates and WE-8 disagreement triage,
    `REPORT-FC1e.md` for rev5 and FC-2 wiring, `REPORT-MP5.md` for solver
    properties and launch evidence, and
-   `REPORT-INT1.md` for integrated evidence.
+   `REPORT-INT1.md` for integrated evidence, `REPORT-INT2.md` for the Phase-1
+   merge, and `REPORT-MP6.md` for narration and the two-call model topology.
 2. **Physical-device validation — explicitly pending.** Run the MP-1 nine-run
    matrix/G6/G8, MP-2 twenty-food error table/runtime counters, and MP-3 runtime
    zero-model-call confirmation exactly as registered in
