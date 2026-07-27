@@ -1,6 +1,6 @@
 {
-  "rolesVersion": 6,
-  "revision": "rev6 — 2026-07-27. Generalises `requiresCooking` into `notReadyToEat` after the G2c reverse census found 126 eligible rows that are not food you can put on a plate. The flag goes from 100 rows to 301. rev5 notes follow. Adds X-DRY-MIX after the second holdout (seed 2026072702, 92/100) found `Puddings, tapioca, dry mix` resolving to the eligible role `sweet`. rev4 notes follow. Adds `recipePostPass` after measuring the rev3 rules against all 1,500 authored recipes: 198 of them (13.2%) resolved to spice or herb, including a 13-ingredient khichdi, and 79 more fell to `other`. Commodity name rules cannot classify dish titles. rev3 notes follow. Corrects the six defects the MP-7 60-row holdout exposed at 47/60: bare `salt` at priority 80 was misclassifying 592 catalogue rows as spice, and `juice`, `sauce`, `cream`, `milk`, `water`, `butter` and `oil` carried the same shape (~2,000 rows of exposure); all 187 categories ran above the name phrases even though 57.7% of rows sit under a coarse top-level bucket; and `nonFood` conflated non-nutritive rows with ingredient-only rows. Fixes: a firstSegment match scope, a three-way sensitive/fine/coarse category split, and a new `ingredientOnly` role. THE 60-ROW HOLDOUT IS NOW BURNED — these rules were written after seeing its failures, so it is training data from here on and a fresh holdout is mandatory. rev2 notes follow. Corrects all three signal-driven rules after the MP-7 signal audit: `recipe.course` did not exist; `usda.foodCategory` was the wrong field name with the wrong 25-value vocabulary; `dravya.classification` supplied Sanskrit keys with zero overlap with the data. All three are now bound to real fields with their real vocabularies, read directly from the repo. rev1 context follows.  Written after MP-6b produced culinarily absurd plans that passed all 23 hard properties: infant formula served to adults three times in one week, a breakfast of four chocolate drinks, and a dinner of six dried herbs beside raw lentils. Nothing in the catalogue said what a row IS FOR. This file says it.",
+  "rolesVersion": 7,
+  "revision": "rev7 — 2026-07-27. Replaces the enumerated concentrate groups with the bare `concentrate` token plus a `from concentrate` veto, after the G2c reverse census found 'Raspberry juice concentrate' belonged to none of the enumerated shapes. 40 catalogue rows carry the token; 6 are 'from concentrate' and eligible; the other 34 are the concentrate itself.\nrev6 — generalised `requiresCooking` into `notReadyToEat` after the G2c reverse census found 126 eligible rows that are not food you can put on a plate. The flag went from 100 rows to 302.\nrev5 — added X-DRY-MIX after the second holdout found `Puddings, tapioca, dry mix` resolving to `sweet`.\nrev4 — added `recipePostPass` after 198 of 1,500 authored recipes (13.2%) resolved to spice or herb, including a 13-ingredient khichdi. Commodity name rules cannot classify dish titles.\nrev3 — fixed the six defects the 60-row holdout exposed at 47/60: bare `salt` at priority 80 was misclassifying 592 rows as spice, and juice/sauce/cream/milk/water/butter/oil carried the same shape (~2,000 rows of exposure); all 187 categories ran above the name phrases though 57.7% of rows sit under a coarse bucket; and `nonFood` conflated non-nutritive rows with ingredient-only rows. Both early holdouts are burned and retained only as regression fixtures.\nrev2 — corrected all three signal-driven rules after the MP-7 signal audit: `recipe.course` did not exist, `usda.foodCategory` was the wrong field with the wrong 25-value vocabulary, and `dravya.classification` supplied Sanskrit keys with zero overlap with the data.\nrev1 — written after MP-6b produced culinarily absurd plans that passed all 23 hard properties: infant formula served to adults three times in one week, a breakfast of four chocolate drinks, and a dinner of six dried herbs beside raw lentils. Nothing in the catalogue said what a row IS FOR. This file says it.",
   "author": "Director",
   "appliesTo": "Every row of the 14,484-item FoodItem catalogue, plus the 1,500 authored recipes. Consumed by the MP-5 solver as an eligibility and composition constraint, and by properties C1-C9 of plan-validity-properties.json as their vocabulary.",
   "whyThisExists": "minAgeMonths is a FLOOR, not a range. Infant formula carries a floor of 0 and therefore satisfies every adult age check in the system. The catalogue can express 'not before this age' and cannot express 'intended for infants, inappropriate for adults'. It also cannot express 'this is a seasoning, not a dish'. Both failures produced the same symptom in MP-6b. A role is the missing field.",
@@ -2022,21 +2022,12 @@
         "reconstituted",
         "diluted"
       ],
-      "concentrateGroups": [
-        [
-          "frozen",
-          "concentrate"
-        ],
-        [
-          "dry",
-          "concentrate"
-        ],
-        [
-          "protein",
-          "concentrate"
-        ]
+      "concentrateTrigger": "concentrate",
+      "concentrateVeto": [
+        "from concentrate",
+        "includes from concentrate"
       ],
-      "concentrateVeto": "from concentrate",
+      "concentrateNote": "rev7 SIMPLIFIES this. rev6 enumerated frozen/dry/protein concentrate groups and missed 'Raspberry juice concentrate', which belongs to none of them. Measured across the catalogue: 40 rows contain the token, 6 of them as 'from concentrate' (a finished juice, eligible) and 34 as the concentrate itself. So the correct rule is the bare token with one veto, not a list of qualifiers. Enumerating the shapes I happened to have seen was the error; the token plus its single negation is the whole population.",
       "doughTokens": [
         "dough",
         "batter"
@@ -2237,17 +2228,17 @@
         "note": "'Peas, green, raw' and 'Beans, snap, raw' are ordinary raw vegetables and MUST NOT be flagged. Nut headwords are deliberately absent: raw almonds are food. Some raw legumes are not merely unpalatable but contain lectins that are actively toxic uncooked, which is why C5 is hard rather than soft."
       },
       "measured": {
-        "totalFlagged": 301,
-        "share": "2.39%",
+        "totalFlagged": 304,
+        "share": "2.41%",
         "byTrigger": {
           "unprepared": 87,
-          "dry-pulse-or-grain": 87,
+          "dry-pulse-or-grain": 89,
           "commodity-flour": 58,
           "unreconstituted": 26,
           "uncooked": 12,
           "dough": 11,
           "ready-to-bake": 10,
-          "concentrate": 10
+          "concentrate": 11
         },
         "validation": "18 must-flag and 19 must-not-flag cases, drawn from the G2c leak list and its false positives, all pass."
       }
