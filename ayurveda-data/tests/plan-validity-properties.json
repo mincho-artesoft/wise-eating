@@ -442,8 +442,8 @@
       "id": "C5",
       "severity": "hard",
       "group": "plausibility",
-      "assert": "no component carries the `requiresCooking` flag defined in food-roles.json (raw dry legume, raw dry grain, raw dry pulse presented as edible)",
-      "why": "OBSERVED in four separate meals. These require cooking; some raw legumes are actively toxic."
+      "assert": "no component carries the `notReadyToEat` flag defined in food-roles.json",
+      "why": "OBSERVED in four MP-6b meals as raw dry pulses. WIDENED in rev3 of this suite: the MP-7 G2c reverse census found 126 further rows that were eligible and not food you can put on a plate — unprepared frozen items, undiluted concentrates, commodity flours, refrigerated doughs. The flag now covers 301 rows rather than 100."
     },
     {
       "id": "C6",
@@ -498,12 +498,12 @@
     "specializeStructuralRequestsWithHeadwords"
   ],
   "deletionNote": "These exist to repair LLM output. A deterministic solver produces correct structure by construction, so they become dead code. Report any that CANNOT be deleted and why — that is a sign the solver is not covering something the old pipeline did.",
-  "revision": "rev2 — 2026-07-27. CRITICAL GAP FOUND IN MP-6b. The rev1 suite passed 23/23 hard properties on plans containing infant formula served to adults, breakfasts of four chocolate drinks, and dinners of six dried herbs beside raw lentils. No property asserted CULINARY PLAUSIBILITY. This revision adds group `plausibility` (C1-C10) and binds it to the new food-roles.json taxonomy. Director defect: I validated structure, nutrition, safety, variety, dosha, determinism, feasibility and performance, and never asked whether the output was food.",
+  "revision": "rev3 — 2026-07-27. C5 rebound to the widened `notReadyToEat` flag. rev2 — 2026-07-27. CRITICAL GAP FOUND IN MP-6b. The rev1 suite passed 23/23 hard properties on plans containing infant formula served to adults, breakfasts of four chocolate drinks, and dinners of six dried herbs beside raw lentils. No property asserted CULINARY PLAUSIBILITY. This revision adds group `plausibility` (C1-C10) and binds it to the new food-roles.json taxonomy. Director defect: I validated structure, nutrition, safety, variety, dosha, determinism, feasibility and performance, and never asked whether the output was food.",
   "notes": [
     "FOOD ROLE is a new prerequisite. C2-C8 need every catalogue row to carry a role: main, staple, side, beverage, spice, herb, condiment, supplement, infantProduct, other. This does not exist yet and is a director artifact to author — it is the same shape as the FC-1 concept work and should live alongside it."
   ],
   "dependsOn": {
-    "ayurveda-data/rules/food-roles.json": "rev1 or later. Properties C1-C10 have NO meaning without it — it supplies the role vocabulary, the per-role portion ranges, the requiresCooking flag and the near-duplicate test. Do not re-implement any of those inside the test harness.",
+    "ayurveda-data/rules/food-roles.json": "rev6 or later. Properties C1-C10 have NO meaning without it — it supplies the role vocabulary, the per-role portion ranges, the `notReadyToEat` flag and the near-duplicate test. Do not re-implement any of those inside the test harness.",
     "ayurveda-data/tests/food-role-goldens.json": "rev1 or later, plus the mandatory random holdout described in it."
   },
   "counts": {

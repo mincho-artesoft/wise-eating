@@ -1,6 +1,6 @@
 {
-  "rolesVersion": 5,
-  "revision": "rev5 — 2026-07-27. Adds X-DRY-MIX after the second holdout (seed 2026072702, 92/100) found `Puddings, tapioca, dry mix` resolving to the eligible role `sweet`. rev4 notes follow. Adds `recipePostPass` after measuring the rev3 rules against all 1,500 authored recipes: 198 of them (13.2%) resolved to spice or herb, including a 13-ingredient khichdi, and 79 more fell to `other`. Commodity name rules cannot classify dish titles. rev3 notes follow. Corrects the six defects the MP-7 60-row holdout exposed at 47/60: bare `salt` at priority 80 was misclassifying 592 catalogue rows as spice, and `juice`, `sauce`, `cream`, `milk`, `water`, `butter` and `oil` carried the same shape (~2,000 rows of exposure); all 187 categories ran above the name phrases even though 57.7% of rows sit under a coarse top-level bucket; and `nonFood` conflated non-nutritive rows with ingredient-only rows. Fixes: a firstSegment match scope, a three-way sensitive/fine/coarse category split, and a new `ingredientOnly` role. THE 60-ROW HOLDOUT IS NOW BURNED — these rules were written after seeing its failures, so it is training data from here on and a fresh holdout is mandatory. rev2 notes follow. Corrects all three signal-driven rules after the MP-7 signal audit: `recipe.course` did not exist; `usda.foodCategory` was the wrong field name with the wrong 25-value vocabulary; `dravya.classification` supplied Sanskrit keys with zero overlap with the data. All three are now bound to real fields with their real vocabularies, read directly from the repo. rev1 context follows.  Written after MP-6b produced culinarily absurd plans that passed all 23 hard properties: infant formula served to adults three times in one week, a breakfast of four chocolate drinks, and a dinner of six dried herbs beside raw lentils. Nothing in the catalogue said what a row IS FOR. This file says it.",
+  "rolesVersion": 6,
+  "revision": "rev6 — 2026-07-27. Generalises `requiresCooking` into `notReadyToEat` after the G2c reverse census found 126 eligible rows that are not food you can put on a plate. The flag goes from 100 rows to 301. rev5 notes follow. Adds X-DRY-MIX after the second holdout (seed 2026072702, 92/100) found `Puddings, tapioca, dry mix` resolving to the eligible role `sweet`. rev4 notes follow. Adds `recipePostPass` after measuring the rev3 rules against all 1,500 authored recipes: 198 of them (13.2%) resolved to spice or herb, including a 13-ingredient khichdi, and 79 more fell to `other`. Commodity name rules cannot classify dish titles. rev3 notes follow. Corrects the six defects the MP-7 60-row holdout exposed at 47/60: bare `salt` at priority 80 was misclassifying 592 catalogue rows as spice, and `juice`, `sauce`, `cream`, `milk`, `water`, `butter` and `oil` carried the same shape (~2,000 rows of exposure); all 187 categories ran above the name phrases even though 57.7% of rows sit under a coarse top-level bucket; and `nonFood` conflated non-nutritive rows with ingredient-only rows. Fixes: a firstSegment match scope, a three-way sensitive/fine/coarse category split, and a new `ingredientOnly` role. THE 60-ROW HOLDOUT IS NOW BURNED — these rules were written after seeing its failures, so it is training data from here on and a fresh holdout is mandatory. rev2 notes follow. Corrects all three signal-driven rules after the MP-7 signal audit: `recipe.course` did not exist; `usda.foodCategory` was the wrong field name with the wrong 25-value vocabulary; `dravya.classification` supplied Sanskrit keys with zero overlap with the data. All three are now bound to real fields with their real vocabularies, read directly from the repo. rev1 context follows.  Written after MP-6b produced culinarily absurd plans that passed all 23 hard properties: infant formula served to adults three times in one week, a breakfast of four chocolate drinks, and a dinner of six dried herbs beside raw lentils. Nothing in the catalogue said what a row IS FOR. This file says it.",
   "author": "Director",
   "appliesTo": "Every row of the 14,484-item FoodItem catalogue, plus the 1,500 authored recipes. Consumed by the MP-5 solver as an eligibility and composition constraint, and by properties C1-C9 of plan-validity-properties.json as their vocabulary.",
   "whyThisExists": "minAgeMonths is a FLOOR, not a range. Infant formula carries a floor of 0 and therefore satisfies every adult age check in the system. The catalogue can express 'not before this age' and cannot express 'intended for infants, inappropriate for adults'. It also cannot express 'this is a seasoning, not a dish'. Both failures produced the same symptom in MP-6b. A role is the missing field.",
@@ -279,6 +279,7 @@
       "phrases": [
         "formula"
       ],
+      "matchScope": "firstSegment",
       "vetoTokens": [
         [
           "adult"
@@ -292,6 +293,13 @@
         [
           "infant",
           "free"
+        ],
+        [
+          "bread"
+        ],
+        [
+          "special",
+          "formula"
         ]
       ],
       "note": "A bare 'formula' row in a food catalogue is an infant product until shown otherwise. Misrouting between infantProduct and supplement is HARMLESS here: both are ineligible as meal components, so this rule is allowed to be blunt."
@@ -451,6 +459,33 @@
         "puff pastry",
         "pie shell",
         "crust"
+      ],
+      "vetoTokens": [
+        [
+          "frozen",
+          "meal"
+        ],
+        [
+          "dinner"
+        ],
+        [
+          "entree"
+        ],
+        [
+          "sauce"
+        ],
+        [
+          "patty"
+        ],
+        [
+          "tart"
+        ],
+        [
+          "fried"
+        ],
+        [
+          "baked"
+        ]
       ],
       "note": "rev3, added after the MP-7 holdout. rev2's `nonFood` conflated two different things: rows that are not nutritive at all (baking soda, tap water, colouring) and rows that ARE food but are not a served dish (pie crust, flour, dry mix, batter). The holdout labeller correctly called an unbaked pie crust ingredient-only; the resolver called it `staple`; and the disagreement counted as a sensitive-role error because my definition had merged the two. Both remain ineligible as components, so nothing about plan safety changes — but the taxonomy can now express what the labeller meant."
     },
@@ -900,8 +935,33 @@
         [
           "butter",
           "cake"
+        ],
+        [
+          "sauce"
+        ],
+        [
+          "meal"
+        ],
+        [
+          "dinner"
+        ],
+        [
+          "entree"
+        ],
+        [
+          "fish"
+        ],
+        [
+          "chicken"
+        ],
+        [
+          "beef"
+        ],
+        [
+          "pork"
         ]
-      ]
+      ],
+      "note": "The sauce/meal/entree/protein vetoes exist because a fat token inside a composed dish name is incidental: 'Fish in lemon-butter sauce ... frozen meal' is a main course, not a fat."
     },
     {
       "id": "S-OIL",
@@ -1441,7 +1501,25 @@
         "murabba",
         "papad",
         "appalam"
-      ]
+      ],
+      "vetoTokens": [
+        [
+          "frozen",
+          "meal"
+        ],
+        [
+          "dinner"
+        ],
+        [
+          "entree"
+        ],
+        [
+          "with",
+          "sauce",
+          "meal"
+        ]
+      ],
+      "note": "The frozen-meal vetoes stop a composed entree whose name mentions a sauce from resolving as the sauce."
     },
     {
       "id": "G-SWEET",
@@ -1899,9 +1977,159 @@
     }
   ],
   "flags": {
-    "requiresCooking": {
-      "purpose": "Backs property C5. A row carrying this flag is ineligible as a plan component in any role.",
-      "positive": {
+    "notReadyToEat": {
+      "renamedFrom": "requiresCooking",
+      "purpose": "Backs property C5. A row carrying this flag is ineligible as a plan component in any role. rev6 GENERALISES it. rev1-5 covered only raw dry pulses and grains — 100 rows — and the G2c reverse census found 126 rows that were eligible, ready by the old flag, and not in fact food you can put on a plate: 87 `unprepared` frozen and refrigerated items, 19 undiluted concentrates, 12 commodity flours, 9 refrigerated doughs, and assorted uncooked grains and meats. They share exactly one property, which the old flag did not name: the row is not ready to eat as purchased. rev6 flags 301 rows (2.39% of the catalogue).",
+      "evaluationOrder": [
+        "1. EXPLICIT-UNREADY markers win over everything, including any preparation word in the same name, because 'Sweet Potatoes, french fried, crosscut, frozen, unprepared' is still raw despite the word 'fried':",
+        "   - token `unprepared`",
+        "   - token `uncooked`, unless a driedFruitVeto token is present",
+        "   - phrase `not reconstituted`, or token `undiluted` / `unreconstituted`",
+        "2. otherwise, if any preparedIndicator matches contiguously, the row IS ready — stop here",
+        "3. otherwise flag on any of: concentrate groups, dough/batter, ready-to-bake/fry, commodity flour, or the original dry pulse/grain rule"
+      ],
+      "explicitUnready": [
+        "unprepared",
+        "uncooked",
+        "not reconstituted",
+        "undiluted",
+        "unreconstituted"
+      ],
+      "driedFruitVeto": [
+        "dried",
+        "dehydrated",
+        "chipped",
+        "sulfured"
+      ],
+      "driedFruitVetoNote": "'Prunes, dehydrated, uncooked' and 'Beef, dried, chipped, uncooked' are ready to eat. Without this veto the flag would remove every dried fruit row from the catalogue.",
+      "preparedIndicators": [
+        "cooked",
+        "baked",
+        "fried",
+        "prepared",
+        "made with",
+        "made from",
+        "from refrigerated dough",
+        "from dough",
+        "from dry mix",
+        "mush",
+        "toasted",
+        "heated",
+        "roasted",
+        "boiled",
+        "steamed",
+        "grilled",
+        "reconstituted",
+        "diluted"
+      ],
+      "concentrateGroups": [
+        [
+          "frozen",
+          "concentrate"
+        ],
+        [
+          "dry",
+          "concentrate"
+        ],
+        [
+          "protein",
+          "concentrate"
+        ]
+      ],
+      "concentrateVeto": "from concentrate",
+      "doughTokens": [
+        "dough",
+        "batter"
+      ],
+      "doughVeto": [
+        "sour"
+      ],
+      "doughVetoNote": "'Bread, sour dough' is bread.",
+      "readyToBakeGroups": [
+        [
+          "ready",
+          "bake"
+        ],
+        [
+          "ready",
+          "fry"
+        ]
+      ],
+      "readyToHeatExcluded": "`ready-to-heat` is deliberately NOT a trigger. 'Pasta with tomato-based sauce, ready-to-heat' is a finished dish that needs warming, not an ingredient. Including it swept in 51 rows.",
+      "commodityFlours": [
+        "cottonseed flour",
+        "sesame flour",
+        "sunflower seed flour",
+        "acorn flour",
+        "peanut flour",
+        "soy flour",
+        "lupin flour",
+        "almond flour",
+        "chickpea flour",
+        "besan",
+        "cornmeal",
+        "corn meal",
+        "semolina",
+        "rye flour",
+        "rice flour",
+        "oat flour",
+        "potato flour",
+        "tapioca flour",
+        "arrowroot flour",
+        "wheat flour",
+        "buckwheat flour",
+        "masa harina",
+        "gram flour"
+      ],
+      "finishedGoodVeto": [
+        "bread",
+        "biscuit",
+        "muffin",
+        "cake",
+        "pancake",
+        "waffle",
+        "roll",
+        "rolls",
+        "cookie",
+        "cookies",
+        "brownie",
+        "pie",
+        "pizza",
+        "cracker",
+        "crackers",
+        "noodle",
+        "pasta",
+        "dosa",
+        "idli",
+        "chapati",
+        "bun",
+        "doughnut",
+        "donut",
+        "pretzel",
+        "bagel",
+        "gumdrop",
+        "candies",
+        "candy",
+        "pastry",
+        "stick",
+        "dressing",
+        "dumpling",
+        "tamale",
+        "arepa",
+        "hushpuppy",
+        "fritter",
+        "patty",
+        "porridge",
+        "stuffing",
+        "coating",
+        "tortilla",
+        "chip",
+        "chips",
+        "pudding",
+        "batter"
+      ],
+      "finishedGoodVetoNote": "A flour token inside a finished baked good is incidental. Without this veto, 'Bread, whole-wheat, made with wheat flour' and 'Cornmeal stick, Puerto Rican style' are both flagged.",
+      "dryPulseRule": {
         "tokenGroups": [
           [
             "mature",
@@ -1915,93 +2143,114 @@
         "orAllOf": {
           "headword": "one token from dryStapleHeadwords",
           "state": "one token from ['raw','dry','dried','uncooked','unprepared']"
-        }
+        },
+        "dryStapleHeadwords": [
+          "mung",
+          "moong",
+          "mash",
+          "lentil",
+          "lentils",
+          "masoor",
+          "toor",
+          "tur",
+          "arhar",
+          "urad",
+          "chana",
+          "chickpea",
+          "chickpeas",
+          "garbanzo",
+          "kidney",
+          "rajma",
+          "cowpea",
+          "cowpeas",
+          "blackeye",
+          "blackeyed",
+          "pigeonpea",
+          "pigeon",
+          "bean",
+          "beans",
+          "soybean",
+          "soybeans",
+          "lupin",
+          "lupins",
+          "fava",
+          "broadbean",
+          "pea",
+          "peas",
+          "rice",
+          "wheat",
+          "barley",
+          "millet",
+          "sorghum",
+          "buckwheat",
+          "quinoa",
+          "groat",
+          "groats",
+          "maize",
+          "dal",
+          "dahl",
+          "daal",
+          "spelt",
+          "teff",
+          "amaranth",
+          "kamut",
+          "farro",
+          "bulgur"
+        ],
+        "veto": [
+          "cooked",
+          "boiled",
+          "sprouted",
+          "roasted",
+          "toasted",
+          "flour",
+          "ground",
+          "meal",
+          "powder",
+          "canned",
+          "soaked",
+          "steamed",
+          "fried",
+          "puffed",
+          "flaked",
+          "popped",
+          "green",
+          "fresh",
+          "immature",
+          "snap",
+          "snow",
+          "frozen",
+          "edible",
+          "podded",
+          "pod",
+          "pods",
+          "tender",
+          "young",
+          "milk",
+          "baby",
+          "shelled",
+          "blanched",
+          "parboiled",
+          "instant"
+        ],
+        "vetoIsTokenMatched": "Single tokens only, same plural tolerance as everything else. Multi-word entries never fire.",
+        "note": "'Peas, green, raw' and 'Beans, snap, raw' are ordinary raw vegetables and MUST NOT be flagged. Nut headwords are deliberately absent: raw almonds are food. Some raw legumes are not merely unpalatable but contain lectins that are actively toxic uncooked, which is why C5 is hard rather than soft."
       },
-      "dryStapleHeadwords": [
-        "mung",
-        "moong",
-        "mash",
-        "lentil",
-        "lentils",
-        "masoor",
-        "toor",
-        "tur",
-        "arhar",
-        "urad",
-        "chana",
-        "chickpea",
-        "chickpeas",
-        "garbanzo",
-        "kidney",
-        "rajma",
-        "cowpea",
-        "cowpeas",
-        "blackeye",
-        "blackeyed",
-        "pigeonpea",
-        "pigeon",
-        "bean",
-        "beans",
-        "soybean",
-        "soybeans",
-        "lupin",
-        "lupins",
-        "fava",
-        "broadbean",
-        "pea",
-        "peas",
-        "rice",
-        "wheat",
-        "barley",
-        "millet",
-        "sorghum",
-        "buckwheat",
-        "quinoa",
-        "groat",
-        "groats",
-        "maize",
-        "dal",
-        "dahl",
-        "daal"
-      ],
-      "veto": [
-        "cooked",
-        "boiled",
-        "sprouted",
-        "roasted",
-        "toasted",
-        "flour",
-        "ground",
-        "meal",
-        "powder",
-        "canned",
-        "soaked",
-        "steamed",
-        "fried",
-        "puffed",
-        "flaked",
-        "popped",
-        "green",
-        "fresh",
-        "immature",
-        "snap",
-        "snow",
-        "frozen",
-        "edible",
-        "podded",
-        "pod",
-        "pods",
-        "tender",
-        "young",
-        "milk",
-        "baby",
-        "shelled",
-        "blanched",
-        "parboiled",
-        "instant"
-      ],
-      "vetoIsTokenMatched": "Each veto entry is a single token compared with the same plural tolerance as everything else. Do not write multi-word entries here; they will never fire.",
-      "note": "'Peas, green, raw' and 'Beans, snap, raw' are ordinary raw vegetables and MUST NOT be flagged — that is what the green/fresh/snap vetoes are for. Nut headwords are deliberately absent from the list: raw almonds are food. Some raw legumes are not merely unpalatable but contain lectins that are actively toxic uncooked, which is why C5 is hard rather than soft."
+      "measured": {
+        "totalFlagged": 301,
+        "share": "2.39%",
+        "byTrigger": {
+          "unprepared": 87,
+          "dry-pulse-or-grain": 87,
+          "commodity-flour": 58,
+          "unreconstituted": 26,
+          "uncooked": 12,
+          "dough": 11,
+          "ready-to-bake": 10,
+          "concentrate": 10
+        },
+        "validation": "18 must-flag and 19 must-not-flag cases, drawn from the G2c leak list and its false positives, all pass."
+      }
     },
     "isNearDuplicateOf": {
       "purpose": "Backs property C7.",

@@ -1,6 +1,6 @@
 # TASK MP-7 — culinary plausibility
 
-Director packet · rev4, 2026-07-27 · branch `ayurveda-app`, base = `484b7e2` (MP-7a on rev4 rules)
+Director packet · rev5, 2026-07-27 · branch `ayurveda-app`, base = `d3b89a9` (rev5 rules)
 Corrective task. Blocks the `MP5AyurvedicSolverEnabled` flag going on.
 
 ---
@@ -33,16 +33,16 @@ New director artifacts are attached and go in as-is; do not rewrite them.
 
 | Path | State |
 |---|---|
-| `ayurveda-data/rules/food-roles.json` | **rev5, replaces whatever is committed** — 15 roles, 33 rules; adds `X-DRY-MIX`. See §9. |
+| `ayurveda-data/rules/food-roles.json` | **rev6, replaces whatever is committed** — `requiresCooking` generalised to `notReadyToEat`. See §10. |
 | `ayurveda-data/tests/food-role-goldens.json` | **rev2** — one label corrected (peanut butter → condiment); see §8 |
-| `ayurveda-data/tests/plan-validity-properties.json` | rev2, unchanged — already committed |
+| `ayurveda-data/tests/plan-validity-properties.json` | **rev3** — C5 rebound to `notReadyToEat` |
 | `ayurveda-data/tools/ref_resolve.py` | **new** — my reference implementation of the same spec, kept deliberately as the second derivation for G3 |
 
 New code:
 
 | Path | Purpose |
 |---|---|
-| `WiseEating/AI/MealPlanning/FoodRoleResolver.swift` | resolves role, `requiresCooking`, headword. Its own file. |
+| `WiseEating/AI/MealPlanning/FoodRoleResolver.swift` | resolves role, `notReadyToEat`, headword. Its own file. |
 | solver changes | role-aware eligibility and composition constraints |
 | test target additions | C1–C10 checker, role golden runner, holdout runner |
 
@@ -88,7 +88,7 @@ Extend the matcher to: identical, `+s`, `+es`, `y→ies`, plus the `irregularPlu
 Hard, checked at candidate-filter time (cheapest place, and it shrinks the pool):
 
 - role declares `eligibleAsComponent: false` → ineligible. `infantProduct` becomes eligible only when profile age < 36 months.
-- `requiresCooking` → ineligible.
+- `notReadyToEat` → ineligible.
 
 Hard, checked during meal assembly:
 
@@ -105,7 +105,7 @@ The adaptive dish-count logic from MP-5 must be re-checked against the new clamp
 
 ### MP-7d — C1–C10 checker
 
-Implement in the test target. The checker **reads role, portion ranges, the cooking flag and the duplicate test from `food-roles.json`**. It must not carry its own copy of any of them.
+Implement in the test target. The checker **reads role, portion ranges, the `notReadyToEat` flag and the duplicate test from `food-roles.json`**. It must not carry its own copy of any of them.
 
 ### MP-7e — holdout
 
@@ -313,3 +313,40 @@ The reverse direction is the one that matters: it is the direction in which an i
 ### Standing rule for the rest of MP-7
 
 When a gate fails, stop and report — that has worked three times now and each stop found something bigger than the case that triggered it. But **do not draw a fresh random holdout after every rule change**; that is what burns them. Fix, re-run the frozen fixtures and the census, and draw a new random sample only when the rules are otherwise stable.
+
+
+---
+
+## 10. rev5 addendum — one flag instead of two half-ideas
+
+The G2c reverse census returned **126/427**, and every one of them is real. This is the census earning its keep: a random holdout would have surfaced roughly one of these per 100 rows and taken a dozen more rounds to find them all.
+
+The 126 sort into five groups that share exactly one property, which the old flag never named:
+
+| Group | Rows | Example |
+|---|---:|---|
+| `unprepared` frozen / refrigerated | 79 | Potatoes, hash brown, refrigerated, unprepared |
+| undiluted or unreconstituted concentrate | 19 | Orange juice, frozen concentrate, undiluted |
+| commodity flour or meal | 12 | Seeds, sesame flour, partially defatted |
+| refrigerated dough | 9 | Cookies, chocolate chip, refrigerated dough |
+| other uncooked | 7 | Spelt, uncooked · Beef tripe, uncooked, raw |
+
+`requiresCooking` was scoped to raw dry pulses and grains and caught 100 rows. The shared property is broader and simpler: **the row is not ready to eat as purchased.** rev6 renames the flag `notReadyToEat` and widens it to **301 rows (2.39%)**.
+
+Evaluation order matters and is specified in the file. Explicit-unready markers win over everything, *including* a preparation word in the same name — "Sweet Potatoes, french fried, crosscut, frozen, unprepared" is still raw despite the word "fried". Only then do preparation indicators mark a row ready. Only then do the structural triggers fire.
+
+Four vetoes exist because without them the flag removes real food: dried fruit ("Prunes, dehydrated, uncooked" is ready), sourdough ("Bread, sour dough" is bread), `from concentrate` ("Lemon juice from concentrate, canned" is juice), and finished baked goods ("Bread, whole-wheat, made with wheat flour" is bread). `ready-to-heat` is deliberately *not* a trigger — "Pasta with tomato-based sauce, ready-to-heat" is a finished dish, and including it swept in 51 rows.
+
+Validated on 18 must-flag and 19 must-not-flag cases drawn from the leak list and its false positives: **all 37 pass**. Residual reverse population still eligible and ready: **295 rows**, all legitimately prepared foods (hot chocolate made with water, pudding made from dry mix, bread).
+
+### The four forward errors are also fixed
+
+| Row | Was | Fix |
+|---|---|---|
+| Bread, white, special formula, added fiber (×2) | infantProduct | `X-INFANT-BARE-FORMULA` gains `matchScope: firstSegment`; all 17 real formula rows carry it in segment 1, "Bread, white, …" does not |
+| Fish in lemon-butter sauce with starch item, … frozen meal | ingredientOnly | veto tokens `frozen meal`, `dinner`, `entree`, `sauce` |
+| Corn flour patty or tart, fried | ingredientOnly | the `finishedGoodVeto` covers `patty` and `tart`; `fried` is a preparation indicator |
+
+### Re-run, don't re-sample
+
+Per the standing rule in §9: re-run G0, the frozen fixtures, and **both directions of G2c** against rev6. Do not draw the third random holdout until G2c is clean.
