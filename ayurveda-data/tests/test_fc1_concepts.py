@@ -9,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 BUILD_SEED_PATH = ROOT / "ayurveda-data" / "build_seed.py"
 ONTOLOGY_PATH = ROOT / "ayurveda-data" / "rules" / "food-concepts.json"
+ROLE_SOURCE_PATH = ROOT / "ayurveda-data" / "rules" / "food-roles.json"
 OVERRIDES_PATH = (
     ROOT / "ayurveda-data" / "crosswalk" / "concept-overrides.json"
 )
@@ -54,6 +55,10 @@ class FoodConceptTests(unittest.TestCase):
             ONTOLOGY_PATH,
             OVERRIDES_PATH,
         )
+        cls.role_source = build_seed.load_food_role_source(ROLE_SOURCE_PATH)
+        cls.irregular_plurals = cls.role_source["matching"][
+            "pluralTolerance"
+        ]["irregularPlurals"]
         cls.suffix_terms = build_seed.load_suffix_negation_terms(
             KNOWLEDGE_BASE_PATH
         )
@@ -66,6 +71,7 @@ class FoodConceptTests(unittest.TestCase):
             cls.ontology,
             cls.overrides,
             cls.suffix_terms,
+            cls.irregular_plurals,
         )
 
     def test_director_artifacts_are_unchanged_and_complete(self):
@@ -251,6 +257,40 @@ class FoodConceptTests(unittest.TestCase):
         )
         self.assertEqual(matches, [])
 
+    def test_fc1f_plural_tolerance_covers_all_authored_forms(self):
+        cases = {
+            "Potatoes, flesh and skin, raw": ("potato",),
+            "Tomatoes, red, ripe, raw": ("tomato",),
+            "Berries, mixed, frozen": ("berry",),
+            "Leaves, raw": ("leaf",),
+        }
+        for name, phrase_tokens in cases.items():
+            with self.subTest(name=name):
+                self.assertTrue(
+                    build_seed._phrase_spans(
+                        build_seed.modifier_normalized_tokens(name),
+                        phrase_tokens,
+                        plural_tolerance="full",
+                        irregular_plurals=self.irregular_plurals,
+                    )
+                )
+
+        self.assertEqual(
+            build_seed._matching_veto_token_groups(
+                build_seed.modifier_normalized_tokens(
+                    "Potatoes, oyster mushrooms"
+                ),
+                [("potato", "oyster", "mushroom")],
+                plural_tolerance="full",
+                irregular_plurals=self.irregular_plurals,
+            ),
+            ["potato oyster mushroom"],
+        )
+        self.assertEqual(
+            self.artifact["pluralTolerance"]["forms"],
+            ["identical", "+s", "+es", "y->ies", "irregular"],
+        )
+
     def test_all_recipes_propagate_from_complete_non_nested_links(self):
         propagation = self.artifact["propagation"]
         self.assertEqual(propagation["ingredientLinks"], 10_571)
@@ -297,6 +337,7 @@ class FoodConceptTests(unittest.TestCase):
             self.ontology,
             self.overrides,
             self.suffix_terms,
+            self.irregular_plurals,
         )
         self.assertEqual(
             build_seed.encode_deterministic_gzip(self.artifact),

@@ -947,6 +947,7 @@ def build_food_concepts(
     ontology: dict[str, Any],
     overrides: dict[str, Any],
     suffix_negation_terms: set[str],
+    irregular_plurals: dict[str, str],
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     validate_food_concept_sources(ontology, overrides)
     concepts_by_id = {
@@ -1013,7 +1014,12 @@ def build_food_concepts(
     for food_id, name in sorted(catalog_names.items()):
         tokens = modifier_normalized_tokens(name)
         for concept_id, (positives, negatives, veto_groups) in compiled.items():
-            token_vetoes = _matching_veto_token_groups(tokens, veto_groups)
+            token_vetoes = _matching_veto_token_groups(
+                tokens,
+                veto_groups,
+                plural_tolerance="full",
+                irregular_plurals=irregular_plurals,
+            )
             if token_vetoes:
                 negative_vetoes[concept_id][food_id] = [
                     f"tokens:{group}" for group in sorted(token_vetoes)
@@ -1022,7 +1028,12 @@ def build_food_concepts(
             vetoes = [
                 phrase
                 for phrase, phrase_tokens in negatives
-                if _phrase_spans(tokens, phrase_tokens)
+                if _phrase_spans(
+                    tokens,
+                    phrase_tokens,
+                    plural_tolerance="full",
+                    irregular_plurals=irregular_plurals,
+                )
             ]
             if vetoes:
                 negative_vetoes[concept_id][food_id] = sorted(vetoes)
@@ -1031,6 +1042,8 @@ def build_food_concepts(
                 tokens,
                 positives,
                 suffix_negation_terms,
+                plural_tolerance="full",
+                irregular_plurals=irregular_plurals,
             )
             if not matches:
                 continue
@@ -1131,6 +1144,13 @@ def build_food_concepts(
         "conceptCount": len(concepts_by_id),
         "aliasCount": len(alias_map),
         "matching": ontology["matching"],
+        "pluralTolerance": {
+            "forms": ["identical", "+s", "+es", "y->ies", "irregular"],
+            "irregularPlurals": {
+                singular: irregular_plurals[singular]
+                for singular in sorted(irregular_plurals)
+            },
+        },
         "membership": {
             concept_id: sorted(membership[concept_id])
             for concept_id in sorted(concepts_by_id)
@@ -2577,6 +2597,12 @@ def main() -> int:
             data_root / "rules" / "food-concepts.json",
             data_root / "crosswalk" / "concept-overrides.json",
         )
+        food_role_source = load_food_role_source(
+            data_root / "rules" / "food-roles.json"
+        )
+        irregular_plurals = food_role_source["matching"]["pluralTolerance"][
+            "irregularPlurals"
+        ]
         suffix_negation_terms = load_suffix_negation_terms(
             Path(__file__).resolve().parent.parent
             / "WiseEating"
@@ -2589,9 +2615,7 @@ def main() -> int:
             ontology,
             concept_overrides,
             suffix_negation_terms,
-        )
-        food_role_source = load_food_role_source(
-            data_root / "rules" / "food-roles.json"
+            irregular_plurals,
         )
         food_roles, _role_diagnostics = build_food_roles(
             envelope,
