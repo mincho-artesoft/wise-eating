@@ -1,22 +1,5 @@
 import Foundation
 
-enum FoodRole: String, Codable, CaseIterable, Sendable {
-    case main
-    case staple
-    case side
-    case beverage
-    case spice
-    case herb
-    case medicinalHerb
-    case condiment
-    case fat
-    case sweet
-    case supplement
-    case infantProduct
-    case nonFood
-    case other
-}
-
 struct FoodRolePortionRange: Codable, Equatable, Sendable {
     let min: Double
     let typical: Double

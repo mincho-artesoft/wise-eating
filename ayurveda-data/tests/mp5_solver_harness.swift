@@ -718,9 +718,9 @@ private enum MP5SolverHarness {
     }
 
     private static func fixtureCandidates() -> [MP5Candidate] {
-        let roles: [MP5FoodRole] = [
-            .main, .grain, .produce, .dairy, .fat, .beverage,
-            .condiment, .other
+        let roles: [FoodRole] = [
+            .main, .staple, .side, .fat, .beverage,
+            .condiment, .sweet, .other, .spice, .herb
         ]
         let tastes = [
             "sweet", "sour", "salty", "pungent", "bitter", "astringent"
@@ -735,7 +735,7 @@ private enum MP5SolverHarness {
             switch role {
             case .fat: roleBoost = 420
             case .main: roleBoost = 180
-            case .grain: roleBoost = 150
+            case .staple: roleBoost = 150
             case .condiment: roleBoost = 260
             case .beverage: roleBoost = 10
             default: roleBoost = 70
@@ -745,16 +745,30 @@ private enum MP5SolverHarness {
             let concepts: Set<String> = [
                 safetyConcepts[(id - 1) % safetyConcepts.count]
             ]
-            let limits: (Double, Double)
+            let roleValues: (
+                anchor: Bool,
+                maxPerMeal: Int,
+                eligible: Bool,
+                minimum: Double,
+                maximum: Double
+            )
             switch role {
-            case .fat: limits = (5, 45)
-            case .condiment: limits = (5, 50)
-            case .beverage: limits = (120, 400)
-            case .main: limits = (60, 320)
-            case .grain: limits = (60, 340)
-            case .produce: limits = (50, 350)
-            case .dairy: limits = (50, 300)
-            case .other: limits = (40, 300)
+            case .main: roleValues = (true, 3, true, 80, 450)
+            case .staple: roleValues = (true, 2, true, 40, 350)
+            case .side: roleValues = (false, 3, true, 40, 250)
+            case .beverage: roleValues = (false, 2, true, 100, 500)
+            case .spice: roleValues = (false, 2, true, 0.3, 15)
+            case .herb: roleValues = (false, 2, true, 0.3, 30)
+            case .medicinalHerb:
+                roleValues = (false, 1, true, 0.5, 10)
+            case .condiment: roleValues = (false, 2, true, 5, 60)
+            case .fat: roleValues = (false, 1, true, 2, 30)
+            case .sweet: roleValues = (false, 1, true, 5, 120)
+            case .supplement: roleValues = (false, 0, false, 5, 60)
+            case .infantProduct:
+                roleValues = (false, 0, false, 10, 300)
+            case .nonFood: roleValues = (false, 0, false, 0, 0)
+            case .other: roleValues = (false, 2, true, 20, 300)
             }
             let effectIndex = id % 4
             let effect: Int = effectIndex == 0
@@ -773,8 +787,13 @@ private enum MP5SolverHarness {
                     enforcedMinAgeMonths: id == 95 ? 12 : 0,
                     engineExcluded: id == 96,
                     role: role,
-                    minimumGrams: limits.0,
-                    maximumGrams: limits.1,
+                    roleAnchor: roleValues.anchor,
+                    roleMaxPerMeal: roleValues.maxPerMeal,
+                    roleEligibleAsComponent: roleValues.eligible,
+                    requiresCooking: false,
+                    roleHeadword: "fixture-\((id - 1) / 2)",
+                    minimumGrams: roleValues.minimum,
+                    maximumGrams: roleValues.maximum,
                     doshaVata: effect,
                     doshaPitta: ((id + 1) % 4 == 0) ? -2 : effect,
                     doshaKapha: ((id + 2) % 4 == 0) ? -2 : effect,

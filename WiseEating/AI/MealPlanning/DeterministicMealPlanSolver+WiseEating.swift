@@ -218,12 +218,12 @@ struct MP5PlannerAdapter {
         )
         let concepts = FoodConcepts.shared.concepts(for: Int32(food.id))
             .union(safetyConcepts(from: compact))
-        let role = foodRole(
-            name: food.name,
-            categories: food.category ?? [],
-            concepts: concepts
+        let roleResolution = FoodRoleResolver.shared.resolution(
+            for: food.id
         )
-        let limits = portionLimits(for: role)
+        let roleDefinition = FoodRoleResolver.shared.definition(
+            for: roleResolution.role
+        )
         let tokens = Set(AyurvedaRules.modifierTokens(food.name))
         let isHoney = concepts.contains("honey") || tokens.contains("honey")
         let isGhee = tokens.contains("ghee")
@@ -244,9 +244,14 @@ struct MP5PlannerAdapter {
                 concepts: concepts,
                 enforcedMinAgeMonths: compact.enforcedMinAgeMonths,
                 engineExcluded: engineExcluded,
-                role: role,
-                minimumGrams: limits.minimum,
-                maximumGrams: limits.maximum,
+                role: roleResolution.role,
+                roleAnchor: roleDefinition.anchor,
+                roleMaxPerMeal: roleDefinition.maxPerMeal,
+                roleEligibleAsComponent: roleDefinition.eligibleAsComponent,
+                requiresCooking: roleResolution.requiresCooking,
+                roleHeadword: roleResolution.headword,
+                minimumGrams: roleDefinition.portionGrams.min,
+                maximumGrams: roleDefinition.portionGrams.max,
                 doshaVata: resolution.vpk.vata,
                 doshaPitta: resolution.vpk.pitta,
                 doshaKapha: resolution.vpk.kapha,
@@ -483,60 +488,6 @@ struct MP5PlannerAdapter {
             return .irregular
         }
         return .balanced
-    }
-
-    private func foodRole(
-        name: String,
-        categories: [FoodCategory],
-        concepts: Set<String>
-    ) -> MP5FoodRole {
-        if !concepts.isDisjoint(
-            with: ["meat", "fish", "shellfish", "egg", "soy"]
-        ) {
-            return .main
-        }
-        if concepts.contains("dairy") { return .dairy }
-        let category = categories.first?.rawValue.lowercased() ?? ""
-        let tokens = Set(AyurvedaRules.modifierTokens(name + " " + category))
-        if !tokens.isDisjoint(
-            with: ["rice", "grain", "pasta", "bread", "cereal", "potato"]
-        ) {
-            return .grain
-        }
-        if !tokens.isDisjoint(with: ["oil", "fat", "butter", "ghee"]) {
-            return .fat
-        }
-        if !tokens.isDisjoint(
-            with: ["drink", "beverage", "juice", "tea", "water"]
-        ) {
-            return .beverage
-        }
-        if !tokens.isDisjoint(
-            with: ["spice", "herb", "sauce", "dressing", "condiment"]
-        ) {
-            return .condiment
-        }
-        if !tokens.isDisjoint(
-            with: ["fruit", "vegetable", "salad", "greens"]
-        ) {
-            return .produce
-        }
-        return .other
-    }
-
-    private func portionLimits(
-        for role: MP5FoodRole
-    ) -> (minimum: Double, maximum: Double) {
-        switch role {
-        case .main: return (60, 320)
-        case .grain: return (50, 350)
-        case .produce: return (50, 350)
-        case .dairy: return (40, 300)
-        case .fat: return (5, 45)
-        case .beverage: return (120, 400)
-        case .condiment: return (3, 40)
-        case .other: return (40, 300)
-        }
     }
 
     private func estimatedDailyCalories(for profile: Profile) -> Double {

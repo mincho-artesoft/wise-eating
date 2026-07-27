@@ -28,14 +28,20 @@ enum MP5AyurvedaTier: String, Codable, Sendable {
     case classical, derived, estimated, none
 }
 
-enum MP5FoodRole: String, Codable, CaseIterable, Sendable {
+enum FoodRole: String, Codable, CaseIterable, Sendable {
     case main
-    case grain
-    case produce
-    case dairy
-    case fat
+    case staple
+    case side
     case beverage
+    case spice
+    case herb
+    case medicinalHerb
     case condiment
+    case fat
+    case sweet
+    case supplement
+    case infantProduct
+    case nonFood
     case other
 }
 
@@ -88,7 +94,12 @@ struct MP5Candidate: Codable, Equatable, Sendable {
     let concepts: Set<String>
     let enforcedMinAgeMonths: Int
     let engineExcluded: Bool
-    let role: MP5FoodRole
+    let role: FoodRole
+    let roleAnchor: Bool
+    let roleMaxPerMeal: Int
+    let roleEligibleAsComponent: Bool
+    let requiresCooking: Bool
+    let roleHeadword: String
     let minimumGrams: Double
     let maximumGrams: Double
     let doshaVata: Int
@@ -106,6 +117,13 @@ struct MP5Candidate: Codable, Equatable, Sendable {
     let isHeatedHoney: Bool
 
     var kcalPerGram: Double { kcalPer100g / 100 }
+
+    var nearDuplicateKey: String? {
+        guard roleHeadword != "unknown", !roleHeadword.isEmpty else {
+            return nil
+        }
+        return "\(role.rawValue)|\(roleHeadword)"
+    }
 
     func doshaEffect(_ dosha: MP5Dosha?) -> Int {
         switch dosha {
@@ -339,6 +357,7 @@ struct DeterministicMealPlanSolver {
 
         var rng = MP5SplitMix64(seed: request.seed)
         var selectedByDay: [Int: Set<Int>] = [:]
+        var selectedHeadwordsByDay: [Int: Set<String>] = [:]
         var recentTastesByDay: [Int: Set<String>] = [:]
         var solvedMeals: [MP5SolvedMeal] = []
         var consumedRules = Set<MP5MustContainRule>()
@@ -357,6 +376,11 @@ struct DeterministicMealPlanSolver {
                 window: 3,
                 tastesByDay: recentTastesByDay
             )
+            let recentHeadwords = headwordsWithinWindow(
+                before: slot.day,
+                window: request.noRepeatDays,
+                headwordsByDay: selectedHeadwordsByDay
+            ).union(selectedHeadwordsByDay[slot.day] ?? [])
 
             let matchingRules = request.mustContain.filter { rule in
                 guard rule.day == slot.day, !consumedRules.contains(rule) else {
@@ -373,6 +397,7 @@ struct DeterministicMealPlanSolver {
                 targetKcal: target,
                 required: required,
                 recentIDs: recentIDs,
+                recentHeadwords: recentHeadwords,
                 recentTastes: recentTastes,
                 allowed: allowed,
                 profile: request.profile,
@@ -382,6 +407,11 @@ struct DeterministicMealPlanSolver {
             consumedRules.formUnion(matchingRules)
             selectedByDay[slot.day, default: []].formUnion(
                 meal.components.map(\.foodID)
+            )
+            selectedHeadwordsByDay[slot.day, default: []].formUnion(
+                meal.components.compactMap {
+                    candidatesByID[$0.foodID]?.nearDuplicateKey
+                }
             )
             recentTastesByDay[slot.day, default: []].formUnion(
                 meal.components.flatMap(\.rasa)
@@ -416,6 +446,7 @@ struct DeterministicMealPlanSolver {
         targetKcal: Double,
         required: [MP5Candidate],
         recentIDs: Set<Int>,
+        recentHeadwords: Set<String>,
         recentTastes: Set<String>,
         allowed: [MP5Candidate],
         profile: MP5SolverProfile,
@@ -434,6 +465,15 @@ struct DeterministicMealPlanSolver {
         guard !containsHardViruddha(required) else {
             throw MP5SolverFailure.infeasible(
                 constraint: "structural placement creates a hard viruddha pair"
+            )
+        }
+        guard roleConstraintsSatisfied(
+            required,
+            profile: profile,
+            requireAnchor: false
+        ) else {
+            throw MP5SolverFailure.infeasible(
+                constraint: "structural placement violates meal role caps"
             )
         }
 
@@ -456,6 +496,7 @@ struct DeterministicMealPlanSolver {
                     candidate,
                     mealName: slot.name,
                     targetPerComponent: componentTarget,
+                    recentHeadwords: recentHeadwords,
                     recentTastes: recentTastes,
                     profile: profile
                 )
@@ -481,15 +522,33 @@ struct DeterministicMealPlanSolver {
             ]
             for ordered in modes {
                 var chosen = required
+                if !containsAnchor(chosen, profile: profile),
+                   let anchor = ordered.first(where: { candidate in
+                       !chosen.contains(where: { $0.id == candidate.id })
+                           && isAnchor(candidate, profile: profile)
+                           && canAdd(candidate, to: chosen, profile: profile)
+                           && !wouldCreateHardViruddha(candidate, in: chosen)
+                   }) {
+                    chosen.append(anchor)
+                }
                 for candidate in ordered where chosen.count < count {
                     guard !chosen.contains(where: { $0.id == candidate.id }),
+                          canAdd(candidate, to: chosen, profile: profile),
                           !wouldCreateHardViruddha(candidate, in: chosen)
                     else {
                         continue
                     }
                     chosen.append(candidate)
                 }
-                guard chosen.count == count else { continue }
+                guard chosen.count == count,
+                      roleConstraintsSatisfied(
+                          chosen,
+                          profile: profile,
+                          requireAnchor: true
+                      )
+                else {
+                    continue
+                }
                 let span = calorieSpan(chosen, profile: profile)
                 guard targetKcal >= span.minimum - 1e-9,
                       targetKcal <= span.maximum + 1e-9
@@ -501,12 +560,16 @@ struct DeterministicMealPlanSolver {
                         $1,
                         mealName: slot.name,
                         targetPerComponent: targetKcal / Double(count),
+                        recentHeadwords: recentHeadwords,
                         recentTastes: recentTastes,
                         profile: profile
                     )
                 }
-                if best == nil || score > best!.score {
-                    best = (chosen, score)
+                let shapedScore = score
+                    + mealShapeScore(chosen, profile: profile)
+                    - nearDuplicatePenalty(chosen)
+                if best == nil || shapedScore > best!.score {
+                    best = (chosen, shapedScore)
                 }
             }
         }
@@ -578,6 +641,13 @@ struct DeterministicMealPlanSolver {
             var trial = bestPlan
             var mealCandidates = currentCandidates
             mealCandidates[componentIndex] = replacement
+            guard roleConstraintsSatisfied(
+                mealCandidates,
+                profile: request.profile,
+                requireAnchor: true
+            ) else {
+                continue
+            }
             let target = trial.days[dayIndex].meals[mealIndex].kcal
             guard let fitted = try? fitPortions(
                 mealCandidates,
@@ -642,7 +712,20 @@ struct DeterministicMealPlanSolver {
         }
         if let last = selected.indices.last,
            selected[last].kcalPerGram > 0 {
-            grams[last] += (targetKcal - current) / selected[last].kcalPerGram
+            let adjusted = grams[last]
+                + (targetKcal - current) / selected[last].kcalPerGram
+            grams[last] = min(
+                limits[last].maximum,
+                max(limits[last].minimum, adjusted)
+            )
+        }
+        let fittedKcal = zip(selected, grams).reduce(0.0) {
+            $0 + $1.0.kcalPerGram * $1.1
+        }
+        guard abs(fittedKcal - targetKcal) <= 1e-6 else {
+            throw MP5SolverFailure.infeasible(
+                constraint: "role portion clamps leave calorie residue"
+            )
         }
 
         return selected.indices.map { index in
@@ -684,7 +767,9 @@ struct DeterministicMealPlanSolver {
               candidate.enforcedMinAgeMonths <= profile.ageInMonths,
               !profile.excludedFoodIDs.contains(candidate.id),
               candidate.concepts.isDisjoint(with: profile.allergenConcepts),
-              !candidate.isHeatedHoney
+              !candidate.isHeatedHoney,
+              !candidate.requiresCooking,
+              isRoleEligible(candidate, profile: profile)
         else {
             return false
         }
@@ -728,12 +813,17 @@ struct DeterministicMealPlanSolver {
         _ candidate: MP5Candidate,
         mealName: String,
         targetPerComponent: Double,
+        recentHeadwords: Set<String>,
         recentTastes: Set<String>,
         profile: MP5SolverProfile
     ) -> Double {
         var score = -densityDistance(candidate, target: targetPerComponent)
         score += min(candidate.proteinPer100g / 20, 1.5)
         score += min(candidate.fiberPer100g / 10, 1.0)
+        if let key = candidate.nearDuplicateKey,
+           recentHeadwords.contains(key) {
+            score -= 1.25
+        }
 
         let missingTastes = candidate.rasa.subtracting(recentTastes)
         score += Double(missingTastes.count) * weights.rasa * 0.12
@@ -794,6 +884,13 @@ struct DeterministicMealPlanSolver {
             }
         }
         score += Double(Set(plan.components.flatMap(\.rasa)).count) * 0.5
+        for meal in plan.days.flatMap(\.meals) {
+            let mealCandidates = meal.components.compactMap {
+                candidatesByID[$0.foodID]
+            }
+            score += mealShapeScore(mealCandidates, profile: profile)
+            score -= nearDuplicatePenalty(mealCandidates)
+        }
         return score
     }
 
@@ -819,9 +916,115 @@ struct DeterministicMealPlanSolver {
         case .sharp: multiplier = 0.95
         case .balanced: multiplier = 1.0
         }
-        let minimum = max(1, candidate.minimumGrams * multiplier)
-        let maximum = max(minimum, candidate.maximumGrams * multiplier)
+        let minimum = max(0.1, candidate.minimumGrams)
+        let maximum = max(
+            minimum,
+            candidate.maximumGrams * multiplier
+        )
         return (minimum, maximum)
+    }
+
+    private func isRoleEligible(
+        _ candidate: MP5Candidate,
+        profile: MP5SolverProfile
+    ) -> Bool {
+        if candidate.role == .infantProduct {
+            return profile.ageInMonths < 36
+        }
+        return candidate.roleEligibleAsComponent
+    }
+
+    private func isAnchor(
+        _ candidate: MP5Candidate,
+        profile: MP5SolverProfile
+    ) -> Bool {
+        candidate.roleAnchor
+            || (candidate.role == .infantProduct && profile.ageInMonths < 36)
+    }
+
+    private func containsAnchor(
+        _ selected: [MP5Candidate],
+        profile: MP5SolverProfile
+    ) -> Bool {
+        selected.contains { isAnchor($0, profile: profile) }
+    }
+
+    private func maximumPerMeal(
+        _ candidate: MP5Candidate,
+        profile: MP5SolverProfile
+    ) -> Int {
+        if candidate.role == .infantProduct && profile.ageInMonths < 36 {
+            return 1
+        }
+        return candidate.roleMaxPerMeal
+    }
+
+    private func canAdd(
+        _ candidate: MP5Candidate,
+        to selected: [MP5Candidate],
+        profile: MP5SolverProfile
+    ) -> Bool {
+        roleConstraintsSatisfied(
+            selected + [candidate],
+            profile: profile,
+            requireAnchor: false
+        )
+    }
+
+    private func roleConstraintsSatisfied(
+        _ selected: [MP5Candidate],
+        profile: MP5SolverProfile,
+        requireAnchor: Bool
+    ) -> Bool {
+        let grouped = Dictionary(grouping: selected, by: \.role)
+        for candidatesForRole in grouped.values {
+            guard let candidate = candidatesForRole.first,
+                  candidatesForRole.count <= maximumPerMeal(
+                      candidate,
+                      profile: profile
+                  )
+            else {
+                return false
+            }
+        }
+        let seasoningRoles: Set<FoodRole> = [
+            .spice, .herb, .condiment, .medicinalHerb
+        ]
+        guard selected.filter({
+            seasoningRoles.contains($0.role)
+        }).count <= 2,
+        selected.filter({ $0.role == .beverage }).count <= 2
+        else {
+            return false
+        }
+        return !requireAnchor || containsAnchor(selected, profile: profile)
+    }
+
+    private func mealShapeScore(
+        _ selected: [MP5Candidate],
+        profile: MP5SolverProfile
+    ) -> Double {
+        var score = containsAnchor(selected, profile: profile) ? 1.2 : 0
+        if selected.contains(where: { $0.role == .side }) {
+            score += 0.7
+        }
+        let seasonings = selected.filter {
+            [.spice, .herb, .condiment, .medicinalHerb].contains($0.role)
+        }.count
+        if seasonings <= 1 {
+            score += 0.35
+        }
+        return score
+    }
+
+    private func nearDuplicatePenalty(
+        _ selected: [MP5Candidate]
+    ) -> Double {
+        let counts = Dictionary(
+            grouping: selected.compactMap(\.nearDuplicateKey),
+            by: { $0 }
+        ).values.map(\.count)
+        return Double(counts.reduce(0) { $0 + max(0, $1 - 1) }) * 0.8
     }
 
     private func containsHardViruddha(_ selected: [MP5Candidate]) -> Bool {
@@ -916,6 +1119,31 @@ struct DeterministicMealPlanSolver {
                     throw MP5SolverFailure.infeasible(
                         constraint: "post-solve safety validation"
                     )
+                }
+                guard roleConstraintsSatisfied(
+                    mealCandidates,
+                    profile: request.profile,
+                    requireAnchor: true
+                ) else {
+                    throw MP5SolverFailure.infeasible(
+                        constraint: "post-solve meal role validation"
+                    )
+                }
+                for (component, candidate) in zip(
+                    meal.components,
+                    mealCandidates
+                ) {
+                    let limits = portionLimits(
+                        candidate,
+                        agni: request.profile.agni
+                    )
+                    guard component.grams >= limits.minimum - 1e-7,
+                          component.grams <= limits.maximum + 1e-7
+                    else {
+                        throw MP5SolverFailure.infeasible(
+                            constraint: "post-solve role portion validation"
+                        )
+                    }
                 }
             }
         }
@@ -1021,6 +1249,17 @@ struct DeterministicMealPlanSolver {
         guard window > 0 else { return [] }
         return ((day - window)..<day).reduce(into: []) {
             $0.formUnion(tastesByDay[$1] ?? [])
+        }
+    }
+
+    private func headwordsWithinWindow(
+        before day: Int,
+        window: Int,
+        headwordsByDay: [Int: Set<String>]
+    ) -> Set<String> {
+        guard window > 0 else { return [] }
+        return ((day - window)..<day).reduce(into: []) {
+            $0.formUnion(headwordsByDay[$1] ?? [])
         }
     }
 
