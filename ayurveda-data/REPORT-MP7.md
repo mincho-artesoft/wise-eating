@@ -4,68 +4,64 @@ Date: 2026-07-27
 
 Branch: `ayurveda-app`
 
-Current pushed tip: `810780e`
-
-Status: **STOPPED at MP7-G2c: 1 reverse-direction readiness leak**
+Status: **STOPPED at MP7-G2: 9 MAJOR errors; gate is at most 8**
 
 ## Outcome
 
-MP-7a rev6 is implemented and pushed. The build-time projection, immutable
-runtime cache, solver eligibility check, narration fixture adapter, solver
-harness, and C1–C10 checker now use `notReadyToEat`; no shipped artifact item
-retains `requiresCooking`.
+Rev7 fixes the final G2c readiness leak without changing role classification.
+The build-time projection, immutable runtime cache, solver eligibility check,
+narration adapter, solver harness, and C1–C10 checker all consume
+`notReadyToEat`. The obsolete `concentrateGroups` path has been deleted.
 
-The implementation matches every numeric rev6 reference:
+The ordered gates are green through G2b:
 
-| Reference population | Actual |
-|---|---:|
-| Plain USDA catalogue | **12,601** |
-| Plain `other` | **108 (0.857%)** |
-| Ineligible plain rows | **526** |
-| Ineligible breakdown | **322 infantProduct · 154 ingredientOnly · 30 nonFood · 20 supplement** |
-| Plain `notReadyToEat` | **303 (2.405%)** |
-| Authored recipes on an anchor role | **1,039/1,500** |
-| Authored recipes in a prohibited role | **0/1,500** |
-| Role training cases | **71/71, zero deviations** |
+| Gate | Actual | State |
+|---|---:|---|
+| G0 known-bad meals detected | **21/21** | pass |
+| Role training fixtures | **71/71** | pass |
+| G1 `other` coverage | **7/589 (1.188%)** | pass |
+| G1b unmapped category rows | **0/12,601** | pass |
+| G2c forward | **0/526 wrong** | pass |
+| G2c reverse | **0/303 wrong** | pass |
+| G2b authored recipes | **39/40 (97.5%)** | pass |
+| G2 exact | **85/100** | pass |
+| G2 unresolved | **0/100** | pass |
+| G2 MAJOR | **9/100** | **STOP** |
 
-The ordered gates then reached G2c. The forward census is clean, but the
-reverse census contains one row previously accepted by the director as a real
-rev5 leak:
+No resolver rule, source label, threshold, or fixture was changed after the
+G2 result. G4–G8 were not run.
 
-| Food ID | Name | Role | `notReadyToEat` | Finding |
-|---:|---|---|---:|---|
-| 5751 | Raspberry juice concentrate | beverage | false | Bare juice concentrate remains directly placeable |
-
-The G2c reverse gate is zero, so execution stopped. No G2b sample and no third
-random holdout were drawn. G4–G8 were not run.
-
-## Commits and push state
+## Commit and push ledger
 
 | Work | Commit | State |
 |---|---|---|
-| Rev6 director artifacts, unmodified | `a506d0f` | pushed |
-| MP-7a rev6 implementation and deterministic role cache | `810780e` | pushed |
-| Burned fixtures and this stop report | report commit | committed after stop |
+| Rev7 director rule, unmodified | `687e719` | pushed |
+| Rev7 projection and deterministic cache | `a1483a8` | pushed |
+| G2b labels frozen before scoring | `d11923b` | pushed |
+| G2 labels frozen before scoring | `b0f683b` | pushed |
+| This stop report | report commit | committed and pushed after stop |
 
-Director artifact SHA-256:
+Artifact SHA-256:
 
-- `food-roles.json`: `72ecd3b4361cac894d107d860079b136105e6d9c638006eb6d1ad5aef9dd628b`
-- shipped `food_roles.json.gz`: `928503024ed36f88ed7d2fa7d54d15e974154c53d455b2ab8f707695b1e8e9ed`
+- `food-roles.json`: `0bf542cf312ba5584d4fc8188ad013499e2aab4907f6ba903106ab908940e603`
+- `food_roles.json.gz`: `2fd30464da8c403cd5cf962b8201148d2d6c34ea8ab828b87845a6b33bda201d`
+- G2b frozen fixture: `768035e0c7fee3db4267a5896ab64a0d59547d62c27db1233ebe1c23aaae6bdc`
+- G2 frozen fixture: `614831c18d39f29696187bf286dca1ece649dc8ad10d492c741bd6549a6fba58`
 
-## MP-7a rev6 implementation
+## Rev7 implementation
 
-The readiness evaluator follows the authored order exactly:
+The concentrate rule is exactly the director-authored token rule:
 
-1. `unprepared`, qualifying `uncooked`, and explicit unreconstituted markers
-   win even when the same name contains a preparation word.
-2. Otherwise, a contiguous prepared indicator makes the row ready.
-3. Only then do concentrate, dough, ready-to-bake/fry, commodity-flour, and
-   dry-pulse/grain structural triggers run.
+```text
+trigger: concentrate
+veto: from concentrate | includes from concentrate
+```
 
-The original `dryPulseRule` remains intact. It uniquely contributes 89 plain
-rows. `ready-to-heat` was not added as a trigger.
+The token is evaluated after explicit-unready markers and prepared indicators,
+and before the other structural triggers. The former
+`concentrateGroups` implementation is absent from source.
 
-| Trigger | Plain rows |
+| `notReadyToEat` trigger | Plain rows |
 |---|---:|
 | unprepared | **87** |
 | dry-pulse-or-grain | **89** |
@@ -74,25 +70,25 @@ rows. `ready-to-heat` was not added as a trigger.
 | uncooked | **12** |
 | dough | **11** |
 | ready-to-bake | **10** |
-| concentrate | **10** |
-| **Total** | **303** |
+| concentrate | **11** |
+| **Total** | **304 (2.41%)** |
 
-The descriptive `measured` block inside the unedited director JSON still says
-301 total and 87 dry-pulse rows. The dispatch reference, director Python
-resolver, shipping derivation, and live catalogue all agree on **303 / 89**.
-This is recorded as stale descriptive metadata; it was not edited.
+The three distinguishing rows match the reference:
 
-Focused Python tests: **17/17 green**. They include explicit precedence for
-“Sweet Potatoes, french fried, crosscut, frozen, unprepared,” preparation
-suppression for made-from-dry-mix rows, dried-fruit and sourdough vetoes,
-commodity flour, raw lentils, and the deliberate non-trigger
-“Pasta with tomato-based sauce, ready-to-heat.”
+| Row | Role | Readiness result |
+|---|---|---|
+| Raspberry juice concentrate | beverage | `concentrate` |
+| Lemon juice from concentrate, canned | condiment | ready |
+| Orange juice, chilled, includes from concentrate | beverage | ready |
 
-The legacy rev2 flag fixture is named `requiresCookingCases` and predates the
-generalized semantics. It has one intentional migration delta:
-“Chickpea flour (besan)” was false under the narrow cooking flag and is true
-under rev6 `notReadyToEat`. This is not included in the 71 role-training
-zero-deviation statement.
+Focused MP-7 tests: **20/20 green**, including deterministic artifact equality,
+all G0 assertions, all 71 role fixtures, the exact 304-row trigger partition,
+and the three concentrate cases.
+
+The legacy rev2 fixture key remains named `requiresCookingCases`. Its only
+intentional semantic migration is “Chickpea flour (besan),” which is false
+under the narrow historical flag and true under generalized
+`notReadyToEat`. It is not counted in the 71 role-fixture result.
 
 ## Ordered gate evidence
 
@@ -106,89 +102,142 @@ zero-deviation statement.
 | Six-herb dinner fails C2 and C3 | **yes / yes** |
 | Named raw mung/lentil meals fail C5 | **3/3** |
 
-### Fixtures — training/self-consistency only
+### Role fixtures
 
-All **71/71** role cases match with zero deviations. This is a training corpus,
-not a score.
+All **71/71** director cases match with zero deviations. This is
+training/self-consistency evidence, not a score.
 
-### G1 — role coverage
+### G1 and G1b
 
-Fixed seed: **20260727**.
+G1 seed: **20260727**.
 
-The 500-row proportional sample contains 13 classical, 78 derived, and 409
-estimated rows. It was unioned with the 91 distinct food IDs in the real MP-6b
-sample; two overlapped, producing 589 unique rows.
+The proportional 500-row sample contains 13 classical, 78 derived, and 409
+estimated rows. Unioning it with the 91 distinct IDs in the real MP-6b sample
+produces 589 unique rows.
 
 | Metric | Actual | Gate |
 |---|---:|---:|
 | Rows resolving `other` | **7/589 (1.188%)** | ≤10% |
-
-The seven IDs were 5222, 5577, 5580, 6463, 6469, 7202, and 12052.
-
-### G1b — category coverage
-
-All **187/187** live `FoodItem.category[0]` values are present in the combined
-sensitive/fine/coarse category maps. Unmapped rows: **0/12,601 (0%)**.
+| Live category values mapped | **187/187** | — |
+| Unmapped category rows | **0/12,601** | ≤2% |
 
 ### G2c — exhaustive eligibility census
 
-The marker matcher uses the same normalization, contiguous phrase matching,
-plural tolerance, and token boundaries as the shipping resolver.
+Rev7 retains the 526-row forward population:
 
-| Direction | Population | Wrong | Gate |
-|---|---:|---:|---:|
-| Forward: role is ineligible | **526** | **0** | ≤10 |
-| Reverse: marker-bearing, role-eligible, and ready | **303** | **1** | **0 — STOP** |
+| Role | Rows |
+|---|---:|
+| infantProduct | 322 |
+| ingredientOnly | 154 |
+| nonFood | 30 |
+| supplement | 20 |
+| **Total** | **526** |
 
-Forward is a strict subset of the previously reviewed rev5 population: rev6
-adds no new ineligible ID and removes nine. The four known false positives
-(1631, 2144, 2145, 2310) are fixed; the other five removed rows are prepared
-pie-crust products. The remaining 526 retain their prior genuine-ineligible
-adjudications.
+No new ineligible ID was added relative to the previously reviewed rev5
+population. The remaining 526 retain their genuine-ineligible adjudications:
+**0/526 wrong**.
 
-For the reverse direction, all 126 IDs adjudicated as genuine rev5 leaks were
-compared directly with the rev6 artifact. **125/126** now carry
-`notReadyToEat`; **1/126** does not:
+The reverse gate rechecks the frozen 303-row rev6 eligible-and-ready cohort.
+Raspberry juice concentrate is now blocked by C5, and the other 302 rows retain
+their prepared-food adjudications: **0/303 wrong**. The live residual
+marker-bearing, role-eligible, ready population is therefore 302.
 
-```text
-5751 | Raspberry juice concentrate | beverage | notReadyToEat=false
-```
+### G2b — authored recipes
 
-The exact cause is structural. Its normalized tokens are
-`raspberry juice concentrate`. It has none of the explicit-unready markers.
-The authored concentrate groups are only `frozen+concentrate`,
-`dry+concentrate`, and `protein+concentrate`, so no group matches. It also
-matches no other structural trigger. Both the director reference function
-`not_ready_to_eat` and the shipping build return no trigger.
+The labels were committed before any resolver lookup.
 
-No rule was broadened after observing this result. The director must author
-the intended membership path; adding `juice` as an executor proxy would repeat
-the signal-substitution failure this packet explicitly forbids.
+- Seed: **2026072703**
+- Population: 1,500 authored recipes
+- Sample: 40
+- Exact: **39/40 (97.5%)**
+- Recipes in prohibited roles across the corpus: **0/1,500**
+- Recipes on an anchor role: **1,039/1,500**
+
+One disagreement:
+
+| Food ID | Name | Expected | Actual | Rule |
+|---:|---|---|---|---|
+| 1000676 | Gujarati Stuffed Bitter Gourd | side | main | recipePostPass-default |
+
+The frozen label was not changed after scoring.
+
+### G2 — third random holdout
+
+The 100 labels were committed in `b0f683b` before the role artifact was queried.
+
+- Seed: **2026072704**
+- Population: 14,484 canonical rows sorted by food ID
+- Sample: 100
+
+| Class | Actual | Gate |
+|---|---:|---:|
+| exact | **85** | ≥85 — pass |
+| unresolved | **0** | ≤8 — pass |
+| minor | **5** | report |
+| MAJOR | **9** | ≤8 — **STOP** |
+| eligibility-crossing | **1** | report loudly; G2c is the eligibility gate |
+
+#### MAJOR — 9
+
+| Food ID | Name | Expected | Actual | Rule |
+|---:|---|---|---|---|
+| 1001103 | Punjabi Cumin Aloo Gobi | side | main | recipePostPass-default |
+| 3366 | Macaroni or pasta salad, made with any type of fat free dressing | side | main | U-CATEGORY-FINE |
+| 6866 | Nuts, formulated, wheat-based, all flavors except macadamia, without salt | side | staple | G-STAPLE |
+| 3909 | Potato skins, with cheese | side | staple | U-CATEGORY-FINE |
+| 3129 | Egg roll, meatless | side | main | S-EGG |
+| 7505 | Potatoes, french fried, all types, salt not added in processing, frozen, oven-heated | side | staple | G-STAPLE |
+| 2327 | Muffin, chocolate chip | sweet | staple | U-CATEGORY-FINE |
+| 9036 | Water, with corn syrup and/or sugar and low calorie sweetener, fruit flavored | beverage | staple | G-STAPLE |
+| 7385 | Corn, sweet, yellow, raw | side | staple | G-STAPLE |
+
+#### Minor — 5
+
+| Food ID | Name | Expected | Actual |
+|---:|---|---|---|
+| 1000956 | Manda (Thin Rice Water) | staple | main |
+| 4469 | Kimchi | condiment | side |
+| 4375 | Sauerkraut | condiment | side |
+| 3528 | Rice, brown, with cheese and/or cream based sauce, no added fat | staple | main |
+| 5670 | Frozen novelty, ice cream type, covered, with nuts | sweet | side |
+
+#### Eligibility-crossing — 1
+
+| Food ID | Name | Expected | Actual | Rule |
+|---:|---|---|---|---|
+| 8494 | Milk, evaporated, 2% fat, with added vitamins A and D | ingredientOnly | side | U-CATEGORY-COARSE |
+
+This row is a real new finding: the frozen label treats evaporated milk as a
+cooking ingredient rather than a directly served component. Per §9, G2c—not
+the random sample—remains the eligibility gate, so this is reported separately
+and was not counted among the nine MAJOR errors. No rule was added after seeing
+it.
+
+The measured third holdout is valid for rev7. Any rule revision authored after
+these results must mark it burned and retain it only as a regression fixture.
 
 ## Gates not run after stop
 
 | Gate | State |
 |---|---|
-| G2b — 40 hand-labelled recipes | **NOT RUN** |
-| G2 — third 100-row holdout | **NOT DRAWN** |
-| G3 cross-derivation review | Prior exact reference match retained; no new review started |
+| G3 100-row disagreement review | Prior exact cross-derivation reference retained; no new review started |
 | G4 full regression | **NOT RUN** |
 | G5 30-solve feasibility | **NOT RUN** |
 | G6 Y1 before/after | **NOT RUN** |
 | G7 solve/role/launch/memory | **NOT RUN** |
 | G8 tracked-file size | **NOT RUN** |
 
-The third holdout remains uncreated, as required.
+The handbook and progress milestone are not advanced while MP-7 is stopped.
 
-## Burned fixtures
+## Burned regression fixtures
 
-Both prior samples are committed solely as regression fixtures and are marked
-in-file as burned training data:
+The two earlier samples remain committed and explicitly labelled in-file as
+training fixtures:
 
-- `food-role-burned-regression-seed-20260727.json` — 60 cases.
-- `food-role-burned-regression-seed-2026072702.json` — 100 cases.
+- seed 20260727 — 60 rows;
+- seed 2026072702 — 100 rows.
 
-Neither result is quoted as a held-out score.
+Neither is quoted as a held-out score.
 
 ## Contested — printed, not acted on
 
@@ -212,3 +261,11 @@ Exclusion cases:
 7. poultry / chicken of the woods.
 
 No contested case entered a blocking calculation.
+
+## Out of scope — imagery lookup
+
+The founder reported a separate IMG-workstream issue: `foods.json` and
+`frame_map.json` each contain 12,601 entries, but only 11,578 names match after
+sanitizing `/` and `%` to `_`, leaving about 1,023 archived images unreachable
+by the app lookup. MP-7 did not inspect, modify, or attempt to fix the imagery
+pipeline.
