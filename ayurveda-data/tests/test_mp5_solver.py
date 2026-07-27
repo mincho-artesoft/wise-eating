@@ -91,9 +91,9 @@ class MP5DeterministicSolverTests(unittest.TestCase):
     def tearDownClass(cls):
         cls.temporary.cleanup()
 
-    def test_all_23_hard_properties_pass(self):
-        self.assertEqual(self.result["hardTotal"], 23)
-        self.assertEqual(self.result["hardPassed"], 23)
+    def test_all_30_hard_properties_pass(self):
+        self.assertEqual(self.result["hardTotal"], 30)
+        self.assertEqual(self.result["hardPassed"], 30)
         failed = [
             item["id"]
             for item in self.result["properties"]
@@ -101,9 +101,16 @@ class MP5DeterministicSolverTests(unittest.TestCase):
         ]
         self.assertEqual(failed, [])
 
-    def test_all_13_soft_properties_are_measured(self):
-        self.assertEqual(self.result["softTotal"], 13)
-        self.assertEqual(self.result["softMeasured"], 13)
+    def test_all_16_soft_properties_are_measured(self):
+        self.assertEqual(self.result["softTotal"], 16)
+        self.assertEqual(self.result["softMeasured"], 16)
+
+    def test_c1_through_c10_are_measured_and_hard_checks_pass(self):
+        for index in range(1, 11):
+            finding = self.properties[f"C{index}"]
+            self.assertGreater(finding["applicableRuns"], 0)
+            if finding["severity"] == "hard":
+                self.assertTrue(finding["passed"], finding["detail"])
 
     def test_y1_dosha_signal_changes_selection(self):
         self.assertLess(self.result["y1ImbalancedMean"], 0)

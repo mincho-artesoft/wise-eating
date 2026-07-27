@@ -166,6 +166,7 @@ private enum MP5SolverHarness {
                         evaluateSoft(
                             plan: plan,
                             request: request,
+                            candidates: candidateMap,
                             record: record
                         )
                         record(
@@ -445,6 +446,84 @@ private enum MP5SolverHarness {
                     meal.name,
                     nil
                 )
+                let mealCandidates = meal.components.compactMap {
+                    candidates[$0.foodID]
+                }
+                let infantAllowed = request.profile.ageInMonths < 36
+                record(
+                    "C1",
+                    infantAllowed || !mealCandidates.contains {
+                        $0.role == .infantProduct
+                    },
+                    meal.name,
+                    nil
+                )
+                record(
+                    "C2",
+                    mealCandidates.contains {
+                        !$0.requiresCooking
+                            && (
+                                $0.roleEligibleAsComponent
+                                    || ($0.role == .infantProduct
+                                        && infantAllowed)
+                            )
+                            && (
+                                $0.roleAnchor
+                                    || ($0.role == .infantProduct
+                                        && infantAllowed)
+                            )
+                    },
+                    meal.name,
+                    nil
+                )
+                let seasoningRoles: Set<FoodRole> = [
+                    .spice, .herb, .condiment, .medicinalHerb
+                ]
+                let seasonings = mealCandidates.filter {
+                    seasoningRoles.contains($0.role)
+                }.count
+                let medicinal = mealCandidates.filter {
+                    $0.role == .medicinalHerb
+                }.count
+                record(
+                    "C3",
+                    seasonings <= 2 && medicinal <= 1,
+                    "\(meal.name): \(seasonings) seasonings",
+                    Double(seasonings)
+                )
+                let portionsValid = zip(
+                    meal.components,
+                    mealCandidates
+                ).allSatisfy { component, candidate in
+                    component.grams >= candidate.minimumGrams - 1e-7
+                        && component.grams <= candidate.maximumGrams + 1e-7
+                }
+                record("C4", portionsValid, meal.name, nil)
+                record(
+                    "C5",
+                    mealCandidates.allSatisfy { !$0.requiresCooking },
+                    meal.name,
+                    nil
+                )
+                let beverageCount = mealCandidates.filter {
+                    $0.role == .beverage
+                }.count
+                record(
+                    "C6",
+                    beverageCount <= 2,
+                    "\(meal.name): \(beverageCount) beverages",
+                    Double(beverageCount)
+                )
+                record(
+                    "C9",
+                    mealCandidates.allSatisfy {
+                        $0.role == .infantProduct
+                            ? infantAllowed
+                            : $0.roleEligibleAsComponent
+                    },
+                    meal.name,
+                    nil
+                )
             }
             let kcalError = abs(day.kcal - request.profile.dailyKcal)
                 / request.profile.dailyKcal
@@ -598,6 +677,7 @@ private enum MP5SolverHarness {
     private static func evaluateSoft(
         plan: MP5SolvedPlan,
         request: MP5SolverRequest,
+        candidates: [Int: MP5Candidate],
         record: (
             String,
             Bool,
@@ -606,11 +686,34 @@ private enum MP5SolverHarness {
         ) -> Void
     ) {
         for meal in plan.days.flatMap(\.meals) {
+            let mealCandidates = meal.components.compactMap {
+                candidates[$0.foodID]
+            }
             record(
                 "S6",
                 (2...6).contains(meal.components.count),
                 "\(meal.name): \(meal.components.count)",
                 Double(meal.components.count)
+            )
+            let nearDuplicateKeys = mealCandidates.compactMap(
+                \.nearDuplicateKey
+            )
+            record(
+                "C7",
+                Set(nearDuplicateKeys).count == nearDuplicateKeys.count,
+                "\(meal.name): "
+                    + "\(nearDuplicateKeys.count - Set(nearDuplicateKeys).count) "
+                    + "near duplicates",
+                Double(
+                    nearDuplicateKeys.count - Set(nearDuplicateKeys).count
+                )
+            )
+            let roleCount = Set(mealCandidates.map(\.role)).count
+            record(
+                "C8",
+                true,
+                "\(meal.name): \(roleCount) distinct roles",
+                Double(roleCount)
             )
         }
         for day in plan.days {
@@ -635,6 +738,15 @@ private enum MP5SolverHarness {
             true,
             "soft viruddha count \(plan.softViruddhaCount)",
             Double(plan.softViruddhaCount)
+        )
+        let otherCount = plan.components.compactMap {
+            candidates[$0.foodID]
+        }.filter { $0.role == .other }.count
+        record(
+            "C10",
+            true,
+            "\(otherCount) other-role components",
+            Double(otherCount)
         )
 
         let grouped = Dictionary(

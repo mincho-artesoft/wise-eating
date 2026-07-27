@@ -21,6 +21,7 @@ SOLVER = MEAL_PLANNING / "DeterministicMealPlanSolver.swift"
 AYURVEDA_SEED = ROOT / "WiseEating" / "ayurveda_seed.json.gz"
 FOODS = ROOT / "WiseEating" / "Legacy" / "foods.json"
 FOOD_CONCEPTS = ROOT / "WiseEating" / "food_concepts.json.gz"
+FOOD_ROLES = ROOT / "WiseEating" / "food_roles.json.gz"
 AYURVEDA_RULES = ROOT / "WiseEating" / "ayurveda_rules.json"
 
 
@@ -466,40 +467,6 @@ def safety_concepts(allergens):
     return concepts
 
 
-def food_role(name, categories, concepts):
-    if concepts.intersection(("meat", "fish", "shellfish", "egg", "soy")):
-        return "main"
-    if "dairy" in concepts:
-        return "dairy"
-    category = categories[0].lower() if categories else ""
-    tokens = set(normalized_tokens(f"{name} {category}"))
-    if tokens.intersection(("rice", "grain", "pasta", "bread", "cereal", "potato")):
-        return "grain"
-    if tokens.intersection(("oil", "fat", "butter", "ghee")):
-        return "fat"
-    if tokens.intersection(("drink", "beverage", "juice", "tea", "water")):
-        return "beverage"
-    if tokens.intersection(
-        ("spice", "herb", "sauce", "dressing", "condiment")
-    ):
-        return "condiment"
-    if tokens.intersection(("fruit", "vegetable", "salad", "greens")):
-        return "produce"
-    return "other"
-
-
-PORTION_LIMITS = {
-    "main": (60, 320),
-    "grain": (50, 350),
-    "produce": (50, 350),
-    "dairy": (40, 300),
-    "fat": (5, 45),
-    "beverage": (120, 400),
-    "condiment": (3, 40),
-    "other": (40, 300),
-}
-
-
 def nutrient_value(food, section, key):
     value = ((food.get(section) or {}).get(key) or {}).get("value")
     return float(value) if value is not None else 0.0
@@ -534,6 +501,8 @@ def make_real_candidate_file(destination):
         foods = json.load(source)
     with gzip.open(FOOD_CONCEPTS, "rt", encoding="utf-8") as source:
         concept_payload = json.load(source)
+    with gzip.open(FOOD_ROLES, "rt", encoding="utf-8") as source:
+        role_payload = json.load(source)
     with AYURVEDA_RULES.open(encoding="utf-8") as source:
         rule_payload = json.load(source)
 
@@ -541,6 +510,12 @@ def make_real_candidate_file(destination):
     for concept, food_ids in concept_payload["membership"].items():
         for food_id in food_ids:
             concepts_by_id.setdefault(int(food_id), set()).add(concept)
+    role_by_id = {
+        int(item["foodId"]): item for item in role_payload["items"]
+    }
+    role_definitions = {
+        item["id"]: item for item in role_payload["definitions"]
+    }
     dravya_by_id = {item["id"]: item for item in seed["dravyas"]}
     direct_by_food_id = {
         int(item["foodId"]): item
@@ -653,8 +628,9 @@ def make_real_candidate_file(destination):
             return
         concepts = set(concepts_by_id.get(food_id, set()))
         concepts.update(safety_concepts(allergens))
-        role = food_role(name, categories, concepts)
-        minimum, maximum = PORTION_LIMITS[role]
+        role_resolution = role_by_id[food_id]
+        role = role_resolution["role"]
+        role_definition = role_definitions[role]
         tokens = set(normalized_tokens(name))
         is_honey = "honey" in concepts or "honey" in tokens
         is_ghee = "ghee" in tokens or {
@@ -696,8 +672,15 @@ def make_real_candidate_file(destination):
             "enforcedMinAgeMonths": int(enforced_age or 0),
             "engineExcluded": resolved["engineExcluded"],
             "role": role,
-            "minimumGrams": minimum,
-            "maximumGrams": maximum,
+            "roleAnchor": role_definition["anchor"],
+            "roleMaxPerMeal": role_definition["maxPerMeal"],
+            "roleEligibleAsComponent": role_definition[
+                "eligibleAsComponent"
+            ],
+            "requiresCooking": role_resolution["requiresCooking"],
+            "roleHeadword": role_resolution["headword"],
+            "minimumGrams": role_definition["portionGrams"]["min"],
+            "maximumGrams": role_definition["portionGrams"]["max"],
             "doshaVata": resolved["doshaVata"],
             "doshaPitta": resolved["doshaPitta"],
             "doshaKapha": resolved["doshaKapha"],
