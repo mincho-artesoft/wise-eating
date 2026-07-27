@@ -648,6 +648,7 @@ def validate_food_concept_sources(
         parents = concept.get("parents")
         phrases = concept.get("phrases")
         negatives = concept.get("negativePhrases")
+        veto_groups = concept.get("vetoTokens", [])
         if not isinstance(parents, list) or not all(
             isinstance(parent, str) for parent in parents
         ):
@@ -662,6 +663,34 @@ def validate_food_concept_sources(
             for phrase in negatives
         ):
             raise BuildError(f"{concept_id}: negativePhrases must be strings")
+        if (
+            not isinstance(veto_groups, list)
+            or not all(
+                isinstance(group, list)
+                and bool(group)
+                and all(
+                    isinstance(token, str)
+                    and len(modifier_normalized_tokens(token)) == 1
+                    for token in group
+                )
+                for group in veto_groups
+            )
+        ):
+            raise BuildError(
+                f"{concept_id}: vetoTokens must contain non-empty groups "
+                "of individual tokens"
+            )
+        normalized_veto_groups = [
+            tuple(
+                modifier_normalized_tokens(token)[0]
+                for token in group
+            )
+            for group in veto_groups
+        ]
+        if any(len(group) != len(set(group)) for group in normalized_veto_groups):
+            raise BuildError(f"{concept_id}: vetoTokens group contains duplicates")
+        if len(normalized_veto_groups) != len(set(normalized_veto_groups)):
+            raise BuildError(f"{concept_id}: duplicate vetoTokens group")
         positive_keys = {modifier_normalized_tokens(phrase) for phrase in phrases}
         negative_keys = {
             modifier_normalized_tokens(phrase) for phrase in negatives
@@ -763,6 +792,20 @@ def _longest_positive_matches(
     return selected
 
 
+def _matching_veto_token_groups(
+    tokens: tuple[str, ...],
+    groups: list[tuple[str, ...]],
+) -> list[str]:
+    def token_matches(authored_token: str) -> bool:
+        return authored_token in tokens or f"{authored_token}s" in tokens
+
+    return [
+        " ".join(group)
+        for group in groups
+        if all(token_matches(token) for token in group)
+    ]
+
+
 def build_food_concepts(
     envelope: dict[str, Any],
     source_food_names: dict[int, str],
@@ -801,6 +844,7 @@ def build_food_concepts(
         tuple[
             list[tuple[str, tuple[str, ...]]],
             list[tuple[str, tuple[str, ...]]],
+            list[tuple[str, ...]],
         ],
     ] = {}
     for concept_id, concept in concepts_by_id.items():
@@ -812,7 +856,14 @@ def build_food_concepts(
             (phrase, modifier_normalized_tokens(phrase))
             for phrase in concept["negativePhrases"]
         ]
-        compiled[concept_id] = (positives, negatives)
+        veto_groups = [
+            tuple(
+                modifier_normalized_tokens(token)[0]
+                for token in group
+            )
+            for group in concept.get("vetoTokens", [])
+        ]
+        compiled[concept_id] = (positives, negatives, veto_groups)
 
     membership = {concept_id: set() for concept_id in concepts_by_id}
     direct_membership = {concept_id: set() for concept_id in concepts_by_id}
@@ -826,7 +877,13 @@ def build_food_concepts(
 
     for food_id, name in sorted(catalog_names.items()):
         tokens = modifier_normalized_tokens(name)
-        for concept_id, (positives, negatives) in compiled.items():
+        for concept_id, (positives, negatives, veto_groups) in compiled.items():
+            token_vetoes = _matching_veto_token_groups(tokens, veto_groups)
+            if token_vetoes:
+                negative_vetoes[concept_id][food_id] = [
+                    f"tokens:{group}" for group in sorted(token_vetoes)
+                ]
+                continue
             vetoes = [
                 phrase
                 for phrase, phrase_tokens in negatives

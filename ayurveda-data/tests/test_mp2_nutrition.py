@@ -19,6 +19,20 @@ MODELS = (
     / "MealPlanning"
     / "AIMealPlanModels.swift"
 )
+SOLVER = (
+    ROOT
+    / "WiseEating"
+    / "AI"
+    / "MealPlanning"
+    / "DeterministicMealPlanSolver.swift"
+)
+SOLVER_ADAPTER = (
+    ROOT
+    / "WiseEating"
+    / "AI"
+    / "MealPlanning"
+    / "DeterministicMealPlanSolver+WiseEating.swift"
+)
 
 
 class MP2NutritionTruthTests(unittest.TestCase):
@@ -308,28 +322,24 @@ print("PASS \(scenario)")
     def test_adjustment_preserves_structure_order_and_positive_portions(self):
         self.run_scenario("structure")
 
-    def test_production_flow_resolves_before_adjusting(self):
+    def test_production_solver_uses_resolved_usda_macro_truth(self):
         planner = PLANNER.read_text(encoding="utf-8")
         models = MODELS.read_text(encoding="utf-8")
-        resolution_begin = planner.index(
-            'beginStage("resolution")',
-            planner.index("public func fillPlanDetails"),
-        )
-        resolution_end = planner.index(
-            'endStage("resolution")',
-            resolution_begin,
-        )
-        adjustment_call = planner.index(
-            "previewMeals = adjustResolvedDayForGoals(",
-            resolution_end,
-        )
-        self.assertLess(resolution_begin, resolution_end)
-        self.assertLess(resolution_end, adjustment_call)
-        self.assertIn("food.calories(for: 1)", planner)
-        self.assertIn("FoodItem.aggregatedNutrition(for: food).macros", planner)
-        self.assertIn("food.referenceWeightG", planner)
+        solver = SOLVER.read_text(encoding="utf-8")
+        adapter = SOLVER_ADAPTER.read_text(encoding="utf-8")
+        self.assertIn("let referenceWeight = compact.referenceWeightG", adapter)
+        self.assertIn("let scale = 100 / referenceWeight", adapter)
+        self.assertIn("compact.nutrientValues[.energy]", adapter)
+        self.assertIn("compact.nutrientValues[.protein]", adapter)
+        self.assertIn("compact.nutrientValues[.carbs]", adapter)
+        self.assertIn("compact.nutrientValues[.totalFat]", adapter)
+        self.assertIn("compact.nutrientValues[.fiber]", adapter)
+        self.assertIn("guard referenceWeight > 0", adapter)
+        self.assertIn("rawEnergy > 0", adapter)
+        self.assertIn("kcal: candidate.kcalPer100g * factor", solver)
+        self.assertIn("protein: candidate.proteinPer100g * factor", solver)
         self.assertIn(
-            "unresolved component(s) from goal math",
+            'beginStage("deterministic_assembly")',
             planner,
         )
         for removed_symbol in (
@@ -342,9 +352,15 @@ print("PASS \(scenario)")
 
     def test_telemetry_static_nutrition_site_is_removed(self):
         planner = PLANNER.read_text(encoding="utf-8")
-        # MP-3 removes the two per-component resolution model sites.
-        self.assertEqual(planner.count("LanguageModelSession("), 18)
-        self.assertEqual(planner.count(".respond("), 23)
+        # MP-5 removes the complete-plan generation and repair model sites.
+        self.assertEqual(planner.count("LanguageModelSession("), 8)
+        self.assertEqual(planner.count(".respond("), 8)
+        assembly = planner.split(
+            "// --- Checkpoint 2: deterministic assembly ---",
+            1,
+        )[1].split("return preview", 1)[0]
+        self.assertNotIn("LanguageModelSession", assembly)
+        self.assertNotIn(".respond(", assembly)
         removed_site = "aiFetch" + "NutritionData"
         self.assertNotIn(f'noteSession(site: "{removed_site}")', planner)
         self.assertNotIn(

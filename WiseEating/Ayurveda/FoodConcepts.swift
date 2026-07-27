@@ -60,6 +60,26 @@ public struct FoodConcepts: Sendable {
     return aliases[key]
   }
 
+  public var resolutionAliases: [String: String] {
+    aliases
+  }
+
+  public func conceptID(for value: String) -> String? {
+    let normalized = AyurvedaRules.modifierTokens(value).joined(separator: " ")
+    guard !normalized.isEmpty else { return nil }
+    let candidate = normalized.replacingOccurrences(of: " ", with: "_")
+    if membership[candidate] != nil {
+      return candidate
+    }
+    if candidate.hasSuffix("s") {
+      let singular = String(candidate.dropLast())
+      if membership[singular] != nil {
+        return singular
+      }
+    }
+    return nil
+  }
+
   public struct Requirement: Codable, Hashable, Sendable {
     public let concept: String
     public let count: Int

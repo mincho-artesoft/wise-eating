@@ -163,9 +163,39 @@ final launch is 1.461s median versus 1.654s at `d393bda`. Physical-device
 generation evidence is not waived: every outstanding item and commit endpoint
 is recorded in `DEFERRED-VALIDATION.md`. See `REPORT-INT1.md`.
 
+FC-1e is complete on the unmerged, unpushed `fc-1c-g12-rulings` feature
+branch. The director's rev5 ontology plus plural-tolerant unordered
+`vetoTokens` reduce the final coconut mismatch from 1 to 0 and correctly veto
+oyster mushroom in both catalogue token orders; equivalent WE-8/FC-1
+disagreements fall from 80 to 77. FC-2 replaces planner exclusion substring
+matching and the hardcoded alcohol list with canonical FoodConcept ID-set
+subtraction, preserving WE-8 authority for the 2,214 seeded rows and using
+FC-1 for the 12,601 plain USDA rows. The authored 75 aliases improve frozen
+MP-3 held-out resolution from 40/48 to 44/48 while training remains 59/59.
+All 98 tests, 25+2 search goldens, validator, Debug/Release, fresh-install,
+determinism, and tracked-size gates pass. Same-session N=10 ABAB launch is
+1.433s median versus 1.425s at `06c767b`; the +0.010s paired median is smaller
+than both IQRs and is not resolvable. See `REPORT-FC1e.md`.
+
+MP-5 is complete on the unmerged, unpushed `mp-5-solver` feature branch.
+Deterministic greedy construction plus bounded iterated local search now owns
+plan structure, catalogue IDs, exact USDA portions/macros, and hard
+FoodConcept/safety/age/viruddha/placement enforcement. All 23 hard properties
+pass across the ten-profile corpus; all 13 soft properties are measured. The
+critical Y1 signal is non-flat and improves dosha pacification by +0.5209,
+P10 reports named allergen infeasibility, and the 1,200/3,600 kcal edge
+profiles hit their targets. The aiDraft Ayurveda objective is gated by
+`MP5AyurvedicSolverEnabled`, off by default pending vaidya review; structural
+and safety assembly is deterministic in both modes. All 108 tests, 25+2 search
+goldens, 59/59 training and 44/48 held-out resolution, validator,
+Debug/Release, fresh-install, tracked-size, and cold-launch gates pass. The
+planner file shrank 5,374→3,348 lines after all 14 obsolete assembly/repair
+targets were removed. Same-session N=10 ABAB launch is 1.401s median versus
+1.403s at `003bed7`, with no resolvable regression. See `REPORT-MP5.md`.
+
 ## Next milestones
 
-1. **Host/simulator engineering integration through INT-1 COMPLETE** — D6 (models+seeder), D34 (all 12,601 foods
+1. **Host/simulator engineering through MP-5 COMPLETE on feature branches** — D6 (models+seeder), D34 (all 12,601 foods
    classified), D8/D8.1/D8.2 (UI end to end incl. computed tier + editors),
    D9 (engineExcluded enforcement), WE-2 (full recipe nutrition + build-time
    projection/search cache), WE-3 (founder-approved read-only display card),
@@ -174,13 +204,19 @@ is recorded in `DEFERRED-VALIDATION.md`. See `REPORT-INT1.md`.
    WE-7 (legacy target audit + proven-dead Swift cluster removal), and WE-8
    (conservative derived safety metadata + IngredientLink parity), and WE-8c
    (provenance-gated age enforcement), plus FC-1 (deterministic food-concept
-   ontology and unused runtime lookup service), and INT-1 (unsquashed MP/FC
-   branch integration, deterministic artifact refresh, and launch paydown).
+   ontology), INT-1 (unsquashed MP/FC branch integration, deterministic
+   artifact refresh, and launch paydown), and FC-1e/FC-2 (rev5 veto semantics,
+   canonical planner exclusion sets, and ontology aliases in deterministic
+   resolution), plus MP-5 (deterministic hard-validated plan assembly and
+   aiDraft Ayurveda scoring flag). FC-1e and MP-5 remain intentionally unmerged
+   and unpushed.
    See PROJECT-HANDBOOK.md §6 ledger and `REPORT-WE2.md` / `REPORT-WE3.md` /
    `REPORT-WE4.md` / `REPORT-WE5.md` / `REPORT-WE6.md` for gates, timing,
    screenshots, accessibility, search, `REPORT-WE7.md` for legacy audit
    evidence, `REPORT-WE8.md` for safety derivation/audit evidence, and
-   `REPORT-FC1.md` for concept gates and WE-8 disagreement triage, and
+   `REPORT-FC1.md` for the original concept gates and WE-8 disagreement triage,
+   `REPORT-FC1e.md` for rev5 and FC-2 wiring, `REPORT-MP5.md` for solver
+   properties and launch evidence, and
    `REPORT-INT1.md` for integrated evidence.
 2. **Physical-device validation — explicitly pending.** Run the MP-1 nine-run
    matrix/G6/G8, MP-2 twenty-food error table/runtime counters, and MP-3 runtime

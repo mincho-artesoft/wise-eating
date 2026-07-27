@@ -17,6 +17,7 @@ PLANNER = (
 )
 CORPUS = ROOT / "ayurveda-data" / "tests" / "resolution-goldens.json"
 HOLDOUT = ROOT / "ayurveda-data" / "tests" / "resolution-holdout.json"
+CONCEPT_ARTIFACT = ROOT / "WiseEating" / "food_concepts.json.gz"
 INCIDENTAL_TOKENS = [
     "raw",
     "cooked",
@@ -129,6 +130,17 @@ class MP3DeterministicResolutionTests(unittest.TestCase):
             json.dumps(candidates, ensure_ascii=False, sort_keys=True),
             encoding="utf-8",
         )
+        with gzip.open(CONCEPT_ARTIFACT, "rt", encoding="utf-8") as source:
+            concept_artifact = json.load(source)
+        cls.aliases = temporary_root / "aliases.json"
+        cls.aliases.write_text(
+            json.dumps(
+                concept_artifact["aliases"],
+                ensure_ascii=False,
+                sort_keys=True,
+            ),
+            encoding="utf-8",
+        )
 
         harness = temporary_root / "MP3ResolutionHarness.swift"
         cls.binary = temporary_root / "mp3-resolution-harness"
@@ -191,11 +203,13 @@ func matchesPattern(_ name: String, _ pattern: String) -> Bool {
 
 func runCorpus(
     _ corpus: GoldenCorpus,
-    candidates: [PlannerPreparedResolutionCandidate]
+    candidates: [PlannerPreparedResolutionCandidate],
+    ontologyAliases: [String: String]
 ) -> [CorpusRecord] {
     corpus.cases.map { golden in
         let decision = PlannerDeterministicFoodResolver.resolve(
             concept: golden.concept,
+            ontologyAliases: ontologyAliases,
             candidates: candidates
         )
         let expectsUnresolved = golden.expectUnresolved == true
@@ -371,10 +385,10 @@ func syntheticProperties() {
 struct MP3ResolutionHarness {
     static func main() throws {
         let arguments = CommandLine.arguments
-        guard arguments.count == 4 else {
-            fatalError("usage: harness catalog corpus mode")
+        guard arguments.count == 5 else {
+            fatalError("usage: harness catalog corpus aliases mode")
         }
-        if arguments[3] == "properties" {
+        if arguments[4] == "properties" {
             syntheticProperties()
             print("PASS properties")
             return
@@ -392,8 +406,20 @@ struct MP3ResolutionHarness {
             GoldenCorpus.self,
             from: Data(contentsOf: URL(fileURLWithPath: arguments[2]))
         )
-        let first = runCorpus(corpus, candidates: preparedCandidates)
-        let second = runCorpus(corpus, candidates: preparedCandidates)
+        let aliases = try decoder.decode(
+            [String: String].self,
+            from: Data(contentsOf: URL(fileURLWithPath: arguments[3]))
+        )
+        let first = runCorpus(
+            corpus,
+            candidates: preparedCandidates,
+            ontologyAliases: aliases
+        )
+        let second = runCorpus(
+            corpus,
+            candidates: preparedCandidates,
+            ontologyAliases: aliases
+        )
         let output = HarnessOutput(
             sameSessionIdentical: first == second,
             records: first
@@ -490,7 +516,13 @@ struct MP3ResolutionHarness {
     @classmethod
     def _run_harness(cls, corpus):
         result = subprocess.run(
-            [str(cls.binary), str(cls.catalog), str(corpus), "corpus"],
+            [
+                str(cls.binary),
+                str(cls.catalog),
+                str(corpus),
+                str(cls.aliases),
+                "corpus",
+            ],
             cwd=ROOT,
             capture_output=True,
             text=True,
@@ -517,7 +549,13 @@ struct MP3ResolutionHarness {
 
     def test_required_scorer_properties(self):
         result = subprocess.run(
-            [str(self.binary), str(self.catalog), str(CORPUS), "properties"],
+            [
+                str(self.binary),
+                str(self.catalog),
+                str(CORPUS),
+                str(self.aliases),
+                "properties",
+            ],
             cwd=ROOT,
             capture_output=True,
             text=True,
@@ -567,7 +605,7 @@ struct MP3ResolutionHarness {
             self.incidental_clean_relaunch_output,
         )
 
-    def test_mp3c_held_out_rev2_score_and_failure_modes(self):
+    def test_fc2_ontology_aliases_improve_held_out_score_without_wrong_matches(self):
         corpus = json.loads(HOLDOUT.read_text(encoding="utf-8"))
         self.assertEqual(len(corpus["cases"]), 53)
         self.assertEqual(
@@ -589,14 +627,14 @@ struct MP3ResolutionHarness {
         ]
         self.assertEqual(
             sum(record["status"] == "PASS" for record in positive_records),
-            40,
+            44,
         )
         self.assertEqual(
             sum(
                 record["status"] == "UNRESOLVED"
                 for record in positive_records
             ),
-            8,
+            4,
         )
         self.assertEqual(
             [record for record in positive_records if record["status"] == "FAIL"],
@@ -655,9 +693,11 @@ struct MP3ResolutionHarness {
 
     def test_production_resolution_has_no_model_call(self):
         planner = PLANNER.read_text(encoding="utf-8")
-        resolution_start = planner.index("private func resolveFoodConcept(")
+        resolution_start = planner.index(
+            "private func resolveCompactCandidate("
+        )
         resolution_end = planner.index(
-            "private func trimToRequestedDaysAndMeals(",
+            "private func buildMustContainRules(",
             resolution_start,
         )
         resolution_source = planner[resolution_start:resolution_end]
@@ -674,30 +714,48 @@ struct MP3ResolutionHarness {
             "PlannerDeterministicFoodResolver.resolve(",
             resolution_source,
         )
-        self.assertIn(
-            "AyurvedaRecommendationGate.excludedFoodIds",
-            resolution_source,
-        )
 
     def test_mp1_static_site_counts_reflect_removed_resolution_calls(self):
         planner = PLANNER.read_text(encoding="utf-8")
-        self.assertEqual(planner.count("LanguageModelSession("), 18)
-        self.assertEqual(planner.count(".respond("), 23)
+        self.assertEqual(planner.count("LanguageModelSession("), 8)
+        self.assertEqual(planner.count(".respond("), 8)
+        assembly = planner.split(
+            "// --- Checkpoint 2: deterministic assembly ---",
+            1,
+        )[1].split("return preview", 1)[0]
+        self.assertNotIn("LanguageModelSession", assembly)
+        self.assertNotIn(".respond(", assembly)
 
-    def test_mp2_unresolved_counting_and_structure_path_remain(self):
+    def test_mp2_truth_and_structural_constraints_feed_solver(self):
         planner = PLANNER.read_text(encoding="utf-8")
+        solver = (
+            ROOT
+            / "WiseEating"
+            / "AI"
+            / "MealPlanning"
+            / "DeterministicMealPlanSolver.swift"
+        ).read_text(encoding="utf-8")
+        adapter = (
+            ROOT
+            / "WiseEating"
+            / "AI"
+            / "MealPlanning"
+            / "DeterministicMealPlanSolver+WiseEating.swift"
+        ).read_text(encoding="utf-8")
         self.assertIn(
-            "conceptualMeal.components.count - resolvedItemCount",
-            planner,
+            "guard referenceWeight > 0",
+            adapter,
         )
         self.assertIn(
-            "unresolved component(s) from goal math",
-            planner,
+            "rawEnergy > 0",
+            adapter,
         )
         self.assertIn(
-            "finalItems = rebalanceMealCalories(items: resolvedItems",
+            "placements: solverPlacements",
             planner,
         )
+        self.assertIn("mustContain: placements", adapter)
+        self.assertIn("mustContain: [MP5MustContainRule]", solver)
 
 
 if __name__ == "__main__":

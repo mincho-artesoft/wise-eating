@@ -532,15 +532,36 @@ class AIRecipeGenerator {
     ) -> [FoodItemCandidate] {
         guard !candidates.isEmpty else { return [] }
         
-        let dynBans = Set((banned + [
+        let dynamicBans = banned + [
             "baby food","infant","toddler","gerber",
             "stage 1","stage 2","stage 3",
             "dog food","cat food","pet food"
-        ]).map { $0.lowercased() })
+        ]
+        let conceptIDs = Set(
+            dynamicBans.compactMap { FoodConcepts.shared.conceptID(for: $0) }
+        )
+        let candidateIDs = Set(candidates.map(\.id))
+        var blockedIDs = Set<Int>()
+        for conceptID in conceptIDs {
+            blockedIDs.formUnion(
+                FoodConcepts.shared.members(of: conceptID).map(Int.init)
+            )
+        }
+        let allowedIDs = candidateIDs.subtracting(blockedIDs)
+        let guardTokenGroups = dynamicBans.compactMap { value -> Set<String>? in
+            guard FoodConcepts.shared.conceptID(for: value) == nil else {
+                return nil
+            }
+            let tokens = Set(AyurvedaRules.modifierTokens(value))
+            return tokens.isEmpty ? nil : tokens
+        }
         
         return candidates.filter { c in
-            let nm = normalize(c.name)
-            if dynBans.contains(where: { nm.contains($0) }) { return false }
+            guard allowedIDs.contains(c.id) else { return false }
+            let candidateTokens = Set(AyurvedaRules.modifierTokens(c.name))
+            if guardTokenGroups.contains(where: { $0.isSubset(of: candidateTokens) }) {
+                return false
+            }
             
             return passesStrictGuards(
                 originalName: original.name,

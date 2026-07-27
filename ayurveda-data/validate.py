@@ -4,7 +4,7 @@
 Usage: python3 validate.py [--store /path/to/preseeded.sqlite]
 Run from the ayurveda-data directory (or pass paths). Exits non-zero on errors.
 """
-import csv, glob, gzip, json, os, re, sqlite3, sys
+import csv, glob, gzip, json, os, re, sqlite3, subprocess, sys
 from collections import Counter
 
 import build_seed
@@ -48,6 +48,63 @@ D34_EXPECTED_MODIFIERS = {
     "pungent": 26,
 }
 d34_normalized_tokens = build_seed.modifier_normalized_tokens
+TRACKED_FILE_SPLIT_LIMIT_BYTES = 90_000_000
+
+
+def tracked_file_sizes(repo_root):
+    result = subprocess.run(
+        ["git", "ls-files", "-z"],
+        cwd=repo_root,
+        check=True,
+        capture_output=True,
+    )
+    sizes = {}
+    for raw_path in result.stdout.split(b"\0"):
+        if not raw_path:
+            continue
+        relative_path = os.fsdecode(raw_path)
+        absolute_path = os.path.join(repo_root, relative_path)
+        if os.path.isfile(absolute_path):
+            sizes[relative_path] = os.path.getsize(absolute_path)
+    return sizes
+
+
+def validate_tracked_file_sizes(repo_root, errs):
+    try:
+        sizes = tracked_file_sizes(repo_root)
+    except (OSError, subprocess.CalledProcessError) as error:
+        errs.append(f"tracked-file size gate could not enumerate Git files: {error}")
+        return {}
+
+    oversized = sorted(
+        (
+            (relative_path, size)
+            for relative_path, size in sizes.items()
+            if size > TRACKED_FILE_SPLIT_LIMIT_BYTES
+        ),
+        key=lambda item: (-item[1], item[0]),
+    )
+    for relative_path, size in oversized:
+        errs.append(
+            f"tracked-file size gate: {relative_path} is {size} bytes; "
+            f"split at {TRACKED_FILE_SPLIT_LIMIT_BYTES} bytes"
+        )
+
+    reportable = sorted(
+        (
+            (relative_path, size)
+            for relative_path, size in sizes.items()
+            if size >= 1_000_000
+        ),
+        key=lambda item: (-item[1], item[0]),
+    )
+    print(
+        f"Git-tracked file size gate: {len(sizes)} files; "
+        f"{len(reportable)} files at least 1 MB"
+    )
+    for relative_path, size in reportable:
+        print(f" - {size} bytes: {relative_path}")
+    return sizes
 
 
 def d34_primary_category(blob, fdc_id, errs):
@@ -541,6 +598,7 @@ def d34_validate(here, store, errs):
 
 def main():
     here = os.path.dirname(os.path.abspath(__file__))
+    repo_root = os.path.dirname(here)
     store = None
     if "--store" in sys.argv:
         store = sys.argv[sys.argv.index("--store") + 1]
@@ -550,6 +608,7 @@ def main():
         fdc_ids = {r[0] for r in c.execute("select ZID from ZFOODITEM")}
 
     errs, seen, total = [], {}, 0
+    validate_tracked_file_sizes(repo_root, errs)
     for path in sorted(glob.glob(os.path.join(here, "dravyas", "batch-*.json"))):
         b = os.path.basename(path)
         try:

@@ -238,12 +238,20 @@ enum PlannerDeterministicFoodResolver {
         "curry", "kitchari", "khichdi", "kichadi", "stew"
     ]
 
-    static func queries(for concept: String) -> [String] {
+    static func queries(
+        for concept: String,
+        ontologyAliases: [String: String] = [:]
+    ) -> [String] {
         let normalizedConcept = normalize(concept)
         guard !normalizedConcept.isEmpty else { return [] }
 
         var ordered = [normalizedConcept]
-        ordered.append(contentsOf: aliasPhrases(for: normalizedConcept))
+        ordered.append(
+            contentsOf: aliasPhrases(
+                for: normalizedConcept,
+                ontologyAliases: ontologyAliases
+            )
+        )
         if let head = headToken(for: tokenized(normalizedConcept)) {
             ordered.append(head)
         }
@@ -257,9 +265,14 @@ enum PlannerDeterministicFoodResolver {
 
     static func resolve(
         concept: String,
+        ontologyAliases: [String: String] = [:],
         candidates: [PlannerResolutionCandidate]
     ) -> PlannerResolutionDecision? {
-        resolve(concept: concept, candidates: prepare(candidates))
+        resolve(
+            concept: concept,
+            ontologyAliases: ontologyAliases,
+            candidates: prepare(candidates)
+        )
     }
 
     static func prepare(
@@ -285,13 +298,17 @@ enum PlannerDeterministicFoodResolver {
 
     static func resolve(
         concept: String,
+        ontologyAliases: [String: String] = [:],
         candidates: [PlannerPreparedResolutionCandidate]
     ) -> PlannerResolutionDecision? {
         let normalizedConcept = normalize(concept)
         guard !normalizedConcept.isEmpty, !candidates.isEmpty else { return nil }
         let conceptTokens = tokenized(normalizedConcept)
         guard !conceptTokens.isEmpty else { return nil }
-        let aliases = aliasPhrases(for: normalizedConcept)
+        let aliases = aliasPhrases(
+            for: normalizedConcept,
+            ontologyAliases: ontologyAliases
+        )
         let head = headToken(for: conceptTokens)
         let qualifiers = Array(
             Set(conceptTokens.filter { token in
@@ -676,7 +693,10 @@ enum PlannerDeterministicFoodResolver {
         }
     }
 
-    private static func aliasPhrases(for concept: String) -> [String] {
+    private static func aliasPhrases(
+        for concept: String,
+        ontologyAliases: [String: String]
+    ) -> [String] {
         let tokens = Set(tokenized(concept))
         var aliases: [String] = []
 
@@ -725,6 +745,10 @@ enum PlannerDeterministicFoodResolver {
             aliases.append(contentsOf: ["dhal tadka", "lentil tadka"])
         }
         if tokens.contains("lemongrass") { aliases.append("lemon grass") }
+
+        if let canonical = ontologyAliases[concept] {
+            aliases.append(canonical)
+        }
 
         var seen = Set<String>()
         return aliases.map(normalize).filter { seen.insert($0).inserted }
@@ -800,9 +824,157 @@ enum PlannerDeterministicFoodResolver {
 }
 // MP3_TESTABLE_END
 
+struct PlannerConceptExclusions: Sendable {
+    static let none = PlannerConceptExclusions(
+        concepts: [],
+        explicitFoodIDs: [],
+        exactTerms: [],
+        seededFoodIDs: [],
+        promptTerms: []
+    )
+
+    let concepts: Set<String>
+    let explicitFoodIDs: Set<Int>
+    let exactTerms: Set<String>
+    let seededFoodIDs: Set<Int>
+    let promptTerms: [String]
+
+    func filtering(_ candidates: [CompactFoodItem]) -> [CompactFoodItem] {
+        let candidateIDs = Set(candidates.map(\.id))
+        let blockedIDs = blockedFoodIDs(in: candidates)
+        let allowedIDs = candidateIDs.subtracting(blockedIDs)
+        return candidates.filter { allowedIDs.contains($0.id) }
+    }
+
+    func excludes(_ food: CompactFoodItem) -> Bool {
+        blockedFoodIDs(in: [food]).contains(food.id)
+    }
+
+    func excludes(
+        foodID: Int,
+        diets: Set<String>,
+        allergens: Set<String>
+    ) -> Bool {
+        if explicitFoodIDs.contains(foodID) {
+            return true
+        }
+        return concepts.contains { concept in
+            isAuthoritativeMember(
+                foodID: foodID,
+                concept: concept,
+                diets: diets,
+                allergens: allergens
+            )
+        }
+    }
+
+    func excludesUnresolvedName(_ value: String) -> Bool {
+        let normalized = AyurvedaRules.modifierTokens(value)
+            .joined(separator: " ")
+        if exactTerms.contains(normalized) {
+            return true
+        }
+        guard let concept = FoodConcepts.shared.conceptID(for: value) else {
+            return false
+        }
+        return concepts.contains(concept)
+    }
+
+    private func blockedFoodIDs(
+        in candidates: [CompactFoodItem]
+    ) -> Set<Int> {
+        let candidateIDs = Set(candidates.map(\.id))
+        var blockedIDs = explicitFoodIDs.intersection(candidateIDs)
+
+        for concept in concepts {
+            let ontologyIDs = Set(
+                FoodConcepts.shared.members(of: concept).map(Int.init)
+            )
+            let plainUSDAIDs = candidateIDs.subtracting(seededFoodIDs)
+            blockedIDs.formUnion(plainUSDAIDs.intersection(ontologyIDs))
+
+            for food in candidates where seededFoodIDs.contains(food.id) {
+                if seededSafetyMatches(food, concept: concept) {
+                    blockedIDs.insert(food.id)
+                }
+            }
+        }
+        return blockedIDs
+    }
+
+    private func isAuthoritativeMember(
+        foodID: Int,
+        concept: String,
+        diets: Set<String>,
+        allergens: Set<String>
+    ) -> Bool {
+        if !seededFoodIDs.contains(foodID) {
+            return FoodConcepts.shared.members(of: concept)
+                .contains(Int32(foodID))
+        }
+        return seededSafetyMatches(
+            diets: diets,
+            allergens: allergens,
+            concept: concept
+        )
+    }
+
+    private func seededSafetyMatches(
+        _ food: CompactFoodItem,
+        concept: String
+    ) -> Bool {
+        seededSafetyMatches(
+            diets: food.diets,
+            allergens: food.allergens,
+            concept: concept
+        )
+    }
+
+    private func seededSafetyMatches(
+        diets: Set<String>,
+        allergens: Set<String>,
+        concept: String
+    ) -> Bool {
+        switch concept {
+        case "dairy":
+            return allergens.contains("Milk")
+        case "egg":
+            return allergens.contains("Eggs")
+        case "gluten":
+            return allergens.contains {
+                $0.hasPrefix("Cereals containing gluten")
+            }
+        case "soy":
+            return allergens.contains("Soybeans")
+        case "sesame":
+            return allergens.contains("Sesame seeds")
+        case "peanut":
+            return allergens.contains("Peanuts")
+        case "tree_nuts":
+            return allergens.contains {
+                $0 == "Nuts" || $0.hasPrefix("Nuts (")
+            }
+        case "fish":
+            return allergens.contains("Fish")
+        case "crustacean":
+            return allergens.contains("Crustaceans")
+        case "mollusc":
+            return allergens.contains("Molluscs")
+        case "shellfish":
+            return !allergens.isDisjoint(
+                with: ["Crustaceans", "Molluscs"]
+            )
+        case "meat":
+            return !diets.contains("Vegetarian")
+        default:
+            // WE-8 has no equivalent canonical predicate for this concept.
+            return false
+        }
+    }
+}
+
 @available(iOS 26.0, *)
 public final class USDAWeeklyMealPlanner: Sendable {
-    private let globalTaskManager = GlobalTaskManager.shared
     private let container: ModelContainer
     public init(container: ModelContainer) {
         self.container = container
@@ -1130,234 +1302,6 @@ public final class USDAWeeklyMealPlanner: Sendable {
         onLog?(message)
     }
     
-    private func makeDietMap(in ctx: ModelContext) throws -> [String: Diet] {
-        let persistedDiets = try ctx.fetch(FetchDescriptor<Diet>())
-        return Dictionary(uniqueKeysWithValues: persistedDiets.map {
-            ($0.name._normKey, $0)
-        })
-    }
-    
-    @MainActor
-    private func createMissingIngredient(
-        named name: String,
-        grams: Double,
-        onLog: (@Sendable (String) -> Void)?
-    ) async throws -> FoodItemCandidate? {
-        emitLog("createMissingIngredient('\(name)', \(grams) g) – START", onLog: onLog)
-        
-        let ctx = ModelContext(self.container)
-        guard !AyurvedaRecommendationGate.nameIsExcluded(name, context: ctx) else {
-            emitLog("🚫 AyurvedaGate: dropped excluded generated ingredient '\(name)'", onLog: onLog)
-            return nil
-        }
-        let excludedFoodIds = AyurvedaRecommendationGate.excludedFoodIds(context: ctx)
-        
-        let exactPredicate = #Predicate<FoodItem> { $0.name == name }
-        if let existing = try ctx.fetch(FetchDescriptor(predicate: exactPredicate)).first(where: { !excludedFoodIds.contains($0.id) }) {
-            emitLog("  • Found existing by exact name: '\(existing.name)' [\(existing.id)] – reuse", onLog: onLog)
-            return FoodItemCandidate(id: existing.id, name: existing.name)
-        }
-        
-        emitLog("  • Generating details via AIFoodDetailGenerator… (input name='\(name)')", onLog: onLog)
-        let gen = AIFoodDetailGenerator(container: ctx.container)
-        
-        var dto = try await gen.generateDetailsRetrying(
-            for: name,
-            ctx: ctx,
-            onLog: onLog,
-            attempts: 5,
-            baseBackoffMs: 700
-        )
-        
-        let finalName = dto.name.isEmpty ? name : dto.name
-        dto.name = finalName
-        emitLog("  • AIFoodDetailGenerator output name: '\(finalName)'", onLog: onLog)
-        guard !AyurvedaRecommendationGate.nameIsExcluded(finalName, context: ctx) else {
-            emitLog("🚫 AyurvedaGate: dropped excluded generated ingredient '\(finalName)'", onLog: onLog)
-            return nil
-        }
-        
-        let finalPredicate = #Predicate<FoodItem> { $0.name == finalName }
-        if let existing = try ctx.fetch(FetchDescriptor(predicate: finalPredicate)).first(where: { !excludedFoodIds.contains($0.id) }) {
-            emitLog("  • Found existing by final name after DTO generation: '\(existing.name)' [\(existing.id)] – reuse", onLog: onLog)
-            return FoodItemCandidate(id: existing.id, name: existing.name)
-        }
-        
-        do {
-            try Task.checkCancellation()
-            var idDescriptor = FetchDescriptor<FoodItem>()
-            idDescriptor.sortBy = [SortDescriptor(\.id, order: .reverse)]
-            idDescriptor.fetchLimit = 1
-            let maxId = (try ctx.fetch(idDescriptor).first?.id) ?? 0
-            dto.id = maxId + 1
-            try Task.checkCancellation()
-            let dietMap = try makeDietMap(in: ctx)
-            let model = dto.model(dietMap: dietMap)
-            model.isUserAdded = false
-            model.isRecipe = false
-            try Task.checkCancellation()
-            ctx.insert(model)
-            try ctx.save()
-            
-            SearchIndexStore.shared.updateItem(model, context: ctx)
-            emitLog("  • New FoodItem persisted: '\(model.name)' [ID: \(model.id)]", onLog: onLog)
-            emitLog("createMissingIngredient – END (created)", onLog: onLog)
-            return FoodItemCandidate(id: model.id, name: model.name)
-        } catch {
-            emitLog("  • ❌ Failed to save new FoodItem: \(error.localizedDescription)", onLog: onLog)
-            
-            if let existing = try ctx.fetch(FetchDescriptor(predicate: finalPredicate)).first(where: { !excludedFoodIds.contains($0.id) }) {
-                emitLog("  • Found existing item after save failed (likely race condition): '\(existing.name)' [\(existing.id)] – reuse", onLog: onLog)
-                return FoodItemCandidate(id: existing.id, name: existing.name)
-            }
-            
-            emitLog("createMissingIngredient – END (error)", onLog: onLog)
-            throw error
-        }
-    }
-    
-    
-    @MainActor
-    private func resolveAndCreateItemsForMeal(
-        _ conceptualMeal: ConceptualMeal,
-        relevantPrompts: [String],
-        smartSearch: SmartFoodSearch3,
-        onLog: (@Sendable (String) -> Void)?
-    ) async -> [MealPlanPreviewItem] {
-        let components = conceptualMeal.components
-        guard !components.isEmpty else { return [] }
-        
-        enum FoodResolutionResult: Sendable {
-            case resolved(info: ResolvedFoodInfo, component: ConceptualComponent)
-            case unresolved(component: ConceptualComponent)
-        }
-        
-        let resolutionGroupTask = Task<[FoodResolutionResult], Never> {
-            await withTaskGroup(of: FoodResolutionResult.self, returning: [FoodResolutionResult].self) { group in
-                for component in components {
-                    group.addTask { [weak self] in
-                        guard let self else { return .unresolved(component: component) }
-                        
-                        if let resolvedInfo = await self.resolveFoodConcept(
-                            smartSearch: smartSearch,
-                            conceptName: component.name,
-                            mealContext: conceptualMeal,
-                            relevantPrompts: relevantPrompts,
-                            onLog: onLog
-                        ) {
-                            return .resolved(info: resolvedInfo, component: component)
-                        } else {
-                            return .unresolved(component: component)
-                        }
-                    }
-                }
-                
-                var results: [FoodResolutionResult] = []
-                for await result in group {
-                    results.append(result)
-                }
-                return results
-            }
-        }
-        
-        await globalTaskManager.addTask(resolutionGroupTask)
-        let resolutionResults = await resolutionGroupTask.value
-        
-        
-        var resolvedItems: [MealPlanPreviewItem] = []
-        var unresolvedComponents: [ConceptualComponent] = []
-        
-        let ctx = ModelContext(self.container)
-        for result in resolutionResults {
-            switch result {
-            case .resolved(let info, let component):
-                if let foodItem = ctx.model(for: info.persistentID) as? FoodItem {
-                    let gramsValue = component.grams > 0 ? component.grams : 100.0
-                    let previewItem = MealPlanPreviewItem(
-                        name: info.resolvedName,
-                        grams: gramsValue,
-                        kcal: foodItem.calories(for: gramsValue)
-                    )
-                    resolvedItems.append(previewItem)
-                } else {
-                    unresolvedComponents.append(component)
-                }
-            case .unresolved(let component):
-                unresolvedComponents.append(component)
-            }
-        }
-        
-        if !unresolvedComponents.isEmpty {
-            emitLog("--- Meal '\(conceptualMeal.name)': Starting SEQUENTIAL creation for \(unresolvedComponents.count) missing item(s) ---", onLog: onLog)
-            for component in unresolvedComponents {
-                do {
-                    try Task.checkCancellation()
-                    if let newFoodCandidate = try await self.createMissingIngredient(named: component.name, grams: component.grams, onLog: onLog) {
-                        let foodID = newFoodCandidate.id
-                        let descriptor = FetchDescriptor<FoodItem>(predicate: #Predicate { $0.id == foodID })
-                        if let newlyCreatedItem = (try? ctx.fetch(descriptor))?.first {
-                            let gramsValue = component.grams > 0 ? component.grams : 100.0
-                            let previewItem = MealPlanPreviewItem(
-                                name: newlyCreatedItem.name,
-                                grams: gramsValue,
-                                kcal: newlyCreatedItem.calories(for: gramsValue)
-                            )
-                            resolvedItems.append(previewItem)
-                            emitLog("   ✅ '\(component.name)' -> CREATED & RESOLVED to '\(newlyCreatedItem.name)'", onLog: onLog)
-                        }
-                    }
-                } catch {
-                    emitLog("   - ⚠️ Error during creation of '\(component.name)': \(error.localizedDescription). Skipping.", onLog: onLog)
-                }
-            }
-            emitLog("--- Finished SEQUENTIAL creation ---", onLog: onLog)
-        }
-        
-        return resolvedItems
-    }
-    
-    /**
-     * NEW FUNCTION
-     * Validates if the generated plan's structure matches the user's request.
-     */
-    private func isPlanStructureValid(
-        plan: AIConceptualPlanResponse,
-        expectedDaysAndMeals: [Int: [String]],
-        onLog: (@Sendable (String) -> Void)?
-    ) -> Bool {
-        let planDays = Set(plan.days.map { $0.day })
-        let expectedDays = Set(expectedDaysAndMeals.keys)
-        
-        if planDays != expectedDays {
-            onLog?("  - structural validation FAIL: Day mismatch. Expected \(expectedDays.sorted()), got \(planDays.sorted()).")
-            return false
-        }
-        
-        for day in plan.days {
-            guard let expectedMeals = expectedDaysAndMeals[day.day] else {
-                onLog?("  - structural validation FAIL: Day \(day.day) was generated but not requested.")
-                return false
-            }
-            
-            let planMeals = day.meals.map { $0.name.lowercased() }
-            let expectedMealsLower = expectedMeals.map { $0.lowercased() }
-            
-            if Set(planMeals) != Set(expectedMealsLower) {
-                onLog?("  - structural validation FAIL: Day \(day.day) meal mismatch. Expected \(expectedMeals), got \(day.meals.map { $0.name }).")
-                return false
-            }
-            
-            for meal in day.meals {
-                if meal.components.isEmpty {
-                    onLog?("  - structural validation FAIL: Day \(day.day), Meal '\(meal.name)' has no components.")
-                    return false
-                }
-            }
-        }
-        
-        return true
-    }
-    
     @MainActor
     private func saveProgress(
         jobID: PersistentIdentifier,
@@ -1416,7 +1360,6 @@ public final class USDAWeeklyMealPlanner: Sendable {
         do {
         // --- START OF CHANGE (2/3): Load or initialize progress ---
         let ctx = ModelContext(self.container)
-        let excludedFoodIds = AyurvedaRecommendationGate.excludedFoodIds(context: ctx)
         emitLog("🚫 AyurvedaGate: AyurvedaGate active, 0 candidates filtered", onLog: onLog)
         guard let job = ctx.model(for: jobID) as? AIGenerationJob else {
             throw NSError(domain: "MealPlannerError", code: 404, userInfo: [NSLocalizedDescriptionKey: "AIGenerationJob not found."])
@@ -1489,317 +1432,80 @@ public final class USDAWeeklyMealPlanner: Sendable {
             await PlannerTelemetry.shared.endStage("interpretation")
         }
         
-        // --- Checkpoint 2: Context & Palettes ---
+        // --- Checkpoint 2: deterministic assembly ---
+        // MP-5 deliberately has no FoundationModels call between this stage
+        // boundary and the returned preview.
         if PlannerTelemetry.isEnabled {
-            await PlannerTelemetry.shared.beginStage("context_palettes")
+            await PlannerTelemetry.shared.beginStage("deterministic_assembly")
         }
-        var contextTags: [(kind: String, tag: String)]
-        var foodPalettesByContext: [(kind: String, tag: String, foods: [String], associatedCuisine: String?)]
-        
-        if let cachedTags = progress.contextTags, let cachedPalettes = progress.foodPalettesByContext {
-            contextTags = cachedTags
-            foodPalettesByContext = cachedPalettes
-            emitLog("  -> ✅ Checkpoint 2: Using cached context tags and palettes.", onLog: onLog)
-        } else {
-            let (headwords, cuisines) = await aiInferContextTags(structural: interpretedPrompts.structuralRequests, qualitative: interpretedPrompts.qualitativeGoals, included: includedFoods, onLog: onLog)
-            try Task.checkCancellation()
-            
-            contextTags = headwords.map { (kind: "headword", tag: $0) } + cuisines.map { (kind: "cuisine", tag: $0) }
-            
-            emitLog("Specialize pass — incoming structural=\(interpretedPrompts.structuralRequests) | included=\(includedFoods)", onLog: onLog)
-            await specializeStructuralRequestsWithHeadwords(
-                profile: profile,
-                structuralRequests: &interpretedPrompts.structuralRequests,
-                includedFoods: &includedFoods,
-                contextTags: &contextTags,
-                headwords: headwords,
-                cuisines: cuisines,
-                onLog: onLog
-            )
-            try Task.checkCancellation()
-            emitLog("Specialize pass — result structural=\(interpretedPrompts.structuralRequests) | included=\(includedFoods) | contextTags=\(contextTags.map{ "\($0.kind):\($0.tag)" })", onLog: onLog)
-            
-            foodPalettesByContext = []
-            for t in contextTags {
-                try Task.checkCancellation()
-                if t.kind == "cuisine" {
-                    // Using local smartSearch instance
-                    let sub = try await aiGenerateFoodPaletteForCuisine(profile: profile, cuisineTag: t.tag, onLog: onLog)
-                    if !sub.isEmpty {
-                        foodPalettesByContext.append((kind: t.kind, tag: t.tag, foods: Array(sub.shuffled().prefix(25)), associatedCuisine: nil))
-                    }
-                } else if t.kind == "headword" {
-                    // Using local smartSearch instance
-                    let (sub, inferredCuisine) = try await aiGenerateFoodPaletteForHeadword(profile: profile, headword: t.tag, includeHeadword: true, smartSearch: smartSearch, onLog: onLog)
-                    if !sub.isEmpty {
-                        foodPalettesByContext.append((kind: t.kind, tag: t.tag, foods: Array(sub.shuffled().prefix(25)), associatedCuisine: inferredCuisine))
-                    }
-                }
-            }
-            
-            progress.contextTags = contextTags
-            progress.foodPalettesByContext = foodPalettesByContext
-            await saveProgress(jobID: jobID, progress: progress, onLog: onLog)
-            emitLog("  -> ✅ Checkpoint 2: Context and palettes generated and saved.", onLog: onLog)
-        }
-        
-        let hardExcludes = deriveHardExcludes(from: interpretedPrompts.structuralRequests)
+        let hardExclusions = await makePlannerExclusions(
+            extractedTerms: excludedFoods,
+            structuralRequests: interpretedPrompts.structuralRequests,
+            smartSearch: smartSearch,
+            context: ctx
+        )
         try Task.checkCancellation()
-        if PlannerTelemetry.isEnabled {
-            await PlannerTelemetry.shared.endStage("context_palettes")
-        }
-        
-        // --- Checkpoint 3: Conceptual Plan ---
-        if PlannerTelemetry.isEnabled {
-            await PlannerTelemetry.shared.beginStage("conceptual_plan")
-        }
-        var conceptualPlan: AIConceptualPlanResponse
-        
-        if let cachedPlan = progress.conceptualPlan {
-            conceptualPlan = cachedPlan
-            emitLog("  -> ✅ Checkpoint 3: Using cached conceptual plan.", onLog: onLog)
-            if PlannerTelemetry.isEnabled {
-                await PlannerTelemetry.shared.endStage("conceptual_plan")
-            }
-        } else {
-            let cuisineTagCSV = contextTags.filter { $0.kind == "cuisine" }.map { $0.tag }.joined(separator: ", ")
-            
-            var rules = parseMustContainRules(interpretedPrompts.structuralRequests)
-            let allPromptText = (atomicPrompts + interpretedPrompts.structuralRequests).joined(separator: " ").lowercased()
-            let wantsDifferentTypes = allPromptText.contains("different type") || allPromptText.contains("different kind") || allPromptText.contains("variet")
-            var specificVariantPlacements: [String] = []
-            
-            if wantsDifferentTypes {
-                let originalIncluded = includedFoods // Operate on the list before it gets pruned
-                for baseFood in originalIncluded {
-                    try Task.checkCancellation()
-                    
-                    let relevantRules = rules.filter { $0.topic.caseInsensitiveCompare(baseFood) == .orderedSame }
-                    if relevantRules.isEmpty { continue }
-                    
-                    let count = relevantRules.count
-                    let context = relevantRules.first?.meal ?? "any meal"
-                    onLog?("  -> User requested \(count) different types of '\(baseFood)'. Generating variants...")
-                    
-                    let variantIdeas = await aiGenerateVariantIdeas(for: baseFood, count: count * 2, context: context, onLog: onLog)
-                    
-                    try Task.checkCancellation()
-                    
-                    let validatedVariants = await validateAndSelectBestVariants(
-                        variantIdeas: variantIdeas,
-                        baseFood: baseFood,
-                        count: count,
-                        smartSearch: smartSearch,
-                        onLog: onLog
-                    )
-                    try Task.checkCancellation()
-                    
-                    if !validatedVariants.isEmpty {
-                        var rulesToRemove = Set<MustContainRule>()
-                        for (i, rule) in relevantRules.enumerated() {
-                            try Task.checkCancellation()
-                            
-                            let variant = validatedVariants.indices.contains(i) ? validatedVariants[i] : "\(baseFood) variant \(i+1)"
-                            // Add a new, specific structural request
-                            let newRuleText = "On Day \(rule.day), the \(rule.meal ?? "any meal") MUST contain exactly: '\(variant)'."
-                            specificVariantPlacements.append(newRuleText)
-                            rulesToRemove.insert(rule)
-                        }
-                        // Remove the old generic rules
-                        rules.removeAll(where: { rulesToRemove.contains($0) })
-                        
-                        try Task.checkCancellation()
-                        
-                        // Also remove the original, generic structural request text to prevent confusion
-                        interpretedPrompts.structuralRequests.removeAll(where: { request in
-                            rulesToRemove.contains(where: { rule in
-                                request.localizedCaseInsensitiveContains("day \(rule.day)") &&
-                                request.localizedCaseInsensitiveContains(rule.topic) &&
-                                (rule.meal == nil || request.localizedCaseInsensitiveContains(rule.meal!))
-                            })
-                        })
-                        try Task.checkCancellation()
-                        
-                        includedFoods.removeAll { $0.caseInsensitiveCompare(baseFood) == .orderedSame }
-                        if let headwordIndex = contextTags.firstIndex(where: { $0.kind == "headword" && $0.tag.caseInsensitiveCompare(baseFood) == .orderedSame }) {
-                            contextTags.remove(at: headwordIndex)
-                            onLog?("   -> Removed generic headword '\(baseFood)' as it has been replaced by specific variants.")
-                        }
-                    }
-                }
-            }
-            
-            let structurallyPlacedFoods = Set(rules.map { $0.topic.lowercased() })
-            let genericIncludedFoods = includedFoods.filter { !structurallyPlacedFoods.contains($0.lowercased()) }
-            
-            var retryCount = 0
-            let maxRetries = 2
-            while true {
-                try Task.checkCancellation()
-                conceptualPlan = try await generateFullPlanWithAI(
-                    profile: profile, daysAndMeals: daysAndMeals, interpretedPrompts: interpretedPrompts,
-                    foodPalettesByContext: foodPalettesByContext, includedFoods: genericIncludedFoods,
-                    specificVariantPlacements: specificVariantPlacements, excludedFoods: hardExcludes,
-                    cuisineTag: cuisineTagCSV, onLog: onLog
-                )
-                try Task.checkCancellation()
-                
-                conceptualPlan = normalizeMealsToRequestedOrder(plan: conceptualPlan, daysAndMeals: daysAndMeals, onLog: onLog)
-                try Task.checkCancellation()
-                
-                if isPlanStructureValid(plan: conceptualPlan, expectedDaysAndMeals: daysAndMeals, onLog: onLog) {
-                    onLog?("✅ Initial plan structure is valid after normalization.")
-                    break
-                } else if retryCount < maxRetries {
-                    retryCount += 1
-                    onLog?("⚠️ Plan structure is invalid. Retrying generation (\(retryCount)/\(maxRetries))...")
-                } else {
-                    onLog?("⚠️ Plan structure remains invalid after \(maxRetries + 1) attempts. Proceeding with potentially flawed structure.")
-                    break
-                }
-            }
-            
-            if PlannerTelemetry.isEnabled {
-                await PlannerTelemetry.shared.endStage("conceptual_plan")
-            }
-            if PlannerTelemetry.isEnabled {
-                await PlannerTelemetry.shared.beginStage("polish")
-            }
-            conceptualPlan = await polishConceptualPlan(
-                plan: conceptualPlan, profile: profile, daysAndMeals: daysAndMeals, rules: rules,
-                excludedFoods: hardExcludes, foodPalette: foodPalettesByContext.flatMap { $0.foods },
-                smartSearch: smartSearch, onLog: onLog
-            )
-            if PlannerTelemetry.isEnabled {
-                await PlannerTelemetry.shared.endStage("polish")
-            }
-            try Task.checkCancellation()
-            
-            progress.conceptualPlan = conceptualPlan
-            await saveProgress(jobID: jobID, progress: progress, onLog: onLog)
-            emitLog("  -> ✅ Checkpoint 4: Conceptual plan generated, polished, and saved.", onLog: onLog)
-        }
-        
-        debugDumpConceptualPlan(conceptualPlan, title: "FINAL CONCEPTUAL PLAN", onLog: onLog)
-        try Task.checkCancellation()
-        
-        // --- Checkpoint 5: Resolution ---
-        if progress.resolvedItems == nil {
-            progress.resolvedItems = [:]
-        }
-        
-        var previewDays: [MealPlanPreviewDay] = []
-        for conceptualDay in conceptualPlan.days.sorted(by: { $0.day < $1.day }) {
-            try Task.checkCancellation()
-            
-            if PlannerTelemetry.isEnabled {
-                await PlannerTelemetry.shared.beginStage("resolution")
-            }
-            var previewMeals: [MealPlanPreviewMeal] = []
-            var unresolvedComponentCount = 0
-            
-            for conceptualMeal in conceptualDay.meals {
-                try Task.checkCancellation()
-                if Task.isCancelled { break }
-                
-                let mealName = conceptualMeal.name
-                let finalItems: [MealPlanPreviewItem]
-                let resolvedItemCount: Int
-                
-                if let cachedItems = progress.resolvedItems?[conceptualDay.day]?[mealName]?.compactMap({ info in
-                    let component = conceptualMeal.components.first(where: { $0.name.lowercased() == info.resolvedName.lowercased() || info.resolvedName.lowercased().contains($0.name.lowercased()) })
-                    if let food = ctx.model(for: info.persistentID) as? FoodItem,
-                       !excludedFoodIds.contains(food.id) {
-                        let grams = component?.grams ?? 100.0
-                        return MealPlanPreviewItem(name: food.name, grams: grams, kcal: food.calories(for: grams))
-                    }
-                    return nil
-                }) {
-                    emitLog("  -> 🔄 Checkpoint 4: Using cached resolved items for Day \(conceptualDay.day) - '\(mealName)'.", onLog: onLog)
-                    resolvedItemCount = cachedItems.count
-                    finalItems = rebalanceMealCalories(items: cachedItems, mealName: mealName, dailyCalTarget: estimatedDailyCalories(for: profile), onLog: onLog)
-                } else {
-                    let relevantPrompts = interpretedPrompts.structuralRequests.filter { prompt in
-                        let lower = prompt.lowercased()
-                        let mealKeywords = ["breakfast", "lunch", "dinner", "morning", "noon", "evening"]
-                        
-                        let hasDaySpecifier = lower.contains("day ")
-                        let hasMealSpecifier = mealKeywords.contains { lower.contains($0) }
-                        
-                        if !hasDaySpecifier && !hasMealSpecifier {
-                            return true
-                        }
-                        if !hasDaySpecifier && hasMealSpecifier {
-                            return lower.contains(conceptualMeal.name.lowercased())
-                        }
-                        if hasDaySpecifier && !hasMealSpecifier {
-                            return lower.contains("day \(conceptualDay.day)")
-                        }
-                        if hasDaySpecifier && hasMealSpecifier {
-                            return lower.contains("day \(conceptualDay.day)") && lower.contains(conceptualMeal.name.lowercased())
-                        }
-                        return false
-                        
-                    } + interpretedPrompts.qualitativeGoals
-                    let resolvedItems = await resolveAndCreateItemsForMeal(conceptualMeal, relevantPrompts: relevantPrompts, smartSearch: smartSearch, onLog: onLog)
-                    try Task.checkCancellation()
-                    
-                    resolvedItemCount = resolvedItems.count
-                    finalItems = rebalanceMealCalories(items: resolvedItems, mealName: conceptualMeal.name, dailyCalTarget: estimatedDailyCalories(for: profile), onLog: onLog)
-                    try Task.checkCancellation()
-                    
-                    var dayDict = progress.resolvedItems?[conceptualDay.day, default: [:]]
-                    dayDict![mealName] = finalItems.map { item in
-                        let foodID = (try? ctx.fetch(FetchDescriptor<FoodItem>(predicate: #Predicate { $0.name == item.name })) )?.first?.persistentModelID
-                        return ResolvedFoodInfo(persistentID: foodID!, resolvedName: item.name)
-                    }
-                    
-                    progress.resolvedItems?[conceptualDay.day] = dayDict
-                    await saveProgress(jobID: jobID, progress: progress, onLog: onLog)
-                    emitLog("  -> ✅ Checkpoint 4: Resolved and saved items for Day \(conceptualDay.day) - '\(mealName)'.", onLog: onLog)
-                }
 
-                unresolvedComponentCount += max(
-                    0,
-                    conceptualMeal.components.count - resolvedItemCount
-                )
-                
-                let mealStartTime = mealTimings?.first { $0.key.lowercased() == conceptualMeal.name.lowercased() }?.value
-                previewMeals.append(MealPlanPreviewMeal(name: conceptualMeal.name, descriptiveTitle: conceptualMeal.descriptiveTitle, items: finalItems, startTime: mealStartTime))
-                try Task.checkCancellation()
-            }
-            if PlannerTelemetry.isEnabled {
-                await PlannerTelemetry.shared.endStage("resolution")
-                await PlannerTelemetry.shared.beginStage("goal_adjustment")
-            }
-            previewMeals = adjustResolvedDayForGoals(
-                dayIndex: conceptualDay.day,
-                meals: previewMeals,
-                goals: interpretedPrompts.numericalGoals,
-                unresolvedComponentCount: unresolvedComponentCount,
-                context: ctx,
-                onLog: onLog
-            )
-            if PlannerTelemetry.isEnabled {
-                await PlannerTelemetry.shared.endStage("goal_adjustment")
-            }
-            previewDays.append(
-                MealPlanPreviewDay(dayIndex: conceptualDay.day, meals: previewMeals)
-            )
-            try Task.checkCancellation()
+        var placementTopics = buildMustContainRules(
+            structuralRequests: interpretedPrompts.structuralRequests,
+            daysAndMeals: daysAndMeals,
+            onLog: onLog
+        )
+        let explicitlyPlaced = Set(placementTopics.map {
+            $0.topic.lowercased()
+        })
+        let orderedSlots = daysAndMeals.keys.sorted().flatMap { day in
+            (daysAndMeals[day] ?? []).map { (day, $0) }
         }
-        
-        // --- Final Cleanup ---
+        for (index, included) in includedFoods.enumerated()
+        where !explicitlyPlaced.contains(included.lowercased())
+            && !orderedSlots.isEmpty {
+            let slot = orderedSlots[index % orderedSlots.count]
+            placementTopics.append(
+                MustContainRule(
+                    day: slot.0,
+                    meal: slot.1,
+                    topic: included
+                )
+            )
+        }
+
+        var solverPlacements: [MP5MustContainRule] = []
+        for placement in placementTopics {
+            guard let candidate = await resolveCompactCandidate(
+                named: placement.topic,
+                smartSearch: smartSearch
+            ) else {
+                throw MP5SolverFailure.infeasible(
+                    constraint: "structural placement '\(placement.topic)' did not resolve to a catalogue food"
+                )
+            }
+            solverPlacements.append(
+                MP5MustContainRule(
+                    day: placement.day,
+                    meal: placement.meal,
+                    foodID: candidate.id
+                )
+            )
+        }
+        try Task.checkCancellation()
+        let preview = try await MP5PlannerAdapter(container: container).solve(
+            profile: profile,
+            daysAndMeals: daysAndMeals,
+            prompts: prompts ?? [],
+            interpretedPrompts: interpretedPrompts,
+            exclusions: hardExclusions,
+            placements: solverPlacements,
+            mealTimings: mealTimings,
+            onLog: onLog
+        )
+        if PlannerTelemetry.isEnabled {
+            await PlannerTelemetry.shared.endStage("deterministic_assembly")
+        }
+
         emitLog("✅ Final Meal Plan Preview Prepared. Clearing intermediate progress.", onLog: onLog)
         job.intermediateResultData = nil
         try ctx.save()
-        
-        let preview = MealPlanPreview(
-            startDate: Date(),
-            prompt: conceptualPlan.planName,
-            days: previewDays,
-            minAgeMonths: conceptualPlan.minAgeMonths
-        )
         if PlannerTelemetry.isEnabled {
             let telemetrySummary = await PlannerTelemetry.shared.summary()
             emitLog(telemetrySummary, onLog: onLog)
@@ -1812,813 +1518,6 @@ public final class USDAWeeklyMealPlanner: Sendable {
             }
             throw error
         }
-    }
-    
-    @inline(__always) private func roundTo5(_ x: Double) -> Double { (x / 5.0).rounded() * 5.0 }
-    
-    private func rebalanceDayCalories(
-        meals: [MealPlanPreviewMeal],
-        dailyCalTarget: Double,
-        onLog: (@Sendable (String) -> Void)?
-    ) -> [MealPlanPreviewMeal] {
-        guard !meals.isEmpty, dailyCalTarget > 0 else { return meals }
-        
-        func isCondimentOrSweetener(_ n: String) -> Bool {
-            let l = n.lowercased()
-            let keys = [
-                "honey","sugar","brown sugar","maple","agave","syrup","molasses","jam","jelly","preserves",
-                "ketchup","mustard","mayo","mayonnaise","aioli","dressing","sauce","butter","ghee","cream",
-                "whipped","coconut sugar","stevia","sweetener"
-            ]
-            return keys.contains { l.contains($0) }
-        }
-        func isBeverage(_ n: String) -> Bool {
-            let l = n.lowercased(); return ["milk","kefir","yogurt drink","smoothie"].contains { l.contains($0) } && !l.contains("powder")
-        }
-        func isProtein(_ n: String) -> Bool {
-            let keys = ["chicken","turkey","salmon","tuna","fish","shrimp","pork","beef","lamb","egg","eggs","tofu","tempeh","lentil","bean","chickpea"]
-            let l = n.lowercased(); return keys.contains { l.contains($0) }
-        }
-        func isGrain(_ n: String) -> Bool {
-            let keys = ["cereal","oat","oatmeal","rice","quinoa","pasta","noodle","bread","toast","couscous","potato"]
-            let l = n.lowercased(); return keys.contains { l.contains($0) }
-        }
-        
-        func minGrams(for name: String, current: Double) -> Double {
-            let l = name.lowercased()
-            if (l.contains("lemon") && (l.contains("wedge") || l.contains("slice"))) { return min(current, 20.0) }
-            if isBeverage(name) { return 150.0 }
-            if isProtein(name) { return 90.0 }
-            if isGrain(name) { return 60.0 }
-            return 40.0
-        }
-        
-        func roundTo5(_ x: Double) -> Double { (x / 5.0).rounded() * 5.0 }
-        
-        let allTuples: [(mIdx: Int, iIdx: Int, item: MealPlanPreviewItem)] = meals.enumerated().flatMap { (mIdx, meal) in
-            meal.items.enumerated().map { (iIdx, it) in (mIdx, iIdx, it) }
-        }
-        let initialTotal = allTuples.reduce(0.0) { $0 + $1.item.kcal }
-        let cap = max(700.0, dailyCalTarget * 1.05)
-        guard initialTotal > cap else { return meals }
-        
-        let locked = Set(allTuples.compactMap { (mIdx, iIdx, it) in
-            (isCondimentOrSweetener(it.name) || it.grams < 50.0) ? "\(mIdx)#\(iIdx)" : nil
-        })
-        
-        var adjustable: [(mIdx: Int, iIdx: Int, perGram: Double, grams: Double, name: String, kcal: Double)] = []
-        var lockedCal = 0.0
-        for (mIdx, iIdx, it) in allTuples {
-            if locked.contains("\(mIdx)#\(iIdx)") {
-                lockedCal += it.kcal
-            } else {
-                let perGram = it.grams > 0 ? (it.kcal / it.grams) : 0
-                adjustable.append((mIdx, iIdx, perGram, it.grams, it.name, it.kcal))
-            }
-        }
-        
-        let currentAdjKcal = adjustable.reduce(0.0) { $0 + $1.kcal }
-        let targetAdjKcal = max(0.0, cap - lockedCal)
-        guard currentAdjKcal > 0 else {
-            onLog?("⚖️ Day-level rebalance: nothing adjustable. Keeping meals as-is.")
-            return meals
-        }
-        
-        let scale = targetAdjKcal / currentAdjKcal
-        var out = meals
-        for a in adjustable {
-            var newGrams = roundTo5(a.grams * scale)
-            let minG = minGrams(for: a.name, current: a.grams)
-            if newGrams < minG { newGrams = roundTo5(minG) }
-            let newKcal = a.perGram * newGrams
-            var items = out[a.mIdx].items
-            items[a.iIdx] = MealPlanPreviewItem(name: items[a.iIdx].name, grams: newGrams, kcal: newKcal)
-            out[a.mIdx] = MealPlanPreviewMeal(
-                name: out[a.mIdx].name,
-                descriptiveTitle: out[a.mIdx].descriptiveTitle,
-                items: items,
-                startTime: out[a.mIdx].startTime
-            )
-        }
-        
-        let newTotal = out.flatMap { $0.items }.reduce(0.0) { $0 + $1.kcal }
-        onLog?("⚖️ Day-level rebalance: \(Int(initialTotal)) → \(Int(newTotal)) kcal (cap \(Int(cap))).")
-        return out
-    }
-    
-    @available(iOS 26.0, *)
-    private func aiInferContextTags(
-        structural: [String],
-        qualitative: [String],
-        included: [String],
-        onLog: (@Sendable (String) -> Void)?
-    ) async -> (headwords: [String], cuisines: [String]) {
-        let validCuisineTags = [
-            "any", "American", "British & Irish", "French", "Italian", "Spanish & Portuguese (Iberian)",
-            "Central & Eastern European", "Scandinavian / Nordic", "Mediterranean / Greek",
-            "Middle Eastern / Levantine", "North African / Maghreb", "Sub-Saharan African",
-            "Indian Subcontinent", "Chinese", "Japanese", "Korean", "Southeast Asian",
-            "Central Asian", "Latin American / Caribbean", "Oceanian / Australasian",
-            "Fusion / Global Contemporary", "ayurvedic", "vegetarian", "vegan", "gluten-free"
-        ]
-        
-        let instructions = Instructions {
-            """
-            You are a highly precise culinary theme and keyword extractor. Your job is to identify and classify the most dominant culinary concepts from user requests.
-            
-            You will classify each theme into one of two `kind`s:
-            - `kind: "cuisine"`: For a broad culinary tradition, dietary system, or style of eating.
-            - `kind: "headword"`: For a specific, named dish or a single primary ingredient that is a central focus.
-            
-            **CRITICAL RULES FOR EXTRACTION AND CLASSIFICATION:**
-            
-            1.  **Preserve Detail**: If a culinary style has a specific sub-type, modifier, or focus (e.g., a diet for a specific condition, a regional variant), you MUST use the full, composite term in the tag. Do not discard these important details.
-            2.  **Classification Logic**:
-                - A specific, named dish or a single primary ingredient is **always** a `headword`.
-                - A broad culinary tradition, dietary system, or style of eating is a `cuisine`.
-            3.  **Mapping Unlisted Cuisines**: If a user's request implies a cuisine that is NOT on the `VALID CUISINE TAGS` list provided in the prompt, your task is twofold:
-                - First, identify the most relevant broader category from that list for a `cuisine` tag.
-                - Second, extract any specific named dishes from the user's request as `headword` tags.
-            4.  **Focus on Dominant Themes**: Return only the 1-3 most important and relevant themes from the request. Do not extract every single food item mentioned.
-            """
-        }
-        
-        let session = LanguageModelSession(instructions: instructions)
-        if PlannerTelemetry.isEnabled {
-            await PlannerTelemetry.shared.noteSession(site: "aiInferContextTags")
-        }
-        
-        func truncateList(_ arr: [String], maxCount: Int, maxLen: Int) -> [String] {
-            return arr.prefix(maxCount).map { $0.count > maxLen ? String($0.prefix(maxLen)) : $0 }
-        }
-        
-        let structuralSlim = truncateList(structural, maxCount: 8, maxLen: 120)
-        let qualitativeSlim = truncateList(qualitative, maxCount: 4, maxLen: 80)
-        let includedSlim = truncateList(included, maxCount: 12, maxLen: 40)
-        
-        let promptSummary = """
-        Analyze the following user requests to identify the main culinary themes according to the rules.
-        VALID CUISINE TAGS for categorization reference: \(validCuisineTags.joined(separator: ", "))
-        
-        STRUCTURAL REQUESTS:
-        \(structuralSlim.joined(separator: " | "))
-        
-        QUALITATIVE GOALS:
-        \(qualitativeSlim.joined(separator: " | "))
-        
-        INCLUDED FOODS:
-        \(includedSlim.joined(separator: " | "))
-        """
-        
-        var telemetryRespondStartedAt: UInt64?
-        var telemetryRespondRecorded = false
-        do {
-            try Task.checkCancellation()
-            
-            if PlannerTelemetry.isEnabled {
-                telemetryRespondStartedAt = DispatchTime.now().uptimeNanoseconds
-            }
-            let result = try await session.respond(
-                to: promptSummary,
-                generating: AIContextTagsResponse.self,
-                includeSchemaInPrompt: true,
-                options: GenerationOptions(sampling: .greedy)
-            )
-            if let startedAt = telemetryRespondStartedAt {
-                await PlannerTelemetry.shared.noteRespond(
-                    site: "aiInferContextTags",
-                    ok: true,
-                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
-                )
-                telemetryRespondRecorded = true
-            }
-            
-            try Task.checkCancellation()
-            
-            var out: [(kind: String, tag: String)] = []
-            var seen = Set<String>()
-            
-            for t in result.content.tags {
-                try Task.checkCancellation()
-                
-                let kind = t.kind.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-                var tag = t.tag.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-                
-                guard !kind.isEmpty, !tag.isEmpty else { continue }
-                
-                tag = tag.components(separatedBy: .whitespacesAndNewlines).filter { !$0.isEmpty }.joined(separator: " ")
-                
-                if seen.insert("\(kind)#\(tag)").inserted {
-                    out.append((kind, tag))
-                }
-            }
-            
-            let cuisines = out.filter { $0.kind == "cuisine" }
-            let headwords = out.filter { $0.kind == "headword" }
-            let finalTags = Array((cuisines + headwords).prefix(3))
-            
-            if !finalTags.isEmpty {
-                onLog?("  -> Context tags inferred: " + finalTags.map { "\($0.kind):\($0.tag)" }.joined(separator: ", "))
-                let heads = finalTags.filter { $0.kind == "headword" }.map { $0.tag }
-                let cuisinesOnly = finalTags.filter { $0.kind == "cuisine" }.map { $0.tag }
-                return (headwords: heads, cuisines: cuisinesOnly.isEmpty ? ["any"] : cuisinesOnly)
-            } else {
-                onLog?("  -> Context inference returned no valid tags; defaulting to cuisine:any")
-                return (headwords: [], cuisines: ["any"])
-            }
-            
-        } catch {
-            if let startedAt = telemetryRespondStartedAt, !telemetryRespondRecorded {
-                await PlannerTelemetry.shared.noteRespond(
-                    site: "aiInferContextTags",
-                    ok: false,
-                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
-                )
-            }
-            onLog?("  -> AI context inference failed: \(error.localizedDescription). Using cuisine:any.")
-            return (headwords: [], cuisines: ["any"])
-        }
-    }
-    
-    @available(iOS 26.0, *)
-    private func aiGenerateVariantsOnly(for headword: String,
-                                        onLog: (@Sendable (String) -> Void)?) async throws -> [String] {
-        let session = LanguageModelSession(instructions: Instructions {
-            """
-            You generate distinct, popular variants for a given headword (dish name).
-            RULES:
-            - Return 4–7 standalone variant names.
-            - Each name must be for a distinct, authentic, and recognized variant.
-            - **CRITICAL**: Do NOT invent hybrid names by combining the headword with generic dish types unless they are real, well-known dishes. Focus on variations in filling, shape, or traditional preparation.
-            - Do NOT include the original headword itself.
-            - Keep names USDA-like and plausible.
-            - Do not add portions or explanations.
-            """
-        })
-        if PlannerTelemetry.isEnabled {
-            await PlannerTelemetry.shared.noteSession(site: "aiGenerateVariantsOnly")
-        }
-        let prompt = "HEADWORD: \"\(headword)\"\nGenerate popular variants only."
-        try Task.checkCancellation()
-        
-        let resp = try await {
-            let startedAt = PlannerTelemetry.isEnabled
-                ? DispatchTime.now().uptimeNanoseconds
-                : nil
-            do {
-                let response = try await session.respond(
-                    to: prompt,
-                    generating: AIHeadwordVariantsResponse.self,
-                    includeSchemaInPrompt: true,
-                    options: GenerationOptions(sampling: .greedy, maximumResponseTokens: 1024)
-                )
-                if let startedAt {
-                    await PlannerTelemetry.shared.noteRespond(
-                        site: "aiGenerateVariantsOnly",
-                        ok: true,
-                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
-                    )
-                }
-                return response
-            } catch {
-                if let startedAt {
-                    await PlannerTelemetry.shared.noteRespond(
-                        site: "aiGenerateVariantsOnly",
-                        ok: false,
-                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
-                    )
-                }
-                throw error
-            }
-        }()
-        try Task.checkCancellation()
-        
-        var seen = Set<String>()
-        onLog?("[Variants] Headword='\(headword)' → raw=\(resp.content.foodExamples)")
-        return resp.content.foodExamples.compactMap { raw in
-            let v = raw.trimmingCharacters(in: .whitespacesAndNewlines)
-            guard !v.isEmpty else { return nil }
-            return seen.insert(v.lowercased()).inserted ? v : nil
-        }
-    }
-    
-    @available(iOS 26.0, *)
-    @MainActor
-    private func specializeStructuralRequestsWithHeadwords(
-        profile: Profile,
-        structuralRequests: inout [String],
-        includedFoods: inout [String],
-        contextTags: inout [(kind: String, tag: String)],
-        headwords: [String],
-        cuisines: [String],
-        onLog: (@Sendable (String) -> Void)?
-    ) async {
-        emitLog("[Specialize] Heads=\(headwords) | cuisines=\(cuisines)", onLog: onLog)
-        guard !headwords.isEmpty else { return }
-        
-        struct HeadwordAssets {
-            let variants: [String]
-            let complements: [String]
-        }
-        var assets: [String: HeadwordAssets] = [:]
-        
-        // ✅ Инициализация на SmartFoodSearch3 на MainActor
-        let smartSearch: SmartFoodSearch3 = await MainActor.run {
-            let engine = SmartFoodSearch3(container: self.container)
-            engine.loadData()
-            return engine
-        }
-        
-        for h in headwords {
-            do {
-                try Task.checkCancellation()
-                
-                // ✅ Подаваме smartSearch към AI генератора
-                let (foods, _) = try await aiGenerateFoodPaletteForHeadword(
-                    profile: profile,
-                    headword: h,
-                    includeHeadword: false,
-                    smartSearch: smartSearch,
-                    onLog: onLog
-                )
-                try Task.checkCancellation()
-                
-                let vars = try await aiGenerateVariantsOnly(for: h, onLog: onLog)
-                try Task.checkCancellation()
-                
-                assets[h.lowercased()] = HeadwordAssets(variants: vars, complements: foods)
-                try Task.checkCancellation()
-                
-                emitLog("[Specialize] Headword '\(h)' → variants=\(vars.count), complements=\(foods.count)", onLog: onLog)
-            } catch {
-                onLog?("  -> ⚠️ Could not prefetch complements/variants for headword '\(h)': \(error.localizedDescription)")
-            }
-        }
-        
-        guard !assets.isEmpty else { return }
-        
-        // --- Cuisine palette допълнения ---
-        var cuisineAdds: [String] = []
-        for c in cuisines {
-            do {
-                try Task.checkCancellation()
-                let examples = try await aiGenerateFoodPaletteForCuisine(
-                    profile: profile,
-                    cuisineTag: c,
-                    onLog: onLog
-                )
-                try Task.checkCancellation()
-                cuisineAdds.append(contentsOf: examples)
-            } catch {
-                onLog?("  -> ⚠️ Could not generate cuisine palette for '\(c)': \(error.localizedDescription)")
-            }
-        }
-        
-        if !cuisineAdds.isEmpty {
-            var seen = Set(includedFoods.map { $0.lowercased() })
-            for n in cuisineAdds {
-                if seen.insert(n.lowercased()).inserted {
-                    includedFoods.append(n)
-                }
-            }
-            emitLog("[Specialize] Enriched included foods with cuisineAdds (\(cuisineAdds.count))", onLog: onLog)
-        }
-        
-        // --- Пренаписване на structuralRequests ---
-        let pattern = #"^\s*On Day\s+(\d+),\s+include\s+(.+?)\s+at\s+(Breakfast|Lunch|Dinner)\s*$"#
-        guard let regex = try? NSRegularExpression(pattern: pattern, options: [.caseInsensitive]) else { return }
-        
-        func chooseCombo(from arr: [String], avoiding set: Set<String>, count: Int) -> [String] {
-            var picks: [String] = []
-            var seen = set
-            for n in arr.shuffled() {
-                let k = n.lowercased()
-                if seen.contains(k) { continue }
-                seen.insert(k)
-                picks.append(n)
-                if picks.count == count { break }
-            }
-            return picks
-        }
-        
-        var newRequests: [String] = []
-        
-        for sr in structuralRequests {
-            let range = NSRange(sr.startIndex..<sr.endIndex, in: sr)
-            if let m = regex.firstMatch(in: sr, options: [], range: range),
-               m.numberOfRanges >= 4,
-               let dayR = Range(m.range(at: 1), in: sr),
-               let topicR = Range(m.range(at: 2), in: sr),
-               let mealR = Range(m.range(at: 3), in: sr) {
-                
-                let day = String(sr[dayR])
-                let topicRaw = String(sr[topicR]).trimmingCharacters(in: .whitespaces)
-                let meal = String(sr[mealR])
-                let key = topicRaw.lowercased()
-                
-                if let asset = assets[key] {
-                    // NOTE: Това е fallback логика; основният flow за variety е през wantsDifferentTypes
-                    let variant = asset.variants.randomElement() ?? topicRaw
-                    let combo = chooseCombo(
-                        from: asset.complements,
-                        avoiding: [key, variant.lowercased()],
-                        count: 6
-                    )
-                    let comboQuoted = combo.map { "\"\($0)\"" }.joined(separator: ", ")
-                    let rewritten = "On Day \(day), include \(topicRaw) at \(meal) combined with some of \(comboQuoted)"
-                    newRequests.append(rewritten)
-                    onLog?("  -> Specialised: '\(sr)' → '\(rewritten)'")
-                } else {
-                    newRequests.append(sr)
-                }
-            } else {
-                newRequests.append(sr)
-            }
-        }
-        
-        structuralRequests = newRequests
-    }
-
-    
-    @available(iOS 26.0, *)
-    @MainActor
-    private func aiGenerateFoodPaletteForCuisine(
-        profile: Profile,
-        cuisineTag: String,
-        onLog: (@Sendable (String) -> Void)?
-    ) async throws -> [String] {
-        let session = LanguageModelSession(instructions: Instructions {
-            """
-            You generate culturally consistent food examples for a given cuisine/dietary system.
-            - Input: a single lowercase cuisine tag (may be composite).
-            - Output: USDA-like item names suitable for that cuisine/system.
-            - Keep names standalone (no portions), realistic, varied.
-            - Do not fabricate hybrid names by prefixing the tag to generic nouns.
-            - No explanations; return only the schema.
-            """
-        })
-        if PlannerTelemetry.isEnabled {
-            await PlannerTelemetry.shared.noteSession(site: "aiGenerateFoodPaletteForCuisine")
-        }
-        
-        let prompt = """
-        PROFILE:
-        - Age months: \(profile.ageInMonths)
-        
-        CUISINE TAG: "\(cuisineTag)"
-        Return foodExamples.
-        """
-        onLog?("Cuisine prompt: \(prompt)")
-        try Task.checkCancellation()
-        
-        let resp = try await {
-            let startedAt = PlannerTelemetry.isEnabled
-                ? DispatchTime.now().uptimeNanoseconds
-                : nil
-            do {
-                let response = try await session.respond(
-                    to: prompt,
-                    generating: AIFoodPaletteResponse.self,
-                    includeSchemaInPrompt: true,
-                    options: GenerationOptions(sampling: .greedy, maximumResponseTokens: 2048)
-                )
-                if let startedAt {
-                    await PlannerTelemetry.shared.noteRespond(
-                        site: "aiGenerateFoodPaletteForCuisine",
-                        ok: true,
-                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
-                    )
-                }
-                return response
-            } catch {
-                if let startedAt {
-                    await PlannerTelemetry.shared.noteRespond(
-                        site: "aiGenerateFoodPaletteForCuisine",
-                        ok: false,
-                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
-                    )
-                }
-                throw error
-            }
-        }()
-        try Task.checkCancellation()
-        
-        var seen = Set<String>()
-        let out = resp.content.foodExamples.compactMap { n -> String? in
-            let v = n.trimmingCharacters(in: .whitespacesAndNewlines)
-            guard !v.isEmpty else { return nil }
-            let key = v.lowercased()
-            return seen.insert(key).inserted ? v : nil
-        }
-        try Task.checkCancellation()
-        
-        if !out.isEmpty { onLog?("  -> Palette(\(cuisineTag)) • \(out.count) items: \(out)") }
-        return out
-    }
-    
-    @available(iOS 26.0, *)
-    @MainActor
-    private func aiGenerateFoodPaletteForHeadword(
-        profile: Profile,
-        headword: String,
-        includeHeadword: Bool = false,
-        smartSearch: SmartFoodSearch3, // Added parameter
-        onLog: (@Sendable (String) -> Void)?
-    ) async throws -> (foods: [String], inferredCuisine: String) {
-        let complementaryFoodSession = LanguageModelSession(instructions: Instructions {
-            """
-            You are a culinary expert specializing in traditional food pairings. Your task is to generate a list of items that would be served **alongside the HEADWORD to create a complete, authentic, and balanced meal**.
-            
-            **CRITICAL RULES:**
-            1.  **Infer Cuisine:** First, you MUST infer the single, most specific, dominant cuisine for the HEADWORD.
-            2.  **Generate a MEAL, not just a list:** The items you generate must be complementary. They should form a cohesive meal experience when eaten with the HEADWORD.
-            3.  **Create Variety:** The list MUST include a mix of item types, such as:
-                *   **Beverages**.
-                *   **Light Sides**.
-                *   **Condiments/Dairy**.
-                *   Maybe a light soup if appropriate for the cuisine.
-            4.  **Avoid Redundancy:** DO NOT suggest items that are nutritionally similar or redundant. For example, if the HEADWORD is a pastry, DO NOT suggest another heavy, starchy side. Prioritize freshness and contrast.
-            5.  **Authenticity:** Items must be standalone food names, not raw ingredients. The pairings must be traditional for the inferred cuisine.
-            6.  **Exclusions:** The HEADWORD itself MUST NOT be in the generated list.
-            7.  **Output:** Return only the required schema containing the inferred cuisine and the list of 16-25 food items.
-            """
-        })
-        if PlannerTelemetry.isEnabled {
-            await PlannerTelemetry.shared.noteSession(site: "aiGenerateFoodPaletteForHeadword")
-        }
-        
-        let complementaryFoodPrompt = """
-        PROFILE:
-        - Age months: \(profile.ageInMonths)
-        HEADWORD: "\(headword)"
-        
-        Return complementary items for this headword and the single cuisine you infer it belongs to.
-        """
-        onLog?("Complementary food prompt: \(complementaryFoodPrompt)")
-        try Task.checkCancellation()
-        
-        let complementaryFoodResp = try await {
-            let startedAt = PlannerTelemetry.isEnabled
-                ? DispatchTime.now().uptimeNanoseconds
-                : nil
-            do {
-                let response = try await complementaryFoodSession.respond(
-                    to: complementaryFoodPrompt,
-                    generating: AIHeadwordPaletteResponse.self,
-                    includeSchemaInPrompt: true,
-                    options: GenerationOptions(sampling: .greedy, maximumResponseTokens: 2048)
-                )
-                if let startedAt {
-                    await PlannerTelemetry.shared.noteRespond(
-                        site: "aiGenerateFoodPaletteForHeadword",
-                        ok: true,
-                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
-                    )
-                }
-                return response
-            } catch {
-                if let startedAt {
-                    await PlannerTelemetry.shared.noteRespond(
-                        site: "aiGenerateFoodPaletteForHeadword",
-                        ok: false,
-                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
-                    )
-                }
-                throw error
-            }
-        }()
-        try Task.checkCancellation()
-        
-        let headLower = headword.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-        var seen = Set<String>()
-        try Task.checkCancellation()
-        
-        var out = complementaryFoodResp.content.foodExamples.compactMap { n -> String? in
-            let v = n.trimmingCharacters(in: .whitespacesAndNewlines)
-            guard !v.isEmpty, v.lowercased() != headLower else { return nil }
-            return seen.insert(v.lowercased()).inserted ? v : nil
-        }
-        try Task.checkCancellation()
-        
-        if includeHeadword {
-            out.insert(headword, at: 0)
-            seen.insert(headLower)
-            
-            onLog?("Starting session to generate variants for headword: \(headword)")
-            let variantsSession = LanguageModelSession(instructions: Instructions {
-                """
-                You are a culinary expert and food historian. Your task is to generate a list of popular and diverse variations of a given food item (the headword).
-                
-                These variations should be specific and distinct. They can be regional versions, variations with different fillings or ingredients, or different preparation styles.
-                
-                OUTPUT RULES:
-                - Return 4-7 standalone item names.
-                - **CRITICAL**: Do NOT invent hybrid names by combining the headword with generic dish types unless they are real, well-known dishes. Focus on variations in filling, shape, or traditional preparation.
-                - Do NOT include the original headword itself.
-                - The items must be plausible USDA-like names.
-                - Return only the schema with the food examples. The 'inferredCuisine' field can be the cuisine of the headword.
-                """
-            })
-            if PlannerTelemetry.isEnabled {
-                await PlannerTelemetry.shared.noteSession(site: "aiGenerateFoodPaletteForHeadword")
-            }
-            
-            let variantsPrompt = "HEADWORD: \"\(headword)\"\n\nGenerate popular variants for this headword."
-            onLog?("Variants prompt: \(variantsPrompt)")
-            
-            var telemetryRespondStartedAt: UInt64?
-            var telemetryRespondRecorded = false
-            do {
-                try Task.checkCancellation()
-                
-                if PlannerTelemetry.isEnabled {
-                    telemetryRespondStartedAt = DispatchTime.now().uptimeNanoseconds
-                }
-                let variantsResp = try await variantsSession.respond(
-                    to: variantsPrompt,
-                    generating: AIHeadwordVariantsResponse.self,
-                    includeSchemaInPrompt: true,
-                    options: GenerationOptions(sampling: .greedy, maximumResponseTokens: 2048)
-                )
-                if let startedAt = telemetryRespondStartedAt {
-                    await PlannerTelemetry.shared.noteRespond(
-                        site: "aiGenerateFoodPaletteForHeadword",
-                        ok: true,
-                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
-                    )
-                    telemetryRespondRecorded = true
-                }
-                try Task.checkCancellation()
-                
-                let variants = variantsResp.content.foodExamples.compactMap { n -> String? in
-                    let v = n.trimmingCharacters(in: .whitespacesAndNewlines)
-                    guard !v.isEmpty else { return nil }
-                    return seen.insert(v.lowercased()).inserted ? v : nil
-                }
-                try Task.checkCancellation()
-                
-                out.append(contentsOf: variants)
-                onLog?("  -> Added \(variants.count) variants.")
-                
-            } catch {
-                if let startedAt = telemetryRespondStartedAt, !telemetryRespondRecorded {
-                    await PlannerTelemetry.shared.noteRespond(
-                        site: "aiGenerateFoodPaletteForHeadword",
-                        ok: false,
-                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
-                    )
-                }
-                onLog?("Could not generate variants for headword '\(headword)': \(error.localizedDescription)")
-            }
-        }
-        
-        // --- NEW: Validate against DB using SmartFoodSearch3 ---
-        let groundingContext = "Grounding food palette items for headword: \(headword)"
-        var final: [String] = []
-        var validatedSeen = Set<String>()
-
-        for name in out {
-            try Task.checkCancellation()
-            let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
-            guard !trimmed.isEmpty else { continue }
-            let key = trimmed.lowercased()
-            guard validatedSeen.insert(key).inserted else { continue }
-
-            let tokenizedWords = FoodItem.makeTokens(from: trimmed)
-            try Task.checkCancellation()
-            
-            // Use the passed instance of SmartFoodSearch3
-            let ids = await smartSearch.searchFoodsAI(
-                query: trimmed,
-                limit: 1,
-                context: groundingContext,
-                requiredHeadwords: tokenizedWords
-            )
-            try Task.checkCancellation()
-            
-            if !ids.isEmpty { final.append(trimmed) }
-            if final.count >= 30 { break }
-        }
-        
-        // Fallback if too few items found
-        if final.count < 12 {
-            for name in out where final.count < 30 {
-                 try Task.checkCancellation()
-                 let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
-                 guard !trimmed.isEmpty else { continue }
-                 let key = trimmed.lowercased()
-                 if !validatedSeen.contains(key) { // Add if not already added
-                      validatedSeen.insert(key)
-                      final.append(trimmed)
-                 }
-            }
-        }
-        // -------------------------------------------------------
-        
-        onLog?("[HeadwordPalette] headword='\(headword)' → items=\(final.count)")
-        
-        let inferredCuisine = complementaryFoodResp.content.inferredCuisine.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-        onLog?("  -> Palette(headword:\(headword)) • \(final.count) items (inferred cuisine='\(inferredCuisine)'): \(final)")
-        
-        return (final, inferredCuisine)
-    }
-    
-    private func rebalanceMealCalories(
-        items: [MealPlanPreviewItem],
-        mealName: String,
-        dailyCalTarget: Double,
-        onLog: (@Sendable (String) -> Void)?
-    ) -> [MealPlanPreviewItem] {
-        guard !items.isEmpty, dailyCalTarget > 0 else { return items }
-        
-        let lowerName = mealName.lowercased()
-        let split: [String: Double] = ["breakfast": 0.25, "lunch": 0.35, "dinner": 0.40]
-        let ratio: Double = {
-            if let r = split[lowerName] { return r }
-            if lowerName.contains("breakfast") { return split["breakfast"]! }
-            if lowerName.contains("lunch") { return split["lunch"]! }
-            if lowerName.contains("dinner") { return split["dinner"]! }
-            return 0.33
-        }()
-        
-        func isCondimentOrSweetener(_ n: String) -> Bool {
-            let l = n.lowercased()
-            let keys = [
-                "honey","sugar","brown sugar","maple","agave","syrup","molasses","jam","jelly","preserves",
-                "ketchup","mustard","mayo","mayonnaise","aioli","dressing","sauce","butter","ghee","cream",
-                "whipped","coconut sugar","stevia","sweetener"
-            ]
-            return keys.contains { l.contains($0) }
-        }
-        func isBeverage(_ n: String) -> Bool {
-            let l = n.lowercased(); return ["milk","kefir","yogurt drink","smoothie"].contains { l.contains($0) } && !l.contains("powder")
-        }
-        func isProtein(_ n: String) -> Bool {
-            let keys = ["chicken","turkey","salmon","tuna","fish","shrimp","pork","beef","lamb","egg","eggs","tofu","tempeh","lentil","bean","chickpea"]
-            let l = n.lowercased(); return keys.contains { l.contains($0) }
-        }
-        func isGrain(_ n: String) -> Bool {
-            let keys = ["cereal","oat","oatmeal","rice","quinoa","pasta","noodle","bread","toast","couscous","potato"]
-            let l = n.lowercased(); return keys.contains { l.contains($0) }
-        }
-        func minGrams(for name: String, current: Double) -> Double {
-            let l = name.lowercased()
-            if (l.contains("lemon") && (l.contains("wedge") || l.contains("slice"))) { return min(current, 20.0) }
-            if isBeverage(name) { return 150.0 }
-            if isProtein(name) { return 90.0 }
-            if isGrain(name) { return 60.0 }
-            return 40.0
-        }
-        
-        let initialTotal = items.reduce(0) { $0 + $1.kcal }
-        let cap = max(300.0, dailyCalTarget * ratio * 1.05)
-        guard initialTotal > cap else { return items }
-        
-        var mainItems = items.filter { !isCondimentOrSweetener($0.name) }
-        if mainItems.count != items.count {
-            let dropped = items.count - mainItems.count
-            onLog?("⚖️ Removed \(dropped) condiment/sweetener item(s) before scaling \(mealName).")
-        }
-        
-        var total = mainItems.reduce(0) { $0 + $1.kcal }
-        if total <= cap { return mainItems }
-        
-        let lockThreshold = 50.0
-        let lockedIdxs = Array(mainItems.enumerated().compactMap { (idx, it) in it.grams < lockThreshold ? idx : nil })
-        let adjustableIdxs = Array(mainItems.indices.filter { !lockedIdxs.contains($0) })
-        
-        guard !adjustableIdxs.isEmpty else {
-            let newTotal = mainItems.reduce(0) { $0 + $1.kcal }
-            onLog?("⚖️ Calorie rebalance for \(mealName): \(Int(initialTotal)) → \(Int(newTotal)) kcal (cap \(Int(cap))).")
-            return mainItems
-        }
-        
-        let lockedCal = lockedIdxs.reduce(0.0) { $0 + mainItems[$1].kcal }
-        let currentAdjKcal = adjustableIdxs.reduce(0.0) { $0 + mainItems[$1].kcal }
-        let targetAdjKcal = max(0.0, cap - lockedCal)
-        
-        guard currentAdjKcal > 0 else {
-            let newTotal = mainItems.reduce(0) { $0 + $1.kcal }
-            onLog?("⚖️ Calorie rebalance for \(mealName): \(Int(initialTotal)) → \(Int(newTotal)) kcal (cap \(Int(cap))).")
-            return mainItems
-        }
-        
-        let scale = targetAdjKcal / currentAdjKcal
-        
-        var adjusted = mainItems
-        for i in adjustableIdxs {
-            let item = adjusted[i]
-            let perGram = item.grams > 0 ? (item.kcal / item.grams) : 0
-            var newGrams = roundTo5(item.grams * scale)
-            let minG = minGrams(for: item.name, current: item.grams)
-            if newGrams < minG { newGrams = roundTo5(minG) }
-            let newKcal = perGram * newGrams
-            adjusted[i] = MealPlanPreviewItem(name: item.name, grams: newGrams, kcal: newKcal)
-        }
-        
-        let newTotal = adjusted.reduce(0) { $0 + $1.kcal }
-        onLog?("⚖️ Calorie rebalance for \(mealName): \(Int(initialTotal)) → \(Int(newTotal)) kcal (cap \(Int(cap))).")
-        return adjusted
     }
     
     public func savePlan(from preview: MealPlanPreview, for profileID: PersistentIdentifier, onLog: (@Sendable (String) -> Void)?) async throws -> MealPlan {
@@ -2659,44 +1558,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
         onLog?("✅ Successfully saved MealPlan from preview.")
         return newPlan
     }
-    
-    @MainActor
-    private func makePreviewItemSendably(
-        component: ConceptualComponent,
-        mealContext: ConceptualMeal,
-        relevantPrompts: [String],
-        smartSearch: SmartFoodSearch3, // Updated Type
-        onLog: (@Sendable (String) -> Void)?
-    ) async -> MealPlanPreviewItem? {
-        let resolvedInfo = await self.resolveFoodConcept(
-            smartSearch: smartSearch,
-            conceptName: component.name,
-            mealContext: mealContext,
-            relevantPrompts: relevantPrompts,
-            onLog: onLog
-        )
-        
-        guard let info = resolvedInfo else {
-            onLog?("    - ⚠️ No match for '\(component.name)'. Skipping.")
-            return nil
-        }
-        
-        let ctx = ModelContext(self.container)
-        guard let food = ctx.model(for: info.persistentID) as? FoodItem else {
-            onLog?("    - ⚠️ Could not materialize FoodItem with ID \(info.persistentID) for '\(component.name)'. Skipping.")
-            return nil
-        }
-        
-        let gramsValue = component.grams > 0 ? component.grams : 100.0
-        return MealPlanPreviewItem(
-            name: info.resolvedName,
-            grams: gramsValue,
-            kcal: food.calories(for: gramsValue)
-        )
-    }
-    
-    
-    @MainActor
+
     private func aiInterpretUserPrompts(
         prompts: [String],
         includedFoods: [String],
@@ -2727,7 +1589,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
                               - evening/dinnertime/for dinner   => "Dinner"
                            5) If the prompt mentions specific days (e.g., “on Day 1”, “on Monday”, “weekends”), prefer structuralRequest and encode the constraint in natural language (do NOT invent new JSON fields).
                            6) If the prompt uses negation (“no”, “avoid”, “without”, “exclude”), use structuralRequest that begins with “Exclude …”.
-                
+
                            EXAMPLES (General)
                            - "I want to have no more than 50 grams of fats per day"
                              => { "numericalGoal": { "nutrient": "fat", "constraint": "lessThan", "value": 50 } }
@@ -2775,7 +1637,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
             
             USER PROMPT: "\(prompt)"
             """
-            
+
             var telemetryRespondStartedAt: UInt64?
             var telemetryRespondRecorded = false
             do {
@@ -2875,20 +1737,6 @@ public final class USDAWeeklyMealPlanner: Sendable {
         smartSearch: SmartFoodSearch3, // Updated Type
         onLog: (@Sendable (String) -> Void)?
     ) async {
-        func containsExcluded(_ text: String?) -> String? {
-            guard let t = text?.lowercased(), !t.isEmpty else { return nil }
-            for raw in excludedFoods {
-                let ex = raw.lowercased()
-                if ex.contains(" ") {
-                    if t.contains(ex) { return raw }
-                } else {
-                    let pattern = "(^|\\W)\(NSRegularExpression.escapedPattern(for: ex))s?(\\W|$)"
-                    if t.range(of: pattern, options: .regularExpression) != nil { return raw }
-                }
-            }
-            return nil
-        }
-        
         func shouldDropMetaInstruction(_ text: String) -> Bool {
             let t = text.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
             if t.isEmpty { return false }
@@ -2935,7 +1783,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
                 onLog?("  -> Unknown constraint '\(aiNumericalGoal.constraint)'; defaulting to 'exactly'.")
                 constraint = .exactly
             }
-            
+
             interpreted.numericalGoals.append(.init(nutrient: nutrient, constraint: constraint, value: aiNumericalGoal.value))
             return
         }
@@ -2955,14 +1803,11 @@ public final class USDAWeeklyMealPlanner: Sendable {
                 onLog?("  -> Skipping meta directive in frequency request: '\(fr.topic)'")
                 return
             }
-            if let banned = containsExcluded(fr.topic) {
-                onLog?("  -> ⚠️ Conflict: frequency request '\(fr.topic)' overlaps with a listed exclusion ('\(banned)'). Preferring the specific frequency for targeted meals and deferring conflict resolution to the global pass.")
-            }
             if await !isConcreteFoodName(fr.topic, smartSearch: smartSearch) {
                 interpreted.qualitativeGoals.append("Prefer \(fr.topic)")
                 return
             }
-            
+
             let sortedDays = daysAndMeals.keys.sorted()
             var daysToInclude: [Int] = []
             switch fr.frequency {
@@ -3008,11 +1853,6 @@ public final class USDAWeeklyMealPlanner: Sendable {
                 onLog?("  -> Skipping meta directive: '\(sr)'")
                 return
             }
-            if let banned = containsExcluded(sr), sr.lowercased().contains("must contain") {
-                sr = "Exclude \(banned) on all days"
-                interpreted.structuralRequests.append(sr)
-                return
-            }
             if let topic = sr.split(separator: " ").last.map(String.init),
                sr.lowercased().contains("must contain"),
                await !isConcreteFoodName(topic, smartSearch: smartSearch) {
@@ -3041,7 +1881,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
         return !ids.isEmpty
     }
     
-    private func deriveHardExcludes(from structural: [String]) -> [String] {
+    private func hardExclusionTerms(from structural: [String]) -> [String] {
         guard !structural.isEmpty else { return [] }
         var out = Set<String>()
         let patterns: [String] = [
@@ -3064,659 +1904,90 @@ public final class USDAWeeklyMealPlanner: Sendable {
         }
         return Array(out)
     }
-    
-    @available(iOS 26.0, *)
+
     @MainActor
-    private func generatePlanViaInterface(
-        session: LanguageModelSession,
-        prompt: String,
-        daysAndMeals: [Int: [String]]
-    ) async throws -> AIConceptualPlanResponse {
-        let count = max(1, min(7, daysAndMeals.keys.count))
-        let greedyOptions = GenerationOptions(sampling: .random(top: 50), temperature: 0.7)
-        try Task.checkCancellation()
-        let telemetryRespondStartedAt = PlannerTelemetry.isEnabled
-            ? DispatchTime.now().uptimeNanoseconds
-            : nil
-        do {
-            switch count {
-            case 1:
-                let r = try await session.respond(to: prompt, generating: AIConceptualPlanResponse1D.self, includeSchemaInPrompt: false, options: greedyOptions)
-                if let startedAt = telemetryRespondStartedAt {
-                    await PlannerTelemetry.shared.noteRespond(site: "generatePlanViaInterface", ok: true, ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000)
-                }
-                return AIConceptualPlanResponse(planName: r.content.planName, minAgeMonths: r.content.minAgeMonths, days: r.content.days)
-            case 2:
-                let r = try await session.respond(to: prompt, generating: AIConceptualPlanResponse2D.self, includeSchemaInPrompt: false, options: greedyOptions)
-                if let startedAt = telemetryRespondStartedAt {
-                    await PlannerTelemetry.shared.noteRespond(site: "generatePlanViaInterface", ok: true, ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000)
-                }
-                return AIConceptualPlanResponse(planName: r.content.planName, minAgeMonths: r.content.minAgeMonths, days: r.content.days)
-            case 3:
-                let r = try await session.respond(to: prompt, generating: AIConceptualPlanResponse3D.self, includeSchemaInPrompt: false, options: greedyOptions)
-                if let startedAt = telemetryRespondStartedAt {
-                    await PlannerTelemetry.shared.noteRespond(site: "generatePlanViaInterface", ok: true, ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000)
-                }
-                return AIConceptualPlanResponse(planName: r.content.planName, minAgeMonths: r.content.minAgeMonths, days: r.content.days)
-            case 4:
-                let r = try await session.respond(to: prompt, generating: AIConceptualPlanResponse4D.self, includeSchemaInPrompt: false, options: greedyOptions)
-                if let startedAt = telemetryRespondStartedAt {
-                    await PlannerTelemetry.shared.noteRespond(site: "generatePlanViaInterface", ok: true, ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000)
-                }
-                return AIConceptualPlanResponse(planName: r.content.planName, minAgeMonths: r.content.minAgeMonths, days: r.content.days)
-            case 5:
-                let r = try await session.respond(to: prompt, generating: AIConceptualPlanResponse5D.self, includeSchemaInPrompt: false, options: greedyOptions)
-                if let startedAt = telemetryRespondStartedAt {
-                    await PlannerTelemetry.shared.noteRespond(site: "generatePlanViaInterface", ok: true, ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000)
-                }
-                return AIConceptualPlanResponse(planName: r.content.planName, minAgeMonths: r.content.minAgeMonths, days: r.content.days)
-            case 6:
-                let r = try await session.respond(to: prompt, generating: AIConceptualPlanResponse6D.self, includeSchemaInPrompt: false, options: greedyOptions)
-                if let startedAt = telemetryRespondStartedAt {
-                    await PlannerTelemetry.shared.noteRespond(site: "generatePlanViaInterface", ok: true, ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000)
-                }
-                return AIConceptualPlanResponse(planName: r.content.planName, minAgeMonths: r.content.minAgeMonths, days: r.content.days)
-            default:
-                let r = try await session.respond(to: prompt, generating: AIConceptualPlanResponse7D.self, includeSchemaInPrompt: false, options: greedyOptions)
-                if let startedAt = telemetryRespondStartedAt {
-                    await PlannerTelemetry.shared.noteRespond(site: "generatePlanViaInterface", ok: true, ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000)
-                }
-                return AIConceptualPlanResponse(planName: r.content.planName, minAgeMonths: r.content.minAgeMonths, days: r.content.days)
-            }
-        } catch {
-            if let startedAt = telemetryRespondStartedAt {
-                await PlannerTelemetry.shared.noteRespond(
-                    site: "generatePlanViaInterface",
-                    ok: false,
-                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
-                )
-            }
-            throw error
-        }
-        
-    }
-    
-    private func detectPreferredMealForIncludedFoods(
+    private func makePlannerExclusions(
+        extractedTerms: [String],
         structuralRequests: [String],
-        daysAndMeals: [Int: [String]]
-    ) -> String? {
-        guard !structuralRequests.isEmpty else { return nil }
-        let requestedMealsCI: [String: String] = {
-            var map: [String: String] = [:]
-            for arr in daysAndMeals.values {
-                for m in arr { map[m.lowercased()] = m }
+        smartSearch: SmartFoodSearch3,
+        context: ModelContext
+    ) async -> PlannerConceptExclusions {
+        var orderedTerms = extractedTerms
+        orderedTerms.append(contentsOf: hardExclusionTerms(from: structuralRequests))
+        orderedTerms.append("Alcohol")
+
+        var seenTerms = Set<String>()
+        orderedTerms = orderedTerms.filter { term in
+            let normalized = AyurvedaRules.modifierTokens(term)
+                .joined(separator: " ")
+            return !normalized.isEmpty && seenTerms.insert(normalized).inserted
+        }
+
+        var concepts = Set<String>()
+        var explicitFoodIDs = Set<Int>()
+        var exactTerms = Set<String>()
+        for term in orderedTerms {
+            let normalized = AyurvedaRules.modifierTokens(term)
+                .joined(separator: " ")
+            exactTerms.insert(normalized)
+            if let concept = FoodConcepts.shared.conceptID(for: term) {
+                concepts.insert(concept)
+            } else if let food = await resolveCompactCandidate(
+                named: term,
+                smartSearch: smartSearch
+            ) {
+                explicitFoodIDs.insert(food.id)
             }
-            return map
-        }()
-        
-        func mapSynonym(_ text: String) -> String? {
-            let l = text.lowercased()
-            if l.contains("morning")    { return requestedMealsCI["breakfast"] }
-            if l.contains("noon") || l.contains("lunchtime") { return requestedMealsCI["lunch"] }
-            if l.contains("evening") || l.contains("dinnertime") { return requestedMealsCI["dinner"] }
+        }
+
+        let seededFoodIDs = Set(
+            ((try? context.fetch(FetchDescriptor<AyurvedaProfile>())) ?? [])
+                .map(\.foodId)
+        )
+        return PlannerConceptExclusions(
+            concepts: concepts,
+            explicitFoodIDs: explicitFoodIDs,
+            exactTerms: exactTerms,
+            seededFoodIDs: seededFoodIDs,
+            promptTerms: orderedTerms
+        )
+    }
+
+    @MainActor
+    private func resolveCompactCandidate(
+        named name: String,
+        smartSearch: SmartFoodSearch3
+    ) async -> CompactFoodItem? {
+        let ontologyAliases = FoodConcepts.shared.resolutionAliases
+        let queries = PlannerDeterministicFoodResolver.queries(
+            for: name,
+            ontologyAliases: ontologyAliases
+        )
+        var candidatesByID: [Int: CompactFoodItem] = [:]
+        for query in queries {
+            for candidate in await smartSearch.searchCompact(
+                query: query,
+                limit: 120
+            ) {
+                candidatesByID[candidate.id] = candidate
+            }
+        }
+        let scorerCandidates = candidatesByID.values.map {
+            PlannerResolutionCandidate(
+                id: $0.id,
+                name: $0.name,
+                isRecipe: $0.isRecipe,
+                tier: .estimated
+            )
+        }
+        guard let decision = PlannerDeterministicFoodResolver.resolve(
+            concept: name,
+            ontologyAliases: ontologyAliases,
+            candidates: scorerCandidates
+        ) else {
             return nil
         }
-        
-        for s in structuralRequests {
-            let l = s.lowercased()
-            if let hit = requestedMealsCI.first(where: { key, _ in l.contains(key) })?.value { return hit }
-            if let syn = mapSynonym(l) { return syn }
-        }
-        return nil
-    }
-    
-    @MainActor
-    private func derivePerMealCuisineFocus(
-        structuralRequests: [String],
-        daysAndMeals: [Int: [String]],
-        defaultTag: String
-    ) async -> [String: String] {
-        var mealNameSet = Set<String>()
-        for meals in daysAndMeals.values { for m in meals { mealNameSet.insert(m) } }
-        let mealNames = Array(mealNameSet)
-        guard !mealNames.isEmpty else { return [:] }
-        
-        let structureBlock = mealNames.sorted().joined(separator: ", ")
-        let requestsBlock = structuralRequests.isEmpty ? "(none)" : structuralRequests.joined(separator: "\n- ")
-        let globalTag = defaultTag.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "any" : defaultTag.lowercased()
-        
-        let instructions = Instructions {
-            """
-            You are a culinary planner. Assign ONE cuisine tag per meal name from the plan structure.
-            Rules:
-            - Use short, lowercase cuisine tags.
-            - If the meal should follow the global tag, use "any".
-            - Do NOT invent or duplicate meals. Cover each meal exactly once.
-            - Avoid cross-cuisine mixing within a meal.
-            - Base decisions on the structural requests and typical cultural associations of named dishes.
-            """
-        }
-        let session = LanguageModelSession(instructions: instructions)
-        if PlannerTelemetry.isEnabled {
-            await PlannerTelemetry.shared.noteSession(site: "derivePerMealCuisineFocus")
-        }
-        let prompt = """
-        PLAN STRUCTURE — MEAL NAMES:
-        \(structureBlock)
-        
-        GLOBAL CUISINE TAG (fallback if unspecified): \(globalTag)
-        
-        STRUCTURAL REQUESTS:
-        - \(requestsBlock)
-        
-        TASK:
-        Return a mapping from meal name → single cuisine tag as an array per the schema.
-        """
-        
-        var telemetryRespondStartedAt: UInt64?
-        var telemetryRespondRecorded = false
-        do {
-            try Task.checkCancellation()
-            if PlannerTelemetry.isEnabled {
-                telemetryRespondStartedAt = DispatchTime.now().uptimeNanoseconds
-            }
-            let resp = try await session.respond(
-                to: prompt,
-                generating: AIPerMealCuisineFocusResponse.self,
-                includeSchemaInPrompt: true,
-                options: GenerationOptions(sampling: .greedy)
-            ).content
-            if let startedAt = telemetryRespondStartedAt {
-                await PlannerTelemetry.shared.noteRespond(
-                    site: "derivePerMealCuisineFocus",
-                    ok: true,
-                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
-                )
-                telemetryRespondRecorded = true
-            }
-            try Task.checkCancellation()
-            var out: [String:String] = [:]
-            let valid = Set(mealNames.map { $0.lowercased() })
-            for pair in resp.focus {
-                try Task.checkCancellation()
-                let meal = pair.meal
-                let cuisine = pair.cuisine.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-                if valid.contains(meal.lowercased()), !cuisine.isEmpty {
-                    out[meal] = cuisine
-                }
-            }
-            try Task.checkCancellation()
-            if globalTag != "any" {
-                for m in mealNames where out[m] == nil { out[m] = globalTag }
-            }
-            return out
-        } catch {
-            if let startedAt = telemetryRespondStartedAt, !telemetryRespondRecorded {
-                await PlannerTelemetry.shared.noteRespond(
-                    site: "derivePerMealCuisineFocus",
-                    ok: false,
-                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
-                )
-            }
-            var out: [String:String] = [:]
-            if globalTag != "any" {
-                for m in mealNames { out[m] = globalTag }
-            }
-            return out
-        }
-    }
-    
-    @MainActor
-    private func aiGenerateFoodPalette(
-        profile: Profile,
-        cuisineTag: String,
-        includedFoods: [String] = [],
-        structuralRequests: [String] = [],
-        mustContainRules: [MustContainRule] = [],
-        relatedTopics: [String] = [],
-        smartSearch: SmartFoodSearch3, // Updated Type
-        onLog: (@Sendable (String) -> Void)?
-    ) async throws -> [String] {
-        onLog?("  -> Generating a dynamic food palette...")
-        
-        var focusSignals = Set<String>()
-        for f in includedFoods { let v = f.trimmingCharacters(in: .whitespacesAndNewlines); if !v.isEmpty { focusSignals.insert(v) } }
-        for r in mustContainRules { let v = r.topic.trimmingCharacters(in: .whitespacesAndNewlines); if !v.isEmpty { focusSignals.insert(v) } }
-        for t in relatedTopics { let v = t.trimmingCharacters(in: .whitespacesAndNewlines); if !v.isEmpty { focusSignals.insert(v) } }
-        
-        let structuralBlock: String = {
-            guard !structuralRequests.isEmpty else { return "(none)" }
-            return structuralRequests.prefix(12).joined(separator: "\n- ")
-        }()
-        
-        let userProfileSection = """
-        --- USER PROFILE ---
-        - Primary Goal: \(profile.goal?.title ?? "General Wellness")
-        - Diets: \(profile.diets.isEmpty ? "None" : profile.diets.map { $0.name }.joined(separator: ", "))
-        - Allergies (CRITICAL): \(profile.allergens.isEmpty ? "None" : profile.allergens.map { $0.rawValue }.joined(separator: ", "))
-        """
-        
-        let focusTargetsLine = focusSignals.isEmpty ? "(none)" : focusSignals.joined(separator: ", ")
-        
-        let prompt = """
-        \(userProfileSection)
-        --- CONTEXT FROM USER PROMPTS (do not invent foods; use only as guidance) ---
-        • Cuisine focus (HIGH): \(cuisineTag)
-        • Focus targets (from user's own words: included foods, must‑contain, headwords): \(focusTargetsLine)
-        • Structural/placement hints (for pairing ideas):
-        - \(structuralBlock)
-        """
-        
-        let session = LanguageModelSession(instructions: Instructions {
-            """
-            TASK:
-              You are building a *palette* of concrete foods to feed a meal‑plan generator.
-              Use BOTH the cuisine focus and the user's own focus targets to bias the list.
-            
-              Produce **25–30 distinct, USDA‑like food names** (single items or established dishes) that:
-                • Are culturally consistent with the cuisine focus, AND
-                • Include a balanced mix of:
-                    – **Variants** of any explicitly requested foods only when the prompt implies variety (e.g., "different types/varieties/kinds").
-                    – **Compatible pairings** that are commonly served with those foods within the cuisine (e.g., traditional drinks, dairy accompaniments, breads, salads, spreads, soups, or sweets). These must be *stand‑alone items*, not fabricated by prefixing the requested food name.
-                • Strictly respect the user's diets/allergies.
-            
-              STRICT NAMING RULES (very important):
-                • Use specific USDA‑style names.
-                • **NEVER** fabricate hybrids by prepending or appending the focus target to a generic noun.
-                • Only include the target term in the name if it is part of a well-established, authentic dish name in that cuisine.
-                • Do **not** output pure spices/herbs/condiments as standalone items. They may appear within a dish name, but not alone.
-                • Avoid duplicates and trivial morphological variants.
-            """
-        })
-        if PlannerTelemetry.isEnabled {
-            await PlannerTelemetry.shared.noteSession(site: "aiGenerateFoodPalette")
-        }
-        try Task.checkCancellation()
-        let options = GenerationOptions(sampling: .greedy)
-        let response = try await {
-            let startedAt = PlannerTelemetry.isEnabled
-                ? DispatchTime.now().uptimeNanoseconds
-                : nil
-            do {
-                let response = try await session.respond(
-                    to: prompt,
-                    generating: AIFoodPaletteResponse.self,
-                    includeSchemaInPrompt: true,
-                    options: options
-                )
-                if let startedAt {
-                    await PlannerTelemetry.shared.noteRespond(
-                        site: "aiGenerateFoodPalette",
-                        ok: true,
-                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
-                    )
-                }
-                return response
-            } catch {
-                if let startedAt {
-                    await PlannerTelemetry.shared.noteRespond(
-                        site: "aiGenerateFoodPalette",
-                        ok: false,
-                        ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
-                    )
-                }
-                throw error
-            }
-        }()
-        try Task.checkCancellation()
-        let raw = response.content.foodExamples
-        
-        let validateSession = LanguageModelSession(instructions: Instructions {
-            """
-            ROLE: You validate candidate food names for a cuisine palette.
-            RULES (critical):
-            - Keep only established dishes or discrete foods that could appear as standalone items in a meal plan for the given cuisine.
-            - Do NOT include pure spices/herbs/condiments as standalone items.
-            - Do NOT include fabricated hybrids that merely attach a focus token (if any) to a generic class (e.g., "<focus> salad/pasta/risotto/bread/soup" etc.).
-            - Preserve names exactly as provided; do not rewrite or translate.
-            - Return 18–30 items.
-            OUTPUT: `foodExamples` as an array of strings using only items from the input list.
-            """
-        })
-        if PlannerTelemetry.isEnabled {
-            await PlannerTelemetry.shared.noteSession(site: "aiGenerateFoodPalette")
-        }
-        try Task.checkCancellation()
-        let validationPrompt = """
-        CUISINE: \(cuisineTag)
-        FOCUS TARGETS (may be empty): \(focusTargetsLine)
-        CANDIDATE ITEMS (choose a clean subset, no rewrites):
-        \(raw.map { "- \($0)" }.joined(separator: "\n"))
-        """
-        
-        var validatedList: [String]
-        var telemetryRespondStartedAt: UInt64?
-        var telemetryRespondRecorded = false
-        do {
-            try Task.checkCancellation()
-            if PlannerTelemetry.isEnabled {
-                telemetryRespondStartedAt = DispatchTime.now().uptimeNanoseconds
-            }
-            let validatedResp = try await validateSession.respond(
-                to: validationPrompt,
-                generating: AIFoodPaletteResponse.self,
-                includeSchemaInPrompt: true,
-                options: GenerationOptions(sampling: .greedy)
-            )
-            if let startedAt = telemetryRespondStartedAt {
-                await PlannerTelemetry.shared.noteRespond(
-                    site: "aiGenerateFoodPalette",
-                    ok: true,
-                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
-                )
-                telemetryRespondRecorded = true
-            }
-            try Task.checkCancellation()
-            validatedList = validatedResp.content.foodExamples
-            try Task.checkCancellation()
-        } catch {
-            if let startedAt = telemetryRespondStartedAt, !telemetryRespondRecorded {
-                await PlannerTelemetry.shared.noteRespond(
-                    site: "aiGenerateFoodPalette",
-                    ok: false,
-                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
-                )
-            }
-            onLog?("  -> ⚠️ Palette validation failed: \(error.localizedDescription). Using raw items.")
-            validatedList = raw
-        }
-        
-        var seen = Set<String>()
-        var final: [String] = []
-        
-        let groundingContext = "Grounding food palette items for cuisine: \(cuisineTag). Focus: \(focusSignals.joined(separator: ", "))"
-        
-        for name in validatedList {
-            try Task.checkCancellation()
-            let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
-            guard !trimmed.isEmpty else { continue }
-            let key = trimmed.lowercased()
-            guard seen.insert(key).inserted else { continue }
-            let tokenizedWords = FoodItem.makeTokens(from: trimmed)
-            try Task.checkCancellation()
-            
-            // Using local smartSearch
-            let ids = await smartSearch.searchFoodsAI(
-                query: trimmed,
-                limit: 1,
-                context: groundingContext,
-                requiredHeadwords: tokenizedWords
-            )
-            try Task.checkCancellation()
-            if !ids.isEmpty { final.append(trimmed) }
-            if final.count >= 30 { break }
-        }
-        
-        if final.count < 12 {
-            for name in raw where final.count < 30 {
-                try Task.checkCancellation()
-                let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
-                guard !trimmed.isEmpty else { continue }
-                let key = trimmed.lowercased()
-                guard !seen.contains(key) else { continue }
-                let tokenizedWords = FoodItem.makeTokens(from: trimmed)
-                try Task.checkCancellation()
-                let ids = await smartSearch.searchFoodsAI(
-                    query: trimmed,
-                    limit: 1,
-                    context: groundingContext,
-                    requiredHeadwords: tokenizedWords
-                )
-                try Task.checkCancellation()
-                if !ids.isEmpty { seen.insert(key); final.append(trimmed) }
-            }
-        }
-        
-        onLog?("  -> Dynamic palette created with \(final.count) items.\n🔎 LLM build prompt:\n\(prompt)\n🔎 LLM validation accepted \(validatedList.count) candidate(s).\n\(final)")
-        return final
-    }
-    
-    @MainActor
-    private func remapDuplicateDays(
-        _ plan: AIConceptualPlanResponse,
-        requested: [Int: [String]],
-        onLog: (@Sendable (String) -> Void)?
-    ) -> AIConceptualPlanResponse {
-        var out = plan
-        let requestedDays = requested.keys.sorted()
-        guard !requestedDays.isEmpty else { return out }
-        
-        let currentDays = out.days.map { $0.day }
-        if Set(currentDays) == Set(requestedDays), currentDays.count == requestedDays.count {
-            return out
-        }
-        
-        var idx = 0
-        for i in 0..<out.days.count where idx < requestedDays.count {
-            let meals = out.days[i].meals
-            out.days[i] = ConceptualDay(day: requestedDays[idx], meals: meals)
-            idx += 1
-        }
-        onLog?("🔧 Remapped duplicate/invalid day indices to requested set: \(requestedDays)")
-        return out
-    }
-    
-    /// Helper function to identify topics that are exclusively requested for breakfast.
-    private func findBreakfastOnlyTopics(from requests: [String]) -> [String] {
-        var topicMealMap: [String: Set<String>] = [:]
-        
-        let pattern = #"\b(?:include|contain|have)\s+([^,.\n]+?)\s+at\s+(Breakfast|Lunch|Dinner)\b"#
-        guard let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) else { return [] }
-        
-        for req in requests {
-            let nsRange = NSRange(req.startIndex..<req.endIndex, in: req)
-            regex.enumerateMatches(in: req, options: [], range: nsRange) { match, _, _ in
-                guard let match = match, match.numberOfRanges == 3 else { return }
-                
-                guard let topicRange = Range(match.range(at: 1), in: req),
-                      let mealRange = Range(match.range(at: 2), in: req) else { return }
-                
-                // Extract and clean the topic, removing "different types of" etc.
-                var topic = String(req[topicRange]).trimmingCharacters(in: .whitespaces)
-                if let range = topic.range(of: #"(?:different\s+types\s+of|different\s+kinds\s+of|a\s+|an\s+)\s+"#, options: .regularExpression) {
-                    topic.removeSubrange(range)
-                }
-                
-                let meal = String(req[mealRange]).lowercased()
-                
-                if !topic.isEmpty {
-                    topicMealMap[topic.lowercased(), default: []].insert(meal)
-                }
-            }
-        }
-        
-        return topicMealMap.compactMap { (topic, meals) in
-            // Return topic if it ONLY appears in the context of breakfast
-            return meals == ["breakfast"] ? topic : nil
-        }
-    }
-    
-    
-    @MainActor
-    private func generateFullPlanWithAI(
-        profile: Profile,
-        daysAndMeals: [Int: [String]],
-        interpretedPrompts: InterpretedPrompts,
-        foodPalettesByContext: [(kind: String, tag: String, foods: [String], associatedCuisine: String?)],
-        includedFoods: [String],
-        specificVariantPlacements: [String],
-        excludedFoods: [String],
-        cuisineTag: String,
-        onLog: (@Sendable (String) -> Void)?
-    ) async throws -> AIConceptualPlanResponse {
-        // ... (кодът за alcoholKeywords и excludedFoodsAugmented остава същият) ...
-        let alcoholKeywords: [String] = [
-            "alcohol","beer","wine","vodka","whiskey","whisky","rum","gin","tequila","brandy",
-            "liqueur","liquor","cider","sake","soju","rakia","rakija","ouzo","vermouth","champagne",
-            "prosecco","cava","mead","port","sherry","cocktail","spritzer","aperitif","digestif",
-            "ale","lager","stout","ipa","pilsner","hard seltzer"
-        ]
-        let excludedFoodsAugmented: [String] = {
-            var seen = Set<String>()
-            var list: [String] = []
-            for x in (excludedFoods + alcoholKeywords) {
-                let key = x.lowercased()
-                if seen.insert(key).inserted { list.append(x) }
-            }
-            return list
-        }()
-        if excludedFoodsAugmented.count != excludedFoods.count {
-            onLog?("  -> Alcohol ban: added \(excludedFoodsAugmented.count - excludedFoods.count) keyword(s) to forbidden foods.")
-        }
-        try Task.checkCancellation()
-        // --- START OF CHANGE ---
-        func buildUserPrompt(excludedLimit: Int) -> String {
-            let qualitativeGoalsSection = interpretedPrompts.qualitativeGoals.isEmpty ? "None." : "- " + interpretedPrompts.qualitativeGoals.joined(separator: "\n- ")
-            let excludedFoodsSection = excludedFoodsAugmented.prefix(excludedLimit).isEmpty ? "None." : "- " + excludedFoodsAugmented.prefix(excludedLimit).joined(separator: "\n- ")
-            
-            // 1. Определяме демографската група на потребителя
-            let demographic = determineDemographic(for: profile)
-            var nutritionalTargetPrompts: [String] = []
-            
-            // 2. Итерираме през приоритетните витамини и намираме техните изисквания
-            for vitamin in profile.priorityVitamins {
-                if let req = vitamin.requirements.first(where: { $0.demographic == demographic }) {
-                    var promptLine = "- \(vitamin.name): Aim for at least \(req.dailyNeed) \(vitamin.unit)."
-                    if let upperLimit = req.upperLimit {
-                        promptLine += " The upper limit is \(upperLimit) \(vitamin.unit)."
-                    }
-                    nutritionalTargetPrompts.append(promptLine)
-                }
-            }
-            
-            // 3. Итерираме през приоритетните минерали и намираме техните изисквания
-            for mineral in profile.priorityMinerals {
-                if let req = mineral.requirements.first(where: { $0.demographic == demographic }) {
-                    var promptLine = "- \(mineral.name): Aim for at least \(req.dailyNeed) \(mineral.unit)."
-                    if let upperLimit = req.upperLimit {
-                        promptLine += " The upper limit is \(upperLimit) \(mineral.unit)."
-                    }
-                    nutritionalTargetPrompts.append(promptLine)
-                }
-            }
-            
-            // 4. Създаваме новата секция за промпта
-            let nutritionalTargetsSection = nutritionalTargetPrompts.isEmpty
-            ? ""
-            : """
-                --- NUTRITIONAL TARGETS (daily) ---
-                Strive to meet these daily goals by including foods rich in these nutrients:
-                \(nutritionalTargetPrompts.joined(separator: "\n"))
-                """
-            
-            // 5. Включваме новата секция в основния промпт
-            return """
-            --- USER PROFILE & GOALS ---
-            - Goal: \(profile.goal?.title ?? "General Wellness")
-            - Diets: \(profile.diets.isEmpty ? "None" : profile.diets.map { $0.name }.joined(separator: ", "))
-            - Allergies (CRITICAL): \(profile.allergens.isEmpty ? "None" : profile.allergens.map { $0.rawValue }.joined(separator: ", "))
-            - Forbidden Foods (CRITICAL):\n\(excludedFoodsSection)
-            \(nutritionalTargetsSection)
-            --- GENERAL PREFERENCES & REQUESTS ---
-            \(qualitativeGoalsSection)
-            --- OTHER INCLUDED FOODS (use these flexibly if they fit) ---
-            \(includedFoods.isEmpty ? "None." : "- " + includedFoods.joined(separator: "\n- "))
-            """
-        }
-        // --- END OF CHANGE ---
-        
-        // ... (останалата част от функцията 'generateFullPlanWithAI' остава непроменена) ...
-        func buildRules(palettes: [(kind: String, tag: String, foods: [String], associatedCuisine: String?)], daysAndMeals: [Int: [String]]) -> String {
-            let planStructureBlock = daysAndMeals.keys.sorted().map { "Day \($0): [\((daysAndMeals[$0] ?? []).joined(separator: ", "))]" }.joined(separator: "\n")
-            
-            var palettePromptSection = ""
-            var headwordAssociationRules = ""
-            
-            for p in palettes {
-                if p.kind == "cuisine" {
-                    palettePromptSection += "\n--- FOOD PALETTE for Cuisine '\(p.tag.capitalized)' ---\n- \(p.foods.joined(separator: ", "))\n"
-                } else if p.kind == "headword", let assocCuisine = p.associatedCuisine, !assocCuisine.isEmpty {
-                    palettePromptSection += "\n--- FOOD PALETTE for Headword '\(p.tag.capitalized)' ---\n- \(p.foods.joined(separator: ", "))\n"
-                    headwordAssociationRules += "- Any meal containing a food from the '\(p.tag.capitalized)' palette (like '\(p.tag)') MUST have its other components chosen from the '\(assocCuisine.capitalized)' cuisine palette.\n"
-                }
-            }
-            
-            let mandatoryPlacements = specificVariantPlacements + interpretedPrompts.structuralRequests
-            let mandatoryPlacementsSection = mandatoryPlacements.isEmpty
-            ? ""
-            : """
-            --- MANDATORY PLACEMENT RULES (HIGHEST PRIORITY) ---
-            You MUST follow these rules exactly. They are not suggestions and override all other contextual hints.
-            - \(mandatoryPlacements.joined(separator: "\n- "))
-            """
-            
-            // **NEW**: Always forbid alcohol; also add negative constraints for breakfast-only foods
-            let breakfastOnly = findBreakfastOnlyTopics(from: mandatoryPlacements)
-            let alcoholBanLine = "- Alcohol is strictly forbidden in all meals. Do NOT include alcoholic beverages or dishes containing alcohol (e.g., \(alcoholKeywords.joined(separator: ", ")))."
-            let negativeConstraintSection: String
-            if !breakfastOnly.isEmpty {
-                negativeConstraintSection = """
-                --- CRITICAL NEGATIVE CONSTRAINTS (HIGHEST PRIORITY) ---
-                \(alcoholBanLine)
-                - The following topics and any variants containing these words MUST ONLY appear in Breakfast meals. Do NOT use them in Lunch or Dinner: \(breakfastOnly.joined(separator: ", ")).
-                """
-            } else {
-                negativeConstraintSection = """
-                --- CRITICAL NEGATIVE CONSTRAINTS (HIGHEST PRIORITY) ---
-                \(alcoholBanLine)
-                """
-            }
-            
-            return """
-            \(mandatoryPlacementsSection)
-            \(negativeConstraintSection)
-            
-            --- CORE DIRECTIVES (NON-NEGOTIABLE) ---
-            1.  **Plan Structure**: Generate a plan for the EXACT days and meals specified:
-                \(planStructureBlock)
-            2.  **Meal Naming**: The `name` field MUST EXACTLY match a name from the structure (e.g., "Breakfast"). Use `descriptiveTitle` for creative names.
-            3.  **Mandatory Composition**: Each meal MUST contain between 3 and 5 components. This is a strict requirement.
-            
-            --- CRITICAL CONTEXTUAL COMPOSITION RULE ---
-            - **NO FUSION**: Each component `name` MUST be a SINGLE item chosen from the food palettes. Do not invent dishes by combining names.
-            - **CONTEXTUAL INTEGRITY**: You MUST follow these rules for combining palettes:
-            \(headwordAssociationRules.isEmpty ? "  - General meals should draw from any relevant cuisine palette." : headwordAssociationRules)
-            - For meals with a specific theme mentioned in the placement rules, you MUST prioritize foods from that specific cuisine's palette.
-            
-            --- FOOD PALETTES ---
-            \(palettePromptSection)
-            
-            --- STRICT VARIETY RULES ---
-            - **CRITICAL: NO MEAL REPETITION**: For any given meal name across days, the set of component names MUST differ by at least two components.
-            - **MAIN MAY REPEAT ONLY IF REQUESTED**: If the same main is explicitly requested in the MANDATORY PLACEMENT RULES, you MUST fulfill that request but vary at least two other components each day.
-            - **NO COPY/PASTE LISTS**: Re-using the same component list (even in a different order) is not allowed.
-            
-            --- IMPORTANT NOTE ABOUT EXAMPLES ---
-            - Do not copy any example tokens from these instructions. Treat any examples as placeholders only; never include them verbatim in outputs.
-            """
-        }
-        
-        do {
-            try Task.checkCancellation()
-            let rules1 = buildRules(palettes: foodPalettesByContext, daysAndMeals: daysAndMeals)
-            try Task.checkCancellation()
-            let session1 = LanguageModelSession(instructions: Instructions { rules1 })
-            if PlannerTelemetry.isEnabled {
-                await PlannerTelemetry.shared.noteSession(site: "generateFullPlanWithAI")
-            }
-            try Task.checkCancellation()
-            let prompt1 = buildUserPrompt(excludedLimit: 24)
-            try Task.checkCancellation()
-            onLog?("  -> Sending contextual prompt to AI for full plan generation...")
-            let rawPlan = try await generatePlanViaInterface(session: session1, prompt: prompt1, daysAndMeals: daysAndMeals)
-            try Task.checkCancellation()
-            return rawPlan // Purging is now part of the consolidated polish function
-        } catch {
-            onLog?("  -> ⚠️ Main generation attempt failed: \(error.localizedDescription). Retrying with minimal prompt.")
-            let rules2 = buildRules(palettes: [], daysAndMeals: daysAndMeals)
-            let session2 = LanguageModelSession(instructions: Instructions { rules2 })
-            if PlannerTelemetry.isEnabled {
-                await PlannerTelemetry.shared.noteSession(site: "generateFullPlanWithAI")
-            }
-            let prompt2 = buildUserPrompt(excludedLimit: 12)
-            let rawPlan = try await generatePlanViaInterface(session: session2, prompt: prompt2, daysAndMeals: daysAndMeals)
-            return rawPlan // Purging is now part of the consolidated polish function
-        }
+        return candidatesByID[decision.candidate.id]
     }
     
     private func buildMustContainRules(
@@ -3793,34 +2064,6 @@ public final class USDAWeeklyMealPlanner: Sendable {
         return out
     }
     
-    @MainActor
-    private func removeBannedCuisineKeywords(
-        plan: AIConceptualPlanResponse,
-        bannedKeywords: [String],
-        onLog: (@Sendable (String) -> Void)?
-    ) -> AIConceptualPlanResponse {
-        guard !bannedKeywords.isEmpty else { return plan }
-        var out = plan
-        let bans = bannedKeywords.map { $0.lowercased() }
-        for d in 0..<out.days.count {
-            for m in 0..<out.days[d].meals.count {
-                var comps = out.days[d].meals[m].components
-                let before = comps.count
-                comps.removeAll { c in
-                    let l = c.name.lowercased()
-                    return bans.contains { l.contains($0) }
-                }
-                if comps.count != before {
-                    let removed = before - comps.count
-                    onLog?("🧹 Removed \(removed) off-cuisine component(s) from Day \(out.days[d].day) • \(out.days[d].meals[m].name).")
-                    if comps.isEmpty { comps = [ConceptualComponent(name: "Greek Yogurt", grams: 180)] }
-                }
-                out.days[d].meals[m].components = comps
-            }
-        }
-        return out
-    }
-
     @MainActor
     private func adjustResolvedDayForGoals(
         dayIndex: Int,
@@ -3969,103 +2212,12 @@ public final class USDAWeeklyMealPlanner: Sendable {
     }
     
     @MainActor
-    private func ensureIncludedFoodsPlaced(
-        plan: AIConceptualPlanResponse,
-        includedFoods: [String],
-        targetMealName: String?,
-        wantVariants: Bool,
-        excludedFoods: [String],
-        daysAndMeals: [Int: [String]],
-        smartSearch: SmartFoodSearch3, // Updated Type
-        onLog: (@Sendable (String) -> Void)?
-    ) async -> AIConceptualPlanResponse {
-        guard !includedFoods.isEmpty else { return plan }
-        var out = plan
-        
-        let banned = Set(excludedFoods.map { $0.lowercased() })
-        func violatesExcluded(_ n: String) -> Bool { banned.contains { n.lowercased().contains($0) } }
-        
-        func targetMealIndex(forDay dIdx: Int) -> Int? {
-            let names = out.days[dIdx].meals.map { $0.name }
-            if let t = targetMealName,
-               let ix = names.firstIndex(where: { $0.caseInsensitiveCompare(t) == .orderedSame }) {
-                return ix
-            }
-            return names.indices.first
-        }
-        
-        let dayCount = out.days.count
-        var variantsPerFood: [String: [String]] = [:]
-        for base in includedFoods {
-            let clean = base.trimmingCharacters(in: .whitespacesAndNewlines)
-            guard !clean.isEmpty, !violatesExcluded(clean) else { continue }
-            if wantVariants && dayCount > 1 {
-                let v = await aiGenerateVariants(for: clean, count: dayCount, mealName: targetMealName, excludedFoods: excludedFoods, onLog: onLog)
-                variantsPerFood[clean.lowercased()] = v
-            } else {
-                variantsPerFood[clean.lowercased()] = Array(repeating: clean.capitalized, count: dayCount)
-            }
-        }
-        
-        func indexOfMainComponent(in meal: ConceptualMeal) -> Int? {
-            let candidates = meal.components.enumerated().filter { $0.element.grams >= 90 }
-            return candidates.max(by: { $0.element.grams < $1.element.grams })?.offset
-        }
-        
-        for dIdx in 0..<out.days.count {
-            guard let mIdx = targetMealIndex(forDay: dIdx) else { continue }
-            let dayNum = out.days[dIdx].day
-            
-            if targetMealName != nil {
-                for ix in 0..<out.days[dIdx].meals.count where ix != mIdx {
-                    let before = out.days[dIdx].meals[ix].components.count
-                    out.days[dIdx].meals[ix].components.removeAll { c in
-                        includedFoods.contains { inc in c.name.range(of: inc, options: .caseInsensitive) != nil }
-                    }
-                    let after = out.days[dIdx].meals[ix].components.count
-                    if after < before { onLog?("🧹 Removed included-food duplicates from Day \(dayNum) • \(out.days[dIdx].meals[ix].name).") }
-                }
-            }
-            
-            for (key, labels) in variantsPerFood {
-                let label = labels.indices.contains(dIdx) ? labels[dIdx] : (labels.first ?? key.capitalized)
-                var meal = out.days[dIdx].meals[mIdx]
-                
-                let alreadyThere = meal.components.contains { $0.name.range(of: key, options: .caseInsensitive) != nil }
-                if !alreadyThere {
-                    if await !isConcreteFoodName(label, smartSearch: smartSearch) {
-                        onLog?("⏭️ Skipped non-concrete included-food label ‘\(label)’ for Day \(dayNum) • \(meal.name).")
-                    } else if let mainIdx = indexOfMainComponent(in: meal) {
-                        meal.components[mainIdx] = ConceptualComponent(name: label, grams: max(120, meal.components[mainIdx].grams))
-                        onLog?("✅ Day \(dayNum) • \(meal.name): replaced main with ‘\(label)’.")
-                    } else {
-                        meal.components.append(ConceptualComponent(name: label, grams: 150))
-                        onLog?("✅ Day \(dayNum) • \(meal.name): appended ‘\(label)’.")
-                    }
-                }
-                
-                var seen: Set<String> = []
-                meal.components = meal.components.filter { c in
-                    let k = c.name.lowercased()
-                    if includedFoods.contains(where: { k.contains($0.lowercased()) }) {
-                        return seen.insert(k).inserted
-                    }
-                    return true
-                }
-                
-                out.days[dIdx].meals[mIdx] = meal
-            }
-        }
-        
-        return out
-    }
-    
-    @MainActor
     private func resolveFoodConcept(
         smartSearch: SmartFoodSearch3, // Updated Type
         conceptName: String,
         mealContext: ConceptualMeal,
         relevantPrompts: [String],
+        exclusions: PlannerConceptExclusions = .none,
         onLog: (@Sendable (String) -> Void)?
     ) async -> ResolvedFoodInfo? {
         onLog?("    - Resolving '\(conceptName)' in context of '\(mealContext.descriptiveTitle)'...")
@@ -4075,7 +2227,11 @@ public final class USDAWeeklyMealPlanner: Sendable {
             return nil
         }
 
-        let queries = PlannerDeterministicFoodResolver.queries(for: conceptName)
+        let ontologyAliases = FoodConcepts.shared.resolutionAliases
+        let queries = PlannerDeterministicFoodResolver.queries(
+            for: conceptName,
+            ontologyAliases: ontologyAliases
+        )
         guard !queries.isEmpty else {
             onLog?("    - ⚠️ Empty deterministic query for '\(conceptName)'.")
             return nil
@@ -4109,6 +2265,18 @@ public final class USDAWeeklyMealPlanner: Sendable {
         emitLog(
             "🚫 AyurvedaGate: AyurvedaGate active, "
                 + "\(beforeExclusionCount - candidatesByID.count) candidates filtered",
+            onLog: onLog
+        )
+        guard !candidatesByID.isEmpty else { return nil }
+
+        let beforeConceptExclusionCount = candidatesByID.count
+        let conceptFiltered = exclusions.filtering(Array(candidatesByID.values))
+        candidatesByID = Dictionary(
+            uniqueKeysWithValues: conceptFiltered.map { ($0.id, $0) }
+        )
+        emitLog(
+            "🚫 FoodConcepts: \(beforeConceptExclusionCount - candidatesByID.count) "
+                + "candidates excluded by canonical membership.",
             onLog: onLog
         )
         guard !candidatesByID.isEmpty else { return nil }
@@ -4149,6 +2317,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
 
         guard let decision = PlannerDeterministicFoodResolver.resolve(
             concept: conceptName,
+            ontologyAliases: ontologyAliases,
             candidates: scorerCandidates
         ) else {
             onLog?(
@@ -4179,30 +2348,6 @@ public final class USDAWeeklyMealPlanner: Sendable {
         )
     }
     
-    private func trimToRequestedDaysAndMeals(
-        plan: AIConceptualPlanResponse,
-        daysAndMeals: [Int: [String]],
-        onLog: (@Sendable (String) -> Void)?
-    ) -> AIConceptualPlanResponse {
-        var out = plan
-        let wantedDays = Set(daysAndMeals.keys)
-        out.days.removeAll { !wantedDays.contains($0.day) }
-        for i in 0..<out.days.count {
-            let day = out.days[i].day
-            let wantedMeals = daysAndMeals[day] ?? []
-            out.days[i].meals = out.days[i].meals
-                .filter { m in wantedMeals.contains { $0.caseInsensitiveCompare(m.name) == .orderedSame } }
-                .sorted { a, b in
-                    let ia = wantedMeals.firstIndex { $0.caseInsensitiveCompare(a.name) == .orderedSame } ?? .max
-                    let ib = wantedMeals.firstIndex { $0.caseInsensitiveCompare(b.name) == .orderedSame } ?? .max
-                    return ia < ib
-                }
-        }
-        onLog?("✅ Normalized to requested days/meals: kept days \(out.days.map{ $0.day }).")
-        return out
-    }
-    
-    // **MODIFIED**: This is the new, consolidated polishing function with context-aware trimming.
     @MainActor
         private func polishConceptualPlan(
             plan: AIConceptualPlanResponse,
@@ -4211,6 +2356,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
             rules: [MustContainRule],
             excludedFoods: [String],
             foodPalette: [String],
+            exclusions: PlannerConceptExclusions,
             smartSearch: SmartFoodSearch3,
             onLog: (@Sendable (String) -> Void)?
         ) async -> AIConceptualPlanResponse {
@@ -4218,11 +2364,30 @@ public final class USDAWeeklyMealPlanner: Sendable {
             onLog?("✨ Polishing conceptual plan (Rules, Trimming & AI Portion Control)...")
             
             // --- Start Helper Functions (scoped to polishing) ---
-            let excludedSet = Set(excludedFoods.map { $0.lowercased() })
-            
+            var namesToResolve = Set(foodPalette)
+            for day in polishedPlan.days {
+                for meal in day.meals {
+                    namesToResolve.formUnion(meal.components.map(\.name))
+                }
+            }
+            var excludedResolvedNames = Set<String>()
+            for name in namesToResolve.sorted() {
+                let normalized = AyurvedaRules.modifierTokens(name)
+                    .joined(separator: " ")
+                if exclusions.excludesUnresolvedName(name) {
+                    excludedResolvedNames.insert(normalized)
+                } else if let candidate = await resolveCompactCandidate(
+                    named: name,
+                    smartSearch: smartSearch
+                ), exclusions.excludes(candidate) {
+                    excludedResolvedNames.insert(normalized)
+                }
+            }
+
             func isExcluded(_ name: String) -> Bool {
-                let lower = name.lowercased()
-                return excludedSet.contains { lower.contains($0) }
+                excludedResolvedNames.contains(
+                    AyurvedaRules.modifierTokens(name).joined(separator: " ")
+                )
             }
             
             func isProtein(_ n: String) -> Bool {
@@ -4261,6 +2426,11 @@ public final class USDAWeeklyMealPlanner: Sendable {
                 if let all = try? ctx.fetch(descriptor) {
                     for f in all {
                         if (isSalad(f.name) || isFruit(f.name)) && !isExcluded(f.name)
+                            && !exclusions.excludes(
+                                foodID: f.id,
+                                diets: Set((f.diets ?? []).map(\.name)),
+                                allergens: Set((f.allergens ?? []).map(\.rawValue))
+                            )
                             && !excludedFoodIds.contains(f.id) {
                             sideCandidates.append(f.name)
                         }
@@ -4880,35 +3050,6 @@ public final class USDAWeeklyMealPlanner: Sendable {
             onLog?("    - ⚠️ Variant generation failed for \(baseDish): \(error.localizedDescription). Using generic labels.")
             return (0..<cleanCount).map { "\(baseDish) (variant \($0+1))" }
         }
-    }
-    
-    private func normalizeMealsToRequestedOrder(
-        plan: AIConceptualPlanResponse,
-        daysAndMeals: [Int: [String]],
-        onLog: (@Sendable (String) -> Void)?
-    ) -> AIConceptualPlanResponse {
-        var newPlan = plan
-        for dIdx in 0..<newPlan.days.count {
-            let dayNumber = newPlan.days[dIdx].day
-            guard let requested = daysAndMeals[dayNumber], !requested.isEmpty else { continue }
-            let currentMeals = newPlan.days[dIdx].meals
-            var normalized: [ConceptualMeal] = []
-            for (i, reqName) in requested.enumerated() {
-                if i < currentMeals.count {
-                    var m = currentMeals[i]
-                    if m.name.caseInsensitiveCompare(reqName) != .orderedSame {
-                        let newTitle = m.descriptiveTitle.isEmpty ? m.name : m.descriptiveTitle
-                        m = ConceptualMeal(name: reqName, descriptiveTitle: newTitle, components: m.components)
-                    }
-                    normalized.append(m)
-                } else {
-                    normalized.append(ConceptualMeal(name: reqName, descriptiveTitle: reqName, components: []))
-                }
-            }
-            newPlan.days[dIdx].meals = normalized
-        }
-        onLog?("✅ Normalized meal names to requested structure (Breakfast/Lunch/Dinner).")
-        return newPlan
     }
     
     private struct MustContainRule: Equatable, Hashable {

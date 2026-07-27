@@ -2,7 +2,7 @@
   "conceptsVersion": 1,
   "author": "director",
   "appliesTo": "all 14,484 foods (12,601 USDA + 383 placeholder + 1,500 recipes)",
-  "matching": "Reuse the modifiers.json normalization VERBATIM: lowercase, parentheticals stripped, split on whitespace/hyphen/slash/apostrophe, contiguous token-sequence match against the full normalized name. Additions for this file: (1) negativePhrases are evaluated BEFORE phrases and veto the match; (2) longest phrase wins on overlap; (3) suffix negation reuses SearchKnowledgeBase.suffixNegationTerms (free/zero/less) so 'gluten-free' never matches 'gluten'; (4) token-boundary only, NEVER substring.",
+  "matching": "Reuse the modifiers.json normalization VERBATIM: lowercase, parentheticals stripped, split on whitespace/hyphen/slash/apostrophe, contiguous token-sequence match against the full normalized name. Additions for this file: (1) negativePhrases are evaluated BEFORE phrases and veto the match; (2) longest phrase wins on overlap; (3) suffix negation reuses SearchKnowledgeBase.suffixNegationTerms (free/zero/less) so 'gluten-free' never matches 'gluten'; (4) token-boundary only, NEVER substring. (5) NEW IN rev4 — `vetoTokens`: a list of token GROUPS. If EVERY token in a group appears anywhere in the normalized name, in any order and not necessarily adjacent, the concept is vetoed for that row. This exists because USDA names invert ('Mushrooms, oyster' not 'oyster mushroom'), so contiguous-sequence negation is systematically unreliable against this catalogue. vetoTokens is evaluated BEFORE negativePhrases, which is evaluated before phrases. vetoTokens matching is PLURAL-TOLERANT: a token matches a catalogue token that is identical, or identical plus a trailing 's' — the same rule the phrase matcher uses. 'mushroom' MUST match 'mushrooms'. Explicit plurals are also enumerated below as belt-and-braces.",
   "authority": {
     "seededRows": "WE-8 ingredient-intersection derivation is AUTHORITATIVE for the 2,214 seeded rows. This file must NOT re-derive or override them. Its concept membership on those rows is used only for cross-validation (gate G12).",
     "usdaRows": "This file is the only concept source for the 12,601 plain USDA rows, which WE-8 does not touch.",
@@ -74,7 +74,9 @@
         "dairy free",
         "dairy-free",
         "non-dairy",
-        "nondairy"
+        "nondairy",
+        "custard apple",
+        "custard-apple"
       ],
       "allergen": "milk",
       "dietImplications": [
@@ -82,7 +84,57 @@
       ],
       "provenance": "curated",
       "confidence": 0.95,
-      "qualityState": "aiDraft"
+      "qualityState": "aiDraft",
+      "vetoTokens": [
+        [
+          "milk",
+          "thistle"
+        ],
+        [
+          "milks",
+          "thistles"
+        ],
+        [
+          "cream",
+          "tartar"
+        ],
+        [
+          "creams",
+          "tartars"
+        ],
+        [
+          "butter",
+          "peanut"
+        ],
+        [
+          "butters",
+          "peanuts"
+        ],
+        [
+          "butter",
+          "cocoa"
+        ],
+        [
+          "butters",
+          "cocoas"
+        ],
+        [
+          "butter",
+          "shea"
+        ],
+        [
+          "butters",
+          "sheas"
+        ],
+        [
+          "butter",
+          "apple"
+        ],
+        [
+          "butters",
+          "apples"
+        ]
+      ]
     },
     {
       "id": "egg",
@@ -110,7 +162,9 @@
         "egg-free",
         "egg substitute",
         "egg replacer",
-        "eggnog-flavored, non-dairy"
+        "eggnog-flavored, non-dairy",
+        "custard apple",
+        "custard-apple"
       ],
       "allergen": "eggs",
       "dietImplications": [
@@ -118,7 +172,23 @@
       ],
       "provenance": "curated",
       "confidence": 0.95,
-      "qualityState": "aiDraft"
+      "qualityState": "aiDraft",
+      "vetoTokens": [
+        [
+          "eggplant"
+        ],
+        [
+          "eggplants"
+        ],
+        [
+          "apple",
+          "custard"
+        ],
+        [
+          "apples",
+          "custards"
+        ]
+      ]
     },
     {
       "id": "gluten",
@@ -149,7 +219,13 @@
         "atta",
         "maida",
         "sooji",
-        "rava"
+        "rava",
+        "oat",
+        "oats",
+        "oatmeal",
+        "rolled oats",
+        "oat bran",
+        "oat flour"
       ],
       "negativePhrases": [
         "buckwheat",
@@ -162,7 +238,13 @@
         "rice flour",
         "corn flour",
         "malt, corn",
-        "malic"
+        "malic",
+        "gluten free oats",
+        "gluten-free oats",
+        "certified gluten free",
+        "ragi",
+        "ragi malt",
+        "malted milk"
       ],
       "allergen": "cerealsContainingGluten",
       "dietImplications": [
@@ -170,7 +252,29 @@
       ],
       "provenance": "curated",
       "confidence": 0.9,
-      "qualityState": "aiDraft"
+      "qualityState": "aiDraft",
+      "vetoTokens": [
+        [
+          "malt",
+          "corn"
+        ],
+        [
+          "malts",
+          "corns"
+        ],
+        [
+          "ragi"
+        ],
+        [
+          "ragis"
+        ],
+        [
+          "buckwheat"
+        ],
+        [
+          "buckwheats"
+        ]
+      ]
     },
     {
       "id": "soy",
@@ -269,7 +373,32 @@
         "praline",
         "nougat",
         "nut butter",
-        "mixed nuts"
+        "mixed nuts",
+        "almonds",
+        "cashews",
+        "walnuts",
+        "pecans",
+        "pistachios",
+        "hazelnuts",
+        "macadamias",
+        "brazil nuts",
+        "pine nuts",
+        "chestnuts",
+        "badam",
+        "kaju",
+        "pista",
+        "akhrot",
+        "chironji",
+        "coconut",
+        "coconut meat",
+        "desiccated coconut",
+        "coconut flour",
+        "coconut milk",
+        "coconut cream",
+        "coconut water",
+        "coconut oil",
+        "nariyal",
+        "copra"
       ],
       "negativePhrases": [
         "nutmeg",
@@ -278,12 +407,8 @@
         "doughnut",
         "donut",
         "nutritional yeast",
-        "coconut",
-        "peanut",
         "nut free",
-        "nut-free",
-        "nutrition",
-        "nutrient"
+        "nut-free"
       ],
       "allergen": "nuts",
       "dietImplications": [
@@ -292,7 +417,25 @@
       "provenance": "curated",
       "confidence": 0.88,
       "qualityState": "aiDraft",
-      "note": "CONTESTED, pending vaidya: coconut is currently EXCLUDED here (94 of 297 nut-flagged recipes are coconut-only per WE-8). FDA classifies coconut as a tree nut; coconut allergy is rare and immunologically distinct. Chestnut is INCLUDED but is low-allergenicity and may warrant separation."
+      "note": "DIRECTOR RULING (G12 triage): coconut is now INCLUDED, aligning with WE-8 and FDA classification. My original exclusion was the unsafe direction for an allergen — over-flagging costs a user ~94 coconut-only recipes, under-flagging can hurt them. A vaidya may relax this; until then it errs toward protection. Chestnut also included (see exclusion corpus rev2).",
+      "vetoTokens": [
+        [
+          "water",
+          "chestnut"
+        ],
+        [
+          "waters",
+          "chestnuts"
+        ],
+        [
+          "chestnut",
+          "water"
+        ],
+        [
+          "chestnuts",
+          "waters"
+        ]
+      ]
     },
     {
       "id": "fish",
@@ -334,7 +477,15 @@
       "dietImplications": [],
       "provenance": "curated",
       "confidence": 0.9,
-      "qualityState": "aiDraft"
+      "qualityState": "aiDraft",
+      "vetoTokens": [
+        [
+          "mushroom"
+        ],
+        [
+          "mushrooms"
+        ]
+      ]
     },
     {
       "id": "shellfish",
@@ -344,13 +495,43 @@
       "phrases": [
         "shellfish"
       ],
-      "negativePhrases": [],
+      "negativePhrases": [
+        "oyster mushroom",
+        "oyster sauce",
+        "oyster plant"
+      ],
       "allergen": "crustaceans",
       "dietImplications": [],
       "provenance": "curated",
       "confidence": 0.9,
       "qualityState": "aiDraft",
-      "note": "CONTESTED, pending vaidya: does this span molluscs or only crustaceans? Currently spans both via children. Allergen mapping uses crustaceans; mollusc children carry their own tag."
+      "note": "CONTESTED, pending vaidya: does this span molluscs or only crustaceans? Currently spans both via children. Allergen mapping uses crustaceans; mollusc children carry their own tag.",
+      "vetoTokens": [
+        [
+          "oyster",
+          "mushroom"
+        ],
+        [
+          "oysters",
+          "mushrooms"
+        ],
+        [
+          "oyster",
+          "sauce"
+        ],
+        [
+          "oysters",
+          "sauces"
+        ],
+        [
+          "oyster",
+          "plant"
+        ],
+        [
+          "oysters",
+          "plants"
+        ]
+      ]
     },
     {
       "id": "crustacean",
@@ -404,13 +585,41 @@
       "negativePhrases": [
         "oyster mushroom",
         "oyster sauce, vegetarian",
-        "clam shell"
+        "clam shell",
+        "oyster sauce",
+        "oyster plant"
       ],
       "allergen": "molluscs",
       "dietImplications": [],
       "provenance": "curated",
       "confidence": 0.94,
-      "qualityState": "aiDraft"
+      "qualityState": "aiDraft",
+      "vetoTokens": [
+        [
+          "oyster",
+          "mushroom"
+        ],
+        [
+          "oysters",
+          "mushrooms"
+        ],
+        [
+          "oyster",
+          "sauce"
+        ],
+        [
+          "oysters",
+          "sauces"
+        ],
+        [
+          "oyster",
+          "plant"
+        ],
+        [
+          "oysters",
+          "plants"
+        ]
+      ]
     },
     {
       "id": "meat",
@@ -418,8 +627,7 @@
       "kind": "animalSource",
       "parents": [],
       "phrases": [
-        "meat",
-        "flesh"
+        "meat"
       ],
       "negativePhrases": [
         "meatless",
@@ -436,7 +644,33 @@
       ],
       "provenance": "curated",
       "confidence": 0.85,
-      "qualityState": "aiDraft"
+      "qualityState": "aiDraft",
+      "vetoTokens": [
+        [
+          "mushroom"
+        ],
+        [
+          "mushrooms"
+        ],
+        [
+          "substitute"
+        ],
+        [
+          "substitutes"
+        ],
+        [
+          "analog"
+        ],
+        [
+          "analogs"
+        ],
+        [
+          "analogue"
+        ],
+        [
+          "analogues"
+        ]
+      ]
     },
     {
       "id": "pork",
@@ -1260,5 +1494,5 @@
       "note": "Canonical direction chosen to match USDA naming 'Coriander (cilantro) leaves, raw'. The reverse mapping was removed in validation — it formed an alias cycle."
     }
   ],
-  "revision": "rev2: alias cycle coriander leaves<->cilantro broken; coriander leaves is canonical."
+  "revision": "rev5: (1) removed the 'peanut' negative from tree_nuts — it under-flagged rows containing both peanut and coconut; (2) vetoTokens is now explicitly PLURAL-TOLERANT and plurals are enumerated, because 'mushroom' failed to match USDA's 'Mushrooms, oyster' twice."
 }

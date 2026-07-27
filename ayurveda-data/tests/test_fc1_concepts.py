@@ -25,8 +25,8 @@ KNOWLEDGE_BASE_PATH = (
 RUNTIME_PATH = ROOT / "WiseEating" / "Ayurveda" / "FoodConcepts.swift"
 
 DIRECTOR_HASHES = {
-    ONTOLOGY_PATH: "2755da46ab2621d6ed4acb9204b4953d79eb03e8893f568c748e5abda9a48d24",
-    EXCLUSION_PATH: "4fa5586c63ecb1227e42e501065834cd1897c3f443c920dcc8dde882de2f5a69",
+    ONTOLOGY_PATH: "1f432b23e233f4bece7f3f2ee92d55f99ac6a6d4ad537bd03007a04211e4b095",
+    EXCLUSION_PATH: "fe721b8ef08e5a6f893c26f312245df1725a5a5ebc036f38a8eaa07091a89f42",
     HOLDOUT_PATH: "557fe9cd78e751522310ec520c2a94a8b19366f12c8405814566d38a517a7a9d",
 }
 
@@ -70,17 +70,17 @@ class FoodConceptTests(unittest.TestCase):
                 )
         self.assertEqual(len(self.ontology["concepts"]), 25)
         self.assertEqual(len(self.ontology["aliases"]), 75)
-        self.assertEqual(len(self.exclusion_goldens["mustExclude"]), 80)
-        self.assertEqual(len(self.exclusion_goldens["mustNotExclude"]), 37)
+        self.assertEqual(len(self.exclusion_goldens["mustExclude"]), 81)
+        self.assertEqual(len(self.exclusion_goldens["mustNotExclude"]), 36)
         self.assertEqual(
             sum(
                 bool(case.get("contested"))
                 for key in ("mustExclude", "mustNotExclude")
                 for case in self.exclusion_goldens[key]
             ),
-            8,
+            7,
         )
-        self.assertIn("rev2", self.exclusion_goldens["revision"])
+        self.assertIn("rev4", self.exclusion_goldens["revision"])
 
     def test_non_contested_must_not_exclude_cases_have_no_members(self):
         names = self.diagnostics["catalogNames"]
@@ -167,7 +167,7 @@ class FoodConceptTests(unittest.TestCase):
         ):
             build_seed.food_concept_ancestors(cyclic)
 
-    def test_negative_veto_token_boundaries_and_suffix_negation(self):
+    def test_veto_tokens_negative_boundaries_and_suffix_negation(self):
         names = self.diagnostics["catalogNames"]
         direct = self.diagnostics["directMembership"]
 
@@ -188,8 +188,50 @@ class FoodConceptTests(unittest.TestCase):
             & self.diagnostics["membership"]["meat"]
         )
         self.assertFalse(
-            matching_ids("coconut ladoo")
-            & self.diagnostics["membership"]["tree_nuts"]
+            matching_ids("mushrooms, oyster")
+            & self.diagnostics["membership"]["mollusc"]
+        )
+        self.assertFalse(
+            matching_ids("mushrooms, oyster")
+            & self.diagnostics["membership"]["shellfish"]
+        )
+        self.assertEqual(
+            build_seed._matching_veto_token_groups(
+                build_seed.modifier_normalized_tokens("Oyster mushroom"),
+                [("oyster", "mushroom")],
+            ),
+            ["oyster mushroom"],
+        )
+        self.assertEqual(
+            build_seed._matching_veto_token_groups(
+                build_seed.modifier_normalized_tokens(
+                    "Mushrooms, oyster, raw"
+                ),
+                [("oyster", "mushroom")],
+            ),
+            ["oyster mushroom"],
+        )
+
+        water_chestnuts = {
+            food_id
+            for food_id, name in names.items()
+            if {"water", "chestnut"}.issubset(
+                build_seed.modifier_normalized_tokens(name)
+            )
+        }
+        self.assertTrue(water_chestnuts)
+        self.assertFalse(
+            water_chestnuts & self.diagnostics["membership"]["tree_nuts"]
+        )
+
+        coconut_ids = {
+            food_id
+            for food_id, name in names.items()
+            if "coconut" in build_seed.modifier_normalized_tokens(name)
+        }
+        self.assertTrue(coconut_ids)
+        self.assertTrue(
+            coconut_ids & self.diagnostics["membership"]["tree_nuts"]
         )
 
         gluten_tokens = build_seed.modifier_normalized_tokens(
@@ -259,12 +301,14 @@ class FoodConceptTests(unittest.TestCase):
             bundled = json.load(source)
         self.assertEqual(bundled, self.artifact)
 
-    def test_runtime_service_is_lazy_sendable_and_has_no_consumer(self):
+    def test_runtime_service_is_lazy_sendable_and_has_fc2_consumers(self):
         source = RUNTIME_PATH.read_text(encoding="utf-8")
         self.assertIn("public struct FoodConcepts: Sendable", source)
         self.assertIn("public func members(of concept: String) -> Set<Int32>", source)
         self.assertIn("public func concepts(for foodID: Int32) -> Set<String>", source)
         self.assertIn("public func canonical(alias: String) -> String?", source)
+        self.assertIn("public var resolutionAliases: [String: String]", source)
+        self.assertIn("public func conceptID(for value: String) -> String?", source)
         self.assertIn("public struct Requirement: Codable, Hashable, Sendable", source)
         self.assertIn("public struct Restriction: Codable, Hashable, Sendable", source)
 
@@ -277,7 +321,15 @@ class FoodConceptTests(unittest.TestCase):
                 errors="ignore",
             ):
                 consumers.append(path)
-        self.assertEqual(consumers, [])
+        self.assertEqual(
+            {path.relative_to(ROOT).as_posix() for path in consumers},
+            {
+                "WiseEating/AI/MealPlanning/"
+                "DeterministicMealPlanSolver+WiseEating.swift",
+                "WiseEating/AI/MealPlanning/USDAWeeklyMealPlanner.swift",
+                "WiseEating/AI/ReceptGeneration/AIRecipeGenerator.swift",
+            },
+        )
 
 
 if __name__ == "__main__":
