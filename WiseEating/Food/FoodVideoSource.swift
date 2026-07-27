@@ -3,14 +3,15 @@ import UIKit
 
 class FoodVideoSource: @unchecked Sendable {
     static let shared = FoodVideoSource()
+
+    private static let unsafeFrameKeyCharacters = CharacterSet(
+        charactersIn: "/\\:*?\"<>|"
+    )
+
     func hasVideo(for foodName: String) -> Bool {
-           // Проверяваме дали името съществува в картата (frameMap)
-           // Може да се наложи нормализация (lowercased), ако ключовете в json-а са малки букви
-           // Тук приемаме, че ключовете съвпадат или са case-sensitive.
-           // Ако искате case-insensitive, може да ползвате keys.contains, но е по-бавно.
-           // За най-бързо:
-           return frameMap[foodName] != nil
-       }
+        frameIndex(for: foodName) != nil
+    }
+
     // ✅ 1. Добавяме заключване (Lock) за защита на данните при многонишков достъп
     private let lock = NSLock()
     
@@ -22,7 +23,7 @@ class FoodVideoSource: @unchecked Sendable {
     
     // Публичен достъп до списъка с храни
     var availableFoodKeys: [String] {
-        return Array(frameMap.keys).sorted()
+        frameMap.keys.map(frameKey).sorted()
     }
     
     private init() {
@@ -108,7 +109,7 @@ class FoodVideoSource: @unchecked Sendable {
         }
         
         // 2. Търсим индекса по име
-        guard let index = frameMap[name] else {
+        guard let index = frameIndex(for: name) else {
             // print("❌ Name '\(name)' not found in frameMap")
             return nil
         }
@@ -133,5 +134,22 @@ class FoodVideoSource: @unchecked Sendable {
             print("❌ Failed to extract image for \(name): \(error.localizedDescription)")
             return nil
         }
+    }
+
+    private func frameIndex(for name: String) -> Int? {
+        if let rawIndex = frameMap[name] {
+            return rawIndex
+        }
+        return frameMap[frameKey(name)]
+    }
+
+    private func frameKey(_ name: String) -> String {
+        String(
+            name.unicodeScalars.map { scalar in
+                Self.unsafeFrameKeyCharacters.contains(scalar)
+                    ? "_"
+                    : Character(scalar)
+            }
+        )
     }
 }
