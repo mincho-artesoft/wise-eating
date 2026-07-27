@@ -1188,8 +1188,8 @@ def load_food_role_source(path: Path) -> dict[str, Any]:
 
 
 def validate_food_role_source(source: dict[str, Any]) -> None:
-    if not isinstance(source, dict) or source.get("rolesVersion") != 8:
-        raise BuildError("food-roles.json must use rolesVersion 8")
+    if not isinstance(source, dict) or source.get("rolesVersion") != 9:
+        raise BuildError("food-roles.json must use rolesVersion 9")
     roles = source.get("roles")
     rules = source.get("rules")
     if not isinstance(roles, list) or len(roles) != EXPECTED_FOOD_ROLE_COUNT:
@@ -1597,7 +1597,7 @@ def _resolve_food_role(
                 irregular_plurals=irregular_plurals,
             )
         ]
-        if group_matches and compiled["preparedIndicators"]:
+        if (matches or group_matches) and compiled["preparedIndicators"]:
             negated_indicator_matches = _phrase_spans(
                 tokens,
                 compiled["negatedIndicator"],
@@ -1617,6 +1617,7 @@ def _resolve_food_role(
                 not negated_indicator_matches
                 and prepared_indicator_matches
             ):
+                matches = []
                 group_matches = []
         matched_labels = matches + group_matches
         resolved_role: str | None = None
