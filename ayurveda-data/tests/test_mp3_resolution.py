@@ -717,8 +717,10 @@ struct MP3ResolutionHarness {
 
     def test_mp1_static_site_counts_reflect_removed_resolution_calls(self):
         planner = PLANNER.read_text(encoding="utf-8")
-        self.assertEqual(planner.count("LanguageModelSession("), 9)
-        self.assertEqual(planner.count(".respond("), 9)
+        # MP-6 deletes the per-meal title-polish session. Its one batched
+        # narrator lives in a separate Foundation Models adapter.
+        self.assertEqual(planner.count("LanguageModelSession("), 8)
+        self.assertEqual(planner.count(".respond("), 8)
         self.assertEqual(planner.count('site: "mealPlanIntentParse"'), 2)
         assembly = planner.split(
             "// --- Checkpoint 2: deterministic assembly ---",
