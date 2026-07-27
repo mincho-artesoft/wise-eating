@@ -1818,7 +1818,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
             )
         }
         try Task.checkCancellation()
-        let assembledPreview = try await MP5PlannerAdapter(
+        let assembly = try await MP5PlannerAdapter(
             container: container
         ).solve(
             profile: profile,
@@ -1832,12 +1832,35 @@ public final class USDAWeeklyMealPlanner: Sendable {
         )
         if PlannerTelemetry.isEnabled {
             await PlannerTelemetry.shared.endStage("deterministic_assembly")
+            await PlannerTelemetry.shared.beginStage("narration")
+        }
+        let narration = await MP6MealPlanNarrator.narrate(
+            facts: assembly.narrationFacts,
+            onLog: onLog
+        )
+        try Task.checkCancellation()
+        var narratedDays = assembly.preview.days
+        for narratedTitle in narration.titles {
+            guard let dayIndex = narratedDays.firstIndex(where: {
+                $0.dayIndex == narratedTitle.day
+            }),
+            narratedDays[dayIndex].meals.indices.contains(
+                narratedTitle.slotIndex
+            ) else {
+                continue
+            }
+            narratedDays[dayIndex].meals[
+                narratedTitle.slotIndex
+            ].descriptiveTitle = narratedTitle.title
+        }
+        if PlannerTelemetry.isEnabled {
+            await PlannerTelemetry.shared.endStage("narration")
         }
         let preview = MealPlanPreview(
-            startDate: assembledPreview.startDate,
-            prompt: assembledPreview.prompt,
-            days: assembledPreview.days,
-            minAgeMonths: assembledPreview.minAgeMonths,
+            startDate: assembly.preview.startDate,
+            prompt: assembly.preview.prompt,
+            days: narratedDays,
+            minAgeMonths: assembly.preview.minAgeMonths,
             interpretationCaveat: interpretationCaveat
         )
 
@@ -2927,10 +2950,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
             // Извикваме новия метод върху целия план наведнъж
             polishedPlan = await aiApplyPortionClamping(plan: polishedPlan, profile: profile, onLog: onLog)
             
-            // --- Final: Polish Titles ---
-            let finalPolishedPlan = await diversifyDescriptiveTitlesIfNeeded(plan: polishedPlan, onLog: onLog)
-            
-            return finalPolishedPlan
+            return polishedPlan
         }
     
     // **NEW**: Helper for `polishConceptualPlan` to infer cuisine
@@ -3021,85 +3041,6 @@ public final class USDAWeeklyMealPlanner: Sendable {
         }
         
         return finalComponents
-    }
-    
-    @MainActor
-    private func isGenericTitle(_ s: String) -> Bool {
-        let l = s.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-        if l.isEmpty { return true }
-        let genericTokens = ["morning", "evening", "balanced", "wellness", "start", "meal", "hearty", "comforting", "light", "nutritious"]
-        return genericTokens.contains { l.contains($0) }
-    }
-    
-    @MainActor
-    private func aiPolishTitle(for meal: ConceptualMeal, day: Int, onLog: (@Sendable (String) -> Void)?) async -> String? {
-        let items = meal.components.map { "\($0.name) (\(Int($0.grams))g)" }.joined(separator: ", ")
-        let prompt = """
-        You are assisting in a meal plan UI. Rewrite the descriptive title for a \(meal.name) so it is concise (max ~6 words), specific, and cuisine-aware, based on its components.
-        Avoid generic words like “morning”, “evening”, “balanced”, “start”, “meal”, “wellness”.
-        Keep it natural and non-marketing. Do not include quantities.
-        
-        MEAL: \(meal.name)
-        COMPONENTS: \(items)
-        CURRENT TITLE: \(meal.descriptiveTitle.ifEmpty("n/a"))
-        
-        Respond with a single improved title string.
-        """
-        var telemetryRespondStartedAt: UInt64?
-        var telemetryRespondRecorded = false
-        do {
-            try Task.checkCancellation()
-            let session = LanguageModelSession()
-            if PlannerTelemetry.isEnabled {
-                await PlannerTelemetry.shared.noteSession(site: "aiPolishTitle")
-            }
-            try Task.checkCancellation()
-            if PlannerTelemetry.isEnabled {
-                telemetryRespondStartedAt = DispatchTime.now().uptimeNanoseconds
-            }
-            let resp = try await session.respond(to: prompt, options: GenerationOptions(sampling: .greedy))
-            if let startedAt = telemetryRespondStartedAt {
-                await PlannerTelemetry.shared.noteRespond(
-                    site: "aiPolishTitle",
-                    ok: true,
-                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
-                )
-                telemetryRespondRecorded = true
-            }
-            try Task.checkCancellation()
-            let out = resp.content.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            try Task.checkCancellation()
-            guard !out.isEmpty, out.count <= 60 else { return nil }
-            onLog?("🖋️ Polished title for Day \(day) • \(meal.name): '\(meal.descriptiveTitle)' → '\(out)'")
-            return out
-        } catch {
-            if let startedAt = telemetryRespondStartedAt, !telemetryRespondRecorded {
-                await PlannerTelemetry.shared.noteRespond(
-                    site: "aiPolishTitle",
-                    ok: false,
-                    ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
-                )
-            }
-            onLog?("   - Title polish skipped (\(error.localizedDescription)).")
-            return nil
-        }
-    }
-    
-    @MainActor
-    private func diversifyDescriptiveTitlesIfNeeded(plan: AIConceptualPlanResponse, onLog: (@Sendable (String) -> Void)?) async -> AIConceptualPlanResponse {
-        var out = plan
-        for d in 0..<out.days.count {
-            for m in 0..<out.days[d].meals.count {
-                let t = out.days[d].meals[m].descriptiveTitle
-                if isGenericTitle(t) {
-                    if let newT = await aiPolishTitle(for: out.days[d].meals[m], day: out.days[d].day, onLog: onLog) {
-                        let old = out.days[d].meals[m]
-                        out.days[d].meals[m] = ConceptualMeal(name: old.name, descriptiveTitle: newT, components: old.components)
-                    }
-                }
-            }
-        }
-        return out
     }
     
     private func debugDumpConceptualPlan(

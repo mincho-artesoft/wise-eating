@@ -57,7 +57,9 @@ actor PlannerTelemetry {
         "conceptual_plan",
         "goal_adjustment",
         "resolution",
-        "polish"
+        "polish",
+        "deterministic_assembly",
+        "narration"
     ]
 
     private var label = ""

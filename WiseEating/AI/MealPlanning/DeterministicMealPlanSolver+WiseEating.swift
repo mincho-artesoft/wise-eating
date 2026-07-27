@@ -1,6 +1,11 @@
 import Foundation
 import SwiftData
 
+struct MP5PlannerAssembly {
+    let preview: MealPlanPreview
+    let narrationFacts: [MP6NarrationFact]
+}
+
 @MainActor
 struct MP5PlannerAdapter {
     let container: ModelContainer
@@ -14,7 +19,7 @@ struct MP5PlannerAdapter {
         placements: [MP5MustContainRule],
         mealTimings: [String: Date]?,
         onLog: (@Sendable (String) -> Void)?
-    ) async throws -> MealPlanPreview {
+    ) async throws -> MP5PlannerAssembly {
         await SearchIndexStore.shared.ensureLoaded(container: container)
         let context = ModelContext(container)
         let foods = try context.fetch(FetchDescriptor<FoodItem>())
@@ -35,6 +40,7 @@ struct MP5PlannerAdapter {
         )
 
         var flattened: [MP5Candidate] = []
+        var thermalByFoodID: [Int: String] = [:]
         flattened.reserveCapacity(foods.count)
         for food in foods.sorted(by: { $0.id < $1.id }) {
             guard let compact = compactMap[food.id],
@@ -42,7 +48,7 @@ struct MP5PlannerAdapter {
             else {
                 continue
             }
-            guard let candidate = makeCandidate(
+            guard let resolved = makeCandidate(
                 food: food,
                 compact: compact,
                 directProfile: profileByFoodID[food.id],
@@ -54,7 +60,8 @@ struct MP5PlannerAdapter {
             ) else {
                 continue
             }
-            flattened.append(candidate)
+            flattened.append(resolved.candidate)
+            thermalByFoodID[food.id] = resolved.thermalCharacter
         }
 
         let text = (prompts
@@ -144,13 +151,46 @@ struct MP5PlannerAdapter {
         let minAgeMonths = solved.components.compactMap {
             compactMap[$0.foodID]?.enforcedMinAgeMonths
         }.max() ?? 0
-        return MealPlanPreview(
-            startDate: Calendar.current.startOfDay(for: Date()),
-            prompt: profileRequest.enableAyurvedicScoring
-                ? "Deterministic Ayurvedic meal plan"
-                : "Deterministic meal plan",
-            days: days,
-            minAgeMonths: minAgeMonths
+        let facts = solved.days.flatMap { day in
+            day.meals.enumerated().map { slotIndex, meal in
+                let thermalValues = Set(
+                    meal.components.compactMap {
+                        thermalByFoodID[$0.foodID]
+                    }.filter { $0 != "unrecorded" }
+                )
+                let thermalCharacter: String
+                if thermalValues.isEmpty {
+                    thermalCharacter = "unrecorded"
+                } else if thermalValues.count == 1 {
+                    thermalCharacter = thermalValues.first ?? "unrecorded"
+                } else {
+                    thermalCharacter = "mixed"
+                }
+                return MP6NarrationFact(
+                    day: day.day,
+                    slotIndex: slotIndex,
+                    slotName: meal.name,
+                    dishNames: meal.components.map(\.name),
+                    kcal: meal.kcal,
+                    proteinGrams: meal.protein,
+                    tastes: Set(
+                        meal.components.flatMap(\.rasa)
+                    ).sorted(),
+                    thermalCharacter: thermalCharacter,
+                    agni: profileRequest.agni.rawValue
+                )
+            }
+        }
+        return MP5PlannerAssembly(
+            preview: MealPlanPreview(
+                startDate: Calendar.current.startOfDay(for: Date()),
+                prompt: profileRequest.enableAyurvedicScoring
+                    ? "Deterministic Ayurvedic meal plan"
+                    : "Deterministic meal plan",
+                days: days,
+                minAgeMonths: minAgeMonths
+            ),
+            narrationFacts: facts
         )
     }
 
@@ -161,7 +201,7 @@ struct MP5PlannerAdapter {
         linkedProfile: AyurvedaProfile?,
         link: AyurvedaLink?,
         engineExcluded: Bool
-    ) -> MP5Candidate? {
+    ) -> (candidate: MP5Candidate, thermalCharacter: String)? {
         let referenceWeight = compact.referenceWeightG
         guard referenceWeight > 0,
               let rawEnergy = compact.nutrientValues[.energy],
@@ -192,33 +232,36 @@ struct MP5PlannerAdapter {
             with: ["heated", "cooked", "baked", "boiled", "warmed"]
         )
 
-        return MP5Candidate(
-            id: food.id,
-            name: food.name,
-            kcalPer100g: rawEnergy * scale,
-            proteinPer100g: (compact.nutrientValues[.protein] ?? 0) * scale,
-            carbsPer100g: (compact.nutrientValues[.carbs] ?? 0) * scale,
-            fatPer100g: (compact.nutrientValues[.totalFat] ?? 0) * scale,
-            fiberPer100g: (compact.nutrientValues[.fiber] ?? 0) * scale,
-            concepts: concepts,
-            enforcedMinAgeMonths: compact.enforcedMinAgeMonths,
-            engineExcluded: engineExcluded,
-            role: role,
-            minimumGrams: limits.minimum,
-            maximumGrams: limits.maximum,
-            doshaVata: resolution.vpk.vata,
-            doshaPitta: resolution.vpk.pitta,
-            doshaKapha: resolution.vpk.kapha,
-            rasa: resolution.rasa,
-            hasVipaka: resolution.hasVipaka,
-            hasVirya: resolution.hasVirya,
-            hasPrabhava: resolution.hasPrabhava,
-            heaviness: resolution.heaviness,
-            seasons: resolution.seasons,
-            tier: resolution.tier,
-            isHoney: isHoney,
-            isGhee: isGhee,
-            isHeatedHoney: isHeatedHoney
+        return (
+            MP5Candidate(
+                id: food.id,
+                name: food.name,
+                kcalPer100g: rawEnergy * scale,
+                proteinPer100g: (compact.nutrientValues[.protein] ?? 0) * scale,
+                carbsPer100g: (compact.nutrientValues[.carbs] ?? 0) * scale,
+                fatPer100g: (compact.nutrientValues[.totalFat] ?? 0) * scale,
+                fiberPer100g: (compact.nutrientValues[.fiber] ?? 0) * scale,
+                concepts: concepts,
+                enforcedMinAgeMonths: compact.enforcedMinAgeMonths,
+                engineExcluded: engineExcluded,
+                role: role,
+                minimumGrams: limits.minimum,
+                maximumGrams: limits.maximum,
+                doshaVata: resolution.vpk.vata,
+                doshaPitta: resolution.vpk.pitta,
+                doshaKapha: resolution.vpk.kapha,
+                rasa: resolution.rasa,
+                hasVipaka: resolution.hasVipaka,
+                hasVirya: resolution.hasVirya,
+                hasPrabhava: resolution.hasPrabhava,
+                heaviness: resolution.heaviness,
+                seasons: resolution.seasons,
+                tier: resolution.tier,
+                isHoney: isHoney,
+                isGhee: isGhee,
+                isHeatedHoney: isHeatedHoney
+            ),
+            resolution.thermalCharacter
         )
     }
 
@@ -233,6 +276,7 @@ struct MP5PlannerAdapter {
         hasVipaka: Bool,
         hasVirya: Bool,
         hasPrabhava: Bool,
+        thermalCharacter: String,
         heaviness: Double,
         seasons: Set<String>,
         tier: MP5AyurvedaTier
@@ -268,7 +312,8 @@ struct MP5PlannerAdapter {
         }
         guard let category = food.category?.first?.rawValue else {
             return (
-                (0, 0, 0), [], false, false, false, 0.5, [], .none
+                (0, 0, 0), [], false, false, false, "unrecorded",
+                0.5, [], .none
             )
         }
         let estimate = AyurvedaRules.shared.estimated(
@@ -281,6 +326,7 @@ struct MP5PlannerAdapter {
             false,
             !estimate.virya.isEmpty,
             false,
+            normalizedThermalCharacter(estimate.virya),
             heaviness(from: estimate.gunas, digestibility: nil),
             [],
             .estimated
@@ -297,6 +343,7 @@ struct MP5PlannerAdapter {
         hasVipaka: Bool,
         hasVirya: Bool,
         hasPrabhava: Bool,
+        thermalCharacter: String,
         heaviness: Double,
         seasons: Set<String>,
         tier: MP5AyurvedaTier
@@ -307,6 +354,7 @@ struct MP5PlannerAdapter {
             !(profile.vipaka ?? "").isEmpty,
             !(profile.virya ?? "").isEmpty,
             !(profile.prabhava ?? "").isEmpty,
+            normalizedThermalCharacter(profile.virya ?? ""),
             heaviness(
                 from: profile.gunas,
                 digestibility: profile.digestibility
@@ -314,6 +362,20 @@ struct MP5PlannerAdapter {
             Set(profile.seasons.map { AyurvedaFacet.normalize($0) }),
             tier
         )
+    }
+
+    private func normalizedThermalCharacter(_ raw: String) -> String {
+        let normalized = AyurvedaFacet.normalize(raw)
+        if ["heating", "hot", "ushna"].contains(normalized) {
+            return "heating"
+        }
+        if ["cooling", "cold", "sheeta", "shita"].contains(normalized) {
+            return "cooling"
+        }
+        if ["neutral", "balanced"].contains(normalized) {
+            return "neutral"
+        }
+        return normalized.isEmpty ? "unrecorded" : normalized
     }
 
     private func heaviness(

@@ -24,7 +24,7 @@ public struct MealPlanPreviewItem: Sendable, Codable, Identifiable {
 public struct MealPlanPreviewMeal: Sendable, Hashable, Codable, Identifiable {
     public var id = UUID()
     public let name: String
-    public let descriptiveTitle: String?
+    public var descriptiveTitle: String?
     public var items: [MealPlanPreviewItem]
     public let startTime: Date?
     public var kcalTotal: Double { items.reduce(0) { $0 + $1.kcal } }
