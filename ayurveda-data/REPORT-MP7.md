@@ -4,7 +4,7 @@ Date: 2026-07-27
 
 Branch: `ayurveda-app`
 
-Status: **STOPPED at MP7-G7 — real-catalogue seven-day solve exceeds 150 ms**
+Status: **COMPLETE — real-catalogue solver profiled and optimized without output change**
 
 ## Outcome
 
@@ -20,9 +20,22 @@ definitions, preventing another silent drift.
 
 G4 is green at 150/150. G5 produces plans for all 30 real-catalogue
 profile/horizon combinations, and G6 records a +1.5507 mean dosha-pacification
-delta. G7 fails its first absolute arm: optimized seven-day solves over the
-real 13,993-candidate input take 1.138–3.998 seconds, exceeding the 150 ms
-ceiling. Work stopped without narrowing the pool or changing solver behavior.
+delta.
+
+The original G7 stop captured the first honest real-catalogue timing:
+1.138–3.998 seconds. The founder withdrew the synthetic-harness 150 ms ceiling
+and authorized profile-first, behavior-preserving work only. The profile
+disproves the proposed 28-million-evaluation shape: eligibility already ran
+once and the 96-iteration local search scanned 1.266 million rows. Repeated
+greedy scoring and four full sorts of value-heavy candidates were dominant.
+
+Compact ranking records, role buckets, precomputed immutable lookup state, and
+per-iteration viruddha context reduce the final seven-day median to
+**641.588 ms** and maximum to **959.744 ms**. All 30 canonical plan hashes are
+identical to the frozen pre-change capture, P7/P8 remain exact at 1,200/3,600
+kcal, Y1 remains +1.5507, and narration remains byte-identical over 100 runs.
+No iteration count, pool size, candidate set, constraint, weight, random draw,
+or comparator changed.
 
 | Gate | Actual | State |
 |---|---:|---|
@@ -38,9 +51,12 @@ ceiling. Work stopped without narrowing the pool or changing solver behavior.
 | G4 full regression | **150/150** | pass |
 | G5 real-catalogue feasibility | **30/30 plans** | pass |
 | G6 Y1 mean delta | **+1.5507** | pass |
-| G7 seven-day solve | **3,998.172 ms max** | **STOP — ceiling 150 ms** |
-| G7 role/launch/memory arms | not run | stopped after first arm |
-| G8 tracked-file gate | not run | stopped before gate |
+| G7 profiled seven-day solve | P8 **4,055.677 ms** before | finding |
+| G7 optimized seven-day solve | median **641.588 ms**, max **959.744 ms** | measured; new ceiling pending founder ruling |
+| G7 full role resolution | **44.735 ms cold / 1.086 ms cached** | pass |
+| G7 device cold launch | **1.090 s median**, N=10 | pass |
+| G7 device peak memory | **402.6 MiB median**, +10.3 MiB paired vs rev1 | pass |
+| G8 largest tracked file | **82,726,160 bytes** | pass |
 
 ## Commit and push ledger
 
@@ -50,7 +66,9 @@ ceiling. Work stopped without narrowing the pool or changing solver behavior.
 | Rev9 projection, prepared-aware matching, tests, and deterministic cache | `a7e67b4` | pushed |
 | G4 harness repair and shipped-role conformance test | `e98caf6` | pushed |
 | Real-catalogue G5–G7 measurement harness | `d0c27fa` | pushed |
-| This stop report | report commit | committed and pushed after stop |
+| Initial real-catalogue G7 stop report | `5da4acf` | pushed |
+| Behavior-preserving G7 optimization and measurement harnesses | `1135fb9` | pushed |
+| Final report and registries | report commit | committed and pushed after all gates |
 
 Artifact SHA-256:
 
@@ -215,10 +233,10 @@ Command:
 python3 -m unittest discover -s ayurveda-data/tests -p 'test_*.py' -v
 ```
 
-Result:
+Final post-optimization result:
 
 ```text
-Ran 150 tests in 345.081s
+Ran 150 tests in 209.925s
 OK
 ```
 
@@ -265,20 +283,26 @@ and no binding failure occurred.
 
 | Profile | 1-day | 3-day | 7-day | Daily kcal |
 |---|---:|---:|---:|---:|
-| P1 | 1,152.053 ms | 2,110.370 ms | 3,919.314 ms | **2,000 exact** |
-| P2 | 416.504 ms | 707.613 ms | 1,341.298 ms | **2,000 exact** |
-| P3 | 782.523 ms | 1,337.488 ms | 2,644.832 ms | **2,200 exact** |
-| P4 | 1,359.626 ms | 2,214.462 ms | 3,968.620 ms | **2,400 exact** |
-| P5 | 777.706 ms | 1,281.276 ms | 2,410.192 ms | **1,700 exact** |
-| P6 | 686.405 ms | 1,221.064 ms | 2,298.829 ms | **2,000 exact** |
-| P7 | 1,065.785 ms | 2,010.636 ms | 3,850.896 ms | **1,200 exact** |
-| P8 | 1,201.127 ms | 2,104.097 ms | 3,998.172 ms | **3,600 exact** |
-| P9 | 756.098 ms | 1,272.910 ms | 2,392.834 ms | **1,900 exact** |
-| P10 | 336.513 ms | 602.122 ms | 1,138.039 ms | **2,000 exact** |
+| P1 | 283.749 ms | 510.009 ms | 949.959 ms | **2,000 exact** |
+| P2 | 99.221 ms | 180.883 ms | 350.194 ms | **2,000 exact** |
+| P3 | 186.745 ms | 328.005 ms | 664.789 ms | **2,200 exact** |
+| P4 | 284.802 ms | 501.065 ms | 958.718 ms | **2,400 exact** |
+| P5 | 184.135 ms | 332.293 ms | 618.388 ms | **1,700 exact** |
+| P6 | 163.478 ms | 287.134 ms | 547.340 ms | **2,000 exact** |
+| P7 | 286.638 ms | 502.006 ms | 927.294 ms | **1,200 exact** |
+| P8 | 287.326 ms | 496.204 ms | 959.744 ms | **3,600 exact** |
+| P9 | 180.829 ms | 328.503 ms | 614.552 ms | **1,900 exact** |
+| P10 | 79.076 ms | 145.720 ms | 314.421 ms | **2,000 exact** |
 
 P7 and P8 remain reachable at all three horizons despite anchor requirements,
 per-role clamps, 543 ineligible catalogue rows, and 304 catalogue
 `notReadyToEat` rows.
+
+The ordered 30-plan canonical-hash ledger is identical before and after the
+G7 optimization. Its SHA-256 is
+`542c8524e27fddd3322cf694ebc0cb08a4194bfb6cf9fe3b291718b355282de0`.
+The P8 seven-day plan remains
+`e9e623f8944d368ea5ec0bb50e9cc47ebf5f76795886e765f6b259f23bca5aea`.
 
 ## G6 — Y1 survives
 
@@ -299,40 +323,177 @@ The +1.5507 mean is above the +0.30 gate and does not show the spice-cap
 collapse described in §6. It is reported as measured; no parameter was tuned
 to protect it.
 
-## G7 — blocking real-catalogue solve latency
+## G7 — real-catalogue profile and behavior-preserving optimization
 
-Method:
+### Method and frozen behavior
 
 - `swiftc -O`;
 - production `DeterministicMealPlanSolver`;
-- one decoded 13,993-candidate input;
-- one reused solver instance;
-- ten seven-day runs, one per director profile;
-- `localSearchIterations = 96`; and
-- monotonic time around `solve`.
+- 13,993 nutrient-usable candidates from shipped `foods.json`,
+  `ayurveda_seed.json.gz`, `food_concepts.json.gz`, and
+  `food_roles.json.gz`;
+- one decoded input and one reused solver instance;
+- deterministic seed `0x4D503700`;
+- `localSearchIterations = 96` before and after; and
+- monotonic time immediately around `solve`, excluding candidate decoding and
+  compilation.
 
-| N | Median | Min | Max | Ceiling |
+Before modifying the solver, the harness captured all 30 canonical plan
+hashes. The optimization was accepted only after every hash matched. It does
+not reduce local-search iterations, cap or sample candidates, relax a
+constraint, alter any score/weight, or change RNG consumption.
+
+### Before profile — P8 seven-day real catalogue
+
+The profile accounts for the complete **4,055.677 ms** solve. Child rows are
+subphases and therefore are not added again to their parent.
+
+| Phase | Time | Calls / rows | Finding |
+|---|---:|---:|---|
+| Eligibility filter | **1.013 ms** | 13,993 scans | once per solve; 13,185 allowed |
+| Per-meal recent/required pool filter | **15.831 ms** | 276,885 scans | 21 × 13,185; not safety eligibility |
+| Greedy construction | **3,300.025 ms** | 21 slots | dominant |
+| ↳ selection/dosha score | 1,207.664 ms | 1,381,972 calls | about 0.874 µs/call |
+| ↳ four full candidate sorts | 1,713.661 ms | 5,524,360 input rows | copied/sorted value-heavy candidates |
+| ↳ mode selection | 256.855 ms | — | repeated global traversal |
+| Local search | **754.316 ms** | 96 iterations total | not 96 × 21 slots |
+| ↳ replacement filtering | 704.698 ms | 1,265,760 scans | exactly 96 × 13,185 |
+| ↳ role checks | 0.509 ms | 96 | metadata already on candidate |
+| ↳ hard validation | 14.665 ms | 79 | complete-plan validation |
+| ↳ objective | 6.392 ms | 79 | includes dosha objective |
+| Portion fitting/clamping | 0.403 ms | 100 | about 4.03 µs/call |
+| Near-duplicate test | 0.979 ms | 231 | about 4.24 µs/call |
+| Final hard validation | 0.196 ms | 1 | — |
+
+The proposed `21 × 96 × 13,993 ≈ 28M` explanation is **false for the
+implemented algorithm**. Local search performs 96 iterations for the whole
+plan, chooses one meal component per iteration, and scans 1.266 million
+candidates. The seconds were instead dominated by greedy scoring and repeated
+full sorting.
+
+Role, `notReadyToEat`, and headword resolution were already build-time
+metadata. `DeterministicMealPlanSolver+WiseEating` copies them into
+`MP5Candidate` once; the inner loops do not call `FoodRoleResolver`.
+Eligibility was already filtered once per solve. No repeated runtime role
+derivation was found.
+
+### Behavior-preserving changes
+
+1. Precompute immutable near-duplicate keys and per-role maximums once in the
+   solver.
+2. Rank compact index/ID/role/number records instead of copying and sorting
+   `MP5Candidate` values containing names and sets.
+3. Reuse each candidate's density and base score across the four ordering
+   modes for a given meal/count.
+4. Bucket compact rankings by role. Anchor selection opens only anchor buckets;
+   other selection performs a k-way comparison of the current head from each
+   role bucket, preserving the exact former global comparator order.
+5. Build the local-search “meal except the replaced component” and viruddha
+   context once per iteration rather than inside every candidate predicate.
+
+The compact role buckets do not restrict the candidate universe. They avoid
+sorting and traversing irrelevant roles while preserving which candidate wins.
+
+### After profile — same P8 plan
+
+| Phase | Time | Calls / rows | Delta / finding |
+|---|---:|---:|---|
+| Complete solve | **928.726 ms** | — | **−77.1%; 4.37× faster** |
+| Eligibility filter | 0.957 ms | 13,993 scans | still once |
+| Per-meal pool filter | 15.063 ms | 276,885 scans | unchanged shape |
+| Greedy construction | **727.788 ms** | 21 slots | −78.0% |
+| ↳ selection/dosha score | 203.444 ms | 1,381,972 calls | same call count |
+| ↳ compact role-bucket sorts | 422.238 ms | 5,524,360 input rows | rank 100.615; density 107.343; kcal ↓ 106.373; kcal ↑ 107.906 |
+| ↳ actual candidate evaluations | — | 15,036 | 15,456 bucket-head scans |
+| Local search | **199.627 ms** | 96 iterations | same iteration count |
+| ↳ replacement filtering | 152.884 ms | 1,265,760 scans | same scan count |
+| ↳ role checks | 0.486 ms | 96 | — |
+| ↳ hard validation | 17.033 ms | 79 | — |
+| ↳ objective | 6.181 ms | 79 | — |
+| Portion fitting/clamping | 0.305 ms | 100 | same calls |
+| Near-duplicate test | 0.859 ms | 231 | same calls |
+| Final hard validation | 0.245 ms | 1 | — |
+
+Across the ten final seven-day solves:
+
+| N | Median | Min | Max |
+|---:|---:|---:|---:|
+| 10 | **641.588 ms** | **314.421 ms** | **959.744 ms** |
+
+The withdrawn 150 ms number is not reused as a gate. This is the measured
+real-catalogue baseline from which the founder can set the product ceiling.
+
+### Role resolver, cold and cached
+
+The performance harness loads the shipped gzip, decodes all 14,484 immutable
+entries, resolves every food ID, then immediately repeats the same 14,484
+lookups on the constructed cache.
+
+| Catalogue rows | Cold load + full resolution | Cached full pass | Checksum |
+|---:|---:|---:|---:|
+| 14,484 | **44.735 ms** | **1.086 ms** | 3,850,755,146 |
+
+This is below the 400 ms role-resolution ceiling and proves role/flag/headword
+lookups are cached rather than recomputed during solver evaluation.
+
+### Physical-device launch and peak memory
+
+Device: iPhone 16 Pro, iOS 26.5. A = MP-6b/rev1 `5df25e3`; B = final optimized
+working tree. Both are signed Release iPhoneOS builds. The same physical device,
+bundle container, cable, and host session were used in strict ABAB order with a
+discarded A warm-up.
+
+The host was quiesced before the counted series: Xcode and Simulator were
+closed; no Maestro, CI, `xcodebuild`, test runner, or active Spotlight indexing
+workload was running. Codex desktop, a low-CPU Claude background process,
+Finder, and normal system services remained. Each trace launched a new app
+process with `-uiTestNoAds -we6LaunchProfile`. Launch is process start to the
+app's `first-interactive-frame` signpost. Peak memory is the maximum physical
+footprint sampled by Instruments Activity Monitor during the same five-second
+trace. No simulator number is substituted.
+
+| Pair | Rev1 launch ms | Optimized launch ms | Rev1 peak MiB | Optimized peak MiB |
 |---:|---:|---:|---:|---:|
-| 10 | **2,527.512 ms** | 1,138.039 ms | **3,998.172 ms** | **150 ms** |
+| 1 | 1,339.752 | 1,098.163 | 363.6 | 395.9 |
+| 2 | 1,091.184 | 1,084.989 | 397.4 | 393.0 |
+| 3 | 1,132.496 | 1,097.352 | 374.1 | 393.7 |
+| 4 | 1,086.862 | 1,098.710 | 396.7 | 401.5 |
+| 5 | 1,123.000 | 1,093.793 | 390.7 | 439.8 |
+| 6 | 1,107.736 | 1,083.681 | 393.2 | 405.1 |
+| 7 | 1,091.923 | 1,095.117 | 399.0 | 407.7 |
+| 8 | 1,081.970 | 1,082.933 | 406.0 | 403.6 |
+| 9 | 1,105.524 | 1,083.226 | 392.1 | 394.0 |
+| 10 | 1,089.966 | 1,085.295 | 399.8 | 421.4 |
 
-Every measured seven-day solve exceeds the ceiling. The maximum is 26.65× the
-budget. This is not startup compilation or candidate decoding: timing starts
-immediately before the already-constructed solver's `solve` call, and the
-solver instance is reused across all 30 G5 runs.
+| Metric | Rev1 A | Optimized B | Paired B−A |
+|---|---:|---:|---:|
+| Launch median | 1,098.724 ms | **1,089.544 ms** | **−14.247 ms** |
+| Launch IQR | 28.913 ms | 12.785 ms | 27.474 ms |
+| Launch min / max | 1,081.970 / 1,339.752 ms | **1,082.933 / 1,098.710 ms** | −241.589 / +11.848 ms |
+| Launch sample stddev | 77.192 ms | 6.824 ms | 74.304 ms |
+| Peak-memory median | 394.978 MiB | **402.556 MiB** | **+10.281 MiB** |
+| Peak-memory IQR | 7.570 MiB | 12.578 MiB | 18.512 MiB |
+| Peak-memory min / max | 363.595 / 405.954 MiB | 393.001 / 439.829 MiB | −4.406 / +49.172 MiB |
+| Peak-memory sample stddev | 12.830 MiB | 14.826 MiB | 16.770 MiB |
 
-Per the standing stop rule, no solver optimization, pool reduction, iteration
-reduction, cache, or constraint relaxation was attempted.
+B's 1.090 s launch median and 1.099 s maximum are under the absolute 1.700 s
+ceiling. Its paired median memory increase is 10.3 MiB and worst paired
+increase is 49.2 MiB, both below the allowed rev1 +90 MiB.
 
-The remaining G7 arms were not run:
+### Post-optimization regression and G8
 
-- full-catalogue role resolution cold/cached;
-- device cold-launch ABAB; and
-- device peak-memory ABAB.
+- full suite: **150/150**, 209.925 seconds;
+- all 30 plan hashes unchanged, P7/P8 exact, Y1 +1.550713;
+- narration template: **100/100 byte-identical**;
+- total model calls: **2**;
+- universal arm64+x86_64 simulator Debug and optimized Release:
+  **BUILD SUCCEEDED**; no warning originates in an MP-7 changed file;
+- fresh install: zero Ayurveda inserts and no search rebuild (suite green);
+- largest git-tracked file:
+  `WiseEating/Food/food_archive_480.mp4` at **82,726,160 bytes**;
+- tracked files at or above 90,000,000 bytes: **0**.
 
-No simulator number was substituted for the required device launch/memory
-measurements. G8 was not run after the G7 stop.
-
-The handbook and progress milestone are not advanced while MP-7 is stopped.
+The gitignored 285 MB `food_archive_1024.mp4` was not moved, changed, or added.
 
 ## Burned regression fixtures
 

@@ -228,9 +228,29 @@ two-day no-repeat check. All 125 tests, 25+2 search goldens, 23/23 hard
 properties, Debug/Release, flag on/off smoke, tracked-size, and final 1.543s
 median launch gates pass. See `REPORT-MP6b.md`.
 
+MP-7 completes the culinary-plausibility correction. A version-9 build-time
+artifact assigns one of 15 roles plus `notReadyToEat` and duplicate headword
+metadata to all 14,484 canonical rows. The plain catalogue has 108 `other`
+rows, 543 ineligible rows, and 304 not-ready rows; 1,039/1,500 recipes resolve
+to anchor roles and none enters a prohibited role. The solver now requires an
+anchor, respects per-role and combined seasoning caps, and clamps portions to
+authored role ranges.
+
+The first real-catalogue profile showed the earlier 150 ms figure was a
+synthetic-harness assumption: P8 took 4.056 seconds, dominated by repeated
+greedy scoring and sorting rather than 28 million local evaluations. Compact
+ranking records, exact role buckets, and precomputed duplicate/viruddha context
+reduce final seven-day solve median to 641.588 ms (max 959.744 ms) while all 30
+plan hashes, exact P7/P8 calories, +1.550713 Y1, 96 iterations, constraints,
+candidate set, and 100-run narration output remain unchanged. The full suite is
+150/150; role resolution is 44.735 ms cold / 1.086 ms cached. Physical iPhone
+16 Pro N=10 ABAB records a 1.090 s launch median and +10.281 MiB paired median
+peak-memory delta against MP-6b, inside both product budgets. See
+`REPORT-MP7.md`.
+
 ## Next milestones
 
-1. **Host/simulator engineering through MP-6b COMPLETE on `ayurveda-app`** — D6 (models+seeder), D34 (all 12,601 foods
+1. **Host/simulator engineering through MP-7 COMPLETE on `ayurveda-app`** — D6 (models+seeder), D34 (all 12,601 foods
    classified), D8/D8.1/D8.2 (UI end to end incl. computed tier + editors),
    D9 (engineExcluded enforcement), WE-2 (full recipe nutrition + build-time
    projection/search cache), WE-3 (founder-approved read-only display card),
@@ -246,7 +266,9 @@ median launch gates pass. See `REPORT-MP6b.md`.
    aiDraft Ayurveda scoring flag), INT-2 Phase 1 (unsquashed MP-4 +
    FC-1e/FC-2 + MP-5 integration), and MP-6 (one-call batched narration plus
    deterministic Foundation-only fallback), plus MP-6b (five-frame
-   conditional fallback copy validated on a real seven-day solver plan).
+   conditional fallback copy validated on a real seven-day solver plan), plus
+   MP-7 (build-time food roles, readiness/eligibility, hard culinary
+   plausibility, and behavior-preserving real-catalogue solver optimization).
    See PROJECT-HANDBOOK.md §6 ledger and `REPORT-WE2.md` / `REPORT-WE3.md` /
    `REPORT-WE4.md` / `REPORT-WE5.md` / `REPORT-WE6.md` for gates, timing,
    screenshots, accessibility, search, `REPORT-WE7.md` for legacy audit
@@ -256,7 +278,9 @@ median launch gates pass. See `REPORT-MP6b.md`.
    properties and launch evidence, and
    `REPORT-INT1.md` for integrated evidence, `REPORT-INT2.md` for the Phase-1
    merge, `REPORT-MP6.md` for narration and the two-call model topology, and
-   `REPORT-MP6b.md` for the real-plan copy sample and frame distribution.
+   `REPORT-MP6b.md` for the real-plan copy sample and frame distribution, and
+   `REPORT-MP7.md` for role coverage, plausibility, real-catalogue profiling,
+   deterministic plan equivalence, and physical-device launch/memory evidence.
 2. **Physical-device validation — explicitly pending.** Run the MP-1 nine-run
    matrix/G6/G8, MP-2 twenty-food error table/runtime counters, and MP-3 runtime
    zero-model-call confirmation exactly as registered in

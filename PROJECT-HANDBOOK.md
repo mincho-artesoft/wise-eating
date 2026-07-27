@@ -2,12 +2,13 @@
 **Read this first. It is the knowledge-transfer document for anyone (human or AI)
 taking over direction of this project. Update it at the end of every milestone —
 that is a standing rule baked into all task packets.**
-Last updated: 2026-07-27 (INT-2 Phase 1 integrates MP-4's single-call intent
-parse with FC-1e/FC-2 and MP-5's deterministic, hard-validated solver; MP-6
-adds one-call whole-plan narration plus a Foundation-only deterministic
-fallback; MP-6b gives that fallback five deterministic conditional frames.
-All authorized host/simulator gates pass; physical-device evidence remains
-explicit in `ayurveda-data/DEFERRED-VALIDATION.md`).
+Last updated: 2026-07-27 (MP-7 adds build-time culinary roles,
+`notReadyToEat` eligibility, anchor/cap/portion plausibility constraints, and a
+real-catalogue solver profile. Behavior-preserving role buckets and compact
+ranking records retain all 30 plan hashes while reducing seven-day solve
+median to 641.588 ms; physical-device launch and memory gates pass. Earlier
+MP-1/MP-2/MP-3 device evidence remains explicit in
+`ayurveda-data/DEFERRED-VALIDATION.md`).
 
 ## 1. Mission and the two applications
 
@@ -151,6 +152,15 @@ simulation; must always pass).
   `MP5AyurvedicSolverEnabled` flag is off by default and gates only aiDraft
   Ayurveda scoring; deterministic structural/safety assembly is common to both
   modes.
+- `WiseEating/AI/MealPlanning/FoodRoleResolver.swift` + bundled
+  `food_roles.json.gz` (MP-7): immutable build-time role, `notReadyToEat`, and
+  headword resolution for all 14,484 canonical catalogue rows. Solver
+  candidates carry this metadata once; eligibility is filtered once per solve.
+  Every meal requires an anchor, respects per-role/combined seasoning caps, and
+  clamps portions to the role definition before calorie repair. The production
+  solver ranks compact records in role buckets and precomputes duplicate/
+  viruddha context without changing candidate order, RNG consumption, 96 local
+  iterations, constraints, or outputs.
 - `WiseEating/AI/MealPlanning/MealPlanNarration.swift` and
   `MealPlanNarrator+FoundationModels.swift` (MP-6): narration receives only
   finished solver facts and cannot choose food or calculate values. The
@@ -208,6 +218,13 @@ simulation; must always pass).
     call for the complete plan, and must have a complete deterministic
     Foundation-only fallback. Template frame selection and optional-clause
     omission remain pure functions of supplied day/slot and finished facts.
+16. Culinary eligibility and meal shape come from the versioned food-role
+    artifact, never ad-hoc name substrings. `eligibleAsComponent == false` and
+    `notReadyToEat` are hard candidate exclusions; each meal requires an anchor
+    and respects authored role caps and portion ranges. Performance work may
+    cache or bucket these exact facts but may not reduce iterations, cap/sample
+    candidates, relax constraints, or change deterministic plan output without
+    a separate founder ruling.
 
 ## 4. Working process (the pattern that built all of this)
 
@@ -271,6 +288,11 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | MP-6 cold launch (Debug simulator) | candidate **1.616s** median vs INT-2 Phase 1 1.623s, N=10 same-session ABAB; paired median −0.015s, smaller than both IQRs and not resolvable |
 | MP-6b narration copy pass | **125/125** · five deterministic frames, zero adjacent repeats (5/4/4/4/4 over 21 meals) · real seven-day solver sample uses 91 distinct food IDs · total model calls remains **2** |
 | MP-6b cold launch (Debug simulator) | **1.543s** median, N=10; IQR 0.017s, min 1.502s, max 1.559s; below the 1.650s paydown trigger and 1.700s ceiling |
+| MP-7 culinary roles | rev9 · 15 roles / 34 rules · 14,484 cached rows · plain catalogue `other` 108/12,601 · ineligible 543 · `notReadyToEat` 304 · recipes on anchor 1,039/1,500 · prohibited recipe roles 0 |
+| MP-7 regression / feasibility | **150/150** tests · 30/30 real-catalogue solves · all 30 plan hashes unchanged by optimization · P7/P8 exact 1,200/3,600 kcal · Y1 **+1.550713** · narration 100/100 byte-identical · model calls 2 |
+| MP-7 real-catalogue solve | 13,993 candidates · 96 local iterations retained · seven-day median **641.588ms**, min 314.421ms, max 959.744ms (N=10); P8 profile 4,055.677→928.726ms without output change |
+| MP-7 role resolution | 14,484 rows **44.735ms cold / 1.086ms cached** |
+| MP-7 device launch / memory | iPhone 16 Pro iOS 26.5, Release, N=10 ABAB vs MP-6b: launch **1.090s** median (paired −14.247ms, max 1.099s); peak **402.556MiB** median (paired +10.281MiB, worst pair +49.172MiB) |
 
 ## 6. Milestone ledger (update after every task)
 
@@ -303,6 +325,7 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | INT-2 MP-4 + FC-1e/FC-2 + MP-5 integration | ✅ PHASE 1 HOST/SIMULATOR COMPLETE — unsquashed histories are integrated; MP-4's one-call typed interpretation feeds MP-5's deterministic assembly with caveat/fallback behavior retained. All 116 tests, 25+2 search goldens, 59/59 + 44/48 resolution, 23/23 MP-5 hard properties, MP-4 one-call/fallback gates, validator, deterministic artifacts, Debug/Release, fresh zero-insert/no-rebuild, tracked-size, and 1.437s launch gates pass. See `REPORT-INT2.md` |
 | MP-6 batched narration | ✅ HOST/SIMULATOR COMPLETE — one indexed whole-plan `@Generable` call replaces per-meal title polishing; the Foundation-only template is complete, deterministic, and has zero Foundation Models linkage. MP-1 telemetry proves one narration call at 1/3/7 days and a model-available seven-day total of 2 with MP-4 parsing. All 123 tests, 25+2 goldens, 23/23 solver properties, validator, Debug/Release, fresh zero-insert/no-rebuild, tracked-size, and 1.616s launch gates pass. The 2-call number remains a static host result until the deferred device matrix. See `REPORT-MP6.md` |
 | MP-6b narration copy pass | ✅ COMPLETE — the repeated three-day MP-6 sample is confirmed as a narration fixture, not solver output. Five deterministic sentence frames rotate without adjacent repeats; balanced-agni and mixed-thermal noise is omitted; single tastes fold into the main sentence. A real production-solver seven-day sample over shipped catalogue inputs has 91 distinct food IDs and passes the two-day no-repeat check. All 125 tests, 25+2 goldens, 23/23 solver properties, Debug/Release, flag on/off smoke, two-call telemetry, tracked-size, and 1.543s launch gates pass. See `REPORT-MP6b.md` |
+| MP-7 culinary plausibility | ✅ COMPLETE — rev9 resolves one cached culinary role, readiness flag, and headword for all 14,484 canonical rows; 543 plain-catalogue rows are ineligible and 304 are not ready to eat. Solver meals now require anchors, cap roles/seasonings, and enforce role portions. G0 detects 21/21 known-bad meals; fixtures 71/71, G1/G1b, both G2c directions, G4 150/150, G5 30/30, and G6 +1.550713 pass. A real-catalogue profile replaced the withdrawn synthetic 150ms assumption: behavior-preserving compact role buckets reduce seven-day median to 641.588ms while all 30 plan hashes remain exact. Physical iPhone N=10 ABAB launch is 1.090s median and peak memory +10.281MiB paired vs MP-6b; role cache 44.735ms cold / 1.086ms cached; tracked max 82,726,160 bytes. See `REPORT-MP7.md` |
 | Expert review pass | ⏳ pending human reviewer: work aiDraft→reviewed, resolve reviewNotes, optional batch-31 top-up to 750 |
 | Later roadmap | media (yoga/meditation content), recommendation engine, dosha assessment — see ayurveda-data/RESTART-PLAN.md history |
 
