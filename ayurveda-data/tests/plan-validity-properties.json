@@ -10,66 +10,477 @@
     "`soft` properties are quality objectives. Report the measured value; a miss is a tuning finding, not a failure.",
     "An INFEASIBLE request must be reported as infeasible. Emitting a partial or silently-relaxed plan is a hard failure."
   ],
-
   "profiles": [
-    { "id": "P1", "label": "balanced baseline", "kcal": 2000, "diet": "omnivore", "agni": "balanced", "dosha": null, "allergens": [], "horizons": [1,3,7] },
-    { "id": "P2", "label": "vegan, nut allergy", "kcal": 2000, "diet": "vegan", "agni": "balanced", "dosha": null, "allergens": ["tree_nuts","peanuts"], "horizons": [1,7] },
-    { "id": "P3", "label": "vata aggravated, irregular agni", "kcal": 2200, "diet": "vegetarian", "agni": "irregular", "dosha": "vata", "allergens": [], "horizons": [3,7] },
-    { "id": "P4", "label": "pitta aggravated, sharp agni", "kcal": 2400, "diet": "omnivore", "agni": "sharp", "dosha": "pitta", "allergens": [], "horizons": [3,7] },
-    { "id": "P5", "label": "kapha aggravated, slow agni", "kcal": 1700, "diet": "vegetarian", "agni": "slow", "dosha": "kapha", "allergens": [], "horizons": [3,7] },
-    { "id": "P6", "label": "multi-allergen", "kcal": 2000, "diet": "omnivore", "agni": "balanced", "dosha": null, "allergens": ["dairy","gluten","tree_nuts","shellfish"], "horizons": [7] },
-    { "id": "P7", "label": "low calorie edge", "kcal": 1200, "diet": "omnivore", "agni": "balanced", "dosha": null, "allergens": [], "horizons": [3] },
-    { "id": "P8", "label": "high calorie edge", "kcal": 3600, "diet": "omnivore", "agni": "balanced", "dosha": null, "allergens": [], "horizons": [3] },
-    { "id": "P9", "label": "jain sattvic, no allium", "kcal": 1900, "diet": "jain_sattvic", "agni": "balanced", "dosha": null, "allergens": [], "horizons": [3] },
-    { "id": "P10", "label": "INFEASIBLE — everything excluded", "kcal": 2000, "diet": "vegan", "agni": "balanced", "dosha": null, "allergens": ["dairy","gluten","tree_nuts","peanuts","soy","egg","shellfish","fish","sesame"], "horizons": [7], "expectInfeasible": true }
+    {
+      "id": "P1",
+      "label": "balanced baseline",
+      "kcal": 2000,
+      "diet": "omnivore",
+      "agni": "balanced",
+      "dosha": null,
+      "allergens": [],
+      "horizons": [
+        1,
+        3,
+        7
+      ]
+    },
+    {
+      "id": "P2",
+      "label": "vegan, nut allergy",
+      "kcal": 2000,
+      "diet": "vegan",
+      "agni": "balanced",
+      "dosha": null,
+      "allergens": [
+        "tree_nuts",
+        "peanuts"
+      ],
+      "horizons": [
+        1,
+        7
+      ]
+    },
+    {
+      "id": "P3",
+      "label": "vata aggravated, irregular agni",
+      "kcal": 2200,
+      "diet": "vegetarian",
+      "agni": "irregular",
+      "dosha": "vata",
+      "allergens": [],
+      "horizons": [
+        3,
+        7
+      ]
+    },
+    {
+      "id": "P4",
+      "label": "pitta aggravated, sharp agni",
+      "kcal": 2400,
+      "diet": "omnivore",
+      "agni": "sharp",
+      "dosha": "pitta",
+      "allergens": [],
+      "horizons": [
+        3,
+        7
+      ]
+    },
+    {
+      "id": "P5",
+      "label": "kapha aggravated, slow agni",
+      "kcal": 1700,
+      "diet": "vegetarian",
+      "agni": "slow",
+      "dosha": "kapha",
+      "allergens": [],
+      "horizons": [
+        3,
+        7
+      ]
+    },
+    {
+      "id": "P6",
+      "label": "multi-allergen",
+      "kcal": 2000,
+      "diet": "omnivore",
+      "agni": "balanced",
+      "dosha": null,
+      "allergens": [
+        "dairy",
+        "gluten",
+        "tree_nuts",
+        "shellfish"
+      ],
+      "horizons": [
+        7
+      ]
+    },
+    {
+      "id": "P7",
+      "label": "low calorie edge",
+      "kcal": 1200,
+      "diet": "omnivore",
+      "agni": "balanced",
+      "dosha": null,
+      "allergens": [],
+      "horizons": [
+        3
+      ]
+    },
+    {
+      "id": "P8",
+      "label": "high calorie edge",
+      "kcal": 3600,
+      "diet": "omnivore",
+      "agni": "balanced",
+      "dosha": null,
+      "allergens": [],
+      "horizons": [
+        3
+      ]
+    },
+    {
+      "id": "P9",
+      "label": "jain sattvic, no allium",
+      "kcal": 1900,
+      "diet": "jain_sattvic",
+      "agni": "balanced",
+      "dosha": null,
+      "allergens": [],
+      "horizons": [
+        3
+      ]
+    },
+    {
+      "id": "P10",
+      "label": "INFEASIBLE — everything excluded",
+      "kcal": 2000,
+      "diet": "vegan",
+      "agni": "balanced",
+      "dosha": null,
+      "allergens": [
+        "dairy",
+        "gluten",
+        "tree_nuts",
+        "peanuts",
+        "soy",
+        "egg",
+        "shellfish",
+        "fish",
+        "sesame"
+      ],
+      "horizons": [
+        7
+      ],
+      "expectInfeasible": true
+    }
   ],
-
   "properties": [
-    { "id": "S1", "severity": "hard", "group": "structure", "assert": "day count equals the requested horizon", "why": "the most basic contract" },
-    { "id": "S2", "severity": "hard", "group": "structure", "assert": "each day has exactly the requested number of meals", "why": "" },
-    { "id": "S3", "severity": "hard", "group": "structure", "assert": "no meal is empty", "why": "an empty meal is an infeasibility being hidden" },
-    { "id": "S4", "severity": "hard", "group": "structure", "assert": "every component has grams > 0", "why": "zero-gram components inflate variety without feeding anyone" },
-    { "id": "S5", "severity": "hard", "group": "structure", "assert": "every component resolves to a real FoodItem id present in the catalogue", "why": "the solver must never emit an invented food" },
-    { "id": "S6", "severity": "soft", "group": "structure", "assert": "component count per meal is between 2 and 6", "why": "one-item meals read as broken; seven read as noise" },
-
-    { "id": "N1", "severity": "hard", "group": "nutrition", "assert": "daily kcal is within ±18% of the profile target", "why": "the band the reference solver holds across all profiles" },
-    { "id": "N2", "severity": "hard", "group": "nutrition", "assert": "day kcal equals the sum over components of FoodItem-derived kcal at that component's grams, within 1e-6", "why": "MP-2's invariant. If this breaks, some path is inventing nutrition again." },
-    { "id": "N3", "severity": "hard", "group": "nutrition", "assert": "day macro totals equal the sum over components of FoodItem-derived macros, within 1e-6", "why": "same invariant, macros" },
-    { "id": "N4", "severity": "soft", "group": "nutrition", "assert": "daily protein is within ±25% of the profile protein target", "why": "" },
-    { "id": "N5", "severity": "soft", "group": "nutrition", "assert": "daily fibre is at least 20 g for a 2000 kcal target, scaled proportionally", "why": "" },
-
-    { "id": "A1", "severity": "hard", "group": "safety", "assert": "no component is a member of ANY excluded allergen concept, checked via FoodConcepts.members(of:) including hierarchy rollup and ingredient propagation", "why": "THE critical property. Name matching is not sufficient — a recipe with a dairy ingredient must be caught even when its name has no dairy word." },
-    { "id": "A2", "severity": "hard", "group": "safety", "assert": "no component is in the profile's excluded/disliked id set", "why": "" },
-    { "id": "A3", "severity": "hard", "group": "safety", "assert": "no component is in AyurvedaRecommendationGate.excludedFoodIds", "why": "the D9 never-recommend set: betel nut, vanaspati" },
-    { "id": "A4", "severity": "hard", "group": "safety", "assert": "for diet=vegan, no component is a member of dairy, egg, meat, fish, shellfish or honey concepts", "why": "diet is a hard constraint, not a preference" },
-    { "id": "A5", "severity": "hard", "group": "safety", "assert": "for diet=vegetarian, no component is a member of meat, fish or shellfish", "why": "" },
-    { "id": "A6", "severity": "hard", "group": "safety", "assert": "for diet=jain_sattvic, no component is a member of meat, fish, shellfish or allium", "why": "alliums are the distinguishing exclusion; if this passes trivially, confirm the allium concept has members" },
-    { "id": "A7", "severity": "hard", "group": "safety", "assert": "no component's AUTHORED minAgeMonths floor exceeds the profile age, where authored means ageProvenance=authored per WE-8c", "why": "legacyImport floors badge but do not hide — that ruling must hold in the solver too" },
-    { "id": "A8", "severity": "hard", "group": "safety", "assert": "no meal contains a hard viruddha pair", "why": "severity 1.0 rules only: milk+fish, honey+ghee at equal parts, honey heated" },
-    { "id": "A9", "severity": "soft", "group": "safety", "assert": "soft viruddha pairs are counted and reported per plan", "why": "exemptible per Ca.Su.26/104-106; report, do not block" },
-
-    { "id": "V1", "severity": "hard", "group": "variety", "assert": "no food id repeats within the no-repeat window (default 2 days)", "why": "" },
-    { "id": "V2", "severity": "soft", "group": "variety", "assert": "for any meal slot across days, component sets differ by at least two components", "why": "the rule the old prompt tried and failed to enforce in prose" },
-    { "id": "V3", "severity": "soft", "group": "variety", "assert": "a 7-day plan uses at least 25 distinct food ids", "why": "guards against a solver that finds one good combination and repeats it" },
-
-    { "id": "Y1", "severity": "soft", "group": "ayurveda", "assert": "when a dosha imbalance is set, the plan's mean signed effect on THAT dosha is negative (pacifying) and lower than the same solver run with imbalance cleared", "why": "THE test that the dravya data is actually driving selection. A solver that ignores dosha will show no difference between the two runs. This is the single most important soft property — it is the whole reason MP-5 exists." },
-    { "id": "Y2", "severity": "soft", "group": "ayurveda", "assert": "for agni=slow, mean component heaviness is lower than for agni=balanced at the same kcal target", "why": "manda agni tolerates less guru" },
-    { "id": "Y3", "severity": "soft", "group": "ayurveda", "assert": "for agni=slow, mean portion grams are lower than for agni=balanced at the same kcal target", "why": "the portion multiplier is applied" },
-    { "id": "Y4", "severity": "soft", "group": "ayurveda", "assert": "rasa coverage across a 7-day plan reaches at least 5 of 6 tastes", "why": "sarva-rasa-abhyasa (Ca.Su.25/40) is HABITUAL intake — measured over the window, never per plate. A per-meal six-taste assertion would be unsourced." },
-    { "id": "Y5", "severity": "soft", "group": "ayurveda", "assert": "mean heaviness at the midday meal exceeds mean heaviness at the evening meal", "why": "peak agni at midday; lightest at night" },
-    { "id": "Y6", "severity": "soft", "group": "ayurveda", "assert": "tier composition is reported: what share of selected components are classical, derived, estimated", "why": "report only. If the solver selects overwhelmingly estimated-tier foods, the Ayurvedic scoring is running on the weakest data and the founder should know." },
-
-    { "id": "D1", "severity": "hard", "group": "determinism", "assert": "same profile + same seed + same catalogue produces a byte-identical plan, across two runs in one session and once after relaunch", "why": "required for regenerate-this-day-only and for every gate here to mean anything" },
-    { "id": "D2", "severity": "hard", "group": "determinism", "assert": "different seeds produce different plans for the same profile", "why": "guards against a solver that ignores its seed and cannot offer alternatives" },
-
-    { "id": "F1", "severity": "hard", "group": "feasibility", "assert": "profile P10 is REPORTED infeasible; no partial plan is emitted and no constraint is silently relaxed", "why": "the honest-failure contract. Quietly dropping an allergen to find a solution is the worst possible behaviour." },
-    { "id": "F2", "severity": "hard", "group": "feasibility", "assert": "when infeasible, the report names WHICH constraint could not be satisfied", "why": "so the UI can tell the user what to relax" },
-
-    { "id": "P_1", "severity": "soft", "group": "performance", "assert": "a 7-day plan solves in under 2 seconds on the simulator", "why": "the reference implementation does it in ~340 ms in unoptimised Python over 14k foods; Swift should be far faster. A miss here means an algorithmic problem, not a tuning one." },
-    { "id": "P_2", "severity": "hard", "group": "performance", "assert": "zero model calls during assembly, proven by MP-1 telemetry", "why": "the entire point of MP-5" },
-    { "id": "P_3", "severity": "hard", "group": "performance", "assert": "the solver completes with no FoundationModels linkage", "why": "must work on iPhone 15/15 Plus and with Apple Intelligence off" }
+    {
+      "id": "S1",
+      "severity": "hard",
+      "group": "structure",
+      "assert": "day count equals the requested horizon",
+      "why": "the most basic contract"
+    },
+    {
+      "id": "S2",
+      "severity": "hard",
+      "group": "structure",
+      "assert": "each day has exactly the requested number of meals",
+      "why": ""
+    },
+    {
+      "id": "S3",
+      "severity": "hard",
+      "group": "structure",
+      "assert": "no meal is empty",
+      "why": "an empty meal is an infeasibility being hidden"
+    },
+    {
+      "id": "S4",
+      "severity": "hard",
+      "group": "structure",
+      "assert": "every component has grams > 0",
+      "why": "zero-gram components inflate variety without feeding anyone"
+    },
+    {
+      "id": "S5",
+      "severity": "hard",
+      "group": "structure",
+      "assert": "every component resolves to a real FoodItem id present in the catalogue",
+      "why": "the solver must never emit an invented food"
+    },
+    {
+      "id": "S6",
+      "severity": "soft",
+      "group": "structure",
+      "assert": "component count per meal is between 2 and 6",
+      "why": "one-item meals read as broken; seven read as noise"
+    },
+    {
+      "id": "N1",
+      "severity": "hard",
+      "group": "nutrition",
+      "assert": "daily kcal is within ±18% of the profile target",
+      "why": "the band the reference solver holds across all profiles"
+    },
+    {
+      "id": "N2",
+      "severity": "hard",
+      "group": "nutrition",
+      "assert": "day kcal equals the sum over components of FoodItem-derived kcal at that component's grams, within 1e-6",
+      "why": "MP-2's invariant. If this breaks, some path is inventing nutrition again."
+    },
+    {
+      "id": "N3",
+      "severity": "hard",
+      "group": "nutrition",
+      "assert": "day macro totals equal the sum over components of FoodItem-derived macros, within 1e-6",
+      "why": "same invariant, macros"
+    },
+    {
+      "id": "N4",
+      "severity": "soft",
+      "group": "nutrition",
+      "assert": "daily protein is within ±25% of the profile protein target",
+      "why": ""
+    },
+    {
+      "id": "N5",
+      "severity": "soft",
+      "group": "nutrition",
+      "assert": "daily fibre is at least 20 g for a 2000 kcal target, scaled proportionally",
+      "why": ""
+    },
+    {
+      "id": "A1",
+      "severity": "hard",
+      "group": "safety",
+      "assert": "no component is a member of ANY excluded allergen concept, checked via FoodConcepts.members(of:) including hierarchy rollup and ingredient propagation",
+      "why": "THE critical property. Name matching is not sufficient — a recipe with a dairy ingredient must be caught even when its name has no dairy word."
+    },
+    {
+      "id": "A2",
+      "severity": "hard",
+      "group": "safety",
+      "assert": "no component is in the profile's excluded/disliked id set",
+      "why": ""
+    },
+    {
+      "id": "A3",
+      "severity": "hard",
+      "group": "safety",
+      "assert": "no component is in AyurvedaRecommendationGate.excludedFoodIds",
+      "why": "the D9 never-recommend set: betel nut, vanaspati"
+    },
+    {
+      "id": "A4",
+      "severity": "hard",
+      "group": "safety",
+      "assert": "for diet=vegan, no component is a member of dairy, egg, meat, fish, shellfish or honey concepts",
+      "why": "diet is a hard constraint, not a preference"
+    },
+    {
+      "id": "A5",
+      "severity": "hard",
+      "group": "safety",
+      "assert": "for diet=vegetarian, no component is a member of meat, fish or shellfish",
+      "why": ""
+    },
+    {
+      "id": "A6",
+      "severity": "hard",
+      "group": "safety",
+      "assert": "for diet=jain_sattvic, no component is a member of meat, fish, shellfish or allium",
+      "why": "alliums are the distinguishing exclusion; if this passes trivially, confirm the allium concept has members"
+    },
+    {
+      "id": "A7",
+      "severity": "hard",
+      "group": "safety",
+      "assert": "no component's AUTHORED minAgeMonths floor exceeds the profile age, where authored means ageProvenance=authored per WE-8c",
+      "why": "legacyImport floors badge but do not hide — that ruling must hold in the solver too"
+    },
+    {
+      "id": "A8",
+      "severity": "hard",
+      "group": "safety",
+      "assert": "no meal contains a hard viruddha pair",
+      "why": "severity 1.0 rules only: milk+fish, honey+ghee at equal parts, honey heated"
+    },
+    {
+      "id": "A9",
+      "severity": "soft",
+      "group": "safety",
+      "assert": "soft viruddha pairs are counted and reported per plan",
+      "why": "exemptible per Ca.Su.26/104-106; report, do not block"
+    },
+    {
+      "id": "V1",
+      "severity": "hard",
+      "group": "variety",
+      "assert": "no food id repeats within the no-repeat window (default 2 days)",
+      "why": ""
+    },
+    {
+      "id": "V2",
+      "severity": "soft",
+      "group": "variety",
+      "assert": "for any meal slot across days, component sets differ by at least two components",
+      "why": "the rule the old prompt tried and failed to enforce in prose"
+    },
+    {
+      "id": "V3",
+      "severity": "soft",
+      "group": "variety",
+      "assert": "a 7-day plan uses at least 25 distinct food ids",
+      "why": "guards against a solver that finds one good combination and repeats it"
+    },
+    {
+      "id": "Y1",
+      "severity": "soft",
+      "group": "ayurveda",
+      "assert": "when a dosha imbalance is set, the plan's mean signed effect on THAT dosha is negative (pacifying) and lower than the same solver run with imbalance cleared",
+      "why": "THE test that the dravya data is actually driving selection. A solver that ignores dosha will show no difference between the two runs. This is the single most important soft property — it is the whole reason MP-5 exists."
+    },
+    {
+      "id": "Y2",
+      "severity": "soft",
+      "group": "ayurveda",
+      "assert": "for agni=slow, mean component heaviness is lower than for agni=balanced at the same kcal target",
+      "why": "manda agni tolerates less guru"
+    },
+    {
+      "id": "Y3",
+      "severity": "soft",
+      "group": "ayurveda",
+      "assert": "for agni=slow, mean portion grams are lower than for agni=balanced at the same kcal target",
+      "why": "the portion multiplier is applied"
+    },
+    {
+      "id": "Y4",
+      "severity": "soft",
+      "group": "ayurveda",
+      "assert": "rasa coverage across a 7-day plan reaches at least 5 of 6 tastes",
+      "why": "sarva-rasa-abhyasa (Ca.Su.25/40) is HABITUAL intake — measured over the window, never per plate. A per-meal six-taste assertion would be unsourced."
+    },
+    {
+      "id": "Y5",
+      "severity": "soft",
+      "group": "ayurveda",
+      "assert": "mean heaviness at the midday meal exceeds mean heaviness at the evening meal",
+      "why": "peak agni at midday; lightest at night"
+    },
+    {
+      "id": "Y6",
+      "severity": "soft",
+      "group": "ayurveda",
+      "assert": "tier composition is reported: what share of selected components are classical, derived, estimated",
+      "why": "report only. If the solver selects overwhelmingly estimated-tier foods, the Ayurvedic scoring is running on the weakest data and the founder should know."
+    },
+    {
+      "id": "D1",
+      "severity": "hard",
+      "group": "determinism",
+      "assert": "same profile + same seed + same catalogue produces a byte-identical plan, across two runs in one session and once after relaunch",
+      "why": "required for regenerate-this-day-only and for every gate here to mean anything"
+    },
+    {
+      "id": "D2",
+      "severity": "hard",
+      "group": "determinism",
+      "assert": "different seeds produce different plans for the same profile",
+      "why": "guards against a solver that ignores its seed and cannot offer alternatives"
+    },
+    {
+      "id": "F1",
+      "severity": "hard",
+      "group": "feasibility",
+      "assert": "profile P10 is REPORTED infeasible; no partial plan is emitted and no constraint is silently relaxed",
+      "why": "the honest-failure contract. Quietly dropping an allergen to find a solution is the worst possible behaviour."
+    },
+    {
+      "id": "F2",
+      "severity": "hard",
+      "group": "feasibility",
+      "assert": "when infeasible, the report names WHICH constraint could not be satisfied",
+      "why": "so the UI can tell the user what to relax"
+    },
+    {
+      "id": "P_1",
+      "severity": "soft",
+      "group": "performance",
+      "assert": "a 7-day plan solves in under 2 seconds on the simulator",
+      "why": "the reference implementation does it in ~340 ms in unoptimised Python over 14k foods; Swift should be far faster. A miss here means an algorithmic problem, not a tuning one."
+    },
+    {
+      "id": "P_2",
+      "severity": "hard",
+      "group": "performance",
+      "assert": "zero model calls during assembly, proven by MP-1 telemetry",
+      "why": "the entire point of MP-5"
+    },
+    {
+      "id": "P_3",
+      "severity": "hard",
+      "group": "performance",
+      "assert": "the solver completes with no FoundationModels linkage",
+      "why": "must work on iPhone 15/15 Plus and with Apple Intelligence off"
+    },
+    {
+      "id": "C1",
+      "severity": "hard",
+      "group": "plausibility",
+      "assert": "no component is an infant or toddler product (infant formula, toddler formula, baby food, pediatric shake, follow-on formula) unless the profile age is under 36 months",
+      "why": "OBSERVED IN MP-6b: three separate infant/toddler formula selections in one week for an adult profile. minAgeMonths is a FLOOR, not a range — infant formula has a floor of 0 and therefore passes every adult age check. The data cannot express 'intended for infants, inappropriate for adults'; this property must."
+    },
+    {
+      "id": "C2",
+      "severity": "hard",
+      "group": "plausibility",
+      "assert": "every meal contains at least one component whose food role has `anchor: true` in food-roles.json (main or staple)",
+      "why": "OBSERVED: dinners composed entirely of spices, herbs and condiments. A meal needs something to be a meal."
+    },
+    {
+      "id": "C3",
+      "severity": "hard",
+      "group": "plausibility",
+      "assert": "per meal, at most 2 components total across roles `spice`, `herb`, `condiment` and `medicinalHerb`, and at most 1 `medicinalHerb`",
+      "why": "OBSERVED: 'Curry Leaves, Tulsi, Black Cumin, Lime leaf, Lentils raw, Nigella Seed' as a dinner; 'Garlic dried, Wild garlic dried, Garlic powder' in one lunch."
+    },
+    {
+      "id": "C4",
+      "severity": "hard",
+      "group": "plausibility",
+      "assert": "every component's portion grams fall inside the `portionGrams` min/max declared for its role in food-roles.json. The suite does NOT carry its own copy of these numbers — one source of truth.",
+      "why": "OBSERVED: exact 500/700/800 kcal totals were hit by scaling spices to implausible weights. Nobody eats 80 g of dried marjoram. Ranges live in food-roles.json so they cannot drift out of sync with the taxonomy."
+    },
+    {
+      "id": "C5",
+      "severity": "hard",
+      "group": "plausibility",
+      "assert": "no component carries the `requiresCooking` flag defined in food-roles.json (raw dry legume, raw dry grain, raw dry pulse presented as edible)",
+      "why": "OBSERVED in four separate meals. These require cooking; some raw legumes are actively toxic."
+    },
+    {
+      "id": "C6",
+      "severity": "hard",
+      "group": "plausibility",
+      "assert": "at most 2 components per meal have role `beverage`",
+      "why": "OBSERVED: 'Frozen yogurt chocolate, Chocolate milk, Milk shake with malt, Soy milk chocolate' as a breakfast."
+    },
+    {
+      "id": "C7",
+      "severity": "soft",
+      "group": "plausibility",
+      "assert": "no two components in the same meal satisfy `isNearDuplicateOf` as defined in food-roles.json",
+      "why": "OBSERVED: 'Marjoram, dried' beside 'Spices, marjoram, dried'; three garlic forms; two infant formulas."
+    },
+    {
+      "id": "C8",
+      "severity": "soft",
+      "group": "plausibility",
+      "assert": "report the role distribution across all selected components per plan",
+      "why": "report-only. If a plan is 60% spice by count, the objective is rewarding the wrong thing regardless of what the hard properties say."
+    },
+    {
+      "id": "C9",
+      "severity": "hard",
+      "group": "plausibility",
+      "assert": "no component has role `supplement`, `nonFood`, or `infantProduct`; that is, no component whose role declares `eligibleAsComponent: false`, except infantProduct for a profile under 36 months",
+      "why": "generalises C1 beyond infant products"
+    },
+    {
+      "id": "C10",
+      "severity": "soft",
+      "group": "plausibility",
+      "assert": "report the count of catalogue rows resolving to role `other`, and the count of plan components with role `other`",
+      "why": "If the role map has holes, C2-C9 are enforcing a vocabulary that does not describe the catalogue. See the coverage gate in food-roles.json."
+    }
   ],
-
   "deletionsExpected": [
     "generateFullPlanWithAI",
     "AIConceptualPlanResponse1D through 7D",
@@ -86,5 +497,29 @@
     "normalizeMealsToRequestedOrder",
     "specializeStructuralRequestsWithHeadwords"
   ],
-  "deletionNote": "These exist to repair LLM output. A deterministic solver produces correct structure by construction, so they become dead code. Report any that CANNOT be deleted and why — that is a sign the solver is not covering something the old pipeline did."
+  "deletionNote": "These exist to repair LLM output. A deterministic solver produces correct structure by construction, so they become dead code. Report any that CANNOT be deleted and why — that is a sign the solver is not covering something the old pipeline did.",
+  "revision": "rev2 — 2026-07-27. CRITICAL GAP FOUND IN MP-6b. The rev1 suite passed 23/23 hard properties on plans containing infant formula served to adults, breakfasts of four chocolate drinks, and dinners of six dried herbs beside raw lentils. No property asserted CULINARY PLAUSIBILITY. This revision adds group `plausibility` (C1-C10) and binds it to the new food-roles.json taxonomy. Director defect: I validated structure, nutrition, safety, variety, dosha, determinism, feasibility and performance, and never asked whether the output was food.",
+  "notes": [
+    "FOOD ROLE is a new prerequisite. C2-C8 need every catalogue row to carry a role: main, staple, side, beverage, spice, herb, condiment, supplement, infantProduct, other. This does not exist yet and is a director artifact to author — it is the same shape as the FC-1 concept work and should live alongside it."
+  ],
+  "dependsOn": {
+    "ayurveda-data/rules/food-roles.json": "rev1 or later. Properties C1-C10 have NO meaning without it — it supplies the role vocabulary, the per-role portion ranges, the requiresCooking flag and the near-duplicate test. Do not re-implement any of those inside the test harness.",
+    "ayurveda-data/tests/food-role-goldens.json": "rev1 or later, plus the mandatory random holdout described in it."
+  },
+  "counts": {
+    "properties": 46,
+    "hard": 30,
+    "soft": 16,
+    "groups": {
+      "structure": 6,
+      "nutrition": 5,
+      "safety": 9,
+      "variety": 3,
+      "ayurveda": 6,
+      "determinism": 2,
+      "feasibility": 2,
+      "performance": 3,
+      "plausibility": 10
+    }
+  }
 }

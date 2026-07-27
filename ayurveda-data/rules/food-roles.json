@@ -1,0 +1,1660 @@
+{
+  "rolesVersion": 1,
+  "revision": "rev1 — 2026-07-27. Written after MP-6b produced culinarily absurd plans that passed all 23 hard properties: infant formula served to adults three times in one week, a breakfast of four chocolate drinks, and a dinner of six dried herbs beside raw lentils. Nothing in the catalogue said what a row IS FOR. This file says it.",
+  "author": "Director",
+  "appliesTo": "Every row of the 14,484-item FoodItem catalogue, plus the 1,500 authored recipes. Consumed by the MP-5 solver as an eligibility and composition constraint, and by properties C1-C9 of plan-validity-properties.json as their vocabulary.",
+  "whyThisExists": "minAgeMonths is a FLOOR, not a range. Infant formula carries a floor of 0 and therefore satisfies every adult age check in the system. The catalogue can express 'not before this age' and cannot express 'intended for infants, inappropriate for adults'. It also cannot express 'this is a seasoning, not a dish'. Both failures produced the same symptom in MP-6b. A role is the missing field.",
+  "matching": {
+    "reuse": "Reuse the food-concepts.json rev5 matcher — same normalization, same contiguous token-sequence phrase match, same order-independent vetoTokens, same suffix negation, token-boundary only and NEVER substring. Do not write a second matcher.",
+    "pluralTolerance": {
+      "spec": "A phrase token matches a catalogue token when they are identical, or differ by a trailing 's', or by a trailing 'es', or by y->ies, or appear together in irregularPlurals below. Case-folded.",
+      "irregularPlurals": {
+        "leaf": "leaves",
+        "loaf": "loaves",
+        "knife": "knives",
+        "half": "halves",
+        "roti": "rotis",
+        "dal": "dals"
+      },
+      "FC1_DEFECT": "food-concepts.json rev5 specifies trailing-'s' ONLY. That rule does not match 'potatoes' from 'potato', 'tomatoes' from 'tomato', 'berries' from 'berry', or 'leaves' from 'leaf'. It was caught here by running this file's own goldens against its own rules: 'Potatoes, flesh and skin, raw' — the exact row that produced the FC-1 `flesh` defect — resolved to `other`. The same fix must be applied to food-concepts.json and its 117 exclusion goldens re-run. Tracked as FC-1f in TASK-MP7.md."
+    }
+  },
+  "resolution": {
+    "algorithm": "Evaluate EVERY rule against the row. Collect all that match. Take the highest `priority`. Break ties by longest matched phrase in tokens; break remaining ties by the order rules appear in this file. A rule with `vetoTokens` or `vetoPhrases` that fires is discarded before priority is considered.",
+    "priorityBands": {
+      "100": "explicit per-row overrides",
+      "95": "exclusionary detectors (infant, supplement, non-food)",
+      "85": "authored recipe course — real data, outranks every name guess",
+      "82": "narrow corrections to the 80 band",
+      "80": "name phrases strong enough to override the USDA category",
+      "70": "USDA foodCategory map",
+      "62": "medicinal dravyas",
+      "60": "general name phrases",
+      "40": "dravya classification fallback",
+      "0": "default `other`"
+    },
+    "default": "other",
+    "singleAssignment": "Exactly one role per row. Unlike food-concepts.json, roles are not a set and do not roll up a hierarchy."
+  },
+  "roles": [
+    {
+      "id": "main",
+      "definition": "The protein or legume centre of a meal, or a composed dish that stands alone.",
+      "anchor": true,
+      "minPerMeal": 0,
+      "maxPerMeal": 3,
+      "portionGrams": {
+        "min": 80,
+        "typical": 200,
+        "max": 450
+      }
+    },
+    {
+      "id": "staple",
+      "definition": "Grain, bread, tuber or other starch base.",
+      "anchor": true,
+      "minPerMeal": 0,
+      "maxPerMeal": 2,
+      "portionGrams": {
+        "min": 40,
+        "typical": 150,
+        "max": 350
+      }
+    },
+    {
+      "id": "side",
+      "definition": "Vegetable, fruit, dairy accompaniment, nuts, salad.",
+      "anchor": false,
+      "minPerMeal": 0,
+      "maxPerMeal": 3,
+      "portionGrams": {
+        "min": 40,
+        "typical": 120,
+        "max": 250
+      }
+    },
+    {
+      "id": "beverage",
+      "definition": "Anything drunk rather than eaten.",
+      "anchor": false,
+      "minPerMeal": 0,
+      "maxPerMeal": 2,
+      "portionGrams": {
+        "min": 100,
+        "typical": 240,
+        "max": 500
+      }
+    },
+    {
+      "id": "spice",
+      "definition": "Dried seed, bark, root or powder used for seasoning. Includes salt.",
+      "anchor": false,
+      "minPerMeal": 0,
+      "maxPerMeal": 2,
+      "portionGrams": {
+        "min": 0.3,
+        "typical": 2,
+        "max": 15
+      }
+    },
+    {
+      "id": "herb",
+      "definition": "Leafy aromatic, fresh or dried.",
+      "anchor": false,
+      "minPerMeal": 0,
+      "maxPerMeal": 2,
+      "portionGrams": {
+        "min": 0.3,
+        "typical": 3,
+        "max": 30
+      }
+    },
+    {
+      "id": "medicinalHerb",
+      "definition": "Classical therapeutic dravya taken in small measured quantity.",
+      "anchor": false,
+      "minPerMeal": 0,
+      "maxPerMeal": 1,
+      "portionGrams": {
+        "min": 0.5,
+        "typical": 3,
+        "max": 10
+      }
+    },
+    {
+      "id": "condiment",
+      "definition": "Chutney, pickle, sauce, dressing, dip served alongside.",
+      "anchor": false,
+      "minPerMeal": 0,
+      "maxPerMeal": 2,
+      "portionGrams": {
+        "min": 5,
+        "typical": 20,
+        "max": 60
+      }
+    },
+    {
+      "id": "fat",
+      "definition": "Cooking or finishing fat: oil, ghee, butter.",
+      "anchor": false,
+      "minPerMeal": 0,
+      "maxPerMeal": 1,
+      "portionGrams": {
+        "min": 2,
+        "typical": 10,
+        "max": 30
+      }
+    },
+    {
+      "id": "sweet",
+      "definition": "Dessert, confection or sweetener.",
+      "anchor": false,
+      "minPerMeal": 0,
+      "maxPerMeal": 1,
+      "portionGrams": {
+        "min": 5,
+        "typical": 40,
+        "max": 120
+      }
+    },
+    {
+      "id": "supplement",
+      "definition": "Protein powder, medical food, vitamin, meal replacement.",
+      "anchor": false,
+      "minPerMeal": 0,
+      "maxPerMeal": 0,
+      "portionGrams": {
+        "min": 5,
+        "typical": 30,
+        "max": 60
+      },
+      "eligibleAsComponent": false
+    },
+    {
+      "id": "infantProduct",
+      "definition": "Infant or toddler formula, baby food, pediatric nutrition.",
+      "anchor": false,
+      "minPerMeal": 0,
+      "maxPerMeal": 0,
+      "portionGrams": {
+        "min": 10,
+        "typical": 150,
+        "max": 300
+      },
+      "eligibleAsComponent": false,
+      "exception": "Eligible ONLY when the profile age is under 36 months, in which case it may be an anchor."
+    },
+    {
+      "id": "nonFood",
+      "definition": "Leavening, thickener, colouring, plain water, ingredient-only rows.",
+      "anchor": false,
+      "minPerMeal": 0,
+      "maxPerMeal": 0,
+      "portionGrams": {
+        "min": 0,
+        "typical": 0,
+        "max": 0
+      },
+      "eligibleAsComponent": false
+    },
+    {
+      "id": "other",
+      "definition": "Unresolved. Eligible but never an anchor, and capped, so an unresolved row can never constitute a meal.",
+      "anchor": false,
+      "minPerMeal": 0,
+      "maxPerMeal": 2,
+      "portionGrams": {
+        "min": 20,
+        "typical": 100,
+        "max": 300
+      }
+    }
+  ],
+  "rules": [
+    {
+      "id": "X-INFANT-FORMULA",
+      "role": "infantProduct",
+      "priority": 95,
+      "tokenGroups": [
+        [
+          "formula",
+          "infant"
+        ],
+        [
+          "formula",
+          "toddler"
+        ],
+        [
+          "formula",
+          "premature"
+        ],
+        [
+          "formula",
+          "preterm"
+        ],
+        [
+          "formula",
+          "soy"
+        ],
+        [
+          "formula",
+          "powder"
+        ],
+        [
+          "formula",
+          "concentrate"
+        ],
+        [
+          "formula",
+          "ready"
+        ],
+        [
+          "follow",
+          "formula"
+        ],
+        [
+          "formula",
+          "hypoallergenic"
+        ]
+      ],
+      "note": "Order-independent because USDA writes both 'Infant formula, ...' and 'Formula, infant, ...'."
+    },
+    {
+      "id": "X-INFANT-BARE-FORMULA",
+      "role": "infantProduct",
+      "priority": 90,
+      "phrases": [
+        "formula"
+      ],
+      "vetoTokens": [
+        [
+          "adult"
+        ],
+        [
+          "enteral"
+        ],
+        [
+          "racing"
+        ],
+        [
+          "infant",
+          "free"
+        ]
+      ],
+      "note": "A bare 'formula' row in a food catalogue is an infant product until shown otherwise. Misrouting between infantProduct and supplement is HARMLESS here: both are ineligible as meal components, so this rule is allowed to be blunt."
+    },
+    {
+      "id": "X-BABY-FOOD",
+      "role": "infantProduct",
+      "priority": 95,
+      "phrases": [
+        "babyfood",
+        "baby food",
+        "infant cereal",
+        "toddler drink",
+        "growing up milk",
+        "pediatric shake",
+        "pediatric drink",
+        "human milk",
+        "breast milk",
+        "weaning food",
+        "follow on",
+        "follow-on"
+      ],
+      "tokenGroups": [
+        [
+          "babyfood"
+        ],
+        [
+          "baby",
+          "food"
+        ],
+        [
+          "cereal",
+          "infant"
+        ],
+        [
+          "shake",
+          "pediatric"
+        ],
+        [
+          "toddler",
+          "beverage"
+        ]
+      ]
+    },
+    {
+      "id": "X-INFANT-BRANDS",
+      "role": "infantProduct",
+      "priority": 95,
+      "phrases": [
+        "similac",
+        "enfamil",
+        "enfagrow",
+        "nutramigen",
+        "alimentum",
+        "neosure",
+        "elecare",
+        "puramino",
+        "gerber",
+        "beech-nut",
+        "pediasure",
+        "nestle good start",
+        "good start",
+        "earth's best infant"
+      ]
+    },
+    {
+      "id": "X-SUPPLEMENT",
+      "role": "supplement",
+      "priority": 95,
+      "phrases": [
+        "protein powder",
+        "protein isolate",
+        "whey protein",
+        "soy protein isolate",
+        "casein protein",
+        "meal replacement",
+        "nutritional supplement",
+        "nutrition shake",
+        "nutritional shake",
+        "medical food",
+        "enteral",
+        "tube feeding",
+        "dietary supplement",
+        "mineral supplement",
+        "electrolyte powder",
+        "creatine",
+        "collagen peptides",
+        "collagen powder",
+        "fiber supplement",
+        "psyllium husk",
+        "multivitamin",
+        "vitamin supplement",
+        "ensure",
+        "boost nutritional",
+        "glucerna",
+        "carnation instant breakfast",
+        "sports drink powder",
+        "amino acid",
+        "protein bar",
+        "supplement drink"
+      ],
+      "tokenGroups": [
+        [
+          "supplement"
+        ],
+        [
+          "isolate",
+          "protein"
+        ],
+        [
+          "vitamin",
+          "tablet"
+        ],
+        [
+          "capsule"
+        ],
+        [
+          "tablet"
+        ],
+        [
+          "softgel"
+        ]
+      ],
+      "vetoTokens": [
+        [
+          "vitamin",
+          "fortified"
+        ]
+      ]
+    },
+    {
+      "id": "X-NONFOOD",
+      "role": "nonFood",
+      "priority": 95,
+      "phrases": [
+        "leavening agent",
+        "baking soda",
+        "yeast, active dry",
+        "food coloring",
+        "gelatin, dry",
+        "meat extender",
+        "imitation, dry",
+        "pectin",
+        "xanthan gum",
+        "rennet",
+        "alum",
+        "water, tap",
+        "water, bottled",
+        "bouillon",
+        "bouillon cube",
+        "stock cube",
+        "broth cube",
+        "soup base, dry",
+        "seasoning cube"
+      ],
+      "note": "Ingredient-only or non-nutritive rows. Ineligible as components. NOT the same as fat or condiment."
+    },
+    {
+      "id": "A-RECIPE-COURSE",
+      "role": "<fromCourseMap>",
+      "priority": 85,
+      "signal": "recipe.course",
+      "courseMap": {
+        "breakfast": "main",
+        "main": "main",
+        "maincourse": "main",
+        "entree": "main",
+        "curry": "main",
+        "dal": "main",
+        "soup": "main",
+        "side": "side",
+        "salad": "side",
+        "chutney": "condiment",
+        "pickle": "condiment",
+        "raita": "side",
+        "bread": "staple",
+        "rice": "staple",
+        "grain": "staple",
+        "beverage": "beverage",
+        "drink": "beverage",
+        "dessert": "sweet",
+        "sweet": "sweet",
+        "spiceblend": "spice",
+        "masala": "spice",
+        "ghee": "fat",
+        "medicinal": "medicinalHerb"
+      },
+      "note": "The 1,500 authored recipes carry a course. Authored data outranks any name guess. If the course field is absent or unmapped this rule does not fire."
+    },
+    {
+      "id": "S-JUICE",
+      "role": "beverage",
+      "priority": 80,
+      "phrases": [
+        "juice",
+        "nectar",
+        "juice drink",
+        "juice concentrate"
+      ],
+      "vetoTokens": [
+        [
+          "lemon",
+          "juice"
+        ],
+        [
+          "lime",
+          "juice"
+        ],
+        [
+          "juice",
+          "concentrate",
+          "frozen"
+        ]
+      ],
+      "note": "Lemon/lime juice is a condiment-scale ingredient, not a drink; vetoed here and caught by C-LEMONJUICE."
+    },
+    {
+      "id": "S-LEMONJUICE",
+      "role": "condiment",
+      "priority": 82,
+      "tokenGroups": [
+        [
+          "lemon",
+          "juice"
+        ],
+        [
+          "lime",
+          "juice"
+        ],
+        [
+          "tamarind",
+          "paste"
+        ],
+        [
+          "tamarind",
+          "concentrate"
+        ]
+      ]
+    },
+    {
+      "id": "S-MILK-DRINK",
+      "role": "beverage",
+      "priority": 80,
+      "phrases": [
+        "milk",
+        "chocolate milk",
+        "soy milk",
+        "almond milk",
+        "oat milk",
+        "rice milk",
+        "cashew milk",
+        "buttermilk",
+        "lassi",
+        "chaas",
+        "milkshake",
+        "milk shake",
+        "kefir",
+        "hot chocolate",
+        "cocoa",
+        "drinking chocolate"
+      ],
+      "vetoTokens": [
+        [
+          "coconut",
+          "milk"
+        ],
+        [
+          "milk",
+          "powder"
+        ],
+        [
+          "milk",
+          "dry"
+        ],
+        [
+          "milk",
+          "condensed"
+        ],
+        [
+          "milk",
+          "evaporated"
+        ],
+        [
+          "milk",
+          "canned"
+        ],
+        [
+          "milk",
+          "chocolate",
+          "bar"
+        ],
+        [
+          "milk",
+          "solids"
+        ],
+        [
+          "yogurt"
+        ],
+        [
+          "yoghurt"
+        ],
+        [
+          "curd"
+        ],
+        [
+          "cheese"
+        ],
+        [
+          "pudding"
+        ],
+        [
+          "custard"
+        ],
+        [
+          "ice",
+          "cream"
+        ],
+        [
+          "paneer"
+        ]
+      ],
+      "note": "Vetoes exist because 'coconut milk' and 'milk powder' are cooking ingredients, not drinks."
+    },
+    {
+      "id": "S-BEVERAGE",
+      "role": "beverage",
+      "priority": 80,
+      "phrases": [
+        "tea",
+        "green tea",
+        "herbal tea",
+        "coffee",
+        "espresso",
+        "soft drink",
+        "soda",
+        "cola",
+        "beer",
+        "wine",
+        "liquor",
+        "smoothie",
+        "shake",
+        "kombucha",
+        "broth",
+        "decoction",
+        "kadha",
+        "infusion",
+        "tonic",
+        "water, mineral",
+        "beverages",
+        "sports drink",
+        "energy drink",
+        "coconut water",
+        "sugarcane juice",
+        "panakam",
+        "thandai"
+      ],
+      "vetoTokens": [
+        [
+          "tea",
+          "leaves",
+          "dry"
+        ],
+        [
+          "coffee",
+          "beans"
+        ],
+        [
+          "tea",
+          "bag",
+          "unbrewed"
+        ],
+        [
+          "broth",
+          "cube"
+        ],
+        [
+          "broth",
+          "granule"
+        ],
+        [
+          "bouillon"
+        ]
+      ]
+    },
+    {
+      "id": "S-SOUP",
+      "role": "main",
+      "priority": 80,
+      "phrases": [
+        "soup",
+        "stew",
+        "chowder",
+        "rasam",
+        "sambar",
+        "shorba",
+        "kadhi",
+        "broth soup"
+      ],
+      "note": "Overrides the 'Soups, Sauces, and Gravies' category, which otherwise routes to condiment."
+    },
+    {
+      "id": "S-EGG",
+      "role": "main",
+      "priority": 80,
+      "phrases": [
+        "egg",
+        "eggs",
+        "omelet",
+        "omelette",
+        "frittata",
+        "scrambled egg",
+        "boiled egg"
+      ],
+      "vetoTokens": [
+        [
+          "egg",
+          "substitute",
+          "powder"
+        ],
+        [
+          "egg",
+          "white",
+          "dried"
+        ],
+        [
+          "eggplant"
+        ],
+        [
+          "egg",
+          "noodle"
+        ]
+      ]
+    },
+    {
+      "id": "S-CHEESE-PANEER",
+      "role": "main",
+      "priority": 80,
+      "phrases": [
+        "paneer",
+        "tofu",
+        "tempeh",
+        "seitan",
+        "cottage cheese",
+        "halloumi"
+      ]
+    },
+    {
+      "id": "S-CREAM-FAT",
+      "role": "fat",
+      "priority": 80,
+      "phrases": [
+        "ghee",
+        "clarified butter",
+        "butter",
+        "margarine",
+        "shortening",
+        "lard",
+        "tallow",
+        "cream, heavy",
+        "heavy cream",
+        "suet",
+        "drippings"
+      ],
+      "vetoTokens": [
+        [
+          "butter",
+          "peanut"
+        ],
+        [
+          "butter",
+          "almond"
+        ],
+        [
+          "butter",
+          "cashew"
+        ],
+        [
+          "butter",
+          "nut"
+        ],
+        [
+          "butter",
+          "apple"
+        ],
+        [
+          "buttermilk"
+        ],
+        [
+          "butter",
+          "cookie"
+        ],
+        [
+          "butter",
+          "cake"
+        ]
+      ]
+    },
+    {
+      "id": "S-OIL",
+      "role": "fat",
+      "priority": 80,
+      "phrases": [
+        "oil",
+        "olive oil",
+        "vegetable oil",
+        "coconut oil",
+        "sesame oil",
+        "mustard oil",
+        "sunflower oil",
+        "canola oil",
+        "peanut oil",
+        "ghee oil",
+        "rice bran oil"
+      ],
+      "vetoTokens": [
+        [
+          "canned",
+          "oil"
+        ],
+        [
+          "packed",
+          "oil"
+        ],
+        [
+          "drained",
+          "oil"
+        ],
+        [
+          "oil",
+          "roasted"
+        ],
+        [
+          "fried",
+          "oil"
+        ]
+      ],
+      "note": "The vetoes stop 'Fish, tuna, canned in oil, drained' from resolving to fat. This is the single most likely place for this file to go wrong, because 'oil' appears as a preparation word across hundreds of rows."
+    },
+    {
+      "id": "S-SALT",
+      "role": "spice",
+      "priority": 80,
+      "phrases": [
+        "salt",
+        "table salt",
+        "rock salt",
+        "black salt",
+        "kala namak",
+        "sendha namak",
+        "sea salt",
+        "seasoning salt",
+        "herb salt"
+      ]
+    },
+    {
+      "id": "U-CATEGORY",
+      "role": "<fromCategoryMap>",
+      "priority": 70,
+      "signal": "usda.foodCategory",
+      "categoryMap": {
+        "Baby Foods": "infantProduct",
+        "Spices and Herbs": "spice",
+        "Fats and Oils": "fat",
+        "Beverages": "beverage",
+        "Sweets": "sweet",
+        "Soups, Sauces, and Gravies": "condiment",
+        "Cereal Grains and Pasta": "staple",
+        "Baked Products": "staple",
+        "Breakfast Cereals": "staple",
+        "Legumes and Legume Products": "main",
+        "Nut and Seed Products": "side",
+        "Vegetables and Vegetable Products": "side",
+        "Fruits and Fruit Juices": "side",
+        "Dairy and Egg Products": "side",
+        "Poultry Products": "main",
+        "Pork Products": "main",
+        "Beef Products": "main",
+        "Lamb, Veal, and Game Products": "main",
+        "Sausages and Luncheon Meats": "main",
+        "Finfish and Shellfish Products": "main",
+        "Meals, Entrees, and Side Dishes": "main",
+        "Fast Foods": "main",
+        "Restaurant Foods": "main",
+        "Snacks": "side",
+        "American Indian/Alaska Native Foods": "other"
+      },
+      "note": "Strongest single structural signal and it already exists on SR Legacy and Foundation rows. Deliberately placed BELOW the 80-band name phrases so that 'Fruits and Fruit Juices' does not make apple juice a side dish."
+    },
+    {
+      "id": "G-SPICE",
+      "role": "spice",
+      "priority": 60,
+      "phrases": [
+        "cumin",
+        "jeera",
+        "coriander seed",
+        "dhania",
+        "fenugreek",
+        "methi seed",
+        "nigella",
+        "kalonji",
+        "black cumin",
+        "kalo jeera",
+        "black pepper",
+        "peppercorn",
+        "long pepper",
+        "pippali",
+        "cardamom",
+        "elaichi",
+        "clove",
+        "laung",
+        "cinnamon",
+        "dalchini",
+        "nutmeg",
+        "jaiphal",
+        "mace",
+        "javitri",
+        "turmeric",
+        "haldi",
+        "asafoetida",
+        "hing",
+        "ajwain",
+        "carom",
+        "jowan",
+        "mustard seed",
+        "rai",
+        "fennel seed",
+        "saunf",
+        "star anise",
+        "anise",
+        "caraway",
+        "juniper berry",
+        "allspice",
+        "saffron",
+        "kesar",
+        "paprika",
+        "chili powder",
+        "chilli powder",
+        "cayenne",
+        "red pepper, dried",
+        "curry powder",
+        "garam masala",
+        "masala",
+        "sambar powder",
+        "rasam powder",
+        "poppy seed",
+        "khus khus",
+        "sumac",
+        "zaatar",
+        "za'atar",
+        "dried ginger",
+        "ground ginger",
+        "sonth",
+        "garlic powder",
+        "onion powder",
+        "pepper, white",
+        "pepper, black",
+        "seasoning",
+        "spice blend",
+        "panch phoron"
+      ],
+      "tokenGroups": [
+        [
+          "garlic",
+          "dried"
+        ],
+        [
+          "onion",
+          "dried"
+        ],
+        [
+          "ginger",
+          "dried"
+        ],
+        [
+          "ginger",
+          "ground"
+        ],
+        [
+          "garlic",
+          "powder"
+        ],
+        [
+          "onion",
+          "powder"
+        ],
+        [
+          "ginger",
+          "powder"
+        ],
+        [
+          "turmeric",
+          "ground"
+        ],
+        [
+          "mango",
+          "powder"
+        ]
+      ],
+      "vetoTokens": [
+        [
+          "fresh"
+        ],
+        [
+          "leaves",
+          "fresh"
+        ],
+        [
+          "paste",
+          "fresh"
+        ]
+      ]
+    },
+    {
+      "id": "G-HERB",
+      "role": "herb",
+      "priority": 60,
+      "phrases": [
+        "basil",
+        "tulsi",
+        "holy basil",
+        "mint",
+        "pudina",
+        "cilantro",
+        "coriander leaf",
+        "coriander leaves",
+        "parsley",
+        "dill",
+        "thyme",
+        "rosemary",
+        "sage",
+        "oregano",
+        "marjoram",
+        "tarragon",
+        "chervil",
+        "bay leaf",
+        "tej patta",
+        "curry leaf",
+        "curry leaves",
+        "kadi patta",
+        "lemongrass",
+        "lime leaf",
+        "kaffir lime",
+        "chives",
+        "savory",
+        "lovage",
+        "epazote",
+        "shiso",
+        "neem leaf",
+        "moringa leaf",
+        "fenugreek leaf",
+        "kasuri methi",
+        "spearmint",
+        "peppermint leaf",
+        "herbs"
+      ]
+    },
+    {
+      "id": "G-MEDICINAL",
+      "role": "medicinalHerb",
+      "priority": 62,
+      "phrases": [
+        "ashwagandha",
+        "shatavari",
+        "triphala",
+        "guduchi",
+        "giloy",
+        "brahmi",
+        "bacopa",
+        "yashtimadhu",
+        "licorice root",
+        "haritaki",
+        "bibhitaki",
+        "amalaki powder",
+        "shilajit",
+        "chyawanprash",
+        "arjuna",
+        "punarnava",
+        "musta",
+        "vidanga",
+        "kutki",
+        "manjistha",
+        "gokshura",
+        "bhringraj",
+        "tinospora",
+        "rasayana"
+      ],
+      "note": "Classical therapeutic dravyas. Deliberately NOT filed under `supplement` — a vaidya would reject that framing — but capped and non-anchoring so they cannot constitute a meal."
+    },
+    {
+      "id": "G-CONDIMENT",
+      "role": "condiment",
+      "priority": 60,
+      "phrases": [
+        "chutney",
+        "pickle",
+        "achar",
+        "relish",
+        "ketchup",
+        "catsup",
+        "prepared mustard",
+        "mustard, prepared",
+        "mayonnaise",
+        "salad dressing",
+        "dressing",
+        "sauce",
+        "salsa",
+        "vinegar",
+        "soy sauce",
+        "tamari",
+        "fish sauce",
+        "hot sauce",
+        "sriracha",
+        "harissa",
+        "pesto",
+        "gravy",
+        "tahini",
+        "dip",
+        "marinade",
+        "podi",
+        "gunpowder powder",
+        "thecha",
+        "murabba",
+        "papad",
+        "appalam"
+      ]
+    },
+    {
+      "id": "G-SWEET",
+      "role": "sweet",
+      "priority": 60,
+      "phrases": [
+        "sugar",
+        "jaggery",
+        "gur",
+        "honey",
+        "syrup",
+        "molasses",
+        "candy",
+        "chocolate",
+        "cookie",
+        "biscuit",
+        "cake",
+        "pie",
+        "pastry",
+        "doughnut",
+        "donut",
+        "ice cream",
+        "frozen yogurt",
+        "halwa",
+        "halva",
+        "barfi",
+        "burfi",
+        "ladoo",
+        "laddu",
+        "kheer",
+        "payasam",
+        "pudding",
+        "jam",
+        "jelly",
+        "marmalade",
+        "preserves",
+        "dessert",
+        "sweetened condensed",
+        "gulab jamun",
+        "rasgulla",
+        "jalebi",
+        "peda",
+        "mithai",
+        "brownie",
+        "custard",
+        "mousse",
+        "toffee",
+        "fudge"
+      ],
+      "vetoTokens": [
+        [
+          "chocolate",
+          "milk"
+        ],
+        [
+          "chocolate",
+          "hot"
+        ],
+        [
+          "milk",
+          "shake"
+        ],
+        [
+          "sugar",
+          "free"
+        ]
+      ]
+    },
+    {
+      "id": "G-MAIN",
+      "role": "main",
+      "priority": 60,
+      "phrases": [
+        "chicken",
+        "beef",
+        "pork",
+        "lamb",
+        "mutton",
+        "goat",
+        "veal",
+        "turkey",
+        "duck",
+        "fish",
+        "salmon",
+        "tuna",
+        "cod",
+        "mackerel",
+        "sardine",
+        "shrimp",
+        "prawn",
+        "crab",
+        "lobster",
+        "dal",
+        "dahl",
+        "daal",
+        "curry",
+        "sabzi",
+        "sabji",
+        "casserole",
+        "lasagna",
+        "pizza",
+        "burger",
+        "sandwich",
+        "wrap",
+        "burrito",
+        "taco",
+        "stir fry",
+        "stir-fry",
+        "kofta",
+        "kebab",
+        "kabab",
+        "biryani",
+        "pulao",
+        "pilaf",
+        "khichdi",
+        "khichari",
+        "risotto",
+        "chili con carne",
+        "cutlet",
+        "patty",
+        "roast",
+        "meatball",
+        "chana masala",
+        "rajma",
+        "chole",
+        "sambar",
+        "korma",
+        "tikka",
+        "bhaji",
+        "poriyal",
+        "kootu",
+        "avial",
+        "undhiyu",
+        "baingan bharta",
+        "palak paneer",
+        "thoran",
+        "usili",
+        "masoor dal",
+        "toor dal",
+        "urad dal",
+        "moong dal",
+        "mung dal",
+        "lentils, cooked",
+        "beans, cooked",
+        "chickpeas, cooked",
+        "hummus",
+        "falafel",
+        "frittata",
+        "quiche",
+        "curry, vegetable",
+        "lentil",
+        "lentils",
+        "mung bean",
+        "mung beans",
+        "moong bean",
+        "black gram",
+        "green gram",
+        "kidney bean",
+        "pigeon pea",
+        "cowpea",
+        "soybean",
+        "chickpea",
+        "garbanzo",
+        "fava bean",
+        "lima bean",
+        "navy bean",
+        "pinto bean",
+        "adzuki bean",
+        "lupin",
+        "split pea"
+      ],
+      "note": "Named pulses are listed individually rather than as a bare 'bean', because a bare 'bean' would beat G-SIDE on 'Beans, snap, green, raw' and turn a green vegetable into a main course."
+    },
+    {
+      "id": "G-STAPLE",
+      "role": "staple",
+      "priority": 60,
+      "phrases": [
+        "rice",
+        "bread",
+        "roti",
+        "chapati",
+        "chapatti",
+        "phulka",
+        "paratha",
+        "naan",
+        "kulcha",
+        "puri",
+        "poori",
+        "bhakri",
+        "thepla",
+        "dosa",
+        "idli",
+        "uttapam",
+        "upma",
+        "poha",
+        "pasta",
+        "noodle",
+        "spaghetti",
+        "macaroni",
+        "couscous",
+        "quinoa",
+        "millet",
+        "bajra",
+        "jowar",
+        "ragi",
+        "barley",
+        "oat",
+        "oatmeal",
+        "porridge",
+        "cereal",
+        "wheat",
+        "flour",
+        "tortilla",
+        "bagel",
+        "muffin",
+        "pancake",
+        "waffle",
+        "toast",
+        "potato",
+        "sweet potato",
+        "yam",
+        "taro",
+        "arbi",
+        "cassava",
+        "buckwheat",
+        "kuttu",
+        "amaranth",
+        "rajgira",
+        "corn",
+        "polenta",
+        "grits",
+        "semolina",
+        "rava",
+        "sooji",
+        "vermicelli",
+        "sevai",
+        "cracker",
+        "bun",
+        "roll, dinner"
+      ],
+      "note": "Deliberately carries NO raw/dry veto. Rice is a staple whether or not it is cooked; edibility is the requiresCooking flag's job. rev1-draft had a veto here and it silently demoted 'Potatoes, flesh and skin, raw' and every raw grain row to `other`, which would have re-created the FC-1 `flesh` defect in a new place."
+    },
+    {
+      "id": "G-SIDE",
+      "role": "side",
+      "priority": 60,
+      "phrases": [
+        "salad",
+        "raita",
+        "yogurt",
+        "curd",
+        "dahi",
+        "kachumber",
+        "slaw",
+        "sprouts",
+        "koshimbir",
+        "pachadi",
+        "vegetable",
+        "vegetables",
+        "greens",
+        "spinach",
+        "kale",
+        "carrot",
+        "beet",
+        "cucumber",
+        "tomato",
+        "cabbage",
+        "cauliflower",
+        "broccoli",
+        "okra",
+        "bhindi",
+        "gourd",
+        "pumpkin",
+        "squash",
+        "brinjal",
+        "eggplant",
+        "radish",
+        "turnip",
+        "pea",
+        "green bean",
+        "apple",
+        "banana",
+        "mango",
+        "orange",
+        "grape",
+        "berry",
+        "melon",
+        "papaya",
+        "guava",
+        "pear",
+        "peach",
+        "plum",
+        "fig",
+        "date",
+        "raisin",
+        "almond",
+        "cashew",
+        "walnut",
+        "pistachio",
+        "pecan",
+        "hazelnut",
+        "peanut",
+        "sunflower seed",
+        "pumpkin seed",
+        "chia",
+        "flaxseed",
+        "sesame seed",
+        "chips",
+        "popcorn",
+        "trail mix",
+        "nuts",
+        "sunflower seed",
+        "pumpkin seed",
+        "garlic",
+        "onion",
+        "shallot",
+        "leek",
+        "spring onion",
+        "ginger root",
+        "fresh ginger",
+        "turmeric root",
+        "lettuce",
+        "celery",
+        "zucchini",
+        "avocado",
+        "olive",
+        "sprout"
+      ],
+      "vetoTokens": [
+        [
+          "mature",
+          "seeds"
+        ],
+        [
+          "dry",
+          "seeds"
+        ]
+      ],
+      "note": "Bare 'seeds' was removed: it matched every 'X, mature seeds, raw' pulse row and routed dry legumes to side. The mature/dry seed veto is belt-and-braces on top of that removal."
+    },
+    {
+      "id": "D-DRAVYA-CLASS",
+      "role": "<fromDravyaMap>",
+      "priority": 40,
+      "signal": "dravya.classification",
+      "dravyaMap": {
+        "shaka": "side",
+        "dhanya": "staple",
+        "shimbi": "main",
+        "mamsa": "main",
+        "dugdha": "side",
+        "phala": "side",
+        "kanda": "side",
+        "taila": "fat",
+        "ghrita": "fat",
+        "madhura-varga": "sweet",
+        "lavana": "spice",
+        "katu-varga": "spice",
+        "jala": "beverage",
+        "madya": "beverage",
+        "aushadha": "medicinalHerb"
+      },
+      "note": "Only fires for the 714 dravyas and only when nothing above matched. Class names must be confirmed against the actual field values in the repo before use; if they differ, MAP THEM, do not silently drop the rule."
+    }
+  ],
+  "flags": {
+    "requiresCooking": {
+      "purpose": "Backs property C5. A row carrying this flag is ineligible as a plan component in any role.",
+      "positive": {
+        "tokenGroups": [
+          [
+            "mature",
+            "seeds"
+          ],
+          [
+            "dry",
+            "seeds"
+          ]
+        ],
+        "orAllOf": {
+          "headword": "one token from dryStapleHeadwords",
+          "state": "one token from ['raw','dry','dried','uncooked','unprepared']"
+        }
+      },
+      "dryStapleHeadwords": [
+        "mung",
+        "moong",
+        "mash",
+        "lentil",
+        "lentils",
+        "masoor",
+        "toor",
+        "tur",
+        "arhar",
+        "urad",
+        "chana",
+        "chickpea",
+        "chickpeas",
+        "garbanzo",
+        "kidney",
+        "rajma",
+        "cowpea",
+        "cowpeas",
+        "blackeye",
+        "blackeyed",
+        "pigeonpea",
+        "pigeon",
+        "bean",
+        "beans",
+        "soybean",
+        "soybeans",
+        "lupin",
+        "lupins",
+        "fava",
+        "broadbean",
+        "pea",
+        "peas",
+        "rice",
+        "wheat",
+        "barley",
+        "millet",
+        "sorghum",
+        "buckwheat",
+        "quinoa",
+        "groat",
+        "groats",
+        "maize",
+        "dal",
+        "dahl",
+        "daal"
+      ],
+      "veto": [
+        "cooked",
+        "boiled",
+        "sprouted",
+        "roasted",
+        "toasted",
+        "flour",
+        "ground",
+        "meal",
+        "powder",
+        "canned",
+        "soaked",
+        "steamed",
+        "fried",
+        "puffed",
+        "flaked",
+        "popped",
+        "green",
+        "fresh",
+        "immature",
+        "snap",
+        "snow",
+        "frozen",
+        "edible",
+        "podded",
+        "pod",
+        "pods",
+        "tender",
+        "young",
+        "milk",
+        "baby",
+        "shelled",
+        "blanched",
+        "parboiled",
+        "instant"
+      ],
+      "vetoIsTokenMatched": "Each veto entry is a single token compared with the same plural tolerance as everything else. Do not write multi-word entries here; they will never fire.",
+      "note": "'Peas, green, raw' and 'Beans, snap, raw' are ordinary raw vegetables and MUST NOT be flagged — that is what the green/fresh/snap vetoes are for. Nut headwords are deliberately absent from the list: raw almonds are food. Some raw legumes are not merely unpalatable but contain lectins that are actively toxic uncooked, which is why C5 is hard rather than soft."
+    },
+    "isNearDuplicateOf": {
+      "purpose": "Backs property C7.",
+      "headwordExtraction": "Normalize. If the first comma-delimited segment is a single token present in categoryPrefixTokens, drop it. From what remains, strip modifiers using modifiers.json. The headword is the first surviving content token, singularized. If nothing survives, fall back to the dropped prefix token.",
+      "categoryPrefixTokens": [
+        "spices",
+        "spice",
+        "babyfood",
+        "beverages",
+        "beverage",
+        "cereals",
+        "cereal",
+        "snacks",
+        "soup",
+        "soups",
+        "candies",
+        "sweets",
+        "nuts",
+        "seeds",
+        "oil",
+        "oils",
+        "syrups",
+        "gravy",
+        "sauce",
+        "dressing",
+        "formula",
+        "fast",
+        "restaurant",
+        "alcoholic",
+        "infant",
+        "toddler"
+      ],
+      "test": "Two components are near-duplicates if their headwords are equal after singularization AND their roles are equal.",
+      "worked": [
+        {
+          "a": "Marjoram, dried",
+          "b": "Spices, marjoram, dried",
+          "headwordA": "marjoram",
+          "headwordB": "marjoram",
+          "duplicate": true
+        },
+        {
+          "a": "Garlic, dried",
+          "b": "Garlic powder",
+          "headwordA": "garlic",
+          "headwordB": "garlic",
+          "duplicate": true
+        },
+        {
+          "a": "Rice, white, cooked",
+          "b": "Rice, brown, cooked",
+          "headwordA": "rice",
+          "headwordB": "rice",
+          "duplicate": true,
+          "comment": "Correctly a duplicate: two rices in one meal is a variety defect, not a menu."
+        },
+        {
+          "a": "Milk, whole",
+          "b": "Milk shake with malt",
+          "headwordA": "milk",
+          "headwordB": "milk",
+          "duplicate": true
+        }
+      ]
+    }
+  },
+  "unknownPolicy": {
+    "rule": "`other` is eligible as a component but is never an anchor and is capped at 2 per meal, so an unresolved row can never by itself constitute a meal.",
+    "coverageGate": "Over a 500-row stratified sample (proportional across the classical 336 / derived 1,969 / estimated 10,296 tiers) plus ALL 91 distinct food IDs the MP-6b sample selected, rows resolving to `other` must be at most 10%. Above that the taxonomy is not fit to constrain the solver and MP-7 must stop and report rather than tighten the solver against a map full of holes."
+  },
+  "validation": {
+    "crossDerivation": "G12-style, and non-optional. Derive each row's role twice — once from name rules alone with the category map disabled, once from the category map alone with the name rules disabled — and enumerate every disagreement. Review them; do NOT auto-resolve. This is the only technique that found the `flesh` phrase matching 'Potatoes, flesh and skin, raw' across 46 vegetarian recipes, and a single-source check would not have found it.",
+    "invalidComparators": "Do not substitute a proxy signal for a missing one. G12 rev1 used 'not Vegan' as a stand-in for honey and produced 831 false disagreements out of 1,217. If a comparator does not exist, say so and stop.",
+    "mustFail": "Re-run the 21 verbatim meals from REPORT-MP6b.md through the C1-C9 checker. At least 12 of the 21 MUST fail at least one hard plausibility property, and all three infant-formula meals MUST fail C1. A suite written from observed failures that does not detect those failures is not evidence of anything.",
+    "regression": "All 45 properties, all 123 existing tests, exclusion goldens 117, resolution holdout 44/48. No regressions."
+  },
+  "openForVaidya": [
+    "Whether ashwagandha, shatavari and triphala belong in a meal plan at all, or only in a separate therapeutic list.",
+    "Whether ghee should be a component with its own portion, or an attribute of the dish it is cooked in.",
+    "Whether buttermilk/chaas at the end of a meal is a beverage or a digestive, which changes the C6 cap.",
+    "Whether a spice cap of 2 per meal is compatible with authored recipes that legitimately name a masala plus salt plus a tempering spice."
+  ]
+}
