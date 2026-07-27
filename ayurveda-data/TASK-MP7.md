@@ -1,6 +1,6 @@
 # TASK MP-7 — culinary plausibility
 
-Director packet · rev3, 2026-07-27 · branch `ayurveda-app`, base = `04b0550` (MP-7d)
+Director packet · rev4, 2026-07-27 · branch `ayurveda-app`, base = `484b7e2` (MP-7a on rev4 rules)
 Corrective task. Blocks the `MP5AyurvedicSolverEnabled` flag going on.
 
 ---
@@ -33,7 +33,7 @@ New director artifacts are attached and go in as-is; do not rewrite them.
 
 | Path | State |
 |---|---|
-| `ayurveda-data/rules/food-roles.json` | **rev4, replaces whatever is committed** — 15 roles, 32 rules, 656 phrases, 94 veto groups, 3-way category split, new `ingredientOnly` role, new `recipePostPass`. See §8. |
+| `ayurveda-data/rules/food-roles.json` | **rev5, replaces whatever is committed** — 15 roles, 33 rules; adds `X-DRY-MIX`. See §9. |
 | `ayurveda-data/tests/food-role-goldens.json` | **rev2** — one label corrected (peanut butter → condiment); see §8 |
 | `ayurveda-data/tests/plan-validity-properties.json` | rev2, unchanged — already committed |
 | `ayurveda-data/tools/ref_resolve.py` | **new** — my reference implementation of the same spec, kept deliberately as the second derivation for G3 |
@@ -266,3 +266,50 @@ Three holdout labels disagreed with the resolver for reasons that are not resolv
 **"Vasanta Mustard Greens Brown Rice" resolves to `staple`, labelled `main`.** Both are anchors, so no C property is affected, and the post-pass form rule reads the head-final "Rice" correctly by its own logic. Reported as minor; not tuned away.
 
 **The `masala` form is genuinely ambiguous.** "Fennel Coriander Cooling Masala" (5 ingredients) is a spice blend; "Black Bean Sweet Potato Masala" (9) is a curry. Split at 6 ingredients. That threshold is a judgement, not a measurement — flag any case where it looks wrong and it goes to the vaidya.
+
+
+---
+
+## 9. rev4 addendum — the eligibility boundary needs a census, not a sample
+
+Holdout #2 (seed `2026072702`, 92/100 exact, 2 major, 1 eligibility-crossing) did its job again. The blocking case was `Puddings, tapioca, dry mix` resolving to the eligible role `sweet`. Correct label, real defect, correct stop.
+
+### The fix, and why it needed measuring
+
+The naive rule — "a name containing *dry* and *mix* is ingredient-only" — captures **101 rows and is wrong on 13 of them**, because FNDDS carries both forms of nearly every such row:
+
+```
+Puddings, tapioca, dry mix                          powder      ingredientOnly
+Pudding, tapioca, made from dry mix                 dessert     sweet
+Hot chocolate / cocoa, dry mix, made with water     drink       beverage
+Milk, malted, dry mix, not reconstituted            powder      ingredientOnly
+```
+
+`X-DRY-MIX` at priority 93 therefore requires a `dry`+`mix` token group **and** the absence of a contiguous preparation indicator (`made with`, `made from`, `prepared with`, `from dry mix`, `reconstituted`, …), with `not reconstituted` overriding the `reconstituted` indicator. It fires on **82 rows**; all four cases above resolve correctly and I could not find a wrong one.
+
+Catalogue after rev5: `other` **108/12,601 (0.86%)**, `ingredientOnly` 161, training goldens 71/71, recipes unchanged at 1,039 anchors and **0** prohibited roles.
+
+### The gate change
+
+**Holdout #2 is burned too.** rev5 was written after seeing its failure. Keep it as a second regression fixture; never quote its score as a holdout number again.
+
+But burning two holdouts to find two eligibility errors is the wrong instrument, and that is my error in gate design rather than anyone's execution. A 100-row random sample contains roughly **four** ineligible rows. The eligibility boundary is the one thing gated at zero, and it was being measured at n≈4 while the population is 535. Random sampling will keep finding these one at a time, burning a holdout each time.
+
+Replace the eligibility component of G2 with a **census** — it cannot be burned in the same way, because it is not a sample:
+
+**G2c — eligibility census.** Two directions, both exhaustive:
+
+| Direction | Population | Question | Gate |
+|---|---:|---|---:|
+| forward | **535** rows resolving to an ineligible role (infantProduct 324, ingredientOnly 161, nonFood 30, supplement 20) | is each one genuinely ineligible? | ≤ 10 wrong |
+| reverse | **427** rows whose name carries an ineligibility marker but which resolve **eligible** | is any of these actually ineligible? | **0 wrong — automatic stop** |
+
+The reverse direction is the one that matters: it is the direction in which an ineligible thing reaches a plate. Markers: `formula`, `infant`, `babyfood`, `baby`, `toddler`, `pediatric`, `dry mix`, `powdered mix`, `unreconstituted`, `supplement`, `isolate`, `medical food`, `enteral`, `unprepared`, `uncooked`, `dough`, `batter`, `flour`, `crust`, `starch`, `concentrate`, `nutritional`.
+
+962 rows is a real afternoon of reading, and it is the right amount of work for the property that says a plan never serves an adult infant formula. Report both counts and every disagreement.
+
+**G2 keeps its random holdout but drops the eligibility clause**, since G2c now covers it exhaustively. Draw a third 100-row sample with a new reported seed, label before resolving, and gate on: MAJOR ≤ 8, unresolved ≤ 8, exact ≥ 85. An eligibility-crossing error there is still worth reporting loudly, but G2c is what decides.
+
+### Standing rule for the rest of MP-7
+
+When a gate fails, stop and report — that has worked three times now and each stop found something bigger than the case that triggered it. But **do not draw a fresh random holdout after every rule change**; that is what burns them. Fix, re-run the frozen fixtures and the census, and draw a new random sample only when the rules are otherwise stable.

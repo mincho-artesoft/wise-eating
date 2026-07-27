@@ -97,7 +97,14 @@ def resolve(name, category=None, dravya_cat=None, recipe_meal=None, is_recipe=Fa
         if any(group_hit(toks, g) for g in r.get("vetoTokens", [])):
             continue
         hit, L = None, 0
-        if role == "<fromCategoryMap>":
+        if "preparedIndicators" in r:                      # X-DRY-MIX evaluation order
+            if any(group_hit(toks, g) for g in r.get("tokenGroups", [])):
+                neg = r.get("negatedIndicator")
+                if (neg and seq(toks, neg)) or not any(
+                    seq(toks, p) for p in r["preparedIndicators"]
+                ):
+                    hit, L = role, 2
+        elif role == "<fromCategoryMap>":
             if category and category in r["categoryMap"]:
                 hit, L = r["categoryMap"][category], 1
         elif role == "<fromDravyaMap>":
