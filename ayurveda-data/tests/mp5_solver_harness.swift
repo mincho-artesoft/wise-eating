@@ -31,6 +31,15 @@ private struct PropertyFinding: Codable {
     var values: [Double]
 }
 
+private struct HarnessRoleDefinition: Codable {
+    let id: String
+    let anchor: Bool
+    let maxPerMeal: Int
+    let eligibleAsComponent: Bool
+    let minimumGrams: Double
+    let maximumGrams: Double
+}
+
 private struct HarnessOutput: Codable {
     let hardPassed: Int
     let hardTotal: Int
@@ -48,6 +57,7 @@ private struct HarnessOutput: Codable {
     let p7KcalRange: [Double]
     let p8KcalRange: [Double]
     let maximumSolveMilliseconds: Double
+    let roleDefinitions: [HarnessRoleDefinition]
 }
 
 @main
@@ -336,7 +346,10 @@ private enum MP5SolverHarness {
             tierEstimatedShare: estimatedShare,
             p7KcalRange: [p7Values.min() ?? 0, p7Values.max() ?? 0],
             p8KcalRange: [p8Values.min() ?? 0, p8Values.max() ?? 0],
-            maximumSolveMilliseconds: solveMilliseconds.max() ?? 0
+            maximumSolveMilliseconds: solveMilliseconds.max() ?? 0,
+            roleDefinitions: FoodRole.allCases
+                .map(roleDefinition)
+                .sorted { $0.id < $1.id }
         )
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
@@ -857,31 +870,7 @@ private enum MP5SolverHarness {
             let concepts: Set<String> = [
                 safetyConcepts[(id - 1) % safetyConcepts.count]
             ]
-            let roleValues: (
-                anchor: Bool,
-                maxPerMeal: Int,
-                eligible: Bool,
-                minimum: Double,
-                maximum: Double
-            )
-            switch role {
-            case .main: roleValues = (true, 3, true, 80, 450)
-            case .staple: roleValues = (true, 2, true, 40, 350)
-            case .side: roleValues = (false, 3, true, 40, 250)
-            case .beverage: roleValues = (false, 2, true, 100, 500)
-            case .spice: roleValues = (false, 2, true, 0.3, 15)
-            case .herb: roleValues = (false, 2, true, 0.3, 30)
-            case .medicinalHerb:
-                roleValues = (false, 1, true, 0.5, 10)
-            case .condiment: roleValues = (false, 2, true, 5, 60)
-            case .fat: roleValues = (false, 1, true, 2, 30)
-            case .sweet: roleValues = (false, 1, true, 5, 120)
-            case .supplement: roleValues = (false, 0, false, 5, 60)
-            case .infantProduct:
-                roleValues = (false, 0, false, 10, 300)
-            case .nonFood: roleValues = (false, 0, false, 0, 0)
-            case .other: roleValues = (false, 2, true, 20, 300)
-            }
+            let roleValues = roleDefinition(role)
             let effectIndex = id % 4
             let effect: Int = effectIndex == 0
                 ? -2
@@ -901,11 +890,11 @@ private enum MP5SolverHarness {
                     role: role,
                     roleAnchor: roleValues.anchor,
                     roleMaxPerMeal: roleValues.maxPerMeal,
-                    roleEligibleAsComponent: roleValues.eligible,
+                    roleEligibleAsComponent: roleValues.eligibleAsComponent,
                     notReadyToEat: false,
                     roleHeadword: "fixture-\((id - 1) / 2)",
-                    minimumGrams: roleValues.minimum,
-                    maximumGrams: roleValues.maximum,
+                    minimumGrams: roleValues.minimumGrams,
+                    maximumGrams: roleValues.maximumGrams,
                     doshaVata: effect,
                     doshaPitta: ((id + 1) % 4 == 0) ? -2 : effect,
                     doshaKapha: ((id + 2) % 4 == 0) ? -2 : effect,
@@ -928,5 +917,147 @@ private enum MP5SolverHarness {
             )
         }
         return out
+    }
+
+    private static func roleDefinition(
+        _ role: FoodRole
+    ) -> HarnessRoleDefinition {
+        switch role {
+        case .main:
+            return .init(
+                id: role.rawValue,
+                anchor: true,
+                maxPerMeal: 3,
+                eligibleAsComponent: true,
+                minimumGrams: 80,
+                maximumGrams: 450
+            )
+        case .staple:
+            return .init(
+                id: role.rawValue,
+                anchor: true,
+                maxPerMeal: 2,
+                eligibleAsComponent: true,
+                minimumGrams: 40,
+                maximumGrams: 350
+            )
+        case .side:
+            return .init(
+                id: role.rawValue,
+                anchor: false,
+                maxPerMeal: 3,
+                eligibleAsComponent: true,
+                minimumGrams: 40,
+                maximumGrams: 250
+            )
+        case .beverage:
+            return .init(
+                id: role.rawValue,
+                anchor: false,
+                maxPerMeal: 2,
+                eligibleAsComponent: true,
+                minimumGrams: 100,
+                maximumGrams: 500
+            )
+        case .spice:
+            return .init(
+                id: role.rawValue,
+                anchor: false,
+                maxPerMeal: 2,
+                eligibleAsComponent: true,
+                minimumGrams: 0.3,
+                maximumGrams: 15
+            )
+        case .herb:
+            return .init(
+                id: role.rawValue,
+                anchor: false,
+                maxPerMeal: 2,
+                eligibleAsComponent: true,
+                minimumGrams: 0.3,
+                maximumGrams: 30
+            )
+        case .medicinalHerb:
+            return .init(
+                id: role.rawValue,
+                anchor: false,
+                maxPerMeal: 1,
+                eligibleAsComponent: true,
+                minimumGrams: 0.5,
+                maximumGrams: 10
+            )
+        case .condiment:
+            return .init(
+                id: role.rawValue,
+                anchor: false,
+                maxPerMeal: 2,
+                eligibleAsComponent: true,
+                minimumGrams: 5,
+                maximumGrams: 60
+            )
+        case .fat:
+            return .init(
+                id: role.rawValue,
+                anchor: false,
+                maxPerMeal: 1,
+                eligibleAsComponent: true,
+                minimumGrams: 2,
+                maximumGrams: 30
+            )
+        case .sweet:
+            return .init(
+                id: role.rawValue,
+                anchor: false,
+                maxPerMeal: 1,
+                eligibleAsComponent: true,
+                minimumGrams: 5,
+                maximumGrams: 120
+            )
+        case .supplement:
+            return .init(
+                id: role.rawValue,
+                anchor: false,
+                maxPerMeal: 0,
+                eligibleAsComponent: false,
+                minimumGrams: 5,
+                maximumGrams: 60
+            )
+        case .infantProduct:
+            return .init(
+                id: role.rawValue,
+                anchor: false,
+                maxPerMeal: 0,
+                eligibleAsComponent: false,
+                minimumGrams: 10,
+                maximumGrams: 300
+            )
+        case .ingredientOnly:
+            return .init(
+                id: role.rawValue,
+                anchor: false,
+                maxPerMeal: 0,
+                eligibleAsComponent: false,
+                minimumGrams: 0,
+                maximumGrams: 0
+            )
+        case .nonFood:
+            return .init(
+                id: role.rawValue,
+                anchor: false,
+                maxPerMeal: 0,
+                eligibleAsComponent: false,
+                minimumGrams: 0,
+                maximumGrams: 0
+            )
+        case .other:
+            return .init(
+                id: role.rawValue,
+                anchor: false,
+                maxPerMeal: 2,
+                eligibleAsComponent: true,
+                minimumGrams: 20,
+                maximumGrams: 300
+            )
+        }
     }
 }

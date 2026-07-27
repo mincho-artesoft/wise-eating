@@ -1,3 +1,4 @@
+import gzip
 import json
 import subprocess
 import tempfile
@@ -41,6 +42,7 @@ CORPUS = (
     / "tests"
     / "plan-validity-properties.json"
 )
+FOOD_ROLES = ROOT / "WiseEating" / "food_roles.json.gz"
 
 
 class MP5DeterministicSolverTests(unittest.TestCase):
@@ -104,6 +106,34 @@ class MP5DeterministicSolverTests(unittest.TestCase):
     def test_all_16_soft_properties_are_measured(self):
         self.assertEqual(self.result["softTotal"], 16)
         self.assertEqual(self.result["softMeasured"], 16)
+
+    def test_harness_role_table_matches_shipped_role_definitions(self):
+        with gzip.open(FOOD_ROLES, "rt", encoding="utf-8") as source:
+            shipped = json.load(source)["definitions"]
+
+        actual = {
+            item["id"]: {
+                "anchor": item["anchor"],
+                "maxPerMeal": item["maxPerMeal"],
+                "eligibleAsComponent": item["eligibleAsComponent"],
+                "minimumGrams": item["minimumGrams"],
+                "maximumGrams": item["maximumGrams"],
+            }
+            for item in self.result["roleDefinitions"]
+        }
+        expected = {
+            item["id"]: {
+                "anchor": item["anchor"],
+                "maxPerMeal": item["maxPerMeal"],
+                "eligibleAsComponent": item["eligibleAsComponent"],
+                "minimumGrams": item["portionGrams"]["min"],
+                "maximumGrams": item["portionGrams"]["max"],
+            }
+            for item in shipped
+        }
+
+        self.assertEqual(set(actual), set(expected))
+        self.assertEqual(actual, expected)
 
     def test_c1_through_c10_are_measured_and_hard_checks_pass(self):
         for index in range(1, 11):
