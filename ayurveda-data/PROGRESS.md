@@ -163,8 +163,8 @@ final launch is 1.461s median versus 1.654s at `d393bda`. Physical-device
 generation evidence is not waived: every outstanding item and commit endpoint
 is recorded in `DEFERRED-VALIDATION.md`. See `REPORT-INT1.md`.
 
-FC-1e is complete on the unmerged, unpushed `fc-1c-g12-rulings` feature
-branch. The director's rev5 ontology plus plural-tolerant unordered
+FC-1e feature-branch work is complete and integrated by INT-2 Phase 1.
+The director's rev5 ontology plus plural-tolerant unordered
 `vetoTokens` reduce the final coconut mismatch from 1 to 0 and correctly veto
 oyster mushroom in both catalogue token orders; equivalent WE-8/FC-1
 disagreements fall from 80 to 77. FC-2 replaces planner exclusion substring
@@ -177,7 +177,7 @@ determinism, and tracked-size gates pass. Same-session N=10 ABAB launch is
 1.433s median versus 1.425s at `06c767b`; the +0.010s paired median is smaller
 than both IQRs and is not resolvable. See `REPORT-FC1e.md`.
 
-MP-5 is complete on the unmerged, unpushed `mp-5-solver` feature branch.
+MP-5 feature-branch work is complete and integrated by INT-2 Phase 1.
 Deterministic greedy construction plus bounded iterated local search now owns
 plan structure, catalogue IDs, exact USDA portions/macros, and hard
 FoodConcept/safety/age/viruddha/placement enforcement. All 23 hard properties
@@ -193,9 +193,20 @@ planner file shrank 5,374→3,348 lines after all 14 obsolete assembly/repair
 targets were removed. Same-session N=10 ABAB launch is 1.401s median versus
 1.403s at `003bed7`, with no resolvable regression. See `REPORT-MP5.md`.
 
+INT-2 Phase 1 integrates FC-1e/FC-2 and MP-5 first, then MP-4, into
+`ayurveda-app` without squashing or rebasing. MP-4's one typed interpretation
+call now feeds MP-5's deterministic assembly while retaining the fallback,
+cache, structured-placement, and caveat behavior from both lines. The combined
+suite reconciles at 116/116 = 98 shared + 10 MP-5 + 8 MP-4; 25+2 search
+goldens, 59/59 + 44/48 resolution, all 23 MP-5 hard properties, validator,
+two-build seed/preseed determinism, Debug/Release, fresh zero-insert/no-rebuild,
+and tracked-file gates pass. Same-session N=10 ABAB launch is 1.437s median
+versus 1.434s at `95da00f`; the +0.002s paired median is not resolvable. See
+`REPORT-INT2.md`.
+
 ## Next milestones
 
-1. **Host/simulator engineering through MP-5 COMPLETE on feature branches** — D6 (models+seeder), D34 (all 12,601 foods
+1. **Host/simulator engineering through INT-2 Phase 1 COMPLETE on `ayurveda-app`** — D6 (models+seeder), D34 (all 12,601 foods
    classified), D8/D8.1/D8.2 (UI end to end incl. computed tier + editors),
    D9 (engineExcluded enforcement), WE-2 (full recipe nutrition + build-time
    projection/search cache), WE-3 (founder-approved read-only display card),
@@ -208,8 +219,8 @@ targets were removed. Same-session N=10 ABAB launch is 1.401s median versus
    artifact refresh, and launch paydown), and FC-1e/FC-2 (rev5 veto semantics,
    canonical planner exclusion sets, and ontology aliases in deterministic
    resolution), plus MP-5 (deterministic hard-validated plan assembly and
-   aiDraft Ayurveda scoring flag). FC-1e and MP-5 remain intentionally unmerged
-   and unpushed.
+   aiDraft Ayurveda scoring flag), and INT-2 Phase 1 (unsquashed MP-4 +
+   FC-1e/FC-2 + MP-5 integration).
    See PROJECT-HANDBOOK.md §6 ledger and `REPORT-WE2.md` / `REPORT-WE3.md` /
    `REPORT-WE4.md` / `REPORT-WE5.md` / `REPORT-WE6.md` for gates, timing,
    screenshots, accessibility, search, `REPORT-WE7.md` for legacy audit
