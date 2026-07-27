@@ -43,6 +43,21 @@ public struct MealPlanPreview: Sendable, Codable, Identifiable {
     public let prompt: String
     public let days: [MealPlanPreviewDay]
     public let minAgeMonths: Int
+    public let interpretationCaveat: String?
+
+    public init(
+        startDate: Date,
+        prompt: String,
+        days: [MealPlanPreviewDay],
+        minAgeMonths: Int,
+        interpretationCaveat: String? = nil
+    ) {
+        self.startDate = startDate
+        self.prompt = prompt
+        self.days = days
+        self.minAgeMonths = minAgeMonths
+        self.interpretationCaveat = interpretationCaveat
+    }
 }
 
 // MARK: - AI Response Models

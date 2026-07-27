@@ -11,6 +11,7 @@ struct MealPlanGenerationProgress: Codable, Sendable {
     var includedFoods: [String]?
     var excludedFoods: [String]?
     var interpretedPrompts: InterpretedPrompts?
+    var interpretationCaveat: String?
     
     // Etapa de context și palete
     var contextTags: [(kind: String, tag: String)]?
@@ -25,7 +26,7 @@ struct MealPlanGenerationProgress: Codable, Sendable {
     
     // Adăugăm conformitate Codable manual pentru tupluri
     enum CodingKeys: String, CodingKey {
-        case atomicPrompts, includedFoods, excludedFoods, interpretedPrompts, contextTags, foodPalettesByContext, conceptualPlan, resolvedItems
+        case atomicPrompts, includedFoods, excludedFoods, interpretedPrompts, interpretationCaveat, contextTags, foodPalettesByContext, conceptualPlan, resolvedItems
     }
     
     // Structuri helper pentru a face tuplurile Codable
@@ -40,6 +41,7 @@ struct MealPlanGenerationProgress: Codable, Sendable {
         includedFoods = try container.decodeIfPresent([String].self, forKey: .includedFoods)
         excludedFoods = try container.decodeIfPresent([String].self, forKey: .excludedFoods)
         interpretedPrompts = try container.decodeIfPresent(InterpretedPrompts.self, forKey: .interpretedPrompts)
+        interpretationCaveat = try container.decodeIfPresent(String.self, forKey: .interpretationCaveat)
         
         if let tags = try container.decodeIfPresent([ContextTag].self, forKey: .contextTags) {
             contextTags = tags.map { ($0.kind, $0.tag) }
@@ -58,6 +60,7 @@ struct MealPlanGenerationProgress: Codable, Sendable {
         try container.encodeIfPresent(includedFoods, forKey: .includedFoods)
         try container.encodeIfPresent(excludedFoods, forKey: .excludedFoods)
         try container.encodeIfPresent(interpretedPrompts, forKey: .interpretedPrompts)
+        try container.encodeIfPresent(interpretationCaveat, forKey: .interpretationCaveat)
         
         if let tags = contextTags {
             try container.encode(tags.map { ContextTag(kind: $0.kind, tag: $0.tag) }, forKey: .contextTags)

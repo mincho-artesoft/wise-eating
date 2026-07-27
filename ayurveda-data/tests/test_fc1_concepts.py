@@ -23,6 +23,13 @@ KNOWLEDGE_BASE_PATH = (
     ROOT / "WiseEating" / "FoodSearch" / "SearchKnowledgeBase.swift"
 )
 RUNTIME_PATH = ROOT / "WiseEating" / "Ayurveda" / "FoodConcepts.swift"
+PLANNER_PATH = (
+    ROOT
+    / "WiseEating"
+    / "AI"
+    / "MealPlanning"
+    / "USDAWeeklyMealPlanner.swift"
+)
 
 DIRECTOR_HASHES = {
     ONTOLOGY_PATH: "1f432b23e233f4bece7f3f2ee92d55f99ac6a6d4ad537bd03007a04211e4b095",
@@ -329,6 +336,11 @@ class FoodConceptTests(unittest.TestCase):
                 "WiseEating/AI/MealPlanning/USDAWeeklyMealPlanner.swift",
                 "WiseEating/AI/ReceptGeneration/AIRecipeGenerator.swift",
             },
+        )
+        planner = PLANNER_PATH.read_text(encoding="utf-8")
+        self.assertEqual(
+            planner.count("FoodConcepts.shared.canonical(alias: term)"),
+            1,
         )
 
 

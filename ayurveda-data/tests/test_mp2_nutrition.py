@@ -352,9 +352,11 @@ print("PASS \(scenario)")
 
     def test_telemetry_static_nutrition_site_is_removed(self):
         planner = PLANNER.read_text(encoding="utf-8")
-        # MP-5 removes the complete-plan generation and repair model sites.
-        self.assertEqual(planner.count("LanguageModelSession("), 8)
-        self.assertEqual(planner.count(".respond("), 8)
+        # MP-5 removes complete-plan generation and repair sites; MP-4 adds
+        # exactly one shared intent session and one guided response.
+        self.assertEqual(planner.count("LanguageModelSession("), 9)
+        self.assertEqual(planner.count(".respond("), 9)
+        self.assertIn('site: "mealPlanIntentParse"', planner)
         assembly = planner.split(
             "// --- Checkpoint 2: deterministic assembly ---",
             1,

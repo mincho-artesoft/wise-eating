@@ -1488,6 +1488,11 @@ struct MealPlanEditorView: View {
         .ignoresSafeArea(.container, edges: .bottom)
         .zIndex(1)
         .transition(.move(edge: .bottom).animation(.easeInOut(duration: 0.3)))
+        .task {
+            if #available(iOS 26.0, *) {
+                USDAWeeklyMealPlanner.prewarmIntentModel()
+            }
+        }
     }
     
     @ViewBuilder
