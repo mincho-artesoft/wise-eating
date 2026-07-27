@@ -1188,8 +1188,8 @@ def load_food_role_source(path: Path) -> dict[str, Any]:
 
 
 def validate_food_role_source(source: dict[str, Any]) -> None:
-    if not isinstance(source, dict) or source.get("rolesVersion") != 5:
-        raise BuildError("food-roles.json must use rolesVersion 5")
+    if not isinstance(source, dict) or source.get("rolesVersion") != 6:
+        raise BuildError("food-roles.json must use rolesVersion 6")
     roles = source.get("roles")
     rules = source.get("rules")
     if not isinstance(roles, list) or len(roles) != EXPECTED_FOOD_ROLE_COUNT:
@@ -1318,6 +1318,29 @@ def validate_food_role_source(source: dict[str, Any]) -> None:
     ):
         raise BuildError("food-role irregularPlurals must map individual tokens")
 
+    readiness = source.get("flags", {}).get("notReadyToEat")
+    dry_pulse = (
+        readiness.get("dryPulseRule")
+        if isinstance(readiness, dict)
+        else None
+    )
+    if (
+        not isinstance(readiness, dict)
+        or "requiresCooking" in source.get("flags", {})
+        or not isinstance(readiness.get("explicitUnready"), list)
+        or not isinstance(readiness.get("preparedIndicators"), list)
+        or not isinstance(readiness.get("concentrateGroups"), list)
+        or not isinstance(readiness.get("doughTokens"), list)
+        or not isinstance(readiness.get("readyToBakeGroups"), list)
+        or not isinstance(readiness.get("commodityFlours"), list)
+        or not isinstance(readiness.get("finishedGoodVeto"), list)
+        or not isinstance(dry_pulse, dict)
+        or not isinstance(dry_pulse.get("tokenGroups"), list)
+        or not isinstance(dry_pulse.get("dryStapleHeadwords"), list)
+        or not isinstance(dry_pulse.get("veto"), list)
+    ):
+        raise BuildError("food-role notReadyToEat flag is missing or malformed")
+
 
 def _singularized_food_token(
     token: str,
@@ -1382,15 +1405,15 @@ def _food_role_headword(
     )
 
 
-def _food_requires_cooking(
+def _food_not_ready_trigger(
     tokens: tuple[str, ...],
     source: dict[str, Any],
     irregular_plurals: dict[str, str],
-) -> bool:
-    flag = source["flags"]["requiresCooking"]
-    veto_tokens = flag["veto"]
-    if any(
-        any(
+) -> str | None:
+    flag = source["flags"]["notReadyToEat"]
+
+    def contains_token(authored: str) -> bool:
+        return any(
             _food_token_matches(
                 authored,
                 observed,
@@ -1399,13 +1422,89 @@ def _food_requires_cooking(
             )
             for observed in tokens
         )
-        for authored in veto_tokens
+
+    def contains_phrase(authored: str) -> bool:
+        return bool(
+            _phrase_spans(
+                tokens,
+                modifier_normalized_tokens(authored),
+                plural_tolerance="full",
+                irregular_plurals=irregular_plurals,
+            )
+        )
+
+    # The source evaluation order is load-bearing. Explicit-unready markers
+    # override preparation words in the same catalogue name.
+    if contains_token("unprepared"):
+        return "unprepared"
+    if (
+        contains_token("uncooked")
+        and not any(contains_token(value) for value in flag["driedFruitVeto"])
     ):
-        return False
+        return "uncooked"
+    if (
+        contains_phrase("not reconstituted")
+        or contains_token("undiluted")
+        or contains_token("unreconstituted")
+    ):
+        return "unreconstituted"
+
+    # A prepared row is ready to eat; no structural trigger may override this.
+    if any(contains_phrase(value) for value in flag["preparedIndicators"]):
+        return None
+
+    concentrate_groups = [
+        tuple(modifier_normalized_tokens(token)[0] for token in group)
+        for group in flag["concentrateGroups"]
+    ]
+    if (
+        any(
+            _tokens_contain_group(
+                tokens,
+                group,
+                plural_tolerance="full",
+                irregular_plurals=irregular_plurals,
+            )
+            for group in concentrate_groups
+        )
+        and not contains_phrase(flag["concentrateVeto"])
+    ):
+        return "concentrate"
+
+    if (
+        any(contains_token(value) for value in flag["doughTokens"])
+        and not any(contains_token(value) for value in flag["doughVeto"])
+    ):
+        return "dough"
+
+    ready_groups = [
+        tuple(modifier_normalized_tokens(token)[0] for token in group)
+        for group in flag["readyToBakeGroups"]
+    ]
+    if any(
+        _tokens_contain_group(
+            tokens,
+            group,
+            plural_tolerance="full",
+            irregular_plurals=irregular_plurals,
+        )
+        for group in ready_groups
+    ):
+        return "ready-to-bake"
+
+    if (
+        any(contains_phrase(value) for value in flag["commodityFlours"])
+        and not any(contains_token(value) for value in flag["finishedGoodVeto"])
+    ):
+        return "commodity-flour"
+
+    dry_pulse = flag["dryPulseRule"]
+    if any(contains_token(authored) for authored in dry_pulse["veto"]):
+        return None
 
     groups = [
         tuple(modifier_normalized_tokens(token)[0] for token in group)
-        for group in flag["positive"]["tokenGroups"]
+        for group in dry_pulse["tokenGroups"]
     ]
     if any(
         _tokens_contain_group(
@@ -1416,26 +1515,17 @@ def _food_requires_cooking(
         )
         for group in groups
     ):
-        return True
+        return "dry-pulse-or-grain"
 
-    headwords = tuple(flag["dryStapleHeadwords"])
-    state_description = flag["positive"]["orAllOf"]["state"]
+    headwords = tuple(dry_pulse["dryStapleHeadwords"])
+    state_description = dry_pulse["orAllOf"]["state"]
     states = tuple(re.findall(r"'([^']+)'", state_description))
-    return (
-        any(
-            any(
-                _food_token_matches(
-                    authored,
-                    observed,
-                    plural_tolerance="full",
-                    irregular_plurals=irregular_plurals,
-                )
-                for observed in tokens
-            )
-            for authored in headwords
-        )
-        and any(state in tokens for state in states)
-    )
+    if (
+        any(contains_token(authored) for authored in headwords)
+        and any(contains_token(state) for state in states)
+    ):
+        return "dry-pulse-or-grain"
+    return None
 
 
 def _resolve_food_role(
@@ -1812,11 +1902,10 @@ def resolve_food_role_fixture(
     }
     return {
         **resolved,
-        "requiresCooking": _food_requires_cooking(
-            modifier_normalized_tokens(name),
-            role_source,
-            irregular_plurals,
-        ),
+        "notReadyToEat": _food_not_ready_trigger(
+            modifier_normalized_tokens(name), role_source, irregular_plurals
+        )
+        is not None,
         "headword": _food_role_headword(
             name,
             matched_label=resolved["matched"],
@@ -1933,6 +2022,7 @@ def build_food_roles(
     membership: dict[str, set[int]] = {
         role["id"]: set() for role in role_source["roles"]
     }
+    not_ready_triggers: dict[int, str] = {}
     for food_id, record in sorted(records.items()):
         resolved = _resolve_food_role_record(
             record,
@@ -1942,11 +2032,13 @@ def build_food_roles(
             irregular_plurals,
         )
         tokens = modifier_normalized_tokens(record["name"])
-        requires_cooking = _food_requires_cooking(
+        not_ready_trigger = _food_not_ready_trigger(
             tokens,
             role_source,
             irregular_plurals,
         )
+        if not_ready_trigger is not None:
+            not_ready_triggers[food_id] = not_ready_trigger
         headword = _food_role_headword(
             record["name"],
             matched_label=resolved["matched"],
@@ -1958,7 +2050,7 @@ def build_food_roles(
             "foodId": food_id,
             "role": resolved["role"],
             "ruleId": resolved["ruleId"],
-            "requiresCooking": requires_cooking,
+            "notReadyToEat": not_ready_trigger is not None,
             "headword": headword,
         }
         items.append(item)
@@ -1998,6 +2090,7 @@ def build_food_roles(
         "categoryValues": actual_categories,
         "dravyaCategoryValues": dravya_categories,
         "recipeMealValues": recipe_meals,
+        "notReadyTriggers": not_ready_triggers,
     }
     return artifact, diagnostics
 

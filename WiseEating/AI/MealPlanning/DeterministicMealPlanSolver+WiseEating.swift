@@ -248,7 +248,7 @@ struct MP5PlannerAdapter {
                 roleAnchor: roleDefinition.anchor,
                 roleMaxPerMeal: roleDefinition.maxPerMeal,
                 roleEligibleAsComponent: roleDefinition.eligibleAsComponent,
-                requiresCooking: roleResolution.requiresCooking,
+                notReadyToEat: roleResolution.notReadyToEat,
                 roleHeadword: roleResolution.headword,
                 minimumGrams: roleDefinition.portionGrams.min,
                 maximumGrams: roleDefinition.portionGrams.max,

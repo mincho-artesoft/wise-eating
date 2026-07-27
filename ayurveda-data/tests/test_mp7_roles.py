@@ -3,6 +3,7 @@ import hashlib
 import importlib.util
 import json
 import unittest
+from collections import Counter
 from pathlib import Path
 
 
@@ -26,7 +27,7 @@ RUNTIME_PATH = (
 )
 
 DIRECTOR_ROLE_SOURCE_SHA256 = (
-    "ca2a2906b44d0a2762dbafc91c790cdbd38ba6f8e2f282423d00e78b26e09561"
+    "72ecd3b4361cac894d107d860079b136105e6d9c638006eb6d1ad5aef9dd628b"
 )
 
 SPEC = importlib.util.spec_from_file_location("build_seed_mp7", BUILD_SEED_PATH)
@@ -69,12 +70,12 @@ class MP7FoodRoleTests(unittest.TestCase):
             **signals,
         )
 
-    def test_director_source_is_unchanged_and_rev5_complete(self):
+    def test_director_source_is_unchanged_and_rev6_complete(self):
         self.assertEqual(
             hashlib.sha256(ROLE_SOURCE_PATH.read_bytes()).hexdigest(),
             DIRECTOR_ROLE_SOURCE_SHA256,
         )
-        self.assertEqual(self.role_source["rolesVersion"], 5)
+        self.assertEqual(self.role_source["rolesVersion"], 6)
         self.assertEqual(len(self.role_source["roles"]), 15)
         self.assertEqual(len(self.role_source["rules"]), 33)
         self.assertEqual(
@@ -93,7 +94,7 @@ class MP7FoodRoleTests(unittest.TestCase):
                 len(rule.get("vetoTokens", []))
                 for rule in self.role_source["rules"]
             ),
-            94,
+            116,
         )
 
     def test_dry_mix_is_ineligible_only_before_preparation(self):
@@ -208,10 +209,10 @@ class MP7FoodRoleTests(unittest.TestCase):
                 )
         self.assertEqual(failures, [])
 
-    def test_requires_cooking_training_cases_are_rule_self_consistent(self):
+    def test_legacy_requires_cooking_fixture_has_only_the_rev6_semantic_delta(self):
         failures = []
         for case in self.goldens["requiresCookingCases"]:
-            actual = self.resolve(case["name"])["requiresCooking"]
+            actual = self.resolve(case["name"])["notReadyToEat"]
             if actual != case["requiresCooking"]:
                 failures.append(
                     {
@@ -220,7 +221,40 @@ class MP7FoodRoleTests(unittest.TestCase):
                         "actual": actual,
                     }
                 )
-        self.assertEqual(failures, [])
+        self.assertEqual(
+            failures,
+            [
+                {
+                    "name": "Chickpea flour (besan)",
+                    "expected": False,
+                    "actual": True,
+                }
+            ],
+        )
+
+    def test_not_ready_evaluation_order_and_structural_triggers(self):
+        must_flag = (
+            "Sweet Potatoes, french fried, crosscut, frozen, unprepared",
+            "Orange juice, frozen concentrate, undiluted",
+            "Cookies, chocolate chip, refrigerated dough",
+            "Chickpea flour",
+            "Bread dough, ready-to-bake",
+            "Lentils, pink or red, raw",
+        )
+        must_not_flag = (
+            "Hot chocolate / cocoa, dry mix, made with water",
+            "Prunes, dehydrated, uncooked",
+            "Bread, sour dough",
+            "Lemon juice from concentrate, canned",
+            "Bread, whole-wheat, made with wheat flour",
+            "Pasta with tomato-based sauce, ready-to-heat",
+        )
+        for name in must_flag:
+            with self.subTest(name=name):
+                self.assertTrue(self.resolve(name)["notReadyToEat"])
+        for name in must_not_flag:
+            with self.subTest(name=name):
+                self.assertFalse(self.resolve(name)["notReadyToEat"])
 
     def test_near_duplicate_training_cases_are_rule_self_consistent(self):
         failures = []
@@ -262,6 +296,68 @@ class MP7FoodRoleTests(unittest.TestCase):
         self.assertEqual(
             build_seed.encode_deterministic_gzip(self.artifact),
             build_seed.encode_deterministic_gzip(rebuilt),
+        )
+
+    def test_rev6_plain_catalogue_reference_populations(self):
+        plain_ids = {food["id"] for food in self.foods}
+        plain = [
+            item for item in self.artifact["items"]
+            if item["foodId"] in plain_ids
+        ]
+        ineligible = {
+            role["id"]
+            for role in self.role_source["roles"]
+            if not role.get("eligibleAsComponent", True)
+        }
+        self.assertEqual(len(plain), 12_601)
+        self.assertEqual(sum(item["role"] == "other" for item in plain), 108)
+        self.assertEqual(
+            sum(item["role"] in ineligible for item in plain),
+            526,
+        )
+        self.assertEqual(
+            sum(item["notReadyToEat"] for item in plain),
+            303,
+        )
+        trigger_counts = Counter(
+            trigger
+            for food_id, trigger in self.diagnostics[
+                "notReadyTriggers"
+            ].items()
+            if food_id in plain_ids
+        )
+        self.assertEqual(
+            trigger_counts,
+            {
+                "unprepared": 87,
+                "dry-pulse-or-grain": 89,
+                "commodity-flour": 58,
+                "unreconstituted": 26,
+                "uncooked": 12,
+                "dough": 11,
+                "ready-to-bake": 10,
+                "concentrate": 10,
+            },
+        )
+
+    def test_rev6_recipe_reference_populations(self):
+        recipe_ids = {recipe["foodId"] for recipe in self.seed["recipes"]}
+        recipes = [
+            item for item in self.artifact["items"]
+            if item["foodId"] in recipe_ids
+        ]
+        definitions = {
+            role["id"]: role for role in self.role_source["roles"]
+        }
+        prohibited = set(self.role_source["recipePostPass"]["prohibited"])
+        self.assertEqual(len(recipes), 1_500)
+        self.assertEqual(
+            sum(definitions[item["role"]]["anchor"] for item in recipes),
+            1_039,
+        )
+        self.assertEqual(
+            sum(item["role"] in prohibited for item in recipes),
+            0,
         )
 
     def test_bundled_artifact_matches_current_build(self):

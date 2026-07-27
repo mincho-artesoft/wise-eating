@@ -461,7 +461,7 @@ private enum MP5SolverHarness {
                 record(
                     "C2",
                     mealCandidates.contains {
-                        !$0.requiresCooking
+                        !$0.notReadyToEat
                             && (
                                 $0.roleEligibleAsComponent
                                     || ($0.role == .infantProduct
@@ -501,7 +501,7 @@ private enum MP5SolverHarness {
                 record("C4", portionsValid, meal.name, nil)
                 record(
                     "C5",
-                    mealCandidates.allSatisfy { !$0.requiresCooking },
+                    mealCandidates.allSatisfy { !$0.notReadyToEat },
                     meal.name,
                     nil
                 )
@@ -902,7 +902,7 @@ private enum MP5SolverHarness {
                     roleAnchor: roleValues.anchor,
                     roleMaxPerMeal: roleValues.maxPerMeal,
                     roleEligibleAsComponent: roleValues.eligible,
-                    requiresCooking: false,
+                    notReadyToEat: false,
                     roleHeadword: "fixture-\((id - 1) / 2)",
                     minimumGrams: roleValues.minimum,
                     maximumGrams: roleValues.maximum,

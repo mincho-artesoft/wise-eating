@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Director reference resolver for food-roles.json rev3.
+"""Director reference resolver for food-roles.json rev6.
 
 NOT the shipping implementation — this exists so the director can measure a rule
 change against the real catalogue before asking anyone to build it. Codex's Swift
@@ -156,20 +156,52 @@ def resolve_recipe(title, meal, n_ingredients=2, n_steps=1):
     return ("side" if meal == "snack" else "main"), "POSTPASS-default"
 
 
-F = RULES["flags"]["requiresCooking"]
-HEAD, VETO = set(F["dryStapleHeadwords"]), set(F["veto"])
+NR = RULES["flags"]["notReadyToEat"]
+DP = NR["dryPulseRule"]
+HEAD, VETO = set(DP["dryStapleHeadwords"]), set(DP["veto"])
 STATE = {"raw", "dry", "dried", "uncooked", "unprepared"}
+FLOURS, FINISHED = NR["commodityFlours"], set(NR["finishedGoodVeto"])
+PREPARED, DRIEDFRUIT = NR["preparedIndicators"], NR["driedFruitVeto"]
 
 
-def requires_cooking(name):
-    t = norm(name)
-    if any(any(teq(v, x) for x in t) for v in VETO):
+def _w(t, x):
+    return any(teq(x, y) for y in t)
+
+
+def _dry_pulse(t):
+    if any(_w(t, v) for v in VETO):
         return False
-    if any(group_hit(t, g) for g in F["positive"]["tokenGroups"]):
+    if any(group_hit(t, g) for g in DP["tokenGroups"]):
         return True
-    return any(any(teq(h, x) for x in t) for h in HEAD) and any(
-        any(teq(s, x) for x in t) for s in STATE
-    )
+    return any(_w(t, h) for h in HEAD) and any(_w(t, s) for s in STATE)
+
+
+def not_ready_to_eat(name):
+    """Returns the trigger name, or None if the row is ready to eat as purchased."""
+    t = norm(name)
+    if _w(t, "unprepared"):
+        return "unprepared"
+    if _w(t, "uncooked") and not any(_w(t, d) for d in DRIEDFRUIT):
+        return "uncooked"
+    if seq(t, "not reconstituted") or _w(t, "undiluted") or _w(t, "unreconstituted"):
+        return "unreconstituted"
+    if any(seq(t, p) for p in PREPARED):        # a prepared row is ready; stop here
+        return None
+    if any(group_hit(t, g) for g in NR["concentrateGroups"]) and not seq(t, NR["concentrateVeto"]):
+        return "concentrate"
+    if any(_w(t, x) for x in NR["doughTokens"]) and not any(_w(t, v) for v in NR["doughVeto"]):
+        return "dough"
+    if any(group_hit(t, g) for g in NR["readyToBakeGroups"]):
+        return "ready-to-bake"
+    if any(seq(t, f) for f in FLOURS) and not any(_w(t, x) for x in FINISHED):
+        return "commodity-flour"
+    if _dry_pulse(t):
+        return "dry-pulse-or-grain"
+    return None
+
+
+def requires_cooking(name):                     # kept as an alias; C5 now reads notReadyToEat
+    return not_ready_to_eat(name) is not None
 
 
 if __name__ == "__main__":
@@ -182,14 +214,14 @@ if __name__ == "__main__":
         role, rid = resolve(r["name"], category=cat)
         out[role] += 1
         byrule[rid] += 1
-        if requires_cooking(r["name"]):
+        if not_ready_to_eat(r["name"]):
             cook += 1
     n = len(rows)
     print(f"catalogue rows: {n}")
     print("role distribution:")
     for k, v in out.most_common():
         print(f"   {v:>6}  {100*v/n:>5.2f}%  {k}")
-    print(f"\nrequiresCooking rows: {cook} ({100*cook/n:.2f}%)")
+    print(f"\nnotReadyToEat rows: {cook} ({100*cook/n:.2f}%)")
     print(f"unresolved `other`: {out['other']} ({100*out['other']/n:.2f}%)")
     print("\ntop firing rules:")
     for k, v in byrule.most_common(12):

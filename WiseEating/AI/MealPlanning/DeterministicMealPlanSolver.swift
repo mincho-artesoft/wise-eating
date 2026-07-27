@@ -99,7 +99,7 @@ struct MP5Candidate: Codable, Equatable, Sendable {
     let roleAnchor: Bool
     let roleMaxPerMeal: Int
     let roleEligibleAsComponent: Bool
-    let requiresCooking: Bool
+    let notReadyToEat: Bool
     let roleHeadword: String
     let minimumGrams: Double
     let maximumGrams: Double
@@ -769,7 +769,7 @@ struct DeterministicMealPlanSolver {
               !profile.excludedFoodIDs.contains(candidate.id),
               candidate.concepts.isDisjoint(with: profile.allergenConcepts),
               !candidate.isHeatedHoney,
-              !candidate.requiresCooking,
+              !candidate.notReadyToEat,
               isRoleEligible(candidate, profile: profile)
         else {
             return false

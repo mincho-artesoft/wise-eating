@@ -677,7 +677,7 @@ def make_real_candidate_file(destination):
             "roleEligibleAsComponent": role_definition[
                 "eligibleAsComponent"
             ],
-            "requiresCooking": role_resolution["requiresCooking"],
+            "notReadyToEat": role_resolution["notReadyToEat"],
             "roleHeadword": role_resolution["headword"],
             "minimumGrams": role_definition["portionGrams"]["min"],
             "maximumGrams": role_definition["portionGrams"]["max"],

@@ -50,7 +50,7 @@ class CulinaryValidityChecker:
             failures.add("C1")
 
         has_anchor = any(
-            not item["requiresCooking"]
+            not item["notReadyToEat"]
             and (
                 definition.get("eligibleAsComponent", True)
                 or (item["role"] == "infantProduct" and infant_allowed)
@@ -77,7 +77,7 @@ class CulinaryValidityChecker:
             limits = definition["portionGrams"]
             if not limits["min"] <= component["grams"] <= limits["max"]:
                 failures.add("C4")
-            if item["requiresCooking"]:
+            if item["notReadyToEat"]:
                 failures.add("C5")
 
         if role_counts["beverage"] > 2:
@@ -160,7 +160,7 @@ class MP7ValidityTests(unittest.TestCase):
 
     def test_g0_known_bad_meal_failure_rate(self):
         self.assertEqual(len(self.result["meals"]), 21)
-        self.assertGreaterEqual(self.result["failedHardMealCount"], 12)
+        self.assertEqual(self.result["failedHardMealCount"], 21)
 
     def test_g0_all_three_infant_formula_meals_fail_c1(self):
         for slot in ((2, "Breakfast"), (3, "Dinner"), (4, "Dinner")):
@@ -190,7 +190,7 @@ class MP7ValidityTests(unittest.TestCase):
     def test_checker_uses_role_source_for_every_culinary_rule(self):
         source = Path(__file__).read_text(encoding="utf-8")
         self.assertIn('definition["portionGrams"]', source)
-        self.assertIn('item["requiresCooking"]', source)
+        self.assertIn('item["notReadyToEat"]', source)
         self.assertIn('(item["role"], item["headword"])', source)
         self.assertEqual(set(self.checker.definitions), {
             role["id"] for role in self.role_source["roles"]

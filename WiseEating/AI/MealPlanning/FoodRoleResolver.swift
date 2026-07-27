@@ -19,7 +19,7 @@ struct FoodRoleResolution: Codable, Equatable, Sendable {
     let foodId: Int
     let role: FoodRole
     let ruleId: String
-    let requiresCooking: Bool
+    let notReadyToEat: Bool
     let headword: String
 }
 
@@ -54,7 +54,7 @@ struct FoodRoleResolver: Sendable {
             FoodRoleDocument.self,
             from: plain
         )
-        guard document.rolesVersion == 5,
+        guard document.rolesVersion == 6,
               document.catalogCount == 14_484,
               document.roleCount == FoodRole.allCases.count,
               document.ruleCount == 33,
@@ -91,7 +91,7 @@ struct FoodRoleResolver: Sendable {
             foodId: foodID,
             role: .other,
             ruleId: "runtime-default",
-            requiresCooking: false,
+            notReadyToEat: false,
             headword: "unknown"
         )
     }
