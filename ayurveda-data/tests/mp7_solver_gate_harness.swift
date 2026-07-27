@@ -1,4 +1,5 @@
 import Foundation
+import CryptoKit
 
 private struct CandidateWrapper: Decodable {
     let candidate: MP5Candidate
@@ -25,6 +26,7 @@ private struct GateRun: Codable {
     let solveMilliseconds: Double
     let minimumDailyKcal: Double?
     let maximumDailyKcal: Double?
+    let canonicalSHA256: String?
 }
 
 private struct Y1Run: Codable {
@@ -44,15 +46,57 @@ private struct GateOutput: Codable {
     let y1Runs: [Y1Run]
     let y1MeanDelta: Double
     let maximumSevenDaySolveMilliseconds: Double
+    let profileDiagnostics: ProfileDiagnostics?
+}
+
+private struct ProfileDiagnostics: Codable {
+    let profile: String
+    let eligibilityFilterMilliseconds: Double
+    let eligibilityFilterScans: Int
+    let allowedCandidateCount: Int
+    let mealPoolFilterMilliseconds: Double
+    let mealPoolFilterScans: Int
+    let greedyConstructionMilliseconds: Double
+    let greedySelectionScoreMilliseconds: Double
+    let greedySelectionScoreCalls: Int
+    let greedySortMilliseconds: Double
+    let greedyRankSortMilliseconds: Double
+    let greedyDensitySortMilliseconds: Double
+    let greedyDescendingKcalSortMilliseconds: Double
+    let greedyAscendingKcalSortMilliseconds: Double
+    let greedySortInputRows: Int
+    let greedyModeMilliseconds: Double
+    let greedyModeSequenceScans: Int
+    let greedyModeCandidateEvaluations: Int
+    let localSearchMilliseconds: Double
+    let localSearchIterations: Int
+    let localReplacementFilterMilliseconds: Double
+    let localReplacementFilterScans: Int
+    let localRoleCheckMilliseconds: Double
+    let localRoleCheckCalls: Int
+    let localHardValidationMilliseconds: Double
+    let localHardValidationCalls: Int
+    let localObjectiveMilliseconds: Double
+    let localObjectiveCalls: Int
+    let portionClampMilliseconds: Double
+    let portionClampCalls: Int
+    let nearDuplicateMilliseconds: Double
+    let nearDuplicateCalls: Int
+    let finalValidationMilliseconds: Double
 }
 
 @main
 private enum MP7SolverGateHarness {
     static func main() throws {
-        guard CommandLine.arguments.count == 3 else {
+        guard CommandLine.arguments.count == 3
+            || (
+                CommandLine.arguments.count == 5
+                    && CommandLine.arguments[3] == "--single"
+            )
+        else {
             fatalError(
                 "usage: mp7_solver_gate_harness real-candidates.json "
-                    + "plan-validity-properties.json"
+                    + "plan-validity-properties.json [--single profile]"
             )
         }
         let wrappers = try JSONDecoder().decode(
@@ -73,11 +117,21 @@ private enum MP7SolverGateHarness {
         )
         let candidates = wrappers.map(\.candidate)
         let solver = DeterministicMealPlanSolver(candidates: candidates)
-        let horizons = [1, 3, 7]
+        let singleProfile = CommandLine.arguments.count == 5
+            ? CommandLine.arguments[4]
+            : nil
+        let profiles = singleProfile.map { requested in
+            suite.profiles.filter { $0.id == requested }
+        } ?? suite.profiles
+        guard singleProfile == nil || profiles.count == 1 else {
+            fatalError("single profile not found")
+        }
+        let horizons = singleProfile == nil ? [1, 3, 7] : [7]
         let seed: UInt64 = 0x4D50_3700
         var runs: [GateRun] = []
+        var capturedDiagnostics: ProfileDiagnostics?
 
-        for source in suite.profiles {
+        for source in profiles {
             for horizon in horizons {
                 let profile = solverProfile(
                     source,
@@ -89,9 +143,15 @@ private enum MP7SolverGateHarness {
                     seed: seed,
                     localSearchIterations: 96
                 )
+                let diagnostics = singleProfile == nil
+                    ? nil
+                    : MP7SolverDiagnostics()
                 let started = DispatchTime.now().uptimeNanoseconds
                 do {
-                    let plan = try solver.solve(request)
+                    let plan = try solver.solve(
+                        request,
+                        diagnostics: diagnostics
+                    )
                     let elapsed = milliseconds(since: started)
                     let dailyKcal = plan.days.map(\.kcal)
                     runs.append(
@@ -102,9 +162,18 @@ private enum MP7SolverGateHarness {
                             bindingConstraint: nil,
                             solveMilliseconds: elapsed,
                             minimumDailyKcal: dailyKcal.min(),
-                            maximumDailyKcal: dailyKcal.max()
+                            maximumDailyKcal: dailyKcal.max(),
+                            canonicalSHA256: sha256(
+                                try plan.canonicalData()
+                            )
                         )
                     )
+                    if let diagnostics {
+                        capturedDiagnostics = profileDiagnostics(
+                            source.id,
+                            diagnostics
+                        )
+                    }
                 } catch let failure as MP5SolverFailure {
                     runs.append(
                         GateRun(
@@ -114,7 +183,8 @@ private enum MP7SolverGateHarness {
                             bindingConstraint: failure.description,
                             solveMilliseconds: milliseconds(since: started),
                             minimumDailyKcal: nil,
-                            maximumDailyKcal: nil
+                            maximumDailyKcal: nil,
+                            canonicalSHA256: nil
                         )
                     )
                 }
@@ -122,7 +192,8 @@ private enum MP7SolverGateHarness {
         }
 
         var y1Runs: [Y1Run] = []
-        for source in suite.profiles where source.dosha != nil {
+        for source in profiles
+            where singleProfile == nil && source.dosha != nil {
             let horizon = 7
             let request = MP5SolverRequest(
                 profile: solverProfile(
@@ -176,7 +247,8 @@ private enum MP7SolverGateHarness {
             runs: runs,
             y1Runs: y1Runs,
             y1MeanDelta: mean(y1Runs.map(\.delta)),
-            maximumSevenDaySolveMilliseconds: sevenDayTimes.max() ?? 0
+            maximumSevenDaySolveMilliseconds: sevenDayTimes.max() ?? 0,
+            profileDiagnostics: capturedDiagnostics
         )
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
@@ -215,6 +287,95 @@ private enum MP7SolverGateHarness {
 
     private static func milliseconds(since start: UInt64) -> Double {
         Double(DispatchTime.now().uptimeNanoseconds - start) / 1_000_000
+    }
+
+    private static func milliseconds(_ nanoseconds: UInt64) -> Double {
+        Double(nanoseconds) / 1_000_000
+    }
+
+    private static func sha256(_ data: Data) -> String {
+        SHA256.hash(data: data).map { String(format: "%02x", $0) }
+            .joined()
+    }
+
+    private static func profileDiagnostics(
+        _ profile: String,
+        _ value: MP7SolverDiagnostics
+    ) -> ProfileDiagnostics {
+        ProfileDiagnostics(
+            profile: profile,
+            eligibilityFilterMilliseconds: milliseconds(
+                value.eligibilityFilterNanoseconds
+            ),
+            eligibilityFilterScans: value.eligibilityFilterScans,
+            allowedCandidateCount: value.allowedCandidateCount,
+            mealPoolFilterMilliseconds: milliseconds(
+                value.mealPoolFilterNanoseconds
+            ),
+            mealPoolFilterScans: value.mealPoolFilterScans,
+            greedyConstructionMilliseconds: milliseconds(
+                value.greedyConstructionNanoseconds
+            ),
+            greedySelectionScoreMilliseconds: milliseconds(
+                value.greedySelectionScoreNanoseconds
+            ),
+            greedySelectionScoreCalls: value.greedySelectionScoreCalls,
+            greedySortMilliseconds: milliseconds(
+                value.greedySortNanoseconds
+            ),
+            greedyRankSortMilliseconds: milliseconds(
+                value.greedyRankSortNanoseconds
+            ),
+            greedyDensitySortMilliseconds: milliseconds(
+                value.greedyDensitySortNanoseconds
+            ),
+            greedyDescendingKcalSortMilliseconds: milliseconds(
+                value.greedyDescendingKcalSortNanoseconds
+            ),
+            greedyAscendingKcalSortMilliseconds: milliseconds(
+                value.greedyAscendingKcalSortNanoseconds
+            ),
+            greedySortInputRows: value.greedySortInputRows,
+            greedyModeMilliseconds: milliseconds(
+                value.greedyModeNanoseconds
+            ),
+            greedyModeSequenceScans: value.greedyModeSequenceScans,
+            greedyModeCandidateEvaluations:
+                value.greedyModeCandidateEvaluations,
+            localSearchMilliseconds: milliseconds(
+                value.localSearchNanoseconds
+            ),
+            localSearchIterations: value.localSearchIterations,
+            localReplacementFilterMilliseconds: milliseconds(
+                value.localReplacementFilterNanoseconds
+            ),
+            localReplacementFilterScans:
+                value.localReplacementFilterScans,
+            localRoleCheckMilliseconds: milliseconds(
+                value.localRoleCheckNanoseconds
+            ),
+            localRoleCheckCalls: value.localRoleCheckCalls,
+            localHardValidationMilliseconds: milliseconds(
+                value.localHardValidationNanoseconds
+            ),
+            localHardValidationCalls:
+                value.localHardValidationCalls,
+            localObjectiveMilliseconds: milliseconds(
+                value.localObjectiveNanoseconds
+            ),
+            localObjectiveCalls: value.localObjectiveCalls,
+            portionClampMilliseconds: milliseconds(
+                value.portionClampNanoseconds
+            ),
+            portionClampCalls: value.portionClampCalls,
+            nearDuplicateMilliseconds: milliseconds(
+                value.nearDuplicateNanoseconds
+            ),
+            nearDuplicateCalls: value.nearDuplicateCalls,
+            finalValidationMilliseconds: milliseconds(
+                value.finalValidationNanoseconds
+            )
+        )
     }
 
     private static func meanEffect(_ plan: MP5SolvedPlan) -> Double {

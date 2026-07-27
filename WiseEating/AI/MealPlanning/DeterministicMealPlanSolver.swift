@@ -282,11 +282,48 @@ enum MP5SolverFailure: Error, Equatable, CustomStringConvertible, Sendable {
     }
 }
 
+final class MP7SolverDiagnostics {
+    var eligibilityFilterNanoseconds: UInt64 = 0
+    var eligibilityFilterScans: Int = 0
+    var allowedCandidateCount: Int = 0
+    var mealPoolFilterNanoseconds: UInt64 = 0
+    var mealPoolFilterScans: Int = 0
+    var greedyConstructionNanoseconds: UInt64 = 0
+    var greedySelectionScoreNanoseconds: UInt64 = 0
+    var greedySelectionScoreCalls: Int = 0
+    var greedySortNanoseconds: UInt64 = 0
+    var greedyRankSortNanoseconds: UInt64 = 0
+    var greedyDensitySortNanoseconds: UInt64 = 0
+    var greedyDescendingKcalSortNanoseconds: UInt64 = 0
+    var greedyAscendingKcalSortNanoseconds: UInt64 = 0
+    var greedySortInputRows: Int = 0
+    var greedyModeNanoseconds: UInt64 = 0
+    var greedyModeSequenceScans: Int = 0
+    var greedyModeCandidateEvaluations: Int = 0
+    var localSearchNanoseconds: UInt64 = 0
+    var localSearchIterations: Int = 0
+    var localReplacementFilterNanoseconds: UInt64 = 0
+    var localReplacementFilterScans: Int = 0
+    var localRoleCheckNanoseconds: UInt64 = 0
+    var localRoleCheckCalls: Int = 0
+    var localHardValidationNanoseconds: UInt64 = 0
+    var localHardValidationCalls: Int = 0
+    var localObjectiveNanoseconds: UInt64 = 0
+    var localObjectiveCalls: Int = 0
+    var portionClampNanoseconds: UInt64 = 0
+    var portionClampCalls: Int = 0
+    var nearDuplicateNanoseconds: UInt64 = 0
+    var nearDuplicateCalls: Int = 0
+    var finalValidationNanoseconds: UInt64 = 0
+}
+
 // MARK: - Deterministic solver
 
 struct DeterministicMealPlanSolver {
     private let candidates: [MP5Candidate]
     private let candidatesByID: [Int: MP5Candidate]
+    private let nearDuplicateKeysByID: [Int: String]
+    private let maximumPerMealByRole: [FoodRole: Int]
     private let weights: MP5AyurvedicWeights
 
     init(
@@ -301,10 +338,30 @@ struct DeterministicMealPlanSolver {
         self.candidatesByID = Dictionary(
             uniqueKeysWithValues: self.candidates.map { ($0.id, $0) }
         )
+        self.nearDuplicateKeysByID = Dictionary(
+            uniqueKeysWithValues: self.candidates.compactMap { candidate in
+                guard candidate.roleHeadword != "unknown",
+                      !candidate.roleHeadword.isEmpty
+                else {
+                    return nil
+                }
+                return (
+                    candidate.id,
+                    "\(candidate.role.rawValue)|\(candidate.roleHeadword)"
+                )
+            }
+        )
+        self.maximumPerMealByRole = Dictionary(
+            grouping: self.candidates,
+            by: \.role
+        ).mapValues { $0.first?.roleMaxPerMeal ?? 0 }
         self.weights = weights
     }
 
-    func solve(_ request: MP5SolverRequest) throws -> MP5SolvedPlan {
+    func solve(
+        _ request: MP5SolverRequest,
+        diagnostics: MP7SolverDiagnostics? = nil
+    ) throws -> MP5SolvedPlan {
         let orderedSlots = request.slots.sorted {
             $0.day == $1.day
                 ? mealOrder($0.name) < mealOrder($1.name)
@@ -323,7 +380,16 @@ struct DeterministicMealPlanSolver {
             )
         }
 
+        let eligibilityStarted = diagnostics == nil
+            ? 0
+            : DispatchTime.now().uptimeNanoseconds
         let allowed = candidates.filter { hardAllowed($0, for: request.profile) }
+        if let diagnostics {
+            diagnostics.eligibilityFilterNanoseconds +=
+                DispatchTime.now().uptimeNanoseconds - eligibilityStarted
+            diagnostics.eligibilityFilterScans += candidates.count
+            diagnostics.allowedCandidateCount = allowed.count
+        }
         guard !allowed.isEmpty else {
             throw MP5SolverFailure.infeasible(
                 constraint: failingSafetyConstraint(for: request.profile)
@@ -363,6 +429,9 @@ struct DeterministicMealPlanSolver {
         var solvedMeals: [MP5SolvedMeal] = []
         var consumedRules = Set<MP5MustContainRule>()
 
+        let greedyStarted = diagnostics == nil
+            ? 0
+            : DispatchTime.now().uptimeNanoseconds
         for slot in orderedSlots {
             let daySlots = days[slot.day] ?? []
             let target = request.profile.dailyKcal
@@ -402,7 +471,8 @@ struct DeterministicMealPlanSolver {
                 recentTastes: recentTastes,
                 allowed: allowed,
                 profile: request.profile,
-                rng: &rng
+                rng: &rng,
+                diagnostics: diagnostics
             )
             solvedMeals.append(meal)
             consumedRules.formUnion(matchingRules)
@@ -411,12 +481,16 @@ struct DeterministicMealPlanSolver {
             )
             selectedHeadwordsByDay[slot.day, default: []].formUnion(
                 meal.components.compactMap {
-                    candidatesByID[$0.foodID]?.nearDuplicateKey
+                    nearDuplicateKeysByID[$0.foodID]
                 }
             )
             recentTastesByDay[slot.day, default: []].formUnion(
                 meal.components.flatMap(\.rasa)
             )
+        }
+        if let diagnostics {
+            diagnostics.greedyConstructionNanoseconds +=
+                DispatchTime.now().uptimeNanoseconds - greedyStarted
         }
 
         guard consumedRules.count == request.mustContain.count else {
@@ -432,13 +506,28 @@ struct DeterministicMealPlanSolver {
                 .sorted { $0.day < $1.day },
             softViruddhaCount: 0
         )
+        let localSearchStarted = diagnostics == nil
+            ? 0
+            : DispatchTime.now().uptimeNanoseconds
         plan = improve(
             plan,
             request: request,
             allowed: allowed,
-            rng: &rng
+            rng: &rng,
+            diagnostics: diagnostics
         )
+        if let diagnostics {
+            diagnostics.localSearchNanoseconds +=
+                DispatchTime.now().uptimeNanoseconds - localSearchStarted
+        }
+        let validationStarted = diagnostics == nil
+            ? 0
+            : DispatchTime.now().uptimeNanoseconds
         try validateHardProperties(plan, request: request)
+        if let diagnostics {
+            diagnostics.finalValidationNanoseconds +=
+                DispatchTime.now().uptimeNanoseconds - validationStarted
+        }
         return plan
     }
 
@@ -451,7 +540,8 @@ struct DeterministicMealPlanSolver {
         recentTastes: Set<String>,
         allowed: [MP5Candidate],
         profile: MP5SolverProfile,
-        rng: inout MP5SplitMix64
+        rng: inout MP5SplitMix64,
+        diagnostics: MP7SolverDiagnostics?
     ) throws -> MP5SolvedMeal {
         if Set(required.map(\.id)).count != required.count {
             throw MP5SolverFailure.infeasible(
@@ -479,67 +569,133 @@ struct DeterministicMealPlanSolver {
         }
 
         let requiredIDs = Set(required.map(\.id))
+        let poolFilterStarted = diagnostics == nil
+            ? 0
+            : DispatchTime.now().uptimeNanoseconds
         let pool = allowed.filter { candidate in
             !recentIDs.contains(candidate.id)
                 && !requiredIDs.contains(candidate.id)
         }
+        if let diagnostics {
+            diagnostics.mealPoolFilterNanoseconds +=
+                DispatchTime.now().uptimeNanoseconds - poolFilterStarted
+            diagnostics.mealPoolFilterScans += allowed.count
+        }
         var best: (candidates: [MP5Candidate], score: Double)?
         let minimumCount = max(2, required.count)
+        let mealContext = mealScoringContext(slot.name)
 
         for count in minimumCount...6 {
             let needed = count - required.count
             guard needed >= 0 else { continue }
             let componentTarget = targetKcal / Double(count)
-            var ranked: [(candidate: MP5Candidate, score: Double)] = []
+            var ranked: [MP5RankedCandidate] = []
             ranked.reserveCapacity(pool.count)
-            for candidate in pool {
+            let scoreStarted = diagnostics == nil
+                ? 0
+                : DispatchTime.now().uptimeNanoseconds
+            for (candidateIndex, candidate) in pool.enumerated() {
+                let distance = densityDistance(
+                    candidate,
+                    target: componentTarget
+                )
                 let baseScore = selectionScore(
                     candidate,
-                    mealName: slot.name,
-                    targetPerComponent: componentTarget,
+                    densityDistance: distance,
+                    mealContext: mealContext,
                     recentHeadwords: recentHeadwords,
                     recentTastes: recentTastes,
                     profile: profile
                 )
                 ranked.append(
-                    (candidate: candidate, score: baseScore + rng.nextUnit() * 0.08)
+                    MP5RankedCandidate(
+                        candidateIndex: candidateIndex,
+                        candidateID: candidate.id,
+                        role: candidate.role,
+                        kcalPerGram: candidate.kcalPerGram,
+                        randomizedScore:
+                            baseScore + rng.nextUnit() * 0.08,
+                        baseScore: baseScore,
+                        densityDistance: distance
+                    )
                 )
             }
-            ranked.sort { lhs, rhs in
-                lhs.score == rhs.score
-                    ? lhs.candidate.id < rhs.candidate.id
-                    : lhs.score > rhs.score
+            if let diagnostics {
+                diagnostics.greedySelectionScoreNanoseconds +=
+                    DispatchTime.now().uptimeNanoseconds - scoreStarted
+                diagnostics.greedySelectionScoreCalls += pool.count
             }
-            let rankedCandidates = ranked.map { $0.candidate }
-
-            let modes: [[MP5Candidate]] = [
-                rankedCandidates,
-                rankedCandidates.sorted {
-                    densityDistance($0, target: componentTarget)
-                        < densityDistance($1, target: componentTarget)
-                },
-                rankedCandidates.sorted { $0.kcalPerGram > $1.kcalPerGram },
-                rankedCandidates.sorted { $0.kcalPerGram < $1.kcalPerGram }
-            ]
-            for ordered in modes {
-                var chosen = required
-                if !containsAnchor(chosen, profile: profile),
-                   let anchor = ordered.first(where: { candidate in
-                       !chosen.contains(where: { $0.id == candidate.id })
-                           && isAnchor(candidate, profile: profile)
-                           && canAdd(candidate, to: chosen, profile: profile)
-                           && !wouldCreateHardViruddha(candidate, in: chosen)
-                   }) {
-                    chosen.append(anchor)
+            let baseScoreByID = Dictionary(
+                uniqueKeysWithValues: ranked.map {
+                    ($0.candidateID, $0.baseScore)
                 }
-                for candidate in ordered where chosen.count < count {
-                    guard !chosen.contains(where: { $0.id == candidate.id }),
-                          canAdd(candidate, to: chosen, profile: profile),
-                          !wouldCreateHardViruddha(candidate, in: chosen)
-                    else {
-                        continue
+            )
+            let rankedByRole = Dictionary(
+                grouping: ranked,
+                by: \.role
+            )
+            let modeStarted = diagnostics == nil
+                ? 0
+                : DispatchTime.now().uptimeNanoseconds
+            for ordering in MP5CandidateOrdering.allCases {
+                let sortStarted = diagnostics == nil
+                    ? 0
+                    : DispatchTime.now().uptimeNanoseconds
+                let sortedByRole = rankedByRole.mapValues { bucket in
+                    orderedRoleBucket(bucket, ordering: ordering)
+                }
+                if let diagnostics {
+                    let elapsed =
+                        DispatchTime.now().uptimeNanoseconds - sortStarted
+                    diagnostics.greedySortNanoseconds += elapsed
+                    diagnostics.greedySortInputRows += ranked.count
+                    switch ordering {
+                    case .score:
+                        diagnostics.greedyRankSortNanoseconds += elapsed
+                    case .density:
+                        diagnostics.greedyDensitySortNanoseconds += elapsed
+                    case .descendingKcal:
+                        diagnostics
+                            .greedyDescendingKcalSortNanoseconds += elapsed
+                    case .ascendingKcal:
+                        diagnostics
+                            .greedyAscendingKcalSortNanoseconds += elapsed
                     }
-                    chosen.append(candidate)
+                }
+                var chosen = required
+                var anchorCursors: [FoodRole: Int] = [:]
+                if !containsAnchor(chosen, profile: profile),
+                   let result = nextEligibleCandidate(
+                       in: sortedByRole,
+                       pool: pool,
+                       ordering: ordering,
+                       selected: chosen,
+                       profile: profile,
+                       requireAnchor: true,
+                       cursors: &anchorCursors
+                   ) {
+                    diagnostics?.greedyModeSequenceScans += result.scans
+                    diagnostics?.greedyModeCandidateEvaluations +=
+                        result.evaluations
+                    chosen.append(result.candidate)
+                }
+                var cursors: [FoodRole: Int] = [:]
+                while chosen.count < count {
+                    guard let result = nextEligibleCandidate(
+                        in: sortedByRole,
+                        pool: pool,
+                        ordering: ordering,
+                        selected: chosen,
+                        profile: profile,
+                        requireAnchor: false,
+                        cursors: &cursors
+                    ) else {
+                        break
+                    }
+                    diagnostics?.greedyModeSequenceScans += result.scans
+                    diagnostics?.greedyModeCandidateEvaluations +=
+                        result.evaluations
+                    chosen.append(result.candidate)
                 }
                 guard chosen.count == count,
                       roleConstraintsSatisfied(
@@ -556,22 +712,43 @@ struct DeterministicMealPlanSolver {
                 else {
                     continue
                 }
-                let score = chosen.reduce(0) {
-                    $0 + selectionScore(
-                        $1,
-                        mealName: slot.name,
-                        targetPerComponent: targetKcal / Double(count),
-                        recentHeadwords: recentHeadwords,
-                        recentTastes: recentTastes,
-                        profile: profile
+                let score = chosen.reduce(0) { partial, candidate in
+                    partial + (
+                        baseScoreByID[candidate.id]
+                            ?? selectionScore(
+                                candidate,
+                                densityDistance: densityDistance(
+                                    candidate,
+                                    target: targetKcal / Double(count)
+                                ),
+                                mealContext: mealContext,
+                                recentHeadwords: recentHeadwords,
+                                recentTastes: recentTastes,
+                                profile: profile
+                            )
                     )
+                }
+                diagnostics?.greedySelectionScoreCalls += chosen.count
+                let nearDuplicateStarted = diagnostics == nil
+                    ? 0
+                    : DispatchTime.now().uptimeNanoseconds
+                let duplicatePenalty = nearDuplicatePenalty(chosen)
+                if let diagnostics {
+                    diagnostics.nearDuplicateNanoseconds +=
+                        DispatchTime.now().uptimeNanoseconds
+                        - nearDuplicateStarted
+                    diagnostics.nearDuplicateCalls += 1
                 }
                 let shapedScore = score
                     + mealShapeScore(chosen, profile: profile)
-                    - nearDuplicatePenalty(chosen)
+                    - duplicatePenalty
                 if best == nil || shapedScore > best!.score {
                     best = (chosen, shapedScore)
                 }
+            }
+            if let diagnostics {
+                diagnostics.greedyModeNanoseconds +=
+                    DispatchTime.now().uptimeNanoseconds - modeStarted
             }
         }
 
@@ -580,11 +757,19 @@ struct DeterministicMealPlanSolver {
                 constraint: "adaptive dish count cannot span \(Int(targetKcal.rounded())) kcal for Day \(slot.day) \(slot.name)"
             )
         }
+        let portionStarted = diagnostics == nil
+            ? 0
+            : DispatchTime.now().uptimeNanoseconds
         let components = try fitPortions(
             best.candidates,
             targetKcal: targetKcal,
             profile: profile
         )
+        if let diagnostics {
+            diagnostics.portionClampNanoseconds +=
+                DispatchTime.now().uptimeNanoseconds - portionStarted
+            diagnostics.portionClampCalls += 1
+        }
         return MP5SolvedMeal(
             day: slot.day,
             name: slot.name,
@@ -596,7 +781,8 @@ struct DeterministicMealPlanSolver {
         _ input: MP5SolvedPlan,
         request: MP5SolverRequest,
         allowed: [MP5Candidate],
-        rng: inout MP5SplitMix64
+        rng: inout MP5SplitMix64,
+        diagnostics: MP7SolverDiagnostics?
     ) -> MP5SolvedPlan {
         guard request.localSearchIterations > 0 else { return input }
         var bestPlan = input
@@ -604,6 +790,7 @@ struct DeterministicMealPlanSolver {
         let requiredIDs = Set(request.mustContain.map(\.foodID))
 
         for _ in 0..<request.localSearchIterations {
+            diagnostics?.localSearchIterations += 1
             guard !bestPlan.days.isEmpty else { break }
             let dayIndex = rng.nextInt(upperBound: bestPlan.days.count)
             guard !bestPlan.days[dayIndex].meals.isEmpty else { continue }
@@ -627,13 +814,28 @@ struct DeterministicMealPlanSolver {
                 .meals[mealIndex].components
                 .compactMap { candidatesByID[$0.foodID] }
             let currentIDs = Set(currentCandidates.map(\.id))
+            let candidatesOtherThanReplaced = currentCandidates.filter {
+                $0.id != old.foodID
+            }
+            let replacementViruddhaContext = viruddhaContext(
+                candidatesOtherThanReplaced
+            )
+            let replacementFilterStarted = diagnostics == nil
+                ? 0
+                : DispatchTime.now().uptimeNanoseconds
             let replacements = allowed.filter { candidate in
                 !blocked.contains(candidate.id)
                     && !currentIDs.contains(candidate.id)
                     && !wouldCreateHardViruddha(
                         candidate,
-                        in: currentCandidates.filter { $0.id != old.foodID }
+                        in: replacementViruddhaContext
                     )
+            }
+            if let diagnostics {
+                diagnostics.localReplacementFilterNanoseconds +=
+                    DispatchTime.now().uptimeNanoseconds
+                    - replacementFilterStarted
+                diagnostics.localReplacementFilterScans += allowed.count
             }
             guard !replacements.isEmpty else { continue }
             let replacement = replacements[
@@ -642,26 +844,66 @@ struct DeterministicMealPlanSolver {
             var trial = bestPlan
             var mealCandidates = currentCandidates
             mealCandidates[componentIndex] = replacement
-            guard roleConstraintsSatisfied(
+            let roleCheckStarted = diagnostics == nil
+                ? 0
+                : DispatchTime.now().uptimeNanoseconds
+            let roleValid = roleConstraintsSatisfied(
                 mealCandidates,
                 profile: request.profile,
                 requireAnchor: true
-            ) else {
+            )
+            if let diagnostics {
+                diagnostics.localRoleCheckNanoseconds +=
+                    DispatchTime.now().uptimeNanoseconds - roleCheckStarted
+                diagnostics.localRoleCheckCalls += 1
+            }
+            guard roleValid else {
                 continue
             }
             let target = trial.days[dayIndex].meals[mealIndex].kcal
+            let portionStarted = diagnostics == nil
+                ? 0
+                : DispatchTime.now().uptimeNanoseconds
             guard let fitted = try? fitPortions(
                 mealCandidates,
                 targetKcal: target,
                 profile: request.profile
             ) else {
+                if let diagnostics {
+                    diagnostics.portionClampNanoseconds +=
+                        DispatchTime.now().uptimeNanoseconds - portionStarted
+                    diagnostics.portionClampCalls += 1
+                }
                 continue
+            }
+            if let diagnostics {
+                diagnostics.portionClampNanoseconds +=
+                    DispatchTime.now().uptimeNanoseconds - portionStarted
+                diagnostics.portionClampCalls += 1
             }
             trial.days[dayIndex].meals[mealIndex].components = fitted
-            guard (try? validateHardProperties(trial, request: request)) != nil else {
+            let validationStarted = diagnostics == nil
+                ? 0
+                : DispatchTime.now().uptimeNanoseconds
+            let hardValid =
+                (try? validateHardProperties(trial, request: request)) != nil
+            if let diagnostics {
+                diagnostics.localHardValidationNanoseconds +=
+                    DispatchTime.now().uptimeNanoseconds - validationStarted
+                diagnostics.localHardValidationCalls += 1
+            }
+            guard hardValid else {
                 continue
             }
+            let objectiveStarted = diagnostics == nil
+                ? 0
+                : DispatchTime.now().uptimeNanoseconds
             let score = objective(trial, profile: request.profile)
+            if let diagnostics {
+                diagnostics.localObjectiveNanoseconds +=
+                    DispatchTime.now().uptimeNanoseconds - objectiveStarted
+                diagnostics.localObjectiveCalls += 1
+            }
             if score > bestScore + 1e-9 {
                 bestPlan = trial
                 bestScore = score
@@ -812,32 +1054,35 @@ struct DeterministicMealPlanSolver {
 
     private func selectionScore(
         _ candidate: MP5Candidate,
-        mealName: String,
-        targetPerComponent: Double,
+        densityDistance: Double,
+        mealContext: MP5MealScoringContext,
         recentHeadwords: Set<String>,
         recentTastes: Set<String>,
         profile: MP5SolverProfile
     ) -> Double {
-        var score = -densityDistance(candidate, target: targetPerComponent)
+        var score = -densityDistance
         score += min(candidate.proteinPer100g / 20, 1.5)
         score += min(candidate.fiberPer100g / 10, 1.0)
-        if let key = candidate.nearDuplicateKey,
+        if let key = nearDuplicateKeysByID[candidate.id],
            recentHeadwords.contains(key) {
             score -= 1.25
         }
 
-        let missingTastes = candidate.rasa.subtracting(recentTastes)
-        score += Double(missingTastes.count) * weights.rasa * 0.12
+        let missingTasteCount = candidate.rasa.reduce(into: 0) {
+            if !recentTastes.contains($1) {
+                $0 += 1
+            }
+        }
+        score += Double(missingTasteCount) * weights.rasa * 0.12
 
         if let season = profile.season,
            candidate.seasons.contains(season) {
             score += 0.75
         }
 
-        let lowerMeal = mealName.lowercased()
-        if lowerMeal.contains("lunch") || lowerMeal.contains("midday") {
+        if mealContext == .midday {
             score += candidate.heaviness * 0.55
-        } else if lowerMeal.contains("dinner") || lowerMeal.contains("evening") {
+        } else if mealContext == .evening {
             score -= candidate.heaviness * 0.70
         }
 
@@ -1022,7 +1267,9 @@ struct DeterministicMealPlanSolver {
         _ selected: [MP5Candidate]
     ) -> Double {
         let counts = Dictionary(
-            grouping: selected.compactMap(\.nearDuplicateKey),
+            grouping: selected.compactMap {
+                nearDuplicateKeysByID[$0.id]
+            },
             by: { $0 }
         ).values.map(\.count)
         return Double(counts.reduce(0) { $0 + max(0, $1 - 1) }) * 0.8
@@ -1045,25 +1292,50 @@ struct DeterministicMealPlanSolver {
         _ candidate: MP5Candidate,
         in selected: [MP5Candidate]
     ) -> Bool {
+        wouldCreateHardViruddha(
+            candidate,
+            in: viruddhaContext(selected)
+        )
+    }
+
+    private func wouldCreateHardViruddha(
+        _ candidate: MP5Candidate,
+        in context: MP5ViruddhaContext
+    ) -> Bool {
         if candidate.isHeatedHoney { return true }
         if candidate.concepts.contains("fish")
-            && selected.contains(where: { $0.concepts.contains("dairy") }) {
+            && context.hasDairy {
             return true
         }
         if candidate.concepts.contains("dairy")
-            && selected.contains(where: { $0.concepts.contains("fish") }) {
+            && context.hasFish {
             return true
         }
         // Equal-parts honey + ghee is the cited hard rule. The assembler
         // conservatively keeps the pair out of one meal, so later portion
         // fitting cannot accidentally make the parts equal.
-        if candidate.isHoney && selected.contains(where: \.isGhee) {
+        if candidate.isHoney && context.hasGhee {
             return true
         }
-        if candidate.isGhee && selected.contains(where: \.isHoney) {
+        if candidate.isGhee && context.hasHoney {
             return true
         }
         return false
+    }
+
+    private func viruddhaContext(
+        _ selected: [MP5Candidate]
+    ) -> MP5ViruddhaContext {
+        MP5ViruddhaContext(
+            hasFish: selected.contains {
+                $0.concepts.contains("fish")
+            },
+            hasDairy: selected.contains {
+                $0.concepts.contains("dairy")
+            },
+            hasHoney: selected.contains(where: \.isHoney),
+            hasGhee: selected.contains(where: \.isGhee)
+        )
     }
 
     private func validateHardProperties(
@@ -1223,12 +1495,129 @@ struct DeterministicMealPlanSolver {
         return 3
     }
 
+    private func mealScoringContext(
+        _ meal: String
+    ) -> MP5MealScoringContext {
+        let lower = meal.lowercased()
+        if lower.contains("lunch") || lower.contains("midday") {
+            return .midday
+        }
+        if lower.contains("dinner") || lower.contains("evening") {
+            return .evening
+        }
+        return .other
+    }
+
     private func densityDistance(
         _ candidate: MP5Candidate,
         target: Double
     ) -> Double {
         let expected = max(candidate.kcalPerGram * 140, 1)
         return abs(log(expected / max(target, 1)))
+    }
+
+    private func orderedRoleBucket(
+        _ bucket: [MP5RankedCandidate],
+        ordering: MP5CandidateOrdering,
+    ) -> [MP5RankedCandidate] {
+        bucket.sorted(by: ordering.precedes)
+    }
+
+    private func nextEligibleCandidate(
+        in buckets: [FoodRole: [MP5RankedCandidate]],
+        pool: [MP5Candidate],
+        ordering: MP5CandidateOrdering,
+        selected: [MP5Candidate],
+        profile: MP5SolverProfile,
+        requireAnchor: Bool,
+        cursors: inout [FoodRole: Int]
+    ) -> (
+        candidate: MP5Candidate,
+        scans: Int,
+        evaluations: Int
+    )? {
+        let selectedIDs = Set(selected.map(\.id))
+        var best: MP5RankedCandidate?
+        var scans = 0
+        var evaluations = 0
+
+        for role in FoodRole.allCases {
+            guard roleCanAccept(
+                role,
+                selected: selected,
+                profile: profile
+            ) else {
+                continue
+            }
+            guard let bucket = buckets[role],
+                  let first = bucket.first,
+                  pool.indices.contains(first.candidateIndex),
+                  !requireAnchor
+                    || isAnchor(
+                        pool[first.candidateIndex],
+                        profile: profile
+                    )
+            else {
+                continue
+            }
+            var index = cursors[role] ?? 0
+            while index < bucket.count {
+                scans += 1
+                let ranked = bucket[index]
+                let candidate = pool[ranked.candidateIndex]
+                guard !selectedIDs.contains(candidate.id) else {
+                    index += 1
+                    continue
+                }
+                evaluations += 1
+                guard !wouldCreateHardViruddha(candidate, in: selected) else {
+                    index += 1
+                    continue
+                }
+                if best == nil
+                    || ordering.precedes(ranked, best!) {
+                    best = ranked
+                }
+                break
+            }
+            cursors[role] = index
+        }
+        if let best {
+            cursors[best.role, default: 0] += 1
+            return (
+                pool[best.candidateIndex],
+                scans,
+                evaluations
+            )
+        }
+        return nil
+    }
+
+    private func roleCanAccept(
+        _ role: FoodRole,
+        selected: [MP5Candidate],
+        profile: MP5SolverProfile
+    ) -> Bool {
+        let candidatesForRole = selected.filter { $0.role == role }
+        let maximum = role == .infantProduct
+            && profile.ageInMonths < 36
+            ? 1
+            : maximumPerMealByRole[role] ?? 0
+        guard candidatesForRole.count < maximum
+        else {
+            return false
+        }
+        if [.spice, .herb, .condiment, .medicinalHerb].contains(role) {
+            let seasoningCount = selected.filter {
+                [.spice, .herb, .condiment, .medicinalHerb]
+                    .contains($0.role)
+            }.count
+            return seasoningCount < 2
+        }
+        if role == .beverage {
+            return selected.filter { $0.role == .beverage }.count < 2
+        }
+        return true
     }
 
     private func idsWithinWindow(
@@ -1275,6 +1664,70 @@ struct DeterministicMealPlanSolver {
                 .flatMap(\.components)
                 .map(\.foodID)
         )
+    }
+}
+
+private enum MP5MealScoringContext {
+    case midday
+    case evening
+    case other
+}
+
+private struct MP5RankedCandidate {
+    let candidateIndex: Int
+    let candidateID: Int
+    let role: FoodRole
+    let kcalPerGram: Double
+    let randomizedScore: Double
+    let baseScore: Double
+    let densityDistance: Double
+}
+
+private struct MP5ViruddhaContext {
+    let hasFish: Bool
+    let hasDairy: Bool
+    let hasHoney: Bool
+    let hasGhee: Bool
+}
+
+private enum MP5CandidateOrdering: CaseIterable {
+    case score
+    case density
+    case descendingKcal
+    case ascendingKcal
+
+    func precedes(
+        _ lhs: MP5RankedCandidate,
+        _ rhs: MP5RankedCandidate
+    ) -> Bool {
+        switch self {
+        case .score:
+            return scorePrecedes(lhs, rhs)
+        case .density:
+            if lhs.densityDistance != rhs.densityDistance {
+                return lhs.densityDistance < rhs.densityDistance
+            }
+            return scorePrecedes(lhs, rhs)
+        case .descendingKcal:
+            if lhs.kcalPerGram != rhs.kcalPerGram {
+                return lhs.kcalPerGram > rhs.kcalPerGram
+            }
+            return scorePrecedes(lhs, rhs)
+        case .ascendingKcal:
+            if lhs.kcalPerGram != rhs.kcalPerGram {
+                return lhs.kcalPerGram < rhs.kcalPerGram
+            }
+            return scorePrecedes(lhs, rhs)
+        }
+    }
+
+    private func scorePrecedes(
+        _ lhs: MP5RankedCandidate,
+        _ rhs: MP5RankedCandidate
+    ) -> Bool {
+        lhs.randomizedScore == rhs.randomizedScore
+            ? lhs.candidateID < rhs.candidateID
+            : lhs.randomizedScore > rhs.randomizedScore
     }
 }
 

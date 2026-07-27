@@ -48,8 +48,16 @@ struct FoodRoleResolver: Sendable {
         ) else {
             throw FoodRoleResolverError.missingBundle
         }
-        let compressed = try Data(contentsOf: url, options: .mappedIfSafe)
-        let plain = try ZlibGzip.decompress(data: compressed)
+        try self.init(
+            compressedData: Data(
+                contentsOf: url,
+                options: .mappedIfSafe
+            )
+        )
+    }
+
+    init(compressedData: Data) throws {
+        let plain = try ZlibGzip.decompress(data: compressedData)
         let document = try JSONDecoder().decode(
             FoodRoleDocument.self,
             from: plain
