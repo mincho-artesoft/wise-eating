@@ -1,6 +1,6 @@
 {
-  "goldensVersion": 2,
-  "revision": "rev2 — 2026-07-27. Companion to food-roles.json rev3. One label CORRECTED against rev1: 'Peanut butter, smooth style' moves side -> condiment, because the MP-7 holdout labeller was right and I was wrong. No other label was touched, and no label was changed to make a score look better. rev1 notes follow. Companion to food-roles.json rev1. The first 26 cases are transcribed verbatim from the MP-6b 21-meal sample; the rest are adversarial cases chosen to break rules that are too blunt.",
+  "goldensVersion": 3,
+  "revision": "rev3 — 2026-07-27. Second label correction: 'Milk, dry, whole' moves other -> ingredientOnly, because rev8 added a role that expresses it properly. Two labels have now been corrected in total, both toward the more accurate answer and neither to move a score. rev2 notes follow. rev2 — 2026-07-27. Companion to food-roles.json rev3. One label CORRECTED against rev1: 'Peanut butter, smooth style' moves side -> condiment, because the MP-7 holdout labeller was right and I was wrong. No other label was touched, and no label was changed to make a score look better. rev1 notes follow. Companion to food-roles.json rev1. The first 26 cases are transcribed verbatim from the MP-6b 21-meal sample; the rest are adversarial cases chosen to break rules that are too blunt.",
   "author": "Director",
   "kind": "food-role-goldens",
   "THIS_IS_A_TRAINING_SET": "Read this before quoting a score from it. These cases were written alongside the rules they test, so a high score here measures self-consistency and nothing else. MP-3 scored 56/56 on the corpus its aliases were built from and 35/48 on a set written afterwards. A HOLDOUT IS MANDATORY: sample 60 rows uniformly at random from the real 14,484-row catalogue with a fixed, reported seed, hand-label them BEFORE running the resolver, and report that score separately. The holdout number is the real number.",
@@ -188,8 +188,8 @@
     },
     {
       "name": "Milk, dry, whole",
-      "expectRole": "other",
-      "why": "MUST NOT be beverage. Reconstitution ingredient. `other` is acceptable here; `beverage` is not."
+      "expectRole": "ingredientOnly",
+      "why": "DIRECTOR CORRECTION, rev3: rev1 labelled this `other` and noted only that `beverage` was wrong. Once rev8 gave the taxonomy an `ingredientOnly` role and a concentrated-milk rule, `other` became the weaker of two available answers rather than an acceptable one. Corrected to the stronger label, not to make a score move — this case was already passing as `other`."
     },
     {
       "name": "Peanut butter, smooth style",
