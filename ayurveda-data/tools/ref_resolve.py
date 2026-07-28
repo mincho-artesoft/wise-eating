@@ -97,8 +97,10 @@ def resolve(name, category=None, dravya_cat=None, recipe_meal=None, is_recipe=Fa
         if any(group_hit(toks, g) for g in r.get("vetoTokens", [])):
             continue
         hit, L = None, 0
-        if "preparedIndicators" in r:                      # X-DRY-MIX evaluation order
-            if any(group_hit(toks, g) for g in r.get("tokenGroups", [])):
+        if "preparedIndicators" in r:                      # X-DRY-MIX / X-CONCENTRATED-MILK
+            trig = any(group_hit(toks, g) for g in r.get("tokenGroups", [])) or \
+                   any(seq(toks, p) for p in r.get("phrases", []))
+            if trig:
                 neg = r.get("negatedIndicator")
                 if (neg and seq(toks, neg)) or not any(
                     seq(toks, p) for p in r["preparedIndicators"]

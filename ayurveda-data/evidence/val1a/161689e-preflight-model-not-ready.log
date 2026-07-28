@@ -1,0 +1,44 @@
+VAL-1a physical-device readiness preflight
+Captured: 2026-07-28 08:22:59–08:26:11 Europe/Sofia
+Commit endpoint: 161689e8efd6d54b657b8eac4d3bd5128e5f6093
+Build: signed Release, arm64-apple-ios18.0
+Device: iPhone 16 Pro (iPhone17,1)
+Device ID: 00008140-000135E611E0801C
+OS: iOS 26.5 (23F77)
+Launch arguments: -wePlannerTelemetry -uiTestNoAds
+
+First launch:
+Launched application with WiseEating.Arte-Soft bundle identifier.
+Waiting for the application to terminate…
+🚀 SwiftData Path: /var/mobile/Containers/Data/Application/6A498CC4-4BEC-44BF-AA8E-5ACEE59365B4/Library/Application%20Support/
+🏁 Database already pre-seeded in a previous launch. Skipping copy.
+✅ AppDelegate: Application did finish launching.
+🧠 AI Availability changed -> modelNotReady
+✅ SearchIndexStore: Index is up-to-date (version: 5, DB: 14484). Skipping rebuild.
+✅ Seeding process completed.
+
+The process remained alive for more than two minutes without an availability
+transition. It was terminated and relaunched to re-read the framework state.
+
+Second launch:
+Launched application with WiseEating.Arte-Soft bundle identifier.
+Waiting for the application to terminate…
+🚀 SwiftData Path: /var/mobile/Containers/Data/Application/6A498CC4-4BEC-44BF-AA8E-5ACEE59365B4/Library/Application%20Support/
+🏁 Database already pre-seeded in a previous launch. Skipping copy.
+✅ AppDelegate: Application did finish launching.
+🧠 AI Availability changed -> modelNotReady
+✅ SearchIndexStore: Index is up-to-date (version: 5, DB: 14484). Skipping rebuild.
+✅ Seeding process completed.
+
+Apple Intelligence is enabled, but the on-device language model is not ready.
+No plan was scheduled, so no zero-call result is claimed. The current-tip
+5af9b91 Release app was restored after the preflight.
+
+Retry after founder confirmed Apple Intelligence was present:
+Captured: 2026-07-28 10:59:48–11:00:16 Europe/Sofia
+The same signed 161689e Release endpoint was installed and launched again.
+The first framework availability event remained:
+🧠 AI Availability changed -> modelNotReady
+
+No plan was scheduled. The historical process was terminated and the
+current-tip 5af9b91 Release app was restored again.
