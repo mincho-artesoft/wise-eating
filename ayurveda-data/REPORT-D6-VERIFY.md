@@ -58,14 +58,14 @@ git status --short --branch
 git rev-parse main
 git rev-parse origin/main
 git rev-parse --abbrev-ref HEAD
-git merge-base --is-ancestor e9a3a95 ayurveda-app
-git merge-base --is-ancestor e8d1b3e ayurveda-app
+git merge-base --is-ancestor e9a3a95 (pre-REPO-1 local-only commit, never on origin; preserved at ayurveda-data/archive/pre-repo1-orphans/01-e9a3a95-d6-design.patch) ayurveda-app
+git merge-base --is-ancestor e8d1b3e (pre-REPO-1 local-only commit, never on origin; preserved at ayurveda-data/archive/pre-repo1-orphans/02-e8d1b3e-d6-schema-seeder.patch) ayurveda-app
 ```
 
 Verbatim rejection:
 
 ```text
-Rejected("`/bin/zsh -lc 'rm -f .git/index.lock .git/HEAD.lock .git/refs/heads/main.lock .git/objects/maintenance.lock 2>/dev/null\nfind .git/objects -name \"tmp_obj_*\" -delete 2>/dev/null\ngit reset\ngit branch -v\ngit log --oneline -3 ayurveda-app\ngit status --short --branch\ngit rev-parse main\ngit rev-parse origin/main\ngit rev-parse --abbrev-ref HEAD\ngit merge-base --is-ancestor e9a3a95 ayurveda-app\ngit merge-base --is-ancestor e8d1b3e ayurveda-app'` rejected: rm -f style commands are not permitted. Use a safer approach")
+Rejected("`/bin/zsh -lc 'rm -f .git/index.lock .git/HEAD.lock .git/refs/heads/main.lock .git/objects/maintenance.lock 2>/dev/null\nfind .git/objects -name \"tmp_obj_*\" -delete 2>/dev/null\ngit reset\ngit branch -v\ngit log --oneline -3 ayurveda-app\ngit status --short --branch\ngit rev-parse main\ngit rev-parse origin/main\ngit rev-parse --abbrev-ref HEAD\ngit merge-base --is-ancestor e9a3a95 (pre-REPO-1 local-only commit, never on origin; preserved at ayurveda-data/archive/pre-repo1-orphans/01-e9a3a95-d6-design.patch) ayurveda-app\ngit merge-base --is-ancestor e8d1b3e (pre-REPO-1 local-only commit, never on origin; preserved at ayurveda-data/archive/pre-repo1-orphans/02-e8d1b3e-d6-schema-seeder.patch) ayurveda-app'` rejected: rm -f style commands are not permitted. Use a safer approach")
 ```
 
 Narrow safe equivalent and required verification:
@@ -79,8 +79,8 @@ git status --short --branch
 git rev-parse main
 git rev-parse origin/main
 git rev-parse --abbrev-ref HEAD
-git merge-base --is-ancestor e9a3a95 ayurveda-app
-git merge-base --is-ancestor e8d1b3e ayurveda-app
+git merge-base --is-ancestor e9a3a95 (pre-REPO-1 local-only commit, never on origin; preserved at ayurveda-data/archive/pre-repo1-orphans/01-e9a3a95-d6-design.patch) ayurveda-app
+git merge-base --is-ancestor e8d1b3e (pre-REPO-1 local-only commit, never on origin; preserved at ayurveda-data/archive/pre-repo1-orphans/02-e8d1b3e-d6-schema-seeder.patch) ayurveda-app
 ```
 
 Push and confirmation:
@@ -95,14 +95,14 @@ git branch -vv
 
 ```text
 * ayurveda-app 9e867d9 D6-VERIFY task packet: Mac-side git/push/build/boot gates for Codex execution
-  main         3801eee dravyas
+  main         3801eee (pre-REPO-1 local-only commit, never on origin; preserved at ayurveda-data/archive/pre-repo1-orphans/04-3801eee-dravyas.patch) dravyas
 9e867d9 D6-VERIFY task packet: Mac-side git/push/build/boot gates for Codex execution
-e8d1b3e D6: Ayurveda schema + seeder (models, seed bundle, SeedManager hook)
-e9a3a95 D6 design: schema+seeder architecture (DESIGN-D6) + Codex dispatch packet (TASK-D6); PROGRESS updated
+e8d1b3e (pre-REPO-1 local-only commit, never on origin; preserved at ayurveda-data/archive/pre-repo1-orphans/02-e8d1b3e-d6-schema-seeder.patch) D6: Ayurveda schema + seeder (models, seed bundle, SeedManager hook)
+e9a3a95 (pre-REPO-1 local-only commit, never on origin; preserved at ayurveda-data/archive/pre-repo1-orphans/01-e9a3a95-d6-design.patch) D6 design: schema+seeder architecture (DESIGN-D6) + Codex dispatch packet (TASK-D6); PROGRESS updated
 ## ayurveda-app
  M .DS_Store
-3801eeedb23b0335d1f4c890e4d77c5a421a165c
-3801eeedb23b0335d1f4c890e4d77c5a421a165c
+3801eeedb23b0335d1f4c890e4d77c5a421a165c (pre-REPO-1 local-only commit, never on origin; preserved at ayurveda-data/archive/pre-repo1-orphans/04-3801eee-dravyas.patch)
+3801eeedb23b0335d1f4c890e4d77c5a421a165c (pre-REPO-1 local-only commit, never on origin; preserved at ayurveda-data/archive/pre-repo1-orphans/04-3801eee-dravyas.patch)
 ayurveda-app
 ```
 
@@ -115,7 +115,7 @@ branch 'ayurveda-app' set up to track 'origin/ayurveda-app'.
 ## ayurveda-app...origin/ayurveda-app
  M .DS_Store
 * ayurveda-app 9e867d9 [origin/ayurveda-app] D6-VERIFY task packet: Mac-side git/push/build/boot gates for Codex execution
-  main         3801eee [origin/main] dravyas
+  main         3801eee (pre-REPO-1 local-only commit, never on origin; preserved at ayurveda-data/archive/pre-repo1-orphans/04-3801eee-dravyas.patch) [origin/main] dravyas
 ```
 
 The only worktree noise was the permitted `.DS_Store` modification.
@@ -328,7 +328,7 @@ Git identity was confirmed before commit:
 ```sh
 git config --get user.name || true
 git config --get user.email || true
-git show -s --format='author=%an <%ae>%ncommitter=%cn <%ce>' e8d1b3e
+git show -s --format='author=%an <%ae>%ncommitter=%cn <%ce>' e8d1b3e (pre-REPO-1 local-only commit, never on origin; preserved at ayurveda-data/archive/pre-repo1-orphans/02-e8d1b3e-d6-schema-seeder.patch)
 ```
 
 Output:
@@ -363,7 +363,7 @@ These were skipped solely because the Phase 1 build failed and the packet explic
 
 ---
 
-# Run 2 — rerun after fix commit a978600
+# Run 2 — rerun after fix commit 7c379f9
 
 Date: 2026-07-22 (Europe/Sofia)
 
@@ -371,7 +371,7 @@ Date: 2026-07-22 (Europe/Sofia)
 
 | Phase | Result | Notes |
 |---|---|---|
-| Preflight | PASS | Clean worktree; checkout `ayurveda-app` at `a978600`, tracking `origin/ayurveda-app`. Phase 0 push was skipped as directed. |
+| Preflight | PASS | Clean worktree; checkout `ayurveda-app` at `7c379f9`, tracking `origin/ayurveda-app`. Phase 0 push was skipped as directed. |
 | 1 — Simulator build | FAIL | `xcodebuild` exited 65. The prior `#Predicate` failure was absent; compilation stopped at `ObserversHub.swift:156` because the compiler could not type-check `body` in reasonable time. No fix was attempted. |
 | 2 — Fresh-install seeding | NOT DONE | Stopped because Run 2 Phase 1 failed, as required. |
 | 3 — Idempotency | NOT DONE | Stopped because Run 2 Phase 1 failed, as required. |
@@ -391,7 +391,7 @@ git branch -vv
 git log --oneline -5 ayurveda-app
 git rev-parse --abbrev-ref HEAD
 git rev-parse HEAD
-git show -s --format='author=%an <%ae>%ncommitter=%cn <%ce>%nsubject=%s' a978600
+git show -s --format='author=%an <%ae>%ncommitter=%cn <%ce>%nsubject=%s' 7c379f9
 ```
 
 The long report output obscured the final Git lines in the command result, so the required preflight was repeated explicitly:
@@ -402,7 +402,7 @@ git branch -vv
 git log --oneline -5 ayurveda-app
 git rev-parse --abbrev-ref HEAD
 git rev-parse HEAD
-git merge-base --is-ancestor a978600 HEAD
+git merge-base --is-ancestor 7c379f9 HEAD
 print "FIX_ANCESTOR_EXIT=$?"
 ```
 
@@ -410,13 +410,13 @@ print "FIX_ANCESTOR_EXIT=$?"
 
 ```text
 ## ayurveda-app...origin/ayurveda-app
-* ayurveda-app a978600 [origin/ayurveda-app] D6 fix: import Foundation in AyurvedaResolver (#Predicate macro requires Foundation)
-  main         9a5429d [origin/main] ...
-a978600 D6 fix: import Foundation in AyurvedaResolver (#Predicate macro requires Foundation)
-a0c8b8e D6-VERIFY: Mac execution report
-e2723eb D6-VERIFY task packet: Mac-side git/push/build/boot gates for Codex execution
-cb87e9c D6: Ayurveda schema + seeder (models, seed bundle, SeedManager hook)
-38c9c8a D6 design: schema+seeder architecture (DESIGN-D6) + Codex dispatch packet (TASK-D6); PROGRESS updated
+* ayurveda-app 7c379f9 [origin/ayurveda-app] D6 fix: import Foundation in AyurvedaResolver (#Predicate macro requires Foundation)
+  main         2508c74 [origin/main] ...
+7c379f9 D6 fix: import Foundation in AyurvedaResolver (#Predicate macro requires Foundation)
+edb194f D6-VERIFY: Mac execution report
+9a7148c D6-VERIFY task packet: Mac-side git/push/build/boot gates for Codex execution
+23c758b D6: Ayurveda schema + seeder (models, seed bundle, SeedManager hook)
+fc5d550 D6 design: schema+seeder architecture (DESIGN-D6) + Codex dispatch packet (TASK-D6); PROGRESS updated
 ayurveda-app
 a978600b20c231954cfc1b95a729ba29857a2af7
 FIX_ANCESTOR_EXIT=0
@@ -624,7 +624,7 @@ All were skipped solely because Run 2 Phase 1 failed and the packet explicitly f
 
 ---
 
-# Run 3 — full Mac verification after fix commit 1cdcf12
+# Run 3 — full Mac verification after fix commit 362c34a
 
 Date: 2026-07-22 (Europe/Sofia)
 
@@ -632,8 +632,8 @@ Date: 2026-07-22 (Europe/Sofia)
 
 | Gate | Result | Evidence |
 |---|---|---|
-| Preflight and plain push | PASS | Clean `ayurveda-app` at `1cdcf12`; branch was one commit ahead and pushed without force. |
-| Informational `main` clean baseline | PASS | `main` at `9a5429d`; clean build exit 0. No ObserversHub type-check timeout. `main` was not moved. |
+| Preflight and plain push | PASS | Clean `ayurveda-app` at `362c34a`; branch was one commit ahead and pushed without force. |
+| Informational `main` clean baseline | PASS | `main` at `2508c74`; clean build exit 0. No ObserversHub type-check timeout. `main` was not moved. |
 | Phase 1 — `ayurveda-app` simulator build | PASS | Scheme `WiseEating`; iPhone 17 destination; build exit 0. |
 | Phase 2 — fresh install | PASS | First launch remained alive for at least 60 seconds, Ayurveda seeded without failure, SQLite counts `2214 / 336 / 383 / 1500`. |
 | Phase 3 — idempotency | PASS | Both relaunches took the “Ayurveda data already seeded, skipping” path; both retained `2214 / 336 / 383 / 1500 / 14484`. |
@@ -667,9 +667,9 @@ git branch -vv
 git log --oneline -5 ayurveda-app
 git rev-parse --abbrev-ref HEAD
 git rev-parse HEAD
-git merge-base --is-ancestor 1cdcf12 HEAD
+git merge-base --is-ancestor 362c34a HEAD
 print "RUN3_FIX_ANCESTOR_EXIT=$?"
-git show -s --format='author=%an <%ae>%ncommitter=%cn <%ce>%nsubject=%s' 1cdcf12
+git show -s --format='author=%an <%ae>%ncommitter=%cn <%ce>%nsubject=%s' 362c34a
 git push origin ayurveda-app
 git status --short --branch
 git branch -vv
@@ -679,8 +679,8 @@ git branch -vv
 
 ```text
 ## ayurveda-app...origin/ayurveda-app [ahead 1]
-* ayurveda-app 1cdcf12 [origin/ayurveda-app: ahead 1] D6 fix 2: split ObserversHub.body into six sub-views (compiler type-check timeout)
-  main         9a5429d [origin/main] ...
+* ayurveda-app 362c34a [origin/ayurveda-app: ahead 1] D6 fix 2: split ObserversHub.body into six sub-views (compiler type-check timeout)
+  main         2508c74 [origin/main] ...
 ayurveda-app
 1cdcf128bc70cfc0d72c839331f63059fae05aee
 RUN3_FIX_ANCESTOR_EXIT=0
@@ -688,7 +688,7 @@ author=Mincho Milev <mincho.milev@gmail.com>
 committer=Mincho Milev <mincho.milev@gmail.com>
 subject=D6 fix 2: split ObserversHub.body into six sub-views (compiler type-check timeout)
 To github.com:mincho-artesoft/wise-eating.git
-   11d57ec..1cdcf12  ayurveda-app -> ayurveda-app
+   b0e5e4f..362c34a  ayurveda-app -> ayurveda-app
 ## ayurveda-app...origin/ayurveda-app
 ```
 
@@ -971,11 +971,11 @@ Required finishing branch: `ayurveda-app`
 
 | Phase | Result | Notes |
 |---|---|---|
-| 0 — Preflight and plain push | PASS | On `ayurveda-app` at `5fb7945`; only packet-tolerated `.DS_Store` noise; plain push advanced the remote to the same tip. |
+| 0 — Preflight and plain push | PASS | On `ayurveda-app` at `d35cbee`; only packet-tolerated `.DS_Store` noise; plain push advanced the remote to the same tip. |
 | 1 — Clean simulator build | FAIL | `xcodebuild` exited 65 on a Swift 6 concurrency-safety error in `AyurvedaRules.swift`. No fix was attempted. |
 | 2 — Fresh-install seeding | NOT DONE | Stopped because Phase 1 failed. No app was installed or launched; SQLite gates were not measured. |
 | 3 — Idempotency | NOT DONE | Stopped because Phase 1 failed. No relaunches occurred. |
-| 4 — v1→v2 top-up | NOT DONE | Stopped because Phase 1 failed. Commit `6800a1a` was not checked out or built. |
+| 4 — v1→v2 top-up | NOT DONE | Stopped because Phase 1 failed. Commit `397d2f2` was not checked out or built. |
 | 5 — Report | PASS | Run 4 was appended on `ayurveda-app`; only this report is committed and pushed. |
 
 No source file was modified, no force-push was used, and `main` was neither checked out nor moved.
@@ -1018,7 +1018,7 @@ Preflight output:
 
 ```text
 ayurveda-app
-5fb7945
+d35cbee
  M .DS_Store
 5fb7945b484c33ccb0f4e9dab5eaf39603d9912a
 mincho.milev@gmail.com
@@ -1031,7 +1031,7 @@ Plain push output:
 
 ```text
 To github.com:mincho-artesoft/wise-eating.git
-   080b937..5fb7945  ayurveda-app -> ayurveda-app
+   dac34aa..d35cbee  ayurveda-app -> ayurveda-app
 ```
 
 Post-push confirmation:
@@ -1039,10 +1039,10 @@ Post-push confirmation:
 ```text
 ## ayurveda-app...origin/ayurveda-app
  M .DS_Store
-* ayurveda-app 5fb7945 [origin/ayurveda-app] D34: USDA crosswalk + category rules — all 12,601 foods classified (derived + estimated tiers)
-  main         9a5429d [origin/main] ...
-origin/ayurveda-app: 5fb7945
-ayurveda-app:        5fb7945
+* ayurveda-app d35cbee [origin/ayurveda-app] D34: USDA crosswalk + category rules — all 12,601 foods classified (derived + estimated tiers)
+  main         2508c74 [origin/main] ...
+origin/ayurveda-app: d35cbee
+ayurveda-app:        d35cbee
 ```
 
 ### Run 4 Phase 1 — clean simulator build: FAIL
@@ -1215,7 +1215,7 @@ No commands were run. Neither relaunch occurred, so no skip-path logs or unchang
 
 ### Run 4 Phase 4 — v1→v2 top-up: NOT DONE
 
-No commands were run. Commit `6800a1a` was not checked out, the simulator was not erased or seeded with v1, and no over-install/top-up was attempted. The checkout remained on `ayurveda-app`; `main` was never moved.
+No commands were run. Commit `397d2f2` was not checked out, the simulator was not erased or seeded with v1, and no over-install/top-up was attempted. The checkout remained on `ayurveda-app`; `main` was never moved.
 
 ### Run 4 report finalization
 
@@ -1231,7 +1231,7 @@ git status --short --branch
 
 - Fresh-install launch and all five SQLite gates.
 - Two idempotency relaunches and skip-path checks.
-- v1 build/install at `6800a1a`.
+- v1 build/install at `397d2f2`.
 - v2 over-install, 1,969-link top-up, profile-preservation, and crash checks.
 
 These items were skipped solely because the required clean build failed.
@@ -1264,7 +1264,7 @@ Preflight:
 ~~~text
 branch: ayurveda-app
 HEAD: 1159729a54862537dea7df88fc2484fb93e46ca0
-commit: 1159729 mincho.milev@gmail.com D34 fix 2: collapse aiStatusObserver closures to a single sync method (type-check budget at ObserversHub:169)
+commit: 7f5636d mincho.milev@gmail.com D34 fix 2: collapse aiStatusObserver closures to a single sync method (type-check budget at ObserversHub:169)
 tracking: ## ayurveda-app...origin/ayurveda-app [ahead 1]
 worktree noise: M .DS_Store
 ~~~
@@ -1275,8 +1275,8 @@ Plain push:
 
 ~~~text
 To github.com:mincho-artesoft/wise-eating.git
-   5a9420d..1159729  ayurveda-app -> ayurveda-app
-origin/ayurveda-app: 1159729
+   01e3e64..7f5636d  ayurveda-app -> ayurveda-app
+origin/ayurveda-app: 7f5636d
 ~~~
 
 No force push was used and main was never checked out or moved.
@@ -1555,7 +1555,7 @@ The exact historical clean build failed only with the allowed error:
             ^~~~~~~~~~~
 ~~~
 
-The same private-subview split was applied on top of 6800a1a. The rebuild
+The same private-subview split was applied on top of 397d2f2. The rebuild
 passed:
 
 ~~~text
@@ -1566,16 +1566,16 @@ passed:
 The detached v1-only mechanical fix was committed separately:
 
 ~~~text
-3ba69eb242424fae8f0bb32f057b240fdd21d240
+3ba69eb242424fae8f0bb32f057b240fdd21d240 (pre-REPO-1 local-only commit, never on origin; preserved at ayurveda-data/archive/pre-repo1-orphans/03-3ba69eb-run6-observershub.patch)
 parent: 6800a1a8079c748149c0ffbf5de28072b3e90440
 Mincho Milev <mincho.milev@gmail.com>
 Run 6 fix: ObserversHub type-check budget, mechanical split only
 1 file changed, 49 insertions(+), 20 deletions(-)
 ~~~
 
-Thus the executed v1 binary was 6800a1a plus only the explicitly permitted
+Thus the executed v1 binary was 397d2f2 plus only the explicitly permitted
 behavior-neutral ObserversHub split. No seed, model, resolver, or persistence
-code differed from 6800a1a.
+code differed from 397d2f2.
 
 Full v1-fix diff:
 
@@ -1708,12 +1708,12 @@ M WiseEating/Main/RootView/ObserversHub.swift
 M WiseEating/Main/RootView/ObserversHub.swift
 ~~~
 
-The correct detached commit is 3ba69eb above.
+The correct detached commit is 3ba69eb (pre-REPO-1 local-only commit, never on origin; preserved at ayurveda-data/archive/pre-repo1-orphans/03-3ba69eb-run6-observershub.patch) above.
 
 #### Return to v2 tip and over-install
 
 While the run was detached, ayurveda-app advanced from the scoped fix commit
-1bc94fc to 14e6bb0. This commit was preserved. Its audited diff was
+cd61bfc to 18fe8b2. This commit was preserved. Its audited diff was
 documentation-only:
 
 ~~~text
@@ -1782,7 +1782,7 @@ did not recur, and the top-up ran once.
 
 | Gate | Result | Evidence |
 | --- | --- | --- |
-| Preflight and plain push | PASS | 1159729 pushed; no force push |
+| Preflight and plain push | PASS | 7f5636d pushed; no force push |
 | Clean simulator build | PASS | final clean build succeeded after scoped mechanical fix |
 | Fresh install | PASS | 2214 / 2305 / 383 / 1500 / 14484 |
 | Idempotency relaunch 1 | PASS | version-key skip; counts unchanged |
@@ -1808,11 +1808,11 @@ Required finishing branch: `ayurveda-app`
 
 | Phase | Result | Notes |
 |---|---|---|
-| 0 — Preflight and plain push | PASS | On `ayurveda-app` at `b96c014`; only packet-tolerated `.DS_Store` noise; plain push advanced the remote to the same tip. |
+| 0 — Preflight and plain push | PASS | On `ayurveda-app` at `1296662`; only packet-tolerated `.DS_Store` noise; plain push advanced the remote to the same tip. |
 | 1 — Clean simulator build | FAIL | `xcodebuild` exited 65 because the compiler could not type-check an expression in `ObserversHub.swift:169` in reasonable time. The prior `AyurvedaRules` Sendable error did not recur. No fix was attempted. |
 | 2 — Fresh-install seeding | NOT DONE | Stopped because Phase 1 failed. No app was installed or launched; SQLite gates were not measured. |
 | 3 — Idempotency | NOT DONE | Stopped because Phase 1 failed. No relaunches occurred. |
-| 4 — v1→v2 top-up | NOT DONE | Stopped because Phase 1 failed. Commit `6800a1a` was not checked out or built. |
+| 4 — v1→v2 top-up | NOT DONE | Stopped because Phase 1 failed. Commit `397d2f2` was not checked out or built. |
 | 5 — Report | PASS | Run 5 was appended on `ayurveda-app`; only this report is committed and pushed. |
 
 No source file was modified, no force-push was used, and `main` was neither checked out nor moved.
@@ -1852,7 +1852,7 @@ Preflight output:
 ```text
 ayurveda-app
 b96c01428b7249943decde1e88b8dccfecf7f759
-b96c014 mincho.milev@gmail.com D34 fix: explicit Sendable conformances on AyurvedaRules value types (Swift 6 strict concurrency)
+1296662 mincho.milev@gmail.com D34 fix: explicit Sendable conformances on AyurvedaRules value types (Swift 6 strict concurrency)
 ## ayurveda-app...origin/ayurveda-app [ahead 1]
  M .DS_Store
 ```
@@ -1863,10 +1863,10 @@ Plain push output:
 
 ```text
 To github.com:mincho-artesoft/wise-eating.git
-   a6cbd0d..b96c014  ayurveda-app -> ayurveda-app
+   cb65cb6..1296662  ayurveda-app -> ayurveda-app
 ## ayurveda-app...origin/ayurveda-app
  M .DS_Store
-origin/ayurveda-app: b96c014
+origin/ayurveda-app: 1296662
 ```
 
 ### Run 5 Phase 1 — clean simulator build: FAIL
@@ -2040,7 +2040,7 @@ No commands were run. Neither relaunch occurred, so no skip-path logs or unchang
 
 ### Run 5 Phase 4 — v1→v2 top-up: NOT DONE
 
-No commands were run. Commit `6800a1a` was not checked out, the simulator was not erased or seeded with v1, and no over-install/top-up was attempted. The checkout remained on `ayurveda-app`; `main` was never moved.
+No commands were run. Commit `397d2f2` was not checked out, the simulator was not erased or seeded with v1, and no over-install/top-up was attempted. The checkout remained on `ayurveda-app`; `main` was never moved.
 
 ### Run 5 report finalization
 
@@ -2056,7 +2056,7 @@ git status --short --branch
 
 - Fresh-install launch and all five SQLite gates.
 - Two idempotency relaunches and skip-path checks.
-- v1 build/install at `6800a1a`.
+- v1 build/install at `397d2f2`.
 - v2 over-install, 1,969-link top-up, profile-preservation, and crash checks.
 
 These items were skipped solely because the required clean build failed.

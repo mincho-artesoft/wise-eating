@@ -1,6 +1,6 @@
 # TASK MP-7 — culinary plausibility
 
-Director packet · rev5, 2026-07-27 · branch `ayurveda-app`, base = `d3b89a9` (rev5 rules)
+Director packet · rev5, 2026-07-27 · branch `ayurveda-app`, base = `7b19056` (rev5 rules)
 Corrective task. Blocks the `MP5AyurvedicSolverEnabled` flag going on.
 
 ---

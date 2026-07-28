@@ -23,7 +23,7 @@ The target was met after the largest measured fix, so no additional launch-path
 changes were attempted. There are no schema, architecture, content, lifecycle,
 or claims changes.
 
-Implementation commit: `a245b58` (`WE-6 defer search index load from launch path`).
+Implementation commit: `e66ddf9` (`WE-6 defer search index load from launch path`).
 
 ## Measurement method
 

@@ -7,7 +7,7 @@ Supersedes the original DESIGN-WE8.md, which used a WE-8…WE-13 numbering now w
 
 ## 1. Why this workstream exists
 
-`USDAWeeklyMealPlanner.swift` was 4,160 lines making an estimated **135–260 on-device model calls per 7-day plan**. Static analysis at `d393bda` found 21 `LanguageModelSession` constructions and 26 `respond()` sites, several inside per-prompt, per-component or per-meal loops.
+`USDAWeeklyMealPlanner.swift` was 4,160 lines making an estimated **135–260 on-device model calls per 7-day plan**. Static analysis at `f46a107` found 21 `LanguageModelSession` constructions and 26 `respond()` sites, several inside per-prompt, per-component or per-meal loops.
 
 Two complaints, one root cause each:
 

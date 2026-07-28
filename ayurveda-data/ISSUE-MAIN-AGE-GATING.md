@@ -1,7 +1,7 @@
 # Founder Decision Record — `main` Age Gating
 
 Date: 2026-07-26
-Audited branch/tip: `main` at `9a5429d`
+Audited branch/tip: `main` at `2508c74`
 Status: **OPEN PRODUCT ISSUE — audit only; no `main` change made**
 
 ## Finding

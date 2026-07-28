@@ -2,8 +2,8 @@
 
 Date: 2026-07-27
 Branch: `ayurveda-app`
-Integrated Phase-1 base: `375b7d1`
-Implementation commits: `6b15f4f`, `8a15da2`, `11a8f0e`
+Integrated Phase-1 base: `971ec92`
+Implementation commits: `6aa0b84`, `0769a40`, `a91a9a0`
 
 ## Headline
 
@@ -108,7 +108,7 @@ Method matches the accepted INT-2/MP-5 method:
 
 - retained iOS 26.2 simulator
   `AF937668-3BFE-45E8-B42A-A76B914038DD`;
-- A = installed INT-2 Phase-1 app (`375b7d1`), B = final MP-6 Debug app;
+- A = installed INT-2 Phase-1 app (`971ec92`), B = final MP-6 Debug app;
 - separate bundle IDs and prepared containers, identical permissions;
 - no Xcode/xcodebuild/compiler, Maestro, CI, Spotlight indexing, or Blender;
   Chrome, Claude, and its idle VM were temporarily suspended and immediately

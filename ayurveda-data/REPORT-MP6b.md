@@ -2,8 +2,8 @@
 
 Date: 2026-07-27
 Branch: `ayurveda-app`
-Accepted MP-6 base: `b410238`
-Implementation commits: `909d518`, `e7752f9`
+Accepted MP-6 base: `cb588d2`
+Implementation commits: `512d5a8`, `2353444`
 Status: **COMPLETE — all gates green**
 
 ## First confirmation: the MP-6 three-day sample was a fixture

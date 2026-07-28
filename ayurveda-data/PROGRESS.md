@@ -159,7 +159,7 @@ goldens remain exact, the validator and resolution/exclusion corpora retain
 their branch-local values, and rebuilt seed/preseed/concept artifacts are
 deterministic. Fresh install remains zero-insert/no-rebuild. The initial
 integrated 1.697s launch median triggered a bounded full-seed-decode paydown;
-final launch is 1.461s median versus 1.654s at `d393bda`. Physical-device
+final launch is 1.461s median versus 1.654s at `f46a107`. Physical-device
 generation evidence is not waived: every outstanding item and commit endpoint
 is recorded in `DEFERRED-VALIDATION.md`. See `REPORT-INT1.md`.
 
@@ -174,7 +174,7 @@ FC-1 for the 12,601 plain USDA rows. The authored 75 aliases improve frozen
 MP-3 held-out resolution from 40/48 to 44/48 while training remains 59/59.
 All 98 tests, 25+2 search goldens, validator, Debug/Release, fresh-install,
 determinism, and tracked-size gates pass. Same-session N=10 ABAB launch is
-1.433s median versus 1.425s at `06c767b`; the +0.010s paired median is smaller
+1.433s median versus 1.425s at `1a55e28`; the +0.010s paired median is smaller
 than both IQRs and is not resolvable. See `REPORT-FC1e.md`.
 
 MP-5 feature-branch work is complete and integrated by INT-2 Phase 1.
@@ -191,7 +191,7 @@ goldens, 59/59 training and 44/48 held-out resolution, validator,
 Debug/Release, fresh-install, tracked-size, and cold-launch gates pass. The
 planner file shrank 5,374→3,348 lines after all 14 obsolete assembly/repair
 targets were removed. Same-session N=10 ABAB launch is 1.401s median versus
-1.403s at `003bed7`, with no resolvable regression. See `REPORT-MP5.md`.
+1.403s at `ba2c0d7`, with no resolvable regression. See `REPORT-MP5.md`.
 
 INT-2 Phase 1 integrates FC-1e/FC-2 and MP-5 first, then MP-4, into
 `ayurveda-app` without squashing or rebasing. MP-4's one typed interpretation
@@ -201,7 +201,7 @@ suite reconciles at 116/116 = 98 shared + 10 MP-5 + 8 MP-4; 25+2 search
 goldens, 59/59 + 44/48 resolution, all 23 MP-5 hard properties, validator,
 two-build seed/preseed determinism, Debug/Release, fresh zero-insert/no-rebuild,
 and tracked-file gates pass. Same-session N=10 ABAB launch is 1.437s median
-versus 1.434s at `95da00f`; the +0.002s paired median is not resolvable. See
+versus 1.434s at `0015e83`; the +0.002s paired median is not resolvable. See
 `REPORT-INT2.md`.
 
 MP-6 completes the host/simulator MP workstream by moving descriptive meal

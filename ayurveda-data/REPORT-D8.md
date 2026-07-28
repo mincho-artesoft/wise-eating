@@ -286,7 +286,7 @@ director-authorized retry.
 
 ### Original visibility diagnosis (recorded before D8.1 implementation)
 
-The app was built from the `2bf56ed` line with the director-provided
+The app was built from the `dd55a94` line with the director-provided
 `Color.clear` render anchor in `AyurvedaSectionView`, installed into the erased
 iPhone 16 simulator, and launched with `-uiTestNoAds`. The seed completed with
 714 dravyas, 1,500 recipe profiles, and 2,305 links.

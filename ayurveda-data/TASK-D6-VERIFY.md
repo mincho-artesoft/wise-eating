@@ -10,8 +10,8 @@ STOP that phase. Never modify source files. Never force-push anything.
 
 1. `rm -f .git/index.lock .git/HEAD.lock .git/refs/heads/main.lock .git/objects/maintenance.lock 2>/dev/null; find .git/objects -name "tmp_obj_*" -delete 2>/dev/null; git reset`
 2. Verify layout and record output of `git branch -v` and `git log --oneline -3 ayurveda-app`:
-   - `main` must be at the same commit as `origin/main` (3801eee)
-   - `ayurveda-app` must contain e9a3a95 and e8d1b3e on top of it
+   - `main` must be at the same commit as `origin/main` (3801eee (pre-REPO-1 local-only commit, never on origin; preserved at ayurveda-data/archive/pre-repo1-orphans/04-3801eee-dravyas.patch))
+   - `ayurveda-app` must contain e9a3a95 (pre-REPO-1 local-only commit, never on origin; preserved at ayurveda-data/archive/pre-repo1-orphans/01-e9a3a95-d6-design.patch) and e8d1b3e (pre-REPO-1 local-only commit, never on origin; preserved at ayurveda-data/archive/pre-repo1-orphans/02-e8d1b3e-d6-schema-seeder.patch) on top of it
    - HEAD must be on `ayurveda-app`
    If layout differs, STOP and report — do not "fix" branches.
 3. `git push -u origin ayurveda-app` (plain push; abort and report if git proposes force).

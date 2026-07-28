@@ -2,7 +2,7 @@
 
 Date: 2026-07-26
 Branch: `fc-1c-g12-rulings`
-Starting commit: `36799dc`
+Starting commit: `5d76803`
 Status: **STOPPED IN PART A — FC-2 wiring was not started**
 
 ## Executive finding

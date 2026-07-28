@@ -67,7 +67,7 @@ The five live legacy JSON resources total 151,390,548 bytes. The removable comme
 
 ## Phase 2 removals
 
-One closed cluster was removed in commit `60ea0d1` (`WE-7 remove dead Legacy
+One closed cluster was removed in commit `90074e0` (`WE-7 remove dead Legacy
 Swift cluster`):
 
 - the nine **DEAD**, comment-only Swift compiler inputs in the table above;
@@ -146,7 +146,7 @@ All **25/25** WE-4 legacy golden arrays matched exactly. The retained WE-6
 instrumented production-engine build was used for runtime capture so no
 temporary current source change outside the authorized Legacy scope was
 needed. This is valid for the removal audit because
-`git diff 14a2e9f..60ea0d1 -- WiseEating/FoodSearch` is empty; the current
+`git diff 8885cbb..90074e0 -- WiseEating/FoodSearch` is empty; the current
 38-test run independently compiles and checks the same source. First lazy index
 load plus a real tomato query returned five results in **1,700.583ms**.
 

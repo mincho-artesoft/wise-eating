@@ -3,8 +3,8 @@
 Date: 2026-07-25
 Branch: `ayurveda-app`
 Audit tip: `2de3b22fd694bb6b8ad89ce0d5007388d649ca4e`
-Phase-A commit: `8ff9f2f`
-Derivation/artifact commit: `72ec2d0`
+Phase-A commit: `52a0d4c`
+Derivation/artifact commit: `a02cece`
 Status: **COMPLETE — 53/53 tests, 25/25 production legacy goldens plus two
 safety goldens, deterministic artifacts, and all local gates green.**
 
@@ -147,7 +147,7 @@ This is a metadata defect, not a request to change parser or filter semantics.
 
 ## Phase B — candidate build-time derivation
 
-Status: **implemented and committed in `72ec2d0`.**
+Status: **implemented and committed in `a02cece`.**
 
 The candidate bumps the Ayurveda seed to version 4 and gives every canonical
 row a reviewable `safety` block:

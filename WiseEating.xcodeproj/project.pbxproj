@@ -105,6 +105,7 @@
 			buildPhases = (
 				508496212DE5D05D0038A7D5 /* Sources */,
 				508496222DE5D05D0038A7D5 /* Frameworks */,
+				A55E75012F1B000100000001 /* Check Required Assets */,
 				508496232DE5D05D0038A7D5 /* Resources */,
 				C843A4162E7E7C66000B1F28 /* Embed Foundation Extensions */,
 				5076E6C32ECCCE7900FA2B4E /* Embed ExtensionKit Extensions */,
@@ -170,6 +171,35 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A55E75012F1B000100000001 /* Check Required Assets */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/tools/check-assets.sh",
+				"$(SRCROOT)/WiseEating/Food/assets-manifest.json",
+				"$(SRCROOT)/WiseEating/Food/food_archive_144.mp4",
+				"$(SRCROOT)/WiseEating/Food/food_archive_480.mp4",
+				"$(SRCROOT)/WiseEating/preseeded_db.store.gz.part-aa",
+				"$(SRCROOT)/WiseEating/preseeded_db.store.gz.part-ab",
+			);
+			name = "Check Required Assets";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "\"${SRCROOT}/tools/check-assets.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		508496212DE5D05D0038A7D5 /* Sources */ = {

@@ -2,7 +2,7 @@
 
 Date: 2026-07-26
 Branch: `ayurveda-app`
-Starting tip: `8b54f87` (one commit ahead of `origin/ayurveda-app`)
+Starting tip: `1c9c023` (one commit ahead of `origin/ayurveda-app`)
 Status: **COMPLETE — replacement absolute launch gate passed; pushed**
 
 ## Outcome
@@ -202,7 +202,7 @@ were not used as the final gate result.
 ## Additional audit — plain USDA rows on `main`
 
 **Yes.** This is a pre-existing `main` behavior independent of Ayurveda.
-At pristine-main tip `9a5429d`,
+At pristine-main tip `2508c74`,
 `WiseEating/FoodSearch/VM/SmartFoodSearch 3.swift:834` applies
 `item.minAgeMonths` to profile constraints and line 925 applies it to parsed
 age intent. Both paths `continue`, so nonmatching rows are hard-hidden rather
@@ -227,14 +227,14 @@ The separate founder decision record is
 
 The implementation chain completed by this report is:
 
-1. `bf2624b` — provenance-gated enforcement and tests;
-2. `4d61667` — deterministic v5 seed and prebuilt cache artifacts;
-3. `6e14f5b` — corrected the stale fresh-cache test version literal;
-4. `9cb4206` — retained the original, correctly triggered G7 stop report;
+1. `36431cb` — provenance-gated enforcement and tests;
+2. `589f4c0` — deterministic v5 seed and prebuilt cache artifacts;
+3. `8b6f451` — corrected the stale fresh-cache test version literal;
+4. `840e4d7` — retained the original, correctly triggered G7 stop report;
 5. this WE-8c-FINAL completion documentation commit.
 
 The branch also includes its already-approved starting WE-8b audit commit
-`8b54f87`. With the replacement gate green, the complete local chain is
+`1c9c023`. With the replacement gate green, the complete local chain is
 authorized for a normal push to `origin/ayurveda-app`.
 
 ## WE-8c-FINAL — Phase 1: same-session cold-launch re-measurement
@@ -243,8 +243,8 @@ authorized for a normal push to `origin/ayurveda-app`.
 
 The retained baseline simulator was used:
 `WiseEating-WE2-Baseline`
-(`AF937668-3BFE-45E8-B42A-A76B914038DD`, iOS 26.2). WE-8b at `8b54f87` and the
-WE-8c working tip at `9cb4206` were built from the same temporary checkout with
+(`AF937668-3BFE-45E8-B42A-A76B914038DD`, iOS 26.2). WE-8b at `1c9c023` and the
+WE-8c working tip at `840e4d7` were built from the same temporary checkout with
 the same Xcode, Debug arm64 simulator configuration, dependency products, and
 compiler settings. Separate bundle identifiers (`WiseEating.Arte-Soft.we8b`
 and `.we8c`) gave each revision an independent application container and

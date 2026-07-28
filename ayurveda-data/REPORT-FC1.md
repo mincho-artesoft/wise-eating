@@ -4,7 +4,7 @@
 
 **Branch:** `fc-1-food-concepts`
 
-**Branch point:** `d0dfc38` (local MP-1 telemetry commit on top of pushed `d393bda`)
+**Branch point:** `4b8307f` (local MP-1 telemetry commit on top of pushed `f46a107`)
 
 **Status:** **COMPLETE after FC-1b director corpus correction; committed locally, not pushed.**
 
@@ -21,7 +21,7 @@ FC-1 now completes its local gates. The director’s rev2 exclusion corpus remov
 
 ## FC-1b correction and bounded compile fix
 
-The initial `164312e` stop was accepted as correct. Rev2 changed only `ayurveda-data/tests/exclusion-goldens.json`; `food-concepts.json` stayed byte-identical. Permanent test-side cross-file validation now resolves every non-contested must-not pattern against the built catalogue and asserts that it intersects no concept member. This catches contradictions that isolated JSON schema validation cannot.
+The initial `771eccd` stop was accepted as correct. Rev2 changed only `ayurveda-data/tests/exclusion-goldens.json`; `food-concepts.json` stayed byte-identical. Permanent test-side cross-file validation now resolves every non-contested must-not pattern against the built catalogue and asserts that it intersects no concept member. This catches contradictions that isolated JSON schema validation cannot.
 
 The first complete Debug build also exposed a pre-existing target symbol named `Requirement`. The new unused FC-1 value types were nested as `FoodConcepts.Requirement` and `FoodConcepts.Restriction`; matching, persistence, public lookup APIs, and consumers are unchanged. This namespace-only correction removed the invalid redeclaration. No planner, FoodSearch, or ranking source changed.
 
@@ -47,7 +47,7 @@ The exclusion corpus contains 80 must-exclude, 37 must-not-exclude, and exactly 
 | FC1-G6 non-contested must-not-exclude | **PASS — 26/34, 0 FAIL, 8 UNRESOLVED** | No resolved false positive. `peanut butter` and `water chestnut` have catalogue fixtures and zero `tree_nuts` intersection. |
 | FC1-G7 viaIngredient | **4/13 nominal; 2 clean ingredient-only proofs** | This is a corpus/fixture worklist, not a revised FC-1b stop condition. Full evidence below. |
 | FC1-G8 concept size | **PASS WITH FLAG** | No concept exceeds 40%. `meat` is 3,890 / 14,484 = 26.857%, explained below. |
-| FC1-G9 cold launch | **PASS — 1.583763s median** | Same-session ABAB N=10 vs `d0dfc38`; paired median -0.002991s. Candidate median below 1.700s and 1.650s trigger. |
+| FC1-G9 cold launch | **PASS — 1.583763s median** | Same-session ABAB N=10 vs `4b8307f`; paired median -0.002991s. Candidate median below 1.700s and 1.650s trigger. |
 | FC1-G10 fresh install | **PASS** | Candidate fresh launch: Ayurveda v5 stamp verified with zero inserts/updates; cache version 5 / DB 14,484 skipped rebuild. Subsequent launches report seed already applied and still skip rebuild. Permanent preseed tests pass 4/4. |
 | FC1-G11 determinism | **PASS** | Two complete builds are byte-identical for seed, rules, and concepts; exact SHAs below. |
 | FC1-G12 cross-validation | **TRIAGED — 1,217 findings, non-blocking** | 1,160 WE-8-only vs 57 FC-1-only. Top five causes explain 1,143 (93.9%); exhaustive rows retained below. Neither authority was altered. |
@@ -357,7 +357,7 @@ The build proves propagation structurally across **10,571 IngredientLinks / 1,50
 ### Method
 
 - Retained iOS 26.2 simulator `WiseEating-WE2-Baseline` (`AF937668-3BFE-45E8-B42A-A76B914038DD`), one booted device.
-- A = branch point `d0dfc38`; B = FC-1b working tree. Both were arm64 Debug builds with separate bundle IDs/containers and identical build settings/package checkout.
+- A = branch point `4b8307f`; B = FC-1b working tree. Both were arm64 Debug builds with separate bundle IDs/containers and identical build settings/package checkout.
 - Both temporary bundles contained the same ignored local `food_archive_1024.mp4`; candidate differed only by FC-1 code/resource and normal plist/metallib build deltas. Candidate temporary Debug bundle was 155,723 bytes larger; the shipped FC-1 artifact itself is 29,740 bytes.
 - Both received untimed fresh/warm setup. Xcode, xcodebuild, Swift compiler, Maestro, and CI were absent. Chrome, Claude, and CleanMyMac HealthMonitor were temporarily suspended and restored immediately afterward. Spotlight `mds` was 0.0% CPU. Codex, CoreSimulator, WindowServer, and ordinary services remained.
 - Host `time.monotonic()` was recorded before `simctl launch --console-pty`; terminal marker was `WE6_PROFILE|first-interactive-frame|<uptime>`. Every app was terminated before each launch. Strict order AB repeated ten times.

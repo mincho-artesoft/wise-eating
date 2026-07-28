@@ -1,6 +1,6 @@
 # TASK IMG-2 — make the generated images reachable from the app
 
-Director packet · 2026-07-27 · branch `ayurveda-app`, base = `5af9b91`
+Director packet · 2026-07-27 · branch `ayurveda-app`, base = `3a99bee`
 
 Deliberately independent of how many images exist. Build the resolution path now, against whatever has been generated, and every later batch drops in with a rebuild. Do not wait for all 1,844.
 

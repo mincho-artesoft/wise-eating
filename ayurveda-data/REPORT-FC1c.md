@@ -1,7 +1,7 @@
 # FC-1c — rev3 G12 rulings audit
 
 Date: 2026-07-26
-Branch: `fc-1c-g12-rulings` from `ayurveda-app` `95da00f`
+Branch: `fc-1c-g12-rulings` from `ayurveda-app` `0015e83`
 Status: **STOPPED IN PART A — FC-2 wiring was not started**
 
 ## Executive finding

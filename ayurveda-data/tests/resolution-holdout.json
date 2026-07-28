@@ -2,7 +2,7 @@
   "goldensVersion": 1,
   "author": "director",
   "kind": "HELD-OUT TEST SET",
-  "purpose": "MP-3 scored 56/56 on resolution-goldens.json, but the report shows the resolver's alias table was populated FROM that corpus (mung/moong, toor/arhar, chana, urad, ghee, paneer, cilantro, chilli, gourds, jaggery, atta, kitchari, dal-tadka, basmati, lemongrass — every one maps to a case in it). That makes it a training set, not a test set. This file is the held-out measurement: written after the scorer was frozen at 37552c0, containing concepts the implementation has never seen.",
+  "purpose": "MP-3 scored 56/56 on resolution-goldens.json, but the report shows the resolver's alias table was populated FROM that corpus (mung/moong, toor/arhar, chana, urad, ghee, paneer, cilantro, chilli, gourds, jaggery, atta, kitchari, dal-tadka, basmati, lemongrass — every one maps to a case in it). That makes it a training set, not a test set. This file is the held-out measurement: written after the scorer was frozen at fc2d835, containing concepts the implementation has never seen.",
   "criticalRule": "RUN THIS AGAINST THE FROZEN SCORER. Do not add aliases, adjust weights, or change the threshold to improve the score. The number this produces IS the finding. A low score is the expected and useful outcome; a high score after tuning is worthless.",
   "howToUse": "Same protocol as resolution-goldens.json. Report PASS / FAIL / UNRESOLVED per case with the resolved food name and score for every case. UNRESOLVED on a real food is a FAIL for coverage purposes but is far better than a wrong confident match — report the two separately.",
   "cases": [

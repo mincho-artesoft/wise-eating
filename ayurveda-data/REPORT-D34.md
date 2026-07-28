@@ -4,7 +4,7 @@
 
 D34 is complete on `ayurveda-app`. The deterministic D3 crosswalk adds 1,969 derived USDA links, the v2 seed contains 2,305 total links, and the D4 rules cover every remaining store food through the estimated tier. The Python resolver mirror classifies all 12,601 foods and reproduces the director's tier totals, modifier histogram, and nine spot values.
 
-The four implementation groups before this report were committed as `d0572cd`, `96b7366`, `c319422`, and `444382a`. Every commit uses `mincho.milev@gmail.com`. Nothing was pushed.
+The four implementation groups before this report were committed as `0c3d9ee`, `a71ae2e`, `51e8d13`, and `a588c91`. Every commit uses `mincho.milev@gmail.com`. Nothing was pushed.
 
 ## match_crosswalk output block
 
@@ -132,7 +132,7 @@ At least one modifier fired on 6,357 of the 12,265 non-classical foods.
 
 ## Files changed
 
-`git diff --stat 080b937 --cached` was used so the unrelated, pre-existing unstaged `.DS_Store` modification is excluded from the D34 scope proof. The final committed range contains exactly the 12 authorized deliverables:
+`git diff --stat dac34aa --cached` was used so the unrelated, pre-existing unstaged `.DS_Store` modification is excluded from the D34 scope proof. The final committed range contains exactly the 12 authorized deliverables:
 
 ```text
  WiseEating/Ayurveda/AyurvedaResolver.swift  |   49 +-

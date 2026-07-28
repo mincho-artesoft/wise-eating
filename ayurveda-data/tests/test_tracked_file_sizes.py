@@ -1,4 +1,5 @@
 import importlib.util
+import json
 import sys
 import unittest
 from pathlib import Path
@@ -20,15 +21,26 @@ class TrackedFileSizeTests(unittest.TestCase):
     def test_only_git_tracked_files_are_gated_at_90_mb(self):
         sizes = validator.tracked_file_sizes(ROOT)
         ignored_video = "WiseEating/Food/food_archive_1024.mp4"
+        local_video = "WiseEating/Food/food_archive_480.mp4"
+        manifest_path = ROOT / "WiseEating" / "Food" / "assets-manifest.json"
 
         self.assertNotIn(ignored_video, sizes)
+        self.assertNotIn(local_video, sizes)
+        self.assertIn("WiseEating/Food/assets-manifest.json", sizes)
         self.assertTrue(sizes)
         self.assertLessEqual(
             max(sizes.values()),
             validator.TRACKED_FILE_SPLIT_LIMIT_BYTES,
         )
+
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        video_entry = next(
+            asset
+            for asset in manifest["assets"]
+            if asset["filename"] == local_video
+        )
         self.assertEqual(
-            sizes["WiseEating/Food/food_archive_480.mp4"],
+            video_entry["byteSize"],
             82_726_160,
         )
 

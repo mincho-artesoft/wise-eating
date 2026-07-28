@@ -4,9 +4,9 @@ Date: 2026-07-22
 
 Branch: `ayurveda-app`
 
-Starting packet commit: `9b7325b`
+Starting packet commit: `7cf9708`
 
-Implementation commits: `2a5dccf`, `f9394dc`
+Implementation commits: `b8a411a`, `2d87f0c`
 
 ## Result
 
@@ -23,7 +23,7 @@ Simulator and requires a physical-device check.
 
 The task began after removing stale Git locks and rebuilding the index with
 `git reset`. The branch was `ayurveda-app`, the worktree was clean, commit
-`9b7325b` was present in its ancestry, and the branch was not behind its remote.
+`7cf9708` was present in its ancestry, and the branch was not behind its remote.
 `main` was neither checked out nor moved.
 
 Git author configuration used for all D9 commits:
@@ -45,7 +45,7 @@ set therefore remains exactly `{900039, 900360}`.
 
 ## Deliverables
 
-### Recommendation gate — commit `2a5dccf`
+### Recommendation gate — commit `b8a411a`
 
 Added `WiseEating/Ayurveda/AyurvedaRecommendationGate.swift` with the exact
 public API from the packet. The cached set includes direct excluded-profile
@@ -54,7 +54,7 @@ Free-text matching is case/diacritic/punctuation insensitive and derives its
 terms only from excluded profile names and aliases. `invalidate()` clears the
 cache for a future seed update.
 
-### Enforcement — commit `f9394dc`
+### Enforcement — commit `2d87f0c`
 
 Applied the gate to active selection/output paths in:
 
@@ -242,7 +242,7 @@ No seed, recipe, dravya, rules, crosswalk, model, seeder, search, or store data
 file changed. Final scope is restricted to the new gate, the five active
 enforcement files, this report, and the handbook ledger.
 
-Deliverables-only scope snapshot from `git diff --stat 9b7325b`, captured after
+Deliverables-only scope snapshot from `git diff --stat 7cf9708`, captured after
 the report and ledger were staged and immediately before this evidence block
 was appended:
 
@@ -261,8 +261,8 @@ was appended:
 ## Commit and push record
 
 ```text
-2a5dccf D9: add data-driven Ayurveda recommendation gate
-f9394dc D9: enforce Ayurveda exclusions in generators
+b8a411a D9: add data-driven Ayurveda recommendation gate
+2d87f0c D9: enforce Ayurveda exclusions in generators
 ```
 
 The report/ledger commit and plain `ayurveda-app` push are recorded by the final

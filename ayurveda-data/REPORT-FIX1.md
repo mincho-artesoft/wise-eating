@@ -4,7 +4,7 @@ Date: 2026-07-28
 
 Branch: `ayurveda-app`
 
-Base: `281599b`
+Base: `dcaf751`
 
 ## Outcome
 

@@ -1,7 +1,7 @@
 # Meal Generation — Status
 
 Director status · rev5 · 2026-07-27
-`ayurveda-app` @ `281599b` · **MP-7 complete**
+`ayurveda-app` @ `dcaf751` · **MP-7 complete**
 
 ---
 

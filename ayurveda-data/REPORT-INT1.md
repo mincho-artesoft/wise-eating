@@ -4,7 +4,7 @@
 
 **Target branch:** `ayurveda-app`
 
-**Baseline:** `d393bda`
+**Baseline:** `f46a107`
 
 **Status:** **PASS — all authorized simulator/host gates green; physical-device
 evidence remains explicitly deferred.**
@@ -14,12 +14,12 @@ evidence remains explicitly deferred.**
 The MP and food-concept histories are integrated without rebasing, squashing,
 or rewriting any task commit:
 
-1. `8b7408a` merges `mp-3-deterministic-resolution` at `247dfa8`, bringing
-   MP-1 (`d0dfc38`), MP-2 (`161689e`), MP-3 (`37552c0`), MP-3b (`777f0d4`),
-   and MP-3c (`247dfa8`).
-2. `5f02e5b` merges `fc-1-food-concepts` at `7b8d5bd`, retaining both FC-1
-   commits (`164312e`, `7b8d5bd`).
-3. `1918b58` is the bounded INT-1 launch paydown required by the handbook's
+1. `ec3cb7c` merges `mp-3-deterministic-resolution` at `e7e9409`, bringing
+   MP-1 (`4b8307f`), MP-2 (`24ac931`), MP-3 (`fc2d835`), MP-3b (`348d8fc`),
+   and MP-3c (`e7e9409`).
+2. `18be042` merges `fc-1-food-concepts` at `70f75ce`, retaining both FC-1
+   commits (`771eccd`, `70f75ce`).
+3. `01ae3e0` is the bounded INT-1 launch paydown required by the handbook's
    1.650s profiling trigger.
 
 The integrated suite is **95/95**, the resolution and exclusion corpora retain
@@ -51,13 +51,13 @@ No conflict required a behavior decision.
 
 | Gate | Result | Evidence |
 |---|---|---|
-| INT1-G1 Debug + Release | **PASS** | From-empty generic-simulator Debug and Release builds passed before the bounded paydown; post-paydown Debug and Release rebuilds passed. `d393bda` has 46 normalized warning messages; final Debug/Release have 45, with zero additions and one pre-existing unused-`head` warning removed. |
+| INT1-G1 Debug + Release | **PASS** | From-empty generic-simulator Debug and Release builds passed before the bounded paydown; post-paydown Debug and Release rebuilds passed. `f46a107` has 46 normalized warning messages; final Debug/Release have 45, with zero additions and one pre-existing unused-`head` warning removed. |
 | INT1-G2 full suite | **PASS — 95/95** | Final discovery run: 95 tests, 95.221s. Reconciliation below. |
 | INT1-G3 search goldens | **PASS — 25/25 + 2/2 exact** | The production legacy and negative-safety golden assertions run in the full suite; no baseline was changed. |
 | INT1-G4 validator | **PASS** | Classical 336 + derived 1,969 + estimated 10,296 = 12,601; 714 dravyas and 1,500 recipes; all checks passed against the rebuilt preseed. |
 | INT1-G5 deterministic artifacts | **PASS** | Two complete seed builds and two complete preseed builds from byte-identical source stores reproduced byte-for-byte. SHAs below. |
 | INT1-G6 fresh install | **PASS** | `Ayurveda v5 preseed stamp verified; no inserts or updates.` Search cache version 5 / DB 14,484: `Skipping rebuild.` |
-| INT1-G7 cold launch | **PASS — 1.461324s median** | Final same-session ABAB N=10 against `d393bda`; paired median −0.195318s. Under the 1.650s paydown trigger and 1.700s hard ceiling. |
+| INT1-G7 cold launch | **PASS — 1.461324s median** | Final same-session ABAB N=10 against `f46a107`; paired median −0.195318s. Under the 1.650s paydown trigger and 1.700s hard ceiling. |
 | INT1-G8 resolution corpora | **PASS — 59/59 expectations; 40/48 held-out** | Training: 56/56 positive cases plus 3/3 unresolved controls. Held-out: 40 pass, 8 honestly unresolved, 0 wrong-confident; all 5 controls unresolved. |
 | INT1-G9 exclusion corpus | **PASS — exact FC-1b values** | Non-contested must-exclude 61/75 pass, 14 unresolved, 0 fail. Must-not-exclude 26/34 pass, 8 unresolved, 0 fail. Eight contested cases remain separately non-blocking. |
 
@@ -106,7 +106,7 @@ The completed-store audit remains 14,484 foods, 2,214 profiles, 2,305 links,
 
 - Retained iOS 26.2 simulator `WiseEating-WE2-Baseline`
   (`AF937668-3BFE-45E8-B42A-A76B914038DD`); exactly one booted device.
-- A = frozen `d393bda`; B = integrated `ayurveda-app`.
+- A = frozen `f46a107`; B = integrated `ayurveda-app`.
 - Both were arm64 Debug apps with separate bundle IDs/containers and the same
   ignored 285,519,148-byte `food_archive_1024.mp4`.
 - Each app received untimed fresh/warm setup and calendar permission before
@@ -126,7 +126,7 @@ The completed-store audit remains 14,484 foods, 2,214 profiles, 2,305 links,
 
 | Series | N | Median | IQR | Min | Max | Population stddev |
 |---|---:|---:|---:|---:|---:|---:|
-| `d393bda` | 10 | 1.692478s | 0.026358s | 1.641067s | 1.715649s | 0.022463s |
+| `f46a107` | 10 | 1.692478s | 0.026358s | 1.641067s | 1.715649s | 0.022463s |
 | Integrated before paydown | 10 | **1.697238s** | 0.051576s | 1.617185s | 1.745192s | 0.036930s |
 | Paired delta | 10 | +0.011873s | 0.054603s | −0.083524s | +0.075008s | 0.046269s |
 
@@ -136,12 +136,12 @@ nevertheless exceeded 1.650s and correctly triggered same-task profiling.
 
 Signposts identified the largest bounded warm-path cost: both revisions spent
 about 0.228s decoding all 2,214 seed records merely to read `seedVersion`.
-`1918b58` keeps the same compressed bundle and full decoder for real seed work,
+`01ae3e0` keeps the same compressed bundle and full decoder for real seed work,
 but the version check decodes only `AyurvedaSeedVersionDTO`.
 
 ### Final post-paydown raw pairs
 
-| Pair | `d393bda` A | Integrated B | B − A |
+| Pair | `f46a107` A | Integrated B | B − A |
 |---:|---:|---:|---:|
 | 1 | 2.712791s | 1.575848s | −1.136942s |
 | 2 | 1.736120s | 1.453753s | −0.282367s |
@@ -156,7 +156,7 @@ but the version check decodes only `AyurvedaSeedVersionDTO`.
 
 | Series | N | Median | IQR | Min | Max | Population stddev |
 |---|---:|---:|---:|---:|---:|---:|
-| `d393bda` | 10 | 1.653787s | 0.086164s | 1.623284s | 2.712791s | 0.316421s |
+| `f46a107` | 10 | 1.653787s | 0.086164s | 1.623284s | 2.712791s | 0.316421s |
 | Integrated final | 10 | **1.461324s** | 0.048351s | 1.428828s | 1.575848s | 0.045343s |
 | Paired delta | 10 | **−0.195318s** | 0.015719s | −1.136942s | −0.160780s | 0.282605s |
 
@@ -176,12 +176,12 @@ The durable registry is `ayurveda-data/DEFERRED-VALIDATION.md`. It records:
 - MP-3 G8 runtime zero-model-call confirmation.
 
 Each entry records what it proves, exact commit endpoints, and why simulator
-evidence cannot substitute. MP-1 G6 remains measurable because both `d393bda`
-and `d0dfc38` persist in the merged history.
+evidence cannot substitute. MP-1 G6 remains measurable because both `f46a107`
+and `4b8307f` persist in the merged history.
 
 ## Final scope
 
 No branch commit was rebased, squashed, or rewritten. No golden baseline,
 resolver behavior, ontology artifact, FoodSearch ranking, lifecycle rule, or
 Ayurvedic claim boundary changed during integration. The only post-merge source
-change is the measured warm seed-version decode paydown in `1918b58`.
+change is the measured warm seed-version decode paydown in `01ae3e0`.

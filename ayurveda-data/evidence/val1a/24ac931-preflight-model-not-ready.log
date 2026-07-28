@@ -32,13 +32,13 @@ Waiting for the application to terminate…
 
 Apple Intelligence is enabled, but the on-device language model is not ready.
 No plan was scheduled, so no zero-call result is claimed. The current-tip
-5af9b91 Release app was restored after the preflight.
+3a99bee Release app was restored after the preflight.
 
 Retry after founder confirmed Apple Intelligence was present:
 Captured: 2026-07-28 10:59:48–11:00:16 Europe/Sofia
-The same signed 161689e Release endpoint was installed and launched again.
+The same signed 24ac931 Release endpoint was installed and launched again.
 The first framework availability event remained:
 🧠 AI Availability changed -> modelNotReady
 
 No plan was scheduled. The historical process was terminated and the
-current-tip 5af9b91 Release app was restored again.
+current-tip 3a99bee Release app was restored again.

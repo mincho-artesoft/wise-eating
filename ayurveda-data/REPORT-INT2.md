@@ -9,8 +9,8 @@ Status: **PHASE 1 COMPLETE — all authorized host/simulator gates green**
 The histories were merged in the founder-specified order without rebasing or
 squashing:
 
-1. `mp-5-solver` at `f87e46b`, producing merge commit `94cafc6`;
-2. `mp-4-intent-parse` at `81dc2f6`, producing merge commit `cde5fbe`.
+1. `mp-5-solver` at `69afbcb`, producing merge commit `c62f497`;
+2. `mp-4-intent-parse` at `06c91d7`, producing merge commit `4e7ed54`.
 
 The merged planner performs MP-4's single typed interpretation call and then
 passes the interpreted constraints, resolved inclusions, hard exclusions, and
@@ -110,7 +110,7 @@ Method:
 
 - retained iOS 26.2 simulator `WiseEating-WE2-Baseline`
   (`AF937668-3BFE-45E8-B42A-A76B914038DD`);
-- A = `95da00f`; B = integrated Phase 1;
+- A = `0015e83`; B = integrated Phase 1;
 - separate bundle IDs and fresh containers, followed by untimed setup/warm
   launches;
 - identical arm64 Debug settings, resources, and permissions;
@@ -122,7 +122,7 @@ Method:
 - host monotonic time immediately before `simctl launch --console-pty` to the
   `WE6_PROFILE|first-interactive-frame|...` marker.
 
-| Pair | A `95da00f` | B integrated | B − A |
+| Pair | A `0015e83` | B integrated | B − A |
 |---:|---:|---:|---:|
 | 1 | 1.468608s | 1.431701s | −0.036907s |
 | 2 | 1.435928s | 1.454919s | +0.018992s |

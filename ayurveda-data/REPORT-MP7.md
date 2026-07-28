@@ -62,12 +62,12 @@ or comparator changed.
 
 | Work | Commit | State |
 |---|---|---|
-| Rev9 director rule, unmodified | `42281ac` | pushed |
-| Rev9 projection, prepared-aware matching, tests, and deterministic cache | `a7e67b4` | pushed |
-| G4 harness repair and shipped-role conformance test | `e98caf6` | pushed |
-| Real-catalogue G5–G7 measurement harness | `d0c27fa` | pushed |
-| Initial real-catalogue G7 stop report | `5da4acf` | pushed |
-| Behavior-preserving G7 optimization and measurement harnesses | `1135fb9` | pushed |
+| Rev9 director rule, unmodified | `bc6e346` | pushed |
+| Rev9 projection, prepared-aware matching, tests, and deterministic cache | `c046559` | pushed |
+| G4 harness repair and shipped-role conformance test | `6a12a9a` | pushed |
+| Real-catalogue G5–G7 measurement harness | `b0d3245` | pushed |
+| Initial real-catalogue G7 stop report | `0e9c502` | pushed |
+| Behavior-preserving G7 optimization and measurement harnesses | `9330cac` | pushed |
 | Final report and registries | report commit | committed and pushed after all gates |
 
 Artifact SHA-256:
@@ -438,7 +438,7 @@ lookups are cached rather than recomputed during solver evaluation.
 
 ### Physical-device launch and peak memory
 
-Device: iPhone 16 Pro, iOS 26.5. A = MP-6b/rev1 `5df25e3`; B = final optimized
+Device: iPhone 16 Pro, iOS 26.5. A = MP-6b/rev1 `6468169`; B = final optimized
 working tree. Both are signed Release iPhoneOS builds. The same physical device,
 bundle container, cable, and host session were used in strict ABAB order with a
 discarded A warm-up.

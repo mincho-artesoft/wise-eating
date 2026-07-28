@@ -2,8 +2,8 @@
 
 Date: 2026-07-26
 Branch: `fc-1c-g12-rulings`
-Starting commit: `06c767b`
-Implementation commits: `34a5047`, `55cd5ae`
+Starting commit: `1a55e28`
+Implementation commits: `c23018a`, `15cb7f2`
 Status: **COMPLETE — all authorized host/simulator gates pass; not merged or pushed**
 
 ## Executive result
@@ -237,7 +237,7 @@ Method:
 
 - retained iOS 26.2 simulator `WiseEating-WE2-Baseline`
   (`AF937668-3BFE-45E8-B42A-A76B914038DD`), the only booted simulator;
-- A = `06c767b`; B = final FC-1e;
+- A = `1a55e28`; B = final FC-1e;
 - separate bundle IDs and containers, arm64 Debug, identical build settings,
   package checkout, preseed resources, and the same ignored 285,519,148-byte
   1024 video;
@@ -249,7 +249,7 @@ Method:
   terminal marker `WE6_PROFILE|first-interactive-frame|<uptime>`;
 - strict AB repeated ten times, terminating the process before every launch.
 
-| Pair | A `06c767b` | B FC-1e | B − A |
+| Pair | A `1a55e28` | B FC-1e | B − A |
 |---:|---:|---:|---:|
 | 1 | 1.432083s | 1.455626s | +0.023543s |
 | 2 | 1.450219s | 1.458849s | +0.008630s |

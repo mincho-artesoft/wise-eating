@@ -1,6 +1,6 @@
 # TASK VAL-1 — close the deferred device measurements
 
-Director packet · 2026-07-27 · branch `ayurveda-app`, base = `5af9b91`
+Director packet · 2026-07-27 · branch `ayurveda-app`, base = `3a99bee`
 Needs a physical device. An iPhone 16 Pro is sufficient for all of it.
 
 ---
@@ -19,23 +19,23 @@ The full specification already exists in **`ayurveda-data/DEFERRED-VALIDATION.md
 
 ### VAL-1a — MP-3: zero model calls during resolution
 
-The cheapest and the most load-bearing. Compare `161689e` → `37552c0`, confirm `247dfa8` retains it.
+The cheapest and the most load-bearing. Compare `24ac931` → `fc2d835`, confirm `e7e9409` retains it.
 
 **Gate:** during a genuine on-device 7-day generation, food resolution makes **zero** `LanguageModelSession` constructions and **zero** `respond()` calls, while the surrounding pipeline still runs normally. Report both counters, not just the resolution one — zero calls because the whole pipeline failed is not a pass.
 
 ### VAL-1b — MP-1: the nine-run device matrix
 
-Three prompts × 1/3/7 days at `d0dfc38` with telemetry on, `d393bda` for baseline.
+Three prompts × 1/3/7 days at `4b8307f` with telemetry on, `f46a107` for baseline.
 
 **This produces the number that replaces the estimate.** Report actual session and `respond()` counts per run, stage timing, response latency, and how it scales with plan size.
 
 **Gate:** the measured 7-day call count at the current tip is **exactly 2**. If it is not, that is a finding and everything downstream of it in STATUS is wrong — report and stop.
 
-Also complete the two companion items in the registry: the **G6 plan-identical diff** (`d393bda` vs `d0dfc38`, same prompts and profile — telemetry must not change plan content) and the **G8 launch A/B**, same-session, N≥10.
+Also complete the two companion items in the registry: the **G6 plan-identical diff** (`f46a107` vs `4b8307f`, same prompts and profile — telemetry must not change plan content) and the **G8 launch A/B**, same-session, N≥10.
 
 ### VAL-1c — MP-2: the twenty-food AI-vs-USDA macro error table
 
-Compare `d0dfc38` → `161689e` over the same twenty-food input set and profile.
+Compare `4b8307f` → `24ac931` over the same twenty-food input set and profile.
 
 This quantifies what was actually wrong with the thing we deleted. `aiFetchNutritionData` asked a 3B model for "typical nutritional values per 100 g" and those invented numbers **mutated gram weights**. We removed it on principle; this measures the error that removal took out. Report per-food AI value, USDA value, absolute and percentage error, and the aggregate.
 

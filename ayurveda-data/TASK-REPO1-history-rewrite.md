@@ -93,9 +93,9 @@ measurements to specific commits and become wrong the moment the rewrite lands:
 
 - `ayurveda-data/STATUS-meal-generation.md`
 - `ayurveda-data/DEFERRED-VALIDATION.md`
-- `ayurveda-data/TASK-VAL1.md` — `d0dfc38`, `161689e`, `37552c0`, `247dfa8`,
-  `d393bda`, `5af9b91`
-- `ayurveda-data/TASK-IMG2.md` — base `5af9b91`
+- `ayurveda-data/TASK-VAL1.md` — `4b8307f`, `24ac931`, `fc2d835`, `e7e9409`,
+  `f46a107`, `3a99bee`
+- `ayurveda-data/TASK-IMG2.md` — base `3a99bee`
 - any MP report referencing a commit
 
 Grep the whole repo for 7-hex-digit strings, map each through

@@ -16,7 +16,7 @@ The audit:
 2. independently re-derived every recipe floor from the 30 dravya and 30 recipe
    batches plus `WiseEating/Legacy/foods.json`;
 3. counted every tied ingredient whose age equals its recipe's derived maximum;
-4. inspected the pre-WE-8 (`2de3b22`) preseed store read-only;
+4. inspected the pre-WE-8 (`731c811`) preseed store read-only;
 5. traced the implicated source rows through repository history; and
 6. simulated the B options entirely in memory without writing a seed or store.
 
@@ -27,7 +27,7 @@ receive one count. Consequently, driver counts are not expected to sum to
 
 Baseline artifact SHA-256 values:
 
-| Artifact | SHA-256 at `6bb8740` |
+| Artifact | SHA-256 at `0e8a028` |
 |---|---|
 | `WiseEating/ayurveda_seed.json.gz` | `e4bfcd638ce10d2815238a0c7da2dff00114f041bbd620425b7db92ac2d55156` |
 | `WiseEating/preseeded_db.store.gz.part-aa` | `fb44696a82f9ad53bd8e98a65164865a2a160fb4e285a73173847226bc7fb0b8` |
@@ -96,9 +96,9 @@ defaulted, or set by a WE-8 age rule. The batch supplies the binding only;
 | 15 | Tomato (`dravya.tomato`) | 24 | 76 | `batch-04.json` exact binding → ID 7774, “Tomatoes, red, ripe, raw, year round average,” age 24 |
 
 Repository history traces all these raw values, plus oats and both tea rows, to
-the original `foods.json` import in commit `672455d` (then moved without content
-change in `13b9274`). Each remained byte-for-byte the same through `2de3b22`
-and `6bb8740`.
+the original `foods.json` import in commit `a6f5cf8` (then moved without content
+change in `3295075`). Each remained byte-for-byte the same through `731c811`
+and `0e8a028`.
 
 The upstream authority or clinical derivation used to author the imported
 `minAgeMonths` values is **untraced**. `foods.json` is USDA-backed nutritional
@@ -116,7 +116,7 @@ rationale is inferred here.
 
 Each row gates one recipe, for two recipes total. Neither value comes from a
 dravya batch or WE-8 rule. Both were already 192 months in the original
-`672455d` import; their upstream rationale is untraced.
+`a6f5cf8` import; their upstream rationale is untraced.
 
 ### A5. Oats
 
@@ -124,18 +124,18 @@ dravya batch or WE-8 rule. Both were already 192 months in the original
 “Oats, raw.” That source row stores **60 months**, and 70 recipes inherit 60 as
 their floor. It is plainly above 12 months: the stored floor is five years.
 WE-8 did not create or raise it; the same value is present in the original
-`672455d` import and the pre-WE-8 store. Its upstream rationale is untraced.
+`a6f5cf8` import and the pre-WE-8 store. Its upstream rationale is untraced.
 
 ### A6. Pre-WE-8 comparison
 
-The read-only `2de3b22` store query found:
+The read-only `731c811` store query found:
 
 - all 15 top-driver FoodItems at the exact ages shown above;
 - oats at 60 months;
 - chamomile and hibiscus tea at 192 months; and
 - all 1,500 recipe FoodItems at 0 months.
 
-There is no `2de3b22..6bb8740` diff to `WiseEating/Legacy/foods.json` or any
+There is no `731c811..0e8a028` diff to `WiseEating/Legacy/foods.json` or any
 dravya/recipe batch. For the 15 drivers, oats, and the two teas, WE-8 changed no
 ingredient-level age; it propagated existing values onto recipe rows.
 

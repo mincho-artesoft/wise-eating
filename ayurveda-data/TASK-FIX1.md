@@ -1,6 +1,6 @@
 # TASK FIX-1 / PERF-1
 
-Director packet · 2026-07-27 · branch `ayurveda-app`, base = `281599b` (MP-7 complete)
+Director packet · 2026-07-27 · branch `ayurveda-app`, base = `dcaf751` (MP-7 complete)
 Two small independent tasks. Neither blocks the `MP5AyurvedicSolverEnabled` flag.
 
 ---

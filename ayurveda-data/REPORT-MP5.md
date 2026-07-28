@@ -1,7 +1,7 @@
 # REPORT-MP5 — Deterministic plan assembly
 
 Date: 2026-07-26
-Branch: `mp-5-solver` from `003bed7`
+Branch: `mp-5-solver` from `ba2c0d7`
 Status: **COMPLETE ON FEATURE BRANCH — not merged, not pushed**
 
 ## Outcome
@@ -187,7 +187,7 @@ Method:
 
 - retained iOS 26.2 simulator `WiseEating-WE2-Baseline`
   (`AF937668-3BFE-45E8-B42A-A76B914038DD`), the only booted simulator;
-- A = branch point `003bed7`; B = final MP-5;
+- A = branch point `ba2c0d7`; B = final MP-5;
 - separate temporary bundle IDs/containers, arm64 Debug, identical build
   settings, package checkout, preseed resources, and ignored 1024 video;
 - both received untimed fresh/warm setup and calendar/reminder permission;
@@ -199,7 +199,7 @@ Method:
   `WE6_PROFILE|first-interactive-frame|<uptime>`;
 - strict AB repeated ten times, terminating the process before every launch.
 
-| Pair | A `003bed7` | B MP-5 | B − A |
+| Pair | A `ba2c0d7` | B MP-5 | B − A |
 |---:|---:|---:|---:|
 | 1 | 1.411544s | 1.407295s | −0.004249s |
 | 2 | 1.391933s | 1.398020s | +0.006086s |

@@ -4,7 +4,7 @@
 
 **Branch:** `mp-4-intent-parse`
 
-**Branch point:** `95da00f`
+**Branch point:** `0015e83`
 
 **Status:** **PASS — implementation and all authorized local gates are green;
 not merged and not pushed.**
@@ -12,10 +12,10 @@ not merged and not pushed.**
 ## INT-1 launch question — answered first
 
 The reported `1.653787s → 1.461324s` launch movement is accounted for by the
-bounded INT-1 paydown in commit `1918b58`, not by MP-3 silently removing a
+bounded INT-1 paydown in commit `01ae3e0`, not by MP-3 silently removing a
 launch check.
 
-Before `1918b58`, `AyurvedaSeeder.bundleSeedVersion()` called `loadSeed()` and
+Before `01ae3e0`, `AyurvedaSeeder.bundleSeedVersion()` called `loadSeed()` and
 therefore decompressed and decoded all 2,214 seed records merely to read
 `seedVersion`. After that commit, the same authoritative bundle is
 decompressed but its JSON is decoded into the one-field
@@ -24,7 +24,7 @@ full `AyurvedaSeedDTO` decoder and validator.
 
 The same-session signposts account for the measured change:
 
-| Phase | `d393bda` median | Integrated final median | Delta |
+| Phase | `f46a107` median | Integrated final median | Delta |
 |---|---:|---:|---:|
 | Warm Ayurveda check | 0.226336s | 0.043991s | −0.182345s |
 | Total seed checks | 0.249819s | 0.068091s | −0.181728s |

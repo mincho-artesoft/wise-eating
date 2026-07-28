@@ -27,11 +27,11 @@ Commits are one per diagnosed defect:
 
 | Defect | Commit |
 |---|---|
-| D1 | `1ad2953` |
-| D2 | `a28c4ca` |
-| D3 | `b92c4bb` |
-| D4 | `754efc7` |
-| D5 | `83a9eba` |
+| D1 | `4a5b979` |
+| D2 | `dbb1193` |
+| D3 | `0e63efa` |
+| D4 | `ad9d9a9` |
+| D5 | `c4c9e9e` |
 
 ## Diagnosis audit — confirm or refute
 

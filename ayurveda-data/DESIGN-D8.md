@@ -32,7 +32,7 @@ into duplicated foods as prefill, deleting a user profile from the editor, seaso
 aware recommendations, dosha assessment, any change to seed/validator/data files,
 any change to `FoodItem.swift`.
 
-## UI reality (measured 2026-07-22, branch `ayurveda-app` @ `bb4403f`)
+## UI reality (measured 2026-07-22, branch `ayurveda-app` @ `375f7de`)
 
 | Fact | Where |
 |---|---|

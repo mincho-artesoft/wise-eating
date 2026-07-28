@@ -28,7 +28,7 @@ Before MP-2 work, the unfinished MP-1 telemetry implementation was committed on
 
 It was not pushed and neither the handbook nor `PROGRESS.md` was changed.
 This branch was created at that commit. MP-1 can therefore compare
-`d393bda` with `d0dfc38` without any MP-2 plan-output change.
+`f46a107` with `4b8307f` without any MP-2 plan-output change.
 
 ## Diagnosis
 
@@ -183,7 +183,7 @@ The remaining session labels are:
 The old prompt requires Apple Intelligence and cannot be invoked by the
 device-independent MP-2 test harness. On the scheduled device session, capture
 20 foods observed in generated plans at the MP-1 checkpoint commit
-`d0dfc38`, then pair each returned protein/fat/carbohydrate value with the
+`4b8307f`, then pair each returned protein/fat/carbohydrate value with the
 exact bound `FoodItem` reference values. For each nutrient the artifact will
 record absolute error and percentage error, followed by the mean and worst
 case over all 20 foods. Percentage error must explicitly mark a true USDA zero

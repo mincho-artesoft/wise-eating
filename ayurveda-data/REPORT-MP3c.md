@@ -33,7 +33,7 @@ steamed.
 
 ## Frozen boundaries
 
-- `aliasPhrases(for:)` is byte-identical to the function at `777f0d4`.
+- `aliasPhrases(for:)` is byte-identical to the function at `348d8fc`.
   Both blocks have SHA-256
   `46afe2ce151443412181964d4b76926660c42c4bfa7fcf90c918fdad9f2c09f2`.
 - No alias was added, removed, or edited.

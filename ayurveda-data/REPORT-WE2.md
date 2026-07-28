@@ -16,7 +16,7 @@ WE-2 ships two founder requirements:
    14,484-row search cache in the preseed artifact. A fresh install performs no
    Ayurveda inserts and no search rebuild.
 
-T1 was accepted as commit `f545569`. T2 contains the preseed artifact, runtime
+T1 was accepted as commit `1e54ca4`. T2 contains the preseed artifact, runtime
 no-op/delta behavior, tests, build tooling, and this close-out documentation.
 
 The superseded untracked `docs/PORT-1-REPORT.md` was deleted before work began,
