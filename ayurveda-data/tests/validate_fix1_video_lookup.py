@@ -106,11 +106,12 @@ def main() -> None:
     assert len(hot) == 5
     assert len(one_eighth) == 5
 
-    raw_lookup = source.index("frameMap[name]")
-    normalized_lookup = source.index("frameMap[frameKey(name)]")
+    raw_lookup = source.index("mapping[name]")
+    normalized_lookup = source.index("mapping[frameKey(name)]")
     assert raw_lookup < normalized_lookup
     assert 'charactersIn: "/\\\\:*?\\"<>|"' in source
-    assert "frameMap.keys.map(frameKey).sorted()" in source
+    assert "Set(frameMap.keys)" in source
+    assert "resolution(for: name) == nil ? nil : frameKey(name)" in source
 
     print(
         json.dumps(
