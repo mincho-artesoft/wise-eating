@@ -23,10 +23,14 @@ Checks, in the order they would hurt:
 
 Exit code 0 only if every check passes. run.sh calls this before generating.
 """
-import argparse, collections, hashlib, importlib.util, json, os, sys
+import argparse, collections, datetime, hashlib, importlib.util, json, os, sys
 
 DIR = os.path.dirname(os.path.abspath(__file__))
 IMG_EXT = (".jpeg", ".jpg", ".png", ".webp")
+
+# Above this many byte-identical files, stop instead of auto-quarantining: that
+# is a systemic fault, not misfiled downloads, and mass regeneration costs money.
+MAX_AUTO_QUARANTINE = 20
 
 
 def load_builder():
@@ -148,10 +152,47 @@ def main():
     for stem, p in have.items():
         with open(p, "rb") as fh:
             byhash[hashlib.sha256(fh.read()).hexdigest()].append(stem)
-    dupes = [v for v in byhash.values() if len(v) > 1]
-    if dupes:
-        fails.append(f"F  {len(dupes)} group(s) of byte-identical images — one of each has the wrong "
-                     f"food attached: {dupes[:3]}")
+    dupes = [sorted(v) for v in byhash.values() if len(v) > 1]
+
+    # Byte-identical files prove one download was written under two names.
+    # QUARANTINE EVERY MEMBER, not all-but-one.
+    #
+    # The instinct is to keep one copy and regenerate the other. A real case
+    # proved that wrong: 'recipe-banana-oat-milk-smoothie' and
+    # 'recipe-banana-dairy-wheat-pancakes' were identical, and the picture was
+    # granola with raisins and almonds — neither food. A stale result had been
+    # rescued and written twice. Keeping either would have shipped granola under
+    # a smoothie's name. When bytes are shared there is no evidence which name,
+    # if any, the image belongs to.
+    #
+    # This check used to be fatal, which halted 1,400 remaining jobs over 2 bad
+    # files AND left the bad files sitting there. Quarantining is both the
+    # correct remediation and cheap: the rows drop out of `complete` and
+    # regenerate on the next round.
+    n_dupe_files = sum(len(g) for g in dupes)
+    if dupes and n_dupe_files > MAX_AUTO_QUARANTINE:
+        # Many identical files is not a handful of misfiled downloads — it is
+        # Flow returning the same placeholder repeatedly. Auto-quarantining then
+        # triggers mass regeneration and spends credits on whatever is broken.
+        fails.append(f"F  {n_dupe_files} images across {len(dupes)} group(s) are byte-identical, over "
+                     f"the {MAX_AUTO_QUARANTINE}-file auto-quarantine limit.\n"
+                     f"       That many identical files usually means Flow is returning the same\n"
+                     f"       placeholder, not that {n_dupe_files} downloads were misfiled. Open one before\n"
+                     f"       regenerating anything. Groups: {dupes[:3]}")
+    elif dupes:
+        qdir = os.path.join(a.out, "_rejected")
+        os.makedirs(qdir, exist_ok=True)
+        ts = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+        moved = []
+        for group in dupes:
+            for stem in group:
+                src = have.pop(stem)
+                os.rename(src, os.path.join(qdir, f"{ts}-dupe-{os.path.basename(src)}"))
+                moved.append(stem)
+        warns.append(f"F  quarantined {len(moved)} byte-identical image(s) in {len(dupes)} group(s) to "
+                     f"_rejected/\n"
+                     f"       every member moved, not all-but-one — shared bytes are no evidence which\n"
+                     f"       name is correct. These rows regenerate. Groups: {dupes[:3]}")
     else:
         print(f"F  duplicates      ok — {len(have)} image(s), {len(byhash)} distinct")
 
