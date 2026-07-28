@@ -179,3 +179,73 @@ number. Stop and report on failure; never fix a gate by loosening it.
 **Do not start Phase C until Phase A is pushed, the loop is stopped, and Phase B's
 checksums match.** Everything before Phase C is reversible. Nothing after it is,
 except from the backup.
+
+---
+
+## 6. AMENDMENT — 2026-07-28, after R5 stopped the run
+
+R5 failed with 229 mappable references and 8 occurrences of 4 unique SHAs that
+`commit-map` could not map. Codex stopped correctly and asked for direction.
+
+### What was actually wrong
+
+The four commits — `e9a3a95`, `e8d1b3e`, `3ba69eb`, `3801eee` — were **never
+pushed to origin**. They lived only in one local clone's reflog, unreachable from
+any branch. So they were absent from the mirror and from the rewrite because they
+had never been part of the canonical history at all.
+
+Which means **the rewrite did not break those four references. They were already
+unresolvable from any clone of origin, before REPO-1 ran.** R5 surfaced a
+pre-existing documentation defect and attributed it to the rewrite.
+
+Every file touched by all four is present in current HEAD — verified file by
+file, zero absent. A rebase carried the work forward and orphaned the commit
+objects. The work was never at risk; only the four SHAs were.
+
+### Two defects in this packet, now fixed
+
+**Phase B backed up the wrong thing.** `git clone --mirror <origin-url>` captures
+origin, not the local clone. The four commits existed *only* in the local clone,
+so R1 passed with a backup that did not contain them.
+
+**Gate R4 would have destroyed them.** `git gc --prune=now --aggressive` deletes
+unreachable objects immediately. Running R4 before noticing these would have
+removed all four permanently, and the R1 backup would not have helped.
+
+Both are now moot: the four commits are preserved as self-contained patches in
+`ayurveda-data/archive/pre-repo1-orphans/` (3.8 MB, committed), with a README
+explaining what they are. R4 is safe to run once that directory is committed.
+
+### R5, restated
+
+R5 stays absolute for the 229 mappable references: **every one must resolve in
+the rewritten history, unmapped count 0.** That is unchanged and non-negotiable.
+
+The four orphans are removed from R5's scope and handled as their own defect,
+because they were never in the canonical history R5 is about. This is a
+correction to a gate whose premise was wrong, not a relaxation of a gate that
+proved inconvenient — the test being that the fix makes the documentation *more*
+accurate than it was before REPO-1 started, not less.
+
+**Do not** import the orphans into the rewritten history to make them resolve.
+They were deliberately never pushed, and rewriting would change their SHAs anyway,
+so it would not satisfy R5 even at the cost of polluting the history.
+
+### D1, amended
+
+For the 229 mappable references: map through `REPO1-commit-map.txt` as specified.
+
+For the 8 occurrences of the 4 orphans, in `REPORT-D6-VERIFY.md:61` and
+`TASK-D6-VERIFY.md:13`, replace the bare SHA with an annotation naming it as a
+pre-REPO-1 local-only commit and pointing at the preserved patch, e.g.
+
+    e8d1b3e (pre-REPO-1 local-only commit, never on origin; preserved at
+    ayurveda-data/archive/pre-repo1-orphans/02-e8d1b3e-d6-schema-seeder.patch)
+
+Report the two counts separately: mappable rewritten, and orphans annotated.
+
+### New gate
+
+| Gate | Requirement |
+|---|---|
+| **R10** | `ayurveda-data/archive/pre-repo1-orphans/` committed with 4 patches and README before any `git gc --prune` runs; each patch's Subject matches its filename |
