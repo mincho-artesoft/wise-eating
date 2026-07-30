@@ -31,7 +31,6 @@ private struct FoodSearchViewContent: View {
     @State private var isFavoritesModeActive = false
     @State private var showRecipesOnly = false
     @State private var showMenusOnly = false
-    @State private var showAyurvedaFilters = false
     @State private var ayurvedaFilters: AyurvedaSearchFilters = .empty
     
     // Quick filter extra state
@@ -85,9 +84,6 @@ private struct FoodSearchViewContent: View {
         }
         .onChange(of: ayurvedaFilters) {
             triggerSearch()
-        }
-        .sheet(isPresented: $showAyurvedaFilters) {
-            AyurvedaSearchFiltersView(filters: $ayurvedaFilters)
         }
     }
     
@@ -159,57 +155,6 @@ private struct FoodSearchViewContent: View {
     private var filtersView: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(spacing: 8) {
-                Button {
-                    showAyurvedaFilters = true
-                } label: {
-                    HStack(spacing: 6) {
-                        Image(systemName: "leaf.fill")
-                            .imageScale(.medium)
-                        Text("Ayurveda")
-                        if ayurvedaFilters.activeCount > 0 {
-                            Text("\(ayurvedaFilters.activeCount)")
-                                .font(.caption2.weight(.bold))
-                                .foregroundStyle(.white)
-                                .frame(minWidth: 18, minHeight: 18)
-                                .background(
-                                    effectManager.currentGlobalAccentColor,
-                                    in: Circle()
-                                )
-                        }
-                    }
-                    .font(.subheadline.weight(
-                        ayurvedaFilters.isActive ? .semibold : .regular
-                    ))
-                    .foregroundStyle(
-                        ayurvedaFilters.isActive
-                            ? effectManager.currentGlobalAccentColor
-                            : Color.primary
-                    )
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 8)
-                    .background(
-                        ayurvedaFilters.isActive
-                            ? Color.green.opacity(0.16)
-                            : Color(.systemGray6),
-                        in: Capsule()
-                    )
-                    .overlay {
-                        Capsule()
-                            .stroke(
-                                ayurvedaFilters.isActive
-                                    ? Color.green.opacity(0.7)
-                                    : Color.clear,
-                                lineWidth: 1.5
-                            )
-                    }
-                }
-                .buttonStyle(.plain)
-                .accessibilityValue(
-                    ayurvedaFilters.isActive
-                        ? "\(ayurvedaFilters.activeCount) active filters"
-                        : "No active filters"
-                )
-
                 // --- FAVORITES BUTTON ---
                 Button(action: { toggleSpecialFilter(.favorites) }) {
                     HStack(spacing: 6) {
@@ -287,6 +232,15 @@ private struct FoodSearchViewContent: View {
                 }
                 .glassCardStyle(cornerRadius: 20)
                 .buttonStyle(.plain)
+
+                ForEach(AyurvedaSearchDosha.allCases) { dosha in
+                    AyurvedaDoshaQuickFilterChip(
+                        dosha: dosha,
+                        preference: ayurvedaFilters.preference(for: dosha)
+                    ) {
+                        toggleQuickDosha(dosha)
+                    }
+                }
                 
                 ForEach(quickFilterChips, id: \.self) { chip in
                     FilterButton(
@@ -518,6 +472,12 @@ private struct FoodSearchViewContent: View {
         }
         triggerSearch()
     }
+
+    private func toggleQuickDosha(_ dosha: AyurvedaSearchDosha) {
+        withAnimation(.easeInOut(duration: 0.2)) {
+            ayurvedaFilters.cyclePreference(for: dosha)
+        }
+    }
     
     private func formatName(_ type: NutrientType) -> String {
         SmartFoodSearch3.displayName(for: type)
@@ -617,12 +577,18 @@ private struct FoodRowView: View {
                     .foregroundColor(.green)
                 }
 
-                if engine.isAyurvedaSearchActive,
-                   let metadata = engine.ayurvedaMetadata(for: food.id) {
-                    AyurvedaSearchResultSummary(
-                        metadata: metadata,
-                        filters: ayurvedaFilters
-                    )
+                let ayurvedaMetadata = engine.ayurvedaMetadata(for: food.id)
+                VStack(alignment: .leading, spacing: 6) {
+                    AyurvedaDoshaResultChips(metadata: ayurvedaMetadata)
+                    if let ayurvedaMetadata,
+                       !engine.searchContext
+                            .displayAyurvedaFields.isEmpty {
+                        AyurvedaSearchedFieldChips(
+                            metadata: ayurvedaMetadata,
+                            fields: engine.searchContext
+                                .displayAyurvedaFields
+                        )
+                    }
                 }
             }
             

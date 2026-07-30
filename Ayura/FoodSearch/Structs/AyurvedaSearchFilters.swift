@@ -78,6 +78,21 @@ struct AyurvedaSearchFilters: Equatable, Sendable {
         case .kapha: kapha = preference
         }
     }
+
+    mutating func cyclePreference(for dosha: AyurvedaSearchDosha) {
+        let nextPreference: AyurvedaDoshaPreference?
+        switch preference(for: dosha) {
+        case nil:
+            nextPreference = .pacifies
+        case .pacifies:
+            nextPreference = .neutral
+        case .neutral:
+            nextPreference = .aggravates
+        case .aggravates:
+            nextPreference = nil
+        }
+        set(nextPreference, for: dosha)
+    }
 }
 
 struct AyurvedaSearchTemporalContext: Sendable {

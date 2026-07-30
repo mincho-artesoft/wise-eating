@@ -95,6 +95,7 @@ struct FoodItemEditorView: View {
     @State private var carbDetails: CarbDetailsForm
     @State private var sterols: SterolsForm
     @State private var ayurForm = AyurvedaForm.neutral
+    @State private var resolvedAyurFormBaseline: AyurvedaForm?
     @State private var didPrefillAyurveda = false
     
     @State private var showAlert = false
@@ -182,6 +183,7 @@ struct FoodItemEditorView: View {
         _carbDetails = State(initialValue: initialCarbDetails)
         _sterols = State(initialValue: initialSterols)
         _ayurForm = State(initialValue: .neutral)
+        _resolvedAyurFormBaseline = State(initialValue: nil)
         _didPrefillAyurveda = State(initialValue: false)
 
         let initialServingWeightG = initialOthers.weightG?.value
@@ -934,6 +936,10 @@ struct FoodItemEditorView: View {
         }
         if let storedForm = AyurvedaUserProfileStore.form(foodId: foodId, context: ctx) {
             ayurForm = storedForm
+        } else if let resolvedForm = AyurvedaUserProfileStore
+            .resolvedFormForDuplication(foodId: foodId, context: ctx) {
+            ayurForm = resolvedForm
+            resolvedAyurFormBaseline = resolvedForm
         } else {
             ayurForm = .neutral
         }
@@ -1017,7 +1023,14 @@ struct FoodItemEditorView: View {
             item.carbDetails?.foodItem    = item
             item.sterols?.foodItem        = item
 
-            AyurvedaUserProfileStore.upsert(form: ayurForm, for: item, context: ctx)
+            if resolvedAyurFormBaseline == nil
+                || ayurForm != resolvedAyurFormBaseline {
+                AyurvedaUserProfileStore.upsert(
+                    form: ayurForm,
+                    for: item,
+                    context: ctx
+                )
+            }
             
             do {
                 try ctx.save()

@@ -35,6 +35,10 @@ struct LiquidTabBar: View {
     
     let standardTabs: [AppTab]
 
+    private var tabIconColor: Color {
+        effectManager.isLightRowTextColor ? .white : .black
+    }
+
     init(
         menuState: Binding<MenuState>,
         selectedTab: Binding<AppTab>,
@@ -135,8 +139,7 @@ struct LiquidTabBar: View {
                                 hasNewTraining: $hasNewTraining,
                                 hasUnreadAINotifications: $hasUnreadAINotifications,
                                 isAIGenerating: isAIGenerating,
-                                accentColor: effectManager.currentGlobalAccentColor,
-                                isAccentColorLight: effectManager.isLightRowTextColor,
+                                iconColor: tabIconColor,
                                 animationNamespace: animation,
                                 isAnimating: isAnimatingSelection
                             )
@@ -256,15 +259,17 @@ struct LiquidTabBar: View {
                         if isSearching {
                             Image("xmark_icon")
                                 .resizable()
-                                .renderingMode(.original)
+                                .renderingMode(.template)
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 20, height: 20)
+                                .frame(width: 34, height: 34)
+                                .foregroundStyle(tabIconColor)
                         } else {
                             Image("search_icon")
                                 .resizable()
-                                .renderingMode(.original)
+                                .renderingMode(.template)
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 30, height: 30)
+                                .frame(width: 34, height: 34)
+                                .foregroundStyle(tabIconColor)
                         }
                     }
                     .frame(width: 50, height: 44)
@@ -308,8 +313,7 @@ private struct TabItem: View {
     
     let isAIGenerating: Bool
     
-    let accentColor: Color
-    let isAccentColorLight: Bool
+    let iconColor: Color
     let animationNamespace: Namespace.ID
     let isAnimating: Bool
     
@@ -343,15 +347,20 @@ private struct TabItem: View {
     @ViewBuilder
     private var iconView: some View {
         if tab == .aiGenerate {
-            BreathingAssetIcon(imageName: tab.iconName, isActive: isAIGenerating)
+            BreathingAssetIcon(
+                imageName: tab.iconName,
+                isActive: isAIGenerating,
+                tintColor: iconColor
+            )
                 .frame(height: 44)
         } else {
             Image(tab.iconName)
                 .resizable()
-                .renderingMode(.original)
+                .renderingMode(.template)
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 34, height: 34)
                 .frame(height: 44)
+                .foregroundStyle(iconColor)
         }
     }
 }
@@ -360,6 +369,7 @@ private struct TabItem: View {
 private struct BreathingAssetIcon: View {
     let imageName: String
     let isActive: Bool
+    let tintColor: Color
 
     @State private var breathingScale: CGFloat = 1.0
     @State private var breathingOpacity: Double = 1.0
@@ -368,9 +378,10 @@ private struct BreathingAssetIcon: View {
     var body: some View {
         Image(imageName)
             .resizable()
-            .renderingMode(.original)
+            .renderingMode(.template)
             .aspectRatio(contentMode: .fit)
             .frame(width: 34, height: 34)
+            .foregroundStyle(tintColor)
             .scaleEffect(breathingScale)
             .opacity(breathingOpacity)
             .onAppear {

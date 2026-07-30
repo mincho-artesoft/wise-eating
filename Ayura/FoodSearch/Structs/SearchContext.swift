@@ -1,5 +1,18 @@
+enum AyurvedaSearchDisplayField: String, CaseIterable, Hashable, Sendable {
+    case rasa
+    case virya
+    case vipaka
+    case guna
+    case agni
+    case digestibility
+    case digestion
+    case season
+    case category
+}
+
 struct SearchContext {
     var displayNutrients: [NutrientType] = []
+    var displayAyurvedaFields: [AyurvedaSearchDisplayField] = []
     var activeDiet: DietType?
     var activeConstraint: String?
     var activeAgeLimit: String?

@@ -186,6 +186,23 @@ struct SearchResultRow: View {
                     }
                     .padding(.top, 8) // Връщаме визуалното разстояние преди таговете
 
+                    let ayurvedaMetadata = smartSearch.ayurvedaMetadata(
+                        for: item.id
+                    )
+                    VStack(alignment: .leading, spacing: 6) {
+                        AyurvedaDoshaResultChips(metadata: ayurvedaMetadata)
+                        if let ayurvedaMetadata,
+                           !smartSearch.searchContext
+                            .displayAyurvedaFields.isEmpty {
+                                AyurvedaSearchedFieldChips(
+                                    metadata: ayurvedaMetadata,
+                                    fields: smartSearch.searchContext
+                                        .displayAyurvedaFields
+                                )
+                        }
+                    }
+                    .padding(.top, 8)
+
                     // Nutrients row
                     nutrientsView
                         .padding(.top, 8) // Връщаме визуалното разстояние преди нутриентите

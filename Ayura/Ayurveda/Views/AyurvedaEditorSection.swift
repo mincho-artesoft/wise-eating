@@ -1,7 +1,7 @@
 import SwiftData
 import SwiftUI
 
-struct AyurvedaForm: Sendable {
+struct AyurvedaForm: Equatable, Sendable {
   var vata: Int
   var pitta: Int
   var kapha: Int

@@ -780,7 +780,9 @@ struct RootView: View {
         effectManager.snapshot = viewToRender.renderAsImage(size: UIScreen.main.bounds.size)
         
         guard let snapshot = effectManager.snapshot else {
-            effectManager.currentGlobalAccentColor = (colorScheme == .dark ? .white : .black)
+            let shouldUseLightForeground = colorScheme == .dark
+            effectManager.currentGlobalAccentColor = shouldUseLightForeground ? .white : .black
+            effectManager.isLightRowTextColor = shouldUseLightForeground
             return
         }
         Task { @MainActor in

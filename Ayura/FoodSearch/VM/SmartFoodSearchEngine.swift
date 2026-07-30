@@ -342,6 +342,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                         self.updateContext(
                             intent: intent,
                             activeFilters: activeFilters,
+                            ayurvedaFilters: ayurvedaFilters,
                             forceShowPH: primaryForceShowPH,
                             foodsWithoutPhExcluded: primaryFoodsWithoutPhExcluded
                         )
@@ -496,6 +497,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
     
     private func updateContext(intent: SearchIntent,
                                activeFilters: Set<NutrientType>,
+                               ayurvedaFilters: AyurvedaSearchFilters,
                                forceShowPH: Bool,
                                foodsWithoutPhExcluded: Int) {
         var display = intent.displayNutrients
@@ -517,8 +519,55 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
         if let age = intent.targetConsumerAge {
             ageStr = age >= 12 ? "\(Int(age / 12))y+" : "\(Int(age))m+"
         }
+        var ayurvedaFields = Set<AyurvedaSearchDisplayField>()
+        for constraint in intent.ayurvedaFacetConstraints {
+            for key in constraint.acceptedKeys {
+                guard let facet = AyurvedaFacet(key: key) else { continue }
+                switch facet.kind {
+                case .rasa:
+                    ayurvedaFields.insert(.rasa)
+                case .virya:
+                    ayurvedaFields.insert(.virya)
+                case .vipaka:
+                    ayurvedaFields.insert(.vipaka)
+                case .guna:
+                    ayurvedaFields.insert(.guna)
+                case .agni:
+                    ayurvedaFields.insert(.agni)
+                case .digestibility:
+                    ayurvedaFields.insert(.digestibility)
+                case .season:
+                    ayurvedaFields.insert(.season)
+                case .category:
+                    ayurvedaFields.insert(.category)
+                case .concept where facet.value == "digestion":
+                    ayurvedaFields.insert(.digestion)
+                default:
+                    break
+                }
+            }
+        }
+        if !ayurvedaFilters.rasa.isEmpty {
+            ayurvedaFields.insert(.rasa)
+        }
+        if ayurvedaFilters.virya != nil {
+            ayurvedaFields.insert(.virya)
+        }
+        if !ayurvedaFilters.gunas.isEmpty {
+            ayurvedaFields.insert(.guna)
+        }
+        if ayurvedaFilters.easyOnDigestion {
+            ayurvedaFields.insert(.digestion)
+        }
+        if ayurvedaFilters.category != nil {
+            ayurvedaFields.insert(.category)
+        }
+        let orderedAyurvedaFields = AyurvedaSearchDisplayField.allCases
+            .filter(ayurvedaFields.contains)
+
         searchContext = SearchContext(
             displayNutrients: uniqueDisplay,
+            displayAyurvedaFields: orderedAyurvedaFields,
             activeDiet: intent.dietFilter,    // 👈 важно – dietFilter от SearchIntent
             activeConstraint: activeConstraint,
             activeAgeLimit: ageStr,

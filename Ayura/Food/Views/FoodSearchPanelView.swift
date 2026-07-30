@@ -33,6 +33,7 @@ struct FoodSearchPanelView: View {
     @State private var isFavoritesModeActive: Bool = false
     @State private var isRecipesModeActive: Bool = false
     @State private var isMenusModeActive: Bool = false
+    @State private var ayurvedaFilters: AyurvedaSearchFilters = .empty
     
     @State private var selectedNutrientID: String? = nil
     @State private var isSearchReady: Bool = false
@@ -217,6 +218,7 @@ struct FoodSearchPanelView: View {
         .onChange(of: isFavoritesModeActive) { _, _ in triggerSearch() }
         .onChange(of: isRecipesModeActive) { _, _ in triggerSearch() }
         .onChange(of: isMenusModeActive) { _, _ in triggerSearch() }
+        .onChange(of: ayurvedaFilters) { _, _ in triggerSearch() }
     }
     
     @ViewBuilder
@@ -269,6 +271,15 @@ struct FoodSearchPanelView: View {
                         .background(isMenusModeActive ? Color.blue : Color.blue.opacity(0.6)).clipShape(Capsule())
                         .overlay(Capsule().strokeBorder(effectManager.currentGlobalAccentColor, lineWidth: isMenusModeActive ? 3 : 0))
                     }.glassCardStyle(cornerRadius: 20).buttonStyle(.plain)
+                }
+
+                ForEach(AyurvedaSearchDosha.allCases) { dosha in
+                    AyurvedaDoshaQuickFilterChip(
+                        dosha: dosha,
+                        preference: ayurvedaFilters.preference(for: dosha)
+                    ) {
+                        toggleQuickDosha(dosha)
+                    }
                 }
                 
                 filterChipButton(for: SelectableNutrient(id: "protein", label: "Protein"))
@@ -351,8 +362,15 @@ struct FoodSearchPanelView: View {
             searchMode: self.searchMode,
             profile: self.profile,          
             excludedFoodIDs: self.excludedFoodIDs,
+            ayurvedaFilters: ayurvedaFilters,
             phSortOrder: phSort
         )
+    }
+
+    private func toggleQuickDosha(_ dosha: AyurvedaSearchDosha) {
+        withAnimation(.easeInOut(duration: 0.2)) {
+            ayurvedaFilters.cyclePreference(for: dosha)
+        }
     }
     
     private var filterChipItems: [SelectableNutrient] {
