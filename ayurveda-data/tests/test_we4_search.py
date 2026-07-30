@@ -27,41 +27,6 @@ ARTIFACT_PARTS = [
 GOLDEN = ROOT / "ayurveda-data" / "tests" / "fixtures" / "we4_golden_queries.json"
 
 
-def expected_facets(profile):
-    facets = set()
-    virya = profile.get("virya")
-    if virya:
-        facets.add(f"virya:{virya}")
-
-    for dosha, effect in profile["dosha"].items():
-        if effect < 0:
-            facets.add(f"pacifies:{dosha}")
-        elif effect > 0:
-            facets.add(f"aggravates:{dosha}")
-
-    agni = profile.get("agniEffect")
-    if agni is not None:
-        if agni > 0:
-            facets.add("agni:kindles")
-        elif agni < 0:
-            facets.add("agni:dampens")
-
-    digestibility = profile.get("digestibility")
-    if digestibility is not None:
-        if digestibility >= 4:
-            facets.add("digestibility:light")
-        elif digestibility <= 2:
-            facets.add("digestibility:heavy")
-
-    facets.update(f"season:{season}" for season in profile["seasons"])
-    category = profile["category"].lower().replace("_", "-").replace(" ", "-")
-    facets.add(f"category:{category}")
-    facets.add(f"concept:{category}")
-    if (agni or 0) > 0 or (digestibility or 0) >= 4:
-        facets.add("concept:digestion")
-    return facets
-
-
 class WE4SearchTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -218,7 +183,7 @@ struct ParserHarness {
         self.assert_parse("virya:frothy tomato", "virya:frothy tomato", [])
         self.assert_parse("grains", "grains", [])
 
-    def test_prebuilt_index_exactly_matches_canonical_seed_projection(self):
+    def test_prebuilt_index_matches_v7_canonical_and_linked_projection(self):
         combined = self.temporary_root / "preseeded_db.store.gz"
         store = self.temporary_root / "preseeded_db.store"
         with combined.open("wb") as destination:
@@ -236,51 +201,61 @@ struct ParserHarness {
                 """
             ).fetchone()
         version, food_count, payload_data = row
-        self.assertEqual((version, food_count), (5, 14_484))
+        self.assertEqual((version, food_count), (7, 14_484))
         payload = json.loads(payload_data)
         compact_by_id = {food["id"]: food for food in payload["compactFoods"]}
 
         with gzip.open(SEED, "rt", encoding="utf-8") as source:
             seed = json.load(source)
         canonical = seed["dravyas"] + seed["recipes"]
-        expected_by_id = {
-            profile["foodId"]: expected_facets(profile) for profile in canonical
-        }
-        self.assertEqual(len(expected_by_id), 2_214)
+        direct_ids = {profile["foodId"] for profile in canonical}
+        link_tiers = {link["fdcId"]: link["tier"] for link in seed["links"]}
+        expected_ids = direct_ids | set(link_tiers)
+        linked_only_ids = set(link_tiers) - direct_ids
+        self.assertEqual(len(direct_ids), 2_214)
+        self.assertEqual(len(linked_only_ids), 1_974)
+        self.assertEqual(len(expected_ids), 4_188)
 
-        for food_id, expected in expected_by_id.items():
+        for food_id in expected_ids:
+            food = compact_by_id[food_id]
+            metadata = food["ayurvedaMetadata"]
+            self.assertTrue(food["ayurvedaFacets"], food_id)
+            self.assertIsInstance(metadata, dict, food_id)
             self.assertEqual(
-                set(compact_by_id[food_id]["ayurvedaFacets"]),
-                expected,
+                set(food["ayurvedaFacets"]),
+                set(metadata["facets"]),
                 food_id,
             )
+            expected_tier = link_tiers[food_id] if food_id in linked_only_ids else None
+            self.assertEqual(metadata.get("sourceTier"), expected_tier, food_id)
         self.assertTrue(
             all(
-                not food["ayurvedaFacets"]
+                not food["ayurvedaFacets"] and food.get("ayurvedaMetadata") is None
                 for food_id, food in compact_by_id.items()
-                if food_id not in expected_by_id
+                if food_id not in expected_ids
             )
         )
 
         expected_index = {}
-        for food_id, facets in expected_by_id.items():
-            for facet in facets:
+        for food_id in expected_ids:
+            for facet in compact_by_id[food_id]["ayurvedaFacets"]:
                 expected_index.setdefault(facet, set()).add(food_id)
         actual_index = {
             facet: set(food_ids)
             for facet, food_ids in payload["ayurvedaFacetIndex"].items()
         }
         self.assertEqual(actual_index, expected_index)
-        self.assertEqual(len(actual_index), 64)
-        self.assertEqual(sum(map(len, expected_by_id.values())), 20_114)
+        self.assertEqual(len(actual_index), 89)
+        self.assertEqual(sum(map(len, expected_index.values())), 58_635)
         self.assertFalse(set(actual_index) & set(payload["invertedIndex"]))
 
     def test_engine_uses_index_intersection_and_exact_title_escape_hatch(self):
         engine = SEARCH_ENGINE.read_text(encoding="utf-8")
         index_store = INDEX_STORE.read_text(encoding="utf-8")
-        self.assertIn("currentIndexVersion: Int = 5", index_store)
+        self.assertIn("currentIndexVersion: Int = 7", index_store)
         self.assertIn("ayurvedaFacetIndex", index_store)
-        self.assertIn("current.intersection(facetCandidateIDs)", engine)
+        self.assertIn("if let ayurveda = item.ayurvedaMetadata", engine)
+        self.assertIn("AyurvedaSearchRanker.matches(", engine)
         self.assertIn("AyurvedaFacetParseResult.passthrough(query)", engine)
         self.assertIn("parsed.nutrientGoals", engine)
 

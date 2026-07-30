@@ -49,9 +49,6 @@ struct ObserversHub: View {
 
     @Binding var isShowingDailyAIGenerator: Bool
 
-    // Keyboard
-    @Binding var keyboardHeight: CGFloat
-
     // Callbacks
     var onActivateSearch: () -> Void
     var onDismissSearch: () -> Void
@@ -98,7 +95,6 @@ struct ObserversHub: View {
           hasUnreadBadgeNotifications: Binding<Bool>,
           isShowingDailyAIGenerator: Binding<Bool>,
           isAIGenerating: Binding<Bool>,
-          keyboardHeight: Binding<CGFloat>,
           onActivateSearch: @escaping () -> Void,
           onDismissSearch: @escaping () -> Void,
           onHideSearchButton: @escaping () -> Void,
@@ -141,7 +137,6 @@ struct ObserversHub: View {
           self._hasUnreadBadgeNotifications = hasUnreadBadgeNotifications
           self._isShowingDailyAIGenerator = isShowingDailyAIGenerator
           self._isAIGenerating = isAIGenerating
-          self._keyboardHeight = keyboardHeight
           self.onActivateSearch = onActivateSearch
           self.onDismissSearch = onDismissSearch
           self.onHideSearchButton = onHideSearchButton
@@ -159,7 +154,6 @@ struct ObserversHub: View {
             notificationsObserver
             coordinatorObserver
             profilesDrawerObserver
-            keyboardObserver
         }
         .hidden()
     }
@@ -288,10 +282,6 @@ struct ObserversHub: View {
                 isProfilesDrawerVisible: $isProfilesDrawerVisible,
                 onDismissSearch: onDismissSearch
             )
-    }
-
-    private var keyboardObserver: some View {
-            KeyboardObserver(keyboardHeight: $keyboardHeight)
     }
 
 }
@@ -895,22 +885,6 @@ private struct ProfilesDrawerObserver: View {
                         onDismissSearch()
                     }
                 }
-            }
-    }
-}
-
-private struct KeyboardObserver: View {
-    @Binding var keyboardHeight: CGFloat
-
-    var body: some View {
-        Color.clear
-            .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { notification in
-                guard let userInfo = notification.userInfo,
-                      let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
-                keyboardHeight = keyboardFrame.height
-            }
-            .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in
-                keyboardHeight = 0
             }
     }
 }

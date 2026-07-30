@@ -2,7 +2,8 @@
 **Read this first. It is the knowledge-transfer document for anyone (human or AI)
 taking over direction of this project. Update it at the end of every milestone —
 that is a standing rule baked into all task packets.**
-Last updated: 2026-07-27 (MP-7 adds build-time culinary roles,
+Last updated: 2026-07-30 (search cache v7 and the bundled preseed now persist
+full Ayurveda metadata for canonical and linked foods; MP-7 adds build-time culinary roles,
 `notReadyToEat` eligibility, anchor/cap/portion plausibility constraints, and a
 real-catalogue solver profile. Behavior-preserving role buckets and compact
 ranking records retain all 30 plan hashes while reducing seven-day solve
@@ -47,7 +48,7 @@ and must always be shown in UI.
 `Ayura/ayurveda_seed.json.gz` (seedVersion 5; sha-verifiable) +
 `Ayura/ayurveda_rules.json`. `ayurveda-data/build_preseeded_store.py`
 audits/compacts a completed 14,484-row store and emits the two bundled gzip
-parts, including the version-5 search cache. `ayurveda-data/validate.py --store
+parts, including the version-7 search cache. `ayurveda-data/validate.py --store
 /tmp/pre` is the gatekeeper (content integrity + full resolver and preseed
 simulation; must always pass).
 
@@ -74,20 +75,21 @@ simulation; must always pass).
 - `RecipeNutritionPanelView` (WE-2): existing glass-card/flow-layout language;
   switches per serving/per 100g and displays the full 39-field nutrient catalog,
   coverage state, and honest missing-slug evidence.
-- `Ayura/FoodSearch/` (WE-4/WE-5/WE-8c): the version-5 compact cache persists canonical
-  virya/dosha/agni/digestibility/season/category/concept facet sets and a
-  separate inverted facet index on exactly the 2,214 seeded profiles.
+- `Ayura/FoodSearch/` (WE-4/WE-5/WE-8c): the version-7 compact cache persists full
+  Ayurveda search/display metadata plus virya/dosha/agni/digestibility/season/
+  category/concept facet sets and a separate inverted facet index on the 2,214
+  seeded profiles plus 1,974 non-profile linked USDA foods.
   `CanonicalFacetParser` removes only validated natural/explicit facet speech
-  before the existing tokenizer; plain USDA rows remain un-faceted. Constrained
+  before the existing tokenizer; unlinked plain USDA rows remain un-faceted. Constrained
   nutrient columns are always visible (`—` means no data; stored zero remains
   `0.0`), both constraint parsers feed query-ordered display context, and pH
   uses one exclusive boundary definition (`low < 7`, `high > 7`, neutral
   6.5…7.5). Unknown-pH filtered rows are counted, pH sort-only mode exposes its
   column, and command heuristics use token boundaries so phosphorus/sulphate/
   phyllo/freeze do not accidentally activate pH or negation modes. WE-6 keeps
-  the 28 MB persisted index off the cold-launch path: views start loading it
+  the 32.6 MB persisted index off the cold-launch path: views start loading it
   nonblockingly on entry, while programmatic `searchCompact`/`searchResults`
-  await the same version-checked load before taking an index snapshot. Version 5
+  await the same version-checked load before taking an index snapshot. Version 7
   also persists display and enforced age floors separately: badges
   retain the display floor; canonical age filters use only authored floors.
 - `Ayura/Ayurveda/AyurvedaRecommendationGate.swift` (D9): set-driven
@@ -103,7 +105,7 @@ simulation; must always pass).
   (after `seedFoodsIfNeeded`) and `DatabaseSetup.swift` (mainTypes): the shipped
   store already contains 383 placeholder FoodItems (reserved ID band
   **900001–900383**), 1,500 recipe FoodItems/IngredientLinks, 2,214 profiles,
-  2,305 links, and the version-5 search cache. Fresh install verifies the
+  2,305 links, and the version-7 search cache. Fresh install verifies the
   seed-v5 profile stamps and is a zero-insert/zero-update no-op. Existing stores
   use a canonical-slug/fdcId upsert delta; ownership ambiguity aborts without
   touching user data. Post-seed food total: 14,484.
@@ -271,9 +273,9 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | Recipe nutrition | 1,500 full · 0 estimated · 0 none; 39 fields × two bases |
 | Recipe IngredientLinks | 10,571 positive-gram rows · 1,500 owners |
 | WE-8 safety projection | 2,214 review-required rows · 156 allergen dravyas · 1,182 allergen recipes · 749 Vegan recipes |
-| Search cache | version 5 · 14,484 DB/compact rows · 2,214 canonical faceted rows · 64 keys / 20,114 assignments · separate display/enforced age floors |
+| Search cache | version 7 · 14,484 DB/compact rows · 4,188 metadata/faceted rows (2,214 canonical + 1,974 linked-only) · 89 keys / 58,635 assignments · separate display/enforced age floors |
 | Seed | seedVersion 5, deterministic SHA-256 `886c6a39…872e` |
-| Preseed parts (INT-1 rebuild) | `aa` `99a97761…bb817` · `ab` `f6b0cd50…b291c` |
+| Preseed parts (v7 rebuild) | `aa` `120cb78f…606e8` · `ab` `79270832…0615d`; restored store `b5e5da6b…d145b` |
 | Age provenance (WE-8c) | dravyas 4 authored / 710 legacyImport · recipes 4 / 1,496 · ingredient contributors 4 / 10,567 |
 | Cold launch (WE-6/WE-7/WE-8/WE-8c, Debug simulator) | WE-8c registry median **1.607s** (N=12); same-session WE-8b 1.569s, paired median delta +0.048s. Absolute hard ceiling 1.700s; profiling paydown required above 1.650s |
 | Legacy target (WE-7) | 9 dead Swift inputs removed · 5 live JSON fallback resources retained |

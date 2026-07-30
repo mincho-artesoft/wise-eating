@@ -27,6 +27,7 @@ struct LiquidTabBar: View {
     
     @State private var localSearchText: String = ""
     @State private var isAnimatingSelection = false
+    @State private var keyboardHeight: CGFloat = 0
     
     // --- State за Жестовете ---
     @State private var draggingTab: AppTab? = nil
@@ -226,26 +227,30 @@ struct LiquidTabBar: View {
 
                 
                 // --- B. ПОЛЕ ЗА ТЪРСЕНЕ ---
-                if isSearching {
-                   ZStack(alignment: .leading) {
-                       if localSearchText.isEmpty {
-                           Text("Search...")
-                               .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.9))
-                               .padding(.leading, 4)
-                       }
-                       TextField("", text: $localSearchText)
-                           .foregroundColor(effectManager.currentGlobalAccentColor)
-                           .tint(effectManager.currentGlobalAccentColor)
-                           .disableAutocorrection(true)
-                           .autocapitalization(.none)
-                           .onChange(of: localSearchText) { _, newValue in
-                               searchText = newValue
-                           }
-                   }
-                   .padding(.leading, 20)
-                   .focused($isSearchFieldFocused)
-                   .transition(.opacity.animation(.easeIn(duration: 0.2).delay(0.1)))
+                // Полето остава в йерархията, за да не се създава едновременно
+                // с първото показване на системната клавиатура.
+                ZStack(alignment: .leading) {
+                    if localSearchText.isEmpty {
+                        Text("Search...")
+                            .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.9))
+                            .padding(.leading, 4)
+                    }
+                    TextField("", text: $localSearchText)
+                        .foregroundColor(effectManager.currentGlobalAccentColor)
+                        .tint(effectManager.currentGlobalAccentColor)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+                        .onChange(of: localSearchText) { _, newValue in
+                            searchText = newValue
+                        }
                 }
+                .padding(.leading, isSearching ? 20 : 0)
+                .frame(maxWidth: isSearching ? .infinity : 0)
+                .opacity(isSearching ? 1 : 0)
+                .clipped()
+                .allowsHitTesting(isSearching)
+                .accessibilityHidden(!isSearching)
+                .focused($isSearchFieldFocused)
                 
                 // --- C. БУТОН ЗА ТЪРСЕНЕ ---
                 if isSearchButtonVisible && !navBarIsHiden {
@@ -289,13 +294,38 @@ struct LiquidTabBar: View {
         .glassCardStyle(cornerRadius: 50)
         .padding(.horizontal)
         .padding(.bottom, 8)
+        .offset(y: isSearching ? -keyboardHeight : 0)
+        .ignoresSafeArea(.keyboard)
         .animation(.interactiveSpring(response: 0.4, dampingFraction: 0.8), value: selectedTab)
         .animation(.interactiveSpring(response: 0.4, dampingFraction: 0.8), value: isSearching)
         .animation(.interactiveSpring(response: 0.4, dampingFraction: 0.8), value: isSearchButtonVisible)
         .animation(.interactiveSpring(response: 0.4, dampingFraction: 0.8), value: navBarIsHiden)
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillChangeFrameNotification)) { notification in
+            guard isSearching,
+                  let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+                return
+            }
+
+            let visibleHeight = max(0, UIScreen.main.bounds.maxY - keyboardFrame.minY)
+            let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double ?? 0.25
+            withAnimation(.easeOut(duration: duration)) {
+                keyboardHeight = visibleHeight
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { notification in
+            let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double ?? 0.25
+            withAnimation(.easeOut(duration: duration)) {
+                keyboardHeight = 0
+            }
+        }
         .onAppear { localSearchText = searchText }
         .onChange(of: searchText) { _, newValue in
             if newValue != localSearchText { localSearchText = newValue }
+        }
+        .onChange(of: isSearching) { _, newValue in
+            if !newValue {
+                keyboardHeight = 0
+            }
         }
         .onChange(of: selectedTab) { _, _ in
             triggerSelectionPop()

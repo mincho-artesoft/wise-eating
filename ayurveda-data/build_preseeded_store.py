@@ -19,8 +19,12 @@ EXPECTED = {
     "recipes": 1_500,
     "links": 2_305,
     "cacheFoods": 14_484,
-    "cacheVersion": 5,
-    "facetFoods": 2_214,
+    "cacheVersion": 7,
+    "facetFoods": 4_188,
+    "metadataFoods": 4_188,
+    "linkedFacetFoods": 1_974,
+    "facetKeys": 89,
+    "facetAssignments": 58_635,
     "seedVersion": 5,
     "ingredientLinks": 10_571,
     "ingredientOwners": 1_500,
@@ -261,7 +265,25 @@ def audit_store(path: Path) -> dict[str, int]:
         require_equal(
             "canonical profile food ids",
             len(profile_food_ids),
-            EXPECTED["facetFoods"],
+            EXPECTED["profiles"],
+        )
+        link_tiers = {
+            food_id: tier
+            for food_id, tier in connection.execute(
+                "SELECT ZFDCID, ZTIER FROM ZAYURVEDALINK"
+            )
+        }
+        linked_only_food_ids = set(link_tiers) - profile_food_ids
+        ayurveda_food_ids = profile_food_ids | set(link_tiers)
+        require_equal(
+            "linked non-profile food ids",
+            len(linked_only_food_ids),
+            EXPECTED["linkedFacetFoods"],
+        )
+        require_equal(
+            "all Ayurveda metadata food ids",
+            len(ayurveda_food_ids),
+            EXPECTED["metadataFoods"],
         )
         compact_by_id = {food["id"]: food for food in compact_foods}
         food_ages = {
@@ -335,11 +357,86 @@ def audit_store(path: Path) -> dict[str, int]:
             {0, 12},
         )
         require_equal(
-            "non-profile age enforcement differs from display",
+            "non-Ayurveda age enforcement differs from display",
             sum(
                 food["enforcedMinAgeMonths"] != food["minAgeMonths"]
                 for food_id, food in compact_by_id.items()
-                if food_id not in profile_food_ids
+                if food_id not in ayurveda_food_ids
+            ),
+            0,
+        )
+        metadata_by_id = {
+            food_id: food.get("ayurvedaMetadata")
+            for food_id, food in compact_by_id.items()
+            if isinstance(food.get("ayurvedaMetadata"), dict)
+        }
+        require_equal(
+            "foods with Ayurveda metadata",
+            set(metadata_by_id),
+            ayurveda_food_ids,
+        )
+        require_equal(
+            "metadata facets differ from compact facets",
+            sum(
+                set(metadata["facets"]) != set(compact_by_id[food_id]["ayurvedaFacets"])
+                for food_id, metadata in metadata_by_id.items()
+            ),
+            0,
+        )
+        require_equal(
+            "metadata enforced ages differ from compact ages",
+            sum(
+                metadata.get("enforcedMinAgeMonths")
+                != compact_by_id[food_id]["enforcedMinAgeMonths"]
+                for food_id, metadata in metadata_by_id.items()
+            ),
+            0,
+        )
+        require_equal(
+            "direct profile metadata unexpectedly has a source tier",
+            sum(
+                metadata_by_id[food_id].get("sourceTier") is not None
+                for food_id in profile_food_ids
+            ),
+            0,
+        )
+        require_equal(
+            "linked metadata source tier mismatches",
+            sum(
+                metadata_by_id[food_id].get("sourceTier") != link_tiers[food_id]
+                for food_id in linked_only_food_ids
+            ),
+            0,
+        )
+        require_equal(
+            "invalid Ayurveda metadata dosha values",
+            sum(
+                any(
+                    not isinstance(metadata.get(key), int)
+                    or metadata[key] < -2
+                    or metadata[key] > 2
+                    for key in ("doshaVata", "doshaPitta", "doshaKapha")
+                )
+                for metadata in metadata_by_id.values()
+            ),
+            0,
+        )
+        require_equal(
+            "invalid Ayurveda metadata confidence values",
+            sum(
+                not isinstance(metadata.get("confidenceAyur"), (int, float))
+                or metadata["confidenceAyur"] < 0
+                or metadata["confidenceAyur"] > 1
+                for metadata in metadata_by_id.values()
+            ),
+            0,
+        )
+        require_equal(
+            "empty Ayurveda metadata source names",
+            sum(
+                not isinstance(metadata.get("sourceProfileName"), str)
+                or not metadata["sourceProfileName"].strip()
+                for metadata in metadata_by_id.values()
             ),
             0,
         )
@@ -351,27 +448,27 @@ def audit_store(path: Path) -> dict[str, int]:
         require_equal(
             "faceted compact foods",
             faceted_food_ids,
-            profile_food_ids,
+            ayurveda_food_ids,
         )
         require_equal(
-            "non-profile foods with Ayurveda facets",
-            sum(
-                bool(food.get("ayurvedaFacets"))
-                for food_id, food in compact_by_id.items()
-                if food_id not in profile_food_ids
-            ),
-            0,
+            "faceted compact food count",
+            len(faceted_food_ids),
+            EXPECTED["facetFoods"],
         )
         facet_index = payload.get("ayurvedaFacetIndex")
         if not isinstance(facet_index, dict):
             raise PreseedBuildError("search payload ayurvedaFacetIndex is not an object")
         allowed_facet_kinds = {
             "virya",
+            "rasa",
+            "vipaka",
+            "guna",
             "pacifies",
             "aggravates",
             "agni",
             "digestibility",
             "season",
+            "time",
             "category",
             "concept",
         }
@@ -398,6 +495,19 @@ def audit_store(path: Path) -> dict[str, int]:
             set(facet_index).intersection(payload.get("invertedIndex", {})),
             set(),
         )
+        require_equal(
+            "Ayurveda facet key count",
+            len(facet_index),
+            EXPECTED["facetKeys"],
+        )
+        facet_assignments = sum(
+            len(food.get("ayurvedaFacets", [])) for food in compact_foods
+        )
+        require_equal(
+            "Ayurveda facet assignment count",
+            facet_assignments,
+            EXPECTED["facetAssignments"],
+        )
         return {
             "foods": EXPECTED["foods"],
             "profiles": EXPECTED["profiles"],
@@ -407,10 +517,10 @@ def audit_store(path: Path) -> dict[str, int]:
             "cacheFoods": cache_foods,
             "cacheVersion": cache_version,
             "facetFoods": len(faceted_food_ids),
+            "metadataFoods": len(metadata_by_id),
+            "linkedFacetFoods": len(linked_only_food_ids),
             "facetKeys": len(facet_index),
-            "facetAssignments": sum(
-                len(food.get("ayurvedaFacets", [])) for food in compact_foods
-            ),
+            "facetAssignments": facet_assignments,
             "allergenTaggedDravyas": EXPECTED["allergenTaggedDravyas"],
             "allergenTaggedRecipes": EXPECTED["allergenTaggedRecipes"],
             "authoredAgeDravyas": EXPECTED["authoredAgeDravyas"],

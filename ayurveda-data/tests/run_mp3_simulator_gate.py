@@ -69,7 +69,7 @@ def write_catalog(store_path, destination):
         payload_data = connection.execute(
             """
             SELECT ZPAYLOADDATA FROM ZSEARCHINDEXCACHE
-            WHERE ZKEY = 'main' AND ZVERSION = 5
+            WHERE ZKEY = 'main' AND ZVERSION = 7
             """
         ).fetchone()[0]
         profile_rows = connection.execute(

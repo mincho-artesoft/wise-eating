@@ -44,6 +44,7 @@ struct RootView: View {
     @AppStorage("lastSelectedTabRoot") private var selectedTab: AppTab = .nutrition
     @AppStorage("lastPreviousTabRoot") private var previousTab: AppTab = .nutrition
     @State private var isSearching = false
+    @State private var searchFocusTask: Task<Void, Never>?
     @State private var searchText = ""
     @State private var menuState: MenuState = .collapsed
     @State private var selectedTabDraggableMenuView = 0
@@ -51,7 +52,6 @@ struct RootView: View {
     @State private var selectedNutrientTab = 0
     
     @FocusState private var isSearchFieldFocused: Bool
-    @State private var keyboardHeight: CGFloat = 0
     
     @State private var isPresentingNewProfile = false
     @State private var editingProfile: Profile? = nil
@@ -309,7 +309,6 @@ struct RootView: View {
                 hasUnreadBadgeNotifications: $hasUnreadBadgeNotifications,
                 isShowingDailyAIGenerator: $isShowingDailyAIGenerator,
                 isAIGenerating: $isAIGenerating,
-                keyboardHeight: $keyboardHeight,
                 onActivateSearch: activateSearch,
                 onDismissSearch: dismissSearch,
                 onHideSearchButton: hideSearchButton,
@@ -747,8 +746,7 @@ struct RootView: View {
                     )
                 }
             }
-            .offset(y: isSearching ? -keyboardHeight - 8 : -8)
-            .animation(.interactiveSpring(response: 0.4, dampingFraction: 0.8), value: keyboardHeight)
+            .offset(y: -8)
             .ignoresSafeArea(.keyboard)
         }
     }
@@ -1024,15 +1022,23 @@ struct RootView: View {
     
     private func activateSearch() {
         trackInteractionAndShowAdIfNeeded()
-        
+
+        searchFocusTask?.cancel()
         previousTab = selectedTab
         selectedTab = .search
         menuState = .collapsed
         isSearching = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) { isSearchFieldFocused = true }
+        searchFocusTask = Task { @MainActor in
+            try? await Task.sleep(nanoseconds: 300_000_000)
+            guard !Task.isCancelled, isSearching else { return }
+            isSearchFieldFocused = true
+            searchFocusTask = nil
+        }
     }
     
     private func dismissSearch() {
+        searchFocusTask?.cancel()
+        searchFocusTask = nil
         isSearchFieldFocused = false
         searchText = ""
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {

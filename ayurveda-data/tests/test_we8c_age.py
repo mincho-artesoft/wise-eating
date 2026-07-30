@@ -230,16 +230,37 @@ class WE8CPreseedAgeTests(unittest.TestCase):
             {9: 1_496, 24: 1_500, 60: 1_500},
         )
 
-    def test_noncanonical_rows_preserve_legacy_age_enforcement(self):
-        canonical_ids = {
-            profile["foodId"]
-            for profile in self.seed["dravyas"] + self.seed["recipes"]
-        }
+    def test_linked_rows_inherit_source_floor_and_unlinked_rows_preserve_legacy(self):
+        profiles = self.seed["dravyas"] + self.seed["recipes"]
+        profiles_by_id = {profile["id"]: profile for profile in profiles}
+        canonical_ids = {profile["foodId"] for profile in profiles}
+        links_by_food = {link["fdcId"]: link for link in self.seed["links"]}
+        linked_only_ids = set(links_by_food) - canonical_ids
+        self.assertEqual(len(linked_only_ids), 1_974)
+
+        for food_id in linked_only_ids:
+            link = links_by_food[food_id]
+            compact = self.compact_by_id[food_id]
+            metadata = compact["ayurvedaMetadata"]
+            source_safety = profiles_by_id[link["dravyaId"]]["safety"]
+            self.assertEqual(
+                compact["enforcedMinAgeMonths"],
+                source_safety["enforcedMinAgeMonths"],
+                food_id,
+            )
+            self.assertEqual(
+                metadata["enforcedMinAgeMonths"],
+                source_safety["enforcedMinAgeMonths"],
+                food_id,
+            )
+            self.assertEqual(metadata["sourceTier"], link["tier"], food_id)
+
+        ayurveda_ids = canonical_ids | set(links_by_food)
         self.assertTrue(
             all(
                 compact["enforcedMinAgeMonths"] == compact["minAgeMonths"]
                 for food_id, compact in self.compact_by_id.items()
-                if food_id not in canonical_ids
+                if food_id not in ayurveda_ids
             )
         )
 

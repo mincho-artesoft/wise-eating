@@ -50,10 +50,12 @@ class PreseedArtifactTests(unittest.TestCase):
                 "ingredientLinks": 10_571,
                 "ingredientOwners": 1_500,
                 "cacheFoods": 14_484,
-                "cacheVersion": 5,
-                "facetFoods": 2_214,
-                "facetKeys": self.audit["facetKeys"],
-                "facetAssignments": self.audit["facetAssignments"],
+                "cacheVersion": 7,
+                "facetFoods": 4_188,
+                "metadataFoods": 4_188,
+                "linkedFacetFoods": 1_974,
+                "facetKeys": 89,
+                "facetAssignments": 58_635,
                 "allergenTaggedDravyas": 156,
                 "allergenTaggedRecipes": 1_182,
                 "authoredAgeDravyas": 4,
@@ -63,7 +65,7 @@ class PreseedArtifactTests(unittest.TestCase):
         )
         self.assertGreater(self.audit["payloadBytes"], 0)
         self.assertGreater(self.audit["facetKeys"], 0)
-        self.assertGreater(self.audit["facetAssignments"], 2_214)
+        self.assertGreater(self.audit["facetAssignments"], 4_188)
 
     def test_fresh_store_seed_run_has_zero_inserts(self):
         profile_rows = self.connection.execute(
@@ -156,12 +158,16 @@ class PreseedArtifactTests(unittest.TestCase):
             """
         ).fetchone()
         self.assertEqual(cache_count, food_count)
-        self.assertEqual(version, 5)
+        self.assertEqual(version, 7)
         decoded = json.loads(payload)
         self.assertEqual(len(decoded["compactFoods"]), food_count)
         self.assertEqual(
             sum(bool(food["ayurvedaFacets"]) for food in decoded["compactFoods"]),
-            2_214,
+            4_188,
+        )
+        self.assertEqual(
+            sum(food.get("ayurvedaMetadata") is not None for food in decoded["compactFoods"]),
+            4_188,
         )
         self.assertIn("virya:cooling", decoded["ayurvedaFacetIndex"])
 
