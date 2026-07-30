@@ -186,6 +186,10 @@
 				"$(SRCROOT)/WiseEating/Food/assets-manifest.json",
 				"$(SRCROOT)/WiseEating/Food/food_archive_144.mp4",
 				"$(SRCROOT)/WiseEating/Food/food_archive_480.mp4",
+				"$(SRCROOT)/WiseEating/Food/food_archive_1024.mp4.gz.part-aa",
+				"$(SRCROOT)/WiseEating/Food/food_archive_1024.mp4.gz.part-ab",
+				"$(SRCROOT)/WiseEating/Food/food_archive_1024.mp4.gz.part-ac",
+				"$(SRCROOT)/WiseEating/Food/food_archive_1024.mp4.gz.part-ad",
 				"$(SRCROOT)/WiseEating/preseeded_db.store.gz.part-aa",
 				"$(SRCROOT)/WiseEating/preseeded_db.store.gz.part-ab",
 			);

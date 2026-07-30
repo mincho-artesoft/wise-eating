@@ -6,6 +6,9 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         print("✅ AppDelegate: Application did finish launching.")
+        Task.detached(priority: .utility) {
+            BundledLargeAssetLoader.prepareBundledAssets()
+        }
         // Authentication and first-launch logic has been removed.
         return true
     }

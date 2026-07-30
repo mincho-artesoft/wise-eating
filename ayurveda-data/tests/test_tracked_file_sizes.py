@@ -20,12 +20,11 @@ SPEC.loader.exec_module(validator)
 class TrackedFileSizeTests(unittest.TestCase):
     def test_only_git_tracked_files_are_gated_at_90_mb(self):
         sizes = validator.tracked_file_sizes(ROOT)
-        ignored_video = "WiseEating/Food/food_archive_1024.mp4"
+        archived_video = "WiseEating/Food/food_archive_1024.mp4"
         local_video = "WiseEating/Food/food_archive_480.mp4"
         manifest_path = ROOT / "WiseEating" / "Food" / "assets-manifest.json"
 
-        self.assertNotIn(ignored_video, sizes)
-        self.assertNotIn(local_video, sizes)
+        self.assertNotIn(archived_video, sizes)
         self.assertIn("WiseEating/Food/assets-manifest.json", sizes)
         self.assertTrue(sizes)
         self.assertLessEqual(
@@ -43,6 +42,22 @@ class TrackedFileSizeTests(unittest.TestCase):
             video_entry["byteSize"],
             82_726_160,
         )
+
+        archive_parts = [
+            asset
+            for asset in manifest["assets"]
+            if asset["filename"].startswith(
+                "WiseEating/Food/food_archive_1024.mp4.gz.part-"
+            )
+        ]
+        self.assertEqual(len(archive_parts), 4)
+        for part in archive_parts:
+            part_path = ROOT / part["filename"]
+            self.assertEqual(part_path.stat().st_size, part["byteSize"])
+            self.assertLessEqual(
+                part["byteSize"],
+                validator.TRACKED_FILE_SPLIT_LIMIT_BYTES,
+            )
 
 
 if __name__ == "__main__":

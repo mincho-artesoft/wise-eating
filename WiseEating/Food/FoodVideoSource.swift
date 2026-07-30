@@ -122,12 +122,15 @@ class FoodVideoSource: @unchecked Sendable {
             ? "food_archive_\(variant)"
             : "food_archive2_\(variant)"
         
-        guard let path = Bundle.main.path(forResource: resourceName, ofType: "mp4") else {
+        guard let videoURL = BundledLargeAssetLoader.url(
+            forResource: resourceName,
+            withExtension: "mp4"
+        ) else {
             print("❌ Error: \(resourceName).mp4 missing from Bundle! Check Target Membership.")
             return nil
         }
         
-        let asset = AVAsset(url: URL(fileURLWithPath: path))
+        let asset = AVAsset(url: videoURL)
         let gen = AVAssetImageGenerator(asset: asset)
         gen.appliesPreferredTrackTransform = true
         

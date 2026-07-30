@@ -207,7 +207,11 @@ simulation; must always pass).
     reported separately but do not block must-exclude or must-not-exclude
     gates. Only non-contested cases contribute to blocking gate arithmetic;
     executors never silently resolve a contested policy question.
-13. No GIT-TRACKED file may exceed 100 MB (GitHub's hard push limit). Split at 90 MB. Bundled media excluded from version control — currently WiseEating/Food/food_archive_1024.mp4 — is out of scope for this gate; it is governed by App Store bundle limits (4 GB uncompressed, 200 MB cellular download) and is tracked separately under the IMG workstream.
+13. No GIT-TRACKED file may exceed 100 MB (GitHub's hard push limit).
+    Split at 90 MB. Large derived bundle resources ship as split gzip parts;
+    never track the reconstructed file. `food_archive_1024.mp4` is restored
+    from its four `food_archive_1024.mp4.gz.part-*` resources at launch by
+    `BundledLargeAssetLoader` and reused from Application Support.
 14. Deterministic meal assembly validates hard constraints before emit and
     reports named infeasibility; it never silently relaxes safety. Ayurvedic
     objective authority is `rasa < vipaka < virya < prabhava`. Vikriti is soft,
