@@ -47,13 +47,9 @@ struct DoshaScaleSelector: View {
   }
 
   private var editorBody: some View {
-    VStack(alignment: .leading, spacing: 10) {
+    VStack(alignment: .leading, spacing: 6) {
       identity
       scale
-      Text(caption)
-        .font(.caption)
-        .foregroundStyle(.secondary)
-        .frame(maxWidth: .infinity, alignment: .center)
     }
     .accessibilityElement(children: .ignore)
     .accessibilityLabel("\(name) effect")
@@ -191,11 +187,11 @@ struct DoshaScaleSelector: View {
   }
 
   private var identity: some View {
-    HStack(spacing: 12) {
+    HStack(spacing: 8) {
       Image(systemName: systemImage)
-        .font(.title2)
+        .font(.subheadline.weight(.semibold))
         .foregroundStyle(tint)
-        .frame(width: 48, height: 48)
+        .frame(width: 32, height: 32)
         .background(tint.opacity(0.14), in: Circle())
         .overlay {
           Circle()
@@ -205,7 +201,7 @@ struct DoshaScaleSelector: View {
 
       VStack(alignment: .leading, spacing: 2) {
         Text(name)
-          .font(.headline)
+          .font(.body)
         Text(subtitle)
           .font(.caption)
           .foregroundStyle(.secondary)
@@ -220,31 +216,43 @@ struct DoshaScaleSelector: View {
           segment(candidate)
         }
       }
-      .padding(3)
+      .padding(2)
       .background(.thinMaterial, in: Capsule())
       .overlay {
         Capsule()
           .stroke(Color.primary.opacity(colorScheme == .dark ? 0.22 : 0.12))
       }
 
-      HStack(spacing: 0) {
-        ForEach(values, id: \.self) { candidate in
-          if candidate == value {
-            VStack(spacing: 0) {
-              Image(systemName: "triangle.fill")
-                .font(.system(size: 7))
-              Text(stateWord)
-                .font(.caption2.weight(.medium))
-            }
-            .foregroundStyle(stateColor)
-            .frame(maxWidth: .infinity, minHeight: 26)
-          } else {
-            Color.clear
-              .frame(maxWidth: .infinity, minHeight: 26)
-          }
-        }
-      }
+      selectionIndicator
     }
+  }
+
+  private var selectionIndicator: some View {
+    GeometryReader { proxy in
+      let selectedIndex = CGFloat(min(2, max(-2, value)) + 2)
+      let segmentWidth = proxy.size.width / CGFloat(values.count)
+      let indicatorX = segmentWidth * (selectedIndex + 0.5)
+      let labelWidth = min(CGFloat(110), proxy.size.width)
+      let labelX = min(
+        max(indicatorX, labelWidth / 2),
+        proxy.size.width - labelWidth / 2
+      )
+
+      ZStack(alignment: .topLeading) {
+        Image(systemName: "triangle.fill")
+          .font(.system(size: 6))
+          .position(x: indicatorX, y: 3)
+
+        Text(stateWord)
+          .font(.caption2.weight(.medium))
+          .lineLimit(1)
+          .minimumScaleFactor(0.8)
+          .frame(width: labelWidth)
+          .position(x: labelX, y: 14)
+      }
+      .foregroundStyle(stateColor)
+    }
+    .frame(height: 22)
   }
 
   private func segment(_ candidate: Int) -> some View {
@@ -252,9 +260,9 @@ struct DoshaScaleSelector: View {
       setValue(candidate)
     } label: {
       Text(displayValue(candidate))
-        .font(.body.monospacedDigit())
+        .font(.caption.monospacedDigit())
         .foregroundStyle(segmentColor(candidate))
-        .frame(maxWidth: .infinity, minHeight: 44)
+        .frame(maxWidth: .infinity, minHeight: 32)
         .background {
           if candidate == value {
             Capsule()
@@ -265,20 +273,16 @@ struct DoshaScaleSelector: View {
     .buttonStyle(.plain)
   }
 
-  private var caption: String {
-    "\(displayValue(value)) · \(AyurvedaDisplayMath.effectLabel(value))"
+  private var stateColor: Color {
+    if value < 0 { return .green }
+    if value > 0 { return .orange }
+    return .blue
   }
 
   private var stateWord: String {
     if value < 0 { return "pacifying" }
     if value > 0 { return "aggravating" }
     return "neutral"
-  }
-
-  private var stateColor: Color {
-    if value < 0 { return .green }
-    if value > 0 { return .orange }
-    return .blue
   }
 
   private func segmentColor(_ candidate: Int) -> Color {

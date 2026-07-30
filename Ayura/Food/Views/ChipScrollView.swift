@@ -64,26 +64,48 @@ struct ChipScrollView<T: Identifiable & Hashable>: View {
     }
 }
 
-private struct GlassChipView: View {
+struct GlassChipView: View {
     @ObservedObject private var effectManager = EffectManager.shared
     let label: String
     var value: String? = nil
     var isAlert: Bool = false
     var color: Color? = nil
+    var systemImage: String? = nil
     let textColor: Color
+    var isSelected: Bool = false
+    var action: (() -> Void)? = nil
 
+    @ViewBuilder
     var body: some View {
-        HStack(spacing: 5) {
+        if let action {
+            Button(action: action) {
+                chipContent
+            }
+            .buttonStyle(.plain)
+            .accessibilityAddTraits(isSelected ? .isSelected : [])
+        } else {
+            chipContent
+        }
+    }
+
+    private var chipContent: some View {
+        let resolvedColor = isAlert ? Color.orange : (isSelected ? (color ?? textColor) : textColor)
+
+        return HStack(spacing: 5) {
             if isAlert {
                 Image(systemName: "exclamationmark.triangle.fill")
                     .font(.caption)
                     .foregroundColor(.orange) // Алергиите остават оранжеви за акцент
+            } else if let systemImage {
+                Image(systemName: systemImage)
+                    .font(.caption)
+                    .foregroundColor(resolvedColor)
             }
             Text(label)
                 .font(.caption)
                 .fontWeight(.medium)
                 // Ако е alert, цветът е оранжев, иначе е подаденият textColor
-                .foregroundColor(isAlert ? .orange : textColor)
+                .foregroundColor(resolvedColor)
             
             if let valueText = value {
                 Text(valueText)
@@ -94,7 +116,22 @@ private struct GlassChipView: View {
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 5)
+        .background {
+            if isSelected {
+                Capsule()
+                    .fill((color ?? textColor).opacity(0.18))
+            }
+        }
         .glassCardStyle(cornerRadius: 25)
         .clipShape(Capsule())
+        .overlay {
+            if isSelected {
+                Capsule()
+                    .stroke((color ?? textColor).opacity(0.65), lineWidth: 2)
+            }
+        }
+        .contentShape(Capsule())
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(label)
     }
 }

@@ -58,6 +58,42 @@ struct AyurvedaForm: Sendable {
 }
 
 struct AyurvedaEditorSection: View {
+  @Environment(\.colorScheme) private var colorScheme
+
+  private enum ViryaPickerOption: String, CaseIterable, Identifiable {
+    case cooling = "Cooling"
+    case neutral = "Neutral"
+    case heating = "Heating"
+
+    var id: Self { self }
+    var storedValue: String { rawValue.lowercased() }
+
+    var tint: Color {
+      switch self {
+      case .cooling: return .blue
+      case .neutral: return .secondary
+      case .heating: return .orange
+      }
+    }
+
+    var systemImage: String {
+      switch self {
+      case .cooling: return "snowflake"
+      case .neutral: return "minus"
+      case .heating: return "flame"
+      }
+    }
+  }
+
+  private enum VipakaPickerOption: String, CaseIterable, Identifiable {
+    case sweet = "Sweet"
+    case sour = "Sour"
+    case pungent = "Pungent"
+
+    var id: Self { self }
+    var storedValue: String { rawValue.lowercased() }
+  }
+
   private static let rasaValues = [
     "sweet", "sour", "salty", "pungent", "bitter", "astringent"
   ]
@@ -65,62 +101,37 @@ struct AyurvedaEditorSection: View {
     "dense", "dry", "heavy", "light", "liquid",
     "oily", "penetrating", "rough", "sharp", "slimy", "smooth", "soft"
   ]
-  private static let viryaOptions = [
-    EffectSegmentOption(
-      value: "cooling", title: "Cooling", systemImage: "snowflake", tone: .cooling
-    ),
-    EffectSegmentOption(
-      value: "neutral", title: "Neutral", systemImage: "minus", tone: .neutral
-    ),
-    EffectSegmentOption(
-      value: "heating", title: "Heating", systemImage: "flame", tone: .heating
-    )
-  ]
-  private static let vipakaOptions = [
-    EffectSegmentOption(value: "sweet", title: "Sweet", systemImage: nil, tone: .accent),
-    EffectSegmentOption(value: "sour", title: "Sour", systemImage: nil, tone: .accent),
-    EffectSegmentOption(value: "pungent", title: "Pungent", systemImage: nil, tone: .accent)
-  ]
-
-  @Environment(\.colorScheme) private var colorScheme
   @ObservedObject private var effectManager = EffectManager.shared
   @Binding var form: AyurvedaForm
 
   var body: some View {
-    VStack(alignment: .leading, spacing: 16) {
-      header
+    VStack(alignment: .leading, spacing: 0) {
       doshaGroup
+      sectionDivider
       rasaGroup
+      sectionDivider
       viryaGroup
+      sectionDivider
       vipakaGroup
+      sectionDivider
       gunaGroup
-      footer
     }
+  }
+
+  private var sectionDivider: some View {
+    Divider()
+      .padding(.vertical, 12)
   }
 
   private var header: some View {
-    HStack(alignment: .top, spacing: 12) {
-      VStack(alignment: .leading, spacing: 4) {
-        Text("Dosha Effects")
-          .font(.title3.weight(.semibold))
-        Text("Adjust how this food affects the doshas")
-          .font(.caption)
-          .foregroundStyle(.secondary)
-      }
-      Spacer(minLength: 8)
-      Button(action: resetAll) {
-        Label("Reset all", systemImage: "arrow.counterclockwise")
-          .font(.caption.weight(.medium))
-          .frame(minHeight: 44)
-      }
-      .buttonStyle(.plain)
+    Text("Dosha Effects")
+      .font(.caption.bold())
       .foregroundStyle(effectManager.currentGlobalAccentColor)
-      .accessibilityHint("Resets every Ayurveda field to neutral or unset")
-    }
   }
 
   private var doshaGroup: some View {
-    VStack(alignment: .leading, spacing: 18) {
+    VStack(alignment: .leading, spacing: 12) {
+      header
       DoshaScaleSelector(
         value: $form.vata,
         name: "Vata",
@@ -145,19 +156,17 @@ struct AyurvedaEditorSection: View {
         tint: .green
       )
     }
-    .padding(14)
-    .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
-    .overlay(groupBorder)
   }
 
   private var rasaGroup: some View {
     editorGroup(title: "Rasa (taste)") {
       ChipGrid {
         ForEach(Self.rasaValues, id: \.self) { value in
-          AyurvedaChip(
-            title: value.capitalized,
+          GlassChipView(
+            label: value.capitalized,
+            color: rasaTint(value),
             systemImage: rasaIcon(value),
-            tint: rasaTint(value),
+            textColor: effectManager.currentGlobalAccentColor,
             isSelected: form.rasa.contains(value),
             action: { toggleRasa(value) }
           )
@@ -168,21 +177,38 @@ struct AyurvedaEditorSection: View {
 
   private var viryaGroup: some View {
     editorGroup(title: "Virya (energy)") {
-      EffectSegmentPicker(
-        selection: $form.virya,
-        title: "Virya energy",
-        options: Self.viryaOptions
+      WrappingSegmentedControl(
+        selection: viryaSelection,
+        layoutMode: .wrap,
+        selectionTint: \.tint,
+        systemImage: \.systemImage
       )
+        .frame(minHeight: 36)
+        .padding(2)
+        .background(.thinMaterial, in: Capsule())
+        .overlay {
+          Capsule()
+            .stroke(Color.primary.opacity(colorScheme == .dark ? 0.22 : 0.12))
+        }
+        .accessibilityLabel("Virya energy")
     }
   }
 
   private var vipakaGroup: some View {
     editorGroup(title: "Vipaka (post-digestive)") {
-      EffectSegmentPicker(
-        selection: $form.vipaka,
-        title: "Vipaka post-digestive effect",
-        options: Self.vipakaOptions
+      WrappingSegmentedControl(
+        selection: vipakaSelection,
+        layoutMode: .wrap,
+        selectionTint: { _ in effectManager.currentGlobalAccentColor }
       )
+        .frame(minHeight: 36)
+        .padding(2)
+        .background(.thinMaterial, in: Capsule())
+        .overlay {
+          Capsule()
+            .stroke(Color.primary.opacity(colorScheme == .dark ? 0.22 : 0.12))
+        }
+        .accessibilityLabel("Vipaka post-digestive effect")
     }
   }
 
@@ -190,10 +216,11 @@ struct AyurvedaEditorSection: View {
     editorGroup(title: "Gunas (qualities)") {
       ChipGrid {
         ForEach(Self.gunaValues, id: \.self) { value in
-          AyurvedaChip(
-            title: value.capitalized,
+          GlassChipView(
+            label: value.capitalized,
+            color: effectManager.currentGlobalAccentColor,
             systemImage: nil,
-            tint: effectManager.currentGlobalAccentColor,
+            textColor: effectManager.currentGlobalAccentColor,
             isSelected: form.gunas.contains(value),
             action: { toggleGuna(value) }
           )
@@ -202,40 +229,16 @@ struct AyurvedaEditorSection: View {
     }
   }
 
-  private var footer: some View {
-    HStack(alignment: .top, spacing: 10) {
-      Image(systemName: "info.circle.fill")
-        .foregroundStyle(effectManager.currentGlobalAccentColor)
-        .accessibilityHidden(true)
-      Text("Saved as tier 'User' — shown in this food's Ayurveda section.")
-        .font(.caption)
-        .foregroundStyle(.secondary)
-    }
-    .padding(12)
-    .frame(maxWidth: .infinity, alignment: .leading)
-    .background(
-      effectManager.currentGlobalAccentColor.opacity(colorScheme == .dark ? 0.18 : 0.10),
-      in: RoundedRectangle(cornerRadius: 14, style: .continuous)
-    )
-  }
-
-  private var groupBorder: some View {
-    RoundedRectangle(cornerRadius: 18, style: .continuous)
-      .stroke(Color.primary.opacity(colorScheme == .dark ? 0.18 : 0.08))
-  }
-
   private func editorGroup<Content: View>(
     title: String,
     @ViewBuilder content: () -> Content
   ) -> some View {
-    VStack(alignment: .leading, spacing: 10) {
+    VStack(alignment: .leading, spacing: 8) {
       Text(title)
-        .font(.headline)
+        .font(.caption.bold())
+        .foregroundStyle(effectManager.currentGlobalAccentColor)
       content()
     }
-    .padding(14)
-    .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
-    .overlay(groupBorder)
   }
 
   private func toggleRasa(_ value: String) {
@@ -254,8 +257,24 @@ struct AyurvedaEditorSection: View {
     }
   }
 
-  private func resetAll() {
-    form = .neutral
+  private var viryaSelection: Binding<ViryaPickerOption?> {
+    Binding(
+      get: {
+        guard let storedValue = form.virya else { return nil }
+        return ViryaPickerOption.allCases.first { $0.storedValue == storedValue }
+      },
+      set: { form.virya = $0?.storedValue }
+    )
+  }
+
+  private var vipakaSelection: Binding<VipakaPickerOption?> {
+    Binding(
+      get: {
+        guard let storedValue = form.vipaka else { return nil }
+        return VipakaPickerOption.allCases.first { $0.storedValue == storedValue }
+      },
+      set: { form.vipaka = $0?.storedValue }
+    )
   }
 
   private func rasaIcon(_ value: String) -> String {

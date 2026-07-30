@@ -35,6 +35,7 @@ struct FoodSearchPanelView: View {
     @State private var isMenusModeActive: Bool = false
     
     @State private var selectedNutrientID: String? = nil
+    @State private var isSearchReady: Bool = false
     
     // MARK: - Initializer
     init(
@@ -154,7 +155,10 @@ struct FoodSearchPanelView: View {
                 
                 ScrollView(showsIndicators: false) {
                     LazyVStack(spacing: 0) {
-                        if displayedSearchResults.isEmpty && !smartSearch.isLoading {
+                        if !isSearchReady || smartSearch.isLoading {
+                            ProgressView()
+                                .padding(.top, 50)
+                        } else if displayedSearchResults.isEmpty {
                             Text("No results found.")
                                 .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
                                 .padding(.top, 50)
@@ -191,27 +195,25 @@ struct FoodSearchPanelView: View {
             .frame(height: UIScreen.main.bounds.height * 0.55)
         }
         .ignoresSafeArea(.container, edges: .bottom)
-        .onAppear {
-            smartSearch.loadData()
+        .task {
             if let externalVal = externalNutrientSelection?.wrappedValue {
                 self.selectedNutrientID = externalVal
             }
+
+            await smartSearch.prepareForSearch()
+            guard !Task.isCancelled else { return }
+
+            isSearchReady = true
             triggerSearch()
         }
         .onChange(of: selectedNutrientID) { _, newValue in
             externalNutrientSelection?.wrappedValue = newValue
             triggerSearch()
         }
-        .onChange(of: smartSearch.isLoading) { _, isLoading in
-            if !isLoading && smartSearch.displayedResults.isEmpty {
-                triggerSearch()
-            }
-        }
         .onChange(of: isSearchFieldFocused) { _, isFocused in
             if isFocused { triggerSearch() }
         }
         .onChange(of: globalSearchText) { _, _ in triggerSearch() }
-        .onChange(of: selectedNutrientID) { _, _ in triggerSearch() }
         .onChange(of: isFavoritesModeActive) { _, _ in triggerSearch() }
         .onChange(of: isRecipesModeActive) { _, _ in triggerSearch() }
         .onChange(of: isMenusModeActive) { _, _ in triggerSearch() }
@@ -327,6 +329,8 @@ struct FoodSearchPanelView: View {
     }
     
     private func triggerSearch() {
+        guard isSearchReady else { return }
+
         var activeFilters: Set<NutrientType> = []
         if let id = selectedNutrientID, let type = getCorrectNutrientType(from: id) {
             activeFilters.insert(type)

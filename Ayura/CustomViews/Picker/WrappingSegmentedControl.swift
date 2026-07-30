@@ -7,8 +7,11 @@ struct WrappingSegmentedControl<T: Hashable & Identifiable & CaseIterable & RawR
         case scrollable
     }
     
-    @Binding var selection: T
+    @Binding private var selection: T?
     let layoutMode: LayoutMode
+    private let allowsEmptySelection: Bool
+    private let selectionTint: ((T) -> Color)?
+    private let systemImage: (T) -> String?
     
     @ObservedObject private var effectManager = EffectManager.shared
     @Namespace private var animation
@@ -23,9 +26,37 @@ struct WrappingSegmentedControl<T: Hashable & Identifiable & CaseIterable & RawR
         horizontalSizeClass == .regular
     }
     
-    init(selection: Binding<T>, layoutMode: LayoutMode = .wrap) {
+    init(
+        selection: Binding<T>,
+        layoutMode: LayoutMode = .wrap,
+        selectionTint: ((T) -> Color)? = nil,
+        systemImage: @escaping (T) -> String? = { _ in nil }
+    ) {
+        self._selection = Binding<T?>(
+            get: { selection.wrappedValue },
+            set: { newValue in
+                if let newValue {
+                    selection.wrappedValue = newValue
+                }
+            }
+        )
+        self.layoutMode = layoutMode
+        self.allowsEmptySelection = false
+        self.selectionTint = selectionTint
+        self.systemImage = systemImage
+    }
+
+    init(
+        selection: Binding<T?>,
+        layoutMode: LayoutMode = .wrap,
+        selectionTint: ((T) -> Color)? = nil,
+        systemImage: @escaping (T) -> String? = { _ in nil }
+    ) {
         self._selection = selection
         self.layoutMode = layoutMode
+        self.allowsEmptySelection = true
+        self.selectionTint = selectionTint
+        self.systemImage = systemImage
     }
     
     var body: some View {
@@ -86,10 +117,13 @@ struct WrappingSegmentedControl<T: Hashable & Identifiable & CaseIterable & RawR
     
     @ViewBuilder
     private func segmentButton(for item: T) -> some View {
+        let isSelected = selection == item
+        let itemTint = selectionTint?(item)
+
         Button(action: {
             // Анимация за местене на фона
             withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                selection = item
+                selection = allowsEmptySelection && selection == item ? nil : item
             }
             
             // --- НАЧАЛО НА ПРОМЯНАТА (2/3): Задействаме "bubble" анимацията ---
@@ -102,17 +136,27 @@ struct WrappingSegmentedControl<T: Hashable & Identifiable & CaseIterable & RawR
             }
             // --- КРАЙ НА ПРОМЯНАТА (2/3) ---
         }) {
-            Text(item.rawValue)
+            HStack(spacing: 5) {
+                if let systemImage = systemImage(item) {
+                    Image(systemName: systemImage)
+                        .accessibilityHidden(true)
+                }
+                Text(item.rawValue)
+            }
                 .font(.caption)
                 .fontWeight(.semibold)
                 .padding(.vertical, 6)
                 .padding(.horizontal, 8)
-                .foregroundColor(effectManager.currentGlobalAccentColor)
+                .foregroundColor(
+                    isSelected
+                        ? (itemTint ?? effectManager.currentGlobalAccentColor)
+                        : effectManager.currentGlobalAccentColor
+                )
                 .background(
                     ZStack {
-                        if selection == item {
+                        if isSelected {
                             Capsule()
-                                .fill(Color.clear)
+                                .fill(itemTint?.opacity(0.18) ?? Color.clear)
                                 .glassCardStyle(cornerRadius: 20)
                                 .matchedGeometryEffect(id: "selection_pill", in: animation)
                         }
@@ -121,7 +165,7 @@ struct WrappingSegmentedControl<T: Hashable & Identifiable & CaseIterable & RawR
         }
         .buttonStyle(.plain)
         // --- НАЧАЛО НА ПРОМЯНАТА (3/3): Прилагаме ефекта за мащабиране ---
-        .scaleEffect(selection == item && isAnimatingSelection ? 1.2 : 1.0)
+        .scaleEffect(isSelected && isAnimatingSelection ? 1.2 : 1.0)
         // --- КРАЙ НА ПРОМЯНАТА (3/3) ---
     }
 }

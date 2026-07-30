@@ -99,6 +99,40 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             excludedFoodIDs: Set<Int> = [],
             phSortOrder: PhSortOrder? = nil // ✅ НОВ ПАРАМЕТЪР
         ) {
+            // A newly-created search engine may receive a query before its
+            // lightweight index has been copied from SearchIndexStore. Defer
+            // the latest request instead of searching an empty snapshot.
+            guard !allFoods.isEmpty else {
+                searchTask?.cancel()
+                isLoading = true
+                searchTask = Task { @MainActor [weak self] in
+                    guard let self else { return }
+                    let hasSearchData = await self.prepareForSearch()
+                    guard !Task.isCancelled else { return }
+
+                    guard hasSearchData else {
+                        self.isLoading = false
+                        self.clearResults()
+                        return
+                    }
+
+                    self.performSearch(
+                        query: rawQuery,
+                        activeFilters: activeFilters,
+                        quickAgeMonths: quickAgeMonths,
+                        forcePhDisplay: forcePhDisplay,
+                        isFavoritesOnly: isFavoritesOnly,
+                        isRecipesOnly: isRecipesOnly,
+                        isMenusOnly: isMenusOnly,
+                        searchMode: searchMode,
+                        profile: profile,
+                        excludedFoodIDs: excludedFoodIDs,
+                        phSortOrder: phSortOrder
+                    )
+                }
+                return
+            }
+
             let canonicalQuery = SmartFoodSearch3.canonicalQuery(from: rawQuery)
             
             print("\n=============================================================")
@@ -155,6 +189,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                 lastPhSortOrder = phSortOrder // ✅ Обновяване на state
                 
                 searchTask?.cancel()
+                isLoading = false
                 showDefaultResultsIfPossible()
                 return
             }
@@ -188,6 +223,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             let snapshotRankings = nutrientRankings
             let snapshotExcludedIDs = excludedFoodIDs
             
+            isLoading = true
             let snapshotAvailableDiets: Set<String> = {
                 var names = snapshotDietsFromDB
                 for d in defaultDietsList {
@@ -275,9 +311,11 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                 
                 await MainActor.run { [weak self] in
                     guard let self else { return }
+                    guard !Task.isCancelled else { return }
                     
                     print("✅ [SmartSearch] Updating UI on MainActor. Aggregated IDs: \(orderedResultIDs.count)")
                     
+                    self.isLoading = false
                     self.fullResultIDs = orderedResultIDs
                     
                     if let intent = primaryIntent {
@@ -1322,14 +1360,24 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
         Task { await loadDataAndWait() }
     }
 
+    /// Makes the search index available to callers that need to issue a query
+    /// immediately after presenting their UI.
     @MainActor
-    private func loadDataAndWait() async {
+    @discardableResult
+    func prepareForSearch() async -> Bool {
         if allFoods.isEmpty {
             isLoading = true
             await SearchIndexStore.shared.ensureLoaded(container: container)
             applyLoadedIndex()
             isLoading = false
         }
+
+        return !allFoods.isEmpty
+    }
+
+    @MainActor
+    private func loadDataAndWait() async {
+        await prepareForSearch()
 
         if lastCanonicalQuery.isEmpty,
            lastActiveFilters.isEmpty,

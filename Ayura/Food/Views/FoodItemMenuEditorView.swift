@@ -120,7 +120,7 @@ struct FoodItemMenuEditorView: View {
     @State private var showMacros       = true
     @State private var showLipids       = false
     @State private var showOther        = false
-    @State private var showAyurveda     = false
+    @State private var showAyurveda     = true
     @State private var showMoreVitamins = false
     @State private var showMoreMinerals = false
     @State private var showAminoAcids = false
@@ -553,6 +553,7 @@ struct FoodItemMenuEditorView: View {
                         ingredientsSection
                     }
                     macroSection
+                    ayurvedaSection
                     vitaminSection
                     mineralSection
                     lipidSection
@@ -560,7 +561,6 @@ struct FoodItemMenuEditorView: View {
                     carbDetailsSection
                     sterolsSection
                     otherSection
-                    ayurvedaSection
                     
                     Color.clear.frame(height: 150)
                 }

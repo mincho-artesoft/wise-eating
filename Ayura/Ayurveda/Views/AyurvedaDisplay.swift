@@ -161,7 +161,7 @@ struct AyurvedaDisplay: Sendable {
         contraindications: [],
         engineExcluded: false,
         confidence: resolution.confidence,
-        qualityCaption: "Estimated from food category and preparation — not a classical source.",
+        qualityCaption: nil,
         sanskrit: nil
       )
     case .none:

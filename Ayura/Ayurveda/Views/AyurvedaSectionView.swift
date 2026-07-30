@@ -54,14 +54,12 @@ struct AyurvedaSectionView: View {
 
 struct AyurvedaDisplayCard: View {
   @Environment(\.accessibilityReduceMotion) private var reduceMotion
-  @Environment(\.colorScheme) private var colorScheme
-  @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
   let display: AyurvedaDisplay
 
   var body: some View {
     VStack(alignment: .leading, spacing: 16) {
-      header
+      title
       if display.engineExcluded {
         AyurvedaDisplayWarningRow(
           title: "Health warning",
@@ -75,12 +73,10 @@ struct AyurvedaDisplayCard: View {
         kapha: display.kapha
       )
       if !propertyGroups.isEmpty {
-        Divider()
         properties
       }
       warnings
       if let caption = display.qualityCaption {
-        Divider()
         Text(caption)
           .font(.caption)
           .foregroundStyle(.secondary)
@@ -95,108 +91,14 @@ struct AyurvedaDisplayCard: View {
     }
   }
 
-  private var header: some View {
-    ViewThatFits(in: .horizontal) {
-      HStack(alignment: .firstTextBaseline, spacing: 10) {
-        title
-        tierBadge
-        if let detail = detailText {
-          Text(detail)
-            .font(.caption)
-            .foregroundStyle(.secondary)
-            .fixedSize(horizontal: false, vertical: true)
-        }
-      }
-
-      VStack(alignment: .leading, spacing: 7) {
-        ViewThatFits(in: .horizontal) {
-          HStack(alignment: .firstTextBaseline, spacing: 10) {
-            title
-            tierBadge
-          }
-          VStack(alignment: .leading, spacing: 7) {
-            title
-            tierBadge
-          }
-        }
-        if let detail = detailText {
-          Text(detail)
-            .font(.caption)
-            .foregroundStyle(.secondary)
-            .fixedSize(horizontal: false, vertical: true)
-        }
-      }
-    }
-  }
-
   private var title: some View {
     Text("Ayurveda")
       .font(.title2.weight(.semibold))
       .foregroundStyle(.primary)
   }
 
-  private var tierBadge: some View {
-    Text(display.tierLabel)
-      .font(.caption.weight(.semibold))
-      .foregroundStyle(tierColor)
-      .padding(.horizontal, 9)
-      .padding(.vertical, 5)
-      .background(
-        tierColor.opacity(colorScheme == .dark ? 0.24 : 0.12),
-        in: Capsule()
-      )
-      .overlay {
-        Capsule()
-          .stroke(tierColor.opacity(colorScheme == .dark ? 0.48 : 0.28), lineWidth: 1)
-      }
-  }
-
-  private var detailText: String? {
-    var parts: [String] = []
-    if let detail = display.tierDetail {
-      parts.append(detail)
-    }
-    if display.tierLabel != "User", let confidence = display.confidence {
-      parts.append("confidence \(String(format: "%.2f", confidence))")
-    }
-    return parts.isEmpty ? nil : parts.joined(separator: " · ")
-  }
-
-  private var tierColor: Color {
-    switch display.tierLabel {
-    case "Classical":
-      return Color("AyurvedaPacify")
-    case "Derived", "Computed":
-      return .blue
-    case "Estimated":
-      return Color("AyurvedaAggravate")
-    case "Recipe":
-      return .purple
-    default:
-      return Color("AyurvedaNeutral")
-    }
-  }
-
   private var properties: some View {
-    let primaryGroups = propertyGroups.filter { $0.kind != .modifier }
-    let modifierGroups = propertyGroups.filter { $0.kind == .modifier }
-
-    return VStack(alignment: .leading, spacing: 14) {
-      if dynamicTypeSize.isAccessibilitySize {
-        propertyStack(primaryGroups)
-      } else {
-        ViewThatFits(in: .horizontal) {
-          HStack(alignment: .top, spacing: 16) {
-            ForEach(primaryGroups) { group in
-              AyurvedaPropertyGroupView(group: group)
-                .frame(maxWidth: .infinity, alignment: .topLeading)
-            }
-          }
-          propertyStack(primaryGroups)
-        }
-      }
-      propertyStack(modifierGroups)
-    }
+    propertyStack(propertyGroups)
   }
 
   private func propertyStack(
