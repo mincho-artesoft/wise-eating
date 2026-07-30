@@ -462,7 +462,6 @@ struct AIDailyMealGeneratorView: View {
         
         // 2) Безплатен план – Rewarded → Interstitial → fallback
         print("📺 Free user: Checking for ads for daily meal generation...")
-        #if !targetEnvironment(macCatalyst)
         if RewardedAdManager.shared.isReady {
             print("📺 Showing Rewarded Ad for daily meal generation...")
             RewardedAdManager.shared.showIfAvailable { amount, type in
@@ -488,9 +487,6 @@ struct AIDailyMealGeneratorView: View {
                 await InterstitialAdManager.shared.loadAd()
             }
         }
-        #else
-        generateAndDismiss()
-        #endif
     }
     
     

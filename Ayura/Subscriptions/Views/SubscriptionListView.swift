@@ -76,7 +76,7 @@ struct SubscriptionListView: View {
                 .padding()
                 .glassCardStyle(cornerRadius: 20)
                 
-                // 3. Links Section (Оправена за Mac Catalyst)
+                // 3. Links Section
                 VStack(spacing: 16) {
                     HStack {
                         Button { Task { await manager.openManageSubscriptions() } } label: {
@@ -143,11 +143,7 @@ struct SubscriptionListView: View {
     
     // Помощна функция за отваряне на линкове
     private func openLink(_ url: URL) {
-        #if targetEnvironment(macCatalyst)
-        UIApplication.shared.open(url)
-        #else
         presentedURL = url
-        #endif
     }
     
     // ... (ActiveSubscriptionStatusView и PurchaseSectionView остават същите като в твоя код)

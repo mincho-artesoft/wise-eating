@@ -47,12 +47,6 @@ struct UpdatePlanBanner: View {
             // ✅ СЦЕНАРИЙ 2: СТАНДАРТЕН РЕЖИМ (След 17 Януари)
             else if subscriptionManager.subscriptionStatus == .base && isVisible {
                 Group {
-                    // Проверка дали приложението работи на Mac Catalyst
-                    #if targetEnvironment(macCatalyst)
-                    // На Mac Catalyst винаги показваме само upgrade съдържанието
-                    upgradePlanContent
-                    #else
-                    // На iOS продължаваме със старата логика за редуване
                     switch currentBannerType {
                     case .upgrade:
                         upgradePlanContent
@@ -63,7 +57,6 @@ struct UpdatePlanBanner: View {
                             upgradePlanContent
                         }
                     }
-                    #endif
                 }
                 .transition(.opacity.combined(with: .move(edge: .top)))
                 .onAppear {
@@ -84,14 +77,9 @@ struct UpdatePlanBanner: View {
 
     private func refreshContent() {
         withAnimation {
-            // Проверка и тук, за да сме сигурни, че на Catalyst типът никога не се сменя на .ad
-            #if targetEnvironment(macCatalyst)
-            currentBannerType = .upgrade
-            #else
             currentBannerType = AdsConfiguration.shouldShowAds
                 ? BannerRotationManager.shared.getAndCycle()
                 : .upgrade
-            #endif
             isVisible = true
         }
     }

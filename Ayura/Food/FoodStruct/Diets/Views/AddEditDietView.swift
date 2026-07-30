@@ -677,7 +677,6 @@ struct AddEditDietView: View {
         
         // 3.2 Безплатен план – Rewarded → Interstitial → fallback
         print("📺 Free user: Checking for ads...")
-        #if !targetEnvironment(macCatalyst)
         if RewardedAdManager.shared.isReady {
             print("📺 Showing Rewarded Ad for diet generation...")
             RewardedAdManager.shared.showIfAvailable { amount, type in
@@ -703,9 +702,6 @@ struct AddEditDietView: View {
                 await InterstitialAdManager.shared.loadAd()
             }
         }
-        #else
-            startDietAIGeneration(promptTexts: promptTexts)
-        #endif
     }
     
     

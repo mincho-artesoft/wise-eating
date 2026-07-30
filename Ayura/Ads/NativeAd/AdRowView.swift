@@ -8,7 +8,7 @@ struct AdRowView: View {
     @State private var hasLoaded = false
     
     var body: some View {
-    #if !targetEnvironment(macCatalyst)
+    #if canImport(GoogleMobileAds)
         if AdsConfiguration.shouldShowAds {
             VStack {
                 if let nativeAd = loader.nativeAd {
@@ -34,7 +34,7 @@ struct AdRowView: View {
     }
 }
 
-#if !targetEnvironment(macCatalyst)
+#if canImport(GoogleMobileAds)
 struct NativeAdViewWrapper: UIViewRepresentable {
     let nativeAd: NativeAd
     

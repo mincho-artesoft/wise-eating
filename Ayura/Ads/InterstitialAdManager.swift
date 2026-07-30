@@ -3,6 +3,7 @@ import UIKit
 import GoogleMobileAds
 #endif
 
+#if canImport(GoogleMobileAds)
 @MainActor
 final class InterstitialAdManager: NSObject {
 
@@ -11,7 +12,6 @@ final class InterstitialAdManager: NSObject {
     private var onAdDismissed: (() -> Void)?
     private var isLoading = false
 
-#if !targetEnvironment(macCatalyst)
     private var interstitialAd: InterstitialAd?
 
     var isReady: Bool {
@@ -50,10 +50,8 @@ final class InterstitialAdManager: NSObject {
         self.onAdDismissed = onDismiss
         ad.present(from: root)
     }
-#endif
 }
 
-#if !targetEnvironment(macCatalyst)
 extension InterstitialAdManager: FullScreenContentDelegate {
     func ad(_ ad: any FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: any Error) {
         interstitialAd = nil
@@ -66,6 +64,19 @@ extension InterstitialAdManager: FullScreenContentDelegate {
         onAdDismissed?()
         onAdDismissed = nil
         Task { await loadAd() }
+    }
+}
+#else
+@MainActor
+final class InterstitialAdManager: NSObject {
+    static let shared = InterstitialAdManager()
+
+    var isReady: Bool { false }
+
+    func loadAd() async {}
+
+    func showIfAvailable(onDismiss: @escaping () -> Void) {
+        onDismiss()
     }
 }
 #endif

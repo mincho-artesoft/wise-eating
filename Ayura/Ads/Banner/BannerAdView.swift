@@ -7,7 +7,7 @@ struct BannerAdView: UIViewRepresentable {
     @Binding var adsBool: Bool
     let bucket: BannerBucket
 
-#if !targetEnvironment(macCatalyst)
+#if canImport(GoogleMobileAds)
     // MARK: - iOS IMPLEMENTATION
     
     func makeUIView(context: Context) -> BannerView {
@@ -54,17 +54,14 @@ struct BannerAdView: UIViewRepresentable {
     }
 
 #else
-    // MARK: - MAC CATALYST STUB (Empty Implementation)
-    // Това е нужно, за да се спази протокола UIViewRepresentable, дори и да не искаме реклами.
+    // MARK: - ADS SDK DISABLED STUB
     
     func makeUIView(context: Context) -> UIView {
-        return UIView() // Връща празен, невидим View
+        adsBool = false
+        return UIView()
     }
     
-    func updateUIView(_ uiView: UIView, context: Context) {
-        // Няма нужда от обновяване
-    }
+    func updateUIView(_ uiView: UIView, context: Context) {}
     
-    // Coordinator не е задължителен тук, SwiftUI ще ползва Void по подразбиране
 #endif
 }

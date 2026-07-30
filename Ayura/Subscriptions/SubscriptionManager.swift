@@ -275,13 +275,6 @@ class SubscriptionManager: ObservableObject {
     
     @MainActor
         func openManageSubscriptions() async {
-            #if targetEnvironment(macCatalyst)
-            // 🖥️ Mac Catalyst: Системният прозорец често не сработва коректно.
-            // Отваряме директния линк към управление на абонаменти в App Store/System Settings.
-            if let url = URL(string: "https://apps.apple.com/account/subscriptions") {
-                await UIApplication.shared.open(url)
-            }
-            #else
             // 📱 iOS/iPadOS: Използваме native StoreKit API
             guard let windowScene = UIApplication.shared.connectedScenes
                 .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene
@@ -293,7 +286,6 @@ class SubscriptionManager: ObservableObject {
             } catch {
                 print("Failed to show subscription management: \(error)")
             }
-            #endif
         }
 
     @MainActor

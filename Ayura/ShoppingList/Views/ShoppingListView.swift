@@ -97,11 +97,7 @@ struct ShoppingListView: View {
         }
 
     private var headerTopPadding: CGFloat {
-#if targetEnvironment(macCatalyst)
-        10
-#else
         -safeAreaInsets.top + 10
-#endif
     }
 
     var body: some View {

@@ -54,11 +54,7 @@ struct AnalyticsView: View {
 
     // --- НАЧАЛО НА ПРОМЯНА 2: Добавяме изчисляемо свойство за горното отстояние ---
     private var headerTopPadding: CGFloat {
-#if targetEnvironment(macCatalyst)
-        10
-#else
         -safeAreaInsets.top + 10
-#endif
     }    // --- КРАЙ НА ПРОМЯНАТА 2 ---
 
     // MARK: - Computed Properties

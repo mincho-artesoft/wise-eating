@@ -5,7 +5,6 @@ struct BannerAdRowView: View {
     private let id = UUID()
 
     var body: some View {
-    #if !targetEnvironment(macCatalyst)
         if AdsConfiguration.shouldShowAds {
             BannerAdView(adsBool: $isAdLoaded, bucket: .large)
                 .frame(maxWidth: .infinity)
@@ -14,6 +13,5 @@ struct BannerAdRowView: View {
                 .animation(.easeInOut(duration: 0.25), value: isAdLoaded)
                 .id(id)
         }
-    #endif
     }
 }

@@ -29,7 +29,7 @@ struct AyuraApp: App {
             // --- AD LOADING LOGIC ---
             if AdsConfiguration.shouldShowAds {
                 
-                #if !targetEnvironment(macCatalyst)
+                #if canImport(GoogleMobileAds)
                 // Инициализация на SDK
                 MobileAds.shared.start(completionHandler: nil)
                
@@ -77,16 +77,12 @@ struct AyuraApp: App {
                                     coldStart = false
                                     Task { @MainActor in
                                         try? await Task.sleep(nanoseconds: 2 * 1_000_000_000)
-                                        #if !targetEnvironment(macCatalyst)
                                         AppOpenAdManager.shared.showAdIfAvailable(forceShow: true)
-                                        #endif
                                     }
                                 } else {
                                     Task { @MainActor in
                                         try? await Task.sleep(nanoseconds: 2 * 1_000_000_000)
-                                        #if !targetEnvironment(macCatalyst)
                                         AppOpenAdManager.shared.showAdIfAvailable(forceShow: false)
-                                        #endif
                                     }
                                 }
                             } else { coldStart = false }
@@ -99,9 +95,7 @@ struct AyuraApp: App {
                         
                     case .background:
                         if AdsConfiguration.shouldShowAds {
-                            #if !targetEnvironment(macCatalyst)
                             Task { @MainActor in await AppOpenAdManager.shared.loadAd() }
-                            #endif
                         }
                     default: break
                     }

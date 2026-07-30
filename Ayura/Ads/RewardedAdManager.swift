@@ -3,13 +3,13 @@ import UIKit
 import GoogleMobileAds
 #endif
 
+#if canImport(GoogleMobileAds)
 @MainActor
 final class RewardedAdManager: NSObject {
 
     static let shared = RewardedAdManager()
     private var isLoading = false
 
-#if !targetEnvironment(macCatalyst)
     private var rewardedAd: RewardedAd?
     var isReady: Bool {
         AdsConfiguration.shouldShowAds && rewardedAd != nil
@@ -46,10 +46,8 @@ final class RewardedAdManager: NSObject {
         }
     }
 
-#endif
 }
 
-#if !targetEnvironment(macCatalyst)
 extension RewardedAdManager: FullScreenContentDelegate {
     func ad(_ ad: any FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: any Error) {
         rewardedAd = nil
@@ -58,5 +56,16 @@ extension RewardedAdManager: FullScreenContentDelegate {
         rewardedAd = nil
         Task { await loadAd() }
     }
+}
+#else
+@MainActor
+final class RewardedAdManager: NSObject {
+    static let shared = RewardedAdManager()
+
+    var isReady: Bool { false }
+
+    func loadAd() async {}
+
+    func showIfAvailable(onReward: @escaping (_ amount: NSDecimalNumber, _ type: String) -> Void) {}
 }
 #endif

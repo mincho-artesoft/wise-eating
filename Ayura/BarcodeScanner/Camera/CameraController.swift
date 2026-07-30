@@ -152,11 +152,6 @@ public final class CameraController: UIViewController,
     }
 
     private func applyCurrentOrientation() {
-            #if targetEnvironment(macCatalyst)
-            // На Mac камерите са физически монтирани правилно за Landscape.
-            // Обикновено не е нужно завъртане, или е .landscapeRight.
-            let videoOrientation: AVCaptureVideoOrientation = .portrait // Често за Mac Catalyst 'portrait' в AVFoundation мапва правилно към 'up'
-            #else
             // iOS Логика
             let orientation = view.window?.windowScene?.interfaceOrientation
                 ?? UIApplication.shared.connectedScenes.compactMap { ($0 as? UIWindowScene)?.interfaceOrientation }.first
@@ -170,7 +165,6 @@ public final class CameraController: UIViewController,
             case .landscapeRight: videoOrientation = .landscapeRight
             @unknown default: videoOrientation = .portrait
             }
-            #endif
 
             if let conn = previewLayer?.connection, conn.isVideoOrientationSupported {
                 conn.videoOrientation = videoOrientation

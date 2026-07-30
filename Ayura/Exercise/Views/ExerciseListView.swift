@@ -812,11 +812,7 @@ What would you like to do?
 
     // MARK: - Helpers
     private var headerTopPadding: CGFloat {
-#if targetEnvironment(macCatalyst)
-        10
-#else
         -safeAreaInsets.top + 10
-#endif
     }
     private func present(item: PresentedItem) {
         if isSearching {

@@ -1186,7 +1186,6 @@ struct MealPlanEditorView: View {
         
         // 5.2 Безплатен план – Rewarded → Interstitial → fallback
         print("📺 Free user: Checking for ads for meal plan generation...")
-        #if !targetEnvironment(macCatalyst)
 
         if RewardedAdManager.shared.isReady {
             print("📺 Showing Rewarded Ad for meal plan generation...")
@@ -1225,13 +1224,6 @@ struct MealPlanEditorView: View {
                 await InterstitialAdManager.shared.loadAd()
             }
         }
-        #else
-        self.startMealPlanAIGeneration(
-            mealsToGenerate: mealsToGenerate,
-            existingMeals: existingMeals,
-            selectedPrompts: selectedPrompts
-            )
-        #endif
     }
     
     

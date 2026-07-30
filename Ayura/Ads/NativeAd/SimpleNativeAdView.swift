@@ -5,7 +5,7 @@ import GoogleMobileAds
 #endif
 
 // MARK: - 1. REAL IMPLEMENTATION (iOS Only)
-#if !targetEnvironment(macCatalyst)
+#if canImport(GoogleMobileAds)
 
 final class SimpleNativeAdView: NativeAdView {
 

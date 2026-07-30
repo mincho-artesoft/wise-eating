@@ -5,7 +5,7 @@ import UIKit
 import GoogleMobileAds
 #endif
 
-#if !targetEnvironment(macCatalyst)
+#if canImport(GoogleMobileAds)
 
 // ✅ FIX: Помощна структура за прехвърляне на non-Sendable обекти към MainActor
 private struct UnsafeSendableAd: @unchecked Sendable {
@@ -64,8 +64,9 @@ final class NativeAdLoader: NSObject, ObservableObject, AdLoaderDelegate, Native
     }
 }
 #else
-// Mac Stub
-class NativeAdLoader: ObservableObject {
+// Ads SDK disabled stub
+@MainActor
+final class NativeAdLoader: ObservableObject {
     @Published var nativeAd: Any? = nil
     func loadAd() {}
 }

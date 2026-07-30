@@ -2302,7 +2302,6 @@ struct FoodItemMenuEditorView: View {
         
         // 4.2 Безплатен план – Rewarded → Interstitial → fallback
         print("📺 Free user: Checking for ads for menu generation...")
-        #if !targetEnvironment(macCatalyst)
         if RewardedAdManager.shared.isReady {
             print("📺 Showing Rewarded Ad for menu generation...")
             RewardedAdManager.shared.showIfAvailable { amount, type in
@@ -2328,9 +2327,6 @@ struct FoodItemMenuEditorView: View {
                 await InterstitialAdManager.shared.loadAd()
             }
         }
-        #else
-        startMenuAIGeneration(profile: profile, promptTexts: promptTexts)
-        #endif
     }
     
     

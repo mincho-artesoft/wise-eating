@@ -3,6 +3,7 @@ import UIKit
 import GoogleMobileAds
 #endif
 
+#if canImport(GoogleMobileAds)
 @MainActor
 class AppOpenAdManager: NSObject {
 
@@ -12,7 +13,6 @@ class AppOpenAdManager: NSObject {
     private var loadTime: Date?
     
 
-#if !targetEnvironment(macCatalyst)
     private var appOpenAd: AppOpenAd?
     
     func loadAd() async {
@@ -58,10 +58,8 @@ class AppOpenAdManager: NSObject {
         }
     }
 
-#endif
 }
 
-#if !targetEnvironment(macCatalyst)
 extension AppOpenAdManager: FullScreenContentDelegate {
     func ad(_ ad: any FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: any Error) {
         appOpenAd = nil
@@ -73,5 +71,13 @@ extension AppOpenAdManager: FullScreenContentDelegate {
         isShowingAd = false
         Task { await loadAd() }
     }
+}
+#else
+@MainActor
+final class AppOpenAdManager: NSObject {
+    static let shared = AppOpenAdManager()
+
+    func loadAd() async {}
+    func showAdIfAvailable(forceShow: Bool = false) {}
 }
 #endif
