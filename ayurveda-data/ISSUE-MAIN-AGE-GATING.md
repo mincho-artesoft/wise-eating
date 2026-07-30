@@ -21,7 +21,7 @@ search results.
 
 ## Imported-age histogram
 
-The source is the shipping `WiseEating/Legacy/foods.json` at `main`. It
+The source is the shipping `Ayura/Legacy/foods.json` at `main`. It
 contains exactly 12,601 rows.
 
 | `minAgeMonths` | USDA rows |
@@ -43,13 +43,13 @@ contains exactly 12,601 rows.
 
 ## Exact shipping code path
 
-1. `WiseEating/Main/DBSeed/SeedManager.swift:100–120` loads
+1. `Ayura/Main/DBSeed/SeedManager.swift:100–120` loads
    `Legacy/foods.json`, decodes `[FoodItemDTO]`, and calls `dto.model(...)`.
-2. `WiseEating/Food/Structs/FoodItemDTO.swift:73` decodes the optional source
+2. `Ayura/Food/Structs/FoodItemDTO.swift:73` decodes the optional source
    value; line 201 assigns `item.minAgeMonths = minAgeMonths ?? 0` unchanged.
-3. `WiseEating/FoodSearch/SearchIndexStore.swift:403` copies that value into
+3. `Ayura/FoodSearch/SearchIndexStore.swift:403` copies that value into
    every `CompactFoodItem`.
-4. `WiseEating/FoodSearch/VM/SmartFoodSearch 3.swift:834` compares the compact
+4. `Ayura/FoodSearch/VM/SmartFoodSearch 3.swift:834` compares the compact
    value with `profileConstraints.ageInMonths`; line 925 compares it with
    `intent.targetConsumerAge`. Both branches execute `continue`, so the row is
    hidden rather than badged or downranked.

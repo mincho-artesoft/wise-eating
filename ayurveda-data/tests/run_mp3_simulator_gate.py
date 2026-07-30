@@ -16,17 +16,17 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 PLANNER = (
     ROOT
-    / "WiseEating"
+    / "Ayura"
     / "AI"
     / "MealPlanning"
     / "USDAWeeklyMealPlanner.swift"
 )
 CORPUS = ROOT / "ayurveda-data" / "tests" / "resolution-goldens.json"
 ARTIFACT_PARTS = [
-    ROOT / "WiseEating" / "preseeded_db.store.gz.part-aa",
-    ROOT / "WiseEating" / "preseeded_db.store.gz.part-ab",
+    ROOT / "Ayura" / "preseeded_db.store.gz.part-aa",
+    ROOT / "Ayura" / "preseeded_db.store.gz.part-ab",
 ]
-BUNDLE_ID = "com.wiseeating.mp3-resolution-gate"
+BUNDLE_ID = "com.ayura.mp3-resolution-gate"
 
 
 def checked(arguments, **kwargs):

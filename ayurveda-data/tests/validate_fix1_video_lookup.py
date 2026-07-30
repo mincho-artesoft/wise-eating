@@ -8,9 +8,9 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
-FOODS = ROOT / "WiseEating" / "Legacy" / "foods.json"
-FRAME_MAP = ROOT / "WiseEating" / "Food" / "frame_map.json"
-SOURCE = ROOT / "WiseEating" / "Food" / "FoodVideoSource.swift"
+FOODS = ROOT / "Ayura" / "Legacy" / "foods.json"
+FRAME_MAP = ROOT / "Ayura" / "Food" / "frame_map.json"
+SOURCE = ROOT / "Ayura" / "Food" / "FoodVideoSource.swift"
 
 UNSAFE = frozenset('/\\:*?"<>|')
 OLD_GUESS = frozenset("/%")

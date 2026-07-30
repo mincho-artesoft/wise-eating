@@ -7,31 +7,31 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 PLANNER = (
     ROOT
-    / "WiseEating"
+    / "Ayura"
     / "AI"
     / "MealPlanning"
     / "USDAWeeklyMealPlanner.swift"
 )
 MODELS = (
     ROOT
-    / "WiseEating"
+    / "Ayura"
     / "AI"
     / "MealPlanning"
     / "AIMealPlanModels.swift"
 )
 SOLVER = (
     ROOT
-    / "WiseEating"
+    / "Ayura"
     / "AI"
     / "MealPlanning"
     / "DeterministicMealPlanSolver.swift"
 )
 SOLVER_ADAPTER = (
     ROOT
-    / "WiseEating"
+    / "Ayura"
     / "AI"
     / "MealPlanning"
-    / "DeterministicMealPlanSolver+WiseEating.swift"
+    / "DeterministicMealPlanSolver+Ayura.swift"
 )
 
 

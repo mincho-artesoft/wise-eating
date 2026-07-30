@@ -9,28 +9,28 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 SOLVER = (
     ROOT
-    / "WiseEating"
+    / "Ayura"
     / "AI"
     / "MealPlanning"
     / "DeterministicMealPlanSolver.swift"
 )
 ADAPTER = (
     ROOT
-    / "WiseEating"
+    / "Ayura"
     / "AI"
     / "MealPlanning"
-    / "DeterministicMealPlanSolver+WiseEating.swift"
+    / "DeterministicMealPlanSolver+Ayura.swift"
 )
 PLANNER = (
     ROOT
-    / "WiseEating"
+    / "Ayura"
     / "AI"
     / "MealPlanning"
     / "USDAWeeklyMealPlanner.swift"
 )
 MODELS = (
     ROOT
-    / "WiseEating"
+    / "Ayura"
     / "AI"
     / "MealPlanning"
     / "AIMealPlanModels.swift"
@@ -42,7 +42,7 @@ CORPUS = (
     / "tests"
     / "plan-validity-properties.json"
 )
-FOOD_ROLES = ROOT / "WiseEating" / "food_roles.json.gz"
+FOOD_ROLES = ROOT / "Ayura" / "food_roles.json.gz"
 
 
 class MP5DeterministicSolverTests(unittest.TestCase):

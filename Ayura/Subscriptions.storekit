@@ -1,0 +1,254 @@
+{
+  "appPolicies" : {
+    "eula" : "",
+    "policies" : [
+      {
+        "locale" : "en_US",
+        "policyText" : "",
+        "policyURL" : ""
+      }
+    ]
+  },
+  "identifier" : "DC8EDDC1",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+
+  ],
+  "settings" : {
+    "_applicationInternalID" : "6751406823",
+    "_askToBuyEnabled" : false,
+    "_billingGracePeriodEnabled" : false,
+    "_billingIssuesEnabled" : false,
+    "_developerTeamID" : "8293TNMX6S",
+    "_disableDialogs" : false,
+    "_failTransactionsEnabled" : false,
+    "_lastSynchronizedDate" : 786610834.52965999,
+    "_locale" : "en_US",
+    "_renewalBillingIssuesEnabled" : false,
+    "_storefront" : "USA",
+    "_storeKitErrors" : [
+      {
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ],
+    "_timeRate" : 0
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "21847766",
+      "localizations" : [
+
+      ],
+      "name" : "Ayura.Group.v2",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "6.99",
+          "familyShareable" : false,
+          "groupNumber" : 2,
+          "internalID" : "6756009218",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "12profiles monthly for dietitians coaches pediatricians",
+              "displayName" : "Premium Monthly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "Ayura.Premium.Monthly.v2",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : " Premium  Monthly",
+          "subscriptionGroupID" : "21847766",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "3.99",
+          "familyShareable" : false,
+          "groupNumber" : 4,
+          "internalID" : "6756009254",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "4 profiles monthly: couples and small families",
+              "displayName" : "Advanced Monthly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "Ayura.Advanced.Monthly.v2",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Advanced  Monthly",
+          "subscriptionGroupID" : "21847766",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "39.99",
+          "familyShareable" : false,
+          "groupNumber" : 3,
+          "internalID" : "6756009340",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "4 profiles yearly: couples and small families",
+              "displayName" : "Advanced Yearly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "Ayura.Advanced.Yearly.v2",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Advanced  Yearly",
+          "subscriptionGroupID" : "21847766",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "69.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "6756008934",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "12profiles yearly for dietitians coaches pediatricians",
+              "displayName" : "Premium Yearly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "Ayura.Premium.Yearly.v2",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Premium  Yearly",
+          "subscriptionGroupID" : "21847766",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "2.99",
+          "familyShareable" : false,
+          "groupNumber" : 6,
+          "internalID" : "6756009463",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Enjoy a clean interface without ads, monthly",
+              "displayName" : "Remove Ads Monthly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "Ayura.Remove.Ads.Monthly.v2",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Remove Ads  Monthly",
+          "subscriptionGroupID" : "21847766",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "29.99",
+          "familyShareable" : false,
+          "groupNumber" : 5,
+          "internalID" : "6756009293",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Enjoy a clean interface without ads, yearly",
+              "displayName" : "Remove Ads Yearly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "Ayura.Remove.Ads.Yearly.v2",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Remove Ads  Yearly",
+          "subscriptionGroupID" : "21847766",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 4,
+    "minor" : 0
+  }
+}

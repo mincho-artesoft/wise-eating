@@ -11,8 +11,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
-FOODS = ROOT / "WiseEating" / "Legacy" / "foods.json"
-FOOD_RESOURCES = ROOT / "WiseEating" / "Food"
+FOODS = ROOT / "Ayura" / "Legacy" / "foods.json"
+FOOD_RESOURCES = ROOT / "Ayura" / "Food"
 FRAME_MAP = FOOD_RESOURCES / "frame_map.json"
 REUSE_MAP = FOOD_RESOURCES / "reuse-map.json"
 FRAME_MAP2 = FOOD_RESOURCES / "frame_map2.json"

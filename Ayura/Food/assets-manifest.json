@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "assets": [
+    {
+      "filename": "Ayura/Food/food_archive_144.mp4",
+      "sha256": "b299cdb085e7631d17ac2d7ac860a878aa5ff5bab6eeb53d7144d9ac519a3bde",
+      "byteSize": 37571026,
+      "frameCount": 12601,
+      "producingCommit": "a6f5cf8224c6624fec8fb4edbe4a4f4eadf55c8e"
+    },
+    {
+      "filename": "Ayura/Food/food_archive_480.mp4",
+      "sha256": "aa4976a15e87db74bf543c91a8ead84b4251bc149f7fa8a905aabb633703ce4d",
+      "byteSize": 82726160,
+      "frameCount": 12601,
+      "producingCommit": "a6f5cf8224c6624fec8fb4edbe4a4f4eadf55c8e"
+    },
+    {
+      "filename": "Ayura/Food/food_archive_1024.mp4.gz.part-aa",
+      "sha256": "0e36720703043bc05648b43e5ad5f3ac999ffa300c17a8d5804c09db16981b04",
+      "byteSize": 73400320,
+      "frameCount": null,
+      "restoredFilename": "Ayura/Food/food_archive_1024.mp4",
+      "restoredSha256": "04de4e63370c280c967b498cf7c29033c04ff4417d29f15712d1329d1bf2ed31",
+      "restoredByteSize": 285519148
+    },
+    {
+      "filename": "Ayura/Food/food_archive_1024.mp4.gz.part-ab",
+      "sha256": "4caeaeae2aa2a6e73d6fa3c8add6f82f5b5d3d8d4a4049b4fee0b35076675ccd",
+      "byteSize": 73400320,
+      "frameCount": null
+    },
+    {
+      "filename": "Ayura/Food/food_archive_1024.mp4.gz.part-ac",
+      "sha256": "ddc64800570fde968f08dff01520e721d4fcae76ff558d1014f0353614adc017",
+      "byteSize": 73400320,
+      "frameCount": null
+    },
+    {
+      "filename": "Ayura/Food/food_archive_1024.mp4.gz.part-ad",
+      "sha256": "a085dc1d821d2eb6a0539c45d59cf721835057020b3da8002081ee0c637ae2cb",
+      "byteSize": 65383838,
+      "frameCount": null
+    },
+    {
+      "filename": "Ayura/preseeded_db.store.gz.part-aa",
+      "sha256": "99a977616c554f3e67d683de045b11bf2a2dd6567f41702d71cc5788f42bb817",
+      "byteSize": 73400320,
+      "frameCount": null,
+      "producingCommit": "eb2dcb4d802f95d86a173bf36b74463713614b60"
+    },
+    {
+      "filename": "Ayura/preseeded_db.store.gz.part-ab",
+      "sha256": "f6b0cd508ccd2a5d2e343ce87b166e6f72df75b3b24f5eda528d08cb1e0b291c",
+      "byteSize": 19162561,
+      "frameCount": null,
+      "producingCommit": "eb2dcb4d802f95d86a173bf36b74463713614b60"
+    }
+  ]
+}

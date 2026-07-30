@@ -1,6 +1,6 @@
 # Ayurveda Data Pipeline — wise-eating extension
 
-Source of truth for all Ayurvedic content added to the WiseEating database.
+Source of truth for all Ayurvedic content added to the Ayura database.
 The app's existing structure is preserved; this data extends it.
 
 ## Approved decisions (2026-07-21)

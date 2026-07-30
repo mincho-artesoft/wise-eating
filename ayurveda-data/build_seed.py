@@ -351,31 +351,31 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--output",
         type=Path,
-        default=repo_root / "WiseEating" / "ayurveda_seed.json.gz",
+        default=repo_root / "Ayura" / "ayurveda_seed.json.gz",
         help="Destination gzip bundle",
     )
     parser.add_argument(
         "--rules-output",
         type=Path,
-        default=repo_root / "WiseEating" / "ayurveda_rules.json",
+        default=repo_root / "Ayura" / "ayurveda_rules.json",
         help="Destination category-rule bundle",
     )
     parser.add_argument(
         "--concepts-output",
         type=Path,
-        default=repo_root / "WiseEating" / "food_concepts.json.gz",
+        default=repo_root / "Ayura" / "food_concepts.json.gz",
         help="Destination deterministic food-concept membership bundle",
     )
     parser.add_argument(
         "--roles-output",
         type=Path,
-        default=repo_root / "WiseEating" / "food_roles.json.gz",
+        default=repo_root / "Ayura" / "food_roles.json.gz",
         help="Destination deterministic food-role resolution bundle",
     )
     parser.add_argument(
         "--foods",
         type=Path,
-        default=repo_root / "WiseEating" / "Legacy" / "foods.json",
+        default=repo_root / "Ayura" / "Legacy" / "foods.json",
         help="USDA-backed per-100g nutrient source used to build the shipped store",
     )
     return parser.parse_args()
@@ -2876,7 +2876,7 @@ def main() -> int:
         ]
         suffix_negation_terms = load_suffix_negation_terms(
             Path(__file__).resolve().parent.parent
-            / "WiseEating"
+            / "Ayura"
             / "FoodSearch"
             / "SearchKnowledgeBase.swift"
         )

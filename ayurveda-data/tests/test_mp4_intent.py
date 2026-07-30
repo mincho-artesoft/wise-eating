@@ -9,21 +9,21 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 REQUEST = (
     ROOT
-    / "WiseEating"
+    / "Ayura"
     / "AI"
     / "MealPlanning"
     / "MealPlanRequest.swift"
 )
 PLANNER = (
     ROOT
-    / "WiseEating"
+    / "Ayura"
     / "AI"
     / "MealPlanning"
     / "USDAWeeklyMealPlanner.swift"
 )
 TELEMETRY = (
     ROOT
-    / "WiseEating"
+    / "Ayura"
     / "AI"
     / "MealPlanning"
     / "PlannerTelemetry.swift"
@@ -240,7 +240,7 @@ struct MP4IntentHarness {
     def run_harness(self, scenario, *arguments, telemetry=False):
         command = [str(self.binary), scenario, *map(str, arguments)]
         if telemetry:
-            command.append("-wePlannerTelemetry")
+            command.append("-ayuraPlannerTelemetry")
         result = subprocess.run(
             command,
             cwd=ROOT,
@@ -371,9 +371,9 @@ struct MP4IntentHarness {
         self.assertIn("session.prewarm()", source)
         self.assertIn("prewarmedIntentSession", source)
         for relative in (
-            "WiseEating/AI/Views/AIPlanGenerationView.swift",
-            "WiseEating/Nutrient/Views/AIDailyMealGeneratorView.swift",
-            "WiseEating/Meal/Views/MealPlanEditorView.swift",
+            "Ayura/AI/Views/AIPlanGenerationView.swift",
+            "Ayura/Nutrient/Views/AIDailyMealGeneratorView.swift",
+            "Ayura/Meal/Views/MealPlanEditorView.swift",
         ):
             view = (ROOT / relative).read_text(encoding="utf-8")
             self.assertIn("USDAWeeklyMealPlanner.prewarmIntentModel()", view)
@@ -381,24 +381,24 @@ struct MP4IntentHarness {
     def test_caveat_survives_resume_and_result_merging(self):
         progress = (
             ROOT
-            / "WiseEating"
+            / "Ayura"
             / "AI"
             / "MealPlanning"
             / "MealPlanGenerationProgress.swift"
         ).read_text(encoding="utf-8")
         models = (
             ROOT
-            / "WiseEating"
+            / "Ayura"
             / "AI"
             / "MealPlanning"
             / "AIMealPlanModels.swift"
         ).read_text(encoding="utf-8")
-        manager = (ROOT / "WiseEating" / "AI" / "AIManager.swift").read_text(
+        manager = (ROOT / "Ayura" / "AI" / "AIManager.swift").read_text(
             encoding="utf-8"
         )
         host = (
             ROOT
-            / "WiseEating"
+            / "Ayura"
             / "AI"
             / "Views"
             / "AIGenerationHostView.swift"

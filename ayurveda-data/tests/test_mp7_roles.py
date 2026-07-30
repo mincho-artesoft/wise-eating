@@ -12,15 +12,15 @@ BUILD_SEED_PATH = ROOT / "ayurveda-data" / "build_seed.py"
 ROLE_SOURCE_PATH = ROOT / "ayurveda-data" / "rules" / "food-roles.json"
 ROLE_GOLDENS_PATH = ROOT / "ayurveda-data" / "tests" / "food-role-goldens.json"
 MODIFIERS_PATH = ROOT / "ayurveda-data" / "rules" / "modifiers.json"
-FOODS_PATH = ROOT / "WiseEating" / "Legacy" / "foods.json"
-SEED_PATH = ROOT / "WiseEating" / "ayurveda_seed.json.gz"
-ROLE_ARTIFACT_PATH = ROOT / "WiseEating" / "food_roles.json.gz"
+FOODS_PATH = ROOT / "Ayura" / "Legacy" / "foods.json"
+SEED_PATH = ROOT / "Ayura" / "ayurveda_seed.json.gz"
+ROLE_ARTIFACT_PATH = ROOT / "Ayura" / "food_roles.json.gz"
 KNOWLEDGE_BASE_PATH = (
-    ROOT / "WiseEating" / "FoodSearch" / "SearchKnowledgeBase.swift"
+    ROOT / "Ayura" / "FoodSearch" / "SearchKnowledgeBase.swift"
 )
 RUNTIME_PATH = (
     ROOT
-    / "WiseEating"
+    / "Ayura"
     / "AI"
     / "MealPlanning"
     / "FoodRoleResolver.swift"

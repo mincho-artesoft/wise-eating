@@ -1,20 +1,20 @@
 import XCTest
 
 final class VAL1DeviceDriverUITests: XCTestCase {
-    private let wiseEatingBundleID = "WiseEating.Arte-Soft"
+    private let ayuraBundleID = "Ayura.Arte-Soft"
 
     override func setUpWithError() throws {
         continueAfterFailure = false
     }
 
-    func testCaptureWiseEatingHierarchy() throws {
-        let app = XCUIApplication(bundleIdentifier: wiseEatingBundleID)
-        app.launchArguments = ["-wePlannerTelemetry", "-uiTestNoAds"]
+    func testCaptureAyuraHierarchy() throws {
+        let app = XCUIApplication(bundleIdentifier: ayuraBundleID)
+        app.launchArguments = ["-ayuraPlannerTelemetry", "-uiTestNoAds"]
         app.launch()
 
         XCTAssertTrue(
             app.wait(for: .runningForeground, timeout: 30),
-            "Wise Eating did not reach the foreground"
+            "Ayura did not reach the foreground"
         )
         sleep(15)
         print("VAL1-HIERARCHY-BEGIN")
@@ -22,7 +22,7 @@ final class VAL1DeviceDriverUITests: XCTestCase {
         print("VAL1-HIERARCHY-END")
 
         let attachment = XCTAttachment(screenshot: app.screenshot())
-        attachment.name = "VAL1-WiseEating-root"
+        attachment.name = "VAL1-Ayura-root"
         attachment.lifetime = .keepAlways
         add(attachment)
     }
@@ -42,11 +42,11 @@ final class VAL1DeviceDriverUITests: XCTestCase {
             return
         }
 
-        let app = XCUIApplication(bundleIdentifier: wiseEatingBundleID)
+        let app = XCUIApplication(bundleIdentifier: ayuraBundleID)
         app.activate()
         XCTAssertTrue(
             app.wait(for: .runningForeground, timeout: 30),
-            "Wise Eating did not reach the foreground"
+            "Ayura did not reach the foreground"
         )
 
         let mealPlansFilter = app.buttons["Meal Plans"]
@@ -117,11 +117,11 @@ final class VAL1DeviceDriverUITests: XCTestCase {
     }
 
     func testSingleColdLaunchMetric() throws {
-        let app = XCUIApplication(bundleIdentifier: wiseEatingBundleID)
+        let app = XCUIApplication(bundleIdentifier: ayuraBundleID)
         app.launchArguments = [
             "-uiTestNoAds",
-            "-we6LaunchProfile",
-            "-wePlannerTelemetry"
+            "-ayuraLaunchProfile",
+            "-ayuraPlannerTelemetry"
         ]
 
         let options = XCTMeasureOptions()

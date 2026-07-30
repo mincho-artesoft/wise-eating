@@ -3,11 +3,11 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
-ROOT_LAUNCHER = ROOT / "WiseEating" / "Main" / "RootLauncher.swift"
-DATABASE_SETUP = ROOT / "WiseEating" / "Main" / "DBSeed" / "DatabaseSetup.swift"
+ROOT_LAUNCHER = ROOT / "Ayura" / "Main" / "RootLauncher.swift"
+DATABASE_SETUP = ROOT / "Ayura" / "Main" / "DBSeed" / "DatabaseSetup.swift"
 SEARCH_ENGINE = (
     ROOT
-    / "WiseEating"
+    / "Ayura"
     / "FoodSearch"
     / "VM"
     / "SmartFoodSearchEngine.swift"
@@ -47,13 +47,13 @@ class WE6LaunchTests(unittest.TestCase):
     def test_launch_probe_is_opt_in(self):
         source = DATABASE_SETUP.read_text(encoding="utf-8")
         self.assertIn('arguments.contains(', source)
-        self.assertIn('"-we6LaunchProfile"', source)
+        self.assertIn('"-ayuraLaunchProfile"', source)
         self.assertIn("os_signpost(.event", source)
 
     def test_warm_ayurveda_version_check_avoids_full_seed_decode(self):
         source = (
             ROOT
-            / "WiseEating"
+            / "Ayura"
             / "Main"
             / "DBSeed"
             / "AyurvedaSeeder.swift"

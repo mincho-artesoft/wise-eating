@@ -3,10 +3,10 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-MANIFEST="$REPO_ROOT/WiseEating/Food/assets-manifest.json"
+MANIFEST="$REPO_ROOT/Ayura/Food/assets-manifest.json"
 
 if [[ ! -f "$MANIFEST" ]]; then
-    echo "MISSING: WiseEating/Food/assets-manifest.json" >&2
+    echo "MISSING: Ayura/Food/assets-manifest.json" >&2
     exit 1
 fi
 

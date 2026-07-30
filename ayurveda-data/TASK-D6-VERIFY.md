@@ -19,9 +19,9 @@ STOP that phase. Never modify source files. Never force-push anything.
 
 ## Phase 1 — Build gate (branch: ayurveda-app)
 
-1. `xcodebuild -list -project WiseEating.xcodeproj` — record schemes.
+1. `xcodebuild -list -project Ayura.xcodeproj` — record schemes.
 2. Build for simulator with the app scheme:
-   `xcodebuild -project WiseEating.xcodeproj -scheme <APP_SCHEME> -destination 'platform=iOS Simulator,name=iPhone 16' -configuration Debug build`
+   `xcodebuild -project Ayura.xcodeproj -scheme <APP_SCHEME> -destination 'platform=iOS Simulator,name=iPhone 16' -configuration Debug build`
    (pick an available device from `xcrun simctl list devices available` if iPhone 16 is absent).
 3. Record: exit code, and on failure the LAST 100 lines verbatim. A failed build
    stops Phases 2–4; still do Phase 5 report.

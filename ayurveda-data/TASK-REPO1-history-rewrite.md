@@ -15,14 +15,14 @@ anything.
 
 | path | total | commits | kind |
 |---|---:|---:|---|
-| `WiseEating/preseeded_db.store.gz.part-aa` | 490.0 MB | 7 | derived |
+| `Ayura/preseeded_db.store.gz.part-aa` | 490.0 MB | 7 | derived |
 | `…/xcuserdata/…/UserInterfaceState.xcuserstate` | 294.7 MB | 103 | noise |
-| `WiseEating/preseeded_db.store.gz.part-ab` | 139.4 MB | 7 | derived |
-| `WiseEating/Food/food_archive_480.mp4` | 78.9 MB | 1 | derived |
-| `WiseEating/Legacy/foods.json` | 65.6 MB | 1 | **source** |
-| `WiseEating/Legacy/product_buckets.json` | 62.6 MB | 1 | **source** |
-| `WiseEating/Food/food_archive_144.mp4` | 35.8 MB | 1 | derived |
-| `WiseEating/Legacy/vocabulary.json` | 12.8 MB | 1 | **source** |
+| `Ayura/preseeded_db.store.gz.part-ab` | 139.4 MB | 7 | derived |
+| `Ayura/Food/food_archive_480.mp4` | 78.9 MB | 1 | derived |
+| `Ayura/Legacy/foods.json` | 65.6 MB | 1 | **source** |
+| `Ayura/Legacy/product_buckets.json` | 62.6 MB | 1 | **source** |
+| `Ayura/Food/food_archive_144.mp4` | 35.8 MB | 1 | derived |
+| `Ayura/Legacy/vocabulary.json` | 12.8 MB | 1 | **source** |
 
 **The rule is strip derived, keep source.** Everything removed here is
 reproducible from something that stays: the database from the Legacy JSONs via
@@ -62,10 +62,10 @@ be stripped somewhere outside the repo — `~/wise-eating-assets/` — because
 filter-repo removes a path from **all** commits including HEAD, so these
 disappear from the working tree too:
 
-    WiseEating/preseeded_db.store.gz.part-aa
-    WiseEating/preseeded_db.store.gz.part-ab
-    WiseEating/Food/food_archive_480.mp4
-    WiseEating/Food/food_archive_144.mp4
+    Ayura/preseeded_db.store.gz.part-aa
+    Ayura/preseeded_db.store.gz.part-ab
+    Ayura/Food/food_archive_480.mp4
+    Ayura/Food/food_archive_144.mp4
 
 Verify each copy's sha256 against the original before continuing. **Do not
 proceed until the mirror exists and the four checksums match.**
@@ -74,10 +74,10 @@ proceed until the mirror exists and the four checksums match.**
 
 Run `git filter-repo` on a **fresh clone**, not on the working repo:
 
-    --path WiseEating/preseeded_db.store.gz.part-aa \
-    --path WiseEating/preseeded_db.store.gz.part-ab \
-    --path WiseEating/Food/food_archive_480.mp4 \
-    --path WiseEating/Food/food_archive_144.mp4 \
+    --path Ayura/preseeded_db.store.gz.part-aa \
+    --path Ayura/preseeded_db.store.gz.part-ab \
+    --path Ayura/Food/food_archive_480.mp4 \
+    --path Ayura/Food/food_archive_144.mp4 \
     --path-glob '*.xcuserstate' \
     --path-glob '*/xcuserdata/*' \
     --invert-paths
@@ -107,8 +107,8 @@ anchor and that is a finding, not a nit.
 `~/wise-eating-assets/` back to their original paths. They are now untracked.
 Add to `.gitignore`:
 
-    WiseEating/Food/food_archive*.mp4
-    WiseEating/preseeded_db.store.gz.part-*
+    Ayura/Food/food_archive*.mp4
+    Ayura/preseeded_db.store.gz.part-*
     .DS_Store
 
 **D3 — make their absence loud.** The project uses
@@ -116,7 +116,7 @@ Add to `.gitignore`:
 error** — it produces an app that launches with no food imagery and no seeded
 database. Add:
 
-- `WiseEating/Food/assets-manifest.json`, tracked, listing filename, sha256, byte
+- `Ayura/Food/assets-manifest.json`, tracked, listing filename, sha256, byte
   size, frame count and producing commit for each archive and each db part;
 - `tools/check-assets.sh`, verifying every manifest entry exists and matches, exit
   non-zero listing what is missing;
@@ -147,7 +147,7 @@ task.
 | **R6** | `tools/check-assets.sh` passes with assets present, and **fails** with one removed — test both directions |
 | **R7** | app builds and launches with seeded database and working food imagery |
 | **R8** | 150/150 tests, Debug and Release |
-| **R9** | Legacy JSONs still tracked and intact — `git ls-files WiseEating/Legacy` returns all five |
+| **R9** | Legacy JSONs still tracked and intact — `git ls-files Ayura/Legacy` returns all five |
 
 Stop and report on R2 or R5. R2 failing means commits were lost. R5 failing means
 the measurement record lost its anchors — both are worse than a large repo.

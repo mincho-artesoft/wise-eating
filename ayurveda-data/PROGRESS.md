@@ -68,7 +68,7 @@ cross-linking.
 ## Validation
 
 `python3 ayurveda-data/validate.py --store /tmp/pre` (store from
-`cat WiseEating/preseeded_db.store.gz.part-aa WiseEating/preseeded_db.store.gz.part-ab > /tmp/pre.gz && gunzip -f /tmp/pre.gz`).
+`cat Ayura/preseeded_db.store.gz.part-aa Ayura/preseeded_db.store.gz.part-ab > /tmp/pre.gz && gunzip -f /tmp/pre.gz`).
 Current status: **714 dravyas, 1,500 recipes — all checks pass.**
 
 The reconstructed store is the full build-time artifact: 14,484
@@ -98,7 +98,7 @@ nutrients share query-ordered display context; pH boundary, unknown-data
 exclusion counting, and sort-only visibility are centralized; and command
 heuristics require word/token boundaries. All 25 WE-4 goldens remain exact and
 the WE-4 median-latency budget remains green. The active engine source is
-`WiseEating/FoodSearch/VM/SmartFoodSearchEngine.swift`; `WiseEating/Legacy/`
+`Ayura/FoodSearch/VM/SmartFoodSearchEngine.swift`; `Ayura/Legacy/`
 was not touched. See `REPORT-WE5.md`.
 
 WE-6 signpost profiling re-established the cold-process baseline at 3.405s and
@@ -109,7 +109,7 @@ load-plus-query returns real results in 1.691s, all 25 goldens remain exact, and
 the worst warm-query median delta is +3.4%. Fresh install remains zero Ayurveda
 inserts/updates and no search rebuild. See `REPORT-WE6.md`.
 
-WE-7 audited every shipping member under `WiseEating/Legacy/`. Nine Swift files
+WE-7 audited every shipping member under `Ayura/Legacy/`. Nine Swift files
 were compiler inputs but consisted entirely of 2,288 commented lines, declared
 no compiled symbols, and had no static, interface, Objective-C runtime, selector,
 or string-based inbound reference; that single dead cluster was removed. The

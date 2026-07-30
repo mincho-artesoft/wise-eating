@@ -22,7 +22,7 @@ is forward-compatible with both), expert review promotion.
 | A3 simulated (director) | 331 primary foods · **383 placeholders** (333 unbound + 50 contested losers) · 336 links |
 | Engine exclusions | `dravya.betel-nut`, `dravya.vanaspati` (flagged in `reviewNote` prose only — must become a structured flag) |
 | User-added id scheme | `nextFoodId() = max(id)+1` → existing users occupy 12,602+ |
-| Xcode project | objectVersion 77, fileSystemSynchronized — new files under `WiseEating/` join the target automatically |
+| Xcode project | objectVersion 77, fileSystemSynchronized — new files under `Ayura/` join the target automatically |
 | Recipe instructions | live in `FoodItem.itemDescription` (no structured steps field) |
 | Search index | `SearchIndexStore.rebuildIndexIfNeeded` auto-rebuilds when food count drifts >5 |
 
@@ -62,7 +62,7 @@ All 40 contested fdcIds and every placeholder are listed in the build report.
 
 **A5 — Seed bundle.**
 `ayurveda-data/build_seed.py` packs everything into one deterministic artifact,
-`WiseEating/ayurveda_seed.json.gz` (auto-included as a bundle resource by the
+`Ayura/ayurveda_seed.json.gz` (auto-included as a bundle resource by the
 synchronized project):
 
 ```json

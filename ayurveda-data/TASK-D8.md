@@ -12,15 +12,15 @@ numbers to force a gate.*
 
 | # | File | Action |
 |---|---|---|
-| 1 | `WiseEating/Ayurveda/AyurvedaDisplayMath.swift` | create (DESIGN U4 — Foundation-only) |
-| 2 | `WiseEating/Ayurveda/Views/AyurvedaDisplay.swift` | create (U3) |
-| 3 | `WiseEating/Ayurveda/Views/AyurvedaSectionView.swift` | create (U1/U2/U5/U8) |
-| 4 | `WiseEating/Ayurveda/Views/DoshaBarsView.swift` | create (U6) |
-| 5 | `WiseEating/Ayurveda/Views/AyurvedaChipsView.swift` | create (U7) |
-| 6 | `WiseEating/Ayurveda/Views/AyurvedaEditorSection.swift` | create (U10) |
-| 7 | `WiseEating/Ayurveda/AyurvedaResolver.swift` | edit (U9.3 `.user` case only) |
-| 8 | `WiseEating/Food/Views/FoodItemDetailView.swift` | edit (U1: one section var + one VStack entry) |
-| 9 | `WiseEating/Food/Views/FoodItemEditorView.swift` | edit (U9/U10: `@State` form + `showAyurveda`, section after `otherSection`, prefill task, one call in `save()`) |
+| 1 | `Ayura/Ayurveda/AyurvedaDisplayMath.swift` | create (DESIGN U4 — Foundation-only) |
+| 2 | `Ayura/Ayurveda/Views/AyurvedaDisplay.swift` | create (U3) |
+| 3 | `Ayura/Ayurveda/Views/AyurvedaSectionView.swift` | create (U1/U2/U5/U8) |
+| 4 | `Ayura/Ayurveda/Views/DoshaBarsView.swift` | create (U6) |
+| 5 | `Ayura/Ayurveda/Views/AyurvedaChipsView.swift` | create (U7) |
+| 6 | `Ayura/Ayurveda/Views/AyurvedaEditorSection.swift` | create (U10) |
+| 7 | `Ayura/Ayurveda/AyurvedaResolver.swift` | edit (U9.3 `.user` case only) |
+| 8 | `Ayura/Food/Views/FoodItemDetailView.swift` | edit (U1: one section var + one VStack entry) |
+| 9 | `Ayura/Food/Views/FoodItemEditorView.swift` | edit (U9/U10: `@State` form + `showAyurveda`, section after `otherSection`, prefill task, one call in `save()`) |
 | 10 | `ayurveda-data/tools/d8_math_check.swift` | create (G2 harness) |
 | 11 | `ayurveda-data/REPORT-D8.md` | create (format below) |
 
@@ -60,14 +60,14 @@ exactly files 1–11.
 from DESIGN U4 — stop and report):**
 
 ```
-swiftc -o /tmp/d8check WiseEating/Ayurveda/AyurvedaDisplayMath.swift ayurveda-data/tools/d8_math_check.swift && /tmp/d8check
+swiftc -o /tmp/d8check Ayura/Ayurveda/AyurvedaDisplayMath.swift ayurveda-data/tools/d8_math_check.swift && /tmp/d8check
 ```
 
 must print `D8 MATH CHECK: 31/31 PASS` — the 31 assertions are exactly the
 §Simulated reference numbers tables (10 percentage vectors, 7 tier labels,
 5 effect labels, 5 value strings, 4 bar fractions), hardcoded in the harness.
 
-**G3 — build.** `xcodebuild -project WiseEating.xcodeproj -scheme WiseEating
+**G3 — build.** `xcodebuild -project Ayura.xcodeproj -scheme Ayura
 -destination 'platform=iOS Simulator,name=iPhone 16' build` succeeds; zero new
 warnings vs. a pre-change baseline build (record both warning counts).
 
@@ -85,11 +85,11 @@ detail updates; relaunch app → values persist and
 `AyurvedaProfile` count with id prefix `user.` == 1. Total seeded counts
 unchanged: profiles 2,214 (+1 user = 2,215 total), links 2,305.
 
-**G6 — data untouched.** `cat WiseEating/preseeded_db.store.gz.part-aa
-WiseEating/preseeded_db.store.gz.part-ab > /tmp/pre.gz && gunzip -f /tmp/pre.gz`
+**G6 — data untouched.** `cat Ayura/preseeded_db.store.gz.part-aa
+Ayura/preseeded_db.store.gz.part-ab > /tmp/pre.gz && gunzip -f /tmp/pre.gz`
 then `python3 ayurveda-data/validate.py --store /tmp/pre` fully green;
 `git diff` shows no change under `ayurveda-data/` except `tools/d8_math_check.swift`
-and `REPORT-D8.md`, and no change to `WiseEating/ayurveda_seed.json.gz` /
+and `REPORT-D8.md`, and no change to `Ayura/ayurveda_seed.json.gz` /
 `ayurveda_rules.json`.
 
 ## REPORT-D8.md format

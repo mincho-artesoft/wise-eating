@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>FIX1VideoSpotCheck</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.wiseeating.fix1-video-spot-check</string>
+	<string>com.ayura.fix1-video-spot-check</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

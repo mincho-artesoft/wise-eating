@@ -53,13 +53,13 @@ virya/vipaka.
 ## Constraints
 - Match the app's glassmorphism (`glassCardStyle`) and support dark mode.
 - Type-checker budget: every component above is its own small file/struct
-  under WiseEating/Ayurveda/Views/ (DoshaScaleSelector, AyurvedaChip,
+  under Ayura/Ayurveda/Views/ (DoshaScaleSelector, AyurvedaChip,
   ChipGrid, EffectSegmentPicker); extracted handlers; explicit Sendable where
   shared value types arise.
 - Accessibility: VoiceOver labels ("Vata effect", value "minus two, strongly
   pacifies", hint "adjusts dosha effect"); chips report selected state;
   all targets ≥ 44pt.
-- No changes outside WiseEating/Ayurveda/Views/ + the report + handbook.
+- No changes outside Ayura/Ayurveda/Views/ + the report + handbook.
 
 ## Gates
 - G1 build PASS, zero new warnings vs baseline.

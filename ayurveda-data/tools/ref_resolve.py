@@ -11,7 +11,7 @@ Usage:  python3 ref_resolve.py <path to ayurveda-data> <path to foods.json>
 import json, re, sys, collections, random
 
 BASE = sys.argv[1] if len(sys.argv) > 1 else "."
-FOODS = sys.argv[2] if len(sys.argv) > 2 else "../WiseEating/Legacy/foods.json"
+FOODS = sys.argv[2] if len(sys.argv) > 2 else "../Ayura/Legacy/foods.json"
 
 RULES = json.load(open(f"{BASE}/rules/food-roles.json"))
 _SING = {}

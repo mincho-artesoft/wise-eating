@@ -92,7 +92,7 @@ primary worklist — cover those names first, then fill each batch theme to 50.
 ## Validation (must pass before every commit)
 
 ```
-cat WiseEating/preseeded_db.store.gz.part-aa WiseEating/preseeded_db.store.gz.part-ab > /tmp/pre.gz && gunzip -f /tmp/pre.gz
+cat Ayura/preseeded_db.store.gz.part-aa Ayura/preseeded_db.store.gz.part-ab > /tmp/pre.gz && gunzip -f /tmp/pre.gz
 python3 ayurveda-data/validate.py --store /tmp/pre
 ```
 

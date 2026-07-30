@@ -14,7 +14,7 @@ enforcement automatically.
 
 ## Design (normative)
 
-New file `WiseEating/Ayurveda/AyurvedaRecommendationGate.swift`:
+New file `Ayura/Ayurveda/AyurvedaRecommendationGate.swift`:
 
 ```swift
 @MainActor
@@ -36,9 +36,9 @@ public enum AyurvedaRecommendationGate {
 ```
 
 Enforcement points (every place the app selects, generates, or proposes foods):
-1. `WiseEating/AI/MealPlanning/*` — filter candidate FoodItems through
+1. `Ayura/AI/MealPlanning/*` — filter candidate FoodItems through
    `excludedFoodIds` before plan assembly.
-2. `WiseEating/AI/DietGeneration/*`, `MenuGeneration/*`, `ReceptGeneration/*`,
+2. `Ayura/AI/DietGeneration/*`, `MenuGeneration/*`, `ReceptGeneration/*`,
    `FoodGeneration/*` — (a) filter any catalog candidates by foodId; (b) for
    AI free-text output, screen generated ingredient/food names with
    `nameIsExcluded` — drop the item and log `🚫 AyurvedaGate:` line.

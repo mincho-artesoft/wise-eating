@@ -19,8 +19,8 @@ class PreseedArtifactTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         parts = [
-            REPO_ROOT / "WiseEating" / "preseeded_db.store.gz.part-aa",
-            REPO_ROOT / "WiseEating" / "preseeded_db.store.gz.part-ab",
+            REPO_ROOT / "Ayura" / "preseeded_db.store.gz.part-aa",
+            REPO_ROOT / "Ayura" / "preseeded_db.store.gz.part-ab",
         ]
         cls.temporary = tempfile.TemporaryDirectory(prefix="we2-preseed-test-")
         cls.store = Path(cls.temporary.name) / "default.store"
@@ -29,7 +29,7 @@ class PreseedArtifactTests(unittest.TestCase):
         cls.audit = build_preseeded_store.audit_store(cls.store)
         cls.connection = sqlite3.connect(cls.store)
         with gzip.open(
-            REPO_ROOT / "WiseEating" / "ayurveda_seed.json.gz",
+            REPO_ROOT / "Ayura" / "ayurveda_seed.json.gz",
             "rt",
             encoding="utf-8",
         ) as source:

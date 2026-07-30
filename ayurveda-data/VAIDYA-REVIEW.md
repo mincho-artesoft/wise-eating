@@ -1,6 +1,6 @@
 # Vaidya Review — decisions needed before the Ayurvedic meal planner is switched on
 
-Prepared for clinical review · 2026-07-27 · WiseEating
+Prepared for clinical review · 2026-07-27 · Ayura
 
 ---
 

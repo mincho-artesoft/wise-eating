@@ -8,12 +8,12 @@ exactly). Repo: wise-eating. Do not push. Touch only the files listed below.*
 | # | File | Action |
 |---|---|---|
 | 1 | `ayurveda-data/build_seed.py` | create |
-| 2 | `WiseEating/ayurveda_seed.json.gz` | generate via #1, commit |
-| 3 | `WiseEating/Ayurveda/AyurvedaProfile.swift` | create (both models, per DESIGN §Model definitions, verbatim field set) |
-| 4 | `WiseEating/Ayurveda/AyurvedaResolver.swift` | create (A9) |
-| 5 | `WiseEating/Main/DBSeed/AyurvedaSeeder.swift` | create (the insert pass) |
-| 6 | `WiseEating/Main/DBSeed/SeedManager.swift` | edit: add `await seedAyurvedaIfNeeded(context: ctx)` directly after `seedFoodsIfNeeded` |
-| 7 | `WiseEating/Main/DBSeed/DatabaseSetup.swift` | edit: append `AyurvedaProfile.self, AyurvedaLink.self` to `mainTypes` |
+| 2 | `Ayura/ayurveda_seed.json.gz` | generate via #1, commit |
+| 3 | `Ayura/Ayurveda/AyurvedaProfile.swift` | create (both models, per DESIGN §Model definitions, verbatim field set) |
+| 4 | `Ayura/Ayurveda/AyurvedaResolver.swift` | create (A9) |
+| 5 | `Ayura/Main/DBSeed/AyurvedaSeeder.swift` | create (the insert pass) |
+| 6 | `Ayura/Main/DBSeed/SeedManager.swift` | edit: add `await seedAyurvedaIfNeeded(context: ctx)` directly after `seedFoodsIfNeeded` |
+| 7 | `Ayura/Main/DBSeed/DatabaseSetup.swift` | edit: append `AyurvedaProfile.self, AyurvedaLink.self` to `mainTypes` |
 | 8 | `ayurveda-data/REPORT-D6.md` | create (format below) |
 
 No other file may change. `git diff --stat` in the report must show exactly these.
@@ -38,7 +38,7 @@ Inputs: `dravyas/batch-*.json`, `recipes/batch-*.json`, the preseeded store
 6. `engineExcluded: true` for exactly `dravya.betel-nut` and `dravya.vanaspati`.
 7. Emit the JSON envelope from DESIGN A5 (sorted keys, `sort_keys=True`,
    `generatedAt` allowed only in the envelope header), gzip with `mtime=0` so the
-   artifact is **byte-deterministic**; write to `WiseEating/ayurveda_seed.json.gz`.
+   artifact is **byte-deterministic**; write to `Ayura/ayurveda_seed.json.gz`.
 8. Print a summary block (counts, contested-fdcId table, placeholder list) — paste
    it into the report.
 

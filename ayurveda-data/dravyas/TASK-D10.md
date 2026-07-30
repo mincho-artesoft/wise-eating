@@ -12,7 +12,7 @@ write Ayurvedic properties.
   Skip those (match by id AND by name similarity — some ids differ slightly,
   e.g. canon `dravya.ginger` vs authored `dravya.ginger-fresh`; when unsure,
   list the pair in the report instead of duplicating).
-- USDA store: `cat WiseEating/preseeded_db.store.gz.part-aa WiseEating/preseeded_db.store.gz.part-ab > /tmp/pre.gz && gunzip -f /tmp/pre.gz`
+- USDA store: `cat Ayura/preseeded_db.store.gz.part-aa Ayura/preseeded_db.store.gz.part-ab > /tmp/pre.gz && gunzip -f /tmp/pre.gz`
   → SQLite at /tmp/pre, table ZFOODITEM (ZID, ZNAME). It contains many Indian
   items — search English, Hindi and Sanskrit names before giving up.
 

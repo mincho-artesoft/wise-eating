@@ -251,7 +251,7 @@ def d34_validate(here, store, errs):
 
     category_path = os.path.join(here, "rules", "category-rules.json")
     modifier_path = os.path.join(here, "rules", "modifiers.json")
-    bundle_path = os.path.join(here, "..", "WiseEating", "ayurveda_rules.json")
+    bundle_path = os.path.join(here, "..", "Ayura", "ayurveda_rules.json")
     try:
         category_source = json.load(open(category_path))
         modifier_source = json.load(open(modifier_path))
@@ -312,7 +312,7 @@ def d34_validate(here, store, errs):
     if len(set(modifier_ids)) != len(modifier_ids):
         errs.append("D34/modifiers: ids are not unique")
 
-    seed_path = os.path.join(here, "..", "WiseEating", "ayurveda_seed.json.gz")
+    seed_path = os.path.join(here, "..", "Ayura", "ayurveda_seed.json.gz")
     try:
         with gzip.open(seed_path, "rt", encoding="utf-8") as source:
             seed = json.load(source)

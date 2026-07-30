@@ -16,7 +16,7 @@ from PIL import Image, ImageChops, ImageStat
 
 ROOT = Path(__file__).resolve().parents[2]
 BASELINES = ROOT / "ayurveda-data/tests/snapshots/we3"
-BUNDLE_ID = "com.wiseeating.we3snapshots"
+BUNDLE_ID = "com.ayura.we3snapshots"
 SNAPSHOT_NAMES = [
     "ayurveda-light-default.png",
     "ayurveda-dark-default.png",
@@ -25,14 +25,14 @@ SNAPSHOT_NAMES = [
 ]
 
 SOURCE_FILES = [
-    ROOT / "WiseEating/Ayurveda/AyurvedaDisplayMath.swift",
-    ROOT / "WiseEating/Ayurveda/Views/AyurvedaDisplay.swift",
-    ROOT / "WiseEating/Ayurveda/Views/AyurvedaSectionView.swift",
-    ROOT / "WiseEating/Ayurveda/Views/AyurvedaChip.swift",
-    ROOT / "WiseEating/Ayurveda/Views/ChipGrid.swift",
-    ROOT / "WiseEating/Ayurveda/Views/DoshaBarsView.swift",
-    ROOT / "WiseEating/Ayurveda/Views/DoshaScaleSelector.swift",
-    ROOT / "WiseEating/Food/Views/CustomFlowLayout.swift",
+    ROOT / "Ayura/Ayurveda/AyurvedaDisplayMath.swift",
+    ROOT / "Ayura/Ayurveda/Views/AyurvedaDisplay.swift",
+    ROOT / "Ayura/Ayurveda/Views/AyurvedaSectionView.swift",
+    ROOT / "Ayura/Ayurveda/Views/AyurvedaChip.swift",
+    ROOT / "Ayura/Ayurveda/Views/ChipGrid.swift",
+    ROOT / "Ayura/Ayurveda/Views/DoshaBarsView.swift",
+    ROOT / "Ayura/Ayurveda/Views/DoshaScaleSelector.swift",
+    ROOT / "Ayura/Food/Views/CustomFlowLayout.swift",
 ]
 
 COLOR_ASSETS = [
@@ -322,7 +322,7 @@ def write_fixture(tmp):
     (fixture_assets / "Contents.json").write_text(
         '{"info":{"author":"xcode","version":1}}\n'
     )
-    assets = ROOT / "WiseEating/Assets.xcassets"
+    assets = ROOT / "Ayura/Assets.xcassets"
     for name in COLOR_ASSETS:
         shutil.copytree(assets / name, fixture_assets / name)
 

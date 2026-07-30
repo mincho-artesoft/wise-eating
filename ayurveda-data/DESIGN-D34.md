@@ -121,7 +121,7 @@ review interface): `force {fdcId: dravyaId}`, `deny [fdcId]` (+`denyNotes`),
 - reads `crosswalk/crosswalk.csv` and appends `{"fdcId", "dravyaId", "tier": "derived"}`
   entries to the existing `links` array → 2,305 links; envelope `seedVersion: 2`;
   `counts` gains `"derivedLinks": 1969`, `"categoryRules": 187`, `"modifiers": 14`.
-- additionally emits `WiseEating/ayurveda_rules.json` — a small uncompressed bundle
+- additionally emits `Ayura/ayurveda_rules.json` — a small uncompressed bundle
   resource `{rulesVersion, categories, default, modifiers}` consumed by the resolver
   at runtime (loading the 12MB seed gz per lookup-cache init would be absurd).
 - determinism gate unchanged: two runs → byte-identical gz **and** rules.json.
@@ -142,7 +142,7 @@ the key, fail-open (D6 A6). Idempotence: a second run inserts 0 rows. Nothing he
 threatens shipped users — the app is pre-release; bands, models, recipes untouched.
 
 **B9 — Resolver: `.estimated` goes live (closes the D6 A9 stub).**
-New `WiseEating/Ayurveda/AyurvedaRules.swift`: singleton that decodes
+New `Ayura/Ayurveda/AyurvedaRules.swift`: singleton that decodes
 `ayurveda_rules.json` once, mirrors the normalization of B6 exactly, and exposes
 `categoryRule(for:)` + `appliedModifiers(name:)`. `AyurvedaResolver.resolve(for:)`
 becomes total for store foods:

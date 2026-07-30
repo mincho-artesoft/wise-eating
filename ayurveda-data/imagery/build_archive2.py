@@ -84,7 +84,7 @@ def main():
     # Stable order: sorting by frameKey makes the archive reproducible.
     accepted.sort(key=lambda r: r["frameKey"])
 
-    existing = set(json.load(open(f"{a.repo}/WiseEating/Food/frame_map.json")))
+    existing = set(json.load(open(f"{a.repo}/Ayura/Food/frame_map.json")))
     clash = [r["frameKey"] for r in accepted if r["frameKey"] in existing]
     if clash:
         sys.exit(f"{len(clash)} frameKeys already exist in frame_map.json, e.g. {clash[:3]}. "

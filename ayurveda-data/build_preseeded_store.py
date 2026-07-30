@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit, compact, gzip, and split a completed WiseEating build-time store."""
+"""Audit, compact, gzip, and split a completed Ayura build-time store."""
 
 from __future__ import annotations
 
@@ -43,7 +43,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--output-directory",
         type=Path,
-        default=repo_root / "WiseEating",
+        default=repo_root / "Ayura",
     )
     return parser.parse_args()
 
@@ -456,7 +456,7 @@ def write_parts(gzip_path: Path, output_directory: Path) -> tuple[Path, Path]:
 def main() -> int:
     args = parse_args()
     source = args.source_store.resolve()
-    with tempfile.TemporaryDirectory(prefix="wise-eating-preseed-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="ayura-preseed-") as temporary:
         temporary_root = Path(temporary)
         compacted = temporary_root / "default.store"
         compressed = temporary_root / "preseeded_db.store.gz"

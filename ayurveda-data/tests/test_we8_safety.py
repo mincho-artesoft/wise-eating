@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 BUILD_SEED_PATH = ROOT / "ayurveda-data" / "build_seed.py"
-KNOWLEDGE_BASE = ROOT / "WiseEating" / "FoodSearch" / "SearchKnowledgeBase.swift"
+KNOWLEDGE_BASE = ROOT / "Ayura" / "FoodSearch" / "SearchKnowledgeBase.swift"
 GOLDEN = ROOT / "ayurveda-data" / "tests" / "fixtures" / "we4_golden_queries.json"
 SPEC = importlib.util.spec_from_file_location("build_seed_we8", BUILD_SEED_PATH)
 assert SPEC and SPEC.loader
@@ -21,7 +21,7 @@ class WE8SafetyDerivationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         data_root = ROOT / "ayurveda-data"
-        foods_path = ROOT / "WiseEating" / "Legacy" / "foods.json"
+        foods_path = ROOT / "Ayura" / "Legacy" / "foods.json"
         foods = json.loads(foods_path.read_text(encoding="utf-8"))
         cls.store_ids = {food["id"] for food in foods}
         cls.source_safety = build_seed.load_food_safety(
@@ -193,15 +193,15 @@ class WE8PreseedSafetyTests(unittest.TestCase):
         cls.temporary = tempfile.TemporaryDirectory(prefix="we8-preseed-")
         cls.store = Path(cls.temporary.name) / "preseed.store"
         parts = [
-            ROOT / "WiseEating" / "preseeded_db.store.gz.part-aa",
-            ROOT / "WiseEating" / "preseeded_db.store.gz.part-ab",
+            ROOT / "Ayura" / "preseeded_db.store.gz.part-aa",
+            ROOT / "Ayura" / "preseeded_db.store.gz.part-ab",
         ]
         cls.store.write_bytes(
             gzip.decompress(b"".join(part.read_bytes() for part in parts))
         )
         cls.connection = sqlite3.connect(cls.store)
         with gzip.open(
-            ROOT / "WiseEating" / "ayurveda_seed.json.gz",
+            ROOT / "Ayura" / "ayurveda_seed.json.gz",
             "rt",
             encoding="utf-8",
         ) as source:
@@ -398,7 +398,7 @@ class WE8PreseedSafetyTests(unittest.TestCase):
         )
         shopping_source = (
             ROOT
-            / "WiseEating"
+            / "Ayura"
             / "ShoppingList"
             / "ViewModels"
             / "ShoppingListVM.swift"

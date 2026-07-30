@@ -10,14 +10,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 PLANNER = (
     ROOT
-    / "WiseEating"
+    / "Ayura"
     / "AI"
     / "MealPlanning"
     / "USDAWeeklyMealPlanner.swift"
 )
 CORPUS = ROOT / "ayurveda-data" / "tests" / "resolution-goldens.json"
 HOLDOUT = ROOT / "ayurveda-data" / "tests" / "resolution-holdout.json"
-CONCEPT_ARTIFACT = ROOT / "WiseEating" / "food_concepts.json.gz"
+CONCEPT_ARTIFACT = ROOT / "Ayura" / "food_concepts.json.gz"
 INCIDENTAL_TOKENS = [
     "raw",
     "cooked",
@@ -36,8 +36,8 @@ INCIDENTAL_TOKENS = [
     "food",
 ]
 ARTIFACT_PARTS = [
-    ROOT / "WiseEating" / "preseeded_db.store.gz.part-aa",
-    ROOT / "WiseEating" / "preseeded_db.store.gz.part-ab",
+    ROOT / "Ayura" / "preseeded_db.store.gz.part-aa",
+    ROOT / "Ayura" / "preseeded_db.store.gz.part-ab",
 ]
 
 
@@ -733,17 +733,17 @@ struct MP3ResolutionHarness {
         planner = PLANNER.read_text(encoding="utf-8")
         solver = (
             ROOT
-            / "WiseEating"
+            / "Ayura"
             / "AI"
             / "MealPlanning"
             / "DeterministicMealPlanSolver.swift"
         ).read_text(encoding="utf-8")
         adapter = (
             ROOT
-            / "WiseEating"
+            / "Ayura"
             / "AI"
             / "MealPlanning"
-            / "DeterministicMealPlanSolver+WiseEating.swift"
+            / "DeterministicMealPlanSolver+Ayura.swift"
         ).read_text(encoding="utf-8")
         self.assertIn(
             "guard referenceWeight > 0",

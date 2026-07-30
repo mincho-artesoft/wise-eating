@@ -42,7 +42,7 @@ New code:
 
 | Path | Purpose |
 |---|---|
-| `WiseEating/AI/MealPlanning/FoodRoleResolver.swift` | resolves role, `notReadyToEat`, headword. Its own file. |
+| `Ayura/AI/MealPlanning/FoodRoleResolver.swift` | resolves role, `notReadyToEat`, headword. Its own file. |
 | solver changes | role-aware eligibility and composition constraints |
 | test target additions | C1–C10 checker, role golden runner, holdout runner |
 

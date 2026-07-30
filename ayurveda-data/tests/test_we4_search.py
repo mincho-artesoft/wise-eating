@@ -11,18 +11,18 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 PARSER = (
     ROOT
-    / "WiseEating"
+    / "Ayura"
     / "FoodSearch"
     / "Constraints"
     / "CanonicalFacetParser.swift"
 )
-SEARCH_ENGINE = ROOT / "WiseEating" / "FoodSearch" / "VM" / "SmartFoodSearchEngine.swift"
-INDEX_STORE = ROOT / "WiseEating" / "FoodSearch" / "SearchIndexStore.swift"
-SYNONYMS = ROOT / "WiseEating" / "FoodSearch" / "food_synonyms.json"
-SEED = ROOT / "WiseEating" / "ayurveda_seed.json.gz"
+SEARCH_ENGINE = ROOT / "Ayura" / "FoodSearch" / "VM" / "SmartFoodSearchEngine.swift"
+INDEX_STORE = ROOT / "Ayura" / "FoodSearch" / "SearchIndexStore.swift"
+SYNONYMS = ROOT / "Ayura" / "FoodSearch" / "food_synonyms.json"
+SEED = ROOT / "Ayura" / "ayurveda_seed.json.gz"
 ARTIFACT_PARTS = [
-    ROOT / "WiseEating" / "preseeded_db.store.gz.part-aa",
-    ROOT / "WiseEating" / "preseeded_db.store.gz.part-ab",
+    ROOT / "Ayura" / "preseeded_db.store.gz.part-aa",
+    ROOT / "Ayura" / "preseeded_db.store.gz.part-ab",
 ]
 GOLDEN = ROOT / "ayurveda-data" / "tests" / "fixtures" / "we4_golden_queries.json"
 

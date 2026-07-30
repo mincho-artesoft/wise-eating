@@ -7,7 +7,7 @@ Two small independent tasks. Neither blocks the `MP5AyurvedicSolverEnabled` flag
 
 ## FIX-1 — 1,023 rows have an image they cannot find
 
-`WiseEating/Food/FoodVideoSource.swift` looks up frames with a raw dictionary hit:
+`Ayura/Food/FoodVideoSource.swift` looks up frames with a raw dictionary hit:
 
 ```swift
 func hasVideo(for foodName: String) -> Bool {

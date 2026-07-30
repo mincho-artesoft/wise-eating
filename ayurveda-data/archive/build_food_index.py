@@ -19,7 +19,7 @@ frame key is carried alongside so both addressing schemes work during migration.
 WHICH CSV IS AUTHORITATIVE — this matters
 -----------------------------------------
 There are two copies of foods_names_with_id.csv and they disagree on 269 ids.
-Verified against WiseEating/Food/frame_map.json:
+Verified against Ayura/Food/frame_map.json:
 
   gemini-food-stylist/generated images/foods_names_with_id.csv
       12,601 rows -> sanitises to exactly the 12,601 frame_map keys.
@@ -68,7 +68,7 @@ def main():
 
     jobs_p = a.jobs or os.path.join(a.repo, "ayurveda-data/imagery/jobs.json")
     reuse_p = a.reuse or os.path.join(a.repo, "ayurveda-data/imagery/reuse-map.json")
-    fmap = json.load(open(os.path.join(a.repo, "WiseEating/Food/frame_map.json")))
+    fmap = json.load(open(os.path.join(a.repo, "Ayura/Food/frame_map.json")))
 
     usda = list(csv.DictReader(open(a.usda_csv)))
     keys = {sanitize(r["name"]) for r in usda}

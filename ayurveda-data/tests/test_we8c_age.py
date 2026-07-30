@@ -12,12 +12,12 @@ ROOT = Path(__file__).resolve().parents[2]
 BUILD_SEED_PATH = ROOT / "ayurveda-data" / "build_seed.py"
 SEARCH_ENGINE = (
     ROOT
-    / "WiseEating"
+    / "Ayura"
     / "FoodSearch"
     / "VM"
     / "SmartFoodSearchEngine.swift"
 )
-FOOD_SEARCH_VIEW = ROOT / "WiseEating" / "FoodSearch" / "FoodSearchView.swift"
+FOOD_SEARCH_VIEW = ROOT / "Ayura" / "FoodSearch" / "FoodSearchView.swift"
 SPEC = importlib.util.spec_from_file_location("build_seed_we8c", BUILD_SEED_PATH)
 assert SPEC and SPEC.loader
 build_seed = importlib.util.module_from_spec(SPEC)
@@ -28,7 +28,7 @@ class WE8CAgeDerivationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         data_root = ROOT / "ayurveda-data"
-        foods_path = ROOT / "WiseEating" / "Legacy" / "foods.json"
+        foods_path = ROOT / "Ayura" / "Legacy" / "foods.json"
         foods = json.loads(foods_path.read_text(encoding="utf-8"))
         cls.store_ids = {food["id"] for food in foods}
         cls.source_safety = build_seed.load_food_safety(
@@ -164,15 +164,15 @@ class WE8CPreseedAgeTests(unittest.TestCase):
         cls.temporary = tempfile.TemporaryDirectory(prefix="we8c-preseed-")
         cls.store = Path(cls.temporary.name) / "preseed.store"
         parts = [
-            ROOT / "WiseEating" / "preseeded_db.store.gz.part-aa",
-            ROOT / "WiseEating" / "preseeded_db.store.gz.part-ab",
+            ROOT / "Ayura" / "preseeded_db.store.gz.part-aa",
+            ROOT / "Ayura" / "preseeded_db.store.gz.part-ab",
         ]
         cls.store.write_bytes(
             gzip.decompress(b"".join(part.read_bytes() for part in parts))
         )
         cls.connection = sqlite3.connect(cls.store)
         with gzip.open(
-            ROOT / "WiseEating" / "ayurveda_seed.json.gz",
+            ROOT / "Ayura" / "ayurveda_seed.json.gz",
             "rt",
             encoding="utf-8",
         ) as source:

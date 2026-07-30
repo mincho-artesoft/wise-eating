@@ -8,20 +8,20 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 PLANNER_PATH = (
     ROOT
-    / "WiseEating"
+    / "Ayura"
     / "AI"
     / "MealPlanning"
     / "USDAWeeklyMealPlanner.swift"
 )
 RECIPE_GENERATOR_PATH = (
     ROOT
-    / "WiseEating"
+    / "Ayura"
     / "AI"
     / "ReceptGeneration"
     / "AIRecipeGenerator.swift"
 )
-CONCEPT_ARTIFACT_PATH = ROOT / "WiseEating" / "food_concepts.json.gz"
-FOODS_PATH = ROOT / "WiseEating" / "Legacy" / "foods.json"
+CONCEPT_ARTIFACT_PATH = ROOT / "Ayura" / "food_concepts.json.gz"
+FOODS_PATH = ROOT / "Ayura" / "Legacy" / "foods.json"
 
 
 class FC2PlannerWiringTests(unittest.TestCase):

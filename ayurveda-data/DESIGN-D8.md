@@ -56,7 +56,7 @@ any change to `FoodItem.swift`.
 `ayurvedaSection`, inserted **between `phSection` and `ingredientsSection`**
 (line 106/107), plus one `private var ayurvedaSection: some View` that is a single
 delegation: `AyurvedaSectionView(food: food)`. All real UI lives in new files under
-`WiseEating/Ayurveda/Views/` so `FoodItemDetailView.swift` changes by ~5 lines.
+`Ayura/Ayurveda/Views/` so `FoodItemDetailView.swift` changes by ~5 lines.
 `AyurvedaSectionView` replicates the `SectionView` header style locally (6 lines —
 do **not** de-fileprivate `SectionView`) and wraps content in
 `.padding().glassCardStyle(cornerRadius: 20)`.
@@ -95,7 +95,7 @@ appliedModifiers → labels; rasa/vipaka/viruddha/contraindications empty,
 sanskrit nil).
 
 **U4 — Tier mapping and display math are pure and gate-tested.** New file
-`WiseEating/Ayurveda/AyurvedaDisplayMath.swift`, **imports Foundation only** (so it
+`Ayura/Ayurveda/AyurvedaDisplayMath.swift`, **imports Foundation only** (so it
 compiles standalone with `swiftc` for gate G2):
 
 ```
@@ -221,15 +221,15 @@ struct; every closure handler extracted; no force-unwraps; raw English literals.
 
 | File | Contents | Action |
 |---|---|---|
-| `WiseEating/Ayurveda/AyurvedaDisplayMath.swift` | U4 pure math, Foundation-only | create |
-| `WiseEating/Ayurveda/Views/AyurvedaDisplay.swift` | U3 struct + `make(from:)` | create |
-| `WiseEating/Ayurveda/Views/AyurvedaSectionView.swift` | U1/U2/U5/U8 shell, tier row, captions | create |
-| `WiseEating/Ayurveda/Views/DoshaBarsView.swift` | U6 bars + % view + toggle | create |
-| `WiseEating/Ayurveda/Views/AyurvedaChipsView.swift` | U7 chips + warnings | create |
-| `WiseEating/Ayurveda/Views/AyurvedaEditorSection.swift` | U10 card, `AyurvedaForm`, `AyurvedaUserProfileStore` | create |
-| `WiseEating/Ayurveda/AyurvedaResolver.swift` | U9.3 `.user` case | edit |
-| `WiseEating/Food/Views/FoodItemDetailView.swift` | U1 (~5 lines) | edit |
-| `WiseEating/Food/Views/FoodItemEditorView.swift` | U9/U10 hooks (state, section, prefill, save call) | edit |
+| `Ayura/Ayurveda/AyurvedaDisplayMath.swift` | U4 pure math, Foundation-only | create |
+| `Ayura/Ayurveda/Views/AyurvedaDisplay.swift` | U3 struct + `make(from:)` | create |
+| `Ayura/Ayurveda/Views/AyurvedaSectionView.swift` | U1/U2/U5/U8 shell, tier row, captions | create |
+| `Ayura/Ayurveda/Views/DoshaBarsView.swift` | U6 bars + % view + toggle | create |
+| `Ayura/Ayurveda/Views/AyurvedaChipsView.swift` | U7 chips + warnings | create |
+| `Ayura/Ayurveda/Views/AyurvedaEditorSection.swift` | U10 card, `AyurvedaForm`, `AyurvedaUserProfileStore` | create |
+| `Ayura/Ayurveda/AyurvedaResolver.swift` | U9.3 `.user` case | edit |
+| `Ayura/Food/Views/FoodItemDetailView.swift` | U1 (~5 lines) | edit |
+| `Ayura/Food/Views/FoodItemEditorView.swift` | U9/U10 hooks (state, section, prefill, save call) | edit |
 | `ayurveda-data/tools/d8_math_check.swift` | G2 harness `main` asserting §vectors | create |
 
 **U12 — What D8 must NOT touch.** `FoodItem.swift`, `AyurvedaProfile.swift`,

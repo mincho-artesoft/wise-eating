@@ -5,11 +5,11 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
-DISPLAY = ROOT / "WiseEating/Ayurveda/Views/AyurvedaDisplay.swift"
-SECTION = ROOT / "WiseEating/Ayurveda/Views/AyurvedaSectionView.swift"
-SCALE = ROOT / "WiseEating/Ayurveda/Views/DoshaScaleSelector.swift"
-CHIP = ROOT / "WiseEating/Ayurveda/Views/AyurvedaChip.swift"
-BARS = ROOT / "WiseEating/Ayurveda/Views/DoshaBarsView.swift"
+DISPLAY = ROOT / "Ayura/Ayurveda/Views/AyurvedaDisplay.swift"
+SECTION = ROOT / "Ayura/Ayurveda/Views/AyurvedaSectionView.swift"
+SCALE = ROOT / "Ayura/Ayurveda/Views/DoshaScaleSelector.swift"
+CHIP = ROOT / "Ayura/Ayurveda/Views/AyurvedaChip.swift"
+BARS = ROOT / "Ayura/Ayurveda/Views/DoshaBarsView.swift"
 
 
 class WE3DisplayTests(unittest.TestCase):

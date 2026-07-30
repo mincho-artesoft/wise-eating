@@ -1,4 +1,4 @@
-# PROJECT HANDBOOK — Ayurveda app built on WiseEating
+# PROJECT HANDBOOK — Ayura
 **Read this first. It is the knowledge-transfer document for anyone (human or AI)
 taking over direction of this project. Update it at the end of every milestone —
 that is a standing rule baked into all task packets.**
@@ -15,7 +15,7 @@ MP-1/MP-2/MP-3 device evidence remains explicit in
 One repository, two products:
 - **`main` branch = WiseEating, the original app, pristine** (tip `2508c74`,
   pre-Ayurveda). Never receives Ayurveda commits. Builds and ships as-is.
-- **`ayurveda-app` branch = the new Ayurveda application**: WiseEating's proven
+- **`ayurveda-app` branch = the new Ayura application**: the proven
   engine (12,601-food USDA database, search, HEVC media, SwiftData) extended with
   a full Ayurvedic knowledge layer. All new work happens here. Single-author
   history: `Mincho Milev <mincho.milev@gmail.com>`.
@@ -44,25 +44,25 @@ estimated 10,296 (category rules × modifiers) = 12,601. Tier is always stored
 and must always be shown in UI.
 
 **Build pipeline:** `ayurveda-data/build_seed.py` → deterministic
-`WiseEating/ayurveda_seed.json.gz` (seedVersion 5; sha-verifiable) +
-`WiseEating/ayurveda_rules.json`. `ayurveda-data/build_preseeded_store.py`
+`Ayura/ayurveda_seed.json.gz` (seedVersion 5; sha-verifiable) +
+`Ayura/ayurveda_rules.json`. `ayurveda-data/build_preseeded_store.py`
 audits/compacts a completed 14,484-row store and emits the two bundled gzip
 parts, including the version-5 search cache. `ayurveda-data/validate.py --store
 /tmp/pre` is the gatekeeper (content integrity + full resolver and preseed
 simulation; must always pass).
 
 **App layer (Swift, additive only — `FoodItem` untouched):**
-- `WiseEating/Ayurveda/AyurvedaProfile.swift`: `@Model AyurvedaProfile`
+- `Ayura/Ayurveda/AyurvedaProfile.swift`: `@Model AyurvedaProfile`
   (2,214 rows: 714 dravyas + 1,500 recipes; joined to FoodItem by plain `foodId`;
   `kind` = "dravya"|"recipe") and `@Model AyurvedaLink` (fdcId→dravya, 2,305 rows,
   tiers exact/near/derived).
-- `WiseEating/Ayurveda/AyurvedaRules.swift`: Sendable value types; loads
+- `Ayura/Ayurveda/AyurvedaRules.swift`: Sendable value types; loads
   ayurveda_rules.json; computes estimated-tier VPK.
-- `WiseEating/Ayurveda/AyurvedaResolver.swift`: single read API for any FoodItem →
+- `Ayura/Ayurveda/AyurvedaResolver.swift`: single read API for any FoodItem →
   `.classical / .recipe / .user / .derived / .estimated / computed` (computed =
   grams-weighted aggregation over ingredients for user recipes/menus; coverage-
   gated ≥0.5; precedence: direct profile > link > computed > estimated > none).
-- `WiseEating/Ayurveda/Views/`: D8 + WE-3 UI — AyurvedaSectionView (detail card:
+- `Ayura/Ayurveda/Views/`: D8 + WE-3 UI — AyurvedaSectionView (detail card:
   tier/source/confidence, accessible center-zero dosha scales with ±/% toggle,
   semantic light/dark tokens, glyph-bearing wrapping chips, always-visible
   viruddha/contraindication warnings, engineExcluded banner, plain aiDraft
@@ -74,7 +74,7 @@ simulation; must always pass).
 - `RecipeNutritionPanelView` (WE-2): existing glass-card/flow-layout language;
   switches per serving/per 100g and displays the full 39-field nutrient catalog,
   coverage state, and honest missing-slug evidence.
-- `WiseEating/FoodSearch/` (WE-4/WE-5/WE-8c): the version-5 compact cache persists canonical
+- `Ayura/FoodSearch/` (WE-4/WE-5/WE-8c): the version-5 compact cache persists canonical
   virya/dosha/agni/digestibility/season/category/concept facet sets and a
   separate inverted facet index on exactly the 2,214 seeded profiles.
   `CanonicalFacetParser` removes only validated natural/explicit facet speech
@@ -90,7 +90,7 @@ simulation; must always pass).
   await the same version-checked load before taking an index snapshot. Version 5
   also persists display and enforced age floors separately: badges
   retain the display floor; canonical age filters use only authored floors.
-- `WiseEating/Ayurveda/AyurvedaRecommendationGate.swift` (D9): set-driven
+- `Ayura/Ayurveda/AyurvedaRecommendationGate.swift` (D9): set-driven
   never-recommend enforcement (engineExcluded profiles + linked fdcIds + AI
   free-text name screen) wired into all AI generation paths and the Siri intent;
   search deliberately NOT filtered (decision 3).
@@ -99,7 +99,7 @@ simulation; must always pass).
   `-we6LaunchProfile` enables opt-in Points of Interest plus monotonic launch
   timestamps through the first interactive frame; ordinary launches emit no
   WE-6 probe output.
-- `WiseEating/Main/DBSeed/AyurvedaSeeder.swift` + hooks in `SeedManager.swift`
+- `Ayura/Main/DBSeed/AyurvedaSeeder.swift` + hooks in `SeedManager.swift`
   (after `seedFoodsIfNeeded`) and `DatabaseSetup.swift` (mainTypes): the shipped
   store already contains 383 placeholder FoodItems (reserved ID band
   **900001–900383**), 1,500 recipe FoodItems/IngredientLinks, 2,214 profiles,
@@ -118,12 +118,12 @@ simulation; must always pass).
   all 1,500 recipes. Ghee remains conservatively `Milk`; unresolved safety
   inputs abort the build rather than receiving permissive defaults. Plain USDA
   rows receive no Ayurveda profile, facet, claim, or derived Ayurveda metadata.
-- `WiseEating/Legacy/` after WE-7 contains only five live JSON fallback
+- `Ayura/Legacy/` after WE-7 contains only five live JSON fallback
   resources (`foods`, `product_buckets`, `sports`, `vocabulary`, `workouts`).
   The nine former Swift compiler inputs were entirely commented, had no inbound
   references, and were removed as one proven-dead cluster. The synchronized
   Xcode group now contributes zero Legacy Swift sources.
-- `WiseEating/Ayurveda/FoodConcepts.swift` + bundled
+- `Ayura/Ayurveda/FoodConcepts.swift` + bundled
   `food_concepts.json.gz` (FC-1/FC-1e): immutable, lazily loaded concept
   lookup over all 14,484 catalogue rows. The director-owned ontology contains
   25 canonical concepts and 75 aliases; build-time matching applies token
@@ -135,14 +135,14 @@ simulation; must always pass).
   alcohol list and planner exclusion substring matchers are removed. The 75
   aliases feed the frozen MP-3 scorer in the authored surface→canonical
   direction; FoodSearch and ranking remain unchanged.
-- `WiseEating/AI/MealPlanning/` (MP-1 through MP-3c): opt-in planner telemetry
+- `Ayura/AI/MealPlanning/` (MP-1 through MP-3c): opt-in planner telemetry
   records stage/model/resolution counts without changing ordinary logging;
   resolved FoodItem/USDA nutrition replaces AI-authored meal macros before goal
   adjustment; and food resolution is deterministic, thresholded, form-aware,
   exclusion-gated, and makes no model call in the statically proven production
   resolution path. Physical-device generation evidence remains in
   `DEFERRED-VALIDATION.md`.
-- `WiseEating/AI/MealPlanning/DeterministicMealPlanSolver.swift` (MP-5 feature
+- `Ayura/AI/MealPlanning/DeterministicMealPlanSolver.swift` (MP-5 feature
   branch): Foundation-only greedy construction plus bounded iterated local
   search, driven by SplitMix64. Hard FoodConcept/diet/allergen/age/engine/
   viruddha/placement constraints validate before emit; exact USDA arithmetic,
@@ -152,7 +152,7 @@ simulation; must always pass).
   `MP5AyurvedicSolverEnabled` flag is off by default and gates only aiDraft
   Ayurveda scoring; deterministic structural/safety assembly is common to both
   modes.
-- `WiseEating/AI/MealPlanning/FoodRoleResolver.swift` + bundled
+- `Ayura/AI/MealPlanning/FoodRoleResolver.swift` + bundled
   `food_roles.json.gz` (MP-7): immutable build-time role, `notReadyToEat`, and
   headword resolution for all 14,484 canonical catalogue rows. Solver
   candidates carry this metadata once; eligibility is filtered once per solve.
@@ -161,7 +161,7 @@ simulation; must always pass).
   solver ranks compact records in role buckets and precomputes duplicate/
   viruddha context without changing candidate order, RNG consumption, 96 local
   iterations, constraints, or outputs.
-- `WiseEating/AI/MealPlanning/MealPlanNarration.swift` and
+- `Ayura/AI/MealPlanning/MealPlanNarration.swift` and
   `MealPlanNarrator+FoundationModels.swift` (MP-6): narration receives only
   finished solver facts and cannot choose food or calculate values. The
   Foundation Models adapter makes one indexed `@Generable` call for the whole
@@ -250,8 +250,8 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 - Sandbox git can't unlink lock files. Workaround: `GIT_INDEX_FILE=/tmp/ayur_index`,
   `git add` → `write-tree` → `commit-tree` → write SHA directly to
   `.git/refs/heads/<branch>`. On the Mac: `rm -f .git/*.lock && git reset`.
-- Store access: `cat WiseEating/preseeded_db.store.gz.part-aa
-  WiseEating/preseeded_db.store.gz.part-ab > /tmp/pre.gz && gunzip -f /tmp/pre.gz`
+- Store access: `cat Ayura/preseeded_db.store.gz.part-aa
+  Ayura/preseeded_db.store.gz.part-ab > /tmp/pre.gz && gunzip -f /tmp/pre.gz`
   → SQLite at /tmp/pre, table ZFOODITEM (ZID, ZNAME…).
 - **This codebase sits near the Swift type-checker's budget.** ObserversHub.swift
   has needed two mechanical splits. Rule for all new SwiftUI: small sub-views,

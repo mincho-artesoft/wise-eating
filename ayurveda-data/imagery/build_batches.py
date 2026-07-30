@@ -50,8 +50,8 @@ def slug(name):
 
 
 def load(repo):
-    fm = json.load(open(f"{repo}/WiseEating/Food/frame_map.json"))
-    foods = json.load(open(f"{repo}/WiseEating/Legacy/foods.json"))
+    fm = json.load(open(f"{repo}/Ayura/Food/frame_map.json"))
+    foods = json.load(open(f"{repo}/Ayura/Legacy/foods.json"))
     recs, dr = [], []
     for f in sorted(glob.glob(f"{repo}/ayurveda-data/recipes/batch-r*.json")):
         d = json.load(open(f))

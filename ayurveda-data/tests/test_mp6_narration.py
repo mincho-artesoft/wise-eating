@@ -8,7 +8,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
-MEAL_PLANNING = ROOT / "WiseEating" / "AI" / "MealPlanning"
+MEAL_PLANNING = ROOT / "Ayura" / "AI" / "MealPlanning"
 NARRATION = MEAL_PLANNING / "MealPlanNarration.swift"
 FOUNDATION_MODELS_NARRATOR = (
     MEAL_PLANNING / "MealPlanNarrator+FoundationModels.swift"
@@ -18,11 +18,11 @@ TELEMETRY = MEAL_PLANNING / "PlannerTelemetry.swift"
 PLANNER = MEAL_PLANNING / "USDAWeeklyMealPlanner.swift"
 MODELS = MEAL_PLANNING / "AIMealPlanModels.swift"
 SOLVER = MEAL_PLANNING / "DeterministicMealPlanSolver.swift"
-AYURVEDA_SEED = ROOT / "WiseEating" / "ayurveda_seed.json.gz"
-FOODS = ROOT / "WiseEating" / "Legacy" / "foods.json"
-FOOD_CONCEPTS = ROOT / "WiseEating" / "food_concepts.json.gz"
-FOOD_ROLES = ROOT / "WiseEating" / "food_roles.json.gz"
-AYURVEDA_RULES = ROOT / "WiseEating" / "ayurveda_rules.json"
+AYURVEDA_SEED = ROOT / "Ayura" / "ayurveda_seed.json.gz"
+FOODS = ROOT / "Ayura" / "Legacy" / "foods.json"
+FOOD_CONCEPTS = ROOT / "Ayura" / "food_concepts.json.gz"
+FOOD_ROLES = ROOT / "Ayura" / "food_roles.json.gz"
+AYURVEDA_RULES = ROOT / "Ayura" / "ayurveda_rules.json"
 
 
 PURE_HARNESS = r'''
@@ -873,7 +873,7 @@ class MP6NarrationTests(unittest.TestCase):
                 str(self.telemetry_binary),
                 scenario,
                 str(days),
-                "-wePlannerTelemetry",
+                "-ayuraPlannerTelemetry",
             ],
             cwd=ROOT,
             capture_output=True,

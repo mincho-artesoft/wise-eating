@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 ROLE_SOURCE = ROOT / "ayurveda-data" / "rules" / "food-roles.json"
-ROLE_ARTIFACT = ROOT / "WiseEating" / "food_roles.json.gz"
+ROLE_ARTIFACT = ROOT / "Ayura" / "food_roles.json.gz"
 KNOWN_BAD_PLAN = (
     ROOT / "ayurveda-data" / "tests" / "mp6b-known-bad-plan.json"
 )

@@ -13,12 +13,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 REQUEST = (
     ROOT
-    / "WiseEating"
+    / "Ayura"
     / "AI"
     / "MealPlanning"
     / "MealPlanRequest.swift"
 )
-BUNDLE_ID = "com.wiseeating.mp4-intent-gate"
+BUNDLE_ID = "com.ayura.mp4-intent-gate"
 
 
 def checked(arguments, **kwargs):

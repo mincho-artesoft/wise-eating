@@ -16,7 +16,7 @@ class RecipeNutritionTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         data_root = REPO_ROOT / "ayurveda-data"
-        foods_path = REPO_ROOT / "WiseEating" / "Legacy" / "foods.json"
+        foods_path = REPO_ROOT / "Ayura" / "Legacy" / "foods.json"
         foods = json.loads(foods_path.read_text(encoding="utf-8"))
         cls.store_ids = {food["id"] for food in foods}
         cls.nutrition_by_id = build_seed.load_food_nutrition(

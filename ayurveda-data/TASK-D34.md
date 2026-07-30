@@ -14,13 +14,13 @@ inputs `rules/category-rules.json`, `rules/modifiers.json`,
 | 2 | `ayurveda-data/crosswalk/crosswalk.csv` | generate via #1, commit |
 | 3 | `ayurveda-data/crosswalk/REVIEW-D3.md` | generate via #1, commit |
 | 4 | `ayurveda-data/build_seed.py` | edit (DESIGN B7: derived links + rules emission + seedVersion 2) |
-| 5 | `WiseEating/ayurveda_seed.json.gz` | regenerate, commit |
-| 6 | `WiseEating/ayurveda_rules.json` | generate via #4, commit |
+| 5 | `Ayura/ayurveda_seed.json.gz` | regenerate, commit |
+| 6 | `Ayura/ayurveda_rules.json` | generate via #4, commit |
 | 7 | `ayurveda-data/validate.py` | edit (new D34 checks, section 3) |
-| 8 | `WiseEating/Ayurveda/AyurvedaRules.swift` | create (DESIGN B9 rules loader + modifier engine) |
-| 9 | `WiseEating/Ayurveda/AyurvedaResolver.swift` | edit (`.estimated` live, derived modifiers) |
-| 10 | `WiseEating/Main/DBSeed/AyurvedaSeeder.swift` | edit (top-up path, DESIGN B8) |
-| 11 | `WiseEating/Main/DBSeed/SeedManager.swift` | edit (guard = version key only) |
+| 8 | `Ayura/Ayurveda/AyurvedaRules.swift` | create (DESIGN B9 rules loader + modifier engine) |
+| 9 | `Ayura/Ayurveda/AyurvedaResolver.swift` | edit (`.estimated` live, derived modifiers) |
+| 10 | `Ayura/Main/DBSeed/AyurvedaSeeder.swift` | edit (top-up path, DESIGN B8) |
+| 11 | `Ayura/Main/DBSeed/SeedManager.swift` | edit (guard = version key only) |
 | 12 | `ayurveda-data/REPORT-D34.md` | create (format below) |
 
 No other file may change. `git diff --stat` in the report must show exactly these.
@@ -55,7 +55,7 @@ distinct dravyas **166**; 0 fdcIds overlapping the v1-bound 336; denied fdcIds
 - Envelope: `seedVersion: 2`; counts add `derivedLinks: 1969, categoryRules: 187,
   modifiers: 14`; total links 2,305. Everything else (dravyas/recipes/placeholders/
   A3/A4 resolution) byte-for-byte as v1 — do not re-derive.
-- Emit `WiseEating/ayurveda_rules.json`: `{"rulesVersion": 1, "categories": …,
+- Emit `Ayura/ayurveda_rules.json`: `{"rulesVersion": 1, "categories": …,
   "default": …, "modifiers": …}` — content lifted verbatim from the two rules files
   (sorted keys, compact separators, deterministic).
 

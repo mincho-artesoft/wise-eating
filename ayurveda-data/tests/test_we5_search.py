@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
-FOOD_SEARCH = ROOT / "WiseEating" / "FoodSearch"
+FOOD_SEARCH = ROOT / "Ayura" / "FoodSearch"
 BOUNDARY = FOOD_SEARCH / "Constraints" / "ConstraintQueryBoundary.swift"
 PH_SEMANTICS = FOOD_SEARCH / "Structs" / "PhSearchSemantics.swift"
 CONSTRAINT_VALUE = FOOD_SEARCH / "Structs" / "ConstraintValue.swift"

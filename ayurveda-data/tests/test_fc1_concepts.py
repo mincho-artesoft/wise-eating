@@ -17,16 +17,16 @@ EXCLUSION_PATH = (
     ROOT / "ayurveda-data" / "tests" / "exclusion-goldens.json"
 )
 HOLDOUT_PATH = ROOT / "ayurveda-data" / "tests" / "resolution-holdout.json"
-FOODS_PATH = ROOT / "WiseEating" / "Legacy" / "foods.json"
-SEED_PATH = ROOT / "WiseEating" / "ayurveda_seed.json.gz"
-CONCEPT_ARTIFACT_PATH = ROOT / "WiseEating" / "food_concepts.json.gz"
+FOODS_PATH = ROOT / "Ayura" / "Legacy" / "foods.json"
+SEED_PATH = ROOT / "Ayura" / "ayurveda_seed.json.gz"
+CONCEPT_ARTIFACT_PATH = ROOT / "Ayura" / "food_concepts.json.gz"
 KNOWLEDGE_BASE_PATH = (
-    ROOT / "WiseEating" / "FoodSearch" / "SearchKnowledgeBase.swift"
+    ROOT / "Ayura" / "FoodSearch" / "SearchKnowledgeBase.swift"
 )
-RUNTIME_PATH = ROOT / "WiseEating" / "Ayurveda" / "FoodConcepts.swift"
+RUNTIME_PATH = ROOT / "Ayura" / "Ayurveda" / "FoodConcepts.swift"
 PLANNER_PATH = (
     ROOT
-    / "WiseEating"
+    / "Ayura"
     / "AI"
     / "MealPlanning"
     / "USDAWeeklyMealPlanner.swift"
@@ -361,7 +361,7 @@ class FoodConceptTests(unittest.TestCase):
         self.assertIn("public struct Restriction: Codable, Hashable, Sendable", source)
 
         consumers = []
-        for path in (ROOT / "WiseEating").rglob("*.swift"):
+        for path in (ROOT / "Ayura").rglob("*.swift"):
             if path == RUNTIME_PATH:
                 continue
             if "FoodConcepts.shared" in path.read_text(
@@ -372,10 +372,10 @@ class FoodConceptTests(unittest.TestCase):
         self.assertEqual(
             {path.relative_to(ROOT).as_posix() for path in consumers},
             {
-                "WiseEating/AI/MealPlanning/"
-                "DeterministicMealPlanSolver+WiseEating.swift",
-                "WiseEating/AI/MealPlanning/USDAWeeklyMealPlanner.swift",
-                "WiseEating/AI/ReceptGeneration/AIRecipeGenerator.swift",
+                "Ayura/AI/MealPlanning/"
+                "DeterministicMealPlanSolver+Ayura.swift",
+                "Ayura/AI/MealPlanning/USDAWeeklyMealPlanner.swift",
+                "Ayura/AI/ReceptGeneration/AIRecipeGenerator.swift",
             },
         )
         planner = PLANNER_PATH.read_text(encoding="utf-8")
