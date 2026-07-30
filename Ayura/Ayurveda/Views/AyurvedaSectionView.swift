@@ -76,13 +76,6 @@ struct AyurvedaDisplayCard: View {
         properties
       }
       warnings
-      if let caption = display.qualityCaption {
-        Text(caption)
-          .font(.caption)
-          .foregroundStyle(.secondary)
-          .fixedSize(horizontal: false, vertical: true)
-          .accessibilityLabel(caption)
-      }
     }
     .transaction { transaction in
       if reduceMotion {
@@ -221,6 +214,8 @@ private struct AyurvedaPropertyGroup: Identifiable {
 }
 
 private struct AyurvedaPropertyGroupView: View {
+  @ObservedObject private var effectManager = EffectManager.shared
+
   let group: AyurvedaPropertyGroup
 
   var body: some View {
@@ -232,13 +227,13 @@ private struct AyurvedaPropertyGroupView: View {
 
       ChipGrid {
         ForEach(Array(group.values.enumerated()), id: \.offset) { _, value in
-          AyurvedaChip(
-            title: value.capitalized,
+          GlassChipView(
+            label: value.capitalized,
+            color: tint(for: value),
             systemImage: icon(for: value),
-            tint: tint(for: value),
+            textColor: effectManager.currentGlobalAccentColor,
             isSelected: true,
-            action: {},
-            isReadOnly: true
+            action: nil
           )
         }
       }

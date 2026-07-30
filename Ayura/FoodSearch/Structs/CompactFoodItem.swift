@@ -11,8 +11,9 @@ struct CompactFoodItem: Identifiable, Hashable, Sendable {
     let isRecipe: Bool
     let isMenu: Bool
     let isFavorite: Bool
-    /// Canonical facets exist only for direct seeded dravya/recipe profiles.
+    /// Searchable facets and their underlying numeric/contextual metadata.
     let ayurvedaFacets: Set<String>
+    let ayurvedaMetadata: AyurvedaCanonicalSearchMetadata?
     // Store nutrients as a raw dictionary for scoring
     let nutrientValues: [NutrientType: Double]
     

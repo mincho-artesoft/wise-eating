@@ -328,14 +328,7 @@ private struct AyurvedaAutomaticPreview: View {
 
   var body: some View {
     VStack(alignment: .leading, spacing: 10) {
-      if !computation.hasIngredients {
-        Text("Add ingredients to see a live Ayurveda preview.")
-          .font(.caption)
-          .foregroundStyle(.secondary)
-      } else {
-        Text("Computed from your ingredients — updates automatically")
-          .font(.caption)
-          .foregroundStyle(.secondary)
+      if computation.hasIngredients {
         if let computed = computation.computed {
           DoshaBarsView(
             vata: computed.vata,
@@ -366,6 +359,37 @@ enum AyurvedaUserProfileStore {
       virya: profile.virya,
       vipaka: profile.vipaka,
       gunas: Set(profile.gunas)
+    )
+  }
+
+  static func resolvedFormForDuplication(
+    foodId: Int,
+    context: ModelContext
+  ) -> AyurvedaForm? {
+    let sourceFoodId = foodId
+    var descriptor = FetchDescriptor<FoodItem>(
+      predicate: #Predicate<FoodItem> { food in
+        food.id == sourceFoodId
+      }
+    )
+    descriptor.fetchLimit = 1
+
+    guard
+      let food = try? context.fetch(descriptor).first,
+      let resolution = try? AyurvedaResolver.resolve(for: food, context: context),
+      let display = AyurvedaDisplay.make(from: resolution)
+    else {
+      return nil
+    }
+
+    return AyurvedaForm(
+      vata: display.vata,
+      pitta: display.pitta,
+      kapha: display.kapha,
+      rasa: Set(display.rasa),
+      virya: display.virya,
+      vipaka: display.vipaka,
+      gunas: Set(display.gunas)
     )
   }
 

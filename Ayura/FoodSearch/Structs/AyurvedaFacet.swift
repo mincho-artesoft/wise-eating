@@ -10,6 +10,7 @@ enum AyurvedaFacetKind: String, CaseIterable, Sendable {
     case agni
     case digestibility
     case season
+    case time
     case category
     case concept
 }
@@ -56,7 +57,8 @@ struct AyurvedaFacet: Hashable, Sendable {
             gunas: profile.gunas,
             agniEffect: profile.agniEffect,
             digestibility: profile.digestibility,
-            seasons: profile.seasons
+            seasons: profile.seasons,
+            timeOfDay: profile.timeOfDay
         )
     }
 
@@ -84,42 +86,50 @@ struct AyurvedaFacet: Hashable, Sendable {
             AyurvedaFacetSeedDocument.self,
             from: plain
         )
-        guard seed.dravyas.count == 714, seed.recipes.count == 1_500 else {
+        guard seed.dravyas.count == 714,
+              seed.recipes.count == 1_500,
+              seed.links.count == 2_305 else {
             throw AyurvedaFacetSeedError.invalidCounts
         }
 
-        return try (seed.dravyas + seed.recipes).reduce(into: [:]) {
-            result,
-            profile in
-            guard profile.isCanonical else { return }
+        let profiles = seed.dravyas + seed.recipes
+        let profilesByID = Dictionary(
+            uniqueKeysWithValues: profiles.map { ($0.id, $0) }
+        )
+        var result: [Int: AyurvedaCanonicalSearchMetadata] = [:]
+
+        for profile in profiles {
+            guard profile.isCanonical else { continue }
             guard profile.safety.enforcedMinAgeMonths >= 0,
                   profile.safety.enforcedMinAgeMonths <= profile.safety.minAgeMonths,
                   ["authored", "legacyImport"].contains(profile.safety.ageProvenance)
             else {
                 throw AyurvedaFacetSeedError.invalidAgeMetadata(profile.id)
             }
-            let facets = searchKeys(
-                category: profile.category,
-                doshaVata: profile.dosha.vata,
-                doshaPitta: profile.dosha.pitta,
-                doshaKapha: profile.dosha.kapha,
-                rasa: profile.rasa ?? [],
-                virya: profile.virya,
-                vipaka: profile.vipaka,
-                gunas: profile.gunas ?? [],
-                agniEffect: profile.agniEffect,
-                digestibility: profile.digestibility,
-                seasons: profile.seasons
-            )
-            guard !facets.isEmpty else { return }
             result[profile.foodId] = AyurvedaCanonicalSearchMetadata(
-                facets: facets,
-                enforcedMinAgeMonths: profile.safety.enforcedMinAgeMonths
+                profile: profile,
+                enforcedMinAgeMonths: profile.safety.enforcedMinAgeMonths,
+                sourceTier: nil
             )
         }
+
+        // USDA links extend the searchable coverage beyond the direct canonical
+        // rows. Direct profiles always win when an ID appears in both sets.
+        for link in seed.links {
+            guard result[link.fdcId]?.sourceTier != nil || result[link.fdcId] == nil,
+                  let profile = profilesByID[link.dravyaId] else {
+                continue
+            }
+            result[link.fdcId] = AyurvedaCanonicalSearchMetadata(
+                profile: profile,
+                enforcedMinAgeMonths: profile.safety.enforcedMinAgeMonths,
+                sourceTier: link.tier
+            )
+        }
+        return result
     }
 
-    private static func searchKeys(
+    static func searchKeys(
         category: String,
         doshaVata: Int,
         doshaPitta: Int,
@@ -130,7 +140,8 @@ struct AyurvedaFacet: Hashable, Sendable {
         gunas: [String],
         agniEffect: Int?,
         digestibility: Int?,
-        seasons: [String]
+        seasons: [String],
+        timeOfDay: [String]
     ) -> Set<String> {
         var facets = Set<String>()
 
@@ -181,6 +192,9 @@ struct AyurvedaFacet: Hashable, Sendable {
 
         for season in seasons {
             insert(.season, season, into: &facets)
+        }
+        for period in timeOfDay {
+            insert(.time, period, into: &facets)
         }
 
         let normalizedCategory = normalize(category)
@@ -263,6 +277,7 @@ private enum AyurvedaFacetSeedError: LocalizedError {
 private struct AyurvedaFacetSeedDocument: Decodable {
     let dravyas: [AyurvedaFacetSeedProfile]
     let recipes: [AyurvedaFacetSeedProfile]
+    let links: [AyurvedaFacetSeedLink]
 }
 
 private struct AyurvedaFacetSeedProfile: Decodable {
@@ -278,17 +293,26 @@ private struct AyurvedaFacetSeedProfile: Decodable {
         let ageProvenance: String
     }
 
+    struct Confidence: Decodable {
+        let ayur: Double
+    }
+
     let id: String
+    let name: String
     let category: String
     let dosha: Dosha
     let seasons: [String]
+    let timeOfDay: [String]
     let foodId: Int
     let rasa: [String]?
     let virya: String?
     let vipaka: String?
     let gunas: [String]?
+    let prabhava: String?
     let agniEffect: Int?
     let digestibility: Int?
+    let contraindications: [String]?
+    let confidence: Confidence
     let safety: Safety
 
     var isCanonical: Bool {
@@ -296,7 +320,191 @@ private struct AyurvedaFacetSeedProfile: Decodable {
     }
 }
 
-struct AyurvedaCanonicalSearchMetadata: Sendable {
+private struct AyurvedaFacetSeedLink: Decodable {
+    let fdcId: Int
+    let dravyaId: String
+    let tier: String
+}
+
+struct AyurvedaCanonicalSearchMetadata: Codable, Hashable, Sendable {
     let facets: Set<String>
     let enforcedMinAgeMonths: Int?
+    let sourceProfileName: String
+    let sourceTier: String?
+    let doshaVata: Int
+    let doshaPitta: Int
+    let doshaKapha: Int
+    let rasa: [String]
+    let virya: String?
+    let vipaka: String?
+    let gunas: [String]
+    let agniEffect: Int?
+    let digestibility: Int?
+    let seasons: [String]
+    let timeOfDay: [String]
+    let category: String
+    let prabhava: String?
+    let contraindications: [String]
+    let confidenceAyur: Double
+
+    var isInferred: Bool {
+        sourceTier == "near" || sourceTier == "derived"
+    }
+
+    var sourceCaption: String? {
+        switch sourceTier {
+        case "near":
+            return "Inferred from \(sourceProfileName) · near match"
+        case "derived":
+            return "Inferred from \(sourceProfileName)"
+        case "exact":
+            return "Linked to \(sourceProfileName)"
+        default:
+            return nil
+        }
+    }
+
+    init(
+        profile: AyurvedaProfile,
+        enforcedMinAgeMonths: Int?,
+        sourceTier: String? = nil
+    ) {
+        self.init(
+            enforcedMinAgeMonths: enforcedMinAgeMonths,
+            sourceProfileName: profile.name,
+            sourceTier: sourceTier,
+            doshaVata: profile.doshaVata,
+            doshaPitta: profile.doshaPitta,
+            doshaKapha: profile.doshaKapha,
+            rasa: profile.rasa,
+            virya: profile.virya,
+            vipaka: profile.vipaka,
+            gunas: profile.gunas,
+            agniEffect: profile.agniEffect,
+            digestibility: profile.digestibility,
+            seasons: profile.seasons,
+            timeOfDay: profile.timeOfDay,
+            category: profile.category,
+            prabhava: profile.prabhava,
+            contraindications: profile.contraindications,
+            confidenceAyur: profile.confidenceAyur
+        )
+    }
+
+    fileprivate init(
+        profile: AyurvedaFacetSeedProfile,
+        enforcedMinAgeMonths: Int?,
+        sourceTier: String?
+    ) {
+        self.init(
+            enforcedMinAgeMonths: enforcedMinAgeMonths,
+            sourceProfileName: profile.name,
+            sourceTier: sourceTier,
+            doshaVata: profile.dosha.vata,
+            doshaPitta: profile.dosha.pitta,
+            doshaKapha: profile.dosha.kapha,
+            rasa: profile.rasa ?? [],
+            virya: profile.virya,
+            vipaka: profile.vipaka,
+            gunas: profile.gunas ?? [],
+            agniEffect: profile.agniEffect,
+            digestibility: profile.digestibility,
+            seasons: profile.seasons,
+            timeOfDay: profile.timeOfDay,
+            category: profile.category,
+            prabhava: profile.prabhava,
+            contraindications: profile.contraindications ?? [],
+            confidenceAyur: profile.confidence.ayur
+        )
+    }
+
+    private init(
+        enforcedMinAgeMonths: Int?,
+        sourceProfileName: String,
+        sourceTier: String?,
+        doshaVata: Int,
+        doshaPitta: Int,
+        doshaKapha: Int,
+        rasa: [String],
+        virya: String?,
+        vipaka: String?,
+        gunas: [String],
+        agniEffect: Int?,
+        digestibility: Int?,
+        seasons: [String],
+        timeOfDay: [String],
+        category: String,
+        prabhava: String?,
+        contraindications: [String],
+        confidenceAyur: Double
+    ) {
+        self.enforcedMinAgeMonths = enforcedMinAgeMonths
+        self.sourceProfileName = sourceProfileName
+        self.sourceTier = sourceTier
+        self.doshaVata = min(2, max(-2, doshaVata))
+        self.doshaPitta = min(2, max(-2, doshaPitta))
+        self.doshaKapha = min(2, max(-2, doshaKapha))
+        self.rasa = rasa
+        self.virya = virya
+        self.vipaka = vipaka
+        self.gunas = gunas
+        self.agniEffect = agniEffect
+        self.digestibility = digestibility
+        self.seasons = seasons
+        self.timeOfDay = timeOfDay
+        self.category = category
+        self.prabhava = prabhava
+        self.contraindications = contraindications
+        self.confidenceAyur = confidenceAyur
+        self.facets = AyurvedaFacet.searchKeys(
+            category: category,
+            doshaVata: doshaVata,
+            doshaPitta: doshaPitta,
+            doshaKapha: doshaKapha,
+            rasa: rasa,
+            virya: virya,
+            vipaka: vipaka,
+            gunas: gunas,
+            agniEffect: agniEffect,
+            digestibility: digestibility,
+            seasons: seasons,
+            timeOfDay: timeOfDay
+        )
+    }
+
+    func applyingDerivedModifiers(to foodName: String) -> Self {
+        guard sourceTier == "derived" else { return self }
+        let modifiers = AyurvedaRules.shared.modifiers(forName: foodName)
+        guard !modifiers.isEmpty else { return self }
+        let adjusted = AyurvedaRules.adjustedVPK(
+            base: (doshaVata, doshaPitta, doshaKapha),
+            modifiers: modifiers
+        )
+        var adjustedGunas = gunas
+        for modifier in modifiers {
+            for guna in modifier.gunas where !adjustedGunas.contains(guna) {
+                adjustedGunas.append(guna)
+            }
+        }
+        return Self(
+            enforcedMinAgeMonths: enforcedMinAgeMonths,
+            sourceProfileName: sourceProfileName,
+            sourceTier: sourceTier,
+            doshaVata: adjusted.vata,
+            doshaPitta: adjusted.pitta,
+            doshaKapha: adjusted.kapha,
+            rasa: rasa,
+            virya: virya,
+            vipaka: vipaka,
+            gunas: adjustedGunas,
+            agniEffect: agniEffect,
+            digestibility: digestibility,
+            seasons: seasons,
+            timeOfDay: timeOfDay,
+            category: category,
+            prabhava: prabhava,
+            contraindications: contraindications,
+            confidenceAyur: max(confidenceAyur - 0.15, 0.1)
+        )
+    }
 }

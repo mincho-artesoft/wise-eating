@@ -31,6 +31,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
     @Published var displayedResults: [FoodItem] = []
     @Published var isLoading: Bool = false
     @Published var searchContext: SearchContext = SearchContext()
+    @Published private(set) var isAyurvedaSearchActive: Bool = false
     
     // MARK: - Internal Data (Lightweight Index)
     
@@ -40,7 +41,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
     /// token -> set of CompactFoodItem IDs
     private var invertedIndex: [String: Set<Int>] = [:]
 
-    /// Ayurveda facet key -> bundled and user-created FoodItem IDs
+    /// Ayurveda facet key -> direct, USDA-linked and user-created FoodItem IDs
     private var ayurvedaFacetIndex: [String: Set<Int>] = [:]
     
     /// id -> CompactFoodItem
@@ -62,6 +63,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
     private var lastIsFavoritesOnly: Bool = false
     private var lastIsRecipesOnly: Bool = false
     private var lastIsMenusOnly: Bool = false
+    private var lastAyurvedaFilters: AyurvedaSearchFilters = .empty
     
     // --- NEW: Track last mode & excluded IDs ---
     private var lastSearchMode: SearchMode? = nil
@@ -98,6 +100,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             searchMode: SearchMode? = nil,
             profile: Profile? = nil,
             excludedFoodIDs: Set<Int> = [],
+            ayurvedaFilters: AyurvedaSearchFilters = .empty,
             phSortOrder: PhSortOrder? = nil // ✅ НОВ ПАРАМЕТЪР
         ) {
             let store = SearchIndexStore.shared
@@ -134,6 +137,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                         searchMode: searchMode,
                         profile: profile,
                         excludedFoodIDs: excludedFoodIDs,
+                        ayurvedaFilters: ayurvedaFilters,
                         phSortOrder: phSortOrder
                     )
                 }
@@ -165,6 +169,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                 isMenusOnly == lastIsMenusOnly &&
                 searchMode == lastSearchMode &&
                 excludedFoodIDs == lastExcludedFoodIDs &&
+                ayurvedaFilters == lastAyurvedaFilters &&
                 phSortOrder == lastPhSortOrder // ✅ Проверка и за pH
             
             // Проверка дали имаме данни, но не ги показваме
@@ -180,6 +185,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                !isMenusOnly,
                searchMode == nil,
                excludedFoodIDs.isEmpty,
+               !ayurvedaFilters.isActive,
                phSortOrder == nil { // ✅ Проверка и за pH
                 
                 print("ℹ️ [SmartSearch] Empty query detected. Attempting to show default results.")
@@ -193,6 +199,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                 lastIsMenusOnly = isMenusOnly
                 lastSearchMode = searchMode
                 lastExcludedFoodIDs = excludedFoodIDs
+                lastAyurvedaFilters = ayurvedaFilters
                 lastPhSortOrder = phSortOrder // ✅ Обновяване на state
                 
                 searchTask?.cancel()
@@ -217,6 +224,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             lastIsMenusOnly = isMenusOnly
             lastSearchMode = searchMode
             lastExcludedFoodIDs = excludedFoodIDs
+            lastAyurvedaFilters = ayurvedaFilters
             lastPhSortOrder = phSortOrder // ✅ Обновяване на state
             
             // Snapshot lightweight state
@@ -229,6 +237,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             let snapshotDietsFromDB = cachedKnownDiets
             let snapshotRankings = nutrientRankings
             let snapshotExcludedIDs = excludedFoodIDs
+            let temporalContext = AyurvedaSearchTemporalContext.current()
             
             isLoading = true
             let snapshotAvailableDiets: Set<String> = {
@@ -294,6 +303,8 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                         searchMode: searchMode,
                         profileConstraints: profileConstraints,
                         excludedFoodIDs: snapshotExcludedIDs,
+                        ayurvedaFilters: ayurvedaFilters,
+                        temporalContext: temporalContext,
                         phSortOrder: phSortOrder,
                         container: self.container
                     )
@@ -326,6 +337,8 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                     self.fullResultIDs = orderedResultIDs
                     
                     if let intent = primaryIntent {
+                        self.isAyurvedaSearchActive = ayurvedaFilters.isActive
+                            || !intent.ayurvedaFacetConstraints.isEmpty
                         self.updateContext(
                             intent: intent,
                             activeFilters: activeFilters,
@@ -356,6 +369,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
         let sorted = allFoods.sorted { $0.lowercasedName < $1.lowercasedName }
         fullResultIDs = sorted.map { $0.id }
         searchContext = SearchContext()
+        isAyurvedaSearchActive = false
         displayedResults = [] // Изчистваме първо, за да форсираме refresh
         
         print("🔄 [SmartSearch] Loading default batch (0)...")
@@ -471,6 +485,13 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
         fullResultIDs = []
         displayedResults = []
         searchContext = SearchContext()
+        isAyurvedaSearchActive = false
+    }
+
+    func ayurvedaMetadata(
+        for foodID: Int
+    ) -> AyurvedaCanonicalSearchMetadata? {
+        compactMap[foodID]?.ayurvedaMetadata
     }
     
     private func updateContext(intent: SearchIntent,
@@ -527,6 +548,8 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             searchMode: SearchMode?,
             profileConstraints: ProfileSearchConstraints?,
             excludedFoodIDs: Set<Int>,
+            ayurvedaFilters: AyurvedaSearchFilters,
+            temporalContext: AyurvedaSearchTemporalContext,
             phSortOrder: PhSortOrder?, // ✅ НОВ ПАРАМЕТЪР
             container: ModelContainer
         ) async -> (
@@ -971,28 +994,6 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             
             let intent = makeIntent()
             var finalCandidateIDs = candidateIDs
-
-            if !intent.ayurvedaFacetConstraints.isEmpty {
-                var facetCandidateIDs: Set<Int>?
-                for constraint in intent.ayurvedaFacetConstraints {
-                    var alternatives = Set<Int>()
-                    for key in constraint.acceptedKeys {
-                        alternatives.formUnion(ayurvedaFacetIndex[key] ?? [])
-                    }
-                    if let current = facetCandidateIDs {
-                        facetCandidateIDs = current.intersection(alternatives)
-                    } else {
-                        facetCandidateIDs = alternatives
-                    }
-                }
-                if let facetCandidateIDs {
-                    if let current = finalCandidateIDs {
-                        finalCandidateIDs = current.intersection(facetCandidateIDs)
-                    } else {
-                        finalCandidateIDs = facetCandidateIDs
-                    }
-                }
-            }
             
             // Ако няма текстови кандидати, зареждаме кандидатите за първата (най-приоритетна) цел
             if finalCandidateIDs == nil, let primaryGoal = intent.nutrientGoals.first, let rankedIDs = nutrientRankings[primaryGoal.nutrient] {
@@ -1020,6 +1021,24 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                     )
                 }
                 if excludedFoodIDs.contains(item.id) { continue }
+
+                // Profiled foods must satisfy true facets. Unprofiled foods are
+                // deliberately retained so the UI can explain the coverage gap.
+                // Dosha constraints are handled only by scoring below.
+                if let ayurveda = item.ayurvedaMetadata {
+                    if !AyurvedaSearchRanker.matches(
+                        ayurveda,
+                        filters: ayurvedaFilters
+                    ) {
+                        continue
+                    }
+                    if !AyurvedaSearchRanker.matches(
+                        ayurveda,
+                        constraints: intent.ayurvedaFacetConstraints
+                    ) {
+                        continue
+                    }
+                }
                 
                 if let mode = searchMode {
                     switch mode {
@@ -1222,7 +1241,11 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             let validRawWords: [String] = rawWords.filter { raw in effectiveTextTokens.contains(Tokenizer.processWord(raw)) }
             let rawCleanQuery = validRawWords.joined(separator: " ")
             let rawPaddedQuery = " " + rawCleanQuery + " "
-            var rankedItems: [(item: CompactFoodItem, score: Double)] = []
+            var rankedItems: [(
+                item: CompactFoodItem,
+                score: Double,
+                ayurvedaScore: Double
+            )] = []
             
             for (index, item) in itemsToRank.enumerated() {
                 if index % 500 == 0 && Task.isCancelled {
@@ -1271,16 +1294,30 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                     default: score += weight
                     }
                 }
-                rankedItems.append((item, score))
+                let ayurvedaScore: Double
+                if let ayurveda = item.ayurvedaMetadata {
+                    ayurvedaScore = AyurvedaSearchRanker.score(
+                        ayurveda,
+                        filters: ayurvedaFilters,
+                        constraints: intent.ayurvedaFacetConstraints,
+                        temporalContext: temporalContext
+                    )
+                    score += ayurvedaScore
+                } else {
+                    ayurvedaScore = 0
+                }
+                rankedItems.append((item, score, ayurvedaScore))
             }
             
-            let finalResults: [Int]
+            let hasAyurvedaRequest = ayurvedaFilters.isActive
+                || !intent.ayurvedaFacetConstraints.isEmpty
+            let sortedResults: [Int]
             if let phLimit = intent.phConstraint {
                 // Тук се случва сортирането по pH!
                 let preferLowPH =
                     PhSearchSemantics.prefersLowValues(for: phLimit)
                 let primaryGoal = intent.nutrientGoals.first
-                finalResults = rankedItems.sorted { lhs, rhs in
+                sortedResults = rankedItems.sorted { lhs, rhs in
                     // 1. pH Сортиране
                     if lhs.item.ph != rhs.item.ph {
                         return preferLowPH ? (lhs.item.ph < rhs.item.ph) : (lhs.item.ph > rhs.item.ph)
@@ -1308,17 +1345,59 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                     default: return false
                     }
                 }()
-                finalResults = rankedItems.sorted { lhs, rhs in
+                sortedResults = rankedItems.sorted { lhs, rhs in
                     let leftVal = lhs.item.value(for: primaryGoal.nutrient); let rightVal = rhs.item.value(for: primaryGoal.nutrient)
                     if leftVal != rightVal { return preferLowValues ? (leftVal < rightVal) : (leftVal > rightVal) }
                     if abs(lhs.score - rhs.score) > 0.001 { return lhs.score > rhs.score }
                     return lhs.item.lowercasedName < rhs.item.lowercasedName
                 }.map { $0.item.id }
             } else {
-                finalResults = rankedItems.sorted { lhs, rhs in
+                sortedResults = rankedItems.sorted { lhs, rhs in
+                    if hasAyurvedaRequest,
+                       lhs.item.ayurvedaMetadata != nil,
+                       rhs.item.ayurvedaMetadata != nil,
+                       abs(lhs.ayurvedaScore - rhs.ayurvedaScore) > 0.001 {
+                        return lhs.ayurvedaScore > rhs.ayurvedaScore
+                    }
                     if abs(lhs.score - rhs.score) > 0.001 { return lhs.score > rhs.score }
                     return lhs.item.lowercasedName < rhs.item.lowercasedName
                 }.map { $0.item.id }
+            }
+
+            let finalResults: [Int]
+            if hasAyurvedaRequest {
+                let profiled = sortedResults.filter {
+                    compactMap[$0]?.ayurvedaMetadata != nil
+                }
+                let unprofiled = sortedResults.filter {
+                    compactMap[$0]?.ayurvedaMetadata == nil
+                }
+                var interleaved: [Int] = []
+                interleaved.reserveCapacity(sortedResults.count)
+                var profiledIndex = 0
+                var unprofiledIndex = 0
+                while profiledIndex < profiled.count
+                    || unprofiledIndex < unprofiled.count {
+                    let nextProfiled = min(
+                        profiledIndex + 30,
+                        profiled.count
+                    )
+                    let nextUnprofiled = min(
+                        unprofiledIndex + 10,
+                        unprofiled.count
+                    )
+                    interleaved.append(
+                        contentsOf: profiled[profiledIndex..<nextProfiled]
+                    )
+                    interleaved.append(
+                        contentsOf: unprofiled[unprofiledIndex..<nextUnprofiled]
+                    )
+                    profiledIndex = nextProfiled
+                    unprofiledIndex = nextUnprofiled
+                }
+                finalResults = interleaved
+            } else {
+                finalResults = sortedResults
             }
             
             return (
@@ -2100,6 +2179,7 @@ extension SmartFoodSearch3 {
         searchMode: SearchMode? = nil,
         profile: Profile? = nil,
         excludedFoodIDs: Set<Int> = [],
+        ayurvedaFilters: AyurvedaSearchFilters = .empty,
         phSortOrder: PhSortOrder? = nil,
         limit: Int = 20
     ) async -> [FoodItem] {
@@ -2159,6 +2239,8 @@ extension SmartFoodSearch3 {
             searchMode: searchMode,
             profileConstraints: profileConstraints,
             excludedFoodIDs: snapshotExcludedIDs,
+            ayurvedaFilters: ayurvedaFilters,
+            temporalContext: AyurvedaSearchTemporalContext.current(),
             phSortOrder: phSortOrder,
             container: self.container
         )
@@ -2239,6 +2321,8 @@ extension SmartFoodSearch3 {
             searchMode: searchMode,
             profileConstraints: nil,
             excludedFoodIDs: [],
+            ayurvedaFilters: .empty,
+            temporalContext: AyurvedaSearchTemporalContext.current(),
             phSortOrder: nil,
             container: self.container
         )

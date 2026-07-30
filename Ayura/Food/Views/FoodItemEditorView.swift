@@ -919,8 +919,15 @@ struct FoodItemEditorView: View {
     private func prefillAyurvedaIfNeeded() {
         guard !didPrefillAyurveda else { return }
         didPrefillAyurveda = true
-        // Prefill only for existing foods: a duplicated (dubFood) item has no
-        // persisted id yet, so no stored user Ayurveda form can exist for it.
+
+        if let sourceFoodId = dubFood?.originalID {
+            ayurForm = AyurvedaUserProfileStore.resolvedFormForDuplication(
+                foodId: sourceFoodId,
+                context: ctx
+            ) ?? .neutral
+            return
+        }
+
         guard let foodId = food?.id else {
             ayurForm = .neutral
             return

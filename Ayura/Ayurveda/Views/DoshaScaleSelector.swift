@@ -267,6 +267,7 @@ struct DoshaScaleSelector: View {
           if candidate == value {
             Capsule()
               .fill(stateColor.opacity(colorScheme == .dark ? 0.32 : 0.18))
+              .glassCardStyle(cornerRadius: 20)
           }
         }
     }

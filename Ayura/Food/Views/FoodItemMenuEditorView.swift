@@ -1300,6 +1300,21 @@ struct FoodItemMenuEditorView: View {
     private func prefillAyurvedaIfNeeded() {
         guard !didPrefillAyurveda else { return }
         didPrefillAyurveda = true
+
+        if let sourceFoodId = dubFood?.originalID {
+            if let sourceForm = AyurvedaUserProfileStore.resolvedFormForDuplication(
+                foodId: sourceFoodId,
+                context: ctx
+            ) {
+                ayurForm = sourceForm
+                isManualAyurvedaOverride = true
+            } else {
+                ayurForm = .neutral
+                isManualAyurvedaOverride = false
+            }
+            return
+        }
+
         guard let foodId = food?.id else {
             ayurForm = .neutral
             isManualAyurvedaOverride = false

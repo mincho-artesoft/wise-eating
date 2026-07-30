@@ -31,6 +31,8 @@ private struct FoodSearchViewContent: View {
     @State private var isFavoritesModeActive = false
     @State private var showRecipesOnly = false
     @State private var showMenusOnly = false
+    @State private var showAyurvedaFilters = false
+    @State private var ayurvedaFilters: AyurvedaSearchFilters = .empty
     
     // Quick filter extra state
     @State private var isPhQuickFilterOn: Bool = false
@@ -80,6 +82,12 @@ private struct FoodSearchViewContent: View {
             if engine.displayedResults.isEmpty {
                 engine.loadData()
             }
+        }
+        .onChange(of: ayurvedaFilters) {
+            triggerSearch()
+        }
+        .sheet(isPresented: $showAyurvedaFilters) {
+            AyurvedaSearchFiltersView(filters: $ayurvedaFilters)
         }
     }
     
@@ -151,6 +159,57 @@ private struct FoodSearchViewContent: View {
     private var filtersView: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(spacing: 8) {
+                Button {
+                    showAyurvedaFilters = true
+                } label: {
+                    HStack(spacing: 6) {
+                        Image(systemName: "leaf.fill")
+                            .imageScale(.medium)
+                        Text("Ayurveda")
+                        if ayurvedaFilters.activeCount > 0 {
+                            Text("\(ayurvedaFilters.activeCount)")
+                                .font(.caption2.weight(.bold))
+                                .foregroundStyle(.white)
+                                .frame(minWidth: 18, minHeight: 18)
+                                .background(
+                                    effectManager.currentGlobalAccentColor,
+                                    in: Circle()
+                                )
+                        }
+                    }
+                    .font(.subheadline.weight(
+                        ayurvedaFilters.isActive ? .semibold : .regular
+                    ))
+                    .foregroundStyle(
+                        ayurvedaFilters.isActive
+                            ? effectManager.currentGlobalAccentColor
+                            : Color.primary
+                    )
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 8)
+                    .background(
+                        ayurvedaFilters.isActive
+                            ? Color.green.opacity(0.16)
+                            : Color(.systemGray6),
+                        in: Capsule()
+                    )
+                    .overlay {
+                        Capsule()
+                            .stroke(
+                                ayurvedaFilters.isActive
+                                    ? Color.green.opacity(0.7)
+                                    : Color.clear,
+                                lineWidth: 1.5
+                            )
+                    }
+                }
+                .buttonStyle(.plain)
+                .accessibilityValue(
+                    ayurvedaFilters.isActive
+                        ? "\(ayurvedaFilters.activeCount) active filters"
+                        : "No active filters"
+                )
+
                 // --- FAVORITES BUTTON ---
                 Button(action: { toggleSpecialFilter(.favorites) }) {
                     HStack(spacing: 6) {
@@ -280,26 +339,63 @@ private struct FoodSearchViewContent: View {
                 }
             }
             
-            // ✅ Секция с резултатите от търсенето – директно от engine
-            Section("Results") {
-                ForEach(engine.displayedResults, id: \.id) { food in
-                    FoodRowView(
-                        food: food,
-                        engine: engine
-                    )
-                    .contentShape(Rectangle()) // пълният ред да е tappable
-                    .onTapGesture {
-                        addToSelected(food)
+            if engine.isAyurvedaSearchActive {
+                let profiled = engine.displayedResults.filter {
+                    engine.ayurvedaMetadata(for: $0.id) != nil
+                }
+                let unprofiled = engine.displayedResults.filter {
+                    engine.ayurvedaMetadata(for: $0.id) == nil
+                }
+
+                if !profiled.isEmpty {
+                    Section {
+                        resultRows(profiled)
+                    } header: {
+                        Label("Ayurvedic matches", systemImage: "leaf.fill")
+                    } footer: {
+                        Text("Dosha choices reorder these foods; they do not hide aggravating results.")
                     }
-                    .onAppear {
-                        if food.id == engine.displayedResults.last?.id {
-                            engine.loadMoreResults()
-                        }
+                }
+
+                if !unprofiled.isEmpty {
+                    Section {
+                        resultRows(unprofiled)
+                    } header: {
+                        Label(
+                            "No Ayurvedic profile yet",
+                            systemImage: "questionmark.circle"
+                        )
+                    } footer: {
+                        Text("These foods still match your text and safety filters, but cannot be evaluated against the selected Ayurvedic facets.")
                     }
+                }
+            } else {
+                Section("Results") {
+                    resultRows(engine.displayedResults)
                 }
             }
         }
         .listStyle(.insetGrouped)
+    }
+
+    @ViewBuilder
+    private func resultRows(_ foods: [FoodItem]) -> some View {
+        ForEach(foods, id: \.id) { food in
+            FoodRowView(
+                food: food,
+                engine: engine,
+                ayurvedaFilters: ayurvedaFilters
+            )
+            .contentShape(Rectangle())
+            .onTapGesture {
+                addToSelected(food)
+            }
+            .onAppear {
+                if food.id == engine.displayedResults.last?.id {
+                    engine.loadMoreResults()
+                }
+            }
+        }
     }
     
     // MARK: - Selection Helpers
@@ -335,7 +431,8 @@ private struct FoodSearchViewContent: View {
                 isMenusOnly: self.showMenusOnly,
                 searchMode: self.searchMode,
                 profile: self.profile,
-                excludedFoodIDs: self.selectedFoodIDs   // ✅ НОВО
+                excludedFoodIDs: self.selectedFoodIDs,
+                ayurvedaFilters: self.ayurvedaFilters
             )
         }
         
@@ -364,7 +461,8 @@ private struct FoodSearchViewContent: View {
             isMenusOnly: showMenusOnly,
             searchMode: searchMode,
             profile: self.profile,
-            excludedFoodIDs: self.selectedFoodIDs   // ✅ НОВО
+            excludedFoodIDs: self.selectedFoodIDs,
+            ayurvedaFilters: self.ayurvedaFilters
         )
     }
 
@@ -430,6 +528,7 @@ private struct FoodSearchViewContent: View {
 private struct FoodRowView: View {
     let food: FoodItem
     @ObservedObject var engine: SmartFoodSearch3
+    let ayurvedaFilters: AyurvedaSearchFilters
     
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -516,6 +615,14 @@ private struct FoodRowView: View {
                     }
                     .font(.caption2)
                     .foregroundColor(.green)
+                }
+
+                if engine.isAyurvedaSearchActive,
+                   let metadata = engine.ayurvedaMetadata(for: food.id) {
+                    AyurvedaSearchResultSummary(
+                        metadata: metadata,
+                        filters: ayurvedaFilters
+                    )
                 }
             }
             
