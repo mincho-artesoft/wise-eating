@@ -20,7 +20,11 @@ PORT="${PORT:-8787}"
 LIMIT="${LIMIT:-100}"
 SETTLE="${SETTLE:-8000}"
 ABORT_AFTER="${ABORT_AFTER:-8}"
-MIN_EXT_VERSION="0.4.2"
+# 0.5.0 is a HARD floor, not a nicety. Every version below it falls back to
+# global result matching when a card will not bind, which silently downloads
+# another job's image under this job's filename. Running 0.4.x reintroduces the
+# wrong-food bug immediately and invisibly.
+MIN_EXT_VERSION="0.5.2"
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LOG="$DIR/bridge.log"
@@ -112,14 +116,38 @@ if [[ "$CONNECTED" != 1 ]]; then
   die "extension never connected — is Chrome running with an authenticated Flow project tab open?"
 fi
 
-VERSION="$(grep -o 'version [0-9][0-9.]*' "$LOG" | tail -1 | awk '{print $2}')"
+# The extension announces its version in a SECOND message, several seconds after
+# the socket opens. Reading the log once, immediately after extensionConnected
+# goes true, loses that race and yields an empty string — measured on a healthy
+# 0.5.0 run: connected at 15:58:22.868, "Extension hello, version 0.5.0" at
+# 15:58:34.478, twelve seconds later. Poll for it instead.
+VERSION=""
+for _ in $(seq 1 30); do
+  VERSION="$(grep -o 'version [0-9][0-9.]*' "$LOG" | tail -1 | awk '{print $2}')"
+  [[ -n "$VERSION" ]] && break
+  sleep 1
+done
+
 if [[ -z "$VERSION" ]]; then
-  warn "could not read the extension version from the log"
+  # Previously a warning that let the run continue. That silently disabled the
+  # entire version floor: an unreadable version is indistinguishable from 0.4.0,
+  # and 0.4.x attaches other jobs' images to this job's filename. Unknown is not
+  # the same as fine.
+  warn "could not read the extension version after 30s"
+  warn "an unknown version cannot be distinguished from a pre-0.5.0 one, and those"
+  warn "silently attach the wrong food's image to the right filename"
+  if [[ -t 0 ]]; then
+    read -r -p "  continue anyway? [y/N] " a; [[ "$a" == y* ]] || exit 1
+  else
+    die "refusing to run unattended without knowing the extension version"
+  fi
 elif [[ "$VERSION" == "$MIN_EXT_VERSION" || "$(printf '%s\n%s\n' "$MIN_EXT_VERSION" "$VERSION" | sort -V | head -1)" == "$MIN_EXT_VERSION" ]]; then
   ok "extension $VERSION"
 else
-  # Worth stopping for. Below 0.4.0 the hidden-tab fix is missing and every job
-  # whose result card fails to bind stalls for ~195s instead of finishing.
+  # Worth stopping for, and below 0.5.0 worth REFUSING for: those versions
+  # attach another job's image to this job's filename when a card fails to bind.
+  # The output looks perfectly healthy — right name, one file, plausible picture
+  # — so nothing downstream catches it.
   warn "extension is $VERSION, expected >= $MIN_EXT_VERSION"
   warn "reload the extension at chrome://extensions — reloading the TAB is not enough"
   # Never block on stdin when there is no terminal. Under `nohup ... &` a read

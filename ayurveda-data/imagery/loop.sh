@@ -22,7 +22,12 @@
 set -uo pipefail
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BATCH="${BATCH:-25}"
+# One round covers the whole catalogue. Rounds are not checkpoints — the ledger
+# is, and it now writes after every job — so a small batch bought nothing except
+# re-running verify.py (which hashes every image on disk) 74 times instead of
+# once. If the round ends with rows still outstanding, the loop simply starts
+# another one and picks them up.
+BATCH="${BATCH:-1844}"
 PAUSE="${PAUSE:-0}"             # no pause between batches by default
 SETTLE="${SETTLE:-15000}"
 # 0 = no daily ceiling (the default: go as fast as the service allows).
@@ -35,6 +40,12 @@ SETTLE="${SETTLE:-15000}"
 # finding the limit by hitting it.
 MAX_PER_DAY="${MAX_PER_DAY:-0}"
 MAX_ROUNDS="${MAX_ROUNDS:-100000}"
+# Passed through to runner.js. It only repeats failures that provably happened
+# BEFORE generation (card_bind_failed, connection errors), so it can never
+# double-generate an image that already exists. Default 1: on an unlimited-credit
+# account the remaining failure mode is a prompt that never reached Flow, and the
+# only cure for that is asking again.
+RETRIES="${RETRIES:-1}"
 OUT="${OUT:-$HOME/wise-eating-images}"
 REPO="${REPO:-$HOME/work/wise-eating}"
 STATE="$DIR/loop-state.txt"
@@ -78,7 +89,8 @@ for round in $(seq 1 "$MAX_ROUNDS"); do
   log "round $round — $REM remaining, starting a batch of $BATCH"
 
   # < /dev/null so nothing downstream can ever wait on a terminal that is not there
-  OUTPUT="$(LIMIT="$BATCH" SETTLE="$SETTLE" OUT="$OUT" REPO="$REPO" "$DIR/run.sh" 2>&1 < /dev/null)"
+  OUTPUT="$(LIMIT="$BATCH" SETTLE="$SETTLE" OUT="$OUT" REPO="$REPO" "$DIR/run.sh" \
+              --retries "$RETRIES" 2>&1 < /dev/null)"
   RC=$?
   printf '%s\n' "$OUTPUT" | tee -a "$STATE" >/dev/null
   printf '%s\n' "$OUTPUT" | tail -25
@@ -89,7 +101,11 @@ for round in $(seq 1 "$MAX_ROUNDS"); do
   # tripped the runner's backoff, the loop read "BACKING OFF" as a refusal, and
   # stopped — while reconciliation was recovering five of the six images. Flow had
   # said nothing. Only Flow actually objecting is a reason to stop.
-  if printf '%s' "$OUTPUT" | grep -qiE "FLOW_REFUSED|unusual activity"; then
+  # "daily limit" added 2026-07-29. Flow showed "You've reached the daily limit
+  # for Nano Banana 2 generations" on every card and this grep did not match it,
+  # so the loop kept submitting for hours into a service that had stopped
+  # answering — the one behaviour this check exists to prevent.
+  if printf '%s' "$OUTPUT" | grep -qiE "FLOW_REFUSED|unusual activity|daily limit|reached the daily"; then
     log "STOPPED — Flow refused the request. This is an anti-abuse or quota block."
     log "  Do not restart this loop today. Wait several hours, then generate ONE"
     log "  image by hand in the Flow UI. Only if that works, start again with a"

@@ -110,7 +110,19 @@ function loadLedger() {
 
 function saveLedger(results) {
   const l = loadLedger();
-  for (const r of results) if (r.filename) l[r.filename] = { status: r.status, name: r.name, kind: r.kind, error: r.error || null };
+  // mediaId is the durable handle on the generated image (extension >= 0.5.5).
+  // Kept even for failed rows — especially for failed rows: a download failure
+  // means the image EXISTS in the Flow project, so the id is what makes it
+  // recoverable later without regenerating. Never overwrite a known id with
+  // null on a retry.
+  for (const r of results) {
+    if (!r.filename) continue;
+    const prev = l[r.filename] || {};
+    l[r.filename] = {
+      status: r.status, name: r.name, kind: r.kind, error: r.error || null,
+      mediaId: r.mediaId || prev.mediaId || null,
+    };
+  }
   fs.mkdirSync(path.dirname(LEDGER), { recursive: true });
   fs.writeFileSync(LEDGER, JSON.stringify(l, null, 2));
 }
@@ -364,7 +376,13 @@ async function runBatch(file) {
       // bind — re-running it spends the credit twice for a picture that already
       // exists. Only failures that provably happened BEFORE generation are safe
       // to repeat. Default is 0 retries; --retries 1 only widens this set.
-      const preGeneration = /already exists|not connected|content script|Receiving end|unreachable|ECONN/i.test(String(lastErr));
+      // card_bind_failed joins that set from extension 0.5.1. In 0.4.x an
+      // unbindable card fell back to global matching and claimed whatever image
+      // appeared next — usually the NEXT job's — so the failure was invisible and
+      // a retry compounded it. From 0.5.1 the job aborts before claiming
+      // anything, so the filename is untouched and a repeat is safe. Inert at the
+      // default --retries 0, where the row simply stays queued for the next round.
+      const preGeneration = /already exists|not connected|content script|Receiving end|unreachable|ECONN|card_bind_failed/i.test(String(lastErr));
       if (attempt < RETRIES && preGeneration) {
         log(`  retry ${i + 1}/${batch.jobs.length} ${job.output.filename} — ${lastErr} (nothing was generated)`);
         await new Promise((r) => setTimeout(r, SETTLE * 2));
@@ -397,12 +415,23 @@ async function runBatch(file) {
       }
       log(`  FAIL ${i + 1}/${batch.jobs.length} ${job.output.filename} — ${problem}`);
       consecutive += 1;
-      results.push({ ...job._row, filename: job.output.filename, status: "error", error: problem });
+      results.push({ ...job._row, filename: job.output.filename, status: "error", error: problem,
+                     mediaId: (done && done.mediaId) || null });
     } else {
       log(`  ${ok ? "ok  " : "FAIL"} ${i + 1}/${batch.jobs.length} ${job.output.filename}${ok ? "" : " — " + lastErr}`);
       consecutive = ok ? 0 : consecutive + 1;
-      results.push({ ...job._row, filename: job.output.filename, status: ok ? done.status : "error", error: ok ? null : lastErr });
+      results.push({ ...job._row, filename: job.output.filename, status: ok ? done.status : "error",
+                     error: ok ? null : lastErr, mediaId: (done && done.mediaId) || null });
     }
+
+    // Persist after EVERY job, not only at the end of the batch.
+    //
+    // The ledger is now the record of which media id belongs to which food, and
+    // that is precisely what a crashed or killed batch needs to have kept. A
+    // single write at batch end loses the ids for every job in a run that dies
+    // — including the failed ones, which are the rows the id exists to rescue.
+    // Writing ~25 small JSON files per batch is free next to regenerating.
+    try { saveLedger(results); } catch (e) { log(`  ledger write failed: ${e.message}`); }
     // A timeout is usually a SLOW SUCCESS: the card failed to bind, the runner gave
     // up, and the image lands a minute later — reconciliation then recovers it. On
     // 2026-07-28 six consecutive timeouts tripped the backoff at 75% and stopped an

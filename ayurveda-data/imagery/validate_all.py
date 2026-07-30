@@ -49,6 +49,33 @@ file from scratch. That matters for three reasons:
 It refuses to run if accepted/ holds files it did not write, because
 build_archive2.py globs accepted/batch-*.json and would concatenate a stale
 legacy batch into the archive.
+
+THRESHOLDS — measured on the real 448-image set, do not "tidy" them back
+------------------------------------------------------------------------
+The values inherited from validate_batch.py rejected 132 of 448 good images.
+Both were wrong for this catalogue, and the perceptual one was dangerously so.
+
+**Hash size 16x16, not 8x8.** Every image is a plated subject, centred, on a
+light grey background. At 8x8 (64 bits) that style *is* the whole signal:
+measured over 100,128 pairs, two completely different foods —
+dravya-dwarf-copperleaf-ponnanganni and dravya-kodo-millet — collided at
+distance **0**, and 555 pairs fell within distance 6. Any 8x8 threshold able to
+catch a true duplicate also condemns hundreds of good images.
+
+At 16x16 (256 bits) the separation is clean: the closest genuine pair over the
+same 100,128 comparisons sits at **11**, and only 5 pairs are below 25. A true
+duplicate is 0 when byte-identical and a few bits when re-encoded, so the
+default of 6 has headroom on both sides.
+
+**Corner mean 130, not 150.** Measured distribution: p05 159, median 195, and
+the darkest legitimate images sit at 141-149 with corner sd near 1.0, i.e.
+perfectly uniform backgrounds that happen to be a slightly deeper grey. 150
+rejected 7 of them. 130 keeps the check meaningful — genuine style drift to a
+dark background lands well under 100 — without clipping the low tail.
+
+Byte-identical detection is verify.py's check F, which uses sha256 and needs no
+threshold at all. That is the primitive to trust; this perceptual pass is a
+weaker net for re-encoded copies and is calibrated to err toward accepting.
 """
 import argparse, collections, json, os, sys
 
@@ -62,7 +89,7 @@ OURS = "batch-000.json"
 IMG_EXT = (".png", ".jpg", ".jpeg", ".webp")
 
 
-def dhash(img, size=8):
+def dhash(img, size=16):
     g = img.convert("L").resize((size + 1, size), Image.LANCZOS)
     # tobytes() on an "L" image is row-major pixel order — identical values to the
     # deprecated getdata(), so hashes stay comparable with anything already graded.
@@ -101,8 +128,9 @@ def main():
     ap.add_argument("--images", default=os.path.expanduser("~/wise-eating-images"))
     ap.add_argument("--jobs", default=os.path.join(DIR, "jobs.json"))
     ap.add_argument("--min-size", type=int, default=1024)
+    # MEASURED on the real 448-image set, not inherited. See THRESHOLDS below.
     ap.add_argument("--hash-distance", type=int, default=6)
-    ap.add_argument("--corner-mean", type=float, default=150.0)
+    ap.add_argument("--corner-mean", type=float, default=130.0)
     ap.add_argument("--corner-sd", type=float, default=18.0)
     ap.add_argument("--report-only", action="store_true",
                     help="grade and print, write nothing — use this to sanity-check "
@@ -120,11 +148,20 @@ def main():
     os.makedirs(acc_dir, exist_ok=True)
     foreign = [f for f in sorted(os.listdir(acc_dir))
                if f.endswith(".json") and f != OURS]
-    if foreign:
+    # Only a WRITE is unsafe with foreign batches present. --report-only writes
+    # nothing, so refusing there blocks a read-only diagnostic for a hazard it
+    # cannot possibly create. That mattered: this check fired while the only
+    # thing being asked was "did killing the loop leave a truncated download",
+    # which is exactly when you least want a safety guard in the way.
+    if foreign and not a.report_only:
         sys.exit(f"accepted/ holds {len(foreign)} file(s) this script did not write: {foreign[:5]}\n"
                  f"build_archive2.py globs accepted/batch-*.json and would concatenate them into\n"
                  f"the archive alongside this run's output, double-counting or resurrecting rows\n"
-                 f"graded under different thresholds. Move them out of accepted/ and re-run.")
+                 f"graded under different thresholds. Move them out of accepted/ and re-run.\n"
+                 f"To inspect without writing anything, add --report-only.")
+    if foreign:
+        print(f"note           accepted/ holds {len(foreign)} foreign file(s): {foreign[:5]}\n"
+              f"               harmless for this read-only run; would block a write.")
 
     # ---- locate what actually exists ---------------------------------------
     present, absent = [], 0
