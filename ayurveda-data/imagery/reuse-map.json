@@ -28,7 +28,7 @@
     "tier": "exact"
   },
   "Almond": {
-    "frameKey": "Nuts, almonds",
+    "frameKey": "Almonds, NFS",
     "tier": "exact"
   },
   "Spinach": {
@@ -36,7 +36,7 @@
     "tier": "exact"
   },
   "Yogurt, plain whole milk": {
-    "frameKey": "Yogurt, plain, whole milk",
+    "frameKey": "Yogurt, whole milk, plain",
     "tier": "exact"
   },
   "Cumin seed": {
@@ -204,7 +204,7 @@
     "tier": "exact"
   },
   "Chickpea": {
-    "frameKey": "Chickpeas (garbanzo beans, bengal gram), mature seeds, raw",
+    "frameKey": "Chickpeas, NFS",
     "tier": "exact"
   },
   "Chana dal (split bengal gram)": {
@@ -220,7 +220,7 @@
     "tier": "exact"
   },
   "Kidney bean": {
-    "frameKey": "Beans, kidney, red, mature seeds, raw",
+    "frameKey": "Kidney beans, NFS",
     "tier": "exact"
   },
   "Black beans": {
@@ -384,7 +384,7 @@
     "tier": "exact"
   },
   "Dates": {
-    "frameKey": "Dates, medjool",
+    "frameKey": "Date",
     "tier": "exact"
   },
   "Watermelon": {
@@ -463,6 +463,10 @@
     "frameKey": "Dandelion greens, raw",
     "tier": "exact"
   },
+  "Spring onion": {
+    "frameKey": "Scallions",
+    "tier": "exact"
+  },
   "Artichoke, globe": {
     "frameKey": "Artichokes, (globe or french), raw",
     "tier": "exact"
@@ -516,7 +520,7 @@
     "tier": "exact"
   },
   "Cashew": {
-    "frameKey": "Nuts, cashew nuts, raw",
+    "frameKey": "Cashews, NFS",
     "tier": "exact"
   },
   "Pistachio": {
@@ -528,19 +532,19 @@
     "tier": "exact"
   },
   "Pine nut": {
-    "frameKey": "Nuts, pine nuts, dried",
+    "frameKey": "Pine nuts",
     "tier": "exact"
   },
   "Hazelnut": {
-    "frameKey": "Nuts, hazelnuts or filberts",
+    "frameKey": "Hazelnuts",
     "tier": "exact"
   },
   "Pecan": {
-    "frameKey": "Nuts, pecans",
+    "frameKey": "Pecans, NFS",
     "tier": "exact"
   },
   "Brazil nut": {
-    "frameKey": "Nuts, brazilnuts, dried, unblanched",
+    "frameKey": "Brazil nuts",
     "tier": "exact"
   },
   "Macadamia": {
@@ -548,7 +552,7 @@
     "tier": "exact"
   },
   "Chestnut": {
-    "frameKey": "Nuts, chestnuts, european, raw, peeled",
+    "frameKey": "Chestnuts",
     "tier": "exact"
   },
   "Sunflower seeds": {
@@ -600,11 +604,11 @@
     "tier": "exact"
   },
   "Cottage cheese": {
-    "frameKey": "Cheese, cottage, creamed, with fruit",
-    "tier": "near"
+    "frameKey": "Cheese, cottage, NFS",
+    "tier": "exact"
   },
   "Milk, goat": {
-    "frameKey": "Milk, goat, fluid, with added vitamin D",
+    "frameKey": "Goat milk",
     "tier": "exact"
   },
   "Mustard oil": {
@@ -843,10 +847,6 @@
     "frameKey": "Celery, raw",
     "tier": "exact"
   },
-  "Green chili (vegetable use)": {
-    "frameKey": "Green chili",
-    "tier": "exact"
-  },
   "Arrowroot (fresh)": {
     "frameKey": "Arrowroot, raw",
     "tier": "near"
@@ -859,16 +859,8 @@
     "frameKey": "Breadfruit, raw",
     "tier": "near"
   },
-  "Ripe mango": {
-    "frameKey": "Mangos, raw",
-    "tier": "near"
-  },
   "Alphonso mango": {
     "frameKey": "Mangos, raw",
-    "tier": "near"
-  },
-  "Ripe banana": {
-    "frameKey": "Bananas, raw",
     "tier": "near"
   },
   "Red banana": {
@@ -881,10 +873,6 @@
   },
   "Ripe papaya": {
     "frameKey": "Papayas, raw",
-    "tier": "near"
-  },
-  "Apricot (fresh)": {
-    "frameKey": "Apricot, raw",
     "tier": "near"
   },
   "Green grapes": {
@@ -910,10 +898,6 @@
   "Litchi": {
     "frameKey": "Litchis, raw",
     "tier": "exact"
-  },
-  "Fresh fig (anjeer)": {
-    "frameKey": "Fig, raw",
-    "tier": "near"
   },
   "Fresh dates": {
     "frameKey": "Dates, medjool",
@@ -1067,10 +1051,6 @@
     "frameKey": "Chickpeas (garbanzo beans, bengal gram), mature seeds, raw",
     "tier": "near"
   },
-  "Garlic (fresh bulb)": {
-    "frameKey": "Garlic, raw",
-    "tier": "exact"
-  },
   "Black-eyed pea": {
     "frameKey": "Cowpeas, common (blackeyes, crowder, southern), mature seeds, raw",
     "tier": "near"
@@ -1099,16 +1079,12 @@
     "frameKey": "Mung beans, mature seeds, sprouted, raw",
     "tier": "near"
   },
-  "Peanut (raw)": {
-    "frameKey": "Peanuts, all types, raw",
-    "tier": "exact"
-  },
   "Peanut (roasted)": {
     "frameKey": "Peanuts, dry roasted, unsalted",
     "tier": "exact"
   },
   "Lima bean": {
-    "frameKey": "Lima beans, large, mature seeds, raw",
+    "frameKey": "Lima beans, NFS",
     "tier": "exact"
   },
   "White peas (safed vatana)": {
@@ -1263,6 +1239,10 @@
     "frameKey": "Whey, sweet, dry",
     "tier": "near"
   },
+  "Skimmed milk": {
+    "frameKey": "Milk, fat free (skim)",
+    "tier": "exact"
+  },
   "Milk powder": {
     "frameKey": "Milk, dry, whole, without added vitamin D",
     "tier": "exact"
@@ -1280,7 +1260,7 @@
     "tier": "exact"
   },
   "Palm oil": {
-    "frameKey": "Palm Oil (Red)",
+    "frameKey": "Oil, palm",
     "tier": "exact"
   },
   "Raw sugar (khand)": {

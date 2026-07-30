@@ -1,5 +1,5 @@
 {
-  "count": 1844,
+  "count": 1840,
   "createdBy": "build_batches.py",
   "styleHash": "c8d83786a68f",
   "jobs": [
@@ -4360,24 +4360,6 @@
       }
     },
     {
-      "id": "img-587530c9d0",
-      "type": "image",
-      "prompt": "Ripe jackfruit. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
-      "settings": {
-        "aspectRatio": "1:1",
-        "model": "Nano Banana 2"
-      },
-      "output": {
-        "filename": "dravya-ripe-jackfruit",
-        "quality": "original"
-      },
-      "_row": {
-        "kind": "dravya",
-        "name": "Ripe jackfruit",
-        "frameKey": "Ripe jackfruit"
-      }
-    },
-    {
       "id": "img-9a06c85ffd",
       "type": "image",
       "prompt": "Ripe karonda. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
@@ -4882,24 +4864,6 @@
       }
     },
     {
-      "id": "img-bd3e7f91e1",
-      "type": "image",
-      "prompt": "Skimmed milk. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
-      "settings": {
-        "aspectRatio": "1:1",
-        "model": "Nano Banana 2"
-      },
-      "output": {
-        "filename": "dravya-skimmed-milk",
-        "quality": "original"
-      },
-      "_row": {
-        "kind": "dravya",
-        "name": "Skimmed milk",
-        "frameKey": "Skimmed milk"
-      }
-    },
-    {
       "id": "img-1ed8b7c805",
       "type": "image",
       "prompt": "Snake gourd. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
@@ -5059,24 +5023,6 @@
         "kind": "dravya",
         "name": "Spring garlic greens",
         "frameKey": "Spring garlic greens"
-      }
-    },
-    {
-      "id": "img-63dab6819a",
-      "type": "image",
-      "prompt": "Spring onion. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
-      "settings": {
-        "aspectRatio": "1:1",
-        "model": "Nano Banana 2"
-      },
-      "output": {
-        "filename": "dravya-spring-onion",
-        "quality": "original"
-      },
-      "_row": {
-        "kind": "dravya",
-        "name": "Spring onion",
-        "frameKey": "Spring onion"
       }
     },
     {
@@ -5863,24 +5809,6 @@
       },
       "output": {
         "filename": "dravya-vetiver-root",
-        "quality": "original"
-      },
-      "_row": {
-        "kind": "dravya",
-        "name": "Vetiver root",
-        "frameKey": "Vetiver root"
-      }
-    },
-    {
-      "id": "img-8d9a79cbba",
-      "type": "image",
-      "prompt": "Vetiver root. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
-      "settings": {
-        "aspectRatio": "1:1",
-        "model": "Nano Banana 2"
-      },
-      "output": {
-        "filename": "dravya-vetiver-root-8d9a79",
         "quality": "original"
       },
       "_row": {

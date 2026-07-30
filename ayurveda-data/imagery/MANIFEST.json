@@ -1,8 +1,8 @@
 {
-  "totalToGenerate": 1844,
+  "totalToGenerate": 1840,
   "batchSize": 100,
   "batches": 19,
-  "reuseWithoutGeneration": 324,
+  "reuseWithoutGeneration": 319,
   "styleHash": "c8d83786a68f",
   "rows": [
     {
@@ -1458,12 +1458,6 @@
       "frameKey": "Rice, brown"
     },
     {
-      "filename": "dravya-ripe-jackfruit",
-      "kind": "dravya",
-      "name": "Ripe jackfruit",
-      "frameKey": "Ripe jackfruit"
-    },
-    {
       "filename": "dravya-ripe-karonda",
       "kind": "dravya",
       "name": "Ripe karonda",
@@ -1632,12 +1626,6 @@
       "frameKey": "Sinki (fermented radish)"
     },
     {
-      "filename": "dravya-skimmed-milk",
-      "kind": "dravya",
-      "name": "Skimmed milk",
-      "frameKey": "Skimmed milk"
-    },
-    {
       "filename": "dravya-snake-gourd",
       "kind": "dravya",
       "name": "Snake gourd",
@@ -1690,12 +1678,6 @@
       "kind": "dravya",
       "name": "Spring garlic greens",
       "frameKey": "Spring garlic greens"
-    },
-    {
-      "filename": "dravya-spring-onion",
-      "kind": "dravya",
-      "name": "Spring onion",
-      "frameKey": "Spring onion"
     },
     {
       "filename": "dravya-sprouted-black-chickpea",
@@ -1957,12 +1939,6 @@
     },
     {
       "filename": "dravya-vetiver-root",
-      "kind": "dravya",
-      "name": "Vetiver root",
-      "frameKey": "Vetiver root"
-    },
-    {
-      "filename": "dravya-vetiver-root-8d9a79",
       "kind": "dravya",
       "name": "Vetiver root",
       "frameKey": "Vetiver root"
