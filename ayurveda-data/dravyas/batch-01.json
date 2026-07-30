@@ -23,7 +23,7 @@
       "viruddha": ["honey in equal weight"],
       "contraindications": ["obesity", "high ama (coating on tongue, sluggish digestion)", "dairy sensitivity"],
       "preparation": "Use warm and melted in modest amounts; add at end of cooking or use as cooking fat; avoid repeated overheating.",
-      "usda": [{"fdcId": 4558, "name": "Ghee, clarified butter", "tier": "exact"}, {"fdcId": 10258, "name": "Butter oil, anhydrous", "tier": "near"}],
+      "usda": [{"fdcId": 4558, "name": "Ghee, clarified butter", "tier": "exact"}, {"fdcId": 8500, "name": "Butter, Clarified butter (ghee)", "tier": "exact"}, {"fdcId": 10258, "name": "Butter oil, anhydrous", "tier": "near"}],
       "servings": [{"label": "1 tsp", "grams": 4.5}, {"label": "1 tbsp", "grams": 13.5}],
       "provenance": ["Charaka Samhita Sutrasthana 27", "Bhavaprakasha Nighantu, Ghrita varga"],
       "confidence": {"ayur": 0.9, "sci": 0.8}
@@ -198,7 +198,7 @@
       "viruddha": [],
       "contraindications": ["nut allergy", "weak digestion (unsoaked)", "high kapha (large amounts)"],
       "preparation": "Soak overnight and remove skins — the skin is heating and hard to digest; 5–10 almonds in the morning.",
-      "usda": [{"fdcId": 7884, "name": "Nuts, almonds", "tier": "exact"}],
+      "usda": [{"fdcId": 1994, "name": "Almonds, NFS", "tier": "exact"}, {"fdcId": 7884, "name": "Nuts, almonds", "tier": "exact"}],
       "servings": [{"label": "10 almonds", "grams": 12}, {"label": "1/4 cup", "grams": 36}],
       "provenance": ["Bhavaprakasha Nighantu, Amradi phala varga"],
       "confidence": {"ayur": 0.85, "sci": 0.85}
@@ -248,7 +248,7 @@
       "viruddha": ["at night (classical prohibition)", "heated or cooked", "with milk", "with fruit in the same dish (traditional caution)", "daily use in spring/summer"],
       "contraindications": ["kapha disorders, congestion, sinusitis", "skin conditions with high pitta", "obesity"],
       "preparation": "Fresh, homemade, at room temperature, at lunch only; dilute 1:1 with water and spices for regular use.",
-      "usda": [{"fdcId": 8481, "name": "Yogurt, plain, whole milk", "tier": "exact"}],
+      "usda": [{"fdcId": 35, "name": "Yogurt, whole milk, plain", "tier": "exact"}, {"fdcId": 8481, "name": "Yogurt, plain, whole milk", "tier": "exact"}],
       "servings": [{"label": "1 cup", "grams": 245}, {"label": "1/2 cup", "grams": 122}],
       "provenance": ["Charaka Samhita Sutrasthana 27 (Dadhi guna)", "Ashtanga Hridaya Sutrasthana 5"],
       "confidence": {"ayur": 0.95, "sci": 0.85}
@@ -348,7 +348,7 @@
       "viruddha": [],
       "contraindications": ["gallstones (large medicinal amounts)"],
       "preparation": "Crush pods lightly before adding to boiling milk or chai; a pinch of ground seed in desserts.",
-      "usda": [{"fdcId": 8144, "name": "Spices, cardamom", "tier": "exact"}],
+      "usda": [{"fdcId": 8144, "name": "Spices, cardamom", "tier": "exact"}, {"fdcId": 12225, "name": "Green cardamom", "tier": "exact"}],
       "servings": [{"label": "1 pod", "grams": 0.3}, {"label": "1/4 tsp ground", "grams": 0.5}],
       "provenance": ["Bhavaprakasha Nighantu, Karpuradi varga"],
       "confidence": {"ayur": 0.9, "sci": 0.85}

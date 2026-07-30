@@ -23,7 +23,7 @@
     {"id":"dravya.besan","name":"Gram flour (besan)","sanskrit":"Chanaka Churna","category":"legume","vpk":[1,-1,-1],"virya":"cooling","fdc":"direct"},
     {"id":"dravya.sattu-flour","name":"Roasted gram flour (sattu)","sanskrit":"Saktu","category":"legume","vpk":[0,-1,-1],"virya":"cooling","fdc":"nearest","note":"classical saktu; summer staple"},
     {"id":"dravya.roasted-chana","name":"Roasted chana (bhuna)","sanskrit":"Bhrishta Chanaka","category":"legume","vpk":[1,-1,-2],"virya":"heating","fdc":"direct"},
-    {"id":"dravya.peanut-raw","name":"Peanut (raw)","sanskrit":"Bhuchanaka","category":"legume","vpk":[-1,1,1],"virya":"heating","fdc":"direct"},
+    {"id":"dravya.peanut","name":"Peanut","sanskrit":"Bhuchanaka","category":"legume","vpk":[-1,1,1],"virya":"heating","fdc":"direct"},
     {"id":"dravya.peanut-roasted","name":"Peanut (roasted)","sanskrit":null,"category":"legume","vpk":[-1,1,1],"virya":"heating","fdc":"direct"},
     {"id":"dravya.lima-bean","name":"Lima bean","sanskrit":null,"category":"legume","vpk":[1,0,-1],"virya":"neutral","fdc":"direct"},
     {"id":"dravya.white-peas","name":"White peas (safed vatana)","sanskrit":"Kalaya","category":"legume","vpk":[1,0,-1],"virya":"cooling","fdc":"direct"},

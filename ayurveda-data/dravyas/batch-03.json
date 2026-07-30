@@ -424,7 +424,7 @@
       "viruddha": [],
       "contraindications": ["vata excess and gas-prone digestion", "weak agni (large portions)"],
       "preparation": "Soak overnight, cook thoroughly, and never skip the warming spices — chickpeas are the most vata-aggravating common legume.",
-      "usda": [{"fdcId": 10547, "name": "Chickpeas (garbanzo beans, bengal gram), mature seeds, raw", "tier": "exact"}],
+      "usda": [{"fdcId": 1926, "name": "Chickpeas, NFS", "tier": "exact"}, {"fdcId": 10547, "name": "Chickpeas (garbanzo beans, bengal gram), mature seeds, raw", "tier": "exact"}],
       "servings": [{"label": "1 cup cooked", "grams": 164}, {"label": "1/4 cup dry", "grams": 50}],
       "provenance": ["Bhavaprakasha Nighantu, Dhanya varga"],
       "confidence": {"ayur": 0.85, "sci": 0.85}
@@ -524,7 +524,7 @@
       "viruddha": [],
       "contraindications": ["vata excess and gas-prone digestion", "weak agni", "undercooked beans (lectin toxicity)"],
       "preparation": "Soak overnight, discard soak water, boil hard until completely soft; generous ginger, hing and fat are essential.",
-      "usda": [{"fdcId": 10535, "name": "Beans, kidney, red, mature seeds, raw", "tier": "exact"}],
+      "usda": [{"fdcId": 1891, "name": "Kidney beans, NFS", "tier": "exact"}, {"fdcId": 10535, "name": "Beans, kidney, red, mature seeds, raw", "tier": "exact"}],
       "servings": [{"label": "1 cup cooked", "grams": 177}, {"label": "1/4 cup dry", "grams": 46}],
       "provenance": ["Post-classical (New World); modern Ayurvedic texts"],
       "confidence": {"ayur": 0.8, "sci": 0.85}

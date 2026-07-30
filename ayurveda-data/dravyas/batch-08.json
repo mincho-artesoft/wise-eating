@@ -73,7 +73,7 @@
       "viruddha": ["with sour fruit (dairy-sour caution)"],
       "contraindications": ["kapha excess, obesity, congestion", "weak digestion", "high cholesterol"],
       "preparation": "Use warm and in moderation; deeply building for depleted vata, quickly excessive for everyone else.",
-      "usda": [{"fdcId": 8093, "name": "Cream, fluid, heavy whipping", "tier": "exact"}],
+      "usda": [{"fdcId": 158, "name": "Cream, heavy", "tier": "exact"}, {"fdcId": 8093, "name": "Cream, fluid, heavy whipping", "tier": "exact"}],
       "servings": [{"label": "1 tbsp", "grams": 15}],
       "provenance": ["Modern texts (dairy guna analysis)"],
       "confidence": {"ayur": 0.8, "sci": 0.85}
@@ -148,7 +148,7 @@
       "viruddha": ["with fresh fruit in the same bowl (dairy-fruit caution)"],
       "contraindications": ["kapha excess, congestion", "dairy sensitivity"],
       "preparation": "Closer to fresh cheese than aged — still cultured, so treat like mild yogurt: lunch hours, warming spices, no fruit mixing.",
-      "usda": [{"fdcId": 9231, "name": "Cheese, cottage, creamed, with fruit", "tier": "near"}],
+      "usda": [{"fdcId": 282, "name": "Cheese, cottage, NFS", "tier": "exact"}, {"fdcId": 9231, "name": "Cheese, cottage, creamed, with fruit", "tier": "near"}],
       "servings": [{"label": "1/2 cup", "grams": 113}],
       "provenance": ["Modern texts (dairy guna analysis)"],
       "confidence": {"ayur": 0.7, "sci": 0.8}
@@ -173,7 +173,7 @@
       "viruddha": ["fish, sour fruit (as with all milks)"],
       "contraindications": ["dairy sensitivity (often better tolerated than cow)"],
       "preparation": "Warm with a pinch of dry ginger; the traditional alternative when cow milk causes congestion.",
-      "usda": [{"fdcId": 8475, "name": "Milk, goat, fluid, with added vitamin D", "tier": "exact"}],
+      "usda": [{"fdcId": 12, "name": "Goat milk", "tier": "exact"}, {"fdcId": 8475, "name": "Milk, goat, fluid, with added vitamin D", "tier": "exact"}],
       "servings": [{"label": "1 cup", "grams": 244}],
       "provenance": ["Charaka Samhita Sutrasthana 27 (ksheera varga)", "Bhavaprakasha"],
       "confidence": {"ayur": 0.9, "sci": 0.85}
@@ -623,7 +623,7 @@
       "viruddha": ["with milk (curdles)"],
       "contraindications": ["high pitta, acidity, ulcers", "tooth enamel (always dilute)", "gastritis"],
       "preparation": "Always diluted; raw unfiltered with 'mother' preferred; a digestive tool, not a beverage.",
-      "usda": [{"fdcId": 10308, "name": "Vinegar, cider", "tier": "exact"}],
+      "usda": [{"fdcId": 10308, "name": "Vinegar, cider", "tier": "exact"}, {"fdcId": 12151, "name": "Apple Cider Vinegar", "tier": "exact"}, {"fdcId": 12116, "name": "Apple Cider / Cider Vinegar", "tier": "near"}],
       "servings": [{"label": "1 tsp", "grams": 5}],
       "provenance": ["Modern texts (shukta analogy)"],
       "confidence": {"ayur": 0.7, "sci": 0.8}

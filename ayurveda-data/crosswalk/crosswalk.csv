@@ -99,7 +99,6 @@ fdcId,name,category,dravyaId,rule,key,contested,losers
 739,"Chicken, prepackaged or deli, luncheon meat, reduced sodium",Cold cuts and cured meats,dravya.broiler-chicken,M1,chicken,0,
 743,"Turkey, prepackaged or deli, luncheon meat",Cold cuts and cured meats,dravya.turkey,M1,turkey,0,
 744,"Turkey, prepackaged or deli, luncheon meat, reduced sodium",Cold cuts and cured meats,dravya.turkey,M1,turkey,0,
-750,"Fish, raw",Fish,dravya.peanut-raw,M1,raw,0,
 791,"Fish, mackerel, baked or broiled",Fish,dravya.mackerel,M1,mackerel,0,
 792,"Fish, mackerel, grilled",Fish,dravya.mackerel,M1,mackerel,0,
 793,"Fish, mackerel, baked or broiled, coated",Fish,dravya.mackerel,M1,mackerel,0,
@@ -228,7 +227,7 @@ fdcId,name,category,dravyaId,rule,key,contested,losers
 3617,"Orange juice, 100%, frozen, not reconstituted",Citrus juice,dravya.orange-juice,M1,orange juice,1,dravya.orange
 3618,"Orange juice, 100%, with calcium added, frozen, reconstituted",Citrus juice,dravya.orange-juice,M1,orange juice,1,dravya.orange
 3622,"Apple, dried",Dried fruits,dravya.apple,M1,apple,0,
-3623,"Apricot, dried",Dried fruits,dravya.apricot,M1,apricot,1,dravya.apricot-fresh
+3623,"Apricot, dried",Dried fruits,dravya.apricot,M1,apricot,0,
 3632,"Papaya, dried",Dried fruits,dravya.papaya,M1,papaya,0,
 3633,"Peach, dried",Dried fruits,dravya.peach,M1,peach,0,
 3634,"Pear, dried",Dried fruits,dravya.pear,M1,pear,0,
@@ -237,7 +236,7 @@ fdcId,name,category,dravyaId,rule,key,contested,losers
 3638,Raisins,Dried fruits,dravya.raisins,M1,raisins,0,
 3641,"Apple, raw",Apples,dravya.apple,M1,apple,0,
 3646,"Apple, baked",Apples,dravya.apple,M1,apple,0,
-3648,"Apricot, canned",Other fruits and fruit salads,dravya.apricot,M1,apricot,1,dravya.apricot-fresh
+3648,"Apricot, canned",Other fruits and fruit salads,dravya.apricot,M1,apricot,0,
 3649,"Avocado, raw",Other vegetables and combinations,dravya.avocado,M1,avocado,0,
 3652,"Cantaloupe, raw",Melons,dravya.muskmelon,M1,cantaloupe,0,
 3663,"Grapes, raw",Grapes,dravya.grapes,M1,grapes,0,
@@ -477,7 +476,7 @@ fdcId,name,category,dravyaId,rule,key,contested,losers
 4321,"Cucumber, cooked",Other vegetables and combinations,dravya.cucumber,M1,cucumber,0,
 4322,"Eggplant, cooked, no added fat",Other vegetables and combinations,dravya.eggplant,M1,eggplant,0,
 4323,"Eggplant, cooked, fat added",Other vegetables and combinations,dravya.eggplant,M1,eggplant,0,
-4325,"Garlic, cooked",Mustard and other condiments,dravya.garlic,M1,garlic,1,dravya.garlic-fresh-bulb
+4325,"Garlic, cooked",Mustard and other condiments,dravya.garlic,M1,garlic,0,
 4327,"Kohlrabi, cooked",Other vegetables and combinations,dravya.kohlrabi,M1,kohlrabi,0,
 4329,"Lotus root, cooked",Other vegetables and combinations,dravya.lotus-root,M1,lotus root,0,
 4337,"Okra, fresh, cooked, no added fat",Other vegetables and combinations,dravya.okra,M1,okra,0,
@@ -1143,8 +1142,6 @@ fdcId,name,category,dravyaId,rule,key,contested,losers
 8160,"Spices, sage, ground",Spices and Herbs,dravya.sage,M1,sage,0,
 8224,"Oil, soybean, salad or cooking, (partially hydrogenated)",Fats and Oils,dravya.soybean,M1,soybean,0,
 8241,"Oil, corn, industrial and retail, all purpose salad or cooking",Fats and Oils,dravya.corn,M1,corn,0,
-8242,"Oil, walnut",Fats and Oils,dravya.walnut,M1,walnut,0,
-8243,"Oil, almond",Fats and Oils,dravya.almond,M1,almond,0,
 8257,"Chicken, broilers or fryers, meat and skin and giblets and neck, raw",Poultry Products,dravya.broiler-chicken,M1,chicken,0,
 8258,"Chicken, broilers or fryers, meat and skin and giblets and neck, cooked, fried, batter",Poultry Products,dravya.broiler-chicken,M1,chicken,0,
 8259,"Chicken, broilers or fryers, meat and skin and giblets and neck, cooked, fried, flour",Poultry Products,dravya.broiler-chicken,M1,chicken,0,
@@ -1232,7 +1229,7 @@ fdcId,name,category,dravyaId,rule,key,contested,losers
 8478,"Whey, acid, dried",Dairy and Egg Products,dravya.whey,M1,whey,0,
 8479,"Whey, sweet, fluid",Dairy and Egg Products,dravya.whey,M1,whey,0,
 8480,"Whey, sweet, dried",Dairy and Egg Products,dravya.whey,M1,whey,0,
-8511,"Spices, garlic powder",Spices and Herbs,dravya.garlic,M2,garlic,1,dravya.garlic-fresh-bulb
+8511,"Spices, garlic powder",Spices and Herbs,dravya.garlic,M2,garlic,0,
 8513,"Spices, onion powder",Spices and Herbs,dravya.onion,M2,onion,0,
 8579,"Oil, soybean, salad or cooking",Fats and Oils,dravya.soybean,M1,soybean,0,
 8595,"Oil, hazelnut",Fats and Oils,dravya.hazelnut,M1,hazelnut,0,
@@ -1390,7 +1387,7 @@ fdcId,name,category,dravyaId,rule,key,contested,losers
 9412,"Chicken, stewing, dark meat, meat only, cooked, stewed",Poultry Products,dravya.broiler-chicken,M1,chicken,0,
 9413,"Chicken, capons, meat and skin and giblets and neck, raw",Poultry Products,dravya.broiler-chicken,M1,chicken,0,
 9414,"Chicken, capons, meat and skin and giblets and neck, cooked, roasted",Poultry Products,dravya.broiler-chicken,M1,chicken,0,
-9442,"Peanut flour, low fat",Legumes and Legume Products,dravya.peanut,M2,peanut,1,dravya.peanut-raw;dravya.peanut-roasted
+9442,"Peanut flour, low fat",Legumes and Legume Products,dravya.peanut,M2,peanut,1,dravya.peanut-roasted
 9470,"Tempeh, cooked",Legumes and Legume Products,dravya.tempeh,M1,tempeh,0,
 9481,"Lamb, composite of trimmed retail cuts, separable lean and fat, trimmed to 1/4"" fat, choice, raw",Lamb,dravya.lamb,M1,lamb,0,
 9482,"Lamb, composite of trimmed retail cuts, separable lean and fat, trimmed to 1/4"" fat, choice, cooked",Lamb,dravya.lamb,M1,lamb,0,
@@ -1655,7 +1652,7 @@ fdcId,name,category,dravyaId,rule,key,contested,losers
 10932,"Fish, salmon, sockeye, canned, without salt, drained solids with bone",Finfish and Shellfish Products,dravya.salmon,M1,salmon,0,
 10933,"Fish, tuna, light, canned in oil, without salt, drained solids",Finfish and Shellfish Products,dravya.tuna,M1,tuna,0,
 10942,"Fish, mackerel, king, cooked, dry heat",Finfish and Shellfish Products,dravya.mackerel,M1,mackerel,0,
-10973,"Peanut flour, defatted",Legumes and Legume Products,dravya.peanut,M2,peanut,1,dravya.peanut-raw;dravya.peanut-roasted
+10973,"Peanut flour, defatted",Legumes and Legume Products,dravya.peanut,M2,peanut,1,dravya.peanut-roasted
 11011,"Lamb, composite of trimmed retail cuts, separable lean only, trimmed to 1/4"" fat, choice, raw",Lamb,dravya.lamb,M1,lamb,0,
 11012,"Lamb, composite of trimmed retail cuts, separable lean only, trimmed to 1/4"" fat, choice, cooked",Lamb,dravya.lamb,M1,lamb,0,
 11013,"Lamb, composite of trimmed retail cuts, separable fat, trimmed to 1/4"" fat, choice, raw",Lamb,dravya.lamb,M1,lamb,0,
@@ -1872,7 +1869,7 @@ fdcId,name,category,dravyaId,rule,key,contested,losers
 11951,Orange (zest and blossom water),Fruits and Fruit Juices,dravya.orange,M1,orange,0,
 11967,Lemon (fresh),Fruits and Fruit Juices,dravya.lemon,M1,lemon,0,
 11970,Cilantro (Fresh),Spices and Herbs,dravya.cilantro,M1,cilantro,0,
-11971,Garlic (fresh and dried),Spices and Herbs,dravya.garlic,M1,garlic,1,dravya.garlic-fresh-bulb
+11971,Garlic (fresh and dried),Spices and Herbs,dravya.garlic,M1,garlic,0,
 11979,Lime (Moli),Fruits and Fruit Juices,dravya.lime,M1,lime,0,
 12034,Bay Leaf (Laurel),Spices and Herbs,dravya.bay-leaf-mediterranean,M1,bay leaf,1,dravya.bay-leaf
 12042,Cayenne,Spices and Herbs,dravya.red-chili,M1,cayenne,0,
@@ -1904,7 +1901,7 @@ fdcId,name,category,dravyaId,rule,key,contested,losers
 12222,Shrimp Paste (from Arakanese influence),Shellfish,dravya.prawn,M2,shrimp,0,
 12224,Carom seed (Ajwain),Spices and Herbs,dravya.ajwain,M1,carom seed,0,
 12226,Clove,Spices and Herbs,dravya.clove,M1,clove,0,
-12229,Garlic (dried),Spices and Herbs,dravya.garlic,M1,garlic,1,dravya.garlic-fresh-bulb
+12229,Garlic (dried),Spices and Herbs,dravya.garlic,M1,garlic,0,
 12230,Red chili powder,Spices and Herbs,dravya.red-chili,M1,red chili powder,0,
 12246,Nettle (dried),Spices and Herbs,dravya.stinging-nettle,M1,nettle,0,
 12251,Fennel seed (for seafood),Spices and Herbs,dravya.fennel-seed,M1,fennel seed,0,
@@ -1919,7 +1916,7 @@ fdcId,name,category,dravyaId,rule,key,contested,losers
 12299,Tamarind powder,Fruits and Fruit Juices,dravya.tamarind,M2,tamarind,0,
 12301,Wild sage,Spices and Herbs,dravya.sage,M2,sage,0,
 12306,Wild onion (dried),Spices and Herbs,dravya.onion,M2,onion,0,
-12307,Wild garlic (dried),Spices and Herbs,dravya.garlic,M2,garlic,1,dravya.garlic-fresh-bulb
+12307,Wild garlic (dried),Spices and Herbs,dravya.garlic,M2,garlic,0,
 12311,Black pepper (post-contact),Spices and Herbs,dravya.black-pepper,M1,black pepper,0,
 12316,Saffron (often substituted with turmeric),Spices and Herbs,dravya.saffron,M1,saffron,0,
 12336,Cinnamon (less common),Spices and Herbs,dravya.cinnamon,M1,cinnamon,0,
@@ -1927,7 +1924,7 @@ fdcId,name,category,dravyaId,rule,key,contested,losers
 12338,Vanilla (dried – signature Tahitian ingredient),Spices and Herbs,dravya.vanilla,M1,vanilla,0,
 12340,Saffron (Imeretian saffron / marigold),Spices and Herbs,dravya.saffron,M1,saffron,0,
 12342,Saffron (Imeretian),Spices and Herbs,dravya.saffron,M1,saffron,0,
-12345,Garlic powder (post-contact),Spices and Herbs,dravya.garlic,M2,garlic,1,dravya.garlic-fresh-bulb
+12345,Garlic powder (post-contact),Spices and Herbs,dravya.garlic,M2,garlic,0,
 12346,Onion powder (post-contact),Spices and Herbs,dravya.onion,M2,onion,0,
 12355,Cinnamon (limited use),Spices and Herbs,dravya.cinnamon,M1,cinnamon,0,
 12356,Clove (limited use),Spices and Herbs,dravya.clove,M1,clove,0,

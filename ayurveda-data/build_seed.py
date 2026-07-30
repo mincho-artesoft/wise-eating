@@ -19,22 +19,22 @@ from typing import Any
 SEED_VERSION = 5
 GENERATED_AT = "2026-07-25T00:00:00Z"
 EXPECTED_COUNTS = {
-    "dravyas": 714,
+    "dravyas": 705,
     "recipes": 1500,
-    "links": 2305,
-    "derivedLinks": 1969,
-    "placeholders": 383,
-    "primaries": 331,
+    "links": 2336,
+    "derivedLinks": 1966,
+    "placeholders": 376,
+    "primaries": 329,
     "categoryRules": 187,
     "modifiers": 14,
 }
-V1_LINK_COUNT = 336
+V1_LINK_COUNT = 370
 ENGINE_EXCLUDED_IDS = {"dravya.betel-nut", "dravya.vanaspati"}
 PLACEHOLDER_BASE = 900_000
 RECIPE_BASE = 1_000_000
 RESERVED_BAND_END = 1_002_000
 TIER_RANK = {"exact": 0, "near": 1}
-EXPECTED_CATALOG_COUNT = 14_484
+EXPECTED_CATALOG_COUNT = 14_477
 EXPECTED_CONCEPT_COUNT = 25
 EXPECTED_ALIAS_COUNT = 75
 EXPECTED_FOOD_ROLE_COUNT = 15
@@ -269,7 +269,6 @@ ALLERGEN_DRAVYA_RULES = {
         "dravya.peanut",
         "dravya.peanut-chikki",
         "dravya.peanut-oil",
-        "dravya.peanut-raw",
         "dravya.peanut-roasted",
     },
     "Sesame seeds": {
@@ -2654,8 +2653,11 @@ def build_envelope(
         raise BuildError(f"director count gate failed: expected {EXPECTED_COUNTS}, got {actual_counts}")
     if excluded_count != len(ENGINE_EXCLUDED_IDS):
         raise BuildError(f"engine exclusion gate failed: expected 2, got {excluded_count}")
-    if len(contested) != 40:
-        raise BuildError(f"contested fdcId gate failed: expected 40, got {len(contested)}")
+    # 40 before the duplicate-dravya merge: dravya.apricot-fresh and
+    # dravya.garlic-fresh-bulb each contested a row they were the twin of, and
+    # both were merged into their survivor, so those two contests no longer exist.
+    if len(contested) != 38:
+        raise BuildError(f"contested fdcId gate failed: expected 38, got {len(contested)}")
 
     all_assigned_ids = [food_id for food_id, _placeholder in assignments.values()]
     if len(set(all_assigned_ids)) != len(all_assigned_ids):

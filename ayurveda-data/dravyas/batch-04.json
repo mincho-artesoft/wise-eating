@@ -23,7 +23,7 @@
       "viruddha": [],
       "contraindications": ["high pitta (large raw amounts)"],
       "preparation": "Cooked carrot is sweet and grounding for vata; raw carrot is rougher and better for kapha.",
-      "usda": [{"fdcId": 7710, "name": "Carrots, raw", "tier": "exact"}],
+      "usda": [{"fdcId": 7710, "name": "Carrots, raw", "tier": "exact"}, {"fdcId": 11912, "name": "Carrots (often julienned and caramelized with sugar)", "tier": "near"}],
       "servings": [{"label": "1 medium", "grams": 61}, {"label": "1 cup chopped", "grams": 128}],
       "provenance": ["Bhavaprakasha Nighantu, Shaka varga"],
       "confidence": {"ayur": 0.8, "sci": 0.85}

@@ -37,14 +37,14 @@ D34_EXPECTED_MODIFIERS = {
     "moist-heat": 771,
     "sweetened": 643,
     "canned": 640,
-    "rich": 565,
+    "rich": 563,
     "frozen": 548,
     "processed": 424,
-    "lowfat": 344,
+    "lowfat": 343,
     "fried": 329,
     "cured": 212,
-    "dried": 206,
-    "fermented-sour": 63,
+    "dried": 205,
+    "fermented-sour": 61,
     "pungent": 26,
 }
 d34_normalized_tokens = build_seed.modifier_normalized_tokens
@@ -171,8 +171,8 @@ def d34_load_dravyas(here, errs):
             for binding in item.get("usda", []):
                 if isinstance(binding.get("fdcId"), int):
                     v1_bound.add(binding["fdcId"])
-    if len(v1_bound) != 336:
-        errs.append(f"D34/v1 bindings: expected 336 distinct fdcIds, got {len(v1_bound)}")
+    if len(v1_bound) != 370:
+        errs.append(f"D34/v1 bindings: expected 370 distinct fdcIds, got {len(v1_bound)}")
     return items, v1_bound
 
 
@@ -191,8 +191,8 @@ def d34_validate(here, store, errs):
                        "contested", "losers"]
     if rows and list(rows[0]) != expected_header:
         errs.append(f"D34/crosswalk.csv: unexpected header {list(rows[0])}")
-    if len(rows) != 1969:
-        errs.append(f"D34/crosswalk.csv: expected 1969 rows, got {len(rows)}")
+    if len(rows) != 1966:
+        errs.append(f"D34/crosswalk.csv: expected 1966 rows, got {len(rows)}")
     crosswalk = {}
     for row in rows:
         try:
@@ -323,18 +323,18 @@ def d34_validate(here, store, errs):
         errs.append(f"D34/seed: expected seedVersion 5, got {seed.get('seedVersion')}")
     counts = seed.get("counts", {})
     expected_counts = {
-        "dravyas": 714, "recipes": 1500, "links": 2305,
-        "derivedLinks": 1969, "placeholders": 383,
+        "dravyas": 705, "recipes": 1500, "links": 2336,
+        "derivedLinks": 1966, "placeholders": 376,
         "categoryRules": 187, "modifiers": 14,
         "nutrition": {"full": 1500, "estimated": 0, "none": 0},
         "safety": {
-            "profiles": 2214,
-            "allergenTaggedDravyas": 156,
+            "profiles": 2205,
+            "allergenTaggedDravyas": 155,
             "allergenTaggedRecipes": 1182,
             "honeyMinAgeDravyas": 4,
             "honeyMinAgeRecipes": 4,
             "authoredAgeDravyas": 4,
-            "legacyImportAgeDravyas": 710,
+            "legacyImportAgeDravyas": 701,
             "authoredAgeRecipes": 4,
             "legacyImportAgeRecipes": 1496,
             "ageContributors": 10571,
@@ -343,8 +343,8 @@ def d34_validate(here, store, errs):
     if counts != expected_counts:
         errs.append(f"D34/seed: counts block differs: {counts}")
     links = seed.get("links", [])
-    if len(links) != 2305:
-        errs.append(f"D34/seed: expected 2305 links, got {len(links)}")
+    if len(links) != 2336:
+        errs.append(f"D34/seed: expected 2336 links, got {len(links)}")
     link_map = {}
     for link in links:
         fdc_id = link.get("fdcId")
@@ -359,9 +359,9 @@ def d34_validate(here, store, errs):
                     if link.get("tier") == "derived"}
     seed_classical = {fdc_id: link for fdc_id, link in link_map.items()
                       if link.get("tier") in {"exact", "near"}}
-    if len(seed_classical) != 336 or len(seed_derived) != 1969:
+    if len(seed_classical) != 370 or len(seed_derived) != 1966:
         errs.append(
-            f"D34/seed: expected 336 classical / 1969 derived links, got "
+            f"D34/seed: expected 370 classical / 1966 derived links, got "
             f"{len(seed_classical)} / {len(seed_derived)}"
         )
     if set(seed_derived) != set(crosswalk):
@@ -519,13 +519,13 @@ def d34_validate(here, store, errs):
             "vpk": d34_adjusted_vpk(base, applied),
         }
 
-    expected_tiers = Counter({"classical": 336, "derived": 1969, "estimated": 10296})
+    expected_tiers = Counter({"classical": 370, "derived": 1966, "estimated": 10265})
     if tier_counts != expected_tiers:
         errs.append(f"D34/resolver: tier totals differ: {dict(tier_counts)}")
     if sum(tier_counts.values()) != 12601:
         errs.append(f"D34/resolver: unresolved foods {12601 - sum(tier_counts.values())}")
-    if modified_foods != 6357:
-        errs.append(f"D34/resolver: expected 6357 modified foods, got {modified_foods}")
+    if modified_foods != 6351:
+        errs.append(f"D34/resolver: expected 6351 modified foods, got {modified_foods}")
     if modifier_histogram != Counter(D34_EXPECTED_MODIFIERS):
         errs.append(f"D34/resolver: modifier histogram differs: {dict(modifier_histogram)}")
 
@@ -557,9 +557,13 @@ def d34_validate(here, store, errs):
          crosswalk[4106]["dravyaId"] == "dravya.sweet-potato"
          and crosswalk[4106]["losers"] == "dravya.potato"
          and "| 4106 |" in review and "| R1 |" in review.split("| 4106 |", 1)[1].splitlines()[0])
-    spot(11971, "garlic over garlic-fresh-bulb (R3)",
+    # dravya.garlic-fresh-bulb was merged into dravya.garlic (it was the same
+    # substance under two ids, both bound to fdcId 6686), so this row is no
+    # longer contested and its losers column is empty. The rule being checked
+    # here is still R3; only the contest is gone.
+    spot(11971, "garlic (R3, no longer contested)",
          crosswalk[11971]["dravyaId"] == "dravya.garlic"
-         and crosswalk[11971]["losers"] == "dravya.garlic-fresh-bulb"
+         and crosswalk[11971]["losers"] == ""
          and "| 11971 |" in review and "| R3 |" in review.split("| 11971 |", 1)[1].splitlines()[0])
     spot(3623, "apricot [0,1,-1] (dried)",
          resolutions[3623]["tier"] == "derived"
@@ -584,9 +588,9 @@ def d34_validate(here, store, errs):
          and resolutions[2655]["vpk"] == [2, 0, -1])
 
     print("D34 resolver simulation")
-    print("tiers: classical 336 · derived 1969 · estimated 10296")
+    print("tiers: classical 370 · derived 1966 · estimated 10265")
     print(f"resolved foods: {sum(tier_counts.values())}/12601")
-    print(f"foods firing modifiers: {modified_foods}/12265")
+    print(f"foods firing modifiers: {modified_foods}/12231")
     print("modifier histogram: " + " · ".join(
         f"{modifier_id} {modifier_histogram[modifier_id]}"
         for modifier_id in D34_EXPECTED_MODIFIERS

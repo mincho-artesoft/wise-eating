@@ -123,7 +123,7 @@
       "viruddha": [],
       "contraindications": ["kapha excess, heart-health moderation (saturated)", "as hidden fat in packaged foods — the real exposure route"],
       "preparation": "If using, choose unrefined red palm for its carotenes; the bigger Ayurvedic advice is noticing how much refined palm arrives uninvited in packets.",
-      "usda": [{"fdcId": 11997, "name": "Palm Oil (Red)", "tier": "exact"}],
+      "usda": [{"fdcId": 8227, "name": "Oil, palm", "tier": "exact"}, {"fdcId": 11997, "name": "Palm Oil (Red)", "tier": "exact"}],
       "servings": [{"label": "1 tbsp", "grams": 14}],
       "provenance": ["Modern global food system; regional traditions"],
       "confidence": {"ayur": 0.65, "sci": 0.8}

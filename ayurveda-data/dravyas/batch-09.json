@@ -273,7 +273,7 @@
       "viruddha": [],
       "contraindications": ["high pitta, acidity, skin inflammation", "hypertension (brine salt)"],
       "preparation": "Naturally fermented (brine, not vinegar) carries live cultures; condiment portions — pickles season a meal, they aren't a vegetable serving.",
-      "usda": [{"fdcId": 6088, "name": "Pickles, cucumber, dill or kosher dill", "tier": "exact"}],
+      "usda": [{"fdcId": 6088, "name": "Pickles, cucumber, dill or kosher dill", "tier": "exact"}, {"fdcId": 4470, "name": "Pickles, dill", "tier": "near"}],
       "servings": [{"label": "1 spear", "grams": 35}],
       "provenance": ["Modern texts (achar analogy)"],
       "confidence": {"ayur": 0.65, "sci": 0.85}

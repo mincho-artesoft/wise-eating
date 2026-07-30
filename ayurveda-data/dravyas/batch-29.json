@@ -299,7 +299,7 @@
       "viruddha": ["fish, sour fruit, salt (milk rules)"],
       "contraindications": ["vata (fat removed = grounding removed — whole milk serves vata better)", "dairy sensitivity"],
       "preparation": "Ayurvedically a compromise: lighter for kapha, but stripped of the sneha that makes milk nourishing — boil with spices as usual.",
-      "usda": [],
+      "usda": [{"fdcId": 5, "name": "Milk, fat free (skim)", "tier": "exact"}],
       "servings": [{"label": "1 cup", "grams": 245}],
       "provenance": ["Modern processing; ksheera rules applied"],
       "confidence": {"ayur": 0.7, "sci": 0.85}
@@ -450,7 +450,7 @@
       "viruddha": [],
       "contraindications": ["nut allergy", "kapha excess (regular use)", "food-grade sweet almond only (bitter almond oil is toxic)"],
       "preparation": "Use food-grade sweet almond oil in teaspoon doses; the traditional vehicle is warm milk before bed.",
-      "usda": [{"fdcId": 4571, "name": "Almond oil", "tier": "exact"}],
+      "usda": [{"fdcId": 4571, "name": "Almond oil", "tier": "exact"}, {"fdcId": 8243, "name": "Oil, almond", "tier": "exact"}],
       "servings": [{"label": "1 tsp", "grams": 4.5}],
       "provenance": ["Vatada lineage; Unani-Ayurvedic badam rogan tradition"],
       "confidence": {"ayur": 0.8, "sci": 0.75}
@@ -475,7 +475,7 @@
       "viruddha": ["heating/cooking it (oxidizes like flax oil)"],
       "contraindications": ["nut allergy", "rancidity (small bottles, refrigerated)"],
       "preparation": "Cold use only; buy small, keep cold, finish fast.",
-      "usda": [{"fdcId": 4583, "name": "Walnut oil", "tier": "exact"}],
+      "usda": [{"fdcId": 4583, "name": "Walnut oil", "tier": "exact"}, {"fdcId": 8242, "name": "Oil, walnut", "tier": "exact"}],
       "servings": [{"label": "1 tsp", "grams": 4.5}],
       "provenance": ["Akshota lineage; modern lipid knowledge"],
       "confidence": {"ayur": 0.7, "sci": 0.85}

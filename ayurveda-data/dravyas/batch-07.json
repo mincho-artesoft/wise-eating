@@ -48,7 +48,7 @@
       "viruddha": [],
       "contraindications": ["nut allergy", "kapha excess, weight gain", "acne-prone pitta (excess)"],
       "preparation": "Soak before blending into sauces; roast lightly for snacking — raw cashews are softer on digestion than most nuts.",
-      "usda": [{"fdcId": 7549, "name": "Nuts, cashew nuts, raw", "tier": "exact"}],
+      "usda": [{"fdcId": 2002, "name": "Cashews, NFS", "tier": "exact"}, {"fdcId": 7549, "name": "Nuts, cashew nuts, raw", "tier": "exact"}],
       "servings": [{"label": "18 nuts", "grams": 28}],
       "provenance": ["Post-classical (New World); modern Ayurvedic texts"],
       "confidence": {"ayur": 0.75, "sci": 0.85}
@@ -73,7 +73,7 @@
       "viruddha": [],
       "contraindications": ["nut allergy", "salted varieties for hypertension"],
       "preparation": "Unsalted, lightly roasted; the festive nut of Indian sweets — moderation keeps kapha content.",
-      "usda": [{"fdcId": 7570, "name": "Nuts, pistachio nuts, raw", "tier": "exact"}],
+      "usda": [{"fdcId": 7570, "name": "Nuts, pistachio nuts, raw", "tier": "exact"}, {"fdcId": 11895, "name": "Pistachios", "tier": "exact"}],
       "servings": [{"label": "49 kernels", "grams": 28}],
       "provenance": ["Modern Ayurvedic texts"],
       "confidence": {"ayur": 0.75, "sci": 0.85}
@@ -82,14 +82,14 @@
       "id": "dravya.peanut",
       "name": "Peanut",
       "sanskrit": null,
-      "aliases": ["moongphali", "groundnut"],
-      "category": "dry-fruit-nut",
+      "aliases": ["moongphali", "groundnut", "Peanut (raw)", "Bhuchanaka", "raw", "moongphali (kachchi)"],
+      "category": "legume",
       "rasa": ["sweet", "astringent"],
       "virya": "heating",
       "vipaka": "sweet",
       "gunas": ["heavy", "oily", "dry"],
       "prabhava": "",
-      "dosha": {"vata": 0, "pitta": 1, "kapha": 1},
+      "dosha": {"vata": -1, "pitta": 1, "kapha": 1},
       "agniEffect": -1,
       "digestibility": 2,
       "seasons": ["hemanta", "shishira"],
@@ -123,7 +123,7 @@
       "viruddha": [],
       "contraindications": ["nut allergy", "pine mouth (rare taste disturbance from some varieties)"],
       "preparation": "Toast gently — they burn fast; small quantities carry rich building energy.",
-      "usda": [{"fdcId": 7907, "name": "Nuts, pine nuts, dried", "tier": "exact"}],
+      "usda": [{"fdcId": 2035, "name": "Pine nuts", "tier": "exact"}, {"fdcId": 7907, "name": "Nuts, pine nuts, dried", "tier": "exact"}],
       "servings": [{"label": "2 tbsp", "grams": 17}],
       "provenance": ["Regional Himalayan tradition; modern Ayurvedic texts"],
       "confidence": {"ayur": 0.75, "sci": 0.85}
@@ -148,7 +148,7 @@
       "viruddha": [],
       "contraindications": ["nut allergy"],
       "preparation": "Roast and rub off the bitter skins; grind fresh for drinks and desserts.",
-      "usda": [{"fdcId": 7898, "name": "Nuts, hazelnuts or filberts", "tier": "exact"}],
+      "usda": [{"fdcId": 2011, "name": "Hazelnuts", "tier": "exact"}, {"fdcId": 7898, "name": "Nuts, hazelnuts or filberts", "tier": "exact"}],
       "servings": [{"label": "21 nuts", "grams": 28}],
       "provenance": ["Modern Ayurvedic texts"],
       "confidence": {"ayur": 0.7, "sci": 0.85}
@@ -173,7 +173,7 @@
       "viruddha": [],
       "contraindications": ["nut allergy", "kapha excess (sweetened preparations)"],
       "preparation": "Toast lightly; buttery and rich — a little suffices for vata grounding.",
-      "usda": [{"fdcId": 7568, "name": "Nuts, pecans", "tier": "exact"}],
+      "usda": [{"fdcId": 2030, "name": "Pecans, NFS", "tier": "exact"}, {"fdcId": 7568, "name": "Nuts, pecans", "tier": "exact"}],
       "servings": [{"label": "19 halves", "grams": 28}],
       "provenance": ["Modern Ayurvedic texts"],
       "confidence": {"ayur": 0.7, "sci": 0.85}
@@ -198,7 +198,7 @@
       "viruddha": [],
       "contraindications": ["selenium toxicity (more than 3–4 daily)", "nut allergy"],
       "preparation": "Strict portion nut: one or two a day, no more — nature's supplement, not a snack.",
-      "usda": [{"fdcId": 7886, "name": "Nuts, brazilnuts, dried, unblanched", "tier": "exact"}],
+      "usda": [{"fdcId": 2001, "name": "Brazil nuts", "tier": "exact"}, {"fdcId": 7886, "name": "Nuts, brazilnuts, dried, unblanched", "tier": "exact"}],
       "servings": [{"label": "2 nuts", "grams": 10}],
       "provenance": ["Modern nutrition; guna analysis"],
       "confidence": {"ayur": 0.7, "sci": 0.9}
@@ -248,7 +248,7 @@
       "viruddha": [],
       "contraindications": ["nut allergy (lower risk but present)"],
       "preparation": "Score and roast until the shell peels; must be cooked — raw chestnuts are tannic and hard on digestion.",
-      "usda": [{"fdcId": 7892, "name": "Nuts, chestnuts, european, raw, peeled", "tier": "exact"}],
+      "usda": [{"fdcId": 2008, "name": "Chestnuts", "tier": "exact"}, {"fdcId": 7892, "name": "Nuts, chestnuts, european, raw, peeled", "tier": "exact"}],
       "servings": [{"label": "5 roasted", "grams": 50}],
       "provenance": ["Modern Ayurvedic texts (guna analysis)"],
       "confidence": {"ayur": 0.7, "sci": 0.85}
@@ -423,7 +423,7 @@
       "viruddha": [],
       "contraindications": ["may trigger opiate drug-test positives", "infants", "excess causes dullness"],
       "preparation": "Soak then grind to paste; a teaspoon in warm milk before bed is the traditional dose.",
-      "usda": [{"fdcId": 12137, "name": "Poppy Seeds", "tier": "exact"}],
+      "usda": [{"fdcId": 12137, "name": "Poppy Seeds", "tier": "exact"}, {"fdcId": 12231, "name": "Poppy seed (Posto)", "tier": "exact"}],
       "servings": [{"label": "1 tsp", "grams": 3}],
       "provenance": ["Bhavaprakasha Nighantu", "regional Bengali tradition"],
       "confidence": {"ayur": 0.85, "sci": 0.8}
@@ -523,7 +523,7 @@
       "viruddha": [],
       "contraindications": ["diabetes (portion control)", "kapha excess (large amounts)"],
       "preparation": "Always soak or stew — dry figs are dense; the soak water carries the laxative virtue.",
-      "usda": [{"fdcId": 11313, "name": "Figs, dried, stewed", "tier": "exact"}],
+      "usda": [{"fdcId": 3630, "name": "Fig, dried", "tier": "exact"}, {"fdcId": 11313, "name": "Figs, dried, stewed", "tier": "exact"}],
       "servings": [{"label": "2 figs", "grams": 32}],
       "provenance": ["Bhavaprakasha Nighantu (anjeera)"],
       "confidence": {"ayur": 0.85, "sci": 0.8}
