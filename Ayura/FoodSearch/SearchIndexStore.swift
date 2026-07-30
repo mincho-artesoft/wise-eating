@@ -6,9 +6,10 @@ final class SearchIndexStore {
     static let shared = SearchIndexStore()
 
     /// Bump this when the structure of CompactFoodItem / tokens changes
-    private let currentIndexVersion: Int = 5
+    private let currentIndexVersion: Int = 6
 
     // MARK: - In-Memory Cache
+    private(set) var revision: UInt64 = 0
     private(set) var compactFoods: [CompactFoodItem] = []
     private(set) var compactMap: [Int: CompactFoodItem] = [:]
     private(set) var invertedIndex: [String: Set<Int>] = [:]
@@ -17,6 +18,7 @@ final class SearchIndexStore {
     private(set) var knownDiets: Set<String> = []
     private(set) var nutrientRankings: [NutrientType: [Int]] = [:]
     private(set) var ayurvedaFacetIndex: [String: Set<Int>] = [:]
+    private var bundledAyurvedaSearchMap: [Int: AyurvedaCanonicalSearchMetadata]?
 
     // MARK: - Async Save Infra
     /// Таймер за debounce на тежкия запис на кеша
@@ -58,7 +60,7 @@ final class SearchIndexStore {
         
         // Извличаме само храните. Вече не ни трябва NutrientIndex.
         let foods = try context.fetch(FetchDescriptor<FoodItem>())
-        let canonicalMap = try AyurvedaFacet.canonicalSearchMapFromBundledSeed()
+        let canonicalMap = try ayurvedaSearchMap(context: context)
         
         buildInMemory(foods: foods, canonicalMap: canonicalMap)
         try saveCache(context: context)
@@ -102,7 +104,7 @@ final class SearchIndexStore {
         print("🔎 SearchIndexStore: Starting full index rebuild...")
 
         let foods = try context.fetch(FetchDescriptor<FoodItem>())
-        let canonicalMap = try AyurvedaFacet.canonicalSearchMapFromBundledSeed()
+        let canonicalMap = try ayurvedaSearchMap(context: context)
         // Премахнато извличането на NutrientIndex
         
         buildInMemory(foods: foods, canonicalMap: canonicalMap)
@@ -116,34 +118,25 @@ final class SearchIndexStore {
     // ... (без промяна в updateFavoriteStatus, updateItem, removeItem, scheduleCacheSave) ...
 
     func updateFavoriteStatus(for foodID: Int, isFavorite: Bool) {
+        guard let item = compactMap[foodID],
+              item.isFavorite != isFavorite else {
+            return
+        }
+        let updated = CompactFoodItem(
+            id: item.id, name: item.name, searchTokens: item.searchTokens,
+            minAgeMonths: item.minAgeMonths,
+            enforcedMinAgeMonths: item.enforcedMinAgeMonths,
+            diets: item.diets, allergens: item.allergens,
+            ph: item.ph, referenceWeightG: item.referenceWeightG,
+            isRecipe: item.isRecipe, isMenu: item.isMenu, isFavorite: isFavorite,
+            ayurvedaFacets: item.ayurvedaFacets,
+            nutrientValues: item.nutrientValues
+        )
+        compactMap[foodID] = updated
         if let index = compactFoods.firstIndex(where: { $0.id == foodID }) {
-            let item = compactFoods[index]
-            guard item.isFavorite != isFavorite else { return }
-            
-            compactFoods[index] = CompactFoodItem(
-                id: item.id, name: item.name, searchTokens: item.searchTokens,
-                minAgeMonths: item.minAgeMonths,
-                enforcedMinAgeMonths: item.enforcedMinAgeMonths,
-                diets: item.diets, allergens: item.allergens,
-                ph: item.ph, referenceWeightG: item.referenceWeightG,
-                isRecipe: item.isRecipe, isMenu: item.isMenu, isFavorite: isFavorite,
-                ayurvedaFacets: item.ayurvedaFacets,
-                nutrientValues: item.nutrientValues
-            )
+            compactFoods[index] = updated
         }
-        if let item = compactMap[foodID] {
-            guard item.isFavorite != isFavorite else { return }
-            compactMap[foodID] = CompactFoodItem(
-                id: item.id, name: item.name, searchTokens: item.searchTokens,
-                minAgeMonths: item.minAgeMonths,
-                enforcedMinAgeMonths: item.enforcedMinAgeMonths,
-                diets: item.diets, allergens: item.allergens,
-                ph: item.ph, referenceWeightG: item.referenceWeightG,
-                isRecipe: item.isRecipe, isMenu: item.isMenu, isFavorite: isFavorite,
-                ayurvedaFacets: item.ayurvedaFacets,
-                nutrientValues: item.nutrientValues
-            )
-        }
+        revision &+= 1
         if let context = GlobalState.modelContext {
              scheduleCacheSave(context: context)
         }
@@ -152,14 +145,26 @@ final class SearchIndexStore {
     func updateItem(_ food: FoodItem, context: ModelContext) {
         let startTime = CFAbsoluteTimeGetCurrent()
 
+        // An incremental update cannot safely start from an empty store because
+        // it would produce a cache containing only the newly-saved item.
+        if compactFoods.isEmpty {
+            do {
+                try forceRebuild(context: context)
+                return
+            } catch {
+                print("⚠️ SearchIndexStore: Full rebuild before update failed: \(error)")
+            }
+        }
+
         guard let oldCompactItem = compactMap[food.id] else {
-            let facets = canonicalFacetKeys(
+            let metadata = ayurvedaSearchMetadata(
                 foodID: food.id,
                 context: context
             )
             let newCompactItem = makeCompactItem(
                 from: food,
-                ayurvedaFacets: facets
+                ayurvedaFacets: metadata?.facets ?? [],
+                enforcedMinAgeMonths: metadata?.enforcedMinAgeMonths
             )
             for token in newCompactItem.searchTokens {
                 invertedIndex[token, default: []].insert(newCompactItem.id)
@@ -170,7 +175,9 @@ final class SearchIndexStore {
             for facet in newCompactItem.ayurvedaFacets {
                 ayurvedaFacetIndex[facet, default: []].insert(newCompactItem.id)
             }
-            newCompactItem.diets.forEach { knownDiets.insert($0) }
+            rebuildNutrientIndexes(for: Set(newCompactItem.nutrientValues.keys))
+            rebuildKnownDiets()
+            revision &+= 1
             scheduleCacheSave(context: context)
             print("🔎 SearchIndexStore: Inserted new item '\(food.name)' during update call.")
             return
@@ -178,14 +185,15 @@ final class SearchIndexStore {
 
         // Rebuild the compact item first so we can compare searchTokens,
         // which already include any exclusion rules.
-        let refreshedFacets = canonicalFacetKeys(
+        let refreshedMetadata = ayurvedaSearchMetadata(
             foodID: food.id,
             context: context
         )
         let newCompactItem = makeCompactItem(
             from: food,
-            ayurvedaFacets: refreshedFacets,
-            enforcedMinAgeMonths: oldCompactItem.enforcedMinAgeMonths
+            ayurvedaFacets: refreshedMetadata?.facets ?? [],
+            enforcedMinAgeMonths: refreshedMetadata?.enforcedMinAgeMonths
+                ?? oldCompactItem.enforcedMinAgeMonths
         )
 
         let oldTokens = oldCompactItem.searchTokens
@@ -202,6 +210,7 @@ final class SearchIndexStore {
             invertedIndex[token]?.remove(food.id)
             if invertedIndex[token]?.isEmpty == true {
                 invertedIndex.removeValue(forKey: token)
+                vocabulary.removeAll { $0 == token }
             }
         }
         for token in tokensToAdd {
@@ -227,7 +236,12 @@ final class SearchIndexStore {
         }
         compactMap[newCompactItem.id] = newCompactItem
 
-        newCompactItem.diets.forEach { knownDiets.insert($0) }
+        rebuildNutrientIndexes(
+            for: Set(oldCompactItem.nutrientValues.keys)
+                .union(newCompactItem.nutrientValues.keys)
+        )
+        rebuildKnownDiets()
+        revision &+= 1
         scheduleCacheSave(context: context)
         
         let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
@@ -249,6 +263,7 @@ final class SearchIndexStore {
             ids.remove(id)
             if ids.isEmpty {
                 invertedIndex.removeValue(forKey: token)
+                vocabulary.removeAll { $0 == token }
             } else {
                 invertedIndex[token] = ids
             }
@@ -259,7 +274,10 @@ final class SearchIndexStore {
                 ayurvedaFacetIndex.removeValue(forKey: facet)
             }
         }
-        
+
+        rebuildNutrientIndexes(for: Set(compact.nutrientValues.keys))
+        rebuildKnownDiets()
+        revision &+= 1
         scheduleCacheSave(context: context)
         
         let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
@@ -360,6 +378,7 @@ final class SearchIndexStore {
         self.knownDiets = dietsSet
         self.nutrientRankings = tmpRankings
         self.ayurvedaFacetIndex = tmpFacetIndex
+        revision &+= 1
     }
 
     private func saveCache(context: ModelContext) throws {
@@ -402,6 +421,7 @@ final class SearchIndexStore {
         self.ayurvedaFacetIndex = payload.ayurvedaFacetIndex.reduce(into: [:]) {
             $0[$1.key] = Set($1.value)
         }
+        revision &+= 1
     }
     
     private func makeCompactItem(
@@ -483,16 +503,119 @@ final class SearchIndexStore {
         )
     }
 
-    private func canonicalFacetKeys(
+    private func bundledAyurvedaMap() throws
+        -> [Int: AyurvedaCanonicalSearchMetadata] {
+        if let bundledAyurvedaSearchMap {
+            return bundledAyurvedaSearchMap
+        }
+        let map = try AyurvedaFacet.canonicalSearchMapFromBundledSeed()
+        bundledAyurvedaSearchMap = map
+        return map
+    }
+
+    /// Keeps all bundled/preseeded metadata and overlays profiles saved in the
+    /// live database. A user-authored profile intentionally replaces the
+    /// bundled facets for that food while retaining its enforced seed age.
+    private func ayurvedaSearchMap(
+        context: ModelContext
+    ) throws -> [Int: AyurvedaCanonicalSearchMetadata] {
+        var result = try bundledAyurvedaMap()
+        let profiles = try context.fetch(FetchDescriptor<AyurvedaProfile>())
+        let profilesByFood = Dictionary(grouping: profiles, by: \.foodId)
+
+        for (foodID, foodProfiles) in profilesByFood where foodID > 0 {
+            let bundledAge = result[foodID]?.enforcedMinAgeMonths
+            let userProfiles = foodProfiles.filter { $0.kind == "user" }
+
+            if !userProfiles.isEmpty {
+                let facets = userProfiles.reduce(into: Set<String>()) {
+                    $0.formUnion(AyurvedaFacet.searchKeys(from: $1))
+                }
+                result[foodID] = AyurvedaCanonicalSearchMetadata(
+                    facets: facets,
+                    enforcedMinAgeMonths: bundledAge
+                )
+                continue
+            }
+
+            var facets = result[foodID]?.facets ?? []
+            for profile in foodProfiles {
+                facets.formUnion(AyurvedaFacet.searchKeys(from: profile))
+            }
+            result[foodID] = AyurvedaCanonicalSearchMetadata(
+                facets: facets,
+                enforcedMinAgeMonths: bundledAge
+            )
+        }
+
+        return result
+    }
+
+    private func ayurvedaSearchMetadata(
         foodID: Int,
         context: ModelContext
-    ) -> Set<String> {
+    ) -> AyurvedaCanonicalSearchMetadata? {
+        let bundled = try? bundledAyurvedaMap()[foodID]
         let descriptor = FetchDescriptor<AyurvedaProfile>(
             predicate: #Predicate { $0.foodId == foodID }
         )
-        guard let profiles = try? context.fetch(descriptor) else { return [] }
-        return profiles.reduce(into: []) { result, profile in
-            result.formUnion(AyurvedaFacet.canonicalKeys(from: profile))
+        guard let profiles = try? context.fetch(descriptor) else {
+            return bundled
+        }
+
+        let userProfiles = profiles.filter { $0.kind == "user" }
+        if !userProfiles.isEmpty {
+            let facets = userProfiles.reduce(into: Set<String>()) {
+                $0.formUnion(AyurvedaFacet.searchKeys(from: $1))
+            }
+            return AyurvedaCanonicalSearchMetadata(
+                facets: facets,
+                enforcedMinAgeMonths: bundled?.enforcedMinAgeMonths
+            )
+        }
+
+        var facets = bundled?.facets ?? []
+        for profile in profiles {
+            facets.formUnion(AyurvedaFacet.searchKeys(from: profile))
+        }
+        guard bundled != nil || !facets.isEmpty else { return nil }
+        return AyurvedaCanonicalSearchMetadata(
+            facets: facets,
+            enforcedMinAgeMonths: bundled?.enforcedMinAgeMonths
+        )
+    }
+
+    private func rebuildNutrientIndexes(
+        for nutrients: Set<NutrientType>
+    ) {
+        for nutrient in nutrients {
+            let ranked = compactFoods.compactMap {
+                item -> (id: Int, density: Double)? in
+                guard let rawValue = item.nutrientValues[nutrient],
+                      rawValue > 0,
+                      item.referenceWeightG > 0 else {
+                    return nil
+                }
+                return (
+                    id: item.id,
+                    density: (rawValue / item.referenceWeightG) * 100
+                )
+            }
+            .sorted { $0.density > $1.density }
+
+            if let maximum = ranked.first?.density {
+                maxNutrientValues[nutrient] = maximum
+                nutrientRankings[nutrient] = ranked.map(\.id)
+            } else {
+                maxNutrientValues.removeValue(forKey: nutrient)
+                nutrientRankings.removeValue(forKey: nutrient)
+            }
+        }
+    }
+
+    private func rebuildKnownDiets() {
+        knownDiets = compactFoods.reduce(into: Set<String>()) {
+            $0.formUnion($1.diets)
         }
     }
 }

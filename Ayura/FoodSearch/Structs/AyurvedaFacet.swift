@@ -2,6 +2,9 @@ import Foundation
 
 enum AyurvedaFacetKind: String, CaseIterable, Sendable {
     case virya
+    case rasa
+    case vipaka
+    case guna
     case pacifies
     case aggravates
     case agni
@@ -37,13 +40,20 @@ struct AyurvedaFacet: Hashable, Sendable {
 
     static func canonicalKeys(from profile: AyurvedaProfile) -> Set<String> {
         guard isCanonicalSeedProfile(profile) else { return [] }
+        return searchKeys(from: profile)
+    }
 
-        return canonicalKeys(
+    /// Search facets for both bundled profiles and records created in the editor.
+    static func searchKeys(from profile: AyurvedaProfile) -> Set<String> {
+        searchKeys(
             category: profile.category,
             doshaVata: profile.doshaVata,
             doshaPitta: profile.doshaPitta,
             doshaKapha: profile.doshaKapha,
+            rasa: profile.rasa,
             virya: profile.virya,
+            vipaka: profile.vipaka,
+            gunas: profile.gunas,
             agniEffect: profile.agniEffect,
             digestibility: profile.digestibility,
             seasons: profile.seasons
@@ -88,12 +98,15 @@ struct AyurvedaFacet: Hashable, Sendable {
             else {
                 throw AyurvedaFacetSeedError.invalidAgeMetadata(profile.id)
             }
-            let facets = canonicalKeys(
+            let facets = searchKeys(
                 category: profile.category,
                 doshaVata: profile.dosha.vata,
                 doshaPitta: profile.dosha.pitta,
                 doshaKapha: profile.dosha.kapha,
+                rasa: profile.rasa ?? [],
                 virya: profile.virya,
+                vipaka: profile.vipaka,
+                gunas: profile.gunas ?? [],
                 agniEffect: profile.agniEffect,
                 digestibility: profile.digestibility,
                 seasons: profile.seasons
@@ -106,12 +119,15 @@ struct AyurvedaFacet: Hashable, Sendable {
         }
     }
 
-    private static func canonicalKeys(
+    private static func searchKeys(
         category: String,
         doshaVata: Int,
         doshaPitta: Int,
         doshaKapha: Int,
+        rasa: [String],
         virya: String?,
+        vipaka: String?,
+        gunas: [String],
         agniEffect: Int?,
         digestibility: Int?,
         seasons: [String]
@@ -120,6 +136,15 @@ struct AyurvedaFacet: Hashable, Sendable {
 
         if let virya {
             insert(.virya, virya, into: &facets)
+        }
+        for value in rasa {
+            insert(.rasa, value, into: &facets)
+        }
+        if let vipaka {
+            insert(.vipaka, vipaka, into: &facets)
+        }
+        for value in gunas {
+            insert(.guna, value, into: &facets)
         }
 
         insertDosha(
@@ -258,7 +283,10 @@ private struct AyurvedaFacetSeedProfile: Decodable {
     let dosha: Dosha
     let seasons: [String]
     let foodId: Int
+    let rasa: [String]?
     let virya: String?
+    let vipaka: String?
+    let gunas: [String]?
     let agniEffect: Int?
     let digestibility: Int?
     let safety: Safety
@@ -270,5 +298,5 @@ private struct AyurvedaFacetSeedProfile: Decodable {
 
 struct AyurvedaCanonicalSearchMetadata: Sendable {
     let facets: Set<String>
-    let enforcedMinAgeMonths: Int
+    let enforcedMinAgeMonths: Int?
 }

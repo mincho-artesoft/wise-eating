@@ -35,11 +35,12 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
     // MARK: - Internal Data (Lightweight Index)
     
     private var allFoods: [CompactFoodItem] = []
+    private var loadedIndexRevision: UInt64 = 0
     
     /// token -> set of CompactFoodItem IDs
     private var invertedIndex: [String: Set<Int>] = [:]
 
-    /// canonical Ayurveda facet key -> seeded dravya/recipe FoodItem IDs
+    /// Ayurveda facet key -> bundled and user-created FoodItem IDs
     private var ayurvedaFacetIndex: [String: Set<Int>] = [:]
     
     /// id -> CompactFoodItem
@@ -99,6 +100,12 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             excludedFoodIDs: Set<Int> = [],
             phSortOrder: PhSortOrder? = nil // ✅ НОВ ПАРАМЕТЪР
         ) {
+            let store = SearchIndexStore.shared
+            if !store.compactFoods.isEmpty,
+               loadedIndexRevision != store.revision {
+                applyLoadedIndex()
+            }
+
             // A newly-created search engine may receive a query before its
             // lightweight index has been copied from SearchIndexStore. Defer
             // the latest request instead of searching an empty snapshot.
@@ -1365,10 +1372,15 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
     @MainActor
     @discardableResult
     func prepareForSearch() async -> Bool {
-        if allFoods.isEmpty {
+        let store = SearchIndexStore.shared
+        if store.compactFoods.isEmpty {
             isLoading = true
-            await SearchIndexStore.shared.ensureLoaded(container: container)
+            await store.ensureLoaded(container: container)
+        }
+        if allFoods.isEmpty || loadedIndexRevision != store.revision {
             applyLoadedIndex()
+        }
+        if isLoading {
             isLoading = false
         }
 
@@ -1390,6 +1402,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
     @MainActor
     private func applyLoadedIndex() {
         let store = SearchIndexStore.shared
+        let didChange = loadedIndexRevision != store.revision
         allFoods = store.compactFoods
         compactMap = store.compactMap
         invertedIndex = store.invertedIndex
@@ -1398,6 +1411,12 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
         maxNutrientValues = store.maxNutrientValues
         cachedKnownDiets = store.knownDiets
         nutrientRankings = store.nutrientRankings
+        loadedIndexRevision = store.revision
+        if didChange {
+            // Force the next request to run even when its text and filters are
+            // identical to the request made before an item was edited.
+            lastCanonicalQuery = "\u{0}"
+        }
     }
     
     // MARK: - Diet Derivation
@@ -2376,18 +2395,12 @@ extension SmartFoodSearch3 {
     }
     
     func refreshData() {
-           let store = SearchIndexStore.shared
-           // Ако Store-ът има по-нови данни (различен брой), обновяваме нашите
-           if store.compactFoods.count != self.allFoods.count {
-               print("🔄 [SmartSearch] Refreshing internal cache from Store (Old: \(self.allFoods.count), New: \(store.compactFoods.count))")
-               self.allFoods = store.compactFoods
-               self.compactMap = store.compactMap
-               self.invertedIndex = store.invertedIndex
-               self.ayurvedaFacetIndex = store.ayurvedaFacetIndex
-               self.vocabulary = store.vocabulary
-               self.maxNutrientValues = store.maxNutrientValues
-               self.cachedKnownDiets = store.knownDiets
-               self.nutrientRankings = store.nutrientRankings
-           }
-       }
+        let store = SearchIndexStore.shared
+        guard loadedIndexRevision != store.revision else { return }
+        print(
+            "🔄 [SmartSearch] Refreshing internal cache "
+                + "(revision: \(loadedIndexRevision) → \(store.revision))"
+        )
+        applyLoadedIndex()
+    }
 }

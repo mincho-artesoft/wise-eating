@@ -20,6 +20,29 @@ struct AyurvedaFacetParseResult: Sendable {
 
 enum CanonicalFacetParser {
     private static let doshas = ["vata", "pitta", "kapha"]
+    private static let rasaValues = [
+        "sweet",
+        "sour",
+        "salty",
+        "pungent",
+        "bitter",
+        "astringent",
+    ]
+    private static let vipakaValues = ["sweet", "sour", "pungent"]
+    private static let gunaValues = [
+        "dense",
+        "dry",
+        "heavy",
+        "light",
+        "liquid",
+        "oily",
+        "penetrating",
+        "rough",
+        "sharp",
+        "slimy",
+        "smooth",
+        "soft",
+    ]
     private static let seasonValues = [
         "grishma",
         "hemanta",
@@ -84,6 +107,13 @@ enum CanonicalFacetParser {
         "virya:",
         "neutral virya",
         "virya neutral",
+        "rasa",
+        "taste",
+        "vipaka",
+        "post-digestive",
+        "post digestive",
+        "guna",
+        "quality",
         "pacif",
         "balanc",
         "calm",
@@ -170,6 +200,25 @@ enum CanonicalFacetParser {
         consume(#"\bcooling(?:[- ]foods?)?\b"#, keys: ["virya:cooling"])
         consume(#"\b(?:warming|heating)(?:[- ]foods?)?\b"#, keys: ["virya:heating"])
 
+        for value in rasaValues {
+            consume(
+                #"\b\#(value)[- ]+(?:rasa|taste)\b|\b(?:rasa|taste)[- :]+\#(value)\b"#,
+                keys: ["rasa:\(value)"]
+            )
+        }
+        for value in vipakaValues {
+            consume(
+                #"\b\#(value)[- ]+(?:vipaka|post[- ]digestive)\b|\b(?:vipaka|post[- ]digestive)[- :]+\#(value)\b"#,
+                keys: ["vipaka:\(value)"]
+            )
+        }
+        for value in gunaValues {
+            consume(
+                #"\b\#(value)[- ]+(?:gunas?|quality|qualities)\b|\b(?:gunas?|quality|qualities)[- :]+\#(value)\b"#,
+                keys: ["guna:\(value)"]
+            )
+        }
+
         for dosha in doshas {
             consume(
                 #"\b(?:balances?|calms?|pacif(?:y|ies)|good[- ]for)[- ]+\#(dosha)\b|\b\#(dosha)[- ]+(?:balancing|calming|pacifying)\b"#,
@@ -224,7 +273,7 @@ enum CanonicalFacetParser {
         in query: inout String,
         add: (Set<String>) -> Void
     ) {
-        let pattern = #"\b(virya|pacifies|aggravates|agni|digestibility|season|ritu|category|concept):([a-z0-9-]+)\b"#
+        let pattern = #"\b(virya|rasa|vipaka|gunas?|pacifies|aggravates|agni|digestibility|season|ritu|category|concept):([a-z0-9-]+)\b"#
         guard let regex = try? NSRegularExpression(pattern: pattern) else { return }
         let original = query
         let range = NSRange(original.startIndex..., in: original)
@@ -239,6 +288,7 @@ enum CanonicalFacetParser {
             var kind = String(original[kindRange])
             let value = String(original[valueRange])
             if kind == "ritu" { kind = "season" }
+            if kind == "gunas" { kind = "guna" }
             let key = "\(kind):\(value)"
             guard isKnownExplicitFacet(kind: kind, value: value) else { continue }
             add([key])
@@ -258,6 +308,12 @@ enum CanonicalFacetParser {
         switch kind {
         case "virya":
             return ["cooling", "heating", "neutral"].contains(value)
+        case "rasa":
+            return rasaValues.contains(value)
+        case "vipaka":
+            return vipakaValues.contains(value)
+        case "guna":
+            return gunaValues.contains(value)
         case "pacifies", "aggravates":
             return doshas.contains(value)
         case "agni":
