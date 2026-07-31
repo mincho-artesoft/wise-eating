@@ -18,6 +18,7 @@ enum AyurvedaSeeder {
     var remappedFoodReferences = 0
     var replacedIngredientSets = 0
     var updatedRecipeFoods = 0
+    var updatedDravyaFoods = 0
     var updatedSafetyFoods = 0
 
     var insertedRows: Int {
@@ -37,6 +38,7 @@ enum AyurvedaSeeder {
         || deletedRows > 0
         || remappedFoodIDs > 0
         || updatedRecipeFoods > 0
+        || updatedDravyaFoods > 0
         || updatedSafetyFoods > 0
         || replacedIngredientSets > 0
     }
@@ -50,6 +52,7 @@ enum AyurvedaSeeder {
         && remappedFoodReferences == 0
         && replacedIngredientSets == 0
         && updatedRecipeFoods == 0
+        && updatedDravyaFoods == 0
         && updatedSafetyFoods == 0
     }
   }
@@ -113,11 +116,18 @@ enum AyurvedaSeeder {
             id: dravya.foodId,
             name: dravya.name,
             isRecipe: false,
-            isUserAdded: false
+            isUserAdded: false,
+            itemDescription: dravyaDescription(dravya)
           )
           context.insert(food)
           foodByID[dravya.foodId] = food
           result.insertedFoods += 1
+        } else if let food = foodByID[dravya.foodId],
+                  food.itemDescription != dravyaDescription(dravya) {
+          // A placeholder row seeded before descriptions existed keeps its empty
+          // one otherwise, and there are 376 of them.
+          food.itemDescription = dravyaDescription(dravya)
+          result.updatedDravyaFoods += 1
         }
       }
       try validateIngredientTargets(seed.recipes, foodByID: foodByID)
@@ -1072,6 +1082,24 @@ enum AyurvedaSeeder {
       throw AyurvedaSeederError.invalidNutritionJSON(recipeId)
     }
     return encoded
+  }
+
+  /// A placeholder dravya has no USDA row to inherit a description from — that
+  /// is precisely why it is a placeholder — so it was shipping with an empty
+  /// one. The text already exists on the dravya itself: 288 of the 376 carry a
+  /// prabhava, and all 376 carry preparation guidance. This surfaces what is
+  /// already authored rather than inventing anything.
+  private static func dravyaDescription(_ dravya: DravyaDTO) -> String {
+    var parts: [String] = []
+    if let prabhava = dravya.prabhava?.trimmingCharacters(in: .whitespacesAndNewlines),
+       !prabhava.isEmpty {
+      parts.append(prabhava)
+    }
+    if let preparation = dravya.preparation?.trimmingCharacters(in: .whitespacesAndNewlines),
+       !preparation.isEmpty {
+      parts.append(preparation)
+    }
+    return parts.joined(separator: "\n\n")
   }
 
   private static func recipeDescription(_ recipe: RecipeDTO) -> String {

@@ -140,9 +140,8 @@ class FoodVideoSource: @unchecked Sendable {
             gen.maximumSize = CGSize(width: 1024, height: 1024)
         }
         
-        let tolerance = CMTime(value: 1, timescale: 100)
-        gen.requestedTimeToleranceBefore = tolerance
-        gen.requestedTimeToleranceAfter = tolerance
+        gen.requestedTimeToleranceBefore = .zero
+        gen.requestedTimeToleranceAfter = .zero
         
         // ✅ 3. Безопасно писане: Заключваме преди запис в речника
         lock.lock()
@@ -183,7 +182,7 @@ class FoodVideoSource: @unchecked Sendable {
             for: variant,
             archive: resolution.archive
         ) else {
-            // print("❌ No generator for variant: \(variant)") // Може да се коментира, за да не спами логовете
+            // print("❌ No generator for variant: \(variant)")
             return nil
         }
 
@@ -199,11 +198,12 @@ class FoodVideoSource: @unchecked Sendable {
         
         let rawSeconds = frameTimestamps[resolution.index]
         
-        // Nudge стратегията (+0.01s)
-        let time = CMTime(seconds: rawSeconds + 0.01, preferredTimescale: 60000)
+        // The unified archives use a 600 Hz video timescale, so map the JSON
+        // timestamp directly onto that exact media clock. Adding 0.01s would
+        // seek between the exact 30 fps frame timestamps.
+        let time = CMTime(seconds: rawSeconds, preferredTimescale: 600)
         
         // 4. Вадим картинката
-        // copyCGImage е Thread-Safe функция на Apple, така че тук няма нужда от допълнителен Lock
         do {
             let cgImage = try generator.copyCGImage(at: time, actualTime: nil)
             return UIImage(cgImage: cgImage)
