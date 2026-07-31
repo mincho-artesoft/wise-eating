@@ -42,9 +42,9 @@ enum BundledLargeAssetLoader {
     private static let foodArchive1024 = AssetDescriptor(
         outputFileName: "food_archive_1024.mp4",
         archiveResourceName: "food_archive_1024.mp4.gz",
-        partSuffixes: ["aa", "ab", "ac", "ad"],
-        expectedByteCount: 285_519_148,
-        contentVersion: "04de4e63370c280c967b498cf7c29033c04ff4417d29f15712d1329d1bf2ed31"
+        partSuffixes: ["aa", "ab", "ac", "ad", "ae"],
+        expectedByteCount: 329_117_770,
+        contentVersion: "0d27621324a7c7c5ee071e3b0274b8ee74b792c82c908e003751a80d552cd587"
     )
 
     private static let preparationLock = NSLock()

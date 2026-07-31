@@ -183,6 +183,7 @@
 				"$(SRCROOT)/Ayura/Food/food_archive_1024.mp4.gz.part-ab",
 				"$(SRCROOT)/Ayura/Food/food_archive_1024.mp4.gz.part-ac",
 				"$(SRCROOT)/Ayura/Food/food_archive_1024.mp4.gz.part-ad",
+				"$(SRCROOT)/Ayura/Food/food_archive_1024.mp4.gz.part-ae",
 				"$(SRCROOT)/Ayura/preseeded_db.store.gz.part-aa",
 				"$(SRCROOT)/Ayura/preseeded_db.store.gz.part-ab",
 			);

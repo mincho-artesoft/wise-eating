@@ -29,6 +29,7 @@ accepted/
 queue/
 done/
 failed/
+rejected/
 __pycache__/
 
 # --- build output: archive 2 lands here, and the mp4s must never be committed

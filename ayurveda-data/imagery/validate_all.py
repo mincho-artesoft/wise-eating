@@ -67,11 +67,21 @@ same 100,128 comparisons sits at **11**, and only 5 pairs are below 25. A true
 duplicate is 0 when byte-identical and a few bits when re-encoded, so the
 default of 6 has headroom on both sides.
 
-**Corner mean 130, not 150.** Measured distribution: p05 159, median 195, and
-the darkest legitimate images sit at 141-149 with corner sd near 1.0, i.e.
-perfectly uniform backgrounds that happen to be a slightly deeper grey. 150
-rejected 7 of them. 130 keeps the check meaningful — genuine style drift to a
-dark background lands well under 100 — without clipping the low tail.
+**Corner brightness is a warning, uniformity is the test.** The first version
+of this used a flat corner-mean floor: 150, then 130 once 150 was measured to
+reject 7 good images out of 448. On the full 1,866 set, 130 rejected 6 more —
+and all six were inspected by eye and are correct. Pale foods and clear drinks
+(cumin water, gond katira cooler, gujarati kadhi) need a darker sweep or they
+disappear into the background, so they legitimately sit at 106-129 while the
+population median is 196. Their corner sd was 1.7-3.4 against a median of 1.3,
+i.e. among the cleanest backgrounds in the whole set.
+
+So brightness alone was never the signal. What the check is really asking is
+"did this render succeed, or is the background a busy photo or a blank frame",
+and UNIFORMITY answers that. Corner sd is now the reject condition; corner mean
+only rejects below a floor of 60, which catches a near-black frame, and anything
+between 60 and 130 is reported as a warning so a real style drift would still be
+visible in the output.
 
 Byte-identical detection is verify.py's check F, which uses sha256 and needs no
 threshold at all. That is the primitive to trust; this perceptual pass is a
@@ -132,6 +142,8 @@ def main():
     ap.add_argument("--hash-distance", type=int, default=6)
     ap.add_argument("--corner-mean", type=float, default=130.0)
     ap.add_argument("--corner-sd", type=float, default=18.0)
+    ap.add_argument("--corner-floor", type=float, default=60.0,
+                    help="reject below this however uniform — catches a near-black frame")
     ap.add_argument("--report-only", action="store_true",
                     help="grade and print, write nothing — use this to sanity-check "
                          "thresholds before letting them gate an archive build")
@@ -181,6 +193,7 @@ def main():
 
     # ---- grade --------------------------------------------------------------
     ok, bad = [], collections.defaultdict(list)
+    warn_dark = []
     cmeans, csds, sds = [], [], []
     for fn, p, row in present:
         try:
@@ -198,8 +211,26 @@ def main():
             bad["blank"].append(f"{fn}: stddev {st.stddev[0]:.1f}"); continue
         cm, cs = corner_stats(img)
         cmeans.append(cm); csds.append(cs)
-        if cm < a.corner_mean or cs > a.corner_sd:
+        # Two conditions, not one. The check exists to catch a failed render — a
+        # blank frame, or a photo with a busy background instead of the studio
+        # sweep. Uniformity answers that; absolute brightness does not.
+        #
+        # Measured 2026-07-30 on the full 1,866: six images fell below a flat
+        # corner-mean floor of 130 (106 to 129) and ALL SIX were inspected by eye
+        # and are correct — cumin water, gond katira cooler, sapota, gujarati
+        # kadhi, spinach potato bake, vata yam mung stew. Every one is the right
+        # food, in the right style, on a clean backdrop that simply sits at the
+        # darker end of the grey the style prompt allows: pale foods and clear
+        # drinks need a darker sweep or they disappear into it. Their corner sd
+        # was 1.7 to 3.4, against a population median of 1.3 — i.e. among the
+        # cleanest backgrounds in the set.
+        #
+        # So a dark background is accepted when it is uniform. The floor stays
+        # only to catch a near-black frame, which is a real failure.
+        if cs > a.corner_sd or cm < a.corner_floor:
             bad["background"].append(f"{fn}: corner mean {cm:.0f}, sd {cs:.1f}"); continue
+        if cm < a.corner_mean:
+            warn_dark.append(f"{fn}: corner mean {cm:.0f}, sd {cs:.1f}")
         ok.append({"filename": fn, "path": p, "name": row["name"], "kind": row["kind"],
                    "frameKey": row["frameKey"], "_d": dhash(img)})
 
@@ -232,8 +263,13 @@ def main():
     # Thresholds you can see are thresholds you can argue with. A silent 90%
     # rejection rate and a silent 0% look identical without these.
     if cmeans:
+        if warn_dark:
+            print(f"\ndark but clean {len(warn_dark)} accepted below corner mean "
+                  f"{a.corner_mean:.0f} — uniform background, so not a failed render")
+            for w in warn_dark:
+                print(f"   {w}")
         print(f"\nbackground     corner mean p05 {pct(cmeans,5):.0f} / med {pct(cmeans,50):.0f} "
-              f"(reject below {a.corner_mean:.0f})")
+              f"(warn below {a.corner_mean:.0f}, reject below {a.corner_floor:.0f})")
         print(f"               corner sd   med {pct(csds,50):.1f} / p95 {pct(csds,95):.1f} "
               f"(reject above {a.corner_sd:.1f})")
     if present and nbad / len(present) > 0.25:
