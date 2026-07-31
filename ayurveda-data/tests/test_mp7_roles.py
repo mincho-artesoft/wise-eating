@@ -287,7 +287,7 @@ class MP7FoodRoleTests(unittest.TestCase):
         self.assertEqual(failures, [])
 
     def test_artifact_is_complete_sorted_and_deterministic(self):
-        self.assertEqual(self.artifact["catalogCount"], 14_484)
+        self.assertEqual(self.artifact["catalogCount"], 14_477)
         self.assertEqual(self.artifact["roleCount"], 15)
         self.assertEqual(self.artifact["ruleCount"], 34)
         self.assertEqual(

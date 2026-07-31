@@ -195,7 +195,7 @@ class MP7ValidityTests(unittest.TestCase):
         self.assertEqual(set(self.checker.definitions), {
             role["id"] for role in self.role_source["roles"]
         })
-        self.assertEqual(len(self.checker.items), 14_484)
+        self.assertEqual(len(self.checker.items), 14_477)
 
 
 if __name__ == "__main__":

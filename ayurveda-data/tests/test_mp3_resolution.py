@@ -543,9 +543,9 @@ struct MP3ResolutionHarness {
             ],
             ["unicorn steak", "xyzzy", ""],
         )
-        self.assertEqual(self.catalog_count, 14_484)
+        self.assertEqual(self.catalog_count, 14_477)
         self.assertEqual(self.excluded_count, 2)
-        self.assertEqual(self.candidate_count, 14_482)
+        self.assertEqual(self.candidate_count, 14_475)
 
     def test_required_scorer_properties(self):
         result = subprocess.run(

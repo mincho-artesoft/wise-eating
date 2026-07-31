@@ -154,7 +154,7 @@ DESCRIPTOR_STOPWORDS = [
 ]
 
 EXPECTED = {
-    "rows": 1969,
+    "rows": 1966,
     "contested": 67,
     "M2": 112,
     "F": 0,

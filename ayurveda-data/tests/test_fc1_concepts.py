@@ -320,13 +320,13 @@ class FoodConceptTests(unittest.TestCase):
                         )
 
     def test_membership_is_sorted_bounded_and_deterministic(self):
-        self.assertEqual(self.artifact["catalogCount"], 14_484)
+        self.assertEqual(self.artifact["catalogCount"], 14_477)
         self.assertEqual(self.artifact["conceptCount"], 25)
         self.assertEqual(self.artifact["aliasCount"], 75)
         for concept, members in self.artifact["membership"].items():
             with self.subTest(concept=concept):
                 self.assertEqual(members, sorted(set(members)))
-                self.assertLessEqual(len(members) / 14_484, 0.40)
+                self.assertLessEqual(len(members) / 14_477, 0.40)
 
         rebuilt, _ = build_seed.build_food_concepts(
             self.seed,

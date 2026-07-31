@@ -16,7 +16,7 @@ from pathlib import Path
 from typing import Any
 
 
-SEED_VERSION = 5
+SEED_VERSION = 6
 GENERATED_AT = "2026-07-25T00:00:00Z"
 EXPECTED_COUNTS = {
     "dravyas": 705,

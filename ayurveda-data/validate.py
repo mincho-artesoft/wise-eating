@@ -235,14 +235,14 @@ def d34_validate(here, store, errs):
     store_ids = set(foods)
     if len(store_ids) != 12601:
         errs.append(f"D34/store: expected 12601 foods, got {len(store_ids)}")
-    if total_store_foods == 14484:
+    if total_store_foods == 14477:
         try:
             build_preseeded_store.audit_store(os.path.abspath(store))
         except (build_preseeded_store.PreseedBuildError, sqlite3.Error) as error:
             errs.append(f"WE2/preseed: {error}")
     elif total_store_foods != 12601:
         errs.append(
-            f"WE2/preseed: expected 12601 base or 14484 projected foods, "
+            f"WE2/preseed: expected 12601 base or 14477 projected foods, "
             f"got {total_store_foods}"
         )
     missing_crosswalk_ids = sorted(set(crosswalk) - store_ids)
@@ -319,8 +319,8 @@ def d34_validate(here, store, errs):
     except Exception as error:
         errs.append(f"D34/ayurveda_seed.json.gz: cannot read: {error}")
         return
-    if seed.get("seedVersion") != 5:
-        errs.append(f"D34/seed: expected seedVersion 5, got {seed.get('seedVersion')}")
+    if seed.get("seedVersion") != 6:
+        errs.append(f"D34/seed: expected seedVersion 6, got {seed.get('seedVersion')}")
     counts = seed.get("counts", {})
     expected_counts = {
         "dravyas": 705, "recipes": 1500, "links": 2336,

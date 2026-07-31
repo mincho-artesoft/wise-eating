@@ -244,6 +244,7 @@ struct LiquidTabBar: View {
                             searchText = newValue
                         }
                 }
+                .frame(height: 44)
                 .padding(.leading, isSearching ? 20 : 0)
                 .frame(maxWidth: isSearching ? .infinity : 0)
                 .opacity(isSearching ? 1 : 0)

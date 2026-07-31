@@ -99,7 +99,7 @@ class WE8CAgeDerivationTests(unittest.TestCase):
         )
         self.assertEqual(
             display,
-            {6: 1, 24: 1_201, 48: 226, 60: 70, 192: 2},
+            {6: 1, 12: 1, 24: 1_210, 48: 216, 60: 70, 192: 2},
         )
 
     def test_provenance_is_carried_per_recipe_ingredient(self):
@@ -146,7 +146,7 @@ class WE8CAgeDerivationTests(unittest.TestCase):
                 )
                 for age in (9, 24, 60)
             },
-            {9: 253, 24: 30, 60: 8},
+            {9: 247, 24: 29, 60: 8},
         )
 
     def test_search_filters_enforced_floor_while_badge_uses_display_floor(self):
@@ -236,7 +236,7 @@ class WE8CPreseedAgeTests(unittest.TestCase):
         canonical_ids = {profile["foodId"] for profile in profiles}
         links_by_food = {link["fdcId"]: link for link in self.seed["links"]}
         linked_only_ids = set(links_by_food) - canonical_ids
-        self.assertEqual(len(linked_only_ids), 1_974)
+        self.assertEqual(len(linked_only_ids), 2_007)
 
         for food_id in linked_only_ids:
             link = links_by_food[food_id]

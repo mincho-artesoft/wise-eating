@@ -64,7 +64,7 @@ class WE8SafetyDerivationTests(unittest.TestCase):
         rows = list(self.dravya_safety.values()) + list(
             self.recipe_safety.values()
         )
-        self.assertEqual(len(rows), 2_214)
+        self.assertEqual(len(rows), 2_205)
         self.assertTrue(
             all(
                 row["provenance"] == "scaffold-default"
@@ -228,7 +228,7 @@ class WE8PreseedSafetyTests(unittest.TestCase):
 
     def test_artifact_metadata_exactly_matches_all_seeded_safety_rows(self):
         canonical = self.seed["dravyas"] + self.seed["recipes"]
-        self.assertEqual(len(canonical), 2_214)
+        self.assertEqual(len(canonical), 2_205)
         for item in canonical:
             compact = self.compact_by_id[item["foodId"]]
             safety = item["safety"]

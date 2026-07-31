@@ -201,7 +201,7 @@ struct ParserHarness {
                 """
             ).fetchone()
         version, food_count, payload_data = row
-        self.assertEqual((version, food_count), (7, 14_484))
+        self.assertEqual((version, food_count), (7, 14_477))
         payload = json.loads(payload_data)
         compact_by_id = {food["id"]: food for food in payload["compactFoods"]}
 
@@ -212,9 +212,9 @@ struct ParserHarness {
         link_tiers = {link["fdcId"]: link["tier"] for link in seed["links"]}
         expected_ids = direct_ids | set(link_tiers)
         linked_only_ids = set(link_tiers) - direct_ids
-        self.assertEqual(len(direct_ids), 2_214)
-        self.assertEqual(len(linked_only_ids), 1_974)
-        self.assertEqual(len(expected_ids), 4_188)
+        self.assertEqual(len(direct_ids), 2_205)
+        self.assertEqual(len(linked_only_ids), 2_007)
+        self.assertEqual(len(expected_ids), 4_212)
 
         for food_id in expected_ids:
             food = compact_by_id[food_id]
@@ -246,7 +246,7 @@ struct ParserHarness {
         }
         self.assertEqual(actual_index, expected_index)
         self.assertEqual(len(actual_index), 89)
-        self.assertEqual(sum(map(len, expected_index.values())), 58_635)
+        self.assertEqual(sum(map(len, expected_index.values())), 59_032)
         self.assertFalse(set(actual_index) & set(payload["invertedIndex"]))
 
     def test_engine_uses_index_intersection_and_exact_title_escape_hatch(self):

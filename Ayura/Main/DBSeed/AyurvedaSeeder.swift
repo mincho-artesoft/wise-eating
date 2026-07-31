@@ -11,6 +11,11 @@ enum AyurvedaSeeder {
     var updatedProfiles = 0
     var insertedLinks = 0
     var updatedLinks = 0
+    var deletedFoods = 0
+    var deletedProfiles = 0
+    var deletedLinks = 0
+    var remappedFoodIDs = 0
+    var remappedFoodReferences = 0
     var replacedIngredientSets = 0
     var updatedRecipeFoods = 0
     var updatedSafetyFoods = 0
@@ -19,8 +24,18 @@ enum AyurvedaSeeder {
       insertedFoods + insertedProfiles + insertedLinks
     }
 
+    var deletedRows: Int {
+      deletedFoods + deletedProfiles + deletedLinks
+    }
+
     var changedSearchableFoods: Bool {
       insertedFoods > 0
+        || insertedProfiles > 0
+        || updatedProfiles > 0
+        || insertedLinks > 0
+        || updatedLinks > 0
+        || deletedRows > 0
+        || remappedFoodIDs > 0
         || updatedRecipeFoods > 0
         || updatedSafetyFoods > 0
         || replacedIngredientSets > 0
@@ -28,8 +43,11 @@ enum AyurvedaSeeder {
 
     var isNoOp: Bool {
       insertedRows == 0
+        && deletedRows == 0
         && updatedProfiles == 0
         && updatedLinks == 0
+        && remappedFoodIDs == 0
+        && remappedFoodReferences == 0
         && replacedIngredientSets == 0
         && updatedRecipeFoods == 0
         && updatedSafetyFoods == 0
@@ -47,11 +65,22 @@ enum AyurvedaSeeder {
       let seed = try loadSeed()
       try validate(seed: seed)
 
-      let existingProfiles = try context.fetch(FetchDescriptor<AyurvedaProfile>())
+      var result = RunResult()
+      var existingProfiles = try context.fetch(FetchDescriptor<AyurvedaProfile>())
+      var existingLinks = try context.fetch(FetchDescriptor<AyurvedaLink>())
+      var allFoods = try context.fetch(FetchDescriptor<FoodItem>())
+
+      try migrateV5CanonicalDataIfNeeded(
+        seed: seed,
+        profiles: &existingProfiles,
+        links: &existingLinks,
+        foods: &allFoods,
+        context: context,
+        result: &result
+      )
+
       let profileByID = try makeProfileMap(existingProfiles)
-      let existingLinks = try context.fetch(FetchDescriptor<AyurvedaLink>())
       let linkByFdcID = try makeLinkMap(existingLinks)
-      let allFoods = try context.fetch(FetchDescriptor<FoodItem>())
       var foodByID = try makeFoodMap(allFoods)
       let allDiets = try context.fetch(FetchDescriptor<Diet>())
       let dietByName = Dictionary(
@@ -75,10 +104,8 @@ enum AyurvedaSeeder {
           "   ✅ Ayurveda v\(seed.seedVersion) preseed stamp verified; "
             + "no inserts or updates."
         )
-        return RunResult()
+        return result
       }
-
-      var result = RunResult()
 
       for dravya in seed.dravyas where dravya.foodIsPlaceholder {
         if foodByID[dravya.foodId] == nil {
@@ -218,6 +245,10 @@ enum AyurvedaSeeder {
           + "\(result.insertedLinks) links); updated \(result.updatedProfiles) profiles, "
           + "\(result.updatedLinks) links, \(result.updatedRecipeFoods) recipe foods, "
           + "\(result.updatedSafetyFoods) safety rows; "
+          + "deleted \(result.deletedRows) rows "
+          + "(\(result.deletedFoods) foods, \(result.deletedProfiles) profiles, "
+          + "\(result.deletedLinks) links); remapped \(result.remappedFoodIDs) food ids "
+          + "and \(result.remappedFoodReferences) references; "
           + "replaced \(result.replacedIngredientSets) ingredient sets."
       )
       return result
@@ -225,6 +256,280 @@ enum AyurvedaSeeder {
       context.rollback()
       throw error
     }
+  }
+
+  private static let v5MergeTargets: [String: String] = [
+    "dravya.vetiver": "dravya.khus-root",
+    "dravya.apricot-fresh": "dravya.apricot",
+    "dravya.fresh-fig": "dravya.fig-fresh",
+    "dravya.ripe-banana": "dravya.banana-ripe",
+    "dravya.ripe-jackfruit": "dravya.jackfruit",
+    "dravya.garlic-fresh-bulb": "dravya.garlic",
+    "dravya.green-chili-fresh": "dravya.green-chili",
+    "dravya.peanut-raw": "dravya.peanut",
+    "dravya.ripe-mango": "dravya.mango-ripe",
+  ]
+
+  private static func migrateV5CanonicalDataIfNeeded(
+    seed: AyurvedaSeedDTO,
+    profiles: inout [AyurvedaProfile],
+    links: inout [AyurvedaLink],
+    foods: inout [FoodItem],
+    context: ModelContext,
+    result: inout RunResult
+  ) throws {
+    let incomingProfileIDs = Set(
+      seed.dravyas.map(\.id) + seed.recipes.map(\.id)
+    )
+    guard seed.seedVersion >= 6,
+      profiles.contains(where: {
+        incomingProfileIDs.contains($0.id) && $0.seedVersion < 6
+      })
+    else {
+      return
+    }
+
+    var profileByID = try makeProfileMap(profiles)
+    var foodByID = try makeFoodMap(foods)
+    let incomingDravyas = Dictionary(
+      uniqueKeysWithValues: seed.dravyas.map { ($0.id, $0) }
+    )
+    let incomingLinkIDs = Set(seed.links.map(\.fdcId))
+
+    let ingredientLinks = try context.fetch(FetchDescriptor<IngredientLink>())
+    let mealPlanEntries = try context.fetch(FetchDescriptor<MealPlanEntry>())
+    let storageItems = try context.fetch(FetchDescriptor<StorageItem>())
+    let mealLogStorageLinks = try context.fetch(
+      FetchDescriptor<MealLogStorageLink>()
+    )
+    let storageTransactions = try context.fetch(
+      FetchDescriptor<StorageTransaction>()
+    )
+    let shoppingItems = try context.fetch(FetchDescriptor<ShoppingListItem>())
+    let recentFoods = try context.fetch(FetchDescriptor<RecentlyAddedFood>())
+    let nodes = try context.fetch(FetchDescriptor<Node>())
+    let dismissedFoods = try context.fetch(FetchDescriptor<DismissedFoodID>())
+
+    var scalarFoodIDRemap: [Int: Int] = [:]
+    var deletedFoodModelIDs = Set<PersistentIdentifier>()
+
+    func mergeAndDeleteGeneratedFood(
+      _ source: FoodItem,
+      into destination: FoodItem,
+      destinationID: Int
+    ) {
+      scalarFoodIDRemap[source.id] = destinationID
+      result.remappedFoodReferences += transferFoodReferences(
+        from: source,
+        to: destination,
+        ingredientLinks: ingredientLinks,
+        mealPlanEntries: mealPlanEntries,
+        storageItems: storageItems,
+        mealLogStorageLinks: mealLogStorageLinks,
+        storageTransactions: storageTransactions,
+        shoppingItems: shoppingItems,
+        recentFoods: recentFoods,
+        nodes: nodes
+      )
+      deletedFoodModelIDs.insert(source.persistentModelID)
+      context.delete(source)
+      result.deletedFoods += 1
+    }
+
+    // First remove the nine duplicate canonical profiles. USDA foods remain in
+    // the catalogue; generated placeholder foods are merged into the survivor
+    // so user references are preserved before the obsolete row is deleted.
+    for (loserID, survivorID) in v5MergeTargets {
+      guard let loserProfile = profileByID[loserID] else {
+        continue
+      }
+      guard let survivorProfile = profileByID[survivorID],
+        let survivorSeed = incomingDravyas[survivorID],
+        let loserFood = foodByID[loserProfile.foodId],
+        let survivorFood = foodByID[survivorProfile.foodId]
+      else {
+        throw AyurvedaSeederError.v5MigrationConflict(loserID)
+      }
+
+      if reservedBand.contains(loserFood.id) {
+        mergeAndDeleteGeneratedFood(
+          loserFood,
+          into: survivorFood,
+          destinationID: survivorSeed.foodId
+        )
+        foodByID.removeValue(forKey: loserFood.id)
+      }
+
+      context.delete(loserProfile)
+      profileByID.removeValue(forKey: loserID)
+      result.deletedProfiles += 1
+    }
+
+    // Placeholder ids were historically assigned by ordinal. Removing seven
+    // placeholders shifts 262 surviving ids. Move their existing FoodItem
+    // objects instead of replacing them so every relationship keeps pointing at
+    // the same logical food.
+    var placeholderMoves: [(food: FoodItem, oldID: Int, newID: Int)] = []
+    for (profileID, incoming) in incomingDravyas {
+      guard let profile = profileByID[profileID],
+        profile.foodId != incoming.foodId,
+        let existingFood = foodByID[profile.foodId]
+      else {
+        continue
+      }
+
+      let oldID = profile.foodId
+      if reservedBand.contains(oldID) && reservedBand.contains(incoming.foodId) {
+        placeholderMoves.append((existingFood, oldID, incoming.foodId))
+        scalarFoodIDRemap[oldID] = incoming.foodId
+      } else if reservedBand.contains(oldID) {
+        guard let destination = foodByID[incoming.foodId] else {
+          throw AyurvedaSeederError.v5MigrationConflict(profileID)
+        }
+        mergeAndDeleteGeneratedFood(
+          existingFood,
+          into: destination,
+          destinationID: incoming.foodId
+        )
+        foodByID.removeValue(forKey: oldID)
+      }
+      profile.foodId = incoming.foodId
+    }
+
+    for (index, move) in placeholderMoves.enumerated() {
+      move.food.id = Int.min / 2 + index
+    }
+    for move in placeholderMoves {
+      move.food.id = move.newID
+      result.remappedFoodIDs += 1
+    }
+
+    for dismissed in dismissedFoods {
+      if let replacement = scalarFoodIDRemap[dismissed.foodID] {
+        dismissed.foodID = replacement
+        result.remappedFoodReferences += 1
+      }
+    }
+
+    // The seed is authoritative for canonical links. In v5 the incorrect
+    // "Fish, raw" link (fdcId 750) has to be removed rather than left behind by
+    // the otherwise upsert-only path.
+    var retainedLinks: [AyurvedaLink] = []
+    retainedLinks.reserveCapacity(links.count)
+    for link in links {
+      if incomingLinkIDs.contains(link.fdcId) {
+        retainedLinks.append(link)
+      } else {
+        context.delete(link)
+        result.deletedLinks += 1
+      }
+    }
+    links = retainedLinks
+
+    let survivingProfileIDs = Set(profileByID.keys)
+    profiles.removeAll { !survivingProfileIDs.contains($0.id) }
+    foods.removeAll { deletedFoodModelIDs.contains($0.persistentModelID) }
+
+    print(
+      "   🔄 Ayurveda v5→v\(seed.seedVersion) migration: "
+        + "deleted \(result.deletedProfiles) duplicate profiles, "
+        + "\(result.deletedFoods) obsolete placeholder foods and "
+        + "\(result.deletedLinks) stale links; remapped "
+        + "\(result.remappedFoodIDs) placeholder ids and "
+        + "\(result.remappedFoodReferences) persisted references."
+    )
+  }
+
+  private static func transferFoodReferences(
+    from source: FoodItem,
+    to destination: FoodItem,
+    ingredientLinks: [IngredientLink],
+    mealPlanEntries: [MealPlanEntry],
+    storageItems: [StorageItem],
+    mealLogStorageLinks: [MealLogStorageLink],
+    storageTransactions: [StorageTransaction],
+    shoppingItems: [ShoppingListItem],
+    recentFoods: [RecentlyAddedFood],
+    nodes: [Node]
+  ) -> Int {
+    let sourceID = source.persistentModelID
+    var changed = 0
+
+    for link in ingredientLinks
+    where link.food?.persistentModelID == sourceID {
+      link.food = destination
+      changed += 1
+    }
+    for entry in mealPlanEntries
+    where entry.food?.persistentModelID == sourceID {
+      entry.food = destination
+      changed += 1
+    }
+    for item in storageItems
+    where item.food?.persistentModelID == sourceID {
+      item.food = destination
+      changed += 1
+    }
+    for link in mealLogStorageLinks
+    where link.food?.persistentModelID == sourceID {
+      link.food = destination
+      changed += 1
+    }
+    for transaction in storageTransactions
+    where transaction.food?.persistentModelID == sourceID {
+      transaction.food = destination
+      changed += 1
+    }
+    for item in shoppingItems
+    where item.foodItem?.persistentModelID == sourceID {
+      item.foodItem = destination
+      changed += 1
+    }
+    for recent in recentFoods
+    where recent.food?.persistentModelID == sourceID {
+      recent.food = destination
+      changed += 1
+    }
+    for node in nodes {
+      guard let linkedFoods = node.linkedFoods,
+        linkedFoods.contains(where: { $0.persistentModelID == sourceID })
+      else {
+        continue
+      }
+      var seen = Set<PersistentIdentifier>()
+      node.linkedFoods = linkedFoods.compactMap { food in
+        let replacement = food.persistentModelID == sourceID
+          ? destination
+          : food
+        return seen.insert(replacement.persistentModelID).inserted
+          ? replacement
+          : nil
+      }
+      changed += 1
+    }
+
+    destination.isFavorite = destination.isFavorite || source.isFavorite
+    if destination.photo == nil, let photo = source.photo {
+      destination.photo = photo
+      source.photo = nil
+      changed += 1
+    }
+    if let sourceGallery = source.gallery, !sourceGallery.isEmpty {
+      var destinationGallery = destination.gallery ?? []
+      let destinationPhotoIDs = Set(
+        destinationGallery.map(\.persistentModelID)
+      )
+      for photo in sourceGallery
+      where !destinationPhotoIDs.contains(photo.persistentModelID) {
+        photo.foodItem = destination
+        destinationGallery.append(photo)
+      }
+      destination.gallery = destinationGallery
+      source.gallery = []
+      changed += sourceGallery.count
+    }
+
+    return changed
   }
 
   private static func loadSeedData() throws -> Data {
@@ -794,6 +1099,7 @@ private enum AyurvedaSeederError: Error, LocalizedError {
   case invalidSafetyMetadata
   case missingSafetyDiet(String)
   case invalidSafetyAllergen(String)
+  case v5MigrationConflict(String)
 
   var errorDescription: String? {
     switch self {
@@ -829,6 +1135,8 @@ private enum AyurvedaSeederError: Error, LocalizedError {
       return "the Ayurveda seed references missing Diet \(diet)"
     case .invalidSafetyAllergen(let allergen):
       return "the Ayurveda seed references unsupported allergen \(allergen)"
+    case .v5MigrationConflict(let profileId):
+      return "the Ayurveda v5 migration cannot reconcile profile \(profileId)"
     }
   }
 }
