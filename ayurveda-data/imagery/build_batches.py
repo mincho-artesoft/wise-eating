@@ -62,6 +62,37 @@ def load(repo):
     return fm, foods, recs, dr
 
 
+def load_deny(out_dir=None):
+    """Dravyas that must NOT inherit an existing archive frame.
+
+    A dravya normally reuses a frame when one of its usda[] bindings names a
+    food already in frame_map.json — a free picture, no generation. That is
+    right when the two names denote the same material and wrong when they do
+    not: 'Black mustard seed' and 'Yellow mustard seed' were both inheriting one
+    frame of GROUND mustard, and three different millets shared one frame of
+    proso. reuse-deny.json lists the ones reviewed and rejected, with a reason
+    each, and they fall through to generation instead.
+    """
+    import json as _json
+    d = out_dir or os.path.dirname(os.path.abspath(__file__))
+    p = os.path.join(d, "reuse-deny.json")
+    if not os.path.exists(p):
+        return {}
+    return _json.load(open(p)).get("dravyas", {})
+
+
+def reuse_hit(dravya, keys, deny):
+    """The frame this dravya can inherit, or None. Shared with verify.py so the
+    two cannot drift apart."""
+    if dravya.get("id") in deny:
+        return None
+    for u in (dravya.get("usda") or []):
+        n = u.get("name") if isinstance(u, dict) else None
+        if n and (n in keys or sanitize(n) in keys):
+            return {"frameKey": n if n in keys else sanitize(n), "tier": u.get("tier")}
+    return None
+
+
 def subject_prompt(row, kind):
     """The subject clause. The style clause is appended identically to every row."""
     if kind == "recipe":
@@ -89,16 +120,12 @@ def main():
     keys = set(fm)
 
     # ---- free win: dravyas whose usda[] link already has a frame ----
+    deny = load_deny(a.out)
     reuse, gen_dravya = {}, []
     for d in dr:
         if d["name"] in keys or sanitize(d["name"]) in keys:
             continue
-        hit = None
-        for u in (d.get("usda") or []):
-            n = u.get("name") if isinstance(u, dict) else None
-            if n and (n in keys or sanitize(n) in keys):
-                hit = {"frameKey": n if n in keys else sanitize(n), "tier": u.get("tier")}
-                break
+        hit = reuse_hit(d, keys, deny)
         if hit:
             reuse[d["name"]] = hit
         else:

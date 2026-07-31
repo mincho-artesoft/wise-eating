@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# Xcode per-user state — never shared, and it changes on every window move
+*.xcuserstate
+xcuserdata/
+
+# Scratch parked for deletion (device_bash cannot rm on a mounted folder)
+_to_delete/

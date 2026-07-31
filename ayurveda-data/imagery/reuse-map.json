@@ -127,10 +127,6 @@
     "frameKey": "Curry Leaves",
     "tier": "exact"
   },
-  "Bay leaf, Indian": {
-    "frameKey": "Spices, bay leaf",
-    "tier": "near"
-  },
   "Star anise": {
     "frameKey": "Star Anise",
     "tier": "exact"
@@ -162,14 +158,6 @@
   "Millet, proso": {
     "frameKey": "Millet, raw",
     "tier": "exact"
-  },
-  "Pearl millet": {
-    "frameKey": "Millet, raw",
-    "tier": "near"
-  },
-  "Finger millet": {
-    "frameKey": "Millet, raw",
-    "tier": "near"
   },
   "Sorghum": {
     "frameKey": "Sorghum grain",
@@ -206,10 +194,6 @@
   "Chickpea": {
     "frameKey": "Chickpeas, NFS",
     "tier": "exact"
-  },
-  "Chana dal (split bengal gram)": {
-    "frameKey": "Chickpeas (garbanzo beans, bengal gram), mature seeds, raw",
-    "tier": "near"
   },
   "Chickpea flour": {
     "frameKey": "Chickpea flour (besan)",
@@ -575,10 +559,6 @@
     "frameKey": "Poppy Seeds",
     "tier": "exact"
   },
-  "Lotus seeds (makhana)": {
-    "frameKey": "Seeds, lotus seeds, raw",
-    "tier": "exact"
-  },
   "Coconut, dried": {
     "frameKey": "Nuts, coconut meat, dried (desiccated), toasted",
     "tier": "exact"
@@ -622,10 +602,6 @@
   "Sugar, white": {
     "frameKey": "Sugars, granulated",
     "tier": "exact"
-  },
-  "Rock sugar (mishri)": {
-    "frameKey": "Sugars, granulated",
-    "tier": "near"
   },
   "Maple syrup": {
     "frameKey": "Syrups, maple",
@@ -783,24 +759,8 @@
     "frameKey": "Summer squash, green, raw",
     "tier": "near"
   },
-  "Red onion": {
-    "frameKey": "Onions, raw",
-    "tier": "near"
-  },
-  "White onion": {
-    "frameKey": "Onions, raw",
-    "tier": "near"
-  },
   "Lotus root (kamal kakdi)": {
     "frameKey": "Lotus root, raw",
-    "tier": "near"
-  },
-  "Brinjal (long purple)": {
-    "frameKey": "Eggplant, raw",
-    "tier": "near"
-  },
-  "Brinjal (small round)": {
-    "frameKey": "Eggplant, raw",
     "tier": "near"
   },
   "Green tomato": {
@@ -811,10 +771,6 @@
     "frameKey": "Plantains, green, raw",
     "tier": "exact"
   },
-  "Raw jackfruit (kathal)": {
-    "frameKey": "Jackfruit, raw",
-    "tier": "near"
-  },
   "Kohlrabi (knol-khol)": {
     "frameKey": "Kohlrabi, raw",
     "tier": "near"
@@ -822,10 +778,6 @@
   "Green capsicum": {
     "frameKey": "Peppers, sweet, green, raw",
     "tier": "exact"
-  },
-  "Red/yellow capsicum": {
-    "frameKey": "Peppers, sweet, red, raw",
-    "tier": "near"
   },
   "Sweet corn (fresh)": {
     "frameKey": "Corn, sweet, white, raw",
@@ -859,28 +811,8 @@
     "frameKey": "Breadfruit, raw",
     "tier": "near"
   },
-  "Alphonso mango": {
-    "frameKey": "Mangos, raw",
-    "tier": "near"
-  },
-  "Red banana": {
-    "frameKey": "Bananas, raw",
-    "tier": "near"
-  },
-  "Elaichi banana (small)": {
-    "frameKey": "Bananas, raw",
-    "tier": "near"
-  },
   "Ripe papaya": {
     "frameKey": "Papayas, raw",
-    "tier": "near"
-  },
-  "Green grapes": {
-    "frameKey": "Grapes, red or green (European type, such as Thompson seedless), raw",
-    "tier": "near"
-  },
-  "Black grapes": {
-    "frameKey": "Grapes, red or green (European type, such as Thompson seedless), raw",
     "tier": "near"
   },
   "Pomelo (chakotra)": {
@@ -931,10 +863,6 @@
     "frameKey": "Tamarinds, raw",
     "tier": "near"
   },
-  "Dry coconut (copra)": {
-    "frameKey": "Nuts, coconut meat, dried (desiccated), not sweetened",
-    "tier": "exact"
-  },
   "Desiccated coconut": {
     "frameKey": "Nuts, coconut meat, dried (desiccated), not sweetened",
     "tier": "exact"
@@ -980,10 +908,6 @@
     "tier": "exact"
   },
   "Whole mung bean": {
-    "frameKey": "Mung beans, mature seeds, raw",
-    "tier": "near"
-  },
-  "Split mung dal": {
     "frameKey": "Mung beans, mature seeds, raw",
     "tier": "near"
   },
@@ -1039,15 +963,7 @@
     "frameKey": "Mango, raw",
     "tier": "near"
   },
-  "Split red lentil": {
-    "frameKey": "Lentils, pink or red, raw",
-    "tier": "near"
-  },
   "White chickpea": {
-    "frameKey": "Chickpeas (garbanzo beans, bengal gram), mature seeds, raw",
-    "tier": "near"
-  },
-  "Black chickpea": {
     "frameKey": "Chickpeas (garbanzo beans, bengal gram), mature seeds, raw",
     "tier": "near"
   },
@@ -1087,10 +1003,6 @@
     "frameKey": "Lima beans, NFS",
     "tier": "exact"
   },
-  "White peas (safed vatana)": {
-    "frameKey": "Peas, green, split, mature seeds, raw",
-    "tier": "near"
-  },
   "Winged bean": {
     "frameKey": "Winged beans, mature seeds, raw",
     "tier": "exact"
@@ -1102,14 +1014,6 @@
   "Mace": {
     "frameKey": "Mace (Jayitri)",
     "tier": "exact"
-  },
-  "Black mustard seed": {
-    "frameKey": "Spices, mustard seed, ground",
-    "tier": "near"
-  },
-  "Yellow mustard seed": {
-    "frameKey": "Spices, mustard seed, ground",
-    "tier": "near"
   },
   "Black cumin": {
     "frameKey": "Black cumin (shahi jeera)",
@@ -1183,10 +1087,6 @@
     "frameKey": "Vanilla (dried)",
     "tier": "near"
   },
-  "Red amaranth greens (lal chaulai)": {
-    "frameKey": "Amaranth leaves, raw",
-    "tier": "near"
-  },
   "Drumstick leaf (fresh)": {
     "frameKey": "Drumstick leaves, raw",
     "tier": "exact"
@@ -1202,10 +1102,6 @@
   "Lettuce (leaf/iceberg)": {
     "frameKey": "Lettuce, raw",
     "tier": "exact"
-  },
-  "Dry dates (chhuara)": {
-    "frameKey": "Dates, medjool",
-    "tier": "near"
   },
   "Dried cranberry": {
     "frameKey": "Cranberries, dried",

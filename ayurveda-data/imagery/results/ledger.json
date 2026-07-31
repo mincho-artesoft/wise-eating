@@ -12530,25 +12530,25 @@
     "mediaId": "87101e1d-a466-4a9b-8bc3-c7490798432e"
   },
   "recipe-weeknight-spinach-masoor-semolina": {
-    "status": "error",
+    "status": "done",
     "name": "Weeknight Spinach Masoor Semolina",
     "kind": "recipe",
-    "error": "error",
-    "mediaId": null
+    "error": null,
+    "mediaId": "08826e03-cb71-4391-a25a-baaec691305f"
   },
   "recipe-weeknight-spinach-mung-amaranth": {
-    "status": "error",
+    "status": "done",
     "name": "Weeknight Spinach Mung Amaranth",
     "kind": "recipe",
-    "error": "error",
-    "mediaId": null
+    "error": null,
+    "mediaId": "61e4ff76-ae4b-4dc1-88c0-ae3aa38f91ea"
   },
   "recipe-weeknight-spinach-mung-oat-pot": {
-    "status": "error",
+    "status": "done",
     "name": "Weeknight Spinach Mung Oat Pot",
     "kind": "recipe",
-    "error": "error",
-    "mediaId": null
+    "error": null,
+    "mediaId": "58e9bd77-f708-4b6a-8bdf-101a50343d6b"
   },
   "recipe-weeknight-spinach-mung-rice": {
     "status": "done",
@@ -12586,18 +12586,18 @@
     "mediaId": "c8749528-0229-400d-818b-1f31ed8f49be"
   },
   "recipe-weeknight-tofu-zucchini-rice": {
-    "status": "error",
+    "status": "done",
     "name": "Weeknight Tofu Zucchini Rice",
     "kind": "recipe",
-    "error": "error",
-    "mediaId": null
+    "error": null,
+    "mediaId": "612a89b0-cd36-47a9-9238-17bd4a5308a1"
   },
   "recipe-weeknight-tomato-masoor-oats": {
-    "status": "error",
+    "status": "done",
     "name": "Weeknight Tomato Masoor Oats",
     "kind": "recipe",
-    "error": "error",
-    "mediaId": null
+    "error": null,
+    "mediaId": "3f43d079-dd24-4d1c-91f8-8c96f1f7f139"
   },
   "recipe-weeknight-tomato-masoor-rice": {
     "status": "done",
@@ -12670,241 +12670,423 @@
     "mediaId": "bb0394c7-2d83-4b97-b7da-e84e6193e121"
   },
   "recipe-whole-wheat-panjiri": {
-    "status": "error",
+    "status": "done",
     "name": "Whole Wheat Panjiri",
     "kind": "recipe",
-    "error": "error",
-    "mediaId": null
+    "error": null,
+    "mediaId": "ea01157e-2948-45a1-b967-0b829112c1a0"
   },
   "recipe-whole-wheat-asparagus-pea-pasta": {
-    "status": "error",
+    "status": "done",
     "name": "Whole-Wheat Asparagus Pea Pasta",
     "kind": "recipe",
-    "error": "error",
-    "mediaId": null
+    "error": null,
+    "mediaId": "badc2838-bc2e-497b-9042-c8fa27d4625e"
   },
   "recipe-whole-wheat-beet-dill-pasta": {
-    "status": "error",
+    "status": "done",
     "name": "Whole-Wheat Beet Dill Pasta",
     "kind": "recipe",
-    "error": "error",
-    "mediaId": null
+    "error": null,
+    "mediaId": "26846ffb-7d7d-4db6-aa27-10fc8692b92f"
   },
   "recipe-whole-wheat-broccoli-almond-pasta": {
-    "status": "error",
+    "status": "done",
     "name": "Whole-Wheat Broccoli Almond Pasta",
     "kind": "recipe",
-    "error": "error",
-    "mediaId": null
+    "error": null,
+    "mediaId": "86153f9e-26c6-4510-96fc-e67d771961e5"
   },
   "recipe-whole-wheat-carrot-pancakes": {
-    "status": "skipped",
+    "status": "done",
     "name": "Whole-Wheat Carrot Pancakes",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "99b890a2-8c3e-4913-8dc1-83c46b9f73a9"
   },
   "recipe-whole-wheat-cauliflower-parsley-pasta": {
-    "status": "skipped",
+    "status": "done",
     "name": "Whole-Wheat Cauliflower Parsley Pasta",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "b560606a-60d5-4b00-871a-dd4f683de12e"
   },
   "recipe-whole-wheat-eggplant-tomato-pasta": {
-    "status": "skipped",
+    "status": "done",
     "name": "Whole-Wheat Eggplant Tomato Pasta",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "389af7a9-b6e3-4aa8-8124-9f61aa19225f"
   },
   "recipe-whole-wheat-mushroom-thyme-pasta": {
-    "status": "skipped",
+    "status": "done",
     "name": "Whole-Wheat Mushroom Thyme Pasta",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "5daeafb7-9c63-4895-a7ce-c5c6f0afd3fb"
   },
   "recipe-whole-wheat-pasta-with-zucchini-herbs": {
-    "status": "skipped",
+    "status": "done",
     "name": "Whole-Wheat Pasta with Zucchini Herbs",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "df725fb8-a384-4b9b-ab58-59900f7f6a37"
   },
   "recipe-whole-wheat-pocket-flatbread": {
-    "status": "skipped",
+    "status": "done",
     "name": "Whole-Wheat Pocket Flatbread",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "24937950-9882-451f-8d87-d69ec7a65cba"
   },
   "recipe-whole-wheat-pumpkin-rosemary-pasta": {
-    "status": "skipped",
+    "status": "done",
     "name": "Whole-Wheat Pumpkin Rosemary Pasta",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "0235c886-6051-417e-9df8-36ca9ce18c08"
   },
   "recipe-whole-wheat-red-pepper-tomato-pasta": {
-    "status": "skipped",
+    "status": "done",
     "name": "Whole-Wheat Red Pepper Tomato Pasta",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "0c9f16b2-660b-4f8c-8558-b104a75f1e88"
   },
   "recipe-whole-wheat-sesame-side-bread": {
-    "status": "skipped",
+    "status": "done",
     "name": "Whole-Wheat Sesame Side Bread",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "bef39c5e-9f3f-4d91-acf4-ba8ecad09784"
   },
   "recipe-whole-wheat-spinach-walnut-pasta": {
-    "status": "skipped",
+    "status": "done",
     "name": "Whole-Wheat Spinach Walnut Pasta",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "34a39319-894b-4e50-b47c-ee7bf7fc7b07"
   },
   "recipe-yam-fenugreek-sabzi": {
-    "status": "skipped",
+    "status": "done",
     "name": "Yam Fenugreek Sabzi",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "b7c9a8fc-032b-4bf6-8f5a-5180f9cddcf2"
   },
   "recipe-yam-green-bean-curry": {
-    "status": "skipped",
+    "status": "done",
     "name": "Yam Green Bean Curry",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "7fb5c33e-91aa-4f65-880d-c7a4dbaa5ab1"
   },
   "recipe-yogurt-whole-wheat-flatbread": {
-    "status": "skipped",
+    "status": "done",
     "name": "Yogurt Whole-Wheat Flatbread",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "c11c0402-608b-47be-b29c-9613c4f3a804"
   },
   "recipe-zucchini-coriander-chutney": {
-    "status": "skipped",
+    "status": "done",
     "name": "Zucchini Coriander Chutney",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "d42f729c-7fcf-47c2-9f1c-9b234adf60e8"
   },
   "recipe-zucchini-coriander-quick-pickle": {
-    "status": "skipped",
+    "status": "done",
     "name": "Zucchini Coriander Quick Pickle",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "843efdf8-ffb6-4984-a3c9-1a2252a26177"
   },
   "recipe-zucchini-dill-raita": {
-    "status": "skipped",
+    "status": "done",
     "name": "Zucchini Dill Raita",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "fadc3e7b-c27b-45e6-afe9-bef90197fc39"
   },
   "recipe-zucchini-dill-sabzi": {
-    "status": "skipped",
+    "status": "done",
     "name": "Zucchini Dill Sabzi",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "85476583-39ba-48cf-9433-1f0981ab161b"
   },
   "recipe-zucchini-dill-uttapam": {
-    "status": "skipped",
+    "status": "done",
     "name": "Zucchini Dill Uttapam",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "89c35a59-4566-4c5a-ad87-4478f4b3ea9a"
   },
   "recipe-zucchini-mint-soup": {
-    "status": "skipped",
+    "status": "done",
     "name": "Zucchini Mint Soup",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "2d3aad03-8b26-4561-9824-b8a723932924"
   },
   "recipe-zucchini-mung-kitchari": {
-    "status": "skipped",
+    "status": "done",
     "name": "Zucchini Mung Kitchari",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "554c6eaa-8f14-4c68-a80d-32b36227d09c"
   },
   "recipe-zucchini-mung-yusha": {
-    "status": "skipped",
+    "status": "done",
     "name": "Zucchini Mung Yusha",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "565863a1-a18e-459a-b523-2fcd5a4dc311"
   },
   "recipe-zucchini-mushroom-roast": {
-    "status": "skipped",
+    "status": "done",
     "name": "Zucchini Mushroom Roast",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "8e70c0d9-9583-4da8-bf53-838b6481b92f"
   },
   "recipe-zucchini-oat-soft-mash": {
-    "status": "skipped",
+    "status": "done",
     "name": "Zucchini Oat Soft Mash",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "ec9fe654-5391-4e15-89c0-c331b6272474"
   },
   "recipe-zucchini-paratha": {
-    "status": "skipped",
+    "status": "done",
     "name": "Zucchini Paratha",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "a6bf6127-6d39-409c-b947-895b7ec0dc0d"
   },
   "recipe-zucchini-peanut-stir-fry": {
-    "status": "skipped",
+    "status": "done",
     "name": "Zucchini Peanut Stir-Fry",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "3d1c8d2e-e4ec-40ea-8460-21053fb1ee50"
   },
   "recipe-zucchini-poriyal": {
-    "status": "skipped",
+    "status": "done",
     "name": "Zucchini Poriyal",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "b1afd460-769b-4ea2-bdd2-5f83e16cf0aa"
   },
   "recipe-zucchini-rice-peya": {
-    "status": "skipped",
+    "status": "done",
     "name": "Zucchini Rice Peya",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "c25ac90f-e03b-40aa-aac5-15cfe24e6600"
   },
   "recipe-zucchini-sesame-dip": {
-    "status": "skipped",
+    "status": "done",
     "name": "Zucchini Sesame Dip",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "1994b61b-bfc3-42c8-80f0-a8b9c74f66d3"
   },
   "recipe-zucchini-tomato-cheese-gratin": {
-    "status": "skipped",
+    "status": "done",
     "name": "Zucchini Tomato Cheese Gratin",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "6c6e26f9-281d-4452-b897-b7e6e944f12e"
   },
   "recipe-zucchini-tomato-cottage-cheese-bake": {
-    "status": "skipped",
+    "status": "done",
     "name": "Zucchini Tomato Cottage Cheese Bake",
     "kind": "recipe",
-    "error": "aborted: sustained failure rate",
-    "mediaId": null
+    "error": null,
+    "mediaId": "e78d7a5e-56aa-4a44-9c0c-6cac2922c325"
+  },
+  "dravya-alphonso-mango": {
+    "status": "done",
+    "name": "Alphonso mango",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "68b538e4-c9f9-445c-b3f1-00ad89f228ab"
+  },
+  "dravya-bay-leaf-indian": {
+    "status": "done",
+    "name": "Bay leaf, Indian",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "1a1bb5b4-d127-4db7-89e8-03895f3472cc"
+  },
+  "dravya-black-chickpea": {
+    "status": "done",
+    "name": "Black chickpea",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "7f324891-c64c-4c1e-bc96-5e9a5ce0cdf9"
+  },
+  "dravya-black-grapes": {
+    "status": "done",
+    "name": "Black grapes",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "894c7578-6551-44f2-84d7-04af2f5e8816"
+  },
+  "dravya-black-mustard-seed": {
+    "status": "done",
+    "name": "Black mustard seed",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "c9ad6c64-62dd-4d7f-9dab-1b1ca6782574"
+  },
+  "dravya-brinjal-long-purple": {
+    "status": "done",
+    "name": "Brinjal (long purple)",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "38749dea-8541-4c5a-aa5a-29e2259ba566"
+  },
+  "dravya-brinjal-small-round": {
+    "status": "done",
+    "name": "Brinjal (small round)",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "6a508ead-efbe-4510-8628-7f06921a98d2"
+  },
+  "dravya-chana-dal-split-bengal-gram": {
+    "status": "done",
+    "name": "Chana dal (split bengal gram)",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "121ab925-2e16-4118-9533-78a6456f073d"
+  },
+  "dravya-dry-coconut-copra": {
+    "status": "done",
+    "name": "Dry coconut (copra)",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "c36b3b51-f9f0-403f-8c3b-1cfd572b614c"
+  },
+  "dravya-dry-dates-chhuara": {
+    "status": "done",
+    "name": "Dry dates (chhuara)",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "c5c6730b-9b6e-4607-a5f6-0e00f11aae1f"
+  },
+  "dravya-elaichi-banana-small": {
+    "status": "done",
+    "name": "Elaichi banana (small)",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "4f1640a1-6537-4bf4-aac1-4b0774358710"
+  },
+  "dravya-finger-millet": {
+    "status": "done",
+    "name": "Finger millet",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "3e84bc3f-2027-4cfe-b6de-244c689a4560"
+  },
+  "dravya-green-grapes": {
+    "status": "done",
+    "name": "Green grapes",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "abc89aa8-8490-4c18-a55c-37381a0f65a9"
+  },
+  "dravya-lotus-seeds-makhana": {
+    "status": "done",
+    "name": "Lotus seeds (makhana)",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "8c06f76f-4f96-4dd5-b77f-9124049f2a48"
+  },
+  "dravya-pearl-millet": {
+    "status": "done",
+    "name": "Pearl millet",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "dd8080ae-f166-4a96-a0de-7761af3aee3f"
+  },
+  "dravya-raw-jackfruit-kathal": {
+    "status": "done",
+    "name": "Raw jackfruit (kathal)",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "4a998928-cc9a-45ed-b939-ddb4e904f778"
+  },
+  "dravya-red-amaranth-greens-lal-chaulai": {
+    "status": "done",
+    "name": "Red amaranth greens (lal chaulai)",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "f09f0155-c1b4-4a01-9ab4-5b15a2c29678"
+  },
+  "dravya-red-banana": {
+    "status": "done",
+    "name": "Red banana",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "5b3ead5d-6066-42a8-ab98-554474507706"
+  },
+  "dravya-red-onion": {
+    "status": "done",
+    "name": "Red onion",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "c93898eb-5c2d-4212-8a26-0a87a0ce7a09"
+  },
+  "dravya-red-yellow-capsicum": {
+    "status": "done",
+    "name": "Red/yellow capsicum",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "613b3df5-295b-4141-a07f-81863e014ef3"
+  },
+  "dravya-rock-sugar-mishri": {
+    "status": "done",
+    "name": "Rock sugar (mishri)",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "2ae00de0-66e7-4cd5-a003-685dee6bbb3a"
+  },
+  "dravya-split-mung-dal": {
+    "status": "done",
+    "name": "Split mung dal",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "3e003b7b-794c-4e36-954c-cfdee7047e40"
+  },
+  "dravya-split-red-lentil": {
+    "status": "done",
+    "name": "Split red lentil",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "3af70d58-3b21-448f-98a6-1eab11c4db49"
+  },
+  "dravya-white-onion": {
+    "status": "done",
+    "name": "White onion",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "b54bc3c0-ba65-44ce-9f70-28698350896a"
+  },
+  "dravya-white-peas-safed-vatana": {
+    "status": "done",
+    "name": "White peas (safed vatana)",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "0e2876a7-9ed4-4f88-b7bf-a5edd26f0afd"
+  },
+  "dravya-yellow-mustard-seed": {
+    "status": "done",
+    "name": "Yellow mustard seed",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "9da9691c-12e0-4689-96f5-50d6543e6fe0"
   }
 }

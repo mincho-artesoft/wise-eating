@@ -58,7 +58,14 @@ remaining() {
 }
 
 DAY=""; DAY_COUNT=0; MISSES=0; BACKOFFS=0
-MAX_BACKOFFS="${MAX_BACKOFFS:-1000}"
+# 1, not 1000. The runner only backs off after deciding the failures are
+# unrecoverable and are real lost work — it says so and stops. This loop used to
+# override that and restart 60s later, up to a thousand times. On 2026-07-30 that
+# turned one Flow refusal into four rounds of generating images that could never
+# be downloaded. Timeouts, the recoverable case this tolerance was written for,
+# are already excluded from the runner's own backoff rate, so there is nothing
+# left for it to protect.
+MAX_BACKOFFS="${MAX_BACKOFFS:-1}"
 MAX_MISSES="${MAX_MISSES:-30}"
 done_count() {
   python3 "$DIR/status.py" --out "$OUT" --json 2>/dev/null \
@@ -113,6 +120,17 @@ for round in $(seq 1 "$MAX_ROUNDS"); do
     exit 2
   fi
   if printf '%s' "$OUTPUT" | grep -q "BACKING OFF"; then
+    # Check progress BEFORE cooling and continuing. This branch used to jump
+    # straight back to the top, skipping the "produced nothing" guard at the end
+    # of the loop entirely — so three consecutive rounds that downloaded zero
+    # images looked identical to healthy progress from here.
+    NOW_BO="$(remaining)"
+    if [[ "$NOW_BO" == "$REM" ]]; then
+      log "STOPPED — the runner backed off and the round produced no new image."
+      log "  Nothing is being gained by asking again. Look at bridge.log for the"
+      log "  last error text before restarting."
+      exit 3
+    fi
     BACKOFFS=$(( BACKOFFS + 1 ))
     COOL=$(( PAUSE > 0 ? PAUSE * 4 : 60 ))
     log "runner backed off (${BACKOFFS}/${MAX_BACKOFFS}) — cooling ${COOL}s, then continuing"

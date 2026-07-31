@@ -1,5 +1,5 @@
 {
-  "count": 1840,
+  "count": 1866,
   "createdBy": "build_batches.py",
   "styleHash": "c8d83786a68f",
   "jobs": [
@@ -109,6 +109,24 @@
         "kind": "dravya",
         "name": "Aloe vera pulp",
         "frameKey": "Aloe vera pulp"
+      }
+    },
+    {
+      "id": "img-24c024c680",
+      "type": "image",
+      "prompt": "Alphonso mango. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-alphonso-mango",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Alphonso mango",
+        "frameKey": "Alphonso mango"
       }
     },
     {
@@ -508,6 +526,24 @@
       }
     },
     {
+      "id": "img-359b5ee10e",
+      "type": "image",
+      "prompt": "Bay leaf, Indian. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-bay-leaf-indian",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Bay leaf, Indian",
+        "frameKey": "Bay leaf, Indian"
+      }
+    },
+    {
       "id": "img-0a562ecf79",
       "type": "image",
       "prompt": "Besan ladoo. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
@@ -613,6 +649,60 @@
         "kind": "dravya",
         "name": "Black carrot kanji",
         "frameKey": "Black carrot kanji"
+      }
+    },
+    {
+      "id": "img-49763a5820",
+      "type": "image",
+      "prompt": "Black chickpea. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-black-chickpea",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Black chickpea",
+        "frameKey": "Black chickpea"
+      }
+    },
+    {
+      "id": "img-8e4e21f7ee",
+      "type": "image",
+      "prompt": "Black grapes. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-black-grapes",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Black grapes",
+        "frameKey": "Black grapes"
+      }
+    },
+    {
+      "id": "img-6f225a43b2",
+      "type": "image",
+      "prompt": "Black mustard seed. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-black-mustard-seed",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Black mustard seed",
+        "frameKey": "Black mustard seed"
       }
     },
     {
@@ -739,6 +829,42 @@
         "kind": "dravya",
         "name": "Brahmi (bacopa)",
         "frameKey": "Brahmi (bacopa)"
+      }
+    },
+    {
+      "id": "img-03fab795ae",
+      "type": "image",
+      "prompt": "Brinjal (long purple). A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-brinjal-long-purple",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Brinjal (long purple)",
+        "frameKey": "Brinjal (long purple)"
+      }
+    },
+    {
+      "id": "img-5a7226829e",
+      "type": "image",
+      "prompt": "Brinjal (small round). A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-brinjal-small-round",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Brinjal (small round)",
+        "frameKey": "Brinjal (small round)"
       }
     },
     {
@@ -1009,6 +1135,24 @@
         "kind": "dravya",
         "name": "Chakvad greens (cassia tora)",
         "frameKey": "Chakvad greens (cassia tora)"
+      }
+    },
+    {
+      "id": "img-078c69ca73",
+      "type": "image",
+      "prompt": "Chana dal (split bengal gram). A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-chana-dal-split-bengal-gram",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Chana dal (split bengal gram)",
+        "frameKey": "Chana dal (split bengal gram)"
       }
     },
     {
@@ -1606,6 +1750,42 @@
       }
     },
     {
+      "id": "img-2d5bd2775d",
+      "type": "image",
+      "prompt": "Dry coconut (copra). A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-dry-coconut-copra",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Dry coconut (copra)",
+        "frameKey": "Dry coconut (copra)"
+      }
+    },
+    {
+      "id": "img-9982e82e25",
+      "type": "image",
+      "prompt": "Dry dates (chhuara). A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-dry-dates-chhuara",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Dry dates (chhuara)",
+        "frameKey": "Dry dates (chhuara)"
+      }
+    },
+    {
       "id": "img-845ab502e3",
       "type": "image",
       "prompt": "Dwarf copperleaf (ponnanganni). A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
@@ -1711,6 +1891,24 @@
         "kind": "dravya",
         "name": "Egg bhurji",
         "frameKey": "Egg bhurji"
+      }
+    },
+    {
+      "id": "img-0cb5a2f09a",
+      "type": "image",
+      "prompt": "Elaichi banana (small). A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-elaichi-banana-small",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Elaichi banana (small)",
+        "frameKey": "Elaichi banana (small)"
       }
     },
     {
@@ -1855,6 +2053,24 @@
         "kind": "dravya",
         "name": "Field bean (avarekalu)",
         "frameKey": "Field bean (avarekalu)"
+      }
+    },
+    {
+      "id": "img-19a62a5fa5",
+      "type": "image",
+      "prompt": "Finger millet. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-finger-millet",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Finger millet",
+        "frameKey": "Finger millet"
       }
     },
     {
@@ -2269,6 +2485,24 @@
         "kind": "dravya",
         "name": "Greater galangal",
         "frameKey": "Greater galangal"
+      }
+    },
+    {
+      "id": "img-1e6841c596",
+      "type": "image",
+      "prompt": "Green grapes. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-green-grapes",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Green grapes",
+        "frameKey": "Green grapes"
       }
     },
     {
@@ -3172,6 +3406,24 @@
       }
     },
     {
+      "id": "img-751a8a692c",
+      "type": "image",
+      "prompt": "Lotus seeds (makhana). A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-lotus-seeds-makhana",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Lotus seeds (makhana)",
+        "frameKey": "Lotus seeds (makhana)"
+      }
+    },
+    {
       "id": "img-f4d1c05376",
       "type": "image",
       "prompt": "Mahua flower (dried). A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
@@ -3802,6 +4054,24 @@
       }
     },
     {
+      "id": "img-41261214d1",
+      "type": "image",
+      "prompt": "Pearl millet. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-pearl-millet",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Pearl millet",
+        "frameKey": "Pearl millet"
+      }
+    },
+    {
       "id": "img-26950ba0c8",
       "type": "image",
       "prompt": "Phalsa. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
@@ -4144,6 +4414,24 @@
       }
     },
     {
+      "id": "img-18b12fef2a",
+      "type": "image",
+      "prompt": "Raw jackfruit (kathal). A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-raw-jackfruit-kathal",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Raw jackfruit (kathal)",
+        "frameKey": "Raw jackfruit (kathal)"
+      }
+    },
+    {
       "id": "img-db2a068d6e",
       "type": "image",
       "prompt": "Raw karonda (pickle berry). A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
@@ -4180,6 +4468,42 @@
       }
     },
     {
+      "id": "img-f4a23e1689",
+      "type": "image",
+      "prompt": "Red amaranth greens (lal chaulai). A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-red-amaranth-greens-lal-chaulai",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Red amaranth greens (lal chaulai)",
+        "frameKey": "Red amaranth greens (lal chaulai)"
+      }
+    },
+    {
+      "id": "img-1fdfc0200f",
+      "type": "image",
+      "prompt": "Red banana. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-red-banana",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Red banana",
+        "frameKey": "Red banana"
+      }
+    },
+    {
       "id": "img-52acda590d",
       "type": "image",
       "prompt": "Red cowpea. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
@@ -4195,6 +4519,24 @@
         "kind": "dravya",
         "name": "Red cowpea",
         "frameKey": "Red cowpea"
+      }
+    },
+    {
+      "id": "img-dc39c92dfa",
+      "type": "image",
+      "prompt": "Red onion. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-red-onion",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Red onion",
+        "frameKey": "Red onion"
       }
     },
     {
@@ -4249,6 +4591,24 @@
         "kind": "dravya",
         "name": "Red rice",
         "frameKey": "Red rice"
+      }
+    },
+    {
+      "id": "img-a98dbb9784",
+      "type": "image",
+      "prompt": "Red/yellow capsicum. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-red-yellow-capsicum",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Red/yellow capsicum",
+        "frameKey": "Red_yellow capsicum"
       }
     },
     {
@@ -4411,6 +4771,24 @@
         "kind": "dravya",
         "name": "Roasted gram flour (sattu)",
         "frameKey": "Roasted gram flour (sattu)"
+      }
+    },
+    {
+      "id": "img-90cd170ae9",
+      "type": "image",
+      "prompt": "Rock sugar (mishri). A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-rock-sugar-mishri",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Rock sugar (mishri)",
+        "frameKey": "Rock sugar (mishri)"
       }
     },
     {
@@ -4987,6 +5365,42 @@
         "kind": "dravya",
         "name": "Split black gram",
         "frameKey": "Split black gram"
+      }
+    },
+    {
+      "id": "img-7e84914831",
+      "type": "image",
+      "prompt": "Split mung dal. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-split-mung-dal",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Split mung dal",
+        "frameKey": "Split mung dal"
+      }
+    },
+    {
+      "id": "img-ac49ca55ff",
+      "type": "image",
+      "prompt": "Split red lentil. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-split-red-lentil",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Split red lentil",
+        "frameKey": "Split red lentil"
       }
     },
     {
@@ -5962,6 +6376,42 @@
       }
     },
     {
+      "id": "img-9bc3971633",
+      "type": "image",
+      "prompt": "White onion. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-white-onion",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "White onion",
+        "frameKey": "White onion"
+      }
+    },
+    {
+      "id": "img-4a61c8f581",
+      "type": "image",
+      "prompt": "White peas (safed vatana). A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-white-peas-safed-vatana",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "White peas (safed vatana)",
+        "frameKey": "White peas (safed vatana)"
+      }
+    },
+    {
       "id": "img-6b4f842553",
       "type": "image",
       "prompt": "White radish (mooli). A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
@@ -6121,6 +6571,24 @@
         "kind": "dravya",
         "name": "Yak milk",
         "frameKey": "Yak milk"
+      }
+    },
+    {
+      "id": "img-81ff5a3cb4",
+      "type": "image",
+      "prompt": "Yellow mustard seed. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-yellow-mustard-seed",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Yellow mustard seed",
+        "frameKey": "Yellow mustard seed"
       }
     },
     {

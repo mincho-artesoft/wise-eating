@@ -1,8 +1,8 @@
 {
-  "totalToGenerate": 1840,
+  "totalToGenerate": 1866,
   "batchSize": 100,
   "batches": 19,
-  "reuseWithoutGeneration": 319,
+  "reuseWithoutGeneration": 293,
   "styleHash": "c8d83786a68f",
   "rows": [
     {
@@ -40,6 +40,12 @@
       "kind": "dravya",
       "name": "Aloe vera pulp",
       "frameKey": "Aloe vera pulp"
+    },
+    {
+      "filename": "dravya-alphonso-mango",
+      "kind": "dravya",
+      "name": "Alphonso mango",
+      "frameKey": "Alphonso mango"
     },
     {
       "filename": "dravya-ambali-fermented-ragi-porridge",
@@ -174,6 +180,12 @@
       "frameKey": "Bathua (chenopodium)"
     },
     {
+      "filename": "dravya-bay-leaf-indian",
+      "kind": "dravya",
+      "name": "Bay leaf, Indian",
+      "frameKey": "Bay leaf, Indian"
+    },
+    {
       "filename": "dravya-besan-ladoo",
       "kind": "dravya",
       "name": "Besan ladoo",
@@ -208,6 +220,24 @@
       "kind": "dravya",
       "name": "Black carrot kanji",
       "frameKey": "Black carrot kanji"
+    },
+    {
+      "filename": "dravya-black-chickpea",
+      "kind": "dravya",
+      "name": "Black chickpea",
+      "frameKey": "Black chickpea"
+    },
+    {
+      "filename": "dravya-black-grapes",
+      "kind": "dravya",
+      "name": "Black grapes",
+      "frameKey": "Black grapes"
+    },
+    {
+      "filename": "dravya-black-mustard-seed",
+      "kind": "dravya",
+      "name": "Black mustard seed",
+      "frameKey": "Black mustard seed"
     },
     {
       "filename": "dravya-black-nightshade-greens",
@@ -250,6 +280,18 @@
       "kind": "dravya",
       "name": "Brahmi (bacopa)",
       "frameKey": "Brahmi (bacopa)"
+    },
+    {
+      "filename": "dravya-brinjal-long-purple",
+      "kind": "dravya",
+      "name": "Brinjal (long purple)",
+      "frameKey": "Brinjal (long purple)"
+    },
+    {
+      "filename": "dravya-brinjal-small-round",
+      "kind": "dravya",
+      "name": "Brinjal (small round)",
+      "frameKey": "Brinjal (small round)"
     },
     {
       "filename": "dravya-broad-bean-pod-sem",
@@ -340,6 +382,12 @@
       "kind": "dravya",
       "name": "Chakvad greens (cassia tora)",
       "frameKey": "Chakvad greens (cassia tora)"
+    },
+    {
+      "filename": "dravya-chana-dal-split-bengal-gram",
+      "kind": "dravya",
+      "name": "Chana dal (split bengal gram)",
+      "frameKey": "Chana dal (split bengal gram)"
     },
     {
       "filename": "dravya-chaturjata-spice-blend",
@@ -540,6 +588,18 @@
       "frameKey": "Dried water chestnut"
     },
     {
+      "filename": "dravya-dry-coconut-copra",
+      "kind": "dravya",
+      "name": "Dry coconut (copra)",
+      "frameKey": "Dry coconut (copra)"
+    },
+    {
+      "filename": "dravya-dry-dates-chhuara",
+      "kind": "dravya",
+      "name": "Dry dates (chhuara)",
+      "frameKey": "Dry dates (chhuara)"
+    },
+    {
       "filename": "dravya-dwarf-copperleaf-ponnanganni",
       "kind": "dravya",
       "name": "Dwarf copperleaf (ponnanganni)",
@@ -574,6 +634,12 @@
       "kind": "dravya",
       "name": "Egg bhurji",
       "frameKey": "Egg bhurji"
+    },
+    {
+      "filename": "dravya-elaichi-banana-small",
+      "kind": "dravya",
+      "name": "Elaichi banana (small)",
+      "frameKey": "Elaichi banana (small)"
     },
     {
       "filename": "dravya-elephant-apple-ou-tenga",
@@ -622,6 +688,12 @@
       "kind": "dravya",
       "name": "Field bean (avarekalu)",
       "frameKey": "Field bean (avarekalu)"
+    },
+    {
+      "filename": "dravya-finger-millet",
+      "kind": "dravya",
+      "name": "Finger millet",
+      "frameKey": "Finger millet"
     },
     {
       "filename": "dravya-flat-bean-papdi",
@@ -760,6 +832,12 @@
       "kind": "dravya",
       "name": "Greater galangal",
       "frameKey": "Greater galangal"
+    },
+    {
+      "filename": "dravya-green-grapes",
+      "kind": "dravya",
+      "name": "Green grapes",
+      "frameKey": "Green grapes"
     },
     {
       "filename": "dravya-green-peas-in-pod-fresh-sabzi",
@@ -1062,6 +1140,12 @@
       "frameKey": "Long pepper root"
     },
     {
+      "filename": "dravya-lotus-seeds-makhana",
+      "kind": "dravya",
+      "name": "Lotus seeds (makhana)",
+      "frameKey": "Lotus seeds (makhana)"
+    },
+    {
       "filename": "dravya-mahua-flower-dried",
       "kind": "dravya",
       "name": "Mahua flower (dried)",
@@ -1272,6 +1356,12 @@
       "frameKey": "Peanut chikki"
     },
     {
+      "filename": "dravya-pearl-millet",
+      "kind": "dravya",
+      "name": "Pearl millet",
+      "frameKey": "Pearl millet"
+    },
+    {
       "filename": "dravya-phalsa",
       "kind": "dravya",
       "name": "Phalsa",
@@ -1386,6 +1476,12 @@
       "frameKey": "Rasam spice blend"
     },
     {
+      "filename": "dravya-raw-jackfruit-kathal",
+      "kind": "dravya",
+      "name": "Raw jackfruit (kathal)",
+      "frameKey": "Raw jackfruit (kathal)"
+    },
+    {
       "filename": "dravya-raw-karonda-pickle-berry",
       "kind": "dravya",
       "name": "Raw karonda (pickle berry)",
@@ -1398,10 +1494,28 @@
       "frameKey": "Raw papaya"
     },
     {
+      "filename": "dravya-red-amaranth-greens-lal-chaulai",
+      "kind": "dravya",
+      "name": "Red amaranth greens (lal chaulai)",
+      "frameKey": "Red amaranth greens (lal chaulai)"
+    },
+    {
+      "filename": "dravya-red-banana",
+      "kind": "dravya",
+      "name": "Red banana",
+      "frameKey": "Red banana"
+    },
+    {
       "filename": "dravya-red-cowpea",
       "kind": "dravya",
       "name": "Red cowpea",
       "frameKey": "Red cowpea"
+    },
+    {
+      "filename": "dravya-red-onion",
+      "kind": "dravya",
+      "name": "Red onion",
+      "frameKey": "Red onion"
     },
     {
       "filename": "dravya-red-pumpkin-kaddu",
@@ -1420,6 +1534,12 @@
       "kind": "dravya",
       "name": "Red rice",
       "frameKey": "Red rice"
+    },
+    {
+      "filename": "dravya-red-yellow-capsicum",
+      "kind": "dravya",
+      "name": "Red/yellow capsicum",
+      "frameKey": "Red_yellow capsicum"
     },
     {
       "filename": "dravya-rhododendron-juice-buransh",
@@ -1474,6 +1594,12 @@
       "kind": "dravya",
       "name": "Roasted gram flour (sattu)",
       "frameKey": "Roasted gram flour (sattu)"
+    },
+    {
+      "filename": "dravya-rock-sugar-mishri",
+      "kind": "dravya",
+      "name": "Rock sugar (mishri)",
+      "frameKey": "Rock sugar (mishri)"
     },
     {
       "filename": "dravya-rohu-freshwater-fish",
@@ -1666,6 +1792,18 @@
       "kind": "dravya",
       "name": "Split black gram",
       "frameKey": "Split black gram"
+    },
+    {
+      "filename": "dravya-split-mung-dal",
+      "kind": "dravya",
+      "name": "Split mung dal",
+      "frameKey": "Split mung dal"
+    },
+    {
+      "filename": "dravya-split-red-lentil",
+      "kind": "dravya",
+      "name": "Split red lentil",
+      "frameKey": "Split red lentil"
     },
     {
       "filename": "dravya-sponge-gourd-gilki",
@@ -1992,6 +2130,18 @@
       "frameKey": "Wheatgrass"
     },
     {
+      "filename": "dravya-white-onion",
+      "kind": "dravya",
+      "name": "White onion",
+      "frameKey": "White onion"
+    },
+    {
+      "filename": "dravya-white-peas-safed-vatana",
+      "kind": "dravya",
+      "name": "White peas (safed vatana)",
+      "frameKey": "White peas (safed vatana)"
+    },
+    {
       "filename": "dravya-white-radish-mooli",
       "kind": "dravya",
       "name": "White radish (mooli)",
@@ -2044,6 +2194,12 @@
       "kind": "dravya",
       "name": "Yak milk",
       "frameKey": "Yak milk"
+    },
+    {
+      "filename": "dravya-yellow-mustard-seed",
+      "kind": "dravya",
+      "name": "Yellow mustard seed",
+      "frameKey": "Yellow mustard seed"
     },
     {
       "filename": "recipe-adai-mixed-dal-dosa",

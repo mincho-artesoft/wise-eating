@@ -1,0 +1,35 @@
+# Imagery working tree.
+#
+# The rule: track what DEFINES an image, ignore what merely RECORDS one run.
+#
+# Tracked, deliberately:
+#   jobs.json        the prompt set + styleHash — the contract that says which
+#                    food each filename is. Without it a downloaded file is
+#                    an anonymous jpeg.
+#   reuse-map.json   which dravyas reuse an existing archive frame instead of
+#                    generating. build_food_index.py reads it.
+#   results/ledger.json
+#                    which Flow mediaId produced which food. This is what makes
+#                    a failed download recoverable without regenerating, so it
+#                    is the one run artifact worth keeping forever.
+#   the scripts.
+
+# --- run logs: one machine, one sitting, no value to anyone else -------------
+*.log
+loop-state.txt
+
+# --- per-run scratch. The leading underscore is the convention. --------------
+results/_*
+
+# --- working directories the scripts create and consume locally --------------
+# accepted/ holds absolute paths from the machine that validated the images,
+# so it is meaningless in anyone else's checkout even though the archive build
+# reads it.
+accepted/
+queue/
+done/
+failed/
+__pycache__/
+
+# --- build output: archive 2 lands here, and the mp4s must never be committed
+dist/

@@ -59,13 +59,15 @@ def main():
     # ---- C: re-derive from the repo and compare -----------------------------
     fm, foods, recs, dr = bb.load(a.repo)
     keys = set(fm)
+    # Same helper build_batches uses, deliberately — this check exists to catch
+    # jobs.json drifting from the repo, and it cannot do that if it reimplements
+    # the rule and drifts too.
+    deny = bb.load_deny(DIR)
     reuse, gen_dravya = set(), []
     for d in dr:
         if d["name"] in keys or bb.sanitize(d["name"]) in keys:
             continue
-        hit = any((u.get("name") in keys or bb.sanitize(u.get("name") or "") in keys)
-                  for u in (d.get("usda") or []) if isinstance(u, dict))
-        (reuse.add(d["name"]) if hit else gen_dravya.append(d))
+        (reuse.add(d["name"]) if bb.reuse_hit(d, keys, deny) else gen_dravya.append(d))
     expected = ([("recipe", r) for r in recs
                  if r["name"] not in keys and bb.sanitize(r["name"]) not in keys]
                 + [("dravya", d) for d in gen_dravya])
