@@ -1,0 +1,437 @@
+{
+ "note": "Canon entries with no dravya and no recipe, after matching canon NAMES against dravya names, sanskrit and aliases — not just ids. Canon frequently uses a different id for a substance that was built under another one.",
+ "count": 26,
+ "items": [
+  {
+   "id": "dravya.fenugreek-greens",
+   "name": "Fenugreek greens (methi)",
+   "sanskrit": "Methika Shaka",
+   "category": "leafy-green",
+   "vpk": [
+    -1,
+    1,
+    -2
+   ],
+   "virya": "heating",
+   "fdc": "direct",
+   "_canonFile": "canon-08-greens-fruits.json",
+   "_buildAs": "dravya"
+  },
+  {
+   "id": "dravya.green-amaranth-greens",
+   "name": "Green amaranth greens",
+   "sanskrit": "Marisha",
+   "category": "leafy-green",
+   "vpk": [
+    0,
+    -1,
+    -1
+   ],
+   "virya": "cooling",
+   "fdc": "direct",
+   "_canonFile": "canon-08-greens-fruits.json",
+   "_buildAs": "dravya"
+  },
+  {
+   "id": "dravya.dill-greens",
+   "name": "Dill greens (suva)",
+   "sanskrit": "Shatapushpa Shaka",
+   "category": "leafy-green",
+   "vpk": [
+    -2,
+    0,
+    -1
+   ],
+   "virya": "heating",
+   "fdc": "direct",
+   "_canonFile": "canon-08-greens-fruits.json",
+   "_buildAs": "dravya"
+  },
+  {
+   "id": "dravya.taro-tender-leaf",
+   "name": "Tender taro leaf (patra use)",
+   "sanskrit": null,
+   "category": "leafy-green",
+   "vpk": [
+    1,
+    0,
+    0
+   ],
+   "virya": "cooling",
+   "fdc": "nearest",
+   "_canonFile": "canon-08-greens-fruits.json",
+   "_buildAs": "dravya"
+  },
+  {
+   "id": "dravya.soft-dates",
+   "name": "Soft dates (khajur)",
+   "sanskrit": "Kharjura",
+   "category": "dry-fruit-nut",
+   "vpk": [
+    -1,
+    -1,
+    1
+   ],
+   "virya": "cooling",
+   "fdc": "direct",
+   "_canonFile": "canon-09-nuts-seeds-dairy-oils-sweeteners.json",
+   "_buildAs": "dravya"
+  },
+  {
+   "id": "dravya.dry-fig",
+   "name": "Dry fig (anjeer)",
+   "sanskrit": "Anjira (shushka)",
+   "category": "dry-fruit-nut",
+   "vpk": [
+    -1,
+    -1,
+    1
+   ],
+   "virya": "cooling",
+   "fdc": "direct",
+   "_canonFile": "canon-09-nuts-seeds-dairy-oils-sweeteners.json",
+   "_buildAs": "dravya"
+  },
+  {
+   "id": "dravya.dry-apricot",
+   "name": "Dry apricot (khubani)",
+   "sanskrit": null,
+   "category": "dry-fruit-nut",
+   "vpk": [
+    -1,
+    0,
+    0
+   ],
+   "virya": "heating",
+   "fdc": "direct",
+   "_canonFile": "canon-09-nuts-seeds-dairy-oils-sweeteners.json",
+   "_buildAs": "dravya"
+  },
+  {
+   "id": "dravya.lotus-seed-popped",
+   "name": "Popped lotus seed",
+   "sanskrit": null,
+   "category": "seed",
+   "vpk": [
+    -1,
+    -1,
+    -1
+   ],
+   "virya": "cooling",
+   "fdc": "nearest",
+   "note": "phool-makhana form",
+   "_canonFile": "canon-09-nuts-seeds-dairy-oils-sweeteners.json",
+   "_buildAs": "dravya"
+  },
+  {
+   "id": "dravya.malai",
+   "name": "Fresh cream (malai)",
+   "sanskrit": "Santanika",
+   "category": "dairy",
+   "vpk": [
+    -2,
+    -2,
+    2
+   ],
+   "virya": "cooling",
+   "fdc": "direct",
+   "_canonFile": "canon-09-nuts-seeds-dairy-oils-sweeteners.json",
+   "_buildAs": "dravya"
+  },
+  {
+   "id": "dravya.cultured-butter",
+   "name": "Cultured butter",
+   "sanskrit": null,
+   "category": "dairy",
+   "vpk": [
+    -2,
+    -1,
+    2
+   ],
+   "virya": "cooling",
+   "fdc": "direct",
+   "_canonFile": "canon-09-nuts-seeds-dairy-oils-sweeteners.json",
+   "_buildAs": "dravya"
+  },
+  {
+   "id": "dravya.cane-jaggery",
+   "name": "Cane jaggery (gud)",
+   "sanskrit": "Guda",
+   "category": "sweetener",
+   "vpk": [
+    -1,
+    0,
+    1
+   ],
+   "virya": "heating",
+   "fdc": "direct",
+   "note": "aged jaggery classically superior",
+   "_canonFile": "canon-09-nuts-seeds-dairy-oils-sweeteners.json",
+   "_buildAs": "dravya"
+  },
+  {
+   "id": "dravya.powdered-jaggery",
+   "name": "Powdered jaggery (shakkar)",
+   "sanskrit": null,
+   "category": "sweetener",
+   "vpk": [
+    -1,
+    0,
+    1
+   ],
+   "virya": "heating",
+   "fdc": "nearest",
+   "_canonFile": "canon-09-nuts-seeds-dairy-oils-sweeteners.json",
+   "_buildAs": "dravya"
+  },
+  {
+   "id": "dravya.stevia-leaf",
+   "name": "Stevia leaf",
+   "sanskrit": null,
+   "category": "sweetener",
+   "vpk": [
+    0,
+    -1,
+    -1
+   ],
+   "virya": "cooling",
+   "fdc": "direct",
+   "note": "modern herb sweetener",
+   "_canonFile": "canon-09-nuts-seeds-dairy-oils-sweeteners.json",
+   "_buildAs": "dravya"
+  },
+  {
+   "id": "dravya.vida-salt",
+   "name": "Vida salt",
+   "sanskrit": "Vida Lavana",
+   "category": "salt-mineral",
+   "vpk": [
+    -2,
+    1,
+    0
+   ],
+   "virya": "heating",
+   "fdc": "estimated",
+   "note": "processed classical salt; churans",
+   "_canonFile": "canon-11-animal-salts-regional.json",
+   "_buildAs": "dravya"
+  },
+  {
+   "id": "dravya.iodized-salt",
+   "name": "Iodized table salt",
+   "sanskrit": null,
+   "category": "salt-mineral",
+   "vpk": [
+    -1,
+    1,
+    1
+   ],
+   "virya": "heating",
+   "fdc": "direct",
+   "_canonFile": "canon-11-animal-salts-regional.json",
+   "_buildAs": "dravya"
+  },
+  {
+   "id": "recipe.horse-gram-soup",
+   "name": "Horse gram soup (kulthi)",
+   "category": "soup",
+   "vpk": [
+    -1,
+    1,
+    -2
+   ],
+   "season": "winter",
+   "key": [
+    "horse-gram",
+    "garlic",
+    "cumin"
+   ],
+   "_canonFile": "canon-12-recipes.json",
+   "_buildAs": "recipe"
+  },
+  {
+   "id": "recipe.parwal-sabzi",
+   "name": "Parwal sabzi",
+   "category": "vegetable",
+   "vpk": [
+    -1,
+    -1,
+    -1
+   ],
+   "season": "all",
+   "key": [
+    "pointed-gourd",
+    "cumin"
+   ],
+   "_canonFile": "canon-12-recipes.json",
+   "_buildAs": "dravya"
+  },
+  {
+   "id": "recipe.tinda-sabzi",
+   "name": "Tinda sabzi",
+   "category": "vegetable",
+   "vpk": [
+    0,
+    -1,
+    -1
+   ],
+   "season": "summer",
+   "key": [
+    "tinda",
+    "cumin"
+   ],
+   "_canonFile": "canon-12-recipes.json",
+   "_buildAs": "dravya"
+  },
+  {
+   "id": "recipe.amla-chutney",
+   "name": "Amla chutney",
+   "category": "condiment",
+   "vpk": [
+    -1,
+    -1,
+    -1
+   ],
+   "season": "winter",
+   "key": [
+    "amla-fresh",
+    "coriander-leaf",
+    "cumin"
+   ],
+   "_canonFile": "canon-12-recipes.json",
+   "_buildAs": "recipe"
+  },
+  {
+   "id": "recipe.sol-kadhi",
+   "name": "Sol kadhi",
+   "category": "drink",
+   "vpk": [
+    -1,
+    -1,
+    0
+   ],
+   "season": "summer",
+   "key": [
+    "kokum",
+    "coconut-milk",
+    "garlic"
+   ],
+   "_canonFile": "canon-12-recipes.json",
+   "_buildAs": "recipe"
+  },
+  {
+   "id": "recipe.khajur-smoothie",
+   "name": "Date-banana smoothie",
+   "category": "drink",
+   "vpk": [
+    -1,
+    -1,
+    2
+   ],
+   "season": "all",
+   "key": [
+    "soft-dates",
+    "ripe-banana",
+    "milk"
+   ],
+   "note": "REVIEWER: banana+milk viruddha flag — decide policy",
+   "_canonFile": "canon-12-recipes.json",
+   "_buildAs": "recipe"
+  },
+  {
+   "id": "recipe.amla-ginger-shot",
+   "name": "Amla-ginger morning shot",
+   "category": "drink",
+   "vpk": [
+    -1,
+    -1,
+    -1
+   ],
+   "season": "winter",
+   "key": [
+    "amla-fresh",
+    "ginger-fresh",
+    "honey"
+   ],
+   "_canonFile": "canon-12-recipes.json",
+   "_buildAs": "recipe"
+  },
+  {
+   "id": "recipe.gond-ladoo",
+   "name": "Gond ladoo",
+   "category": "sweet",
+   "vpk": [
+    -2,
+    0,
+    1
+   ],
+   "season": "winter",
+   "key": [
+    "acacia-gum",
+    "whole-wheat-flour",
+    "ghee",
+    "jaggery"
+   ],
+   "_canonFile": "canon-12-recipes.json",
+   "_buildAs": "recipe"
+  },
+  {
+   "id": "recipe.samak-rice-fasting",
+   "name": "Samak rice bowl (fasting)",
+   "category": "one-pot",
+   "vpk": [
+    0,
+    -1,
+    -1
+   ],
+   "season": "all",
+   "key": [
+    "barnyard-millet",
+    "cumin",
+    "ghee"
+   ],
+   "_canonFile": "canon-12-recipes.json",
+   "_buildAs": "recipe"
+  },
+  {
+   "id": "recipe.singhara-pakora-fasting",
+   "name": "Singhara flour pakora",
+   "category": "snack",
+   "vpk": [
+    0,
+    0,
+    0
+   ],
+   "season": "all",
+   "key": [
+    "water-chestnut-flour",
+    "potato",
+    "rock-salt"
+   ],
+   "_canonFile": "canon-12-recipes.json",
+   "_buildAs": "recipe"
+  },
+  {
+   "id": "recipe.ugadi-pachadi",
+   "name": "Ugadi pachadi",
+   "category": "ritual",
+   "vpk": [
+    0,
+    0,
+    0
+   ],
+   "season": "spring",
+   "key": [
+    "neem-flower",
+    "raw-mango-vegetable",
+    "jaggery",
+    "tamarind",
+    "rock-salt",
+    "green-chili"
+   ],
+   "note": "six-taste new year teaching dish",
+   "_canonFile": "canon-12-recipes.json",
+   "_buildAs": "recipe"
+  }
+ ]
+}
