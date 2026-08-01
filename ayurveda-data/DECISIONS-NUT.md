@@ -61,6 +61,17 @@ handbook amendment; no sign-off step.
 **Discipline.** Cite the rule or do not ship it. A category rule with no source
 does not ship, and the foods under it keep their current floor.
 
+**Outcome of the citation pass (2026-08-01), superseding the assumption that
+all 373 become authored.** Two of seven category rules survive; five do not,
+and two are *contradicted* by the sources rather than merely unsupported —
+`animal → 12 mo` against WHO Recommendation 4a (animal-source foods should be
+consumed **daily** at 6–23 months), and `fermented → 24 mo` against paediatric
+consensus placing plain yoghurt at 6 months. Shipping either would have been a
+nutrition harm dressed as caution. The nut/seed rule ships revised to **60
+months and whole forms only** (NHS, not the proposed 48). Citable authored set:
+**187 at 6 months**, plus R2–R5. Roughly 177 proposals do not become floors.
+Full table, sources and gates in `TASK-NUT2.md`.
+
 **The display fix, which is the part that matters.** 701 dravyas carry
 `legacyImport` age provenance with a value of 0, and the app renders that as a
 number — the detail view shows Achiote as "Min. Age 6 mo". A never-assessed 0
