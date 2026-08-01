@@ -5,7 +5,7 @@ Emits queue/batch-NNN.json, 100 rows each. Deterministic: same inputs, same
 batches, same order, so a re-run after a partial failure produces identical
 files and you can diff them.
 
-    python3 build_batches.py --repo /path/to/wise-eating [--size 100]
+    python3 build_batches.py --repo /path/to/wise-eating [--size 100] [--full]
 
 Writes:
     imagery/queue/batch-001.json ...      to be consumed by runner.js
@@ -62,6 +62,18 @@ def load(repo):
     return fm, foods, recs, dr
 
 
+def legacy_frame_keys(foods):
+    """Frame keys supplied by the original 12,601-row USDA archive.
+
+    The unified frame map also contains every generated dravya and recipe. It
+    is therefore useful for finding only newly missing work, but it cannot
+    reconstruct jobs.json as the permanent prompt master: all completed jobs
+    would disappear. The legacy foods catalogue is the stable source of truth
+    for which frames existed before imagery generation began.
+    """
+    return {sanitize(food["name"]) for food in foods}
+
+
 def load_deny(out_dir=None):
     """Dravyas that must NOT inherit an existing archive frame.
 
@@ -114,10 +126,12 @@ def main():
     ap.add_argument("--out", default=os.path.dirname(os.path.abspath(__file__)))
     ap.add_argument("--batches", action="store_true",
                     help="also emit the legacy queue/batch-NNN.json split")
+    ap.add_argument("--full", action="store_true",
+                    help="rebuild the complete prompt master using only the legacy USDA frame set")
     a = ap.parse_args()
 
     fm, foods, recs, dr = load(a.repo)
-    keys = set(fm)
+    keys = legacy_frame_keys(foods) if a.full else set(fm)
 
     # ---- free win: dravyas whose usda[] link already has a frame ----
     deny = load_deny(a.out)

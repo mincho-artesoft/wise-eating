@@ -13088,5 +13088,103 @@
     "kind": "dravya",
     "error": null,
     "mediaId": "9da9691c-12e0-4689-96f5-50d6543e6fe0"
+  },
+  "dravya-fresh-cream-malai": {
+    "status": "done",
+    "name": "Fresh cream (malai)",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "59066984-1409-4f26-95d3-0945afe1bba9"
+  },
+  "dravya-powdered-jaggery-shakkar": {
+    "status": "done",
+    "name": "Powdered jaggery (shakkar)",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "06623c5c-2625-4dd2-9864-e262496baf9a"
+  },
+  "dravya-vida-salt": {
+    "status": "done",
+    "name": "Vida salt",
+    "kind": "dravya",
+    "error": null,
+    "mediaId": "df6b4f65-57f2-4bfc-a87e-30e533fba108"
+  },
+  "recipe-amla-chutney": {
+    "status": "done",
+    "name": "Amla Chutney",
+    "kind": "recipe",
+    "error": null,
+    "mediaId": "4935ebd5-06dd-4b97-8b58-6471e0fbf69a"
+  },
+  "recipe-amla-ginger-morning-shot": {
+    "status": "done",
+    "name": "Amla Ginger Morning Shot",
+    "kind": "recipe",
+    "error": null,
+    "mediaId": "0d60fb60-78cb-44cc-a752-8be30ca38534"
+  },
+  "recipe-date-banana-smoothie": {
+    "status": "done",
+    "name": "Date Banana Smoothie",
+    "kind": "recipe",
+    "error": null,
+    "mediaId": "89979462-298f-4379-8b85-26ddfdb20afb"
+  },
+  "recipe-gond-ladoo": {
+    "status": "done",
+    "name": "Gond Ladoo",
+    "kind": "recipe",
+    "error": null,
+    "mediaId": "c5f893b3-3293-4347-ab23-480211cef80f"
+  },
+  "recipe-horse-gram-soup-kulthi": {
+    "status": "done",
+    "name": "Horse Gram Soup (Kulthi)",
+    "kind": "recipe",
+    "error": null,
+    "mediaId": "fd9bfc1a-513b-4f5c-a4c6-b69b955bbb2b"
+  },
+  "recipe-parwal-sabzi": {
+    "status": "done",
+    "name": "Parwal Sabzi",
+    "kind": "recipe",
+    "error": null,
+    "mediaId": "7d63d839-85a5-43cd-bcc4-c5edf2258328"
+  },
+  "recipe-samak-rice-bowl-fasting": {
+    "status": "done",
+    "name": "Samak Rice Bowl (Fasting)",
+    "kind": "recipe",
+    "error": null,
+    "mediaId": "02224ac3-edb5-47e2-9a36-dd93e29b794f"
+  },
+  "recipe-singhara-flour-pakora": {
+    "status": "done",
+    "name": "Singhara Flour Pakora",
+    "kind": "recipe",
+    "error": null,
+    "mediaId": "c329ac8d-f1b6-424f-8f7b-1fb3fa0d544c"
+  },
+  "recipe-sol-kadhi": {
+    "status": "done",
+    "name": "Sol Kadhi",
+    "kind": "recipe",
+    "error": null,
+    "mediaId": "bd79ac9b-5291-43a4-b6eb-aa047d526db1"
+  },
+  "recipe-tinda-sabzi": {
+    "status": "done",
+    "name": "Tinda Sabzi",
+    "kind": "recipe",
+    "error": null,
+    "mediaId": "79308f57-1022-4845-895b-a5db6907f0e6"
+  },
+  "recipe-ugadi-pachadi": {
+    "status": "done",
+    "name": "Ugadi Pachadi",
+    "kind": "recipe",
+    "error": null,
+    "mediaId": "f078a218-e9c3-4bc5-8378-757b256eaa84"
   }
 }

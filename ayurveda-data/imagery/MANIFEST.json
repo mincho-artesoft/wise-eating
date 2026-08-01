@@ -1,5 +1,5 @@
 {
-  "totalToGenerate": 1866,
+  "totalToGenerate": 1880,
   "batchSize": 100,
   "batches": 19,
   "reuseWithoutGeneration": 293,
@@ -732,6 +732,12 @@
       "frameKey": "Fresh amla"
     },
     {
+      "filename": "dravya-fresh-cream-malai",
+      "kind": "dravya",
+      "name": "Fresh cream (malai)",
+      "frameKey": "Fresh cream (malai)"
+    },
+    {
       "filename": "dravya-fresh-hyacinth-beans-lilva",
       "kind": "dravya",
       "name": "Fresh hyacinth beans (lilva)",
@@ -1402,6 +1408,12 @@
       "kind": "dravya",
       "name": "Pomfret",
       "frameKey": "Pomfret"
+    },
+    {
+      "filename": "dravya-powdered-jaggery-shakkar",
+      "kind": "dravya",
+      "name": "Powdered jaggery (shakkar)",
+      "frameKey": "Powdered jaggery (shakkar)"
     },
     {
       "filename": "dravya-psyllium-husk",
@@ -2082,6 +2094,12 @@
       "frameKey": "Vetiver root"
     },
     {
+      "filename": "dravya-vida-salt",
+      "kind": "dravya",
+      "name": "Vida salt",
+      "frameKey": "Vida salt"
+    },
+    {
       "filename": "dravya-vidari-kanda",
       "kind": "dravya",
       "name": "Vidari kanda",
@@ -2476,6 +2494,18 @@
       "kind": "recipe",
       "name": "Amaranth Wheat Skillet Bread",
       "frameKey": "Amaranth Wheat Skillet Bread"
+    },
+    {
+      "filename": "recipe-amla-chutney",
+      "kind": "recipe",
+      "name": "Amla Chutney",
+      "frameKey": "Amla Chutney"
+    },
+    {
+      "filename": "recipe-amla-ginger-morning-shot",
+      "kind": "recipe",
+      "name": "Amla Ginger Morning Shot",
+      "frameKey": "Amla Ginger Morning Shot"
     },
     {
       "filename": "recipe-andhra-cabbage-chili-fry",
@@ -4632,6 +4662,12 @@
       "frameKey": "Date Almond-Milk Warmer"
     },
     {
+      "filename": "recipe-date-banana-smoothie",
+      "kind": "recipe",
+      "name": "Date Banana Smoothie",
+      "frameKey": "Date Banana Smoothie"
+    },
+    {
       "filename": "recipe-date-milk",
       "kind": "recipe",
       "name": "Date Milk",
@@ -5100,6 +5136,12 @@
       "frameKey": "Golden Oat-Milk Tonic II"
     },
     {
+      "filename": "recipe-gond-ladoo",
+      "kind": "recipe",
+      "name": "Gond Ladoo",
+      "frameKey": "Gond Ladoo"
+    },
+    {
       "filename": "recipe-grape-cumin-sherbet",
       "kind": "recipe",
       "name": "Grape Cumin Sherbet",
@@ -5482,6 +5524,12 @@
       "kind": "recipe",
       "name": "Hibiscus Fennel Tea",
       "frameKey": "Hibiscus Fennel Tea"
+    },
+    {
+      "filename": "recipe-horse-gram-soup-kulthi",
+      "kind": "recipe",
+      "name": "Horse Gram Soup (Kulthi)",
+      "frameKey": "Horse Gram Soup (Kulthi)"
     },
     {
       "filename": "recipe-jeera-rice",
@@ -6780,6 +6828,12 @@
       "frameKey": "Papaya Lime Sherbet"
     },
     {
+      "filename": "recipe-parwal-sabzi",
+      "kind": "recipe",
+      "name": "Parwal Sabzi",
+      "frameKey": "Parwal Sabzi"
+    },
+    {
       "filename": "recipe-pea-cumin-stuffed-flatbread",
       "kind": "recipe",
       "name": "Pea Cumin Stuffed Flatbread",
@@ -7980,6 +8034,12 @@
       "frameKey": "Saffron Oat-Milk Evening Drink"
     },
     {
+      "filename": "recipe-samak-rice-bowl-fasting",
+      "kind": "recipe",
+      "name": "Samak Rice Bowl (Fasting)",
+      "frameKey": "Samak Rice Bowl (Fasting)"
+    },
+    {
       "filename": "recipe-sankranti-til-laddu",
       "kind": "recipe",
       "name": "Sankranti Til Laddu",
@@ -8298,6 +8358,12 @@
       "frameKey": "Simple Yellow Mung Dal"
     },
     {
+      "filename": "recipe-singhara-flour-pakora",
+      "kind": "recipe",
+      "name": "Singhara Flour Pakora",
+      "frameKey": "Singhara Flour Pakora"
+    },
+    {
       "filename": "recipe-soba-with-mushroom-and-kale",
       "kind": "recipe",
       "name": "Soba with Mushroom and Kale",
@@ -8320,6 +8386,12 @@
       "kind": "recipe",
       "name": "Soft Barley Manda",
       "frameKey": "Soft Barley Manda"
+    },
+    {
+      "filename": "recipe-sol-kadhi",
+      "kind": "recipe",
+      "name": "Sol Kadhi",
+      "frameKey": "Sol Kadhi"
     },
     {
       "filename": "recipe-sorghum-black-bean-pot",
@@ -9156,6 +9228,12 @@
       "frameKey": "Til-Gud Bar"
     },
     {
+      "filename": "recipe-tinda-sabzi",
+      "kind": "recipe",
+      "name": "Tinda Sabzi",
+      "frameKey": "Tinda Sabzi"
+    },
+    {
       "filename": "recipe-tofu-asparagus-stir-fry",
       "kind": "recipe",
       "name": "Tofu Asparagus Stir-Fry",
@@ -9544,6 +9622,12 @@
       "kind": "recipe",
       "name": "Turnip Parsley Soup",
       "frameKey": "Turnip Parsley Soup"
+    },
+    {
+      "filename": "recipe-ugadi-pachadi",
+      "kind": "recipe",
+      "name": "Ugadi Pachadi",
+      "frameKey": "Ugadi Pachadi"
     },
     {
       "filename": "recipe-ukadiche-modak",

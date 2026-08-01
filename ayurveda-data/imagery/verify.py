@@ -58,7 +58,10 @@ def main():
 
     # ---- C: re-derive from the repo and compare -----------------------------
     fm, foods, recs, dr = bb.load(a.repo)
-    keys = set(fm)
+    # jobs.json is the permanent prompt master, not a queue of only the rows
+    # missing from today's unified frame map. Re-derive against the original
+    # USDA archive boundary exactly as build_batches.py --full does.
+    keys = bb.legacy_frame_keys(foods)
     # Same helper build_batches uses, deliberately — this check exists to catch
     # jobs.json drifting from the repo, and it cannot do that if it reimplements
     # the rule and drifts too.

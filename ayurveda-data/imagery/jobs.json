@@ -1,5 +1,5 @@
 {
-  "count": 1866,
+  "count": 1880,
   "createdBy": "build_batches.py",
   "styleHash": "c8d83786a68f",
   "jobs": [
@@ -2182,6 +2182,24 @@
       }
     },
     {
+      "id": "img-c16ff65a51",
+      "type": "image",
+      "prompt": "Fresh cream (malai). A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-fresh-cream-malai",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Fresh cream (malai)",
+        "frameKey": "Fresh cream (malai)"
+      }
+    },
+    {
       "id": "img-01658e1144",
       "type": "image",
       "prompt": "Fresh hyacinth beans (lilva). A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
@@ -4195,6 +4213,24 @@
         "kind": "dravya",
         "name": "Pomfret",
         "frameKey": "Pomfret"
+      }
+    },
+    {
+      "id": "img-f2b22f6133",
+      "type": "image",
+      "prompt": "Powdered jaggery (shakkar). A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-powdered-jaggery-shakkar",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Powdered jaggery (shakkar)",
+        "frameKey": "Powdered jaggery (shakkar)"
       }
     },
     {
@@ -6232,6 +6268,24 @@
       }
     },
     {
+      "id": "img-7e0756eb87",
+      "type": "image",
+      "prompt": "Vida salt. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-vida-salt",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Vida salt",
+        "frameKey": "Vida salt"
+      }
+    },
+    {
       "id": "img-cc772cc9c6",
       "type": "image",
       "prompt": "Vidari kanda. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
@@ -7417,6 +7471,42 @@
         "kind": "recipe",
         "name": "Amaranth Wheat Skillet Bread",
         "frameKey": "Amaranth Wheat Skillet Bread"
+      }
+    },
+    {
+      "id": "img-62aeb1014e",
+      "type": "image",
+      "prompt": "Amla Chutney, made with Fresh amla, deseeded, Fresh coriander leaves, Green chili, Fresh ginger, Cumin seed, Rock salt. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "recipe-amla-chutney",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "recipe",
+        "name": "Amla Chutney",
+        "frameKey": "Amla Chutney"
+      }
+    },
+    {
+      "id": "img-6cb15354ee",
+      "type": "image",
+      "prompt": "Amla Ginger Morning Shot, made with Fresh amla, Fresh ginger, Raw honey, Black pepper, freshly ground. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "recipe-amla-ginger-morning-shot",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "recipe",
+        "name": "Amla Ginger Morning Shot",
+        "frameKey": "Amla Ginger Morning Shot"
       }
     },
     {
@@ -13882,6 +13972,24 @@
       }
     },
     {
+      "id": "img-566245aaeb",
+      "type": "image",
+      "prompt": "Date Banana Smoothie, made with Soft dates, pitted, Ripe banana, Whole milk, warmed and cooled, Green cardamom, Ghee. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "recipe-date-banana-smoothie",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "recipe",
+        "name": "Date Banana Smoothie",
+        "frameKey": "Date Banana Smoothie"
+      }
+    },
+    {
       "id": "img-9df9bcc156",
       "type": "image",
       "prompt": "Date Milk, made with Whole cow milk, Soft dates, Green cardamom, served as a drink. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
@@ -15286,6 +15394,24 @@
       }
     },
     {
+      "id": "img-0f5647b3b4",
+      "type": "image",
+      "prompt": "Gond Ladoo, made with Edible acacia gum (gond), Whole wheat flour, Ghee, Jaggery, Almonds, chopped, Dry ginger powder. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "recipe-gond-ladoo",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "recipe",
+        "name": "Gond Ladoo",
+        "frameKey": "Gond Ladoo"
+      }
+    },
+    {
       "id": "img-719c5abbf4",
       "type": "image",
       "prompt": "Grape Cumin Sherbet, made with Sweet grapes, Cumin seeds, toasted, Rock sugar, Water, served as a drink. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
@@ -16435,6 +16561,24 @@
         "kind": "recipe",
         "name": "Hibiscus Fennel Tea",
         "frameKey": "Hibiscus Fennel Tea"
+      }
+    },
+    {
+      "id": "img-e8c6e77f60",
+      "type": "image",
+      "prompt": "Horse Gram Soup (Kulthi), made with Horse gram, soaked overnight, Fresh ginger, Garlic, Cumin seed, Turmeric, Black pepper. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "recipe-horse-gram-soup-kulthi",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "recipe",
+        "name": "Horse Gram Soup (Kulthi)",
+        "frameKey": "Horse Gram Soup (Kulthi)"
       }
     },
     {
@@ -20326,6 +20470,24 @@
       }
     },
     {
+      "id": "img-89499b6e6d",
+      "type": "image",
+      "prompt": "Parwal Sabzi, made with Parwal, halved lengthwise, Mustard oil, Cumin seed, Turmeric, Coriander powder, Rock salt. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "recipe-parwal-sabzi",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "recipe",
+        "name": "Parwal Sabzi",
+        "frameKey": "Parwal Sabzi"
+      }
+    },
+    {
       "id": "img-79f24541f5",
       "type": "image",
       "prompt": "Pea Cumin Stuffed Flatbread, made with Whole-wheat flour, freshly measured, Green peas, cooked and mashed, Cumin seeds, lightly crushed, Ghee, divided for the griddle, Rock salt, finely ground, Water, freshly boiled. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
@@ -23926,6 +24088,24 @@
       }
     },
     {
+      "id": "img-deabfc418c",
+      "type": "image",
+      "prompt": "Samak Rice Bowl (Fasting), made with Samak rice (barnyard millet), Roasted peanuts, crushed, Potato, cubed, Ghee, Cumin seed, Green chili. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "recipe-samak-rice-bowl-fasting",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "recipe",
+        "name": "Samak Rice Bowl (Fasting)",
+        "frameKey": "Samak Rice Bowl (Fasting)"
+      }
+    },
+    {
       "id": "img-722d54d8f6",
       "type": "image",
       "prompt": "Sankranti Til Laddu, made with White sesame seeds, Peanuts, toasted, Ghee, Jaggery, Green cardamom, served as a dessert. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
@@ -24880,6 +25060,24 @@
       }
     },
     {
+      "id": "img-0e81f89edc",
+      "type": "image",
+      "prompt": "Singhara Flour Pakora, made with Singhara (water chestnut) flour, Potato, sliced thin, Rock salt, Black pepper, Cumin seed, Groundnut oil for frying. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "recipe-singhara-flour-pakora",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "recipe",
+        "name": "Singhara Flour Pakora",
+        "frameKey": "Singhara Flour Pakora"
+      }
+    },
+    {
       "id": "img-fb669c3432",
       "type": "image",
       "prompt": "Soba with Mushroom and Kale, made with Dry soba noodles, Firm tofu, cubed, White mushrooms, sliced, Kale, chopped, Sesame oil, Fresh ginger. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
@@ -24949,6 +25147,24 @@
         "kind": "recipe",
         "name": "Soft Barley Manda",
         "frameKey": "Soft Barley Manda"
+      }
+    },
+    {
+      "id": "img-831a19e6fa",
+      "type": "image",
+      "prompt": "Sol Kadhi, made with Dried kokum petals, Fresh grated coconut, Garlic, Green chili, Fresh coriander leaves, Rock salt. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "recipe-sol-kadhi",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "recipe",
+        "name": "Sol Kadhi",
+        "frameKey": "Sol Kadhi"
       }
     },
     {
@@ -27454,6 +27670,24 @@
       }
     },
     {
+      "id": "img-4389cd29ba",
+      "type": "image",
+      "prompt": "Tinda Sabzi, made with Tinda, quartered, Ghee, Cumin seed, Asafoetida, Turmeric, Coriander powder. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "recipe-tinda-sabzi",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "recipe",
+        "name": "Tinda Sabzi",
+        "frameKey": "Tinda Sabzi"
+      }
+    },
+    {
       "id": "img-6f24f36610",
       "type": "image",
       "prompt": "Tofu Asparagus Stir-Fry, made with Firm tofu, cubed, Asparagus, cut, Sesame seeds, Sesame oil, Fresh ginger, julienned, Rock salt. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
@@ -28621,6 +28855,24 @@
         "kind": "recipe",
         "name": "Turnip Parsley Soup",
         "frameKey": "Turnip Parsley Soup"
+      }
+    },
+    {
+      "id": "img-c2cf0da744",
+      "type": "image",
+      "prompt": "Ugadi Pachadi, made with Raw mango, finely chopped, Jaggery, Tamarind pulp, Neem flowers, Green chili, Rock salt. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "recipe-ugadi-pachadi",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "recipe",
+        "name": "Ugadi Pachadi",
+        "frameKey": "Ugadi Pachadi"
       }
     },
     {
