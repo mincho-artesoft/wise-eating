@@ -18,6 +18,9 @@ SEARCH_ENGINE = (
     / "SmartFoodSearchEngine.swift"
 )
 FOOD_SEARCH_VIEW = ROOT / "Ayura" / "FoodSearch" / "FoodSearchView.swift"
+FOOD_ITEM_MODEL = ROOT / "Ayura" / "Food" / "Models" / "FoodItem.swift"
+FOOD_DETAIL_VIEW = ROOT / "Ayura" / "Food" / "Views" / "FoodItemDetailView.swift"
+AYURVEDA_SEEDER = ROOT / "Ayura" / "Main" / "DBSeed" / "AyurvedaSeeder.swift"
 SPEC = importlib.util.spec_from_file_location("build_seed_we8c", BUILD_SEED_PATH)
 assert SPEC and SPEC.loader
 build_seed = importlib.util.module_from_spec(SPEC)
@@ -65,6 +68,19 @@ class WE8CAgeDerivationTests(unittest.TestCase):
             )
             for recipe in cls.recipes
         }
+        new_dravyas = json.loads(
+            (data_root / "dravyas" / "batch-31.json").read_text(encoding="utf-8")
+        )
+        new_recipes = json.loads(
+            (data_root / "recipes" / "batch-r31.json").read_text(encoding="utf-8")
+        )
+        cls.new_dravya_ids = {item["id"] for item in new_dravyas["items"]}
+        cls.new_recipe_ids = {item["id"] for item in new_recipes["items"]}
+        cls.historical_recipe_safety = {
+            recipe_id: safety
+            for recipe_id, safety in cls.recipe_safety.items()
+            if recipe_id not in cls.new_recipe_ids
+        }
 
     def test_honey_authored_floor_remains_enforced(self):
         for dravya_id in build_seed.HONEY_DRAVYA_IDS:
@@ -78,19 +94,28 @@ class WE8CAgeDerivationTests(unittest.TestCase):
             for safety in self.recipe_safety.values()
             if safety["ageProvenance"] == "authored"
         ]
-        self.assertEqual(len(honey_recipes), 4)
+        self.assertEqual(len(honey_recipes), 5)
         self.assertTrue(
             all(safety["enforcedMinAgeMonths"] == 12 for safety in honey_recipes)
         )
 
     def test_recipe_visibility_matches_founder_simulation(self):
-        enforced = [
+        historical = [
+            safety["enforcedMinAgeMonths"]
+            for safety in self.historical_recipe_safety.values()
+        ]
+        self.assertEqual(
+            {age: sum(floor <= age for floor in historical) for age in (9, 24, 60)},
+            {9: 1_496, 24: 1_500, 60: 1_500},
+        )
+
+        current = [
             safety["enforcedMinAgeMonths"]
             for safety in self.recipe_safety.values()
         ]
         self.assertEqual(
-            {age: sum(floor <= age for floor in enforced) for age in (9, 24, 60)},
-            {9: 1_496, 24: 1_500, 60: 1_500},
+            {age: sum(floor <= age for floor in current) for age in (9, 24, 60)},
+            {9: 1_506, 24: 1_511, 60: 1_511},
         )
 
     def test_display_floor_histogram_is_unchanged(self):
@@ -99,7 +124,7 @@ class WE8CAgeDerivationTests(unittest.TestCase):
         )
         self.assertEqual(
             display,
-            {6: 1, 12: 1, 24: 1_210, 48: 216, 60: 70, 192: 2},
+            {6: 1, 12: 1, 24: 1_218, 48: 219, 60: 70, 192: 2},
         )
 
     def test_provenance_is_carried_per_recipe_ingredient(self):
@@ -125,8 +150,38 @@ class WE8CAgeDerivationTests(unittest.TestCase):
                 )
                 total += 1
                 authored += contributor["ageProvenance"] == "authored"
-        self.assertEqual(total, 10_571)
-        self.assertEqual(authored, 4)
+        self.assertEqual(total, 10_644)
+        self.assertEqual(authored, 5)
+
+    def test_legacy_import_age_is_not_rendered(self):
+        historical = {
+            dravya_id: safety
+            for dravya_id, safety in self.dravya_safety.items()
+            if dravya_id not in self.new_dravya_ids
+        }
+        self.assertEqual(
+            collections.Counter(
+                safety["ageProvenance"] for safety in historical.values()
+            ),
+            {"legacyImport": 701, "authored": 4},
+        )
+        self.assertEqual(
+            collections.Counter(
+                safety["ageProvenance"] for safety in self.dravya_safety.values()
+            ),
+            {"legacyImport": 704, "authored": 4},
+        )
+
+        model = FOOD_ITEM_MODEL.read_text(encoding="utf-8")
+        detail = FOOD_DETAIL_VIEW.read_text(encoding="utf-8")
+        seeder = AYURVEDA_SEEDER.read_text(encoding="utf-8")
+        self.assertIn("public var ageProvenance: String?", model)
+        self.assertIn(
+            'food.minAgeMonths > 0 && food.ageProvenance != "legacyImport"',
+            detail,
+        )
+        self.assertEqual(detail.count("if shouldDisplayMinimumAge"), 2)
+        self.assertIn("food.ageProvenance = safety.ageProvenance", seeder)
 
     def test_dravya_visibility_delta_is_exact(self):
         display = {

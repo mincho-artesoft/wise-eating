@@ -75,6 +75,10 @@ struct FoodItemDetailView: View {
         return calculatedKcal > 0 ? calculatedKcal : nil
     }
 
+    private var shouldDisplayMinimumAge: Bool {
+        food.minAgeMonths > 0 && food.ageProvenance != "legacyImport"
+    }
+
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
@@ -311,7 +315,7 @@ struct FoodItemDetailView: View {
                             .foregroundColor(effectManager.currentGlobalAccentColor)
                     }
                 }
-                if food.minAgeMonths > 0 {
+                if shouldDisplayMinimumAge {
                     VStack(spacing: 4) {
                         Label { Text("Min. Age") } icon: {
                             Image(systemName: "person.badge.clock.fill")
@@ -409,7 +413,7 @@ struct FoodItemDetailView: View {
                         .foregroundColor(effectManager.currentGlobalAccentColor)
                 }
             }
-            if food.minAgeMonths > 0 {
+            if shouldDisplayMinimumAge {
                 VStack(spacing: 2) {
                     Label { Text("Min. Age") } icon: {
                         Image(systemName: "person.badge.clock.fill")

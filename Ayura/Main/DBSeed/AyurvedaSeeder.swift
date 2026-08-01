@@ -784,6 +784,7 @@ enum AyurvedaSeeder {
     return actualDiets == Set(safety.diets)
       && actualAllergens == Set(safety.allergens)
       && food.minAgeMonths == safety.minAgeMonths
+      && food.ageProvenance == safety.ageProvenance
   }
 
   private static func updateSafetyMetadata(
@@ -807,6 +808,7 @@ enum AyurvedaSeeder {
       return allergen
     }
     food.minAgeMonths = safety.minAgeMonths
+    food.ageProvenance = safety.ageProvenance
     return true
   }
 
