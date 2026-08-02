@@ -167,7 +167,7 @@
       "kind": "safety",
       "query": "no allergens",
       "mustExcludeScope": "allergen-bearing-seeded-recipes",
-      "expectedExcludedCount": 1182,
+      "expectedExcludedCount": 1190,
       "reason": "WE-8 safety golden: exclude-all must reject every seeded recipe whose derived allergen set is nonempty."
     },
     {

@@ -38,11 +38,8 @@ assert SPEC and SPEC.loader
 build_seed = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(build_seed)
 
-# SHIPPED ARTIFACT COUNT. The bundled artifact predates NUT-3. Job 4
-# regenerates it and re-pins this to TARGET. Do not "fix" this to match
-# the source. See ayurveda-data/JOB4-REPIN.md.
-SHIPPED_FOODS = build_seed.SHIPPED_FOODS
-SHIPPED_RECIPES = build_seed.SHIPPED_RECIPES
+TARGET_FOODS = build_seed.TARGET_FOODS
+TARGET_RECIPES = build_seed.TARGET_RECIPES
 
 
 class MP7FoodRoleTests(unittest.TestCase):
@@ -67,7 +64,7 @@ class MP7FoodRoleTests(unittest.TestCase):
             cls.role_source,
             cls.modifiers,
             cls.suffix_terms,
-            expected_catalog_count=SHIPPED_FOODS,
+            expected_catalog_count=TARGET_FOODS,
         )
 
     @classmethod
@@ -294,7 +291,7 @@ class MP7FoodRoleTests(unittest.TestCase):
         self.assertEqual(failures, [])
 
     def test_artifact_is_complete_sorted_and_deterministic(self):
-        self.assertEqual(self.artifact["catalogCount"], SHIPPED_FOODS)
+        self.assertEqual(self.artifact["catalogCount"], TARGET_FOODS)
         self.assertEqual(self.artifact["roleCount"], 15)
         self.assertEqual(self.artifact["ruleCount"], 34)
         self.assertEqual(
@@ -307,7 +304,7 @@ class MP7FoodRoleTests(unittest.TestCase):
             self.role_source,
             self.modifiers,
             self.suffix_terms,
-            expected_catalog_count=SHIPPED_FOODS,
+            expected_catalog_count=TARGET_FOODS,
         )
         self.assertEqual(
             build_seed.encode_deterministic_gzip(self.artifact),
@@ -462,10 +459,10 @@ class MP7FoodRoleTests(unittest.TestCase):
             role["id"]: role for role in self.role_source["roles"]
         }
         prohibited = set(self.role_source["recipePostPass"]["prohibited"])
-        self.assertEqual(len(recipes), SHIPPED_RECIPES)
+        self.assertEqual(len(recipes), TARGET_RECIPES)
         self.assertEqual(
             sum(definitions[item["role"]]["anchor"] for item in recipes),
-            1_039,
+            1_043,
         )
         self.assertEqual(
             sum(item["role"] in prohibited for item in recipes),

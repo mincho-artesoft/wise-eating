@@ -16,12 +16,9 @@ assert SPEC and SPEC.loader
 build_seed = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(build_seed)
 
-# SHIPPED ARTIFACT COUNT. The bundled artifact predates NUT-3. Job 4
-# regenerates it and re-pins this to TARGET. Do not "fix" this to match
-# the source. See ayurveda-data/JOB4-REPIN.md.
-SHIPPED_PROFILES = build_seed.SHIPPED_PROFILES
-SHIPPED_INGREDIENT_LINKS = build_seed.SHIPPED_INGREDIENT_LINKS
-SHIPPED_INGREDIENT_OWNERS = build_seed.SHIPPED_INGREDIENT_OWNERS
+TARGET_PROFILES = build_seed.TARGET_PROFILES
+TARGET_INGREDIENT_LINKS = build_seed.TARGET_INGREDIENT_LINKS
+TARGET_INGREDIENT_OWNERS = build_seed.TARGET_INGREDIENT_OWNERS
 
 
 class WE8SafetyDerivationTests(unittest.TestCase):
@@ -237,7 +234,7 @@ class WE8PreseedSafetyTests(unittest.TestCase):
 
     def test_artifact_metadata_exactly_matches_all_seeded_safety_rows(self):
         canonical = self.seed["dravyas"] + self.seed["recipes"]
-        self.assertEqual(len(canonical), SHIPPED_PROFILES)
+        self.assertEqual(len(canonical), TARGET_PROFILES)
         for item in canonical:
             compact = self.compact_by_id[item["foodId"]]
             safety = item["safety"]
@@ -341,7 +338,7 @@ class WE8PreseedSafetyTests(unittest.TestCase):
             for recipe in self.seed["recipes"]
             if "honey-min-age:12" in recipe["safety"]["rules"]
         ]
-        self.assertEqual(len(honey_recipes), 4)
+        self.assertEqual(len(honey_recipes), 5)
         for recipe in honey_recipes:
             self.assertGreaterEqual(
                 self.compact_by_id[recipe["foodId"]]["minAgeMonths"],
@@ -369,8 +366,8 @@ class WE8PreseedSafetyTests(unittest.TestCase):
                 (food_id_by_pk[ingredient], float(grams))
             )
 
-        self.assertEqual(sum(map(len, actual.values())), SHIPPED_INGREDIENT_LINKS)
-        self.assertEqual(len(actual), SHIPPED_INGREDIENT_OWNERS)
+        self.assertEqual(sum(map(len, actual.values())), TARGET_INGREDIENT_LINKS)
+        self.assertEqual(len(actual), TARGET_INGREDIENT_OWNERS)
         for recipe in self.seed["recipes"]:
             expected = sorted(
                 (ingredient["foodId"], float(ingredient["grams"]))

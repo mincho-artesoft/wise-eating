@@ -40,10 +40,7 @@ ARTIFACT_PARTS = [
     ROOT / "Ayura" / "preseeded_db.store.gz.part-ab",
 ]
 
-# SHIPPED ARTIFACT COUNT. The bundled artifact predates NUT-3. Job 4
-# regenerates it and re-pins this to TARGET. Do not "fix" this to match
-# the source. See ayurveda-data/JOB4-REPIN.md.
-SHIPPED_FOODS = 14_477
+TARGET_FOODS = 14_488
 
 
 class MP3DeterministicResolutionTests(unittest.TestCase):
@@ -548,9 +545,9 @@ struct MP3ResolutionHarness {
             ],
             ["unicorn steak", "xyzzy", ""],
         )
-        self.assertEqual(self.catalog_count, SHIPPED_FOODS)
+        self.assertEqual(self.catalog_count, TARGET_FOODS)
         self.assertEqual(self.excluded_count, 2)
-        self.assertEqual(self.candidate_count, SHIPPED_FOODS - 2)
+        self.assertEqual(self.candidate_count, TARGET_FOODS - 2)
 
     def test_required_scorer_properties(self):
         result = subprocess.run(

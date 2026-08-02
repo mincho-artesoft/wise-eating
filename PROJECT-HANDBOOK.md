@@ -2,7 +2,8 @@
 **Read this first. It is the knowledge-transfer document for anyone (human or AI)
 taking over direction of this project. Update it at the end of every milestone —
 that is a standing rule baked into all task packets.**
-Last updated: 2026-07-30 (search cache v7 and the bundled preseed now persist
+Last updated: 2026-08-02 (job 4 re-pins the bundled seed, preseed, concept,
+role, and search-cache artifacts to the post-NUT catalogue. Search cache v7 persists
 full Ayurveda metadata for canonical and linked foods; MP-7 adds build-time culinary roles,
 `notReadyToEat` eligibility, anchor/cap/portion plausibility constraints, and a
 real-catalogue solver profile. Behavior-preserving role buckets and compact
@@ -24,38 +25,38 @@ One repository, two products:
 ## 2. What has been built (architecture in one pass)
 
 **Content (source of truth = JSON in `ayurveda-data/`):**
-- **714 dravyas** (`dravyas/batch-01..30.json`): classical foods, each with 16+
+- **705 dravyas** (`dravyas/batch-01..31.json`): classical foods, each with 16+
   fields — rasa, virya, vipaka, gunas, prabhava, dosha effects (V/P/K each
   −2…+2 signed scale: − pacifies, + aggravates), agniEffect, digestibility,
   seasons (6 ritus), timeOfDay, combinations, viruddha, contraindications,
   preparation, USDA bindings (fdcId+tier), servings, provenance, confidence.
-- **1,500 recipes** (`recipes/batch-r01..r30.json`): 300 classical + 1,200
-  everyday/international; ingredients link to dravyas/fdcIds; computed dosha;
+- **1,511 recipes** (`recipes/batch-r01..r31.json`): ingredients link to
+  dravyas/fdcIds; computed dosha;
   viruddha-flagged where a modern dish breaks a rule (with compliant variant).
   The seed build derives honest per-serving and per-100g panels from bound
   ingredient nutrition: energy, macros, fiber, sugars, 22 vitamins, 11 minerals.
 - **Classification rules** (`rules/category-rules.json` 187 categories,
   `rules/modifiers.json` 14 name-modifiers, `crosswalk/overrides.json`).
-- **Crosswalk** (`crosswalk/crosswalk.csv`): 1,969 deterministic USDA→dravya
+- **Crosswalk** (`crosswalk/crosswalk.csv`): 1,966 deterministic USDA→dravya
   derived-tier matches (matcher: `match_crosswalk.py`).
 
 **Three-tier dosha coverage of ALL 12,601 USDA foods:**
-classical 336 (direct dravya bindings) + derived 1,969 (crosswalk) +
-estimated 10,296 (category rules × modifiers) = 12,601. Tier is always stored
+classical 370 (306 exact + 64 near direct dravya bindings) + derived 1,966
+(crosswalk) + estimated 10,265 (category rules × modifiers) = 12,601. Tier is always stored
 and must always be shown in UI.
 
 **Build pipeline:** `ayurveda-data/build_seed.py` → deterministic
-`Ayura/ayurveda_seed.json.gz` (seedVersion 5; sha-verifiable) +
+`Ayura/ayurveda_seed.json.gz` (seedVersion 6; sha-verifiable) +
 `Ayura/ayurveda_rules.json`. `ayurveda-data/build_preseeded_store.py`
-audits/compacts a completed 14,484-row store and emits the two bundled gzip
+audits/compacts a completed 14,488-row store and emits the two bundled gzip
 parts, including the version-7 search cache. `ayurveda-data/validate.py --store
 /tmp/pre` is the gatekeeper (content integrity + full resolver and preseed
 simulation; must always pass).
 
 **App layer (Swift, additive only — `FoodItem` untouched):**
 - `Ayura/Ayurveda/AyurvedaProfile.swift`: `@Model AyurvedaProfile`
-  (2,214 rows: 714 dravyas + 1,500 recipes; joined to FoodItem by plain `foodId`;
-  `kind` = "dravya"|"recipe") and `@Model AyurvedaLink` (fdcId→dravya, 2,305 rows,
+  (2,216 rows: 705 dravyas + 1,511 recipes; joined to FoodItem by plain `foodId`;
+  `kind` = "dravya"|"recipe") and `@Model AyurvedaLink` (fdcId→dravya, 2,336 rows,
   tiers exact/near/derived).
 - `Ayura/Ayurveda/AyurvedaRules.swift`: Sendable value types; loads
   ayurveda_rules.json; computes estimated-tier VPK.
@@ -263,20 +264,20 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 
 | Thing | Count |
 |---|---|
-| Dravyas / recipes / profiles | 714 / 1,500 / 2,214 |
-| AyurvedaLink rows (v4 seed) | 2,305 = 278 exact + 58 near + 1,969 derived |
-| Tier coverage | classical 336 · derived 1,969 · estimated 10,296 = 12,601 |
-| Placeholder FoodItems | 383 (IDs 900001–900383) |
-| Post-seed ZFOODITEM total | 14,484 (12,601 + 383 + 1,500) |
-| Category rules / modifiers | 187 / 14 (modifiers fire on 6,357 foods) |
-| Crosswalk distinct dravyas | 166; contested 67; curated denies 2 |
-| Recipe nutrition | 1,500 full · 0 estimated · 0 none; 39 fields × two bases |
-| Recipe IngredientLinks | 10,571 positive-gram rows · 1,500 owners |
-| WE-8 safety projection | 2,214 review-required rows · 156 allergen dravyas · 1,182 allergen recipes · 749 Vegan recipes |
-| Search cache | version 7 · 14,484 DB/compact rows · 4,188 metadata/faceted rows (2,214 canonical + 1,974 linked-only) · 89 keys / 58,635 assignments · separate display/enforced age floors |
-| Seed | seedVersion 5, deterministic SHA-256 `886c6a39…872e` |
-| Preseed parts (v7 rebuild) | `aa` `120cb78f…606e8` · `ab` `79270832…0615d`; restored store `b5e5da6b…d145b` |
-| Age provenance (WE-8c) | dravyas 4 authored / 710 legacyImport · recipes 4 / 1,496 · ingredient contributors 4 / 10,567 |
+| Dravyas / recipes / profiles | 705 / 1,511 / 2,216 |
+| AyurvedaLink rows (v6 seed) | 2,336 = 306 exact + 64 near + 1,966 derived |
+| Tier coverage | classical 370 · derived 1,966 · estimated 10,265 = 12,601 |
+| Placeholder FoodItems | 376 (IDs 900001–900376) |
+| Post-seed ZFOODITEM total | 14,488 (12,601 + 376 + 1,511) |
+| Category rules / modifiers | 187 / 14 (modifiers fire on 6,351 foods) |
+| Crosswalk distinct dravyas | 164; 59 contested rows with recorded losers; curated denies 2 |
+| Recipe nutrition | 1,508 full · 3 estimated · 0 none; 39 fields × two bases |
+| Recipe IngredientLinks | 10,644 positive-gram rows · 1,511 owners |
+| WE-8 safety projection | 2,216 review-required rows · 155 allergen dravyas · 1,190 allergen recipes · 754 Vegan recipes |
+| Search cache | version 7 · 14,488 DB/compact rows · 4,223 metadata/faceted rows (2,216 canonical + 2,007 linked-only) · 89 keys / 59,114 assignments · separate display/enforced age floors |
+| Seed | seedVersion 6, deterministic SHA-256 `7687498a…0fe50f3f` |
+| Preseed parts (v7 rebuild) | `aa` `003d25ae…fc4839` · `ab` `bd7f2b24…40562`; restored store `48aebeb3…54c44b` |
+| Age provenance (WE-8c) | dravyas 391 authored / 314 legacyImport · recipes 1,457 / 54 · ingredient contributors 4,957 / 5,687 |
 | Cold launch (WE-6/WE-7/WE-8/WE-8c, Debug simulator) | WE-8c registry median **1.607s** (N=12); same-session WE-8b 1.569s, paired median delta +0.048s. Absolute hard ceiling 1.700s; profiling paydown required above 1.650s |
 | Legacy target (WE-7) | 9 dead Swift inputs removed · 5 live JSON fallback resources retained |
 | Food concepts (FC-1e feature branch) | rev5 · 25 concepts · 75 aliases · 14,484 catalogue memberships resolved into a 31,165-byte deterministic artifact |

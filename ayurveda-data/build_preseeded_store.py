@@ -12,12 +12,6 @@ import tempfile
 from pathlib import Path
 
 from build_seed import (
-    SHIPPED_AYURVEDA_LINKS,
-    SHIPPED_FOODS,
-    SHIPPED_INGREDIENT_LINKS,
-    SHIPPED_INGREDIENT_OWNERS,
-    SHIPPED_PROFILES,
-    SHIPPED_RECIPES,
     TARGET_AYURVEDA_LINKS,
     TARGET_FOODS,
     TARGET_INGREDIENT_LINKS,
@@ -32,35 +26,23 @@ TARGET_EXPECTED = {
     "profiles": TARGET_PROFILES,
     "dravyas": 705,
     "recipes": TARGET_RECIPES,
+    "nutritionFull": 1_508,
+    "nutritionEstimated": 3,
     "links": TARGET_AYURVEDA_LINKS,
     "cacheFoods": TARGET_FOODS,
     "cacheVersion": 7,
-    "facetFoods": 4_212,
-    "metadataFoods": 4_212,
+    "facetFoods": 4_223,
+    "metadataFoods": 4_223,
     "linkedFacetFoods": 2_007,
     "facetKeys": 89,
-    "facetAssignments": 59_032,
+    "facetAssignments": 59_114,
     "seedVersion": 6,
     "ingredientLinks": TARGET_INGREDIENT_LINKS,
     "ingredientOwners": TARGET_INGREDIENT_OWNERS,
     "allergenTaggedDravyas": 155,
-    "allergenTaggedRecipes": 1_182,
-    "authoredAgeDravyas": 4,
-    "authoredAgeRecipes": 4,
-}
-
-# SHIPPED ARTIFACT COUNT. The bundled artifact predates NUT-3. Job 4
-# regenerates it and re-pins this to TARGET. Do not "fix" this to match
-# the source. See ayurveda-data/JOB4-REPIN.md.
-SHIPPED_EXPECTED = {
-    **TARGET_EXPECTED,
-    "foods": SHIPPED_FOODS,
-    "profiles": SHIPPED_PROFILES,
-    "recipes": SHIPPED_RECIPES,
-    "links": SHIPPED_AYURVEDA_LINKS,
-    "cacheFoods": SHIPPED_FOODS,
-    "ingredientLinks": SHIPPED_INGREDIENT_LINKS,
-    "ingredientOwners": SHIPPED_INGREDIENT_OWNERS,
+    "allergenTaggedRecipes": 1_190,
+    "positiveEnforcedAgeDravyas": 391,
+    "positiveEnforcedAgeRecipes": 5,
 }
 
 # Backward-compatible name for callers building a new target artifact.
@@ -204,7 +186,7 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
             0,
         )
         require_equal(
-            "recipe nutrition panels",
+            "full recipe nutrition panels",
             scalar(
                 connection,
                 """
@@ -216,7 +198,22 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
                   AND ZNUTRITIONUNITSJSON IS NOT NULL
                 """,
             ),
-            EXPECTED["recipes"],
+            EXPECTED["nutritionFull"],
+        )
+        require_equal(
+            "estimated recipe nutrition panels",
+            scalar(
+                connection,
+                """
+                SELECT COUNT(*) FROM ZAYURVEDAPROFILE
+                WHERE ZKIND = 'recipe'
+                  AND ZNUTRITIONSTATUS = 'estimated'
+                  AND ZNUTRITIONPERSERVINGJSON IS NOT NULL
+                  AND ZNUTRITIONPER100GJSON IS NOT NULL
+                  AND ZNUTRITIONUNITSJSON IS NOT NULL
+                """,
+            ),
+            EXPECTED["nutritionEstimated"],
         )
         require_equal(
             "IngredientLink count",
@@ -337,11 +334,15 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
             sum(
                 not isinstance(food.get("enforcedMinAgeMonths"), int)
                 or food["enforcedMinAgeMonths"] < 0
-                or food["enforcedMinAgeMonths"] > food["minAgeMonths"]
                 for food in compact_foods
             ),
             0,
         )
+        # A linked USDA row keeps its own legacy display age while inheriting
+        # the canonical profile's safety floor. The inherited floor may
+        # therefore exceed the unrelated display value; only non-negativity is
+        # a universal invariant here. Canonical and linked inheritance are
+        # checked independently below.
         dravya_food_ids = {
             row[0]
             for row in connection.execute(
@@ -365,28 +366,28 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
             EXPECTED["allergenTaggedRecipes"],
         )
         require_equal(
-            "authored-age canonical dravyas",
+            "positive enforced-age canonical dravyas",
             sum(
                 compact_by_id[food_id]["enforcedMinAgeMonths"] > 0
                 for food_id in dravya_food_ids
             ),
-            EXPECTED["authoredAgeDravyas"],
+            EXPECTED["positiveEnforcedAgeDravyas"],
         )
         require_equal(
-            "authored-age canonical recipes",
+            "positive enforced-age canonical recipes",
             sum(
                 compact_by_id[food_id]["enforcedMinAgeMonths"] > 0
                 for food_id in recipe_food_ids
             ),
-            EXPECTED["authoredAgeRecipes"],
+            EXPECTED["positiveEnforcedAgeRecipes"],
         )
         require_equal(
-            "canonical enforced floors differ from zero-or-twelve",
+            "canonical enforced-floor domain",
             {
                 compact_by_id[food_id]["enforcedMinAgeMonths"]
                 for food_id in profile_food_ids
             },
-            {0, 12},
+            {0, 6, 12, 60},
         )
         require_equal(
             "non-Ayurveda age enforcement differs from display",
@@ -546,6 +547,8 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
             "links": EXPECTED["links"],
             "ingredientLinks": EXPECTED["ingredientLinks"],
             "ingredientOwners": EXPECTED["ingredientOwners"],
+            "nutritionFull": EXPECTED["nutritionFull"],
+            "nutritionEstimated": EXPECTED["nutritionEstimated"],
             "cacheFoods": cache_foods,
             "cacheVersion": cache_version,
             "facetFoods": len(faceted_food_ids),
@@ -555,8 +558,8 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
             "facetAssignments": facet_assignments,
             "allergenTaggedDravyas": EXPECTED["allergenTaggedDravyas"],
             "allergenTaggedRecipes": EXPECTED["allergenTaggedRecipes"],
-            "authoredAgeDravyas": EXPECTED["authoredAgeDravyas"],
-            "authoredAgeRecipes": EXPECTED["authoredAgeRecipes"],
+            "positiveEnforcedAgeDravyas": EXPECTED["positiveEnforcedAgeDravyas"],
+            "positiveEnforcedAgeRecipes": EXPECTED["positiveEnforcedAgeRecipes"],
             "payloadBytes": len(payload_data),
         }
 

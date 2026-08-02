@@ -43,12 +43,9 @@ assert SPEC and SPEC.loader
 build_seed = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(build_seed)
 
-# SHIPPED ARTIFACT COUNT. The bundled artifact predates NUT-3. Job 4
-# regenerates it and re-pins this to TARGET. Do not "fix" this to match
-# the source. See ayurveda-data/JOB4-REPIN.md.
-SHIPPED_FOODS = build_seed.SHIPPED_FOODS
-SHIPPED_INGREDIENT_LINKS = build_seed.SHIPPED_INGREDIENT_LINKS
-SHIPPED_INGREDIENT_OWNERS = build_seed.SHIPPED_INGREDIENT_OWNERS
+TARGET_FOODS = build_seed.TARGET_FOODS
+TARGET_INGREDIENT_LINKS = build_seed.TARGET_INGREDIENT_LINKS
+TARGET_INGREDIENT_OWNERS = build_seed.TARGET_INGREDIENT_OWNERS
 
 
 class FoodConceptTests(unittest.TestCase):
@@ -79,9 +76,9 @@ class FoodConceptTests(unittest.TestCase):
             cls.overrides,
             cls.suffix_terms,
             cls.irregular_plurals,
-            expected_catalog_count=SHIPPED_FOODS,
-            expected_ingredient_links=SHIPPED_INGREDIENT_LINKS,
-            expected_ingredient_owners=SHIPPED_INGREDIENT_OWNERS,
+            expected_catalog_count=TARGET_FOODS,
+            expected_ingredient_links=TARGET_INGREDIENT_LINKS,
+            expected_ingredient_owners=TARGET_INGREDIENT_OWNERS,
         )
 
     def test_director_artifacts_are_unchanged_and_complete(self):
@@ -305,11 +302,11 @@ class FoodConceptTests(unittest.TestCase):
         propagation = self.artifact["propagation"]
         self.assertEqual(
             propagation["ingredientLinks"],
-            SHIPPED_INGREDIENT_LINKS,
+            TARGET_INGREDIENT_LINKS,
         )
         self.assertEqual(
             propagation["recipeOwners"],
-            SHIPPED_INGREDIENT_OWNERS,
+            TARGET_INGREDIENT_OWNERS,
         )
         self.assertEqual(propagation["nestedRecipeLinks"], 0)
         self.assertEqual(propagation["depthUsed"], 1)
@@ -336,13 +333,13 @@ class FoodConceptTests(unittest.TestCase):
                         )
 
     def test_membership_is_sorted_bounded_and_deterministic(self):
-        self.assertEqual(self.artifact["catalogCount"], SHIPPED_FOODS)
+        self.assertEqual(self.artifact["catalogCount"], TARGET_FOODS)
         self.assertEqual(self.artifact["conceptCount"], 25)
         self.assertEqual(self.artifact["aliasCount"], 75)
         for concept, members in self.artifact["membership"].items():
             with self.subTest(concept=concept):
                 self.assertEqual(members, sorted(set(members)))
-                self.assertLessEqual(len(members) / SHIPPED_FOODS, 0.40)
+                self.assertLessEqual(len(members) / TARGET_FOODS, 0.40)
 
         rebuilt, _ = build_seed.build_food_concepts(
             self.seed,
@@ -354,9 +351,9 @@ class FoodConceptTests(unittest.TestCase):
             self.overrides,
             self.suffix_terms,
             self.irregular_plurals,
-            expected_catalog_count=SHIPPED_FOODS,
-            expected_ingredient_links=SHIPPED_INGREDIENT_LINKS,
-            expected_ingredient_owners=SHIPPED_INGREDIENT_OWNERS,
+            expected_catalog_count=TARGET_FOODS,
+            expected_ingredient_links=TARGET_INGREDIENT_LINKS,
+            expected_ingredient_owners=TARGET_INGREDIENT_OWNERS,
         )
         self.assertEqual(
             build_seed.encode_deterministic_gzip(self.artifact),

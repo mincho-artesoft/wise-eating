@@ -17,16 +17,6 @@ TARGET_INGREDIENT_LINKS = build_seed.TARGET_INGREDIENT_LINKS
 TARGET_INGREDIENT_OWNERS = build_seed.TARGET_INGREDIENT_OWNERS
 TARGET_AYURVEDA_LINKS = build_seed.TARGET_AYURVEDA_LINKS
 
-# SHIPPED ARTIFACT COUNT. The bundled artifact predates NUT-3. Job 4
-# regenerates it and re-pins this to TARGET. Do not "fix" this to match
-# the source. See ayurveda-data/JOB4-REPIN.md.
-SHIPPED_FOODS = build_seed.SHIPPED_FOODS
-SHIPPED_PROFILES = build_seed.SHIPPED_PROFILES
-SHIPPED_RECIPES = build_seed.SHIPPED_RECIPES
-SHIPPED_INGREDIENT_LINKS = build_seed.SHIPPED_INGREDIENT_LINKS
-SHIPPED_INGREDIENT_OWNERS = build_seed.SHIPPED_INGREDIENT_OWNERS
-SHIPPED_AYURVEDA_LINKS = build_seed.SHIPPED_AYURVEDA_LINKS
-
 RASA = {"sweet", "sour", "salty", "pungent", "bitter", "astringent"}
 GUNA = {"heavy", "light", "oily", "dry", "sharp", "soft", "smooth", "rough",
         "penetrating", "dense", "liquid", "slimy"}
@@ -385,17 +375,7 @@ def d34_validate(here, store, errs):
     store_ids = set(foods)
     if len(store_ids) != 12601:
         errs.append(f"D34/store: expected 12601 foods, got {len(store_ids)}")
-    # Transitional detector: job 4 removes the SHIPPED branch and accepts only
-    # TARGET_FOODS once the bundled preseed has been regenerated.
-    if total_store_foods == SHIPPED_FOODS:
-        try:
-            build_preseeded_store.audit_store(
-                os.path.abspath(store),
-                build_preseeded_store.SHIPPED_EXPECTED,
-            )
-        except (build_preseeded_store.PreseedBuildError, sqlite3.Error) as error:
-            errs.append(f"WE2/preseed: {error}")
-    elif total_store_foods == TARGET_FOODS:
+    if total_store_foods == TARGET_FOODS:
         try:
             build_preseeded_store.audit_store(os.path.abspath(store))
         except (build_preseeded_store.PreseedBuildError, sqlite3.Error) as error:
@@ -403,7 +383,7 @@ def d34_validate(here, store, errs):
     elif total_store_foods != 12601:
         errs.append(
             "WE2/preseed: expected 12601 base, "
-            f"{SHIPPED_FOODS} shipped, or {TARGET_FOODS} target foods, "
+            f"or {TARGET_FOODS} target foods, "
             f"got {total_store_foods}"
         )
     missing_crosswalk_ids = sorted(set(crosswalk) - store_ids)
@@ -485,30 +465,30 @@ def d34_validate(here, store, errs):
     counts = seed.get("counts", {})
     expected_counts = {
         "dravyas": 705,
-        "recipes": SHIPPED_RECIPES,
-        "links": SHIPPED_AYURVEDA_LINKS,
+        "recipes": TARGET_RECIPES,
+        "links": TARGET_AYURVEDA_LINKS,
         "derivedLinks": 1966, "placeholders": 376,
         "categoryRules": 187, "modifiers": 14,
-        "nutrition": {"full": SHIPPED_RECIPES, "estimated": 0, "none": 0},
+        "nutrition": {"full": 1508, "estimated": 3, "none": 0},
         "safety": {
-            "profiles": SHIPPED_PROFILES,
+            "profiles": TARGET_PROFILES,
             "allergenTaggedDravyas": 155,
-            "allergenTaggedRecipes": 1182,
+            "allergenTaggedRecipes": 1190,
             "honeyMinAgeDravyas": 4,
-            "honeyMinAgeRecipes": 4,
-            "authoredAgeDravyas": 4,
-            "legacyImportAgeDravyas": 701,
-            "authoredAgeRecipes": 4,
-            "legacyImportAgeRecipes": 1496,
-            "ageContributors": SHIPPED_INGREDIENT_LINKS,
+            "honeyMinAgeRecipes": 5,
+            "authoredAgeDravyas": 391,
+            "legacyImportAgeDravyas": 314,
+            "authoredAgeRecipes": 1457,
+            "legacyImportAgeRecipes": 54,
+            "ageContributors": TARGET_INGREDIENT_LINKS,
         },
     }
     if counts != expected_counts:
         errs.append(f"D34/seed: counts block differs: {counts}")
     links = seed.get("links", [])
-    if len(links) != SHIPPED_AYURVEDA_LINKS:
+    if len(links) != TARGET_AYURVEDA_LINKS:
         errs.append(
-            f"D34/seed: expected {SHIPPED_AYURVEDA_LINKS} links, got {len(links)}"
+            f"D34/seed: expected {TARGET_AYURVEDA_LINKS} links, got {len(links)}"
         )
     link_map = {}
     for link in links:
@@ -641,7 +621,7 @@ def d34_validate(here, store, errs):
             kitchari_energy = per_serving.get("energyKcal")
 
     expected_nutrition_counts = Counter(
-        {"full": SHIPPED_RECIPES, "estimated": 0, "none": 0}
+        {"full": 1508, "estimated": 3, "none": 0}
     )
     if nutrition_counts != expected_nutrition_counts:
         errs.append(f"WE2/seed: nutrition coverage differs: {dict(nutrition_counts)}")

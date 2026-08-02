@@ -561,7 +561,7 @@ enum AyurvedaSeeder {
 
   private static func validate(seed: AyurvedaSeedDTO) throws {
     guard seed.counts.dravyas == 705,
-      seed.counts.recipes == 1_500,
+      seed.counts.recipes == 1_511,
       seed.counts.links == 2_336,
       seed.counts.derivedLinks == 1_966,
       seed.counts.placeholders == 376,
@@ -571,11 +571,11 @@ enum AyurvedaSeeder {
         + seed.counts.nutrition.estimated
         + seed.counts.nutrition.none == seed.counts.recipes,
       seed.counts.safety.profiles == seed.counts.dravyas + seed.counts.recipes,
-      seed.counts.safety.authoredAgeDravyas == 4,
-      seed.counts.safety.legacyImportAgeDravyas == 701,
-      seed.counts.safety.authoredAgeRecipes == 4,
-      seed.counts.safety.legacyImportAgeRecipes == 1_496,
-      seed.counts.safety.ageContributors == 10_571,
+      seed.counts.safety.authoredAgeDravyas == 391,
+      seed.counts.safety.legacyImportAgeDravyas == 314,
+      seed.counts.safety.authoredAgeRecipes == 1_457,
+      seed.counts.safety.legacyImportAgeRecipes == 54,
+      seed.counts.safety.ageContributors == 10_644,
       seed.dravyas.count == seed.counts.dravyas,
       seed.recipes.count == seed.counts.recipes,
       seed.links.count == seed.counts.links,

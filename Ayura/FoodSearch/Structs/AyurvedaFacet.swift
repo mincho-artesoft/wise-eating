@@ -87,7 +87,7 @@ struct AyurvedaFacet: Hashable, Sendable {
             from: plain
         )
         guard seed.dravyas.count == 705,
-              seed.recipes.count == 1_500,
+              seed.recipes.count == 1_511,
               seed.links.count == 2_336 else {
             throw AyurvedaFacetSeedError.invalidCounts
         }

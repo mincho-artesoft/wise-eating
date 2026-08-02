@@ -26,11 +26,8 @@ ARTIFACT_PARTS = [
 ]
 GOLDEN = ROOT / "ayurveda-data" / "tests" / "fixtures" / "we4_golden_queries.json"
 
-# SHIPPED ARTIFACT COUNT. The bundled artifact predates NUT-3. Job 4
-# regenerates it and re-pins this to TARGET. Do not "fix" this to match
-# the source. See ayurveda-data/JOB4-REPIN.md.
-SHIPPED_FOODS = 14_477
-SHIPPED_PROFILES = 2_205
+TARGET_FOODS = 14_488
+TARGET_PROFILES = 2_216
 
 
 class WE4SearchTests(unittest.TestCase):
@@ -207,7 +204,7 @@ struct ParserHarness {
                 """
             ).fetchone()
         version, food_count, payload_data = row
-        self.assertEqual((version, food_count), (7, SHIPPED_FOODS))
+        self.assertEqual((version, food_count), (7, TARGET_FOODS))
         payload = json.loads(payload_data)
         compact_by_id = {food["id"]: food for food in payload["compactFoods"]}
 
@@ -218,9 +215,9 @@ struct ParserHarness {
         link_tiers = {link["fdcId"]: link["tier"] for link in seed["links"]}
         expected_ids = direct_ids | set(link_tiers)
         linked_only_ids = set(link_tiers) - direct_ids
-        self.assertEqual(len(direct_ids), SHIPPED_PROFILES)
+        self.assertEqual(len(direct_ids), TARGET_PROFILES)
         self.assertEqual(len(linked_only_ids), 2_007)
-        self.assertEqual(len(expected_ids), 4_212)
+        self.assertEqual(len(expected_ids), 4_223)
 
         for food_id in expected_ids:
             food = compact_by_id[food_id]
@@ -252,7 +249,7 @@ struct ParserHarness {
         }
         self.assertEqual(actual_index, expected_index)
         self.assertEqual(len(actual_index), 89)
-        self.assertEqual(sum(map(len, expected_index.values())), 59_032)
+        self.assertEqual(sum(map(len, expected_index.values())), 59_114)
         self.assertFalse(set(actual_index) & set(payload["invertedIndex"]))
 
     def test_engine_uses_index_intersection_and_exact_title_escape_hatch(self):
@@ -292,7 +289,7 @@ struct ParserHarness {
             no_allergens["mustExcludeScope"],
             "allergen-bearing-seeded-recipes",
         )
-        self.assertEqual(no_allergens["expectedExcludedCount"], 1_182)
+        self.assertEqual(no_allergens["expectedExcludedCount"], 1_190)
         self.assertIn("tomatoes low fat", {entry["query"] for entry in legacy})
         self.assertIn("more iron than spinach", {entry["query"] for entry in legacy})
         self.assertTrue(

@@ -12,10 +12,7 @@ KNOWN_BAD_PLAN = (
     ROOT / "ayurveda-data" / "tests" / "mp6b-known-bad-plan.json"
 )
 
-# SHIPPED ARTIFACT COUNT. The bundled artifact predates NUT-3. Job 4
-# regenerates it and re-pins this to TARGET. Do not "fix" this to match
-# the source. See ayurveda-data/JOB4-REPIN.md.
-SHIPPED_FOODS = 14_477
+TARGET_FOODS = 14_488
 
 
 class CulinaryValidityChecker:
@@ -200,7 +197,7 @@ class MP7ValidityTests(unittest.TestCase):
         self.assertEqual(set(self.checker.definitions), {
             role["id"] for role in self.role_source["roles"]
         })
-        self.assertEqual(len(self.checker.items), SHIPPED_FOODS)
+        self.assertEqual(len(self.checker.items), TARGET_FOODS)
 
 
 if __name__ == "__main__":

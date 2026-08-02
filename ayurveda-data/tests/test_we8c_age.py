@@ -357,9 +357,9 @@ class WE8CPreseedAgeTests(unittest.TestCase):
         honey = [
             profile
             for profile in self.seed["dravyas"] + self.seed["recipes"]
-            if profile["safety"]["ageProvenance"] == "authored"
+            if "honey-min-age:12" in profile["safety"]["rules"]
         ]
-        self.assertEqual(len(honey), 8)
+        self.assertEqual(len(honey), 9)
         self.assertTrue(
             all(
                 self.compact_by_id[profile["foodId"]]["enforcedMinAgeMonths"]
@@ -373,7 +373,7 @@ class WE8CPreseedAgeTests(unittest.TestCase):
         ]
         self.assertEqual(
             {age: sum(floor <= age for floor in recipe_floors) for age in (9, 24, 60)},
-            {9: 1_496, 24: 1_500, 60: 1_500},
+            {9: 1_506, 24: 1_511, 60: 1_511},
         )
 
     def test_linked_rows_inherit_source_floor_and_unlinked_rows_preserve_legacy(self):

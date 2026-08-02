@@ -16,10 +16,7 @@ assert SPEC and SPEC.loader
 build_preseeded_store = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(build_preseeded_store)
 
-# SHIPPED ARTIFACT COUNT. The bundled artifact predates NUT-3. Job 4
-# regenerates it and re-pins this to TARGET. Do not "fix" this to match
-# the source. See ayurveda-data/JOB4-REPIN.md.
-SHIPPED = build_preseeded_store.SHIPPED_EXPECTED
+TARGET = build_preseeded_store.TARGET_EXPECTED
 
 
 class PreseedArtifactTests(unittest.TestCase):
@@ -33,7 +30,7 @@ class PreseedArtifactTests(unittest.TestCase):
         cls.store = Path(cls.temporary.name) / "default.store"
         compressed = b"".join(part.read_bytes() for part in parts)
         cls.store.write_bytes(gzip.decompress(compressed))
-        cls.audit = build_preseeded_store.audit_store(cls.store, SHIPPED)
+        cls.audit = build_preseeded_store.audit_store(cls.store, TARGET)
         cls.connection = sqlite3.connect(cls.store)
         with gzip.open(
             REPO_ROOT / "Ayura" / "ayurveda_seed.json.gz",
@@ -51,28 +48,30 @@ class PreseedArtifactTests(unittest.TestCase):
         self.assertEqual(
             self.audit,
             {
-                "foods": SHIPPED["foods"],
-                "profiles": SHIPPED["profiles"],
-                "links": SHIPPED["links"],
-                "ingredientLinks": SHIPPED["ingredientLinks"],
-                "ingredientOwners": SHIPPED["ingredientOwners"],
-                "cacheFoods": SHIPPED["cacheFoods"],
+                "foods": TARGET["foods"],
+                "profiles": TARGET["profiles"],
+                "links": TARGET["links"],
+                "ingredientLinks": TARGET["ingredientLinks"],
+                "ingredientOwners": TARGET["ingredientOwners"],
+                "nutritionFull": TARGET["nutritionFull"],
+                "nutritionEstimated": TARGET["nutritionEstimated"],
+                "cacheFoods": TARGET["cacheFoods"],
                 "cacheVersion": 7,
-                "facetFoods": 4_212,
-                "metadataFoods": 4_212,
+                "facetFoods": 4_223,
+                "metadataFoods": 4_223,
                 "linkedFacetFoods": 2_007,
                 "facetKeys": 89,
-                "facetAssignments": 59_032,
+                "facetAssignments": 59_114,
                 "allergenTaggedDravyas": 155,
-                "allergenTaggedRecipes": 1_182,
-                "authoredAgeDravyas": 4,
-                "authoredAgeRecipes": 4,
+                "allergenTaggedRecipes": 1_190,
+                "positiveEnforcedAgeDravyas": 391,
+                "positiveEnforcedAgeRecipes": 5,
                 "payloadBytes": self.audit["payloadBytes"],
             },
         )
         self.assertGreater(self.audit["payloadBytes"], 0)
         self.assertGreater(self.audit["facetKeys"], 0)
-        self.assertGreater(self.audit["facetAssignments"], 4_212)
+        self.assertGreater(self.audit["facetAssignments"], 4_223)
 
     def test_fresh_store_seed_run_has_zero_inserts(self):
         profile_rows = self.connection.execute(
@@ -131,9 +130,9 @@ class PreseedArtifactTests(unittest.TestCase):
         self.assertEqual(
             before,
             {
-                "foods": SHIPPED["foods"],
-                "profiles": SHIPPED["profiles"],
-                "links": SHIPPED["links"],
+                "foods": TARGET["foods"],
+                "profiles": TARGET["profiles"],
+                "links": TARGET["links"],
             },
         )
         self.assertEqual(
@@ -174,11 +173,11 @@ class PreseedArtifactTests(unittest.TestCase):
         self.assertEqual(len(decoded["compactFoods"]), food_count)
         self.assertEqual(
             sum(bool(food["ayurvedaFacets"]) for food in decoded["compactFoods"]),
-            4_212,
+            4_223,
         )
         self.assertEqual(
             sum(food.get("ayurvedaMetadata") is not None for food in decoded["compactFoods"]),
-            4_212,
+            4_223,
         )
         self.assertIn("virya:cooling", decoded["ayurvedaFacetIndex"])
 
