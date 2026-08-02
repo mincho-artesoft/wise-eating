@@ -16,6 +16,13 @@ assert SPEC and SPEC.loader
 build_seed = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(build_seed)
 
+# SHIPPED ARTIFACT COUNT. The bundled artifact predates NUT-3. Job 4
+# regenerates it and re-pins this to TARGET. Do not "fix" this to match
+# the source. See ayurveda-data/JOB4-REPIN.md.
+SHIPPED_PROFILES = build_seed.SHIPPED_PROFILES
+SHIPPED_INGREDIENT_LINKS = build_seed.SHIPPED_INGREDIENT_LINKS
+SHIPPED_INGREDIENT_OWNERS = build_seed.SHIPPED_INGREDIENT_OWNERS
+
 
 class WE8SafetyDerivationTests(unittest.TestCase):
     @classmethod
@@ -66,7 +73,7 @@ class WE8SafetyDerivationTests(unittest.TestCase):
         rows = list(self.dravya_safety.values()) + list(
             self.recipe_safety.values()
         )
-        self.assertEqual(len(rows), 2_216)
+        self.assertEqual(len(rows), build_seed.TARGET_PROFILES)
         self.assertTrue(
             all(
                 row["provenance"] == "scaffold-default"
@@ -230,7 +237,7 @@ class WE8PreseedSafetyTests(unittest.TestCase):
 
     def test_artifact_metadata_exactly_matches_all_seeded_safety_rows(self):
         canonical = self.seed["dravyas"] + self.seed["recipes"]
-        self.assertEqual(len(canonical), 2_205)
+        self.assertEqual(len(canonical), SHIPPED_PROFILES)
         for item in canonical:
             compact = self.compact_by_id[item["foodId"]]
             safety = item["safety"]
@@ -362,8 +369,8 @@ class WE8PreseedSafetyTests(unittest.TestCase):
                 (food_id_by_pk[ingredient], float(grams))
             )
 
-        self.assertEqual(sum(map(len, actual.values())), 10_571)
-        self.assertEqual(len(actual), 1_500)
+        self.assertEqual(sum(map(len, actual.values())), SHIPPED_INGREDIENT_LINKS)
+        self.assertEqual(len(actual), SHIPPED_INGREDIENT_OWNERS)
         for recipe in self.seed["recipes"]:
             expected = sorted(
                 (ingredient["foodId"], float(ingredient["grams"]))

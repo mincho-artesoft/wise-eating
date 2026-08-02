@@ -26,6 +26,12 @@ ARTIFACT_PARTS = [
 ]
 GOLDEN = ROOT / "ayurveda-data" / "tests" / "fixtures" / "we4_golden_queries.json"
 
+# SHIPPED ARTIFACT COUNT. The bundled artifact predates NUT-3. Job 4
+# regenerates it and re-pins this to TARGET. Do not "fix" this to match
+# the source. See ayurveda-data/JOB4-REPIN.md.
+SHIPPED_FOODS = 14_477
+SHIPPED_PROFILES = 2_205
+
 
 class WE4SearchTests(unittest.TestCase):
     @classmethod
@@ -201,7 +207,7 @@ struct ParserHarness {
                 """
             ).fetchone()
         version, food_count, payload_data = row
-        self.assertEqual((version, food_count), (7, 14_477))
+        self.assertEqual((version, food_count), (7, SHIPPED_FOODS))
         payload = json.loads(payload_data)
         compact_by_id = {food["id"]: food for food in payload["compactFoods"]}
 
@@ -212,7 +218,7 @@ struct ParserHarness {
         link_tiers = {link["fdcId"]: link["tier"] for link in seed["links"]}
         expected_ids = direct_ids | set(link_tiers)
         linked_only_ids = set(link_tiers) - direct_ids
-        self.assertEqual(len(direct_ids), 2_205)
+        self.assertEqual(len(direct_ids), SHIPPED_PROFILES)
         self.assertEqual(len(linked_only_ids), 2_007)
         self.assertEqual(len(expected_ids), 4_212)
 

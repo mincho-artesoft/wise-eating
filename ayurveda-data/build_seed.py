@@ -18,10 +18,26 @@ from typing import Any
 
 SEED_VERSION = 6
 GENERATED_AT = "2026-07-25T00:00:00Z"
+TARGET_FOODS = 14_488
+TARGET_PROFILES = 2_216
+TARGET_RECIPES = 1_511
+TARGET_INGREDIENT_LINKS = 10_644
+TARGET_INGREDIENT_OWNERS = 1_511
+TARGET_AYURVEDA_LINKS = 2_336
+
+# SHIPPED ARTIFACT COUNT. The bundled artifact predates NUT-3. Job 4
+# regenerates it and re-pins this to TARGET. Do not "fix" this to match
+# the source. See ayurveda-data/JOB4-REPIN.md.
+SHIPPED_FOODS = 14_477
+SHIPPED_PROFILES = 2_205
+SHIPPED_RECIPES = 1_500
+SHIPPED_INGREDIENT_LINKS = 10_571
+SHIPPED_INGREDIENT_OWNERS = 1_500
+SHIPPED_AYURVEDA_LINKS = 2_336
 EXPECTED_COUNTS = {
     "dravyas": 705,
-    "recipes": 1511,
-    "links": 2336,
+    "recipes": TARGET_RECIPES,
+    "links": TARGET_AYURVEDA_LINKS,
     "derivedLinks": 1966,
     "placeholders": 376,
     "primaries": 329,
@@ -34,7 +50,6 @@ PLACEHOLDER_BASE = 900_000
 RECIPE_BASE = 1_000_000
 RESERVED_BAND_END = 1_002_000
 TIER_RANK = {"exact": 0, "near": 1}
-EXPECTED_CATALOG_COUNT = 14_477
 EXPECTED_CONCEPT_COUNT = 25
 EXPECTED_ALIAS_COUNT = 75
 EXPECTED_FOOD_ROLE_COUNT = 15
@@ -1032,6 +1047,10 @@ def build_food_concepts(
     overrides: dict[str, Any],
     suffix_negation_terms: set[str],
     irregular_plurals: dict[str, str],
+    *,
+    expected_catalog_count: int = TARGET_FOODS,
+    expected_ingredient_links: int = TARGET_INGREDIENT_LINKS,
+    expected_ingredient_owners: int = TARGET_INGREDIENT_OWNERS,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     validate_food_concept_sources(ontology, overrides)
     concepts_by_id = {
@@ -1053,9 +1072,9 @@ def build_food_concepts(
         if food_id in catalog_names:
             raise BuildError(f"recipe food id already exists: {food_id}")
         catalog_names[food_id] = recipe["name"]
-    if len(catalog_names) != EXPECTED_CATALOG_COUNT:
+    if len(catalog_names) != expected_catalog_count:
         raise BuildError(
-            f"food-concept catalog gate failed: expected {EXPECTED_CATALOG_COUNT}, "
+            f"food-concept catalog gate failed: expected {expected_catalog_count}, "
             f"got {len(catalog_names)}"
         )
 
@@ -1152,7 +1171,10 @@ def build_food_concepts(
             raise BuildError(f"{recipe['id']}: no ingredient links for concepts")
         ingredients_by_recipe[recipe["foodId"]] = ingredient_ids
     link_count = sum(len(values) for values in ingredients_by_recipe.values())
-    if link_count != 10_571 or len(ingredients_by_recipe) != 1_500:
+    if (
+        link_count != expected_ingredient_links
+        or len(ingredients_by_recipe) != expected_ingredient_owners
+    ):
         raise BuildError(
             "IngredientLink coverage insufficient for food-concept propagation: "
             f"{link_count} links / {len(ingredients_by_recipe)} owners"
@@ -2007,6 +2029,8 @@ def build_food_roles(
     role_source: dict[str, Any],
     modifiers: list[dict[str, Any]],
     suffix_negation_terms: set[str],
+    *,
+    expected_catalog_count: int = TARGET_FOODS,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     validate_food_role_source(role_source)
     records = {
@@ -2047,9 +2071,9 @@ def build_food_roles(
         }
         recipe_meals.add(recipe["meal"])
 
-    if len(records) != EXPECTED_CATALOG_COUNT:
+    if len(records) != expected_catalog_count:
         raise BuildError(
-            f"food-role catalog gate failed: expected {EXPECTED_CATALOG_COUNT}, "
+            f"food-role catalog gate failed: expected {expected_catalog_count}, "
             f"got {len(records)}"
         )
 

@@ -55,7 +55,7 @@ unchanged. Record both launch logs' relevant lines.
 2. `git checkout ayurveda-app` → build → install OVER the existing app → launch.
 3. PASS: no crash, no migration error in logs, seeding fires exactly once
    (Phase 2 criteria), pre-existing store content intact (ZFOODITEM count =
-   12601 + 383 + 1500 = 14484 total).
+   12,601 + 383 + 1,500 = 14,484 total).
 4. Return the checkout to `ayurveda-app` when done.
 
 ## Phase 5 — Report, then STOP

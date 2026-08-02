@@ -11,14 +11,29 @@ import sqlite3
 import tempfile
 from pathlib import Path
 
+from build_seed import (
+    SHIPPED_AYURVEDA_LINKS,
+    SHIPPED_FOODS,
+    SHIPPED_INGREDIENT_LINKS,
+    SHIPPED_INGREDIENT_OWNERS,
+    SHIPPED_PROFILES,
+    SHIPPED_RECIPES,
+    TARGET_AYURVEDA_LINKS,
+    TARGET_FOODS,
+    TARGET_INGREDIENT_LINKS,
+    TARGET_INGREDIENT_OWNERS,
+    TARGET_PROFILES,
+    TARGET_RECIPES,
+)
 
-EXPECTED = {
-    "foods": 14_477,
-    "profiles": 2_205,
+
+TARGET_EXPECTED = {
+    "foods": TARGET_FOODS,
+    "profiles": TARGET_PROFILES,
     "dravyas": 705,
-    "recipes": 1_500,
-    "links": 2_336,
-    "cacheFoods": 14_477,
+    "recipes": TARGET_RECIPES,
+    "links": TARGET_AYURVEDA_LINKS,
+    "cacheFoods": TARGET_FOODS,
     "cacheVersion": 7,
     "facetFoods": 4_212,
     "metadataFoods": 4_212,
@@ -26,13 +41,30 @@ EXPECTED = {
     "facetKeys": 89,
     "facetAssignments": 59_032,
     "seedVersion": 6,
-    "ingredientLinks": 10_571,
-    "ingredientOwners": 1_500,
+    "ingredientLinks": TARGET_INGREDIENT_LINKS,
+    "ingredientOwners": TARGET_INGREDIENT_OWNERS,
     "allergenTaggedDravyas": 155,
     "allergenTaggedRecipes": 1_182,
     "authoredAgeDravyas": 4,
     "authoredAgeRecipes": 4,
 }
+
+# SHIPPED ARTIFACT COUNT. The bundled artifact predates NUT-3. Job 4
+# regenerates it and re-pins this to TARGET. Do not "fix" this to match
+# the source. See ayurveda-data/JOB4-REPIN.md.
+SHIPPED_EXPECTED = {
+    **TARGET_EXPECTED,
+    "foods": SHIPPED_FOODS,
+    "profiles": SHIPPED_PROFILES,
+    "recipes": SHIPPED_RECIPES,
+    "links": SHIPPED_AYURVEDA_LINKS,
+    "cacheFoods": SHIPPED_FOODS,
+    "ingredientLinks": SHIPPED_INGREDIENT_LINKS,
+    "ingredientOwners": SHIPPED_INGREDIENT_OWNERS,
+}
+
+# Backward-compatible name for callers building a new target artifact.
+EXPECTED = TARGET_EXPECTED
 PART_SIZE = 70 * 1024 * 1024
 
 
@@ -62,7 +94,7 @@ def require_equal(label: str, actual, expected) -> None:
         raise PreseedBuildError(f"{label}: expected {expected!r}, got {actual!r}")
 
 
-def audit_store(path: Path) -> dict[str, int]:
+def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[str, int]:
     path = Path(path)
     if not path.is_file():
         raise PreseedBuildError(f"store does not exist: {path}")

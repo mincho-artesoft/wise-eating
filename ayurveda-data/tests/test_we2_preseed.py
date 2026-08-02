@@ -2,6 +2,7 @@ import gzip
 import importlib.util
 import json
 import sqlite3
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -9,10 +10,16 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 PRESEED_SCRIPT = REPO_ROOT / "ayurveda-data" / "build_preseeded_store.py"
+sys.path.insert(0, str(PRESEED_SCRIPT.parent))
 SPEC = importlib.util.spec_from_file_location("build_preseeded_store", PRESEED_SCRIPT)
 assert SPEC and SPEC.loader
 build_preseeded_store = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(build_preseeded_store)
+
+# SHIPPED ARTIFACT COUNT. The bundled artifact predates NUT-3. Job 4
+# regenerates it and re-pins this to TARGET. Do not "fix" this to match
+# the source. See ayurveda-data/JOB4-REPIN.md.
+SHIPPED = build_preseeded_store.SHIPPED_EXPECTED
 
 
 class PreseedArtifactTests(unittest.TestCase):
@@ -26,7 +33,7 @@ class PreseedArtifactTests(unittest.TestCase):
         cls.store = Path(cls.temporary.name) / "default.store"
         compressed = b"".join(part.read_bytes() for part in parts)
         cls.store.write_bytes(gzip.decompress(compressed))
-        cls.audit = build_preseeded_store.audit_store(cls.store)
+        cls.audit = build_preseeded_store.audit_store(cls.store, SHIPPED)
         cls.connection = sqlite3.connect(cls.store)
         with gzip.open(
             REPO_ROOT / "Ayura" / "ayurveda_seed.json.gz",
@@ -44,12 +51,12 @@ class PreseedArtifactTests(unittest.TestCase):
         self.assertEqual(
             self.audit,
             {
-                "foods": 14_477,
-                "profiles": 2_205,
-                "links": 2_336,
-                "ingredientLinks": 10_571,
-                "ingredientOwners": 1_500,
-                "cacheFoods": 14_477,
+                "foods": SHIPPED["foods"],
+                "profiles": SHIPPED["profiles"],
+                "links": SHIPPED["links"],
+                "ingredientLinks": SHIPPED["ingredientLinks"],
+                "ingredientOwners": SHIPPED["ingredientOwners"],
+                "cacheFoods": SHIPPED["cacheFoods"],
                 "cacheVersion": 7,
                 "facetFoods": 4_212,
                 "metadataFoods": 4_212,
@@ -123,7 +130,11 @@ class PreseedArtifactTests(unittest.TestCase):
         }
         self.assertEqual(
             before,
-            {"foods": 14_477, "profiles": 2_205, "links": 2_336},
+            {
+                "foods": SHIPPED["foods"],
+                "profiles": SHIPPED["profiles"],
+                "links": SHIPPED["links"],
+            },
         )
         self.assertEqual(
             self.connection.execute(
