@@ -82,7 +82,7 @@ measurements. `vit` and `vitb` were rejected because mass sums across compounds
 normally expressed at both microgram and milligram scales have no useful
 interpretation. The 37 individual polyphenols and eight tocopherol/tocotrienol
 isomers remain in the CSV without schema fields; their totals are retained.
-This is the final scope ruling recorded in `DECISIONS-NUT.md` §N7, not a backlog.
+This is the final scope ruling recorded in `DECISIONS-NUT.md` §N9, not a backlog.
 
 The ruling contains 66 newly populated mappings but 65 structural additions:
 `vitd` maps to the already-existing `vitamins.vitaminD`. Adding a duplicate
@@ -119,7 +119,160 @@ Seed propagation and app display require a future packet with a measured cold
 launch delta against the 1.700 s ceiling and 1.650 s paydown trigger in fixed
 decision 11.
 
-## Remaining phases
+## Phase 2 — reviewed sourcing and final accounting
 
-The Phase 2 derivation gate and the final unresolved/fill accounting are
-recorded here as they land.
+Accepted implementation: `7c7c0e9`.
+
+The honest headline is **61 populated records at the start and 68 at the
+end**:
+
+| Change | Records | Running populated total |
+| --- | ---: | ---: |
+| NUT-1 baseline | — | 61 |
+| Phase 0 wrong IFCT bindings withdrawn | −6 | 55 |
+| Late F016 wrong-species binding withdrawn | −1 | 54 |
+| Director-reviewed direct IFCT identities | +6 | 60 |
+| Direct published-literature measurements | +2 | 62 |
+| Manually resolved ambiguous IFCT identities | +6 | 68 |
+
+Thus NUT-1 added 14 defensible records and removed 7 wrong bindings. The
+explicit final provenance split is 12 newly reviewed IFCT records, 2 new
+published-literature records, and 54 pre-existing populated records. Of the 22
+ambiguous records, 6 were resolved and 16 were deferred with their candidates
+and reasons recorded.
+
+The brief asked to fill 298 unmatched records. The defensible result is not
+298 fills: it is 14 records added, 7 removed, and 178 records permanently
+unmatchable to IFCT for a documented reason. Avoiding a false species identity
+is more important than raising a coverage number.
+
+### §N1 derivation investigation: zero members
+
+No nutrient value was derived. All 13 candidates failed the §N1 rule: drying
+retention varies by temperature and variety; juice extraction does not retain
+nutrients at one uniform yield; ajwain, barley, coriander, cumin, and fenugreek
+waters are infusions; badam milk adds dairy and spices; and sattu adds roasting
+and sometimes barley. §N1 remains valid policy, but `_review.provenance` is
+`derived` on zero records.
+
+The useful recovery path was direct measurement or a manually reviewed
+identity, not a transformation multiplier.
+
+### Shared-name species failures
+
+IFCT F016 is *Eleocharis dulcis*, while the project's fresh singhara record is
+*Trapa natans*. The F016 binding on `dravya.fresh-water-chestnut` was stripped,
+its former code and a wrong-species explanation remain in `_review`, and all
+nutrient values are null. This was the seventh withdrawn binding and the one
+wrong binding already present in shipped data.
+
+Three shared-name species failures surfaced across the packet: elephant apple,
+surmai/“king mackerel”, and singhara/“water chestnut”. They are one matcher
+failure mode: an English or vernacular name shared by different organisms.
+
+### Six direct IFCT identities
+
+These are manually reviewed ratio-1.000 identity bindings with ordinary IFCT
+2017 provenance. None is derived:
+
+| Dravya | IFCT row |
+| --- | --- |
+| Fresh amla | `E021` Gooseberry |
+| Fresh green pea | `D061` Peas, fresh |
+| White/button mushroom | `J001` Button mushroom, fresh |
+| Brown lentil / whole masoor | `B014` Lentil whole, brown |
+| Split mung dal | `B010` Green gram, dal |
+| Pink elephant yam | `F017` Yam, elephant |
+
+Two plausible direct bindings were reviewed and declined. Ripe karonda was not
+bound to E032 because another karonda already uses the row and IFCT does not
+state maturity; sugar and acid change materially with ripening. Sweet parwal
+was not bound to D060 because a named sweet cultivar cannot inherit the generic
+pointed-gourd measurement. Both remain null with the declined candidate and
+reason recorded.
+
+### Two direct literature measurements
+
+Only fields measured by each study were populated:
+
+- Fresh amla juice: total sugars 5.87 g/100 g, vitamin C 550.25 mg/100 g, and
+  total polyphenols 3,220 mg/100 g. Source: Kumari and Khatkar, “Effect of
+  processing treatment on nutritional properties and phytochemical contents
+  of aonla juice,” *Journal of Food Science and Technology* 56(4), 2019,
+  2010–2015, DOI `10.1007/s13197-019-03674-0`. The record includes the reported
+  triplicate standard deviations.
+- Water-chestnut flour: protein 8.4 g/100 g, fat 0.47 g/100 g, starch
+  65.86 g/100 g, water 7.08 g/100 g, and ash 2.59 g/100 g. Source: Ahmed,
+  Al-Attar, and Arfat, “Effect of particle size on compositional, functional,
+  pasting and rheological properties of commercial water chestnut flour,”
+  *Food Hydrocolloids* 52, 2016, 888–895, DOI
+  `10.1016/j.foodhyd.2015.08.028`. The study reports no variation for the
+  whole-sample proximate values; the record notes the reported effect of
+  sieving on ash and explicitly avoids F016 because the flour is Indian
+  *Trapa natans*.
+
+### Ambiguous IFCT dispositions
+
+Six identities were resolved manually. Every losing candidate remains in
+`_review.manualResolution`:
+
+| Dravya | Selected | Losing candidates |
+| --- | --- | --- |
+| Broad bean pod | `D047` | `B007`, `B008`, `B009`, `D003`, `D048`, `E001`–`E004` |
+| Dry dates | `E017` | `E018`, `E019` |
+| Red pumpkin | `D066` | `D065` |
+| Raisins | `E058` | `E057` |
+| Raw jackfruit | `D051` | `D052`, `E030` |
+| White radish | `F010` | `F009`, `F011`, `F012` |
+
+The other 16 remain null and retain every candidate plus a food-specific
+reason: betel leaf, betel nut, elephant-foot yam, field bean, French bean,
+fresh dates, gherkin, green grapes, green peas pod, hung curd, jamun, khus
+root, manathakkali greens, niger seed, taro stem, and wild celery seed.
+
+### G4 — the 178 no-token-relation records
+
+The 178 are defined by IFCT matchability, not nullness. They have no subset or
+superset token relationship to any of the 3,435 IFCT keys and remain unmatched
+by IFCT. Of them, 176 are null; Black rice and Camel milk retain their
+pre-NUT-1 published-literature values. Zero records in this set acquired or
+changed a value during Phase 2.
+
+| Category | Count | Category | Count |
+| --- | ---: | --- | ---: |
+| preparation | 29 | medicinal | 24 |
+| spice | 22 | regional | 21 |
+| beverage | 16 | vegetable | 12 |
+| fruit | 11 | fermented | 8 |
+| grain | 7 | animal | 6 |
+| salt-mineral | 4 | sweetener | 4 |
+| oil-fat | 3 | leafy-green | 3 |
+| seed | 2 | dairy | 2 |
+| dry-fruit-nut | 2 | legume | 2 |
+
+### Final gates
+
+- Matcher: 56 strict matches, 6 manual direct matches, 6 manually resolved
+  ambiguous matches, 61 active IFCT matches, 16 ambiguous, 292 unmatched,
+  7 withdrawn, and 0 unreviewed reverse collisions.
+- Population: 376 records, 68 populated, 7 withdrawn. Comparing to the NUT-1
+  baseline gives exactly 14 newly populated and 7 newly null records.
+  Comparing Phase 2 against `bd7d4b3` finds no nutrient-value change outside
+  the 14 additions and the F016 withdrawal.
+- Two-run determinism:
+  - `dravya_foods.json`:
+    `3ed8055e5ed509f7c6fe6dcaafd4f87c3763cc7270de08ab60caeaa0dfe542ad`
+  - `ifct-unresolved.json`:
+    `7e21d9cc3f1e3084ff19b66828d39183b7b634c0b7ee54c8d8ea4e5f28e57b95`
+- Recipe panels retain the same 39-field schema. Coverage is 1,508 full,
+  3 estimated, 0 none; the remaining three are acacia gum, kokum, and neem
+  flower recipes.
+- Source and reconstructed-shipped validation both pass at 705 dravyas, 1,511
+  recipes, placeholder band 900001–900376, and mapping SHA
+  `bc7afbfce5b0ec708aec1fea387a72806bbe5e6b4fd9d48747ae01d60736441b`.
+- The full suite ran 157 tests. Its only failures are the six proven
+  pre-existing failures at `9cb6fda`: the 480 archive size gate, the three
+  WE-3 display gates, recursive `xcuserdata` ignore, and lazy search-index
+  loading.
+- No `Ayura/**/*.swift` file changed. No seed, preseed, food archive,
+  `jobs.json`, or search-cache artifact was regenerated or committed.
