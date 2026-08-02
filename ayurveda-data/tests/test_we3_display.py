@@ -105,6 +105,26 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
             warning_start,
         )
 
+    def test_ai_draft_profile_renders_not_medical_advice_disclaimer(self):
+        display = DISPLAY.read_text()
+        section = SECTION.read_text()
+        disclaimer = (
+            "AI-drafted Ayurvedic details, pending expert review. "
+            "Informational only — not medical advice."
+        )
+
+        self.assertIn('if profile.qualityState == "aiDraft"', display)
+        self.assertIn(disclaimer, display)
+        self.assertIn(
+            "qualityCaption: qualityCaption(for: profile, tierLabel: tierLabel)",
+            display,
+        )
+
+        render_start = section.index("if let caption = display.qualityCaption")
+        render_source = section[render_start:]
+        self.assertIn("Text(caption)", render_source)
+        self.assertIn(".accessibilityLabel(caption)", render_source)
+
 
 if __name__ == "__main__":
     unittest.main()
