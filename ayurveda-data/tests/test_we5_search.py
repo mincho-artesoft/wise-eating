@@ -13,7 +13,6 @@ CONSTRAINT_VALUE = FOOD_SEARCH / "Structs" / "ConstraintValue.swift"
 SEARCH_CONTEXT = FOOD_SEARCH / "Structs" / "SearchContext.swift"
 SEARCH_ENGINE = FOOD_SEARCH / "VM" / "SmartFoodSearchEngine.swift"
 SEARCH_VIEW = FOOD_SEARCH / "FoodSearchView.swift"
-GITIGNORE = ROOT / ".gitignore"
 
 
 class WE5SearchBorderCaseTests(unittest.TestCase):
@@ -297,7 +296,18 @@ struct WE5HelperHarness {
         self.assertFalse(
             (FOOD_SEARCH / "VM" / "SmartFoodSearch 3.swift").exists()
         )
-        self.assertIn("**/xcuserdata/", GITIGNORE.read_text(encoding="utf-8"))
+        ignored = subprocess.run(
+            [
+                "git",
+                "check-ignore",
+                "--no-index",
+                "--quiet",
+                "deeply/nested/xcuserdata/example.xcuserdatad",
+            ],
+            cwd=ROOT,
+            check=False,
+        )
+        self.assertEqual(ignored.returncode, 0)
 
 
 if __name__ == "__main__":

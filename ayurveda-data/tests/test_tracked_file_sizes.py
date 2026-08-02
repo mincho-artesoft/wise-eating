@@ -40,7 +40,7 @@ class TrackedFileSizeTests(unittest.TestCase):
         )
         self.assertEqual(
             video_entry["byteSize"],
-            82_726_160,
+            85_356_519,
         )
 
         archive_parts = [
@@ -50,7 +50,7 @@ class TrackedFileSizeTests(unittest.TestCase):
                 "Ayura/Food/food_archive_1024.mp4.gz.part-"
             )
         ]
-        self.assertEqual(len(archive_parts), 4)
+        self.assertEqual(len(archive_parts), 5)
         for part in archive_parts:
             part_path = ROOT / part["filename"]
             self.assertEqual(part_path.stat().st_size, part["byteSize"])

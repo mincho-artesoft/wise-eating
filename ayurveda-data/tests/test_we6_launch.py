@@ -26,14 +26,21 @@ class WE6LaunchTests(unittest.TestCase):
     def test_programmatic_search_awaits_the_lazy_index_load(self):
         source = SEARCH_ENGINE.read_text(encoding="utf-8")
         self.assertEqual(source.count("await loadDataAndWait()"), 3)
-        self.assertIn(
-            "await SearchIndexStore.shared.ensureLoaded(container: container)",
-            source,
+        load_and_wait = source[
+            source.index("private func loadDataAndWait()") :
+            source.index("private func applyLoadedIndex()")
+        ]
+        self.assertIn("await prepareForSearch()", load_and_wait)
+
+        prepare = source[
+            source.index("func prepareForSearch()") :
+            source.index("private func loadDataAndWait()")
+        ]
+        self.assertIn("await store.ensureLoaded(container: container)", prepare)
+        ensure_offset = prepare.index(
+            "await store.ensureLoaded(container: container)"
         )
-        ensure_offset = source.index(
-            "await SearchIndexStore.shared.ensureLoaded(container: container)"
-        )
-        apply_offset = source.index("applyLoadedIndex()", ensure_offset)
+        apply_offset = prepare.index("applyLoadedIndex()", ensure_offset)
         self.assertLess(ensure_offset, apply_offset)
 
     def test_view_load_wrapper_remains_nonblocking(self):

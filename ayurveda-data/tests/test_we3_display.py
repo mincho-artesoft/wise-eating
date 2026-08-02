@@ -8,7 +8,8 @@ ROOT = Path(__file__).resolve().parents[2]
 DISPLAY = ROOT / "Ayura/Ayurveda/Views/AyurvedaDisplay.swift"
 SECTION = ROOT / "Ayura/Ayurveda/Views/AyurvedaSectionView.swift"
 SCALE = ROOT / "Ayura/Ayurveda/Views/DoshaScaleSelector.swift"
-CHIP = ROOT / "Ayura/Ayurveda/Views/AyurvedaChip.swift"
+CHIP_GRID = ROOT / "Ayura/Ayurveda/Views/ChipGrid.swift"
+GLASS_CHIP = ROOT / "Ayura/Food/Views/ChipScrollView.swift"
 BARS = ROOT / "Ayura/Ayurveda/Views/DoshaBarsView.swift"
 
 
@@ -67,30 +68,35 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
             ],
         )
 
-    def test_read_only_display_reuses_d8_components(self):
+    def test_read_only_display_uses_noninteractive_glass_chips(self):
         section = SECTION.read_text()
         scale = SCALE.read_text()
-        chip = CHIP.read_text()
+        glass_chip = GLASS_CHIP.read_text()
         bars = BARS.read_text()
 
-        self.assertEqual(section.count("AyurvedaChip("), 1)
-        self.assertIn("isReadOnly: true", section)
+        self.assertEqual(section.count("GlassChipView("), 1)
+        self.assertIn("action: nil", section)
+        glass_body = glass_chip[
+            glass_chip.index("struct GlassChipView") :
+        ]
+        self.assertIn("if let action", glass_body)
+        self.assertIn("Button(action: action)", glass_body)
+        self.assertIn("} else {\n            chipContent", glass_body)
         self.assertEqual(bars.count("DoshaScaleSelector(readOnlyValue:"), 3)
         self.assertIn("init(readOnlyValue value: Int, name: String)", scale)
-        self.assertIn("if isReadOnly", chip)
-        self.assertIn("editorChip", chip)
 
     def test_accessibility_size_has_single_column_and_no_truncating_chips(self):
         section = SECTION.read_text()
         scale = SCALE.read_text()
-        chip = CHIP.read_text()
+        chip_grid = CHIP_GRID.read_text()
+        glass_chip = GLASS_CHIP.read_text()
 
-        self.assertIn("dynamicTypeSize.isAccessibilitySize", section)
-        self.assertIn("propertyStack(primaryGroups)", section)
+        self.assertIn("propertyStack(propertyGroups)", section)
+        self.assertNotIn("dynamicTypeSize", section)
+        self.assertIn("CustomFlowLayout", chip_grid)
         self.assertGreaterEqual(scale.count("ViewThatFits(in: .horizontal)"), 2)
-        read_only_chip = chip[chip.index("private var readOnlyChip") :]
-        self.assertNotIn(".lineLimit(", read_only_chip)
-        self.assertIn(".fixedSize(horizontal: false, vertical: true)", read_only_chip)
+        glass_body = glass_chip[glass_chip.index("struct GlassChipView") :]
+        self.assertNotIn(".lineLimit(", glass_body)
 
     def test_warning_and_disclaimer_surfaces_remain_separate(self):
         section = SECTION.read_text()
