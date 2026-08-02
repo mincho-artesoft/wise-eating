@@ -68,6 +68,26 @@ so the mistake stays auditable. Do not silently blank them.
 
 ---
 
+## §3.0 Phase 0.5 — wire dravya_foods.json into the build
+
+The build currently reads Ayura/Legacy/foods.json for placeholder nutrition,
+so nothing in dravya_foods.json reaches a recipe, a panel or the app. Every
+value sourced in this packet is inert until this is done, and four recipes
+are wrongly classified "estimated" today for this reason alone
+(recipe.horse-gram-soup, recipe.parwal-sabzi, recipe.tinda-sabzi,
+recipe.samak-rice-fasting).
+
+Make dravya_foods.json the source for the 376 placeholder dravyas, keyed on
+dravyaId and never on the numeric id — the placeholder band renumbers
+whenever the dravya set changes (build_seed.py:2524). Strip _review and
+dravyaId at ingest. A null stays null and must never become 0.
+
+Gate G0.5: the four recipes above move estimated → full with no new sourcing,
+and the transitional snapshot in the nutrition coverage test is updated in the
+same commit that changes it.
+
+---
+
 ## 3. Phase 1 — complete the mapping for the rows already matched
 
 Pure gain, no matching risk: these are rows whose identity is already settled.
