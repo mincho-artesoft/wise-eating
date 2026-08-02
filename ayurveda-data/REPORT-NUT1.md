@@ -41,7 +41,21 @@ NUT-1, most likely after the 714 → 705 dravya merge in `ad22c6d`.
 Job 4 must re-derive the three tiers and update §5 from measurement; it must not
 copy either decomposition merely because the total remains 2,336.
 
+## Phase 0.5 — stable placeholder-nutrition ingest
+
+`dravya_foods.json` is now ingested by stable `dravyaId`; the unstable numeric
+placeholder id, `_review`, and `dravyaId` metadata do not enter the nutrition
+panel. Null remains null, and a withdrawn Phase 0 match cannot fall back to its
+former USDA binding.
+
+- Coverage: 1,501 full / 10 estimated / 0 none → 1,505 full / 6 estimated /
+  0 none.
+- `recipe.horse-gram-soup`, `recipe.parwal-sabzi`, `recipe.tinda-sabzi`, and
+  `recipe.samak-rice-fasting` moved from estimated to full without new sourcing.
+- Two independent builds were byte-identical; the seed SHA-256 was
+  `822e16ba1bbfaef2a8c8be99ee94b6f8ced5a9ccf3affc049f696cefaa4ceaaa`.
+
 ## Remaining phases
 
-Phase 0.5, the individual-fatty-acid mapping, the Phase 1b schema director gate,
-and the final unresolved/fill accounting are recorded here as they land.
+The individual-fatty-acid mapping, the Phase 1b schema director gate, and the
+final unresolved/fill accounting are recorded here as they land.

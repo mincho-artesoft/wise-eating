@@ -99,6 +99,7 @@ NUTRIENT_CATALOG = {
     "manganese": ("minerals", "mg"),
     "fluoride": ("minerals", "µg"),
 }
+WITHDRAWN_IFCT_STATUS = "withdrawn — wrong IFCT row, see TASK-NUT1 §2"
 SAFETY_PROVENANCE = "scaffold-default"
 SAFETY_REVIEW_REQUIRED = True
 AGE_PROVENANCE_AUTHORED = "authored"
@@ -477,6 +478,12 @@ def parse_args() -> argparse.Namespace:
         default=repo_root / "Ayura" / "Legacy" / "foods.json",
         help="USDA-backed per-100g nutrient source used to build the shipped store",
     )
+    parser.add_argument(
+        "--dravya-foods",
+        type=Path,
+        default=repo_root / "ayurveda-data" / "nutrition" / "dravya_foods.json",
+        help="dravyaId-keyed per-100g nutrient source for placeholder dravyas",
+    )
     return parser.parse_args()
 
 
@@ -580,6 +587,69 @@ def load_food_nutrition(
         preview = ", ".join(str(food_id) for food_id in missing_source_ids[:10])
         raise BuildError(f"{path}: nutrient source food ids are absent from store: {preview}")
     return nutrition_by_id
+
+
+def load_dravya_food_nutrition(path: Path) -> dict[str, dict[str, float]]:
+    """Load placeholder panels by stable dravyaId, ignoring numeric food ids."""
+    try:
+        foods = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise BuildError(f"cannot load dravya nutrient source {path}: {error}") from error
+    if not isinstance(foods, list):
+        raise BuildError(f"{path}: expected a top-level array")
+
+    nutrition_by_dravya: dict[str, dict[str, float]] = {}
+    for food in foods:
+        if not isinstance(food, dict):
+            raise BuildError(f"{path}: dravya food is not an object")
+        dravya_id = food.get("dravyaId")
+        if not isinstance(dravya_id, str) or not dravya_id:
+            raise BuildError(f"{path}: dravya food has no stable dravyaId")
+        if dravya_id in nutrition_by_dravya:
+            raise BuildError(f"{path}: duplicate dravyaId {dravya_id}")
+
+        panel: dict[str, float] = {}
+        for nutrient, (section, expected_unit) in NUTRIENT_CATALOG.items():
+            entry = food.get(section, {}).get(nutrient)
+            if not isinstance(entry, dict):
+                raise BuildError(
+                    f"{path}: {dravya_id} is missing {section}.{nutrient}"
+                )
+            unit = entry.get("unit")
+            value = entry.get("value")
+            if value is not None:
+                equivalent_micrograms = {unit, expected_unit} == {"ug", "µg"}
+                if unit != expected_unit and not equivalent_micrograms:
+                    raise BuildError(
+                        f"{path}: {dravya_id} {nutrient} uses {unit!r}, "
+                        f"expected {expected_unit!r}"
+                    )
+                if not isinstance(value, (int, float)) or value < 0:
+                    raise BuildError(
+                        f"{path}: {dravya_id} {nutrient} has invalid value {value!r}"
+                    )
+                panel[nutrient] = float(value)
+        # _review, dravyaId, and the unstable numeric id deliberately do not
+        # enter the returned ingest payload.
+        nutrition_by_dravya[dravya_id] = panel
+    return nutrition_by_dravya
+
+
+def load_withdrawn_dravya_nutrition_ids(path: Path) -> set[str]:
+    try:
+        foods = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise BuildError(f"cannot load dravya nutrient source {path}: {error}") from error
+    if not isinstance(foods, list):
+        raise BuildError(f"{path}: expected a top-level array")
+    return {
+        food["dravyaId"]
+        for food in foods
+        if isinstance(food, dict)
+        and isinstance(food.get("dravyaId"), str)
+        and isinstance(food.get("_review"), dict)
+        and food["_review"].get("status") == WITHDRAWN_IFCT_STATUS
+    }
 
 
 def load_food_safety(
@@ -2214,6 +2284,48 @@ def preferred_nutrition_bindings(
     return preferred
 
 
+def merge_placeholder_nutrition(
+    assignments: dict[str, tuple[int, bool]],
+    placeholder_ids: list[str],
+    dravya_nutrition_by_id: dict[str, dict[str, float]],
+    withdrawn_dravya_ids: set[str],
+    nutrition_by_id: dict[int, dict[str, float]],
+    preferred_bindings: dict[str, int],
+) -> tuple[dict[int, dict[str, float]], dict[str, int]]:
+    """Bind placeholder panels to this build's assigned ids by dravyaId."""
+    expected = set(placeholder_ids)
+    actual = set(dravya_nutrition_by_id)
+    if actual != expected:
+        missing = sorted(expected - actual)
+        extra = sorted(actual - expected)
+        raise BuildError(
+            "dravya nutrient source must match placeholder dravyas exactly: "
+            f"missing={missing[:10]}, extra={extra[:10]}"
+        )
+
+    merged_nutrition = dict(nutrition_by_id)
+    merged_bindings = dict(preferred_bindings)
+    for dravya_id in placeholder_ids:
+        food_id, is_placeholder = assignments[dravya_id]
+        if not is_placeholder:
+            raise BuildError(f"{dravya_id}: expected a placeholder assignment")
+        if food_id in merged_nutrition:
+            raise BuildError(f"{dravya_id}: placeholder food id {food_id} already has nutrition")
+        panel = dravya_nutrition_by_id[dravya_id]
+        if panel:
+            merged_bindings[dravya_id] = food_id
+            merged_nutrition[food_id] = panel
+        elif dravya_id in withdrawn_dravya_ids:
+            # A ruled-wrong IFCT match must not fall back to the old USDA
+            # binding that Phase 0 explicitly withdrew.
+            merged_bindings.pop(dravya_id, None)
+        elif dravya_id not in merged_bindings:
+            # Keep an honestly-null placeholder addressable without turning
+            # the absence of a panel into zeroes.
+            merged_bindings[dravya_id] = food_id
+    return merged_nutrition, merged_bindings
+
+
 def rounded(value: float) -> float:
     return round(value, 12)
 
@@ -2819,6 +2931,8 @@ def build_envelope(
     store_ids: set[int],
     derived_links: list[dict[str, Any]],
     nutrition_by_id: dict[int, dict[str, float]],
+    dravya_nutrition_by_id: dict[str, dict[str, float]],
+    withdrawn_dravya_ids: set[str],
     source_safety_by_id: dict[int, dict[str, Any]],
     preferred_bindings: dict[str, int],
 ) -> tuple[dict[str, Any], list[tuple[int, str, str, list[str]]], list[str]]:
@@ -2826,6 +2940,14 @@ def build_envelope(
     validate_safety_rule_ids(dravyas, age_rules)
     assert_reserved_band_free(store_ids)
     assignments, links, contested, placeholder_ids = resolve_primary_foods(dravyas, store_ids)
+    nutrition_by_id, preferred_bindings = merge_placeholder_nutrition(
+        assignments,
+        placeholder_ids,
+        dravya_nutrition_by_id,
+        withdrawn_dravya_ids,
+        nutrition_by_id,
+        preferred_bindings,
+    )
     if len(links) != V1_LINK_COUNT:
         raise BuildError(f"v1-link gate failed: expected {V1_LINK_COUNT}, got {len(links)}")
     v1_fdc_ids = {link["fdcId"] for link in links}
@@ -3090,6 +3212,10 @@ def main() -> int:
         actual_store_path = store_path(args.store)
         store_ids = load_store_ids(actual_store_path)
         nutrition_by_id = load_food_nutrition(args.foods, store_ids)
+        dravya_nutrition_by_id = load_dravya_food_nutrition(args.dravya_foods)
+        withdrawn_dravya_ids = load_withdrawn_dravya_nutrition_ids(
+            args.dravya_foods
+        )
         source_safety_by_id = load_food_safety(args.foods, store_ids)
         source_food_catalog = load_food_catalog(args.foods, store_ids)
         source_food_names = {
@@ -3119,6 +3245,8 @@ def main() -> int:
             store_ids,
             derived_links,
             nutrition_by_id,
+            dravya_nutrition_by_id,
+            withdrawn_dravya_ids,
             source_safety_by_id,
             preferred_bindings,
         )

@@ -17,10 +17,17 @@ class RecipeNutritionTests(unittest.TestCase):
     def setUpClass(cls):
         data_root = REPO_ROOT / "ayurveda-data"
         foods_path = REPO_ROOT / "Ayura" / "Legacy" / "foods.json"
+        dravya_foods_path = data_root / "nutrition" / "dravya_foods.json"
         foods = json.loads(foods_path.read_text(encoding="utf-8"))
         cls.store_ids = {food["id"] for food in foods}
-        cls.nutrition_by_id = build_seed.load_food_nutrition(
+        cls.usda_nutrition_by_id = build_seed.load_food_nutrition(
             foods_path, cls.store_ids
+        )
+        cls.dravya_nutrition_by_id = build_seed.load_dravya_food_nutrition(
+            dravya_foods_path
+        )
+        cls.withdrawn_dravya_ids = (
+            build_seed.load_withdrawn_dravya_nutrition_ids(dravya_foods_path)
         )
         cls.source_safety_by_id = build_seed.load_food_safety(
             foods_path, cls.store_ids
@@ -35,6 +42,19 @@ class RecipeNutritionTests(unittest.TestCase):
             cls.dravyas, cls.store_ids
         )
         cls.preferred_bindings = build_seed.preferred_nutrition_bindings(bindings)
+        assignments, _, _, placeholder_ids = build_seed.resolve_primary_foods(
+            cls.dravyas, cls.store_ids
+        )
+        cls.nutrition_by_id, cls.preferred_bindings = (
+            build_seed.merge_placeholder_nutrition(
+                assignments,
+                placeholder_ids,
+                cls.dravya_nutrition_by_id,
+                cls.withdrawn_dravya_ids,
+                cls.usda_nutrition_by_id,
+                cls.preferred_bindings,
+            )
+        )
         v1_fdc_ids = set(claims)
         cls.derived_links = build_seed.load_crosswalk_links(
             data_root / "crosswalk" / "crosswalk.csv",
@@ -47,7 +67,9 @@ class RecipeNutritionTests(unittest.TestCase):
             cls.recipes,
             cls.store_ids,
             cls.derived_links,
-            cls.nutrition_by_id,
+            cls.usda_nutrition_by_id,
+            cls.dravya_nutrition_by_id,
+            cls.withdrawn_dravya_ids,
             cls.source_safety_by_id,
             cls.preferred_bindings,
         )
@@ -112,11 +134,11 @@ class RecipeNutritionTests(unittest.TestCase):
                 recipe["id"],
             )
 
-        # TRANSITIONAL, PRE-INGEST. dravya_foods.json is not wired into the build;
-        # the build reads Ayura/Legacy/foods.json. 4 of these 10 close on ingest
-        # alone, 3 on NUT-1 review, 3 are permanently unfillable. TASK-NUT1 must
-        # update this figure. See issue #3.
-        self.assertEqual(counts, {"full": 1501, "estimated": 10, "none": 0})
+        # TRANSITIONAL, POST-INGEST. dravya_foods.json is wired by dravyaId;
+        # 4 recipes closed without new sourcing. 3 remain for NUT-1 review and
+        # 3 are permanently unfillable. TASK-NUT1 must update this figure when
+        # either class changes. See issue #3.
+        self.assertEqual(counts, {"full": 1505, "estimated": 6, "none": 0})
         self.assertLessEqual(counts["none"], len(self.recipes) * 0.25)
 
     def test_panels_cover_energy_macros_all_vitamins_and_all_minerals(self):
