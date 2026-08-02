@@ -11,6 +11,7 @@ SCALE = ROOT / "Ayura/Ayurveda/Views/DoshaScaleSelector.swift"
 CHIP_GRID = ROOT / "Ayura/Ayurveda/Views/ChipGrid.swift"
 GLASS_CHIP = ROOT / "Ayura/Food/Views/ChipScrollView.swift"
 BARS = ROOT / "Ayura/Ayurveda/Views/DoshaBarsView.swift"
+EDITOR = ROOT / "Ayura/Ayurveda/Views/AyurvedaEditorSection.swift"
 
 
 class WE3DisplayTests(unittest.TestCase):
@@ -130,6 +131,23 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         render_source = section[render_start:]
         self.assertIn("Text(caption)", render_source)
         self.assertIn(".accessibilityLabel(caption)", render_source)
+
+    def test_computed_tier_preview_renders_provenance_cue(self):
+        editor = EDITOR.read_text()
+        preview_start = editor.index("private struct AyurvedaAutomaticPreview")
+        preview_source = editor[preview_start:]
+
+        self.assertIn(
+            'Text("Computed from your ingredients — updates automatically")',
+            preview_source,
+        )
+        self.assertIn("if !computation.hasIngredients", preview_source)
+        self.assertLess(
+            preview_source.index(
+                'Text("Computed from your ingredients — updates automatically")'
+            ),
+            preview_source.index("if let computed = computation.computed"),
+        )
 
 
 if __name__ == "__main__":

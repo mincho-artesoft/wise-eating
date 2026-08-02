@@ -328,7 +328,14 @@ private struct AyurvedaAutomaticPreview: View {
 
   var body: some View {
     VStack(alignment: .leading, spacing: 10) {
-      if computation.hasIngredients {
+      if !computation.hasIngredients {
+        Text("Add ingredients to see a live Ayurveda preview.")
+          .font(.caption)
+          .foregroundStyle(.secondary)
+      } else {
+        Text("Computed from your ingredients — updates automatically")
+          .font(.caption)
+          .foregroundStyle(.secondary)
         if let computed = computation.computed {
           DoshaBarsView(
             vata: computed.vata,
