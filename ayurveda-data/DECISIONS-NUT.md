@@ -115,6 +115,25 @@ placeholder ids are issued.
 Job 3 authors **zero new dravyas and 11 new recipes**. Disposition table in
 `TASK-NUT3.md`.
 
+## N7. IFCT Phase 1b stores totals, not uninterpretable mass sums or isomers
+
+**Ruling.** Store the 15 approved top-level classes and 51 approved detailed
+measurements in the source-only `dravya_foods.json` schema. Do not store IFCT
+`vit` (total vitamins by mass) or `vitb` (total vitamin-B mass): adding masses
+across compounds normally expressed on both microgram and milligram scales has
+no useful interpretation.
+
+The 37 individual polyphenol compounds and eight tocopherol/tocotrienol isomers
+remain in the source CSV without schema fields. Their published totals are
+stored. This is a final scope decision, not a backlog item to revisit by
+default.
+
+Phase 1b is source-only. It does not expand recipe nutrition panels or any
+shipped artifact. Propagation and display require a separate packet measuring
+cold launch against the 1.700 s ceiling and 1.650 s paydown trigger. Aluminium,
+arsenic, cadmium, lead, mercury and the toxic-mineral total are stored with
+`notForDisplay`; no consumer view may surface them under this ruling.
+
 ---
 
 ## Open items this session did not resolve

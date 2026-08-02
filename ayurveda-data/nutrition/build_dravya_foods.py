@@ -16,9 +16,9 @@ WHAT IS REAL HERE AND WHAT IS NOT — read before trusting a number
         preparation text, already authored. Not invented.
     category                                  : mapped from the dravya category.
         Deterministic, no judgement.
-    macronutrients / vitamins / minerals /
-    lipids / aminoAcids / carbDetails /
-    sterols / other                           : NULL unless listed in VALUES
+    macronutrients / vitamins / minerals / lipids / aminoAcids / carbDetails /
+    sterols / other, plus the NUT-1 source-only groups in SHAPE
+                                                : NULL unless listed in VALUES
         below. A null means "not established here", never zero.
 
     Every food carries `_review` with the provenance of its numbers and a note
@@ -28,27 +28,84 @@ WHAT IS REAL HERE AND WHAT IS NOT — read before trusting a number
 import argparse, glob, json, os, sqlite3, sys
 
 SHAPE = {
- "macronutrients": ["carbohydrates","protein","fat","fiber","totalSugars"],
+ "macronutrients": ["carbohydrates","protein","fat","fiber","totalSugars",
+   "insolubleFiber","solubleFiber"],
  "vitamins": ["vitaminA_RAE","retinol","caroteneAlpha","caroteneBeta","cryptoxanthinBeta",
    "luteinZeaxanthin","lycopene","vitaminB1_Thiamin","vitaminB2_Riboflavin","vitaminB3_Niacin",
    "vitaminB5_PantothenicAcid","vitaminB6","vitaminB12","folateDFE","folateFood","folateTotal",
-   "folicAcid","vitaminC","vitaminD","vitaminE","vitaminK","choline"],
+   "folicAcid","vitaminC","vitaminD","vitaminE","vitaminK","choline","biotin","vitaminD2",
+   "vitaminD3","vitaminD3_25Hydroxy","vitaminK1","vitaminK2"],
  "minerals": ["calcium","iron","magnesium","phosphorus","potassium","sodium","selenium","zinc",
-   "copper","manganese","fluoride"],
- "carbDetails": ["starch","sucrose","glucose","fructose","lactose","maltose","galactose"],
+   "copper","manganese","fluoride","aluminium","arsenic","cadmium","chromium","cobalt","lead",
+   "lithium","mercury","molybdenum","nickel"],
+ "carbDetails": ["starch","sucrose","glucose","fructose","lactose","maltose","galactose",
+   "availableCarbohydratesBySummation"],
  "sterols": ["phytosterols","betaSitosterol","campesterol","stigmasterol"],
  "other": ["alcoholEthyl","caffeine","theobromine","cholesterol","energyKcal","water","weightG",
    "ash","betaine","alkalinityPH"],
  "aminoAcids": ["alanine","arginine","asparticAcid","cystine","glutamicAcid","glycine","histidine",
    "isoleucine","leucine","lysine","methionine","phenylalanine","proline","threonine","tryptophan",
    "tyrosine","valine","serine","hydroxyproline"],
+ "aminoAcidTotals": ["total","essential","conditionallyEssential","nonEssential"],
+ "carotenoids": ["total","totalCarotenes","totalXanthophylls","betaCaroteneEquivalents","zeaxanthin",
+   "gammaCarotene"],
+ "polyphenols": ["total"],
+ "vitaminForms": ["totalTocopherols","totalTocotrienols"],
+ "organicAcids": ["total","cisAconiticAcid","citricAcid","fumaricAcid","malicAcid","quinicAcid",
+   "succinicAcid","tartaricAcid"],
+ "antiNutrients": ["phytate","saponins"],
+ "mineralTotals": ["essentialQuantity","essentialTrace","possiblyEssentialTrace","nonEssentialTrace",
+   "toxic"],
+ "oligosaccharides": ["total","raffinose","stachyose","verbascose","ajugose"],
+ "oxalates": ["total","soluble","insoluble"],
 }
+SOURCE_ONLY_LIPIDS = ["totalUnsaturated","totalEssentialFattyAcids","totalCisFattyAcids",
+  "totalCisOmega3","totalCisOmega6","totalCisOmega9","totalCisOmega5","totalCisOmega7","sfa11_0",
+  "pufa22_2"]
 UNITS = {"macronutrients":"g","carbDetails":"g","sterols":"mg","aminoAcids":"g",
-         "lipids":"g","minerals":"mg","vitamins":"mg"}
+         "lipids":"g","minerals":"mg","vitamins":"mg","aminoAcidTotals":"g",
+         "carotenoids":"ug","polyphenols":"mg","vitaminForms":"mg","organicAcids":"g",
+         "antiNutrients":"mg","mineralTotals":"mg","oligosaccharides":"g","oxalates":"mg"}
 MG = {"vitaminA_RAE":"ug","caroteneBeta":"ug","vitaminB12":"ug","folateDFE":"ug","folateFood":"ug",
       "folateTotal":"ug","folicAcid":"ug","vitaminD":"ug","vitaminK":"ug","selenium":"ug",
       "cryptoxanthinBeta":"ug","caroteneAlpha":"ug","luteinZeaxanthin":"ug","lycopene":"ug",
-      "retinol":"ug"}
+      "retinol":"ug","biotin":"ug","vitaminD2":"ug","vitaminD3":"ug","vitaminD3_25Hydroxy":"ug",
+      "vitaminK1":"ug","vitaminK2":"ug","aluminium":"ug","arsenic":"ug","cadmium":"ug",
+      "chromium":"ug","cobalt":"ug","lead":"ug","lithium":"ug","mercury":"ug","molybdenum":"ug",
+      "nickel":"ug","possiblyEssentialTrace":"ug","nonEssentialTrace":"ug","toxic":"ug"}
+NOT_FOR_DISPLAY = {
+    ("minerals", "aluminium"), ("minerals", "arsenic"),
+    ("minerals", "cadmium"), ("minerals", "lead"),
+    ("minerals", "mercury"), ("mineralTotals", "toxic"),
+}
+WITHDRAWN_IFCT = {
+    "dravya.petha-murabba": ("D001", "Ash gourd"),
+    "dravya.kanda-poha": ("A011", "Rice flakes"),
+    "dravya.foxtail-millet": ("A017", "Varagu"),
+    "dravya.elephant-apple": ("E067", "Wood Apple"),
+    "dravya.mosambi-juice": ("E034", "Lime, sweet, pulp"),
+    "dravya.chickpea-white": ("B002", "Bengal gram, whole"),
+}
+REVIEWED_COLLISIONS = {
+    "dravya.ash-gourd-juice-flesh": {
+        "ifctCode": "D001",
+        "status": "reviewed — identical by construction",
+        "note": "Two raw ash-gourd cuts share the same measured base row.",
+    },
+    "dravya.ash-gourd-strips": {
+        "ifctCode": "D001",
+        "status": "reviewed — identical by construction",
+        "note": "Two raw ash-gourd cuts share the same measured base row.",
+    },
+    "dravya.round-melon-tinda-punjabi": {
+        "ifctCode": "D073",
+        "status": "reviewed — duplicate identity, see GitHub issue #4",
+    },
+    "dravya.tinda": {
+        "ifctCode": "D073",
+        "status": "reviewed — duplicate identity, see GitHub issue #4",
+    },
+}
 OTHER_UNITS = {"energyKcal":"kcal","water":"g","weightG":"g","ash":"g","cholesterol":"mg",
                "caffeine":"mg","theobromine":"mg","alcoholEthyl":"g","betaine":"mg","alkalinityPH":""}
 CATEGORY = {
@@ -146,13 +203,13 @@ def blank(group):
     for f in SHAPE[group]:
         if group == "other":
             unit = OTHER_UNITS.get(f, "g")
-        elif group == "vitamins":
-            unit = MG.get(f, "mg")
-        elif group == "minerals":
-            unit = MG.get(f, "mg")
+        elif group in {"vitamins", "minerals", "mineralTotals"}:
+            unit = MG.get(f, UNITS[group])
         else:
             unit = UNITS[group]
         out[f] = {"value": None, "unit": unit}
+        if (group, f) in NOT_FOR_DISPLAY:
+            out[f]["notForDisplay"] = True
     return out
 
 
@@ -173,9 +230,9 @@ def main():
     lip = SHAPE.get("lipids")
     if a.lipids_from:
         src = json.load(open(os.path.expanduser(a.lipids_from)))[0]
-        SHAPE["lipids"] = list(src["lipids"])
+        SHAPE["lipids"] = list(src["lipids"]) + SOURCE_ONLY_LIPIDS
     elif not lip:
-        SHAPE["lipids"] = []
+        SHAPE["lipids"] = list(SOURCE_ONLY_LIPIDS)
 
     out, filled = [], 0
     for fid, did in sorted(prof.items()):
@@ -190,7 +247,9 @@ def main():
         rec = {"id": fid, "name": row[0], "dravyaId": did,
                "minAgeMonths": row[1], "allergens": [], "desctiption": desc}
         for g in ("macronutrients","lipids","vitamins","minerals","aminoAcids",
-                  "carbDetails","sterols","other"):
+                  "carbDetails","sterols","other","aminoAcidTotals","carotenoids",
+                  "polyphenols","vitaminForms","organicAcids","antiNutrients",
+                  "mineralTotals","oligosaccharides","oxalates"):
             rec[g] = blank(g) if g in SHAPE else {}
         v = VALUES.get(did)
         if v:
@@ -208,6 +267,15 @@ def main():
                               "status": "NOT YET SOURCED — every nutrient is null, not zero",
                               "currentMinAgeMonths": row[1],
                               "proposedMinAgeMonths": prop, "ageReason": why}
+        if did in WITHDRAWN_IFCT:
+            code, name = WITHDRAWN_IFCT[did]
+            rec["_review"].update({
+                "status": "withdrawn — wrong IFCT row, see TASK-NUT1 §2",
+                "withdrawnIfctCode": code,
+                "withdrawnIfctName": name,
+            })
+        if did in REVIEWED_COLLISIONS:
+            rec["_review"]["reverseCollision"] = REVIEWED_COLLISIONS[did]
         out.append(rec)
     json.dump(out, open(a.out, "w"), indent=1, ensure_ascii=False)
     print(f"wrote {a.out}: {len(out)} dravya foods, {filled} with proposed nutrition, "

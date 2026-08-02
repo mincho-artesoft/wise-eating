@@ -25,21 +25,29 @@ rows=list(csv.DictReader(open(B+'ifct2017-compositions.csv',encoding='utf-8',err
 C={c.split('; ')[-1]:c for c in rows[0]}
 byc={r[C['code']]:r for r in rows}
 G=1000.0; U=1000000.0            # IFCT stores every nutrient as g/100g
+# IFCT header labels are not reliable. Verify every new mapping against the
+# data, never against the header:
+#   `glu`   is labelled "Glucose" but is glutamic acid in the amino-acid
+#           block. Free glucose is the separate `glus` column.
+#   `amiac` is labelled "Essential Amino acids" but equals essential +
+#           conditionally essential + non-essential amino acids.
 MAP={
  'macronutrients':{'carbohydrates':('choavldf',1),'protein':('protcnt',1),'fat':('fatce',1),
-                   'fiber':('fibtg',1),'totalSugars':('fsugar',1)},
+                   'fiber':('fibtg',1),'totalSugars':('fsugar',1),
+                   'insolubleFiber':('fibins',1),'solubleFiber':('fibsol',1)},
  'other':{'water':('water',1),'ash':('ash',1),'cholesterol':('cholc',G)},
- 'minerals':{'calcium':('ca',G),'iron':('fe',G),'magnesium':('mg',G),'phosphorus':('p',G),
-             'potassium':('k',G),'sodium':('na',G),'zinc':('zn',G),'copper':('cu',G),
-             'manganese':('mn',G),'selenium':('se',U)},
  'vitamins':{'vitaminC':('vitc',G),'vitaminE':('vite',G),'vitaminB1_Thiamin':('thia',G),
              'vitaminB2_Riboflavin':('ribf',G),'vitaminB3_Niacin':('nia',G),
              'vitaminB5_PantothenicAcid':('pantac',G),'vitaminB6':('vitb6c',G),
              'folateTotal':('folsum',U),'vitaminK':('vitk',U),'vitaminA_RAE':('vita',U),
              'retinol':('retol',U),'caroteneBeta':('cartb',U),'caroteneAlpha':('carta',U),
-             'cryptoxanthinBeta':('crypxb',U),'lycopene':('lycpn',U),'luteinZeaxanthin':('lutn',U)},
+             'cryptoxanthinBeta':('crypxb',U),'lycopene':('lycpn',U),'luteinZeaxanthin':('lutn',U),
+             'vitaminD':('vitd',U),'biotin':('biot',U),'vitaminD2':('ergcal',U),
+             'vitaminD3':('chocal',U),'vitaminD3_25Hydroxy':('doh25',U),
+             'vitaminK1':('vitk1',U),'vitaminK2':('vitk2',U)},
  'carbDetails':{'starch':('starch',1),'sucrose':('sucs',1),'glucose':('glus',1),
-                'fructose':('frus',1),'maltose':('mals',1),'lactose':('lactose',1)},
+                'fructose':('frus',1),'maltose':('mals',1),'lactose':('lactose',1),
+                'availableCarbohydratesBySummation':('cho',1)},
  'sterols':{'phytosterols':('phystr',G),'campesterol':('camt',G),'stigmasterol':('stgstr',G),
             'betaSitosterol':('stostrb',G)},
  'aminoAcids':{'histidine':('his',1),'isoleucine':('ile',1),'leucine':('leu',1),'lysine':('lys',1),
@@ -49,6 +57,10 @@ MAP={
    'serine':('ser',1),'tyrosine':('tyr',1)},
  'lipids':{'totalSaturated':('fasat',1),'totalMonounsaturated':('fams',1),
    'totalPolyunsaturated':('fapu',1),'totalTrans':('fatrn',1),
+   'totalUnsaturated':('fauns',1),'totalEssentialFattyAcids':('faess',1),
+   'totalCisFattyAcids':('facis',1),'totalCisOmega3':('facn3',1),
+   'totalCisOmega6':('facn6',1),'totalCisOmega9':('facn9',1),
+   'totalCisOmega5':('facn5',1),'totalCisOmega7':('facn7',1),
    'sfa4_0':('f4d0',1),'sfa6_0':('f6d0',1),'sfa8_0':('f8d0',1),
    'sfa10_0':('f10d0',1),'sfa12_0':('f12d0',1),'sfa14_0':('f14d0',1),
    'sfa15_0':('f15d0',1),'sfa16_0':('f16d0',1),'sfa18_0':('f18d0',1),
@@ -60,7 +72,31 @@ MAP={
    'pufa18_2':('f18d2cn6',1),'pufa18_3':('f18d3n3',1),
    'pufa20_2':('f20d2n6',1),'pufa20_3':('f20d3n6',1),
    'pufa20_4':('f20d4n6',1),'pufa20_5':('f20d5n3',1),
-   'pufa22_5':('f22d5n3',1),'pufa22_6':('f22d6n3',1)},
+   'pufa22_5':('f22d5n3',1),'pufa22_6':('f22d6n3',1),
+   'sfa11_0':('f11d0',1),'pufa22_2':('f22d2n6',1)},
+ 'aminoAcidTotals':{'total':('amiac',1),'essential':('amiace',1),
+   'conditionallyEssential':('amiacce',1),'nonEssential':('amiacne',1)},
+ 'carotenoids':{'total':('cartoid',U),'totalCarotenes':('carot',U),
+   'totalXanthophylls':('xantp',U),'betaCaroteneEquivalents':('cartbeq',U),
+   'zeaxanthin':('zea',U),'gammaCarotene':('cartg',U)},
+ 'polyphenols':{'total':('polyph',G)},
+ 'vitaminForms':{'totalTocopherols':('tocph',G),'totalTocotrienols':('toctr',G)},
+ 'organicAcids':{'total':('orgac',1),'cisAconiticAcid':('caconac',1),
+   'citricAcid':('citac',1),'fumaricAcid':('fumac',1),'malicAcid':('malac',1),
+   'quinicAcid':('quinac',1),'succinicAcid':('sucac',1),'tartaricAcid':('tarac',1)},
+ 'antiNutrients':{'phytate':('phytac',G),'saponins':('sapon',G)},
+ 'mineralTotals':{'essentialQuantity':('mnrleq',G),'essentialTrace':('mnrlet',G),
+   'possiblyEssentialTrace':('mnrlpet',U),'nonEssentialTrace':('mnrlnet',U),
+   'toxic':('mnrltx',U)},
+ 'oligosaccharides':{'total':('olsac',1),'raffinose':('rafs',1),
+   'stachyose':('stas',1),'verbascose':('vers',1),'ajugose':('ajgs',1)},
+ 'oxalates':{'total':('oxalt',G),'soluble':('oxals',G),'insoluble':('oxali',G)},
+ 'minerals':{'calcium':('ca',G),'iron':('fe',G),'magnesium':('mg',G),'phosphorus':('p',G),
+             'potassium':('k',G),'sodium':('na',G),'zinc':('zn',G),'copper':('cu',G),
+             'manganese':('mn',G),'selenium':('se',U),'aluminium':('al',U),
+             'arsenic':('as',U),'cadmium':('cd',U),'chromium':('cr',U),'cobalt':('co',U),
+             'lead':('pb',U),'lithium':('li',U),'mercury':('hg',U),
+             'molybdenum':('mo',U),'nickel':('ni',U)},
 }
 def num(r,k):
     v=(r.get(C.get(k,''),'') or '').strip()
@@ -96,13 +132,14 @@ for rec in foods:
     withdrawn=WITHDRAWN.get(rec['dravyaId'])
     if not withdrawn: continue
     code,iname=withdrawn
+    r=byc[code]
     for grp in MAP:
         for field in rec.get(grp,{}).values():
             field['value']=None
     previous=rec['_review']
     rec['_review']={
-        'source':previous.get('source'),
-        'spread':previous.get('spread'),
+        'source':f'IFCT 2017 [{code}] {iname}',
+        'spread':f"regions sampled: {r[C['regn']]}; each nutrient has a published SD in the _e column of ifct2017-compositions.csv",
         'status':WITHDRAWN_STATUS,
         'withdrawnIfctCode':code,
         'withdrawnIfctName':iname,

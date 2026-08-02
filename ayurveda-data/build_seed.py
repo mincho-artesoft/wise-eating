@@ -99,6 +99,79 @@ NUTRIENT_CATALOG = {
     "manganese": ("minerals", "mg"),
     "fluoride": ("minerals", "µg"),
 }
+# NUT-1 Phase 1b is source-only. These 66 approved IFCT mappings are validated
+# at ingest but deliberately excluded from recipe panels and shipped artifacts.
+# One mapping, vitamins.vitaminD, targets an existing field; the other 65 are
+# new structural fields in dravya_foods.json. A future propagation packet must
+# measure cold launch before expanding NUTRIENT_CATALOG.
+SOURCE_ONLY_NUTRIENT_CATALOG = {
+    ("macronutrients", "insolubleFiber"): ("g", False),
+    ("macronutrients", "solubleFiber"): ("g", False),
+    ("carbDetails", "availableCarbohydratesBySummation"): ("g", False),
+    ("vitamins", "vitaminD"): ("ug", False),
+    ("vitamins", "biotin"): ("ug", False),
+    ("vitamins", "vitaminD2"): ("ug", False),
+    ("vitamins", "vitaminD3"): ("ug", False),
+    ("vitamins", "vitaminD3_25Hydroxy"): ("ug", False),
+    ("vitamins", "vitaminK1"): ("ug", False),
+    ("vitamins", "vitaminK2"): ("ug", False),
+    ("minerals", "aluminium"): ("ug", True),
+    ("minerals", "arsenic"): ("ug", True),
+    ("minerals", "cadmium"): ("ug", True),
+    ("minerals", "chromium"): ("ug", False),
+    ("minerals", "cobalt"): ("ug", False),
+    ("minerals", "lead"): ("ug", True),
+    ("minerals", "lithium"): ("ug", False),
+    ("minerals", "mercury"): ("ug", True),
+    ("minerals", "molybdenum"): ("ug", False),
+    ("minerals", "nickel"): ("ug", False),
+    ("lipids", "totalUnsaturated"): ("g", False),
+    ("lipids", "totalEssentialFattyAcids"): ("g", False),
+    ("lipids", "totalCisFattyAcids"): ("g", False),
+    ("lipids", "totalCisOmega3"): ("g", False),
+    ("lipids", "totalCisOmega6"): ("g", False),
+    ("lipids", "totalCisOmega9"): ("g", False),
+    ("lipids", "totalCisOmega5"): ("g", False),
+    ("lipids", "totalCisOmega7"): ("g", False),
+    ("lipids", "sfa11_0"): ("g", False),
+    ("lipids", "pufa22_2"): ("g", False),
+    ("aminoAcidTotals", "total"): ("g", False),
+    ("aminoAcidTotals", "essential"): ("g", False),
+    ("aminoAcidTotals", "conditionallyEssential"): ("g", False),
+    ("aminoAcidTotals", "nonEssential"): ("g", False),
+    ("carotenoids", "total"): ("ug", False),
+    ("carotenoids", "totalCarotenes"): ("ug", False),
+    ("carotenoids", "totalXanthophylls"): ("ug", False),
+    ("carotenoids", "betaCaroteneEquivalents"): ("ug", False),
+    ("carotenoids", "zeaxanthin"): ("ug", False),
+    ("carotenoids", "gammaCarotene"): ("ug", False),
+    ("polyphenols", "total"): ("mg", False),
+    ("vitaminForms", "totalTocopherols"): ("mg", False),
+    ("vitaminForms", "totalTocotrienols"): ("mg", False),
+    ("organicAcids", "total"): ("g", False),
+    ("organicAcids", "cisAconiticAcid"): ("g", False),
+    ("organicAcids", "citricAcid"): ("g", False),
+    ("organicAcids", "fumaricAcid"): ("g", False),
+    ("organicAcids", "malicAcid"): ("g", False),
+    ("organicAcids", "quinicAcid"): ("g", False),
+    ("organicAcids", "succinicAcid"): ("g", False),
+    ("organicAcids", "tartaricAcid"): ("g", False),
+    ("antiNutrients", "phytate"): ("mg", False),
+    ("antiNutrients", "saponins"): ("mg", False),
+    ("mineralTotals", "essentialQuantity"): ("mg", False),
+    ("mineralTotals", "essentialTrace"): ("mg", False),
+    ("mineralTotals", "possiblyEssentialTrace"): ("ug", False),
+    ("mineralTotals", "nonEssentialTrace"): ("ug", False),
+    ("mineralTotals", "toxic"): ("ug", True),
+    ("oligosaccharides", "total"): ("g", False),
+    ("oligosaccharides", "raffinose"): ("g", False),
+    ("oligosaccharides", "stachyose"): ("g", False),
+    ("oligosaccharides", "verbascose"): ("g", False),
+    ("oligosaccharides", "ajugose"): ("g", False),
+    ("oxalates", "total"): ("mg", False),
+    ("oxalates", "soluble"): ("mg", False),
+    ("oxalates", "insoluble"): ("mg", False),
+}
 WITHDRAWN_IFCT_STATUS = "withdrawn — wrong IFCT row, see TASK-NUT1 §2"
 SAFETY_PROVENANCE = "scaffold-default"
 SAFETY_REVIEW_REQUIRED = True
@@ -608,6 +681,37 @@ def load_dravya_food_nutrition(path: Path) -> dict[str, dict[str, float]]:
         if dravya_id in nutrition_by_dravya:
             raise BuildError(f"{path}: duplicate dravyaId {dravya_id}")
 
+        for (section, nutrient), (
+            expected_unit,
+            expected_not_for_display,
+        ) in SOURCE_ONLY_NUTRIENT_CATALOG.items():
+            entry = food.get(section, {}).get(nutrient)
+            if not isinstance(entry, dict):
+                raise BuildError(
+                    f"{path}: {dravya_id} is missing source-only "
+                    f"{section}.{nutrient}"
+                )
+            unit = entry.get("unit")
+            equivalent_micrograms = {unit, expected_unit} == {"ug", "µg"}
+            if unit != expected_unit and not equivalent_micrograms:
+                raise BuildError(
+                    f"{path}: {dravya_id} source-only {nutrient} uses "
+                    f"{unit!r}, expected {expected_unit!r}"
+                )
+            if bool(entry.get("notForDisplay", False)) != expected_not_for_display:
+                raise BuildError(
+                    f"{path}: {dravya_id} source-only {nutrient} has invalid "
+                    "notForDisplay policy"
+                )
+            value = entry.get("value")
+            if value is not None and (
+                not isinstance(value, (int, float)) or value < 0
+            ):
+                raise BuildError(
+                    f"{path}: {dravya_id} source-only {nutrient} has invalid "
+                    f"value {value!r}"
+                )
+
         panel: dict[str, float] = {}
         for nutrient, (section, expected_unit) in NUTRIENT_CATALOG.items():
             entry = food.get(section, {}).get(nutrient)
@@ -628,7 +732,8 @@ def load_dravya_food_nutrition(path: Path) -> dict[str, dict[str, float]]:
                     raise BuildError(
                         f"{path}: {dravya_id} {nutrient} has invalid value {value!r}"
                     )
-                panel[nutrient] = float(value)
+                if (section, nutrient) not in SOURCE_ONLY_NUTRIENT_CATALOG:
+                    panel[nutrient] = float(value)
         # _review, dravyaId, and the unstable numeric id deliberately do not
         # enter the returned ingest payload.
         nutrition_by_dravya[dravya_id] = panel

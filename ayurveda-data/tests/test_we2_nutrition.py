@@ -173,6 +173,57 @@ class RecipeNutritionTests(unittest.TestCase):
             self.assertIn("energyKcal", panel["perServing"])
             self.assertIn("energyKcal", panel["per100g"])
 
+    def test_phase1b_fields_are_validated_but_not_propagated(self):
+        self.assertEqual(len(build_seed.SOURCE_ONLY_NUTRIENT_CATALOG), 66)
+        self.assertEqual(len(build_seed.NUTRIENT_CATALOG), 39)
+
+        source = json.loads(
+            (REPO_ROOT / "ayurveda-data/nutrition/dravya_foods.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        structural_fields = {
+            (section, nutrient)
+            for food in source
+            for section, fields in food.items()
+            if isinstance(fields, dict)
+            for nutrient, entry in fields.items()
+            if isinstance(entry, dict) and {"value", "unit"} <= set(entry)
+        }
+        self.assertEqual(len(structural_fields), 187)
+        self.assertEqual(
+            len(set(build_seed.SOURCE_ONLY_NUTRIENT_CATALOG) - {
+                ("vitamins", "vitaminD")
+            }),
+            65,
+        )
+
+        source_only_names = {
+            nutrient for _, nutrient in build_seed.SOURCE_ONLY_NUTRIENT_CATALOG
+        }
+        for panel in self.dravya_nutrition_by_id.values():
+            self.assertTrue(set(panel) <= set(build_seed.NUTRIENT_CATALOG))
+            self.assertFalse(set(panel) & (source_only_names - {"vitaminD"}))
+            self.assertNotIn("vitaminD", panel)
+
+        self.assertEqual(
+            {
+                pair
+                for pair, (_, not_for_display) in (
+                    build_seed.SOURCE_ONLY_NUTRIENT_CATALOG.items()
+                )
+                if not_for_display
+            },
+            {
+                ("minerals", "aluminium"),
+                ("minerals", "arsenic"),
+                ("minerals", "cadmium"),
+                ("minerals", "lead"),
+                ("minerals", "mercury"),
+                ("mineralTotals", "toxic"),
+            },
+        )
+
     def test_unresolved_ingredient_is_reported_without_fabricated_values(self):
         recipe = {
             "id": "recipe.coverage-test",

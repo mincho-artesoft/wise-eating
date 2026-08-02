@@ -75,7 +75,51 @@ IFCT `f11d0` and `f22d2n6` have no identity-equivalent field in the current
 schema and were not forced into a differently named field. Conversely, schema
 fields for acids IFCT does not measure remain null.
 
+## Phase 1b — ruled source-only IFCT classes
+
+The director approved 66 source mappings: 15 top-level classes and 51 detailed
+measurements. `vit` and `vitb` were rejected because mass sums across compounds
+normally expressed at both microgram and milligram scales have no useful
+interpretation. The 37 individual polyphenols and eight tocopherol/tocotrienol
+isomers remain in the CSV without schema fields; their totals are retained.
+This is the final scope ruling recorded in `DECISIONS-NUT.md` §N7, not a backlog.
+
+The ruling contains 66 newly populated mappings but 65 structural additions:
+`vitd` maps to the already-existing `vitamins.vitaminD`. Adding a duplicate
+field merely to make the structural delta 66 would contradict that explicit
+ruling. The measured counts are therefore:
+
+- Schema fields per dravya source row: 122 → 187, exactly 65 additions.
+- Ever-populated fields: 94 → 160, exactly 66 newly populated mappings.
+- New non-null cells: 3,250 in new fields plus 50 in existing `vitaminD`.
+- Existing non-null values changed: 0.
+- Approved mappings present: 66/66; rejected or deferred mappings present: 0.
+- Two-run `dravya_foods.json` SHA-256:
+  `f1dcc367e0783ecc0873186cf38910b420cb39c9693cba9141b9647daacea173`.
+- Two-run `ifct-unresolved.json` SHA-256:
+  `13c9da97f67d3c14a741dfc0afe5c5e7a022d57cd9645c3455dca990348b0825`.
+
+The source-only ingest catalogue has 66 entries and validates their units,
+values and display policy. The recipe catalogue remains at 39 fields. Recipe
+panels before and after Phase 1b were byte-identical, SHA-256
+`63bb2dc4897eb0cd2ff6c566615f1b61ed8e8cdb0453de4839b99dd19bdc1612`.
+No Phase 1b field entered a recipe panel or shipped artifact.
+
+The full suite ran 153 tests with only the six failures proven pre-existing at
+`9cb6fda`: the 480 archive size gate, three WE-3 display tests, recursive
+`xcuserdata`, and lazy search-index loading. Source and reconstructed-shipped
+validation both passed at 705 dravyas, 1,511 recipes, placeholder band
+900001–900376, and mapping SHA
+`bc7afbfce5b0ec708aec1fea387a72806bbe5e6b4fd9d48747ae01d60736441b`.
+
+Aluminium, arsenic, cadmium, lead, mercury and the toxic-mineral total carry
+`notForDisplay: true`. None is wired to a view.
+
+Seed propagation and app display require a future packet with a measured cold
+launch delta against the 1.700 s ceiling and 1.650 s paydown trigger in fixed
+decision 11.
+
 ## Remaining phases
 
-The Phase 1b schema director gate and the final unresolved/fill accounting are
+The Phase 2 derivation gate and the final unresolved/fill accounting are
 recorded here as they land.

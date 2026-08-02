@@ -23,6 +23,20 @@ so their food row carries no macros, no micronutrients and no description.
     REJECTED_usda_analogue_matcher.py
                                 kept as a warning, not a tool. See below.
 
+## IFCT HEADER LABELS ARE NOT RELIABLE
+
+Verify every new mapping against the data and its position in the composition
+table, never against the header alone.
+
+- `glu` is labelled "Glucose", but it sits in the amino-acid block and is
+  glutamic acid. Free glucose is the separate `glus` column.
+- `amiac` is labelled "Essential Amino acids", but its value equals the sum of
+  `amiace` essential + `amiacce` conditionally essential + `amiacne`
+  non-essential amino acids. It is the total amino-acid mass.
+
+Both labels have already produced plausible-looking wrong mappings during
+review; they are data hazards, not cosmetic naming issues.
+
 ## THERE IS NO SYNONYM LIST
 
 match_ifct.py builds its synonyms from IFCT's own `Local Name; lang` column,
