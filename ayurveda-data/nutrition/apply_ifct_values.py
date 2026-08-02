@@ -48,7 +48,19 @@ MAP={
    'asparticAcid':('asp',1),'glutamicAcid':('glu',1),'glycine':('gly',1),'proline':('pro',1),
    'serine':('ser',1),'tyrosine':('tyr',1)},
  'lipids':{'totalSaturated':('fasat',1),'totalMonounsaturated':('fams',1),
-           'totalPolyunsaturated':('fapu',1),'totalTrans':('fatrn',1)},
+   'totalPolyunsaturated':('fapu',1),'totalTrans':('fatrn',1),
+   'sfa4_0':('f4d0',1),'sfa6_0':('f6d0',1),'sfa8_0':('f8d0',1),
+   'sfa10_0':('f10d0',1),'sfa12_0':('f12d0',1),'sfa14_0':('f14d0',1),
+   'sfa15_0':('f15d0',1),'sfa16_0':('f16d0',1),'sfa18_0':('f18d0',1),
+   'sfa20_0':('f20d0',1),'sfa22_0':('f22d0',1),'sfa24_0':('f24d0',1),
+   'mufa14_1':('f14d1cn5',1),'mufa16_1':('f16d1cn7',1),
+   'mufa18_1':('f18d1cn9',1),'mufa20_1':('f20d1cn9',1),
+   'mufa22_1':('f22d1cn9',1),'mufa24_1':('f24d1cn9',1),
+   'tfa18_1_t':('f18d1tn9',1),
+   'pufa18_2':('f18d2cn6',1),'pufa18_3':('f18d3n3',1),
+   'pufa20_2':('f20d2n6',1),'pufa20_3':('f20d3n6',1),
+   'pufa20_4':('f20d4n6',1),'pufa20_5':('f20d5n3',1),
+   'pufa22_5':('f22d5n3',1),'pufa22_6':('f22d6n3',1)},
 }
 def num(r,k):
     v=(r.get(C.get(k,''),'') or '').strip()

@@ -2134,23 +2134,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -2158,15 +2158,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.346,
     "unit": "g"
    },
    "sfa17_0": {
@@ -2174,23 +2174,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0745,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0239,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.025,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0206,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -2198,7 +2198,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0169,
     "unit": "g"
    },
    "mufa17_1": {
@@ -2206,19 +2206,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.0408,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -2226,7 +2226,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -2238,11 +2238,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.125,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.407,
     "unit": "g"
    },
    "pufa18_4": {
@@ -2250,19 +2250,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -2274,11 +2274,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -8896,23 +8896,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -8920,15 +8920,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0008,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.018,
     "unit": "g"
    },
    "sfa17_0": {
@@ -8936,23 +8936,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0059,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0006,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -8960,7 +8960,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0009,
     "unit": "g"
    },
    "mufa17_1": {
@@ -8968,19 +8968,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.0066,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -8988,7 +8988,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -9000,11 +9000,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.0749,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0016,
     "unit": "g"
    },
    "pufa18_4": {
@@ -9012,19 +9012,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -9036,11 +9036,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -9423,23 +9423,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -9447,15 +9447,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0008,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.018,
     "unit": "g"
    },
    "sfa17_0": {
@@ -9463,23 +9463,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0059,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0006,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -9487,7 +9487,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0009,
     "unit": "g"
    },
    "mufa17_1": {
@@ -9495,19 +9495,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.0066,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -9515,7 +9515,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -9527,11 +9527,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.0749,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0016,
     "unit": "g"
    },
    "pufa18_4": {
@@ -9539,19 +9539,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -9563,11 +9563,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -10470,23 +10470,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -10494,15 +10494,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.18,
     "unit": "g"
    },
    "sfa17_0": {
@@ -10510,23 +10510,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0311,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -10534,7 +10534,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa17_1": {
@@ -10542,19 +10542,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.384,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0075,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -10562,7 +10562,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -10574,11 +10574,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.433,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0257,
     "unit": "g"
    },
    "pufa18_4": {
@@ -10586,19 +10586,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -10610,11 +10610,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -11512,23 +11512,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0004,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0028,
     "unit": "g"
    },
    "sfa13_0": {
@@ -11536,15 +11536,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0034,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.103,
     "unit": "g"
    },
    "sfa17_0": {
@@ -11552,23 +11552,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0186,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0016,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0009,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -11576,7 +11576,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0042,
     "unit": "g"
    },
    "mufa17_1": {
@@ -11584,19 +11584,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.107,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -11604,7 +11604,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -11616,11 +11616,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.087,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0662,
     "unit": "g"
    },
    "pufa18_4": {
@@ -11628,19 +11628,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -11652,11 +11652,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -13074,23 +13074,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -13098,15 +13098,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.729,
     "unit": "g"
    },
    "sfa17_0": {
@@ -13114,23 +13114,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.128,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0182,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -13138,7 +13138,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.007,
     "unit": "g"
    },
    "mufa17_1": {
@@ -13146,19 +13146,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 1.04,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -13166,7 +13166,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -13178,11 +13178,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 1.844,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.14,
     "unit": "g"
    },
    "pufa18_4": {
@@ -13190,19 +13190,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -13214,11 +13214,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -13596,23 +13596,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -13620,15 +13620,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0019,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.125,
     "unit": "g"
    },
    "sfa17_0": {
@@ -13636,23 +13636,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0488,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.052,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0232,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0221,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -13660,7 +13660,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0019,
     "unit": "g"
    },
    "mufa17_1": {
@@ -13668,19 +13668,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.0298,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -13688,7 +13688,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -13700,11 +13700,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.154,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0441,
     "unit": "g"
    },
    "pufa18_4": {
@@ -13712,19 +13712,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -13736,11 +13736,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -14118,23 +14118,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -14142,15 +14142,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.0196,
     "unit": "g"
    },
    "sfa17_0": {
@@ -14158,23 +14158,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0036,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0011,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0013,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.002,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -14182,7 +14182,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0006,
     "unit": "g"
    },
    "mufa17_1": {
@@ -14190,19 +14190,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.0021,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -14210,7 +14210,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -14222,11 +14222,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.0141,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0144,
     "unit": "g"
    },
    "pufa18_4": {
@@ -14234,19 +14234,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -14258,11 +14258,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -29720,23 +29720,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -29744,15 +29744,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.162,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 1.162,
     "unit": "g"
    },
    "sfa17_0": {
@@ -29760,23 +29760,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.33,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0155,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -29784,7 +29784,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.273,
     "unit": "g"
    },
    "mufa17_1": {
@@ -29792,19 +29792,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.91,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0534,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -29812,7 +29812,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -29824,11 +29824,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.214,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa18_4": {
@@ -29836,19 +29836,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.09,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0263,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.12,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.123,
     "unit": "g"
    },
    "pufa21_5": {
@@ -29860,11 +29860,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.242,
     "unit": "g"
    },
    "pufa2_4": {
@@ -30762,23 +30762,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -30786,15 +30786,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.0561,
     "unit": "g"
    },
    "sfa17_0": {
@@ -30802,23 +30802,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0066,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -30826,7 +30826,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa17_1": {
@@ -30834,19 +30834,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.0059,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -30854,7 +30854,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -30866,11 +30866,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.099,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0323,
     "unit": "g"
    },
    "pufa18_4": {
@@ -30878,19 +30878,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -30902,11 +30902,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -34404,23 +34404,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.23,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.34,
     "unit": "g"
    },
    "sfa13_0": {
@@ -34428,15 +34428,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 1.6,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 4.792,
     "unit": "g"
    },
    "sfa17_0": {
@@ -34444,23 +34444,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 1.755,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0881,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0287,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0171,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -34468,7 +34468,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.385,
     "unit": "g"
    },
    "mufa17_1": {
@@ -34476,19 +34476,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 3.914,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -34496,7 +34496,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -34508,11 +34508,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.206,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.233,
     "unit": "g"
    },
    "pufa18_4": {
@@ -34520,19 +34520,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -34544,11 +34544,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -35446,23 +35446,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -35470,15 +35470,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.382,
     "unit": "g"
    },
    "sfa17_0": {
@@ -35486,23 +35486,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.058,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0133,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -35510,7 +35510,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0079,
     "unit": "g"
    },
    "mufa17_1": {
@@ -35518,19 +35518,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.871,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0118,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -35538,7 +35538,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -35550,11 +35550,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 2.22,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.117,
     "unit": "g"
    },
    "pufa18_4": {
@@ -35562,19 +35562,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -35586,11 +35586,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -38570,23 +38570,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -38594,15 +38594,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.0649,
     "unit": "g"
    },
    "sfa17_0": {
@@ -38610,23 +38610,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0217,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0085,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0066,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0052,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -38634,7 +38634,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa17_1": {
@@ -38642,19 +38642,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.0302,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -38662,7 +38662,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -38674,11 +38674,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.0847,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0634,
     "unit": "g"
    },
    "pufa18_4": {
@@ -38686,19 +38686,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -38710,11 +38710,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -46372,23 +46372,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -46396,15 +46396,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.284,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 2.641,
     "unit": "g"
    },
    "sfa17_0": {
@@ -46412,23 +46412,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.667,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0153,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0073,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -46436,7 +46436,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.084,
     "unit": "g"
    },
    "mufa17_1": {
@@ -46444,19 +46444,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 3.015,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0995,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -46464,7 +46464,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -46476,11 +46476,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.86,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa18_4": {
@@ -46488,19 +46488,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0495,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0642,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0602,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0225,
     "unit": "g"
    },
    "pufa21_5": {
@@ -46512,11 +46512,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0475,
     "unit": "g"
    },
    "pufa2_4": {
@@ -57818,23 +57818,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0003,
     "unit": "g"
    },
    "sfa13_0": {
@@ -57842,15 +57842,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0018,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.065,
     "unit": "g"
    },
    "sfa17_0": {
@@ -57858,23 +57858,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0145,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0027,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0015,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0016,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -57882,7 +57882,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0009,
     "unit": "g"
    },
    "mufa17_1": {
@@ -57890,19 +57890,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.1,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0021,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0015,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -57910,7 +57910,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -57922,11 +57922,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.0978,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0062,
     "unit": "g"
    },
    "pufa18_4": {
@@ -57934,19 +57934,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -57958,11 +57958,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -63020,23 +63020,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.004,
     "unit": "g"
    },
    "sfa13_0": {
@@ -63044,15 +63044,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0374,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.735,
     "unit": "g"
    },
    "sfa17_0": {
@@ -63060,23 +63060,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.944,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0498,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -63084,7 +63084,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.042,
     "unit": "g"
    },
    "mufa17_1": {
@@ -63092,19 +63092,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.879,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -63112,7 +63112,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -63124,11 +63124,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.368,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0565,
     "unit": "g"
    },
    "pufa18_4": {
@@ -63136,19 +63136,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.362,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -63160,11 +63160,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.138,
     "unit": "g"
    },
    "pufa2_4": {
@@ -67702,23 +67702,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -67726,15 +67726,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0018,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.0481,
     "unit": "g"
    },
    "sfa17_0": {
@@ -67742,23 +67742,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0201,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0029,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0023,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0018,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -67766,7 +67766,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0014,
     "unit": "g"
    },
    "mufa17_1": {
@@ -67774,19 +67774,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.0113,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -67794,7 +67794,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -67806,11 +67806,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.135,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0371,
     "unit": "g"
    },
    "pufa18_4": {
@@ -67818,19 +67818,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -67842,11 +67842,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -71864,23 +71864,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -71888,15 +71888,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.187,
     "unit": "g"
    },
    "sfa17_0": {
@@ -71904,23 +71904,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0398,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -71928,7 +71928,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa17_1": {
@@ -71936,19 +71936,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.0887,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -71956,7 +71956,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -71968,11 +71968,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.0438,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0411,
     "unit": "g"
    },
    "pufa18_4": {
@@ -71980,19 +71980,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -72004,11 +72004,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -74986,23 +74986,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0177,
     "unit": "g"
    },
    "sfa13_0": {
@@ -75010,15 +75010,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 1.65,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 6.091,
     "unit": "g"
    },
    "sfa17_0": {
@@ -75026,23 +75026,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 1.468,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0356,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0236,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -75050,7 +75050,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 2.225,
     "unit": "g"
    },
    "mufa17_1": {
@@ -75058,19 +75058,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 3.695,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.101,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -75078,7 +75078,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -75090,11 +75090,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.136,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa18_4": {
@@ -75102,19 +75102,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.209,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0491,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.146,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.925,
     "unit": "g"
    },
    "pufa21_5": {
@@ -75126,11 +75126,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.232,
     "unit": "g"
    },
    "pufa2_4": {
@@ -76548,23 +76548,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -76572,15 +76572,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.114,
     "unit": "g"
    },
    "sfa17_0": {
@@ -76588,23 +76588,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0136,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0044,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0027,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -76612,7 +76612,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa17_1": {
@@ -76620,19 +76620,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.0689,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -76640,7 +76640,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -76652,11 +76652,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.207,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0517,
     "unit": "g"
    },
    "pufa18_4": {
@@ -76664,19 +76664,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -76688,11 +76688,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -87992,23 +87992,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -88016,15 +88016,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.0429,
     "unit": "g"
    },
    "sfa17_0": {
@@ -88032,23 +88032,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0205,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0034,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -88056,7 +88056,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0036,
     "unit": "g"
    },
    "mufa17_1": {
@@ -88064,19 +88064,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.0205,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -88084,7 +88084,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -88096,11 +88096,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.0451,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0075,
     "unit": "g"
    },
    "pufa18_4": {
@@ -88108,19 +88108,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -88132,11 +88132,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -92674,23 +92674,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.259,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.375,
     "unit": "g"
    },
    "sfa13_0": {
@@ -92698,15 +92698,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 1.932,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 7.138,
     "unit": "g"
    },
    "sfa17_0": {
@@ -92714,23 +92714,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 3.099,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0612,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.043,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0282,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -92738,7 +92738,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.398,
     "unit": "g"
    },
    "mufa17_1": {
@@ -92746,19 +92746,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 5.266,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -92766,7 +92766,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -92778,11 +92778,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.525,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.265,
     "unit": "g"
    },
    "pufa18_4": {
@@ -92790,19 +92790,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -92814,11 +92814,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -95796,23 +95796,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -95820,15 +95820,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.211,
     "unit": "g"
    },
    "sfa17_0": {
@@ -95836,23 +95836,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0284,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0038,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0022,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -95860,7 +95860,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0032,
     "unit": "g"
    },
    "mufa17_1": {
@@ -95868,19 +95868,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.291,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0027,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -95888,7 +95888,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -95900,11 +95900,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.576,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.021,
     "unit": "g"
    },
    "pufa18_4": {
@@ -95912,19 +95912,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -95936,11 +95936,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -100478,23 +100478,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -100502,15 +100502,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.487,
     "unit": "g"
    },
    "sfa17_0": {
@@ -100518,23 +100518,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.102,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -100542,7 +100542,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa17_1": {
@@ -100550,19 +100550,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.868,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -100570,7 +100570,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -100582,11 +100582,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 1.23,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0472,
     "unit": "g"
    },
    "pufa18_4": {
@@ -100594,19 +100594,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -100618,11 +100618,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -105680,23 +105680,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -105704,15 +105704,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.146,
     "unit": "g"
    },
    "sfa17_0": {
@@ -105720,23 +105720,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0306,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -105744,7 +105744,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa17_1": {
@@ -105752,19 +105752,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.0523,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -105772,7 +105772,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -105784,11 +105784,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.256,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0783,
     "unit": "g"
    },
    "pufa18_4": {
@@ -105796,19 +105796,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -105820,11 +105820,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -107762,23 +107762,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -107786,15 +107786,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.0797,
     "unit": "g"
    },
    "sfa17_0": {
@@ -107802,23 +107802,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0113,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -107826,7 +107826,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa17_1": {
@@ -107834,19 +107834,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.112,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -107854,7 +107854,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -107866,11 +107866,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.266,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0701,
     "unit": "g"
    },
    "pufa18_4": {
@@ -107878,19 +107878,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -107902,11 +107902,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -112446,23 +112446,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -112470,15 +112470,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.32,
     "unit": "g"
    },
    "sfa17_0": {
@@ -112486,23 +112486,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0978,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0079,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0048,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0028,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -112510,7 +112510,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa17_1": {
@@ -112518,19 +112518,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.0722,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -112538,7 +112538,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -112550,11 +112550,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.609,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.24,
     "unit": "g"
    },
    "pufa18_4": {
@@ -112562,19 +112562,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -112586,11 +112586,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -114008,23 +114008,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -114032,15 +114032,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.233,
     "unit": "g"
    },
    "sfa17_0": {
@@ -114048,23 +114048,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0413,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -114072,7 +114072,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa17_1": {
@@ -114080,19 +114080,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.0272,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -114100,7 +114100,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -114112,11 +114112,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.43,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.18,
     "unit": "g"
    },
    "pufa18_4": {
@@ -114124,19 +114124,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -114148,11 +114148,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -127012,23 +127012,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -127036,15 +127036,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0022,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.107,
     "unit": "g"
    },
    "sfa17_0": {
@@ -127052,23 +127052,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0457,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0042,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0031,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0022,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -127076,7 +127076,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0057,
     "unit": "g"
    },
    "mufa17_1": {
@@ -127084,19 +127084,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.162,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -127104,7 +127104,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -127116,11 +127116,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.362,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0187,
     "unit": "g"
    },
    "pufa18_4": {
@@ -127128,19 +127128,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -127152,11 +127152,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -128054,23 +128054,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -128078,15 +128078,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.003,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.0728,
     "unit": "g"
    },
    "sfa17_0": {
@@ -128094,23 +128094,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.015,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0023,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0014,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0014,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -128118,7 +128118,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa17_1": {
@@ -128126,19 +128126,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.0132,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -128146,7 +128146,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -128158,11 +128158,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.0919,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0204,
     "unit": "g"
    },
    "pufa18_4": {
@@ -128170,19 +128170,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -128194,11 +128194,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -129616,23 +129616,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -129640,15 +129640,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.035,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.009,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.259,
     "unit": "g"
    },
    "sfa17_0": {
@@ -129656,23 +129656,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.136,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0029,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -129680,7 +129680,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0503,
     "unit": "g"
    },
    "mufa17_1": {
@@ -129688,19 +129688,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.143,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0047,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -129708,7 +129708,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -129720,11 +129720,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.0146,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa18_4": {
@@ -129732,19 +129732,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0013,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.001,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0651,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0639,
     "unit": "g"
    },
    "pufa21_5": {
@@ -129756,11 +129756,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.035,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.275,
     "unit": "g"
    },
    "pufa2_4": {
@@ -135858,23 +135858,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -135882,15 +135882,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.29,
     "unit": "g"
    },
    "sfa17_0": {
@@ -135898,23 +135898,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0279,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -135922,7 +135922,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa17_1": {
@@ -135930,19 +135930,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.585,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -135950,7 +135950,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -135962,11 +135962,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.362,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0686,
     "unit": "g"
    },
    "pufa18_4": {
@@ -135974,19 +135974,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -135998,11 +135998,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -138980,23 +138980,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -139004,15 +139004,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.152,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0236,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.936,
     "unit": "g"
    },
    "sfa17_0": {
@@ -139020,23 +139020,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.469,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.017,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0129,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -139044,7 +139044,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.154,
     "unit": "g"
    },
    "mufa17_1": {
@@ -139052,19 +139052,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.602,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0348,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0274,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -139072,7 +139072,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -139084,11 +139084,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.0713,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa18_4": {
@@ -139096,19 +139096,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0121,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0132,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.259,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.116,
     "unit": "g"
    },
    "pufa21_5": {
@@ -139120,11 +139120,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.13,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.74,
     "unit": "g"
    },
    "pufa2_4": {
@@ -140022,23 +140022,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -140046,15 +140046,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0014,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.0528,
     "unit": "g"
    },
    "sfa17_0": {
@@ -140062,23 +140062,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0078,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0032,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.004,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -140086,7 +140086,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa17_1": {
@@ -140094,19 +140094,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.0445,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -140114,7 +140114,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -140126,11 +140126,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.066,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0096,
     "unit": "g"
    },
    "pufa18_4": {
@@ -140138,19 +140138,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -140162,11 +140162,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -144184,23 +144184,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -144208,15 +144208,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.261,
     "unit": "g"
    },
    "sfa17_0": {
@@ -144224,23 +144224,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0237,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -144248,7 +144248,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa17_1": {
@@ -144256,19 +144256,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.425,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -144276,7 +144276,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -144288,11 +144288,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.553,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0244,
     "unit": "g"
    },
    "pufa18_4": {
@@ -144300,19 +144300,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -144324,11 +144324,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -146266,23 +146266,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -146290,15 +146290,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0055,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.0453,
     "unit": "g"
    },
    "sfa17_0": {
@@ -146306,23 +146306,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0053,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -146330,7 +146330,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0095,
     "unit": "g"
    },
    "mufa17_1": {
@@ -146338,19 +146338,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.0168,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -146358,7 +146358,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -146370,11 +146370,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.0103,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0379,
     "unit": "g"
    },
    "pufa18_4": {
@@ -146382,19 +146382,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -146406,11 +146406,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -147308,23 +147308,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0069,
     "unit": "g"
    },
    "sfa13_0": {
@@ -147332,15 +147332,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.337,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 2.234,
     "unit": "g"
    },
    "sfa17_0": {
@@ -147348,23 +147348,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.571,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0138,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0195,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -147372,7 +147372,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.123,
     "unit": "g"
    },
    "mufa17_1": {
@@ -147380,19 +147380,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 2.401,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0931,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -147400,7 +147400,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -147412,11 +147412,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.531,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa18_4": {
@@ -147424,19 +147424,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0466,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0449,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0535,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0236,
     "unit": "g"
    },
    "pufa21_5": {
@@ -147448,11 +147448,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0467,
     "unit": "g"
    },
    "pufa2_4": {
@@ -149390,23 +149390,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -149414,15 +149414,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0016,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.0362,
     "unit": "g"
    },
    "sfa17_0": {
@@ -149430,23 +149430,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0074,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0009,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0014,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0016,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -149454,7 +149454,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0009,
     "unit": "g"
    },
    "mufa17_1": {
@@ -149462,19 +149462,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.0057,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -149482,7 +149482,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -149494,11 +149494,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.0465,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0304,
     "unit": "g"
    },
    "pufa18_4": {
@@ -149506,19 +149506,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -149530,11 +149530,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -153556,23 +153556,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -153580,15 +153580,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.343,
     "unit": "g"
    },
    "sfa17_0": {
@@ -153596,23 +153596,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0453,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -153620,7 +153620,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.035,
     "unit": "g"
    },
    "mufa17_1": {
@@ -153628,19 +153628,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.22,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -153648,7 +153648,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -153660,11 +153660,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.233,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.125,
     "unit": "g"
    },
    "pufa18_4": {
@@ -153672,19 +153672,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -153696,11 +153696,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -156158,23 +156158,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -156182,15 +156182,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.325,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.034,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 1.352,
     "unit": "g"
    },
    "sfa17_0": {
@@ -156198,23 +156198,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.464,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0289,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0177,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0077,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -156222,7 +156222,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.431,
     "unit": "g"
    },
    "mufa17_1": {
@@ -156230,19 +156230,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.603,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0262,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0066,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0122,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -156250,7 +156250,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -156262,11 +156262,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.06,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa18_4": {
@@ -156274,19 +156274,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0099,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0119,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.14,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.422,
     "unit": "g"
    },
    "pufa21_5": {
@@ -156298,11 +156298,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.115,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.626,
     "unit": "g"
    },
    "pufa2_4": {
@@ -162400,23 +162400,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -162424,15 +162424,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.0357,
     "unit": "g"
    },
    "sfa17_0": {
@@ -162440,23 +162440,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0018,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0017,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0018,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -162464,7 +162464,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa17_1": {
@@ -162472,19 +162472,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.0075,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -162492,7 +162492,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -162504,11 +162504,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.0422,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0092,
     "unit": "g"
    },
    "pufa18_4": {
@@ -162516,19 +162516,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -162540,11 +162540,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -167082,23 +167082,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -167106,15 +167106,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.119,
     "unit": "g"
    },
    "sfa17_0": {
@@ -167122,23 +167122,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0208,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -167146,7 +167146,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa17_1": {
@@ -167154,19 +167154,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.0297,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -167174,7 +167174,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -167186,11 +167186,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.145,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0283,
     "unit": "g"
    },
    "pufa18_4": {
@@ -167198,19 +167198,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -167222,11 +167222,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -168644,23 +168644,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -168668,15 +168668,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.0654,
     "unit": "g"
    },
    "sfa17_0": {
@@ -168684,23 +168684,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.011,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -168708,7 +168708,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0083,
     "unit": "g"
    },
    "mufa17_1": {
@@ -168716,19 +168716,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.0269,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -168736,7 +168736,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -168748,11 +168748,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.0678,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0166,
     "unit": "g"
    },
    "pufa18_4": {
@@ -168760,19 +168760,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -168784,11 +168784,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -178006,23 +178006,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -178030,15 +178030,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0016,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.0362,
     "unit": "g"
    },
    "sfa17_0": {
@@ -178046,23 +178046,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0074,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0009,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0014,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0016,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -178070,7 +178070,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0009,
     "unit": "g"
    },
    "mufa17_1": {
@@ -178078,19 +178078,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.0057,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -178098,7 +178098,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -178110,11 +178110,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.0465,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0304,
     "unit": "g"
    },
    "pufa18_4": {
@@ -178122,19 +178122,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -178146,11 +178146,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -181132,23 +181132,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -181156,15 +181156,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.221,
     "unit": "g"
    },
    "sfa17_0": {
@@ -181172,23 +181172,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0546,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -181196,7 +181196,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa17_1": {
@@ -181204,19 +181204,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.186,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -181224,7 +181224,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -181236,11 +181236,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.176,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.566,
     "unit": "g"
    },
    "pufa18_4": {
@@ -181248,19 +181248,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -181272,11 +181272,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -182694,23 +182694,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -182718,15 +182718,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.211,
     "unit": "g"
    },
    "sfa17_0": {
@@ -182734,23 +182734,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0474,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -182758,7 +182758,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa17_1": {
@@ -182766,19 +182766,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.161,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -182786,7 +182786,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -182798,11 +182798,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.117,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.601,
     "unit": "g"
    },
    "pufa18_4": {
@@ -182810,19 +182810,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -182834,11 +182834,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -183736,23 +183736,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.37,
     "unit": "g"
    },
    "sfa13_0": {
@@ -183760,15 +183760,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 1.19,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 53.1,
     "unit": "g"
    },
    "sfa17_0": {
@@ -183776,23 +183776,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 5.98,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.81,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -183800,7 +183800,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa17_1": {
@@ -183808,19 +183808,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 29.19,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -183828,7 +183828,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 4.68,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -183840,11 +183840,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 4.69,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa18_4": {
@@ -183852,19 +183852,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -183876,11 +183876,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -191018,23 +191018,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -191042,15 +191042,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.236,
     "unit": "g"
    },
    "sfa17_0": {
@@ -191058,23 +191058,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.041,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -191082,7 +191082,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa17_1": {
@@ -191090,19 +191090,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.0785,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -191110,7 +191110,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -191122,11 +191122,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.585,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0517,
     "unit": "g"
    },
    "pufa18_4": {
@@ -191134,19 +191134,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -191158,11 +191158,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -191540,23 +191540,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -191564,15 +191564,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.191,
     "unit": "g"
    },
    "sfa17_0": {
@@ -191580,23 +191580,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.0146,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -191604,7 +191604,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa17_1": {
@@ -191612,19 +191612,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.149,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -191632,7 +191632,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -191644,11 +191644,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.697,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.0449,
     "unit": "g"
    },
    "pufa18_4": {
@@ -191656,19 +191656,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -191680,11 +191680,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {
@@ -193622,23 +193622,23 @@
     "unit": "g"
    },
    "sfa4_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa6_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa8_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa10_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa12_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa13_0": {
@@ -193646,15 +193646,15 @@
     "unit": "g"
    },
    "sfa14_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa15_0": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "sfa16_0": {
-    "value": null,
+    "value": 0.657,
     "unit": "g"
    },
    "sfa17_0": {
@@ -193662,23 +193662,23 @@
     "unit": "g"
    },
    "sfa18_0": {
-    "value": null,
+    "value": 0.162,
     "unit": "g"
    },
    "sfa20_0": {
-    "value": null,
+    "value": 0.028,
     "unit": "g"
    },
    "sfa22_0": {
-    "value": null,
+    "value": 0.0162,
     "unit": "g"
    },
    "sfa24_0": {
-    "value": null,
+    "value": 0.013,
     "unit": "g"
    },
    "mufa14_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa15_1": {
@@ -193686,7 +193686,7 @@
     "unit": "g"
    },
    "mufa16_1": {
-    "value": null,
+    "value": 0.0354,
     "unit": "g"
    },
    "mufa17_1": {
@@ -193694,19 +193694,19 @@
     "unit": "g"
    },
    "mufa18_1": {
-    "value": null,
+    "value": 0.559,
     "unit": "g"
    },
    "mufa20_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa22_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "mufa24_1": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa16_1_t": {
@@ -193714,7 +193714,7 @@
     "unit": "g"
    },
    "tfa18_1_t": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "tfa22_1_t": {
@@ -193726,11 +193726,11 @@
     "unit": "g"
    },
    "pufa18_2": {
-    "value": null,
+    "value": 0.799,
     "unit": "g"
    },
    "pufa18_3": {
-    "value": null,
+    "value": 0.636,
     "unit": "g"
    },
    "pufa18_4": {
@@ -193738,19 +193738,19 @@
     "unit": "g"
    },
    "pufa20_2": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_3": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_4": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa20_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa21_5": {
@@ -193762,11 +193762,11 @@
     "unit": "g"
    },
    "pufa22_5": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa22_6": {
-    "value": null,
+    "value": 0.0,
     "unit": "g"
    },
    "pufa2_4": {

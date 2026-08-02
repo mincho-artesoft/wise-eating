@@ -55,7 +55,27 @@ former USDA binding.
 - Two independent builds were byte-identical; the seed SHA-256 was
   `822e16ba1bbfaef2a8c8be99ee94b6f8ced5a9ccf3affc049f696cefaa4ceaaa`.
 
+## Phase 1a — individual fatty acids
+
+The existing 44-field lipid schema now receives every identity-compatible IFCT
+individual-fatty-acid column: 12 saturated, 6 monounsaturated, 1 trans, and
+8 polyunsaturated fields. All source columns and destination fields are grams
+per 100 g with multiplier 1.
+
+- Ever-populated schema fields: 67 → 94.
+- New non-null cells: 1,350 across 27 lipid fields.
+- Existing non-null cells changed: 0.
+- Matcher population stayed 56 exact / 22 ambiguous / 298 unmatched, with
+  0 unreviewed reverse collisions.
+- Applying `match_ifct.py` and `apply_ifct_values.py` twice was byte-identical:
+  - `dravya_foods.json`: `ee29daf6bc1c43cec1b9f0c0bf51166a4212521fe640057c1f36b82bc9a1bbe1`
+  - `ifct-unresolved.json`: `13c9da97f67d3c14a741dfc0afe5c5e7a022d57cd9645c3455dca990348b0825`
+
+IFCT `f11d0` and `f22d2n6` have no identity-equivalent field in the current
+schema and were not forced into a differently named field. Conversely, schema
+fields for acids IFCT does not measure remain null.
+
 ## Remaining phases
 
-The individual-fatty-acid mapping, the Phase 1b schema director gate, and the
-final unresolved/fill accounting are recorded here as they land.
+The Phase 1b schema director gate and the final unresolved/fill accounting are
+recorded here as they land.
