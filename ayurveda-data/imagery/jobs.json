@@ -1,5 +1,5 @@
 {
-  "count": 1880,
+  "count": 1877,
   "createdBy": "build_batches.py",
   "styleHash": "c8d83786a68f",
   "jobs": [
@@ -2182,24 +2182,6 @@
       }
     },
     {
-      "id": "img-c16ff65a51",
-      "type": "image",
-      "prompt": "Fresh cream (malai). A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
-      "settings": {
-        "aspectRatio": "1:1",
-        "model": "Nano Banana 2"
-      },
-      "output": {
-        "filename": "dravya-fresh-cream-malai",
-        "quality": "original"
-      },
-      "_row": {
-        "kind": "dravya",
-        "name": "Fresh cream (malai)",
-        "frameKey": "Fresh cream (malai)"
-      }
-    },
-    {
       "id": "img-01658e1144",
       "type": "image",
       "prompt": "Fresh hyacinth beans (lilva). A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
@@ -4213,24 +4195,6 @@
         "kind": "dravya",
         "name": "Pomfret",
         "frameKey": "Pomfret"
-      }
-    },
-    {
-      "id": "img-f2b22f6133",
-      "type": "image",
-      "prompt": "Powdered jaggery (shakkar). A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
-      "settings": {
-        "aspectRatio": "1:1",
-        "model": "Nano Banana 2"
-      },
-      "output": {
-        "filename": "dravya-powdered-jaggery-shakkar",
-        "quality": "original"
-      },
-      "_row": {
-        "kind": "dravya",
-        "name": "Powdered jaggery (shakkar)",
-        "frameKey": "Powdered jaggery (shakkar)"
       }
     },
     {
@@ -6265,24 +6229,6 @@
         "kind": "dravya",
         "name": "Vetiver root",
         "frameKey": "Vetiver root"
-      }
-    },
-    {
-      "id": "img-7e0756eb87",
-      "type": "image",
-      "prompt": "Vida salt. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
-      "settings": {
-        "aspectRatio": "1:1",
-        "model": "Nano Banana 2"
-      },
-      "output": {
-        "filename": "dravya-vida-salt",
-        "quality": "original"
-      },
-      "_row": {
-        "kind": "dravya",
-        "name": "Vida salt",
-        "frameKey": "Vida salt"
       }
     },
     {
@@ -13972,24 +13918,6 @@
       }
     },
     {
-      "id": "img-566245aaeb",
-      "type": "image",
-      "prompt": "Date Banana Smoothie, made with Soft dates, pitted, Ripe banana, Whole milk, warmed and cooled, Green cardamom, Ghee. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
-      "settings": {
-        "aspectRatio": "1:1",
-        "model": "Nano Banana 2"
-      },
-      "output": {
-        "filename": "recipe-date-banana-smoothie",
-        "quality": "original"
-      },
-      "_row": {
-        "kind": "recipe",
-        "name": "Date Banana Smoothie",
-        "frameKey": "Date Banana Smoothie"
-      }
-    },
-    {
       "id": "img-9df9bcc156",
       "type": "image",
       "prompt": "Date Milk, made with Whole cow milk, Soft dates, Green cardamom, served as a drink. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
@@ -14023,6 +13951,24 @@
         "kind": "recipe",
         "name": "Date-Raisin Avaleha-Style Preserve",
         "frameKey": "Date-Raisin Avaleha-Style Preserve"
+      }
+    },
+    {
+      "id": "img-ec8d13a3f0",
+      "type": "image",
+      "prompt": "Date-banana Smoothie, made with Soft dates, pitted, Ripe banana, Whole milk, warmed and cooled, Green cardamom, Ghee. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "recipe-date-banana-smoothie",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "recipe",
+        "name": "Date-banana Smoothie",
+        "frameKey": "Date-banana Smoothie"
       }
     },
     {

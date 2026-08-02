@@ -1,5 +1,5 @@
 {
-  "totalToGenerate": 1880,
+  "totalToGenerate": 1877,
   "batchSize": 100,
   "batches": 19,
   "reuseWithoutGeneration": 293,
@@ -732,12 +732,6 @@
       "frameKey": "Fresh amla"
     },
     {
-      "filename": "dravya-fresh-cream-malai",
-      "kind": "dravya",
-      "name": "Fresh cream (malai)",
-      "frameKey": "Fresh cream (malai)"
-    },
-    {
       "filename": "dravya-fresh-hyacinth-beans-lilva",
       "kind": "dravya",
       "name": "Fresh hyacinth beans (lilva)",
@@ -1408,12 +1402,6 @@
       "kind": "dravya",
       "name": "Pomfret",
       "frameKey": "Pomfret"
-    },
-    {
-      "filename": "dravya-powdered-jaggery-shakkar",
-      "kind": "dravya",
-      "name": "Powdered jaggery (shakkar)",
-      "frameKey": "Powdered jaggery (shakkar)"
     },
     {
       "filename": "dravya-psyllium-husk",
@@ -2092,12 +2080,6 @@
       "kind": "dravya",
       "name": "Vetiver root",
       "frameKey": "Vetiver root"
-    },
-    {
-      "filename": "dravya-vida-salt",
-      "kind": "dravya",
-      "name": "Vida salt",
-      "frameKey": "Vida salt"
     },
     {
       "filename": "dravya-vidari-kanda",
@@ -4662,12 +4644,6 @@
       "frameKey": "Date Almond-Milk Warmer"
     },
     {
-      "filename": "recipe-date-banana-smoothie",
-      "kind": "recipe",
-      "name": "Date Banana Smoothie",
-      "frameKey": "Date Banana Smoothie"
-    },
-    {
       "filename": "recipe-date-milk",
       "kind": "recipe",
       "name": "Date Milk",
@@ -4678,6 +4654,12 @@
       "kind": "recipe",
       "name": "Date-Raisin Avaleha-Style Preserve",
       "frameKey": "Date-Raisin Avaleha-Style Preserve"
+    },
+    {
+      "filename": "recipe-date-banana-smoothie",
+      "kind": "recipe",
+      "name": "Date-banana Smoothie",
+      "frameKey": "Date-banana Smoothie"
     },
     {
       "filename": "recipe-dill-cardamom-infusion",

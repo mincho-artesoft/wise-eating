@@ -110,20 +110,17 @@ def main():
         for k, v in list(dupes.items())[:5]:
             print(f"    {k} <- {v}")
 
-    missing = [k for k in fmap if k not in zkey]
     extra = [k for k in zkey if k not in fmap]
-    print(f"  frame_map keys with no image in the zip : {len(missing)}")
-    for k in missing[:10]:
-        print(f"    {k}")
     print(f"  zip images not in frame_map            : {len(extra)}")
     for k in extra[:10]:
         print(f"    {k}")
-    if missing and not a.allow_missing:
-        sys.exit("\nREFUSING — a missing frame does not leave a gap, it shifts every later "
-                 "frame by one and every food after it shows the wrong picture. "
-                 "Resolve, or pass --allow-missing for a diagnostic run.")
 
-    # ---- the new images -----------------------------------------------------
+    # ---- generated images ---------------------------------------------------
+    # On the first unified build these are all additions to the legacy ZIP.
+    # On subsequent builds most are already keys in frame_map.json and are the
+    # source material for those existing frames. Treating the ZIP as the only
+    # source for an existing key makes an incremental rebuild reject every
+    # generated frame before it can consider this directory.
     newfiles, newclaims = {}, {}
     for p in sorted(glob.glob(os.path.join(os.path.expanduser(a.new), "*"))):
         stem, ext = os.path.splitext(os.path.basename(p))
@@ -157,15 +154,24 @@ def main():
     print(f"new images matched to a job : {sum(len(v) for v in newclaims.values())} "
           f"-> {len(newfiles)} distinct frame key(s)")
 
-    collide = sorted(set(newfiles) & set(fmap))
-    if collide:
-        print(f"\n{len(collide)} new frame key(s) ALREADY EXIST in archive 1: {collide[:5]}")
-        sys.exit("REFUSING — a duplicate key would silently shadow the archive-1 frame.")
+    available = set(zkey) | set(newfiles)
+    missing = [k for k in fmap if k not in available]
+    print(f"  frame_map keys with no source image     : {len(missing)}")
+    for k in missing[:10]:
+        print(f"    {k}")
+    if missing and not a.allow_missing:
+        sys.exit("\nREFUSING — a missing frame does not leave a gap, it shifts every later "
+                 "frame by one and every food after it shows the wrong picture. "
+                 "Resolve, or pass --allow-missing for a diagnostic run.")
+
+    additions = sorted(set(newfiles) - set(fmap))
+    print(f"  generated keys already in frame_map     : {len(set(newfiles) & set(fmap))}")
+    print(f"  generated keys to append                : {len(additions)}")
 
     # ---- one decode per image: staged JPEG + ordering feature ---------------
     pool = os.path.expanduser(a.pool)
     os.makedirs(pool, exist_ok=True)
-    order_keys = sorted(fmap, key=lambda k: fmap[k]) + sorted(newfiles)
+    order_keys = sorted(fmap, key=lambda k: fmap[k]) + additions
     print(f"\nstaging {len(order_keys)} frame(s) -> {pool}")
 
     feats = np.zeros((len(order_keys), a.feature_px * a.feature_px), dtype=np.float32)
