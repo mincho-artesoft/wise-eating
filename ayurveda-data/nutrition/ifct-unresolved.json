@@ -33,70 +33,6 @@
    ]
   ],
   [
-   "dravya.broad-bean",
-   "Broad bean pod (sem)",
-   [
-    [
-     "B007",
-     "Field bean, black"
-    ],
-    [
-     "B008",
-     "Field bean, brown"
-    ],
-    [
-     "B009",
-     "Field bean, white"
-    ],
-    [
-     "D003",
-     "Bean scarlet, tender"
-    ],
-    [
-     "D047",
-     "Field beans, tender, broad"
-    ],
-    [
-     "D048",
-     "Field beans, tender, lean"
-    ],
-    [
-     "E001",
-     "Apple, big"
-    ],
-    [
-     "E002",
-     "Apple, green"
-    ],
-    [
-     "E003",
-     "Apple, small"
-    ],
-    [
-     "E004",
-     "Apple, small, Kashmir"
-    ]
-   ]
-  ],
-  [
-   "dravya.dry-dates",
-   "Dry dates (chhuara)",
-   [
-    [
-     "E017",
-     "Dates, dry, pale brown"
-    ],
-    [
-     "E018",
-     "Dates, dry, dark brown"
-    ],
-    [
-     "E019",
-     "Dates, processed"
-    ]
-   ]
-  ],
-  [
    "dravya.elephant-foot-yam",
    "Elephant foot yam (suran)",
    [
@@ -309,6 +245,100 @@
    ]
   ],
   [
+   "dravya.taro-stem-regional",
+   "Taro stem",
+   [
+    [
+     "D040",
+     "Colocasia, stem, black"
+    ],
+    [
+     "D041",
+     "Colocasia, stem, green"
+    ]
+   ]
+  ],
+  [
+   "dravya.wild-celery-seed",
+   "Wild celery seed",
+   [
+    [
+     "G029",
+     "Omum"
+    ],
+    [
+     "C028",
+     "Parsley"
+    ]
+   ]
+  ]
+ ],
+ "resolvedAmbiguous": [
+  [
+   "dravya.broad-bean",
+   "Broad bean pod (sem)",
+   [
+    [
+     "B007",
+     "Field bean, black"
+    ],
+    [
+     "B008",
+     "Field bean, brown"
+    ],
+    [
+     "B009",
+     "Field bean, white"
+    ],
+    [
+     "D003",
+     "Bean scarlet, tender"
+    ],
+    [
+     "D047",
+     "Field beans, tender, broad"
+    ],
+    [
+     "D048",
+     "Field beans, tender, lean"
+    ],
+    [
+     "E001",
+     "Apple, big"
+    ],
+    [
+     "E002",
+     "Apple, green"
+    ],
+    [
+     "E003",
+     "Apple, small"
+    ],
+    [
+     "E004",
+     "Apple, small, Kashmir"
+    ]
+   ]
+  ],
+  [
+   "dravya.dry-dates",
+   "Dry dates (chhuara)",
+   [
+    [
+     "E017",
+     "Dates, dry, pale brown"
+    ],
+    [
+     "E018",
+     "Dates, dry, dark brown"
+    ],
+    [
+     "E019",
+     "Dates, processed"
+    ]
+   ]
+  ],
+  [
    "dravya.pumpkin-red",
    "Red pumpkin (kaddu)",
    [
@@ -355,20 +385,6 @@
    ]
   ],
   [
-   "dravya.taro-stem-regional",
-   "Taro stem",
-   [
-    [
-     "D040",
-     "Colocasia, stem, black"
-    ],
-    [
-     "D041",
-     "Colocasia, stem, green"
-    ]
-   ]
-  ],
-  [
    "dravya.white-radish",
    "White radish (mooli)",
    [
@@ -387,20 +403,6 @@
     [
      "F012",
      "Radish, round, white skin"
-    ]
-   ]
-  ],
-  [
-   "dravya.wild-celery-seed",
-   "Wild celery seed",
-   [
-    [
-     "G029",
-     "Omum"
-    ],
-    [
-     "C028",
-     "Parsley"
     ]
    ]
   ]
@@ -449,10 +451,6 @@
   [
    "dravya.amla-dry",
    "Dried amla"
-  ],
-  [
-   "dravya.amla-fresh",
-   "Fresh amla"
   ],
   [
    "dravya.amla-juice",
@@ -815,10 +813,6 @@
    "Greater galangal"
   ],
   [
-   "dravya.green-pea-fresh",
-   "Fresh green pea"
-  ],
-  [
    "dravya.guduchi",
    "Guduchi (giloy) stem"
   ],
@@ -893,10 +887,6 @@
   [
    "dravya.jeera-water",
    "Cumin water"
-  ],
-  [
-   "dravya.jimikand-pink",
-   "Pink elephant yam"
   ],
   [
    "dravya.joha-rice",
@@ -1011,10 +1001,6 @@
    "Lemongrass tea"
   ],
   [
-   "dravya.lentil-brown",
-   "Brown lentil"
-  ],
-  [
    "dravya.long-brinjal",
    "Brinjal (long purple)"
   ],
@@ -1089,10 +1075,6 @@
   [
    "dravya.mukhwas",
    "Mukhwas (fennel mouth-freshener)"
-  ],
-  [
-   "dravya.mung-dal-split",
-   "Split mung dal"
   ],
   [
    "dravya.muskmelon-seed",
@@ -1567,10 +1549,6 @@
    "Wheatgrass"
   ],
   [
-   "dravya.white-mushroom",
-   "Mushroom, white"
-  ],
-  [
    "dravya.white-onion",
    "White onion"
   ],
@@ -1601,12 +1579,6 @@
  ],
  "withdrawn": [
   [
-   "dravya.petha-murabba",
-   "Ash gourd murabba (petha)",
-   "D001",
-   "Ash gourd"
-  ],
-  [
    "dravya.chickpea-white",
    "White chickpea",
    "B002",
@@ -1625,6 +1597,12 @@
    "Varagu"
   ],
   [
+   "dravya.fresh-water-chestnut",
+   "Fresh water chestnut (singhara)",
+   "F016",
+   "Water Chestnut"
+  ],
+  [
    "dravya.kanda-poha",
    "Kanda poha",
    "A011",
@@ -1635,6 +1613,12 @@
    "Sweet lime juice",
    "E034",
    "Lime, sweet, pulp"
+  ],
+  [
+   "dravya.petha-murabba",
+   "Ash gourd murabba (petha)",
+   "D001",
+   "Ash gourd"
   ]
  ]
 }

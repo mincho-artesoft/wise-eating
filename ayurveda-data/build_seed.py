@@ -173,6 +173,14 @@ SOURCE_ONLY_NUTRIENT_CATALOG = {
     ("oxalates", "insoluble"): ("mg", False),
 }
 WITHDRAWN_IFCT_STATUS = "withdrawn — wrong IFCT row, see TASK-NUT1 §2"
+WITHDRAWN_IFCT_SPECIES_STATUS = (
+    "withdrawn — wrong species, F016 is Eleocharis dulcis; "
+    "singhara is Trapa natans. See TASK-NUT1 §2."
+)
+WITHDRAWN_IFCT_STATUSES = {
+    WITHDRAWN_IFCT_STATUS,
+    WITHDRAWN_IFCT_SPECIES_STATUS,
+}
 SAFETY_PROVENANCE = "scaffold-default"
 SAFETY_REVIEW_REQUIRED = True
 AGE_PROVENANCE_AUTHORED = "authored"
@@ -753,7 +761,7 @@ def load_withdrawn_dravya_nutrition_ids(path: Path) -> set[str]:
         if isinstance(food, dict)
         and isinstance(food.get("dravyaId"), str)
         and isinstance(food.get("_review"), dict)
-        and food["_review"].get("status") == WITHDRAWN_IFCT_STATUS
+        and food["_review"].get("status") in WITHDRAWN_IFCT_STATUSES
     }
 
 

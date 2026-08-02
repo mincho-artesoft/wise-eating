@@ -6,6 +6,13 @@ import re
 import sqlite3
 import unicodedata
 
+from phase2_rulings import (
+    AMBIGUOUS_BINDINGS,
+    DIRECT_BINDINGS,
+    F016_WITHDRAWAL_STATUS,
+    LATE_WITHDRAWALS,
+)
+
 
 B = "ayurveda-data/nutrition/"
 WITHDRAWN_STATUS = "withdrawn — wrong IFCT row, see TASK-NUT1 §2"
@@ -41,7 +48,14 @@ def reverse_collisions(exact):
     return {code: matches for code, matches in by_code.items() if len(matches) > 1}
 
 
-def reviewed_withdrawal(review, code):
+def reviewed_withdrawal(review, dravya_id, code):
+    late = LATE_WITHDRAWALS.get(dravya_id)
+    if late:
+        return (
+            late[0] == code
+            and review.get("status") == F016_WITHDRAWAL_STATUS
+            and review.get("withdrawnIfctCode") == code
+        )
     return (
         review.get("status") == WITHDRAWN_STATUS
         and review.get("withdrawnIfctCode") == code
@@ -121,16 +135,47 @@ for food_id, dravya_id in sorted(placeholders.items()):
     else:
         none.append((dravya_id, dravya.get("name")))
 
+# Director-reviewed ratio-1.000 identities are explicit bindings, not a looser
+# matcher. Remove only those exact ids from the unresolved buckets, then expose
+# them to the same reverse-collision assertion as strict matches.
+row_by_code = {row[C["code"]]: row for row in rows}
+ruled_bindings = dict(DIRECT_BINDINGS)
+ruled_bindings.update(
+    {dravya_id: ruling["binding"] for dravya_id, ruling in AMBIGUOUS_BINDINGS.items()}
+)
+resolved_ambiguous = [
+    match for match in ambiguous if match[0] in AMBIGUOUS_BINDINGS
+]
+manual_exact = []
+for dravya_id, (code, ruled_name) in sorted(ruled_bindings.items()):
+    row = row_by_code[code]
+    if row[C["name"]] != ruled_name:
+        raise SystemExit(
+            f"manual binding {dravya_id}: [{code}] name moved from "
+            f"{ruled_name!r} to {row[C['name']]!r}"
+        )
+    dravya = dravyas[dravya_id]
+    manual_exact.append((dravya_id, dravya.get("name"), code, ruled_name))
+
+manual_ids = {match[0] for match in manual_exact}
+ambiguous = [match for match in ambiguous if match[0] not in manual_ids]
+none = [match for match in none if match[0] not in manual_ids]
+exact.extend(manual_exact)
+
 collisions = reverse_collisions(exact)
 unreviewed = {}
-withdrawn = []
+withdrawn = [
+    match
+    for match in exact
+    if reviewed_withdrawal(
+        foods.get(match[0], {}).get("_review", {}), match[0], match[2]
+    )
+]
+withdrawn_ids = {match[0] for match in withdrawn}
 for code, matches in collisions.items():
     active = []
     for match in matches:
-        review = foods.get(match[0], {}).get("_review", {})
-        if reviewed_withdrawal(review, code):
-            withdrawn.append(match)
-        else:
+        if match[0] not in withdrawn_ids:
             active.append(match)
     if len(active) > 1 and not all(
         reviewed_active_collision(foods.get(match[0], {}).get("_review", {}), code)
@@ -138,11 +183,13 @@ for code, matches in collisions.items():
     ):
         unreviewed[code] = matches
 
-withdrawn_ids = {match[0] for match in withdrawn}
 active_exact = [match for match in exact if match[0] not in withdrawn_ids]
 
 print(f"IFCT rows {len(rows)}   match keys {len(ikeys)}")
-print(f"EXACT single match : {len(exact)}")
+print(f"STRICT exact match : {len(exact) - len(manual_exact)}")
+print(f"MANUAL direct match: {len(DIRECT_BINDINGS)}")
+print(f"MANUAL ambiguous   : {len(AMBIGUOUS_BINDINGS)}")
+print(f"ACTIVE match total : {len(active_exact)}")
 print(f"AMBIGUOUS (>1)     : {len(ambiguous)}")
 print(f"NO MATCH           : {len(none)}")
 print(
@@ -173,6 +220,7 @@ json.dump(
     {
         "exact": active_exact,
         "ambiguous": ambiguous,
+        "resolvedAmbiguous": resolved_ambiguous,
         "none": none,
         "withdrawn": withdrawn,
     },

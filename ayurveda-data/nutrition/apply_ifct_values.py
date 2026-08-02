@@ -1,4 +1,16 @@
 import csv,json
+
+from phase2_rulings import (
+    AMBIGUOUS_BINDINGS,
+    AMBIGUOUS_DEFERRALS,
+    AMBIGUOUS_MATCH_STATUS,
+    DIRECT_BINDINGS,
+    DIRECT_DECLINES,
+    DIRECT_MATCH_STATUS,
+    F016_WITHDRAWAL_STATUS,
+    LATE_WITHDRAWALS,
+    PUBLISHED_LITERATURE,
+)
 B='ayurveda-data/nutrition/'
 WITHDRAWN_STATUS='withdrawn — wrong IFCT row, see TASK-NUT1 §2'
 WITHDRAWN={
@@ -9,6 +21,7 @@ WITHDRAWN={
  'dravya.mosambi-juice':('E034','Lime, sweet, pulp'),
  'dravya.chickpea-white':('B002','Bengal gram, whole'),
 }
+WITHDRAWN.update(LATE_WITHDRAWALS)
 REVIEWED_COLLISIONS={
  'dravya.ash-gourd-juice-flesh':{
    'ifctCode':'D001','status':'reviewed — identical by construction',
@@ -104,6 +117,8 @@ def num(r,k):
     except: return None
 m=json.load(open('/tmp/match.json'))
 exact={x[0]:(x[2],x[3]) for x in m['exact']}
+resolved_ambiguous={x[0]:x for x in m.get('resolvedAmbiguous',[])}
+remaining_ambiguous={x[0]:x for x in m['ambiguous']}
 foods=json.load(open(B+'dravya_foods.json'))
 n=0
 for rec in foods:
@@ -126,8 +141,83 @@ for rec in foods:
         'currentMinAgeMonths':rec['_review'].get('currentMinAgeMonths'),
         'proposedMinAgeMonths':rec['_review'].get('proposedMinAgeMonths'),
         'ageReason':rec['_review'].get('ageReason')}
+    if rec['dravyaId'] in DIRECT_BINDINGS:
+        rec['_review']['status']=DIRECT_MATCH_STATUS
+        rec['_review']['provenance']='IFCT 2017'
+        rec['_review']['note']='Director-reviewed ratio 1.000 identity binding; not derived.'
+    if rec['dravyaId'] in AMBIGUOUS_BINDINGS:
+        ruling=AMBIGUOUS_BINDINGS[rec['dravyaId']]
+        original=resolved_ambiguous.get(rec['dravyaId'])
+        if not original:
+            raise SystemExit(f"{rec['dravyaId']}: ruled ambiguous binding was not ambiguous")
+        losing=[{'ifctCode':candidate[0],'ifctName':candidate[1]}
+                for candidate in original[2] if candidate[0] != code]
+        rec['_review']['status']=AMBIGUOUS_MATCH_STATUS
+        rec['_review']['provenance']='IFCT 2017'
+        rec['_review']['manualResolution']={
+            'selectedIfctCode':code,
+            'selectedIfctName':iname,
+            'losingCandidates':losing,
+            'reason':ruling['reason']}
     if rec['dravyaId'] in REVIEWED_COLLISIONS:
         rec['_review']['reverseCollision']=REVIEWED_COLLISIONS[rec['dravyaId']]
+
+for rec in foods:
+    literature=PUBLISHED_LITERATURE.get(rec['dravyaId'])
+    if not literature: continue
+    for grp,fields in literature['values'].items():
+        for field,value in fields.items():
+            if field not in rec.get(grp,{}):
+                raise SystemExit(f"{rec['dravyaId']}: literature field {grp}.{field} is absent")
+            rec[grp][field]['value']=value
+    previous=rec['_review']
+    rec['_review']={
+        'source':literature['source'],
+        'spread':literature['spread'],
+        'status':'measured — published literature, TASK-NUT1 Phase 2b',
+        'provenance':'published-literature',
+        'note':literature['note'],
+        'currentMinAgeMonths':previous.get('currentMinAgeMonths'),
+        'proposedMinAgeMonths':previous.get('proposedMinAgeMonths'),
+        'ageReason':previous.get('ageReason')}
+
+for rec in foods:
+    decline=DIRECT_DECLINES.get(rec['dravyaId'])
+    if not decline: continue
+    previous=rec['_review']
+    rec['_review']={
+        'source':None,
+        'spread':None,
+        'status':'declined — direct IFCT binding, TASK-NUT1 Phase 2b',
+        'declinedIfctCode':decline['ifctCode'],
+        'declinedIfctName':decline['ifctName'],
+        'reason':decline['reason'],
+        'currentMinAgeMonths':previous.get('currentMinAgeMonths'),
+        'proposedMinAgeMonths':previous.get('proposedMinAgeMonths'),
+        'ageReason':previous.get('ageReason')}
+
+if set(remaining_ambiguous) != set(AMBIGUOUS_DEFERRALS):
+    raise SystemExit(
+        'Phase 2c dispositions do not cover the remaining ambiguous set: '
+        f"unruled={sorted(set(remaining_ambiguous)-set(AMBIGUOUS_DEFERRALS))}, "
+        f"stale={sorted(set(AMBIGUOUS_DEFERRALS)-set(remaining_ambiguous))}"
+    )
+for rec in foods:
+    reason=AMBIGUOUS_DEFERRALS.get(rec['dravyaId'])
+    if not reason: continue
+    original=remaining_ambiguous[rec['dravyaId']]
+    previous=rec['_review']
+    rec['_review']={
+        'source':None,
+        'spread':None,
+        'status':'deferred — ambiguous IFCT identity, TASK-NUT1 Phase 2c',
+        'ambiguousCandidates':[
+            {'ifctCode':candidate[0],'ifctName':candidate[1]}
+            for candidate in original[2]],
+        'reason':reason,
+        'currentMinAgeMonths':previous.get('currentMinAgeMonths'),
+        'proposedMinAgeMonths':previous.get('proposedMinAgeMonths'),
+        'ageReason':previous.get('ageReason')}
 for rec in foods:
     withdrawn=WITHDRAWN.get(rec['dravyaId'])
     if not withdrawn: continue
@@ -137,17 +227,20 @@ for rec in foods:
         for field in rec.get(grp,{}).values():
             field['value']=None
     previous=rec['_review']
+    status=(F016_WITHDRAWAL_STATUS
+            if rec['dravyaId'] in LATE_WITHDRAWALS else WITHDRAWN_STATUS)
     rec['_review']={
         'source':f'IFCT 2017 [{code}] {iname}',
         'spread':f"regions sampled: {r[C['regn']]}; each nutrient has a published SD in the _e column of ifct2017-compositions.csv",
-        'status':WITHDRAWN_STATUS,
+        'status':status,
         'withdrawnIfctCode':code,
         'withdrawnIfctName':iname,
         'currentMinAgeMonths':previous.get('currentMinAgeMonths'),
         'proposedMinAgeMonths':previous.get('proposedMinAgeMonths'),
         'ageReason':previous.get('ageReason')}
 json.dump(foods,open(B+'dravya_foods.json','w'),indent=1,ensure_ascii=False)
-json.dump({'ambiguous':m['ambiguous'],'unmatched':m['none'],'withdrawn':m.get('withdrawn',[])},
+json.dump({'ambiguous':m['ambiguous'],'resolvedAmbiguous':m.get('resolvedAmbiguous',[]),
+           'unmatched':m['none'],'withdrawn':m.get('withdrawn',[])},
           open(B+'ifct-unresolved.json','w'),indent=1,ensure_ascii=False)
 print(f"filled {n} foods from IFCT 2017 measured values")
 srcd=sum(1 for f in foods if any(
@@ -156,3 +249,7 @@ srcd=sum(1 for f in foods if any(
     for field in f.get(grp,{}).values()))
 print(f"total with nutrition now: {srcd} of {len(foods)}")
 print(f"withdrew {len(WITHDRAWN)} wrong IFCT matches")
+print(f"published-literature foods: {len(PUBLISHED_LITERATURE)}")
+print(f"manually resolved ambiguous foods: {len(AMBIGUOUS_BINDINGS)}")
+print(f"explicitly deferred ambiguous foods: {len(AMBIGUOUS_DEFERRALS)}")
+print(f"derived provenance records: {sum(1 for f in foods if f.get('_review',{}).get('provenance') == 'derived')}")

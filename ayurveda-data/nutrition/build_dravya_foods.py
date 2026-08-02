@@ -27,6 +27,13 @@ WHAT IS REAL HERE AND WHAT IS NOT — read before trusting a number
 """
 import argparse, glob, json, os, sqlite3, sys
 
+from phase2_rulings import (
+    DIRECT_DECLINES,
+    F016_WITHDRAWAL_STATUS,
+    LATE_WITHDRAWALS,
+    PUBLISHED_LITERATURE,
+)
+
 SHAPE = {
  "macronutrients": ["carbohydrates","protein","fat","fiber","totalSugars",
    "insolubleFiber","solubleFiber"],
@@ -86,6 +93,7 @@ WITHDRAWN_IFCT = {
     "dravya.mosambi-juice": ("E034", "Lime, sweet, pulp"),
     "dravya.chickpea-white": ("B002", "Bengal gram, whole"),
 }
+WITHDRAWN_IFCT.update(LATE_WITHDRAWALS)
 REVIEWED_COLLISIONS = {
     "dravya.ash-gourd-juice-flesh": {
         "ifctCode": "D001",
@@ -252,6 +260,13 @@ def main():
                   "mineralTotals","oligosaccharides","oxalates"):
             rec[g] = blank(g) if g in SHAPE else {}
         v = VALUES.get(did)
+        literature = PUBLISHED_LITERATURE.get(did)
+        if literature:
+            v = {
+                "_src": literature["source"],
+                "_spread": literature["spread"],
+                **literature["values"],
+            }
         if v:
             filled += 1
             for g, fields in v.items():
@@ -262,6 +277,12 @@ def main():
                               "status": "proposed — verify before ingest",
                               "currentMinAgeMonths": row[1],
                               "proposedMinAgeMonths": prop, "ageReason": why}
+            if literature:
+                rec["_review"].update({
+                    "status": "measured — published literature, TASK-NUT1 Phase 2b",
+                    "provenance": "published-literature",
+                    "note": literature["note"],
+                })
         else:
             rec["_review"] = {"source": None, "spread": None,
                               "status": "NOT YET SOURCED — every nutrient is null, not zero",
@@ -270,9 +291,21 @@ def main():
         if did in WITHDRAWN_IFCT:
             code, name = WITHDRAWN_IFCT[did]
             rec["_review"].update({
-                "status": "withdrawn — wrong IFCT row, see TASK-NUT1 §2",
+                "status": (F016_WITHDRAWAL_STATUS
+                           if did in LATE_WITHDRAWALS
+                           else "withdrawn — wrong IFCT row, see TASK-NUT1 §2"),
                 "withdrawnIfctCode": code,
                 "withdrawnIfctName": name,
+            })
+        if did in DIRECT_DECLINES:
+            decline = DIRECT_DECLINES[did]
+            rec["_review"].update({
+                "source": None,
+                "spread": None,
+                "status": "declined — direct IFCT binding, TASK-NUT1 Phase 2b",
+                "declinedIfctCode": decline["ifctCode"],
+                "declinedIfctName": decline["ifctName"],
+                "reason": decline["reason"],
             })
         if did in REVIEWED_COLLISIONS:
             rec["_review"]["reverseCollision"] = REVIEWED_COLLISIONS[did]

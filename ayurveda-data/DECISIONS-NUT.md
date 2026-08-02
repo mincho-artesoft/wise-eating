@@ -51,6 +51,46 @@ is a colloquial synonym list, not botany — it lists `E. Elephant apple` as a
 synonym of Wood Apple (*Limonia acidissima* vs *Dillenia indica*). Treat `lang`
 as a candidate generator, never as an identity assertion.
 
+This is now the third instance of one failure: a name shared by unrelated
+organisms. IFCT's own list supplied elephant apple for wood apple; the
+vernacular “king mackerel” conflated surmai species; and the English “water
+chestnut” conflated *Eleocharis dulcis* with the project's singhara,
+*Trapa natans*. The late F016 binding was stripped rather than allowing a
+shared common name to outrank botany.
+
+## N7. The derivation rule produced nothing
+
+§N1 permitted derivation for pure water loss or dilution with a cited yield.
+On investigation every one of the 13 candidates failed: drying retention
+varies by temperature and variety with no single multiplier; juice yield does
+not transfer uniformly across nutrients; the ajwain, barley, coriander, cumin
+and fenugreek “waters” are infusions; badam milk carries dairy and spices; and
+sattu adds roasting and sometimes barley.
+
+**Ruling.** §N1 stands as policy but has no members. Zero records carry
+`_review.provenance: "derived"`. This is a finding, not an unfinished sourcing
+gap.
+
+## N8. Recovery uses reviewed identities and direct measurements
+
+The strict matcher correctly refuses qualifier-token supersets, but that means
+it also misses a small number of identities whose qualifier makes the match
+more precise. Six ratio-1.000 bindings were reviewed food by food and approved:
+Fresh amla → E021, Fresh green pea → D061, Mushroom white/button → J001,
+Brown lentil/whole masoor → B014, Split mung dal → B010, and Pink elephant yam
+→ F017. These carry normal IFCT measured provenance, never `derived`.
+
+Ripe karonda → E032 and Sweet parwal → D060 were considered and declined. The
+first would repeat a reverse collision without a maturity-specific measurement;
+the second would assign a named sweet cultivar the generic pointed-gourd row.
+Their null values are reviewed decisions, not unexamined records.
+
+Fresh amla juice and water-chestnut flour use published measurements of their
+actual forms, populating only fields the studies measured. The flour source is
+commercial Indian *Trapa natans* flour and deliberately avoids F016
+(*Eleocharis dulcis*). Direct measurements are the recovery path; applying a
+base-row multiplier is not.
+
 ## N4. Age floors: authored and cited, with a display fix
 
 **Ruling.** The 373 `_review` age proposals become `authored`, hard-filtering
@@ -115,7 +155,7 @@ placeholder ids are issued.
 Job 3 authors **zero new dravyas and 11 new recipes**. Disposition table in
 `TASK-NUT3.md`.
 
-## N7. IFCT Phase 1b stores totals, not uninterpretable mass sums or isomers
+## N9. IFCT Phase 1b stores totals, not uninterpretable mass sums or isomers
 
 **Ruling.** Store the 15 approved top-level classes and 51 approved detailed
 measurements in the source-only `dravya_foods.json` schema. Do not store IFCT

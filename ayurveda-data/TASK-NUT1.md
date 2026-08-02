@@ -160,8 +160,15 @@ recommended.
 
 ### 4.4 The 178
 
-They stay null. Record the count and the category breakdown in the report so
-that "why is this null" has a durable answer.
+The 178 have no token relationship to any of the 3,435 IFCT keys and remain
+unmatched by IFCT. Of those records, 176 are null. Black rice and Camel milk
+retain their pre-existing published-literature values, which predate NUT-1.
+Zero records in this set acquire a value during Phase 2.
+
+The 178 is defined by IFCT matchability, not by nullness. A record can be
+unmatchable and still be sourced from published literature. Record the count
+and category breakdown in the report so that "why is this null" has a durable
+answer.
 
 ---
 
