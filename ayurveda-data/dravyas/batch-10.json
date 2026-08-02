@@ -522,7 +522,7 @@
       "combinations": ["seared with pepper", "in warm grain bowls"],
       "viruddha": ["with milk (classical fish-milk viruddha)"],
       "contraindications": ["fish allergy", "pregnancy (mercury: limit large-species tuna)", "histamine sensitivity"],
-      "preparation": "Dense, meaty fish — brief cooking; prefer smaller-species (skipjack) for regular use.",
+      "preparation": "Dense, meaty fish — brief cooking; prefer smaller-species (skipjack) for regular use. Avoid bigeye tuna; canned light and skipjack are the low-mercury choices.",
       "usda": [{"fdcId": 835, "name": "Fish, tuna, raw", "tier": "exact"}],
       "servings": [{"label": "3 oz", "grams": 85}],
       "provenance": ["Modern texts; marine matsya class"],
