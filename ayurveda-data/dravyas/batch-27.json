@@ -458,7 +458,7 @@
       "id": "dravya.colocasia-leaf",
       "name": "Colocasia leaf (arbi patta)",
       "sanskrit": "Pindalu Patra",
-      "aliases": ["taro leaf", "patra", "alu vadi leaf"],
+      "aliases": ["taro leaf", "patra", "alu vadi leaf", "Tender taro leaf (patra use)"],
       "category": "leafy-green",
       "rasa": ["astringent", "sweet"],
       "virya": "cooling",
@@ -477,7 +477,8 @@
       "usda": [],
       "servings": [{"label": "2 rolls (patra)", "grams": 80}],
       "provenance": ["Gujarati-Maharashtrian patra tradition; pindalu lineage"],
-      "confidence": {"ayur": 0.75, "sci": 0.7}
+      "confidence": {"ayur": 0.75, "sci": 0.7},
+      "reviewNote": "Canon tender-taro vpk [1, 0, 0] differs from the retained target [1, 0, 1]."
     },
     {
       "id": "dravya.drumstick-leaf",

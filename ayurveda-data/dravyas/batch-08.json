@@ -32,7 +32,7 @@
       "id": "dravya.butter",
       "name": "Butter, unsalted",
       "sanskrit": "Navanita",
-      "aliases": ["white butter", "makhan"],
+      "aliases": ["white butter", "makhan", "Cultured butter"],
       "category": "dairy",
       "rasa": ["sweet", "astringent"],
       "virya": "cooling",
@@ -56,8 +56,8 @@
     {
       "id": "dravya.cream",
       "name": "Cream, heavy",
-      "sanskrit": null,
-      "aliases": ["malai"],
+      "sanskrit": "Santanika",
+      "aliases": ["malai", "Fresh cream (malai)", "milk cream", "clotted milk skin"],
       "category": "dairy",
       "rasa": ["sweet"],
       "virya": "cooling",
@@ -76,7 +76,8 @@
       "usda": [{"fdcId": 158, "name": "Cream, heavy", "tier": "exact"}, {"fdcId": 8093, "name": "Cream, fluid, heavy whipping", "tier": "exact"}],
       "servings": [{"label": "1 tbsp", "grams": 15}],
       "provenance": ["Modern texts (dairy guna analysis)"],
-      "confidence": {"ayur": 0.8, "sci": 0.85}
+      "confidence": {"ayur": 0.8, "sci": 0.85},
+      "reviewNote": "Canon fresh-cream vpk [-2, -2, 2] differs from the retained target [-2, -1, 2]."
     },
     {
       "id": "dravya.paneer",
@@ -482,7 +483,7 @@
       "id": "dravya.stevia",
       "name": "Stevia",
       "sanskrit": null,
-      "aliases": ["stevia leaf extract"],
+      "aliases": ["stevia leaf extract", "Stevia leaf"],
       "category": "sweetener",
       "rasa": ["sweet", "bitter"],
       "virya": "cooling",
@@ -501,7 +502,8 @@
       "usda": [{"fdcId": 7981, "name": "Sweetener, herbal extract powder from Stevia leaf", "tier": "exact"}],
       "servings": [{"label": "1 packet", "grams": 1}],
       "provenance": ["Modern texts"],
-      "confidence": {"ayur": 0.65, "sci": 0.85}
+      "confidence": {"ayur": 0.65, "sci": 0.85},
+      "reviewNote": "Canon is explicitly stevia leaf while the existing alias names leaf extract; identity retained pending product-form review."
     },
     {
       "id": "dravya.tofu",

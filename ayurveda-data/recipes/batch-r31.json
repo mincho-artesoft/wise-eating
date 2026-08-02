@@ -54,7 +54,7 @@
       "confidence": {"ayur": 0.8, "sci": 0.6}
     },
     {
-      "id": "recipe.date-banana-smoothie", "name": "Date Banana Smoothie", "category": "international", "meal": "breakfast",
+      "id": "recipe.khajur-smoothie", "name": "Date-banana Smoothie", "category": "international", "meal": "breakfast",
       "servings": 2, "prepMinutes": 8, "cookMinutes": 0,
       "ingredients": [
         {"dravyaId": "dravya.dates", "name": "Soft dates, pitted", "grams": 60},
@@ -71,7 +71,7 @@
       "dosha": {"vata": -2, "pitta": -1, "kapha": 2},
       "seasons": ["hemanta", "shishira"], "timeOfDay": ["morning"],
       "viruddhaFlags": ["milk with fruit is a contested combination; banana and milk are named together in some modern viruddha lists though not in the samhitas"],
-      "guidance": "Strongly building, and the classic vata breakfast when appetite is weak but weight is needed. Vata: as written. Pitta: reduce the dates. Kapha: this is the wrong drink — take warm spiced water instead.",
+      "guidance": "Strongly building, and the classic vata breakfast when appetite is weak but weight is needed. Vata: as written. Pitta: reduce the dates. Kapha: this is the wrong drink — take warm spiced water instead. Compliant variant: replace cow milk with unsweetened almond milk.",
       "provenance": ["modern preparation; ingredients per Bhavaprakasha Kharjura and Kadali"],
       "confidence": {"ayur": 0.7, "sci": 0.6}
     },
@@ -122,7 +122,7 @@
       "confidence": {"ayur": 0.8, "sci": 0.6}
     },
     {
-      "id": "recipe.samak-rice-bowl", "name": "Samak Rice Bowl (Fasting)", "category": "everyday", "meal": "lunch",
+      "id": "recipe.samak-rice-fasting", "name": "Samak Rice Bowl (Fasting)", "category": "everyday", "meal": "lunch",
       "servings": 2, "prepMinutes": 10, "cookMinutes": 20,
       "ingredients": [
         {"dravyaId": "dravya.barnyard-millet", "name": "Samak rice (barnyard millet)", "grams": 150},
@@ -148,7 +148,7 @@
       "confidence": {"ayur": 0.75, "sci": 0.7}
     },
     {
-      "id": "recipe.singhara-pakora", "name": "Singhara Flour Pakora", "category": "everyday", "meal": "snack",
+      "id": "recipe.singhara-pakora-fasting", "name": "Singhara Flour Pakora", "category": "everyday", "meal": "snack",
       "servings": 4, "prepMinutes": 15, "cookMinutes": 15,
       "ingredients": [
         {"dravyaId": "dravya.water-chestnut-flour", "name": "Singhara (water chestnut) flour", "grams": 150},

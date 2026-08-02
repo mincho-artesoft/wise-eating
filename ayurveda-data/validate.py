@@ -4,7 +4,7 @@
 Usage: python3 validate.py [--store /path/to/preseeded.sqlite]
 Run from the ayurveda-data directory (or pass paths). Exits non-zero on errors.
 """
-import csv, glob, gzip, json, os, re, sqlite3, subprocess, sys
+import csv, glob, gzip, hashlib, json, os, re, sqlite3, subprocess, sys
 from collections import Counter
 
 import build_seed
@@ -49,6 +49,139 @@ D34_EXPECTED_MODIFIERS = {
 }
 d34_normalized_tokens = build_seed.modifier_normalized_tokens
 TRACKED_FILE_SPLIT_LIMIT_BYTES = 90_000_000
+EXPECTED_SOURCE_COUNTS = {"dravyas": 705, "recipes": 1511}
+NUT3_PLACEHOLDER_MAPPING_SHA256 = (
+    "bc7afbfce5b0ec708aec1fea387a72806bbe5e6b4fd9d48747ae01d60736441b"
+)
+NUT3_DRAVYA_TARGETS = {
+    "dravya.fenugreek-greens": "dravya.methi-leaves",
+    "dravya.green-amaranth-greens": "dravya.amaranth-leaves",
+    "dravya.dill-greens": "dravya.dill",
+    "dravya.taro-tender-leaf": "dravya.colocasia-leaf",
+    "dravya.soft-dates": "dravya.dates",
+    "dravya.dry-fig": "dravya.dried-fig",
+    "dravya.dry-apricot": "dravya.dried-apricot",
+    "dravya.lotus-seed-popped": "dravya.lotus-seed",
+    "dravya.malai": "dravya.cream",
+    "dravya.cultured-butter": "dravya.butter",
+    "dravya.cane-jaggery": "dravya.jaggery",
+    "dravya.powdered-jaggery": "dravya.jaggery",
+    "dravya.stevia-leaf": "dravya.stevia",
+    "dravya.vida-salt": "dravya.black-salt",
+    "dravya.iodized-salt": "dravya.sea-salt",
+}
+NUT3_NAME_COLLISIONS = {
+    "golden milk": ("dravya.golden-milk", "recipe.golden-milk"),
+    "mung rice peya": ("recipe.light-mung-rice-peya", "recipe.mung-peya"),
+    "panchamrita": ("dravya.panchamrita", "recipe.panchamrit-classic"),
+}
+
+
+def normalized_catalog_name(value):
+    return " ".join(re.sub(r"[^a-z0-9]+", " ", value.lower()).split())
+
+
+def validate_nut3(here, repo_root, dravyas, recipes, errs):
+    actual_counts = {"dravyas": len(dravyas), "recipes": len(recipes)}
+    if actual_counts != EXPECTED_SOURCE_COUNTS:
+        errs.append(
+            f"NUT3/G0: expected source counts {EXPECTED_SOURCE_COUNTS}, "
+            f"got {actual_counts}"
+        )
+
+    canon_path = os.path.join(here, "nutrition", "canon-unbuilt.json")
+    try:
+        canon = json.load(open(canon_path, encoding="utf-8"))
+    except Exception as error:
+        errs.append(f"NUT3/G4: cannot read canon-unbuilt.json: {error}")
+        canon = {"items": []}
+    canon_items = canon.get("items", [])
+    if canon.get("count") != 26 or len(canon_items) != 26:
+        errs.append(
+            f"NUT3/G4: expected 26 canon entries, got "
+            f"count={canon.get('count')!r} items={len(canon_items)}"
+        )
+
+    recipe_ids = {item["id"] for item in recipes}
+    resolved = 0
+    for item in canon_items:
+        canon_id = item.get("id", "?")
+        if canon_id.startswith("recipe."):
+            matches = [canon_id] if canon_id in recipe_ids else []
+            expected = [canon_id]
+        else:
+            canon_name = normalized_catalog_name(item.get("name", ""))
+            matches = sorted(
+                dravya["id"]
+                for dravya in dravyas
+                if canon_name
+                in {
+                    normalized_catalog_name(value)
+                    for value in (
+                        [dravya.get("name"), dravya.get("sanskrit")]
+                        + dravya.get("aliases", [])
+                    )
+                    if value
+                }
+            )
+            target = NUT3_DRAVYA_TARGETS.get(canon_id)
+            expected = [target] if target else []
+        if matches != expected:
+            errs.append(
+                f"NUT3/G4/{canon_id}: expected exactly {expected}, got {matches}"
+            )
+        else:
+            resolved += 1
+
+    foods_path = os.path.join(repo_root, "Ayura", "Legacy", "foods.json")
+    try:
+        foods = json.load(open(foods_path, encoding="utf-8"))
+        store_ids = {food["id"] for food in foods}
+        assignments, _links, _contested, placeholder_ids = (
+            build_seed.resolve_primary_foods(dravyas, store_ids)
+        )
+        placeholder_mapping = [
+            (dravya_id, assignments[dravya_id][0])
+            for dravya_id in placeholder_ids
+        ]
+        placeholder_values = [food_id for _dravya_id, food_id in placeholder_mapping]
+        mapping_sha256 = hashlib.sha256(
+            json.dumps(placeholder_mapping, separators=(",", ":")).encode("utf-8")
+        ).hexdigest()
+        if placeholder_values != list(range(900_001, 900_377)):
+            errs.append(
+                "NUT3/G1: placeholder band is not exactly 900001-900376"
+            )
+        if mapping_sha256 != NUT3_PLACEHOLDER_MAPPING_SHA256:
+            errs.append(
+                f"NUT3/G1: placeholder mapping changed: {mapping_sha256}"
+            )
+    except Exception as error:
+        placeholder_ids = []
+        mapping_sha256 = "unavailable"
+        errs.append(f"NUT3/G1: placeholder mapping could not be checked: {error}")
+
+    names = {}
+    for item in dravyas + recipes:
+        normalized = normalized_catalog_name(item["name"])
+        names.setdefault(normalized, []).append(item["id"])
+    collisions = {
+        name: tuple(sorted(ids))
+        for name, ids in names.items()
+        if len(ids) > 1
+    }
+    if collisions != NUT3_NAME_COLLISIONS:
+        errs.append(
+            f"NUT3/G9: expected collisions {NUT3_NAME_COLLISIONS}, "
+            f"got {collisions}"
+        )
+
+    print(
+        f"NUT3 gates: {actual_counts['dravyas']} dravyas · "
+        f"{actual_counts['recipes']} recipes · {resolved}/26 canon ids · "
+        f"{len(placeholder_ids)} placeholders · mapping {mapping_sha256} · "
+        f"{len(collisions)} name collisions"
+    )
 
 
 def tracked_file_sizes(repo_root):
@@ -612,6 +745,7 @@ def main():
         fdc_ids = {r[0] for r in c.execute("select ZID from ZFOODITEM")}
 
     errs, seen, total = [], {}, 0
+    dravya_records = []
     validate_tracked_file_sizes(repo_root, errs)
     for path in sorted(glob.glob(os.path.join(here, "dravyas", "batch-*.json"))):
         b = os.path.basename(path)
@@ -621,6 +755,7 @@ def main():
             errs.append(f"{b}: JSON parse error: {e}")
             continue
         for it in data.get("items", []):
+            dravya_records.append(it)
             total += 1
             i = it.get("id", "?")
             for f in REQUIRED:
@@ -665,6 +800,7 @@ def main():
     # ---- recipes ----
     dravya_ids = set(seen.keys())
     r_total, r_seen = 0, {}
+    recipe_records = []
     MEAL = {"breakfast", "lunch", "dinner", "snack", "drink", "dessert"}
     RCAT = {"classical", "everyday", "international"}
     R_REQUIRED = ["id", "name", "category", "meal", "servings", "prepMinutes",
@@ -678,6 +814,7 @@ def main():
             errs.append(f"{b}: JSON parse error: {e}")
             continue
         for r in data.get("items", []):
+            recipe_records.append(r)
             r_total += 1
             i = r.get("id", "?")
             for f in R_REQUIRED:
@@ -724,6 +861,8 @@ def main():
             cf = r.get("confidence", {})
             if not (0 <= cf.get("ayur", -1) <= 1):
                 errs.append(f"{b}/{i}: confidence out of range")
+
+    validate_nut3(here, repo_root, dravya_records, recipe_records, errs)
 
     if fdc_ids is not None:
         d34_validate(here, store, errs)

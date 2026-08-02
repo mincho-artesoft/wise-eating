@@ -20,7 +20,7 @@ SEED_VERSION = 6
 GENERATED_AT = "2026-07-25T00:00:00Z"
 EXPECTED_COUNTS = {
     "dravyas": 705,
-    "recipes": 1500,
+    "recipes": 1511,
     "links": 2336,
     "derivedLinks": 1966,
     "placeholders": 376,

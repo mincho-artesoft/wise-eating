@@ -326,7 +326,8 @@
       "usda": [{"fdcId": 8509, "name": "Spices, fennel seed", "tier": "exact"}],
       "servings": [{"label": "1 tsp", "grams": 2}],
       "provenance": ["Bhavaprakasha Nighantu, Haritakyadi varga"],
-      "confidence": {"ayur": 0.85, "sci": 0.85}
+      "confidence": {"ayur": 0.85, "sci": 0.85},
+      "reviewNote": "Shatapushpa is also claimed for dill as Shatapushpa Shaka in the canon backlog; do not reassign either entry until vaidya review."
     },
     {
       "id": "dravya.cardamom",
@@ -583,7 +584,7 @@
       "id": "dravya.jaggery",
       "name": "Jaggery",
       "sanskrit": "Guda",
-      "aliases": ["gur", "panela"],
+      "aliases": ["gur", "panela", "Cane jaggery (gud)", "Powdered jaggery (shakkar)", "shakkar", "jaggery powder", "granulated jaggery"],
       "category": "sweetener",
       "rasa": ["sweet"],
       "virya": "heating",

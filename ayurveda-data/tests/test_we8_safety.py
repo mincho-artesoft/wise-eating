@@ -66,7 +66,7 @@ class WE8SafetyDerivationTests(unittest.TestCase):
         rows = list(self.dravya_safety.values()) + list(
             self.recipe_safety.values()
         )
-        self.assertEqual(len(rows), 2_219)
+        self.assertEqual(len(rows), 2_216)
         self.assertTrue(
             all(
                 row["provenance"] == "scaffold-default"

@@ -358,7 +358,7 @@
       "id": "dravya.dates",
       "name": "Dates",
       "sanskrit": "Kharjura",
-      "aliases": ["khajoor"],
+      "aliases": ["khajoor", "Soft dates (khajur)"],
       "category": "fruit",
       "rasa": ["sweet"],
       "virya": "cooling",
@@ -377,7 +377,8 @@
       "usda": [{"fdcId": 3629, "name": "Date", "tier": "exact"}, {"fdcId": 5729, "name": "Dates, medjool", "tier": "exact"}, {"fdcId": 8852, "name": "Dates, deglet noor", "tier": "exact"}],
       "servings": [{"label": "2 dates", "grams": 48}],
       "provenance": ["Charaka Samhita Sutrasthana 27", "Bhavaprakasha Nighantu"],
-      "confidence": {"ayur": 0.95, "sci": 0.85}
+      "confidence": {"ayur": 0.95, "sci": 0.85},
+      "reviewNote": "Canon soft-dates vpk [-1, -1, 1] differs from the retained target [-2, -1, 1]."
     },
     {
       "id": "dravya.raisins",

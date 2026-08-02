@@ -432,7 +432,7 @@
       "id": "dravya.lotus-seed",
       "name": "Lotus seeds (makhana)",
       "sanskrit": "Makhanna",
-      "aliases": ["makhana", "fox nuts", "phool makhana"],
+      "aliases": ["makhana", "fox nuts", "phool makhana", "Popped lotus seed"],
       "category": "seed",
       "rasa": ["sweet", "astringent"],
       "virya": "cooling",
@@ -451,7 +451,8 @@
       "usda": [{"fdcId": 6121, "name": "Seeds, lotus seeds, raw", "tier": "exact"}],
       "servings": [{"label": "1 cup roasted", "grams": 32}],
       "provenance": ["Bhavaprakasha Nighantu", "regional fasting tradition"],
-      "confidence": {"ayur": 0.85, "sci": 0.75}
+      "confidence": {"ayur": 0.85, "sci": 0.75},
+      "reviewNote": "Canon popped-lotus vpk [-1, -1, -1] differs from the retained target [-1, -1, 0]. Pre-existing dravya.lotus-seed versus dravya.makhana identity remains out of scope."
     },
     {
       "id": "dravya.coconut-dried",
@@ -507,7 +508,7 @@
       "id": "dravya.dried-fig",
       "name": "Fig, dried",
       "sanskrit": "Shushka anjeera",
-      "aliases": ["dry anjeer"],
+      "aliases": ["dry anjeer", "Dry fig (anjeer)"],
       "category": "dry-fruit-nut",
       "rasa": ["sweet"],
       "virya": "cooling",
@@ -532,7 +533,7 @@
       "id": "dravya.dried-apricot",
       "name": "Apricot, dried",
       "sanskrit": null,
-      "aliases": ["sukhi khubani"],
+      "aliases": ["sukhi khubani", "Dry apricot (khubani)"],
       "category": "dry-fruit-nut",
       "rasa": ["sweet", "sour"],
       "virya": "heating",

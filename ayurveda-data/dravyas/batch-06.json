@@ -32,7 +32,7 @@
       "id": "dravya.methi-leaves",
       "name": "Fenugreek leaves",
       "sanskrit": "Methika patra",
-      "aliases": ["methi", "kasuri methi (dried)"],
+      "aliases": ["methi", "Fenugreek greens (methi)"],
       "category": "leafy-green",
       "rasa": ["bitter", "pungent"],
       "virya": "heating",
@@ -57,7 +57,7 @@
       "id": "dravya.amaranth-leaves",
       "name": "Amaranth leaves",
       "sanskrit": "Tanduliya",
-      "aliases": ["chaulai", "thotakura"],
+      "aliases": ["chaulai", "thotakura", "Green amaranth greens"],
       "category": "leafy-green",
       "rasa": ["sweet", "astringent"],
       "virya": "cooling",
@@ -76,7 +76,8 @@
       "usda": [{"fdcId": 5915, "name": "Amaranth leaves, raw", "tier": "exact"}],
       "servings": [{"label": "1 cup", "grams": 28}],
       "provenance": ["Bhavaprakasha Nighantu, Shaka varga"],
-      "confidence": {"ayur": 0.85, "sci": 0.8}
+      "confidence": {"ayur": 0.85, "sci": 0.8},
+      "reviewNote": "Canon names green amaranth Marisha while this target is Tanduliya; the Tanduliya/Marisha and green/red varietal split remains for vaidya review."
     },
     {
       "id": "dravya.mustard-greens",

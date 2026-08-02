@@ -158,7 +158,7 @@
       "id": "dravya.sea-salt",
       "name": "Salt, sea/table",
       "sanskrit": "Samudra lavana",
-      "aliases": ["table salt"],
+      "aliases": ["table salt", "Iodized table salt"],
       "category": "salt-mineral",
       "rasa": ["salty"],
       "virya": "heating",
@@ -177,13 +177,14 @@
       "usda": [{"fdcId": 10307, "name": "Salt, table", "tier": "exact"}],
       "servings": [{"label": "1/4 tsp", "grams": 1.5}],
       "provenance": ["Charaka Samhita Sutrasthana 27 (Lavana varga)"],
-      "confidence": {"ayur": 0.9, "sci": 0.85}
+      "confidence": {"ayur": 0.9, "sci": 0.85},
+      "reviewNote": "Canon iodized table salt resolves here by identity; iodization is a fortification distinction, not a separate Ayurvedic substance."
     },
     {
       "id": "dravya.black-salt",
       "name": "Black salt",
       "sanskrit": "Vida lavana",
-      "aliases": ["kala namak", "bit noon"],
+      "aliases": ["kala namak", "bit noon", "Vida salt", "bid lavan", "vit lavan"],
       "category": "salt-mineral",
       "rasa": ["salty"],
       "virya": "heating",
@@ -485,7 +486,7 @@
       "id": "dravya.dill",
       "name": "Dill, fresh",
       "sanskrit": "Shatahva",
-      "aliases": ["soa", "suva"],
+      "aliases": ["soa", "suva", "Dill greens (suva)"],
       "category": "herb",
       "rasa": ["pungent", "bitter"],
       "virya": "heating",
@@ -505,7 +506,7 @@
       "servings": [{"label": "2 tbsp chopped", "grams": 3.5}],
       "provenance": ["Bhavaprakasha Nighantu, Haritakyadi varga"],
       "confidence": {"ayur": 0.8, "sci": 0.8},
-      "reviewNote": "Sanskrit naming overlaps in sources: Shatapushpa is used for both dill and fennel; dill given as Shatahva here, fennel as Madhurika/Mishreya. Expert to standardize."
+      "reviewNote": "Sanskrit naming overlaps in sources: Shatapushpa is used for both dill and fennel; dill remains Shatahva here and fennel remains Shatapushpa pending vaidya review. Canon dill vpk [-2, 0, -1] differs from the retained target [-1, 1, -1]."
     },
     {
       "id": "dravya.oregano",

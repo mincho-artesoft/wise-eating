@@ -88,7 +88,35 @@ class RecipeNutritionTests(unittest.TestCase):
 
     def test_all_recipes_meet_coverage_floor(self):
         counts = self.envelope["counts"]["nutrition"]
-        self.assertEqual(counts, {"full": 1500, "estimated": 0, "none": 0})
+        self.assertEqual(counts["none"], 0)
+        self.assertEqual(sum(counts.values()), len(self.recipes))
+
+        source_recipes = {recipe["id"]: recipe for recipe in self.recipes}
+        for recipe in self.envelope["recipes"]:
+            panel = recipe["nutrition"]
+            if panel["status"] != "estimated":
+                continue
+            active_source_null_dravyas = {
+                ingredient["dravyaId"]
+                for ingredient in source_recipes[recipe["id"]]["ingredients"]
+                if "dravyaId" in ingredient
+                and self.nutrition_by_id.get(
+                    self.preferred_bindings.get(ingredient["dravyaId"])
+                )
+                is None
+            }
+            self.assertTrue(active_source_null_dravyas, recipe["id"])
+            self.assertEqual(
+                set(panel["missingIngredients"]),
+                active_source_null_dravyas,
+                recipe["id"],
+            )
+
+        # TRANSITIONAL, PRE-INGEST. dravya_foods.json is not wired into the build;
+        # the build reads Ayura/Legacy/foods.json. 4 of these 10 close on ingest
+        # alone, 3 on NUT-1 review, 3 are permanently unfillable. TASK-NUT1 must
+        # update this figure. See issue #3.
+        self.assertEqual(counts, {"full": 1501, "estimated": 10, "none": 0})
         self.assertLessEqual(counts["none"], len(self.recipes) * 0.25)
 
     def test_panels_cover_energy_macros_all_vitamins_and_all_minerals(self):
