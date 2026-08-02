@@ -785,6 +785,7 @@ enum AyurvedaSeeder {
       && actualAllergens == Set(safety.allergens)
       && food.minAgeMonths == safety.minAgeMonths
       && food.ageProvenance == safety.ageProvenance
+      && food.ageSource == safety.ageSource
   }
 
   private static func updateSafetyMetadata(
@@ -809,6 +810,7 @@ enum AyurvedaSeeder {
     }
     food.minAgeMonths = safety.minAgeMonths
     food.ageProvenance = safety.ageProvenance
+    food.ageSource = safety.ageSource
     return true
   }
 
@@ -1221,6 +1223,7 @@ private struct SafetyMetadataDTO: Decodable {
   let minAgeMonths: Int
   let enforcedMinAgeMonths: Int
   let ageProvenance: String
+  let ageSource: String?
   let ageContributors: [AgeContributorDTO]
   let provenance: String
   let reviewRequired: Bool
@@ -1234,6 +1237,7 @@ private struct AgeContributorDTO: Decodable {
   let minAgeMonths: Int
   let enforcedMinAgeMonths: Int
   let ageProvenance: String
+  let ageSource: String?
 }
 
 private struct DoshaDTO: Decodable {

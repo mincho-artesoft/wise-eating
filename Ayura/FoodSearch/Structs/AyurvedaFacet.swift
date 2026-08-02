@@ -291,6 +291,7 @@ private struct AyurvedaFacetSeedProfile: Decodable {
         let minAgeMonths: Int
         let enforcedMinAgeMonths: Int
         let ageProvenance: String
+        let ageSource: String?
     }
 
     struct Confidence: Decodable {

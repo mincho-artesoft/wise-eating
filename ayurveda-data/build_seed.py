@@ -332,6 +332,91 @@ HONEY_DRAVYA_IDS = {
     "dravya.honey-aged",
     "dravya.panchamrita",
 }
+WHOLE_NUT_SEED_AGE_IDS = {
+    "dravya.almond",
+    "dravya.brazil-nut",
+    "dravya.cashew",
+    "dravya.chestnut",
+    "dravya.chironji",
+    "dravya.coconut-dried",
+    "dravya.dry-coconut",
+    "dravya.hazelnut",
+    "dravya.lotus-seed",
+    "dravya.macadamia",
+    "dravya.makhana",
+    "dravya.panchmeva",
+    "dravya.pecan",
+    "dravya.pine-nut",
+    "dravya.pistachio",
+    "dravya.pumpkin-seed",
+    "dravya.sunflower-seed",
+    "dravya.walnut",
+}
+NO_FLOOR_NUT_SEED_IDS = {
+    "dravya.basil-holy-seed",
+    "dravya.black-sesame",
+    "dravya.chia",
+    "dravya.cucumber-seed",
+    "dravya.desiccated-coconut",
+    "dravya.dried-apricot",
+    "dravya.dried-cranberry",
+    "dravya.dried-fig",
+    "dravya.dried-water-chestnut",
+    "dravya.dry-dates",
+    "dravya.flaxseed",
+    "dravya.garden-cress-seed",
+    "dravya.golden-raisin",
+    "dravya.hemp-seed",
+    "dravya.kamal-gatta-dry",
+    "dravya.munakka",
+    "dravya.muskmelon-seed",
+    "dravya.niger-seed",
+    "dravya.poppy-seed",
+    "dravya.prunes",
+    "dravya.sabja-seed",
+    "dravya.sesame-seed",
+    "dravya.watermelon-seed",
+    "dravya.white-sesame",
+}
+SALT_AGE_IDS = {
+    "dravya.black-salt",
+    "dravya.rock-salt",
+    "dravya.sambhar-salt",
+    "dravya.sea-salt",
+}
+WEANING_AGE_CATEGORIES = {
+    "dairy",
+    "fruit",
+    "grain",
+    "leafy-green",
+    "legume",
+    "oil-fat",
+    "regional",
+    "sweetener",
+    "vegetable",
+}
+AGE_PROPAGATION_CONTAMINANT = "contaminant"
+AGE_PROPAGATION_PREPARATION = "preparation"
+AGE_PROPAGATION_DIETARY_PRACTICE = "dietary-practice"
+AGE_PROPAGATION_WEANING_FLOOR = "weaning-floor"
+AGE_PROPAGATION_MODES = {
+    AGE_PROPAGATION_CONTAMINANT,
+    AGE_PROPAGATION_PREPARATION,
+    AGE_PROPAGATION_DIETARY_PRACTICE,
+    AGE_PROPAGATION_WEANING_FLOOR,
+}
+HONEY_AGE_SOURCE = "NHS, Foods to avoid — do not give honey until over 1 year old"
+WHOLE_NUT_SEED_AGE_SOURCE = (
+    "NHS, Foods to avoid giving babies and young children — whole nuts should "
+    "not be given to children under 5"
+)
+SALT_AGE_SOURCE = (
+    "NHS — do not add salt to your baby's food; SACN max 1g/day at 6-12 months"
+)
+WEANING_AGE_SOURCE = (
+    "WHO, Infant and young child feeding, 20 Dec 2023 — complementary foods "
+    "at 6 months"
+)
 
 
 class BuildError(RuntimeError):
@@ -2157,10 +2242,84 @@ def composition_diets_for_dravya(
     return diets
 
 
+def authored_age_rules(dravyas: list[dict[str, Any]]) -> tuple[dict[str, Any], ...]:
+    """Return the complete cited rule table for the supplied catalogue."""
+    weaning_ids = frozenset(
+        dravya["id"]
+        for dravya in dravyas
+        if dravya["category"] in WEANING_AGE_CATEGORIES
+    )
+    rules = (
+        {
+            "name": "honey-min-age:12",
+            "ids": frozenset(HONEY_DRAVYA_IDS),
+            "floor": 12,
+            "source": HONEY_AGE_SOURCE,
+            "propagation": AGE_PROPAGATION_CONTAMINANT,
+        },
+        {
+            "name": "complementary-food-min-age:6",
+            "ids": weaning_ids,
+            "floor": 6,
+            "source": WEANING_AGE_SOURCE,
+            "propagation": AGE_PROPAGATION_WEANING_FLOOR,
+        },
+        {
+            "name": "whole-nut-seed-min-age:60",
+            "ids": frozenset(WHOLE_NUT_SEED_AGE_IDS),
+            "floor": 60,
+            "source": WHOLE_NUT_SEED_AGE_SOURCE,
+            "propagation": AGE_PROPAGATION_PREPARATION,
+        },
+        {
+            "name": "added-salt-min-age:12",
+            "ids": frozenset(SALT_AGE_IDS),
+            "floor": 12,
+            "source": SALT_AGE_SOURCE,
+            "propagation": AGE_PROPAGATION_DIETARY_PRACTICE,
+        },
+    )
+    for rule in rules:
+        if not rule["ids"]:
+            raise BuildError(f"authored age rule has no ids: {rule['name']}")
+        if not isinstance(rule["floor"], int) or rule["floor"] <= 0:
+            raise BuildError(f"authored age rule has invalid floor: {rule['name']}")
+        if not rule["source"].strip():
+            raise BuildError(f"authored age rule has no source: {rule['name']}")
+        if rule["propagation"] not in AGE_PROPAGATION_MODES:
+            raise BuildError(
+                f"authored age rule has invalid propagation: {rule['name']}"
+            )
+    contaminant_rules = {
+        rule["name"]
+        for rule in rules
+        if rule["propagation"] == AGE_PROPAGATION_CONTAMINANT
+    }
+    if contaminant_rules != {"honey-min-age:12"}:
+        raise BuildError(
+            "contaminant age-rule gate failed: "
+            + f"expected honey only, got {sorted(contaminant_rules)}"
+        )
+    return rules
+
+
+def matching_authored_age_rules(
+    dravya_id: str,
+    rules: tuple[dict[str, Any], ...],
+) -> list[dict[str, Any]]:
+    return [rule for rule in rules if dravya_id in rule["ids"]]
+
+
+def joined_age_sources(rules: list[dict[str, Any]]) -> str | None:
+    sources = sorted({rule["source"] for rule in rules})
+    return " | ".join(sources) if sources else None
+
+
 def derive_dravya_safety(
     dravya: dict[str, Any],
     food_id: int,
     source_safety_by_id: dict[int, dict[str, Any]],
+    age_rules: tuple[dict[str, Any], ...],
 ) -> dict[str, Any]:
     source = source_safety_by_id.get(
         food_id,
@@ -2170,20 +2329,57 @@ def derive_dravya_safety(
     allergens = set(source["allergens"]).union(reviewed)
     controlled_diets = composition_diets_for_dravya(dravya, allergens)
     preserved_source_diets = set(source["diets"]) - COMPOSITION_DIETS
-    min_age = int(source["minAgeMonths"])
-    enforced_min_age = 0
-    age_provenance = AGE_PROVENANCE_LEGACY_IMPORT
-    if dravya["id"] in HONEY_DRAVYA_IDS:
-        min_age = max(min_age, 12)
-        enforced_min_age = 12
-        age_provenance = AGE_PROVENANCE_AUTHORED
+    source_min_age = int(source["minAgeMonths"])
+    matched_age_rules = matching_authored_age_rules(dravya["id"], age_rules)
+    authored_floor = max(
+        (int(rule["floor"]) for rule in matched_age_rules),
+        default=0,
+    )
+    min_age = max(source_min_age, authored_floor)
+    enforced_min_age = authored_floor
+    age_provenance = (
+        AGE_PROVENANCE_AUTHORED
+        if matched_age_rules
+        else AGE_PROVENANCE_LEGACY_IMPORT
+    )
+    age_source = joined_age_sources(matched_age_rules)
+
+    recipe_display_rules = [
+        rule
+        for rule in matched_age_rules
+        if rule["propagation"]
+        in {
+            AGE_PROPAGATION_CONTAMINANT,
+            AGE_PROPAGATION_PREPARATION,
+            AGE_PROPAGATION_WEANING_FLOOR,
+        }
+    ]
+    recipe_enforced_rules = [
+        rule
+        for rule in matched_age_rules
+        if rule["propagation"] == AGE_PROPAGATION_CONTAMINANT
+    ]
+    recipe_display_floor = max(
+        source_min_age,
+        max((int(rule["floor"]) for rule in recipe_display_rules), default=0),
+    )
+    recipe_enforced_floor = max(
+        (int(rule["floor"]) for rule in recipe_enforced_rules),
+        default=0,
+    )
+    recipe_age_rules = recipe_display_rules + recipe_enforced_rules
+    recipe_age_source = joined_age_sources(recipe_age_rules)
+    recipe_age_provenance = (
+        AGE_PROVENANCE_AUTHORED
+        if recipe_age_rules
+        else AGE_PROVENANCE_LEGACY_IMPORT
+    )
 
     rules = [f"category:{dravya['category']}"]
     rules.extend(f"reviewed-allergen:{allergen}" for allergen in sorted(reviewed))
     if food_id in source_safety_by_id:
         rules.append(f"existing-usda:{food_id}")
-    if dravya["id"] in HONEY_DRAVYA_IDS:
-        rules.append("honey-min-age:12")
+    rules.extend(rule["name"] for rule in matched_age_rules)
 
     return {
         "allergens": sorted(allergens),
@@ -2191,12 +2387,18 @@ def derive_dravya_safety(
         "minAgeMonths": min_age,
         "enforcedMinAgeMonths": enforced_min_age,
         "ageProvenance": age_provenance,
+        "ageSource": age_source,
+        "recipeDisplayMinAgeMonths": recipe_display_floor,
+        "recipeEnforcedMinAgeMonths": recipe_enforced_floor,
+        "recipeAgeProvenance": recipe_age_provenance,
+        "recipeAgeSource": recipe_age_source,
         "ageContributors": [
             {
                 "ingredientId": dravya["id"],
                 "minAgeMonths": min_age,
                 "enforcedMinAgeMonths": enforced_min_age,
                 "ageProvenance": age_provenance,
+                "ageSource": age_source,
             }
         ],
         "provenance": SAFETY_PROVENANCE,
@@ -2234,6 +2436,11 @@ def normalized_direct_food_safety(source: dict[str, Any]) -> dict[str, Any]:
         "minAgeMonths": int(source["minAgeMonths"]),
         "enforcedMinAgeMonths": 0,
         "ageProvenance": AGE_PROVENANCE_LEGACY_IMPORT,
+        "ageSource": None,
+        "recipeDisplayMinAgeMonths": int(source["minAgeMonths"]),
+        "recipeEnforcedMinAgeMonths": 0,
+        "recipeAgeProvenance": AGE_PROVENANCE_LEGACY_IMPORT,
+        "recipeAgeSource": None,
     }
 
 
@@ -2269,9 +2476,12 @@ def derive_recipe_safety(
             {
                 "ingredientId": ingredient_id,
                 "grams": ingredient["grams"],
-                "minAgeMonths": int(safety["minAgeMonths"]),
-                "enforcedMinAgeMonths": int(safety["enforcedMinAgeMonths"]),
-                "ageProvenance": safety["ageProvenance"],
+                "minAgeMonths": int(safety["recipeDisplayMinAgeMonths"]),
+                "enforcedMinAgeMonths": int(
+                    safety["recipeEnforcedMinAgeMonths"]
+                ),
+                "ageProvenance": safety["recipeAgeProvenance"],
+                "ageSource": safety["recipeAgeSource"],
             }
         )
 
@@ -2286,13 +2496,27 @@ def derive_recipe_safety(
     for safety in ingredient_safety:
         diets.intersection_update(set(safety["diets"]))
 
-    min_age = max(int(safety["minAgeMonths"]) for safety in ingredient_safety)
-    enforced_min_age = max(
-        int(safety["enforcedMinAgeMonths"]) for safety in ingredient_safety
+    min_age = max(
+        int(safety["recipeDisplayMinAgeMonths"])
+        for safety in ingredient_safety
     )
-    if contains_honey:
-        min_age = max(min_age, 12)
-        enforced_min_age = max(enforced_min_age, 12)
+    enforced_min_age = max(
+        int(safety["recipeEnforcedMinAgeMonths"])
+        for safety in ingredient_safety
+    )
+    authored_contributors = [
+        safety
+        for safety in ingredient_safety
+        if safety["recipeAgeProvenance"] == AGE_PROVENANCE_AUTHORED
+    ]
+    age_source_values = sorted(
+        {
+            safety["recipeAgeSource"]
+            for safety in authored_contributors
+            if safety["recipeAgeSource"]
+        }
+    )
+    age_source = " | ".join(age_source_values) if age_source_values else None
 
     rules = [
         "ingredient-union:allergens",
@@ -2308,9 +2532,10 @@ def derive_recipe_safety(
         "enforcedMinAgeMonths": enforced_min_age,
         "ageProvenance": (
             AGE_PROVENANCE_AUTHORED
-            if enforced_min_age > 0
+            if authored_contributors
             else AGE_PROVENANCE_LEGACY_IMPORT
         ),
+        "ageSource": age_source,
         "ageContributors": age_contributors,
         "provenance": SAFETY_PROVENANCE,
         "reviewRequired": SAFETY_REVIEW_REQUIRED,
@@ -2319,9 +2544,14 @@ def derive_recipe_safety(
     }
 
 
-def validate_safety_rule_ids(dravyas: list[dict[str, Any]]) -> None:
+def validate_safety_rule_ids(
+    dravyas: list[dict[str, Any]],
+    age_rules: tuple[dict[str, Any], ...],
+) -> None:
     dravya_ids = {dravya["id"] for dravya in dravyas}
-    configured_ids = set(HONEY_DRAVYA_IDS)
+    configured_ids: set[str] = set()
+    for rule in age_rules:
+        configured_ids.update(rule["ids"])
     for allergen, ids in ALLERGEN_DRAVYA_RULES.items():
         if allergen not in ALLERGEN_VOCABULARY:
             raise BuildError(f"unsupported reviewed allergen rule: {allergen}")
@@ -2568,7 +2798,8 @@ def build_envelope(
     source_safety_by_id: dict[int, dict[str, Any]],
     preferred_bindings: dict[str, int],
 ) -> tuple[dict[str, Any], list[tuple[int, str, str, list[str]]], list[str]]:
-    validate_safety_rule_ids(dravyas)
+    age_rules = authored_age_rules(dravyas)
+    validate_safety_rule_ids(dravyas, age_rules)
     assert_reserved_band_free(store_ids)
     assignments, links, contested, placeholder_ids = resolve_primary_foods(dravyas, store_ids)
     if len(links) != V1_LINK_COUNT:
@@ -2589,6 +2820,7 @@ def build_envelope(
             dravya,
             output["foodId"],
             source_safety_by_id,
+            age_rules,
         )
         dravya_safety[dravya["id"]] = output["safety"]
         output_dravyas.append(output)

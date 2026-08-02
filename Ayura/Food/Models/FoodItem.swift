@@ -24,6 +24,7 @@ public final class FoodItem: Identifiable {
     
     public var minAgeMonths: Int = 0
     public var ageProvenance: String?
+    public var ageSource: String?
     public var nameNormalized: String
     public var category: [FoodCategory]?
 

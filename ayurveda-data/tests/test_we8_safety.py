@@ -38,7 +38,8 @@ class WE8SafetyDerivationTests(unittest.TestCase):
             "batch-r*.json",
             "items",
         )
-        build_seed.validate_safety_rule_ids(cls.dravyas)
+        cls.age_rules = build_seed.authored_age_rules(cls.dravyas)
+        build_seed.validate_safety_rule_ids(cls.dravyas, cls.age_rules)
         assignments, _, _, _ = build_seed.resolve_primary_foods(
             cls.dravyas,
             cls.store_ids,
@@ -48,6 +49,7 @@ class WE8SafetyDerivationTests(unittest.TestCase):
                 dravya,
                 assignments[dravya["id"]][0],
                 cls.source_safety,
+                cls.age_rules,
             )
             for dravya in cls.dravyas
         }
@@ -64,7 +66,7 @@ class WE8SafetyDerivationTests(unittest.TestCase):
         rows = list(self.dravya_safety.values()) + list(
             self.recipe_safety.values()
         )
-        self.assertEqual(len(rows), 2_205)
+        self.assertEqual(len(rows), 2_219)
         self.assertTrue(
             all(
                 row["provenance"] == "scaffold-default"
@@ -177,7 +179,7 @@ class WE8SafetyDerivationTests(unittest.TestCase):
             for safety in self.recipe_safety.values()
             if "honey-min-age:12" in safety["rules"]
         ]
-        self.assertEqual(len(honey_recipes), 4)
+        self.assertEqual(len(honey_recipes), 5)
         self.assertTrue(
             all(
                 safety["minAgeMonths"] >= 12

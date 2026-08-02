@@ -48,6 +48,8 @@ class WE8CAgeDerivationTests(unittest.TestCase):
             "batch-r*.json",
             "items",
         )
+        cls.age_rules = build_seed.authored_age_rules(cls.dravyas)
+        build_seed.validate_safety_rule_ids(cls.dravyas, cls.age_rules)
         assignments, _, _, _ = build_seed.resolve_primary_foods(
             cls.dravyas,
             cls.store_ids,
@@ -57,6 +59,7 @@ class WE8CAgeDerivationTests(unittest.TestCase):
                 dravya,
                 assignments[dravya["id"]][0],
                 cls.source_safety,
+                cls.age_rules,
             )
             for dravya in cls.dravyas
         }
@@ -92,11 +95,15 @@ class WE8CAgeDerivationTests(unittest.TestCase):
         honey_recipes = [
             safety
             for safety in self.recipe_safety.values()
-            if safety["ageProvenance"] == "authored"
+            if safety["enforcedMinAgeMonths"] > 0
         ]
         self.assertEqual(len(honey_recipes), 5)
         self.assertTrue(
-            all(safety["enforcedMinAgeMonths"] == 12 for safety in honey_recipes)
+            all(
+                safety["enforcedMinAgeMonths"] == 12
+                and build_seed.HONEY_AGE_SOURCE in safety["ageSource"]
+                for safety in honey_recipes
+            )
         )
 
     def test_recipe_visibility_matches_founder_simulation(self):
@@ -118,13 +125,30 @@ class WE8CAgeDerivationTests(unittest.TestCase):
             {9: 1_506, 24: 1_511, 60: 1_511},
         )
 
-    def test_display_floor_histogram_is_unchanged(self):
+    def test_display_floor_histogram_reports_propagated_preparation_rules(self):
         display = collections.Counter(
             safety["minAgeMonths"] for safety in self.recipe_safety.values()
         )
         self.assertEqual(
             display,
-            {6: 1, 12: 1, 24: 1_218, 48: 219, 60: 70, 192: 2},
+            {6: 1, 12: 1, 24: 1_203, 48: 109, 60: 195, 192: 2},
+        )
+
+        r2_recipes = [
+            recipe
+            for recipe in self.recipes
+            if any(
+                ingredient.get("dravyaId") in build_seed.WHOLE_NUT_SEED_AGE_IDS
+                for ingredient in recipe["ingredients"]
+            )
+        ]
+        self.assertEqual(len(r2_recipes), 155)
+        self.assertEqual(
+            sum(
+                self.recipe_safety[recipe["id"]]["minAgeMonths"] == 60
+                for recipe in r2_recipes
+            ),
+            155,
         )
 
     def test_provenance_is_carried_per_recipe_ingredient(self):
@@ -151,7 +175,7 @@ class WE8CAgeDerivationTests(unittest.TestCase):
                 total += 1
                 authored += contributor["ageProvenance"] == "authored"
         self.assertEqual(total, 10_644)
-        self.assertEqual(authored, 5)
+        self.assertEqual(authored, 4_957)
 
     def test_legacy_import_age_is_not_rendered(self):
         historical = {
@@ -163,25 +187,92 @@ class WE8CAgeDerivationTests(unittest.TestCase):
             collections.Counter(
                 safety["ageProvenance"] for safety in historical.values()
             ),
-            {"legacyImport": 701, "authored": 4},
+            {"legacyImport": 314, "authored": 391},
         )
         self.assertEqual(
             collections.Counter(
                 safety["ageProvenance"] for safety in self.dravya_safety.values()
             ),
-            {"legacyImport": 704, "authored": 4},
+            {"legacyImport": 315, "authored": 393},
         )
 
         model = FOOD_ITEM_MODEL.read_text(encoding="utf-8")
         detail = FOOD_DETAIL_VIEW.read_text(encoding="utf-8")
         seeder = AYURVEDA_SEEDER.read_text(encoding="utf-8")
         self.assertIn("public var ageProvenance: String?", model)
+        self.assertIn("public var ageSource: String?", model)
         self.assertIn(
             'food.minAgeMonths > 0 && food.ageProvenance != "legacyImport"',
             detail,
         )
         self.assertEqual(detail.count("if shouldDisplayMinimumAge"), 2)
         self.assertIn("food.ageProvenance = safety.ageProvenance", seeder)
+        self.assertIn("food.ageSource = safety.ageSource", seeder)
+
+    def test_authored_age_sources_and_propagation_modes_are_complete(self):
+        self.assertEqual(len(self.dravyas), 708)
+        weaning_rule = next(
+            rule
+            for rule in self.age_rules
+            if rule["propagation"] == build_seed.AGE_PROPAGATION_WEANING_FLOOR
+        )
+        self.assertEqual(len(weaning_rule["ids"]), 369)
+
+        category_ids = {
+            dravya["id"]
+            for dravya in self.dravyas
+            if dravya["category"] in {"dry-fruit-nut", "seed"}
+        }
+        self.assertEqual(len(category_ids), 42)
+        self.assertEqual(len(build_seed.WHOLE_NUT_SEED_AGE_IDS), 18)
+        self.assertEqual(len(build_seed.NO_FLOOR_NUT_SEED_IDS), 24)
+        self.assertFalse(
+            build_seed.WHOLE_NUT_SEED_AGE_IDS
+            & build_seed.NO_FLOOR_NUT_SEED_IDS
+        )
+        self.assertEqual(
+            category_ids,
+            build_seed.WHOLE_NUT_SEED_AGE_IDS
+            | build_seed.NO_FLOOR_NUT_SEED_IDS,
+        )
+
+        contaminants = {
+            rule["name"]
+            for rule in self.age_rules
+            if rule["propagation"] == build_seed.AGE_PROPAGATION_CONTAMINANT
+        }
+        self.assertEqual(contaminants, {"honey-min-age:12"})
+        self.assertTrue(
+            all(
+                self.dravya_safety[fish_id]["ageSource"] is None
+                for fish_id in ("dravya.seer-fish", "dravya.tuna")
+            )
+        )
+
+        rows = list(self.dravya_safety.values()) + list(
+            self.recipe_safety.values()
+        )
+        self.assertTrue(
+            all(
+                row["ageProvenance"] != "authored"
+                or bool(row["ageSource"])
+                for row in rows
+            )
+        )
+        allowed_sources = {
+            build_seed.HONEY_AGE_SOURCE,
+            build_seed.SALT_AGE_SOURCE,
+            build_seed.WEANING_AGE_SOURCE,
+            build_seed.WHOLE_NUT_SEED_AGE_SOURCE,
+        }
+        observed_sources = {
+            source
+            for row in rows
+            for source in (row["ageSource"] or "").split(" | ")
+            if source
+        }
+        self.assertTrue(observed_sources)
+        self.assertFalse(observed_sources - allowed_sources)
 
     def test_dravya_visibility_delta_is_exact(self):
         display = {
@@ -201,7 +292,7 @@ class WE8CAgeDerivationTests(unittest.TestCase):
                 )
                 for age in (9, 24, 60)
             },
-            {9: 247, 24: 29, 60: 8},
+            {9: 232, 24: 18, 60: 8},
         )
 
     def test_search_filters_enforced_floor_while_badge_uses_display_floor(self):
