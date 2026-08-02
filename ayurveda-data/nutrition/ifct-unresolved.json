@@ -1598,5 +1598,43 @@
    "dravya.yam-lesser",
    "Lesser yam"
   ]
+ ],
+ "withdrawn": [
+  [
+   "dravya.petha-murabba",
+   "Ash gourd murabba (petha)",
+   "D001",
+   "Ash gourd"
+  ],
+  [
+   "dravya.chickpea-white",
+   "White chickpea",
+   "B002",
+   "Bengal gram, whole"
+  ],
+  [
+   "dravya.elephant-apple",
+   "Elephant apple (ou-tenga)",
+   "E067",
+   "Wood Apple"
+  ],
+  [
+   "dravya.foxtail-millet",
+   "Foxtail millet",
+   "A017",
+   "Varagu"
+  ],
+  [
+   "dravya.kanda-poha",
+   "Kanda poha",
+   "A011",
+   "Rice flakes"
+  ],
+  [
+   "dravya.mosambi-juice",
+   "Sweet lime juice",
+   "E034",
+   "Lime, sweet, pulp"
+  ]
  ]
 }

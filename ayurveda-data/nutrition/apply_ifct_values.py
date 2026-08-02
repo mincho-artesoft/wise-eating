@@ -1,5 +1,26 @@
 import csv,json
 B='ayurveda-data/nutrition/'
+WITHDRAWN_STATUS='withdrawn — wrong IFCT row, see TASK-NUT1 §2'
+WITHDRAWN={
+ 'dravya.petha-murabba':('D001','Ash gourd'),
+ 'dravya.kanda-poha':('A011','Rice flakes'),
+ 'dravya.foxtail-millet':('A017','Varagu'),
+ 'dravya.elephant-apple':('E067','Wood Apple'),
+ 'dravya.mosambi-juice':('E034','Lime, sweet, pulp'),
+ 'dravya.chickpea-white':('B002','Bengal gram, whole'),
+}
+REVIEWED_COLLISIONS={
+ 'dravya.ash-gourd-juice-flesh':{
+   'ifctCode':'D001','status':'reviewed — identical by construction',
+   'note':'Two raw ash-gourd cuts share the same measured base row.'},
+ 'dravya.ash-gourd-strips':{
+   'ifctCode':'D001','status':'reviewed — identical by construction',
+   'note':'Two raw ash-gourd cuts share the same measured base row.'},
+ 'dravya.round-melon-tinda-punjabi':{
+   'ifctCode':'D073','status':'reviewed — duplicate identity, see GitHub issue #4'},
+ 'dravya.tinda':{
+   'ifctCode':'D073','status':'reviewed — duplicate identity, see GitHub issue #4'},
+}
 rows=list(csv.DictReader(open(B+'ifct2017-compositions.csv',encoding='utf-8',errors='replace')))
 C={c.split('; ')[-1]:c for c in rows[0]}
 byc={r[C['code']]:r for r in rows}
@@ -38,6 +59,7 @@ exact={x[0]:(x[2],x[3]) for x in m['exact']}
 foods=json.load(open(B+'dravya_foods.json'))
 n=0
 for rec in foods:
+    if rec['dravyaId'] in WITHDRAWN: continue
     hit=exact.get(rec['dravyaId'])
     if not hit: continue
     code,iname=hit; r=byc[code]; n+=1
@@ -56,9 +78,32 @@ for rec in foods:
         'currentMinAgeMonths':rec['_review'].get('currentMinAgeMonths'),
         'proposedMinAgeMonths':rec['_review'].get('proposedMinAgeMonths'),
         'ageReason':rec['_review'].get('ageReason')}
+    if rec['dravyaId'] in REVIEWED_COLLISIONS:
+        rec['_review']['reverseCollision']=REVIEWED_COLLISIONS[rec['dravyaId']]
+for rec in foods:
+    withdrawn=WITHDRAWN.get(rec['dravyaId'])
+    if not withdrawn: continue
+    code,iname=withdrawn
+    for grp in MAP:
+        for field in rec.get(grp,{}).values():
+            field['value']=None
+    previous=rec['_review']
+    rec['_review']={
+        'source':previous.get('source'),
+        'spread':previous.get('spread'),
+        'status':WITHDRAWN_STATUS,
+        'withdrawnIfctCode':code,
+        'withdrawnIfctName':iname,
+        'currentMinAgeMonths':previous.get('currentMinAgeMonths'),
+        'proposedMinAgeMonths':previous.get('proposedMinAgeMonths'),
+        'ageReason':previous.get('ageReason')}
 json.dump(foods,open(B+'dravya_foods.json','w'),indent=1,ensure_ascii=False)
-json.dump({'ambiguous':m['ambiguous'],'unmatched':m['none']},
+json.dump({'ambiguous':m['ambiguous'],'unmatched':m['none'],'withdrawn':m.get('withdrawn',[])},
           open(B+'ifct-unresolved.json','w'),indent=1,ensure_ascii=False)
 print(f"filled {n} foods from IFCT 2017 measured values")
-srcd=sum(1 for f in foods if f['_review'].get('source'))
+srcd=sum(1 for f in foods if any(
+    field.get('value') is not None
+    for grp in MAP
+    for field in f.get(grp,{}).values()))
 print(f"total with nutrition now: {srcd} of {len(foods)}")
+print(f"withdrew {len(WITHDRAWN)} wrong IFCT matches")

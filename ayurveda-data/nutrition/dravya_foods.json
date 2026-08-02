@@ -9360,7 +9360,12 @@
    "ifctName": "Ash gourd",
    "currentMinAgeMonths": 0,
    "proposedMinAgeMonths": 6,
-   "ageReason": "annaprashana in the sixth month, matching the modern weaning floor"
+   "ageReason": "annaprashana in the sixth month, matching the modern weaning floor",
+   "reverseCollision": {
+    "ifctCode": "D001",
+    "status": "reviewed — identical by construction",
+    "note": "Two raw ash-gourd cuts share the same measured base row."
+   }
   }
  },
  {
@@ -9882,7 +9887,12 @@
    "ifctName": "Ash gourd",
    "currentMinAgeMonths": 0,
    "proposedMinAgeMonths": 6,
-   "ageReason": "annaprashana in the sixth month, matching the modern weaning floor"
+   "ageReason": "annaprashana in the sixth month, matching the modern weaning floor",
+   "reverseCollision": {
+    "ifctCode": "D001",
+    "status": "reviewed — identical by construction",
+    "note": "Two raw ash-gourd cuts share the same measured base row."
+   }
   }
  },
  {
@@ -35912,41 +35922,41 @@
   "desctiption": "Soak overnight, cook thoroughly, spice assertively — chana's cooling dryness provokes vata unless ginger, ajwain and fat intervene. Midday food.",
   "macronutrients": {
    "carbohydrates": {
-    "value": 39.56,
+    "value": null,
     "unit": "g"
    },
    "protein": {
-    "value": 18.77,
+    "value": null,
     "unit": "g"
    },
    "fat": {
-    "value": 5.11,
+    "value": null,
     "unit": "g"
    },
    "fiber": {
-    "value": 25.22,
+    "value": null,
     "unit": "g"
    },
    "totalSugars": {
-    "value": 0.99,
+    "value": null,
     "unit": "g"
    }
   },
   "lipids": {
    "totalSaturated": {
-    "value": 0.453,
+    "value": null,
     "unit": "g"
    },
    "totalMonounsaturated": {
-    "value": 0.89,
+    "value": null,
     "unit": "g"
    },
    "totalPolyunsaturated": {
-    "value": 2.337,
+    "value": null,
     "unit": "g"
    },
    "totalTrans": {
-    "value": 0.0,
+    "value": null,
     "unit": "g"
    },
    "totalTransMonoenoic": {
@@ -36112,51 +36122,51 @@
   },
   "vitamins": {
    "vitaminA_RAE": {
-    "value": 172.0,
+    "value": null,
     "unit": "ug"
    },
    "retinol": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "caroteneAlpha": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "caroteneBeta": {
-    "value": 172.0,
+    "value": null,
     "unit": "ug"
    },
    "cryptoxanthinBeta": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "luteinZeaxanthin": {
-    "value": 385.0,
+    "value": null,
     "unit": "ug"
    },
    "lycopene": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "vitaminB1_Thiamin": {
-    "value": 0.37,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB2_Riboflavin": {
-    "value": 0.24,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB3_Niacin": {
-    "value": 2.1,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB5_PantothenicAcid": {
-    "value": 2.38,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB6": {
-    "value": 0.36,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB12": {
@@ -36172,7 +36182,7 @@
     "unit": "ug"
    },
    "folateTotal": {
-    "value": 233.0,
+    "value": null,
     "unit": "ug"
    },
    "folicAcid": {
@@ -36180,7 +36190,7 @@
     "unit": "ug"
    },
    "vitaminC": {
-    "value": 0.0,
+    "value": null,
     "unit": "mg"
    },
    "vitaminD": {
@@ -36188,11 +36198,11 @@
     "unit": "ug"
    },
    "vitaminE": {
-    "value": 1.72,
+    "value": null,
     "unit": "mg"
    },
    "vitaminK": {
-    "value": 2.1,
+    "value": null,
     "unit": "ug"
    },
    "choline": {
@@ -36202,43 +36212,43 @@
   },
   "minerals": {
    "calcium": {
-    "value": 150.0,
+    "value": null,
     "unit": "mg"
    },
    "iron": {
-    "value": 6.78,
+    "value": null,
     "unit": "mg"
    },
    "magnesium": {
-    "value": 160.0,
+    "value": null,
     "unit": "mg"
    },
    "phosphorus": {
-    "value": 267.0,
+    "value": null,
     "unit": "mg"
    },
    "potassium": {
-    "value": 935.0,
+    "value": null,
     "unit": "mg"
    },
    "sodium": {
-    "value": 26.56,
+    "value": null,
     "unit": "mg"
    },
    "selenium": {
-    "value": 41.23,
+    "value": null,
     "unit": "ug"
    },
    "zinc": {
-    "value": 3.37,
+    "value": null,
     "unit": "mg"
    },
    "copper": {
-    "value": 0.85,
+    "value": null,
     "unit": "mg"
    },
    "manganese": {
-    "value": 2.71,
+    "value": null,
     "unit": "mg"
    },
    "fluoride": {
@@ -36248,75 +36258,75 @@
   },
   "aminoAcids": {
    "alanine": {
-    "value": 0.8766,
+    "value": null,
     "unit": "g"
    },
    "arginine": {
-    "value": 1.6123,
+    "value": null,
     "unit": "g"
    },
    "asparticAcid": {
-    "value": 2.2111,
+    "value": null,
     "unit": "g"
    },
    "cystine": {
-    "value": 0.2384,
+    "value": null,
     "unit": "g"
    },
    "glutamicAcid": {
-    "value": 3.2416,
+    "value": null,
     "unit": "g"
    },
    "glycine": {
-    "value": 0.7414,
+    "value": null,
     "unit": "g"
    },
    "histidine": {
-    "value": 0.4711,
+    "value": null,
     "unit": "g"
    },
    "isoleucine": {
-    "value": 0.8146,
+    "value": null,
     "unit": "g"
    },
    "leucine": {
-    "value": 1.389,
+    "value": null,
     "unit": "g"
    },
    "lysine": {
-    "value": 1.2369,
+    "value": null,
     "unit": "g"
    },
    "methionine": {
-    "value": 0.2177,
+    "value": null,
     "unit": "g"
    },
    "phenylalanine": {
-    "value": 1.175,
+    "value": null,
     "unit": "g"
    },
    "proline": {
-    "value": 0.702,
+    "value": null,
     "unit": "g"
    },
    "threonine": {
-    "value": 0.6663,
+    "value": null,
     "unit": "g"
    },
    "tryptophan": {
-    "value": 0.1783,
+    "value": null,
     "unit": "g"
    },
    "tyrosine": {
-    "value": 0.5406,
+    "value": null,
     "unit": "g"
    },
    "valine": {
-    "value": 0.8597,
+    "value": null,
     "unit": "g"
    },
    "serine": {
-    "value": 0.9573,
+    "value": null,
     "unit": "g"
    },
    "hydroxyproline": {
@@ -36326,27 +36336,27 @@
   },
   "carbDetails": {
    "starch": {
-    "value": 35.69,
+    "value": null,
     "unit": "g"
    },
    "sucrose": {
-    "value": 0.69,
+    "value": null,
     "unit": "g"
    },
    "glucose": {
-    "value": 0.1,
+    "value": null,
     "unit": "g"
    },
    "fructose": {
-    "value": 0.1,
+    "value": null,
     "unit": "g"
    },
    "lactose": {
-    "value": 0.0,
+    "value": null,
     "unit": "g"
    },
    "maltose": {
-    "value": 0.1,
+    "value": null,
     "unit": "g"
    },
    "galactose": {
@@ -36356,19 +36366,19 @@
   },
   "sterols": {
    "phytosterols": {
-    "value": 98.63,
+    "value": null,
     "unit": "mg"
    },
    "betaSitosterol": {
-    "value": 85.27,
+    "value": null,
     "unit": "mg"
    },
    "campesterol": {
-    "value": 7.1,
+    "value": null,
     "unit": "mg"
    },
    "stigmasterol": {
-    "value": 6.26,
+    "value": null,
     "unit": "mg"
    }
   },
@@ -36386,15 +36396,15 @@
     "unit": "mg"
    },
    "cholesterol": {
-    "value": 0.0,
+    "value": null,
     "unit": "mg"
    },
    "energyKcal": {
-    "value": 287.0,
+    "value": null,
     "unit": "kcal"
    },
    "water": {
-    "value": 8.56,
+    "value": null,
     "unit": "g"
    },
    "weightG": {
@@ -36402,7 +36412,7 @@
     "unit": "g"
    },
    "ash": {
-    "value": 2.78,
+    "value": null,
     "unit": "g"
    },
    "betaine": {
@@ -36417,9 +36427,9 @@
   "_review": {
    "source": "IFCT 2017 [B002] Bengal gram, whole",
    "spread": "regions sampled: 6; each nutrient has a published SD in the _e column of ifct2017-compositions.csv",
-   "status": "measured — IFCT 2017, verify the name match",
-   "ifctCode": "B002",
-   "ifctName": "Bengal gram, whole",
+   "status": "withdrawn — wrong IFCT row, see TASK-NUT1 §2",
+   "withdrawnIfctCode": "B002",
+   "withdrawnIfctName": "Bengal gram, whole",
    "currentMinAgeMonths": 0,
    "proposedMinAgeMonths": 6,
    "ageReason": "annaprashana in the sixth month, matching the modern weaning floor"
@@ -52038,41 +52048,41 @@
   "desctiption": "The Assamese souring fruit — ou-tenga gives masor tenga (sour fish curry) its signature cooling tang.\n\nThe fleshy sepals cooked as a souring agent; rarely eaten raw.",
   "macronutrients": {
    "carbohydrates": {
-    "value": 7.52,
+    "value": null,
     "unit": "g"
    },
    "protein": {
-    "value": 3.14,
+    "value": null,
     "unit": "g"
    },
    "fat": {
-    "value": 3.62,
+    "value": null,
     "unit": "g"
    },
    "fiber": {
-    "value": 5.21,
+    "value": null,
     "unit": "g"
    },
    "totalSugars": {
-    "value": 3.81,
+    "value": null,
     "unit": "g"
    }
   },
   "lipids": {
    "totalSaturated": {
-    "value": 0.877,
+    "value": null,
     "unit": "g"
    },
    "totalMonounsaturated": {
-    "value": 0.595,
+    "value": null,
     "unit": "g"
    },
    "totalPolyunsaturated": {
-    "value": 1.435,
+    "value": null,
     "unit": "g"
    },
    "totalTrans": {
-    "value": 0.0,
+    "value": null,
     "unit": "g"
    },
    "totalTransMonoenoic": {
@@ -52238,51 +52248,51 @@
   },
   "vitamins": {
    "vitaminA_RAE": {
-    "value": 3.81,
+    "value": null,
     "unit": "ug"
    },
    "retinol": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "caroteneAlpha": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "caroteneBeta": {
-    "value": 3.81,
+    "value": null,
     "unit": "ug"
    },
    "cryptoxanthinBeta": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "luteinZeaxanthin": {
-    "value": 11.0,
+    "value": null,
     "unit": "ug"
    },
    "lycopene": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "vitaminB1_Thiamin": {
-    "value": 0.04,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB2_Riboflavin": {
-    "value": 0.01,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB3_Niacin": {
-    "value": 0.55,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB5_PantothenicAcid": {
-    "value": 0.22,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB6": {
-    "value": 0.17,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB12": {
@@ -52298,7 +52308,7 @@
     "unit": "ug"
    },
    "folateTotal": {
-    "value": 6.51,
+    "value": null,
     "unit": "ug"
    },
    "folicAcid": {
@@ -52306,7 +52316,7 @@
     "unit": "ug"
    },
    "vitaminC": {
-    "value": 22.17,
+    "value": null,
     "unit": "mg"
    },
    "vitaminD": {
@@ -52314,11 +52324,11 @@
     "unit": "ug"
    },
    "vitaminE": {
-    "value": 0.07,
+    "value": null,
     "unit": "mg"
    },
    "vitaminK": {
-    "value": 6.8,
+    "value": null,
     "unit": "ug"
    },
    "choline": {
@@ -52328,43 +52338,43 @@
   },
   "minerals": {
    "calcium": {
-    "value": 55.71,
+    "value": null,
     "unit": "mg"
    },
    "iron": {
-    "value": 0.45,
+    "value": null,
     "unit": "mg"
    },
    "magnesium": {
-    "value": 23.7,
+    "value": null,
     "unit": "mg"
    },
    "phosphorus": {
-    "value": 84.32,
+    "value": null,
     "unit": "mg"
    },
    "potassium": {
-    "value": 347.0,
+    "value": null,
     "unit": "mg"
    },
    "sodium": {
-    "value": 1.48,
+    "value": null,
     "unit": "mg"
    },
    "selenium": {
-    "value": 2.32,
+    "value": null,
     "unit": "ug"
    },
    "zinc": {
-    "value": 0.31,
+    "value": null,
     "unit": "mg"
    },
    "copper": {
-    "value": 0.2,
+    "value": null,
     "unit": "mg"
    },
    "manganese": {
-    "value": 0.2,
+    "value": null,
     "unit": "mg"
    },
    "fluoride": {
@@ -52374,75 +52384,75 @@
   },
   "aminoAcids": {
    "alanine": {
-    "value": 0.173,
+    "value": null,
     "unit": "g"
    },
    "arginine": {
-    "value": 0.2368,
+    "value": null,
     "unit": "g"
    },
    "asparticAcid": {
-    "value": 0.9866,
+    "value": null,
     "unit": "g"
    },
    "cystine": {
-    "value": 0.0129,
+    "value": null,
     "unit": "g"
    },
    "glutamicAcid": {
-    "value": 0.4914,
+    "value": null,
     "unit": "g"
    },
    "glycine": {
-    "value": 0.0917,
+    "value": null,
     "unit": "g"
    },
    "histidine": {
-    "value": 0.0377,
+    "value": null,
     "unit": "g"
    },
    "isoleucine": {
-    "value": 0.1234,
+    "value": null,
     "unit": "g"
    },
    "leucine": {
-    "value": 0.0995,
+    "value": null,
     "unit": "g"
    },
    "lysine": {
-    "value": 0.081,
+    "value": null,
     "unit": "g"
    },
    "methionine": {
-    "value": 0.0267,
+    "value": null,
     "unit": "g"
    },
    "phenylalanine": {
-    "value": 0.0936,
+    "value": null,
     "unit": "g"
    },
    "proline": {
-    "value": 0.1319,
+    "value": null,
     "unit": "g"
    },
    "threonine": {
-    "value": 0.0631,
+    "value": null,
     "unit": "g"
    },
    "tryptophan": {
-    "value": 0.0267,
+    "value": null,
     "unit": "g"
    },
    "tyrosine": {
-    "value": 0.0788,
+    "value": null,
     "unit": "g"
    },
    "valine": {
-    "value": 0.1168,
+    "value": null,
     "unit": "g"
    },
    "serine": {
-    "value": 0.1338,
+    "value": null,
     "unit": "g"
    },
    "hydroxyproline": {
@@ -52452,27 +52462,27 @@
   },
   "carbDetails": {
    "starch": {
-    "value": 2.79,
+    "value": null,
     "unit": "g"
    },
    "sucrose": {
-    "value": 1.02,
+    "value": null,
     "unit": "g"
    },
    "glucose": {
-    "value": 1.41,
+    "value": null,
     "unit": "g"
    },
    "fructose": {
-    "value": 1.38,
+    "value": null,
     "unit": "g"
    },
    "lactose": {
-    "value": 0.0,
+    "value": null,
     "unit": "g"
    },
    "maltose": {
-    "value": 0.0,
+    "value": null,
     "unit": "g"
    },
    "galactose": {
@@ -52482,19 +52492,19 @@
   },
   "sterols": {
    "phytosterols": {
-    "value": 29.04,
+    "value": null,
     "unit": "mg"
    },
    "betaSitosterol": {
-    "value": 20.55,
+    "value": null,
     "unit": "mg"
    },
    "campesterol": {
-    "value": 3.86,
+    "value": null,
     "unit": "mg"
    },
    "stigmasterol": {
-    "value": 4.63,
+    "value": null,
     "unit": "mg"
    }
   },
@@ -52512,15 +52522,15 @@
     "unit": "mg"
    },
    "cholesterol": {
-    "value": 0.0,
+    "value": null,
     "unit": "mg"
    },
    "energyKcal": {
-    "value": 78.2,
+    "value": null,
     "unit": "kcal"
    },
    "water": {
-    "value": 79.36,
+    "value": null,
     "unit": "g"
    },
    "weightG": {
@@ -52528,7 +52538,7 @@
     "unit": "g"
    },
    "ash": {
-    "value": 1.15,
+    "value": null,
     "unit": "g"
    },
    "betaine": {
@@ -52543,9 +52553,9 @@
   "_review": {
    "source": "IFCT 2017 [E067] Wood Apple",
    "spread": "regions sampled: 3; each nutrient has a published SD in the _e column of ifct2017-compositions.csv",
-   "status": "measured — IFCT 2017, verify the name match",
-   "ifctCode": "E067",
-   "ifctName": "Wood Apple",
+   "status": "withdrawn — wrong IFCT row, see TASK-NUT1 §2",
+   "withdrawnIfctCode": "E067",
+   "withdrawnIfctName": "Wood Apple",
    "currentMinAgeMonths": 0,
    "proposedMinAgeMonths": 6,
    "ageReason": "annaprashana in the sixth month, matching the modern weaning floor"
@@ -56200,41 +56210,41 @@
   "desctiption": "Soaked, then cooked soft with extra water and ghee — the rule for every millet.",
   "macronutrients": {
    "carbohydrates": {
-    "value": 66.19,
+    "value": null,
     "unit": "g"
    },
    "protein": {
-    "value": 8.92,
+    "value": null,
     "unit": "g"
    },
    "fat": {
-    "value": 2.55,
+    "value": null,
     "unit": "g"
    },
    "fiber": {
-    "value": 6.39,
+    "value": null,
     "unit": "g"
    },
    "totalSugars": {
-    "value": 1.29,
+    "value": null,
     "unit": "g"
    }
   },
   "lipids": {
    "totalSaturated": {
-    "value": 0.246,
+    "value": null,
     "unit": "g"
    },
    "totalMonounsaturated": {
-    "value": 0.297,
+    "value": null,
     "unit": "g"
    },
    "totalPolyunsaturated": {
-    "value": 0.597,
+    "value": null,
     "unit": "g"
    },
    "totalTrans": {
-    "value": 0.0,
+    "value": null,
     "unit": "g"
    },
    "totalTransMonoenoic": {
@@ -56400,51 +56410,51 @@
   },
   "vitamins": {
    "vitaminA_RAE": {
-    "value": 1.41,
+    "value": null,
     "unit": "ug"
    },
    "retinol": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "caroteneAlpha": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "caroteneBeta": {
-    "value": 1.41,
+    "value": null,
     "unit": "ug"
    },
    "cryptoxanthinBeta": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "luteinZeaxanthin": {
-    "value": 59.4,
+    "value": null,
     "unit": "ug"
    },
    "lycopene": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "vitaminB1_Thiamin": {
-    "value": 0.29,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB2_Riboflavin": {
-    "value": 0.2,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB3_Niacin": {
-    "value": 1.49,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB5_PantothenicAcid": {
-    "value": 0.63,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB6": {
-    "value": 0.07,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB12": {
@@ -56460,7 +56470,7 @@
     "unit": "ug"
    },
    "folateTotal": {
-    "value": 39.49,
+    "value": null,
     "unit": "ug"
    },
    "folicAcid": {
@@ -56468,7 +56478,7 @@
     "unit": "ug"
    },
    "vitaminC": {
-    "value": 0.0,
+    "value": null,
     "unit": "mg"
    },
    "vitaminD": {
@@ -56476,11 +56486,11 @@
     "unit": "ug"
    },
    "vitaminE": {
-    "value": 0.07,
+    "value": null,
     "unit": "mg"
    },
    "vitaminK": {
-    "value": 3.75,
+    "value": null,
     "unit": "ug"
    },
    "choline": {
@@ -56490,43 +56500,43 @@
   },
   "minerals": {
    "calcium": {
-    "value": 15.27,
+    "value": null,
     "unit": "mg"
    },
    "iron": {
-    "value": 2.34,
+    "value": null,
     "unit": "mg"
    },
    "magnesium": {
-    "value": 122.0,
+    "value": null,
     "unit": "mg"
    },
    "phosphorus": {
-    "value": 101.0,
+    "value": null,
     "unit": "mg"
    },
    "potassium": {
-    "value": 94.0,
+    "value": null,
     "unit": "mg"
    },
    "sodium": {
-    "value": 3.35,
+    "value": null,
     "unit": "mg"
    },
    "selenium": {
-    "value": 14.12,
+    "value": null,
     "unit": "ug"
    },
    "zinc": {
-    "value": 1.65,
+    "value": null,
     "unit": "mg"
    },
    "copper": {
-    "value": 0.26,
+    "value": null,
     "unit": "mg"
    },
    "manganese": {
-    "value": 0.33,
+    "value": null,
     "unit": "mg"
    },
    "fluoride": {
@@ -56536,75 +56546,75 @@
   },
   "aminoAcids": {
    "alanine": {
-    "value": 0.9812,
+    "value": null,
     "unit": "g"
    },
    "arginine": {
-    "value": 0.2837,
+    "value": null,
     "unit": "g"
    },
    "asparticAcid": {
-    "value": 0.5004,
+    "value": null,
     "unit": "g"
    },
    "cystine": {
-    "value": 0.1713,
+    "value": null,
     "unit": "g"
    },
    "glutamicAcid": {
-    "value": 1.6279,
+    "value": null,
     "unit": "g"
    },
    "glycine": {
-    "value": 0.2783,
+    "value": null,
     "unit": "g"
    },
    "histidine": {
-    "value": 0.1909,
+    "value": null,
     "unit": "g"
    },
    "isoleucine": {
-    "value": 0.4059,
+    "value": null,
     "unit": "g"
    },
    "leucine": {
-    "value": 1.0668,
+    "value": null,
     "unit": "g"
    },
    "lysine": {
-    "value": 0.1267,
+    "value": null,
     "unit": "g"
    },
    "methionine": {
-    "value": 0.2399,
+    "value": null,
     "unit": "g"
    },
    "phenylalanine": {
-    "value": 0.5593,
+    "value": null,
     "unit": "g"
    },
    "proline": {
-    "value": 0.6538,
+    "value": null,
     "unit": "g"
    },
    "threonine": {
-    "value": 0.347,
+    "value": null,
     "unit": "g"
    },
    "tryptophan": {
-    "value": 0.1177,
+    "value": null,
     "unit": "g"
    },
    "tyrosine": {
-    "value": 0.3452,
+    "value": null,
     "unit": "g"
    },
    "valine": {
-    "value": 0.4897,
+    "value": null,
     "unit": "g"
    },
    "serine": {
-    "value": 0.4906,
+    "value": null,
     "unit": "g"
    },
    "hydroxyproline": {
@@ -56614,27 +56624,27 @@
   },
   "carbDetails": {
    "starch": {
-    "value": 64.96,
+    "value": null,
     "unit": "g"
    },
    "sucrose": {
-    "value": 0.4,
+    "value": null,
     "unit": "g"
    },
    "glucose": {
-    "value": 0.89,
+    "value": null,
     "unit": "g"
    },
    "fructose": {
-    "value": 0.0,
+    "value": null,
     "unit": "g"
    },
    "lactose": {
-    "value": 0.0,
+    "value": null,
     "unit": "g"
    },
    "maltose": {
-    "value": 0.0,
+    "value": null,
     "unit": "g"
    },
    "galactose": {
@@ -56644,19 +56654,19 @@
   },
   "sterols": {
    "phytosterols": {
-    "value": 44.51,
+    "value": null,
     "unit": "mg"
    },
    "betaSitosterol": {
-    "value": 37.03,
+    "value": null,
     "unit": "mg"
    },
    "campesterol": {
-    "value": 3.08,
+    "value": null,
     "unit": "mg"
    },
    "stigmasterol": {
-    "value": 4.4,
+    "value": null,
     "unit": "mg"
    }
   },
@@ -56674,15 +56684,15 @@
     "unit": "mg"
    },
    "cholesterol": {
-    "value": 0.0,
+    "value": null,
     "unit": "mg"
    },
    "energyKcal": {
-    "value": 331.7,
+    "value": null,
     "unit": "kcal"
    },
    "water": {
-    "value": 14.23,
+    "value": null,
     "unit": "g"
    },
    "weightG": {
@@ -56690,7 +56700,7 @@
     "unit": "g"
    },
    "ash": {
-    "value": 1.72,
+    "value": null,
     "unit": "g"
    },
    "betaine": {
@@ -56705,9 +56715,9 @@
   "_review": {
    "source": "IFCT 2017 [A017] Varagu",
    "spread": "regions sampled: 5; each nutrient has a published SD in the _e column of ifct2017-compositions.csv",
-   "status": "measured — IFCT 2017, verify the name match",
-   "ifctCode": "A017",
-   "ifctName": "Varagu",
+   "status": "withdrawn — wrong IFCT row, see TASK-NUT1 §2",
+   "withdrawnIfctCode": "A017",
+   "withdrawnIfctName": "Varagu",
    "currentMinAgeMonths": 0,
    "proposedMinAgeMonths": 6,
    "ageReason": "annaprashana in the sixth month, matching the modern weaning floor"
@@ -87414,41 +87424,41 @@
   "desctiption": "Flattened rice rinsed soft, folded into a turmeric-mustard-onion tempering with peanuts. Light, quick morning grain — the standard against which breakfasts are measured in Maharashtra.",
   "macronutrients": {
    "carbohydrates": {
-    "value": 76.75,
+    "value": null,
     "unit": "g"
    },
    "protein": {
-    "value": 7.44,
+    "value": null,
     "unit": "g"
    },
    "fat": {
-    "value": 1.14,
+    "value": null,
     "unit": "g"
    },
    "fiber": {
-    "value": 3.46,
+    "value": null,
     "unit": "g"
    },
    "totalSugars": {
-    "value": 0.34,
+    "value": null,
     "unit": "g"
    }
   },
   "lipids": {
    "totalSaturated": {
-    "value": 0.284,
+    "value": null,
     "unit": "g"
    },
    "totalMonounsaturated": {
-    "value": 0.425,
+    "value": null,
     "unit": "g"
    },
    "totalPolyunsaturated": {
-    "value": 0.577,
+    "value": null,
     "unit": "g"
    },
    "totalTrans": {
-    "value": 0.0,
+    "value": null,
     "unit": "g"
    },
    "totalTransMonoenoic": {
@@ -87614,51 +87624,51 @@
   },
   "vitamins": {
    "vitaminA_RAE": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "retinol": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "caroteneAlpha": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "caroteneBeta": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "cryptoxanthinBeta": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "luteinZeaxanthin": {
-    "value": 1.46,
+    "value": null,
     "unit": "ug"
    },
    "lycopene": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "vitaminB1_Thiamin": {
-    "value": 0.12,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB2_Riboflavin": {
-    "value": 0.04,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB3_Niacin": {
-    "value": 1.6,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB5_PantothenicAcid": {
-    "value": 0.48,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB6": {
-    "value": 0.02,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB12": {
@@ -87674,7 +87684,7 @@
     "unit": "ug"
    },
    "folateTotal": {
-    "value": 8.46,
+    "value": null,
     "unit": "ug"
    },
    "folicAcid": {
@@ -87682,7 +87692,7 @@
     "unit": "ug"
    },
    "vitaminC": {
-    "value": 0.0,
+    "value": null,
     "unit": "mg"
    },
    "vitaminD": {
@@ -87690,11 +87700,11 @@
     "unit": "ug"
    },
    "vitaminE": {
-    "value": 0.05,
+    "value": null,
     "unit": "mg"
    },
    "vitaminK": {
-    "value": 1.0,
+    "value": null,
     "unit": "ug"
    },
    "choline": {
@@ -87704,43 +87714,43 @@
   },
   "minerals": {
    "calcium": {
-    "value": 9.19,
+    "value": null,
     "unit": "mg"
    },
    "iron": {
-    "value": 4.46,
+    "value": null,
     "unit": "mg"
    },
    "magnesium": {
-    "value": 77.92,
+    "value": null,
     "unit": "mg"
    },
    "phosphorus": {
-    "value": 195.0,
+    "value": null,
     "unit": "mg"
    },
    "potassium": {
-    "value": 148.0,
+    "value": null,
     "unit": "mg"
    },
    "sodium": {
-    "value": 2.58,
+    "value": null,
     "unit": "mg"
    },
    "selenium": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "zinc": {
-    "value": 1.49,
+    "value": null,
     "unit": "mg"
    },
    "copper": {
-    "value": 0.26,
+    "value": null,
     "unit": "mg"
    },
    "manganese": {
-    "value": 0.89,
+    "value": null,
     "unit": "mg"
    },
    "fluoride": {
@@ -87750,75 +87760,75 @@
   },
   "aminoAcids": {
    "alanine": {
-    "value": 0.4717,
+    "value": null,
     "unit": "g"
    },
    "arginine": {
-    "value": 0.5669,
+    "value": null,
     "unit": "g"
    },
    "asparticAcid": {
-    "value": 0.6845,
+    "value": null,
     "unit": "g"
    },
    "cystine": {
-    "value": 0.1228,
+    "value": null,
     "unit": "g"
    },
    "glutamicAcid": {
-    "value": 1.3838,
+    "value": null,
     "unit": "g"
    },
    "glycine": {
-    "value": 0.3236,
+    "value": null,
     "unit": "g"
    },
    "histidine": {
-    "value": 0.1696,
+    "value": null,
     "unit": "g"
    },
    "isoleucine": {
-    "value": 0.2693,
+    "value": null,
     "unit": "g"
    },
    "leucine": {
-    "value": 0.5989,
+    "value": null,
     "unit": "g"
    },
    "lysine": {
-    "value": 0.2693,
+    "value": null,
     "unit": "g"
    },
    "methionine": {
-    "value": 0.157,
+    "value": null,
     "unit": "g"
    },
    "phenylalanine": {
-    "value": 0.3884,
+    "value": null,
     "unit": "g"
    },
    "proline": {
-    "value": 0.3177,
+    "value": null,
     "unit": "g"
    },
    "threonine": {
-    "value": 0.2358,
+    "value": null,
     "unit": "g"
    },
    "tryptophan": {
-    "value": 0.0826,
+    "value": null,
     "unit": "g"
    },
    "tyrosine": {
-    "value": 0.279,
+    "value": null,
     "unit": "g"
    },
    "valine": {
-    "value": 0.4018,
+    "value": null,
     "unit": "g"
    },
    "serine": {
-    "value": 0.3556,
+    "value": null,
     "unit": "g"
    },
    "hydroxyproline": {
@@ -87828,27 +87838,27 @@
   },
   "carbDetails": {
    "starch": {
-    "value": 68.06,
+    "value": null,
     "unit": "g"
    },
    "sucrose": {
-    "value": 0.14,
+    "value": null,
     "unit": "g"
    },
    "glucose": {
-    "value": 0.2,
+    "value": null,
     "unit": "g"
    },
    "fructose": {
-    "value": 0.0,
+    "value": null,
     "unit": "g"
    },
    "lactose": {
-    "value": 0.0,
+    "value": null,
     "unit": "g"
    },
    "maltose": {
-    "value": 0.0,
+    "value": null,
     "unit": "g"
    },
    "galactose": {
@@ -87858,19 +87868,19 @@
   },
   "sterols": {
    "phytosterols": {
-    "value": 26.89,
+    "value": null,
     "unit": "mg"
    },
    "betaSitosterol": {
-    "value": 21.26,
+    "value": null,
     "unit": "mg"
    },
    "campesterol": {
-    "value": 3.48,
+    "value": null,
     "unit": "mg"
    },
    "stigmasterol": {
-    "value": 2.15,
+    "value": null,
     "unit": "mg"
    }
   },
@@ -87888,15 +87898,15 @@
     "unit": "mg"
    },
    "cholesterol": {
-    "value": 0.0,
+    "value": null,
     "unit": "mg"
    },
    "energyKcal": {
-    "value": 353.7,
+    "value": null,
     "unit": "kcal"
    },
    "water": {
-    "value": 10.36,
+    "value": null,
     "unit": "g"
    },
    "weightG": {
@@ -87904,7 +87914,7 @@
     "unit": "g"
    },
    "ash": {
-    "value": 0.85,
+    "value": null,
     "unit": "g"
    },
    "betaine": {
@@ -87919,9 +87929,9 @@
   "_review": {
    "source": "IFCT 2017 [A011] Rice flakes",
    "spread": "regions sampled: 6; each nutrient has a published SD in the _e column of ifct2017-compositions.csv",
-   "status": "measured — IFCT 2017, verify the name match",
-   "ifctCode": "A011",
-   "ifctName": "Rice flakes",
+   "status": "withdrawn — wrong IFCT row, see TASK-NUT1 §2",
+   "withdrawnIfctCode": "A011",
+   "withdrawnIfctName": "Rice flakes",
    "currentMinAgeMonths": 0,
    "proposedMinAgeMonths": 12,
    "ageReason": "compound preparation, often sweetened"
@@ -111868,41 +111878,41 @@
   "desctiption": "The hospital-visit juice of India — gentle, hydrating, low-acid citrus that sits well on weak and feverish digestion.\n\nFresh-pressed and drunk promptly, unsweetened or lightly salted; the gentlest citrus for convalescence.",
   "macronutrients": {
    "carbohydrates": {
-    "value": 5.18,
+    "value": null,
     "unit": "g"
    },
    "protein": {
-    "value": 0.76,
+    "value": null,
     "unit": "g"
    },
    "fat": {
-    "value": 0.2,
+    "value": null,
     "unit": "g"
    },
    "fiber": {
-    "value": 2.07,
+    "value": null,
     "unit": "g"
    },
    "totalSugars": {
-    "value": 3.42,
+    "value": null,
     "unit": "g"
    }
   },
   "lipids": {
    "totalSaturated": {
-    "value": 0.0764,
+    "value": null,
     "unit": "g"
    },
    "totalMonounsaturated": {
-    "value": 0.0352,
+    "value": null,
     "unit": "g"
    },
    "totalPolyunsaturated": {
-    "value": 0.0844,
+    "value": null,
     "unit": "g"
    },
    "totalTrans": {
-    "value": 0.0,
+    "value": null,
     "unit": "g"
    },
    "totalTransMonoenoic": {
@@ -112068,51 +112078,51 @@
   },
   "vitamins": {
    "vitaminA_RAE": {
-    "value": 2.54,
+    "value": null,
     "unit": "ug"
    },
    "retinol": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "caroteneAlpha": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "caroteneBeta": {
-    "value": 2.54,
+    "value": null,
     "unit": "ug"
    },
    "cryptoxanthinBeta": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "luteinZeaxanthin": {
-    "value": 13.2,
+    "value": null,
     "unit": "ug"
    },
    "lycopene": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "vitaminB1_Thiamin": {
-    "value": 0.06,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB2_Riboflavin": {
-    "value": 0.01,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB3_Niacin": {
-    "value": 0.17,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB5_PantothenicAcid": {
-    "value": 0.25,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB6": {
-    "value": 0.05,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB12": {
@@ -112128,7 +112138,7 @@
     "unit": "ug"
    },
    "folateTotal": {
-    "value": 15.38,
+    "value": null,
     "unit": "ug"
    },
    "folicAcid": {
@@ -112136,7 +112146,7 @@
     "unit": "ug"
    },
    "vitaminC": {
-    "value": 46.96,
+    "value": null,
     "unit": "mg"
    },
    "vitaminD": {
@@ -112144,11 +112154,11 @@
     "unit": "ug"
    },
    "vitaminE": {
-    "value": 0.07,
+    "value": null,
     "unit": "mg"
    },
    "vitaminK": {
-    "value": 2.2,
+    "value": null,
     "unit": "ug"
    },
    "choline": {
@@ -112158,43 +112168,43 @@
   },
   "minerals": {
    "calcium": {
-    "value": 25.79,
+    "value": null,
     "unit": "mg"
    },
    "iron": {
-    "value": 0.11,
+    "value": null,
     "unit": "mg"
    },
    "magnesium": {
-    "value": 15.4,
+    "value": null,
     "unit": "mg"
    },
    "phosphorus": {
-    "value": 20.55,
+    "value": null,
     "unit": "mg"
    },
    "potassium": {
-    "value": 182.0,
+    "value": null,
     "unit": "mg"
    },
    "sodium": {
-    "value": 1.17,
+    "value": null,
     "unit": "mg"
    },
    "selenium": {
-    "value": 0.72,
+    "value": null,
     "unit": "ug"
    },
    "zinc": {
-    "value": 0.05,
+    "value": null,
     "unit": "mg"
    },
    "copper": {
-    "value": 0.03,
+    "value": null,
     "unit": "mg"
    },
    "manganese": {
-    "value": 0.04,
+    "value": null,
     "unit": "mg"
    },
    "fluoride": {
@@ -112204,75 +112214,75 @@
   },
   "aminoAcids": {
    "alanine": {
-    "value": 0.0258,
+    "value": null,
     "unit": "g"
    },
    "arginine": {
-    "value": 0.0099,
+    "value": null,
     "unit": "g"
    },
    "asparticAcid": {
-    "value": 0.1503,
+    "value": null,
     "unit": "g"
    },
    "cystine": {
-    "value": 0.0101,
+    "value": null,
     "unit": "g"
    },
    "glutamicAcid": {
-    "value": 0.0411,
+    "value": null,
     "unit": "g"
    },
    "glycine": {
-    "value": 0.0164,
+    "value": null,
     "unit": "g"
    },
    "histidine": {
-    "value": 0.0258,
+    "value": null,
     "unit": "g"
    },
    "isoleucine": {
-    "value": 0.0161,
+    "value": null,
     "unit": "g"
    },
    "leucine": {
-    "value": 0.0202,
+    "value": null,
     "unit": "g"
    },
    "lysine": {
-    "value": 0.0176,
+    "value": null,
     "unit": "g"
    },
    "methionine": {
-    "value": 0.0074,
+    "value": null,
     "unit": "g"
    },
    "phenylalanine": {
-    "value": 0.01,
+    "value": null,
     "unit": "g"
    },
    "proline": {
-    "value": 0.0518,
+    "value": null,
     "unit": "g"
    },
    "threonine": {
-    "value": 0.0098,
+    "value": null,
     "unit": "g"
    },
    "tryptophan": {
-    "value": 0.0036,
+    "value": null,
     "unit": "g"
    },
    "tyrosine": {
-    "value": 0.0061,
+    "value": null,
     "unit": "g"
    },
    "valine": {
-    "value": 0.0131,
+    "value": null,
     "unit": "g"
    },
    "serine": {
-    "value": 0.0258,
+    "value": null,
     "unit": "g"
    },
    "hydroxyproline": {
@@ -112282,27 +112292,27 @@
   },
   "carbDetails": {
    "starch": {
-    "value": 0.52,
+    "value": null,
     "unit": "g"
    },
    "sucrose": {
-    "value": 0.12,
+    "value": null,
     "unit": "g"
    },
    "glucose": {
-    "value": 2.6,
+    "value": null,
     "unit": "g"
    },
    "fructose": {
-    "value": 0.7,
+    "value": null,
     "unit": "g"
    },
    "lactose": {
-    "value": 0.0,
+    "value": null,
     "unit": "g"
    },
    "maltose": {
-    "value": 0.0,
+    "value": null,
     "unit": "g"
    },
    "galactose": {
@@ -112312,19 +112322,19 @@
   },
   "sterols": {
    "phytosterols": {
-    "value": 0.0,
+    "value": null,
     "unit": "mg"
    },
    "betaSitosterol": {
-    "value": 0.0,
+    "value": null,
     "unit": "mg"
    },
    "campesterol": {
-    "value": 0.0,
+    "value": null,
     "unit": "mg"
    },
    "stigmasterol": {
-    "value": 0.0,
+    "value": null,
     "unit": "mg"
    }
   },
@@ -112342,15 +112352,15 @@
     "unit": "mg"
    },
    "cholesterol": {
-    "value": 0.0,
+    "value": null,
     "unit": "mg"
    },
    "energyKcal": {
-    "value": 27.2,
+    "value": null,
     "unit": "kcal"
    },
    "water": {
-    "value": 91.32,
+    "value": null,
     "unit": "g"
    },
    "weightG": {
@@ -112358,7 +112368,7 @@
     "unit": "g"
    },
    "ash": {
-    "value": 0.47,
+    "value": null,
     "unit": "g"
    },
    "betaine": {
@@ -112373,9 +112383,9 @@
   "_review": {
    "source": "IFCT 2017 [E034] Lime, sweet, pulp",
    "spread": "regions sampled: 6; each nutrient has a published SD in the _e column of ifct2017-compositions.csv",
-   "status": "measured — IFCT 2017, verify the name match",
-   "ifctCode": "E034",
-   "ifctName": "Lime, sweet, pulp",
+   "status": "withdrawn — wrong IFCT row, see TASK-NUT1 §2",
+   "withdrawnIfctCode": "E034",
+   "withdrawnIfctName": "Lime, sweet, pulp",
    "currentMinAgeMonths": 0,
    "proposedMinAgeMonths": 12,
    "ageReason": "compound preparation, often sweetened"
@@ -126434,41 +126444,41 @@
   "desctiption": "The classical medhya preserve — kushmanda candied is the traditional brain-and-nerve nourisher, the base of kushmanda rasayana for depleted minds and bodies.\n\nAsh gourd cubes limed, blanched and candied in syrup. Cooling, building, calming — morning food for the studious and the depleted, in ones and twos.",
   "macronutrients": {
    "carbohydrates": {
-    "value": 2.84,
+    "value": null,
     "unit": "g"
    },
    "protein": {
-    "value": 0.79,
+    "value": null,
     "unit": "g"
    },
    "fat": {
-    "value": 0.14,
+    "value": null,
     "unit": "g"
    },
    "fiber": {
-    "value": 3.37,
+    "value": null,
     "unit": "g"
    },
    "totalSugars": {
-    "value": 0.19,
+    "value": null,
     "unit": "g"
    }
   },
   "lipids": {
    "totalSaturated": {
-    "value": 0.0253,
+    "value": null,
     "unit": "g"
    },
    "totalMonounsaturated": {
-    "value": 0.0074,
+    "value": null,
     "unit": "g"
    },
    "totalPolyunsaturated": {
-    "value": 0.0765,
+    "value": null,
     "unit": "g"
    },
    "totalTrans": {
-    "value": 0.0,
+    "value": null,
     "unit": "g"
    },
    "totalTransMonoenoic": {
@@ -126634,51 +126644,51 @@
   },
   "vitamins": {
    "vitaminA_RAE": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "retinol": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "caroteneAlpha": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "caroteneBeta": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "cryptoxanthinBeta": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "luteinZeaxanthin": {
-    "value": 18.29,
+    "value": null,
     "unit": "ug"
    },
    "lycopene": {
-    "value": 0.0,
+    "value": null,
     "unit": "ug"
    },
    "vitaminB1_Thiamin": {
-    "value": 0.03,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB2_Riboflavin": {
-    "value": 0.01,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB3_Niacin": {
-    "value": 0.12,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB5_PantothenicAcid": {
-    "value": 0.37,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB6": {
-    "value": 0.18,
+    "value": null,
     "unit": "mg"
    },
    "vitaminB12": {
@@ -126694,7 +126704,7 @@
     "unit": "ug"
    },
    "folateTotal": {
-    "value": 14.11,
+    "value": null,
     "unit": "ug"
    },
    "folicAcid": {
@@ -126702,7 +126712,7 @@
     "unit": "ug"
    },
    "vitaminC": {
-    "value": 11.41,
+    "value": null,
     "unit": "mg"
    },
    "vitaminD": {
@@ -126710,11 +126720,11 @@
     "unit": "ug"
    },
    "vitaminE": {
-    "value": 0.02,
+    "value": null,
     "unit": "mg"
    },
    "vitaminK": {
-    "value": 27.15,
+    "value": null,
     "unit": "ug"
    },
    "choline": {
@@ -126724,43 +126734,43 @@
   },
   "minerals": {
    "calcium": {
-    "value": 19.39,
+    "value": null,
     "unit": "mg"
    },
    "iron": {
-    "value": 0.47,
+    "value": null,
     "unit": "mg"
    },
    "magnesium": {
-    "value": 19.95,
+    "value": null,
     "unit": "mg"
    },
    "phosphorus": {
-    "value": 29.07,
+    "value": null,
     "unit": "mg"
    },
    "potassium": {
-    "value": 372.0,
+    "value": null,
     "unit": "mg"
    },
    "sodium": {
-    "value": 0.77,
+    "value": null,
     "unit": "mg"
    },
    "selenium": {
-    "value": 1.15,
+    "value": null,
     "unit": "ug"
    },
    "zinc": {
-    "value": 0.13,
+    "value": null,
     "unit": "mg"
    },
    "copper": {
-    "value": 0.04,
+    "value": null,
     "unit": "mg"
    },
    "manganese": {
-    "value": 0.09,
+    "value": null,
     "unit": "mg"
    },
    "fluoride": {
@@ -126770,75 +126780,75 @@
   },
   "aminoAcids": {
    "alanine": {
-    "value": 0.0447,
+    "value": null,
     "unit": "g"
    },
    "arginine": {
-    "value": 0.0619,
+    "value": null,
     "unit": "g"
    },
    "asparticAcid": {
-    "value": 0.0843,
+    "value": null,
     "unit": "g"
    },
    "cystine": {
-    "value": 0.0066,
+    "value": null,
     "unit": "g"
    },
    "glutamicAcid": {
-    "value": 0.1418,
+    "value": null,
     "unit": "g"
    },
    "glycine": {
-    "value": 0.0442,
+    "value": null,
     "unit": "g"
    },
    "histidine": {
-    "value": 0.0204,
+    "value": null,
     "unit": "g"
    },
    "isoleucine": {
-    "value": 0.034,
+    "value": null,
     "unit": "g"
    },
    "leucine": {
-    "value": 0.0448,
+    "value": null,
     "unit": "g"
    },
    "lysine": {
-    "value": 0.0268,
+    "value": null,
     "unit": "g"
    },
    "methionine": {
-    "value": 0.0123,
+    "value": null,
     "unit": "g"
    },
    "phenylalanine": {
-    "value": 0.0254,
+    "value": null,
     "unit": "g"
    },
    "proline": {
-    "value": 0.0315,
+    "value": null,
     "unit": "g"
    },
    "threonine": {
-    "value": 0.0288,
+    "value": null,
     "unit": "g"
    },
    "tryptophan": {
-    "value": 0.0057,
+    "value": null,
     "unit": "g"
    },
    "tyrosine": {
-    "value": 0.0228,
+    "value": null,
     "unit": "g"
    },
    "valine": {
-    "value": 0.0404,
+    "value": null,
     "unit": "g"
    },
    "serine": {
-    "value": 0.0321,
+    "value": null,
     "unit": "g"
    },
    "hydroxyproline": {
@@ -126848,27 +126858,27 @@
   },
   "carbDetails": {
    "starch": {
-    "value": 1.01,
+    "value": null,
     "unit": "g"
    },
    "sucrose": {
-    "value": 0.02,
+    "value": null,
     "unit": "g"
    },
    "glucose": {
-    "value": 0.05,
+    "value": null,
     "unit": "g"
    },
    "fructose": {
-    "value": 0.12,
+    "value": null,
     "unit": "g"
    },
    "lactose": {
-    "value": 0.0,
+    "value": null,
     "unit": "g"
    },
    "maltose": {
-    "value": 0.0,
+    "value": null,
     "unit": "g"
    },
    "galactose": {
@@ -126878,19 +126888,19 @@
   },
   "sterols": {
    "phytosterols": {
-    "value": 2.99,
+    "value": null,
     "unit": "mg"
    },
    "betaSitosterol": {
-    "value": 2.38,
+    "value": null,
     "unit": "mg"
    },
    "campesterol": {
-    "value": 0.16,
+    "value": null,
     "unit": "mg"
    },
    "stigmasterol": {
-    "value": 0.45,
+    "value": null,
     "unit": "mg"
    }
   },
@@ -126908,15 +126918,15 @@
     "unit": "mg"
    },
    "cholesterol": {
-    "value": 0.0,
+    "value": null,
     "unit": "mg"
    },
    "energyKcal": {
-    "value": 17.4,
+    "value": null,
     "unit": "kcal"
    },
    "water": {
-    "value": 92.17,
+    "value": null,
     "unit": "g"
    },
    "weightG": {
@@ -126924,7 +126934,7 @@
     "unit": "g"
    },
    "ash": {
-    "value": 0.7,
+    "value": null,
     "unit": "g"
    },
    "betaine": {
@@ -126939,9 +126949,9 @@
   "_review": {
    "source": "IFCT 2017 [D001] Ash gourd",
    "spread": "regions sampled: 6; each nutrient has a published SD in the _e column of ifct2017-compositions.csv",
-   "status": "measured — IFCT 2017, verify the name match",
-   "ifctCode": "D001",
-   "ifctName": "Ash gourd",
+   "status": "withdrawn — wrong IFCT row, see TASK-NUT1 §2",
+   "withdrawnIfctCode": "D001",
+   "withdrawnIfctName": "Ash gourd",
    "currentMinAgeMonths": 0,
    "proposedMinAgeMonths": 48,
    "ageReason": "pharmacologically active or mineral; not an infant food in any tradition"
@@ -149844,7 +149854,11 @@
    "ifctName": "Tinda, tender",
    "currentMinAgeMonths": 0,
    "proposedMinAgeMonths": 6,
-   "ageReason": "annaprashana in the sixth month, matching the modern weaning floor"
+   "ageReason": "annaprashana in the sixth month, matching the modern weaning floor",
+   "reverseCollision": {
+    "ifctCode": "D073",
+    "status": "reviewed — duplicate identity, see GitHub issue #4"
+   }
   }
  },
  {
@@ -178456,7 +178470,11 @@
    "ifctName": "Tinda, tender",
    "currentMinAgeMonths": 0,
    "proposedMinAgeMonths": 6,
-   "ageReason": "annaprashana in the sixth month, matching the modern weaning floor"
+   "ageReason": "annaprashana in the sixth month, matching the modern weaning floor",
+   "reverseCollision": {
+    "ifctCode": "D073",
+    "status": "reviewed — duplicate identity, see GitHub issue #4"
+   }
   }
  },
  {
