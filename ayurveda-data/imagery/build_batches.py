@@ -30,6 +30,9 @@ STYLE = (
 # and the new frames have to sit beside them without looking like a second set.
 
 SETTINGS = {"aspectRatio": "1:1", "model": "Nano Banana 2"}
+SOURCE_DIR = os.path.dirname(os.path.abspath(__file__))
+REUSE_DENY_PATH = os.path.join(SOURCE_DIR, "reuse-deny.json")
+EXPECTED_REUSE_DENIALS = 26
 
 
 def sanitize(name):
@@ -74,7 +77,7 @@ def legacy_frame_keys(foods):
     return {sanitize(food["name"]) for food in foods}
 
 
-def load_deny(out_dir=None):
+def load_deny():
     """Dravyas that must NOT inherit an existing archive frame.
 
     A dravya normally reuses a frame when one of its usda[] bindings names a
@@ -85,12 +88,23 @@ def load_deny(out_dir=None):
     proso. reuse-deny.json lists the ones reviewed and rejected, with a reason
     each, and they fall through to generation instead.
     """
-    import json as _json
-    d = out_dir or os.path.dirname(os.path.abspath(__file__))
-    p = os.path.join(d, "reuse-deny.json")
-    if not os.path.exists(p):
-        return {}
-    return _json.load(open(p)).get("dravyas", {})
+    try:
+        with open(REUSE_DENY_PATH) as fh:
+            document = json.load(fh)
+        deny = document["dravyas"]
+    except (OSError, json.JSONDecodeError, KeyError, TypeError) as exc:
+        raise RuntimeError(
+            f"required reuse denial list is missing or unreadable: {REUSE_DENY_PATH}"
+        ) from exc
+
+    if not isinstance(deny, dict) or len(deny) != EXPECTED_REUSE_DENIALS:
+        raise RuntimeError(
+            f"reuse denial count mismatch at {REUSE_DENY_PATH}: "
+            f"expected {EXPECTED_REUSE_DENIALS}, got "
+            f"{len(deny) if isinstance(deny, dict) else 'non-object'}"
+        )
+    print(f"reuse denials loaded    : {len(deny)} ({REUSE_DENY_PATH})")
+    return deny
 
 
 def reuse_hit(dravya, keys, deny):
@@ -134,7 +148,7 @@ def main():
     keys = legacy_frame_keys(foods) if a.full else set(fm)
 
     # ---- free win: dravyas whose usda[] link already has a frame ----
-    deny = load_deny(a.out)
+    deny = load_deny()
     reuse, gen_dravya = {}, []
     for d in dr:
         if d["name"] in keys or sanitize(d["name"]) in keys:

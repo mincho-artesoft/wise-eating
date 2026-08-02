@@ -65,7 +65,7 @@ def main():
     # Same helper build_batches uses, deliberately — this check exists to catch
     # jobs.json drifting from the repo, and it cannot do that if it reimplements
     # the rule and drifts too.
-    deny = bb.load_deny(DIR)
+    deny = bb.load_deny()
     reuse, gen_dravya = set(), []
     for d in dr:
         if d["name"] in keys or bb.sanitize(d["name"]) in keys:
