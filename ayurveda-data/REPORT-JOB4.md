@@ -139,4 +139,59 @@ SHA and packet count above.
 - Timestamp SHA: `d3666f4a56036440f7922e1af59ae9641f1e77ed112c70b89adc616ec11c6d34`.
 - Repository suite after the archive replacement: 161/161 tests passed.
 
-Phase F, Phase G, and the proposed Phase H registry table follow below.
+### Phase F — rebuilt preseed
+
+The preseed was manufactured from a fresh simulator install after deleting the
+whole app, so its container and `UserDefaults` were absent. The manufacturing
+launch started from the 12,601-row USDA base, inserted the target catalogue,
+and built search cache v7 at 14,488 foods. The completed SQLite store passed
+`PRAGMA integrity_check` before export.
+
+`build_preseeded_store.py` was run twice from that completed store. Both runs
+produced byte-identical gzip parts and the same reconstructed store:
+
+| Artifact | Bytes | SHA-256 |
+| --- | ---: | --- |
+| `preseeded_db.store.gz.part-aa` | 73,400,320 | `e7b2fb2c9a3e03e3a76247a6988e5e9b033a4a2e95f89ad389a08d15d0e15d11` |
+| `preseeded_db.store.gz.part-ab` | 21,398,959 | `89b06ea707d798e20756098c0cd6f83f273c798bf12cb034b42bcc20dba9ed2b` |
+| reconstructed `default.store` | 211,791,872 | `a6ddf152234fee2b12c9d9efcdffb70c3d01fdc4d4980418a46686b2f57d25a0` |
+
+Measured rebuilt-store population:
+
+- 14,488 foods, 2,216 Ayurveda profiles, and 2,336 Ayurveda links.
+- 10,644 ingredient links across 1,511 recipe owners.
+- Recipe nutrition: 1,508 full, 3 estimated, 0 none.
+- Search cache: version 7, 14,488 foods; 4,223 facet foods, 4,223 metadata
+  rows, 2,007 linked rows, 89 keys, and 59,114 assignments.
+- Safety metadata: 155 dravyas and 1,190 recipes with allergens; 391 recipes
+  at the 12-month floor and 5 at the 24-month floor.
+
+The reconstructed bundled store passed `validate.py --store` with 705 dravyas,
+1,511 recipes, the exact placeholder band 900001–900376, and mapping SHA
+`bc7afbfce...36441b`.
+
+A second whole-app deletion followed by installing the normally built product
+produced this fresh-launch evidence:
+
+```text
+✅ Successfully prepared pre-seeded MAIN database.
+✅ Large bundled assets are ready.
+   ✅ Ayurveda v6 preseed stamp verified; no inserts or updates.
+✅ SearchIndexStore: Index is up-to-date (version: 7, DB: 14488). Skipping rebuild.
+✅ Seeding process completed.
+```
+
+- GF1: pass — full store validation succeeded.
+- GF2: pass — all target counts above match exactly.
+- GF3: pass — fresh install performed zero Ayurveda inserts/updates and no
+  search-index rebuild.
+- GF4: pass — exact placeholder band and mapping SHA retained.
+- GF5: pass — all 25 production search goldens and both Sanskrit synonym cases
+  are exact; the complete repository suite passed 161/161 after the reseed.
+- GF6: pass — all 11 formerly frameless recipes resolved through the app's
+  exact-timestamp `AVAssetImageGenerator` path at 144, 480, and 1024: 33/33
+  successful frame extractions.
+- Debug and Release simulator builds both succeeded with the rebuilt preseed
+  and required-asset guard enabled.
+
+Phase G and the proposed Phase H registry table follow below.
