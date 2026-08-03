@@ -710,11 +710,22 @@ private struct AyurvedaInformationalDisclaimer: View {
 struct AyurvedaConstitutionEditorButton: View {
   @ObservedObject private var effectManager = EffectManager.shared
 
+  let title: String
   let profileID: UUID?
   @Binding var pendingDraft: AyurvedaConstitutionDraft?
 
   @State private var record: AyurvedaConstitutionRecord?
   @State private var isShowingManager = false
+
+  init(
+    title: String = "Ayurvedic profile",
+    profileID: UUID?,
+    pendingDraft: Binding<AyurvedaConstitutionDraft?>
+  ) {
+    self.title = title
+    self.profileID = profileID
+    _pendingDraft = pendingDraft
+  }
 
   var body: some View {
     Button {
@@ -723,7 +734,7 @@ struct AyurvedaConstitutionEditorButton: View {
       HStack(spacing: 12) {
         Image(systemName: "leaf.circle.fill")
           .font(.title3)
-        Text("Ayurvedic profile")
+        Text(title)
           .font(.headline)
         Spacer()
         Text(resultLabel ?? "Set up")

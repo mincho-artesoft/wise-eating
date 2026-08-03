@@ -375,10 +375,17 @@ struct ProfileEditorView: View {
    }
 
  private var constitutionSection: some View {
-     AyurvedaConstitutionEditorButton(
-         profileID: profile?.id,
-         pendingDraft: $pendingAyurvedaDraft
-     )
+     VStack(alignment: .leading, spacing: 8) {
+         Text("Ayurvedic Profile")
+             .font(.headline)
+             .foregroundStyle(effectManager.currentGlobalAccentColor)
+
+         AyurvedaConstitutionEditorButton(
+             title: "Constitution",
+             profileID: profile?.id,
+             pendingDraft: $pendingAyurvedaDraft
+         )
+     }
  }
  
  private var settingsSection: some View {

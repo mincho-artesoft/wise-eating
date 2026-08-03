@@ -15,6 +15,7 @@ EDITOR = ROOT / "Ayura/Ayurveda/Views/AyurvedaEditorSection.swift"
 CONSTITUTION = ROOT / "Ayura/Ayurveda/AyurvedaConstitutionViews.swift"
 SEARCH_CHIPS = ROOT / "Ayura/FoodSearch/AyurvedaSearchChips.swift"
 FOOD_ROW = ROOT / "Ayura/Food/Views/FoodItemRowView.swift"
+PROFILE_EDITOR = ROOT / "Ayura/Profile/Views/ProfileEditorView.swift"
 
 
 class WE3DisplayTests(unittest.TestCase):
@@ -180,6 +181,25 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         self.assertNotIn("Estimated profile", visible_sources)
         self.assertNotIn("Estimated Ayurveda", visible_sources)
         self.assertNotIn('== "Estimated"', visible_sources)
+
+    def test_profile_editor_ayurveda_control_matches_section_style(self):
+        profile_editor = PROFILE_EDITOR.read_text()
+        constitution = CONSTITUTION.read_text()
+        section = profile_editor[
+            profile_editor.index("private var constitutionSection") :
+            profile_editor.index("private var settingsSection")
+        ]
+
+        self.assertIn("VStack(alignment: .leading, spacing: 8)", section)
+        self.assertIn('Text("Ayurvedic Profile")', section)
+        self.assertIn(".font(.headline)", section)
+        self.assertIn(
+            ".foregroundStyle(effectManager.currentGlobalAccentColor)",
+            section,
+        )
+        self.assertIn('title: "Constitution"', section)
+        self.assertIn('title: String = "Ayurvedic profile"', constitution)
+        self.assertIn("Text(title)", constitution)
 
 
 if __name__ == "__main__":
