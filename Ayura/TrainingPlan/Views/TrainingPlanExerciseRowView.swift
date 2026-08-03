@@ -159,7 +159,7 @@ struct TrainingPlanExerciseRowView: View {
     // MARK: - Set Row View
     // MARK: - Set Row View
         private func setRow(for setBinding: Binding<TrainingPlanSet>) -> some View {
-                let pickerColorScheme: ColorScheme = effectManager.isLightRowTextColor ? .dark : .light
+                let pickerColorScheme: ColorScheme = effectManager.appColorScheme
                 let displayIndex = setBinding.wrappedValue.orderIndex + 1
 
                 return VStack(spacing: 6) {
@@ -298,7 +298,7 @@ struct TrainingPlanExerciseRowView: View {
                                 )
                             )
                             .labelsHidden()
-                            .environment(\.colorScheme, effectManager.isLightRowTextColor ? .dark : .light)
+                            .environment(\.colorScheme, effectManager.appColorScheme)
                         }
                         .padding(.vertical, 8)
                         
@@ -320,7 +320,7 @@ struct TrainingPlanExerciseRowView: View {
                                 .labelsHidden()
                                 .fixedSize()
                                 .padding(.leading, 8)
-                                .environment(\.colorScheme, effectManager.isLightRowTextColor ? .dark : .light)
+                                .environment(\.colorScheme, effectManager.appColorScheme)
                             }
                             
                             Spacer()
@@ -343,7 +343,7 @@ struct TrainingPlanExerciseRowView: View {
                                 )
                             )
                             .labelsHidden()
-                            .environment(\.colorScheme, effectManager.isLightRowTextColor ? .dark : .light)
+                            .environment(\.colorScheme, effectManager.appColorScheme)
                         }
                         .padding(.vertical, 8)
                     }

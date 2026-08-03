@@ -5,9 +5,14 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
+APP = ROOT / "Ayura/Main/AyuraApp.swift"
+EFFECT_MANAGER = ROOT / "Ayura/CustomViews/GlassEffects/EffectManager.swift"
+THEME_MANAGER = ROOT / "Ayura/CustomViews/ThemeManager/ThemeManager.swift"
 DISPLAY = ROOT / "Ayura/Ayurveda/Views/AyurvedaDisplay.swift"
 SECTION = ROOT / "Ayura/Ayurveda/Views/AyurvedaSectionView.swift"
 SCALE = ROOT / "Ayura/Ayurveda/Views/DoshaScaleSelector.swift"
+AYURVEDA_CHIP = ROOT / "Ayura/Ayurveda/Views/AyurvedaChip.swift"
+EFFECT_PICKER = ROOT / "Ayura/Ayurveda/Views/EffectSegmentPicker.swift"
 CHIP_GRID = ROOT / "Ayura/Ayurveda/Views/ChipGrid.swift"
 GLASS_CHIP = ROOT / "Ayura/Food/Views/ChipScrollView.swift"
 BARS = ROOT / "Ayura/Ayurveda/Views/DoshaBarsView.swift"
@@ -29,6 +34,48 @@ RINGS_SUMMARY = ROOT / "Ayura/Nutrient/Views/RingsSummaryRow.swift"
 
 
 class WE3DisplayTests(unittest.TestCase):
+    def test_app_appearance_follows_in_app_theme_not_device_scheme(self):
+        app = APP.read_text()
+        effect_manager = EFFECT_MANAGER.read_text()
+        theme_manager = THEME_MANAGER.read_text()
+
+        self.assertIn(
+            ".preferredColorScheme(effectManager.appColorScheme)",
+            app,
+        )
+        self.assertIn("var appColorScheme: ColorScheme", effect_manager)
+        self.assertIn(
+            "isLightRowTextColor ? .dark : .light",
+            effect_manager,
+        )
+        self.assertNotIn("UITraitCollection.current", theme_manager)
+
+        theme_owned_components = (
+            SCALE,
+            AYURVEDA_CHIP,
+            EFFECT_PICKER,
+            EDITOR,
+            DAILY_AYURVEDA_SUMMARY,
+        )
+        for component in theme_owned_components:
+            source = component.read_text()
+            self.assertNotIn("@Environment(\\.colorScheme)", source)
+
+        self.assertNotIn("Color(.systemBackground)", SCALE.read_text())
+        self.assertNotIn(".foregroundStyle(.secondary)", EDITOR.read_text())
+
+        direct_device_appearance = []
+        for swift_file in (ROOT / "Ayura").rglob("*.swift"):
+            source = swift_file.read_text()
+            if (
+                "@Environment(\\.colorScheme)" in source
+                or "UITraitCollection.current.userInterfaceStyle" in source
+            ):
+                direct_device_appearance.append(
+                    str(swift_file.relative_to(ROOT))
+                )
+        self.assertEqual(direct_device_appearance, [])
+
     def test_minus_two_zero_plus_two_presentations(self):
         source = DISPLAY.read_text()
         start = source.index("enum AyurvedaDoshaTone")
@@ -156,6 +203,9 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
     def test_percentage_dosha_bar_matches_profile_palette(self):
         bars = BARS.read_text()
 
+        self.assertIn("WrappingSegmentedControl(", bars)
+        self.assertIn("selection: $mode", bars)
+        self.assertNotIn(".pickerStyle(.segmented)", bars)
         self.assertIn(
             '.init(label: "Vata", value: percentages.v, color: .blue)',
             bars,
@@ -479,12 +529,18 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
 
         self.assertNotIn('Label("Daily Ayurveda"', row)
         self.assertIn('Text("Dosha Balance")', row)
-        self.assertIn('Text("Fit: \\(fitLabel)")', row)
-        self.assertIn("Image(systemName: fitIcon)", row)
+        self.assertIn("GlassChipView(", row)
+        self.assertIn('label: "Fit: \\(fitLabel)"', row)
+        self.assertIn("systemImage: fitIcon", row)
+        self.assertIn("textColor: fitColor", row)
+        self.assertIn("font: .subheadline", row)
+        self.assertIn("fontWeight: .semibold", row)
+        self.assertIn("iconPlacement: .trailing", row)
+        self.assertNotIn('Text("Fit: \\(fitLabel)")', row)
         self.assertNotIn("Label(fitLabel, systemImage: fitIcon)", row)
         self.assertNotIn('Text("Fit")', row)
         self.assertIn("VStack(alignment: .leading, spacing: 12)", row)
-        self.assertIn(".background(.thinMaterial, in: Capsule())", row)
+        self.assertNotIn(".background(.thinMaterial, in: Capsule())", row)
         self.assertIn("DoshaBalanceGlyph(", row)
         self.assertIn("private struct DoshaBalanceGlyph", summary)
         self.assertIn("distribution: foodEffectDistribution", row)

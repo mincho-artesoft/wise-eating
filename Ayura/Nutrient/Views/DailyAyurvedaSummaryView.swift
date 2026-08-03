@@ -24,23 +24,16 @@ struct DailyAyurvedaSummaryRow: View {
 
                     Spacer(minLength: 8)
 
-                    HStack(spacing: 6) {
-                        Text("Fit: \(fitLabel)")
-                            .lineLimit(1)
-                        Image(systemName: fitIcon)
-                    }
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(fitColor)
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 7)
-                    .background(.thinMaterial, in: Capsule())
-                    .overlay {
-                        Capsule()
-                            .stroke(
-                                effectManager.currentGlobalAccentColor.opacity(0.12),
-                                lineWidth: 1
-                            )
-                    }
+                    GlassChipView(
+                        label: "Fit: \(fitLabel)",
+                        systemImage: fitIcon,
+                        textColor: fitColor,
+                        font: .subheadline,
+                        fontWeight: .semibold,
+                        horizontalPadding: 12,
+                        verticalPadding: 7,
+                        iconPlacement: .trailing
+                    )
 
                     DoshaBalanceGlyph(
                         distribution: foodEffectDistribution
@@ -163,7 +156,11 @@ struct DailyAyurvedaSummaryRow: View {
 
                 ForEach(1..<4, id: \.self) { division in
                     Rectangle()
-                        .fill(.white.opacity(division == 2 ? 0.72 : 0.5))
+                        .fill(
+                            effectManager.contrastingSurfaceColor.opacity(
+                                division == 2 ? 0.72 : 0.5
+                            )
+                        )
                         .frame(
                             width: division == 2 ? 2 : 1,
                             height: division == 2 ? 10 : 8
@@ -180,7 +177,11 @@ struct DailyAyurvedaSummaryRow: View {
                     .frame(width: markerDiameter, height: markerDiameter)
                     .overlay {
                         Circle()
-                            .stroke(.white.opacity(0.85), lineWidth: 2)
+                            .stroke(
+                                effectManager.contrastingSurfaceColor
+                                    .opacity(0.85),
+                                lineWidth: 2
+                            )
                     }
                     .position(
                         x: trackInset + trackWidth * progress,
@@ -318,7 +319,7 @@ struct DailyAyurvedaSummaryRow: View {
 }
 
 private struct DoshaBalanceGlyph: View {
-    @Environment(\.colorScheme) private var colorScheme
+    @ObservedObject private var effectManager = EffectManager.shared
 
     let distribution: AyurvedaDoshaDistribution?
 
@@ -342,7 +343,9 @@ private struct DoshaBalanceGlyph: View {
             triangle.closeSubpath()
             context.stroke(
                 triangle,
-                with: .color(.secondary.opacity(0.55)),
+                with: .color(
+                    effectManager.currentGlobalAccentColor.opacity(0.55)
+                ),
                 lineWidth: 1.5
             )
 
@@ -385,7 +388,9 @@ private struct DoshaBalanceGlyph: View {
                 )
                 context.stroke(
                     Path(ellipseIn: haloRect),
-                    with: .color(.secondary.opacity(0.5)),
+                    with: .color(
+                        effectManager.currentGlobalAccentColor.opacity(0.5)
+                    ),
                     lineWidth: 1
                 )
                 context.fill(
@@ -411,7 +416,9 @@ private struct DoshaBalanceGlyph: View {
     }
 
     private var markerColor: Color {
-        guard let distribution else { return .secondary }
+        guard let distribution else {
+            return effectManager.currentGlobalAccentColor
+        }
         if distribution.vata >= distribution.pitta,
            distribution.vata >= distribution.kapha {
             return .blue
@@ -423,7 +430,7 @@ private struct DoshaBalanceGlyph: View {
     }
 
     private var markerHaloColor: Color {
-        colorScheme == .dark ? .black : .white
+        effectManager.contrastingSurfaceColor
     }
 
     private func insetPoint(
@@ -443,7 +450,10 @@ private struct DoshaBalanceGlyph: View {
         in context: inout GraphicsContext
     ) {
         let rect = CGRect(x: point.x - 3, y: point.y - 3, width: 6, height: 6)
-        context.fill(Path(ellipseIn: rect), with: .color(.white))
+        context.fill(
+            Path(ellipseIn: rect),
+            with: .color(effectManager.contrastingSurfaceColor)
+        )
         context.stroke(
             Path(ellipseIn: rect),
             with: .color(color),

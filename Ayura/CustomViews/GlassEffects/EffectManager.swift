@@ -8,9 +8,24 @@ final class EffectManager: ObservableObject {
     
     @Published var snapshot: UIImage? = nil
     @Published var contentSnapshot: UIImage? = nil 
-    @Published var currentGlobalAccentColor: Color = .primary
+    @Published var currentGlobalAccentColor: Color = .black
 
     @Published var isLightRowTextColor: Bool = false
+
+    /// The app appearance is derived from the foreground selected for the
+    /// active in-app theme, never from the device light/dark setting.
+    var appColorScheme: ColorScheme {
+        isLightRowTextColor ? .dark : .light
+    }
+
+    var appInterfaceStyle: UIUserInterfaceStyle {
+        isLightRowTextColor ? .dark : .light
+    }
+
+    /// A surface color that contrasts with the active themed foreground.
+    var contrastingSurfaceColor: Color {
+        isLightRowTextColor ? .black : .white
+    }
     
     private let configKey = "glassEffectConfiguration"
     

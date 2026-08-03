@@ -43,13 +43,14 @@ struct DoshaBarsView: View {
   }
 
   private var modePicker: some View {
-    Picker("Dosha display", selection: $mode) {
-      ForEach(Mode.allCases) { mode in
-        Text(mode.rawValue).tag(mode)
-      }
-    }
-    .pickerStyle(.segmented)
+    WrappingSegmentedControl(
+      selection: $mode,
+      layoutMode: .wrap,
+      selectionTint: { _ in effectManager.currentGlobalAccentColor }
+    )
     .frame(width: 88)
+    .padding(2)
+    .accessibilityLabel("Dosha display")
   }
 
   private var signedBars: some View {

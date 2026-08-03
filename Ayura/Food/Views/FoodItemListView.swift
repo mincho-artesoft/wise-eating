@@ -4,7 +4,6 @@ import SwiftData
 struct FoodItemListView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @ObservedObject private var effectManager = EffectManager.shared
-    @Environment(\.colorScheme) private var colorScheme
     @FocusState.Binding var isSearchFieldFocused: Bool
     
     @State private var isShowingDeletePlanConfirmation = false
@@ -213,7 +212,7 @@ struct FoodItemListView: View {
                     .background {
                         RoundedRectangle(cornerRadius: 16)
                             .fill(.ultraThinMaterial)
-                            .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light) // 👈 Това принуждава материала да е тъмен
+                            .environment(\.colorScheme, effectManager.appColorScheme) // Следва темата на приложението
                     }
                     .shadow(radius: 6)
                     .transition(.opacity)

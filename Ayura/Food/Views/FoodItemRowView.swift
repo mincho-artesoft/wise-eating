@@ -5,7 +5,6 @@ import UIKit
 struct FoodItemRowView: View {
     let item: FoodItem
     @ObservedObject private var effectManager = EffectManager.shared
-    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.modelContext) private var modelContext
     @State private var ayurvedaDisplay: AyurvedaDisplay?
 

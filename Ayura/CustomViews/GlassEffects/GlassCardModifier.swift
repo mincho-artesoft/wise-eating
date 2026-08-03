@@ -30,7 +30,7 @@ struct GlassCardModifier: ViewModifier {
                         .background {
                             Rectangle()
                                 .fill(.ultraThinMaterial)
-                                .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light) // 👈 Това принуждава материала да е тъмен
+                                .environment(\.colorScheme, effectManager.appColorScheme) // Следва темата на приложението
                         }
                 } else {
                     Color.black.opacity(effectManager.config.customGlassOpacity)
@@ -93,13 +93,14 @@ private struct ParallaxBackgroundView: View {
 
 // MARK: – Intelligent Contrast Modifier
 struct IntelligentContrastModifier: ViewModifier {
-    @Environment(\.colorScheme) private var colorScheme
     @ObservedObject private var effectManager = EffectManager.shared
 
     private var contrastShader: Shader {
         Shader(
             function: .init(library: .default, name: "intelligentContrastColor"),
-            arguments: [ .float(colorScheme == .dark ? 0.65 : 0.35) ]
+            arguments: [
+                .float(effectManager.isLightRowTextColor ? 0.65 : 0.35)
+            ]
         )
     }
     

@@ -586,7 +586,7 @@ struct ProfileWizardView: View {
                 .datePickerStyle(.wheel)
                 .labelsHidden()
                 .tint(effectManager.currentGlobalAccentColor)
-                .environment(\.colorScheme, effectManager.isLightRowTextColor ? .dark : .light)
+                .environment(\.colorScheme, effectManager.appColorScheme)
             
             Spacer()
             navigationButtons
@@ -679,7 +679,7 @@ struct ProfileWizardView: View {
                 }
                 .frame(height: 180)
                 .tint(effectManager.currentGlobalAccentColor)
-                .environment(\.colorScheme, effectManager.isLightRowTextColor ? .dark : .light)
+                .environment(\.colorScheme, effectManager.appColorScheme)
             }
             .onAppear {
                 if data.height.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
@@ -721,7 +721,7 @@ struct ProfileWizardView: View {
                 }
                 .frame(height: 180)
                 .tint(effectManager.currentGlobalAccentColor)
-                .environment(\.colorScheme, effectManager.isLightRowTextColor ? .dark : .light)
+                .environment(\.colorScheme, effectManager.appColorScheme)
             }
             .onAppear {
                 if data.weight.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
@@ -895,7 +895,7 @@ struct ProfileWizardView: View {
                     }
                 }
             }
-            .environment(\.colorScheme, effectManager.isLightRowTextColor ? .dark : .light)
+            .environment(\.colorScheme, effectManager.appColorScheme)
             .foregroundColor(effectManager.currentGlobalAccentColor)
             .padding(.vertical)
 

@@ -1,5 +1,4 @@
 import SwiftUI
-import UIKit // Необходимо е за достъп до UITraitCollection
 
 @MainActor
 final class ThemeManager: ObservableObject {
@@ -18,26 +17,20 @@ final class ThemeManager: ObservableObject {
         self.currentTheme = Theme.pastelAurora // Временна стойност
         self.allAvailableThemes = [] // Временна стойност
         
-        // --- НАЧАЛО НА ПРОМЯНАТА ---
-        // Проверяваме дали приложението се стартира за първи път.
+        // Keep the initial in-app theme deterministic. Device appearance must
+        // not choose or alter the app's own theme.
         if !UserDefaults.standard.bool(forKey: hasLaunchedBeforeKey) {
-            // Разпознаваме системната тема (dark/light).
-            let isDarkMode = UITraitCollection.current.userInterfaceStyle == .dark
-            
-            // Задаваме името на темата по подразбиране.
-            // @AppStorage ще запише тази стойност автоматично.
-            self.selectedThemeName = isDarkMode ? "Galactic Void" : "Frozen Tundra"
-            
-            // Маркираме, че първоначалната настройка е направена.
+            self.selectedThemeName = Theme.defaultThemes.first?.name
+                ?? Theme.pastelAurora.name
             UserDefaults.standard.set(true, forKey: hasLaunchedBeforeKey)
-            print("First launch: Setting theme to '\(self.selectedThemeName)' based on system appearance.")
+            print("First launch: Setting the default in-app theme to '\(self.selectedThemeName)'.")
         }
-        // --- КРАЙ НА ПРОМЯНАТА ---
         
         // Ако selectedThemeName все още е празно (случва се само преди промяната по-горе),
         // задаваме стойност по подразбиране, за да избегнем проблеми.
         if self.selectedThemeName.isEmpty {
-            self.selectedThemeName = "Fresh Meadow"
+            self.selectedThemeName = Theme.defaultThemes.first?.name
+                ?? Theme.pastelAurora.name
         }
         
         // Зареждаме и подреждаме всички теми.

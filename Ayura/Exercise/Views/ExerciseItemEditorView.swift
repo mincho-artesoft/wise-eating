@@ -40,7 +40,6 @@ struct ExerciseItemEditorView: View {
     @State private var isGeneratingAIData = false
     
     @ObservedObject private var effectManager = EffectManager.shared
-    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.modelContext) private var ctx
     
     private enum FocusableField: Hashable {
@@ -614,7 +613,7 @@ struct ExerciseItemEditorView: View {
             .background {
                 Rectangle()
                     .fill(.ultraThinMaterial)
-                    .environment(\.colorScheme, effectManager.isLightRowTextColor ? .dark : .light)
+                    .environment(\.colorScheme, effectManager.appColorScheme)
             }
             .cornerRadius(20, corners: [.topLeft, .topRight])
             .frame(maxHeight: UIScreen.main.bounds.height * 0.85)

@@ -17,7 +17,6 @@ struct EffectSegmentOption: Identifiable, Sendable {
 }
 
 struct EffectSegmentPicker: View {
-  @Environment(\.colorScheme) private var colorScheme
   @ObservedObject private var effectManager = EffectManager.shared
   @Binding var selection: String?
 
@@ -31,12 +30,17 @@ struct EffectSegmentPicker: View {
       }
     }
     .padding(3)
-    .background(.thinMaterial, in: Capsule())
+    .background(
+      effectManager.currentGlobalAccentColor.opacity(
+        effectManager.isLightRowTextColor ? 0.12 : 0.07
+      ),
+      in: Capsule()
+    )
     .overlay {
       Capsule()
         .stroke(
           effectManager.currentGlobalAccentColor.opacity(
-            colorScheme == .dark ? 0.22 : 0.12
+            effectManager.isLightRowTextColor ? 0.22 : 0.12
           )
         )
     }
@@ -69,7 +73,11 @@ struct EffectSegmentPicker: View {
       .background {
         if isSelected {
           Capsule()
-            .fill(tint.opacity(colorScheme == .dark ? 0.30 : 0.17))
+            .fill(
+              tint.opacity(
+                effectManager.isLightRowTextColor ? 0.30 : 0.17
+              )
+            )
         }
       }
     }

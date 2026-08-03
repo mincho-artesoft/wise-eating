@@ -81,7 +81,7 @@ struct BatchCardView: View {
                 Text("Has Expiration Date")
                     .foregroundColor(effectManager.currentGlobalAccentColor)
             }
-            .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light)
+            .environment(\.colorScheme, effectManager.appColorScheme)
 
             if hasExpiration {
                 HStack {

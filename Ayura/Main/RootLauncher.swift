@@ -6,6 +6,7 @@ struct RootLauncher: View {
     @State private var isReady = false
 
     @ObservedObject private var effectManager = EffectManager.shared
+    @ObservedObject private var themeManager = ThemeManager.shared
 
     @Query private var allVitamins: [Vitamin]
     @Query private var allMinerals: [Mineral]
@@ -56,8 +57,12 @@ struct RootLauncher: View {
                 effectManager.currentGlobalAccentColor = accentColor
                 effectManager.isLightRowTextColor = accentColor.isLight()
             } else {
-                effectManager.currentGlobalAccentColor = .primary
-                effectManager.isLightRowTextColor = false
+                let prefersLightForeground = themeManager.currentTheme
+                    .prefersLightForeground
+                effectManager.currentGlobalAccentColor = themeManager
+                    .currentTheme
+                    .preferredForegroundColor
+                effectManager.isLightRowTextColor = prefersLightForeground
             }
             print("🎨 RootLauncher: Initial snapshot taken and accent color set.")
             AyuraLaunchProbe.event("theme-snapshot-end")

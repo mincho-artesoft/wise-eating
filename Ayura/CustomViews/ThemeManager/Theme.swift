@@ -56,6 +56,23 @@ struct Theme: Identifiable, @preconcurrency Codable, @preconcurrency Equatable {
             endPoint: endPoint
         )
     }
+
+    /// Fallback contrast for the active app theme when a rendered background
+    /// snapshot is temporarily unavailable.
+    var prefersLightForeground: Bool {
+        guard !colors.isEmpty else { return false }
+        let averageLuminance = colors.reduce(0.0) { partialResult, color in
+            partialResult
+                + (0.2126 * color.red)
+                + (0.7152 * color.green)
+                + (0.0722 * color.blue)
+        } / Double(colors.count)
+        return averageLuminance <= 0.55
+    }
+
+    var preferredForegroundColor: Color {
+        prefersLightForeground ? .white : .black
+    }
     
     var isDefaultTheme: Bool {
         Theme.defaultThemes.contains(where: { $0.id == self.id })

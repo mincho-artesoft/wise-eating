@@ -29,7 +29,7 @@ struct CustomTimePicker: UIViewRepresentable {
             uiView.date = selection
         }
         
-        uiView.overrideUserInterfaceStyle = effectManager.isLightRowTextColor ? .dark : .light
+        uiView.overrideUserInterfaceStyle = effectManager.appInterfaceStyle
     }
 
     func makeCoordinator() -> Coordinator {

@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct AyurvedaChip: View {
-  @Environment(\.colorScheme) private var colorScheme
   @ObservedObject private var effectManager = EffectManager.shared
 
   let title: String
@@ -52,11 +51,19 @@ struct AyurvedaChip: View {
       .frame(minHeight: 44)
       .background {
         RoundedRectangle(cornerRadius: 13, style: .continuous)
-          .fill(.thinMaterial)
+          .fill(
+            effectManager.currentGlobalAccentColor.opacity(
+              effectManager.isLightRowTextColor ? 0.12 : 0.07
+            )
+          )
           .overlay {
             if isSelected {
               RoundedRectangle(cornerRadius: 13, style: .continuous)
-                .fill(tint.opacity(colorScheme == .dark ? 0.28 : 0.16))
+                .fill(
+                  tint.opacity(
+                    effectManager.isLightRowTextColor ? 0.28 : 0.16
+                  )
+                )
             }
           }
       }
@@ -66,7 +73,7 @@ struct AyurvedaChip: View {
             isSelected
               ? tint.opacity(0.58)
               : effectManager.currentGlobalAccentColor.opacity(
-                colorScheme == .dark ? 0.22 : 0.10
+                effectManager.isLightRowTextColor ? 0.22 : 0.10
               ),
             lineWidth: 1
           )
@@ -108,11 +115,20 @@ struct AyurvedaChip: View {
     .frame(minHeight: 34)
     .background {
       RoundedRectangle(cornerRadius: 13, style: .continuous)
-        .fill(tint.opacity(colorScheme == .dark ? 0.22 : 0.11))
+        .fill(
+          tint.opacity(
+            effectManager.isLightRowTextColor ? 0.22 : 0.11
+          )
+        )
     }
     .overlay {
       RoundedRectangle(cornerRadius: 13, style: .continuous)
-        .stroke(tint.opacity(colorScheme == .dark ? 0.50 : 0.32), lineWidth: 1)
+        .stroke(
+          tint.opacity(
+            effectManager.isLightRowTextColor ? 0.50 : 0.32
+          ),
+          lineWidth: 1
+        )
     }
     .accessibilityElement(children: .combine)
   }

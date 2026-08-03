@@ -43,7 +43,6 @@ struct FoodItemReceptEditorView: View {
     // MARK: - Managers and Environment
     @ObservedObject private var effectManager = EffectManager.shared
     @Environment(\.modelContext) private var ctx
-    @Environment(\.colorScheme)  private var colorScheme
     let onDismiss: (FoodItem?) -> Void
     @State private var scrollToIngredientID: FoodItem.ID? = nil
     

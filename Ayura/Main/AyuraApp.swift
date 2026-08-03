@@ -10,6 +10,7 @@ struct AyuraApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     @Environment(\.scenePhase) private var scenePhase
     @ObservedObject private var subscriptionManager = SubscriptionManager.shared
+    @ObservedObject private var effectManager = EffectManager.shared
     
     @AppStorage("isFirstAppLaunch") private var isFirstAppLaunch: Bool = true
     @State private var coldStart: Bool = true
@@ -58,6 +59,7 @@ struct AyuraApp: App {
     var body: some Scene {
         WindowGroup {
             RootLauncher(container: container)
+                .preferredColorScheme(effectManager.appColorScheme)
                 .onChange(of: scenePhase) { _, newPhase in
                     // ... (старата логика за scenePhase остава същата) ...
                     switch newPhase {

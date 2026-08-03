@@ -18,7 +18,6 @@ struct RootView: View {
     @State private var isAIGenerating: Bool = false
     @State private var permissionState: PermissionState = .checking
     @ObservedObject private var themeManager = ThemeManager.shared
-    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.modelContext) private var modelContext
     @State private var navBarIsHiden: Bool = false
     
@@ -704,9 +703,12 @@ struct RootView: View {
         effectManager.snapshot = viewToRender.renderAsImage(size: UIScreen.main.bounds.size)
         
         guard let snapshot = effectManager.snapshot else {
-            let shouldUseLightForeground = colorScheme == .dark
-            effectManager.currentGlobalAccentColor = shouldUseLightForeground ? .white : .black
-            effectManager.isLightRowTextColor = shouldUseLightForeground
+            effectManager.currentGlobalAccentColor = themeManager
+                .currentTheme
+                .preferredForegroundColor
+            effectManager.isLightRowTextColor = themeManager
+                .currentTheme
+                .prefersLightForeground
             return
         }
         Task { @MainActor in

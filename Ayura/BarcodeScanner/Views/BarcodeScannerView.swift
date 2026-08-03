@@ -85,7 +85,7 @@ struct BarcodeScannerView: View {
                 } else {
                     RoundedRectangle(cornerRadius: 20)
                         .fill(.ultraThinMaterial)
-                        .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light) // 👈 Това принуждава материала да е тъмен
+                        .environment(\.colorScheme, effectManager.appColorScheme) // Следва темата на приложението
                         .overlay(
                             VStack(spacing: 8) {
                                 Image(systemName: "barcode.viewfinder")

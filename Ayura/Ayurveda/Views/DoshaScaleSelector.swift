@@ -203,7 +203,11 @@ struct DoshaScaleSelector: View {
 
           ForEach(1..<4, id: \.self) { division in
             Rectangle()
-              .fill(.white.opacity(division == 2 ? 0.72 : 0.5))
+              .fill(
+                effectManager.contrastingSurfaceColor.opacity(
+                  division == 2 ? 0.72 : 0.5
+                )
+              )
               .frame(
                 width: division == 2 ? 2 : 1,
                 height: division == 2 ? 10 : 8
@@ -219,7 +223,10 @@ struct DoshaScaleSelector: View {
             .frame(width: markerDiameter, height: markerDiameter)
             .overlay {
               Circle()
-                .stroke(Color(.systemBackground).opacity(0.88), lineWidth: 2)
+                .stroke(
+                  effectManager.contrastingSurfaceColor.opacity(0.88),
+                  lineWidth: 2
+                )
             }
             .position(
               x: trackInset + trackWidth * progress,

@@ -293,7 +293,7 @@ struct AIGenerationHostView: View {
             Spacer()
             Toggle("", isOn: isOn)
                 .labelsHidden()
-                .environment(\.colorScheme, effectManager.isLightRowTextColor ? .dark : .light)
+                .environment(\.colorScheme, effectManager.appColorScheme)
         }
         .padding(.vertical, 8)
     }

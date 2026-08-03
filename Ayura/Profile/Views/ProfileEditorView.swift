@@ -6,7 +6,6 @@ import PhotosUI
 struct ProfileEditorView: View {
     // MARK: – Environment & Queries
     @Environment(\.modelContext) private var modelContext
-    @Environment(\.colorScheme)  private var colorScheme
     @ObservedObject private var effectManager = EffectManager.shared
 
     @Query(sort: \Vitamin.name) private var allVitamins: [Vitamin]
@@ -380,7 +379,7 @@ struct ProfileEditorView: View {
                          .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
                  }
              }
-             .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light)
+             .environment(\.colorScheme, effectManager.appColorScheme)
              .padding(.horizontal, 4)
              .foregroundColor(effectManager.currentGlobalAccentColor)
          }
@@ -929,7 +928,7 @@ struct ProfileEditorView: View {
          .background {
              Rectangle()
                  .fill(.ultraThinMaterial)
-                 .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light) // 👈 Това принуждава материала да е тъмен
+                 .environment(\.colorScheme, effectManager.appColorScheme) // Следва темата на приложението
          }
          .cornerRadius(20, corners: [.topLeft, .topRight])
          .frame(maxHeight: UIScreen.main.bounds.height * 0.55)

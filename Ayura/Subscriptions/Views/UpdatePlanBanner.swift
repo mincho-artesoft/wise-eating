@@ -140,7 +140,7 @@ struct UpdatePlanBanner: View {
         .background(
             RoundedRectangle(cornerRadius: 20)
                 .fill(.ultraThinMaterial)
-                .environment(\.colorScheme, effectManager.isLightRowTextColor ? .dark : .light)
+                .environment(\.colorScheme, effectManager.appColorScheme)
         )
         .padding(.horizontal)
         .padding(.bottom, 8)

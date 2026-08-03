@@ -58,8 +58,6 @@ struct AyurvedaForm: Equatable, Sendable {
 }
 
 struct AyurvedaEditorSection: View {
-  @Environment(\.colorScheme) private var colorScheme
-
   private enum ViryaPickerOption: String, CaseIterable, Identifiable {
     case cooling = "Cooling"
     case neutral = "Neutral"
@@ -180,15 +178,20 @@ struct AyurvedaEditorSection: View {
           $0.tint ?? effectManager.currentGlobalAccentColor
         },
         systemImage: \.systemImage
-      )
+        )
         .frame(minHeight: 36)
         .padding(2)
-        .background(.thinMaterial, in: Capsule())
+        .background(
+          effectManager.currentGlobalAccentColor.opacity(
+            effectManager.isLightRowTextColor ? 0.12 : 0.07
+          ),
+          in: Capsule()
+        )
         .overlay {
           Capsule()
             .stroke(
               effectManager.currentGlobalAccentColor.opacity(
-                colorScheme == .dark ? 0.22 : 0.12
+                effectManager.isLightRowTextColor ? 0.22 : 0.12
               )
             )
         }
@@ -202,15 +205,20 @@ struct AyurvedaEditorSection: View {
         selection: vipakaSelection,
         layoutMode: .wrap,
         selectionTint: { _ in effectManager.currentGlobalAccentColor }
-      )
+        )
         .frame(minHeight: 36)
         .padding(2)
-        .background(.thinMaterial, in: Capsule())
+        .background(
+          effectManager.currentGlobalAccentColor.opacity(
+            effectManager.isLightRowTextColor ? 0.12 : 0.07
+          ),
+          in: Capsule()
+        )
         .overlay {
           Capsule()
             .stroke(
               effectManager.currentGlobalAccentColor.opacity(
-                colorScheme == .dark ? 0.22 : 0.12
+                effectManager.isLightRowTextColor ? 0.22 : 0.12
               )
             )
         }
@@ -343,11 +351,15 @@ private struct AyurvedaAutomaticPreview: View {
       if !computation.hasIngredients {
         Text("Add ingredients to see a live Ayurveda preview.")
           .font(.caption)
-          .foregroundStyle(.secondary)
+          .foregroundStyle(
+            effectManager.currentGlobalAccentColor.opacity(0.72)
+          )
       } else {
         Text("Computed from your ingredients — updates automatically")
           .font(.caption)
-          .foregroundStyle(.secondary)
+          .foregroundStyle(
+            effectManager.currentGlobalAccentColor.opacity(0.72)
+          )
         if let computed = computation.computed {
           DoshaBarsView(
             vata: computed.vata,

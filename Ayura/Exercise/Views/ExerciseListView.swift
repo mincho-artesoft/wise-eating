@@ -298,7 +298,7 @@ What would you like to do?
                     .background {
                         RoundedRectangle(cornerRadius: 16)
                             .fill(.ultraThinMaterial)
-                            .environment(\.colorScheme, effectManager.isLightRowTextColor ? .dark : .light)
+                            .environment(\.colorScheme, effectManager.appColorScheme)
                     }
                     .shadow(radius: 6)
                     .transition(.opacity)

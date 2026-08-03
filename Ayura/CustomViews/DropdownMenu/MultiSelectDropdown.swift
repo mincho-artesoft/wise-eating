@@ -84,7 +84,6 @@ private struct TagView: View {
     let onRemove: () -> Void
 
     @ObservedObject private var effectManager = EffectManager.shared
-    @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
         HStack(spacing: 4) {

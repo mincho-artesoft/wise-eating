@@ -60,6 +60,11 @@ struct ChipScrollView<T: Identifiable & Hashable>: View {
     }
 }
 
+enum GlassChipIconPlacement {
+    case leading
+    case trailing
+}
+
 struct GlassChipView: View {
     @ObservedObject private var effectManager = EffectManager.shared
     let label: String
@@ -68,6 +73,11 @@ struct GlassChipView: View {
     var color: Color? = nil
     var systemImage: String? = nil
     let textColor: Color
+    var font: Font = .caption
+    var fontWeight: Font.Weight = .medium
+    var horizontalPadding: CGFloat = 10
+    var verticalPadding: CGFloat = 5
+    var iconPlacement: GlassChipIconPlacement = .leading
     var isSelected: Bool = false
     var action: (() -> Void)? = nil
 
@@ -93,16 +103,16 @@ struct GlassChipView: View {
         return HStack(spacing: 5) {
             if isAlert {
                 Image(systemName: "exclamationmark.triangle.fill")
-                    .font(.caption)
+                    .font(font)
                     .foregroundColor(.orange) // Алергиите остават оранжеви за акцент
-            } else if let systemImage {
+            } else if let systemImage, iconPlacement == .leading {
                 Image(systemName: systemImage)
-                    .font(.caption)
+                    .font(font)
                     .foregroundColor(resolvedIconColor)
             }
             Text(label)
-                .font(.caption)
-                .fontWeight(.medium)
+                .font(font)
+                .fontWeight(fontWeight)
                 // Ако е alert, цветът е оранжев, иначе е подаденият textColor
                 .foregroundColor(resolvedTextColor)
             
@@ -112,9 +122,17 @@ struct GlassChipView: View {
                     // Стойността също е оранжева при alert, иначе е по-бледа версия на textColor
                     .foregroundColor(isAlert ? .orange.opacity(0.8) : textColor.opacity(0.7))
             }
+
+            if !isAlert,
+               let systemImage,
+               iconPlacement == .trailing {
+                Image(systemName: systemImage)
+                    .font(font)
+                    .foregroundColor(resolvedIconColor)
+            }
         }
-        .padding(.horizontal, 10)
-        .padding(.vertical, 5)
+        .padding(.horizontal, horizontalPadding)
+        .padding(.vertical, verticalPadding)
         .background {
             if isSelected {
                 Capsule()

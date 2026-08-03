@@ -33,7 +33,6 @@ struct FoodItemEditorView: View {
 
     
     @ObservedObject private var effectManager = EffectManager.shared
-    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.modelContext) private var ctx
     
     private enum FocusableField: Hashable {
@@ -1362,7 +1361,7 @@ struct FoodItemEditorView: View {
             .background {
                 Rectangle()
                     .fill(.ultraThinMaterial)
-                    .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light) // 👈 Това принуждава материала да е тъмен
+                    .environment(\.colorScheme, effectManager.appColorScheme) // Следва темата на приложението
             }
             .cornerRadius(20, corners: [.topLeft, .topRight])
             .frame(maxHeight: UIScreen.main.bounds.height * 0.55)

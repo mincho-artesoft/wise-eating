@@ -66,7 +66,6 @@ struct FoodItemMenuEditorView: View {
     // MARK: - Managers and Environment
     @ObservedObject private var effectManager = EffectManager.shared
     @Environment(\.modelContext) private var ctx
-    @Environment(\.colorScheme)  private var colorScheme
     let onDismiss: (FoodItem?) -> Void
     
     // MARK: - Data Queries
@@ -2514,7 +2513,7 @@ struct FoodItemMenuEditorView: View {
             .background {
                 Rectangle()
                     .fill(.ultraThinMaterial)
-                    .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light) // 👈 Това принуждава материала да е тъмен
+                    .environment(\.colorScheme, effectManager.appColorScheme) // Следва темата на приложението
             }
             .cornerRadius(20, corners: [.topLeft, .topRight])
             .frame(maxHeight: UIScreen.main.bounds.height * 0.55)

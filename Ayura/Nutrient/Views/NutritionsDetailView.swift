@@ -45,7 +45,6 @@ struct NutritionsDetailView: View {
     
     // MARK: - Environment & Managers
     @Environment(\.safeAreaInsets) private var safeAreaInsets
-    @Environment(\.colorScheme) private var colorScheme
     @ObservedObject private var effectManager = EffectManager.shared
     @Environment(\.modelContext) private var ctx
     

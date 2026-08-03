@@ -3,7 +3,6 @@ import SwiftUI
 struct ThemeBackgroundView: View {
     @ObservedObject var themeManager = ThemeManager.shared
     @ObservedObject var backgroundManager = BackgroundManager.shared
-    @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
         GeometryReader { geometry in
@@ -11,7 +10,6 @@ struct ThemeBackgroundView: View {
                 let gradient = themeManager.currentTheme.screenGradient
                 
                 gradient
-                    .animation(.easeIn(duration: 0.5), value: colorScheme)
                     .animation(.easeIn(duration: 0.5), value: themeManager.currentTheme)
 
                 // Използвайте selectedImage вместо backgroundImage

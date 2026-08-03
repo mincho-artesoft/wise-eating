@@ -109,7 +109,7 @@ struct ExerciseLogEntryView: View {
     private func setRow(for setBinding: Binding<WorkoutSet>) -> some View {
                 let set = setBinding.wrappedValue
                 let setIndex = exerciseLog.sets.firstIndex(where: { $0.id == set.id }) ?? 0
-                let pickerColorScheme: ColorScheme = effectManager.isLightRowTextColor ? .dark : .light
+                let pickerColorScheme: ColorScheme = effectManager.appColorScheme
 
                 return VStack(spacing: 6) {
                     // 🔹 ПЪРВИ РЕД: (Set + Reps/Min + Weight + Delete)
@@ -249,7 +249,7 @@ struct ExerciseLogEntryView: View {
                                 )
                             )
                             .labelsHidden()
-                            .environment(\.colorScheme, effectManager.isLightRowTextColor ? .dark : .light)
+                            .environment(\.colorScheme, effectManager.appColorScheme)
                         }
                         .padding(.vertical, 8)
                         
@@ -271,7 +271,7 @@ struct ExerciseLogEntryView: View {
                                 .labelsHidden()
                                 .fixedSize()
                                 .padding(.leading, 8)
-                                .environment(\.colorScheme, effectManager.isLightRowTextColor ? .dark : .light)
+                                .environment(\.colorScheme, effectManager.appColorScheme)
                             }
                             
                             Spacer()
@@ -293,7 +293,7 @@ struct ExerciseLogEntryView: View {
                                 )
                             )
                             .labelsHidden()
-                            .environment(\.colorScheme, effectManager.isLightRowTextColor ? .dark : .light)
+                            .environment(\.colorScheme, effectManager.appColorScheme)
                         }
                         .padding(.vertical, 8)
                     }
