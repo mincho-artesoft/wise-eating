@@ -434,6 +434,7 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         detail = summary[summary.index("struct DailyAyurvedaDetailView") :]
 
         self.assertIn("@State private var selectedMealID: UUID?", detail)
+        self.assertNotIn("date.formatted", detail)
         self.assertIn("selectedSummaryCard", detail)
         self.assertNotIn('Text("Coverage \\(coveragePercent(for: selected))%")', detail)
         self.assertNotIn("private func coveragePercent(", detail)

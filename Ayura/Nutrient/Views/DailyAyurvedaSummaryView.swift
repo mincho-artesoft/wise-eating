@@ -277,13 +277,8 @@ struct DailyAyurvedaDetailView: View {
                 .glassCardStyle(cornerRadius: 20)
 
             Spacer()
-            VStack(spacing: 1) {
-                Text("Daily Ayurveda")
-                    .font(.headline)
-                Text(date.formatted(date: .abbreviated, time: .omitted))
-                    .font(.caption2)
-                    .opacity(0.75)
-            }
+            Text("Daily Ayurveda")
+                .font(.headline)
             Spacer()
 
             Button("Close") {}
