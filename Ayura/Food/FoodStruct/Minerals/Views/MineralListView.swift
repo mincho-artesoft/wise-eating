@@ -16,11 +16,6 @@ struct MineralListView: View {
     private func demographicString(for profile: Profile) -> String {
         // ... (съдържанието на функцията е непроменено)
         let isFemale = profile.gender.lowercased().hasPrefix("f")
-        if isFemale {
-            if profile.isPregnant  { return Demographic.pregnantWomen }
-            if profile.isLactating { return Demographic.lactatingWomen }
-        }
-
         let months = Calendar.current.dateComponents([.month],
                                                      from: profile.birthday,
                                                      to: Date()).month ?? 0

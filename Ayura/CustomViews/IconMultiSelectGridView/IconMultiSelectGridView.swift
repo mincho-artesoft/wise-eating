@@ -22,9 +22,28 @@ struct IconMultiSelectGridView<Item: SelectableItem>: View {
     // НОВИ ЗАДЪЛЖИТЕЛНИ ПАРАМЕТРИ
     let iconSize: CGSize
     let useIconColor: Bool
+    let assetNameProvider: ((Item) -> String?)?
     @State var dissableText: Bool = false
     // MARK: - Състояние
     @State private var searchText: String = ""
+
+    init(
+        items: [Item],
+        selection: Binding<Set<Item.ID>>,
+        searchPrompt: String,
+        iconSize: CGSize,
+        useIconColor: Bool,
+        assetNameProvider: ((Item) -> String?)? = nil,
+        dissableText: Bool = false
+    ) {
+        self.items = items
+        self._selection = selection
+        self.searchPrompt = searchPrompt
+        self.iconSize = iconSize
+        self.useIconColor = useIconColor
+        self.assetNameProvider = assetNameProvider
+        self._dissableText = State(initialValue: dissableText)
+    }
     
     private var filteredItems: [Item] {
         if searchText.isEmpty {
@@ -59,6 +78,7 @@ struct IconMultiSelectGridView<Item: SelectableItem>: View {
                         IconSelectItemView(
                             item: item,
                             isSelected: selection.contains(item.id),
+                            iconName: assetNameProvider?(item) ?? item.iconName,
                             iconSize: iconSize,      // Подаваме размера
                             useIconColor: useIconColor, // Подаваме избора на цвят
                             dissableText: dissableText
@@ -90,6 +110,7 @@ private struct IconSelectItemView<Item: SelectableItem>: View {
     
     let item: Item
     let isSelected: Bool
+    let iconName: String?
     let iconSize: CGSize
     let useIconColor: Bool
     let dissableText: Bool
@@ -103,7 +124,7 @@ private struct IconSelectItemView<Item: SelectableItem>: View {
                 // Изглед за иконата
                 ZStack {
                     // Първо проверяваме за икона-снимка
-                    if let iconName = item.iconName, let uiImage = UIImage(named: iconName) {
+                    if let iconName, let uiImage = UIImage(named: iconName) {
                         Image(uiImage: uiImage)
                             .resizable()
                             // Условно задаваме renderingMode

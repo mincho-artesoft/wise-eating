@@ -16,10 +16,6 @@ public final class Profile {
     public var updatedAt: Date = Date()
     public var createdAt: Date = Date()
 
-    // MARK: - Health & Activity
-    public var isPregnant: Bool = false
-    public var isLactating: Bool = false
-
     // MARK: - Feature Flags & System IDs
     public var hasSeparateStorage: Bool = false
     public var calendarID: String? = nil
@@ -101,8 +97,6 @@ public final class Profile {
         height: Double,
         meals: [Meal] = [],
         trainings: [Training] = [],
-        isPregnant: Bool = false,
-        isLactating: Bool = false,
         calendarID: String? = nil,
         shoppingListCalendarID: String? = nil,
         priorityVitamins: [Vitamin] = [],
@@ -125,8 +119,6 @@ public final class Profile {
             self.trainings.append(training)
         }
         
-        self.isPregnant = isPregnant
-        self.isLactating = isLactating
         self.calendarID = calendarID
         self.shoppingListCalendarID = shoppingListCalendarID
         self.priorityVitamins = priorityVitamins

@@ -8,8 +8,16 @@ import Foundation
 public enum MuscleGroup: String, Codable, CaseIterable, Identifiable, SelectableItem, Sendable {
     public var id: String { self.rawValue }
     public var name: String { self.rawValue }
-    public var iconName: String? { self.rawValue }
+    public var iconName: String? { assetName(forGender: "Male") }
     public var iconText: String? { self.rawValue }
+
+    public func assetName(forGender gender: String) -> String {
+        let normalizedGender = gender
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .lowercased()
+        let namespace = normalizedGender.hasPrefix("f") ? "female" : "male"
+        return "\(namespace)/\(rawValue)"
+    }
 
     case chest = "Chest"
     case back = "Back"
@@ -33,4 +41,3 @@ public enum MuscleGroup: String, Codable, CaseIterable, Identifiable, Selectable
     case legs = "Legs"
     case arms = "Arms"
 }
-

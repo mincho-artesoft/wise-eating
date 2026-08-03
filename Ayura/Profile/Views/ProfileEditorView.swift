@@ -27,8 +27,6 @@ struct ProfileEditorView: View {
     @State private var gender: String
     @State private var weight: String
     @State private var height: String
-    @State private var isPregnant: Bool
-    @State private var isLactating: Bool
     @State private var hasSeparateStorage: Bool = false
 
     // MARK: – Selections
@@ -56,11 +54,6 @@ struct ProfileEditorView: View {
         case name, weight, height
     }
     @FocusState private var focusedField: Field?
-
-    private var ageInYears: Int? {
-        guard let bday = birthday else { return nil }
-        return Calendar.current.dateComponents([.year], from: bday, to: Date()).year
-    }
 
     private struct MenuButtonPreference: PreferenceKey {
         nonisolated(unsafe) static var defaultValue: [OpenMenu: CGRect] = [:]
@@ -108,8 +101,6 @@ struct ProfileEditorView: View {
             _height = State(initialValue: GlobalState.measurementSystem == "Imperial" ? UnitConversion.formatDecimal(UnitConversion.cmToInches(p.height)) : UnitConversion.formatDecimal(p.height))
             _meals = State(initialValue: p.meals)
             _trainings = State(initialValue: p.trainings)
-            _isPregnant = State(initialValue: p.isPregnant)
-            _isLactating = State(initialValue: p.isLactating)
             _photoData = State(initialValue: p.photoData)
             _selectedVitIDs = State(initialValue: Set(p.priorityVitamins.map(\.id)))
             _selectedMinIDs = State(initialValue: Set(p.priorityMinerals.map(\.id)))
@@ -124,8 +115,6 @@ struct ProfileEditorView: View {
             _height = State(initialValue: "")
             _meals = State(initialValue: Meal.defaultMeals())
             _trainings = State(initialValue: Training.defaultTrainings())
-            _isPregnant = State(initialValue: false)
-            _isLactating = State(initialValue: false)
             _photoData = State(initialValue: nil)
             _selectedVitIDs = State(initialValue: [])
             _selectedMinIDs = State(initialValue: [])
@@ -342,9 +331,6 @@ struct ProfileEditorView: View {
                                Picker("Select Gender", selection: $gender) {
                                    ForEach(genders, id: \.self, content: Text.init)
                                }
-                               .onChange(of: gender) { _, new in
-                                   if new.lowercased().hasPrefix("m") { isPregnant = false; isLactating = false }
-                               }
                            } label: {
                                Text(gender)
                                    .font(.system(size: 16))
@@ -357,16 +343,6 @@ struct ProfileEditorView: View {
                        birthdayPicker
                    }
                    
-                   if ageInYears ?? 2 >= 14 {
-                           if gender.lowercased().hasPrefix("f") {
-                               Toggle("Pregnant", isOn: $isPregnant).padding(.horizontal, 4).foregroundColor(effectManager.currentGlobalAccentColor)
-                                   .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light)
-
-                               Toggle("Lactating", isOn: $isLactating).padding(.horizontal, 4).foregroundColor(effectManager.currentGlobalAccentColor)
-                                   .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light)
-
-                           }
-                   }
                }
            }
            .padding()
@@ -695,7 +671,7 @@ struct ProfileEditorView: View {
 
          p.name = name; p.birthday = validBirthday; p.gender = gender; p.weight = weightInKg
          p.height = heightInCm; p.meals = meals; p.trainings = trainings
-         p.isPregnant = isPregnant; p.isLactating = isLactating; p.priorityVitamins = chosenVitamins
+         p.priorityVitamins = chosenVitamins
          p.priorityMinerals = chosenMinerals; p.allergens = chosenAllergens
          p.photoData = photoData; p.hasSeparateStorage = hasSeparateStorage; p.updatedAt = Date()
          
@@ -709,8 +685,6 @@ struct ProfileEditorView: View {
              height: heightInCm,
              meals: meals,
              trainings: trainings,
-             isPregnant: isPregnant,
-             isLactating: isLactating,
              priorityVitamins: chosenVitamins,
              priorityMinerals: chosenMinerals,
              allergens: chosenAllergens,

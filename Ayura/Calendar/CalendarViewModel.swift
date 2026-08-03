@@ -801,7 +801,7 @@ extension CalendarViewModel {
 
                 let newProfile = Profile(
                     name: payload.name, birthday: payload.birthday, gender: payload.gender, weight: payload.weight, height: payload.height,
-                    meals: payload.meals, isPregnant: payload.isPregnant, isLactating: payload.isLactating,
+                    meals: payload.meals,
                     calendarID: calendar.calendarIdentifier, priorityVitamins: vitamins, priorityMinerals: minerals,
                     allergens: payload.allergens, photoData: nil
                 )

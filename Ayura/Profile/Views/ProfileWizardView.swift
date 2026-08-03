@@ -15,8 +15,6 @@ fileprivate struct WizardData {
     var gender: Gender = .male
     var weight: String = ""
     var height: String = ""
-    var isPregnant: Bool = false
-    var isLactating: Bool = false
     var meals: [Meal] = Meal.defaultMeals()
     var trainings: [Training] = Training.defaultTrainings()
     var selectedVitIDs: Set<Vitamin.ID> = []
@@ -609,8 +607,6 @@ struct ProfileWizardView: View {
                     Button(action: {
                         withAnimation {
                             data.gender = .male
-                            data.isPregnant = false
-                            data.isLactating = false
                         }
                     }) {
                         Image("m")
@@ -650,19 +646,6 @@ struct ProfileWizardView: View {
                     .buttonStyle(.plain)
                 }
 
-                if data.gender == .female && ageInYears >= 14 {
-                    VStack(spacing: 16) {
-                        Toggle("Pregnant", isOn: $data.isPregnant)
-                            .foregroundColor(effectManager.currentGlobalAccentColor)
-                            .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light)
-                        Toggle("Lactating", isOn: $data.isLactating)
-                            .foregroundColor(effectManager.currentGlobalAccentColor)
-                            .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light)
-                    }
-                    .padding(.top, 30)
-                    .transition(.opacity.animation(.easeInOut))
-                }
-                
                 Spacer()
                 navigationButtons
                     .padding(.top, 10)
@@ -880,10 +863,6 @@ struct ProfileWizardView: View {
                     SummaryRow(label: "Gender", value: data.gender.rawValue)
                     SummaryRow(label: "Height", value: "\(data.height) \(isImperial ? "in" : "cm")")
                     SummaryRow(label: "Weight", value: "\(data.weight) \(isImperial ? "lbs" : "kg")")
-                    if ageInYears >= 14 {
-                        if data.isPregnant { SummaryRow(label: "Condition", value: "Pregnant") }
-                        if data.isLactating { SummaryRow(label: "Condition", value: "Lactating") }
-                    }
                     if !data.selectedVitIDs.isEmpty { SummaryRow(label: "Vitamins", value: "\(data.selectedVitIDs.count) selected") }
                     if !data.selectedMinIDs.isEmpty { SummaryRow(label: "Minerals", value: "\(data.selectedMinIDs.count) selected") }
                     if !data.selectedAllergens.isEmpty { SummaryRow(label: "Allergens", value: "\(data.selectedAllergens.count) selected") }
@@ -1097,8 +1076,6 @@ struct ProfileWizardView: View {
                 name: data.name, birthday: data.birthday, gender: data.gender.rawValue,
                 weight: weightInKg, height: heightInCm, meals: data.meals,
                 trainings: data.trainings,
-                isPregnant: data.isPregnant,
-                isLactating: data.isLactating,
                 priorityVitamins: chosenVitamins, priorityMinerals: chosenMinerals,
                 allergens: chosenAllergens,
                 photoData: data.photoData,

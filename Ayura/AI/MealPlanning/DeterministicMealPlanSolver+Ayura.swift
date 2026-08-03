@@ -492,9 +492,7 @@ struct MP5PlannerAdapter {
         let base = profile.gender.lowercased() == "female"
             ? 10 * weight + 6.25 * height - 5 * Double(age) - 161
             : 10 * weight + 6.25 * height - 5 * Double(age) + 5
-        var total = base * 1.2
-        if profile.isPregnant { total += 300 }
-        if profile.isLactating { total += 500 }
+        let total = base * 1.2
         return max(1_000, min(4_500, total.rounded()))
     }
 

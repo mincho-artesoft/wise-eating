@@ -601,7 +601,10 @@ struct ExerciseItemEditorView: View {
                         selection: $selectedMuscleGroups,
                         searchPrompt: "Search muscles...",
                         iconSize: CGSize(width: 48, height: 80),
-                        useIconColor: true
+                        useIconColor: true,
+                        assetNameProvider: { group in
+                            group.assetName(forGender: profile?.gender ?? "Male")
+                        }
                     )
                 case .none:
                     EmptyView()

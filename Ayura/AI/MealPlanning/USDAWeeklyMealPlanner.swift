@@ -3013,7 +3013,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
     
     @MainActor private func fetchFoodItem(by id: PersistentIdentifier) -> FoodItem? { let ctx = ModelContext(self.container); return ctx.model(for: id) as? FoodItem }
     private func logInterpretedGoals(_ interpreted: InterpretedPrompts, onLog: (@Sendable (String) -> Void)?) { for goal in interpreted.numericalGoals { onLog?("  -> Interpreted numerical goal: \(goal.nutrient.rawValue) \(goal.constraint) \(goal.value)g") }; for goal in interpreted.qualitativeGoals { onLog?("  -> Interpreted qualitative goal: \(goal)") }; for request in interpreted.structuralRequests { onLog?("  -> Interpreted structural request: \(request)") } }
-    private func estimatedDailyCalories(for p: Profile) -> Double { let ageY = Calendar.current.dateComponents([.year], from: p.birthday, to: .now).year ?? 30; let w = max(20, p.weight); let h = max(120, p.height); let base = (p.gender.lowercased() == "female") ? (10*w + 6.25*h - 5*Double(ageY) - 161) : (10*w + 6.25*h - 5*Double(ageY) + 5); var tdee = base * 1.2; if p.isPregnant { tdee += 300 }; if p.isLactating { tdee += 500 }; return max(1400, tdee.rounded()) }
+    private func estimatedDailyCalories(for p: Profile) -> Double { let ageY = Calendar.current.dateComponents([.year], from: p.birthday, to: .now).year ?? 30; let w = max(20, p.weight); let h = max(120, p.height); let base = (p.gender.lowercased() == "female") ? (10*w + 6.25*h - 5*Double(ageY) - 161) : (10*w + 6.25*h - 5*Double(ageY) + 5); let tdee = base * 1.2; return max(1400, tdee.rounded()) }
     private func logPreview(_ days: [MealPlanPreviewDay]) { for day in days { print("  -> Day \(day.dayIndex):"); for meal in day.meals { let title = meal.descriptiveTitle ?? meal.name; print("    - Meal: \(meal.name) ('\(title)') (\(meal.items.count) items, \(Int(meal.kcalTotal)) kcal)"); for item in meal.items { print("      - \(item.name), \(Int(item.grams))g, \(Int(item.kcal)) kcal") } } } }
     
     private func mealSignature(_ meal: ConceptualMeal) -> String {
@@ -3299,9 +3299,6 @@ public final class USDAWeeklyMealPlanner: Sendable {
         let age = profile.age
         let ageInMonths = profile.ageInMonths
         let gender = profile.gender.lowercased()
-        
-        if profile.isPregnant { return Demographic.pregnantWomen }
-        if profile.isLactating { return Demographic.lactatingWomen }
         
         if ageInMonths <= 6 { return Demographic.babies0_6m }
         if ageInMonths <= 12 { return Demographic.babies7_12m }

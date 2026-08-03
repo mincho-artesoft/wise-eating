@@ -418,10 +418,6 @@ struct AnalyticsChartView: View {
 
     private func demographicString(for p: Profile) -> String {
         let isF = p.gender.lowercased().hasPrefix("f")
-        if isF {
-            if p.isPregnant { return Demographic.pregnantWomen }
-            if p.isLactating { return Demographic.lactatingWomen }
-        }
         let m = Calendar.current.dateComponents([.month], from: p.birthday, to: Date()).month ?? 0
         if m < 6 { return Demographic.babies0_6m }
         if m < 12 { return Demographic.babies7_12m }

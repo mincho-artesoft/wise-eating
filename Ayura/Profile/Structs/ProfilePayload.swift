@@ -10,8 +10,6 @@ struct ProfilePayload: Codable {
     var height:    Double
     
     var meals: [Meal]
-    var isPregnant:  Bool
-    var isLactating: Bool
     var priorityVitaminIDs: [String]
     var priorityMineralIDs: [String]
     var allergens: [Allergen]
@@ -26,8 +24,6 @@ struct ProfilePayload: Codable {
         self.weight      = profile.weight
         self.height      = profile.height
         self.meals       = profile.meals
-        self.isPregnant  = profile.isPregnant
-        self.isLactating = profile.isLactating
         self.priorityVitaminIDs = profile.priorityVitamins.map(\.id)
         self.priorityMineralIDs = profile.priorityMinerals.map(\.id)
         self.allergens          = profile.allergens
@@ -39,7 +35,7 @@ struct ProfilePayload: Codable {
     }
     
     enum CodingKeys: String, CodingKey {
-        case name, birthday, gender, weight, height, meals, isPregnant, isLactating
+        case name, birthday, gender, weight, height, meals
         case priorityVitaminIDs, priorityMineralIDs
         case allergens
         case ayurvedaConstitution

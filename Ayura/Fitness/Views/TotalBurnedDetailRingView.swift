@@ -155,7 +155,7 @@ struct TotalBurnedDetailRingView: View {
             }
         } label: {
             VStack(spacing: 4) {
-                if let uiImage = UIImage(named: group.rawValue) {
+                if let uiImage = UIImage(named: group.assetName(forGender: profile.gender)) {
                     Image(uiImage: uiImage)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
