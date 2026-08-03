@@ -15,49 +15,35 @@ struct DailyAyurvedaSummaryRow: View {
 
     var body: some View {
         Button(action: onTap) {
-            VStack(alignment: .leading, spacing: 10) {
-                HStack(spacing: 12) {
-                    VStack(spacing: 3) {
-                        fitScale
-                        HStack {
-                            Text("Poor")
-                            Spacer()
-                            Text("Mixed")
-                            Spacer()
-                            Text("Good")
-                        }
-                        .font(.caption2)
-                        .foregroundStyle(
-                            effectManager.currentGlobalAccentColor.opacity(0.62)
-                        )
+            HStack(alignment: .top, spacing: 16) {
+                if let computed = computation.computed {
+                    VStack(spacing: 8) {
+                        doshaScale(name: "Vata", value: computed.vata)
+                        doshaScale(name: "Pitta", value: computed.pitta)
+                        doshaScale(name: "Kapha", value: computed.kapha)
+                        scaleLabels
                     }
                     .frame(maxWidth: .infinity)
-
-                    VStack(alignment: .trailing, spacing: 2) {
-                        Text("Fit")
-                            .font(.caption)
-                            .foregroundStyle(
-                                effectManager.currentGlobalAccentColor.opacity(0.72)
-                            )
-                        Label(fitLabel, systemImage: fitIcon)
-                            .font(.subheadline.weight(.semibold))
-                            .foregroundStyle(fitColor)
-                    }
-                }
-
-                if let computed = computation.computed {
-                    AyurvedaDoshaResultChips(
-                        vata: computed.vata,
-                        pitta: computed.pitta,
-                        kapha: computed.kapha
-                    )
                 } else {
                     Text("Ayurvedic effects unavailable")
                         .font(.caption)
                         .foregroundStyle(
                             effectManager.currentGlobalAccentColor.opacity(0.7)
                         )
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
+
+                VStack(alignment: .trailing, spacing: 2) {
+                    Text("Fit")
+                        .font(.caption)
+                        .foregroundStyle(
+                            effectManager.currentGlobalAccentColor.opacity(0.72)
+                        )
+                    Label(fitLabel, systemImage: fitIcon)
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(fitColor)
+                }
+                .frame(minWidth: 68, alignment: .trailing)
             }
             .foregroundStyle(effectManager.currentGlobalAccentColor)
             .padding()
@@ -72,7 +58,26 @@ struct DailyAyurvedaSummaryRow: View {
         )
     }
 
-    private var fitScale: some View {
+    private func doshaScale(name: String, value: Int) -> some View {
+        let clampedValue = min(2, max(-2, value))
+        let progress = CGFloat(2 - clampedValue) / 4
+        return VStack(alignment: .leading, spacing: 3) {
+            HStack(spacing: 6) {
+                Text(name)
+                    .font(.caption.weight(.semibold))
+                Spacer(minLength: 8)
+                Text(signedValue(clampedValue))
+                    .font(.caption2.monospacedDigit().weight(.semibold))
+                    .foregroundStyle(doshaColor(for: clampedValue))
+            }
+
+            doshaTrack(progress: progress, color: doshaColor(for: clampedValue))
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(name) effect \(signedValue(clampedValue))")
+    }
+
+    private func doshaTrack(progress: CGFloat, color: Color) -> some View {
         GeometryReader { proxy in
             ZStack(alignment: .leading) {
                 Capsule()
@@ -90,20 +95,45 @@ struct DailyAyurvedaSummaryRow: View {
                     .frame(height: 8)
 
                 Circle()
-                    .fill(fitColor)
-                    .frame(width: 16, height: 16)
+                    .fill(color)
+                    .frame(width: 12, height: 12)
                     .overlay {
                         Circle()
                             .stroke(.white.opacity(0.85), lineWidth: 2)
                     }
                     .offset(
-                        x: max(0, (proxy.size.width - 16) * fitProgress)
+                        x: max(0, (proxy.size.width - 12) * progress)
                     )
             }
             .frame(maxHeight: .infinity)
         }
-        .frame(height: 16)
+        .frame(height: 12)
         .accessibilityHidden(true)
+    }
+
+    private var scaleLabels: some View {
+        HStack {
+            Text("Poor")
+            Spacer()
+            Text("Mixed")
+            Spacer()
+            Text("Good")
+        }
+        .font(.caption2)
+        .foregroundStyle(
+            effectManager.currentGlobalAccentColor.opacity(0.62)
+        )
+        .accessibilityHidden(true)
+    }
+
+    private func signedValue(_ value: Int) -> String {
+        value > 0 ? "+\(value)" : "\(value)"
+    }
+
+    private func doshaColor(for value: Int) -> Color {
+        if value < 0 { return Color("AyurvedaPacify") }
+        if value > 0 { return Color("AyurvedaAggravate") }
+        return neutralColor
     }
 
     private var fit: AyurvedaFoodFitPresentation? {
@@ -129,11 +159,6 @@ struct DailyAyurvedaSummaryRow: View {
         case .mixed: return "Mixed"
         case .lessSupportive: return "Poor"
         }
-    }
-
-    private var fitProgress: CGFloat {
-        guard let fit else { return 0.5 }
-        return CGFloat(min(1, max(0, (fit.score + 2) / 4)))
     }
 
     private var fitColor: Color {

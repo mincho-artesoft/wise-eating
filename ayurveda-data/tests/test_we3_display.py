@@ -353,7 +353,6 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         nutrition_detail = NUTRITIONS_DETAIL.read_text()
 
         self.assertIn("struct DailyAyurvedaSummaryRow", summary)
-        self.assertIn("AyurvedaDoshaResultChips(", summary)
         self.assertIn("AyurvedaFoodFitPresentation.make(", summary)
         self.assertIn('Text("Fit for \\(profileName)")', summary)
 
@@ -388,12 +387,17 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
 
         self.assertNotIn('Label("Daily Ayurveda"', row)
         self.assertIn('Text("Fit")', row)
-        self.assertIn("private var fitScale", row)
+        self.assertIn("private func doshaScale", row)
+        self.assertIn("private func doshaTrack", row)
+        self.assertIn('doshaScale(name: "Vata"', row)
+        self.assertIn('doshaScale(name: "Pitta"', row)
+        self.assertIn('doshaScale(name: "Kapha"', row)
         self.assertIn("LinearGradient(", row)
         self.assertIn('Text("Poor")', row)
         self.assertIn('Text("Mixed")', row)
         self.assertIn('Text("Good")', row)
-        self.assertIn("AyurvedaDoshaResultChips(", row)
+        self.assertNotIn("AyurvedaDoshaResultChips(", row)
+        self.assertNotIn("private var fitScale", row)
         self.assertEqual(row.count(".glassCardStyle(cornerRadius: 20)"), 1)
         self.assertNotIn("Divider()", row)
         self.assertIn(".padding(.horizontal, 20)", row)
