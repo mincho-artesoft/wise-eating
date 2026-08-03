@@ -91,9 +91,9 @@ struct DoshaBarsView: View {
     return VStack(alignment: .leading, spacing: 8) {
       DoshaPercentageBar(
         values: [
-          .init(label: "Vata", value: percentages.v, color: .purple),
-          .init(label: "Pitta", value: percentages.p, color: .red),
-          .init(label: "Kapha", value: percentages.k, color: Color("AyurvedaPacify"))
+          .init(label: "Vata", value: percentages.v, color: .blue),
+          .init(label: "Pitta", value: percentages.p, color: .orange),
+          .init(label: "Kapha", value: percentages.k, color: .green)
         ]
       )
     }

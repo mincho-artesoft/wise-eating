@@ -126,6 +126,30 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         )
         self.assertIn("activeRecord()?", search_chips)
 
+    def test_percentage_dosha_bar_matches_profile_palette(self):
+        bars = BARS.read_text()
+
+        self.assertIn(
+            '.init(label: "Vata", value: percentages.v, color: .blue)',
+            bars,
+        )
+        self.assertIn(
+            '.init(label: "Pitta", value: percentages.p, color: .orange)',
+            bars,
+        )
+        self.assertIn(
+            '.init(label: "Kapha", value: percentages.k, color: .green)',
+            bars,
+        )
+        self.assertNotIn(
+            '.init(label: "Vata", value: percentages.v, color: .purple)',
+            bars,
+        )
+        self.assertNotIn(
+            '.init(label: "Pitta", value: percentages.p, color: .red)',
+            bars,
+        )
+
     def test_accessibility_size_has_single_column_and_no_truncating_chips(self):
         section = SECTION.read_text()
         scale = SCALE.read_text()
