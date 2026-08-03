@@ -12,13 +12,18 @@ struct DailyAyurvedaSummaryRow: View {
     let onTap: () -> Void
 
     var body: some View {
-        HStack(alignment: .top, spacing: 8) {
+        HStack(alignment: .top) {
+            Spacer()
             doshaCard(.vata, value: computation.computed?.vata)
+            Spacer()
             doshaCard(.pitta, value: computation.computed?.pitta)
+            Spacer()
             doshaCard(.kapha, value: computation.computed?.kapha)
+            Spacer()
             fitCard
+            Spacer()
         }
-        .padding(.horizontal, 16)
+        .padding(.horizontal, 6)
         .accessibilityElement(children: .contain)
         .accessibilityLabel("Daily Ayurveda summary")
     }
@@ -43,7 +48,6 @@ struct DailyAyurvedaSummaryRow: View {
             )
         }
         .buttonStyle(.plain)
-        .frame(maxWidth: .infinity)
     }
 
     private var fitCard: some View {
@@ -57,7 +61,6 @@ struct DailyAyurvedaSummaryRow: View {
             )
         }
         .buttonStyle(.plain)
-        .frame(maxWidth: .infinity)
     }
 
     private var fit: AyurvedaFoodFitPresentation? {
@@ -184,7 +187,6 @@ private struct DailyAyurvedaRingCard: View {
                 )
         }
         .padding(10)
-        .frame(maxWidth: .infinity)
         .glassCardStyle(cornerRadius: 20)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("\(title), \(value)")

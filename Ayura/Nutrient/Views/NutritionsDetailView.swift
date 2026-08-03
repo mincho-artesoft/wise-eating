@@ -1007,6 +1007,7 @@ struct NutritionsDetailView: View {
                                 target: dailyAyurvedaTarget,
                                 onTap: { presentRingDetail(.ayurveda) }
                             )
+                            .padding(.horizontal, 10)
                         }
                         .padding(.top, -40)
                     }

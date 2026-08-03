@@ -25,6 +25,7 @@ DAILY_AYURVEDA_SUMMARY = (
     ROOT / "Ayura/Nutrient/Views/DailyAyurvedaSummaryView.swift"
 )
 NUTRITIONS_DETAIL = ROOT / "Ayura/Nutrient/Views/NutritionsDetailView.swift"
+RINGS_SUMMARY = ROOT / "Ayura/Nutrient/Views/RingsSummaryRow.swift"
 
 
 class WE3DisplayTests(unittest.TestCase):
@@ -374,6 +375,20 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
             2,
         )
         self.assertIn("case goals, calories, macros, ayurveda", nutrition_detail)
+
+    def test_daily_ayurveda_rings_match_existing_size_and_pin_hit_target(self):
+        summary = DAILY_AYURVEDA_SUMMARY.read_text()
+        rings = RINGS_SUMMARY.read_text()
+        row = summary[
+            summary.index("struct DailyAyurvedaSummaryRow") :
+            summary.index("private struct DailyAyurvedaRingCard")
+        ]
+
+        self.assertGreaterEqual(row.count("Spacer()"), 5)
+        self.assertIn(".padding(.horizontal, 6)", row)
+        self.assertNotIn(".frame(maxWidth: .infinity)", row)
+        self.assertIn(".frame(width: 44, height: 44)", rings)
+        self.assertIn(".contentShape(Rectangle())", rings)
 
 
 if __name__ == "__main__":

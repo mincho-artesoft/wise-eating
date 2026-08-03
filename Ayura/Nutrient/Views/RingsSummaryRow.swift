@@ -110,9 +110,14 @@ struct RingsSummaryRow<CalorieRing: View, MacroRing: View>: View {
                 Button(action: { isPinned.toggle() }) {
                     Image(systemName: isPinned ? "pin.fill" : "pin.slash")
                         .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
                 }
+                .buttonStyle(.plain)
+                .contentShape(Rectangle())
+                .zIndex(1)
             }
-            .padding(.trailing, 30)
+            .padding(.trailing, 18)
         }
     }
 }
