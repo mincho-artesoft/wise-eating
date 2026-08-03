@@ -452,8 +452,15 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         )
         self.assertNotIn('title: "Whole day"', detail)
         self.assertIn("ForEach(meals)", detail)
+        self.assertNotIn('systemImage: "fork.knife"', detail)
+        self.assertNotIn("systemImage: String", detail)
+        self.assertIn("private static let mealPalette", detail)
+        self.assertIn("private var mealColors", detail)
+        self.assertIn("localizedCaseInsensitiveCompare", detail)
+        self.assertIn("color.opacity(isSelected ? 0.8 : 0.3)", detail)
+        self.assertIn(".stroke(color, lineWidth: isSelected ? 2 : 0)", detail)
         self.assertIn(
-            "selectedMealID = selectedMealID == mealID ? nil : mealID",
+            "selectedMealID = isSelected ? nil : mealID",
             detail,
         )
         self.assertIn("return meal.computation", detail)

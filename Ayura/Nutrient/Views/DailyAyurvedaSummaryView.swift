@@ -230,6 +230,11 @@ struct DailyAyurvedaDetailView: View {
     @ObservedObject private var effectManager = EffectManager.shared
     @State private var selectedMealID: UUID?
 
+    private static let mealPalette: [Color] = [
+        .orange, .pink, .green, .indigo, .purple, .blue, .red,
+        Color(hex: "#00ffff"),
+    ]
+
     let date: Date
     let profileName: String
     let computation: AyurvedaIngredientComputation
@@ -398,7 +403,8 @@ struct DailyAyurvedaDetailView: View {
                 ForEach(meals) { meal in
                     scopeChip(
                         title: meal.name,
-                        systemImage: "fork.knife",
+                        color: mealColors[meal.id]
+                            ?? effectManager.currentGlobalAccentColor,
                         mealID: meal.id
                     )
                 }
@@ -409,19 +415,43 @@ struct DailyAyurvedaDetailView: View {
 
     private func scopeChip(
         title: String,
-        systemImage: String,
+        color: Color,
         mealID: UUID?
     ) -> some View {
-        GlassChipView(
-            label: title,
-            color: .blue,
-            systemImage: systemImage,
-            textColor: effectManager.currentGlobalAccentColor,
-            isSelected: selectedMealID == mealID,
-            action: {
-                withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
-                    selectedMealID = selectedMealID == mealID ? nil : mealID
+        let isSelected = selectedMealID == mealID
+        return Button {
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                selectedMealID = isSelected ? nil : mealID
+            }
+        } label: {
+            Text(title)
+                .font(.caption.weight(.semibold))
+                .padding(.horizontal, 12)
+                .padding(.vertical, 6)
+                .background {
+                    Capsule()
+                        .fill(color.opacity(isSelected ? 0.8 : 0.3))
                 }
+                .glassCardStyle(cornerRadius: 20)
+                .overlay {
+                    Capsule()
+                        .stroke(color, lineWidth: isSelected ? 2 : 0)
+                }
+                .foregroundStyle(effectManager.currentGlobalAccentColor)
+        }
+        .buttonStyle(.plain)
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
+    }
+
+    private var mealColors: [UUID: Color] {
+        let sortedMeals = meals.sorted {
+            $0.name.localizedCaseInsensitiveCompare($1.name)
+                == .orderedAscending
+        }
+        let paletteCount = Self.mealPalette.count
+        return Dictionary(uniqueKeysWithValues:
+            sortedMeals.enumerated().map { index, meal in
+                (meal.id, Self.mealPalette[index % paletteCount])
             }
         )
     }
