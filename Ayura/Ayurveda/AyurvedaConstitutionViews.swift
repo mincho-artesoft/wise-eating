@@ -940,7 +940,6 @@ struct AyurvedaConstitutionManagerView: View {
 
   @State private var record: AyurvedaConstitutionRecord?
   @State private var setupMethod: AyurvedaConstitutionSetupMethod?
-  @State private var isShowingCheckIn = false
 
   var body: some View {
     ZStack {
@@ -962,43 +961,6 @@ struct AyurvedaConstitutionManagerView: View {
                 source: record.source
               )
               .listRowInsets(EdgeInsets())
-            }
-            .listRowBackground(Color.clear)
-            .listRowSeparator(.hidden)
-
-            Section {
-              VStack(alignment: .leading, spacing: 12) {
-                if let checkIn = record.latestCheckIn {
-                  AyurvedaDistributionBars(
-                    distribution: checkIn.distribution
-                  )
-                  Text(
-                    checkIn.createdAt.formatted(
-                      date: .abbreviated,
-                      time: .shortened
-                    )
-                  )
-                  .font(.caption)
-                  .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.72))
-                  Text(checkInStatus(record))
-                    .font(.caption)
-                    .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.72))
-                } else {
-                  Text(
-                    "No recent check-in. Food ranking currently uses the long-term profile only."
-                  )
-                  .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.76))
-                }
-                Button("Check in for the past week or two") {
-                  isShowingCheckIn = true
-                }
-                .ayurvedaGlassButton(fillsWidth: true, emphasized: true)
-              }
-              .padding()
-              .ayurvedaGlassSurface(cornerRadius: 18)
-            } header: {
-              Text("Current pattern")
-                .foregroundStyle(effectManager.currentGlobalAccentColor)
             }
             .listRowBackground(Color.clear)
             .listRowSeparator(.hidden)
@@ -1092,22 +1054,8 @@ struct AyurvedaConstitutionManagerView: View {
         setupMethod = nil
       }
     }
-    .fullScreenCover(isPresented: $isShowingCheckIn) {
-      AyurvedaCheckInView(profileID: profileID) {
-        reload()
-        isShowingCheckIn = false
-      }
-    }
     .tint(effectManager.currentGlobalAccentColor)
     .foregroundStyle(effectManager.currentGlobalAccentColor)
-  }
-
-  private func checkInStatus(_ record: AyurvedaConstitutionRecord) -> String {
-    let percent = Int((record.vikritiWeight() / 0.7 * 100).rounded())
-    if percent <= 0 {
-      return "This check-in is no longer influencing food ranking."
-    }
-    return "Current check-in influence: \(percent)% of its full weight."
   }
 
   private func reload() {

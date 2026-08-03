@@ -222,6 +222,18 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
             constitution_view,
         )
 
+    def test_profile_manager_does_not_render_current_pattern_section(self):
+        constitution = CONSTITUTION.read_text()
+        manager = constitution[
+            constitution.index("struct AyurvedaConstitutionManagerView") :
+            constitution.index("private struct AyurvedaCheckInView")
+        ]
+
+        self.assertNotIn('Text("Current pattern")', manager)
+        self.assertNotIn("No recent check-in", manager)
+        self.assertNotIn("Check in for the past week or two", manager)
+        self.assertNotIn("isShowingCheckIn", manager)
+
     def test_main_profile_deletion_removes_ayurveda_data(self):
         profile_list = PROFILE_LIST.read_text()
         deletion = profile_list[
