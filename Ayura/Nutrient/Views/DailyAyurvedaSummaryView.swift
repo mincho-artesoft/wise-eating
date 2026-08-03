@@ -21,7 +21,6 @@ struct DailyAyurvedaSummaryRow: View {
                         doshaScale(name: "Vata", value: computed.vata)
                         doshaScale(name: "Pitta", value: computed.pitta)
                         doshaScale(name: "Kapha", value: computed.kapha)
-                        scaleLabels
                     }
                     .frame(maxWidth: .infinity)
                 } else {
@@ -108,21 +107,6 @@ struct DailyAyurvedaSummaryRow: View {
             .frame(maxHeight: .infinity)
         }
         .frame(height: 12)
-        .accessibilityHidden(true)
-    }
-
-    private var scaleLabels: some View {
-        HStack {
-            Text("Poor")
-            Spacer()
-            Text("Mixed")
-            Spacer()
-            Text("Good")
-        }
-        .font(.caption2)
-        .foregroundStyle(
-            effectManager.currentGlobalAccentColor.opacity(0.62)
-        )
         .accessibilityHidden(true)
     }
 
