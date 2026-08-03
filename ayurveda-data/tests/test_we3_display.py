@@ -396,6 +396,8 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         self.assertIn(".frame(width: 76, alignment: .center)", row)
         self.assertIn("private func doshaScale", row)
         self.assertIn("private func doshaTrack", row)
+        self.assertIn("ForEach(1..<4, id: \\.self)", row)
+        self.assertIn("proxy.size.width * CGFloat(division) / 4", row)
         self.assertIn('name: "Vata",\n                            value: computed.vata', row)
         self.assertIn('name: "Pitta",\n                            value: computed.pitta', row)
         self.assertIn('name: "Kapha",\n                            value: computed.kapha', row)

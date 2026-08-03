@@ -132,6 +132,19 @@ struct DailyAyurvedaSummaryRow: View {
                     )
                     .frame(height: 8)
 
+                ForEach(1..<4, id: \.self) { division in
+                    Rectangle()
+                        .fill(.white.opacity(division == 2 ? 0.72 : 0.5))
+                        .frame(
+                            width: division == 2 ? 2 : 1,
+                            height: division == 2 ? 10 : 8
+                        )
+                        .position(
+                            x: proxy.size.width * CGFloat(division) / 4,
+                            y: proxy.size.height / 2
+                        )
+                }
+
                 Circle()
                     .fill(color)
                     .frame(width: 12, height: 12)
