@@ -43,7 +43,7 @@ struct DailyAyurvedaSummaryRow: View {
                     }
 
                     DoshaBalanceGlyph(
-                        distribution: profileDistribution ?? target
+                        distribution: foodEffectDistribution
                     )
                     .frame(width: 44, height: 38)
                 }
@@ -261,6 +261,20 @@ struct DailyAyurvedaSummaryRow: View {
         )
     }
 
+    private var foodEffectDistribution: AyurvedaDoshaDistribution? {
+        guard let computed = computation.computed else { return nil }
+        let percentages = AyurvedaDisplayMath.percentages(
+            vata: computed.vata,
+            pitta: computed.pitta,
+            kapha: computed.kapha
+        )
+        return AyurvedaDoshaDistribution(
+            vata: Double(percentages.v),
+            pitta: Double(percentages.p),
+            kapha: Double(percentages.k)
+        )
+    }
+
     private var fitLabel: String {
         guard computation.computed != nil else { return "—" }
         guard let fit else { return "?" }
@@ -336,44 +350,49 @@ private struct DoshaBalanceGlyph: View {
             drawNode(at: leading, color: .orange, in: &context)
             drawNode(at: trailing, color: .green, in: &context)
 
-            let centroid = CGPoint(
-                x: (top.x + leading.x + trailing.x) / 3,
-                y: (top.y + leading.y + trailing.y) / 3
-            )
-            let markerTop = insetPoint(top, toward: centroid)
-            let markerLeading = insetPoint(leading, toward: centroid)
-            let markerTrailing = insetPoint(trailing, toward: centroid)
-            let weights = normalizedWeights
-            let marker = CGPoint(
-                x: (markerTop.x * weights.vata)
-                    + (markerLeading.x * weights.pitta)
-                    + (markerTrailing.x * weights.kapha),
-                y: (markerTop.y * weights.vata)
-                    + (markerLeading.y * weights.pitta)
-                    + (markerTrailing.y * weights.kapha)
-            )
-            let haloRect = CGRect(
-                x: marker.x - 6,
-                y: marker.y - 6,
-                width: 12,
-                height: 12
-            )
-            let markerRect = CGRect(
-                x: marker.x - 4,
-                y: marker.y - 4,
-                width: 8,
-                height: 8
-            )
-            context.fill(
-                Path(ellipseIn: haloRect),
-                with: .color(markerHaloColor)
-            )
-            context.stroke(
-                Path(ellipseIn: haloRect),
-                with: .color(.secondary.opacity(0.5)),
-                lineWidth: 1
-            )
-            context.fill(Path(ellipseIn: markerRect), with: .color(markerColor))
+            if distribution != nil {
+                let centroid = CGPoint(
+                    x: (top.x + leading.x + trailing.x) / 3,
+                    y: (top.y + leading.y + trailing.y) / 3
+                )
+                let markerTop = insetPoint(top, toward: centroid)
+                let markerLeading = insetPoint(leading, toward: centroid)
+                let markerTrailing = insetPoint(trailing, toward: centroid)
+                let weights = normalizedWeights
+                let marker = CGPoint(
+                    x: (markerTop.x * weights.vata)
+                        + (markerLeading.x * weights.pitta)
+                        + (markerTrailing.x * weights.kapha),
+                    y: (markerTop.y * weights.vata)
+                        + (markerLeading.y * weights.pitta)
+                        + (markerTrailing.y * weights.kapha)
+                )
+                let haloRect = CGRect(
+                    x: marker.x - 6,
+                    y: marker.y - 6,
+                    width: 12,
+                    height: 12
+                )
+                let markerRect = CGRect(
+                    x: marker.x - 4,
+                    y: marker.y - 4,
+                    width: 8,
+                    height: 8
+                )
+                context.fill(
+                    Path(ellipseIn: haloRect),
+                    with: .color(markerHaloColor)
+                )
+                context.stroke(
+                    Path(ellipseIn: haloRect),
+                    with: .color(.secondary.opacity(0.5)),
+                    lineWidth: 1
+                )
+                context.fill(
+                    Path(ellipseIn: markerRect),
+                    with: .color(markerColor)
+                )
+            }
         }
         .accessibilityHidden(true)
     }
