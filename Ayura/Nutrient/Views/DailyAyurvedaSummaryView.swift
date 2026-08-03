@@ -77,8 +77,13 @@ struct DailyAyurvedaSummaryRow: View {
     ) -> some View {
         let clampedValue = min(2, max(-2, value))
         let progress = CGFloat(2 - clampedValue) / 4
-        let relevance = profileRelevance(for: profileWeight)
-        let effectColor = doshaColor(for: clampedValue)
+        let prefersPacifying = prefersPacifyingEffect(
+            for: profileWeight
+        )
+        let effectColor = personalizedColor(
+            for: clampedValue,
+            prefersPacifying: prefersPacifying
+        )
         return VStack(alignment: .leading, spacing: 3) {
             HStack(spacing: 6) {
                 Text(name)
@@ -86,14 +91,13 @@ struct DailyAyurvedaSummaryRow: View {
                 Spacer(minLength: 8)
                 Text(signedValue(clampedValue))
                     .font(.caption2.monospacedDigit().weight(.semibold))
-                    .foregroundStyle(relevance > 0 ? effectColor : neutralColor)
-                    .opacity(0.55 + 0.45 * relevance)
+                    .foregroundStyle(effectColor)
             }
 
             doshaTrack(
                 progress: progress,
                 color: effectColor,
-                relevance: relevance
+                prefersPacifying: prefersPacifying
             )
         }
         .accessibilityElement(children: .ignore)
@@ -103,37 +107,34 @@ struct DailyAyurvedaSummaryRow: View {
     private func doshaTrack(
         progress: CGFloat,
         color: Color,
-        relevance: CGFloat
+        prefersPacifying: Bool
     ) -> some View {
-        GeometryReader { proxy in
+        let gradientColors = prefersPacifying
+            ? [
+                Color("AyurvedaAggravate"),
+                neutralColor,
+                Color("AyurvedaPacify"),
+            ]
+            : [
+                Color("AyurvedaPacify"),
+                neutralColor,
+                Color("AyurvedaAggravate"),
+            ]
+        return GeometryReader { proxy in
             ZStack(alignment: .leading) {
-                Capsule()
-                    .fill(neutralColor.opacity(0.34))
-                    .frame(height: 8)
-
                 Capsule()
                     .fill(
                         LinearGradient(
-                            colors: [
-                                Color("AyurvedaAggravate"),
-                                Color("AyurvedaNeutral"),
-                                Color("AyurvedaPacify"),
-                            ],
+                            colors: gradientColors,
                             startPoint: .leading,
                             endPoint: .trailing
                         )
                     )
                     .frame(height: 8)
-                    .opacity(relevance)
 
                 Circle()
-                    .fill(neutralColor)
+                    .fill(color)
                     .frame(width: 12, height: 12)
-                    .overlay {
-                        Circle()
-                            .fill(color)
-                            .opacity(relevance)
-                    }
                     .overlay {
                         Circle()
                             .stroke(.white.opacity(0.85), lineWidth: 2)
@@ -152,21 +153,20 @@ struct DailyAyurvedaSummaryRow: View {
         value > 0 ? "+\(value)" : "\(value)"
     }
 
-    private func profileRelevance(for weight: Double) -> CGFloat {
-        guard let profileDistribution else { return 0 }
-        let maximum = max(
-            profileDistribution.vata,
-            profileDistribution.pitta,
-            profileDistribution.kapha
-        )
-        guard maximum > 0 else { return 0 }
-        return CGFloat(min(1, max(0, weight / maximum)))
+    private func prefersPacifyingEffect(for profileWeight: Double) -> Bool {
+        guard profileDistribution != nil else { return true }
+        return profileWeight >= (1.0 / 3.0)
     }
 
-    private func doshaColor(for value: Int) -> Color {
-        if value < 0 { return Color("AyurvedaPacify") }
-        if value > 0 { return Color("AyurvedaAggravate") }
-        return neutralColor
+    private func personalizedColor(
+        for value: Int,
+        prefersPacifying: Bool
+    ) -> Color {
+        guard value != 0 else { return neutralColor }
+        let isSupportive = prefersPacifying ? value < 0 : value > 0
+        return isSupportive
+            ? Color("AyurvedaPacify")
+            : Color("AyurvedaAggravate")
     }
 
     private var fit: AyurvedaFoodFitPresentation? {

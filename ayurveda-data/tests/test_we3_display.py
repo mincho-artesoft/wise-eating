@@ -397,9 +397,12 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         self.assertIn("profileWeight: profileDistribution?.vata ?? 0", row)
         self.assertIn("profileWeight: profileDistribution?.pitta ?? 0", row)
         self.assertIn("profileWeight: profileDistribution?.kapha ?? 0", row)
-        self.assertIn("private func profileRelevance", row)
-        self.assertIn("weight / maximum", row)
-        self.assertIn(".opacity(relevance)", row)
+        self.assertIn("private func prefersPacifyingEffect", row)
+        self.assertIn("profileWeight >= (1.0 / 3.0)", row)
+        self.assertIn("private func personalizedColor", row)
+        self.assertIn("prefersPacifying ? value < 0 : value > 0", row)
+        self.assertIn("let gradientColors = prefersPacifying", row)
+        self.assertNotIn(".opacity(relevance)", row)
         self.assertGreaterEqual(
             nutrition_detail.count(
                 "profileDistribution: dailyAyurvedaProfileResult?.distribution"
