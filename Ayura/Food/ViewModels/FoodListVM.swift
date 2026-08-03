@@ -329,7 +329,11 @@ final class FoodListVM: ObservableObject {
         // 4) Update Search Index (Remove from In-Memory Cache)
         SearchIndexStore.shared.removeItem(id: foodID, context: ctx)
 
-        // 5) Nullify relations
+        // 5) Delete the per-food Ayurveda override before the FoodItem so a
+        // future user-added food cannot inherit stale data if its ID is reused.
+        AyurvedaUserProfileStore.remove(foodId: foodID, context: ctx)
+
+        // 6) Nullify relations
         item.macronutrients = nil
         item.lipids         = nil
         item.vitamins       = nil
@@ -339,7 +343,7 @@ final class FoodListVM: ObservableObject {
         item.carbDetails    = nil
         item.sterols        = nil
         
-        // 6) Delete
+        // 7) Delete
         ctx.delete(item)
         
         do {

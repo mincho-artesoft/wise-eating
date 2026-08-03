@@ -17,6 +17,7 @@ SEARCH_CHIPS = ROOT / "Ayura/FoodSearch/AyurvedaSearchChips.swift"
 FOOD_ROW = ROOT / "Ayura/Food/Views/FoodItemRowView.swift"
 PROFILE_EDITOR = ROOT / "Ayura/Profile/Views/ProfileEditorView.swift"
 PROFILE_LIST = ROOT / "Ayura/Profile/Views/ProfileListView.swift"
+FOOD_LIST_VM = ROOT / "Ayura/Food/ViewModels/FoodListVM.swift"
 
 
 class WE3DisplayTests(unittest.TestCase):
@@ -249,6 +250,23 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         self.assertLess(
             deletion.index(ayurveda_delete),
             deletion.index("modelContext.delete(profileToDeleteInContext)"),
+        )
+
+    def test_user_food_deletion_removes_ayurveda_profile_first(self):
+        food_list_vm = FOOD_LIST_VM.read_text()
+        deletion = food_list_vm[
+            food_list_vm.index("func delete(_ item: FoodItem)") :
+            food_list_vm.index("func pruneFavoritesAfterToggle")
+        ]
+
+        ayurveda_delete = (
+            "AyurvedaUserProfileStore.remove(foodId: foodID, context: ctx)"
+        )
+        self.assertIn(ayurveda_delete, deletion)
+        self.assertIn("ctx.delete(item)", deletion)
+        self.assertLess(
+            deletion.index(ayurveda_delete),
+            deletion.index("ctx.delete(item)"),
         )
 
 
