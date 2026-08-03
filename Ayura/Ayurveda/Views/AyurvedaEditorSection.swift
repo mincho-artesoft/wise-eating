@@ -360,6 +360,7 @@ private struct AyurvedaAutomaticPreview: View {
             pitta: computed.pitta,
             kapha: computed.kapha
           )
+          computedVirya(computed.virya)
         } else {
           Text("Not enough recognizable ingredients yet.")
             .font(.caption)
@@ -368,6 +369,41 @@ private struct AyurvedaAutomaticPreview: View {
             )
         }
       }
+    }
+  }
+
+  private func computedVirya(_ virya: String) -> some View {
+    VStack(alignment: .leading, spacing: 7) {
+      Label("Virya (energy)", systemImage: "bolt.fill")
+        .font(.caption)
+        .foregroundStyle(
+          effectManager.currentGlobalAccentColor.opacity(0.72)
+        )
+
+      GlassChipView(
+        label: virya.capitalized,
+        color: viryaColor(virya),
+        systemImage: viryaIcon(virya),
+        textColor: effectManager.currentGlobalAccentColor,
+        isSelected: true,
+        action: nil
+      )
+    }
+  }
+
+  private func viryaColor(_ virya: String) -> Color {
+    switch virya.lowercased() {
+    case "cooling": Color("AyurvedaPacify")
+    case "heating": Color("AyurvedaAggravate")
+    default: Color("AyurvedaNeutral")
+    }
+  }
+
+  private func viryaIcon(_ virya: String) -> String {
+    switch virya.lowercased() {
+    case "cooling": "snowflake"
+    case "heating": "flame.fill"
+    default: "minus.circle.fill"
     }
   }
 }

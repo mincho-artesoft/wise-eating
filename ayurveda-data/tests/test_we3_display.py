@@ -169,6 +169,9 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
             'Text("Computed from your ingredients — updates automatically")',
             preview_source,
         )
+        self.assertIn('Label("Virya (energy)", systemImage: "bolt.fill")', preview_source)
+        self.assertIn("computedVirya(computed.virya)", preview_source)
+        self.assertIn("action: nil", preview_source)
         self.assertIn("if !computation.hasIngredients", preview_source)
         self.assertLess(
             preview_source.index(
