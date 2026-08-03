@@ -17,7 +17,37 @@ struct DailyAyurvedaSummaryRow: View {
 
     var body: some View {
         Button(action: onTap) {
-            HStack(alignment: .center, spacing: 16) {
+            VStack(alignment: .leading, spacing: 12) {
+                HStack(spacing: 10) {
+                    Text("Dosha Balance")
+                        .font(.headline)
+
+                    Spacer(minLength: 8)
+
+                    HStack(spacing: 6) {
+                        Text("Fit: \(fitLabel)")
+                            .lineLimit(1)
+                        Image(systemName: fitIcon)
+                    }
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(fitColor)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 7)
+                    .background(.thinMaterial, in: Capsule())
+                    .overlay {
+                        Capsule()
+                            .stroke(
+                                effectManager.currentGlobalAccentColor.opacity(0.12),
+                                lineWidth: 1
+                            )
+                    }
+
+                    DoshaBalanceGlyph(
+                        distribution: profileDistribution ?? target
+                    )
+                    .frame(width: 44, height: 38)
+                }
+
                 if let computed = computation.computed {
                     VStack(spacing: 8) {
                         doshaScale(
@@ -45,22 +75,6 @@ struct DailyAyurvedaSummaryRow: View {
                         )
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
-
-                VStack(alignment: .center, spacing: 4) {
-                    Text("Fit")
-                        .font(.caption)
-                        .foregroundStyle(
-                            effectManager.currentGlobalAccentColor.opacity(0.72)
-                        )
-                    Text(fitLabel)
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(fitColor)
-                        .lineLimit(1)
-                    Image(systemName: fitIcon)
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(fitColor)
-                }
-                .frame(width: 76, alignment: .center)
             }
             .foregroundStyle(effectManager.currentGlobalAccentColor)
             .padding()
@@ -278,6 +292,97 @@ struct DailyAyurvedaSummaryRow: View {
 
     private var neutralColor: Color {
         Color("AyurvedaNeutral")
+    }
+}
+
+private struct DoshaBalanceGlyph: View {
+    let distribution: AyurvedaDoshaDistribution?
+
+    var body: some View {
+        Canvas { context, size in
+            let nodeRadius: CGFloat = 3.5
+            let top = CGPoint(x: size.width / 2, y: nodeRadius + 1)
+            let leading = CGPoint(
+                x: nodeRadius + 1,
+                y: size.height - nodeRadius - 1
+            )
+            let trailing = CGPoint(
+                x: size.width - nodeRadius - 1,
+                y: size.height - nodeRadius - 1
+            )
+
+            var triangle = Path()
+            triangle.move(to: top)
+            triangle.addLine(to: leading)
+            triangle.addLine(to: trailing)
+            triangle.closeSubpath()
+            context.stroke(
+                triangle,
+                with: .color(.secondary.opacity(0.55)),
+                lineWidth: 1.5
+            )
+
+            drawNode(at: top, color: .blue, in: &context)
+            drawNode(at: leading, color: .orange, in: &context)
+            drawNode(at: trailing, color: .green, in: &context)
+
+            let weights = normalizedWeights
+            let marker = CGPoint(
+                x: (top.x * weights.vata)
+                    + (leading.x * weights.pitta)
+                    + (trailing.x * weights.kapha),
+                y: (top.y * weights.vata)
+                    + (leading.y * weights.pitta)
+                    + (trailing.y * weights.kapha)
+            )
+            let markerRect = CGRect(
+                x: marker.x - 4,
+                y: marker.y - 4,
+                width: 8,
+                height: 8
+            )
+            context.fill(Path(ellipseIn: markerRect), with: .color(markerColor))
+        }
+        .accessibilityHidden(true)
+    }
+
+    private var normalizedWeights: (vata: CGFloat, pitta: CGFloat, kapha: CGFloat) {
+        guard let distribution else {
+            return (1 / 3, 1 / 3, 1 / 3)
+        }
+        let total = distribution.vata + distribution.pitta + distribution.kapha
+        guard total > 0 else { return (1 / 3, 1 / 3, 1 / 3) }
+        return (
+            CGFloat(distribution.vata / total),
+            CGFloat(distribution.pitta / total),
+            CGFloat(distribution.kapha / total)
+        )
+    }
+
+    private var markerColor: Color {
+        guard let distribution else { return .secondary }
+        if distribution.vata >= distribution.pitta,
+           distribution.vata >= distribution.kapha {
+            return .blue
+        }
+        if distribution.pitta >= distribution.kapha {
+            return .orange
+        }
+        return .green
+    }
+
+    private func drawNode(
+        at point: CGPoint,
+        color: Color,
+        in context: inout GraphicsContext
+    ) {
+        let rect = CGRect(x: point.x - 3, y: point.y - 3, width: 6, height: 6)
+        context.fill(Path(ellipseIn: rect), with: .color(.white))
+        context.stroke(
+            Path(ellipseIn: rect),
+            with: .color(color),
+            lineWidth: 1.5
+        )
     }
 }
 
