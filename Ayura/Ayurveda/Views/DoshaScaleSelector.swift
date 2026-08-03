@@ -129,9 +129,12 @@ struct DoshaScaleSelector: View {
   private var readOnlyBody: some View {
     let presentation = AyurvedaDoshaEffectPresentation(value: value)
     return ViewThatFits(in: .horizontal) {
-      HStack(alignment: .top, spacing: 12) {
-        DoshaIdentityLabel(dosha: dosha, titleFont: .headline)
-          .frame(width: 96, alignment: .leading)
+      HStack(alignment: .center, spacing: 12) {
+        DoshaIdentityLabel(
+          dosha: dosha,
+          titleFont: .caption.weight(.semibold)
+        )
+        .frame(width: 88, alignment: .leading)
 
         VStack(alignment: .leading, spacing: 6) {
           readOnlyEffect(presentation)
@@ -142,7 +145,10 @@ struct DoshaScaleSelector: View {
 
       VStack(alignment: .leading, spacing: 6) {
         HStack(alignment: .firstTextBaseline, spacing: 12) {
-          DoshaIdentityLabel(dosha: dosha, titleFont: .headline)
+          DoshaIdentityLabel(
+            dosha: dosha,
+            titleFont: .caption.weight(.semibold)
+          )
           Spacer(minLength: 8)
           readOnlyEffect(presentation)
         }
@@ -160,9 +166,9 @@ struct DoshaScaleSelector: View {
       Image(systemName: presentation.systemImage)
         .accessibilityHidden(true)
       Text(presentation.primaryText)
-        .font(.subheadline.weight(.semibold))
         .fixedSize(horizontal: false, vertical: true)
     }
+    .font(.caption.weight(.semibold))
     .foregroundStyle(stateColor)
   }
 
