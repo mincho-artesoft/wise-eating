@@ -18,18 +18,18 @@ from typing import Any
 
 SEED_VERSION = 6
 GENERATED_AT = "2026-07-25T00:00:00Z"
-TARGET_FOODS = 14_488
-TARGET_PROFILES = 2_216
+TARGET_FOODS = 14_489
+TARGET_PROFILES = 2_217
 TARGET_RECIPES = 1_511
 TARGET_INGREDIENT_LINKS = 10_644
 TARGET_INGREDIENT_OWNERS = 1_511
 TARGET_AYURVEDA_LINKS = 2_336
 EXPECTED_COUNTS = {
-    "dravyas": 705,
+    "dravyas": 706,
     "recipes": TARGET_RECIPES,
     "links": TARGET_AYURVEDA_LINKS,
     "derivedLinks": 1966,
-    "placeholders": 376,
+    "placeholders": 377,
     "primaries": 329,
     "categoryRules": 187,
     "modifiers": 14,
@@ -470,6 +470,7 @@ SALT_AGE_IDS = {
     "dravya.rock-salt",
     "dravya.sambhar-salt",
     "dravya.sea-salt",
+    "dravya.vida-salt",
 }
 WEANING_AGE_CATEGORIES = {
     "dairy",

@@ -125,7 +125,7 @@ enum AyurvedaSeeder {
         } else if let food = foodByID[dravya.foodId],
                   food.itemDescription != dravyaDescription(dravya) {
           // A placeholder row seeded before descriptions existed keeps its empty
-          // one otherwise, and there are 376 of them.
+          // one otherwise, and there are 377 of them.
           food.itemDescription = dravyaDescription(dravya)
           result.updatedDravyaFoods += 1
         }
@@ -560,18 +560,18 @@ enum AyurvedaSeeder {
   }
 
   private static func validate(seed: AyurvedaSeedDTO) throws {
-    guard seed.counts.dravyas == 705,
+    guard seed.counts.dravyas == 706,
       seed.counts.recipes == 1_511,
       seed.counts.links == 2_336,
       seed.counts.derivedLinks == 1_966,
-      seed.counts.placeholders == 376,
+      seed.counts.placeholders == 377,
       seed.counts.categoryRules == 187,
       seed.counts.modifiers == 14,
       seed.counts.nutrition.full
         + seed.counts.nutrition.estimated
         + seed.counts.nutrition.none == seed.counts.recipes,
       seed.counts.safety.profiles == seed.counts.dravyas + seed.counts.recipes,
-      seed.counts.safety.authoredAgeDravyas == 391,
+      seed.counts.safety.authoredAgeDravyas == 392,
       seed.counts.safety.legacyImportAgeDravyas == 314,
       seed.counts.safety.authoredAgeRecipes == 1_457,
       seed.counts.safety.legacyImportAgeRecipes == 54,

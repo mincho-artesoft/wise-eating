@@ -33,6 +33,9 @@ enum SeedManager {
                 print("💾 Final save of all seeded data successful.")
             }
 
+            let projectedRecipeCount = try RecipeNutritionProjection.shared.load(context: ctx)
+            print("   ✅ Loaded nutrition display data for \(projectedRecipeCount) recipes.")
+
             try SearchIndexStore.shared.rebuildIndexIfNeeded(
                 context: ctx,
                 force: ayurvedaChangedSearchableFoods

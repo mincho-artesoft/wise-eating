@@ -145,6 +145,11 @@ by two foods and therefore share one addressable frame: `Golden milk`
 (**two recipes** — the dravya/recipe distinction does not resolve this one).
 TASK-IDKEY §1 names only Panchamrita; there are three.
 
+**Landed 2026-08-03.** The separate IDKEY packet now keys the runtime on
+`ZFOODITEM.ZID`. Reviewed sharing and reuse are compiled into the build-time id
+map; names and `reuse-map.json` no longer participate in app lookup. See
+`TASK-IDKEY.md` §6 for the measured final invariants.
+
 ## N6. Canon backlog: alias duplicates onto the existing dravya
 
 **Ruling.** Canon entries that duplicate an existing dravya become aliases on

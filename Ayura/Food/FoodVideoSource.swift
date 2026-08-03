@@ -1,127 +1,74 @@
 import AVFoundation
 import UIKit
 
-class FoodVideoSource: @unchecked Sendable {
+/// Random-access food imagery keyed only by the database FoodItem id.
+///
+/// Human-readable names remain build-time provenance in foods_index.csv. They
+/// are intentionally absent from this runtime path: renaming a food must not
+/// detach it from its frame or attach another food's picture.
+final class FoodVideoSource: @unchecked Sendable {
     static let shared = FoodVideoSource()
 
-    private enum Archive: Equatable {
-        case primary
-        case secondary
-    }
-
-    private struct FrameResolution {
-        let archive: Archive
-        let index: Int
-    }
-
-    private struct ReuseReference: Decodable {
-        let frameKey: String
-        let tier: String
-    }
-
-    private static let unsafeFrameKeyCharacters = CharacterSet(
-        charactersIn: "/\\:*?\"<>|"
-    )
-
-    func hasVideo(for foodName: String) -> Bool {
-        resolution(for: foodName) != nil
-    }
-
-    // ✅ 1. Добавяме заключване (Lock) за защита на данните при многонишков достъп
-    private let lock = NSLock()
-    
-    // Генератори по вариант/размер, напр. "144", "240", "480", "1024"
+    private let stateLock = NSLock()
+    private let decodeLock = NSLock()
     private var generators: [String: AVAssetImageGenerator] = [:]
-    private var secondaryGenerators: [String: AVAssetImageGenerator] = [:]
-    
-    private var frameMap: [String: Int] = [:]
-    private var reuseMap: [String: ReuseReference] = [:]
-    private var frameMap2: [String: Int] = [:]
+    private var frameIndex: [Int: Int] = [:]
     private var timestamps: [Double] = []
-    private var timestamps2: [Double] = []
-    
-    // Публичен достъп до списъка с храни
-    var availableFoodKeys: [String] {
-        let candidates = Set(frameMap.keys)
-            .union(reuseMap.keys)
-            .union(frameMap2.keys)
-        return Set(
-            candidates.compactMap { name in
-                resolution(for: name) == nil ? nil : frameKey(name)
-            }
-        ).sorted()
+
+    func hasVideo(for foodID: Int) -> Bool {
+        frameIndex[foodID] != nil
     }
-    
+
+    var availableFoodIDs: [Int] {
+        frameIndex.keys.sorted()
+    }
+
     private init() {
-        // 1. Зареждане на Timestamp-овете
-        if let url = Bundle.main.url(forResource: "frame_timestamps", withExtension: "json"),
-           let data = try? Data(contentsOf: url),
-           let times = try? JSONDecoder().decode([Double].self, from: data) {
-            self.timestamps = times
-        } else {
-            print("❌ Error: frame_timestamps.json missing or invalid!")
-        }
-        
-        // 2. Зареждане на Mapping-а
-        if let url = Bundle.main.url(forResource: "frame_map", withExtension: "json"),
-           let data = try? Data(contentsOf: url),
-           let mapping = try? JSONDecoder().decode([String: Int].self, from: data) {
-            self.frameMap = mapping
-        } else {
-            print("❌ Error: frame_map.json missing or invalid!")
-        }
-
-        // 3. Reuse-map: dravya name -> an existing frame in archive 1.
-        if let url = Bundle.main.url(forResource: "reuse-map", withExtension: "json"),
-           let data = try? Data(contentsOf: url),
-           let mapping = try? JSONDecoder().decode(
-               [String: ReuseReference].self,
-               from: data
-           ) {
-            self.reuseMap = mapping
-        }
-
-        // 4. Archive 2 is optional until the first accepted imagery batch ships.
-        if let url = Bundle.main.url(forResource: "frame_map2", withExtension: "json"),
-           let data = try? Data(contentsOf: url),
-           let mapping = try? JSONDecoder().decode([String: Int].self, from: data) {
-            self.frameMap2 = mapping
-        }
-
         if let url = Bundle.main.url(
-            forResource: "frame_timestamps2",
+            forResource: "frame_timestamps",
             withExtension: "json"
         ),
            let data = try? Data(contentsOf: url),
            let times = try? JSONDecoder().decode([Double].self, from: data) {
-            self.timestamps2 = times
+            timestamps = times
+        } else {
+            print("❌ Error: frame_timestamps.json missing or invalid!")
+        }
+
+        if let url = Bundle.main.url(forResource: "frame_index", withExtension: "json"),
+           let data = try? Data(contentsOf: url),
+           let raw = try? JSONDecoder().decode([String: Int].self, from: data) {
+            let pairs = raw.compactMap { key, value -> (Int, Int)? in
+                guard let foodID = Int(key) else { return nil }
+                return (foodID, value)
+            }
+            guard pairs.count == raw.count else {
+                print("❌ Error: frame_index.json contains a non-integer DB id!")
+                return
+            }
+            frameIndex = Dictionary(uniqueKeysWithValues: pairs)
+        } else {
+            print("❌ Error: frame_index.json missing or invalid!")
+        }
+
+        if let maximumIndex = frameIndex.values.max(), maximumIndex >= timestamps.count {
+            print(
+                "❌ Error: frame_index.json references frame \(maximumIndex), "
+                + "but only \(timestamps.count) timestamps are bundled!"
+            )
+            frameIndex = [:]
         }
     }
-    
-    // Създава или връща наличен генератор за даден вариант
-    private func generator(
-        for variant: String,
-        archive: Archive
-    ) -> AVAssetImageGenerator? {
-        // ✅ 2. Безопасно четене: Заключваме, проверяваме и отключваме
-        lock.lock()
-        let cachedGenerator = archive == .primary
-            ? generators[variant]
-            : secondaryGenerators[variant]
-        if let cachedGenerator {
-            lock.unlock()
-            return cachedGenerator
+
+    private func generator(for variant: String) -> AVAssetImageGenerator? {
+        stateLock.lock()
+        if let existing = generators[variant] {
+            stateLock.unlock()
+            return existing
         }
-        lock.unlock()
-        
-        // Създаването на генератора е тежка операция, правим я БЕЗ заключване,
-        // за да не блокираме другите нишки, които четат вече готови генератори.
-        
-        // Име на ресурса: food_archive_480.mp4 / food_archive2_480.mp4
-        let resourceName = archive == .primary
-            ? "food_archive_\(variant)"
-            : "food_archive2_\(variant)"
-        
+        stateLock.unlock()
+
+        let resourceName = "food_archive_\(variant)"
         guard let videoURL = BundledLargeAssetLoader.url(
             forResource: resourceName,
             withExtension: "mp4"
@@ -129,132 +76,49 @@ class FoodVideoSource: @unchecked Sendable {
             print("❌ Error: \(resourceName).mp4 missing from Bundle! Check Target Membership.")
             return nil
         }
-        
-        let asset = AVAsset(url: videoURL)
-        let gen = AVAssetImageGenerator(asset: asset)
-        gen.appliesPreferredTrackTransform = true
-        
+
+        let asset = AVURLAsset(url: videoURL)
+        let created = AVAssetImageGenerator(asset: asset)
+        created.appliesPreferredTrackTransform = true
         if let side = Double(variant) {
-            gen.maximumSize = CGSize(width: side, height: side)
+            created.maximumSize = CGSize(width: side, height: side)
         } else {
-            gen.maximumSize = CGSize(width: 1024, height: 1024)
+            created.maximumSize = CGSize(width: 1024, height: 1024)
         }
-        
-        gen.requestedTimeToleranceBefore = .zero
-        gen.requestedTimeToleranceAfter = .zero
-        
-        // ✅ 3. Безопасно писане: Заключваме преди запис в речника
-        lock.lock()
-        defer { lock.unlock() }
-        
-        // "Double-check locking": Проверяваме дали друга нишка не го е създала, докато сме зареждали
-        let existing = archive == .primary
-            ? generators[variant]
-            : secondaryGenerators[variant]
-        if let existing {
+        created.requestedTimeToleranceBefore = .zero
+        created.requestedTimeToleranceAfter = .zero
+
+        stateLock.lock()
+        defer { stateLock.unlock() }
+        if let existing = generators[variant] {
             return existing
         }
-        
-        if archive == .primary {
-            generators[variant] = gen
-        } else {
-            secondaryGenerators[variant] = gen
-        }
-        return gen
+        generators[variant] = created
+        return created
     }
-    
-    // Старото API (по подразбиране 240)
-    func getFrame(named name: String) -> UIImage? {
-        return getFrame(named: name, variant: "240")
-    }
-    
-    // Ново API – по вариант
-    func getFrame(named name: String, variant: String) -> UIImage? {
-        // 1. Търсим архива и индекса по име.
-        guard let resolution = resolution(for: name) else {
-            // print("❌ Name '\(name)' not found in frameMap")
-            return nil
-        }
 
-        // 2. Проверка на генератора (видео файла).
-        // Този метод вече е thread-safe вътрешно.
-        guard let generator = generator(
-            for: variant,
-            archive: resolution.archive
-        ) else {
-            // print("❌ No generator for variant: \(variant)")
+    func getFrame(id foodID: Int, variant: String) -> UIImage? {
+        guard let index = frameIndex[foodID] else { return nil }
+        guard index >= 0, index < timestamps.count else {
+            print("❌ Frame index \(index) for food id \(foodID) is out of bounds")
             return nil
         }
+        guard let generator = generator(for: variant) else { return nil }
 
-        let frameTimestamps = resolution.archive == .primary
-            ? timestamps
-            : timestamps2
-        
-        // 3. Взимаме времето
-        guard resolution.index < frameTimestamps.count else {
-            print("❌ Index \(resolution.index) out of bounds for timestamps")
-            return nil
-        }
-        
-        let rawSeconds = frameTimestamps[resolution.index]
-        
-        // The unified archives use a 600 Hz video timescale, so map the JSON
-        // timestamp directly onto that exact media clock. Adding 0.01s would
-        // seek between the exact 30 fps frame timestamps.
-        let time = CMTime(seconds: rawSeconds, preferredTimescale: 600)
-        
-        // 4. Вадим картинката
+        // Exact 30 fps positions on a 600 Hz media clock. Never add the old
+        // +0.01 s nudge and never loosen the tolerance: both return neighbours.
+        let time = CMTime(seconds: timestamps[index], preferredTimescale: 600)
+        decodeLock.lock()
+        defer { decodeLock.unlock() }
         do {
             let cgImage = try generator.copyCGImage(at: time, actualTime: nil)
             return UIImage(cgImage: cgImage)
         } catch {
-            print("❌ Failed to extract image for \(name): \(error.localizedDescription)")
+            print(
+                "❌ Failed to extract image for food id \(foodID), frame \(index): "
+                + error.localizedDescription
+            )
             return nil
         }
-    }
-
-    private func resolution(for name: String) -> FrameResolution? {
-        // Tier order is load-bearing: archive 1 -> reuse into archive 1 -> archive 2.
-        if let index = frameIndex(for: name, in: frameMap) {
-            return FrameResolution(archive: .primary, index: index)
-        }
-
-        if let reference = reuseReference(for: name),
-           let index = frameIndex(for: reference.frameKey, in: frameMap) {
-            return FrameResolution(archive: .primary, index: index)
-        }
-
-        if let index = frameIndex(for: name, in: frameMap2) {
-            return FrameResolution(archive: .secondary, index: index)
-        }
-
-        return nil
-    }
-
-    private func frameIndex(
-        for name: String,
-        in mapping: [String: Int]
-    ) -> Int? {
-        if let rawIndex = mapping[name] {
-            return rawIndex
-        }
-        return mapping[frameKey(name)]
-    }
-
-    private func reuseReference(for name: String) -> ReuseReference? {
-        if let rawReference = reuseMap[name] {
-            return rawReference
-        }
-        return reuseMap[frameKey(name)]
-    }
-
-    private func frameKey(_ name: String) -> String {
-        String(
-            name.unicodeScalars.map { scalar in
-                Self.unsafeFrameKeyCharacters.contains(scalar)
-                    ? "_"
-                    : Character(scalar)
-            }
-        )
     }
 }

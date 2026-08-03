@@ -193,7 +193,7 @@ class WE8CAgeDerivationTests(unittest.TestCase):
             collections.Counter(
                 safety["ageProvenance"] for safety in self.dravya_safety.values()
             ),
-            {"legacyImport": 314, "authored": 391},
+            {"legacyImport": 314, "authored": 392},
         )
 
         model = FOOD_ITEM_MODEL.read_text(encoding="utf-8")
@@ -210,7 +210,7 @@ class WE8CAgeDerivationTests(unittest.TestCase):
         self.assertIn("food.ageSource = safety.ageSource", seeder)
 
     def test_authored_age_sources_and_propagation_modes_are_complete(self):
-        self.assertEqual(len(self.dravyas), 705)
+        self.assertEqual(len(self.dravyas), 706)
         weaning_rule = next(
             rule
             for rule in self.age_rules

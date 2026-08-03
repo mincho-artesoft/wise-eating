@@ -2,6 +2,16 @@
 
 Director packet · 2026-07-27 · runs in parallel with MP-7, touches nothing the solver uses.
 
+> **Current pipeline (2026-08-03):** the second-archive design below is
+> historical. Images are encoded into one unified archive. Runtime lookup is
+> `ZFOODITEM.ZID -> frame_index.json -> frame`, with no name, secondary-map or
+> reuse fallback. The reviewed source-tree `reuse-map.json` remains build-time
+> safety metadata: `build_food_index.py` resolves it into DB ids and fails if
+> any catalogue row is unresolved. Always rebuild the preseed first, then run
+> `build_food_index.py --store <that exact store>`, and encode/embed the map.
+> The preseed, shipped `frame_index.json`, and archive metadata are a matched
+> set and must land in one commit.
+
 ---
 
 ## What this covers

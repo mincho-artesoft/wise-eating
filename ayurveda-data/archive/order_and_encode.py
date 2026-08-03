@@ -36,14 +36,12 @@ THREE THINGS THIS CHANGES FROM generate_multires_assets.py
     no neighbour to predict from. It is applied because it is cheap and
     deterministic, not because it is the lever that matters.
 
-    The lever that matters is B-frames, measured at -17%, seven times the
-    ordering gain. They are OFF by default here because the old pipeline set
-    -bf 0 on the belief that they break the iOS seek. Measurement says otherwise:
-    packet count still equals frame count and the sorted PTS stay exactly
-    i x ticks, so an accurate seek lands correctly. VERIFY ON DEVICE across a
-    sample before shipping --bframes. The failure mode is wrong-food images.
+    B-frames are forbidden for shipped archives. Packet count and sorted PTS
+    alone looked healthy in an earlier measurement, but AVAssetImageGenerator
+    cannot reliably random-access the reordered HEVC stream. The visible
+    failure is a missing or wrong food image. Keep -bf 0.
 """
-import argparse, json, os, subprocess, sys
+import argparse, base64, csv, json, os, subprocess, sys, tempfile
 
 FPS = 30
 TIMESCALE = 600
@@ -82,6 +80,85 @@ def check_exact(ts):
     timescale change, so it is asserted rather than assumed."""
     worst = max(abs(t - i / FPS) for i, t in enumerate(ts)) if ts else 0.0
     return worst
+
+
+def build_id_index(food_index_csv, frame_map):
+    with open(food_index_csv, newline="", encoding="utf-8") as stream:
+        rows = list(csv.DictReader(stream))
+    mapping = {}
+    for row in rows:
+        db_id = str(int(row["db_id"]))
+        frame_key = row["frame_key"]
+        if frame_key not in frame_map:
+            sys.exit(
+                f"foods_index.csv points DB id {db_id} at missing frame key "
+                f"{frame_key!r}"
+            )
+        if db_id in mapping:
+            sys.exit(f"foods_index.csv repeats DB id {db_id}")
+        mapping[db_id] = frame_map[frame_key]
+    return mapping
+
+
+def embed_id_index(dist, variants, food_index_csv, frame_map):
+    """Embed the canonical DB-id map without re-encoding the video stream."""
+    mapping = build_id_index(food_index_csv, frame_map)
+    payload = (
+        json.dumps(mapping, sort_keys=True, separators=(",", ":")) + "\n"
+    ).encode("utf-8")
+    index_path = os.path.join(dist, "frame_index.json")
+    with open(index_path, "wb") as output:
+        output.write(payload)
+
+    # Base64 makes ffmetadata escaping lossless. The file side input avoids
+    # ARG_MAX, and each remux is read back immediately as an integrity gate.
+    encoded = base64.b64encode(payload).decode("ascii")
+    with tempfile.NamedTemporaryFile(
+        mode="w", encoding="utf-8", suffix=".ffmeta", delete=False
+    ) as metadata:
+        metadata.write(";FFMETADATA1\n")
+        metadata.write(f"frame_index_b64={encoded}\n")
+        metadata_path = metadata.name
+    try:
+        for variant in variants:
+            source = os.path.join(dist, f"food_archive_{variant}.mp4")
+            if not os.path.isfile(source):
+                sys.exit(f"cannot embed DB-id map; missing encoded variant: {source}")
+            temporary = source + ".idkey.tmp.mp4"
+            subprocess.run(
+                [
+                    "ffmpeg", "-y", "-i", source,
+                    "-f", "ffmetadata", "-i", metadata_path,
+                    "-map", "0", "-c", "copy", "-map_metadata", "1",
+                    "-movflags", "use_metadata_tags",
+                    "-video_track_timescale", str(TIMESCALE), temporary,
+                ],
+                check=True,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+            )
+            os.replace(temporary, source)
+            probe = subprocess.run(
+                [
+                    "ffprobe", "-v", "error", "-show_entries",
+                    "format_tags=frame_index_b64", "-of", "json", source,
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+            tag = json.loads(probe.stdout)["format"]["tags"]["frame_index_b64"]
+            if base64.b64decode(tag) != payload:
+                sys.exit(
+                    f"{variant}: embedded DB-id table differs from frame_index.json"
+                )
+            print(
+                f"  {variant:>4}: embedded {len(mapping)} DB-id pairs; "
+                "round-trip byte-identical"
+            )
+    finally:
+        os.unlink(metadata_path)
+    return mapping, payload
 
 
 def build_order(pool, dims=8):
@@ -129,19 +206,38 @@ def main():
     ap.add_argument("--out", help="where the mp4s land (default <pool>/dist)")
     ap.add_argument("--variants", nargs="+", default=["144", "480", "1024"])
     ap.add_argument("--bframes", action="store_true",
-                    help="-17%% size. Verify the iOS seek on device first.")
+                    help="diagnostic only; NEVER use for a shipped archive")
     ap.add_argument("--no-order", action="store_true", help="skip similarity ordering")
     ap.add_argument("--crf", type=int,
                     help="override CRF for every variant in this run (default: per-variant table)")
     ap.add_argument("--matrix", type=int, metavar="N",
                     help="encode the first N frames every way and print the table, "
                          "then stop. Settles the B-frame and 480-GOP questions.")
+    ap.add_argument(
+        "--food-index",
+        help="foods_index.csv with db_id; writes and embeds frame_index.json",
+    )
+    ap.add_argument(
+        "--embed-only",
+        action="store_true",
+        help="metadata-remux existing variants in --out; do not re-encode video",
+    )
     a = ap.parse_args()
 
     pool = os.path.expanduser(a.pool)
     dist = os.path.expanduser(a.out) if a.out else os.path.join(pool, "dist")
     os.makedirs(dist, exist_ok=True)
     man_all = json.load(open(os.path.join(pool, "manifest.json")))["frames"]
+
+    if a.embed_only:
+        if not a.food_index:
+            sys.exit("--embed-only requires --food-index")
+        frame_map_path = os.path.join(dist, "frame_map.json")
+        if not os.path.isfile(frame_map_path):
+            sys.exit(f"--embed-only requires {frame_map_path}")
+        frame_map = json.load(open(frame_map_path))
+        embed_id_index(dist, a.variants, a.food_index, frame_map)
+        return
 
     # ---------------- measurement mode ---------------------------------------
     if a.matrix:
@@ -210,12 +306,13 @@ def main():
                "ordered": not a.no_order, "bframes": a.bframes, "variants": results},
               open(os.path.join(dist, "build-info.json"), "w"), indent=1)
 
+    if a.food_index:
+        embed_id_index(dist, a.variants, a.food_index, fmap)
+
     print(f"\n{len(order)} frames -> {dist}")
     print("frame_map.json now covers BOTH archives, so frame_map2.json is dead.")
-    print("reuse-map.json is NOT dead and this script used to claim otherwise: the")
-    print("dravyas in it were never generated — they borrow a USDA frame on purpose —")
-    print("so their names are not keys here. Copy imagery/reuse-map.json to Ayura/Food")
-    print("alongside this map; a stale one silently serves the wrong picture.")
+    print("runtime reuse-map.json is dead. build_food_index.py resolves reviewed reuse")
+    print("once at build time and writes those DB ids directly into frame_index.json.")
 
 
 if __name__ == "__main__":

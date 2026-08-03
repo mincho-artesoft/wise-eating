@@ -212,6 +212,24 @@ class RecipeNutritionTests(unittest.TestCase):
             self.assertIn("energyKcal", panel["perServing"])
             self.assertIn("energyKcal", panel["per100g"])
 
+    def test_recipe_list_projection_reads_the_profile_payload(self):
+        projection = (
+            REPO_ROOT / "Ayura/Ayurveda/RecipeNutritionProjection.swift"
+        ).read_text(encoding="utf-8")
+        food_item = (
+            REPO_ROOT / "Ayura/Food/Models/FoodItem.swift"
+        ).read_text(encoding="utf-8")
+        seed_manager = (
+            REPO_ROOT / "Ayura/Main/DBSeed/SeedManager.swift"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("profile.nutritionPer100gJSON", projection)
+        self.assertIn("profile.nutritionUnitsJSON", projection)
+        self.assertIn("RecipeNutritionProjection.shared.load(context: ctx)", seed_manager)
+        self.assertIn("RecipeNutritionProjection.shared.snapshot(foodID: item.id)", food_item)
+        for nutrient in build_seed.NUTRIENT_CATALOG:
+            self.assertIn(f'nutrient("{nutrient}")', food_item)
+
     def test_phase1b_fields_are_validated_but_not_propagated(self):
         self.assertEqual(len(build_seed.SOURCE_ONLY_NUTRIENT_CATALOG), 66)
         self.assertEqual(len(build_seed.NUTRIENT_CATALOG), 39)
@@ -313,7 +331,7 @@ class Phase2NutritionTests(unittest.TestCase):
             for dravya_id, record in self.records.items()
             if populated_values(record)
         }
-        self.assertEqual(len(self.records), 376)
+        self.assertEqual(len(self.records), 377)
         self.assertEqual(len(populated), 68)
 
         withdrawn = self.unresolved["withdrawn"]

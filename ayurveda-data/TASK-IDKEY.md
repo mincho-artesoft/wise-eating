@@ -134,3 +134,22 @@ should be a line in the README, not folklore.
   bug in the new map, not in the old one** — the old one is what shipped.
 - Confirm the embedded `udta` table matches `frame_index.json` byte for byte
   after encoding.
+
+---
+
+## 6. Implementation correction (2026-08-03)
+
+The §5 count and bijection wording described the pre-unification model and is
+not achievable for the reviewed catalogue that actually ships. The final
+database has **14,489 ids** and the unified archive has **14,478 physical
+frames**. All 14,489 ids resolve, but only 14,466 slots are addressed: 21 ids
+use reviewed reuse decisions, two independently reviewed catalogue pairs share
+a physical frame, and 12 retained JOB4 orphan frames remain in the container.
+Those 12 are asserted by exact name; an added or removed orphan fails the
+build. This is a deliberate many-to-one DB-id map, not a runtime name fallback.
+
+The shipped invariant is therefore: every DB id appears exactly once in
+`frame_index.json`, every id resolves to an in-range frame, the exact reviewed
+orphan set is unchanged, and the embedded table in all three archives matches
+the shipped JSON byte-for-byte. The old name + reuse resolution is retained
+only as a build/test oracle; it is absent from the Swift runtime.

@@ -302822,5 +302822,809 @@
    "proposedMinAgeMonths": 6,
    "ageReason": "annaprashana in the sixth month, matching the modern weaning floor"
   }
+ },
+ {
+  "id": 900357,
+  "name": "Vida salt",
+  "dravyaId": "dravya.vida-salt",
+  "minAgeMonths": 0,
+  "allergens": [],
+  "desctiption": "One of the pancha lavana. Distinctly anulomana — it moves vata downward and breaks up gulma and adhmana, which is why it sits in Hingvashtaka churna rather than at the table.\n\nA prepared salt, not a mined one. Used by the pinch in digestive churnas and over buttermilk; it is a medicine at culinary dose and should not replace common salt.",
+  "macronutrients": {
+   "carbohydrates": {
+    "value": null,
+    "unit": "g"
+   },
+   "protein": {
+    "value": null,
+    "unit": "g"
+   },
+   "fat": {
+    "value": null,
+    "unit": "g"
+   },
+   "fiber": {
+    "value": null,
+    "unit": "g"
+   },
+   "totalSugars": {
+    "value": null,
+    "unit": "g"
+   },
+   "insolubleFiber": {
+    "value": null,
+    "unit": "g"
+   },
+   "solubleFiber": {
+    "value": null,
+    "unit": "g"
+   }
+  },
+  "lipids": {
+   "totalSaturated": {
+    "value": null,
+    "unit": "g"
+   },
+   "totalMonounsaturated": {
+    "value": null,
+    "unit": "g"
+   },
+   "totalPolyunsaturated": {
+    "value": null,
+    "unit": "g"
+   },
+   "totalTrans": {
+    "value": null,
+    "unit": "g"
+   },
+   "totalTransMonoenoic": {
+    "value": null,
+    "unit": "g"
+   },
+   "totalTransPolyenoic": {
+    "value": null,
+    "unit": "g"
+   },
+   "sfa4_0": {
+    "value": null,
+    "unit": "g"
+   },
+   "sfa6_0": {
+    "value": null,
+    "unit": "g"
+   },
+   "sfa8_0": {
+    "value": null,
+    "unit": "g"
+   },
+   "sfa10_0": {
+    "value": null,
+    "unit": "g"
+   },
+   "sfa12_0": {
+    "value": null,
+    "unit": "g"
+   },
+   "sfa13_0": {
+    "value": null,
+    "unit": "g"
+   },
+   "sfa14_0": {
+    "value": null,
+    "unit": "g"
+   },
+   "sfa15_0": {
+    "value": null,
+    "unit": "g"
+   },
+   "sfa16_0": {
+    "value": null,
+    "unit": "g"
+   },
+   "sfa17_0": {
+    "value": null,
+    "unit": "g"
+   },
+   "sfa18_0": {
+    "value": null,
+    "unit": "g"
+   },
+   "sfa20_0": {
+    "value": null,
+    "unit": "g"
+   },
+   "sfa22_0": {
+    "value": null,
+    "unit": "g"
+   },
+   "sfa24_0": {
+    "value": null,
+    "unit": "g"
+   },
+   "mufa14_1": {
+    "value": null,
+    "unit": "g"
+   },
+   "mufa15_1": {
+    "value": null,
+    "unit": "g"
+   },
+   "mufa16_1": {
+    "value": null,
+    "unit": "g"
+   },
+   "mufa17_1": {
+    "value": null,
+    "unit": "g"
+   },
+   "mufa18_1": {
+    "value": null,
+    "unit": "g"
+   },
+   "mufa20_1": {
+    "value": null,
+    "unit": "g"
+   },
+   "mufa22_1": {
+    "value": null,
+    "unit": "g"
+   },
+   "mufa24_1": {
+    "value": null,
+    "unit": "g"
+   },
+   "tfa16_1_t": {
+    "value": null,
+    "unit": "g"
+   },
+   "tfa18_1_t": {
+    "value": null,
+    "unit": "g"
+   },
+   "tfa22_1_t": {
+    "value": null,
+    "unit": "g"
+   },
+   "tfa18_2_t": {
+    "value": null,
+    "unit": "g"
+   },
+   "pufa18_2": {
+    "value": null,
+    "unit": "g"
+   },
+   "pufa18_3": {
+    "value": null,
+    "unit": "g"
+   },
+   "pufa18_4": {
+    "value": null,
+    "unit": "g"
+   },
+   "pufa20_2": {
+    "value": null,
+    "unit": "g"
+   },
+   "pufa20_3": {
+    "value": null,
+    "unit": "g"
+   },
+   "pufa20_4": {
+    "value": null,
+    "unit": "g"
+   },
+   "pufa20_5": {
+    "value": null,
+    "unit": "g"
+   },
+   "pufa21_5": {
+    "value": null,
+    "unit": "g"
+   },
+   "pufa22_4": {
+    "value": null,
+    "unit": "g"
+   },
+   "pufa22_5": {
+    "value": null,
+    "unit": "g"
+   },
+   "pufa22_6": {
+    "value": null,
+    "unit": "g"
+   },
+   "pufa2_4": {
+    "value": null,
+    "unit": "g"
+   },
+   "totalUnsaturated": {
+    "value": null,
+    "unit": "g"
+   },
+   "totalEssentialFattyAcids": {
+    "value": null,
+    "unit": "g"
+   },
+   "totalCisFattyAcids": {
+    "value": null,
+    "unit": "g"
+   },
+   "totalCisOmega3": {
+    "value": null,
+    "unit": "g"
+   },
+   "totalCisOmega6": {
+    "value": null,
+    "unit": "g"
+   },
+   "totalCisOmega9": {
+    "value": null,
+    "unit": "g"
+   },
+   "totalCisOmega5": {
+    "value": null,
+    "unit": "g"
+   },
+   "totalCisOmega7": {
+    "value": null,
+    "unit": "g"
+   },
+   "sfa11_0": {
+    "value": null,
+    "unit": "g"
+   },
+   "pufa22_2": {
+    "value": null,
+    "unit": "g"
+   }
+  },
+  "vitamins": {
+   "vitaminA_RAE": {
+    "value": null,
+    "unit": "ug"
+   },
+   "retinol": {
+    "value": null,
+    "unit": "ug"
+   },
+   "caroteneAlpha": {
+    "value": null,
+    "unit": "ug"
+   },
+   "caroteneBeta": {
+    "value": null,
+    "unit": "ug"
+   },
+   "cryptoxanthinBeta": {
+    "value": null,
+    "unit": "ug"
+   },
+   "luteinZeaxanthin": {
+    "value": null,
+    "unit": "ug"
+   },
+   "lycopene": {
+    "value": null,
+    "unit": "ug"
+   },
+   "vitaminB1_Thiamin": {
+    "value": null,
+    "unit": "mg"
+   },
+   "vitaminB2_Riboflavin": {
+    "value": null,
+    "unit": "mg"
+   },
+   "vitaminB3_Niacin": {
+    "value": null,
+    "unit": "mg"
+   },
+   "vitaminB5_PantothenicAcid": {
+    "value": null,
+    "unit": "mg"
+   },
+   "vitaminB6": {
+    "value": null,
+    "unit": "mg"
+   },
+   "vitaminB12": {
+    "value": null,
+    "unit": "ug"
+   },
+   "folateDFE": {
+    "value": null,
+    "unit": "ug"
+   },
+   "folateFood": {
+    "value": null,
+    "unit": "ug"
+   },
+   "folateTotal": {
+    "value": null,
+    "unit": "ug"
+   },
+   "folicAcid": {
+    "value": null,
+    "unit": "ug"
+   },
+   "vitaminC": {
+    "value": null,
+    "unit": "mg"
+   },
+   "vitaminD": {
+    "value": null,
+    "unit": "ug"
+   },
+   "vitaminE": {
+    "value": null,
+    "unit": "mg"
+   },
+   "vitaminK": {
+    "value": null,
+    "unit": "ug"
+   },
+   "choline": {
+    "value": null,
+    "unit": "mg"
+   },
+   "biotin": {
+    "value": null,
+    "unit": "ug"
+   },
+   "vitaminD2": {
+    "value": null,
+    "unit": "ug"
+   },
+   "vitaminD3": {
+    "value": null,
+    "unit": "ug"
+   },
+   "vitaminD3_25Hydroxy": {
+    "value": null,
+    "unit": "ug"
+   },
+   "vitaminK1": {
+    "value": null,
+    "unit": "ug"
+   },
+   "vitaminK2": {
+    "value": null,
+    "unit": "ug"
+   }
+  },
+  "minerals": {
+   "calcium": {
+    "value": null,
+    "unit": "mg"
+   },
+   "iron": {
+    "value": null,
+    "unit": "mg"
+   },
+   "magnesium": {
+    "value": null,
+    "unit": "mg"
+   },
+   "phosphorus": {
+    "value": null,
+    "unit": "mg"
+   },
+   "potassium": {
+    "value": null,
+    "unit": "mg"
+   },
+   "sodium": {
+    "value": null,
+    "unit": "mg"
+   },
+   "selenium": {
+    "value": null,
+    "unit": "ug"
+   },
+   "zinc": {
+    "value": null,
+    "unit": "mg"
+   },
+   "copper": {
+    "value": null,
+    "unit": "mg"
+   },
+   "manganese": {
+    "value": null,
+    "unit": "mg"
+   },
+   "fluoride": {
+    "value": null,
+    "unit": "mg"
+   },
+   "aluminium": {
+    "value": null,
+    "unit": "ug",
+    "notForDisplay": true
+   },
+   "arsenic": {
+    "value": null,
+    "unit": "ug",
+    "notForDisplay": true
+   },
+   "cadmium": {
+    "value": null,
+    "unit": "ug",
+    "notForDisplay": true
+   },
+   "chromium": {
+    "value": null,
+    "unit": "ug"
+   },
+   "cobalt": {
+    "value": null,
+    "unit": "ug"
+   },
+   "lead": {
+    "value": null,
+    "unit": "ug",
+    "notForDisplay": true
+   },
+   "lithium": {
+    "value": null,
+    "unit": "ug"
+   },
+   "mercury": {
+    "value": null,
+    "unit": "ug",
+    "notForDisplay": true
+   },
+   "molybdenum": {
+    "value": null,
+    "unit": "ug"
+   },
+   "nickel": {
+    "value": null,
+    "unit": "ug"
+   }
+  },
+  "aminoAcids": {
+   "alanine": {
+    "value": null,
+    "unit": "g"
+   },
+   "arginine": {
+    "value": null,
+    "unit": "g"
+   },
+   "asparticAcid": {
+    "value": null,
+    "unit": "g"
+   },
+   "cystine": {
+    "value": null,
+    "unit": "g"
+   },
+   "glutamicAcid": {
+    "value": null,
+    "unit": "g"
+   },
+   "glycine": {
+    "value": null,
+    "unit": "g"
+   },
+   "histidine": {
+    "value": null,
+    "unit": "g"
+   },
+   "isoleucine": {
+    "value": null,
+    "unit": "g"
+   },
+   "leucine": {
+    "value": null,
+    "unit": "g"
+   },
+   "lysine": {
+    "value": null,
+    "unit": "g"
+   },
+   "methionine": {
+    "value": null,
+    "unit": "g"
+   },
+   "phenylalanine": {
+    "value": null,
+    "unit": "g"
+   },
+   "proline": {
+    "value": null,
+    "unit": "g"
+   },
+   "threonine": {
+    "value": null,
+    "unit": "g"
+   },
+   "tryptophan": {
+    "value": null,
+    "unit": "g"
+   },
+   "tyrosine": {
+    "value": null,
+    "unit": "g"
+   },
+   "valine": {
+    "value": null,
+    "unit": "g"
+   },
+   "serine": {
+    "value": null,
+    "unit": "g"
+   },
+   "hydroxyproline": {
+    "value": null,
+    "unit": "g"
+   }
+  },
+  "carbDetails": {
+   "starch": {
+    "value": null,
+    "unit": "g"
+   },
+   "sucrose": {
+    "value": null,
+    "unit": "g"
+   },
+   "glucose": {
+    "value": null,
+    "unit": "g"
+   },
+   "fructose": {
+    "value": null,
+    "unit": "g"
+   },
+   "lactose": {
+    "value": null,
+    "unit": "g"
+   },
+   "maltose": {
+    "value": null,
+    "unit": "g"
+   },
+   "galactose": {
+    "value": null,
+    "unit": "g"
+   },
+   "availableCarbohydratesBySummation": {
+    "value": null,
+    "unit": "g"
+   }
+  },
+  "sterols": {
+   "phytosterols": {
+    "value": null,
+    "unit": "mg"
+   },
+   "betaSitosterol": {
+    "value": null,
+    "unit": "mg"
+   },
+   "campesterol": {
+    "value": null,
+    "unit": "mg"
+   },
+   "stigmasterol": {
+    "value": null,
+    "unit": "mg"
+   }
+  },
+  "other": {
+   "alcoholEthyl": {
+    "value": null,
+    "unit": "g"
+   },
+   "caffeine": {
+    "value": null,
+    "unit": "mg"
+   },
+   "theobromine": {
+    "value": null,
+    "unit": "mg"
+   },
+   "cholesterol": {
+    "value": null,
+    "unit": "mg"
+   },
+   "energyKcal": {
+    "value": null,
+    "unit": "kcal"
+   },
+   "water": {
+    "value": null,
+    "unit": "g"
+   },
+   "weightG": {
+    "value": null,
+    "unit": "g"
+   },
+   "ash": {
+    "value": null,
+    "unit": "g"
+   },
+   "betaine": {
+    "value": null,
+    "unit": "mg"
+   },
+   "alkalinityPH": {
+    "value": null,
+    "unit": ""
+   }
+  },
+  "aminoAcidTotals": {
+   "total": {
+    "value": null,
+    "unit": "g"
+   },
+   "essential": {
+    "value": null,
+    "unit": "g"
+   },
+   "conditionallyEssential": {
+    "value": null,
+    "unit": "g"
+   },
+   "nonEssential": {
+    "value": null,
+    "unit": "g"
+   }
+  },
+  "carotenoids": {
+   "total": {
+    "value": null,
+    "unit": "ug"
+   },
+   "totalCarotenes": {
+    "value": null,
+    "unit": "ug"
+   },
+   "totalXanthophylls": {
+    "value": null,
+    "unit": "ug"
+   },
+   "betaCaroteneEquivalents": {
+    "value": null,
+    "unit": "ug"
+   },
+   "zeaxanthin": {
+    "value": null,
+    "unit": "ug"
+   },
+   "gammaCarotene": {
+    "value": null,
+    "unit": "ug"
+   }
+  },
+  "polyphenols": {
+   "total": {
+    "value": null,
+    "unit": "mg"
+   }
+  },
+  "vitaminForms": {
+   "totalTocopherols": {
+    "value": null,
+    "unit": "mg"
+   },
+   "totalTocotrienols": {
+    "value": null,
+    "unit": "mg"
+   }
+  },
+  "organicAcids": {
+   "total": {
+    "value": null,
+    "unit": "g"
+   },
+   "cisAconiticAcid": {
+    "value": null,
+    "unit": "g"
+   },
+   "citricAcid": {
+    "value": null,
+    "unit": "g"
+   },
+   "fumaricAcid": {
+    "value": null,
+    "unit": "g"
+   },
+   "malicAcid": {
+    "value": null,
+    "unit": "g"
+   },
+   "quinicAcid": {
+    "value": null,
+    "unit": "g"
+   },
+   "succinicAcid": {
+    "value": null,
+    "unit": "g"
+   },
+   "tartaricAcid": {
+    "value": null,
+    "unit": "g"
+   }
+  },
+  "antiNutrients": {
+   "phytate": {
+    "value": null,
+    "unit": "mg"
+   },
+   "saponins": {
+    "value": null,
+    "unit": "mg"
+   }
+  },
+  "mineralTotals": {
+   "essentialQuantity": {
+    "value": null,
+    "unit": "mg"
+   },
+   "essentialTrace": {
+    "value": null,
+    "unit": "mg"
+   },
+   "possiblyEssentialTrace": {
+    "value": null,
+    "unit": "ug"
+   },
+   "nonEssentialTrace": {
+    "value": null,
+    "unit": "ug"
+   },
+   "toxic": {
+    "value": null,
+    "unit": "ug",
+    "notForDisplay": true
+   }
+  },
+  "oligosaccharides": {
+   "total": {
+    "value": null,
+    "unit": "g"
+   },
+   "raffinose": {
+    "value": null,
+    "unit": "g"
+   },
+   "stachyose": {
+    "value": null,
+    "unit": "g"
+   },
+   "verbascose": {
+    "value": null,
+    "unit": "g"
+   },
+   "ajugose": {
+    "value": null,
+    "unit": "g"
+   }
+  },
+  "oxalates": {
+   "total": {
+    "value": null,
+    "unit": "mg"
+   },
+   "soluble": {
+    "value": null,
+    "unit": "mg"
+   },
+   "insoluble": {
+    "value": null,
+    "unit": "mg"
+   }
+  },
+  "_review": {
+   "source": null,
+   "spread": null,
+   "status": "NOT YET SOURCED — every nutrient is null, not zero",
+   "currentMinAgeMonths": 0,
+   "proposedMinAgeMonths": 12,
+   "ageReason": "Added-salt dietary guidance; see TASK-NUT2."
+  }
  }
 ]

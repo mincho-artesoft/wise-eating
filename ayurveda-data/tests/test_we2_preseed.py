@@ -57,21 +57,21 @@ class PreseedArtifactTests(unittest.TestCase):
                 "nutritionEstimated": TARGET["nutritionEstimated"],
                 "cacheFoods": TARGET["cacheFoods"],
                 "cacheVersion": 7,
-                "facetFoods": 4_223,
-                "metadataFoods": 4_223,
+                "facetFoods": 4_224,
+                "metadataFoods": 4_224,
                 "linkedFacetFoods": 2_007,
                 "facetKeys": 89,
-                "facetAssignments": 59_114,
+                "facetAssignments": 59_132,
                 "allergenTaggedDravyas": 155,
                 "allergenTaggedRecipes": 1_190,
-                "positiveEnforcedAgeDravyas": 391,
+                "positiveEnforcedAgeDravyas": 392,
                 "positiveEnforcedAgeRecipes": 5,
                 "payloadBytes": self.audit["payloadBytes"],
             },
         )
         self.assertGreater(self.audit["payloadBytes"], 0)
         self.assertGreater(self.audit["facetKeys"], 0)
-        self.assertGreater(self.audit["facetAssignments"], 4_223)
+        self.assertGreater(self.audit["facetAssignments"], 4_224)
 
     def test_fresh_store_seed_run_has_zero_inserts(self):
         profile_rows = self.connection.execute(
@@ -173,11 +173,11 @@ class PreseedArtifactTests(unittest.TestCase):
         self.assertEqual(len(decoded["compactFoods"]), food_count)
         self.assertEqual(
             sum(bool(food["ayurvedaFacets"]) for food in decoded["compactFoods"]),
-            4_223,
+            4_224,
         )
         self.assertEqual(
             sum(food.get("ayurvedaMetadata") is not None for food in decoded["compactFoods"]),
-            4_223,
+            4_224,
         )
         self.assertIn("virya:cooling", decoded["ayurvedaFacetIndex"])
 

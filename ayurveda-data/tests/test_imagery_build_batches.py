@@ -42,7 +42,8 @@ class ImageryBuildBatchesTests(unittest.TestCase):
             reuse = json.loads((Path(output) / "reuse-map.json").read_text())
 
         self.assertIn("reuse denials loaded    : 26", result.stdout)
-        self.assertEqual(jobs["count"], 1_877)
+        # Restoring Vida as its own dravya adds exactly one generated job.
+        self.assertEqual(jobs["count"], 1_878)
         self.assertEqual(jobs["styleHash"], "c8d83786a68f")
         self.assertEqual(len(reuse), 293)
         self.assertTrue(

@@ -1,168 +1,238 @@
 #!/usr/bin/env python3
-"""Build foods_index.csv — one stable id per food, across both archives.
+"""Build the DB-id to unified-video-frame index.
 
-    python3 build_food_index.py --repo /path/to/wise-eating \
-        --usda-csv "/path/to/generated images/foods_names_with_id.csv" \
-        --out foods_index.csv
+The app owns `ZFOODITEM.ZID`; Gemini CSV ids are provenance only and must never
+be used at runtime.  This command is deliberately run against the final preseed
+because the Ayurveda placeholder band can be renumbered by a source rebuild.
 
-WHY THIS FILE EXISTS
---------------------
-Today a frame is addressed by a sanitised name. That is why FIX-1 existed (a `%`
-in a name orphaned its image), why `sanitize()` has to stay byte-identical
-forever, and why renaming a food silently detaches its picture. A stable integer
-id fixes all three at once.
+    python3 build_food_index.py --repo ~/work/wise-eating \
+        --store /tmp/default.store \
+        --usda-csv ".../generated images/foods_names_with_id.csv"
 
-This builds the id table without changing anything yet: every existing archive-1
-row keeps the id it already had in foods_names_with_id.csv, and the sanitised
-frame key is carried alongside so both addressing schemes work during migration.
-
-WHICH CSV IS AUTHORITATIVE — this matters
------------------------------------------
-There are two copies of foods_names_with_id.csv and they disagree on 269 ids.
-Verified against Ayura/Food/frame_map.json:
-
-  gemini-food-stylist/generated images/foods_names_with_id.csv
-      12,601 rows -> sanitises to exactly the 12,601 frame_map keys.
-      Perfect bijection: 0 unmatched, 0 uncovered.  <-- USE THIS ONE
-
-  gemini-food-stylist/foods_names_with_id.csv
-      12,625 rows, 25 of which have no frame at all (Cheese fontina, Cheese
-      provolone, Broccoli chinese, ...), and 269 shared ids naming a different
-      food.  Using it to key frames would give 269 foods someone else's picture.
-
-The script re-verifies the bijection every run and refuses to write if it breaks.
-
-COLUMNS
--------
-  id           stable, never reused. 1..12622 are the existing USDA ids,
-               untouched. New rows start at 13001 so the boundary is obvious.
-  name         the food name as written
-  kind         usda | recipe | dravya
-  frame_key    the sanitised name currently used as the frame_map key
-  archive      1 = in food_archive_*.mp4 today (includes reuse-map dravyas that
-               borrow an archive-1 frame), 2 = to be encoded into archive 2
-  frame_index  archive-1 rows only.
-
-frame_index is deliberately BLANK for archive 2. Archive 2's indices shift on
-every rebuild — that is the whole reason map and archive must ship as a matched
-pair — so writing a number here would be a lie with a shelf life.
+It writes a reviewable foods_index.csv and the exact frame_index.json shipped by
+the app.  Every catalogue row must resolve.  The twelve retained physical
+orphans are a reviewed JOB4 inventory and are asserted by name; any other
+unaddressed frame is a build failure.
 """
-import argparse, csv, json, os, re, sys
 
-SAN = re.compile(r'[/\\:*?"<>|]')
+from __future__ import annotations
+
+import argparse
+import csv
+import json
+import re
+import sqlite3
+import sys
+import unicodedata
+from collections import Counter, defaultdict
+from pathlib import Path
 
 
-def sanitize(name):
-    return SAN.sub("_", name)
+SANITIZE = re.compile(r'[/\\:*?"<>|]')
+EXPECTED_ORPHAN_FRAME_KEYS = {
+    "Black mustard seed",
+    "Curry leaf powder",
+    "Dosa",
+    "Grapes",
+    "Lamb",
+    "Lotus seeds (makhana)",
+    "Rice kheer",
+    "Rice, brown",
+    "Sardine",
+    "Spiced buttermilk (takra)",
+    "Sweet potato",
+    "Wheat, whole grain",
+}
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--repo", required=True)
-    ap.add_argument("--usda-csv", required=True)
-    ap.add_argument("--jobs", help="imagery/jobs.json (default: <repo>/ayurveda-data/imagery/jobs.json)")
-    ap.add_argument("--reuse", help="imagery/reuse-map.json")
-    ap.add_argument("--out", default="foods_index.csv")
-    ap.add_argument("--new-id-base", type=int, default=13001)
-    a = ap.parse_args()
+def nfc(value: str) -> str:
+    return unicodedata.normalize("NFC", value)
 
-    jobs_p = a.jobs or os.path.join(a.repo, "ayurveda-data/imagery/jobs.json")
-    reuse_p = a.reuse or os.path.join(a.repo, "ayurveda-data/imagery/reuse-map.json")
-    fmap = json.load(open(os.path.join(a.repo, "Ayura/Food/frame_map.json")))
 
-    usda = list(csv.DictReader(open(a.usda_csv)))
-    keys = {sanitize(r["name"]) for r in usda}
-    unmatched = [r["name"] for r in usda if sanitize(r["name"]) not in fmap]
-    uncovered = sorted(set(fmap) - keys)
-    if unmatched or uncovered:
+def frame_key(value: str) -> str:
+    return SANITIZE.sub("_", nfc(value))
+
+
+def unique_normalized_map(rows, label):
+    result = {}
+    for key, value in rows:
+        normalized = nfc(key)
+        if normalized in result:
+            raise RuntimeError(f"{label} has duplicate NFC key {normalized!r}")
+        result[normalized] = (key, value)
+    return result
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--repo", required=True, type=Path)
+    parser.add_argument("--store", required=True, type=Path)
+    parser.add_argument(
+        "--usda-csv",
+        type=Path,
+        help="optional Gemini source-id provenance; never used as the runtime key",
+    )
+    parser.add_argument("--reuse", type=Path)
+    parser.add_argument("--out", type=Path)
+    parser.add_argument("--frame-index-out", type=Path)
+    return parser.parse_args()
+
+
+def main() -> int:
+    args = parse_args()
+    repo = args.repo.expanduser().resolve()
+    store = args.store.expanduser().resolve()
+    out = args.out or repo / "ayurveda-data/archive/foods_index.csv"
+    frame_index_out = args.frame_index_out or repo / "Ayura/Food/frame_index.json"
+    reuse_path = args.reuse or repo / "ayurveda-data/imagery/reuse-map.json"
+    frame_map_path = repo / "Ayura/Food/frame_map.json"
+
+    for path, label in (
+        (store, "preseed store"),
+        (reuse_path, "reviewed reuse map"),
+        (frame_map_path, "frame map"),
+    ):
+        if not path.is_file():
+            sys.exit(f"missing {label}: {path}")
+
+    frame_map_raw = json.loads(frame_map_path.read_text(encoding="utf-8"))
+    reuse_raw = json.loads(reuse_path.read_text(encoding="utf-8"))
+    expected_slots = set(range(len(frame_map_raw)))
+    actual_slots = set(frame_map_raw.values())
+    if actual_slots != expected_slots or len(actual_slots) != len(frame_map_raw):
         sys.exit(
-            f"REFUSING TO WRITE — {a.usda_csv} is not the CSV archive 1 was built from.\n"
-            f"  {len(unmatched)} row(s) sanitise to a key that is not in frame_map.json"
-            f"{': ' + str(unmatched[:3]) if unmatched else ''}\n"
-            f"  {len(uncovered)} frame_map key(s) have no row"
-            f"{': ' + str(uncovered[:3]) if uncovered else ''}\n"
-            f"Use 'gemini-food-stylist/generated images/foods_names_with_id.csv'. The copy one\n"
-            f"directory up has 25 extra foods and disagrees on 269 ids; keying frames with it\n"
-            f"would attach the wrong picture to 269 foods.")
+            "REFUSING TO WRITE — frame_map.json is not a one-to-one physical "
+            "inventory covering 0...N-1"
+        )
+    frame_map = unique_normalized_map(frame_map_raw.items(), "frame_map.json")
+    reuse = unique_normalized_map(reuse_raw.items(), "reuse-map.json")
+
+    with sqlite3.connect(f"file:{store}?mode=ro", uri=True) as connection:
+        foods = connection.execute(
+            "SELECT ZID, ZNAME FROM ZFOODITEM ORDER BY ZID"
+        ).fetchall()
+        profiles = dict(
+            connection.execute("SELECT ZFOODID, ZKIND FROM ZAYURVEDAPROFILE")
+        )
+
+    legacy_ids = {}
+    if args.usda_csv:
+        with args.usda_csv.expanduser().open(newline="") as stream:
+            source_rows = list(csv.DictReader(stream))
+        for row in source_rows:
+            key = nfc(row["name"])
+            if key in legacy_ids:
+                sys.exit(f"Gemini CSV has duplicate NFC name {key!r}")
+            legacy_ids[key] = row["id"]
+        if len(source_rows) != 12_601:
+            sys.exit(
+                f"wrong Gemini CSV: expected 12601 rows, found {len(source_rows)} at "
+                f"{args.usda_csv}"
+            )
 
     rows = []
-    seen_names = set()
-    for r in usda:
-        k = sanitize(r["name"])
-        rows.append({"id": int(r["id"]), "name": r["name"], "kind": "usda",
-                     "frame_key": k, "archive": 1, "frame_index": fmap[k]})
-        seen_names.add(r["name"])
+    frame_index = {}
+    resolution_counts = Counter()
+    unresolved = []
+    for db_id, name in foods:
+        normalized_name = nfc(name)
+        candidates = (normalized_name, frame_key(normalized_name))
+        resolved = None
 
-    nxt = max(a.new_id_base, max(x["id"] for x in rows) + 1)
+        for candidate in candidates:
+            if candidate in frame_map:
+                physical_key, index = frame_map[candidate]
+                resolved = (physical_key, index, "direct")
+                break
 
-    # reuse-map dravyas: real foods that borrow an archive-1 frame, no generation
-    reuse = json.load(open(reuse_p)) if os.path.exists(reuse_p) else {}
-    for name in sorted(reuse):
-        if name in seen_names:
+        if resolved is None:
+            reference = None
+            for candidate in candidates:
+                if candidate in reuse:
+                    _, reference = reuse[candidate]
+                    break
+            if reference is not None:
+                borrowed = nfc(reference["frameKey"])
+                target = frame_map.get(borrowed) or frame_map.get(frame_key(borrowed))
+                if target is not None:
+                    physical_key, index = target
+                    resolved = (physical_key, index, "reviewed-reuse")
+
+        if resolved is None:
+            unresolved.append((db_id, name))
             continue
-        k = reuse[name].get("frameKey")
-        if k not in fmap:
-            sys.exit(f"reuse-map points {name!r} at {k!r}, which is not in frame_map.json")
-        rows.append({"id": nxt, "name": name, "kind": "dravya",
-                     "frame_key": k, "archive": 1, "frame_index": fmap[k]})
-        seen_names.add(name)
-        nxt += 1
 
-    # everything still to be generated
-    jobs = json.load(open(jobs_p))["jobs"]
+        physical_key, index, route = resolved
+        kind = profiles.get(db_id, "usda")
+        legacy_id = legacy_ids.get(normalized_name, "") if kind == "usda" else ""
+        rows.append(
+            {
+                "id": legacy_id,
+                "db_id": db_id,
+                "name": name,
+                "kind": kind,
+                "frame_key": physical_key,
+                "archive": 1,
+                "frame_index": index,
+                "resolution": route,
+            }
+        )
+        frame_index[str(db_id)] = index
+        resolution_counts[route] += 1
 
-    # jobs.json guarantees unique FILENAMES — build_batches.py appends a content
-    # hash when slugs collide — but it does not guarantee unique frameKeys, and
-    # the frameKey is what addresses the frame. Two jobs sharing one frameKey
-    # means two images encoded and one silently shadowing the other in
-    # frame_map2, i.e. a food showing the wrong picture. Nothing downstream
-    # catches this: build_archive2.py only checks archive 2 against map 1, and
-    # its frame-count assertion still passes because the count is right and only
-    # the map is short.
-    bykey = {}
-    for j in jobs:
-        bykey.setdefault(j["_row"]["frameKey"], []).append(j)
-    clashes = {k: v for k, v in bykey.items() if len(v) > 1}
-    if clashes:
-        msg = [f"REFUSING TO WRITE — {len(clashes)} frameKey(s) are claimed by more than one job.",
-               "Each would encode two frames and keep one at random; the other food shows the",
-               "wrong picture. Fix the source data (rename one), rebuild jobs.json, re-run.", ""]
-        for k, v in sorted(clashes.items()):
-            msg.append(f"  {k!r}")
-            for j in v:
-                msg.append(f"      {j['_row']['kind']:<7} {j['output']['filename']}")
-        sys.exit("\n".join(msg))
+    if unresolved:
+        details = "\n".join(f"  {db_id}: {name}" for db_id, name in unresolved)
+        sys.exit(
+            f"REFUSING TO WRITE — {len(unresolved)} DB food(s) have no frame:\n{details}"
+        )
+    if len(rows) != len(foods) or len(frame_index) != len(foods):
+        sys.exit("REFUSING TO WRITE — DB-id resolution is not one row per FoodItem")
 
-    for j in sorted(jobs, key=lambda j: (j["_row"]["kind"], j["_row"]["name"])):
-        row = j["_row"]
-        if row["name"] in seen_names:
-            sys.exit(f"job {row['name']!r} duplicates a name already claimed by an archive-1 row; "
-                     f"resolve in the source data rather than here")
-        rows.append({"id": nxt, "name": row["name"], "kind": row["kind"],
-                     "frame_key": row["frameKey"], "archive": 2, "frame_index": ""})
-        seen_names.add(row["name"])
-        nxt += 1
+    by_index = defaultdict(list)
+    for row in rows:
+        by_index[row["frame_index"]].append((row["db_id"], row["name"]))
+    physical_keys_by_index = {value: key for key, value in frame_map_raw.items()}
+    orphan_indices = set(physical_keys_by_index) - set(by_index)
+    orphan_keys = {physical_keys_by_index[index] for index in orphan_indices}
+    if orphan_keys != EXPECTED_ORPHAN_FRAME_KEYS:
+        sys.exit(
+            "REFUSING TO WRITE — retained orphan inventory changed.\n"
+            f"  missing expected: {sorted(EXPECTED_ORPHAN_FRAME_KEYS - orphan_keys)}\n"
+            f"  unexpected: {sorted(orphan_keys - EXPECTED_ORPHAN_FRAME_KEYS)}"
+        )
 
-    ids = [r["id"] for r in rows]
-    assert len(set(ids)) == len(ids), "duplicate id generated"
-    fk = [(r["archive"], r["frame_key"]) for r in rows if r["archive"] == 2]
-    assert len(set(fk)) == len(fk), "duplicate archive-2 frame_key"
+    shared = {index: members for index, members in by_index.items() if len(members) > 1}
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with out.open("w", newline="", encoding="utf-8") as output:
+        writer = csv.DictWriter(
+            output,
+            fieldnames=list(rows[0]),
+            lineterminator="\n",
+        )
+        writer.writeheader()
+        writer.writerows(rows)
+    frame_index_out.parent.mkdir(parents=True, exist_ok=True)
+    frame_index_out.write_text(
+        json.dumps(frame_index, sort_keys=True, separators=(",", ":")) + "\n",
+        encoding="utf-8",
+    )
 
-    with open(a.out, "w", newline="") as fh:
-        w = csv.DictWriter(fh, fieldnames=["id", "name", "kind", "frame_key",
-                                           "archive", "frame_index"])
-        w.writeheader()
-        w.writerows(rows)
-
-    n1 = sum(1 for r in rows if r["archive"] == 1)
-    print(f"verified   {len(usda)} USDA rows <-> {len(fmap)} frame_map keys, exact bijection")
-    print(f"wrote      {a.out}   {len(rows)} rows")
-    print(f"  archive 1  {n1}   ({len(usda)} usda + {n1 - len(usda)} dravyas reusing a frame)")
-    for k in ("recipe", "dravya"):
-        c = sum(1 for r in rows if r["archive"] == 2 and r["kind"] == k)
-        print(f"  archive 2  {c:<6} {k}")
-    print(f"  id range   {min(ids)}-{max(ids)}, new ids from {a.new_id_base}")
+    print(f"DB catalogue      : {len(foods)}")
+    print(f"physical frames   : {len(frame_map_raw)}")
+    print(f"resolved DB ids   : {len(frame_index)} (unresolved 0)")
+    print(
+        "routes            : "
+        + ", ".join(f"{key} {value}" for key, value in sorted(resolution_counts.items()))
+    )
+    print(
+        f"addressed slots   : {len(by_index)}; shared slots {len(shared)} "
+        f"({sum(len(members) - 1 for members in shared.values())} extra DB ids)"
+    )
+    print(f"retained orphans  : {len(orphan_keys)} (exact reviewed JOB4 inventory)")
+    print(f"wrote             : {out}")
+    print(f"wrote             : {frame_index_out}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

@@ -384,6 +384,64 @@ extension FoodItem {
         carbDetails: CarbDetailsData?,
         sterols: SterolsData?
     ) {
+        if item.isRecipe,
+           let snapshot = RecipeNutritionProjection.shared.snapshot(foodID: item.id) {
+            // `aggregatedNutrition` has historically returned totals for a
+            // recipe's full ingredient weight. Project the canonical per-100 g
+            // payload onto that same basis so every existing row scaler keeps
+            // its established semantics.
+            let multiplier = (item.totalWeightG ?? 100) / 100
+            func nutrient(_ key: String) -> Nutrient? {
+                snapshot.nutrient(key, multiplier: multiplier)
+            }
+            let macros = MacronutrientsData(
+                carbohydrates: nutrient("carbohydrates"),
+                protein: nutrient("protein"),
+                fat: nutrient("fat"),
+                fiber: nutrient("fiber"),
+                totalSugars: nutrient("totalSugars")
+            )
+            let vitamins = VitaminsData(
+                vitaminA_RAE: nutrient("vitaminA_RAE"),
+                retinol: nutrient("retinol"),
+                caroteneAlpha: nutrient("caroteneAlpha"),
+                caroteneBeta: nutrient("caroteneBeta"),
+                cryptoxanthinBeta: nutrient("cryptoxanthinBeta"),
+                luteinZeaxanthin: nutrient("luteinZeaxanthin"),
+                lycopene: nutrient("lycopene"),
+                vitaminB1_Thiamin: nutrient("vitaminB1_Thiamin"),
+                vitaminB2_Riboflavin: nutrient("vitaminB2_Riboflavin"),
+                vitaminB3_Niacin: nutrient("vitaminB3_Niacin"),
+                vitaminB5_PantothenicAcid: nutrient("vitaminB5_PantothenicAcid"),
+                vitaminB6: nutrient("vitaminB6"),
+                folateDFE: nutrient("folateDFE"),
+                folateFood: nutrient("folateFood"),
+                folateTotal: nutrient("folateTotal"),
+                folicAcid: nutrient("folicAcid"),
+                vitaminB12: nutrient("vitaminB12"),
+                vitaminC: nutrient("vitaminC"),
+                vitaminD: nutrient("vitaminD"),
+                vitaminE: nutrient("vitaminE"),
+                vitaminK: nutrient("vitaminK"),
+                choline: nutrient("choline")
+            )
+            let minerals = MineralsData(
+                calcium: nutrient("calcium"),
+                iron: nutrient("iron"),
+                magnesium: nutrient("magnesium"),
+                phosphorus: nutrient("phosphorus"),
+                potassium: nutrient("potassium"),
+                sodium: nutrient("sodium"),
+                selenium: nutrient("selenium"),
+                zinc: nutrient("zinc"),
+                copper: nutrient("copper"),
+                manganese: nutrient("manganese"),
+                fluoride: nutrient("fluoride")
+            )
+            let other = OtherCompoundsData(energyKcal: nutrient("energyKcal"))
+            return (macros, nil, vitamins, minerals, other, nil, nil, nil)
+        }
+
         guard item.isRecipe || item.isMenu, let links = item.ingredients, !links.isEmpty else {
             return (item.macronutrients, item.lipids, item.vitamins, item.minerals, item.other, item.aminoAcids, item.carbDetails, item.sterols)
         }
@@ -776,14 +834,7 @@ extension FoodItem {
                return img
            }
 
-           let original = self.name
-           // ... (надолу кодът остава същият)
-           let sanitizedName = original
-               .replacingOccurrences(of: "\"", with: "_")
-               .replacingOccurrences(of: "/", with: "_")
-               .replacingOccurrences(of: ":", with: "_")
-
-           if let videoImg = FoodVideoSource.shared.getFrame(named: sanitizedName, variant: variant) {
+           if let videoImg = FoodVideoSource.shared.getFrame(id: self.id, variant: variant) {
                return videoImg
            }
 

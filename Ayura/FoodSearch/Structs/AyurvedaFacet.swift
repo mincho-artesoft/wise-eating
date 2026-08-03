@@ -86,7 +86,7 @@ struct AyurvedaFacet: Hashable, Sendable {
             AyurvedaFacetSeedDocument.self,
             from: plain
         )
-        guard seed.dravyas.count == 705,
+        guard seed.dravyas.count == 706,
               seed.recipes.count == 1_511,
               seed.links.count == 2_336 else {
             throw AyurvedaFacetSeedError.invalidCounts
@@ -267,7 +267,7 @@ private enum AyurvedaFacetSeedError: LocalizedError {
         case .missingBundle:
             return "ayurveda_seed.json.gz is missing from the app bundle"
         case .invalidCounts:
-            return "the Ayurveda facet seed must contain 705 dravyas and 1,500 recipes"
+            return "the Ayurveda facet seed must contain 706 dravyas and 1,511 recipes"
         case .invalidAgeMetadata(let profileID):
             return "the Ayurveda seed has invalid age metadata for \(profileID)"
         }

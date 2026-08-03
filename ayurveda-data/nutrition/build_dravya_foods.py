@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Emit the 376 placeholder dravyas in Legacy/foods.json shape, for review.
+"""Emit the 377 placeholder dravyas in Legacy/foods.json shape, for review.
 
     python3 build_dravya_foods.py --repo ~/work/wise-eating \
         --store /path/to/preseeded.store --out dravya_foods.json
 
-WHY THESE 376
+WHY THESE 377
     They are the dravyas with no USDA match, so their food row was synthesised
     and carries no nutrition, no category and no description. Every other food
     in the catalogue inherits all three from USDA.
@@ -175,7 +175,7 @@ VALUES = {
 # ---------------------------------------------------------------------------
 
 
-# minAgeMonths of 0 means "from birth", which is what 373 of these 376 carry
+# minAgeMonths of 0 means "from birth", which is what most of these records carry
 # today because only the honey rule ever fired. Classical Ayurveda does have a
 # framework — exclusive stanyapana to about six months, then annaprashana, the
 # first solid food, in the sixth month (Kashyapa Samhita is the paediatric text)

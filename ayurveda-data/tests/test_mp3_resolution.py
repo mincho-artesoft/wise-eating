@@ -40,7 +40,7 @@ ARTIFACT_PARTS = [
     ROOT / "Ayura" / "preseeded_db.store.gz.part-ab",
 ]
 
-TARGET_FOODS = 14_488
+TARGET_FOODS = 14_489
 
 
 class MP3DeterministicResolutionTests(unittest.TestCase):

@@ -29,7 +29,7 @@ public struct FoodConcepts: Sendable {
       from: plain
     )
     guard
-      document.catalogCount == 14_488,
+      document.catalogCount == 14_489,
       document.conceptCount == 25,
       document.aliasCount == 75,
       document.membership.count == document.conceptCount,
