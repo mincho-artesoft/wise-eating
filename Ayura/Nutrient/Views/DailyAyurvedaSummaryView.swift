@@ -329,10 +329,10 @@ struct DailyAyurvedaDetailView: View {
     private var selectedSummaryCard: some View {
         let selected = selectedComputation
         return VStack(alignment: .leading, spacing: 14) {
-            Text(selectedTitle)
-                .font(.title.weight(.bold))
-
             if let computed = selected.computed {
+                Text(selectedTitle)
+                    .font(.title.weight(.bold))
+
                 if let target {
                     let fit = AyurvedaFoodFitPresentation.make(
                         target: target,
@@ -368,21 +368,34 @@ struct DailyAyurvedaDetailView: View {
                     kapha: computed.kapha
                 )
             } else {
-                Label(
-                    selected.hasIngredients
-                        ? "Not Enough Ayurveda Data"
-                        : "No Foods in \(selectedTitle)",
-                    systemImage: "leaf.circle"
-                )
-                .font(.headline)
+                VStack(spacing: 16) {
+                    Image(
+                        systemName: selected.hasIngredients
+                            ? "leaf.circle"
+                            : "fork.knife.circle"
+                    )
+                    .font(.system(size: 52, weight: .medium))
+                    .opacity(0.62)
 
-                Text(
-                    selected.hasIngredients
-                        ? "At least half of the food weight needs Ayurveda data."
-                        : "Add foods to this meal to see its Ayurveda summary."
-                )
-                .font(.subheadline)
-                .opacity(0.76)
+                    Text(
+                        selected.hasIngredients
+                            ? "Not Enough Ayurveda Data"
+                            : "No Foods to Display"
+                    )
+                    .font(.title2.weight(.bold))
+                    .multilineTextAlignment(.center)
+
+                    if selected.hasIngredients {
+                        Text(
+                            "At least half of the food weight needs Ayurveda data."
+                        )
+                        .font(.subheadline)
+                        .multilineTextAlignment(.center)
+                        .opacity(0.76)
+                    }
+                }
+                .frame(maxWidth: .infinity, minHeight: 300)
+                .accessibilityElement(children: .combine)
             }
         }
         .foregroundStyle(effectManager.currentGlobalAccentColor)

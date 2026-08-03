@@ -375,6 +375,16 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         )
         self.assertIn("AyurvedaResolver.computeIngredients(", nutrition_detail)
         self.assertGreaterEqual(
+            nutrition_detail.count(
+                "dailyAyurvedaMeals = emptyDailyAyurvedaMealSummaries()"
+            ),
+            2,
+        )
+        self.assertIn(
+            "private func emptyDailyAyurvedaMealSummaries()",
+            nutrition_detail,
+        )
+        self.assertGreaterEqual(
             nutrition_detail.count("DailyAyurvedaSummaryRow("),
             2,
         )
@@ -463,6 +473,9 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
             detail.index("selectedSummaryCard", detail.index("mealSelector")),
         )
         self.assertNotIn('title: "Whole day"', detail)
+        self.assertIn('"fork.knife.circle"', detail)
+        self.assertIn('"No Foods to Display"', detail)
+        self.assertIn(".frame(maxWidth: .infinity, minHeight: 300)", detail)
         self.assertIn("ForEach(meals)", detail)
         self.assertNotIn('systemImage: "fork.knife"', detail)
         self.assertNotIn("systemImage: String", detail)

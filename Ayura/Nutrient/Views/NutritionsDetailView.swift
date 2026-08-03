@@ -2429,7 +2429,7 @@ struct NutritionsDetailView: View {
 
         guard !ingredients.isEmpty else {
             dailyAyurvedaComputation = .empty
-            dailyAyurvedaMeals = []
+            dailyAyurvedaMeals = emptyDailyAyurvedaMealSummaries()
             return
         }
 
@@ -2468,10 +2468,21 @@ struct NutritionsDetailView: View {
             }
         } catch {
             dailyAyurvedaComputation = .empty
-            dailyAyurvedaMeals = []
+            dailyAyurvedaMeals = emptyDailyAyurvedaMealSummaries()
             #if DEBUG
             print("Daily Ayurveda summary failed: \(error)")
             #endif
+        }
+    }
+
+    private func emptyDailyAyurvedaMealSummaries()
+        -> [DailyAyurvedaMealSummary] {
+        dailyMeals.map { meal in
+            DailyAyurvedaMealSummary(
+                id: meal.id,
+                name: meal.name,
+                computation: .empty
+            )
         }
     }
     
