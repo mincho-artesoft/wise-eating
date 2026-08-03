@@ -390,6 +390,22 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         self.assertIn(".frame(width: 44, height: 44)", rings)
         self.assertIn(".contentShape(Rectangle())", rings)
 
+    def test_daily_ayurveda_detail_switches_one_card_by_meal(self):
+        summary = DAILY_AYURVEDA_SUMMARY.read_text()
+        nutrition_detail = NUTRITIONS_DETAIL.read_text()
+        detail = summary[summary.index("struct DailyAyurvedaDetailView") :]
+
+        self.assertIn("@State private var selectedMealID: UUID?", detail)
+        self.assertIn("selectedSummaryCard", detail)
+        self.assertIn("if !meals.isEmpty {\n                        mealSelector", detail)
+        self.assertIn('title: "Whole day"', detail)
+        self.assertIn("ForEach(meals)", detail)
+        self.assertIn("return meal.computation", detail)
+        self.assertNotIn("mealBreakdown", detail)
+        self.assertNotIn('Text("By Meal")', detail)
+        self.assertIn("dailyAyurvedaMeals = dailyMeals.map", nutrition_detail)
+        self.assertIn("computation: computation", nutrition_detail)
+
 
 if __name__ == "__main__":
     unittest.main()

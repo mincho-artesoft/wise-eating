@@ -2440,7 +2440,7 @@ struct NutritionsDetailView: View {
                 ingredients,
                 context: ctx
             )
-            dailyAyurvedaMeals = dailyMeals.compactMap { meal in
+            dailyAyurvedaMeals = dailyMeals.map { meal in
                 let mealIngredients: [AyurvedaIngredientAmount] = (
                     foodsByMeal[meal.id] ?? [:]
                 ).compactMap { entry in
@@ -2451,16 +2451,21 @@ struct NutritionsDetailView: View {
                         grams: grams
                     )
                 }
-                guard !mealIngredients.isEmpty else { return nil }
-                guard let computation = try? AyurvedaResolver.computeIngredients(
-                    mealIngredients,
-                    context: ctx
-                ) else { return nil }
-                guard let computed = computation.computed else { return nil }
+                let computation: AyurvedaIngredientComputation
+                if mealIngredients.isEmpty {
+                    computation = .empty
+                } else {
+                    computation = (
+                        try? AyurvedaResolver.computeIngredients(
+                            mealIngredients,
+                            context: ctx
+                        )
+                    ) ?? .empty
+                }
                 return DailyAyurvedaMealSummary(
                     id: meal.id,
                     name: meal.name,
-                    computed: computed
+                    computation: computation
                 )
             }
         } catch {

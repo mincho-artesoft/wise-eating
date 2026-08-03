@@ -3,7 +3,7 @@ import SwiftUI
 struct DailyAyurvedaMealSummary: Identifiable {
     let id: UUID
     let name: String
-    let computed: AyurvedaDisplayMath.Computed
+    let computation: AyurvedaIngredientComputation
 }
 
 struct DailyAyurvedaSummaryRow: View {
@@ -195,6 +195,7 @@ private struct DailyAyurvedaRingCard: View {
 
 struct DailyAyurvedaDetailView: View {
     @ObservedObject private var effectManager = EffectManager.shared
+    @State private var selectedMealID: UUID?
 
     let date: Date
     let profileName: String
@@ -209,33 +210,20 @@ struct DailyAyurvedaDetailView: View {
 
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 16) {
-                    if let computed = computation.computed {
-                        profileFitCard(computed)
-                        doshaCard(computed)
-                        contextCard(computed)
-                        mealBreakdown
-                    } else {
-                        ContentUnavailableView(
-                            computation.hasIngredients
-                                ? "Not Enough Ayurveda Data"
-                                : "No Foods for This Day",
-                            systemImage: "leaf.circle",
-                            description: Text(
-                                computation.hasIngredients
-                                    ? "At least half of the day's food weight needs Ayurveda data."
-                                    : "Add foods to see the daily Ayurveda summary."
-                            )
-                        )
-                        .foregroundStyle(
-                            effectManager.currentGlobalAccentColor.opacity(0.8)
-                        )
-                        .padding(.vertical, 40)
-                        .glassCardStyle(cornerRadius: 20)
+                    selectedSummaryCard
+
+                    if !meals.isEmpty {
+                        mealSelector
                     }
 
                     Spacer(minLength: 150)
                 }
                 .padding(.horizontal)
+            }
+        }
+        .onChange(of: meals.map(\.id)) { _, mealIDs in
+            if let selectedMealID, !mealIDs.contains(selectedMealID) {
+                self.selectedMealID = nil
             }
         }
     }
@@ -268,123 +256,151 @@ struct DailyAyurvedaDetailView: View {
         .padding(.bottom, 10)
     }
 
-    @ViewBuilder
-    private func profileFitCard(
-        _ computed: AyurvedaDisplayMath.Computed
-    ) -> some View {
-        if let target {
-            let fit = AyurvedaFoodFitPresentation.make(
-                target: target,
-                vata: computed.vata,
-                pitta: computed.pitta,
-                kapha: computed.kapha,
-                rasa: [],
-                virya: computed.virya,
-                gunas: []
-            )
-            VStack(alignment: .leading, spacing: 8) {
-                Text("Fit for \(profileName)")
-                    .font(.title3.weight(.semibold))
-                Label(fit.title, systemImage: fitIcon(fit.direction))
-                    .font(.headline)
-                    .foregroundStyle(fitColor(fit.direction))
-                Text(fit.explanation)
-                    .font(.subheadline)
-                HStack(spacing: 14) {
-                    profileShare("Vata", target.vata)
-                    profileShare("Pitta", target.pitta)
-                    profileShare("Kapha", target.kapha)
-                }
-            }
-            .foregroundStyle(effectManager.currentGlobalAccentColor)
-            .padding()
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .glassCardStyle(cornerRadius: 20)
-        } else {
-            Label(
-                "Create an Ayurvedic profile for \(profileName) to see personal fit.",
-                systemImage: "person.crop.circle.badge.questionmark"
-            )
-            .font(.subheadline)
-            .foregroundStyle(effectManager.currentGlobalAccentColor)
-            .padding()
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .glassCardStyle(cornerRadius: 20)
-        }
-    }
+    private var selectedSummaryCard: some View {
+        let selected = selectedComputation
+        return VStack(alignment: .leading, spacing: 14) {
+            Text(selectedTitle)
+                .font(.title.weight(.bold))
 
-    private func doshaCard(
-        _ computed: AyurvedaDisplayMath.Computed
-    ) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("Daily Dosha Effect")
-                .font(.title3.weight(.semibold))
-            DoshaBarsView(
-                vata: computed.vata,
-                pitta: computed.pitta,
-                kapha: computed.kapha
-            )
-        }
-        .foregroundStyle(effectManager.currentGlobalAccentColor)
-        .padding()
-        .glassCardStyle(cornerRadius: 20)
-    }
+            if let computed = selected.computed {
+                if let target {
+                    let fit = AyurvedaFoodFitPresentation.make(
+                        target: target,
+                        vata: computed.vata,
+                        pitta: computed.pitta,
+                        kapha: computed.kapha,
+                        rasa: [],
+                        virya: computed.virya,
+                        gunas: []
+                    )
 
-    private func contextCard(
-        _ computed: AyurvedaDisplayMath.Computed
-    ) -> some View {
-        HStack(spacing: 12) {
-            Label(computed.virya.capitalized, systemImage: viryaIcon(computed.virya))
-            Spacer()
-            Text("Coverage \(coveragePercent)%")
-        }
-        .font(.subheadline.weight(.semibold))
-        .foregroundStyle(effectManager.currentGlobalAccentColor)
-        .padding()
-        .glassCardStyle(cornerRadius: 20)
-    }
-
-    @ViewBuilder
-    private var mealBreakdown: some View {
-        if !meals.isEmpty {
-            VStack(alignment: .leading, spacing: 10) {
-                Text("By Meal")
-                    .font(.headline)
-                    .foregroundStyle(effectManager.currentGlobalAccentColor)
-
-                ForEach(meals) { meal in
                     VStack(alignment: .leading, spacing: 8) {
-                        HStack {
-                            Text(meal.name)
-                                .font(.subheadline.weight(.semibold))
-                            Spacer()
-                            Label(
-                                meal.computed.virya.capitalized,
-                                systemImage: viryaIcon(meal.computed.virya)
-                            )
-                            .font(.caption)
-                        }
-                        AyurvedaDoshaResultChips(
-                            vata: meal.computed.vata,
-                            pitta: meal.computed.pitta,
-                            kapha: meal.computed.kapha
+                        Text("Fit for \(profileName)")
+                            .font(.subheadline.weight(.semibold))
+                        Label(fit.title, systemImage: fitIcon(fit.direction))
+                            .font(.title3.weight(.semibold))
+                            .foregroundStyle(fitColor(fit.direction))
+                        Text(fit.explanation)
+                            .font(.subheadline)
+                    }
+                } else {
+                    Label(
+                        "Create an Ayurvedic profile for \(profileName) to see personal fit.",
+                        systemImage: "person.crop.circle.badge.questionmark"
+                    )
+                    .font(.subheadline)
+                }
+
+                Divider()
+
+                DoshaBarsView(
+                    vata: computed.vata,
+                    pitta: computed.pitta,
+                    kapha: computed.kapha
+                )
+
+                Divider()
+
+                HStack(spacing: 12) {
+                    Label(
+                        computed.virya.capitalized,
+                        systemImage: viryaIcon(computed.virya)
+                    )
+                    Spacer()
+                    Text("Coverage \(coveragePercent(for: selected))%")
+                }
+                .font(.subheadline.weight(.semibold))
+            } else {
+                Label(
+                    selected.hasIngredients
+                        ? "Not Enough Ayurveda Data"
+                        : "No Foods in \(selectedTitle)",
+                    systemImage: "leaf.circle"
+                )
+                .font(.headline)
+
+                Text(
+                    selected.hasIngredients
+                        ? "At least half of the food weight needs Ayurveda data."
+                        : "Add foods to this meal to see its Ayurveda summary."
+                )
+                .font(.subheadline)
+                .opacity(0.76)
+            }
+        }
+        .foregroundStyle(effectManager.currentGlobalAccentColor)
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .glassCardStyle(cornerRadius: 20)
+        .animation(.easeInOut(duration: 0.2), value: selectedMealID)
+    }
+
+    private var mealSelector: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Show")
+                .font(.headline)
+                .foregroundStyle(effectManager.currentGlobalAccentColor)
+
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    scopeChip(
+                        title: "Whole day",
+                        systemImage: "calendar",
+                        mealID: nil
+                    )
+
+                    ForEach(meals) { meal in
+                        scopeChip(
+                            title: meal.name,
+                            systemImage: "fork.knife",
+                            mealID: meal.id
                         )
                     }
-                    .foregroundStyle(effectManager.currentGlobalAccentColor)
-                    .padding()
-                    .glassCardStyle(cornerRadius: 16)
                 }
+                .padding(.vertical, 2)
             }
         }
     }
 
-    private var coveragePercent: Int {
-        Int((min(1, max(0, computation.coverage)) * 100).rounded())
+    private func scopeChip(
+        title: String,
+        systemImage: String,
+        mealID: UUID?
+    ) -> some View {
+        GlassChipView(
+            label: title,
+            color: .blue,
+            systemImage: systemImage,
+            textColor: effectManager.currentGlobalAccentColor,
+            isSelected: selectedMealID == mealID,
+            action: {
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                    selectedMealID = mealID
+                }
+            }
+        )
     }
 
-    private func profileShare(_ name: String, _ value: Double) -> some View {
-        Text("\(name) \(Int((value * 100).rounded()))%")
-            .font(.caption.weight(.semibold))
+    private var selectedComputation: AyurvedaIngredientComputation {
+        guard let selectedMealID,
+              let meal = meals.first(where: { $0.id == selectedMealID }) else {
+            return computation
+        }
+        return meal.computation
+    }
+
+    private var selectedTitle: String {
+        guard let selectedMealID,
+              let meal = meals.first(where: { $0.id == selectedMealID }) else {
+            return "Whole Day"
+        }
+        return meal.name
+    }
+
+    private func coveragePercent(
+        for computation: AyurvedaIngredientComputation
+    ) -> Int {
+        Int((min(1, max(0, computation.coverage)) * 100).rounded())
     }
 
     private func viryaIcon(_ virya: String) -> String {
