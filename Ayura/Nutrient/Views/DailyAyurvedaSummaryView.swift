@@ -304,6 +304,8 @@ struct DailyAyurvedaSummaryRow: View {
 }
 
 private struct DoshaBalanceGlyph: View {
+    @Environment(\.colorScheme) private var colorScheme
+
     let distribution: AyurvedaDoshaDistribution?
 
     var body: some View {
@@ -334,20 +336,42 @@ private struct DoshaBalanceGlyph: View {
             drawNode(at: leading, color: .orange, in: &context)
             drawNode(at: trailing, color: .green, in: &context)
 
+            let centroid = CGPoint(
+                x: (top.x + leading.x + trailing.x) / 3,
+                y: (top.y + leading.y + trailing.y) / 3
+            )
+            let markerTop = insetPoint(top, toward: centroid)
+            let markerLeading = insetPoint(leading, toward: centroid)
+            let markerTrailing = insetPoint(trailing, toward: centroid)
             let weights = normalizedWeights
             let marker = CGPoint(
-                x: (top.x * weights.vata)
-                    + (leading.x * weights.pitta)
-                    + (trailing.x * weights.kapha),
-                y: (top.y * weights.vata)
-                    + (leading.y * weights.pitta)
-                    + (trailing.y * weights.kapha)
+                x: (markerTop.x * weights.vata)
+                    + (markerLeading.x * weights.pitta)
+                    + (markerTrailing.x * weights.kapha),
+                y: (markerTop.y * weights.vata)
+                    + (markerLeading.y * weights.pitta)
+                    + (markerTrailing.y * weights.kapha)
+            )
+            let haloRect = CGRect(
+                x: marker.x - 6,
+                y: marker.y - 6,
+                width: 12,
+                height: 12
             )
             let markerRect = CGRect(
                 x: marker.x - 4,
                 y: marker.y - 4,
                 width: 8,
                 height: 8
+            )
+            context.fill(
+                Path(ellipseIn: haloRect),
+                with: .color(markerHaloColor)
+            )
+            context.stroke(
+                Path(ellipseIn: haloRect),
+                with: .color(.secondary.opacity(0.5)),
+                lineWidth: 1
             )
             context.fill(Path(ellipseIn: markerRect), with: .color(markerColor))
         }
@@ -377,6 +401,21 @@ private struct DoshaBalanceGlyph: View {
             return .orange
         }
         return .green
+    }
+
+    private var markerHaloColor: Color {
+        colorScheme == .dark ? .black : .white
+    }
+
+    private func insetPoint(
+        _ point: CGPoint,
+        toward centroid: CGPoint
+    ) -> CGPoint {
+        let insetFraction: CGFloat = 0.18
+        return CGPoint(
+            x: point.x + ((centroid.x - point.x) * insetFraction),
+            y: point.y + ((centroid.y - point.y) * insetFraction)
+        )
     }
 
     private func drawNode(
