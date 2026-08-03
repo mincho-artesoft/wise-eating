@@ -337,7 +337,10 @@ struct DailyAyurvedaDetailView: View {
                     )
 
                     VStack(alignment: .leading, spacing: 8) {
-                        Label(fit.title, systemImage: fitIcon(fit.direction))
+                        Label(
+                            fitLabel(fit.direction),
+                            systemImage: fitIcon(fit.direction)
+                        )
                             .font(.title3.weight(.semibold))
                             .foregroundStyle(fitColor(fit.direction))
                     }
@@ -463,6 +466,16 @@ struct DailyAyurvedaDetailView: View {
         case .supportive: "leaf.fill"
         case .mixed: "equal.circle.fill"
         case .lessSupportive: "arrow.down.right.circle.fill"
+        }
+    }
+
+    private func fitLabel(
+        _ direction: AyurvedaFoodFitPresentation.Direction
+    ) -> String {
+        switch direction {
+        case .supportive: "Good"
+        case .mixed: "Mixed"
+        case .lessSupportive: "Poor"
         }
     }
 
