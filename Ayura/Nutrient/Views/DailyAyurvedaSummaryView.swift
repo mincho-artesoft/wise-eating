@@ -356,18 +356,6 @@ struct DailyAyurvedaDetailView: View {
                     pitta: computed.pitta,
                     kapha: computed.kapha
                 )
-
-                Divider()
-
-                HStack(spacing: 12) {
-                    Label(
-                        computed.virya.capitalized,
-                        systemImage: viryaIcon(computed.virya)
-                    )
-                    Spacer()
-                    Text("Coverage \(coveragePercent(for: selected))%")
-                }
-                .font(.subheadline.weight(.semibold))
             } else {
                 Label(
                     selected.hasIngredients
@@ -466,20 +454,6 @@ struct DailyAyurvedaDetailView: View {
             return "Whole Day"
         }
         return meal.name
-    }
-
-    private func coveragePercent(
-        for computation: AyurvedaIngredientComputation
-    ) -> Int {
-        Int((min(1, max(0, computation.coverage)) * 100).rounded())
-    }
-
-    private func viryaIcon(_ virya: String) -> String {
-        switch virya.lowercased() {
-        case "heating": "flame.fill"
-        case "cooling": "snowflake"
-        default: "minus.circle.fill"
-        }
     }
 
     private func fitIcon(

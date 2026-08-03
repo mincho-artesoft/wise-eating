@@ -433,6 +433,9 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
 
         self.assertIn("@State private var selectedMealID: UUID?", detail)
         self.assertIn("selectedSummaryCard", detail)
+        self.assertNotIn('Text("Coverage \\(coveragePercent(for: selected))%")', detail)
+        self.assertNotIn("private func coveragePercent(", detail)
+        self.assertNotIn("private func viryaIcon(", detail)
         self.assertIn("profileConstitutionCard", detail)
         self.assertIn("AyurvedaConstitutionResultSummary(", detail)
         self.assertIn("let profileResult: AyurvedaConstitutionResult?", detail)
