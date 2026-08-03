@@ -2,9 +2,9 @@ import SwiftUI
 import UIKit
 
 struct DoshaScaleSelector: View {
-  @Environment(\.colorScheme) private var colorScheme
   @ObservedObject private var effectManager = EffectManager.shared
   @Binding var value: Int
+  @State private var profileDistribution: AyurvedaDoshaDistribution?
 
   let name: String
   let subtitle: String
@@ -22,6 +22,7 @@ struct DoshaScaleSelector: View {
     tint: Color
   ) {
     _value = value
+    _profileDistribution = State(initialValue: nil)
     self.name = name
     self.subtitle = subtitle
     self.systemImage = systemImage
@@ -31,6 +32,7 @@ struct DoshaScaleSelector: View {
 
   init(readOnlyValue value: Int, name: String) {
     _value = .constant(min(2, max(-2, value)))
+    _profileDistribution = State(initialValue: nil)
     self.name = name
     subtitle = ""
     systemImage = ""
@@ -49,12 +51,20 @@ struct DoshaScaleSelector: View {
     }
     .foregroundStyle(effectManager.currentGlobalAccentColor)
     .tint(effectManager.currentGlobalAccentColor)
+    .onAppear(perform: reloadProfileDistribution)
+    .onReceive(
+      NotificationCenter.default.publisher(
+        for: .ayurvedaConstitutionDidChange
+      )
+    ) { _ in
+      reloadProfileDistribution()
+    }
   }
 
   private var editorBody: some View {
     VStack(alignment: .leading, spacing: 6) {
       identity
-      scale
+      profileAwareScale(isInteractive: true)
     }
     .accessibilityElement(children: .ignore)
     .accessibilityLabel("\(name) effect")
@@ -107,90 +117,13 @@ struct DoshaScaleSelector: View {
         .font(.subheadline.weight(.semibold))
         .fixedSize(horizontal: false, vertical: true)
     }
-    .foregroundStyle(readOnlyColor(presentation.tone))
+    .foregroundStyle(stateColor)
   }
 
   private func readOnlyScale(
-    _ presentation: AyurvedaDoshaEffectPresentation
+    _: AyurvedaDoshaEffectPresentation
   ) -> some View {
-    VStack(spacing: 4) {
-      HStack(spacing: 0) {
-        ForEach(values, id: \.self) { candidate in
-          Text(displayValue(candidate))
-            .font(.caption2.monospacedDigit())
-            .foregroundStyle(
-              effectManager.currentGlobalAccentColor.opacity(0.68)
-            )
-            .frame(maxWidth: .infinity)
-        }
-      }
-
-      GeometryReader { proxy in
-        let width = max(proxy.size.width, 16)
-        let trackInset: CGFloat = 8
-        let trackWidth = max(width - (trackInset * 2), 1)
-        let midpoint = trackInset + trackWidth / 2
-        let dotX = trackInset
-          + trackWidth * CGFloat(min(2, max(-2, value)) + 2) / 4
-        let fillWidth = abs(dotX - midpoint)
-
-        ZStack {
-          Capsule()
-            .fill(Color("AyurvedaNeutral").opacity(colorScheme == .dark ? 0.34 : 0.22))
-            .frame(width: trackWidth, height: 5)
-            .position(x: width / 2, y: 10)
-
-          if value != 0 {
-            Capsule()
-              .fill(readOnlyColor(presentation.tone).opacity(
-                colorScheme == .dark ? 0.72 : 0.58
-              ))
-              .frame(width: fillWidth, height: 7)
-              .position(x: (midpoint + dotX) / 2, y: 10)
-          }
-
-          ForEach(values, id: \.self) { candidate in
-            let tickX = trackInset + trackWidth * CGFloat(candidate + 2) / 4
-            Rectangle()
-              .fill(Color("AyurvedaNeutral").opacity(candidate == 0 ? 0.78 : 0.48))
-              .frame(width: candidate == 0 ? 2 : 1, height: candidate == 0 ? 16 : 11)
-              .position(x: tickX, y: 10)
-          }
-
-          Circle()
-            .fill(readOnlyColor(presentation.tone))
-            .frame(width: 16, height: 16)
-            .overlay {
-              Circle()
-                .stroke(Color(.systemBackground).opacity(0.88), lineWidth: 2)
-            }
-            .position(x: dotX, y: 10)
-        }
-      }
-      .frame(height: 20)
-
-      HStack {
-        Label("Pacifies", systemImage: "leaf.fill")
-          .foregroundStyle(Color("AyurvedaPacify"))
-        Spacer(minLength: 8)
-        Label("Aggravates", systemImage: "sun.max.fill")
-          .foregroundStyle(Color("AyurvedaAggravate"))
-      }
-      .font(.caption2)
-      .fixedSize(horizontal: false, vertical: true)
-    }
-    .accessibilityHidden(true)
-  }
-
-  private func readOnlyColor(_ tone: AyurvedaDoshaTone) -> Color {
-    switch tone {
-    case .pacify:
-      return Color("AyurvedaPacify")
-    case .neutral:
-      return Color("AyurvedaNeutral")
-    case .aggravate:
-      return Color("AyurvedaAggravate")
-    }
+    profileAwareScale(isInteractive: false)
   }
 
   private var identity: some View {
@@ -218,91 +151,147 @@ struct DoshaScaleSelector: View {
     }
   }
 
-  private var scale: some View {
-    VStack(spacing: 2) {
-      HStack(spacing: 0) {
-        ForEach(values, id: \.self) { candidate in
-          segment(candidate)
-        }
-      }
-      .padding(2)
-      .background(.thinMaterial, in: Capsule())
-      .overlay {
-        Capsule()
-          .stroke(
-            effectManager.currentGlobalAccentColor.opacity(
-              colorScheme == .dark ? 0.22 : 0.12
+  private func profileAwareScale(isInteractive: Bool) -> some View {
+    VStack(spacing: 3) {
+      GeometryReader { proxy in
+        let markerDiameter: CGFloat = 12
+        let trackInset = markerDiameter / 2
+        let trackWidth = max(proxy.size.width - markerDiameter, 1)
+        let progress = CGFloat(min(2, max(-2, value)) + 2) / 4
+
+        ZStack {
+          Capsule()
+            .fill(
+              LinearGradient(
+                colors: gradientColors,
+                startPoint: .leading,
+                endPoint: .trailing
+              )
             )
-          )
-      }
+            .frame(height: 8)
 
-      selectionIndicator
-    }
-  }
+          ForEach(1..<4, id: \.self) { division in
+            Rectangle()
+              .fill(.white.opacity(division == 2 ? 0.72 : 0.5))
+              .frame(
+                width: division == 2 ? 2 : 1,
+                height: division == 2 ? 10 : 8
+              )
+              .position(
+                x: trackInset + trackWidth * CGFloat(division) / 4,
+                y: proxy.size.height / 2
+              )
+          }
 
-  private var selectionIndicator: some View {
-    GeometryReader { proxy in
-      let selectedIndex = CGFloat(min(2, max(-2, value)) + 2)
-      let segmentWidth = proxy.size.width / CGFloat(values.count)
-      let indicatorX = segmentWidth * (selectedIndex + 0.5)
-      let labelWidth = min(CGFloat(110), proxy.size.width)
-      let labelX = min(
-        max(indicatorX, labelWidth / 2),
-        proxy.size.width - labelWidth / 2
-      )
+          Circle()
+            .fill(stateColor)
+            .frame(width: markerDiameter, height: markerDiameter)
+            .overlay {
+              Circle()
+                .stroke(Color(.systemBackground).opacity(0.88), lineWidth: 2)
+            }
+            .position(
+              x: trackInset + trackWidth * progress,
+              y: proxy.size.height / 2
+            )
 
-      ZStack(alignment: .topLeading) {
-        Image(systemName: "triangle.fill")
-          .font(.system(size: 6))
-          .position(x: indicatorX, y: 3)
-
-        Text(stateWord)
-          .font(.caption2.weight(.medium))
-          .lineLimit(1)
-          .minimumScaleFactor(0.8)
-          .frame(width: labelWidth)
-          .position(x: labelX, y: 14)
-      }
-      .foregroundStyle(stateColor)
-    }
-    .frame(height: 22)
-  }
-
-  private func segment(_ candidate: Int) -> some View {
-    Button {
-      setValue(candidate)
-    } label: {
-      Text(displayValue(candidate))
-        .font(.caption.monospacedDigit())
-        .foregroundStyle(segmentColor(candidate))
-        .frame(maxWidth: .infinity, minHeight: 32)
-        .background {
-          if candidate == value {
-            Capsule()
-              .fill(stateColor.opacity(colorScheme == .dark ? 0.32 : 0.18))
-              .glassCardStyle(cornerRadius: 20)
+          if isInteractive {
+            Color.clear
+              .contentShape(Rectangle())
+              .gesture(
+                DragGesture(minimumDistance: 0)
+                  .onEnded { gesture in
+                    setValue(
+                      scaleValue(
+                        at: gesture.location.x,
+                        width: proxy.size.width
+                      )
+                    )
+                  }
+              )
           }
         }
+      }
+      .frame(height: 16)
+
+      scaleLabels
     }
-    .buttonStyle(.plain)
+    .accessibilityHidden(true)
+  }
+
+  private var scaleLabels: some View {
+    GeometryReader { proxy in
+      let trackInset: CGFloat = 6
+      let trackWidth = max(proxy.size.width - (trackInset * 2), 1)
+      ForEach(Array(values.enumerated()), id: \.offset) { index, candidate in
+        Text(displayValue(candidate))
+          .font(
+            .caption2.monospacedDigit().weight(
+              candidate == value ? .semibold : .regular
+            )
+          )
+          .foregroundStyle(
+            candidate == value
+              ? stateColor
+              : effectManager.currentGlobalAccentColor.opacity(0.62)
+          )
+          .position(
+            x: trackInset + trackWidth * CGFloat(index) / 4,
+            y: 6
+          )
+      }
+    }
+    .frame(height: 12)
   }
 
   private var stateColor: Color {
-    if value < 0 { return .green }
-    if value > 0 { return .orange }
-    return .blue
+    guard value != 0 else { return Color("AyurvedaNeutral") }
+    let isSupportive = prefersPacifying ? value < 0 : value > 0
+    return isSupportive
+      ? Color("AyurvedaPacify")
+      : Color("AyurvedaAggravate")
   }
 
-  private var stateWord: String {
-    if value < 0 { return "pacifying" }
-    if value > 0 { return "aggravating" }
-    return "neutral"
+  private var gradientColors: [Color] {
+    prefersPacifying
+      ? [
+          Color("AyurvedaPacify"),
+          Color("AyurvedaNeutral"),
+          Color("AyurvedaAggravate"),
+        ]
+      : [
+          Color("AyurvedaAggravate"),
+          Color("AyurvedaNeutral"),
+          Color("AyurvedaPacify"),
+        ]
   }
 
-  private func segmentColor(_ candidate: Int) -> Color {
-    if candidate < 0 { return .green }
-    if candidate > 0 { return .orange }
-    return effectManager.currentGlobalAccentColor
+  private var prefersPacifying: Bool {
+    guard let profileWeight else { return true }
+    return profileWeight >= (1.0 / 3.0)
+  }
+
+  private var profileWeight: Double? {
+    guard let profileDistribution else { return nil }
+    switch name.lowercased() {
+    case "vata": return profileDistribution.vata
+    case "pitta": return profileDistribution.pitta
+    case "kapha": return profileDistribution.kapha
+    default: return nil
+    }
+  }
+
+  private func scaleValue(at x: CGFloat, width: CGFloat) -> Int {
+    guard width > 0 else { return value }
+    let progress = min(1, max(0, x / width))
+    return Int((progress * 4).rounded()) - 2
+  }
+
+  private func reloadProfileDistribution() {
+    profileDistribution = AyurvedaConstitutionStore
+      .activeRecord()?
+      .result
+      .distribution
   }
 
   private func displayValue(_ candidate: Int) -> String {

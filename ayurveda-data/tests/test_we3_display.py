@@ -100,6 +100,32 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         self.assertEqual(bars.count("DoshaScaleSelector(readOnlyValue:"), 3)
         self.assertIn("init(readOnlyValue value: Int, name: String)", scale)
 
+    def test_dosha_scales_and_food_chips_follow_active_profile(self):
+        scale = SCALE.read_text()
+        search_chips = SEARCH_CHIPS.read_text()
+
+        self.assertIn("profileAwareScale(isInteractive: true)", scale)
+        self.assertIn("profileAwareScale(isInteractive: false)", scale)
+        self.assertIn("LinearGradient(", scale)
+        self.assertIn("private var profileWeight: Double?", scale)
+        self.assertIn("profileWeight >= (1.0 / 3.0)", scale)
+        self.assertIn("activeRecord()?", scale)
+        self.assertNotIn("private func segment(", scale)
+
+        self.assertIn(
+            "@State private var profileDistribution: "
+            "AyurvedaDoshaDistribution?",
+            search_chips,
+        )
+        self.assertIn("profileDistribution?.vata", search_chips)
+        self.assertIn("profileDistribution?.pitta", search_chips)
+        self.assertIn("profileDistribution?.kapha", search_chips)
+        self.assertIn(
+            "let isSupportive = prefersPacifying ? value < 0 : value > 0",
+            search_chips,
+        )
+        self.assertIn("activeRecord()?", search_chips)
+
     def test_accessibility_size_has_single_column_and_no_truncating_chips(self):
         section = SECTION.read_text()
         scale = SCALE.read_text()

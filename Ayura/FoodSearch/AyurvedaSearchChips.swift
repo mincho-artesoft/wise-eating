@@ -59,6 +59,7 @@ struct AyurvedaDoshaQuickFilterChip: View {
 
 struct AyurvedaDoshaResultChips: View {
     @ObservedObject private var effectManager = EffectManager.shared
+    @State private var profileDistribution: AyurvedaDoshaDistribution?
 
     private let vata: Int?
     private let pitta: Int?
@@ -66,6 +67,7 @@ struct AyurvedaDoshaResultChips: View {
     private let showsUnavailableState: Bool
 
     init(metadata: AyurvedaCanonicalSearchMetadata?) {
+        _profileDistribution = State(initialValue: nil)
         vata = metadata?.doshaVata
         pitta = metadata?.doshaPitta
         kapha = metadata?.doshaKapha
@@ -77,6 +79,7 @@ struct AyurvedaDoshaResultChips: View {
         pitta: Int,
         kapha: Int
     ) {
+        _profileDistribution = State(initialValue: nil)
         self.vata = vata
         self.pitta = pitta
         self.kapha = kapha
@@ -94,26 +97,52 @@ struct AyurvedaDoshaResultChips: View {
             } else {
                 VStack(alignment: .leading, spacing: 5) {
                     HStack(spacing: 6) {
-                        doshaChip("Vata", value: vata)
-                        doshaChip("Pitta", value: pitta)
-                        doshaChip("Kapha", value: kapha)
+                        doshaChip(
+                            "Vata",
+                            value: vata,
+                            profileWeight: profileDistribution?.vata
+                        )
+                        doshaChip(
+                            "Pitta",
+                            value: pitta,
+                            profileWeight: profileDistribution?.pitta
+                        )
+                        doshaChip(
+                            "Kapha",
+                            value: kapha,
+                            profileWeight: profileDistribution?.kapha
+                        )
                     }
                 }
             }
         }
         .accessibilityElement(children: .contain)
         .accessibilityLabel("Ayurvedic dosha effects")
+        .onAppear(perform: reloadProfileDistribution)
+        .onReceive(
+            NotificationCenter.default.publisher(
+                for: .ayurvedaConstitutionDidChange
+            )
+        ) { _ in
+            reloadProfileDistribution()
+        }
     }
 
     private func doshaChip(
         _ name: String,
-        value: Int?
+        value: Int?,
+        profileWeight: Double?
     ) -> some View {
         let presentation = value.map {
             AyurvedaDoshaEffectPresentation(value: $0)
         }
-        let color = presentation
-            .map { effectColor(for: $0.tone) }
+        let color = value
+            .map {
+                personalizedColor(
+                    for: $0,
+                    profileWeight: profileWeight
+                )
+            }
             ?? effectManager.currentGlobalAccentColor.opacity(0.7)
 
         return Text("\(name) \(presentation?.signedValue ?? "—")")
@@ -132,14 +161,25 @@ struct AyurvedaDoshaResultChips: View {
             )
     }
 
-    private func effectColor(
-        for tone: AyurvedaDoshaTone
+    private func personalizedColor(
+        for value: Int,
+        profileWeight: Double?
     ) -> Color {
-        switch tone {
-        case .pacify: return Color("AyurvedaPacify")
-        case .neutral: return Color("AyurvedaNeutral")
-        case .aggravate: return Color("AyurvedaAggravate")
-        }
+        guard value != 0 else { return Color("AyurvedaNeutral") }
+        let prefersPacifying = profileWeight.map {
+            $0 >= (1.0 / 3.0)
+        } ?? true
+        let isSupportive = prefersPacifying ? value < 0 : value > 0
+        return isSupportive
+            ? Color("AyurvedaPacify")
+            : Color("AyurvedaAggravate")
+    }
+
+    private func reloadProfileDistribution() {
+        profileDistribution = AyurvedaConstitutionStore
+            .activeRecord()?
+            .result
+            .distribution
     }
 }
 
