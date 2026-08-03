@@ -52,7 +52,11 @@ struct DailyAyurvedaSummaryRow: View {
                         .foregroundStyle(
                             effectManager.currentGlobalAccentColor.opacity(0.72)
                         )
-                    Label(fitLabel, systemImage: fitIcon)
+                    Text(fitLabel)
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(fitColor)
+                        .lineLimit(1)
+                    Image(systemName: fitIcon)
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(fitColor)
                 }
