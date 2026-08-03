@@ -138,12 +138,6 @@ struct AyurvedaDisplayCard: View {
       values: optionalValue(display.vipaka)
     )
     groups += group(
-      title: "Prabhava (specific effect)",
-      systemImage: "sparkles",
-      kind: .prabhava,
-      values: optionalValue(display.prabhava)
-    )
-    groups += group(
       title: "Gunas (qualities)",
       systemImage: "circle.grid.2x2.fill",
       kind: .guna,
@@ -210,7 +204,6 @@ private enum AyurvedaPropertyKind: Equatable {
   case rasa
   case virya
   case vipaka
-  case prabhava
   case guna
   case modifier
 }
@@ -278,8 +271,6 @@ private struct AyurvedaPropertyGroupView: View {
       case "pungent": return "flame.fill"
       default: return "arrow.triangle.2.circlepath"
       }
-    case .prabhava:
-      return "sparkles"
     case .guna:
       switch value {
       case "dense": return "circle.grid.3x3.fill"
@@ -316,8 +307,6 @@ private struct AyurvedaPropertyGroupView: View {
       return Color("AyurvedaPacify")
     case .modifier:
       return Color("AyurvedaAggravate")
-    case .prabhava:
-      return Color("AyurvedaWarning")
     default:
       return Color("AyurvedaChipTint")
     }

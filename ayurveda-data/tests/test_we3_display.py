@@ -122,6 +122,14 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         self.assertNotIn("qualityCaption", display)
         self.assertNotIn("qualityCaption", section)
 
+    def test_prabhava_section_is_not_rendered(self):
+        display = DISPLAY.read_text()
+        section = SECTION.read_text()
+
+        self.assertNotIn("Prabhava (specific effect)", section)
+        self.assertNotIn("display.prabhava", section)
+        self.assertNotIn("let prabhava", display)
+
     def test_computed_tier_preview_renders_provenance_cue(self):
         editor = EDITOR.read_text()
         preview_start = editor.index("private struct AyurvedaAutomaticPreview")
