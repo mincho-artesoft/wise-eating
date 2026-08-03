@@ -86,6 +86,7 @@ struct AyurvedaFacet: Hashable, Sendable {
         )
         guard seed.dravyas.count == 705,
               seed.recipes.count == 1_511,
+              seed.catalogProfiles.count == 10_265,
               seed.links.count == 2_336 else {
             throw AyurvedaFacetSeedError.invalidCounts
         }
@@ -108,6 +109,12 @@ struct AyurvedaFacet: Hashable, Sendable {
                 profile: profile,
                 enforcedMinAgeMonths: profile.safety.enforcedMinAgeMonths,
                 sourceTier: nil
+            )
+        }
+
+        for profile in seed.catalogProfiles {
+            result[profile.foodId] = AyurvedaCanonicalSearchMetadata(
+                catalogProfile: profile
             )
         }
 
@@ -207,6 +214,8 @@ struct AyurvedaFacet: Hashable, Sendable {
             return profile.id.hasPrefix("dravya.")
         case "recipe":
             return profile.id.hasPrefix("recipe.")
+        case "catalog":
+            return profile.id.hasPrefix("catalog.usda.")
         default:
             return false
         }
@@ -258,7 +267,7 @@ private enum AyurvedaFacetSeedError: LocalizedError {
         case .missingBundle:
             return "ayurveda_seed.json.gz is missing from the app bundle"
         case .invalidCounts:
-            return "the Ayurveda facet seed must contain 705 dravyas and 1,500 recipes"
+            return "the Ayurveda facet seed has invalid profile counts"
         case .invalidAgeMetadata(let profileID):
             return "the Ayurveda seed has invalid age metadata for \(profileID)"
         }
@@ -268,6 +277,7 @@ private enum AyurvedaFacetSeedError: LocalizedError {
 private struct AyurvedaFacetSeedDocument: Decodable {
     let dravyas: [AyurvedaFacetSeedProfile]
     let recipes: [AyurvedaFacetSeedProfile]
+    let catalogProfiles: [AyurvedaFacetCatalogProfile]
     let links: [AyurvedaFacetSeedLink]
 }
 
@@ -317,6 +327,24 @@ private struct AyurvedaFacetSeedLink: Decodable {
     let tier: String
 }
 
+private struct AyurvedaFacetCatalogProfile: Decodable {
+    struct Dosha: Decodable {
+        let vata: Int
+        let pitta: Int
+        let kapha: Int
+    }
+
+    let id: String
+    let name: String
+    let foodId: Int
+    let category: String
+    let dosha: Dosha
+    let virya: String
+    let gunas: [String]
+    let confidenceAyur: Double
+    let enforcedMinAgeMonths: Int
+}
+
 struct AyurvedaCanonicalSearchMetadata: Codable, Hashable, Sendable {
     let facets: Set<String>
     let enforcedMinAgeMonths: Int?
@@ -340,6 +368,7 @@ struct AyurvedaCanonicalSearchMetadata: Codable, Hashable, Sendable {
     var isInferred: Bool {
         sourceTier == "near"
             || sourceTier == "derived"
+            || sourceTier == "catalog"
             || sourceTier == "estimated"
     }
 
@@ -352,7 +381,9 @@ struct AyurvedaCanonicalSearchMetadata: Codable, Hashable, Sendable {
         case "exact":
             return "Linked to \(sourceProfileName)"
         case "estimated":
-            return "Estimated from \(sourceProfileName)"
+            return "Ayurveda profile · \(sourceProfileName)"
+        case "catalog":
+            return "Ayurveda profile · \(sourceProfileName)"
         default:
             return nil
         }
@@ -390,8 +421,8 @@ struct AyurvedaCanonicalSearchMetadata: Codable, Hashable, Sendable {
     ) {
         self.init(
             enforcedMinAgeMonths: enforcedMinAgeMonths,
-            sourceProfileName: "default Ayurveda rule",
-            sourceTier: "estimated",
+            sourceProfileName: "Ayurveda catalogue",
+            sourceTier: "catalog",
             doshaVata: estimate.vpk.vata,
             doshaPitta: estimate.vpk.pitta,
             doshaKapha: estimate.vpk.kapha,
@@ -432,6 +463,28 @@ struct AyurvedaCanonicalSearchMetadata: Codable, Hashable, Sendable {
             prabhava: profile.prabhava,
             contraindications: profile.contraindications ?? [],
             confidenceAyur: profile.confidence.ayur
+        )
+    }
+
+    fileprivate init(catalogProfile profile: AyurvedaFacetCatalogProfile) {
+        self.init(
+            enforcedMinAgeMonths: profile.enforcedMinAgeMonths,
+            sourceProfileName: profile.category,
+            sourceTier: "catalog",
+            doshaVata: profile.dosha.vata,
+            doshaPitta: profile.dosha.pitta,
+            doshaKapha: profile.dosha.kapha,
+            rasa: [],
+            virya: profile.virya,
+            vipaka: nil,
+            gunas: profile.gunas,
+            agniEffect: nil,
+            digestibility: nil,
+            seasons: [],
+            timeOfDay: [],
+            prabhava: nil,
+            contraindications: [],
+            confidenceAyur: profile.confidenceAyur
         )
     }
 

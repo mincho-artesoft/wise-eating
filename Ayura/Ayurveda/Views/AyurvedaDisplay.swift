@@ -98,6 +98,15 @@ struct AyurvedaDisplay: Sendable {
         detail: "from \(profile.name)",
         confidence: resolution.confidence
       )
+    case .catalog(let profile):
+      let category = profile.provenance.first?
+        .replacingOccurrences(of: "USDA primary category: ", with: "")
+      return profileDisplay(
+        profile,
+        tier: .catalog,
+        detail: category.map { "profile from \($0)" } ?? "catalogue profile",
+        confidence: resolution.confidence
+      )
     case .recipe(let profile):
       return profileDisplay(
         profile,
@@ -150,7 +159,7 @@ struct AyurvedaDisplay: Sendable {
     case .estimated(let estimate):
       return AyurvedaDisplay(
         tierLabel: AyurvedaDisplayMath.tierLabel(.estimated),
-        tierDetail: "default Ayurveda rule",
+        tierDetail: "Ayurveda profile",
         vata: estimate.vpk.vata,
         pitta: estimate.vpk.pitta,
         kapha: estimate.vpk.kapha,

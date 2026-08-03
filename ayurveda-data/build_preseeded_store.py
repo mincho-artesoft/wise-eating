@@ -31,13 +31,13 @@ TARGET_EXPECTED = {
     "nutritionEstimated": 3,
     "links": TARGET_AYURVEDA_LINKS,
     "cacheFoods": TARGET_FOODS,
-    "cacheVersion": 9,
+    "cacheVersion": 10,
     "facetFoods": TARGET_FOODS,
     "metadataFoods": TARGET_FOODS,
     "linkedFacetFoods": 2_007,
     "facetKeys": 45,
-    "facetAssignments": 74_419,
-    "seedVersion": 6,
+    "facetAssignments": 99_454,
+    "seedVersion": 7,
     "ingredientLinks": TARGET_INGREDIENT_LINKS,
     "ingredientOwners": TARGET_INGREDIENT_OWNERS,
     "allergenTaggedDravyas": 155,
@@ -382,6 +382,14 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
             EXPECTED["recipes"],
         )
         require_equal(
+            "catalogue profile count",
+            scalar(
+                connection,
+                "SELECT COUNT(*) FROM ZAYURVEDAPROFILE WHERE ZKIND = 'catalog'",
+            ),
+            TARGET_PROFILES - EXPECTED["dravyas"] - EXPECTED["recipes"],
+        )
+        require_equal(
             "canonical slug prefixes",
             scalar(
                 connection,
@@ -389,17 +397,19 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
                 SELECT COUNT(*) FROM ZAYURVEDAPROFILE
                 WHERE (ZKIND = 'dravya' AND ZID NOT LIKE 'dravya.%')
                    OR (ZKIND = 'recipe' AND ZID NOT LIKE 'recipe.%')
+                   OR (ZKIND = 'catalog' AND ZID NOT LIKE 'catalog.usda.%')
                 """,
             ),
             0,
         )
         require_equal(
-            "canonical aiDraft lifecycle",
+            "profile quality lifecycle",
             scalar(
                 connection,
                 """
                 SELECT COUNT(*) FROM ZAYURVEDAPROFILE
-                WHERE COALESCE(ZQUALITYSTATE, '') != 'aiDraft'
+                WHERE (ZKIND = 'catalog' AND COALESCE(ZQUALITYSTATE, '') != 'catalogRule')
+                   OR (ZKIND != 'catalog' AND COALESCE(ZQUALITYSTATE, '') != 'aiDraft')
                 """,
             ),
             0,
@@ -524,6 +534,7 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
                 SELECT ZFOODID FROM ZAYURVEDAPROFILE
                 WHERE (ZKIND = 'dravya' AND ZID LIKE 'dravya.%')
                    OR (ZKIND = 'recipe' AND ZID LIKE 'recipe.%')
+                   OR (ZKIND = 'catalog' AND ZID LIKE 'catalog.usda.%')
                 """
             )
         }
@@ -591,6 +602,12 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
                 "SELECT ZFOODID FROM ZAYURVEDAPROFILE WHERE ZKIND = 'recipe'"
             )
         }
+        catalog_food_ids = {
+            row[0]
+            for row in connection.execute(
+                "SELECT ZFOODID FROM ZAYURVEDAPROFILE WHERE ZKIND = 'catalog'"
+            )
+        }
         require_equal(
             "allergen-tagged canonical dravyas",
             sum(bool(compact_by_id[food_id]["allergens"]) for food_id in dravya_food_ids),
@@ -618,10 +635,10 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
             EXPECTED["positiveEnforcedAgeRecipes"],
         )
         require_equal(
-            "canonical enforced-floor domain",
+            "authored canonical enforced-floor domain",
             {
                 compact_by_id[food_id]["enforcedMinAgeMonths"]
-                for food_id in profile_food_ids
+                for food_id in dravya_food_ids | recipe_food_ids
             },
             {0, 6, 12, 60},
         )
@@ -662,10 +679,18 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
             0,
         )
         require_equal(
-            "direct profile metadata unexpectedly has a source tier",
+            "authored profile metadata unexpectedly has a source tier",
             sum(
                 metadata_by_id[food_id].get("sourceTier") is not None
-                for food_id in profile_food_ids
+                for food_id in dravya_food_ids | recipe_food_ids
+            ),
+            0,
+        )
+        require_equal(
+            "catalogue metadata source tier mismatches",
+            sum(
+                metadata_by_id[food_id].get("sourceTier") != "catalog"
+                for food_id in catalog_food_ids
             ),
             0,
         )

@@ -306,7 +306,7 @@ struct MP5PlannerAdapter {
                     profile.doshaPitta,
                     profile.doshaKapha
                 ),
-                tier: .classical
+                tier: profile.kind == "catalog" ? .derived : .classical
             )
         }
         if let profile = linkedProfile, let link {

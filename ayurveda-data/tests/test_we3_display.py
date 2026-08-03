@@ -12,6 +12,9 @@ CHIP_GRID = ROOT / "Ayura/Ayurveda/Views/ChipGrid.swift"
 GLASS_CHIP = ROOT / "Ayura/Food/Views/ChipScrollView.swift"
 BARS = ROOT / "Ayura/Ayurveda/Views/DoshaBarsView.swift"
 EDITOR = ROOT / "Ayura/Ayurveda/Views/AyurvedaEditorSection.swift"
+CONSTITUTION = ROOT / "Ayura/Ayurveda/AyurvedaConstitutionViews.swift"
+SEARCH_CHIPS = ROOT / "Ayura/FoodSearch/AyurvedaSearchChips.swift"
+FOOD_ROW = ROOT / "Ayura/Food/Views/FoodItemRowView.swift"
 
 
 class WE3DisplayTests(unittest.TestCase):
@@ -148,6 +151,16 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
             ),
             preview_source.index("if let computed = computation.computed"),
         )
+
+    def test_catalogue_profiles_do_not_render_estimated_labels(self):
+        visible_sources = "\n".join(
+            path.read_text()
+            for path in (DISPLAY, CONSTITUTION, SEARCH_CHIPS, FOOD_ROW)
+        )
+
+        self.assertNotIn("Estimated profile", visible_sources)
+        self.assertNotIn("Estimated Ayurveda", visible_sources)
+        self.assertNotIn('== "Estimated"', visible_sources)
 
 
 if __name__ == "__main__":

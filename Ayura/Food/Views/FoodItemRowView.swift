@@ -164,10 +164,7 @@ struct FoodItemRowView: View {
                                     AyurvedaDoshaResultChips(
                                         vata: ayurvedaDisplay.vata,
                                         pitta: ayurvedaDisplay.pitta,
-                                        kapha: ayurvedaDisplay.kapha,
-                                        isEstimated:
-                                            ayurvedaDisplay.tierLabel
-                                            == "Estimated"
+                                        kapha: ayurvedaDisplay.kapha
                                     )
                                 }
                             }

@@ -16,10 +16,13 @@ from pathlib import Path
 from typing import Any
 
 
-SEED_VERSION = 6
-GENERATED_AT = "2026-07-25T00:00:00Z"
+SEED_VERSION = 7
+GENERATED_AT = "2026-08-03T00:00:00Z"
 TARGET_FOODS = 14_488
-TARGET_PROFILES = 2_216
+TARGET_CANONICAL_PROFILES = 2_216
+TARGET_CATALOG_PROFILES = 10_265
+TARGET_PROFILES = TARGET_CANONICAL_PROFILES + TARGET_CATALOG_PROFILES
+TARGET_SAFETY_PROFILES = TARGET_CANONICAL_PROFILES
 TARGET_RECIPES = 1_511
 TARGET_INGREDIENT_LINKS = 10_644
 TARGET_INGREDIENT_OWNERS = 1_511
@@ -31,6 +34,7 @@ EXPECTED_COUNTS = {
     "derivedLinks": 1966,
     "placeholders": 376,
     "primaries": 329,
+    "categoryRules": 187,
     "modifiers": 14,
 }
 V1_LINK_COUNT = 370
@@ -538,6 +542,17 @@ def modifier_normalized_tokens(value: str) -> tuple[str, ...]:
     value = MODIFIER_INVALID.sub(" ", value)
     value = value.replace(",", " ").replace(";", " ")
     return tuple(token for token in MODIFIER_TOKEN_SPLIT.split(value) if token)
+
+
+def modifier_applies(food_tokens: tuple[str, ...], phrase: str) -> bool:
+    phrase_tokens = modifier_normalized_tokens(phrase)
+    if not phrase_tokens or len(phrase_tokens) > len(food_tokens):
+        return False
+    width = len(phrase_tokens)
+    return any(
+        food_tokens[start : start + width] == phrase_tokens
+        for start in range(len(food_tokens) - width + 1)
+    )
 
 
 def load_batches(directory: Path, pattern: str, collection_key: str) -> list[dict[str, Any]]:
@@ -2767,24 +2782,152 @@ def load_crosswalk_links(
 
 
 def load_rules_bundle(data_root: Path) -> dict[str, Any]:
+    category_path = data_root / "rules" / "category-rules.json"
     modifier_path = data_root / "rules" / "modifiers.json"
     try:
+        category_source = json.loads(category_path.read_text(encoding="utf-8"))
         modifier_source = json.loads(modifier_path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as error:
         raise BuildError(f"cannot load Ayurveda rules: {error}") from error
+    categories = category_source.get("categories")
     modifiers = modifier_source.get("modifiers")
+    if not isinstance(categories, list) or len(categories) != EXPECTED_COUNTS["categoryRules"]:
+        raise BuildError(
+            f"category-rule gate failed: expected {EXPECTED_COUNTS['categoryRules']}"
+        )
     if not isinstance(modifiers, list) or len(modifiers) != EXPECTED_COUNTS["modifiers"]:
         raise BuildError(f"modifier gate failed: expected {EXPECTED_COUNTS['modifiers']}")
     return {
-        "rulesVersion": 2,
-        "default": {
-            "vpk": [0, 0, 0],
-            "virya": "neutral",
-            "gunas": [],
-            "note": "Neutral fallback for foods without a linked Ayurveda profile.",
-        },
+        "rulesVersion": category_source.get("rulesVersion"),
+        "categories": categories,
+        "default": category_source.get("default"),
         "modifiers": modifiers,
     }
+
+
+def load_food_category_index(
+    path: Path,
+    store_ids: set[int],
+    rules_bundle: dict[str, Any],
+) -> dict[int, str]:
+    try:
+        source = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise BuildError(f"cannot load food-category index {path}: {error}") from error
+    if source.get("schemaVersion") != 1:
+        raise BuildError(f"{path}: expected schemaVersion 1")
+    values = source.get("categoriesByFoodId")
+    if not isinstance(values, list) or not values or values[0] is not None:
+        raise BuildError(f"{path}: categoriesByFoodId must be a one-based array")
+    categories = {
+        food_id: category
+        for food_id, category in enumerate(values)
+        if food_id > 0 and isinstance(category, str) and category
+    }
+    known_rules = {rule["category"] for rule in rules_bundle["categories"]}
+    unknown = sorted(set(categories.values()) - known_rules)
+    if unknown:
+        raise BuildError(f"{path}: categories without rules {unknown[:10]}")
+    return {
+        food_id: categories[food_id]
+        for food_id in store_ids
+        if food_id in categories
+    }
+
+
+def build_catalog_profiles(
+    envelope: dict[str, Any],
+    source_food_catalog: dict[int, dict[str, Any]],
+    source_safety_by_id: dict[int, dict[str, Any]],
+    food_categories: dict[int, str],
+    rules_bundle: dict[str, Any],
+) -> list[dict[str, Any]]:
+    category_rules = {
+        rule["category"]: rule
+        for rule in rules_bundle["categories"]
+    }
+    covered_food_ids = {
+        profile["foodId"]
+        for profile in envelope["dravyas"] + envelope["recipes"]
+    }
+    covered_food_ids.update(link["fdcId"] for link in envelope["links"])
+    catalog_food_ids = sorted(set(source_food_catalog) - covered_food_ids)
+    missing_categories = [
+        food_id for food_id in catalog_food_ids if food_id not in food_categories
+    ]
+    if missing_categories:
+        raise BuildError(
+            "food-category index is missing catalogue ids "
+            f"{missing_categories[:10]}"
+        )
+
+    profiles: list[dict[str, Any]] = []
+    for food_id in catalog_food_ids:
+        food = source_food_catalog[food_id]
+        category = food_categories[food_id]
+        rule = category_rules[category]
+        food_tokens = modifier_normalized_tokens(food["name"])
+        applied = [
+            modifier
+            for modifier in rules_bundle["modifiers"]
+            if any(
+                modifier_applies(food_tokens, phrase)
+                for phrase in modifier.get("phrases", [])
+            )
+        ]
+        modifier_totals = [
+            sum(modifier["vpk"][index] for modifier in applied)
+            for index in range(3)
+        ]
+        dosha = [
+            max(-2, min(2, value + modifier_totals[index]))
+            for index, value in enumerate(rule["vpk"])
+        ]
+        gunas = list(rule.get("gunas", []))
+        for modifier in applied:
+            for guna in modifier.get("gunas", []):
+                if guna not in gunas:
+                    gunas.append(guna)
+        modifier_ids = [modifier["id"] for modifier in applied]
+        provenance = [
+            f"USDA primary category: {category}",
+            f"Ayura category rules v{rules_bundle['rulesVersion']}",
+        ]
+        if modifier_ids:
+            provenance.append("Preparation modifiers: " + ", ".join(modifier_ids))
+        profiles.append(
+            {
+                "id": f"catalog.usda.{food_id}",
+                "name": food["name"],
+                "foodId": food_id,
+                "category": category,
+                "dosha": {
+                    "vata": dosha[0],
+                    "pitta": dosha[1],
+                    "kapha": dosha[2],
+                },
+                "virya": rule["virya"],
+                "gunas": gunas,
+                "modifierIds": modifier_ids,
+                "provenance": provenance,
+                "confidenceAyur": 0.45,
+                "qualityState": "catalogRule",
+                "reviewNote": (
+                    "Deterministic catalogue profile from the USDA primary category"
+                    " and preparation terms in the food name."
+                ),
+                "enforcedMinAgeMonths": source_safety_by_id[food_id]["minAgeMonths"],
+            }
+        )
+
+    if len(profiles) != TARGET_CATALOG_PROFILES:
+        raise BuildError(
+            "catalog-profile gate failed: expected "
+            f"{TARGET_CATALOG_PROFILES}, got {len(profiles)}"
+        )
+    if len({profile["foodId"] for profile in profiles}) != len(profiles):
+        raise BuildError("catalog profiles contain duplicate food ids")
+    return profiles
 
 
 def validate_bindings(
@@ -2967,6 +3110,7 @@ def build_envelope(
         "derivedLinks": len(derived_links),
         "placeholders": len(placeholder_ids),
         "primaries": primary_count,
+        "categoryRules": EXPECTED_COUNTS["categoryRules"],
         "modifiers": EXPECTED_COUNTS["modifiers"],
     }
     if actual_counts != EXPECTED_COUNTS:
@@ -2992,6 +3136,7 @@ def build_envelope(
             "links": actual_counts["links"],
             "derivedLinks": actual_counts["derivedLinks"],
             "placeholders": actual_counts["placeholders"],
+            "categoryRules": actual_counts["categoryRules"],
             "modifiers": actual_counts["modifiers"],
             "nutrition": {
                 status: sum(
@@ -3196,6 +3341,11 @@ def main() -> int:
             v1_fdc_ids,
         )
         rules_bundle = load_rules_bundle(data_root)
+        food_categories = load_food_category_index(
+            data_root / "rules" / "food-category-index.json",
+            store_ids,
+            rules_bundle,
+        )
         envelope, contested, placeholder_ids = build_envelope(
             dravyas,
             recipes,
@@ -3207,6 +3357,15 @@ def main() -> int:
             source_safety_by_id,
             preferred_bindings,
         )
+        catalog_profiles = build_catalog_profiles(
+            envelope,
+            source_food_catalog,
+            source_safety_by_id,
+            food_categories,
+            rules_bundle,
+        )
+        envelope["catalogProfiles"] = catalog_profiles
+        envelope["counts"]["catalogProfiles"] = len(catalog_profiles)
         ontology, concept_overrides = load_food_concept_sources(
             data_root / "rules" / "food-concepts.json",
             data_root / "crosswalk" / "concept-overrides.json",
@@ -3233,7 +3392,7 @@ def main() -> int:
         )
         food_roles = load_preserved_food_roles(
             args.roles_output,
-            EXPECTED_CATALOG_COUNT,
+            TARGET_FOODS,
         )
         compressed = encode_deterministic_gzip(envelope)
         args.output.parent.mkdir(parents=True, exist_ok=True)

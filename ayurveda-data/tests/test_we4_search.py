@@ -29,7 +29,7 @@ ARTIFACT_PARTS = [
 GOLDEN = ROOT / "ayurveda-data" / "tests" / "fixtures" / "we4_golden_queries.json"
 
 TARGET_FOODS = 14_488
-TARGET_PROFILES = 2_216
+TARGET_PROFILES = 12_481
 
 
 class WE4SearchTests(unittest.TestCase):
@@ -205,20 +205,27 @@ struct ParserHarness {
                 """
             ).fetchone()
         version, food_count, payload_data = row
-        self.assertEqual((version, food_count), (9, TARGET_FOODS))
+        self.assertEqual((version, food_count), (10, TARGET_FOODS))
         payload = json.loads(payload_data)
         compact_by_id = {food["id"]: food for food in payload["compactFoods"]}
 
         with gzip.open(SEED, "rt", encoding="utf-8") as source:
             seed = json.load(source)
-        canonical = seed["dravyas"] + seed["recipes"]
+        canonical = (
+            seed["dravyas"]
+            + seed["recipes"]
+            + seed["catalogProfiles"]
+        )
+        catalog_ids = {
+            profile["foodId"] for profile in seed["catalogProfiles"]
+        }
         direct_ids = {profile["foodId"] for profile in canonical}
         link_tiers = {link["fdcId"]: link["tier"] for link in seed["links"]}
         expected_ids = direct_ids | set(link_tiers)
         linked_only_ids = set(link_tiers) - direct_ids
         self.assertEqual(len(direct_ids), TARGET_PROFILES)
         self.assertEqual(len(linked_only_ids), 2_007)
-        self.assertEqual(len(expected_ids), 4_223)
+        self.assertEqual(len(expected_ids), TARGET_FOODS)
 
         for food_id in expected_ids:
             food = compact_by_id[food_id]
@@ -230,27 +237,28 @@ struct ParserHarness {
                 set(metadata["facets"]),
                 food_id,
             )
-            expected_tier = link_tiers[food_id] if food_id in linked_only_ids else None
+            expected_tier = (
+                "catalog"
+                if food_id in catalog_ids
+                else link_tiers[food_id]
+                if food_id in linked_only_ids
+                else None
+            )
             self.assertEqual(metadata.get("sourceTier"), expected_tier, food_id)
         estimated_ids = set(compact_by_id) - expected_ids
-        self.assertEqual(len(estimated_ids), 10_265)
-        for food_id in estimated_ids:
-            food = compact_by_id[food_id]
-            metadata = food["ayurvedaMetadata"]
-            self.assertTrue(food["ayurvedaFacets"], food_id)
-            self.assertEqual(metadata["sourceTier"], "estimated", food_id)
-            self.assertEqual(metadata["confidenceAyur"], 0.25, food_id)
+        self.assertEqual(estimated_ids, set())
         cajun = compact_by_id[12_601]["ayurvedaMetadata"]
-        self.assertEqual(cajun["sourceProfileName"], "default Ayurveda rule")
+        self.assertEqual(cajun["sourceProfileName"], "Spices and Herbs")
+        self.assertEqual(cajun["sourceTier"], "catalog")
         self.assertEqual(
             (
                 cajun["doshaVata"],
                 cajun["doshaPitta"],
                 cajun["doshaKapha"],
             ),
-            (0, 0, 0),
+            (-1, 1, -1),
         )
-        self.assertIn("virya:neutral", cajun["facets"])
+        self.assertIn("virya:heating", cajun["facets"])
 
         expected_index = {}
         for food_id in compact_by_id:
@@ -262,13 +270,13 @@ struct ParserHarness {
         }
         self.assertEqual(actual_index, expected_index)
         self.assertEqual(len(actual_index), 45)
-        self.assertEqual(sum(map(len, expected_index.values())), 74_419)
+        self.assertEqual(sum(map(len, expected_index.values())), 99_454)
         self.assertFalse(set(actual_index) & set(payload["invertedIndex"]))
 
     def test_engine_uses_index_intersection_and_exact_title_escape_hatch(self):
         engine = SEARCH_ENGINE.read_text(encoding="utf-8")
         index_store = INDEX_STORE.read_text(encoding="utf-8")
-        self.assertIn("currentIndexVersion: Int = 9", index_store)
+        self.assertIn("currentIndexVersion: Int = 10", index_store)
         self.assertIn("ayurvedaFacetIndex", index_store)
         self.assertIn("if let ayurveda = item.ayurvedaMetadata", engine)
         self.assertIn("AyurvedaSearchRanker.matches(", engine)

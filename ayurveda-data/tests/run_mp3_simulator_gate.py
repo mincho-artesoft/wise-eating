@@ -69,23 +69,28 @@ def write_catalog(store_path, destination):
         payload_data = connection.execute(
             """
             SELECT ZPAYLOADDATA FROM ZSEARCHINDEXCACHE
-            WHERE ZKEY = 'main' AND ZVERSION = 7
+            WHERE ZKEY = 'main' AND ZVERSION = 10
             """
         ).fetchone()[0]
         profile_rows = connection.execute(
-            "SELECT ZID, ZFOODID, ZENGINEEXCLUDED FROM ZAYURVEDAPROFILE"
+            "SELECT ZID, ZFOODID, ZENGINEEXCLUDED, ZKIND FROM ZAYURVEDAPROFILE"
         ).fetchall()
         link_rows = connection.execute(
             "SELECT ZFDCID, ZDRAVYAPROFILEID, ZTIER FROM ZAYURVEDALINK"
         ).fetchall()
 
     payload = json.loads(payload_data)
-    direct_ids = {food_id for _, food_id, _ in profile_rows}
+    direct_ids = {
+        food_id for _, food_id, _, kind in profile_rows if kind != "catalog"
+    }
+    catalog_ids = {
+        food_id for _, food_id, _, kind in profile_rows if kind == "catalog"
+    }
     excluded_profile_ids = {
-        profile_id for profile_id, _, excluded in profile_rows if excluded
+        profile_id for profile_id, _, excluded, _ in profile_rows if excluded
     }
     excluded_food_ids = {
-        food_id for _, food_id, excluded in profile_rows if excluded
+        food_id for _, food_id, excluded, _ in profile_rows if excluded
     }
     link_tiers = {}
     for food_id, profile_id, tier in link_rows:
@@ -100,6 +105,8 @@ def write_catalog(store_path, destination):
             continue
         if food_id in direct_ids:
             tier = "classical"
+        elif food_id in catalog_ids:
+            tier = "derived"
         elif food_id in link_tiers:
             tier = "derived" if link_tiers[food_id] == "derived" else "classical"
         else:

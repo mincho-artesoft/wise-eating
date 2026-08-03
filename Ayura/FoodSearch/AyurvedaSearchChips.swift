@@ -63,27 +63,23 @@ struct AyurvedaDoshaResultChips: View {
     private let vata: Int?
     private let pitta: Int?
     private let kapha: Int?
-    private let isEstimated: Bool
     private let showsUnavailableState: Bool
 
     init(metadata: AyurvedaCanonicalSearchMetadata?) {
         vata = metadata?.doshaVata
         pitta = metadata?.doshaPitta
         kapha = metadata?.doshaKapha
-        isEstimated = metadata?.sourceTier == "estimated"
         showsUnavailableState = metadata == nil
     }
 
     init(
         vata: Int,
         pitta: Int,
-        kapha: Int,
-        isEstimated: Bool = false
+        kapha: Int
     ) {
         self.vata = vata
         self.pitta = pitta
         self.kapha = kapha
-        self.isEstimated = isEstimated
         showsUnavailableState = false
     }
 
@@ -97,11 +93,6 @@ struct AyurvedaDoshaResultChips: View {
                     )
             } else {
                 VStack(alignment: .leading, spacing: 5) {
-                    if isEstimated {
-                        Label("Estimated Ayurveda", systemImage: "sparkles")
-                            .font(.caption2.weight(.semibold))
-                            .foregroundStyle(.orange)
-                    }
                     HStack(spacing: 6) {
                         doshaChip("Vata", value: vata)
                         doshaChip("Pitta", value: pitta)

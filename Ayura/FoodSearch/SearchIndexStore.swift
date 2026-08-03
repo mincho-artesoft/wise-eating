@@ -6,7 +6,7 @@ final class SearchIndexStore {
     static let shared = SearchIndexStore()
 
     /// Bump this when the structure of CompactFoodItem / tokens changes
-    private let currentIndexVersion: Int = 9
+    private let currentIndexVersion: Int = 10
 
     // MARK: - In-Memory Cache
     private(set) var revision: UInt64 = 0
@@ -540,6 +540,9 @@ final class SearchIndexStore {
             }
 
             if let preferred = foodProfiles.first {
+                if preferred.kind == "catalog", result[foodID] != nil {
+                    continue
+                }
                 result[foodID] = AyurvedaCanonicalSearchMetadata(
                     profile: preferred,
                     enforcedMinAgeMonths: bundledAge
@@ -591,6 +594,10 @@ final class SearchIndexStore {
                 profile: preferred,
                 enforcedMinAgeMonths: bundled?.enforcedMinAgeMonths
             )
+        }
+
+        if profiles.first?.kind == "catalog", bundled != nil {
+            return bundled
         }
 
         if let preferred = profiles.first {

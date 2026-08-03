@@ -12,6 +12,7 @@ import build_preseeded_store
 
 TARGET_FOODS = build_seed.TARGET_FOODS
 TARGET_PROFILES = build_seed.TARGET_PROFILES
+TARGET_SAFETY_PROFILES = build_seed.TARGET_SAFETY_PROFILES
 TARGET_RECIPES = build_seed.TARGET_RECIPES
 TARGET_INGREDIENT_LINKS = build_seed.TARGET_INGREDIENT_LINKS
 TARGET_INGREDIENT_OWNERS = build_seed.TARGET_INGREDIENT_OWNERS
@@ -371,29 +372,54 @@ def d34_validate(here, store, errs):
     if missing_crosswalk_ids:
         errs.append(f"D34/crosswalk.csv: fdcIds absent from store {missing_crosswalk_ids[:10]}")
 
+    category_path = os.path.join(here, "rules", "category-rules.json")
+    category_index_path = os.path.join(here, "rules", "food-category-index.json")
     modifier_path = os.path.join(here, "rules", "modifiers.json")
     bundle_path = os.path.join(here, "..", "Ayura", "ayurveda_rules.json")
     try:
+        category_source = json.load(open(category_path))
+        category_index = json.load(open(category_index_path))
         modifier_source = json.load(open(modifier_path))
         rules_bundle = json.load(open(bundle_path))
     except Exception as error:
         errs.append(f"D34/rules: cannot read rule inputs/bundle: {error}")
         return
     expected_bundle = {
-        "rulesVersion": 2,
-        "default": {
-            "vpk": [0, 0, 0],
-            "virya": "neutral",
-            "gunas": [],
-            "note": "Neutral fallback for foods without a linked Ayurveda profile.",
-        },
+        "rulesVersion": category_source.get("rulesVersion"),
+        "categories": category_source.get("categories"),
+        "default": category_source.get("default"),
         "modifiers": modifier_source.get("modifiers"),
     }
     if rules_bundle != expected_bundle:
         errs.append("D34/ayurveda_rules.json: content does not match authored rule inputs")
 
+    category_rules = rules_bundle.get("categories", [])
     default_rule = rules_bundle.get("default", {})
     modifiers = rules_bundle.get("modifiers", [])
+    category_map = {}
+    for rule in category_rules:
+        category = rule.get("category")
+        if category in category_map:
+            errs.append(f"D34/rules: duplicate category rule {category}")
+        category_map[category] = rule
+        d34_check_vector(rule.get("vpk"), f"D34/rules/{category}", errs)
+        if rule.get("virya") not in D34_VIRYA:
+            errs.append(f"D34/rules/{category}: invalid virya {rule.get('virya')}")
+        if set(rule.get("gunas", [])) - D34_RULE_GUNA:
+            errs.append(f"D34/rules/{category}: invalid gunas")
+    indexed_categories = category_index.get("categoriesByFoodId", [])
+    indexed_store_categories = {
+        indexed_categories[food_id]
+        for food_id in store_ids
+        if food_id < len(indexed_categories)
+    }
+    uncovered = sorted(indexed_store_categories - set(category_map))
+    dead = sorted(set(category_map) - indexed_store_categories)
+    if len(category_rules) != 187 or uncovered or dead:
+        errs.append(
+            "D34/rules: expected 187 rules / 0 dead / 0 uncovered; got "
+            f"{len(category_rules)} / {len(dead)} / {len(uncovered)}"
+        )
     d34_check_vector(default_rule.get("vpk"), "D34/rules/default", errs)
     if default_rule.get("virya") not in D34_VIRYA:
         errs.append(f"D34/rules/default: invalid virya {default_rule.get('virya')}")
@@ -419,18 +445,19 @@ def d34_validate(here, store, errs):
     except Exception as error:
         errs.append(f"D34/ayurveda_seed.json.gz: cannot read: {error}")
         return
-    if seed.get("seedVersion") != 6:
-        errs.append(f"D34/seed: expected seedVersion 6, got {seed.get('seedVersion')}")
+    if seed.get("seedVersion") != 7:
+        errs.append(f"D34/seed: expected seedVersion 7, got {seed.get('seedVersion')}")
     counts = seed.get("counts", {})
     expected_counts = {
         "dravyas": 705,
         "recipes": TARGET_RECIPES,
+        "catalogProfiles": build_seed.TARGET_CATALOG_PROFILES,
         "links": TARGET_AYURVEDA_LINKS,
         "derivedLinks": 1966, "placeholders": 376,
         "categoryRules": 187, "modifiers": 14,
         "nutrition": {"full": 1508, "estimated": 3, "none": 0},
         "safety": {
-            "profiles": TARGET_PROFILES,
+            "profiles": TARGET_SAFETY_PROFILES,
             "allergenTaggedDravyas": 155,
             "allergenTaggedRecipes": 1190,
             "honeyMinAgeDravyas": 4,
@@ -444,6 +471,19 @@ def d34_validate(here, store, errs):
     }
     if counts != expected_counts:
         errs.append(f"D34/seed: counts block differs: {counts}")
+    catalog_profiles = seed.get("catalogProfiles", [])
+    if len(catalog_profiles) != build_seed.TARGET_CATALOG_PROFILES:
+        errs.append(
+            "D34/seed: expected "
+            f"{build_seed.TARGET_CATALOG_PROFILES} catalog profiles, "
+            f"got {len(catalog_profiles)}"
+        )
+    catalog_food_ids = {profile.get("foodId") for profile in catalog_profiles}
+    if len(catalog_food_ids) != len(catalog_profiles):
+        errs.append("D34/seed: duplicate catalog profile foodId")
+    catalog_by_food_id = {
+        profile.get("foodId"): profile for profile in catalog_profiles
+    }
     links = seed.get("links", [])
     if len(links) != TARGET_AYURVEDA_LINKS:
         errs.append(
@@ -470,6 +510,44 @@ def d34_validate(here, store, errs):
         )
     if set(seed_derived) != set(crosswalk):
         errs.append("D34/seed: derived fdcIds differ from crosswalk.csv")
+
+    authored_food_ids = {
+        profile.get("foodId")
+        for profile in seed.get("dravyas", []) + seed.get("recipes", [])
+        if profile.get("foodId") in store_ids
+    }
+    expected_catalog_food_ids = store_ids - authored_food_ids - set(link_map)
+    if catalog_food_ids != expected_catalog_food_ids:
+        errs.append("D34/seed: catalogue profile foodIds do not close coverage")
+    for food_id, profile in catalog_by_food_id.items():
+        if food_id not in store_ids or food_id >= len(indexed_categories):
+            errs.append(f"D34/seed/catalog/{food_id}: invalid foodId")
+            continue
+        category = indexed_categories[food_id]
+        rule = category_map.get(category)
+        if rule is None:
+            errs.append(f"D34/seed/catalog/{food_id}: missing category rule")
+            continue
+        applied = d34_applied_modifiers(foods[food_id]["name"], modifiers)
+        expected_vpk = d34_adjusted_vpk(rule["vpk"], applied)
+        expected_dosha = dict(zip(("vata", "pitta", "kapha"), expected_vpk))
+        expected_gunas = list(rule.get("gunas", []))
+        for modifier in applied:
+            for guna in modifier.get("gunas", []):
+                if guna not in expected_gunas:
+                    expected_gunas.append(guna)
+        if (
+            profile.get("id") != f"catalog.usda.{food_id}"
+            or profile.get("name") != foods[food_id]["name"]
+            or profile.get("category") != category
+            or profile.get("dosha") != expected_dosha
+            or profile.get("virya") != rule["virya"]
+            or profile.get("gunas") != expected_gunas
+            or profile.get("modifierIds")
+            != [modifier["id"] for modifier in applied]
+            or profile.get("qualityState") != "catalogRule"
+        ):
+            errs.append(f"D34/seed/catalog/{food_id}: rule-derived profile differs")
 
     safety_rows = seed.get("dravyas", []) + seed.get("recipes", [])
     for item in safety_rows:
@@ -606,8 +684,9 @@ def d34_validate(here, store, errs):
             dravya = dravyas[link["dravyaId"]]
             base = [dravya["dosha"][key] for key in ("vata", "pitta", "kapha")]
         else:
-            tier = "estimated"
-            rule = default_rule
+            tier = "catalog"
+            profile = catalog_by_food_id.get(fdc_id, {})
+            rule = category_map.get(profile.get("category"), default_rule)
             applied = d34_applied_modifiers(food["name"], modifiers)
             base = rule["vpk"]
         tier_counts[tier] += 1
@@ -623,7 +702,7 @@ def d34_validate(here, store, errs):
             "vpk": d34_adjusted_vpk(base, applied),
         }
 
-    expected_tiers = Counter({"classical": 370, "derived": 1966, "estimated": 10265})
+    expected_tiers = Counter({"classical": 370, "derived": 1966, "catalog": 10265})
     if tier_counts != expected_tiers:
         errs.append(f"D34/resolver: tier totals differ: {dict(tier_counts)}")
     if sum(tier_counts.values()) != 12601:
@@ -674,25 +753,25 @@ def d34_validate(here, store, errs):
          and resolutions[3623]["link"]["dravyaId"] == "dravya.apricot"
          and resolutions[3623]["modifiers"] == ["dried"]
          and resolutions[3623]["vpk"] == [0, 1, -1])
-    spot(3923, "neutral fallback [1,0,0] (processed)",
-         resolutions[3923]["tier"] == "estimated"
+    spot(3923, "mashed-potato category [1,0,1] (processed)",
+         resolutions[3923]["tier"] == "catalog"
          and resolutions[3923]["modifiers"] == ["processed"]
-         and resolutions[3923]["vpk"] == [1, 0, 0])
-    spot(68, "neutral fallback [1,0,0] (frozen)",
-         resolutions[68]["tier"] == "estimated"
+         and resolutions[3923]["vpk"] == [1, 0, 1])
+    spot(68, "frozen-dairy category [2,-1,2] (frozen)",
+         resolutions[68]["tier"] == "catalog"
          and resolutions[68]["modifiers"] == ["frozen"]
-         and resolutions[68]["vpk"] == [1, 0, 0])
-    spot(6148, "neutral fallback [1,1,-1] (dry-heat)",
-         resolutions[6148]["tier"] == "estimated"
+         and resolutions[68]["vpk"] == [2, -1, 2])
+    spot(6148, "beef category [0,2,0] (dry-heat)",
+         resolutions[6148]["tier"] == "catalog"
          and resolutions[6148]["modifiers"] == ["dry-heat"]
-         and resolutions[6148]["vpk"] == [1, 1, -1])
-    spot(2655, "neutral fallback [0,0,0] (none)",
-         resolutions[2655]["tier"] == "estimated"
+         and resolutions[6148]["vpk"] == [0, 2, 0])
+    spot(2655, "popcorn category [2,0,-1] (none)",
+         resolutions[2655]["tier"] == "catalog"
          and resolutions[2655]["modifiers"] == []
-         and resolutions[2655]["vpk"] == [0, 0, 0])
+         and resolutions[2655]["vpk"] == [2, 0, -1])
 
     print("D34 resolver simulation")
-    print("tiers: classical 370 · derived 1966 · estimated 10265")
+    print("tiers: classical 370 · derived 1966 · catalog 10265")
     print(f"resolved foods: {sum(tier_counts.values())}/12601")
     print(f"foods firing modifiers: {modified_foods}/12231")
     print("modifier histogram: " + " · ".join(

@@ -1331,14 +1331,6 @@ struct AyurvedaPersonalizedFoodFitView: View {
           gunas: display.gunas
         )
         VStack(alignment: .leading, spacing: 8) {
-          if display.tierLabel == "Estimated" {
-            Label(
-              "Personal fit uses a lower-confidence category estimate.",
-              systemImage: "sparkles"
-            )
-            .font(.caption)
-            .foregroundStyle(.orange)
-          }
           personalizedCard(fit)
         }
       } else if activeProfileID != nil {
@@ -1415,14 +1407,7 @@ struct AyurvedaPersonalFitBadge: View {
 
   var body: some View {
     Group {
-      if let metadata, metadata.sourceTier == "estimated" {
-        Label(
-          "Estimated profile — not used for personal fit",
-          systemImage: "questionmark.circle"
-        )
-        .font(.caption2)
-        .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.7))
-      } else if let metadata, let target {
+      if let metadata, let target {
         let fit = AyurvedaFoodFitPresentation.make(
           target: target,
           vata: metadata.doshaVata,

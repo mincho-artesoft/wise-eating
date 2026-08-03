@@ -15,7 +15,7 @@ assert SPEC and SPEC.loader
 build_seed = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(build_seed)
 
-TARGET_PROFILES = build_seed.TARGET_PROFILES
+TARGET_SAFETY_PROFILES = build_seed.TARGET_SAFETY_PROFILES
 TARGET_INGREDIENT_LINKS = build_seed.TARGET_INGREDIENT_LINKS
 TARGET_INGREDIENT_OWNERS = build_seed.TARGET_INGREDIENT_OWNERS
 
@@ -69,7 +69,7 @@ class WE8SafetyDerivationTests(unittest.TestCase):
         rows = list(self.dravya_safety.values()) + list(
             self.recipe_safety.values()
         )
-        self.assertEqual(len(rows), build_seed.TARGET_PROFILES)
+        self.assertEqual(len(rows), TARGET_SAFETY_PROFILES)
         self.assertTrue(
             all(
                 row["provenance"] == "scaffold-default"
@@ -207,7 +207,7 @@ class WE8PreseedSafetyTests(unittest.TestCase):
 
     def test_artifact_metadata_exactly_matches_all_seeded_safety_rows(self):
         canonical = self.seed["dravyas"] + self.seed["recipes"]
-        self.assertEqual(len(canonical), TARGET_PROFILES)
+        self.assertEqual(len(canonical), TARGET_SAFETY_PROFILES)
         for item in canonical:
             compact = self.compact_by_id[item["foodId"]]
             safety = item["safety"]

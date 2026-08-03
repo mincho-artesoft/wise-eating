@@ -153,6 +153,30 @@ enum AyurvedaSeeder {
         }
       }
 
+      for catalogProfile in seed.catalogProfiles {
+        guard foodByID[catalogProfile.foodId] != nil else {
+          throw AyurvedaSeederError.missingCatalogFood(catalogProfile.foodId)
+        }
+        if let profile = profileByID[catalogProfile.id] {
+          if profile.seedVersion < seed.seedVersion {
+            apply(
+              catalogProfile: catalogProfile,
+              seedVersion: seed.seedVersion,
+              to: profile
+            )
+            result.updatedProfiles += 1
+          }
+        } else {
+          context.insert(
+            makeCatalogProfile(
+              catalogProfile,
+              seedVersion: seed.seedVersion
+            )
+          )
+          result.insertedProfiles += 1
+        }
+      }
+
       for link in seed.links {
         if let existing = linkByFdcID[link.fdcId] {
           if existing.dravyaProfileId != link.dravyaId || existing.tier != link.tier {
@@ -270,7 +294,9 @@ enum AyurvedaSeeder {
     result: inout RunResult
   ) throws {
     let incomingProfileIDs = Set(
-      seed.dravyas.map(\.id) + seed.recipes.map(\.id)
+      seed.dravyas.map(\.id)
+        + seed.recipes.map(\.id)
+        + seed.catalogProfiles.map(\.id)
     )
     guard seed.seedVersion >= 6,
       profiles.contains(where: {
@@ -543,6 +569,7 @@ enum AyurvedaSeeder {
   private static func validate(seed: AyurvedaSeedDTO) throws {
     guard seed.counts.dravyas == 705,
       seed.counts.recipes == 1_511,
+      seed.counts.catalogProfiles == 10_265,
       seed.counts.links == 2_336,
       seed.counts.derivedLinks == 1_966,
       seed.counts.placeholders == 376,
@@ -558,6 +585,7 @@ enum AyurvedaSeeder {
       seed.counts.safety.ageContributors == 10_644,
       seed.dravyas.count == seed.counts.dravyas,
       seed.recipes.count == seed.counts.recipes,
+      seed.catalogProfiles.count == seed.counts.catalogProfiles,
       seed.links.count == seed.counts.links,
       seed.links.filter({ $0.tier == "derived" }).count == seed.counts.derivedLinks,
       seed.dravyas.filter(\.foodIsPlaceholder).count == seed.counts.placeholders
@@ -566,6 +594,17 @@ enum AyurvedaSeeder {
     }
     guard seed.recipes.allSatisfy({ !$0.ingredients.isEmpty }) else {
       throw AyurvedaSeederError.emptyRecipeIngredients
+    }
+    guard seed.catalogProfiles.allSatisfy({
+      $0.id == "catalog.usda.\($0.foodId)"
+        && (-2...2).contains($0.dosha.vata)
+        && (-2...2).contains($0.dosha.pitta)
+        && (-2...2).contains($0.dosha.kapha)
+        && $0.confidenceAyur > 0
+        && $0.confidenceAyur <= 1
+        && $0.enforcedMinAgeMonths >= 0
+    }) else {
+      throw AyurvedaSeederError.invalidCatalogProfiles
     }
     let validNutritionStates = Set(["full", "estimated", "none"])
     guard seed.recipes.allSatisfy({
@@ -659,6 +698,19 @@ enum AyurvedaSeeder {
         throw AyurvedaSeederError.reservedBandCollision(recipe.foodId)
       }
     }
+    for catalogProfile in seed.catalogProfiles {
+      if let profile = profileByID[catalogProfile.id] {
+        guard profile.kind == "catalog",
+          profile.foodId == catalogProfile.foodId
+        else {
+          throw AyurvedaSeederError.canonicalOwnershipConflict(
+            catalogProfile.id
+          )
+        }
+      } else if foodByID[catalogProfile.foodId] == nil {
+        throw AyurvedaSeederError.missingCatalogFood(catalogProfile.foodId)
+      }
+    }
 
     let expectedReservedFoodIDs = Set(
       seed.dravyas.lazy.filter(\.foodIsPlaceholder).map(\.foodId)
@@ -704,6 +756,22 @@ enum AyurvedaSeeder {
         && !food.isUserAdded
     }
     guard recipesAreCurrent else {
+      return false
+    }
+
+    let catalogProfilesAreCurrent = seed.catalogProfiles.allSatisfy {
+      catalogProfile in
+      guard
+        let profile = profileByID[catalogProfile.id],
+        foodByID[catalogProfile.foodId] != nil
+      else {
+        return false
+      }
+      return profile.kind == "catalog"
+        && profile.foodId == catalogProfile.foodId
+        && profile.seedVersion >= seed.seedVersion
+    }
+    guard catalogProfilesAreCurrent else {
       return false
     }
 
@@ -859,6 +927,20 @@ enum AyurvedaSeeder {
   ) throws {
     copyProfile(
       from: try makeRecipeProfile(recipe, seedVersion: seedVersion),
+      to: profile
+    )
+  }
+
+  private static func apply(
+    catalogProfile: CatalogProfileDTO,
+    seedVersion: Int,
+    to profile: AyurvedaProfile
+  ) {
+    copyProfile(
+      from: makeCatalogProfile(
+        catalogProfile,
+        seedVersion: seedVersion
+      ),
       to: profile
     )
   }
@@ -1028,6 +1110,51 @@ enum AyurvedaSeeder {
     )
   }
 
+  private static func makeCatalogProfile(
+    _ profile: CatalogProfileDTO,
+    seedVersion: Int
+  ) -> AyurvedaProfile {
+    AyurvedaProfile(
+      id: profile.id,
+      kind: "catalog",
+      foodId: profile.foodId,
+      foodIsPlaceholder: false,
+      name: profile.name,
+      doshaVata: profile.dosha.vata,
+      doshaPitta: profile.dosha.pitta,
+      doshaKapha: profile.dosha.kapha,
+      seasons: [],
+      timeOfDay: [],
+      viruddha: [],
+      provenance: profile.provenance,
+      confidenceAyur: profile.confidenceAyur,
+      confidenceSci: nil,
+      qualityState: profile.qualityState,
+      reviewNote: profile.reviewNote,
+      engineExcluded: false,
+      seedVersion: seedVersion,
+      sanskrit: nil,
+      aliases: [],
+      rasa: [],
+      virya: profile.virya,
+      vipaka: nil,
+      gunas: profile.gunas,
+      prabhava: nil,
+      agniEffect: nil,
+      digestibility: nil,
+      combinations: [],
+      contraindications: [],
+      preparation: nil,
+      servingsJSON: nil,
+      meal: nil,
+      servingsCount: nil,
+      prepMinutes: nil,
+      cookMinutes: nil,
+      steps: [],
+      guidance: nil
+    )
+  }
+
   private static func encodeNutritionJSON<Value: Encodable>(
     _ value: Value,
     recipeId: String,
@@ -1079,9 +1206,11 @@ private enum AyurvedaSeederError: Error, LocalizedError {
   case recipeIngredientReference(recipeId: String, foodId: Int)
   case invalidServings(String)
   case invalidNutrition
+  case invalidCatalogProfiles
   case invalidNutritionJSON(String)
   case invalidSafetyMetadata
   case invalidSafetyAllergen(String)
+  case missingCatalogFood(Int)
   case v5MigrationConflict(String)
 
   var errorDescription: String? {
@@ -1110,12 +1239,16 @@ private enum AyurvedaSeederError: Error, LocalizedError {
       return "dravya \(dravyaId) has servings that cannot be encoded as JSON"
     case .invalidNutrition:
       return "the Ayurveda seed contains invalid recipe nutrition"
+    case .invalidCatalogProfiles:
+      return "the Ayurveda seed contains invalid catalogue profiles"
     case .invalidNutritionJSON(let recipeId):
       return "recipe \(recipeId) nutrition cannot be encoded as JSON"
     case .invalidSafetyMetadata:
       return "the Ayurveda seed contains invalid scaffold-default safety metadata"
     case .invalidSafetyAllergen(let allergen):
       return "the Ayurveda seed references unsupported allergen \(allergen)"
+    case .missingCatalogFood(let foodId):
+      return "catalogue profile references missing FoodItem \(foodId)"
     case .v5MigrationConflict(let profileId):
       return "the Ayurveda v5 migration cannot reconcile profile \(profileId)"
     }
@@ -1132,12 +1265,14 @@ private struct AyurvedaSeedDTO: Decodable {
   let counts: AyurvedaSeedCountsDTO
   let dravyas: [DravyaDTO]
   let recipes: [RecipeDTO]
+  let catalogProfiles: [CatalogProfileDTO]
   let links: [AyurvedaLinkDTO]
 }
 
 private struct AyurvedaSeedCountsDTO: Decodable {
   let dravyas: Int
   let recipes: Int
+  let catalogProfiles: Int
   let links: Int
   let derivedLinks: Int
   let placeholders: Int
@@ -1260,6 +1395,22 @@ private struct RecipeDTO: Decodable {
   let foodId: Int
   let nutrition: RecipeNutritionDTO
   let safety: SafetyMetadataDTO
+}
+
+private struct CatalogProfileDTO: Decodable {
+  let id: String
+  let name: String
+  let foodId: Int
+  let category: String
+  let dosha: DoshaDTO
+  let virya: String
+  let gunas: [String]
+  let modifierIds: [String]
+  let provenance: [String]
+  let confidenceAyur: Double
+  let qualityState: String
+  let reviewNote: String
+  let enforcedMinAgeMonths: Int
 }
 
 private struct RecipeNutritionDTO: Decodable {

@@ -3,6 +3,7 @@ import Foundation
 public enum AyurvedaDisplayMath {
   public enum TierInput {
     case classical
+    case catalog
     case recipe
     case derived(linkTier: String)
     case computed
@@ -45,6 +46,8 @@ public enum AyurvedaDisplayMath {
     switch tier {
     case .classical:
       return "Classical"
+    case .catalog:
+      return "Ayurveda"
     case .recipe:
       return "Recipe"
     case .derived(let linkTier):
@@ -52,7 +55,7 @@ public enum AyurvedaDisplayMath {
     case .computed:
       return "Computed"
     case .estimated:
-      return "Estimated"
+      return "Ayurveda"
     case .user:
       return "User"
     }
