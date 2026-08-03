@@ -354,7 +354,7 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
 
         self.assertIn("struct DailyAyurvedaSummaryRow", summary)
         self.assertIn("AyurvedaFoodFitPresentation.make(", summary)
-        self.assertIn('Text("Fit for \\(profileName)")', summary)
+        self.assertNotIn('Text("Fit for \\(profileName)")', summary)
 
         self.assertIn(
             "let constitutionRecord = "

@@ -337,8 +337,6 @@ struct DailyAyurvedaDetailView: View {
                     )
 
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Fit for \(profileName)")
-                            .font(.subheadline.weight(.semibold))
                         Label(fit.title, systemImage: fitIcon(fit.direction))
                             .font(.title3.weight(.semibold))
                             .foregroundStyle(fitColor(fit.direction))
