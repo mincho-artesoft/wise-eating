@@ -17,10 +17,21 @@ struct DailyAyurvedaSummaryRow: View {
         Button(action: onTap) {
             VStack(alignment: .leading, spacing: 10) {
                 HStack(spacing: 12) {
-                    Label("Daily Ayurveda", systemImage: "leaf.fill")
-                        .font(.headline)
-
-                    Spacer()
+                    VStack(spacing: 3) {
+                        fitScale
+                        HStack {
+                            Text("Poor")
+                            Spacer()
+                            Text("Mixed")
+                            Spacer()
+                            Text("Good")
+                        }
+                        .font(.caption2)
+                        .foregroundStyle(
+                            effectManager.currentGlobalAccentColor.opacity(0.62)
+                        )
+                    }
+                    .frame(maxWidth: .infinity)
 
                     VStack(alignment: .trailing, spacing: 2) {
                         Text("Fit")
@@ -33,8 +44,6 @@ struct DailyAyurvedaSummaryRow: View {
                             .foregroundStyle(fitColor)
                     }
                 }
-
-                Divider()
 
                 if let computed = computation.computed {
                     AyurvedaDoshaResultChips(
@@ -57,10 +66,44 @@ struct DailyAyurvedaSummaryRow: View {
             .contentShape(RoundedRectangle(cornerRadius: 20))
         }
         .buttonStyle(.plain)
-        .padding(.horizontal, 6)
+        .padding(.horizontal, 20)
         .accessibilityLabel(
             "Daily Ayurveda. Fit \(fitLabel). Open daily details."
         )
+    }
+
+    private var fitScale: some View {
+        GeometryReader { proxy in
+            ZStack(alignment: .leading) {
+                Capsule()
+                    .fill(
+                        LinearGradient(
+                            colors: [
+                                Color("AyurvedaAggravate"),
+                                Color("AyurvedaNeutral"),
+                                Color("AyurvedaPacify"),
+                            ],
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                    )
+                    .frame(height: 8)
+
+                Circle()
+                    .fill(fitColor)
+                    .frame(width: 16, height: 16)
+                    .overlay {
+                        Circle()
+                            .stroke(.white.opacity(0.85), lineWidth: 2)
+                    }
+                    .offset(
+                        x: max(0, (proxy.size.width - 16) * fitProgress)
+                    )
+            }
+            .frame(maxHeight: .infinity)
+        }
+        .frame(height: 16)
+        .accessibilityHidden(true)
     }
 
     private var fit: AyurvedaFoodFitPresentation? {
@@ -86,6 +129,11 @@ struct DailyAyurvedaSummaryRow: View {
         case .mixed: return "Mixed"
         case .lessSupportive: return "Poor"
         }
+    }
+
+    private var fitProgress: CGFloat {
+        guard let fit else { return 0.5 }
+        return CGFloat(min(1, max(0, (fit.score + 2) / 4)))
     }
 
     private var fitColor: Color {

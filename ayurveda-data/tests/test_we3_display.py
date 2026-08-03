@@ -381,13 +381,17 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
             summary.index("struct DailyAyurvedaDetailView")
         ]
 
-        self.assertIn('Label("Daily Ayurveda", systemImage: "leaf.fill")', row)
+        self.assertNotIn('Label("Daily Ayurveda"', row)
         self.assertIn('Text("Fit")', row)
-        self.assertIn("Divider()", row)
+        self.assertIn("private var fitScale", row)
+        self.assertIn("LinearGradient(", row)
+        self.assertIn('Text("Poor")', row)
+        self.assertIn('Text("Mixed")', row)
+        self.assertIn('Text("Good")', row)
         self.assertIn("AyurvedaDoshaResultChips(", row)
         self.assertEqual(row.count(".glassCardStyle(cornerRadius: 20)"), 1)
-        self.assertNotIn("Circle()", row)
-        self.assertIn(".padding(.horizontal, 6)", row)
+        self.assertNotIn("Divider()", row)
+        self.assertIn(".padding(.horizontal, 20)", row)
         self.assertIn(".frame(width: 44, height: 44)", rings)
         self.assertIn(".contentShape(Rectangle())", rings)
 
