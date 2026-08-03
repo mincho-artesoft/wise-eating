@@ -10,6 +10,7 @@ struct DailyAyurvedaSummaryRow: View {
     @ObservedObject private var effectManager = EffectManager.shared
 
     let computation: AyurvedaIngredientComputation
+    let profileDistribution: AyurvedaDoshaDistribution?
     let target: AyurvedaDoshaDistribution?
     let onTap: () -> Void
 
@@ -18,9 +19,21 @@ struct DailyAyurvedaSummaryRow: View {
             HStack(alignment: .top, spacing: 16) {
                 if let computed = computation.computed {
                     VStack(spacing: 8) {
-                        doshaScale(name: "Vata", value: computed.vata)
-                        doshaScale(name: "Pitta", value: computed.pitta)
-                        doshaScale(name: "Kapha", value: computed.kapha)
+                        doshaScale(
+                            name: "Vata",
+                            value: computed.vata,
+                            profileWeight: profileDistribution?.vata ?? 0
+                        )
+                        doshaScale(
+                            name: "Pitta",
+                            value: computed.pitta,
+                            profileWeight: profileDistribution?.pitta ?? 0
+                        )
+                        doshaScale(
+                            name: "Kapha",
+                            value: computed.kapha,
+                            profileWeight: profileDistribution?.kapha ?? 0
+                        )
                     }
                     .frame(maxWidth: .infinity)
                 } else {
@@ -57,9 +70,15 @@ struct DailyAyurvedaSummaryRow: View {
         )
     }
 
-    private func doshaScale(name: String, value: Int) -> some View {
+    private func doshaScale(
+        name: String,
+        value: Int,
+        profileWeight: Double
+    ) -> some View {
         let clampedValue = min(2, max(-2, value))
         let progress = CGFloat(2 - clampedValue) / 4
+        let relevance = profileRelevance(for: profileWeight)
+        let effectColor = doshaColor(for: clampedValue)
         return VStack(alignment: .leading, spacing: 3) {
             HStack(spacing: 6) {
                 Text(name)
@@ -67,18 +86,31 @@ struct DailyAyurvedaSummaryRow: View {
                 Spacer(minLength: 8)
                 Text(signedValue(clampedValue))
                     .font(.caption2.monospacedDigit().weight(.semibold))
-                    .foregroundStyle(doshaColor(for: clampedValue))
+                    .foregroundStyle(relevance > 0 ? effectColor : neutralColor)
+                    .opacity(0.55 + 0.45 * relevance)
             }
 
-            doshaTrack(progress: progress, color: doshaColor(for: clampedValue))
+            doshaTrack(
+                progress: progress,
+                color: effectColor,
+                relevance: relevance
+            )
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("\(name) effect \(signedValue(clampedValue))")
     }
 
-    private func doshaTrack(progress: CGFloat, color: Color) -> some View {
+    private func doshaTrack(
+        progress: CGFloat,
+        color: Color,
+        relevance: CGFloat
+    ) -> some View {
         GeometryReader { proxy in
             ZStack(alignment: .leading) {
+                Capsule()
+                    .fill(neutralColor.opacity(0.34))
+                    .frame(height: 8)
+
                 Capsule()
                     .fill(
                         LinearGradient(
@@ -92,10 +124,16 @@ struct DailyAyurvedaSummaryRow: View {
                         )
                     )
                     .frame(height: 8)
+                    .opacity(relevance)
 
                 Circle()
-                    .fill(color)
+                    .fill(neutralColor)
                     .frame(width: 12, height: 12)
+                    .overlay {
+                        Circle()
+                            .fill(color)
+                            .opacity(relevance)
+                    }
                     .overlay {
                         Circle()
                             .stroke(.white.opacity(0.85), lineWidth: 2)
@@ -112,6 +150,17 @@ struct DailyAyurvedaSummaryRow: View {
 
     private func signedValue(_ value: Int) -> String {
         value > 0 ? "+\(value)" : "\(value)"
+    }
+
+    private func profileRelevance(for weight: Double) -> CGFloat {
+        guard let profileDistribution else { return 0 }
+        let maximum = max(
+            profileDistribution.vata,
+            profileDistribution.pitta,
+            profileDistribution.kapha
+        )
+        guard maximum > 0 else { return 0 }
+        return CGFloat(min(1, max(0, weight / maximum)))
     }
 
     private func doshaColor(for value: Int) -> Color {

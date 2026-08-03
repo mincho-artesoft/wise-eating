@@ -1005,6 +1005,7 @@ struct NutritionsDetailView: View {
 
                             DailyAyurvedaSummaryRow(
                                 computation: dailyAyurvedaComputation,
+                                profileDistribution: dailyAyurvedaProfileResult?.distribution,
                                 target: dailyAyurvedaTarget,
                                 onTap: { presentRingDetail(.ayurveda) }
                             )
@@ -1043,6 +1044,7 @@ struct NutritionsDetailView: View {
 
                                     DailyAyurvedaSummaryRow(
                                         computation: dailyAyurvedaComputation,
+                                        profileDistribution: dailyAyurvedaProfileResult?.distribution,
                                         target: dailyAyurvedaTarget,
                                         onTap: { presentRingDetail(.ayurveda) }
                                     )

@@ -379,6 +379,7 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
 
     def test_daily_ayurveda_summary_is_one_card_and_pin_has_large_hit_target(self):
         summary = DAILY_AYURVEDA_SUMMARY.read_text()
+        nutrition_detail = NUTRITIONS_DETAIL.read_text()
         rings = RINGS_SUMMARY.read_text()
         row = summary[
             summary.index("struct DailyAyurvedaSummaryRow") :
@@ -389,9 +390,22 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         self.assertIn('Text("Fit")', row)
         self.assertIn("private func doshaScale", row)
         self.assertIn("private func doshaTrack", row)
-        self.assertIn('doshaScale(name: "Vata"', row)
-        self.assertIn('doshaScale(name: "Pitta"', row)
-        self.assertIn('doshaScale(name: "Kapha"', row)
+        self.assertIn('name: "Vata",\n                            value: computed.vata', row)
+        self.assertIn('name: "Pitta",\n                            value: computed.pitta', row)
+        self.assertIn('name: "Kapha",\n                            value: computed.kapha', row)
+        self.assertIn("let profileDistribution: AyurvedaDoshaDistribution?", row)
+        self.assertIn("profileWeight: profileDistribution?.vata ?? 0", row)
+        self.assertIn("profileWeight: profileDistribution?.pitta ?? 0", row)
+        self.assertIn("profileWeight: profileDistribution?.kapha ?? 0", row)
+        self.assertIn("private func profileRelevance", row)
+        self.assertIn("weight / maximum", row)
+        self.assertIn(".opacity(relevance)", row)
+        self.assertGreaterEqual(
+            nutrition_detail.count(
+                "profileDistribution: dailyAyurvedaProfileResult?.distribution"
+            ),
+            2,
+        )
         self.assertIn("LinearGradient(", row)
         self.assertNotIn('Text("Poor")', row)
         self.assertNotIn('Text("Mixed")', row)
