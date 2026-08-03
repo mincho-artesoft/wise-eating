@@ -186,6 +186,18 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         self.assertNotIn("Estimated Ayurveda", visible_sources)
         self.assertNotIn('== "Estimated"', visible_sources)
 
+    def test_added_food_rows_show_the_same_personal_fit_as_search(self):
+        food_row = FOOD_ROW.read_text()
+        constitution = CONSTITUTION.read_text()
+
+        self.assertIn(
+            "AyurvedaPersonalFitBadge(\n"
+            "                                        display: ayurvedaDisplay",
+            food_row,
+        )
+        self.assertIn("init(display: AyurvedaDisplay)", constitution)
+        self.assertIn("init(metadata: AyurvedaCanonicalSearchMetadata?)", constitution)
+
     def test_profile_editor_ayurveda_control_matches_section_style(self):
         profile_editor = PROFILE_EDITOR.read_text()
         constitution = CONSTITUTION.read_text()

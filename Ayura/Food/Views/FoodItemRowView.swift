@@ -153,6 +153,10 @@ struct FoodItemRowView: View {
 
                             if let ayurvedaDisplay {
                                 VStack(alignment: .leading, spacing: 6) {
+                                    AyurvedaPersonalFitBadge(
+                                        display: ayurvedaDisplay
+                                    )
+
                                     Text("Doshas")
                                         .font(.caption.weight(.semibold))
                                         .foregroundStyle(

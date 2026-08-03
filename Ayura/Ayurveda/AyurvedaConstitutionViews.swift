@@ -1406,26 +1406,52 @@ struct AyurvedaPersonalizedFoodFitView: View {
 struct AyurvedaPersonalFitBadge: View {
   @ObservedObject private var effectManager = EffectManager.shared
 
-  let metadata: AyurvedaCanonicalSearchMetadata?
+  private let vata: Int?
+  private let pitta: Int?
+  private let kapha: Int?
+  private let rasa: [String]
+  private let virya: String?
+  private let gunas: [String]
+  private let hasAyurvedaProfile: Bool
 
   @State private var target: AyurvedaDoshaDistribution?
 
+  init(metadata: AyurvedaCanonicalSearchMetadata?) {
+    vata = metadata?.doshaVata
+    pitta = metadata?.doshaPitta
+    kapha = metadata?.doshaKapha
+    rasa = metadata?.rasa ?? []
+    virya = metadata?.virya
+    gunas = metadata?.gunas ?? []
+    hasAyurvedaProfile = metadata != nil
+  }
+
+  init(display: AyurvedaDisplay) {
+    vata = display.vata
+    pitta = display.pitta
+    kapha = display.kapha
+    rasa = display.rasa
+    virya = display.virya
+    gunas = display.gunas
+    hasAyurvedaProfile = true
+  }
+
   var body: some View {
     Group {
-      if let metadata, let target {
+      if let vata, let pitta, let kapha, let target {
         let fit = AyurvedaFoodFitPresentation.make(
           target: target,
-          vata: metadata.doshaVata,
-          pitta: metadata.doshaPitta,
-          kapha: metadata.doshaKapha,
-          rasa: metadata.rasa,
-          virya: metadata.virya,
-          gunas: metadata.gunas
+          vata: vata,
+          pitta: pitta,
+          kapha: kapha,
+          rasa: rasa,
+          virya: virya,
+          gunas: gunas
         )
         Label(fit.title, systemImage: icon(for: fit.direction))
           .font(.caption2.weight(.semibold))
           .foregroundStyle(color(for: fit.direction))
-      } else if metadata == nil {
+      } else if !hasAyurvedaProfile {
         Label("No Ayurvedic profile", systemImage: "questionmark.circle")
           .font(.caption2)
           .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.7))
