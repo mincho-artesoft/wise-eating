@@ -8,7 +8,6 @@ enum PromptType: String, Codable, CaseIterable {
     case trainingViewМealPlan = "Training View Тraining Plan"
     case menu = "Menu"
     case workout = "Workout"
-    case diet = "Diet"
 }
 
 @Model

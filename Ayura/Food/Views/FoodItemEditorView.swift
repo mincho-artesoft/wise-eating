@@ -69,8 +69,6 @@ struct FoodItemEditorView: View {
     @State private var itemDescription: String
     @State private var selectedPhoto: PhotosPickerItem?
     @State private var photoData: Data?
-    @State private var selectedCategories: Set<FoodCategory.ID>
-    @State private var selectedDiets: Set<Diet.ID>
     @State private var selectedAllergens: Set<Allergen.ID>
     
     @State private var showMacros = true
@@ -83,7 +81,7 @@ struct FoodItemEditorView: View {
     @State private var showCarbDetails = false
     @State private var showSterols = false
     
-    enum OpenMenu { case none, category, diet, allergen }
+    enum OpenMenu { case none, allergen }
     @State private var openMenu: OpenMenu = .none
     
     @State private var macros: MacroForm
@@ -109,8 +107,6 @@ struct FoodItemEditorView: View {
     private var isImperial: Bool { GlobalState.measurementSystem == "Imperial" }
     private var servingUnit: String { isImperial ? "oz" : "g" }
     
-    @Query(sort: \Diet.name) private var allDiets: [Diet]
-
     init(dubFood: FoodItemCopy? = nil, food: FoodItem? = nil, profile: Profile? = nil, onDismiss: @escaping (FoodItem?) -> Void, isAIInit: Bool? = false) {
         self.dubFood = dubFood
         self.food = food
@@ -121,8 +117,6 @@ struct FoodItemEditorView: View {
         var initialDescription = ""
         var initialPhotoData: Data? = nil
         var initialMinAgeMonthsTxt = ""
-        var initialSelectedCategories = Set<FoodCategory.ID>()
-        var initialSelectedDiets = Set<Diet.ID>()
         var initialSelectedAllergens = Set<Allergen.ID>()
         var initialMacros = MacroForm()
         var initialLipids = LipidForm()
@@ -138,8 +132,6 @@ struct FoodItemEditorView: View {
             initialName = isAIInit! ? dub.name : "Copy of \(dub.name)"
             initialPhotoData = dub.photo
             initialDescription = dub.itemDescription ?? ""
-            initialSelectedCategories = Set(dub.category?.map(\.id) ?? [])
-            initialSelectedDiets = Set(dub.dietIDs ?? [])
             initialSelectedAllergens = Set(dub.allergens?.map(\.id) ?? [])
             initialMacros = MacroForm(from: dub.macronutrients?.toOriginal())
             initialLipids = LipidForm(from: dub.lipids?.toOriginal())
@@ -154,8 +146,6 @@ struct FoodItemEditorView: View {
             initialPhotoData = f.photo
             initialDescription = f.itemDescription ?? ""
             initialMinAgeMonthsTxt = f.minAgeMonths > 0 ? String(f.minAgeMonths) : ""
-            initialSelectedCategories = Set(f.category?.map(\.id) ?? [])
-            initialSelectedDiets = Set(f.diets?.map(\.id) ?? [])
             initialSelectedAllergens = Set(f.allergens?.map(\.id) ?? [])
             initialMacros = MacroForm(from: f.macronutrients)
             initialLipids = LipidForm(from: f.lipids)
@@ -171,8 +161,6 @@ struct FoodItemEditorView: View {
         _itemDescription = State(initialValue: initialDescription)
         _photoData = State(initialValue: initialPhotoData)
         _minAgeMonthsTxt = State(initialValue: initialMinAgeMonthsTxt)
-        _selectedCategories = State(initialValue: initialSelectedCategories)
-        _selectedDiets = State(initialValue: initialSelectedDiets)
         _selectedAllergens = State(initialValue: initialSelectedAllergens)
         _macros = State(initialValue: initialMacros)
         _lipids = State(initialValue: initialLipids)
@@ -350,7 +338,6 @@ struct FoodItemEditorView: View {
                 withAnimation(.easeInOut) {
                     self.itemDescription    = mapped.description
                     self.minAgeMonthsTxt    = mapped.minAgeMonthsTxt
-                    self.selectedCategories = mapped.categories
                     self.selectedAllergens  = mapped.allergens
                     self.macros             = mapped.macros
                     self.others             = mapped.others
@@ -360,8 +347,6 @@ struct FoodItemEditorView: View {
                     self.aminoAcids         = mapped.aminoAcids
                     self.carbDetails        = mapped.carbDetails
                     self.sterols            = mapped.sterols
-                    self.selectedDiets      = mapped.diets
-
                     if let weightGrams = mapped.others.weightG?.value {
                         let displayValue = isImperial ? UnitConversion.gToOz(weightGrams) : weightGrams
                         self.servingWeightString = GlobalState.formatDecimalString(String(displayValue))
@@ -514,47 +499,6 @@ struct FoodItemEditorView: View {
                 }
                 .id(FocusableField.minAge)
 
-                // Category
-                tagPicker(
-                    label: "Category",
-                    selection: $selectedCategories,
-                    items: FoodCategory.allCases.sorted { $0.rawValue < $1.rawValue },
-                    itemLabel: { $0.rawValue },
-                    menu: .category
-                )
-
-                // --- DIETS + WARNING ---
-                VStack(alignment: .leading, spacing: 4) {
-                    tagPicker(
-                        label: "Diets",
-                        selection: $selectedDiets,
-                        items: allDiets,
-                        itemLabel: { $0.name },
-                        menu: .diet
-                    )
-
-                    if showsDietMismatchWarning {
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text("⚠️ This food does not match any of the user's diets.")
-                                .font(.caption)
-                                .foregroundStyle(.orange)
-
-                            if !selectedDietNames.isEmpty {
-                                Text("Food diets: \(selectedDietNames)")
-                                    .font(.caption2)
-                                    .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
-                            }
-
-                            if !userDietNames.isEmpty {
-                                Text("User diets: \(userDietNames)")
-                                    .font(.caption2)
-                                    .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
-                            }
-                        }
-                        .fixedSize(horizontal: false, vertical: true)
-                    }
-                }
-
                 // --- ALLERGENS + WARNING ---
                 VStack(alignment: .leading, spacing: 4) {
                     tagPicker(
@@ -593,31 +537,11 @@ struct FoodItemEditorView: View {
         .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
     }
 
-    // MARK: - Profile Diet & Allergen Helpers
-
-    private var profileDietIDs: Set<Diet.ID> {
-        guard let profile else { return [] }
-        return Set(profile.diets.map(\.id))
-    }
+    // MARK: - Profile Allergen Helpers
 
     private var profileAllergenIDs: Set<Allergen.ID> {
         guard let profile else { return [] }
         return Set(profile.allergens.map(\.id))
-    }
-
-    private var selectedDietModels: [Diet] {
-        allDiets.filter { selectedDiets.contains($0.id) }
-    }
-
-    private var selectedDietNames: String {
-        let names = selectedDietModels.map(\.name).sorted()
-        return names.joined(separator: ", ")
-    }
-
-    private var userDietNames: String {
-        guard let profile else { return "" }
-        let names = profile.diets.map(\.name).sorted()
-        return names.joined(separator: ", ")
     }
 
     private var matchingProfileAllergens: [Allergen] {
@@ -640,15 +564,6 @@ struct FoodItemEditorView: View {
             .sorted()
         return names.joined(separator: ", ")
     }
-
-    private var showsDietMismatchWarning: Bool {
-        // Need both: user has diets AND food has diets
-        guard !profileDietIDs.isEmpty else { return false }
-        guard !selectedDiets.isEmpty else { return false }
-        // Show warning when there is no overlap
-        return selectedDiets.isDisjoint(with: profileDietIDs)
-    }
-
 
     private var photoPicker: some View {
         let imageData = photoData
@@ -996,10 +911,6 @@ struct FoodItemEditorView: View {
             
             // ... (другите присвоявания на свойства остават същите) ...
             item.photo = photoData
-            item.category = idsToEnums(selectedCategories, of: FoodCategory.self)
-            
-            let chosenDiets = allDiets.filter { selectedDiets.contains($0.id) }
-            item.diets = chosenDiets.isEmpty ? nil : chosenDiets
             
             item.allergens = idsToEnums(selectedAllergens, of: Allergen.self)
             item.itemDescription = itemDescription.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty()
@@ -1464,11 +1375,6 @@ struct FoodItemEditorView: View {
     private var dropDownLayer: some View {
         Group {
             switch openMenu {
-            case .category:
-                dropdownMenu(selection: $selectedCategories, items: FoodCategory.allCases.sorted { $0.rawValue < $1.rawValue }, label: { $0.rawValue })
-            case .diet:
-                // --- CORRECTION: Use `allDiets` from query ---
-                dropdownMenu(selection: $selectedDiets, items: allDiets, label: { $0.name })
             case .allergen:
                 dropdownMenu(selection: $selectedAllergens, items: Allergen.allCases, label: { $0.rawValue })
             case .none:
@@ -1696,7 +1602,7 @@ extension FoodItemEditorView {
                 let minX = radius
                 let maxX = size.width  - radius
                 let minY = radius + safeArea.top
-                let maxY = size.height - radius - safeArea.bottom - 80
+                let maxY = size.height - radius - safeArea.bottom
                 
                 let clampedCenterX = min(max(rawCenterX, minX), maxX)
                 let clampedCenterY = min(max(rawCenterY, minY), maxY)
@@ -1916,8 +1822,6 @@ extension FoodItemEditorView {
 extension FoodItemEditorView.OpenMenu {
     var title: String {
         switch self {
-        case .category: return "Category"
-        case .diet: return "Diets"
         case .allergen: return "Allergens"
         case .none: return ""
         }

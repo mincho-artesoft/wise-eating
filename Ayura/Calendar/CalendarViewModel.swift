@@ -110,6 +110,12 @@ final class CalendarViewModel: ObservableObject {
             name: .EKEventStoreChanged,
             object: eventStore
         )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleAyurvedaConstitutionStorageChanged(_:)),
+            name: .ayurvedaConstitutionStorageDidChange,
+            object: nil
+        )
     }
 
     private func isProfileCalendarTitle(_ title: String) -> Bool {
@@ -136,9 +142,18 @@ final class CalendarViewModel: ObservableObject {
         reloadCalendars()
     }
 
+    @objc private func handleAyurvedaConstitutionStorageChanged(
+        _ notification: Notification
+    ) {
+        guard let profileID = notification.object as? UUID else { return }
+        Task { @MainActor [weak self] in
+            await self?.syncAyurvedaConstitutionMetadata(for: profileID)
+        }
+    }
+
     @MainActor
-    func updateSelectedCalendars(for profiles: [Profile]) {
-        let desired = Set(profiles.compactMap { $0.calendarID })
+    func updateSelectedCalendar(for profile: Profile?) {
+        let desired = Set([profile?.calendarID].compactMap { $0 })
 
         var changed = false
         for key in calendarsDict.keys {
@@ -748,6 +763,31 @@ extension CalendarViewModel {
                 if deletedProfileUUIDs.contains(profileUUID.uuidString) { continue }
                 renameCalendarIfNeeded(calendar, to: "\(payload.name)\(profileCalendarSuffix)")
 
+                AyurvedaConstitutionStore.restore(
+                    payload.ayurvedaConstitution,
+                    deletedAt: payload.ayurvedaConstitutionDeletedAt,
+                    for: profileUUID
+                )
+
+                let localConstitution =
+                    AyurvedaConstitutionStore.record(for: profileUUID)
+                let localConstitutionDeletionDate =
+                    AyurvedaConstitutionStore.deletionDate(for: profileUUID)
+                if localConstitution != payload.ayurvedaConstitution
+                    || localConstitutionDeletionDate
+                        != payload.ayurvedaConstitutionDeletedAt
+                {
+                    var updatedPayload = payload
+                    updatedPayload.ayurvedaConstitution = localConstitution
+                    updatedPayload.ayurvedaConstitutionDeletedAt =
+                        localConstitutionDeletionDate
+                    await createOrUpdateMetadataEvent(
+                        profileUUID: profileUUID,
+                        payload: updatedPayload,
+                        in: calendar
+                    )
+                }
+
                 let existingProfileDescriptor = FetchDescriptor<Profile>(predicate: #Predicate { $0.id == profileUUID })
                 if let existingCount = try? context.fetchCount(existingProfileDescriptor), existingCount > 0 { continue }
                 if recentlyDeletedCalendarIDs.contains(calendar.calendarIdentifier) { continue }
@@ -757,21 +797,12 @@ extension CalendarViewModel {
                 let vitamins = allVitamins.filter { payload.priorityVitaminIDs.contains($0.id) }
                 let minerals = allMinerals.filter { payload.priorityMineralIDs.contains($0.id) }
                 
-                let dietNames = Set(payload.dietIDs)
-                let diets: [Diet]
-                if !dietNames.isEmpty {
-                    let predicate = #Predicate<Diet> { diet in dietNames.contains(diet.name) }
-                    diets = (try? context.fetch(FetchDescriptor<Diet>(predicate: predicate))) ?? []
-                } else {
-                    diets = []
-                }
-
                 for meal in payload.meals where meal.modelContext == nil { context.insert(meal) }
 
                 let newProfile = Profile(
                     name: payload.name, birthday: payload.birthday, gender: payload.gender, weight: payload.weight, height: payload.height,
-                    meals: payload.meals, activityLevel: payload.activityLevel, isPregnant: payload.isPregnant, isLactating: payload.isLactating,
-                    calendarID: calendar.calendarIdentifier, priorityVitamins: vitamins, priorityMinerals: minerals, diets: diets,
+                    meals: payload.meals, isPregnant: payload.isPregnant, isLactating: payload.isLactating,
+                    calendarID: calendar.calendarIdentifier, priorityVitamins: vitamins, priorityMinerals: minerals,
                     allergens: payload.allergens, photoData: nil
                 )
                 newProfile.id = profileUUID
@@ -1168,9 +1199,56 @@ extension CalendarViewModel {
         print("   ... ✍️ Updating metadata event in calendar '\(calendar.title)'")
         
         let payload = ProfilePayload(from: profile)
+        await createOrUpdateMetadataEvent(
+            profileUUID: profile.id,
+            payload: payload,
+            in: calendar
+        )
+    }
+
+    @MainActor
+    private func syncAyurvedaConstitutionMetadata(for profileID: UUID) async {
+        guard isCalendarAccessGranted() else {
+            print("   ... ⚠️ Calendar access unavailable; Ayurveda metadata remains local.")
+            return
+        }
+
+        let profileCalendars = eventStore.calendars(for: .event).filter {
+            isProfileCalendarTitle($0.title)
+                && !deletedCalendarIDs.contains($0.calendarIdentifier)
+        }
+
+        for calendar in profileCalendars {
+            guard let (calendarProfileID, decodedPayload) =
+                    await reconstructProfileData(from: calendar),
+                  calendarProfileID == profileID
+            else {
+                continue
+            }
+
+            var payload = decodedPayload
+            payload.ayurvedaConstitution =
+                AyurvedaConstitutionStore.record(for: profileID)
+            payload.ayurvedaConstitutionDeletedAt =
+                AyurvedaConstitutionStore.deletionDate(for: profileID)
+            await createOrUpdateMetadataEvent(
+                profileUUID: calendarProfileID,
+                payload: payload,
+                in: calendar
+            )
+            return
+        }
+    }
+
+    @MainActor
+    private func createOrUpdateMetadataEvent(
+        profileUUID: UUID,
+        payload: ProfilePayload,
+        in calendar: EKCalendar
+    ) async {
         var invisiblePayload: String?
         do {
-            let profileUUIDString = profile.id.uuidString
+            let profileUUIDString = profileUUID.uuidString
             let jsonData = try JSONEncoder().encode(payload)
             if let jsonString = String(data: jsonData, encoding: .utf8),
                let encodedPart = OptimizedInvisibleCoder.encode(from: "\(profileUUIDString):::\(jsonString)") {

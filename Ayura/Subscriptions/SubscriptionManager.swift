@@ -310,7 +310,7 @@ class SubscriptionManager: ObservableObject {
     var maxProfilesAllowed: Int {
           switch subscriptionStatus {
           case .base, .removeAds:
-              return 2
+              return 1
           case .advance:
               return 4
           case .premium:
@@ -339,41 +339,6 @@ class SubscriptionManager: ObservableObject {
               return lhs.createdAt < rhs.createdAt
           }
 
-          switch subscriptionStatus {
-          case .premium:
-              let maxCount = 12
-              return Set(sorted.prefix(maxCount).map { $0.id })
-
-          case .advance:
-              let maxCount = 4
-              return Set(sorted.prefix(maxCount).map { $0.id })
-
-          case .base, .removeAds:
-              var adultTaken = false   // без възрастово ограничение
-              var childTaken = false   // до 14 г.
-              var active: [UUID] = []
-
-              for profile in sorted {
-                  let isChild = profile.age <= 14
-
-                  if isChild {
-                      if !childTaken {
-                          childTaken = true
-                          active.append(profile.id)
-                      }
-                  } else {
-                      if !adultTaken {
-                          adultTaken = true
-                          active.append(profile.id)
-                      }
-                  }
-
-                  if adultTaken && childTaken {
-                      break
-                  }
-              }
-
-              return Set(active)
-          }
+          return Set(sorted.prefix(maxProfilesAllowed).map { $0.id })
       }
 }

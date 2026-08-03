@@ -10,10 +10,6 @@ class UserSettings: ObservableObject {
     /// Последно избраният профил
     var lastSelectedProfile: Profile?
 
-    /// Списък с допълнително избрани профили
-    @Relationship(deleteRule: .nullify)
-    var lastSelectedProfiles: [Profile] = []
-    
     // MARK: - General Settings
     var isAIButtonEnabled: Bool = true
     
@@ -25,7 +21,6 @@ class UserSettings: ObservableObject {
 
     init(
         lastSelectedProfile: Profile? = nil,
-        lastSelectedProfiles: [Profile] = [],
         isAIButtonEnabled: Bool = true,
         generateLipids: Bool = false,
         generateAminoAcids: Bool = false,
@@ -33,7 +28,6 @@ class UserSettings: ObservableObject {
         generateSterols: Bool = false
     ) {
         self.lastSelectedProfile   = lastSelectedProfile
-        self.lastSelectedProfiles  = lastSelectedProfiles
         self.isAIButtonEnabled     = isAIButtonEnabled 
         self.generateLipids = generateLipids
         self.generateAminoAcids = generateAminoAcids

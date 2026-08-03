@@ -8,7 +8,6 @@ import SwiftData
   public var foodId: Int
   public var foodIsPlaceholder: Bool = false
   public var name: String
-  public var category: String
   public var doshaVata: Int
   public var doshaPitta: Int
   public var doshaKapha: Int
@@ -54,7 +53,6 @@ import SwiftData
     foodId: Int,
     foodIsPlaceholder: Bool = false,
     name: String,
-    category: String,
     doshaVata: Int,
     doshaPitta: Int,
     doshaKapha: Int,
@@ -99,7 +97,6 @@ import SwiftData
     self.foodId = foodId
     self.foodIsPlaceholder = foodIsPlaceholder
     self.name = name
-    self.category = category
     self.doshaVata = doshaVata
     self.doshaPitta = doshaPitta
     self.doshaKapha = doshaKapha

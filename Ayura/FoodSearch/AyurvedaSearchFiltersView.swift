@@ -2,6 +2,7 @@ import SwiftUI
 
 struct AyurvedaSearchFiltersView: View {
     @Environment(\.dismiss) private var dismiss
+    @ObservedObject private var effectManager = EffectManager.shared
     @Binding var filters: AyurvedaSearchFilters
 
     private let rasaValues = [
@@ -12,12 +13,6 @@ struct AyurvedaSearchFiltersView: View {
         "dense", "dry", "heavy", "light", "liquid", "oily", "penetrating",
         "rough", "sharp", "slimy", "smooth", "soft",
     ]
-    private let categoryValues = [
-        "animal", "beverage", "classical", "dairy", "dry-fruit-nut",
-        "everyday", "fermented", "fruit", "grain", "herb", "international",
-        "leafy-green", "legume", "medicinal", "oil-fat", "preparation",
-        "regional", "salt-mineral", "seed", "spice", "sweetener", "vegetable",
-    ]
 
     var body: some View {
         NavigationStack {
@@ -25,7 +20,9 @@ struct AyurvedaSearchFiltersView: View {
                 Section {
                     Text("Dosha choices change ranking only. Foods that aggravate the selected dosha remain visible.")
                         .font(.footnote)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(
+                            effectManager.currentGlobalAccentColor.opacity(0.72)
+                        )
                 }
 
                 Section("Dosha effect") {
@@ -63,7 +60,9 @@ struct AyurvedaSearchFiltersView: View {
                     )
                     Text("Uses digestibility and agni effect together.")
                         .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(
+                            effectManager.currentGlobalAccentColor.opacity(0.72)
+                        )
                 }
 
                 Section("Gunas · qualities") {
@@ -74,14 +73,6 @@ struct AyurvedaSearchFiltersView: View {
                     ) { toggle($0, in: \.gunas) }
                 }
 
-                Section("Category") {
-                    Picker("Food category", selection: $filters.category) {
-                        Text("Any category").tag(String?.none)
-                        ForEach(categoryValues, id: \.self) { value in
-                            Text(displayName(value)).tag(String?.some(value))
-                        }
-                    }
-                }
             }
             .navigationTitle("Ayurvedic filters")
             .navigationBarTitleDisplayMode(.inline)
@@ -99,6 +90,8 @@ struct AyurvedaSearchFiltersView: View {
                 }
             }
         }
+        .tint(effectManager.currentGlobalAccentColor)
+        .foregroundStyle(effectManager.currentGlobalAccentColor)
     }
 
     private func doshaRow(_ dosha: AyurvedaSearchDosha) -> some View {
@@ -132,8 +125,8 @@ struct AyurvedaSearchFiltersView: View {
                 }
                 .foregroundStyle(
                     filters.preference(for: dosha) == nil
-                        ? Color.secondary
-                        : Color.accentColor
+                        ? effectManager.currentGlobalAccentColor.opacity(0.72)
+                        : effectManager.currentGlobalAccentColor
                 )
             }
         }
@@ -178,6 +171,8 @@ struct AyurvedaSearchFiltersView: View {
 }
 
 struct AyurvedaSearchResultSummary: View {
+    @ObservedObject private var effectManager = EffectManager.shared
+
     let metadata: AyurvedaCanonicalSearchMetadata
     let filters: AyurvedaSearchFilters
 
@@ -219,13 +214,19 @@ struct AyurvedaSearchResultSummary: View {
                     Image(systemName: "sparkles")
                 }
                 .font(.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(
+                    effectManager.currentGlobalAccentColor.opacity(0.72)
+                )
             }
 
             if let sourceCaption = metadata.sourceCaption {
                 Label(sourceCaption, systemImage: "arrow.triangle.branch")
                     .font(.caption2)
-                    .foregroundStyle(metadata.isInferred ? .orange : .secondary)
+                    .foregroundStyle(
+                        metadata.isInferred
+                            ? Color.orange
+                            : effectManager.currentGlobalAccentColor.opacity(0.72)
+                    )
             }
 
             if metadata.confidenceAyur < 0.6 {
@@ -246,12 +247,17 @@ struct AyurvedaSearchResultSummary: View {
     ) -> some View {
         Text(text)
             .font(.caption2.weight(isEmphasized ? .semibold : .regular))
-            .foregroundStyle(isEmphasized ? Color.accentColor : Color.secondary)
+            .foregroundStyle(
+                effectManager.currentGlobalAccentColor.opacity(
+                    isEmphasized ? 1 : 0.72
+                )
+            )
             .padding(.horizontal, 7)
             .padding(.vertical, 4)
             .background(
-                (isEmphasized ? Color.accentColor : Color.secondary)
-                    .opacity(0.11),
+                effectManager.currentGlobalAccentColor.opacity(
+                    isEmphasized ? 0.16 : 0.09
+                ),
                 in: Capsule()
             )
     }

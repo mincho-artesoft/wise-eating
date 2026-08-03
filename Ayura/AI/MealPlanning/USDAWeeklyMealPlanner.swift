@@ -852,7 +852,6 @@ struct PlannerConceptExclusions: Sendable {
 
     func excludes(
         foodID: Int,
-        diets: Set<String>,
         allergens: Set<String>
     ) -> Bool {
         if explicitFoodIDs.contains(foodID) {
@@ -862,7 +861,6 @@ struct PlannerConceptExclusions: Sendable {
             isAuthoritativeMember(
                 foodID: foodID,
                 concept: concept,
-                diets: diets,
                 allergens: allergens
             )
         }
@@ -905,33 +903,29 @@ struct PlannerConceptExclusions: Sendable {
     private func isAuthoritativeMember(
         foodID: Int,
         concept: String,
-        diets: Set<String>,
         allergens: Set<String>
     ) -> Bool {
         if !seededFoodIDs.contains(foodID) {
             return FoodConcepts.shared.members(of: concept)
                 .contains(Int32(foodID))
         }
-        return seededSafetyMatches(
-            diets: diets,
-            allergens: allergens,
-            concept: concept
-        )
+        if concept == "meat" {
+            return FoodConcepts.shared.members(of: concept).contains(Int32(foodID))
+        }
+        return seededSafetyMatches(allergens: allergens, concept: concept)
     }
 
     private func seededSafetyMatches(
         _ food: CompactFoodItem,
         concept: String
     ) -> Bool {
-        seededSafetyMatches(
-            diets: food.diets,
-            allergens: food.allergens,
-            concept: concept
-        )
+        if concept == "meat" {
+            return FoodConcepts.shared.members(of: concept).contains(Int32(food.id))
+        }
+        return seededSafetyMatches(allergens: food.allergens, concept: concept)
     }
 
     private func seededSafetyMatches(
-        diets: Set<String>,
         allergens: Set<String>,
         concept: String
     ) -> Bool {
@@ -964,8 +958,6 @@ struct PlannerConceptExclusions: Sendable {
             return !allergens.isDisjoint(
                 with: ["Crustaceans", "Molluscs"]
             )
-        case "meat":
-            return !diets.contains("Vegetarian")
         default:
             // WE-8 has no equivalent canonical predicate for this concept.
             return false
@@ -1023,19 +1015,6 @@ public final class USDAWeeklyMealPlanner: Sendable {
         let interpretedPrompts: InterpretedPrompts
         let caveat: String?
         let usedFallback: Bool
-    }
-
-    private func mappedDiet(for pattern: DietPattern) -> DietType? {
-        switch pattern {
-        case .omnivore:
-            return nil
-        case .vegetarian, .eggetarian, .jainSattvic:
-            return .vegetarian
-        case .vegan:
-            return .vegan
-        case .pescatarian:
-            return .pescatarian
-        }
     }
 
     private func mappedAllergens(for tags: [AllergenTag]) -> Set<Allergen> {
@@ -1101,40 +1080,6 @@ public final class USDAWeeklyMealPlanner: Sendable {
 
     private func interpretationGoals(for request: ParsedRequest) -> InterpretedPrompts {
         var interpreted = InterpretedPrompts()
-
-        if let diet = mappedDiet(for: request.diet) {
-            switch request.diet {
-            case .eggetarian:
-                interpreted.qualitativeGoals.append(
-                    "Follow the existing \(diet.rawValue) diet while allowing eggs"
-                )
-            case .jainSattvic:
-                interpreted.qualitativeGoals.append(
-                    "Follow the existing \(diet.rawValue) diet with Jain sattvic preferences"
-                )
-            default:
-                interpreted.qualitativeGoals.append(
-                    "Follow the existing \(diet.rawValue) diet"
-                )
-            }
-        }
-
-        switch request.goal {
-        case .maintain:
-            interpreted.qualitativeGoals.append("Maintain current weight")
-        case .weightLoss:
-            interpreted.qualitativeGoals.append("Support gradual weight loss")
-        case .weightGain:
-            interpreted.qualitativeGoals.append("Support gradual weight gain")
-        case .muscleGain:
-            interpreted.qualitativeGoals.append("Support muscle gain")
-        case .digestion:
-            interpreted.qualitativeGoals.append("Prioritize comfortable digestion")
-        case .energy:
-            interpreted.qualitativeGoals.append("Prioritize sustained energy")
-        case .unspecified:
-            break
-        }
 
         if request.statedKcal > 0 {
             interpreted.qualitativeGoals.append(
@@ -1236,12 +1181,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
             }
         )
 
-        let maintenance = Int(
-            TDEECalculator.calculate(
-                for: profile,
-                activityLevel: profile.activityLevel
-            ).rounded()
-        )
+        let maintenance = Int(TDEECalculator.calculate(for: profile).rounded())
         let sanitized = RequestSanitizer.sanitize(
             outcome.request,
             computedMaintenanceKcal: maintenance
@@ -1339,7 +1279,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
         func aiSplitSinglePrompt(_ single: String) async -> [String] {
             let instructions = Instructions {
                 """
-                You split messy, compound diet requests into atomic, standalone directives.
+                You split messy, compound meal-planning requests into atomic, standalone directives.
                 RULES:
                 - Each unit MUST express exactly one requirement (frequency, inclusion/exclusion, replacement, meal-time).
                 - Preserve negations (“no”, “avoid”, “without”) and numeric patterns (“once every 3 days”, “daily”).
@@ -1532,7 +1472,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
         
         let instructions = Instructions {
             """
-            You reconcile a list of atomic diet directives with the user's raw prompts and the extracted food lists.
+            You reconcile a list of atomic meal-planning directives with the user's raw prompts and the extracted food lists.
             GOALS:
             - Preserve the user's explicit foods EXACTLY as written in the raw prompts unless they are clear plural or casing variants. Do NOT replace or substitute them with different foods.
             - If a food is negated in any raw prompt (using terms like 'no', 'avoid', or 'without'), ensure it appears in the excludedFoods list unless it is also explicitly required for specific meals or days.
@@ -2789,7 +2729,6 @@ public final class USDAWeeklyMealPlanner: Sendable {
                         if (isSalad(f.name) || isFruit(f.name)) && !isExcluded(f.name)
                             && !exclusions.excludes(
                                 foodID: f.id,
-                                diets: Set((f.diets ?? []).map(\.name)),
                                 allergens: Set((f.allergens ?? []).map(\.rawValue))
                             )
                             && !excludedFoodIds.contains(f.id) {
@@ -3074,7 +3013,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
     
     @MainActor private func fetchFoodItem(by id: PersistentIdentifier) -> FoodItem? { let ctx = ModelContext(self.container); return ctx.model(for: id) as? FoodItem }
     private func logInterpretedGoals(_ interpreted: InterpretedPrompts, onLog: (@Sendable (String) -> Void)?) { for goal in interpreted.numericalGoals { onLog?("  -> Interpreted numerical goal: \(goal.nutrient.rawValue) \(goal.constraint) \(goal.value)g") }; for goal in interpreted.qualitativeGoals { onLog?("  -> Interpreted qualitative goal: \(goal)") }; for request in interpreted.structuralRequests { onLog?("  -> Interpreted structural request: \(request)") } }
-    private func estimatedDailyCalories(for p: Profile) -> Double { let ageY = Calendar.current.dateComponents([.year], from: p.birthday, to: .now).year ?? 30; let w = max(20, p.weight); let h = max(120, p.height); let base = (p.gender.lowercased() == "female") ? (10*w + 6.25*h - 5*Double(ageY) - 161) : (10*w + 6.25*h - 5*Double(ageY) + 5); let mult = p.activityLevel.rawValue; var tdee = base * mult; if p.isPregnant { tdee += 300 }; if p.isLactating { tdee += 500 }; return max(1400, tdee.rounded()) }
+    private func estimatedDailyCalories(for p: Profile) -> Double { let ageY = Calendar.current.dateComponents([.year], from: p.birthday, to: .now).year ?? 30; let w = max(20, p.weight); let h = max(120, p.height); let base = (p.gender.lowercased() == "female") ? (10*w + 6.25*h - 5*Double(ageY) - 161) : (10*w + 6.25*h - 5*Double(ageY) + 5); var tdee = base * 1.2; if p.isPregnant { tdee += 300 }; if p.isLactating { tdee += 500 }; return max(1400, tdee.rounded()) }
     private func logPreview(_ days: [MealPlanPreviewDay]) { for day in days { print("  -> Day \(day.dayIndex):"); for meal in day.meals { let title = meal.descriptiveTitle ?? meal.name; print("    - Meal: \(meal.name) ('\(title)') (\(meal.items.count) items, \(Int(meal.kcalTotal)) kcal)"); for item in meal.items { print("      - \(item.name), \(Int(item.grams))g, \(Int(item.kcal)) kcal") } } } }
     
     private func mealSignature(_ meal: ConceptualMeal) -> String {
@@ -3425,19 +3364,19 @@ extension USDAWeeklyMealPlanner {
     
     @available(iOS 26.0, *)
         @MainActor
-        private func aiBatchClassifyFoods(
+        private func aiBatchAssignFoodPortions(
             names: [String],
             onLog: (@Sendable (String) -> Void)?
-        ) async -> [String: AIFoodPortionCategory] {
+        ) async -> [String: AIFoodPortionKind] {
             guard !names.isEmpty else { return [:] }
             
             let uniqueNames = Array(Set(names)).sorted()
             
             let session = LanguageModelSession(instructions: Instructions {
                 """
-                You are a nutritional data assistant. Classify food items for portion control.
+                You are a nutritional data assistant. Assign a portion-control rule to each food item.
                 
-                CATEGORIES:
+                PORTION TYPES:
                 1. **Protein**: Meat, fish, eggs, tofu, seitan.
                 2. **Starchy Carb**: Rice, pasta, bread, potatoes, corn, oats, beans/lentils.
                 3. **Fat/Oil**: Pure fats like Butter, Olive Oil, Ghee, Coconut Oil.
@@ -3449,15 +3388,15 @@ extension USDAWeeklyMealPlanner {
                 9. **Salad**: Leafy greens mixes.
                 10. **Dairy**: Milk (Drink), Cheese/Yogurt (Solid).
                 
-                Return a JSON map of Name -> Category.
+                Return a JSON map of Name -> Portion Type.
                 """
             })
             if PlannerTelemetry.isEnabled {
-                await PlannerTelemetry.shared.noteSession(site: "aiBatchClassifyFoods")
+                await PlannerTelemetry.shared.noteSession(site: "aiBatchAssignFoodPortions")
             }
             
             let prompt = """
-            Classify these foods:
+            Assign portion types to these foods:
             \(uniqueNames.map { "- \($0)" }.joined(separator: "\n"))
             """
             
@@ -3470,22 +3409,22 @@ extension USDAWeeklyMealPlanner {
                 }
                 let response = try await session.respond(
                     to: prompt,
-                    generating: AIBatchFoodClassificationResponse.self,
+                    generating: AIBatchFoodPortionAssignments.self,
                     includeSchemaInPrompt: true,
                     options: GenerationOptions(sampling: .greedy)
                 )
                 if let startedAt = telemetryRespondStartedAt {
                     await PlannerTelemetry.shared.noteRespond(
-                        site: "aiBatchClassifyFoods",
+                        site: "aiBatchAssignFoodPortions",
                         ok: true,
                         ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
                     )
                     telemetryRespondRecorded = true
                 }
                 
-                var map: [String: AIFoodPortionCategory] = [:]
-                for item in response.content.classifications {
-                    map[item.foodName.lowercased()] = item.category
+                var map: [String: AIFoodPortionKind] = [:]
+                for item in response.content.assignments {
+                    map[item.foodName.lowercased()] = item.kind
                 }
                 
                 // Fallback
@@ -3497,12 +3436,12 @@ extension USDAWeeklyMealPlanner {
             } catch {
                 if let startedAt = telemetryRespondStartedAt, !telemetryRespondRecorded {
                     await PlannerTelemetry.shared.noteRespond(
-                        site: "aiBatchClassifyFoods",
+                        site: "aiBatchAssignFoodPortions",
                         ok: false,
                         ms: Double(DispatchTime.now().uptimeNanoseconds - startedAt) / 1_000_000
                     )
                 }
-                onLog?("⚠️ AI Classification failed. Defaults applied.")
+                onLog?("⚠️ AI portion assignment failed. Defaults applied.")
                 return [:]
             }
         }
@@ -3526,23 +3465,15 @@ extension USDAWeeklyMealPlanner {
                 }
             }
             
-            // 2. Класификация
-            let categoryMap = await aiBatchClassifyFoods(names: Array(allFoodNames), onLog: onLog)
+            // 2. Правила за порции
+            let portionKindByName = await aiBatchAssignFoodPortions(names: Array(allFoodNames), onLog: onLog)
             
             // 3. Helpers
             func clamp(_ x: Double, _ lo: Double, _ hi: Double) -> Double { max(lo, min(hi, x)) }
             func round5(_ x: Double) -> Double { (x / 5.0).rounded() * 5.0 }
             
-            // Profile logic
-            let goal = profile.goal
-            let (preferLower, preferHighProtein, preferHigherCarb) = (
-                goal == .weightLoss,
-                [.muscleGain, .strength, .injuryRecovery].contains(goal),
-                [.endurance, .sportPerformance].contains(goal)
-            )
-            
-            let proteinMax = preferHighProtein ? 220.0 : (preferLower ? 150.0 : 180.0)
-            let starchHi   = preferHigherCarb ? 240.0 : (preferLower ? 150.0 : 180.0)
+            let proteinMax = 180.0
+            let starchHi = 180.0
             
             // 4. Обхождане и обновяване
             for d in 0..<newPlan.days.count {
@@ -3550,16 +3481,16 @@ extension USDAWeeklyMealPlanner {
                     for c in 0..<newPlan.days[d].meals[m].components.count {
                         let component = newPlan.days[d].meals[m].components[c]
                         let key = component.name.lowercased()
-                        let category = categoryMap[key] ?? .other
+                        let portionKind = portionKindByName[key] ?? .other
                         
                         var g = component.grams
                         
-                        switch category {
+                        switch portionKind {
                         case .protein:
                             g = clamp(g, 90.0, proteinMax)
                             
                         case .starchyCarb:
-                            g = clamp(g, preferLower ? 80.0 : 90.0, starchHi)
+                            g = clamp(g, 90.0, starchHi)
                             
                         case .dairyDrink:
                             g = clamp(g, 200.0, 300.0)
@@ -3568,11 +3499,11 @@ extension USDAWeeklyMealPlanner {
                             if key.contains("yogurt") || key.contains("skyr") || key.contains("quark") {
                                 g = clamp(g, 120.0, 200.0)
                             } else {
-                                g = clamp(g, preferLower ? 20.0 : 30.0, 60.0)
+                                g = clamp(g, 30.0, 60.0)
                             }
                             
                         case .nutOrSeed:
-                            g = clamp(g, preferLower ? 10.0 : 15.0, 40.0)
+                            g = clamp(g, 15.0, 40.0)
                             
                         case .fruit:
                             g = clamp(g, 100.0, 180.0)
@@ -3612,7 +3543,7 @@ extension USDAWeeklyMealPlanner {
                         }
                         
                         // Закръгляме, но за сухите подправки запазваме прецизност
-                        if category == .spiceOrHerb && g < 5.0 {
+                        if portionKind == .spiceOrHerb && g < 5.0 {
                             newPlan.days[d].meals[m].components[c].grams = (g * 2).rounded() / 2
                         } else {
                             newPlan.days[d].meals[m].components[c].grams = round5(g)
@@ -3621,7 +3552,7 @@ extension USDAWeeklyMealPlanner {
                 }
             }
             
-            onLog?("✅ Applied AI-based portion clamping with extended categories.")
+            onLog?("✅ Applied AI-based portion clamping.")
             return newPlan
         }
 }

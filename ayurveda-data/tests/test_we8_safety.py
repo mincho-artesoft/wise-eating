@@ -9,7 +9,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 BUILD_SEED_PATH = ROOT / "ayurveda-data" / "build_seed.py"
-KNOWLEDGE_BASE = ROOT / "Ayura" / "FoodSearch" / "SearchKnowledgeBase.swift"
 GOLDEN = ROOT / "ayurveda-data" / "tests" / "fixtures" / "we4_golden_queries.json"
 SPEC = importlib.util.spec_from_file_location("build_seed_we8", BUILD_SEED_PATH)
 assert SPEC and SPEC.loader
@@ -142,32 +141,6 @@ class WE8SafetyDerivationTests(unittest.TestCase):
                 recipe["id"],
             )
 
-    def test_dairy_filters_exclude_lassi_kheer_and_ghee_recipe_classes(self):
-        for dravya_id in ("dravya.lassi-digestive", "dravya.lassi-sweet"):
-            safety = self.dravya_safety[dravya_id]
-            self.assertIn("Milk", safety["allergens"])
-            self.assertNotIn("Dairy-Free", safety["diets"])
-
-        for recipe_id in (
-            "recipe.amaranth-kheer",
-            "recipe.classic-mung-kitchari",
-        ):
-            safety = self.recipe_safety[recipe_id]
-            self.assertIn("Milk", safety["allergens"])
-            self.assertNotIn("Dairy-Free", safety["diets"])
-
-    def test_vegan_excludes_ghee_honey_and_dairy_recipes(self):
-        for recipe_id in (
-            "recipe.amaranth-kheer",
-            "recipe.classic-mung-kitchari",
-            "recipe.ginger-lemon-honey-tea",
-        ):
-            self.assertNotIn("Vegan", self.recipe_safety[recipe_id]["diets"])
-        self.assertIn(
-            "Vegan",
-            self.recipe_safety["recipe.grishma-fennel-kitchari"]["diets"],
-        )
-
     def test_honey_dravyas_and_recipes_have_minimum_age_twelve(self):
         for dravya_id in build_seed.HONEY_DRAVYA_IDS:
             self.assertGreaterEqual(
@@ -244,11 +217,6 @@ class WE8PreseedSafetyTests(unittest.TestCase):
                 item["id"],
             )
             self.assertEqual(
-                set(compact["diets"]),
-                set(safety["diets"]),
-                item["id"],
-            )
-            self.assertEqual(
                 compact["minAgeMonths"],
                 safety["minAgeMonths"],
                 item["id"],
@@ -287,7 +255,6 @@ class WE8PreseedSafetyTests(unittest.TestCase):
             recipe = self.recipe_by_slug[slug]
             compact = self.compact_by_id[recipe["foodId"]]
             self.assertIn("Milk", compact["allergens"], slug)
-            self.assertNotIn("Dairy-Free", compact["diets"], slug)
 
         allergen_recipe_ids = {
             recipe["foodId"]
@@ -304,33 +271,6 @@ class WE8PreseedSafetyTests(unittest.TestCase):
                 for food_id in allergen_recipe_ids
             )
         )
-
-    def test_no_dairy_excludes_seeded_lassi_kheer_and_ghee_rice_classes(self):
-        source = KNOWLEDGE_BASE.read_text(encoding="utf-8")
-        self.assertIn('"no dairy": "Dairy-Free"', source)
-        items = [
-            self.dravya_by_slug["dravya.lassi-digestive"],
-            self.dravya_by_slug["dravya.lassi-sweet"],
-            self.recipe_by_slug["recipe.amaranth-kheer"],
-            self.recipe_by_slug["recipe.classic-mung-kitchari"],
-        ]
-        for item in items:
-            compact = self.compact_by_id[item["foodId"]]
-            self.assertIn("Milk", compact["allergens"], item["id"])
-            self.assertNotIn("Dairy-Free", compact["diets"], item["id"])
-
-    def test_vegan_excludes_seeded_ghee_honey_and_dairy_recipes(self):
-        for recipe_id in (
-            "recipe.amaranth-kheer",
-            "recipe.classic-mung-kitchari",
-            "recipe.ginger-lemon-honey-tea",
-        ):
-            recipe = self.recipe_by_slug[recipe_id]
-            self.assertNotIn(
-                "Vegan",
-                self.compact_by_id[recipe["foodId"]]["diets"],
-                recipe_id,
-            )
 
     def test_honey_recipe_minimum_age_is_persisted_in_the_fresh_artifact(self):
         honey_recipes = [

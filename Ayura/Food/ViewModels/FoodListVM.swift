@@ -107,7 +107,7 @@ final class FoodListVM: ObservableObject {
                 case .recipes:   isRecipes = true
                 case .menus:     isMenus = true
                 case .favorites: isFavorites = true
-                case .foods, .default, .diets, .plans:
+                case .foods, .default, .plans:
                     break
                 }
                 
@@ -133,7 +133,7 @@ final class FoodListVM: ObservableObject {
                         return !item.isRecipe && !item.isMenu && item.isUserAdded
                     case .default:
                         return !item.isUserAdded
-                    case .diets, .plans:
+                    case .plans:
                         return false
                     case .recipes:
                         return item.isUserAdded && item.isRecipe
@@ -206,7 +206,6 @@ final class FoodListVM: ObservableObject {
         case .menus:     return #Predicate<FoodItem> { $0.isUserAdded && $0.isMenu }
         case .favorites: return #Predicate<FoodItem> { $0.isFavorite }
         case .default:   return #Predicate<FoodItem> { !$0.isUserAdded }
-        case .diets:     return #Predicate<FoodItem> { _ in false }
         case .plans:     return #Predicate<FoodItem> { _ in false }
         }
     }

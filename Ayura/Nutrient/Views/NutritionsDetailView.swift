@@ -892,7 +892,7 @@ struct NutritionsDetailView: View {
     }
     
     private var targetCalories: Double {
-        return TDEECalculator.calculate(for: profile, activityLevel: profile.activityLevel)
+        return TDEECalculator.calculate(for: profile)
     }
     
     private func totalGramsForMacro(_ keyPath: KeyPath<MacronutrientsData, Nutrient?>) -> Double {
@@ -988,6 +988,18 @@ struct NutritionsDetailView: View {
                     }
                     ScrollViewReader { proxy in
                         List {
+                            AyurvedaHomeCheckInCard(profileID: profile.id)
+                                .listRowSeparator(.hidden)
+                                .listRowBackground(Color.clear)
+                                .listRowInsets(
+                                    EdgeInsets(
+                                        top: 4,
+                                        leading: 16,
+                                        bottom: 8,
+                                        trailing: 16
+                                    )
+                                )
+
                             if !isRingsPinned {
                                 RingsSummaryRow(
                                     goalsAchieved: goalsAchieved,
@@ -2421,7 +2433,6 @@ struct NutritionsDetailView: View {
         let comps = Calendar.current.dateComponents([.year, .month, .day], from: chosenDate)
         animateDates.insert(comps)
         animateStamp.toggle()
-        await BadgeManager.shared.checkAndAwardBadges(for: profile, using: ctx)
     }
     
     @MainActor
@@ -2643,7 +2654,7 @@ struct NutritionsDetailView: View {
                 let minX = radius
                 let maxX = size.width  - radius
                 let minY = radius + safeArea.top
-                let maxY = size.height - radius - safeArea.bottom - 80 
+                let maxY = size.height - radius - safeArea.bottom
                 
                 let clampedCenterX = min(max(rawCenterX, minX), maxX)
                 let clampedCenterY = min(max(rawCenterY, minY), maxY)

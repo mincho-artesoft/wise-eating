@@ -35,6 +35,10 @@ final class AnalyticsViewModel: ObservableObject {
            }
            
            let (conceptualStartDate, conceptualEndDate) = getDateRange()
+           let profileMetricData = profileMetricChartData(
+               from: conceptualStartDate,
+               until: conceptualEndDate
+           )
            // LOG 2: Извлечен период от getDateRange
            print("📊 [ANALYTICS] Conceptual date range: \(conceptualStartDate.formatted()) to \(conceptualEndDate.formatted())")
            
@@ -81,8 +85,8 @@ final class AnalyticsViewModel: ObservableObject {
         guard !allDates.isEmpty,
               let actualStartDate = allDates.min(),
               let actualEndDate = allDates.max() else {
-            print("📊 [ANALYTICS] No events or water logs found. Clearing chart data.")
-            self.chartData = [:]
+            print("📊 [ANALYTICS] No events or water logs found. Showing available profile metrics only.")
+            self.chartData = profileMetricData
             return
         }
            // LOG 6: Реален период на данните
@@ -114,14 +118,18 @@ final class AnalyticsViewModel: ObservableObject {
            // LOG 7: Брой дни с обработени логове
            print("📊 [ANALYTICS] Created \(dailyLogs.count) daily logs.")
            
-           updateChartData(from: dailyLogs)
+           updateChartData(from: dailyLogs, profileMetricData: profileMetricData)
        }
 
     /// Обновява `chartData` на базата на събраните дневни логове.
-    private func updateChartData(from dailyLogs: [Date: (foods: [FoodItem: Double], waterMl: Double)]) {
-            var newChartData: [String: [PlottableMetric]] = [:]
+    private func updateChartData(
+        from dailyLogs: [Date: (foods: [FoodItem: Double], waterMl: Double)],
+        profileMetricData: [String: [PlottableMetric]]
+    ) {
+            var newChartData = profileMetricData
             
-            for nutrientID in selectedNutrientIDs {
+            for nutrientID in selectedNutrientIDs
+            where nutrientID != "profile_weight" && nutrientID != "profile_height" {
                 var nutrientPoints: [PlottableMetric] = []
                 for (date, logData) in dailyLogs {
                     let totalValue: Double
@@ -168,6 +176,45 @@ final class AnalyticsViewModel: ObservableObject {
             }
             self.chartData = newChartData
         }
+
+    private func profileMetricChartData(
+        from startDate: Date,
+        until endDate: Date
+    ) -> [String: [PlottableMetric]] {
+        let records = profile.weightHeightHistory
+            .filter { $0.date >= startDate && $0.date < endDate }
+            .sorted { $0.date < $1.date }
+        let isImperial = GlobalState.measurementSystem == "Imperial"
+        var data: [String: [PlottableMetric]] = [:]
+
+        if selectedNutrientIDs.contains("profile_weight") {
+            data["profile_weight"] = records.map { record in
+                let value = isImperial
+                    ? UnitConversion.kgToLbs(record.weight)
+                    : record.weight
+                return PlottableMetric(
+                    date: record.date,
+                    metricName: "profile_weight",
+                    value: value
+                )
+            }
+        }
+
+        if selectedNutrientIDs.contains("profile_height") {
+            data["profile_height"] = records.map { record in
+                let value = isImperial
+                    ? UnitConversion.cmToInches(record.height)
+                    : record.height
+                return PlottableMetric(
+                    date: record.date,
+                    metricName: "profile_height",
+                    value: value
+                )
+            }
+        }
+
+        return data
+    }
 
     /// Изчислява общото количество на всеки нутриент за даден речник с храни.
     private func nutrientTotals(for foods: [FoodItem : Double]) -> [String : Double] {

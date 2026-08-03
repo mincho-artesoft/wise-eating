@@ -67,7 +67,6 @@ struct ExerciseItemEditorView: View {
     @State private var photoData: Data?
     
     @State private var selectedMuscleGroups: Set<MuscleGroup.ID>
-    @State private var selectedSports: Set<Sport.ID>
     
     @State private var galleryData: [Data] = []
     @State private var newGalleryItems: [PhotosPickerItem] = []   // вече не се използва, но не пречи
@@ -81,7 +80,7 @@ struct ExerciseItemEditorView: View {
     @State private var alertMessage = ""
     @State private var isSaving = false
     
-    fileprivate enum OpenMenu { case none, muscle, sport }
+    fileprivate enum OpenMenu { case none, muscle }
     @State private var openMenu: OpenMenu = .none
     
     init(
@@ -111,7 +110,6 @@ struct ExerciseItemEditorView: View {
             _metValueString = State(initialValue: copy.metValue.map { String(format: "%.1f", $0) } ?? "")
             _photoData = State(initialValue: copy.photo)
             _selectedMuscleGroups = State(initialValue: Set(copy.muscleGroups.map(\.id)))
-            _selectedSports = State(initialValue: Set(copy.sports?.map(\.id) ?? []))
             _galleryData = State(initialValue: copy.gallery ?? [])
             _durationMinutesString = State(initialValue: copy.durationMinutes.map { String($0) } ?? "")
             _minAgeMonthsTxt = State(initialValue: copy.minimalAgeMonths > 0 ? String(copy.minimalAgeMonths) : "")
@@ -122,7 +120,6 @@ struct ExerciseItemEditorView: View {
             _metValueString = State(initialValue: p.metValue.map { String(format: "%.1f", $0) } ?? "")
             _photoData = State(initialValue: p.photo)
             _selectedMuscleGroups = State(initialValue: Set(p.muscleGroups.map(\.id)))
-            _selectedSports = State(initialValue: Set(p.sports?.map(\.id) ?? []))
             _galleryData = State(initialValue: p.gallery?.map(\.data) ?? [])
             _durationMinutesString = State(initialValue: p.durationMinutes.map { String($0) } ?? "")
             _minAgeMonthsTxt = State(initialValue: p.minimalAgeMonths > 0 ? String(p.minimalAgeMonths) : "")
@@ -133,7 +130,6 @@ struct ExerciseItemEditorView: View {
             _metValueString = State(initialValue: "")
             _photoData = State(initialValue: nil)
             _selectedMuscleGroups = State(initialValue: [])
-            _selectedSports = State(initialValue: [])
             _galleryData = State(initialValue: [])
             _durationMinutesString = State(initialValue: "")
             _minAgeMonthsTxt = State(initialValue: "")
@@ -290,7 +286,6 @@ struct ExerciseItemEditorView: View {
                     gallerySection
                     detailsSection
                     muscleGroupSection
-                    sportsSection
                 }
                 .padding()
                 Spacer(minLength: 150)
@@ -545,26 +540,6 @@ struct ExerciseItemEditorView: View {
         }
     }
     
-    private var sportsSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("Related Sports")
-                .font(.headline)
-                .foregroundStyle(effectManager.currentGlobalAccentColor)
-            MultiSelectButton(
-                selection: $selectedSports,
-                items: Sport.allCases.sorted { $0.rawValue < $1.rawValue },
-                label: { $0.rawValue },
-                prompt: "Select related sports...",
-                isExpanded: openMenu == .sport
-            )
-            .contentShape(Rectangle())
-            .onTapGesture { withAnimation { openMenu = .sport } }
-            .padding(.vertical, 5)
-            .padding(.horizontal, 10)
-            .glassCardStyle(cornerRadius: 20)
-        }
-    }
-    
     // MARK: - UI Components
     private var photoPicker: some View {
         let imageData = photoData
@@ -628,14 +603,6 @@ struct ExerciseItemEditorView: View {
                         iconSize: CGSize(width: 48, height: 80),
                         useIconColor: true
                     )
-                case .sport:
-                    IconMultiSelectGridView(
-                        items: Sport.allCases.sorted { $0.rawValue < $1.rawValue },
-                        selection: $selectedSports,
-                        searchPrompt: "Search sports...",
-                        iconSize: CGSize(width: 48, height: 48),
-                        useIconColor: false
-                    )
                 case .none:
                     EmptyView()
                 }
@@ -686,7 +653,6 @@ struct ExerciseItemEditorView: View {
             itemToSave.metValue = Double(metValueString)
             itemToSave.photo = photoData
             itemToSave.muscleGroups = selectedMuscleGroups.compactMap { MuscleGroup(rawValue: $0) }
-            itemToSave.sports = selectedSports.compactMap { Sport(rawValue: $0) }
             itemToSave.durationMinutes = Int(durationMinutesString)
             itemToSave.minimalAgeMonths = Int(minAgeMonthsTxt) ?? 0
             
@@ -875,7 +841,6 @@ struct ExerciseItemEditorView: View {
                 self.description         = mapped.description
                 self.metValueString      = mapped.metValueString
                 self.selectedMuscleGroups = mapped.selectedMuscleGroups
-                self.selectedSports      = mapped.selectedSports
                 self.minAgeMonthsTxt     = mapped.minAgeMonthsTxt
             }
             
@@ -994,7 +959,7 @@ struct ExerciseItemEditorView: View {
                 let minX = radius
                 let maxX = size.width  - radius
                 let minY = radius + safeArea.top
-                let maxY = size.height - radius - safeArea.bottom - 80
+                let maxY = size.height - radius - safeArea.bottom
                 
                 let clampedCenterX = min(max(rawCenterX, minX), maxX)
                 let clampedCenterY = min(max(rawCenterY, minY), maxY)
@@ -1140,7 +1105,6 @@ fileprivate extension ExerciseItemEditorView.OpenMenu {
     var title: String {
         switch self {
         case .muscle: "Muscle Groups"
-        case .sport:  "Sports"
         case .none:   ""
         }
     }

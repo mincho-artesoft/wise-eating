@@ -24,7 +24,6 @@ extension Notification.Name {
     static let aiRecipeJobCompleted = Notification.Name("aiRecipeJobCompleted")
     static let aiMenuJobCompleted = Notification.Name("aiRecipeJobCompleted")
     static let aiExerciseDetailJobCompleted = Notification.Name("aiExerciseDetailJobCompleted")
-    static let aiDietJobCompleted = Notification.Name("aiDietJobCompleted")
     static let aiTrainingPlanJobCompleted = Notification.Name("aiTrainingPlanJobCompleted")
     static let aiWorkoutJobCompleted = Notification.Name("aiWorkoutJobCompleted")
     static let aiTrainingJobCompleted = Notification.Name("aiTrainingJobCompleted")

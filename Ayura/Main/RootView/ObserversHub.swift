@@ -16,12 +16,9 @@ struct ObserversHub: View {
     @Binding var profilesMenuState: MenuState
     @Binding var profilesDrawerContent: RootView.ProfilesDrawerContent
     @Binding var navBarIsHidden: Bool
-    @Binding var showMultiSelection: Bool
     @Binding var selectedProfile: Profile?
-    @Binding var selectedProfiles: [Profile]
     @Binding var isPresentingNewProfile: Bool
     @Binding var editingProfile: Profile?
-    @Binding var profileForHistoryView: Profile?
     @Binding var isPresentingProfileWizard: Bool
 
     // Tabs & Search
@@ -45,7 +42,6 @@ struct ObserversHub: View {
     // AI
     var coordinator: NavigationCoordinator
     @Binding var hasUnreadAINotifications: Bool
-    @Binding var hasUnreadBadgeNotifications: Bool
 
     @Binding var isShowingDailyAIGenerator: Bool
 
@@ -56,7 +52,6 @@ struct ObserversHub: View {
     var onShowSearchButton: () -> Void
     var onUpdateBackgroundSnapshot: () -> Void
     var onCheckUnreadAI: () async -> Void
-    var onCheckUnreadBadges: () async -> Void
     
     // ✅ ДОБАВЕНО: Callback за отваряне на абонаментите
     var onOpenSubscriptionFlow: () -> Void
@@ -69,12 +64,9 @@ struct ObserversHub: View {
           profilesMenuState: Binding<MenuState>,
           profilesDrawerContent: Binding<RootView.ProfilesDrawerContent>,
           navBarIsHidden: Binding<Bool>,
-          showMultiSelection: Binding<Bool>,
           selectedProfile: Binding<Profile?>,
-          selectedProfiles: Binding<[Profile]>,
           isPresentingNewProfile: Binding<Bool>,
           editingProfile: Binding<Profile?>,
-          profileForHistoryView: Binding<Profile?>,
           isPresentingProfileWizard: Binding<Bool>,
           selectedTab: Binding<AppTab>,
           previousTab: Binding<AppTab>,
@@ -92,7 +84,6 @@ struct ObserversHub: View {
           nutritionSelectedMealID: Binding<Meal.ID?>,
           coordinator: NavigationCoordinator,
           hasUnreadAINotifications: Binding<Bool>,
-          hasUnreadBadgeNotifications: Binding<Bool>,
           isShowingDailyAIGenerator: Binding<Bool>,
           isAIGenerating: Binding<Bool>,
           onActivateSearch: @escaping () -> Void,
@@ -101,7 +92,6 @@ struct ObserversHub: View {
           onShowSearchButton: @escaping () -> Void,
           onUpdateBackgroundSnapshot: @escaping () -> Void,
           onCheckUnreadAI: @escaping () async -> Void,
-          onCheckUnreadBadges: @escaping () async -> Void,
           onOpenSubscriptionFlow: @escaping () -> Void
       ) {
           self.profiles = profiles
@@ -111,12 +101,9 @@ struct ObserversHub: View {
           self._profilesMenuState = profilesMenuState
           self._profilesDrawerContent = profilesDrawerContent
           self._navBarIsHidden = navBarIsHidden
-          self._showMultiSelection = showMultiSelection
           self._selectedProfile = selectedProfile
-          self._selectedProfiles = selectedProfiles
           self._isPresentingNewProfile = isPresentingNewProfile
           self._editingProfile = editingProfile
-          self._profileForHistoryView = profileForHistoryView
           self._isPresentingProfileWizard = isPresentingProfileWizard
           self._selectedTab = selectedTab
           self._previousTab = previousTab
@@ -134,7 +121,6 @@ struct ObserversHub: View {
           self._nutritionSelectedMealID = nutritionSelectedMealID
           self.coordinator = coordinator
           self._hasUnreadAINotifications = hasUnreadAINotifications
-          self._hasUnreadBadgeNotifications = hasUnreadBadgeNotifications
           self._isShowingDailyAIGenerator = isShowingDailyAIGenerator
           self._isAIGenerating = isAIGenerating
           self.onActivateSearch = onActivateSearch
@@ -143,7 +129,6 @@ struct ObserversHub: View {
           self.onShowSearchButton = onShowSearchButton
           self.onUpdateBackgroundSnapshot = onUpdateBackgroundSnapshot
           self.onCheckUnreadAI = onCheckUnreadAI
-          self.onCheckUnreadBadges = onCheckUnreadBadges
           self.onOpenSubscriptionFlow = onOpenSubscriptionFlow
       }
     
@@ -169,7 +154,6 @@ struct ObserversHub: View {
                 hasNewTraining: $hasNewTraining,
                 isPresentingNewProfile: $isPresentingNewProfile,
                 editingProfile: $editingProfile,
-                profileForHistoryView: $profileForHistoryView,
                 isPresentingProfileWizard: $isPresentingProfileWizard,
                 isMealPlanEditorPresented: coordinator.pendingAIPlanPreview != nil,
                 isSearchButtonVisible: $isSearchButtonVisible,
@@ -242,7 +226,6 @@ struct ObserversHub: View {
                 onBackgroundChanged: {
                     onUpdateBackgroundSnapshot()
                 },
-                onCheckUnreadBadges: onCheckUnreadBadges,
                 // ✅ ДОБАВЕНО: Подаваме callback-а към NotificationsObserver
                 onOpenSubscriptionFlow: onOpenSubscriptionFlow
             )
@@ -264,7 +247,6 @@ struct ObserversHub: View {
                 navBarIsHidden: $navBarIsHidden,
                 isPresentingNewProfile: $isPresentingNewProfile,
                 editingProfile: $editingProfile,
-                profileForHistoryView: $profileForHistoryView,
                 isPresentingProfileWizard: $isPresentingProfileWizard,
                 isShowingDailyAIGenerator: $isShowingDailyAIGenerator,
                 onDismissSearch: onDismissSearch
@@ -276,7 +258,6 @@ struct ObserversHub: View {
                 profilesMenuState: $profilesMenuState,
                 isPresentingNewProfile: $isPresentingNewProfile,
                 editingProfile: $editingProfile,
-                profileForHistoryView: $profileForHistoryView,
                 isPresentingProfileWizard: $isPresentingProfileWizard,
                 navBarIsHidden: $navBarIsHidden,
                 isProfilesDrawerVisible: $isProfilesDrawerVisible,
@@ -342,7 +323,6 @@ private struct TabChangeObserver: View {
     @Binding var hasNewTraining: Bool
     @Binding var isPresentingNewProfile: Bool
     @Binding var editingProfile: Profile?
-    @Binding var profileForHistoryView: Profile?
     @Binding var isPresentingProfileWizard: Bool
     let isMealPlanEditorPresented: Bool
     @Binding var isSearchButtonVisible: Bool
@@ -361,12 +341,11 @@ private struct TabChangeObserver: View {
                     Task { await NotificationManager.shared.markAllAINotificationsAsRead() }
                 }
 
-                let sheetInitially = isPresentingNewProfile || editingProfile != nil || profileForHistoryView != nil || isPresentingProfileWizard
+                let sheetInitially = isPresentingNewProfile || editingProfile != nil || isPresentingProfileWizard
                 if sheetInitially && newTab != .search {
                     withAnimation {
                         isPresentingNewProfile = false
                         editingProfile = nil
-                        profileForHistoryView = nil
                         isPresentingProfileWizard = false
                         navBarIsHidden = false
                         isProfilesDrawerVisible = true
@@ -377,7 +356,6 @@ private struct TabChangeObserver: View {
                     withAnimation {
                         isPresentingNewProfile = false
                         editingProfile = nil
-                        profileForHistoryView = nil
                         isPresentingProfileWizard = false
                         navBarIsHidden = false
                         isProfilesDrawerVisible = true
@@ -385,8 +363,8 @@ private struct TabChangeObserver: View {
                 }
 
                 DispatchQueue.main.async {
-                    let sheetAfter = isPresentingNewProfile || editingProfile != nil || profileForHistoryView != nil || isPresentingProfileWizard
-                    if newTab == .calendar || newTab == .analytics || newTab == .aiGenerate || newTab == .nodes || newTab == .badges || sheetAfter {
+                    let sheetAfter = isPresentingNewProfile || editingProfile != nil || isPresentingProfileWizard
+                    if newTab == .calendar || newTab == .analytics || newTab == .aiGenerate || newTab == .nodes || sheetAfter {
                         if !isMealPlanEditorPresented { isSearchButtonVisible = false }
                     } else {
                         isSearchButtonVisible = true
@@ -406,7 +384,6 @@ private struct NotificationsObserver: View {
     let onUnreadStatusChanged: () -> Void
     let onOpenProfilesDrawer: () -> Void
     let onBackgroundChanged: () -> Void
-    let onCheckUnreadBadges: () async -> Void
     
     // ✅ ДОБАВЕНО: Callback параметър
     let onOpenSubscriptionFlow: () -> Void
@@ -431,11 +408,9 @@ private struct NotificationsObserver: View {
             }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
                 onWillEnterForeground()
-                Task { await onCheckUnreadBadges() }
             }
             .onReceive(NotificationCenter.default.publisher(for: .unreadNotificationStatusChanged)) { _ in
                 onUnreadStatusChanged()
-                Task { await onCheckUnreadBadges() }
             }
             .onReceive(NotificationCenter.default.publisher(for: .openProfilesDrawer)) { _ in
                 onOpenProfilesDrawer()
@@ -518,7 +493,6 @@ private struct CoordinatorObserver: View {
 
     @Binding var isPresentingNewProfile: Bool
     @Binding var editingProfile: Profile?
-    @Binding var profileForHistoryView: Profile?
     @Binding var isPresentingProfileWizard: Bool
 
     @Binding var isShowingDailyAIGenerator: Bool
@@ -527,23 +501,6 @@ private struct CoordinatorObserver: View {
 
     var body: some View {
         Color.clear
-            .onChange(of: coordinator.pendingBadgeProfileID) { _, newProfileID in
-                guard let id = newProfileID else { return }
-                
-                onDismissSearch()
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    if let profileToSelect = profiles.first(where: { $0.id == id }) {
-                        selectedProfile = profileToSelect
-                    }
-                    
-                    withAnimation {
-                        selectedTab = .badges
-                        menuState = .collapsed
-                    }
-                    coordinator.pendingBadgeProfileID = nil
-                }
-            }
             .onChange(of: coordinator.pendingTab) { _, newTab in
                 guard let tab = newTab else { return }
                 
@@ -663,9 +620,6 @@ private struct CoordinatorObserver: View {
                      coordinator.sourceAIMenuJobID = nil
                      coordinator.pendingAIExerciseDetailResponse = nil
                      coordinator.sourceAIExerciseDetailJobID = nil
-                     coordinator.pendingAIDietResponse = nil
-                     coordinator.sourceAIDietJobID = nil
-                     coordinator.pendingAIDietWireResponse = nil
                      coordinator.pendingAITrainingPlan = nil
                      coordinator.sourceAITrainingPlanJobID = nil
                      coordinator.pendingAIWorkout = nil
@@ -753,28 +707,6 @@ private struct CoordinatorObserver: View {
                          coordinator.pendingAIExerciseDetailResponse = response
                          coordinator.sourceAIExerciseDetailJobID = job.id
                      }
-                 case .dietGeneration:
-                     guard #available(iOS 26.0, *),
-                              let data = job.resultData
-                        else {
-                            print("❌ Diet job has no result data or OS too old.")
-                            coordinator.sourceAIGenerationJobID = nil
-                            return
-                        }
-
-                        guard let wire = try? JSONDecoder().decode(AIDietResponseWireDTO.self, from: data) else {
-                            print("❌ Failed to decode AIDietResponseWireDTO for diet generation job.")
-                            coordinator.sourceAIGenerationJobID = nil
-                            return
-                        }
-                        
-                        if let profile = job.profile, selectedProfile?.id != profile.id {
-                            selectedProfile = profile
-                        }
-                        coordinator.pendingAIDietWireResponse = wire
-                        coordinator.sourceAIDietJobID = job.id
-                        coordinator.profileForPendingAIPlan = job.profile
-                 
                  case .trainingPlan:
                      guard #available(iOS 26.0, *),
                            let data = job.resultData,
@@ -863,7 +795,6 @@ private struct ProfilesDrawerObserver: View {
     @Binding var profilesMenuState: MenuState
     @Binding var isPresentingNewProfile: Bool
     @Binding var editingProfile: Profile?
-    @Binding var profileForHistoryView: Profile?
     @Binding var isPresentingProfileWizard: Bool
     @Binding var navBarIsHidden: Bool
     @Binding var isProfilesDrawerVisible: Bool
@@ -875,7 +806,7 @@ private struct ProfilesDrawerObserver: View {
             .onChange(of: profilesMenuState) { _, newState in
                 withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
                     if newState == .collapsed {
-                        let showEditorOrWizard = isPresentingNewProfile || editingProfile != nil || profileForHistoryView != nil || isPresentingProfileWizard
+                        let showEditorOrWizard = isPresentingNewProfile || editingProfile != nil || isPresentingProfileWizard
                         if !showEditorOrWizard {
                             navBarIsHidden = false
                             isProfilesDrawerVisible = false

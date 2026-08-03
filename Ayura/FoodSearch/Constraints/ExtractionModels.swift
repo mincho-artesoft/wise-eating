@@ -10,7 +10,7 @@ enum ComparisonOperator: String {
     case unknown = "?"
 }
 
-struct DietaryConstraint: Identifiable, Hashable {
+struct SearchConstraint: Identifiable, Hashable {
     let id = UUID()
     let originalText: String
     let subject: String

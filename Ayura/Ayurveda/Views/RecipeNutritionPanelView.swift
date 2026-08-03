@@ -53,29 +53,38 @@ struct RecipeNutritionPanelView: View {
         .glassCardStyle(cornerRadius: 20)
       }
     }
+    .foregroundStyle(effectManager.currentGlobalAccentColor)
+    .tint(effectManager.currentGlobalAccentColor)
     .task(id: food.id) {
       resolveDisplay()
     }
   }
 
   private func coverageSummary(_ display: RecipeNutritionDisplay) -> some View {
-    VStack(alignment: .leading, spacing: 7) {
+    let statusColor = display.statusColor
+      ?? effectManager.currentGlobalAccentColor.opacity(0.72)
+
+    return VStack(alignment: .leading, spacing: 7) {
       HStack(spacing: 8) {
         Text(display.statusLabel)
           .font(.caption.weight(.semibold))
-          .foregroundStyle(display.statusColor)
+          .foregroundStyle(statusColor)
           .padding(.horizontal, 9)
           .padding(.vertical, 5)
-          .background(display.statusColor.opacity(0.22), in: Capsule())
+          .background(statusColor.opacity(0.22), in: Capsule())
 
         Text(display.servingSummary)
           .font(.caption)
-          .foregroundStyle(.secondary)
+          .foregroundStyle(
+            effectManager.currentGlobalAccentColor.opacity(0.72)
+          )
       }
 
       Text(display.explanation)
         .font(.caption)
-        .foregroundStyle(.secondary)
+        .foregroundStyle(
+          effectManager.currentGlobalAccentColor.opacity(0.72)
+        )
 
       if !display.missingIngredients.isEmpty {
         Text("Missing nutrition: " + display.missingIngredients.joined(separator: ", "))
@@ -198,14 +207,14 @@ private struct RecipeNutritionDisplay {
     }
   }
 
-  var statusColor: Color {
+  var statusColor: Color? {
     switch status {
     case "full":
       return Color(hex: "34A853")
     case "estimated":
       return Color(hex: "FCC934")
     default:
-      return .secondary
+      return nil
     }
   }
 

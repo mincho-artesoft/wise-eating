@@ -11,7 +11,6 @@ enum AyurvedaFacetKind: String, CaseIterable, Sendable {
     case digestibility
     case season
     case time
-    case category
     case concept
 }
 
@@ -47,7 +46,6 @@ struct AyurvedaFacet: Hashable, Sendable {
     /// Search facets for both bundled profiles and records created in the editor.
     static func searchKeys(from profile: AyurvedaProfile) -> Set<String> {
         searchKeys(
-            category: profile.category,
             doshaVata: profile.doshaVata,
             doshaPitta: profile.doshaPitta,
             doshaKapha: profile.doshaKapha,
@@ -130,7 +128,6 @@ struct AyurvedaFacet: Hashable, Sendable {
     }
 
     static func searchKeys(
-        category: String,
         doshaVata: Int,
         doshaPitta: Int,
         doshaKapha: Int,
@@ -195,12 +192,6 @@ struct AyurvedaFacet: Hashable, Sendable {
         }
         for period in timeOfDay {
             insert(.time, period, into: &facets)
-        }
-
-        let normalizedCategory = normalize(category)
-        if !normalizedCategory.isEmpty {
-            insert(.category, normalizedCategory, into: &facets)
-            insert(.concept, normalizedCategory, into: &facets)
         }
 
         if (agniEffect ?? 0) > 0 || (digestibility ?? 0) >= 4 {
@@ -300,7 +291,6 @@ private struct AyurvedaFacetSeedProfile: Decodable {
 
     let id: String
     let name: String
-    let category: String
     let dosha: Dosha
     let seasons: [String]
     let timeOfDay: [String]
@@ -343,13 +333,14 @@ struct AyurvedaCanonicalSearchMetadata: Codable, Hashable, Sendable {
     let digestibility: Int?
     let seasons: [String]
     let timeOfDay: [String]
-    let category: String
     let prabhava: String?
     let contraindications: [String]
     let confidenceAyur: Double
 
     var isInferred: Bool {
-        sourceTier == "near" || sourceTier == "derived"
+        sourceTier == "near"
+            || sourceTier == "derived"
+            || sourceTier == "estimated"
     }
 
     var sourceCaption: String? {
@@ -360,6 +351,8 @@ struct AyurvedaCanonicalSearchMetadata: Codable, Hashable, Sendable {
             return "Inferred from \(sourceProfileName)"
         case "exact":
             return "Linked to \(sourceProfileName)"
+        case "estimated":
+            return "Estimated from \(sourceProfileName)"
         default:
             return nil
         }
@@ -385,10 +378,34 @@ struct AyurvedaCanonicalSearchMetadata: Codable, Hashable, Sendable {
             digestibility: profile.digestibility,
             seasons: profile.seasons,
             timeOfDay: profile.timeOfDay,
-            category: profile.category,
             prabhava: profile.prabhava,
             contraindications: profile.contraindications,
             confidenceAyur: profile.confidenceAyur
+        )
+    }
+
+    init(
+        estimate: EstimatedAyurveda,
+        enforcedMinAgeMonths: Int
+    ) {
+        self.init(
+            enforcedMinAgeMonths: enforcedMinAgeMonths,
+            sourceProfileName: "default Ayurveda rule",
+            sourceTier: "estimated",
+            doshaVata: estimate.vpk.vata,
+            doshaPitta: estimate.vpk.pitta,
+            doshaKapha: estimate.vpk.kapha,
+            rasa: [],
+            virya: estimate.virya,
+            vipaka: nil,
+            gunas: estimate.gunas,
+            agniEffect: nil,
+            digestibility: nil,
+            seasons: [],
+            timeOfDay: [],
+            prabhava: nil,
+            contraindications: [],
+            confidenceAyur: estimate.confidence
         )
     }
 
@@ -412,7 +429,6 @@ struct AyurvedaCanonicalSearchMetadata: Codable, Hashable, Sendable {
             digestibility: profile.digestibility,
             seasons: profile.seasons,
             timeOfDay: profile.timeOfDay,
-            category: profile.category,
             prabhava: profile.prabhava,
             contraindications: profile.contraindications ?? [],
             confidenceAyur: profile.confidence.ayur
@@ -434,7 +450,6 @@ struct AyurvedaCanonicalSearchMetadata: Codable, Hashable, Sendable {
         digestibility: Int?,
         seasons: [String],
         timeOfDay: [String],
-        category: String,
         prabhava: String?,
         contraindications: [String],
         confidenceAyur: Double
@@ -453,12 +468,10 @@ struct AyurvedaCanonicalSearchMetadata: Codable, Hashable, Sendable {
         self.digestibility = digestibility
         self.seasons = seasons
         self.timeOfDay = timeOfDay
-        self.category = category
         self.prabhava = prabhava
         self.contraindications = contraindications
         self.confidenceAyur = confidenceAyur
         self.facets = AyurvedaFacet.searchKeys(
-            category: category,
             doshaVata: doshaVata,
             doshaPitta: doshaPitta,
             doshaKapha: doshaKapha,
@@ -502,7 +515,6 @@ struct AyurvedaCanonicalSearchMetadata: Codable, Hashable, Sendable {
             digestibility: digestibility,
             seasons: seasons,
             timeOfDay: timeOfDay,
-            category: category,
             prabhava: prabhava,
             contraindications: contraindications,
             confidenceAyur: max(confidenceAyur - 0.15, 0.1)

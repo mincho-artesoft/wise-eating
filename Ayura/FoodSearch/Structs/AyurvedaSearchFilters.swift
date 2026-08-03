@@ -36,7 +36,6 @@ struct AyurvedaSearchFilters: Equatable, Sendable {
     var virya: String?
     var gunas: Set<String> = []
     var easyOnDigestion = false
-    var category: String?
 
     static let empty = AyurvedaSearchFilters()
 
@@ -48,7 +47,6 @@ struct AyurvedaSearchFilters: Equatable, Sendable {
             || virya != nil
             || !gunas.isEmpty
             || easyOnDigestion
-            || category != nil
     }
 
     var activeCount: Int {
@@ -57,7 +55,6 @@ struct AyurvedaSearchFilters: Equatable, Sendable {
             + (virya == nil ? 0 : 1)
             + gunas.count
             + (easyOnDigestion ? 1 : 0)
-            + (category == nil ? 0 : 1)
     }
 
     func preference(for dosha: AyurvedaSearchDosha) -> AyurvedaDoshaPreference? {
@@ -158,10 +155,6 @@ enum AyurvedaSearchRanker {
                 return false
             }
         }
-        if let category = filters.category,
-           AyurvedaFacet.normalize(metadata.category) != category {
-            return false
-        }
         return true
     }
 
@@ -186,7 +179,8 @@ enum AyurvedaSearchRanker {
         _ metadata: AyurvedaCanonicalSearchMetadata,
         filters: AyurvedaSearchFilters,
         constraints: [AyurvedaFacetConstraint],
-        temporalContext: AyurvedaSearchTemporalContext
+        temporalContext: AyurvedaSearchTemporalContext,
+        constitutionTarget: AyurvedaDoshaDistribution? = nil
     ) -> Double {
         var score = 0.0
 
@@ -197,6 +191,16 @@ enum AyurvedaSearchRanker {
         }
         if metadata.timeOfDay.contains(temporalContext.period) {
             score += 6
+        }
+
+        // A constitution/current check-in changes ordering only. It never
+        // participates in `matches`, so an unfavorable fit cannot hide food.
+        if let constitutionTarget, metadata.sourceTier != "estimated" {
+            score += constitutionTarget.doshaFit(
+                vata: metadata.doshaVata,
+                pitta: metadata.doshaPitta,
+                kapha: metadata.doshaKapha
+            ) * 24
         }
 
         for dosha in AyurvedaSearchDosha.allCases {
@@ -211,7 +215,6 @@ enum AyurvedaSearchRanker {
         if filters.virya != nil { score += 8 }
         if !filters.gunas.isEmpty { score += 8 }
         if filters.easyOnDigestion { score += 10 }
-        if filters.category != nil { score += 6 }
 
         for constraint in constraints {
             let doshaScores = constraint.acceptedKeys.compactMap {

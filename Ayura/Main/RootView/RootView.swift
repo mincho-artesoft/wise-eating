@@ -10,8 +10,6 @@ struct RootView: View {
     @State private var nextAdRunDate: Date = Date().addingTimeInterval(70) // Първоначално след 70 сек
     @Environment(\.safeAreaInsets) private var safeAreaInsets
     private var headerTopPadding: CGFloat { safeAreaInsets.top }
-    @State private var hasUnreadBadgeNotifications: Bool = false
-    
     enum ProfilesDrawerContent { case profiles, notifications }
     
     // ПРОМЯНА 1: Премахваме .notificationsDenied от enum-а, тъй като вече не блокираме приложението за това.
@@ -55,7 +53,6 @@ struct RootView: View {
     
     @State private var isPresentingNewProfile = false
     @State private var editingProfile: Profile? = nil
-    @State private var profileForHistoryView: Profile?
     
     @State private var editorState: ThemeEditorState? = nil
     
@@ -67,13 +64,10 @@ struct RootView: View {
     @State private var editingRecipe: FoodItem? = nil
     @State private var detailedFood: FoodItem? = nil
     
-    @AppStorage("showMultiSelection") private var showMultiSelection: Bool = false
-    
     @Query private var profiles: [Profile]
     @Query private var settings: [UserSettings]
     
     @State private var selectedProfile: Profile?
-    @State private var selectedProfiles: [Profile] = []
     
     @StateObject private var coordinator = NavigationCoordinator.shared
     
@@ -103,20 +97,19 @@ struct RootView: View {
     private var isRecipeEditorPresented: Bool { coordinator.pendingAIRecipe != nil }
     private var isMenuEditorPresented: Bool { coordinator.pendingAIMenu != nil }
     private var isFoodDetailEditorPresented: Bool { coordinator.pendingAIFoodDetailResponse != nil }
-    private var isDietEditorPresented: Bool { coordinator.pendingAIDietWireResponse != nil }
     private var isExerciseDetailEditorPresented: Bool { coordinator.pendingAIExerciseDetailResponse != nil }
     private var isTrainingPlanEditorPresented: Bool { coordinator.pendingAITrainingPlan != nil }
     private var isWorkoutEditorPresented: Bool { coordinator.pendingAIWorkout != nil }
     
     private var isAnyAIEditorPresented: Bool {
-        isMealPlanEditorPresented || isRecipeEditorPresented || isMenuEditorPresented || isFoodDetailEditorPresented || isDietEditorPresented || isExerciseDetailEditorPresented || isTrainingPlanEditorPresented || isWorkoutEditorPresented
+        isMealPlanEditorPresented || isRecipeEditorPresented || isMenuEditorPresented || isFoodDetailEditorPresented || isExerciseDetailEditorPresented || isTrainingPlanEditorPresented || isWorkoutEditorPresented
     }
     
     private func hideSearchButton() { withAnimation { isSearchButtonVisible = false } }
     private func showSearchButton() { withAnimation { isSearchButtonVisible = true } }
     
     private var visibleTabs: [AppTab] {
-        AppTab.allCases.filter { $0 != .search && $0 != .analytics && $0 != .foods && $0 != .exercises && $0 != .nodes && $0 != .badges }
+        AppTab.allCases.filter { $0 != .search && $0 != .analytics && $0 != .foods && $0 != .exercises && $0 != .nodes }
     }
     
     var body: some View {
@@ -184,13 +177,12 @@ struct RootView: View {
                 }
             }
             
-            let isSheetPresentedInitially = isPresentingNewProfile || editingProfile != nil || profileForHistoryView != nil || editorState != nil || isPresentingProfileWizard
+            let isSheetPresentedInitially = isPresentingNewProfile || editingProfile != nil || editorState != nil || isPresentingProfileWizard
             
             if isSheetPresentedInitially && newTab != .search {
                 withAnimation {
                     isPresentingNewProfile = false
                     editingProfile = nil
-                    profileForHistoryView = nil
                     editorState = nil
                     isPresentingProfileWizard = false
                     
@@ -221,10 +213,6 @@ struct RootView: View {
                     coordinator.pendingAIExerciseDetailResponse = nil
                     coordinator.sourceAIExerciseDetailJobID = nil
                     
-                    coordinator.pendingAIDietResponse = nil
-                    coordinator.pendingAIDietWireResponse = nil
-                    coordinator.sourceAIDietJobID = nil
-                    
                     coordinator.pendingAITrainingPlan = nil
                     coordinator.sourceAITrainingPlanJobID = nil
                     coordinator.pendingAIPlanJobType = nil
@@ -239,9 +227,9 @@ struct RootView: View {
             
             
             DispatchQueue.main.async {
-                let isSheetPresentedAfterDismissal = isPresentingNewProfile || editingProfile != nil || profileForHistoryView != nil || editorState != nil || isPresentingProfileWizard
+                let isSheetPresentedAfterDismissal = isPresentingNewProfile || editingProfile != nil || editorState != nil || isPresentingProfileWizard
                 
-                if newTab == .calendar || newTab == .analytics || newTab == .aiGenerate || newTab == .nodes || newTab == .badges || isSheetPresentedAfterDismissal {
+                if newTab == .calendar || newTab == .analytics || newTab == .aiGenerate || newTab == .nodes || isSheetPresentedAfterDismissal {
                     if !isAnyAIEditorPresented {
                         isSearchButtonVisible = false
                     }
@@ -259,15 +247,6 @@ struct RootView: View {
             trainingChosenDate = Date()
             nutritionSelectedMealID = nil
             
-            if let profile = newProfile {
-                UsageTrackingManager.shared.logUsage(for: profile)
-                Task {
-                    await BadgeManager.shared.checkAndAwardBadges(for: profile, using: modelContext)
-                }
-            }
-        }
-        .onChange(of: selectedProfiles) { _, newValue in
-            Task { @MainActor in CalendarViewModel.shared.updateSelectedCalendars(for: newValue) }
         }
         .onChange(of: profiles) {
             if let sel = selectedProfile, !profiles.contains(where: { $0.id == sel.id }) {
@@ -283,12 +262,9 @@ struct RootView: View {
                 profilesMenuState: $profilesMenuState,
                 profilesDrawerContent: $profilesDrawerContent,
                 navBarIsHidden: $navBarIsHiden,
-                showMultiSelection: $showMultiSelection,
                 selectedProfile: $selectedProfile,
-                selectedProfiles: $selectedProfiles,
                 isPresentingNewProfile: $isPresentingNewProfile,
                 editingProfile: $editingProfile,
-                profileForHistoryView: $profileForHistoryView,
                 isPresentingProfileWizard: $isPresentingProfileWizard,
                 selectedTab: $selectedTab,
                 previousTab: $previousTab,
@@ -306,7 +282,6 @@ struct RootView: View {
                 nutritionSelectedMealID: $nutritionSelectedMealID,
                 coordinator: coordinator,
                 hasUnreadAINotifications: $hasUnreadAINotifications,
-                hasUnreadBadgeNotifications: $hasUnreadBadgeNotifications,
                 isShowingDailyAIGenerator: $isShowingDailyAIGenerator,
                 isAIGenerating: $isAIGenerating,
                 onActivateSearch: activateSearch,
@@ -315,7 +290,6 @@ struct RootView: View {
                 onShowSearchButton: showSearchButton,
                 onUpdateBackgroundSnapshot: updateBackgroundSnapshot,
                 onCheckUnreadAI: { await checkForUnreadAINotifications() },
-                onCheckUnreadBadges: { await checkForUnreadBadgeNotifications() },
                 
                 // ✅ ДОБАВЕНО: Логика за отваряне на менюто с абонаменти
                 onOpenSubscriptionFlow: {
@@ -334,13 +308,6 @@ struct RootView: View {
                 }
             )
         )
-    }
-    
-    private func checkForUnreadBadgeNotifications() async {
-        let unread = await NotificationManager.shared.getUnreadBadgeNotifications()
-        if self.hasUnreadBadgeNotifications != !unread.isEmpty {
-            self.hasUnreadBadgeNotifications = !unread.isEmpty
-        }
     }
     
     // MARK: - Views
@@ -422,7 +389,6 @@ struct RootView: View {
                 
             }
             
-            dietEditorLayer
             recipeEditorLayer
             menuEditorLayer
             foodDetailEditorLayer
@@ -452,10 +418,6 @@ struct RootView: View {
                             self.selectedProfile = profile
                             if let userSettings = settings.first {
                                 userSettings.lastSelectedProfile = profile
-                                if !showMultiSelection {
-                                    self.selectedProfiles = [profile]
-                                    userSettings.lastSelectedProfiles = [profile]
-                                }
                                 try? modelContext.save()
                             }
                         } else {
@@ -480,10 +442,6 @@ struct RootView: View {
                             self.selectedProfile = profile
                             if let userSettings = settings.first {
                                 userSettings.lastSelectedProfile = profile
-                                if !showMultiSelection {
-                                    self.selectedProfiles = [profile]
-                                    userSettings.lastSelectedProfiles = [profile]
-                                }
                                 try? modelContext.save()
                             }
                         }
@@ -530,10 +488,6 @@ struct RootView: View {
                         self.selectedProfile = profile
                         if let userSettings = settings.first {
                             userSettings.lastSelectedProfile = profile
-                            if !showMultiSelection {
-                                self.selectedProfiles = [profile]
-                                userSettings.lastSelectedProfiles = [profile]
-                            }
                             try? modelContext.save()
                         }
                     }
@@ -547,30 +501,6 @@ struct RootView: View {
                 .transition(.move(edge: .bottom).combined(with: .opacity))
             }
             
-            if let profile = profileForHistoryView {
-                WeightHeightHistoryView(
-                    profile: profile,
-                    navBarIsHiden: $navBarIsHiden,
-                    isProfilesDrawerVisible: $isProfilesDrawerVisible,
-                    menuState: $menuState,
-                    onDismiss: {
-                        withAnimation {
-                            profileForHistoryView = nil
-                            isProfilesDrawerVisible = true
-                            profilesMenuState = .full
-                        }
-                    }
-                )
-                .onAppear {
-                    isProfilesDrawerVisible = false
-                    profilesMenuState = .collapsed
-                }
-                .onDisappear {
-                    isProfilesDrawerVisible = true
-                    profilesMenuState = .full
-                }
-                .transition(.move(edge: .bottom).combined(with: .opacity))
-            }
             
             if isShowingDailyAIGenerator, let profile = selectedProfile {
                 AIDailyMealGeneratorView(
@@ -670,16 +600,12 @@ struct RootView: View {
                             case .profiles:
                                 ProfileListView(
                                     selectedProfile: $selectedProfile,
-                                    selectedProfiles: $selectedProfiles,
                                     isPresentingNewProfile: $isPresentingNewProfile,
                                     editingProfile: $editingProfile,
-                                    showMultiSelection: $showMultiSelection,
-                                    profileForHistoryView: $profileForHistoryView,
                                     isPresentingWizard: $isPresentingProfileWizard,
                                     selectedTab: $selectedTab,
                                     profilesMenuState: $profilesMenuState,
                                     profilesDrawerContent: $profilesDrawerContent,
-                                    hasUnreadBadgeNotifications: $hasUnreadBadgeNotifications,
                                     onRequestedUpgrade: { targetCategory in
                                         selectedSubscriptionCategory = targetCategory
                                         pendingUpgradeCategory = targetCategory
@@ -865,7 +791,7 @@ struct RootView: View {
                 )
                 .onAppear { NotificationCenter.default.post(name: .forceCalendarReload, object: nil) }
                 .onReceive(timer) { _ in
-                    let isSheetPresented = isPresentingNewProfile || editingProfile != nil || profileForHistoryView != nil || editorState != nil || isPresentingProfileWizard
+                    let isSheetPresented = isPresentingNewProfile || editingProfile != nil || editorState != nil || isPresentingProfileWizard
                     if selectedTab == .calendar && !isSheetPresented {
                         NotificationCenter.default.post(name: .forceCalendarReload, object: nil)
                     }
@@ -926,10 +852,6 @@ struct RootView: View {
         case .nodes:
             if let profile = selectedProfile {
                 NodesListView(profile: profile)
-            }
-        case .badges:
-            if let profile = selectedProfile {
-                ProfileBadgesView(profile: profile).id(profile)
             }
             //        case .test:
             //                TestView()
@@ -1060,9 +982,9 @@ struct RootView: View {
             selectedTab = previousTab
         }
         
-        let isSheetPresentedAfterDismissal = isPresentingNewProfile || editingProfile != nil || profileForHistoryView != nil || editorState != nil || isPresentingProfileWizard
+        let isSheetPresentedAfterDismissal = isPresentingNewProfile || editingProfile != nil || editorState != nil || isPresentingProfileWizard
         
-        if selectedTab == .calendar || selectedTab == .analytics || selectedTab == .aiGenerate || selectedTab == .nodes || selectedTab == .badges || isSheetPresentedAfterDismissal {
+        if selectedTab == .calendar || selectedTab == .analytics || selectedTab == .aiGenerate || selectedTab == .nodes || isSheetPresentedAfterDismissal {
             if !isAnyAIEditorPresented {
                 isSearchButtonVisible = false
             }
@@ -1092,18 +1014,10 @@ struct RootView: View {
                 selectedProfile = profiles.first
                 userSettings.lastSelectedProfile = selectedProfile
             }
-            
-            selectedProfiles = userSettings.lastSelectedProfiles.filter { stored in
-                profiles.contains(where: { $0.id == stored.id })
-            }
-            
-            if selectedProfiles.isEmpty, let primary = selectedProfile {
-                selectedProfiles = [primary]
-                userSettings.lastSelectedProfiles = selectedProfiles
-            }
+            AyurvedaConstitutionStore.setActiveProfile(selectedProfile?.id)
             
             try? modelContext.save()
-            CalendarViewModel.shared.updateSelectedCalendars(for: selectedProfiles)
+            CalendarViewModel.shared.updateSelectedCalendar(for: selectedProfile)
         }
     }
     
@@ -1117,18 +1031,15 @@ struct RootView: View {
                 selectedProfile = profiles.first
             }
         }
-        if let current = selectedProfile,
-           !selectedProfiles.contains(where: { $0.id == current.id }) {
-            selectedProfiles = [current]
-        }
         if let us = settings.first {
             us.lastSelectedProfile  = selectedProfile
-            us.lastSelectedProfiles = selectedProfiles
             try? modelContext.save()
         }
     }
     
     private func handleProfileChange(_ newProfile: Profile?) {
+        AyurvedaConstitutionStore.setActiveProfile(newProfile?.id)
+        CalendarViewModel.shared.updateSelectedCalendar(for: newProfile)
         if let new = newProfile, let userSettings = settings.first {
             userSettings.lastSelectedProfile = new
             try? modelContext.save()
@@ -1572,50 +1483,6 @@ extension RootView {
                 dismissSearch()
                 menuState = .collapsed
                 isSearchButtonVisible = false
-            }
-                .onDisappear {
-                    isSearchButtonVisible = !(selectedTab == .aiGenerate || selectedTab == .calendar || selectedTab == .analytics)
-                }
-                .padding(.top, headerTopPadding)
-                .transition(.move(edge: .bottom).combined(with: .opacity))
-        )
-    }
-    
-    private var dietEditorLayer: AnyView {
-        guard let dto = coordinator.pendingAIDietWireResponse else { return AnyView(EmptyView()) }
-        let dismissAction: (Diet?) -> Void = { savedItem in
-            if savedItem != nil, let jobID = coordinator.sourceAIDietJobID {
-                Task { @MainActor in await AIManager.shared.deleteJob(byID: jobID) }
-            }
-            withAnimation {
-                coordinator.pendingAIDietResponse = nil
-                coordinator.pendingAIDietWireResponse = nil
-                coordinator.sourceAIDietJobID = nil
-                isSearchButtonVisible = !(selectedTab == .aiGenerate || selectedTab == .calendar || selectedTab == .analytics)
-                dismissSearch()
-            }
-        }
-        guard let profile = coordinator.profileForPendingAIPlan else {
-            return AnyView(EmptyView().task {
-                coordinator.pendingAIDietResponse = nil
-                coordinator.pendingAIDietWireResponse = nil
-                coordinator.sourceAIDietJobID = nil
-            })
-        }
-        return AnyView(
-            AddEditDietView(
-                wireDTO: dto,
-                profile: profile,
-                onDismiss: dismissAction,
-                globalSearchText: $searchText,
-                isSearchFieldFocused: $isSearchFieldFocused,
-                onDismissSearch: dismissSearch
-            )
-            .onAppear {
-                dismissSearch()
-                profilesMenuState = .collapsed
-                menuState = .collapsed
-                isSearchButtonVisible = true
             }
                 .onDisappear {
                     isSearchButtonVisible = !(selectedTab == .aiGenerate || selectedTab == .calendar || selectedTab == .analytics)

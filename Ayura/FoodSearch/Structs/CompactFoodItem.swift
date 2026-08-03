@@ -4,7 +4,6 @@ struct CompactFoodItem: Identifiable, Hashable, Sendable {
     let searchTokens: Set<String>
     let minAgeMonths: Int
     let enforcedMinAgeMonths: Int
-    let diets: Set<String>
     let allergens: Set<String>
     let ph: Double
     let referenceWeightG: Double
@@ -25,10 +24,6 @@ struct CompactFoodItem: Identifiable, Hashable, Sendable {
     // Helpers for logic compatibility
     var lowercasedName: String { name.lowercased() }
     var paddedLowercasedName: String { " " + lowercasedName + " " }
-    
-    func fits(dietName: String) -> Bool {
-        diets.contains { $0.localizedCaseInsensitiveContains(dietName) }
-    }
     
     func contains(allergen: String) -> Bool {
         allergens.contains { $0.localizedCaseInsensitiveContains(allergen) }

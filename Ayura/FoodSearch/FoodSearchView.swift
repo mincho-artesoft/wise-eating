@@ -85,6 +85,13 @@ private struct FoodSearchViewContent: View {
         .onChange(of: ayurvedaFilters) {
             triggerSearch()
         }
+        .onReceive(
+            NotificationCenter.default.publisher(
+                for: .ayurvedaConstitutionDidChange
+            )
+        ) { _ in
+            triggerSearch()
+        }
     }
     
     // MARK: - Sub-Views
@@ -486,6 +493,8 @@ private struct FoodSearchViewContent: View {
 
 // MARK: - Component: Food Row
 private struct FoodRowView: View {
+    @ObservedObject private var effectManager = EffectManager.shared
+
     let food: FoodItem
     @ObservedObject var engine: SmartFoodSearch3
     let ayurvedaFilters: AyurvedaSearchFilters
@@ -493,7 +502,9 @@ private struct FoodRowView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
-                Text(food.name).font(.body).foregroundColor(.primary)
+                Text(food.name)
+                    .font(.body)
+                    .foregroundColor(effectManager.currentGlobalAccentColor)
                 Spacer()
                 
                 // Възрастова група
@@ -511,7 +522,11 @@ private struct FoodRowView: View {
                         .clipShape(Capsule())
                 }
 
-                Text("per 100g").font(.caption).foregroundColor(.secondary)
+                Text("per 100g")
+                    .font(.caption)
+                    .foregroundColor(
+                        effectManager.currentGlobalAccentColor.opacity(0.72)
+                    )
             }
             
             VStack(alignment: .leading, spacing: 4) {
@@ -537,7 +552,7 @@ private struct FoodRowView: View {
                             (
                                 PhSearchSemantics.hasData(food.ph)
                                     ? phColor(food.ph)
-                                    : Color.secondary
+                                    : effectManager.currentGlobalAccentColor
                             )
                             .opacity(0.1)
                         )
@@ -545,7 +560,7 @@ private struct FoodRowView: View {
                         .foregroundColor(
                             PhSearchSemantics.hasData(food.ph)
                                 ? phColor(food.ph)
-                                : .secondary
+                                : effectManager.currentGlobalAccentColor
                         )
                         .accessibilityElement(children: .combine)
                     }
@@ -564,21 +579,9 @@ private struct FoodRowView: View {
                     .foregroundColor(.orange)
                 }
                 
-                // Диети
-                if let diets = food.diets, !diets.isEmpty {
-                    HStack(alignment: .top, spacing: 4) {
-                        Image(systemName: "leaf.circle.fill")
-                            .padding(.top, 1)
-                        Text(diets.map { $0.name }.joined(separator: ", "))
-                            .multilineTextAlignment(.leading)
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
-                    .font(.caption2)
-                    .foregroundColor(.green)
-                }
-
                 let ayurvedaMetadata = engine.ayurvedaMetadata(for: food.id)
                 VStack(alignment: .leading, spacing: 6) {
+                    AyurvedaPersonalFitBadge(metadata: ayurvedaMetadata)
                     AyurvedaDoshaResultChips(metadata: ayurvedaMetadata)
                     if let ayurvedaMetadata,
                        !engine.searchContext
@@ -599,18 +602,26 @@ private struct FoodRowView: View {
                             HStack(spacing: 2) {
                                 Text(formatName(nutrient) + ":")
                                     .font(.caption)
-                                    .foregroundColor(.secondary)
+                                    .foregroundColor(
+                                        effectManager.currentGlobalAccentColor
+                                            .opacity(0.72)
+                                    )
 
                                 if let result = engine.normalizedAndScaledValue(for: food, nutrient: nutrient) {
                                     Text("\(String(format: "%.1f", result.value)) \(result.unit)")
                                         .font(.caption)
                                         .fontWeight(.bold)
-                                        .foregroundColor(.blue)
+                                        .foregroundColor(
+                                            effectManager.currentGlobalAccentColor
+                                        )
                                 } else {
                                     Text("—")
                                         .font(.caption)
                                         .fontWeight(.bold)
-                                        .foregroundColor(.secondary)
+                                        .foregroundColor(
+                                            effectManager.currentGlobalAccentColor
+                                                .opacity(0.72)
+                                        )
                                         .accessibilityLabel("no data")
                                 }
                             }
@@ -621,25 +632,43 @@ private struct FoodRowView: View {
             } else {
                 HStack {
                     if let calories = engine.normalizedAndScaledValue(for: food, nutrient: .energy) {
-                        Text("Calories:").font(.caption).foregroundColor(.secondary)
+                        Text("Calories:")
+                            .font(.caption)
+                            .foregroundColor(
+                                effectManager.currentGlobalAccentColor.opacity(0.72)
+                            )
                         Text("\(String(format: "%.0f", calories.value)) \(calories.unit)").font(.caption).fontWeight(.bold)
                     }
                     if let protein = engine.normalizedAndScaledValue(for: food, nutrient: .protein) {
-                        Text("• Protein:").font(.caption).foregroundColor(.secondary)
+                        Text("• Protein:")
+                            .font(.caption)
+                            .foregroundColor(
+                                effectManager.currentGlobalAccentColor.opacity(0.72)
+                            )
                         Text("\(String(format: "%.1f", protein.value))\(protein.unit)").font(.caption).fontWeight(.bold)
                     }
                     if let fat = engine.normalizedAndScaledValue(for: food, nutrient: .totalFat) {
-                        Text("• Fat:").font(.caption).foregroundColor(.secondary)
+                        Text("• Fat:")
+                            .font(.caption)
+                            .foregroundColor(
+                                effectManager.currentGlobalAccentColor.opacity(0.72)
+                            )
                         Text("\(String(format: "%.1f", fat.value))\(fat.unit)").font(.caption).fontWeight(.bold)
                     }
                     if let carbs = engine.normalizedAndScaledValue(for: food, nutrient: .carbs) {
-                        Text("• Carbs:").font(.caption).foregroundColor(.secondary)
+                        Text("• Carbs:")
+                            .font(.caption)
+                            .foregroundColor(
+                                effectManager.currentGlobalAccentColor.opacity(0.72)
+                            )
                         Text("\(String(format: "%.1f", carbs.value))\(carbs.unit)").font(.caption).fontWeight(.bold)
                     }
                 }
             }
         }
         .padding(.vertical, 4)
+        .foregroundStyle(effectManager.currentGlobalAccentColor)
+        .tint(effectManager.currentGlobalAccentColor)
     }
     
     private func phColor(_ ph: Double) -> Color {

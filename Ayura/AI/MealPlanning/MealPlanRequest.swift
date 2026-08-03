@@ -29,24 +29,6 @@ import FoundationModels
 @Generable
 #endif
 @available(iOS 26.0, *)
-public enum DietPattern: String, Codable, CaseIterable, Sendable {
-    case omnivore, vegetarian, vegan, pescatarian, eggetarian
-    case jainSattvic = "jain_sattvic"
-}
-
-#if canImport(FoundationModels) && !MP4_NO_FOUNDATION_MODELS
-@Generable
-#endif
-@available(iOS 26.0, *)
-public enum GoalTag: String, Codable, CaseIterable, Sendable {
-    case maintain, weightLoss = "weight_loss", weightGain = "weight_gain"
-    case muscleGain = "muscle_gain", digestion, energy, unspecified
-}
-
-#if canImport(FoundationModels) && !MP4_NO_FOUNDATION_MODELS
-@Generable
-#endif
-@available(iOS 26.0, *)
 public enum DoshaTag: String, Codable, CaseIterable, Sendable {
     case vata, pitta, kapha
 }
@@ -83,12 +65,6 @@ public struct PlanRequest: Sendable {
     @Guide(description: "How many meals per day.", .range(1...3))
     public var mealsPerDay: Int
 
-    @Guide(description: "The person's dietary pattern.")
-    public var diet: DietPattern
-
-    @Guide(description: "The person's stated goal, or unspecified if they gave none.")
-    public var goal: GoalTag
-
     @Guide(description: "A daily calorie target ONLY if the person stated an explicit number. Otherwise 0 and the app computes one.", .range(0...5000))
     public var statedKcal: Int
 
@@ -118,8 +94,6 @@ public struct PlanRequest: Sendable {
 public struct ParsedRequest: Sendable, Equatable {
     public var days: Int = 7
     public var mealsPerDay: Int = 3
-    public var diet: DietPattern = .omnivore
-    public var goal: GoalTag = .unspecified
     public var statedKcal: Int = 0
     public var avoid: [String] = []
     public var prefer: [String] = []
@@ -136,7 +110,7 @@ extension ParsedRequest {
     public init(_ r: PlanRequest) {
         self.init()
         days = r.days; mealsPerDay = r.mealsPerDay
-        diet = r.diet; goal = r.goal; statedKcal = r.statedKcal
+        statedKcal = r.statedKcal
         avoid = r.avoid; prefer = r.prefer; allergens = r.allergens
         doshaFocus = r.doshaFocus.first; agni = r.agni.first
         unmapped = r.unmapped
@@ -212,13 +186,6 @@ public enum RequestSanitizer {
                 message: "Treated \(conflicts.sorted().joined(separator: ", ")) as something to avoid."))
         }
 
-        // A declared vegan diet implies allergen-independent exclusions; make
-        // them explicit so the solver enforces them rather than trusting tags.
-        if out.diet == .vegan {
-            if !out.allergens.contains(.dairy) { out.allergens.append(.dairy) }
-            if !out.allergens.contains(.egg) { out.allergens.append(.egg) }
-        }
-
         return (out, notes)
     }
 }
@@ -264,7 +231,7 @@ public enum FallbackParser {
     private static let generic: Set<String> = [
         "meal", "meals", "food", "foods", "plan", "plans", "day", "days",
         "week", "weeks", "thing", "things", "stuff", "option", "options",
-        "dish", "dishes", "recipe", "recipes", "item", "items", "diet",
+        "dish", "dishes", "recipe", "recipes", "item", "items",
         "breakfast", "lunch", "dinner", "snack", "snacks", "portion",
         "portions", "calorie", "calories", "weight", "protein", "carbs",
     ]
@@ -283,12 +250,6 @@ public enum FallbackParser {
             .replacingOccurrences(of: ".", with: " . ") + " "
         var r = ParsedRequest()
 
-        if text.contains("vegan") { r.diet = .vegan }
-        else if text.contains("pescatarian") { r.diet = .pescatarian }
-        else if text.contains("eggetarian") { r.diet = .eggetarian }
-        else if text.contains("jain") || text.contains("sattvic") { r.diet = .jainSattvic }
-        else if text.contains("vegetarian") || text.contains("veggie") { r.diet = .vegetarian }
-
         if let n = firstInt(in: text, followedByAnyOf: ["day", "days"]), (1...7).contains(n) {
             r.days = n
         } else if text.contains("weekend") { r.days = 2 }
@@ -302,13 +263,6 @@ public enum FallbackParser {
         if let n = firstInt(in: text, followedByAnyOf: ["cal", "cals", "kcal", "calories", "calorie"]) {
             r.statedKcal = n
         }
-
-        if containsAny(text, ["lose weight", "losing weight", "lose a bit", "slim", "cut ",
-                              "weight loss", "shed", "leaner"]) { r.goal = .weightLoss }
-        else if containsAny(text, ["gain weight", "bulk", "put on weight"]) { r.goal = .weightGain }
-        else if containsAny(text, ["muscle", "gains", "strength"]) { r.goal = .muscleGain }
-        else if containsAny(text, ["digestion", "digestive", "bloat", "gut"]) { r.goal = .digestion }
-        else if containsAny(text, ["energy", "energetic", "tired", "fatigue"]) { r.goal = .energy }
 
         if text.contains("vata") { r.doshaFocus = .vata }
         else if text.contains("pitta") { r.doshaFocus = .pitta }
@@ -328,12 +282,6 @@ public enum FallbackParser {
                 r.allergens.append(tag)
             }
         }
-        // A named diet already implies its exclusions; re-deriving them from
-        // word matches only adds noise.
-        if r.diet == .vegan || r.diet == .vegetarian {
-            r.allergens.removeAll { $0 == .fish || $0 == .shellfish }
-        }
-
         r.avoid = extractTerms(text, cues: negationCues).filter { !generic.contains($0) }
         r.prefer = extractTerms(text, cues: positiveCues)
             .filter { !r.avoid.contains($0) && !generic.contains($0) }

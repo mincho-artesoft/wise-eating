@@ -7,8 +7,6 @@ struct SearchSignature: Equatable {
     let nutrientGoals: [NutrientGoal]
     let displayNutrients: [NutrientType]
     let negativeTokens: Set<String>
-    let diets: Set<String>
-    let dietFilter: DietType?
     let age: Double?
     let allergens: Set<Allergen>
     let excludeAllAllergens: Bool
@@ -20,8 +18,6 @@ struct SearchSignature: Equatable {
         self.nutrientGoals = intent.nutrientGoals
         self.displayNutrients = intent.displayNutrients
         self.negativeTokens = intent.negativeTokens
-        self.diets = intent.diets
-        self.dietFilter = intent.dietFilter
         self.age = intent.targetConsumerAge
         self.allergens = intent.allergenExclusions
         self.excludeAllAllergens = intent.excludeAllAllergens

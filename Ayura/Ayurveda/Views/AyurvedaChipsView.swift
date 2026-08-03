@@ -12,7 +12,9 @@ struct AyurvedaChipRow: View {
       VStack(alignment: .leading, spacing: 6) {
         Text(title)
           .font(.caption)
-          .foregroundStyle(.secondary)
+          .foregroundStyle(
+            effectManager.currentGlobalAccentColor.opacity(0.72)
+          )
         CustomFlowLayout(horizontalSpacing: 6, verticalSpacing: 6) {
           ForEach(Array(values.enumerated()), id: \.offset) { _, value in
             AyurvedaFacetChip(
@@ -71,6 +73,8 @@ struct AyurvedaWarningsView: View {
 }
 
 private struct AyurvedaFacetChip: View {
+  @ObservedObject private var effectManager = EffectManager.shared
+
   let text: String
   let color: Color
 
@@ -79,7 +83,7 @@ private struct AyurvedaFacetChip: View {
       .font(.caption)
       .padding(.horizontal, 9)
       .padding(.vertical, 5)
-      .foregroundStyle(color)
+      .foregroundStyle(effectManager.currentGlobalAccentColor)
       .background(color.opacity(0.2), in: Capsule())
   }
 }

@@ -37,20 +37,12 @@ class NavigationCoordinator: ObservableObject {
     @Published var pendingAIExerciseDetailResponse: ExerciseItemDTO?
     @Published var sourceAIExerciseDetailJobID: UUID?
     
-    @Published var pendingAIDietResponse: AIDietResponseDTO?
-    @Published var sourceAIDietJobID: UUID?
-    @Published var pendingAIDietWireResponse: AIDietResponseWireDTO?
-
     @Published var pendingAITrainingPlan: TrainingPlanDraft?
     @Published var sourceAITrainingPlanJobID: UUID?
     
     @Published var pendingAIWorkout: ExerciseItemCopy?
     @Published var sourceAIWorkoutJobID: UUID?
     
-    // --- НАЧАЛО НА ПРОМЯНАТА ---
-    @Published var pendingBadgeProfileID: UUID?
-    // --- КРАЙ НА ПРОМЯНАТА ---
-
     // Daily AI Generator Trigger
     @Published var triggerDailyAIGeneratorForProfile: Profile? = nil
     

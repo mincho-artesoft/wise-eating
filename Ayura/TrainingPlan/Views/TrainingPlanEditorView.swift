@@ -1104,10 +1104,7 @@ struct TrainingPlanEditorView: View {
                     // Но ако искаш да си сигурен, че сетовете са 1:1, логиката е в `syncWorkouts`.
                     
                     let aggregatedMuscles = Array(Set(validLinks.flatMap { $0.exercise?.muscleGroups ?? [] }))
-                    let aggregatedSports  = Array(Set(validLinks.flatMap { $0.exercise?.sports ?? [] }))
-                    
                     workoutToUpdate.muscleGroups = aggregatedMuscles
-                    workoutToUpdate.sports       = aggregatedSports
                     
                     let totalDuration = validLinks.reduce(0) { $0 + $1.durationMinutes }
                     workoutToUpdate.durationMinutes = Int(totalDuration)
@@ -1599,7 +1596,7 @@ struct TrainingPlanEditorView: View {
                    let minX = radius
                    let maxX = size.width  - radius
                    let minY = radius + safeArea.top
-                   let maxY = size.height - radius - safeArea.bottom - 80
+                   let maxY = size.height - radius - safeArea.bottom
                    
                    let clampedCenterX = min(max(rawCenterX, minX), maxX)
                    let clampedCenterY = min(max(rawCenterY, minY), maxY)

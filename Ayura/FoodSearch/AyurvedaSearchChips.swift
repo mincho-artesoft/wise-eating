@@ -58,13 +58,57 @@ struct AyurvedaDoshaQuickFilterChip: View {
 }
 
 struct AyurvedaDoshaResultChips: View {
-    let metadata: AyurvedaCanonicalSearchMetadata?
+    @ObservedObject private var effectManager = EffectManager.shared
+
+    private let vata: Int?
+    private let pitta: Int?
+    private let kapha: Int?
+    private let isEstimated: Bool
+    private let showsUnavailableState: Bool
+
+    init(metadata: AyurvedaCanonicalSearchMetadata?) {
+        vata = metadata?.doshaVata
+        pitta = metadata?.doshaPitta
+        kapha = metadata?.doshaKapha
+        isEstimated = metadata?.sourceTier == "estimated"
+        showsUnavailableState = metadata == nil
+    }
+
+    init(
+        vata: Int,
+        pitta: Int,
+        kapha: Int,
+        isEstimated: Bool = false
+    ) {
+        self.vata = vata
+        self.pitta = pitta
+        self.kapha = kapha
+        self.isEstimated = isEstimated
+        showsUnavailableState = false
+    }
 
     var body: some View {
-        HStack(spacing: 6) {
-            doshaChip("Vata", value: metadata?.doshaVata)
-            doshaChip("Pitta", value: metadata?.doshaPitta)
-            doshaChip("Kapha", value: metadata?.doshaKapha)
+        Group {
+            if showsUnavailableState {
+                Text("Ayurvedic effects unavailable")
+                    .font(.caption2)
+                    .foregroundStyle(
+                        effectManager.currentGlobalAccentColor.opacity(0.7)
+                    )
+            } else {
+                VStack(alignment: .leading, spacing: 5) {
+                    if isEstimated {
+                        Label("Estimated Ayurveda", systemImage: "sparkles")
+                            .font(.caption2.weight(.semibold))
+                            .foregroundStyle(.orange)
+                    }
+                    HStack(spacing: 6) {
+                        doshaChip("Vata", value: vata)
+                        doshaChip("Pitta", value: pitta)
+                        doshaChip("Kapha", value: kapha)
+                    }
+                }
+            }
         }
         .accessibilityElement(children: .contain)
         .accessibilityLabel("Ayurvedic dosha effects")
@@ -79,7 +123,7 @@ struct AyurvedaDoshaResultChips: View {
         }
         let color = presentation
             .map { effectColor(for: $0.tone) }
-            ?? Color.secondary
+            ?? effectManager.currentGlobalAccentColor.opacity(0.7)
 
         return Text("\(name) \(presentation?.signedValue ?? "—")")
             .font(.caption2.weight(.semibold))
@@ -109,6 +153,8 @@ struct AyurvedaDoshaResultChips: View {
 }
 
 struct AyurvedaSearchedFieldChips: View {
+    @ObservedObject private var effectManager = EffectManager.shared
+
     let metadata: AyurvedaCanonicalSearchMetadata
     let fields: [AyurvedaSearchDisplayField]
 
@@ -118,17 +164,20 @@ struct AyurvedaSearchedFieldChips: View {
                 if let text = displayText(for: field) {
                     Text(text)
                         .font(.caption2)
-                        .foregroundStyle(Color.accentColor)
+                        .foregroundStyle(
+                            effectManager.currentGlobalAccentColor
+                        )
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
                         .background(
-                            Color.accentColor.opacity(0.10),
+                            effectManager.currentGlobalAccentColor.opacity(0.10),
                             in: Capsule()
                         )
                         .overlay {
                             Capsule()
                                 .stroke(
-                                    Color.accentColor.opacity(0.35),
+                                    effectManager.currentGlobalAccentColor
+                                        .opacity(0.35),
                                     lineWidth: 1
                                 )
                         }
@@ -176,8 +225,6 @@ struct AyurvedaSearchedFieldChips: View {
             return "Digestion: \(values.joined(separator: " · "))"
         case .season:
             return listText(label: "Season", values: metadata.seasons)
-        case .category:
-            return optionalText(label: "Category", value: metadata.category)
         }
     }
 

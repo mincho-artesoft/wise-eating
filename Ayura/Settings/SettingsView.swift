@@ -1,11 +1,13 @@
 // ==== FILE: /Users/aleksandarsvinarov/Desktop/Repo/Ayura/Ayura/Settings/SettingsView.swift ====
 import SwiftUI
 import PhotosUI
+import SwiftData
 
 struct SettingsView: View {
     @ObservedObject private var themeManager = ThemeManager.shared
     @ObservedObject private var backgroundManager = BackgroundManager.shared
     @ObservedObject private var effectManager = EffectManager.shared
+    @Query private var userSettings: [UserSettings]
 
     @State private var showingImagePicker = false
     @State private var inputImage: UIImage?
@@ -124,6 +126,22 @@ struct SettingsView: View {
                 }
                 .frame(height: 120)
                 
+                Divider().padding(.horizontal)
+
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Personalization")
+                        .font(.title2.bold())
+                        .foregroundStyle(effectManager.currentGlobalAccentColor)
+
+                    if let profileID = userSettings.first?.lastSelectedProfile?.id {
+                        AyurvedaConstitutionEditorButton(
+                            profileID: profileID,
+                            pendingDraft: .constant(nil)
+                        )
+                    }
+                }
+                .padding(.horizontal)
+
                 Divider().padding(.horizontal)
                 
                 EffectControlPanelView()

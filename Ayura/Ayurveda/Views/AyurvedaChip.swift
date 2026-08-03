@@ -2,6 +2,7 @@ import SwiftUI
 
 struct AyurvedaChip: View {
   @Environment(\.colorScheme) private var colorScheme
+  @ObservedObject private var effectManager = EffectManager.shared
 
   let title: String
   let systemImage: String?
@@ -46,7 +47,7 @@ struct AyurvedaChip: View {
           .lineLimit(1)
       }
       .font(.caption.weight(.medium))
-      .foregroundStyle(isSelected ? tint : Color.primary)
+      .foregroundStyle(effectManager.currentGlobalAccentColor)
       .padding(.horizontal, 12)
       .frame(minHeight: 44)
       .background {
@@ -64,7 +65,9 @@ struct AyurvedaChip: View {
           .stroke(
             isSelected
               ? tint.opacity(0.58)
-              : Color.primary.opacity(colorScheme == .dark ? 0.22 : 0.10),
+              : effectManager.currentGlobalAccentColor.opacity(
+                colorScheme == .dark ? 0.22 : 0.10
+              ),
             lineWidth: 1
           )
       }
@@ -72,7 +75,9 @@ struct AyurvedaChip: View {
         if isSelected {
           Image(systemName: "checkmark")
             .font(.system(size: 9, weight: .bold))
-            .foregroundStyle(Color.white)
+            .foregroundStyle(
+              effectManager.isLightRowTextColor ? Color.white : Color.black
+            )
             .frame(width: 18, height: 18)
             .background(tint, in: Circle())
             .offset(x: 5, y: -5)
@@ -97,7 +102,7 @@ struct AyurvedaChip: View {
         .fixedSize(horizontal: false, vertical: true)
     }
     .font(.caption.weight(.medium))
-    .foregroundStyle(tint)
+    .foregroundStyle(effectManager.currentGlobalAccentColor)
     .padding(.horizontal, 11)
     .padding(.vertical, 7)
     .frame(minHeight: 34)

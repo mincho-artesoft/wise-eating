@@ -85,18 +85,11 @@ struct ExerciseRowView: View {
                     .layoutPriority(1)
                 }
 
-                // Тук е критичната точка за краша - достъп до релациите sports и muscleGroups
-                let sports = item.sports ?? []
                 let muscleGroups = item.muscleGroups
                 
-                if !sports.isEmpty || !muscleGroups.isEmpty {
+                if !muscleGroups.isEmpty {
                     VStack(alignment: .leading, spacing: 8) {
-                        if !sports.isEmpty {
-                            ChipScrollView(title: "Related Sports", items: sports, textColor: effectManager.currentGlobalAccentColor)
-                        }
-                        if !muscleGroups.isEmpty {
-                            ChipScrollView(title: "Primary Muscles", items: muscleGroups, textColor: effectManager.currentGlobalAccentColor)
-                        }
+                        ChipScrollView(title: "Primary Muscles", items: muscleGroups, textColor: effectManager.currentGlobalAccentColor)
                     }
                 }
             }

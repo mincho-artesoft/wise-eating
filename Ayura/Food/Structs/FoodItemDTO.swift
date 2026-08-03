@@ -69,11 +69,9 @@ struct FoodItemDTO: Codable, Sendable, Identifiable {
     // ───── Basic info ─────
     var id: Int
     var name: String
-    var category: [FoodCategory]?
     var minAgeMonths: Int?
     var desctiption: String?
     // ───── Tags/taxonomy ─────
-    var diets:     [String]?
     var allergens: [Allergen]?
 
     // ───── Nested JSON blocks ─────
@@ -86,25 +84,11 @@ struct FoodItemDTO: Codable, Sendable, Identifiable {
     var carbDetails:    CarbDetailsDTO?
     var sterols:        SterolsDTO?
 
-    // --- CHANGE: This method now takes the pre-fetched diet map for efficiency ---
-    func model(dietMap: [String: Diet]) -> FoodItem {
-
-        // ✅ Case-insensitive, trimmed lookup на Diet
-        let fetchedDiets: [Diet]
-        if let dietNames = self.diets {
-            fetchedDiets = dietNames.compactMap {
-                dietMap[$0.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()]
-            }
-        } else {
-            fetchedDiets = []
-        }
-
+    func model() -> FoodItem {
         // Base FoodItem
         let item = FoodItem(
             id: id,
             name: name,
-            category: category,
-            diets: fetchedDiets,           // ← вече са управлявани обекти от същия контекст
             allergens: allergens ?? []
         )
         
@@ -233,11 +217,9 @@ extension FoodItemCopy {
     convenience init(from dto: FoodItemDTO) {
         self.init(
             name: dto.name,
-            category: dto.category,
             isRecipe: false,
             isMenu: false,
             isUserAdded: true,
-            dietIDs: dto.diets,
             allergens: dto.allergens,
             photo: nil,
             gallery: nil,
@@ -256,4 +238,3 @@ extension FoodItemCopy {
         )
     }
 }
-

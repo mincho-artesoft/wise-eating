@@ -67,7 +67,6 @@ struct SimulatorGateResult: Codable {
     let usedFallback: Bool
     let modelCalls: Int
     let days: Int
-    let diet: String
     let allergen: String?
     let deterministic: Bool
 }
@@ -112,7 +111,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 usedFallback: first.usedFallback,
                 modelCalls: modelCalls,
                 days: sanitized.days,
-                diet: sanitized.diet.rawValue,
                 allergen: sanitized.allergens.first?.rawValue,
                 deterministic: first == second
             )
@@ -215,7 +213,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             "usedFallback": True,
             "modelCalls": 0,
             "days": 3,
-            "diet": "vegan",
             "allergen": "peanuts",
             "deterministic": True,
         }

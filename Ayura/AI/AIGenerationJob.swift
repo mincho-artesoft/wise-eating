@@ -39,7 +39,6 @@ final class AIGenerationJob {
         case recipeGeneration = "Recipe Generation"
         case menuGeneration = "Menu Generation"
         case exerciseDetail = "Exercise Detail"
-        case dietGeneration = "Diet Generation"
         case trainingPlan = "Training Plan"
         case workoutGeneration = "Workout Generation"
         case createFoodWithAI = "Create Food With AI"

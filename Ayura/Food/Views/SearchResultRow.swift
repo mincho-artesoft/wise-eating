@@ -151,7 +151,7 @@ struct SearchResultRow: View {
                             .padding(.top, 1)
                     }
 
-                    // Tags (pH, Allergens, Diets)
+                    // Tags (pH and allergens)
                     // Тук добавяме padding, защото премахнахме spacing: 8 от главния контейнер
                     VStack(alignment: .leading, spacing: 4) {
                         if smartSearch.searchContext.isPhActive && item.ph > 0 {
@@ -173,16 +173,6 @@ struct SearchResultRow: View {
                             .foregroundColor(.orange)
                         }
 
-                        if let diets = item.diets, !diets.isEmpty {
-                            HStack(alignment: .top, spacing: 4) {
-                                Image(systemName: "leaf.circle.fill")
-                                    .font(.caption2)
-                                Text(diets.map { $0.name }.joined(separator: ", "))
-                                    .font(.caption2)
-                                    .multilineTextAlignment(.leading)
-                            }
-                            .foregroundColor(.green)
-                        }
                     }
                     .padding(.top, 8) // Връщаме визуалното разстояние преди таговете
 
@@ -190,6 +180,7 @@ struct SearchResultRow: View {
                         for: item.id
                     )
                     VStack(alignment: .leading, spacing: 6) {
+                        AyurvedaPersonalFitBadge(metadata: ayurvedaMetadata)
                         AyurvedaDoshaResultChips(metadata: ayurvedaMetadata)
                         if let ayurvedaMetadata,
                            !smartSearch.searchContext

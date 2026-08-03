@@ -65,7 +65,7 @@ struct FoodRoleResolver: Sendable {
         guard document.rolesVersion == 9,
               document.catalogCount == 14_488,
               document.roleCount == FoodRole.allCases.count,
-              document.ruleCount == 34,
+              document.ruleCount == 31,
               document.items.count == document.catalogCount,
               document.definitions.count == document.roleCount
         else {

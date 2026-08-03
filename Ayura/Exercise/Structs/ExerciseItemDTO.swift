@@ -6,14 +6,12 @@ struct ExerciseItemDTO: Codable, Sendable {
     let desc: String?
     let muscleGroups: [MuscleGroup]
     let metValue: Double?
-    let sports: [Sport]
     let minimalAgeMonths: Int?
     
     func model() -> ExerciseItem {
         return ExerciseItem(
             id: id,
             name: title ?? "Unnamed Exercise",
-            sports: sports,
             description: desc,
             videoURL: nil,
             metValue: metValue,

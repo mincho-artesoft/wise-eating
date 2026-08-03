@@ -22,35 +22,31 @@ struct FoodItemListView: View {
         case menus     = "Menus"
         case plans     = "Meal Plans"
         case favorites = "Favorites"
-        case diets     = "Diets"
         case `default` = "Default"
         var id: String { rawValue }
     }
     
     // MARK: - Navigation State
     enum PresentedItem: Identifiable, Equatable {
-        case newFood, newRecipe, newMenu, newDiet, newPlan
-        case editFood(FoodItem), editRecipe(FoodItem), editMenu(FoodItem), editDiet(Diet), editPlan(MealPlan)
+        case newFood, newRecipe, newMenu, newPlan
+        case editFood(FoodItem), editRecipe(FoodItem), editMenu(FoodItem), editPlan(MealPlan)
         case duplicateFood(FoodItemCopy), duplicateRecipe(FoodItemCopy), duplicateMenu(FoodItemCopy)
-        case detail(FoodItem), detailDiet(Diet), detailPlan(MealPlan)
+        case detail(FoodItem), detailPlan(MealPlan)
         
         var id: String {
             switch self {
             case .newFood: "newFood"
             case .newRecipe: "newRecipe"
             case .newMenu: "newMenu"
-            case .newDiet: "newDiet"
             case .newPlan: "newPlan"
             case .editFood(let item): "editFood-\(item.id)"
             case .editRecipe(let item): "editRecipe-\(item.id)"
             case .editMenu(let item): "editMenu-\(item.id)"
-            case .editDiet(let item): "editDiet-\(item.id)"
             case .editPlan(let item): "editPlan-\(item.id)"
             case .duplicateFood(let item): "duplicateFood-\(item.id)"
             case .duplicateRecipe(let item): "duplicateRecipe-\(item.id)"
             case .duplicateMenu(let item): "duplicateMenu-\(item.id)"
             case .detail(let item): "detail-\(item.id)"
-            case .detailDiet(let item): "detailDiet-\(item.id)"
             case .detailPlan(let item): "detailPlan-\(item.id)"
             }
         }
@@ -81,11 +77,6 @@ struct FoodItemListView: View {
     // --- END OF CHANGE ---
     @StateObject var mealPlanVM: MealPlanListVM
     
-    @Query(sort: \Diet.name) private var allDiets: [Diet]
-    @State private var filteredDiets: [Diet] = []
-    @State private var isShowingDeleteDietAlert = false
-    @State private var dietToDelete: Diet?
-    
     // MARK: - UI State
     @State private var buttonOffset: CGSize = .zero
     @State private var isDragging: Bool = false
@@ -97,10 +88,6 @@ struct FoodItemListView: View {
     @State private var isShowingDeleteItemConfirmation = false
     @State private var itemToDelete: FoodItem? = nil
     @State private var itemUsageCount: Int = 0
-    
-    @State private var editingDietProfilesFor: Diet? = nil
-    @Query(sort: \Profile.name) private var profiles: [Profile]
-    @State private var stagingProfileIDs: Set<UUID> = []
     
     @State private var currentTimeString: String = ""
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -154,11 +141,6 @@ struct FoodItemListView: View {
                     addButton(geometry: geometry)
                 }
             }
-            .overlay {
-                if editingDietProfilesFor != nil {
-                    profileSelectionSheet
-                }
-            }
             .onReceive(timer) { _ in
                 self.currentTimeString = Self.tFmt.string(from: Date())
             }
@@ -202,9 +184,7 @@ struct FoodItemListView: View {
                 WrappingSegmentedControl(selection: $vm.filter, layoutMode: layoutMode)
                     .padding(.bottom, 5)
                 
-                if vm.filter == .diets {
-                    dietsManagementSection
-                } else if vm.filter == .plans {
+                if vm.filter == .plans {
                     mealPlansSection
                 } else if vm.items.isEmpty && !vm.isLoading {
                     Spacer()
@@ -275,16 +255,6 @@ struct FoodItemListView: View {
                 Text("")
             }
         }
-        .alert("Delete Diet", isPresented: $isShowingDeleteDietAlert) {
-            Button("Delete", role: .destructive) {
-                if let diet = dietToDelete {
-                    deleteDiet(diet)
-                }
-            }
-            Button("Cancel", role: .cancel) {}
-        } message: {
-            Text("Are you sure you want to delete the \"\(dietToDelete?.name ?? "")\" diet? This cannot be undone.")
-        }
         .alert("Delete Meal Plan", isPresented: $isShowingDeletePlanConfirmation) {
             Button("Delete Plan Only", role: .destructive) {
                 if let plan = planToDelete {
@@ -334,26 +304,18 @@ struct FoodItemListView: View {
             vm.searchText = globalSearchText
             vm.resetAndLoad()
             
-            updateFilteredDiets()
             loadButtonPosition()
         }
         .onChange(of: globalSearchText) { _, newValue in
             vm.searchText = newValue
-            if vm.filter == .diets {
-                updateFilteredDiets()
-            } else if vm.filter == .plans {
+            if vm.filter == .plans {
                 mealPlanVM.searchText = newValue
             }
         }
         .onChange(of: vm.filter) { _, newFilter in
-            if newFilter == .diets {
-                updateFilteredDiets()
-            } else if newFilter == .plans {
+            if newFilter == .plans {
                 mealPlanVM.fetchPlans()
             }
-        }
-        .onChange(of: allDiets) {
-            updateFilteredDiets()
         }
         .onChange(of: modelContext) { _, new in
             vm.attach(context: new)
@@ -361,11 +323,6 @@ struct FoodItemListView: View {
         }
         .onReceive(NotificationCenter.default.publisher(for: .foodFavoriteToggled)) { _ in
             vm.pruneFavoritesAfterToggle()
-        }
-        .onChange(of: editingDietProfilesFor) { _, newDiet in
-            guard let diet = newDiet else { return }
-            let profilesWithDiet = profiles.filter { $0.diets.contains(where: { $0.id == diet.id }) }
-            stagingProfileIDs = Set(profilesWithDiet.map { $0.id })
         }
     }
     
@@ -430,7 +387,6 @@ struct FoodItemListView: View {
                 else if vm.filter == .menus { Text("Menus list").font(.title.bold()) }
                 else if vm.filter == .plans { Text("Meal Plans").font(.title.bold()) }
                 else if vm.filter == .favorites { Text("Favorites").font(.title.bold()) }
-                else if vm.filter == .diets { Text("Manage Diets").font(.title.bold()) }
             }
             .foregroundColor(effectManager.currentGlobalAccentColor)
             
@@ -463,26 +419,6 @@ struct FoodItemListView: View {
         }
         
         let onDismissItemView: () -> Void = {
-            withAnimation(.easeInOut(duration: 0.3)) {
-                self.presentedItem = nil
-                self.isAddButtonVisible = true
-                self.navBarIsHiden = false
-                if SIsSearching{
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                        onActivateSearch()
-                        globalSearchText = SglobalSearchText
-                        SIsSearching = false
-                    }
-                }else{
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                        onDismissSearch()
-                        globalSearchText = ""
-                    }
-                }
-            }
-        }
-        
-        let onDismissDietItemView: (Diet?) -> Void = {_ in
             withAnimation(.easeInOut(duration: 0.3)) {
                 self.presentedItem = nil
                 self.isAddButtonVisible = true
@@ -549,34 +485,6 @@ struct FoodItemListView: View {
         case .detail(let food):
             FoodItemDetailView(food: food, profile: profile, onDismiss: onDismissItemView)
             
-        case .newDiet:
-            AddEditDietView(
-                dietToEdit: nil,
-                profile: profile,
-                onDismiss: onDismissDietItemView,
-                globalSearchText: $globalSearchText,
-                isSearchFieldFocused: $isSearchFieldFocused,
-                onDismissSearch: onDismissSearch
-            )
-        case .editDiet(let diet):
-            AddEditDietView(
-                dietToEdit: diet,
-                profile: profile,
-                onDismiss: onDismissDietItemView,
-                globalSearchText: $globalSearchText,
-                isSearchFieldFocused: $isSearchFieldFocused,
-                onDismissSearch: onDismissSearch
-            )
-            
-        case .detailDiet(let diet):
-            DietDetailView(
-                diet: diet,
-                profile: self.profile,
-                onDismiss: onDismissItemView,
-                globalSearchText: $globalSearchText,
-                onDismissSearch: onDismissSearch
-            )
-            
         case .newPlan:
             MealPlanEditorView(
                 profile: profile!,
@@ -610,7 +518,6 @@ struct FoodItemListView: View {
         case .plans: return "No Meal Plans"
         case .favorites: return "No Favorites"
         case .default: return "No Items Available"
-        case .diets: return ""
         }
     }
     
@@ -625,7 +532,6 @@ struct FoodItemListView: View {
             case .plans: text = "Tap the '+' button to create your first meal plan."
             case .favorites: text = "You can add items to your favorites by swiping left on them."
             case .default: text = "Select a filter like 'Foods' or 'Recipes' to get started."
-            case .diets: text = ""
             }
         }
         return Text(text)
@@ -692,114 +598,6 @@ struct FoodItemListView: View {
             )
         )
         .ignoresSafeArea(.all)
-    }
-
-    
-    private var dietsManagementSection: some View {
-        Group {
-            if filteredDiets.isEmpty && !globalSearchText.isEmpty {
-                ContentUnavailableView.search(text: globalSearchText)
-                    .foregroundColor(effectManager.currentGlobalAccentColor)
-            } else {
-                List {
-                    ForEach(Array(filteredDiets.enumerated()), id: \.element.id) { index, diet in
-                        VStack(spacing: 0) {
-                            HStack {
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text(diet.name)
-                                        .foregroundColor(effectManager.currentGlobalAccentColor)
-                                    if diet.isDefault {
-                                        Text("Default")
-                                            .font(.caption2)
-                                            .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.7))
-                                    }
-                                }
-                                Spacer()
-                                profileIconsPreview(for: diet)
-                                Button(action: {
-                                    if isSearching {
-                                        onDismissSearch()
-                                    }
-                                    withAnimation {
-                                        editingDietProfilesFor = diet
-                                        navBarIsHiden = true
-                                        isProfilesDrawerVisible = false
-                                    }
-                                }) {
-                                    Image(systemName: "person.2.fill")
-                                        .font(.title3)
-                                        .foregroundColor(effectManager.currentGlobalAccentColor)
-                                        .padding(10)
-                                        .glassCardStyle(cornerRadius: 20)
-                                }
-                                .buttonStyle(.plain)
-                            }
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                present(item: .detailDiet(diet))
-                            }
-                            .padding()
-                            .glassCardStyle(cornerRadius: 20)
-                            .swipeActions(allowsFullSwipe: false) {
-                                if !diet.isDefault {
-                                    Button(role: .destructive) {
-                                        if #available(iOS 26.0, *) {
-                                            deleteDiet(diet)
-                                        } else {
-                                            dietToDelete = diet
-                                            isShowingDeleteDietAlert = true
-                                        }
-                                    } label: {
-                                        Image(systemName: "trash.fill")
-                                            .symbolRenderingMode(.palette)
-                                            .foregroundStyle(effectManager.currentGlobalAccentColor)
-                                    }
-                                    .tint(.clear)
-                                }
-                                Button {
-                                    present(item: .editDiet(diet))
-                                } label: {
-                                    Image(systemName: "pencil")
-                                        .symbolRenderingMode(.palette)
-                                        .foregroundStyle(effectManager.currentGlobalAccentColor)
-                                }
-                                .tint(.clear)
-                            }
-                            .padding(.vertical, 6) // вертикален padding върху картата
-
-                            // 👇 Реклама след някои диети, по същата логика
-                            if shouldShowAd(at: index) {
-                                AdRowView()
-                                    .padding(.top, 8)
-                                    .padding(.bottom, 8)
-                                    .transition(.opacity)
-                            }
-                        }
-                        .listRowBackground(Color.clear)
-                        .listRowSeparator(.hidden)
-                        .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
-                    }
-                    
-                    Color.clear.frame(height: 150)
-                        .listRowBackground(Color.clear)
-                        .listRowSeparator(.hidden)
-                }
-                .listStyle(.plain)
-                .scrollContentBackground(.hidden)
-                .mask(
-                    LinearGradient(
-                        gradient: Gradient(stops: [
-                            .init(color: .clear, location: 0),
-                            .init(color: effectManager.currentGlobalAccentColor, location: 0.01),
-                            .init(color: effectManager.currentGlobalAccentColor, location: 0.9),
-                            .init(color: .clear, location: 0.95)
-                        ]),
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                )
-            }
-        }
     }
 
     
@@ -895,193 +693,6 @@ struct FoodItemListView: View {
         }
     }
 
-    
-    @ViewBuilder
-    private func profileIconsPreview(for diet: Diet) -> some View {
-        let associatedProfiles = profiles.filter { $0.diets.contains(where: { $0.id == diet.id }) }
-        let displayProfiles = associatedProfiles.prefix(3)
-        let remainingCount = max(associatedProfiles.count - displayProfiles.count, 0)
-        HStack(spacing: -10) {
-            ForEach(displayProfiles) { profile in
-                ZStack {
-                    Circle()
-                        .fill(.clear)
-                        .frame(width: 28, height: 28)
-                        .overlay(
-                            Circle()
-                                .fill(effectManager.isLightRowTextColor ? .black : .white)
-                                .stroke(effectManager.currentGlobalAccentColor, lineWidth: 1)
-                        )
-                    
-                    
-                    if let data = profile.photoData, let ui = UIImage(data: data) {
-                        Image(uiImage: ui)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 26, height: 26)
-                            .clipShape(Circle())
-                    } else {
-                        ZStack {
-                            Circle().fill(effectManager.currentGlobalAccentColor.opacity(0.2))
-                            Text(String(profile.name.first ?? "?"))
-                                .font(.caption2).bold()
-                                .foregroundColor(effectManager.currentGlobalAccentColor)
-                        }
-                        .frame(width: 26, height: 26)
-                    }
-                }
-            }
-            if remainingCount > 0 {
-                ZStack {
-                    Circle()
-                        .fill(.clear)
-                        .frame(width: 28, height: 28)
-                        .overlay(
-                            Circle()
-                                .fill(effectManager.isLightRowTextColor ? .black : .white)
-                                .stroke(effectManager.currentGlobalAccentColor, lineWidth: 0.5)
-                        )
-                    ZStack {
-                        Circle().fill(effectManager.currentGlobalAccentColor.opacity(0.2))
-                        Text("+\(remainingCount)")
-                            .font(.caption2).bold()
-                            .foregroundColor(effectManager.currentGlobalAccentColor)
-                    }
-                    .frame(width: 26, height: 26)
-                }
-            }
-        }
-    }
-    
-    @ViewBuilder
-    private var profileSelectionSheet: some View {
-        ZStack(alignment: .bottom) {
-            
-            if effectManager.isLightRowTextColor {
-                Color.black.opacity(0.4).ignoresSafeArea()
-                    .ignoresSafeArea()
-                    .transition(.opacity)
-                    .onTapGesture {
-                        withAnimation(.easeInOut(duration: 0.3)) {
-                            editingDietProfilesFor = nil
-                            navBarIsHiden = false
-                        }
-                    }
-            } else {
-                Color.white.opacity(0.4).ignoresSafeArea()
-                    .ignoresSafeArea()
-                    .transition(.opacity)
-                    .onTapGesture {
-                        withAnimation(.easeInOut(duration: 0.3)) {
-                            editingDietProfilesFor = nil
-                            navBarIsHiden = false
-                        }
-                    }
-            }
-            
-            
-            VStack(spacing: 8) {
-                ZStack {
-                    HStack {
-                        Text("Assign '\(editingDietProfilesFor?.name ?? "")' to Profiles")
-                            .font(.headline)
-                            .foregroundColor(effectManager.currentGlobalAccentColor)
-                        Spacer()
-                        Button("Done") {
-                            saveDietProfileAssignments()
-                        }
-                        .foregroundColor(effectManager.currentGlobalAccentColor)
-                        .padding(.horizontal, 10).padding(.vertical, 5)
-                        .glassCardStyle(cornerRadius: 20)
-                    }
-                }
-                .padding(.horizontal).frame(height: 35)
-                
-                ScrollView(showsIndicators: false) {
-                    VStack(alignment: .leading, spacing: 0) {
-                        ForEach(profiles) { profile in
-                            Button {
-                                if stagingProfileIDs.contains(profile.id) {
-                                    stagingProfileIDs.remove(profile.id)
-                                } else {
-                                    stagingProfileIDs.insert(profile.id)
-                                }
-                            } label: {
-                                HStack(spacing: 12) {
-                                    if let data = profile.photoData, let ui = UIImage(data: data) {
-                                        Image(uiImage: ui)
-                                            .resizable()
-                                            .scaledToFill()
-                                            .frame(width: 40, height: 40)
-                                            .clipShape(Circle())
-                                    } else {
-                                        Image(systemName: "person.circle")
-                                            .font(.system(size: 40))
-                                            .foregroundColor(effectManager.currentGlobalAccentColor.opacity(1))
-                                    }
-                                    
-                                    Text(profile.name)
-                                        .foregroundColor(effectManager.currentGlobalAccentColor)
-                                    
-                                    Spacer()
-                                    
-                                    if stagingProfileIDs.contains(profile.id) {
-                                        Image(systemName: "checkmark")
-                                            .foregroundColor(effectManager.currentGlobalAccentColor)
-                                    }
-                                }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .contentShape(Rectangle())
-                                .padding(.horizontal)
-                                .padding(.vertical, 8)
-                            }
-                            .buttonStyle(.plain)
-                        }
-                    }
-                    .padding(.bottom, 150)
-                }
-            }
-            .padding(.top)
-            .background {
-                Rectangle()
-                    .fill(.ultraThinMaterial)
-                    .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light) // 👈 Това принуждава материала да е тъмен
-            }
-            .cornerRadius(20, corners: [.topLeft, .topRight])
-            .frame(maxHeight: UIScreen.main.bounds.height * 0.55)
-            .transition(.move(edge: .bottom))
-        }
-        .ignoresSafeArea(.container, edges: .bottom)
-        .zIndex(1)
-    }
-    
-    private func updateFilteredDiets() {
-        if globalSearchText.isEmpty {
-            filteredDiets = allDiets
-        } else {
-            filteredDiets = allDiets.filter { $0.name.localizedCaseInsensitiveContains(globalSearchText) }
-        }
-    }
-    
-    private func deleteDiet(_ diet: Diet) {
-        do {
-            let allFoodItems = try modelContext.fetch(FetchDescriptor<FoodItem>())
-            for item in allFoodItems {
-                item.diets?.removeAll { $0.id == diet.id }
-            }
-            
-            let allProfiles = try modelContext.fetch(FetchDescriptor<Profile>())
-            for profile in allProfiles {
-                profile.diets.removeAll { $0.id == diet.id }
-            }
-            
-            modelContext.delete(diet)
-            try modelContext.save()
-        } catch {
-            print("Failed to delete diet and update relationships: \(error)")
-        }
-    }
-    
     @ViewBuilder
     private func swipeActions(for item: FoodItem) -> some View {
         Group {
@@ -1197,8 +808,7 @@ struct FoodItemListView: View {
                 let minX = radius
                 let maxX = size.width  - radius
                 let minY = radius + safeArea.top
-                // -80 допълнителен буфер отдолу, както при AI бутона
-                let maxY = size.height - radius - safeArea.bottom - 80
+                let maxY = size.height - radius - safeArea.bottom
                 
                 let clampedCenterX = min(max(rawCenterX, minX), maxX)
                 let clampedCenterY = min(max(rawCenterY, minY), maxY)
@@ -1284,7 +894,7 @@ struct FoodItemListView: View {
             // Разширяваме логиката, за да включим всички случаи,
             // които трябва да скрият навигационната лента.
             switch item {
-            case .newFood, .editFood, .duplicateFood, .detail, .detailDiet, .detailPlan:
+            case .newFood, .editFood, .duplicateFood, .detail, .detailPlan:
                 shouldHideNav = true
             default:
                 // Всички останали случаи (като .newRecipe, .editDiet и т.н.)
@@ -1306,8 +916,6 @@ struct FoodItemListView: View {
             present(item: .newRecipe)
         case .menus:
             present(item: .newMenu)
-        case .diets:
-            present(item: .newDiet)
         case .plans:
             present(item: .newPlan)
         default:
@@ -1326,32 +934,6 @@ struct FoodItemListView: View {
         let width = defaults.double(forKey: "\(buttonPositionKey)_width")
         let height = defaults.double(forKey: "\(buttonPositionKey)_height")
         self.buttonOffset = CGSize(width: width, height: height)
-    }
-    
-    private func saveDietProfileAssignments() {
-        guard let diet = editingDietProfilesFor else { return }
-        
-        for profile in profiles {
-            let profileHasDiet = profile.diets.contains { $0.id == diet.id }
-            let profileShouldHaveDiet = stagingProfileIDs.contains(profile.id)
-            
-            if profileShouldHaveDiet && !profileHasDiet {
-                profile.diets.append(diet)
-            } else if !profileShouldHaveDiet && profileHasDiet {
-                profile.diets.removeAll { $0.id == diet.id }
-            }
-        }
-        
-        do {
-            try modelContext.save()
-        } catch {
-            print("Error saving diet-profile associations: \(error)")
-        }
-        
-        withAnimation {
-            editingDietProfilesFor = nil
-            navBarIsHiden = false
-        }
     }
     
     private struct FoodRow: View {

@@ -104,8 +104,6 @@ struct FoodItemDetailView: View {
                         textInfoSection
                         bannerAdSection
                           .frame(height: isBannerAdLoaded ? 120 : 0)
-                        categorySection
-                        dietsSection
                         macrosSection
                         phSection
                         ayurvedaSection
@@ -158,13 +156,6 @@ struct FoodItemDetailView: View {
             }
         }
         .onAppear {
-            if let diets = food.diets, !diets.isEmpty {
-                let dietNames = diets.map { $0.name }.joined(separator: ", ")
-                print("🥗 Food Item '\(food.name)' Diets: [\(dietNames)]")
-            } else {
-                print("🥗 Food Item '\(food.name)' has no associated diets.")
-            }
-
             if selectedImageData == nil { selectedImageData = food.photo }
             if !showThumbnails {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
@@ -431,16 +422,6 @@ struct FoodItemDetailView: View {
         .frame(maxWidth: .infinity).padding(.top, 10)
     }
 
-    private var categorySection: some View {
-        let items = (food.category ?? []).map { StaticTag(label: $0.rawValue, color: .purple) }
-        return tagSectionView(title: "Category", tags: items)
-    }
-    
-    private var dietsSection: some View {
-        let items = (food.diets ?? []).map { StaticTag(label: $0.name, color: .blue) }
-        return tagSectionView(title: "Diets", tags: items)
-    }
-    
     private var allergensSection: some View {
         let items = (food.allergens ?? []).map { StaticTag(label: $0.rawValue, color: .orange) }
         return tagSectionView(title: "Allergens", tags: items)

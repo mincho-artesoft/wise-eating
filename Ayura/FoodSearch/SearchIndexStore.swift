@@ -6,7 +6,7 @@ final class SearchIndexStore {
     static let shared = SearchIndexStore()
 
     /// Bump this when the structure of CompactFoodItem / tokens changes
-    private let currentIndexVersion: Int = 7
+    private let currentIndexVersion: Int = 9
 
     // MARK: - In-Memory Cache
     private(set) var revision: UInt64 = 0
@@ -15,7 +15,6 @@ final class SearchIndexStore {
     private(set) var invertedIndex: [String: Set<Int>] = [:]
     private(set) var vocabulary: [String] = []
     private(set) var maxNutrientValues: [NutrientType: Double] = [:]
-    private(set) var knownDiets: Set<String> = []
     private(set) var nutrientRankings: [NutrientType: [Int]] = [:]
     private(set) var ayurvedaFacetIndex: [String: Set<Int>] = [:]
     private var bundledAyurvedaSearchMap: [Int: AyurvedaCanonicalSearchMetadata]?
@@ -126,7 +125,7 @@ final class SearchIndexStore {
             id: item.id, name: item.name, searchTokens: item.searchTokens,
             minAgeMonths: item.minAgeMonths,
             enforcedMinAgeMonths: item.enforcedMinAgeMonths,
-            diets: item.diets, allergens: item.allergens,
+            allergens: item.allergens,
             ph: item.ph, referenceWeightG: item.referenceWeightG,
             isRecipe: item.isRecipe, isMenu: item.isMenu, isFavorite: isFavorite,
             ayurvedaFacets: item.ayurvedaFacets,
@@ -177,7 +176,6 @@ final class SearchIndexStore {
                 ayurvedaFacetIndex[facet, default: []].insert(newCompactItem.id)
             }
             rebuildNutrientIndexes(for: Set(newCompactItem.nutrientValues.keys))
-            rebuildKnownDiets()
             revision &+= 1
             scheduleCacheSave(context: context)
             print("🔎 SearchIndexStore: Inserted new item '\(food.name)' during update call.")
@@ -241,7 +239,6 @@ final class SearchIndexStore {
             for: Set(oldCompactItem.nutrientValues.keys)
                 .union(newCompactItem.nutrientValues.keys)
         )
-        rebuildKnownDiets()
         revision &+= 1
         scheduleCacheSave(context: context)
         
@@ -277,7 +274,6 @@ final class SearchIndexStore {
         }
 
         rebuildNutrientIndexes(for: Set(compact.nutrientValues.keys))
-        rebuildKnownDiets()
         revision &+= 1
         scheduleCacheSave(context: context)
         
@@ -312,7 +308,6 @@ final class SearchIndexStore {
         var tmpMap: [Int: CompactFoodItem] = [:]
         var tmpInverted: [String: Set<Int>] = [:]
         var vocabSet = Set<String>()
-        var dietsSet = Set<String>()
         var tmpFacetIndex: [String: Set<Int>] = [:]
 
         // 1. Build Compact Items & Index
@@ -331,10 +326,6 @@ final class SearchIndexStore {
                 vocabSet.insert(t)
             }
             
-            for d in compact.diets {
-                dietsSet.insert(d)
-            }
-
             for facet in compact.ayurvedaFacets {
                 tmpFacetIndex[facet, default: []].insert(compact.id)
             }
@@ -376,7 +367,6 @@ final class SearchIndexStore {
         self.invertedIndex = tmpInverted
         self.vocabulary = Array(vocabSet)
         self.maxNutrientValues = tmpMaxValues
-        self.knownDiets = dietsSet
         self.nutrientRankings = tmpRankings
         self.ayurvedaFacetIndex = tmpFacetIndex
         revision &+= 1
@@ -388,7 +378,6 @@ final class SearchIndexStore {
             invertedIndex: invertedIndex.mapValues { Array($0) },
             vocabulary: vocabulary,
             maxNutrientValues: encodeMaxNutrientValues(maxNutrientValues),
-            knownDiets: Array(knownDiets),
             nutrientRankings: encodeNutrientRankings(nutrientRankings),
             ayurvedaFacetIndex: ayurvedaFacetIndex.mapValues { Array($0) }
         )
@@ -417,7 +406,6 @@ final class SearchIndexStore {
         }
         self.vocabulary = payload.vocabulary
         self.maxNutrientValues = decodeMaxNutrientValues(payload.maxNutrientValues)
-        self.knownDiets = Set(payload.knownDiets)
         self.nutrientRankings = decodeNutrientRankings(payload.nutrientRankings)
         self.ayurvedaFacetIndex = payload.ayurvedaFacetIndex.reduce(into: [:]) {
             $0[$1.key] = Set($1.value)
@@ -464,7 +452,6 @@ final class SearchIndexStore {
             }
         }
 
-        let dietNames = Set((food.diets ?? []).map { $0.name })
         let allergenNames = Set((food.allergens ?? []).map { $0.name })
 
         var nutrientDict: [NutrientType: Double] = [:]
@@ -486,8 +473,19 @@ final class SearchIndexStore {
             }
         }()
 
-        let adjustedAyurveda = ayurvedaMetadata?
-            .applyingDerivedModifiers(to: food.name)
+        let adjustedAyurveda: AyurvedaCanonicalSearchMetadata
+        if let ayurvedaMetadata {
+            adjustedAyurveda = ayurvedaMetadata
+                .applyingDerivedModifiers(to: food.name)
+        } else {
+            // The estimate already includes name-based preparation modifiers.
+            adjustedAyurveda = AyurvedaCanonicalSearchMetadata(
+                estimate: AyurvedaRules.shared.estimated(
+                    name: food.name
+                ),
+                enforcedMinAgeMonths: food.minAgeMonths
+            )
+        }
 
         return CompactFoodItem(
             id: food.id,
@@ -495,14 +493,13 @@ final class SearchIndexStore {
             searchTokens: tokenSet,
             minAgeMonths: food.minAgeMonths,
             enforcedMinAgeMonths: enforcedMinAgeMonths ?? food.minAgeMonths,
-            diets: dietNames,
             allergens: allergenNames,
             ph: phValue,
             referenceWeightG: food.referenceWeightG,
             isRecipe: food.isRecipe,
             isMenu: food.isMenu,
             isFavorite: food.isFavorite,
-            ayurvedaFacets: adjustedAyurveda?.facets ?? [],
+            ayurvedaFacets: adjustedAyurveda.facets,
             ayurvedaMetadata: adjustedAyurveda,
             nutrientValues: nutrientDict
         )
@@ -633,11 +630,6 @@ final class SearchIndexStore {
         }
     }
 
-    private func rebuildKnownDiets() {
-        knownDiets = compactFoods.reduce(into: Set<String>()) {
-            $0.formUnion($1.diets)
-        }
-    }
 }
 
 // MARK: - Codable Structures (Unchanged)
@@ -649,7 +641,6 @@ private struct SearchIndexPayload: Codable {
         let searchTokens: [String]
         let minAgeMonths: Int
         let enforcedMinAgeMonths: Int
-        let diets: [String]
         let allergens: [String]
         let ph: Double
         let referenceWeightG: Double
@@ -665,7 +656,6 @@ private struct SearchIndexPayload: Codable {
     let invertedIndex: [String: [Int]]
     let vocabulary: [String]
     let maxNutrientValues: [String: Double]
-    let knownDiets: [String]
     let nutrientRankings: [String: [Int]]
     let ayurvedaFacetIndex: [String: [Int]]
 }
@@ -680,7 +670,6 @@ private extension CompactFoodItem {
             searchTokens: Array(searchTokens),
             minAgeMonths: minAgeMonths,
             enforcedMinAgeMonths: enforcedMinAgeMonths,
-            diets: Array(diets),
             allergens: Array(allergens),
             ph: ph,
             referenceWeightG: referenceWeightG,
@@ -703,7 +692,6 @@ private extension CompactFoodItem {
             searchTokens: Set(codable.searchTokens),
             minAgeMonths: codable.minAgeMonths,
             enforcedMinAgeMonths: codable.enforcedMinAgeMonths,
-            diets: Set(codable.diets),
             allergens: Set(codable.allergens),
             ph: codable.ph,
             referenceWeightG: codable.referenceWeightG,

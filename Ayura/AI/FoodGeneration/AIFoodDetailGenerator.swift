@@ -142,8 +142,6 @@ class AIFoodDetailGenerator {
         var sharedPromptPrefix = ""
         
         let greedyOptions = GenerationOptions(sampling: .greedy, maximumResponseTokens: 64)
-        let allowedDiets = try dbDietNames(in: ctx)
-        
         // 🔧 UserSettings → кои „тежки“ детайли да се генерират
         let settings = loadUserSettings(from: ctx)
 
@@ -306,8 +304,6 @@ class AIFoodDetailGenerator {
         
         let refName: String? = similarFood?.name
         let refMinAge: Int?  = similarFood?.minAgeMonths
-        let allowedDietsStr = allowedDiets.joined(separator: ", ")
-        
         // 2) Построяваме промптовете предварително, като вмъкваме контекста само ако е наличен
         let minAgePrompt = """
         You are a pediatric nutrition specialist.
@@ -316,22 +312,9 @@ class AIFoodDetailGenerator {
         Return ONLY the 'minAgeMonths' field.\( (refName != nil && refMinAge != nil) ? "\n\nCONTEXT: For reference, similar food '\(refName!)' has minAgeMonths = \(refMinAge!). Use for plausibility only." : "" )
         """
         
-        let categoriesPrompt = """
-        Classify the food '\(foodName)' into relevant categories.
-        Return ONLY the 'categories' array using the provided enum values.\( (refName != nil) ? "\n\nNOTE: A DB-near item is '\(refName!)'. Do not force identical categories; use it solely as plausibility context." : "" )
-        """
-        
         let allergensPrompt = """
         List the common allergens present in the food '\(foodName)'.
         Return ONLY the 'allergens' array using the provided enum values.\( (refName != nil) ? "\n\nNOTE: Similar reference '\(refName!)'. Use only as plausibility; do not fabricate allergens." : "" )
-        """
-        
-        let dietsPrompt = """
-        Which of the following diets does '\(foodName)' fit into?
-        Choose ONLY from this exact list (case-insensitive match; if none apply, return []):
-        \(allowedDietsStr)
-        
-        Return ONLY the 'diets' array as strings.\( (refName != nil) ? "\n\nNOTE: Reference nearby item '\(refName!)'. Diets may differ; use only as plausibility context." : "" )
         """
         
         // 3) Паралелни задачи без директен capture на similarFood
@@ -346,16 +329,6 @@ class AIFoodDetailGenerator {
         }
         await globalTaskManager.addTask(minAgeTask)
         try Task.checkCancellation()
-        let categoriesTask = Task<AICategoriesResponse, Error> {
-            try await askWithRetry(
-                "Categories",
-                categoriesPrompt,
-                generating: AICategoriesResponse.self,
-                maxTokens: 512
-            )
-        }
-        await globalTaskManager.addTask(categoriesTask)
-        try Task.checkCancellation()
         let allergensTask = Task<AIAllergensResponse, Error> {
             try await askWithRetry(
                 "Allergens",
@@ -366,21 +339,9 @@ class AIFoodDetailGenerator {
         }
         try Task.checkCancellation()
         await globalTaskManager.addTask(allergensTask)
-        let dietsTask = Task<AIDietsResponse, Error> {
-            try await askWithRetry(
-                "Diets",
-                dietsPrompt,
-                generating: AIDietsResponse.self,
-                maxTokens: 512
-            )
-        }
-        await globalTaskManager.addTask(dietsTask)
-        try Task.checkCancellation()
         // и тук вместо tuple-await на async let:
         let minAgeResp = try await minAgeTask.value
-        let categoriesResp = try await categoriesTask.value
         let allergensResp = try await allergensTask.value
-        let diets = try await dietsTask.value
         
         // MARK: 6) Macronutrients - PARALLEL BATCH 2
         let carbohydratesPrompt = createPromptWithReference(
@@ -1936,10 +1897,8 @@ class AIFoodDetailGenerator {
         let dto = FoodItemDTO(
             id: 0,
             name: foodName,
-            category: categoriesResp.categories.compactMap { FoodCategory(rawValue: $0.rawValue) },
             minAgeMonths: minAgeResp.minAgeMonths,
             desctiption: descResp.description,
-            diets: diets.diets,
             allergens: allergensResp.allergens.compactMap { Allergen(rawValue: $0.rawValue) },
             // ... останалата част от DTO асемблирането ...
             
@@ -2089,8 +2048,6 @@ class AIFoodDetailGenerator {
     ) throws -> (
         description: String,
         minAgeMonthsTxt: String,
-        categories: Set<FoodCategory.ID>,
-        diets: Set<Diet.ID>,
         allergens: Set<Allergen.ID>,
         macros: MacroForm,
         others: OtherForm,
@@ -2105,10 +2062,7 @@ class AIFoodDetailGenerator {
         let minAge = dto.minAgeMonths ?? 0
         let minAgeMonthsTxt = minAge > 0 ? String(minAge) : ""
         
-        let categories = Set((dto.category ?? []).map { $0.id })
         let allergens  = Set((dto.allergens ?? []).map { $0.id })
-        let dietIDs = try resolveDietIDs(from: Set(dto.diets ?? []), in: ctx, createIfMissing: true)
-        
         let macros      = MacroForm(from: dto.macronutrients)
         let others      = OtherForm(from: dto.other)
         let vitamins    = VitaminForm(from: dto.vitamins)
@@ -2118,7 +2072,7 @@ class AIFoodDetailGenerator {
         let carbDetails = CarbDetailsForm(from: dto.carbDetails)
         let sterols     = SterolsForm(from: dto.sterols)
         
-        return (description, minAgeMonthsTxt, categories, dietIDs, allergens, macros, others, vitamins, minerals, lipids, aminoAcids, carbDetails, sterols)
+        return (description, minAgeMonthsTxt, allergens, macros, others, vitamins, minerals, lipids, aminoAcids, carbDetails, sterols)
     }
     
     // Груба, но ефективна Jaccard-подобна близост между две имена (по токени)

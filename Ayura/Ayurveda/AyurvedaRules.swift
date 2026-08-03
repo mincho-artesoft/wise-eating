@@ -2,8 +2,7 @@ import Foundation
 
 public typealias DoshaVPK = (vata: Int, pitta: Int, kapha: Int)
 
-public struct CategoryRule: Sendable {
-  public let category: String?
+public struct AyurvedaBaseRule: Sendable {
   public let vpk: DoshaVPK
   public let virya: String
   public let gunas: [String]
@@ -23,7 +22,7 @@ public struct EstimatedAyurveda: Sendable {
   public let virya: String
   public let gunas: [String]
   public let appliedModifiers: [AppliedModifier]
-  public let categoryRule: CategoryRule
+  public let baseRule: AyurvedaBaseRule
   public let confidence: Double
 }
 
@@ -38,8 +37,7 @@ public struct AyurvedaRules: Sendable {
 
   public let rulesVersion: Int
 
-  private let categories: [String: CategoryRule]
-  private let defaultRule: CategoryRule
+  private let baseRule: AyurvedaBaseRule
   private let modifierRules: [ModifierRule]
 
   private init() throws {
@@ -55,25 +53,8 @@ public struct AyurvedaRules: Sendable {
     let envelope = try JSONDecoder().decode(RulesEnvelope.self, from: data)
 
     rulesVersion = envelope.rulesVersion
-    defaultRule = try CategoryRule(dto: envelope.default)
+    baseRule = try AyurvedaBaseRule(dto: envelope.default)
     modifierRules = try envelope.modifiers.map { try ModifierRule(dto: $0) }
-
-    var decodedCategories: [String: CategoryRule] = [:]
-    decodedCategories.reserveCapacity(envelope.categories.count)
-    for dto in envelope.categories {
-      guard let category = dto.category else {
-        throw AyurvedaRulesError.missingCategory
-      }
-      guard decodedCategories[category] == nil else {
-        throw AyurvedaRulesError.duplicateCategory(category)
-      }
-      decodedCategories[category] = try CategoryRule(dto: dto)
-    }
-    categories = decodedCategories
-  }
-
-  public func rule(forCategory category: String) -> CategoryRule {
-    categories[category] ?? defaultRule
   }
 
   public func modifiers(forName name: String) -> [AppliedModifier] {
@@ -86,21 +67,20 @@ public struct AyurvedaRules: Sendable {
     }
   }
 
-  public func estimated(category: String, name: String) -> EstimatedAyurveda {
-    let categoryRule = rule(forCategory: category)
+  public func estimated(name: String) -> EstimatedAyurveda {
     let appliedModifiers = modifiers(forName: name)
-    var gunas = categoryRule.gunas
+    var gunas = baseRule.gunas
     for modifier in appliedModifiers {
       for guna in modifier.gunas where !gunas.contains(guna) {
         gunas.append(guna)
       }
     }
     return EstimatedAyurveda(
-      vpk: Self.adjustedVPK(base: categoryRule.vpk, modifiers: appliedModifiers),
-      virya: categoryRule.virya,
+      vpk: Self.adjustedVPK(base: baseRule.vpk, modifiers: appliedModifiers),
+      virya: baseRule.virya,
       gunas: gunas,
       appliedModifiers: appliedModifiers,
-      categoryRule: categoryRule,
+      baseRule: baseRule,
       confidence: 0.25
     )
   }
@@ -166,9 +146,8 @@ public struct AyurvedaRules: Sendable {
   }
 }
 
-private extension CategoryRule {
+private extension AyurvedaBaseRule {
   init(dto: RuleDTO) throws {
-    category = dto.category
     vpk = try dto.vpk.doshaVPK()
     virya = dto.virya
     gunas = dto.gunas
@@ -194,13 +173,11 @@ private struct ModifierRule: Sendable {
 
 private struct RulesEnvelope: Decodable {
   let rulesVersion: Int
-  let categories: [RuleDTO]
   let `default`: RuleDTO
   let modifiers: [ModifierDTO]
 }
 
 private struct RuleDTO: Decodable {
-  let category: String?
   let vpk: [Int]
   let virya: String
   let gunas: [String]
@@ -227,7 +204,5 @@ private extension Array where Element == Int {
 
 private enum AyurvedaRulesError: Error {
   case missingBundle
-  case missingCategory
-  case duplicateCategory(String)
   case invalidVPK([Int])
 }

@@ -64,6 +64,24 @@
             "restoredSha256": "bdc69c2823f95d0a9cba3dfa5d370fd00eceda2be9ee7354c59a710130a747e1",
             "restoredByteSize": 351950638,
             "producingCommit": "ecc384f464cf1f2866470976dd3fa7d9d9d271f5"
+        },
+        {
+            "filename": "Ayura/preseeded_db.store.gz.part-aa",
+            "sha256": "db5dc492e5f5e1a00f1d92eb557ecaefa8f234e5e24628f7b8ee9b34d3383834",
+            "byteSize": 73400320,
+            "frameCount": null,
+            "restoredFilename": "Ayura/preseeded_db.store",
+            "restoredSha256": "23b3f5bd19e3813ca6205c477edcd6e0584bbb96fdd5f4395cdc3a0a7984327e",
+            "restoredByteSize": 224419840
+        },
+        {
+            "filename": "Ayura/preseeded_db.store.gz.part-ab",
+            "sha256": "317628daf869601c1d01cfe775678a6397c12133296c5b6131e311003c78074f",
+            "byteSize": 22169899,
+            "frameCount": null,
+            "restoredFilename": "Ayura/preseeded_db.store",
+            "restoredSha256": "23b3f5bd19e3813ca6205c477edcd6e0584bbb96fdd5f4395cdc3a0a7984327e",
+            "restoredByteSize": 224419840
         }
     ]
 }

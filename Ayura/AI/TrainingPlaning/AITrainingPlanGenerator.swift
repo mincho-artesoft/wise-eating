@@ -60,7 +60,7 @@ final class AITrainingPlanGenerator {
         }
         try Task.checkCancellation()
         
-        emit(tag("👤 Profile: \(profile.name) | age=\(profile.age) | gender=\(profile.gender) | goal=\(profile.goal?.rawValue ?? "General Fitness")"), onLog)
+        emit(tag("👤 Profile: \(profile.name) | age=\(profile.age) | gender=\(profile.gender)"), onLog)
         
         do {
             emit(tag("🚀 Starting Training Plan Generation for '\(profile.name)'..."), onLog)
@@ -357,7 +357,7 @@ final class AITrainingPlanGenerator {
            - Strictly respect the user's profile and goals.
            """
         })
-        let prompt = "PROFILE: Age \(profile.age), Gender \(profile.gender), Goal: \(profile.goal?.rawValue ?? "General Fitness")\nCONTEXT: \(context.kind): \(context.tag)"
+        let prompt = "PROFILE: Age \(profile.age), Gender \(profile.gender)\nCONTEXT: \(context.kind): \(context.tag)"
         do {
             try Task.checkCancellation()
             let resp = try await session.respond(to: prompt, generating: AIExercisePaletteResponse.self, includeSchemaInPrompt: true).content
@@ -401,16 +401,13 @@ final class AITrainingPlanGenerator {
         6.  **Safety (age \(profile.age))**: Avoid unsafe lifts; prefer age-appropriate selections.
         
         \(mandatoryPlacementsSection)
-        
-        --- GOAL CONTEXT ---
-        The user's primary goal is: **\(profile.goal?.rawValue ?? "General Fitness")**. Reflect this in exercise selection.
         """
         
         let prompt = """
         \(palettesText)
         
         --- USER PROFILE & GOALS ---
-        - Profile: Age \(profile.age), Gender \(profile.gender), Goal: \(profile.goal?.rawValue ?? "General Fitness")
+        - Profile: Age \(profile.age), Gender \(profile.gender)
         - Qualitative Goals: \(interpretedPrompts.qualitativeGoals.isEmpty ? "None" : interpretedPrompts.qualitativeGoals.joined(separator: ", "))
         - Must Include (use on matching focus days): \(includedExercises.isEmpty ? "None" : includedExercises.joined(separator: ", "))
         - Must Exclude (CRITICAL): \(excludedExercises.isEmpty ? "None" : excludedExercises.joined(separator: ", "))
@@ -452,10 +449,8 @@ final class AITrainingPlanGenerator {
         polished = purgeExcludedExercises(plan: polished, excluded: excludedExercises, onLog: onLog)
         polished = await enforceMustDoExercises(plan: polished, rules: rules, onLog: onLog)
         
-        var palettesNorm = await ensureGeneralPalettes(palettes: palettes, profile: profile, onLog: onLog)
-        palettesNorm = await ensureGoalPalettes(palettes: palettesNorm, profile: profile, onLog: onLog)
-        
-        polished = await goalAuditAndRepairPlan(plan: polished, profile: profile, palettes: palettesNorm, onLog: onLog)
+        let palettesNorm = await ensureGeneralPalettes(palettes: palettes, profile: profile, onLog: onLog)
+
         polished = await enrichAndVaryWorkouts(plan: polished, palettes: palettesNorm, excluded: excludedExercises, onLog: onLog)
         polished = await enforceInterDayVariety(plan: polished, protectedRules: rules, palettes: palettesNorm, onLog: onLog)
         polished = clampDurationsHeuristically(plan: polished, onLog: onLog)
@@ -694,9 +689,6 @@ final class AITrainingPlanGenerator {
         return """
         - Age: \(profile.age)
         - Gender: \(profile.gender)
-        - Main Goal: \(profile.goal?.rawValue ?? "General Fitness")
-        - Activity Level: \(profile.activityLevel.description)
-        - Favorite Sports: \(profile.sports.map { $0.rawValue }.joined(separator: ", "))
         """
     }
     
@@ -801,7 +793,7 @@ final class AITrainingPlanGenerator {
             try Task.checkCancellation()
             let newID = try Self.nextExerciseID(in: ctx)
             try Task.checkCancellation()
-            let model = ExerciseItem(id: newID, name: finalName, sports: dto.sports, description: dto.desc, metValue: dto.metValue, isUserAdded: false, muscleGroups: dto.muscleGroups, minimalAgeMonths: dto.minimalAgeMonths)
+            let model = ExerciseItem(id: newID, name: finalName, description: dto.desc, metValue: dto.metValue, isUserAdded: false, muscleGroups: dto.muscleGroups, minimalAgeMonths: dto.minimalAgeMonths)
             try Task.checkCancellation()
             ctx.insert(model)
             try Task.checkCancellation()
@@ -975,57 +967,6 @@ final class AITrainingPlanGenerator {
         if out[fullBodyKey]?.isEmpty ?? true {
             let fb = await aiGenerateExercisePaletteForContext(profile: profile, context: AITrainingContextTag(kind: "muscleGroup", tag: "full body"), onLog: onLog)
             if !fb.isEmpty { out[fullBodyKey] = fb; emit("  -> Added fallback full body palette (\(fb.count)).", onLog) }
-        }
-        return out
-    }
-    
-    @MainActor
-    private func ensureGoalPalettes(palettes: [String: [String]], profile: Profile, onLog: (@Sendable (String) -> Void)?) async -> [String: [String]] {
-        var out = palettes
-        func ensure(kind: String, tag: String) async {
-            let key = "\(kind):\(tag)"
-            if out[key]?.isEmpty ?? true {
-                let arr = await aiGenerateExercisePaletteForContext(profile: profile, context: AITrainingContextTag(kind: kind, tag: tag), onLog: onLog)
-                if !arr.isEmpty { out[key] = arr; emit("  -> Added goal palette [\(key)] (\(arr.count)).", onLog) }
-            }
-        }
-        switch profile.goal {
-        case .weightLoss?: await ensure(kind: "trainingType", tag: "cardio")
-        case .muscleGain?, .strength?: await ensure(kind: "trainingType", tag: "strength")
-        case .flexibility?: await ensure(kind: "trainingType", tag: "flexibility")
-        default: break
-        }
-        return out
-    }
-    
-    @MainActor
-    private func goalAuditAndRepairPlan(plan: AIConceptualTrainingPlanResponse, profile: Profile, palettes: [String: [String]], onLog: (@Sendable (String) -> Void)?) async -> AIConceptualTrainingPlanResponse {
-        guard let g = profile.goal else { return plan }
-        var out = plan
-        let isCardio = { (n: String) in ["run","jog","cycle","row","jump rope","burpee"].contains { n.lowercased().contains($0) } }
-        let isCompound = { (n: String) in ["squat","deadlift","bench press","overhead press","row","pull-up"].contains { n.lowercased().contains($0) } }
-        let isFlex = { (n: String) in ["stretch","mobility","yoga","foam roll"].contains { n.lowercased().contains($0) } }
-        for dIdx in out.days.indices {
-            for wIdx in out.days[dIdx].workouts.indices {
-                var exs = out.days[dIdx].workouts[wIdx].exercises
-                let existing = Set(exs.map { $0.name.lowercased() })
-                func replace(with predicate: @escaping (String) -> Bool, fromKeys keys: [String], logMsg: String) {
-                    if let idx = exs.firstIndex(where: { !predicate($0.name) }) {
-                        let flatPalette = keys.compactMap { palettes[$0] }.flatMap { $0 }
-                        if let replacement = flatPalette.first(where: { predicate($0) && !existing.contains($0.lowercased()) }) {
-                            exs[idx].name = replacement
-                            emit("    - Goal fix (\(logMsg)): Injected '\(replacement)' on Day \(out.days[dIdx].dayIndex).", onLog)
-                        }
-                    }
-                }
-                switch g {
-                case .weightLoss, .endurance: if !exs.contains(where: { isCardio($0.name) }) { replace(with: isCardio, fromKeys: ["trainingtype:cardio"], logMsg: g.rawValue) }
-                case .muscleGain, .strength: if !exs.contains(where: { isCompound($0.name) }) { replace(with: isCompound, fromKeys: ["trainingtype:strength"], logMsg: g.rawValue) }
-                case .flexibility: if !exs.contains(where: { isFlex($0.name) }) { replace(with: isFlex, fromKeys: ["trainingtype:flexibility"], logMsg: g.rawValue) }
-                default: break
-                }
-                out.days[dIdx].workouts[wIdx].exercises = exs
-            }
         }
         return out
     }

@@ -50,7 +50,6 @@ struct FoodItemReceptEditorView: View {
     // MARK: - Data Queries
     @Query(sort: \Vitamin.name)  private var allVitamins:  [Vitamin]
     @Query(sort: \Mineral.name)  private var allMinerals:  [Mineral]
-    @Query(sort: \Diet.name)     private var allDiets: [Diet]
     @Query private var userSettingsArray: [UserSettings]   // 👈 НОВО
     
     // MARK: - Input Properties
@@ -81,8 +80,6 @@ struct FoodItemReceptEditorView: View {
     private var servingUnit: String { isImperial ? "oz" : "g" }
     
     // Tags
-    @State private var selectedCategories: Set<FoodCategory.ID>
-    @State private var selectedDiets: Set<Diet.ID>
     @State private var selectedAllergens: Set<Allergen.ID>
     
     // Gallery
@@ -175,8 +172,6 @@ struct FoodItemReceptEditorView: View {
         var initialAminoAcids = AminoAcidsForm()
         var initialCarbDetails = CarbDetailsForm()
         var initialSterols = SterolsForm()
-        var initialSelectedCategories = Set<FoodCategory.ID>()
-        var initialSelectedDiets = Set<Diet.ID>()
         var initialSelectedAllergens = Set<Allergen.ID>()
         var initialGalleryData: [Data] = []
         
@@ -206,10 +201,7 @@ struct FoodItemReceptEditorView: View {
             initialCarbDetails = CarbDetailsForm(from: totals.carbDetails)
             initialSterols = SterolsForm(from: totals.sterols)
             
-            let tags = Self.aggregatedTags(for: f)
-            initialSelectedCategories = tags.categories
-            initialSelectedDiets = tags.diets
-            initialSelectedAllergens = tags.allergens
+            initialSelectedAllergens = Self.aggregatedAllergens(for: f)
             
             if let photos = f.gallery {
                 initialGalleryData = photos.map(\.data)
@@ -234,8 +226,6 @@ struct FoodItemReceptEditorView: View {
         _aminoAcids = State(initialValue: initialAminoAcids)
         _carbDetails = State(initialValue: initialCarbDetails)
         _sterols = State(initialValue: initialSterols)
-        _selectedCategories = State(initialValue: initialSelectedCategories)
-        _selectedDiets = State(initialValue: initialSelectedDiets)
         _selectedAllergens = State(initialValue: initialSelectedAllergens)
         _galleryData = State(initialValue: initialGalleryData)
         _ayurForm = State(initialValue: .neutral)
@@ -612,45 +602,6 @@ struct FoodItemReceptEditorView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
                     
-                    // Category
-                    tagPicker(
-                        label: "Category",
-                        selection: $selectedCategories,
-                        items: FoodCategory.allCases.sorted { $0.rawValue < $1.rawValue },
-                        itemLabel: { $0.rawValue }
-                    )
-                    
-                    // --- DIETS + DETAILS ---
-                    VStack(alignment: .leading, spacing: 4) {
-                        tagPicker(
-                            label: "Diets",
-                            selection: $selectedDiets,
-                            items: allDiets,
-                            itemLabel: { $0.name }
-                        )
-                        
-                        if showsDietMismatchWarning {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text("⚠️ This recipe does not match any of the user's diets.")
-                                    .font(.caption)
-                                    .foregroundStyle(.orange)
-                                
-                                if !selectedDietNames.isEmpty {
-                                    Text("Recipe diets: \(selectedDietNames)")
-                                        .font(.caption2)
-                                        .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
-                                }
-                                
-                                if !userDietNames.isEmpty {
-                                    Text("User diets: \(userDietNames)")
-                                        .font(.caption2)
-                                        .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
-                                }
-                            }
-                            .fixedSize(horizontal: false, vertical: true)
-                        }
-                    }
-                    
                     // --- ALLERGENS + DETAILS ---
                     VStack(alignment: .leading, spacing: 4) {
                         tagPicker(
@@ -689,31 +640,11 @@ struct FoodItemReceptEditorView: View {
         .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
     }
     
-    // MARK: - Profile Diet & Allergen Helpers
-    
-    private var profileDietIDs: Set<Diet.ID> {
-        guard let profile else { return [] }
-        return Set(profile.diets.map(\.id))
-    }
+    // MARK: - Profile Allergen Helpers
     
     private var profileAllergenIDs: Set<Allergen.ID> {
         guard let profile else { return [] }
         return Set(profile.allergens.map(\.id))
-    }
-    
-    private var selectedDietModels: [Diet] {
-        allDiets.filter { selectedDiets.contains($0.id) }
-    }
-    
-    private var selectedDietNames: String {
-        let names = selectedDietModels.map(\.name).sorted()
-        return names.joined(separator: ", ")
-    }
-    
-    private var userDietNames: String {
-        guard let profile else { return "" }
-        let names = profile.diets.map(\.name).sorted()
-        return names.joined(separator: ", ")
     }
     
     private var matchingProfileAllergens: [Allergen] {
@@ -737,14 +668,6 @@ struct FoodItemReceptEditorView: View {
             .map(\.rawValue)
             .sorted()
         return names.joined(separator: ", ")
-    }
-    
-    private var showsDietMismatchWarning: Bool {
-        // Need both: user has diets AND recipe has diets
-        guard !profileDietIDs.isEmpty else { return false }
-        guard !selectedDiets.isEmpty else { return false }
-        // Show warning when there is no overlap
-        return selectedDiets.isDisjoint(with: profileDietIDs)
     }
     
     private var minAgeSourceDescription: String? {
@@ -1211,11 +1134,6 @@ struct FoodItemReceptEditorView: View {
             recipe.itemDescription = itemDescription.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty()
             recipe.prepTimeMinutes = Int(prepTimeTxt)
             recipe.minAgeMonths    = Int(minAgeMonthsTxt) ?? 0
-            
-            recipe.category  = idsToEnums(selectedCategories, of: FoodCategory.self)
-            
-            let chosenDiets = allDiets.filter { selectedDiets.contains($0.id) }
-            recipe.diets = chosenDiets.isEmpty ? nil : chosenDiets
             
             recipe.allergens = idsToEnums(selectedAllergens, of: Allergen.self)
             recipe.isRecipe     = true
@@ -1734,48 +1652,28 @@ struct FoodItemReceptEditorView: View {
     
     private func recalcTags() {
         guard !selectedIng.isEmpty else {
-            selectedCategories = []; selectedDiets = []; selectedAllergens = []
+            selectedAllergens = []
             return
         }
-        var catUnion = Set<FoodCategory.ID>()
-        var dietsIntersection: Set<Diet.ID>? = nil
         var allUnion = Set<Allergen.ID>()
         
         for item in selectedIng.keys {
-            let itemDiets = Set(item.diets?.map(\.id) ?? [])
-            catUnion.formUnion(item.category?.map(\.id) ?? [])
             allUnion.formUnion(item.allergens?.map(\.id) ?? [])
-            if dietsIntersection == nil {
-                dietsIntersection = itemDiets
-            } else {
-                dietsIntersection?.formIntersection(itemDiets)
-            }
         }
-        selectedCategories = catUnion
-        selectedDiets = dietsIntersection ?? []
         selectedAllergens = allUnion
     }
     
-    static func aggregatedTags(for item: FoodItem) -> (categories: Set<FoodCategory.ID>, diets: Set<Diet.ID>, allergens: Set<Allergen.ID>) {
+    static func aggregatedAllergens(for item: FoodItem) -> Set<Allergen.ID> {
         guard let links = item.ingredients, !links.isEmpty else {
-            return (Set(item.category?.map(\.id) ?? []), Set(item.diets?.map(\.id) ?? []), Set(item.allergens?.map(\.id) ?? []))
+            return Set(item.allergens?.map(\.id) ?? [])
         }
-        var catUnion = Set<FoodCategory.ID>()
-        var dietsIntersection: Set<Diet.ID>? = nil
         var allUnion = Set<Allergen.ID>()
         
         for link in links {
             guard let food = link.food else { continue }
-            let itemDiets = Set(food.diets?.map(\.id) ?? [])
-            catUnion.formUnion(food.category?.map(\.id) ?? [])
             allUnion.formUnion(food.allergens?.map(\.id) ?? [])
-            if dietsIntersection == nil {
-                dietsIntersection = itemDiets
-            } else {
-                dietsIntersection?.formIntersection(itemDiets)
-            }
         }
-        return (catUnion, dietsIntersection ?? [], allUnion)
+        return allUnion
     }
     
     // MARK: - Nutrient Row Generation
@@ -2080,7 +1978,7 @@ struct FoodItemReceptEditorView: View {
                 let minX = radius
                 let maxX = size.width  - radius
                 let minY = radius + safeArea.top
-                let maxY = size.height - radius - safeArea.bottom - 80
+                let maxY = size.height - radius - safeArea.bottom
                 
                 let clampedCenterX = min(max(rawCenterX, minX), maxX)
                 let clampedCenterY = min(max(rawCenterY, minY), maxY)

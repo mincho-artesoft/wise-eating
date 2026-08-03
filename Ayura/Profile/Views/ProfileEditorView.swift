@@ -11,7 +11,6 @@ struct ProfileEditorView: View {
 
     @Query(sort: \Vitamin.name) private var allVitamins: [Vitamin]
     @Query(sort: \Mineral.name) private var allMinerals: [Mineral]
-    @Query(sort: \Diet.name) private var allDiets: [Diet]
 
     // MARK: – View Models & State
     private let calVM = CalendarViewModel.shared
@@ -28,11 +27,6 @@ struct ProfileEditorView: View {
     @State private var gender: String
     @State private var weight: String
     @State private var height: String
-    @State private var headCircumference: String
-    @State private var goal: Goal?
-    @State private var activityLevelSTR: String = ActivityLevel.sedentary.description
-
-    @State private var activityLevel: ActivityLevel
     @State private var isPregnant: Bool
     @State private var isLactating: Bool
     @State private var hasSeparateStorage: Bool = false
@@ -40,9 +34,8 @@ struct ProfileEditorView: View {
     // MARK: – Selections
     @State private var selectedVitIDs: Set<Vitamin.ID>
     @State private var selectedMinIDs: Set<Mineral.ID>
-    @State private var selectedDiets: Set<Diet.ID>
     @State private var selectedAllergens: Set<Allergen.ID>
-    @State private var selectedSportIDs: Set<Sport.ID>
+    @State private var pendingAyurvedaDraft: AyurvedaConstitutionDraft? = nil
 
     // MARK: – Photo
     @State private var selectedPhoto: PhotosPickerItem? = nil
@@ -55,12 +48,12 @@ struct ProfileEditorView: View {
     @State private var showErrorAlert = false
 
     // MARK: – Drop-Down Menu
-    enum OpenMenu { case none, vitamin, mineral, diet, allergen, sport, goal }
+    enum OpenMenu { case none, vitamin, mineral, allergen }
     @State private var openMenu: OpenMenu = .none
     @State private var buttonFrames: [OpenMenu: CGRect] = [:]
 
     private enum Field: Hashable {
-        case name, weight, height, headCircumference
+        case name, weight, height
     }
     @FocusState private var focusedField: Field?
 
@@ -113,47 +106,31 @@ struct ProfileEditorView: View {
             _gender = State(initialValue: p.gender)
             _weight = State(initialValue: GlobalState.measurementSystem == "Imperial" ? UnitConversion.formatDecimal(UnitConversion.kgToLbs(p.weight)) : UnitConversion.formatDecimal(p.weight))
             _height = State(initialValue: GlobalState.measurementSystem == "Imperial" ? UnitConversion.formatDecimal(UnitConversion.cmToInches(p.height)) : UnitConversion.formatDecimal(p.height))
-            _goal = State(initialValue: p.goal)
             _meals = State(initialValue: p.meals)
             _trainings = State(initialValue: p.trainings)
-            _activityLevel = State(initialValue: p.activityLevel)
             _isPregnant = State(initialValue: p.isPregnant)
             _isLactating = State(initialValue: p.isLactating)
             _photoData = State(initialValue: p.photoData)
             _selectedVitIDs = State(initialValue: Set(p.priorityVitamins.map(\.id)))
             _selectedMinIDs = State(initialValue: Set(p.priorityMinerals.map(\.id)))
-            _selectedDiets = State(initialValue: Set(p.diets.map(\.id)))
             _selectedAllergens = State(initialValue: Set(p.allergens.map(\.id)))
             _hasSeparateStorage = State(initialValue: p.hasSeparateStorage)
-            _selectedSportIDs = State(initialValue: Set(p.sports.map(\.id)))
 
-            if p.age < 2,
-               let latestRecord = p.weightHeightHistory.sorted(by: { $0.date > $1.date }).first,
-               let hc = latestRecord.headCircumference {
-                _headCircumference = State(initialValue: GlobalState.measurementSystem == "Imperial" ? UnitConversion.formatDecimal(UnitConversion.cmToInches(hc)) : UnitConversion.formatDecimal(hc))
-            } else {
-                _headCircumference = State(initialValue: "")
-            }
         } else {
             _name = State(initialValue: "")
             _birthday = State(initialValue: nil)
             _gender = State(initialValue: "Male")
             _weight = State(initialValue: "")
             _height = State(initialValue: "")
-            _headCircumference = State(initialValue: "")
-            _goal = State(initialValue: .generalFitness)
             _meals = State(initialValue: Meal.defaultMeals())
             _trainings = State(initialValue: Training.defaultTrainings())
-            _activityLevel = State(initialValue: .sedentary)
             _isPregnant = State(initialValue: false)
             _isLactating = State(initialValue: false)
             _photoData = State(initialValue: nil)
             _selectedVitIDs = State(initialValue: [])
             _selectedMinIDs = State(initialValue: [])
-            _selectedDiets = State(initialValue: [])
             _selectedAllergens = State(initialValue: [])
             _hasSeparateStorage = State(initialValue: false)
-            _selectedSportIDs = State(initialValue: [])
         }
     }
 
@@ -170,12 +147,10 @@ struct ProfileEditorView: View {
                             ScrollView(.vertical, showsIndicators: false) {
                                 VStack(spacing: 24) {
                                     personalSection
-                                    goalSection
+                                    constitutionSection
                                     vitaminsSection
                                     mineralsSection
-                                    dietsSection
                                     allergensSection
-                                    sportsSection
                                     mealsSection
                                     trainingsSection
                                     settingsSection
@@ -382,39 +357,7 @@ struct ProfileEditorView: View {
                        birthdayPicker
                    }
                    
-                   if ageInYears ?? 2 < 2 {
-                        StyledLabeledPicker(label: "Head Circ. (\(GlobalState.measurementSystem == "Imperial" ? "in" : "cm"))") {
-                           ConfigurableTextField(
-                               title: GlobalState.measurementSystem == "Imperial" ? "16" : "40",
-                               value: $headCircumference,
-                               type: .decimal,
-                               placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
-                               textAlignment: .leading,
-                               focused: $focusedField,
-                               fieldIdentifier: .headCircumference
-                           )
-                           .font(.system(size: 16))
-                        }
-                        .id(Field.headCircumference)
-                   }
-                   
-                   if ageInYears ?? 2 >= 2 {
-                       StyledLabeledPicker(label: "Activity Level", isRequired: true) {
-                           Menu {
-                               Picker("Activity Level", selection: $activityLevel) {
-                                   ForEach(ActivityLevel.allCases) { level in
-                                       Text(level.description).tag(level)
-                                   }
-                               }
-                           } label: {
-                               Text(activityLevel.description)
-                                   .font(.system(size: 16))
-                                   .frame(maxWidth: .infinity, alignment: .leading)
-                                   .contentShape(Rectangle())
-                                   .foregroundColor(effectManager.currentGlobalAccentColor)
-                           }
-                       }
-                       if ageInYears ?? 2 >= 14 {
+                   if ageInYears ?? 2 >= 14 {
                            if gender.lowercased().hasPrefix("f") {
                                Toggle("Pregnant", isOn: $isPregnant).padding(.horizontal, 4).foregroundColor(effectManager.currentGlobalAccentColor)
                                    .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light)
@@ -423,7 +366,6 @@ struct ProfileEditorView: View {
                                    .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light)
 
                            }
-                       }
                    }
                }
            }
@@ -432,35 +374,11 @@ struct ProfileEditorView: View {
        }
    }
 
- private var goalSection: some View {
-     VStack(alignment: .leading, spacing: 8) {
-         Text("Main Goal")
-             .font(.headline)
-             .foregroundStyle(effectManager.currentGlobalAccentColor)
-         
-         Button {
-             withAnimation {
-                 openMenu = .goal
-             }
-         } label: {
-             HStack {
-                 if let selectedGoal = goal {
-                     Image(systemName: selectedGoal.systemImageName)
-                     Text(selectedGoal.title)
-                 } else {
-                     Text("Select a Goal")
-                 }
-                 Spacer()
-                 Image(systemName: "chevron.up.chevron.down")
-             }
-             .foregroundColor(effectManager.currentGlobalAccentColor)
-             .padding()
-             .frame(maxWidth: .infinity, alignment: .leading)          // ← заема цялата ширина
-             .contentShape(RoundedRectangle(cornerRadius: 20))          // ← цялата карта е кликаема
-             .glassCardStyle(cornerRadius: 20)
-         }
-         .buttonStyle(.plain)
-     }
+ private var constitutionSection: some View {
+     AyurvedaConstitutionEditorButton(
+         profileID: profile?.id,
+         pendingDraft: $pendingAyurvedaDraft
+     )
  }
  
  private var settingsSection: some View {
@@ -508,19 +426,6 @@ struct ProfileEditorView: View {
 
          tagPicker(label: "Minerals", selection: $selectedMinIDs, items: allMinerals, menu: .mineral) { mineral in
              "\(mineral.name) (\(mineral.symbol))"
-         }
-         .glassCardStyle(cornerRadius: 20)
-     }
- }
-
- private var dietsSection: some View {
-     VStack(alignment: .leading, spacing: 8) {
-         Text("Diets")
-             .font(.headline)
-             .foregroundStyle(effectManager.currentGlobalAccentColor)
-
-         tagPicker(label: "Diets", selection: $selectedDiets, items: allDiets, menu: .diet) { diet in
-             diet.name
          }
          .glassCardStyle(cornerRadius: 20)
      }
@@ -698,12 +603,6 @@ struct ProfileEditorView: View {
          height = UnitConversion.formatDecimal(finalDisplayHeight)
      }
 
-     if let currentHeadCircumferenceDisplay = UnitConversion.parseDecimal(headCircumference) {
-         let headCircumferenceCm = (GlobalState.measurementSystem == "Imperial") ? UnitConversion.inchesToCm(currentHeadCircumferenceDisplay) : currentHeadCircumferenceDisplay
-         let clampedHeadCircumferenceCm = min(max(0, headCircumferenceCm), 100.0)
-         let finalDisplayHeadCircumference = (GlobalState.measurementSystem == "Imperial") ? UnitConversion.cmToInches(clampedHeadCircumferenceCm) : clampedHeadCircumferenceCm
-         headCircumference = UnitConversion.formatDecimal(finalDisplayHeadCircumference)
-     }
  }
 
  private func addMeal() {
@@ -756,10 +655,6 @@ struct ProfileEditorView: View {
      let weightInKg = GlobalState.measurementSystem == "Imperial" ? UnitConversion.lbsToKg(w_display) : w_display
      let heightInCm = GlobalState.measurementSystem == "Imperial" ? UnitConversion.inchesToCm(h_display) : h_display
      
-     let headCircumferenceCm = UnitConversion.parseDecimal(headCircumference).map {
-         GlobalState.measurementSystem == "Imperial" ? UnitConversion.inchesToCm($0) : $0
-     }
-
      guard !meals.isEmpty else {
          showError("Please add at least one meal.")
          return
@@ -775,29 +670,26 @@ struct ProfileEditorView: View {
      
      let chosenVitamins = allVitamins.filter { selectedVitIDs.contains($0.id) }
      let chosenMinerals = allMinerals.filter { selectedMinIDs.contains($0.id) }
-     let chosenDiets = allDiets.filter { selectedDiets.contains($0.id) }
      let chosenAllergens = selectedAllergens.compactMap { Allergen(rawValue: $0) }
-     let chosenSports = Sport.allCases.filter { selectedSportIDs.contains($0.id) }
-     
      let activeProfile: Profile
      if let p = profile {
          let weightChanged = abs(p.weight - weightInKg) > 0.01
          let heightChanged = abs(p.height - heightInCm) > 0.1
-         
-         let latestRecord = p.weightHeightHistory.sorted { $0.date > $1.date }.first
-         let headCircumferenceChanged = headCircumferenceCm != latestRecord?.headCircumference
 
-         if weightChanged || heightChanged || (headCircumferenceChanged && ageInYears ?? 2 < 2) {
-             let newRecord = WeightHeightRecord(date: Date(), weight: weightInKg, height: heightInCm, headCircumference: headCircumferenceCm)
+         if weightChanged || heightChanged {
+             let newRecord = WeightHeightRecord(
+                 date: Date(),
+                 weight: weightInKg,
+                 height: heightInCm
+             )
              p.weightHeightHistory.append(newRecord)
          }
 
          p.name = name; p.birthday = validBirthday; p.gender = gender; p.weight = weightInKg
-         p.height = heightInCm; p.goal = goal; p.meals = meals; p.trainings = trainings; p.activityLevel = activityLevel
+         p.height = heightInCm; p.meals = meals; p.trainings = trainings
          p.isPregnant = isPregnant; p.isLactating = isLactating; p.priorityVitamins = chosenVitamins
-         p.priorityMinerals = chosenMinerals; p.diets = chosenDiets; p.allergens = chosenAllergens
+         p.priorityMinerals = chosenMinerals; p.allergens = chosenAllergens
          p.photoData = photoData; p.hasSeparateStorage = hasSeparateStorage; p.updatedAt = Date()
-         p.sports = chosenSports
          
          activeProfile = p
      } else {
@@ -807,23 +699,16 @@ struct ProfileEditorView: View {
              gender: gender,
              weight: weightInKg,
              height: heightInCm,
-             goal: goal,
              meals: meals,
              trainings: trainings,
-             sports: chosenSports,
-             activityLevel: activityLevel,
              isPregnant: isPregnant,
              isLactating: isLactating,
              priorityVitamins: chosenVitamins,
              priorityMinerals: chosenMinerals,
-             diets: chosenDiets,
              allergens: chosenAllergens,
              photoData: photoData,
              hasSeparateStorage: hasSeparateStorage
          )
-         let initialRecord = WeightHeightRecord(date: Date(), weight: weightInKg, height: heightInCm, headCircumference: headCircumferenceCm)
-         newProfile.weightHeightHistory.append(initialRecord)
-         
          modelContext.insert(newProfile)
          activeProfile = newProfile
      }
@@ -839,6 +724,12 @@ struct ProfileEditorView: View {
          
          do {
              try modelContext.save()
+             if profile == nil, let pendingAyurvedaDraft {
+                 AyurvedaConstitutionStore.save(
+                     pendingAyurvedaDraft,
+                     for: activeProfile.id
+                 )
+             }
              onDismiss(activeProfile)
          } catch {
              showError("Failed to save profile: \(error.localizedDescription)")
@@ -970,18 +861,6 @@ struct ProfileEditorView: View {
      }
  }
  
- private var sportsSection: some View {
-     VStack(alignment: .leading, spacing: 8) {
-         Text("Favorite Sports")
-             .font(.headline)
-             .foregroundStyle(effectManager.currentGlobalAccentColor)
-         
-         tagPicker(label: "Sports", selection: $selectedSportIDs, items: Sport.allCases.sorted { $0.rawValue < $1.rawValue }, menu: .sport) { sport in
-             sport.rawValue
-         }
-         .glassCardStyle(cornerRadius: 20)
-     }
- }
  private func showError(_ msg: String) {
      errorMessage = msg
      showErrorAlert = true
@@ -1089,14 +968,8 @@ struct ProfileEditorView: View {
              dropdownMenu(selection: $selectedMinIDs, items: allMinerals) { mineral in
                  "\(mineral.name) (\(mineral.symbol))"
              }
-         case .diet:
-             dropdownMenu(selection: $selectedDiets, items: allDiets, label: { $0.name })
          case .allergen:
              dropdownMenu(selection: $selectedAllergens, items: Allergen.allCases, label: { $0.rawValue })
-         case .sport:
-             dropdownMenu(selection: $selectedSportIDs, items: Sport.allCases.sorted(by: { $0.rawValue < $1.rawValue }), label: { $0.rawValue })
-         case .goal:
-             GoalSelectionView(selectedGoal: $goal, isStyle: true)
          case .none:
              EmptyView()
          }
@@ -1155,10 +1028,7 @@ extension ProfileEditorView.OpenMenu {
      switch self {
      case .vitamin: return "Vitamins"
      case .mineral: return "Minerals"
-     case .diet: return "Diets"
      case .allergen: return "Allergens"
-     case .sport: return "Sports"
-     case .goal: return "Main Goal"
      case .none: return ""
      }
  }

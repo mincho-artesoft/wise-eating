@@ -142,40 +142,7 @@ final class AIManager: ObservableObject {
         return newJob
     }
 
-    // 2) startDietGeneration
-    @discardableResult
-    func startDietGeneration(
-        for profile: Profile?,
-        prompts: [String],
-        jobType: AIGenerationJob.JobType
-    ) -> AIGenerationJob? {
-        guard let context = modelContainer?.mainContext else { return nil }
-
-        let input = AIGenerationJob.InputParameters(
-            startDate: nil,
-            numberOfDays: nil,
-            specificMeals: nil,
-            mealsToFill: nil,
-            existingMeals: nil,
-            selectedPrompts: prompts,
-            mealTimings: nil,
-            foodNameToGenerate: nil,
-            preCreatedItemID: nil
-        )
-
-        let newJob = AIGenerationJob(profile: profile!, inputParams: input, jobType: jobType)
-        context.insert(newJob)
-        try? context.save()
-
-        Task {
-            await fetchJobs()
-            await scheduleNextIfIdle()
-        }
-
-        return newJob
-    }
-
-    // 3) startFoodDetailGeneration
+    // 2) startFoodDetailGeneration
     @discardableResult
     func startFoodDetailGeneration(
         for profile: Profile?,
@@ -554,18 +521,6 @@ final class AIManager: ObservableObject {
                         
                         return .success(try JSONEncoder().encode(generatedDraft))
                         
-                    case .dietGeneration:
-                        guard let prompts = job.inputParameters?.selectedPrompts else {
-                            throw NSError(
-                                domain: "AIManager",
-                                code: 8,
-                                userInfo: [NSLocalizedDescriptionKey: "Prompts not found for diet generation job."]
-                            )
-                        }
-                        
-                        let data = try await self.generateDietDataOnMain(jobID: job.persistentModelID, container: container, prompts: prompts)
-                        return .success(data)
-                        
                     case .workoutGeneration:
                         guard let prompts = job.inputParameters?.selectedPrompts,
                               let profile = job.profile else {
@@ -715,11 +670,6 @@ final class AIManager: ObservableObject {
                     notificationName = .aiTrainingJobCompleted
                     notificationTitle = "✅ One Daily Workouts Generated!"
                     notificationBody = "Your new AI-generated daily workouts for \(job.profile?.name ?? "your profile") are ready."
-                    
-                case .dietGeneration:
-                    notificationName = .aiDietJobCompleted
-                    notificationTitle = "✅ Diet Generated!"
-                    notificationBody = "Your new AI-generated diet is ready to be saved."
                     
                 case .workoutGeneration:
                     notificationName = .aiWorkoutJobCompleted
@@ -1112,21 +1062,6 @@ final class AIManager: ObservableObject {
     }
     
     @available(iOS 26.0, *)
-       @MainActor
-
-       private func generateDietDataOnMain(jobID: PersistentIdentifier, container: ModelContainer, prompts: [String]) async throws -> Data {
-           let generator = AIDietGenerator(container: container)
-
-           let dto = try await generator.generateDiet(
-               jobID: jobID,
-               prompts: prompts,
-               onLog: { log in print("[AI BG Diet] \(log)") }
-           )
-           let wire = dto.toWireDTO()
-           return try JSONEncoder().encode(wire)
-       }
-    
-    @available(iOS 26.0, *)
     @MainActor
     private func generateFoodDetailDataOnMain(container: ModelContainer, foodName: String) async throws -> Data {
         let context = ModelContext(container)
@@ -1168,11 +1103,7 @@ final class AIManager: ObservableObject {
             throw NSError(domain: "AIManager", code: 12, userInfo: [NSLocalizedDescriptionKey: "Could not find pre-created FoodItem with ID \(itemPID)."])
         }
         
-        let dietDescriptor = FetchDescriptor<Diet>()
-        let allDiets = (try? context.fetch(dietDescriptor)) ?? []
-        let dietMap = Dictionary(uniqueKeysWithValues: allDiets.map { ($0.name.trimmingCharacters(in: .whitespacesAndNewlines).lowercased(), $0) })
-        
-        await foodToUpdate.update(from: dto, dietMap: dietMap)
+        await foodToUpdate.update(from: dto)
         
         return Data()
     }

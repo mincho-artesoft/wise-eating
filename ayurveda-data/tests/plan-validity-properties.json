@@ -15,7 +15,6 @@
       "id": "P1",
       "label": "balanced baseline",
       "kcal": 2000,
-      "diet": "omnivore",
       "agni": "balanced",
       "dosha": null,
       "allergens": [],
@@ -27,9 +26,8 @@
     },
     {
       "id": "P2",
-      "label": "vegan, nut allergy",
+      "label": "nut allergy",
       "kcal": 2000,
-      "diet": "vegan",
       "agni": "balanced",
       "dosha": null,
       "allergens": [
@@ -45,7 +43,6 @@
       "id": "P3",
       "label": "vata aggravated, irregular agni",
       "kcal": 2200,
-      "diet": "vegetarian",
       "agni": "irregular",
       "dosha": "vata",
       "allergens": [],
@@ -58,7 +55,6 @@
       "id": "P4",
       "label": "pitta aggravated, sharp agni",
       "kcal": 2400,
-      "diet": "omnivore",
       "agni": "sharp",
       "dosha": "pitta",
       "allergens": [],
@@ -71,7 +67,6 @@
       "id": "P5",
       "label": "kapha aggravated, slow agni",
       "kcal": 1700,
-      "diet": "vegetarian",
       "agni": "slow",
       "dosha": "kapha",
       "allergens": [],
@@ -84,7 +79,6 @@
       "id": "P6",
       "label": "multi-allergen",
       "kcal": 2000,
-      "diet": "omnivore",
       "agni": "balanced",
       "dosha": null,
       "allergens": [
@@ -101,7 +95,6 @@
       "id": "P7",
       "label": "low calorie edge",
       "kcal": 1200,
-      "diet": "omnivore",
       "agni": "balanced",
       "dosha": null,
       "allergens": [],
@@ -113,7 +106,6 @@
       "id": "P8",
       "label": "high calorie edge",
       "kcal": 3600,
-      "diet": "omnivore",
       "agni": "balanced",
       "dosha": null,
       "allergens": [],
@@ -123,9 +115,8 @@
     },
     {
       "id": "P9",
-      "label": "jain sattvic, no allium",
+      "label": "additional balanced profile",
       "kcal": 1900,
-      "diet": "jain_sattvic",
       "agni": "balanced",
       "dosha": null,
       "allergens": [],
@@ -137,7 +128,6 @@
       "id": "P10",
       "label": "INFEASIBLE — everything excluded",
       "kcal": 2000,
-      "diet": "vegan",
       "agni": "balanced",
       "dosha": null,
       "allergens": [
@@ -255,27 +245,6 @@
       "group": "safety",
       "assert": "no component is in AyurvedaRecommendationGate.excludedFoodIds",
       "why": "the D9 never-recommend set: betel nut, vanaspati"
-    },
-    {
-      "id": "A4",
-      "severity": "hard",
-      "group": "safety",
-      "assert": "for diet=vegan, no component is a member of dairy, egg, meat, fish, shellfish or honey concepts",
-      "why": "diet is a hard constraint, not a preference"
-    },
-    {
-      "id": "A5",
-      "severity": "hard",
-      "group": "safety",
-      "assert": "for diet=vegetarian, no component is a member of meat, fish or shellfish",
-      "why": ""
-    },
-    {
-      "id": "A6",
-      "severity": "hard",
-      "group": "safety",
-      "assert": "for diet=jain_sattvic, no component is a member of meat, fish, shellfish or allium",
-      "why": "alliums are the distinguishing exclusion; if this passes trivially, confirm the allium concept has members"
     },
     {
       "id": "A7",

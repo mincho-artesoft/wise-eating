@@ -15,26 +15,22 @@ fileprivate struct WizardData {
     var gender: Gender = .male
     var weight: String = ""
     var height: String = ""
-    var headCircumference: String = ""
-    var goal: Goal? = .generalFitness // Default goal
-    var activityLevel: ActivityLevel = .sedentary
     var isPregnant: Bool = false
     var isLactating: Bool = false
     var meals: [Meal] = Meal.defaultMeals()
     var trainings: [Training] = Training.defaultTrainings()
     var selectedVitIDs: Set<Vitamin.ID> = []
     var selectedMinIDs: Set<Mineral.ID> = []
-    var selectedDiets: Set<Diet.ID> = []
     var selectedAllergens: Set<Allergen.ID> = []
     var hasSeparateStorage: Bool = false
-    var selectedSports: Set<Sport.ID> = []
     var selectedPhoto: PhotosPickerItem? = nil
     var photoData: Data? = nil
+    var ayurvedaConstitution: AyurvedaConstitutionDraft? = nil
 }
 
 // Enum to define the steps of the wizard.
 fileprivate enum WizardStep: Int, Identifiable {
-    case name, photo, birthday, gender, height, weight, headCircumference, goal, activity, meals, trainings, sports, vitamins, minerals, diets, allergens, settings, summary
+    case name, photo, birthday, gender, height, weight, meals, trainings, vitamins, minerals, allergens, constitution, summary
 
     var id: Int { self.rawValue }
 
@@ -46,18 +42,13 @@ fileprivate enum WizardStep: Int, Identifiable {
         case .gender: "What's your biological sex?"
         case .height: "What's your height?"
         case .weight: "What's your weight?"
-        case .headCircumference: "Head Circumference?"
-        case .goal: "What's your main goal?"
-        case .activity: "How active are you?"
         case .meals: "Meal Times"
         case .trainings: "Workout Times"
         case .vitamins: "Priority Vitamins"
         case .minerals: "Priority Minerals"
-        case .diets: "Any Special Diets?"
         case .allergens: "Any Allergies?"
-        case .settings: "Data Storage"
+        case .constitution: "Your traditional constitution"
         case .summary: "Confirm Your Details"
-        case .sports: "What's your favorite sport?"
         }
     }
     
@@ -69,18 +60,13 @@ fileprivate enum WizardStep: Int, Identifiable {
         case .gender: "This helps tailor recommendations."
         case .height: "We use this for calorie calculations."
         case .weight: "We use this for calorie calculations."
-        case .headCircumference: "For tracking growth in infants."
-        case .goal: "Select a primary goal to tailor your experience."
-        case .activity: "To estimate your daily energy needs."
         case .meals: "Set your daily meal schedule."
         case .trainings: "Set your daily workout schedule."
         case .vitamins: "Select vitamins you want to track."
         case .minerals: "Select minerals you want to track."
-        case .diets: "Let us know about your dietary preferences."
         case .allergens: "Select any allergies you have."
-        case .settings: "Choose how your data is stored."
+        case .constitution: "Choose your constitution or answer 12 questions."
         case .summary: "Please review your information."
-        case .sports: "Help us personalize your fitness journey"
         }
     }
 }
@@ -98,7 +84,6 @@ struct ProfileWizardView: View {
     // MARK: - Data Queries
     @Query(sort: \Vitamin.name) private var allVitamins: [Vitamin]
     @Query(sort: \Mineral.name) private var allMinerals: [Mineral]
-    @Query(sort: \Diet.name) private var allDiets: [Diet]
 
     // MARK: - Wizard State
     @State private var currentStep: WizardStep = .name
@@ -109,12 +94,14 @@ struct ProfileWizardView: View {
 
     // MARK: - UI State
     enum FocusableWizardField: Hashable {
-        case name, height, weight, headCircumference
+        case name, height, weight
     }
     @FocusState private var focusedField: FocusableWizardField?
     @State private var showAlert = false
     @State private var alertMessage = ""
     @State private var isSaving = false
+    @State private var constitutionStepTitle = "Your traditional constitution"
+    @State private var constitutionStepSubtitle = "Choose your constitution or answer 12 questions."
     private let genders = ["Male", "Female"]
     
     @State private var generatePlanOnFinish = false
@@ -125,7 +112,6 @@ struct ProfileWizardView: View {
     @State private var fullScreenUIImage: UIImage? = nil
     // MARK: - Picker State & Helpers
     // Two-wheel pickers (whole + decimal) for height & weight
-    // For babies (< 2y), the whole-number ranges are narrowed to age‑specific min/max (see helpers below).
     // MARK: - Picker State & Helpers
 
     // Универсален обхват за Ръст (от бебета до високи възрастни)
@@ -146,67 +132,6 @@ struct ProfileWizardView: View {
         }
     }
 
-    // Универсален обхват за Обиколка на главата
-    // Покрива от новородени (~30см) до големи глави (~65-70см)
-    private var headWholeRange: [Int] {
-        if isImperial {
-            return Array(10...30) // Инчове
-        } else {
-            return Array(20...80) // Сантиметри (достатъчно широко, за да позволиш 61)
-        }
-    }
-
-    // Age in months helper
-    private var ageInMonths: Int {
-        Calendar.current.dateComponents([.month], from: data.birthday, to: Date()).month ?? 0
-    }
-
-    // Units conversion (local to avoid coupling)
-    private func cmToInches(_ cm: Double) -> Double { cm / 2.54 }
-    private func kgToLbs(_ kg: Double) -> Double { kg * 2.2046226218 }
-
-    // Metrics we support for baby ranges
-    private enum BabyMetric { case height, weight, head }
-
-    private func currentHeadParts() -> (whole: Int, dec: Int) {
-        let raw = UnitConversion.parseDecimal(data.headCircumference) ?? (isImperial ? 16.0 : 40.0)
-        let whole = Int(raw.rounded(.down))
-        let scale: Double = isImperial ? 100.0 : 10.0
-        let maxDec: Int = isImperial ? 99 : 9
-        let dec = Int(max(0, min(maxDec, Int((raw * scale).truncatingRemainder(dividingBy: scale)))))
-        return (whole, dec)
-    }
-
-    private func composeHeadString(whole: Int, dec: Int) -> String {
-        let w = max(headWholeRange.first ?? whole, min(whole, headWholeRange.last ?? whole))
-        if isImperial {
-            let d = max(0, min(99, dec))
-            return "\(w)\(decimalSeparator)\(String(format: "%02d", d))"
-        } else {
-            let d = max(0, min(9, dec))
-            return "\(w)\(decimalSeparator)\(d)"
-        }
-    }
-
-    private var headWholeBinding: Binding<Int> {
-        Binding<Int>(
-            get: { currentHeadParts().whole },
-            set: { newWhole in
-                let parts = currentHeadParts()
-                data.headCircumference = composeHeadString(whole: newWhole, dec: parts.dec)
-            }
-        )
-    }
-
-    private var headDecimalBinding: Binding<Int> {
-        Binding<Int>(
-            get: { currentHeadParts().dec },
-            set: { newDec in
-                let parts = currentHeadParts()
-                data.headCircumference = composeHeadString(whole: parts.whole, dec: newDec)
-            }
-        )
-    }
     private let decimalRange: [Int] = Array(0...9)
     private let decimalRangeInches: [Int] = Array(0...99)
     private var decimalSeparator: String { Locale.current.decimalSeparator ?? "." }
@@ -301,13 +226,11 @@ struct ProfileWizardView: View {
     private var stepsSequence: [WizardStep] {
         var steps: [WizardStep] = [.name, .photo, .birthday, .gender]
         
-        if ageInYears < 2 {
-            steps.append(contentsOf: [.height, .weight, .headCircumference])
-        } else {
-            steps.append(contentsOf: [.height, .weight, .goal, .activity, .sports])
-        }
+        steps.append(contentsOf: [.height, .weight])
         
-        steps.append(contentsOf: [.meals, .trainings, .vitamins, .minerals, .diets, .allergens, .settings, .summary])
+        steps.append(contentsOf: [.meals, .trainings, .vitamins, .minerals, .allergens])
+        steps.append(.constitution)
+        steps.append(.summary)
         return steps
     }
     
@@ -320,7 +243,20 @@ struct ProfileWizardView: View {
     }
 
     private var progressPercentage: Double {
-        Double(currentStepIndex + 1) / Double(totalSteps)
+        guard totalSteps > 1 else { return 1 }
+        return Double(currentStepIndex) / Double(totalSteps - 1)
+    }
+
+    private var progressPercentLabel: Int {
+        Int((progressPercentage * 100).rounded())
+    }
+
+    private var displayedStepTitle: String {
+        currentStep == .constitution ? constitutionStepTitle : currentStep.title
+    }
+
+    private var displayedStepSubtitle: String {
+        currentStep == .constitution ? constitutionStepSubtitle : currentStep.subtitle
     }
 
     private var isNextDisabled: Bool {
@@ -333,9 +269,6 @@ struct ProfileWizardView: View {
         case .weight:
             let weightVal = UnitConversion.parseDecimal(data.weight)
             return weightVal == nil || weightVal! <= 0
-        case .headCircumference:
-            let hcVal = UnitConversion.parseDecimal(data.headCircumference)
-            return hcVal == nil || hcVal! <= 0
         default:
             return false
         }
@@ -355,7 +288,7 @@ struct ProfileWizardView: View {
                                 .font(.caption2)
                                 .fontWeight(.medium)
                             Spacer()
-                            Text("\(Int(progressPercentage * 100))%")
+                            Text("\(progressPercentLabel)%")
                                 .font(.caption2)
                                 .fontWeight(.medium)
                         }
@@ -372,12 +305,12 @@ struct ProfileWizardView: View {
 
                     VStack(spacing: 20) {
                         VStack(spacing: 16) {
-                            Text(currentStep.title)
+                            Text(displayedStepTitle)
                                 .font(.title.weight(.bold))
                                 .foregroundStyle(effectManager.currentGlobalAccentColor)
                                 .multilineTextAlignment(.center)
                             
-                            Text(currentStep.subtitle)
+                            Text(displayedStepSubtitle)
                                 .font(.subheadline)
                                 .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
                                 .multilineTextAlignment(.center)
@@ -391,18 +324,13 @@ struct ProfileWizardView: View {
                                 case .gender: genderStep
                                 case .height: heightStep
                                 case .weight: weightStep
-                                case .headCircumference: headCircumferenceStep
-                                case .goal: goalStep
-                                case .activity: activityStep
                                 case .meals: mealsStep
                                 case .trainings: trainingsStep
                                 case .vitamins: vitaminsStep
                                 case .minerals: mineralsStep
-                                case .diets: dietsStep
                                 case .allergens: allergensStep
-                                case .settings: settingsStep
+                                case .constitution: constitutionStep
                                 case .summary: summaryStep
-                                case .sports: sportsStep
                                 }
                             }
                             .transition(.asymmetric(
@@ -427,13 +355,6 @@ struct ProfileWizardView: View {
                         .transition(.opacity.animation(.easeInOut))
                 }
             }
-//            .if(currentStep == .sports ||
-//                currentStep == .vitamins ||
-//                currentStep == .minerals ||
-//                currentStep == .diets ||
-//                currentStep == .allergens
-//            ) { $0.ignoresSafeArea(.keyboard, edges: .bottom)}
-
             .ignoresSafeArea(.container, edges: .bottom)
             .alert("Error", isPresented: $showAlert) {
                 Button("OK", role: .cancel) {}
@@ -831,84 +752,6 @@ struct ProfileWizardView: View {
     }
 
     
-    @ViewBuilder private var headCircumferenceStep: some View {
-        VStack(spacing: 20) {
-            Spacer()
-            StyledLabeledPicker(label: "Head Circumference (\(isImperial ? "in" : "cm"))", isFixedHeight: false, isRequired: true) {
-                HStack(spacing: 8) {
-                    
-                    // ПРОМЯНА 1: Използваме headWholeBinding (беше heightWholeBinding)
-                    // ПРОМЯНА 2: Използваме headWholeRange (беше heightWholeRange)
-                    Picker("Whole", selection: headWholeBinding) {
-                        ForEach(headWholeRange, id: \.self) { v in
-                            Text("\(v)").tag(v)
-                        }
-                    }
-                    .pickerStyle(.wheel)
-                    .labelsHidden()
-
-                    Text(decimalSeparator)
-                        .font(.title2.weight(.bold))
-
-                    if isImperial {
-                        InfiniteWheelPicker(
-                            values: decimalRangeInches,
-                            selection: headDecimalBinding,
-                            labelForValue: { String(format: "%02d", $0) }
-                        )
-                    } else {
-                        InfiniteWheelPicker(
-                            values: decimalRange,
-                            selection: headDecimalBinding
-                        )
-                    }
-
-                    Text(isImperial ? "in" : "cm")
-                        .font(.headline)
-                        .padding(.leading, 4)
-                }
-                .frame(height: 180)
-                .tint(effectManager.currentGlobalAccentColor)
-                .environment(\.colorScheme, effectManager.isLightRowTextColor ? .dark : .light)
-            }
-            .onAppear {
-                if data.headCircumference.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                    // Задаваме стойност по подразбиране, която е валидна за новите широки обхвати
-                    data.headCircumference = composeHeadString(whole: isImperial ? 20 : 50, dec: 0)
-                }
-            }
-            Spacer()
-            navigationButtons
-        }
-    }
-
-    
-    @ViewBuilder private var goalStep: some View {
-        VStack {
-            GoalSelectionView(selectedGoal: $data.goal)
-            Spacer()
-            navigationButtons
-        }
-    }
-    
-    @ViewBuilder private var activityStep: some View {
-        VStack {
-            Spacer()
-            Picker("Activity Level", selection: $data.activityLevel) {
-                ForEach(ActivityLevel.allCases) { level in
-                    Text(level.description).tag(level)
-                }
-            }
-            .pickerStyle(.wheel)
-            .labelsHidden()
-            .tint(effectManager.currentGlobalAccentColor)
-            .environment(\.colorScheme, effectManager.isLightRowTextColor ? .dark : .light)
-            
-            Spacer()
-            navigationButtons
-        }
-    }
-
     @ViewBuilder
     private var mealsStep: some View {
         VStack {
@@ -972,7 +815,13 @@ struct ProfileWizardView: View {
                 items: allVitamins,
                 selection: $data.selectedVitIDs,
                 searchPrompt: "Search vitamins...",
-                itemContentSize: CGSize(width: 48, height: 48)
+                itemContentSize: CGSize(width: 48, height: 48),
+                itemLabel: { vitamin in
+                    vitamin.abbreviation.replacingOccurrences(
+                        of: "Vit ",
+                        with: "Vitamin "
+                    )
+                }
             )
             Spacer()
             navigationButtons
@@ -987,20 +836,6 @@ struct ProfileWizardView: View {
                 selection: $data.selectedMinIDs,
                 searchPrompt: "Search minerals...",
                 itemContentSize: CGSize(width: 48, height: 48)
-            )
-            Spacer()
-            navigationButtons
-        }
-        .ignoresSafeArea(.keyboard, edges: .bottom) // ✅ ДОБАВЕНО
-    }
-
-    @ViewBuilder private var dietsStep: some View {
-        VStack {
-            ColorTextMultiSelectGridView(
-                items: allDiets,
-                selection: $data.selectedDiets,
-                searchPrompt: "Search diets...",
-                itemContentSize: CGSize(width: 0, height: 56)
             )
             Spacer()
             navigationButtons
@@ -1024,38 +859,16 @@ struct ProfileWizardView: View {
         .ignoresSafeArea(.keyboard, edges: .bottom) // ✅ ДОБАВЕНО
     }
     
-    @ViewBuilder private var sportsStep: some View {
-        VStack {
-            IconMultiSelectGridView(
-                items: Sport.allCases.sorted { $0.rawValue < $1.rawValue },
-                selection: $data.selectedSports,
-                searchPrompt: "Search sports...",
-                iconSize: CGSize(width: 48, height: 48),
-                useIconColor: false
-            )
-            Spacer()
-            navigationButtons
-        }
-        .ignoresSafeArea(.keyboard, edges: .bottom) // ✅ ДОБАВЕНО
-    }
-    
-    @ViewBuilder private var settingsStep: some View {
-        VStack {
-            Toggle(isOn: $data.hasSeparateStorage) {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("Separate Storage & Lists")
-                    Text("This profile will have its own private storage and shopping lists.")
-                        .font(.caption)
-                        .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
-                }
+    @ViewBuilder private var constitutionStep: some View {
+        AyurvedaConstitutionOnboardingStepView(
+            draft: $data.ayurvedaConstitution,
+            onBack: backStep,
+            onContinue: nextStep,
+            onHeaderChange: { title, subtitle in
+                constitutionStepTitle = title
+                constitutionStepSubtitle = subtitle
             }
-            .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light)
-            .foregroundColor(effectManager.currentGlobalAccentColor)
-            .padding(.vertical)
-            
-            Spacer()
-            navigationButtons
-        }
+        )
     }
     
     @ViewBuilder private var summaryStep: some View {
@@ -1067,19 +880,16 @@ struct ProfileWizardView: View {
                     SummaryRow(label: "Gender", value: data.gender.rawValue)
                     SummaryRow(label: "Height", value: "\(data.height) \(isImperial ? "in" : "cm")")
                     SummaryRow(label: "Weight", value: "\(data.weight) \(isImperial ? "lbs" : "kg")")
-                    if ageInYears < 2 { SummaryRow(label: "Head Circ.", value: "\(data.headCircumference) \(isImperial ? "in" : "cm")") }
-                    if let goal = data.goal { SummaryRow(label: "Goal", value: goal.title) }
-                    if ageInYears >= 2 { SummaryRow(label: "Activity", value: data.activityLevel.description) }
                     if ageInYears >= 14 {
                         if data.isPregnant { SummaryRow(label: "Condition", value: "Pregnant") }
                         if data.isLactating { SummaryRow(label: "Condition", value: "Lactating") }
                     }
                     if !data.selectedVitIDs.isEmpty { SummaryRow(label: "Vitamins", value: "\(data.selectedVitIDs.count) selected") }
                     if !data.selectedMinIDs.isEmpty { SummaryRow(label: "Minerals", value: "\(data.selectedMinIDs.count) selected") }
-                    if !data.selectedDiets.isEmpty { SummaryRow(label: "Diets", value: "\(data.selectedDiets.count) selected") }
                     if !data.selectedAllergens.isEmpty { SummaryRow(label: "Allergens", value: "\(data.selectedAllergens.count) selected") }
-                    if !data.selectedSports.isEmpty { SummaryRow(label: "Sports", value: "\(data.selectedSports.count) selected") }
-                    SummaryRow(label: "Data Storage", value: data.hasSeparateStorage ? "Separate" : "Shared")
+                    if let constitution = data.ayurvedaConstitution {
+                        SummaryRow(label: "Ayurvedic Profile", value: constitution.result.label)
+                    }
                 }
                 .listRowBackground(Color.clear)
                 .listRowSeparator(.hidden)
@@ -1087,15 +897,26 @@ struct ProfileWizardView: View {
             .listStyle(.plain)
             .scrollContentBackground(.hidden)
 
-            Toggle(isOn: $generatePlanOnFinish) {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("Generate First Weekly Meal Plan")
-                    Text("Uses USDA foods, respecting your diet, allergens, and nutrient priorities.")
-                        .font(.caption)
-                        .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
+            VStack(spacing: 12) {
+                Toggle(isOn: $data.hasSeparateStorage) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Separate Storage & Lists")
+                        Text("This profile will have its own private storage and shopping lists.")
+                            .font(.caption)
+                            .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
+                    }
+                }
+
+                Toggle(isOn: $generatePlanOnFinish) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Generate First Weekly Meal Plan")
+                        Text("Uses USDA foods, respecting your allergens and nutrient priorities.")
+                            .font(.caption)
+                            .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
+                    }
                 }
             }
-            .environment(\.colorScheme,effectManager.isLightRowTextColor ? .dark : .light)
+            .environment(\.colorScheme, effectManager.isLightRowTextColor ? .dark : .light)
             .foregroundColor(effectManager.currentGlobalAccentColor)
             .padding(.vertical)
 
@@ -1175,7 +996,7 @@ struct ProfileWizardView: View {
                 currentStep = stepsSequence[currentIndex + 1]
             }
         }
-        let simpleSteps: [WizardStep] = [.name, .height, .weight, .headCircumference]
+        let simpleSteps: [WizardStep] = [.name, .height, .weight]
         if simpleSteps.contains(currentStep) {
              DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                 focusedField = simpleSteps.first(where: { $0 == currentStep }).map { step -> FocusableWizardField in
@@ -1183,7 +1004,6 @@ struct ProfileWizardView: View {
                     case .name: return .name
                     case .height: return .height
                     case .weight: return .weight
-                    case .headCircumference: return .headCircumference
                     default: fatalError("Unreachable case in wizard focus")
                     }
                 }
@@ -1270,41 +1090,33 @@ struct ProfileWizardView: View {
             let weightInKg = isImperial ? UnitConversion.lbsToKg(weightDisplay) : weightDisplay
             let heightInCm = isImperial ? UnitConversion.inchesToCm(heightDisplay) : heightDisplay
             
-            let headCircumferenceCm = UnitConversion.parseDecimal(data.headCircumference).map {
-                isImperial ? UnitConversion.inchesToCm($0) : $0
-            }
-
             let chosenVitamins = allVitamins.filter { data.selectedVitIDs.contains($0.id) }
             let chosenMinerals = allMinerals.filter { data.selectedMinIDs.contains($0.id) }
-            let chosenDiets = allDiets.filter { data.selectedDiets.contains($0.id) }
             let chosenAllergens = data.selectedAllergens.compactMap { Allergen(rawValue: $0) }
-            let chosenSports = Sport.allCases.filter { data.selectedSports.contains($0.id) }
-
             let newProfile = Profile(
                 name: data.name, birthday: data.birthday, gender: data.gender.rawValue,
-                weight: weightInKg, height: heightInCm, goal: data.goal, meals: data.meals,
-                trainings: data.trainings, sports: chosenSports,
-                activityLevel: data.activityLevel, isPregnant: data.isPregnant,
+                weight: weightInKg, height: heightInCm, meals: data.meals,
+                trainings: data.trainings,
+                isPregnant: data.isPregnant,
                 isLactating: data.isLactating,
                 priorityVitamins: chosenVitamins, priorityMinerals: chosenMinerals,
-                diets: chosenDiets, allergens: chosenAllergens,
+                allergens: chosenAllergens,
                 photoData: data.photoData,
                 hasSeparateStorage: data.hasSeparateStorage
             )
-            
-            let initialRecord = WeightHeightRecord(
-                date: .now,
-                weight: weightInKg,
-                height: heightInCm,
-                headCircumference: headCircumferenceCm
-            )
-            newProfile.weightHeightHistory.append(initialRecord)
             
             modelContext.insert(newProfile)
 
             do {
                 try modelContext.save()
                 print("[WizardSave] SwiftData saved profile successfully.")
+
+                if let constitution = data.ayurvedaConstitution {
+                    AyurvedaConstitutionStore.save(
+                        constitution,
+                        for: newProfile.id
+                    )
+                }
 
                 guard await calVM.requestCalendarAccessIfNeeded() else {
                     alertMessage = "Calendar access is required. Please grant permission in Settings."; showAlert = true; isSaving = false; return

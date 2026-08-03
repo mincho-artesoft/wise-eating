@@ -16,15 +16,9 @@ public final class Profile {
     public var updatedAt: Date = Date()
     public var createdAt: Date = Date()
 
-    public var goal: Goal?
-
-    public var unlockedBadgeIDs: [String] = []
-
     // MARK: - Health & Activity
-    public var activityLevel: ActivityLevel = ActivityLevel.sedentary
     public var isPregnant: Bool = false
     public var isLactating: Bool = false
-    public var sports: [Sport] = []
 
     // MARK: - Feature Flags & System IDs
     public var hasSeparateStorage: Bool = false
@@ -43,13 +37,11 @@ public final class Profile {
     @Relationship(deleteRule: .nullify)
     public var priorityMinerals: [Mineral] = []
     
-    @Relationship
-    public var diets: [Diet] = []
     public var allergens: [Allergen] = []
 
     @Attribute(.externalStorage)
     public var photoData: Data? = nil
-    
+
     @Relationship(deleteRule: .cascade, inverse: \WeightHeightRecord.profile)
     public var weightHeightHistory: [WeightHeightRecord] = []
     
@@ -107,18 +99,14 @@ public final class Profile {
         gender: String,
         weight: Double,
         height: Double,
-        goal: Goal? = nil,
         meals: [Meal] = [],
         trainings: [Training] = [],
-        sports: [Sport] = [],
-        activityLevel: ActivityLevel = .sedentary,
         isPregnant: Bool = false,
         isLactating: Bool = false,
         calendarID: String? = nil,
         shoppingListCalendarID: String? = nil,
         priorityVitamins: [Vitamin] = [],
         priorityMinerals: [Mineral] = [],
-        diets: [Diet] = [],
         allergens: [Allergen] = [],
         photoData: Data? = nil,
         hasSeparateStorage: Bool = false
@@ -128,7 +116,6 @@ public final class Profile {
         self.gender = gender
         self.weight = weight
         self.height = height
-        self.goal = goal
         self.meals = meals.isEmpty ? Meal.defaultMeals() : meals
         
         self.trainings = []
@@ -138,19 +125,16 @@ public final class Profile {
             self.trainings.append(training)
         }
         
-        self.activityLevel = activityLevel
         self.isPregnant = isPregnant
         self.isLactating = isLactating
         self.calendarID = calendarID
         self.shoppingListCalendarID = shoppingListCalendarID
         self.priorityVitamins = priorityVitamins
         self.priorityMinerals = priorityMinerals
-        self.diets = diets
         self.allergens = allergens
         self.photoData = photoData
         self.hasSeparateStorage = hasSeparateStorage
         self.updatedAt = Date()
-        self.sports = sports
     }
     
     // MARK: - Helper Methods

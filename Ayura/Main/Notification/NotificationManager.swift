@@ -28,7 +28,7 @@ class NotificationManager {
 
     func requestAuthorization() async -> Bool {
         do {
-            let granted = try await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound])
+            let granted = try await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound])
             print("Разрешението за нотификации е: \(granted)")
             return granted
         } catch {
@@ -95,25 +95,6 @@ class NotificationManager {
 
     }
     
-    // --- НАЧАЛО НА ПРОМЯНАТА (1/2): Нова функция за значки ---
-    /// Връща само непрочетените известия, свързани със значки.
-    func getUnreadBadgeNotifications() async -> [NotificationHistoryItem] {
-        let deliveredNotifications = await UNUserNotificationCenter.current().deliveredNotifications()
-        
-        return deliveredNotifications
-            .filter { $0.request.content.userInfo["openBadges"] as? String == "true" }
-            .map { notification in
-                NotificationHistoryItem(
-                    id: notification.request.identifier,
-                    title: notification.request.content.title,
-                    body: notification.request.content.body,
-                    date: notification.date,
-                    userInfo: notification.request.content.userInfo
-                )
-            }
-    }
-    // --- КРАЙ НА ПРОМЯНАТА (1/2) ---
-
     func removeDeliveredNotification(identifier: String) {
         UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [identifier])
         print("Notification with ID \(identifier) marked as read and removed from history.")

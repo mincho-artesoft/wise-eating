@@ -93,9 +93,9 @@ class MP5DeterministicSolverTests(unittest.TestCase):
     def tearDownClass(cls):
         cls.temporary.cleanup()
 
-    def test_all_30_hard_properties_pass(self):
-        self.assertEqual(self.result["hardTotal"], 30)
-        self.assertEqual(self.result["hardPassed"], 30)
+    def test_all_hard_properties_pass(self):
+        self.assertEqual(self.result["hardTotal"], 27)
+        self.assertEqual(self.result["hardPassed"], 27)
         failed = [
             item["id"]
             for item in self.result["properties"]

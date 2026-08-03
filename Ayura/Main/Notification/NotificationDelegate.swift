@@ -11,7 +11,7 @@ class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
     ) {
         NotificationCenter.default.post(name: .unreadNotificationStatusChanged, object: nil)
-        completionHandler([.banner, .sound, .badge])
+        completionHandler([.banner, .sound])
     }
     
     /// Извиква се, когато потребителят натисне нотификация.
@@ -81,8 +81,6 @@ class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
             return nil
         }()
         
-        let openBadges = userInfo["openBadges"] as? String
-        
          Task {
              await MainActor.run {
                  let coordinator = NavigationCoordinator.shared
@@ -123,11 +121,6 @@ class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
                             coordinator.pendingAIPlanJobType = type
                         }
                     }
-                 } else if let openBadges = openBadges, openBadges == "true" {
-                    print("DELEGATE: Потребителят натисна нотификация за значка.")
-                    // Задаваме САМО pendingBadgeProfileID.
-                    // Неговият наблюдател в RootView ще се погрижи да смени профила И таба.
-                    coordinator.pendingBadgeProfileID = profileID
                  }
                  // --- КРАЙ НА КОРЕКЦИЯТА ---
              }

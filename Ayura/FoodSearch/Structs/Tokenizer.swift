@@ -161,7 +161,7 @@ struct Tokenizer {
 
     // MARK: - Main Parser
 
-    @MainActor static func parse(_ query: String, availableDiets: Set<String> = []) -> SearchIntent {
+    @MainActor static func parse(_ query: String) -> SearchIntent {
         var processed = query.lowercased()
         processed = normalizePercentages(processed)
         processed = normalizeRanges(processed)
@@ -179,17 +179,6 @@ struct Tokenizer {
             }
         }
         
-        // Phrase Protection for multi-word diets (e.g., "low sodium" -> "low_sodium")
-        let dietPhraseKeys = Array(SearchKnowledgeBase.shared.dietMap.keys) +
-                             Array(SearchKnowledgeBase.shared.dietSynonyms.keys)
-        let dietPhrases = dietPhraseKeys.filter { $0.contains(" ") }
-        for key in dietPhrases {
-            if processed.contains(key) {
-                let protectedKey = key.replacingOccurrences(of: " ", with: "_")
-                processed = processed.replacingOccurrences(of: key, with: protectedKey)
-            }
-        }
-
         // Age Logic
         var detectedAge: Double? = nil
         let agePattern = "(_op_[a-z]+_)?\\s*(\\d+(\\.\\d+)?)\\s*(months?|mos?|mths?|m|years?|yrs?|y\\.o\\.|y\\/o|yo|y)\\b"
@@ -232,9 +221,6 @@ struct Tokenizer {
         var textTokens = Set<String>()
         var negativeTokens = Set<String>()
         var goals: [NutrientGoal] = []
-        var detectedDiets = Set<String>()
-        var dietFilter: DietType? = nil
-        var dietExclusions = Set<String>()
         var allergenExclusions = Set<Allergen>()
         var excludeAllAllergens = false
         var phGoal: ConstraintValue? = nil
@@ -284,29 +270,8 @@ struct Tokenizer {
 
             let cleanWord = word.replacingOccurrences(of: "_", with: " ")
 
-            // A. Diet (Positive)
-            if let mappedDiet = SearchKnowledgeBase.shared.dietSynonyms[cleanWord] {
-                detectedDiets.insert(mappedDiet)
-                dietFilter = DietType.from(string: mappedDiet)
-                consumed = true
-            }
-            else if let d = SearchKnowledgeBase.shared.dietMap[cleanWord] {
-                // Known, static diet keyword
-                dietFilter = d
-                detectedDiets.insert(d.rawValue)
-                consumed = true
-            }
-            else if let dynamicMatch = availableDiets.first(where: { $0.lowercased() == cleanWord }) {
-                // Dynamic diet coming from DB / user-defined list
-                detectedDiets.insert(dynamicMatch)
-                if dietFilter == nil {
-                    dietFilter = DietType.from(string: dynamicMatch)
-                }
-                consumed = true
-            }
-
-            // B. Age personas
-            else if detectedAge == nil,
+            // A. Age personas
+            if detectedAge == nil,
                     let age = SearchKnowledgeBase.shared.personaAgeMap[cleanWord] {
                 detectedAge = age
                 consumed = true
@@ -533,30 +498,8 @@ struct Tokenizer {
                         allergenExclusions.insert(allergen)
                         i += 1
                     }
-                    // --- DIET SEMANTIC NEGATION ---
-                    else if let dietType = SearchKnowledgeBase.shared.dietMap[cleanNext] {
-                        // e.g. "no halal", "no keto"
-                        dietExclusions.insert(dietType.rawValue)
-                        i += 1
-                    }
-                    else if let mappedDietName = SearchKnowledgeBase.shared.dietSynonyms[cleanNext] {
-                        // e.g. "no gluten" -> "Gluten-Free"
-                        dietExclusions.insert(mappedDietName)
-                        i += 1
-                    }
-                    else if let ingredientDietName = SearchKnowledgeBase.shared.ingredientToDietMap[cleanNext] {
-                        // e.g. "no milk" -> "Dairy-Free"
-                        dietExclusions.insert(ingredientDietName)
-                        i += 1
-                    }
                     else {
-                        // Try “<word>-Free” diet that exists in DB
-                        let potentialDietName = cleanNext.capitalized + "-Free"
-                        if availableDiets.contains(potentialDietName) {
-                            dietExclusions.insert(potentialDietName)
-                            i += 1
-                        }
-                        else if let negatedNut = resolveNutrient(nextWord) {
+                        if let negatedNut = resolveNutrient(nextWord) {
                             goals.append(
                                 NutrientGoal(
                                     nutrient: negatedNut,
@@ -598,9 +541,6 @@ struct Tokenizer {
             negativeTokens: negativeTokens,
             nutrientGoals: goals,
             displayNutrients: goals.map(\.nutrient),
-            diets: detectedDiets,
-            dietFilter: dietFilter,
-            excludedDiets: dietExclusions,           // ⬅️ NEW
             targetConsumerAge: detectedAge,
             allergenExclusions: allergenExclusions,
             excludeAllAllergens: excludeAllAllergens,

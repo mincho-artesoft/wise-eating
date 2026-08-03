@@ -130,7 +130,7 @@ struct AIGenerationHostView: View {
             ContentUnavailableView(
                 "No AI Generation History",
                 systemImage: "sparkles",
-                description: Text("Tap the ✨ button on diet or training screens to start a new generation.")
+                description: Text("Tap the ✨ button on training screens to start a new generation.")
             )
             .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
         } else {
@@ -487,22 +487,6 @@ struct AIGenerationHostView: View {
                 }
             } label: {
                 Label("Preview & Save Exercise", systemImage: "square.and.arrow.down.on.square")
-                    .font(.caption.bold())
-                    .frame(maxWidth: .infinity, alignment: .center)
-            }
-            .padding(.vertical, 10)
-            .glassCardStyle(cornerRadius: 20)
-            
-        case .dietGeneration:
-            Button {
-                guard #available(iOS 26.0, *), let data = job.resultData, let wire = try? JSONDecoder().decode(AIDietResponseWireDTO.self, from: data) else { return }
-                withAnimation {
-                    coordinator.pendingAIDietWireResponse = wire
-                    coordinator.sourceAIGenerationJobID = job.id
-                    coordinator.profileForPendingAIPlan = job.profile
-                }
-            } label: {
-                Label("Review & Save Diet", systemImage: "square.and.arrow.down.on.square")
                     .font(.caption.bold())
                     .frame(maxWidth: .infinity, alignment: .center)
             }

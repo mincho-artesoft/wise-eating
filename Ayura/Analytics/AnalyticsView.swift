@@ -64,7 +64,9 @@ struct AnalyticsView: View {
                SelectableNutrient(id: "water", label: "Water Intake"),
                SelectableNutrient(id: "protein", label: "Protein"),
                SelectableNutrient(id: "carbohydrates", label: "Carbohydrates"),
-               SelectableNutrient(id: "fat", label: "Fat")
+               SelectableNutrient(id: "fat", label: "Fat"),
+               SelectableNutrient(id: "profile_weight", label: "Weight"),
+               SelectableNutrient(id: "profile_height", label: "Height")
            ]
            items.append(contentsOf: allVitamins.map { SelectableNutrient(id: "vit_\($0.id)", label: $0.name) })
            items.append(contentsOf: allMinerals.map { SelectableNutrient(id: "min_\($0.id)", label: $0.name) })

@@ -219,6 +219,13 @@ struct FoodSearchPanelView: View {
         .onChange(of: isRecipesModeActive) { _, _ in triggerSearch() }
         .onChange(of: isMenusModeActive) { _, _ in triggerSearch() }
         .onChange(of: ayurvedaFilters) { _, _ in triggerSearch() }
+        .onReceive(
+            NotificationCenter.default.publisher(
+                for: .ayurvedaConstitutionDidChange
+            )
+        ) { _ in
+            triggerSearch()
+        }
     }
     
     @ViewBuilder

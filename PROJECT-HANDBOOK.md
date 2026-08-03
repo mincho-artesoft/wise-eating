@@ -49,7 +49,7 @@ and must always be shown in UI.
 `Ayura/ayurveda_seed.json.gz` (seedVersion 6; sha-verifiable) +
 `Ayura/ayurveda_rules.json`. `ayurveda-data/build_preseeded_store.py`
 audits/compacts a completed 14,488-row store and emits the two bundled gzip
-parts, including the version-7 search cache. `ayurveda-data/validate.py --store
+parts, including the version-9 search cache. `ayurveda-data/validate.py --store
 /tmp/pre` is the gatekeeper (content integrity + full resolver and preseed
 simulation; must always pass).
 
@@ -76,12 +76,14 @@ simulation; must always pass).
 - `RecipeNutritionPanelView` (WE-2): existing glass-card/flow-layout language;
   switches per serving/per 100g and displays the full 39-field nutrient catalog,
   coverage state, and honest missing-slug evidence.
-- `Ayura/FoodSearch/` (WE-4/WE-5/WE-8c): the version-7 compact cache persists full
+- `Ayura/FoodSearch/` (WE-4/WE-5/WE-8c): the version-8 compact cache persists full
   Ayurveda search/display metadata plus virya/dosha/agni/digestibility/season/
   category/concept facet sets and a separate inverted facet index on the 2,214
-  seeded profiles plus 1,974 non-profile linked USDA foods.
+  seeded profiles, linked USDA foods, and low-confidence category-rule
+  fallback metadata for every remaining food.
   `CanonicalFacetParser` removes only validated natural/explicit facet speech
-  before the existing tokenizer; unlinked plain USDA rows remain un-faceted. Constrained
+  before the existing tokenizer; unlinked plain USDA rows use clearly labeled
+  `Estimated` facets. Constrained
   nutrient columns are always visible (`—` means no data; stored zero remains
   `0.0`), both constraint parsers feed query-ordered display context, and pH
   uses one exclusive boundary definition (`low < 7`, `high > 7`, neutral
@@ -106,7 +108,7 @@ simulation; must always pass).
   (after `seedFoodsIfNeeded`) and `DatabaseSetup.swift` (mainTypes): the shipped
   store already contains 383 placeholder FoodItems (reserved ID band
   **900001–900383**), 1,500 recipe FoodItems/IngredientLinks, 2,214 profiles,
-  2,305 links, and the version-7 search cache. Fresh install verifies the
+  2,336 links, and the version-8 search cache. Fresh install verifies the
   seed-v5 profile stamps and is a zero-insert/zero-update no-op. Existing stores
   use a canonical-slug/fdcId upsert delta; ownership ambiguity aborts without
   touching user data. Post-seed food total: 14,484.
@@ -274,9 +276,9 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | Recipe nutrition | 1,508 full · 3 estimated · 0 none; 39 fields × two bases. Estimated: Gond Ladoo (`dravya.acacia-gum` missing composition), Sol Kadhi (`dravya.kokum`), Ugadi Pachadi (`dravya.neem-flower`) |
 | Recipe IngredientLinks | 10,644 positive-gram rows · 1,511 owners |
 | WE-8 safety projection | 2,216 review-required rows · 155 allergen dravyas · 1,190 allergen recipes · 754 Vegan recipes |
-| Search cache | version 7 · 14,488 DB/compact rows · 4,223 metadata/faceted rows (2,216 canonical + 2,007 linked-only) · 89 keys / 59,114 assignments · separate display/enforced age floors |
+| Search cache | version 9 · 14,488 DB/compact/metadata/faceted rows (2,216 canonical + 2,007 linked-only + 10,265 estimated) · 45 keys / 74,419 assignments · separate display/enforced age floors |
 | Seed / rules | seedVersion 6, seed SHA-256 `7687498a8012aa6e14b71781fe9721ab2d7b968005618ace9dc6e09a0fe50f3f`; rules SHA-256 `e92ad29fda7616a011090bd3674f9653d33b9553357c49f43ffd87f850c0364c` |
-| Preseed parts (v7 rebuild) | `aa` `e7b2fb2c9a3e03e3a76247a6988e5e9b033a4a2e95f89ad389a08d15d0e15d11` · `ab` `89b06ea707d798e20756098c0cd6f83f273c798bf12cb034b42bcc20dba9ed2b`; restored store `a6ddf152234fee2b12c9d9efcdffb70c3d01fdc4d4980418a46686b2f57d25a0` |
+| Preseed parts (v9 rebuild) | `aa` `db5dc492e5f5e1a00f1d92eb557ecaefa8f234e5e24628f7b8ee9b34d3383834` · `ab` `317628daf869601c1d01cfe775678a6397c12133296c5b6131e311003c78074f`; restored store `23b3f5bd19e3813ca6205c477edcd6e0584bbb96fdd5f4395cdc3a0a7984327e` |
 | Age provenance (WE-8c) | dravyas 391 authored / 314 legacyImport · recipes 1,457 / 54 · ingredient contributors 4,957 / 5,687 |
 | Cold launch (WE-6/WE-7/WE-8/WE-8c, Debug simulator) | WE-8c registry median **1.607s** (N=12); same-session WE-8b 1.569s, paired median delta +0.048s. Absolute hard ceiling 1.700s; profiling paydown required above 1.650s |
 | Legacy target (WE-7) | 9 dead Swift inputs removed · 5 live JSON fallback resources retained |

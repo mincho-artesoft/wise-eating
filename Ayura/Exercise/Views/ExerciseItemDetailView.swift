@@ -81,7 +81,6 @@ struct ExerciseItemDetailView: View {
                             .frame(height: isBannerAdLoaded ? 120 : 0)
                         workoutExercisesSection
                         muscleGroupSection
-                        sportsSection
                         videoSection
                     }
                     .padding()
@@ -405,11 +404,6 @@ struct ExerciseItemDetailView: View {
         return tagSectionView(title: "Primary Muscles", tags: items)
     }
     
-    private var sportsSection: some View {
-        let items = (item.sports ?? []).map { StaticTag(label: $0.rawValue, color: .blue) }
-        return tagSectionView(title: "Related Sports", tags: items)
-    }
-    
     @ViewBuilder
     private var videoSection: some View {
         if let url = videoURL {
@@ -609,4 +603,3 @@ fileprivate struct StaticTagView: View {
             .clipShape(Capsule())
     }
 }
-

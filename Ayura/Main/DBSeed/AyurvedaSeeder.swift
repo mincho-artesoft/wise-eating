@@ -85,18 +85,11 @@ enum AyurvedaSeeder {
       let profileByID = try makeProfileMap(existingProfiles)
       let linkByFdcID = try makeLinkMap(existingLinks)
       var foodByID = try makeFoodMap(allFoods)
-      let allDiets = try context.fetch(FetchDescriptor<Diet>())
-      let dietByName = Dictionary(
-        uniqueKeysWithValues: allDiets.map { ($0.name, $0) }
-      )
-
       try validateCanonicalOwnership(
         seed: seed,
         profileByID: profileByID,
         foodByID: foodByID
       )
-      try validateSafetyDietTargets(seed: seed, dietByName: dietByName)
-
       if storeHasCurrentSeed(
         seed: seed,
         profileByID: profileByID,
@@ -139,11 +132,7 @@ enum AyurvedaSeeder {
             foodId: dravya.foodId
           )
         }
-        if try updateSafetyMetadata(
-          dravya.safety,
-          food: food,
-          dietByName: dietByName
-        ) {
+        if try updateSafetyMetadata(dravya.safety, food: food) {
           result.updatedSafetyFoods += 1
         }
       }
@@ -190,11 +179,7 @@ enum AyurvedaSeeder {
           if updateRecipeFoodMetadata(recipe, food: recipeFood) {
             result.updatedRecipeFoods += 1
           }
-          if try updateSafetyMetadata(
-            recipe.safety,
-            food: recipeFood,
-            dietByName: dietByName
-          ) {
+          if try updateSafetyMetadata(recipe.safety, food: recipeFood) {
             result.updatedSafetyFoods += 1
           }
           if !ingredientSetMatches(recipe, food: recipeFood) {
@@ -216,11 +201,7 @@ enum AyurvedaSeeder {
             itemDescription: recipeDescription(recipe)
           )
           context.insert(recipeFood)
-          _ = try updateSafetyMetadata(
-            recipe.safety,
-            food: recipeFood,
-            dietByName: dietByName
-          )
+          _ = try updateSafetyMetadata(recipe.safety, food: recipeFood)
           try replaceIngredients(
             for: recipe,
             food: recipeFood,
@@ -565,7 +546,6 @@ enum AyurvedaSeeder {
       seed.counts.links == 2_336,
       seed.counts.derivedLinks == 1_966,
       seed.counts.placeholders == 376,
-      seed.counts.categoryRules == 187,
       seed.counts.modifiers == 14,
       seed.counts.nutrition.full
         + seed.counts.nutrition.estimated
@@ -612,7 +592,6 @@ enum AyurvedaSeeder {
               && ["authored", "legacyImport"].contains($0.ageProvenance)
           })
           && Set($0.allergens).count == $0.allergens.count
-          && Set($0.diets).count == $0.diets.count
           && !$0.rules.isEmpty
       })
     else {
@@ -760,29 +739,12 @@ enum AyurvedaSeeder {
     }
   }
 
-  private static func validateSafetyDietTargets(
-    seed: AyurvedaSeedDTO,
-    dietByName: [String: Diet]
-  ) throws {
-    let safetyRows = seed.dravyas.map(\.safety) + seed.recipes.map(\.safety)
-    for safety in safetyRows {
-      for diet in safety.diets where dietByName[diet] == nil {
-        throw AyurvedaSeederError.missingSafetyDiet(diet)
-      }
-      for allergen in safety.allergens where Allergen(rawValue: allergen) == nil {
-        throw AyurvedaSeederError.invalidSafetyAllergen(allergen)
-      }
-    }
-  }
-
   private static func safetyMetadataMatches(
     _ safety: SafetyMetadataDTO,
     food: FoodItem
   ) -> Bool {
-    let actualDiets = Set((food.diets ?? []).map(\.name))
     let actualAllergens = Set((food.allergens ?? []).map(\.rawValue))
-    return actualDiets == Set(safety.diets)
-      && actualAllergens == Set(safety.allergens)
+    return actualAllergens == Set(safety.allergens)
       && food.minAgeMonths == safety.minAgeMonths
       && food.ageProvenance == safety.ageProvenance
       && food.ageSource == safety.ageSource
@@ -790,17 +752,10 @@ enum AyurvedaSeeder {
 
   private static func updateSafetyMetadata(
     _ safety: SafetyMetadataDTO,
-    food: FoodItem,
-    dietByName: [String: Diet]
+    food: FoodItem
   ) throws -> Bool {
     guard !safetyMetadataMatches(safety, food: food) else {
       return false
-    }
-    food.diets = try safety.diets.map { dietName in
-      guard let diet = dietByName[dietName] else {
-        throw AyurvedaSeederError.missingSafetyDiet(dietName)
-      }
-      return diet
     }
     food.allergens = try safety.allergens.map { allergenName in
       guard let allergen = Allergen(rawValue: allergenName) else {
@@ -916,7 +871,6 @@ enum AyurvedaSeeder {
     destination.foodId = source.foodId
     destination.foodIsPlaceholder = source.foodIsPlaceholder
     destination.name = source.name
-    destination.category = source.category
     destination.doshaVata = source.doshaVata
     destination.doshaPitta = source.doshaPitta
     destination.doshaKapha = source.doshaKapha
@@ -971,7 +925,6 @@ enum AyurvedaSeeder {
       foodId: dravya.foodId,
       foodIsPlaceholder: dravya.foodIsPlaceholder,
       name: dravya.name,
-      category: dravya.category,
       doshaVata: dravya.dosha.vata,
       doshaPitta: dravya.dosha.pitta,
       doshaKapha: dravya.dosha.kapha,
@@ -1034,7 +987,6 @@ enum AyurvedaSeeder {
       foodId: recipe.foodId,
       foodIsPlaceholder: false,
       name: recipe.name,
-      category: recipe.category,
       doshaVata: recipe.dosha.vata,
       doshaPitta: recipe.dosha.pitta,
       doshaKapha: recipe.dosha.kapha,
@@ -1129,7 +1081,6 @@ private enum AyurvedaSeederError: Error, LocalizedError {
   case invalidNutrition
   case invalidNutritionJSON(String)
   case invalidSafetyMetadata
-  case missingSafetyDiet(String)
   case invalidSafetyAllergen(String)
   case v5MigrationConflict(String)
 
@@ -1163,8 +1114,6 @@ private enum AyurvedaSeederError: Error, LocalizedError {
       return "recipe \(recipeId) nutrition cannot be encoded as JSON"
     case .invalidSafetyMetadata:
       return "the Ayurveda seed contains invalid scaffold-default safety metadata"
-    case .missingSafetyDiet(let diet):
-      return "the Ayurveda seed references missing Diet \(diet)"
     case .invalidSafetyAllergen(let allergen):
       return "the Ayurveda seed references unsupported allergen \(allergen)"
     case .v5MigrationConflict(let profileId):
@@ -1192,7 +1141,6 @@ private struct AyurvedaSeedCountsDTO: Decodable {
   let links: Int
   let derivedLinks: Int
   let placeholders: Int
-  let categoryRules: Int
   let modifiers: Int
   let nutrition: RecipeNutritionCountsDTO
   let safety: SafetyMetadataCountsDTO
@@ -1219,7 +1167,6 @@ private struct SafetyMetadataCountsDTO: Decodable {
 
 private struct SafetyMetadataDTO: Decodable {
   let allergens: [String]
-  let diets: [String]
   let minAgeMonths: Int
   let enforcedMinAgeMonths: Int
   let ageProvenance: String
@@ -1261,7 +1208,6 @@ private struct DravyaDTO: Decodable {
   let name: String
   let sanskrit: String?
   let aliases: [String]
-  let category: String
   let rasa: [String]
   let virya: String?
   let vipaka: String?
@@ -1296,7 +1242,6 @@ private struct RecipeIngredientDTO: Decodable {
 private struct RecipeDTO: Decodable {
   let id: String
   let name: String
-  let category: String
   let meal: String
   let servings: Int
   let prepMinutes: Int

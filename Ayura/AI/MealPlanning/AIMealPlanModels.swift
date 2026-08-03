@@ -288,7 +288,7 @@ struct AIAtomsAndFoodsFixResponse: Codable {
 
 @available(iOS 26.0, *)
 @Generable
-public enum AIFoodPortionCategory: String, Codable, CaseIterable, Sendable {
+public enum AIFoodPortionKind: String, Codable, CaseIterable, Sendable {
     case protein = "Protein"
     case starchyCarb = "Starchy carb (grains, potatoes, legumes, bread)"
     case dairyDrink = "Dairy drink (milk, kefir, liquid yogurt)"
@@ -299,7 +299,7 @@ public enum AIFoodPortionCategory: String, Codable, CaseIterable, Sendable {
     case veg = "Non-starchy vegetable"
     case soup = "Soup / broth"
     
-    // Специфични категории
+    // Специални правила за порции
     case fatOrOil = "Cooking fat or oil (butter, oil, ghee, lard)"
     case sauceOrDressing = "Sauce, dip, or dressing (ketchup, mayo, pesto)"
     case spiceOrHerb = "Spice or dry herb (salt, pepper, turmeric, oregano)"
@@ -311,15 +311,15 @@ public enum AIFoodPortionCategory: String, Codable, CaseIterable, Sendable {
 
 @available(iOS 26.0, *)
 @Generable
-struct AIFoodClassificationItem: Codable {
+struct AIFoodPortionAssignment: Codable {
     @Guide(description: "The exact name of the food from the input list.")
     let foodName: String
-    @Guide(description: "The nutritional category for portion control.")
-    let category: AIFoodPortionCategory
+    @Guide(description: "The portion-control rule to apply.")
+    let kind: AIFoodPortionKind
 }
 
 @available(iOS 26.0, *)
 @Generable
-struct AIBatchFoodClassificationResponse: Codable {
-    let classifications: [AIFoodClassificationItem]
+struct AIBatchFoodPortionAssignments: Codable {
+    let assignments: [AIFoodPortionAssignment]
 }
