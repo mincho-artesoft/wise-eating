@@ -7,60 +7,60 @@ struct DailyAyurvedaMealSummary: Identifiable {
 }
 
 struct DailyAyurvedaSummaryRow: View {
+    @ObservedObject private var effectManager = EffectManager.shared
+
     let computation: AyurvedaIngredientComputation
     let target: AyurvedaDoshaDistribution?
     let onTap: () -> Void
 
     var body: some View {
-        HStack(alignment: .top) {
-            Spacer()
-            doshaCard(.vata, value: computation.computed?.vata)
-            Spacer()
-            doshaCard(.pitta, value: computation.computed?.pitta)
-            Spacer()
-            doshaCard(.kapha, value: computation.computed?.kapha)
-            Spacer()
-            fitCard
-            Spacer()
-        }
-        .padding(.horizontal, 6)
-        .accessibilityElement(children: .contain)
-        .accessibilityLabel("Daily Ayurveda summary")
-    }
-
-    private func doshaCard(
-        _ dosha: AyurvedaDosha,
-        value: Int?
-    ) -> some View {
         Button(action: onTap) {
-            DailyAyurvedaRingCard(
-                title: dosha.displayName,
-                value: value.map(AyurvedaDisplayMath.valueString) ?? "—",
-                fraction: value.map {
-                    AyurvedaDisplayMath.barFraction($0)
-                } ?? 0,
-                color: value.map {
-                    profileAwareColor(value: $0, dosha: dosha)
-                } ?? neutralColor,
-                systemImage: value.map {
-                    AyurvedaDoshaEffectPresentation(value: $0).systemImage
+            VStack(alignment: .leading, spacing: 10) {
+                HStack(spacing: 12) {
+                    Label("Daily Ayurveda", systemImage: "leaf.fill")
+                        .font(.headline)
+
+                    Spacer()
+
+                    VStack(alignment: .trailing, spacing: 2) {
+                        Text("Fit")
+                            .font(.caption)
+                            .foregroundStyle(
+                                effectManager.currentGlobalAccentColor.opacity(0.72)
+                            )
+                        Label(fitLabel, systemImage: fitIcon)
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(fitColor)
+                    }
                 }
-            )
-        }
-        .buttonStyle(.plain)
-    }
 
-    private var fitCard: some View {
-        Button(action: onTap) {
-            DailyAyurvedaRingCard(
-                title: "Fit",
-                value: fitLabel,
-                fraction: fitFraction,
-                color: fitColor,
-                systemImage: fitIcon
-            )
+                Divider()
+
+                if let computed = computation.computed {
+                    AyurvedaDoshaResultChips(
+                        vata: computed.vata,
+                        pitta: computed.pitta,
+                        kapha: computed.kapha
+                    )
+                } else {
+                    Text("Ayurvedic effects unavailable")
+                        .font(.caption)
+                        .foregroundStyle(
+                            effectManager.currentGlobalAccentColor.opacity(0.7)
+                        )
+                }
+            }
+            .foregroundStyle(effectManager.currentGlobalAccentColor)
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .glassCardStyle(cornerRadius: 20)
+            .contentShape(RoundedRectangle(cornerRadius: 20))
         }
         .buttonStyle(.plain)
+        .padding(.horizontal, 6)
+        .accessibilityLabel(
+            "Daily Ayurveda. Fit \(fitLabel). Open daily details."
+        )
     }
 
     private var fit: AyurvedaFoodFitPresentation? {
@@ -88,11 +88,6 @@ struct DailyAyurvedaSummaryRow: View {
         }
     }
 
-    private var fitFraction: Double {
-        guard let fit else { return 0 }
-        return min(1, max(0, (fit.score + 2) / 4))
-    }
-
     private var fitColor: Color {
         guard computation.computed != nil, let fit else {
             return neutralColor
@@ -100,33 +95,14 @@ struct DailyAyurvedaSummaryRow: View {
         return color(for: fit.direction)
     }
 
-    private var fitIcon: String? {
-        guard computation.computed != nil else { return nil }
+    private var fitIcon: String {
+        guard computation.computed != nil else { return "minus.circle.fill" }
         guard let fit else { return "person.crop.circle.badge.questionmark" }
         switch fit.direction {
         case .supportive: return "leaf.fill"
         case .mixed: return "equal.circle.fill"
         case .lessSupportive: return "arrow.down.right.circle.fill"
         }
-    }
-
-    private func profileAwareColor(
-        value: Int,
-        dosha: AyurvedaDosha
-    ) -> Color {
-        guard let target else {
-            return effectColor(value)
-        }
-        let contribution = Double(-value) * target[dosha]
-        if contribution > 0.05 { return Color("AyurvedaPacify") }
-        if contribution < -0.05 { return Color("AyurvedaAggravate") }
-        return neutralColor
-    }
-
-    private func effectColor(_ value: Int) -> Color {
-        if value < 0 { return Color("AyurvedaPacify") }
-        if value > 0 { return Color("AyurvedaAggravate") }
-        return neutralColor
     }
 
     private func color(
@@ -141,55 +117,6 @@ struct DailyAyurvedaSummaryRow: View {
 
     private var neutralColor: Color {
         Color("AyurvedaNeutral")
-    }
-}
-
-private struct DailyAyurvedaRingCard: View {
-    @ObservedObject private var effectManager = EffectManager.shared
-
-    let title: String
-    let value: String
-    let fraction: Double
-    let color: Color
-    let systemImage: String?
-
-    var body: some View {
-        VStack(spacing: 4) {
-            ZStack {
-                Circle()
-                    .stroke(color.opacity(0.18), lineWidth: 7)
-                Circle()
-                    .trim(from: 0, to: min(1, max(0, fraction)))
-                    .stroke(
-                        color,
-                        style: StrokeStyle(lineWidth: 7, lineCap: .round)
-                    )
-                    .rotationEffect(.degrees(-90))
-
-                VStack(spacing: 1) {
-                    if let systemImage {
-                        Image(systemName: systemImage)
-                            .font(.caption2)
-                    }
-                    Text(value)
-                        .font(.caption.weight(.bold))
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.7)
-                }
-                .foregroundStyle(color)
-            }
-            .frame(width: 60, height: 60)
-
-            Text(title)
-                .font(.caption)
-                .foregroundStyle(
-                    effectManager.currentGlobalAccentColor.opacity(0.8)
-                )
-        }
-        .padding(10)
-        .glassCardStyle(cornerRadius: 20)
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel("\(title), \(value)")
     }
 }
 
