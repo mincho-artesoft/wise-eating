@@ -37,7 +37,7 @@ struct DatabaseSetup {
             ShoppingListItem.self, ShoppingListModel.self,
             RecentlyAddedFood.self, DismissedFoodID.self,
             AminoAcidsData.self, CarbDetailsData.self,
-            SterolsData.self, Diet.self,
+            SterolsData.self,
             WaterLog.self, MealPlanEntry.self,
             MealPlan.self, MealPlanDay.self,
             MealPlanMeal.self, Training.self,

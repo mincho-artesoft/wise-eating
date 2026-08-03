@@ -41,7 +41,7 @@ class NumberRangeParser {
         return mapping[text.lowercased()]
     }
 
-    func parse(candidate: NumberRangeExtractor.ExtractionCandidate) -> [DietaryConstraint] {
+    func parse(candidate: NumberRangeExtractor.ExtractionCandidate) -> [SearchConstraint] {
         let cleanSubject = candidate.subjectText
         var op1 = parseOperator(candidate.operatorText)
         let finalUnit = candidate.unitText ?? candidate.unitText2
@@ -55,18 +55,14 @@ class NumberRangeParser {
         // --- ABSTRACT VALUE HANDLING ---
         if val1 == nil && candidate.isAbstract {
             
-            // 1. Zero/Free Logic (applies to Nutrients, Allergens, Diets)
+            // 1. Zero/Free Logic (applies to nutrients and allergens)
             // e.g. "No Sugar", "Gluten Free" -> Force 0.0
             if ["no", "free", "zero", "without", "non", "avoid", "exclude", "except"].contains(where: { opText.contains($0) }) {
                 op1 = .equal
                 val1 = 0.0
             }
-            // 2. Diet/Allergen Existence (e.g. "Vegan", "Contains Peanuts")
+            // 2. Allergen existence (e.g. "Contains Peanuts")
             // Implies "Must have this tag"
-            else if case .diet = type {
-                op1 = .greaterThanOrEqual
-                val1 = 1.0
-            }
             else if case .allergen = type {
                 op1 = .greaterThanOrEqual
                 val1 = 1.0
@@ -84,18 +80,18 @@ class NumberRangeParser {
         }
         
         // --- STANDARD RETURN ---
-        var results: [DietaryConstraint] = []
+        var results: [SearchConstraint] = []
         // NOTE: If val1 is nil here, we pass nil. ConstraintMapper handles nil now.
         
-        results.append(DietaryConstraint(originalText: candidate.matchedText, subject: cleanSubject, comparison: op1, value: val1, value2: nil, unit: finalUnit))
+        results.append(SearchConstraint(originalText: candidate.matchedText, subject: cleanSubject, comparison: op1, value: val1, value2: nil, unit: finalUnit))
         
         if let v2 = val2 {
             if let secondOp = op2 {
-                results.append(DietaryConstraint(originalText: candidate.matchedText, subject: cleanSubject, comparison: secondOp, value: v2, value2: nil, unit: finalUnit))
+                results.append(SearchConstraint(originalText: candidate.matchedText, subject: cleanSubject, comparison: secondOp, value: v2, value2: nil, unit: finalUnit))
             } else {
                 // Range
                 let startVal = val1 ?? 0.0 // fallback if range start missing (unlikely in valid range syntax)
-                results[0] = DietaryConstraint(originalText: candidate.matchedText, subject: cleanSubject, comparison: .greaterThanOrEqual, value: startVal, value2: v2, unit: finalUnit)
+                results[0] = SearchConstraint(originalText: candidate.matchedText, subject: cleanSubject, comparison: .greaterThanOrEqual, value: startVal, value2: v2, unit: finalUnit)
             }
         }
         
@@ -104,7 +100,7 @@ class NumberRangeParser {
     
     // MARK: - pH Logic Refinement
     // (Kept consistent with previous, but ensures abstract logic flows through)
-    private func refinePhLogic(subject: String, op: ComparisonOperator, val: Double?, val2: Double?, originalText: String, abstractOpText: String?) -> [DietaryConstraint] {
+    private func refinePhLogic(subject: String, op: ComparisonOperator, val: Double?, val2: Double?, originalText: String, abstractOpText: String?) -> [SearchConstraint] {
         let lowerSubject = subject.lowercased()
         let isAcid = lowerSubject.contains("acid") || lowerSubject.contains("sour")
         let opText = abstractOpText?.lowercased() ?? ""
@@ -142,7 +138,7 @@ class NumberRangeParser {
         if finalVal == nil {
             if ["neutral", "balanced", "normal"].contains(where: { opText.contains($0) }) {
                 return [
-                    DietaryConstraint(
+                    SearchConstraint(
                         originalText: originalText,
                         subject: "ph",
                         comparison: .greaterThanOrEqual,
@@ -175,8 +171,8 @@ class NumberRangeParser {
         
         // 3. Return Constraints
         if let v2 = finalVal2, let v1 = finalVal {
-            return [DietaryConstraint(originalText: originalText, subject: "ph", comparison: .greaterThanOrEqual, value: v1, value2: v2, unit: nil)]
+            return [SearchConstraint(originalText: originalText, subject: "ph", comparison: .greaterThanOrEqual, value: v1, value2: v2, unit: nil)]
         }
-        return [DietaryConstraint(originalText: originalText, subject: "ph", comparison: finalOp, value: finalVal ?? 7.0, value2: nil, unit: nil)]
+        return [SearchConstraint(originalText: originalText, subject: "ph", comparison: finalOp, value: finalVal ?? 7.0, value2: nil, unit: nil)]
     }
 }

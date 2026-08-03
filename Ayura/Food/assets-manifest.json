@@ -44,17 +44,17 @@
     },
     {
       "filename": "Ayura/preseeded_db.store.gz.part-aa",
-      "sha256": "39e05b05c839be67dd4460596e6c42adfb2e2ca405f8c90d91407a41fabb1ba9",
+      "sha256": "fbb37e2cee0de39e0eaf39ec0157b886acecdc99956f9ba449f344b9921285ad",
       "byteSize": 73400320,
       "frameCount": null,
       "restoredFilename": "Ayura/preseeded_db.store",
-      "restoredSha256": "9a403c2f30c181fe9a37e4345ccdca06a8e458dd07d6116aaa4c64521b3642af",
-      "restoredByteSize": 206008320
+      "restoredSha256": "1266bdaee441cd6a63246f28298e46d52631668db904820d7688e61504871852",
+      "restoredByteSize": 183222272
     },
     {
       "filename": "Ayura/preseeded_db.store.gz.part-ab",
-      "sha256": "39055a3d8a5905689c90dc3cc4fa3ec047ec3a718a057cecb079b3c8039df355",
-      "byteSize": 19937378,
+      "sha256": "4bf9f9b7dbfa5aeae144b368df5951f7e23d87c80805eef7a29da492cde2b4bb",
+      "byteSize": 11822117,
       "frameCount": null
     }
   ]

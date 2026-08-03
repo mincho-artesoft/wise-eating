@@ -24,7 +24,6 @@ public final class FoodItem: Identifiable {
     
     public var minAgeMonths: Int = 0
     public var nameNormalized: String
-    public var category: [FoodCategory]?
 
     public var isRecipe: Bool = false
     public var isMenu: Bool = false
@@ -32,9 +31,6 @@ public final class FoodItem: Identifiable {
     public var isFavorite: Bool = false
 
     // MARK: – Tags
-    @Relationship(deleteRule: .nullify)
-    public var diets: [Diet]?
-
     public var allergens: [Allergen]?
 
     // MARK: – Nutrition Relationships
@@ -123,11 +119,9 @@ public final class FoodItem: Identifiable {
     public init(
         id: Int,
         name: String,
-        category: [FoodCategory]? = nil,
         isRecipe: Bool = false,
         isMenu: Bool = false,
         isUserAdded: Bool = true,
-        diets: [Diet]? = nil,
         allergens: [Allergen]? = nil,
         photo: Data? = nil,
         gallery: [FoodPhoto]? = nil,
@@ -148,11 +142,9 @@ public final class FoodItem: Identifiable {
         self.nameNormalized = name.foldedSearchKey
         self.searchTokens = FoodItem.makeTokens(from: name)
         self.searchTokens2 = FoodItem.makeTokens2(from: name)
-        self.category = category
         self.isRecipe = isRecipe
         self.isMenu = isMenu
         self.isUserAdded = isUserAdded
-        self.diets = diets ?? []
         self.allergens = allergens ?? []
         self.photo = photo
         self.gallery = gallery
@@ -205,12 +197,6 @@ extension FoodItem {
     }
     
     // 2. Logic Methods
-    func fits(dietName: String) -> Bool {
-        guard let diets = self.diets else { return false }
-        // Case-insensitive check against connected Diet entities
-        return diets.contains { $0.name.localizedCaseInsensitiveContains(dietName) }
-    }
-    
     func contains(allergen: Allergen) -> Bool {
         guard let allergens = self.allergens else { return false }
         // Case-insensitive check against connected Allergen entities
@@ -665,22 +651,12 @@ extension FoodItem {
         }
     
     @MainActor
-    func update(from dto: FoodItemDTO, dietMap: [String: Diet]) {
+    func update(from dto: FoodItemDTO) {
         // Main fields
         self.itemDescription = dto.desctiption
         self.minAgeMonths = dto.minAgeMonths ?? 0
-        self.category = dto.category
         self.allergens = dto.allergens
         
-        // Diet linking
-        let fetchedDiets: [Diet]
-        if let dietNames = dto.diets {
-            fetchedDiets = dietNames.compactMap { dietMap[$0.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()] }
-        } else {
-            fetchedDiets = []
-        }
-        self.diets = fetchedDiets
-
         // Macros
         if let m = dto.macronutrients {
             self.macronutrients = MacronutrientsData(carbohydrates: m.carbohydrates, protein: m.protein, fat: m.fat, fiber: m.fiber, totalSugars: m.totalSugars)

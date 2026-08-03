@@ -100,11 +100,16 @@ struct AnalyticsChartView: View {
 
     @ViewBuilder
     private func emptyChartPlaceholder(accent: Color) -> some View {
+        let isProfileMetric = nutrientID == "profile_weight" || nutrientID == "profile_height"
         ContentUnavailableView {
             Label("No Data", systemImage: "chart.bar.xaxis.ascending")
                 .foregroundStyle(accent)
         } description: {
-            Text("No meal data found for this metric.")
+            Text(
+                isProfileMetric
+                    ? "This metric will appear after it is changed in the profile editor."
+                    : "No meal data found for this metric."
+            )
                 .foregroundStyle(accent.opacity(0.8))
         }
         .frame(height: 250)
@@ -370,7 +375,7 @@ struct AnalyticsChartView: View {
     private func getRequirements(for nutrientID: String) -> (min: Double?, max: Double?, unit: String?) {
            let demographic = demographicString(for: profile)
            if nutrientID == "calories" {
-               return (TDEECalculator.calculate(for: profile, activityLevel: profile.activityLevel), nil, "kcal")
+               return (TDEECalculator.calculate(for: profile), nil, "kcal")
            }
            if nutrientID == "water" {
                let goalInGlasses = calculateWaterGoal(for: profile)
@@ -385,6 +390,12 @@ struct AnalyticsChartView: View {
            }
            if nutrientID == "fat" {
                return (nil, nil, "g")
+           }
+           if nutrientID == "profile_weight" {
+               return (nil, nil, GlobalState.measurementSystem == "Imperial" ? "lbs" : "kg")
+           }
+           if nutrientID == "profile_height" {
+               return (nil, nil, GlobalState.measurementSystem == "Imperial" ? "in" : "cm")
            }
         let requirement: Requirement?
         var unit: String?
@@ -432,6 +443,8 @@ struct AnalyticsChartView: View {
         if id == "protein" { return "Protein" }
         if id == "carbohydrates" { return "Carbohydrates" }
         if id == "fat" { return "Fat" }
+        if id == "profile_weight" { return "Weight" }
+        if id == "profile_height" { return "Height" }
         if id.starts(with: "vit_") {
             let key = String(id.dropFirst(4))
             return allVitamins.first { $0.id == key }?.name ?? "Unknown Vitamin"
@@ -574,7 +587,10 @@ private extension AnalyticsChartView {
               let lastDate  = points.last?.date
         else { return }
 
-        let isSpecialChart = ["calories", "water", "protein", "carbohydrates", "fat"].contains(nutrientID)
+        let isSpecialChart = [
+            "calories", "water", "protein", "carbohydrates", "fat",
+            "profile_weight", "profile_height"
+        ].contains(nutrientID)
         let totalDuration = lastDate.timeIntervalSince(firstDate)
 
         // Екранни точки за всяка стойност
@@ -617,6 +633,11 @@ private extension AnalyticsChartView {
                 with: .color(chartColor),
                 style: StrokeStyle(lineWidth: 2.5, lineCap: .round, lineJoin: .round)
             )
+
+            for point in screenPoints {
+                let dot = CGRect(center: point, radius: 4)
+                context.fill(Path(ellipseIn: dot), with: .color(chartColor))
+            }
             return
         }
 
@@ -714,6 +735,8 @@ private extension AnalyticsChartView {
           case "protein": return Color(hex: "#C9BFED")
           case "carbohydrates": return Color(hex: "#A8D7FF")
           case "fat": return Color(hex: "#FFDAB3")
+          case "profile_weight": return .blue
+          case "profile_height": return .green
           default:
               if nutrientID.starts(with: "vit_") {
                   let id = String(nutrientID.dropFirst(4))

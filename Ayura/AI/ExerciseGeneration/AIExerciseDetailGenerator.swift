@@ -127,10 +127,6 @@ final class AIExerciseDetailGenerator {
         muscles.map { String(describing: $0) }.joined(separator: ", ")
     }
 
-    private func names(_ sports: [Sport]) -> String {
-        sports.map { String(describing: $0) }.joined(separator: ", ")
-    }
-
     // ── Контекстни промптове на база similarExercise (меки подсказки, без копиране) ──
     private func createPromptWithReference_Description(
         basePrompt: String,
@@ -146,9 +142,6 @@ final class AIExerciseDetailGenerator {
         ]
         if !sim.muscleGroups.isEmpty {
             extra.append("Typical muscles there: \(names(sim.muscleGroups)). Treat as plausibility only.")
-        }
-        if let ss = sim.sports, !ss.isEmpty {
-            extra.append("Related sports there: \(names(ss)). Plausibility only.")
         }
         return basePrompt + "\n\nCONTEXT:\n- " + extra.joined(separator: "\n- ")
     }
@@ -187,24 +180,6 @@ final class AIExerciseDetailGenerator {
         CONTEXT (plausibility hints only):
         - Nearby DB item "\(sim.name)" targets: \(names(sim.muscleGroups)).
         - Prefer canonical choices for "\(exerciseName)". Do not force identical muscles.
-        """
-    }
-
-    private func createPromptWithReference_Sports(
-        basePrompt: String,
-        exerciseName: String,
-        similar: ExerciseItem?
-    ) -> String {
-        guard let sim = similar, let ss = sim.sports, !ss.isEmpty else { return basePrompt }
-        let simScore = nameSimilarity(sim.name, exerciseName)
-        guard simScore >= 0.6 else { return basePrompt }
-
-        return """
-        \(basePrompt)
-
-        CONTEXT (plausibility hints only):
-        - Nearby DB item "\(sim.name)" relates to: \(names(ss)).
-        - Prefer canonical sports for "\(exerciseName)". Do not force identical sports.
         """
     }
 
@@ -425,15 +400,6 @@ final class AIExerciseDetailGenerator {
             similar: similarExercise
         )
 
-        let sportsPrompt = createPromptWithReference_Sports(
-            basePrompt: """
-            List sports that benefit from or include '\(exerciseName)'.
-            Choose ONLY from the provided enum values. Return ONLY the 'sports' array.
-            """,
-            exerciseName: exerciseName,
-            similar: similarExercise
-        )
-
         let minAgePrompt = createPromptWithReference_MinAge(
             basePrompt: """
             Estimate the minimum suitable age in months for a child to safely perform a variation of '\(exerciseName)'.
@@ -466,17 +432,6 @@ final class AIExerciseDetailGenerator {
         await globalTaskManager.addTask(musclesTask)
         try Task.checkCancellation()
 
-        let sportsTask = Task<AIExerciseSportsResponse, Error> {
-            try await askWithRetry(
-                "Related Sports",
-                sharedPromptPrefix + "\n\n" + sportsPrompt,
-                generating: AIExerciseSportsResponse.self,
-                maxTokens: 600
-            )
-        }
-        await globalTaskManager.addTask(sportsTask)
-        try Task.checkCancellation()
-
         let minAgeTask = Task<AIExerciseMinAgeResponse, Error> {
             try await askWithRetry(
                 "Min Age (months)",
@@ -492,12 +447,10 @@ final class AIExerciseDetailGenerator {
         // MARK: 4) Await & map към домейн
         let metResp       = try await metTask.value
         let musclesResp   = try await musclesTask.value
-        let sportsResp    = try await sportsTask.value
         let minAgeResp    = try await minAgeTask.value
         try Task.checkCancellation()
         let correctedMinAge = validateAndCorrectMinAge(minAgeResp.minAgeMonths, for: exerciseName, onLog: onLog)
         let domainMuscles: [MuscleGroup] = musclesResp.muscleGroups.compactMap { $0.toDomain() }
-        let domainSports:  [Sport]       = sportsResp.sports.compactMap { $0.toDomain() }
         try Task.checkCancellation()
         let dto = ExerciseItemDTO(
             id: 0,
@@ -505,7 +458,6 @@ final class AIExerciseDetailGenerator {
             desc: descResp.description,
             muscleGroups: domainMuscles,
             metValue: metResp.metValue,
-            sports: domainSports,
             minimalAgeMonths: correctedMinAge
         )
         
@@ -521,15 +473,13 @@ final class AIExerciseDetailGenerator {
         description: String,
         metValueString: String,
         selectedMuscleGroups: Set<MuscleGroup.ID>,
-        selectedSports: Set<Sport.ID>,
         minAgeMonthsTxt: String
     ) {
         let description = dto.desc ?? ""
         let metValueString = dto.metValue.map { String(format: "%.1f", $0) } ?? ""
         let selectedMuscleGroups = Set(dto.muscleGroups.map(\.id))
-        let selectedSports = Set(dto.sports.map(\.id))
         let minAgeMonthsTxt: String = (dto.minimalAgeMonths ?? 0) > 0 ? String(dto.minimalAgeMonths!) : ""
-        return (description, metValueString, selectedMuscleGroups, selectedSports, minAgeMonthsTxt)
+        return (description, metValueString, selectedMuscleGroups, minAgeMonthsTxt)
     }
     
     // Хевристика: минимален възрастов ПРАГ (в месеци) според името
@@ -620,4 +570,3 @@ final class AIExerciseDetailGenerator {
     }
 
 }
-

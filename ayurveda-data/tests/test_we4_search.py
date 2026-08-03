@@ -18,6 +18,8 @@ PARSER = (
 )
 SEARCH_ENGINE = ROOT / "Ayura" / "FoodSearch" / "VM" / "SmartFoodSearchEngine.swift"
 INDEX_STORE = ROOT / "Ayura" / "FoodSearch" / "SearchIndexStore.swift"
+AYURVEDA_RESOLVER = ROOT / "Ayura" / "Ayurveda" / "AyurvedaResolver.swift"
+AYURVEDA_RULES = ROOT / "Ayura" / "Ayurveda" / "AyurvedaRules.swift"
 SYNONYMS = ROOT / "Ayura" / "FoodSearch" / "food_synonyms.json"
 SEED = ROOT / "Ayura" / "ayurveda_seed.json.gz"
 ARTIFACT_PARTS = [
@@ -183,7 +185,7 @@ struct ParserHarness {
         self.assert_parse("virya:frothy tomato", "virya:frothy tomato", [])
         self.assert_parse("grains", "grains", [])
 
-    def test_prebuilt_index_matches_v7_canonical_and_linked_projection(self):
+    def test_prebuilt_index_matches_v8_global_fallback_projection(self):
         combined = self.temporary_root / "preseeded_db.store.gz"
         store = self.temporary_root / "preseeded_db.store"
         with combined.open("wb") as destination:
@@ -201,7 +203,7 @@ struct ParserHarness {
                 """
             ).fetchone()
         version, food_count, payload_data = row
-        self.assertEqual((version, food_count), (7, 14_477))
+        self.assertEqual((version, food_count), (9, 14_477))
         payload = json.loads(payload_data)
         compact_by_id = {food["id"]: food for food in payload["compactFoods"]}
 
@@ -228,16 +230,28 @@ struct ParserHarness {
             )
             expected_tier = link_tiers[food_id] if food_id in linked_only_ids else None
             self.assertEqual(metadata.get("sourceTier"), expected_tier, food_id)
-        self.assertTrue(
-            all(
-                not food["ayurvedaFacets"] and food.get("ayurvedaMetadata") is None
-                for food_id, food in compact_by_id.items()
-                if food_id not in expected_ids
-            )
+        estimated_ids = set(compact_by_id) - expected_ids
+        self.assertEqual(len(estimated_ids), 10_265)
+        for food_id in estimated_ids:
+            food = compact_by_id[food_id]
+            metadata = food["ayurvedaMetadata"]
+            self.assertTrue(food["ayurvedaFacets"], food_id)
+            self.assertEqual(metadata["sourceTier"], "estimated", food_id)
+            self.assertEqual(metadata["confidenceAyur"], 0.25, food_id)
+        cajun = compact_by_id[12_601]["ayurvedaMetadata"]
+        self.assertEqual(cajun["sourceProfileName"], "Spices and Herbs")
+        self.assertEqual(
+            (
+                cajun["doshaVata"],
+                cajun["doshaPitta"],
+                cajun["doshaKapha"],
+            ),
+            (-1, 1, -1),
         )
+        self.assertIn("virya:heating", cajun["facets"])
 
         expected_index = {}
-        for food_id in expected_ids:
+        for food_id in compact_by_id:
             for facet in compact_by_id[food_id]["ayurvedaFacets"]:
                 expected_index.setdefault(facet, set()).add(food_id)
         actual_index = {
@@ -245,19 +259,42 @@ struct ParserHarness {
             for facet, food_ids in payload["ayurvedaFacetIndex"].items()
         }
         self.assertEqual(actual_index, expected_index)
-        self.assertEqual(len(actual_index), 89)
-        self.assertEqual(sum(map(len, expected_index.values())), 59_032)
+        self.assertEqual(len(actual_index), 445)
+        self.assertEqual(sum(map(len, expected_index.values())), 128_348)
         self.assertFalse(set(actual_index) & set(payload["invertedIndex"]))
 
     def test_engine_uses_index_intersection_and_exact_title_escape_hatch(self):
         engine = SEARCH_ENGINE.read_text(encoding="utf-8")
         index_store = INDEX_STORE.read_text(encoding="utf-8")
-        self.assertIn("currentIndexVersion: Int = 7", index_store)
+        self.assertIn("currentIndexVersion: Int = 9", index_store)
         self.assertIn("ayurvedaFacetIndex", index_store)
         self.assertIn("if let ayurveda = item.ayurvedaMetadata", engine)
         self.assertIn("AyurvedaSearchRanker.matches(", engine)
         self.assertIn("AyurvedaFacetParseResult.passthrough(query)", engine)
         self.assertIn("parsed.nutrientGoals", engine)
+
+    def test_runtime_paths_keep_the_global_estimated_fallback(self):
+        index_store = INDEX_STORE.read_text(encoding="utf-8")
+        resolver = AYURVEDA_RESOLVER.read_text(encoding="utf-8")
+        rules = AYURVEDA_RULES.read_text(encoding="utf-8")
+        self.assertIn("if let ayurvedaMetadata", index_store)
+        self.assertIn("AyurvedaCanonicalSearchMetadata(", index_store)
+        self.assertIn(
+            "The estimate already includes name-based preparation modifiers.",
+            index_store,
+        )
+        self.assertIn(
+            "category: nil",
+            resolver,
+        )
+        self.assertNotIn(
+            "foodItem.category",
+            resolver,
+        )
+        self.assertIn(
+            "public func estimated(category: String?, name: String)",
+            rules,
+        )
 
     def test_production_golden_capture_preserves_legacy_results(self):
         golden = json.loads(GOLDEN.read_text(encoding="utf-8"))

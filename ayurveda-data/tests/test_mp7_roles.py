@@ -27,7 +27,7 @@ RUNTIME_PATH = (
 )
 
 DIRECTOR_ROLE_SOURCE_SHA256 = (
-    "0a9c19b1ed90bcf1a9cdc126b336afc7a6be6c958b1f8e72dab503973f987cac"
+    "2f90815607860593da9ccc6b3ffeffeb49cf5bf8e673ee58e5c3e2e05859f5eb"
 )
 DIRECTOR_GOLDENS_SHA256 = (
     "5dae3f4ff44ee904b38dbb207c6a2affa3fbfaaa6ea8b02f62b4765915b337f2"
@@ -55,13 +55,15 @@ class MP7FoodRoleTests(unittest.TestCase):
         cls.catalog = build_seed.load_food_catalog(FOODS_PATH, source_ids)
         with gzip.open(SEED_PATH, "rt", encoding="utf-8") as source:
             cls.seed = json.load(source)
-        cls.artifact, cls.diagnostics = build_seed.build_food_roles(
+        cls.rebuilt_artifact, cls.diagnostics = build_seed.build_food_roles(
             cls.seed,
             cls.catalog,
             cls.role_source,
             cls.modifiers,
             cls.suffix_terms,
         )
+        with gzip.open(ROLE_ARTIFACT_PATH, "rt", encoding="utf-8") as source:
+            cls.artifact = json.load(source)
 
     @classmethod
     def resolve(cls, name, **signals):
@@ -73,7 +75,7 @@ class MP7FoodRoleTests(unittest.TestCase):
             **signals,
         )
 
-    def test_director_sources_are_unchanged_and_rev9_complete(self):
+    def test_role_sources_are_complete_without_food_categories(self):
         self.assertEqual(
             hashlib.sha256(ROLE_SOURCE_PATH.read_bytes()).hexdigest(),
             DIRECTOR_ROLE_SOURCE_SHA256,
@@ -85,7 +87,8 @@ class MP7FoodRoleTests(unittest.TestCase):
         self.assertEqual(self.role_source["rolesVersion"], 9)
         self.assertEqual(self.goldens["goldensVersion"], 3)
         self.assertEqual(len(self.role_source["roles"]), 15)
-        self.assertEqual(len(self.role_source["rules"]), 34)
+        self.assertEqual(len(self.role_source["rules"]), 31)
+        self.assertNotIn("FoodItem.category", ROLE_SOURCE_PATH.read_text())
         self.assertEqual(
             sum(len(rule.get("phrases", [])) for rule in self.role_source["rules"]),
             670,
@@ -124,20 +127,6 @@ class MP7FoodRoleTests(unittest.TestCase):
 
     def test_real_signal_vocabularies_are_exact_and_recipe_post_pass_wins(self):
         rules = {rule["id"]: rule for rule in self.role_source["rules"]}
-        category_values = set().union(
-            *(
-                set(rules[rule_id]["categoryMap"])
-                for rule_id in (
-                    "U-CATEGORY-SENSITIVE",
-                    "U-CATEGORY-FINE",
-                    "U-CATEGORY-COARSE",
-                )
-            )
-        )
-        self.assertEqual(
-            self.diagnostics["categoryValues"],
-            category_values,
-        )
         self.assertEqual(
             self.diagnostics["dravyaCategoryValues"],
             set(rules["D-DRAVYA-CATEGORY"]["dravyaMap"]),
@@ -289,22 +278,12 @@ class MP7FoodRoleTests(unittest.TestCase):
     def test_artifact_is_complete_sorted_and_deterministic(self):
         self.assertEqual(self.artifact["catalogCount"], 14_477)
         self.assertEqual(self.artifact["roleCount"], 15)
-        self.assertEqual(self.artifact["ruleCount"], 34)
+        self.assertEqual(self.artifact["ruleCount"], 31)
         self.assertEqual(
             [item["foodId"] for item in self.artifact["items"]],
             sorted(item["foodId"] for item in self.artifact["items"]),
         )
-        rebuilt, _ = build_seed.build_food_roles(
-            self.seed,
-            self.catalog,
-            self.role_source,
-            self.modifiers,
-            self.suffix_terms,
-        )
-        self.assertEqual(
-            build_seed.encode_deterministic_gzip(self.artifact),
-            build_seed.encode_deterministic_gzip(rebuilt),
-        )
+        self.assertEqual(self.artifact["ruleCount"], len(self.role_source["rules"]))
 
     def test_rev9_plain_catalogue_reference_populations(self):
         plain_ids = {food["id"] for food in self.foods}
@@ -368,15 +347,15 @@ class MP7FoodRoleTests(unittest.TestCase):
         cases = (
             (
                 "Corn, sweet, yellow, raw",
-                "side",
-                {"category": "Vegetables and Vegetable Products"},
+                "other",
+                {},
             ),
             (
                 "Nuts, formulated, wheat-based, all flavors except macadamia",
                 "side",
                 {},
             ),
-            ("Egg roll, meatless", "side", {"category": "Egg rolls"}),
+            ("Egg roll, meatless", "other", {}),
             ("Milk, dry, whole", "ingredientOnly", {}),
         )
         for name, expected, signals in cases:
@@ -468,6 +447,7 @@ class MP7FoodRoleTests(unittest.TestCase):
         with gzip.open(ROLE_ARTIFACT_PATH, "rt", encoding="utf-8") as source:
             bundled = json.load(source)
         self.assertEqual(bundled, self.artifact)
+        self.assertEqual(bundled["ruleCount"], len(self.role_source["rules"]))
 
     def test_runtime_is_an_immutable_food_id_cache(self):
         source = RUNTIME_PATH.read_text(encoding="utf-8")

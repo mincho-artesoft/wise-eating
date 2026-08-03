@@ -8,7 +8,6 @@ private let smartFoodSearchEmbedding: NLEmbedding? = NLEmbedding.wordEmbedding(f
 
 fileprivate struct ProfileSearchConstraints: Sendable {
     let ageInMonths: Int
-    let requiredDiets: Set<String>    // Диети, които профилът има (храната трябва да ги спазва)
     let avoidedAllergens: Set<String> // Алергени, които профилът има (храната не трябва да ги съдържа)
 }
 
@@ -20,7 +19,6 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
         case nutrients = "Nutrients"
         case recipes = "Recipes"
         case menus = "Menus"
-        case diets = "Diets"
         case mealPlans = "Meal Plans"
         
         public var id: String { rawValue }
@@ -49,7 +47,6 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
     
     private var vocabulary: [String] = []
     private var maxNutrientValues: [NutrientType: Double] = [:]
-    private var cachedKnownDiets: Set<String> = []
     
     /// Optional: nutrient-based candidate lists from NutrientIndex
     private var nutrientRankings: [NutrientType: [Int]] = [:]
@@ -64,6 +61,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
     private var lastIsRecipesOnly: Bool = false
     private var lastIsMenusOnly: Bool = false
     private var lastAyurvedaFilters: AyurvedaSearchFilters = .empty
+    private var lastConstitutionTarget: AyurvedaDoshaDistribution?
     
     // --- NEW: Track last mode & excluded IDs ---
     private var lastSearchMode: SearchMode? = nil
@@ -151,12 +149,17 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             print("=============================================================\n")
             
             var profileConstraints: ProfileSearchConstraints? = nil
+            let constitutionTarget: AyurvedaDoshaDistribution?
             if let p = profile {
                 profileConstraints = ProfileSearchConstraints(
                     ageInMonths: p.ageInMonths,
-                    requiredDiets: Set(p.diets.map { $0.name }),
                     avoidedAllergens: Set(p.allergens.map { $0.rawValue })
                 )
+                constitutionTarget = AyurvedaConstitutionStore
+                    .record(for: p.id)?
+                    .target()
+            } else {
+                constitutionTarget = nil
             }
             
             let sameQuery =
@@ -170,6 +173,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                 searchMode == lastSearchMode &&
                 excludedFoodIDs == lastExcludedFoodIDs &&
                 ayurvedaFilters == lastAyurvedaFilters &&
+                constitutionTarget == lastConstitutionTarget &&
                 phSortOrder == lastPhSortOrder // ✅ Проверка и за pH
             
             // Проверка дали имаме данни, но не ги показваме
@@ -186,6 +190,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                searchMode == nil,
                excludedFoodIDs.isEmpty,
                !ayurvedaFilters.isActive,
+               constitutionTarget == nil,
                phSortOrder == nil { // ✅ Проверка и за pH
                 
                 print("ℹ️ [SmartSearch] Empty query detected. Attempting to show default results.")
@@ -200,6 +205,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                 lastSearchMode = searchMode
                 lastExcludedFoodIDs = excludedFoodIDs
                 lastAyurvedaFilters = ayurvedaFilters
+                lastConstitutionTarget = constitutionTarget
                 lastPhSortOrder = phSortOrder // ✅ Обновяване на state
                 
                 searchTask?.cancel()
@@ -225,6 +231,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             lastSearchMode = searchMode
             lastExcludedFoodIDs = excludedFoodIDs
             lastAyurvedaFilters = ayurvedaFilters
+            lastConstitutionTarget = constitutionTarget
             lastPhSortOrder = phSortOrder // ✅ Обновяване на state
             
             // Snapshot lightweight state
@@ -234,20 +241,11 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             let snapshotFacetIndex = ayurvedaFacetIndex
             let snapshotVocab = vocabulary
             let snapshotMaxValues = maxNutrientValues
-            let snapshotDietsFromDB = cachedKnownDiets
             let snapshotRankings = nutrientRankings
             let snapshotExcludedIDs = excludedFoodIDs
             let temporalContext = AyurvedaSearchTemporalContext.current()
             
             isLoading = true
-            let snapshotAvailableDiets: Set<String> = {
-                var names = snapshotDietsFromDB
-                for d in defaultDietsList {
-                    names.insert(d.name)
-                }
-                return names
-            }()
-            
             searchTask = Task.detached(
                 priority: .userInitiated
             ) { [weak self,
@@ -290,7 +288,6 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                         compactMap: snapshotMap,
                         allFoods: snapshotAllFoods,
                         maxValues: snapshotMaxValues,
-                        availableDiets: snapshotAvailableDiets,
                         invertedIndex: snapshotIndex,
                         ayurvedaFacetIndex: snapshotFacetIndex,
                         vocabulary: snapshotVocab,
@@ -305,6 +302,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                         excludedFoodIDs: snapshotExcludedIDs,
                         ayurvedaFilters: ayurvedaFilters,
                         temporalContext: temporalContext,
+                        constitutionTarget: constitutionTarget,
                         phSortOrder: phSortOrder,
                         container: self.container
                     )
@@ -538,8 +536,6 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                     ayurvedaFields.insert(.digestibility)
                 case .season:
                     ayurvedaFields.insert(.season)
-                case .category:
-                    ayurvedaFields.insert(.category)
                 case .concept where facet.value == "digestion":
                     ayurvedaFields.insert(.digestion)
                 default:
@@ -559,16 +555,12 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
         if ayurvedaFilters.easyOnDigestion {
             ayurvedaFields.insert(.digestion)
         }
-        if ayurvedaFilters.category != nil {
-            ayurvedaFields.insert(.category)
-        }
         let orderedAyurvedaFields = AyurvedaSearchDisplayField.allCases
             .filter(ayurvedaFields.contains)
 
         searchContext = SearchContext(
             displayNutrients: uniqueDisplay,
             displayAyurvedaFields: orderedAyurvedaFields,
-            activeDiet: intent.dietFilter,    // 👈 важно – dietFilter от SearchIntent
             activeConstraint: activeConstraint,
             activeAgeLimit: ageStr,
             isPhActive: forceShowPH || intent.phConstraint != nil,
@@ -584,7 +576,6 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             compactMap: [Int: CompactFoodItem],
             allFoods: [CompactFoodItem],
             maxValues: [NutrientType: Double],
-            availableDiets: Set<String>,
             invertedIndex: [String: Set<Int>],
             ayurvedaFacetIndex: [String: Set<Int>],
             vocabulary: [String],
@@ -599,6 +590,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             excludedFoodIDs: Set<Int>,
             ayurvedaFilters: AyurvedaSearchFilters,
             temporalContext: AyurvedaSearchTemporalContext,
+            constitutionTarget: AyurvedaDoshaDistribution?,
             phSortOrder: PhSortOrder?, // ✅ НОВ ПАРАМЕТЪР
             container: ModelContainer
         ) async -> (
@@ -642,10 +634,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             let queryBoundary = ConstraintQueryBoundary(searchQuery)
             let rawPhCount = queryBoundary.count(of: "ph")
             
-            let parsed = await Tokenizer.parse(
-                searchQuery,
-                availableDiets: availableDiets
-            )
+            let parsed = await Tokenizer.parse(searchQuery)
             let hasDigits = searchQuery.rangeOfCharacter(from: .decimalDigits) != nil
             var textTokens = parsed.textTokens
 
@@ -783,12 +772,6 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                 ]
             )
             
-            // --- Diets ---
-            let baseExcludedDiets = parsed.excludedDiets.union(
-                Self.deriveExcludedDiets(negativeTokens: parsed.negativeTokens, availableDiets: availableDiets)
-            )
-            let excludedDietNames = baseExcludedDiets.union(mappedConstraints.excludeDiets)
-            let combinedDiets = parsed.diets.union(mappedConstraints.includeDiets)
             var combinedAllergenExclusions = parsed.allergenExclusions.union(mappedConstraints.excludeAllergens)
             
             // --- ✅ pH Logic Update with Explicit Sort Order ---
@@ -821,9 +804,6 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                     negativeTokens: parsed.negativeTokens,
                     nutrientGoals: mergedGoals,
                     displayNutrients: displayNutrients,
-                    diets: combinedDiets,
-                    dietFilter: parsed.dietFilter,
-                    excludedDiets: excludedDietNames,
                     targetConsumerAge: combinedAge,
                     allergenExclusions: combinedAllergenExclusions,
                     excludeAllAllergens: parsed.excludeAllAllergens,
@@ -876,7 +856,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             //     treat it as a negative ingredient.
             //   • Also map ingredients to allergens when possible (e.g. "no milk" -> Dairy).
             var negativeIngredients = Set<String>()
-            let ingredientKeys = Set(SearchKnowledgeBase.shared.ingredientToDietMap.keys)
+            let ingredientKeys = vocabSet
 
             let rawWordsForNegatives: [String] = simpleRawQuery
                 .components(separatedBy: .whitespacesAndNewlines)
@@ -932,15 +912,8 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                     // Original system keyword detection
                     let rawIsPrefix = SearchKnowledgeBase.shared.isSystemKeywordPrefix(t)
                     
-                    // FIX: If the word is a known ingredient (even if it links to a diet),
-                    // treat it as a STRICT text token, not a skippable command.
-                    let isIngredient = SearchKnowledgeBase.shared.ingredientToDietMap.keys.contains(lower)
-                    
-                    // If it's an ingredient, force false. Otherwise respect rawIsPrefix.
-                    let effectiveIsPrefix = isIngredient ? false : rawIsPrefix
-                    
                     // "ph" and "no" remain special 2-char commands
-                    let isCommand: Bool = (t.count <= 2) ? (lower == "ph" || lower == "no") : effectiveIsPrefix
+                    let isCommand: Bool = (t.count <= 2) ? (lower == "ph" || lower == "no") : rawIsPrefix
                     
                     map[t] = isCommand
                 }
@@ -1096,18 +1069,12 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                     case .nutrients, .mealPlans:
                         if let cons = profileConstraints {
                             if Double(item.enforcedMinAgeMonths) > Double(cons.ageInMonths) { continue }
-                            if !cons.requiredDiets.isEmpty {
-                                var meetsAll = true
-                                for d in cons.requiredDiets { if !item.fits(dietName: d) { meetsAll = false; break } }
-                                if !meetsAll { continue }
-                            }
                             if !cons.avoidedAllergens.isEmpty {
                                 var hasAllergen = false
                                 for a in cons.avoidedAllergens { if item.contains(allergen: a) { hasAllergen = true; break } }
                                 if hasAllergen { continue }
                             }
                         }
-                    case .diets: break
                     }
                 }
                 
@@ -1175,17 +1142,6 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                     if rejectDueToNegativeIngredient { continue }
                 }
 
-                if !intent.excludedDiets.isEmpty {
-                    var hasExcludedDiet = false
-                    for excluded in intent.excludedDiets where item.fits(dietName: excluded) { hasExcludedDiet = true; break }
-                    if hasExcludedDiet { continue }
-                }
-                if !intent.diets.isEmpty {
-                    var meetsAll = true
-                    for d in intent.diets where !item.fits(dietName: d) { meetsAll = false; break }
-                    if !meetsAll { continue }
-                }
-                if let uiDiet = intent.dietFilter, !item.fits(dietName: uiDiet.rawValue) { continue }
                 if let age = intent.targetConsumerAge,
                    Double(item.enforcedMinAgeMonths) > age { continue }
                 if intent.excludeAllAllergens && !item.allergens.isEmpty { continue }
@@ -1349,7 +1305,8 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                         ayurveda,
                         filters: ayurvedaFilters,
                         constraints: intent.ayurvedaFacetConstraints,
-                        temporalContext: temporalContext
+                        temporalContext: temporalContext,
+                        constitutionTarget: constitutionTarget
                     )
                     score += ayurvedaScore
                 } else {
@@ -1537,7 +1494,6 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
         ayurvedaFacetIndex = store.ayurvedaFacetIndex
         vocabulary = store.vocabulary
         maxNutrientValues = store.maxNutrientValues
-        cachedKnownDiets = store.knownDiets
         nutrientRankings = store.nutrientRankings
         loadedIndexRevision = store.revision
         if didChange {
@@ -1545,22 +1501,6 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             // identical to the request made before an item was edited.
             lastCanonicalQuery = "\u{0}"
         }
-    }
-    
-    // MARK: - Diet Derivation
-    
-    nonisolated private static func deriveExcludedDiets(negativeTokens: Set<String>, availableDiets: Set<String>) -> Set<String> {
-        guard !negativeTokens.isEmpty else { return [] }
-        var result = Set<String>()
-        let lowerToDietName: [String: String] = availableDiets.reduce(into: [:]) { $0[$1.lowercased()] = $1 }
-        for token in negativeTokens {
-            let lower = token.lowercased()
-            if let dietType = SearchKnowledgeBase.shared.dietMap[lower] { result.insert(dietType.rawValue); continue }
-            if let mappedName = SearchKnowledgeBase.shared.dietSynonyms[lower] { result.insert(mappedName); continue }
-            if let exact = lowerToDietName[lower] { result.insert(exact); continue }
-            if let (_, name) = lowerToDietName.first(where: { $0.key.contains(lower) }) { result.insert(name) }
-        }
-        return result
     }
     
     // MARK: - Numeric rounding helper (single decimal place)
@@ -2241,12 +2181,17 @@ extension SmartFoodSearch3 {
 
         // Build profile constraints just like in performSearch(...)
         var profileConstraints: ProfileSearchConstraints? = nil
+        let constitutionTarget: AyurvedaDoshaDistribution?
         if let p = profile {
             profileConstraints = ProfileSearchConstraints(
                 ageInMonths: p.ageInMonths,
-                requiredDiets: Set(p.diets.map { $0.name }),
                 avoidedAllergens: Set(p.allergens.map { $0.rawValue })
             )
+            constitutionTarget = AyurvedaConstitutionStore
+                .record(for: p.id)?
+                .target()
+        } else {
+            constitutionTarget = nil
         }
 
         // Snapshot lightweight state (same pattern as performSearch)
@@ -2256,26 +2201,16 @@ extension SmartFoodSearch3 {
         let snapshotFacetIndex = ayurvedaFacetIndex
         let snapshotVocab = vocabulary
         let snapshotMaxValues = maxNutrientValues
-        let snapshotDietsFromDB = cachedKnownDiets
         let snapshotRankings = nutrientRankings
         let snapshotExcludedIDs = excludedFoodIDs
 
-        let snapshotAvailableDiets: Set<String> = {
-            var names = snapshotDietsFromDB
-            for d in defaultDietsList {
-                names.insert(d.name)
-            }
-            return names
-        }()
-
-        // Run the full search logic pipeline (constraints, nutrients, pH, diets, scoring, sorting, etc.)
+        // Run the full search logic pipeline.
         let (resultIDs, _, _, _, _) = await self.runSearchLogic(
             query: canonicalQuery,
             activeFilters: activeFilters,
             compactMap: snapshotMap,
             allFoods: snapshotAllFoods,
             maxValues: snapshotMaxValues,
-            availableDiets: snapshotAvailableDiets,
             invertedIndex: snapshotIndex,
             ayurvedaFacetIndex: snapshotFacetIndex,
             vocabulary: snapshotVocab,
@@ -2290,6 +2225,7 @@ extension SmartFoodSearch3 {
             excludedFoodIDs: snapshotExcludedIDs,
             ayurvedaFilters: ayurvedaFilters,
             temporalContext: AyurvedaSearchTemporalContext.current(),
+            constitutionTarget: constitutionTarget,
             phSortOrder: phSortOrder,
             container: self.container
         )
@@ -2342,14 +2278,6 @@ extension SmartFoodSearch3 {
         let snapshotMaxValues = maxNutrientValues
         let snapshotRankings = nutrientRankings
         
-        let snapshotAvailableDiets: Set<String> = {
-            var names = cachedKnownDiets
-            for d in defaultDietsList {
-                names.insert(d.name)
-            }
-            return names
-        }()
-
         // Run search logic
         let (resultIDs, _, _, _, _) = await self.runSearchLogic(
             query: canonicalQuery,
@@ -2357,7 +2285,6 @@ extension SmartFoodSearch3 {
             compactMap: snapshotMap,
             allFoods: snapshotAllFoods,
             maxValues: snapshotMaxValues,
-            availableDiets: snapshotAvailableDiets,
             invertedIndex: snapshotIndex,
             ayurvedaFacetIndex: snapshotFacetIndex,
             vocabulary: snapshotVocab,
@@ -2372,6 +2299,7 @@ extension SmartFoodSearch3 {
             excludedFoodIDs: [],
             ayurvedaFilters: .empty,
             temporalContext: AyurvedaSearchTemporalContext.current(),
+            constitutionTarget: nil,
             phSortOrder: nil,
             container: self.container
         )

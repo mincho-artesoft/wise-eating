@@ -228,7 +228,7 @@ struct TrainingView: View {
     }
     
     private var netCalorieBalance: Double { totalCaloriesConsumedToday - totalCaloriesBurnedToday }
-    private var targetCalories: Double { TDEECalculator.calculate(for: profile, activityLevel: profile.activityLevel) }
+    private var targetCalories: Double { TDEECalculator.calculate(for: profile) }
     
     private var allMuscleGroups: [MuscleGroup] {
         MuscleGroup.allCases
@@ -647,7 +647,6 @@ struct TrainingView: View {
             loadTrainings(preselect: selectedTrainingID)
             exerciseSearchVM.query = globalSearchText
             exerciseSearchVM.muscleGroupFilter = selectedMuscleGroup
-            exerciseSearchVM.userSportsFilter = profile.sports
             exerciseSearchVM.profileAgeInMonths = profile.ageInMonths
             exerciseSearchVM.exclude(Set(currentExercises.keys))
             await loadNodesForDay()
@@ -1171,7 +1170,7 @@ struct TrainingView: View {
                 let minX = radius
                 let maxX = size.width  - radius
                 let minY = radius + safeArea.top
-                let maxY = size.height - radius - safeArea.bottom - 80
+                let maxY = size.height - radius - safeArea.bottom
                 
                 let clampedCenterX = min(max(rawCenterX, minX), maxX)
                 let clampedCenterY = min(max(rawCenterY, minY), maxY)
@@ -1575,7 +1574,6 @@ struct TrainingView: View {
             try? ctx.save()
         }
         
-        await BadgeManager.shared.checkAndAwardBadges(for: profile, using: ctx)
     }
     
     private func goalProgress(on date: Date) -> Double? { nil }

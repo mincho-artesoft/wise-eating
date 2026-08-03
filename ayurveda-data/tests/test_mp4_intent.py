@@ -45,8 +45,6 @@ struct FallbackRecord: Codable {
     let id: String
     let days: Int
     let mealsPerDay: Int
-    let diet: String
-    let goal: String
     let statedKcal: Int
     let avoid: [String]
     let allergens: [String]
@@ -67,8 +65,6 @@ func fallbackRecord(_ id: String, _ prompt: String) -> FallbackRecord {
         id: id,
         days: request.days,
         mealsPerDay: request.mealsPerDay,
-        diet: request.diet.rawValue,
-        goal: request.goal.rawValue,
         statedKcal: request.statedKcal,
         avoid: request.avoid,
         allergens: request.allergens.map(\.rawValue),
@@ -258,9 +254,7 @@ struct MP4IntentHarness {
         }
         self.assertEqual(len(records), 10)
 
-        self.assertEqual(records["light-week"]["diet"], "vegetarian")
         self.assertEqual(records["light-week"]["days"], 7)
-        self.assertEqual(records["light-week"]["goal"], "weight_loss")
         self.assertEqual(records["light-week"]["agni"], "slow")
         self.assertIn("dairy", records["light-week"]["allergens"])
 
@@ -268,7 +262,6 @@ struct MP4IntentHarness {
         self.assertEqual(records["three-day"]["statedKcal"], 1800)
         self.assertIn("mushrooms", records["three-day"]["avoid"])
 
-        self.assertEqual(records["vegan-peanut"]["diet"], "vegan")
         self.assertEqual(records["vegan-peanut"]["days"], 7)
         self.assertEqual(records["vegan-peanut"]["allergens"], ["peanuts"])
 
@@ -281,16 +274,12 @@ struct MP4IntentHarness {
 
         self.assertEqual(records["gluten-muscle"]["days"], 7)
         self.assertEqual(records["gluten-muscle"]["statedKcal"], 2800)
-        self.assertEqual(records["gluten-muscle"]["goal"], "muscle_gain")
         self.assertIn("gluten", records["gluten-muscle"]["allergens"])
 
-        self.assertEqual(records["positive-dairy"]["diet"], "vegetarian")
         self.assertEqual(records["positive-dairy"]["allergens"], [])
 
         self.assertEqual(records["weekend"]["days"], 2)
-        self.assertEqual(records["weekend"]["goal"], "digestion")
 
-        self.assertEqual(records["shellfish"]["diet"], "pescatarian")
         self.assertEqual(records["shellfish"]["days"], 4)
         self.assertEqual(records["shellfish"]["allergens"], ["shellfish"])
 
@@ -359,7 +348,6 @@ struct MP4IntentHarness {
 
     def test_existing_vocab_and_resolution_are_wired(self):
         source = PLANNER.read_text(encoding="utf-8")
-        self.assertIn("private func mappedDiet(for pattern: DietPattern) -> DietType?", source)
         self.assertIn("private func mappedAllergens(for tags: [AllergenTag])", source)
         self.assertIn("FoodConcepts.shared.canonical(alias: term)", source)
         self.assertIn("resolveFoodConcept(", source)

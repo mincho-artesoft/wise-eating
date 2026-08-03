@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct DoshaBarsView: View {
+  @ObservedObject private var effectManager = EffectManager.shared
+
   private enum Mode: String, CaseIterable, Identifiable {
     case signed = "±"
     case percentage = "%"
@@ -36,6 +38,8 @@ struct DoshaBarsView: View {
         percentageBars
       }
     }
+    .foregroundStyle(effectManager.currentGlobalAccentColor)
+    .tint(effectManager.currentGlobalAccentColor)
   }
 
   private var modePicker: some View {
@@ -97,6 +101,8 @@ struct DoshaBarsView: View {
 }
 
 private struct DoshaLegendItem: View {
+  @ObservedObject private var effectManager = EffectManager.shared
+
   let title: String
   let detail: String
   let color: Color
@@ -111,7 +117,9 @@ private struct DoshaLegendItem: View {
         .fontWeight(.semibold)
         .foregroundStyle(color)
       Text(detail)
-        .foregroundStyle(.secondary)
+        .foregroundStyle(
+          effectManager.currentGlobalAccentColor.opacity(0.72)
+        )
     }
     .font(.caption)
     .fixedSize(horizontal: false, vertical: true)

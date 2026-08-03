@@ -7,6 +7,7 @@ struct FoodItemRowView: View {
     @ObservedObject private var effectManager = EffectManager.shared
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.modelContext) private var modelContext
+    @State private var ayurvedaDisplay: AyurvedaDisplay?
 
     private var displayWeightG: Double? {
         if item.isRecipe || item.isMenu { return item.totalWeightG }
@@ -142,15 +143,42 @@ struct FoodItemRowView: View {
                     let nutrients = topVitamins + topMinerals
                     let allergens = item.allergens ?? []
                     
-                    if !nutrients.isEmpty || !allergens.isEmpty {
+                    if !nutrients.isEmpty
+                        || !allergens.isEmpty
+                        || ayurvedaDisplay != nil
+                    {
                         VStack(alignment: .leading, spacing: 8) {
                             ChipScrollView(title: "Top Nutrients", items: nutrients, textColor: effectManager.currentGlobalAccentColor)
                             ChipScrollView(title: "Allergens", items: allergens, textColor: effectManager.currentGlobalAccentColor, isAlertSection: true)
+
+                            if let ayurvedaDisplay {
+                                VStack(alignment: .leading, spacing: 6) {
+                                    Text("Doshas")
+                                        .font(.caption.weight(.semibold))
+                                        .foregroundStyle(
+                                            effectManager
+                                                .currentGlobalAccentColor
+                                                .opacity(0.8)
+                                        )
+
+                                    AyurvedaDoshaResultChips(
+                                        vata: ayurvedaDisplay.vata,
+                                        pitta: ayurvedaDisplay.pitta,
+                                        kapha: ayurvedaDisplay.kapha,
+                                        isEstimated:
+                                            ayurvedaDisplay.tierLabel
+                                            == "Estimated"
+                                    )
+                                }
+                            }
                         }
                     }
                 }
                 .padding()
                 .glassCardStyle(cornerRadius: 20)
+                .task(id: item.id) {
+                    resolveAyurvedaDisplay()
+                }
             }
         }
     
@@ -183,6 +211,28 @@ struct FoodItemRowView: View {
             str = String(format: "%.1f", scaled)
         }
         return "\(str) \(newUnit)"
+    }
+
+    private func resolveAyurvedaDisplay() {
+        guard !item.isDeleted, item.modelContext != nil else {
+            ayurvedaDisplay = nil
+            return
+        }
+
+        do {
+            let resolution = try AyurvedaResolver.resolve(
+                for: item,
+                context: modelContext
+            )
+            ayurvedaDisplay = AyurvedaDisplay.make(from: resolution)
+        } catch {
+            ayurvedaDisplay = nil
+            #if DEBUG
+            print(
+                "Food row Ayurveda resolve FAILED foodId=\(item.id): \(error)"
+            )
+            #endif
+        }
     }
     
     private func autoScale(_ value: Double, unit: String) -> (Double, String) {

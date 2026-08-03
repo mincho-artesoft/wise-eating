@@ -15,7 +15,6 @@ enum SeedManager {
         await seedBarcodesIfNeeded(context: ctx)
         await seedReferenceVitaminsIfNeeded(context: ctx)
         await seedReferenceMineralsIfNeeded(context: ctx)
-        await seedReferenceDietsIfNeeded(context: ctx)
         await seedFoodsIfNeeded(context: ctx)
         AyuraLaunchProbe.event("ayurveda-check-begin")
         let ayurvedaChangedSearchableFoods = await seedAyurvedaIfNeeded(context: ctx)
@@ -133,13 +132,6 @@ enum SeedManager {
         }
 
         do {
-            let persistedDiets = try ctx.fetch(FetchDescriptor<Diet>())
-            let dietMap: [String: Diet] = Dictionary(
-                uniqueKeysWithValues: persistedDiets.map {
-                    ($0.name.trimmingCharacters(in: .whitespacesAndNewlines).lowercased(), $0)
-                }
-            )
-
             let raw = try Data(contentsOf: url)
             let dtos = try JSONDecoder().decode([FoodItemDTO].self, from: raw)
 
@@ -147,7 +139,7 @@ enum SeedManager {
             items.reserveCapacity(dtos.count)
 
             for dto in dtos {
-                let model = dto.model(dietMap: dietMap)
+                let model = dto.model()
                 model.isUserAdded = false
                 model.isRecipe = false
                 items.append(model)
@@ -156,7 +148,7 @@ enum SeedManager {
             try ctx.transaction {
                 for item in items { ctx.insert(item) }
             }
-            print("   ✅ Seeded \(items.count) foods with their diet relationships.")
+            print("   ✅ Seeded \(items.count) foods.")
         } catch {
             print("   ❌ Food seeding failed: \(error)")
         }
@@ -170,9 +162,9 @@ enum SeedManager {
             return
         }
 
-        print("   Seeding Exercises from sports.json...")
-        guard let url = Bundle.main.url(forResource: "sports", withExtension: "json") else {
-            assertionFailure("sports.json not found"); return
+        print("   Seeding Exercises from exercises.json...")
+        guard let url = Bundle.main.url(forResource: "exercises", withExtension: "json") else {
+            assertionFailure("exercises.json not found"); return
         }
 
         do {
@@ -185,7 +177,7 @@ enum SeedManager {
                     ctx.insert(exercise)
                 }
             }
-            print("   ✅ Seeded \(dtos.count) exercises from sports.json")
+            print("   ✅ Seeded \(dtos.count) exercises from exercises.json")
         } catch {
             print("   ❌ Exercise seeding failed: \(error)")
         }
@@ -214,19 +206,6 @@ enum SeedManager {
             print("   ✅ Seeded \(defaultMineralsList.count) minerals.")
         } catch {
             print("   ❌ Mineral seeding failed: \(error)")
-        }
-    }
-
-    // MARK: – Reference Diets
-    private static func seedReferenceDietsIfNeeded(context ctx: ModelContext) async {
-        guard databaseIsEmpty(entity: Diet.self, context: ctx) else { return }
-        do {
-            try ctx.transaction {
-                for diet in defaultDietsList { ctx.insert(diet) }
-            }
-            print("   ✅ Seeded \(defaultDietsList.count) diets.")
-        } catch {
-            print("   ❌ Diet seeding failed: \(error)")
         }
     }
 
@@ -310,7 +289,7 @@ enum SeedManager {
                 print("      ❌ \"\(name)\"")
             }
             print("   ---------------------------------------------------")
-            print("   👉 Action: Add these to 'sports.json' or fix the spelling in 'workouts.json'.")
+            print("   👉 Action: Add these to 'exercises.json' or fix the spelling in 'workouts.json'.")
         }
     }
 }

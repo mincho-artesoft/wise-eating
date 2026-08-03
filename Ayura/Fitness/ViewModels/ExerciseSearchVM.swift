@@ -15,11 +15,6 @@ final class ExerciseSearchVM: ObservableObject {
     @Published var query: String = ""
     @Published var muscleGroupFilter: MuscleGroup? = nil
     
-    /// Спортовете от профила на потребителя. Ако е празен – не се филтрира.
-    @Published var userSportsFilter: [Sport] = []
-    /// Ако е true: показва само упражнения, които съвпадат с поне един спорт.
-    @Published var requireSportsMatch: Bool = false
-    
     /// Филтриране по workout режим
     @Published var workoutFilterMode: WorkoutFilterMode = .all {
         didSet {
@@ -65,10 +60,9 @@ final class ExerciseSearchVM: ObservableObject {
 
     // MARK: - Init
     init() {
-        Publishers.CombineLatest3($query, $muscleGroupFilter, $userSportsFilter)
-            .combineLatest($requireSportsMatch)
+        Publishers.CombineLatest($query, $muscleGroupFilter)
             .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
-            .sink { [weak self] _, _ in
+            .sink { [weak self] _ in
                 self?.resetAndLoad()
             }
             .store(in: &cancellables)
@@ -115,8 +109,6 @@ final class ExerciseSearchVM: ObservableObject {
         let capturedPageSize = self.pageSize
         let capturedGeneration = self.generation
         let capturedMuscleGroup = self.muscleGroupFilter
-        let capturedUserSports = self.userSportsFilter
-        let capturedRequireMatch = self.requireSportsMatch
 
         currentTask?.cancel()
         currentTask = Task {
@@ -144,22 +136,7 @@ final class ExerciseSearchVM: ObservableObject {
                         afterMuscleFilter = fetchedItems
                     }
 
-                    // 2) sports filter (in-memory)
-                    let finalItems: [ExerciseItem]
-                    if !capturedUserSports.isEmpty {
-                        finalItems = afterMuscleFilter.filter { item in
-                            let itemSports = item.sports ?? []
-                            if capturedRequireMatch {
-                                return !itemSports.isEmpty && !Set(itemSports).isDisjoint(with: capturedUserSports)
-                            } else {
-                                return itemSports.isEmpty || !Set(itemSports).isDisjoint(with: capturedUserSports)
-                            }
-                        }
-                    } else {
-                        finalItems = afterMuscleFilter
-                    }
-
-                    return (finalItems.map(\.persistentModelID), fetchedItems.count)
+                    return (afterMuscleFilter.map(\.persistentModelID), fetchedItems.count)
                 }.value
             } catch {
                 print("ExerciseSearchVM background task error: \(error)")

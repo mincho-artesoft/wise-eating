@@ -72,11 +72,6 @@ struct AIRecipeIngredient: Codable, Sendable {
 
     @Guide(description: "A realistic quantity for this ingredient in grams for a typical recipe serving 2-4 people.")
     var grams: Double
-
-    // --- START OF CHANGE ---
-    @Guide(description: "A short, lowercase food category to help disambiguate (e.g., 'vegetable', 'fruit', 'meat', 'dairy', 'spice').")
-    var category: String
-    // --- END OF CHANGE ---
 }
 
 @available(iOS 26.0, *)
@@ -161,6 +156,4 @@ struct AINamingVariants: Codable, Sendable {
     @Guide(description: "Up to 8 keywords indicating raw/fresh forms (e.g., 'raw','fresh','unpeeled','peeled').")
     var rawKeywords: [String]
 
-    @Guide(description: "Lowercase category guess such as 'vegetable','fruit','meat','dairy','spice','herb','grain','legume','oil','condiment'.")
-    var categoryGuess: String
 }

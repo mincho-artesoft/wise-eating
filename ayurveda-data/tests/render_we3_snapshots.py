@@ -61,12 +61,7 @@ struct AyurvedaModifier {
 
 typealias DoshaVPK = (vata: Int, pitta: Int, kapha: Int)
 
-struct AyurvedaCategoryRule {
-  let category: String?
-}
-
 struct AyurvedaEstimate {
-  let categoryRule: AyurvedaCategoryRule
   let vpk: DoshaVPK
   let virya: String?
   let gunas: [String]

@@ -7,13 +7,11 @@ enum AyurvedaSearchDisplayField: String, CaseIterable, Hashable, Sendable {
     case digestibility
     case digestion
     case season
-    case category
 }
 
 struct SearchContext {
     var displayNutrients: [NutrientType] = []
     var displayAyurvedaFields: [AyurvedaSearchDisplayField] = []
-    var activeDiet: DietType?
     var activeConstraint: String?
     var activeAgeLimit: String?
     var isPhActive: Bool = false

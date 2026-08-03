@@ -107,24 +107,6 @@ def validate_tracked_file_sizes(repo_root, errs):
     return sizes
 
 
-def d34_primary_category(blob, fdc_id, errs):
-    if isinstance(blob, bytes):
-        try:
-            blob = blob.decode("utf-8")
-        except UnicodeDecodeError as error:
-            errs.append(f"D34/store/{fdc_id}: category is not UTF-8: {error}")
-            return None
-    try:
-        categories = json.loads(blob)
-    except (TypeError, json.JSONDecodeError) as error:
-        errs.append(f"D34/store/{fdc_id}: invalid category JSON: {error}")
-        return None
-    if not isinstance(categories, list) or not categories or not isinstance(categories[0], str):
-        errs.append(f"D34/store/{fdc_id}: missing primary category")
-        return None
-    return categories[0]
-
-
 def d34_modifier_applies(food_tokens, phrase_tokens):
     if not phrase_tokens or len(phrase_tokens) > len(food_tokens):
         return False
@@ -187,7 +169,7 @@ def d34_validate(here, store, errs):
         errs.append(f"D34/crosswalk.csv: cannot read: {error}")
         return
 
-    expected_header = ["fdcId", "name", "category", "dravyaId", "rule", "key",
+    expected_header = ["fdcId", "name", "dravyaId", "rule", "key",
                        "contested", "losers"]
     if rows and list(rows[0]) != expected_header:
         errs.append(f"D34/crosswalk.csv: unexpected header {list(rows[0])}")
@@ -219,7 +201,7 @@ def d34_validate(here, store, errs):
         ).fetchone()[0]
         store_rows = connection.execute(
             """
-            SELECT ZID, ZNAME, ZCATEGORY FROM ZFOODITEM
+            SELECT ZID, ZNAME FROM ZFOODITEM
             WHERE ZID BETWEEN 1 AND 12601
             ORDER BY ZID
             """
@@ -229,9 +211,8 @@ def d34_validate(here, store, errs):
         errs.append(f"D34/store: cannot query foods: {error}")
         return
     foods = {}
-    for fdc_id, name, category_blob in store_rows:
-        category = d34_primary_category(category_blob, fdc_id, errs)
-        foods[fdc_id] = {"name": name, "category": category}
+    for fdc_id, name in store_rows:
+        foods[fdc_id] = {"name": name}
     store_ids = set(foods)
     if len(store_ids) != 12601:
         errs.append(f"D34/store: expected 12601 foods, got {len(store_ids)}")
@@ -249,56 +230,34 @@ def d34_validate(here, store, errs):
     if missing_crosswalk_ids:
         errs.append(f"D34/crosswalk.csv: fdcIds absent from store {missing_crosswalk_ids[:10]}")
 
-    category_path = os.path.join(here, "rules", "category-rules.json")
     modifier_path = os.path.join(here, "rules", "modifiers.json")
     bundle_path = os.path.join(here, "..", "Ayura", "ayurveda_rules.json")
     try:
-        category_source = json.load(open(category_path))
         modifier_source = json.load(open(modifier_path))
         rules_bundle = json.load(open(bundle_path))
     except Exception as error:
         errs.append(f"D34/rules: cannot read rule inputs/bundle: {error}")
         return
     expected_bundle = {
-        "rulesVersion": category_source.get("rulesVersion"),
-        "categories": category_source.get("categories"),
-        "default": category_source.get("default"),
+        "rulesVersion": 2,
+        "default": {
+            "vpk": [0, 0, 0],
+            "virya": "neutral",
+            "gunas": [],
+            "note": "Neutral fallback for foods without a linked Ayurveda profile.",
+        },
         "modifiers": modifier_source.get("modifiers"),
     }
     if rules_bundle != expected_bundle:
         errs.append("D34/ayurveda_rules.json: content does not match authored rule inputs")
 
-    category_rules = rules_bundle.get("categories", [])
     default_rule = rules_bundle.get("default", {})
     modifiers = rules_bundle.get("modifiers", [])
-    category_map = {}
-    for rule in category_rules:
-        category = rule.get("category")
-        if category in category_map:
-            errs.append(f"D34/rules: duplicate category rule {category}")
-        category_map[category] = rule
-        d34_check_vector(rule.get("vpk"), f"D34/rules/{category}", errs)
-        if rule.get("virya") not in D34_VIRYA:
-            errs.append(f"D34/rules/{category}: invalid virya {rule.get('virya')}")
-        if set(rule.get("gunas", [])) - D34_RULE_GUNA:
-            errs.append(f"D34/rules/{category}: invalid gunas")
     d34_check_vector(default_rule.get("vpk"), "D34/rules/default", errs)
     if default_rule.get("virya") not in D34_VIRYA:
         errs.append(f"D34/rules/default: invalid virya {default_rule.get('virya')}")
     if set(default_rule.get("gunas", [])) - D34_RULE_GUNA:
         errs.append("D34/rules/default: invalid gunas")
-
-    store_categories = {food["category"] for food in foods.values() if food["category"]}
-    rule_categories = set(category_map)
-    uncovered = sorted(store_categories - rule_categories)
-    dead = sorted(rule_categories - store_categories)
-    if len(store_categories) != 187:
-        errs.append(f"D34/store: expected 187 primary categories, got {len(store_categories)}")
-    if len(category_rules) != 187 or uncovered or dead:
-        errs.append(
-            f"D34/rules: expected 187 rules / 0 dead / 0 uncovered; got "
-            f"{len(category_rules)} / {len(dead)} / {len(uncovered)}"
-        )
 
     modifier_ids = []
     for modifier in modifiers:
@@ -325,7 +284,7 @@ def d34_validate(here, store, errs):
     expected_counts = {
         "dravyas": 705, "recipes": 1500, "links": 2336,
         "derivedLinks": 1966, "placeholders": 376,
-        "categoryRules": 187, "modifiers": 14,
+        "modifiers": 14,
         "nutrition": {"full": 1500, "estimated": 0, "none": 0},
         "safety": {
             "profiles": 2205,
@@ -419,8 +378,6 @@ def d34_validate(here, store, errs):
                     break
         if set(safety.get("allergens", [])) - build_seed.ALLERGEN_VOCABULARY:
             errs.append(f"WE8/seed/{item_id}: unsupported allergen")
-        if set(safety.get("diets", [])) - build_seed.DIET_VOCABULARY:
-            errs.append(f"WE8/seed/{item_id}: unsupported diet")
 
     nutrition_counts = Counter()
     nutrient_keys = set(build_seed.NUTRIENT_CATALOG)
@@ -503,7 +460,7 @@ def d34_validate(here, store, errs):
             base = [dravya["dosha"][key] for key in ("vata", "pitta", "kapha")]
         else:
             tier = "estimated"
-            rule = category_map.get(food["category"], default_rule)
+            rule = default_rule
             applied = d34_applied_modifiers(food["name"], modifiers)
             base = rule["vpk"]
         tier_counts[tier] += 1
@@ -570,22 +527,22 @@ def d34_validate(here, store, errs):
          and resolutions[3623]["link"]["dravyaId"] == "dravya.apricot"
          and resolutions[3623]["modifiers"] == ["dried"]
          and resolutions[3623]["vpk"] == [0, 1, -1])
-    spot(3923, "estimated [1,0,1] (processed)",
+    spot(3923, "neutral fallback [1,0,0] (processed)",
          resolutions[3923]["tier"] == "estimated"
          and resolutions[3923]["modifiers"] == ["processed"]
-         and resolutions[3923]["vpk"] == [1, 0, 1])
-    spot(68, "estimated [2,-1,2] (frozen)",
+         and resolutions[3923]["vpk"] == [1, 0, 0])
+    spot(68, "neutral fallback [1,0,0] (frozen)",
          resolutions[68]["tier"] == "estimated"
          and resolutions[68]["modifiers"] == ["frozen"]
-         and resolutions[68]["vpk"] == [2, -1, 2])
-    spot(6148, "estimated [0,2,0] (dry-heat)",
+         and resolutions[68]["vpk"] == [1, 0, 0])
+    spot(6148, "neutral fallback [1,1,-1] (dry-heat)",
          resolutions[6148]["tier"] == "estimated"
          and resolutions[6148]["modifiers"] == ["dry-heat"]
-         and resolutions[6148]["vpk"] == [0, 2, 0])
-    spot(2655, "estimated [2,0,-1] (none)",
+         and resolutions[6148]["vpk"] == [1, 1, -1])
+    spot(2655, "neutral fallback [0,0,0] (none)",
          resolutions[2655]["tier"] == "estimated"
          and resolutions[2655]["modifiers"] == []
-         and resolutions[2655]["vpk"] == [2, 0, -1])
+         and resolutions[2655]["vpk"] == [0, 0, 0])
 
     print("D34 resolver simulation")
     print("tiers: classical 370 · derived 1966 · estimated 10265")

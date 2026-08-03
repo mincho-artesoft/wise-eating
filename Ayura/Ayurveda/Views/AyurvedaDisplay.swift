@@ -79,6 +79,7 @@ struct AyurvedaDisplay: Sendable {
   let rasa: [String]
   let virya: String?
   let vipaka: String?
+  let prabhava: String?
   let gunas: [String]
   let modifierLabels: [String]
   let viruddha: [String]
@@ -136,6 +137,7 @@ struct AyurvedaDisplay: Sendable {
         rasa: [],
         virya: computed.virya,
         vipaka: nil,
+        prabhava: nil,
         gunas: [],
         modifierLabels: [],
         viruddha: [],
@@ -148,13 +150,14 @@ struct AyurvedaDisplay: Sendable {
     case .estimated(let estimate):
       return AyurvedaDisplay(
         tierLabel: AyurvedaDisplayMath.tierLabel(.estimated),
-        tierDetail: "category rule: \(estimate.categoryRule.category ?? "default")",
+        tierDetail: "default Ayurveda rule",
         vata: estimate.vpk.vata,
         pitta: estimate.vpk.pitta,
         kapha: estimate.vpk.kapha,
         rasa: [],
         virya: estimate.virya,
         vipaka: nil,
+        prabhava: nil,
         gunas: estimate.gunas,
         modifierLabels: estimate.appliedModifiers.map(\.label),
         viruddha: [],
@@ -192,6 +195,7 @@ struct AyurvedaDisplay: Sendable {
       rasa: profile.rasa,
       virya: profile.virya,
       vipaka: profile.vipaka,
+      prabhava: profile.prabhava,
       gunas: profile.gunas,
       modifierLabels: modifierLabels,
       viruddha: profile.viruddha,

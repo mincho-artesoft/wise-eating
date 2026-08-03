@@ -45,10 +45,10 @@ estimated 10,296 (category rules × modifiers) = 12,601. Tier is always stored
 and must always be shown in UI.
 
 **Build pipeline:** `ayurveda-data/build_seed.py` → deterministic
-`Ayura/ayurveda_seed.json.gz` (seedVersion 5; sha-verifiable) +
+`Ayura/ayurveda_seed.json.gz` (seedVersion 6; sha-verifiable) +
 `Ayura/ayurveda_rules.json`. `ayurveda-data/build_preseeded_store.py`
 audits/compacts a completed 14,484-row store and emits the two bundled gzip
-parts, including the version-7 search cache. `ayurveda-data/validate.py --store
+parts, including the version-8 search cache. `ayurveda-data/validate.py --store
 /tmp/pre` is the gatekeeper (content integrity + full resolver and preseed
 simulation; must always pass).
 
@@ -75,12 +75,14 @@ simulation; must always pass).
 - `RecipeNutritionPanelView` (WE-2): existing glass-card/flow-layout language;
   switches per serving/per 100g and displays the full 39-field nutrient catalog,
   coverage state, and honest missing-slug evidence.
-- `Ayura/FoodSearch/` (WE-4/WE-5/WE-8c): the version-7 compact cache persists full
+- `Ayura/FoodSearch/` (WE-4/WE-5/WE-8c): the version-8 compact cache persists full
   Ayurveda search/display metadata plus virya/dosha/agni/digestibility/season/
   category/concept facet sets and a separate inverted facet index on the 2,214
-  seeded profiles plus 1,974 non-profile linked USDA foods.
+  seeded profiles, linked USDA foods, and low-confidence category-rule
+  fallback metadata for every remaining food.
   `CanonicalFacetParser` removes only validated natural/explicit facet speech
-  before the existing tokenizer; unlinked plain USDA rows remain un-faceted. Constrained
+  before the existing tokenizer; unlinked plain USDA rows use clearly labeled
+  `Estimated` facets. Constrained
   nutrient columns are always visible (`—` means no data; stored zero remains
   `0.0`), both constraint parsers feed query-ordered display context, and pH
   uses one exclusive boundary definition (`low < 7`, `high > 7`, neutral
@@ -105,7 +107,7 @@ simulation; must always pass).
   (after `seedFoodsIfNeeded`) and `DatabaseSetup.swift` (mainTypes): the shipped
   store already contains 383 placeholder FoodItems (reserved ID band
   **900001–900383**), 1,500 recipe FoodItems/IngredientLinks, 2,214 profiles,
-  2,305 links, and the version-7 search cache. Fresh install verifies the
+  2,336 links, and the version-8 search cache. Fresh install verifies the
   seed-v5 profile stamps and is a zero-insert/zero-update no-op. Existing stores
   use a canonical-slug/fdcId upsert delta; ownership ambiguity aborts without
   touching user data. Post-seed food total: 14,484.
@@ -273,9 +275,9 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | Recipe nutrition | 1,500 full · 0 estimated · 0 none; 39 fields × two bases |
 | Recipe IngredientLinks | 10,571 positive-gram rows · 1,500 owners |
 | WE-8 safety projection | 2,214 review-required rows · 156 allergen dravyas · 1,182 allergen recipes · 749 Vegan recipes |
-| Search cache | version 7 · 14,484 DB/compact rows · 4,188 metadata/faceted rows (2,214 canonical + 1,974 linked-only) · 89 keys / 58,635 assignments · separate display/enforced age floors |
-| Seed | seedVersion 5, deterministic SHA-256 `886c6a39…872e` |
-| Preseed parts (v7 rebuild) | `aa` `120cb78f…606e8` · `ab` `79270832…0615d`; restored store `b5e5da6b…d145b` |
+| Search cache | version 8 · 14,477 DB/compact rows · 14,477 metadata/faceted rows (2,205 canonical + 2,007 linked-only + 10,265 estimated) · 445 keys / 128,348 assignments · separate display/enforced age floors |
+| Seed | seedVersion 6, deterministic SHA-256 `0e3bad99…b1d70` |
+| Preseed parts (v8 rebuild, no FoodItem category column) | `aa` `30eac4f8…d9181f` · `ab` `37dae22f…a1da5`; restored store `dbe5bba6…f00ea3` |
 | Age provenance (WE-8c) | dravyas 4 authored / 710 legacyImport · recipes 4 / 1,496 · ingredient contributors 4 / 10,567 |
 | Cold launch (WE-6/WE-7/WE-8/WE-8c, Debug simulator) | WE-8c registry median **1.607s** (N=12); same-session WE-8b 1.569s, paired median delta +0.048s. Absolute hard ceiling 1.700s; profiling paydown required above 1.650s |
 | Legacy target (WE-7) | 9 dead Swift inputs removed · 5 live JSON fallback resources retained |

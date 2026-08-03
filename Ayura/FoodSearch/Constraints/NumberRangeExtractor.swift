@@ -68,7 +68,7 @@ class NumberRangeExtractor {
             // 4. ABSTRACT (Subject First) - "Tomatoes Low Acid" matches "Low Acid"
             subjectRaw + connector + abstractOpPart + #"(?=$|\s|[\),])"#,
             
-            // 5. ABSTRACT (Op First) - "High pH", "Low Fat", "No Sugar", "Vegan"
+            // 5. ABSTRACT (Op First) - "High pH", "Low Fat", "No Sugar"
             // Note: AbstractOp is optional in regex, but we filter later if both op and value are nil.
             abstractOpPart + #"\s+(?:of\s+)?(?<subject>[a-zA-Z0-9\s\(\)\-%]+)"#,
             
@@ -94,7 +94,7 @@ class NumberRangeExtractor {
                 
                 guard let finalSubject = subject else { continue }
                 if value == nil && abstractOp == nil && opFromGroup == nil {
-                    // Special case: If the subject itself is a Diet (e.g. "Vegan"), treat it as Abstract.
+                    // A known subject without an explicit value is treated as abstract.
                     if SearchKnowledgeBase.shared.isValidSubject(finalSubject) == false { continue }
                 }
                 
@@ -170,7 +170,7 @@ class NumberRangeExtractor {
         let noiseWords = [
             "softgels", "per tablet", "serving", "vs", "type", "style", "per scoop",
             "per 100g", "syrup", "liquid", "bar", "capsule", "products", "more than", "less than", "of",
-            "foods", "food", "diet", "intake"
+            "foods", "food", "intake"
         ]
         
         for word in noiseWords {

@@ -3,9 +3,6 @@ struct SearchIntent {
     let negativeTokens: Set<String>
     let nutrientGoals: [NutrientGoal]
     let displayNutrients: [NutrientType]
-    let diets: Set<String>
-    let dietFilter: DietType?
-    let excludedDiets: Set<String>   // ⬅️ NEW
     let targetConsumerAge: Double?
     let allergenExclusions: Set<Allergen>   // or AllergenType in the demo
     let excludeAllAllergens: Bool

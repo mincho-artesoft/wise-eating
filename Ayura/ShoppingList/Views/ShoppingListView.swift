@@ -620,8 +620,7 @@ struct ShoppingListView: View {
                     let minX = radius
                     let maxX = size.width  - radius
                     let minY = radius + safeArea.top
-                    // -80 допълнителен буфер отдолу, както при AI бутона
-                    let maxY = size.height - radius - safeArea.bottom - 80
+                    let maxY = size.height - radius - safeArea.bottom
                     
                     let clampedCenterX = min(max(rawCenterX, minX), maxX)
                     let clampedCenterY = min(max(rawCenterY, minY), maxY)

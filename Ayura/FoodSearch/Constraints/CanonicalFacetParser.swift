@@ -51,55 +51,6 @@ enum CanonicalFacetParser {
         "varsha",
         "vasanta",
     ]
-    private static let categoryAliases: [(pattern: String, value: String)] = [
-        (#"\bleafy[- ]greens?\b"#, "leafy-green"),
-        (#"\bdried[- ]fruits?\b"#, "dry-fruit-nut"),
-        (#"\bdry[- ]fruit(?:s)?(?:[- ]and[- ]nuts?)?\b"#, "dry-fruit-nut"),
-        (#"\boils?(?:[- ]and[- ]fats?)?\b"#, "oil-fat"),
-        (#"\bsalts?(?:[- ]and[- ]minerals?)?\b"#, "salt-mineral"),
-        (#"\banimal(?:[- ]foods?)?\b"#, "animal"),
-        (#"\bbeverages?\b|\bdrinks?\b"#, "beverage"),
-        (#"\bclassical\b"#, "classical"),
-        (#"\bdairy\b(?![- ]free\b)"#, "dairy"),
-        (#"\beveryday\b"#, "everyday"),
-        (#"\bfermented\b"#, "fermented"),
-        (#"\bfruits?\b"#, "fruit"),
-        (#"\bgrains?\b"#, "grain"),
-        (#"\bherbs?\b"#, "herb"),
-        (#"\binternational\b"#, "international"),
-        (#"\blegumes?\b|\bpulses?\b"#, "legume"),
-        (#"\bmedicinal\b"#, "medicinal"),
-        (#"\bpreparations?\b"#, "preparation"),
-        (#"\bregional\b"#, "regional"),
-        (#"\bseeds?\b"#, "seed"),
-        (#"\bspices?\b"#, "spice"),
-        (#"\bsweeteners?\b"#, "sweetener"),
-        (#"\bvegetables?\b|\bveggies?\b"#, "vegetable"),
-    ]
-    private static let categoryValues = Set([
-        "animal",
-        "beverage",
-        "classical",
-        "dairy",
-        "dry-fruit-nut",
-        "everyday",
-        "fermented",
-        "fruit",
-        "grain",
-        "herb",
-        "international",
-        "leafy-green",
-        "legume",
-        "medicinal",
-        "oil-fat",
-        "preparation",
-        "regional",
-        "salt-mineral",
-        "seed",
-        "spice",
-        "sweetener",
-        "vegetable",
-    ])
     private static let fastSignals = [
         "cool",
         "warm",
@@ -137,7 +88,6 @@ enum CanonicalFacetParser {
         "vasanta",
         "ritu:",
         "season:",
-        "category:",
         "concept:",
         "ushna",
         "sheeta",
@@ -251,15 +201,6 @@ enum CanonicalFacetParser {
             consume(#"\b\#(season)(?:[- ]ritu)?\b"#, keys: ["season:\(season)"])
         }
 
-        // Category words retain their existing text meaning unless another
-        // Ayurvedic facet makes the category intent explicit.
-        if !constraints.isEmpty {
-            for alias in categoryAliases {
-                consume(alias.pattern, keys: ["category:\(alias.value)"])
-            }
-            remove(#"\bfoods?\b"#)
-        }
-
         guard !constraints.isEmpty else {
             return .passthrough(query)
         }
@@ -273,7 +214,7 @@ enum CanonicalFacetParser {
         in query: inout String,
         add: (Set<String>) -> Void
     ) {
-        let pattern = #"\b(virya|rasa|vipaka|gunas?|pacifies|aggravates|agni|digestibility|season|ritu|category|concept):([a-z0-9-]+)\b"#
+        let pattern = #"\b(virya|rasa|vipaka|gunas?|pacifies|aggravates|agni|digestibility|season|ritu|concept):([a-z0-9-]+)\b"#
         guard let regex = try? NSRegularExpression(pattern: pattern) else { return }
         let original = query
         let range = NSRange(original.startIndex..., in: original)
@@ -322,10 +263,8 @@ enum CanonicalFacetParser {
             return ["light", "heavy"].contains(value)
         case "season":
             return seasonValues.contains(value)
-        case "category":
-            return categoryValues.contains(value)
         case "concept":
-            return value == "digestion" || categoryValues.contains(value)
+            return value == "digestion"
         default:
             return false
         }

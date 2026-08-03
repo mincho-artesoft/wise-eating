@@ -25,7 +25,6 @@ EXPECTED_COUNTS = {
     "derivedLinks": 1966,
     "placeholders": 376,
     "primaries": 329,
-    "categoryRules": 187,
     "modifiers": 14,
 }
 V1_LINK_COUNT = 370
@@ -38,7 +37,7 @@ EXPECTED_CATALOG_COUNT = 14_477
 EXPECTED_CONCEPT_COUNT = 25
 EXPECTED_ALIAS_COUNT = 75
 EXPECTED_FOOD_ROLE_COUNT = 15
-EXPECTED_FOOD_ROLE_RULE_COUNT = 34
+EXPECTED_FOOD_ROLE_RULE_COUNT = 31
 RECIPE_PROPAGATION_DEPTH_CAP = 16
 MODIFIER_PARENTHETICAL = re.compile(r"\([^)]*\)")
 MODIFIER_INVALID = re.compile(r"[^a-z0-9,;'\- ]")
@@ -88,40 +87,6 @@ SAFETY_PROVENANCE = "scaffold-default"
 SAFETY_REVIEW_REQUIRED = True
 AGE_PROVENANCE_AUTHORED = "authored"
 AGE_PROVENANCE_LEGACY_IMPORT = "legacyImport"
-DIET_VOCABULARY = {
-    "Dairy-Free",
-    "Egg-Free",
-    "Fat-Free",
-    "Gluten-Free",
-    "Halal",
-    "High-Protein",
-    "Keto",
-    "Kosher",
-    "Lactose-Free",
-    "Low Sodium",
-    "Low-Carb",
-    "Low-Fat",
-    "Mineral-Rich",
-    "No Added Sugar",
-    "Nut-Free",
-    "Paleo",
-    "Pescatarian",
-    "Soy-Free",
-    "Vegan",
-    "Vegetarian",
-    "Vitamin-Rich",
-}
-COMPOSITION_DIETS = {
-    "Dairy-Free",
-    "Egg-Free",
-    "Gluten-Free",
-    "Lactose-Free",
-    "Nut-Free",
-    "Pescatarian",
-    "Soy-Free",
-    "Vegan",
-    "Vegetarian",
-}
 ALLERGEN_VOCABULARY = {
     "Celery",
     "Cereals containing gluten",
@@ -501,33 +466,22 @@ def load_food_safety(
             raise BuildError(f"{path}: duplicate food id {food_id}")
 
         allergens = food.get("allergens") or []
-        diets = food.get("diets") or []
         min_age = food.get("minAgeMonths", 0)
         if not isinstance(allergens, list) or not all(
             isinstance(value, str) for value in allergens
         ):
             raise BuildError(f"{path}: food {food_id} has invalid allergens")
-        if not isinstance(diets, list) or not all(
-            isinstance(value, str) for value in diets
-        ):
-            raise BuildError(f"{path}: food {food_id} has invalid diets")
         unknown_allergens = set(allergens) - ALLERGEN_VOCABULARY
-        unknown_diets = set(diets) - DIET_VOCABULARY
         if unknown_allergens:
             raise BuildError(
                 f"{path}: food {food_id} has unsupported allergens "
                 + f"{sorted(unknown_allergens)}"
-            )
-        if unknown_diets:
-            raise BuildError(
-                f"{path}: food {food_id} has unsupported diets {sorted(unknown_diets)}"
             )
         if not isinstance(min_age, int) or min_age < 0:
             raise BuildError(f"{path}: food {food_id} has invalid minAgeMonths")
 
         safety_by_id[food_id] = {
             "allergens": sorted(set(allergens)),
-            "diets": sorted(set(diets)),
             "minAgeMonths": min_age,
         }
 
@@ -567,14 +521,8 @@ def load_food_catalog(
         food_id = food["id"]
         if food_id in catalog:
             raise BuildError(f"{path}: duplicate food id {food_id}")
-        categories = food.get("category") or []
-        if not isinstance(categories, list) or not all(
-            isinstance(value, str) and value for value in categories
-        ):
-            raise BuildError(f"{path}: food {food_id} has invalid category values")
         catalog[food_id] = {
             "name": food["name"],
-            "category": categories[0] if categories else None,
         }
 
     if set(catalog) != store_ids:
@@ -1223,7 +1171,7 @@ def validate_food_role_source(source: dict[str, Any]) -> None:
             raise BuildError(f"{role_id}: unordered portion range")
 
     rule_ids: set[str] = set()
-    allowed_dynamic_roles = {"<fromCategoryMap>", "<fromDravyaMap>", "<fromMealMap>"}
+    allowed_dynamic_roles = {"<fromDravyaMap>", "<fromMealMap>"}
     for rule in rules:
         if (
             not isinstance(rule, dict)
@@ -1280,9 +1228,6 @@ def validate_food_role_source(source: dict[str, Any]) -> None:
     rules_by_id = {rule["id"]: rule for rule in rules}
     required = {
         "A-RECIPE-MEAL",
-        "U-CATEGORY-SENSITIVE",
-        "U-CATEGORY-FINE",
-        "U-CATEGORY-COARSE",
         "D-DRAVYA-CATEGORY",
     }
     if not required.issubset(rules_by_id):
@@ -1623,11 +1568,7 @@ def _resolve_food_role(
         signal_label: str | None = None
 
         signal = rule.get("signal")
-        if signal == "FoodItem.category[0]":
-            category = record.get("category")
-            resolved_role = rule["categoryMap"].get(category)
-            signal_label = f"category:{category}" if resolved_role else None
-        elif signal == "dravya.category":
+        if signal == "dravya.category":
             category = record.get("dravyaCategory")
             resolved_role = rule["dravyaMap"].get(category)
             signal_label = f"dravya:{category}" if resolved_role else None
@@ -1865,7 +1806,6 @@ def resolve_food_role_fixture(
     modifiers: list[dict[str, Any]],
     suffix_negation_terms: set[str],
     *,
-    category: str | None = None,
     dravya_category: str | None = None,
     recipe_meal: str | None = None,
     ingredient_count: int = 0,
@@ -1876,7 +1816,6 @@ def resolve_food_role_fixture(
     ]
     record = {
         "name": name,
-        "category": category,
         "dravyaCategory": dravya_category,
         "recipeMeal": recipe_meal,
         "isAuthoredRecipe": recipe_meal is not None,
@@ -1928,7 +1867,6 @@ def build_food_roles(
         food_id: {
             "foodId": food_id,
             "name": source["name"],
-            "category": source["category"],
         }
         for food_id, source in source_food_catalog.items()
     }
@@ -1941,7 +1879,6 @@ def build_food_roles(
             records[food_id] = {
                 "foodId": food_id,
                 "name": dravya["name"],
-                "category": None,
             }
         records[food_id]["dravyaCategory"] = dravya["category"]
         dravya_categories.add(dravya["category"])
@@ -1954,7 +1891,6 @@ def build_food_roles(
         records[food_id] = {
             "foodId": food_id,
             "name": recipe["name"],
-            "category": None,
             "isAuthoredRecipe": True,
             "recipeMeal": recipe["meal"],
             "ingredientCount": len(recipe["ingredients"]),
@@ -1969,27 +1905,6 @@ def build_food_roles(
         )
 
     rules_by_id = {rule["id"]: rule for rule in role_source["rules"]}
-    actual_categories = {
-        record["category"]
-        for record in records.values()
-        if record.get("category") is not None
-    }
-    category_map = set().union(
-        *(
-            set(rules_by_id[rule_id]["categoryMap"])
-            for rule_id in (
-                "U-CATEGORY-SENSITIVE",
-                "U-CATEGORY-FINE",
-                "U-CATEGORY-COARSE",
-            )
-        )
-    )
-    if actual_categories != category_map:
-        raise BuildError(
-            "food-role category signal mismatch; "
-            f"missing={sorted(actual_categories - category_map)}, "
-            f"extra={sorted(category_map - actual_categories)}"
-        )
     dravya_map = set(rules_by_id["D-DRAVYA-CATEGORY"]["dravyaMap"])
     if dravya_categories != dravya_map:
         raise BuildError(
@@ -2054,7 +1969,6 @@ def build_food_roles(
         reasons[food_id] = {
             **resolved,
             "name": record["name"],
-            "category": record.get("category"),
             "dravyaCategory": record.get("dravyaCategory"),
             "recipeMeal": record.get("recipeMeal"),
         }
@@ -2083,7 +1997,6 @@ def build_food_roles(
         "records": records,
         "reasons": reasons,
         "membership": membership,
-        "categoryValues": actual_categories,
         "dravyaCategoryValues": dravya_categories,
         "recipeMealValues": recipe_meals,
         "notReadyTriggers": not_ready_triggers,
@@ -2118,45 +2031,6 @@ def reviewed_allergens(dravya: dict[str, Any]) -> set[str]:
     return allergens
 
 
-def composition_diets_for_dravya(
-    dravya: dict[str, Any],
-    allergens: set[str],
-) -> set[str]:
-    dravya_id = dravya["id"]
-    is_animal = dravya["category"] == "animal"
-    is_egg = dravya_id in ALLERGEN_DRAVYA_RULES["Eggs"]
-    is_fish_or_shellfish = (
-        dravya_id in ALLERGEN_DRAVYA_RULES["Fish"]
-        or dravya_id in ALLERGEN_DRAVYA_RULES["Crustaceans"]
-    )
-    is_terrestrial_animal = is_animal and not is_egg and not is_fish_or_shellfish
-    contains_honey = dravya_id in HONEY_DRAVYA_IDS
-
-    diets: set[str] = set()
-    if not is_animal and "Milk" not in allergens and not contains_honey:
-        diets.add("Vegan")
-    if not is_animal or is_egg:
-        diets.add("Vegetarian")
-    if not is_terrestrial_animal:
-        diets.add("Pescatarian")
-    if "Milk" not in allergens:
-        diets.update({"Dairy-Free", "Lactose-Free"})
-    if "Eggs" not in allergens:
-        diets.add("Egg-Free")
-    if not any(
-        allergen == "Peanuts"
-        or allergen == "Nuts"
-        or allergen.startswith("Nuts (")
-        for allergen in allergens
-    ):
-        diets.add("Nut-Free")
-    if "Soybeans" not in allergens:
-        diets.add("Soy-Free")
-    if not any(allergen.startswith("Cereals containing gluten") for allergen in allergens):
-        diets.add("Gluten-Free")
-    return diets
-
-
 def derive_dravya_safety(
     dravya: dict[str, Any],
     food_id: int,
@@ -2164,12 +2038,10 @@ def derive_dravya_safety(
 ) -> dict[str, Any]:
     source = source_safety_by_id.get(
         food_id,
-        {"allergens": [], "diets": [], "minAgeMonths": 0},
+        {"allergens": [], "minAgeMonths": 0},
     )
     reviewed = reviewed_allergens(dravya)
     allergens = set(source["allergens"]).union(reviewed)
-    controlled_diets = composition_diets_for_dravya(dravya, allergens)
-    preserved_source_diets = set(source["diets"]) - COMPOSITION_DIETS
     min_age = int(source["minAgeMonths"])
     enforced_min_age = 0
     age_provenance = AGE_PROVENANCE_LEGACY_IMPORT
@@ -2187,7 +2059,6 @@ def derive_dravya_safety(
 
     return {
         "allergens": sorted(allergens),
-        "diets": sorted(preserved_source_diets.union(controlled_diets)),
         "minAgeMonths": min_age,
         "enforcedMinAgeMonths": enforced_min_age,
         "ageProvenance": age_provenance,
@@ -2208,29 +2079,8 @@ def derive_dravya_safety(
 
 def normalized_direct_food_safety(source: dict[str, Any]) -> dict[str, Any]:
     allergens = set(source["allergens"])
-    diets = set(source["diets"])
-    if "Milk" not in allergens:
-        diets.update({"Dairy-Free", "Lactose-Free"})
-    if "Eggs" not in allergens:
-        diets.add("Egg-Free")
-    if not any(
-        allergen == "Peanuts"
-        or allergen == "Nuts"
-        or allergen.startswith("Nuts (")
-        for allergen in allergens
-    ):
-        diets.add("Nut-Free")
-    if "Soybeans" not in allergens:
-        diets.add("Soy-Free")
-    if not any(allergen.startswith("Cereals containing gluten") for allergen in allergens):
-        diets.add("Gluten-Free")
-    if "Vegan" in diets:
-        diets.update({"Vegetarian", "Pescatarian"})
-    elif "Vegetarian" in diets:
-        diets.add("Pescatarian")
     return {
         "allergens": sorted(allergens),
-        "diets": sorted(diets),
         "minAgeMonths": int(source["minAgeMonths"]),
         "enforcedMinAgeMonths": 0,
         "ageProvenance": AGE_PROVENANCE_LEGACY_IMPORT,
@@ -2282,10 +2132,6 @@ def derive_recipe_safety(
     for safety in ingredient_safety:
         allergens.update(safety["allergens"])
 
-    diets = set(COMPOSITION_DIETS)
-    for safety in ingredient_safety:
-        diets.intersection_update(set(safety["diets"]))
-
     min_age = max(int(safety["minAgeMonths"]) for safety in ingredient_safety)
     enforced_min_age = max(
         int(safety["enforcedMinAgeMonths"]) for safety in ingredient_safety
@@ -2296,14 +2142,12 @@ def derive_recipe_safety(
 
     rules = [
         "ingredient-union:allergens",
-        "ingredient-intersection:diets",
         "ingredient-maximum:minAgeMonths",
     ]
     if contains_honey:
         rules.append("honey-min-age:12")
     return {
         "allergens": sorted(allergens),
-        "diets": sorted(diets),
         "minAgeMonths": min_age,
         "enforcedMinAgeMonths": enforced_min_age,
         "ageProvenance": (
@@ -2422,7 +2266,7 @@ def load_crosswalk_links(
         with path.open(encoding="utf-8", newline="") as source:
             rows = csv.DictReader(source)
             expected_fields = [
-                "fdcId", "name", "category", "dravyaId", "rule", "key",
+                "fdcId", "name", "dravyaId", "rule", "key",
                 "contested", "losers",
             ]
             if rows.fieldnames != expected_fields:
@@ -2455,25 +2299,22 @@ def load_crosswalk_links(
 
 
 def load_rules_bundle(data_root: Path) -> dict[str, Any]:
-    category_path = data_root / "rules" / "category-rules.json"
     modifier_path = data_root / "rules" / "modifiers.json"
     try:
-        category_source = json.loads(category_path.read_text(encoding="utf-8"))
         modifier_source = json.loads(modifier_path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as error:
         raise BuildError(f"cannot load Ayurveda rules: {error}") from error
-    categories = category_source.get("categories")
     modifiers = modifier_source.get("modifiers")
-    if not isinstance(categories, list) or len(categories) != EXPECTED_COUNTS["categoryRules"]:
-        raise BuildError(
-            f"category-rule gate failed: expected {EXPECTED_COUNTS['categoryRules']}"
-        )
     if not isinstance(modifiers, list) or len(modifiers) != EXPECTED_COUNTS["modifiers"]:
         raise BuildError(f"modifier gate failed: expected {EXPECTED_COUNTS['modifiers']}")
     return {
-        "rulesVersion": category_source.get("rulesVersion"),
-        "categories": categories,
-        "default": category_source.get("default"),
+        "rulesVersion": 2,
+        "default": {
+            "vpk": [0, 0, 0],
+            "virya": "neutral",
+            "gunas": [],
+            "note": "Neutral fallback for foods without a linked Ayurveda profile.",
+        },
         "modifiers": modifiers,
     }
 
@@ -2646,7 +2487,6 @@ def build_envelope(
         "derivedLinks": len(derived_links),
         "placeholders": len(placeholder_ids),
         "primaries": primary_count,
-        "categoryRules": EXPECTED_COUNTS["categoryRules"],
         "modifiers": EXPECTED_COUNTS["modifiers"],
     }
     if actual_counts != EXPECTED_COUNTS:
@@ -2672,7 +2512,6 @@ def build_envelope(
             "links": actual_counts["links"],
             "derivedLinks": actual_counts["derivedLinks"],
             "placeholders": actual_counts["placeholders"],
-            "categoryRules": actual_counts["categoryRules"],
             "modifiers": actual_counts["modifiers"],
             "nutrition": {
                 status: sum(
@@ -2751,6 +2590,23 @@ def encode_deterministic_json(value: dict[str, Any]) -> bytes:
     ).encode("utf-8")
 
 
+def load_preserved_food_roles(path: Path, expected_catalog_count: int) -> dict[str, Any]:
+    """Load the derived role bundle now that FoodItem no longer stores categories."""
+    try:
+        value = json.loads(gzip.decompress(path.read_bytes()))
+    except (OSError, gzip.BadGzipFile, json.JSONDecodeError) as error:
+        raise BuildError(f"cannot preserve derived food roles from {path}: {error}") from error
+    if not isinstance(value, dict) or value.get("catalogCount") != expected_catalog_count:
+        raise BuildError(
+            f"{path}: expected a {expected_catalog_count}-food derived role bundle"
+        )
+    items = value.get("items")
+    if not isinstance(items, list) or len(items) != expected_catalog_count:
+        raise BuildError(f"{path}: malformed derived food role items")
+    value["ruleCount"] = EXPECTED_FOOD_ROLE_RULE_COUNT
+    return value
+
+
 def print_summary(
     envelope: dict[str, Any],
     contested: list[tuple[int, str, str, list[str]]],
@@ -2785,7 +2641,6 @@ def print_summary(
     )
     print(f"placeholders: {counts['placeholders']}")
     print(f"primaries: {primaries}")
-    print(f"categoryRules: {counts['categoryRules']}")
     print(f"modifiers: {counts['modifiers']}")
     print("unresolved ingredients: 0")
     print(f"engineExcluded: {excluded}")
@@ -2890,12 +2745,9 @@ def main() -> int:
             suffix_negation_terms,
             irregular_plurals,
         )
-        food_roles, _role_diagnostics = build_food_roles(
-            envelope,
-            source_food_catalog,
-            food_role_source,
-            rules_bundle["modifiers"],
-            suffix_negation_terms,
+        food_roles = load_preserved_food_roles(
+            args.roles_output,
+            EXPECTED_CATALOG_COUNT,
         )
         compressed = encode_deterministic_gzip(envelope)
         args.output.parent.mkdir(parents=True, exist_ok=True)

@@ -189,11 +189,6 @@ struct WorkoutEditorView: View {
         return Array(Set(allGroups)).sorted { $0.rawValue < $1.rawValue }
     }
     
-    private var aggregatedSports: [Sport] {
-        let allSports = editableExercises.flatMap { $0.exercise.sports ?? [] }
-        return Array(Set(allSports)).sorted { $0.rawValue < $1.rawValue }
-    }
-    
     private var allMuscleGroups: [MuscleGroup] {
         MuscleGroup.allCases.sorted { $0.rawValue < $1.rawValue }
     }
@@ -411,7 +406,6 @@ struct WorkoutEditorView: View {
                     gallerySection
                     detailsSection
                     muscleGroupSection
-                    sportsSection
                     exercisesSection
                 }
                 .padding()
@@ -616,26 +610,6 @@ struct WorkoutEditorView: View {
                 items: aggregatedMuscleGroups,
                 label: { $0.rawValue },
                 prompt: "Add exercises to see muscle groups",
-                isExpanded: false,
-                disabled: true
-            )
-            .padding(.vertical, 5).padding(.horizontal, 10)
-            .glassCardStyle(cornerRadius: 20)
-        }
-    }
-    
-    private var sportsSection: some View {
-        let aggregatedIDs = Set(aggregatedSports.map(\.id))
-        
-        return VStack(alignment: .leading, spacing: 8) {
-            Text("Related Sports")
-                .font(.headline)
-                .foregroundStyle(effectManager.currentGlobalAccentColor)
-            MultiSelectButton(
-                selection: .constant(aggregatedIDs),
-                items: aggregatedSports,
-                label: { $0.rawValue },
-                prompt: "Add exercises to see related sports",
                 isExpanded: false,
                 disabled: true
             )
@@ -1162,7 +1136,6 @@ struct WorkoutEditorView: View {
             itemToSave.durationMinutes = Int(totalDuration)
             
             itemToSave.muscleGroups = aggregatedMuscleGroups
-            itemToSave.sports = aggregatedSports
             
             if itemToSave.gallery == nil { itemToSave.gallery = [] }
             itemToSave.gallery?.removeAll { photo in !galleryData.contains(photo.data) }
@@ -1279,7 +1252,7 @@ struct WorkoutEditorView: View {
                    let minX = radius
                    let maxX = size.width  - radius
                    let minY = radius + safeArea.top
-                   let maxY = size.height - radius - safeArea.bottom - 80
+                   let maxY = size.height - radius - safeArea.bottom
                    
                    let clampedCenterX = min(max(rawCenterX, minX), maxX)
                    let clampedCenterY = min(max(rawCenterY, minY), maxY)

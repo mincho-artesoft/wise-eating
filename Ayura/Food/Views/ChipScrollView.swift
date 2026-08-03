@@ -34,10 +34,6 @@ struct ChipScrollView<T: Identifiable & Hashable>: View {
                             ForEach(items as! [MuscleGroup]) { group in
                                 GlassChipView(label: group.rawValue, color: .purple, textColor: textColor)
                             }
-                        } else if T.self == Sport.self {
-                            ForEach(items as! [Sport]) { sport in
-                                GlassChipView(label: sport.rawValue, color: .blue, textColor: textColor)
-                            }
                         }
                     }
                 }
@@ -89,7 +85,10 @@ struct GlassChipView: View {
     }
 
     private var chipContent: some View {
-        let resolvedColor = isAlert ? Color.orange : (isSelected ? (color ?? textColor) : textColor)
+        let resolvedTextColor = isAlert ? Color.orange : textColor
+        let resolvedIconColor = isAlert
+            ? Color.orange
+            : (isSelected ? (color ?? textColor) : textColor)
 
         return HStack(spacing: 5) {
             if isAlert {
@@ -99,13 +98,13 @@ struct GlassChipView: View {
             } else if let systemImage {
                 Image(systemName: systemImage)
                     .font(.caption)
-                    .foregroundColor(resolvedColor)
+                    .foregroundColor(resolvedIconColor)
             }
             Text(label)
                 .font(.caption)
                 .fontWeight(.medium)
                 // Ако е alert, цветът е оранжев, иначе е подаденият textColor
-                .foregroundColor(resolvedColor)
+                .foregroundColor(resolvedTextColor)
             
             if let valueText = value {
                 Text(valueText)

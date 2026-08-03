@@ -157,11 +157,7 @@ struct NotificationHistoryView: View {
         }) {
             HStack(spacing: 12) {
                 VStack {
-                    let isBadgeNotification = notification.userInfo["openBadges"] as? String == "true"
-                    
-                    let iconName = if isBadgeNotification {
-                        "rosette"
-                    } else if notification.userInfo["trainingID"] != nil {
+                    let iconName = if notification.userInfo["trainingID"] != nil {
                         "dumbbell.fill"
                     } else if notification.userInfo["mealID"] != nil {
                         "fork.knife"
@@ -267,9 +263,6 @@ struct NotificationHistoryView: View {
                 coordinator.pendingTrainingID = trainingID
                 coordinator.pendingTrainingDate = trainingDate
                 coordinator.pendingTrainingName = trainingName
-            }
-            else if let openBadges = userInfo["openBadges"] as? String, openBadges == "true" {
-                coordinator.pendingBadgeProfileID = coordinator.pendingProfileID
             }
         }
 

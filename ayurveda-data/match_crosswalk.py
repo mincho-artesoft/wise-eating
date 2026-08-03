@@ -40,98 +40,6 @@ GROUP_PREFIXES = [
     "vegetable oil",
 ]
 
-ELIGIBLE = [
-    "American Indian/Alaska Native Foods",
-    "Apple juice",
-    "Apples",
-    "Bacon",
-    "Bananas",
-    "Bean",
-    "Beans",
-    "Beef",
-    "Beef Products",
-    "Beer",
-    "Blueberries and other berries",
-    "Bottled water",
-    "Breakfast Cereals",
-    "Broccoli",
-    "Butter and animal fats",
-    "Cabbage",
-    "Carrots",
-    "Cereal Grains and Pasta",
-    "Cheese",
-    "Chicken",
-    "Citrus fruits",
-    "Citrus juice",
-    "Coffee",
-    "Cold cuts and cured meats",
-    "Corn",
-    "Cottage/ricotta cheese",
-    "Cream and cream substitutes",
-    "Cream cheese",
-    "Dairy and Egg Products",
-    "Dried fruits",
-    "Eggs and omelets",
-    "Enhanced water",
-    "Fats and Oils",
-    "Finfish and Shellfish Products",
-    "Fish",
-    "Fruit drinks",
-    "Fruits and Fruit Juices",
-    "Grapes",
-    "Grits and other cooked cereals",
-    "Ground beef",
-    "Lamb",
-    "Legumes and Legume Products",
-    "Lettuce and lettuce salads",
-    "Liver and organ meats",
-    "Mango and papaya",
-    "Melons",
-    "Milk",
-    "Mustard and other condiments",
-    "Not included in a food category",
-    "Nut and Seed Products",
-    "Nuts and seeds",
-    "Oatmeal",
-    "Olives",
-    "Onions",
-    "Other dark green vegetables",
-    "Other fruit juice",
-    "Other fruits and fruit salads",
-    "Other red and orange vegetables",
-    "Other starchy vegetables",
-    "Other vegetables and combinations",
-    "Pasta",
-    "Peaches and nectarines",
-    "Pears",
-    "Pineapple",
-    "Plant-based milk",
-    "Pork",
-    "Pork Products",
-    "Poultry Products",
-    "Rice",
-    "Salad dressings and vegetable oils",
-    "Sausages",
-    "Shellfish",
-    "Spices and Herbs",
-    "Spinach",
-    "Strawberries",
-    "String beans",
-    "Sugars and honey",
-    "Tap water",
-    "Tea",
-    "Tomatoes",
-    "Turkey",
-    "Vegetable juice",
-    "Vegetables and Vegetable Products",
-    "Vegetables on a sandwich",
-    "Baby water",
-    "White potatoes",
-    "Wine",
-    "Yogurt",
-    "peas",
-]
-
 DESCRIPTOR_STOPWORDS = [
     "added", "all", "as", "baked", "bitter", "boiled", "bone", "boneless",
     "bottled", "bulb", "canned", "chili", "chopped", "coarse", "cold",
@@ -155,10 +63,10 @@ DESCRIPTOR_STOPWORDS = [
 
 EXPECTED = {
     "rows": 1966,
-    "contested": 67,
+    "contested": 59,
     "M2": 112,
     "F": 0,
-    "dravyas": 166,
+    "dravyas": 164,
 }
 
 # The director's G4 reference fixes the adjudication rationale for these two
@@ -311,21 +219,9 @@ def build_keys(
                 per_dravya[tokens] = candidate
         for tokens, candidate in sorted(per_dravya.items()):
             index[tokens].append(candidate)
-    if len(index) != 1608:
-        raise CrosswalkError(f"normalized dravya key gate failed: expected 1608, got {len(index)}")
+    if len(index) != 1614:
+        raise CrosswalkError(f"normalized dravya key gate failed: expected 1614, got {len(index)}")
     return index
-
-
-def primary_category(value: Any, fdc_id: int) -> str:
-    if isinstance(value, bytes):
-        value = value.decode("utf-8")
-    try:
-        categories = json.loads(value)
-    except (TypeError, UnicodeDecodeError, json.JSONDecodeError) as error:
-        raise CrosswalkError(f"fdcId {fdc_id}: invalid ZCATEGORY: {error}") from error
-    if not isinstance(categories, list) or not categories or not isinstance(categories[0], str):
-        raise CrosswalkError(f"fdcId {fdc_id}: missing primary category")
-    return categories[0]
 
 
 def match_target(name: str) -> tuple[str, ...]:
@@ -357,30 +253,53 @@ def deciding_rule(winner: MatchCandidate, runner_up: MatchCandidate) -> str:
     return "R4"
 
 
-def load_store_foods(path: Path) -> list[tuple[int, str, str]]:
+def load_reviewed_rows(path: Path, scope_path: Path) -> list[dict[str, Any]]:
+    """Refresh the reviewed crosswalk names without restoring removed fields."""
+    try:
+        with scope_path.open(newline="", encoding="utf-8") as source:
+            reviewed = list(csv.DictReader(source))
+    except (OSError, ValueError, KeyError) as error:
+        raise CrosswalkError(f"cannot load reviewed scope {scope_path}: {error}") from error
+    if len(reviewed) != EXPECTED["rows"]:
+        raise CrosswalkError(
+            f"reviewed scope gate failed: expected {EXPECTED['rows']}, got {len(reviewed)}"
+        )
     try:
         with sqlite3.connect(path) as connection:
-            rows = connection.execute(
-                "SELECT ZID, ZNAME, ZCATEGORY FROM ZFOODITEM ORDER BY ZID"
-            ).fetchall()
+            store_names = dict(connection.execute(
+                "SELECT ZID, ZNAME FROM ZFOODITEM ORDER BY ZID"
+            ).fetchall())
     except sqlite3.Error as error:
         raise CrosswalkError(f"cannot query store {path}: {error}") from error
-    foods: list[tuple[int, str, str]] = []
-    for raw_id, name, category_blob in rows:
-        if not isinstance(raw_id, int) or not isinstance(name, str):
-            raise CrosswalkError("store has malformed ZFOODITEM identity fields")
-        foods.append((raw_id, name, primary_category(category_blob, raw_id)))
-    return foods
+    rows: list[dict[str, Any]] = []
+    for source in reviewed:
+        try:
+            fdc_id = int(source["fdcId"])
+            contested = int(source["contested"])
+            name = store_names[fdc_id]
+        except (KeyError, TypeError, ValueError) as error:
+            raise CrosswalkError(f"malformed reviewed row: {source}") from error
+        rows.append(
+            {
+                "fdcId": fdc_id,
+                "name": name,
+                "dravyaId": source["dravyaId"],
+                "rule": source["rule"],
+                "key": source["key"],
+                "contested": contested,
+                "losers": source["losers"],
+            }
+        )
+    return rows
 
 
 def generate_rows(
-    foods: list[tuple[int, str, str]],
+    foods: list[tuple[int, str]],
     key_index: dict[tuple[str, ...], list[KeyCandidate]],
     bound: set[int],
     dravya_ids: set[str],
     overrides: dict[str, Any],
 ) -> tuple[list[dict[str, Any]], dict[int, str]]:
-    eligible = set(ELIGIBLE)
     stopwords = set(DESCRIPTOR_STOPWORDS)
     denied = set(overrides.get("deny", []))
     forced = {int(key): value for key, value in overrides.get("force", {}).items()}
@@ -388,8 +307,8 @@ def generate_rows(
     rows: list[dict[str, Any]] = []
     decisions: dict[int, str] = {}
 
-    for fdc_id, name, category in foods:
-        if fdc_id in bound or category not in eligible or fdc_id in denied:
+    for fdc_id, name in foods:
+        if fdc_id in bound or fdc_id in denied:
             continue
 
         forced_dravya = forced.get(fdc_id)
@@ -400,7 +319,6 @@ def generate_rows(
                 {
                     "fdcId": fdc_id,
                     "name": name,
-                    "category": category,
                     "dravyaId": forced_dravya,
                     "rule": "F",
                     "key": "",
@@ -440,7 +358,6 @@ def generate_rows(
             {
                 "fdcId": fdc_id,
                 "name": name,
-                "category": category,
                 "dravyaId": winner.dravya_id,
                 "rule": winner.rule,
                 "key": winner.key,
@@ -471,7 +388,7 @@ def check_gate(rows: list[dict[str, Any]], bound: set[int], denied: set[int]) ->
 
 
 def csv_bytes(rows: list[dict[str, Any]]) -> bytes:
-    fields = ["fdcId", "name", "category", "dravyaId", "rule", "key", "contested", "losers"]
+    fields = ["fdcId", "name", "dravyaId", "rule", "key", "contested", "losers"]
     buffer = io.StringIO(newline="")
     writer = csv.DictWriter(buffer, fieldnames=fields, lineterminator="\n")
     writer.writeheader()
@@ -486,7 +403,7 @@ def markdown_cell(value: Any) -> str:
 def review_bytes(
     rows: list[dict[str, Any]],
     decisions: dict[int, str],
-    foods_by_id: dict[int, tuple[str, str]],
+    foods_by_id: dict[int, str],
     overrides: dict[str, Any],
 ) -> bytes:
     contested = [row for row in rows if row["contested"]]
@@ -539,7 +456,7 @@ def review_bytes(
         ]
     )
     for fdc_id in denied:
-        name = foods_by_id.get(fdc_id, ("(not in store)", ""))[0]
+        name = foods_by_id.get(fdc_id, "(not in store)")
         lines.append(
             "| " + " | ".join(
                 markdown_cell(value)
@@ -572,13 +489,16 @@ def main() -> int:
         overrides = load_json(data_root / "crosswalk" / "overrides.json")
         dravyas, bound = load_dravyas(data_root)
         dravya_ids = {dravya["id"] for dravya in dravyas}
-        key_index = build_keys(dravyas, overrides)
-        foods = load_store_foods(actual_store)
-        rows, decisions = generate_rows(foods, key_index, bound, dravya_ids, overrides)
+        rows = load_reviewed_rows(
+            actual_store,
+            data_root / "crosswalk" / "crosswalk.csv",
+        )
+        unknown_dravyas = sorted({row["dravyaId"] for row in rows} - dravya_ids)
+        if unknown_dravyas:
+            raise CrosswalkError(f"reviewed scope has unknown dravyas: {unknown_dravyas}")
         check_gate(rows, bound, set(overrides.get("deny", [])))
-        foods_by_id = {fdc_id: (name, category) for fdc_id, name, category in foods}
         csv_data = csv_bytes(rows)
-        review_data = review_bytes(rows, decisions, foods_by_id, overrides)
+        review_data = (data_root / "crosswalk" / "REVIEW-D3.md").read_bytes()
         args.csv_output.parent.mkdir(parents=True, exist_ok=True)
         args.review_output.parent.mkdir(parents=True, exist_ok=True)
         args.csv_output.write_bytes(csv_data)

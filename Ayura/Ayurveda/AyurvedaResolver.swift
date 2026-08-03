@@ -120,7 +120,7 @@ public enum AyurvedaResolver {
       case "user":
         return .user(direct)
       default:
-        return .none
+        break
       }
     }
 
@@ -145,7 +145,7 @@ public enum AyurvedaResolver {
     }
 
     guard !visited.contains(foodItem.id) else {
-      return .none
+      return estimated(for: foodItem)
     }
     var nextVisited = visited
     nextVisited.insert(foodItem.id)
@@ -318,11 +318,10 @@ public enum AyurvedaResolver {
   }
 
   private static func estimated(for foodItem: FoodItem) -> AyurvedaResolution {
-    guard let category = foodItem.category?.first?.rawValue else {
-      return .none
-    }
     return .estimated(
-      AyurvedaRules.shared.estimated(category: category, name: foodItem.name)
+      AyurvedaRules.shared.estimated(
+        name: foodItem.name
+      )
     )
   }
 }

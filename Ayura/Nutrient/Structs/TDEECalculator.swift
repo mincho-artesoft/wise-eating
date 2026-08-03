@@ -4,7 +4,7 @@ import Foundation
 public struct TDEECalculator {
 
     /// Изчислява TDEE по формулата на Mifflin-St Jeor.
-    public static func calculate(for profile: Profile, activityLevel: ActivityLevel) -> Double {
+    public static func calculate(for profile: Profile) -> Double {
         let weightInKg = profile.weight
         let heightInCm = profile.height
         let ageInYears = Double(profile.age)
@@ -20,7 +20,7 @@ public struct TDEECalculator {
             bmr = (10 * weightInKg) + (6.25 * heightInCm) - (5 * ageInYears) + 5
         }
 
-        let tdee = bmr * activityLevel.rawValue
+        let tdee = bmr * 1.2
         
         return tdee
     }

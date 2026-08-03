@@ -18,6 +18,7 @@ struct EffectSegmentOption: Identifiable, Sendable {
 
 struct EffectSegmentPicker: View {
   @Environment(\.colorScheme) private var colorScheme
+  @ObservedObject private var effectManager = EffectManager.shared
   @Binding var selection: String?
 
   let title: String
@@ -33,8 +34,14 @@ struct EffectSegmentPicker: View {
     .background(.thinMaterial, in: Capsule())
     .overlay {
       Capsule()
-        .stroke(Color.primary.opacity(colorScheme == .dark ? 0.22 : 0.12))
+        .stroke(
+          effectManager.currentGlobalAccentColor.opacity(
+            colorScheme == .dark ? 0.22 : 0.12
+          )
+        )
     }
+    .foregroundStyle(effectManager.currentGlobalAccentColor)
+    .tint(effectManager.currentGlobalAccentColor)
     .accessibilityElement(children: .contain)
     .accessibilityLabel(title)
   }
@@ -55,7 +62,9 @@ struct EffectSegmentPicker: View {
           .lineLimit(1)
       }
       .font(.caption.weight(.medium))
-      .foregroundStyle(isSelected ? tint : Color.primary)
+      .foregroundStyle(
+        isSelected ? tint : effectManager.currentGlobalAccentColor
+      )
       .frame(maxWidth: .infinity, minHeight: 44)
       .background {
         if isSelected {
@@ -76,11 +85,11 @@ struct EffectSegmentPicker: View {
     case .cooling:
       return .blue
     case .neutral:
-      return .secondary
+      return effectManager.currentGlobalAccentColor
     case .heating:
       return .orange
     case .accent:
-      return .accentColor
+      return effectManager.currentGlobalAccentColor
     }
   }
 }

@@ -46,7 +46,7 @@ struct NodesListView: View {
     @State private var isDragging: Bool = false
     @GestureState private var gestureDragOffset: CGSize = .zero
     @State private var isPressed: Bool = false
-    private let buttonPositionKey = "nodesListFloatingButtonPosition"
+    private let buttonPositionKey = "nodesListFloatingButtonPositionV2"
 
     // Toolbar States
     @State private var currentTimeString: String = ""
@@ -240,10 +240,10 @@ struct NodesListView: View {
                             Spacer()
                         }
                     }
+                    .padding(.top, headerTopPadding)
                     
                     addButton(geometry: geometry)
                 }
-                .padding(.top, headerTopPadding)
                 .onAppear(perform: loadButtonPosition)
                 .onReceive(timer) { _ in self.currentTimeString = Self.timeFormatter.string(from: Date()) }
                 .task { await checkForUnreadNotifications() }
@@ -486,8 +486,7 @@ struct NodesListView: View {
                     let minX = radius
                     let maxX = size.width  - radius
                     let minY = radius + safeArea.top
-                    // -80 допълнителен буфер отдолу, както при AI бутона
-                    let maxY = size.height - radius - safeArea.bottom - 80
+                    let maxY = size.height - radius - safeArea.bottom
                     
                     let clampedCenterX = min(max(rawCenterX, minX), maxX)
                     let clampedCenterY = min(max(rawCenterY, minY), maxY)

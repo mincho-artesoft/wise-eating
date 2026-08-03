@@ -310,7 +310,6 @@ private enum MP6RealSolverHarness {
             dailyKcal: 2_000,
             dailyProteinTarget: 80,
             ageInMonths: 360,
-            diet: "vegetarian",
             allergenConcepts: [],
             excludedFoodIDs: [],
             dosha: nil,

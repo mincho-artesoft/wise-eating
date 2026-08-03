@@ -1,6 +1,6 @@
 import Foundation
 
-/// Result of transforming raw DietaryConstraint entries into
+/// Result of transforming raw SearchConstraint entries into
 /// the structures used by SmartFoodSearch3 / Tokenizer / SearchIntent.
 struct ConstraintMapperResult {
     /// Extra numeric / range goals, one per nutrient.
@@ -10,13 +10,6 @@ struct ConstraintMapperResult {
     ///   "low acid", "more alkaline", "ph between 6 and 7", etc.
     var phConstraint: ConstraintValue? = nil
     
-    /// Diets that must be present (e.g. "Vegan", "Gluten-Free").
-    /// These are raw diet names, same as you store in FoodItem / CompactFoodItem.
-    var includeDiets: Set<String> = []
-    
-    /// Diets that must be absent (e.g. "not vegan", "no keto").
-    var excludeDiets: Set<String> = []
-    
     /// Allergens that must be present (rare, e.g. "contains peanuts").
     var includeAllergens: Set<Allergen> = []
     
@@ -24,11 +17,11 @@ struct ConstraintMapperResult {
     var excludeAllergens: Set<Allergen> = []
 }
 
-/// Translates DietaryConstraint entries (from the regex + parser layer)
+/// Translates SearchConstraint entries (from the regex + parser layer)
 /// into high-level search constraints used by SmartFoodSearch3.
 enum ConstraintMapper {
     
-    static func map(_ constraints: [DietaryConstraint]) -> ConstraintMapperResult {
+    static func map(_ constraints: [SearchConstraint]) -> ConstraintMapperResult {
         var result = ConstraintMapperResult()
         
         for constraint in constraints {
@@ -49,9 +42,6 @@ enum ConstraintMapper {
                     result.phConstraint = cv
                 }
                 
-            case .diet(let dietName):
-                mapDietConstraint(constraint, dietName: dietName, into: &result)
-                
             case .allergen(let allergen):
                 mapAllergenConstraint(constraint, allergen: allergen, into: &result)
                 
@@ -70,9 +60,9 @@ enum ConstraintMapper {
 private extension ConstraintMapper {
     /// Heuristic check whether the original constraint text expresses negation
     /// for the given subject (e.g. "no soy", "without gluten", "sugar free",
-    /// "not vegan", "non-dairy"). This is used for nutrients, diets, and
+    /// "non-dairy"). This is used for nutrients and
     /// allergens when there is no reliable numeric value.
-    static func isNegated(_ c: DietaryConstraint) -> Bool {
+    static func isNegated(_ c: SearchConstraint) -> Bool {
         let baseText = c.originalText.isEmpty ? c.subject : c.originalText
         var text = baseText.lowercased()
         text = text.replacingOccurrences(of: "-", with: " ")
@@ -126,7 +116,7 @@ private extension ConstraintMapper {
         return false
     }
 
-    /// Maps a DietaryConstraint about a concrete nutrient into a ConstraintValue.
+    /// Maps a SearchConstraint about a concrete nutrient into a ConstraintValue.
     ///
     /// IMPORTANT DESIGN DECISION:
     /// - This function now handles ONLY *textual* negation like:
@@ -140,7 +130,7 @@ private extension ConstraintMapper {
     ///
     /// This restores the old numeric behaviour while keeping the new
     /// "no sodium" / "sugar free" semantics.
-    static func constraintValue(for nutrient: NutrientType, from c: DietaryConstraint) -> ConstraintValue? {
+    static func constraintValue(for nutrient: NutrientType, from c: SearchConstraint) -> ConstraintValue? {
         let negated = isNegated(c)
 
         // 1) HANDLE MISSING VALUES (Abstract / Dangling comparators)
@@ -240,11 +230,11 @@ private extension ConstraintMapper {
         return 5.0
     }
     
-    /// Maps a DietaryConstraint numeric relation to your ConstraintValue model
+    /// Maps a SearchConstraint numeric relation to your ConstraintValue model
     /// for non-nutrient subjects (currently pH). Nutrient-specific logic lives
     /// in `constraintValue(for:from:)` so that we can handle phrases such as
     /// "no sodium" or "sugar free" in a more natural way.
-    static func constraintValue(from c: DietaryConstraint) -> ConstraintValue? {
+    static func constraintValue(from c: SearchConstraint) -> ConstraintValue? {
         guard let v1 = c.value else {
             // Abstract-only constraints (e.g. "high protein") are usually
             // already handled by Tokenizer into .high / .low. The numeric
@@ -276,43 +266,8 @@ private extension ConstraintMapper {
         }
     }
     
-    static func mapDietConstraint(
-        _ c: DietaryConstraint,
-        dietName: String,
-        into result: inout ConstraintMapperResult
-    ) {
-        let value = c.value ?? 0.0
-        // Textual negation ("no vegan", "not vegan", "non-vegan") takes
-        // precedence over any numeric encoding.
-        if isNegated(c) {
-            result.excludeDiets.insert(dietName)
-            return
-        }
-        switch c.comparison {
-        case .greaterThan, .greaterThanOrEqual:
-            // "Vegan", "High Vegan" -> must have this diet tag.
-            result.includeDiets.insert(dietName)
-            
-        case .equal:
-            // "Not Vegan" should have been converted by NumberRangeParser into
-            // "= 0" on that diet; "= 1" (or no value) implies presence.
-            if value == 0 {
-                result.excludeDiets.insert(dietName)
-            } else {
-                result.includeDiets.insert(dietName)
-            }
-            
-        case .lessThan, .lessThanOrEqual:
-            // "Less than 1 Vegan" ~= "not Vegan".
-            result.excludeDiets.insert(dietName)
-            
-        case .notEqual, .unknown:
-            break
-        }
-    }
-    
     static func mapAllergenConstraint(
-        _ c: DietaryConstraint,
+        _ c: SearchConstraint,
         allergen: Allergen,
         into result: inout ConstraintMapperResult
     ) {

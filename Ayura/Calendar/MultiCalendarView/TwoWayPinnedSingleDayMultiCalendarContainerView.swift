@@ -323,6 +323,7 @@ public final class TwoWayPinnedSingleDayMultiCalendarContainerView: UIView,
 
         if #available(iOS 15.0, *) {
             var config = UIButton.Configuration.plain()
+            config.cornerStyle = .capsule
             config.baseBackgroundColor = .clear
             config.background.backgroundColor = .clear
             profileButton.configuration = config
@@ -438,7 +439,9 @@ public final class TwoWayPinnedSingleDayMultiCalendarContainerView: UIView,
         profileImageView.frame = profileButton.bounds
         profileInitialsLabel.frame = profileButton.bounds
         profileButton.layer.cornerRadius = profileButtonSize / 2
+        profileButton.layer.cornerCurve = .circular
         profileImageView.layer.cornerRadius = profileButtonSize / 2
+        profileImageView.layer.cornerCurve = .circular
         
         let badgeSize: CGFloat = 12
         notificationBadgeView.frame = CGRect(

@@ -3,6 +3,7 @@ import UIKit
 
 struct DoshaScaleSelector: View {
   @Environment(\.colorScheme) private var colorScheme
+  @ObservedObject private var effectManager = EffectManager.shared
   @Binding var value: Int
 
   let name: String
@@ -39,11 +40,15 @@ struct DoshaScaleSelector: View {
 
   @ViewBuilder
   var body: some View {
-    if isReadOnly {
-      readOnlyBody
-    } else {
-      editorBody
+    Group {
+      if isReadOnly {
+        readOnlyBody
+      } else {
+        editorBody
+      }
     }
+    .foregroundStyle(effectManager.currentGlobalAccentColor)
+    .tint(effectManager.currentGlobalAccentColor)
   }
 
   private var editorBody: some View {
@@ -113,7 +118,9 @@ struct DoshaScaleSelector: View {
         ForEach(values, id: \.self) { candidate in
           Text(displayValue(candidate))
             .font(.caption2.monospacedDigit())
-            .foregroundStyle(.secondary)
+            .foregroundStyle(
+              effectManager.currentGlobalAccentColor.opacity(0.68)
+            )
             .frame(maxWidth: .infinity)
         }
       }
@@ -204,7 +211,9 @@ struct DoshaScaleSelector: View {
           .font(.body)
         Text(subtitle)
           .font(.caption)
-          .foregroundStyle(.secondary)
+          .foregroundStyle(
+            effectManager.currentGlobalAccentColor.opacity(0.72)
+          )
       }
     }
   }
@@ -220,7 +229,11 @@ struct DoshaScaleSelector: View {
       .background(.thinMaterial, in: Capsule())
       .overlay {
         Capsule()
-          .stroke(Color.primary.opacity(colorScheme == .dark ? 0.22 : 0.12))
+          .stroke(
+            effectManager.currentGlobalAccentColor.opacity(
+              colorScheme == .dark ? 0.22 : 0.12
+            )
+          )
       }
 
       selectionIndicator
@@ -289,7 +302,7 @@ struct DoshaScaleSelector: View {
   private func segmentColor(_ candidate: Int) -> Color {
     if candidate < 0 { return .green }
     if candidate > 0 { return .orange }
-    return .primary
+    return effectManager.currentGlobalAccentColor
   }
 
   private func displayValue(_ candidate: Int) -> String {

@@ -31,7 +31,7 @@ struct CameraPicker: View {
                         presentationMode.wrappedValue.dismiss()
                     }
                     .padding()
-                    .foregroundColor(.primary)
+                    .foregroundColor(effectManager.currentGlobalAccentColor)
                 }
                 
             case .notDetermined:

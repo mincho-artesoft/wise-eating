@@ -9,13 +9,11 @@ public final class FoodItemCopy: Identifiable, Codable {
     // MARK: – Basic
     public var name: String
     public var nameNormalized: String
-    public var category:  [FoodCategory]?
     public var isRecipe:    Bool
     public var isMenu:      Bool
     public var isUserAdded: Bool
 
     // MARK: – Tags
-    public var dietIDs:     [String]?
     public var allergens: [Allergen]?
 
     // MARK: – Nutrition
@@ -40,11 +38,9 @@ public final class FoodItemCopy: Identifiable, Codable {
     // MARK: – Init
     public init(
         name: String,
-        category: [FoodCategory]? = nil,
         isRecipe: Bool = false,
         isMenu: Bool = false,
         isUserAdded: Bool = true,
-        dietIDs: [String]? = nil,
         allergens: [Allergen]? = nil,
         photo: Data? = nil,
         gallery: [FoodPhotoCopy]? = nil,
@@ -63,11 +59,9 @@ public final class FoodItemCopy: Identifiable, Codable {
     ) {
         self.name               = name
         self.nameNormalized     = name.foldedSearchKey
-        self.category           = category
         self.isRecipe           = isRecipe
         self.isMenu             = isMenu
         self.isUserAdded        = isUserAdded
-        self.dietIDs            = dietIDs
         self.allergens          = allergens
         self.photo              = photo
         self.gallery            = gallery
@@ -165,8 +159,7 @@ public final class FoodItemCopy: Identifiable, Codable {
     }
     // --- Ръчна имплементация на Codable ---
     enum CodingKeys: String, CodingKey {
-        case originalID, name, nameNormalized, category, isRecipe, isMenu, isUserAdded
-        case dietIDs = "diets" // Казваме му да използва "diets" в JSON
+        case originalID, name, nameNormalized, isRecipe, isMenu, isUserAdded
         case allergens, macronutrients, lipids, vitamins, minerals, other, aminoAcids, carbDetails, sterols
         case photo, gallery, prepTimeMinutes, itemDescription, ingredients
     }
@@ -176,11 +169,9 @@ public final class FoodItemCopy: Identifiable, Codable {
         originalID = try container.decodeIfPresent(Int.self, forKey: .originalID)
         name = try container.decode(String.self, forKey: .name)
         nameNormalized = try container.decode(String.self, forKey: .nameNormalized)
-        category = try container.decodeIfPresent([FoodCategory].self, forKey: .category)
         isRecipe = try container.decode(Bool.self, forKey: .isRecipe)
         isMenu = try container.decode(Bool.self, forKey: .isMenu)
         isUserAdded = try container.decode(Bool.self, forKey: .isUserAdded)
-        dietIDs = try container.decodeIfPresent([String].self, forKey: .dietIDs)
         allergens = try container.decodeIfPresent([Allergen].self, forKey: .allergens)
         macronutrients = try container.decodeIfPresent(MacronutrientsDataCopy.self, forKey: .macronutrients)
         lipids = try container.decodeIfPresent(LipidsDataCopy.self, forKey: .lipids)
@@ -206,11 +197,9 @@ public final class FoodItemCopy: Identifiable, Codable {
         try container.encodeIfPresent(originalID, forKey: .originalID)
         try container.encode(name, forKey: .name)
         try container.encode(nameNormalized, forKey: .nameNormalized)
-        try container.encodeIfPresent(category, forKey: .category)
         try container.encode(isRecipe, forKey: .isRecipe)
         try container.encode(isMenu, forKey: .isMenu)
         try container.encode(isUserAdded, forKey: .isUserAdded)
-        try container.encodeIfPresent(dietIDs, forKey: .dietIDs)
         try container.encodeIfPresent(allergens, forKey: .allergens)
         try container.encodeIfPresent(macronutrients, forKey: .macronutrients)
         try container.encodeIfPresent(lipids, forKey: .lipids)
@@ -499,8 +488,7 @@ extension FoodItemCopy {
         let ingCopies = src.ingredients?.map { IngredientLinkCopy(from: $0, cache: &cache) }
         
         self.init(
-            name: src.name, category: src.category, isRecipe: src.isRecipe, isMenu: src.isMenu, isUserAdded: src.isUserAdded,
-            dietIDs: src.diets?.map(\.id), // <-- КОРЕКЦИЯТА Е ТУК
+            name: src.name, isRecipe: src.isRecipe, isMenu: src.isMenu, isUserAdded: src.isUserAdded,
             allergens: src.allergens, photo: src.photo, gallery: src.gallery?.map { FoodPhotoCopy(from: $0) },
             prepTimeMinutes: src.prepTimeMinutes, itemDescription: src.itemDescription,
             macronutrients: mac, lipids: lip, vitamins: vit, minerals: min, other: oth,
@@ -519,8 +507,7 @@ extension FoodItemCopy {
 
     private convenience init(from copy: FoodItemCopy) {
         self.init(
-            name: copy.name, category: copy.category, isRecipe: copy.isRecipe, isMenu: copy.isMenu, isUserAdded: copy.isUserAdded,
-            dietIDs: copy.dietIDs,
+            name: copy.name, isRecipe: copy.isRecipe, isMenu: copy.isMenu, isUserAdded: copy.isUserAdded,
             allergens: copy.allergens, photo: copy.photo, gallery: copy.gallery,
             prepTimeMinutes: copy.prepTimeMinutes, itemDescription: copy.itemDescription,
             macronutrients: copy.macronutrients, lipids: copy.lipids, vitamins: copy.vitamins, minerals: copy.minerals, other: copy.other,
@@ -611,23 +598,12 @@ extension FoodItemCopy {
             return found
         }
         
-        let dietNames = Set(self.dietIDs ?? [])
-        let fetchedDiets: [Diet]
-        if !dietNames.isEmpty {
-            let predicate = #Predicate<Diet> { diet in dietNames.contains(diet.name) }
-            fetchedDiets = (try? context.fetch(FetchDescriptor<Diet>(predicate: predicate))) ?? []
-        } else {
-            fetchedDiets = []
-        }
-
         let fi = FoodItem(
             id: originalID ?? Self.generateNewID(in: context),
             name: name,
-            category: category,
             isRecipe: isRecipe,
             isMenu: isMenu,
             isUserAdded: isUserAdded,
-            diets: fetchedDiets,
             allergens: allergens,
             photo: photo,
             gallery: gallery?.map { $0.toOriginal() },

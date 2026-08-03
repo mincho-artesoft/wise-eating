@@ -160,7 +160,6 @@ final class TrainingPlanListVM: ObservableObject {
                 newWorkout.linkedWorkoutID = workoutItem.id
 
                 var allMuscleGroups: Set<MuscleGroup> = []
-                var allSports: Set<Sport> = []
                 var totalDuration: Double = 0
 
                 for tEx in tWorkout.exercises {
@@ -182,7 +181,6 @@ final class TrainingPlanListVM: ObservableObject {
                     guard let validEx = exerciseItem else { continue }
 
                     allMuscleGroups.formUnion(validEx.muscleGroups)
-                    if let s = validEx.sports { allSports.formUnion(s) }
                     totalDuration += tEx.durationMinutes
 
                     if isNewWorkoutItem {
@@ -218,7 +216,6 @@ final class TrainingPlanListVM: ObservableObject {
 
                 if isNewWorkoutItem {
                     workoutItem.muscleGroups = Array(allMuscleGroups).sorted { $0.rawValue < $1.rawValue }
-                    workoutItem.sports = Array(allSports).sorted { $0.rawValue < $1.rawValue }
                     workoutItem.durationMinutes = Int(totalDuration)
                 }
             }

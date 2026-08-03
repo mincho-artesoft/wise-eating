@@ -50,12 +50,12 @@ class PreseedArtifactTests(unittest.TestCase):
                 "ingredientLinks": 10_571,
                 "ingredientOwners": 1_500,
                 "cacheFoods": 14_477,
-                "cacheVersion": 7,
-                "facetFoods": 4_212,
-                "metadataFoods": 4_212,
+                "cacheVersion": 9,
+                "facetFoods": 14_477,
+                "metadataFoods": 14_477,
                 "linkedFacetFoods": 2_007,
-                "facetKeys": 89,
-                "facetAssignments": 59_032,
+                "facetKeys": 45,
+                "facetAssignments": 99_394,
                 "allergenTaggedDravyas": 155,
                 "allergenTaggedRecipes": 1_182,
                 "authoredAgeDravyas": 4,
@@ -65,7 +65,62 @@ class PreseedArtifactTests(unittest.TestCase):
         )
         self.assertGreater(self.audit["payloadBytes"], 0)
         self.assertGreater(self.audit["facetKeys"], 0)
-        self.assertGreater(self.audit["facetAssignments"], 4_212)
+        self.assertGreater(self.audit["facetAssignments"], 14_477)
+
+    def test_store_has_no_category_columns(self):
+        category_columns = [
+            (table_name, column[1])
+            for (table_name,) in self.connection.execute(
+                "SELECT name FROM sqlite_master WHERE type = 'table'"
+            )
+            for column in self.connection.execute(f'PRAGMA table_info("{table_name}")')
+            if "CATEGORY" in column[1].upper()
+        ]
+        self.assertEqual(category_columns, [])
+
+    def test_store_has_no_head_circumference_columns(self):
+        head_circumference_columns = [
+            (table_name, column[1])
+            for (table_name,) in self.connection.execute(
+                "SELECT name FROM sqlite_master WHERE type = 'table'"
+            )
+            for column in self.connection.execute(f'PRAGMA table_info("{table_name}")')
+            if "HEADCIRCUMFERENCE" in column[1].upper()
+        ]
+        self.assertEqual(head_circumference_columns, [])
+
+    def test_store_has_no_badge_columns(self):
+        badge_columns = [
+            (table_name, column[1])
+            for (table_name,) in self.connection.execute(
+                "SELECT name FROM sqlite_master WHERE type = 'table'"
+            )
+            for column in self.connection.execute(f'PRAGMA table_info("{table_name}")')
+            if "BADGE" in column[1].upper()
+        ]
+        self.assertEqual(badge_columns, [])
+
+    def test_store_has_no_diet_schema(self):
+        schema_objects = self.connection.execute(
+            "SELECT name FROM sqlite_master WHERE UPPER(name) LIKE '%DIET%'"
+        ).fetchall()
+        self.assertEqual(schema_objects, [])
+
+    def test_removed_profile_and_exercise_fields_are_absent(self):
+        profile_columns = {
+            row[1]
+            for row in self.connection.execute("PRAGMA table_info(ZPROFILE)")
+        }
+        exercise_columns = {
+            row[1]
+            for row in self.connection.execute("PRAGMA table_info(ZEXERCISEITEM)")
+        }
+        self.assertTrue(
+            profile_columns.isdisjoint(
+                {"ZGOAL", "ZACTIVITYLEVEL", "ZSPORT", "ZSPORTS", "ZDIET", "ZDIETS"}
+            )
+        )
+        self.assertTrue(exercise_columns.isdisjoint({"ZSPORT", "ZSPORTS"}))
 
     def test_fresh_store_seed_run_has_zero_inserts(self):
         profile_rows = self.connection.execute(
@@ -158,16 +213,31 @@ class PreseedArtifactTests(unittest.TestCase):
             """
         ).fetchone()
         self.assertEqual(cache_count, food_count)
-        self.assertEqual(version, 7)
+        self.assertEqual(version, 9)
         decoded = json.loads(payload)
         self.assertEqual(len(decoded["compactFoods"]), food_count)
+        self.assertTrue(
+            all("diets" not in food for food in decoded["compactFoods"])
+        )
+        self.assertTrue(
+            all(
+                "category" not in food.get("ayurvedaMetadata", {})
+                for food in decoded["compactFoods"]
+            )
+        )
+        self.assertTrue(
+            all(
+                not key.startswith("category:")
+                for key in decoded["ayurvedaFacetIndex"]
+            )
+        )
         self.assertEqual(
             sum(bool(food["ayurvedaFacets"]) for food in decoded["compactFoods"]),
-            4_212,
+            food_count,
         )
         self.assertEqual(
             sum(food.get("ayurvedaMetadata") is not None for food in decoded["compactFoods"]),
-            4_212,
+            food_count,
         )
         self.assertIn("virya:cooling", decoded["ayurvedaFacetIndex"])
 

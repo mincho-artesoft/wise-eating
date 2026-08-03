@@ -69,17 +69,29 @@ struct MP5PlannerAdapter {
             + interpretedPrompts.structuralRequests)
             .joined(separator: " ")
             .lowercased()
+        let storedTarget = AyurvedaConstitutionStore
+            .record(for: profile.id)?
+            .target()
+        let promptDosha = inferredDosha(from: text)
         let profileRequest = MP5SolverProfile(
             dailyKcal: estimatedDailyCalories(for: profile),
             dailyProteinTarget: estimatedDailyProtein(for: profile),
             ageInMonths: profile.ageInMonths,
-            diet: canonicalDiet(for: profile),
             allergenConcepts: allergenConcepts(for: profile),
             excludedFoodIDs: exclusions.explicitFoodIDs.union(excludedByGate),
-            dosha: inferredDosha(from: text),
+            dosha: storedTarget?.ordered.first.flatMap {
+                MP5Dosha(rawValue: $0.dosha.rawValue)
+            } ?? promptDosha,
             agni: inferredAgni(from: text),
             season: currentRitu(),
-            enableAyurvedicScoring: MP5FeatureFlags.ayurvedicSolverEnabled
+            enableAyurvedicScoring: MP5FeatureFlags.ayurvedicSolverEnabled,
+            doshaTarget: storedTarget.map {
+                MP5DoshaTarget(
+                    vata: $0.vata,
+                    pitta: $0.pitta,
+                    kapha: $0.kapha
+                )
+            }
         )
         let slots = daysAndMeals.keys.sorted().flatMap { day in
             (daysAndMeals[day] ?? []).map {
@@ -315,14 +327,7 @@ struct MP5PlannerAdapter {
                 tier: link.tier == "derived" ? .derived : .classical
             )
         }
-        guard let category = food.category?.first?.rawValue else {
-            return (
-                (0, 0, 0), [], false, false, false, "unrecorded",
-                0.5, [], .none
-            )
-        }
         let estimate = AyurvedaRules.shared.estimated(
-            category: category,
             name: food.name
         )
         return (
@@ -454,20 +459,6 @@ struct MP5PlannerAdapter {
         return concepts
     }
 
-    private func canonicalDiet(for profile: Profile) -> String {
-        let names = profile.diets.map { $0.name.lowercased() }
-        if names.contains(where: { $0.contains("vegan") }) { return "vegan" }
-        if names.contains(where: {
-            $0.contains("jain") || $0.contains("sattvic")
-        }) {
-            return "jain_sattvic"
-        }
-        if names.contains(where: { $0.contains("vegetarian") }) {
-            return "vegetarian"
-        }
-        return "omnivore"
-    }
-
     private func inferredDosha(from text: String) -> MP5Dosha? {
         let tokens = Set(AyurvedaRules.modifierTokens(text))
         if tokens.contains("vata") { return .vata }
@@ -501,16 +492,14 @@ struct MP5PlannerAdapter {
         let base = profile.gender.lowercased() == "female"
             ? 10 * weight + 6.25 * height - 5 * Double(age) - 161
             : 10 * weight + 6.25 * height - 5 * Double(age) + 5
-        var total = base * profile.activityLevel.rawValue
+        var total = base * 1.2
         if profile.isPregnant { total += 300 }
         if profile.isLactating { total += 500 }
         return max(1_000, min(4_500, total.rounded()))
     }
 
     private func estimatedDailyProtein(for profile: Profile) -> Double {
-        let multiplier = profile.goal?.title.lowercased().contains("muscle")
-            == true ? 1.6 : 1.0
-        return max(45, profile.weight * multiplier)
+        max(45, profile.weight)
     }
 
     private func currentRitu() -> String {

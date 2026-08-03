@@ -4,7 +4,6 @@ private struct HarnessProfile: Decodable {
     let id: String
     let label: String
     let kcal: Int
-    let diet: String
     let agni: String
     let dosha: String?
     let allergens: [String]
@@ -207,7 +206,6 @@ private enum MP5SolverHarness {
                                 dailyKcal: profile.dailyKcal,
                                 dailyProteinTarget: profile.dailyProteinTarget,
                                 ageInMonths: profile.ageInMonths,
-                                diet: profile.diet,
                                 allergenConcepts: profile.allergenConcepts,
                                 excludedFoodIDs: profile.excludedFoodIDs,
                                 dosha: dosha,
@@ -250,8 +248,6 @@ private enum MP5SolverHarness {
                             record("F1", true, detail: failure.description)
                             let namesConstraint = failure.description
                                 .lowercased().contains("allergen")
-                                || failure.description.lowercased()
-                                    .contains("diet")
                                 || failure.description.lowercased()
                                     .contains("safety")
                             record(
@@ -386,7 +382,6 @@ private enum MP5SolverHarness {
             dailyKcal: Double(source.kcal),
             dailyProteinTarget: Double(source.kcal) * 0.04,
             ageInMonths: 360,
-            diet: source.diet,
             allergenConcepts: allergens,
             excludedFoodIDs: [96],
             dosha: source.dosha.flatMap(MP5Dosha.init(rawValue:)),
@@ -405,7 +400,6 @@ private enum MP5SolverHarness {
             dailyKcal: 2_000,
             dailyProteinTarget: 80,
             ageInMonths: 360,
-            diet: "vegetarian",
             allergenConcepts: [],
             excludedFoodIDs: [],
             dosha: nil,
@@ -590,38 +584,6 @@ private enum MP5SolverHarness {
                 nil
             )
             record("A3", !candidate.engineExcluded, candidate.name, nil)
-            let vegan = Set([
-                "dairy", "egg", "meat", "fish", "shellfish",
-                "crustacean", "mollusc", "honey"
-            ])
-            let vegetarian = Set([
-                "meat", "fish", "shellfish", "crustacean", "mollusc"
-            ])
-            let jain = vegetarian.union(["allium"])
-            if request.profile.diet == "vegan" {
-                record(
-                    "A4",
-                    candidate.concepts.isDisjoint(with: vegan),
-                    candidate.name,
-                    nil
-                )
-            }
-            if request.profile.diet == "vegetarian" {
-                record(
-                    "A5",
-                    candidate.concepts.isDisjoint(with: vegetarian),
-                    candidate.name,
-                    nil
-                )
-            }
-            if request.profile.diet == "jain_sattvic" {
-                record(
-                    "A6",
-                    candidate.concepts.isDisjoint(with: jain),
-                    candidate.name,
-                    nil
-                )
-            }
             record(
                 "A7",
                 candidate.enforcedMinAgeMonths <= request.profile.ageInMonths,
@@ -629,10 +591,6 @@ private enum MP5SolverHarness {
                 nil
             )
         }
-        if request.profile.diet != "vegan" { record("A4", true, "", nil) }
-        if request.profile.diet != "vegetarian" { record("A5", true, "", nil) }
-        if request.profile.diet != "jain_sattvic" { record("A6", true, "", nil) }
-
         for meal in plan.days.flatMap(\.meals) {
             let mealCandidates = meal.components.compactMap {
                 candidates[$0.foodID]

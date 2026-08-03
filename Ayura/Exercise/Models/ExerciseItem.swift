@@ -21,7 +21,6 @@ public final class ExerciseItem: Identifiable {
     }
     public var nameNormalized: String
     
-    public var sports: [Sport]?
     public var exerciseDescription: String?
     public var videoURL: String?
     public var metValue: Double?
@@ -102,7 +101,6 @@ public final class ExerciseItem: Identifiable {
     public init(
         id: Int,
         name: String,
-        sports: [Sport]? = nil,
         description: String? = nil,
         videoURL: String? = nil,
         metValue: Double? = nil,
@@ -124,7 +122,6 @@ public final class ExerciseItem: Identifiable {
         self.searchTokens  = ExerciseItem.makeTokens(from: name)
         self.searchTokens2 = ExerciseItem.makeTokens2(from: name)
 
-        self.sports = sports
         self.exerciseDescription = description
         self.videoURL = videoURL
         self.metValue = metValue
@@ -144,7 +141,6 @@ public final class ExerciseItem: Identifiable {
            self.exerciseDescription = dto.desc
            self.metValue = dto.metValue
            self.muscleGroups = dto.muscleGroups
-           self.sports = dto.sports
            self.minimalAgeMonths = dto.minimalAgeMonths ?? 0
        }
     

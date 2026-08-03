@@ -15,9 +15,24 @@ struct ColorTextMultiSelectGridView<Item: ColorSelectableItem>: View {
     let items: [Item]
     @Binding var selection: Set<Item.ID>
     let searchPrompt: String
+    let itemLabel: (Item) -> String
 
     /// Височината на реда/„плочката“. Използваме само височината; ширината е full-width.
     let itemContentSize: CGSize
+
+    init(
+        items: [Item],
+        selection: Binding<Set<Item.ID>>,
+        searchPrompt: String,
+        itemContentSize: CGSize,
+        itemLabel: @escaping (Item) -> String = { $0.name }
+    ) {
+        self.items = items
+        self._selection = selection
+        self.searchPrompt = searchPrompt
+        self.itemContentSize = itemContentSize
+        self.itemLabel = itemLabel
+    }
     
     // MARK: - Състояние
     @State private var searchText: String = ""
@@ -25,11 +40,11 @@ struct ColorTextMultiSelectGridView<Item: ColorSelectableItem>: View {
     private var filteredItems: [Item] {
         searchText.isEmpty
         ? items
-        : items.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+        : items.filter {
+            $0.name.localizedCaseInsensitiveContains(searchText)
+                || itemLabel($0).localizedCaseInsensitiveContains(searchText)
+        }
     }
-    
-    // Един колона → един елемент на ред
-    private let columns = [GridItem(.flexible(), spacing: 12)]
     
     var body: some View {
         VStack(spacing: 20) {
@@ -48,12 +63,13 @@ struct ColorTextMultiSelectGridView<Item: ColorSelectableItem>: View {
             .padding()
             .glassCardStyle(cornerRadius: 25)
             
-            // Мрежа (всъщност 1 колона → списък от плочки)
+            // Един пълноширок елемент на ред.
             ScrollView(showsIndicators: false) {
-                LazyVGrid(columns: columns, spacing: 12) {
+                LazyVStack(spacing: 12) {
                     ForEach(filteredItems) { item in
                         ColorTextSelectItemView(
                             item: item,
+                            displayName: itemLabel(item),
                             isSelected: selection.contains(item.id),
                             rowHeight: itemContentSize.height // ползваме само височината
                         ) {
@@ -65,14 +81,18 @@ struct ColorTextMultiSelectGridView<Item: ColorSelectableItem>: View {
                                 }
                             }
                         }
+                        .frame(maxWidth: .infinity)
                         .contentShape(Rectangle())
-                        .padding(.horizontal)
                     }
                 }
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal)
                 .padding(.vertical, 4)
                 Spacer(minLength: 150)
             }
+            .frame(maxWidth: .infinity)
         }
+        .frame(maxWidth: .infinity)
         .padding(.horizontal)
     }
 }
@@ -82,6 +102,7 @@ private struct ColorTextSelectItemView<Item: ColorSelectableItem>: View {
     @ObservedObject private var effectManager = EffectManager.shared
     
     let item: Item
+    let displayName: String
     let isSelected: Bool
     let rowHeight: CGFloat
     let action: () -> Void
@@ -93,7 +114,7 @@ private struct ColorTextSelectItemView<Item: ColorSelectableItem>: View {
         Button(action: action) {
             // Съдържание: само името, авто-мащабирано
             FittingLabel(
-                text: item.name,
+                text: displayName,
                 baseFontSize: rowHeight * 0.45,
                 weight: .bold,
                 minScale: 0.5,
@@ -116,9 +137,11 @@ private struct ColorTextSelectItemView<Item: ColorSelectableItem>: View {
                     .stroke(isSelected ? effectManager.currentGlobalAccentColor : Color.clear, lineWidth: 2.5)
             )
         }
+        .frame(maxWidth: .infinity)
         .buttonStyle(.plain)
+        .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
-        .accessibilityLabel(Text(item.name))
+        .accessibilityLabel(Text(displayName))
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 }

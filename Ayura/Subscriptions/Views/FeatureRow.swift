@@ -99,8 +99,7 @@ struct BaseSubscriptionView: View {
                 .foregroundColor(effectManager.currentGlobalAccentColor)
 
             VStack(alignment: .leading, spacing: 8) {
-                FeatureRow(feature: "1 Main Profile")
-                FeatureRow(feature: "1 Child Profile (up to 4 years)")
+                FeatureRow(feature: "1 Profile")
                 FeatureRow(feature: "Meal Tracking")
                 FeatureRow(feature: "Workout Tracking")
                 FeatureRow(feature: "Storage List")

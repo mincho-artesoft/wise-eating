@@ -68,10 +68,10 @@ struct AyurvedaEditorSection: View {
     var id: Self { self }
     var storedValue: String { rawValue.lowercased() }
 
-    var tint: Color {
+    var tint: Color? {
       switch self {
       case .cooling: return .blue
-      case .neutral: return .secondary
+      case .neutral: return nil
       case .heating: return .orange
       }
     }
@@ -116,6 +116,8 @@ struct AyurvedaEditorSection: View {
       sectionDivider
       gunaGroup
     }
+    .foregroundStyle(effectManager.currentGlobalAccentColor)
+    .tint(effectManager.currentGlobalAccentColor)
   }
 
   private var sectionDivider: some View {
@@ -180,7 +182,9 @@ struct AyurvedaEditorSection: View {
       WrappingSegmentedControl(
         selection: viryaSelection,
         layoutMode: .wrap,
-        selectionTint: \.tint,
+        selectionTint: {
+          $0.tint ?? effectManager.currentGlobalAccentColor
+        },
         systemImage: \.systemImage
       )
         .frame(minHeight: 36)
@@ -188,7 +192,11 @@ struct AyurvedaEditorSection: View {
         .background(.thinMaterial, in: Capsule())
         .overlay {
           Capsule()
-            .stroke(Color.primary.opacity(colorScheme == .dark ? 0.22 : 0.12))
+            .stroke(
+              effectManager.currentGlobalAccentColor.opacity(
+                colorScheme == .dark ? 0.22 : 0.12
+              )
+            )
         }
         .accessibilityLabel("Virya energy")
     }
@@ -206,7 +214,11 @@ struct AyurvedaEditorSection: View {
         .background(.thinMaterial, in: Capsule())
         .overlay {
           Capsule()
-            .stroke(Color.primary.opacity(colorScheme == .dark ? 0.22 : 0.12))
+            .stroke(
+              effectManager.currentGlobalAccentColor.opacity(
+                colorScheme == .dark ? 0.22 : 0.12
+              )
+            )
         }
         .accessibilityLabel("Vipaka post-digestive effect")
     }
@@ -301,6 +313,8 @@ struct AyurvedaEditorSection: View {
 }
 
 struct AyurvedaRecipeEditorSection: View {
+  @ObservedObject private var effectManager = EffectManager.shared
+
   @Binding var isManualOverride: Bool
   @Binding var form: AyurvedaForm
 
@@ -320,10 +334,14 @@ struct AyurvedaRecipeEditorSection: View {
         AyurvedaAutomaticPreview(computation: computation)
       }
     }
+    .foregroundStyle(effectManager.currentGlobalAccentColor)
+    .tint(effectManager.currentGlobalAccentColor)
   }
 }
 
 private struct AyurvedaAutomaticPreview: View {
+  @ObservedObject private var effectManager = EffectManager.shared
+
   let computation: AyurvedaIngredientComputation
 
   var body: some View {
@@ -338,7 +356,9 @@ private struct AyurvedaAutomaticPreview: View {
         } else {
           Text("Not enough recognizable ingredients yet.")
             .font(.caption)
-            .foregroundStyle(.secondary)
+            .foregroundStyle(
+              effectManager.currentGlobalAccentColor.opacity(0.72)
+            )
         }
       }
     }
@@ -440,7 +460,6 @@ enum AyurvedaUserProfileStore {
       kind: "user",
       foodId: food.id,
       name: food.name,
-      category: food.category?.first?.rawValue ?? "",
       doshaVata: form.vata,
       doshaPitta: form.pitta,
       doshaKapha: form.kapha,
@@ -480,7 +499,6 @@ enum AyurvedaUserProfileStore {
     profile.foodId = food.id
     profile.foodIsPlaceholder = false
     profile.name = food.name
-    profile.category = food.category?.first?.rawValue ?? ""
     profile.doshaVata = form.vata
     profile.doshaPitta = form.pitta
     profile.doshaKapha = form.kapha

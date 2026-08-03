@@ -49,7 +49,7 @@ class AIRecipeGenerator {
             s.append("  – none")
         } else {
             for (i, ing) in r.ingredients.enumerated() {
-                s.append(String(format: "  %2d) %@ – %.0f g (Category: %@)", i+1, ing.name, ing.grams, ing.category))
+                s.append(String(format: "  %2d) %@ – %.0f g", i+1, ing.name, ing.grams))
             }
         }
         s.append("")
@@ -156,15 +156,10 @@ class AIRecipeGenerator {
         let hasCookingVerb = cookVerbs.contains { desc.contains($0) }
         let hasColdSignal   = coldSignals.contains { desc.contains($0) }
         
-        // Signals from ingredient categories (if mostly fresh produce + dairy + herbs, likely no-cook)
-        let cats = r.ingredients.map { $0.category.lowercased() }
-        let freshLeanCats = cats.filter { ["vegetable","fruit","herb","dairy","yogurt","nut","seed","spice"].contains($0) }
-        let freshRatio = cats.isEmpty ? 0.0 : Double(freshLeanCats.count) / Double(cats.count)
-        
-        let isNoCook = (hasColdSignal && !hasCookingVerb) || (!hasCookingVerb && freshRatio >= 0.6)
+        let isNoCook = hasColdSignal && !hasCookingVerb
         let preferRaw = isNoCook // if it's a no-cook/cold style, prefer raw variants
-        
-        let rationale = "isNoCook=\(isNoCook) (coldSignal=\(hasColdSignal), cookingVerb=\(hasCookingVerb), freshRatio=\(String(format: "%.2f", freshRatio)))"
+
+        let rationale = "isNoCook=\(isNoCook) (coldSignal=\(hasColdSignal), cookingVerb=\(hasCookingVerb))"
         return RecipeContextProfile(
             recipeName: recipeName,
             isColdOrNoCook: isNoCook,
@@ -193,7 +188,6 @@ class AIRecipeGenerator {
         
         INGREDIENTS & PREP TIME:
         - List common, simple ingredients with realistic gram amounts for 2–4 servings.
-        - For each ingredient, provide a 'category' like "vegetable", "fruit", "meat", "dairy", "spice", "herb", "legume", "grain", "oil", or "condiment" to help with disambiguation.
         - "prepTimeMinutes" is an integer in [5, 240], covering active prep only (washing, chopping, preheating).
         
         NAMING:
@@ -279,7 +273,7 @@ class AIRecipeGenerator {
                 2) ...
                 3) ...
                 (5–12 steps total, plain text only)
-                Keep ingredients realistic in grams for 2–4 servings, provide a valid 'category' for each, and a valid prepTimeMinutes in [5, 240].
+                Keep ingredients realistic in grams for 2–4 servings and provide a valid prepTimeMinutes in [5, 240].
                 """
                 
                 emitLog("LLM#1b prompt → \(fixPrompt)", onLog: onLog)
@@ -565,7 +559,6 @@ class AIRecipeGenerator {
             
             return passesStrictGuards(
                 originalName: original.name,
-                originalCategory: original.category,
                 candidateName: c.name,
                 recipeContext: recipeContext,
                 otherIngredients: otherIngredients,
@@ -689,7 +682,6 @@ class AIRecipeGenerator {
                         
                         let pickIdx = try await self.chooseBestIngredientCandidate(
                             originalName: ing.name,
-                            originalCategory: ing.category,
                             candidateNames: filteredCandItems.map { $0.name },
                             recipeName: recipeName,
                             recipeContext: recipeContext,
@@ -799,7 +791,6 @@ class AIRecipeGenerator {
         // 1) Варианти + avoid от AINamingVariants
         let (variantQueries, variantBans) = try await generateUSDANameVariants(
             for: rawName,
-            categoryHint: nil,
             recipeName: recipeName,
             recipeContext: recipeContext,
             otherIngredients: otherIngredients,
@@ -885,7 +876,6 @@ class AIRecipeGenerator {
     @MainActor
     private func generateUSDANameVariants(
         for rawName: String,
-        categoryHint: String?,
         recipeName: String,
         recipeContext: RecipeContextProfile,
         otherIngredients: [String],
@@ -898,7 +888,6 @@ class AIRecipeGenerator {
                 - preferForms: realistic names that match USDA catalog entries for the concept.
                 - avoidForms: clearly wrong or composite foods that would pollute search results; include dairy/fats like butter if unrelated to the headword; avoid brand-like or flavored variants; avoid 'with X' composites.
                 - cookedKeywords/rawKeywords: one-word tokens that indicate state; these help the caller filter according to preparation context.
-                - categoryGuess: lowercase broad category.
                 """
         }
         let session = LanguageModelSession(instructions: instructions)
@@ -906,7 +895,6 @@ class AIRecipeGenerator {
             INGREDIENT: "\(rawName)"
             RECIPE: "\(recipeName)"
             OTHER INGREDIENTS: \(ctx)
-            CATEGORY HINT: \(categoryHint ?? "n/a")
             PREPARATION CONTEXT: \(recipeContext.isColdOrNoCook ? "no-cook/cold dish; prefer raw forms" : "cooking allowed; raw/cooked both acceptable")
             TASK: Produce USDA-style naming variants for this single ingredient.
             """
@@ -976,7 +964,6 @@ class AIRecipeGenerator {
     @MainActor
     private func chooseBestIngredientCandidate(
         originalName: String,
-        originalCategory: String,
         candidateNames: [String],
         recipeName: String,
         recipeContext: RecipeContextProfile,
@@ -984,7 +971,7 @@ class AIRecipeGenerator {
         requiredHeadwords: [String],
         onLog: (@Sendable (String) -> Void)?
     ) async throws -> Int {
-        emitLog("chooseBestIngredientCandidate(\"\(originalName)\" [\(originalCategory)]) – START", onLog: onLog)
+        emitLog("chooseBestIngredientCandidate(\"\(originalName)\") – START", onLog: onLog)
         
         if candidateNames.isEmpty {
             emitLog("  • No candidates at all. Returning -1.", onLog: onLog)
@@ -1009,7 +996,7 @@ class AIRecipeGenerator {
         You must pick ONE candidate index for the target ingredient OR -1 if none is valid.
         
         RECIPE: \(recipeName)
-        TARGET: "\(originalName)" (category: \(originalCategory))
+        TARGET: "\(originalName)"
         PREPARATION: \(recipeContext.isColdOrNoCook ? "no-cook/cold; avoid cooked variants" : "cooking allowed")
         HEADWORDS (must appear in the chosen name): \(headStr)
         FORBIDDEN INDICATORS (reject if present): \(forbidden)
@@ -1021,7 +1008,7 @@ class AIRecipeGenerator {
         HARD RULES (MANDATORY):
         1) The chosen name MUST contain at least one HEADWORD literally (substring match is ok).
         2) Reject composite dishes (dip/spread/salad/casserole/burger/bread/wrap/sandwich/marinade/seasoning/mix/blend/sauce/dressing/syrup/jam/jelly/cereal/bar).
-        3) If dish is savory (garlic/cucumber/onion/dill/pepper/salt in other ingredients) or the category is dairy, REJECT sweetened/flavored/fruit variants.
+        3) If dish is savory (garlic/cucumber/onion/dill/pepper/salt in other ingredients), REJECT sweetened/flavored/fruit variants.
         4) If PREPARATION says no-cook/cold, REJECT cooked forms (cooked/boiled/grilled/roasted/fried/baked/steamed).
         5) If no candidate satisfies ALL rules, you MUST answer { "bestIndex": -1, "reason": "..." }.
         
@@ -1054,7 +1041,6 @@ class AIRecipeGenerator {
         // Пост-валидация с динамичните headwords (твърди гардове).
         let valid = passesStrictGuards(
             originalName: originalName,
-            originalCategory: originalCategory,
             candidateName: chosenName,
             recipeContext: recipeContext,
             otherIngredients: otherIngredients,
@@ -1151,8 +1137,7 @@ class AIRecipeGenerator {
             dto.id = maxId + 1
             try Task.checkCancellation()
             
-            let dietMap = try makeDietMap(in: ctx)
-            let model = dto.model(dietMap: dietMap)
+            let model = dto.model()
             model.isUserAdded = false
             model.isRecipe = false
             try Task.checkCancellation()
@@ -1203,9 +1188,8 @@ class AIRecipeGenerator {
         }
         try Task.checkCancellation()
         
-        // 1) Build dietMap and model from DTO
-        let dietMap = try makeDietMap(in: ctx)
-        let model = dto.model(dietMap: dietMap)
+        // 1) Build model from DTO
+        let model = dto.model()
         model.isUserAdded = false
         model.isRecipe   = false
         try Task.checkCancellation()
@@ -1215,14 +1199,6 @@ class AIRecipeGenerator {
         emitLog("  • Materialized & inserted FoodItem from DTO: '\(model.name)' [\(model.id)]", onLog: onLog)
         
         return model
-    }
-    
-    private func makeDietMap(in ctx: ModelContext) throws -> [String: Diet] {
-        try Task.checkCancellation()
-        let persistedDiets = try ctx.fetch(FetchDescriptor<Diet>())
-        return Dictionary(uniqueKeysWithValues: persistedDiets.map {
-            ($0.name._normKey, $0)
-        })
     }
     
     @MainActor
@@ -1337,7 +1313,6 @@ class AIRecipeGenerator {
     // Строга пост-валидация на кандидат спрямо ДИНАМИЧНИ headwords.
     private func passesStrictGuards(
         originalName: String,
-        originalCategory: String,
         candidateName: String,
         recipeContext: RecipeContextProfile,
         otherIngredients: [String],
@@ -1353,11 +1328,11 @@ class AIRecipeGenerator {
         // 2) Отхвърляне на композити/изделия.
         if compositeIndicators.contains(where: { name.contains($0) }) { return false }
         
-        // 3) Савъри контекст → забрана за сладки/овкусени варианти (особено за dairy).
+        // 3) Савъри контекст → забрана за сладки/овкусени варианти.
         let savoryHints = otherIngredients.joined(separator: " ").lowercased()
         let looksSavory = ["garlic","cucumber","onion","dill","pepper","salt"]
             .contains(where: { savoryHints.contains($0) })
-        if looksSavory || originalCategory.lowercased() == "dairy" {
+        if looksSavory {
             if sweetFlavoringIndicators.contains(where: { name.contains($0) }) { return false }
         }
         

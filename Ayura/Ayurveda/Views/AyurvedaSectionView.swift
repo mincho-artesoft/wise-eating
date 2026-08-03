@@ -54,6 +54,7 @@ struct AyurvedaSectionView: View {
 
 struct AyurvedaDisplayCard: View {
   @Environment(\.accessibilityReduceMotion) private var reduceMotion
+  @ObservedObject private var effectManager = EffectManager.shared
 
   let display: AyurvedaDisplay
 
@@ -67,6 +68,7 @@ struct AyurvedaDisplayCard: View {
           tone: .warning
         )
       }
+      AyurvedaPersonalizedFoodFitView(display: display)
       DoshaBarsView(
         vata: display.vata,
         pitta: display.pitta,
@@ -82,12 +84,14 @@ struct AyurvedaDisplayCard: View {
         transaction.animation = nil
       }
     }
+    .foregroundStyle(effectManager.currentGlobalAccentColor)
+    .tint(effectManager.currentGlobalAccentColor)
   }
 
   private var title: some View {
     Text("Ayurveda")
       .font(.title2.weight(.semibold))
-      .foregroundStyle(.primary)
+      .foregroundStyle(effectManager.currentGlobalAccentColor)
   }
 
   private var properties: some View {
@@ -132,6 +136,12 @@ struct AyurvedaDisplayCard: View {
       systemImage: "arrow.triangle.2.circlepath",
       kind: .vipaka,
       values: optionalValue(display.vipaka)
+    )
+    groups += group(
+      title: "Prabhava (specific effect)",
+      systemImage: "sparkles",
+      kind: .prabhava,
+      values: optionalValue(display.prabhava)
     )
     groups += group(
       title: "Gunas (qualities)",
@@ -200,6 +210,7 @@ private enum AyurvedaPropertyKind: Equatable {
   case rasa
   case virya
   case vipaka
+  case prabhava
   case guna
   case modifier
 }
@@ -222,7 +233,9 @@ private struct AyurvedaPropertyGroupView: View {
     VStack(alignment: .leading, spacing: 7) {
       Label(group.title, systemImage: group.systemImage)
         .font(.caption)
-        .foregroundStyle(.secondary)
+        .foregroundStyle(
+          effectManager.currentGlobalAccentColor.opacity(0.72)
+        )
         .fixedSize(horizontal: false, vertical: true)
 
       ChipGrid {
@@ -265,6 +278,8 @@ private struct AyurvedaPropertyGroupView: View {
       case "pungent": return "flame.fill"
       default: return "arrow.triangle.2.circlepath"
       }
+    case .prabhava:
+      return "sparkles"
     case .guna:
       switch value {
       case "dense": return "circle.grid.3x3.fill"
@@ -301,6 +316,8 @@ private struct AyurvedaPropertyGroupView: View {
       return Color("AyurvedaPacify")
     case .modifier:
       return Color("AyurvedaAggravate")
+    case .prabhava:
+      return Color("AyurvedaWarning")
     default:
       return Color("AyurvedaChipTint")
     }

@@ -21,7 +21,7 @@ class SearchKnowledgeBase: @unchecked Sendable {
         return map
     }()
 
-    // MARK: - Generic key normalization for subjects (nutrients, diets, allergens, pH)
+    // MARK: - Generic key normalization for subjects (nutrients, allergens, pH)
     func normalizeKey(_ raw: String) -> String {
         return raw
             .lowercased()
@@ -49,7 +49,7 @@ class SearchKnowledgeBase: @unchecked Sendable {
         "strictly", "exactly", "roughly", "approximately", "around", "about",
         "just", "almost", "nearly", "virtually",
         "value", "values", "level", "levels", "scale", "balance",
-        "than", "then", "g", "mg", "ug", "mcg", "µg", "kcal", "diet", "diets"
+        "than", "then", "g", "mg", "ug", "mcg", "µg", "kcal"
     ]
 
     let negationTerms: Set<String> = [
@@ -212,102 +212,6 @@ class SearchKnowledgeBase: @unchecked Sendable {
         return map
     }()
 
-
-    // MARK: - Diets (mapped to DietType enum)
-
-    let dietMap: [String: DietType] = [
-        "vegan": .vegan,
-        "vegetarian": .vegetarian,
-        "veg": .vegetarian,
-
-        "keto": .keto,
-        "ketogenic": .keto,
-
-        "paleo": .paleo,
-
-        "gluten free": .glutenFree,
-        "gf": .glutenFree,
-        "gluten-free": .glutenFree,
-
-        "dairy free": .dairyFree,
-        "df": .dairyFree,
-        "dairy-free": .dairyFree,
-
-        "lactose free": .lactoseFree,
-        "lactose-free": .lactoseFree,
-
-        "halal": .halal,
-        "kosher": .kosher,
-
-        "low carb": .lowCarb,
-        "low-carb": .lowCarb,
-
-        "low fat": .lowFat,
-        "low-fat": .lowFat,
-
-        "low sodium": .lowSodium,
-        "low-sodium": .lowSodium,
-
-        "high protein": .highProtein,
-        "high-protein": .highProtein,
-
-        "nut free": .nutFree,
-        "nut-free": .nutFree,
-
-        "egg free": .eggFree,
-        "egg-free": .eggFree,
-
-        "soy free": .soyFree,
-        "soy-free": .soyFree,
-
-        "fat free": .fatFree,
-        "fat-free": .fatFree,
-
-        "no added sugar": .noAddedSugar,
-
-        "mineral rich": .mineralRich,
-        "mineral-rich": .mineralRich,
-
-        "vitamin rich": .vitaminRich,
-        "vitamin-rich": .vitaminRich,
-
-        "pescatarian": .pescatarian
-    ]
-
-    let dietSynonyms: [String: String] = [
-        "plant based": "Vegan",
-        "no animal products": "Vegan",
-        "veggie": "Vegetarian",
-        "whole30": "Paleo",
-        "no gluten": "Gluten-Free",
-        "no dairy": "Dairy-Free",
-        "no nuts": "Nut-Free",
-        "zero fat": "Fat-Free"
-    ]
-
-    // Used when a word is an ingredient that implies a diet flag
-    let ingredientToDietMap: [String: String] = [
-        "milk": "Dairy-Free", "cream": "Dairy-Free", "cheese": "Dairy-Free", "lactose": "Lactose-Free",
-        "cow milk": "Dairy-Free", "yoghurt": "Dairy-Free", "yogurt": "Dairy-Free",
-
-        "egg": "Egg-Free", "eggs": "Egg-Free",
-
-        "nut": "Nut-Free", "nuts": "Nut-Free",
-        "peanut": "Nut-Free", "peanuts": "Nut-Free",
-        "almond": "Nut-Free", "cashew": "Nut-Free", "walnut": "Nut-Free",
-
-        "soy": "Soy-Free", "soya": "Soy-Free", "tofu": "Soy-Free",
-
-        "gluten": "Gluten-Free", "wheat": "Gluten-Free", "bread": "Gluten-Free",
-        "pasta": "Gluten-Free", "flour": "Gluten-Free", "barley": "Gluten-Free", "rye": "Gluten-Free",
-
-        "sugar": "No Added Sugar", "added sugar": "No Added Sugar",
-
-        "meat": "Vegetarian", "animal": "Vegan", "beef": "Vegetarian",
-        "pork": "Vegetarian", "chicken": "Vegetarian",
-
-        "salt": "Low Sodium", "sodium": "Low Sodium"
-    ]
 
     // MARK: - PH Logic
 
@@ -564,9 +468,6 @@ class SearchKnowledgeBase: @unchecked Sendable {
     lazy var allSystemKeywords: Set<String> = {
         var keys = Set<String>()
 //        keys.formUnion(nutrientMap.keys)
-        keys.formUnion(dietSynonyms.keys)
-        keys.formUnion(dietMap.keys)
-        keys.formUnion(ingredientToDietMap.keys)
         keys.formUnion(allergenMap.keys)
         keys.formUnion(phKeywords)
         keys.formUnion(phTerms.keys)
@@ -796,18 +697,17 @@ class SearchKnowledgeBase: @unchecked Sendable {
         return bestNutrient
     }
     
-    /// High-level classification of a parsed subject: can be a nutrient, diet,
+    /// High-level classification of a parsed subject: can be a nutrient,
     /// allergen, pH concept, or unknown.
     enum SubjectType {
         case nutrient(NutrientType)
-        case diet(String)
         case allergen(Allergen)
         case ph
         case unknown
     }
 
     /// Returns true if the given raw subject string can be interpreted as a
-    /// known nutrient, diet, allergen, or pH-related term.
+    /// known nutrient, allergen, or pH-related term.
     func isValidSubject(_ raw: String) -> Bool {
         let key = normalizeKey(raw)
 
@@ -816,15 +716,7 @@ class SearchKnowledgeBase: @unchecked Sendable {
             return true
         }
 
-        // 2. Diets (both direct map and synonyms)
-        if dietMap[key] != nil {
-            return true
-        }
-        if dietSynonyms[key] != nil {
-            return true
-        }
-
-        // 3. Allergens (direct map and alias map)
+        // 2. Allergens (direct map and alias map)
         if allergenMap[key] != nil {
             return true
         }
@@ -832,7 +724,7 @@ class SearchKnowledgeBase: @unchecked Sendable {
             return true
         }
 
-        // 4. pH-related terms
+        // 3. pH-related terms
         if phKeywords.contains(key) { return true }
         if phTerms.keys.contains(key) { return true }
 
@@ -840,7 +732,7 @@ class SearchKnowledgeBase: @unchecked Sendable {
     }
 
     /// Provides a more precise classification of the subject, including the
-    /// concrete NutrientType, Diet name, or Allergen where applicable.
+    /// concrete NutrientType or Allergen where applicable.
     func getSubjectType(_ raw: String) -> SubjectType {
         let key = normalizeKey(raw)
 
@@ -854,16 +746,7 @@ class SearchKnowledgeBase: @unchecked Sendable {
             return .nutrient(nutrient)
         }
 
-        // 3. Diets
-        if let dietType = dietMap[key] {
-            // Use the DietType's rawValue as the canonical diet name string
-            return .diet(dietType.rawValue)
-        }
-        if let dietName = dietSynonyms[key] {
-            return .diet(dietName)
-        }
-
-        // 4. Allergens
+        // 3. Allergens
         if let allergen = allergenMap[key] {
             return .allergen(allergen)
         }

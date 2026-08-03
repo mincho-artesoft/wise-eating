@@ -7,6 +7,7 @@ import argparse
 import gzip
 import json
 import os
+import re
 import sqlite3
 import tempfile
 from pathlib import Path
@@ -19,12 +20,12 @@ EXPECTED = {
     "recipes": 1_500,
     "links": 2_336,
     "cacheFoods": 14_477,
-    "cacheVersion": 7,
-    "facetFoods": 4_212,
-    "metadataFoods": 4_212,
+    "cacheVersion": 9,
+    "facetFoods": 14_477,
+    "metadataFoods": 14_477,
     "linkedFacetFoods": 2_007,
-    "facetKeys": 89,
-    "facetAssignments": 59_032,
+    "facetKeys": 45,
+    "facetAssignments": 99_394,
     "seedVersion": 6,
     "ingredientLinks": 10_571,
     "ingredientOwners": 1_500,
@@ -62,6 +63,170 @@ def require_equal(label: str, actual, expected) -> None:
         raise PreseedBuildError(f"{label}: expected {expected!r}, got {actual!r}")
 
 
+def normalized_modifier_tokens(value: str) -> list[str]:
+    value = value.lower()
+    value = re.sub(r"\([^)]*\)", "", value)
+    value = value.replace("&", " and ")
+    value = re.sub(r"[^a-z0-9,;'\- ]", " ", value)
+    value = value.replace(",", " ").replace(";", " ")
+    return [token for token in re.split(r"[\s\-'/]+", value) if token]
+
+
+def modifier_applies(food_tokens: list[str], phrase: str) -> bool:
+    phrase_tokens = normalized_modifier_tokens(phrase)
+    width = len(phrase_tokens)
+    if width == 0 or width > len(food_tokens):
+        return False
+    return any(
+        food_tokens[index:index + width] == phrase_tokens
+        for index in range(len(food_tokens) - width + 1)
+    )
+
+
+def normalized_facet_value(value: str) -> str:
+    value = value.lower().strip().replace("_", "-").replace(" ", "-")
+    return re.sub(r"-+", "-", value)
+
+
+def estimated_search_metadata(
+    *,
+    food_name: str,
+    enforced_min_age_months: int,
+    default_rule: dict,
+    modifiers: list[dict],
+) -> dict:
+    rule = default_rule
+    food_tokens = normalized_modifier_tokens(food_name)
+    applied = [
+        modifier
+        for modifier in modifiers
+        if any(
+            modifier_applies(food_tokens, phrase)
+            for phrase in modifier.get("phrases", [])
+        )
+    ]
+    modifier_totals = [0, 0, 0]
+    gunas = list(rule["gunas"])
+    for modifier in applied:
+        modifier_totals = [
+            total + delta
+            for total, delta in zip(
+                modifier_totals,
+                modifier["vpk"],
+                strict=True,
+            )
+        ]
+        for guna in modifier.get("gunas", []):
+            if guna not in gunas:
+                gunas.append(guna)
+    vpk = [
+        max(-2, min(2, value + delta))
+        for value, delta in zip(
+            rule["vpk"],
+            modifier_totals,
+            strict=True,
+        )
+    ]
+
+    facets = {f"virya:{normalized_facet_value(rule['virya'])}"}
+    for guna in gunas:
+        facets.add(f"guna:{normalized_facet_value(guna)}")
+    for dosha, value in zip(("vata", "pitta", "kapha"), vpk, strict=True):
+        if value < 0:
+            facets.add(f"pacifies:{dosha}")
+        elif value > 0:
+            facets.add(f"aggravates:{dosha}")
+    return {
+        "contraindications": [],
+        "sourceTier": "estimated",
+        "sourceProfileName": (
+            "default Ayurveda rule"
+        ),
+        "doshaPitta": vpk[1],
+        "confidenceAyur": 0.25,
+        "virya": rule["virya"],
+        "doshaVata": vpk[0],
+        "facets": sorted(facets),
+        "rasa": [],
+        "doshaKapha": vpk[2],
+        "timeOfDay": [],
+        "gunas": gunas,
+        "enforcedMinAgeMonths": enforced_min_age_months,
+        "seasons": [],
+    }
+
+
+def add_estimated_search_fallbacks(store: Path) -> None:
+    rules_path = Path(__file__).resolve().parent.parent / "Ayura" / "ayurveda_rules.json"
+    rules = json.loads(rules_path.read_text(encoding="utf-8"))
+    with sqlite3.connect(store) as connection:
+        row = connection.execute(
+            """
+            SELECT ZPAYLOADDATA FROM ZSEARCHINDEXCACHE
+            WHERE ZKEY = 'main'
+            """
+        ).fetchone()
+        if row is None:
+            raise PreseedBuildError("main search cache is missing")
+        payload = json.loads(row[0])
+        payload.pop("knownDiets", None)
+        food_rows = dict(
+            connection.execute("SELECT ZID, ZNAME FROM ZFOODITEM")
+        )
+
+        for compact in payload["compactFoods"]:
+            compact.pop("diets", None)
+            existing_metadata = compact.get("ayurvedaMetadata")
+            if isinstance(existing_metadata, dict):
+                existing_metadata.pop("category", None)
+                existing_metadata["facets"] = [
+                    facet
+                    for facet in existing_metadata.get("facets", [])
+                    if not facet.startswith("category:")
+                    and (not facet.startswith("concept:") or facet == "concept:digestion")
+                ]
+                compact["ayurvedaFacets"] = [
+                    facet
+                    for facet in compact.get("ayurvedaFacets", [])
+                    if not facet.startswith("category:")
+                    and (not facet.startswith("concept:") or facet == "concept:digestion")
+                ]
+                continue
+            food_id = compact["id"]
+            food_name = food_rows[food_id]
+            metadata = estimated_search_metadata(
+                food_name=food_name,
+                enforced_min_age_months=compact["minAgeMonths"],
+                default_rule=rules["default"],
+                modifiers=rules["modifiers"],
+            )
+            compact["ayurvedaMetadata"] = metadata
+            compact["ayurvedaFacets"] = metadata["facets"]
+
+        facet_index: dict[str, list[int]] = {}
+        for compact in payload["compactFoods"]:
+            for facet in compact["ayurvedaFacets"]:
+                facet_index.setdefault(facet, []).append(compact["id"])
+        payload["ayurvedaFacetIndex"] = {
+            facet: sorted(food_ids)
+            for facet, food_ids in sorted(facet_index.items())
+        }
+        payload_data = json.dumps(
+            payload,
+            ensure_ascii=False,
+            separators=(",", ":"),
+        ).encode("utf-8")
+        connection.execute(
+            """
+            UPDATE ZSEARCHINDEXCACHE
+            SET ZVERSION = ?, ZPAYLOADDATA = ?, Z_OPT = Z_OPT + 1
+            WHERE ZKEY = 'main'
+            """,
+            (EXPECTED["cacheVersion"], payload_data),
+        )
+        connection.commit()
+
+
 def audit_store(path: Path) -> dict[str, int]:
     path = Path(path)
     if not path.is_file():
@@ -72,6 +237,70 @@ def audit_store(path: Path) -> dict[str, int]:
             scalar(connection, "PRAGMA integrity_check"),
             "ok",
         )
+        category_columns = [
+            (table_name, column[1])
+            for (table_name,) in connection.execute(
+                "SELECT name FROM sqlite_master WHERE type = 'table'"
+            )
+            for column in connection.execute(f'PRAGMA table_info("{table_name}")')
+            if "CATEGORY" in column[1].upper()
+        ]
+        require_equal(
+            "category columns",
+            category_columns,
+            [],
+        )
+        head_circumference_columns = [
+            (table_name, column[1])
+            for (table_name,) in connection.execute(
+                "SELECT name FROM sqlite_master WHERE type = 'table'"
+            )
+            for column in connection.execute(f'PRAGMA table_info("{table_name}")')
+            if "HEADCIRCUMFERENCE" in column[1].upper()
+        ]
+        require_equal(
+            "head circumference columns",
+            head_circumference_columns,
+            [],
+        )
+        badge_columns = [
+            (table_name, column[1])
+            for (table_name,) in connection.execute(
+                "SELECT name FROM sqlite_master WHERE type = 'table'"
+            )
+            for column in connection.execute(f'PRAGMA table_info("{table_name}")')
+            if "BADGE" in column[1].upper()
+        ]
+        require_equal(
+            "badge columns",
+            badge_columns,
+            [],
+        )
+        exercise_columns = {
+            row[1] for row in connection.execute("PRAGMA table_info(ZEXERCISEITEM)")
+        }
+        require_equal(
+            "ExerciseItem removed fields",
+            exercise_columns.intersection({"ZSPORT", "ZSPORTS"}),
+            set(),
+        )
+        profile_columns = {
+            row[1] for row in connection.execute("PRAGMA table_info(ZPROFILE)")
+        }
+        require_equal(
+            "Profile removed fields",
+            profile_columns.intersection(
+                {"ZGOAL", "ZACTIVITYLEVEL", "ZSPORT", "ZSPORTS", "ZDIET", "ZDIETS"}
+            ),
+            set(),
+        )
+        diet_schema_objects = [
+            row[0]
+            for row in connection.execute(
+                "SELECT name FROM sqlite_master WHERE UPPER(name) LIKE '%DIET%'"
+            )
+        ]
+        require_equal("diet schema objects", diet_schema_objects, [])
         require_equal(
             "FoodItem count",
             scalar(connection, "SELECT COUNT(*) FROM ZFOODITEM"),
@@ -252,6 +481,11 @@ def audit_store(path: Path) -> dict[str, int]:
             len(compact_foods) - len({food["id"] for food in compact_foods}),
             0,
         )
+        require_equal(
+            "search payload diet fields",
+            sum("diets" in food for food in compact_foods),
+            0,
+        )
         profile_food_ids = {
             row[0]
             for row in connection.execute(
@@ -281,9 +515,9 @@ def audit_store(path: Path) -> dict[str, int]:
             EXPECTED["linkedFacetFoods"],
         )
         require_equal(
-            "all Ayurveda metadata food ids",
+            "direct and linked Ayurveda food ids",
             len(ayurveda_food_ids),
-            EXPECTED["metadataFoods"],
+            EXPECTED["profiles"] + EXPECTED["linkedFacetFoods"],
         )
         compact_by_id = {food["id"]: food for food in compact_foods}
         food_ages = {
@@ -373,7 +607,7 @@ def audit_store(path: Path) -> dict[str, int]:
         require_equal(
             "foods with Ayurveda metadata",
             set(metadata_by_id),
-            ayurveda_food_ids,
+            set(compact_by_id),
         )
         require_equal(
             "metadata facets differ from compact facets",
@@ -405,6 +639,15 @@ def audit_store(path: Path) -> dict[str, int]:
             sum(
                 metadata_by_id[food_id].get("sourceTier") != link_tiers[food_id]
                 for food_id in linked_only_food_ids
+            ),
+            0,
+        )
+        estimated_food_ids = set(compact_by_id) - ayurveda_food_ids
+        require_equal(
+            "estimated fallback metadata source tier mismatches",
+            sum(
+                metadata_by_id[food_id].get("sourceTier") != "estimated"
+                for food_id in estimated_food_ids
             ),
             0,
         )
@@ -440,6 +683,11 @@ def audit_store(path: Path) -> dict[str, int]:
             ),
             0,
         )
+        require_equal(
+            "removed category metadata fields",
+            sum("category" in metadata for metadata in metadata_by_id.values()),
+            0,
+        )
         faceted_food_ids = {
             food_id
             for food_id, food in compact_by_id.items()
@@ -448,7 +696,7 @@ def audit_store(path: Path) -> dict[str, int]:
         require_equal(
             "faceted compact foods",
             faceted_food_ids,
-            ayurveda_food_ids,
+            set(compact_by_id),
         )
         require_equal(
             "faceted compact food count",
@@ -469,7 +717,6 @@ def audit_store(path: Path) -> dict[str, int]:
             "digestibility",
             "season",
             "time",
-            "category",
             "concept",
         }
         invalid_facet_keys = {
@@ -478,6 +725,11 @@ def audit_store(path: Path) -> dict[str, int]:
             if ":" not in key or key.split(":", 1)[0] not in allowed_facet_kinds
         }
         require_equal("invalid Ayurveda facet keys", invalid_facet_keys, set())
+        require_equal(
+            "removed category facets",
+            {key for key in facet_index if key.startswith("category:")},
+            set(),
+        )
         expected_facet_index: dict[str, set[int]] = {}
         for food in compact_foods:
             for facet in food.get("ayurvedaFacets", []):
@@ -571,6 +823,7 @@ def main() -> int:
         compacted = temporary_root / "default.store"
         compressed = temporary_root / "preseeded_db.store.gz"
         compact_store(source, compacted)
+        add_estimated_search_fallbacks(compacted)
         audit = audit_store(compacted)
         deterministic_gzip(compacted, compressed)
         parts = write_parts(compressed, args.output_directory)

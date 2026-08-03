@@ -20,6 +20,30 @@ enum MP5Dosha: String, Codable, Sendable {
     case vata, pitta, kapha
 }
 
+struct MP5DoshaTarget: Codable, Equatable, Sendable {
+    let vata: Double
+    let pitta: Double
+    let kapha: Double
+
+    init(vata: Double, pitta: Double, kapha: Double) {
+        let values = [
+            max(0, vata.isFinite ? vata : 0),
+            max(0, pitta.isFinite ? pitta : 0),
+            max(0, kapha.isFinite ? kapha : 0),
+        ]
+        let total = values.reduce(0, +)
+        if total > 0 {
+            self.vata = values[0] / total
+            self.pitta = values[1] / total
+            self.kapha = values[2] / total
+        } else {
+            self.vata = 1.0 / 3.0
+            self.pitta = 1.0 / 3.0
+            self.kapha = 1.0 / 3.0
+        }
+    }
+}
+
 enum MP5Agni: String, Codable, Sendable {
     case balanced, irregular, sharp, slow
 }
@@ -134,19 +158,28 @@ struct MP5Candidate: Codable, Equatable, Sendable {
         case nil: return 0
         }
     }
+
+    func doshaFit(_ target: MP5DoshaTarget?) -> Double {
+        guard let target, tier != .estimated, tier != .none else {
+            return 0
+        }
+        return target.vata * Double(-doshaVata)
+            + target.pitta * Double(-doshaPitta)
+            + target.kapha * Double(-doshaKapha)
+    }
 }
 
 struct MP5SolverProfile: Codable, Equatable, Sendable {
     let dailyKcal: Double
     let dailyProteinTarget: Double
     let ageInMonths: Int
-    let diet: String
     let allergenConcepts: Set<String>
     let excludedFoodIDs: Set<Int>
     let dosha: MP5Dosha?
     let agni: MP5Agni
     let season: String?
     let enableAyurvedicScoring: Bool
+    var doshaTarget: MP5DoshaTarget? = nil
 }
 
 struct MP5MealSlot: Codable, Equatable, Sendable {
@@ -1016,9 +1049,7 @@ struct DeterministicMealPlanSolver {
         else {
             return false
         }
-        return candidate.concepts.isDisjoint(
-            with: dietExclusions(profile.diet)
-        )
+        return true
     }
 
     private func failingSafetyConstraint(
@@ -1027,29 +1058,7 @@ struct DeterministicMealPlanSolver {
         if !profile.allergenConcepts.isEmpty {
             return "allergen exclusions leave no safe candidate (\(profile.allergenConcepts.sorted().joined(separator: ", ")))"
         }
-        if !dietExclusions(profile.diet).isEmpty {
-            return "diet \(profile.diet) leaves no safe candidate"
-        }
         return "safety constraints leave no candidate"
-    }
-
-    private func dietExclusions(_ diet: String) -> Set<String> {
-        switch diet.lowercased() {
-        case "vegan":
-            return [
-                "dairy", "egg", "meat", "fish", "shellfish",
-                "crustacean", "mollusc", "honey"
-            ]
-        case "vegetarian":
-            return ["meat", "fish", "shellfish", "crustacean", "mollusc"]
-        case "jain_sattvic", "jain sattvic":
-            return [
-                "meat", "fish", "shellfish", "crustacean", "mollusc",
-                "allium"
-            ]
-        default:
-            return []
-        }
     }
 
     private func selectionScore(
@@ -1097,14 +1106,21 @@ struct DeterministicMealPlanSolver {
             break
         }
 
-        if profile.enableAyurvedicScoring, let dosha = profile.dosha {
+        if profile.enableAyurvedicScoring,
+           profile.doshaTarget != nil || profile.dosha != nil {
             let authority = weights.authority(
                 hasRasa: !candidate.rasa.isEmpty,
                 hasVipaka: candidate.hasVipaka,
                 hasVirya: candidate.hasVirya,
                 hasPrabhava: candidate.hasPrabhava
             )
-            score += Double(-candidate.doshaEffect(dosha)) * authority * 0.9
+            if let target = profile.doshaTarget {
+                score += candidate.doshaFit(target) * authority * 0.9
+            } else if let dosha = profile.dosha {
+                score += Double(-candidate.doshaEffect(dosha))
+                    * authority
+                    * 0.9
+            }
         }
         return score
     }
@@ -1123,10 +1139,21 @@ struct DeterministicMealPlanSolver {
             score -= proteinError * 4
             score += min(day.fiber / max(profile.dailyKcal / 100, 1), 1) * 2
         }
-        if profile.enableAyurvedicScoring, profile.dosha != nil {
-            let effects = plan.components.map(\.doshaEffect)
-            if !effects.isEmpty {
-                score -= Double(effects.reduce(0, +)) / Double(effects.count) * 8
+        if profile.enableAyurvedicScoring {
+            if let target = profile.doshaTarget {
+                let fits = plan.components.compactMap {
+                    candidatesByID[$0.foodID]
+                }.map { $0.doshaFit(target) }
+                if !fits.isEmpty {
+                    score += fits.reduce(0, +) / Double(fits.count) * 8
+                }
+            } else if profile.dosha != nil {
+                let effects = plan.components.map(\.doshaEffect)
+                if !effects.isEmpty {
+                    score -= Double(effects.reduce(0, +))
+                        / Double(effects.count)
+                        * 8
+                }
             }
         }
         score += Double(Set(plan.components.flatMap(\.rasa)).count) * 0.5

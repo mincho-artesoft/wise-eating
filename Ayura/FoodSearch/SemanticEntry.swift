@@ -9,7 +9,6 @@ struct SemanticEntry {
     enum Kind {
         case nutrient(NutrientType)
         case allergen(Allergen)
-        case diet(DietType)
         case op(Tokenizer.OpToken)
     }
 
@@ -47,19 +46,6 @@ final class SemanticLexicon {
         // --- Allergens (generic AllergenType level) ---
         for (phrase, allergenType) in kb.allergenMap {
             add(phrase, .allergen(allergenType))
-        }
-
-        // --- Diets ---
-        // Direct diet phrases mapped to DietType enum
-        for (phrase, dietType) in kb.dietMap {
-            add(phrase, .diet(dietType))
-        }
-
-        // Synonyms that resolve to DietType via their canonical string
-        for (synonym, canonicalName) in kb.dietSynonyms {
-            if let t = DietType.from(string: canonicalName) {
-                add(synonym, .diet(t))
-            }
         }
 
         // --- Operators: phrase → OpToken ---

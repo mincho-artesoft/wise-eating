@@ -15,7 +15,6 @@ public final class ExerciseItemCopy: Identifiable, Codable {
     public var gallery: [Data]?
     public var assetImageName: String?
     public var muscleGroups: [MuscleGroup]
-    public var sports: [Sport]?
     public var durationMinutes: Int?
     public var isWorkout: Bool
     public var exercises: [ExerciseLinkCopy]?
@@ -23,7 +22,7 @@ public final class ExerciseItemCopy: Identifiable, Codable {
     
     // CodingKeys to handle manual encoding/decoding if needed, especially for weak references.
     enum CodingKeys: String, CodingKey {
-        case originalID, name, exerciseDescription, videoURL, metValue, isUserAdded, isFavorite, photo, gallery, assetImageName, muscleGroups, sports, durationMinutes, isWorkout, exercises, minimalAgeMonths
+        case originalID, name, exerciseDescription, videoURL, metValue, isUserAdded, isFavorite, photo, gallery, assetImageName, muscleGroups, durationMinutes, isWorkout, exercises, minimalAgeMonths
     }
 
     // Full initializer
@@ -31,7 +30,7 @@ public final class ExerciseItemCopy: Identifiable, Codable {
         originalID: Int? = nil, name: String, exerciseDescription: String? = nil, videoURL: String? = nil,
         metValue: Double? = nil, isUserAdded: Bool = true, isFavorite: Bool = false,
         photo: Data? = nil, gallery: [Data]? = nil, assetImageName: String? = nil,
-        muscleGroups: [MuscleGroup], sports: [Sport]? = nil, durationMinutes: Int? = nil,
+        muscleGroups: [MuscleGroup], durationMinutes: Int? = nil,
         isWorkout: Bool = false, exercises: [ExerciseLinkCopy]? = nil, minimalAgeMonths: Int = 0
     ) {
         self.originalID = originalID
@@ -45,7 +44,6 @@ public final class ExerciseItemCopy: Identifiable, Codable {
         self.gallery = gallery
         self.assetImageName = assetImageName
         self.muscleGroups = muscleGroups
-        self.sports = sports
         self.durationMinutes = durationMinutes
         self.isWorkout = isWorkout
         self.exercises = exercises
@@ -66,7 +64,7 @@ public final class ExerciseItemCopy: Identifiable, Codable {
             originalID: src.id, name: src.name, exerciseDescription: src.exerciseDescription,
             videoURL: src.videoURL, metValue: src.metValue, isUserAdded: src.isUserAdded,
             isFavorite: src.isFavorite, photo: src.photo, gallery: src.gallery?.map(\.data),
-            assetImageName: src.assetImageName, muscleGroups: src.muscleGroups, sports: src.sports,
+            assetImageName: src.assetImageName, muscleGroups: src.muscleGroups,
             durationMinutes: src.durationMinutes, isWorkout: src.isWorkout,
             exercises: exerciseLinksCopy, minimalAgeMonths: src.minimalAgeMonths
         )
@@ -86,7 +84,6 @@ public final class ExerciseItemCopy: Identifiable, Codable {
                gallery: nil,
                assetImageName: nil,
                muscleGroups: [], // Ще се агрегира автоматично в редактора
-               sports: [],       // Ще се агрегира автоматично
                durationMinutes: dto.totalDurationMinutes,
                isWorkout: true,
                exercises: links,
@@ -106,7 +103,7 @@ public final class ExerciseItemCopy: Identifiable, Codable {
             originalID: copy.originalID, name: copy.name, exerciseDescription: copy.exerciseDescription,
             videoURL: copy.videoURL, metValue: copy.metValue, isUserAdded: copy.isUserAdded,
             isFavorite: copy.isFavorite, photo: copy.photo, gallery: copy.gallery,
-            assetImageName: copy.assetImageName, muscleGroups: copy.muscleGroups, sports: copy.sports,
+            assetImageName: copy.assetImageName, muscleGroups: copy.muscleGroups,
             durationMinutes: copy.durationMinutes, isWorkout: copy.isWorkout,
             exercises: copy.exercises, minimalAgeMonths: copy.minimalAgeMonths
         )
@@ -124,7 +121,6 @@ public final class ExerciseItemCopy: Identifiable, Codable {
             gallery: nil,
             assetImageName: nil,
             muscleGroups: dto.muscleGroups,
-            sports: dto.sports,
             durationMinutes: nil, // DTO-то не съдържа продължителност по подразбиране
             isWorkout: false, // Това е за единично упражнение, не за тренировка
             exercises: nil,

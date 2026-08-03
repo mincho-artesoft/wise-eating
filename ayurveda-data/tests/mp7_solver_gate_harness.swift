@@ -8,7 +8,6 @@ private struct CandidateWrapper: Decodable {
 private struct GateProfile: Decodable {
     let id: String
     let kcal: Int
-    let diet: String
     let agni: String
     let dosha: String?
     let allergens: [String]
@@ -267,7 +266,6 @@ private enum MP7SolverGateHarness {
             dailyKcal: Double(source.kcal),
             dailyProteinTarget: Double(source.kcal) * 0.04,
             ageInMonths: 360,
-            diet: source.diet,
             allergenConcepts: allergens,
             excludedFoodIDs: [],
             dosha: source.dosha.flatMap(MP5Dosha.init(rawValue:)),

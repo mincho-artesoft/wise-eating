@@ -11,7 +11,7 @@
   "labelInputs": [
     "food name",
     "row kind",
-    "FoodItem.category[0] or dravya.category",
+    "dravya classification when applicable",
     "recipe meal and structure when applicable"
   ],
   "cases": [
