@@ -78,13 +78,6 @@ struct AyurvedaDisplayCard: View {
         properties
       }
       warnings
-      if let caption = display.qualityCaption {
-        Text(caption)
-          .font(.caption)
-          .foregroundStyle(.secondary)
-          .fixedSize(horizontal: false, vertical: true)
-          .accessibilityLabel(caption)
-      }
     }
     .transaction { transaction in
       if reduceMotion {

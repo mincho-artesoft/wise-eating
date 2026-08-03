@@ -102,20 +102,15 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         glass_body = glass_chip[glass_chip.index("struct GlassChipView") :]
         self.assertNotIn(".lineLimit(", glass_body)
 
-    def test_warning_and_disclaimer_surfaces_remain_separate(self):
+    def test_warning_surface_remains_present(self):
         section = SECTION.read_text()
 
         warning_start = section.index("private struct AyurvedaDisplayWarningRow")
         warning_source = section[warning_start:]
         self.assertIn("AyurvedaWarning", warning_source)
         self.assertIn("display.contraindications.enumerated()", section)
-        self.assertIn("if let caption = display.qualityCaption", section)
-        self.assertLess(
-            section.index("if let caption = display.qualityCaption"),
-            warning_start,
-        )
 
-    def test_ai_draft_profile_renders_not_medical_advice_disclaimer(self):
+    def test_ai_draft_disclaimer_is_not_rendered(self):
         display = DISPLAY.read_text()
         section = SECTION.read_text()
         disclaimer = (
@@ -123,17 +118,9 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
             "Informational only — not medical advice."
         )
 
-        self.assertIn('if profile.qualityState == "aiDraft"', display)
-        self.assertIn(disclaimer, display)
-        self.assertIn(
-            "qualityCaption: qualityCaption(for: profile, tierLabel: tierLabel)",
-            display,
-        )
-
-        render_start = section.index("if let caption = display.qualityCaption")
-        render_source = section[render_start:]
-        self.assertIn("Text(caption)", render_source)
-        self.assertIn(".accessibilityLabel(caption)", render_source)
+        self.assertNotIn(disclaimer, display)
+        self.assertNotIn("qualityCaption", display)
+        self.assertNotIn("qualityCaption", section)
 
     def test_computed_tier_preview_renders_provenance_cue(self):
         editor = EDITOR.read_text()

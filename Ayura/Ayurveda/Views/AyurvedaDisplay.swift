@@ -86,7 +86,6 @@ struct AyurvedaDisplay: Sendable {
   let contraindications: [String]
   let engineExcluded: Bool
   let confidence: Double?
-  let qualityCaption: String?
   let sanskrit: String?
 
   static func make(from resolution: AyurvedaResolution) -> AyurvedaDisplay? {
@@ -153,7 +152,6 @@ struct AyurvedaDisplay: Sendable {
         contraindications: [],
         engineExcluded: false,
         confidence: resolution.confidence,
-        qualityCaption: "AI-drafted Ayurvedic details, pending expert review. Informational only — not medical advice.",
         sanskrit: nil
       )
     case .estimated(let estimate):
@@ -173,7 +171,6 @@ struct AyurvedaDisplay: Sendable {
         contraindications: [],
         engineExcluded: false,
         confidence: resolution.confidence,
-        qualityCaption: nil,
         sanskrit: nil
       )
     case .none:
@@ -211,21 +208,7 @@ struct AyurvedaDisplay: Sendable {
       contraindications: profile.contraindications,
       engineExcluded: profile.engineExcluded,
       confidence: confidence,
-      qualityCaption: qualityCaption(for: profile, tierLabel: tierLabel),
       sanskrit: profile.sanskrit
     )
-  }
-
-  private static func qualityCaption(
-    for profile: AyurvedaProfile,
-    tierLabel: String
-  ) -> String? {
-    guard tierLabel != "User" else {
-      return nil
-    }
-    if profile.qualityState == "aiDraft" {
-      return "AI-drafted Ayurvedic details, pending expert review. Informational only — not medical advice."
-    }
-    return nil
   }
 }
