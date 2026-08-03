@@ -250,11 +250,18 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
             constitution_view,
         )
 
-    def test_ayurveda_questions_use_colons_instead_of_ellipses(self):
+    def test_ayurveda_prompts_keep_shared_wording_with_question_marks(self):
         constitution_model = CONSTITUTION_MODEL.read_text()
 
         self.assertNotIn("…", constitution_model)
-        self.assertIn('"Your natural pace has usually been:"', constitution_model)
+        self.assertIn(
+            '"Your natural pace has usually been?"',
+            constitution_model,
+        )
+        self.assertIn(
+            '"Over the past week or two, your sleep has felt?"',
+            constitution_model,
+        )
 
     def test_profile_manager_does_not_render_current_pattern_section(self):
         constitution = CONSTITUTION.read_text()
