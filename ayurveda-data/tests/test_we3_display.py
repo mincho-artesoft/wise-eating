@@ -18,6 +18,7 @@ FOOD_ROW = ROOT / "Ayura/Food/Views/FoodItemRowView.swift"
 PROFILE_EDITOR = ROOT / "Ayura/Profile/Views/ProfileEditorView.swift"
 PROFILE_LIST = ROOT / "Ayura/Profile/Views/ProfileListView.swift"
 FOOD_LIST_VM = ROOT / "Ayura/Food/ViewModels/FoodListVM.swift"
+SETTINGS = ROOT / "Ayura/Settings/SettingsView.swift"
 
 
 class WE3DisplayTests(unittest.TestCase):
@@ -223,6 +224,12 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
             setup,
         )
         self.assertIn("if completesDirectly {\n      finish(draft)", setup)
+
+    def test_settings_does_not_duplicate_ayurveda_profile_editor(self):
+        settings = SETTINGS.read_text()
+
+        self.assertNotIn("AyurvedaConstitutionEditorButton", settings)
+        self.assertNotIn("userSettings", settings)
 
     def test_profile_manager_privacy_controls_are_not_rendered(self):
         constitution = CONSTITUTION.read_text()
