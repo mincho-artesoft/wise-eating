@@ -3,7 +3,7 @@ struct CompactFoodItem: Identifiable, Hashable, Sendable {
     let name: String
     let searchTokens: Set<String>
     let minAgeMonths: Int
-    let enforcedMinAgeMonths: Int
+    let enforcedMinAgeMonths: Int?
     let diets: Set<String>
     let allergens: Set<String>
     let ph: Double
@@ -11,6 +11,7 @@ struct CompactFoodItem: Identifiable, Hashable, Sendable {
     let isRecipe: Bool
     let isMenu: Bool
     let isFavorite: Bool
+    let isEdible: Bool
     /// Searchable facets and their underlying numeric/contextual metadata.
     let ayurvedaFacets: Set<String>
     let ayurvedaMetadata: AyurvedaCanonicalSearchMetadata?

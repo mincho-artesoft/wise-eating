@@ -84,6 +84,7 @@ struct AyurvedaDisplay: Sendable {
   let viruddha: [String]
   let contraindications: [String]
   let engineExcluded: Bool
+  let edible: Bool
   let confidence: Double?
   let qualityCaption: String?
   let sanskrit: String?
@@ -141,6 +142,7 @@ struct AyurvedaDisplay: Sendable {
         viruddha: [],
         contraindications: [],
         engineExcluded: false,
+        edible: true,
         confidence: resolution.confidence,
         qualityCaption: "AI-drafted Ayurvedic details, pending expert review. Informational only — not medical advice.",
         sanskrit: nil
@@ -160,6 +162,7 @@ struct AyurvedaDisplay: Sendable {
         viruddha: [],
         contraindications: [],
         engineExcluded: false,
+        edible: true,
         confidence: resolution.confidence,
         qualityCaption: nil,
         sanskrit: nil
@@ -197,6 +200,7 @@ struct AyurvedaDisplay: Sendable {
       viruddha: profile.viruddha,
       contraindications: profile.contraindications,
       engineExcluded: profile.engineExcluded,
+      edible: profile.edible,
       confidence: confidence,
       qualityCaption: qualityCaption(for: profile, tierLabel: tierLabel),
       sanskrit: profile.sanskrit

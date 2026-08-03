@@ -367,7 +367,9 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             clearResults()
             return
         }
-        let sorted = allFoods.sorted { $0.lowercasedName < $1.lowercasedName }
+        let sorted = allFoods
+            .filter(\.isEdible)
+            .sorted { $0.lowercasedName < $1.lowercasedName }
         fullResultIDs = sorted.map { $0.id }
         searchContext = SearchContext()
         isAyurvedaSearchActive = false
@@ -1070,6 +1072,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                     )
                 }
                 if excludedFoodIDs.contains(item.id) { continue }
+                if !item.isEdible { continue }
 
                 // Profiled foods must satisfy true facets. Unprofiled foods are
                 // deliberately retained so the UI can explain the coverage gap.
@@ -1095,7 +1098,9 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                     case .menus: if item.isMenu { continue }
                     case .nutrients, .mealPlans:
                         if let cons = profileConstraints {
-                            if Double(item.enforcedMinAgeMonths) > Double(cons.ageInMonths) { continue }
+                            guard let enforcedMinAgeMonths = item.enforcedMinAgeMonths
+                            else { continue }
+                            if Double(enforcedMinAgeMonths) > Double(cons.ageInMonths) { continue }
                             if !cons.requiredDiets.isEmpty {
                                 var meetsAll = true
                                 for d in cons.requiredDiets { if !item.fits(dietName: d) { meetsAll = false; break } }
@@ -1186,8 +1191,11 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                     if !meetsAll { continue }
                 }
                 if let uiDiet = intent.dietFilter, !item.fits(dietName: uiDiet.rawValue) { continue }
-                if let age = intent.targetConsumerAge,
-                   Double(item.enforcedMinAgeMonths) > age { continue }
+                if let age = intent.targetConsumerAge {
+                    guard let enforcedMinAgeMonths = item.enforcedMinAgeMonths
+                    else { continue }
+                    if Double(enforcedMinAgeMonths) > age { continue }
+                }
                 if intent.excludeAllAllergens && !item.allergens.isEmpty { continue }
                 
                 if !intent.allergenExclusions.isEmpty {

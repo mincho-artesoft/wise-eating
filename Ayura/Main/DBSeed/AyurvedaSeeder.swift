@@ -67,6 +67,9 @@ enum AyurvedaSeeder {
     do {
       let seed = try loadSeed()
       try validate(seed: seed)
+      let seedDravyaByID = Dictionary(
+        uniqueKeysWithValues: seed.dravyas.map { ($0.id, $0) }
+      )
 
       var result = RunResult()
       var existingProfiles = try context.fetch(FetchDescriptor<AyurvedaProfile>())
@@ -146,6 +149,9 @@ enum AyurvedaSeeder {
         ) {
           result.updatedSafetyFoods += 1
         }
+        if updateEdibilityMetadata(dravya, food: food) {
+          result.updatedSafetyFoods += 1
+        }
       }
 
       for dravya in seed.dravyas {
@@ -180,6 +186,16 @@ enum AyurvedaSeeder {
             )
           )
           result.insertedLinks += 1
+        }
+        guard let sourceDravya = seedDravyaByID[link.dravyaId],
+              let linkedFood = foodByID[link.fdcId] else {
+          throw AyurvedaSeederError.missingIngredientFood(
+            recipeId: link.dravyaId,
+            foodId: link.fdcId
+          )
+        }
+        if updateEdibilityMetadata(sourceDravya, food: linkedFood) {
+          result.updatedSafetyFoods += 1
         }
       }
 
@@ -587,6 +603,17 @@ enum AyurvedaSeeder {
     guard seed.recipes.allSatisfy({ !$0.ingredients.isEmpty }) else {
       throw AyurvedaSeederError.emptyRecipeIngredients
     }
+    let inedibleDravyas = seed.dravyas.filter { !$0.edible }
+    guard inedibleDravyas.count == 6,
+      inedibleDravyas.allSatisfy({
+        $0.engineExcluded
+          && ($0.inedibleReason?.isEmpty == false)
+          && !$0.servings.isEmpty
+      }),
+      seed.dravyas.filter(\.engineExcluded).count == 8
+    else {
+      throw AyurvedaSeederError.invalidSafetyMetadata
+    }
     let validNutritionStates = Set(["full", "estimated", "none"])
     guard seed.recipes.allSatisfy({
       validNutritionStates.contains($0.nutrition.status)
@@ -704,7 +731,11 @@ enum AyurvedaSeeder {
       return profile.kind == "dravya"
         && profile.foodId == dravya.foodId
         && profile.seedVersion >= seed.seedVersion
-        && foodByID[dravya.foodId] != nil
+        && profile.edible == dravya.edible
+        && profile.inedibleReason == dravya.inedibleReason
+        && foodByID[dravya.foodId].map {
+          edibilityMetadataMatches(dravya, food: $0)
+        } == true
     }
     guard dravyasAreCurrent else {
       return false
@@ -728,12 +759,20 @@ enum AyurvedaSeeder {
       return false
     }
 
+    let seedDravyaByID = Dictionary(
+      uniqueKeysWithValues: seed.dravyas.map { ($0.id, $0) }
+    )
     return seed.links.allSatisfy { link in
       guard let existing = linkByFdcID[link.fdcId] else {
         return false
       }
       return existing.dravyaProfileId == link.dravyaId
         && existing.tier == link.tier
+        && seedDravyaByID[link.dravyaId].map { dravya in
+          foodByID[link.fdcId].map {
+            edibilityMetadataMatches(dravya, food: $0)
+          } == true
+        } == true
     }
   }
 
@@ -814,6 +853,31 @@ enum AyurvedaSeeder {
     return true
   }
 
+  private static func edibilityMetadataMatches(
+    _ dravya: DravyaDTO,
+    food: FoodItem
+  ) -> Bool {
+    food.isEdible == dravya.edible
+      && food.inedibleReason == dravya.inedibleReason
+      && food.inedibleContraindications
+        == (dravya.edible ? [] : dravya.contraindications)
+  }
+
+  private static func updateEdibilityMetadata(
+    _ dravya: DravyaDTO,
+    food: FoodItem
+  ) -> Bool {
+    guard !edibilityMetadataMatches(dravya, food: food) else {
+      return false
+    }
+    food.isEdible = dravya.edible
+    food.inedibleReason = dravya.inedibleReason
+    food.inedibleContraindications = dravya.edible
+      ? []
+      : dravya.contraindications
+    return true
+  }
+
   private static func recipeFoodMetadataMatches(
     _ recipe: RecipeDTO,
     food: FoodItem
@@ -822,6 +886,9 @@ enum AyurvedaSeeder {
       && food.isRecipe
       && !food.isMenu
       && !food.isUserAdded
+      && food.isEdible
+      && food.inedibleReason == nil
+      && food.inedibleContraindications.isEmpty
       && food.prepTimeMinutes == recipe.prepMinutes + recipe.cookMinutes
       && food.itemDescription == recipeDescription(recipe)
   }
@@ -837,6 +904,9 @@ enum AyurvedaSeeder {
     food.isRecipe = true
     food.isMenu = false
     food.isUserAdded = false
+    food.isEdible = true
+    food.inedibleReason = nil
+    food.inedibleContraindications = []
     food.prepTimeMinutes = recipe.prepMinutes + recipe.cookMinutes
     food.itemDescription = recipeDescription(recipe)
     return true
@@ -929,6 +999,8 @@ enum AyurvedaSeeder {
     destination.qualityState = source.qualityState
     destination.reviewNote = source.reviewNote
     destination.engineExcluded = source.engineExcluded
+    destination.edible = source.edible
+    destination.inedibleReason = source.inedibleReason
     destination.seedVersion = source.seedVersion
     destination.sanskrit = source.sanskrit
     destination.aliases = source.aliases
@@ -984,6 +1056,8 @@ enum AyurvedaSeeder {
       qualityState: dravya.qualityState,
       reviewNote: dravya.reviewNote,
       engineExcluded: dravya.engineExcluded,
+      edible: dravya.edible,
+      inedibleReason: dravya.inedibleReason,
       seedVersion: seedVersion,
       sanskrit: dravya.sanskrit,
       aliases: dravya.aliases,
@@ -997,7 +1071,7 @@ enum AyurvedaSeeder {
       combinations: dravya.combinations,
       contraindications: dravya.contraindications,
       preparation: dravya.preparation,
-      servingsJSON: servingsJSON,
+      servingsJSON: dravya.edible ? servingsJSON : nil,
       meal: nil,
       servingsCount: nil,
       prepMinutes: nil,
@@ -1047,6 +1121,8 @@ enum AyurvedaSeeder {
       qualityState: recipe.qualityState,
       reviewNote: recipe.reviewNote,
       engineExcluded: false,
+      edible: true,
+      inedibleReason: nil,
       seedVersion: seedVersion,
       sanskrit: nil,
       aliases: [],
@@ -1262,6 +1338,8 @@ private struct DravyaDTO: Decodable {
   let sanskrit: String?
   let aliases: [String]
   let category: String
+  let edible: Bool
+  let inedibleReason: String?
   let rasa: [String]
   let virya: String?
   let vipaka: String?
@@ -1291,6 +1369,8 @@ private struct RecipeIngredientDTO: Decodable {
   let foodId: Int
   let grams: Double
   let name: String
+  let portioned: Bool?
+  let contraindications: [String]?
 }
 
 private struct RecipeDTO: Decodable {

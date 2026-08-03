@@ -411,6 +411,8 @@
       "sanskrit": "Eranda Taila",
       "aliases": ["arandi ka tel"],
       "category": "oil-fat",
+      "edible": false,
+      "inedibleReason": "stimulant laxative — a drug dose, not a cooking oil",
       "rasa": ["sweet", "pungent", "astringent"],
       "virya": "heating",
       "vipaka": "sweet",

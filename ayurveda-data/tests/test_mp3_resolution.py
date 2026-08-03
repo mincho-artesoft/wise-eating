@@ -66,7 +66,7 @@ class MP3DeterministicResolutionTests(unittest.TestCase):
             payload_data = connection.execute(
                 """
                 SELECT ZPAYLOADDATA FROM ZSEARCHINDEXCACHE
-                WHERE ZKEY = 'main' AND ZVERSION = 7
+                WHERE ZKEY = 'main' AND ZVERSION = 9
                 """
             ).fetchone()[0]
             profile_rows = connection.execute(
@@ -546,8 +546,8 @@ struct MP3ResolutionHarness {
             ["unicorn steak", "xyzzy", ""],
         )
         self.assertEqual(self.catalog_count, TARGET_FOODS)
-        self.assertEqual(self.excluded_count, 2)
-        self.assertEqual(self.candidate_count, TARGET_FOODS - 2)
+        self.assertEqual(self.excluded_count, 8)
+        self.assertEqual(self.candidate_count, TARGET_FOODS - 8)
 
     def test_required_scorer_properties(self):
         result = subprocess.run(

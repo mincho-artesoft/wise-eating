@@ -202,7 +202,8 @@ class WE8CAgeDerivationTests(unittest.TestCase):
         self.assertIn("public var ageProvenance: String?", model)
         self.assertIn("public var ageSource: String?", model)
         self.assertIn(
-            'food.minAgeMonths > 0 && food.ageProvenance != "legacyImport"',
+            'food.isEdible\n            && food.minAgeMonths > 0\n'
+            '            && food.ageProvenance != "legacyImport"',
             detail,
         )
         self.assertEqual(detail.count("if shouldDisplayMinimumAge"), 2)
@@ -348,8 +349,8 @@ class WE8CPreseedAgeTests(unittest.TestCase):
                 profile["id"],
             )
             self.assertEqual(
-                compact["enforcedMinAgeMonths"],
-                safety["enforcedMinAgeMonths"],
+                compact.get("enforcedMinAgeMonths"),
+                safety["enforcedMinAgeMonths"] if profile["edible"] else None,
                 profile["id"],
             )
 

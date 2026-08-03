@@ -85,6 +85,7 @@ struct AyurvedaProfile {
   let viruddha: [String]
   let contraindications: [String]
   let engineExcluded: Bool
+  let edible: Bool
   let qualityState: String
   let sanskrit: String?
 }
@@ -249,6 +250,7 @@ struct WE3SnapshotApp: App {
         "Pregnancy (traditional caution).",
       ],
       engineExcluded: false,
+      edible: true,
       confidence: 0.75,
       qualityCaption: "AI-drafted Ayurvedic details, pending expert review. Informational only — not medical advice.",
       sanskrit: nil

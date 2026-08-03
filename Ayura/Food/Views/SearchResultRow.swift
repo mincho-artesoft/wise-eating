@@ -83,7 +83,7 @@ struct SearchResultRow: View {
                                 
                                 // Badges
                                 VStack(alignment: .trailing, spacing: 4) {
-                                    if item.minAgeMonths >= 0 {
+                                    if item.isEdible && item.minAgeMonths >= 0 {
                                         let ageText = item.minAgeMonths <= 48
                                         ? "\(item.minAgeMonths)m+"
                                         : "\(item.minAgeMonths / 12)y+"

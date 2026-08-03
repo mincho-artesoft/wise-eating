@@ -186,7 +186,7 @@ struct ParserHarness {
         self.assert_parse("virya:frothy tomato", "virya:frothy tomato", [])
         self.assert_parse("grains", "grains", [])
 
-    def test_prebuilt_index_matches_v7_canonical_and_linked_projection(self):
+    def test_prebuilt_index_matches_v9_canonical_and_linked_projection(self):
         combined = self.temporary_root / "preseeded_db.store.gz"
         store = self.temporary_root / "preseeded_db.store"
         with combined.open("wb") as destination:
@@ -204,7 +204,7 @@ struct ParserHarness {
                 """
             ).fetchone()
         version, food_count, payload_data = row
-        self.assertEqual((version, food_count), (7, TARGET_FOODS))
+        self.assertEqual((version, food_count), (9, TARGET_FOODS))
         payload = json.loads(payload_data)
         compact_by_id = {food["id"]: food for food in payload["compactFoods"]}
 
@@ -255,7 +255,7 @@ struct ParserHarness {
     def test_engine_uses_index_intersection_and_exact_title_escape_hatch(self):
         engine = SEARCH_ENGINE.read_text(encoding="utf-8")
         index_store = INDEX_STORE.read_text(encoding="utf-8")
-        self.assertIn("currentIndexVersion: Int = 7", index_store)
+        self.assertIn("currentIndexVersion: Int = 9", index_store)
         self.assertIn("ayurvedaFacetIndex", index_store)
         self.assertIn("if let ayurveda = item.ayurvedaMetadata", engine)
         self.assertIn("AyurvedaSearchRanker.matches(", engine)

@@ -63,17 +63,21 @@ struct AyurvedaDisplayCard: View {
       if display.engineExcluded {
         AyurvedaDisplayWarningRow(
           title: "Health warning",
-          text: "Traditional sources and modern evidence advise against consuming this. Shown for reference only — never recommended.",
+          text: display.edible
+            ? "Traditional sources and modern evidence advise against consuming this. Shown for reference only — never recommended."
+            : "Not available as food. Shown for reference only — no serving or recommendation is provided.",
           tone: .warning
         )
       }
-      DoshaBarsView(
-        vata: display.vata,
-        pitta: display.pitta,
-        kapha: display.kapha
-      )
-      if !propertyGroups.isEmpty {
-        properties
+      if display.edible {
+        DoshaBarsView(
+          vata: display.vata,
+          pitta: display.pitta,
+          kapha: display.kapha
+        )
+        if !propertyGroups.isEmpty {
+          properties
+        }
       }
       warnings
       if let caption = display.qualityCaption {

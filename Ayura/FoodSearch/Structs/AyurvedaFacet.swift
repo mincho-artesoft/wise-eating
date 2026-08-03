@@ -108,7 +108,9 @@ struct AyurvedaFacet: Hashable, Sendable {
             }
             result[profile.foodId] = AyurvedaCanonicalSearchMetadata(
                 profile: profile,
-                enforcedMinAgeMonths: profile.safety.enforcedMinAgeMonths,
+                enforcedMinAgeMonths: profile.edible
+                    ? profile.safety.enforcedMinAgeMonths
+                    : nil,
                 sourceTier: nil
             )
         }
@@ -122,7 +124,9 @@ struct AyurvedaFacet: Hashable, Sendable {
             }
             result[link.fdcId] = AyurvedaCanonicalSearchMetadata(
                 profile: profile,
-                enforcedMinAgeMonths: profile.safety.enforcedMinAgeMonths,
+                enforcedMinAgeMonths: profile.edible
+                    ? profile.safety.enforcedMinAgeMonths
+                    : nil,
                 sourceTier: link.tier
             )
         }
@@ -301,6 +305,7 @@ private struct AyurvedaFacetSeedProfile: Decodable {
     let id: String
     let name: String
     let category: String
+    let edible: Bool
     let dosha: Dosha
     let seasons: [String]
     let timeOfDay: [String]
@@ -344,6 +349,7 @@ struct AyurvedaCanonicalSearchMetadata: Codable, Hashable, Sendable {
     let seasons: [String]
     let timeOfDay: [String]
     let category: String
+    let edible: Bool
     let prabhava: String?
     let contraindications: [String]
     let confidenceAyur: Double
@@ -386,6 +392,7 @@ struct AyurvedaCanonicalSearchMetadata: Codable, Hashable, Sendable {
             seasons: profile.seasons,
             timeOfDay: profile.timeOfDay,
             category: profile.category,
+            edible: profile.edible,
             prabhava: profile.prabhava,
             contraindications: profile.contraindications,
             confidenceAyur: profile.confidenceAyur
@@ -413,6 +420,7 @@ struct AyurvedaCanonicalSearchMetadata: Codable, Hashable, Sendable {
             seasons: profile.seasons,
             timeOfDay: profile.timeOfDay,
             category: profile.category,
+            edible: profile.edible,
             prabhava: profile.prabhava,
             contraindications: profile.contraindications ?? [],
             confidenceAyur: profile.confidence.ayur
@@ -435,6 +443,7 @@ struct AyurvedaCanonicalSearchMetadata: Codable, Hashable, Sendable {
         seasons: [String],
         timeOfDay: [String],
         category: String,
+        edible: Bool,
         prabhava: String?,
         contraindications: [String],
         confidenceAyur: Double
@@ -454,6 +463,7 @@ struct AyurvedaCanonicalSearchMetadata: Codable, Hashable, Sendable {
         self.seasons = seasons
         self.timeOfDay = timeOfDay
         self.category = category
+        self.edible = edible
         self.prabhava = prabhava
         self.contraindications = contraindications
         self.confidenceAyur = confidenceAyur
@@ -503,6 +513,7 @@ struct AyurvedaCanonicalSearchMetadata: Codable, Hashable, Sendable {
             seasons: seasons,
             timeOfDay: timeOfDay,
             category: category,
+            edible: edible,
             prabhava: prabhava,
             contraindications: contraindications,
             confidenceAyur: max(confidenceAyur - 0.15, 0.1)

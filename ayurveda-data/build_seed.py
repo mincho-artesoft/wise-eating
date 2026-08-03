@@ -16,7 +16,7 @@ from pathlib import Path
 from typing import Any
 
 
-SEED_VERSION = 6
+SEED_VERSION = 7
 GENERATED_AT = "2026-07-25T00:00:00Z"
 TARGET_FOODS = 14_489
 TARGET_PROFILES = 2_217
@@ -35,7 +35,16 @@ EXPECTED_COUNTS = {
     "modifiers": 14,
 }
 V1_LINK_COUNT = 370
-ENGINE_EXCLUDED_IDS = {"dravya.betel-nut", "dravya.vanaspati"}
+ENGINE_EXCLUDED_IDS = {
+    "dravya.alkanet-root",
+    "dravya.betel-nut",
+    "dravya.camphor-edible",
+    "dravya.castor-oil",
+    "dravya.edible-lime",
+    "dravya.kaunch-beej",
+    "dravya.shilajit",
+    "dravya.vanaspati",
+}
 PLACEHOLDER_BASE = 900_000
 RECIPE_BASE = 1_000_000
 RESERVED_BAND_END = 1_002_000
@@ -509,6 +518,40 @@ WEANING_AGE_SOURCE = (
 
 class BuildError(RuntimeError):
     """Raised when source data cannot produce the approved seed layout."""
+
+
+def dravya_edibility(dravya: dict[str, Any]) -> tuple[bool, str | None]:
+    """Return the explicit projection, with omitted `edible` meaning true."""
+    edible = dravya.get("edible", True)
+    inedible_reason = dravya.get("inedibleReason")
+    dravya_id = dravya.get("id", "<unknown>")
+    if not isinstance(edible, bool):
+        raise BuildError(f"{dravya_id}: edible must be a boolean")
+    if not edible and (
+        not isinstance(inedible_reason, str) or not inedible_reason.strip()
+    ):
+        raise BuildError(f"{dravya_id}: edible false requires inedibleReason")
+    if edible and inedible_reason is not None:
+        raise BuildError(f"{dravya_id}: edible true must not carry inedibleReason")
+    return edible, inedible_reason if not edible else None
+
+
+def ingredient_presentation_metadata(
+    ingredient: dict[str, Any],
+    dravya_by_id: dict[str, dict[str, Any]],
+) -> dict[str, Any]:
+    """Describe an inedible recipe reference without changing nutrition grams."""
+    dravya_id = ingredient.get("dravyaId")
+    if dravya_id is None:
+        return {}
+    dravya = dravya_by_id[dravya_id]
+    edible, _reason = dravya_edibility(dravya)
+    if edible:
+        return {}
+    return {
+        "portioned": False,
+        "contraindications": list(dravya.get("contraindications", [])),
+    }
 
 
 def parse_args() -> argparse.Namespace:
@@ -3062,8 +3105,12 @@ def build_envelope(
 
     output_dravyas: list[dict[str, Any]] = []
     dravya_safety: dict[str, dict[str, Any]] = {}
+    dravya_by_id = {dravya["id"]: dravya for dravya in dravyas}
     for dravya in sorted(dravyas, key=lambda item: item["id"]):
         output = dict(dravya)
+        edible, inedible_reason = dravya_edibility(dravya)
+        output["edible"] = edible
+        output["inedibleReason"] = inedible_reason if not edible else None
         output["foodId"], output["foodIsPlaceholder"] = assignments[dravya["id"]]
         output["engineExcluded"] = dravya["id"] in ENGINE_EXCLUDED_IDS
         output["safety"] = derive_dravya_safety(
@@ -3075,10 +3122,24 @@ def build_envelope(
         dravya_safety[dravya["id"]] = output["safety"]
         output_dravyas.append(output)
 
+    inedible_ids = {
+        item["id"] for item in output_dravyas if item["edible"] is False
+    }
+    expected_inedible_ids = ENGINE_EXCLUDED_IDS - {
+        "dravya.betel-nut",
+        "dravya.vanaspati",
+    }
+    if inedible_ids != expected_inedible_ids:
+        raise BuildError(
+            "edibility gate failed: expected "
+            f"{sorted(expected_inedible_ids)}, got {sorted(inedible_ids)}"
+        )
+
     output_recipes: list[dict[str, Any]] = []
     unresolved: list[str] = []
     for ordinal, recipe in enumerate(sorted(recipes, key=lambda item: item["id"]), start=1):
         output = dict(recipe)
+        output["edible"] = True
         output["foodId"] = RECIPE_BASE + ordinal
         nutrition, nutrition_source_ids = derive_recipe_nutrition(
             recipe, nutrition_by_id, preferred_bindings
@@ -3104,6 +3165,9 @@ def build_envelope(
                 "grams": ingredient["grams"],
                 "name": ingredient["name"],
             }
+            resolved.update(
+                ingredient_presentation_metadata(ingredient, dravya_by_id)
+            )
             if nutrition_source_id is not None:
                 resolved["nutritionFdcId"] = nutrition_source_id
             resolved_ingredients.append(resolved)
@@ -3134,7 +3198,10 @@ def build_envelope(
     if actual_counts != EXPECTED_COUNTS:
         raise BuildError(f"director count gate failed: expected {EXPECTED_COUNTS}, got {actual_counts}")
     if excluded_count != len(ENGINE_EXCLUDED_IDS):
-        raise BuildError(f"engine exclusion gate failed: expected 2, got {excluded_count}")
+        raise BuildError(
+            "engine exclusion gate failed: "
+            f"expected {len(ENGINE_EXCLUDED_IDS)}, got {excluded_count}"
+        )
     # 40 before the duplicate-dravya merge: dravya.apricot-fresh and
     # dravya.garlic-fresh-bulb each contested a row they were the twin of, and
     # both were merged into their survivor, so those two contests no longer exist.

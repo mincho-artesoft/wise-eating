@@ -335,6 +335,8 @@
       "sanskrit": "Kapikacchu",
       "aliases": [],
       "category": "medicinal",
+      "edible": false,
+      "inedibleReason": "pharmacologically active L-DOPA seed — requires processing and dosing, not a food",
       "rasa": ["sweet", "bitter"],
       "virya": "heating",
       "vipaka": "sweet",

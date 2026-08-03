@@ -460,8 +460,11 @@ def d34_validate(here, store, errs):
     except Exception as error:
         errs.append(f"D34/ayurveda_seed.json.gz: cannot read: {error}")
         return
-    if seed.get("seedVersion") != 6:
-        errs.append(f"D34/seed: expected seedVersion 6, got {seed.get('seedVersion')}")
+    if seed.get("seedVersion") != build_seed.SEED_VERSION:
+        errs.append(
+            "D34/seed: expected seedVersion "
+            f"{build_seed.SEED_VERSION}, got {seed.get('seedVersion')}"
+        )
     counts = seed.get("counts", {})
     expected_counts = {
         "dravyas": 706,
@@ -788,6 +791,15 @@ def main():
                 errs.append(f"{b}/{i}: invalid guna {set(it['gunas']) - GUNA}")
             if it.get("category") not in CATEGORY:
                 errs.append(f"{b}/{i}: invalid category {it.get('category')}")
+            edible = it.get("edible", True)
+            inedible_reason = it.get("inedibleReason")
+            if not isinstance(edible, bool):
+                errs.append(f"{b}/{i}: edible must be a boolean")
+            if edible is False:
+                if not isinstance(inedible_reason, str) or not inedible_reason.strip():
+                    errs.append(f"{b}/{i}: edible false requires inedibleReason")
+            elif inedible_reason is not None:
+                errs.append(f"{b}/{i}: edible true must not carry inedibleReason")
             for k, v in it.get("dosha", {}).items():
                 if k not in ("vata", "pitta", "kapha") or not -2 <= v <= 2:
                     errs.append(f"{b}/{i}: bad dosha {k}={v}")

@@ -32,6 +32,10 @@ public final class FoodItem: Identifiable {
     public var isMenu: Bool = false
     public var isUserAdded: Bool = true
     public var isFavorite: Bool = false
+    /// False only for catalogue substances that are not eaten as a portion.
+    public var isEdible: Bool = true
+    public var inedibleReason: String?
+    public var inedibleContraindications: [String] = []
 
     // MARK: – Tags
     @Relationship(deleteRule: .nullify)
@@ -129,6 +133,9 @@ public final class FoodItem: Identifiable {
         isRecipe: Bool = false,
         isMenu: Bool = false,
         isUserAdded: Bool = true,
+        isEdible: Bool = true,
+        inedibleReason: String? = nil,
+        inedibleContraindications: [String] = [],
         diets: [Diet]? = nil,
         allergens: [Allergen]? = nil,
         photo: Data? = nil,
@@ -154,6 +161,9 @@ public final class FoodItem: Identifiable {
         self.isRecipe = isRecipe
         self.isMenu = isMenu
         self.isUserAdded = isUserAdded
+        self.isEdible = isEdible
+        self.inedibleReason = inedibleReason
+        self.inedibleContraindications = inedibleContraindications
         self.diets = diets ?? []
         self.allergens = allergens ?? []
         self.photo = photo

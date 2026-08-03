@@ -497,7 +497,7 @@ private struct FoodRowView: View {
                 Spacer()
                 
                 // Възрастова група
-                if food.minAgeMonths >= 0 {
+                if food.isEdible && food.minAgeMonths >= 0 {
                     let ageText = food.minAgeMonths >= 12
                         ? "\(food.minAgeMonths / 12)y+"
                         : "\(food.minAgeMonths)m+"
