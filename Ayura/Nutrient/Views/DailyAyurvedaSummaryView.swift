@@ -175,6 +175,7 @@ struct DailyAyurvedaDetailView: View {
     let date: Date
     let profileName: String
     let computation: AyurvedaIngredientComputation
+    let profileResult: AyurvedaConstitutionResult?
     let target: AyurvedaDoshaDistribution?
     let meals: [DailyAyurvedaMealSummary]
     let onDismiss: () -> Void
@@ -185,11 +186,13 @@ struct DailyAyurvedaDetailView: View {
 
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 16) {
-                    selectedSummaryCard
+                    profileConstitutionCard
 
                     if !meals.isEmpty {
                         mealSelector
                     }
+
+                    selectedSummaryCard
 
                     Spacer(minLength: 150)
                 }
@@ -229,6 +232,27 @@ struct DailyAyurvedaDetailView: View {
         .foregroundStyle(effectManager.currentGlobalAccentColor)
         .padding(.horizontal)
         .padding(.bottom, 10)
+    }
+
+    @ViewBuilder
+    private var profileConstitutionCard: some View {
+        if let profileResult {
+            AyurvedaConstitutionResultSummary(
+                result: profileResult,
+                source: .selfDeclared,
+                showsContextLabels: false
+            )
+        } else {
+            Label(
+                "Create an Ayurvedic profile for \(profileName) to see personal fit.",
+                systemImage: "person.crop.circle.badge.questionmark"
+            )
+            .font(.subheadline)
+            .foregroundStyle(effectManager.currentGlobalAccentColor)
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .glassCardStyle(cornerRadius: 20)
+        }
     }
 
     private var selectedSummaryCard: some View {
@@ -311,29 +335,17 @@ struct DailyAyurvedaDetailView: View {
     }
 
     private var mealSelector: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("Show")
-                .font(.headline)
-                .foregroundStyle(effectManager.currentGlobalAccentColor)
-
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 8) {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(meals) { meal in
                     scopeChip(
-                        title: "Whole day",
-                        systemImage: "calendar",
-                        mealID: nil
+                        title: meal.name,
+                        systemImage: "fork.knife",
+                        mealID: meal.id
                     )
-
-                    ForEach(meals) { meal in
-                        scopeChip(
-                            title: meal.name,
-                            systemImage: "fork.knife",
-                            mealID: meal.id
-                        )
-                    }
                 }
-                .padding(.vertical, 2)
             }
+            .padding(.vertical, 2)
         }
     }
 
@@ -350,7 +362,7 @@ struct DailyAyurvedaDetailView: View {
             isSelected: selectedMealID == mealID,
             action: {
                 withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
-                    selectedMealID = mealID
+                    selectedMealID = selectedMealID == mealID ? nil : mealID
                 }
             }
         )

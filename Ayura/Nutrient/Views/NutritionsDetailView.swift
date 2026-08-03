@@ -101,6 +101,7 @@ struct NutritionsDetailView: View {
     @State private var showingRingDetail: RingDetailType? = nil
     @State private var ringDetailMenuState: MenuState = .collapsed
     @State private var dailyAyurvedaComputation: AyurvedaIngredientComputation = .empty
+    @State private var dailyAyurvedaProfileResult: AyurvedaConstitutionResult?
     @State private var dailyAyurvedaTarget: AyurvedaDoshaDistribution?
     @State private var dailyAyurvedaMeals: [DailyAyurvedaMealSummary] = []
     @State private var dailyAyurvedaRefreshTask: Task<Void, Never>?
@@ -2400,6 +2401,7 @@ struct NutritionsDetailView: View {
             date: chosenDate,
             profileName: profile.name,
             computation: dailyAyurvedaComputation,
+            profileResult: dailyAyurvedaProfileResult,
             target: dailyAyurvedaTarget,
             meals: dailyAyurvedaMeals,
             onDismiss: dismissRingDetail
@@ -2418,9 +2420,9 @@ struct NutritionsDetailView: View {
     }
 
     private func refreshDailyAyurvedaSummary() {
-        dailyAyurvedaTarget = AyurvedaConstitutionStore
-            .record(for: profile.id)?
-            .target(at: chosenDate)
+        let constitutionRecord = AyurvedaConstitutionStore.record(for: profile.id)
+        dailyAyurvedaProfileResult = constitutionRecord?.result
+        dailyAyurvedaTarget = constitutionRecord?.target(at: chosenDate)
 
         let ingredients: [AyurvedaIngredientAmount] = allConsumedFoods.compactMap {
             entry in

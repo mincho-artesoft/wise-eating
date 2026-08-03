@@ -358,7 +358,12 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         self.assertIn('Text("Fit for \\(profileName)")', summary)
 
         self.assertIn(
-            ".record(for: profile.id)?\n            .target(at: chosenDate)",
+            "let constitutionRecord = "
+            "AyurvedaConstitutionStore.record(for: profile.id)",
+            nutrition_detail,
+        )
+        self.assertIn(
+            "dailyAyurvedaTarget = constitutionRecord?.target(at: chosenDate)",
             nutrition_detail,
         )
         self.assertIn(
@@ -402,9 +407,30 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
 
         self.assertIn("@State private var selectedMealID: UUID?", detail)
         self.assertIn("selectedSummaryCard", detail)
+        self.assertIn("profileConstitutionCard", detail)
+        self.assertIn("AyurvedaConstitutionResultSummary(", detail)
+        self.assertIn("let profileResult: AyurvedaConstitutionResult?", detail)
+        self.assertIn("if let profileResult", detail)
+        self.assertIn("result: profileResult", detail)
+        self.assertIn(
+            "dailyAyurvedaProfileResult = constitutionRecord?.result",
+            nutrition_detail,
+        )
         self.assertIn("if !meals.isEmpty {\n                        mealSelector", detail)
-        self.assertIn('title: "Whole day"', detail)
+        self.assertLess(
+            detail.index("profileConstitutionCard"),
+            detail.index("mealSelector"),
+        )
+        self.assertLess(
+            detail.index("mealSelector"),
+            detail.index("selectedSummaryCard", detail.index("mealSelector")),
+        )
+        self.assertNotIn('title: "Whole day"', detail)
         self.assertIn("ForEach(meals)", detail)
+        self.assertIn(
+            "selectedMealID = selectedMealID == mealID ? nil : mealID",
+            detail,
+        )
         self.assertIn("return meal.computation", detail)
         self.assertNotIn("mealBreakdown", detail)
         self.assertNotIn('Text("By Meal")', detail)
