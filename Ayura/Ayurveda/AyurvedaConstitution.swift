@@ -74,9 +74,9 @@ enum AyurvedaConstitutionSource: String, Codable, Sendable {
   case selfDeclared
   case questionnaire
 
-  var displayName: String {
+  var displayName: String? {
     switch self {
-    case .selfDeclared: "Chosen by you"
+    case .selfDeclared: nil
     case .questionnaire: "From the 12-question profile"
     }
   }

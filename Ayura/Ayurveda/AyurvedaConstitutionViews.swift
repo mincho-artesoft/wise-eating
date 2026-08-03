@@ -639,8 +639,8 @@ struct AyurvedaConstitutionResultSummary: View {
           .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.76))
       }
 
-      if showsContextLabels {
-        Text(source.displayName)
+      if showsContextLabels, let sourceName = source.displayName {
+        Text(sourceName)
           .font(.caption)
           .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.68))
       }

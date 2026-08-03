@@ -209,6 +209,19 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         self.assertNotIn("Delete complete Ayurvedic profile", constitution)
         self.assertNotIn("isShowingDeleteConfirmation", constitution)
 
+    def test_self_declared_result_has_no_chosen_by_you_caption(self):
+        constitution_model = (
+            ROOT / "Ayura/Ayurveda/AyurvedaConstitution.swift"
+        ).read_text()
+        constitution_view = CONSTITUTION.read_text()
+
+        self.assertNotIn("Chosen by you", constitution_model)
+        self.assertIn("case .selfDeclared: nil", constitution_model)
+        self.assertIn(
+            "if showsContextLabels, let sourceName = source.displayName",
+            constitution_view,
+        )
+
     def test_main_profile_deletion_removes_ayurveda_data(self):
         profile_list = PROFILE_LIST.read_text()
         deletion = profile_list[
