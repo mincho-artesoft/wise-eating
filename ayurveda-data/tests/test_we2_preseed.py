@@ -56,7 +56,7 @@ class PreseedArtifactTests(unittest.TestCase):
                 "nutritionFull": TARGET["nutritionFull"],
                 "nutritionEstimated": TARGET["nutritionEstimated"],
                 "cacheFoods": TARGET["cacheFoods"],
-                "cacheVersion": 10,
+                "cacheVersion": 11,
                 "facetFoods": TARGET["foods"],
                 "metadataFoods": TARGET["foods"],
                 "linkedFacetFoods": 2_007,
@@ -223,7 +223,7 @@ class PreseedArtifactTests(unittest.TestCase):
             """
         ).fetchone()
         self.assertEqual(cache_count, food_count)
-        self.assertEqual(version, 10)
+        self.assertEqual(version, 11)
         decoded = json.loads(payload)
         self.assertEqual(len(decoded["compactFoods"]), food_count)
         self.assertTrue(

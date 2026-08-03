@@ -31,7 +31,7 @@ TARGET_EXPECTED = {
     "nutritionEstimated": 3,
     "links": TARGET_AYURVEDA_LINKS,
     "cacheFoods": TARGET_FOODS,
-    "cacheVersion": 10,
+    "cacheVersion": 11,
     "facetFoods": TARGET_FOODS,
     "metadataFoods": TARGET_FOODS,
     "linkedFacetFoods": 2_007,

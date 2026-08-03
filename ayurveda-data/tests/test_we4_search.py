@@ -208,7 +208,7 @@ struct ParserHarness {
                 """
             ).fetchone()
         version, food_count, payload_data = row
-        self.assertEqual((version, food_count), (10, TARGET_FOODS))
+        self.assertEqual((version, food_count), (11, TARGET_FOODS))
         payload = json.loads(payload_data)
         compact_by_id = {food["id"]: food for food in payload["compactFoods"]}
 

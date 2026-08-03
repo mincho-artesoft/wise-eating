@@ -66,7 +66,7 @@ class MP3DeterministicResolutionTests(unittest.TestCase):
             payload_data = connection.execute(
                 """
                 SELECT ZPAYLOADDATA FROM ZSEARCHINDEXCACHE
-                WHERE ZKEY = 'main' AND ZVERSION = 10
+                WHERE ZKEY = 'main' AND ZVERSION = 11
                 """
             ).fetchone()[0]
             profile_rows = connection.execute(

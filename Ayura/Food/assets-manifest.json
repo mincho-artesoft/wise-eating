@@ -67,21 +67,21 @@
         },
         {
             "filename": "Ayura/preseeded_db.store.gz.part-aa",
-            "sha256": "eafdffae20ca844d4c3d08c35ef98c58d91cd51478a47ae2f8e45f0f5a16281d",
+            "sha256": "55d646cd23879e260b285b13ae3b72ed84c2407e556be635928d5b72427d14cb",
             "byteSize": 73400320,
             "frameCount": null,
             "restoredFilename": "Ayura/preseeded_db.store",
-            "restoredSha256": "5b862d121bb8e54a03811fd21ac10ab68fba3bb131b75b53516bb059f53d1d5b",
-            "restoredByteSize": 269402112
+            "restoredSha256": "af4cfcdd2693c7e2bd13fa5e40c28c021a730a52516972f459fb3884f82ddee3",
+            "restoredByteSize": 233627648
         },
         {
             "filename": "Ayura/preseeded_db.store.gz.part-ab",
-            "sha256": "41b9cc1b2a37f1488a7f7f108fe17262e04eb005994fbe2ff54e64683f9c84dd",
-            "byteSize": 24511684,
+            "sha256": "ee2791ecf0832530f18a4a6db30014293c048ac70d91908c45fbfd699fe60497",
+            "byteSize": 15799110,
             "frameCount": null,
             "restoredFilename": "Ayura/preseeded_db.store",
-            "restoredSha256": "5b862d121bb8e54a03811fd21ac10ab68fba3bb131b75b53516bb059f53d1d5b",
-            "restoredByteSize": 269402112
+            "restoredSha256": "af4cfcdd2693c7e2bd13fa5e40c28c021a730a52516972f459fb3884f82ddee3",
+            "restoredByteSize": 233627648
         }
     ]
 }
