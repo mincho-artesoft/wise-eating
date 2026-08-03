@@ -94,9 +94,16 @@ struct NutritionsDetailView: View {
     @State private var showAll = false
     @State private var waterGlassesConsumed: Int = 0
     @State private var waterGoal: Int = 8
-    enum RingDetailType: Identifiable { case goals, calories, macros; var id: Self { self } }
+    enum RingDetailType: Identifiable {
+        case goals, calories, macros, ayurveda
+        var id: Self { self }
+    }
     @State private var showingRingDetail: RingDetailType? = nil
     @State private var ringDetailMenuState: MenuState = .collapsed
+    @State private var dailyAyurvedaComputation: AyurvedaIngredientComputation = .empty
+    @State private var dailyAyurvedaTarget: AyurvedaDoshaDistribution?
+    @State private var dailyAyurvedaMeals: [DailyAyurvedaMealSummary] = []
+    @State private var dailyAyurvedaRefreshTask: Task<Void, Never>?
     @State private var isShowingMealPlanPicker = false
     @State private var mealPlanMenuState: MenuState = .collapsed
     @State private var selectedPlanForPreview: MealPlan? = nil
@@ -382,7 +389,15 @@ struct NutritionsDetailView: View {
             .onChange(of: foodsByMeal) {
                 calculateCollapsedItems()
                 calculateAllItems()
+                scheduleDailyAyurvedaRefresh()
                 if !isBootstrapping { scheduleAutosave() }
+            }
+            .onReceive(
+                NotificationCenter.default.publisher(
+                    for: .ayurvedaConstitutionDidChange
+                )
+            ) { _ in
+                scheduleDailyAyurvedaRefresh(immediate: true)
             }
             .onChange(of: isSearchFieldFocused) { _, isFocused in
                 if isFocused {
@@ -734,6 +749,7 @@ struct NutritionsDetailView: View {
         .onChange(of: profile.isLactating) { refreshProfileDependentData() }
         .onDisappear {
             autosaveTask?.cancel()
+            dailyAyurvedaRefreshTask?.cancel()
             Task {
                 await saveMealsToCalendar()
             }
@@ -971,19 +987,27 @@ struct NutritionsDetailView: View {
                     .padding(.horizontal, 40)
                     
                     if isRingsPinned {
-                        RingsSummaryRow(
-                            goalsAchieved: goalsAchieved,
-                            totalGoals: totalGoals,
-                            onTap: { presentRingDetail($0) },
-                            calorieRing: { calorieRing },
-                            macroRing:   { macroProportionRing },
-                            isPinned: $isRingsPinned,
-                            waterConsumed: $waterGlassesConsumed,
-                            waterGoal: waterGoal,
-                            onIncrementWater: incrementWater,
-                            onDecrementWater: decrementWater
-                        )
-                        .padding(.horizontal,10)
+                        VStack(spacing: 8) {
+                            RingsSummaryRow(
+                                goalsAchieved: goalsAchieved,
+                                totalGoals: totalGoals,
+                                onTap: { presentRingDetail($0) },
+                                calorieRing: { calorieRing },
+                                macroRing:   { macroProportionRing },
+                                isPinned: $isRingsPinned,
+                                waterConsumed: $waterGlassesConsumed,
+                                waterGoal: waterGoal,
+                                onIncrementWater: incrementWater,
+                                onDecrementWater: decrementWater
+                            )
+                            .padding(.horizontal, 10)
+
+                            DailyAyurvedaSummaryRow(
+                                computation: dailyAyurvedaComputation,
+                                target: dailyAyurvedaTarget,
+                                onTap: { presentRingDetail(.ayurveda) }
+                            )
+                        }
                         .padding(.top, -40)
                     }
                     ScrollViewReader { proxy in
@@ -1001,18 +1025,26 @@ struct NutritionsDetailView: View {
                                 )
 
                             if !isRingsPinned {
-                                RingsSummaryRow(
-                                    goalsAchieved: goalsAchieved,
-                                    totalGoals: totalGoals,
-                                    onTap: { presentRingDetail($0) },
-                                    calorieRing: { calorieRing },
-                                    macroRing:   { macroProportionRing },
-                                    isPinned: $isRingsPinned,
-                                    waterConsumed: $waterGlassesConsumed,
-                                    waterGoal: waterGoal,
-                                    onIncrementWater: incrementWater,
-                                    onDecrementWater: decrementWater
-                                )
+                                VStack(spacing: 8) {
+                                    RingsSummaryRow(
+                                        goalsAchieved: goalsAchieved,
+                                        totalGoals: totalGoals,
+                                        onTap: { presentRingDetail($0) },
+                                        calorieRing: { calorieRing },
+                                        macroRing:   { macroProportionRing },
+                                        isPinned: $isRingsPinned,
+                                        waterConsumed: $waterGlassesConsumed,
+                                        waterGoal: waterGoal,
+                                        onIncrementWater: incrementWater,
+                                        onDecrementWater: decrementWater
+                                    )
+
+                                    DailyAyurvedaSummaryRow(
+                                        computation: dailyAyurvedaComputation,
+                                        target: dailyAyurvedaTarget,
+                                        onTap: { presentRingDetail(.ayurveda) }
+                                    )
+                                }
                                 .listRowSeparator(.hidden)
                                 .listRowBackground(Color.clear)
                                 .listRowInsets(EdgeInsets())
@@ -2320,6 +2352,8 @@ struct NutritionsDetailView: View {
                 caloriesDetailView
             case .macros:
                 macrosDetailView
+            case .ayurveda:
+                dailyAyurvedaDetailView
             }
         }
         .id(detailType)
@@ -2358,6 +2392,84 @@ struct NutritionsDetailView: View {
             allConsumedFoods: self.allConsumedFoods
         )
     }
+
+    @ViewBuilder
+    private var dailyAyurvedaDetailView: some View {
+        DailyAyurvedaDetailView(
+            date: chosenDate,
+            profileName: profile.name,
+            computation: dailyAyurvedaComputation,
+            target: dailyAyurvedaTarget,
+            meals: dailyAyurvedaMeals,
+            onDismiss: dismissRingDetail
+        )
+    }
+
+    private func scheduleDailyAyurvedaRefresh(immediate: Bool = false) {
+        dailyAyurvedaRefreshTask?.cancel()
+        dailyAyurvedaRefreshTask = Task { @MainActor in
+            if !immediate {
+                try? await Task.sleep(nanoseconds: 180_000_000)
+            }
+            guard !Task.isCancelled else { return }
+            refreshDailyAyurvedaSummary()
+        }
+    }
+
+    private func refreshDailyAyurvedaSummary() {
+        dailyAyurvedaTarget = AyurvedaConstitutionStore
+            .record(for: profile.id)?
+            .target(at: chosenDate)
+
+        let ingredients: [AyurvedaIngredientAmount] = allConsumedFoods.compactMap {
+            entry in
+            let (food, grams) = entry
+            guard grams.isFinite, grams > 0 else { return nil }
+            return AyurvedaIngredientAmount(foodId: food.id, grams: grams)
+        }
+
+        guard !ingredients.isEmpty else {
+            dailyAyurvedaComputation = .empty
+            dailyAyurvedaMeals = []
+            return
+        }
+
+        do {
+            dailyAyurvedaComputation = try AyurvedaResolver.computeIngredients(
+                ingredients,
+                context: ctx
+            )
+            dailyAyurvedaMeals = dailyMeals.compactMap { meal in
+                let mealIngredients: [AyurvedaIngredientAmount] = (
+                    foodsByMeal[meal.id] ?? [:]
+                ).compactMap { entry in
+                    let (food, grams) = entry
+                    guard grams.isFinite, grams > 0 else { return nil }
+                    return AyurvedaIngredientAmount(
+                        foodId: food.id,
+                        grams: grams
+                    )
+                }
+                guard !mealIngredients.isEmpty else { return nil }
+                guard let computation = try? AyurvedaResolver.computeIngredients(
+                    mealIngredients,
+                    context: ctx
+                ) else { return nil }
+                guard let computed = computation.computed else { return nil }
+                return DailyAyurvedaMealSummary(
+                    id: meal.id,
+                    name: meal.name,
+                    computed: computed
+                )
+            }
+        } catch {
+            dailyAyurvedaComputation = .empty
+            dailyAyurvedaMeals = []
+            #if DEBUG
+            print("Daily Ayurveda summary failed: \(error)")
+            #endif
+        }
+    }
     
     private func loadMeals(preselect idToKeep: Meal.ID? = nil) {
         loadMealsTask?.cancel()
@@ -2394,6 +2506,7 @@ struct NutritionsDetailView: View {
             )
             
             self.initialFoodsByMeal = self.foodsByMeal
+            scheduleDailyAyurvedaRefresh(immediate: true)
             
             calculateCollapsedItems()
             if showAll { calculateAllItems() }

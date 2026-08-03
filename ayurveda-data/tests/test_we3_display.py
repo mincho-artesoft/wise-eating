@@ -21,6 +21,10 @@ PROFILE_EDITOR = ROOT / "Ayura/Profile/Views/ProfileEditorView.swift"
 PROFILE_LIST = ROOT / "Ayura/Profile/Views/ProfileListView.swift"
 FOOD_LIST_VM = ROOT / "Ayura/Food/ViewModels/FoodListVM.swift"
 SETTINGS = ROOT / "Ayura/Settings/SettingsView.swift"
+DAILY_AYURVEDA_SUMMARY = (
+    ROOT / "Ayura/Nutrient/Views/DailyAyurvedaSummaryView.swift"
+)
+NUTRITIONS_DETAIL = ROOT / "Ayura/Nutrient/Views/NutritionsDetailView.swift"
 
 
 class WE3DisplayTests(unittest.TestCase):
@@ -342,6 +346,34 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
             deletion.index(ayurveda_delete),
             deletion.index("ctx.delete(item)"),
         )
+
+    def test_daily_ayurveda_summary_uses_selected_profile_and_all_meals(self):
+        summary = DAILY_AYURVEDA_SUMMARY.read_text()
+        nutrition_detail = NUTRITIONS_DETAIL.read_text()
+
+        self.assertIn("struct DailyAyurvedaSummaryRow", summary)
+        self.assertIn("doshaCard(.vata", summary)
+        self.assertIn("doshaCard(.pitta", summary)
+        self.assertIn("doshaCard(.kapha", summary)
+        self.assertIn("AyurvedaFoodFitPresentation.make(", summary)
+        self.assertIn("Double(-value) * target[dosha]", summary)
+        self.assertIn('Text("Fit for \\(profileName)")', summary)
+
+        self.assertIn(
+            ".record(for: profile.id)?\n            .target(at: chosenDate)",
+            nutrition_detail,
+        )
+        self.assertIn(
+            "let ingredients: [AyurvedaIngredientAmount] = "
+            "allConsumedFoods.compactMap",
+            nutrition_detail,
+        )
+        self.assertIn("AyurvedaResolver.computeIngredients(", nutrition_detail)
+        self.assertGreaterEqual(
+            nutrition_detail.count("DailyAyurvedaSummaryRow("),
+            2,
+        )
+        self.assertIn("case goals, calories, macros, ayurveda", nutrition_detail)
 
 
 if __name__ == "__main__":
