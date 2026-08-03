@@ -941,7 +941,6 @@ struct AyurvedaConstitutionManagerView: View {
   @State private var record: AyurvedaConstitutionRecord?
   @State private var setupMethod: AyurvedaConstitutionSetupMethod?
   @State private var isShowingCheckIn = false
-  @State private var isShowingDeleteConfirmation = false
 
   var body: some View {
     ZStack {
@@ -1057,35 +1056,6 @@ struct AyurvedaConstitutionManagerView: View {
             .listRowBackground(Color.clear)
             .listRowSeparator(.hidden)
 
-            Section {
-              VStack(alignment: .leading, spacing: 12) {
-                Text(
-                  "This profile and its answers are stored on this device and in the private metadata event of your Ayura profile calendar. A calendar account may sync them between your devices. Ayura does not send them to advertising or analytics providers."
-                )
-                .font(.caption)
-                .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.72))
-                Button(
-                  "Delete complete Ayurvedic profile",
-                  role: .destructive
-                ) {
-                  isShowingDeleteConfirmation = true
-                }
-                .buttonStyle(.plain)
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(.red)
-                .padding(.horizontal, 14)
-                .padding(.vertical, 10)
-                .frame(maxWidth: .infinity)
-                .glassCardStyle(cornerRadius: 16)
-              }
-              .padding()
-              .ayurvedaGlassSurface(cornerRadius: 18)
-            } header: {
-              Text("Privacy controls")
-                .foregroundStyle(effectManager.currentGlobalAccentColor)
-            }
-            .listRowBackground(Color.clear)
-            .listRowSeparator(.hidden)
           } else {
             Section {
               VStack(alignment: .leading, spacing: 12) {
@@ -1127,21 +1097,6 @@ struct AyurvedaConstitutionManagerView: View {
         reload()
         isShowingCheckIn = false
       }
-    }
-    .confirmationDialog(
-      "Delete the complete Ayurvedic profile?",
-      isPresented: $isShowingDeleteConfirmation,
-      titleVisibility: .visible
-    ) {
-      Button("Delete profile and check-in", role: .destructive) {
-        AyurvedaConstitutionStore.delete(profileID: profileID)
-        reload()
-      }
-      Button("Cancel", role: .cancel) {}
-    } message: {
-      Text(
-        "This removes the answers, derived traditional profile and current check-in from this device and, when calendar access is available, from the Ayura profile calendar metadata."
-      )
     }
     .tint(effectManager.currentGlobalAccentColor)
     .foregroundStyle(effectManager.currentGlobalAccentColor)

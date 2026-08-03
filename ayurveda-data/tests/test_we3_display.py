@@ -16,6 +16,7 @@ CONSTITUTION = ROOT / "Ayura/Ayurveda/AyurvedaConstitutionViews.swift"
 SEARCH_CHIPS = ROOT / "Ayura/FoodSearch/AyurvedaSearchChips.swift"
 FOOD_ROW = ROOT / "Ayura/Food/Views/FoodItemRowView.swift"
 PROFILE_EDITOR = ROOT / "Ayura/Profile/Views/ProfileEditorView.swift"
+PROFILE_LIST = ROOT / "Ayura/Profile/Views/ProfileListView.swift"
 
 
 class WE3DisplayTests(unittest.TestCase):
@@ -200,6 +201,30 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         self.assertIn('title: "Constitution"', section)
         self.assertIn('title: String = "Ayurvedic profile"', constitution)
         self.assertIn("Text(title)", constitution)
+
+    def test_profile_manager_privacy_controls_are_not_rendered(self):
+        constitution = CONSTITUTION.read_text()
+
+        self.assertNotIn('Text("Privacy controls")', constitution)
+        self.assertNotIn("Delete complete Ayurvedic profile", constitution)
+        self.assertNotIn("isShowingDeleteConfirmation", constitution)
+
+    def test_main_profile_deletion_removes_ayurveda_data(self):
+        profile_list = PROFILE_LIST.read_text()
+        deletion = profile_list[
+            profile_list.index("private func performDeletion") :
+            profile_list.index("private func handleSingleSelection")
+        ]
+
+        ayurveda_delete = (
+            "AyurvedaConstitutionStore.delete(profileID: profileIDToDelete)"
+        )
+        self.assertIn(ayurveda_delete, deletion)
+        self.assertIn("modelContext.delete(profileToDeleteInContext)", deletion)
+        self.assertLess(
+            deletion.index(ayurveda_delete),
+            deletion.index("modelContext.delete(profileToDeleteInContext)"),
+        )
 
 
 if __name__ == "__main__":
