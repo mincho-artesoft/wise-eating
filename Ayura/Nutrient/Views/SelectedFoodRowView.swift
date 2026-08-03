@@ -4,6 +4,7 @@ import Combine
 
 struct SelectedFoodRowView: View {
     @ObservedObject private var effectManager = EffectManager.shared
+    @Environment(\.modelContext) private var modelContext
 
     // MARK: – Public
     let item: FoodItem
@@ -16,8 +17,9 @@ struct SelectedFoodRowView: View {
     @State private var textValue: String
 
     @Binding var expandedItemID: FoodItem.ID?
-    
+
     @State private var showFullText: Bool
+    @State private var ayurvedaDisplay: AyurvedaDisplay?
 
     private var isExpanded: Bool {
         expandedItemID == item.id
@@ -25,7 +27,7 @@ struct SelectedFoodRowView: View {
 
     private var isImperial: Bool { GlobalState.measurementSystem == "Imperial" }
     private var displayUnit: String { isImperial ? "oz" : "g" }
-    
+
     private var isFocused: Bool { focusedField == item }
 
     // MARK: – Chart helper
@@ -34,7 +36,7 @@ struct SelectedFoodRowView: View {
         let kcalCenter: Double?
         let chartTotal: Double?
     }
-    
+
     private var currentGrams: Double {
         guard let displayValue = GlobalState.double(from: textValue) else { return grams }
         return isImperial ? UnitConversion.ozToG(displayValue) : displayValue
@@ -64,7 +66,7 @@ struct SelectedFoodRowView: View {
             chartTotal:  currentGrams > 0 ? currentGrams : nil
         )
     }
-    
+
     private let central: CGFloat = 60
     private let ringT:   CGFloat = 6
     private let canalT:  CGFloat = 6
@@ -93,9 +95,9 @@ struct SelectedFoodRowView: View {
         self.onGramsChanged = onGramsChanged
         self._focusedField = focusedField
         self._expandedItemID = expandedItemID
-        
+
         self._showFullText = State(initialValue: expandedItemID.wrappedValue == item.id)
-        
+
         let isImperial = GlobalState.measurementSystem == "Imperial"
         let displayValue = isImperial ? UnitConversion.gToOz_display(grams) : grams
         _textValue = State(initialValue: UnitConversion.formatDecimal(displayValue))
@@ -103,131 +105,145 @@ struct SelectedFoodRowView: View {
 
     // MARK: – Body
     var body: some View {
-        HStack(spacing: 12) {
-            NutrientProportionDonutChartView(
-                proportions:             chart.slices,
-                centralImageUIImage: item.foodImage(variant: "480"),
-                imagePlaceholderSystemName: "photo.circle.fill",
-                centralContentDiameter:  central,
-                donutRingThickness:      ringT,
-                canalRingThickness:      canalT,
-                adaptiveTextColor:       effectManager.currentGlobalAccentColor,
-                ringTrackColor:          effectManager.currentGlobalAccentColor.opacity(0.1),
-                totalEnergyKcal:         chart.kcalCenter,
-                totalReferenceValue:     chart.chartTotal
-            )
-            .frame(width: donutD, height: donutD)
-            .foregroundStyle(effectManager.currentGlobalAccentColor)
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 12) {
+                NutrientProportionDonutChartView(
+                    proportions:             chart.slices,
+                    centralImageUIImage: item.foodImage(variant: "480"),
+                    imagePlaceholderSystemName: "photo.circle.fill",
+                    centralContentDiameter:  central,
+                    donutRingThickness:      ringT,
+                    canalRingThickness:      canalT,
+                    adaptiveTextColor:       effectManager.currentGlobalAccentColor,
+                    ringTrackColor:          effectManager.currentGlobalAccentColor.opacity(0.1),
+                    totalEnergyKcal:         chart.kcalCenter,
+                    totalReferenceValue:     chart.chartTotal
+                )
+                .frame(width: donutD, height: donutD)
+                .foregroundStyle(effectManager.currentGlobalAccentColor)
 
-            VStack(alignment: .leading, spacing: 2) {
-                Text(item.name)
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundStyle(effectManager.currentGlobalAccentColor)
-                    .if(showFullText) { view in
-                        view.fixedSize(horizontal: false, vertical: true)
-                    } else: { view in
-                        view.lineLimit(2)
-                    }
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        if isExpanded {
-                            // СВИВАНЕ
-                            withAnimation(.easeInOut(duration: 0.15)) {
-                                showFullText = false
-                            }
-                            DispatchQueue.main.asyncAfter(deadline: .now()) {
-                                 withAnimation(.easeInOut(duration: 0.3)) {
-                                     expandedItemID = nil
-                                 }
-                            }
-                        } else {
-                            // РАЗГЪВАНЕ
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                expandedItemID = item.id
-                            }
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(item.name)
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundStyle(effectManager.currentGlobalAccentColor)
+                        .if(showFullText) { view in
+                            view.fixedSize(horizontal: false, vertical: true)
+                        } else: { view in
+                            view.lineLimit(2)
                         }
-                    }
-                    .onChange(of: isExpanded) { _, isNowExpanded in
-                        if isNowExpanded {
-                            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            if isExpanded {
+                                // СВИВАНЕ
                                 withAnimation(.easeInOut(duration: 0.15)) {
-                                    showFullText = true
+                                    showFullText = false
+                                }
+                                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                                     withAnimation(.easeInOut(duration: 0.3)) {
+                                         expandedItemID = nil
+                                     }
+                                }
+                            } else {
+                                // РАЗГЪВАНЕ
+                                withAnimation(.easeInOut(duration: 0.3)) {
+                                    expandedItemID = item.id
                                 }
                             }
-                        } else {
-                            showFullText = false
                         }
+                        .onChange(of: isExpanded) { _, isNowExpanded in
+                            if isNowExpanded {
+                                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                                    withAnimation(.easeInOut(duration: 0.15)) {
+                                        showFullText = true
+                                    }
+                                }
+                            } else {
+                                showFullText = false
+                            }
+                        }
+
+                    if !isStockSufficient {
+                        HStack(alignment: .center, spacing: 4) {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .font(.caption)
+                            Text("Quantity exceeds stock")
+                                .font(.caption)
+                        }
+                        .foregroundColor(.orange)
+                        .padding(.top, 1)
                     }
 
-                if !isStockSufficient {
-                    HStack(alignment: .center, spacing: 4) {
-                        Image(systemName: "exclamationmark.triangle.fill")
-                            .font(.caption)
-                        Text("Quantity exceeds stock")
-                            .font(.caption)
+                    HStack(spacing: 16) {
+                        if hasPhoto {
+                            HStack(spacing: central * 0.08) {
+                                Image(systemName: "flame.fill")
+                                    .font(.system(size: central * 0.18))
+                                    .foregroundColor(.orange)
+
+                                Text(String(format: "%.0f", energy))
+                                    .font(.system(size: central * 0.24, weight: .bold))
+                                    .foregroundStyle(effectManager.currentGlobalAccentColor)
+
+                                Text("Kcal")
+                                    .font(.system(size: central * 0.16))
+                                    .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
+                            }
+                        }
+
+                        if let ph = phValue {
+                            HStack(spacing: central * 0.08) {
+                                Text(String(format: "pH %.1f", ph))
+                                    .font(.system(size: central * 0.22, weight: .semibold))
+                                    .foregroundStyle(effectManager.currentGlobalAccentColor)
+                            }
+                        }
+
+                        // +++ НАЧАЛО НА ПРОМЯНАТА +++
+                        if let nodes = item.nodes, !nodes.isEmpty {
+                            HStack(spacing: central * 0.08) {
+                                Text("Nodes: \(nodes.count)")
+                                    .font(.system(size: central * 0.22, weight: .semibold))
+                                    .foregroundStyle(effectManager.currentGlobalAccentColor)
+                            }
+                        }
+                        // +++ КРАЙ НА ПРОМЯНАТА +++
                     }
-                    .foregroundColor(.orange)
-                    .padding(.top, 1)
+                    .padding(.top, isStockSufficient ? 4 : 2)
                 }
-                
-                HStack(spacing: 16) {
-                    if hasPhoto {
-                        HStack(spacing: central * 0.08) {
-                            Image(systemName: "flame.fill")
-                                .font(.system(size: central * 0.18))
-                                .foregroundColor(.orange)
 
-                            Text(String(format: "%.0f", energy))
-                                .font(.system(size: central * 0.24, weight: .bold))
-                                .foregroundStyle(effectManager.currentGlobalAccentColor)
+                Spacer(minLength: 8)
 
-                            Text("Kcal")
-                                .font(.system(size: central * 0.16))
-                                .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
-                        }
+                HStack(spacing: 4) {
+                    ConfigurableTextField(
+                        title: displayUnit,
+                        value: $textValue,
+                        type: .decimal,
+                        placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
+                        focused: $focusedField,
+                        fieldIdentifier: item
+                    )
+                    .foregroundStyle(effectManager.currentGlobalAccentColor)
+                    .multilineTextAlignment(.trailing)
+                    .frame(width: 60)
+                    .onChange(of: textValue) { _, newText in
+                        processChange(newText: newText)
                     }
-                    
-                    if let ph = phValue {
-                        HStack(spacing: central * 0.08) {
-                            Text(String(format: "pH %.1f", ph))
-                                .font(.system(size: central * 0.22, weight: .semibold))
-                                .foregroundStyle(effectManager.currentGlobalAccentColor)
-                        }
-                    }
-                    
-                    // +++ НАЧАЛО НА ПРОМЯНАТА +++
-                    if let nodes = item.nodes, !nodes.isEmpty {
-                        HStack(spacing: central * 0.08) {
-                            Text("Nodes: \(nodes.count)")
-                                .font(.system(size: central * 0.22, weight: .semibold))
-                                .foregroundStyle(effectManager.currentGlobalAccentColor)
-                        }
-                    }
-                    // +++ КРАЙ НА ПРОМЯНАТА +++
+
+                    Text(displayUnit)
+                        .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
                 }
-                .padding(.top, isStockSufficient ? 4 : 2)
             }
 
-            Spacer(minLength: 8)
-
-            HStack(spacing: 4) {
-                ConfigurableTextField(
-                    title: displayUnit,
-                    value: $textValue,
-                    type: .decimal,
-                    placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
-                    focused: $focusedField,
-                    fieldIdentifier: item
-                )
-                .foregroundStyle(effectManager.currentGlobalAccentColor)
-                .multilineTextAlignment(.trailing)
-                .frame(width: 60)
-                .onChange(of: textValue) { _, newText in
-                    processChange(newText: newText)
+            if let ayurvedaDisplay {
+                VStack(alignment: .leading, spacing: 6) {
+                    AyurvedaPersonalFitBadge(display: ayurvedaDisplay)
+                    AyurvedaDoshaResultChips(
+                        vata: ayurvedaDisplay.vata,
+                        pitta: ayurvedaDisplay.pitta,
+                        kapha: ayurvedaDisplay.kapha
+                    )
                 }
-
-                Text(displayUnit)
-                    .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
+                .padding(.horizontal, 4)
             }
         }
         .padding(.vertical, 5)
@@ -241,14 +257,39 @@ struct SelectedFoodRowView: View {
         .onChange(of: grams) { _, newGrams in
             updateTextFromModel(newGrams: newGrams)
         }
+        .task(id: item.id) {
+            resolveAyurvedaDisplay()
+        }
     }
-    
+
+    private func resolveAyurvedaDisplay() {
+        guard !item.isDeleted, item.modelContext != nil else {
+            ayurvedaDisplay = nil
+            return
+        }
+
+        do {
+            let resolution = try AyurvedaResolver.resolve(
+                for: item,
+                context: modelContext
+            )
+            ayurvedaDisplay = AyurvedaDisplay.make(from: resolution)
+        } catch {
+            ayurvedaDisplay = nil
+            #if DEBUG
+            print(
+                "Selected food Ayurveda resolve FAILED foodId=\(item.id): \(error)"
+            )
+            #endif
+        }
+    }
+
     private func processChange(newText: String) {
         if newText.isEmpty {
             onGramsChanged(0)
             return
         }
-        
+
         guard let displayValue = GlobalState.double(from: newText) else { return }
         let grams = isImperial ? UnitConversion.ozToG(displayValue) : displayValue
         onGramsChanged(grams)
@@ -257,12 +298,12 @@ struct SelectedFoodRowView: View {
     private func formatTextFinal() {
         let displayValue = isImperial ? UnitConversion.gToOz_display(grams) : grams
         let formattedText = UnitConversion.formatDecimal(displayValue)
-        
+
         if textValue != formattedText {
             textValue = formattedText
         }
     }
-    
+
     private func updateTextFromModel(newGrams: Double) {
         let currentTextAsGrams = currentGrams
         if abs(currentTextAsGrams - newGrams) > 0.01 {

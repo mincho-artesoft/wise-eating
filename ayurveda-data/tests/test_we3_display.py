@@ -16,6 +16,7 @@ CONSTITUTION = ROOT / "Ayura/Ayurveda/AyurvedaConstitutionViews.swift"
 CONSTITUTION_MODEL = ROOT / "Ayura/Ayurveda/AyurvedaConstitution.swift"
 SEARCH_CHIPS = ROOT / "Ayura/FoodSearch/AyurvedaSearchChips.swift"
 FOOD_ROW = ROOT / "Ayura/Food/Views/FoodItemRowView.swift"
+SELECTED_FOOD_ROW = ROOT / "Ayura/Nutrient/Views/SelectedFoodRowView.swift"
 PROFILE_EDITOR = ROOT / "Ayura/Profile/Views/ProfileEditorView.swift"
 PROFILE_LIST = ROOT / "Ayura/Profile/Views/ProfileListView.swift"
 FOOD_LIST_VM = ROOT / "Ayura/Food/ViewModels/FoodListVM.swift"
@@ -186,15 +187,15 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         self.assertNotIn("Estimated Ayurveda", visible_sources)
         self.assertNotIn('== "Estimated"', visible_sources)
 
-    def test_added_food_rows_show_the_same_personal_fit_as_search(self):
+    def test_selected_nutrition_foods_show_the_same_ayurveda_fit_as_search(self):
         food_row = FOOD_ROW.read_text()
+        selected_food_row = SELECTED_FOOD_ROW.read_text()
         constitution = CONSTITUTION.read_text()
 
-        self.assertIn(
-            "AyurvedaPersonalFitBadge(\n"
-            "                                        display: ayurvedaDisplay",
-            food_row,
-        )
+        self.assertNotIn("AyurvedaPersonalFitBadge", food_row)
+        self.assertIn("AyurvedaPersonalFitBadge(display: ayurvedaDisplay)", selected_food_row)
+        self.assertIn("AyurvedaDoshaResultChips(", selected_food_row)
+        self.assertIn("resolveAyurvedaDisplay()", selected_food_row)
         self.assertIn("init(display: AyurvedaDisplay)", constitution)
         self.assertIn("init(metadata: AyurvedaCanonicalSearchMetadata?)", constitution)
 
