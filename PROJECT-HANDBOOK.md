@@ -2,8 +2,8 @@
 **Read this first. It is the knowledge-transfer document for anyone (human or AI)
 taking over direction of this project. Update it at the end of every milestone —
 that is a standing rule baked into all task packets.**
-Last updated: 2026-08-02 (job 4 re-pins the bundled seed, preseed, concept,
-role, and search-cache artifacts to the post-NUT catalogue. Search cache v7 persists
+Last updated: 2026-08-03 (job 4 re-pins the bundled seed, preseed, concept,
+role, imagery, archive, and search-cache artifacts to the post-NUT catalogue. Search cache v7 persists
 full Ayurveda metadata for canonical and linked foods; MP-7 adds build-time culinary roles,
 `notReadyToEat` eligibility, anchor/cap/portion plausibility constraints, and a
 real-catalogue solver profile. Behavior-preserving role buckets and compact
@@ -271,16 +271,16 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | Post-seed ZFOODITEM total | 14,488 (12,601 + 376 + 1,511) |
 | Category rules / modifiers | 187 / 14 (modifiers fire on 6,351 foods) |
 | Crosswalk distinct dravyas | 164; 59 contested rows with recorded losers; curated denies 2 |
-| Recipe nutrition | 1,508 full · 3 estimated · 0 none; 39 fields × two bases |
+| Recipe nutrition | 1,508 full · 3 estimated · 0 none; 39 fields × two bases. Estimated: Gond Ladoo (`dravya.acacia-gum` missing composition), Sol Kadhi (`dravya.kokum`), Ugadi Pachadi (`dravya.neem-flower`) |
 | Recipe IngredientLinks | 10,644 positive-gram rows · 1,511 owners |
 | WE-8 safety projection | 2,216 review-required rows · 155 allergen dravyas · 1,190 allergen recipes · 754 Vegan recipes |
 | Search cache | version 7 · 14,488 DB/compact rows · 4,223 metadata/faceted rows (2,216 canonical + 2,007 linked-only) · 89 keys / 59,114 assignments · separate display/enforced age floors |
-| Seed | seedVersion 6, deterministic SHA-256 `7687498a…0fe50f3f` |
-| Preseed parts (v7 rebuild) | `aa` `003d25ae…fc4839` · `ab` `bd7f2b24…40562`; restored store `48aebeb3…54c44b` |
+| Seed / rules | seedVersion 6, seed SHA-256 `7687498a8012aa6e14b71781fe9721ab2d7b968005618ace9dc6e09a0fe50f3f`; rules SHA-256 `e92ad29fda7616a011090bd3674f9653d33b9553357c49f43ffd87f850c0364c` |
+| Preseed parts (v7 rebuild) | `aa` `e7b2fb2c9a3e03e3a76247a6988e5e9b033a4a2e95f89ad389a08d15d0e15d11` · `ab` `89b06ea707d798e20756098c0cd6f83f273c798bf12cb034b42bcc20dba9ed2b`; restored store `a6ddf152234fee2b12c9d9efcdffb70c3d01fdc4d4980418a46686b2f57d25a0` |
 | Age provenance (WE-8c) | dravyas 391 authored / 314 legacyImport · recipes 1,457 / 54 · ingredient contributors 4,957 / 5,687 |
 | Cold launch (WE-6/WE-7/WE-8/WE-8c, Debug simulator) | WE-8c registry median **1.607s** (N=12); same-session WE-8b 1.569s, paired median delta +0.048s. Absolute hard ceiling 1.700s; profiling paydown required above 1.650s |
 | Legacy target (WE-7) | 9 dead Swift inputs removed · 5 live JSON fallback resources retained |
-| Food concepts (FC-1e feature branch) | rev5 · 25 concepts · 75 aliases · 14,484 catalogue memberships resolved into a 31,165-byte deterministic artifact |
+| Food concepts (current shipped artifact) | artifact v1 / rev5 matching semantics · 25 concepts · 75 aliases · 14,488 catalogue rows · 32,166 bytes · SHA-256 `a90d8dd82ce36bfd967e1f698e502dda6fef9e072e64d90a9f7a7ec7ba398cba` |
 | FC-1e exclusion corpus | non-contested must-exclude 62/76 pass, 0 fail, 14 unresolved · must-not-exclude 26/34 pass, 0 fail, 8 unresolved · 7 contested reported separately |
 | FC-1 cold launch (Debug simulator) | candidate **1.584s** median vs branch point 1.584s, N=10 same-session ABAB; paired median −0.003s, delta smaller than both IQRs |
 | Integrated test suite (INT-1) | **95/95** = 62 shared + 23 MP + 9 FC + 1 INT launch regression |
@@ -295,11 +295,16 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | MP-6 cold launch (Debug simulator) | candidate **1.616s** median vs INT-2 Phase 1 1.623s, N=10 same-session ABAB; paired median −0.015s, smaller than both IQRs and not resolvable |
 | MP-6b narration copy pass | **125/125** · five deterministic frames, zero adjacent repeats (5/4/4/4/4 over 21 meals) · real seven-day solver sample uses 91 distinct food IDs · total model calls remains **2** |
 | MP-6b cold launch (Debug simulator) | **1.543s** median, N=10; IQR 0.017s, min 1.502s, max 1.559s; below the 1.650s paydown trigger and 1.700s ceiling |
-| MP-7 culinary roles | rev9 · 15 roles / 34 rules · 14,484 cached rows · plain catalogue `other` 108/12,601 · ineligible 543 · `notReadyToEat` 304 · recipes on anchor 1,039/1,500 · prohibited recipe roles 0 |
+| MP-7 culinary roles (current shipped artifact) | rev9 · 15 roles / 34 rules · 14,488 cached rows · plain catalogue `other` 108/12,601 · ineligible 543 · `notReadyToEat` 304 · recipes on anchor 1,043/1,511 · prohibited recipe roles 0 · SHA-256 `0e6078a661a953d9bab0eed741a9044fd5c459807c1ddec1b5ae7556a4b7867e` |
 | MP-7 regression / feasibility | **150/150** tests · 30/30 real-catalogue solves · all 30 plan hashes unchanged by optimization · P7/P8 exact 1,200/3,600 kcal · Y1 **+1.550713** · narration 100/100 byte-identical · model calls 2 |
 | MP-7 real-catalogue solve | 13,993 candidates · 96 local iterations retained · seven-day median **641.588ms**, min 314.421ms, max 959.744ms (N=10); P8 profile 4,055.677→928.726ms without output change |
-| MP-7 role resolution | 14,484 rows **44.735ms cold / 1.086ms cached** |
+| Historical MP-7 role resolution (14,484-row artifact) | **44.735ms cold / 1.086ms cached**; retained as the original MP-7 measurement, not a JOB4 remeasurement |
 | MP-7 device launch / memory | iPhone 16 Pro iOS 26.5, Release, N=10 ABAB vs MP-6b: launch **1.090s** median (paired −14.247ms, max 1.099s); peak **402.556MiB** median (paired +10.281MiB, worst pair +49.172MiB) |
+| Imagery master (JOB4) | 1,877 jobs · 293 reviewed reuses · 26 reviewed denials · styleHash `c8d83786a68f` |
+| Unified food archive (JOB4) | 14,477 encoded frames · 14,465 catalogue-addressed indices · 23 extra catalogue references share an addressed frame · 12 inventoried retained orphans · 14,488/14,488 catalogue entries resolve |
+| Archive sizes / identity (JOB4) | 144: 43,591,000 bytes · 480: 85,383,373 bytes · restored 1024: 351,950,638 bytes in five parts · 14,477 packets each · zero B-frames · frame map `b0fffc11279025e7e5e95606e0954357ba942ebbb202635e49d8ca4b3d80ca85` · timestamps `d3666f4a56036440f7922e1af59ae9641f1e77ed112c70b89adc616ec11c6d34` |
+| JOB4 regression | 161/161 tests · 25+2 search goldens exact · Debug and Release builds pass · fresh install zero Ayurveda inserts/updates and no index rebuild |
+| JOB4 cold launch (Debug simulator) | candidate **1.392724s** median, IQR 0.012074s, min 1.365718s, max 1.407776s; pre-batch `8ba4099` median 1.396913s; paired median −0.005364s; N=10 same-session AB |
 
 ## 6. Milestone ledger (update after every task)
 

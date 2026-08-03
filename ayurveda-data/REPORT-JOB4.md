@@ -3,6 +3,28 @@
 This report records the measured inputs, retained exceptions, regenerated
 artifacts, and release gates for the one-time JOB4 shipped-artifact rebuild.
 
+## Three-record investigation before Phase H
+
+Commit `3e79448` has no explanatory body, but its diff and the contemporaneous
+NUT-3 ruling establish **Case A: ruled duplicates**, not records deleted to
+satisfy a hard-coded count. The same commit emptied `batch-31.json`, added the
+three aliases to their retained targets, and taught the canon validator those
+targets. `TASK-NUT3.md` records the reviewed dispositions:
+
+| Removed record | Retained target | Recorded reason | Alias state |
+| --- | --- | --- | --- |
+| `dravya.malai` — Fresh cream (malai) | `dravya.cream` — Cream, heavy | “existing alias `malai`; add `Santanika` as sanskrit” | `Fresh cream (malai)`, `malai`, `milk cream`, and `clotted milk skin` are present; `Santanika` is the Sanskrit name |
+| `dravya.shakkar` — Powdered jaggery (shakkar) | `dravya.jaggery` — Jaggery | “shakkar is granulated gud, same substance” | `Powdered jaggery (shakkar)`, `shakkar`, `jaggery powder`, and `granulated jaggery` are present |
+| `dravya.vida-salt` — Vida salt | `dravya.black-salt` — Black salt | “exact sanskrit match” (`Vida lavana`) | `Vida salt`, `bid lavan`, and `vit lavan` are present |
+
+The NUT-3 canon id for the second record is `dravya.powdered-jaggery`, while
+the short-lived batch-31 id was `dravya.shakkar`; the exact display-name alias
+and the commit's validator mapping both resolve the identity to
+`dravya.jaggery`. No alias is missing. Consequently the correct entity counts
+remain 705 dravyas, 1,511 recipes, 14,488 catalogue entries, 1,877 imagery
+jobs, and 14,477 physical archive frames. Restoring the alias-only rows would
+reintroduce duplicate entities, so phases D–G were not repeated.
+
 ## Frame inventory before regeneration
 
 - Catalogue: 14,488 entries.
@@ -194,4 +216,81 @@ produced this fresh-launch evidence:
 - Debug and Release simulator builds both succeeded with the rebuilt preseed
   and required-asset guard enabled.
 
-Phase G and the proposed Phase H registry table follow below.
+### Phase G — same-session cold launch
+
+The comparison used the retained iPhone 17 Pro iOS 26.2 simulator. A was the
+pre-batch tip `8ba4099`; B was the pushed JOB4 tip `768354f`. Both were arm64
+Debug builds with the same build settings, separate bundle IDs and containers,
+identical calendar/reminder permissions, and an untimed fresh plus warm setup.
+No Xcode, `xcodebuild`, Swift compiler, Maestro, Blender, or Spotlight work was
+active; Spotlight measured 0.0% CPU and system-wide free memory was 84%.
+
+Host `time.monotonic()` was captured immediately before
+`simctl launch --console-pty`, and the terminal event was
+`AYURA_PROFILE|first-interactive-frame|...`. Each process was terminated before
+the next launch. Order was strict AB repeated ten times. Every accepted launch
+emitted the Ayurveda version skip and search-cache `Skipping rebuild` line.
+
+One earlier attempted series was discarded in full: pair 8B emitted
+`root-view-appeared` but no terminal `first-interactive-frame` marker. None of
+its samples enter this table.
+
+| Pair | A `8ba4099` | B `768354f` | B − A |
+| ---: | ---: | ---: | ---: |
+| 1 | 1.397948s | 1.379781s | −0.018167s |
+| 2 | 1.380127s | 1.391588s | +0.011461s |
+| 3 | 1.392522s | 1.396792s | +0.004270s |
+| 4 | 1.397177s | 1.393859s | −0.003317s |
+| 5 | 1.411310s | 1.398863s | −0.012447s |
+| 6 | 1.378527s | 1.396514s | +0.017987s |
+| 7 | 1.402408s | 1.365718s | −0.036689s |
+| 8 | 1.396650s | 1.389624s | −0.007026s |
+| 9 | 1.413169s | 1.407776s | −0.005393s |
+| 10 | 1.388324s | 1.382990s | −0.005334s |
+
+| Series | N | Median | IQR (Q1–Q3) | Min | Max |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| A `8ba4099` | 10 | **1.396913s** | 0.011919s (1.389373–1.401293) | 1.378527s | 1.413169s |
+| B `768354f` | 10 | **1.392724s** | 0.012074s (1.384648–1.396722) | 1.365718s | 1.407776s |
+| Paired delta | 10 | **−0.005364s** | 0.013465s (−0.011092–0.002373) | −0.036689s | +0.017987s |
+
+The candidate median is below both the 1.650s profiling-paydown trigger and the
+1.700s hard ceiling. The paired delta is smaller than both arm IQRs, so no
+launch change is resolvable from this sample.
+
+### Phase H — corrected §5 registry table
+
+Every value below was measured from the current source, shipped JSON/gzip
+artifacts, reconstructed SQLite store, media files, or the accepted Phase G
+series. Historical milestone/performance rows in §5 are not reinterpreted;
+they remain explicitly historical. The current-state portion of §5 is:
+
+| Thing | Measured value |
+| --- | --- |
+| Dravyas / recipes / profiles | 705 / 1,511 / 2,216 |
+| AyurvedaLink rows (v6 seed) | 2,336 = 306 exact + 64 near + 1,966 derived |
+| Tier coverage | classical 370 · derived 1,966 · estimated 10,265 = 12,601 |
+| Placeholder FoodItems | 376, exact band 900001–900376 |
+| Post-seed ZFOODITEM total | 14,488 = 12,601 USDA + 376 placeholders + 1,511 recipes |
+| Category rules / modifiers | 187 / 14; modifiers fire on 6,351 of the 12,231 non-classical foods |
+| Crosswalk | 1,966 rows · 164 distinct dravyas · 59 contested rows, each with recorded loser(s) · 2 curated denies |
+| Recipe nutrition | 1,508 full · 3 estimated · 0 none · 39-field schema on per-serving and per-100g bases. Gond Ladoo is missing `dravya.acacia-gum` composition; Sol Kadhi is missing `dravya.kokum`; Ugadi Pachadi is missing `dravya.neem-flower` |
+| Recipe IngredientLinks | 10,644 positive-gram rows · 1,511 owners |
+| Safety projection | 2,216 review-required rows · 155 allergen dravyas · 1,190 allergen recipes · 754 Vegan recipes |
+| Age provenance | dravyas 391 authored / 314 legacyImport · recipes 1,457 / 54 · ingredient contributors 4,957 / 5,687 |
+| Search cache | v7 · 14,488 DB/compact rows · 4,223 metadata/faceted rows = 2,216 direct + 2,007 linked-only · 89 keys · 59,114 assignments |
+| Seed / rules | seed v6, SHA `7687498a8012aa6e14b71781fe9721ab2d7b968005618ace9dc6e09a0fe50f3f`; rules SHA `e92ad29fda7616a011090bd3674f9653d33b9553357c49f43ffd87f850c0364c` |
+| Preseed v7 | `aa` SHA `e7b2fb2c9a3e03e3a76247a6988e5e9b033a4a2e95f89ad389a08d15d0e15d11` · `ab` SHA `89b06ea707d798e20756098c0cd6f83f273c798bf12cb034b42bcc20dba9ed2b` · restored store SHA `a6ddf152234fee2b12c9d9efcdffb70c3d01fdc4d4980418a46686b2f57d25a0` |
+| Food concepts | artifact v1 / rev5 matching semantics · 25 concepts · 75 aliases · 14,488 catalogue rows · 32,166 bytes · SHA `a90d8dd82ce36bfd967e1f698e502dda6fef9e072e64d90a9f7a7ec7ba398cba` |
+| Food roles | rev9 · 15 roles / 34 rules · 14,488 rows · plain USDA: 108 `other`, 543 ineligible, 304 not-ready · recipe anchors 1,043/1,511 · prohibited recipe roles 0 |
+| Imagery master | 1,877 jobs · 293 reviewed reuses · 26 reviewed denials · styleHash `c8d83786a68f` |
+| Unified food archive | 14,477 encoded frames · 14,465 catalogue-addressed indices · 23 extra catalogue references share an addressed frame · 12 inventoried retained orphans · 14,488/14,488 catalogue entries resolve |
+| Archive sizes | 144: 43,591,000 bytes · 480: 85,383,373 bytes · restored 1024: 351,950,638 bytes in five parts · 14,477 packets each · zero B-frames |
+| Archive map identity | frame map SHA `b0fffc11279025e7e5e95606e0954357ba942ebbb202635e49d8ca4b3d80ca85` · timestamps SHA `d3666f4a56036440f7922e1af59ae9641f1e77ed112c70b89adc616ec11c6d34` |
+| JOB4 regression | 161/161 tests · 25+2 search goldens exact · Debug and Release builds pass · fresh install zero Ayurveda inserts/updates and no index rebuild |
+| JOB4 cold launch | candidate 1.392724s median, IQR 0.012074s, min 1.365718s, max 1.407776s; `8ba4099` median 1.396913s; paired median −0.005364s; N=10 same-session AB |
+
+Commit `8e659b8` changed the core §5 rows during Phase B, before the Phase H
+director gate. Its intermediate preseed hashes and stale 14,484 concept/role
+rows are corrected forward in the normal follow-up commit that records this
+report. History is not rewritten.
