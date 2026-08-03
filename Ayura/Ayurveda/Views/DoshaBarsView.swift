@@ -54,9 +54,9 @@ struct DoshaBarsView: View {
 
   private var signedBars: some View {
     VStack(spacing: 14) {
-      DoshaScaleSelector(readOnlyValue: vata, name: "Vata")
-      DoshaScaleSelector(readOnlyValue: pitta, name: "Pitta")
-      DoshaScaleSelector(readOnlyValue: kapha, name: "Kapha")
+      DoshaScaleSelector(readOnlyValue: vata, dosha: .vata)
+      DoshaScaleSelector(readOnlyValue: pitta, dosha: .pitta)
+      DoshaScaleSelector(readOnlyValue: kapha, dosha: .kapha)
     }
   }
 

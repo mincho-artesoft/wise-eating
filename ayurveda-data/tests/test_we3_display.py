@@ -98,7 +98,30 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         self.assertIn("Button(action: action)", glass_body)
         self.assertIn("} else {\n            chipContent", glass_body)
         self.assertEqual(bars.count("DoshaScaleSelector(readOnlyValue:"), 3)
-        self.assertIn("init(readOnlyValue value: Int, name: String)", scale)
+        self.assertIn(
+            "init(readOnlyValue value: Int, dosha: AyurvedaDosha)",
+            scale,
+        )
+
+    def test_dosha_line_labels_share_identity_icons_and_colors(self):
+        scale = SCALE.read_text()
+        constitution = CONSTITUTION.read_text()
+        daily_summary = DAILY_AYURVEDA_SUMMARY.read_text()
+
+        self.assertIn("struct DoshaIdentityLabel: View", scale)
+        self.assertIn('case .vata: "wind"', scale)
+        self.assertIn('case .pitta: "flame"', scale)
+        self.assertIn('case .kapha: "drop.fill"', scale)
+        self.assertIn("case .vata: .blue", scale)
+        self.assertIn("case .pitta: .orange", scale)
+        self.assertIn("case .kapha: .green", scale)
+        self.assertIn("DoshaIdentityLabel(dosha: dosha", scale)
+        self.assertIn("DoshaIdentityLabel(", constitution)
+        self.assertIn("dosha.identityColor", constitution)
+        self.assertIn("DoshaIdentityLabel(", daily_summary)
+        self.assertIn("dosha: .vata", daily_summary)
+        self.assertIn("dosha: .pitta", daily_summary)
+        self.assertIn("dosha: .kapha", daily_summary)
 
     def test_dosha_scales_and_food_chips_follow_active_profile(self):
         scale = SCALE.read_text()
@@ -466,9 +489,9 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         self.assertIn("private static let scaleValues = [2, 1, 0, -1, -2]", row)
         self.assertIn("private func doshaScaleLabels(", row)
         self.assertIn("trackWidth * CGFloat(index) / 4", row)
-        self.assertIn('name: "Vata",\n                            value: computed.vata', row)
-        self.assertIn('name: "Pitta",\n                            value: computed.pitta', row)
-        self.assertIn('name: "Kapha",\n                            value: computed.kapha', row)
+        self.assertIn('dosha: .vata,\n                            value: computed.vata', row)
+        self.assertIn('dosha: .pitta,\n                            value: computed.pitta', row)
+        self.assertIn('dosha: .kapha,\n                            value: computed.kapha', row)
         self.assertIn("let profileDistribution: AyurvedaDoshaDistribution?", row)
         self.assertIn("profileWeight: profileDistribution?.vata ?? 0", row)
         self.assertIn("profileWeight: profileDistribution?.pitta ?? 0", row)

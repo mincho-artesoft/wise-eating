@@ -716,32 +716,35 @@ private struct AyurvedaDistributionBars: View {
 
   var body: some View {
     VStack(spacing: 10) {
-      bar(.vata, color: .blue)
-      bar(.pitta, color: .orange)
-      bar(.kapha, color: .green)
+      bar(.vata)
+      bar(.pitta)
+      bar(.kapha)
     }
   }
 
-  private func bar(_ dosha: AyurvedaDosha, color: Color) -> some View {
+  private func bar(_ dosha: AyurvedaDosha) -> some View {
     let percentage = distribution.percentage(for: dosha)
-    return VStack(spacing: 4) {
-      HStack {
-        Text(dosha.displayName)
-          .font(.caption.weight(.semibold))
-        Spacer()
-        Text("\(percentage)%")
-          .font(.caption.monospacedDigit())
-      }
-      .foregroundStyle(effectManager.currentGlobalAccentColor)
+    return HStack(spacing: 12) {
+      DoshaIdentityLabel(
+        dosha: dosha,
+        titleFont: .caption.weight(.semibold)
+      )
+      .frame(width: 88, alignment: .leading)
+
       GeometryReader { proxy in
         ZStack(alignment: .leading) {
-          Capsule().fill(color.opacity(0.15))
+          Capsule().fill(dosha.identityColor.opacity(0.15))
           Capsule()
-            .fill(color)
+            .fill(dosha.identityColor)
             .frame(width: proxy.size.width * distribution[dosha])
         }
       }
       .frame(height: 7)
+
+      Text("\(percentage)%")
+        .font(.caption.monospacedDigit())
+        .foregroundStyle(effectManager.currentGlobalAccentColor)
+        .frame(width: 38, alignment: .trailing)
     }
   }
 }

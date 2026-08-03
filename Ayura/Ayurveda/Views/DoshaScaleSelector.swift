@@ -1,42 +1,86 @@
 import SwiftUI
 import UIKit
 
+extension AyurvedaDosha {
+  var identityColor: Color {
+    switch self {
+    case .vata: .blue
+    case .pitta: .orange
+    case .kapha: .green
+    }
+  }
+
+  var identitySystemImage: String {
+    switch self {
+    case .vata: "wind"
+    case .pitta: "flame"
+    case .kapha: "drop.fill"
+    }
+  }
+}
+
+struct DoshaIdentityLabel: View {
+  @ObservedObject private var effectManager = EffectManager.shared
+
+  let dosha: AyurvedaDosha
+  var subtitle: String?
+  var titleFont: Font = .body
+
+  var body: some View {
+    HStack(spacing: 8) {
+      Image(systemName: dosha.identitySystemImage)
+        .font(.title3.weight(.medium))
+        .foregroundStyle(dosha.identityColor)
+        .frame(width: 28)
+        .accessibilityHidden(true)
+
+      VStack(alignment: .leading, spacing: 2) {
+        Text(dosha.displayName)
+          .font(titleFont)
+          .foregroundStyle(effectManager.currentGlobalAccentColor)
+
+        if let subtitle, !subtitle.isEmpty {
+          Text(subtitle)
+            .font(.caption)
+            .foregroundStyle(
+              effectManager.currentGlobalAccentColor.opacity(0.72)
+            )
+        }
+      }
+    }
+  }
+}
+
 struct DoshaScaleSelector: View {
   @ObservedObject private var effectManager = EffectManager.shared
   @Binding var value: Int
   @State private var profileDistribution: AyurvedaDoshaDistribution?
 
-  let name: String
+  let dosha: AyurvedaDosha
   let subtitle: String
-  let systemImage: String
-  let tint: Color
   let isReadOnly: Bool
+
+  private var name: String { dosha.displayName }
 
   private let values = [-2, -1, 0, 1, 2]
 
   init(
     value: Binding<Int>,
-    name: String,
-    subtitle: String,
-    systemImage: String,
-    tint: Color
+    dosha: AyurvedaDosha,
+    subtitle: String
   ) {
     _value = value
     _profileDistribution = State(initialValue: nil)
-    self.name = name
+    self.dosha = dosha
     self.subtitle = subtitle
-    self.systemImage = systemImage
-    self.tint = tint
     isReadOnly = false
   }
 
-  init(readOnlyValue value: Int, name: String) {
+  init(readOnlyValue value: Int, dosha: AyurvedaDosha) {
     _value = .constant(min(2, max(-2, value)))
     _profileDistribution = State(initialValue: nil)
-    self.name = name
+    self.dosha = dosha
     subtitle = ""
-    systemImage = ""
-    tint = .clear
     isReadOnly = true
   }
 
@@ -62,9 +106,18 @@ struct DoshaScaleSelector: View {
   }
 
   private var editorBody: some View {
-    VStack(alignment: .leading, spacing: 6) {
-      identity
-      profileAwareScale(isInteractive: true)
+    ViewThatFits(in: .horizontal) {
+      HStack(alignment: .top, spacing: 12) {
+        identity
+          .frame(width: 132, alignment: .leading)
+        profileAwareScale(isInteractive: true)
+          .frame(maxWidth: .infinity)
+      }
+
+      VStack(alignment: .leading, spacing: 6) {
+        identity
+        profileAwareScale(isInteractive: true)
+      }
     }
     .accessibilityElement(children: .ignore)
     .accessibilityLabel("\(name) effect")
@@ -76,29 +129,22 @@ struct DoshaScaleSelector: View {
   private var readOnlyBody: some View {
     let presentation = AyurvedaDoshaEffectPresentation(value: value)
     return ViewThatFits(in: .horizontal) {
-      HStack(alignment: .center, spacing: 12) {
-        Text(name)
-          .font(.headline)
-          .frame(minWidth: 56, alignment: .leading)
-        readOnlyEffect(presentation)
-          .frame(width: 200, alignment: .leading)
-        readOnlyScale(presentation)
-          .frame(minWidth: 240)
+      HStack(alignment: .top, spacing: 12) {
+        DoshaIdentityLabel(dosha: dosha, titleFont: .headline)
+          .frame(width: 96, alignment: .leading)
+
+        VStack(alignment: .leading, spacing: 6) {
+          readOnlyEffect(presentation)
+          readOnlyScale(presentation)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
       }
 
-      VStack(alignment: .leading, spacing: 9) {
-        ViewThatFits(in: .horizontal) {
-          HStack(alignment: .firstTextBaseline, spacing: 12) {
-            Text(name)
-              .font(.headline)
-            Spacer(minLength: 8)
-            readOnlyEffect(presentation)
-          }
-          VStack(alignment: .leading, spacing: 5) {
-            Text(name)
-              .font(.headline)
-            readOnlyEffect(presentation)
-          }
+      VStack(alignment: .leading, spacing: 6) {
+        HStack(alignment: .firstTextBaseline, spacing: 12) {
+          DoshaIdentityLabel(dosha: dosha, titleFont: .headline)
+          Spacer(minLength: 8)
+          readOnlyEffect(presentation)
         }
         readOnlyScale(presentation)
       }
@@ -127,28 +173,7 @@ struct DoshaScaleSelector: View {
   }
 
   private var identity: some View {
-    HStack(spacing: 8) {
-      Image(systemName: systemImage)
-        .font(.subheadline.weight(.semibold))
-        .foregroundStyle(tint)
-        .frame(width: 32, height: 32)
-        .background(tint.opacity(0.14), in: Circle())
-        .overlay {
-          Circle()
-            .stroke(tint.opacity(0.24), lineWidth: 1)
-        }
-        .accessibilityHidden(true)
-
-      VStack(alignment: .leading, spacing: 2) {
-        Text(name)
-          .font(.body)
-        Text(subtitle)
-          .font(.caption)
-          .foregroundStyle(
-            effectManager.currentGlobalAccentColor.opacity(0.72)
-          )
-      }
-    }
+    DoshaIdentityLabel(dosha: dosha, subtitle: subtitle)
   }
 
   private func profileAwareScale(isInteractive: Bool) -> some View {
@@ -273,11 +298,10 @@ struct DoshaScaleSelector: View {
 
   private var profileWeight: Double? {
     guard let profileDistribution else { return nil }
-    switch name.lowercased() {
-    case "vata": return profileDistribution.vata
-    case "pitta": return profileDistribution.pitta
-    case "kapha": return profileDistribution.kapha
-    default: return nil
+    switch dosha {
+    case .vata: return profileDistribution.vata
+    case .pitta: return profileDistribution.pitta
+    case .kapha: return profileDistribution.kapha
     }
   }
 

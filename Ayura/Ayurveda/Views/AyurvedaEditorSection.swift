@@ -136,26 +136,20 @@ struct AyurvedaEditorSection: View {
       header
       DoshaScaleSelector(
         value: $form.vata,
-        name: "Vata",
-        subtitle: "Movement & Air",
-        systemImage: "wind",
-        tint: .blue
+        dosha: .vata,
+        subtitle: "Movement & Air"
       )
       Divider()
       DoshaScaleSelector(
         value: $form.pitta,
-        name: "Pitta",
-        subtitle: "Fire & Transformation",
-        systemImage: "flame",
-        tint: .orange
+        dosha: .pitta,
+        subtitle: "Fire & Transformation"
       )
       Divider()
       DoshaScaleSelector(
         value: $form.kapha,
-        name: "Kapha",
-        subtitle: "Structure & Water",
-        systemImage: "leaf",
-        tint: .green
+        dosha: .kapha,
+        subtitle: "Structure & Water"
       )
     }
   }

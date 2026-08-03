@@ -51,17 +51,17 @@ struct DailyAyurvedaSummaryRow: View {
                 if let computed = computation.computed {
                     VStack(spacing: 8) {
                         doshaScale(
-                            name: "Vata",
+                            dosha: .vata,
                             value: computed.vata,
                             profileWeight: profileDistribution?.vata ?? 0
                         )
                         doshaScale(
-                            name: "Pitta",
+                            dosha: .pitta,
                             value: computed.pitta,
                             profileWeight: profileDistribution?.pitta ?? 0
                         )
                         doshaScale(
-                            name: "Kapha",
+                            dosha: .kapha,
                             value: computed.kapha,
                             profileWeight: profileDistribution?.kapha ?? 0
                         )
@@ -90,7 +90,7 @@ struct DailyAyurvedaSummaryRow: View {
     }
 
     private func doshaScale(
-        name: String,
+        dosha: AyurvedaDosha,
         value: Int,
         profileWeight: Double
     ) -> some View {
@@ -103,23 +103,31 @@ struct DailyAyurvedaSummaryRow: View {
             for: clampedValue,
             prefersPacifying: prefersPacifying
         )
-        return VStack(alignment: .leading, spacing: 3) {
-            Text(name)
-                .font(.caption.weight(.semibold))
-
-            doshaTrack(
-                progress: progress,
-                color: effectColor,
-                prefersPacifying: prefersPacifying
+        return HStack(alignment: .top, spacing: 12) {
+            DoshaIdentityLabel(
+                dosha: dosha,
+                titleFont: .caption.weight(.semibold)
             )
+            .frame(width: 88, alignment: .leading)
 
-            doshaScaleLabels(
-                selectedValue: clampedValue,
-                selectedColor: effectColor
-            )
+            VStack(spacing: 3) {
+                doshaTrack(
+                    progress: progress,
+                    color: effectColor,
+                    prefersPacifying: prefersPacifying
+                )
+
+                doshaScaleLabels(
+                    selectedValue: clampedValue,
+                    selectedColor: effectColor
+                )
+            }
+            .frame(maxWidth: .infinity)
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("\(name) effect \(signedValue(clampedValue))")
+        .accessibilityLabel(
+            "\(dosha.displayName) effect \(signedValue(clampedValue))"
+        )
     }
 
     private func doshaTrack(
