@@ -388,6 +388,9 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
 
         self.assertNotIn('Label("Daily Ayurveda"', row)
         self.assertIn('Text("Fit")', row)
+        self.assertIn("HStack(alignment: .center, spacing: 16)", row)
+        self.assertIn("VStack(alignment: .center, spacing: 4)", row)
+        self.assertIn(".frame(width: 76, alignment: .center)", row)
         self.assertIn("private func doshaScale", row)
         self.assertIn("private func doshaTrack", row)
         self.assertIn('name: "Vata",\n                            value: computed.vata', row)

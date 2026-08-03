@@ -16,7 +16,7 @@ struct DailyAyurvedaSummaryRow: View {
 
     var body: some View {
         Button(action: onTap) {
-            HStack(alignment: .top, spacing: 16) {
+            HStack(alignment: .center, spacing: 16) {
                 if let computed = computation.computed {
                     VStack(spacing: 8) {
                         doshaScale(
@@ -45,7 +45,7 @@ struct DailyAyurvedaSummaryRow: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
 
-                VStack(alignment: .trailing, spacing: 2) {
+                VStack(alignment: .center, spacing: 4) {
                     Text("Fit")
                         .font(.caption)
                         .foregroundStyle(
@@ -55,7 +55,7 @@ struct DailyAyurvedaSummaryRow: View {
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(fitColor)
                 }
-                .frame(minWidth: 68, alignment: .trailing)
+                .frame(width: 76, alignment: .center)
             }
             .foregroundStyle(effectManager.currentGlobalAccentColor)
             .padding()
