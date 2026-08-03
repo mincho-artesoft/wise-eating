@@ -435,6 +435,7 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         self.assertNotIn("Text(fit.explanation)", summary)
         self.assertNotIn("Label(fit.title", summary)
         self.assertIn("fitLabel(fit.direction)", summary)
+        self.assertIn('"Fit: \\(fitLabel(fit.direction))"', summary)
 
         self.assertIn(
             "let constitutionRecord = "

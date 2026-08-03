@@ -559,7 +559,7 @@ struct DailyAyurvedaDetailView: View {
 
                     VStack(alignment: .leading, spacing: 8) {
                         Label(
-                            fitLabel(fit.direction),
+                            "Fit: \(fitLabel(fit.direction))",
                             systemImage: fitIcon(fit.direction)
                         )
                             .font(.title3.weight(.semibold))
