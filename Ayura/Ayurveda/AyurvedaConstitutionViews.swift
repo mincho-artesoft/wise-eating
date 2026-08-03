@@ -685,11 +685,6 @@ struct AyurvedaConstitutionResultSummary: View {
 
   var body: some View {
     VStack(alignment: .leading, spacing: 14) {
-      if showsContextLabels {
-        Text("Your answers most closely match")
-          .font(.subheadline)
-          .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.76))
-      }
       Text(result.label)
         .font(.title.weight(.bold))
         .foregroundStyle(effectManager.currentGlobalAccentColor)
@@ -1051,7 +1046,9 @@ struct AyurvedaConstitutionManagerView: View {
                 result: record.result,
                 source: record.source
               )
-              .listRowInsets(EdgeInsets())
+              .listRowInsets(
+                EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
+              )
             }
             .listRowBackground(Color.clear)
             .listRowSeparator(.hidden)

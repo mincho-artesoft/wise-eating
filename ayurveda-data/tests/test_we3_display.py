@@ -250,6 +250,11 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
             constitution_view,
         )
 
+    def test_result_summary_has_no_match_caption(self):
+        constitution = CONSTITUTION.read_text()
+
+        self.assertNotIn("Your answers most closely match", constitution)
+
     def test_ayurveda_prompts_keep_shared_wording_with_question_marks(self):
         constitution_model = CONSTITUTION_MODEL.read_text()
 
@@ -274,6 +279,19 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         self.assertNotIn("No recent check-in", manager)
         self.assertNotIn("Check in for the past week or two", manager)
         self.assertNotIn("isShowingCheckIn", manager)
+
+    def test_profile_manager_summary_has_horizontal_insets(self):
+        constitution = CONSTITUTION.read_text()
+        manager = constitution[
+            constitution.index("struct AyurvedaConstitutionManagerView") :
+            constitution.index("private struct AyurvedaCheckInView")
+        ]
+
+        self.assertIn(
+            "EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)",
+            manager,
+        )
+        self.assertNotIn(".listRowInsets(EdgeInsets())", manager)
 
     def test_main_profile_deletion_removes_ayurveda_data(self):
         profile_list = PROFILE_LIST.read_text()
