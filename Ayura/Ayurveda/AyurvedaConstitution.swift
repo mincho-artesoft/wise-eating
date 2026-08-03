@@ -220,67 +220,67 @@ struct AyurvedaConstitutionQuestion: Identifiable, Sendable {
         "Solid or broad; gains easily"
       ),
       (
-        "Over the years, your weight has usually tended to…",
+        "Over the years, your weight has usually tended to:",
         "Fluctuate, or stay low",
         "Hold steady with effort",
         "Climb, and come off slowly"
       ),
       (
-        "Your skin has generally felt…",
+        "Your skin has generally felt:",
         "Dry or rough and cool to touch",
         "Warm and quick to flush",
         "Soft, moist and cool"
       ),
       (
-        "Your hair has generally been…",
+        "Your hair has generally been:",
         "Fine, dry and prone to frizz",
         "Fine and prone to early greying or thinning",
         "Thick, wavy and prone to oiliness"
       ),
       (
-        "Your appetite is usually…",
+        "Your appetite is usually:",
         "Irregular — big some days, absent on others",
         "Strong; a late meal feels uncomfortable",
         "Steady; skipping a meal is usually easy"
       ),
       (
-        "After a heavy meal, you usually feel…",
+        "After a heavy meal, you usually feel:",
         "Gassy or bloated",
         "Warm, sometimes acidic",
         "Heavy and sleepy"
       ),
       (
-        "The weather you have usually felt best in is…",
+        "The weather you have usually felt best in is:",
         "Warm and humid",
         "Cool and breezy",
         "Warm and dry"
       ),
       (
-        "Your energy through a typical day usually…",
+        "Your energy through a typical day usually:",
         "Comes in bursts, then dips",
         "Feels steady and driven",
         "Starts slowly, then lasts"
       ),
       (
-        "Your sleep on most nights is…",
+        "Your sleep on most nights is:",
         "Light; you wake easily",
         "Moderate; you wake, then resettle",
         "Deep and long; waking is hard"
       ),
       (
-        "Your natural pace has usually been…",
+        "Your natural pace has usually been:",
         "Quick; sitting still is difficult",
         "Purposeful and focused",
         "Unhurried and steady"
       ),
       (
-        "In conversation, you usually tend to be…",
+        "In conversation, you usually tend to be:",
         "Fast and likely to jump between subjects",
         "Precise and eager to convince",
         "Measured and happy to listen"
       ),
       (
-        "Under pressure, you usually notice yourself becoming…",
+        "Under pressure, you usually notice yourself becoming:",
         "Scattered",
         "Sharp",
         "Quiet"
@@ -321,35 +321,35 @@ struct AyurvedaCheckInQuestion: Identifiable, Sendable {
     let rows: [(String, String, String, String, String)] = [
       (
         "Sleep",
-        "Over the past week or two, your sleep has felt…",
+        "Over the past week or two, your sleep has felt:",
         "Light or interrupted",
         "Moderate, with some restlessness",
         "Deep, long or hard to wake from"
       ),
       (
         "Digestion",
-        "Over the past week or two, after meals you have most often felt…",
+        "Over the past week or two, after meals you have most often felt:",
         "Variable, gassy or bloated",
         "Warm or acidic",
         "Heavy or slow"
       ),
       (
         "Appetite",
-        "Over the past week or two, your appetite has been…",
+        "Over the past week or two, your appetite has been:",
         "Irregular",
         "Strong and urgent",
         "Steady but easy to postpone"
       ),
       (
         "Energy",
-        "Over the past week or two, your energy has been…",
+        "Over the past week or two, your energy has been:",
         "Changeable, with bursts and dips",
         "Driven and intense",
         "Slow to start but long-lasting"
       ),
       (
         "Skin",
-        "Over the past week or two, your skin has most often felt…",
+        "Over the past week or two, your skin has most often felt:",
         "Dry or rough",
         "Warm or sensitive",
         "Soft or oily"

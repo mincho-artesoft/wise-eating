@@ -13,6 +13,7 @@ GLASS_CHIP = ROOT / "Ayura/Food/Views/ChipScrollView.swift"
 BARS = ROOT / "Ayura/Ayurveda/Views/DoshaBarsView.swift"
 EDITOR = ROOT / "Ayura/Ayurveda/Views/AyurvedaEditorSection.swift"
 CONSTITUTION = ROOT / "Ayura/Ayurveda/AyurvedaConstitutionViews.swift"
+CONSTITUTION_MODEL = ROOT / "Ayura/Ayurveda/AyurvedaConstitution.swift"
 SEARCH_CHIPS = ROOT / "Ayura/FoodSearch/AyurvedaSearchChips.swift"
 FOOD_ROW = ROOT / "Ayura/Food/Views/FoodItemRowView.swift"
 PROFILE_EDITOR = ROOT / "Ayura/Profile/Views/ProfileEditorView.swift"
@@ -239,9 +240,7 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         self.assertNotIn("isShowingDeleteConfirmation", constitution)
 
     def test_self_declared_result_has_no_chosen_by_you_caption(self):
-        constitution_model = (
-            ROOT / "Ayura/Ayurveda/AyurvedaConstitution.swift"
-        ).read_text()
+        constitution_model = CONSTITUTION_MODEL.read_text()
         constitution_view = CONSTITUTION.read_text()
 
         self.assertNotIn("Chosen by you", constitution_model)
@@ -250,6 +249,12 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
             "if showsContextLabels, let sourceName = source.displayName",
             constitution_view,
         )
+
+    def test_ayurveda_questions_use_colons_instead_of_ellipses(self):
+        constitution_model = CONSTITUTION_MODEL.read_text()
+
+        self.assertNotIn("…", constitution_model)
+        self.assertIn('"Your natural pace has usually been:"', constitution_model)
 
     def test_profile_manager_does_not_render_current_pattern_section(self):
         constitution = CONSTITUTION.read_text()
