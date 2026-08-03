@@ -80,10 +80,6 @@ struct AyurvedaDisplay: Sendable {
   let virya: String?
   let vipaka: String?
   let gunas: [String]
-  let modifierLabels: [String]
-  let viruddha: [String]
-  let contraindications: [String]
-  let engineExcluded: Bool
   let confidence: Double?
   let sanskrit: String?
 
@@ -120,19 +116,17 @@ struct AyurvedaDisplay: Sendable {
         confidence: resolution.confidence
       )
     case .derived(let profile, let link, let modifiers, let vpk):
-      let modifierLabels = modifiers.map(\.label)
       var detail = "from \(profile.name)"
-      if !modifierLabels.isEmpty {
-        let suffix = modifierLabels.count == 1 ? "modifier" : "modifiers"
-        detail += " · \(modifierLabels.count) preparation \(suffix)"
+      if !modifiers.isEmpty {
+        let suffix = modifiers.count == 1 ? "modifier" : "modifiers"
+        detail += " · \(modifiers.count) preparation \(suffix)"
       }
       return profileDisplay(
         profile,
         tier: .derived(linkTier: link.tier),
         detail: detail,
         confidence: resolution.confidence,
-        vpk: vpk,
-        modifierLabels: modifierLabels
+        vpk: vpk
       )
     case .computed(let computed):
       return AyurvedaDisplay(
@@ -145,10 +139,6 @@ struct AyurvedaDisplay: Sendable {
         virya: computed.virya,
         vipaka: nil,
         gunas: [],
-        modifierLabels: [],
-        viruddha: [],
-        contraindications: [],
-        engineExcluded: false,
         confidence: resolution.confidence,
         sanskrit: nil
       )
@@ -163,10 +153,6 @@ struct AyurvedaDisplay: Sendable {
         virya: estimate.virya,
         vipaka: nil,
         gunas: estimate.gunas,
-        modifierLabels: estimate.appliedModifiers.map(\.label),
-        viruddha: [],
-        contraindications: [],
-        engineExcluded: false,
         confidence: resolution.confidence,
         sanskrit: nil
       )
@@ -180,8 +166,7 @@ struct AyurvedaDisplay: Sendable {
     tier: AyurvedaDisplayMath.TierInput,
     detail: String,
     confidence: Double?,
-    vpk: DoshaVPK? = nil,
-    modifierLabels: [String] = []
+    vpk: DoshaVPK? = nil
   ) -> AyurvedaDisplay {
     let resolvedVPK = vpk ?? (
       vata: profile.doshaVata,
@@ -199,10 +184,6 @@ struct AyurvedaDisplay: Sendable {
       virya: profile.virya,
       vipaka: profile.vipaka,
       gunas: profile.gunas,
-      modifierLabels: modifierLabels,
-      viruddha: profile.viruddha,
-      contraindications: profile.contraindications,
-      engineExcluded: profile.engineExcluded,
       confidence: confidence,
       sanskrit: profile.sanskrit
     )

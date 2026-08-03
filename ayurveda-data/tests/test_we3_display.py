@@ -102,13 +102,37 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         glass_body = glass_chip[glass_chip.index("struct GlassChipView") :]
         self.assertNotIn(".lineLimit(", glass_body)
 
-    def test_warning_surface_remains_present(self):
+    def test_detail_fields_match_creation_fields(self):
+        editor = EDITOR.read_text()
+        display = DISPLAY.read_text()
         section = SECTION.read_text()
 
-        warning_start = section.index("private struct AyurvedaDisplayWarningRow")
-        warning_source = section[warning_start:]
-        self.assertIn("AyurvedaWarning", warning_source)
-        self.assertIn("display.contraindications.enumerated()", section)
+        for title in (
+            "Rasa (taste)",
+            "Virya (energy)",
+            "Vipaka (post-digestive)",
+            "Gunas (qualities)",
+        ):
+            self.assertIn(title, editor)
+            self.assertIn(title, section)
+
+        self.assertIn("DoshaScaleSelector(", editor)
+        self.assertIn("DoshaBarsView(", section)
+        for mapping in (
+            "rasa: profile.rasa",
+            "virya: profile.virya",
+            "vipaka: profile.vipaka",
+            "gunas: profile.gunas",
+        ):
+            self.assertIn(mapping, display)
+
+        for display_only_field in (
+            "Preparation modifiers",
+            "Health warning",
+            "Viruddha — incompatible combination",
+            "Contraindication",
+        ):
+            self.assertNotIn(display_only_field, section)
 
     def test_ai_draft_disclaimer_is_not_rendered(self):
         display = DISPLAY.read_text()

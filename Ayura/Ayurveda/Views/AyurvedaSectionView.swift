@@ -61,13 +61,6 @@ struct AyurvedaDisplayCard: View {
   var body: some View {
     VStack(alignment: .leading, spacing: 16) {
       title
-      if display.engineExcluded {
-        AyurvedaDisplayWarningRow(
-          title: "Health warning",
-          text: "Traditional sources and modern evidence advise against consuming this. Shown for reference only — never recommended.",
-          tone: .warning
-        )
-      }
       AyurvedaPersonalizedFoodFitView(display: display)
       DoshaBarsView(
         vata: display.vata,
@@ -77,7 +70,6 @@ struct AyurvedaDisplayCard: View {
       if !propertyGroups.isEmpty {
         properties
       }
-      warnings
     }
     .transaction { transaction in
       if reduceMotion {
@@ -143,12 +135,6 @@ struct AyurvedaDisplayCard: View {
       kind: .guna,
       values: display.gunas
     )
-    groups += group(
-      title: "Preparation modifiers",
-      systemImage: "slider.horizontal.3",
-      kind: .modifier,
-      values: display.modifierLabels
-    )
     return groups
   }
 
@@ -174,30 +160,6 @@ struct AyurvedaDisplayCard: View {
     return [value]
   }
 
-  @ViewBuilder
-  private var warnings: some View {
-    if !display.viruddha.isEmpty || !display.contraindications.isEmpty {
-      VStack(alignment: .leading, spacing: 8) {
-        ForEach(Array(display.viruddha.enumerated()), id: \.offset) { _, value in
-          AyurvedaDisplayWarningRow(
-            title: "Viruddha — incompatible combination",
-            text: value,
-            tone: .caution
-          )
-        }
-        ForEach(
-          Array(display.contraindications.enumerated()),
-          id: \.offset
-        ) { _, value in
-          AyurvedaDisplayWarningRow(
-            title: "Contraindication",
-            text: value,
-            tone: .warning
-          )
-        }
-      }
-    }
-  }
 }
 
 private enum AyurvedaPropertyKind: Equatable {
@@ -205,7 +167,6 @@ private enum AyurvedaPropertyKind: Equatable {
   case virya
   case vipaka
   case guna
-  case modifier
 }
 
 private struct AyurvedaPropertyGroup: Identifiable {
@@ -287,8 +248,6 @@ private struct AyurvedaPropertyGroupView: View {
       case "soft": return "cloud.fill"
       default: return "circle.fill"
       }
-    case .modifier:
-      return "wand.and.stars"
     }
   }
 
@@ -305,59 +264,8 @@ private struct AyurvedaPropertyGroupView: View {
       }
     case .guna:
       return Color("AyurvedaPacify")
-    case .modifier:
-      return Color("AyurvedaAggravate")
     default:
       return Color("AyurvedaChipTint")
     }
-  }
-}
-
-private enum AyurvedaDisplayWarningTone {
-  case caution
-  case warning
-}
-
-private struct AyurvedaDisplayWarningRow: View {
-  @Environment(\.colorScheme) private var colorScheme
-
-  let title: String
-  let text: String
-  let tone: AyurvedaDisplayWarningTone
-
-  private var color: Color {
-    switch tone {
-    case .caution:
-      return Color("AyurvedaAggravate")
-    case .warning:
-      return Color("AyurvedaWarning")
-    }
-  }
-
-  var body: some View {
-    HStack(alignment: .top, spacing: 10) {
-      Image(systemName: "exclamationmark.triangle.fill")
-        .foregroundStyle(color)
-        .accessibilityHidden(true)
-      VStack(alignment: .leading, spacing: 3) {
-        Text(title)
-          .font(.caption.weight(.semibold))
-        Text(text)
-          .font(.caption)
-      }
-      .foregroundStyle(color)
-      .fixedSize(horizontal: false, vertical: true)
-    }
-    .padding(11)
-    .frame(maxWidth: .infinity, alignment: .leading)
-    .background(
-      color.opacity(colorScheme == .dark ? 0.18 : 0.09),
-      in: RoundedRectangle(cornerRadius: 13, style: .continuous)
-    )
-    .overlay {
-      RoundedRectangle(cornerRadius: 13, style: .continuous)
-        .stroke(color.opacity(colorScheme == .dark ? 0.45 : 0.24), lineWidth: 1)
-    }
-    .accessibilityElement(children: .combine)
   }
 }
