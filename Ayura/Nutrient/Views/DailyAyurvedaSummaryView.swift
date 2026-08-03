@@ -8,6 +8,7 @@ struct DailyAyurvedaMealSummary: Identifiable {
 
 struct DailyAyurvedaSummaryRow: View {
     @ObservedObject private var effectManager = EffectManager.shared
+    private static let scaleValues = [2, 1, 0, -1, -2]
 
     let computation: AyurvedaIngredientComputation
     let profileDistribution: AyurvedaDoshaDistribution?
@@ -85,19 +86,18 @@ struct DailyAyurvedaSummaryRow: View {
             prefersPacifying: prefersPacifying
         )
         return VStack(alignment: .leading, spacing: 3) {
-            HStack(spacing: 6) {
-                Text(name)
-                    .font(.caption.weight(.semibold))
-                Spacer(minLength: 8)
-                Text(signedValue(clampedValue))
-                    .font(.caption2.monospacedDigit().weight(.semibold))
-                    .foregroundStyle(effectColor)
-            }
+            Text(name)
+                .font(.caption.weight(.semibold))
 
             doshaTrack(
                 progress: progress,
                 color: effectColor,
                 prefersPacifying: prefersPacifying
+            )
+
+            doshaScaleLabels(
+                selectedValue: clampedValue,
+                selectedColor: effectColor
             )
         }
         .accessibilityElement(children: .ignore)
@@ -121,6 +121,9 @@ struct DailyAyurvedaSummaryRow: View {
                 Color("AyurvedaAggravate"),
             ]
         return GeometryReader { proxy in
+            let markerDiameter: CGFloat = 12
+            let trackInset = markerDiameter / 2
+            let trackWidth = max(proxy.size.width - markerDiameter, 1)
             ZStack(alignment: .leading) {
                 Capsule()
                     .fill(
@@ -140,23 +143,58 @@ struct DailyAyurvedaSummaryRow: View {
                             height: division == 2 ? 10 : 8
                         )
                         .position(
-                            x: proxy.size.width * CGFloat(division) / 4,
+                            x: trackInset
+                                + trackWidth * CGFloat(division) / 4,
                             y: proxy.size.height / 2
                         )
                 }
 
                 Circle()
                     .fill(color)
-                    .frame(width: 12, height: 12)
+                    .frame(width: markerDiameter, height: markerDiameter)
                     .overlay {
                         Circle()
                             .stroke(.white.opacity(0.85), lineWidth: 2)
                     }
-                    .offset(
-                        x: max(0, (proxy.size.width - 12) * progress)
+                    .position(
+                        x: trackInset + trackWidth * progress,
+                        y: proxy.size.height / 2
                     )
             }
             .frame(maxHeight: .infinity)
+        }
+        .frame(height: 12)
+        .accessibilityHidden(true)
+    }
+
+    private func doshaScaleLabels(
+        selectedValue: Int,
+        selectedColor: Color
+    ) -> some View {
+        GeometryReader { proxy in
+            let trackInset: CGFloat = 6
+            let trackWidth = max(proxy.size.width - (trackInset * 2), 1)
+            ForEach(
+                Array(Self.scaleValues.enumerated()),
+                id: \.offset
+            ) { index, candidate in
+                Text(signedValue(candidate))
+                    .font(
+                        .caption2.monospacedDigit().weight(
+                            candidate == selectedValue ? .semibold : .regular
+                        )
+                    )
+                    .foregroundStyle(
+                        candidate == selectedValue
+                            ? selectedColor
+                            : effectManager.currentGlobalAccentColor.opacity(0.62)
+                    )
+                    .position(
+                        x: trackInset
+                            + trackWidth * CGFloat(index) / 4,
+                        y: 6
+                    )
+            }
         }
         .frame(height: 12)
         .accessibilityHidden(true)
