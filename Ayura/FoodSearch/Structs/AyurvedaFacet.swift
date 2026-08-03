@@ -440,6 +440,32 @@ struct AyurvedaCanonicalSearchMetadata: Codable, Hashable, Sendable {
         )
     }
 
+    init(
+        computed: AyurvedaDisplayMath.Computed,
+        sourceName: String,
+        enforcedMinAgeMonths: Int
+    ) {
+        self.init(
+            enforcedMinAgeMonths: enforcedMinAgeMonths,
+            sourceProfileName: sourceName,
+            sourceTier: nil,
+            doshaVata: computed.vata,
+            doshaPitta: computed.pitta,
+            doshaKapha: computed.kapha,
+            rasa: [],
+            virya: computed.virya,
+            vipaka: nil,
+            gunas: [],
+            agniEffect: nil,
+            digestibility: nil,
+            seasons: [],
+            timeOfDay: [],
+            prabhava: nil,
+            contraindications: [],
+            confidenceAyur: computed.confidence
+        )
+    }
+
     fileprivate init(
         profile: AyurvedaFacetSeedProfile,
         enforcedMinAgeMonths: Int?,

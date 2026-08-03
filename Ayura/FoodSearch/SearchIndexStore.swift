@@ -6,7 +6,7 @@ final class SearchIndexStore {
     static let shared = SearchIndexStore()
 
     /// Bump this when the structure of CompactFoodItem / tokens changes
-    private let currentIndexVersion: Int = 10
+    private let currentIndexVersion: Int = 11
 
     // MARK: - In-Memory Cache
     private(set) var revision: UInt64 = 0
@@ -61,7 +61,11 @@ final class SearchIndexStore {
         let foods = try context.fetch(FetchDescriptor<FoodItem>())
         let canonicalMap = try ayurvedaSearchMap(context: context)
         
-        buildInMemory(foods: foods, canonicalMap: canonicalMap)
+        buildInMemory(
+            foods: foods,
+            canonicalMap: canonicalMap,
+            context: context
+        )
         try saveCache(context: context)
         
         print("🔎 SearchIndexStore: Index build complete & saved (\(foods.count) items).")
@@ -106,7 +110,11 @@ final class SearchIndexStore {
         let canonicalMap = try ayurvedaSearchMap(context: context)
         // Премахнато извличането на NutrientIndex
         
-        buildInMemory(foods: foods, canonicalMap: canonicalMap)
+        buildInMemory(
+            foods: foods,
+            canonicalMap: canonicalMap,
+            context: context
+        )
 
         try saveCache(context: context)
         
@@ -157,10 +165,15 @@ final class SearchIndexStore {
         }
 
         guard let oldCompactItem = compactMap[food.id] else {
-            let metadata = ayurvedaSearchMetadata(
+            let storedMetadata = ayurvedaSearchMetadata(
                 foodID: food.id,
                 context: context
             )
+            let metadata = storedMetadata
+                ?? computedAyurvedaSearchMetadata(
+                    for: food,
+                    context: context
+                )
             let newCompactItem = makeCompactItem(
                 from: food,
                 ayurvedaMetadata: metadata,
@@ -184,10 +197,15 @@ final class SearchIndexStore {
 
         // Rebuild the compact item first so we can compare searchTokens,
         // which already include any exclusion rules.
-        let refreshedMetadata = ayurvedaSearchMetadata(
+        let storedMetadata = ayurvedaSearchMetadata(
             foodID: food.id,
             context: context
         )
+        let refreshedMetadata = storedMetadata
+            ?? computedAyurvedaSearchMetadata(
+                for: food,
+                context: context
+            )
         let newCompactItem = makeCompactItem(
             from: food,
             ayurvedaMetadata: refreshedMetadata,
@@ -302,7 +320,8 @@ final class SearchIndexStore {
     /// Сега `tmpRankings` се генерира динамично от `tmpFoods`.
     private func buildInMemory(
         foods: [FoodItem],
-        canonicalMap: [Int: AyurvedaCanonicalSearchMetadata]
+        canonicalMap: [Int: AyurvedaCanonicalSearchMetadata],
+        context: ModelContext
     ) {
         var tmpFoods: [CompactFoodItem] = []
         var tmpMap: [Int: CompactFoodItem] = [:]
@@ -313,9 +332,14 @@ final class SearchIndexStore {
         // 1. Build Compact Items & Index
         for food in foods {
             let canonical = canonicalMap[food.id]
+            let metadata = canonical
+                ?? computedAyurvedaSearchMetadata(
+                    for: food,
+                    context: context
+                )
             let compact = makeCompactItem(
                 from: food,
-                ayurvedaMetadata: canonical,
+                ayurvedaMetadata: metadata,
                 enforcedMinAgeMonths: canonical?.enforcedMinAgeMonths
             )
             tmpFoods.append(compact)
@@ -607,6 +631,25 @@ final class SearchIndexStore {
             )
         }
         return bundled
+    }
+
+    private func computedAyurvedaSearchMetadata(
+        for food: FoodItem,
+        context: ModelContext
+    ) -> AyurvedaCanonicalSearchMetadata? {
+        guard food.isRecipe || food.isMenu,
+              case .computed(let computed) = try? AyurvedaResolver.resolve(
+                for: food,
+                context: context
+              ) else {
+            return nil
+        }
+
+        return AyurvedaCanonicalSearchMetadata(
+            computed: computed,
+            sourceName: food.name,
+            enforcedMinAgeMonths: food.minAgeMonths
+        )
     }
 
     private func rebuildNutrientIndexes(

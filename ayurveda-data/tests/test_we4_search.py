@@ -20,6 +20,9 @@ SEARCH_ENGINE = ROOT / "Ayura" / "FoodSearch" / "VM" / "SmartFoodSearchEngine.sw
 INDEX_STORE = ROOT / "Ayura" / "FoodSearch" / "SearchIndexStore.swift"
 AYURVEDA_RESOLVER = ROOT / "Ayura" / "Ayurveda" / "AyurvedaResolver.swift"
 AYURVEDA_RULES = ROOT / "Ayura" / "Ayurveda" / "AyurvedaRules.swift"
+AYURVEDA_FACET = (
+    ROOT / "Ayura" / "FoodSearch" / "Structs" / "AyurvedaFacet.swift"
+)
 SYNONYMS = ROOT / "Ayura" / "FoodSearch" / "food_synonyms.json"
 SEED = ROOT / "Ayura" / "ayurveda_seed.json.gz"
 ARTIFACT_PARTS = [
@@ -276,7 +279,7 @@ struct ParserHarness {
     def test_engine_uses_index_intersection_and_exact_title_escape_hatch(self):
         engine = SEARCH_ENGINE.read_text(encoding="utf-8")
         index_store = INDEX_STORE.read_text(encoding="utf-8")
-        self.assertIn("currentIndexVersion: Int = 10", index_store)
+        self.assertIn("currentIndexVersion: Int = 11", index_store)
         self.assertIn("ayurvedaFacetIndex", index_store)
         self.assertIn("if let ayurveda = item.ayurvedaMetadata", engine)
         self.assertIn("AyurvedaSearchRanker.matches(", engine)
@@ -296,6 +299,24 @@ struct ParserHarness {
         self.assertNotIn("category:", resolver)
         self.assertNotIn("foodItem.category", resolver)
         self.assertIn("public func estimated(name: String)", rules)
+
+    def test_user_recipes_and_menus_are_indexed_from_their_ingredients(self):
+        index_store = INDEX_STORE.read_text(encoding="utf-8")
+        ayurveda_facet = AYURVEDA_FACET.read_text(encoding="utf-8")
+
+        self.assertIn("computedAyurvedaSearchMetadata(", index_store)
+        self.assertIn("case .computed(let computed)", index_store)
+        self.assertIn(
+            "let metadata = canonical\n"
+            "                ?? computedAyurvedaSearchMetadata(",
+            index_store,
+        )
+        self.assertIn(
+            "let refreshedMetadata = storedMetadata\n"
+            "            ?? computedAyurvedaSearchMetadata(",
+            index_store,
+        )
+        self.assertIn("computed: AyurvedaDisplayMath.Computed", ayurveda_facet)
 
     def test_production_golden_capture_preserves_legacy_results(self):
         golden = json.loads(GOLDEN.read_text(encoding="utf-8"))
