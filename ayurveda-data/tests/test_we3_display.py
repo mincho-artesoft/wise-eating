@@ -200,8 +200,29 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
             section,
         )
         self.assertIn('title: "Constitution"', section)
+        self.assertIn("completesSetupDirectly: true", section)
         self.assertIn('title: String = "Ayurvedic profile"', constitution)
         self.assertIn("Text(title)", constitution)
+
+    def test_profile_editor_ayurveda_setup_finishes_from_header(self):
+        constitution = CONSTITUTION.read_text()
+        setup = constitution[
+            constitution.index("struct AyurvedaConstitutionSetupView") :
+            constitution.index("struct AyurvedaConstitutionResultSummary")
+        ]
+
+        self.assertIn(
+            'trailingTitle: completesDirectly ? "Done" : nil',
+            setup,
+        )
+        self.assertIn("trailingDisabled: directCompletionDisabled", setup)
+        self.assertIn("return questionnaireAnswers.contains { $0 == nil }", setup)
+        self.assertIn('Button("Next")', setup)
+        self.assertIn(
+            ".padding(.horizontal, completesDirectly ? 16 : 0)",
+            setup,
+        )
+        self.assertIn("if completesDirectly {\n      finish(draft)", setup)
 
     def test_profile_manager_privacy_controls_are_not_rendered(self):
         constitution = CONSTITUTION.read_text()

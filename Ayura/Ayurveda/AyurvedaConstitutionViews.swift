@@ -72,6 +72,7 @@ private struct AyurvedaCustomHeader: View {
   let title: String
   var leadingTitle: String?
   var trailingTitle: String?
+  var trailingDisabled = false
   var leadingAction: (() -> Void)?
   var trailingAction: (() -> Void)?
 
@@ -92,6 +93,8 @@ private struct AyurvedaCustomHeader: View {
 
         if let trailingTitle, let trailingAction {
           headerButton(trailingTitle, action: trailingAction)
+            .disabled(trailingDisabled)
+            .opacity(trailingDisabled ? 0.38 : 1)
         }
       }
     }
@@ -173,6 +176,7 @@ struct AyurvedaConstitutionSetupView: View {
 
   let method: AyurvedaConstitutionSetupMethod
   let isEmbedded: Bool
+  let completesDirectly: Bool
   let onCancel: () -> Void
   let onHeaderChange: (_ title: String, _ subtitle: String) -> Void
   let onComplete: (AyurvedaConstitutionDraft) -> Void
@@ -190,6 +194,7 @@ struct AyurvedaConstitutionSetupView: View {
     method: AyurvedaConstitutionSetupMethod,
     initialDraft: AyurvedaConstitutionDraft? = nil,
     isEmbedded: Bool = false,
+    completesDirectly: Bool = false,
     onCancel: @escaping () -> Void = {},
     onHeaderChange: @escaping (_ title: String, _ subtitle: String) -> Void = { _, _ in },
     onComplete: @escaping (AyurvedaConstitutionDraft) -> Void
@@ -209,14 +214,19 @@ struct AyurvedaConstitutionSetupView: View {
 
     self.method = resolvedMethod
     self.isEmbedded = isEmbedded
+    self.completesDirectly = completesDirectly
     self.onCancel = onCancel
     self.onHeaderChange = onHeaderChange
     self.onComplete = onComplete
-    _phase = State(
-      initialValue: initialDraft == nil
-        ? (resolvedMethod == .selfDeclared ? .picker : .questionnaire)
-        : .result
-    )
+    let startingPhase: Phase
+    if completesDirectly || initialDraft == nil {
+      startingPhase = resolvedMethod == .selfDeclared
+        ? .picker
+        : .questionnaire
+    } else {
+      startingPhase = .result
+    }
+    _phase = State(initialValue: startingPhase)
     _selectedDeclaredTypeID = State(
       initialValue: initialDraft?.declaredTypeID
     )
@@ -243,7 +253,10 @@ struct AyurvedaConstitutionSetupView: View {
             AyurvedaCustomHeader(
               title: navigationTitle,
               leadingTitle: "Cancel",
-              leadingAction: cancelSetup
+              trailingTitle: completesDirectly ? "Done" : nil,
+              trailingDisabled: directCompletionDisabled,
+              leadingAction: cancelSetup,
+              trailingAction: completeDirectly
             )
             setupContent
           }
@@ -376,7 +389,7 @@ struct AyurvedaConstitutionSetupView: View {
               .ayurvedaWizardNavigationButton()
               .disabled(selectedDeclaredTypeID == nil)
           }
-        } else {
+        } else if !completesDirectly {
           Button("Continue", action: completeDeclaredSelection)
             .ayurvedaWizardNavigationButton()
             .disabled(selectedDeclaredTypeID == nil)
@@ -488,17 +501,28 @@ struct AyurvedaConstitutionSetupView: View {
         }
         .ayurvedaWizardNavigationButton()
 
-        Button("Continue") {
+        if completesDirectly {
           if questionIndex < AyurvedaConstitutionQuestion.all.count - 1 {
-            questionIndex += 1
-          } else {
-            completeQuestionnaire()
+            Button("Next") {
+              questionIndex += 1
+            }
+            .ayurvedaWizardNavigationButton()
+            .disabled(questionnaireAnswers[questionIndex] == nil)
           }
+        } else {
+          Button("Continue") {
+            if questionIndex < AyurvedaConstitutionQuestion.all.count - 1 {
+              questionIndex += 1
+            } else {
+              completeQuestionnaire()
+            }
+          }
+          .ayurvedaWizardNavigationButton()
+          .disabled(questionnaireAnswers[questionIndex] == nil)
         }
-        .ayurvedaWizardNavigationButton()
-        .disabled(questionnaireAnswers[questionIndex] == nil)
       }
     }
+    .padding(.horizontal, completesDirectly ? 16 : 0)
   }
 
   private func questionnaireOption(
@@ -564,10 +588,7 @@ struct AyurvedaConstitutionSetupView: View {
           .ayurvedaWizardNavigationButton()
 
           Button("Continue") {
-            onComplete(completedDraft)
-            if !isEmbedded {
-              dismiss()
-            }
+            finish(completedDraft)
           }
           .ayurvedaWizardNavigationButton()
         }
@@ -580,13 +601,18 @@ struct AyurvedaConstitutionSetupView: View {
     guard answers.count == AyurvedaConstitutionQuestion.all.count else {
       return
     }
-    completedDraft = AyurvedaConstitutionDraft(
+    let draft = AyurvedaConstitutionDraft(
       source: .questionnaire,
       prakriti: AyurvedaConstitutionResult.from(answers: answers).distribution,
       declaredTypeID: nil,
       questionnaireAnswers: answers
     )
-    phase = .result
+    if completesDirectly {
+      finish(draft)
+    } else {
+      completedDraft = draft
+      phase = .result
+    }
   }
 
   private func completeDeclaredSelection() {
@@ -595,13 +621,50 @@ struct AyurvedaConstitutionSetupView: View {
     ) else {
       return
     }
-    completedDraft = AyurvedaConstitutionDraft(
+    let draft = AyurvedaConstitutionDraft(
       source: .selfDeclared,
       prakriti: option.distribution,
       declaredTypeID: option.id,
       questionnaireAnswers: []
     )
-    phase = .result
+    if completesDirectly {
+      finish(draft)
+    } else {
+      completedDraft = draft
+      phase = .result
+    }
+  }
+
+  private var directCompletionDisabled: Bool {
+    guard completesDirectly else { return false }
+    switch phase {
+    case .picker:
+      return selectedDeclaredTypeID == nil
+    case .questionnaire:
+      return questionnaireAnswers.contains { $0 == nil }
+    case .result:
+      return completedDraft == nil
+    }
+  }
+
+  private func completeDirectly() {
+    switch phase {
+    case .picker:
+      completeDeclaredSelection()
+    case .questionnaire:
+      completeQuestionnaire()
+    case .result:
+      if let completedDraft {
+        finish(completedDraft)
+      }
+    }
+  }
+
+  private func finish(_ draft: AyurvedaConstitutionDraft) {
+    onComplete(draft)
+    if !isEmbedded {
+      dismiss()
+    }
   }
 
   private func cancelSetup() {
@@ -712,6 +775,7 @@ struct AyurvedaConstitutionEditorButton: View {
 
   let title: String
   let profileID: UUID?
+  let completesSetupDirectly: Bool
   @Binding var pendingDraft: AyurvedaConstitutionDraft?
 
   @State private var record: AyurvedaConstitutionRecord?
@@ -720,10 +784,12 @@ struct AyurvedaConstitutionEditorButton: View {
   init(
     title: String = "Ayurvedic profile",
     profileID: UUID?,
+    completesSetupDirectly: Bool = false,
     pendingDraft: Binding<AyurvedaConstitutionDraft?>
   ) {
     self.title = title
     self.profileID = profileID
+    self.completesSetupDirectly = completesSetupDirectly
     _pendingDraft = pendingDraft
   }
 
@@ -761,9 +827,15 @@ struct AyurvedaConstitutionEditorButton: View {
     }
     .fullScreenCover(isPresented: $isShowingManager, onDismiss: reload) {
       if let profileID {
-        AyurvedaConstitutionManagerView(profileID: profileID)
+        AyurvedaConstitutionManagerView(
+          profileID: profileID,
+          completesSetupDirectly: completesSetupDirectly
+        )
       } else {
-        AyurvedaConstitutionDraftManagerView(draft: $pendingDraft)
+        AyurvedaConstitutionDraftManagerView(
+          draft: $pendingDraft,
+          completesSetupDirectly: completesSetupDirectly
+        )
       }
     }
   }
@@ -782,7 +854,16 @@ private struct AyurvedaConstitutionDraftManagerView: View {
   @ObservedObject private var effectManager = EffectManager.shared
 
   @Binding var draft: AyurvedaConstitutionDraft?
+  let completesSetupDirectly: Bool
   @State private var setupMethod: AyurvedaConstitutionSetupMethod?
+
+  init(
+    draft: Binding<AyurvedaConstitutionDraft?>,
+    completesSetupDirectly: Bool = false
+  ) {
+    _draft = draft
+    self.completesSetupDirectly = completesSetupDirectly
+  }
 
   var body: some View {
     ZStack {
@@ -828,7 +909,8 @@ private struct AyurvedaConstitutionDraftManagerView: View {
     .fullScreenCover(item: $setupMethod) { method in
       AyurvedaConstitutionSetupView(
         method: method,
-        initialDraft: matchingDraft(for: method)
+        initialDraft: matchingDraft(for: method),
+        completesDirectly: completesSetupDirectly
       ) { newDraft in
         draft = newDraft
         setupMethod = nil
@@ -937,6 +1019,15 @@ struct AyurvedaConstitutionManagerView: View {
   @ObservedObject private var effectManager = EffectManager.shared
 
   let profileID: UUID
+  let completesSetupDirectly: Bool
+
+  init(
+    profileID: UUID,
+    completesSetupDirectly: Bool = false
+  ) {
+    self.profileID = profileID
+    self.completesSetupDirectly = completesSetupDirectly
+  }
 
   @State private var record: AyurvedaConstitutionRecord?
   @State private var setupMethod: AyurvedaConstitutionSetupMethod?
@@ -1048,7 +1139,10 @@ struct AyurvedaConstitutionManagerView: View {
     }
     .onAppear(perform: reload)
     .fullScreenCover(item: $setupMethod) { method in
-      AyurvedaConstitutionSetupView(method: method) { draft in
+      AyurvedaConstitutionSetupView(
+        method: method,
+        completesDirectly: completesSetupDirectly
+      ) { draft in
         AyurvedaConstitutionStore.save(draft, for: profileID)
         reload()
         setupMethod = nil

@@ -383,6 +383,7 @@ struct ProfileEditorView: View {
          AyurvedaConstitutionEditorButton(
              title: "Constitution",
              profileID: profile?.id,
+             completesSetupDirectly: true,
              pendingDraft: $pendingAyurvedaDraft
          )
      }
