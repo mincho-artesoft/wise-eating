@@ -87,37 +87,37 @@ struct RingsSummaryRow<CalorieRing: View, MacroRing: View>: View {
                 Spacer() // <--- 4. ДОБАВЕН SPACER ТУК
 
                 // --- 4. Macros Button ---
-                Button(action: { onTap(.macros) }) {
-                    VStack(spacing: 4) {
-                        macroRing()
-                            .frame(width: 60, height: 60)
-                        Text("Macros")
-                            .font(.caption)
-                            .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
+                ZStack(alignment: .topTrailing) {
+                    Button(action: { onTap(.macros) }) {
+                        VStack(spacing: 4) {
+                            macroRing()
+                                .frame(width: 60, height: 60)
+                            Text("Macros")
+                                .font(.caption)
+                                .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
+                        }
                     }
+                    .buttonStyle(.plain)
+                    .padding(10)
+                    .glassCardStyle(cornerRadius: 20)
+
+                    Button(action: { isPinned.toggle() }) {
+                        Image(systemName: isPinned ? "pin.fill" : "pin.slash")
+                            .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
+                            .frame(width: 44, height: 44)
+                            .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .contentShape(Rectangle())
+                    .offset(x: 14, y: -14)
+                    .zIndex(1)
                 }
-                .buttonStyle(.plain)
-                .padding(10)
-                .glassCardStyle(cornerRadius: 20)
 
                 Spacer() // 5. Spacer в края
             }
             .padding(.horizontal, 6)
             .padding(.bottom, 2)
 
-            HStack {
-                Spacer()
-                Button(action: { isPinned.toggle() }) {
-                    Image(systemName: isPinned ? "pin.fill" : "pin.slash")
-                        .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
-                        .frame(width: 44, height: 44)
-                        .contentShape(Rectangle())
-                }
-                .buttonStyle(.plain)
-                .contentShape(Rectangle())
-                .zIndex(1)
-            }
-            .padding(.trailing, 18)
         }
     }
 }

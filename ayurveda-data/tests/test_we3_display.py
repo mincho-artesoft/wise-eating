@@ -427,6 +427,9 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         self.assertIn(".padding(.horizontal, 20)", row)
         self.assertIn(".frame(width: 44, height: 44)", rings)
         self.assertIn(".contentShape(Rectangle())", rings)
+        self.assertIn("ZStack(alignment: .topTrailing)", rings)
+        self.assertIn(".offset(x: 14, y: -14)", rings)
+        self.assertNotIn(".padding(.trailing, 18)", rings)
 
     def test_daily_ayurveda_detail_switches_one_card_by_meal(self):
         summary = DAILY_AYURVEDA_SUMMARY.read_text()
