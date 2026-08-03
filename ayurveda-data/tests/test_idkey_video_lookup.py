@@ -18,9 +18,11 @@ ORPHANS = {
     "Black mustard seed",
     "Curry leaf powder",
     "Dosa",
+    "Fox nut (makhana)",
     "Grapes",
     "Lamb",
     "Lotus seeds (makhana)",
+    "Punjabi tinda (apple gourd)",
     "Rice kheer",
     "Rice, brown",
     "Sardine",
@@ -89,21 +91,24 @@ class IDKeyVideoLookupTests(unittest.TestCase):
                 return frame_map.get(reference, frame_map.get(frame_key(reference)))
             return None
 
-        self.assertEqual(len(foods), 14_489)
+        self.assertEqual(len(foods), 14_487)
         self.assertEqual(set(id_map), {food_id for food_id, _ in foods})
-        previous = {food_id: old_resolution(name) for food_id, name in foods}
-        self.assertNotIn(None, previous.values())
-        self.assertEqual(id_map, previous)
+        expected = {food_id: old_resolution(name) for food_id, name in foods}
+        # ID-keying deliberately gives the recipe its reviewed private image;
+        # name-keying previously collapsed it onto the dravya frame.
+        expected[1_001_052] = frame_map["recipe-panchamrita"]
+        self.assertNotIn(None, expected.values())
+        self.assertEqual(id_map, expected)
 
         # The packet calls for 200 random round trips. The exhaustive equality
         # above is stronger; keep the deterministic sample explicit as a
         # readable regression set as well.
         sample = random.Random(20260803).sample([row[0] for row in foods], 200)
-        self.assertTrue(all(id_map[food_id] == previous[food_id] for food_id in sample))
+        self.assertTrue(all(id_map[food_id] == expected[food_id] for food_id in sample))
 
         addressed = set(id_map.values())
         inverse = {index: key for key, index in frame_map.items()}
-        self.assertEqual(len(addressed), 14_466)
+        self.assertEqual(len(addressed), 14_465)
         self.assertEqual(
             {inverse[index] for index in set(inverse) - addressed},
             ORPHANS,
@@ -113,8 +118,8 @@ class IDKeyVideoLookupTests(unittest.TestCase):
         with (ROOT / "ayurveda-data/archive/foods_index.csv").open(newline="") as stream:
             rows = list(csv.DictReader(stream))
         id_map = json.loads((FOOD / "frame_index.json").read_text())
-        self.assertEqual(len(rows), 14_489)
-        self.assertEqual(len(id_map), 14_489)
+        self.assertEqual(len(rows), 14_487)
+        self.assertEqual(len(id_map), 14_487)
         self.assertEqual(
             {row["db_id"]: int(row["frame_index"]) for row in rows},
             id_map,
@@ -137,7 +142,7 @@ class IDKeyVideoLookupTests(unittest.TestCase):
                 ]
             ))
             stream = probe["streams"][0]
-            self.assertEqual(stream["nb_read_packets"], "14478", variant)
+            self.assertEqual(stream["nb_read_packets"], "14479", variant)
             self.assertEqual(stream["has_b_frames"], 0, variant)
             self.assertEqual(stream["time_base"], "1/600", variant)
             self.assertEqual(stream["codec_tag_string"], "hvc1", variant)

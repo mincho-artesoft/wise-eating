@@ -107,7 +107,7 @@
       "id": "dravya.tinda",
       "name": "Round gourd (tinda)",
       "sanskrit": null,
-      "aliases": ["tinda"],
+      "aliases": ["tinda", "Punjabi tinda (apple gourd)", "apple gourd", "round melon"],
       "category": "vegetable",
       "rasa": ["sweet"],
       "virya": "cooling",
@@ -126,7 +126,8 @@
       "usda": [],
       "servings": [{"label": "1 cup chopped", "grams": 100}],
       "provenance": ["North Indian tradition"],
-      "confidence": {"ayur": 0.7, "sci": 0.55}
+      "confidence": {"ayur": 0.7, "sci": 0.55},
+      "reviewNote": "Merged dravya.round-melon-tinda-punjabi: both records describe Praecitrullus fistulosus. Retained the referenced id and folded in the Punjabi/apple-gourd names."
     },
     {
       "id": "dravya.pumpkin-red",

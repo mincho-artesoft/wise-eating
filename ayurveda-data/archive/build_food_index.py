@@ -33,15 +33,22 @@ EXPECTED_ORPHAN_FRAME_KEYS = {
     "Black mustard seed",
     "Curry leaf powder",
     "Dosa",
+    "Fox nut (makhana)",  # dravya.makhana merged into dravya.lotus-seed
     "Grapes",
     "Lamb",
     "Lotus seeds (makhana)",
+    "Punjabi tinda (apple gourd)",  # merged into dravya.tinda
     "Rice kheer",
     "Rice, brown",
     "Sardine",
     "Spiced buttermilk (takra)",
     "Sweet potato",
     "Wheat, whole grain",
+}
+SPECIAL_FRAME_KEYS = {
+    # Name-keying collapsed this recipe onto the dravya's image. ID-keying lets
+    # the two same-name catalogue entities retain reviewed distinct frames.
+    ("recipe", "Panchamrita"): "recipe-panchamrita",
 }
 
 
@@ -136,16 +143,23 @@ def main() -> int:
     unresolved = []
     for db_id, name in foods:
         normalized_name = nfc(name)
-        candidates = (normalized_name, frame_key(normalized_name))
+        kind = profiles.get(db_id, "usda")
+        special_frame_key = SPECIAL_FRAME_KEYS.get((kind, normalized_name))
+        candidates = (
+            (special_frame_key,)
+            if special_frame_key is not None
+            else (normalized_name, frame_key(normalized_name))
+        )
         resolved = None
 
         for candidate in candidates:
             if candidate in frame_map:
                 physical_key, index = frame_map[candidate]
-                resolved = (physical_key, index, "direct")
+                route = "reviewed-id-override" if special_frame_key else "direct"
+                resolved = (physical_key, index, route)
                 break
 
-        if resolved is None:
+        if resolved is None and special_frame_key is None:
             reference = None
             for candidate in candidates:
                 if candidate in reuse:
@@ -163,7 +177,6 @@ def main() -> int:
             continue
 
         physical_key, index, route = resolved
-        kind = profiles.get(db_id, "usda")
         legacy_id = legacy_ids.get(normalized_name, "") if kind == "usda" else ""
         rows.append(
             {

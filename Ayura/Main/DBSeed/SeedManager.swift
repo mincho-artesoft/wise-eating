@@ -114,7 +114,7 @@ enum SeedManager {
                 try ctx.save()
             }
             UserDefaults.standard.set(seedVersion, forKey: "ayurvedaSeedVersion")
-            return result.changedSearchableFoods
+            return result.requiresSearchIndexRebuild
         } catch {
             ctx.rollback()
             print("   ❌ Ayurveda seeding failed; continuing without Ayurveda data: \(error)")

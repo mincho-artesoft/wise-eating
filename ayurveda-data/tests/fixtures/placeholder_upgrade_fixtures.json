@@ -1,0 +1,34 @@
+[
+  {
+    "name": "close1-v7-to-v8",
+    "baselineCommit": "75b8901",
+    "before": {
+      "foods": 14489,
+      "profiles": 2217,
+      "placeholders": 377,
+      "seedVersion": 7,
+      "cacheFoods": 14489
+    },
+    "after": {
+      "foods": 14487,
+      "profiles": 2215,
+      "placeholders": 375,
+      "seedVersion": 8,
+      "cacheFoods": 14487,
+      "remappedFoodIDs": 175,
+      "deletedFoods": 2,
+      "mappingSHA256": "c0348d706d03685c93aa78b5f3ed9741b5f43eb772d1ab230cbbeb360944aba3"
+    },
+    "deletedProfiles": {
+      "dravya.makhana": 900201,
+      "dravya.round-melon-tinda-punjabi": 900288
+    },
+    "identitySamples": [
+      "dravya.mamsa-rasa",
+      "dravya.manathakkali-greens",
+      "dravya.mango-ginger",
+      "dravya.mango-pickle",
+      "dravya.marathi-moggu"
+    ]
+  }
+]

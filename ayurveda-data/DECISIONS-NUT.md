@@ -189,10 +189,11 @@ arsenic, cadmium, lead, mercury and the toxic-mineral total are stored with
    Shatapushpa as *Anethum sowa* (dill) and give fennel Mishreya/Madhurika.
    Our data has it the other way and fennel-seed already ships. Flagged as a
    reviewNote for the vaidya, not silently reassigned.
-2. **Pre-existing duplicate pairs the earlier merge missed.**
-   `dravya.lotus-seed` (Makhanna) vs `dravya.makhana` (Makhanna / Padma Beeja);
-   `dravya.round-melon-tinda-punjabi` vs `dravya.tinda` — the latter pair is
-   what produced the D073 IFCT collision.
+2. **Pre-existing duplicate pairs the earlier merge missed (closed by
+   CLOSE1).** `dravya.lotus-seed` (Makhanna) absorbed `dravya.makhana`
+   (Makhanna / Padma Beeja), and `dravya.tinda` absorbed
+   `dravya.round-melon-tinda-punjabi`. The latter merge resolved the D073 IFCT
+   reverse collision: D073 now has one dravya owner.
 3. **An alias bug.** `dravya.methi-leaves` carries the alias
    `kasuri methi (dried)` while `dravya.fenugreek-leaf-dry` *is* Kasuri Methi.
    Fresh leaf can be matched by a dried-leaf name.

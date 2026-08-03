@@ -1,6 +1,10 @@
 import Foundation
 import SwiftData
 
+private enum SearchIndexMigrationError: Error {
+    case countMismatch(expected: Int, actual: Int)
+}
+
 @MainActor
 final class SearchIndexStore {
     static let shared = SearchIndexStore()
@@ -112,6 +116,24 @@ final class SearchIndexStore {
         try saveCache(context: context)
         
         print("🔎 SearchIndexStore: Full rebuild complete. Indexed \(foods.count) items.")
+    }
+
+    /// Rebuilds the persisted cache as part of an in-flight catalogue
+    /// migration without committing the surrounding SwiftData transaction.
+    /// AyurvedaSeeder owns the eventual save or rollback.
+    func rebuildForCatalogueMigration(context: ModelContext) throws -> Int {
+        let foods = try context.fetch(FetchDescriptor<FoodItem>())
+        let canonicalMap = try ayurvedaSearchMap(context: context)
+        buildInMemory(foods: foods, canonicalMap: canonicalMap)
+        let rebuiltCount = compactFoods.count
+        try saveCache(context: context, persist: false)
+        guard rebuiltCount == foods.count else {
+            throw SearchIndexMigrationError.countMismatch(
+                expected: foods.count,
+                actual: rebuiltCount
+            )
+        }
+        return rebuiltCount
     }
 
     // MARK: - 3. CRUD & Status Operations
@@ -385,7 +407,10 @@ final class SearchIndexStore {
         revision &+= 1
     }
 
-    private func saveCache(context: ModelContext) throws {
+    private func saveCache(
+        context: ModelContext,
+        persist: Bool = true
+    ) throws {
         let payload = SearchIndexPayload(
             compactFoods: compactFoods.map { $0.asCodable() },
             invertedIndex: invertedIndex.mapValues { Array($0) },
@@ -407,7 +432,9 @@ final class SearchIndexStore {
             createdAt: .now
         )
         context.insert(cache)
-        try context.save()
+        if persist {
+            try context.save()
+        }
     }
 
     private func apply(payload: SearchIndexPayload) {

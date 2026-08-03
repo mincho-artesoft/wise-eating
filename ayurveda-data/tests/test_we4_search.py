@@ -26,8 +26,8 @@ ARTIFACT_PARTS = [
 ]
 GOLDEN = ROOT / "ayurveda-data" / "tests" / "fixtures" / "we4_golden_queries.json"
 
-TARGET_FOODS = 14_489
-TARGET_PROFILES = 2_217
+TARGET_FOODS = 14_487
+TARGET_PROFILES = 2_215
 
 
 class WE4SearchTests(unittest.TestCase):
@@ -217,7 +217,7 @@ struct ParserHarness {
         linked_only_ids = set(link_tiers) - direct_ids
         self.assertEqual(len(direct_ids), TARGET_PROFILES)
         self.assertEqual(len(linked_only_ids), 2_007)
-        self.assertEqual(len(expected_ids), 4_224)
+        self.assertEqual(len(expected_ids), 4_222)
 
         for food_id in expected_ids:
             food = compact_by_id[food_id]
@@ -249,7 +249,7 @@ struct ParserHarness {
         }
         self.assertEqual(actual_index, expected_index)
         self.assertEqual(len(actual_index), 89)
-        self.assertEqual(sum(map(len, expected_index.values())), 59_132)
+        self.assertEqual(sum(map(len, expected_index.values())), 59_097)
         self.assertFalse(set(actual_index) & set(payload["invertedIndex"]))
 
     def test_engine_uses_index_intersection_and_exact_title_escape_hatch(self):

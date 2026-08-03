@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Emit the 377 placeholder dravyas in Legacy/foods.json shape, for review.
+"""Emit the 375 placeholder dravyas in Legacy/foods.json shape, for review.
 
     python3 build_dravya_foods.py --repo ~/work/wise-eating \
         --store /path/to/preseeded.store --out dravya_foods.json
 
-WHY THESE 377
+WHY THESE 375
     They are the dravyas with no USDA match, so their food row was synthesised
     and carries no nutrition, no category and no description. Every other food
     in the catalogue inherits all three from USDA.
@@ -25,7 +25,7 @@ WHAT IS REAL HERE AND WHAT IS NOT — read before trusting a number
     on how much published sources disagree. That block is for review only and
     must be stripped before ingest.
 """
-import argparse, glob, json, os, sqlite3, sys
+import argparse, glob, gzip, json, os, sqlite3, sys
 
 from phase2_rulings import (
     DIRECT_DECLINES,
@@ -105,14 +105,18 @@ REVIEWED_COLLISIONS = {
         "status": "reviewed — identical by construction",
         "note": "Two raw ash-gourd cuts share the same measured base row.",
     },
-    "dravya.round-melon-tinda-punjabi": {
-        "ifctCode": "D073",
-        "status": "reviewed — duplicate identity, see GitHub issue #4",
-    },
-    "dravya.tinda": {
-        "ifctCode": "D073",
-        "status": "reviewed — duplicate identity, see GitHub issue #4",
-    },
+}
+NOT_APPLICABLE = {
+    "dravya.acacia-gum": "culinary gum used in small functional amounts; a macro/vitamin panel is not meaningful",
+    "dravya.alkanet-root": "medicinal dye root used in trace amounts, not as a nutritive food",
+    "dravya.camphor-edible": "aromatic crystalline substance used only in trace amounts, not as a nutritive food",
+    "dravya.catechu": "concentrated medicinal wood extract used in trace amounts, not as a nutritive food",
+    "dravya.edible-lime": "calcium hydroxide mineral used only in trace amounts, not a food matrix",
+    "dravya.sambhar-salt": "individual mineral salt; a macro/vitamin panel is not meaningful",
+    "dravya.shilajit": "mineral resin taken in medicinal doses, not as a nutritive food",
+    "dravya.silver-leaf": "elemental silver garnish used in trace amounts, not a food matrix",
+    "dravya.tragacanth-gum": "culinary gum used in small functional amounts; a macro/vitamin panel is not meaningful",
+    "dravya.vida-salt": "individual mineral salt; a macro/vitamin panel is not meaningful",
 }
 OTHER_UNITS = {"energyKcal":"kcal","water":"g","weightG":"g","ash":"g","cholesterol":"mg",
                "caffeine":"mg","theobromine":"mg","alcoholEthyl":"g","betaine":"mg","alkalinityPH":""}
@@ -224,7 +228,12 @@ def blank(group):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--repo", required=True)
-    ap.add_argument("--store", required=True)
+    source = ap.add_mutually_exclusive_group(required=True)
+    source.add_argument("--store")
+    source.add_argument(
+        "--seed",
+        help="built ayurveda_seed.json.gz; avoids requiring an app-seeded store",
+    )
     ap.add_argument("--lipids-from", help="a foods.json to copy the 44-field lipid shape from")
     ap.add_argument("--out", default="dravya_foods.json")
     a = ap.parse_args()
@@ -232,9 +241,29 @@ def main():
 
     dr = {it["id"]: it for f in glob.glob(f"{repo}/ayurveda-data/dravyas/batch-*.json")
           for it in json.load(open(f))["items"]}
-    c = sqlite3.connect(os.path.expanduser(a.store))
-    prof = {r[0]: r[1] for r in c.execute(
-        "select ZFOODID, ZID from ZAYURVEDAPROFILE where ZKIND='dravya' and ZFOODID>=900000")}
+    if a.seed:
+        with gzip.open(os.path.expanduser(a.seed), "rt", encoding="utf-8") as handle:
+            envelope = json.load(handle)
+        prof = {
+            item["foodId"]: (
+                item["id"],
+                item["name"],
+                item["safety"]["minAgeMonths"],
+            )
+            for item in envelope["dravyas"]
+            if item["foodIsPlaceholder"]
+        }
+        c = None
+    else:
+        c = sqlite3.connect(os.path.expanduser(a.store))
+        prof = {
+            row[0]: (row[1], row[2], row[3])
+            for row in c.execute(
+                "select p.ZFOODID, p.ZID, f.ZNAME, f.ZMINAGEMONTHS "
+                "from ZAYURVEDAPROFILE p join ZFOODITEM f on f.ZID=p.ZFOODID "
+                "where p.ZKIND='dravya' and p.ZFOODID>=900000"
+            )
+        }
     lip = SHAPE.get("lipids")
     if a.lipids_from:
         src = json.load(open(os.path.expanduser(a.lipids_from)))[0]
@@ -243,17 +272,16 @@ def main():
         SHAPE["lipids"] = list(SOURCE_ONLY_LIPIDS)
 
     out, filled = [], 0
-    for fid, did in sorted(prof.items()):
+    for fid, (did, row_name, row_min_age) in sorted(prof.items()):
         d = dr.get(did, {})
         desc = "\n\n".join(x for x in (d.get("prabhava"), d.get("preparation")) if x)
-        row = c.execute("select ZNAME, ZMINAGEMONTHS from ZFOODITEM where ZID=?", (fid,)).fetchone()
         # category and diets are deliberately absent. The app does not use
         # category, and default diets were dropped on the reasoning that
         # Ayurveda is itself a dietary system and a fixed diet label can
         # contradict a constitution.
         prop, why = propose_age(d)
-        rec = {"id": fid, "name": row[0], "dravyaId": did,
-               "minAgeMonths": row[1], "allergens": [], "desctiption": desc}
+        rec = {"id": fid, "name": row_name, "dravyaId": did,
+               "minAgeMonths": row_min_age, "allergens": [], "desctiption": desc}
         for g in ("macronutrients","lipids","vitamins","minerals","aminoAcids",
                   "carbDetails","sterols","other","aminoAcidTotals","carotenoids",
                   "polyphenols","vitaminForms","organicAcids","antiNutrients",
@@ -275,7 +303,7 @@ def main():
                     if k in rec.get(g, {}): rec[g][k]["value"] = val
             rec["_review"] = {"source": v.get("_src"), "spread": v.get("_spread"),
                               "status": "proposed — verify before ingest",
-                              "currentMinAgeMonths": row[1],
+                              "currentMinAgeMonths": row_min_age,
                               "proposedMinAgeMonths": prop, "ageReason": why}
             if literature:
                 rec["_review"].update({
@@ -285,8 +313,12 @@ def main():
                 })
         else:
             rec["_review"] = {"source": None, "spread": None,
-                              "status": "NOT YET SOURCED — every nutrient is null, not zero",
-                              "currentMinAgeMonths": row[1],
+                              "status": (
+                                  f"not-applicable — {NOT_APPLICABLE[did]}"
+                                  if did in NOT_APPLICABLE
+                                  else "unsourced — no IFCT row, no published composition found"
+                              ),
+                              "currentMinAgeMonths": row_min_age,
                               "proposedMinAgeMonths": prop, "ageReason": why}
         if did in WITHDRAWN_IFCT:
             code, name = WITHDRAWN_IFCT[did]

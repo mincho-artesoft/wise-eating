@@ -40,7 +40,7 @@ class TrackedFileSizeTests(unittest.TestCase):
         )
         self.assertEqual(
             video_entry["byteSize"],
-            85_633_724,
+            85_697_754,
         )
 
         archive_parts = [

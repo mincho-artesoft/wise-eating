@@ -56,9 +56,14 @@ D34_EXPECTED_MODIFIERS = {
 }
 d34_normalized_tokens = build_seed.modifier_normalized_tokens
 TRACKED_FILE_SPLIT_LIMIT_BYTES = 90_000_000
-EXPECTED_SOURCE_COUNTS = {"dravyas": 706, "recipes": 1511}
+EXPECTED_SOURCE_COUNTS = {"dravyas": 704, "recipes": 1511}
 NUT3_PLACEHOLDER_MAPPING_SHA256 = (
-    "a0c450d16611d9ed78cf285ee630855e0e7dd81336f2c4fc49a642086b6f7022"
+    # CLOSE1 merged dravya.makhana (900201) into dravya.lotus-seed and
+    # dravya.round-melon-tinda-punjabi (900288) into dravya.tinda. No
+    # placeholder was added: 175 later placeholders shifted down by the
+    # mathematically expected offset with zero deviations. Prior value:
+    # bc7afbfce5b0ec708aec1fea387a72806bbe5e6b4fd9d48747ae01d60736441b.
+    "c0348d706d03685c93aa78b5f3ed9741b5f43eb772d1ab230cbbeb360944aba3"
 )
 NUT3_DRAVYA_TARGETS = {
     "dravya.fenugreek-greens": "dravya.methi-leaves",
@@ -155,9 +160,9 @@ def validate_nut3(here, repo_root, dravyas, recipes, errs):
         mapping_sha256 = hashlib.sha256(
             json.dumps(placeholder_mapping, separators=(",", ":")).encode("utf-8")
         ).hexdigest()
-        if placeholder_values != list(range(900_001, 900_378)):
+        if placeholder_values != list(range(900_001, 900_376)):
             errs.append(
-                "NUT3/G1: placeholder band is not exactly 900001-900377"
+                "NUT3/G1: placeholder band is not exactly 900001-900375"
             )
         if mapping_sha256 != NUT3_PLACEHOLDER_MAPPING_SHA256:
             errs.append(
@@ -467,10 +472,10 @@ def d34_validate(here, store, errs):
         )
     counts = seed.get("counts", {})
     expected_counts = {
-        "dravyas": 706,
+        "dravyas": 704,
         "recipes": TARGET_RECIPES,
         "links": TARGET_AYURVEDA_LINKS,
-        "derivedLinks": 1966, "placeholders": 377,
+        "derivedLinks": 1966, "placeholders": 375,
         "categoryRules": 187, "modifiers": 14,
         "nutrition": {"full": 1508, "estimated": 3, "none": 0},
         "safety": {
@@ -479,7 +484,7 @@ def d34_validate(here, store, errs):
             "allergenTaggedRecipes": 1190,
             "honeyMinAgeDravyas": 4,
             "honeyMinAgeRecipes": 5,
-            "authoredAgeDravyas": 392,
+            "authoredAgeDravyas": 390,
             "legacyImportAgeDravyas": 314,
             "authoredAgeRecipes": 1457,
             "legacyImportAgeRecipes": 54,

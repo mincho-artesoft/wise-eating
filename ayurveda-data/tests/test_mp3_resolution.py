@@ -40,7 +40,7 @@ ARTIFACT_PARTS = [
     ROOT / "Ayura" / "preseeded_db.store.gz.part-ab",
 ]
 
-TARGET_FOODS = 14_489
+TARGET_FOODS = 14_487
 
 
 class MP3DeterministicResolutionTests(unittest.TestCase):
@@ -546,8 +546,8 @@ struct MP3ResolutionHarness {
             ["unicorn steak", "xyzzy", ""],
         )
         self.assertEqual(self.catalog_count, TARGET_FOODS)
-        self.assertEqual(self.excluded_count, 8)
-        self.assertEqual(self.candidate_count, TARGET_FOODS - 8)
+        self.assertEqual(self.excluded_count, 11)
+        self.assertEqual(self.candidate_count, TARGET_FOODS - 11)
 
     def test_required_scorer_properties(self):
         result = subprocess.run(

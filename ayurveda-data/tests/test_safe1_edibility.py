@@ -35,6 +35,11 @@ EXPECTED = {
     ),
 }
 LEGACY_ENGINE_EXCLUSIONS = {"dravya.betel-nut", "dravya.vanaspati"}
+ENGINE_ONLY_EXCLUSIONS = {
+    "dravya.acacia-gum",
+    "dravya.silver-leaf",
+    "dravya.tragacanth-gum",
+}
 HONEY_AGE_SOURCE = (
     "NHS, Foods to avoid — do not give honey until over 1 year old | "
     "WHO, Infant and young child feeding, 20 Dec 2023 — complementary foods "
@@ -75,7 +80,7 @@ class SAFE1EdibilityTests(unittest.TestCase):
     def test_meal_engine_uses_the_existing_exclusion_set(self):
         self.assertEqual(
             build_seed.ENGINE_EXCLUDED_IDS,
-            set(EXPECTED) | LEGACY_ENGINE_EXCLUSIONS,
+            set(EXPECTED) | LEGACY_ENGINE_EXCLUSIONS | ENGINE_ONLY_EXCLUSIONS,
         )
         source = (DATA / "build_seed.py").read_text(encoding="utf-8")
         self.assertIn(
@@ -203,7 +208,7 @@ class SAFE1EdibilityTests(unittest.TestCase):
             set(EXPECTED),
         )
         self.assertEqual(
-            sum(item["engineExcluded"] for item in seed["dravyas"]), 8
+            sum(item["engineExcluded"] for item in seed["dravyas"]), 11
         )
         for dravya_id, reason in EXPECTED.items():
             self.assertEqual(dravyas[dravya_id]["inedibleReason"], reason)

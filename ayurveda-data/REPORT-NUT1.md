@@ -14,8 +14,9 @@ Accepted in commit `07cca4a`.
   - `E067`: Elephant apple (ou-tenga)
   - `E034`: Sweet lime juice
   - `B002`: White chickpea
-- `D073` remains shared by Punjabi tinda and Round gourd; the probable duplicate
-  is tracked in issue #4 rather than treated as a nutrition-match defect.
+- `D073` originally remained shared by Punjabi tinda and Round gourd. CLOSE1
+  confirmed both as *Praecitrullus fistulosus* and merged them into
+  `dravya.tinda`; the reverse collision is resolved and D073 now has one owner.
 - The two raw Ash gourd forms remain identical by construction and are flagged
   for review.
 

@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Build the deterministic Ayurveda seed bundle consumed by the app."""
+"""Build the deterministic Ayurveda seed bundle consumed by the app.
+
+The input store is asserted to be a clean USDA import because temporary bases
+have previously retained derived IngredientLink and search-index rows.
+"""
 
 from __future__ import annotations
 
@@ -16,20 +20,27 @@ from pathlib import Path
 from typing import Any
 
 
-SEED_VERSION = 7
+SEED_VERSION = 8
 GENERATED_AT = "2026-07-25T00:00:00Z"
-TARGET_FOODS = 14_489
-TARGET_PROFILES = 2_217
+TARGET_FOODS = 14_487
+TARGET_PROFILES = 2_215
 TARGET_RECIPES = 1_511
 TARGET_INGREDIENT_LINKS = 10_644
 TARGET_INGREDIENT_OWNERS = 1_511
 TARGET_AYURVEDA_LINKS = 2_336
+CLEAN_BASE_COUNTS = {
+    "ZFOODITEM": 12_601,
+    "ZAYURVEDAPROFILE": 0,
+    "ZAYURVEDALINK": 0,
+    "ZINGREDIENTLINK": 0,
+    "ZSEARCHINDEXCACHE": 0,
+}
 EXPECTED_COUNTS = {
-    "dravyas": 706,
+    "dravyas": 704,
     "recipes": TARGET_RECIPES,
     "links": TARGET_AYURVEDA_LINKS,
     "derivedLinks": 1966,
-    "placeholders": 377,
+    "placeholders": 375,
     "primaries": 329,
     "categoryRules": 187,
     "modifiers": 14,
@@ -37,12 +48,15 @@ EXPECTED_COUNTS = {
 V1_LINK_COUNT = 370
 ENGINE_EXCLUDED_IDS = {
     "dravya.alkanet-root",
+    "dravya.acacia-gum",
     "dravya.betel-nut",
     "dravya.camphor-edible",
     "dravya.castor-oil",
     "dravya.edible-lime",
     "dravya.kaunch-beej",
     "dravya.shilajit",
+    "dravya.silver-leaf",
+    "dravya.tragacanth-gum",
     "dravya.vanaspati",
 }
 PLACEHOLDER_BASE = 900_000
@@ -439,7 +453,6 @@ WHOLE_NUT_SEED_AGE_IDS = {
     "dravya.hazelnut",
     "dravya.lotus-seed",
     "dravya.macadamia",
-    "dravya.makhana",
     "dravya.panchmeva",
     "dravya.pecan",
     "dravya.pine-nut",
@@ -657,6 +670,23 @@ def load_store_ids(path: Path) -> set[int]:
     except sqlite3.Error as error:
         raise BuildError(f"cannot query ZFOODITEM.ZID in {path}: {error}") from error
     return {int(row[0]) for row in rows}
+
+
+def assert_clean_usda_base(path: Path) -> None:
+    """Fail before building if the temporary store contains derived state."""
+    try:
+        with sqlite3.connect(f"file:{path}?mode=ro", uri=True) as connection:
+            for table, expected in CLEAN_BASE_COUNTS.items():
+                actual = connection.execute(
+                    f"SELECT COUNT(*) FROM {table}"
+                ).fetchone()[0]
+                if actual != expected:
+                    raise BuildError(
+                        f"unclean USDA base {path}: {table} expected "
+                        f"{expected}, got {actual}"
+                    )
+    except sqlite3.Error as error:
+        raise BuildError(f"cannot audit clean USDA base {path}: {error}") from error
 
 
 def load_food_nutrition(
@@ -3126,7 +3156,10 @@ def build_envelope(
         item["id"] for item in output_dravyas if item["edible"] is False
     }
     expected_inedible_ids = ENGINE_EXCLUDED_IDS - {
+        "dravya.acacia-gum",
         "dravya.betel-nut",
+        "dravya.silver-leaf",
+        "dravya.tragacanth-gum",
         "dravya.vanaspati",
     }
     if inedible_ids != expected_inedible_ids:
@@ -3381,6 +3414,7 @@ def main() -> int:
     data_root = Path(__file__).resolve().parent
     try:
         actual_store_path = store_path(args.store)
+        assert_clean_usda_base(actual_store_path)
         store_ids = load_store_ids(actual_store_path)
         nutrition_by_id = load_food_nutrition(args.foods, store_ids)
         dravya_nutrition_by_id = load_dravya_food_nutrition(args.dravya_foods)

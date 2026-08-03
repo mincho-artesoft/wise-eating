@@ -40,13 +40,16 @@ THREE THINGS THIS CHANGES FROM generate_multires_assets.py
     alone looked healthy in an earlier measurement, but AVAssetImageGenerator
     cannot reliably random-access the reordered HEVC stream. The visible
     failure is a missing or wrong food image. Keep -bf 0.
+
+    The shipped 480 variant uses CRF 26 to stay below the 90 MB tracked-file
+    gate; 1024 remains CRF 24.
 """
 import argparse, base64, csv, json, os, subprocess, sys, tempfile
 
 FPS = 30
 TIMESCALE = 600
 GOP_BY_VARIANT = {"144": 1, "240": 1, "360": 12, "480": 12, "720": 30, "1024": 30}
-CRF_BY_VARIANT = {"144": 28, "240": 28, "360": 26, "480": 24, "720": 24, "1024": 24}
+CRF_BY_VARIANT = {"144": 28, "240": 28, "360": 26, "480": 26, "720": 24, "1024": 24}
 PRESET_BY_VARIANT = {"144": "fast", "240": "fast"}      # default "medium"
 GATE_MB = 90
 

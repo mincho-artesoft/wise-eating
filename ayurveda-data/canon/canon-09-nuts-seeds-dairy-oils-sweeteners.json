@@ -8,7 +8,7 @@
     {"id":"dravya.pistachio","name":"Pistachio","sanskrit":"Mukulaka","category":"dry-fruit-nut","vpk":[-1,0,1],"virya":"heating","fdc":"direct"},
     {"id":"dravya.pine-nut","name":"Pine nut (chilgoza)","sanskrit":"Nikochaka","category":"dry-fruit-nut","vpk":[-2,0,1],"virya":"heating","fdc":"direct"},
     {"id":"dravya.chironji","name":"Chironji (charoli)","sanskrit":"Priyala","category":"dry-fruit-nut","vpk":[-1,-1,1],"virya":"cooling","fdc":"estimated","note":"classical kheer nut"},
-    {"id":"dravya.makhana","name":"Fox nut (makhana)","sanskrit":"Makhanna / Padma Beeja","category":"dry-fruit-nut","vpk":[-1,-1,0],"virya":"cooling","fdc":"direct","note":"light, sattvic; fasting staple"},
+    {"id":"dravya.lotus-seed","name":"Fox nut (makhana)","sanskrit":"Makhanna / Padma Beeja","category":"dry-fruit-nut","vpk":[-1,-1,0],"virya":"cooling","fdc":"direct","note":"light, sattvic; fasting staple; merged duplicate"},
     {"id":"dravya.dry-coconut","name":"Dry coconut (copra)","sanskrit":"Narikela (shushka)","category":"dry-fruit-nut","vpk":[-1,0,1],"virya":"heating","fdc":"direct"},
     {"id":"dravya.desiccated-coconut","name":"Desiccated coconut","sanskrit":null,"category":"dry-fruit-nut","vpk":[-1,0,1],"virya":"neutral","fdc":"direct"},
     {"id":"dravya.golden-raisin","name":"Golden raisin (kishmish)","sanskrit":"Draksha (shushka)","category":"dry-fruit-nut","vpk":[-1,-1,0],"virya":"cooling","fdc":"direct","note":"classical laxative-mild nourisher"},

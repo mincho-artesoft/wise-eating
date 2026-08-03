@@ -51,6 +51,34 @@ def normalized_tokens(value):
     )
 
 
+class NutritionUnitSchemaTests(unittest.TestCase):
+    def test_dravya_food_units_match_the_canonical_catalogue(self):
+        path = REPO_ROOT / "ayurveda-data" / "nutrition" / "dravya_foods.json"
+        rows = json.loads(path.read_text(encoding="utf-8"))
+
+        for row in rows:
+            for nutrient, (group, expected_unit) in (
+                build_seed.NUTRIENT_CATALOG.items()
+            ):
+                with self.subTest(
+                    dravya_id=row["dravyaId"],
+                    group=group,
+                    nutrient=nutrient,
+                ):
+                    entry = row.get(group, {}).get(nutrient)
+                    self.assertIsInstance(entry, dict)
+                    actual_unit = entry.get("unit")
+                    equivalent_micrograms = {
+                        actual_unit,
+                        expected_unit,
+                    } == {"ug", "µg"}
+                    self.assertTrue(
+                        actual_unit == expected_unit or equivalent_micrograms,
+                        f"{row['dravyaId']} {group}.{nutrient} uses "
+                        f"{actual_unit!r}, expected {expected_unit!r}",
+                    )
+
+
 class RecipeNutritionTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -331,8 +359,8 @@ class Phase2NutritionTests(unittest.TestCase):
             for dravya_id, record in self.records.items()
             if populated_values(record)
         }
-        self.assertEqual(len(self.records), 377)
-        self.assertEqual(len(populated), 68)
+        self.assertEqual(len(self.records), 375)
+        self.assertEqual(len(populated), 73)
 
         withdrawn = self.unresolved["withdrawn"]
         self.assertEqual(len(withdrawn), 7)
@@ -347,11 +375,12 @@ class Phase2NutritionTests(unittest.TestCase):
         )
         for dravya_id, _, _, _ in withdrawn:
             self.assertFalse(populated_values(self.records[dravya_id]))
-        self.assertFalse(
-            any(
+        self.assertEqual(
+            sum(
                 record.get("_review", {}).get("provenance") == "derived"
                 for record in self.records.values()
-            )
+            ),
+            6,
         )
 
         added_ids = (
@@ -449,7 +478,7 @@ class Phase2NutritionTests(unittest.TestCase):
                 {tuple(candidate) for candidate in deferred_by_id[dravya_id][2]},
             )
 
-    def test_178_no_relation_records_are_unmatched_not_all_null(self):
+    def test_current_no_relation_records_are_unmatched_not_all_null(self):
         nutrition_root = REPO_ROOT / "ayurveda-data" / "nutrition"
         with (nutrition_root / "ifct2017-compositions.csv").open(
             encoding="utf-8", errors="replace"
@@ -487,9 +516,19 @@ class Phase2NutritionTests(unittest.TestCase):
             if populated_values(self.records[dravya_id])
         }
         self.assertEqual(len(ifct_keys), 3_435)
-        self.assertEqual(len(no_relation), 178)
-        self.assertEqual(len(no_relation - populated), 176)
-        self.assertEqual(populated, {"dravya.black-rice", "dravya.camel-milk"})
+        self.assertEqual(len(no_relation), 177)
+        self.assertEqual(len(no_relation - populated), 171)
+        self.assertEqual(
+            populated,
+            {
+                "dravya.black-rice",
+                "dravya.camel-milk",
+                "dravya.besan-ladoo",
+                "dravya.panchamrita",
+                "dravya.pongal-ven",
+                "dravya.steamed-modak",
+            },
+        )
         self.assertEqual(
             Counter(self.dravyas[dravya_id]["category"] for dravya_id in no_relation),
             Counter(
@@ -510,7 +549,7 @@ class Phase2NutritionTests(unittest.TestCase):
                     "leafy-green": 3,
                     "seed": 2,
                     "dairy": 2,
-                    "dry-fruit-nut": 2,
+                    "dry-fruit-nut": 1,
                     "legume": 2,
                 }
             ),

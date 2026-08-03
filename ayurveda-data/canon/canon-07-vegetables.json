@@ -77,7 +77,6 @@
     {"id":"dravya.green-peas-pod","name":"Green peas in pod (fresh sabzi)","sanskrit":"Harita Kalaya","category":"vegetable","vpk":[1,-1,-1],"virya":"cooling","fdc":"direct"},
     {"id":"dravya.mustard-pods","name":"Tender mustard pods","sanskrit":null,"category":"vegetable","vpk":[-1,1,-1],"virya":"heating","fdc":"estimated"},
     {"id":"dravya.gherkin","name":"Indian gherkin (kundru-dondakaya kin)","sanskrit":null,"category":"vegetable","vpk":[0,-1,-1],"virya":"cooling","fdc":"nearest"},
-    {"id":"dravya.round-melon-tinda-punjabi","name":"Punjabi tinda (apple gourd)","sanskrit":null,"category":"vegetable","vpk":[0,-1,-1],"virya":"cooling","fdc":"estimated"},
     {"id":"dravya.wild-brinjal","name":"Wild brinjal (kantakari class)","sanskrit":"Brihati","category":"vegetable","vpk":[-1,1,-2],"virya":"heating","fdc":"estimated","note":"classical dashamula relative; regional sabzi"},
     {"id":"dravya.tender-tamarind-pod","name":"Tender tamarind pod","sanskrit":"Bala Amlika","category":"vegetable","vpk":[-1,2,0],"virya":"heating","fdc":"estimated"},
     {"id":"dravya.papdi-lilva","name":"Fresh hyacinth beans (lilva)","sanskrit":null,"category":"vegetable","vpk":[1,0,-1],"virya":"neutral","fdc":"estimated"},

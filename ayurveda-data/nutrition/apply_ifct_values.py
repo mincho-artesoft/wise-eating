@@ -29,10 +29,6 @@ REVIEWED_COLLISIONS={
  'dravya.ash-gourd-strips':{
    'ifctCode':'D001','status':'reviewed — identical by construction',
    'note':'Two raw ash-gourd cuts share the same measured base row.'},
- 'dravya.round-melon-tinda-punjabi':{
-   'ifctCode':'D073','status':'reviewed — duplicate identity, see GitHub issue #4'},
- 'dravya.tinda':{
-   'ifctCode':'D073','status':'reviewed — duplicate identity, see GitHub issue #4'},
 }
 rows=list(csv.DictReader(open(B+'ifct2017-compositions.csv',encoding='utf-8',errors='replace')))
 C={c.split('; ')[-1]:c for c in rows[0]}

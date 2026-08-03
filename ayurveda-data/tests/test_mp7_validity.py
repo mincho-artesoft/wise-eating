@@ -12,7 +12,7 @@ KNOWN_BAD_PLAN = (
     ROOT / "ayurveda-data" / "tests" / "mp6b-known-bad-plan.json"
 )
 
-TARGET_FOODS = 14_489
+TARGET_FOODS = 14_487
 
 
 class CulinaryValidityChecker:

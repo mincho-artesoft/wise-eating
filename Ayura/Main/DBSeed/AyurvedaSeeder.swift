@@ -20,6 +20,7 @@ enum AyurvedaSeeder {
     var updatedRecipeFoods = 0
     var updatedDravyaFoods = 0
     var updatedSafetyFoods = 0
+    var rebuiltSearchIndex = false
 
     var insertedRows: Int {
       insertedFoods + insertedProfiles + insertedLinks
@@ -55,6 +56,10 @@ enum AyurvedaSeeder {
         && updatedDravyaFoods == 0
         && updatedSafetyFoods == 0
     }
+
+    var requiresSearchIndexRebuild: Bool {
+      changedSearchableFoods && !rebuiltSearchIndex
+    }
   }
 
   static func bundleSeedVersion() throws -> Int {
@@ -80,6 +85,13 @@ enum AyurvedaSeeder {
         seed: seed,
         profiles: &existingProfiles,
         links: &existingLinks,
+        foods: &allFoods,
+        context: context,
+        result: &result
+      )
+      try migratePlaceholderIdsIfNeeded(
+        seed: seed,
+        profiles: &existingProfiles,
         foods: &allFoods,
         context: context,
         result: &result
@@ -128,7 +140,7 @@ enum AyurvedaSeeder {
         } else if let food = foodByID[dravya.foodId],
                   food.itemDescription != dravyaDescription(dravya) {
           // A placeholder row seeded before descriptions existed keeps its empty
-          // one otherwise, and there are 377 of them.
+          // one otherwise, and there are 375 of them.
           food.itemDescription = dravyaDescription(dravya)
           result.updatedDravyaFoods += 1
         }
@@ -296,6 +308,11 @@ enum AyurvedaSeeder {
     "dravya.ripe-mango": "dravya.mango-ripe",
   ]
 
+  private static let placeholderMergeTargets: [String: String] = [
+    "dravya.makhana": "dravya.lotus-seed",
+    "dravya.round-melon-tinda-punjabi": "dravya.tinda",
+  ]
+
   private static func migrateV5CanonicalDataIfNeeded(
     seed: AyurvedaSeedDTO,
     profiles: inout [AyurvedaProfile],
@@ -391,45 +408,6 @@ enum AyurvedaSeeder {
       result.deletedProfiles += 1
     }
 
-    // Placeholder ids were historically assigned by ordinal. Removing seven
-    // placeholders shifts 262 surviving ids. Move their existing FoodItem
-    // objects instead of replacing them so every relationship keeps pointing at
-    // the same logical food.
-    var placeholderMoves: [(food: FoodItem, oldID: Int, newID: Int)] = []
-    for (profileID, incoming) in incomingDravyas {
-      guard let profile = profileByID[profileID],
-        profile.foodId != incoming.foodId,
-        let existingFood = foodByID[profile.foodId]
-      else {
-        continue
-      }
-
-      let oldID = profile.foodId
-      if reservedBand.contains(oldID) && reservedBand.contains(incoming.foodId) {
-        placeholderMoves.append((existingFood, oldID, incoming.foodId))
-        scalarFoodIDRemap[oldID] = incoming.foodId
-      } else if reservedBand.contains(oldID) {
-        guard let destination = foodByID[incoming.foodId] else {
-          throw AyurvedaSeederError.v5MigrationConflict(profileID)
-        }
-        mergeAndDeleteGeneratedFood(
-          existingFood,
-          into: destination,
-          destinationID: incoming.foodId
-        )
-        foodByID.removeValue(forKey: oldID)
-      }
-      profile.foodId = incoming.foodId
-    }
-
-    for (index, move) in placeholderMoves.enumerated() {
-      move.food.id = Int.min / 2 + index
-    }
-    for move in placeholderMoves {
-      move.food.id = move.newID
-      result.remappedFoodIDs += 1
-    }
-
     for dismissed in dismissedFoods {
       if let replacement = scalarFoodIDRemap[dismissed.foodID] {
         dismissed.foodID = replacement
@@ -463,6 +441,161 @@ enum AyurvedaSeeder {
         + "\(result.deletedLinks) stale links; remapped "
         + "\(result.remappedFoodIDs) placeholder ids and "
         + "\(result.remappedFoodReferences) persisted references."
+    )
+  }
+
+  private static func migratePlaceholderIdsIfNeeded(
+    seed: AyurvedaSeedDTO,
+    profiles: inout [AyurvedaProfile],
+    foods: inout [FoodItem],
+    context: ModelContext,
+    result: inout RunResult
+  ) throws {
+    var profileByID = try makeProfileMap(profiles)
+    var foodByID = try makeFoodMap(foods)
+    let incomingProfileIDs = Set(
+      seed.dravyas.map(\.id) + seed.recipes.map(\.id)
+    )
+    let incomingPlaceholders = seed.dravyas
+      .filter(\.foodIsPlaceholder)
+      .sorted { $0.id < $1.id }
+
+    var moves: [(
+      profileID: String,
+      profile: AyurvedaProfile,
+      food: FoodItem,
+      oldID: Int,
+      newID: Int,
+      persistentID: PersistentIdentifier
+    )] = []
+    for incoming in incomingPlaceholders {
+      guard let profile = profileByID[incoming.id],
+        profile.foodId != incoming.foodId
+      else {
+        continue
+      }
+      guard reservedBand.contains(profile.foodId),
+        reservedBand.contains(incoming.foodId),
+        let food = foodByID[profile.foodId]
+      else {
+        throw AyurvedaSeederError.placeholderMigrationConflict(incoming.id)
+      }
+      moves.append((
+        incoming.id,
+        profile,
+        food,
+        profile.foodId,
+        incoming.foodId,
+        food.persistentModelID
+      ))
+    }
+    guard !moves.isEmpty else {
+      return
+    }
+
+    let ingredientLinks = try context.fetch(FetchDescriptor<IngredientLink>())
+    let mealPlanEntries = try context.fetch(FetchDescriptor<MealPlanEntry>())
+    let storageItems = try context.fetch(FetchDescriptor<StorageItem>())
+    let mealLogStorageLinks = try context.fetch(
+      FetchDescriptor<MealLogStorageLink>()
+    )
+    let storageTransactions = try context.fetch(
+      FetchDescriptor<StorageTransaction>()
+    )
+    let shoppingItems = try context.fetch(FetchDescriptor<ShoppingListItem>())
+    let recentFoods = try context.fetch(FetchDescriptor<RecentlyAddedFood>())
+    let nodes = try context.fetch(FetchDescriptor<Node>())
+    let dismissedFoods = try context.fetch(FetchDescriptor<DismissedFoodID>())
+
+    var scalarFoodIDRemap = Dictionary(
+      uniqueKeysWithValues: moves.map { ($0.oldID, $0.newID) }
+    )
+    var deletedFoodModelIDs = Set<PersistentIdentifier>()
+    var deletedProfileIDs = Set<String>()
+    let targetIDs = Set(moves.map(\.newID))
+    let staleBlockers = profiles
+      .filter {
+        !incomingProfileIDs.contains($0.id) && targetIDs.contains($0.foodId)
+      }
+      .sorted { $0.id < $1.id }
+
+    for staleProfile in staleBlockers {
+      guard let survivorID = placeholderMergeTargets[staleProfile.id],
+        let survivorProfile = profileByID[survivorID],
+        let sourceFood = foodByID[staleProfile.foodId],
+        let destinationFood = foodByID[survivorProfile.foodId]
+      else {
+        throw AyurvedaSeederError.placeholderMigrationConflict(staleProfile.id)
+      }
+      scalarFoodIDRemap[staleProfile.foodId] = survivorProfile.foodId
+      result.remappedFoodReferences += transferFoodReferences(
+        from: sourceFood,
+        to: destinationFood,
+        ingredientLinks: ingredientLinks,
+        mealPlanEntries: mealPlanEntries,
+        storageItems: storageItems,
+        mealLogStorageLinks: mealLogStorageLinks,
+        storageTransactions: storageTransactions,
+        shoppingItems: shoppingItems,
+        recentFoods: recentFoods,
+        nodes: nodes
+      )
+      deletedFoodModelIDs.insert(sourceFood.persistentModelID)
+      deletedProfileIDs.insert(staleProfile.id)
+      context.delete(sourceFood)
+      context.delete(staleProfile)
+      foodByID.removeValue(forKey: staleProfile.foodId)
+      profileByID.removeValue(forKey: staleProfile.id)
+      result.deletedFoods += 1
+      result.deletedProfiles += 1
+    }
+
+    for move in moves {
+      move.profile.foodId = move.newID
+    }
+    for (index, move) in moves.enumerated() {
+      move.food.id = Int.min / 2 + index
+    }
+    for move in moves {
+      move.food.id = move.newID
+      result.remappedFoodIDs += 1
+    }
+
+    for move in moves.prefix(5) {
+      guard move.food.persistentModelID == move.persistentID else {
+        throw AyurvedaSeederError.placeholderIdentityChanged(move.profileID)
+      }
+      print(
+        "   🧷 Placeholder identity preserved: \(move.profileID) "
+          + "\(move.oldID)→\(move.newID), \(move.persistentID)"
+      )
+    }
+
+    for dismissed in dismissedFoods {
+      if let replacement = scalarFoodIDRemap[dismissed.foodID] {
+        dismissed.foodID = replacement
+        result.remappedFoodReferences += 1
+      }
+    }
+
+    profiles.removeAll { deletedProfileIDs.contains($0.id) }
+    foods.removeAll { deletedFoodModelIDs.contains($0.persistentModelID) }
+
+    let expectedFoodCount = 12_601 + seed.counts.placeholders + seed.counts.recipes
+    let cacheFoodCount = try SearchIndexStore.shared
+      .rebuildForCatalogueMigration(context: context)
+    guard cacheFoodCount == expectedFoodCount else {
+      throw AyurvedaSeederError.placeholderCacheCount(
+        expected: expectedFoodCount,
+        actual: cacheFoodCount
+      )
+    }
+    result.rebuiltSearchIndex = true
+
+    print(
+      "   🔄 Placeholder migration: remapped \(moves.count) FoodItem ids; "
+        + "deleted \(staleBlockers.count) obsolete placeholder foods; "
+        + "rebuilt search cache for \(cacheFoodCount) foods."
     )
   }
 
@@ -576,18 +709,18 @@ enum AyurvedaSeeder {
   }
 
   private static func validate(seed: AyurvedaSeedDTO) throws {
-    guard seed.counts.dravyas == 706,
+    guard seed.counts.dravyas == 704,
       seed.counts.recipes == 1_511,
       seed.counts.links == 2_336,
       seed.counts.derivedLinks == 1_966,
-      seed.counts.placeholders == 377,
+      seed.counts.placeholders == 375,
       seed.counts.categoryRules == 187,
       seed.counts.modifiers == 14,
       seed.counts.nutrition.full
         + seed.counts.nutrition.estimated
         + seed.counts.nutrition.none == seed.counts.recipes,
       seed.counts.safety.profiles == seed.counts.dravyas + seed.counts.recipes,
-      seed.counts.safety.authoredAgeDravyas == 392,
+      seed.counts.safety.authoredAgeDravyas == 390,
       seed.counts.safety.legacyImportAgeDravyas == 314,
       seed.counts.safety.authoredAgeRecipes == 1_457,
       seed.counts.safety.legacyImportAgeRecipes == 54,
@@ -610,7 +743,7 @@ enum AyurvedaSeeder {
           && ($0.inedibleReason?.isEmpty == false)
           && !$0.servings.isEmpty
       }),
-      seed.dravyas.filter(\.engineExcluded).count == 8
+      seed.dravyas.filter(\.engineExcluded).count == 11
     else {
       throw AyurvedaSeederError.invalidSafetyMetadata
     }
@@ -1208,6 +1341,9 @@ private enum AyurvedaSeederError: Error, LocalizedError {
   case missingSafetyDiet(String)
   case invalidSafetyAllergen(String)
   case v5MigrationConflict(String)
+  case placeholderMigrationConflict(String)
+  case placeholderIdentityChanged(String)
+  case placeholderCacheCount(expected: Int, actual: Int)
 
   var errorDescription: String? {
     switch self {
@@ -1245,6 +1381,12 @@ private enum AyurvedaSeederError: Error, LocalizedError {
       return "the Ayurveda seed references unsupported allergen \(allergen)"
     case .v5MigrationConflict(let profileId):
       return "the Ayurveda v5 migration cannot reconcile profile \(profileId)"
+    case .placeholderMigrationConflict(let profileId):
+      return "the placeholder migration cannot reconcile profile \(profileId)"
+    case .placeholderIdentityChanged(let profileId):
+      return "the placeholder migration replaced FoodItem identity for \(profileId)"
+    case .placeholderCacheCount(let expected, let actual):
+      return "the placeholder migration rebuilt a search cache for \(actual) foods; expected \(expected)"
     }
   }
 }
