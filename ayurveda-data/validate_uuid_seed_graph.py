@@ -41,7 +41,6 @@ def validate_catalogs() -> tuple[set[str], dict[str, int]]:
     identities: set[str] = set()
     payload_ids: set[str] = set()
     foods = load_json(AYURA / "Legacy/foods.json")
-    exercises = load_json(AYURA / "Legacy/exercises.json")
     catalog_numbers: set[int] = set()
     for row in foods:
         food_id = add_unique(identities, row["id"], "food.id")
@@ -55,12 +54,9 @@ def validate_catalogs() -> tuple[set[str], dict[str, int]]:
         ):
             if row.get(key) is not None:
                 add_unique(payload_ids, row[key]["id"], f"{food_id}.{key}.id")
-    for row in exercises:
-        add_unique(identities, row["id"], "exercise.id")
     return identities | payload_ids, {
         "foods": len(foods),
         "foodPayloads": len(payload_ids),
-        "exercises": len(exercises),
     }
 
 

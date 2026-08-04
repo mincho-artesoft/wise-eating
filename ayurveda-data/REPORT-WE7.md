@@ -34,7 +34,7 @@ This table was written before any removal, as required.
 | `SmartSearchView.swift` | 7,859 | No compiled declaration; commented archive of `SmartSearchView` and `SearchDomain` | Swift compiler input | No exact-symbol, interface, Objective-C runtime, selector, or string lookup | **DEAD** |
 | `foods.json` | 68,749,883 | 12,601 USDA food records | Copied into app bundle | `SeedManager.swift:131`; also build/test inputs in `build_seed.py:107` and `test_we2_nutrition.py:19` | **LIVE** |
 | `product_buckets.json` | 65,629,090 | 7,639 product-bucket records | Copied into app bundle | `SeedManager.swift:80` | **LIVE** |
-| `sports.json` | 1,059,339 | 2,918 exercise records | Copied into app bundle | `SeedManager.swift:174` | **LIVE** |
+| `exercises.json` | 1,059,339 | 2,918 exercise records | Removed from app bundle | Bundled exercise seed removed | **REMOVED** |
 | `vocabulary.json` | 13,442,886 | 544,453 vocabulary entries | Copied into app bundle | `SeedManager.swift:60` | **LIVE** |
 | `workouts.json` | 2,509,350 | 1,777 workout-template records | Removed from app bundle | Template-plan feature removed | **REMOVED** |
 
@@ -42,15 +42,14 @@ The nine Swift sources have 2,288 nonblank lines in total, and every nonblank li
 
 ## LIVE-file founder decision list
 
-The four remaining JSON resources stay. They are part of the runtime empty-table/fallback seed path, even though the WE-2 preseed normally makes that path unnecessary on a fresh install.
+The three remaining JSON resources stay. They are part of the runtime empty-table/fallback seed path, even though the WE-2 preseed normally makes that path unnecessary on a fresh install.
 
 | Live resource | What removal would require |
 |---|---|
 | `foods.json` | Replace or remove the `FoodItem` empty-table fallback in `SeedManager`, and replace its build/test input use. |
 | `product_buckets.json` | Replace or remove the product-bucket fallback seed path in `SeedManager`. |
-| `sports.json` | Replace or remove the exercise fallback seed path in `SeedManager`. |
 | `vocabulary.json` | Replace or remove the vocabulary fallback seed path in `SeedManager`. |
-The former `workouts.json` template seed and its runtime lookup were removed together with the training-plan template feature.
+The former `exercises.json` and `workouts.json` seeds were removed together with their runtime seed paths.
 
 ## Before-removal size baseline
 

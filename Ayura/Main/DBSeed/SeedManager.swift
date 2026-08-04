@@ -11,6 +11,7 @@ enum SeedManager {
         let ctx = GlobalState.modelContext!
         ctx.autosaveEnabled = false
 
+        removeBundledExercisesIfNeeded(context: ctx)
         await seedBarcodesIfNeeded(context: ctx)
         await seedReferenceVitaminsIfNeeded(context: ctx)
         await seedReferenceMineralsIfNeeded(context: ctx)
@@ -18,7 +19,6 @@ enum SeedManager {
         AyuraLaunchProbe.event("ayurveda-check-begin")
         let ayurvedaChangedSearchableFoods = await seedAyurvedaIfNeeded(context: ctx)
         AyuraLaunchProbe.event("ayurveda-check-end")
-        await seedExercisesIfNeeded(context: ctx)
 
         do {
             if ctx.hasChanges {
@@ -155,32 +155,39 @@ enum SeedManager {
         }
     }
 
-    // MARK: – Exercises
-    private static func seedExercisesIfNeeded(context ctx: ModelContext) async {
-        print("-> Checking for Exercises...")
-        guard databaseIsEmpty(entity: ExerciseItem.self, context: ctx) else {
-            print("   Exercises already seeded, skipping.")
-            return
-        }
-
-        print("   Seeding Exercises from exercises.json...")
-        guard let url = Bundle.main.url(forResource: "exercises", withExtension: "json") else {
-            assertionFailure("exercises.json not found"); return
-        }
-
+    // MARK: – Removed bundled exercise catalogue
+    private static func removeBundledExercisesIfNeeded(context ctx: ModelContext) {
         do {
-            let raw = try Data(contentsOf: url)
-            let dtos = try JSONDecoder().decode([ExerciseItemDTO].self, from: raw)
+            let descriptor = FetchDescriptor<ExerciseItem>(
+                predicate: #Predicate { $0.catalogNumber != nil }
+            )
+            let bundledExercises = try ctx.fetch(descriptor)
+            guard !bundledExercises.isEmpty else { return }
 
-            try ctx.transaction {
-                for dto in dtos {
-                    let exercise = dto.model()
-                    ctx.insert(exercise)
+            let bundledIDs = Set(bundledExercises.map(\.id))
+
+            for link in try ctx.fetch(FetchDescriptor<ExerciseLink>()) {
+                if let exerciseID = link.exercise?.id,
+                   bundledIDs.contains(exerciseID) {
+                    ctx.delete(link)
                 }
             }
-            print("   ✅ Seeded \(dtos.count) exercises from exercises.json")
+
+            for planExercise in try ctx.fetch(FetchDescriptor<TrainingPlanExercise>()) {
+                if let exerciseID = planExercise.exercise?.id,
+                   bundledIDs.contains(exerciseID) {
+                    ctx.delete(planExercise)
+                }
+            }
+
+            for exercise in bundledExercises {
+                ctx.delete(exercise)
+            }
+            try ctx.save()
+            print("🧹 Removed \(bundledExercises.count) bundled exercises.")
         } catch {
-            print("   ❌ Exercise seeding failed: \(error)")
+            ctx.rollback()
+            print("❌ Failed to remove bundled exercises: \(error)")
         }
     }
 

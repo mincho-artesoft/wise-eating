@@ -9,7 +9,6 @@ import re
 from pathlib import Path
 
 from stable_ids import (
-    exercise_uuid,
     food_payload_uuid,
     food_uuid,
     product_bucket_uuid,
@@ -200,9 +199,6 @@ def main() -> int:
     changed = {
         "foods": migrate_catalog(
             root / "Ayura/Legacy/foods.json", food_uuid, payload_ids=True
-        ),
-        "exercises": migrate_catalog(
-            root / "Ayura/Legacy/exercises.json", exercise_uuid
         ),
         "frameIndex": migrate_frame_index(
             root / "Ayura/Food/frame_index.json"

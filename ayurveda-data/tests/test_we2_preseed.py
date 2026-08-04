@@ -120,6 +120,13 @@ class PreseedArtifactTests(unittest.TestCase):
         self.assertFalse((REPO_ROOT / "Ayura" / "AyuraTemplates.store").exists())
         self.assertFalse((REPO_ROOT / "Ayura" / "Legacy" / "workouts.json").exists())
 
+    def test_bundled_exercise_catalog_is_removed(self):
+        self.assertEqual(
+            self.connection.execute("SELECT COUNT(*) FROM ZEXERCISEITEM").fetchone()[0],
+            0,
+        )
+        self.assertFalse((REPO_ROOT / "Ayura" / "Legacy" / "exercises.json").exists())
+
     def test_removed_profile_and_exercise_fields_are_absent(self):
         profile_columns = {
             row[1]
