@@ -9,7 +9,9 @@ public final class FoodItem: Identifiable {
     #Index<FoodItem>([\.name], [\.isUserAdded, \.isRecipe], [\.nameNormalized])
 
     // MARK: – Basic
-    @Attribute(.unique) public var id: Int
+    @Attribute(.unique) public var id: UUID
+    /// Stable number from the legacy USDA catalogue. It is provenance, not identity.
+    @Attribute(.unique) public var catalogNumber: Int?
 
     public var searchTokens: [String] = []
     public var searchTokens2: [String] = []
@@ -123,7 +125,8 @@ public final class FoodItem: Identifiable {
     
     // MARK: – Init
     public init(
-        id: Int,
+        id: UUID = UUID(),
+        catalogNumber: Int? = nil,
         name: String,
         isRecipe: Bool = false,
         isMenu: Bool = false,
@@ -147,6 +150,7 @@ public final class FoodItem: Identifiable {
         ingredients: [IngredientLink]? = nil
     ) {
         self.id = id
+        self.catalogNumber = catalogNumber
         self.name = name
         self.nameNormalized = name.foldedSearchKey
         self.searchTokens = FoodItem.makeTokens(from: name)
@@ -570,7 +574,7 @@ extension FoodItem {
 
         let vitaminsWithColor = (try? ctx.fetch(FetchDescriptor<Vitamin>())) ?? []
         let mineralsWithColor = (try? ctx.fetch(FetchDescriptor<Mineral>())) ?? []
-        let colorMap = Dictionary(uniqueKeysWithValues: (vitaminsWithColor.map { ($0.id, Color(hex: $0.colorHex)) } + mineralsWithColor.map { ($0.id, Color(hex: $0.colorHex)) }))
+        let colorMap = Dictionary(uniqueKeysWithValues: (vitaminsWithColor.map { ($0.key, Color(hex: $0.colorHex)) } + mineralsWithColor.map { ($0.key, Color(hex: $0.colorHex)) }))
 
         var pool: [DisplayableNutrient] = []
         for (id, label) in labelMap {

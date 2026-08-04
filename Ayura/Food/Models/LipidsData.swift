@@ -5,7 +5,7 @@ import Foundation
 public final class LipidsData: Identifiable {
 
     // MARK: – Основни данни
-    @Attribute(.unique) public var id = UUID()
+    @Attribute(.unique) public var id: UUID
 
     // MARK: – Общи стойности (lipids_main)
     public var totalSaturated:        Nutrient?   // Fatty acids, total saturated (G)
@@ -66,6 +66,7 @@ public final class LipidsData: Identifiable {
 
     // MARK: – Инициализатор
     public init(
+        id: UUID = UUID(),
         totalSaturated:        Nutrient? = nil,
         totalMonounsaturated:  Nutrient? = nil,
         totalPolyunsaturated:  Nutrient? = nil,
@@ -115,6 +116,7 @@ public final class LipidsData: Identifiable {
         pufa22_6: Nutrient? = nil,
         pufa2_4:  Nutrient? = nil
     ) {
+        self.id                   = id
         self.totalSaturated       = totalSaturated
         self.totalMonounsaturated = totalMonounsaturated
         self.totalPolyunsaturated = totalPolyunsaturated

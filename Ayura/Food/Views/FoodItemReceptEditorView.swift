@@ -1039,15 +1039,6 @@ struct FoodItemReceptEditorView: View {
         }
     }
     
-    private func nextFoodId() -> Int {
-        var desc = FetchDescriptor<FoodItem>()
-        desc.sortBy = [SortDescriptor(\FoodItem.id, order: .reverse)]
-        desc.fetchLimit = 1
-        
-        let maxId = ((try? ctx.fetch(desc))?.first?.id) ?? 0
-        return maxId + 1
-    }
-
     private func prefillAyurvedaIfNeeded() {
         guard !didPrefillAyurveda else { return }
         didPrefillAyurveda = true
@@ -1116,13 +1107,13 @@ struct FoodItemReceptEditorView: View {
             let recipe: FoodItem
             if isAIInit{
                 recipe = food ?? origRecipe ?? {
-                    let r = FoodItem(id: nextFoodId(), name: name, isRecipe: true, isUserAdded: true)
+                    let r = FoodItem(id: UUID(), name: name, isRecipe: true, isUserAdded: true)
                     ctx.insert(r)
                     return r
                 }()
             }else{
                 recipe = food ?? {
-                    let r = FoodItem(id: nextFoodId(), name: name, isRecipe: true, isUserAdded: true)
+                    let r = FoodItem(id: UUID(), name: name, isRecipe: true, isUserAdded: true)
                     ctx.insert(r)
                     return r
                 }()
@@ -1292,8 +1283,8 @@ struct FoodItemReceptEditorView: View {
         case mineral(Mineral)
         var id: String {
             switch self {
-            case .vitamin(let v): "vit_\(v.id)"
-            case .mineral(let m): "min_\(m.id)"
+            case .vitamin(let v): "vit_\(v.key)"
+            case .mineral(let m): "min_\(m.key)"
             }
         }
         var name: String {
@@ -1812,8 +1803,8 @@ struct FoodItemReceptEditorView: View {
     private func splitRows(_ rows: [NutrientRow], priorityNames: Set<String>) -> (prio: [NutrientRow], other: [NutrientRow]) {
         (rows.filter { priorityNames.contains($0.label) }, rows.filter { !priorityNames.contains($0.label) })
     }
-    private func label(for vitamin: Vitamin) -> String { vitaminLabelById[vitamin.id] ?? vitamin.name }
-    private func label(for mineral: Mineral) -> String { mineralLabelById[mineral.id] ?? mineral.name }
+    private func label(for vitamin: Vitamin) -> String { vitaminLabelById[vitamin.key] ?? vitamin.name }
+    private func label(for mineral: Mineral) -> String { mineralLabelById[mineral.key] ?? mineral.name }
     
     private func vitaminRows() -> [NutrientRow] {
         [.init(label: "Vit A", unit: "µg RAE", field: nutBinding(\.vitaminA_RAE, state: $vitamins, unit: "µg")),
@@ -1905,8 +1896,8 @@ struct FoodItemReceptEditorView: View {
     
     private var filterChipItems: [SelectableNutrient] {
         guard let profile else { return allSelectableNutrients }
-        let priorityVitIDs = Set(profile.priorityVitamins.map { "vit_" + $0.id })
-        let priorityMinIDs = Set(profile.priorityMinerals.map { "min_" + $0.id })
+        let priorityVitIDs = Set(profile.priorityVitamins.map { "vit_" + $0.key })
+        let priorityMinIDs = Set(profile.priorityMinerals.map { "min_" + $0.key })
         let allPriorityIDs = priorityVitIDs.union(priorityMinIDs)
         
         let (priority, other) = allSelectableNutrients.reduce(into: ([SelectableNutrient](), [SelectableNutrient]())) { result, nutrient in
@@ -1918,14 +1909,14 @@ struct FoodItemReceptEditorView: View {
     
     private var allSelectableNutrients: [SelectableNutrient] {
         var items: [SelectableNutrient] = []
-        items.append(contentsOf: allVitamins.map { SelectableNutrient(id: "vit_\($0.id)", label: $0.abbreviation) })
-        items.append(contentsOf: allMinerals.map { SelectableNutrient(id: "min_\($0.id)", label: $0.symbol) })
+        items.append(contentsOf: allVitamins.map { SelectableNutrient(id: "vit_\($0.key)", label: $0.abbreviation) })
+        items.append(contentsOf: allMinerals.map { SelectableNutrient(id: "min_\($0.key)", label: $0.symbol) })
         return items.sorted { $0.label < $1.label }
     }
     
     private func nutrientColor(for id: String) -> Color {
-        if id.starts(with: "vit_"), let vitamin = allVitamins.first(where: { "vit_\($0.id)" == id }) { return Color(hex: vitamin.colorHex) }
-        if id.starts(with: "min_"), let mineral = allMinerals.first(where: { "min_\($0.id)" == id }) { return Color(hex: mineral.colorHex) }
+        if id.starts(with: "vit_"), let vitamin = allVitamins.first(where: { "vit_\($0.key)" == id }) { return Color(hex: vitamin.colorHex) }
+        if id.starts(with: "min_"), let mineral = allMinerals.first(where: { "min_\($0.key)" == id }) { return Color(hex: mineral.colorHex) }
         return .gray
     }
     

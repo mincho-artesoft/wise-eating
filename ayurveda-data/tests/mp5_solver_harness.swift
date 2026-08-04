@@ -134,7 +134,7 @@ private enum MP5SolverHarness {
                             MP5MustContainRule(
                                 day: 1,
                                 meal: "Breakfast",
-                                foodID: 1
+                                foodID: fixtureID(1)
                             )
                         ]
                     let request = MP5SolverRequest(
@@ -383,7 +383,7 @@ private enum MP5SolverHarness {
             dailyProteinTarget: Double(source.kcal) * 0.04,
             ageInMonths: 360,
             allergenConcepts: allergens,
-            excludedFoodIDs: [96],
+            excludedFoodIDs: [fixtureID(96)],
             dosha: source.dosha.flatMap(MP5Dosha.init(rawValue:)),
             agni: MP5Agni(rawValue: source.agni) ?? .balanced,
             season: "summer",
@@ -420,7 +420,7 @@ private enum MP5SolverHarness {
     private static func evaluateHard(
         plan: MP5SolvedPlan,
         request: MP5SolverRequest,
-        candidates: [Int: MP5Candidate],
+        candidates: [UUID: MP5Candidate],
         record: (
             String,
             Bool,
@@ -648,7 +648,7 @@ private enum MP5SolverHarness {
     private static func evaluateSoft(
         plan: MP5SolvedPlan,
         request: MP5SolverRequest,
-        candidates: [Int: MP5Candidate],
+        candidates: [UUID: MP5Candidate],
         record: (
             String,
             Bool,
@@ -835,7 +835,7 @@ private enum MP5SolverHarness {
                 : (effectIndex == 1 ? -1 : (effectIndex == 2 ? 0 : 1))
             out.append(
                 MP5Candidate(
-                    id: id,
+                    id: fixtureID(id),
                     name: "Fixture food \(id)",
                     kcalPer100g: kcal,
                     proteinPer100g: 6 + Double((id * 5) % 24),
@@ -875,6 +875,15 @@ private enum MP5SolverHarness {
             )
         }
         return out
+    }
+
+    private static func fixtureID(_ value: Int) -> UUID {
+        UUID(
+            uuidString: String(
+                format: "00000000-0000-0000-0000-%012d",
+                value
+            )
+        )!
     }
 
     private static func roleDefinition(

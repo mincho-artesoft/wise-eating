@@ -5,6 +5,7 @@ import sqlite3
 import sys
 import tempfile
 import unittest
+import uuid
 from pathlib import Path
 
 
@@ -22,10 +23,9 @@ TARGET = build_preseeded_store.TARGET_EXPECTED
 class PreseedArtifactTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        parts = [
-            REPO_ROOT / "Ayura" / "preseeded_db.store.gz.part-aa",
-            REPO_ROOT / "Ayura" / "preseeded_db.store.gz.part-ab",
-        ]
+        parts = sorted(
+            (REPO_ROOT / "Ayura").glob("preseeded_db.store.gz.part-*")
+        )
         cls.temporary = tempfile.TemporaryDirectory(prefix="we2-preseed-test-")
         cls.store = Path(cls.temporary.name) / "default.store"
         compressed = b"".join(part.read_bytes() for part in parts)
@@ -56,7 +56,7 @@ class PreseedArtifactTests(unittest.TestCase):
                 "nutritionFull": TARGET["nutritionFull"],
                 "nutritionEstimated": TARGET["nutritionEstimated"],
                 "cacheFoods": TARGET["cacheFoods"],
-                "cacheVersion": 12,
+                "cacheVersion": 13,
                 "facetFoods": TARGET["foods"],
                 "metadataFoods": TARGET["foods"],
                 "linkedFacetFoods": 2_007,
@@ -132,14 +132,21 @@ class PreseedArtifactTests(unittest.TestCase):
         profile_rows = self.connection.execute(
             "SELECT ZID, ZSEEDVERSION FROM ZAYURVEDAPROFILE"
         ).fetchall()
-        existing_profiles = {profile_id: version for profile_id, version in profile_rows}
+        existing_profiles = {
+            str(uuid.UUID(bytes=profile_id)): version
+            for profile_id, version in profile_rows
+        }
         existing_food_ids = {
-            row[0] for row in self.connection.execute("SELECT ZID FROM ZFOODITEM")
+            str(uuid.UUID(bytes=row[0]))
+            for row in self.connection.execute("SELECT ZID FROM ZFOODITEM")
         }
         existing_links = {
-            fdc_id: (profile_id, tier)
-            for fdc_id, profile_id, tier in self.connection.execute(
-                "SELECT ZFDCID, ZDRAVYAPROFILEID, ZTIER FROM ZAYURVEDALINK"
+            str(uuid.UUID(bytes=food_id)): (
+                str(uuid.UUID(bytes=profile_id)),
+                tier,
+            )
+            for food_id, profile_id, tier in self.connection.execute(
+                "SELECT ZFOODID, ZDRAVYAPROFILEID, ZTIER FROM ZAYURVEDALINK"
             )
         }
 
@@ -159,10 +166,10 @@ class PreseedArtifactTests(unittest.TestCase):
         } | {item["foodId"] for item in self.seed["recipes"]}
         missing_foods = canonical_food_ids - existing_food_ids
         missing_or_stale_links = [
-            link["fdcId"]
+            link["foodId"]
             for link in self.seed["links"]
-            if existing_links.get(link["fdcId"])
-            != (link["dravyaId"], link["tier"])
+            if existing_links.get(link["foodId"])
+            != (link["dravyaProfileId"], link["tier"])
         ]
 
         self.assertEqual(missing_profiles, [])
@@ -223,7 +230,7 @@ class PreseedArtifactTests(unittest.TestCase):
             """
         ).fetchone()
         self.assertEqual(cache_count, food_count)
-        self.assertEqual(version, 12)
+        self.assertEqual(version, 13)
         decoded = json.loads(payload)
         self.assertEqual(len(decoded["compactFoods"]), food_count)
         self.assertTrue(

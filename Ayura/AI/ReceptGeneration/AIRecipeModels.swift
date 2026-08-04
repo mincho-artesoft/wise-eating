@@ -10,7 +10,7 @@ struct SmartResolutionResult: Codable, Sendable {
     let resolved: [ResolvedIngredient]
     let replacements: [Replacement]
     let generatedNames: [String]
-    let nameByID: [Int: String]
+    let nameByID: [UUID: String]
     let unresolved: [String]
 
     struct Replacement: Codable, Sendable {
@@ -33,7 +33,7 @@ struct RecipeGenerationProgress: Codable, Sendable {
 
 // MARK: - AI Response Models for Recipe Generation
 struct FoodItemCandidate: Sendable {
-    let id: Int
+    let id: UUID
     let name: String
 }
 
@@ -102,7 +102,7 @@ struct AIRecipeResponse: Codable, Sendable {
 
 /// Represents a single ingredient already “resolved” to a concrete FoodItem in the database.
 struct ResolvedIngredient: Codable, Sendable {
-    let foodItemID: Int
+    let foodItemID: UUID
     let grams: Double
 }
 

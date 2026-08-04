@@ -3,7 +3,7 @@ import Foundation
 
 @Model
 public final class CarbDetailsData: Identifiable {
-    @Attribute(.unique) public var id = UUID()
+    @Attribute(.unique) public var id: UUID
 
     // Съвпадат 1:1 с генератора ("carb_details")
     public var starch:    Nutrient?
@@ -17,6 +17,7 @@ public final class CarbDetailsData: Identifiable {
     @Relationship(inverse: \FoodItem.carbDetails) public var foodItem: FoodItem?
 
     public init(
+        id: UUID = UUID(),
         starch: Nutrient? = nil,
         sucrose: Nutrient? = nil,
         glucose: Nutrient? = nil,
@@ -25,6 +26,7 @@ public final class CarbDetailsData: Identifiable {
         maltose: Nutrient? = nil,
         galactose: Nutrient? = nil
     ) {
+        self.id = id
         self.starch = starch
         self.sucrose = sucrose
         self.glucose = glucose

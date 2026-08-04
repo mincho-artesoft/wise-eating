@@ -109,7 +109,7 @@ struct MP5AyurvedicWeights: Equatable, Sendable {
 }
 
 struct MP5Candidate: Codable, Equatable, Sendable {
-    let id: Int
+    let id: UUID
     let name: String
     let kcalPer100g: Double
     let proteinPer100g: Double
@@ -174,7 +174,7 @@ struct MP5SolverProfile: Codable, Equatable, Sendable {
     let dailyProteinTarget: Double
     let ageInMonths: Int
     let allergenConcepts: Set<String>
-    let excludedFoodIDs: Set<Int>
+    let excludedFoodIDs: Set<UUID>
     let dosha: MP5Dosha?
     let agni: MP5Agni
     let season: String?
@@ -190,7 +190,7 @@ struct MP5MealSlot: Codable, Equatable, Sendable {
 struct MP5MustContainRule: Codable, Equatable, Hashable, Sendable {
     let day: Int
     let meal: String?
-    let foodID: Int
+    let foodID: UUID
 }
 
 struct MP5SolverRequest: Codable, Equatable, Sendable {
@@ -219,7 +219,7 @@ struct MP5SolverRequest: Codable, Equatable, Sendable {
 }
 
 struct MP5SolvedComponent: Codable, Equatable, Sendable {
-    let foodID: Int
+    let foodID: UUID
     let name: String
     let grams: Double
     let kcal: Double
@@ -275,7 +275,7 @@ struct MP5SolvedPlan: Codable, Equatable, Sendable {
                         "name": meal.name,
                         "components": meal.components.map { component in
                             [
-                                "foodID": component.foodID,
+                                "foodID": component.foodID.uuidString,
                                 "name": component.name,
                                 "grams": component.grams,
                                 "kcal": component.kcal,
@@ -354,8 +354,8 @@ final class MP7SolverDiagnostics {
 
 struct DeterministicMealPlanSolver {
     private let candidates: [MP5Candidate]
-    private let candidatesByID: [Int: MP5Candidate]
-    private let nearDuplicateKeysByID: [Int: String]
+    private let candidatesByID: [UUID: MP5Candidate]
+    private let nearDuplicateKeysByID: [UUID: String]
     private let maximumPerMealByRole: [FoodRole: Int]
     private let weights: MP5AyurvedicWeights
 
@@ -364,9 +364,11 @@ struct DeterministicMealPlanSolver {
         weights: MP5AyurvedicWeights = MP5AyurvedicWeights()
     ) {
         self.candidates = candidates
-            .filter { $0.id > 0 && $0.kcalPer100g > 0 }
+            .filter { $0.kcalPer100g > 0 }
             .sorted { lhs, rhs in
-                lhs.id == rhs.id ? lhs.name < rhs.name : lhs.id < rhs.id
+                lhs.id == rhs.id
+                    ? lhs.name < rhs.name
+                    : lhs.id.uuidString < rhs.id.uuidString
             }
         self.candidatesByID = Dictionary(
             uniqueKeysWithValues: self.candidates.map { ($0.id, $0) }
@@ -456,7 +458,7 @@ struct DeterministicMealPlanSolver {
         }
 
         var rng = MP5SplitMix64(seed: request.seed)
-        var selectedByDay: [Int: Set<Int>] = [:]
+        var selectedByDay: [Int: Set<UUID>] = [:]
         var selectedHeadwordsByDay: [Int: Set<String>] = [:]
         var recentTastesByDay: [Int: Set<String>] = [:]
         var solvedMeals: [MP5SolvedMeal] = []
@@ -568,7 +570,7 @@ struct DeterministicMealPlanSolver {
         slot: MP5MealSlot,
         targetKcal: Double,
         required: [MP5Candidate],
-        recentIDs: Set<Int>,
+        recentIDs: Set<UUID>,
         recentHeadwords: Set<String>,
         recentTastes: Set<String>,
         allowed: [MP5Candidate],
@@ -1650,8 +1652,8 @@ struct DeterministicMealPlanSolver {
     private func idsWithinWindow(
         before day: Int,
         window: Int,
-        selectedByDay: [Int: Set<Int>]
-    ) -> Set<Int> {
+        selectedByDay: [Int: Set<UUID>]
+    ) -> Set<UUID> {
         guard window > 0 else { return [] }
         return ((day - window)..<day).reduce(into: []) {
             $0.formUnion(selectedByDay[$1] ?? [])
@@ -1683,7 +1685,7 @@ struct DeterministicMealPlanSolver {
     private func selectedIDs(
         in plan: MP5SolvedPlan,
         days: ClosedRange<Int>
-    ) -> Set<Int> {
+    ) -> Set<UUID> {
         Set(
             plan.days
                 .filter { days.contains($0.day) }
@@ -1702,7 +1704,7 @@ private enum MP5MealScoringContext {
 
 private struct MP5RankedCandidate {
     let candidateIndex: Int
-    let candidateID: Int
+    let candidateID: UUID
     let role: FoodRole
     let kcalPerGram: Double
     let randomizedScore: Double
@@ -1753,7 +1755,7 @@ private enum MP5CandidateOrdering: CaseIterable {
         _ rhs: MP5RankedCandidate
     ) -> Bool {
         lhs.randomizedScore == rhs.randomizedScore
-            ? lhs.candidateID < rhs.candidateID
+            ? lhs.candidateID.uuidString < rhs.candidateID.uuidString
             : lhs.randomizedScore > rhs.randomizedScore
     }
 }

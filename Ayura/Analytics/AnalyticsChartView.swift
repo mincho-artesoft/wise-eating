@@ -401,12 +401,12 @@ struct AnalyticsChartView: View {
         var unit: String?
         if nutrientID.starts(with: "vit_") {
             let id = String(nutrientID.dropFirst(4))
-            let vitamin = allVitamins.first { $0.id == id }
+            let vitamin = allVitamins.first { $0.key == id }
             requirement = vitamin?.requirements.first { $0.demographic == demographic }
             unit = vitamin?.unit
         } else if nutrientID.starts(with: "min_") {
             let id = String(nutrientID.dropFirst(4))
-            let mineral = allMinerals.first { $0.id == id }
+            let mineral = allMinerals.first { $0.key == id }
             requirement = mineral?.requirements.first { $0.demographic == demographic }
             unit = mineral?.unit
         } else {
@@ -443,11 +443,11 @@ struct AnalyticsChartView: View {
         if id == "profile_height" { return "Height" }
         if id.starts(with: "vit_") {
             let key = String(id.dropFirst(4))
-            return allVitamins.first { $0.id == key }?.name ?? "Unknown Vitamin"
+            return allVitamins.first { $0.key == key }?.name ?? "Unknown Vitamin"
         }
         if id.starts(with: "min_") {
             let key = String(id.dropFirst(4))
-            return allMinerals.first { $0.id == key }?.name ?? "Unknown Mineral"
+            return allMinerals.first { $0.key == key }?.name ?? "Unknown Mineral"
         }
         return "Unknown"
     }
@@ -736,13 +736,13 @@ private extension AnalyticsChartView {
           default:
               if nutrientID.starts(with: "vit_") {
                   let id = String(nutrientID.dropFirst(4))
-                  if let vitamin = allVitamins.first(where: { $0.id == id }) {
+                  if let vitamin = allVitamins.first(where: { $0.key == id }) {
                       return Color(hex: vitamin.colorHex)
                   }
               }
               if nutrientID.starts(with: "min_") {
                   let id = String(nutrientID.dropFirst(4))
-                  if let mineral = allMinerals.first(where: { $0.id == id }) {
+                  if let mineral = allMinerals.first(where: { $0.key == id }) {
                       return Color(hex: mineral.colorHex)
                   }
               }

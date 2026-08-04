@@ -9,8 +9,8 @@ public struct FoodConcepts: Sendable {
     }
   }()
 
-  private let membership: [String: Set<Int32>]
-  private let reverseMembership: [Int32: Set<String>]
+  private let membership: [String: Set<UUID>]
+  private let reverseMembership: [UUID: Set<String>]
   private let aliases: [String: String]
 
   private init(bundle: Bundle = .main) throws {
@@ -47,11 +47,11 @@ public struct FoodConcepts: Sendable {
     }
   }
 
-  public func members(of concept: String) -> Set<Int32> {
+  public func members(of concept: String) -> Set<UUID> {
     membership[concept] ?? []
   }
 
-  public func concepts(for foodID: Int32) -> Set<String> {
+  public func concepts(for foodID: UUID) -> Set<String> {
     reverseMembership[foodID] ?? []
   }
 
@@ -128,7 +128,7 @@ private struct FoodConceptDocument: Decodable, Sendable {
   let catalogCount: Int
   let conceptCount: Int
   let aliasCount: Int
-  let membership: [String: [Int32]]
+  let membership: [String: [UUID]]
   let aliases: [String: String]
 }
 

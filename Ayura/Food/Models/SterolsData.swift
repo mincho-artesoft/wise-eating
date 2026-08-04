@@ -3,7 +3,7 @@ import Foundation
 
 @Model
 public final class SterolsData: Identifiable {
-    @Attribute(.unique) public var id = UUID()
+    @Attribute(.unique) public var id: UUID
 
     // Съвпадат 1:1 с генератора ("sterols")
     public var phytosterols:    Nutrient?
@@ -14,11 +14,13 @@ public final class SterolsData: Identifiable {
     @Relationship(inverse: \FoodItem.sterols) public var foodItem: FoodItem?
 
     public init(
+        id: UUID = UUID(),
         phytosterols: Nutrient? = nil,
         betaSitosterol: Nutrient? = nil,
         campesterol: Nutrient? = nil,
         stigmasterol: Nutrient? = nil
     ) {
+        self.id = id
         self.phytosterols = phytosterols
         self.betaSitosterol = betaSitosterol
         self.campesterol = campesterol

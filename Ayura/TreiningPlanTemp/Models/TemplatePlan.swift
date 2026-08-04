@@ -5,14 +5,14 @@ import SwiftData
 
 @Model
 final class TemplatePlan: Identifiable {
-    @Attribute(.unique) public var id: String
+    @Attribute(.unique) public var id: UUID
     public var name: String
 
     @Relationship(deleteRule: .cascade, inverse: \TemplateDay.plan)
     public var days: [TemplateDay] = []
 
-    public init(name: String) {
-        self.id = UUID().uuidString
+    public init(id: UUID = UUID(), name: String) {
+        self.id = id
         self.name = name
     }
 }

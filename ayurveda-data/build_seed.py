@@ -19,8 +19,20 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
+# The test suite loads this file directly through importlib, where the script
+# directory is not automatically added to sys.path.
+SCRIPT_DIRECTORY = Path(__file__).resolve().parent
+if str(SCRIPT_DIRECTORY) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIRECTORY))
 
-SEED_VERSION = 9
+from migrate_seed_graph_uuid import (
+    migrate_ayurveda_seed,
+    migrate_concepts,
+    migrate_roles,
+)
+
+
+SEED_VERSION = 10
 GENERATED_AT = "2026-08-04T00:00:00Z"
 TARGET_FOODS = 14_487
 TARGET_CANONICAL_PROFILES = 2_215
@@ -647,9 +659,14 @@ def load_batches(directory: Path, pattern: str, collection_key: str) -> list[dic
 def load_store_ids(path: Path) -> set[int]:
     try:
         with sqlite3.connect(path) as connection:
-            rows = connection.execute("SELECT ZID FROM ZFOODITEM").fetchall()
+            rows = connection.execute(
+                "SELECT ZCATALOGNUMBER FROM ZFOODITEM "
+                "WHERE ZCATALOGNUMBER IS NOT NULL"
+            ).fetchall()
     except sqlite3.Error as error:
-        raise BuildError(f"cannot query ZFOODITEM.ZID in {path}: {error}") from error
+        raise BuildError(
+            f"cannot query ZFOODITEM.ZCATALOGNUMBER in {path}: {error}"
+        ) from error
     return {int(row[0]) for row in rows}
 
 
@@ -682,9 +699,9 @@ def load_food_nutrition(
 
     nutrition_by_id: dict[int, dict[str, float]] = {}
     for food in foods:
-        if not isinstance(food, dict) or not isinstance(food.get("id"), int):
-            raise BuildError(f"{path}: food has no integer id")
-        food_id = food["id"]
+        if not isinstance(food, dict) or not isinstance(food.get("catalogNumber"), int):
+            raise BuildError(f"{path}: food has no integer catalogNumber")
+        food_id = food["catalogNumber"]
         if food_id in nutrition_by_id:
             raise BuildError(f"{path}: duplicate food id {food_id}")
 
@@ -843,9 +860,9 @@ def load_food_safety(
 
     safety_by_id: dict[int, dict[str, Any]] = {}
     for food in foods:
-        if not isinstance(food, dict) or not isinstance(food.get("id"), int):
-            raise BuildError(f"{path}: food has no integer id")
-        food_id = food["id"]
+        if not isinstance(food, dict) or not isinstance(food.get("catalogNumber"), int):
+            raise BuildError(f"{path}: food has no integer catalogNumber")
+        food_id = food["catalogNumber"]
         if food_id in safety_by_id:
             raise BuildError(f"{path}: duplicate food id {food_id}")
 
@@ -897,12 +914,12 @@ def load_food_catalog(
     for food in foods:
         if (
             not isinstance(food, dict)
-            or not isinstance(food.get("id"), int)
+            or not isinstance(food.get("catalogNumber"), int)
             or not isinstance(food.get("name"), str)
             or not food["name"].strip()
         ):
-            raise BuildError(f"{path}: food has no integer id and non-empty name")
-        food_id = food["id"]
+            raise BuildError(f"{path}: food has no integer catalogNumber and non-empty name")
+        food_id = food["catalogNumber"]
         if food_id in catalog:
             raise BuildError(f"{path}: duplicate food id {food_id}")
         catalog[food_id] = {
@@ -3459,6 +3476,13 @@ def load_preserved_food_roles(path: Path, expected_catalog_count: int) -> dict[s
     items = value.get("items")
     if not isinstance(items, list) or len(items) != expected_catalog_count:
         raise BuildError(f"{path}: malformed derived food role items")
+    for item in items:
+        catalog_number = item.get("catalogNumber", item.get("foodId"))
+        if not isinstance(catalog_number, int):
+            raise BuildError(f"{path}: role item is missing catalogNumber")
+        item["foodId"] = catalog_number
+        item.pop("catalogNumber", None)
+    value.pop("identitySchema", None)
     value["ruleCount"] = EXPECTED_FOOD_ROLE_RULE_COUNT
     return value
 
@@ -3639,6 +3663,9 @@ def main() -> int:
         args.concepts_output.write_bytes(encode_deterministic_gzip(food_concepts))
         args.roles_output.parent.mkdir(parents=True, exist_ok=True)
         args.roles_output.write_bytes(encode_deterministic_gzip(food_roles))
+        migrate_ayurveda_seed(args.output)
+        migrate_concepts(args.concepts_output)
+        migrate_roles(args.roles_output)
         print_summary(
             envelope,
             contested,

@@ -54,8 +54,10 @@ class MP7FoodRoleTests(unittest.TestCase):
             KNOWLEDGE_BASE_PATH
         )
         cls.foods = json.loads(FOODS_PATH.read_text(encoding="utf-8"))
-        source_ids = {food["id"] for food in cls.foods}
-        cls.catalog = build_seed.load_food_catalog(FOODS_PATH, source_ids)
+        cls.catalog = {
+            food["id"]: {"name": food["name"]}
+            for food in cls.foods
+        }
         with gzip.open(SEED_PATH, "rt", encoding="utf-8") as source:
             cls.seed = json.load(source)
         cls.rebuilt_artifact, cls.diagnostics = build_seed.build_food_roles(
@@ -285,7 +287,13 @@ class MP7FoodRoleTests(unittest.TestCase):
         self.assertEqual(self.artifact["ruleCount"], len(self.role_source["rules"]))
         self.assertEqual(
             [item["foodId"] for item in self.artifact["items"]],
-            sorted(item["foodId"] for item in self.artifact["items"]),
+            [
+                item["foodId"]
+                for item in sorted(
+                    self.artifact["items"],
+                    key=lambda item: item["catalogNumber"],
+                )
+            ],
         )
         self.assertEqual(self.artifact["ruleCount"], len(self.role_source["rules"]))
 
@@ -457,7 +465,7 @@ class MP7FoodRoleTests(unittest.TestCase):
         source = RUNTIME_PATH.read_text(encoding="utf-8")
         self.assertIn("struct FoodRoleResolver: Sendable", source)
         self.assertIn("private let resolutionByFoodID", source)
-        self.assertIn("func resolution(for foodID: Int)", source)
+        self.assertIn("func resolution(for foodID: UUID)", source)
         self.assertIn('forResource: "food_roles"', source)
         self.assertNotIn("FoodItem", source)
 

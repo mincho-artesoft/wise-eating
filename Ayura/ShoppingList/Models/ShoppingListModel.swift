@@ -72,14 +72,14 @@ public final class ShoppingListModel: Identifiable {
 
     // --- МЕТОДИ ---
     
-    func addDismissedSuggestion(foodID: Int, context: ModelContext? = nil) {
+    func addDismissedSuggestion(foodID: UUID, context: ModelContext? = nil) {
         if !dismissedSuggestions.contains(where: { $0.foodID == foodID }) {
             let newDismissedID = DismissedFoodID(foodID: foodID)
             dismissedSuggestions.append(newDismissedID)
         }
     }
 
-    func isSuggestionDismissed(foodID: Int) -> Bool {
+    func isSuggestionDismissed(foodID: UUID) -> Bool {
         dismissedSuggestions.contains { $0.foodID == foodID }
     }
     

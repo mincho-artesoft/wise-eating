@@ -4,7 +4,7 @@ import SwiftData
 @MainActor
 public enum AyurvedaRecommendationGate {
   private struct Cache {
-    let foodIds: Set<Int>
+    let foodIds: Set<UUID>
     let excludedNameTerms: Set<String>
   }
 
@@ -13,11 +13,11 @@ public enum AyurvedaRecommendationGate {
   /// All foodIds that must never be recommended: direct profiles with
   /// engineExcluded == true, plus any fdcIds whose AyurvedaLink resolves to
   /// an excluded dravya profile.
-  public static func excludedFoodIds(context: ModelContext) -> Set<Int> {
+  public static func excludedFoodIds(context: ModelContext) -> Set<UUID> {
     load(context: context).foodIds
   }
 
-  public static func isExcluded(foodId: Int, context: ModelContext) -> Bool {
+  public static func isExcluded(foodId: UUID, context: ModelContext) -> Bool {
     excludedFoodIds(context: context).contains(foodId)
   }
 
@@ -52,7 +52,7 @@ public enum AyurvedaRecommendationGate {
       foodIds.formUnion(
         links.lazy
           .filter { excludedProfileIds.contains($0.dravyaProfileId) }
-          .map(\.fdcId)
+          .map(\.foodId)
       )
 
       var nameTerms = Set<String>()

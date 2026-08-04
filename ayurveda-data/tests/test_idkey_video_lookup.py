@@ -9,10 +9,15 @@ import subprocess
 import tempfile
 import unittest
 import unicodedata
+import uuid
 from pathlib import Path
+
+import sys
 
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "ayurveda-data"))
+from stable_ids import food_uuid
 FOOD = ROOT / "Ayura/Food"
 ORPHANS = {
     "Black mustard seed",
@@ -70,7 +75,7 @@ class IDKeyVideoLookupTests(unittest.TestCase):
         reuse = json.loads(
             (ROOT / "ayurveda-data/imagery/reuse-map.json").read_text()
         )
-        id_map = {int(key): value for key, value in json.loads(
+        id_map = {str(uuid.UUID(key)): value for key, value in json.loads(
             (FOOD / "frame_index.json").read_text()
         ).items()}
         with sqlite3.connect(self.store) as connection:
@@ -92,11 +97,18 @@ class IDKeyVideoLookupTests(unittest.TestCase):
             return None
 
         self.assertEqual(len(foods), 14_487)
+        foods = [(str(uuid.UUID(bytes=food_id)), name) for food_id, name in foods]
         self.assertEqual(set(id_map), {food_id for food_id, _ in foods})
         expected = {food_id: old_resolution(name) for food_id, name in foods}
         # ID-keying deliberately gives the recipe its reviewed private image;
         # name-keying previously collapsed it onto the dravya frame.
-        expected[1_001_052] = frame_map["recipe-panchamrita"]
+        with gzip.open(ROOT / "Ayura/ayurveda_seed.json.gz", "rt") as source:
+            seed = json.load(source)
+        panchamrita_id = next(
+            recipe["foodId"] for recipe in seed["recipes"]
+            if recipe["key"] == "recipe.panchamrit-classic"
+        )
+        expected[panchamrita_id] = frame_map["recipe-panchamrita"]
         self.assertNotIn(None, expected.values())
         self.assertEqual(id_map, expected)
 
@@ -118,10 +130,20 @@ class IDKeyVideoLookupTests(unittest.TestCase):
         with (ROOT / "ayurveda-data/archive/foods_index.csv").open(newline="") as stream:
             rows = list(csv.DictReader(stream))
         id_map = json.loads((FOOD / "frame_index.json").read_text())
+        catalog_to_uuid = {
+            str(food["catalogNumber"]): food["id"]
+            for food in json.loads(
+                (ROOT / "Ayura/Legacy/foods.json").read_text()
+            )
+        }
         self.assertEqual(len(rows), 14_487)
         self.assertEqual(len(id_map), 14_487)
         self.assertEqual(
-            {row["db_id"]: int(row["frame_index"]) for row in rows},
+            {
+                catalog_to_uuid.get(row["db_id"], food_uuid(int(row["db_id"]))):
+                    int(row["frame_index"])
+                for row in rows
+            },
             id_map,
         )
 
@@ -146,16 +168,24 @@ class IDKeyVideoLookupTests(unittest.TestCase):
             self.assertEqual(stream["has_b_frames"], 0, variant)
             self.assertEqual(stream["time_base"], "1/600", variant)
             self.assertEqual(stream["codec_tag_string"], "hvc1", variant)
-            embedded = base64.b64decode(
+            embedded = json.loads(base64.b64decode(
                 probe["format"]["tags"]["frame_index_b64"]
+            ))
+            migrated_embedded = {
+                food_uuid(int(food_id)): frame
+                for food_id, frame in embedded.items()
+            }
+            self.assertEqual(
+                migrated_embedded,
+                json.loads(payload),
+                variant,
             )
-            self.assertEqual(embedded, payload, variant)
 
     def test_swift_runtime_has_no_name_or_secondary_lookup_path(self):
         source = (FOOD / "FoodVideoSource.swift").read_text()
         food_item = (ROOT / "Ayura/Food/Models/FoodItem.swift").read_text()
-        self.assertIn("func getFrame(id foodID: Int, variant: String)", source)
-        self.assertIn("func hasVideo(for foodID: Int)", source)
+        self.assertIn("func getFrame(id foodID: UUID, variant: String)", source)
+        self.assertIn("func hasVideo(for foodID: UUID)", source)
         self.assertIn('forResource: "frame_index"', source)
         self.assertNotIn("getFrame(named", source)
         self.assertNotIn("frameMap2", source)

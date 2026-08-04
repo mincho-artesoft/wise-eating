@@ -179,7 +179,7 @@ public final class Training: Codable, Identifiable, Equatable, @unchecked Sendab
         let exercisesFromNotes = exerciseString.split(separator: "|").compactMap { part -> (ExerciseItem, Double)? in
             let components = part.split(separator: "=", maxSplits: 1).map { String($0) }
             guard components.count == 2 else { return nil }
-            guard let exerciseID = Int(components[0]), let duration = Double(components[1]) else { return nil }
+            guard let exerciseID = UUID(uuidString: components[0]), let duration = Double(components[1]) else { return nil }
             
             var descriptor = FetchDescriptor<ExerciseItem>(predicate: #Predicate { $0.id == exerciseID })
             descriptor.fetchLimit = 1

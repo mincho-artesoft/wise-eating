@@ -34,7 +34,7 @@ final class ExerciseListVM: ObservableObject {
     private var containsOffset = 0
 
     // Де-дубликация през целия lifecycle на текущото зареждане
-    private var seenIDs = Set<Int>()
+    private var seenIDs = Set<UUID>()
 
     // За да избегнем двойно първоначално reset при .onAppear + Combine sink
     private var didInitialLoad = false

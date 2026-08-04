@@ -3,8 +3,8 @@
     "assets": [
         {
             "filename": "Ayura/Food/frame_index.json",
-      "sha256": "64c79d3b76e7f95f8bbb1b99a93b280ea04106e66684efc67a8c66a66bd25178",
-      "byteSize": 183994,
+      "sha256": "b972b6fe6961bbb4bd25c2e34ea478de45d129d2cce731dc729942484dbc80ae",
+      "byteSize": 640799,
             "frameCount": null,
             "producingCommit": "bbf30cb71b793568f4e079440c2d1b947992f272"
         },

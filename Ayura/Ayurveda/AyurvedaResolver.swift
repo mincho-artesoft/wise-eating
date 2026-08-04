@@ -37,10 +37,10 @@ public enum AyurvedaResolution {
 }
 
 public struct AyurvedaIngredientAmount: Sendable {
-  public let foodId: Int
+  public let foodId: UUID
   public let grams: Double
 
-  public init(foodId: Int, grams: Double) {
+  public init(foodId: UUID, grams: Double) {
     self.foodId = foodId
     self.grams = grams
   }
@@ -111,7 +111,7 @@ public enum AyurvedaResolver {
     for foodItem: FoodItem,
     context: ModelContext,
     depth: Int,
-    visited: Set<Int>
+    visited: Set<UUID>
   ) throws -> AyurvedaResolution {
     if let direct = try profile(foodId: foodItem.id, context: context) {
       switch direct.kind {
@@ -128,7 +128,7 @@ public enum AyurvedaResolver {
       }
     }
 
-    if let link = try link(fdcId: foodItem.id, context: context),
+    if let link = try link(foodId: foodItem.id, context: context),
       let profile = try profile(id: link.dravyaProfileId, context: context)
     {
       let baseVPK: DoshaVPK = (
@@ -172,7 +172,7 @@ public enum AyurvedaResolver {
     for foodItem: FoodItem,
     context: ModelContext,
     depth: Int,
-    visited: Set<Int>
+    visited: Set<UUID>
   ) throws -> AyurvedaIngredientComputation {
     let ingredientLinks = foodItem.ingredients ?? []
     let hasIngredients = foodItem.isRecipe
@@ -200,7 +200,7 @@ public enum AyurvedaResolver {
     _ ingredients: [IngredientCandidate],
     context: ModelContext,
     depth: Int,
-    visited: Set<Int>
+    visited: Set<UUID>
   ) throws -> AyurvedaIngredientComputation {
     var totalGrams = 0.0
     var resolvedIngredients: [AyurvedaDisplayMath.WeightedIngredient] = []
@@ -246,7 +246,7 @@ public enum AyurvedaResolver {
   }
 
   private static func food(
-    id: Int,
+    id: UUID,
     context: ModelContext
   ) throws -> FoodItem? {
     let foodId = id
@@ -284,7 +284,7 @@ public enum AyurvedaResolver {
   }
 
   private static func profile(
-    foodId: Int,
+    foodId: UUID,
     context: ModelContext
   ) throws -> AyurvedaProfile? {
     var descriptor = FetchDescriptor<AyurvedaProfile>(
@@ -297,12 +297,12 @@ public enum AyurvedaResolver {
   }
 
   private static func link(
-    fdcId: Int,
+    foodId: UUID,
     context: ModelContext
   ) throws -> AyurvedaLink? {
     var descriptor = FetchDescriptor<AyurvedaLink>(
       predicate: #Predicate<AyurvedaLink> { link in
-        link.fdcId == fdcId
+        link.foodId == foodId
       }
     )
     descriptor.fetchLimit = 1
@@ -310,7 +310,7 @@ public enum AyurvedaResolver {
   }
 
   private static func profile(
-    id: String,
+    id: UUID,
     context: ModelContext
   ) throws -> AyurvedaProfile? {
     var descriptor = FetchDescriptor<AyurvedaProfile>(

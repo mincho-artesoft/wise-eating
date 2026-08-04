@@ -11,7 +11,7 @@ public final class MealPlanMeal: Identifiable {
     public var startTime: Date?
     // +++ КРАЙ НА ПРОМЯНАТА +++
 
-    public var linkedMenuID: Int? = nil
+    public var linkedMenuID: UUID? = nil
 
     @Relationship(deleteRule: .cascade, inverse: \MealPlanEntry.meal)
     public var entries: [MealPlanEntry] = []

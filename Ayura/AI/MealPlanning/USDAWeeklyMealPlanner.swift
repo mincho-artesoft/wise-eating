@@ -143,7 +143,7 @@ enum PlannerResolutionTier: String, Codable, Equatable, Sendable {
 }
 
 struct PlannerResolutionCandidate: Codable, Equatable, Sendable {
-    let id: Int
+    let id: UUID
     let name: String
     let isRecipe: Bool
     let tier: PlannerResolutionTier
@@ -395,7 +395,7 @@ enum PlannerDeterministicFoodResolver {
         let candidateName = normalize(candidate.candidate.name)
         let incumbentName = normalize(incumbent.candidate.name)
         if candidateName != incumbentName { return candidateName < incumbentName }
-        return candidate.candidate.id < incumbent.candidate.id
+        return candidate.candidate.id.uuidString < incumbent.candidate.id.uuidString
     }
 
     private static func score(
@@ -834,9 +834,9 @@ struct PlannerConceptExclusions: Sendable {
     )
 
     let concepts: Set<String>
-    let explicitFoodIDs: Set<Int>
+    let explicitFoodIDs: Set<UUID>
     let exactTerms: Set<String>
-    let seededFoodIDs: Set<Int>
+    let seededFoodIDs: Set<UUID>
     let promptTerms: [String]
 
     func filtering(_ candidates: [CompactFoodItem]) -> [CompactFoodItem] {
@@ -851,7 +851,7 @@ struct PlannerConceptExclusions: Sendable {
     }
 
     func excludes(
-        foodID: Int,
+        foodID: UUID,
         allergens: Set<String>
     ) -> Bool {
         if explicitFoodIDs.contains(foodID) {
@@ -880,13 +880,13 @@ struct PlannerConceptExclusions: Sendable {
 
     private func blockedFoodIDs(
         in candidates: [CompactFoodItem]
-    ) -> Set<Int> {
+    ) -> Set<UUID> {
         let candidateIDs = Set(candidates.map(\.id))
         var blockedIDs = explicitFoodIDs.intersection(candidateIDs)
 
         for concept in concepts {
             let ontologyIDs = Set(
-                FoodConcepts.shared.members(of: concept).map(Int.init)
+                FoodConcepts.shared.members(of: concept)
             )
             let plainUSDAIDs = candidateIDs.subtracting(seededFoodIDs)
             blockedIDs.formUnion(plainUSDAIDs.intersection(ontologyIDs))
@@ -901,16 +901,16 @@ struct PlannerConceptExclusions: Sendable {
     }
 
     private func isAuthoritativeMember(
-        foodID: Int,
+        foodID: UUID,
         concept: String,
         allergens: Set<String>
     ) -> Bool {
         if !seededFoodIDs.contains(foodID) {
             return FoodConcepts.shared.members(of: concept)
-                .contains(Int32(foodID))
+                .contains(foodID)
         }
         if concept == "meat" {
-            return FoodConcepts.shared.members(of: concept).contains(Int32(foodID))
+            return FoodConcepts.shared.members(of: concept).contains(foodID)
         }
         return seededSafetyMatches(allergens: allergens, concept: concept)
     }
@@ -920,7 +920,7 @@ struct PlannerConceptExclusions: Sendable {
         concept: String
     ) -> Bool {
         if concept == "meat" {
-            return FoodConcepts.shared.members(of: concept).contains(Int32(food.id))
+            return FoodConcepts.shared.members(of: concept).contains(food.id)
         }
         return seededSafetyMatches(allergens: food.allergens, concept: concept)
     }
@@ -2225,7 +2225,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
         }
 
         var concepts = Set<String>()
-        var explicitFoodIDs = Set<Int>()
+        var explicitFoodIDs = Set<UUID>()
         var exactTerms = Set<String>()
         for term in orderedTerms {
             let normalized = AyurvedaRules.modifierTokens(term)
@@ -2264,7 +2264,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
             for: name,
             ontologyAliases: ontologyAliases
         )
-        var candidatesByID: [Int: CompactFoodItem] = [:]
+        var candidatesByID: [UUID: CompactFoodItem] = [:]
         for query in queries {
             for candidate in await smartSearch.searchCompact(
                 query: query,
@@ -2538,7 +2538,7 @@ public final class USDAWeeklyMealPlanner: Sendable {
             return nil
         }
 
-        var candidatesByID: [Int: CompactFoodItem] = [:]
+        var candidatesByID: [UUID: CompactFoodItem] = [:]
         for query in queries {
             let searchCandidates = await smartSearch.searchCompact(
                 query: query,
@@ -2583,19 +2583,19 @@ public final class USDAWeeklyMealPlanner: Sendable {
         guard !candidatesByID.isEmpty else { return nil }
 
         let candidateFoodIDs = Array(candidatesByID.keys)
-        let directProfileIDs: Set<Int> = {
+        let directProfileIDs: Set<UUID> = {
             let descriptor = FetchDescriptor<AyurvedaProfile>(
                 predicate: #Predicate { candidateFoodIDs.contains($0.foodId) }
             )
             return Set((try? ctx.fetch(descriptor))?.map(\.foodId) ?? [])
         }()
-        let linksByFoodID: [Int: String] = {
+        let linksByFoodID: [UUID: String] = {
             let descriptor = FetchDescriptor<AyurvedaLink>(
-                predicate: #Predicate { candidateFoodIDs.contains($0.fdcId) }
+                predicate: #Predicate { candidateFoodIDs.contains($0.foodId) }
             )
             let links = (try? ctx.fetch(descriptor)) ?? []
             return Dictionary(
-                uniqueKeysWithValues: links.map { ($0.fdcId, $0.tier) }
+                uniqueKeysWithValues: links.map { ($0.foodId, $0.tier) }
             )
         }()
 

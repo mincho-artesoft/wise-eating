@@ -65,12 +65,14 @@ enum SeedManager {
 
         do {
             let vocabData = try Data(contentsOf: vocabURL)
-            let decodedVocab = try JSONDecoder().decode([String: String].self, from: vocabData)
-            for (idString, word) in decodedVocab {
-                if let id = Int(idString) {
-                    let entry = VocabularyEntry(id: id, word: word)
-                    ctx.insert(entry)
-                }
+            let decodedVocab = try JSONDecoder().decode([VocabularySeedDTO].self, from: vocabData)
+            for row in decodedVocab {
+                let entry = VocabularyEntry(
+                    id: row.id,
+                    tokenIndex: row.tokenIndex,
+                    word: row.word
+                )
+                ctx.insert(entry)
             }
             print("   ✅ Seeded vocabulary entries.")
         } catch {
@@ -85,13 +87,15 @@ enum SeedManager {
 
         do {
             let bucketsData = try Data(contentsOf: bucketsURL)
-            let decodedBuckets = try JSONDecoder().decode([String: String].self, from: bucketsData)
+            let decodedBuckets = try JSONDecoder().decode([ProductBucketSeedDTO].self, from: bucketsData)
 
-            for (key, data) in decodedBuckets {
-                if let keyAsInt = Int64(key) {
-                    let bucket = ProductBucket(bucketKey: keyAsInt, compressedData: data)
-                    ctx.insert(bucket)
-                }
+            for row in decodedBuckets {
+                let bucket = ProductBucket(
+                    id: row.id,
+                    bucketKey: row.bucketKey,
+                    compressedData: row.compressedData
+                )
+                ctx.insert(bucket)
             }
             print("   ✅ Seeded \(decodedBuckets.count) product buckets.")
         } catch {
@@ -295,4 +299,16 @@ enum SeedManager {
             print("   👉 Action: Add these to 'exercises.json' or fix the spelling in 'workouts.json'.")
         }
     }
+}
+
+private struct VocabularySeedDTO: Decodable {
+    let id: UUID
+    let tokenIndex: Int
+    let word: String
+}
+
+private struct ProductBucketSeedDTO: Decodable {
+    let id: UUID
+    let bucketKey: String
+    let compressedData: String
 }

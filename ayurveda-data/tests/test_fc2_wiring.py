@@ -54,7 +54,7 @@ class FC2PlannerWiringTests(unittest.TestCase):
         with gzip.open(CONCEPT_ARTIFACT_PATH, "rt", encoding="utf-8") as source:
             artifact = json.load(source)
         foods = {
-            int(food["id"]): food["name"].lower()
+            food["id"]: food["name"].lower()
             for food in json.loads(FOODS_PATH.read_text(encoding="utf-8"))
         }
         alcohol_ids = set(artifact["membership"]["alcohol"])

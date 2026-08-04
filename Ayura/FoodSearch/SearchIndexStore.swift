@@ -10,18 +10,21 @@ final class SearchIndexStore {
     static let shared = SearchIndexStore()
 
     /// Bump this when the structure of CompactFoodItem / tokens changes
-    private let currentIndexVersion: Int = 12
+    private let currentIndexVersion: Int = 13
+    private let mainCacheID = UUID(
+        uuidString: "76686d0c-b023-5c5e-b7d5-59582e3d9f3b"
+    )!
 
     // MARK: - In-Memory Cache
     private(set) var revision: UInt64 = 0
     private(set) var compactFoods: [CompactFoodItem] = []
-    private(set) var compactMap: [Int: CompactFoodItem] = [:]
-    private(set) var invertedIndex: [String: Set<Int>] = [:]
+    private(set) var compactMap: [UUID: CompactFoodItem] = [:]
+    private(set) var invertedIndex: [String: Set<UUID>] = [:]
     private(set) var vocabulary: [String] = []
     private(set) var maxNutrientValues: [NutrientType: Double] = [:]
-    private(set) var nutrientRankings: [NutrientType: [Int]] = [:]
-    private(set) var ayurvedaFacetIndex: [String: Set<Int>] = [:]
-    private var bundledAyurvedaSearchMap: [Int: AyurvedaCanonicalSearchMetadata]?
+    private(set) var nutrientRankings: [NutrientType: [UUID]] = [:]
+    private(set) var ayurvedaFacetIndex: [String: Set<UUID>] = [:]
+    private var bundledAyurvedaSearchMap: [UUID: AyurvedaCanonicalSearchMetadata]?
 
     // MARK: - Async Save Infra
     /// Таймер за debounce на тежкия запис на кеша
@@ -150,7 +153,7 @@ final class SearchIndexStore {
     // MARK: - 3. CRUD & Status Operations
     // ... (без промяна в updateFavoriteStatus, updateItem, removeItem, scheduleCacheSave) ...
 
-    func updateFavoriteStatus(for foodID: Int, isFavorite: Bool) {
+    func updateFavoriteStatus(for foodID: UUID, isFavorite: Bool) {
         guard let item = compactMap[foodID],
               item.isFavorite != isFavorite else {
             return
@@ -293,7 +296,7 @@ final class SearchIndexStore {
         print("🔎 SearchIndexStore (Explicit): Updated item '\(food.name)' in \(String(format: "%.4f", timeElapsed * 1000)) ms.")
     }
 
-    func removeItem(id: Int, context: ModelContext) {
+    func removeItem(id: UUID, context: ModelContext) {
         let startTime = CFAbsoluteTimeGetCurrent()
 
         guard let compact = compactMap[id] else { return }
@@ -349,14 +352,14 @@ final class SearchIndexStore {
     /// Сега `tmpRankings` се генерира динамично от `tmpFoods`.
     private func buildInMemory(
         foods: [FoodItem],
-        canonicalMap: [Int: AyurvedaCanonicalSearchMetadata],
+        canonicalMap: [UUID: AyurvedaCanonicalSearchMetadata],
         context: ModelContext
     ) {
         var tmpFoods: [CompactFoodItem] = []
-        var tmpMap: [Int: CompactFoodItem] = [:]
-        var tmpInverted: [String: Set<Int>] = [:]
+        var tmpMap: [UUID: CompactFoodItem] = [:]
+        var tmpInverted: [String: Set<UUID>] = [:]
         var vocabSet = Set<String>()
-        var tmpFacetIndex: [String: Set<Int>] = [:]
+        var tmpFacetIndex: [String: Set<UUID>] = [:]
 
         // 1. Build Compact Items & Index
         for food in foods {
@@ -386,12 +389,12 @@ final class SearchIndexStore {
 
         // 2. Calculate Max Values & Rankings on the fly
         var tmpMaxValues: [NutrientType: Double] = [:]
-        var tmpRankings: [NutrientType: [Int]] = [:]
+        var tmpRankings: [NutrientType: [UUID]] = [:]
 
         // Итерираме през всички известни нутриенти
         for nutrient in NutrientType.allCases {
             // Събираме двойки (ID, стойност_на_100г) само за тези, които имат стойност > 0
-            let itemsWithValues = tmpFoods.compactMap { item -> (Int, Double)? in
+            let itemsWithValues = tmpFoods.compactMap { item -> (UUID, Double)? in
                 guard let rawVal = item.nutrientValues[nutrient], rawVal > 0 else { return nil }
                 let ref = item.referenceWeightG
                 guard ref > 0 else { return nil }
@@ -442,6 +445,7 @@ final class SearchIndexStore {
         try? context.delete(model: SearchIndexCache.self)
 
         let cache = SearchIndexCache(
+            id: mainCacheID,
             key: "main",
             payloadData: data,
             foodsCount: compactFoods.count,
@@ -567,7 +571,7 @@ final class SearchIndexStore {
     }
 
     private func bundledAyurvedaMap() throws
-        -> [Int: AyurvedaCanonicalSearchMetadata] {
+        -> [UUID: AyurvedaCanonicalSearchMetadata] {
         if let bundledAyurvedaSearchMap {
             return bundledAyurvedaSearchMap
         }
@@ -581,12 +585,12 @@ final class SearchIndexStore {
     /// bundled metadata for that food while retaining its enforced seed age.
     private func ayurvedaSearchMap(
         context: ModelContext
-    ) throws -> [Int: AyurvedaCanonicalSearchMetadata] {
+    ) throws -> [UUID: AyurvedaCanonicalSearchMetadata] {
         var result = try bundledAyurvedaMap()
         let profiles = try context.fetch(FetchDescriptor<AyurvedaProfile>())
         let profilesByFood = Dictionary(grouping: profiles, by: \.foodId)
 
-        for (foodID, foodProfiles) in profilesByFood where foodID > 0 {
+        for (foodID, foodProfiles) in profilesByFood {
             let bundledAge = result[foodID]?.enforcedMinAgeMonths
             let userProfiles = foodProfiles.filter { $0.kind == "user" }
 
@@ -618,16 +622,16 @@ final class SearchIndexStore {
         )
         let links = try context.fetch(FetchDescriptor<AyurvedaLink>())
         for link in links {
-            if result[link.fdcId]?.sourceTier == nil,
-               result[link.fdcId] != nil {
+            if result[link.foodId]?.sourceTier == nil,
+               result[link.foodId] != nil {
                 continue
             }
             guard let profile = profilesByID[link.dravyaProfileId] else {
                 continue
             }
-            result[link.fdcId] = AyurvedaCanonicalSearchMetadata(
+            result[link.foodId] = AyurvedaCanonicalSearchMetadata(
                 profile: profile,
-                enforcedMinAgeMonths: profile.edible && profile.foodId > 0
+                enforcedMinAgeMonths: profile.edible
                     ? result[profile.foodId]?.enforcedMinAgeMonths
                     : nil,
                 sourceTier: link.tier
@@ -638,7 +642,7 @@ final class SearchIndexStore {
     }
 
     private func ayurvedaSearchMetadata(
-        foodID: Int,
+        foodID: UUID,
         context: ModelContext
     ) -> AyurvedaCanonicalSearchMetadata? {
         let bundled = try? bundledAyurvedaMap()[foodID]
@@ -698,7 +702,7 @@ final class SearchIndexStore {
     ) {
         for nutrient in nutrients {
             let ranked = compactFoods.compactMap {
-                item -> (id: Int, density: Double)? in
+                item -> (id: UUID, density: Double)? in
                 guard let rawValue = item.nutrientValues[nutrient],
                       rawValue > 0,
                       item.referenceWeightG > 0 else {
@@ -727,7 +731,7 @@ final class SearchIndexStore {
 
 private struct SearchIndexPayload: Codable {
     struct CompactFoodCodable: Codable {
-        let id: Int
+        let id: UUID
         let name: String
         let searchTokens: [String]
         let minAgeMonths: Int
@@ -745,11 +749,11 @@ private struct SearchIndexPayload: Codable {
     }
 
     let compactFoods: [CompactFoodCodable]
-    let invertedIndex: [String: [Int]]
+    let invertedIndex: [String: [UUID]]
     let vocabulary: [String]
     let maxNutrientValues: [String: Double]
-    let nutrientRankings: [String: [Int]]
-    let ayurvedaFacetIndex: [String: [Int]]
+    let nutrientRankings: [String: [UUID]]
+    let ayurvedaFacetIndex: [String: [UUID]]
 }
 
 // MARK: - Extensions for Encoding/Decoding Maps
@@ -807,10 +811,10 @@ private func decodeMaxNutrientValues(_ dict: [String: Double]) -> [NutrientType:
     dict.reduce(into: [:]) { if let t = NutrientType(rawValue: $1.key) { $0[t] = $1.value } }
 }
 
-private func encodeNutrientRankings(_ dict: [NutrientType: [Int]]) -> [String: [Int]] {
+private func encodeNutrientRankings(_ dict: [NutrientType: [UUID]]) -> [String: [UUID]] {
     dict.reduce(into: [:]) { $0[$1.key.rawValue] = $1.value }
 }
 
-private func decodeNutrientRankings(_ dict: [String: [Int]]) -> [NutrientType: [Int]] {
+private func decodeNutrientRankings(_ dict: [String: [UUID]]) -> [NutrientType: [UUID]] {
     dict.reduce(into: [:]) { if let t = NutrientType(rawValue: $1.key) { $0[t] = $1.value } }
 }

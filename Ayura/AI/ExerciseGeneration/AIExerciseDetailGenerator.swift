@@ -453,7 +453,7 @@ final class AIExerciseDetailGenerator {
         let domainMuscles: [MuscleGroup] = musclesResp.muscleGroups.compactMap { $0.toDomain() }
         try Task.checkCancellation()
         let dto = ExerciseItemDTO(
-            id: 0,
+            id: UUID(),
             title: exerciseName,
             desc: descResp.description,
             muscleGroups: domainMuscles,

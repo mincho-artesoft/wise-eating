@@ -27,7 +27,7 @@ struct FoodSearchPanelView: View {
     let headerRightText: String?
     
     // Сет от ID-та на храни, които да НЕ се показват в резултатите
-    let excludedFoodIDs: Set<Int>
+    let excludedFoodIDs: Set<UUID>
     
     // MARK: - Internal State
     @State private var isFavoritesModeActive: Bool = false
@@ -48,7 +48,7 @@ struct FoodSearchPanelView: View {
         showRecipesFilter: Bool = false,
         showMenusFilter: Bool = false,
         headerRightText: String? = nil,
-        excludedFoodIDs: Set<Int> = [],
+        excludedFoodIDs: Set<UUID> = [],
         // ✅ НОВО: Добавяме параметър с default nil
         selectedNutrientID: Binding<String?>? = nil,
         onSelectFood: @escaping (FoodItem) -> Void,
@@ -382,8 +382,8 @@ struct FoodSearchPanelView: View {
     
     private var filterChipItems: [SelectableNutrient] {
         guard let profile = profile else { return allSelectableNutrients }
-        let priorityVitIDs = Set(profile.priorityVitamins.map { "vit_" + $0.id })
-        let priorityMinIDs = Set(profile.priorityMinerals.map { "min_" + $0.id })
+        let priorityVitIDs = Set(profile.priorityVitamins.map { "vit_" + $0.key })
+        let priorityMinIDs = Set(profile.priorityMinerals.map { "min_" + $0.key })
         let allPriorityIDs = priorityVitIDs.union(priorityMinIDs)
         
         let (priority, other) = allSelectableNutrients.reduce(into: ([SelectableNutrient](), [SelectableNutrient]())) { result, nutrient in
@@ -395,8 +395,8 @@ struct FoodSearchPanelView: View {
     
     private var allSelectableNutrients: [SelectableNutrient] {
         var items: [SelectableNutrient] = []
-        items.append(contentsOf: allVitamins.map { SelectableNutrient(id: "vit_\($0.id)", label: $0.abbreviation) })
-        items.append(contentsOf: allMinerals.map { SelectableNutrient(id: "min_\($0.id)", label: $0.symbol) })
+        items.append(contentsOf: allVitamins.map { SelectableNutrient(id: "vit_\($0.key)", label: $0.abbreviation) })
+        items.append(contentsOf: allMinerals.map { SelectableNutrient(id: "min_\($0.key)", label: $0.symbol) })
         return items.sorted { $0.label < $1.label }
     }
     
@@ -407,8 +407,8 @@ struct FoodSearchPanelView: View {
         case "carbohydrates": return Color(hex: "#A8D7FF")
         default: break
         }
-        if id.starts(with: "vit_"), let vitamin = allVitamins.first(where: { "vit_\($0.id)" == id }) { return Color(hex: vitamin.colorHex) }
-        if id.starts(with: "min_"), let mineral = allMinerals.first(where: { "min_\($0.id)" == id }) { return Color(hex: mineral.colorHex) }
+        if id.starts(with: "vit_"), let vitamin = allVitamins.first(where: { "vit_\($0.key)" == id }) { return Color(hex: vitamin.colorHex) }
+        if id.starts(with: "min_"), let mineral = allMinerals.first(where: { "min_\($0.key)" == id }) { return Color(hex: mineral.colorHex) }
         return .gray
     }
     

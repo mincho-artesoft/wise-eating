@@ -36,13 +36,13 @@ struct MP5PlannerAdapter {
             uniqueKeysWithValues: profiles.map { ($0.id, $0) }
         )
         let linkByFoodID = Dictionary(
-            uniqueKeysWithValues: links.map { ($0.fdcId, $0) }
+            uniqueKeysWithValues: links.map { ($0.foodId, $0) }
         )
 
         var flattened: [MP5Candidate] = []
-        var thermalByFoodID: [Int: String] = [:]
+        var thermalByFoodID: [UUID: String] = [:]
         flattened.reserveCapacity(foods.count)
-        for food in foods.sorted(by: { $0.id < $1.id }) {
+        for food in foods.sorted(by: { $0.id.uuidString < $1.id.uuidString }) {
             guard let compact = compactMap[food.id],
                   !exclusions.excludes(compact)
             else {
@@ -230,7 +230,7 @@ struct MP5PlannerAdapter {
             linkedProfile: linkedProfile,
             link: link
         )
-        let concepts = FoodConcepts.shared.concepts(for: Int32(food.id))
+        let concepts = FoodConcepts.shared.concepts(for: food.id)
             .union(safetyConcepts(from: compact))
         let roleResolution = FoodRoleResolver.shared.resolution(
             for: food.id
@@ -536,7 +536,7 @@ struct MP5PlannerAdapter {
         day: Int,
         meal: String,
         componentIndex: Int,
-        foodID: Int
+        foodID: UUID
     ) -> UUID {
         let first = fnv1a64(
             "\(seed)|\(day)|\(meal)|\(componentIndex)|\(foodID)"

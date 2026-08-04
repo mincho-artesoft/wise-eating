@@ -3,6 +3,7 @@ import SwiftData
 
 @Model
 final class TemplateDay: Identifiable {
+    @Attribute(.unique) public var id: UUID
     public var dayIndex: Int
 
     // ✅ НОВО: Почивен ден
@@ -13,7 +14,8 @@ final class TemplateDay: Identifiable {
 
     public var plan: TemplatePlan?
 
-    public init(dayIndex: Int, isRestDay: Bool = false) {
+    public init(id: UUID = UUID(), dayIndex: Int, isRestDay: Bool = false) {
+        self.id = id
         self.dayIndex = dayIndex
         self.isRestDay = isRestDay
     }

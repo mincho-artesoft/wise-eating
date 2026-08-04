@@ -37,19 +37,19 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
     private var loadedIndexRevision: UInt64 = 0
     
     /// token -> set of CompactFoodItem IDs
-    private var invertedIndex: [String: Set<Int>] = [:]
+    private var invertedIndex: [String: Set<UUID>] = [:]
 
     /// Ayurveda facet key -> direct, USDA-linked and user-created FoodItem IDs
-    private var ayurvedaFacetIndex: [String: Set<Int>] = [:]
+    private var ayurvedaFacetIndex: [String: Set<UUID>] = [:]
     
     /// id -> CompactFoodItem
-    private var compactMap: [Int: CompactFoodItem] = [:]
+    private var compactMap: [UUID: CompactFoodItem] = [:]
     
     private var vocabulary: [String] = []
     private var maxNutrientValues: [NutrientType: Double] = [:]
     
     /// Optional: nutrient-based candidate lists from NutrientIndex
-    private var nutrientRankings: [NutrientType: [Int]] = [:]
+    private var nutrientRankings: [NutrientType: [UUID]] = [:]
     
     // MARK: - Search State
     
@@ -65,9 +65,9 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
     
     // --- NEW: Track last mode & excluded IDs ---
     private var lastSearchMode: SearchMode? = nil
-    private var lastExcludedFoodIDs: Set<Int> = []      // ✅ ново
+    private var lastExcludedFoodIDs: Set<UUID> = []      // ✅ ново
     
-    private var fullResultIDs: [Int] = []       // sorted IDs
+    private var fullResultIDs: [UUID] = []       // sorted IDs
     private let pageSize: Int = 40
     
     private var searchTask: Task<Void, Never>?
@@ -97,7 +97,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             isMenusOnly: Bool = false,
             searchMode: SearchMode? = nil,
             profile: Profile? = nil,
-            excludedFoodIDs: Set<Int> = [],
+            excludedFoodIDs: Set<UUID> = [],
             ayurvedaFilters: AyurvedaSearchFilters = .empty,
             phSortOrder: PhSortOrder? = nil // ✅ НОВ ПАРАМЕТЪР
         ) {
@@ -267,8 +267,8 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                 let queryVariants = SmartFoodSearch3.expandOrVariants(canonicalQuery)
                 print("🚀 [SmartSearch] Task started for canonical query: '\(canonicalQuery)' | variants: \(queryVariants)")
                 
-                var aggregatedIDs = Set<Int>()
-                var orderedResultIDs: [Int] = []
+                var aggregatedIDs = Set<UUID>()
+                var orderedResultIDs: [UUID] = []
                 var primaryIntent: SearchIntent?
                 var primaryForceShowPH = false
                 var primaryFoodsWithoutPhExcluded = 0
@@ -490,7 +490,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
     }
 
     func ayurvedaMetadata(
-        for foodID: Int
+        for foodID: UUID
     ) -> AyurvedaCanonicalSearchMetadata? {
         compactMap[foodID]?.ayurvedaMetadata
     }
@@ -575,13 +575,13 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
         nonisolated private func runSearchLogic(
             query: String,
             activeFilters: Set<NutrientType>,
-            compactMap: [Int: CompactFoodItem],
+            compactMap: [UUID: CompactFoodItem],
             allFoods: [CompactFoodItem],
             maxValues: [NutrientType: Double],
-            invertedIndex: [String: Set<Int>],
-            ayurvedaFacetIndex: [String: Set<Int>],
+            invertedIndex: [String: Set<UUID>],
+            ayurvedaFacetIndex: [String: Set<UUID>],
             vocabulary: [String],
-            nutrientRankings: [NutrientType: [Int]],
+            nutrientRankings: [NutrientType: [UUID]],
             quickAgeMonths: Double?,
             forcePhDisplay: Bool,
             isFavoritesOnly: Bool,
@@ -589,14 +589,14 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             isMenusOnly: Bool,
             searchMode: SearchMode?,
             profileConstraints: ProfileSearchConstraints?,
-            excludedFoodIDs: Set<Int>,
+            excludedFoodIDs: Set<UUID>,
             ayurvedaFilters: AyurvedaSearchFilters,
             temporalContext: AyurvedaSearchTemporalContext,
             constitutionTarget: AyurvedaDoshaDistribution?,
             phSortOrder: PhSortOrder?, // ✅ НОВ ПАРАМЕТЪР
             container: ModelContainer
         ) async -> (
-            resultIDs: [Int],
+            resultIDs: [UUID],
             intent: SearchIntent,
             effectiveTokens: [String],
             forceShowPH: Bool,
@@ -922,14 +922,14 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                 return map
             }
             
-            var candidateIDs: Set<Int>? = nil
+            var candidateIDs: Set<UUID>? = nil
             var effectiveTextTokens: [String] = []
             let trimmedNumericQuery = searchQuery
                 .trimmingCharacters(in: .whitespacesAndNewlines)
             let isPureNumericQuery = !trimmedNumericQuery.isEmpty && trimmedNumericQuery.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
             
             if isPureNumericQuery {
-                var numericMatches = Set<Int>()
+                var numericMatches = Set<UUID>()
                 for item in allFoods where item.lowercasedName.contains(trimmedNumericQuery) {
                     numericMatches.insert(item.id)
                 }
@@ -955,7 +955,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
 
                     let isCommandPrefix = tokenIsCommandPrefix[term] ?? false
                     let isShortSoftToken = (term.count <= 2 && candidateIDs != nil && !isCommandPrefix)
-                    var termMatches = Set<Int>()
+                    var termMatches = Set<UUID>()
                     if let ids = invertedIndex[term] { termMatches.formUnion(ids) }
                     
                     let isNumericOnly = term.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
@@ -1325,7 +1325,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             
             let hasAyurvedaRequest = ayurvedaFilters.isActive
                 || !intent.ayurvedaFacetConstraints.isEmpty
-            let sortedResults: [Int]
+            let sortedResults: [UUID]
             if let phLimit = intent.phConstraint {
                 // Тук се случва сортирането по pH!
                 let preferLowPH =
@@ -1378,7 +1378,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                 }.map { $0.item.id }
             }
 
-            let finalResults: [Int]
+            let finalResults: [UUID]
             if hasAyurvedaRequest {
                 let profiled = sortedResults.filter {
                     compactMap[$0]?.ayurvedaMetadata != nil
@@ -1386,7 +1386,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                 let unprofiled = sortedResults.filter {
                     compactMap[$0]?.ayurvedaMetadata == nil
                 }
-                var interleaved: [Int] = []
+                var interleaved: [UUID] = []
                 interleaved.reserveCapacity(sortedResults.count)
                 var profiledIndex = 0
                 var unprofiledIndex = 0
@@ -2175,7 +2175,7 @@ extension SmartFoodSearch3 {
         isMenusOnly: Bool = false,
         searchMode: SearchMode? = nil,
         profile: Profile? = nil,
-        excludedFoodIDs: Set<Int> = [],
+        excludedFoodIDs: Set<UUID> = [],
         ayurvedaFilters: AyurvedaSearchFilters = .empty,
         phSortOrder: PhSortOrder? = nil,
         limit: Int = 20

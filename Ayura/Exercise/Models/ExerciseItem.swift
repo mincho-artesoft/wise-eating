@@ -6,7 +6,9 @@ import SwiftData
 public final class ExerciseItem: Identifiable {
     #Index<ExerciseItem>([\.name], [\.isUserAdded], [\.nameNormalized])
 
-    @Attribute(.unique) public var id: Int
+    @Attribute(.unique) public var id: UUID
+    /// Stable number from the bundled catalogue. It is provenance, not identity.
+    @Attribute(.unique) public var catalogNumber: Int?
 
     // 🔎 Search Tokens
     public var searchTokens: [String] = []
@@ -99,7 +101,8 @@ public final class ExerciseItem: Identifiable {
     }
     
     public init(
-        id: Int,
+        id: UUID = UUID(),
+        catalogNumber: Int? = nil,
         name: String,
         description: String? = nil,
         videoURL: String? = nil,
@@ -115,6 +118,7 @@ public final class ExerciseItem: Identifiable {
         minimalAgeMonths: Int? = 0
     ) {
         self.id = id
+        self.catalogNumber = catalogNumber
         self.name = name
         self.nameNormalized = name.foldedSearchKey
 

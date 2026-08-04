@@ -203,9 +203,24 @@ struct AyurvedaQuestionOption: Identifiable, Sendable {
 }
 
 struct AyurvedaConstitutionQuestion: Identifiable, Sendable {
-  let id: Int
+  let id: UUID
   let prompt: String
   let options: [AyurvedaQuestionOption]
+
+  private static let stableIDs: [UUID] = [
+    UUID(uuidString: "E55B7FD0-61FA-590E-9A5B-AC4619FFECFD")!,
+    UUID(uuidString: "7694D3C7-9723-5B17-B8CD-B8D03069BCDE")!,
+    UUID(uuidString: "9B554058-47DC-56C7-B168-7EC79E00DBEE")!,
+    UUID(uuidString: "D5D4AA7C-9E5F-5131-A90F-CC1E202001F4")!,
+    UUID(uuidString: "A4F88319-2964-5816-8A83-DD71ED8182D1")!,
+    UUID(uuidString: "95AF03E2-2BB5-5AFF-A2EE-789E01E933A4")!,
+    UUID(uuidString: "9BEBAE3C-E61C-542D-A5FE-FA60BE2A5FD3")!,
+    UUID(uuidString: "2DAB3E14-50AA-5085-BA74-99D23EC2ED92")!,
+    UUID(uuidString: "D9FAA46B-722B-5873-9AF9-3B600DEEBA3A")!,
+    UUID(uuidString: "63A1A16E-CFE9-52D3-A36E-C19D95041436")!,
+    UUID(uuidString: "5CB89F3E-B5B3-5E9D-ACCE-FB277CB139A5")!,
+    UUID(uuidString: "D941FA41-37D2-5563-8E7F-5CA4ECF77DEA")!,
+  ]
 
   func option(for dosha: AyurvedaDosha) -> AyurvedaQuestionOption? {
     options.first { $0.dosha == dosha }
@@ -299,7 +314,7 @@ struct AyurvedaConstitutionQuestion: Identifiable, Sendable {
         .kapha: row.3,
       ]
       return AyurvedaConstitutionQuestion(
-        id: index,
+        id: stableIDs[index],
         prompt: row.0,
         options: rotations[index % rotations.count].compactMap { dosha in
           textByDosha[dosha].map {
@@ -312,10 +327,18 @@ struct AyurvedaConstitutionQuestion: Identifiable, Sendable {
 }
 
 struct AyurvedaCheckInQuestion: Identifiable, Sendable {
-  let id: Int
+  let id: UUID
   let title: String
   let prompt: String
   let options: [AyurvedaQuestionOption]
+
+  private static let stableIDs: [UUID] = [
+    UUID(uuidString: "3C5453E3-C5C2-5F07-BF66-6216D6A6F273")!,
+    UUID(uuidString: "F78C1BF5-9E5F-5436-8F61-D3DA48ADA568")!,
+    UUID(uuidString: "63B070E9-0550-58B7-B963-F043789E81AD")!,
+    UUID(uuidString: "BB26F518-7C8F-5AE4-82E8-0FE65278778D")!,
+    UUID(uuidString: "8392FF4E-AB48-5B3B-A3A7-430ABDC1BCE7")!,
+  ]
 
   static let all: [AyurvedaCheckInQuestion] = {
     let rows: [(String, String, String, String, String)] = [
@@ -367,7 +390,7 @@ struct AyurvedaCheckInQuestion: Identifiable, Sendable {
         .kapha: row.4,
       ]
       return AyurvedaCheckInQuestion(
-        id: index,
+        id: stableIDs[index],
         title: row.0,
         prompt: row.1,
         options: rotations[index % rotations.count].compactMap { dosha in

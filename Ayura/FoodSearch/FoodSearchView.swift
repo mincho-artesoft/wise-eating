@@ -41,7 +41,7 @@ private struct FoodSearchViewContent: View {
     let profile: Profile?
     
     // ✅ НОВО: Избрани храни (изключени от резултатите в engine)
-    @State private var selectedFoodIDs: Set<Int> = []
+    @State private var selectedFoodIDs: Set<UUID> = []
     @State private var selectedFoods: [FoodItem] = []
     
     // MARK: - Quick Filter Model

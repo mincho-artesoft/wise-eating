@@ -16,7 +16,7 @@ struct FoodRoleDefinition: Codable, Equatable, Sendable {
 }
 
 struct FoodRoleResolution: Codable, Equatable, Sendable {
-    let foodId: Int
+    let foodId: UUID
     let role: FoodRole
     let ruleId: String
     let notReadyToEat: Bool
@@ -38,7 +38,7 @@ struct FoodRoleResolver: Sendable {
         }
     }()
 
-    private let resolutionByFoodID: [Int: FoodRoleResolution]
+    private let resolutionByFoodID: [UUID: FoodRoleResolution]
     private let definitionByRole: [FoodRole: FoodRoleDefinition]
 
     private init(bundle: Bundle = .main) throws {
@@ -94,7 +94,7 @@ struct FoodRoleResolver: Sendable {
         definitionByRole = definitions
     }
 
-    func resolution(for foodID: Int) -> FoodRoleResolution {
+    func resolution(for foodID: UUID) -> FoodRoleResolution {
         resolutionByFoodID[foodID] ?? FoodRoleResolution(
             foodId: foodID,
             role: .other,
@@ -111,7 +111,7 @@ struct FoodRoleResolver: Sendable {
         preconditionFailure("Missing shipped definition for food role \(role)")
     }
 
-    func isNearDuplicate(foodID lhs: Int, foodID rhs: Int) -> Bool {
+    func isNearDuplicate(foodID lhs: UUID, foodID rhs: UUID) -> Bool {
         let left = resolution(for: lhs)
         let right = resolution(for: rhs)
         return left.role == right.role

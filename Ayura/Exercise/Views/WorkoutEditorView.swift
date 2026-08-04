@@ -1116,10 +1116,7 @@ struct WorkoutEditorView: View {
             if let existing = workoutToEdit {
                 itemToSave = existing
             } else {
-                var desc = FetchDescriptor<ExerciseItem>(sortBy: [SortDescriptor(\.id, order: .reverse)])
-                desc.fetchLimit = 1
-                let maxID = (try? modelContext.fetch(desc).first?.id) ?? 0
-                itemToSave = ExerciseItem(id: maxID + 1, name: "", muscleGroups: [])
+                itemToSave = ExerciseItem(id: UUID(), name: "", muscleGroups: [])
                 modelContext.insert(itemToSave)
             }
             

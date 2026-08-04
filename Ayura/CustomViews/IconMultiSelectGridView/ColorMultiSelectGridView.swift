@@ -1,7 +1,6 @@
 import SwiftUI
 
 protocol ColorSelectableItem: Identifiable, Hashable {
-    var id: String { get }
     var name: String { get }
     /// Може да си остане в протокола за съвместимост, но вече не се ползва.
     var displayText: String? { get }

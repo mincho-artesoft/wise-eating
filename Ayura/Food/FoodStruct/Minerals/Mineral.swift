@@ -3,7 +3,8 @@ import Foundation
 
 @Model
 public final class Mineral: Identifiable, Hashable, SelectableItem {
-    @Attribute(.unique) public var id: String
+    @Attribute(.unique) public var id: UUID
+    @Attribute(.unique) public var key: String
     @Attribute(.unique) public var name: String
     public var unit: String
     public var symbol: String
@@ -16,11 +17,22 @@ public final class Mineral: Identifiable, Hashable, SelectableItem {
     public var profiles: [Profile] = []
     
     public init(id: String, name: String, unit: String, symbol: String, colorHex: String, requirements: [Requirement] = []) {
-        self.id = id
+        let identity = SeedReferenceIDs.entity(kind: "mineral", key: id)
+        guard identity.requirementIds.count == requirements.count else {
+            fatalError("Requirement UUID count mismatch for mineral \(id)")
+        }
+        self.id = identity.id
+        self.key = identity.key
         self.name = name
         self.unit = unit
         self.symbol = symbol
         self.colorHex = colorHex
+        for (requirement, requirementID) in zip(
+            requirements,
+            identity.requirementIds
+        ) {
+            requirement.id = requirementID
+        }
         self.requirements = requirements
     }
 

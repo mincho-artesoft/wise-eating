@@ -5,7 +5,7 @@ import Foundation
 public final class OtherCompoundsData: Identifiable {
 
     // MARK: – Идентификация
-    @Attribute(.unique) public var id = UUID()
+    @Attribute(.unique) public var id: UUID
 
     // MARK: – Полеви стойности (флатнати)
     public var alcoholEthyl: Nutrient?
@@ -25,6 +25,7 @@ public final class OtherCompoundsData: Identifiable {
 
     // MARK: – Init
     public init(
+        id: UUID = UUID(),
         alcoholEthyl: Nutrient? = nil,
         caffeine:     Nutrient? = nil,
         theobromine:  Nutrient? = nil,
@@ -36,6 +37,7 @@ public final class OtherCompoundsData: Identifiable {
         betaine:      Nutrient? = nil,
         alkalinityPH: Nutrient? = nil
     ) {
+        self.id           = id
         self.alcoholEthyl = alcoholEthyl
         self.caffeine     = caffeine
         self.theobromine  = theobromine

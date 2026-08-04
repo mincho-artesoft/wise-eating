@@ -141,9 +141,9 @@ class SAFE1EdibilityTests(unittest.TestCase):
             encoding="utf-8"
         )
         self.assertIn("let enforcedMinAgeMonths: Int?", compact)
-        self.assertIn("currentIndexVersion: Int = 12", index)
+        self.assertIn("currentIndexVersion: Int = 13", index)
         self.assertIn("food.isEdible", index)
-        self.assertIn('"cacheVersion": 12', preseed)
+        self.assertIn('"cacheVersion": 13', preseed)
         self.assertIn(
             '"compact nil enforced ages differ from inedible foods"',
             preseed,
@@ -157,7 +157,7 @@ class SAFE1EdibilityTests(unittest.TestCase):
         foods = json.loads(
             (ROOT / "Ayura/Legacy/foods.json").read_text(encoding="utf-8")
         )
-        row = next(food for food in foods if food["id"] == 12_117)
+        row = next(food for food in foods if food["catalogNumber"] == 12_117)
         self.assertEqual(row["name"], "Honey (especially Leatherwood)")
         self.assertEqual(row["minAgeMonths"], 12)
         self.assertEqual(row["ageProvenance"], "authored")
@@ -196,7 +196,7 @@ class SAFE1EdibilityTests(unittest.TestCase):
         with gzip.open(ROOT / "Ayura/ayurveda_seed.json.gz", "rt") as handle:
             seed = json.load(handle)
         self.assertGreaterEqual(seed["seedVersion"], 7)
-        dravyas = {dravya["id"]: dravya for dravya in seed["dravyas"]}
+        dravyas = {dravya["key"]: dravya for dravya in seed["dravyas"]}
         profiles = seed["dravyas"] + seed["recipes"]
         self.assertTrue(all("edible" in profile for profile in profiles))
         self.assertEqual(
@@ -204,7 +204,7 @@ class SAFE1EdibilityTests(unittest.TestCase):
             6,
         )
         self.assertEqual(
-            {item["id"] for item in seed["dravyas"] if not item["edible"]},
+            {item["key"] for item in seed["dravyas"] if not item["edible"]},
             set(EXPECTED),
         )
         self.assertEqual(
@@ -217,7 +217,10 @@ class SAFE1EdibilityTests(unittest.TestCase):
         self.assertEqual(
             dravyas["dravya.honey-aged"]["safety"]["minAgeMonths"], 12
         )
-        honey_ids = {"dravya.honey", "dravya.honey-aged"}
+        honey_ids = {
+            dravyas["dravya.honey"]["id"],
+            dravyas["dravya.honey-aged"]["id"],
+        }
         honey_recipes = [
             recipe
             for recipe in seed["recipes"]

@@ -217,9 +217,6 @@ final class AIManager: ObservableObject {
         guard let context = modelContainer?.mainContext else { return nil }
 
         let foodName = foodItem.name
-        let identifierData = try? JSONEncoder().encode(foodItem.persistentModelID)
-        let identifierString = identifierData?.base64EncodedString()
-
         let input = AIGenerationJob.InputParameters(
             startDate: nil,
             numberOfDays: nil,
@@ -229,7 +226,7 @@ final class AIManager: ObservableObject {
             selectedPrompts: nil,
             mealTimings: nil,
             foodNameToGenerate: foodName,
-            preCreatedItemID: identifierString
+            preCreatedItemID: foodItem.id
         )
 
         let newJob = AIGenerationJob(profile: profile!, inputParams: input, jobType: .createFoodWithAI)
@@ -253,9 +250,6 @@ final class AIManager: ObservableObject {
         guard let context = modelContainer?.mainContext else { return nil }
 
         let exerciseName = exerciseItem.name
-        let identifierData = try? JSONEncoder().encode(exerciseItem.persistentModelID)
-        let identifierString = identifierData?.base64EncodedString()
-
         let input = AIGenerationJob.InputParameters(
             startDate: nil,
             numberOfDays: nil,
@@ -265,7 +259,7 @@ final class AIManager: ObservableObject {
             selectedPrompts: nil,
             mealTimings: nil,
             foodNameToGenerate: exerciseName,
-            preCreatedItemID: identifierString
+            preCreatedItemID: exerciseItem.id
         )
 
         let newJob = AIGenerationJob(profile: profile!, inputParams: input, jobType: .createExerciseWithAI)
@@ -573,26 +567,22 @@ final class AIManager: ObservableObject {
                         
                     case .createFoodWithAI:
                         guard let foodName = job.inputParameters?.foodNameToGenerate,
-                              let itemIDString = job.inputParameters?.preCreatedItemID,
-                              let itemIDData = Data(base64Encoded: itemIDString),
-                              let itemPID = try? JSONDecoder().decode(PersistentIdentifier.self, from: itemIDData)
+                              let itemID = job.inputParameters?.preCreatedItemID
                         else {
                             throw NSError(domain: "AIManager", code: 11, userInfo: [NSLocalizedDescriptionKey: "Missing food name or pre-created item ID for createFoodWithAI job."])
                         }
                         
-                        let data = try await self.createFoodWithAIDataOnMain(container: container, foodName: foodName, itemPID: itemPID)
+                        let data = try await self.createFoodWithAIDataOnMain(container: container, foodName: foodName, itemID: itemID)
                         return .success(data)
                         
                     case .createExerciseWithAI:
                         guard let exerciseName = job.inputParameters?.foodNameToGenerate,
-                              let itemIDString = job.inputParameters?.preCreatedItemID,
-                              let itemIDData = Data(base64Encoded: itemIDString),
-                              let itemPID = try? JSONDecoder().decode(PersistentIdentifier.self, from: itemIDData)
+                              let itemID = job.inputParameters?.preCreatedItemID
                         else {
                             throw NSError(domain: "AIManager", code: 13, userInfo: [NSLocalizedDescriptionKey: "Missing exercise name or pre-created item ID for createExerciseWithAI job."])
                         }
                         
-                        let data = try await self.createExerciseWithAIDataOnMain(container: container, exerciseName: exerciseName, itemPID: itemPID)
+                        let data = try await self.createExerciseWithAIDataOnMain(container: container, exerciseName: exerciseName, itemID: itemID)
                         return .success(data)
                     }
                 } else {
@@ -1094,13 +1084,16 @@ final class AIManager: ObservableObject {
     
     @available(iOS 26.0, *)
     @MainActor
-    private func createFoodWithAIDataOnMain(container: ModelContainer, foodName: String, itemPID: PersistentIdentifier) async throws -> Data {
+    private func createFoodWithAIDataOnMain(container: ModelContainer, foodName: String, itemID: UUID) async throws -> Data {
         let context = ModelContext(container)
         let generator = AIFoodDetailGenerator(container: container)
         let dto = try await generator.generateDetailsRetrying(for: foodName, ctx: context, onLog: { print("[AI BG Food Create] \($0)") })
-        
-        guard let foodToUpdate = context.model(for: itemPID) as? FoodItem else {
-            throw NSError(domain: "AIManager", code: 12, userInfo: [NSLocalizedDescriptionKey: "Could not find pre-created FoodItem with ID \(itemPID)."])
+
+        let descriptor = FetchDescriptor<FoodItem>(
+            predicate: #Predicate { $0.id == itemID }
+        )
+        guard let foodToUpdate = try context.fetch(descriptor).first else {
+            throw NSError(domain: "AIManager", code: 12, userInfo: [NSLocalizedDescriptionKey: "Could not find pre-created FoodItem with ID \(itemID)."])
         }
         
         await foodToUpdate.update(from: dto)
@@ -1110,13 +1103,16 @@ final class AIManager: ObservableObject {
     
     @available(iOS 26.0, *)
     @MainActor
-    private func createExerciseWithAIDataOnMain(container: ModelContainer, exerciseName: String, itemPID: PersistentIdentifier) async throws -> Data {
+    private func createExerciseWithAIDataOnMain(container: ModelContainer, exerciseName: String, itemID: UUID) async throws -> Data {
         let context = ModelContext(container)
         let generator = AIExerciseDetailGenerator(container: container)
         let dto = try await generator.generateDetails(for: exerciseName, ctx: context, onLog: { print("[AI BG Exercise Create] \($0)") })
-        
-        guard let exerciseToUpdate = context.model(for: itemPID) as? ExerciseItem else {
-            throw NSError(domain: "AIManager", code: 14, userInfo: [NSLocalizedDescriptionKey: "Could not find pre-created ExerciseItem with ID \(itemPID)."])
+
+        let descriptor = FetchDescriptor<ExerciseItem>(
+            predicate: #Predicate { $0.id == itemID }
+        )
+        guard let exerciseToUpdate = try context.fetch(descriptor).first else {
+            throw NSError(domain: "AIManager", code: 14, userInfo: [NSLocalizedDescriptionKey: "Could not find pre-created ExerciseItem with ID \(itemID)."])
         }
         
         await exerciseToUpdate.update(from: dto)

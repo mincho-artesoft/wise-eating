@@ -3,7 +3,7 @@ import Foundation
 
 @Model
 public final class MineralsData: Identifiable {
-    @Attribute(.unique) public var id = UUID()
+    @Attribute(.unique) public var id: UUID
 
     public var calcium:    Nutrient?
     public var iron:       Nutrient?
@@ -20,6 +20,7 @@ public final class MineralsData: Identifiable {
     @Relationship(inverse: \FoodItem.minerals) public var foodItem: FoodItem?
 
     public init(
+        id: UUID = UUID(),
         calcium:    Nutrient? = nil,
         iron:       Nutrient? = nil,
         magnesium:  Nutrient? = nil,
@@ -32,6 +33,7 @@ public final class MineralsData: Identifiable {
         manganese:  Nutrient? = nil,
         fluoride:   Nutrient? = nil
     ) {
+        self.id         = id
         self.calcium    = calcium
         self.iron       = iron
         self.magnesium  = magnesium

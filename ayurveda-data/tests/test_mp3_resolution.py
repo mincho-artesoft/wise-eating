@@ -4,6 +4,7 @@ import sqlite3
 import subprocess
 import tempfile
 import unittest
+import uuid
 from pathlib import Path
 
 
@@ -35,10 +36,9 @@ INCIDENTAL_TOKENS = [
     "restaurant",
     "food",
 ]
-ARTIFACT_PARTS = [
-    ROOT / "Ayura" / "preseeded_db.store.gz.part-aa",
-    ROOT / "Ayura" / "preseeded_db.store.gz.part-ab",
-]
+ARTIFACT_PARTS = sorted(
+    (ROOT / "Ayura").glob("preseeded_db.store.gz.part-*")
+)
 
 TARGET_FOODS = 14_487
 
@@ -66,7 +66,7 @@ class MP3DeterministicResolutionTests(unittest.TestCase):
             payload_data = connection.execute(
                 """
                 SELECT ZPAYLOADDATA FROM ZSEARCHINDEXCACHE
-                WHERE ZKEY = 'main' AND ZVERSION = 12
+                WHERE ZKEY = 'main' AND ZVERSION = 13
                 """
             ).fetchone()[0]
             profile_rows = connection.execute(
@@ -77,12 +77,29 @@ class MP3DeterministicResolutionTests(unittest.TestCase):
             ).fetchall()
             link_rows = connection.execute(
                 """
-                SELECT ZFDCID, ZDRAVYAPROFILEID, ZTIER
+                SELECT ZFOODID, ZDRAVYAPROFILEID, ZTIER
                 FROM ZAYURVEDALINK
                 """
             ).fetchall()
 
         payload = json.loads(payload_data)
+        profile_rows = [
+            (
+                str(uuid.UUID(bytes=profile_id)),
+                str(uuid.UUID(bytes=food_id)),
+                excluded,
+                kind,
+            )
+            for profile_id, food_id, excluded, kind in profile_rows
+        ]
+        link_rows = [
+            (
+                str(uuid.UUID(bytes=food_id)),
+                str(uuid.UUID(bytes=profile_id)),
+                tier,
+            )
+            for food_id, profile_id, tier in link_rows
+        ]
         direct_ids = {
             food_id for _, food_id, _, kind in profile_rows if kind != "catalog"
         }
@@ -175,7 +192,7 @@ struct CorpusRecord: Codable, Equatable {
     let status: String
     let expectationMet: Bool
     let resolvedName: String?
-    let resolvedID: Int?
+    let resolvedID: UUID?
     let isRecipe: Bool?
     let tier: String?
     let score: Double?
@@ -270,6 +287,15 @@ func require(_ condition: @autoclosure () -> Bool, _ message: String) {
 }
 
 func syntheticProperties() {
+    func fixtureID(_ value: Int) -> UUID {
+        UUID(
+            uuidString: String(
+                format: "00000000-0000-0000-0000-%012d",
+                value
+            )
+        )!
+    }
+
     func candidate(
         _ id: Int,
         _ name: String,
@@ -277,7 +303,7 @@ func syntheticProperties() {
         tier: PlannerResolutionTier = .estimated
     ) -> PlannerResolutionCandidate {
         PlannerResolutionCandidate(
-            id: id,
+            id: fixtureID(id),
             name: name,
             isRecipe: recipe,
             tier: tier
@@ -291,7 +317,7 @@ func syntheticProperties() {
             candidate(2, "Chicken breast, cooked, grilled"),
         ]
     )
-    require(chicken?.candidate.id == 2, "headword weighting failed")
+    require(chicken?.candidate.id == fixtureID(2), "headword weighting failed")
 
     let milk = PlannerDeterministicFoodResolver.resolve(
         concept: "milk",
@@ -300,7 +326,7 @@ func syntheticProperties() {
             candidate(4, "Milk, whole"),
         ]
     )
-    require(milk?.candidate.id == 4, "extra-token penalty failed")
+    require(milk?.candidate.id == fixtureID(4), "extra-token penalty failed")
 
     let tier = PlannerDeterministicFoodResolver.resolve(
         concept: "tomato",
@@ -309,7 +335,7 @@ func syntheticProperties() {
             candidate(6, "Tomato", tier: .classical),
         ]
     )
-    require(tier?.candidate.id == 6, "tier preference failed")
+    require(tier?.candidate.id == fixtureID(6), "tier preference failed")
 
     let cooked = PlannerDeterministicFoodResolver.resolve(
         concept: "cooked lentils",
@@ -318,7 +344,7 @@ func syntheticProperties() {
             candidate(8, "Lentils, cooked, boiled"),
         ]
     )
-    require(cooked?.candidate.id == 8, "cooked-form preference failed")
+    require(cooked?.candidate.id == fixtureID(8), "cooked-form preference failed")
 
     let recipe = PlannerDeterministicFoodResolver.resolve(
         concept: "kitchari",
@@ -327,7 +353,7 @@ func syntheticProperties() {
             candidate(10, "Kitchari", recipe: true, tier: .classical),
         ]
     )
-    require(recipe?.candidate.id == 10, "recipe preference failed")
+    require(recipe?.candidate.id == fixtureID(10), "recipe preference failed")
 
     let control = PlannerDeterministicFoodResolver.resolve(
         concept: "unicorn steak",
@@ -357,7 +383,7 @@ func syntheticProperties() {
             candidate(15, "Fresh Ginger Achar", recipe: true, tier: .classical),
         ]
     )
-    require(freshGinger?.candidate.id == 14, "fresh/ground form conflict failed")
+    require(freshGinger?.candidate.id == fixtureID(14), "fresh/ground form conflict failed")
 
     let roastedAlmond = PlannerDeterministicFoodResolver.resolve(
         concept: "roasted almonds",
@@ -366,7 +392,7 @@ func syntheticProperties() {
             candidate(17, "Nuts, almonds, dry roasted, without salt added"),
         ]
     )
-    require(roastedAlmond?.candidate.id == 17, "dry-roasted form match failed")
+    require(roastedAlmond?.candidate.id == fixtureID(17), "dry-roasted form match failed")
 
     let steamedBroccoli = PlannerDeterministicFoodResolver.resolve(
         concept: "steamed broccoli",
@@ -387,7 +413,7 @@ func syntheticProperties() {
             candidate(21, "Spices, fenugreek seed"),
         ]
     )
-    require(plantPart?.candidate.id == 21, "seed/leaf conflict failed")
+    require(plantPart?.candidate.id == fixtureID(21), "seed/leaf conflict failed")
 }
 
 @main
@@ -665,7 +691,17 @@ struct MP3ResolutionHarness {
             record["concept"]: record
             for record in self.holdout_output["records"]
         }
-        self.assertEqual(records["fresh ginger"]["resolvedID"], 6687)
+        foods = json.loads(
+            (ROOT / "Ayura/Legacy/foods.json").read_text()
+        )
+        fresh_ginger_id = next(
+            food["id"] for food in foods
+            if food["catalogNumber"] == 6687
+        )
+        self.assertEqual(
+            records["fresh ginger"]["resolvedID"].lower(),
+            fresh_ginger_id,
+        )
         self.assertEqual(records["fresh ginger"]["resolvedName"], "Ginger root, raw")
         self.assertFalse(records["fresh ginger"]["isRecipe"])
         self.assertEqual(

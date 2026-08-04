@@ -24,13 +24,13 @@ final class ProductDataManager {
     
     // --- CHANGE 4: This function is now ASYNC ---
     public func findProductName(for gtin: String) async -> String? {
-        guard let gtinAsInt = Int64(gtin) else { return nil }
-    
-        let predicate = #Predicate<ProductBucket> { $0.bucketKey <= gtinAsInt }
-        var fetchDescriptor = FetchDescriptor<ProductBucket>(predicate: predicate, sortBy: [SortDescriptor(\.bucketKey, order: .reverse)])
-        fetchDescriptor.fetchLimit = 1
-
-        guard let bucket = try? modelContext.fetch(fetchDescriptor).first else {
+        let normalizedGTIN = Self.normalizedDecimal(gtin)
+        guard !normalizedGTIN.isEmpty,
+              let buckets = try? modelContext.fetch(FetchDescriptor<ProductBucket>()),
+              let bucket = buckets
+                .filter({ Self.compareDecimal($0.bucketKey, normalizedGTIN) != .orderedDescending })
+                .max(by: { Self.compareDecimal($0.bucketKey, $1.bucketKey) == .orderedAscending })
+        else {
             print("DEBUG: Could not find any bucket for GTIN \(gtin).")
             return nil
         }
@@ -43,6 +43,22 @@ final class ProductDataManager {
         
         // The call to reconstructName is now awaited
         return await reconstructName(from: tokenIDs)
+    }
+
+    private static func normalizedDecimal(_ value: String) -> String {
+        guard value.allSatisfy(\.isNumber) else { return "" }
+        let trimmed = value.drop(while: { $0 == "0" })
+        return trimmed.isEmpty ? "0" : String(trimmed)
+    }
+
+    private static func compareDecimal(_ lhs: String, _ rhs: String) -> ComparisonResult {
+        let left = normalizedDecimal(lhs)
+        let right = normalizedDecimal(rhs)
+        if left.count != right.count {
+            return left.count < right.count ? .orderedAscending : .orderedDescending
+        }
+        if left == right { return .orderedSame }
+        return left < right ? .orderedAscending : .orderedDescending
     }
     
     private func getTokenIDs(for gtin: String, from bucket: ProductBucket) -> [Int]? {
@@ -80,7 +96,7 @@ final class ProductDataManager {
         
         // 1. Create a predicate to fetch all vocabulary entries whose ID is in our list.
         // This is ONE efficient database query.
-        let predicate = #Predicate<VocabularyEntry> { tokenIDs.contains($0.id) }
+        let predicate = #Predicate<VocabularyEntry> { tokenIDs.contains($0.tokenIndex) }
         let descriptor = FetchDescriptor(predicate: predicate)
         
         do {
@@ -89,7 +105,7 @@ final class ProductDataManager {
             
             // 3. The fetch returns an unordered array. We must convert it to a dictionary
             // to reassemble the words in the correct order.
-            let wordMap = Dictionary(uniqueKeysWithValues: entries.map { ($0.id, $0.word) })
+            let wordMap = Dictionary(uniqueKeysWithValues: entries.map { ($0.tokenIndex, $0.word) })
             
             // 4. Reconstruct the final string using the original tokenID order.
             let words = tokenIDs.compactMap { wordMap[$0] }

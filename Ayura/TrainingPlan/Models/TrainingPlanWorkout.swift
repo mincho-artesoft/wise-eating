@@ -7,7 +7,7 @@ public final class TrainingPlanWorkout: Identifiable {
     public var workoutName: String
 
     /// ID на ExerciseItem (isWorkout = true), който е автоматично генериран от този запис.
-    public var linkedWorkoutID: Int? = nil
+    public var linkedWorkoutID: UUID? = nil
 
     @Relationship(deleteRule: .cascade, inverse: \TrainingPlanExercise.workout)
     public var exercises: [TrainingPlanExercise] = []

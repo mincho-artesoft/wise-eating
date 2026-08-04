@@ -404,18 +404,7 @@ struct BarcodeScannerView: View {
     private func createNewFoodItemAndAdd(from scannedItem: ScannedItem) {
         guard let productName = scannedItem.productName else { return }
 
-        let nextID: Int
-        do {
-            var desc = FetchDescriptor<FoodItem>()
-            desc.sortBy = [SortDescriptor(\.id, order: .reverse)]
-            desc.fetchLimit = 1
-            let maxID = (try modelContext.fetch(desc).first?.id) ?? 0
-            nextID = maxID + 1
-        } catch {
-            nextID = (try? modelContext.fetch(FetchDescriptor<FoodItem>()).count) ?? 0 + 1000000
-        }
-
-        let newFoodItem = FoodItem(id: nextID, name: productName)
+        let newFoodItem = FoodItem(id: UUID(), name: productName)
 
 
         modelContext.insert(newFoodItem)
@@ -433,18 +422,7 @@ struct BarcodeScannerView: View {
         guard let productName = scannedItem.productName else { return }
         guard ensureAIAvailableOrShowMessage() else { return }
 
-        let nextID: Int
-        do {
-            var desc = FetchDescriptor<FoodItem>()
-            desc.sortBy = [SortDescriptor(\.id, order: .reverse)]
-            desc.fetchLimit = 1
-            let maxID = (try modelContext.fetch(desc).first?.id) ?? 0
-            nextID = maxID + 1
-        } catch {
-            nextID = (try? modelContext.fetch(FetchDescriptor<FoodItem>()).count) ?? 0 + 1000000
-        }
-
-        let newFoodItem = FoodItem(id: nextID, name: productName)
+        let newFoodItem = FoodItem(id: UUID(), name: productName)
 
 
         modelContext.insert(newFoodItem)

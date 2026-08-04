@@ -4,8 +4,12 @@ import unittest
 from collections import Counter
 from pathlib import Path
 
+import sys
+
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "ayurveda-data"))
+from stable_ids import food_uuid
 ROLE_SOURCE = ROOT / "ayurveda-data" / "rules" / "food-roles.json"
 ROLE_ARTIFACT = ROOT / "Ayura" / "food_roles.json.gz"
 KNOWN_BAD_PLAN = (
@@ -150,6 +154,10 @@ class MP7ValidityTests(unittest.TestCase):
         cls.known_bad = json.loads(
             KNOWN_BAD_PLAN.read_text(encoding="utf-8")
         )
+        for day in cls.known_bad["days"]:
+            for meal in day["meals"]:
+                for component in meal["components"]:
+                    component["foodId"] = food_uuid(component["foodId"])
         cls.checker = CulinaryValidityChecker(
             cls.role_source,
             cls.role_artifact,

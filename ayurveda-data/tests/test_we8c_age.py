@@ -33,7 +33,7 @@ class WE8CAgeDerivationTests(unittest.TestCase):
         data_root = ROOT / "ayurveda-data"
         foods_path = ROOT / "Ayura" / "Legacy" / "foods.json"
         foods = json.loads(foods_path.read_text(encoding="utf-8"))
-        cls.store_ids = {food["id"] for food in foods}
+        cls.store_ids = {food["catalogNumber"] for food in foods}
         cls.source_safety = build_seed.load_food_safety(
             foods_path,
             cls.store_ids,
@@ -311,10 +311,9 @@ class WE8CPreseedAgeTests(unittest.TestCase):
     def setUpClass(cls):
         cls.temporary = tempfile.TemporaryDirectory(prefix="we8c-preseed-")
         cls.store = Path(cls.temporary.name) / "preseed.store"
-        parts = [
-            ROOT / "Ayura" / "preseeded_db.store.gz.part-aa",
-            ROOT / "Ayura" / "preseeded_db.store.gz.part-ab",
-        ]
+        parts = sorted(
+            (ROOT / "Ayura").glob("preseeded_db.store.gz.part-*")
+        )
         cls.store.write_bytes(
             gzip.decompress(b"".join(part.read_bytes() for part in parts))
         )
@@ -382,7 +381,7 @@ class WE8CPreseedAgeTests(unittest.TestCase):
         profiles = self.seed["dravyas"] + self.seed["recipes"]
         profiles_by_id = {profile["id"]: profile for profile in profiles}
         canonical_ids = {profile["foodId"] for profile in profiles}
-        links_by_food = {link["fdcId"]: link for link in self.seed["links"]}
+        links_by_food = {link["foodId"]: link for link in self.seed["links"]}
         linked_only_ids = set(links_by_food) - canonical_ids
         self.assertEqual(len(linked_only_ids), 2_007)
 
@@ -390,7 +389,7 @@ class WE8CPreseedAgeTests(unittest.TestCase):
             link = links_by_food[food_id]
             compact = self.compact_by_id[food_id]
             metadata = compact["ayurvedaMetadata"]
-            source_safety = profiles_by_id[link["dravyaId"]]["safety"]
+            source_safety = profiles_by_id[link["dravyaProfileId"]]["safety"]
             self.assertEqual(
                 compact["enforcedMinAgeMonths"],
                 source_safety["enforcedMinAgeMonths"],

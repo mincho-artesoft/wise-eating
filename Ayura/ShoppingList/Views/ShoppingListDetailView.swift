@@ -61,7 +61,7 @@ struct ShoppingListDetailView: View {
 
     // MARK: - AppStorage for Last Prices
     @AppStorage("ShoppingListLastPrices") private var lastPricesData: Data = Data()
-    @State private var lastPrices: [Int: Double] = [:]
+    @State private var lastPrices: [UUID: Double] = [:]
 
     // MARK: - Helper Struct for Editable Items
     private struct EditableShoppingListItem: Identifiable, Hashable {
@@ -122,7 +122,7 @@ struct ShoppingListDetailView: View {
         _editableStartDate = State(initialValue: list.eventStartDate)
         _editableReminderOffset = State(initialValue: list.reminderMinutes ?? 0)
         _editableItems = State(initialValue: list.items.map { EditableShoppingListItem(from: $0) })
-        _lastPrices = State(initialValue: (try? JSONDecoder().decode([Int: Double].self, from: lastPricesData)) ?? [:])
+        _lastPrices = State(initialValue: (try? JSONDecoder().decode([UUID: Double].self, from: lastPricesData)) ?? [:])
     }
     
     // MARK: - Computed Properties
@@ -766,7 +766,7 @@ struct ShoppingListDetailView: View {
     private var combinedSuggestions: [FoodItem] {
         let lowStockFoods = viewModel.suggestedItems.compactMap { $0.food }
         let recentFoods = viewModel.recentFoodItems
-        var uniqueFoods: [Int: FoodItem] = [:]
+        var uniqueFoods: [UUID: FoodItem] = [:]
         for food in lowStockFoods { uniqueFoods[food.id] = food }
         for food in recentFoods { uniqueFoods[food.id] = food }
         let allUniqueSuggestions = Array(uniqueFoods.values).sorted { $0.name < $1.name }
@@ -777,7 +777,7 @@ struct ShoppingListDetailView: View {
     private func dismissKeyboardAndSearch() { isSearchFieldFocused = false; globalSearchText = "" }
     
     private func reloadLastPricesFromAppStorage() {
-        if let decoded = try? JSONDecoder().decode([Int: Double].self, from: lastPricesData) { lastPrices = decoded }
+        if let decoded = try? JSONDecoder().decode([UUID: Double].self, from: lastPricesData) { lastPrices = decoded }
         else { lastPrices = [:] }
     }
     

@@ -4,6 +4,7 @@ import json
 import sqlite3
 import tempfile
 import unittest
+import uuid
 from pathlib import Path
 
 
@@ -26,7 +27,7 @@ class WE8SafetyDerivationTests(unittest.TestCase):
         data_root = ROOT / "ayurveda-data"
         foods_path = ROOT / "Ayura" / "Legacy" / "foods.json"
         foods = json.loads(foods_path.read_text(encoding="utf-8"))
-        cls.store_ids = {food["id"] for food in foods}
+        cls.store_ids = {food["catalogNumber"] for food in foods}
         cls.source_safety = build_seed.load_food_safety(
             foods_path,
             cls.store_ids,
@@ -171,10 +172,9 @@ class WE8PreseedSafetyTests(unittest.TestCase):
     def setUpClass(cls):
         cls.temporary = tempfile.TemporaryDirectory(prefix="we8-preseed-")
         cls.store = Path(cls.temporary.name) / "preseed.store"
-        parts = [
-            ROOT / "Ayura" / "preseeded_db.store.gz.part-aa",
-            ROOT / "Ayura" / "preseeded_db.store.gz.part-ab",
-        ]
+        parts = sorted(
+            (ROOT / "Ayura").glob("preseeded_db.store.gz.part-*")
+        )
         cls.store.write_bytes(
             gzip.decompress(b"".join(part.read_bytes() for part in parts))
         )
@@ -194,10 +194,16 @@ class WE8PreseedSafetyTests(unittest.TestCase):
             food["id"]: food for food in payload["compactFoods"]
         }
         cls.recipe_by_slug = {
-            recipe["id"]: recipe for recipe in cls.seed["recipes"]
+            recipe["key"]: recipe for recipe in cls.seed["recipes"]
         }
         cls.dravya_by_slug = {
-            dravya["id"]: dravya for dravya in cls.seed["dravyas"]
+            dravya["key"]: dravya for dravya in cls.seed["dravyas"]
+        }
+        foods = json.loads(
+            (ROOT / "Ayura" / "Legacy" / "foods.json").read_text()
+        )
+        cls.food_uuid_by_catalog = {
+            food["catalogNumber"]: food["id"] for food in foods
         }
 
     @classmethod
@@ -293,7 +299,7 @@ class WE8PreseedSafetyTests(unittest.TestCase):
 
     def test_fresh_artifact_contains_exact_recipe_ingredient_links(self):
         food_id_by_pk = {
-            pk: food_id
+            pk: str(uuid.UUID(bytes=food_id))
             for pk, food_id in self.connection.execute(
                 "SELECT Z_PK, ZID FROM ZFOODITEM"
             )
@@ -322,14 +328,14 @@ class WE8PreseedSafetyTests(unittest.TestCase):
     def test_kitchari_links_support_fresh_shopping_list_expansion(self):
         recipe = self.recipe_by_slug["recipe.classic-mung-kitchari"]
         food_id_by_pk = {
-            pk: food_id
+            pk: str(uuid.UUID(bytes=food_id))
             for pk, food_id in self.connection.execute(
                 "SELECT Z_PK, ZID FROM ZFOODITEM"
             )
         }
         owner_pk = self.connection.execute(
             "SELECT Z_PK FROM ZFOODITEM WHERE ZID = ?",
-            (recipe["foodId"],),
+            (uuid.UUID(recipe["foodId"]).bytes,),
         ).fetchone()[0]
         expanded = {
             food_id_by_pk[ingredient_pk]
@@ -340,7 +346,13 @@ class WE8PreseedSafetyTests(unittest.TestCase):
         }
         self.assertEqual(
             expanded,
-            {4_558, 6_372, 6_687, 8_148, 9_277, 10_444, 10_962, 11_888},
+            {
+                self.food_uuid_by_catalog[catalog_number]
+                for catalog_number in (
+                    4_558, 6_372, 6_687, 8_148,
+                    9_277, 10_444, 10_962, 11_888,
+                )
+            },
         )
         shopping_source = (
             ROOT

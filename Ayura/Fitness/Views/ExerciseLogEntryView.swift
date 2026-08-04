@@ -14,7 +14,7 @@ struct ExerciseLogEntryView: View {
     
     // MARK: - Focus State
     struct FocusField: Hashable {
-        let exerciseID: Int
+        let exerciseID: UUID
         let setID: UUID
     }
     @FocusState.Binding var focusedField: FocusField?

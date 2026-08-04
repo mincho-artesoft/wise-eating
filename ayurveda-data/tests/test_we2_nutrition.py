@@ -86,7 +86,7 @@ class RecipeNutritionTests(unittest.TestCase):
         foods_path = REPO_ROOT / "Ayura" / "Legacy" / "foods.json"
         dravya_foods_path = data_root / "nutrition" / "dravya_foods.json"
         foods = json.loads(foods_path.read_text(encoding="utf-8"))
-        cls.store_ids = {food["id"] for food in foods}
+        cls.store_ids = {food["catalogNumber"] for food in foods}
         cls.usda_nutrition_by_id = build_seed.load_food_nutrition(
             foods_path, cls.store_ids
         )

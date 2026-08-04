@@ -218,7 +218,7 @@ struct MealPlanEditorView: View {
                     )
                     
                     // Изчисляваме кои ID-та да скрием (тези, които вече са добавени в текущото хранене)
-                    let excludedIDs: Set<Int> = {
+                    let excludedIDs: Set<UUID> = {
                         if let meal = currentlySelectedMeal {
                             return Set(meal.entries.compactMap { $0.food?.id })
                         }
@@ -949,7 +949,7 @@ struct MealPlanEditorView: View {
                 if let existingMenuID = meal.linkedMenuID, let foundMenu = try? modelContext.fetch(FetchDescriptor<FoodItem>(predicate: #Predicate { $0.id == existingMenuID })).first {
                     menuToUpdate = foundMenu
                 } else {
-                    menuToUpdate = FoodItem(id: nextFoodId(), name: menuName, isMenu: true, isUserAdded: true)
+                    menuToUpdate = FoodItem(id: UUID(), name: menuName, isMenu: true, isUserAdded: true)
                     modelContext.insert(menuToUpdate)
                     meal.linkedMenuID = menuToUpdate.id
                 }
@@ -962,14 +962,6 @@ struct MealPlanEditorView: View {
                 SearchIndexStore.shared.updateItem(menuToUpdate, context: modelContext)
             }
         }
-    }
-    
-    private func nextFoodId() -> Int {
-        var desc = FetchDescriptor<FoodItem>()
-        desc.sortBy = [SortDescriptor(\.id, order: .reverse)]
-        desc.fetchLimit = 1
-        let maxId = ((try? modelContext.fetch(desc))?.first?.id) ?? 0
-        return maxId + 1
     }
     
     private var allFoodsInPlan: [FoodItem] {

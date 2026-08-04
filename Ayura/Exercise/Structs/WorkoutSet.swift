@@ -60,11 +60,11 @@ public struct WorkoutSet: Codable, Hashable, Identifiable {
 // ... (ExerciseLog, DetailedTrainingLog и TrainingPayload остават без промяна)
 /// Represents the detailed log for a single exercise within a workout.
 public struct ExerciseLog: Codable, Hashable, Identifiable {
-    public var id: Int { exerciseID }
-    public let exerciseID: Int
+    public var id: UUID { exerciseID }
+    public let exerciseID: UUID
     public var sets: [WorkoutSet]
     
-    public init(exerciseID: Int, sets: [WorkoutSet]) {
+    public init(exerciseID: UUID, sets: [WorkoutSet]) {
         self.exerciseID = exerciseID
         self.sets = sets
     }

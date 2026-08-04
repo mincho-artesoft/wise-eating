@@ -3,6 +3,7 @@ import Foundation
 
 @Model
 public final class IngredientLink: Identifiable {
+    @Attribute(.unique) public var id: UUID
 
     /// Конкретният продукт / суровина
     /// ⬇︎  ВАЖНО: вече е .nullify, за да не трие FoodItem-a при изтриване на връзката
@@ -17,10 +18,12 @@ public final class IngredientLink: Identifiable {
     public var owner: FoodItem?
 
     // MARK: – Init
-    public init(food: FoodItem,
+    public init(id: UUID = UUID(),
+                food: FoodItem,
                 grams: Double = 0,
                 owner: FoodItem? = nil)
     {
+        self.id = id
         self.food  = food
         self.grams = grams
         self.owner = owner

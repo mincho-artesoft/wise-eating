@@ -220,7 +220,7 @@ final class AnalyticsViewModel: ObservableObject {
     private func nutrientTotals(for foods: [FoodItem : Double]) -> [String : Double] {
         var sums: [String : Double] = [:]
         for (food, grams) in foods {
-            let allNutrientIDs = allVitamins.map { "vit_\($0.id)" } + allMinerals.map { "min_\($0.id)" }
+            let allNutrientIDs = allVitamins.map { "vit_\($0.key)" } + allMinerals.map { "min_\($0.key)" }
             for id in allNutrientIDs {
                 sums[id, default: 0] += food.amount(of: id, grams: grams)
             }

@@ -117,7 +117,7 @@ struct NutritionsDetailView: View {
     private let maxRecentItems = 20
     @State private var currentTimeString: String = ""
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    @State private var scrollToItemID: Int? = nil
+    @State private var scrollToItemID: UUID? = nil
     
     @State private var hasUnreadNotifications: Bool = false
     

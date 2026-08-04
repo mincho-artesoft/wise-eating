@@ -1895,7 +1895,7 @@ class AIFoodDetailGenerator {
         
         // --- Final assembly -> FoodItemDTO (остава непроменено) ---
         let dto = FoodItemDTO(
-            id: 0,
+            id: UUID(),
             name: foodName,
             minAgeMonths: minAgeResp.minAgeMonths,
             desctiption: descResp.description,

@@ -33,7 +33,14 @@ public struct MealPlanPreviewMeal: Sendable, Hashable, Codable, Identifiable {
 }
 
 public struct MealPlanPreviewDay: Sendable, Codable, Identifiable {
-    public var id: Int { dayIndex }
+    public var id: UUID {
+        let suffix = UInt64(bitPattern: Int64(dayIndex)) & 0x0000_FFFF_FFFF_FFFF
+        let value = String(
+            format: "7D252C42-DC2A-598F-AE8D-%012llX",
+            suffix
+        )
+        return UUID(uuidString: value)!
+    }
     public let dayIndex: Int
     public var meals: [MealPlanPreviewMeal]
 }

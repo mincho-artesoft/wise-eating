@@ -3,6 +3,7 @@ import SwiftData
 
 // DTO sub-structs remain unchanged...
 struct MacronutrientsDTO: Codable {
+    var id: UUID?
     var carbohydrates: Nutrient?
     var protein:       Nutrient?
     var fat:           Nutrient?
@@ -10,6 +11,7 @@ struct MacronutrientsDTO: Codable {
     var totalSugars:   Nutrient?
 }
 struct LipidsDTO: Codable {
+    var id: UUID?
     var totalSaturated: Nutrient?; var totalMonounsaturated: Nutrient?; var totalPolyunsaturated: Nutrient?
     var totalTrans: Nutrient?; var totalTransMonoenoic: Nutrient?; var totalTransPolyenoic: Nutrient?
     var sfa4_0: Nutrient?; var sfa6_0: Nutrient?; var sfa8_0: Nutrient?; var sfa10_0: Nutrient?
@@ -25,6 +27,7 @@ struct LipidsDTO: Codable {
     var pufa2_4:  Nutrient?
 }
 struct VitaminsDTO: Codable {
+    var id: UUID?
     var vitaminA_RAE: Nutrient?; var retinol: Nutrient?
     var caroteneAlpha: Nutrient?; var caroteneBeta: Nutrient?; var cryptoxanthinBeta: Nutrient?
     var luteinZeaxanthin: Nutrient?; var lycopene: Nutrient?
@@ -36,12 +39,14 @@ struct VitaminsDTO: Codable {
     var vitaminK: Nutrient?; var choline: Nutrient?
 }
 struct MineralsDTO: Codable {
+    var id: UUID?
     var calcium: Nutrient?; var iron: Nutrient?; var magnesium: Nutrient?
     var phosphorus: Nutrient?; var potassium: Nutrient?; var sodium: Nutrient?
     var selenium: Nutrient?; var zinc: Nutrient?; var copper: Nutrient?
     var manganese: Nutrient?; var fluoride: Nutrient?
 }
 struct OtherDTO: Codable {
+    var id: UUID?
     var alcoholEthyl: Nutrient?; var caffeine: Nutrient?; var theobromine: Nutrient?
     var cholesterol: Nutrient?; var energyKcal: Nutrient?; var water: Nutrient?
     var weightG: Nutrient?; var ash: Nutrient?; var betaine: Nutrient?
@@ -49,6 +54,7 @@ struct OtherDTO: Codable {
 }
 
 struct AminoAcidsDTO: Codable {
+    var id: UUID?
     var alanine: Nutrient?; var arginine: Nutrient?; var asparticAcid: Nutrient?; var cystine: Nutrient?
     var glutamicAcid: Nutrient?; var glycine: Nutrient?; var histidine: Nutrient?; var isoleucine: Nutrient?
     var leucine: Nutrient?; var lysine: Nutrient?; var methionine: Nutrient?; var phenylalanine: Nutrient?
@@ -56,10 +62,12 @@ struct AminoAcidsDTO: Codable {
     var valine: Nutrient?; var serine: Nutrient?; var hydroxyproline: Nutrient?
 }
 struct CarbDetailsDTO: Codable {
+    var id: UUID?
     var starch: Nutrient?; var sucrose: Nutrient?; var glucose: Nutrient?
     var fructose: Nutrient?; var lactose: Nutrient?; var maltose: Nutrient?; var galactose: Nutrient?
 }
 struct SterolsDTO: Codable {
+    var id: UUID?
     var phytosterols: Nutrient?; var betaSitosterol: Nutrient?; var campesterol: Nutrient?; var stigmasterol: Nutrient?
 }
 
@@ -67,7 +75,8 @@ struct SterolsDTO: Codable {
 struct FoodItemDTO: Codable, Sendable, Identifiable {
 
     // ───── Basic info ─────
-    var id: Int
+    var id: UUID
+    var catalogNumber: Int? = nil
     var name: String
     var minAgeMonths: Int?
     var ageProvenance: String? = nil
@@ -90,6 +99,7 @@ struct FoodItemDTO: Codable, Sendable, Identifiable {
         // Base FoodItem
         let item = FoodItem(
             id: id,
+            catalogNumber: catalogNumber,
             name: name,
             allergens: allergens ?? []
         )
@@ -101,6 +111,7 @@ struct FoodItemDTO: Codable, Sendable, Identifiable {
         // Mapping (без промени)
         if let m = macronutrients {
             item.macronutrients = MacronutrientsData(
+                id: m.id ?? UUID(),
                 carbohydrates: m.carbohydrates, protein: m.protein, fat: m.fat,
                 fiber: m.fiber, totalSugars: m.totalSugars
             )
@@ -108,6 +119,7 @@ struct FoodItemDTO: Codable, Sendable, Identifiable {
         }
         if let l = lipids {
             item.lipids = LipidsData(
+                id: l.id ?? UUID(),
                 totalSaturated: l.totalSaturated, totalMonounsaturated: l.totalMonounsaturated, totalPolyunsaturated: l.totalPolyunsaturated,
                 totalTrans: l.totalTrans, totalTransMonoenoic: l.totalTransMonoenoic, totalTransPolyenoic: l.totalTransPolyenoic,
                 sfa4_0: l.sfa4_0, sfa6_0: l.sfa6_0, sfa8_0: l.sfa8_0, sfa10_0: l.sfa10_0,
@@ -125,6 +137,7 @@ struct FoodItemDTO: Codable, Sendable, Identifiable {
         }
         if let v = vitamins {
             item.vitamins = VitaminsData(
+                id: v.id ?? UUID(),
                 vitaminA_RAE: v.vitaminA_RAE, retinol: v.retinol,
                 caroteneAlpha: v.caroteneAlpha, caroteneBeta: v.caroteneBeta,
                 cryptoxanthinBeta: v.cryptoxanthinBeta, luteinZeaxanthin: v.luteinZeaxanthin,
@@ -140,6 +153,7 @@ struct FoodItemDTO: Codable, Sendable, Identifiable {
         }
         if let m = minerals {
             item.minerals = MineralsData(
+                id: m.id ?? UUID(),
                 calcium: m.calcium, iron: m.iron, magnesium: m.magnesium,
                 phosphorus: m.phosphorus, potassium: m.potassium, sodium: m.sodium,
                 selenium: m.selenium, zinc: m.zinc, copper: m.copper,
@@ -149,6 +163,7 @@ struct FoodItemDTO: Codable, Sendable, Identifiable {
         }
         if let o = other {
             item.other = OtherCompoundsData(
+                id: o.id ?? UUID(),
                 alcoholEthyl: o.alcoholEthyl,
                 caffeine:     o.caffeine,
                 theobromine:  o.theobromine,
@@ -164,6 +179,7 @@ struct FoodItemDTO: Codable, Sendable, Identifiable {
         }
         if let a = aminoAcids {
             item.aminoAcids = AminoAcidsData(
+                id: a.id ?? UUID(),
                 alanine: a.alanine, arginine: a.arginine, asparticAcid: a.asparticAcid, cystine: a.cystine,
                 glutamicAcid: a.glutamicAcid, glycine: a.glycine, histidine: a.histidine, isoleucine: a.isoleucine,
                 leucine: a.leucine, lysine: a.lysine, methionine: a.methionine, phenylalanine: a.phenylalanine,
@@ -174,6 +190,7 @@ struct FoodItemDTO: Codable, Sendable, Identifiable {
         }
         if let c = carbDetails {
             item.carbDetails = CarbDetailsData(
+                id: c.id ?? UUID(),
                 starch: c.starch, sucrose: c.sucrose, glucose: c.glucose,
                 fructose: c.fructose, lactose: c.lactose, maltose: c.maltose, galactose: c.galactose
             )
@@ -181,6 +198,7 @@ struct FoodItemDTO: Codable, Sendable, Identifiable {
         }
         if let s = sterols {
             item.sterols = SterolsData(
+                id: s.id ?? UUID(),
                 phytosterols: s.phytosterols, betaSitosterol: s.betaSitosterol,
                 campesterol: s.campesterol, stigmasterol: s.stigmasterol
             )

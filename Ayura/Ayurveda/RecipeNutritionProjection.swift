@@ -19,7 +19,7 @@ final class RecipeNutritionProjection: @unchecked Sendable {
   static let shared = RecipeNutritionProjection()
 
   private let lock = NSLock()
-  private var snapshots: [Int: RecipeNutritionSnapshot] = [:]
+  private var snapshots: [UUID: RecipeNutritionSnapshot] = [:]
 
   private init() {}
 
@@ -35,7 +35,7 @@ final class RecipeNutritionProjection: @unchecked Sendable {
         }
       )
     )
-    var loaded: [Int: RecipeNutritionSnapshot] = [:]
+    var loaded: [UUID: RecipeNutritionSnapshot] = [:]
     loaded.reserveCapacity(profiles.count)
     let decoder = JSONDecoder()
 
@@ -61,7 +61,7 @@ final class RecipeNutritionProjection: @unchecked Sendable {
     return loaded.count
   }
 
-  func snapshot(foodID: Int) -> RecipeNutritionSnapshot? {
+  func snapshot(foodID: UUID) -> RecipeNutritionSnapshot? {
     lock.lock()
     defer { lock.unlock() }
     return snapshots[foodID]
@@ -69,8 +69,8 @@ final class RecipeNutritionProjection: @unchecked Sendable {
 }
 
 private enum RecipeNutritionProjectionError: LocalizedError {
-  case missingPayload(String)
-  case duplicateFoodID(Int)
+  case missingPayload(UUID)
+  case duplicateFoodID(UUID)
 
   var errorDescription: String? {
     switch self {

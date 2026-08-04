@@ -1065,7 +1065,7 @@ struct TrainingPlanEditorView: View {
                        ).first {
                         workoutToUpdate = found
                     } else {
-                        let newID = nextExerciseId()
+                        let newID = UUID()
                         workoutToUpdate = ExerciseItem(id: newID, name: workoutName, muscleGroups: [], isWorkout: true)
                         modelContext.insert(workoutToUpdate)
                         workout.linkedWorkoutID = newID
@@ -1118,14 +1118,6 @@ struct TrainingPlanEditorView: View {
             }
         }
 
-    
-    private func nextExerciseId() -> Int {
-        var desc = FetchDescriptor<ExerciseItem>()
-        desc.sortBy = [SortDescriptor(\.id, order: .reverse)]
-        desc.fetchLimit = 1
-        let maxId = ((try? modelContext.fetch(desc))?.first?.id) ?? 0
-        return maxId + 1
-    }
     
     private func syncDays(of plan: TrainingPlan, from stateDays: [TrainingPlanDay]) {
         // Преобразуваме за бърз достъп

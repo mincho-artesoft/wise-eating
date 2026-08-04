@@ -4,7 +4,7 @@ import SwiftData
 
 // A Codable, non-persistent representation of an ExerciseItem, used for duplication and AI generation flows.
 public final class ExerciseItemCopy: Identifiable, Codable {
-    public var originalID: Int?
+    public var originalID: UUID?
     public var name: String
     public var exerciseDescription: String?
     public var videoURL: String?
@@ -27,7 +27,7 @@ public final class ExerciseItemCopy: Identifiable, Codable {
 
     // Full initializer
     public init(
-        originalID: Int? = nil, name: String, exerciseDescription: String? = nil, videoURL: String? = nil,
+        originalID: UUID? = nil, name: String, exerciseDescription: String? = nil, videoURL: String? = nil,
         metValue: Double? = nil, isUserAdded: Bool = true, isFavorite: Bool = false,
         photo: Data? = nil, gallery: [Data]? = nil, assetImageName: String? = nil,
         muscleGroups: [MuscleGroup], durationMinutes: Int? = nil,

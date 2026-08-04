@@ -1211,15 +1211,6 @@ struct FoodItemMenuEditorView: View {
         }
     }
     
-    private func nextFoodId() -> Int {
-        var desc = FetchDescriptor<FoodItem>()
-        desc.sortBy = [SortDescriptor(\FoodItem.id, order: .reverse)]
-        desc.fetchLimit = 1
-        
-        let maxId = ((try? ctx.fetch(desc))?.first?.id) ?? 0
-        return maxId + 1
-    }
-
     private func prefillAyurvedaIfNeeded() {
         guard !didPrefillAyurveda else { return }
         didPrefillAyurveda = true
@@ -1288,7 +1279,7 @@ struct FoodItemMenuEditorView: View {
             let menu: FoodItem
             if isAIInit{
                 menu = food ?? origRecipe ?? {
-                    let m = FoodItem(id: nextFoodId(), name: name, isRecipe: false, isUserAdded: true)
+                    let m = FoodItem(id: UUID(), name: name, isRecipe: false, isUserAdded: true)
                     m.isMenu = true
                     m.isRecipe = false
                     ctx.insert(m)
@@ -1296,7 +1287,7 @@ struct FoodItemMenuEditorView: View {
                 }()
             }else{
                 menu = food ?? {
-                    let m = FoodItem(id: nextFoodId(), name: name, isRecipe: false, isUserAdded: true)
+                    let m = FoodItem(id: UUID(), name: name, isRecipe: false, isUserAdded: true)
                     m.isMenu = true
                     m.isRecipe = false
                     ctx.insert(m)
@@ -1475,8 +1466,8 @@ struct FoodItemMenuEditorView: View {
         case mineral(Mineral)
         var id: String {
             switch self {
-            case .vitamin(let v): "vit_\(v.id)"
-            case .mineral(let m): "min_\(m.id)"
+            case .vitamin(let v): "vit_\(v.key)"
+            case .mineral(let m): "min_\(m.key)"
             }
         }
         var name: String {
@@ -1989,8 +1980,8 @@ struct FoodItemMenuEditorView: View {
     private func splitRows(_ rows: [NutrientRow], priorityNames: Set<String>) -> (prio: [NutrientRow], other: [NutrientRow]) {
         (rows.filter { priorityNames.contains($0.label) }, rows.filter { !priorityNames.contains($0.label) })
     }
-    private func label(for vitamin: Vitamin) -> String { vitaminLabelById[vitamin.id] ?? vitamin.name }
-    private func label(for mineral: Mineral) -> String { mineralLabelById[mineral.id] ?? mineral.name }
+    private func label(for vitamin: Vitamin) -> String { vitaminLabelById[vitamin.key] ?? vitamin.name }
+    private func label(for mineral: Mineral) -> String { mineralLabelById[mineral.key] ?? mineral.name }
     
     private func vitaminRows() -> [NutrientRow] {
         [.init(label: "Vit A", unit: "µg RAE", field: nutBinding(\.vitaminA_RAE, state: $vitamins, unit: "µg")),

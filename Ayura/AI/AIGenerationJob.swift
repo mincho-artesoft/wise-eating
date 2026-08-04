@@ -61,7 +61,7 @@ final class AIGenerationJob {
         public var plannedWorkoutTimes: [String: Date]?
         public var workoutsToFill: [Int: [String]]?
         public var existingWorkouts: [Int: [TrainingPlanWorkoutDraft]]?
-        let preCreatedItemID: String?
+        let preCreatedItemID: UUID?
     }
     
     var inputParameters: InputParameters? {

@@ -25,10 +25,9 @@ AYURVEDA_FACET = (
 )
 SYNONYMS = ROOT / "Ayura" / "FoodSearch" / "food_synonyms.json"
 SEED = ROOT / "Ayura" / "ayurveda_seed.json.gz"
-ARTIFACT_PARTS = [
-    ROOT / "Ayura" / "preseeded_db.store.gz.part-aa",
-    ROOT / "Ayura" / "preseeded_db.store.gz.part-ab",
-]
+ARTIFACT_PARTS = sorted(
+    (ROOT / "Ayura").glob("preseeded_db.store.gz.part-*")
+)
 GOLDEN = ROOT / "ayurveda-data" / "tests" / "fixtures" / "we4_golden_queries.json"
 
 TARGET_FOODS = 14_487
@@ -190,7 +189,7 @@ struct ParserHarness {
         self.assert_parse("virya:frothy tomato", "virya:frothy tomato", [])
         self.assert_parse("grains", "grains", [])
 
-    def test_prebuilt_index_matches_v12_global_fallback_projection(self):
+    def test_prebuilt_index_matches_v13_global_fallback_projection(self):
         combined = self.temporary_root / "preseeded_db.store.gz"
         store = self.temporary_root / "preseeded_db.store"
         with combined.open("wb") as destination:
@@ -208,7 +207,7 @@ struct ParserHarness {
                 """
             ).fetchone()
         version, food_count, payload_data = row
-        self.assertEqual((version, food_count), (12, TARGET_FOODS))
+        self.assertEqual((version, food_count), (13, TARGET_FOODS))
         payload = json.loads(payload_data)
         compact_by_id = {food["id"]: food for food in payload["compactFoods"]}
 
@@ -223,7 +222,7 @@ struct ParserHarness {
             profile["foodId"] for profile in seed["catalogProfiles"]
         }
         direct_ids = {profile["foodId"] for profile in canonical}
-        link_tiers = {link["fdcId"]: link["tier"] for link in seed["links"]}
+        link_tiers = {link["foodId"]: link["tier"] for link in seed["links"]}
         expected_ids = direct_ids | set(link_tiers)
         linked_only_ids = set(link_tiers) - direct_ids
         self.assertEqual(len(direct_ids), TARGET_PROFILES)
@@ -250,7 +249,14 @@ struct ParserHarness {
             self.assertEqual(metadata.get("sourceTier"), expected_tier, food_id)
         estimated_ids = set(compact_by_id) - expected_ids
         self.assertEqual(estimated_ids, set())
-        cajun = compact_by_id[12_601]["ayurvedaMetadata"]
+        foods = json.loads(
+            (ROOT / "Ayura" / "Legacy" / "foods.json").read_text()
+        )
+        cajun_id = next(
+            food["id"] for food in foods
+            if food["catalogNumber"] == 12_601
+        )
+        cajun = compact_by_id[cajun_id]["ayurvedaMetadata"]
         self.assertEqual(cajun["sourceProfileName"], "Spices and Herbs")
         self.assertEqual(cajun["sourceTier"], "catalog")
         self.assertEqual(
@@ -279,7 +285,7 @@ struct ParserHarness {
     def test_engine_uses_index_intersection_and_exact_title_escape_hatch(self):
         engine = SEARCH_ENGINE.read_text(encoding="utf-8")
         index_store = INDEX_STORE.read_text(encoding="utf-8")
-        self.assertIn("currentIndexVersion: Int = 12", index_store)
+        self.assertIn("currentIndexVersion: Int = 13", index_store)
         self.assertIn("ayurvedaFacetIndex", index_store)
         self.assertIn("if let ayurveda = item.ayurvedaMetadata", engine)
         self.assertIn("AyurvedaSearchRanker.matches(", engine)

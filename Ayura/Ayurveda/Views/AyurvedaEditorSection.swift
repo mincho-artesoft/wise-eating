@@ -416,7 +416,7 @@ private struct AyurvedaAutomaticPreview: View {
 
 @MainActor
 enum AyurvedaUserProfileStore {
-  static func form(foodId: Int, context: ModelContext) -> AyurvedaForm? {
+  static func form(foodId: UUID, context: ModelContext) -> AyurvedaForm? {
     guard let profile = profile(foodId: foodId, context: context) else {
       return nil
     }
@@ -432,7 +432,7 @@ enum AyurvedaUserProfileStore {
   }
 
   static func resolvedFormForDuplication(
-    foodId: Int,
+    foodId: UUID,
     context: ModelContext
   ) -> AyurvedaForm? {
     let sourceFoodId = foodId
@@ -479,7 +479,7 @@ enum AyurvedaUserProfileStore {
     }
   }
 
-  static func remove(foodId: Int, context: ModelContext) {
+  static func remove(foodId: UUID, context: ModelContext) {
     guard let existing = profile(foodId: foodId, context: context) else {
       return
     }
@@ -487,13 +487,13 @@ enum AyurvedaUserProfileStore {
   }
 
   private static func profile(
-    foodId: Int,
+    foodId: UUID,
     context: ModelContext
   ) -> AyurvedaProfile? {
-    let id = profileID(foodId)
+    let key = profileKey(foodId)
     var descriptor = FetchDescriptor<AyurvedaProfile>(
       predicate: #Predicate<AyurvedaProfile> { profile in
-        profile.id == id
+        profile.key == key
       }
     )
     descriptor.fetchLimit = 1
@@ -505,7 +505,8 @@ enum AyurvedaUserProfileStore {
     food: FoodItem
   ) -> AyurvedaProfile {
     AyurvedaProfile(
-      id: profileID(food.id),
+      id: UUID(),
+      key: profileKey(food.id),
       kind: "user",
       foodId: food.id,
       name: food.name,
@@ -582,7 +583,7 @@ enum AyurvedaUserProfileStore {
     profile.guidance = nil
   }
 
-  private static func profileID(_ foodId: Int) -> String {
+  private static func profileKey(_ foodId: UUID) -> String {
     "user.\(foodId)"
   }
 

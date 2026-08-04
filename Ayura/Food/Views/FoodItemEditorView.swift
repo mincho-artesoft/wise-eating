@@ -859,16 +859,6 @@ struct FoodItemEditorView: View {
         }
     }
     
-    private func nextFoodId() -> Int {
-            var desc = FetchDescriptor<FoodItem>()
-            desc.sortBy = [SortDescriptor(\.id, order: .reverse)] // Сортираме низходящо
-            desc.fetchLimit = 1 // Взимаме само първия (най-големия)
-            
-            // Ако няма записи връща 0, иначе най-голямото ID
-            let maxId = (try? ctx.fetch(desc))?.first?.id ?? 0
-            return maxId + 1
-        }
-    
     // MARK: - Save Logic
     private func save() {
         let totalWeight: Double = others.weightG?.value ?? 0
@@ -899,7 +889,7 @@ struct FoodItemEditorView: View {
             
             let item: FoodItem = food ?? {
                            // ✅ FIX: Използваме новата логика тук
-                           let newId = nextFoodId()
+                           let newId = UUID()
                            let new = FoodItem(id: newId, name: name, isUserAdded: true)
                            ctx.insert(new)
                            return new
@@ -1211,8 +1201,8 @@ struct FoodItemEditorView: View {
          rows.filter { !priorityNames.contains($0.label) })
     }
     
-    private func label(for vitamin: Vitamin) -> String { vitaminLabelById[vitamin.id] ?? vitamin.name }
-    private func label(for mineral: Mineral) -> String { mineralLabelById[mineral.id] ?? mineral.name }
+    private func label(for vitamin: Vitamin) -> String { vitaminLabelById[vitamin.key] ?? vitamin.name }
+    private func label(for mineral: Mineral) -> String { mineralLabelById[mineral.key] ?? mineral.name }
     
     private func vitaminRows() -> [(row: NutrientRow, focusID: FocusableField)] {
         return [

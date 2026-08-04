@@ -3,7 +3,7 @@ import Foundation
 
 @Model
 public final class AminoAcidsData: Identifiable {
-    @Attribute(.unique) public var id = UUID()
+    @Attribute(.unique) public var id: UUID
 
     // Съвпадат 1:1 с генератора ("amino_acids")
     public var alanine:         Nutrient?
@@ -29,6 +29,7 @@ public final class AminoAcidsData: Identifiable {
     @Relationship(inverse: \FoodItem.aminoAcids) public var foodItem: FoodItem?
 
     public init(
+        id: UUID = UUID(),
         alanine: Nutrient? = nil,
         arginine: Nutrient? = nil,
         asparticAcid: Nutrient? = nil,
@@ -49,6 +50,7 @@ public final class AminoAcidsData: Identifiable {
         serine: Nutrient? = nil,
         hydroxyproline: Nutrient? = nil
     ) {
+        self.id = id
         self.alanine = alanine
         self.arginine = arginine
         self.asparticAcid = asparticAcid

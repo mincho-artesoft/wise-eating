@@ -3,6 +3,7 @@ import SwiftData
 
 @Model
 final class SearchIndexCache {
+    @Attribute(.unique) var id: UUID
     @Attribute(.unique) var key: String        // напр. "main"
     var payloadData: Data                      // сериализираният индекс
     var createdAt: Date
@@ -10,12 +11,14 @@ final class SearchIndexCache {
     var version: Int                           // за бъдещи промени на формата
 
     init(
+        id: UUID = UUID(),
         key: String = "main",
         payloadData: Data,
         foodsCount: Int,
         version: Int = 1,
         createdAt: Date = .now
     ) {
+        self.id = id
         self.key = key
         self.payloadData = payloadData
         self.foodsCount = foodsCount

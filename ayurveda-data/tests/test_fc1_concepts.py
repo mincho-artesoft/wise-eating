@@ -80,6 +80,7 @@ class FoodConceptTests(unittest.TestCase):
             expected_ingredient_links=TARGET_INGREDIENT_LINKS,
             expected_ingredient_owners=TARGET_INGREDIENT_OWNERS,
         )
+        cls.artifact["identitySchema"] = "stable-uuid-v1"
 
     def test_director_artifacts_are_unchanged_and_complete(self):
         for path, expected in DIRECTOR_HASHES.items():
@@ -355,6 +356,7 @@ class FoodConceptTests(unittest.TestCase):
             expected_ingredient_links=TARGET_INGREDIENT_LINKS,
             expected_ingredient_owners=TARGET_INGREDIENT_OWNERS,
         )
+        rebuilt["identitySchema"] = "stable-uuid-v1"
         self.assertEqual(
             build_seed.encode_deterministic_gzip(self.artifact),
             build_seed.encode_deterministic_gzip(rebuilt),
@@ -368,8 +370,8 @@ class FoodConceptTests(unittest.TestCase):
     def test_runtime_service_is_lazy_sendable_and_has_fc2_consumers(self):
         source = RUNTIME_PATH.read_text(encoding="utf-8")
         self.assertIn("public struct FoodConcepts: Sendable", source)
-        self.assertIn("public func members(of concept: String) -> Set<Int32>", source)
-        self.assertIn("public func concepts(for foodID: Int32) -> Set<String>", source)
+        self.assertIn("public func members(of concept: String) -> Set<UUID>", source)
+        self.assertIn("public func concepts(for foodID: UUID) -> Set<String>", source)
         self.assertIn("public func canonical(alias: String) -> String?", source)
         self.assertIn("public var resolutionAliases: [String: String]", source)
         self.assertIn("public func conceptID(for value: String) -> String?", source)

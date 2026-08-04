@@ -3,7 +3,6 @@ import SwiftData
 
 @MainActor
 enum AyurvedaSeeder {
-  private static let reservedBand = 900_000..<1_002_000
 
   struct RunResult {
     var insertedFoods = 0
@@ -84,24 +83,8 @@ enum AyurvedaSeeder {
       var existingLinks = try context.fetch(FetchDescriptor<AyurvedaLink>())
       var allFoods = try context.fetch(FetchDescriptor<FoodItem>())
 
-      try migrateV5CanonicalDataIfNeeded(
-        seed: seed,
-        profiles: &existingProfiles,
-        links: &existingLinks,
-        foods: &allFoods,
-        context: context,
-        result: &result
-      )
-      try migratePlaceholderIdsIfNeeded(
-        seed: seed,
-        profiles: &existingProfiles,
-        foods: &allFoods,
-        context: context,
-        result: &result
-      )
-
       let profileByID = try makeProfileMap(existingProfiles)
-      let linkByFdcID = try makeLinkMap(existingLinks)
+      let linkByFoodID = try makeLinkMap(existingLinks)
       var foodByID = try makeFoodMap(allFoods)
       try validateCanonicalOwnership(
         seed: seed,
@@ -111,7 +94,7 @@ enum AyurvedaSeeder {
       if storeHasCurrentSeed(
         seed: seed,
         profileByID: profileByID,
-        linkByFdcID: linkByFdcID,
+        linkByFoodID: linkByFoodID,
         foodByID: foodByID
       ) {
         print(
@@ -203,27 +186,28 @@ enum AyurvedaSeeder {
       }
 
       for link in seed.links {
-        if let existing = linkByFdcID[link.fdcId] {
-          if existing.dravyaProfileId != link.dravyaId || existing.tier != link.tier {
-            existing.dravyaProfileId = link.dravyaId
+        if let existing = linkByFoodID[link.foodId] {
+          if existing.dravyaProfileId != link.dravyaProfileId || existing.tier != link.tier {
+            existing.dravyaProfileId = link.dravyaProfileId
             existing.tier = link.tier
             result.updatedLinks += 1
           }
         } else {
           context.insert(
             AyurvedaLink(
-              fdcId: link.fdcId,
-              dravyaProfileId: link.dravyaId,
+              id: link.id,
+              foodId: link.foodId,
+              dravyaProfileId: link.dravyaProfileId,
               tier: link.tier
             )
           )
           result.insertedLinks += 1
         }
-        guard let sourceDravya = seedDravyaByID[link.dravyaId],
-              let linkedFood = foodByID[link.fdcId] else {
+        guard let sourceDravya = seedDravyaByID[link.dravyaProfileId],
+              let linkedFood = foodByID[link.foodId] else {
           throw AyurvedaSeederError.missingIngredientFood(
-            recipeId: link.dravyaId,
-            foodId: link.fdcId
+            recipeId: link.dravyaProfileId,
+            foodId: link.foodId
           )
         }
         if updateEdibilityMetadata(sourceDravya, food: linkedFood) {
@@ -329,6 +313,7 @@ enum AyurvedaSeeder {
     }
 
     let macros = MacronutrientsData(
+      id: nutrition.payloadIds.macronutrients,
       carbohydrates: nutrient("carbohydrates"),
       protein: nutrient("protein"),
       fat: nutrient("fat"),
@@ -336,6 +321,7 @@ enum AyurvedaSeeder {
       totalSugars: nutrient("totalSugars")
     )
     let vitamins = VitaminsData(
+      id: nutrition.payloadIds.vitamins,
       vitaminA_RAE: nutrient("vitaminA_RAE"),
       retinol: nutrient("retinol"),
       caroteneAlpha: nutrient("caroteneAlpha"),
@@ -360,6 +346,7 @@ enum AyurvedaSeeder {
       choline: nutrient("choline")
     )
     let minerals = MineralsData(
+      id: nutrition.payloadIds.minerals,
       calcium: nutrient("calcium"),
       iron: nutrient("iron"),
       magnesium: nutrient("magnesium"),
@@ -376,406 +363,13 @@ enum AyurvedaSeeder {
     food.macronutrients = macros
     food.vitamins = vitamins
     food.minerals = minerals
-    food.other = OtherCompoundsData(energyKcal: nutrient("energyKcal"))
+    food.other = OtherCompoundsData(
+      id: nutrition.payloadIds.other,
+      energyKcal: nutrient("energyKcal")
+    )
     return true
   }
 
-  private static let v5MergeTargets: [String: String] = [
-    "dravya.vetiver": "dravya.khus-root",
-    "dravya.apricot-fresh": "dravya.apricot",
-    "dravya.fresh-fig": "dravya.fig-fresh",
-    "dravya.ripe-banana": "dravya.banana-ripe",
-    "dravya.ripe-jackfruit": "dravya.jackfruit",
-    "dravya.garlic-fresh-bulb": "dravya.garlic",
-    "dravya.green-chili-fresh": "dravya.green-chili",
-    "dravya.peanut-raw": "dravya.peanut",
-    "dravya.ripe-mango": "dravya.mango-ripe",
-  ]
-
-  private static let placeholderMergeTargets: [String: String] = [
-    "dravya.makhana": "dravya.lotus-seed",
-    "dravya.round-melon-tinda-punjabi": "dravya.tinda",
-  ]
-
-  private static func migrateV5CanonicalDataIfNeeded(
-    seed: AyurvedaSeedDTO,
-    profiles: inout [AyurvedaProfile],
-    links: inout [AyurvedaLink],
-    foods: inout [FoodItem],
-    context: ModelContext,
-    result: inout RunResult
-  ) throws {
-    let incomingProfileIDs = Set(
-      seed.dravyas.map(\.id)
-        + seed.recipes.map(\.id)
-        + seed.catalogProfiles.map(\.id)
-    )
-    guard seed.seedVersion >= 6,
-      profiles.contains(where: {
-        incomingProfileIDs.contains($0.id) && $0.seedVersion < 6
-      })
-    else {
-      return
-    }
-
-    var profileByID = try makeProfileMap(profiles)
-    var foodByID = try makeFoodMap(foods)
-    let incomingDravyas = Dictionary(
-      uniqueKeysWithValues: seed.dravyas.map { ($0.id, $0) }
-    )
-    let incomingLinkIDs = Set(seed.links.map(\.fdcId))
-
-    let ingredientLinks = try context.fetch(FetchDescriptor<IngredientLink>())
-    let mealPlanEntries = try context.fetch(FetchDescriptor<MealPlanEntry>())
-    let storageItems = try context.fetch(FetchDescriptor<StorageItem>())
-    let mealLogStorageLinks = try context.fetch(
-      FetchDescriptor<MealLogStorageLink>()
-    )
-    let storageTransactions = try context.fetch(
-      FetchDescriptor<StorageTransaction>()
-    )
-    let shoppingItems = try context.fetch(FetchDescriptor<ShoppingListItem>())
-    let recentFoods = try context.fetch(FetchDescriptor<RecentlyAddedFood>())
-    let nodes = try context.fetch(FetchDescriptor<Node>())
-    let dismissedFoods = try context.fetch(FetchDescriptor<DismissedFoodID>())
-
-    var scalarFoodIDRemap: [Int: Int] = [:]
-    var deletedFoodModelIDs = Set<PersistentIdentifier>()
-
-    func mergeAndDeleteGeneratedFood(
-      _ source: FoodItem,
-      into destination: FoodItem,
-      destinationID: Int
-    ) {
-      scalarFoodIDRemap[source.id] = destinationID
-      result.remappedFoodReferences += transferFoodReferences(
-        from: source,
-        to: destination,
-        ingredientLinks: ingredientLinks,
-        mealPlanEntries: mealPlanEntries,
-        storageItems: storageItems,
-        mealLogStorageLinks: mealLogStorageLinks,
-        storageTransactions: storageTransactions,
-        shoppingItems: shoppingItems,
-        recentFoods: recentFoods,
-        nodes: nodes
-      )
-      deletedFoodModelIDs.insert(source.persistentModelID)
-      context.delete(source)
-      result.deletedFoods += 1
-    }
-
-    // First remove the nine duplicate canonical profiles. USDA foods remain in
-    // the catalogue; generated placeholder foods are merged into the survivor
-    // so user references are preserved before the obsolete row is deleted.
-    for (loserID, survivorID) in v5MergeTargets {
-      guard let loserProfile = profileByID[loserID] else {
-        continue
-      }
-      guard let survivorProfile = profileByID[survivorID],
-        let survivorSeed = incomingDravyas[survivorID],
-        let loserFood = foodByID[loserProfile.foodId],
-        let survivorFood = foodByID[survivorProfile.foodId]
-      else {
-        throw AyurvedaSeederError.v5MigrationConflict(loserID)
-      }
-
-      if reservedBand.contains(loserFood.id) {
-        mergeAndDeleteGeneratedFood(
-          loserFood,
-          into: survivorFood,
-          destinationID: survivorSeed.foodId
-        )
-        foodByID.removeValue(forKey: loserFood.id)
-      }
-
-      context.delete(loserProfile)
-      profileByID.removeValue(forKey: loserID)
-      result.deletedProfiles += 1
-    }
-
-    for dismissed in dismissedFoods {
-      if let replacement = scalarFoodIDRemap[dismissed.foodID] {
-        dismissed.foodID = replacement
-        result.remappedFoodReferences += 1
-      }
-    }
-
-    // The seed is authoritative for canonical links. In v5 the incorrect
-    // "Fish, raw" link (fdcId 750) has to be removed rather than left behind by
-    // the otherwise upsert-only path.
-    var retainedLinks: [AyurvedaLink] = []
-    retainedLinks.reserveCapacity(links.count)
-    for link in links {
-      if incomingLinkIDs.contains(link.fdcId) {
-        retainedLinks.append(link)
-      } else {
-        context.delete(link)
-        result.deletedLinks += 1
-      }
-    }
-    links = retainedLinks
-
-    let survivingProfileIDs = Set(profileByID.keys)
-    profiles.removeAll { !survivingProfileIDs.contains($0.id) }
-    foods.removeAll { deletedFoodModelIDs.contains($0.persistentModelID) }
-
-    print(
-      "   🔄 Ayurveda v5→v\(seed.seedVersion) migration: "
-        + "deleted \(result.deletedProfiles) duplicate profiles, "
-        + "\(result.deletedFoods) obsolete placeholder foods and "
-        + "\(result.deletedLinks) stale links; remapped "
-        + "\(result.remappedFoodIDs) placeholder ids and "
-        + "\(result.remappedFoodReferences) persisted references."
-    )
-  }
-
-  private static func migratePlaceholderIdsIfNeeded(
-    seed: AyurvedaSeedDTO,
-    profiles: inout [AyurvedaProfile],
-    foods: inout [FoodItem],
-    context: ModelContext,
-    result: inout RunResult
-  ) throws {
-    var profileByID = try makeProfileMap(profiles)
-    var foodByID = try makeFoodMap(foods)
-    let incomingProfileIDs = Set(
-      seed.dravyas.map(\.id) + seed.recipes.map(\.id)
-    )
-    let incomingPlaceholders = seed.dravyas
-      .filter(\.foodIsPlaceholder)
-      .sorted { $0.id < $1.id }
-
-    var moves: [(
-      profileID: String,
-      profile: AyurvedaProfile,
-      food: FoodItem,
-      oldID: Int,
-      newID: Int,
-      persistentID: PersistentIdentifier
-    )] = []
-    for incoming in incomingPlaceholders {
-      guard let profile = profileByID[incoming.id],
-        profile.foodId != incoming.foodId
-      else {
-        continue
-      }
-      guard reservedBand.contains(profile.foodId),
-        reservedBand.contains(incoming.foodId),
-        let food = foodByID[profile.foodId]
-      else {
-        throw AyurvedaSeederError.placeholderMigrationConflict(incoming.id)
-      }
-      moves.append((
-        incoming.id,
-        profile,
-        food,
-        profile.foodId,
-        incoming.foodId,
-        food.persistentModelID
-      ))
-    }
-    guard !moves.isEmpty else {
-      return
-    }
-
-    let ingredientLinks = try context.fetch(FetchDescriptor<IngredientLink>())
-    let mealPlanEntries = try context.fetch(FetchDescriptor<MealPlanEntry>())
-    let storageItems = try context.fetch(FetchDescriptor<StorageItem>())
-    let mealLogStorageLinks = try context.fetch(
-      FetchDescriptor<MealLogStorageLink>()
-    )
-    let storageTransactions = try context.fetch(
-      FetchDescriptor<StorageTransaction>()
-    )
-    let shoppingItems = try context.fetch(FetchDescriptor<ShoppingListItem>())
-    let recentFoods = try context.fetch(FetchDescriptor<RecentlyAddedFood>())
-    let nodes = try context.fetch(FetchDescriptor<Node>())
-    let dismissedFoods = try context.fetch(FetchDescriptor<DismissedFoodID>())
-
-    var scalarFoodIDRemap = Dictionary(
-      uniqueKeysWithValues: moves.map { ($0.oldID, $0.newID) }
-    )
-    var deletedFoodModelIDs = Set<PersistentIdentifier>()
-    var deletedProfileIDs = Set<String>()
-    let targetIDs = Set(moves.map(\.newID))
-    let staleBlockers = profiles
-      .filter {
-        !incomingProfileIDs.contains($0.id) && targetIDs.contains($0.foodId)
-      }
-      .sorted { $0.id < $1.id }
-
-    for staleProfile in staleBlockers {
-      guard let survivorID = placeholderMergeTargets[staleProfile.id],
-        let survivorProfile = profileByID[survivorID],
-        let sourceFood = foodByID[staleProfile.foodId],
-        let destinationFood = foodByID[survivorProfile.foodId]
-      else {
-        throw AyurvedaSeederError.placeholderMigrationConflict(staleProfile.id)
-      }
-      scalarFoodIDRemap[staleProfile.foodId] = survivorProfile.foodId
-      result.remappedFoodReferences += transferFoodReferences(
-        from: sourceFood,
-        to: destinationFood,
-        ingredientLinks: ingredientLinks,
-        mealPlanEntries: mealPlanEntries,
-        storageItems: storageItems,
-        mealLogStorageLinks: mealLogStorageLinks,
-        storageTransactions: storageTransactions,
-        shoppingItems: shoppingItems,
-        recentFoods: recentFoods,
-        nodes: nodes
-      )
-      deletedFoodModelIDs.insert(sourceFood.persistentModelID)
-      deletedProfileIDs.insert(staleProfile.id)
-      context.delete(sourceFood)
-      context.delete(staleProfile)
-      foodByID.removeValue(forKey: staleProfile.foodId)
-      profileByID.removeValue(forKey: staleProfile.id)
-      result.deletedFoods += 1
-      result.deletedProfiles += 1
-    }
-
-    for move in moves {
-      move.profile.foodId = move.newID
-    }
-    for (index, move) in moves.enumerated() {
-      move.food.id = Int.min / 2 + index
-    }
-    for move in moves {
-      move.food.id = move.newID
-      result.remappedFoodIDs += 1
-    }
-
-    for move in moves.prefix(5) {
-      guard move.food.persistentModelID == move.persistentID else {
-        throw AyurvedaSeederError.placeholderIdentityChanged(move.profileID)
-      }
-      print(
-        "   🧷 Placeholder identity preserved: \(move.profileID) "
-          + "\(move.oldID)→\(move.newID), \(move.persistentID)"
-      )
-    }
-
-    for dismissed in dismissedFoods {
-      if let replacement = scalarFoodIDRemap[dismissed.foodID] {
-        dismissed.foodID = replacement
-        result.remappedFoodReferences += 1
-      }
-    }
-
-    profiles.removeAll { deletedProfileIDs.contains($0.id) }
-    foods.removeAll { deletedFoodModelIDs.contains($0.persistentModelID) }
-
-    let expectedFoodCount = 12_601 + seed.counts.placeholders + seed.counts.recipes
-    let cacheFoodCount = try SearchIndexStore.shared
-      .rebuildForCatalogueMigration(context: context)
-    guard cacheFoodCount == expectedFoodCount else {
-      throw AyurvedaSeederError.placeholderCacheCount(
-        expected: expectedFoodCount,
-        actual: cacheFoodCount
-      )
-    }
-    result.rebuiltSearchIndex = true
-
-    print(
-      "   🔄 Placeholder migration: remapped \(moves.count) FoodItem ids; "
-        + "deleted \(staleBlockers.count) obsolete placeholder foods; "
-        + "rebuilt search cache for \(cacheFoodCount) foods."
-    )
-  }
-
-  private static func transferFoodReferences(
-    from source: FoodItem,
-    to destination: FoodItem,
-    ingredientLinks: [IngredientLink],
-    mealPlanEntries: [MealPlanEntry],
-    storageItems: [StorageItem],
-    mealLogStorageLinks: [MealLogStorageLink],
-    storageTransactions: [StorageTransaction],
-    shoppingItems: [ShoppingListItem],
-    recentFoods: [RecentlyAddedFood],
-    nodes: [Node]
-  ) -> Int {
-    let sourceID = source.persistentModelID
-    var changed = 0
-
-    for link in ingredientLinks
-    where link.food?.persistentModelID == sourceID {
-      link.food = destination
-      changed += 1
-    }
-    for entry in mealPlanEntries
-    where entry.food?.persistentModelID == sourceID {
-      entry.food = destination
-      changed += 1
-    }
-    for item in storageItems
-    where item.food?.persistentModelID == sourceID {
-      item.food = destination
-      changed += 1
-    }
-    for link in mealLogStorageLinks
-    where link.food?.persistentModelID == sourceID {
-      link.food = destination
-      changed += 1
-    }
-    for transaction in storageTransactions
-    where transaction.food?.persistentModelID == sourceID {
-      transaction.food = destination
-      changed += 1
-    }
-    for item in shoppingItems
-    where item.foodItem?.persistentModelID == sourceID {
-      item.foodItem = destination
-      changed += 1
-    }
-    for recent in recentFoods
-    where recent.food?.persistentModelID == sourceID {
-      recent.food = destination
-      changed += 1
-    }
-    for node in nodes {
-      guard let linkedFoods = node.linkedFoods,
-        linkedFoods.contains(where: { $0.persistentModelID == sourceID })
-      else {
-        continue
-      }
-      var seen = Set<PersistentIdentifier>()
-      node.linkedFoods = linkedFoods.compactMap { food in
-        let replacement = food.persistentModelID == sourceID
-          ? destination
-          : food
-        return seen.insert(replacement.persistentModelID).inserted
-          ? replacement
-          : nil
-      }
-      changed += 1
-    }
-
-    destination.isFavorite = destination.isFavorite || source.isFavorite
-    if destination.photo == nil, let photo = source.photo {
-      destination.photo = photo
-      source.photo = nil
-      changed += 1
-    }
-    if let sourceGallery = source.gallery, !sourceGallery.isEmpty {
-      var destinationGallery = destination.gallery ?? []
-      let destinationPhotoIDs = Set(
-        destinationGallery.map(\.persistentModelID)
-      )
-      for photo in sourceGallery
-      where !destinationPhotoIDs.contains(photo.persistentModelID) {
-        photo.foodItem = destination
-        destinationGallery.append(photo)
-      }
-      destination.gallery = destinationGallery
-      source.gallery = []
-      changed += sourceGallery.count
-    }
-
-    return changed
-  }
 
   private static func loadSeedData() throws -> Data {
     guard
@@ -825,7 +419,7 @@ enum AyurvedaSeeder {
       throw AyurvedaSeederError.emptyRecipeIngredients
     }
     guard seed.catalogProfiles.allSatisfy({
-      $0.id == "catalog.usda.\($0.foodId)"
+      $0.key.hasPrefix("catalog.usda.")
         && (-2...2).contains($0.dosha.vata)
         && (-2...2).contains($0.dosha.pitta)
         && (-2...2).contains($0.dosha.kapha)
@@ -878,8 +472,8 @@ enum AyurvedaSeeder {
     }
   }
 
-  private static func makeFoodMap(_ foods: [FoodItem]) throws -> [Int: FoodItem] {
-    var foodByID: [Int: FoodItem] = [:]
+  private static func makeFoodMap(_ foods: [FoodItem]) throws -> [UUID: FoodItem] {
+    var foodByID: [UUID: FoodItem] = [:]
     foodByID.reserveCapacity(foods.count)
     for food in foods {
       guard foodByID.updateValue(food, forKey: food.id) == nil else {
@@ -891,8 +485,8 @@ enum AyurvedaSeeder {
 
   private static func makeProfileMap(
     _ profiles: [AyurvedaProfile]
-  ) throws -> [String: AyurvedaProfile] {
-    var profileByID: [String: AyurvedaProfile] = [:]
+  ) throws -> [UUID: AyurvedaProfile] {
+    var profileByID: [UUID: AyurvedaProfile] = [:]
     profileByID.reserveCapacity(profiles.count)
     for profile in profiles {
       guard profileByID.updateValue(profile, forKey: profile.id) == nil else {
@@ -904,29 +498,27 @@ enum AyurvedaSeeder {
 
   private static func makeLinkMap(
     _ links: [AyurvedaLink]
-  ) throws -> [Int: AyurvedaLink] {
-    var linkByFdcID: [Int: AyurvedaLink] = [:]
-    linkByFdcID.reserveCapacity(links.count)
+  ) throws -> [UUID: AyurvedaLink] {
+    var linkByFoodID: [UUID: AyurvedaLink] = [:]
+    linkByFoodID.reserveCapacity(links.count)
     for link in links {
-      guard linkByFdcID.updateValue(link, forKey: link.fdcId) == nil else {
-        throw AyurvedaSeederError.duplicateLinkFdcId(link.fdcId)
+      guard linkByFoodID.updateValue(link, forKey: link.foodId) == nil else {
+        throw AyurvedaSeederError.duplicateLinkFoodId(link.foodId)
       }
     }
-    return linkByFdcID
+    return linkByFoodID
   }
 
   private static func validateCanonicalOwnership(
     seed: AyurvedaSeedDTO,
-    profileByID: [String: AyurvedaProfile],
-    foodByID: [Int: FoodItem]
+    profileByID: [UUID: AyurvedaProfile],
+    foodByID: [UUID: FoodItem]
   ) throws {
     for dravya in seed.dravyas {
       if let profile = profileByID[dravya.id] {
         guard profile.kind == "dravya", profile.foodId == dravya.foodId else {
           throw AyurvedaSeederError.canonicalOwnershipConflict(dravya.id)
         }
-      } else if dravya.foodIsPlaceholder, foodByID[dravya.foodId] != nil {
-        throw AyurvedaSeederError.reservedBandCollision(dravya.foodId)
       }
     }
     for recipe in seed.recipes {
@@ -934,8 +526,6 @@ enum AyurvedaSeeder {
         guard profile.kind == "recipe", profile.foodId == recipe.foodId else {
           throw AyurvedaSeederError.canonicalOwnershipConflict(recipe.id)
         }
-      } else if foodByID[recipe.foodId] != nil {
-        throw AyurvedaSeederError.reservedBandCollision(recipe.foodId)
       }
     }
     for catalogProfile in seed.catalogProfiles {
@@ -951,22 +541,13 @@ enum AyurvedaSeeder {
         throw AyurvedaSeederError.missingCatalogFood(catalogProfile.foodId)
       }
     }
-
-    let expectedReservedFoodIDs = Set(
-      seed.dravyas.lazy.filter(\.foodIsPlaceholder).map(\.foodId)
-    ).union(seed.recipes.map(\.foodId))
-    for foodID in foodByID.keys where reservedBand.contains(foodID) {
-      guard expectedReservedFoodIDs.contains(foodID) else {
-        throw AyurvedaSeederError.reservedBandCollision(foodID)
-      }
-    }
   }
 
   private static func storeHasCurrentSeed(
     seed: AyurvedaSeedDTO,
-    profileByID: [String: AyurvedaProfile],
-    linkByFdcID: [Int: AyurvedaLink],
-    foodByID: [Int: FoodItem]
+    profileByID: [UUID: AyurvedaProfile],
+    linkByFoodID: [UUID: AyurvedaLink],
+    foodByID: [UUID: FoodItem]
   ) -> Bool {
     let dravyasAreCurrent = seed.dravyas.allSatisfy { dravya in
       guard let profile = profileByID[dravya.id] else {
@@ -1023,13 +604,13 @@ enum AyurvedaSeeder {
       uniqueKeysWithValues: seed.dravyas.map { ($0.id, $0) }
     )
     return seed.links.allSatisfy { link in
-      guard let existing = linkByFdcID[link.fdcId] else {
+      guard let existing = linkByFoodID[link.foodId] else {
         return false
       }
-      return existing.dravyaProfileId == link.dravyaId
+      return existing.dravyaProfileId == link.dravyaProfileId
         && existing.tier == link.tier
-        && seedDravyaByID[link.dravyaId].map { dravya in
-          foodByID[link.fdcId].map {
+        && seedDravyaByID[link.dravyaProfileId].map { dravya in
+          foodByID[link.foodId].map {
             edibilityMetadataMatches(dravya, food: $0)
           } == true
         } == true
@@ -1038,7 +619,7 @@ enum AyurvedaSeeder {
 
   private static func validateIngredientTargets(
     _ recipes: [RecipeDTO],
-    foodByID: [Int: FoodItem]
+    foodByID: [UUID: FoodItem]
   ) throws {
     let recipeIDs = Set(recipes.map(\.foodId))
     for recipe in recipes {
@@ -1167,7 +748,7 @@ enum AyurvedaSeeder {
   private static func replaceIngredients(
     for recipe: RecipeDTO,
     food: FoodItem,
-    foodByID: [Int: FoodItem],
+    foodByID: [UUID: FoodItem],
     context: ModelContext
   ) throws {
     for existing in food.ingredients ?? [] {
@@ -1181,6 +762,7 @@ enum AyurvedaSeeder {
         )
       }
       return IngredientLink(
+        id: ingredient.id,
         food: ingredientFood,
         grams: ingredient.grams,
         owner: food
@@ -1232,6 +814,7 @@ enum AyurvedaSeeder {
     from source: AyurvedaProfile,
     to destination: AyurvedaProfile
   ) {
+    destination.key = source.key
     destination.kind = source.kind
     destination.foodId = source.foodId
     destination.foodIsPlaceholder = source.foodIsPlaceholder
@@ -1288,6 +871,7 @@ enum AyurvedaSeeder {
     }
     return AyurvedaProfile(
       id: dravya.id,
+      key: dravya.key,
       kind: "dravya",
       foodId: dravya.foodId,
       foodIsPlaceholder: dravya.foodIsPlaceholder,
@@ -1352,6 +936,7 @@ enum AyurvedaSeeder {
     )
     return AyurvedaProfile(
       id: recipe.id,
+      key: recipe.key,
       kind: "recipe",
       foodId: recipe.foodId,
       foodIsPlaceholder: false,
@@ -1405,6 +990,7 @@ enum AyurvedaSeeder {
   ) -> AyurvedaProfile {
     AyurvedaProfile(
       id: profile.id,
+      key: profile.key,
       kind: "catalog",
       foodId: profile.foodId,
       foodIsPlaceholder: false,
@@ -1446,7 +1032,7 @@ enum AyurvedaSeeder {
 
   private static func encodeNutritionJSON<Value: Encodable>(
     _ value: Value,
-    recipeId: String,
+    recipeId: UUID,
     encoder: JSONEncoder
   ) throws -> String {
     let data = try encoder.encode(value)
@@ -1486,20 +1072,20 @@ private enum AyurvedaSeederError: Error, LocalizedError {
   case missingBundle
   case invalidCounts
   case emptyRecipeIngredients
-  case reservedBandCollision(Int)
-  case duplicateFoodId(Int)
-  case duplicateProfileId(String)
-  case duplicateLinkFdcId(Int)
-  case canonicalOwnershipConflict(String)
-  case missingIngredientFood(recipeId: String, foodId: Int)
-  case recipeIngredientReference(recipeId: String, foodId: Int)
-  case invalidServings(String)
+  case reservedBandCollision(UUID)
+  case duplicateFoodId(UUID)
+  case duplicateProfileId(UUID)
+  case duplicateLinkFoodId(UUID)
+  case canonicalOwnershipConflict(UUID)
+  case missingIngredientFood(recipeId: UUID, foodId: UUID)
+  case recipeIngredientReference(recipeId: UUID, foodId: UUID)
+  case invalidServings(UUID)
   case invalidNutrition
   case invalidCatalogProfiles
-  case invalidNutritionJSON(String)
+  case invalidNutritionJSON(UUID)
   case invalidSafetyMetadata
   case invalidSafetyAllergen(String)
-  case missingCatalogFood(Int)
+  case missingCatalogFood(UUID)
   case v5MigrationConflict(String)
   case placeholderMigrationConflict(String)
   case placeholderIdentityChanged(String)
@@ -1519,8 +1105,8 @@ private enum AyurvedaSeederError: Error, LocalizedError {
       return "the FoodItem store contains duplicate id \(foodId)"
     case .duplicateProfileId(let profileId):
       return "the Ayurveda store contains duplicate profile slug \(profileId)"
-    case .duplicateLinkFdcId(let fdcId):
-      return "the Ayurveda store contains duplicate link fdcId \(fdcId)"
+    case .duplicateLinkFoodId(let foodId):
+      return "the Ayurveda store contains duplicate link foodId \(foodId)"
     case .canonicalOwnershipConflict(let profileId):
       return "canonical profile ownership conflicts at slug \(profileId)"
     case .missingIngredientFood(let recipeId, let foodId):
@@ -1613,7 +1199,7 @@ private struct SafetyMetadataDTO: Decodable {
 }
 
 private struct AgeContributorDTO: Decodable {
-  let ingredientId: String
+  let ingredientId: UUID
   let grams: Double?
   let minAgeMonths: Int
   let enforcedMinAgeMonths: Int
@@ -1639,12 +1225,21 @@ private struct ServingDTO: Codable {
 
 private struct DravyaDTO: Decodable {
   struct Nutrition: Decodable {
+    struct PayloadIDs: Decodable {
+      let macronutrients: UUID
+      let vitamins: UUID
+      let minerals: UUID
+      let other: UUID
+    }
+
     let status: String
     let per100g: [String: Double]
     let units: [String: String]
+    let payloadIds: PayloadIDs
   }
 
-  let id: String
+  let id: UUID
+  let key: String
   let name: String
   let sanskrit: String?
   let aliases: [String]
@@ -1670,7 +1265,7 @@ private struct DravyaDTO: Decodable {
   let confidence: ConfidenceDTO
   let qualityState: String
   let reviewNote: String?
-  let foodId: Int
+  let foodId: UUID
   let foodIsPlaceholder: Bool
   let engineExcluded: Bool
   let nutrition: Nutrition?
@@ -1678,7 +1273,8 @@ private struct DravyaDTO: Decodable {
 }
 
 private struct RecipeIngredientDTO: Decodable {
-  let foodId: Int
+  let id: UUID
+  let foodId: UUID
   let grams: Double
   let name: String
   let portioned: Bool?
@@ -1686,7 +1282,8 @@ private struct RecipeIngredientDTO: Decodable {
 }
 
 private struct RecipeDTO: Decodable {
-  let id: String
+  let id: UUID
+  let key: String
   let name: String
   let meal: String
   let servings: Int
@@ -1703,15 +1300,16 @@ private struct RecipeDTO: Decodable {
   let confidence: ConfidenceDTO
   let qualityState: String
   let reviewNote: String?
-  let foodId: Int
+  let foodId: UUID
   let nutrition: RecipeNutritionDTO
   let safety: SafetyMetadataDTO
 }
 
 private struct CatalogProfileDTO: Decodable {
-  let id: String
+  let id: UUID
+  let key: String
   let name: String
-  let foodId: Int
+  let foodId: UUID
   let category: String
   let dosha: DoshaDTO
   let virya: String
@@ -1734,7 +1332,8 @@ private struct RecipeNutritionDTO: Decodable {
 }
 
 private struct AyurvedaLinkDTO: Decodable {
-  let fdcId: Int
-  let dravyaId: String
+  let id: UUID
+  let foodId: UUID
+  let dravyaProfileId: UUID
   let tier: String
 }

@@ -1,3 +1,4 @@
+import Foundation
 import FoundationModels
 
 @available(iOS 26.0, *)
@@ -17,7 +18,7 @@ struct AIWorkoutNameResponse: Codable, Sendable {
 
 // DTO-та за комуникация на резултата
 struct ResolvedExercise: Codable, Sendable {
-    let exerciseID: Int
+    let exerciseID: UUID
     let durationMinutes: Double
 }
 

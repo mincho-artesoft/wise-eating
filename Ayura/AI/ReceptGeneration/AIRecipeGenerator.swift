@@ -64,7 +64,7 @@ class AIRecipeGenerator {
         description: String,
         prepTime: Int,
         resolved: [ResolvedIngredient],
-        nameByID: [Int: String]
+        nameByID: [UUID: String]
     ) -> String {
         var s: [String] = []
         s.append("FINAL RECIPE: \(name)")
@@ -77,7 +77,7 @@ class AIRecipeGenerator {
             let sorted = resolved.sorted { $0.grams > $1.grams }
             for (i, r) in sorted.enumerated() {
                 let nm = nameByID[r.foodItemID] ?? "Item #\(r.foodItemID)"
-                s.append(String(format: "  %2d) %@ – %.0f g  [id: %d]", i+1, nm, r.grams, r.foodItemID))
+                s.append(String(format: "  %2d) %@ – %.0f g  [id: %@]", i+1, nm, r.grams, r.foodItemID.uuidString))
             }
         }
         s.append("")
@@ -535,10 +535,10 @@ class AIRecipeGenerator {
             dynamicBans.compactMap { FoodConcepts.shared.conceptID(for: $0) }
         )
         let candidateIDs = Set(candidates.map(\.id))
-        var blockedIDs = Set<Int>()
+        var blockedIDs = Set<UUID>()
         for conceptID in conceptIDs {
             blockedIDs.formUnion(
-                FoodConcepts.shared.members(of: conceptID).map(Int.init)
+                FoodConcepts.shared.members(of: conceptID)
             )
         }
         let allowedIDs = candidateIDs.subtracting(blockedIDs)
@@ -579,7 +579,7 @@ class AIRecipeGenerator {
         resolved: [ResolvedIngredient],
         replacements: [(from: String, to: String)],
         generatedNames: [String],
-        nameByID: [Int: String],
+        nameByID: [UUID: String],
         unresolved: [String]
     ) {
         emitLog("🔎 resolveIngredientsSmartly – START (\(conceptual.ingredients.count) conceptual ingredient(s))", onLog: onLog)
@@ -604,7 +604,7 @@ class AIRecipeGenerator {
         
         var outResolved: [ResolvedIngredient] = []
         var outRepl: [(from: String, to: String)] = []
-        var nameByID: [Int: String] = [:]
+        var nameByID: [UUID: String] = [:]
         var unresolvedConceptualNames: [String] = []
         try Task.checkCancellation()
         
@@ -613,7 +613,7 @@ class AIRecipeGenerator {
         
         let ingredientResolutionTask = Task<Void, Error> {
             try await withThrowingTaskGroup(
-                of: (ResolvedIngredient?, (String, String)?, (Int, String)?, String?).self
+                of: (ResolvedIngredient?, (String, String)?, (UUID, String)?, String?).self
             ) { group in
                 for ing in allowedIngredients {
                     group.addTask { [weak self] in
@@ -746,7 +746,7 @@ class AIRecipeGenerator {
         try Task.checkCancellation()
         
         // Merge на дубликати
-        var mergedByID: [Int: Double] = [:]
+        var mergedByID: [UUID: Double] = [:]
         for r in outResolved { mergedByID[r.foodItemID, default: 0.0] += r.grams }
         let merged: [ResolvedIngredient] = mergedByID.map { ResolvedIngredient(foodItemID: $0.key, grams: $0.value) }
         try Task.checkCancellation()
@@ -1130,11 +1130,7 @@ class AIRecipeGenerator {
         
         // --- ATOMIC CREATION BLOCK ---
         do {
-            var idDescriptor = FetchDescriptor<FoodItem>()
-            idDescriptor.sortBy = [SortDescriptor(\.id, order: .reverse)]
-            idDescriptor.fetchLimit = 1
-            let maxId = (try ctx.fetch(idDescriptor).first?.id) ?? 0
-            dto.id = maxId + 1
+            dto.id = UUID()
             try Task.checkCancellation()
             
             let model = dto.model()

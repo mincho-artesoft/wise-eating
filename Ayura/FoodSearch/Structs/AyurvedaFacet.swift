@@ -62,7 +62,7 @@ struct AyurvedaFacet: Hashable, Sendable {
 
     static func canonicalMapFromBundledSeed(
         bundle: Bundle = .main
-    ) throws -> [Int: Set<String>] {
+    ) throws -> [UUID: Set<String>] {
         try canonicalSearchMapFromBundledSeed(bundle: bundle).mapValues {
             $0.facets
         }
@@ -70,7 +70,7 @@ struct AyurvedaFacet: Hashable, Sendable {
 
     static func canonicalSearchMapFromBundledSeed(
         bundle: Bundle = .main
-    ) throws -> [Int: AyurvedaCanonicalSearchMetadata] {
+    ) throws -> [UUID: AyurvedaCanonicalSearchMetadata] {
         guard let url = bundle.url(
             forResource: "ayurveda_seed",
             withExtension: "json.gz"
@@ -95,7 +95,7 @@ struct AyurvedaFacet: Hashable, Sendable {
         let profilesByID = Dictionary(
             uniqueKeysWithValues: profiles.map { ($0.id, $0) }
         )
-        var result: [Int: AyurvedaCanonicalSearchMetadata] = [:]
+        var result: [UUID: AyurvedaCanonicalSearchMetadata] = [:]
 
         for profile in profiles {
             guard profile.isCanonical else { continue }
@@ -123,11 +123,11 @@ struct AyurvedaFacet: Hashable, Sendable {
         // USDA links extend the searchable coverage beyond the direct canonical
         // rows. Direct profiles always win when an ID appears in both sets.
         for link in seed.links {
-            guard result[link.fdcId]?.sourceTier != nil || result[link.fdcId] == nil,
-                  let profile = profilesByID[link.dravyaId] else {
+            guard result[link.foodId]?.sourceTier != nil || result[link.foodId] == nil,
+                  let profile = profilesByID[link.dravyaProfileId] else {
                 continue
             }
-            result[link.fdcId] = AyurvedaCanonicalSearchMetadata(
+            result[link.foodId] = AyurvedaCanonicalSearchMetadata(
                 profile: profile,
                 enforcedMinAgeMonths: profile.edible
                     ? profile.safety.enforcedMinAgeMonths
@@ -215,11 +215,11 @@ struct AyurvedaFacet: Hashable, Sendable {
     static func isCanonicalSeedProfile(_ profile: AyurvedaProfile) -> Bool {
         switch profile.kind {
         case "dravya":
-            return profile.id.hasPrefix("dravya.")
+            return profile.key.hasPrefix("dravya.")
         case "recipe":
-            return profile.id.hasPrefix("recipe.")
+            return profile.key.hasPrefix("recipe.")
         case "catalog":
-            return profile.id.hasPrefix("catalog.usda.")
+            return profile.key.hasPrefix("catalog.usda.")
         default:
             return false
         }
@@ -264,7 +264,7 @@ struct AyurvedaFacet: Hashable, Sendable {
 private enum AyurvedaFacetSeedError: LocalizedError {
     case missingBundle
     case invalidCounts
-    case invalidAgeMetadata(String)
+    case invalidAgeMetadata(UUID)
 
     var errorDescription: String? {
         switch self {
@@ -303,13 +303,14 @@ private struct AyurvedaFacetSeedProfile: Decodable {
         let ayur: Double
     }
 
-    let id: String
+    let id: UUID
+    let key: String
     let name: String
     let edible: Bool
     let dosha: Dosha
     let seasons: [String]
     let timeOfDay: [String]
-    let foodId: Int
+    let foodId: UUID
     let rasa: [String]?
     let virya: String?
     let vipaka: String?
@@ -322,13 +323,14 @@ private struct AyurvedaFacetSeedProfile: Decodable {
     let safety: Safety
 
     var isCanonical: Bool {
-        id.hasPrefix("dravya.") || id.hasPrefix("recipe.")
+        key.hasPrefix("dravya.") || key.hasPrefix("recipe.")
     }
 }
 
 private struct AyurvedaFacetSeedLink: Decodable {
-    let fdcId: Int
-    let dravyaId: String
+    let id: UUID
+    let foodId: UUID
+    let dravyaProfileId: UUID
     let tier: String
 }
 
@@ -339,9 +341,10 @@ private struct AyurvedaFacetCatalogProfile: Decodable {
         let kapha: Int
     }
 
-    let id: String
+    let id: UUID
+    let key: String
     let name: String
-    let foodId: Int
+    let foodId: UUID
     let category: String
     let dosha: Dosha
     let virya: String

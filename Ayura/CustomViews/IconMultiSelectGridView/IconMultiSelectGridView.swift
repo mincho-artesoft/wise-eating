@@ -1,7 +1,6 @@
 import SwiftUI
 
 protocol SelectableItem: Identifiable, Hashable {
-    var id: String { get }
     var name: String { get }
     // An optional name for a SF Symbol or asset image.
     var iconName: String? { get }

@@ -1,5 +1,7 @@
+import Foundation
+
 struct CompactFoodItem: Identifiable, Hashable, Sendable {
-    let id: Int
+    let id: UUID
     let name: String
     let searchTokens: Set<String>
     let minAgeMonths: Int

@@ -3,7 +3,21 @@ import Foundation
 enum AppTab: Int, CaseIterable, Identifiable {
     case nutrition, training, foods, calendar, storage, shoppingList, aiGenerate, search, analytics, exercises, nodes//, test
 
-    var id: Int { self.rawValue }
+    var id: UUID { Self.stableIDs[rawValue] }
+
+    private static let stableIDs: [UUID] = [
+        UUID(uuidString: "8E6BDEA8-95E3-5958-8A0C-CB0986E87172")!,
+        UUID(uuidString: "89D5DC93-F335-5562-BFFA-2CEF27618724")!,
+        UUID(uuidString: "ECA8144F-7E38-5235-8375-4555346D2BB7")!,
+        UUID(uuidString: "CD181048-C149-5415-8DB6-1BCBAC5CB898")!,
+        UUID(uuidString: "AAEA6848-55C6-5D8B-9160-AF55D1C188F6")!,
+        UUID(uuidString: "773609EF-991F-5624-BF3A-2E2429FE9BA2")!,
+        UUID(uuidString: "2EEC9FA6-2791-5EC1-B5B5-88E072E14A7E")!,
+        UUID(uuidString: "EE56B20A-2B8F-5D6E-A405-FD0ED6888818")!,
+        UUID(uuidString: "D9741028-116F-5EDC-97D7-8C1DC0A9B5FC")!,
+        UUID(uuidString: "AB722EAD-A174-50B3-A82D-C8D31DF30527")!,
+        UUID(uuidString: "72E9E511-2127-514F-98AD-CA95ED8473FE")!,
+    ]
 
     var title: String {
         switch self {

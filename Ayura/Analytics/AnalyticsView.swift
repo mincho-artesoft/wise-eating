@@ -68,8 +68,8 @@ struct AnalyticsView: View {
                SelectableNutrient(id: "profile_weight", label: "Weight"),
                SelectableNutrient(id: "profile_height", label: "Height")
            ]
-           items.append(contentsOf: allVitamins.map { SelectableNutrient(id: "vit_\($0.id)", label: $0.name) })
-           items.append(contentsOf: allMinerals.map { SelectableNutrient(id: "min_\($0.id)", label: $0.name) })
+           items.append(contentsOf: allVitamins.map { SelectableNutrient(id: "vit_\($0.key)", label: $0.name) })
+           items.append(contentsOf: allMinerals.map { SelectableNutrient(id: "min_\($0.key)", label: $0.name) })
            return items
        }
     

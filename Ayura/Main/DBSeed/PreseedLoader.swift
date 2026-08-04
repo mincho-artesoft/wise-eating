@@ -9,16 +9,25 @@ enum PreseedLoader {
         let fm = FileManager.default
         let tmpDir = fm.temporaryDirectory
 
-        // 1) Prefer 3-part split: preseeded_db.store.gz.part-aa/ab/ac
-        let partSuffixes = ["aa","ab"]
-        let partURLs: [URL] = partSuffixes.compactMap { suffix in
-            Bundle.main.url(forResource: "preseeded_db.store.gz", withExtension: "part-\(suffix)")
-        }
+        // 1) Prefer a complete 3-part split, then the compact 2-part form.
+        let supportedPartSuffixes = [
+            ["aa", "ab", "ac"],
+            ["aa", "ab"],
+        ]
+        let partURLs: [URL] = supportedPartSuffixes.lazy.compactMap { suffixes in
+            let urls = suffixes.compactMap { suffix in
+                Bundle.main.url(
+                    forResource: "preseeded_db.store.gz",
+                    withExtension: "part-\(suffix)"
+                )
+            }
+            return urls.count == suffixes.count ? urls : nil
+        }.first ?? []
 
         var gzURL: URL?
         var combinedURL: URL?
 
-        if partURLs.count == partSuffixes.count {
+        if !partURLs.isEmpty {
             let combinedGZ = tmpDir.appendingPathComponent("preseeded_db.store.gz")
             // Remove if exists from a previous attempt
             try? fm.removeItem(at: combinedGZ)

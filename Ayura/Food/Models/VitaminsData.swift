@@ -3,7 +3,7 @@ import Foundation
 
 @Model
 public final class VitaminsData: Identifiable {
-    @Attribute(.unique) public var id = UUID()
+    @Attribute(.unique) public var id: UUID
 
     public var vitaminA_RAE:        Nutrient?
     public var retinol:             Nutrient?
@@ -35,6 +35,7 @@ public final class VitaminsData: Identifiable {
 
     // MARK: – Init
     public init(
+        id: UUID = UUID(),
         vitaminA_RAE:      Nutrient? = nil,
         retinol:           Nutrient? = nil,
         caroteneAlpha:     Nutrient? = nil,
@@ -58,6 +59,7 @@ public final class VitaminsData: Identifiable {
         vitaminK:        Nutrient? = nil,
         choline:         Nutrient? = nil
     ) {
+        self.id                = id
         self.vitaminA_RAE      = vitaminA_RAE
         self.retinol           = retinol
         self.caroteneAlpha     = caroteneAlpha

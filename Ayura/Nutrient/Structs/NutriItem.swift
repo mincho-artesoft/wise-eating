@@ -17,7 +17,7 @@ struct NutriItem: Identifiable, Equatable {
     //––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
     init(mineral m: Mineral, demographic: String) {
         self.id = m.symbol
-        self.otherId = m.id
+        self.otherId = m.key
         self.color = Color(hex: m.colorHex)
         self.label = m.symbol
         self.unit = m.unit
@@ -27,7 +27,7 @@ struct NutriItem: Identifiable, Equatable {
 
     init(vitamin v: Vitamin, demographic: String) {
         self.id = v.abbreviation
-        self.otherId = v.id
+        self.otherId = v.key
         self.color = Color(hex: v.colorHex)
         self.label = v.abbreviation
         self.unit = v.unit

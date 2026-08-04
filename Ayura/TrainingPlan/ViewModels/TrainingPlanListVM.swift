@@ -11,7 +11,7 @@ final class TrainingPlanListVM: ObservableObject {
     }
 
     struct DisplayPlan: Identifiable {
-        let id: String
+        let id: UUID
         let name: String
         let dayCount: Int
         let creationDate: Date?
@@ -58,7 +58,7 @@ final class TrainingPlanListVM: ObservableObject {
             if let userPlans = try? context.fetch(descriptor) {
                 allFetchedPlans = userPlans.map { plan in
                     DisplayPlan(
-                        id: plan.id.uuidString,
+                        id: plan.id,
                         name: plan.name,
                         dayCount: plan.days.count,
                         creationDate: plan.creationDate,
@@ -96,15 +96,6 @@ final class TrainingPlanListVM: ObservableObject {
             let term = searchText.lowercased()
             displayPlans = allFetchedPlans.filter { $0.name.lowercased().contains(term) }
         }
-    }
-
-    private func nextExerciseId() -> Int {
-        guard let context = modelContext else { return Int.random(in: 100000...999999) }
-        var desc = FetchDescriptor<ExerciseItem>()
-        desc.sortBy = [SortDescriptor(\.id, order: .reverse)]
-        desc.fetchLimit = 1
-        let maxId = ((try? context.fetch(desc))?.first?.id) ?? 0
-        return maxId + 1
     }
 
     // MARK: - Actions
@@ -145,9 +136,8 @@ final class TrainingPlanListVM: ObservableObject {
                 if let existingItem = try? context.fetch(descriptor).first {
                     workoutItem = existingItem
                 } else {
-                    let newWorkoutItemID = nextExerciseId()
                     workoutItem = ExerciseItem(
-                        id: newWorkoutItemID,
+                        id: UUID(),
                         name: uniqueWorkoutName,
                         isUserAdded: true,
                         muscleGroups: [],
@@ -172,7 +162,7 @@ final class TrainingPlanListVM: ObservableObject {
                     if let found = (try? context.fetch(exDesc))?.first {
                         exerciseItem = found
                     } else {
-                        let newItem = ExerciseItem(id: nextExerciseId(), name: targetName, muscleGroups: [])
+                        let newItem = ExerciseItem(id: UUID(), name: targetName, muscleGroups: [])
                         newItem.isUserAdded = false
                         context.insert(newItem)
                         exerciseItem = newItem

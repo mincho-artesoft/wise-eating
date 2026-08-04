@@ -1,11 +1,13 @@
+import Foundation
 import SwiftData
 
 @Model public final class AyurvedaProfile {
   #Index<AyurvedaProfile>([\.foodId], [\.kind])
 
-  @Attribute(.unique) public var id: String
+  @Attribute(.unique) public var id: UUID
+  @Attribute(.unique) public var key: String
   public var kind: String
-  public var foodId: Int
+  public var foodId: UUID
   public var foodIsPlaceholder: Bool = false
   public var name: String
   public var doshaVata: Int
@@ -50,9 +52,10 @@ import SwiftData
   public var nutritionUnitsJSON: String?
 
   public init(
-    id: String,
+    id: UUID,
+    key: String,
     kind: String,
-    foodId: Int,
+    foodId: UUID,
     foodIsPlaceholder: Bool = false,
     name: String,
     doshaVata: Int,
@@ -97,6 +100,7 @@ import SwiftData
     nutritionUnitsJSON: String? = nil
   ) {
     self.id = id
+    self.key = key
     self.kind = kind
     self.foodId = foodId
     self.foodIsPlaceholder = foodIsPlaceholder
@@ -145,14 +149,16 @@ import SwiftData
 }
 
 @Model public final class AyurvedaLink {
-  #Index<AyurvedaLink>([\.fdcId])
+  #Index<AyurvedaLink>([\.foodId])
 
-  @Attribute(.unique) public var fdcId: Int
-  public var dravyaProfileId: String
+  @Attribute(.unique) public var id: UUID
+  @Attribute(.unique) public var foodId: UUID
+  public var dravyaProfileId: UUID
   public var tier: String
 
-  public init(fdcId: Int, dravyaProfileId: String, tier: String) {
-    self.fdcId = fdcId
+  public init(id: UUID, foodId: UUID, dravyaProfileId: UUID, tier: String) {
+    self.id = id
+    self.foodId = foodId
     self.dravyaProfileId = dravyaProfileId
     self.tier = tier
   }

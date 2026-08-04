@@ -6,10 +6,12 @@ from __future__ import annotations
 import argparse
 import gzip
 import json
+import math
 import os
 import re
 import sqlite3
 import tempfile
+import uuid
 from pathlib import Path
 
 from build_seed import (
@@ -31,14 +33,14 @@ TARGET_EXPECTED = {
     "nutritionEstimated": 3,
     "links": TARGET_AYURVEDA_LINKS,
     "cacheFoods": TARGET_FOODS,
-    "cacheVersion": 12,
+    "cacheVersion": 13,
     "inedibleFoods": 6,
     "facetFoods": TARGET_FOODS,
     "metadataFoods": TARGET_FOODS,
     "linkedFacetFoods": 2_007,
     "facetKeys": 45,
     "facetAssignments": 99_439,
-    "seedVersion": 9,
+    "seedVersion": 10,
     "ingredientLinks": TARGET_INGREDIENT_LINKS,
     "ingredientOwners": TARGET_INGREDIENT_OWNERS,
     "allergenTaggedDravyas": 155,
@@ -50,6 +52,7 @@ TARGET_EXPECTED = {
 # Backward-compatible name for callers building a new target artifact.
 EXPECTED = TARGET_EXPECTED
 PART_SIZE = 70 * 1024 * 1024
+PART_SUFFIXES = ("aa", "ab", "ac")
 
 
 class PreseedBuildError(RuntimeError):
@@ -71,6 +74,12 @@ def parse_args() -> argparse.Namespace:
 def scalar(connection: sqlite3.Connection, query: str, parameters=()):
     row = connection.execute(query, parameters).fetchone()
     return row[0] if row else None
+
+
+def uuid_key(value) -> str:
+    if isinstance(value, bytes):
+        return str(uuid.UUID(bytes=value))
+    return str(uuid.UUID(str(value)))
 
 
 def require_equal(label: str, actual, expected) -> None:
@@ -183,7 +192,23 @@ def add_estimated_search_fallbacks(store: Path) -> None:
             raise PreseedBuildError("main search cache is missing")
         payload = json.loads(row[0])
         payload.pop("knownDiets", None)
-        food_rows = dict(connection.execute("SELECT ZID, ZNAME FROM ZFOODITEM"))
+        food_rows = {
+            uuid_key(food_id): name
+            for food_id, name in connection.execute(
+                "SELECT ZID, ZNAME FROM ZFOODITEM"
+            )
+        }
+
+        # Swift's UUID encoder emits upper-case strings. Canonicalize every
+        # identity carried by the JSON cache so the shipped graph has one
+        # byte-for-byte representation across repeated builds.
+        for compact in payload["compactFoods"]:
+            compact["id"] = uuid_key(compact["id"])
+        for collection_key in ("invertedIndex", "nutrientRankings"):
+            payload[collection_key] = {
+                key: [uuid_key(value) for value in values]
+                for key, values in payload.get(collection_key, {}).items()
+            }
 
         for compact in payload["compactFoods"]:
             compact.pop("diets", None)
@@ -209,7 +234,7 @@ def add_estimated_search_fallbacks(store: Path) -> None:
                     )
                 ]
                 continue
-            food_id = compact["id"]
+            food_id = uuid_key(compact["id"])
             food_name = food_rows[food_id]
             metadata = estimated_search_metadata(
                 food_name=food_name,
@@ -220,7 +245,7 @@ def add_estimated_search_fallbacks(store: Path) -> None:
             compact["ayurvedaMetadata"] = metadata
             compact["ayurvedaFacets"] = metadata["facets"]
 
-        facet_index: dict[str, list[int]] = {}
+        facet_index: dict[str, list[str]] = {}
         for compact in payload["compactFoods"]:
             for facet in compact["ayurvedaFacets"]:
                 facet_index.setdefault(facet, []).append(compact["id"])
@@ -396,9 +421,9 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
                 connection,
                 """
                 SELECT COUNT(*) FROM ZAYURVEDAPROFILE
-                WHERE (ZKIND = 'dravya' AND ZID NOT LIKE 'dravya.%')
-                   OR (ZKIND = 'recipe' AND ZID NOT LIKE 'recipe.%')
-                   OR (ZKIND = 'catalog' AND ZID NOT LIKE 'catalog.usda.%')
+                WHERE (ZKIND = 'dravya' AND ZKEY NOT LIKE 'dravya.%')
+                   OR (ZKIND = 'recipe' AND ZKEY NOT LIKE 'recipe.%')
+                   OR (ZKIND = 'catalog' AND ZKEY NOT LIKE 'catalog.usda.%')
                 """,
             ),
             0,
@@ -489,8 +514,8 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
                 connection,
                 """
                 SELECT COUNT(*) FROM (
-                  SELECT ZFDCID FROM ZAYURVEDALINK
-                  GROUP BY ZFDCID HAVING COUNT(*) > 1
+                  SELECT ZFOODID FROM ZAYURVEDALINK
+                  GROUP BY ZFOODID HAVING COUNT(*) > 1
                 )
                 """,
             ),
@@ -520,7 +545,7 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
         )
         require_equal(
             "search payload duplicate food ids",
-            len(compact_foods) - len({food["id"] for food in compact_foods}),
+            len(compact_foods) - len({uuid_key(food["id"]) for food in compact_foods}),
             0,
         )
         require_equal(
@@ -529,13 +554,13 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
             0,
         )
         profile_food_ids = {
-            row[0]
+            uuid_key(row[0])
             for row in connection.execute(
                 """
                 SELECT ZFOODID FROM ZAYURVEDAPROFILE
-                WHERE (ZKIND = 'dravya' AND ZID LIKE 'dravya.%')
-                   OR (ZKIND = 'recipe' AND ZID LIKE 'recipe.%')
-                   OR (ZKIND = 'catalog' AND ZID LIKE 'catalog.usda.%')
+                WHERE (ZKIND = 'dravya' AND ZKEY LIKE 'dravya.%')
+                   OR (ZKIND = 'recipe' AND ZKEY LIKE 'recipe.%')
+                   OR (ZKIND = 'catalog' AND ZKEY LIKE 'catalog.usda.%')
                 """
             )
         }
@@ -545,9 +570,9 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
             EXPECTED["profiles"],
         )
         link_tiers = {
-            food_id: tier
+            uuid_key(food_id): tier
             for food_id, tier in connection.execute(
-                "SELECT ZFDCID, ZTIER FROM ZAYURVEDALINK"
+                "SELECT ZFOODID, ZTIER FROM ZAYURVEDALINK"
             )
         }
         linked_only_food_ids = set(link_tiers) - profile_food_ids
@@ -562,9 +587,9 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
             len(ayurveda_food_ids),
             EXPECTED["profiles"] + EXPECTED["linkedFacetFoods"],
         )
-        compact_by_id = {food["id"]: food for food in compact_foods}
+        compact_by_id = {uuid_key(food["id"]): food for food in compact_foods}
         food_ages = {
-            food_id: min_age
+            uuid_key(food_id): min_age
             for food_id, min_age in connection.execute(
                 "SELECT ZID, ZMINAGEMONTHS FROM ZFOODITEM"
             )
@@ -590,17 +615,19 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
             0,
         )
         inedible_food_ids = {
-            food_id
+            uuid_key(food_id)
             for food_id, is_edible in connection.execute(
                 "SELECT ZID, ZISEDIBLE FROM ZFOODITEM"
             )
             if not is_edible
         }
         compact_inedible_food_ids = {
-            food["id"] for food in compact_foods if food.get("isEdible") is False
+            uuid_key(food["id"])
+            for food in compact_foods
+            if food.get("isEdible") is False
         }
         compact_nil_age_ids = {
-            food["id"]
+            uuid_key(food["id"])
             for food in compact_foods
             if food.get("enforcedMinAgeMonths") is None
         }
@@ -625,19 +652,19 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
         # a universal invariant here. Canonical and linked inheritance are
         # checked independently below.
         dravya_food_ids = {
-            row[0]
+            uuid_key(row[0])
             for row in connection.execute(
                 "SELECT ZFOODID FROM ZAYURVEDAPROFILE WHERE ZKIND = 'dravya'"
             )
         }
         recipe_food_ids = {
-            row[0]
+            uuid_key(row[0])
             for row in connection.execute(
                 "SELECT ZFOODID FROM ZAYURVEDAPROFILE WHERE ZKIND = 'recipe'"
             )
         }
         catalog_food_ids = {
-            row[0]
+            uuid_key(row[0])
             for row in connection.execute(
                 "SELECT ZFOODID FROM ZAYURVEDAPROFILE WHERE ZKIND = 'catalog'"
             )
@@ -910,16 +937,18 @@ def deterministic_gzip(source: Path, destination: Path) -> None:
                 output.write(chunk)
 
 
-def write_parts(gzip_path: Path, output_directory: Path) -> tuple[Path, Path]:
+def write_parts(gzip_path: Path, output_directory: Path) -> tuple[Path, ...]:
     size = gzip_path.stat().st_size
-    if size > PART_SIZE * 2:
+    if size > PART_SIZE * len(PART_SUFFIXES):
         raise PreseedBuildError(
-            f"compressed store is {size} bytes; two 70 MiB parts are insufficient"
+            f"compressed store is {size} bytes; "
+            f"{len(PART_SUFFIXES)} 70 MiB parts are insufficient"
         )
     output_directory.mkdir(parents=True, exist_ok=True)
-    outputs = (
-        output_directory / "preseeded_db.store.gz.part-aa",
-        output_directory / "preseeded_db.store.gz.part-ab",
+    part_count = max(2, math.ceil(size / PART_SIZE))
+    outputs = tuple(
+        output_directory / f"preseeded_db.store.gz.part-{suffix}"
+        for suffix in PART_SUFFIXES[:part_count]
     )
     with gzip_path.open("rb") as source:
         for output in outputs:
@@ -927,6 +956,10 @@ def write_parts(gzip_path: Path, output_directory: Path) -> tuple[Path, Path]:
             with temporary.open("wb") as destination:
                 destination.write(source.read(PART_SIZE))
             os.replace(temporary, output)
+    for suffix in PART_SUFFIXES[part_count:]:
+        stale = output_directory / f"preseeded_db.store.gz.part-{suffix}"
+        if stale.exists():
+            stale.unlink()
     return outputs
 
 

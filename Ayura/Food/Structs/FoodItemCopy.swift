@@ -4,7 +4,7 @@ import SwiftData
 // MARK: - FoodItemCopy -----------------------------------------------------
 
 public final class FoodItemCopy: Identifiable, Codable {
-    public var originalID: Int?
+    public var originalID: UUID?
 
     // MARK: – Basic
     public var name: String
@@ -55,7 +55,7 @@ public final class FoodItemCopy: Identifiable, Codable {
         carbDetails: CarbDetailsDataCopy? = nil,
         sterols: SterolsDataCopy? = nil,
         ingredients: [IngredientLinkCopy]? = nil,
-        originalID: Int? = nil
+        originalID: UUID? = nil
     ) {
         self.name               = name
         self.nameNormalized     = name.foldedSearchKey
@@ -166,7 +166,7 @@ public final class FoodItemCopy: Identifiable, Codable {
     
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        originalID = try container.decodeIfPresent(Int.self, forKey: .originalID)
+        originalID = try container.decodeIfPresent(UUID.self, forKey: .originalID)
         name = try container.decode(String.self, forKey: .name)
         nameNormalized = try container.decode(String.self, forKey: .nameNormalized)
         isRecipe = try container.decode(Bool.self, forKey: .isRecipe)
@@ -562,7 +562,7 @@ extension FoodItemCopy: Equatable {
 @MainActor
 extension IngredientLinkCopy {
     func toOriginal(context: ModelContext, cache: inout [ObjectIdentifier : FoodItem]) -> IngredientLink {
-        let foodOrig: FoodItem = food?.toOriginal(context: context, cache: &cache) ?? FoodItem(id: -1, name: "Unknown")
+        let foodOrig: FoodItem = food?.toOriginal(context: context, cache: &cache) ?? FoodItem(id: UUID(), name: "Unknown")
         return IngredientLink(food: foodOrig, grams: grams)
     }
 }
@@ -599,7 +599,7 @@ extension FoodItemCopy {
         }
         
         let fi = FoodItem(
-            id: originalID ?? Self.generateNewID(in: context),
+            id: originalID ?? UUID(),
             name: name,
             isRecipe: isRecipe,
             isMenu: isMenu,
@@ -630,11 +630,6 @@ extension FoodItemCopy {
             }
         }
         return fi
-    }
-    
-    private static func generateNewID(in context: ModelContext) -> Int {
-        let count = (try? context.fetchCount(FetchDescriptor<FoodItem>())) ?? 0
-        return count + 1
     }
     
     @MainActor

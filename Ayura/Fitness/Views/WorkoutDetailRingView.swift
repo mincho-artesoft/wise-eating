@@ -12,7 +12,7 @@ struct WorkoutDetailRingView: View {
     let onSaveChanges: () -> Void
 
     @State private var detailedLog: [ExerciseLog] = []
-    @State private var expandedExerciseIDs = Set<Int>()
+    @State private var expandedExerciseIDs = Set<UUID>()
     
     typealias FocusField = ExerciseLogEntryView.FocusField
     
@@ -153,7 +153,7 @@ struct WorkoutDetailRingView: View {
         )
     }
 
-    private func expansionBinding(for exerciseID: Int) -> Binding<Bool> {
+    private func expansionBinding(for exerciseID: UUID) -> Binding<Bool> {
         Binding<Bool>(
             get: { self.expandedExerciseIDs.contains(exerciseID) },
             set: { isExpanding in

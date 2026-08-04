@@ -642,10 +642,7 @@ struct ExerciseItemEditorView: View {
                       let existing = (try? ctx.fetch(FetchDescriptor<ExerciseItem>(predicate: #Predicate { $0.id == id })))?.first {
                 itemToSave = existing
             } else {
-                var desc = FetchDescriptor<ExerciseItem>(sortBy: [SortDescriptor(\.id, order: .reverse)])
-                desc.fetchLimit = 1
-                let maxID = (try? ctx.fetch(desc).first?.id) ?? 0
-                itemToSave = ExerciseItem(id: maxID + 1, name: "", muscleGroups: [])
+                itemToSave = ExerciseItem(id: UUID(), name: "", muscleGroups: [])
                 ctx.insert(itemToSave)
             }
             

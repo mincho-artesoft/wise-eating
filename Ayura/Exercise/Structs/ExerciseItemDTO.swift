@@ -1,7 +1,8 @@
 import Foundation
 
 struct ExerciseItemDTO: Codable, Sendable {
-    let id: Int
+    let id: UUID
+    var catalogNumber: Int? = nil
     let title: String?
     let desc: String?
     let muscleGroups: [MuscleGroup]
@@ -11,6 +12,7 @@ struct ExerciseItemDTO: Codable, Sendable {
     func model() -> ExerciseItem {
         return ExerciseItem(
             id: id,
+            catalogNumber: catalogNumber,
             name: title ?? "Unnamed Exercise",
             description: desc,
             videoURL: nil,

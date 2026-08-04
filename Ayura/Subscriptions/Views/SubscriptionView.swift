@@ -22,10 +22,12 @@ struct SubscriptionView: View {
         case restore(String)
         case upgrade(String)
 
-        var id: Int {
+        var id: UUID {
             switch self {
-            case .restore: return 0
-            case .upgrade: return 1
+            case .restore:
+                return UUID(uuidString: "811E13E1-8671-5D43-A0A4-59CBEA8C59F")!
+            case .upgrade:
+                return UUID(uuidString: "E7BAB2C2-FBF5-560B-BA67-C51C70A3712E")!
             }
         }
     }

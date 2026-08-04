@@ -276,7 +276,7 @@ private struct RealMealEvidence: Codable {
     let day: Int
     let slotIndex: Int
     let frameIndex: Int
-    let componentIDs: [Int]
+    let componentIDs: [UUID]
     let title: String
 }
 
@@ -508,21 +508,21 @@ def make_real_candidate_file(destination):
     concepts_by_id = {}
     for concept, food_ids in concept_payload["membership"].items():
         for food_id in food_ids:
-            concepts_by_id.setdefault(int(food_id), set()).add(concept)
+            concepts_by_id.setdefault(food_id, set()).add(concept)
     role_by_id = {
-        int(item["foodId"]): item for item in role_payload["items"]
+        item["foodId"]: item for item in role_payload["items"]
     }
     role_definitions = {
         item["id"]: item for item in role_payload["definitions"]
     }
     dravya_by_id = {item["id"]: item for item in seed["dravyas"]}
     direct_by_food_id = {
-        int(item["foodId"]): item
+        item["foodId"]: item
         for item in seed["dravyas"]
         if item.get("foodId") is not None
     }
     link_by_food_id = {
-        int(link["fdcId"]): link
+        link["foodId"]: link
         for link in seed["links"]
     }
     category_rules = {
@@ -535,7 +535,7 @@ def make_real_candidate_file(destination):
         direct = direct_by_food_id.get(food_id)
         link = link_by_food_id.get(food_id)
         profile = direct or (
-            dravya_by_id.get(link["dravyaId"]) if link else None
+            dravya_by_id.get(link["dravyaProfileId"]) if link else None
         )
         if profile:
             dosha = profile.get("dosha") or {}
@@ -623,7 +623,7 @@ def make_real_candidate_file(destination):
         recipe_dosha=None,
         recipe_seasons=None,
     ):
-        if food_id <= 0 or energy <= 0:
+        if not food_id or energy <= 0:
             return
         concepts = set(concepts_by_id.get(food_id, set()))
         concepts.update(safety_concepts(allergens))
@@ -702,7 +702,7 @@ def make_real_candidate_file(destination):
         )
 
     for food in foods:
-        food_id = int(food["id"])
+        food_id = food["id"]
         categories = food.get("category") or []
         append_candidate(
             food_id=food_id,
@@ -722,7 +722,7 @@ def make_real_candidate_file(destination):
         nutrition = recipe["nutrition"]["per100g"]
         safety = recipe.get("safety") or {}
         append_candidate(
-            food_id=int(recipe["foodId"]),
+            food_id=recipe["foodId"],
             name=recipe["name"],
             categories=[recipe.get("category", "")],
             allergens=safety.get("allergens"),

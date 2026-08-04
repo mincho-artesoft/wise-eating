@@ -10,8 +10,8 @@ struct ProfilePayload: Codable {
     var height:    Double
     
     var meals: [Meal]
-    var priorityVitaminIDs: [String]
-    var priorityMineralIDs: [String]
+    var priorityVitaminIDs: [UUID]
+    var priorityMineralIDs: [UUID]
     var allergens: [Allergen]
     var ayurvedaConstitution: AyurvedaConstitutionRecord?
     var ayurvedaConstitutionDeletedAt: Date?

@@ -12,15 +12,15 @@ final class FoodVideoSource: @unchecked Sendable {
     private let stateLock = NSLock()
     private let decodeLock = NSLock()
     private var generators: [String: AVAssetImageGenerator] = [:]
-    private var frameIndex: [Int: Int] = [:]
+    private var frameIndex: [UUID: Int] = [:]
     private var timestamps: [Double] = []
 
-    func hasVideo(for foodID: Int) -> Bool {
+    func hasVideo(for foodID: UUID) -> Bool {
         frameIndex[foodID] != nil
     }
 
-    var availableFoodIDs: [Int] {
-        frameIndex.keys.sorted()
+    var availableFoodIDs: [UUID] {
+        frameIndex.keys.sorted { $0.uuidString < $1.uuidString }
     }
 
     private init() {
@@ -38,12 +38,12 @@ final class FoodVideoSource: @unchecked Sendable {
         if let url = Bundle.main.url(forResource: "frame_index", withExtension: "json"),
            let data = try? Data(contentsOf: url),
            let raw = try? JSONDecoder().decode([String: Int].self, from: data) {
-            let pairs = raw.compactMap { key, value -> (Int, Int)? in
-                guard let foodID = Int(key) else { return nil }
+            let pairs = raw.compactMap { key, value -> (UUID, Int)? in
+                guard let foodID = UUID(uuidString: key) else { return nil }
                 return (foodID, value)
             }
             guard pairs.count == raw.count else {
-                print("❌ Error: frame_index.json contains a non-integer DB id!")
+                print("❌ Error: frame_index.json contains a non-UUID DB id!")
                 return
             }
             frameIndex = Dictionary(uniqueKeysWithValues: pairs)
@@ -97,7 +97,7 @@ final class FoodVideoSource: @unchecked Sendable {
         return created
     }
 
-    func getFrame(id foodID: Int, variant: String) -> UIImage? {
+    func getFrame(id foodID: UUID, variant: String) -> UIImage? {
         guard let index = frameIndex[foodID] else { return nil }
         guard index >= 0, index < timestamps.count else {
             print("❌ Frame index \(index) for food id \(foodID) is out of bounds")

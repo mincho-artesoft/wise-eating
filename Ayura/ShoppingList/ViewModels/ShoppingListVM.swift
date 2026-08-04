@@ -229,7 +229,7 @@ class ShoppingListViewModel: ObservableObject {
             }
             
             var uniqueSuggestions: [StorageItem] = []
-            var seenIDs = Set<Int>()
+            var seenIDs = Set<UUID>()
             for item in finalSuggestions {
                 if let food = item.food, !seenIDs.contains(food.id) {
                     uniqueSuggestions.append(item)
@@ -260,7 +260,7 @@ class ShoppingListViewModel: ObservableObject {
             let recentBaseProducts = recentComplexItems.flatMap { unpackIngredients(from: $0) }
             
             var uniqueRecentFoods: [FoodItem] = []
-            var seenIDs = Set<Int>()
+            var seenIDs = Set<UUID>()
             for item in recentBaseProducts {
                 if !seenIDs.contains(item.id) {
                     uniqueRecentFoods.append(item)

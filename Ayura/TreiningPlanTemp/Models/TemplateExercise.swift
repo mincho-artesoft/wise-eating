@@ -3,6 +3,7 @@ import SwiftData
 
 @Model
 final class TemplateExercise: Identifiable {
+    @Attribute(.unique) public var id: UUID
     public var exerciseName: String
     public var durationMinutes: Double
 
@@ -11,7 +12,8 @@ final class TemplateExercise: Identifiable {
 
     public var workout: TemplateWorkout?
 
-    public init(exerciseName: String, durationMinutes: Double) {
+    public init(id: UUID = UUID(), exerciseName: String, durationMinutes: Double) {
+        self.id = id
         self.exerciseName = exerciseName
         self.durationMinutes = durationMinutes
     }

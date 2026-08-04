@@ -30,7 +30,23 @@ fileprivate struct WizardData {
 fileprivate enum WizardStep: Int, Identifiable {
     case name, photo, birthday, gender, height, weight, meals, trainings, vitamins, minerals, allergens, constitution, summary
 
-    var id: Int { self.rawValue }
+    var id: UUID { Self.stableIDs[rawValue] }
+
+    private static let stableIDs: [UUID] = [
+        UUID(uuidString: "E16BE25C-9D63-5DFB-93DF-ABF0C695D36C")!,
+        UUID(uuidString: "3B78288C-14E6-5F68-9260-C3F2BF284A5D")!,
+        UUID(uuidString: "4551C432-B3D8-53E6-8BE5-9E326D4095FE")!,
+        UUID(uuidString: "DFDBCA54-9BEF-52AF-ACF9-37CA60990ABC")!,
+        UUID(uuidString: "81DE1EB9-6B72-5CC0-8E5C-AFAB0F2FDC20")!,
+        UUID(uuidString: "BDE9A40C-A4DC-5AA1-AB1C-CD6715F8667D")!,
+        UUID(uuidString: "7E7C42DF-396D-54A2-B39A-7AF27432AABC")!,
+        UUID(uuidString: "C7A21808-AC78-50AB-87E8-095680592A2C")!,
+        UUID(uuidString: "76FF218C-EC3D-5982-8D45-D13723A8355F")!,
+        UUID(uuidString: "AFA75CF7-B523-5DCA-B26C-D2BEBED23C61")!,
+        UUID(uuidString: "8FB0B362-856D-5722-8D47-F7991A8EF75E")!,
+        UUID(uuidString: "284D50DA-2DE5-5107-A7C2-9728118077DE")!,
+        UUID(uuidString: "0C4A33AA-0509-54AE-9AE3-0E79168C3A49")!,
+    ]
 
     var title: String {
         switch self {

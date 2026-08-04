@@ -791,7 +791,7 @@ final class AITrainingPlanGenerator {
                 return existing
             }
             try Task.checkCancellation()
-            let newID = try Self.nextExerciseID(in: ctx)
+            let newID = UUID()
             try Task.checkCancellation()
             let model = ExerciseItem(id: newID, name: finalName, description: dto.desc, metValue: dto.metValue, isUserAdded: false, muscleGroups: dto.muscleGroups, minimalAgeMonths: dto.minimalAgeMonths)
             try Task.checkCancellation()
@@ -818,19 +818,6 @@ final class AITrainingPlanGenerator {
         if toks.contains("curl") { return "curl" }
         if toks.contains("plank") { return "plank" }
         return toks.last ?? s.lowercased()
-    }
-    
-    private static func nextExerciseID(in ctx: ModelContext) throws -> Int {
-        try Task.checkCancellation()
-        var fd = FetchDescriptor<ExerciseItem>()
-        try Task.checkCancellation()
-        fd.sortBy = [SortDescriptor(\.id, order: .reverse)]
-        try Task.checkCancellation()
-        fd.fetchLimit = 1
-        try Task.checkCancellation()
-        let maxID = try ctx.fetch(fd).first?.id ?? 0
-        try Task.checkCancellation()
-        return maxID + 1
     }
     
     private func workoutSignature(_ workout: ConceptualWorkout, replacing: ConceptualExercise? = nil, with newName: String? = nil) -> String {
