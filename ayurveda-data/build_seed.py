@@ -112,11 +112,12 @@ NUTRIENT_CATALOG = {
     "manganese": ("minerals", "mg"),
     "fluoride": ("minerals", "µg"),
 }
-# NUT-1 Phase 1b is source-only. These 66 approved IFCT mappings are validated
-# at ingest but deliberately excluded from recipe panels and shipped artifacts.
-# One mapping, vitamins.vitaminD, targets an existing field; the other 65 are
-# new structural fields in dravya_foods.json. A future propagation packet must
-# measure cold launch before expanding NUTRIENT_CATALOG.
+# NUT-1 Phase 1b added 65 structural fields that are validated at ingest but
+# deliberately excluded from shipped artifacts. vitamins.vitaminD is also
+# listed here only so its ingest unit is validated: unlike those 65 fields it
+# already belongs to NUTRIENT_CATALOG and therefore remains a shipped nutrient.
+# A future propagation packet must measure cold launch before expanding the
+# shipped catalogue with any of the 65 structural fields.
 SOURCE_ONLY_NUTRIENT_CATALOG = {
     ("macronutrients", "insolubleFiber"): ("g", False),
     ("macronutrients", "solubleFiber"): ("g", False),
@@ -804,12 +805,33 @@ def load_dravya_food_nutrition(path: Path) -> dict[str, dict[str, float]]:
                     raise BuildError(
                         f"{path}: {dravya_id} {nutrient} has invalid value {value!r}"
                     )
-                if (section, nutrient) not in SOURCE_ONLY_NUTRIENT_CATALOG:
-                    panel[nutrient] = float(value)
+                # This loop is defined by the shipped catalogue. The one key
+                # also present in SOURCE_ONLY_NUTRIENT_CATALOG (vitaminD) is
+                # there for additional ingest validation, not suppression.
+                panel[nutrient] = float(value)
         # _review, dravyaId, and the unstable numeric id deliberately do not
         # enter the returned ingest payload.
         nutrition_by_dravya[dravya_id] = panel
     return nutrition_by_dravya
+
+
+def load_dravya_food_nutrition_statuses(path: Path) -> dict[str, str]:
+    """Return the shipped panel status without propagating review scaffolding."""
+    try:
+        foods = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise BuildError(f"cannot load dravya nutrient source {path}: {error}") from error
+    if not isinstance(foods, list):
+        raise BuildError(f"{path}: expected a top-level array")
+    statuses: dict[str, str] = {}
+    for food in foods:
+        if not isinstance(food, dict) or not isinstance(food.get("dravyaId"), str):
+            raise BuildError(f"{path}: dravya food has no stable dravyaId")
+        review = food.get("_review", {})
+        statuses[food["dravyaId"]] = (
+            "derived" if review.get("provenance") == "derived" else "measured"
+        )
+    return statuses
 
 
 def load_withdrawn_dravya_nutrition_ids(path: Path) -> set[str]:
@@ -2507,6 +2529,44 @@ def rounded(value: float) -> float:
     return round(value, 12)
 
 
+def dravya_nutrition_payload(
+    food_id: int,
+    is_placeholder: bool,
+    nutrition_by_id: dict[int, dict[str, float]],
+    status: str = "measured",
+) -> dict[str, Any] | None:
+    """Emit a measured per-100 g panel for a placeholder dravya, or None.
+
+    A dravya bound to a real USDA row already carries that row's nutrition on
+    the FoodItem itself. Placeholder panels arrive from dravya_foods.json via
+    merge_placeholder_nutrition, which has already dropped source nulls. An
+    empty panel is unsourced and must stay absent -- never zero.
+    """
+    if not is_placeholder:
+        return None
+    panel = nutrition_by_id.get(food_id)
+    if not panel:
+        return None
+    per_100g = {
+        nutrient: rounded(panel[nutrient])
+        for nutrient in NUTRIENT_CATALOG
+        if nutrient in panel
+    }
+    if not per_100g:
+        return None
+    if status not in {"measured", "derived"}:
+        raise BuildError(f"unsupported dravya nutrition status: {status}")
+    return {
+        "status": status,
+        "per100g": per_100g,
+        "units": {
+            nutrient: unit
+            for nutrient, (_section, unit) in NUTRIENT_CATALOG.items()
+            if nutrient in per_100g
+        },
+    }
+
+
 def reviewed_allergens(dravya: dict[str, Any]) -> set[str]:
     allergens = set(CATEGORY_ALLERGEN_RULES.get(dravya["category"], set()))
     dravya_id = dravya["id"]
@@ -2953,6 +3013,68 @@ def derive_recipe_nutrition(
     )
 
 
+def derive_dravya_composition(
+    composition: dict[str, Any],
+    nutrition_by_id: dict[int, dict[str, float]],
+    preferred_bindings: dict[str, int],
+) -> tuple[dict[str, Any] | None, list[int | None]]:
+    """Project an authored composition through the recipe nutrition engine.
+
+    The recipe engine remains the sole ingredient accumulator. A dravya
+    composition differs only in using its authored finished yield as the
+    per-100 g divisor. Added water documents the mass balance but contributes
+    no nutrient panel of its own. If any ingredient panel is absent, no
+    composition payload is returned; partial dravya panels are forbidden.
+    """
+    dravya_id = composition.get("dravyaId")
+    yield_g = composition.get("yieldG")
+    water_g = composition.get("waterG", 0)
+    if not isinstance(yield_g, (int, float)) or yield_g <= 0:
+        raise BuildError(f"{dravya_id}: composition yieldG must be greater than zero")
+    if not isinstance(water_g, (int, float)) or water_g < 0:
+        raise BuildError(f"{dravya_id}: composition waterG must be nonnegative")
+
+    ingredients = composition.get("ingredients")
+    if not isinstance(ingredients, list) or not ingredients:
+        raise BuildError(f"{dravya_id}: composition must have ingredients")
+    recipe_shape = {
+        "id": f"composition.{dravya_id}",
+        "servings": 1,
+        "ingredients": [
+            {
+                "dravyaId": ingredient["dravyaId"],
+                "name": ingredient["dravyaId"],
+                "grams": ingredient["grams"],
+            }
+            for ingredient in ingredients
+        ],
+    }
+    projected, source_ids = derive_recipe_nutrition(
+        recipe_shape, nutrition_by_id, preferred_bindings
+    )
+    if projected["status"] != "full" or any(
+        source_id is None for source_id in source_ids
+    ):
+        return None, source_ids
+
+    per_100g = {
+        nutrient: rounded(total * 100.0 / float(yield_g))
+        for nutrient, total in projected["perServing"].items()
+    }
+    return (
+        {
+            "status": "derived",
+            "per100g": per_100g,
+            "units": {
+                nutrient: unit
+                for nutrient, (_section, unit) in NUTRIENT_CATALOG.items()
+                if nutrient in per_100g
+            },
+        },
+        source_ids,
+    )
+
+
 def load_crosswalk_links(
     path: Path,
     store_ids: set[int],
@@ -3112,6 +3234,7 @@ def build_envelope(
     withdrawn_dravya_ids: set[str],
     source_safety_by_id: dict[int, dict[str, Any]],
     preferred_bindings: dict[str, int],
+    dravya_nutrition_status_by_id: dict[str, str] | None = None,
 ) -> tuple[dict[str, Any], list[tuple[int, str, str, list[str]]], list[str]]:
     age_rules = authored_age_rules(dravyas)
     validate_safety_rule_ids(dravyas, age_rules)
@@ -3134,6 +3257,7 @@ def build_envelope(
     links.extend(derived_links)
 
     output_dravyas: list[dict[str, Any]] = []
+    dravya_nutrition_status_by_id = dravya_nutrition_status_by_id or {}
     dravya_safety: dict[str, dict[str, Any]] = {}
     dravya_by_id = {dravya["id"]: dravya for dravya in dravyas}
     for dravya in sorted(dravyas, key=lambda item: item["id"]):
@@ -3143,6 +3267,12 @@ def build_envelope(
         output["inedibleReason"] = inedible_reason if not edible else None
         output["foodId"], output["foodIsPlaceholder"] = assignments[dravya["id"]]
         output["engineExcluded"] = dravya["id"] in ENGINE_EXCLUDED_IDS
+        output["nutrition"] = dravya_nutrition_payload(
+            output["foodId"],
+            output["foodIsPlaceholder"],
+            nutrition_by_id,
+            dravya_nutrition_status_by_id.get(dravya["id"], "measured"),
+        )
         output["safety"] = derive_dravya_safety(
             dravya,
             output["foodId"],
@@ -3418,6 +3548,9 @@ def main() -> int:
         store_ids = load_store_ids(actual_store_path)
         nutrition_by_id = load_food_nutrition(args.foods, store_ids)
         dravya_nutrition_by_id = load_dravya_food_nutrition(args.dravya_foods)
+        dravya_nutrition_status_by_id = load_dravya_food_nutrition_statuses(
+            args.dravya_foods
+        )
         withdrawn_dravya_ids = load_withdrawn_dravya_nutrition_ids(
             args.dravya_foods
         )
@@ -3454,6 +3587,7 @@ def main() -> int:
             withdrawn_dravya_ids,
             source_safety_by_id,
             preferred_bindings,
+            dravya_nutrition_status_by_id,
         )
         ontology, concept_overrides = load_food_concept_sources(
             data_root / "rules" / "food-concepts.json",

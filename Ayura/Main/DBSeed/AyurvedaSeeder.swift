@@ -19,6 +19,7 @@ enum AyurvedaSeeder {
     var replacedIngredientSets = 0
     var updatedRecipeFoods = 0
     var updatedDravyaFoods = 0
+    var nutritionAppliedFoods = 0
     var updatedSafetyFoods = 0
     var rebuiltSearchIndex = false
 
@@ -40,6 +41,7 @@ enum AyurvedaSeeder {
         || remappedFoodIDs > 0
         || updatedRecipeFoods > 0
         || updatedDravyaFoods > 0
+        || nutritionAppliedFoods > 0
         || updatedSafetyFoods > 0
         || replacedIngredientSets > 0
     }
@@ -54,6 +56,7 @@ enum AyurvedaSeeder {
         && replacedIngredientSets == 0
         && updatedRecipeFoods == 0
         && updatedDravyaFoods == 0
+        && nutritionAppliedFoods == 0
         && updatedSafetyFoods == 0
     }
 
@@ -143,6 +146,10 @@ enum AyurvedaSeeder {
           // one otherwise, and there are 375 of them.
           food.itemDescription = dravyaDescription(dravya)
           result.updatedDravyaFoods += 1
+        }
+        if let food = foodByID[dravya.foodId],
+           applyDravyaNutrition(dravya.nutrition, to: food) {
+          result.nutritionAppliedFoods += 1
         }
       }
       try validateIngredientTargets(seed.recipes, foodByID: foodByID)
@@ -282,7 +289,8 @@ enum AyurvedaSeeder {
           + "(\(result.insertedFoods) foods, \(result.insertedProfiles) profiles, "
           + "\(result.insertedLinks) links); updated \(result.updatedProfiles) profiles, "
           + "\(result.updatedLinks) links, \(result.updatedRecipeFoods) recipe foods, "
-          + "\(result.updatedSafetyFoods) safety rows; "
+          + "\(result.updatedSafetyFoods) safety rows; applied nutrition to "
+          + "\(result.nutritionAppliedFoods) dravya foods; "
           + "deleted \(result.deletedRows) rows "
           + "(\(result.deletedFoods) foods, \(result.deletedProfiles) profiles, "
           + "\(result.deletedLinks) links); remapped \(result.remappedFoodIDs) food ids "
@@ -294,6 +302,77 @@ enum AyurvedaSeeder {
       context.rollback()
       throw error
     }
+  }
+
+  /// Writes a sourced per-100 g panel onto a placeholder FoodItem.
+  ///
+  /// The Python builder has already omitted every source null. Missing keys
+  /// therefore remain absent here; they must never be materialized as zero.
+  /// A non-recipe FoodItem without an explicit weight is already interpreted
+  /// per 100 g, so these values are written without scaling or a weight value.
+  @discardableResult
+  private static func applyDravyaNutrition(
+    _ nutrition: DravyaDTO.Nutrition?,
+    to food: FoodItem
+  ) -> Bool {
+    guard let nutrition, !nutrition.per100g.isEmpty else { return false }
+
+    func nutrient(_ key: String) -> Nutrient? {
+      guard let value = nutrition.per100g[key],
+            let unit = nutrition.units[key] else { return nil }
+      return Nutrient(value: value, unit: unit)
+    }
+
+    let macros = MacronutrientsData(
+      carbohydrates: nutrient("carbohydrates"),
+      protein: nutrient("protein"),
+      fat: nutrient("fat"),
+      fiber: nutrient("fiber"),
+      totalSugars: nutrient("totalSugars")
+    )
+    let vitamins = VitaminsData(
+      vitaminA_RAE: nutrient("vitaminA_RAE"),
+      retinol: nutrient("retinol"),
+      caroteneAlpha: nutrient("caroteneAlpha"),
+      caroteneBeta: nutrient("caroteneBeta"),
+      cryptoxanthinBeta: nutrient("cryptoxanthinBeta"),
+      luteinZeaxanthin: nutrient("luteinZeaxanthin"),
+      lycopene: nutrient("lycopene"),
+      vitaminB1_Thiamin: nutrient("vitaminB1_Thiamin"),
+      vitaminB2_Riboflavin: nutrient("vitaminB2_Riboflavin"),
+      vitaminB3_Niacin: nutrient("vitaminB3_Niacin"),
+      vitaminB5_PantothenicAcid: nutrient("vitaminB5_PantothenicAcid"),
+      vitaminB6: nutrient("vitaminB6"),
+      folateDFE: nutrient("folateDFE"),
+      folateFood: nutrient("folateFood"),
+      folateTotal: nutrient("folateTotal"),
+      folicAcid: nutrient("folicAcid"),
+      vitaminB12: nutrient("vitaminB12"),
+      vitaminC: nutrient("vitaminC"),
+      vitaminD: nutrient("vitaminD"),
+      vitaminE: nutrient("vitaminE"),
+      vitaminK: nutrient("vitaminK"),
+      choline: nutrient("choline")
+    )
+    let minerals = MineralsData(
+      calcium: nutrient("calcium"),
+      iron: nutrient("iron"),
+      magnesium: nutrient("magnesium"),
+      phosphorus: nutrient("phosphorus"),
+      potassium: nutrient("potassium"),
+      sodium: nutrient("sodium"),
+      selenium: nutrient("selenium"),
+      zinc: nutrient("zinc"),
+      copper: nutrient("copper"),
+      manganese: nutrient("manganese"),
+      fluoride: nutrient("fluoride")
+    )
+
+    food.macronutrients = macros
+    food.vitamins = vitamins
+    food.minerals = minerals
+    food.other = OtherCompoundsData(energyKcal: nutrient("energyKcal"))
+    return true
   }
 
   private static let v5MergeTargets: [String: String] = [
@@ -1475,6 +1554,12 @@ private struct ServingDTO: Codable {
 }
 
 private struct DravyaDTO: Decodable {
+  struct Nutrition: Decodable {
+    let status: String
+    let per100g: [String: Double]
+    let units: [String: String]
+  }
+
   let id: String
   let name: String
   let sanskrit: String?
@@ -1504,6 +1589,7 @@ private struct DravyaDTO: Decodable {
   let foodId: Int
   let foodIsPlaceholder: Bool
   let engineExcluded: Bool
+  let nutrition: Nutrition?
   let safety: SafetyMetadataDTO
 }
 

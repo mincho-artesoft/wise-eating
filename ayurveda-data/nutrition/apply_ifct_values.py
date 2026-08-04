@@ -1,4 +1,9 @@
-import csv,json
+import argparse
+import collections
+import csv
+import json
+import sys
+from pathlib import Path
 
 from phase2_rulings import (
     AMBIGUOUS_BINDINGS,
@@ -111,6 +116,164 @@ def num(r,k):
     v=(r.get(C.get(k,''),'') or '').strip()
     try: return float(v)
     except: return None
+
+
+def projected_value(value, multiplier):
+    """Keep the established precision unless it would erase a measurement."""
+    projected = value * multiplier
+    rounded_value = round(projected, 4)
+    if projected != 0 and rounded_value == 0:
+        return round(projected, 12)
+    return rounded_value
+
+
+def apply_reviewed_batch(argv):
+    parser = argparse.ArgumentParser(
+        description="Apply a director-reviewed IFCT decision file without rerunning matching."
+    )
+    parser.add_argument("--reviewed", required=True, type=Path)
+    parser.add_argument("--foods", default=Path(B) / "dravya_foods.json", type=Path)
+    parser.add_argument("--dry-run", action="store_true")
+    args = parser.parse_args(argv)
+
+    reviewed = json.loads(args.reviewed.read_text(encoding="utf-8"))
+    accepted = [*reviewed.get("accept", []), *reviewed.get("accept_with_note", [])]
+    if len(accepted) != 17:
+        raise SystemExit(f"reviewed input must contain 17 accepts, got {len(accepted)}")
+    accepted_ids = [item["dravyaId"] for item in accepted]
+    if len(set(accepted_ids)) != len(accepted_ids):
+        raise SystemExit("reviewed input contains a duplicate accepted dravyaId")
+
+    foods = json.loads(args.foods.read_text(encoding="utf-8"))
+    before = json.loads(json.dumps(foods, ensure_ascii=False))
+    by_dravya = {row["dravyaId"]: row for row in foods}
+    if len(by_dravya) != len(foods):
+        raise SystemExit("dravya_foods.json contains duplicate dravyaId values")
+
+    status_before = collections.Counter(
+        row.get("_review", {}).get("status", "<missing>") for row in foods
+    )
+    changed_rows = []
+    zero_writes = []
+    invalid_zero_writes = []
+    for decision in accepted:
+        dravya_id = decision["dravyaId"]
+        row = by_dravya.get(dravya_id)
+        if row is None:
+            raise SystemExit(f"reviewed target is absent from dravya_foods.json: {dravya_id}")
+        code = decision["ifct"]
+        ifct_row = byc.get(code)
+        if ifct_row is None:
+            raise SystemExit(f"reviewed IFCT code is absent: {code}")
+        actual_name = ifct_row[C["name"]]
+        if actual_name != decision["ifctName"]:
+            raise SystemExit(
+                f"{dravya_id}: IFCT name drift for {code}: "
+                f"expected {decision['ifctName']!r}, got {actual_name!r}"
+            )
+
+        existing = [
+            f"{group}.{field}"
+            for group, fields in MAP.items()
+            for field in fields
+            if field in row.get(group, {})
+            and row[group][field].get("value") is not None
+        ]
+        if existing:
+            raise SystemExit(
+                f"{dravya_id}: refusing to replace existing values: {existing[:8]}"
+            )
+
+        populated = 0
+        for group, fields in MAP.items():
+            for field, (ifct_field, multiplier) in fields.items():
+                if field not in row.get(group, {}):
+                    continue
+                value = num(ifct_row, ifct_field)
+                if value is None:
+                    continue
+                projected = projected_value(value, multiplier)
+                row[group][field]["value"] = projected
+                populated += 1
+                if projected == 0:
+                    trace = f"{dravya_id}:{group}.{field}<-{ifct_field}"
+                    zero_writes.append(trace)
+                    if value != 0:
+                        invalid_zero_writes.append(f"{trace} (source={value})")
+        energy = num(ifct_row, "enerc")
+        if energy is not None and "energyKcal" in row.get("other", {}):
+            projected_energy = round(energy / 4.184, 1)
+            row["other"]["energyKcal"]["value"] = projected_energy
+            populated += 1
+            if projected_energy == 0:
+                trace = f"{dravya_id}:other.energyKcal<-enerc"
+                zero_writes.append(trace)
+                if energy != 0:
+                    invalid_zero_writes.append(f"{trace} (source={energy})")
+        if populated == 0:
+            raise SystemExit(f"{dravya_id}: reviewed IFCT row populated no values")
+
+        previous_review = row.get("_review", {})
+        review = {
+            "source": (
+                f"IFCT 2017 [{code}] {decision['ifctName']}; "
+                f"director-reviewed identity: {decision['why']}"
+            ),
+            "spread": (
+                f"regions sampled: {ifct_row[C['regn']]}; each nutrient has a "
+                "published SD in the _e column of ifct2017-compositions.csv"
+            ),
+            "status": "measured — IFCT 2017, director-reviewed NUT5 batch 1",
+            "provenance": "IFCT 2017",
+            "ifctCode": code,
+            "ifctName": decision["ifctName"],
+            "currentMinAgeMonths": previous_review.get("currentMinAgeMonths"),
+            "proposedMinAgeMonths": previous_review.get("proposedMinAgeMonths"),
+            "ageReason": previous_review.get("ageReason"),
+        }
+        if "note" in decision:
+            review["note"] = decision["note"]
+        row["_review"] = review
+        changed_rows.append((dravya_id, code, populated))
+
+    changed_ids = {
+        after["dravyaId"]
+        for old, after in zip(before, foods, strict=True)
+        if old != after
+    }
+    if changed_ids != set(accepted_ids):
+        raise SystemExit(
+            "reviewed apply changed the wrong rows: "
+            f"expected={sorted(accepted_ids)}, actual={sorted(changed_ids)}"
+        )
+    if invalid_zero_writes:
+        raise SystemExit(
+            "reviewed apply wrote zero from a nonzero source: "
+            f"{invalid_zero_writes}"
+        )
+
+    status_after = collections.Counter(
+        row.get("_review", {}).get("status", "<missing>") for row in foods
+    )
+    print("reviewed IFCT accepts")
+    for dravya_id, code, populated in changed_rows:
+        print(f"{dravya_id}|{code}|{populated}")
+    print("status histogram before:", json.dumps(status_before, ensure_ascii=False, sort_keys=True))
+    print("status histogram after:", json.dumps(status_after, ensure_ascii=False, sort_keys=True))
+    print(f"literal-source zero writes: {len(zero_writes)}")
+    if not args.dry_run:
+        args.foods.write_text(
+            json.dumps(foods, indent=1, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
+        print(f"wrote {args.foods}")
+
+
+if __name__ == "__main__" and ("--reviewed" in sys.argv or "--help" in sys.argv):
+    apply_reviewed_batch(sys.argv[1:])
+    raise SystemExit(0)
+
+
 m=json.load(open('/tmp/match.json'))
 exact={x[0]:(x[2],x[3]) for x in m['exact']}
 resolved_ambiguous={x[0]:x for x in m.get('resolvedAmbiguous',[])}
