@@ -1,6 +1,5 @@
 import SwiftData
 import Foundation
-import UIKit
 
 @MainActor
 enum SeedManager {
@@ -20,11 +19,6 @@ enum SeedManager {
         let ayurvedaChangedSearchableFoods = await seedAyurvedaIfNeeded(context: ctx)
         AyuraLaunchProbe.event("ayurveda-check-end")
         await seedExercisesIfNeeded(context: ctx)
-        await seedTrainingPlansIfNeeded(context: ctx)
-
-//        await MainActor.run {
-//            validateExercisesIntegrity(context: ctx)
-//        }
 
         do {
             if ctx.hasChanges {
@@ -216,28 +210,6 @@ enum SeedManager {
         }
     }
 
-    // MARK: – Training Plans (Templates)
-    private static func seedTrainingPlansIfNeeded(context ctx: ModelContext) async {
-        // ✅ FIX: проверяваме TemplatePlan (а не TrainingPlan)
-        let desc = FetchDescriptor<TemplatePlan>()
-        if ((try? ctx.fetchCount(desc)) ?? 0) > 0 {
-            return
-        }
-
-        print("   Seeding Training Plans from workouts.json...")
-        guard let url = Bundle.main.url(forResource: "workouts", withExtension: "json") else {
-            print("   ⚠️ workouts.json not found.")
-            return
-        }
-
-        do {
-            let data = try Data(contentsOf: url)
-            try await TrainingPlanImporter.shared.importTemplates(jsonData: data, context: ctx)
-        } catch {
-            print("   ❌ Failed to import training plans: \(error)")
-        }
-    }
-
     // MARK: – Helpers
     private static func databaseIsEmpty<T: PersistentModel>(
         entity: T.Type,
@@ -254,51 +226,6 @@ enum SeedManager {
         }
     }
 
-    // MARK: - Validation Logic
-    private static func validateExercisesIntegrity(context ctx: ModelContext) {
-        print("🔍 Validating Template Exercises against Main Database...")
-        let planCount = (try? ctx.fetchCount(FetchDescriptor<TemplatePlan>())) ?? 0
-        print("📊 [SeedManager] Total Template Plans in Database: \(planCount)")
-
-        var exerciseDescriptor = FetchDescriptor<ExerciseItem>()
-        exerciseDescriptor.propertiesToFetch = [\.name]
-
-        guard let allExercises = try? ctx.fetch(exerciseDescriptor) else {
-            print("   ❌ Failed to fetch ExerciseItems for validation.")
-            return
-        }
-
-        let existingNames = Set(allExercises.map { $0.name.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() })
-
-        var templateDescriptor = FetchDescriptor<TemplateExercise>()
-        templateDescriptor.propertiesToFetch = [\.exerciseName]
-
-        guard let allTemplateExercises = try? ctx.fetch(templateDescriptor) else {
-            print("   ❌ Failed to fetch TemplateExercises for validation.")
-            return
-        }
-
-        var missingNames = Set<String>()
-
-        for tex in allTemplateExercises {
-            let targetName = tex.exerciseName.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-            if !existingNames.contains(targetName) {
-                missingNames.insert(tex.exerciseName)
-            }
-        }
-
-        if missingNames.isEmpty {
-            print("   ✅ INTEGRITY CHECK PASSED: All template exercises exist in the main database.")
-        } else {
-            print("   ⚠️ INTEGRITY WARNING: Found \(missingNames.count) exercises in Templates that are MISSING from the main DB:")
-            print("   ---------------------------------------------------")
-            for name in missingNames.sorted() {
-                print("      ❌ \"\(name)\"")
-            }
-            print("   ---------------------------------------------------")
-            print("   👉 Action: Add these to 'exercises.json' or fix the spelling in 'workouts.json'.")
-        }
-    }
 }
 
 private struct VocabularySeedDTO: Decodable {

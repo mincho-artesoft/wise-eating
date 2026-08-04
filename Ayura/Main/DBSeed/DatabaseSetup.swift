@@ -56,21 +56,8 @@ struct DatabaseSetup {
             AyurvedaProfile.self, AyurvedaLink.self
         ]
         
-        // 2. Дефинираме типовете за ТЕМПЛЕЙТНАТА база (AyuraTemplates.store)
-        let templateTypes: [any PersistentModel.Type] = [
-            TemplatePlan.self,
-            TemplateDay.self,
-            TemplateWorkout.self,
-            TemplateExercise.self,
-            TemplateSet.self
-        ]
-        
-        // 3. Създаваме отделните схеми
+        // Създаваме единствената схема на приложението.
         let mainSchema = Schema(mainTypes)
-        let templateSchema = Schema(templateTypes)
-        
-        // 4. Обединена схема за контейнера
-        let fullSchema = Schema(mainTypes + templateTypes)
 
         do {
             let appSupportURL = try FileManager.default.url(
@@ -81,21 +68,14 @@ struct DatabaseSetup {
             )
             print("🚀 SwiftData Path: \(appSupportURL.path())")
             
-            // Конфигурация 1: Основна база
+            // Основна база
             let mainStoreURL = appSupportURL.appendingPathComponent("Ayura.store")
             let mainConfig = ModelConfiguration(
                 "AyuraDefault",
                 schema: mainSchema,
                 url: mainStoreURL
             )
-
-            // Конфигурация 2: Темплейти
-            let templateStoreURL = appSupportURL.appendingPathComponent("AyuraTemplates.store")
-            let templateConfig = ModelConfiguration(
-                "AyuraTemplates",
-                schema: templateSchema,
-                url: templateStoreURL
-            )
+            removeObsoleteTemplateStore(from: appSupportURL)
             
             // --- Логика за копиране на Pre-seeded база ---
             let usePreSeededDatabaseCopy = true
@@ -131,36 +111,6 @@ struct DatabaseSetup {
                     print("❌ Failed to prepare pre-seeded MAIN database: \(error). Using empty DB.")
                 }
                 
-                // =====================================================
-                // 2. TEMPLATES STORE COPY (Директно копиране)
-                // =====================================================
-                // Търсим файл "AyuraTemplates.store" в Bundle-а на приложението.
-                if let bundleTemplateURL = Bundle.main.url(forResource: "AyuraTemplates", withExtension: "store") {
-                    print("📄 Found pre-seeded 'AyuraTemplates.store' in Bundle. Copying...")
-                    
-                    // Почистване на дестинацията за Templates Store
-                    // Важно е да изтрием и WAL/SHM файловете, за да не се получи корупция
-                    let tBase = templateStoreURL.lastPathComponent
-                    let tWal = appSupportURL.appendingPathComponent(tBase + "-wal")
-                    let tShm = appSupportURL.appendingPathComponent(tBase + "-shm")
-                    
-                    for fileURL in [templateStoreURL, tWal, tShm] {
-                        if fm.fileExists(atPath: fileURL.path) {
-                            try? fm.removeItem(at: fileURL)
-                        }
-                    }
-                    
-                    do {
-                        // Директно копиране
-                        try fm.copyItem(at: bundleTemplateURL, to: templateStoreURL)
-                        print("✅ Successfully copied pre-seeded TEMPLATES database.")
-                    } catch {
-                        print("❌ Failed to copy AyuraTemplates.store: \(error)")
-                    }
-                } else {
-                    print("⚠️ 'AyuraTemplates.store' not found in Bundle resources. Skipping templates seed.")
-                }
-
                 // Маркираме, че сме приключили с първоначалното зареждане
                 UserDefaults.standard.set(true, forKey: didCopyDatabaseKey)
                 
@@ -169,17 +119,32 @@ struct DatabaseSetup {
             }
             AyuraLaunchProbe.event("preseed-check-end")
             
-            // Създаваме контейнера с двете именувани конфигурации
+            // Създаваме контейнера само с основната конфигурация.
             AyuraLaunchProbe.event("model-container-open-begin")
             let container = try ModelContainer(
-                for: fullSchema,
-                configurations: [mainConfig, templateConfig]
+                for: mainSchema,
+                configurations: [mainConfig]
             )
             AyuraLaunchProbe.event("model-container-open-end")
             return container
             
         } catch {
             fatalError("Failed to create model container: \(error)")
+        }
+    }
+
+    private static func removeObsoleteTemplateStore(from directory: URL) {
+        let baseName = "AyuraTemplates.store"
+        let fileManager = FileManager.default
+        for filename in [baseName, baseName + "-wal", baseName + "-shm"] {
+            let url = directory.appendingPathComponent(filename)
+            guard fileManager.fileExists(atPath: url.path) else { continue }
+            do {
+                try fileManager.removeItem(at: url)
+                print("🧹 Removed obsolete training-plan template store: \(filename)")
+            } catch {
+                print("⚠️ Could not remove obsolete template store \(filename): \(error)")
+            }
         }
     }
 }

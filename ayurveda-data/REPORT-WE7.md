@@ -36,13 +36,13 @@ This table was written before any removal, as required.
 | `product_buckets.json` | 65,629,090 | 7,639 product-bucket records | Copied into app bundle | `SeedManager.swift:80` | **LIVE** |
 | `sports.json` | 1,059,339 | 2,918 exercise records | Copied into app bundle | `SeedManager.swift:174` | **LIVE** |
 | `vocabulary.json` | 13,442,886 | 544,453 vocabulary entries | Copied into app bundle | `SeedManager.swift:60` | **LIVE** |
-| `workouts.json` | 2,509,350 | 1,777 workout-template records | Copied into app bundle | `SeedManager.swift:242`; direct lookup at `ExerciseListView.swift:459` | **LIVE** |
+| `workouts.json` | 2,509,350 | 1,777 workout-template records | Removed from app bundle | Template-plan feature removed | **REMOVED** |
 
 The nine Swift sources have 2,288 nonblank lines in total, and every nonblank line begins with `//`. They compile to empty object files but declare no symbols. They form one closed **DEAD** cluster. There are no files classified **REACHABLE-BUT-OBSOLETE**.
 
 ## LIVE-file founder decision list
 
-The five JSON resources stay. They are part of the runtime empty-table/fallback seed path, even though the WE-2 preseed normally makes that path unnecessary on a fresh install.
+The four remaining JSON resources stay. They are part of the runtime empty-table/fallback seed path, even though the WE-2 preseed normally makes that path unnecessary on a fresh install.
 
 | Live resource | What removal would require |
 |---|---|
@@ -50,9 +50,7 @@ The five JSON resources stay. They are part of the runtime empty-table/fallback 
 | `product_buckets.json` | Replace or remove the product-bucket fallback seed path in `SeedManager`. |
 | `sports.json` | Replace or remove the exercise fallback seed path in `SeedManager`. |
 | `vocabulary.json` | Replace or remove the vocabulary fallback seed path in `SeedManager`. |
-| `workouts.json` | Replace or remove both the template-plan fallback seed path and the direct exercise-view bundle lookup. |
-
-Those changes would alter active seed/fallback behavior and are outside WE-7's removal-only scope.
+The former `workouts.json` template seed and its runtime lookup were removed together with the training-plan template feature.
 
 ## Before-removal size baseline
 

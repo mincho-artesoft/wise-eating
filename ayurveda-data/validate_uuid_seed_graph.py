@@ -144,31 +144,6 @@ def validate_auxiliary(known_ids: set[str]) -> dict[str, int]:
         known_ids.update(ids)
         counts[filename.removesuffix(".json")] = len(rows)
 
-    templates = load_json(AYURA / "Legacy/workouts.json")
-    if templates.get("identitySchema") != "stable-uuid-v1":
-        raise AssertionError("workouts.json has no stable UUID schema")
-    template_ids: set[str] = set()
-    for plan in templates["plans"]:
-        plan_id = add_unique(template_ids, plan["id"], "templatePlan.id")
-        for day in plan["days"]:
-            day_id = add_unique(template_ids, day["id"], "templateDay.id")
-            if require_uuid(day["planId"], "templateDay.planId") != plan_id:
-                raise AssertionError("invalid template day relationship")
-            for workout in day["workouts"]:
-                workout_id = add_unique(template_ids, workout["id"], "templateWorkout.id")
-                if require_uuid(workout["dayId"], "templateWorkout.dayId") != day_id:
-                    raise AssertionError("invalid template workout relationship")
-                for exercise in workout["exercises"]:
-                    exercise_id = add_unique(template_ids, exercise["id"], "templateExercise.id")
-                    if require_uuid(exercise["workoutId"], "templateExercise.workoutId") != workout_id:
-                        raise AssertionError("invalid template exercise relationship")
-                    for item_set in exercise["sets"]:
-                        add_unique(template_ids, item_set["id"], "templateSet.id")
-                        if require_uuid(item_set["exerciseId"], "templateSet.exerciseId") != exercise_id:
-                            raise AssertionError("invalid template set relationship")
-    known_ids.update(template_ids)
-    counts["templateIdentities"] = len(template_ids)
-
     references = load_json(AYURA / "Legacy/reference_ids.json")
     reference_ids: set[str] = set()
     for rows in references["entities"].values():

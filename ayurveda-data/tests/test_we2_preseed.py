@@ -112,6 +112,14 @@ class PreseedArtifactTests(unittest.TestCase):
         ).fetchall()
         self.assertEqual(schema_objects, [])
 
+    def test_training_plan_template_artifacts_are_removed(self):
+        template_schema_objects = self.connection.execute(
+            "SELECT name FROM sqlite_master WHERE UPPER(name) LIKE '%TEMPLATE%'"
+        ).fetchall()
+        self.assertEqual(template_schema_objects, [])
+        self.assertFalse((REPO_ROOT / "Ayura" / "AyuraTemplates.store").exists())
+        self.assertFalse((REPO_ROOT / "Ayura" / "Legacy" / "workouts.json").exists())
+
     def test_removed_profile_and_exercise_fields_are_absent(self):
         profile_columns = {
             row[1]

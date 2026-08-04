@@ -32,7 +32,6 @@ struct ExerciseListView: View {
         case new, edit(ExerciseItem), detail(ExerciseItem)
         case newWorkout, editWorkout(ExerciseItem)
         case newPlan, editPlan(TrainingPlan), detailPlan(TrainingPlan)
-        case detailTemplate(TrainingPlanListVM.DisplayPlan)
 
         var id: String {
             switch self {
@@ -44,7 +43,6 @@ struct ExerciseListView: View {
             case .newPlan: "newPlan"
             case .editPlan(let plan): "editPlan-\(plan.id)"
             case .detailPlan(let plan): "detailPlan-\(plan.id)"
-            case .detailTemplate(let plan): "detailTemplate-\(plan.id)"
             }
         }
     }
@@ -118,7 +116,6 @@ struct ExerciseListView: View {
 
                 if !isSearching &&
                     (vm.filter != .default && vm.filter != .favorites) &&
-                    !(vm.filter == .plans && trainingPlanVM.selectedScope == .templates) &&
                     isAddButtonVisible &&
                     !navBarIsHiden {
                     addButton(geometry: geometry)
@@ -415,164 +412,132 @@ What would you like to do?
 
     private var trainingPlansSection: some View {
         VStack(spacing: 0) {
-            // 1. Табовете (My Plans / Templates)
-            WrappingSegmentedControl(
-                selection: $trainingPlanVM.selectedScope,
-                layoutMode: .wrap
-            )
-            .padding(.horizontal)
-            
-            // ✅ НОВО: Събтайтъл над целия списък, само ако сме в Templates
-            if trainingPlanVM.selectedScope == .templates {
-                HStack() {
-                    Image(systemName: "sparkles")
-                        .symbolRenderingMode(.hierarchical)
-                    Text("AI-assisted fitness training plans")
-                    Spacer()
-                }
-                .font(.title3)
-                .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
-                .padding(.top, 8)
-                .padding(.bottom, 2)
-                .padding(.horizontal, 12)
-                .transition(.opacity)
-            } else {
-                // Добавяме малко разстояние, когато няма събтайтъл, за да не залепва списъкът
-                Color.clear.frame(height: 10)
-            }
-            
-            // 2. Съдържанието (Списък или Empty State)
+            Color.clear.frame(height: 10)
+
             if trainingPlanVM.displayPlans.isEmpty {
                 if globalSearchText.isEmpty {
-                    let title = trainingPlanVM.selectedScope == .myPlans ? "No Training Plans" : "No Templates"
-                    let desc = trainingPlanVM.selectedScope == .myPlans
-                    ? "Create your first training plan manually or copy one from the Templates tab."
-                    : "No template plans are available at the moment."
-                    
-                    VStack(spacing: 16) {
-                        ContentUnavailableView(title, systemImage: "calendar.badge.clock", description: Text(desc))
-                            .foregroundStyle(effectManager.currentGlobalAccentColor)
-                        
-                        if trainingPlanVM.selectedScope == .templates {
-                            Button("Load Default Templates") {
-                                Task {
-                                    if let jsonURL = Bundle.main.url(forResource: "workouts", withExtension: "json"),
-                                       let data = try? Data(contentsOf: jsonURL) {
-                                        do {
-                                            try await TrainingPlanImporter.shared.importTemplates(jsonData: data, context: modelContext)
-                                            trainingPlanVM.fetchPlans()
-                                        } catch {
-                                            print("❌ Error importing templates: \(error)")
-                                        }
-                                    }
-                                }
-                            }
-                            .font(.caption)
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 8)
-                            .glassCardStyle(cornerRadius: 12)
-                            .foregroundColor(effectManager.currentGlobalAccentColor)
-                        }
-                    }
-                    .padding(.top, 20) // Малко отстояние от табовете при empty state
+                    ContentUnavailableView(
+                        "No Training Plans",
+                        systemImage: "calendar.badge.clock",
+                        description: Text("Create your first training plan.")
+                    )
+                    .foregroundStyle(effectManager.currentGlobalAccentColor)
+                    .padding(.top, 20)
                 } else {
                     ContentUnavailableView {
-                        Label("No Results for \"\(globalSearchText)\"", systemImage: "magnifyingglass")
-                            .foregroundStyle(effectManager.currentGlobalAccentColor)
+                        Label(
+                            "No Results for \"\(globalSearchText)\"",
+                            systemImage: "magnifyingglass"
+                        )
+                        .foregroundStyle(effectManager.currentGlobalAccentColor)
                     } description: {
                         Text("Check the spelling or try a new search.")
-                            .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
+                            .foregroundStyle(
+                                effectManager.currentGlobalAccentColor.opacity(0.8)
+                            )
                     }
                     .padding(.top, 20)
                 }
             } else {
                 List {
-                    ForEach(Array(trainingPlanVM.displayPlans.enumerated()), id: \.element.id) { index, planWrapper in
+                    ForEach(
+                        Array(trainingPlanVM.displayPlans.enumerated()),
+                        id: \.element.id
+                    ) { index, planWrapper in
                         VStack(spacing: 0) {
                             VStack(alignment: .leading, spacing: 6) {
-                                HStack(alignment: .top) {
-                                    Text(planWrapper.name)
-                                        .font(.headline)
-                                        .foregroundColor(effectManager.currentGlobalAccentColor)
-                                        .lineLimit(2)
-                                        .multilineTextAlignment(.leading)
-                                    
-                                    Spacer()
-                                }
-                                
+                                Text(planWrapper.name)
+                                    .font(.headline)
+                                    .foregroundColor(
+                                        effectManager.currentGlobalAccentColor
+                                    )
+                                    .lineLimit(2)
+                                    .multilineTextAlignment(.leading)
+
                                 HStack {
-                                    Text("\(planWrapper.dayCount) day\(planWrapper.dayCount == 1 ? "" : "s")")
+                                    Text(
+                                        "\(planWrapper.dayCount) day"
+                                            + (planWrapper.dayCount == 1 ? "" : "s")
+                                    )
                                     Text("•")
-                                    
-                                    if !planWrapper.isTemplate, let date = planWrapper.creationDate {
-                                        Text("Created: \(date.formatted(date: .abbreviated, time: .omitted))")
-                                    } else {
-                                        Text("Template")
-                                    }
-                                    
+                                    Text(
+                                        "Created: "
+                                            + planWrapper.creationDate.formatted(
+                                                date: .abbreviated,
+                                                time: .omitted
+                                            )
+                                    )
+
                                     if planWrapper.minAgeMonths > 0 {
                                         Text("•")
                                         Text("\(Int(planWrapper.minAgeMonths / 12))y+")
                                     }
                                 }
                                 .font(.caption)
-                                .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
+                                .foregroundColor(
+                                    effectManager.currentGlobalAccentColor.opacity(0.8)
+                                )
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding()
                             .glassCardStyle(cornerRadius: 20)
                             .contentShape(Rectangle())
                             .onTapGesture {
-                                if planWrapper.isTemplate {
-                                    present(item: .detailTemplate(planWrapper))
-                                } else if let realPlan = planWrapper.originalObject as? TrainingPlan {
-                                    present(item: .detailPlan(realPlan))
-                                }
+                                present(item: .detailPlan(planWrapper.plan))
                             }
-                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                if !planWrapper.isTemplate,
-                                   let realPlan = planWrapper.originalObject as? TrainingPlan {
-                                    
-                                    Button(role: .destructive) {
-                                        self.planToDeleteID = realPlan.id
-                                        self.planToDeleteName = realPlan.name
-                                        self.planToDeleteLinkedWorkoutCount = realPlan.days
-                                            .flatMap { $0.workouts }
-                                            .compactMap { $0.linkedWorkoutID }
-                                            .count
-                                        
-                                        self.isShowingDeletePlanConfirmation = true
-                                    } label: {
-                                        Image(systemName: "trash.fill")
-                                            .symbolRenderingMode(.palette)
-                                            .foregroundStyle(effectManager.currentGlobalAccentColor)
-                                    }
-                                    .tint(.clear)
-                                    
-                                    Button {
-                                        present(item: .editPlan(realPlan))
-                                    } label: {
-                                        Image(systemName: "pencil")
-                                            .symbolRenderingMode(.palette)
-                                            .foregroundStyle(effectManager.currentGlobalAccentColor)
-                                    }
-                                    .tint(.clear)
+                            .swipeActions(
+                                edge: .trailing,
+                                allowsFullSwipe: false
+                            ) {
+                                Button(role: .destructive) {
+                                    let plan = planWrapper.plan
+                                    planToDeleteID = plan.id
+                                    planToDeleteName = plan.name
+                                    planToDeleteLinkedWorkoutCount = plan.days
+                                        .flatMap { $0.workouts }
+                                        .compactMap { $0.linkedWorkoutID }
+                                        .count
+                                    isShowingDeletePlanConfirmation = true
+                                } label: {
+                                    Image(systemName: "trash.fill")
+                                        .symbolRenderingMode(.palette)
+                                        .foregroundStyle(
+                                            effectManager.currentGlobalAccentColor
+                                        )
                                 }
+                                .tint(.clear)
+
+                                Button {
+                                    present(item: .editPlan(planWrapper.plan))
+                                } label: {
+                                    Image(systemName: "pencil")
+                                        .symbolRenderingMode(.palette)
+                                        .foregroundStyle(
+                                            effectManager.currentGlobalAccentColor
+                                        )
+                                }
+                                .tint(.clear)
                             }
                             .padding(.vertical, 6)
-                            
+
                             if shouldShowAd(at: index) {
                                 AdRowView()
-                                    .padding(.top, 8)
-                                    .padding(.bottom, 8)
+                                    .padding(.vertical, 8)
                                     .transition(.opacity)
                             }
                         }
                         .listRowBackground(Color.clear)
                         .listRowSeparator(.hidden)
-                        .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+                        .listRowInsets(
+                            EdgeInsets(
+                                top: 0,
+                                leading: 16,
+                                bottom: 0,
+                                trailing: 16
+                            )
+                        )
                     }
-                    
+
                     Color.clear.frame(height: 150)
                         .listRowBackground(Color.clear)
                         .listRowSeparator(.hidden)
@@ -583,8 +548,14 @@ What would you like to do?
                     LinearGradient(
                         gradient: Gradient(stops: [
                             .init(color: .clear, location: 0),
-                            .init(color: effectManager.currentGlobalAccentColor, location: 0.01),
-                            .init(color: effectManager.currentGlobalAccentColor, location: 0.9),
+                            .init(
+                                color: effectManager.currentGlobalAccentColor,
+                                location: 0.01
+                            ),
+                            .init(
+                                color: effectManager.currentGlobalAccentColor,
+                                location: 0.9
+                            ),
                             .init(color: .clear, location: 0.95)
                         ]),
                         startPoint: .top,
@@ -784,29 +755,6 @@ What would you like to do?
                 onDismiss: onSimpleDismiss,
                 navBarIsHiden: $navBarIsHiden
             )
-        case .detailTemplate(let planWrapper):
-            TemplatePlanDetailView(
-                planWrapper: planWrapper,
-                profile: profile!,
-                onDismiss: onSimpleDismiss,
-                onGet: { selectedWorkoutName in
-                    onSimpleDismiss()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        withAnimation {
-                            if let newPlan = trainingPlanVM.copyTemplateToMyPlans(
-                                planWrapper,
-                                targetWorkoutName: selectedWorkoutName
-                            ) {
-                                present(item: .editPlan(newPlan))
-                            }
-                        }
-                    }
-                }
-            )
-            .onAppear {
-                navBarIsHiden = true
-                isAddButtonVisible = false
-            }
         }
     }
 

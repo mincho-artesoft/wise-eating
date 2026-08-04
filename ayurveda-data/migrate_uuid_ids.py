@@ -15,11 +15,6 @@ from stable_ids import (
     product_bucket_uuid,
     reference_entity_uuid,
     reference_requirement_uuid,
-    template_day_uuid,
-    template_exercise_uuid,
-    template_plan_uuid,
-    template_set_uuid,
-    template_workout_uuid,
     vocabulary_entry_uuid,
 )
 
@@ -142,128 +137,6 @@ def migrate_product_buckets(path: Path) -> int:
     return changed
 
 
-def _extract_day_index(title: str) -> int | None:
-    match = re.search(r"\bDay\s*(\d+)\b", title, re.IGNORECASE)
-    return int(match.group(1)) if match else None
-
-
-def _workout_display_name(plan_name: str, title: str) -> str:
-    prefix = plan_name + " - "
-    if title.startswith(prefix):
-        rest = title[len(prefix):].strip()
-        if rest:
-            return rest
-    return "Workout"
-
-
-def migrate_workout_templates(path: Path) -> int:
-    document = json.loads(path.read_text(encoding="utf-8"))
-    if isinstance(document, dict) and document.get("identitySchema") == "stable-uuid-v1":
-        for plan in document["plans"]:
-            if plan["id"] != template_plan_uuid(plan["name"]):
-                raise ValueError(f"{path}: plan UUID mismatch for {plan['name']}")
-        compact_json(path, document)
-        return 0
-    if not isinstance(document, list):
-        raise ValueError(f"{path}: expected legacy array or UUID document")
-
-    grouped: dict[str, list[dict]] = {}
-    for item in document:
-        plan_name = item["title"].split(" - ", 1)[0]
-        grouped.setdefault(plan_name, []).append(item)
-
-    plans: list[dict] = []
-    for plan_name in sorted(grouped, key=str.casefold):
-        plan_id = template_plan_uuid(plan_name)
-        mapped = [(_extract_day_index(row["title"]), row) for row in grouped[plan_name]]
-        has_explicit_day = any(day is not None for day, _ in mapped)
-        buckets: dict[int, list[dict]] = {}
-        if has_explicit_day:
-            for day, row in mapped:
-                buckets.setdefault(day or 0, []).append(row)
-        else:
-            for ordinal, (_, row) in enumerate(
-                sorted(mapped, key=lambda value: value[1]["title"].casefold()),
-                start=1,
-            ):
-                buckets.setdefault(ordinal, []).append(row)
-        zero = buckets.pop(0, [])
-        if zero:
-            max_day = max(buckets, default=0)
-            for offset, row in enumerate(
-                sorted(zero, key=lambda value: value["title"].casefold()),
-                start=1,
-            ):
-                buckets.setdefault(max_day + offset, []).append(row)
-
-        max_day = max(buckets, default=0)
-        days: list[dict] = []
-        for day_index in range(1, max_day + 1 if max_day else 2):
-            day_id = template_day_uuid(plan_id, day_index)
-            source_workouts = sorted(
-                buckets.get(day_index, []),
-                key=lambda value: value["title"].casefold(),
-            )
-            workouts: list[dict] = []
-            for workout_ordinal, source in enumerate(source_workouts):
-                workout_id = template_workout_uuid(
-                    plan_id,
-                    day_index,
-                    workout_ordinal,
-                    source["title"],
-                )
-                exercises: list[dict] = []
-                for exercise_ordinal, exercise in enumerate(source["exercises"]):
-                    exercise_id = template_exercise_uuid(
-                        workout_id, exercise_ordinal, exercise["name"]
-                    )
-                    sets = [
-                        {
-                            "id": template_set_uuid(exercise_id, order_index),
-                            "exerciseId": exercise_id,
-                            "reps": exercise.get("reps"),
-                            "isToFailure": exercise.get("to_failure", False),
-                            "isTimeBased": exercise.get("is_time_based", False),
-                            "timeUnitString": exercise.get("unit") or "sec",
-                            "orderIndex": order_index,
-                        }
-                        for order_index in range(max(exercise.get("sets", 0), 0))
-                    ]
-                    exercises.append(
-                        {
-                            "id": exercise_id,
-                            "workoutId": workout_id,
-                            "exerciseName": exercise["name"],
-                            "durationMinutes": float(exercise.get("duration", 0)),
-                            "sets": sets,
-                        }
-                    )
-                workouts.append(
-                    {
-                        "id": workout_id,
-                        "dayId": day_id,
-                        "workoutName": _workout_display_name(plan_name, source["title"]),
-                        "exercises": exercises,
-                    }
-                )
-            days.append(
-                {
-                    "id": day_id,
-                    "planId": plan_id,
-                    "dayIndex": day_index,
-                    "isRestDay": not bool(source_workouts),
-                    "workouts": workouts,
-                }
-            )
-        plans.append({"id": plan_id, "name": plan_name, "days": days})
-
-    compact_json(
-        path,
-        {"identitySchema": "stable-uuid-v1", "plans": plans},
-    )
-    return len(plans)
-
-
 def _reference_source_records(path: Path, constructor: str) -> list[tuple[str, int]]:
     text = path.read_text(encoding="utf-8")
     starts = list(re.finditer(rf"\b{constructor}\s*\(\s*\n\s*id:\s*\"([^\"]+)\"", text))
@@ -339,9 +212,6 @@ def main() -> int:
         ),
         "productBuckets": migrate_product_buckets(
             root / "Ayura/Legacy/product_buckets.json"
-        ),
-        "templatePlans": migrate_workout_templates(
-            root / "Ayura/Legacy/workouts.json"
         ),
         "referenceIDs": migrate_reference_ids(root),
     }

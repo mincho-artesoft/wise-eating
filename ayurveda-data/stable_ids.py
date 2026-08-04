@@ -55,29 +55,6 @@ def product_bucket_uuid(bucket_key: int) -> str:
     return stable_uuid("product-bucket", bucket_key)
 
 
-def template_plan_uuid(name: str) -> str:
-    return stable_uuid("template-plan", name)
-
-
-def template_day_uuid(plan_id: str, day_index: int) -> str:
-    return stable_uuid("template-day", f"{plan_id}:{day_index}")
-
-
-def template_workout_uuid(plan_id: str, day_index: int, ordinal: int, title: str) -> str:
-    return stable_uuid(
-        "template-workout",
-        f"{plan_id}:{day_index}:{ordinal}:{title}",
-    )
-
-
-def template_exercise_uuid(workout_id: str, ordinal: int, name: str) -> str:
-    return stable_uuid("template-exercise", f"{workout_id}:{ordinal}:{name}")
-
-
-def template_set_uuid(exercise_id: str, order_index: int) -> str:
-    return stable_uuid("template-set", f"{exercise_id}:{order_index}")
-
-
 def reference_entity_uuid(kind: str, key: str) -> str:
     return stable_uuid(f"reference-{kind}", key)
 
