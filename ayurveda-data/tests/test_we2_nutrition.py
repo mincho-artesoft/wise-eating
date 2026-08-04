@@ -51,6 +51,34 @@ def normalized_tokens(value):
     )
 
 
+class NutritionUnitSchemaTests(unittest.TestCase):
+    def test_dravya_food_units_match_the_canonical_catalogue(self):
+        path = REPO_ROOT / "ayurveda-data" / "nutrition" / "dravya_foods.json"
+        rows = json.loads(path.read_text(encoding="utf-8"))
+
+        for row in rows:
+            for nutrient, (group, expected_unit) in (
+                build_seed.NUTRIENT_CATALOG.items()
+            ):
+                with self.subTest(
+                    dravya_id=row["dravyaId"],
+                    group=group,
+                    nutrient=nutrient,
+                ):
+                    entry = row.get(group, {}).get(nutrient)
+                    self.assertIsInstance(entry, dict)
+                    actual_unit = entry.get("unit")
+                    equivalent_micrograms = {
+                        actual_unit,
+                        expected_unit,
+                    } == {"ug", "µg"}
+                    self.assertTrue(
+                        actual_unit == expected_unit or equivalent_micrograms,
+                        f"{row['dravyaId']} {group}.{nutrient} uses "
+                        f"{actual_unit!r}, expected {expected_unit!r}",
+                    )
+
+
 class RecipeNutritionTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -64,6 +92,9 @@ class RecipeNutritionTests(unittest.TestCase):
         )
         cls.dravya_nutrition_by_id = build_seed.load_dravya_food_nutrition(
             dravya_foods_path
+        )
+        cls.dravya_nutrition_status_by_id = (
+            build_seed.load_dravya_food_nutrition_statuses(dravya_foods_path)
         )
         cls.withdrawn_dravya_ids = (
             build_seed.load_withdrawn_dravya_nutrition_ids(dravya_foods_path)
@@ -111,6 +142,7 @@ class RecipeNutritionTests(unittest.TestCase):
             cls.withdrawn_dravya_ids,
             cls.source_safety_by_id,
             cls.preferred_bindings,
+            cls.dravya_nutrition_status_by_id,
         )
 
     def test_kitchari_energy_matches_independent_hand_calculation(self):
@@ -212,6 +244,146 @@ class RecipeNutritionTests(unittest.TestCase):
             self.assertIn("energyKcal", panel["perServing"])
             self.assertIn("energyKcal", panel["per100g"])
 
+        seeder = (
+            REPO_ROOT / "Ayura/Main/DBSeed/AyurvedaSeeder.swift"
+        ).read_text(encoding="utf-8")
+        helper = seeder.split("private static func applyDravyaNutrition(", 1)[1]
+        helper = helper.split("return true", 1)[0]
+        swift_keys = set(re.findall(r'nutrient\("([A-Za-z0-9_]+)"\)', helper))
+        self.assertEqual(swift_keys, set(build_seed.NUTRIENT_CATALOG))
+
+    def test_nut5_dravya_panels_emit_without_null_to_zero_conversion(self):
+        source = {
+            row["dravyaId"]: row
+            for row in json.loads(
+                (
+                    REPO_ROOT / "ayurveda-data/nutrition/dravya_foods.json"
+                ).read_text(encoding="utf-8")
+            )
+        }
+        emitted = {
+            dravya["id"]: dravya["nutrition"]
+            for dravya in self.envelope["dravyas"]
+            if dravya.get("nutrition") is not None
+        }
+        self.assertEqual(len(emitted), 124)
+        self.assertEqual(
+            Counter(payload["status"] for payload in emitted.values()),
+            Counter({"measured": 84, "derived": 40}),
+        )
+        for dravya_id, payload in emitted.items():
+            self.assertTrue(payload["per100g"])
+            self.assertEqual(
+                set(payload["per100g"]), set(payload["units"]), dravya_id
+            )
+            for nutrient, value in payload["per100g"].items():
+                section, _unit = build_seed.NUTRIENT_CATALOG[nutrient]
+                source_value = source[dravya_id][section][nutrient]["value"]
+                self.assertIsNotNone(source_value, f"{dravya_id}:{nutrient}")
+                if value == 0:
+                    self.assertEqual(source_value, 0, f"{dravya_id}:{nutrient}")
+
+    def test_nut5_composition_engine_yield_and_missing_panel_policy(self):
+        composition = {
+            "dravyaId": "dravya.test-composition",
+            "yieldG": 400,
+            "waterG": 250,
+            "ingredients": [
+                {"dravyaId": "dravya.a", "grams": 100},
+                {"dravyaId": "dravya.b", "grams": 50},
+            ],
+        }
+        payload, source_ids = build_seed.derive_dravya_composition(
+            composition,
+            {
+                1: {"protein": 10.0, "vitaminC": 0.0},
+                2: {"protein": 20.0, "vitaminC": 0.0},
+            },
+            {"dravya.a": 1, "dravya.b": 2},
+        )
+        self.assertEqual(source_ids, [1, 2])
+        self.assertEqual(payload["status"], "derived")
+        self.assertEqual(payload["per100g"]["protein"], 5.0)
+        self.assertEqual(payload["per100g"]["vitaminC"], 0.0)
+
+        missing, missing_ids = build_seed.derive_dravya_composition(
+            composition,
+            {1: {"protein": 10.0}},
+            {"dravya.a": 1, "dravya.b": 2},
+        )
+        self.assertIsNone(missing)
+        self.assertEqual(missing_ids, [1, None])
+
+    def test_nut5_composition_review_annotations_are_complete(self):
+        nutrition_root = REPO_ROOT / "ayurveda-data/nutrition"
+        source = json.loads(
+            (nutrition_root / "nut5-batch1/compositions.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        records = {
+            row["dravyaId"]: row
+            for row in json.loads(
+                (nutrition_root / "dravya_foods.json").read_text(encoding="utf-8")
+            )
+        }
+        traces = []
+        affected = set()
+        for composition in source["compositions"]:
+            review = records[composition["dravyaId"]]["_review"]
+            self.assertTrue(review["status"].startswith("derived — computed from "))
+            self.assertEqual(review["source"], composition["basis"])
+            self.assertIn("established recipe per-nutrient aggregation", review["limitation"])
+            if "note" in composition:
+                self.assertEqual(review["note"], composition["note"])
+            row_traces = review.get("inheritedPartialObservationZeroes", [])
+            if row_traces:
+                affected.add(composition["dravyaId"])
+            for trace in row_traces:
+                self.assertTrue(trace["measuredZeroIngredients"])
+                self.assertTrue(trace["absentIngredients"])
+                nutrient = trace["nutrient"]
+                section, _unit = build_seed.NUTRIENT_CATALOG[nutrient]
+                self.assertEqual(
+                    records[composition["dravyaId"]][section][nutrient]["value"],
+                    0,
+                )
+                traces.append((composition["dravyaId"], nutrient))
+        self.assertEqual(len(traces), 28)
+        self.assertEqual(
+            affected,
+            {
+                "dravya.kitchari-mung-rice",
+                "dravya.kitchari-tridoshic",
+                "dravya.khichadi-vegetable",
+                "dravya.coconut-rice",
+                "dravya.lemon-rice",
+                "dravya.dal-tadka-mung",
+                "dravya.ambali",
+                "dravya.ragi-malt",
+                "dravya.payasam-mung",
+                "dravya.pongal-sweet",
+            },
+        )
+
+    def test_recipe_list_projection_reads_the_profile_payload(self):
+        projection = (
+            REPO_ROOT / "Ayura/Ayurveda/RecipeNutritionProjection.swift"
+        ).read_text(encoding="utf-8")
+        food_item = (
+            REPO_ROOT / "Ayura/Food/Models/FoodItem.swift"
+        ).read_text(encoding="utf-8")
+        seed_manager = (
+            REPO_ROOT / "Ayura/Main/DBSeed/SeedManager.swift"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn("profile.nutritionPer100gJSON", projection)
+        self.assertIn("profile.nutritionUnitsJSON", projection)
+        self.assertIn("RecipeNutritionProjection.shared.load(context: ctx)", seed_manager)
+        self.assertIn("RecipeNutritionProjection.shared.snapshot(foodID: item.id)", food_item)
+        for nutrient in build_seed.NUTRIENT_CATALOG:
+            self.assertIn(f'nutrient("{nutrient}")', food_item)
+
     def test_phase1b_fields_are_validated_but_not_propagated(self):
         self.assertEqual(len(build_seed.SOURCE_ONLY_NUTRIENT_CATALOG), 66)
         self.assertEqual(len(build_seed.NUTRIENT_CATALOG), 39)
@@ -243,7 +415,26 @@ class RecipeNutritionTests(unittest.TestCase):
         for panel in self.dravya_nutrition_by_id.values():
             self.assertTrue(set(panel) <= set(build_seed.NUTRIENT_CATALOG))
             self.assertFalse(set(panel) & (source_only_names - {"vitaminD"}))
-            self.assertNotIn("vitaminD", panel)
+
+        # Dravya and recipe panels are two emitters of one shipped catalogue.
+        # Derive the expected dravya keys directly from that catalogue and the
+        # source nulls so an overlapping validation-only entry cannot silently
+        # suppress a nutrient on just one path (as vitaminD once did).
+        source_by_id = {row["dravyaId"]: row for row in source}
+        for dravya_id, panel in self.dravya_nutrition_by_id.items():
+            expected = {
+                nutrient
+                for nutrient, (section, _unit) in (
+                    build_seed.NUTRIENT_CATALOG.items()
+                )
+                if source_by_id[dravya_id][section][nutrient]["value"] is not None
+            }
+            self.assertEqual(set(panel), expected, dravya_id)
+        for recipe in self.envelope["recipes"]:
+            self.assertTrue(
+                set(recipe["nutrition"]["per100g"])
+                <= set(build_seed.NUTRIENT_CATALOG)
+            )
 
         self.assertEqual(
             {
@@ -313,8 +504,8 @@ class Phase2NutritionTests(unittest.TestCase):
             for dravya_id, record in self.records.items()
             if populated_values(record)
         }
-        self.assertEqual(len(self.records), 376)
-        self.assertEqual(len(populated), 68)
+        self.assertEqual(len(self.records), 375)
+        self.assertEqual(len(populated), 124)
 
         withdrawn = self.unresolved["withdrawn"]
         self.assertEqual(len(withdrawn), 7)
@@ -329,11 +520,12 @@ class Phase2NutritionTests(unittest.TestCase):
         )
         for dravya_id, _, _, _ in withdrawn:
             self.assertFalse(populated_values(self.records[dravya_id]))
-        self.assertFalse(
-            any(
+        self.assertEqual(
+            sum(
                 record.get("_review", {}).get("provenance") == "derived"
                 for record in self.records.values()
-            )
+            ),
+            40,
         )
 
         added_ids = (
@@ -431,7 +623,7 @@ class Phase2NutritionTests(unittest.TestCase):
                 {tuple(candidate) for candidate in deferred_by_id[dravya_id][2]},
             )
 
-    def test_178_no_relation_records_are_unmatched_not_all_null(self):
+    def test_current_no_relation_records_are_unmatched_not_all_null(self):
         nutrition_root = REPO_ROOT / "ayurveda-data" / "nutrition"
         with (nutrition_root / "ifct2017-compositions.csv").open(
             encoding="utf-8", errors="replace"
@@ -469,9 +661,42 @@ class Phase2NutritionTests(unittest.TestCase):
             if populated_values(self.records[dravya_id])
         }
         self.assertEqual(len(ifct_keys), 3_435)
-        self.assertEqual(len(no_relation), 178)
-        self.assertEqual(len(no_relation - populated), 176)
-        self.assertEqual(populated, {"dravya.black-rice", "dravya.camel-milk"})
+        self.assertEqual(len(no_relation), 177)
+        self.assertEqual(len(no_relation - populated), 148)
+        self.assertEqual(
+            populated,
+            {
+                "dravya.basundi",
+                "dravya.black-rice",
+                "dravya.coconut-rice",
+                "dravya.curd-rice",
+                "dravya.camel-milk",
+                "dravya.besan-ladoo",
+                "dravya.khichadi-vegetable",
+                "dravya.kitchari-tridoshic",
+                "dravya.lassi-digestive",
+                "dravya.lassi-sweet",
+                "dravya.lemon-rice",
+                "dravya.masala-chai",
+                "dravya.pakhala",
+                "dravya.panchamrita",
+                "dravya.peanut-chikki",
+                "dravya.pomegranate-sweet",
+                "dravya.pongal-sweet",
+                "dravya.pongal-ven",
+                "dravya.ponnanganni",
+                "dravya.rabri",
+                "dravya.rose-milk",
+                "dravya.sattu-drink",
+                "dravya.shrikhand",
+                "dravya.steamed-modak",
+                "dravya.tamarind-rice",
+                "dravya.tender-tamarind-leaf",
+                "dravya.thandai",
+                "dravya.veg-pulao",
+                "dravya.white-peas",
+            },
+        )
         self.assertEqual(
             Counter(self.dravyas[dravya_id]["category"] for dravya_id in no_relation),
             Counter(
@@ -492,7 +717,7 @@ class Phase2NutritionTests(unittest.TestCase):
                     "leafy-green": 3,
                     "seed": 2,
                     "dairy": 2,
-                    "dry-fruit-nut": 2,
+                    "dry-fruit-nut": 1,
                     "legume": 2,
                 }
             ),

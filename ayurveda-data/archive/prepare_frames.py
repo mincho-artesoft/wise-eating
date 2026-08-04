@@ -27,6 +27,11 @@ WHAT IT REFUSES TO DO
 import argparse, glob, hashlib, io, json, os, re, sys, unicodedata, zipfile
 
 SAN = re.compile(r'[/\\:*?"<>|]')          # verbatim from build_food_index.py
+GENERATED_FRAME_KEY_OVERRIDES = {
+    # The dravya and recipe share a display name but have reviewed distinct art.
+    # Runtime is DB-id keyed, so the recipe gets a private physical-frame key.
+    "recipe-panchamrita": "recipe-panchamrita",
+}
 
 
 def zip_name(info):
@@ -55,6 +60,10 @@ def zip_name(info):
 
 def sanitize(name):
     return SAN.sub("_", unicodedata.normalize("NFC", name))
+
+
+def generated_frame_key(filename, authored_frame_key):
+    return GENERATED_FRAME_KEY_OVERRIDES.get(filename, sanitize(authored_frame_key))
 
 
 def main():
@@ -130,7 +139,7 @@ def main():
         if not row:
             print(f"  ! {stem} is on disk but not in jobs.json — skipped")
             continue
-        key = sanitize(row["frameKey"])
+        key = generated_frame_key(stem, row["frameKey"])
         newclaims.setdefault(key, []).append((row["kind"], p))
     # Two new images can claim one frame key, and the app cannot tell them apart:
     # FoodItem.swift looks a frame up by the sanitised FOOD NAME, so one name has

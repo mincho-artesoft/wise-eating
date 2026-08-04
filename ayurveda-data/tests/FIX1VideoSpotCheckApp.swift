@@ -85,7 +85,7 @@ private final class SpotCheckViewController: UIViewController {
         view.backgroundColor = .systemBackground
 
         summaryLabel.font = .boldSystemFont(ofSize: 18)
-        summaryLabel.text = "FIX-1 UI spot check: loading 10 frames…"
+        summaryLabel.text = "ID-key device check: loading 10 visible + 200 sampled frames…"
         summaryLabel.textAlignment = .center
         summaryLabel.numberOfLines = 2
         summaryLabel.accessibilityIdentifier = "fix1-summary"
@@ -156,7 +156,14 @@ private final class SpotCheckViewController: UIViewController {
     private func loadFrames() {
         DispatchQueue.global(qos: .userInitiated).async { [foods] in
             let images = foods.map {
-                FoodVideoSource.shared.getFrame(named: $0.name, variant: "144")
+                FoodVideoSource.shared.getFrame(id: $0.id, variant: "144")
+            }
+            let available = FoodVideoSource.shared.availableFoodIDs
+            let sampledIDs = (0..<200).map { position in
+                available[position * (available.count - 1) / 199]
+            }
+            let sampledImages = sampledIDs.map {
+                FoodVideoSource.shared.getFrame(id: $0, variant: "144")
             }
             DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
@@ -172,8 +179,14 @@ private final class SpotCheckViewController: UIViewController {
                         statusLabels[index].textColor = .systemRed
                     }
                 }
-                summaryLabel.text = "FIX-1 UI spot check: \(loaded)/\(foods.count) images rendered"
-                summaryLabel.textColor = loaded == foods.count ? .systemGreen : .systemRed
+                let sampledLoaded = sampledImages.compactMap { $0 }.count
+                summaryLabel.text = (
+                    "ID-key device check: \(loaded)/\(foods.count) visible; "
+                    + "\(sampledLoaded)/\(sampledIDs.count) sampled"
+                )
+                summaryLabel.textColor = (
+                    loaded == foods.count && sampledLoaded == sampledIDs.count
+                ) ? .systemGreen : .systemRed
             }
         }
     }

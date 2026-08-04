@@ -1,5 +1,5 @@
 {
-  "totalToGenerate": 1877,
+  "totalToGenerate": 1878,
   "batchSize": 100,
   "batches": 19,
   "reuseWithoutGeneration": 293,
@@ -2080,6 +2080,12 @@
       "kind": "dravya",
       "name": "Vetiver root",
       "frameKey": "Vetiver root"
+    },
+    {
+      "filename": "dravya-vida-salt",
+      "kind": "dravya",
+      "name": "Vida salt",
+      "frameKey": "Vida salt"
     },
     {
       "filename": "dravya-vidari-kanda",

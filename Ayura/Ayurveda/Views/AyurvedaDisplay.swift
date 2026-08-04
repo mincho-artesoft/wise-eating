@@ -80,6 +80,11 @@ struct AyurvedaDisplay: Sendable {
   let virya: String?
   let vipaka: String?
   let gunas: [String]
+  let modifierLabels: [String]
+  let viruddha: [String]
+  let contraindications: [String]
+  let engineExcluded: Bool
+  let edible: Bool
   let confidence: Double?
   let sanskrit: String?
 
@@ -126,7 +131,8 @@ struct AyurvedaDisplay: Sendable {
         tier: .derived(linkTier: link.tier),
         detail: detail,
         confidence: resolution.confidence,
-        vpk: vpk
+        vpk: vpk,
+        modifierLabels: modifiers.map(\.label)
       )
     case .computed(let computed):
       return AyurvedaDisplay(
@@ -139,6 +145,11 @@ struct AyurvedaDisplay: Sendable {
         virya: computed.virya,
         vipaka: nil,
         gunas: [],
+        modifierLabels: [],
+        viruddha: [],
+        contraindications: [],
+        engineExcluded: false,
+        edible: true,
         confidence: resolution.confidence,
         sanskrit: nil
       )
@@ -153,6 +164,11 @@ struct AyurvedaDisplay: Sendable {
         virya: estimate.virya,
         vipaka: nil,
         gunas: estimate.gunas,
+        modifierLabels: estimate.appliedModifiers.map(\.label),
+        viruddha: [],
+        contraindications: [],
+        engineExcluded: false,
+        edible: true,
         confidence: resolution.confidence,
         sanskrit: nil
       )
@@ -166,7 +182,8 @@ struct AyurvedaDisplay: Sendable {
     tier: AyurvedaDisplayMath.TierInput,
     detail: String,
     confidence: Double?,
-    vpk: DoshaVPK? = nil
+    vpk: DoshaVPK? = nil,
+    modifierLabels: [String] = []
   ) -> AyurvedaDisplay {
     let resolvedVPK = vpk ?? (
       vata: profile.doshaVata,
@@ -184,6 +201,11 @@ struct AyurvedaDisplay: Sendable {
       virya: profile.virya,
       vipaka: profile.vipaka,
       gunas: profile.gunas,
+      modifierLabels: modifierLabels,
+      viruddha: profile.viruddha,
+      contraindications: profile.contraindications,
+      engineExcluded: profile.engineExcluded,
+      edible: profile.edible,
       confidence: confidence,
       sanskrit: profile.sanskrit
     )

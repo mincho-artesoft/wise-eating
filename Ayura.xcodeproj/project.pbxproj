@@ -177,6 +177,7 @@
 			inputPaths = (
 				"$(SRCROOT)/tools/check-assets.sh",
 				"$(SRCROOT)/Ayura/Food/assets-manifest.json",
+				"$(SRCROOT)/Ayura/Food/frame_index.json",
 				"$(SRCROOT)/Ayura/Food/food_archive_144.mp4",
 				"$(SRCROOT)/Ayura/Food/food_archive_480.mp4",
 				"$(SRCROOT)/Ayura/Food/food_archive_1024.mp4.gz.part-aa",

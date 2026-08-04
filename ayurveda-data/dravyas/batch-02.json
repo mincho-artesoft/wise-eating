@@ -183,8 +183,8 @@
     {
       "id": "dravya.black-salt",
       "name": "Black salt",
-      "sanskrit": "Vida lavana",
-      "aliases": ["kala namak", "bit noon", "Vida salt", "bid lavan", "vit lavan"],
+      "sanskrit": "Sauvarchala lavana",
+      "aliases": ["kala namak", "bit noon"],
       "category": "salt-mineral",
       "rasa": ["salty"],
       "virya": "heating",

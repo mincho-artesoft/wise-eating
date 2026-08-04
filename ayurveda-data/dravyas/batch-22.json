@@ -535,6 +535,8 @@
       "sanskrit": "Shilajatu",
       "aliases": ["shilajeet", "mumijo", "mineral pitch"],
       "category": "medicinal",
+      "edible": false,
+      "inedibleReason": "supplement taken by dose — contamination risk, not a food",
       "rasa": ["astringent", "bitter", "pungent"],
       "virya": "heating",
       "vipaka": "pungent",

@@ -57,9 +57,14 @@ D34_EXPECTED_MODIFIERS = {
 }
 d34_normalized_tokens = build_seed.modifier_normalized_tokens
 TRACKED_FILE_SPLIT_LIMIT_BYTES = 90_000_000
-EXPECTED_SOURCE_COUNTS = {"dravyas": 705, "recipes": 1511}
+EXPECTED_SOURCE_COUNTS = {"dravyas": 704, "recipes": 1511}
 NUT3_PLACEHOLDER_MAPPING_SHA256 = (
-    "bc7afbfce5b0ec708aec1fea387a72806bbe5e6b4fd9d48747ae01d60736441b"
+    # CLOSE1 merged dravya.makhana (900201) into dravya.lotus-seed and
+    # dravya.round-melon-tinda-punjabi (900288) into dravya.tinda. No
+    # placeholder was added: 175 later placeholders shifted down by the
+    # mathematically expected offset with zero deviations. Prior value:
+    # bc7afbfce5b0ec708aec1fea387a72806bbe5e6b4fd9d48747ae01d60736441b.
+    "c0348d706d03685c93aa78b5f3ed9741b5f43eb772d1ab230cbbeb360944aba3"
 )
 NUT3_DRAVYA_TARGETS = {
     "dravya.fenugreek-greens": "dravya.methi-leaves",
@@ -75,7 +80,7 @@ NUT3_DRAVYA_TARGETS = {
     "dravya.cane-jaggery": "dravya.jaggery",
     "dravya.powdered-jaggery": "dravya.jaggery",
     "dravya.stevia-leaf": "dravya.stevia",
-    "dravya.vida-salt": "dravya.black-salt",
+    "dravya.vida-salt": "dravya.vida-salt",
     "dravya.iodized-salt": "dravya.sea-salt",
 }
 NUT3_NAME_COLLISIONS = {
@@ -156,9 +161,9 @@ def validate_nut3(here, repo_root, dravyas, recipes, errs):
         mapping_sha256 = hashlib.sha256(
             json.dumps(placeholder_mapping, separators=(",", ":")).encode("utf-8")
         ).hexdigest()
-        if placeholder_values != list(range(900_001, 900_377)):
+        if placeholder_values != list(range(900_001, 900_376)):
             errs.append(
-                "NUT3/G1: placeholder band is not exactly 900001-900376"
+                "NUT3/G1: placeholder band is not exactly 900001-900375"
             )
         if mapping_sha256 != NUT3_PLACEHOLDER_MAPPING_SHA256:
             errs.append(
@@ -445,15 +450,18 @@ def d34_validate(here, store, errs):
     except Exception as error:
         errs.append(f"D34/ayurveda_seed.json.gz: cannot read: {error}")
         return
-    if seed.get("seedVersion") != 7:
-        errs.append(f"D34/seed: expected seedVersion 7, got {seed.get('seedVersion')}")
+    if seed.get("seedVersion") != build_seed.SEED_VERSION:
+        errs.append(
+            "D34/seed: expected seedVersion "
+            f"{build_seed.SEED_VERSION}, got {seed.get('seedVersion')}"
+        )
     counts = seed.get("counts", {})
     expected_counts = {
-        "dravyas": 705,
+        "dravyas": 704,
         "recipes": TARGET_RECIPES,
         "catalogProfiles": build_seed.TARGET_CATALOG_PROFILES,
         "links": TARGET_AYURVEDA_LINKS,
-        "derivedLinks": 1966, "placeholders": 376,
+        "derivedLinks": 1966, "placeholders": 375,
         "categoryRules": 187, "modifiers": 14,
         "nutrition": {"full": 1508, "estimated": 3, "none": 0},
         "safety": {
@@ -462,7 +470,7 @@ def d34_validate(here, store, errs):
             "allergenTaggedRecipes": 1190,
             "honeyMinAgeDravyas": 4,
             "honeyMinAgeRecipes": 5,
-            "authoredAgeDravyas": 391,
+            "authoredAgeDravyas": 390,
             "legacyImportAgeDravyas": 314,
             "authoredAgeRecipes": 1457,
             "legacyImportAgeRecipes": 54,
@@ -824,6 +832,15 @@ def main():
                 errs.append(f"{b}/{i}: invalid guna {set(it['gunas']) - GUNA}")
             if it.get("category") not in CATEGORY:
                 errs.append(f"{b}/{i}: invalid category {it.get('category')}")
+            edible = it.get("edible", True)
+            inedible_reason = it.get("inedibleReason")
+            if not isinstance(edible, bool):
+                errs.append(f"{b}/{i}: edible must be a boolean")
+            if edible is False:
+                if not isinstance(inedible_reason, str) or not inedible_reason.strip():
+                    errs.append(f"{b}/{i}: edible false requires inedibleReason")
+            elif inedible_reason is not None:
+                errs.append(f"{b}/{i}: edible true must not carry inedibleReason")
             for k, v in it.get("dosha", {}).items():
                 if k not in ("vata", "pitta", "kapha") or not -2 <= v <= 2:
                     errs.append(f"{b}/{i}: bad dosha {k}={v}")

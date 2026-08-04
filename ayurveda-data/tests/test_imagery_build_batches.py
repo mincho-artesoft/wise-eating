@@ -42,7 +42,9 @@ class ImageryBuildBatchesTests(unittest.TestCase):
             reuse = json.loads((Path(output) / "reuse-map.json").read_text())
 
         self.assertIn("reuse denials loaded    : 26", result.stdout)
-        self.assertEqual(jobs["count"], 1_877)
+        # Restoring Vida added one job; CLOSE1 then merged the two duplicate
+        # dravyas makhana and Punjabi tinda into their canonical rows.
+        self.assertEqual(jobs["count"], 1_876)
         self.assertEqual(jobs["styleHash"], "c8d83786a68f")
         self.assertEqual(len(reuse), 293)
         self.assertTrue(

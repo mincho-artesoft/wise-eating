@@ -31,8 +31,8 @@ ARTIFACT_PARTS = [
 ]
 GOLDEN = ROOT / "ayurveda-data" / "tests" / "fixtures" / "we4_golden_queries.json"
 
-TARGET_FOODS = 14_488
-TARGET_PROFILES = 12_481
+TARGET_FOODS = 14_487
+TARGET_PROFILES = 12_480
 
 
 class WE4SearchTests(unittest.TestCase):
@@ -190,7 +190,7 @@ struct ParserHarness {
         self.assert_parse("virya:frothy tomato", "virya:frothy tomato", [])
         self.assert_parse("grains", "grains", [])
 
-    def test_prebuilt_index_matches_v9_global_fallback_projection(self):
+    def test_prebuilt_index_matches_v12_global_fallback_projection(self):
         combined = self.temporary_root / "preseeded_db.store.gz"
         store = self.temporary_root / "preseeded_db.store"
         with combined.open("wb") as destination:
@@ -208,7 +208,7 @@ struct ParserHarness {
                 """
             ).fetchone()
         version, food_count, payload_data = row
-        self.assertEqual((version, food_count), (11, TARGET_FOODS))
+        self.assertEqual((version, food_count), (12, TARGET_FOODS))
         payload = json.loads(payload_data)
         compact_by_id = {food["id"]: food for food in payload["compactFoods"]}
 
@@ -273,13 +273,13 @@ struct ParserHarness {
         }
         self.assertEqual(actual_index, expected_index)
         self.assertEqual(len(actual_index), 45)
-        self.assertEqual(sum(map(len, expected_index.values())), 99_454)
+        self.assertEqual(sum(map(len, expected_index.values())), 99_439)
         self.assertFalse(set(actual_index) & set(payload["invertedIndex"]))
 
     def test_engine_uses_index_intersection_and_exact_title_escape_hatch(self):
         engine = SEARCH_ENGINE.read_text(encoding="utf-8")
         index_store = INDEX_STORE.read_text(encoding="utf-8")
-        self.assertIn("currentIndexVersion: Int = 11", index_store)
+        self.assertIn("currentIndexVersion: Int = 12", index_store)
         self.assertIn("ayurvedaFacetIndex", index_store)
         self.assertIn("if let ayurveda = item.ayurvedaMetadata", engine)
         self.assertIn("AyurvedaSearchRanker.matches(", engine)

@@ -270,7 +270,7 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
             "Viruddha — incompatible combination",
             "Contraindication",
         ):
-            self.assertNotIn(display_only_field, section)
+            self.assertIn(display_only_field, section)
 
     def test_ai_draft_disclaimer_is_not_rendered(self):
         display = DISPLAY.read_text()

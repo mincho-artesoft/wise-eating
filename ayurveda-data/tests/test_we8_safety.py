@@ -222,8 +222,8 @@ class WE8PreseedSafetyTests(unittest.TestCase):
                 item["id"],
             )
             self.assertEqual(
-                compact["enforcedMinAgeMonths"],
-                safety["enforcedMinAgeMonths"],
+                compact.get("enforcedMinAgeMonths"),
+                safety["enforcedMinAgeMonths"] if item["edible"] else None,
                 item["id"],
             )
 

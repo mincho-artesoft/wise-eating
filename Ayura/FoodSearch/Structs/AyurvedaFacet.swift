@@ -84,7 +84,7 @@ struct AyurvedaFacet: Hashable, Sendable {
             AyurvedaFacetSeedDocument.self,
             from: plain
         )
-        guard seed.dravyas.count == 705,
+        guard seed.dravyas.count == 704,
               seed.recipes.count == 1_511,
               seed.catalogProfiles.count == 10_265,
               seed.links.count == 2_336 else {
@@ -107,7 +107,9 @@ struct AyurvedaFacet: Hashable, Sendable {
             }
             result[profile.foodId] = AyurvedaCanonicalSearchMetadata(
                 profile: profile,
-                enforcedMinAgeMonths: profile.safety.enforcedMinAgeMonths,
+                enforcedMinAgeMonths: profile.edible
+                    ? profile.safety.enforcedMinAgeMonths
+                    : nil,
                 sourceTier: nil
             )
         }
@@ -127,7 +129,9 @@ struct AyurvedaFacet: Hashable, Sendable {
             }
             result[link.fdcId] = AyurvedaCanonicalSearchMetadata(
                 profile: profile,
-                enforcedMinAgeMonths: profile.safety.enforcedMinAgeMonths,
+                enforcedMinAgeMonths: profile.edible
+                    ? profile.safety.enforcedMinAgeMonths
+                    : nil,
                 sourceTier: link.tier
             )
         }
@@ -301,6 +305,7 @@ private struct AyurvedaFacetSeedProfile: Decodable {
 
     let id: String
     let name: String
+    let edible: Bool
     let dosha: Dosha
     let seasons: [String]
     let timeOfDay: [String]

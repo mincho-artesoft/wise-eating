@@ -1,5 +1,5 @@
 {
-  "count": 1877,
+  "count": 1878,
   "createdBy": "build_batches.py",
   "styleHash": "c8d83786a68f",
   "jobs": [
@@ -6229,6 +6229,24 @@
         "kind": "dravya",
         "name": "Vetiver root",
         "frameKey": "Vetiver root"
+      }
+    },
+    {
+      "id": "img-7e0756eb87",
+      "type": "image",
+      "prompt": "Vida salt. A Michelin 5-star food presentation, photorealistic, ultra-high detail, professional studio lighting. The dish should be centered and fully visible, captured from a slight top-down (45°) angle. Present the food in a clean, minimal serving vessel appropriate to its texture: liquids or pourable foods → shown in a clear glass, cup, or bottle; creamy or semi-solid foods → shown in a bowl, cup, or parfait glass; solid foods → shown on a clean white ceramic plate. Use a plain, neutral background (white, gray, or soft gradient). No wood surfaces, no cutting boards, no textured tables, no additional props. No text, labels, or logos. Entire vessel visible with natural soft shadows.",
+      "settings": {
+        "aspectRatio": "1:1",
+        "model": "Nano Banana 2"
+      },
+      "output": {
+        "filename": "dravya-vida-salt",
+        "quality": "original"
+      },
+      "_row": {
+        "kind": "dravya",
+        "name": "Vida salt",
+        "frameKey": "Vida salt"
       }
     },
     {

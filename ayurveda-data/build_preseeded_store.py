@@ -25,24 +25,25 @@ from build_seed import (
 TARGET_EXPECTED = {
     "foods": TARGET_FOODS,
     "profiles": TARGET_PROFILES,
-    "dravyas": 705,
+    "dravyas": 704,
     "recipes": TARGET_RECIPES,
     "nutritionFull": 1_508,
     "nutritionEstimated": 3,
     "links": TARGET_AYURVEDA_LINKS,
     "cacheFoods": TARGET_FOODS,
-    "cacheVersion": 11,
+    "cacheVersion": 12,
+    "inedibleFoods": 6,
     "facetFoods": TARGET_FOODS,
     "metadataFoods": TARGET_FOODS,
     "linkedFacetFoods": 2_007,
     "facetKeys": 45,
-    "facetAssignments": 99_454,
-    "seedVersion": 7,
+    "facetAssignments": 99_439,
+    "seedVersion": 9,
     "ingredientLinks": TARGET_INGREDIENT_LINKS,
     "ingredientOwners": TARGET_INGREDIENT_OWNERS,
     "allergenTaggedDravyas": 155,
     "allergenTaggedRecipes": 1_190,
-    "positiveEnforcedAgeDravyas": 391,
+    "positiveEnforcedAgeDravyas": 389,
     "positiveEnforcedAgeRecipes": 5,
 }
 
@@ -579,11 +580,44 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
         require_equal(
             "invalid compact enforced ages",
             sum(
-                not isinstance(food.get("enforcedMinAgeMonths"), int)
-                or food["enforcedMinAgeMonths"] < 0
+                food.get("enforcedMinAgeMonths") is not None
+                and (
+                    not isinstance(food["enforcedMinAgeMonths"], int)
+                    or food["enforcedMinAgeMonths"] < 0
+                )
                 for food in compact_foods
             ),
             0,
+        )
+        inedible_food_ids = {
+            food_id
+            for food_id, is_edible in connection.execute(
+                "SELECT ZID, ZISEDIBLE FROM ZFOODITEM"
+            )
+            if not is_edible
+        }
+        compact_inedible_food_ids = {
+            food["id"] for food in compact_foods if food.get("isEdible") is False
+        }
+        compact_nil_age_ids = {
+            food["id"]
+            for food in compact_foods
+            if food.get("enforcedMinAgeMonths") is None
+        }
+        require_equal(
+            "inedible FoodItem count",
+            len(inedible_food_ids),
+            EXPECTED["inedibleFoods"],
+        )
+        require_equal(
+            "compact edibility differs from FoodItem",
+            compact_inedible_food_ids,
+            inedible_food_ids,
+        )
+        require_equal(
+            "compact nil enforced ages differ from inedible foods",
+            compact_nil_age_ids,
+            inedible_food_ids,
         )
         # A linked USDA row keeps its own legacy display age while inheriting
         # the canonical profile's safety floor. The inherited floor may
@@ -621,7 +655,7 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
         require_equal(
             "positive enforced-age canonical dravyas",
             sum(
-                compact_by_id[food_id]["enforcedMinAgeMonths"] > 0
+                (compact_by_id[food_id].get("enforcedMinAgeMonths") or 0) > 0
                 for food_id in dravya_food_ids
             ),
             EXPECTED["positiveEnforcedAgeDravyas"],
@@ -629,7 +663,7 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
         require_equal(
             "positive enforced-age canonical recipes",
             sum(
-                compact_by_id[food_id]["enforcedMinAgeMonths"] > 0
+                (compact_by_id[food_id].get("enforcedMinAgeMonths") or 0) > 0
                 for food_id in recipe_food_ids
             ),
             EXPECTED["positiveEnforcedAgeRecipes"],
@@ -637,15 +671,15 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
         require_equal(
             "authored canonical enforced-floor domain",
             {
-                compact_by_id[food_id]["enforcedMinAgeMonths"]
+                compact_by_id[food_id].get("enforcedMinAgeMonths")
                 for food_id in dravya_food_ids | recipe_food_ids
             },
-            {0, 6, 12, 60},
+            {None, 0, 6, 12, 60},
         )
         require_equal(
             "non-Ayurveda age enforcement differs from display",
             sum(
-                food["enforcedMinAgeMonths"] != food["minAgeMonths"]
+                food.get("enforcedMinAgeMonths") != food["minAgeMonths"]
                 for food_id, food in compact_by_id.items()
                 if food_id not in ayurveda_food_ids
             ),
@@ -673,8 +707,27 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
             "metadata enforced ages differ from compact ages",
             sum(
                 metadata.get("enforcedMinAgeMonths")
-                != compact_by_id[food_id]["enforcedMinAgeMonths"]
+                != compact_by_id[food_id].get("enforcedMinAgeMonths")
                 for food_id, metadata in metadata_by_id.items()
+            ),
+            0,
+        )
+        metadata_nil_age_ids = {
+            food_id
+            for food_id, metadata in metadata_by_id.items()
+            if metadata.get("enforcedMinAgeMonths") is None
+        }
+        require_equal(
+            "metadata nil enforced ages differ from inedible foods",
+            metadata_nil_age_ids,
+            inedible_food_ids,
+        )
+        require_equal(
+            "edible Ayurveda metadata missing enforced ages",
+            sum(
+                metadata.get("enforcedMinAgeMonths") is None
+                for food_id, metadata in metadata_by_id.items()
+                if food_id not in inedible_food_ids
             ),
             0,
         )

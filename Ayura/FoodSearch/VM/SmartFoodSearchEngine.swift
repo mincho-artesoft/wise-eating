@@ -365,7 +365,9 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
             clearResults()
             return
         }
-        let sorted = allFoods.sorted { $0.lowercasedName < $1.lowercasedName }
+        let sorted = allFoods
+            .filter(\.isEdible)
+            .sorted { $0.lowercasedName < $1.lowercasedName }
         fullResultIDs = sorted.map { $0.id }
         searchContext = SearchContext()
         isAyurvedaSearchActive = false
@@ -1043,6 +1045,7 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                     )
                 }
                 if excludedFoodIDs.contains(item.id) { continue }
+                if !item.isEdible { continue }
 
                 // Profiled foods must satisfy true facets. Unprofiled foods are
                 // deliberately retained so the UI can explain the coverage gap.
@@ -1064,12 +1067,14 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                 
                 if let mode = searchMode {
                     switch mode {
-                    case .recipes: if item.isRecipe || item.isMenu { continue }
-                    case .menus: if item.isMenu { continue }
-                    case .nutrients, .mealPlans:
-                        if let cons = profileConstraints {
-                            if Double(item.enforcedMinAgeMonths) > Double(cons.ageInMonths) { continue }
-                            if !cons.avoidedAllergens.isEmpty {
+                        case .recipes: if item.isRecipe || item.isMenu { continue }
+                        case .menus: if item.isMenu { continue }
+                        case .nutrients, .mealPlans:
+                            if let cons = profileConstraints {
+                                guard let enforcedMinAgeMonths = item.enforcedMinAgeMonths
+                                else { continue }
+                                if Double(enforcedMinAgeMonths) > Double(cons.ageInMonths) { continue }
+                                if !cons.avoidedAllergens.isEmpty {
                                 var hasAllergen = false
                                 for a in cons.avoidedAllergens { if item.contains(allergen: a) { hasAllergen = true; break } }
                                 if hasAllergen { continue }
@@ -1142,8 +1147,11 @@ final class SmartFoodSearch3: ObservableObject, @unchecked Sendable {
                     if rejectDueToNegativeIngredient { continue }
                 }
 
-                if let age = intent.targetConsumerAge,
-                   Double(item.enforcedMinAgeMonths) > age { continue }
+                if let age = intent.targetConsumerAge {
+                    guard let enforcedMinAgeMonths = item.enforcedMinAgeMonths
+                    else { continue }
+                    if Double(enforcedMinAgeMonths) > age { continue }
+                }
                 if intent.excludeAllAllergens && !item.allergens.isEmpty { continue }
                 
                 if !intent.allergenExclusions.isEmpty {

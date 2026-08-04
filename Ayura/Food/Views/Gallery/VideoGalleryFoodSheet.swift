@@ -184,7 +184,7 @@ struct VideoGalleryFoodSheet: View {
         
         await MainActor.run {
             let filtered = results.filter { item in
-                (item.photo != nil) || FoodVideoSource.shared.hasVideo(for: item.name)
+                (item.photo != nil) || FoodVideoSource.shared.hasVideo(for: item.id)
             }
             
             self.allMatchingItems = filtered

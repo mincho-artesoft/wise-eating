@@ -20,6 +20,8 @@ import SwiftData
   public var qualityState: String = "aiDraft"
   public var reviewNote: String?
   public var engineExcluded: Bool = false
+  public var edible: Bool = true
+  public var inedibleReason: String?
   public var seedVersion: Int
   public var sanskrit: String?
   public var aliases: [String] = []
@@ -65,6 +67,8 @@ import SwiftData
     qualityState: String = "aiDraft",
     reviewNote: String?,
     engineExcluded: Bool = false,
+    edible: Bool = true,
+    inedibleReason: String? = nil,
     seedVersion: Int,
     sanskrit: String?,
     aliases: [String] = [],
@@ -109,6 +113,8 @@ import SwiftData
     self.qualityState = qualityState
     self.reviewNote = reviewNote
     self.engineExcluded = engineExcluded
+    self.edible = edible
+    self.inedibleReason = inedibleReason
     self.seedVersion = seedVersion
     self.sanskrit = sanskrit
     self.aliases = aliases

@@ -201,11 +201,11 @@ final class FoodListVM: ObservableObject {
     
     private func makeEmptyStatePredicate(filter: FoodItemListView.Filter) -> Predicate<FoodItem> {
         switch filter {
-        case .foods:     return #Predicate<FoodItem> { $0.isUserAdded && !$0.isRecipe && !$0.isMenu }
-        case .recipes:   return #Predicate<FoodItem> { $0.isUserAdded && $0.isRecipe }
-        case .menus:     return #Predicate<FoodItem> { $0.isUserAdded && $0.isMenu }
-        case .favorites: return #Predicate<FoodItem> { $0.isFavorite }
-        case .default:   return #Predicate<FoodItem> { !$0.isUserAdded }
+        case .foods:     return #Predicate<FoodItem> { $0.isEdible && $0.isUserAdded && !$0.isRecipe && !$0.isMenu }
+        case .recipes:   return #Predicate<FoodItem> { $0.isEdible && $0.isUserAdded && $0.isRecipe }
+        case .menus:     return #Predicate<FoodItem> { $0.isEdible && $0.isUserAdded && $0.isMenu }
+        case .favorites: return #Predicate<FoodItem> { $0.isEdible && $0.isFavorite }
+        case .default:   return #Predicate<FoodItem> { $0.isEdible && !$0.isUserAdded }
         case .plans:     return #Predicate<FoodItem> { _ in false }
         }
     }

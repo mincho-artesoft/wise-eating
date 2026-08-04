@@ -187,13 +187,13 @@ class WE8CAgeDerivationTests(unittest.TestCase):
             collections.Counter(
                 safety["ageProvenance"] for safety in historical.values()
             ),
-            {"legacyImport": 314, "authored": 391},
+            {"legacyImport": 314, "authored": 389},
         )
         self.assertEqual(
             collections.Counter(
                 safety["ageProvenance"] for safety in self.dravya_safety.values()
             ),
-            {"legacyImport": 314, "authored": 391},
+            {"legacyImport": 314, "authored": 390},
         )
 
         model = FOOD_ITEM_MODEL.read_text(encoding="utf-8")
@@ -202,7 +202,8 @@ class WE8CAgeDerivationTests(unittest.TestCase):
         self.assertIn("public var ageProvenance: String?", model)
         self.assertIn("public var ageSource: String?", model)
         self.assertIn(
-            'food.minAgeMonths > 0 && food.ageProvenance != "legacyImport"',
+            'food.isEdible\n            && food.minAgeMonths > 0\n'
+            '            && food.ageProvenance != "legacyImport"',
             detail,
         )
         self.assertEqual(detail.count("if shouldDisplayMinimumAge"), 2)
@@ -210,21 +211,22 @@ class WE8CAgeDerivationTests(unittest.TestCase):
         self.assertIn("food.ageSource = safety.ageSource", seeder)
 
     def test_authored_age_sources_and_propagation_modes_are_complete(self):
-        self.assertEqual(len(self.dravyas), 705)
+        self.assertEqual(len(self.dravyas), 704)
         weaning_rule = next(
             rule
             for rule in self.age_rules
             if rule["propagation"] == build_seed.AGE_PROPAGATION_WEANING_FLOOR
         )
-        self.assertEqual(len(weaning_rule["ids"]), 367)
+        # The CLOSE1 makhana merge removed one member of this source rule.
+        self.assertEqual(len(weaning_rule["ids"]), 366)
 
         category_ids = {
             dravya["id"]
             for dravya in self.dravyas
             if dravya["category"] in {"dry-fruit-nut", "seed"}
         }
-        self.assertEqual(len(category_ids), 42)
-        self.assertEqual(len(build_seed.WHOLE_NUT_SEED_AGE_IDS), 18)
+        self.assertEqual(len(category_ids), 41)
+        self.assertEqual(len(build_seed.WHOLE_NUT_SEED_AGE_IDS), 17)
         self.assertEqual(len(build_seed.NO_FLOOR_NUT_SEED_IDS), 24)
         self.assertFalse(
             build_seed.WHOLE_NUT_SEED_AGE_IDS
@@ -348,8 +350,8 @@ class WE8CPreseedAgeTests(unittest.TestCase):
                 profile["id"],
             )
             self.assertEqual(
-                compact["enforcedMinAgeMonths"],
-                safety["enforcedMinAgeMonths"],
+                compact.get("enforcedMinAgeMonths"),
+                safety["enforcedMinAgeMonths"] if profile["edible"] else None,
                 profile["id"],
             )
 

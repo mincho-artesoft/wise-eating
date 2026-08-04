@@ -32,6 +32,9 @@ enum SeedManager {
                 print("💾 Final save of all seeded data successful.")
             }
 
+            let projectedRecipeCount = try RecipeNutritionProjection.shared.load(context: ctx)
+            print("   ✅ Loaded nutrition display data for \(projectedRecipeCount) recipes.")
+
             try SearchIndexStore.shared.rebuildIndexIfNeeded(
                 context: ctx,
                 force: ayurvedaChangedSearchableFoods
@@ -110,7 +113,7 @@ enum SeedManager {
                 try ctx.save()
             }
             UserDefaults.standard.set(seedVersion, forKey: "ayurvedaSeedVersion")
-            return result.changedSearchableFoods
+            return result.requiresSearchIndexRebuild
         } catch {
             ctx.rollback()
             print("   ❌ Ayurveda seeding failed; continuing without Ayurveda data: \(error)")

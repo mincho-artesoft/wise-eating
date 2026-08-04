@@ -1,12 +1,16 @@
 import Foundation
 import SwiftData
 
+private enum SearchIndexMigrationError: Error {
+    case countMismatch(expected: Int, actual: Int)
+}
+
 @MainActor
 final class SearchIndexStore {
     static let shared = SearchIndexStore()
 
     /// Bump this when the structure of CompactFoodItem / tokens changes
-    private let currentIndexVersion: Int = 11
+    private let currentIndexVersion: Int = 12
 
     // MARK: - In-Memory Cache
     private(set) var revision: UInt64 = 0
@@ -121,6 +125,28 @@ final class SearchIndexStore {
         print("🔎 SearchIndexStore: Full rebuild complete. Indexed \(foods.count) items.")
     }
 
+    /// Rebuilds the persisted cache as part of an in-flight catalogue
+    /// migration without committing the surrounding SwiftData transaction.
+    /// AyurvedaSeeder owns the eventual save or rollback.
+    func rebuildForCatalogueMigration(context: ModelContext) throws -> Int {
+        let foods = try context.fetch(FetchDescriptor<FoodItem>())
+        let canonicalMap = try ayurvedaSearchMap(context: context)
+        buildInMemory(
+            foods: foods,
+            canonicalMap: canonicalMap,
+            context: context
+        )
+        let rebuiltCount = compactFoods.count
+        try saveCache(context: context, persist: false)
+        guard rebuiltCount == foods.count else {
+            throw SearchIndexMigrationError.countMismatch(
+                expected: foods.count,
+                actual: rebuiltCount
+            )
+        }
+        return rebuiltCount
+    }
+
     // MARK: - 3. CRUD & Status Operations
     // ... (без промяна в updateFavoriteStatus, updateItem, removeItem, scheduleCacheSave) ...
 
@@ -136,6 +162,7 @@ final class SearchIndexStore {
             allergens: item.allergens,
             ph: item.ph, referenceWeightG: item.referenceWeightG,
             isRecipe: item.isRecipe, isMenu: item.isMenu, isFavorite: isFavorite,
+            isEdible: item.isEdible,
             ayurvedaFacets: item.ayurvedaFacets,
             ayurvedaMetadata: item.ayurvedaMetadata,
             nutrientValues: item.nutrientValues
@@ -209,8 +236,10 @@ final class SearchIndexStore {
         let newCompactItem = makeCompactItem(
             from: food,
             ayurvedaMetadata: refreshedMetadata,
-            enforcedMinAgeMonths: refreshedMetadata?.enforcedMinAgeMonths
-                ?? oldCompactItem.enforcedMinAgeMonths
+            enforcedMinAgeMonths: food.isEdible
+                ? (refreshedMetadata?.enforcedMinAgeMonths
+                    ?? oldCompactItem.enforcedMinAgeMonths)
+                : nil
         )
 
         let oldTokens = oldCompactItem.searchTokens
@@ -396,7 +425,10 @@ final class SearchIndexStore {
         revision &+= 1
     }
 
-    private func saveCache(context: ModelContext) throws {
+    private func saveCache(
+        context: ModelContext,
+        persist: Bool = true
+    ) throws {
         let payload = SearchIndexPayload(
             compactFoods: compactFoods.map { $0.asCodable() },
             invertedIndex: invertedIndex.mapValues { Array($0) },
@@ -417,7 +449,9 @@ final class SearchIndexStore {
             createdAt: .now
         )
         context.insert(cache)
-        try context.save()
+        if persist {
+            try context.save()
+        }
     }
 
     private func apply(payload: SearchIndexPayload) {
@@ -516,13 +550,16 @@ final class SearchIndexStore {
             name: food.name,
             searchTokens: tokenSet,
             minAgeMonths: food.minAgeMonths,
-            enforcedMinAgeMonths: enforcedMinAgeMonths ?? food.minAgeMonths,
+            enforcedMinAgeMonths: food.isEdible
+                ? (enforcedMinAgeMonths ?? food.minAgeMonths)
+                : nil,
             allergens: allergenNames,
             ph: phValue,
             referenceWeightG: food.referenceWeightG,
             isRecipe: food.isRecipe,
             isMenu: food.isMenu,
             isFavorite: food.isFavorite,
+            isEdible: food.isEdible,
             ayurvedaFacets: adjustedAyurveda.facets,
             ayurvedaMetadata: adjustedAyurveda,
             nutrientValues: nutrientDict
@@ -557,7 +594,7 @@ final class SearchIndexStore {
                 if let preferred = userProfiles.first {
                     result[foodID] = AyurvedaCanonicalSearchMetadata(
                         profile: preferred,
-                        enforcedMinAgeMonths: bundledAge
+                        enforcedMinAgeMonths: preferred.edible ? bundledAge : nil
                     )
                 }
                 continue
@@ -569,7 +606,7 @@ final class SearchIndexStore {
                 }
                 result[foodID] = AyurvedaCanonicalSearchMetadata(
                     profile: preferred,
-                    enforcedMinAgeMonths: bundledAge
+                    enforcedMinAgeMonths: preferred.edible ? bundledAge : nil
                 )
             }
         }
@@ -590,7 +627,7 @@ final class SearchIndexStore {
             }
             result[link.fdcId] = AyurvedaCanonicalSearchMetadata(
                 profile: profile,
-                enforcedMinAgeMonths: profile.foodId > 0
+                enforcedMinAgeMonths: profile.edible && profile.foodId > 0
                     ? result[profile.foodId]?.enforcedMinAgeMonths
                     : nil,
                 sourceTier: link.tier
@@ -616,7 +653,9 @@ final class SearchIndexStore {
         if let preferred = userProfiles.first {
             return AyurvedaCanonicalSearchMetadata(
                 profile: preferred,
-                enforcedMinAgeMonths: bundled?.enforcedMinAgeMonths
+                enforcedMinAgeMonths: preferred.edible
+                    ? bundled?.enforcedMinAgeMonths
+                    : nil
             )
         }
 
@@ -627,7 +666,9 @@ final class SearchIndexStore {
         if let preferred = profiles.first {
             return AyurvedaCanonicalSearchMetadata(
                 profile: preferred,
-                enforcedMinAgeMonths: bundled?.enforcedMinAgeMonths
+                enforcedMinAgeMonths: preferred.edible
+                    ? bundled?.enforcedMinAgeMonths
+                    : nil
             )
         }
         return bundled
@@ -690,13 +731,14 @@ private struct SearchIndexPayload: Codable {
         let name: String
         let searchTokens: [String]
         let minAgeMonths: Int
-        let enforcedMinAgeMonths: Int
+        let enforcedMinAgeMonths: Int?
         let allergens: [String]
         let ph: Double
         let referenceWeightG: Double
         let isRecipe: Bool
         let isMenu: Bool
         let isFavorite: Bool
+        let isEdible: Bool
         let ayurvedaFacets: [String]
         let ayurvedaMetadata: AyurvedaCanonicalSearchMetadata?
         let nutrientValues: [String: Double]
@@ -726,6 +768,7 @@ private extension CompactFoodItem {
             isRecipe: isRecipe,
             isMenu: isMenu,
             isFavorite: isFavorite,
+            isEdible: isEdible,
             ayurvedaFacets: Array(ayurvedaFacets),
             ayurvedaMetadata: ayurvedaMetadata,
             nutrientValues: Dictionary(uniqueKeysWithValues: nutrientValues.map { ($0.key.rawValue, $0.value) })
@@ -748,6 +791,7 @@ private extension CompactFoodItem {
             isRecipe: codable.isRecipe,
             isMenu: codable.isMenu,
             isFavorite: codable.isFavorite,
+            isEdible: codable.isEdible,
             ayurvedaFacets: Set(codable.ayurvedaFacets),
             ayurvedaMetadata: codable.ayurvedaMetadata,
             nutrientValues: nutrientDict

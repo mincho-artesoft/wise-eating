@@ -40,7 +40,7 @@ ARTIFACT_PARTS = [
     ROOT / "Ayura" / "preseeded_db.store.gz.part-ab",
 ]
 
-TARGET_FOODS = 14_488
+TARGET_FOODS = 14_487
 
 
 class MP3DeterministicResolutionTests(unittest.TestCase):
@@ -66,7 +66,7 @@ class MP3DeterministicResolutionTests(unittest.TestCase):
             payload_data = connection.execute(
                 """
                 SELECT ZPAYLOADDATA FROM ZSEARCHINDEXCACHE
-                WHERE ZKEY = 'main' AND ZVERSION = 11
+                WHERE ZKEY = 'main' AND ZVERSION = 12
                 """
             ).fetchone()[0]
             profile_rows = connection.execute(
@@ -553,8 +553,8 @@ struct MP3ResolutionHarness {
             ["unicorn steak", "xyzzy", ""],
         )
         self.assertEqual(self.catalog_count, TARGET_FOODS)
-        self.assertEqual(self.excluded_count, 2)
-        self.assertEqual(self.candidate_count, TARGET_FOODS - 2)
+        self.assertEqual(self.excluded_count, 11)
+        self.assertEqual(self.candidate_count, TARGET_FOODS - 11)
 
     def test_required_scorer_properties(self):
         result = subprocess.run(

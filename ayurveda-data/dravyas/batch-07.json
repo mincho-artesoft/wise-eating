@@ -431,8 +431,8 @@
     {
       "id": "dravya.lotus-seed",
       "name": "Lotus seeds (makhana)",
-      "sanskrit": "Makhanna",
-      "aliases": ["makhana", "fox nuts", "phool makhana", "Popped lotus seed"],
+      "sanskrit": "Makhanna / Padma Beeja",
+      "aliases": ["makhana", "fox nuts", "phool makhana", "Popped lotus seed", "Fox nut (makhana)", "Makhanna", "Padma Beeja"],
       "category": "seed",
       "rasa": ["sweet", "astringent"],
       "virya": "cooling",
@@ -452,7 +452,7 @@
       "servings": [{"label": "1 cup roasted", "grams": 32}],
       "provenance": ["Bhavaprakasha Nighantu", "regional fasting tradition"],
       "confidence": {"ayur": 0.85, "sci": 0.75},
-      "reviewNote": "Canon popped-lotus vpk [-1, -1, -1] differs from the retained target [-1, -1, 0]. Pre-existing dravya.lotus-seed versus dravya.makhana identity remains out of scope."
+      "reviewNote": "Merged dravya.makhana: both records describe popped Euryale ferox seed. Retained the more-referenced USDA-linked record and folded in the Padma Beeja Sanskrit name and aliases. Canon popped-lotus vpk [-1, -1, -1] differs from the retained target [-1, -1, 0]."
     },
     {
       "id": "dravya.coconut-dried",

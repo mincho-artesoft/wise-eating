@@ -34,6 +34,8 @@ Every item in `dravyas/batch-NN.json`:
 | Field | Meaning / scale |
 |---|---|
 | `id`, `name`, `sanskrit`, `aliases`, `category` | identity |
+| `edible` | whether the item is eaten as a portion; defaults to `true` when omitted |
+| `inedibleReason` | required non-empty reason when `edible` is `false`; absent otherwise |
 | `rasa` | tastes: sweet, sour, salty, pungent, bitter, astringent |
 | `virya` | heating / cooling / neutral |
 | `vipaka` | post-digestive: sweet / sour / pungent |

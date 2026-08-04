@@ -43,6 +43,13 @@ struct FoodItemDetailView: View {
             let topIngredients = ingredients.prefix(3)
             let ingredientsStrings = topIngredients.map { link -> String in
                 let name = link.food?.name ?? "Ingredient"
+                if let ingredient = link.food, !ingredient.isEdible {
+                    let notes = ingredient.inedibleContraindications
+                        .joined(separator: "; ")
+                    return notes.isEmpty
+                        ? "\(name) — non-portioned"
+                        : "\(name) — non-portioned (\(notes))"
+                }
                 let grams = link.grams
                 let formattedGrams = grams.truncatingRemainder(dividingBy: 1) == 0
                     ? String(format: "%.0fg", grams)
@@ -57,6 +64,7 @@ struct FoodItemDetailView: View {
     }
     
     private var displayWeightG: Double? {
+        guard food.isEdible else { return nil }
         if food.isRecipe || food.isMenu { return food.totalWeightG }
         if let explicitWeight = food.other?.weightG?.value, explicitWeight > 0 { return explicitWeight }
         let p = food.macronutrients?.protein?.value ?? 0
@@ -76,7 +84,9 @@ struct FoodItemDetailView: View {
     }
 
     private var shouldDisplayMinimumAge: Bool {
-        food.minAgeMonths > 0 && food.ageProvenance != "legacyImport"
+        food.isEdible
+            && food.minAgeMonths > 0
+            && food.ageProvenance != "legacyImport"
     }
 
     var body: some View {
@@ -450,14 +460,28 @@ struct FoodItemDetailView: View {
                 VStack(alignment: .leading, spacing: 10) {
                     ForEach(ingredients) { link in
                         if let ingredient = link.food {
-                            HStack {
-                                Text(ingredient.name)
-                                    .foregroundColor(effectManager.currentGlobalAccentColor)
-                                
-                                Spacer()
-                                
-                                Text(formattedWeight(link.grams))
-                                    .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
+                            VStack(alignment: .leading, spacing: 4) {
+                                HStack {
+                                    Text(ingredient.name)
+                                        .foregroundColor(effectManager.currentGlobalAccentColor)
+
+                                    Spacer()
+
+                                    if ingredient.isEdible {
+                                        Text(formattedWeight(link.grams))
+                                            .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
+                                    } else {
+                                        Text("Non-portioned")
+                                            .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
+                                    }
+                                }
+                                if !ingredient.isEdible {
+                                    ForEach(ingredient.inedibleContraindications, id: \.self) { note in
+                                        Text(note)
+                                            .font(.caption)
+                                            .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
+                                    }
+                                }
                             }
                             .font(.subheadline)
                             if link.id != ingredients.last?.id { Divider() }

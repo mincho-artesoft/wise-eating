@@ -63,6 +63,9 @@ DESCRIPTOR_STOPWORDS = [
 
 EXPECTED = {
     "rows": 1966,
+    # Re-measured after the 714 -> 705 dravya consolidation: nine former
+    # contests disappeared with the merged records, and one later reviewed
+    # contest was added. Keep this loud gate pinned to the generated output.
     "contested": 59,
     "M2": 112,
     "F": 0,

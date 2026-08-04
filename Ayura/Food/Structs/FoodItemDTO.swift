@@ -70,6 +70,8 @@ struct FoodItemDTO: Codable, Sendable, Identifiable {
     var id: Int
     var name: String
     var minAgeMonths: Int?
+    var ageProvenance: String? = nil
+    var ageSource: String? = nil
     var desctiption: String?
     // ───── Tags/taxonomy ─────
     var allergens: [Allergen]?
@@ -93,6 +95,9 @@ struct FoodItemDTO: Codable, Sendable, Identifiable {
         )
         
         item.itemDescription = desctiption
+        item.minAgeMonths = minAgeMonths ?? 0
+        item.ageProvenance = ageProvenance
+        item.ageSource = ageSource
         // Mapping (без промени)
         if let m = macronutrients {
             item.macronutrients = MacronutrientsData(

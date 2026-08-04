@@ -2,5 +2,31 @@
   "formatVersion": "1.0",
   "batch": "dravya-batch-31",
   "qualityState": "aiDraft",
-  "items": []
+  "items": [
+    {
+      "id": "dravya.vida-salt",
+      "name": "Vida salt",
+      "sanskrit": "Vida Lavana",
+      "aliases": ["bid lavan", "vit lavan"],
+      "category": "salt-mineral",
+      "rasa": ["salty", "pungent"],
+      "virya": "heating",
+      "vipaka": "pungent",
+      "gunas": ["light", "sharp", "dry"],
+      "prabhava": "One of the pancha lavana. Distinctly anulomana — it moves vata downward and breaks up gulma and adhmana, which is why it sits in Hingvashtaka churna rather than at the table.",
+      "dosha": {"vata": -2, "pitta": 1, "kapha": 0},
+      "agniEffect": 2,
+      "digestibility": 4,
+      "seasons": ["varsha", "hemanta", "shishira"],
+      "timeOfDay": ["midday"],
+      "combinations": ["asafoetida", "ajwain", "cumin", "buttermilk", "digestive churna"],
+      "viruddha": [],
+      "contraindications": ["hypertension", "oedema", "pitta disorders", "skin inflammation", "pregnancy in quantity"],
+      "preparation": "A prepared salt, not a mined one. Used by the pinch in digestive churnas and over buttermilk; it is a medicine at culinary dose and should not replace common salt.",
+      "usda": [],
+      "servings": [{"label": "1 pinch", "grams": 0.3}, {"label": "1/4 tsp", "grams": 1.5}],
+      "provenance": ["Bhavaprakasha Nighantu, Lavana varga", "Sharangadhara Samhita (Hingvashtaka churna)"],
+      "confidence": {"ayur": 0.85, "sci": 0.5}
+    }
+  ]
 }

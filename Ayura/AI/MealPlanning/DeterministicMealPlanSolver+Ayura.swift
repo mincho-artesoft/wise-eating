@@ -216,6 +216,8 @@ struct MP5PlannerAdapter {
     ) -> (candidate: MP5Candidate, thermalCharacter: String)? {
         let referenceWeight = compact.referenceWeightG
         guard referenceWeight > 0,
+              compact.isEdible,
+              let enforcedMinAgeMonths = compact.enforcedMinAgeMonths,
               let rawEnergy = compact.nutrientValues[.energy],
               rawEnergy > 0
         else {
@@ -254,7 +256,7 @@ struct MP5PlannerAdapter {
                 fatPer100g: (compact.nutrientValues[.totalFat] ?? 0) * scale,
                 fiberPer100g: (compact.nutrientValues[.fiber] ?? 0) * scale,
                 concepts: concepts,
-                enforcedMinAgeMonths: compact.enforcedMinAgeMonths,
+                enforcedMinAgeMonths: enforcedMinAgeMonths,
                 engineExcluded: engineExcluded,
                 role: roleResolution.role,
                 roleAnchor: roleDefinition.anchor,

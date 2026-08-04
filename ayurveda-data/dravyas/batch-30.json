@@ -360,6 +360,8 @@
       "sanskrit": null,
       "aliases": ["chuna", "slaked lime (food)"],
       "category": "salt-mineral",
+      "edible": false,
+      "inedibleReason": "caustic alkali — a reagent, not a food",
       "rasa": ["astringent"],
       "virya": "heating",
       "vipaka": "pungent",
