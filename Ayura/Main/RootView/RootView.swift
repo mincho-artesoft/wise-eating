@@ -869,7 +869,6 @@ struct RootView: View {
         case nutrients = "Nutrients"
         case settings = "Settings"
         case subscriptions = "Plans"
-        case moreApps = "Apps"
         
         var id: String { rawValue }
     }
@@ -916,8 +915,6 @@ struct RootView: View {
                 selectedCategory: $selectedSubscriptionCategory,
                 pendingUpgradeCategory: $pendingUpgradeCategory
             )
-        case .moreApps:
-            OtherAppsView()
         }
     }
     

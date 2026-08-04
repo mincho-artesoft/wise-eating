@@ -264,13 +264,17 @@ for (name, value) in [("Vata", -2), ("Pitta", 0), ("Kapha", 2)] {{
         ):
             self.assertIn(mapping, display)
 
-        for display_only_field in (
+        for displayed_field in (
             "Preparation modifiers",
             "Health warning",
+        ):
+            self.assertIn(displayed_field, section)
+
+        for hidden_detail_field in (
             "Viruddha — incompatible combination",
             "Contraindication",
         ):
-            self.assertIn(display_only_field, section)
+            self.assertNotIn(hidden_detail_field, section)
 
     def test_ai_draft_disclaimer_is_not_rendered(self):
         display = DISPLAY.read_text()

@@ -66,8 +66,7 @@ struct AyurvedaDisplayCard: View {
           title: "Health warning",
           text: display.edible
             ? "Traditional sources and modern evidence advise against consuming this. Shown for reference only — never recommended."
-            : "Not available as food. Shown for reference only — no serving or recommendation is provided.",
-          tone: .warning
+            : "Not available as food. Shown for reference only — no serving or recommendation is provided."
         )
       }
       if display.edible {
@@ -81,7 +80,6 @@ struct AyurvedaDisplayCard: View {
           properties
         }
       }
-      warnings
     }
     .transaction { transaction in
       if reduceMotion {
@@ -176,31 +174,6 @@ struct AyurvedaDisplayCard: View {
   private func optionalValue(_ value: String?) -> [String] {
     guard let value, !value.isEmpty else { return [] }
     return [value]
-  }
-
-  @ViewBuilder
-  private var warnings: some View {
-    if !display.viruddha.isEmpty || !display.contraindications.isEmpty {
-      VStack(alignment: .leading, spacing: 8) {
-        ForEach(Array(display.viruddha.enumerated()), id: \.offset) { _, value in
-          AyurvedaDisplayWarningRow(
-            title: "Viruddha — incompatible combination",
-            text: value,
-            tone: .caution
-          )
-        }
-        ForEach(
-          Array(display.contraindications.enumerated()),
-          id: \.offset
-        ) { _, value in
-          AyurvedaDisplayWarningRow(
-            title: "Contraindication",
-            text: value,
-            tone: .warning
-          )
-        }
-      }
-    }
   }
 
 }
@@ -316,25 +289,14 @@ private struct AyurvedaPropertyGroupView: View {
   }
 }
 
-private enum AyurvedaDisplayWarningTone {
-  case caution
-  case warning
-}
-
 private struct AyurvedaDisplayWarningRow: View {
   @ObservedObject private var effectManager = EffectManager.shared
 
   let title: String
   let text: String
-  let tone: AyurvedaDisplayWarningTone
 
   private var color: Color {
-    switch tone {
-    case .caution:
-      return Color("AyurvedaAggravate")
-    case .warning:
-      return Color("AyurvedaWarning")
-    }
+    Color("AyurvedaWarning")
   }
 
   var body: some View {
