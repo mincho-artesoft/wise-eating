@@ -41,7 +41,7 @@ struct DatabaseSetup {
             WaterLog.self, MealPlanEntry.self,
             MealPlan.self, MealPlanDay.self,
             MealPlanMeal.self, Training.self,
-            ExerciseItem.self, ExercisePhoto.self,
+            ExerciseItem.self, ExercisePhoto.self, YogaSequence.self,
             ExerciseLink.self, AIGenerationJob.self,
             TrainingPlan.self, TrainingPlanDay.self,
             TrainingPlanWorkout.self, TrainingPlanExercise.self,

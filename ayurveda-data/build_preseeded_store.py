@@ -47,6 +47,8 @@ TARGET_EXPECTED = {
     "allergenTaggedRecipes": 1_190,
     "positiveEnforcedAgeDravyas": 389,
     "positiveEnforcedAgeRecipes": 5,
+    "yogaAsanas": 908,
+    "yogaSequences": 4_419,
 }
 
 # Backward-compatible name for callers building a new target artifact.
@@ -325,6 +327,67 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
             "ExerciseItem removed fields",
             exercise_columns.intersection({"ZSPORT", "ZSPORTS"}),
             set(),
+        )
+        require_equal(
+            "Yoga asana count",
+            scalar(connection, "SELECT COUNT(*) FROM ZEXERCISEITEM"),
+            EXPECTED["yogaAsanas"],
+        )
+        require_equal(
+            "Yoga asana UUID count",
+            scalar(connection, "SELECT COUNT(DISTINCT ZID) FROM ZEXERCISEITEM"),
+            EXPECTED["yogaAsanas"],
+        )
+        require_equal(
+            "Yoga asana catalogue range",
+            connection.execute(
+                "SELECT MIN(ZCATALOGNUMBER), MAX(ZCATALOGNUMBER) "
+                "FROM ZEXERCISEITEM"
+            ).fetchone(),
+            (800_000, 800_907),
+        )
+        require_equal(
+            "Yoga asanas missing search metadata",
+            scalar(
+                connection,
+                """
+                SELECT COUNT(*) FROM ZEXERCISEITEM
+                WHERE ZFAMILY IS NULL OR ZSANSKRIT IS NULL
+                   OR ZNAMENORMALIZED IS NULL OR LENGTH(ZNAMENORMALIZED) = 0
+                   OR ZSEARCHTOKENS IS NULL OR LENGTH(ZSEARCHTOKENS) = 0
+                   OR ZSEARCHTOKENS2 IS NULL OR LENGTH(ZSEARCHTOKENS2) = 0
+                """,
+            ),
+            0,
+        )
+        require_equal(
+            "Yoga sequence count",
+            scalar(connection, "SELECT COUNT(*) FROM ZYOGASEQUENCE"),
+            EXPECTED["yogaSequences"],
+        )
+        require_equal(
+            "Yoga sequence UUID count",
+            scalar(connection, "SELECT COUNT(DISTINCT ZID) FROM ZYOGASEQUENCE"),
+            EXPECTED["yogaSequences"],
+        )
+        require_equal(
+            "Yoga sequence catalogue range",
+            connection.execute(
+                "SELECT MIN(ZCATALOGNUMBER), MAX(ZCATALOGNUMBER) "
+                "FROM ZYOGASEQUENCE"
+            ).fetchone(),
+            (700_001, 704_419),
+        )
+        require_equal(
+            "Yoga sequences missing poses",
+            scalar(
+                connection,
+                """
+                SELECT COUNT(*) FROM ZYOGASEQUENCE
+                WHERE ZPOSESDATA IS NULL OR LENGTH(ZPOSESDATA) = 0
+                """,
+            ),
+            0,
         )
         profile_columns = {
             row[1] for row in connection.execute("PRAGMA table_info(ZPROFILE)")
@@ -919,6 +982,8 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
             "allergenTaggedRecipes": EXPECTED["allergenTaggedRecipes"],
             "positiveEnforcedAgeDravyas": EXPECTED["positiveEnforcedAgeDravyas"],
             "positiveEnforcedAgeRecipes": EXPECTED["positiveEnforcedAgeRecipes"],
+            "yogaAsanas": EXPECTED["yogaAsanas"],
+            "yogaSequences": EXPECTED["yogaSequences"],
             "payloadBytes": len(payload_data),
         }
 

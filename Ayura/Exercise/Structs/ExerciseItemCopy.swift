@@ -6,6 +6,17 @@ import SwiftData
 public final class ExerciseItemCopy: Identifiable, Codable {
     public var originalID: UUID?
     public var name: String
+    public var sanskrit: String?
+    public var slug: String?
+    public var family: AsanaFamily?
+    public var level: Int?
+    public var levelScale: String?
+    public var durationSeconds: Int?
+    public var breath: String?
+    public var drishti: String?
+    public var contraindications: [String]?
+    public var dosha: YogaDosha?
+    public var doshaProvenance: String?
     public var exerciseDescription: String?
     public var videoURL: String?
     public var metValue: Double?
@@ -22,12 +33,22 @@ public final class ExerciseItemCopy: Identifiable, Codable {
     
     // CodingKeys to handle manual encoding/decoding if needed, especially for weak references.
     enum CodingKeys: String, CodingKey {
-        case originalID, name, exerciseDescription, videoURL, metValue, isUserAdded, isFavorite, photo, gallery, assetImageName, muscleGroups, durationMinutes, isWorkout, exercises, minimalAgeMonths
+        case originalID, name, sanskrit, slug, family, level, levelScale, durationSeconds
+        case breath, drishti, contraindications, dosha, doshaProvenance
+        case exerciseDescription, videoURL, metValue, isUserAdded, isFavorite, photo
+        case gallery, assetImageName, muscleGroups, durationMinutes, isWorkout
+        case exercises, minimalAgeMonths
     }
 
     // Full initializer
     public init(
-        originalID: UUID? = nil, name: String, exerciseDescription: String? = nil, videoURL: String? = nil,
+        originalID: UUID? = nil, name: String, sanskrit: String? = nil,
+        slug: String? = nil, family: AsanaFamily? = nil, level: Int? = nil,
+        levelScale: String? = nil, durationSeconds: Int? = nil,
+        breath: String? = nil, drishti: String? = nil,
+        contraindications: [String]? = nil, dosha: YogaDosha? = nil,
+        doshaProvenance: String? = nil, exerciseDescription: String? = nil,
+        videoURL: String? = nil,
         metValue: Double? = nil, isUserAdded: Bool = true, isFavorite: Bool = false,
         photo: Data? = nil, gallery: [Data]? = nil, assetImageName: String? = nil,
         muscleGroups: [MuscleGroup], durationMinutes: Int? = nil,
@@ -35,6 +56,17 @@ public final class ExerciseItemCopy: Identifiable, Codable {
     ) {
         self.originalID = originalID
         self.name = name
+        self.sanskrit = sanskrit
+        self.slug = slug
+        self.family = family
+        self.level = level
+        self.levelScale = levelScale
+        self.durationSeconds = durationSeconds
+        self.breath = breath
+        self.drishti = drishti
+        self.contraindications = contraindications
+        self.dosha = dosha
+        self.doshaProvenance = doshaProvenance
         self.exerciseDescription = exerciseDescription
         self.videoURL = videoURL
         self.metValue = metValue
@@ -61,7 +93,11 @@ public final class ExerciseItemCopy: Identifiable, Codable {
         let exerciseLinksCopy = src.exercises?.map { ExerciseLinkCopy(from: $0, cache: &cache) }
 
         self.init(
-            originalID: src.id, name: src.name, exerciseDescription: src.exerciseDescription,
+            originalID: src.id, name: src.name, sanskrit: src.sanskrit, slug: src.slug,
+            family: src.family, level: src.level, levelScale: src.levelScale,
+            durationSeconds: src.durationSeconds, breath: src.breath, drishti: src.drishti,
+            contraindications: src.contraindications, dosha: src.dosha,
+            doshaProvenance: src.doshaProvenance, exerciseDescription: src.exerciseDescription,
             videoURL: src.videoURL, metValue: src.metValue, isUserAdded: src.isUserAdded,
             isFavorite: src.isFavorite, photo: src.photo, gallery: src.gallery?.map(\.data),
             assetImageName: src.assetImageName, muscleGroups: src.muscleGroups,
@@ -100,7 +136,13 @@ public final class ExerciseItemCopy: Identifiable, Codable {
     // Private convenience init for re-using from cache
     private convenience init(from copy: ExerciseItemCopy) {
         self.init(
-            originalID: copy.originalID, name: copy.name, exerciseDescription: copy.exerciseDescription,
+            originalID: copy.originalID, name: copy.name, sanskrit: copy.sanskrit,
+            slug: copy.slug, family: copy.family, level: copy.level,
+            levelScale: copy.levelScale, durationSeconds: copy.durationSeconds,
+            breath: copy.breath, drishti: copy.drishti,
+            contraindications: copy.contraindications, dosha: copy.dosha,
+            doshaProvenance: copy.doshaProvenance,
+            exerciseDescription: copy.exerciseDescription,
             videoURL: copy.videoURL, metValue: copy.metValue, isUserAdded: copy.isUserAdded,
             isFavorite: copy.isFavorite, photo: copy.photo, gallery: copy.gallery,
             assetImageName: copy.assetImageName, muscleGroups: copy.muscleGroups,
@@ -113,13 +155,24 @@ public final class ExerciseItemCopy: Identifiable, Codable {
     convenience init(from dto: ExerciseItemDTO) {
         self.init(
             name: dto.title ?? "New Exercise",
+            sanskrit: dto.sanskrit,
+            slug: dto.slug,
+            family: dto.family,
+            level: dto.level,
+            levelScale: dto.levelScale,
+            durationSeconds: dto.durationSeconds,
+            breath: dto.breath,
+            drishti: dto.drishti,
+            contraindications: dto.contraindications,
+            dosha: dto.dosha,
+            doshaProvenance: dto.doshaProvenance,
             exerciseDescription: dto.desc,
             metValue: dto.metValue,
             isUserAdded: false, // Генерираните от AI не са "user added" по подразбиране
             isFavorite: false,
             photo: nil,
             gallery: nil,
-            assetImageName: nil,
+            assetImageName: dto.assetImageName,
             muscleGroups: dto.muscleGroups,
             durationMinutes: nil, // DTO-то не съдържа продължителност по подразбиране
             isWorkout: false, // Това е за единично упражнение, не за тренировка

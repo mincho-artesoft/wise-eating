@@ -16,6 +16,7 @@ SPEC = importlib.util.spec_from_file_location("build_preseeded_store", PRESEED_S
 assert SPEC and SPEC.loader
 build_preseeded_store = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(build_preseeded_store)
+from stable_ids import yoga_asana_uuid, yoga_sequence_uuid
 
 TARGET = build_preseeded_store.TARGET_EXPECTED
 
@@ -66,6 +67,8 @@ class PreseedArtifactTests(unittest.TestCase):
                 "allergenTaggedRecipes": 1_190,
                 "positiveEnforcedAgeDravyas": 389,
                 "positiveEnforcedAgeRecipes": 5,
+                "yogaAsanas": 908,
+                "yogaSequences": 4_419,
                 "payloadBytes": self.audit["payloadBytes"],
             },
         )
@@ -120,12 +123,48 @@ class PreseedArtifactTests(unittest.TestCase):
         self.assertFalse((REPO_ROOT / "Ayura" / "AyuraTemplates.store").exists())
         self.assertFalse((REPO_ROOT / "Ayura" / "Legacy" / "workouts.json").exists())
 
-    def test_bundled_exercise_catalog_is_removed(self):
+    def test_bundled_exercise_catalog_is_replaced_by_yoga(self):
         self.assertEqual(
             self.connection.execute("SELECT COUNT(*) FROM ZEXERCISEITEM").fetchone()[0],
-            0,
+            908,
         )
         self.assertFalse((REPO_ROOT / "Ayura" / "Legacy" / "exercises.json").exists())
+        self.assertFalse((REPO_ROOT / "Ayura" / "Legacy" / "sports.json").exists())
+
+        asanas = self.connection.execute(
+            """
+            SELECT ZCATALOGNUMBER, ZID, ZFAMILY, ZNAMENORMALIZED,
+                   ZSEARCHTOKENS, ZSEARCHTOKENS2
+            FROM ZEXERCISEITEM ORDER BY ZCATALOGNUMBER
+            """
+        ).fetchall()
+        self.assertEqual(
+            [row[0] for row in asanas],
+            list(range(800_000, 800_908)),
+        )
+        for catalog_number, stable_id, family, normalized, tokens, tokens2 in asanas:
+            self.assertEqual(str(uuid.UUID(bytes=stable_id)), yoga_asana_uuid(catalog_number))
+            self.assertTrue(family)
+            self.assertTrue(normalized)
+            self.assertTrue(tokens)
+            self.assertTrue(tokens2)
+
+    def test_yoga_sequences_are_preseeded_with_canonical_uuids(self):
+        sequences = self.connection.execute(
+            """
+            SELECT ZCATALOGNUMBER, ZID, ZPOSESDATA
+            FROM ZYOGASEQUENCE ORDER BY ZCATALOGNUMBER
+            """
+        ).fetchall()
+        self.assertEqual(len(sequences), 4_419)
+        self.assertEqual(sequences[0][0], 700_001)
+        self.assertEqual(sequences[-1][0], 704_419)
+        for catalog_number, stable_id, poses_data in sequences:
+            self.assertEqual(
+                str(uuid.UUID(bytes=stable_id)),
+                yoga_sequence_uuid(catalog_number),
+            )
+            self.assertTrue(poses_data)
 
     def test_removed_profile_and_exercise_fields_are_absent(self):
         profile_columns = {

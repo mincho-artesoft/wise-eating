@@ -16,12 +16,26 @@ public final class ExerciseItem: Identifiable {
 
     public var name: String {
         didSet {
-            self.nameNormalized = name.foldedSearchKey
-            self.searchTokens  = ExerciseItem.makeTokens(from: name)
-            self.searchTokens2 = ExerciseItem.makeTokens2(from: name)
+            refreshSearchMetadata()
         }
     }
     public var nameNormalized: String
+
+    public var sanskrit: String? {
+        didSet { refreshSearchMetadata() }
+    }
+    public var slug: String?
+    public var family: AsanaFamily? {
+        didSet { refreshSearchMetadata() }
+    }
+    public var level: Int?
+    public var levelScale: String?
+    public var durationSeconds: Int?
+    public var breath: String?
+    public var drishti: String?
+    public var contraindications: [String]?
+    public var dosha: YogaDosha?
+    public var doshaProvenance: String?
     
     public var exerciseDescription: String?
     public var videoURL: String?
@@ -104,6 +118,17 @@ public final class ExerciseItem: Identifiable {
         id: UUID = UUID(),
         catalogNumber: Int? = nil,
         name: String,
+        sanskrit: String? = nil,
+        slug: String? = nil,
+        family: AsanaFamily? = nil,
+        level: Int? = nil,
+        levelScale: String? = nil,
+        durationSeconds: Int? = nil,
+        breath: String? = nil,
+        drishti: String? = nil,
+        contraindications: [String]? = nil,
+        dosha: YogaDosha? = nil,
+        doshaProvenance: String? = nil,
         description: String? = nil,
         videoURL: String? = nil,
         metValue: Double? = nil,
@@ -122,9 +147,21 @@ public final class ExerciseItem: Identifiable {
         self.name = name
         self.nameNormalized = name.foldedSearchKey
 
+        self.sanskrit = sanskrit
+        self.slug = slug
+        self.family = family
+        self.level = level
+        self.levelScale = levelScale
+        self.durationSeconds = durationSeconds
+        self.breath = breath
+        self.drishti = drishti
+        self.contraindications = contraindications
+        self.dosha = dosha
+        self.doshaProvenance = doshaProvenance
+
         // 🔎 Init tokens
-        self.searchTokens  = ExerciseItem.makeTokens(from: name)
-        self.searchTokens2 = ExerciseItem.makeTokens2(from: name)
+        self.searchTokens = []
+        self.searchTokens2 = []
 
         self.exerciseDescription = description
         self.videoURL = videoURL
@@ -138,6 +175,7 @@ public final class ExerciseItem: Identifiable {
         self.isWorkout = isWorkout
         self.exercises = exercises
         self.minimalAgeMonths = minimalAgeMonths ?? 0
+        refreshSearchMetadata()
     }
     
     @MainActor
@@ -146,12 +184,40 @@ public final class ExerciseItem: Identifiable {
            self.metValue = dto.metValue
            self.muscleGroups = dto.muscleGroups
            self.minimalAgeMonths = dto.minimalAgeMonths ?? 0
+           self.sanskrit = dto.sanskrit
+           self.slug = dto.slug
+           self.family = dto.family
+           self.level = dto.level
+           self.levelScale = dto.levelScale
+           self.durationSeconds = dto.durationSeconds
+           self.breath = dto.breath
+           self.drishti = dto.drishti
+           self.contraindications = dto.contraindications
+           self.dosha = dto.dosha
+           self.doshaProvenance = dto.doshaProvenance
+           self.assetImageName = dto.assetImageName
+           refreshSearchMetadata()
        }
+
+    func refreshSearchMetadata() {
+        let searchableText = [name, sanskrit, family?.rawValue]
+            .compactMap { $0?.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+            .joined(separator: " ")
+
+        nameNormalized = searchableText.foldedSearchKey
+        searchTokens = ExerciseItem.makeTokens(from: searchableText)
+        searchTokens2 = ExerciseItem.makeTokens2(from: searchableText)
+    }
     
     func exerciseImage() -> UIImage? {
        // A) Check DB photo
         if let data = self.photo, let img = UIImage(data: data) {
            return img
+       }
+
+       if let assetImageName, let image = UIImage(named: assetImageName) {
+           return image
        }
 
        let original = self.name

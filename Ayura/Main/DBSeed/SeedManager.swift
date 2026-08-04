@@ -12,6 +12,7 @@ enum SeedManager {
         ctx.autosaveEnabled = false
 
         removeBundledExercisesIfNeeded(context: ctx)
+        seedYogaIfNeeded(context: ctx)
         await seedBarcodesIfNeeded(context: ctx)
         await seedReferenceVitaminsIfNeeded(context: ctx)
         await seedReferenceMineralsIfNeeded(context: ctx)
@@ -41,6 +42,41 @@ enum SeedManager {
         ctx.autosaveEnabled = true
         print("✅ Seeding process completed.")
         AyuraLaunchProbe.event("seed-checks-end")
+    }
+
+    // MARK: – Yoga
+    private static func seedYogaIfNeeded(context ctx: ModelContext) {
+        print("-> Checking for Yoga data...")
+        let versionKey = "yogaSeedVersion"
+        do {
+            let bundleVersion = try YogaSeeder.bundleSeedVersion()
+            let installedVersion = UserDefaults.standard.integer(forKey: versionKey)
+            let catalogueIsInstalled = try YogaSeeder.isInstalled(context: ctx)
+            if installedVersion >= bundleVersion, catalogueIsInstalled {
+                print("   Yoga seed version already applied, skipping.")
+                return
+            }
+            if installedVersion == 0, catalogueIsInstalled {
+                UserDefaults.standard.set(bundleVersion, forKey: versionKey)
+                print(
+                    "   ✅ Yoga v\(bundleVersion) preseed stamp verified; "
+                        + "no inserts or updates."
+                )
+                return
+            }
+
+            let result = try YogaSeeder.run(context: ctx)
+            UserDefaults.standard.set(bundleVersion, forKey: versionKey)
+            print(
+                "   Yoga seed v\(bundleVersion) installed: "
+                    + "\(result.asanaCount) asanas, "
+                    + "\(result.sequenceCount) sequences."
+            )
+        } catch {
+            ctx.rollback()
+            print("   ❌ Yoga seeding failed: \(error)")
+            assertionFailure("Yoga seed gate failed: \(error)")
+        }
     }
 
     // MARK: - Barcodes
@@ -161,7 +197,10 @@ enum SeedManager {
             let descriptor = FetchDescriptor<ExerciseItem>(
                 predicate: #Predicate { $0.catalogNumber != nil }
             )
-            let bundledExercises = try ctx.fetch(descriptor)
+            let bundledExercises = try ctx.fetch(descriptor).filter {
+                guard let catalogNumber = $0.catalogNumber else { return false }
+                return catalogNumber < 800_000
+            }
             guard !bundledExercises.isEmpty else { return }
 
             let bundledIDs = Set(bundledExercises.map(\.id))

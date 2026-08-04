@@ -23,6 +23,14 @@ def food_uuid(catalog_number: int) -> str:
     return stable_uuid("food", catalog_number)
 
 
+def yoga_asana_uuid(catalog_number: int) -> str:
+    return stable_uuid("yoga-asana", catalog_number)
+
+
+def yoga_sequence_uuid(catalog_number: int) -> str:
+    return stable_uuid("yoga-sequence", catalog_number)
+
+
 def ayurveda_profile_uuid(profile_key: str) -> str:
     return stable_uuid("ayurveda-profile", profile_key)
 
