@@ -744,7 +744,6 @@ struct TrainingView: View {
             target: exerciseAyurvedaTarget,
             summaryTitle: "Exercise Dosha Balance",
             accessibilityContext: "Daily exercise Ayurveda",
-            usesPersonalizedEffectColors: false,
             onTap: { presentRingDetail(.ayurveda) }
         )
     }
