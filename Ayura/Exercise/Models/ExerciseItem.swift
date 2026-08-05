@@ -30,7 +30,6 @@ public final class ExerciseItem: Identifiable {
     }
     public var level: Int?
     public var levelScale: String?
-    public var durationSeconds: Int?
     public var breath: String?
     public var drishti: String?
     public var contraindications: [String]?
@@ -123,7 +122,6 @@ public final class ExerciseItem: Identifiable {
         family: AsanaFamily? = nil,
         level: Int? = nil,
         levelScale: String? = nil,
-        durationSeconds: Int? = nil,
         breath: String? = nil,
         drishti: String? = nil,
         contraindications: [String]? = nil,
@@ -152,7 +150,6 @@ public final class ExerciseItem: Identifiable {
         self.family = family
         self.level = level
         self.levelScale = levelScale
-        self.durationSeconds = durationSeconds
         self.breath = breath
         self.drishti = drishti
         self.contraindications = contraindications
@@ -189,7 +186,7 @@ public final class ExerciseItem: Identifiable {
            self.family = dto.family
            self.level = dto.level
            self.levelScale = dto.levelScale
-           self.durationSeconds = dto.durationSeconds
+           self.durationMinutes = dto.durationMinutes
            self.breath = dto.breath
            self.drishti = dto.drishti
            self.contraindications = dto.contraindications

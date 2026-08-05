@@ -11,7 +11,6 @@ public final class ExerciseItemCopy: Identifiable, Codable {
     public var family: AsanaFamily?
     public var level: Int?
     public var levelScale: String?
-    public var durationSeconds: Int?
     public var breath: String?
     public var drishti: String?
     public var contraindications: [String]?
@@ -33,7 +32,7 @@ public final class ExerciseItemCopy: Identifiable, Codable {
     
     // CodingKeys to handle manual encoding/decoding if needed, especially for weak references.
     enum CodingKeys: String, CodingKey {
-        case originalID, name, sanskrit, slug, family, level, levelScale, durationSeconds
+        case originalID, name, sanskrit, slug, family, level, levelScale
         case breath, drishti, contraindications, dosha, doshaProvenance
         case exerciseDescription, videoURL, metValue, isUserAdded, isFavorite, photo
         case gallery, assetImageName, muscleGroups, durationMinutes, isWorkout
@@ -44,7 +43,7 @@ public final class ExerciseItemCopy: Identifiable, Codable {
     public init(
         originalID: UUID? = nil, name: String, sanskrit: String? = nil,
         slug: String? = nil, family: AsanaFamily? = nil, level: Int? = nil,
-        levelScale: String? = nil, durationSeconds: Int? = nil,
+        levelScale: String? = nil,
         breath: String? = nil, drishti: String? = nil,
         contraindications: [String]? = nil, dosha: YogaDosha? = nil,
         doshaProvenance: String? = nil, exerciseDescription: String? = nil,
@@ -61,7 +60,6 @@ public final class ExerciseItemCopy: Identifiable, Codable {
         self.family = family
         self.level = level
         self.levelScale = levelScale
-        self.durationSeconds = durationSeconds
         self.breath = breath
         self.drishti = drishti
         self.contraindications = contraindications
@@ -95,7 +93,7 @@ public final class ExerciseItemCopy: Identifiable, Codable {
         self.init(
             originalID: src.id, name: src.name, sanskrit: src.sanskrit, slug: src.slug,
             family: src.family, level: src.level, levelScale: src.levelScale,
-            durationSeconds: src.durationSeconds, breath: src.breath, drishti: src.drishti,
+            breath: src.breath, drishti: src.drishti,
             contraindications: src.contraindications, dosha: src.dosha,
             doshaProvenance: src.doshaProvenance, exerciseDescription: src.exerciseDescription,
             videoURL: src.videoURL, metValue: src.metValue, isUserAdded: src.isUserAdded,
@@ -138,7 +136,7 @@ public final class ExerciseItemCopy: Identifiable, Codable {
         self.init(
             originalID: copy.originalID, name: copy.name, sanskrit: copy.sanskrit,
             slug: copy.slug, family: copy.family, level: copy.level,
-            levelScale: copy.levelScale, durationSeconds: copy.durationSeconds,
+            levelScale: copy.levelScale,
             breath: copy.breath, drishti: copy.drishti,
             contraindications: copy.contraindications, dosha: copy.dosha,
             doshaProvenance: copy.doshaProvenance,
@@ -160,7 +158,6 @@ public final class ExerciseItemCopy: Identifiable, Codable {
             family: dto.family,
             level: dto.level,
             levelScale: dto.levelScale,
-            durationSeconds: dto.durationSeconds,
             breath: dto.breath,
             drishti: dto.drishti,
             contraindications: dto.contraindications,
@@ -174,7 +171,7 @@ public final class ExerciseItemCopy: Identifiable, Codable {
             gallery: nil,
             assetImageName: dto.assetImageName,
             muscleGroups: dto.muscleGroups,
-            durationMinutes: nil, // DTO-то не съдържа продължителност по подразбиране
+            durationMinutes: dto.durationMinutes,
             isWorkout: false, // Това е за единично упражнение, не за тренировка
             exercises: nil,
             minimalAgeMonths: dto.minimalAgeMonths ?? 0

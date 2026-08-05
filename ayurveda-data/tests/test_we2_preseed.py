@@ -133,8 +133,8 @@ class PreseedArtifactTests(unittest.TestCase):
 
         asanas = self.connection.execute(
             """
-            SELECT ZCATALOGNUMBER, ZID, ZFAMILY, ZNAMENORMALIZED,
-                   ZSEARCHTOKENS, ZSEARCHTOKENS2
+            SELECT ZCATALOGNUMBER, ZID, ZNAME, ZSANSKRIT, ZFAMILY,
+                   ZDURATIONMINUTES, ZNAMENORMALIZED, ZSEARCHTOKENS, ZSEARCHTOKENS2
             FROM ZEXERCISEITEM ORDER BY ZCATALOGNUMBER
             """
         ).fetchall()
@@ -142,9 +142,22 @@ class PreseedArtifactTests(unittest.TestCase):
             [row[0] for row in asanas],
             list(range(800_000, 800_908)),
         )
-        for catalog_number, stable_id, family, normalized, tokens, tokens2 in asanas:
+        for (
+            catalog_number,
+            stable_id,
+            name,
+            sanskrit,
+            family,
+            duration_minutes,
+            normalized,
+            tokens,
+            tokens2,
+        ) in asanas:
             self.assertEqual(str(uuid.UUID(bytes=stable_id)), yoga_asana_uuid(catalog_number))
+            expected_suffix = f" ({sanskrit})"
+            self.assertTrue(name == sanskrit or name.endswith(expected_suffix))
             self.assertTrue(family)
+            self.assertGreater(duration_minutes, 0)
             self.assertTrue(normalized)
             self.assertTrue(tokens)
             self.assertTrue(tokens2)
@@ -180,7 +193,11 @@ class PreseedArtifactTests(unittest.TestCase):
                 {"ZGOAL", "ZACTIVITYLEVEL", "ZSPORT", "ZSPORTS", "ZDIET", "ZDIETS"}
             )
         )
-        self.assertTrue(exercise_columns.isdisjoint({"ZSPORT", "ZSPORTS"}))
+        self.assertTrue(
+            exercise_columns.isdisjoint(
+                {"ZSPORT", "ZSPORTS", "ZDURATIONSECONDS"}
+            )
+        )
 
     def test_fresh_store_seed_run_has_zero_inserts(self):
         profile_rows = self.connection.execute(

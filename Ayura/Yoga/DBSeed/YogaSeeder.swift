@@ -14,7 +14,7 @@ enum YogaSeeder {
     }
 
     static func bundleSeedVersion() throws -> Int {
-        1
+        3
     }
 
     static func isInstalled(context: ModelContext) throws -> Bool {
@@ -23,14 +23,26 @@ enum YogaSeeder {
                 predicate: #Predicate { $0.catalogNumber != nil }
             )
         )
-        let asanaCount = cataloguedExercises.lazy.filter {
+        let installedAsanas = cataloguedExercises.filter {
             guard let number = $0.catalogNumber else { return false }
             return (800_000...800_907).contains(number) && $0.family != nil
-        }.count
+        }
+        let namesAreComposed = installedAsanas.allSatisfy {
+            $0.name == YogaExerciseNaming.displayName(
+                title: $0.name,
+                sanskrit: $0.sanskrit
+            )
+        }
+        let durationsAreConsolidated = installedAsanas.allSatisfy {
+            ($0.durationMinutes ?? 0) > 0
+        }
         let sequenceCount = try context.fetchCount(
             FetchDescriptor<YogaSequence>()
         )
-        return asanaCount == 908 && sequenceCount == 4_419
+        return installedAsanas.count == 908
+            && namesAreComposed
+            && durationsAreConsolidated
+            && sequenceCount == 4_419
     }
 
     static func run(context: ModelContext) throws -> Result {
@@ -73,7 +85,10 @@ enum YogaSeeder {
                     model = ExerciseItem(
                         id: dto.id,
                         catalogNumber: dto.catalogNumber,
-                        name: dto.title,
+                        name: YogaExerciseNaming.displayName(
+                            title: dto.title,
+                            sanskrit: dto.sanskrit
+                        ),
                         muscleGroups: dto.muscleGroups
                     )
                     context.insert(model)
@@ -152,13 +167,15 @@ enum YogaSeeder {
 
     private static func apply(_ dto: YogaAsanaDTO, to model: ExerciseItem) {
         model.catalogNumber = dto.catalogNumber
-        model.name = dto.title
+        model.name = YogaExerciseNaming.displayName(
+            title: dto.title,
+            sanskrit: dto.sanskrit
+        )
         model.sanskrit = dto.sanskrit
         model.slug = dto.slug
         model.family = dto.family
         model.level = dto.level
         model.levelScale = dto.levelScale
-        model.durationSeconds = dto.durationSeconds
         model.breath = dto.breath
         model.drishti = dto.drishti
         model.contraindications = dto.contraindications
@@ -171,7 +188,7 @@ enum YogaSeeder {
         model.assetImageName = dto.assetImageName
         model.isUserAdded = false
         model.isWorkout = false
-        model.durationMinutes = nil
+        model.durationMinutes = max(1, (dto.durationSeconds + 59) / 60)
         model.refreshSearchMetadata()
     }
 

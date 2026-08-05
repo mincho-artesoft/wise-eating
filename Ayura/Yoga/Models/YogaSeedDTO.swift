@@ -1,5 +1,25 @@
 import Foundation
 
+enum YogaExerciseNaming {
+    static func displayName(title: String, sanskrit: String?) -> String {
+        let title = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let sanskrit = sanskrit?
+            .trimmingCharacters(in: .whitespacesAndNewlines),
+              !sanskrit.isEmpty else {
+            return title
+        }
+        guard title.caseInsensitiveCompare(sanskrit) != .orderedSame else {
+            return title
+        }
+
+        let suffix = "(\(sanskrit))"
+        guard !title.localizedCaseInsensitiveContains(suffix) else {
+            return title
+        }
+        return "\(title) \(suffix)"
+    }
+}
+
 public struct YogaDosha: Codable, Hashable, Sendable {
     public let vata: Int
     public let pitta: Int

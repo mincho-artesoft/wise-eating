@@ -63,7 +63,7 @@ struct ExerciseItemDetailView: View {
                     .padding(.horizontal)
                 
                 ScrollView(showsIndicators: false) {
-                    if item.photo != nil {
+                    if mainUIImage != nil {
                         mainImageSection
                             .padding(.horizontal)
                             .padding(.top, 5)
@@ -77,6 +77,8 @@ struct ExerciseItemDetailView: View {
                     
                     VStack(alignment: .leading, spacing: 24) {
                         textInfoSection
+                        yogaDetailsSection
+                        workoutYogaSection
                         bannerAdSection
                             .frame(height: isBannerAdLoaded ? 120 : 0)
                         workoutExercisesSection
@@ -128,6 +130,9 @@ struct ExerciseItemDetailView: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
                     self.showThumbnails = true
                 }
+            }
+            if mainUIImage == nil {
+                mainUIImage = item.exerciseImage()
             }
         }
         .task(id: selectedImageData) {
@@ -216,12 +221,22 @@ struct ExerciseItemDetailView: View {
     
     
     private func loadImage(data: Data?) async {
-        guard let data = data, !data.isEmpty else {
-            if !Task.isCancelled { await MainActor.run { mainUIImage = nil } }
-            return
+        if mainUIImage == nil, let fallback = item.exerciseImage() {
+            await MainActor.run {
+                mainUIImage = fallback
+            }
         }
-        let image = await Task.detached(priority: .userInitiated) { UIImage(data: data) }.value
-        if !Task.isCancelled { await MainActor.run { mainUIImage = image } }
+
+        if let data, !data.isEmpty {
+            let image = await Task.detached(priority: .userInitiated) {
+                UIImage(data: data)
+            }.value
+            if let image, !Task.isCancelled {
+                await MainActor.run {
+                    mainUIImage = image
+                }
+            }
+        }
     }
     
     @ViewBuilder
@@ -312,9 +327,9 @@ struct ExerciseItemDetailView: View {
                 .font(.largeTitle.weight(.bold))
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
-                .padding(.top, item.photo != nil ? 0 : 16)
+                .padding(.top, mainUIImage != nil ? 0 : 16)
                 .foregroundStyle(effectManager.currentGlobalAccentColor)
-            
+
             if let desc = item.exerciseDescription?.trimmingCharacters(in: .whitespacesAndNewlines), !desc.isEmpty {
                 Text(desc)
                     .font(.callout)
@@ -323,7 +338,7 @@ struct ExerciseItemDetailView: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
             
-            if item.photo != nil {
+            if mainUIImage != nil {
                 summaryInfoRow
             }
         }
@@ -379,12 +394,31 @@ struct ExerciseItemDetailView: View {
                 VStack(alignment: .leading, spacing: 10) {
                     ForEach(exercises) { link in
                         if let exercise = link.exercise {
-                            HStack {
-                                Text(exercise.name)
-                                    .foregroundColor(effectManager.currentGlobalAccentColor)
-                                Spacer()
-                                Text("\(link.durationMinutes.clean) min")
-                                    .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
+                            VStack(alignment: .leading, spacing: 8) {
+                                HStack {
+                                    Text(exercise.name)
+                                        .foregroundColor(effectManager.currentGlobalAccentColor)
+                                    Spacer()
+                                    Text("\(link.durationMinutes.clean) min")
+                                        .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
+                                }
+
+                                if exercise.hasYogaPracticeMetadata {
+                                    DisclosureGroup {
+                                        YogaExerciseDetailSection(
+                                            item: exercise,
+                                            title: nil,
+                                            usesCard: false
+                                        )
+                                        .padding(.top, 10)
+                                    } label: {
+                                        Label("Yoga & Ayurveda details", systemImage: "figure.yoga")
+                                            .font(.caption.weight(.semibold))
+                                            .foregroundStyle(
+                                                effectManager.currentGlobalAccentColor.opacity(0.82)
+                                            )
+                                    }
+                                }
                             }
                             .font(.subheadline)
                             if link.id != exercises.last?.id {
@@ -402,6 +436,29 @@ struct ExerciseItemDetailView: View {
     private var muscleGroupSection: some View {
         let items = item.muscleGroups.map { StaticTag(label: $0.rawValue, color: .purple) }
         return tagSectionView(title: "Primary Muscles", tags: items)
+    }
+
+    @ViewBuilder
+    private var yogaDetailsSection: some View {
+        if !item.isWorkout {
+            YogaExerciseDetailSection(item: item)
+        }
+    }
+
+    @ViewBuilder
+    private var workoutYogaSection: some View {
+        if item.isWorkout, let exercises = item.exercises {
+            YogaWorkoutAyurvedaSection(
+                entries: exercises.compactMap { link in
+                    guard let exercise = link.exercise else { return nil }
+                    return YogaWorkoutExerciseEntry(
+                        exercise: exercise,
+                        durationMinutes: link.durationMinutes
+                    )
+                },
+                manualDosha: item.dosha
+            )
+        }
     }
     
     @ViewBuilder

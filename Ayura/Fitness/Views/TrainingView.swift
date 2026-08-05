@@ -1802,7 +1802,10 @@ struct TrainingView: View {
                                                     .foregroundColor(.orange)
                                                     .font(.caption)
                                             }
-                                            Text(item.name)
+                                            VStack(alignment: .leading, spacing: 5) {
+                                                Text(item.name)
+                                                ExerciseAyurvedaSearchResultChips(item: item)
+                                            }
                                             Spacer()
                                         }
                                         .padding()
@@ -1917,7 +1920,7 @@ struct TrainingView: View {
                 }
                 .glassCardStyle(cornerRadius: 20)
                 .buttonStyle(.plain)
-                
+
                 Button(action: {
                     withAnimation(.easeInOut) {
                         exerciseSearchVM.workoutFilterMode =
@@ -1925,7 +1928,7 @@ struct TrainingView: View {
                     }
                 }) {
                     HStack(spacing: 6) {
-                        Image(systemName: "figure.strengthtraining.traditional")
+                        Image(systemName: "figure.yoga")
                             .imageScale(.medium)
                             .font(.system(size: 13, weight: .semibold))
                         if exerciseSearchVM.workoutFilterMode == .onlyWorkouts {
@@ -1947,8 +1950,18 @@ struct TrainingView: View {
                 }
                 .glassCardStyle(cornerRadius: 20)
                 .buttonStyle(.plain)
-                
-                
+
+                ForEach(AyurvedaSearchDosha.allCases) { dosha in
+                    AyurvedaDoshaQuickFilterChip(
+                        dosha: dosha,
+                        preference: exerciseSearchVM.ayurvedaFilters.preference(for: dosha)
+                    ) {
+                        withAnimation(.easeInOut(duration: 0.2)) {
+                            exerciseSearchVM.ayurvedaFilters.cyclePreference(for: dosha)
+                        }
+                    }
+                }
+
                 ForEach(allMuscleGroups) { group in
                     muscleChipButton(for: group)
                 }

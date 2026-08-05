@@ -66,6 +66,10 @@ struct WorkoutEditorView: View {
     
     // Exercises inside the workout
     @State private var editableExercises: [EditableExerciseLink] = []
+    @State private var isManualAyurvedaOverride: Bool
+    @State private var doshaVata: Int
+    @State private var doshaPitta: Int
+    @State private var doshaKapha: Int
     
     // MARK: - UI State
     @State private var isSaving = false
@@ -138,6 +142,10 @@ struct WorkoutEditorView: View {
                _minimalAgeMonthsTxt = State(initialValue: copy.minimalAgeMonths > 0 ? String(copy.minimalAgeMonths) : "")
                _videoURL = State(initialValue: copy.videoURL ?? "")
                _galleryData = State(initialValue: copy.gallery ?? [])
+               _isManualAyurvedaOverride = State(initialValue: copy.dosha != nil)
+               _doshaVata = State(initialValue: copy.dosha?.vata ?? 0)
+               _doshaPitta = State(initialValue: copy.dosha?.pitta ?? 0)
+               _doshaKapha = State(initialValue: copy.dosha?.kapha ?? 0)
                _editableExercises = State(initialValue: copy.exercises?.compactMap { link in
                    guard let exCopy = link.exercise else { return nil }
                    // Тук трябва да намерим реалния ExerciseItem от базата данни,
@@ -162,6 +170,10 @@ struct WorkoutEditorView: View {
                _minimalAgeMonthsTxt = State(initialValue: p.minimalAgeMonths > 0 ? String(p.minimalAgeMonths) : "")
                _videoURL = State(initialValue: p.videoURL ?? "")
                _galleryData = State(initialValue: p.gallery?.map(\.data) ?? [])
+               _isManualAyurvedaOverride = State(initialValue: p.dosha != nil)
+               _doshaVata = State(initialValue: p.dosha?.vata ?? 0)
+               _doshaPitta = State(initialValue: p.dosha?.pitta ?? 0)
+               _doshaKapha = State(initialValue: p.dosha?.kapha ?? 0)
                _editableExercises = State(initialValue: []) // Ще се зареди в onAppear
            } else { // New workout
                _name = State(initialValue: "")
@@ -170,6 +182,10 @@ struct WorkoutEditorView: View {
                _minimalAgeMonthsTxt = State(initialValue: "")
                _videoURL = State(initialValue: "")
                _galleryData = State(initialValue: [])
+               _isManualAyurvedaOverride = State(initialValue: false)
+               _doshaVata = State(initialValue: 0)
+               _doshaPitta = State(initialValue: 0)
+               _doshaKapha = State(initialValue: 0)
                _editableExercises = State(initialValue: [])
            }
        }
@@ -187,6 +203,15 @@ struct WorkoutEditorView: View {
     private var aggregatedMuscleGroups: [MuscleGroup] {
         let allGroups = editableExercises.flatMap { $0.exercise.muscleGroups }
         return Array(Set(allGroups)).sorted { $0.rawValue < $1.rawValue }
+    }
+
+    private var yogaWorkoutEntries: [YogaWorkoutExerciseEntry] {
+        editableExercises.map {
+            YogaWorkoutExerciseEntry(
+                exercise: $0.exercise,
+                durationMinutes: $0.durationMinutes
+            )
+        }
     }
     
     private var allMuscleGroups: [MuscleGroup] {
@@ -406,6 +431,13 @@ struct WorkoutEditorView: View {
                     gallerySection
                     detailsSection
                     muscleGroupSection
+                    YogaWorkoutAyurvedaEditorSection(
+                        isManualOverride: $isManualAyurvedaOverride,
+                        vata: $doshaVata,
+                        pitta: $doshaPitta,
+                        kapha: $doshaKapha,
+                        entries: yogaWorkoutEntries
+                    )
                     exercisesSection
                 }
                 .padding()
@@ -516,7 +548,7 @@ struct WorkoutEditorView: View {
                         HStack(spacing: 16) {
                             StyledLabeledPicker(label: "Total Duration") {
                                 HStack {
-                                    Text("\(totalDuration, specifier: "%.0f") min")
+                                    Text("\(totalDuration.clean) min")
                                         .font(.system(size: 16))
                                     Spacer()
                                 }
@@ -652,6 +684,26 @@ struct WorkoutEditorView: View {
             .glassCardStyle(cornerRadius: 20)
         }
     }
+
+    @ViewBuilder
+    private func yogaSearchMetadata(for item: ExerciseItem) -> some View {
+        if item.hasYogaPracticeMetadata {
+            let values = [
+                item.family?.rawValue,
+                item.level.map { "Level \($0)" },
+                item.durationMinutes.map { "\($0) min" }
+            ]
+            .compactMap { $0 }
+            .filter { !$0.isEmpty }
+
+            if !values.isEmpty {
+                Text(values.joined(separator: " · "))
+                    .font(.caption)
+                    .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.68))
+                    .multilineTextAlignment(.leading)
+            }
+        }
+    }
     
     // MARK: - Full-screen search layer
     @ViewBuilder
@@ -691,11 +743,15 @@ struct WorkoutEditorView: View {
                         } else {
                             ForEach(displayedSearchResults) { item in
                                 Button(action: { add(exercise: item) }) {
-                                    HStack {
+                                    HStack(alignment: .top, spacing: 10) {
                                         if item.isFavorite {
                                             Image(systemName: "star.fill").foregroundColor(.yellow)
                                         }
-                                        Text(item.name)
+                                        VStack(alignment: .leading, spacing: 4) {
+                                            Text(item.name)
+                                            yogaSearchMetadata(for: item)
+                                            ExerciseAyurvedaSearchResultChips(item: item)
+                                        }
                                         Spacer()
                                     }
                                     .padding()
@@ -757,6 +813,17 @@ struct WorkoutEditorView: View {
                 }
                 .glassCardStyle(cornerRadius: 20)
                 .buttonStyle(.plain)
+
+                ForEach(AyurvedaSearchDosha.allCases) { dosha in
+                    AyurvedaDoshaQuickFilterChip(
+                        dosha: dosha,
+                        preference: searchVM.ayurvedaFilters.preference(for: dosha)
+                    ) {
+                        withAnimation(.easeInOut(duration: 0.2)) {
+                            searchVM.ayurvedaFilters.cyclePreference(for: dosha)
+                        }
+                    }
+                }
                 
                 ForEach(allMuscleGroups) { group in
                     muscleChipButton(for: group)
@@ -1077,9 +1144,16 @@ struct WorkoutEditorView: View {
     }
     
     private func add(exercise: ExerciseItem) {
+        let defaultDuration: Double
+        if let minutes = exercise.durationMinutes {
+            defaultDuration = Double(minutes)
+        } else {
+            defaultDuration = 15
+        }
+
         let newLink = EditableExerciseLink(
             exercise: exercise,
-            durationMinutes: Double(exercise.durationMinutes ?? 15)
+            durationMinutes: defaultDuration
         )
         withAnimation {
             editableExercises.append(newLink)
@@ -1131,7 +1205,19 @@ struct WorkoutEditorView: View {
             
             itemToSave.metValue = averageMET
             itemToSave.durationMinutes = Int(totalDuration)
-            
+
+            if isManualAyurvedaOverride {
+                itemToSave.dosha = YogaDosha(
+                    vata: doshaVata,
+                    pitta: doshaPitta,
+                    kapha: doshaKapha
+                )
+                itemToSave.doshaProvenance = "user-editor"
+            } else {
+                itemToSave.dosha = nil
+                itemToSave.doshaProvenance = nil
+            }
+
             itemToSave.muscleGroups = aggregatedMuscleGroups
             
             if itemToSave.gallery == nil { itemToSave.gallery = [] }
@@ -1586,6 +1672,7 @@ fileprivate struct EditableExerciseRow: View {
     let focusCase: WorkoutEditorView.FocusableField
     
     @State private var textValue: String
+    @State private var showsYogaDetails = false
     
     init(link: Binding<WorkoutEditorView.EditableExerciseLink>,
          onDelete: @escaping () -> Void,
@@ -1595,37 +1682,56 @@ fileprivate struct EditableExerciseRow: View {
         self.onDelete = onDelete
         self._focusedField = focusedField
         self.focusCase = focusCase
-        self._textValue = State(initialValue: String(format: "%.0f", link.wrappedValue.durationMinutes))
+        self._textValue = State(
+            initialValue: Self.formattedDuration(link.wrappedValue.durationMinutes)
+        )
     }
     
     var body: some View {
-        HStack {
-            Text(link.exercise.name)
-                .foregroundStyle(effectManager.currentGlobalAccentColor)
-                .lineLimit(2)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            
-            HStack(spacing: 4) {
-                ConfigurableTextField(
-                    title: "min",
-                    value: $textValue,
-                    type: .integer,
-                    placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
-                    focused: $focusedField,
-                    fieldIdentifier: focusCase
-                )
-                .multilineTextAlignment(.trailing)
-                .fixedSize()
-                .foregroundStyle(effectManager.currentGlobalAccentColor)
-                
-                Text("min")
-                    .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
-                
-                Button(role: .destructive, action: onDelete) {
-                    Image(systemName: "trash")
-                        .foregroundStyle(effectManager.currentGlobalAccentColor)
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                Text(link.exercise.name)
+                    .foregroundStyle(effectManager.currentGlobalAccentColor)
+                    .lineLimit(2)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                HStack(spacing: 4) {
+                    ConfigurableTextField(
+                        title: "min",
+                        value: $textValue,
+                        type: .decimal,
+                        placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
+                        focused: $focusedField,
+                        fieldIdentifier: focusCase
+                    )
+                    .multilineTextAlignment(.trailing)
+                    .fixedSize()
+                    .foregroundStyle(effectManager.currentGlobalAccentColor)
+
+                    Text("min")
+                        .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
+
+                    Button(role: .destructive, action: onDelete) {
+                        Image(systemName: "trash")
+                            .foregroundStyle(effectManager.currentGlobalAccentColor)
+                    }
+                    .buttonStyle(.borderless)
                 }
-                .buttonStyle(.borderless)
+            }
+
+            if link.exercise.hasYogaPracticeMetadata {
+                DisclosureGroup(isExpanded: $showsYogaDetails) {
+                    YogaExerciseDetailSection(
+                        item: link.exercise,
+                        title: nil,
+                        usesCard: false
+                    )
+                    .padding(.top, 10)
+                } label: {
+                    Label("Yoga & Ayurveda details", systemImage: "figure.yoga")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.82))
+                }
             }
         }
         .padding(12)
@@ -1640,15 +1746,22 @@ fileprivate struct EditableExerciseRow: View {
         .onChange(of: link.durationMinutes) { _, newDuration in
             let currentTextAsDouble = Double(textValue) ?? 0.0
             if abs(currentTextAsDouble - newDuration) > 0.1 {
-                textValue = String(format: "%.0f", newDuration)
+                textValue = Self.formattedDuration(newDuration)
             }
         }
         .onChange(of: focusedField) { _, newFocus in
             if newFocus != focusCase {
-                let clampedDuration = max(1, min(link.durationMinutes, 999))
-                textValue = String(format: "%.0f", clampedDuration)
+                let clampedDuration = max(1.0 / 60.0, min(link.durationMinutes, 999))
+                textValue = Self.formattedDuration(clampedDuration)
                 link.durationMinutes = clampedDuration
             }
         }
+    }
+
+    private static func formattedDuration(_ minutes: Double) -> String {
+        if minutes.rounded() == minutes {
+            return String(format: "%.0f", minutes)
+        }
+        return String(format: minutes < 1 ? "%.2f" : "%.1f", minutes)
     }
 }

@@ -764,7 +764,10 @@ struct TrainingPlanEditorView: View {
                                             if item.isWorkout {
                                                 Image(systemName: "figure.strengthtraining.traditional").foregroundColor(.orange).font(.caption)
                                             }
-                                            Text(item.name).lineLimit(1)
+                                            VStack(alignment: .leading, spacing: 5) {
+                                                Text(item.name).lineLimit(1)
+                                                ExerciseAyurvedaSearchResultChips(item: item)
+                                            }
                                             Spacer()
                                         }
                                         .padding()
@@ -839,7 +842,7 @@ struct TrainingPlanEditorView: View {
                     }
                 }) {
                     HStack(spacing: 6) {
-                        Image(systemName: "figure.strengthtraining.traditional")
+                        Image(systemName: "figure.yoga")
                             .imageScale(.medium)
                             .font(.system(size: 13, weight: .semibold))
                         if searchVM.workoutFilterMode == .onlyWorkouts {
@@ -861,6 +864,17 @@ struct TrainingPlanEditorView: View {
                 }
                 .glassCardStyle(cornerRadius: 20)
                 .buttonStyle(.plain)
+
+                ForEach(AyurvedaSearchDosha.allCases) { dosha in
+                    AyurvedaDoshaQuickFilterChip(
+                        dosha: dosha,
+                        preference: searchVM.ayurvedaFilters.preference(for: dosha)
+                    ) {
+                        withAnimation(.easeInOut(duration: 0.2)) {
+                            searchVM.ayurvedaFilters.cyclePreference(for: dosha)
+                        }
+                    }
+                }
                 
                 
                 ForEach(allMuscleGroups) { group in

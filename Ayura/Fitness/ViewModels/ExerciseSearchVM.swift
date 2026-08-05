@@ -14,6 +14,7 @@ final class ExerciseSearchVM: ObservableObject {
     // MARK: - Inputs from the View
     @Published var query: String = ""
     @Published var muscleGroupFilter: MuscleGroup? = nil
+    @Published var ayurvedaFilters: AyurvedaSearchFilters = .empty
     
     /// Филтриране по workout режим
     @Published var workoutFilterMode: WorkoutFilterMode = .all {
@@ -60,7 +61,7 @@ final class ExerciseSearchVM: ObservableObject {
 
     // MARK: - Init
     init() {
-        Publishers.CombineLatest($query, $muscleGroupFilter)
+        Publishers.CombineLatest3($query, $muscleGroupFilter, $ayurvedaFilters)
             .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
             .sink { [weak self] _ in
                 self?.resetAndLoad()
@@ -104,15 +105,26 @@ final class ExerciseSearchVM: ObservableObject {
         guard let container, !isLoading else { return }
         isLoading = true
 
-        let capturedPredicate = makePredicate()
+        let parsedQuery = ExerciseAyurvedaSearch.parse(query)
+        let capturedPredicate = makePredicate(
+            lexicalQuery: parsedQuery.lexicalQuery
+        )
         let capturedOffset = self.currentOffset
         let capturedPageSize = self.pageSize
         let capturedGeneration = self.generation
         let capturedMuscleGroup = self.muscleGroupFilter
+        let capturedAyurvedaFilters = self.ayurvedaFilters
+        let capturedAyurvedaConstraints = parsedQuery.constraints
+        let usesAyurvedaRanking = capturedAyurvedaFilters.isActive
+            || !capturedAyurvedaConstraints.isEmpty
 
         currentTask?.cancel()
         currentTask = Task {
-            let backgroundResult: (ids: [PersistentIdentifier], dbFetchCount: Int)
+            let backgroundResult: (
+                ids: [PersistentIdentifier],
+                nextOffset: Int,
+                hasMore: Bool
+            )
 
             do {
                 backgroundResult = try await Task.detached {
@@ -122,11 +134,13 @@ final class ExerciseSearchVM: ObservableObject {
                         predicate: capturedPredicate,
                         sortBy: [SortDescriptor(\.nameNormalized)]
                     )
-                    descriptor.fetchOffset = capturedOffset
-                    descriptor.fetchLimit = capturedPageSize
+                    if !usesAyurvedaRanking {
+                        descriptor.fetchOffset = capturedOffset
+                        descriptor.fetchLimit = capturedPageSize
+                    }
 
                     let fetchedItems = try bgContext.fetch(descriptor)
-                    if Task.isCancelled { return ([], 0) }
+                    if Task.isCancelled { return ([], capturedOffset, false) }
 
                     // 1) muscle filter (in-memory)
                     let afterMuscleFilter: [ExerciseItem]
@@ -136,7 +150,37 @@ final class ExerciseSearchVM: ObservableObject {
                         afterMuscleFilter = fetchedItems
                     }
 
-                    return (afterMuscleFilter.map(\.persistentModelID), fetchedItems.count)
+                    if usesAyurvedaRanking {
+                        let ranked = afterMuscleFilter.sorted { lhs, rhs in
+                            let lhsScore = ExerciseAyurvedaSearch.score(
+                                item: lhs,
+                                filters: capturedAyurvedaFilters,
+                                constraints: capturedAyurvedaConstraints
+                            )
+                            let rhsScore = ExerciseAyurvedaSearch.score(
+                                item: rhs,
+                                filters: capturedAyurvedaFilters,
+                                constraints: capturedAyurvedaConstraints
+                            )
+                            if lhsScore != rhsScore { return lhsScore > rhsScore }
+                            return lhs.nameNormalized < rhs.nameNormalized
+                        }
+                        let page = ranked
+                            .dropFirst(capturedOffset)
+                            .prefix(capturedPageSize)
+                        let nextOffset = capturedOffset + page.count
+                        return (
+                            page.map(\.persistentModelID),
+                            nextOffset,
+                            nextOffset < ranked.count
+                        )
+                    }
+
+                    return (
+                        afterMuscleFilter.map(\.persistentModelID),
+                        capturedOffset + fetchedItems.count,
+                        fetchedItems.count == capturedPageSize
+                    )
                 }.value
             } catch {
                 print("ExerciseSearchVM background task error: \(error)")
@@ -167,8 +211,8 @@ final class ExerciseSearchVM: ObservableObject {
                 }
             }
 
-            self.currentOffset += backgroundResult.dbFetchCount
-            self.hasMore = backgroundResult.dbFetchCount == capturedPageSize
+            self.currentOffset = backgroundResult.nextOffset
+            self.hasMore = backgroundResult.hasMore
             self.isLoading = false
 
             if appendedCountThisPage == 0, self.hasMore, self.generation == capturedGeneration {
@@ -178,8 +222,10 @@ final class ExerciseSearchVM: ObservableObject {
     }
 
     // MARK: - Predicate Builder
-    private func makePredicate() -> Predicate<ExerciseItem> {
-        let normalizedQuery = query.foldedSearchKey
+    private func makePredicate(
+        lexicalQuery: String
+    ) -> Predicate<ExerciseItem> {
+        let normalizedQuery = lexicalQuery.foldedSearchKey
         let capturedExcludedIDs = excludedIDs
         let capturedIsFavorites = isFavoritesModeActive
         let mode = workoutFilterMode

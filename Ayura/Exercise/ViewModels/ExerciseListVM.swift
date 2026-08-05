@@ -18,6 +18,7 @@ final class ExerciseListVM: ObservableObject {
     // MARK: - Inputs & Outputs
     @Published var searchText: String = ""
     @Published var filter: Filter = .all
+    @Published var ayurvedaFilters: AyurvedaSearchFilters = .empty
     @Published private(set) var items: [ExerciseItem] = []
     @Published private(set) var hasMore: Bool = false
     @Published private(set) var isLoading: Bool = false
@@ -32,6 +33,7 @@ final class ExerciseListVM: ObservableObject {
     private var searchPhase: SearchPhase = .startsWith
     private var startsWithOffset = 0
     private var containsOffset = 0
+    private var ayurvedaOffset = 0
 
     // Де-дубликация през целия lifecycle на текущото зареждане
     private var seenIDs = Set<UUID>()
@@ -41,10 +43,13 @@ final class ExerciseListVM: ObservableObject {
 
     // MARK: - Init
     init() {
-        Publishers.CombineLatest($searchText.removeDuplicates(),
-                                 $filter.removeDuplicates())
+        Publishers.CombineLatest3(
+            $searchText.removeDuplicates(),
+            $filter.removeDuplicates(),
+            $ayurvedaFilters.removeDuplicates()
+        )
             .debounce(for: .milliseconds(250), scheduler: RunLoop.main)
-            .sink { [weak self] _, _ in
+            .sink { [weak self] _ in
                 self?.resetAndLoad()
             }
             .store(in: &cancellables)
@@ -78,6 +83,7 @@ final class ExerciseListVM: ObservableObject {
         searchPhase = .startsWith
         startsWithOffset = 0
         containsOffset = 0
+        ayurvedaOffset = 0
         hasMore = false
         isLoading = false
         loadPage()
@@ -87,7 +93,21 @@ final class ExerciseListVM: ObservableObject {
         guard let context, !isLoading, searchPhase != .finished else { return }
         isLoading = true
 
-        let search = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        let parsedQuery = ExerciseAyurvedaSearch.parse(searchText)
+        let search = parsedQuery.lexicalQuery
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        let usesAyurvedaRanking = ayurvedaFilters.isActive
+            || !parsedQuery.constraints.isEmpty
+
+        if usesAyurvedaRanking {
+            loadAyurvedaPage(
+                context: context,
+                search: search,
+                constraints: parsedQuery.constraints
+            )
+            return
+        }
+
         let phase = self.searchPhase
         let startsOff = self.startsWithOffset
         let containsOff = self.containsOffset
@@ -136,6 +156,63 @@ final class ExerciseListVM: ObservableObject {
         }
 
         self.isLoading = false
+    }
+
+    private func loadAyurvedaPage(
+        context: ModelContext,
+        search: String,
+        constraints: [AyurvedaFacetConstraint]
+    ) {
+        do {
+            let startsWith = try context.fetch(
+                FetchDescriptor(
+                    predicate: makePredicate(for: .startsWith, search: search),
+                    sortBy: [SortDescriptor(\.nameNormalized)]
+                )
+            )
+            let contains = search.isEmpty
+                ? []
+                : try context.fetch(
+                    FetchDescriptor(
+                        predicate: makePredicate(for: .contains, search: search),
+                        sortBy: [SortDescriptor(\.nameNormalized)]
+                    )
+                )
+
+            var unique: [ExerciseItem] = []
+            var uniqueIDs = Set<UUID>()
+            for item in startsWith + contains where uniqueIDs.insert(item.id).inserted {
+                unique.append(item)
+            }
+
+            let ranked = unique.sorted { lhs, rhs in
+                let lhsScore = ExerciseAyurvedaSearch.score(
+                    item: lhs,
+                    filters: ayurvedaFilters,
+                    constraints: constraints
+                )
+                let rhsScore = ExerciseAyurvedaSearch.score(
+                    item: rhs,
+                    filters: ayurvedaFilters,
+                    constraints: constraints
+                )
+                if lhsScore != rhsScore { return lhsScore > rhsScore }
+                return lhs.nameNormalized < rhs.nameNormalized
+            }
+
+            let page = ranked.dropFirst(ayurvedaOffset).prefix(pageSize)
+            let uniqueNew = page.filter { seenIDs.insert($0.id).inserted }
+            items.append(contentsOf: uniqueNew)
+            ayurvedaOffset += page.count
+            hasMore = ayurvedaOffset < ranked.count
+            searchPhase = hasMore ? .startsWith : .finished
+        } catch {
+            print("❌ ExerciseListVM Ayurveda search error: \(error)")
+            hasMore = false
+            searchPhase = .finished
+        }
+
+        isLoading = false
     }
 
     private func makePredicate(for phase: SearchPhase, search: String) -> Predicate<ExerciseItem> {

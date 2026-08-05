@@ -325,7 +325,9 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
         }
         require_equal(
             "ExerciseItem removed fields",
-            exercise_columns.intersection({"ZSPORT", "ZSPORTS"}),
+            exercise_columns.intersection(
+                {"ZSPORT", "ZSPORTS", "ZDURATIONSECONDS"}
+            ),
             set(),
         )
         require_equal(
@@ -356,6 +358,31 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
                    OR ZNAMENORMALIZED IS NULL OR LENGTH(ZNAMENORMALIZED) = 0
                    OR ZSEARCHTOKENS IS NULL OR LENGTH(ZSEARCHTOKENS) = 0
                    OR ZSEARCHTOKENS2 IS NULL OR LENGTH(ZSEARCHTOKENS2) = 0
+                """,
+            ),
+            0,
+        )
+        require_equal(
+            "Yoga asanas missing canonical duration",
+            scalar(
+                connection,
+                """
+                SELECT COUNT(*) FROM ZEXERCISEITEM
+                WHERE ZCATALOGNUMBER BETWEEN 800000 AND 800907
+                  AND (ZDURATIONMINUTES IS NULL OR ZDURATIONMINUTES <= 0)
+                """,
+            ),
+            0,
+        )
+        require_equal(
+            "Yoga asanas with a separate Sanskrit display name",
+            scalar(
+                connection,
+                """
+                SELECT COUNT(*) FROM ZEXERCISEITEM
+                WHERE ZCATALOGNUMBER BETWEEN 800000 AND 800907
+                  AND ZNAME != ZSANSKRIT
+                  AND ZNAME NOT LIKE '% (' || ZSANSKRIT || ')'
                 """,
             ),
             0,

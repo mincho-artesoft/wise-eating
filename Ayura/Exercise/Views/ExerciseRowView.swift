@@ -81,6 +81,8 @@ struct ExerciseRowView: View {
                                 .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
                                 .lineLimit(2)
                         }
+
+                        ExerciseAyurvedaSearchResultChips(item: item)
                     }
                     .layoutPriority(1)
                 }

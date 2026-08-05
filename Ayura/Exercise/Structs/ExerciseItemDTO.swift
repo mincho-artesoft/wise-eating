@@ -13,7 +13,7 @@ struct ExerciseItemDTO: Codable, Sendable {
     var family: AsanaFamily? = nil
     var level: Int? = nil
     var levelScale: String? = nil
-    var durationSeconds: Int? = nil
+    var durationMinutes: Int? = nil
     var breath: String? = nil
     var drishti: String? = nil
     var contraindications: [String]? = nil
@@ -31,7 +31,6 @@ struct ExerciseItemDTO: Codable, Sendable {
             family: family,
             level: level,
             levelScale: levelScale,
-            durationSeconds: durationSeconds,
             breath: breath,
             drishti: drishti,
             contraindications: contraindications,
@@ -45,7 +44,7 @@ struct ExerciseItemDTO: Codable, Sendable {
             gallery: nil,
             assetImageName: assetImageName,
             muscleGroups: muscleGroups,
-            durationMinutes: nil,
+            durationMinutes: durationMinutes,
             isWorkout: false,
             exercises: [],
             minimalAgeMonths: minimalAgeMonths

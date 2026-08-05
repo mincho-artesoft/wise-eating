@@ -60,6 +60,15 @@ struct ExerciseItemEditorView: View {
     @State private var metValueString: String
     @State private var durationMinutesString: String
     @State private var minAgeMonthsTxt: String
+    @State private var selectedFamily: AsanaFamily?
+    @State private var levelString: String
+    @State private var levelScale: String
+    @State private var breath: String
+    @State private var drishti: String
+    @State private var doshaVata: Int
+    @State private var doshaPitta: Int
+    @State private var doshaKapha: Int
+    @State private var showYogaDetails = true
     
     // Вече не ползваме PhotosPicker директно, но може да оставим това състояние ако искаш
     @State private var selectedPhoto: PhotosPickerItem?
@@ -103,7 +112,11 @@ struct ExerciseItemEditorView: View {
         self.exerciseToEdit = initialExercise
         
         if let copy = dubExercise {
-            _name = State(initialValue: isAIInit ? copy.name : "Copy of \(copy.name)")
+            let composedName = YogaExerciseNaming.displayName(
+                title: copy.name,
+                sanskrit: copy.sanskrit
+            )
+            _name = State(initialValue: isAIInit ? composedName : "Copy of \(composedName)")
             _description = State(initialValue: copy.exerciseDescription ?? "")
             _videoURL = State(initialValue: copy.videoURL ?? "")
             _metValueString = State(initialValue: copy.metValue.map { String(format: "%.1f", $0) } ?? "")
@@ -112,8 +125,21 @@ struct ExerciseItemEditorView: View {
             _galleryData = State(initialValue: copy.gallery ?? [])
             _durationMinutesString = State(initialValue: copy.durationMinutes.map { String($0) } ?? "")
             _minAgeMonthsTxt = State(initialValue: copy.minimalAgeMonths > 0 ? String(copy.minimalAgeMonths) : "")
+            _selectedFamily = State(initialValue: copy.family)
+            _levelString = State(initialValue: copy.level.map(String.init) ?? "")
+            _levelScale = State(initialValue: copy.levelScale ?? "")
+            _breath = State(initialValue: copy.breath ?? "")
+            _drishti = State(initialValue: copy.drishti ?? "")
+            _doshaVata = State(initialValue: copy.dosha?.vata ?? 0)
+            _doshaPitta = State(initialValue: copy.dosha?.pitta ?? 0)
+            _doshaKapha = State(initialValue: copy.dosha?.kapha ?? 0)
         } else if let p = initialExercise {
-            _name = State(initialValue: p.name)
+            _name = State(
+                initialValue: YogaExerciseNaming.displayName(
+                    title: p.name,
+                    sanskrit: p.sanskrit
+                )
+            )
             _description = State(initialValue: p.exerciseDescription ?? "")
             _videoURL = State(initialValue: p.videoURL ?? "")
             _metValueString = State(initialValue: p.metValue.map { String(format: "%.1f", $0) } ?? "")
@@ -122,6 +148,14 @@ struct ExerciseItemEditorView: View {
             _galleryData = State(initialValue: p.gallery?.map(\.data) ?? [])
             _durationMinutesString = State(initialValue: p.durationMinutes.map { String($0) } ?? "")
             _minAgeMonthsTxt = State(initialValue: p.minimalAgeMonths > 0 ? String(p.minimalAgeMonths) : "")
+            _selectedFamily = State(initialValue: p.family)
+            _levelString = State(initialValue: p.level.map(String.init) ?? "")
+            _levelScale = State(initialValue: p.levelScale ?? "")
+            _breath = State(initialValue: p.breath ?? "")
+            _drishti = State(initialValue: p.drishti ?? "")
+            _doshaVata = State(initialValue: p.dosha?.vata ?? 0)
+            _doshaPitta = State(initialValue: p.dosha?.pitta ?? 0)
+            _doshaKapha = State(initialValue: p.dosha?.kapha ?? 0)
         } else {
             _name = State(initialValue: "")
             _description = State(initialValue: "")
@@ -132,6 +166,14 @@ struct ExerciseItemEditorView: View {
             _galleryData = State(initialValue: [])
             _durationMinutesString = State(initialValue: "")
             _minAgeMonthsTxt = State(initialValue: "")
+            _selectedFamily = State(initialValue: nil)
+            _levelString = State(initialValue: "")
+            _levelScale = State(initialValue: "")
+            _breath = State(initialValue: "")
+            _drishti = State(initialValue: "")
+            _doshaVata = State(initialValue: 0)
+            _doshaPitta = State(initialValue: 0)
+            _doshaKapha = State(initialValue: 0)
         }
     }
     
@@ -284,6 +326,7 @@ struct ExerciseItemEditorView: View {
                         .frame(height: isBannerAdLoaded ? 120 : 0)
                     gallerySection
                     detailsSection
+                    yogaSection
                     muscleGroupSection
                 }
                 .padding()
@@ -518,6 +561,44 @@ struct ExerciseItemEditorView: View {
         .padding()
         .glassCardStyle(cornerRadius: 20)
     }
+
+    private var yogaSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Button {
+                withAnimation {
+                    showYogaDetails.toggle()
+                }
+            } label: {
+                HStack {
+                    Text("Yoga & Ayurveda")
+                        .font(.headline)
+                    Spacer()
+                    Image(systemName: showYogaDetails ? "chevron.up" : "chevron.down")
+                        .font(.body.weight(.semibold))
+                        .contentTransition(.symbolEffect(.replace))
+                }
+                .foregroundStyle(effectManager.currentGlobalAccentColor)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+
+            if showYogaDetails {
+                YogaExerciseEditorSection(
+                    family: $selectedFamily,
+                    level: $levelString,
+                    levelScale: $levelScale,
+                    breath: $breath,
+                    drishti: $drishti,
+                    vata: $doshaVata,
+                    pitta: $doshaPitta,
+                    kapha: $doshaKapha
+                )
+                .padding()
+                .glassCardStyle(cornerRadius: 20)
+                .padding(.top, 4)
+            }
+        }
+    }
     
     private var muscleGroupSection: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -552,6 +633,10 @@ struct ExerciseItemEditorView: View {
                     Image(uiImage: uiImage)
                         .resizable()
                         .scaledToFill()
+                } else if let assetImage = exerciseAssetImage {
+                    Image(uiImage: assetImage)
+                        .resizable()
+                        .scaledToFill()
                 } else {
                     ZStack {
                         Circle()
@@ -569,6 +654,12 @@ struct ExerciseItemEditorView: View {
         }
         .buttonStyle(.plain)
         .padding(.leading, -4)
+    }
+
+    private var exerciseAssetImage: UIImage? {
+        let assetName = exerciseToEdit?.assetImageName ?? dubExercise?.assetImageName
+        guard let assetName else { return nil }
+        return UIImage(named: assetName)
     }
     
     @ViewBuilder
@@ -654,6 +745,28 @@ struct ExerciseItemEditorView: View {
             itemToSave.muscleGroups = selectedMuscleGroups.compactMap { MuscleGroup(rawValue: $0) }
             itemToSave.durationMinutes = Int(durationMinutesString)
             itemToSave.minimalAgeMonths = Int(minAgeMonthsTxt) ?? 0
+            itemToSave.family = selectedFamily
+            itemToSave.level = Int(levelString)
+            itemToSave.levelScale = levelScale.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty()
+            itemToSave.breath = breath.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty()
+            itemToSave.drishti = drishti.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty()
+
+            let hasYogaDetails = itemToSave.family != nil
+                || itemToSave.level != nil
+                || itemToSave.levelScale != nil
+                || itemToSave.breath != nil
+                || itemToSave.drishti != nil
+                || doshaVata != 0
+                || doshaPitta != 0
+                || doshaKapha != 0
+                || itemToSave.dosha != nil
+            let updatedDosha = hasYogaDetails
+                ? YogaDosha(vata: doshaVata, pitta: doshaPitta, kapha: doshaKapha)
+                : nil
+            if itemToSave.dosha != updatedDosha {
+                itemToSave.doshaProvenance = updatedDosha == nil ? nil : "user-editor"
+            }
+            itemToSave.dosha = updatedDosha
             
             if itemToSave.gallery == nil { itemToSave.gallery = [] }
             itemToSave.gallery?.removeAll { photo in !galleryData.contains(photo.data) }
@@ -683,7 +796,7 @@ struct ExerciseItemEditorView: View {
             
         }
     }
-    
+
     // Оставяме тази функция, макар че вече не ползваме PhotosPicker за добавяне
     private func handleNewGalleryItems(_: [PhotosPickerItem], items: [PhotosPickerItem]) {
         Task {
@@ -841,6 +954,23 @@ struct ExerciseItemEditorView: View {
                 self.metValueString      = mapped.metValueString
                 self.selectedMuscleGroups = mapped.selectedMuscleGroups
                 self.minAgeMonthsTxt     = mapped.minAgeMonthsTxt
+                if let sanskrit = response.sanskrit {
+                    self.name = YogaExerciseNaming.displayName(
+                        title: self.name,
+                        sanskrit: sanskrit
+                    )
+                }
+                self.selectedFamily      = response.family ?? self.selectedFamily
+                self.levelString         = response.level.map(String.init) ?? self.levelString
+                self.levelScale          = response.levelScale ?? self.levelScale
+                self.durationMinutesString = response.durationMinutes.map(String.init) ?? self.durationMinutesString
+                self.breath              = response.breath ?? self.breath
+                self.drishti             = response.drishti ?? self.drishti
+                if let dosha = response.dosha {
+                    self.doshaVata = dosha.vata
+                    self.doshaPitta = dosha.pitta
+                    self.doshaKapha = dosha.kapha
+                }
             }
             
             // ❗️Не трием job-а тук – само отбелязваме, че трябва да се изтрие при Save
