@@ -10,7 +10,6 @@ public final class ExerciseItemCopy: Identifiable, Codable {
     public var slug: String?
     public var family: AsanaFamily?
     public var level: Int?
-    public var levelScale: String?
     public var breath: String?
     public var drishti: String?
     public var contraindications: [String]?
@@ -32,7 +31,7 @@ public final class ExerciseItemCopy: Identifiable, Codable {
     
     // CodingKeys to handle manual encoding/decoding if needed, especially for weak references.
     enum CodingKeys: String, CodingKey {
-        case originalID, name, sanskrit, slug, family, level, levelScale
+        case originalID, name, sanskrit, slug, family, level
         case breath, drishti, contraindications, dosha, doshaProvenance
         case exerciseDescription, videoURL, metValue, isUserAdded, isFavorite, photo
         case gallery, assetImageName, muscleGroups, durationSeconds, isWorkout
@@ -43,7 +42,6 @@ public final class ExerciseItemCopy: Identifiable, Codable {
     public init(
         originalID: UUID? = nil, name: String, sanskrit: String? = nil,
         slug: String? = nil, family: AsanaFamily? = nil, level: Int? = nil,
-        levelScale: String? = nil,
         breath: String? = nil, drishti: String? = nil,
         contraindications: [String]? = nil, dosha: YogaDosha? = nil,
         doshaProvenance: String? = nil, exerciseDescription: String? = nil,
@@ -59,7 +57,6 @@ public final class ExerciseItemCopy: Identifiable, Codable {
         self.slug = slug
         self.family = family
         self.level = level
-        self.levelScale = levelScale
         self.breath = breath
         self.drishti = drishti
         self.contraindications = contraindications
@@ -92,7 +89,7 @@ public final class ExerciseItemCopy: Identifiable, Codable {
 
         self.init(
             originalID: src.id, name: src.name, sanskrit: src.sanskrit, slug: src.slug,
-            family: src.family, level: src.level, levelScale: src.levelScale,
+            family: src.family, level: src.level,
             breath: src.breath, drishti: src.drishti,
             contraindications: src.contraindications, dosha: src.dosha,
             doshaProvenance: src.doshaProvenance, exerciseDescription: src.exerciseDescription,
@@ -136,7 +133,6 @@ public final class ExerciseItemCopy: Identifiable, Codable {
         self.init(
             originalID: copy.originalID, name: copy.name, sanskrit: copy.sanskrit,
             slug: copy.slug, family: copy.family, level: copy.level,
-            levelScale: copy.levelScale,
             breath: copy.breath, drishti: copy.drishti,
             contraindications: copy.contraindications, dosha: copy.dosha,
             doshaProvenance: copy.doshaProvenance,
@@ -157,7 +153,6 @@ public final class ExerciseItemCopy: Identifiable, Codable {
             slug: dto.slug,
             family: dto.family,
             level: dto.level,
-            levelScale: dto.levelScale,
             breath: dto.breath,
             drishti: dto.drishti,
             contraindications: dto.contraindications,

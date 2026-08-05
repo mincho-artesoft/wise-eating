@@ -60,7 +60,6 @@ struct YogaAsanaDTO: Decodable, Sendable {
     let desc: String
     let family: AsanaFamily
     let level: Int
-    let levelScale: String
     let muscleGroups: [MuscleGroup]
     let metValue: Double
     let minimalAgeMonths: Int

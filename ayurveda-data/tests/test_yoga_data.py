@@ -60,7 +60,7 @@ class YogaDataTests(unittest.TestCase):
             self.assertEqual(len(values), len(set(values)), key)
 
         for row in self.asanas:
-            self.assertEqual(row["levelScale"], "authored scale, not classical")
+            self.assertNotIn("levelScale", row)
             self.assertEqual(row["doshaProvenance"], "modern-synthesis")
             self.assertTrue(row["desc"].strip())
             self.assertTrue(

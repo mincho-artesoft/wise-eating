@@ -326,7 +326,7 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
         require_equal(
             "ExerciseItem removed fields",
             exercise_columns.intersection(
-                {"ZSPORT", "ZSPORTS", "ZDURATIONMINUTES"}
+                {"ZSPORT", "ZSPORTS", "ZDURATIONMINUTES", "ZLEVELSCALE"}
             ),
             set(),
         )

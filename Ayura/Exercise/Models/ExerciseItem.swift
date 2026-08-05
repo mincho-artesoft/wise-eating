@@ -29,7 +29,6 @@ public final class ExerciseItem: Identifiable {
         didSet { refreshSearchMetadata() }
     }
     public var level: Int?
-    public var levelScale: String?
     public var breath: String?
     public var drishti: String?
     public var contraindications: [String]?
@@ -122,7 +121,6 @@ public final class ExerciseItem: Identifiable {
         slug: String? = nil,
         family: AsanaFamily? = nil,
         level: Int? = nil,
-        levelScale: String? = nil,
         breath: String? = nil,
         drishti: String? = nil,
         contraindications: [String]? = nil,
@@ -150,7 +148,6 @@ public final class ExerciseItem: Identifiable {
         self.slug = slug
         self.family = family
         self.level = level
-        self.levelScale = levelScale
         self.breath = breath
         self.drishti = drishti
         self.contraindications = contraindications
@@ -186,7 +183,6 @@ public final class ExerciseItem: Identifiable {
            self.slug = dto.slug
            self.family = dto.family
            self.level = dto.level
-           self.levelScale = dto.levelScale
            self.durationSeconds = dto.durationSeconds
            self.breath = dto.breath
            self.drishti = dto.drishti

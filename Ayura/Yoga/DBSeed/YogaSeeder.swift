@@ -14,7 +14,7 @@ enum YogaSeeder {
     }
 
     static func bundleSeedVersion() throws -> Int {
-        4
+        5
     }
 
     static func isInstalled(context: ModelContext) throws -> Bool {
@@ -178,7 +178,6 @@ enum YogaSeeder {
         model.slug = dto.slug
         model.family = dto.family
         model.level = dto.level
-        model.levelScale = dto.levelScale
         model.breath = dto.breath
         model.drishti = dto.drishti
         model.contraindications = dto.contraindications
@@ -294,7 +293,6 @@ enum YogaSeeder {
 
         for row in rows {
             guard !row.desc.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
-                  row.levelScale == "authored scale, not classical",
                   row.doshaProvenance == "modern-synthesis",
                   [row.dosha.vata, row.dosha.pitta, row.dosha.kapha]
                     .allSatisfy({ (-2...2).contains($0) }) else {

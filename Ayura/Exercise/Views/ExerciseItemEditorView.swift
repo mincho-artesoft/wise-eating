@@ -62,7 +62,6 @@ struct ExerciseItemEditorView: View {
     @State private var minAgeMonthsTxt: String
     @State private var selectedFamily: AsanaFamily?
     @State private var levelString: String
-    @State private var levelScale: String
     @State private var breath: String
     @State private var drishti: String
     @State private var doshaVata: Int
@@ -127,7 +126,6 @@ struct ExerciseItemEditorView: View {
             _minAgeMonthsTxt = State(initialValue: copy.minimalAgeMonths > 0 ? String(copy.minimalAgeMonths) : "")
             _selectedFamily = State(initialValue: copy.family)
             _levelString = State(initialValue: copy.level.map(String.init) ?? "")
-            _levelScale = State(initialValue: copy.levelScale ?? "")
             _breath = State(initialValue: copy.breath ?? "")
             _drishti = State(initialValue: copy.drishti ?? "")
             _doshaVata = State(initialValue: copy.dosha?.vata ?? 0)
@@ -150,7 +148,6 @@ struct ExerciseItemEditorView: View {
             _minAgeMonthsTxt = State(initialValue: p.minimalAgeMonths > 0 ? String(p.minimalAgeMonths) : "")
             _selectedFamily = State(initialValue: p.family)
             _levelString = State(initialValue: p.level.map(String.init) ?? "")
-            _levelScale = State(initialValue: p.levelScale ?? "")
             _breath = State(initialValue: p.breath ?? "")
             _drishti = State(initialValue: p.drishti ?? "")
             _doshaVata = State(initialValue: p.dosha?.vata ?? 0)
@@ -168,7 +165,6 @@ struct ExerciseItemEditorView: View {
             _minAgeMonthsTxt = State(initialValue: "")
             _selectedFamily = State(initialValue: nil)
             _levelString = State(initialValue: "")
-            _levelScale = State(initialValue: "")
             _breath = State(initialValue: "")
             _drishti = State(initialValue: "")
             _doshaVata = State(initialValue: 0)
@@ -586,7 +582,6 @@ struct ExerciseItemEditorView: View {
                 YogaExerciseEditorSection(
                     family: $selectedFamily,
                     level: $levelString,
-                    levelScale: $levelScale,
                     breath: $breath,
                     drishti: $drishti,
                     vata: $doshaVata,
@@ -747,13 +742,11 @@ struct ExerciseItemEditorView: View {
             itemToSave.minimalAgeMonths = Int(minAgeMonthsTxt) ?? 0
             itemToSave.family = selectedFamily
             itemToSave.level = Int(levelString)
-            itemToSave.levelScale = levelScale.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty()
             itemToSave.breath = breath.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty()
             itemToSave.drishti = drishti.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty()
 
             let hasYogaDetails = itemToSave.family != nil
                 || itemToSave.level != nil
-                || itemToSave.levelScale != nil
                 || itemToSave.breath != nil
                 || itemToSave.drishti != nil
                 || doshaVata != 0
@@ -962,7 +955,6 @@ struct ExerciseItemEditorView: View {
                 }
                 self.selectedFamily      = response.family ?? self.selectedFamily
                 self.levelString         = response.level.map(String.init) ?? self.levelString
-                self.levelScale          = response.levelScale ?? self.levelScale
                 self.durationSecondsString = response.durationSeconds.map(String.init) ?? self.durationSecondsString
                 self.breath              = response.breath ?? self.breath
                 self.drishti             = response.drishti ?? self.drishti

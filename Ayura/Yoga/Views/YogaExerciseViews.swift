@@ -4,7 +4,6 @@ extension ExerciseItem {
     var hasYogaPracticeMetadata: Bool {
         family != nil
             || level != nil
-            || nonemptyYogaValue(levelScale) != nil
             || nonemptyYogaValue(breath) != nil
             || nonemptyYogaValue(drishti) != nil
             || dosha != nil
@@ -44,7 +43,6 @@ struct YogaExerciseEditorSection: View {
 
     @Binding var family: AsanaFamily?
     @Binding var level: String
-    @Binding var levelScale: String
     @Binding var breath: String
     @Binding var drishti: String
     @Binding var vata: Int
@@ -100,18 +98,12 @@ struct YogaExerciseEditorSection: View {
                 }
             }
 
-            HStack(alignment: .top, spacing: 12) {
-                StyledLabeledPicker(label: "Level") {
-                    editorTextField(
-                        "1–3",
-                        text: $level,
-                        keyboardType: .numberPad
-                    )
-                }
-
-                StyledLabeledPicker(label: "Level Scale") {
-                    editorTextField("e.g., authored scale", text: $levelScale)
-                }
+            StyledLabeledPicker(label: "Level") {
+                editorTextField(
+                    "1–3",
+                    text: $level,
+                    keyboardType: .numberPad
+                )
             }
         }
     }
@@ -279,13 +271,7 @@ struct YogaExerciseDetailSection: View {
     }
 
     private var formattedLevel: String? {
-        guard let level = item.level else {
-            return nonempty(item.levelScale).map { "Scale: \($0)" }
-        }
-        if let scale = nonempty(item.levelScale) {
-            return "Level \(level) · \(scale)"
-        }
-        return "Level \(level)"
+        item.level.map { "Level \($0)" }
     }
 
     private var formattedDuration: String? {

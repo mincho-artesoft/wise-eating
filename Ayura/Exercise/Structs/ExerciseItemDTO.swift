@@ -12,7 +12,6 @@ struct ExerciseItemDTO: Codable, Sendable {
     var slug: String? = nil
     var family: AsanaFamily? = nil
     var level: Int? = nil
-    var levelScale: String? = nil
     var durationSeconds: Int? = nil
     var breath: String? = nil
     var drishti: String? = nil
@@ -30,7 +29,6 @@ struct ExerciseItemDTO: Codable, Sendable {
             slug: slug,
             family: family,
             level: level,
-            levelScale: levelScale,
             breath: breath,
             drishti: drishti,
             contraindications: contraindications,

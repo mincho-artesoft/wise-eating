@@ -214,7 +214,7 @@ class PreseedArtifactTests(unittest.TestCase):
         )
         self.assertTrue(
             exercise_columns.isdisjoint(
-                {"ZSPORT", "ZSPORTS", "ZDURATIONMINUTES"}
+                {"ZSPORT", "ZSPORTS", "ZDURATIONMINUTES", "ZLEVELSCALE"}
             )
         )
         sequence_columns = {
