@@ -14,7 +14,7 @@ enum YogaSeeder {
     }
 
     static func bundleSeedVersion() throws -> Int {
-        5
+        6
     }
 
     static func isInstalled(context: ModelContext) throws -> Bool {
@@ -288,6 +288,13 @@ enum YogaSeeder {
         guard levels == expectedLevels else {
             throw YogaSeedError.invalidData(
                 "Asana level histogram differs from the approved catalogue"
+            )
+        }
+
+        guard Set(rows.map(\.breath)) == Set(YogaBreath.allCases),
+              Set(rows.map(\.drishti)) == Set(YogaDrishti.allCases) else {
+            throw YogaSeedError.invalidData(
+                "Breath or drishti enum options differ from the approved catalogue"
             )
         }
 

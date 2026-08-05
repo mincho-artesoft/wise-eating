@@ -4,15 +4,9 @@ extension ExerciseItem {
     var hasYogaPracticeMetadata: Bool {
         family != nil
             || level != nil
-            || nonemptyYogaValue(breath) != nil
-            || nonemptyYogaValue(drishti) != nil
+            || breath != nil
+            || drishti != nil
             || dosha != nil
-    }
-
-    private func nonemptyYogaValue(_ value: String?) -> String? {
-        guard let value else { return nil }
-        let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
-        return trimmed.isEmpty ? nil : trimmed
     }
 }
 
@@ -43,8 +37,8 @@ struct YogaExerciseEditorSection: View {
 
     @Binding var family: AsanaFamily?
     @Binding var level: String
-    @Binding var breath: String
-    @Binding var drishti: String
+    @Binding var breath: YogaBreath?
+    @Binding var drishti: YogaDrishti?
     @Binding var vata: Int
     @Binding var pitta: Int
     @Binding var kapha: Int
@@ -113,13 +107,55 @@ struct YogaExerciseEditorSection: View {
             groupHeader("Practice Guidance")
 
             StyledLabeledPicker(label: "Breath") {
-                editorTextField("e.g., Even ujjayi", text: $breath)
+                Menu {
+                    Button("Not set") {
+                        breath = nil
+                    }
+                    ForEach(YogaBreath.allCases) { option in
+                        Button(option.rawValue) {
+                            breath = option
+                        }
+                    }
+                } label: {
+                    optionMenuLabel(
+                        breath?.rawValue ?? "Select a breathing option",
+                        isEmpty: breath == nil
+                    )
+                }
             }
 
             StyledLabeledPicker(label: "Drishti (gaze)") {
-                editorTextField("e.g., Nasagra", text: $drishti)
+                Menu {
+                    Button("Not set") {
+                        drishti = nil
+                    }
+                    ForEach(YogaDrishti.allCases) { option in
+                        Button(option.rawValue) {
+                            drishti = option
+                        }
+                    }
+                } label: {
+                    optionMenuLabel(
+                        drishti?.rawValue ?? "Select a gaze option",
+                        isEmpty: drishti == nil
+                    )
+                }
             }
         }
+    }
+
+    private func optionMenuLabel(_ text: String, isEmpty: Bool) -> some View {
+        HStack {
+            Text(text)
+                .foregroundStyle(
+                    effectManager.currentGlobalAccentColor.opacity(isEmpty ? 0.6 : 1)
+                )
+            Spacer()
+            Image(systemName: "chevron.up.chevron.down")
+                .font(.caption.weight(.semibold))
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .contentShape(Rectangle())
     }
 
     private var doshaGroup: some View {
@@ -245,8 +281,8 @@ struct YogaExerciseDetailSection: View {
 
     @ViewBuilder
     private var practiceContent: some View {
-        let breath = nonempty(item.breath)
-        let drishti = nonempty(item.drishti)
+        let breath = item.breath?.rawValue
+        let drishti = item.drishti?.rawValue
 
         if breath != nil || drishti != nil {
             propertyGroup(title: "Practice Guidance", systemImage: "wind") {
@@ -311,11 +347,6 @@ struct YogaExerciseDetailSection: View {
         }
     }
 
-    private func nonempty(_ value: String?) -> String? {
-        guard let value else { return nil }
-        let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
-        return trimmed.isEmpty ? nil : trimmed
-    }
 }
 
 struct YogaWorkoutAyurvedaEditorSection: View {

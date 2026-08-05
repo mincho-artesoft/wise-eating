@@ -326,8 +326,20 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
         require_equal(
             "ExerciseItem removed fields",
             exercise_columns.intersection(
-                {"ZSPORT", "ZSPORTS", "ZDURATIONMINUTES", "ZLEVELSCALE"}
+                {
+                    "ZSPORT",
+                    "ZSPORTS",
+                    "ZDURATIONMINUTES",
+                    "ZLEVELSCALE",
+                    "ZBREATH",
+                    "ZDRISHTI",
+                }
             ),
+            set(),
+        )
+        require_equal(
+            "ExerciseItem enum-backed practice columns",
+            {"ZBREATHRAWVALUE", "ZDRISHTIRAWVALUE"}.difference(exercise_columns),
             set(),
         )
         require_equal(
@@ -373,6 +385,16 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
                 """,
             ),
             0,
+        )
+        require_equal(
+            "Yoga asana practice option coverage",
+            connection.execute(
+                "SELECT COUNT(DISTINCT ZBREATHRAWVALUE), "
+                "COUNT(DISTINCT ZDRISHTIRAWVALUE), "
+                "SUM(ZBREATHRAWVALUE IS NULL), SUM(ZDRISHTIRAWVALUE IS NULL) "
+                "FROM ZEXERCISEITEM"
+            ).fetchone(),
+            (41, 24, 0, 0),
         )
         require_equal(
             "Yoga asana duration range in seconds",

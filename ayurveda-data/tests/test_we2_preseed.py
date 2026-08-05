@@ -198,6 +198,24 @@ class PreseedArtifactTests(unittest.TestCase):
             self.assertTrue(poses_data)
             self.assertEqual(duration_seconds, expected_durations[catalog_number])
 
+    def test_yoga_practice_options_use_complete_enum_backed_values(self):
+        breath_values = {
+            row[0]
+            for row in self.connection.execute(
+                "SELECT DISTINCT ZBREATHRAWVALUE FROM ZEXERCISEITEM"
+            )
+        }
+        drishti_values = {
+            row[0]
+            for row in self.connection.execute(
+                "SELECT DISTINCT ZDRISHTIRAWVALUE FROM ZEXERCISEITEM"
+            )
+        }
+        self.assertEqual(breath_values, {row["breath"] for row in self.yoga_asanas})
+        self.assertEqual(drishti_values, {row["drishti"] for row in self.yoga_asanas})
+        self.assertNotIn(None, breath_values)
+        self.assertNotIn(None, drishti_values)
+
     def test_removed_profile_and_exercise_fields_are_absent(self):
         profile_columns = {
             row[1]
@@ -214,8 +232,18 @@ class PreseedArtifactTests(unittest.TestCase):
         )
         self.assertTrue(
             exercise_columns.isdisjoint(
-                {"ZSPORT", "ZSPORTS", "ZDURATIONMINUTES", "ZLEVELSCALE"}
+                {
+                    "ZSPORT",
+                    "ZSPORTS",
+                    "ZDURATIONMINUTES",
+                    "ZLEVELSCALE",
+                    "ZBREATH",
+                    "ZDRISHTI",
+                }
             )
+        )
+        self.assertTrue(
+            {"ZBREATHRAWVALUE", "ZDRISHTIRAWVALUE"}.issubset(exercise_columns)
         )
         sequence_columns = {
             row[1]

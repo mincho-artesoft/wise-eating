@@ -67,6 +67,9 @@ class YogaDataTests(unittest.TestCase):
                 all(-2 <= value <= 2 for value in row["dosha"].values())
             )
 
+        self.assertEqual(len({row["breath"] for row in self.asanas}), 41)
+        self.assertEqual(len({row["drishti"] for row in self.asanas}), 24)
+
     def test_sequence_catalogue_gate(self):
         self.assertEqual(len(self.sequences), 4_419)
         asana_ids = {row["id"] for row in self.asanas}

@@ -62,8 +62,8 @@ struct ExerciseItemEditorView: View {
     @State private var minAgeMonthsTxt: String
     @State private var selectedFamily: AsanaFamily?
     @State private var levelString: String
-    @State private var breath: String
-    @State private var drishti: String
+    @State private var breath: YogaBreath?
+    @State private var drishti: YogaDrishti?
     @State private var doshaVata: Int
     @State private var doshaPitta: Int
     @State private var doshaKapha: Int
@@ -126,8 +126,8 @@ struct ExerciseItemEditorView: View {
             _minAgeMonthsTxt = State(initialValue: copy.minimalAgeMonths > 0 ? String(copy.minimalAgeMonths) : "")
             _selectedFamily = State(initialValue: copy.family)
             _levelString = State(initialValue: copy.level.map(String.init) ?? "")
-            _breath = State(initialValue: copy.breath ?? "")
-            _drishti = State(initialValue: copy.drishti ?? "")
+            _breath = State(initialValue: copy.breath)
+            _drishti = State(initialValue: copy.drishti)
             _doshaVata = State(initialValue: copy.dosha?.vata ?? 0)
             _doshaPitta = State(initialValue: copy.dosha?.pitta ?? 0)
             _doshaKapha = State(initialValue: copy.dosha?.kapha ?? 0)
@@ -148,8 +148,8 @@ struct ExerciseItemEditorView: View {
             _minAgeMonthsTxt = State(initialValue: p.minimalAgeMonths > 0 ? String(p.minimalAgeMonths) : "")
             _selectedFamily = State(initialValue: p.family)
             _levelString = State(initialValue: p.level.map(String.init) ?? "")
-            _breath = State(initialValue: p.breath ?? "")
-            _drishti = State(initialValue: p.drishti ?? "")
+            _breath = State(initialValue: p.breath)
+            _drishti = State(initialValue: p.drishti)
             _doshaVata = State(initialValue: p.dosha?.vata ?? 0)
             _doshaPitta = State(initialValue: p.dosha?.pitta ?? 0)
             _doshaKapha = State(initialValue: p.dosha?.kapha ?? 0)
@@ -165,8 +165,8 @@ struct ExerciseItemEditorView: View {
             _minAgeMonthsTxt = State(initialValue: "")
             _selectedFamily = State(initialValue: nil)
             _levelString = State(initialValue: "")
-            _breath = State(initialValue: "")
-            _drishti = State(initialValue: "")
+            _breath = State(initialValue: nil)
+            _drishti = State(initialValue: nil)
             _doshaVata = State(initialValue: 0)
             _doshaPitta = State(initialValue: 0)
             _doshaKapha = State(initialValue: 0)
@@ -742,8 +742,8 @@ struct ExerciseItemEditorView: View {
             itemToSave.minimalAgeMonths = Int(minAgeMonthsTxt) ?? 0
             itemToSave.family = selectedFamily
             itemToSave.level = Int(levelString)
-            itemToSave.breath = breath.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty()
-            itemToSave.drishti = drishti.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty()
+            itemToSave.breath = breath
+            itemToSave.drishti = drishti
 
             let hasYogaDetails = itemToSave.family != nil
                 || itemToSave.level != nil

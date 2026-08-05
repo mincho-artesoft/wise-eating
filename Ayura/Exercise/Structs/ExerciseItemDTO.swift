@@ -13,8 +13,8 @@ struct ExerciseItemDTO: Codable, Sendable {
     var family: AsanaFamily? = nil
     var level: Int? = nil
     var durationSeconds: Int? = nil
-    var breath: String? = nil
-    var drishti: String? = nil
+    var breath: YogaBreath? = nil
+    var drishti: YogaDrishti? = nil
     var contraindications: [String]? = nil
     var dosha: YogaDosha? = nil
     var doshaProvenance: String? = nil

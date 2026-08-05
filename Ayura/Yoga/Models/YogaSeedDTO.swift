@@ -64,8 +64,8 @@ struct YogaAsanaDTO: Decodable, Sendable {
     let metValue: Double
     let minimalAgeMonths: Int
     let durationSeconds: Int
-    let breath: String
-    let drishti: String
+    let breath: YogaBreath
+    let drishti: YogaDrishti
     let contraindications: [String]
     let dosha: YogaDosha
     let doshaProvenance: String

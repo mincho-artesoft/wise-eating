@@ -10,8 +10,8 @@ public final class ExerciseItemCopy: Identifiable, Codable {
     public var slug: String?
     public var family: AsanaFamily?
     public var level: Int?
-    public var breath: String?
-    public var drishti: String?
+    public var breath: YogaBreath?
+    public var drishti: YogaDrishti?
     public var contraindications: [String]?
     public var dosha: YogaDosha?
     public var doshaProvenance: String?
@@ -42,7 +42,7 @@ public final class ExerciseItemCopy: Identifiable, Codable {
     public init(
         originalID: UUID? = nil, name: String, sanskrit: String? = nil,
         slug: String? = nil, family: AsanaFamily? = nil, level: Int? = nil,
-        breath: String? = nil, drishti: String? = nil,
+        breath: YogaBreath? = nil, drishti: YogaDrishti? = nil,
         contraindications: [String]? = nil, dosha: YogaDosha? = nil,
         doshaProvenance: String? = nil, exerciseDescription: String? = nil,
         videoURL: String? = nil,

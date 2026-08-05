@@ -29,8 +29,18 @@ public final class ExerciseItem: Identifiable {
         didSet { refreshSearchMetadata() }
     }
     public var level: Int?
-    public var breath: String?
-    public var drishti: String?
+    @Attribute(originalName: "breath")
+    private var breathRawValue: String?
+    @Attribute(originalName: "drishti")
+    private var drishtiRawValue: String?
+    public var breath: YogaBreath? {
+        get { breathRawValue.flatMap(YogaBreath.init(rawValue:)) }
+        set { breathRawValue = newValue?.rawValue }
+    }
+    public var drishti: YogaDrishti? {
+        get { drishtiRawValue.flatMap(YogaDrishti.init(rawValue:)) }
+        set { drishtiRawValue = newValue?.rawValue }
+    }
     public var contraindications: [String]?
     public var dosha: YogaDosha?
     public var doshaProvenance: String?
@@ -121,8 +131,8 @@ public final class ExerciseItem: Identifiable {
         slug: String? = nil,
         family: AsanaFamily? = nil,
         level: Int? = nil,
-        breath: String? = nil,
-        drishti: String? = nil,
+        breath: YogaBreath? = nil,
+        drishti: YogaDrishti? = nil,
         contraindications: [String]? = nil,
         dosha: YogaDosha? = nil,
         doshaProvenance: String? = nil,
@@ -148,8 +158,8 @@ public final class ExerciseItem: Identifiable {
         self.slug = slug
         self.family = family
         self.level = level
-        self.breath = breath
-        self.drishti = drishti
+        self.breathRawValue = breath?.rawValue
+        self.drishtiRawValue = drishti?.rawValue
         self.contraindications = contraindications
         self.dosha = dosha
         self.doshaProvenance = doshaProvenance
