@@ -1672,8 +1672,6 @@ fileprivate struct EditableExerciseRow: View {
     let focusCase: WorkoutEditorView.FocusableField
     
     @State private var textValue: String
-    @State private var showsYogaDetails = false
-    
     init(link: Binding<WorkoutEditorView.EditableExerciseLink>,
          onDelete: @escaping () -> Void,
          focusedField: FocusState<WorkoutEditorView.FocusableField?>.Binding,
@@ -1716,23 +1714,6 @@ fileprivate struct EditableExerciseRow: View {
                             .foregroundStyle(effectManager.currentGlobalAccentColor)
                     }
                     .buttonStyle(.borderless)
-                }
-            }
-
-            if link.exercise.hasYogaPracticeMetadata {
-                DisclosureGroup(isExpanded: $showsYogaDetails) {
-                    VStack(alignment: .leading, spacing: 14) {
-                        ExercisePracticeDetailSection(item: link.exercise)
-                        ExerciseAyurvedaDetailSection(
-                            item: link.exercise,
-                            usesCard: false
-                        )
-                    }
-                    .padding(.top, 10)
-                } label: {
-                    Label("Exercise details", systemImage: "figure.yoga")
-                        .font(.caption.weight(.semibold))
-                        .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.82))
                 }
             }
         }
