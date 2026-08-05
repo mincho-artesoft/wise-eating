@@ -210,7 +210,7 @@ struct TrainingView: View {
             let (ex, dur) = pair
             guard let met = ex.metValue, met > 0, dur > 0 else { return acc }
             let cpm = (met * 3.5 * profile.weight) / 200.0 // Calories per minute
-            return acc + cpm * dur
+            return acc + cpm * (dur / 60)
         }
     }
     
@@ -221,7 +221,7 @@ struct TrainingView: View {
                 let (ex, dur) = pair
                 guard let met = ex.metValue, met > 0, dur > 0 else { return acc }
                 let cpm = (met * 3.5 * profile.weight) / 200.0
-                return acc + cpm * dur
+                return acc + cpm * (dur / 60)
             }
             return tot + burn
         }
@@ -500,7 +500,7 @@ struct TrainingView: View {
                                 
                                 SelectedExerciseRowView(
                                     exercise: exercise,
-                                    duration: currentExercises[exercise] ?? 15.0,
+                                    duration: currentExercises[exercise] ?? 900.0,
                                     profile: profile,
                                     onDurationChanged: { newDuration in
                                         update(duration: newDuration, for: exercise)
@@ -1054,7 +1054,7 @@ struct TrainingView: View {
                             guard let exercise = entry.exercise else { continue }
                             
                             // 1. Добавяме/Актуализираме продължителността
-                            finalExercises[exercise, default: 0.0] += entry.durationMinutes
+                            finalExercises[exercise, default: 0.0] += entry.durationSeconds
                             
                             // 2. Конвертираме TrainingPlanSet -> WorkoutSet
                             // ✅ FIX: Сортираме по orderIndex и прехвърляме isTimeBased И timeUnit
@@ -1258,7 +1258,7 @@ struct TrainingView: View {
                 let exerciseDrafts = exercises.map { (item, duration) in
                     TrainingPlanExerciseDraft(
                         exerciseName: item.name,
-                        durationMinutes: duration
+                        durationSeconds: duration
                     )
                 }
                 let workoutDraft = TrainingPlanWorkoutDraft(
@@ -1412,13 +1412,13 @@ struct TrainingView: View {
             for link in subExercises {
                 guard let subExercise = link.exercise else { continue }
                 
-                let duration = link.durationMinutes > 0 ? link.durationMinutes : Double(subExercise.durationMinutes ?? 15)
+                let duration = link.durationSeconds > 0 ? link.durationSeconds : Double(subExercise.durationSeconds ?? 900)
                 
                 currentEx[subExercise] = duration
                 lastAddedExerciseID = subExercise.id
             }
         } else {
-            let defaultDuration = Double(exerciseItem.durationMinutes ?? 15)
+            let defaultDuration = Double(exerciseItem.durationSeconds ?? 900)
             currentEx[exerciseItem] = defaultDuration
             lastAddedExerciseID = exerciseItem.id
         }

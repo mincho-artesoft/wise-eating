@@ -531,7 +531,7 @@ struct AIGenerationHostView: View {
                      let itemMap = Dictionary(uniqueKeysWithValues: fetchedItems.map { ($0.id, $0) })
                      let links: [ExerciseLinkCopy] = dto.exercises.compactMap { resolved in
                          guard let item = itemMap[resolved.exerciseID] else { return nil }
-                         return ExerciseLinkCopy(exercise: ExerciseItemCopy(from: item), durationMinutes: resolved.durationMinutes)
+                         return ExerciseLinkCopy(exercise: ExerciseItemCopy(from: item), durationSeconds: resolved.durationSeconds)
                      }
                      let workoutCopy = ExerciseItemCopy(from: dto, links: links)
                      withAnimation {

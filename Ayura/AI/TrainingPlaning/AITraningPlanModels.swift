@@ -11,8 +11,8 @@ struct ConceptualExercise: Codable, Sendable {
     @Guide(description: "A specific, common exercise name (e.g., 'Barbell Squat', 'Push-up', 'Plank'). Names within a single workout MUST be all distinct.")
     var name: String
 
-    @Guide(description: "Duration in minutes for this exercise. Use a varied mix per workout; avoid identical durations across all exercises in the same workout. Typical range: 6–20.")
-    var durationMinutes: Int
+    @Guide(description: "Duration in seconds for this exercise. Use a varied mix per workout; avoid identical durations across all exercises in the same workout. Typical range: 360–1200.")
+    var durationSeconds: Int
 }
 
 @available(iOS 26.0, *)

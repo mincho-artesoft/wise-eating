@@ -51,7 +51,8 @@ public final class ExerciseItem: Identifiable {
     public var assetImageName: String?
     public var muscleGroups: [MuscleGroup]
     
-    public var durationMinutes: Int?
+    @Attribute(originalName: "durationMinutes")
+    public var durationSeconds: Int?
     public var isWorkout: Bool = false
     @Relationship(deleteRule: .cascade)
     public var exercises: [ExerciseLink]? = []
@@ -135,7 +136,7 @@ public final class ExerciseItem: Identifiable {
         gallery: [ExercisePhoto]? = nil,
         assetImageName: String? = nil,
         muscleGroups: [MuscleGroup],
-        durationMinutes: Int? = nil,
+        durationSeconds: Int? = nil,
         isWorkout: Bool = false,
         exercises: [ExerciseLink]? = [],
         minimalAgeMonths: Int? = 0
@@ -168,7 +169,7 @@ public final class ExerciseItem: Identifiable {
         self.gallery = gallery
         self.assetImageName = assetImageName
         self.muscleGroups = muscleGroups
-        self.durationMinutes = durationMinutes
+        self.durationSeconds = durationSeconds
         self.isWorkout = isWorkout
         self.exercises = exercises
         self.minimalAgeMonths = minimalAgeMonths ?? 0
@@ -186,7 +187,7 @@ public final class ExerciseItem: Identifiable {
            self.family = dto.family
            self.level = dto.level
            self.levelScale = dto.levelScale
-           self.durationMinutes = dto.durationMinutes
+           self.durationSeconds = dto.durationSeconds
            self.breath = dto.breath
            self.drishti = dto.drishti
            self.contraindications = dto.contraindications

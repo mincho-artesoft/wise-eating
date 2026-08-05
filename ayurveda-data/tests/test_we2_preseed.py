@@ -39,6 +39,16 @@ class PreseedArtifactTests(unittest.TestCase):
             encoding="utf-8",
         ) as source:
             cls.seed = json.load(source)
+        cls.yoga_asanas = json.loads(
+            (REPO_ROOT / "ayurveda-data" / "yoga" / "asanas.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        cls.yoga_sequences = json.loads(
+            (REPO_ROOT / "ayurveda-data" / "yoga" / "sequences.json").read_text(
+                encoding="utf-8"
+            )
+        )
 
     @classmethod
     def tearDownClass(cls):
@@ -134,7 +144,7 @@ class PreseedArtifactTests(unittest.TestCase):
         asanas = self.connection.execute(
             """
             SELECT ZCATALOGNUMBER, ZID, ZNAME, ZSANSKRIT, ZFAMILY,
-                   ZDURATIONMINUTES, ZNAMENORMALIZED, ZSEARCHTOKENS, ZSEARCHTOKENS2
+                   ZDURATIONSECONDS, ZNAMENORMALIZED, ZSEARCHTOKENS, ZSEARCHTOKENS2
             FROM ZEXERCISEITEM ORDER BY ZCATALOGNUMBER
             """
         ).fetchall()
@@ -142,13 +152,17 @@ class PreseedArtifactTests(unittest.TestCase):
             [row[0] for row in asanas],
             list(range(800_000, 800_908)),
         )
+        expected_durations = {
+            800_000 + index: item["durationSeconds"]
+            for index, item in enumerate(self.yoga_asanas)
+        }
         for (
             catalog_number,
             stable_id,
             name,
             sanskrit,
             family,
-            duration_minutes,
+            duration_seconds,
             normalized,
             tokens,
             tokens2,
@@ -157,7 +171,7 @@ class PreseedArtifactTests(unittest.TestCase):
             expected_suffix = f" ({sanskrit})"
             self.assertTrue(name == sanskrit or name.endswith(expected_suffix))
             self.assertTrue(family)
-            self.assertGreater(duration_minutes, 0)
+            self.assertEqual(duration_seconds, expected_durations[catalog_number])
             self.assertTrue(normalized)
             self.assertTrue(tokens)
             self.assertTrue(tokens2)
@@ -165,19 +179,24 @@ class PreseedArtifactTests(unittest.TestCase):
     def test_yoga_sequences_are_preseeded_with_canonical_uuids(self):
         sequences = self.connection.execute(
             """
-            SELECT ZCATALOGNUMBER, ZID, ZPOSESDATA
+            SELECT ZCATALOGNUMBER, ZID, ZPOSESDATA, ZDURATIONSECONDS
             FROM ZYOGASEQUENCE ORDER BY ZCATALOGNUMBER
             """
         ).fetchall()
         self.assertEqual(len(sequences), 4_419)
         self.assertEqual(sequences[0][0], 700_001)
         self.assertEqual(sequences[-1][0], 704_419)
-        for catalog_number, stable_id, poses_data in sequences:
+        expected_durations = {
+            700_001 + index: item["durationMinutes"] * 60
+            for index, item in enumerate(self.yoga_sequences)
+        }
+        for catalog_number, stable_id, poses_data, duration_seconds in sequences:
             self.assertEqual(
                 str(uuid.UUID(bytes=stable_id)),
                 yoga_sequence_uuid(catalog_number),
             )
             self.assertTrue(poses_data)
+            self.assertEqual(duration_seconds, expected_durations[catalog_number])
 
     def test_removed_profile_and_exercise_fields_are_absent(self):
         profile_columns = {
@@ -195,9 +214,14 @@ class PreseedArtifactTests(unittest.TestCase):
         )
         self.assertTrue(
             exercise_columns.isdisjoint(
-                {"ZSPORT", "ZSPORTS", "ZDURATIONSECONDS"}
+                {"ZSPORT", "ZSPORTS", "ZDURATIONMINUTES"}
             )
         )
+        sequence_columns = {
+            row[1]
+            for row in self.connection.execute("PRAGMA table_info(ZYOGASEQUENCE)")
+        }
+        self.assertNotIn("ZDURATIONMINUTES", sequence_columns)
 
     def test_fresh_store_seed_run_has_zero_inserts(self):
         profile_rows = self.connection.execute(

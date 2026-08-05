@@ -39,10 +39,10 @@ struct ExerciseItemDetailView: View {
         return images
     }
     
-    private var caloriesBurnedPer30Min: Double? {
+    private var caloriesBurnedPer1800Seconds: Double? {
         guard let profile = profile, let met = item.metValue else { return nil }
         let cpm = (met * 3.5 * profile.weight) / 200.0 // Calories per minute
-        return cpm * 30 // Calories for 30 minutes
+        return cpm * (1_800.0 / 60.0) // Calories for 1,800 seconds
     }
     
     private var videoURL: URL? {
@@ -289,9 +289,9 @@ struct ExerciseItemDetailView: View {
                             .foregroundColor(effectManager.currentGlobalAccentColor)
                     }
                 }
-                if let calories = caloriesBurnedPer30Min {
+                if let calories = caloriesBurnedPer1800Seconds {
                     VStack(spacing: 4) {
-                        Label { Text("Burn (30 min)") } icon: {
+                        Label { Text("Burn (1800 sec)") } icon: {
                             Image(systemName: "flame.fill").foregroundColor(.orange)
                         }
                         .font(.subheadline)
@@ -359,9 +359,9 @@ struct ExerciseItemDetailView: View {
                         .foregroundColor(effectManager.currentGlobalAccentColor)
                 }
             }
-            if let calories = caloriesBurnedPer30Min {
+            if let calories = caloriesBurnedPer1800Seconds {
                 VStack(spacing: 2) {
-                    Label { Text("Burn (30 min)") } icon: { Image(systemName: "flame.fill").foregroundColor(.orange) }
+                    Label { Text("Burn (1800 sec)") } icon: { Image(systemName: "flame.fill").foregroundColor(.orange) }
                         .font(.caption)
                         .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
                     Text("\(calories, specifier: "%.0f") kcal")
@@ -399,7 +399,7 @@ struct ExerciseItemDetailView: View {
                                     Text(exercise.name)
                                         .foregroundColor(effectManager.currentGlobalAccentColor)
                                     Spacer()
-                                    Text("\(link.durationMinutes.clean) min")
+                                    Text("\(link.durationSeconds.clean) sec")
                                         .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
                                 }
 
@@ -453,7 +453,7 @@ struct ExerciseItemDetailView: View {
                     guard let exercise = link.exercise else { return nil }
                     return YogaWorkoutExerciseEntry(
                         exercise: exercise,
-                        durationMinutes: link.durationMinutes
+                        durationSeconds: link.durationSeconds
                     )
                 },
                 manualDosha: item.dosha

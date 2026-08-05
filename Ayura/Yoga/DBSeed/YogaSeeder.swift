@@ -14,7 +14,7 @@ enum YogaSeeder {
     }
 
     static func bundleSeedVersion() throws -> Int {
-        3
+        4
     }
 
     static func isInstalled(context: ModelContext) throws -> Bool {
@@ -33,16 +33,19 @@ enum YogaSeeder {
                 sanskrit: $0.sanskrit
             )
         }
-        let durationsAreConsolidated = installedAsanas.allSatisfy {
-            ($0.durationMinutes ?? 0) > 0
+        let installedDurations = installedAsanas.compactMap(\.durationSeconds)
+        let durationsAreExactSeconds = installedDurations.count == installedAsanas.count
+            && installedDurations.min() == 5
+            && installedDurations.max() == 1_800
+        let installedSequences = try context.fetch(FetchDescriptor<YogaSequence>())
+        let sequenceDurationsAreSeconds = installedSequences.allSatisfy {
+            $0.durationSeconds >= 15 * 60
         }
-        let sequenceCount = try context.fetchCount(
-            FetchDescriptor<YogaSequence>()
-        )
         return installedAsanas.count == 908
             && namesAreComposed
-            && durationsAreConsolidated
-            && sequenceCount == 4_419
+            && durationsAreExactSeconds
+            && installedSequences.count == 4_419
+            && sequenceDurationsAreSeconds
     }
 
     static func run(context: ModelContext) throws -> Result {
@@ -114,7 +117,7 @@ enum YogaSeeder {
                         title: dto.title,
                         intent: dto.intent,
                         level: dto.level,
-                        durationMinutes: dto.durationMinutes,
+                        durationSeconds: dto.durationMinutes * 60,
                         season: dto.season,
                         school: dto.school,
                         sequenceNote: dto.note,
@@ -188,7 +191,7 @@ enum YogaSeeder {
         model.assetImageName = dto.assetImageName
         model.isUserAdded = false
         model.isWorkout = false
-        model.durationMinutes = max(1, (dto.durationSeconds + 59) / 60)
+        model.durationSeconds = dto.durationSeconds
         model.refreshSearchMetadata()
     }
 

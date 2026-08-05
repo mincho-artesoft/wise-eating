@@ -12,7 +12,7 @@ struct ExerciseCalorieRowView: View {
     private var caloriesBurned: Double {
         guard let met = exercise.metValue else { return 0 }
         let cpm = (met * 3.5 * profile.weight) / 200.0 // Calories per minute
-        return cpm * duration
+        return cpm * (duration / 60)
     }
 
     // MARK: - Body
@@ -47,7 +47,7 @@ struct ExerciseCalorieRowView: View {
                     .font(.subheadline)
                     .foregroundStyle(effectManager.currentGlobalAccentColor)
 
-                Text("min")
+                Text("sec")
                     .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
             }
         }

@@ -326,7 +326,7 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
         require_equal(
             "ExerciseItem removed fields",
             exercise_columns.intersection(
-                {"ZSPORT", "ZSPORTS", "ZDURATIONSECONDS"}
+                {"ZSPORT", "ZSPORTS", "ZDURATIONMINUTES"}
             ),
             set(),
         )
@@ -369,10 +369,18 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
                 """
                 SELECT COUNT(*) FROM ZEXERCISEITEM
                 WHERE ZCATALOGNUMBER BETWEEN 800000 AND 800907
-                  AND (ZDURATIONMINUTES IS NULL OR ZDURATIONMINUTES <= 0)
+                  AND (ZDURATIONSECONDS IS NULL OR ZDURATIONSECONDS <= 0)
                 """,
             ),
             0,
+        )
+        require_equal(
+            "Yoga asana duration range in seconds",
+            connection.execute(
+                "SELECT MIN(ZDURATIONSECONDS), MAX(ZDURATIONSECONDS) "
+                "FROM ZEXERCISEITEM"
+            ).fetchone(),
+            (5, 1_800),
         )
         require_equal(
             "Yoga asanas with a separate Sanskrit display name",
@@ -404,6 +412,22 @@ def audit_store(path: Path, EXPECTED: dict[str, int] = TARGET_EXPECTED) -> dict[
                 "FROM ZYOGASEQUENCE"
             ).fetchone(),
             (700_001, 704_419),
+        )
+        yoga_sequence_columns = {
+            row[1] for row in connection.execute("PRAGMA table_info(ZYOGASEQUENCE)")
+        }
+        require_equal(
+            "YogaSequence removed duration field",
+            yoga_sequence_columns.intersection({"ZDURATIONMINUTES"}),
+            set(),
+        )
+        require_equal(
+            "Yoga sequence duration range in seconds",
+            connection.execute(
+                "SELECT MIN(ZDURATIONSECONDS), MAX(ZDURATIONSECONDS) "
+                "FROM ZYOGASEQUENCE"
+            ).fetchone(),
+            (15 * 60, 90 * 60),
         )
         require_equal(
             "Yoga sequences missing poses",

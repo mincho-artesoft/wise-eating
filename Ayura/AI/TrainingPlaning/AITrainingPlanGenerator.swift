@@ -396,7 +396,7 @@ final class AITrainingPlanGenerator {
             \(planStructure)
         2.  **Workout Names**: Each workout `name` MUST EXACTLY match one from the structure.
         3.  **Composition**: Each workout MUST contain **5–7 distinct** exercises.
-        4.  **Durations**: Use a **varied mix** of durations (6–20 minutes).
+        4.  **Durations**: Use a **varied mix** of durations (360–1200 seconds).
         5.  **Inter-Day Variety**: Do not repeat the exact same set of exercises across different days.
         6.  **Safety (age \(profile.age))**: Avoid unsafe lifts; prefer age-appropriate selections.
         
@@ -530,7 +530,7 @@ final class AITrainingPlanGenerator {
             for wIdx in targetIndices {
                 let alreadyHas = out.days[dIdx].workouts[wIdx].exercises.contains { $0.name.range(of: rule.exercise, options: .caseInsensitive) != nil }
                 if !alreadyHas {
-                    out.days[dIdx].workouts[wIdx].exercises.insert(.init(name: rule.exercise, durationMinutes: 10), at: 0)
+                    out.days[dIdx].workouts[wIdx].exercises.insert(.init(name: rule.exercise, durationSeconds: 600), at: 0)
                     emit("  -> Enforced rule: Added '\(rule.exercise)' to Day \(rule.day) - \(out.days[dIdx].workouts[wIdx].name).", onLog)
                 }
             }
@@ -572,7 +572,7 @@ final class AITrainingPlanGenerator {
                 
                 for conceptualExercise in workout.exercises {
                     if let exerciseItem = await resolveOrCreateExercise(named: conceptualExercise.name, searcher: searcher, ctx: modelContext, onLog: onLog) {
-                        resolvedExercises[exerciseItem] = Double(conceptualExercise.durationMinutes)
+                        resolvedExercises[exerciseItem] = Double(conceptualExercise.durationSeconds)
                     } else {
                         emit("    - ⚠️ Could not resolve '\(conceptualExercise.name)' → skipped", onLog)
                     }
@@ -679,7 +679,7 @@ final class AITrainingPlanGenerator {
             emit("  Day \(day.dayIndex):", onLog)
             for workout in day.workouts {
                 emit("    • \(workout.name) (\(workout.exercises.count) exercises)", onLog)
-                for ex in workout.exercises { emit("        - \(ex.name) (\(ex.durationMinutes) min)", onLog) }
+                for ex in workout.exercises { emit("        - \(ex.name) (\(ex.durationSeconds) sec)", onLog) }
             }
         }
         emit("────────────────────────────", onLog)
@@ -696,7 +696,7 @@ final class AITrainingPlanGenerator {
         guard let existing = existing, !existing.isEmpty else { return "EXISTING WORKOUTS: None." }
         let lines = existing.keys.sorted().map { dayIndex -> String in
             let workoutsStr = existing[dayIndex]!.map { workout -> String in
-                let exercisesStr = workout.exercises.map { "\($0.exerciseName) (\(Int($0.durationMinutes)) min)" }.joined(separator: ", ")
+                let exercisesStr = workout.exercises.map { "\($0.exerciseName) (\(Int($0.durationSeconds)) sec)" }.joined(separator: ", ")
                 return "  - \(workout.workoutName): [\(exercisesStr)]"
             }.joined(separator: "\n")
             return "Day \(dayIndex):\n\(workoutsStr)"
@@ -969,11 +969,11 @@ final class AITrainingPlanGenerator {
                 var seen = Set(exs.map { $0.name.lowercased() })
                 while exs.count < 5 {
                     if let pick = flatPalette.first(where: { !seen.contains($0.lowercased()) && !banned.contains($0.lowercased()) }) {
-                        exs.append(.init(name: pick, durationMinutes: Int.random(in: 6...20)))
+                        exs.append(.init(name: pick, durationSeconds: Int.random(in: 360...1200)))
                         seen.insert(pick.lowercased())
                     } else { break }
                 }
-                if Set(exs.map { $0.durationMinutes }).count <= 1 { exs.indices.forEach { exs[$0].durationMinutes = Int.random(in: 6...20) } }
+                if Set(exs.map { $0.durationSeconds }).count <= 1 { exs.indices.forEach { exs[$0].durationSeconds = Int.random(in: 360...1200) } }
                 out.days[d].workouts[w].exercises = exs
             }
         }
@@ -1010,16 +1010,16 @@ final class AITrainingPlanGenerator {
         for d in 0..<out.days.count {
             for w in 0..<out.days[d].workouts.count {
                 for e in 0..<out.days[d].workouts[w].exercises.count {
-                    let original = out.days[d].workouts[w].exercises[e].durationMinutes
-                    let clamped = max(5, min(30, original))
+                    let original = out.days[d].workouts[w].exercises[e].durationSeconds
+                    let clamped = max(300, min(1800, original))
                     if original != clamped {
-                        out.days[d].workouts[w].exercises[e].durationMinutes = clamped
+                        out.days[d].workouts[w].exercises[e].durationSeconds = clamped
                         adjustedCount += 1
                     }
                 }
             }
         }
-        if adjustedCount > 0 { emit("  -> Clamped \(adjustedCount) exercise duration(s) to be within 5-30 min.", onLog) }
+        if adjustedCount > 0 { emit("  -> Clamped \(adjustedCount) exercise duration(s) to be within 300-1800 sec.", onLog) }
         return out
     }
     

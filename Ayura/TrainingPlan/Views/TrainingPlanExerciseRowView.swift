@@ -12,7 +12,7 @@ struct TrainingPlanExerciseRowView: View {
     @State private var isExpanded: Bool = false
 
     private var item: ExerciseItem? { link.exercise }
-    private var duration: Double { link.durationMinutes }
+    private var duration: Double { link.durationSeconds }
     
     private var isImperial: Bool { GlobalState.measurementSystem == "Imperial" }
     private var weightUnit: String { isImperial ? "lbs" : "kg" }
@@ -34,7 +34,7 @@ struct TrainingPlanExerciseRowView: View {
         self._focusedField = focusedField
         self.focusCase = focusCase
         self.onDelete = onDelete
-        self._textValue = State(initialValue: String(format: "%.0f", link.wrappedValue.durationMinutes))
+        self._textValue = State(initialValue: String(format: "%.0f", link.wrappedValue.durationSeconds))
     }
 
     var body: some View {
@@ -59,7 +59,7 @@ struct TrainingPlanExerciseRowView: View {
 
                     HStack(spacing: 4) {
                         ConfigurableTextField(
-                            title: "min",
+                            title: "sec",
                             value: $textValue,
                             type: .integer,
                             placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
@@ -70,7 +70,7 @@ struct TrainingPlanExerciseRowView: View {
                         .fixedSize()
                         .foregroundStyle(effectManager.currentGlobalAccentColor)
 
-                        Text("min")
+                        Text("sec")
                             .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
                     }
                     .padding(.trailing, 8)
@@ -136,12 +136,12 @@ struct TrainingPlanExerciseRowView: View {
         
         .onChange(of: textValue) { _, newText in
             if let newDuration = Double(newText) {
-                link.durationMinutes = newDuration
+                link.durationSeconds = newDuration
             } else if newText.isEmpty {
-                link.durationMinutes = 0
+                link.durationSeconds = 0
             }
         }
-        .onChange(of: link.durationMinutes) { _, newDuration in
+        .onChange(of: link.durationSeconds) { _, newDuration in
             let currentTextAsDouble = Double(textValue) ?? 0.0
             if abs(currentTextAsDouble - newDuration) > 0.1 {
                 textValue = String(format: "%.0f", newDuration)
@@ -149,9 +149,9 @@ struct TrainingPlanExerciseRowView: View {
         }
         .onChange(of: focusedField) { _, newFocus in
             if newFocus != focusCase {
-                let clampedDuration = max(1, min(link.durationMinutes, 999))
+                let clampedDuration = max(1, min(link.durationSeconds, 86_400))
                 textValue = String(format: "%.0f", clampedDuration)
-                link.durationMinutes = clampedDuration
+                link.durationSeconds = clampedDuration
             }
         }
     }

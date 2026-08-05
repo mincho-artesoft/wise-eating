@@ -764,7 +764,7 @@ private struct CoordinatorObserver: View {
                              return nil
                          }
                          let exerciseCopy = ExerciseItemCopy(from: exerciseItem)
-                         return ExerciseLinkCopy(exercise: exerciseCopy, durationMinutes: resolvedExercise.durationMinutes)
+                         return ExerciseLinkCopy(exercise: exerciseCopy, durationSeconds: resolvedExercise.durationSeconds)
                      }
                      
                      let workoutCopy = ExerciseItemCopy(from: dto, links: links)

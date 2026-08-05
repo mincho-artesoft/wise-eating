@@ -122,7 +122,7 @@ struct TrainingPlanEditorView: View {
                                 
                                 let newExerciseLink = TrainingPlanExercise(
                                     exercise: ex,
-                                    durationMinutes: link.durationMinutes,
+                                    durationSeconds: link.durationSeconds,
                                     workout: newWorkout
                                 )
                                 
@@ -174,7 +174,7 @@ struct TrainingPlanEditorView: View {
                         let exercises = training.exercises(using: context)
                         
                         for (item, duration) in exercises {
-                            let newExercise = TrainingPlanExercise(exercise: item, durationMinutes: duration, workout: newWorkout)
+                            let newExercise = TrainingPlanExercise(exercise: item, durationSeconds: duration, workout: newWorkout)
                             // При Draft обикновено няма сетове, но ако имаше, тук трябваше да се добавят
                             newWorkout.exercises.append(newExercise)
                         }
@@ -1098,7 +1098,7 @@ struct TrainingPlanEditorView: View {
                     workoutToUpdate.exercises = validLinks.map { exerciseLink in
                         ExerciseLink(
                             exercise: exerciseLink.exercise!,
-                            durationMinutes: exerciseLink.durationMinutes,
+                            durationSeconds: exerciseLink.durationSeconds,
                             owner: workoutToUpdate
                         )
                     }
@@ -1120,8 +1120,8 @@ struct TrainingPlanEditorView: View {
                     let aggregatedMuscles = Array(Set(validLinks.flatMap { $0.exercise?.muscleGroups ?? [] }))
                     workoutToUpdate.muscleGroups = aggregatedMuscles
                     
-                    let totalDuration = validLinks.reduce(0) { $0 + $1.durationMinutes }
-                    workoutToUpdate.durationMinutes = Int(totalDuration)
+                    let totalDuration = validLinks.reduce(0) { $0 + $1.durationSeconds }
+                    workoutToUpdate.durationSeconds = Int(totalDuration)
                     
                     let metValues   = validLinks.compactMap { $0.exercise?.metValue }
                     workoutToUpdate.metValue = metValues.isEmpty ? nil : metValues.reduce(0, +) / Double(metValues.count)
@@ -1212,7 +1212,7 @@ struct TrainingPlanEditorView: View {
                     
                     let newEntry = TrainingPlanExercise(
                         exercise: exItem,
-                        durationMinutes: entry.durationMinutes,
+                        durationSeconds: entry.durationSeconds,
                         workout: persistedWorkout
                     )
                     modelContext.insert(newEntry)
@@ -1288,11 +1288,11 @@ struct TrainingPlanEditorView: View {
         if item.isWorkout, let subExercises = item.exercises, !subExercises.isEmpty {
             for link in subExercises {
                 guard let exercise = link.exercise else { continue }
-                let duration = link.durationMinutes > 0 ? link.durationMinutes : Double(exercise.durationMinutes ?? 15)
+                let duration = link.durationSeconds > 0 ? link.durationSeconds : Double(exercise.durationSeconds ?? 900)
                 exercisesToAddOrUpdate.append((exercise, duration))
             }
         } else {
-            let duration = Double(item.durationMinutes ?? 15)
+            let duration = Double(item.durationSeconds ?? 900)
             exercisesToAddOrUpdate.append((item, duration))
         }
         
@@ -1300,9 +1300,9 @@ struct TrainingPlanEditorView: View {
             let (exerciseToAdd, duration) = tuple
             
             if let existingExerciseIndex = days[dayIndex].workouts[workoutIndex].exercises.firstIndex(where: { $0.exercise?.id == exerciseToAdd.id }) {
-                days[dayIndex].workouts[workoutIndex].exercises[existingExerciseIndex].durationMinutes = duration
+                days[dayIndex].workouts[workoutIndex].exercises[existingExerciseIndex].durationSeconds = duration
             } else {
-                let newLink = TrainingPlanExercise(exercise: exerciseToAdd, durationMinutes: duration)
+                let newLink = TrainingPlanExercise(exercise: exerciseToAdd, durationSeconds: duration)
                 newLink.workout = days[dayIndex].workouts[workoutIndex]
                 days[dayIndex].workouts[workoutIndex].exercises.append(newLink)
                 scrollToExerciseID = newLink.id
@@ -1370,7 +1370,7 @@ struct TrainingPlanEditorView: View {
                     
                     let newExercise = TrainingPlanExercise(
                         exercise: exercise,
-                        durationMinutes: link.durationMinutes,
+                        durationSeconds: link.durationSeconds,
                         workout: workout
                     )
                     // Тук НЕ слагаме сетове, защото ExerciseItem няма такива –
@@ -1459,7 +1459,7 @@ struct TrainingPlanEditorView: View {
                         guard let exercise = exerciseLink.exercise else { return nil }
                         return TrainingPlanExerciseDraft(
                             exerciseName: exercise.name,
-                            durationMinutes: exerciseLink.durationMinutes
+                            durationSeconds: exerciseLink.durationSeconds
                         )
                     }
                     return TrainingPlanWorkoutDraft(
@@ -1844,7 +1844,7 @@ struct TrainingPlanEditorView: View {
                     let exercises = training.exercises(using: modelContext)
                     
                     for (exerciseItem, duration) in exercises {
-                        let newExercise = TrainingPlanExercise(exercise: exerciseItem, durationMinutes: duration, workout: newWorkout)
+                        let newExercise = TrainingPlanExercise(exercise: exerciseItem, durationSeconds: duration, workout: newWorkout)
                         newWorkout.exercises.append(newExercise)
                     }
                     newWorkout.day = dayToUpdate
@@ -1860,7 +1860,7 @@ struct TrainingPlanEditorView: View {
                     let newWorkout = TrainingPlanWorkout(workoutName: training.name)
                     let exercises = training.exercises(using: modelContext)
                     for (item, duration) in exercises {
-                        newWorkout.exercises.append(TrainingPlanExercise(exercise: item, durationMinutes: duration, workout: newWorkout))
+                        newWorkout.exercises.append(TrainingPlanExercise(exercise: item, durationSeconds: duration, workout: newWorkout))
                     }
                     newWorkout.day = newDay
                     newWorkoutsForDay.append(newWorkout)

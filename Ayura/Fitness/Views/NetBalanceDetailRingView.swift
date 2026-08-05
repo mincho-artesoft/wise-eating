@@ -127,7 +127,7 @@ struct NetBalanceDetailRingView: View {
                 let (ex, dur) = pair
                 guard let met = ex.metValue, met > 0, dur > 0 else { return acc }
                 let cpm = (met * 3.5 * profile.weight) / 200.0
-                return acc + cpm * dur
+                return acc + cpm * (dur / 60)
             }
             return (training, calories)
         }

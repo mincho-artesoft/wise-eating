@@ -12,7 +12,7 @@ struct TrainingPlanExerciseDetailRow: View {
     
     // Помощни променливи
     private var exercise: ExerciseItem? { link.exercise }
-    private var duration: Double { link.durationMinutes }
+    private var duration: Double { link.durationSeconds }
     
     private var isImperial: Bool { GlobalState.measurementSystem == "Imperial" }
     private var weightUnit: String { isImperial ? "lbs" : "kg" }
@@ -20,7 +20,7 @@ struct TrainingPlanExerciseDetailRow: View {
     private var caloriesBurned: Double {
         guard let ex = exercise, let met = ex.metValue else { return 0 }
         let cpm = (met * 3.5 * profile.weight) / 200.0
-        return cpm * duration
+        return cpm * (duration / 60)
     }
     
     var body: some View {
@@ -68,7 +68,7 @@ struct TrainingPlanExerciseDetailRow: View {
                             .font(.subheadline)
                             .foregroundStyle(effectManager.currentGlobalAccentColor)
                         
-                        Text("min")
+                        Text("sec")
                             .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
                         
                         Image(systemName: "chevron.down")

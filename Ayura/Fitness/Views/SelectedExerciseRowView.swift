@@ -33,7 +33,7 @@ struct SelectedExerciseRowView: View {
     private var caloriesBurned: Double {
         guard let met = exercise.metValue else { return 0 }
         let cpm = (met * 3.5 * profile.weight) / 200.0 // Calories per minute
-        return cpm * duration
+        return cpm * (duration / 60)
     }
 
     // MARK: - Initializer
@@ -133,7 +133,7 @@ struct SelectedExerciseRowView: View {
 
             HStack(spacing: 4) {
                 ConfigurableTextField(
-                    title: "min",
+                    title: "sec",
                     value: $textValue,
                     type: .integer,
                     placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
@@ -144,7 +144,7 @@ struct SelectedExerciseRowView: View {
                 .frame(width: 40)
                 .foregroundStyle(effectManager.currentGlobalAccentColor)
 
-                Text("min")
+                Text("sec")
                     .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
             }
         }
@@ -197,7 +197,7 @@ struct SelectedExerciseRowView: View {
 
     private func formatAndCommit() {
         let newDuration = Double(textValue) ?? duration
-        let clampedDuration = max(1, min(newDuration, 999))
+        let clampedDuration = max(1, min(newDuration, 86_400))
         
         textValue = String(format: "%.0f", clampedDuration)
         

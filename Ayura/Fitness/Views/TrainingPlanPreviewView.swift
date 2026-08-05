@@ -254,7 +254,7 @@ struct TrainingPlanPreviewView: View {
                 let sortedExercises = workout.exercises.sorted { ($0.exercise?.name ?? "") < ($1.exercise?.name ?? "") }
                 ForEach(sortedExercises) { entry in
                     if let exercise = entry.exercise {
-                        ExerciseCalorieRowView(exercise: exercise, duration: entry.durationMinutes, profile: profile)
+                        ExerciseCalorieRowView(exercise: exercise, duration: entry.durationSeconds, profile: profile)
                     }
                 }
             } else {

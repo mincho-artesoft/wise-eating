@@ -2,12 +2,12 @@ import Foundation
 
 enum YogaWorkoutAyurvedaMath {
     static func aggregate(
-        _ values: [(dosha: YogaDosha, durationMinutes: Double)]
+        _ values: [(dosha: YogaDosha, durationSeconds: Double)]
     ) -> YogaDosha? {
         guard !values.isEmpty else { return nil }
 
         let weightedValues = values.map {
-            (dosha: $0.dosha, weight: max($0.durationMinutes, 1.0 / 60.0))
+            (dosha: $0.dosha, weight: max($0.durationSeconds, 1))
         }
         let totalWeight = weightedValues.reduce(0.0) { $0 + $1.weight }
         guard totalWeight > 0 else { return nil }
@@ -36,7 +36,7 @@ extension ExerciseItem {
         guard isWorkout, let exercises else { return nil }
         let values = exercises.compactMap { link -> (YogaDosha, Double)? in
             guard let dosha = link.exercise?.dosha else { return nil }
-            return (dosha, link.durationMinutes)
+            return (dosha, link.durationSeconds)
         }
         return YogaWorkoutAyurvedaMath.aggregate(values)
     }

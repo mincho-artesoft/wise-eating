@@ -25,7 +25,7 @@ public final class ExerciseItemCopy: Identifiable, Codable {
     public var gallery: [Data]?
     public var assetImageName: String?
     public var muscleGroups: [MuscleGroup]
-    public var durationMinutes: Int?
+    public var durationSeconds: Int?
     public var isWorkout: Bool
     public var exercises: [ExerciseLinkCopy]?
     public var minimalAgeMonths: Int
@@ -35,7 +35,7 @@ public final class ExerciseItemCopy: Identifiable, Codable {
         case originalID, name, sanskrit, slug, family, level, levelScale
         case breath, drishti, contraindications, dosha, doshaProvenance
         case exerciseDescription, videoURL, metValue, isUserAdded, isFavorite, photo
-        case gallery, assetImageName, muscleGroups, durationMinutes, isWorkout
+        case gallery, assetImageName, muscleGroups, durationSeconds, isWorkout
         case exercises, minimalAgeMonths
     }
 
@@ -50,7 +50,7 @@ public final class ExerciseItemCopy: Identifiable, Codable {
         videoURL: String? = nil,
         metValue: Double? = nil, isUserAdded: Bool = true, isFavorite: Bool = false,
         photo: Data? = nil, gallery: [Data]? = nil, assetImageName: String? = nil,
-        muscleGroups: [MuscleGroup], durationMinutes: Int? = nil,
+        muscleGroups: [MuscleGroup], durationSeconds: Int? = nil,
         isWorkout: Bool = false, exercises: [ExerciseLinkCopy]? = nil, minimalAgeMonths: Int = 0
     ) {
         self.originalID = originalID
@@ -74,7 +74,7 @@ public final class ExerciseItemCopy: Identifiable, Codable {
         self.gallery = gallery
         self.assetImageName = assetImageName
         self.muscleGroups = muscleGroups
-        self.durationMinutes = durationMinutes
+        self.durationSeconds = durationSeconds
         self.isWorkout = isWorkout
         self.exercises = exercises
         self.minimalAgeMonths = minimalAgeMonths
@@ -99,7 +99,7 @@ public final class ExerciseItemCopy: Identifiable, Codable {
             videoURL: src.videoURL, metValue: src.metValue, isUserAdded: src.isUserAdded,
             isFavorite: src.isFavorite, photo: src.photo, gallery: src.gallery?.map(\.data),
             assetImageName: src.assetImageName, muscleGroups: src.muscleGroups,
-            durationMinutes: src.durationMinutes, isWorkout: src.isWorkout,
+            durationSeconds: src.durationSeconds, isWorkout: src.isWorkout,
             exercises: exerciseLinksCopy, minimalAgeMonths: src.minimalAgeMonths
         )
         
@@ -118,7 +118,7 @@ public final class ExerciseItemCopy: Identifiable, Codable {
                gallery: nil,
                assetImageName: nil,
                muscleGroups: [], // Ще се агрегира автоматично в редактора
-               durationMinutes: dto.totalDurationMinutes,
+               durationSeconds: dto.totalDurationSeconds,
                isWorkout: true,
                exercises: links,
                minimalAgeMonths: 0 // Ще се изчисли автоматично в редактора
@@ -144,7 +144,7 @@ public final class ExerciseItemCopy: Identifiable, Codable {
             videoURL: copy.videoURL, metValue: copy.metValue, isUserAdded: copy.isUserAdded,
             isFavorite: copy.isFavorite, photo: copy.photo, gallery: copy.gallery,
             assetImageName: copy.assetImageName, muscleGroups: copy.muscleGroups,
-            durationMinutes: copy.durationMinutes, isWorkout: copy.isWorkout,
+            durationSeconds: copy.durationSeconds, isWorkout: copy.isWorkout,
             exercises: copy.exercises, minimalAgeMonths: copy.minimalAgeMonths
         )
     }
@@ -171,7 +171,7 @@ public final class ExerciseItemCopy: Identifiable, Codable {
             gallery: nil,
             assetImageName: dto.assetImageName,
             muscleGroups: dto.muscleGroups,
-            durationMinutes: dto.durationMinutes,
+            durationSeconds: dto.durationSeconds,
             isWorkout: false, // Това е за единично упражнение, не за тренировка
             exercises: nil,
             minimalAgeMonths: dto.minimalAgeMonths ?? 0
@@ -184,15 +184,15 @@ public final class ExerciseItemCopy: Identifiable, Codable {
 public final class ExerciseLinkCopy: Identifiable, Codable {
     public var id = UUID()
     public var exercise: ExerciseItemCopy?
-    public var durationMinutes: Double
+    public var durationSeconds: Double
     public weak var owner: ExerciseItemCopy?
 
-    enum CodingKeys: String, CodingKey { case id, exercise, durationMinutes }
+    enum CodingKeys: String, CodingKey { case id, exercise, durationSeconds }
     
     // +++ НАЧАЛО НА ПРОМЯНАТА (1/2): Добавете този нов инициализатор +++
-    public init(exercise: ExerciseItemCopy?, durationMinutes: Double, owner: ExerciseItemCopy? = nil) {
+    public init(exercise: ExerciseItemCopy?, durationSeconds: Double, owner: ExerciseItemCopy? = nil) {
         self.exercise = exercise
-        self.durationMinutes = durationMinutes
+        self.durationSeconds = durationSeconds
         self.owner = owner
     }
     // +++ КРАЙ НА ПРОМЯНАТА (1/2) +++
@@ -201,18 +201,18 @@ public final class ExerciseLinkCopy: Identifiable, Codable {
         let c = try decoder.container(keyedBy: CodingKeys.self)
         id = try c.decode(UUID.self, forKey: .id)
         exercise = try c.decodeIfPresent(ExerciseItemCopy.self, forKey: .exercise)
-        durationMinutes = try c.decode(Double.self, forKey: .durationMinutes)
+        durationSeconds = try c.decode(Double.self, forKey: .durationSeconds)
     }
     public func encode(to encoder: Encoder) throws {
         var c = encoder.container(keyedBy: CodingKeys.self)
         try c.encode(id, forKey: .id)
         try c.encodeIfPresent(exercise, forKey: .exercise)
-        try c.encode(durationMinutes, forKey: .durationMinutes)
+        try c.encode(durationSeconds, forKey: .durationSeconds)
     }
 
     @MainActor
     public init(from src: ExerciseLink, cache: inout [ObjectIdentifier: ExerciseItemCopy]) {
-        self.durationMinutes = src.durationMinutes
+        self.durationSeconds = src.durationSeconds
         if let ex = src.exercise {
             self.exercise = ExerciseItemCopy(from: ex, cache: &cache)
         }

@@ -19,7 +19,7 @@ extension ExerciseItem {
 
 struct YogaWorkoutExerciseEntry: Identifiable {
     let exercise: ExerciseItem
-    let durationMinutes: Double
+    let durationSeconds: Double
 
     var id: UUID { exercise.id }
 }
@@ -289,8 +289,8 @@ struct YogaExerciseDetailSection: View {
     }
 
     private var formattedDuration: String? {
-        guard let minutes = item.durationMinutes, minutes > 0 else { return nil }
-        return "\(minutes) min"
+        guard let seconds = item.durationSeconds, seconds > 0 else { return nil }
+        return "\(seconds) sec"
     }
 
     private func propertyGroup<Content: View>(
@@ -346,7 +346,7 @@ struct YogaWorkoutAyurvedaEditorSection: View {
         YogaWorkoutAyurvedaMath.aggregate(
             entries.compactMap { entry in
                 guard let dosha = entry.exercise.dosha else { return nil }
-                return (dosha: dosha, durationMinutes: entry.durationMinutes)
+                return (dosha: dosha, durationSeconds: entry.durationSeconds)
             }
         )
     }
@@ -434,7 +434,7 @@ struct YogaWorkoutAyurvedaSection: View {
         YogaWorkoutAyurvedaMath.aggregate(
             yogaEntries.compactMap { entry in
                 guard let dosha = entry.exercise.dosha else { return nil }
-                return (dosha: dosha, durationMinutes: entry.durationMinutes)
+                return (dosha: dosha, durationSeconds: entry.durationSeconds)
             }
         )
     }

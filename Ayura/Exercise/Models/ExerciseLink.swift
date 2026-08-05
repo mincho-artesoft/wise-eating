@@ -9,8 +9,9 @@ public final class ExerciseLink: Identifiable {
     @Relationship(deleteRule: .nullify)
     public var exercise: ExerciseItem?
 
-    /// Колко минути да се изпълнява това упражнение в рамките на тренировката.
-    public var durationMinutes: Double = 0
+    /// Колко секунди да се изпълнява това упражнение в рамките на тренировката.
+    @Attribute(originalName: "durationMinutes")
+    public var durationSeconds: Double = 0
 
     /// Тренировката, която притежава тази връзка.
     @Relationship(inverse: \ExerciseItem.exercises)
@@ -19,12 +20,12 @@ public final class ExerciseLink: Identifiable {
     public init(
         id: UUID = UUID(),
         exercise: ExerciseItem,
-        durationMinutes: Double = 0,
+        durationSeconds: Double = 0,
         owner: ExerciseItem? = nil
     ) {
         self.id = id
         self.exercise = exercise
-        self.durationMinutes = durationMinutes
+        self.durationSeconds = durationSeconds
         self.owner = owner
     }
 }

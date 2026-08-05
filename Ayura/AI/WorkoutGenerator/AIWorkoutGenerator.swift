@@ -62,7 +62,7 @@ final class AIWorkoutGenerator {
         try Task.checkCancellation()
 
         let totalDuration = Int(resolvedExercises.values.reduce(0, +))
-        emitLog("✅ Exercises resolved. Total duration: \(totalDuration) min.", onLog: onLog)
+        emitLog("✅ Exercises resolved. Total duration: \(totalDuration) sec.", onLog: onLog)
 
         // 2. Генерираме описание (summary + steps) на база получените упражнения
         let description = try await regenerateDescriptionForWorkout(
@@ -92,9 +92,9 @@ final class AIWorkoutGenerator {
         let dto = ResolvedWorkoutResponseDTO(
             name: finalWorkoutName, // Използваме новото име
             description: description,
-            totalDurationMinutes: totalDuration,
+            totalDurationSeconds: totalDuration,
             exercises: resolvedExercises.map { (item, duration) in
-                ResolvedExercise(exerciseID: item.id, durationMinutes: duration)
+                ResolvedExercise(exerciseID: item.id, durationSeconds: duration)
             }
         )
 
@@ -126,7 +126,7 @@ final class AIWorkoutGenerator {
         let session = LanguageModelSession(instructions: instructions)
         let prompt = """
         USER'S GOAL/PROMPTS: "\(prompts.joined(separator: ", "))"
-        WORKOUT DURATION: \(totalDuration) minutes
+        WORKOUT DURATION: \(totalDuration) seconds
         MAIN EXERCISES: \(exerciseList)
         TASK: Generate a creative and fitting name for this workout.
         """
@@ -161,7 +161,7 @@ final class AIWorkoutGenerator {
         onLog: (@Sendable (String) -> Void)?
     ) async throws -> String {
         let exerciseList = exercises
-            .map { "\($0.key.name) (\(Int($0.value)) min)" }
+            .map { "\($0.key.name) (\(Int($0.value)) sec)" }
             .joined(separator: ", ")
 
         let instructions = Instructions {
@@ -196,7 +196,7 @@ final class AIWorkoutGenerator {
             return resp.description
         } catch {
             emitLog("⚠️ Workout description generation failed: \(error.localizedDescription). Falling back to simple list.", onLog: onLog)
-            return "Summary: A workout focusing on \(workoutName).\n\n1) Warm up for 5-10 minutes.\n2) Perform the following exercises: \(exerciseList).\n3) Cool down with light stretching."
+            return "Summary: A workout focusing on \(workoutName).\n\n1) Warm up for 300-600 seconds.\n2) Perform the following exercises: \(exerciseList).\n3) Cool down with light stretching."
         }
     }
 }

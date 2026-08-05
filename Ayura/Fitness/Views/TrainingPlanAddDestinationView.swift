@@ -200,7 +200,7 @@ struct TrainingPlanAddDestinationView: View {
                 let sortedExercises = workout.exercises.sorted { ($0.exercise?.name ?? "") < ($1.exercise?.name ?? "") }
                 ForEach(sortedExercises) { entry in
                     if let exercise = entry.exercise {
-                        ExerciseCalorieRowView(exercise: exercise, duration: entry.durationMinutes, profile: profile)
+                        ExerciseCalorieRowView(exercise: exercise, duration: entry.durationSeconds, profile: profile)
                     }
                 }
             } else {
@@ -223,7 +223,7 @@ struct TrainingPlanAddDestinationView: View {
             let newWorkout = TrainingPlanWorkout(workoutName: training.name)
             let exercises = training.exercises(using: modelContext)
             for (exerciseItem, duration) in exercises {
-                let newExercise = TrainingPlanExercise(exercise: exerciseItem, durationMinutes: duration, workout: newWorkout)
+                let newExercise = TrainingPlanExercise(exercise: exerciseItem, durationSeconds: duration, workout: newWorkout)
                 newWorkout.exercises.append(newExercise)
             }
             newWorkout.day = newDay
@@ -256,7 +256,7 @@ struct TrainingPlanAddDestinationView: View {
             let newWorkout = TrainingPlanWorkout(workoutName: training.name)
             let exercises = training.exercises(using: modelContext)
             for (exerciseItem, duration) in exercises {
-                let newExercise = TrainingPlanExercise(exercise: exerciseItem, durationMinutes: duration, workout: newWorkout)
+                let newExercise = TrainingPlanExercise(exercise: exerciseItem, durationSeconds: duration, workout: newWorkout)
                 newWorkout.exercises.append(newExercise)
             }
             newWorkout.day = day

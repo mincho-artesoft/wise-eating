@@ -109,7 +109,7 @@ struct WorkoutEditorView: View {
     struct EditableExerciseLink: Identifiable, Equatable {
         let id = UUID()
         var exercise: ExerciseItem
-        var durationMinutes: Double
+        var durationSeconds: Double
     }
     
     @State private var selectedMuscleGroup: MuscleGroup? = nil
@@ -159,7 +159,7 @@ struct WorkoutEditorView: View {
                    let exID = exCopy.originalID!
                    let descriptor = FetchDescriptor<ExerciseItem>(predicate: #Predicate { $0.id == exID })
                    if let realItem = (try? context.fetch(descriptor))?.first {
-                       return EditableExerciseLink(exercise: realItem, durationMinutes: link.durationMinutes)
+                       return EditableExerciseLink(exercise: realItem, durationSeconds: link.durationSeconds)
                    }
                    return nil
                } ?? [])
@@ -191,7 +191,7 @@ struct WorkoutEditorView: View {
        }
     
     private var totalDuration: Double {
-        editableExercises.reduce(0) { $0 + $1.durationMinutes }
+        editableExercises.reduce(0) { $0 + $1.durationSeconds }
     }
     
     private var averageMET: Double? {
@@ -209,7 +209,7 @@ struct WorkoutEditorView: View {
         editableExercises.map {
             YogaWorkoutExerciseEntry(
                 exercise: $0.exercise,
-                durationMinutes: $0.durationMinutes
+                durationSeconds: $0.durationSeconds
             )
         }
     }
@@ -548,7 +548,7 @@ struct WorkoutEditorView: View {
                         HStack(spacing: 16) {
                             StyledLabeledPicker(label: "Total Duration") {
                                 HStack {
-                                    Text("\(totalDuration.clean) min")
+                                    Text("\(totalDuration.clean) sec")
                                         .font(.system(size: 16))
                                     Spacer()
                                 }
@@ -691,7 +691,7 @@ struct WorkoutEditorView: View {
             let values = [
                 item.family?.rawValue,
                 item.level.map { "Level \($0)" },
-                item.durationMinutes.map { "\($0) min" }
+                item.durationSeconds.map { "\($0) sec" }
             ]
             .compactMap { $0 }
             .filter { !$0.isEmpty }
@@ -1113,7 +1113,7 @@ struct WorkoutEditorView: View {
         if let links = workout.exercises {
             let editable = links.compactMap { link -> EditableExerciseLink? in
                 guard let ex = link.exercise else { return nil }
-                return EditableExerciseLink(exercise: ex, durationMinutes: link.durationMinutes)
+                return EditableExerciseLink(exercise: ex, durationSeconds: link.durationSeconds)
             }
             self.editableExercises = editable
         }
@@ -1145,15 +1145,15 @@ struct WorkoutEditorView: View {
     
     private func add(exercise: ExerciseItem) {
         let defaultDuration: Double
-        if let minutes = exercise.durationMinutes {
-            defaultDuration = Double(minutes)
+        if let seconds = exercise.durationSeconds {
+            defaultDuration = Double(seconds)
         } else {
-            defaultDuration = 15
+            defaultDuration = 900
         }
 
         let newLink = EditableExerciseLink(
             exercise: exercise,
-            durationMinutes: defaultDuration
+            durationSeconds: defaultDuration
         )
         withAnimation {
             editableExercises.append(newLink)
@@ -1204,7 +1204,7 @@ struct WorkoutEditorView: View {
             itemToSave.videoURL = videoURL.trimmingCharacters(in: .whitespaces).nilIfEmpty()
             
             itemToSave.metValue = averageMET
-            itemToSave.durationMinutes = Int(totalDuration)
+            itemToSave.durationSeconds = Int(totalDuration)
 
             if isManualAyurvedaOverride {
                 itemToSave.dosha = YogaDosha(
@@ -1236,7 +1236,7 @@ struct WorkoutEditorView: View {
             }
             itemToSave.exercises = []
             for e in editableExercises {
-                let link = ExerciseLink(exercise: e.exercise, durationMinutes: e.durationMinutes, owner: itemToSave)
+                let link = ExerciseLink(exercise: e.exercise, durationSeconds: e.durationSeconds, owner: itemToSave)
                 modelContext.insert(link)
                 itemToSave.exercises?.append(link)
             }
@@ -1489,7 +1489,7 @@ struct WorkoutEditorView: View {
                 let itemMap = Dictionary(uniqueKeysWithValues: fetchedItems.map { ($0.id, $0) })
                 for entry in payload.exercises {
                     if let exerciseItem = itemMap[entry.exerciseID] {
-                        newExercises.append(EditableExerciseLink(exercise: exerciseItem, durationMinutes: entry.durationMinutes))
+                        newExercises.append(EditableExerciseLink(exercise: exerciseItem, durationSeconds: entry.durationSeconds))
                     }
                 }
             }
@@ -1683,7 +1683,7 @@ fileprivate struct EditableExerciseRow: View {
         self._focusedField = focusedField
         self.focusCase = focusCase
         self._textValue = State(
-            initialValue: Self.formattedDuration(link.wrappedValue.durationMinutes)
+            initialValue: Self.formattedDuration(link.wrappedValue.durationSeconds)
         )
     }
     
@@ -1697,7 +1697,7 @@ fileprivate struct EditableExerciseRow: View {
 
                 HStack(spacing: 4) {
                     ConfigurableTextField(
-                        title: "min",
+                        title: "sec",
                         value: $textValue,
                         type: .decimal,
                         placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
@@ -1708,7 +1708,7 @@ fileprivate struct EditableExerciseRow: View {
                     .fixedSize()
                     .foregroundStyle(effectManager.currentGlobalAccentColor)
 
-                    Text("min")
+                    Text("sec")
                         .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
 
                     Button(role: .destructive, action: onDelete) {
@@ -1738,12 +1738,12 @@ fileprivate struct EditableExerciseRow: View {
         .glassCardStyle(cornerRadius: 20)
         .onChange(of: textValue) { _, newText in
             if let newDuration = Double(newText) {
-                link.durationMinutes = newDuration
+                link.durationSeconds = newDuration
             } else if newText.isEmpty {
-                link.durationMinutes = 0
+                link.durationSeconds = 0
             }
         }
-        .onChange(of: link.durationMinutes) { _, newDuration in
+        .onChange(of: link.durationSeconds) { _, newDuration in
             let currentTextAsDouble = Double(textValue) ?? 0.0
             if abs(currentTextAsDouble - newDuration) > 0.1 {
                 textValue = Self.formattedDuration(newDuration)
@@ -1751,17 +1751,17 @@ fileprivate struct EditableExerciseRow: View {
         }
         .onChange(of: focusedField) { _, newFocus in
             if newFocus != focusCase {
-                let clampedDuration = max(1.0 / 60.0, min(link.durationMinutes, 999))
+                let clampedDuration = max(1, min(link.durationSeconds, 86_400))
                 textValue = Self.formattedDuration(clampedDuration)
-                link.durationMinutes = clampedDuration
+                link.durationSeconds = clampedDuration
             }
         }
     }
 
-    private static func formattedDuration(_ minutes: Double) -> String {
-        if minutes.rounded() == minutes {
-            return String(format: "%.0f", minutes)
+    private static func formattedDuration(_ seconds: Double) -> String {
+        if seconds.rounded() == seconds {
+            return String(format: "%.0f", seconds)
         }
-        return String(format: minutes < 1 ? "%.2f" : "%.1f", minutes)
+        return String(format: "%.1f", seconds)
     }
 }

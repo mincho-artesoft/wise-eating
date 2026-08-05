@@ -11,6 +11,7 @@ enum SeedManager {
         let ctx = GlobalState.modelContext!
         ctx.autosaveEnabled = false
 
+        migrateExerciseDurationsIfNeeded(context: ctx)
         removeBundledExercisesIfNeeded(context: ctx)
         seedYogaIfNeeded(context: ctx)
         await seedBarcodesIfNeeded(context: ctx)
@@ -45,6 +46,16 @@ enum SeedManager {
     }
 
     // MARK: – Yoga
+    private static func migrateExerciseDurationsIfNeeded(context ctx: ModelContext) {
+        do {
+            try ExerciseDurationUnitMigrator.migrateIfNeeded(context: ctx)
+        } catch {
+            ctx.rollback()
+            print("   ❌ Exercise duration unit migration failed: \(error)")
+            assertionFailure("Exercise duration unit migration failed: \(error)")
+        }
+    }
+
     private static func seedYogaIfNeeded(context ctx: ModelContext) {
         print("-> Checking for Yoga data...")
         let versionKey = "yogaSeedVersion"

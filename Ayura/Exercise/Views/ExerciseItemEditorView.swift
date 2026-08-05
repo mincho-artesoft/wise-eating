@@ -58,7 +58,7 @@ struct ExerciseItemEditorView: View {
     @State private var description: String
     @State private var videoURL: String
     @State private var metValueString: String
-    @State private var durationMinutesString: String
+    @State private var durationSecondsString: String
     @State private var minAgeMonthsTxt: String
     @State private var selectedFamily: AsanaFamily?
     @State private var levelString: String
@@ -123,7 +123,7 @@ struct ExerciseItemEditorView: View {
             _photoData = State(initialValue: copy.photo)
             _selectedMuscleGroups = State(initialValue: Set(copy.muscleGroups.map(\.id)))
             _galleryData = State(initialValue: copy.gallery ?? [])
-            _durationMinutesString = State(initialValue: copy.durationMinutes.map { String($0) } ?? "")
+            _durationSecondsString = State(initialValue: copy.durationSeconds.map { String($0) } ?? "")
             _minAgeMonthsTxt = State(initialValue: copy.minimalAgeMonths > 0 ? String(copy.minimalAgeMonths) : "")
             _selectedFamily = State(initialValue: copy.family)
             _levelString = State(initialValue: copy.level.map(String.init) ?? "")
@@ -146,7 +146,7 @@ struct ExerciseItemEditorView: View {
             _photoData = State(initialValue: p.photo)
             _selectedMuscleGroups = State(initialValue: Set(p.muscleGroups.map(\.id)))
             _galleryData = State(initialValue: p.gallery?.map(\.data) ?? [])
-            _durationMinutesString = State(initialValue: p.durationMinutes.map { String($0) } ?? "")
+            _durationSecondsString = State(initialValue: p.durationSeconds.map { String($0) } ?? "")
             _minAgeMonthsTxt = State(initialValue: p.minimalAgeMonths > 0 ? String(p.minimalAgeMonths) : "")
             _selectedFamily = State(initialValue: p.family)
             _levelString = State(initialValue: p.level.map(String.init) ?? "")
@@ -164,7 +164,7 @@ struct ExerciseItemEditorView: View {
             _photoData = State(initialValue: nil)
             _selectedMuscleGroups = State(initialValue: [])
             _galleryData = State(initialValue: [])
-            _durationMinutesString = State(initialValue: "")
+            _durationSecondsString = State(initialValue: "")
             _minAgeMonthsTxt = State(initialValue: "")
             _selectedFamily = State(initialValue: nil)
             _levelString = State(initialValue: "")
@@ -383,10 +383,10 @@ struct ExerciseItemEditorView: View {
                     photoPicker
                     
                     VStack(alignment: .leading, spacing: 12) {
-                        StyledLabeledPicker(label: "Default Duration (min)") {
+                        StyledLabeledPicker(label: "Default Duration (sec)") {
                             ConfigurableTextField(
-                                title: "e.g., 15",
-                                value: $durationMinutesString,
+                                title: "e.g., 30",
+                                value: $durationSecondsString,
                                 type: .integer,
                                 placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
                                 textAlignment: .leading,
@@ -743,7 +743,7 @@ struct ExerciseItemEditorView: View {
             itemToSave.metValue = Double(metValueString)
             itemToSave.photo = photoData
             itemToSave.muscleGroups = selectedMuscleGroups.compactMap { MuscleGroup(rawValue: $0) }
-            itemToSave.durationMinutes = Int(durationMinutesString)
+            itemToSave.durationSeconds = Int(durationSecondsString)
             itemToSave.minimalAgeMonths = Int(minAgeMonthsTxt) ?? 0
             itemToSave.family = selectedFamily
             itemToSave.level = Int(levelString)
@@ -963,7 +963,7 @@ struct ExerciseItemEditorView: View {
                 self.selectedFamily      = response.family ?? self.selectedFamily
                 self.levelString         = response.level.map(String.init) ?? self.levelString
                 self.levelScale          = response.levelScale ?? self.levelScale
-                self.durationMinutesString = response.durationMinutes.map(String.init) ?? self.durationMinutesString
+                self.durationSecondsString = response.durationSeconds.map(String.init) ?? self.durationSecondsString
                 self.breath              = response.breath ?? self.breath
                 self.drishti             = response.drishti ?? self.drishti
                 if let dosha = response.dosha {

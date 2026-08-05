@@ -9,7 +9,8 @@ public final class YogaSequence: Identifiable {
     public var title: String
     public var intent: String
     public var level: Int
-    public var durationMinutes: Int
+    @Attribute(originalName: "durationMinutes")
+    public var durationSeconds: Int
     public var season: String
     public var school: String
     public var sequenceNote: String?
@@ -40,7 +41,7 @@ public final class YogaSequence: Identifiable {
         title: String,
         intent: String,
         level: Int,
-        durationMinutes: Int,
+        durationSeconds: Int,
         season: String,
         school: String,
         sequenceNote: String?,
@@ -54,7 +55,7 @@ public final class YogaSequence: Identifiable {
         self.title = title
         self.intent = intent
         self.level = level
-        self.durationMinutes = durationMinutes
+        self.durationSeconds = durationSeconds
         self.season = season
         self.school = school
         self.sequenceNote = sequenceNote
@@ -70,7 +71,7 @@ public final class YogaSequence: Identifiable {
         title = dto.title
         intent = dto.intent
         level = dto.level
-        durationMinutes = dto.durationMinutes
+        durationSeconds = dto.durationMinutes * 60
         season = dto.season
         school = dto.school
         sequenceNote = dto.note

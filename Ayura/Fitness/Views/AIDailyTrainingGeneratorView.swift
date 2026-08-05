@@ -409,7 +409,7 @@ struct AIDailyTrainingGeneratorView: View {
             .filter { !$0.exercises(using: modelContext).isEmpty }
             .map { training -> TrainingPlanWorkoutDraft in
                 let exercises = training.exercises(using: modelContext).map { (item, duration) in
-                    TrainingPlanExerciseDraft(exerciseName: item.name, durationMinutes: duration)
+                    TrainingPlanExerciseDraft(exerciseName: item.name, durationSeconds: duration)
                 }
                 return TrainingPlanWorkoutDraft(workoutName: training.name, exercises: exercises)
             }
