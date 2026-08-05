@@ -39,10 +39,10 @@ struct ExerciseItemDetailView: View {
         return images
     }
     
-    private var caloriesBurnedPer1800Seconds: Double? {
+    private var caloriesBurnedPer30Minutes: Double? {
         guard let profile = profile, let met = item.metValue else { return nil }
         let cpm = (met * 3.5 * profile.weight) / 200.0 // Calories per minute
-        return cpm * (1_800.0 / 60.0) // Calories for 1,800 seconds
+        return cpm * 30.0
     }
     
     private var videoURL: URL? {
@@ -290,9 +290,9 @@ struct ExerciseItemDetailView: View {
                             .foregroundColor(effectManager.currentGlobalAccentColor)
                     }
                 }
-                if let calories = caloriesBurnedPer1800Seconds {
+                if let calories = caloriesBurnedPer30Minutes {
                     VStack(spacing: 4) {
-                        Label { Text("Burn (1800 sec)") } icon: {
+                        Label { Text("Burn (30 min)") } icon: {
                             Image(systemName: "flame.fill").foregroundColor(.orange)
                         }
                         .font(.subheadline)
@@ -368,9 +368,9 @@ struct ExerciseItemDetailView: View {
                         .foregroundColor(effectManager.currentGlobalAccentColor)
                 }
             }
-            if let calories = caloriesBurnedPer1800Seconds {
+            if let calories = caloriesBurnedPer30Minutes {
                 VStack(spacing: 2) {
-                    Label { Text("Burn (1800 sec)") } icon: { Image(systemName: "flame.fill").foregroundColor(.orange) }
+                    Label { Text("Burn (30 min)") } icon: { Image(systemName: "flame.fill").foregroundColor(.orange) }
                         .font(.caption)
                         .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
                     Text("\(calories, specifier: "%.0f") kcal")
