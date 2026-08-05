@@ -742,7 +742,6 @@ struct TrainingView: View {
                 .result
                 .distribution,
             target: exerciseAyurvedaTarget,
-            summaryTitle: "Exercise Dosha Balance",
             accessibilityContext: "Daily exercise Ayurveda",
             onTap: { presentRingDetail(.ayurveda) }
         )
