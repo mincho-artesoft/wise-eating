@@ -310,11 +310,18 @@ struct ExerciseAyurvedaEditorSection: View {
     }
 }
 
+private struct ExercisePracticeMetric: Identifiable {
+    let title: String
+    let value: String
+    let systemImage: String
+
+    var id: String { title }
+}
+
 struct ExercisePracticeDetailSection: View {
     @ObservedObject private var effectManager = EffectManager.shared
 
     let item: ExerciseItem
-    var usesCards = true
 
     private var hasContent: Bool {
         item.hasExercisePracticeMetadata
@@ -329,50 +336,76 @@ struct ExercisePracticeDetailSection: View {
     }
 
     private var content: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            if let family = item.family?.rawValue {
-                detailSection(title: "Family") {
-                    detailChip(
-                        label: family,
-                        systemImage: "figure.yoga"
-                    )
-                }
-            }
-            if let level = formattedLevel {
-                detailSection(title: "Level") {
-                    detailChip(
-                        label: level,
-                        systemImage: "chart.bar.fill"
-                    )
-                }
-            }
-            if let duration = formattedDuration {
-                detailSection(title: "Duration") {
-                    detailChip(
-                        label: duration,
-                        systemImage: "timer"
-                    )
-                }
-            }
-            if let breath = item.breath?.rawValue {
-                detailSection(title: "Breath") {
-                    detailChip(
-                        label: breath,
-                        systemImage: "wind"
-                    )
-                }
-            }
-            if let drishti = item.drishti?.rawValue {
-                detailSection(title: "Drishti") {
-                    detailChip(
-                        label: drishti,
-                        systemImage: "eye.fill"
-                    )
+        VStack(spacing: 16) {
+            ForEach(Array(metricRows.enumerated()), id: \.offset) { _, row in
+                HStack(spacing: 24) {
+                    ForEach(row) { metric in
+                        metricView(metric)
+                    }
                 }
             }
         }
+        .frame(maxWidth: .infinity)
         .foregroundStyle(effectManager.currentGlobalAccentColor)
         .tint(effectManager.currentGlobalAccentColor)
+    }
+
+    private var metrics: [ExercisePracticeMetric] {
+        var values: [ExercisePracticeMetric] = []
+
+        if let family = item.family?.rawValue {
+            values.append(
+                ExercisePracticeMetric(
+                    title: "Family",
+                    value: family,
+                    systemImage: "figure.yoga"
+                )
+            )
+        }
+        if let level = formattedLevel {
+            values.append(
+                ExercisePracticeMetric(
+                    title: "Level",
+                    value: level,
+                    systemImage: "chart.bar.fill"
+                )
+            )
+        }
+        if let duration = formattedDuration {
+            values.append(
+                ExercisePracticeMetric(
+                    title: "Duration",
+                    value: duration,
+                    systemImage: "timer"
+                )
+            )
+        }
+        if let breath = item.breath?.rawValue {
+            values.append(
+                ExercisePracticeMetric(
+                    title: "Breath",
+                    value: breath,
+                    systemImage: "wind"
+                )
+            )
+        }
+        if let drishti = item.drishti?.rawValue {
+            values.append(
+                ExercisePracticeMetric(
+                    title: "Drishti",
+                    value: drishti,
+                    systemImage: "eye.fill"
+                )
+            )
+        }
+
+        return values
+    }
+
+    private var metricRows: [[ExercisePracticeMetric]] {
+        stride(from: 0, to: metrics.count, by: 2).map { startIndex in
+            Array(metrics[startIndex..<min(startIndex + 2, metrics.count)])
+        }
     }
 
     private var formattedLevel: String? {
@@ -384,37 +417,23 @@ struct ExercisePracticeDetailSection: View {
         return "\(seconds) sec"
     }
 
-    private func detailSection<Content: View>(
-        title: String,
-        @ViewBuilder content: () -> Content
-    ) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(title)
-                .font(.title2.weight(.semibold))
-
-            if usesCards {
-                content()
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding()
-                    .glassCardStyle(cornerRadius: 20)
-            } else {
-                content()
+    private func metricView(_ metric: ExercisePracticeMetric) -> some View {
+        VStack(spacing: 2) {
+            Label {
+                Text(metric.title)
+            } icon: {
+                Image(systemName: metric.systemImage)
+                    .foregroundStyle(Color("AyurvedaChipTint"))
             }
-        }
-    }
+            .font(.caption)
+            .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
 
-    private func detailChip(
-        label: String,
-        systemImage: String
-    ) -> some View {
-        GlassChipView(
-            label: label,
-            color: Color("AyurvedaChipTint"),
-            systemImage: systemImage,
-            textColor: effectManager.currentGlobalAccentColor,
-            isSelected: true,
-            action: nil
-        )
+            Text(metric.value)
+                .font(.headline)
+                .foregroundStyle(effectManager.currentGlobalAccentColor)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+        }
     }
 
 }

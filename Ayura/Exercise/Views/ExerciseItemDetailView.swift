@@ -420,10 +420,7 @@ struct ExerciseItemDetailView: View {
                                 if exercise.hasYogaPracticeMetadata {
                                     DisclosureGroup {
                                         VStack(alignment: .leading, spacing: 14) {
-                                            ExercisePracticeDetailSection(
-                                                item: exercise,
-                                                usesCards: false
-                                            )
+                                            ExercisePracticeDetailSection(item: exercise)
                                             ExerciseAyurvedaDetailSection(
                                                 item: exercise,
                                                 usesCard: false
