@@ -727,8 +727,9 @@ struct TrainingView: View {
                 .distribution,
             target: exerciseAyurvedaTarget,
             summaryTitle: "Exercise Dosha Balance",
-            summarySubtitle: "Daily effect, weighted by exercise duration",
-            accessibilityContext: "Daily exercise Ayurveda"
+            summarySubtitle: "Weighted by duration · − pacifies · + aggravates",
+            accessibilityContext: "Daily exercise Ayurveda",
+            usesPersonalizedEffectColors: false
         )
     }
     

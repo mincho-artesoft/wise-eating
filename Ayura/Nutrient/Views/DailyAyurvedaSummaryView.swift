@@ -16,6 +16,7 @@ struct DailyAyurvedaSummaryRow: View {
     let summaryTitle: String
     let summarySubtitle: String?
     let accessibilityContext: String
+    let usesPersonalizedEffectColors: Bool
     let onTap: (() -> Void)?
 
     init(
@@ -25,6 +26,7 @@ struct DailyAyurvedaSummaryRow: View {
         summaryTitle: String = "Dosha Balance",
         summarySubtitle: String? = nil,
         accessibilityContext: String = "Daily Ayurveda",
+        usesPersonalizedEffectColors: Bool = true,
         onTap: (() -> Void)? = nil
     ) {
         self.computation = computation
@@ -33,6 +35,7 @@ struct DailyAyurvedaSummaryRow: View {
         self.summaryTitle = summaryTitle
         self.summarySubtitle = summarySubtitle
         self.accessibilityContext = accessibilityContext
+        self.usesPersonalizedEffectColors = usesPersonalizedEffectColors
         self.onTap = onTap
     }
 
@@ -128,9 +131,9 @@ struct DailyAyurvedaSummaryRow: View {
     ) -> some View {
         let clampedValue = min(2, max(-2, value))
         let progress = CGFloat(2 - clampedValue) / 4
-        let prefersPacifying = prefersPacifyingEffect(
-            for: profileWeight
-        )
+        let prefersPacifying = usesPersonalizedEffectColors
+            ? prefersPacifyingEffect(for: profileWeight)
+            : true
         let effectColor = personalizedColor(
             for: clampedValue,
             prefersPacifying: prefersPacifying

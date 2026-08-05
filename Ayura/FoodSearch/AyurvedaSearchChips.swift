@@ -1,5 +1,10 @@
 import SwiftUI
 
+enum AyurvedaDoshaChipColorMode: Equatable {
+    case personalized
+    case rawEffect
+}
+
 struct AyurvedaDoshaQuickFilterChip: View {
     @ObservedObject private var effectManager = EffectManager.shared
 
@@ -65,25 +70,32 @@ struct AyurvedaDoshaResultChips: View {
     private let pitta: Int?
     private let kapha: Int?
     private let showsUnavailableState: Bool
+    private let colorMode: AyurvedaDoshaChipColorMode
 
-    init(metadata: AyurvedaCanonicalSearchMetadata?) {
+    init(
+        metadata: AyurvedaCanonicalSearchMetadata?,
+        colorMode: AyurvedaDoshaChipColorMode = .personalized
+    ) {
         _profileDistribution = State(initialValue: nil)
         vata = metadata?.doshaVata
         pitta = metadata?.doshaPitta
         kapha = metadata?.doshaKapha
         showsUnavailableState = metadata == nil
+        self.colorMode = colorMode
     }
 
     init(
         vata: Int,
         pitta: Int,
-        kapha: Int
+        kapha: Int,
+        colorMode: AyurvedaDoshaChipColorMode = .personalized
     ) {
         _profileDistribution = State(initialValue: nil)
         self.vata = vata
         self.pitta = pitta
         self.kapha = kapha
         showsUnavailableState = false
+        self.colorMode = colorMode
     }
 
     var body: some View {
@@ -166,6 +178,11 @@ struct AyurvedaDoshaResultChips: View {
         profileWeight: Double?
     ) -> Color {
         guard value != 0 else { return Color("AyurvedaNeutral") }
+        if colorMode == .rawEffect {
+            return value < 0
+                ? Color("AyurvedaPacify")
+                : Color("AyurvedaAggravate")
+        }
         let prefersPacifying = profileWeight.map {
             $0 >= (1.0 / 3.0)
         } ?? true

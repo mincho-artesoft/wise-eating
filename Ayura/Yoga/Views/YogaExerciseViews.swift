@@ -32,7 +32,8 @@ struct ExerciseAyurvedaSearchResultChips: View {
             AyurvedaDoshaResultChips(
                 vata: dosha.vata,
                 pitta: dosha.pitta,
-                kapha: dosha.kapha
+                kapha: dosha.kapha,
+                colorMode: .rawEffect
             )
         }
     }
