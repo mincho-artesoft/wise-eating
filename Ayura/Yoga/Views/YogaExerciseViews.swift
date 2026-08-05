@@ -424,24 +424,31 @@ struct ExerciseAyurvedaDetailSection: View {
     @ViewBuilder
     var body: some View {
         if let dosha = item.dosha {
-            let content = VStack(alignment: .leading, spacing: 14) {
-                Text("Ayurveda")
-                    .font(.title2.weight(.semibold))
-                DoshaBarsView(
-                    vata: dosha.vata,
-                    pitta: dosha.pitta,
-                    kapha: dosha.kapha
-                )
-            }
-            .foregroundStyle(effectManager.currentGlobalAccentColor)
-            .tint(effectManager.currentGlobalAccentColor)
+            let title = Text("Ayurveda")
+                .font(.title2.weight(.semibold))
+
+            let content = DoshaBarsView(
+                vata: dosha.vata,
+                pitta: dosha.pitta,
+                kapha: dosha.kapha
+            )
 
             if usesCard {
-                content
-                    .padding()
-                    .glassCardStyle(cornerRadius: 20)
+                VStack(alignment: .leading, spacing: 8) {
+                    title
+                    content
+                        .padding()
+                        .glassCardStyle(cornerRadius: 20)
+                }
+                .foregroundStyle(effectManager.currentGlobalAccentColor)
+                .tint(effectManager.currentGlobalAccentColor)
             } else {
-                content
+                VStack(alignment: .leading, spacing: 14) {
+                    title
+                    content
+                }
+                .foregroundStyle(effectManager.currentGlobalAccentColor)
+                .tint(effectManager.currentGlobalAccentColor)
             }
         }
     }
@@ -467,28 +474,30 @@ struct YogaWorkoutAyurvedaEditorSection: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 14) {
+        VStack(alignment: .leading, spacing: 8) {
             Text("Ayurveda")
-                .font(.title2.weight(.semibold))
+                .font(.headline)
 
-            Toggle("Set manually", isOn: $isManualOverride)
-                .onChange(of: isManualOverride) { wasManual, isManual in
-                    guard isManual, !wasManual, let automaticDosha else { return }
-                    vata = automaticDosha.vata
-                    pitta = automaticDosha.pitta
-                    kapha = automaticDosha.kapha
+            VStack(alignment: .leading, spacing: 14) {
+                Toggle("Set manually", isOn: $isManualOverride)
+                    .onChange(of: isManualOverride) { wasManual, isManual in
+                        guard isManual, !wasManual, let automaticDosha else { return }
+                        vata = automaticDosha.vata
+                        pitta = automaticDosha.pitta
+                        kapha = automaticDosha.kapha
+                    }
+
+                if isManualOverride {
+                    manualDoshaEditor
+                } else {
+                    automaticPreview
                 }
-
-            if isManualOverride {
-                manualDoshaEditor
-            } else {
-                automaticPreview
             }
+            .padding()
+            .glassCardStyle(cornerRadius: 20)
         }
         .foregroundStyle(effectManager.currentGlobalAccentColor)
         .tint(effectManager.currentGlobalAccentColor)
-        .padding()
-        .glassCardStyle(cornerRadius: 20)
     }
 
     private var manualDoshaEditor: some View {
@@ -561,30 +570,32 @@ struct YogaWorkoutAyurvedaSection: View {
     @ViewBuilder
     var body: some View {
         if !yogaEntries.isEmpty || manualDosha != nil {
-            VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: 8) {
                 Text("Ayurveda")
                     .font(.title2.weight(.semibold))
 
-                Text(
-                    manualDosha == nil
-                        ? "Calculated from \(yogaEntries.count) exercise\(yogaEntries.count == 1 ? "" : "s") in this workout."
-                        : "Ayurveda effects set manually."
-                )
-                .font(.caption)
-                .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.72))
-
-                if let displayedDosha {
-                    DoshaBarsView(
-                        vata: displayedDosha.vata,
-                        pitta: displayedDosha.pitta,
-                        kapha: displayedDosha.kapha
+                VStack(alignment: .leading, spacing: 16) {
+                    Text(
+                        manualDosha == nil
+                            ? "Calculated from \(yogaEntries.count) exercise\(yogaEntries.count == 1 ? "" : "s") in this workout."
+                            : "Ayurveda effects set manually."
                     )
+                    .font(.caption)
+                    .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.72))
+
+                    if let displayedDosha {
+                        DoshaBarsView(
+                            vata: displayedDosha.vata,
+                            pitta: displayedDosha.pitta,
+                            kapha: displayedDosha.kapha
+                        )
+                    }
                 }
+                .padding()
+                .glassCardStyle(cornerRadius: 20)
             }
             .foregroundStyle(effectManager.currentGlobalAccentColor)
             .tint(effectManager.currentGlobalAccentColor)
-            .padding()
-            .glassCardStyle(cornerRadius: 20)
         }
     }
 }

@@ -3,6 +3,7 @@ import SwiftUI
 
 struct AyurvedaSectionView: View {
   @Environment(\.modelContext) private var modelContext
+  @ObservedObject private var effectManager = EffectManager.shared
   @State private var display: AyurvedaDisplay?
   @State private var debugFailure: String?
 
@@ -22,9 +23,15 @@ struct AyurvedaSectionView: View {
       }
       #endif
       if let display {
-        AyurvedaDisplayCard(display: display)
-          .padding()
-          .glassCardStyle(cornerRadius: 20)
+        VStack(alignment: .leading, spacing: 8) {
+          Text("Ayurveda")
+            .font(.title2.weight(.semibold))
+            .foregroundStyle(effectManager.currentGlobalAccentColor)
+
+          AyurvedaDisplayCard(display: display)
+            .padding()
+            .glassCardStyle(cornerRadius: 20)
+        }
       }
     }
     .task(id: food.id) {
@@ -60,7 +67,6 @@ struct AyurvedaDisplayCard: View {
 
   var body: some View {
     VStack(alignment: .leading, spacing: 16) {
-      title
       if display.engineExcluded {
         AyurvedaDisplayWarningRow(
           title: "Health warning",
@@ -88,12 +94,6 @@ struct AyurvedaDisplayCard: View {
     }
     .foregroundStyle(effectManager.currentGlobalAccentColor)
     .tint(effectManager.currentGlobalAccentColor)
-  }
-
-  private var title: some View {
-    Text("Ayurveda")
-      .font(.title2.weight(.semibold))
-      .foregroundStyle(effectManager.currentGlobalAccentColor)
   }
 
   private var properties: some View {
