@@ -2,12 +2,14 @@ import SwiftUI
 
 /// Един пръстен + 0–2 редов етикет. Олекотен и БЕЗ клипване на щриха.
 struct NutrientRingView: View {
+    @ObservedObject private var effectManager = EffectManager.shared
+
     // ... (всички properties остават същите) ...
     let item: NutriItem
     var diameter:   CGFloat = 70
     var isSelected: Bool    = false
     var animate: Bool = true
-    var accent: Color = .primary
+    var accent: Color? = nil
     // ... (всички computed properties остават същите) ...
     private var ringWidth:    CGFloat { diameter * 0.11 }
     private let labelSpacing: CGFloat = 6
@@ -27,7 +29,10 @@ struct NutrientRingView: View {
     private var percentColor: Color {
         if let ul = item.upperLimit, item.amount >= ul { return .red }
         if let dn = item.dailyNeed, dn > 0 { return item.amount >= dn ? .green : .red }
-        return accent
+        return resolvedAccent
+    }
+    private var resolvedAccent: Color {
+        accent ?? effectManager.currentGlobalAccentColor
     }
 
     var body: some View {
@@ -38,7 +43,7 @@ struct NutrientRingView: View {
 
                 Circle()
                     .inset(by: ringInset)
-                    .stroke(accent.opacity(0.18), lineWidth: ringWidth)
+                    .stroke(resolvedAccent.opacity(0.18), lineWidth: ringWidth)
 
                 Circle()
                     .inset(by: ringInset)
@@ -59,7 +64,7 @@ struct NutrientRingView: View {
             Text(item.label)
                 .font(.system(size: labelFontSize, weight: .semibold, design: .rounded))
                 .frame(width: diameter, height: labelHeight, alignment: .top)
-                .foregroundStyle(accent)
+                .foregroundStyle(resolvedAccent)
                 .multilineTextAlignment(.center)
                 .lineLimit(labelLines)
                 .minimumScaleFactor(0.7)

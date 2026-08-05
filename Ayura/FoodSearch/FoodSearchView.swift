@@ -270,7 +270,9 @@ private struct FoodSearchViewContent: View {
                     ProgressView()
                     Text("Indexing Database...")
                         .font(.caption)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(
+                            effectManager.currentGlobalAccentColor.opacity(0.7)
+                        )
                 }
                 .frame(maxHeight: .infinity)
             } else {
@@ -684,6 +686,8 @@ private struct FoodRowView: View {
 
 // MARK: - Component: Filter Button
 private struct FilterButton: View {
+    @ObservedObject private var effectManager = EffectManager.shared
+
     let title: String
     let isSelected: Bool
     let action: () -> Void
@@ -696,7 +700,9 @@ private struct FilterButton: View {
                 .padding(.horizontal, 12)
                 .padding(.vertical, 8)
                 .background(isSelected ? Color.blue.opacity(0.1) : Color(.systemGray6))
-                .foregroundColor(isSelected ? .blue : .primary)
+                .foregroundColor(
+                    isSelected ? .blue : effectManager.currentGlobalAccentColor
+                )
                 .cornerRadius(20)
                 .overlay(
                     RoundedRectangle(cornerRadius: 20)
