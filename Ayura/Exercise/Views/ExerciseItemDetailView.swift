@@ -77,6 +77,7 @@ struct ExerciseItemDetailView: View {
                     
                     VStack(alignment: .leading, spacing: 24) {
                         textInfoSection
+                        exercisePracticeDetailsSection
                         ayurvedaDetailsSection
                         workoutYogaSection
                         bannerAdSection
@@ -342,12 +343,15 @@ struct ExerciseItemDetailView: View {
                 summaryInfoRow
             }
 
-            if !item.isWorkout, item.hasExercisePracticeMetadata {
-                Divider()
-                ExercisePracticeDetailSection(item: item)
-            }
         }
         .frame(maxWidth: .infinity)
+    }
+
+    @ViewBuilder
+    private var exercisePracticeDetailsSection: some View {
+        if !item.isWorkout {
+            ExercisePracticeDetailSection(item: item)
+        }
     }
     
     private var summaryInfoRow: some View {
@@ -416,7 +420,10 @@ struct ExerciseItemDetailView: View {
                                 if exercise.hasYogaPracticeMetadata {
                                     DisclosureGroup {
                                         VStack(alignment: .leading, spacing: 14) {
-                                            ExercisePracticeDetailSection(item: exercise)
+                                            ExercisePracticeDetailSection(
+                                                item: exercise,
+                                                usesCards: false
+                                            )
                                             ExerciseAyurvedaDetailSection(
                                                 item: exercise,
                                                 usesCard: false

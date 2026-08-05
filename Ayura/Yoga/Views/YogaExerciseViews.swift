@@ -313,6 +313,7 @@ struct ExercisePracticeDetailSection: View {
     @ObservedObject private var effectManager = EffectManager.shared
 
     let item: ExerciseItem
+    var usesCards = true
 
     private var hasContent: Bool {
         item.hasExercisePracticeMetadata
@@ -327,7 +328,7 @@ struct ExercisePracticeDetailSection: View {
     }
 
     private var content: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: 20) {
             identityContent
             practiceContent
         }
@@ -337,24 +338,27 @@ struct ExercisePracticeDetailSection: View {
 
     @ViewBuilder
     private var identityContent: some View {
-        let level = formattedLevel
-        let values = [
-            item.family?.rawValue,
-            level,
-            formattedDuration
-        ].compactMap { $0 }
-
-        if !values.isEmpty {
-            ChipGrid {
-                ForEach(values, id: \.self) { value in
-                    GlassChipView(
-                        label: value,
-                        color: Color("AyurvedaChipTint"),
-                        systemImage: nil,
-                        textColor: effectManager.currentGlobalAccentColor,
-                        isSelected: true,
-                        action: nil
-                    )
+        if item.family != nil || formattedLevel != nil || formattedDuration != nil {
+            detailSection(title: "Pose Identity") {
+                ChipGrid {
+                    if let family = item.family?.rawValue {
+                        detailChip(
+                            label: family,
+                            systemImage: "figure.yoga"
+                        )
+                    }
+                    if let level = formattedLevel {
+                        detailChip(
+                            label: level,
+                            systemImage: "chart.bar.fill"
+                        )
+                    }
+                    if let duration = formattedDuration {
+                        detailChip(
+                            label: duration,
+                            systemImage: "timer"
+                        )
+                    }
                 }
             }
         }
@@ -366,20 +370,20 @@ struct ExercisePracticeDetailSection: View {
         let drishti = item.drishti?.rawValue
 
         if breath != nil || drishti != nil {
-            VStack(alignment: .leading, spacing: 10) {
-                if let breath {
-                    guidanceRow(
-                        title: "Breath",
-                        value: breath,
-                        systemImage: "wind"
-                    )
-                }
-                if let drishti {
-                    guidanceRow(
-                        title: "Drishti",
-                        value: drishti,
-                        systemImage: "eye.fill"
-                    )
+            detailSection(title: "Practice Guidance") {
+                ChipGrid {
+                    if let breath {
+                        detailChip(
+                            label: breath,
+                            systemImage: "wind"
+                        )
+                    }
+                    if let drishti {
+                        detailChip(
+                            label: drishti,
+                            systemImage: "eye.fill"
+                        )
+                    }
                 }
             }
         }
@@ -394,23 +398,37 @@ struct ExercisePracticeDetailSection: View {
         return "\(seconds) sec"
     }
 
-    private func guidanceRow(
+    private func detailSection<Content: View>(
         title: String,
-        value: String,
-        systemImage: String
+        @ViewBuilder content: () -> Content
     ) -> some View {
-        HStack(alignment: .top, spacing: 9) {
-            Image(systemName: systemImage)
-                .frame(width: 18)
-                .foregroundStyle(Color("AyurvedaPacify"))
-            VStack(alignment: .leading, spacing: 2) {
-                Text(title)
-                    .font(.caption.weight(.semibold))
-                Text(value)
-                    .font(.callout)
-                    .fixedSize(horizontal: false, vertical: true)
+        VStack(alignment: .leading, spacing: 8) {
+            Text(title)
+                .font(.title2.weight(.semibold))
+
+            if usesCards {
+                content()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .glassCardStyle(cornerRadius: 20)
+            } else {
+                content()
             }
         }
+    }
+
+    private func detailChip(
+        label: String,
+        systemImage: String
+    ) -> some View {
+        GlassChipView(
+            label: label,
+            color: Color("AyurvedaChipTint"),
+            systemImage: systemImage,
+            textColor: effectManager.currentGlobalAccentColor,
+            isSelected: true,
+            action: nil
+        )
     }
 
 }
