@@ -329,64 +329,49 @@ struct ExercisePracticeDetailSection: View {
 
     private var content: some View {
         VStack(alignment: .leading, spacing: 20) {
-            identityContent
-            practiceContent
+            if let family = item.family?.rawValue {
+                detailSection(title: "Family") {
+                    detailChip(
+                        label: family,
+                        systemImage: "figure.yoga"
+                    )
+                }
+            }
+            if let level = formattedLevel {
+                detailSection(title: "Level") {
+                    detailChip(
+                        label: level,
+                        systemImage: "chart.bar.fill"
+                    )
+                }
+            }
+            if let duration = formattedDuration {
+                detailSection(title: "Duration") {
+                    detailChip(
+                        label: duration,
+                        systemImage: "timer"
+                    )
+                }
+            }
+            if let breath = item.breath?.rawValue {
+                detailSection(title: "Breath") {
+                    detailChip(
+                        label: breath,
+                        systemImage: "wind"
+                    )
+                }
+            }
+            if let drishti = item.drishti?.rawValue {
+                detailSection(title: "Drishti") {
+                    detailChip(
+                        label: drishti,
+                        systemImage: "eye.fill"
+                    )
+                }
+            }
         }
         .foregroundStyle(effectManager.currentGlobalAccentColor)
         .tint(effectManager.currentGlobalAccentColor)
-    }
-
-    @ViewBuilder
-    private var identityContent: some View {
-        if item.family != nil || formattedLevel != nil || formattedDuration != nil {
-            detailSection(title: "Pose Identity") {
-                ChipGrid {
-                    if let family = item.family?.rawValue {
-                        detailChip(
-                            label: family,
-                            systemImage: "figure.yoga"
-                        )
-                    }
-                    if let level = formattedLevel {
-                        detailChip(
-                            label: level,
-                            systemImage: "chart.bar.fill"
-                        )
-                    }
-                    if let duration = formattedDuration {
-                        detailChip(
-                            label: duration,
-                            systemImage: "timer"
-                        )
-                    }
-                }
-            }
-        }
-    }
-
-    @ViewBuilder
-    private var practiceContent: some View {
-        let breath = item.breath?.rawValue
-        let drishti = item.drishti?.rawValue
-
-        if breath != nil || drishti != nil {
-            detailSection(title: "Practice Guidance") {
-                ChipGrid {
-                    if let breath {
-                        detailChip(
-                            label: breath,
-                            systemImage: "wind"
-                        )
-                    }
-                    if let drishti {
-                        detailChip(
-                            label: drishti,
-                            systemImage: "eye.fill"
-                        )
-                    }
-                }
-            }
-        }
     }
 
     private var formattedLevel: String? {
