@@ -13,73 +13,112 @@ struct DailyAyurvedaSummaryRow: View {
     let computation: AyurvedaIngredientComputation
     let profileDistribution: AyurvedaDoshaDistribution?
     let target: AyurvedaDoshaDistribution?
-    let onTap: () -> Void
+    let summaryTitle: String
+    let summarySubtitle: String?
+    let accessibilityContext: String
+    let onTap: (() -> Void)?
+
+    init(
+        computation: AyurvedaIngredientComputation,
+        profileDistribution: AyurvedaDoshaDistribution?,
+        target: AyurvedaDoshaDistribution?,
+        summaryTitle: String = "Dosha Balance",
+        summarySubtitle: String? = nil,
+        accessibilityContext: String = "Daily Ayurveda",
+        onTap: (() -> Void)? = nil
+    ) {
+        self.computation = computation
+        self.profileDistribution = profileDistribution
+        self.target = target
+        self.summaryTitle = summaryTitle
+        self.summarySubtitle = summarySubtitle
+        self.accessibilityContext = accessibilityContext
+        self.onTap = onTap
+    }
 
     var body: some View {
-        Button(action: onTap) {
-            VStack(alignment: .leading, spacing: 12) {
-                HStack(spacing: 10) {
-                    Text("Dosha Balance")
-                        .font(.headline)
-
-                    Spacer(minLength: 8)
-
-                    GlassChipView(
-                        label: "Fit: \(fitLabel)",
-                        systemImage: fitIcon,
-                        textColor: fitColor,
-                        font: .subheadline,
-                        fontWeight: .semibold,
-                        horizontalPadding: 12,
-                        verticalPadding: 7,
-                        iconPlacement: .trailing
-                    )
-
-                    DoshaBalanceGlyph(
-                        distribution: foodEffectDistribution
-                    )
-                    .frame(width: 44, height: 38)
+        Group {
+            if let onTap {
+                Button(action: onTap) {
+                    cardContent
                 }
-
-                if let computed = computation.computed {
-                    VStack(spacing: 8) {
-                        doshaScale(
-                            dosha: .vata,
-                            value: computed.vata,
-                            profileWeight: profileDistribution?.vata ?? 0
-                        )
-                        doshaScale(
-                            dosha: .pitta,
-                            value: computed.pitta,
-                            profileWeight: profileDistribution?.pitta ?? 0
-                        )
-                        doshaScale(
-                            dosha: .kapha,
-                            value: computed.kapha,
-                            profileWeight: profileDistribution?.kapha ?? 0
-                        )
-                    }
-                    .frame(maxWidth: .infinity)
-                } else {
-                    Text("Ayurvedic effects unavailable")
-                        .font(.caption)
-                        .foregroundStyle(
-                            effectManager.currentGlobalAccentColor.opacity(0.7)
-                        )
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
+                .buttonStyle(.plain)
+            } else {
+                cardContent
             }
-            .foregroundStyle(effectManager.currentGlobalAccentColor)
-            .padding()
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .glassCardStyle(cornerRadius: 20)
-            .contentShape(RoundedRectangle(cornerRadius: 20))
         }
-        .buttonStyle(.plain)
         .padding(.horizontal, 20)
         .accessibilityLabel(
-            "Daily Ayurveda. Fit \(fitLabel). Open daily details."
+            "\(accessibilityContext). Fit \(fitLabel)."
         )
+    }
+
+    private var cardContent: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 10) {
+                Text(summaryTitle)
+                    .font(.headline)
+
+                Spacer(minLength: 8)
+
+                GlassChipView(
+                    label: "Fit: \(fitLabel)",
+                    systemImage: fitIcon,
+                    textColor: fitColor,
+                    font: .subheadline,
+                    fontWeight: .semibold,
+                    horizontalPadding: 12,
+                    verticalPadding: 7,
+                    iconPlacement: .trailing
+                )
+
+                DoshaBalanceGlyph(
+                    distribution: foodEffectDistribution
+                )
+                .frame(width: 44, height: 38)
+            }
+
+            if let computed = computation.computed {
+                VStack(spacing: 8) {
+                    doshaScale(
+                        dosha: .vata,
+                        value: computed.vata,
+                        profileWeight: profileDistribution?.vata ?? 0
+                    )
+                    doshaScale(
+                        dosha: .pitta,
+                        value: computed.pitta,
+                        profileWeight: profileDistribution?.pitta ?? 0
+                    )
+                    doshaScale(
+                        dosha: .kapha,
+                        value: computed.kapha,
+                        profileWeight: profileDistribution?.kapha ?? 0
+                    )
+                }
+                .frame(maxWidth: .infinity)
+            } else {
+                Text("Ayurvedic effects unavailable")
+                    .font(.caption)
+                    .foregroundStyle(
+                        effectManager.currentGlobalAccentColor.opacity(0.7)
+                    )
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+
+            if let summarySubtitle {
+                Text(summarySubtitle)
+                    .font(.caption2)
+                    .foregroundStyle(
+                        effectManager.currentGlobalAccentColor.opacity(0.68)
+                    )
+            }
+        }
+        .foregroundStyle(effectManager.currentGlobalAccentColor)
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .glassCardStyle(cornerRadius: 20)
+        .contentShape(RoundedRectangle(cornerRadius: 20))
     }
 
     private func doshaScale(

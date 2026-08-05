@@ -226,6 +226,48 @@ struct TrainingView: View {
             return tot + burn
         }
     }
+
+    private var dailyExerciseAyurvedaComputation: AyurvedaIngredientComputation {
+        var totalDuration = 0.0
+        var resolvedEffects: [AyurvedaDisplayMath.WeightedIngredient] = []
+
+        for training in dailyTrainings {
+            for (exercise, duration) in training.exercises(using: ctx) {
+                guard duration.isFinite, duration > 0 else { continue }
+                totalDuration += duration
+
+                guard let dosha = exercise.resolvedYogaDosha else { continue }
+                resolvedEffects.append(
+                    AyurvedaDisplayMath.WeightedIngredient(
+                        vata: dosha.vata,
+                        pitta: dosha.pitta,
+                        kapha: dosha.kapha,
+                        grams: duration
+                    )
+                )
+            }
+        }
+
+        guard totalDuration > 0 else { return .empty }
+        let resolvedDuration = resolvedEffects.reduce(0.0) { $0 + $1.grams }
+        let computation = AyurvedaDisplayMath.computed(
+            totalGrams: totalDuration,
+            resolved: resolvedEffects
+        )
+        return AyurvedaIngredientComputation(
+            computed: computation,
+            coverage: resolvedDuration / totalDuration,
+            hasIngredients: true
+        )
+    }
+
+    private var exerciseAyurvedaConstitutionRecord: AyurvedaConstitutionRecord? {
+        AyurvedaConstitutionStore.record(for: profile.id)
+    }
+
+    private var exerciseAyurvedaTarget: AyurvedaDoshaDistribution? {
+        exerciseAyurvedaConstitutionRecord?.target(at: chosenDate)
+    }
     
     private var netCalorieBalance: Double { totalCaloriesConsumedToday - totalCaloriesBurnedToday }
     private var targetCalories: Double { TDEECalculator.calculate(for: profile) }
@@ -405,17 +447,21 @@ struct TrainingView: View {
                     .padding(.horizontal, 20)
                     
                     if isRingsPinned {
-                        TrainingSummaryView(
-                            selectedWorkoutCaloriesBurned: selectedWorkoutCaloriesBurned,
-                            totalCaloriesBurnedToday: totalCaloriesBurnedToday,
-                            targetCalories: targetCalories,
-                            netCalorieBalance: netCalorieBalance,
-                            totalCaloriesConsumedToday: totalCaloriesConsumedToday,
-                            isPinned: $isRingsPinned,
-                            onTap: { detailType in
-                                presentRingDetail(detailType)
-                            }
-                        )
+                        VStack(spacing: 8) {
+                            TrainingSummaryView(
+                                selectedWorkoutCaloriesBurned: selectedWorkoutCaloriesBurned,
+                                totalCaloriesBurnedToday: totalCaloriesBurnedToday,
+                                targetCalories: targetCalories,
+                                netCalorieBalance: netCalorieBalance,
+                                totalCaloriesConsumedToday: totalCaloriesConsumedToday,
+                                isPinned: $isRingsPinned,
+                                onTap: { detailType in
+                                    presentRingDetail(detailType)
+                                }
+                            )
+
+                            exerciseAyurvedaSummaryCard
+                        }
                         .padding(.top, -40)
                         .transition(.opacity.combined(with: .scale))
                     }
@@ -423,17 +469,21 @@ struct TrainingView: View {
                     ScrollViewReader { proxy in
                         List {
                             if !isRingsPinned {
-                                TrainingSummaryView(
-                                    selectedWorkoutCaloriesBurned: selectedWorkoutCaloriesBurned,
-                                    totalCaloriesBurnedToday: totalCaloriesBurnedToday,
-                                    targetCalories: targetCalories,
-                                    netCalorieBalance: netCalorieBalance,
-                                    totalCaloriesConsumedToday: totalCaloriesConsumedToday,
-                                    isPinned: $isRingsPinned,
-                                    onTap: { detailType in
-                                        presentRingDetail(detailType)
-                                    }
-                                )
+                                VStack(spacing: 8) {
+                                    TrainingSummaryView(
+                                        selectedWorkoutCaloriesBurned: selectedWorkoutCaloriesBurned,
+                                        totalCaloriesBurnedToday: totalCaloriesBurnedToday,
+                                        targetCalories: targetCalories,
+                                        netCalorieBalance: netCalorieBalance,
+                                        totalCaloriesConsumedToday: totalCaloriesConsumedToday,
+                                        isPinned: $isRingsPinned,
+                                        onTap: { detailType in
+                                            presentRingDetail(detailType)
+                                        }
+                                    )
+
+                                    exerciseAyurvedaSummaryCard
+                                }
                                 .listRowSeparator(.hidden)
                                 .listRowBackground(Color.clear)
                                 .listRowInsets(EdgeInsets())
@@ -667,6 +717,19 @@ struct TrainingView: View {
                 await checkForUnreadNotifications()
             }
         }
+    }
+
+    private var exerciseAyurvedaSummaryCard: some View {
+        DailyAyurvedaSummaryRow(
+            computation: dailyExerciseAyurvedaComputation,
+            profileDistribution: exerciseAyurvedaConstitutionRecord?
+                .result
+                .distribution,
+            target: exerciseAyurvedaTarget,
+            summaryTitle: "Exercise Dosha Balance",
+            summarySubtitle: "Daily effect, weighted by exercise duration",
+            accessibilityContext: "Daily exercise Ayurveda"
+        )
     }
     
     private func checkForUnreadNotifications() async {

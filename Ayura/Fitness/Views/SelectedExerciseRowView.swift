@@ -129,6 +129,9 @@ struct SelectedExerciseRowView: View {
                 }
                 .padding(.top, 2)
                 // +++ КРАЙ НА ПРОМЯНАТА +++
+
+                ExerciseAyurvedaSearchResultChips(item: exercise)
+                    .padding(.top, 3)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
 
