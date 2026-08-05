@@ -1721,14 +1721,16 @@ fileprivate struct EditableExerciseRow: View {
 
             if link.exercise.hasYogaPracticeMetadata {
                 DisclosureGroup(isExpanded: $showsYogaDetails) {
-                    YogaExerciseDetailSection(
-                        item: link.exercise,
-                        title: nil,
-                        usesCard: false
-                    )
+                    VStack(alignment: .leading, spacing: 14) {
+                        ExercisePracticeDetailSection(item: link.exercise)
+                        ExerciseAyurvedaDetailSection(
+                            item: link.exercise,
+                            usesCard: false
+                        )
+                    }
                     .padding(.top, 10)
                 } label: {
-                    Label("Yoga & Ayurveda details", systemImage: "figure.yoga")
+                    Label("Exercise details", systemImage: "figure.yoga")
                         .font(.caption.weight(.semibold))
                         .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.82))
                 }

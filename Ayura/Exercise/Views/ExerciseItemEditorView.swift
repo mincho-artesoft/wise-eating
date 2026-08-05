@@ -67,7 +67,6 @@ struct ExerciseItemEditorView: View {
     @State private var doshaVata: Int
     @State private var doshaPitta: Int
     @State private var doshaKapha: Int
-    @State private var showYogaDetails = true
     
     // Вече не ползваме PhotosPicker директно, но може да оставим това състояние ако искаш
     @State private var selectedPhoto: PhotosPickerItem?
@@ -322,7 +321,7 @@ struct ExerciseItemEditorView: View {
                         .frame(height: isBannerAdLoaded ? 120 : 0)
                     gallerySection
                     detailsSection
-                    yogaSection
+                    ayurvedaSection
                     muscleGroupSection
                 }
                 .padding()
@@ -414,6 +413,15 @@ struct ExerciseItemEditorView: View {
                     .font(.system(size: 16))
                 }
                 .id(FocusableField.minAge)
+
+                Divider()
+
+                ExercisePracticeEditorFields(
+                    family: $selectedFamily,
+                    level: $levelString,
+                    breath: $breath,
+                    drishti: $drishti
+                )
             }
             .padding()
             .glassCardStyle(cornerRadius: 20)
@@ -558,40 +566,19 @@ struct ExerciseItemEditorView: View {
         .glassCardStyle(cornerRadius: 20)
     }
 
-    private var yogaSection: some View {
+    private var ayurvedaSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Button {
-                withAnimation {
-                    showYogaDetails.toggle()
-                }
-            } label: {
-                HStack {
-                    Text("Yoga & Ayurveda")
-                        .font(.headline)
-                    Spacer()
-                    Image(systemName: showYogaDetails ? "chevron.up" : "chevron.down")
-                        .font(.body.weight(.semibold))
-                        .contentTransition(.symbolEffect(.replace))
-                }
+            Text("Ayurveda")
+                .font(.headline)
                 .foregroundStyle(effectManager.currentGlobalAccentColor)
-                .contentShape(Rectangle())
-            }
-            .buttonStyle(.plain)
 
-            if showYogaDetails {
-                YogaExerciseEditorSection(
-                    family: $selectedFamily,
-                    level: $levelString,
-                    breath: $breath,
-                    drishti: $drishti,
-                    vata: $doshaVata,
-                    pitta: $doshaPitta,
-                    kapha: $doshaKapha
-                )
+            ExerciseAyurvedaEditorSection(
+                vata: $doshaVata,
+                pitta: $doshaPitta,
+                kapha: $doshaKapha
+            )
                 .padding()
                 .glassCardStyle(cornerRadius: 20)
-                .padding(.top, 4)
-            }
         }
     }
     

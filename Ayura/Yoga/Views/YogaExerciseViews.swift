@@ -1,12 +1,17 @@
 import SwiftUI
 
 extension ExerciseItem {
-    var hasYogaPracticeMetadata: Bool {
+    var hasExercisePracticeMetadata: Bool {
         family != nil
             || level != nil
             || breath != nil
             || drishti != nil
-            || dosha != nil
+    }
+
+    var hasAyurvedaMetadata: Bool { dosha != nil }
+
+    var hasYogaPracticeMetadata: Bool {
+        hasExercisePracticeMetadata || hasAyurvedaMetadata
     }
 }
 
@@ -32,24 +37,19 @@ struct ExerciseAyurvedaSearchResultChips: View {
     }
 }
 
-struct YogaExerciseEditorSection: View {
+struct ExercisePracticeEditorFields: View {
     @ObservedObject private var effectManager = EffectManager.shared
 
     @Binding var family: AsanaFamily?
     @Binding var level: String
     @Binding var breath: YogaBreath?
     @Binding var drishti: YogaDrishti?
-    @Binding var vata: Int
-    @Binding var pitta: Int
-    @Binding var kapha: Int
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             identityGroup
             sectionDivider
             practiceGroup
-            sectionDivider
-            doshaGroup
         }
         .foregroundStyle(effectManager.currentGlobalAccentColor)
         .tint(effectManager.currentGlobalAccentColor)
@@ -158,30 +158,6 @@ struct YogaExerciseEditorSection: View {
         .contentShape(Rectangle())
     }
 
-    private var doshaGroup: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            groupHeader("Dosha Effects")
-
-            DoshaScaleSelector(
-                value: $vata,
-                dosha: .vata,
-                subtitle: "Movement & Air"
-            )
-            Divider()
-            DoshaScaleSelector(
-                value: $pitta,
-                dosha: .pitta,
-                subtitle: "Fire & Transformation"
-            )
-            Divider()
-            DoshaScaleSelector(
-                value: $kapha,
-                dosha: .kapha,
-                subtitle: "Structure & Water"
-            )
-        }
-    }
-
     private func groupHeader(_ title: String) -> some View {
         Text(title)
             .font(.caption.bold())
@@ -206,47 +182,62 @@ struct YogaExerciseEditorSection: View {
     }
 }
 
-struct YogaExerciseDetailSection: View {
+struct ExerciseAyurvedaEditorSection: View {
+    @ObservedObject private var effectManager = EffectManager.shared
+
+    @Binding var vata: Int
+    @Binding var pitta: Int
+    @Binding var kapha: Int
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Dosha Effects")
+                .font(.caption.bold())
+
+            DoshaScaleSelector(
+                value: $vata,
+                dosha: .vata,
+                subtitle: "Movement & Air"
+            )
+            Divider()
+            DoshaScaleSelector(
+                value: $pitta,
+                dosha: .pitta,
+                subtitle: "Fire & Transformation"
+            )
+            Divider()
+            DoshaScaleSelector(
+                value: $kapha,
+                dosha: .kapha,
+                subtitle: "Structure & Water"
+            )
+        }
+        .foregroundStyle(effectManager.currentGlobalAccentColor)
+        .tint(effectManager.currentGlobalAccentColor)
+    }
+}
+
+struct ExercisePracticeDetailSection: View {
     @ObservedObject private var effectManager = EffectManager.shared
 
     let item: ExerciseItem
-    var title: String? = "Yoga & Ayurveda"
-    var usesCard: Bool = true
 
     private var hasContent: Bool {
-        item.hasYogaPracticeMetadata
+        item.hasExercisePracticeMetadata
     }
 
     @ViewBuilder
     var body: some View {
         if hasContent {
-            if usesCard {
-                content
-                    .padding()
-                    .glassCardStyle(cornerRadius: 20)
-            } else {
-                content
-            }
+            content
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 
     private var content: some View {
         VStack(alignment: .leading, spacing: 16) {
-            if let title {
-                Text(title)
-                    .font(.title2.weight(.semibold))
-            }
-
             identityContent
             practiceContent
-
-            if let dosha = item.dosha {
-                DoshaBarsView(
-                    vata: dosha.vata,
-                    pitta: dosha.pitta,
-                    kapha: dosha.kapha
-                )
-            }
         }
         .foregroundStyle(effectManager.currentGlobalAccentColor)
         .tint(effectManager.currentGlobalAccentColor)
@@ -347,6 +338,38 @@ struct YogaExerciseDetailSection: View {
         }
     }
 
+}
+
+struct ExerciseAyurvedaDetailSection: View {
+    @ObservedObject private var effectManager = EffectManager.shared
+
+    let item: ExerciseItem
+    var usesCard = true
+
+    @ViewBuilder
+    var body: some View {
+        if let dosha = item.dosha {
+            let content = VStack(alignment: .leading, spacing: 14) {
+                Text("Ayurveda")
+                    .font(.title2.weight(.semibold))
+                DoshaBarsView(
+                    vata: dosha.vata,
+                    pitta: dosha.pitta,
+                    kapha: dosha.kapha
+                )
+            }
+            .foregroundStyle(effectManager.currentGlobalAccentColor)
+            .tint(effectManager.currentGlobalAccentColor)
+
+            if usesCard {
+                content
+                    .padding()
+                    .glassCardStyle(cornerRadius: 20)
+            } else {
+                content
+            }
+        }
+    }
 }
 
 struct YogaWorkoutAyurvedaEditorSection: View {
@@ -460,58 +483,20 @@ struct YogaWorkoutAyurvedaSection: View {
         manualDosha ?? automaticDosha
     }
 
-    private var families: [String] {
-        Array(Set(yogaEntries.compactMap { $0.exercise.family?.rawValue }))
-            .sorted()
-    }
-
-    private var levelSummary: String? {
-        let levels = yogaEntries.compactMap { $0.exercise.level }
-        guard let minimum = levels.min(), let maximum = levels.max() else {
-            return nil
-        }
-        return minimum == maximum ? "Level \(minimum)" : "Levels \(minimum)–\(maximum)"
-    }
-
     @ViewBuilder
     var body: some View {
         if !yogaEntries.isEmpty || manualDosha != nil {
             VStack(alignment: .leading, spacing: 16) {
-                Text("Yoga & Ayurveda")
+                Text("Ayurveda")
                     .font(.title2.weight(.semibold))
 
                 Text(
                     manualDosha == nil
-                        ? "Calculated from \(yogaEntries.count) yoga exercise\(yogaEntries.count == 1 ? "" : "s") in this workout."
+                        ? "Calculated from \(yogaEntries.count) exercise\(yogaEntries.count == 1 ? "" : "s") in this workout."
                         : "Ayurveda effects set manually."
                 )
                 .font(.caption)
                 .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.72))
-
-                if levelSummary != nil || !families.isEmpty {
-                    ChipGrid {
-                        if let levelSummary {
-                            GlassChipView(
-                                label: levelSummary,
-                                color: Color("AyurvedaChipTint"),
-                                systemImage: nil,
-                                textColor: effectManager.currentGlobalAccentColor,
-                                isSelected: true,
-                                action: nil
-                            )
-                        }
-                        ForEach(families, id: \.self) { family in
-                            GlassChipView(
-                                label: family,
-                                color: Color("AyurvedaChipTint"),
-                                systemImage: nil,
-                                textColor: effectManager.currentGlobalAccentColor,
-                                isSelected: true,
-                                action: nil
-                            )
-                        }
-                    }
-                }
 
                 if let displayedDosha {
                     DoshaBarsView(

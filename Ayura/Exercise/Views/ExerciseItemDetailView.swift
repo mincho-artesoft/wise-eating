@@ -77,7 +77,7 @@ struct ExerciseItemDetailView: View {
                     
                     VStack(alignment: .leading, spacing: 24) {
                         textInfoSection
-                        yogaDetailsSection
+                        ayurvedaDetailsSection
                         workoutYogaSection
                         bannerAdSection
                             .frame(height: isBannerAdLoaded ? 120 : 0)
@@ -341,6 +341,11 @@ struct ExerciseItemDetailView: View {
             if mainUIImage != nil {
                 summaryInfoRow
             }
+
+            if !item.isWorkout, item.hasExercisePracticeMetadata {
+                Divider()
+                ExercisePracticeDetailSection(item: item)
+            }
         }
         .frame(maxWidth: .infinity)
     }
@@ -405,14 +410,16 @@ struct ExerciseItemDetailView: View {
 
                                 if exercise.hasYogaPracticeMetadata {
                                     DisclosureGroup {
-                                        YogaExerciseDetailSection(
-                                            item: exercise,
-                                            title: nil,
-                                            usesCard: false
-                                        )
+                                        VStack(alignment: .leading, spacing: 14) {
+                                            ExercisePracticeDetailSection(item: exercise)
+                                            ExerciseAyurvedaDetailSection(
+                                                item: exercise,
+                                                usesCard: false
+                                            )
+                                        }
                                         .padding(.top, 10)
                                     } label: {
-                                        Label("Yoga & Ayurveda details", systemImage: "figure.yoga")
+                                        Label("Exercise details", systemImage: "figure.yoga")
                                             .font(.caption.weight(.semibold))
                                             .foregroundStyle(
                                                 effectManager.currentGlobalAccentColor.opacity(0.82)
@@ -439,9 +446,9 @@ struct ExerciseItemDetailView: View {
     }
 
     @ViewBuilder
-    private var yogaDetailsSection: some View {
+    private var ayurvedaDetailsSection: some View {
         if !item.isWorkout {
-            YogaExerciseDetailSection(item: item)
+            ExerciseAyurvedaDetailSection(item: item)
         }
     }
 
