@@ -89,6 +89,11 @@ struct FoodItemDetailView: View {
             && food.ageProvenance != "legacyImport"
     }
 
+    private var displayPrepTimeMinutes: Int? {
+        guard let minutes = food.prepTimeMinutes, minutes > 0 else { return nil }
+        return minutes
+    }
+
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
@@ -316,6 +321,20 @@ struct FoodItemDetailView: View {
                             .foregroundColor(effectManager.currentGlobalAccentColor)
                     }
                 }
+                if let minutes = displayPrepTimeMinutes {
+                    VStack(spacing: 4) {
+                        Label { Text("Prep Time") } icon: {
+                            Image(systemName: "clock.fill")
+                                .symbolRenderingMode(.hierarchical)
+                        }
+                        .font(.subheadline)
+                        .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
+
+                        Text("\(minutes) min")
+                            .font(.title.weight(.bold))
+                            .foregroundColor(effectManager.currentGlobalAccentColor)
+                    }
+                }
                 if shouldDisplayMinimumAge {
                     VStack(spacing: 4) {
                         Label { Text("Min. Age") } icon: {
@@ -410,6 +429,20 @@ struct FoodItemDetailView: View {
                     .font(.caption)
                     .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
                     Text("\(kcal.clean) kcal")
+                        .font(.headline)
+                        .foregroundColor(effectManager.currentGlobalAccentColor)
+                }
+            }
+            if let minutes = displayPrepTimeMinutes {
+                VStack(spacing: 2) {
+                    Label { Text("Prep Time") } icon: {
+                        Image(systemName: "clock.fill")
+                            .symbolRenderingMode(.hierarchical)
+                    }
+                    .font(.caption)
+                    .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
+
+                    Text("\(minutes) min")
                         .font(.headline)
                         .foregroundColor(effectManager.currentGlobalAccentColor)
                 }
