@@ -6,6 +6,7 @@ extension ExerciseItem {
             || level != nil
             || breath != nil
             || drishti != nil
+            || (durationSeconds ?? 0) > 0
     }
 
     var hasAyurvedaMetadata: Bool { dosha != nil }
