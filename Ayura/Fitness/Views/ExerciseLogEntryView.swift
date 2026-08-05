@@ -50,8 +50,11 @@ struct ExerciseLogEntryView: View {
             withAnimation { isExpanded.toggle() }
         }) {
             HStack {
-                exerciseImage
-                    .frame(width: 40, height: 40)
+                ExerciseThumbnailView(
+                    item: exercise,
+                    size: 40,
+                    cornerRadius: 20
+                )
                 
                 VStack(alignment: .leading) {
                     Text(exercise.name)
@@ -353,17 +356,4 @@ struct ExerciseLogEntryView: View {
         )
     }
 
-    @ViewBuilder
-    private var exerciseImage: some View {
-        if let photoData = exercise.photo, let uiImage = UIImage(data: photoData) {
-            Image(uiImage: uiImage).resizable().scaledToFill().clipShape(Circle())
-        } else if let assetName = exercise.assetImageName, let uiImage = UIImage(named: assetName) {
-            Image(uiImage: uiImage).resizable().scaledToFill().clipShape(Circle())
-        } else {
-            Image(systemName: "dumbbell.fill").resizable().scaledToFit().padding(10)
-                .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.6))
-                .background(effectManager.currentGlobalAccentColor.opacity(0.1))
-                .clipShape(Circle())
-        }
-    }
 }

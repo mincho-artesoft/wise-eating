@@ -44,6 +44,14 @@ struct TrainingPlanExerciseRowView: View {
                 withAnimation { isExpanded.toggle() }
             }) {
                 HStack {
+                    if let item {
+                        ExerciseThumbnailView(
+                            item: item,
+                            size: 52,
+                            cornerRadius: 12
+                        )
+                    }
+
                     VStack(alignment: .leading, spacing: 2) {
                         Text(item?.name ?? "Unknown")
                             .foregroundStyle(effectManager.currentGlobalAccentColor)

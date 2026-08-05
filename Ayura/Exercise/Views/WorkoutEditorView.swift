@@ -744,6 +744,11 @@ struct WorkoutEditorView: View {
                             ForEach(displayedSearchResults) { item in
                                 Button(action: { add(exercise: item) }) {
                                     HStack(alignment: .top, spacing: 10) {
+                                        ExerciseThumbnailView(
+                                            item: item,
+                                            size: 48,
+                                            cornerRadius: 10
+                                        )
                                         if item.isFavorite {
                                             Image(systemName: "star.fill").foregroundColor(.yellow)
                                         }
@@ -1688,6 +1693,12 @@ fileprivate struct EditableExerciseRow: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
+                ExerciseThumbnailView(
+                    item: link.exercise,
+                    size: 44,
+                    cornerRadius: 10
+                )
+
                 Text(link.exercise.name)
                     .foregroundStyle(effectManager.currentGlobalAccentColor)
                     .lineLimit(2)

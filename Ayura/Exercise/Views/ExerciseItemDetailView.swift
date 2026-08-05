@@ -401,6 +401,11 @@ struct ExerciseItemDetailView: View {
                         if let exercise = link.exercise {
                             VStack(alignment: .leading, spacing: 8) {
                                 HStack {
+                                    ExerciseThumbnailView(
+                                        item: exercise,
+                                        size: 44,
+                                        cornerRadius: 10
+                                    )
                                     Text(exercise.name)
                                         .foregroundColor(effectManager.currentGlobalAccentColor)
                                     Spacer()

@@ -1792,6 +1792,11 @@ struct TrainingView: View {
                                 ForEach(exerciseSearchVM.items) { item in
                                     Button(action: { add(exerciseItem: item) }) {
                                         HStack(spacing: 8) {
+                                            ExerciseThumbnailView(
+                                                item: item,
+                                                size: 44,
+                                                cornerRadius: 10
+                                            )
                                             if item.isFavorite {
                                                 Image(systemName: "star.fill")
                                                     .foregroundColor(.yellow)

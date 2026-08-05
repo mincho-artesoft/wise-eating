@@ -62,8 +62,11 @@ struct SelectedExerciseRowView: View {
     // MARK: - Body
     var body: some View {
         HStack(spacing: 12) {
-            exerciseImage
-                .frame(width: 60, height: 60)
+            ExerciseThumbnailView(
+                item: exercise,
+                size: 60,
+                cornerRadius: 30
+            )
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(exercise.name)
@@ -168,30 +171,6 @@ struct SelectedExerciseRowView: View {
             if abs(currentTextAsDouble - newDuration) > 0.1 {
                 textValue = String(format: "%.0f", newDuration)
             }
-        }
-    }
-
-    // MARK: - Subviews & Helpers
-    @ViewBuilder
-    private var exerciseImage: some View {
-        if let photoData = exercise.photo, let uiImage = UIImage(data: photoData) {
-            Image(uiImage: uiImage)
-                .resizable()
-                .scaledToFill()
-                .clipShape(Circle())
-        } else if let assetName = exercise.assetImageName, let uiImage = UIImage(named: assetName) {
-            Image(uiImage: uiImage)
-                .resizable()
-                .scaledToFill()
-                .clipShape(Circle())
-        } else {
-            Image(systemName: "dumbbell.fill")
-                .resizable()
-                .scaledToFit()
-                .padding(15)
-                .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.6))
-                .background(effectManager.currentGlobalAccentColor.opacity(0.1))
-                .clipShape(Circle())
         }
     }
 

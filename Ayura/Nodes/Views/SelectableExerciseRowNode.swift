@@ -20,7 +20,11 @@ struct SelectableExerciseRowNode: View {
             
             HStack(spacing: 12) {
                 // 👇 размерът вече е като при графиката (84x84)
-                exerciseImage
+                ExerciseThumbnailView(
+                    item: exercise,
+                    size: imageDiameter,
+                    cornerRadius: imageDiameter / 2
+                )
                 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(exercise.name)
@@ -42,29 +46,4 @@ struct SelectableExerciseRowNode: View {
         )
     }
     
-    @ViewBuilder
-    private var exerciseImage: some View {
-        if let photoData = exercise.photo, let uiImage = UIImage(data: photoData) {
-            Image(uiImage: uiImage)
-                .resizable()
-                .scaledToFill()
-                .frame(width: imageDiameter, height: imageDiameter)
-                .clipShape(Circle())
-        } else if let assetName = exercise.assetImageName, let uiImage = UIImage(named: assetName) {
-            Image(uiImage: uiImage)
-                .resizable()
-                .scaledToFill()
-                .frame(width: imageDiameter, height: imageDiameter)
-                .clipShape(Circle())
-        } else {
-            Image(systemName: "dumbbell.fill")
-                .resizable()
-                .scaledToFit()
-                .padding(12)
-                .frame(width: imageDiameter, height: imageDiameter)
-                .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.6))
-                .background(effectManager.currentGlobalAccentColor.opacity(0.1))
-                .clipShape(Circle())
-        }
-    }
 }

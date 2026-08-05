@@ -14,26 +14,13 @@ struct ExerciseRowEventView: View {
         return cpm * duration
     }
 
-    private var image: Image {
-        if let photoData = exercise.photo, let uiImage = UIImage(data: photoData) {
-            return Image(uiImage: uiImage)
-        } else if let assetName = exercise.assetImageName, let uiImage = UIImage(named: assetName) {
-            return Image(uiImage: uiImage)
-        } else {
-            return Image(systemName: "dumbbell.fill")
-        }
-    }
-
     var body: some View {
         HStack(alignment: .top, spacing: 10) {
-            image
-                .resizable()
-                .scaledToFit()
-                .frame(width: 40, height: 40)
-                .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.6))
-                .padding(4)
-                .background(effectManager.currentGlobalAccentColor.opacity(0.1))
-                .clipShape(Circle())
+            ExerciseThumbnailView(
+                item: exercise,
+                size: 40,
+                cornerRadius: 20
+            )
                 .padding(.top, 2)
 
             VStack(alignment: .leading, spacing: 4) {

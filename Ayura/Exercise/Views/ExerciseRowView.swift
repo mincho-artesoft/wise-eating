@@ -36,8 +36,11 @@ struct ExerciseRowView: View {
             // Целият UI код влиза в else блока
             VStack(alignment: .leading, spacing: 12) {
                 HStack(alignment: .top, spacing: 12) {
-                    image
-                        .frame(width: 80, height: 80)
+                    ExerciseThumbnailView(
+                        item: item,
+                        size: 80,
+                        cornerRadius: 40
+                    )
                         .padding(.top, 2)
 
                     VStack(alignment: .leading, spacing: 4) {
@@ -100,18 +103,37 @@ struct ExerciseRowView: View {
         }
     }
     
-    @ViewBuilder
-    private var image: some View {
-        if let photoData = item.photo, let uiImage = UIImage(data: photoData) {
-            Image(uiImage: uiImage).resizable().scaledToFill().clipShape(Circle())
-        } else if let assetName = item.assetImageName, let uiImage = UIImage(named: assetName) {
-            Image(uiImage: uiImage).resizable().scaledToFill().clipShape(Circle())
-        } else {
-            Image(systemName: "dumbbell.fill")
-                .resizable().scaledToFit().padding(20)
-                .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.6))
-                .background(effectManager.currentGlobalAccentColor.opacity(0.1))
-                .clipShape(Circle())
+}
+
+/// Shared row thumbnail for exercises and workouts. Keeping all row imagery
+/// behind this view means a future video-frame source only needs to be added to
+/// `ExerciseItem.exerciseImage()` once.
+struct ExerciseThumbnailView: View {
+    @ObservedObject private var effectManager = EffectManager.shared
+
+    let item: ExerciseItem
+    var size: CGFloat = 40
+    var cornerRadius: CGFloat = 8
+
+    var body: some View {
+        Group {
+            if let uiImage = item.exerciseImage() {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFill()
+            } else {
+                ZStack {
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .fill(effectManager.currentGlobalAccentColor.opacity(0.15))
+
+                    Image(systemName: "figure.yoga")
+                        .font(.system(size: size * 0.45, weight: .medium))
+                        .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.9))
+                }
+            }
         }
+        .frame(width: size, height: size)
+        .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+        .contentShape(RoundedRectangle(cornerRadius: cornerRadius))
     }
 }

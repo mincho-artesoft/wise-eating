@@ -241,6 +241,20 @@ public final class ExerciseItem: Identifiable {
            }
        }
 
+       // Workouts without their own cover use the first available exercise
+       // image. An explicitly attached workout photo always wins above.
+       if isWorkout, let exercises {
+           for link in exercises {
+               guard let exercise = link.exercise,
+                     exercise.id != id,
+                     !exercise.isWorkout,
+                     let image = exercise.exerciseImage() else {
+                   continue
+               }
+               return image
+           }
+       }
+
        return nil
    }
 }

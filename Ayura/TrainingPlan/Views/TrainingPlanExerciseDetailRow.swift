@@ -32,8 +32,13 @@ struct TrainingPlanExerciseDetailRow: View {
                 }
             }) {
                 HStack(spacing: 12) {
-                    exerciseImage
-                        .frame(width: 60, height: 60)
+                    if let exercise {
+                        ExerciseThumbnailView(
+                            item: exercise,
+                            size: 60,
+                            cornerRadius: 30
+                        )
+                    }
                     
                     VStack(alignment: .leading, spacing: 2) {
                         Text(exercise?.name ?? "Unknown")
@@ -169,26 +174,4 @@ struct TrainingPlanExerciseDetailRow: View {
         .glassCardStyle(cornerRadius: 20)
     }
     
-    @ViewBuilder
-    private var exerciseImage: some View {
-        if let data = exercise?.photo, let uiImage = UIImage(data: data) {
-            Image(uiImage: uiImage)
-                .resizable()
-                .scaledToFill()
-                .clipShape(Circle())
-        } else if let asset = exercise?.assetImageName, let uiImage = UIImage(named: asset) {
-            Image(uiImage: uiImage)
-                .resizable()
-                .scaledToFill()
-                .clipShape(Circle())
-        } else {
-            Image(systemName: "dumbbell.fill")
-                .resizable()
-                .scaledToFit()
-                .padding(12)
-                .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.6))
-                .background(effectManager.currentGlobalAccentColor.opacity(0.1))
-                .clipShape(Circle())
-        }
-    }
 }

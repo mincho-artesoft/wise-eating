@@ -32,13 +32,22 @@ struct TrainingSummaryRowEventView: View {
     
     var body: some View {
         HStack(alignment: .top, spacing: 10) {
-            VStack {
-                Image(systemName: "figure.run.circle.fill")
-                    .font(.system(size: chartCentralContentSize))
-                    .foregroundStyle(effectManager.currentGlobalAccentColor)
+            if let firstExercise = exercises.first?.0 {
+                ExerciseThumbnailView(
+                    item: firstExercise,
+                    size: chartCentralContentSize + 16,
+                    cornerRadius: (chartCentralContentSize + 16) / 2
+                )
+                .padding(.top, 2)
+            } else {
+                VStack {
+                    Image(systemName: "figure.yoga")
+                        .font(.system(size: chartCentralContentSize))
+                        .foregroundStyle(effectManager.currentGlobalAccentColor)
+                }
+                .frame(width: chartCentralContentSize + 16, height: chartCentralContentSize + 16)
+                .padding(.top, 2)
             }
-            .frame(width: chartCentralContentSize + 16, height: chartCentralContentSize + 16)
-            .padding(.top, 2)
 
             VStack(alignment: .leading, spacing: 4) {
                 HStack {

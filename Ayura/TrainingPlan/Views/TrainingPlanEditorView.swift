@@ -758,6 +758,11 @@ struct TrainingPlanEditorView: View {
                                 ForEach(displayedSearchResults) { item in
                                     Button(action: { addExerciseToSelectedWorkout(item) }) {
                                         HStack(spacing: 8) {
+                                            ExerciseThumbnailView(
+                                                item: item,
+                                                size: 44,
+                                                cornerRadius: 10
+                                            )
                                             if item.isFavorite {
                                                 Image(systemName: "star.fill").foregroundColor(.yellow).font(.caption)
                                             }
