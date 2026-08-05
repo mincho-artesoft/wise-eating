@@ -43,7 +43,7 @@ struct ExerciseItemEditorView: View {
     @Environment(\.modelContext) private var ctx
     
     private enum FocusableField: Hashable {
-        case name, description, videoURL, metValue, duration, minAge
+        case name, description, videoURL, metValue, duration, minAge, level
     }
     @FocusState private var focusedField: FocusableField?
     
@@ -428,7 +428,9 @@ struct ExerciseItemEditorView: View {
                     expandedPicker: openMenu.exercisePracticePicker,
                     onOpenPicker: { picker in
                         openMenu = OpenMenu(picker)
-                    }
+                    },
+                    focusedField: $focusedField,
+                    levelFocusField: .level
                 )
             }
             .padding()

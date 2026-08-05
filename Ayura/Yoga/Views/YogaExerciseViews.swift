@@ -37,7 +37,7 @@ struct ExerciseAyurvedaSearchResultChips: View {
     }
 }
 
-struct ExercisePracticeEditorFields: View {
+struct ExercisePracticeEditorFields<FocusField: Hashable>: View {
     @ObservedObject private var effectManager = EffectManager.shared
 
     @Binding var family: AsanaFamily?
@@ -47,18 +47,26 @@ struct ExercisePracticeEditorFields: View {
 
     let expandedPicker: ExercisePracticePicker?
     let onOpenPicker: (ExercisePracticePicker) -> Void
+    @FocusState.Binding var focusedField: FocusField?
+    let levelFocusField: FocusField
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             familyField
 
             StyledLabeledPicker(label: "Level") {
-                editorTextField(
-                    "1–3",
-                    text: $level,
-                    keyboardType: .numberPad
+                ConfigurableTextField(
+                    title: "1–3",
+                    value: $level,
+                    type: .integer,
+                    placeholderColor: effectManager.currentGlobalAccentColor.opacity(0.6),
+                    textAlignment: .leading,
+                    focused: $focusedField,
+                    fieldIdentifier: levelFocusField
                 )
+                .font(.system(size: 16))
             }
+            .id(levelFocusField)
 
             breathField
             drishtiField
@@ -158,22 +166,6 @@ struct ExercisePracticeEditorFields: View {
         }
     }
 
-    private func editorTextField(
-        _ prompt: String,
-        text: Binding<String>,
-        keyboardType: UIKeyboardType = .default
-    ) -> some View {
-        TextField(
-            "",
-            text: text,
-            prompt: Text(prompt)
-                .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.6))
-        )
-        .keyboardType(keyboardType)
-        .textInputAutocapitalization(.sentences)
-        .autocorrectionDisabled()
-        .foregroundStyle(effectManager.currentGlobalAccentColor)
-    }
 }
 
 enum ExercisePracticePicker: Hashable {
