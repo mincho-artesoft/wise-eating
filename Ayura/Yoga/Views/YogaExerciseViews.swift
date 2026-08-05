@@ -338,9 +338,10 @@ struct ExercisePracticeDetailSection: View {
     private var content: some View {
         VStack(spacing: 16) {
             ForEach(Array(metricRows.enumerated()), id: \.offset) { _, row in
-                HStack(spacing: 24) {
+                HStack(spacing: 12) {
                     ForEach(row) { metric in
                         metricView(metric)
+                            .frame(maxWidth: .infinity)
                     }
                 }
             }
@@ -403,9 +404,8 @@ struct ExercisePracticeDetailSection: View {
     }
 
     private var metricRows: [[ExercisePracticeMetric]] {
-        stride(from: 0, to: metrics.count, by: 2).map { startIndex in
-            Array(metrics[startIndex..<min(startIndex + 2, metrics.count)])
-        }
+        guard metrics.count > 3 else { return [metrics] }
+        return [Array(metrics.prefix(3)), Array(metrics.dropFirst(3))]
     }
 
     private var formattedLevel: String? {
@@ -427,12 +427,17 @@ struct ExercisePracticeDetailSection: View {
             }
             .font(.caption)
             .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
+            .lineLimit(1)
+            .minimumScaleFactor(0.6)
+            .allowsTightening(true)
 
             Text(metric.value)
                 .font(.headline)
                 .foregroundStyle(effectManager.currentGlobalAccentColor)
                 .multilineTextAlignment(.center)
-                .fixedSize(horizontal: false, vertical: true)
+                .lineLimit(1)
+                .minimumScaleFactor(0.55)
+                .allowsTightening(true)
         }
     }
 
