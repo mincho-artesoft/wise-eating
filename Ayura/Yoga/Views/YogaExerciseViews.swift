@@ -45,52 +45,12 @@ struct ExercisePracticeEditorFields: View {
     @Binding var breath: YogaBreath?
     @Binding var drishti: YogaDrishti?
 
+    let expandedPicker: ExercisePracticePicker?
+    let onOpenPicker: (ExercisePracticePicker) -> Void
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            identityGroup
-            sectionDivider
-            practiceGroup
-        }
-        .foregroundStyle(effectManager.currentGlobalAccentColor)
-        .tint(effectManager.currentGlobalAccentColor)
-    }
-
-    private var sectionDivider: some View {
-        Divider()
-            .padding(.vertical, 12)
-    }
-
-    private var identityGroup: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            groupHeader("Pose Identity")
-
-            StyledLabeledPicker(label: "Family") {
-                Menu {
-                    Button("Not set") {
-                        family = nil
-                    }
-
-                    ForEach(AsanaFamily.allCases) { option in
-                        Button(option.rawValue) {
-                            family = option
-                        }
-                    }
-                } label: {
-                    HStack {
-                        Text(family?.rawValue ?? "Select a family")
-                            .foregroundStyle(
-                                effectManager.currentGlobalAccentColor.opacity(
-                                    family == nil ? 0.6 : 1
-                                )
-                            )
-                        Spacer()
-                        Image(systemName: "chevron.up.chevron.down")
-                            .font(.caption.weight(.semibold))
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .contentShape(Rectangle())
-                }
-            }
+        VStack(alignment: .leading, spacing: 16) {
+            familyField
 
             StyledLabeledPicker(label: "Level") {
                 editorTextField(
@@ -99,69 +59,103 @@ struct ExercisePracticeEditorFields: View {
                     keyboardType: .numberPad
                 )
             }
+
+            breathField
+            drishtiField
         }
+        .foregroundStyle(effectManager.currentGlobalAccentColor)
+        .tint(effectManager.currentGlobalAccentColor)
     }
 
-    private var practiceGroup: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            groupHeader("Practice Guidance")
-
-            StyledLabeledPicker(label: "Breath") {
-                Menu {
-                    Button("Not set") {
-                        breath = nil
-                    }
-                    ForEach(YogaBreath.allCases) { option in
-                        Button(option.rawValue) {
-                            breath = option
-                        }
-                    }
-                } label: {
-                    optionMenuLabel(
-                        breath?.rawValue ?? "Select a breathing option",
-                        isEmpty: breath == nil
-                    )
+    private var familySelection: Binding<Set<AsanaFamily.ID>> {
+        Binding(
+            get: { family.map { [$0.id] } ?? [] },
+            set: { selectedIDs in
+                family = AsanaFamily.allCases.first {
+                    selectedIDs.contains($0.id)
                 }
             }
+        )
+    }
 
-            StyledLabeledPicker(label: "Drishti (gaze)") {
-                Menu {
-                    Button("Not set") {
-                        drishti = nil
-                    }
-                    ForEach(YogaDrishti.allCases) { option in
-                        Button(option.rawValue) {
-                            drishti = option
-                        }
-                    }
-                } label: {
-                    optionMenuLabel(
-                        drishti?.rawValue ?? "Select a gaze option",
-                        isEmpty: drishti == nil
-                    )
+    private var breathSelection: Binding<Set<YogaBreath.ID>> {
+        Binding(
+            get: { breath.map { [$0.id] } ?? [] },
+            set: { selectedIDs in
+                breath = YogaBreath.allCases.first {
+                    selectedIDs.contains($0.id)
+                }
+            }
+        )
+    }
+
+    private var drishtiSelection: Binding<Set<YogaDrishti.ID>> {
+        Binding(
+            get: { drishti.map { [$0.id] } ?? [] },
+            set: { selectedIDs in
+                drishti = YogaDrishti.allCases.first {
+                    selectedIDs.contains($0.id)
+                }
+            }
+        )
+    }
+
+    private var familyField: some View {
+        searchablePickerField(
+            label: "Family",
+            selection: familySelection,
+            items: AsanaFamily.allCases,
+            itemLabel: { $0.rawValue },
+            prompt: "Select a family",
+            picker: .family
+        )
+    }
+
+    private var breathField: some View {
+        searchablePickerField(
+            label: "Breath",
+            selection: breathSelection,
+            items: YogaBreath.allCases,
+            itemLabel: { $0.rawValue },
+            prompt: "Select a breathing option",
+            picker: .breath
+        )
+    }
+
+    private var drishtiField: some View {
+        searchablePickerField(
+            label: "Drishti (gaze)",
+            selection: drishtiSelection,
+            items: YogaDrishti.allCases,
+            itemLabel: { $0.rawValue },
+            prompt: "Select a gaze option",
+            picker: .drishti
+        )
+    }
+
+    private func searchablePickerField<Item: Identifiable & Hashable>(
+        label: String,
+        selection: Binding<Set<Item.ID>>,
+        items: [Item],
+        itemLabel: @escaping (Item) -> String,
+        prompt: String,
+        picker: ExercisePracticePicker
+    ) -> some View {
+        StyledLabeledPicker(label: label, isFixedHeight: false) {
+            MultiSelectButton(
+                selection: selection,
+                items: items,
+                label: itemLabel,
+                prompt: prompt,
+                isExpanded: expandedPicker == picker
+            )
+            .contentShape(Rectangle())
+            .onTapGesture {
+                withAnimation {
+                    onOpenPicker(picker)
                 }
             }
         }
-    }
-
-    private func optionMenuLabel(_ text: String, isEmpty: Bool) -> some View {
-        HStack {
-            Text(text)
-                .foregroundStyle(
-                    effectManager.currentGlobalAccentColor.opacity(isEmpty ? 0.6 : 1)
-                )
-            Spacer()
-            Image(systemName: "chevron.up.chevron.down")
-                .font(.caption.weight(.semibold))
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .contentShape(Rectangle())
-    }
-
-    private func groupHeader(_ title: String) -> some View {
-        Text(title)
-            .font(.caption.bold())
-            .foregroundStyle(effectManager.currentGlobalAccentColor)
     }
 
     private func editorTextField(
@@ -179,6 +173,112 @@ struct ExercisePracticeEditorFields: View {
         .textInputAutocapitalization(.sentences)
         .autocorrectionDisabled()
         .foregroundStyle(effectManager.currentGlobalAccentColor)
+    }
+}
+
+enum ExercisePracticePicker: Hashable {
+    case family
+    case breath
+    case drishti
+}
+
+struct SearchableSingleSelectList<Item: Identifiable & Hashable>: View {
+    @ObservedObject private var effectManager = EffectManager.shared
+
+    let items: [Item]
+    let selection: Item?
+    let label: (Item) -> String
+    let searchPrompt: String
+    let onSelect: (Item?) -> Void
+
+    @State private var searchText = ""
+
+    private var filteredItems: [Item] {
+        guard !searchText.isEmpty else { return items }
+        return items.filter {
+            label($0).localizedCaseInsensitiveContains(searchText)
+        }
+    }
+
+    var body: some View {
+        VStack(spacing: 14) {
+            HStack {
+                Image(systemName: "magnifyingglass")
+                    .foregroundStyle(
+                        effectManager.currentGlobalAccentColor.opacity(0.7)
+                    )
+                TextField(
+                    searchPrompt,
+                    text: $searchText,
+                    prompt: Text("Search...")
+                        .foregroundStyle(
+                            effectManager.currentGlobalAccentColor.opacity(0.6)
+                        )
+                )
+                .foregroundStyle(effectManager.currentGlobalAccentColor)
+            }
+            .padding()
+            .glassCardStyle(cornerRadius: 25)
+
+            ScrollView(showsIndicators: false) {
+                LazyVStack(spacing: 10) {
+                    selectionRow(
+                        title: "Not set",
+                        isSelected: selection == nil
+                    ) {
+                        onSelect(nil)
+                    }
+
+                    ForEach(filteredItems) { item in
+                        selectionRow(
+                            title: label(item),
+                            isSelected: selection?.id == item.id
+                        ) {
+                            onSelect(item)
+                        }
+                    }
+
+                    Spacer(minLength: 150)
+                }
+                .padding(.vertical, 1)
+            }
+        }
+        .padding(.horizontal)
+    }
+
+    private func selectionRow(
+        title: String,
+        isSelected: Bool,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button(action: action) {
+            HStack(spacing: 12) {
+                Text(title)
+                    .multilineTextAlignment(.leading)
+
+                Spacer()
+
+                if isSelected {
+                    Image(systemName: "checkmark.circle.fill")
+                        .font(.title3)
+                }
+            }
+            .foregroundStyle(effectManager.currentGlobalAccentColor)
+            .padding(.horizontal, 16)
+            .frame(maxWidth: .infinity, minHeight: 52, alignment: .leading)
+            .glassCardStyle(cornerRadius: 18)
+            .overlay {
+                RoundedRectangle(cornerRadius: 18)
+                    .stroke(
+                        isSelected
+                            ? effectManager.currentGlobalAccentColor
+                            : Color.clear,
+                        lineWidth: 2
+                    )
+            }
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
     }
 }
 
@@ -253,18 +353,16 @@ struct ExercisePracticeDetailSection: View {
         ].compactMap { $0 }
 
         if !values.isEmpty {
-            propertyGroup(title: "Pose Identity", systemImage: "figure.yoga") {
-                ChipGrid {
-                    ForEach(values, id: \.self) { value in
-                        GlassChipView(
-                            label: value,
-                            color: Color("AyurvedaChipTint"),
-                            systemImage: nil,
-                            textColor: effectManager.currentGlobalAccentColor,
-                            isSelected: true,
-                            action: nil
-                        )
-                    }
+            ChipGrid {
+                ForEach(values, id: \.self) { value in
+                    GlassChipView(
+                        label: value,
+                        color: Color("AyurvedaChipTint"),
+                        systemImage: nil,
+                        textColor: effectManager.currentGlobalAccentColor,
+                        isSelected: true,
+                        action: nil
+                    )
                 }
             }
         }
@@ -276,22 +374,20 @@ struct ExercisePracticeDetailSection: View {
         let drishti = item.drishti?.rawValue
 
         if breath != nil || drishti != nil {
-            propertyGroup(title: "Practice Guidance", systemImage: "wind") {
-                VStack(alignment: .leading, spacing: 10) {
-                    if let breath {
-                        guidanceRow(
-                            title: "Breath",
-                            value: breath,
-                            systemImage: "wind"
-                        )
-                    }
-                    if let drishti {
-                        guidanceRow(
-                            title: "Drishti",
-                            value: drishti,
-                            systemImage: "eye.fill"
-                        )
-                    }
+            VStack(alignment: .leading, spacing: 10) {
+                if let breath {
+                    guidanceRow(
+                        title: "Breath",
+                        value: breath,
+                        systemImage: "wind"
+                    )
+                }
+                if let drishti {
+                    guidanceRow(
+                        title: "Drishti",
+                        value: drishti,
+                        systemImage: "eye.fill"
+                    )
                 }
             }
         }
@@ -304,19 +400,6 @@ struct ExercisePracticeDetailSection: View {
     private var formattedDuration: String? {
         guard let seconds = item.durationSeconds, seconds > 0 else { return nil }
         return "\(seconds) sec"
-    }
-
-    private func propertyGroup<Content: View>(
-        title: String,
-        systemImage: String,
-        @ViewBuilder content: () -> Content
-    ) -> some View {
-        VStack(alignment: .leading, spacing: 7) {
-            Label(title, systemImage: systemImage)
-                .font(.caption)
-                .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.72))
-            content()
-        }
     }
 
     private func guidanceRow(

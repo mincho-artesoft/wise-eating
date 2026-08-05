@@ -86,7 +86,13 @@ struct ExerciseItemEditorView: View {
     @State private var alertMessage = ""
     @State private var isSaving = false
     
-    fileprivate enum OpenMenu { case none, muscle }
+    fileprivate enum OpenMenu {
+        case none
+        case muscle
+        case family
+        case breath
+        case drishti
+    }
     @State private var openMenu: OpenMenu = .none
     
     init(
@@ -414,13 +420,15 @@ struct ExerciseItemEditorView: View {
                 }
                 .id(FocusableField.minAge)
 
-                Divider()
-
                 ExercisePracticeEditorFields(
                     family: $selectedFamily,
                     level: $levelString,
                     breath: $breath,
-                    drishti: $drishti
+                    drishti: $drishti,
+                    expandedPicker: openMenu.exercisePracticePicker,
+                    onOpenPicker: { picker in
+                        openMenu = OpenMenu(picker)
+                    }
                 )
             }
             .padding()
@@ -678,6 +686,39 @@ struct ExerciseItemEditorView: View {
                             group.assetName(forGender: profile?.gender ?? "Male")
                         }
                     )
+                case .family:
+                    SearchableSingleSelectList(
+                        items: AsanaFamily.allCases,
+                        selection: selectedFamily,
+                        label: { $0.rawValue },
+                        searchPrompt: "Search families...",
+                        onSelect: { selection in
+                            selectedFamily = selection
+                            closePracticePicker()
+                        }
+                    )
+                case .breath:
+                    SearchableSingleSelectList(
+                        items: YogaBreath.allCases,
+                        selection: breath,
+                        label: { $0.rawValue },
+                        searchPrompt: "Search breathing options...",
+                        onSelect: { selection in
+                            breath = selection
+                            closePracticePicker()
+                        }
+                    )
+                case .drishti:
+                    SearchableSingleSelectList(
+                        items: YogaDrishti.allCases,
+                        selection: drishti,
+                        label: { $0.rawValue },
+                        searchPrompt: "Search gaze options...",
+                        onSelect: { selection in
+                            drishti = selection
+                            closePracticePicker()
+                        }
+                    )
                 case .none:
                     EmptyView()
                 }
@@ -693,6 +734,13 @@ struct ExerciseItemEditorView: View {
         }
         .ignoresSafeArea(.container, edges: .bottom)
         .zIndex(1)
+    }
+
+    private func closePracticePicker() {
+        hasUserMadeEdits = true
+        withAnimation {
+            openMenu = .none
+        }
     }
     
     // MARK: - Logic
@@ -1213,7 +1261,27 @@ fileprivate extension ExerciseItemEditorView.OpenMenu {
     var title: String {
         switch self {
         case .muscle: "Muscle Groups"
+        case .family: "Family"
+        case .breath: "Breath"
+        case .drishti: "Drishti"
         case .none:   ""
+        }
+    }
+
+    var exercisePracticePicker: ExercisePracticePicker? {
+        switch self {
+        case .family: .family
+        case .breath: .breath
+        case .drishti: .drishti
+        case .none, .muscle: nil
+        }
+    }
+
+    init(_ picker: ExercisePracticePicker) {
+        switch picker {
+        case .family: self = .family
+        case .breath: self = .breath
+        case .drishti: self = .drishti
         }
     }
 }
