@@ -6,6 +6,48 @@ struct DailyAyurvedaMealSummary: Identifiable {
     let computation: AyurvedaIngredientComputation
 }
 
+enum DailyAyurvedaDetailContent {
+    case food
+    case exercise
+
+    var headerTitle: String {
+        switch self {
+        case .food: "Daily Ayurveda"
+        case .exercise: "Exercise Ayurveda"
+        }
+    }
+
+    var emptySystemImage: String {
+        switch self {
+        case .food: "fork.knife.circle"
+        case .exercise: "figure.yoga"
+        }
+    }
+
+    var emptyTitle: String {
+        switch self {
+        case .food: "No Foods to Display"
+        case .exercise: "No Exercises to Display"
+        }
+    }
+
+    var insufficientDataTitle: String {
+        switch self {
+        case .food: "Not Enough Ayurveda Data"
+        case .exercise: "Not Enough Exercise Ayurveda Data"
+        }
+    }
+
+    var coverageMessage: String {
+        switch self {
+        case .food:
+            "At least half of the food weight needs Ayurveda data."
+        case .exercise:
+            "At least half of the exercise duration needs Ayurveda data."
+        }
+    }
+}
+
 struct DailyAyurvedaSummaryRow: View {
     @ObservedObject private var effectManager = EffectManager.shared
     private static let scaleValues = [2, 1, 0, -1, -2]
@@ -519,7 +561,28 @@ struct DailyAyurvedaDetailView: View {
     let profileResult: AyurvedaConstitutionResult?
     let target: AyurvedaDoshaDistribution?
     let meals: [DailyAyurvedaMealSummary]
+    let content: DailyAyurvedaDetailContent
     let onDismiss: () -> Void
+
+    init(
+        date: Date,
+        profileName: String,
+        computation: AyurvedaIngredientComputation,
+        profileResult: AyurvedaConstitutionResult?,
+        target: AyurvedaDoshaDistribution?,
+        meals: [DailyAyurvedaMealSummary],
+        content: DailyAyurvedaDetailContent = .food,
+        onDismiss: @escaping () -> Void
+    ) {
+        self.date = date
+        self.profileName = profileName
+        self.computation = computation
+        self.profileResult = profileResult
+        self.target = target
+        self.meals = meals
+        self.content = content
+        self.onDismiss = onDismiss
+    }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -555,7 +618,7 @@ struct DailyAyurvedaDetailView: View {
                 .glassCardStyle(cornerRadius: 20)
 
             Spacer()
-            Text("Daily Ayurveda")
+            Text(content.headerTitle)
                 .font(.headline)
             Spacer()
 
@@ -637,23 +700,21 @@ struct DailyAyurvedaDetailView: View {
                     Image(
                         systemName: selected.hasIngredients
                             ? "leaf.circle"
-                            : "fork.knife.circle"
+                            : content.emptySystemImage
                     )
                     .font(.system(size: 52, weight: .medium))
                     .opacity(0.62)
 
                     Text(
                         selected.hasIngredients
-                            ? "Not Enough Ayurveda Data"
-                            : "No Foods to Display"
+                            ? content.insufficientDataTitle
+                            : content.emptyTitle
                     )
                     .font(.title2.weight(.bold))
                     .multilineTextAlignment(.center)
 
                     if selected.hasIngredients {
-                        Text(
-                            "At least half of the food weight needs Ayurveda data."
-                        )
+                        Text(content.coverageMessage)
                         .font(.subheadline)
                         .multilineTextAlignment(.center)
                         .opacity(0.76)

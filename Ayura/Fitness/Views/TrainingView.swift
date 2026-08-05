@@ -75,7 +75,7 @@ struct TrainingView: View {
     }
     
     enum TrainingRingDetailType: Identifiable {
-        case workout, totalBurned, netBalance
+        case workout, totalBurned, netBalance, ayurveda
         var id: Self { self }
     }
     @State private var showingTrainingRingDetail: TrainingRingDetailType? = nil
@@ -228,10 +228,26 @@ struct TrainingView: View {
     }
 
     private var dailyExerciseAyurvedaComputation: AyurvedaIngredientComputation {
+        exerciseAyurvedaComputation(for: dailyTrainings)
+    }
+
+    private var dailyExerciseAyurvedaWorkoutSummaries: [DailyAyurvedaMealSummary] {
+        dailyTrainings.map { training in
+            DailyAyurvedaMealSummary(
+                id: training.id,
+                name: training.name,
+                computation: exerciseAyurvedaComputation(for: [training])
+            )
+        }
+    }
+
+    private func exerciseAyurvedaComputation(
+        for trainings: [Training]
+    ) -> AyurvedaIngredientComputation {
         var totalDuration = 0.0
         var resolvedEffects: [AyurvedaDisplayMath.WeightedIngredient] = []
 
-        for training in dailyTrainings {
+        for training in trainings {
             for (exercise, duration) in training.exercises(using: ctx) {
                 guard duration.isFinite, duration > 0 else { continue }
                 totalDuration += duration
@@ -727,9 +743,9 @@ struct TrainingView: View {
                 .distribution,
             target: exerciseAyurvedaTarget,
             summaryTitle: "Exercise Dosha Balance",
-            summarySubtitle: "Weighted by duration · − pacifies · + aggravates",
             accessibilityContext: "Daily exercise Ayurveda",
-            usesPersonalizedEffectColors: false
+            usesPersonalizedEffectColors: false,
+            onTap: { presentRingDetail(.ayurveda) }
         )
     }
     
@@ -776,49 +792,64 @@ struct TrainingView: View {
     
     @ViewBuilder
     private func trainingRingDetailContent(for detailType: TrainingRingDetailType) -> some View {
-        
-        let onSaveChangesCallback = {
-            self.scheduleAutosave()
-        }
-        
-        if let selectedID = selectedTrainingID,
-           let trainingIndex = dailyTrainings.firstIndex(where: { $0.id == selectedID }) {
-            
-            let trainingBinding = $dailyTrainings[trainingIndex]
-            
-            VStack(spacing: 0) {
-                switch detailType {
-                case .workout:
-                    WorkoutDetailRingView(
-                        training: trainingBinding.wrappedValue,
-                        onDismiss: dismissRingDetail,
-                        profile: profile,
-                        onSaveChanges: onSaveChangesCallback
-                    )
-                case .totalBurned:
-                    TotalBurnedDetailRingView(
-                        totalCalories: totalCaloriesBurnedToday,
-                        trainings: dailyTrainings,
-                        profile: profile,
-                        onDismiss: dismissRingDetail
-                    )
-                case .netBalance:
-                    NetBalanceDetailRingView(
-                        totalConsumed: totalCaloriesConsumedToday,
-                        totalBurned: totalCaloriesBurnedToday,
-                        netBalance: netCalorieBalance,
-                        dailyTrainings: dailyTrainings,
-                        onDismiss: dismissRingDetail, profile: profile
-                    )
+        switch detailType {
+        case .ayurveda:
+            DailyAyurvedaDetailView(
+                date: chosenDate,
+                profileName: profile.name,
+                computation: dailyExerciseAyurvedaComputation,
+                profileResult: exerciseAyurvedaConstitutionRecord?.result,
+                target: exerciseAyurvedaTarget,
+                meals: dailyExerciseAyurvedaWorkoutSummaries,
+                content: .exercise,
+                onDismiss: dismissRingDetail
+            )
+        case .workout, .totalBurned, .netBalance:
+            if let selectedID = selectedTrainingID,
+               let trainingIndex = dailyTrainings.firstIndex(
+                   where: { $0.id == selectedID }
+               ) {
+                let trainingBinding = $dailyTrainings[trainingIndex]
+                let onSaveChangesCallback = {
+                    self.scheduleAutosave()
                 }
+
+                VStack(spacing: 0) {
+                    switch detailType {
+                    case .workout:
+                        WorkoutDetailRingView(
+                            training: trainingBinding.wrappedValue,
+                            onDismiss: dismissRingDetail,
+                            profile: profile,
+                            onSaveChanges: onSaveChangesCallback
+                        )
+                    case .totalBurned:
+                        TotalBurnedDetailRingView(
+                            totalCalories: totalCaloriesBurnedToday,
+                            trainings: dailyTrainings,
+                            profile: profile,
+                            onDismiss: dismissRingDetail
+                        )
+                    case .netBalance:
+                        NetBalanceDetailRingView(
+                            totalConsumed: totalCaloriesConsumedToday,
+                            totalBurned: totalCaloriesBurnedToday,
+                            netBalance: netCalorieBalance,
+                            dailyTrainings: dailyTrainings,
+                            onDismiss: dismissRingDetail,
+                            profile: profile
+                        )
+                    case .ayurveda:
+                        EmptyView()
+                    }
+                }
+                .id(detailType.id)
+                .transition(.opacity.animation(.easeInOut(duration: 0.15)))
+            } else {
+                Text("Please select a workout from the timeline.")
+                    .foregroundColor(effectManager.currentGlobalAccentColor)
+                    .padding()
             }
-            .id(detailType.id)
-            .transition(.opacity.animation(.easeInOut(duration: 0.15)))
-            
-        } else {
-            Text("Please select a workout from the timeline.")
-                .foregroundColor(effectManager.currentGlobalAccentColor)
-                .padding()
         }
     }
     
