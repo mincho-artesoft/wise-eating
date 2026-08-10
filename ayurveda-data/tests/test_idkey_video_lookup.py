@@ -4,6 +4,7 @@ import gzip
 import json
 import random
 import re
+import shutil
 import sqlite3
 import subprocess
 import tempfile
@@ -19,6 +20,9 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "ayurveda-data"))
 from stable_ids import food_uuid
 FOOD = ROOT / "Ayura/Food"
+FRAME_CLOCK = ROOT / "Ayura/Media/FrameArchiveClock.swift"
+FRAME_VERIFIER = ROOT / "ayurveda-data/archive/verify_frame_archive.swift"
+SOURCE_FIXTURES = ROOT / "ayurveda-data/tests/fixtures/idkey_video_sources"
 ORPHANS = {
     "Black mustard seed",
     "Curry leaf powder",
@@ -65,6 +69,15 @@ class IDKeyVideoLookupTests(unittest.TestCase):
             ) as source:
                 while chunk := source.read(1024 * 1024):
                     output.write(chunk)
+        cls.frame_verifier = root / "verify-frame-archive"
+        if shutil.which("xcrun") and shutil.which("ffmpeg"):
+            subprocess.run(
+                [
+                    "xcrun", "swiftc", str(FRAME_VERIFIER), str(FRAME_CLOCK),
+                    "-o", str(cls.frame_verifier),
+                ],
+                check=True,
+            )
 
     @classmethod
     def tearDownClass(cls):
@@ -191,9 +204,72 @@ class IDKeyVideoLookupTests(unittest.TestCase):
         self.assertNotIn("frameMap2", source)
         self.assertNotIn("secondaryGenerators", source)
         self.assertNotIn("reuseMap", source)
+        self.assertIn("FrameArchiveClock.time(", source)
+        self.assertNotIn("CMTime(seconds:", source)
+        self.assertNotIn("timestamps[index]", source)
         self.assertIn("getFrame(id: self.id, variant: variant)", food_item)
         self.assertNotIn("sanitizedName", food_item)
 
+    def test_index_to_cmtime_to_decoded_frame_matches_source_not_neighbor(self):
+        """Cross the exact boundary missed by the original ID-key tests.
+
+        Indices congruent to 1 modulo 3 are the reproducing set for the old
+        decimal-truncation defect. Those samples are load-bearing: do not
+        "simplify" this set to 0, 1, 2. The production FrameArchiveClock is
+        compiled into the probe, and each decoded result must resemble its
+        requested source much more closely than either adjacent source.
+        """
+        missing_tools = [
+            tool for tool in ("xcrun", "ffmpeg") if not shutil.which(tool)
+        ]
+        if missing_tools:
+            message = (
+                "CRITICAL PIXEL GATE NOT EXECUTED — missing "
+                + ", ".join(missing_tools)
+                + ". ID→CMTime→AVAssetImageGenerator→SSIM is unverified."
+            )
+            print(f"\n{'!' * 78}\n{message}\n{'!' * 78}", file=sys.stderr)
+            self.skipTest(message)
+        requested_indices = [0, 1, 2, 4, 436, 472, 11_194, 12_514, 14_478]
+        id_map = json.loads((FOOD / "frame_index.json").read_text())
+        id_by_frame = {frame: food_id for food_id, frame in id_map.items()}
+        requested_ids = [id_by_frame[index] for index in requested_indices]
+        output = Path(self.temporary.name) / "decoded-source-gate"
+        output.mkdir()
+        probe = subprocess.run(
+            [
+                str(self.frame_verifier),
+                "--archive", str(FOOD / "food_archive_144.mp4"),
+                "--frame-index", str(FOOD / "frame_index.json"),
+                "--timestamps", str(FOOD / "frame_timestamps.json"),
+                "--ids", ",".join(requested_ids),
+                "--fps", "30",
+                "--timescale", "600",
+                "--out", str(output),
+            ],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        self.assertIn("delta_seconds", probe.stdout)
+        for row in probe.stdout.strip().splitlines()[1:]:
+            self.assertEqual(float(row.split("\t")[4]), 0.0)
+
+        for frame, food_id in zip(requested_indices, requested_ids):
+            decoded = output / f"{food_id}.png"
+            expected = _ssim(SOURCE_FIXTURES / f"{frame}.jpg", decoded)
+            neighbors = [
+                candidate for candidate in (frame - 1, frame + 1)
+                if (SOURCE_FIXTURES / f"{candidate}.jpg").is_file()
+            ]
+            neighbor_scores = [
+                _ssim(SOURCE_FIXTURES / f"{neighbor}.jpg", decoded)
+                for neighbor in neighbors
+            ]
+            with self.subTest(frame=frame, food_id=food_id):
+                self.assertGreaterEqual(expected, 0.90)
+                if neighbor_scores:
+                    self.assertGreaterEqual(expected - max(neighbor_scores), 0.10)
 
 class _PartReader:
     """Minimal readable stream joining split gzip parts without copying them."""
@@ -224,6 +300,29 @@ class _PartReader:
                 self.current.close()
                 self.current = None
         return b"".join(chunks)
+
+
+def _ssim(reference, decoded):
+    result = subprocess.run(
+        [
+            "ffmpeg", "-hide_banner", "-nostats",
+            "-i", str(reference), "-i", str(decoded),
+            "-filter_complex",
+            (
+                "[0:v]format=yuv420p[reference];"
+                "[1:v]format=yuv420p[decoded];"
+                "[reference][decoded]ssim"
+            ),
+            "-f", "null", "-",
+        ],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    match = re.search(r"All:([0-9.]+)", result.stderr)
+    if not match:
+        raise AssertionError(f"ffmpeg did not report SSIM:\n{result.stderr}")
+    return float(match.group(1))
 
 
 if __name__ == "__main__":

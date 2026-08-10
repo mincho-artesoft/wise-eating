@@ -9,11 +9,14 @@ import UIKit
 final class FoodVideoSource: @unchecked Sendable {
     static let shared = FoodVideoSource()
 
+    private static let framesPerSecond: Int64 = 30
+    private static let mediaTimescale: CMTimeScale = 600
+
     private let stateLock = NSLock()
     private let decodeLock = NSLock()
     private var generators: [String: AVAssetImageGenerator] = [:]
     private var frameIndex: [UUID: Int] = [:]
-    private var timestamps: [Double] = []
+    private var timestampCount = 0
 
     func hasVideo(for foodID: UUID) -> Bool {
         frameIndex[foodID] != nil
@@ -30,7 +33,10 @@ final class FoodVideoSource: @unchecked Sendable {
         ),
            let data = try? Data(contentsOf: url),
            let times = try? JSONDecoder().decode([Double].self, from: data) {
-            timestamps = times
+            // Retained as a shipped archive-validation artifact. Runtime frame
+            // addressing uses exact integer media-clock ticks below, never
+            // these decimal seconds.
+            timestampCount = times.count
         } else {
             print("❌ Error: frame_timestamps.json missing or invalid!")
         }
@@ -51,10 +57,10 @@ final class FoodVideoSource: @unchecked Sendable {
             print("❌ Error: frame_index.json missing or invalid!")
         }
 
-        if let maximumIndex = frameIndex.values.max(), maximumIndex >= timestamps.count {
+        if let maximumIndex = frameIndex.values.max(), maximumIndex >= timestampCount {
             print(
                 "❌ Error: frame_index.json references frame \(maximumIndex), "
-                + "but only \(timestamps.count) timestamps are bundled!"
+                + "but only \(timestampCount) timestamps are bundled!"
             )
             frameIndex = [:]
         }
@@ -99,15 +105,20 @@ final class FoodVideoSource: @unchecked Sendable {
 
     func getFrame(id foodID: UUID, variant: String) -> UIImage? {
         guard let index = frameIndex[foodID] else { return nil }
-        guard index >= 0, index < timestamps.count else {
+        guard index >= 0, index < timestampCount else {
             print("❌ Frame index \(index) for food id \(foodID) is out of bounds")
             return nil
         }
         guard let generator = generator(for: variant) else { return nil }
 
-        // Exact 30 fps positions on a 600 Hz media clock. Never add the old
-        // +0.01 s nudge and never loosen the tolerance: both return neighbours.
-        let time = CMTime(seconds: timestamps[index], preferredTimescale: 600)
+        // Construct the position in integer media-clock ticks. Decimal seconds
+        // truncate one tick for one third of 30 fps frames at timescale 600,
+        // returning the preceding image under zero tolerance.
+        let time = FrameArchiveClock.time(
+            forFrameIndex: index,
+            framesPerSecond: Self.framesPerSecond,
+            timescale: Self.mediaTimescale
+        )
         decodeLock.lock()
         defer { decodeLock.unlock() }
         do {
