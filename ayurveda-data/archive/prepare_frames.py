@@ -25,6 +25,7 @@ WHAT IT REFUSES TO DO
     later frame by one, so every food after it shows the wrong picture.
 """
 import argparse, glob, hashlib, io, json, os, re, sys, unicodedata, zipfile
+from pathlib import Path
 
 SAN = re.compile(r'[/\\:*?"<>|]')          # verbatim from build_food_index.py
 GENERATED_FRAME_KEY_OVERRIDES = {
@@ -66,12 +67,160 @@ def generated_frame_key(filename, authored_frame_key):
     return GENERATED_FRAME_KEY_OVERRIDES.get(filename, sanitize(authored_frame_key))
 
 
+def prepare_catalogue_frames(a, Image, np):
+    """Stage a simple id-keyed catalogue without food's legacy ZIP/reuse layers."""
+    catalogue_path = Path(a.catalogue).expanduser().resolve()
+    images_dir = Path(a.images).expanduser().resolve()
+    if not catalogue_path.is_file():
+        sys.exit(f"missing catalogue: {catalogue_path}")
+    if not images_dir.is_dir():
+        sys.exit(f"missing image directory: {images_dir}")
+
+    rows = json.loads(catalogue_path.read_text(encoding="utf-8"))
+    if not isinstance(rows, list) or not rows:
+        sys.exit("catalogue must be a non-empty JSON array")
+    try:
+        ordered = sorted(rows, key=lambda row: int(row[a.id_field]))
+        ids = [int(row[a.id_field]) for row in ordered]
+        assets = [row[a.asset_field] for row in ordered]
+    except (KeyError, TypeError, ValueError) as error:
+        sys.exit(f"invalid catalogue id/asset field: {error}")
+    if len(ids) != len(set(ids)):
+        sys.exit(f"catalogue repeats {a.id_field}")
+    if ids != list(range(ids[0], ids[-1] + 1)):
+        sys.exit(
+            f"catalogue ids are not contiguous: {ids[0]}...{ids[-1]} "
+            f"contains {len(ids)} rows"
+        )
+    if any(not isinstance(asset, str) or not asset for asset in assets):
+        sys.exit(f"catalogue has an empty/non-string {a.asset_field}")
+    if len(assets) != len(set(assets)):
+        sys.exit(f"catalogue repeats {a.asset_field}")
+
+    supported = {".jpg", ".jpeg", ".png", ".webp"}
+    by_stem = {}
+    for source in sorted(images_dir.iterdir()):
+        if not source.is_file() or source.suffix.lower() not in supported:
+            continue
+        if source.stem in by_stem:
+            sys.exit(
+                f"image filename collision for {source.stem!r}: "
+                f"{by_stem[source.stem].name}, {source.name}"
+            )
+        by_stem[source.stem] = source
+
+    expected = set(assets)
+    missing = sorted(expected - set(by_stem))
+    extra = sorted(set(by_stem) - expected)
+    print(f"catalogue           : {len(rows)} rows, ids {ids[0]}...{ids[-1]}")
+    print(f"catalogue images    : {len(expected) - len(missing)}/{len(expected)} present")
+    print(f"missing             : {len(missing)}")
+    for key in missing[:20]:
+        print(f"  {key}")
+    print(f"non-catalogue images: {len(extra)} (ignored)")
+    for key in extra[:20]:
+        print(f"  {key}")
+    if missing and not a.allow_missing:
+        sys.exit("REFUSING — every catalogue id must have its own source image")
+
+    hash_groups = {}
+    for asset in assets:
+        source = by_stem.get(asset)
+        if source is None:
+            continue
+        digest = hashlib.sha256(source.read_bytes()).hexdigest()
+        hash_groups.setdefault(digest, []).append(asset)
+    duplicates = [members for members in hash_groups.values() if len(members) > 1]
+    print(f"duplicate hash pairs: {len(duplicates)} (retained as separate frames)")
+    for members in duplicates:
+        print("  " + " == ".join(members))
+
+    if a.dry_run:
+        print("DRY RUN — validated only; no pool files written")
+        return
+
+    pool = Path(a.pool).expanduser().resolve()
+    existing = list(pool.glob("[0-9][0-9][0-9][0-9][0-9].jpg")) if pool.exists() else []
+    existing += [pool / name for name in ("features.npy", "manifest.json") if (pool / name).exists()]
+    if existing:
+        sys.exit(
+            "REFUSING TO OVERWRITE an existing frame pool:\n  "
+            + "\n  ".join(str(path) for path in existing[:10])
+        )
+    pool.mkdir(parents=True, exist_ok=True)
+    present_rows = [row for row in ordered if row[a.asset_field] in by_stem]
+    feats = np.zeros((len(present_rows), a.feature_px * a.feature_px), dtype=np.float32)
+    manifest = []
+    print(f"\nstaging {len(present_rows)} frame(s) -> {pool}")
+    for index, row in enumerate(present_rows):
+        asset = row[a.asset_field]
+        source = by_stem[asset]
+        image = Image.open(source).convert("RGB")
+        width, height = image.size
+        if max(width, height) != a.size:
+            scale = a.size / max(width, height)
+            image = image.resize(
+                (
+                    max(2, int(width * scale)) // 2 * 2,
+                    max(2, int(height * scale)) // 2 * 2,
+                ),
+                Image.LANCZOS,
+            )
+        output = pool / f"{index:05d}.jpg"
+        image.save(output, quality=a.quality)
+        feats[index] = (
+            np.asarray(
+                image.convert("L").resize((a.feature_px, a.feature_px), Image.LANCZOS),
+                dtype=np.float32,
+            ).ravel()
+            / 255.0
+        )
+        manifest.append(
+            {
+                "idx": index,
+                "dbId": int(row[a.id_field]),
+                "frameKey": asset,
+                "source": source.name,
+                "origin": "catalogue",
+            }
+        )
+        if (index + 1) % 100 == 0:
+            print(f"  {index + 1}/{len(present_rows)}")
+
+    np.save(pool / "features.npy", feats)
+    (pool / "manifest.json").write_text(
+        json.dumps(
+            {
+                "count": len(manifest),
+                "size": a.size,
+                "featurePx": a.feature_px,
+                "catalogue": str(catalogue_path),
+                "idField": a.id_field,
+                "assetField": a.asset_field,
+                "frames": manifest,
+            },
+            indent=1,
+            ensure_ascii=False,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    total = sum((pool / f"{index:05d}.jpg").stat().st_size for index in range(len(manifest)))
+    print(f"\nstaged {len(manifest)} frames, {total / 1e9:.2f} GB")
+    print(f"next: order_and_encode.py --pool {pool}")
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--repo", required=True)
-    ap.add_argument("--zip", required=True, help="extra_images.zip (read, never extracted)")
-    ap.add_argument("--new", required=True, help="directory of newly generated images")
+    ap.add_argument("--repo")
+    ap.add_argument("--zip", help="extra_images.zip (read, never extracted)")
+    ap.add_argument("--new", help="directory of newly generated images")
     ap.add_argument("--pool", required=True, help="scratch dir for staged frames — needs ~8 GB")
+    ap.add_argument("--catalogue", help="simple JSON-array catalogue (generic id-keyed mode)")
+    ap.add_argument("--images", help="image directory for --catalogue mode")
+    ap.add_argument("--id-field", default="id")
+    ap.add_argument("--asset-field", default="assetImageName")
+    ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--size", type=int, default=1024, help="staged frame long edge")
     ap.add_argument("--quality", type=int, default=95)
     ap.add_argument("--feature-px", type=int, default=64)
@@ -90,6 +239,14 @@ def main():
     except ImportError:
         sys.exit("pip install numpy --break-system-packages")
 
+    if a.catalogue:
+        if not a.images:
+            sys.exit("--catalogue requires --images")
+        prepare_catalogue_frames(a, Image, np)
+        return
+
+    if not all((a.repo, a.zip, a.new)):
+        sys.exit("food mode requires --repo, --zip and --new")
     repo = os.path.expanduser(a.repo)
     fmap = json.load(open(f"{repo}/Ayura/Food/frame_map.json"))
     print(f"archive 1 frame_map : {len(fmap)} keys")

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the DB-id to unified-video-frame index.
+"""Build a stable DB/catalogue-id to unified-video-frame index.
 
 The app owns `ZFOODITEM.ZID`; Gemini CSV ids are provenance only and must never
 be used at runtime.  This command is deliberately run against the final preseed
@@ -26,6 +26,12 @@ import sys
 import unicodedata
 from collections import Counter, defaultdict
 from pathlib import Path
+
+DATA_DIRECTORY = Path(__file__).resolve().parents[1]
+if str(DATA_DIRECTORY) not in sys.path:
+    sys.path.insert(0, str(DATA_DIRECTORY))
+
+from stable_ids import yoga_asana_uuid
 
 
 SANITIZE = re.compile(r'[/\\:*?"<>|]')
@@ -73,7 +79,22 @@ def unique_normalized_map(rows, label):
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repo", required=True, type=Path)
-    parser.add_argument("--store", required=True, type=Path)
+    parser.add_argument("--store", type=Path)
+    parser.add_argument("--catalogue", type=Path, help="generic JSON-array catalogue")
+    parser.add_argument("--id-field", default="id")
+    parser.add_argument("--catalog-number-field", default="catalogNumber")
+    parser.add_argument(
+        "--stable-id-kind",
+        choices=("yoga-asana",),
+        help=(
+            "derive and verify the runtime UUID with the shared stable_ids helper; "
+            "catalogNumber remains ordering/provenance only"
+        ),
+    )
+    parser.add_argument("--name-field", default="title")
+    parser.add_argument("--asset-field", default="assetImageName")
+    parser.add_argument("--frame-map", type=Path)
+    parser.add_argument("--dry-run", action="store_true")
     parser.add_argument(
         "--usda-csv",
         type=Path,
@@ -85,9 +106,142 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def build_catalogue_index(args: argparse.Namespace, repo: Path) -> int:
+    catalogue_path = args.catalogue.expanduser().resolve()
+    frame_map_path = (
+        args.frame_map.expanduser().resolve()
+        if args.frame_map
+        else repo / "Ayura/Yoga/frame_map.json"
+    )
+    out = args.out or repo / "ayurveda-data/archive/yoga_index.csv"
+    frame_index_out = args.frame_index_out or repo / "Ayura/Yoga/frame_index.json"
+    for path, label in ((catalogue_path, "catalogue"), (frame_map_path, "frame map")):
+        if not path.is_file():
+            sys.exit(f"missing {label}: {path}")
+
+    catalogue = json.loads(catalogue_path.read_text(encoding="utf-8"))
+    frame_map = json.loads(frame_map_path.read_text(encoding="utf-8"))
+    if not isinstance(catalogue, list) or not catalogue:
+        sys.exit("catalogue must be a non-empty JSON array")
+    expected_slots = set(range(len(frame_map)))
+    actual_slots = set(frame_map.values())
+    if actual_slots != expected_slots or len(actual_slots) != len(frame_map):
+        sys.exit(
+            "REFUSING TO WRITE — frame_map.json is not a one-to-one physical "
+            "inventory covering 0...N-1"
+        )
+
+    identities = []
+    try:
+        for row in catalogue:
+            if args.stable_id_kind == "yoga-asana":
+                catalog_number = int(row[args.catalog_number_field])
+                runtime_id = yoga_asana_uuid(catalog_number)
+                if str(row[args.id_field]) != runtime_id:
+                    raise ValueError(
+                        f"{args.id_field} for {catalog_number} is not the "
+                        "materialized yoga_asana_uuid"
+                    )
+                order_key = catalog_number
+            else:
+                runtime_id = int(row[args.id_field])
+                catalog_number = runtime_id
+                order_key = runtime_id
+            identities.append((order_key, runtime_id, catalog_number, row))
+        identities.sort(key=lambda value: value[0])
+    except (KeyError, TypeError, ValueError) as error:
+        sys.exit(f"invalid catalogue identity: {error}")
+    ids = [runtime_id for _, runtime_id, _, _ in identities]
+    if len(ids) != len(set(ids)):
+        sys.exit(f"catalogue repeats {args.id_field}")
+
+    rows = []
+    frame_index = {}
+    unresolved = []
+    for _, db_id, catalog_number, row in identities:
+        name = row.get(args.name_field, "")
+        physical_key = row.get(args.asset_field)
+        index = frame_map.get(physical_key)
+        if index is None:
+            unresolved.append((db_id, name, physical_key))
+            continue
+        rows.append(
+            {
+                "id": db_id,
+                "db_id": db_id,
+                "catalog_number": catalog_number,
+                "name": name,
+                "kind": "catalogue",
+                "frame_key": physical_key,
+                "archive": 1,
+                "frame_index": index,
+                "resolution": "direct-id",
+            }
+        )
+        frame_index[str(db_id)] = index
+
+    if unresolved:
+        details = "\n".join(
+            f"  {db_id}: {name} -> {physical_key!r}"
+            for db_id, name, physical_key in unresolved
+        )
+        sys.exit(
+            f"REFUSING TO WRITE — {len(unresolved)} catalogue row(s) have no frame:\n{details}"
+        )
+    if len(rows) != len(catalogue) or len(frame_index) != len(catalogue):
+        sys.exit("REFUSING TO WRITE — id resolution is not one row per catalogue item")
+
+    by_index = defaultdict(list)
+    for row in rows:
+        by_index[row["frame_index"]].append((row["db_id"], row["name"]))
+    orphan_indices = expected_slots - set(by_index)
+    shared = {index: members for index, members in by_index.items() if len(members) > 1}
+    if orphan_indices or shared or len(frame_map) != len(catalogue):
+        sys.exit(
+            "REFUSING TO WRITE — generic catalogue must be a one-id/one-frame bijection.\n"
+            f"  catalogue rows: {len(catalogue)}\n"
+            f"  physical frames: {len(frame_map)}\n"
+            f"  orphan slots: {sorted(orphan_indices)}\n"
+            f"  shared slots: {shared}"
+        )
+
+    print(f"catalogue rows    : {len(catalogue)}")
+    print(f"physical frames   : {len(frame_map)}")
+    print(f"resolved ids      : {len(frame_index)} (unresolved 0)")
+    if args.stable_id_kind:
+        print(
+            f"runtime key       : {args.stable_id_kind} UUID "
+            f"({args.catalog_number_field} is provenance only)"
+        )
+    print(f"bijection         : {len(by_index)} addressed, shared 0, orphans 0")
+    if args.dry_run:
+        print("DRY RUN — validated only; no index files written")
+        return 0
+
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with out.open("w", newline="", encoding="utf-8") as output:
+        writer = csv.DictWriter(output, fieldnames=list(rows[0]), lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(rows)
+    frame_index_out.parent.mkdir(parents=True, exist_ok=True)
+    frame_index_out.write_text(
+        json.dumps(frame_index, sort_keys=True, separators=(",", ":")) + "\n",
+        encoding="utf-8",
+    )
+    print(f"wrote             : {out}")
+    print(f"wrote             : {frame_index_out}")
+    return 0
+
+
 def main() -> int:
     args = parse_args()
     repo = args.repo.expanduser().resolve()
+    if args.catalogue:
+        if args.store:
+            sys.exit("pass either --catalogue or --store, not both")
+        return build_catalogue_index(args, repo)
+    if not args.store:
+        sys.exit("food mode requires --store")
     store = args.store.expanduser().resolve()
     out = args.out or repo / "ayurveda-data/archive/foods_index.csv"
     frame_index_out = args.frame_index_out or repo / "Ayura/Food/frame_index.json"

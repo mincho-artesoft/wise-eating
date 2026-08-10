@@ -46,6 +46,12 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
+				Yoga/assets-manifest.json,
+				Yoga/frame_index.json,
+				Yoga/frame_timestamps.json,
+				Yoga/yoga_archive_144.mp4,
+				Yoga/yoga_archive_480.mp4,
+				Yoga/yoga_archive_1024.mp4,
 			);
 			target = 508496242DE5D05D0038A7D5 /* Ayura */;
 		};
@@ -111,6 +117,7 @@
 				508496222DE5D05D0038A7D5 /* Frameworks */,
 				A55E75012F1B000100000001 /* Check Required Assets */,
 				508496232DE5D05D0038A7D5 /* Resources */,
+				A55E75022F1B000100000002 /* Copy Yoga Archive Resources */,
 				C843A4162E7E7C66000B1F28 /* Embed Foundation Extensions */,
 				5076E6C32ECCCE7900FA2B4E /* Embed ExtensionKit Extensions */,
 			);
@@ -198,6 +205,12 @@
 				"$(SRCROOT)/Ayura/Food/food_archive_1024.mp4.gz.part-ae",
 				"$(SRCROOT)/Ayura/preseeded_db.store.gz.part-aa",
 				"$(SRCROOT)/Ayura/preseeded_db.store.gz.part-ab",
+				"$(SRCROOT)/Ayura/Yoga/assets-manifest.json",
+				"$(SRCROOT)/Ayura/Yoga/frame_index.json",
+				"$(SRCROOT)/Ayura/Yoga/frame_timestamps.json",
+				"$(SRCROOT)/Ayura/Yoga/yoga_archive_144.mp4",
+				"$(SRCROOT)/Ayura/Yoga/yoga_archive_480.mp4",
+				"$(SRCROOT)/Ayura/Yoga/yoga_archive_1024.mp4",
 			);
 			name = "Check Required Assets";
 			outputFileListPaths = (
@@ -207,6 +220,38 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
 			shellScript = "\"${SRCROOT}/tools/check-assets.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A55E75022F1B000100000002 /* Copy Yoga Archive Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/tools/copy-yoga-assets.sh",
+				"$(SRCROOT)/Ayura/Yoga/assets-manifest.json",
+				"$(SRCROOT)/Ayura/Yoga/frame_index.json",
+				"$(SRCROOT)/Ayura/Yoga/frame_timestamps.json",
+				"$(SRCROOT)/Ayura/Yoga/yoga_archive_144.mp4",
+				"$(SRCROOT)/Ayura/Yoga/yoga_archive_480.mp4",
+				"$(SRCROOT)/Ayura/Yoga/yoga_archive_1024.mp4",
+			);
+			name = "Copy Yoga Archive Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Yoga/assets-manifest.json",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Yoga/frame_index.json",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Yoga/frame_timestamps.json",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Yoga/yoga_archive_144.mp4",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Yoga/yoga_archive_480.mp4",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Yoga/yoga_archive_1024.mp4",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "\"${SRCROOT}/tools/copy-yoga-assets.sh\" \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Yoga\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
