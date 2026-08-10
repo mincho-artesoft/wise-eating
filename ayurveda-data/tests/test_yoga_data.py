@@ -143,7 +143,7 @@ class YogaDataTests(unittest.TestCase):
             ROOT / "Ayura/Exercise/Models/ExerciseItem.swift"
         ).read_text()
         image_path = exercise_item.split("func exerciseImage", 1)[1].split(
-            "func ", 1
+            "// Hashable", 1
         )[0]
         self.assertIn("id: dto.id", seeder)
         self.assertIn("private var frameIndex: [UUID: Int]", video_source)
@@ -159,6 +159,17 @@ class YogaDataTests(unittest.TestCase):
         self.assertFalse((ROOT / "Ayura" / "AyuraTemplates.store").exists())
         self.assertLess((YOGA / "asanas.json").stat().st_size, 90_000_000)
         self.assertLess((YOGA / "sequences.json").stat().st_size, 90_000_000)
+
+    def test_yoga_image_variants_match_food_detail_behavior(self):
+        detail = (
+            ROOT / "Ayura/Exercise/Views/ExerciseItemDetailView.swift"
+        ).read_text()
+        rows = (ROOT / "Ayura/Exercise/Views/ExerciseRowView.swift").read_text()
+        video_source = (SHIPPED_YOGA / "YogaVideoSource.swift").read_text()
+
+        self.assertIn('preferredVariants: ["1024", "480"]', detail)
+        self.assertIn('exerciseImage(variant: "144")', rows)
+        self.assertIn('"1024": 47_000_394', video_source)
 
     def test_search_terms_have_results(self):
         for query in ("adho mukha", "backbend", "pranayama", "warrior"):

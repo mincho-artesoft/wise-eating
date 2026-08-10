@@ -11,6 +11,7 @@ YOGA_ASSETS=(
     frame_timestamps.json
     yoga_archive_144.mp4
     yoga_archive_480.mp4
+    yoga_archive_1024.mp4
 )
 
 /bin/mkdir -p "$YOGA_DESTINATION_DIRECTORY"

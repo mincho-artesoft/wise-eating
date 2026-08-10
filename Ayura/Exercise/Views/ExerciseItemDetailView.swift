@@ -133,7 +133,9 @@ struct ExerciseItemDetailView: View {
                 }
             }
             if mainUIImage == nil {
-                mainUIImage = item.exerciseImage()
+                mainUIImage = item.exerciseImage(
+                    preferredVariants: ["1024", "480"]
+                )
             }
         }
         .task(id: selectedImageData) {
@@ -222,7 +224,10 @@ struct ExerciseItemDetailView: View {
     
     
     private func loadImage(data: Data?) async {
-        if mainUIImage == nil, let fallback = item.exerciseImage() {
+        if mainUIImage == nil,
+           let fallback = item.exerciseImage(
+               preferredVariants: ["1024", "480"]
+           ) {
             await MainActor.run {
                 mainUIImage = fallback
             }

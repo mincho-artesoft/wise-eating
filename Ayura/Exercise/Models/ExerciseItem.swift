@@ -215,20 +215,26 @@ public final class ExerciseItem: Identifiable {
     }
     
     func exerciseImage(variant: String = "480") -> UIImage? {
-       // A) Check DB photo
+        exerciseImage(preferredVariants: [variant])
+    }
+
+    func exerciseImage(preferredVariants: [String]) -> UIImage? {
+        // A) Check DB photo
         if let data = self.photo, let img = UIImage(data: data) {
-           return img
-       }
+            return img
+        }
 
-       // The same materialized UUID is written by YogaSeeder and keys the
-       // archive, so renames and catalogue provenance never affect imagery.
-       if let image = YogaVideoSource.shared.getFrame(id: self.id, variant: variant) {
-           return image
-       }
+        // The same materialized UUID is written by YogaSeeder and keys the
+        // archive, so renames and catalogue provenance never affect imagery.
+        for variant in preferredVariants {
+            if let image = YogaVideoSource.shared.getFrame(id: self.id, variant: variant) {
+                return image
+            }
+        }
 
-       if let assetImageName, let image = UIImage(named: assetImageName) {
-           return image
-       }
+        if let assetImageName, let image = UIImage(named: assetImageName) {
+            return image
+        }
 
        let original = self.name
        let folded   = original.folding(options: .diacriticInsensitive, locale: .current)

@@ -13,6 +13,7 @@ final class YogaVideoSource: @unchecked Sendable {
     private static let expectedArchiveByteCounts: [String: Int64] = [
         "144": 3_292_621,
         "480": 13_614_817,
+        "1024": 47_000_394,
     ]
 
     private let stateLock = NSLock()

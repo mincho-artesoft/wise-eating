@@ -64,8 +64,10 @@ class YogaVideoLookupTests(unittest.TestCase):
         # 144 px. Heavy downscaling of Yoga's high-frequency backgrounds makes
         # the food archive's 0.90 floor unreachable, so 0.85 preserves a
         # measured 0.010546 margin. At 480 px the measured minimum was 0.920731,
-        # so that variant retains the same 0.90 floor as food.
-        variant_floors = {"144": 0.85, "480": 0.90}
+        # so that variant retains the same 0.90 floor as food. Native-resolution
+        # 1024 measured 0.955723; its 0.95 floor preserves a measured 0.005723
+        # margin while requiring materially higher fidelity than 480.
+        variant_floors = {"144": 0.85, "480": 0.90, "1024": 0.95}
         minimum_neighbor_advantage = 0.10
 
         for variant, ssim_floor in variant_floors.items():
