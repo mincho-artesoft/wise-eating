@@ -117,7 +117,7 @@ struct ExerciseThumbnailView: View {
 
     var body: some View {
         Group {
-            if let uiImage = item.exerciseImage() {
+            if let uiImage = item.exerciseImage(variant: "144") {
                 Image(uiImage: uiImage)
                     .resizable()
                     .scaledToFill()

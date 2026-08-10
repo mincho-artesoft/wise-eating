@@ -1,0 +1,33 @@
+{
+    "schemaVersion": 1,
+    "assets": [
+        {
+            "filename": "Ayura/Yoga/frame_index.json",
+            "sha256": "58e517dd29c61dc59bf020d99e38a5721068514176fd64e366f7957f4adf3651",
+            "byteSize": 38936,
+            "frameCount": null,
+            "producingCommit": null
+        },
+        {
+            "filename": "Ayura/Yoga/frame_timestamps.json",
+            "sha256": "d3fc8b2709bf3db82c2a48a5a099b54b59ac8662463d0e806459f2f3d725df7d",
+            "byteSize": 8173,
+            "frameCount": null,
+            "producingCommit": null
+        },
+        {
+            "filename": "Ayura/Yoga/yoga_archive_144.mp4",
+            "sha256": "b6b0ecf9718394bdbfecb3f1ebfd2d6c8a8465d1cc87b9f1e2b577bb6cc667e8",
+            "byteSize": 3292621,
+            "frameCount": 908,
+            "producingCommit": null
+        },
+        {
+            "filename": "Ayura/Yoga/yoga_archive_480.mp4",
+            "sha256": "b51c8fbb8dd1e8ab5924f386221da154bc0f157adeb1c60d5e31bdd87cb323fd",
+            "byteSize": 13614817,
+            "frameCount": 908,
+            "producingCommit": null
+        }
+    ]
+}

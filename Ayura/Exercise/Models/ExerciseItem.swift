@@ -214,10 +214,16 @@ public final class ExerciseItem: Identifiable {
         searchTokens2 = ExerciseItem.makeTokens2(from: searchableText)
     }
     
-    func exerciseImage() -> UIImage? {
+    func exerciseImage(variant: String = "480") -> UIImage? {
        // A) Check DB photo
         if let data = self.photo, let img = UIImage(data: data) {
            return img
+       }
+
+       // The same materialized UUID is written by YogaSeeder and keys the
+       // archive, so renames and catalogue provenance never affect imagery.
+       if let image = YogaVideoSource.shared.getFrame(id: self.id, variant: variant) {
+           return image
        }
 
        if let assetImageName, let image = UIImage(named: assetImageName) {

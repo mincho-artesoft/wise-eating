@@ -44,7 +44,7 @@ THREE THINGS THIS CHANGES FROM generate_multires_assets.py
     The shipped 480 variant uses CRF 26 to stay below the 90 MB tracked-file
     gate; 1024 remains CRF 24.
 """
-import argparse, base64, csv, json, os, subprocess, sys, tempfile
+import argparse, base64, csv, json, os, shlex, subprocess, sys, tempfile
 
 FPS = 30
 TIMESCALE = 600
@@ -54,19 +54,27 @@ PRESET_BY_VARIANT = {"144": "fast", "240": "fast"}      # default "medium"
 GATE_MB = 90
 
 
-def encode(frames_dir, out_mp4, variant, bframes, gop=None, crf=None):
+def encode_command(frames_dir, out_mp4, variant, bframes, gop=None, crf=None):
     res = int(variant)
     g = str(gop if gop is not None else GOP_BY_VARIANT.get(variant, 30))
     c = str(crf if crf is not None else CRF_BY_VARIANT.get(variant, 24))
     preset = PRESET_BY_VARIANT.get(variant, "medium")
     scale = "scale=1024:-2" if res == 1024 else f"scale=-2:{res}"
-    cmd = ["ffmpeg", "-y", "-f", "image2", "-framerate", str(FPS),
+    return ["ffmpeg", "-n", "-f", "image2", "-framerate", str(FPS),
            "-i", os.path.join(frames_dir, "img_%05d.jpg"),
            "-c:v", "libx265", "-preset", preset, "-crf", c, "-tag:v", "hvc1",
            "-g", g, "-vsync", "0", "-bf", "8" if bframes else "0",
            "-pix_fmt", "yuv420p", "-video_track_timescale", str(TIMESCALE),
            "-vf", scale, out_mp4]
+
+
+def encode(frames_dir, out_mp4, variant, bframes, gop=None, crf=None):
+    if os.path.exists(out_mp4):
+        raise RuntimeError(f"REFUSING TO OVERWRITE existing archive: {out_mp4}")
+    cmd = encode_command(frames_dir, out_mp4, variant, bframes, gop=gop, crf=crf)
     subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    g = str(gop if gop is not None else GOP_BY_VARIANT.get(variant, 30))
+    c = str(crf if crf is not None else CRF_BY_VARIANT.get(variant, 24))
     return {"variant": variant, "gop": g, "crf": c, "bframes": bool(bframes),
             "mb": os.path.getsize(out_mp4) / 1e6}
 
@@ -103,9 +111,13 @@ def build_id_index(food_index_csv, frame_map):
     return mapping
 
 
-def embed_id_index(dist, variants, food_index_csv, frame_map):
+def archive_path(dist, archive_prefix, variant):
+    return os.path.join(dist, f"{archive_prefix}_{variant}.mp4")
+
+
+def embed_id_index(dist, variants, index_csv, frame_map, archive_prefix):
     """Embed the canonical DB-id map without re-encoding the video stream."""
-    mapping = build_id_index(food_index_csv, frame_map)
+    mapping = build_id_index(index_csv, frame_map)
     payload = (
         json.dumps(mapping, sort_keys=True, separators=(",", ":")) + "\n"
     ).encode("utf-8")
@@ -124,13 +136,15 @@ def embed_id_index(dist, variants, food_index_csv, frame_map):
         metadata_path = metadata.name
     try:
         for variant in variants:
-            source = os.path.join(dist, f"food_archive_{variant}.mp4")
+            source = archive_path(dist, archive_prefix, variant)
             if not os.path.isfile(source):
                 sys.exit(f"cannot embed DB-id map; missing encoded variant: {source}")
             temporary = source + ".idkey.tmp.mp4"
+            if os.path.exists(temporary):
+                sys.exit(f"refusing to overwrite stale remux output: {temporary}")
             subprocess.run(
                 [
-                    "ffmpeg", "-y", "-i", source,
+                    "ffmpeg", "-n", "-i", source,
                     "-f", "ffmetadata", "-i", metadata_path,
                     "-map", "0", "-c", "copy", "-map_metadata", "1",
                     "-movflags", "use_metadata_tags",
@@ -193,12 +207,12 @@ def build_order(pool, dims=8):
 
 
 def link_frames(pool, order, dest):
+    if os.path.isdir(dest) and os.listdir(dest):
+        sys.exit(f"REFUSING TO OVERWRITE non-empty frame stage: {dest}")
     os.makedirs(dest, exist_ok=True)
     for slot, idx in enumerate(order):
         src = os.path.join(pool, f"{idx:05d}.jpg")
         dst = os.path.join(dest, f"img_{slot:05d}.jpg")
-        if os.path.exists(dst):
-            os.remove(dst)
         os.link(src, dst)          # hardlink: no extra disk, same filesystem
 
 
@@ -208,6 +222,12 @@ def main():
     ap.add_argument("--repo")
     ap.add_argument("--out", help="where the mp4s land (default <pool>/dist)")
     ap.add_argument("--variants", nargs="+", default=["144", "480", "1024"])
+    ap.add_argument(
+        "--archive-prefix",
+        default="food_archive",
+        help="output basename before _<variant>.mp4 (for example yoga_archive)",
+    )
+    ap.add_argument("--dry-run", action="store_true", help="print encode/remux commands; write nothing")
     ap.add_argument("--bframes", action="store_true",
                     help="diagnostic only; NEVER use for a shipped archive")
     ap.add_argument("--no-order", action="store_true", help="skip similarity ordering")
@@ -217,9 +237,10 @@ def main():
                     help="encode the first N frames every way and print the table, "
                          "then stop. Settles the B-frame and 480-GOP questions.")
     ap.add_argument(
-        "--food-index",
-        help="foods_index.csv with db_id; writes and embeds frame_index.json",
+        "--index-csv",
+        help="catalogue index CSV with db_id/frame_key; writes and embeds frame_index.json",
     )
+    ap.add_argument("--food-index", dest="legacy_food_index", help=argparse.SUPPRESS)
     ap.add_argument(
         "--embed-only",
         action="store_true",
@@ -229,17 +250,49 @@ def main():
 
     pool = os.path.expanduser(a.pool)
     dist = os.path.expanduser(a.out) if a.out else os.path.join(pool, "dist")
-    os.makedirs(dist, exist_ok=True)
     man_all = json.load(open(os.path.join(pool, "manifest.json")))["frames"]
+    index_csv = a.index_csv or a.legacy_food_index
+    if a.index_csv and a.legacy_food_index:
+        sys.exit("pass --index-csv, not both --index-csv and legacy --food-index")
+
+    if a.dry_run:
+        print(f"DRY RUN — {len(man_all)} staged frames; no files will be written")
+        if a.bframes:
+            sys.exit("REFUSING — --bframes is diagnostic only and cannot be dry-run as a shipped build")
+        if a.embed_only:
+            if not index_csv:
+                sys.exit("--embed-only requires --index-csv")
+            for variant in a.variants:
+                source = archive_path(dist, a.archive_prefix, variant)
+                print(
+                    shlex.join(
+                        [
+                            "ffmpeg", "-n", "-i", source,
+                            "-f", "ffmetadata", "-i", "<generated-metadata.ffmeta>",
+                            "-map", "0", "-c", "copy", "-map_metadata", "1",
+                            "-movflags", "use_metadata_tags",
+                            "-video_track_timescale", str(TIMESCALE),
+                            source + ".idkey.tmp.mp4",
+                        ]
+                    )
+                )
+            return
+        stage = os.path.join(dist, "sorted_frames")
+        for variant in a.variants:
+            print(shlex.join(encode_command(stage, archive_path(dist, a.archive_prefix, variant), variant, False, crf=a.crf)))
+        print(f"planned frame_map/timestamps/build-info -> {dist}")
+        return
+
+    os.makedirs(dist, exist_ok=True)
 
     if a.embed_only:
-        if not a.food_index:
-            sys.exit("--embed-only requires --food-index")
+        if not index_csv:
+            sys.exit("--embed-only requires --index-csv")
         frame_map_path = os.path.join(dist, "frame_map.json")
         if not os.path.isfile(frame_map_path):
             sys.exit(f"--embed-only requires {frame_map_path}")
         frame_map = json.load(open(frame_map_path))
-        embed_id_index(dist, a.variants, a.food_index, frame_map)
+        embed_id_index(dist, a.variants, index_csv, frame_map, a.archive_prefix)
         return
 
     # ---------------- measurement mode ---------------------------------------
@@ -276,8 +329,6 @@ def main():
         return
 
     # ---------------- real build ---------------------------------------------
-    if not a.repo:
-        sys.exit("--repo is required for a real build")
     order = list(range(len(man_all))) if a.no_order else build_order(pool)[0]
     if a.no_order:
         print("ordering skipped (--no-order)")
@@ -288,8 +339,9 @@ def main():
     fmap = {man_all[idx]["frameKey"]: slot for slot, idx in enumerate(order)}
     results, ts_ref = [], None
     for v in a.variants:
-        r = encode(stage, os.path.join(dist, f"food_archive_{v}.mp4"), v, a.bframes, crf=a.crf)
-        ts = packet_times(os.path.join(dist, f"food_archive_{v}.mp4"))
+        output = archive_path(dist, a.archive_prefix, v)
+        r = encode(stage, output, v, a.bframes, crf=a.crf)
+        ts = packet_times(output)
         if len(ts) != len(order):
             sys.exit(f"FRAME COUNT MISMATCH at {v}: {len(ts)} packets vs {len(order)} frames. "
                      "Do not ship this — the seek would return the wrong food.")
@@ -309,13 +361,12 @@ def main():
                "ordered": not a.no_order, "bframes": a.bframes, "variants": results},
               open(os.path.join(dist, "build-info.json"), "w"), indent=1)
 
-    if a.food_index:
-        embed_id_index(dist, a.variants, a.food_index, fmap)
+    if index_csv:
+        embed_id_index(dist, a.variants, index_csv, fmap, a.archive_prefix)
 
     print(f"\n{len(order)} frames -> {dist}")
-    print("frame_map.json now covers BOTH archives, so frame_map2.json is dead.")
-    print("runtime reuse-map.json is dead. build_food_index.py resolves reviewed reuse")
-    print("once at build time and writes those DB ids directly into frame_index.json.")
+    print("frame_map.json is the physical frame inventory; frame_index.json is the")
+    print("stable DB-id lookup produced from --index-csv when supplied.")
 
 
 if __name__ == "__main__":

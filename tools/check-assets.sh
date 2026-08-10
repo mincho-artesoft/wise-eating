@@ -3,12 +3,17 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-MANIFEST="$REPO_ROOT/Ayura/Food/assets-manifest.json"
+MANIFESTS=(
+    "$REPO_ROOT/Ayura/Food/assets-manifest.json"
+    "$REPO_ROOT/Ayura/Yoga/assets-manifest.json"
+)
 
-if [[ ! -f "$MANIFEST" ]]; then
-    echo "MISSING: Ayura/Food/assets-manifest.json" >&2
-    exit 1
-fi
+for manifest in "${MANIFESTS[@]}"; do
+    if [[ ! -f "$manifest" ]]; then
+        echo "MISSING: ${manifest#"$REPO_ROOT/"}" >&2
+        exit 1
+    fi
+done
 
 PYTHON_BIN="${PYTHON_BIN:-/usr/bin/python3}"
 if [[ ! -x "$PYTHON_BIN" ]]; then
@@ -19,7 +24,7 @@ if [[ -z "$PYTHON_BIN" || ! -x "$PYTHON_BIN" ]]; then
     exit 1
 fi
 
-"$PYTHON_BIN" - "$REPO_ROOT" "$MANIFEST" <<'PY'
+"$PYTHON_BIN" - "$REPO_ROOT" "${MANIFESTS[@]}" <<'PY'
 import hashlib
 import json
 import os
@@ -29,9 +34,11 @@ import sys
 from pathlib import Path
 
 repo = Path(sys.argv[1])
-manifest_path = Path(sys.argv[2])
-manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-assets = manifest.get("assets", [])
+manifest_paths = [Path(value) for value in sys.argv[2:]]
+assets = []
+for manifest_path in manifest_paths:
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    assets.extend(manifest.get("assets", []))
 errors = []
 verified = 0
 ffprobe = shutil.which("ffprobe")

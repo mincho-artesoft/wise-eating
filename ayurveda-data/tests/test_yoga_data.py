@@ -1,6 +1,7 @@
 import json
 import sys
 import unittest
+import uuid
 from collections import Counter
 from pathlib import Path
 
@@ -8,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "ayurveda-data"
 YOGA = DATA / "yoga"
+SHIPPED_YOGA = ROOT / "Ayura" / "Yoga"
 sys.path.insert(0, str(DATA))
 
 from stable_ids import yoga_asana_uuid, yoga_sequence_uuid
@@ -113,6 +115,42 @@ class YogaDataTests(unittest.TestCase):
                     pose["id"],
                     asana_ids[pose["catalogNumber"]],
                 )
+
+    def test_yoga_frame_index_matches_the_ids_materialized_by_the_seeder(self):
+        """The shipped archive and YogaSeeder input are one UUID-keyed set.
+
+        A mismatch here does not crash the app; it silently blanks every yoga
+        image.  Keep the derivation, materialized JSON ids, frame index and
+        runtime lookup in one cross-layer gate.
+        """
+        frame_index = json.loads(
+            (SHIPPED_YOGA / "frame_index.json").read_text(encoding="utf-8")
+        )
+        seed_ids = {row["id"] for row in self.asanas}
+
+        self.assertEqual(len(frame_index), 908)
+        self.assertEqual(len(seed_ids), 908)
+        self.assertEqual(set(frame_index), seed_ids)
+        self.assertEqual(set(frame_index.values()), set(range(908)))
+        self.assertEqual(len(set(frame_index.values())), 908)
+        for row in self.asanas:
+            self.assertEqual(str(uuid.UUID(row["id"])), row["id"])
+            self.assertEqual(row["id"], yoga_asana_uuid(row["catalogNumber"]))
+
+        seeder = (ROOT / "Ayura/Yoga/DBSeed/YogaSeeder.swift").read_text()
+        video_source = (SHIPPED_YOGA / "YogaVideoSource.swift").read_text()
+        exercise_item = (
+            ROOT / "Ayura/Exercise/Models/ExerciseItem.swift"
+        ).read_text()
+        image_path = exercise_item.split("func exerciseImage", 1)[1].split(
+            "func ", 1
+        )[0]
+        self.assertIn("id: dto.id", seeder)
+        self.assertIn("private var frameIndex: [UUID: Int]", video_source)
+        self.assertIn("func getFrame(id asanaID: UUID", video_source)
+        self.assertNotIn("catalogNumber", video_source)
+        self.assertIn("getFrame(id: self.id, variant: variant)", image_path)
+        self.assertNotIn("catalogNumber", image_path)
 
     def test_only_yoga_runtime_data_is_present(self):
         self.assertTrue(all("sports" not in row for row in self.asanas))
