@@ -2,15 +2,17 @@ import base64
 import gzip
 import json
 import sqlite3
+import sys
 import tempfile
 import unittest
-import uuid
 import zlib
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
 CATALOG = ROOT / "Ayura" / "Legacy"
+sys.path.insert(0, str(ROOT / "ayurveda-data"))
+from stable_ids import food_uuid, product_bucket_uuid, vocabulary_entry_uuid
 
 
 def normalized_decimal(value: str) -> str:
@@ -68,7 +70,17 @@ class BarcodeCatalogTests(unittest.TestCase):
         self.assertEqual(self.vocabulary[0]["word"], "UNK")
         for index, row in enumerate(self.vocabulary):
             self.assertEqual(row["tokenIndex"], index)
-            uuid.UUID(row["id"])
+            self.assertEqual(row["id"], vocabulary_entry_uuid(index))
+
+    def test_food_targets_use_the_git_uuid_migration(self):
+        foods = json.loads(
+            (CATALOG / "foods.json").read_text(encoding="utf-8")
+        )
+        for food in foods:
+            self.assertEqual(
+                food["id"],
+                food_uuid(food["catalogNumber"]),
+            )
 
     def test_buckets_cover_sorted_unique_product_codes(self):
         vocabulary_count = len(self.vocabulary)
@@ -76,8 +88,11 @@ class BarcodeCatalogTests(unittest.TestCase):
         previous_sort_key = None
         previous_bucket_key = None
         for bucket_row in self.buckets:
-            uuid.UUID(bucket_row["id"])
             bucket_key = normalized_decimal(bucket_row["bucketKey"])
+            self.assertEqual(
+                bucket_row["id"],
+                product_bucket_uuid(int(bucket_key)),
+            )
             bucket_sort_key = (len(bucket_key), bucket_key)
             if previous_bucket_key is not None:
                 self.assertLess(previous_bucket_key, bucket_sort_key)
@@ -122,9 +137,41 @@ class BarcodeCatalogTests(unittest.TestCase):
                     "SELECT count(*) FROM ZPRODUCTBUCKET"
                 ).fetchone()[0]
                 integrity = connection.execute("PRAGMA integrity_check").fetchone()[0]
+                vocabulary_samples = [
+                    connection.execute(
+                        "SELECT ZTOKENINDEX, ZID FROM ZVOCABULARYENTRY "
+                        "ORDER BY Z_PK LIMIT 1 OFFSET ?",
+                        (offset,),
+                    ).fetchone()
+                    for offset in (0, vocabulary_count // 2, vocabulary_count - 1)
+                ]
+                bucket_samples = [
+                    connection.execute(
+                        "SELECT ZBUCKETKEY, ZID FROM ZPRODUCTBUCKET "
+                        "ORDER BY Z_PK LIMIT 1 OFFSET ?",
+                        (offset,),
+                    ).fetchone()
+                    for offset in (0, bucket_count // 2, bucket_count - 1)
+                ]
         self.assertEqual(vocabulary_count, self.metadata["vocabularyCount"])
         self.assertEqual(bucket_count, self.metadata["bucketCount"])
         self.assertEqual(integrity, "ok")
+        for token_index, identifier in vocabulary_samples:
+            self.assertEqual(
+                str(uuid_from_store(identifier)),
+                vocabulary_entry_uuid(token_index),
+            )
+        for bucket_key, identifier in bucket_samples:
+            self.assertEqual(
+                str(uuid_from_store(identifier)),
+                product_bucket_uuid(int(bucket_key)),
+            )
+
+
+def uuid_from_store(value):
+    import uuid
+
+    return uuid.UUID(bytes=bytes(value))
 
 
 if __name__ == "__main__":

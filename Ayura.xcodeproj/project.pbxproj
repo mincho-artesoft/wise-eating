@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A55E75102F1B000100000001 /* asanas.json in Resources */ = {isa = PBXBuildFile; fileRef = A55E75202F1B000100000001 /* asanas.json */; };
-		A55E75112F1B000100000001 /* sequences.json in Resources */ = {isa = PBXBuildFile; fileRef = A55E75212F1B000100000001 /* sequences.json */; };
+		A55E75102F1B000100000001 /* ayurveda-data/yoga/asanas.json in Resources */ = {isa = PBXBuildFile; fileRef = A55E75202F1B000100000001 /* ayurveda-data/yoga/asanas.json */; };
+		A55E75112F1B000100000001 /* ayurveda-data/yoga/sequences.json in Resources */ = {isa = PBXBuildFile; fileRef = A55E75212F1B000100000001 /* ayurveda-data/yoga/sequences.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,8 +36,8 @@
 
 /* Begin PBXFileReference section */
 		508496252DE5D05D0038A7D5 /* Ayura.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ayura.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A55E75202F1B000100000001 /* asanas.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ayurveda-data/yoga/asanas.json; sourceTree = SOURCE_ROOT; };
-		A55E75212F1B000100000001 /* sequences.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ayurveda-data/yoga/sequences.json; sourceTree = SOURCE_ROOT; };
+		A55E75202F1B000100000001 /* ayurveda-data/yoga/asanas.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "ayurveda-data/yoga/asanas.json"; sourceTree = SOURCE_ROOT; };
+		A55E75212F1B000100000001 /* ayurveda-data/yoga/sequences.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "ayurveda-data/yoga/sequences.json"; sourceTree = SOURCE_ROOT; };
 		C843A40D2E7E7C66000B1F28 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -46,7 +46,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
-				Yoga/assets-manifest.json,
+				"Yoga/assets-manifest.json",
 				Yoga/frame_index.json,
 				Yoga/frame_timestamps.json,
 				Yoga/yoga_archive_144.mp4,
@@ -83,8 +83,8 @@
 			isa = PBXGroup;
 			children = (
 				508496272DE5D05D0038A7D5 /* Ayura */,
-				A55E75202F1B000100000001 /* asanas.json */,
-				A55E75212F1B000100000001 /* sequences.json */,
+				A55E75202F1B000100000001 /* ayurveda-data/yoga/asanas.json */,
+				A55E75212F1B000100000001 /* ayurveda-data/yoga/sequences.json */,
 				C843A40C2E7E7C66000B1F28 /* Frameworks */,
 				508496262DE5D05D0038A7D5 /* Products */,
 			);
@@ -176,8 +176,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A55E75102F1B000100000001 /* asanas.json in Resources */,
-				A55E75112F1B000100000001 /* sequences.json in Resources */,
+				A55E75102F1B000100000001 /* ayurveda-data/yoga/asanas.json in Resources */,
+				A55E75112F1B000100000001 /* ayurveda-data/yoga/sequences.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

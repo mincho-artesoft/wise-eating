@@ -80,6 +80,12 @@ struct BarcodeRowView: View {
                             .foregroundColor(effectManager.currentGlobalAccentColor)
                     }
 
+                    if item.mappingConfidence != nil {
+                        Label("Reliable local match", systemImage: "checkmark.shield.fill")
+                            .font(.caption)
+                            .foregroundColor(.green)
+                    }
+
                     FoodItemRowEventView(item: foodItem, amount: foodItem.referenceWeightG)
                 }
                 // --- END OF CHANGE ---
@@ -99,7 +105,7 @@ struct BarcodeRowView: View {
                         Text(productName)
                             .font(.headline)
                             .foregroundColor(effectManager.currentGlobalAccentColor)
-                        Text("Not found in your database")
+                        Text("No reliable match in your database")
                             .font(.caption)
                             .foregroundColor(.orange)
                             .padding(.top, 2)
