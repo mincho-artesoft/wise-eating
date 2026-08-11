@@ -1,4 +1,4 @@
-// ==== FILE: /Users/aleksandarsvinarov/Desktop/Repo/Ayura/Ayura/Settings/BackgroundManager.swift ====
+// ==== FILE: /Users/aleksandarsvinarov/Desktop/Repo/AyurvedaAsanaYoga/AyurvedaAsanaYoga/Settings/BackgroundManager.swift ====
 import SwiftUI
 import Combine
 

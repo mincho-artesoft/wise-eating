@@ -130,7 +130,7 @@ class PreseedArtifactTests(unittest.TestCase):
             "SELECT name FROM sqlite_master WHERE UPPER(name) LIKE '%TEMPLATE%'"
         ).fetchall()
         self.assertEqual(template_schema_objects, [])
-        self.assertFalse((REPO_ROOT / "Ayura" / "AyuraTemplates.store").exists())
+        self.assertFalse((REPO_ROOT / "Ayura" / "AyurvedaAsanaYogaTemplates.store").exists())
         self.assertFalse((REPO_ROOT / "Ayura" / "Legacy" / "workouts.json").exists())
 
     def test_bundled_exercise_catalog_is_replaced_by_yoga(self):

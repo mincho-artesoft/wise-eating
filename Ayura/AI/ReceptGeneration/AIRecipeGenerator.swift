@@ -1,4 +1,4 @@
-// ==== FILE: /Users/aleksandarsvinarov/Desktop/Repo/Ayura/Ayura/AI/ReceptGeneration/AIRecipeGenerator.swift ====
+// ==== FILE: /Users/aleksandarsvinarov/Desktop/Repo/AyurvedaAsanaYoga/AyurvedaAsanaYoga/AI/ReceptGeneration/AIRecipeGenerator.swift ====
 import Foundation
 import SwiftData
 import FoundationModels

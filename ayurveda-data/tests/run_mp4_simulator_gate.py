@@ -18,7 +18,7 @@ REQUEST = (
     / "MealPlanning"
     / "MealPlanRequest.swift"
 )
-BUNDLE_ID = "com.ayura.mp4-intent-gate"
+BUNDLE_ID = "com.ayurvedaasanayoga.mp4-intent-gate"
 
 
 def checked(arguments, **kwargs):

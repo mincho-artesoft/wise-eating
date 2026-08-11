@@ -372,7 +372,7 @@ extension FoodItem {
 extension FoodItem {
 
     // MARK: - Nutrition Aggregation (RECURSIVE)
-    // ==== FILE: Ayura/Food/Models/FoodItem.swift ====
+    // ==== FILE: AyurvedaAsanaYoga/Food/Models/FoodItem.swift ====
 
     static func aggregatedNutrition(for item: FoodItem) -> (
         macros: MacronutrientsData?,

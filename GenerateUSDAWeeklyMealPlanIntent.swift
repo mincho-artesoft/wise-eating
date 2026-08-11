@@ -1,6 +1,6 @@
 //
 //  GenerateUSDAWeeklyMealPlanIntent.swift
-//  Ayura
+//  AyurvedaAsanaYoga
 //
 //  Created by Mincho Milev on 9/20/25.
 //

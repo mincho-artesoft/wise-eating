@@ -19,7 +19,7 @@ ADAPTER = (
     / "Ayura"
     / "AI"
     / "MealPlanning"
-    / "DeterministicMealPlanSolver+Ayura.swift"
+    / "DeterministicMealPlanSolver+AyurvedaAsanaYoga.swift"
 )
 PLANNER = (
     ROOT

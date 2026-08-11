@@ -1,6 +1,6 @@
 name: VAL1DeviceDriver
 options:
-  bundleIdPrefix: com.ayura.validation
+  bundleIdPrefix: com.ayurvedaasanayoga.validation
 settings:
   base:
     DEVELOPMENT_TEAM: 8293TNMX6S
@@ -14,7 +14,7 @@ targets:
       - path: Host
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.ayura.validation.VAL1DeviceDriver
+        PRODUCT_BUNDLE_IDENTIFIER: com.ayurvedaasanayoga.validation.VAL1DeviceDriver
         GENERATE_INFOPLIST_FILE: true
         INFOPLIST_KEY_UILaunchScreen_Generation: true
         SUPPORTS_MACCATALYST: false
@@ -27,7 +27,7 @@ targets:
       - target: VAL1DeviceDriver
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.ayura.validation.VAL1DeviceDriverUITests
+        PRODUCT_BUNDLE_IDENTIFIER: com.ayurvedaasanayoga.validation.VAL1DeviceDriverUITests
         GENERATE_INFOPLIST_FILE: true
         TEST_TARGET_NAME: VAL1DeviceDriver
         SUPPORTS_MACCATALYST: false

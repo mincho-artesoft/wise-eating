@@ -1,4 +1,4 @@
-// ==== FILE: /Users/aleksandarsvinarov/Desktop/Repo/Ayura/Ayura/Fitness/Views/TrainingPlanPreviewView.swift ====
+// ==== FILE: /Users/aleksandarsvinarov/Desktop/Repo/AyurvedaAsanaYoga/AyurvedaAsanaYoga/Fitness/Views/TrainingPlanPreviewView.swift ====
 import SwiftUI
 import SwiftData
 

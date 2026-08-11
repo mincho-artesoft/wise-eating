@@ -1,4 +1,4 @@
-# PROJECT HANDBOOK — Ayura
+# PROJECT HANDBOOK — Ayurveda & Asana Yoga
 **Read this first. It is the knowledge-transfer document for anyone (human or AI)
 taking over direction of this project. Update it at the end of every milestone —
 that is a standing rule baked into all task packets.**
@@ -17,7 +17,7 @@ MP-1/MP-2/MP-3 device evidence remains explicit in
 One repository, two products:
 - **`main` branch = WiseEating, the original app, pristine** (tip `2508c74`,
   pre-Ayurveda). Never receives Ayurveda commits. Builds and ships as-is.
-- **`ayurveda-app` branch = the new Ayura application**: the proven
+- **`ayurveda-app` branch = the new Ayurveda & Asana Yoga application**: the proven
   engine (12,601-food USDA database, search, HEVC media, SwiftData) extended with
   a full Ayurvedic knowledge layer. All new work happens here. Single-author
   history: `Mincho Milev <mincho.milev@gmail.com>`.

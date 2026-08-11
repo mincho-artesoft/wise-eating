@@ -1,5 +1,5 @@
-// ==== FILE: /Users/aleksandarsvinarov/Desktop/Repo/Ayura/Ayura/Calendar/CalendarViewModel.swift ====
-// ==== FILE: /Users/aleksandarsvinarov/Desktop/Repo/Ayura/Ayura/Calendar/CalendarViewModel.swift ====
+// ==== FILE: /Users/aleksandarsvinarov/Desktop/Repo/AyurvedaAsanaYoga/AyurvedaAsanaYoga/Calendar/CalendarViewModel.swift ====
+// ==== FILE: /Users/aleksandarsvinarov/Desktop/Repo/AyurvedaAsanaYoga/AyurvedaAsanaYoga/Calendar/CalendarViewModel.swift ====
 import SwiftUI
 import SwiftData
 import EventKit
@@ -18,17 +18,17 @@ final class CalendarViewModel: ObservableObject {
             return Calendar.current.date(from: components)!
         }
     
-    private let profileCalendarSuffix = " – Ayura"
-    private let profileMetadataEventTitle = "DO_NOT_DELETE_Ayura_Profile_Data"
-    private let sharedShoppingListCalendarTitle = "Shared Shopping List – Ayura"
-    private let selectedCalendarIDsKey = "Ayura_SelectedCalendarIDs"
+    private let profileCalendarSuffix = " – Ayurveda & Asana Yoga"
+    private let profileMetadataEventTitle = "DO_NOT_DELETE_AyurvedaAsanaYoga_Profile_Data"
+    private let sharedShoppingListCalendarTitle = "Shared Shopping List – Ayurveda & Asana Yoga"
+    private let selectedCalendarIDsKey = "AyurvedaAsanaYoga_SelectedCalendarIDs"
     
     // MARK: - EventKit Store & Properties
     var eventStore: EKEventStore = EKEventStore()
     private var recentlyDeletedCalendarIDs = Set<String>()
-    let sharedShoppingListCalendarIDKey = "Ayura_SharedShoppingListCalendarID"
-    private let deletedCalendarIDsKey = "Ayura_DeletedCalendarIDs"
-    private let deletedProfileUUIDsKey = "Ayura_DeletedProfileUUIDs"
+    let sharedShoppingListCalendarIDKey = "AyurvedaAsanaYoga_SharedShoppingListCalendarID"
+    private let deletedCalendarIDsKey = "AyurvedaAsanaYoga_DeletedCalendarIDs"
+    private let deletedProfileUUIDsKey = "AyurvedaAsanaYoga_DeletedProfileUUIDs"
     
     private var deletedCalendarIDs: Set<String> {
         get { Set(UserDefaults.standard.stringArray(forKey: deletedCalendarIDsKey) ?? []) }
@@ -730,7 +730,7 @@ extension CalendarViewModel {
         }
     }
 
-    // ==== FILE: /Users/aleksandarsvinarov/Desktop/Repo/Ayura/Ayura/Calendar/CalendarViewModel.swift ====
+    // ==== FILE: /Users/aleksandarsvinarov/Desktop/Repo/AyurvedaAsanaYoga/AyurvedaAsanaYoga/Calendar/CalendarViewModel.swift ====
 
         @MainActor
         func reconstructProfilesFromCalendars(
@@ -753,12 +753,12 @@ extension CalendarViewModel {
                 deletedCalendarIDs = cids
             }
 
-            let ayuraCalendarsAll = allCals.filter { isProfileCalendarTitle($0.title) }
-            let ayuraCalendars = ayuraCalendarsAll.filter { !deletedCalendarIDs.contains($0.calendarIdentifier) }
+            let ayurvedaasanayogaCalendarsAll = allCals.filter { isProfileCalendarTitle($0.title) }
+            let ayurvedaasanayogaCalendars = ayurvedaasanayogaCalendarsAll.filter { !deletedCalendarIDs.contains($0.calendarIdentifier) }
 
             var reconstructedCount = 0
 
-            for calendar in ayuraCalendars {
+            for calendar in ayurvedaasanayogaCalendars {
                 guard let (profileUUID, payload) = await reconstructProfileData(from: calendar) else { continue }
                 if deletedProfileUUIDs.contains(profileUUID.uuidString) { continue }
                 renameCalendarIfNeeded(calendar, to: "\(payload.name)\(profileCalendarSuffix)")
@@ -935,7 +935,7 @@ extension CalendarViewModel {
         
         if let listProfile = list.profile {
             print("   -> List is PRIVATE to profile '\(listProfile.name)'")
-            let calendarName = "\(listProfile.name) – Ayura Shopping List"
+            let calendarName = "\(listProfile.name) – Ayurveda & Asana Yoga Shopping List"
             if let calendarID = listProfile.shoppingListCalendarID, let existingCal = eventStore.calendar(withIdentifier: calendarID) {
                 print("   ✅ Found existing PRIVATE calendar: \(existingCal.title)")
                 renameCalendarIfNeeded(existingCal, to: calendarName)
@@ -1302,7 +1302,7 @@ extension CalendarViewModel {
         }
         
         if profile.hasSeparateStorage {
-            let calendarName = "\(profile.name) – Ayura Shopping List"
+            let calendarName = "\(profile.name) – Ayurveda & Asana Yoga Shopping List"
             if let calendarID = profile.shoppingListCalendarID, let existingCal = eventStore.calendar(withIdentifier: calendarID) {
                 print("   ✅ Найден существующий ОТДЕЛЬНЫЙ календарь списка покупок: \(existingCal.title)")
                 renameCalendarIfNeeded(existingCal, to: calendarName)

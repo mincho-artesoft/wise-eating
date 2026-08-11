@@ -26,7 +26,7 @@ ARTIFACT_PARTS = [
     ROOT / "Ayura" / "preseeded_db.store.gz.part-aa",
     ROOT / "Ayura" / "preseeded_db.store.gz.part-ab",
 ]
-BUNDLE_ID = "com.ayura.mp3-resolution-gate"
+BUNDLE_ID = "com.ayurvedaasanayoga.mp3-resolution-gate"
 
 
 def checked(arguments, **kwargs):

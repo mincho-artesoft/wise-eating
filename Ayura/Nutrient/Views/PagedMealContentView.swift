@@ -1,4 +1,4 @@
-// FILE: /Users/aleksandarsvinarov/Desktop/Repo/Ayura/Ayura/Nutrient/Views/PagedMealContentView.swift
+// FILE: /Users/aleksandarsvinarov/Desktop/Repo/AyurvedaAsanaYoga/AyurvedaAsanaYoga/Nutrient/Views/PagedMealContentView.swift
 
 import SwiftUI
 

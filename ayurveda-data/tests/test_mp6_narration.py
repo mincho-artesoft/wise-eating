@@ -872,7 +872,7 @@ class MP6NarrationTests(unittest.TestCase):
                 str(self.telemetry_binary),
                 scenario,
                 str(days),
-                "-ayuraPlannerTelemetry",
+                "-ayurvedaasanayogaPlannerTelemetry",
             ],
             cwd=ROOT,
             capture_output=True,

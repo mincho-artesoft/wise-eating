@@ -31,7 +31,7 @@ SOLVER_ADAPTER = (
     / "Ayura"
     / "AI"
     / "MealPlanning"
-    / "DeterministicMealPlanSolver+Ayura.swift"
+    / "DeterministicMealPlanSolver+AyurvedaAsanaYoga.swift"
 )
 
 

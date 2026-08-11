@@ -91,12 +91,12 @@ class SubscriptionManager: ObservableObject {
         defer { isLoading = false }
 
         let ids: [String] = [
-            "Ayura.Remove.Ads.Monthly.v2",
-            "Ayura.Remove.Ads.Yearly.v2",
-            "Ayura.Advanced.Monthly.v2",
-            "Ayura.Advanced.Yearly.v2",
-            "Ayura.Premium.Monthly.v2",
-            "Ayura.Premium.Yearly.v2"
+            "AyurvedaAsanaYoga.Remove.Ads.Monthly.v2",
+            "AyurvedaAsanaYoga.Remove.Ads.Yearly.v2",
+            "AyurvedaAsanaYoga.Advanced.Monthly.v2",
+            "AyurvedaAsanaYoga.Advanced.Yearly.v2",
+            "AyurvedaAsanaYoga.Premium.Monthly.v2",
+            "AyurvedaAsanaYoga.Premium.Yearly.v2"
         ]
 
         print("🟦 [StoreKit] loadProducts() starting. IDs =\n   \(ids.joined(separator: ", "))")

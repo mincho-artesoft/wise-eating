@@ -1,4 +1,4 @@
-// ==== FILE: Ayura/Main/Notification/NotificationDelegate.swift ====
+// ==== FILE: AyurvedaAsanaYoga/Main/Notification/NotificationDelegate.swift ====
 import Foundation
 import UserNotifications
 

@@ -1,4 +1,4 @@
-// FILE: /Users/aleksandarsvinarov/Desktop/Repo/Ayura/Ayura/Fitness/Views/TotalBurnedDetailRingView.swift
+// FILE: /Users/aleksandarsvinarov/Desktop/Repo/AyurvedaAsanaYoga/AyurvedaAsanaYoga/Fitness/Views/TotalBurnedDetailRingView.swift
 import SwiftUI
 import SwiftData
 

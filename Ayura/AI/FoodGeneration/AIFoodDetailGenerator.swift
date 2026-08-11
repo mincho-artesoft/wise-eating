@@ -2279,7 +2279,7 @@ class AIFoodDetailGenerator {
             dto.sterols = mergedReferenceDTO(generated: dto.sterols, reference: copy.sterols)
             dto.minAgeMonths = max(6, reference.minAgeMonths)
             dto.ageProvenance = "catalog-reference"
-            dto.ageSource = "Ayura catalogue: \(reference.name)"
+            dto.ageSource = "Ayurveda & Asana Yoga catalogue: \(reference.name)"
             if let allergens = reference.allergens, !allergens.isEmpty { dto.allergens = allergens }
             onLog?("  🛡️ Nutrition validated from exact catalog reference '\(reference.name)'.")
         }

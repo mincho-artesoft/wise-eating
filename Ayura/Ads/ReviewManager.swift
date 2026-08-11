@@ -3,7 +3,7 @@ import StoreKit
 import SwiftUI
 import UIKit
 
-/// ReviewManager за Ayura
+/// ReviewManager за AyurvedaAsanaYoga
 ///
 /// Условия:
 /// - Поне 5 стартирания на приложението

@@ -18,9 +18,9 @@ struct RootLauncher: View {
                     .modelContainer(container)
                     .transition(.opacity.animation(.easeInOut))
                     .onAppear {
-                        AyuraLaunchProbe.event("root-view-appeared")
+                        AyurvedaAsanaYogaLaunchProbe.event("root-view-appeared")
                         DispatchQueue.main.async {
-                            AyuraLaunchProbe.event("first-interactive-frame")
+                            AyurvedaAsanaYogaLaunchProbe.event("first-interactive-frame")
                         }
                     }
             } else {
@@ -47,7 +47,7 @@ struct RootLauncher: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
         .task(priority: .userInitiated) {
-            AyuraLaunchProbe.event("root-task-begin")
+            AyurvedaAsanaYogaLaunchProbe.event("root-task-begin")
             // 1. Намиране на цветове (Theme)
             let viewToRender = ThemeBackgroundView()
             let snapshot = viewToRender.renderAsImage(size: UIScreen.main.bounds.size)
@@ -65,7 +65,7 @@ struct RootLauncher: View {
                 effectManager.isLightRowTextColor = prefersLightForeground
             }
             print("🎨 RootLauncher: Initial snapshot taken and accent color set.")
-            AyuraLaunchProbe.event("theme-snapshot-end")
+            AyurvedaAsanaYogaLaunchProbe.event("theme-snapshot-end")
 
             // 2. Seeding (Попълване на базата и създаване на Cache Blob)
             await SeedManager.seedIfNeeded(container: container)
@@ -84,10 +84,10 @@ struct RootLauncher: View {
             // FoodSearch performs the same version-checked load when its view opens.
             // Keeping the 28 MB cache decode off the launch path makes first render
             // independent of a feature the user may not open in this session.
-            AyuraLaunchProbe.event("search-index-load-deferred")
+            AyurvedaAsanaYogaLaunchProbe.event("search-index-load-deferred")
                         
             let modelContext = container.mainContext
-            AyuraLaunchProbe.event("calendar-load-begin")
+            AyurvedaAsanaYogaLaunchProbe.event("calendar-load-begin")
             let calendarAccessGranted = await CalendarViewModel.shared.requestCalendarAccessIfNeeded()
             
             if calendarAccessGranted {
@@ -103,14 +103,14 @@ struct RootLauncher: View {
             } else {
                 print("Calendar access not granted. Skipping profile reconstruction from calendars.")
             }
-            AyuraLaunchProbe.event("calendar-load-end")
+            AyurvedaAsanaYogaLaunchProbe.event("calendar-load-end")
 
             // 4. Готово - показваме UI
             if !isReady {
                 withAnimation {
                     isReady = true
                 }
-                AyuraLaunchProbe.event("root-ready-set")
+                AyurvedaAsanaYogaLaunchProbe.event("root-ready-set")
             }
         }
     }

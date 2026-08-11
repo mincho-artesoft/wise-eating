@@ -7,11 +7,11 @@ enum AdsConfiguration {
     static let shouldShowAds = false
 
     enum Unit: String {
-        case appOpen = "AyuraAdMobAppOpenAdUnitID"
-        case banner = "AyuraAdMobBannerAdUnitID"
-        case interstitial = "AyuraAdMobInterstitialAdUnitID"
-        case native = "AyuraAdMobNativeAdUnitID"
-        case rewarded = "AyuraAdMobRewardedAdUnitID"
+        case appOpen = "AyurvedaAsanaYogaAdMobAppOpenAdUnitID"
+        case banner = "AyurvedaAsanaYogaAdMobBannerAdUnitID"
+        case interstitial = "AyurvedaAsanaYogaAdMobInterstitialAdUnitID"
+        case native = "AyurvedaAsanaYogaAdMobNativeAdUnitID"
+        case rewarded = "AyurvedaAsanaYogaAdMobRewardedAdUnitID"
     }
 
     static func adUnitID(for unit: Unit) -> String? {

@@ -1,4 +1,4 @@
-// FILE: /Users/aleksandarsvinarov/Desktop/Repo/Ayura/Ayura/ShoppingList/Views/ShoppingListView.swift
+// FILE: /Users/aleksandarsvinarov/Desktop/Repo/AyurvedaAsanaYoga/AyurvedaAsanaYoga/ShoppingList/Views/ShoppingListView.swift
 
 import SwiftUI
 import SwiftData

@@ -1,4 +1,4 @@
-// ==== FILE: /Users/aleksandarsvinarov/Desktop/Repo/Ayura/Ayura/ShoppingList/Views/ShoppingListDetailView.swift ====
+// ==== FILE: /Users/aleksandarsvinarov/Desktop/Repo/AyurvedaAsanaYoga/AyurvedaAsanaYoga/ShoppingList/Views/ShoppingListDetailView.swift ====
 import SwiftUI
 import SwiftData
 import EventKit

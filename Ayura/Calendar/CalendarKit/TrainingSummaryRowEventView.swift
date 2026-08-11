@@ -1,12 +1,12 @@
 //
 //  TrainingSummaryRowEventView.swift
-//  Ayura
+//  AyurvedaAsanaYoga
 //
 //  Created by Aleksandar Svinarov on 17/9/25.
 //
 
 
-// FILE: /Users/aleksandarsvinarov/Desktop/Repo/Ayura/Ayura/Fitness/Views/TrainingSummaryRowEventView.swift
+// FILE: /Users/aleksandarsvinarov/Desktop/Repo/AyurvedaAsanaYoga/AyurvedaAsanaYoga/Fitness/Views/TrainingSummaryRowEventView.swift
 import SwiftUI
 import UIKit
 

@@ -1,4 +1,4 @@
-// ==== FILE: /Ayura/Ads/NativeAd/NativeAdLoader.swift ====
+// ==== FILE: /AyurvedaAsanaYoga/Ads/NativeAd/NativeAdLoader.swift ====
 import SwiftUI
 import UIKit
 #if canImport(GoogleMobileAds)

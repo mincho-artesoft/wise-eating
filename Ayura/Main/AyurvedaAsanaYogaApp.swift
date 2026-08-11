@@ -1,4 +1,4 @@
-// ==== FILE: AyuraApp.swift ====
+// ==== FILE: AyurvedaAsanaYogaApp.swift ====
 import SwiftUI
 import SwiftData
 #if canImport(GoogleMobileAds)
@@ -6,7 +6,7 @@ import GoogleMobileAds
 #endif
 
 @main
-struct AyuraApp: App {
+struct AyurvedaAsanaYogaApp: App {
     private static var isAIGenerationSmokeTest: Bool {
         #if DEBUG
         ProcessInfo.processInfo.arguments.contains("-aiGenerationSmokeTest")

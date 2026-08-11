@@ -180,7 +180,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ayura.validation.VAL1DeviceDriver;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ayurvedaasanayoga.validation.VAL1DeviceDriver;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -197,7 +197,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ayura.validation.VAL1DeviceDriverUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ayurvedaasanayoga.validation.VAL1DeviceDriverUITests;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -274,7 +274,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ayura.validation.VAL1DeviceDriver;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ayurvedaasanayoga.validation.VAL1DeviceDriver;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -291,7 +291,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ayura.validation.VAL1DeviceDriverUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ayurvedaasanayoga.validation.VAL1DeviceDriverUITests;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";

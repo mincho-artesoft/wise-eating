@@ -236,7 +236,7 @@ struct MP4IntentHarness {
     def run_harness(self, scenario, *arguments, telemetry=False):
         command = [str(self.binary), scenario, *map(str, arguments)]
         if telemetry:
-            command.append("-ayuraPlannerTelemetry")
+            command.append("-ayurvedaasanayogaPlannerTelemetry")
         result = subprocess.run(
             command,
             cwd=ROOT,

@@ -4,7 +4,7 @@ import FoundationModels
 
 actor PlannerTelemetry {
     static let shared = PlannerTelemetry()
-    nonisolated static let isEnabled = ProcessInfo.processInfo.arguments.contains("-ayuraPlannerTelemetry")
+    nonisolated static let isEnabled = ProcessInfo.processInfo.arguments.contains("-ayurvedaasanayogaPlannerTelemetry")
 
     private struct SiteStats: Codable {
         var sessions = 0

@@ -788,7 +788,7 @@ struct MP3ResolutionHarness {
             / "Ayura"
             / "AI"
             / "MealPlanning"
-            / "DeterministicMealPlanSolver+Ayura.swift"
+            / "DeterministicMealPlanSolver+AyurvedaAsanaYoga.swift"
         ).read_text(encoding="utf-8")
         self.assertIn(
             "guard referenceWeight > 0",

@@ -1,4 +1,4 @@
-// ==== FILE: Ayura/Main/Notification/NavigationCoordinator.swift ====
+// ==== FILE: AyurvedaAsanaYoga/Main/Notification/NavigationCoordinator.swift ====
 import Foundation
 import SwiftUI
 

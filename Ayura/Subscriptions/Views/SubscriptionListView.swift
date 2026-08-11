@@ -21,7 +21,7 @@ struct SubscriptionListView: View {
 
     private var privacyPolicyURL: URL? {
         guard
-            let value = Bundle.main.object(forInfoDictionaryKey: "AyuraPrivacyPolicyURL") as? String,
+            let value = Bundle.main.object(forInfoDictionaryKey: "AyurvedaAsanaYogaPrivacyPolicyURL") as? String,
             !value.isEmpty
         else {
             return nil

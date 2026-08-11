@@ -186,7 +186,7 @@ struct DailyMealPlanView: View {
     }
 
    
-    // FILE: /Users/aleksandarsvinarov/Desktop/Repo/Ayura/Ayura/Meal/Views/DailyMealPlanView.swift
+    // FILE: /Users/aleksandarsvinarov/Desktop/Repo/AyurvedaAsanaYoga/AyurvedaAsanaYoga/Meal/Views/DailyMealPlanView.swift
 
     @ViewBuilder
     private func mealTabButton(for meal: MealPlanMeal, in day: MealPlanDay, colorMap: [String: Color]) -> some View {

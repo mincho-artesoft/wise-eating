@@ -1,4 +1,4 @@
-// FILE: /Users/aleksandarsvinarov/Desktop/Repo/Ayura/Ayura/CustomViews/GlassEffects/EffectControlPanelView.swift
+// FILE: /Users/aleksandarsvinarov/Desktop/Repo/AyurvedaAsanaYoga/AyurvedaAsanaYoga/CustomViews/GlassEffects/EffectControlPanelView.swift
 import SwiftUI
 
 struct EffectControlPanelView: View {

@@ -6,7 +6,7 @@ enum SeedManager {
 
     // MARK: – Public entry point
     static func seedIfNeeded(container: ModelContainer) async {
-        AyuraLaunchProbe.event("seed-checks-begin")
+        AyurvedaAsanaYogaLaunchProbe.event("seed-checks-begin")
         print("🚀 Starting database seed process if needed...")
         let ctx = GlobalState.modelContext!
         ctx.autosaveEnabled = false
@@ -18,9 +18,9 @@ enum SeedManager {
         await seedReferenceVitaminsIfNeeded(context: ctx)
         await seedReferenceMineralsIfNeeded(context: ctx)
         await seedFoodsIfNeeded(context: ctx)
-        AyuraLaunchProbe.event("ayurveda-check-begin")
+        AyurvedaAsanaYogaLaunchProbe.event("ayurveda-check-begin")
         let ayurvedaChangedSearchableFoods = await seedAyurvedaIfNeeded(context: ctx)
-        AyuraLaunchProbe.event("ayurveda-check-end")
+        AyurvedaAsanaYogaLaunchProbe.event("ayurveda-check-end")
 
         do {
             if ctx.hasChanges {
@@ -42,7 +42,7 @@ enum SeedManager {
 
         ctx.autosaveEnabled = true
         print("✅ Seeding process completed.")
-        AyuraLaunchProbe.event("seed-checks-end")
+        AyurvedaAsanaYogaLaunchProbe.event("seed-checks-end")
     }
 
     // MARK: – Yoga

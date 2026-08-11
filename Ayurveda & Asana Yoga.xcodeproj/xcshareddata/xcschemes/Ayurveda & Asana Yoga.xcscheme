@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "508496242DE5D05D0038A7D5"
-               BuildableName = "Ayura.app"
-               BlueprintName = "Ayura"
-               ReferencedContainer = "container:Ayura.xcodeproj">
+               BuildableName = "Ayurveda &amp; Asana Yoga.app"
+               BlueprintName = "Ayurveda &amp; Asana Yoga"
+               ReferencedContainer = "container:Ayurveda &amp; Asana Yoga.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "508496242DE5D05D0038A7D5"
-            BuildableName = "Ayura.app"
-            BlueprintName = "Ayura"
-            ReferencedContainer = "container:Ayura.xcodeproj">
+            BuildableName = "Ayurveda &amp; Asana Yoga.app"
+            BlueprintName = "Ayurveda &amp; Asana Yoga"
+            ReferencedContainer = "container:Ayurveda &amp; Asana Yoga.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
@@ -74,9 +74,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "508496242DE5D05D0038A7D5"
-            BuildableName = "Ayura.app"
-            BlueprintName = "Ayura"
-            ReferencedContainer = "container:Ayura.xcodeproj">
+            BuildableName = "Ayurveda &amp; Asana Yoga.app"
+            BlueprintName = "Ayurveda &amp; Asana Yoga"
+            ReferencedContainer = "container:Ayurveda &amp; Asana Yoga.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

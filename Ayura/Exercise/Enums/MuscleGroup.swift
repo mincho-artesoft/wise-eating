@@ -1,4 +1,4 @@
-// ==== FILE: /Users/aleksandarsvinarov/Desktop/Repo/Ayura/Ayura/Exercise/Enums/MuscleGroup.swift ====
+// ==== FILE: /Users/aleksandarsvinarov/Desktop/Repo/AyurvedaAsanaYoga/AyurvedaAsanaYoga/Exercise/Enums/MuscleGroup.swift ====
 import Foundation
 
 /// Represents a major muscle group targeted by an exercise.

@@ -156,7 +156,7 @@ class YogaDataTests(unittest.TestCase):
         self.assertTrue(all("sports" not in row for row in self.asanas))
         self.assertFalse((ROOT / "Ayura" / "Legacy" / "sports.json").exists())
         self.assertFalse((ROOT / "Ayura" / "Legacy" / "workouts.json").exists())
-        self.assertFalse((ROOT / "Ayura" / "AyuraTemplates.store").exists())
+        self.assertFalse((ROOT / "Ayura" / "AyurvedaAsanaYogaTemplates.store").exists())
         self.assertLess((YOGA / "asanas.json").stat().st_size, 90_000_000)
         self.assertLess((YOGA / "sequences.json").stat().st_size, 90_000_000)
 

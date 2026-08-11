@@ -555,12 +555,12 @@ extension Notification.Name {
 
 @MainActor
 enum AyurvedaConstitutionStore {
-  private static let recordsKey = "ayura.ayurveda.constitution.records.v1"
+  private static let recordsKey = "ayurvedaasanayoga.ayurveda.constitution.records.v1"
   private static let deletionDatesKey =
-    "ayura.ayurveda.constitution.deletionDates.v1"
+    "ayurvedaasanayoga.ayurveda.constitution.deletionDates.v1"
   private static let checkInSnoozeDatesKey =
-    "ayura.ayurveda.constitution.checkInSnoozeDates.v1"
-  private static let activeProfileKey = "ayura.ayurveda.constitution.activeProfile"
+    "ayurvedaasanayoga.ayurveda.constitution.checkInSnoozeDates.v1"
+  private static let activeProfileKey = "ayurvedaasanayoga.ayurveda.constitution.activeProfile"
 
   static func record(for profileID: UUID) -> AyurvedaConstitutionRecord? {
     records().first { $0.profileID == profileID }

@@ -1,4 +1,4 @@
-// FILE: /Users/aleksandarsvinarov/Desktop/Repo/Ayura/Ayura/Fitness/Views/NetBalanceDetailRingView.swift
+// FILE: /Users/aleksandarsvinarov/Desktop/Repo/AyurvedaAsanaYoga/AyurvedaAsanaYoga/Fitness/Views/NetBalanceDetailRingView.swift
 import SwiftUI
 import SwiftData
 

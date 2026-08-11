@@ -1,4 +1,4 @@
-// FILE: /Users/aleksandarsvinarov/Desktop/Repo/Ayura/Ayura/Nutrient/Views/MealSelectionForPlanView.swift
+// FILE: /Users/aleksandarsvinarov/Desktop/Repo/AyurvedaAsanaYoga/AyurvedaAsanaYoga/Nutrient/Views/MealSelectionForPlanView.swift
 
 import SwiftUI
 import SwiftData

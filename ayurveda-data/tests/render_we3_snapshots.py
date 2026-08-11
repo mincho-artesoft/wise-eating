@@ -16,7 +16,7 @@ from PIL import Image, ImageChops, ImageStat
 
 ROOT = Path(__file__).resolve().parents[2]
 BASELINES = ROOT / "ayurveda-data/tests/snapshots/we3"
-BUNDLE_ID = "com.ayura.we3snapshots"
+BUNDLE_ID = "com.ayurvedaasanayoga.we3snapshots"
 SNAPSHOT_NAMES = [
     "ayurveda-light-default.png",
     "ayurveda-dark-default.png",

@@ -5,7 +5,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
-APP = ROOT / "Ayura/Main/AyuraApp.swift"
+APP = ROOT / "Ayura/Main/AyurvedaAsanaYogaApp.swift"
 EFFECT_MANAGER = ROOT / "Ayura/CustomViews/GlassEffects/EffectManager.swift"
 THEME_MANAGER = ROOT / "Ayura/CustomViews/ThemeManager/ThemeManager.swift"
 DISPLAY = ROOT / "Ayura/Ayurveda/Views/AyurvedaDisplay.swift"

@@ -1,4 +1,4 @@
-// ==== FILE: /Users/aleksandarsvinarov/Desktop/as/Ayura-clean/Ayura/Profile/Models/UserSettings.swift ====
+// ==== FILE: /Users/aleksandarsvinarov/Desktop/as/AyurvedaAsanaYoga-clean/AyurvedaAsanaYoga/Profile/Models/UserSettings.swift ====
 import Combine
 import SwiftData
 import Foundation

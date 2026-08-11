@@ -391,7 +391,7 @@ class FoodConceptTests(unittest.TestCase):
             {path.relative_to(ROOT).as_posix() for path in consumers},
             {
                 "Ayura/AI/MealPlanning/"
-                "DeterministicMealPlanSolver+Ayura.swift",
+                "DeterministicMealPlanSolver+AyurvedaAsanaYoga.swift",
                 "Ayura/AI/MealPlanning/USDAWeeklyMealPlanner.swift",
                 "Ayura/AI/ReceptGeneration/AIRecipeGenerator.swift",
             },

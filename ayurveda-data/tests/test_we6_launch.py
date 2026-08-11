@@ -54,7 +54,7 @@ class WE6LaunchTests(unittest.TestCase):
     def test_launch_probe_is_opt_in(self):
         source = DATABASE_SETUP.read_text(encoding="utf-8")
         self.assertIn('arguments.contains(', source)
-        self.assertIn('"-ayuraLaunchProfile"', source)
+        self.assertIn('"-ayurvedaasanayogaLaunchProfile"', source)
         self.assertIn("os_signpost(.event", source)
 
     def test_warm_ayurveda_version_check_avoids_full_seed_decode(self):

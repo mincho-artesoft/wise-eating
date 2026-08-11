@@ -1,4 +1,4 @@
-// ==== FILE: Ayura/AI/ExerciseGeneration/AIExerciseGenerableEnums.swift ====
+// ==== FILE: AyurvedaAsanaYoga/AI/ExerciseGeneration/AIExerciseGenerableEnums.swift ====
 import Foundation
 import FoundationModels
 

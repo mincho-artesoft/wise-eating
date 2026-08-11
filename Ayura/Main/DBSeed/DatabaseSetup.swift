@@ -1,22 +1,22 @@
-// ==== FILE: /Users/aleksandarsvinarov/Desktop/as/Ayura-clean/Ayura/Main/DBSeed/DatabaseSetup.swift ====
+// ==== FILE: /Users/aleksandarsvinarov/Desktop/as/AyurvedaAsanaYoga-clean/AyurvedaAsanaYoga/Main/DBSeed/DatabaseSetup.swift ====
 import SwiftData
 import Foundation
 import os
 
-enum AyuraLaunchProbe {
+enum AyurvedaAsanaYogaLaunchProbe {
     private static let signpostLog = OSLog(
-        subsystem: "Ayura.Arte-Soft",
+        subsystem: "AyurvedaAsanaYoga.Arte-Soft",
         category: .pointsOfInterest
     )
     private static let isEnabled = ProcessInfo.processInfo.arguments.contains(
-        "-ayuraLaunchProfile"
+        "-ayurvedaasanayogaLaunchProfile"
     )
 
     static func event(_ name: StaticString) {
         guard isEnabled else { return }
         os_signpost(.event, log: signpostLog, name: name)
         print(
-            "AYURA_PROFILE|\(name)|"
+            "AYURVEDAASANAYOGA_PROFILE|\(name)|"
                 + String(format: "%.6f", ProcessInfo.processInfo.systemUptime)
         )
     }
@@ -26,8 +26,8 @@ enum AyuraLaunchProbe {
 struct DatabaseSetup {
     
     static func createContainer() -> ModelContainer {
-        AyuraLaunchProbe.event("database-setup-begin")
-        // 1. Дефинираме типовете за ОСНОВНАТА база (Ayura.store)
+        AyurvedaAsanaYogaLaunchProbe.event("database-setup-begin")
+        // 1. Дефинираме типовете за ОСНОВНАТА база (AyurvedaAsanaYoga.store)
         let mainTypes: [any PersistentModel.Type] = [
             Profile.self, UserSettings.self,
             FoodItem.self, Mineral.self,
@@ -69,9 +69,9 @@ struct DatabaseSetup {
             print("🚀 SwiftData Path: \(appSupportURL.path())")
             
             // Основна база
-            let mainStoreURL = appSupportURL.appendingPathComponent("Ayura.store")
+            let mainStoreURL = appSupportURL.appendingPathComponent("AyurvedaAsanaYoga.store")
             let mainConfig = ModelConfiguration(
-                "AyuraDefault",
+                "AyurvedaAsanaYogaDefault",
                 schema: mainSchema,
                 url: mainStoreURL
             )
@@ -81,9 +81,9 @@ struct DatabaseSetup {
             let usePreSeededDatabaseCopy = true
             
             // Използваме ключ, за да копираме само веднъж при първо стартиране на тази версия
-            let didCopyDatabaseKey = "Ayura_DidCopyPreSeededDatabase_v1"
+            let didCopyDatabaseKey = "AyurvedaAsanaYoga_DidCopyPreSeededDatabase_v1"
 
-            AyuraLaunchProbe.event("preseed-check-begin")
+            AyurvedaAsanaYogaLaunchProbe.event("preseed-check-begin")
             if usePreSeededDatabaseCopy && !UserDefaults.standard.bool(forKey: didCopyDatabaseKey) {
                 print("🏁 First launch with pre-seed logic. Preparing to copy databases…")
                 let fm = FileManager.default
@@ -104,7 +104,7 @@ struct DatabaseSetup {
                 }
 
                 do {
-                    // PreseedLoader подготвя Ayura.store от архивирания seed.
+                    // PreseedLoader подготвя AyurvedaAsanaYoga.store от архивирания seed.
                     try PreseedLoader.preparePreseededStore(to: mainStoreURL)
                     print("✅ Successfully prepared pre-seeded MAIN database.")
                 } catch {
@@ -117,15 +117,15 @@ struct DatabaseSetup {
             } else if usePreSeededDatabaseCopy {
                 print("🏁 Database already pre-seeded in a previous launch. Skipping copy.")
             }
-            AyuraLaunchProbe.event("preseed-check-end")
+            AyurvedaAsanaYogaLaunchProbe.event("preseed-check-end")
             
             // Създаваме контейнера само с основната конфигурация.
-            AyuraLaunchProbe.event("model-container-open-begin")
+            AyurvedaAsanaYogaLaunchProbe.event("model-container-open-begin")
             let container = try ModelContainer(
                 for: mainSchema,
                 configurations: [mainConfig]
             )
-            AyuraLaunchProbe.event("model-container-open-end")
+            AyurvedaAsanaYogaLaunchProbe.event("model-container-open-end")
             return container
             
         } catch {
@@ -134,7 +134,7 @@ struct DatabaseSetup {
     }
 
     private static func removeObsoleteTemplateStore(from directory: URL) {
-        let baseName = "AyuraTemplates.store"
+        let baseName = "AyurvedaAsanaYogaTemplates.store"
         let fileManager = FileManager.default
         for filename in [baseName, baseName + "-wal", baseName + "-shm"] {
             let url = directory.appendingPathComponent(filename)

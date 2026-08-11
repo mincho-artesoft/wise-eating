@@ -75,7 +75,7 @@ private struct FoodSearchViewContent: View {
             filtersView
             contentView
         }
-        .navigationTitle("Ayura")
+        .navigationTitle("Ayurveda & Asana Yoga")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             if engine.displayedResults.isEmpty {
