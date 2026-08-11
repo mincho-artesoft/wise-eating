@@ -93,54 +93,126 @@ enum SeedManager {
     // MARK: - Barcodes
     private static func seedBarcodesIfNeeded(context ctx: ModelContext) async {
         print("-> Checking for Barcodes (Vocabulary & Buckets)...")
-        guard databaseIsEmpty(entity: ProductBucket.self, context: ctx),
-              databaseIsEmpty(entity: VocabularyEntry.self, context: ctx) else {
-            print("   Barcodes already seeded, skipping.")
+        let versionKey = "barcodeCatalogVersion"
+        guard let metadataURL = Bundle.main.url(
+            forResource: "barcode_catalog_metadata",
+            withExtension: "json"
+        ) else {
+            assertionFailure("barcode_catalog_metadata.json not found")
             return
         }
 
-        print("   Seeding Vocabulary from vocabulary.json...")
-        guard let vocabURL = Bundle.main.url(forResource: "vocabulary", withExtension: "json") else {
-            assertionFailure("vocabulary.json not found"); return
-        }
-
         do {
+            let metadataData = try Data(contentsOf: metadataURL)
+            let metadata = try JSONDecoder().decode(
+                BarcodeCatalogMetadata.self,
+                from: metadataData
+            )
+            guard metadata.schemaVersion == 1 else {
+                throw BarcodeCatalogSeedError.unsupportedSchema(
+                    metadata.schemaVersion
+                )
+            }
+            let vocabularyCount = try ctx.fetchCount(
+                FetchDescriptor<VocabularyEntry>()
+            )
+            let bucketCount = try ctx.fetchCount(
+                FetchDescriptor<ProductBucket>()
+            )
+            let catalogueIsInstalled =
+                vocabularyCount == metadata.vocabularyCount
+                && bucketCount == metadata.bucketCount
+
+            if catalogueIsInstalled {
+                if UserDefaults.standard.integer(forKey: versionKey)
+                    < metadata.catalogVersion {
+                    UserDefaults.standard.set(
+                        metadata.catalogVersion,
+                        forKey: versionKey
+                    )
+                }
+                print(
+                    "   Barcode catalogue v\(metadata.catalogVersion) verified: "
+                        + "\(metadata.productCount) products."
+                )
+                return
+            }
+
+            guard let vocabURL = Bundle.main.url(
+                forResource: "vocabulary",
+                withExtension: "json"
+            ), let bucketsURL = Bundle.main.url(
+                forResource: "product_buckets",
+                withExtension: "json"
+            ) else {
+                assertionFailure("barcode seed resources not found")
+                return
+            }
+
+            print(
+                "   Updating barcode catalogue to v\(metadata.catalogVersion) "
+                    + "(\(metadata.productCount) products)..."
+            )
+            try deleteAll(entity: ProductBucket.self, context: ctx)
+            try deleteAll(entity: VocabularyEntry.self, context: ctx)
+
+            print("   Seeding Vocabulary from vocabulary.json...")
             let vocabData = try Data(contentsOf: vocabURL)
             let decodedVocab = try JSONDecoder().decode([VocabularySeedDTO].self, from: vocabData)
-            for row in decodedVocab {
+            for (index, row) in decodedVocab.enumerated() {
                 let entry = VocabularyEntry(
                     id: row.id,
                     tokenIndex: row.tokenIndex,
                     word: row.word
                 )
                 ctx.insert(entry)
+                if (index + 1).isMultiple(of: 10_000) {
+                    try ctx.save()
+                }
             }
-            print("   ✅ Seeded vocabulary entries.")
-        } catch {
-            print("   ❌ Vocabulary seeding failed: \(error)")
-            return
-        }
+            if ctx.hasChanges { try ctx.save() }
+            print("   ✅ Seeded \(decodedVocab.count) vocabulary entries.")
 
-        print("   Seeding Product Buckets from product_buckets.json...")
-        guard let bucketsURL = Bundle.main.url(forResource: "product_buckets", withExtension: "json") else {
-            assertionFailure("product_buckets.json not found"); return
-        }
-
-        do {
+            print("   Seeding Product Buckets from product_buckets.json...")
             let bucketsData = try Data(contentsOf: bucketsURL)
             let decodedBuckets = try JSONDecoder().decode([ProductBucketSeedDTO].self, from: bucketsData)
 
-            for row in decodedBuckets {
+            for (index, row) in decodedBuckets.enumerated() {
                 let bucket = ProductBucket(
                     id: row.id,
                     bucketKey: row.bucketKey,
                     compressedData: row.compressedData
                 )
                 ctx.insert(bucket)
+                if (index + 1).isMultiple(of: 1_000) {
+                    try ctx.save()
+                }
             }
+            if ctx.hasChanges { try ctx.save() }
+
+            let installedVocabularyCount = try ctx.fetchCount(
+                FetchDescriptor<VocabularyEntry>()
+            )
+            let installedBucketCount = try ctx.fetchCount(
+                FetchDescriptor<ProductBucket>()
+            )
+            guard installedVocabularyCount == metadata.vocabularyCount,
+                  installedBucketCount == metadata.bucketCount else {
+                throw BarcodeCatalogSeedError.countMismatch(
+                    vocabulary: installedVocabularyCount,
+                    buckets: installedBucketCount
+                )
+            }
+            UserDefaults.standard.set(
+                metadata.catalogVersion,
+                forKey: versionKey
+            )
+            ProductDataManager.shared.resetCatalogCache()
             print("   ✅ Seeded \(decodedBuckets.count) product buckets.")
         } catch {
-            print("   ❌ Product bucket seeding failed: \(error)")
+            ctx.rollback()
+            print("   ❌ Barcode catalogue update failed: \(error)")
+            assertionFailure("Barcode catalogue update failed: \(error)")
         }
     }
 
@@ -275,6 +347,20 @@ enum SeedManager {
         ((try? ctx.fetchCount(FetchDescriptor<T>())) ?? 0) == 0
     }
 
+    private static func deleteAll<T: PersistentModel>(
+        entity: T.Type,
+        context ctx: ModelContext
+    ) throws {
+        while true {
+            var descriptor = FetchDescriptor<T>()
+            descriptor.fetchLimit = 10_000
+            let rows = try ctx.fetch(descriptor)
+            guard !rows.isEmpty else { return }
+            for row in rows { ctx.delete(row) }
+            try ctx.save()
+        }
+    }
+
     private static func toMg(value: Double, unit: String) -> Double {
         switch unit.lowercased() {
         case "g":            return value * 1_000
@@ -295,4 +381,17 @@ private struct ProductBucketSeedDTO: Decodable {
     let id: UUID
     let bucketKey: String
     let compressedData: String
+}
+
+private struct BarcodeCatalogMetadata: Decodable {
+    let schemaVersion: Int
+    let catalogVersion: Int
+    let productCount: Int
+    let vocabularyCount: Int
+    let bucketCount: Int
+}
+
+private enum BarcodeCatalogSeedError: Error {
+    case unsupportedSchema(Int)
+    case countMismatch(vocabulary: Int, buckets: Int)
 }

@@ -22,7 +22,8 @@ class ScannedItem: ObservableObject, @preconcurrency Identifiable {
     func performProductLookup(container: ModelContainer) {
         guard entity.category?.contains("GTIN") == true else { return }
 
-        let gtin = self.entity.title
+        let parsed = BarcodeParser.parse(self.entity.title)
+        let gtin = parsed.extras["gtin"] ?? self.entity.title
 
         Task {
             // 1. Задаваме първоначално състояние за зареждане на Main Actor.

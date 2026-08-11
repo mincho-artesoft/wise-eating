@@ -24,25 +24,68 @@ final class ProductDataManager {
     
     // --- CHANGE 4: This function is now ASYNC ---
     public func findProductName(for gtin: String) async -> String? {
-        let normalizedGTIN = Self.normalizedDecimal(gtin)
-        guard !normalizedGTIN.isEmpty,
-              let buckets = try? modelContext.fetch(FetchDescriptor<ProductBucket>()),
-              let bucket = buckets
-                .filter({ Self.compareDecimal($0.bucketKey, normalizedGTIN) != .orderedDescending })
-                .max(by: { Self.compareDecimal($0.bucketKey, $1.bucketKey) == .orderedAscending })
+        let candidates = Self.lookupCandidates(for: gtin)
+        guard !candidates.isEmpty,
+              let buckets = try? modelContext.fetch(FetchDescriptor<ProductBucket>())
         else {
             print("DEBUG: Could not find any bucket for GTIN \(gtin).")
             return nil
         }
-        
-        print("DEBUG: Found bucket with key \(bucket.bucketKey) for target GTIN \(gtin).")
 
-        guard let tokenIDs = getTokenIDs(for: gtin, from: bucket) else {
-            return nil
+        for candidate in candidates {
+            let normalizedCandidate = Self.normalizedDecimal(candidate)
+            guard let bucket = buckets
+                .filter({
+                    Self.compareDecimal($0.bucketKey, normalizedCandidate)
+                        != .orderedDescending
+                })
+                .max(by: {
+                    Self.compareDecimal($0.bucketKey, $1.bucketKey)
+                        == .orderedAscending
+                })
+            else {
+                continue
+            }
+            guard let tokenIDs = getTokenIDs(for: candidate, from: bucket) else {
+                continue
+            }
+            return await reconstructName(from: tokenIDs)
         }
-        
-        // The call to reconstructName is now awaited
-        return await reconstructName(from: tokenIDs)
+
+        print("DEBUG: No local product found for GTIN candidates \(candidates).")
+        return nil
+    }
+
+    /// OFF stores most UPC-A values in their zero-prefixed EAN-13 form, while
+    /// AVFoundation can return the 12-digit UPC-A printed on the package. GS1
+    /// payloads similarly carry a 14-digit, zero-prefixed GTIN. Try the exact
+    /// scan first, followed by equivalent zero-prefix representations.
+    private static func lookupCandidates(for value: String) -> [String] {
+        let raw = value.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !raw.isEmpty, raw.allSatisfy(\.isNumber) else { return [] }
+
+        var result: [String] = []
+        func append(_ candidate: String) {
+            guard !candidate.isEmpty, !result.contains(candidate) else { return }
+            result.append(candidate)
+        }
+
+        append(raw)
+        switch raw.count {
+        case 12:
+            append("0" + raw)
+        case 13 where raw.first == "0":
+            append(String(raw.dropFirst()))
+        case 14 where raw.first == "0":
+            let gtin13 = String(raw.dropFirst())
+            append(gtin13)
+            if gtin13.first == "0" {
+                append(String(gtin13.dropFirst()))
+            }
+        default:
+            break
+        }
+        return result
     }
 
     private static func normalizedDecimal(_ value: String) -> String {
@@ -87,6 +130,10 @@ final class ProductDataManager {
         
         bucketCache.setObject(bucketContent as NSDictionary, forKey: cacheKey)
         return bucketContent[gtin]
+    }
+
+    func resetCatalogCache() {
+        bucketCache.removeAllObjects()
     }
     
     // --- CHANGE 5: The ENTIRE reconstructName function is REWRITTEN ---
