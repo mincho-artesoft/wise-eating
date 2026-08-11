@@ -7,6 +7,14 @@ import GoogleMobileAds
 
 @main
 struct AyuraApp: App {
+    private static var isAIGenerationSmokeTest: Bool {
+        #if DEBUG
+        ProcessInfo.processInfo.arguments.contains("-aiGenerationSmokeTest")
+        #else
+        false
+        #endif
+    }
+
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     @Environment(\.scenePhase) private var scenePhase
     @ObservedObject private var subscriptionManager = SubscriptionManager.shared
@@ -24,6 +32,10 @@ struct AyuraApp: App {
             
             Task { @MainActor in GlobalState.updateAIAvailability() }
             UNUserNotificationCenter.current().delegate = notificationDelegate
+            if Self.isAIGenerationSmokeTest {
+                print("AI_SMOKE|APP|isolated-launch-mode")
+                return
+            }
             AIManager.shared.setup(container: container)
             Task { @MainActor in await CalendarViewModel.shared.ensureSharedShoppingListCalendarExists() }
             
@@ -61,6 +73,7 @@ struct AyuraApp: App {
             RootLauncher(container: container)
                 .preferredColorScheme(effectManager.appColorScheme)
                 .onChange(of: scenePhase) { _, newPhase in
+                    guard !Self.isAIGenerationSmokeTest else { return }
                     // ... (старата логика за scenePhase остава същата) ...
                     switch newPhase {
                     case .active:

@@ -479,6 +479,62 @@ enum AyurvedaUserProfileStore {
     }
   }
 
+  /// Persists the complete AI payload while allowing the editor's seven
+  /// directly editable Ayurveda fields to remain the final authority.
+  static func upsert(
+    generated: AyurvedaGeneratedFoodDTO,
+    editorForm: AyurvedaForm,
+    for food: FoodItem,
+    context: ModelContext
+  ) {
+    let value = generated.overridingEditableFields(with: editorForm)
+    let existing = profile(foodId: food.id, context: context)
+    let profile = existing ?? makeProfile(form: editorForm, food: food)
+
+    profile.kind = "user"
+    profile.foodId = food.id
+    profile.foodIsPlaceholder = false
+    profile.name = food.name
+    profile.doshaVata = value.doshaVata
+    profile.doshaPitta = value.doshaPitta
+    profile.doshaKapha = value.doshaKapha
+    profile.seasons = value.seasons
+    profile.timeOfDay = value.timeOfDay
+    profile.viruddha = value.viruddha
+    profile.provenance = ["ai-generated", "apple-foundation-models"]
+    profile.confidenceAyur = value.confidenceAyur
+    profile.confidenceSci = nil
+    profile.qualityState = "aiDraft"
+    profile.reviewNote = "AI-generated Ayurveda metadata; expert review required."
+    profile.engineExcluded = !food.isEdible
+    profile.edible = food.isEdible
+    profile.inedibleReason = food.inedibleReason
+    profile.seedVersion = bundleSeedVersion
+    profile.sanskrit = value.sanskrit
+    profile.aliases = value.aliases
+    profile.rasa = value.rasa
+    profile.virya = value.virya
+    profile.vipaka = value.vipaka
+    profile.gunas = value.gunas
+    profile.prabhava = value.prabhava
+    profile.agniEffect = value.agniEffect
+    profile.digestibility = value.digestibility
+    profile.combinations = value.combinations
+    profile.contraindications = value.contraindications
+    profile.preparation = value.preparation
+    profile.servingsJSON = nil
+    profile.meal = nil
+    profile.servingsCount = nil
+    profile.prepMinutes = nil
+    profile.cookMinutes = nil
+    profile.steps = []
+    profile.guidance = value.guidance
+
+    if existing == nil {
+      context.insert(profile)
+    }
+  }
+
   static func remove(foodId: UUID, context: ModelContext) {
     guard let existing = profile(foodId: foodId, context: context) else {
       return

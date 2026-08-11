@@ -1097,6 +1097,15 @@ final class AIManager: ObservableObject {
         }
         
         await foodToUpdate.update(from: dto)
+        if let generatedAyurveda = dto.ayurveda {
+            AyurvedaUserProfileStore.upsert(
+                generated: generatedAyurveda,
+                editorForm: generatedAyurveda.editorForm,
+                for: foodToUpdate,
+                context: context
+            )
+        }
+        try context.save()
         
         return Data()
     }
@@ -1116,6 +1125,7 @@ final class AIManager: ObservableObject {
         }
         
         await exerciseToUpdate.update(from: dto)
+        try context.save()
         
         return Data()
     }

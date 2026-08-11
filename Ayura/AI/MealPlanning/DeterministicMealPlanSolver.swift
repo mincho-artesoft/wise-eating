@@ -140,6 +140,9 @@ struct MP5Candidate: Codable, Equatable, Sendable {
     let isHoney: Bool
     let isGhee: Bool
     let isHeatedHoney: Bool
+    /// Relative density of the vitamins/minerals the current profile marked as priorities.
+    /// It is a small preference signal and never overrides safety or energy feasibility.
+    var priorityNutrientScore: Double = 0
 
     var kcalPerGram: Double { kcalPer100g / 100 }
 
@@ -1074,6 +1077,7 @@ struct DeterministicMealPlanSolver {
         var score = -densityDistance
         score += min(candidate.proteinPer100g / 20, 1.5)
         score += min(candidate.fiberPer100g / 10, 1.0)
+        score += candidate.priorityNutrientScore * 1.25
         if let key = nearDuplicateKeysByID[candidate.id],
            recentHeadwords.contains(key) {
             score -= 1.25
@@ -1159,6 +1163,14 @@ struct DeterministicMealPlanSolver {
             }
         }
         score += Double(Set(plan.components.flatMap(\.rasa)).count) * 0.5
+        let priorityScores = plan.components.compactMap {
+            candidatesByID[$0.foodID]?.priorityNutrientScore
+        }
+        if !priorityScores.isEmpty {
+            score += priorityScores.reduce(0, +)
+                / Double(priorityScores.count)
+                * 3
+        }
         for meal in plan.days.flatMap(\.meals) {
             let mealCandidates = meal.components.compactMap {
                 candidatesByID[$0.foodID]

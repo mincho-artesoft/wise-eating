@@ -71,6 +71,58 @@ struct SterolsDTO: Codable {
     var phytosterols: Nutrient?; var betaSitosterol: Nutrient?; var campesterol: Nutrient?; var stigmasterol: Nutrient?
 }
 
+/// The Ayurvedic metadata produced together with an AI-created food.
+///
+/// This intentionally mirrors the editable and recommendation-relevant fields
+/// in `AyurvedaProfile`. It lives in the transport DTO so a completed AI job
+/// can be previewed first and persisted only after the user taps Save.
+struct AyurvedaGeneratedFoodDTO: Codable, Sendable, Equatable {
+    var sanskrit: String?
+    var aliases: [String]
+    var doshaVata: Int
+    var doshaPitta: Int
+    var doshaKapha: Int
+    var rasa: [String]
+    var virya: String?
+    var vipaka: String?
+    var gunas: [String]
+    var seasons: [String]
+    var timeOfDay: [String]
+    var viruddha: [String]
+    var prabhava: String?
+    var agniEffect: Int?
+    var digestibility: Int?
+    var combinations: [String]
+    var contraindications: [String]
+    var preparation: String?
+    var guidance: String?
+    var confidenceAyur: Double
+
+    var editorForm: AyurvedaForm {
+        AyurvedaForm(
+            vata: doshaVata,
+            pitta: doshaPitta,
+            kapha: doshaKapha,
+            rasa: Set(rasa),
+            virya: virya,
+            vipaka: vipaka,
+            gunas: Set(gunas)
+        )
+    }
+
+    func overridingEditableFields(with form: AyurvedaForm) -> Self {
+        var copy = self
+        copy.doshaVata = form.vata
+        copy.doshaPitta = form.pitta
+        copy.doshaKapha = form.kapha
+        copy.rasa = form.rasa.sorted()
+        copy.virya = form.virya
+        copy.vipaka = form.vipaka
+        copy.gunas = form.gunas.sorted()
+        return copy
+    }
+}
+
 // MARK: – Main DTO
 struct FoodItemDTO: Codable, Sendable, Identifiable {
 
@@ -82,8 +134,14 @@ struct FoodItemDTO: Codable, Sendable, Identifiable {
     var ageProvenance: String? = nil
     var ageSource: String? = nil
     var desctiption: String?
+    var isEdible: Bool? = nil
+    var inedibleReason: String? = nil
+    var inedibleContraindications: [String]? = nil
     // ───── Tags/taxonomy ─────
     var allergens: [Allergen]?
+
+    // ───── Ayurveda ─────
+    var ayurveda: AyurvedaGeneratedFoodDTO? = nil
 
     // ───── Nested JSON blocks ─────
     var macronutrients: MacronutrientsDTO?
@@ -108,6 +166,9 @@ struct FoodItemDTO: Codable, Sendable, Identifiable {
         item.minAgeMonths = minAgeMonths ?? 0
         item.ageProvenance = ageProvenance
         item.ageSource = ageSource
+        item.isEdible = isEdible ?? true
+        item.inedibleReason = inedibleReason
+        item.inedibleContraindications = inedibleContraindications ?? []
         // Mapping (без промени)
         if let m = macronutrients {
             item.macronutrients = MacronutrientsData(

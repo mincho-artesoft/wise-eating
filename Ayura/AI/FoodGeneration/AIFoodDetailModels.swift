@@ -23,6 +23,58 @@ struct AIMinAgeResponse: Codable {
     var minAgeMonths: Int
 }
 
+@available(iOS 26.0, *)
+@Generable
+struct AIFoodSafetyAyurvedaResponse: Codable {
+    @Guide(description: "True only when the exact named item is ordinarily consumed as food or a culinary herb/spice.")
+    var isEdible: Bool
+    @Guide(description: "If isEdible is false, give a short factual reason; otherwise return an empty string.")
+    var inedibleReason: String
+    @Guide(description: "Concrete safety contraindications for consuming the exact item. Return an empty array when none are known.")
+    var inedibleContraindications: [String]
+
+    @Guide(description: "Traditional Sanskrit name when well established; otherwise return an empty string.")
+    var sanskrit: String
+    @Guide(description: "Up to five common culinary or traditional aliases. Do not include unrelated species or varieties.")
+    var aliases: [String]
+    @Guide(description: "Ayurvedic Vata effect from -2 (strongly pacifies) to 2 (strongly aggravates).")
+    var doshaVata: Int
+    @Guide(description: "Ayurvedic Pitta effect from -2 (strongly pacifies) to 2 (strongly aggravates).")
+    var doshaPitta: Int
+    @Guide(description: "Ayurvedic Kapha effect from -2 (strongly pacifies) to 2 (strongly aggravates).")
+    var doshaKapha: Int
+    @Guide(description: "Applicable rasa values using only: sweet, sour, salty, pungent, bitter, astringent.")
+    var rasa: [String]
+    @Guide(description: "Virya using only cooling, neutral, or heating; return an empty string if genuinely unknown.")
+    var virya: String
+    @Guide(description: "Vipaka using only sweet, sour, or pungent; return an empty string if genuinely unknown.")
+    var vipaka: String
+    @Guide(description: "Applicable guna values using only: dense, dry, heavy, light, liquid, oily, penetrating, rough, sharp, slimy, smooth, soft.")
+    var gunas: [String]
+    @Guide(description: "Suitable seasons using lowercase common season names; empty when no meaningful seasonality is known.")
+    var seasons: [String]
+    @Guide(description: "Suitable times of day such as morning, midday, evening; empty when not meaningful.")
+    var timeOfDay: [String]
+    @Guide(description: "Classical incompatible combinations (viruddha) stated conservatively; empty when none are established.")
+    var viruddha: [String]
+    @Guide(description: "Distinctive prabhava only when traditionally established; otherwise return an empty string.")
+    var prabhava: String
+    @Guide(description: "Effect on agni from -2 (weakens) to 2 (stimulates), or 0 when neutral/unknown.")
+    var agniEffect: Int
+    @Guide(description: "Digestibility from -2 (very hard to digest) to 2 (very easy to digest), or 0 when neutral/unknown.")
+    var digestibility: Int
+    @Guide(description: "Up to five traditionally compatible food combinations; empty when none are established.")
+    var combinations: [String]
+    @Guide(description: "Ayurvedic contraindications, including dosha or condition cautions, stated conservatively.")
+    var contraindications: [String]
+    @Guide(description: "Short preparation guidance that materially changes digestibility or dosha effect; otherwise empty.")
+    var preparation: String
+    @Guide(description: "One short, cautious Ayurveda usage note. Do not make medical treatment claims.")
+    var guidance: String
+    @Guide(description: "Confidence in the Ayurvedic classification from 0.0 to 1.0. Use low confidence for modern or poorly documented items.")
+    var confidenceAyur: Double
+}
+
 // --- START OF CHANGE: tolerant AINutrient decoder ---
 @available(iOS 26.0, *)
 @Generable

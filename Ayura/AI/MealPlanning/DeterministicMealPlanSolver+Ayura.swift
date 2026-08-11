@@ -38,6 +38,13 @@ struct MP5PlannerAdapter {
         let linkByFoodID = Dictionary(
             uniqueKeysWithValues: links.map { ($0.foodId, $0) }
         )
+        let priorityNutrientTypes = Set(
+            profile.priorityVitamins.compactMap {
+                NutrientType.fromID($0.key)
+            } + profile.priorityMinerals.compactMap {
+                NutrientType.fromID($0.key)
+            }
+        )
 
         var flattened: [MP5Candidate] = []
         var thermalByFoodID: [UUID: String] = [:]
@@ -56,7 +63,8 @@ struct MP5PlannerAdapter {
                     profileByID[$0.dravyaProfileId]
                 },
                 link: linkByFoodID[food.id],
-                engineExcluded: excludedByGate.contains(food.id)
+                engineExcluded: excludedByGate.contains(food.id),
+                priorityNutrientTypes: priorityNutrientTypes
             ) else {
                 continue
             }
@@ -113,6 +121,15 @@ struct MP5PlannerAdapter {
                 + "\(MP5FeatureFlags.ayurvedicSolverFlagName)="
                 + "\(profileRequest.enableAyurvedicScoring); "
                 + "\(flattened.count) safe candidates; seed \(seed)"
+        )
+        let priorities = (profile.priorityVitamins.map(\.name)
+            + profile.priorityMinerals.map(\.name)).sorted()
+        let prioritySummary = priorities.isEmpty ? ["none"] : priorities
+        onLog?(
+            "👤 Meal profile context: age \(profile.age), gender \(profile.gender), "
+                + String(format: "%.1f kg, %.1f cm; ", profile.weight, profile.height)
+                + "allergens: \(profile.allergens.map(\.rawValue).sorted()); "
+                + "priority nutrients: \(prioritySummary)"
         )
 
         let startedAt = DispatchTime.now().uptimeNanoseconds
@@ -212,7 +229,8 @@ struct MP5PlannerAdapter {
         directProfile: AyurvedaProfile?,
         linkedProfile: AyurvedaProfile?,
         link: AyurvedaLink?,
-        engineExcluded: Bool
+        engineExcluded: Bool,
+        priorityNutrientTypes: Set<NutrientType>
     ) -> (candidate: MP5Candidate, thermalCharacter: String)? {
         let referenceWeight = compact.referenceWeightG
         guard referenceWeight > 0,
@@ -278,10 +296,46 @@ struct MP5PlannerAdapter {
                 tier: resolution.tier,
                 isHoney: isHoney,
                 isGhee: isGhee,
-                isHeatedHoney: isHeatedHoney
+                isHeatedHoney: isHeatedHoney,
+                priorityNutrientScore: priorityNutrientScore(
+                    values: compact.nutrientValues,
+                    referenceWeight: referenceWeight,
+                    priorities: priorityNutrientTypes
+                )
             ),
             resolution.thermalCharacter
         )
+    }
+
+    private func priorityNutrientScore(
+        values: [NutrientType: Double],
+        referenceWeight: Double,
+        priorities: Set<NutrientType>
+    ) -> Double {
+        guard referenceWeight > 0, !priorities.isEmpty else { return 0 }
+        let per100Scale = 100 / referenceWeight
+        let scores = priorities.compactMap { nutrient -> Double? in
+            guard let amount = values[nutrient], amount > 0,
+                  let dailyReference = priorityDailyReference[nutrient]
+            else { return nil }
+            return min(2, amount * per100Scale / dailyReference)
+        }
+        guard !scores.isEmpty else { return 0 }
+        return scores.reduce(0, +) / Double(priorities.count)
+    }
+
+    private var priorityDailyReference: [NutrientType: Double] {
+        [
+            .vitaminA: 900, .vitaminC: 90, .vitaminD: 20,
+            .vitaminE: 15, .vitaminK: 120, .thiamin: 1.2,
+            .riboflavin: 1.3, .niacin: 16, .pantothenicAcid: 5,
+            .vitaminB6: 1.7, .vitaminB12: 2.4, .folateDFE: 400,
+            .folateFood: 400, .folateTotal: 400, .folicAcid: 400,
+            .choline: 550, .calcium: 1_000, .iron: 18,
+            .magnesium: 420, .phosphorus: 700, .potassium: 4_700,
+            .sodium: 2_300, .selenium: 55, .zinc: 11,
+            .copper: 0.9, .manganese: 2.3, .fluoride: 4
+        ]
     }
 
     private func ayurvedicResolution(

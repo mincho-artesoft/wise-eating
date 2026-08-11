@@ -729,6 +729,11 @@ extension FoodItem {
         // Main fields
         self.itemDescription = dto.desctiption
         self.minAgeMonths = dto.minAgeMonths ?? 0
+        self.ageProvenance = dto.ageProvenance
+        self.ageSource = dto.ageSource
+        self.isEdible = dto.isEdible ?? true
+        self.inedibleReason = dto.inedibleReason
+        self.inedibleContraindications = dto.inedibleContraindications ?? []
         self.allergens = dto.allergens
         
         // Macros

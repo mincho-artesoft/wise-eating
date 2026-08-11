@@ -67,6 +67,11 @@ struct ExerciseItemEditorView: View {
     @State private var doshaVata: Int
     @State private var doshaPitta: Int
     @State private var doshaKapha: Int
+    @State private var generatedSanskrit: String?
+    @State private var generatedSlug: String?
+    @State private var generatedContraindications: [String]?
+    @State private var generatedDoshaProvenance: String?
+    @State private var generatedAssetImageName: String?
     
     // Вече не ползваме PhotosPicker директно, но може да оставим това състояние ако искаш
     @State private var selectedPhoto: PhotosPickerItem?
@@ -136,6 +141,11 @@ struct ExerciseItemEditorView: View {
             _doshaVata = State(initialValue: copy.dosha?.vata ?? 0)
             _doshaPitta = State(initialValue: copy.dosha?.pitta ?? 0)
             _doshaKapha = State(initialValue: copy.dosha?.kapha ?? 0)
+            _generatedSanskrit = State(initialValue: copy.sanskrit)
+            _generatedSlug = State(initialValue: copy.slug)
+            _generatedContraindications = State(initialValue: copy.contraindications)
+            _generatedDoshaProvenance = State(initialValue: copy.doshaProvenance)
+            _generatedAssetImageName = State(initialValue: copy.assetImageName)
         } else if let p = initialExercise {
             _name = State(
                 initialValue: YogaExerciseNaming.displayName(
@@ -158,6 +168,11 @@ struct ExerciseItemEditorView: View {
             _doshaVata = State(initialValue: p.dosha?.vata ?? 0)
             _doshaPitta = State(initialValue: p.dosha?.pitta ?? 0)
             _doshaKapha = State(initialValue: p.dosha?.kapha ?? 0)
+            _generatedSanskrit = State(initialValue: p.sanskrit)
+            _generatedSlug = State(initialValue: p.slug)
+            _generatedContraindications = State(initialValue: p.contraindications)
+            _generatedDoshaProvenance = State(initialValue: p.doshaProvenance)
+            _generatedAssetImageName = State(initialValue: p.assetImageName)
         } else {
             _name = State(initialValue: "")
             _description = State(initialValue: "")
@@ -175,6 +190,11 @@ struct ExerciseItemEditorView: View {
             _doshaVata = State(initialValue: 0)
             _doshaPitta = State(initialValue: 0)
             _doshaKapha = State(initialValue: 0)
+            _generatedSanskrit = State(initialValue: nil)
+            _generatedSlug = State(initialValue: nil)
+            _generatedContraindications = State(initialValue: nil)
+            _generatedDoshaProvenance = State(initialValue: nil)
+            _generatedAssetImageName = State(initialValue: nil)
         }
     }
     
@@ -781,6 +801,10 @@ struct ExerciseItemEditorView: View {
             itemToSave.level = Int(levelString)
             itemToSave.breath = breath
             itemToSave.drishti = drishti
+            itemToSave.sanskrit = generatedSanskrit
+            itemToSave.slug = generatedSlug
+            itemToSave.contraindications = generatedContraindications
+            itemToSave.assetImageName = generatedAssetImageName
 
             let hasYogaDetails = itemToSave.family != nil
                 || itemToSave.level != nil
@@ -794,7 +818,9 @@ struct ExerciseItemEditorView: View {
                 ? YogaDosha(vata: doshaVata, pitta: doshaPitta, kapha: doshaKapha)
                 : nil
             if itemToSave.dosha != updatedDosha {
-                itemToSave.doshaProvenance = updatedDosha == nil ? nil : "user-editor"
+                itemToSave.doshaProvenance = updatedDosha == nil
+                    ? nil
+                    : (generatedDoshaProvenance ?? "user-editor")
             }
             itemToSave.dosha = updatedDosha
             
@@ -985,11 +1011,16 @@ struct ExerciseItemEditorView: View {
                 self.selectedMuscleGroups = mapped.selectedMuscleGroups
                 self.minAgeMonthsTxt     = mapped.minAgeMonthsTxt
                 if let sanskrit = response.sanskrit {
+                    self.generatedSanskrit = sanskrit
                     self.name = YogaExerciseNaming.displayName(
                         title: self.name,
                         sanskrit: sanskrit
                     )
                 }
+                self.generatedSlug        = response.slug
+                self.generatedContraindications = response.contraindications
+                self.generatedDoshaProvenance = response.doshaProvenance
+                self.generatedAssetImageName = response.assetImageName
                 self.selectedFamily      = response.family ?? self.selectedFamily
                 self.levelString         = response.level.map(String.init) ?? self.levelString
                 self.durationSecondsString = response.durationSeconds.map(String.init) ?? self.durationSecondsString

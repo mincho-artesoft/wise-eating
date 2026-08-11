@@ -127,6 +127,63 @@ final class AIExerciseDetailGenerator {
         muscles.map { String(describing: $0) }.joined(separator: ", ")
     }
 
+    private func isVerifiedYogaPractice(
+        _ exerciseName: String,
+        reference: ExerciseItem?
+    ) -> Bool {
+        let normalized = normalizeExerciseName(exerciseName)
+        let directMarkers = [
+            " yoga", "yoga ", "asana", "pranayama", "meditation", "mudra",
+            "bandha", "kriya", " pose", "pose ", "sun salutation", "surya namaskar"
+        ]
+        if directMarkers.contains(where: { normalized.contains($0) }) {
+            return true
+        }
+
+        guard let reference else { return false }
+        let referenceHasYogaMetadata = reference.sanskrit?.nilIfEmpty() != nil
+            || reference.family != nil
+            || reference.dosha != nil
+        guard referenceHasYogaMetadata else { return false }
+
+        func englishHead(_ value: String) -> String {
+            let head = value.split(separator: "(", maxSplits: 1).first.map(String.init) ?? value
+            return normalizeExerciseName(head)
+        }
+        let sameEnglishHead = !englishHead(exerciseName).isEmpty
+            && englishHead(exerciseName) == englishHead(reference.name)
+        return sameEnglishHead || nameSimilarity(exerciseName, reference.name) >= 0.6
+    }
+
+    private func validatedMET(_ raw: Double, for exerciseName: String, isYoga: Bool) -> Double {
+        let finite = raw.isFinite ? raw : 0
+        if isYoga {
+            return max(1.5, min(6, finite))
+        }
+
+        let normalized = normalizeExerciseName(exerciseName)
+        let activeStrengthMarkers = [
+            "squat", "deadlift", "lunge", "burpee", "push up", "pushup",
+            "pull up", "pullup", "bodyweight", "kettlebell", "dumbbell", "barbell"
+        ]
+        let minimum = activeStrengthMarkers.contains(where: { normalized.contains($0) }) ? 3.0 : 1.3
+        return max(minimum, min(20, finite))
+    }
+
+    private func validatedYogaBreath(_ breath: YogaBreath?, for exerciseName: String) -> YogaBreath? {
+        guard let breath else { return nil }
+        let normalized = normalizeExerciseName(exerciseName)
+        let isExplicitBreathPractice = [
+            "pranayama", "nadi shodhana", "anulom", "kapalabhati", "bhastrika", "breath"
+        ].contains(where: { normalized.contains($0) })
+        if !isExplicitBreathPractice,
+           [.alternatingNostrils, .breathOfFire, .forcefulBothWays, .rapidDiaphragmatic, .sharpExhales]
+            .contains(breath) {
+            return .slowAndEven
+        }
+        return breath
+    }
+
     // ── Контекстни промптове на база similarExercise (меки подсказки, без копиране) ──
     private func createPromptWithReference_Description(
         basePrompt: String,
@@ -237,7 +294,8 @@ final class AIExerciseDetailGenerator {
           - The provided exercise name is the exact item. DO NOT substitute synonyms, variations, or different implements.
           - If the term could refer to related items, assume it refers to **exactly** the literal name provided and nothing else.
         - CRITICAL OUTPUT RULES:
-          - Never output strings like "N/A", "NA", "nan", "null", empty strings, or objects missing required fields.
+          - Never output strings like "N/A", "NA", "nan", "null", or objects missing required fields.
+          - Empty strings are allowed only when a schema field explicitly asks for one.
           - Numeric values must be finite, non-negative, and realistic.
         """
 
@@ -289,7 +347,7 @@ final class AIExerciseDetailGenerator {
         }
 
         // shared identity prefix (като при Foods)
-        var sharedPromptPrefix = """
+        let sharedPromptPrefix = """
         Exercise identity (STRICT — no substitution):
         - EXACT name (do not reinterpret or generalize): \(exerciseName)
         - Output must follow the JSON schema precisely. No prose. No extra keys.
@@ -365,11 +423,15 @@ final class AIExerciseDetailGenerator {
             emitLog("  ℹ️ No similar exercises found in the initial search.", onLog: onLog)
         }
         try Task.checkCancellation()
+        let verifiedYogaPractice = isVerifiedYogaPractice(exerciseName, reference: similarExercise)
         // MARK: 1) Description (с референтен контекст, ако е приложим)
         let descPrompt = createPromptWithReference_Description(
             basePrompt: """
             Write a concise, helpful description for the EXACT exercise name '\(exerciseName)'.
             Focus on proper form cues and main benefits. Return ONLY the 'description' field.
+            The app has classified this exact item as \(verifiedYogaPractice ? "a yoga practice" : "a non-yoga exercise").
+            For a yoga practice, describe only its canonical form. Do not borrow limb placement from a different asana.
+            If exact positioning is uncertain, stay concise and high-level instead of inventing a detailed movement.
             """,
             exerciseName: exerciseName,
             similar: similarExercise
@@ -410,6 +472,23 @@ final class AIExerciseDetailGenerator {
             similar: similarExercise
         )
 
+        let breathValues = YogaBreath.allCases.map(\.rawValue).joined(separator: ", ")
+        let drishtiValues = YogaDrishti.allCases.map(\.rawValue).joined(separator: ", ")
+        let practicePrompt = """
+        Classify and complete the current fields for the EXACT exercise '\(exerciseName)'.
+        - The app's verified classification is isYogaPractice=\(verifiedYogaPractice). You MUST use that exact boolean value.
+        - Mark isYogaPractice true only for an actual yoga practice, never merely because an ordinary stretch resembles a pose.
+        - For a non-yoga exercise, family, sanskrit, breath, and drishti must be empty; dosha values must be 0.
+        - For yoga, family must use the schema vocabulary and Sanskrit must be the established transliteration when known.
+        - breath must use exactly one of: \(breathValues)
+        - For an ordinary held asana, prefer Natural, Slow and even, Slow and quiet, or Even ujjayi.
+        - Alternating nostrils and other forceful breath techniques are valid only when the exact item is that pranayama, never for a standing or balance pose.
+        - drishti must use exactly one of: \(drishtiValues)
+        - Contraindications must be cautious and specific, without medical treatment claims.
+        - For yoga, estimate the dosha effects meaningfully; do not default all three to zero unless the practice is genuinely neutral.
+        - Do not invent an image or asset filename.
+        """
+
         // MARK: 3) Паралелни задачи
         let metTask = Task<AIExerciseMETValueResponse, Error> {
             try await askWithRetry(
@@ -442,27 +521,87 @@ final class AIExerciseDetailGenerator {
         await globalTaskManager.addTask(minAgeTask)
         try Task.checkCancellation()
 
+        let practiceTask = Task<AIExercisePracticeDetailsResponse, Error> {
+            try await askWithRetry(
+                "Practice Details",
+                sharedPromptPrefix + "\n\n" + practicePrompt,
+                generating: AIExercisePracticeDetailsResponse.self,
+                maxTokens: 1_000
+            )
+        }
+        await globalTaskManager.addTask(practiceTask)
+        try Task.checkCancellation()
+
         // --- END OF CHANGE ---
 
         // MARK: 4) Await & map към домейн
         let metResp       = try await metTask.value
         let musclesResp   = try await musclesTask.value
         let minAgeResp    = try await minAgeTask.value
+        let practiceResp  = try await practiceTask.value
         try Task.checkCancellation()
         let correctedMinAge = validateAndCorrectMinAge(minAgeResp.minAgeMonths, for: exerciseName, onLog: onLog)
-        let domainMuscles: [MuscleGroup] = musclesResp.muscleGroups.compactMap { $0.toDomain() }
+        var seenMuscles = Set<MuscleGroup>()
+        let domainMuscles: [MuscleGroup] = musclesResp.muscleGroups
+            .compactMap { $0.toDomain() }
+            .filter { seenMuscles.insert($0).inserted }
+            .prefix(6)
+            .map { $0 }
         try Task.checkCancellation()
-        let dto = ExerciseItemDTO(
+        let isYoga = verifiedYogaPractice
+        let family = isYoga ? matchingCase(practiceResp.family, in: AsanaFamily.allCases) : nil
+        let breath = isYoga
+            ? validatedYogaBreath(matchingCase(practiceResp.breath, in: YogaBreath.allCases), for: exerciseName)
+            : nil
+        let drishti = isYoga ? matchingCase(practiceResp.drishti, in: YogaDrishti.allCases) : nil
+        let dosha = isYoga
+            ? YogaDosha(
+                vata: max(-2, min(2, practiceResp.doshaVata)),
+                pitta: max(-2, min(2, practiceResp.doshaPitta)),
+                kapha: max(-2, min(2, practiceResp.doshaKapha))
+            )
+            : nil
+        var dto = ExerciseItemDTO(
             id: UUID(),
             title: exerciseName,
             desc: descResp.description,
             muscleGroups: domainMuscles,
-            metValue: metResp.metValue,
+            metValue: validatedMET(metResp.metValue, for: exerciseName, isYoga: isYoga),
             minimalAgeMonths: correctedMinAge
         )
+        dto.sanskrit = isYoga ? practiceResp.sanskrit.nilIfEmpty() : nil
+        dto.slug = canonicalSlug(practiceResp.slug.nilIfEmpty() ?? exerciseName)
+        dto.family = family
+        dto.level = max(1, min(3, practiceResp.level))
+        dto.durationSeconds = max(15, min(1_800, practiceResp.durationSeconds))
+        dto.breath = breath
+        dto.drishti = drishti
+        let contraindications = practiceResp.contraindications
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+        dto.contraindications = contraindications
+        dto.dosha = dosha
+        dto.doshaProvenance = dosha == nil ? nil : "ai-estimate; review required"
         
         emitLog("✅ Successfully generated all details for '\(exerciseName)'.", onLog: onLog)
         return dto
+    }
+
+    private func matchingCase<T: RawRepresentable>(
+        _ raw: String,
+        in values: [T]
+    ) -> T? where T.RawValue == String {
+        let wanted = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+        return values.first { $0.rawValue.caseInsensitiveCompare(wanted) == .orderedSame }
+    }
+
+    private func canonicalSlug(_ raw: String) -> String? {
+        let slug = raw
+            .folding(options: [.diacriticInsensitive, .widthInsensitive], locale: Locale(identifier: "en_US_POSIX"))
+            .lowercased()
+            .replacingOccurrences(of: "[^a-z0-9]+", with: "-", options: .regularExpression)
+            .trimmingCharacters(in: CharacterSet(charactersIn: "-"))
+        return slug.nilIfEmpty()
     }
 
     // MARK: - UI Mapping (оставен без промяна)

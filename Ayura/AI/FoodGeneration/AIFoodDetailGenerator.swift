@@ -57,7 +57,8 @@ class AIFoodDetailGenerator {
           - The provided food name is the exact item. DO NOT substitute synonyms, varieties, colors, species, cultivars, or cooking/processing forms.
           - If a term could refer to related items (e.g., \(foodName)), assume it refers to **exactly** the literal name provided and nothing else.
         - CRITICAL OUTPUT RULES:
-          - Never output strings like "N/A", "NA", "nan", "null", empty strings, or objects missing "value" or "unit".
+          - Never output strings like "N/A", "NA", "nan", "null", or objects missing required fields.
+          - Empty strings are allowed only when a schema field explicitly asks for one; nutrient units must never be empty.
           - If the nutrient is absent/unknown/not detected, return EXACTLY zero in the correct unit (e.g., { "value": 0, "unit": "g" }).
           - Values must be finite numbers (no Infinity/NaN), non-negative, and plausible for **per 100 g**.
         """
@@ -316,6 +317,18 @@ class AIFoodDetailGenerator {
         List the common allergens present in the food '\(foodName)'.
         Return ONLY the 'allergens' array using the provided enum values.\( (refName != nil) ? "\n\nNOTE: Similar reference '\(refName!)'. Use only as plausibility; do not fabricate allergens." : "" )
         """
+
+        let safetyAyurvedaPrompt = """
+        Classify the EXACT item '\(foodName)' for food safety and Ayurvedic metadata.
+
+        Rules:
+        - Do not substitute a related species, color, preparation, extract, or supplement.
+        - Ayurveda values are review-required estimates. Prefer conservative/neutral values when evidence is weak.
+        - Dosha, agniEffect, and digestibility values MUST be integers in -2...2.
+        - Use only the vocabularies stated in the schema guides for rasa, virya, vipaka, and gunas.
+        - Do not make medical-treatment claims.
+        - Return every schema field. Use empty strings/arrays only where the guide explicitly permits them.
+        """
         
         // 3) Паралелни задачи без директен capture на similarFood
         // вместо async let ... = askWithRetry(...)
@@ -339,9 +352,20 @@ class AIFoodDetailGenerator {
         }
         try Task.checkCancellation()
         await globalTaskManager.addTask(allergensTask)
+        let safetyAyurvedaTask = Task<AIFoodSafetyAyurvedaResponse, Error> {
+            try await askWithRetry(
+                "Safety & Ayurveda",
+                safetyAyurvedaPrompt,
+                generating: AIFoodSafetyAyurvedaResponse.self,
+                maxTokens: 1600
+            )
+        }
+        await globalTaskManager.addTask(safetyAyurvedaTask)
+        try Task.checkCancellation()
         // и тук вместо tuple-await на async let:
         let minAgeResp = try await minAgeTask.value
         let allergensResp = try await allergensTask.value
+        let safetyAyurvedaResp = try await safetyAyurvedaTask.value
         
         // MARK: 6) Macronutrients - PARALLEL BATCH 2
         let carbohydratesPrompt = createPromptWithReference(
@@ -1898,8 +1922,51 @@ class AIFoodDetailGenerator {
             id: UUID(),
             name: foodName,
             minAgeMonths: minAgeResp.minAgeMonths,
+            ageProvenance: "ai-estimate",
+            ageSource: "Apple Foundation Models; review required",
             desctiption: descResp.description,
+            isEdible: safetyAyurvedaResp.isEdible,
+            inedibleReason: safetyAyurvedaResp.inedibleReason
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+                .nilIfEmpty(),
+            inedibleContraindications: safetyAyurvedaResp.inedibleContraindications,
             allergens: allergensResp.allergens.compactMap { Allergen(rawValue: $0.rawValue) },
+            ayurveda: AyurvedaGeneratedFoodDTO(
+                sanskrit: safetyAyurvedaResp.sanskrit
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                    .nilIfEmpty(),
+                aliases: Array(safetyAyurvedaResp.aliases.prefix(5)),
+                doshaVata: min(2, max(-2, safetyAyurvedaResp.doshaVata)),
+                doshaPitta: min(2, max(-2, safetyAyurvedaResp.doshaPitta)),
+                doshaKapha: min(2, max(-2, safetyAyurvedaResp.doshaKapha)),
+                rasa: safetyAyurvedaResp.rasa,
+                virya: safetyAyurvedaResp.virya
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                    .lowercased()
+                    .nilIfEmpty(),
+                vipaka: safetyAyurvedaResp.vipaka
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                    .lowercased()
+                    .nilIfEmpty(),
+                gunas: safetyAyurvedaResp.gunas,
+                seasons: safetyAyurvedaResp.seasons,
+                timeOfDay: safetyAyurvedaResp.timeOfDay,
+                viruddha: safetyAyurvedaResp.viruddha,
+                prabhava: safetyAyurvedaResp.prabhava
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                    .nilIfEmpty(),
+                agniEffect: min(2, max(-2, safetyAyurvedaResp.agniEffect)),
+                digestibility: min(2, max(-2, safetyAyurvedaResp.digestibility)),
+                combinations: Array(safetyAyurvedaResp.combinations.prefix(5)),
+                contraindications: safetyAyurvedaResp.contraindications,
+                preparation: safetyAyurvedaResp.preparation
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                    .nilIfEmpty(),
+                guidance: safetyAyurvedaResp.guidance
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                    .nilIfEmpty(),
+                confidenceAyur: min(1, max(0, safetyAyurvedaResp.confidenceAyur))
+            ),
             // ... останалата част от DTO асемблирането ...
             
             // ... (Вмъквам само част, за да покажа, че съвпадат)
@@ -2056,7 +2123,13 @@ class AIFoodDetailGenerator {
         lipids: LipidForm,
         aminoAcids: AminoAcidsForm,
         carbDetails: CarbDetailsForm,
-        sterols: SterolsForm
+        sterols: SterolsForm,
+        ayurveda: AyurvedaGeneratedFoodDTO?,
+        isEdible: Bool,
+        inedibleReason: String?,
+        inedibleContraindications: [String],
+        ageProvenance: String?,
+        ageSource: String?
     ) {
         let description = dto.desctiption ?? ""   // <— от DTO-то
         let minAge = dto.minAgeMonths ?? 0
@@ -2072,7 +2145,25 @@ class AIFoodDetailGenerator {
         let carbDetails = CarbDetailsForm(from: dto.carbDetails)
         let sterols     = SterolsForm(from: dto.sterols)
         
-        return (description, minAgeMonthsTxt, allergens, macros, others, vitamins, minerals, lipids, aminoAcids, carbDetails, sterols)
+        return (
+            description,
+            minAgeMonthsTxt,
+            allergens,
+            macros,
+            others,
+            vitamins,
+            minerals,
+            lipids,
+            aminoAcids,
+            carbDetails,
+            sterols,
+            dto.ayurveda,
+            dto.isEdible ?? true,
+            dto.inedibleReason,
+            dto.inedibleContraindications ?? [],
+            dto.ageProvenance,
+            dto.ageSource
+        )
     }
     
     // Груба, но ефективна Jaccard-подобна близост между две имена (по токени)

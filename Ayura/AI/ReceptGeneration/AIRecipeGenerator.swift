@@ -286,30 +286,74 @@ class AIRecipeGenerator {
                 logJSON(response.content, label: "LLM#1b output (AIRecipeResponse)", onLog: onLog)
             }
             try Task.checkCancellation()
+
+            let finalContent = normalizeConceptualRecipeIdentity(
+                response.content,
+                recipeName: recipeName
+            )
             
             emitLog("✅ Conceptual recipe generated.", onLog: onLog)
-            emitLog("   • Prep time (active): \(response.content.prepTimeMinutes) min", onLog: onLog)
-            emitLog("   • Ingredients count: \(response.content.ingredients.count)", onLog: onLog)
-            let preview = String(response.content.description.prefix(140))
-            emitLog("   • Description (preview): \(preview)\(response.content.description.count > 140 ? "..." : "")", onLog: onLog)
+            emitLog("   • Prep time (active): \(finalContent.prepTimeMinutes) min", onLog: onLog)
+            emitLog("   • Ingredients count: \(finalContent.ingredients.count)", onLog: onLog)
+            let preview = String(finalContent.description.prefix(140))
+            emitLog("   • Description (preview): \(preview)\(finalContent.description.count > 140 ? "..." : "")", onLog: onLog)
             try Task.checkCancellation()
             
             // Full conceptual printout (for visibility)
             logDivider("Conceptual Recipe (Full Printout)", onLog: onLog)
-            emitLog("\n" + formatConceptualRecipe(response.content, title: recipeName), onLog: onLog)
+            emitLog("\n" + formatConceptualRecipe(finalContent, title: recipeName), onLog: onLog)
             logDivider(onLog: onLog)
             try Task.checkCancellation()
             
             // After generating a conceptual recipe (and any retry), drop the last 2 turns to cap growth
             trimSharedSessionRemovingLast(2, onLog: onLog)
             emitLog("🏁 generateConceptualRecipe – END", onLog: onLog)
-            return response.content
+            return finalContent
             
         } catch {
             emitLog("❌ Conceptual generation failed: \(error.localizedDescription)", onLog: onLog)
             emitLog("🏁 generateConceptualRecipe – END (ERROR)", onLog: onLog)
             throw error
         }
+    }
+
+    private func normalizeConceptualRecipeIdentity(
+        _ response: AIRecipeResponse,
+        recipeName: String
+    ) -> AIRecipeResponse {
+        var result = response
+        let normalizedRecipeName = normalize(recipeName)
+
+        for index in result.ingredients.indices {
+            let ingredientName = normalize(result.ingredients[index].name)
+            if ingredientName == "salt" {
+                result.ingredients[index].grams = min(8, max(1, result.ingredients[index].grams))
+            }
+        }
+
+        if normalizedRecipeName.contains("mung dal") && normalizedRecipeName.contains("kitchari") {
+            if let pulseIndex = result.ingredients.firstIndex(where: {
+                let name = normalize($0.name)
+                return name.contains("lentil") || name.contains("dal") || name.contains("mung")
+            }) {
+                result.ingredients[pulseIndex].name = "Split Yellow Mung Dal"
+            } else {
+                result.ingredients.insert(
+                    AIRecipeIngredient(name: "Split Yellow Mung Dal", grams: 150),
+                    at: 0
+                )
+            }
+            if let fatIndex = result.ingredients.firstIndex(where: {
+                let name = normalize($0.name)
+                return name == "oil" || name == "vegetable oil" || name == "cooking oil"
+            }) {
+                result.ingredients[fatIndex].name = "Ghee"
+            }
+            if let saltIndex = result.ingredients.firstIndex(where: { normalize($0.name) == "salt" }) {
+                result.ingredients[saltIndex].grams = min(5, result.ingredients[saltIndex].grams)
+            }
+        }
+        return result
     }
     
     // MARK: Step 2 – Resolve conceptual ingredients to FoodItems (DTO)
@@ -797,73 +841,20 @@ class AIRecipeGenerator {
             onLog: onLog
         )
         
-        // 2) Кратки ключови думи + синоними (AIShortKeywords)
+        // 2) Детерминистични ключови думи само от текущата съставка.
+        // Контекстът на цялата рецепта не трябва да може да превърне „cucumber“ в „chicken“.
         let ctx = otherIngredients.isEmpty ? "n/a" : otherIngredients.joined(separator: ", ")
         emitLog("  • Recipe context: \(recipeContext.rationale)", onLog: onLog)
         emitLog("  • Context → recipe: '\(recipeName)', other: \(ctx)", onLog: onLog)
         
-        var finalQueries = variantQueries
-        var bannedSet = Set(variantBans.map { $0.lowercased() })
-        var dynamicHeadwords = [String]()
-        
-        do {
-            let instructions = Instructions {
-                """
-                Extract compact search tokens: 2–4 priority keywords (headword first), up to 6 banned tokens, and up to 3 headword synonyms.
-                Keep tokens short (1–2 words each). No brands.
-                """
-            }
-            let session = LanguageModelSession(instructions: instructions)
-            let prompt = """
-            CONCEPT: "\(rawName)"
-            RECIPE: "\(recipeName)"
-            OTHER INGREDIENTS: \(ctx)
-            """
-            emitLog("  • LLM#KW prompt → \(prompt)", onLog: onLog)
-            try Task.checkCancellation()
-            
-            let resp = try await session.respond(
-                to: prompt,
-                generating: AIShortKeywords.self,
-                includeSchemaInPrompt: true,
-                options: GenerationOptions(sampling: .greedy)
-            ).content
-            logJSON(resp, label: "  • LLM#KW output (AIShortKeywords)", onLog: onLog)
-            try Task.checkCancellation()
-            
-            // Headword = първият priority keyword; добавяме и headwordSynonyms (динамични).
-            let kw = resp.priorityKeywords.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { !$0.isEmpty }
-            if let head = kw.first { dynamicHeadwords.append(head) }
-            dynamicHeadwords.append(contentsOf: resp.headwordSynonyms)
-            try Task.checkCancellation()
-            
-            // Подобряване на заявки (както досега)
-            if !kw.isEmpty {
-                let top3 = Array(kw.prefix(3))
-                if top3.count == 3 { finalQueries.append(top3.joined(separator: " ")) }
-                if top3.count >= 2 { finalQueries.append(top3.prefix(2).joined(separator: " ")) }
-                finalQueries.append(top3[0])
-            }
-            bannedSet.formUnion(resp.bannedKeywords.map { $0.lowercased() })
-        } catch {
-            // --- НАЧАЛО НА ПРОМЯНАТА ---
-            if error is CancellationError {
-                throw error
-            }
-            // --- КРАЙ НА ПРОМЯНАТА ---
-            
-            emitLog("  • LLM#KW enrichment skipped: \(error.localizedDescription)", onLog: onLog)
-        }
-        
-        // Fallback за headwords, ако LLM не даде – първи токен от името/самото име.
-        if dynamicHeadwords.isEmpty {
-            if let t0 = tokens(rawName).first { dynamicHeadwords.append(t0) }
-            else { dynamicHeadwords.append(normalize(rawName)) }
-        }
+        var finalQueries = variantQueries + [rawName]
+        let bannedSet = Set(variantBans.map { $0.lowercased() })
+        let dynamicHeadwords = deterministicIngredientHeadwords(rawName)
+        finalQueries.append(contentsOf: dynamicHeadwords)
         
         finalQueries = finalQueries.dedupCaseInsensitive()
         let bans = Array(bannedSet)
-        let requiredHeads = Array(Set(dynamicHeadwords.map { $0.lowercased() })).filter { !$0.isEmpty }
+        let requiredHeads = dynamicHeadwords
         
         emitLog("  • queries(final): \(finalQueries)", onLog: onLog)
         emitLog("  • banned(final): \(bans)", onLog: onLog)
@@ -978,6 +969,14 @@ class AIRecipeGenerator {
             return -1
         }
         try Task.checkCancellation()
+
+        if let deterministicPick = deterministicBestCandidate(
+            originalName: originalName,
+            candidateNames: candidateNames
+        ) {
+            emitLog("  • Deterministic identity match selected index \(deterministicPick).", onLog: onLog)
+            return deterministicPick
+        }
         
         let heads = requiredHeadwords.isEmpty
         ? (tokens(originalName).first.map { [$0] } ?? [normalize(originalName)])
@@ -1291,6 +1290,87 @@ class AIRecipeGenerator {
     
     private func tokens(_ s: String) -> [String] {
         FoodItem.makeTokens(from: s.lowercased())
+    }
+
+    private func deterministicIngredientHeadwords(_ rawName: String) -> [String] {
+        let words = AyurvedaRules.modifierTokens(rawName)
+            .map { $0.lowercased() }
+            .filter { !$0.isEmpty }
+        let formWords: Set<String> = [
+            "powder", "ground", "fresh", "raw", "cooked", "boiled", "roasted",
+            "fried", "baked", "dried", "canned", "smoked", "frozen", "prepared"
+        ]
+        let semanticWords = words.filter { !formWords.contains($0) }
+        guard let last = semanticWords.last ?? words.last else { return [normalize(rawName)] }
+
+        func singular(_ word: String) -> String {
+            if word.hasSuffix("ies"), word.count > 3 {
+                return String(word.dropLast(3)) + "y"
+            }
+            if word.hasSuffix("oes"), word.count > 3 {
+                return String(word.dropLast(2))
+            }
+            if word.hasSuffix("s"), !word.hasSuffix("ss"), word.count > 3 {
+                return String(word.dropLast())
+            }
+            return word
+        }
+
+        var values = [semanticWords.joined(separator: " "), last, singular(last)]
+        values = values.filter { !$0.isEmpty }.dedupCaseInsensitive()
+        return values
+    }
+
+    private func deterministicBestCandidate(
+        originalName: String,
+        candidateNames: [String]
+    ) -> Int? {
+        let allTargetWords = Set(AyurvedaRules.modifierTokens(originalName).map { $0.lowercased() })
+        let identityFormWords: Set<String> = [
+            "powder", "ground", "fresh", "raw", "cooked", "boiled", "roasted",
+            "fried", "baked", "dried", "canned", "smoked", "frozen", "prepared"
+        ]
+        let semanticTargetWords = allTargetWords.subtracting(identityFormWords)
+        let targetWords = semanticTargetWords.isEmpty ? allTargetWords : semanticTargetWords
+        guard !targetWords.isEmpty else { return nil }
+        let normalizedTarget = targetWords.sorted().joined(separator: " ")
+
+        let ranked = candidateNames.enumerated().map { index, candidate -> (Int, Double) in
+            let allCandidateWords = Set(AyurvedaRules.modifierTokens(candidate).map { $0.lowercased() })
+            let semanticCandidateWords = allCandidateWords.subtracting(identityFormWords)
+            let candidateWords = semanticCandidateWords.isEmpty ? allCandidateWords : semanticCandidateWords
+            let intersection = Double(targetWords.intersection(candidateWords).count)
+            let union = Double(targetWords.union(candidateWords).count)
+            var score = union > 0 ? (intersection / union) * 4 : 0
+            let normalizedCandidate = candidateWords.sorted().joined(separator: " ")
+            if normalizedCandidate == normalizedTarget { score += 8 }
+            if targetWords.isSubset(of: candidateWords) { score += 5 }
+            score -= Double(candidateWords.subtracting(targetWords).count) * 0.08
+
+            let freshProduceHeads: Set<String> = [
+                "tomato", "tomatoes", "cucumber", "onion", "onions", "parsley",
+                "lemon", "lime", "garlic", "ginger", "pepper", "peppers"
+            ]
+            let targetIsFreshProduce = !targetWords.isDisjoint(with: freshProduceHeads)
+            let targetRequestsProcessed = !allTargetWords.isDisjoint(with: [
+                "cooked", "boiled", "roasted", "fried", "baked", "dried", "powder",
+                "canned", "smoked", "scalloped", "juice", "paste"
+            ])
+            if targetIsFreshProduce && !targetRequestsProcessed {
+                if !allCandidateWords.isDisjoint(with: ["raw", "fresh", "unprepared"]) { score += 1.5 }
+                if !allCandidateWords.isDisjoint(with: [
+                    "cooked", "boiled", "roasted", "fried", "baked", "dried", "powder",
+                    "canned", "smoked", "scalloped", "juice", "paste", "stewed"
+                ]) { score -= 2.5 }
+            }
+            if allTargetWords.isDisjoint(with: ["smoked", "hot", "flavored", "flavoured"]),
+               !allCandidateWords.isDisjoint(with: ["smoked", "hot", "flavored", "flavoured"]) {
+                score -= 1.5
+            }
+            return (index, score)
+        }
+        guard let best = ranked.max(by: { $0.1 < $1.1 }), best.1 > 0 else { return nil }
+        return best.0
     }
     
     // Индикатори за композитни изделия и овкусени варианти (не са синоними).

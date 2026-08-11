@@ -60,7 +60,7 @@ final class AITrainingPlanGenerator {
         }
         try Task.checkCancellation()
         
-        emit(tag("👤 Profile: \(profile.name) | age=\(profile.age) | gender=\(profile.gender)"), onLog)
+        emit(tag("👤 Profile context loaded:\n\(buildProfileInfo(profile))"), onLog)
         
         do {
             emit(tag("🚀 Starting Training Plan Generation for '\(profile.name)'..."), onLog)
@@ -73,9 +73,14 @@ final class AITrainingPlanGenerator {
                 let (included0, excluded0) = await aiExtractRequestedExercises(from: atomicPromptsRaw, onLog: onLog)
                 let fix = await aiFixAtomsAndExercises(originalPrompts: prompts, atoms: atomicPromptsRaw, included: included0, excluded: excluded0, onLog: onLog)
                 
+                let constrainedExercises = applyDeterministicEquipmentConstraints(
+                    rawPrompts: prompts,
+                    included: fix.included,
+                    excluded: fix.excluded
+                )
                 progress.atomicPrompts = fix.directives
-                progress.includedExercises = fix.included
-                progress.excludedExercises = fix.excluded
+                progress.includedExercises = constrainedExercises.included
+                progress.excludedExercises = constrainedExercises.excluded
                 progress.interpretedPrompts = await aiInterpretUserPrompts(prompts: fix.directives, workoutsToFill: workoutsToFill, onLog: onLog)
                 
                 await saveProgress(jobID: jobID, progress: progress, onLog: onLog)
@@ -167,6 +172,35 @@ final class AITrainingPlanGenerator {
     }
     
     // MARK: - STAGE 1: Interpretation
+
+    private func applyDeterministicEquipmentConstraints(
+        rawPrompts: [String],
+        included: [String],
+        excluded: [String]
+    ) -> (included: [String], excluded: [String]) {
+        let raw = rawPrompts.joined(separator: " ").lowercased()
+        let requestsNoEquipment = [
+            "no equipment", "without equipment", "bodyweight only", "body-weight only"
+        ].contains(where: { raw.contains($0) })
+        guard requestsNoEquipment else { return (included, excluded) }
+
+        let equipmentDependent = [
+            "barbell", "dumbbell", "kettlebell", "machine", "cable",
+            "bench press", "overhead press", "shoulder press", "bent-over row",
+            "bent over row", "lat pulldown", "pull-up", "pull up", "chin-up",
+            "chin up", "deadlift", "bicep curl", "tricep extension"
+        ]
+        let cleanIncluded = included.filter { exercise in
+            let value = exercise.lowercased()
+            return !equipmentDependent.contains(where: { value.contains($0) })
+        }
+        var cleanExcluded = excluded
+        var seen = Set(cleanExcluded.map { $0.lowercased() })
+        for item in equipmentDependent where seen.insert(item).inserted {
+            cleanExcluded.append(item)
+        }
+        return (cleanIncluded, cleanExcluded)
+    }
     
     private func aiSplitIntoAtomicPrompts(_ prompts: [String], onLog: (@Sendable (String) -> Void)?) async -> [String] {
         guard !prompts.isEmpty else { return [] }
@@ -357,7 +391,13 @@ final class AITrainingPlanGenerator {
            - Strictly respect the user's profile and goals.
            """
         })
-        let prompt = "PROFILE: Age \(profile.age), Gender \(profile.gender)\nCONTEXT: \(context.kind): \(context.tag)"
+        let prompt = """
+        PROFILE:
+        \(buildProfileInfo(profile))
+
+        CONTEXT: \(context.kind): \(context.tag)
+        Use the Ayurveda line only when the context is yoga, mobility, breathwork, meditation, or recovery. It is a preference signal, not a medical restriction.
+        """
         do {
             try Task.checkCancellation()
             let resp = try await session.respond(to: prompt, generating: AIExercisePaletteResponse.self, includeSchemaInPrompt: true).content
@@ -407,7 +447,8 @@ final class AITrainingPlanGenerator {
         \(palettesText)
         
         --- USER PROFILE & GOALS ---
-        - Profile: Age \(profile.age), Gender \(profile.gender)
+        - Profile details:
+        \(buildProfileInfo(profile))
         - Qualitative Goals: \(interpretedPrompts.qualitativeGoals.isEmpty ? "None" : interpretedPrompts.qualitativeGoals.joined(separator: ", "))
         - Must Include (use on matching focus days): \(includedExercises.isEmpty ? "None" : includedExercises.joined(separator: ", "))
         - Must Exclude (CRITICAL): \(excludedExercises.isEmpty ? "None" : excludedExercises.joined(separator: ", "))
@@ -581,8 +622,8 @@ final class AITrainingPlanGenerator {
                 guard !resolvedExercises.isEmpty else { continue }
                 
                 let chosenStart = plannedWorkoutTimes[workout.name] ?? plannedTimes[day.dayIndex] ?? Date()
-                let totalMinutes = resolvedExercises.values.reduce(0, +)
-                let endTime = chosenStart.addingTimeInterval(totalMinutes * 60.0)
+                let totalSeconds = resolvedExercises.values.reduce(0, +)
+                let endTime = chosenStart.addingTimeInterval(totalSeconds)
                 
                 let training = Training(name: workout.name, startTime: chosenStart, endTime: endTime)
                 training.updateNotes(exercises: resolvedExercises, detailedLog: nil)
@@ -686,10 +727,38 @@ final class AITrainingPlanGenerator {
     }
     
     private func buildProfileInfo(_ profile: Profile) -> String {
-        return """
-        - Age: \(profile.age)
-        - Gender: \(profile.gender)
-        """
+        let measurementLines = [
+            "- Age: \(profile.age) years (\(profile.ageInMonths) months)",
+            "- Gender: \(profile.gender)",
+            String(format: "- Weight: %.1f kg", profile.weight),
+            String(format: "- Height: %.1f cm", profile.height)
+        ]
+
+        let clock = Date.FormatStyle(date: .omitted, time: .shortened)
+        let schedule = profile.trainings
+            .sorted { $0.startTime < $1.startTime }
+            .map { training in
+                let minutes = max(0, Int(training.endTime.timeIntervalSince(training.startTime) / 60))
+                return "\(training.name) at \(training.startTime.formatted(clock)), about \(minutes) min"
+            }
+        let scheduleLine = "- Usual training schedule: "
+            + (schedule.isEmpty ? "not specified" : schedule.joined(separator: "; "))
+
+        let ayurvedaLine: String
+        if let record = AyurvedaConstitutionStore.record(for: profile.id) {
+            let target = record.target()
+            ayurvedaLine = String(
+                format: "- Ayurveda preference context: %@ (Vata %.0f%%, Pitta %.0f%%, Kapha %.0f%%)",
+                record.result.label,
+                target.vata * 100,
+                target.pitta * 100,
+                target.kapha * 100
+            )
+        } else {
+            ayurvedaLine = "- Ayurveda preference context: not set"
+        }
+
+        return (measurementLines + [scheduleLine, ayurvedaLine]).joined(separator: "\n")
     }
     
     private func buildExistingWorkoutsText(_ existing: [Int: [TrainingPlanWorkoutDraft]]?) -> String {

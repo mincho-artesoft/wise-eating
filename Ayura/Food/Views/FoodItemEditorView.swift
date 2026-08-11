@@ -94,6 +94,12 @@ struct FoodItemEditorView: View {
     @State private var ayurForm = AyurvedaForm.neutral
     @State private var resolvedAyurFormBaseline: AyurvedaForm?
     @State private var didPrefillAyurveda = false
+    @State private var generatedAyurveda: AyurvedaGeneratedFoodDTO?
+    @State private var generatedIsEdible: Bool
+    @State private var generatedInedibleReason: String?
+    @State private var generatedInedibleContraindications: [String]
+    @State private var generatedAgeProvenance: String?
+    @State private var generatedAgeSource: String?
     
     @State private var showAlert = false
     @State private var alertMsg = ""
@@ -172,6 +178,14 @@ struct FoodItemEditorView: View {
         _ayurForm = State(initialValue: .neutral)
         _resolvedAyurFormBaseline = State(initialValue: nil)
         _didPrefillAyurveda = State(initialValue: false)
+        _generatedAyurveda = State(initialValue: nil)
+        _generatedIsEdible = State(initialValue: food?.isEdible ?? true)
+        _generatedInedibleReason = State(initialValue: food?.inedibleReason)
+        _generatedInedibleContraindications = State(
+            initialValue: food?.inedibleContraindications ?? []
+        )
+        _generatedAgeProvenance = State(initialValue: food?.ageProvenance)
+        _generatedAgeSource = State(initialValue: food?.ageSource)
 
         let initialServingWeightG = initialOthers.weightG?.value
         var initialDisplayWeightString = ""
@@ -346,6 +360,15 @@ struct FoodItemEditorView: View {
                     self.aminoAcids         = mapped.aminoAcids
                     self.carbDetails        = mapped.carbDetails
                     self.sterols            = mapped.sterols
+                    self.generatedAyurveda  = mapped.ayurveda
+                    if let generatedAyurveda = mapped.ayurveda {
+                        self.ayurForm = generatedAyurveda.editorForm
+                    }
+                    self.generatedIsEdible = mapped.isEdible
+                    self.generatedInedibleReason = mapped.inedibleReason
+                    self.generatedInedibleContraindications = mapped.inedibleContraindications
+                    self.generatedAgeProvenance = mapped.ageProvenance
+                    self.generatedAgeSource = mapped.ageSource
                     if let weightGrams = mapped.others.weightG?.value {
                         let displayValue = isImperial ? UnitConversion.gToOz(weightGrams) : weightGrams
                         self.servingWeightString = GlobalState.formatDecimalString(String(displayValue))
@@ -904,6 +927,11 @@ struct FoodItemEditorView: View {
             item.allergens = idsToEnums(selectedAllergens, of: Allergen.self)
             item.itemDescription = itemDescription.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty()
             item.minAgeMonths = Int(minAgeMonthsTxt) ?? 0
+            item.ageProvenance = generatedAgeProvenance
+            item.ageSource = generatedAgeSource
+            item.isEdible = generatedIsEdible
+            item.inedibleReason = generatedInedibleReason
+            item.inedibleContraindications = generatedInedibleContraindications
             
             item.macronutrients = MacronutrientsData(from: macros)
             item.lipids         = LipidsData(from: lipids)
@@ -923,7 +951,14 @@ struct FoodItemEditorView: View {
             item.carbDetails?.foodItem    = item
             item.sterols?.foodItem        = item
 
-            if resolvedAyurFormBaseline == nil
+            if let generatedAyurveda {
+                AyurvedaUserProfileStore.upsert(
+                    generated: generatedAyurveda,
+                    editorForm: ayurForm,
+                    for: item,
+                    context: ctx
+                )
+            } else if resolvedAyurFormBaseline == nil
                 || ayurForm != resolvedAyurFormBaseline {
                 AyurvedaUserProfileStore.upsert(
                     form: ayurForm,

@@ -53,7 +53,15 @@ final class AIWorkoutGenerator {
         }
         try Task.checkCancellation()
 
-        let resolvedExercises = generatedTraining.exercises(using: ModelContext(container))
+        let initiallyResolvedExercises = generatedTraining.exercises(using: ModelContext(container))
+        let equipmentConstrainedExercises = applyingEquipmentConstraints(
+            to: initiallyResolvedExercises,
+            prompts: prompts
+        )
+        let resolvedExercises = normalizeDurationIfRequested(
+            equipmentConstrainedExercises,
+            prompts: prompts
+        )
         if resolvedExercises.isEmpty {
             let error = NSError(domain: "AIWorkoutGenerator", code: 2, userInfo: [NSLocalizedDescriptionKey: "Generated training contains no resolved exercises."])
             emitLog("❌ Generated training has no exercises.", onLog: onLog)
@@ -68,6 +76,7 @@ final class AIWorkoutGenerator {
         let description = try await regenerateDescriptionForWorkout(
             workoutName: generatedTraining.name, // Подаваме временното име за контекст
             exercises: resolvedExercises,
+            totalDuration: totalDuration,
             onLog: onLog
         )
         try Task.checkCancellation()
@@ -100,6 +109,70 @@ final class AIWorkoutGenerator {
 
         emitLog("🏁 Successfully created ResolvedWorkoutResponseDTO for '\(dto.name)'.", onLog: onLog)
         return dto
+    }
+
+    private func applyingEquipmentConstraints(
+        to exercises: [ExerciseItem: Double],
+        prompts: [String]
+    ) -> [ExerciseItem: Double] {
+        let raw = prompts.joined(separator: " ").lowercased()
+        let noEquipment = ["no equipment", "without equipment", "bodyweight only", "body-weight only"]
+            .contains(where: { raw.contains($0) })
+        guard noEquipment else { return exercises }
+
+        let banned = [
+            "barbell", "dumbbell", "kettlebell", "machine", "cable",
+            "bench press", "overhead press", "shoulder press", "bent-over row",
+            "bent over row", "lat pulldown", "pull-up", "pull up", "chin-up",
+            "chin up", "deadlift", "bicep curl", "tricep extension"
+        ]
+        let filtered = exercises.filter { item, _ in
+            let name = item.name.lowercased()
+            return !banned.contains(where: { name.contains($0) })
+        }
+        return filtered.count >= 3 ? filtered : exercises
+    }
+
+    private func normalizeDurationIfRequested(
+        _ exercises: [ExerciseItem: Double],
+        prompts: [String]
+    ) -> [ExerciseItem: Double] {
+        guard !exercises.isEmpty,
+              let targetSeconds = requestedDurationSeconds(in: prompts),
+              targetSeconds >= exercises.count * 15 else { return exercises }
+
+        let ordered = exercises.keys.sorted { $0.id.uuidString < $1.id.uuidString }
+        let currentTotal = exercises.values.reduce(0, +)
+        guard currentTotal > 0 else { return exercises }
+
+        var normalized: [ExerciseItem: Double] = [:]
+        var remaining = targetSeconds
+        for (index, item) in ordered.enumerated() {
+            let itemsAfterThis = ordered.count - index - 1
+            if itemsAfterThis == 0 {
+                normalized[item] = Double(remaining)
+                break
+            }
+            let proportional = Double(targetSeconds) * ((exercises[item] ?? 0) / currentTotal)
+            let rounded = Int((proportional / 5).rounded()) * 5
+            let maximum = remaining - itemsAfterThis * 15
+            let duration = max(15, min(maximum, rounded))
+            normalized[item] = Double(duration)
+            remaining -= duration
+        }
+        return normalized
+    }
+
+    private func requestedDurationSeconds(in prompts: [String]) -> Int? {
+        let raw = prompts.joined(separator: " ").lowercased()
+        guard let regex = try? NSRegularExpression(
+            pattern: #"\b(\d{1,3})\s*(?:-|–)?\s*(?:minute|minutes|min)\b"#
+        ) else { return nil }
+        let range = NSRange(raw.startIndex..<raw.endIndex, in: raw)
+        guard let match = regex.firstMatch(in: raw, range: range),
+              let numberRange = Range(match.range(at: 1), in: raw),
+              let minutes = Int(raw[numberRange]) else { return nil }
+        return minutes * 60
     }
     
     // +++ НАЧАЛО НА ПРОМЯНАТА (2/2): Добавяме нова функция за генериране на име +++
@@ -158,6 +231,7 @@ final class AIWorkoutGenerator {
     private func regenerateDescriptionForWorkout(
         workoutName: String,
         exercises: [ExerciseItem: Double],
+        totalDuration: Int,
         onLog: (@Sendable (String) -> Void)?
     ) async throws -> String {
         let exerciseList = exercises
@@ -170,6 +244,8 @@ final class AIWorkoutGenerator {
             - The description MUST be a single string with a "Summary: ..." line, a blank line, and 3-8 numbered steps.
             - Steps should be short, imperative sentences.
             - Do not list ingredients in the steps; just ensure the steps naturally use them.
+            - The stated duration must exactly match the supplied total. Never call it a one-hour workout unless the supplied total is 3600 seconds.
+            - Describe one pass through the supplied exercises. Do not tell the user to repeat the whole workout.
             - Return ONLY valid JSON for AIWorkoutDetailsOnly.
             """
         }
@@ -177,6 +253,7 @@ final class AIWorkoutGenerator {
         let session = LanguageModelSession(instructions: instructions)
         let prompt = """
         WORKOUT NAME: "\(workoutName)"
+        EXACT TOTAL DURATION: \(totalDuration) seconds (\(totalDuration / 60) minutes)
         EXERCISES: \(exerciseList)
         TASK: Generate a description for this workout.
         """
@@ -193,10 +270,63 @@ final class AIWorkoutGenerator {
             ).content
             try Task.checkCancellation()
 
-            return resp.description
+            let generated = resp.description.trimmingCharacters(in: .whitespacesAndNewlines)
+            guard isConsistentWorkoutDescription(generated, totalDuration: totalDuration) else {
+                emitLog("⚠️ Generated description added time or repetition outside the resolved workout. Using exact-duration description.", onLog: onLog)
+                return exactWorkoutDescription(
+                    workoutName: workoutName,
+                    exercises: exercises,
+                    totalDuration: totalDuration
+                )
+            }
+            return generated
         } catch {
             emitLog("⚠️ Workout description generation failed: \(error.localizedDescription). Falling back to simple list.", onLog: onLog)
-            return "Summary: A workout focusing on \(workoutName).\n\n1) Warm up for 300-600 seconds.\n2) Perform the following exercises: \(exerciseList).\n3) Cool down with light stretching."
+            return exactWorkoutDescription(
+                workoutName: workoutName,
+                exercises: exercises,
+                totalDuration: totalDuration
+            )
         }
+    }
+
+    private func isConsistentWorkoutDescription(_ description: String, totalDuration: Int) -> Bool {
+        let lower = description.lowercased()
+        let repeatsWholeWorkout = [
+            "repeat the circuit", "repeat this circuit", "repeat the workout",
+            "repeat the whole", "another round"
+        ].contains(where: { lower.contains($0) })
+        if repeatsWholeWorkout { return false }
+
+        if totalDuration != 3600,
+           ["one-hour", "one hour", "60-minute", "60 minute"]
+            .contains(where: { lower.contains($0) }) {
+            return false
+        }
+
+        guard description.hasPrefix("Summary:"), description.contains("\n\n") else {
+            return false
+        }
+        let minutes = totalDuration / 60
+        return lower.contains("\(totalDuration) seconds")
+            || lower.contains("\(minutes)-minute")
+            || lower.contains("\(minutes) minute")
+    }
+
+    private func exactWorkoutDescription(
+        workoutName: String,
+        exercises: [ExerciseItem: Double],
+        totalDuration: Int
+    ) -> String {
+        let minutes = totalDuration / 60
+        let ordered = exercises.sorted {
+            if $0.value == $1.value { return $0.key.name < $1.key.name }
+            return $0.value > $1.value
+        }
+        let steps = ordered.enumerated().map { index, entry in
+            "\(index + 1)) Perform \(entry.key.name) for \(Int(entry.value)) seconds."
+        }
+        return "Summary: A \(minutes)-minute \(workoutName) completed in one pass; the listed exercise durations total exactly \(totalDuration) seconds.\n\n"
+            + steps.joined(separator: "\n")
     }
 }

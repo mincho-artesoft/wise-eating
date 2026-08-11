@@ -69,6 +69,17 @@ struct RootLauncher: View {
 
             // 2. Seeding (Попълване на базата и създаване на Cache Blob)
             await SeedManager.seedIfNeeded(container: container)
+
+            #if DEBUG
+            if ProcessInfo.processInfo.arguments.contains("-aiGenerationSmokeTest") {
+                if #available(iOS 26.0, *) {
+                    await AIGenerationSmokeTestRunner.run(container: container)
+                } else {
+                    print("AI_SMOKE|ERROR|iOS 26 or newer is required")
+                }
+                return
+            }
+            #endif
             
             // FoodSearch performs the same version-checked load when its view opens.
             // Keeping the 28 MB cache decode off the launch path makes first render
