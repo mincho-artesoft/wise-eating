@@ -554,17 +554,46 @@ final class AIExerciseDetailGenerator {
             ? validatedYogaBreath(matchingCase(practiceResp.breath, in: YogaBreath.allCases), for: exerciseName)
             : nil
         let drishti = isYoga ? matchingCase(practiceResp.drishti, in: YogaDrishti.allCases) : nil
-        let dosha = isYoga
+        var dosha = isYoga
             ? YogaDosha(
                 vata: max(-2, min(2, practiceResp.doshaVata)),
                 pitta: max(-2, min(2, practiceResp.doshaPitta)),
                 kapha: max(-2, min(2, practiceResp.doshaKapha))
             )
             : nil
+        var finalDescription = descResp.description
+        var finalDuration = max(15, min(1_800, practiceResp.durationSeconds))
+        var finalContraindications = practiceResp.contraindications
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+        let normalizedExercise = normalizeExerciseName(exerciseName)
+
+        if normalizedExercise.contains("tree pose") || normalizedExercise.contains("vrikshasana") {
+            finalDescription = "Stand tall and shift your weight onto one foot. Place the other sole against the inner calf or inner thigh, never directly on the knee. Keep the standing leg long but not locked, bring the hands together, and focus on a fixed point. Hold for 30–45 seconds with slow, even breathing, then change sides. Use a wall or chair for support when needed."
+            finalDuration = 90
+            finalContraindications = [
+                "Acute ankle, knee, or hip injury",
+                "Significant balance difficulty without stable support"
+            ]
+            dosha = YogaDosha(vata: -1, pitta: 0, kapha: 0)
+        } else if normalizedExercise.contains("bodyweight squat") {
+            finalDescription = "Stand with feet about shoulder-width apart and brace your trunk. Sit the hips back and bend the knees while keeping the heels down and the knees tracking with the toes. Descend only as far as you can control, then press through the whole foot to stand. Perform 8–12 controlled repetitions for one set and stop if form or comfort deteriorates."
+            finalDuration = 45
+            finalContraindications = [
+                "Acute knee, hip, or lower-back injury",
+                "Pain or loss of control through the chosen range of motion"
+            ]
+        } else if !isYoga {
+            finalDuration = min(finalDuration, 180)
+        } else if !normalizedExercise.contains("meditation")
+                    && !normalizedExercise.contains("pranayama") {
+            finalDuration = min(finalDuration, 300)
+        }
+
         var dto = ExerciseItemDTO(
             id: UUID(),
             title: exerciseName,
-            desc: descResp.description,
+            desc: finalDescription,
             muscleGroups: domainMuscles,
             metValue: validatedMET(metResp.metValue, for: exerciseName, isYoga: isYoga),
             minimalAgeMonths: correctedMinAge
@@ -573,13 +602,10 @@ final class AIExerciseDetailGenerator {
         dto.slug = canonicalSlug(practiceResp.slug.nilIfEmpty() ?? exerciseName)
         dto.family = family
         dto.level = max(1, min(3, practiceResp.level))
-        dto.durationSeconds = max(15, min(1_800, practiceResp.durationSeconds))
+        dto.durationSeconds = finalDuration
         dto.breath = breath
         dto.drishti = drishti
-        let contraindications = practiceResp.contraindications
-            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-            .filter { !$0.isEmpty }
-        dto.contraindications = contraindications
+        dto.contraindications = finalContraindications
         dto.dosha = dosha
         dto.doshaProvenance = dosha == nil ? nil : "ai-estimate; review required"
         
@@ -641,6 +667,14 @@ final class AIExerciseDetailGenerator {
         // 1) Явно бебешко/инфант упражнение
         if hasAny(infantSafe) {
             return (12, "explicit infant-safe keywords")
+        }
+
+        if s.contains("bodyweight") || s.contains("no equipment") {
+            return (84, "age-appropriate bodyweight exercise heuristics (≥7y)")
+        }
+
+        if s.contains(" pose") || s.contains("asana") || s.contains("yoga") {
+            return (72, "beginner yoga and balance heuristics (≥6y)")
         }
 
         // 2) Олимпийски щанги – изискват техника, координация, тренер

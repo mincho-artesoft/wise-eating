@@ -182,6 +182,7 @@ struct MP5SolverProfile: Codable, Equatable, Sendable {
     let agni: MP5Agni
     let season: String?
     let enableAyurvedicScoring: Bool
+    var requestText: String = ""
     var doshaTarget: MP5DoshaTarget? = nil
 }
 
@@ -307,7 +308,7 @@ struct MP5SolvedPlan: Codable, Equatable, Sendable {
     }
 }
 
-enum MP5SolverFailure: Error, Equatable, CustomStringConvertible, Sendable {
+enum MP5SolverFailure: Error, LocalizedError, Equatable, CustomStringConvertible, Sendable {
     case infeasible(constraint: String)
 
     var description: String {
@@ -316,6 +317,8 @@ enum MP5SolverFailure: Error, Equatable, CustomStringConvertible, Sendable {
             return "Meal plan is infeasible: \(constraint)"
         }
     }
+
+    var errorDescription: String? { description }
 }
 
 final class MP7SolverDiagnostics {
@@ -385,7 +388,7 @@ struct DeterministicMealPlanSolver {
                 }
                 return (
                     candidate.id,
-                    "\(candidate.role.rawValue)|\(candidate.roleHeadword)"
+                    candidate.roleHeadword
                 )
             }
         )
@@ -613,6 +616,9 @@ struct DeterministicMealPlanSolver {
         let pool = allowed.filter { candidate in
             !recentIDs.contains(candidate.id)
                 && !requiredIDs.contains(candidate.id)
+                && nearDuplicateKeysByID[candidate.id].map {
+                    !recentHeadwords.contains($0)
+                } ?? true
         }
         if let diagnostics {
             diagnostics.mealPoolFilterNanoseconds +=
@@ -777,9 +783,14 @@ struct DeterministicMealPlanSolver {
                         - nearDuplicateStarted
                     diagnostics.nearDuplicateCalls += 1
                 }
-                let shapedScore = score
+                let averageCandidateScore = score / Double(max(chosen.count, 1))
+                let excessComponentPenalty = Double(max(0, chosen.count - 3)) * 0.9
+                let completeMealBonus = chosen.count >= 3 ? 0.8 : 0
+                let shapedScore = averageCandidateScore
                     + mealShapeScore(chosen, profile: profile)
+                    + completeMealBonus
                     - duplicatePenalty
+                    - excessComponentPenalty
                 if best == nil || shapedScore > best!.score {
                     best = (chosen, shapedScore)
                 }
@@ -1078,6 +1089,51 @@ struct DeterministicMealPlanSolver {
         score += min(candidate.proteinPer100g / 20, 1.5)
         score += min(candidate.fiberPer100g / 10, 1.0)
         score += candidate.priorityNutrientScore * 1.25
+        let lowerName = candidate.name.lowercased()
+        let ultraProcessedMarkers = [
+            "snack", "extruded", "hot pocket", "cake", "cookie", "candy",
+            "sweetened", "fries", "fried chicken", "papad", "marshmallow",
+            "turnover", "egg roll", "fast foods", "heavy syrup", "nacho"
+        ]
+        if ultraProcessedMarkers.contains(where: lowerName.contains) {
+            score -= 8.0
+        }
+        let minimallyProcessedMarkers = [
+            "raw", "fresh", "cooked", "boiled", "steamed", "roasted",
+            "lentil", "bean", "chickpea", "rice", "oat", "yogurt",
+            "egg", "chicken breast", "fish", "tofu", "vegetable"
+        ]
+        if minimallyProcessedMarkers.contains(where: lowerName.contains) {
+            score += 0.45
+        }
+        if profile.requestText.contains("mediterranean") {
+            let mediterraneanMarkers = [
+                "chicken", "fish", "tuna", "salmon", "rice", "lentil",
+                "chickpea", "bean", "tomato", "cucumber", "olive",
+                "yogurt", "pepper", "zucchini"
+            ]
+            if mediterraneanMarkers.contains(where: lowerName.contains) {
+                score += 2.6
+            }
+        }
+        if profile.requestText.contains("ayurved")
+            || profile.requestText.contains("vata") {
+            let vataFriendlyMarkers = [
+                "rice", "mung", "moong", "dal", "lentil", "oat", "ghee",
+                "ginger", "cumin", "turmeric", "yam", "sweet potato",
+                "pumpkin", "carrot", "zucchini", "khichdi", "kitchari"
+            ]
+            if vataFriendlyMarkers.contains(where: lowerName.contains) {
+                score += 3.0
+            }
+            let poorVataDinnerMarkers = [
+                "beef", "pork", "duck", "sauce,", "cold", "raw",
+                "canned", "fried", "snack"
+            ]
+            if poorVataDinnerMarkers.contains(where: lowerName.contains) {
+                score -= 4.0
+            }
+        }
         if let key = nearDuplicateKeysByID[candidate.id],
            recentHeadwords.contains(key) {
             score -= 1.25
@@ -1095,7 +1151,21 @@ struct DeterministicMealPlanSolver {
             score += 0.75
         }
 
-        if mealContext == .midday {
+        if mealContext == .morning {
+            let breakfastMarkers = [
+                "oat", "yogurt", "whole egg", "fruit", "banana", "apple",
+                "pear", "berry", "berries", "millet", "rice", "tofu"
+            ]
+            if breakfastMarkers.contains(where: lowerName.contains) {
+                score += 2.0
+            }
+            let heavyBreakfastMarkers = [
+                "beef", "steak", "pork", "lamb", "goat", "organ meat"
+            ]
+            if heavyBreakfastMarkers.contains(where: lowerName.contains) {
+                score -= 6.0
+            }
+        } else if mealContext == .midday {
             score += candidate.heaviness * 0.55
         } else if mealContext == .evening {
             score -= candidate.heaviness * 0.70
@@ -1284,7 +1354,14 @@ struct DeterministicMealPlanSolver {
         else {
             return false
         }
-        return !requireAnchor || containsAnchor(selected, profile: profile)
+        let duplicateKeys = selected.compactMap { nearDuplicateKeysByID[$0.id] }
+        guard Set(duplicateKeys).count == duplicateKeys.count else {
+            return false
+        }
+        let containsProteinAnchor = selected.contains(where: isProteinAnchor)
+        return !requireAnchor
+            || (containsAnchor(selected, profile: profile)
+                && containsProteinAnchor)
     }
 
     private func mealShapeScore(
@@ -1295,6 +1372,9 @@ struct DeterministicMealPlanSolver {
         if selected.contains(where: { $0.role == .side }) {
             score += 0.7
         }
+        if selected.contains(where: isProteinAnchor) {
+            score += 1.4
+        }
         let seasonings = selected.filter {
             [.spice, .herb, .condiment, .medicinalHerb].contains($0.role)
         }.count
@@ -1302,6 +1382,11 @@ struct DeterministicMealPlanSolver {
             score += 0.35
         }
         return score
+    }
+
+    private func isProteinAnchor(_ candidate: MP5Candidate) -> Bool {
+        [.main, .staple, .side, .other].contains(candidate.role)
+            && candidate.proteinPer100g >= 8
     }
 
     private func nearDuplicatePenalty(
@@ -1472,8 +1557,12 @@ struct DeterministicMealPlanSolver {
             let current = sortedDays[index].meals
                 .flatMap(\.components)
                 .map(\.foodID)
+            let currentHeadwords = current.compactMap {
+                nearDuplicateKeysByID[$0]
+            }
             guard Set(prior).isDisjoint(with: current),
-                  Set(current).count == current.count
+                  Set(current).count == current.count,
+                  Set(currentHeadwords).count == currentHeadwords.count
             else {
                 throw MP5SolverFailure.infeasible(
                     constraint: "two-day no-repeat window"
@@ -1540,6 +1629,9 @@ struct DeterministicMealPlanSolver {
         _ meal: String
     ) -> MP5MealScoringContext {
         let lower = meal.lowercased()
+        if lower.contains("breakfast") || lower.contains("morning") {
+            return .morning
+        }
         if lower.contains("lunch") || lower.contains("midday") {
             return .midday
         }
@@ -1592,12 +1684,7 @@ struct DeterministicMealPlanSolver {
             }
             guard let bucket = buckets[role],
                   let first = bucket.first,
-                  pool.indices.contains(first.candidateIndex),
-                  !requireAnchor
-                    || isAnchor(
-                        pool[first.candidateIndex],
-                        profile: profile
-                    )
+                  pool.indices.contains(first.candidateIndex)
             else {
                 continue
             }
@@ -1607,6 +1694,13 @@ struct DeterministicMealPlanSolver {
                 let ranked = bucket[index]
                 let candidate = pool[ranked.candidateIndex]
                 guard !selectedIDs.contains(candidate.id) else {
+                    index += 1
+                    continue
+                }
+                guard !requireAnchor
+                    || (isAnchor(candidate, profile: profile)
+                        && isProteinAnchor(candidate))
+                else {
                     index += 1
                     continue
                 }
@@ -1709,6 +1803,7 @@ struct DeterministicMealPlanSolver {
 }
 
 private enum MP5MealScoringContext {
+    case morning
     case midday
     case evening
     case other

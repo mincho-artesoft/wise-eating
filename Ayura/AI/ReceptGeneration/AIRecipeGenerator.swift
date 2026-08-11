@@ -352,6 +352,16 @@ class AIRecipeGenerator {
             if let saltIndex = result.ingredients.firstIndex(where: { normalize($0.name) == "salt" }) {
                 result.ingredients[saltIndex].grams = min(5, result.ingredients[saltIndex].grams)
             }
+            if let riceIndex = result.ingredients.firstIndex(where: {
+                normalize($0.name).contains("rice")
+            }) {
+                result.ingredients[riceIndex].name = "White Basmati Rice"
+            } else {
+                result.ingredients.insert(
+                    AIRecipeIngredient(name: "White Basmati Rice", grams: 120),
+                    at: min(1, result.ingredients.count)
+                )
+            }
         }
         return result
     }
@@ -448,23 +458,19 @@ class AIRecipeGenerator {
         
         // --- Step 3: Description reconciliation (fast, no checkpoint needed) ---
         emitLog("Step 3/3: Description reconciliation (if needed)…", onLog: onLog)
-        var finalDescription = conceptual.description
-        if !smart.replacements.isEmpty || !smart.generatedNames.isEmpty || allowedResolved.count != smart.resolved.count {
-            let finalNamesWithGrams: [(String, Double)] = allowedResolved
-                .compactMap { rid in
-                    guard let name = smart.nameByID[rid.foodItemID] else { return nil }
-                    return (name, rid.grams)
-                }
-            finalDescription = try await regenerateDescriptionToMatchIngredients(
-                original: conceptual.description,
-                recipeName: recipeName,
-                finalIngredients: finalNamesWithGrams,
-                onLog: onLog
-            )
-            emitLog("📝 Description was regenerated to reflect final ingredient names.", onLog: onLog)
-        } else {
-            emitLog("📝 Description regeneration skipped (no replacements/new items).", onLog: onLog)
-        }
+        let finalNamesWithGrams: [(String, Double)] = allowedResolved
+            .compactMap { rid in
+                guard let name = smart.nameByID[rid.foodItemID] else { return nil }
+                return (name, rid.grams)
+            }
+        let finalDescription = try await regenerateDescriptionToMatchIngredients(
+            original: conceptual.description,
+            recipeName: recipeName,
+            activePrepMinutes: conceptual.prepTimeMinutes,
+            finalIngredients: finalNamesWithGrams,
+            onLog: onLog
+        )
+        emitLog("📝 Description was regenerated against the final resolved ingredient list.", onLog: onLog)
         try Task.checkCancellation()
         
         let clampedPrep = max(5, min(240, conceptual.prepTimeMinutes))
@@ -1200,6 +1206,7 @@ class AIRecipeGenerator {
     private func regenerateDescriptionToMatchIngredients(
         original: String,
         recipeName: String,
+        activePrepMinutes: Int,
         finalIngredients: [(name: String, grams: Double)],
         onLog: (@Sendable (String) -> Void)?
     ) async throws -> String {
@@ -1220,8 +1227,13 @@ class AIRecipeGenerator {
         
         TASK:
         Regenerate ONLY the description for the recipe "\(recipeName)" so that it aligns with the EXACT ingredient list below.
-        Do not list ingredients in the steps verbatim as a list; just ensure the steps naturally use them.
-        Keep the style concise and realistic for a home cook.
+        - Every substantial listed ingredient must be used in at least one numbered step.
+        - Do not mention sauces, garnishes, cooking methods, or ingredients that are absent from the final list. Water may be mentioned only as a necessary cooking liquid.
+        - Keep raw salad vegetables raw unless the recipe name clearly asks for them cooked.
+        - Use one internally consistent cooking method; never describe an ingredient as oven-roasted and then only pan-cook it.
+        - State realistic simmer/bake/rest durations in the steps. The separate active prep estimate is \(max(5, min(240, activePrepMinutes))) minutes and must not be presented as total elapsed cooking time.
+        - For grain-and-legume dishes, explicitly add both the grain and legume before simmering and use a realistic 25–50 minute simmer unless the named ingredient genuinely needs longer.
+        - Keep the style concise and realistic for a home cook. Do not add serving suggestions that introduce unlisted foods.
         
         FINAL INGREDIENTS:
         \(ingLines)
@@ -1242,10 +1254,124 @@ class AIRecipeGenerator {
         )
         try Task.checkCancellation()
         
-        let preview = String(res.content.prefix(200))
+        let generated = res.content.trimmingCharacters(in: .whitespacesAndNewlines)
+        let finalDescription: String
+        if reconciledDescriptionIsConsistent(
+            generated,
+            finalIngredients: finalIngredients
+        ) {
+            finalDescription = generated
+        } else {
+            emitLog(
+                "  • Reconciled text still omitted ingredients or added an unlisted serving suggestion; using deterministic instructions.",
+                onLog: onLog
+            )
+            finalDescription = deterministicReconciledDescription(
+                recipeName: recipeName,
+                finalIngredients: finalIngredients
+            )
+        }
+        let preview = String(finalDescription.prefix(200))
         emitLog("  • LLM#DescReconcile output (preview 200 chars): \(preview)\(res.content.count > 200 ? "…" : "")", onLog: onLog)
         emitLog("regenerateDescriptionToMatchIngredients – END", onLog: onLog)
-        return res.content
+        return finalDescription
+    }
+
+    private func reconciledDescriptionIsConsistent(
+        _ description: String,
+        finalIngredients: [(name: String, grams: Double)]
+    ) -> Bool {
+        let lower = description.lowercased()
+        guard lower.hasPrefix("summary:"),
+              !lower.contains("serve with"),
+              !lower.contains("side of"),
+              !lower.contains("garnish")
+        else { return false }
+
+        let ignoredTokens: Set<String> = [
+            "raw", "fresh", "cooked", "boiled", "roasted", "fried",
+            "baked", "dried", "ground", "powder", "prepared", "white",
+            "brown", "often", "local", "with", "without"
+        ]
+        for ingredient in finalIngredients where ingredient.grams >= 2 {
+            let tokens = AyurvedaRules.modifierTokens(ingredient.name)
+                .map { $0.lowercased() }
+                .filter { $0.count >= 3 && !ignoredTokens.contains($0) }
+            guard tokens.isEmpty || tokens.contains(where: lower.contains) else {
+                return false
+            }
+        }
+
+        let preparedProtein = finalIngredients.contains {
+            let name = $0.name.lowercased()
+            return (name.contains("chicken") || name.contains("turkey")
+                || name.contains("beef") || name.contains("fish"))
+                && (name.contains("oven-roasted") || name.contains("cooked"))
+        }
+        if preparedProtein,
+           lower.contains("preheat your oven") || lower.contains("roast for") {
+            return false
+        }
+        return true
+    }
+
+    private func deterministicReconciledDescription(
+        recipeName: String,
+        finalIngredients: [(name: String, grams: Double)]
+    ) -> String {
+        let lowerRecipe = recipeName.lowercased()
+        func names(containing words: [String]) -> [String] {
+            finalIngredients.compactMap { ingredient in
+                let lower = ingredient.name.lowercased()
+                return words.contains(where: lower.contains)
+                    ? ingredient.name
+                    : nil
+            }
+        }
+        func joined(_ values: [String], fallback: String) -> String {
+            values.isEmpty ? fallback : values.joined(separator: ", ")
+        }
+
+        if lowerRecipe.contains("kitchari") || lowerRecipe.contains("khichdi") {
+            let pulses = names(containing: ["mung", "moong", "dal", "lentil"])
+            let rice = names(containing: ["rice"])
+            let fat = names(containing: ["ghee", "oil"])
+            let aromatics = names(containing: ["onion", "garlic", "ginger"])
+            let spices = names(containing: [
+                "turmeric", "cumin", "coriander", "pepper", "salt"
+            ])
+            return """
+            Summary: A one-pot mung and rice kitchari with warming aromatics and measured spices.
+
+            1) Rinse \(joined(pulses + rice, fallback: "the mung and rice")) until the water runs mostly clear.
+            2) Warm \(joined(fat, fallback: "the cooking fat")) in a heavy pot, add \(joined(aromatics, fallback: "the aromatics")), and cook gently for 3–4 minutes.
+            3) Stir in \(joined(spices.filter { !$0.lowercased().contains("salt") }, fallback: "the spices")) for about 30 seconds without scorching.
+            4) Add the rinsed mung and rice, cover with water, bring to a gentle boil, then reduce to a simmer.
+            5) Cover and simmer for 30–40 minutes, stirring occasionally, until both grains are soft and the mixture is porridge-like.
+            6) Stir in \(joined(spices.filter { $0.lowercased().contains("salt") }, fallback: "salt to taste")), rest for 5 minutes, and serve warm.
+            """
+        }
+
+        let grains = names(containing: ["rice", "quinoa", "oat", "barley", "pasta"])
+        let proteins = names(containing: [
+            "chicken", "turkey", "beef", "fish", "tofu", "bean", "lentil",
+            "chickpea", "egg"
+        ])
+        let fats = names(containing: ["oil", "ghee", "butter"])
+        let seasonings = finalIngredients.filter { $0.grams <= 15 }.map(\.name)
+        let remaining = finalIngredients.map(\.name).filter {
+            !Set(grains + proteins + fats + seasonings).contains($0)
+        }
+        return """
+        Summary: A practical \(recipeName) assembled from the exact listed ingredients.
+
+        1) Measure all ingredients and prepare \(joined(remaining, fallback: "the vegetables")) as appropriate.
+        2) Cook \(joined(grains, fallback: "the grain component")) until tender, using water only as the necessary cooking liquid.
+        3) Cook or gently reheat \(joined(proteins, fallback: "the main component")) until safely ready to eat.
+        4) Combine \(joined(fats, fallback: "the cooking fat")) with \(joined(seasonings, fallback: "the seasonings")) and distribute evenly.
+        5) Fold the prepared vegetables and main component into the cooked grain without adding unlisted sauces or garnishes.
+        6) Taste for seasoning, rest briefly, and serve the completed dish warm.
+        """
     }
     
     @MainActor
@@ -1417,8 +1543,22 @@ class AIRecipeGenerator {
             let cooked = ["cooked","boiled","grilled","roasted","fried","baked","steamed"]
             if cooked.contains(where: { name.contains($0) }) { return false }
         }
+
+        // 5) A raw, generic meat request must not silently resolve to a
+        // processed roll or an already cooked product. That would make the
+        // generated cooking instructions unsafe or internally contradictory.
+        let original = normalize(originalName)
+        let isPlainProteinRequest = ["chicken", "turkey", "beef", "pork", "fish"]
+            .contains(where: { original.contains($0) })
+            && !["cooked", "roasted", "fried", "baked", "smoked", "roll"]
+                .contains(where: { original.contains($0) })
+        if isPlainProteinRequest,
+           ["roll", "cooked", "roasted", "fried", "baked", "smoked", "deli"]
+            .contains(where: { name.contains($0) }) {
+            return false
+        }
         
-        // 5) Избягваме конструкции, подсказващи композит.
+        // 6) Избягваме конструкции, подсказващи композит.
         if withJoiners.contains(where: { name.contains($0) }) { return false }
         
         return true

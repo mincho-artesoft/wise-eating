@@ -155,6 +155,8 @@ final class AITrainingPlanGenerator {
                 jobID: jobID,
                 plannedTimes: plannedTimes,
                 plannedWorkoutTimes: plannedWorkoutTimes,
+                profile: profile,
+                prompts: prompts,
                 onLog: onLog
             )
             
@@ -435,8 +437,8 @@ final class AITrainingPlanGenerator {
         1.  **Plan Structure**: Your output MUST contain ONLY the days and workout names specified below.
             \(planStructure)
         2.  **Workout Names**: Each workout `name` MUST EXACTLY match one from the structure.
-        3.  **Composition**: Each workout MUST contain **5–7 distinct** exercises.
-        4.  **Durations**: Use a **varied mix** of durations (360–1200 seconds).
+        3.  **Composition**: Each workout MUST contain **4–7 distinct** exercises.
+        4.  **Durations**: Each duration is the complete allocation for that exercise, including its sets and short rests. Use a varied mix of 120–420 seconds and keep the workout total realistic (normally 20–45 minutes unless the user requests another duration).
         5.  **Inter-Day Variety**: Do not repeat the exact same set of exercises across different days.
         6.  **Safety (age \(profile.age))**: Avoid unsafe lifts; prefer age-appropriate selections.
         
@@ -544,12 +546,17 @@ final class AITrainingPlanGenerator {
     private func purgeExcludedExercises(plan: AIConceptualTrainingPlanResponse, excluded: [String], onLog: (@Sendable (String) -> Void)?) -> AIConceptualTrainingPlanResponse {
         guard !excluded.isEmpty else { return plan }
         var out = plan
-        let banned = excluded.map { $0.lowercased() }
+        let banned = excluded.map(canonicalExerciseName)
         var removedCount = 0
         for d in 0..<out.days.count {
             for w in 0..<out.days[d].workouts.count {
                 let before = out.days[d].workouts[w].exercises.count
-                out.days[d].workouts[w].exercises.removeAll { ex in let nameLower = ex.name.lowercased(); return banned.contains { nameLower.contains($0) } }
+                out.days[d].workouts[w].exercises.removeAll { exercise in
+                    let name = canonicalExerciseName(exercise.name)
+                    return banned.contains {
+                        name.contains($0) || $0.contains(name)
+                    }
+                }
                 removedCount += before - out.days[d].workouts[w].exercises.count
             }
         }
@@ -587,10 +594,15 @@ final class AITrainingPlanGenerator {
         jobID: PersistentIdentifier,
         plannedTimes: [Int: Date],
         plannedWorkoutTimes: [String: Date],
+        profile: Profile,
+        prompts: [String],
         onLog: (@Sendable (String) -> Void)?
     ) async -> TrainingPlanDraft {
         let searcher = SmartExerciseSearch(container: self.container)
         let modelContext = ModelContext(self.container)
+        let yogaIntent = prompts.joined(separator: " ")
+            .lowercased()
+            .contains("yoga")
         
         if progress.resolvedDayDrafts == nil {
             progress.resolvedDayDrafts = []
@@ -612,7 +624,13 @@ final class AITrainingPlanGenerator {
                 emit("  • Resolving workout: '\(workout.name)' (Day \(day.dayIndex))", onLog)
                 
                 for conceptualExercise in workout.exercises {
-                    if let exerciseItem = await resolveOrCreateExercise(named: conceptualExercise.name, searcher: searcher, ctx: modelContext, onLog: onLog) {
+                    if let exerciseItem = await resolveOrCreateExercise(
+                        named: conceptualExercise.name,
+                        searcher: searcher,
+                        ctx: modelContext,
+                        allowYogaMatch: yogaIntent,
+                        onLog: onLog
+                    ) {
                         resolvedExercises[exerciseItem] = Double(conceptualExercise.durationSeconds)
                     } else {
                         emit("    - ⚠️ Could not resolve '\(conceptualExercise.name)' → skipped", onLog)
@@ -620,13 +638,30 @@ final class AITrainingPlanGenerator {
                 }
                 
                 guard !resolvedExercises.isEmpty else { continue }
+                resolvedExercises = normalizedTrainingAllocations(
+                    resolvedExercises,
+                    prompts: prompts
+                )
                 
-                let chosenStart = plannedWorkoutTimes[workout.name] ?? plannedTimes[day.dayIndex] ?? Date()
+                let chosenStart = plannedWorkoutTimes[workout.name]
+                    ?? plannedTimes[day.dayIndex]
+                    ?? profileScheduledStart(
+                        workoutName: workout.name,
+                        dayIndex: day.dayIndex,
+                        profile: profile
+                    )
+                    ?? Date()
                 let totalSeconds = resolvedExercises.values.reduce(0, +)
                 let endTime = chosenStart.addingTimeInterval(totalSeconds)
                 
                 let training = Training(name: workout.name, startTime: chosenStart, endTime: endTime)
-                training.updateNotes(exercises: resolvedExercises, detailedLog: nil)
+                training.updateNotes(
+                    exercises: resolvedExercises,
+                    detailedLog: detailedTrainingLog(
+                        exercises: resolvedExercises,
+                        prompts: prompts
+                    )
+                )
                 resolvedTrainingsForDay.append(training)
             }
             
@@ -656,6 +691,114 @@ final class AITrainingPlanGenerator {
         
         emit("  -> Resolved \(finalResolvedDays.flatMap { $0.trainings }.count) training item(s) across \(finalResolvedDays.count) days.", onLog)
         return TrainingPlanDraft(name: conceptualPlan.planName, days: finalResolvedDays)
+    }
+
+    private func normalizedTrainingAllocations(
+        _ exercises: [ExerciseItem: Double],
+        prompts: [String]
+    ) -> [ExerciseItem: Double] {
+        let currentTotal = exercises.values.reduce(0, +)
+        guard currentTotal > 0 else { return exercises }
+        let requestedTotal = requestedWorkoutDurationSeconds(from: prompts)
+        let targetTotal = requestedTotal ?? max(1_200, currentTotal)
+        guard abs(targetTotal - currentTotal) > 0.5 else { return exercises }
+
+        let ordered = exercises.keys.sorted {
+            $0.id.uuidString < $1.id.uuidString
+        }
+        let scale = targetTotal / currentTotal
+        var normalized: [ExerciseItem: Double] = [:]
+        var assigned = 0.0
+        for (index, exercise) in ordered.enumerated() {
+            let original = exercises[exercise] ?? 0
+            let allocation: Double
+            if index == ordered.count - 1 {
+                allocation = max(60, targetTotal - assigned)
+            } else {
+                allocation = max(60, (original * scale).rounded())
+            }
+            normalized[exercise] = allocation
+            assigned += allocation
+        }
+        return normalized
+    }
+
+    private func requestedWorkoutDurationSeconds(
+        from prompts: [String]
+    ) -> Double? {
+        let text = prompts.joined(separator: " ").lowercased()
+        let pattern = #"\b(\d{1,3})\s*(?:-|\s)?(?:minute|minutes|min)\b"#
+        guard let regex = try? NSRegularExpression(pattern: pattern),
+              let match = regex.firstMatch(
+                in: text,
+                range: NSRange(text.startIndex..., in: text)
+              ),
+              let range = Range(match.range(at: 1), in: text),
+              let minutes = Double(text[range]),
+              (5...120).contains(minutes)
+        else {
+            return nil
+        }
+        return minutes * 60
+    }
+
+    private func profileScheduledStart(
+        workoutName: String,
+        dayIndex: Int,
+        profile: Profile
+    ) -> Date? {
+        guard !profile.trainings.isEmpty else { return nil }
+        let lower = workoutName.lowercased()
+        let preferred: Training?
+        if lower.contains("morning") {
+            preferred = profile.trainings.min(by: { $0.startTime < $1.startTime })
+        } else if lower.contains("evening") {
+            preferred = profile.trainings.max(by: { $0.startTime < $1.startTime })
+        } else {
+            preferred = profile.trainings.first(where: {
+                $0.name.caseInsensitiveCompare(workoutName) == .orderedSame
+            }) ?? profile.trainings.sorted(by: { $0.startTime < $1.startTime }).first
+        }
+        guard let preferred else { return nil }
+
+        let calendar = Calendar.current
+        let baseDay = calendar.date(
+            byAdding: .day,
+            value: max(0, dayIndex - 1),
+            to: calendar.startOfDay(for: Date())
+        ) ?? Date()
+        let clock = calendar.dateComponents([.hour, .minute, .second], from: preferred.startTime)
+        return calendar.date(
+            bySettingHour: clock.hour ?? 9,
+            minute: clock.minute ?? 0,
+            second: clock.second ?? 0,
+            of: baseDay
+        )
+    }
+
+    private func detailedTrainingLog(
+        exercises: [ExerciseItem: Double],
+        prompts: [String]
+    ) -> DetailedTrainingLog {
+        let lower = prompts.joined(separator: " ").lowercased()
+        let yoga = lower.contains("yoga") || lower.contains("asana")
+        let logs = exercises.map { exercise, allocation -> ExerciseLog in
+            if yoga || exercise.family != nil || exercise.sanskrit?.nilIfEmpty() != nil {
+                return ExerciseLog(
+                    exerciseID: exercise.id,
+                    sets: [WorkoutSet(
+                        reps: max(15, Int(allocation.rounded())),
+                        isTimeBased: true,
+                        timeUnit: .seconds
+                    )]
+                )
+            }
+            return ExerciseLog(
+                exerciseID: exercise.id,
+                sets: (0..<3).map { _ in WorkoutSet(reps: 10) }
+            )
+        }
+        return DetailedTrainingLog(logs: logs)
     }
     
     // MARK: - Helpers & Fallbacks
@@ -818,6 +961,7 @@ final class AITrainingPlanGenerator {
         named rawName: String,
         searcher: SmartExerciseSearch,
         ctx: ModelContext,
+        allowYogaMatch: Bool,
         onLog: (@Sendable (String) -> Void)?
     ) async -> ExerciseItem? {
         let name = rawName.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -827,7 +971,10 @@ final class AITrainingPlanGenerator {
             try Task.checkCancellation()
             let desc = FetchDescriptor<ExerciseItem>(predicate: #Predicate { $0.name == name })
             try Task.checkCancellation()
-            if let exactMatch = try ctx.fetch(desc).first { return exactMatch }
+            if let exactMatch = try ctx.fetch(desc).first,
+               allowYogaMatch || !isYogaExercise(exactMatch) {
+                return exactMatch
+            }
             try Task.checkCancellation()
         } catch { emit("    - ⚠️ Could not perform exact match lookup: \(error.localizedDescription)", onLog) }
         
@@ -841,7 +988,15 @@ final class AITrainingPlanGenerator {
                 try Task.checkCancellation()
                 let desc = FetchDescriptor<ExerciseItem>(predicate: #Predicate { $0.persistentModelID == firstID })
                 try Task.checkCancellation()
-                if let bestMatch = try ctx.fetch(desc).first { return bestMatch }
+                if let bestMatch = try ctx.fetch(desc).first {
+                    if allowYogaMatch || !isYogaExercise(bestMatch) {
+                        return bestMatch
+                    }
+                    emit(
+                        "    - ℹ️ Rejected yoga-only catalogue match '\(bestMatch.name)' for a standard workout.",
+                        onLog
+                    )
+                }
                 try Task.checkCancellation()
             } catch { emit("    - ⚠️ Fetching best candidate failed: \(error.localizedDescription)", onLog) }
         }
@@ -873,6 +1028,12 @@ final class AITrainingPlanGenerator {
             emit("    - ❌ Failed to create ExerciseItem for '\(name)': \(error.localizedDescription)", onLog)
             return nil
         }
+    }
+
+    private func isYogaExercise(_ exercise: ExerciseItem) -> Bool {
+        exercise.family != nil
+            || exercise.sanskrit?.nilIfEmpty() != nil
+            || exercise.name.lowercased().contains("asana")
     }
     
     private func canonicalHeadword(from s: String) -> String {
@@ -1030,23 +1191,66 @@ final class AITrainingPlanGenerator {
     @MainActor
     private func enrichAndVaryWorkouts(plan: AIConceptualTrainingPlanResponse, palettes: [String: [String]], excluded: [String], onLog: (@Sendable (String) -> Void)?) async -> AIConceptualTrainingPlanResponse {
         var out = plan
-        let banned = Set(excluded.map { $0.lowercased() })
-        let flatPalette = palettes.values.flatMap { $0 }.shuffled()
+        let banned = Set(excluded.map(canonicalExerciseName))
+        let flatPalette = palettes.values.flatMap { $0 }.sorted()
         for d in 0..<out.days.count {
             for w in 0..<out.days[d].workouts.count {
                 var exs = out.days[d].workouts[w].exercises
                 var seen = Set(exs.map { $0.name.lowercased() })
+                let context = ([out.planName, out.days[d].workouts[w].name]
+                    + exs.map(\.name))
+                    .joined(separator: " ")
+                    .lowercased()
+                let yogaIntent = [
+                    "yoga", "vata", "asana", "child's pose", "cat-cow",
+                    "savasana", "forward bend", "spinal twist"
+                ].contains(where: context.contains)
+                let deterministicFallback = yogaIntent
+                    ? [
+                        "Child's Pose", "Cat-Cow Stretch",
+                        "Seated Forward Bend", "Supine Spinal Twist",
+                        "Corpse Pose"
+                    ]
+                    : [
+                        "Bodyweight Squat", "Push-up", "Plank",
+                        "Glute Bridge", "Bird Dog"
+                    ]
+                let candidateNames = flatPalette + deterministicFallback
                 while exs.count < 5 {
-                    if let pick = flatPalette.first(where: { !seen.contains($0.lowercased()) && !banned.contains($0.lowercased()) }) {
-                        exs.append(.init(name: pick, durationSeconds: Int.random(in: 360...1200)))
+                    if let pick = candidateNames.first(where: {
+                        let lower = $0.lowercased()
+                        let canonical = canonicalExerciseName($0)
+                        return !seen.contains(lower)
+                            && !banned.contains(where: {
+                                canonical.contains($0) || $0.contains(canonical)
+                            })
+                    }) {
+                        exs.append(.init(name: pick, durationSeconds: 180))
                         seen.insert(pick.lowercased())
                     } else { break }
                 }
-                if Set(exs.map { $0.durationSeconds }).count <= 1 { exs.indices.forEach { exs[$0].durationSeconds = Int.random(in: 360...1200) } }
+                if Set(exs.map { $0.durationSeconds }).count <= 1 {
+                    for index in exs.indices {
+                        exs[index].durationSeconds = 150 + index * 15
+                    }
+                }
                 out.days[d].workouts[w].exercises = exs
             }
         }
         return out
+    }
+
+    private func canonicalExerciseName(_ value: String) -> String {
+        value.lowercased()
+            .split(whereSeparator: { !$0.isLetter && !$0.isNumber })
+            .map { token in
+                var word = String(token)
+                if word.count > 3, word.hasSuffix("s") {
+                    word.removeLast()
+                }
+                return word
+            }
+            .joined(separator: " ")
     }
     
     private func enforceInterDayVariety(plan: AIConceptualTrainingPlanResponse, protectedRules: [MustDoRule], palettes: [String: [String]], onLog: (@Sendable (String) -> Void)?) async -> AIConceptualTrainingPlanResponse {
@@ -1080,7 +1284,7 @@ final class AITrainingPlanGenerator {
             for w in 0..<out.days[d].workouts.count {
                 for e in 0..<out.days[d].workouts[w].exercises.count {
                     let original = out.days[d].workouts[w].exercises[e].durationSeconds
-                    let clamped = max(300, min(1800, original))
+                    let clamped = max(120, min(420, original))
                     if original != clamped {
                         out.days[d].workouts[w].exercises[e].durationSeconds = clamped
                         adjustedCount += 1
@@ -1088,7 +1292,7 @@ final class AITrainingPlanGenerator {
                 }
             }
         }
-        if adjustedCount > 0 { emit("  -> Clamped \(adjustedCount) exercise duration(s) to be within 300-1800 sec.", onLog) }
+        if adjustedCount > 0 { emit("  -> Clamped \(adjustedCount) exercise allocation(s) to 120–420 sec including sets and rests.", onLog) }
         return out
     }
     

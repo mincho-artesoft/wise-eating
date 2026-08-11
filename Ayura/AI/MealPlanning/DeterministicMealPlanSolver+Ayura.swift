@@ -22,6 +22,18 @@ struct MP5PlannerAdapter {
     ) async throws -> MP5PlannerAssembly {
         await SearchIndexStore.shared.ensureLoaded(container: container)
         let context = ModelContext(container)
+        let text = (prompts
+            + interpretedPrompts.qualitativeGoals
+            + interpretedPrompts.structuralRequests)
+            .joined(separator: " ")
+            .lowercased()
+        let storedTarget = AyurvedaConstitutionStore
+            .record(for: profile.id)?
+            .target()
+        let promptDosha = inferredDosha(from: text)
+        let isAyurvedicRequest = storedTarget != nil
+            || promptDosha != nil
+            || text.contains("ayurved")
         let foods = try context.fetch(FetchDescriptor<FoodItem>())
         let profiles = try context.fetch(FetchDescriptor<AyurvedaProfile>())
         let links = try context.fetch(FetchDescriptor<AyurvedaLink>())
@@ -64,7 +76,8 @@ struct MP5PlannerAdapter {
                 },
                 link: linkByFoodID[food.id],
                 engineExcluded: excludedByGate.contains(food.id),
-                priorityNutrientTypes: priorityNutrientTypes
+                priorityNutrientTypes: priorityNutrientTypes,
+                requestText: text
             ) else {
                 continue
             }
@@ -72,18 +85,21 @@ struct MP5PlannerAdapter {
             thermalByFoodID[food.id] = resolved.thermalCharacter
         }
 
-        let text = (prompts
-            + interpretedPrompts.qualitativeGoals
-            + interpretedPrompts.structuralRequests)
-            .joined(separator: " ")
-            .lowercased()
-        let storedTarget = AyurvedaConstitutionStore
-            .record(for: profile.id)?
-            .target()
-        let promptDosha = inferredDosha(from: text)
+        let fullDailyKcal = estimatedDailyCalories(for: profile)
+        let fullDailyProtein = estimatedDailyProtein(for: profile)
+        let largestDaySlotCount = daysAndMeals.values.map(\.count).max() ?? 0
+        let singleSlotFraction = mealTargetFraction(
+            for: daysAndMeals.values.first?.first ?? ""
+        )
+        let requestedKcal = largestDaySlotCount <= 1
+            ? fullDailyKcal * singleSlotFraction
+            : fullDailyKcal
+        let requestedProtein = largestDaySlotCount <= 1
+            ? fullDailyProtein * singleSlotFraction
+            : fullDailyProtein
         let profileRequest = MP5SolverProfile(
-            dailyKcal: estimatedDailyCalories(for: profile),
-            dailyProteinTarget: estimatedDailyProtein(for: profile),
+            dailyKcal: requestedKcal,
+            dailyProteinTarget: requestedProtein,
             ageInMonths: profile.ageInMonths,
             allergenConcepts: allergenConcepts(for: profile),
             excludedFoodIDs: exclusions.explicitFoodIDs.union(excludedByGate),
@@ -92,7 +108,9 @@ struct MP5PlannerAdapter {
             } ?? promptDosha,
             agni: inferredAgni(from: text),
             season: currentRitu(),
-            enableAyurvedicScoring: MP5FeatureFlags.ayurvedicSolverEnabled,
+            enableAyurvedicScoring: MP5FeatureFlags.ayurvedicSolverEnabled
+                || isAyurvedicRequest,
+            requestText: text,
             doshaTarget: storedTarget.map {
                 MP5DoshaTarget(
                     vata: $0.vata,
@@ -133,9 +151,20 @@ struct MP5PlannerAdapter {
         )
 
         let startedAt = DispatchTime.now().uptimeNanoseconds
-        let solved = try DeterministicMealPlanSolver(
-            candidates: flattened
-        ).solve(request)
+        var solved: MP5SolvedPlan
+        do {
+            solved = try DeterministicMealPlanSolver(
+                candidates: flattened
+            ).solve(request)
+        } catch let failure as MP5SolverFailure {
+            onLog?("❌ \(failure.description)")
+            throw failure
+        }
+        solved = enrichSparseMeals(
+            solved,
+            candidates: flattened,
+            profile: profileRequest
+        )
         let elapsedMilliseconds = Double(
             DispatchTime.now().uptimeNanoseconds - startedAt
         ) / 1_000_000
@@ -213,7 +242,7 @@ struct MP5PlannerAdapter {
         return MP5PlannerAssembly(
             preview: MealPlanPreview(
                 startDate: Calendar.current.startOfDay(for: Date()),
-                prompt: profileRequest.enableAyurvedicScoring
+                prompt: isAyurvedicRequest
                     ? "Deterministic Ayurvedic meal plan"
                     : "Deterministic meal plan",
                 days: days,
@@ -230,8 +259,17 @@ struct MP5PlannerAdapter {
         linkedProfile: AyurvedaProfile?,
         link: AyurvedaLink?,
         engineExcluded: Bool,
-        priorityNutrientTypes: Set<NutrientType>
+        priorityNutrientTypes: Set<NutrientType>,
+        requestText: String
     ) -> (candidate: MP5Candidate, thermalCharacter: String)? {
+        guard !isLowQualityPlannerCandidate(food.name),
+              isCompatibleWithRequestedTradition(
+                food.name,
+                requestText: requestText
+              )
+        else {
+            return nil
+        }
         let referenceWeight = compact.referenceWeightG
         guard referenceWeight > 0,
               compact.isEdible,
@@ -253,10 +291,20 @@ struct MP5PlannerAdapter {
         let roleResolution = FoodRoleResolver.shared.resolution(
             for: food.id
         )
-        let roleDefinition = FoodRoleResolver.shared.definition(
-            for: roleResolution.role
-        )
         let tokens = Set(AyurvedaRules.modifierTokens(food.name))
+        let correctedRole = correctedRole(
+            name: food.name,
+            nameTokens: tokens,
+            resolved: roleResolution.role
+        )
+        let roleDefinition = FoodRoleResolver.shared.definition(
+            for: correctedRole
+        )
+        let correctedPortion = correctedPortionLimits(
+            name: food.name,
+            nameTokens: tokens,
+            definition: roleDefinition
+        )
         let isHoney = concepts.contains("honey") || tokens.contains("honey")
         let isGhee = tokens.contains("ghee")
             || (tokens.contains("clarified") && tokens.contains("butter"))
@@ -276,14 +324,17 @@ struct MP5PlannerAdapter {
                 concepts: concepts,
                 enforcedMinAgeMonths: enforcedMinAgeMonths,
                 engineExcluded: engineExcluded,
-                role: roleResolution.role,
+                role: correctedRole,
                 roleAnchor: roleDefinition.anchor,
                 roleMaxPerMeal: roleDefinition.maxPerMeal,
                 roleEligibleAsComponent: roleDefinition.eligibleAsComponent,
                 notReadyToEat: roleResolution.notReadyToEat,
-                roleHeadword: roleResolution.headword,
-                minimumGrams: roleDefinition.portionGrams.min,
-                maximumGrams: roleDefinition.portionGrams.max,
+                roleHeadword: normalizedPlannerHeadword(
+                    name: food.name,
+                    fallback: roleResolution.headword
+                ),
+                minimumGrams: correctedPortion.minimum,
+                maximumGrams: correctedPortion.maximum,
                 doshaVata: resolution.vpk.vata,
                 doshaPitta: resolution.vpk.pitta,
                 doshaKapha: resolution.vpk.kapha,
@@ -304,6 +355,375 @@ struct MP5PlannerAdapter {
                 )
             ),
             resolution.thermalCharacter
+        )
+    }
+
+    private func correctedRole(
+        name: String,
+        nameTokens: Set<String>,
+        resolved: FoodRole
+    ) -> FoodRole {
+        let lower = name.lowercased()
+        let seasoningTokens: Set<String> = [
+            "seed", "seeds", "spice", "spices", "seasoning", "tempering",
+            "cumin", "pepper", "turmeric", "masala", "radhuni", "posto",
+            "sesame", "poppy", "mustard", "garlic"
+        ]
+        let concentratedSeasoning = lower.contains("dried")
+            || lower.contains("powder")
+            || lower.contains("ground")
+        let seasoningPlantTokens: Set<String> = [
+            "garlic", "basil", "tulsi", "thyme", "methi", "coriander",
+            "parsley", "oregano", "rosemary", "sage", "mint"
+        ]
+        let dishTokens: Set<String> = [
+            "khichdi", "kitchari", "stew", "soup", "curry", "salad",
+            "rice", "chicken", "fish", "bowl", "meal", "stir", "fry",
+            "roast", "pot", "sabzi", "chivda"
+        ]
+        let isDirectSeasoning = nameTokens.isDisjoint(with: dishTokens)
+            && nameTokens.count <= 5
+        let directSeasoningMarkers = [
+            "black pepper", "white pepper", "cayenne", "paprika", "cumin",
+            "turmeric", "coriander", "cinnamon", "cardamom", "clove",
+            "nutmeg", "ginger, ground", "garlic powder", "onion powder"
+        ]
+        let isPepperVegetable = lower.contains("peppers, sweet")
+            || lower.contains("sweet pepper")
+            || lower.contains("bell pepper")
+        if !isPepperVegetable
+            && (directSeasoningMarkers.contains(where: lower.contains)
+            || (isDirectSeasoning
+                && !nameTokens.isDisjoint(with: seasoningTokens))
+            || (concentratedSeasoning
+                && !nameTokens.isDisjoint(with: seasoningPlantTokens))) {
+            return .spice
+        }
+        if ["sauce", "dressing", "ketchup", "chutney", "relish"]
+            .contains(where: lower.contains) {
+            return .condiment
+        }
+        let fatTokens: Set<String> = ["oil", "butter", "ghee", "margarine", "spread"]
+        if !nameTokens.isDisjoint(with: fatTokens) {
+            return .fat
+        }
+        return resolved
+    }
+
+    private func correctedPortionLimits(
+        name: String,
+        nameTokens: Set<String>,
+        definition: FoodRoleDefinition
+    ) -> (minimum: Double, maximum: Double) {
+        let lower = name.lowercased()
+        let seedTokens: Set<String> = [
+            "seed", "seeds", "radhuni", "posto", "sesame", "poppy", "mustard"
+        ]
+        let dishTokens: Set<String> = [
+            "khichdi", "kitchari", "stew", "soup", "curry", "salad",
+            "rice", "chicken", "fish", "bowl", "meal", "stir", "fry",
+            "roast", "pot", "sabzi", "chivda"
+        ]
+        let seasoningMarkers = [
+            "pepper", "paprika", "cumin", "turmeric", "coriander", "cinnamon",
+            "cardamom", "clove", "nutmeg", "ginger, ground", "garlic powder",
+            "onion powder", "seasoning", "spice"
+        ]
+        let isPepperVegetable = lower.contains("peppers, sweet")
+            || lower.contains("sweet pepper")
+            || lower.contains("bell pepper")
+        if nameTokens.isDisjoint(with: dishTokens),
+           !isPepperVegetable,
+           seasoningMarkers.contains(where: lower.contains) {
+            return (0.5, 10)
+        }
+        if lower.contains("garlic"),
+           (lower.contains("dried") || lower.contains("powder")) {
+            return (0.5, 10)
+        }
+        if lower.contains("dehydrated") {
+            return (1, 20)
+        }
+        if nameTokens.isDisjoint(with: dishTokens),
+           (!nameTokens.isDisjoint(with: seedTokens)
+                || lower.contains("seed")) {
+            return (0.5, 15)
+        }
+        let legumeTokens: Set<String> = [
+            "bean", "beans", "lentil", "lentils", "chickpea", "chickpeas",
+            "cowpea", "cowpeas", "pea", "peas", "dal", "mung", "moong"
+        ]
+        let concentratedMarkers = [
+            "dried", "powder", "flour", "starch", "extract", "protein"
+        ]
+        if (!nameTokens.isDisjoint(with: legumeTokens)
+                || ["bean", "lentil", "chickpea", "cowpea", "pea"]
+                    .contains(where: lower.contains)),
+           !concentratedMarkers.contains(where: lower.contains) {
+            return (
+                max(50, definition.portionGrams.min),
+                max(250, definition.portionGrams.max)
+            )
+        }
+        let grainTokens: Set<String> = [
+            "oat", "oats", "rice", "quinoa", "barley", "millet", "bulgur"
+        ]
+        if !nameTokens.isDisjoint(with: grainTokens),
+           nameTokens.isDisjoint(with: dishTokens),
+           !lower.contains("cracker"),
+           !lower.contains("flour") {
+            let minimum = min(80, max(30, definition.portionGrams.min))
+            return (minimum, max(minimum, min(120, definition.portionGrams.max)))
+        }
+        let vegetableTokens: Set<String> = [
+            "broccoli", "spinach", "carrot", "tomato", "tomatoes", "pepper",
+            "peppers", "zucchini", "cauliflower", "pumpkin", "turnip",
+            "cucumber", "cabbage", "eggplant", "okra", "asparagus"
+        ]
+        let preparedDishMarkers = [
+            "salsa", "raita", "sauce", "dressing", "soup", "stew", "curry"
+        ]
+        if !nameTokens.isDisjoint(with: vegetableTokens),
+           !concentratedMarkers.contains(where: lower.contains),
+           !preparedDishMarkers.contains(where: lower.contains) {
+            return (
+                max(50, definition.portionGrams.min),
+                max(300, definition.portionGrams.max)
+            )
+        }
+        return (
+            definition.portionGrams.min,
+            definition.portionGrams.max
+        )
+    }
+
+    private func isLowQualityPlannerCandidate(_ name: String) -> Bool {
+        let lower = name.lowercased()
+        let blockedMarkers = [
+            "snacks,", "fast foods", "hot pocket", "turnover", "cookie",
+            "cake", "candy", "marshmallow", "egg roll", "extruded",
+            "nacho cheese", "heavy syrup", "sweet, fluid", "margarine-like",
+            "vegetable oil-butter spread", "breadfruit leaf", "corn-based cones",
+            "canned, vacuum pack", "alcohol", "liqueur", "cocktail",
+            "distilled beverage", "candied", "confection", "popcorn",
+            "gelatin dessert", "ice cream", "pudding", "doughnut", "donut",
+            "pastry", "pie filling", "soft drink", "energy drink", "sandwich",
+            "fries", "wonton", "dumpling", "pot sticker", "pupusa", "pizza",
+            "burger", "sausage", "bacon", "rotisserie", "barbecue", "bbq",
+            "halwa", "fritter", "breaded", "battered", "sweet and sour",
+            "pasta with tomato-based sauce and cheese", "variety meats",
+            "brain", "tripe", "sweetbread", "pork hash", "corned beef hash",
+            "cereal bar", "protein bar", "pretzel", "dry mix", "from frozen",
+            "gravy", "macaroni and cheese", "fried", "coated",
+            "with added sugar", "yolk only", "pokeberry", "poke shoots",
+            "raw banana (plantain)"
+        ]
+        let rawAnimalMarkers = [
+            "beef", "pork", "chicken", "turkey", "lamb", "goat", "duck",
+            "fish", "salmon", "tuna", "cod", "meat"
+        ]
+        if lower.contains("raw"),
+           rawAnimalMarkers.contains(where: lower.contains) {
+            return true
+        }
+        return blockedMarkers.contains(where: lower.contains)
+    }
+
+    private func isCompatibleWithRequestedTradition(
+        _ name: String,
+        requestText: String
+    ) -> Bool {
+        let lower = name.lowercased()
+        if requestText.contains("balanced") {
+            let simplePreparationMarkers = [
+                "raw", "cooked", "boiled", "steamed", "baked", "grilled",
+                "roasted"
+            ]
+            let wholeFoodMarkers = [
+                "rice", "oat", "lentil", "bean", "chickpea",
+                "pea", "yogurt", "tofu", "egg", "chicken", "turkey", "fish",
+                "beef", "pork", "milk", "cheese", "bread", "pasta", "potato",
+                "tomato", "cucumber", "carrot", "spinach", "broccoli",
+                "zucchini", "pepper", "cabbage", "cauliflower", "pumpkin",
+                "apple", "pear", "orange", "banana", "berry", "berries",
+                "peach", "nectarine", "plum", "pomegranate", "avocado"
+            ]
+            let wholesomeDishMarkers = [
+                "stew", "curry", "sabzi", "pilaf", "kitchari", "khichdi",
+                " dal", "roast", "toor", "bowl"
+            ]
+            let isSimpleWholeFood = simplePreparationMarkers.contains(
+                where: lower.contains
+            ) && wholeFoodMarkers.contains(where: lower.contains)
+            guard isSimpleWholeFood
+                    || wholesomeDishMarkers.contains(where: lower.contains)
+            else {
+                return false
+            }
+        }
+        guard requestText.contains("vata") else { return true }
+        let unsuitableMarkers = [
+            "cooking spray", "creamed", "omelet", "scrambled", "fried",
+            "salsa", "raita", "duck", "beef", "pork", "cold", "raw",
+            "dehydrated", "puffed", "makhana", "wasabi", "cracker", "bran",
+            "crude", "chicken", "turkey", "fish", "meat", "puerto rican",
+            "veal", "lamb", "goat", "shellfish", "seafood"
+        ]
+        guard !unsuitableMarkers.contains(where: lower.contains) else {
+            return false
+        }
+        let tokens = Set(AyurvedaRules.modifierTokens(name))
+        let tokenMarkers: Set<String> = [
+            "rice", "mung", "moong", "dal", "lentil", "lentils", "oat",
+            "oats", "ghee", "ginger", "garlic", "cumin", "turmeric",
+            "coriander", "yam", "pumpkin", "carrot", "zucchini", "turnip",
+            "spinach", "pea", "peas", "khichdi", "kitchari",
+            "stew"
+        ]
+        return !tokens.isDisjoint(with: tokenMarkers)
+            || lower.contains("sweet potato")
+    }
+
+    private func normalizedPlannerHeadword(
+        name: String,
+        fallback: String
+    ) -> String {
+        let lower = name.lowercased()
+        let groups: [(key: String, markers: [String])] = [
+            ("sweet-potato", ["sweet potato"]),
+            ("oat", ["oat"]),
+            ("rice", ["rice"]),
+            ("mung", ["mung", "moong"]),
+            ("lentil", ["lentil", "dal"]),
+            ("chickpea", ["chickpea", "garbanzo"]),
+            ("bean", ["bean", "cowpea"]),
+            ("egg", ["egg"]),
+            ("chicken", ["chicken"]),
+            ("beef", ["beef", "steak"]),
+            ("fish", ["fish", "salmon", "tuna", "cod"]),
+            ("yogurt", ["yogurt", "yoghurt"]),
+            ("tomato", ["tomato"]),
+            ("carrot", ["carrot"]),
+            ("spinach", ["spinach"]),
+            ("broccoli", ["broccoli"]),
+            ("cauliflower", ["cauliflower"]),
+            ("pumpkin", ["pumpkin"]),
+            ("apple", ["apple"])
+        ]
+        return groups.first(where: { group in
+            group.markers.contains(where: lower.contains)
+        })?.key ?? fallback
+    }
+
+    private func mealTargetFraction(for slotName: String) -> Double {
+        let lower = slotName.lowercased()
+        if lower.contains("breakfast") { return 0.25 }
+        if lower.contains("snack") { return 0.15 }
+        if lower.contains("lunch") || lower.contains("dinner") { return 0.35 }
+        return 0.33
+    }
+
+    private func enrichSparseMeals(
+        _ input: MP5SolvedPlan,
+        candidates: [MP5Candidate],
+        profile: MP5SolverProfile
+    ) -> MP5SolvedPlan {
+        var output = input
+        var usedIDs = Set(output.components.map(\.foodID))
+        let preferredMarkers: [String]
+        if profile.requestText.contains("mediterranean") {
+            preferredMarkers = [
+                "tomato", "cucumber", "zucchini", "pepper", "spinach"
+            ]
+        } else if profile.requestText.contains("vata") {
+            preferredMarkers = [
+                "pumpkin", "carrot", "turnip", "spinach", "zucchini",
+                "sweet potato"
+            ]
+        } else {
+            preferredMarkers = [
+                "broccoli", "spinach", "carrot", "tomato", "pepper",
+                "zucchini", "cauliflower"
+            ]
+        }
+        let sideCandidates = candidates.filter { candidate in
+            !usedIDs.contains(candidate.id)
+                && candidate.role == .side
+                && candidate.roleEligibleAsComponent
+                && !candidate.notReadyToEat
+                && !candidate.engineExcluded
+                && candidate.enforcedMinAgeMonths <= profile.ageInMonths
+                && candidate.concepts.isDisjoint(with: profile.allergenConcepts)
+                && preferredMarkers.contains(where: {
+                    candidate.name.lowercased().contains($0)
+                })
+        }.sorted {
+            $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending
+        }
+
+        for dayIndex in output.days.indices {
+            for mealIndex in output.days[dayIndex].meals.indices {
+                var meal = output.days[dayIndex].meals[mealIndex]
+                guard meal.components.count < 3,
+                      let side = sideCandidates.first(where: {
+                          !usedIDs.contains($0.id)
+                      })
+                else { continue }
+                let sideGrams = min(
+                    side.maximumGrams,
+                    max(side.minimumGrams, 100)
+                )
+                let sideKcal = side.kcalPerGram * sideGrams
+                guard let anchorIndex = meal.components.indices.max(by: {
+                    meal.components[$0].kcal < meal.components[$1].kcal
+                }),
+                let anchor = candidates.first(where: {
+                    $0.id == meal.components[anchorIndex].foodID
+                }), anchor.kcalPerGram > 0
+                else { continue }
+                let adjustedAnchorGrams = meal.components[anchorIndex].grams
+                    - sideKcal / anchor.kcalPerGram
+                guard adjustedAnchorGrams >= anchor.minimumGrams else {
+                    continue
+                }
+                meal.components[anchorIndex] = solvedComponent(
+                    anchor,
+                    grams: adjustedAnchorGrams,
+                    dosha: profile.dosha
+                )
+                meal.components.append(
+                    solvedComponent(
+                        side,
+                        grams: sideGrams,
+                        dosha: profile.dosha
+                    )
+                )
+                output.days[dayIndex].meals[mealIndex] = meal
+                usedIDs.insert(side.id)
+            }
+        }
+        return output
+    }
+
+    private func solvedComponent(
+        _ candidate: MP5Candidate,
+        grams: Double,
+        dosha: MP5Dosha?
+    ) -> MP5SolvedComponent {
+        let factor = grams / 100
+        return MP5SolvedComponent(
+            foodID: candidate.id,
+            name: candidate.name,
+            grams: grams,
+            kcal: candidate.kcalPer100g * factor,
+            protein: candidate.proteinPer100g * factor,
+            carbs: candidate.carbsPer100g * factor,
+            fat: candidate.fatPer100g * factor,
+            fiber: candidate.fiberPer100g * factor,
+            doshaEffect: candidate.doshaEffect(dosha),
+            heaviness: candidate.heaviness,
+            rasa: candidate.rasa,
+            tier: candidate.tier
         )
     }
 

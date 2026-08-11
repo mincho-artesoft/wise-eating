@@ -87,10 +87,16 @@ class AIFoodDetailGenerator {
             // ПРИНТ ЗА ДЕБЪГ: Виж кои са кандидатите
             print("📋 [DEBUG] Намерени кандидати: \(candidateNames)")
             
-            onLog?("  🧠 Asking AI to select the best match from \(candidateNames.count) candidates…")
+            if let deterministicMatch = bestDeterministicReference(for: foodName, in: candidates) {
+                similarFood = deterministicMatch
+                onLog?("  ✅ Strict name match selected catalog reference: '\(deterministicMatch.name)'")
+            }
+
+            if similarFood == nil {
+                onLog?("  🧠 Asking AI to select the best match from \(candidateNames.count) candidates…")
             
-            // 3. Създаваме промпт за избор
-            let selectionSession = makeSession()
+                // 3. Създаваме промпт за избор
+                let selectionSession = makeSession()
             
             let selectionPrompt = """
                     From the list below, which is the SINGLE most semantically similar and appropriate food item to be used as a nutritional reference for "\(foodName)"?
@@ -105,32 +111,33 @@ class AIFoodDetailGenerator {
                     """
             
             // 4. Изпращаме запитването към езиковия модел
-            do {
-                let selectionResult = try await selectionSession.respond(
-                    to: selectionPrompt,
-                    generating: AIBestMatchResponse.self,
-                    includeSchemaInPrompt: true
-                ).content
+                do {
+                    let selectionResult = try await selectionSession.respond(
+                        to: selectionPrompt,
+                        generating: AIBestMatchResponse.self,
+                        includeSchemaInPrompt: true
+                    ).content
                 
-                if let bestMatchName = selectionResult.bestMatch, !bestMatchName.isEmpty {
-                    // 5. Намираме избрания FoodItem в нашия списък
-                    if let foundFood = candidates.first(where: { $0.name == bestMatchName }) {
-                        similarFood = foundFood
+                    if let bestMatchName = selectionResult.bestMatch, !bestMatchName.isEmpty {
+                        // 5. Намираме избрания FoodItem в нашия списък
+                        if let foundFood = candidates.first(where: { $0.name == bestMatchName }) {
+                            similarFood = foundFood
                         
-                        // ✅ ТУК Е ИЗРИЧНИЯТ ПРИНТ
-                        print("\n🎯 [AI MATCH] ИЗБРАН КАНДИДАТ: \(foundFood.name)\n")
+                            // ✅ ТУК Е ИЗРИЧНИЯТ ПРИНТ
+                            print("\n🎯 [AI MATCH] ИЗБРАН КАНДИДАТ: \(foundFood.name)\n")
                         
-                        onLog?("  ✅ AI selected reference food: '\(foundFood.name)'")
+                            onLog?("  ✅ AI selected reference food: '\(foundFood.name)'")
+                        } else {
+                            print("⚠️ AI върна име '\(bestMatchName)', което не е в списъка с кандидати.")
+                            onLog?("  ⚠️ AI returned a name ('\(bestMatchName)') not found in the candidate list. Proceeding without reference.")
+                        }
                     } else {
-                        print("⚠️ AI върна име '\(bestMatchName)', което не е в списъка с кандидати.")
-                        onLog?("  ⚠️ AI returned a name ('\(bestMatchName)') not found in the candidate list. Proceeding without reference.")
+                        print("ℹ️ AI реши, че няма подходящ кандидат.")
+                        onLog?("  ℹ️ AI concluded no candidate is a good match. Proceeding without reference food.")
                     }
-                } else {
-                    print("ℹ️ AI реши, че няма подходящ кандидат.")
-                    onLog?("  ℹ️ AI concluded no candidate is a good match. Proceeding without reference food.")
+                } catch {
+                    onLog?("  ⚠️ AI selection step failed: \(error.localizedDescription)")
                 }
-            } catch {
-                onLog?("  ⚠️ AI selection step failed: \(error.localizedDescription)")
             }
         } else {
             print("ℹ️ Търсачката не върна никакви резултати за '\(foodName)'.")
@@ -1918,7 +1925,7 @@ class AIFoodDetailGenerator {
         
         
         // --- Final assembly -> FoodItemDTO (остава непроменено) ---
-        let dto = FoodItemDTO(
+        var dto = FoodItemDTO(
             id: UUID(),
             name: foodName,
             minAgeMonths: minAgeResp.minAgeMonths,
@@ -2091,6 +2098,8 @@ class AIFoodDetailGenerator {
                 stigmasterol:   Nutrient(from: sterols.sterols.stigmasterol)
             )
         )
+
+        dto = validatedFoodDTO(dto, foodName: foodName, reference: similarFood, onLog: onLog)
         
         do {
             let encoder = JSONEncoder()
@@ -2182,6 +2191,159 @@ class AIFoodDetailGenerator {
         let inter = Double(A.intersection(B).count)
         let uni   = Double(A.union(B).count)
         return inter / uni
+    }
+
+    private func foodNameTokens(_ value: String) -> Set<String> {
+        let normalized = value.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: .current)
+            .lowercased()
+            .replacingOccurrences(of: #"[^a-zа-я0-9\s]"#, with: " ", options: .regularExpression)
+        let stop: Set<String> = [
+            "and", "or", "of", "the", "as", "to", "type", "nfs", "ns",
+            "food", "и", "или", "от", "тип"
+        ]
+        return Set(normalized.split(whereSeparator: \.isWhitespace).map(String.init).filter { !stop.contains($0) })
+    }
+
+    private func bestDeterministicReference(for requestedName: String, in candidates: [FoodItem]) -> FoodItem? {
+        let requested = foodNameTokens(requestedName)
+        guard !requested.isEmpty else { return nil }
+        let preparationWords: Set<String> = ["raw", "cooked", "boiled", "fried", "dried", "powder", "juice", "frozen"]
+
+        return candidates.compactMap { candidate -> (FoodItem, Double)? in
+            let candidateTokens = foodNameTokens(candidate.name)
+            guard requested.isSubset(of: candidateTokens) else { return nil }
+            let requestedPreparation = requested.intersection(preparationWords)
+            let candidatePreparation = candidateTokens.intersection(preparationWords)
+            guard requestedPreparation == candidatePreparation || requestedPreparation.isEmpty else { return nil }
+
+            let extras = candidateTokens.subtracting(requested).count
+            let startsWithRequestedHead = candidate.name.lowercased().hasPrefix(requestedName.lowercased().split(separator: ",").first.map(String.init) ?? requestedName.lowercased())
+            let nutritionBonus = candidate.other?.energyKcal?.value != nil && candidate.macronutrients != nil ? 0.25 : 0
+            let score = 10 - Double(extras) + (startsWithRequestedHead ? 1 : 0) + nutritionBonus
+            return (candidate, score)
+        }
+        .max(by: { $0.1 < $1.1 })?
+        .0
+    }
+
+    private func isTrustedNutritionReference(_ reference: FoodItem, for requestedName: String) -> Bool {
+        let requested = foodNameTokens(requestedName)
+        let referenceTokens = foodNameTokens(reference.name)
+        guard !requested.isEmpty, requested.isSubset(of: referenceTokens) else { return false }
+        let preparationWords: Set<String> = ["raw", "cooked", "boiled", "fried", "dried", "powder", "juice", "frozen"]
+        let requestedPreparation = requested.intersection(preparationWords)
+        return requestedPreparation.isEmpty || requestedPreparation == referenceTokens.intersection(preparationWords)
+    }
+
+    private func mergedReferenceDTO<Output: Codable, Reference: Encodable>(
+        generated: Output?,
+        reference: Reference?
+    ) -> Output? {
+        guard let generated, let reference,
+              let generatedObject = try? JSONSerialization.jsonObject(with: JSONEncoder().encode(generated)),
+              let referenceObject = try? JSONSerialization.jsonObject(with: JSONEncoder().encode(reference))
+        else { return generated }
+
+        func merge(_ base: Any, _ overlay: Any) -> Any {
+            guard var baseDictionary = base as? [String: Any],
+                  let overlayDictionary = overlay as? [String: Any]
+            else { return overlay }
+            for (key, value) in overlayDictionary {
+                baseDictionary[key] = baseDictionary[key].map { merge($0, value) } ?? value
+            }
+            return baseDictionary
+        }
+
+        let merged = merge(generatedObject, referenceObject)
+        guard let data = try? JSONSerialization.data(withJSONObject: merged) else { return generated }
+        return (try? JSONDecoder().decode(Output.self, from: data)) ?? generated
+    }
+
+    private func validatedFoodDTO(
+        _ generated: FoodItemDTO,
+        foodName: String,
+        reference: FoodItem?,
+        onLog: (@Sendable (String) -> Void)?
+    ) -> FoodItemDTO {
+        var dto = generated
+
+        if let reference, isTrustedNutritionReference(reference, for: foodName) {
+            let copy = FoodItemCopy(from: reference)
+            dto.macronutrients = mergedReferenceDTO(generated: dto.macronutrients, reference: copy.macronutrients)
+            dto.lipids = mergedReferenceDTO(generated: dto.lipids, reference: copy.lipids)
+            dto.vitamins = mergedReferenceDTO(generated: dto.vitamins, reference: copy.vitamins)
+            dto.minerals = mergedReferenceDTO(generated: dto.minerals, reference: copy.minerals)
+            dto.other = mergedReferenceDTO(generated: dto.other, reference: copy.other)
+            dto.aminoAcids = mergedReferenceDTO(generated: dto.aminoAcids, reference: copy.aminoAcids)
+            dto.carbDetails = mergedReferenceDTO(generated: dto.carbDetails, reference: copy.carbDetails)
+            dto.sterols = mergedReferenceDTO(generated: dto.sterols, reference: copy.sterols)
+            dto.minAgeMonths = max(6, reference.minAgeMonths)
+            dto.ageProvenance = "catalog-reference"
+            dto.ageSource = "Ayura catalogue: \(reference.name)"
+            if let allergens = reference.allergens, !allergens.isEmpty { dto.allergens = allergens }
+            onLog?("  🛡️ Nutrition validated from exact catalog reference '\(reference.name)'.")
+        }
+
+        if dto.isEdible ?? true {
+            dto.inedibleReason = nil
+            dto.minAgeMonths = max(6, dto.minAgeMonths ?? 6)
+        }
+
+        if var macros = dto.macronutrients {
+            let carbohydrates = max(0, macros.carbohydrates?.value ?? 0)
+            let protein = max(0, macros.protein?.value ?? 0)
+            let fat = max(0, macros.fat?.value ?? 0)
+            if let sugars = macros.totalSugars?.value, sugars > carbohydrates {
+                macros.totalSugars = Nutrient(value: carbohydrates, unit: "g")
+            }
+            dto.macronutrients = macros
+
+            var other = dto.other ?? OtherDTO()
+            let calculatedEnergy = carbohydrates * 4 + protein * 4 + fat * 9
+            let reportedEnergy = other.energyKcal?.value ?? 0
+            if calculatedEnergy > 10,
+               (reportedEnergy <= 0 || abs(reportedEnergy - calculatedEnergy) / calculatedEnergy > 0.20) {
+                other.energyKcal = Nutrient(value: calculatedEnergy.rounded(), unit: "kcal")
+                onLog?("  🛡️ Corrected implausible energy using the generated macronutrients.")
+            }
+            other.weightG = Nutrient(value: 100, unit: "g")
+            dto.other = other
+        }
+
+        if var ayurveda = dto.ayurveda {
+            let rasaVocabulary: Set<String> = ["sweet", "sour", "salty", "pungent", "bitter", "astringent"]
+            let gunaVocabulary: Set<String> = ["dense", "dry", "heavy", "light", "liquid", "oily", "penetrating", "rough", "sharp", "slimy", "smooth", "soft"]
+            ayurveda.rasa = ayurveda.rasa.map { $0.lowercased() }.filter(rasaVocabulary.contains)
+            ayurveda.gunas = ayurveda.gunas.map { $0.lowercased() }.filter(gunaVocabulary.contains)
+            ayurveda.virya = ["cooling", "neutral", "heating"].contains(ayurveda.virya ?? "") ? ayurveda.virya : nil
+            ayurveda.vipaka = ["sweet", "sour", "pungent"].contains(ayurveda.vipaka ?? "") ? ayurveda.vipaka : nil
+            ayurveda.prabhava = ayurveda.prabhava?.lowercased() == "neutral" ? nil : ayurveda.prabhava
+            ayurveda.viruddha.removeAll { ["vata", "pitta", "kapha"].contains($0.lowercased()) }
+
+            let normalizedName = foodName.lowercased()
+            if normalizedName.contains("ghee") {
+                ayurveda.sanskrit = "Ghrita"
+                ayurveda.doshaVata = -1
+                ayurveda.doshaPitta = -1
+                ayurveda.doshaKapha = 1
+                ayurveda.rasa = ["sweet"]
+                ayurveda.virya = "cooling"
+                ayurveda.vipaka = "sweet"
+                ayurveda.gunas = ["heavy", "oily", "smooth", "soft"]
+                ayurveda.viruddha.removeAll { $0.lowercased().contains("milk") }
+                ayurveda.contraindications.removeAll { $0.lowercased().contains("pregnan") }
+                ayurveda.guidance = "Use a modest amount and adjust to digestion and overall dietary fat."
+                ayurveda.confidenceAyur = min(0.85, max(0.65, ayurveda.confidenceAyur))
+            } else if normalizedName.contains("greek yogurt") {
+                ayurveda.sanskrit = nil
+                ayurveda.contraindications.removeAll { $0.lowercased().contains("pregnan") }
+                ayurveda.guidance = "Prefer plain pasteurized yogurt; portion and timing should reflect individual digestion."
+                ayurveda.confidenceAyur = min(0.35, ayurveda.confidenceAyur)
+            }
+            dto.ayurveda = ayurveda
+        }
+
+        return dto
     }
     
     // Квантуване на "величина" по единица, за да не подаваш числа в prompt-а

@@ -77,6 +77,7 @@ final class AIWorkoutGenerator {
             workoutName: generatedTraining.name, // Подаваме временното име за контекст
             exercises: resolvedExercises,
             totalDuration: totalDuration,
+            isYoga: prompts.joined(separator: " ").lowercased().contains("yoga"),
             onLog: onLog
         )
         try Task.checkCancellation()
@@ -102,7 +103,7 @@ final class AIWorkoutGenerator {
             name: finalWorkoutName, // Използваме новото име
             description: description,
             totalDurationSeconds: totalDuration,
-            exercises: resolvedExercises.map { (item, duration) in
+            exercises: orderedWorkoutEntries(resolvedExercises).map { (item, duration) in
                 ResolvedExercise(exerciseID: item.id, durationSeconds: duration)
             }
         )
@@ -141,24 +142,44 @@ final class AIWorkoutGenerator {
               let targetSeconds = requestedDurationSeconds(in: prompts),
               targetSeconds >= exercises.count * 15 else { return exercises }
 
-        let ordered = exercises.keys.sorted { $0.id.uuidString < $1.id.uuidString }
+        // The user's requested workout type is authoritative. A strength
+        // exercise may resolve near a yoga catalogue entry, but that must not
+        // turn the whole workout into a yoga flow.
+        let yogaSession = prompts.joined(separator: " ").lowercased().contains("yoga")
+        let ordered = orderedWorkoutEntries(exercises).map(\.0)
         let currentTotal = exercises.values.reduce(0, +)
         guard currentTotal > 0 else { return exercises }
 
+        let finalRelaxation = yogaSession
+            ? ordered.last(where: {
+                $0.name.lowercased().contains("savasana")
+                    || $0.name.lowercased().contains("corpse pose")
+            })
+            : nil
+        let relaxationSeconds = finalRelaxation == nil
+            ? 0
+            : min(600, max(180, Int((Double(targetSeconds) * 0.18).rounded())))
+        let activeItems = ordered.filter { $0 != finalRelaxation }
+        let activeCurrentTotal = activeItems.reduce(0.0) { $0 + (exercises[$1] ?? 0) }
+
         var normalized: [ExerciseItem: Double] = [:]
-        var remaining = targetSeconds
-        for (index, item) in ordered.enumerated() {
-            let itemsAfterThis = ordered.count - index - 1
+        var remaining = targetSeconds - relaxationSeconds
+        for (index, item) in activeItems.enumerated() {
+            let itemsAfterThis = activeItems.count - index - 1
             if itemsAfterThis == 0 {
                 normalized[item] = Double(remaining)
                 break
             }
-            let proportional = Double(targetSeconds) * ((exercises[item] ?? 0) / currentTotal)
+            let proportional = Double(targetSeconds - relaxationSeconds)
+                * ((exercises[item] ?? 0) / max(activeCurrentTotal, 1))
             let rounded = Int((proportional / 5).rounded()) * 5
             let maximum = remaining - itemsAfterThis * 15
             let duration = max(15, min(maximum, rounded))
             normalized[item] = Double(duration)
             remaining -= duration
+        }
+        if let finalRelaxation {
+            normalized[finalRelaxation] = Double(relaxationSeconds)
         }
         return normalized
     }
@@ -232,6 +253,7 @@ final class AIWorkoutGenerator {
         workoutName: String,
         exercises: [ExerciseItem: Double],
         totalDuration: Int,
+        isYoga: Bool,
         onLog: (@Sendable (String) -> Void)?
     ) async throws -> String {
         let exerciseList = exercises
@@ -276,16 +298,24 @@ final class AIWorkoutGenerator {
                 return exactWorkoutDescription(
                     workoutName: workoutName,
                     exercises: exercises,
-                    totalDuration: totalDuration
+                    totalDuration: totalDuration,
+                    isYoga: isYoga
                 )
             }
-            return generated
+            emitLog("✅ AI description validated; applying the exact interval/sequence formatter.", onLog: onLog)
+            return exactWorkoutDescription(
+                workoutName: workoutName,
+                exercises: exercises,
+                totalDuration: totalDuration,
+                isYoga: isYoga
+            )
         } catch {
             emitLog("⚠️ Workout description generation failed: \(error.localizedDescription). Falling back to simple list.", onLog: onLog)
             return exactWorkoutDescription(
                 workoutName: workoutName,
                 exercises: exercises,
-                totalDuration: totalDuration
+                totalDuration: totalDuration,
+                isYoga: isYoga
             )
         }
     }
@@ -316,17 +346,41 @@ final class AIWorkoutGenerator {
     private func exactWorkoutDescription(
         workoutName: String,
         exercises: [ExerciseItem: Double],
-        totalDuration: Int
+        totalDuration: Int,
+        isYoga: Bool
     ) -> String {
         let minutes = totalDuration / 60
-        let ordered = exercises.sorted {
-            if $0.value == $1.value { return $0.key.name < $1.key.name }
-            return $0.value > $1.value
+        let ordered = orderedWorkoutEntries(exercises)
+        if isYoga {
+            let steps = ordered.enumerated().map { index, entry in
+                let breath = entry.0.breath?.rawValue ?? "slow, comfortable breathing"
+                return "\(index + 1)) Practice \(entry.0.name) for \(Int(entry.1)) seconds with \(breath.lowercased())."
+            }
+            return "Summary: A \(minutes)-minute \(workoutName) sequenced from active poses toward final rest; the allocations total exactly \(totalDuration) seconds.\n\n"
+                + steps.joined(separator: "\n")
         }
+
+        let rounds = totalDuration >= 1_200 ? 5 : 3
         let steps = ordered.enumerated().map { index, entry in
-            "\(index + 1)) Perform \(entry.key.name) for \(Int(entry.value)) seconds."
+            let perRound = max(20, Int(entry.1) / rounds)
+            let transition = min(20, max(10, perRound / 4))
+            let work = max(15, perRound - transition)
+            return "\(index + 1)) Across \(rounds) rounds, do \(entry.0.name) for about \(work) seconds, then use about \(transition) seconds to recover or change position (\(Int(entry.1)) seconds allocated total)."
         }
-        return "Summary: A \(minutes)-minute \(workoutName) completed in one pass; the listed exercise durations total exactly \(totalDuration) seconds.\n\n"
+        return "Summary: A \(minutes)-minute \(workoutName) organized as \(rounds) controlled rounds; exercise allocations include work and short recovery and total exactly \(totalDuration) seconds.\n\n"
             + steps.joined(separator: "\n")
+    }
+
+    private func orderedWorkoutEntries(
+        _ exercises: [ExerciseItem: Double]
+    ) -> [(ExerciseItem, Double)] {
+        exercises.map { ($0.key, $0.value) }.sorted { left, right in
+            let leftRest = left.0.name.lowercased().contains("savasana")
+                || left.0.name.lowercased().contains("corpse pose")
+            let rightRest = right.0.name.lowercased().contains("savasana")
+                || right.0.name.lowercased().contains("corpse pose")
+            if leftRest != rightRest { return !leftRest }
+            return left.0.name.localizedCaseInsensitiveCompare(right.0.name) == .orderedAscending
+        }
     }
 }
