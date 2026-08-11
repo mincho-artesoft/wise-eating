@@ -558,6 +558,8 @@ enum AyurvedaConstitutionStore {
   private static let recordsKey = "ayura.ayurveda.constitution.records.v1"
   private static let deletionDatesKey =
     "ayura.ayurveda.constitution.deletionDates.v1"
+  private static let checkInSnoozeDatesKey =
+    "ayura.ayurveda.constitution.checkInSnoozeDates.v1"
   private static let activeProfileKey = "ayura.ayurveda.constitution.activeProfile"
 
   static func record(for profileID: UUID) -> AyurvedaConstitutionRecord? {
@@ -605,6 +607,7 @@ enum AyurvedaConstitutionStore {
       ),
       createdAt: date
     )
+    clearCheckInSnooze(for: profileID)
     record.updatedAt = date
     var allRecords = records()
     allRecords.removeAll { $0.profileID == profileID }
@@ -669,6 +672,7 @@ enum AyurvedaConstitutionStore {
     allRecords.removeAll { $0.profileID == profileID }
     persist(allRecords)
     setDeletionDate(.now, for: profileID)
+    clearCheckInSnooze(for: profileID)
     if activeProfileID == profileID {
       setActiveProfile(nil)
     }
@@ -703,6 +707,19 @@ enum AyurvedaConstitutionStore {
 
   static func activeTarget(at date: Date = .now) -> AyurvedaDoshaDistribution? {
     activeRecord()?.target(at: date)
+  }
+
+  static func snoozeCheckIn(
+    for profileID: UUID,
+    until date: Date = .now.addingTimeInterval(7 * 86_400)
+  ) {
+    var dates = checkInSnoozeDates()
+    dates[profileID.uuidString] = date
+    persistCheckInSnoozeDates(dates)
+  }
+
+  static func checkInSnoozedUntil(for profileID: UUID) -> Date? {
+    checkInSnoozeDates()[profileID.uuidString]
   }
 
   static func deletionDate(for profileID: UUID) -> Date? {
@@ -749,6 +766,28 @@ enum AyurvedaConstitutionStore {
   private static func persistDeletionDates(_ dates: [String: Date]) {
     guard let data = try? JSONEncoder().encode(dates) else { return }
     UserDefaults.standard.set(data, forKey: deletionDatesKey)
+  }
+
+  private static func checkInSnoozeDates() -> [String: Date] {
+    guard let data = UserDefaults.standard.data(forKey: checkInSnoozeDatesKey)
+    else {
+      return [:]
+    }
+    return (try? JSONDecoder().decode(
+      [String: Date].self,
+      from: data
+    )) ?? [:]
+  }
+
+  private static func clearCheckInSnooze(for profileID: UUID) {
+    var dates = checkInSnoozeDates()
+    dates.removeValue(forKey: profileID.uuidString)
+    persistCheckInSnoozeDates(dates)
+  }
+
+  private static func persistCheckInSnoozeDates(_ dates: [String: Date]) {
+    guard let data = try? JSONEncoder().encode(dates) else { return }
+    UserDefaults.standard.set(data, forKey: checkInSnoozeDatesKey)
   }
 
   private static func notify(profileID: UUID) {

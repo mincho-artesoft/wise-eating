@@ -478,6 +478,7 @@ struct TrainingView: View {
 
                             exerciseAyurvedaSummaryCard
                         }
+                        .frame(maxWidth: .infinity)
                         .padding(.top, -40)
                         .transition(.opacity.combined(with: .scale))
                     }
@@ -497,13 +498,13 @@ struct TrainingView: View {
                                             presentRingDetail(detailType)
                                         }
                                     )
+                                    .padding(.horizontal, -6)
 
                                     exerciseAyurvedaSummaryCard
                                 }
                                 .listRowSeparator(.hidden)
                                 .listRowBackground(Color.clear)
                                 .listRowInsets(EdgeInsets())
-                                .padding(.horizontal, -6)
                                 .padding(.top, 4)
                             }
                             
@@ -742,6 +743,7 @@ struct TrainingView: View {
                 .result
                 .distribution,
             target: exerciseAyurvedaTarget,
+            horizontalPadding: 10,
             accessibilityContext: "Daily exercise Ayurveda",
             onTap: { presentRingDetail(.ayurveda) }
         )

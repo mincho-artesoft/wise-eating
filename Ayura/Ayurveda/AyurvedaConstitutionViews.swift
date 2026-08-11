@@ -947,29 +947,38 @@ private struct AyurvedaConstitutionDraftManagerView: View {
   }
 }
 
-struct AyurvedaHomeCheckInCard: View {
+struct AyurvedaGlobalCheckInOverlay: View {
   @ObservedObject private var effectManager = EffectManager.shared
 
   let profileID: UUID
+  let isPresentationAllowed: Bool
 
   @State private var record: AyurvedaConstitutionRecord?
   @State private var isShowingCheckIn = false
   @State private var isDismissed = false
 
   var body: some View {
-    Group {
-      if shouldOfferCheckIn, !isDismissed {
-        VStack(alignment: .leading, spacing: 8) {
+    ZStack {
+      if isPresentationAllowed, shouldOfferCheckIn, !isDismissed {
+        Color.black.opacity(0.28)
+          .ignoresSafeArea()
+
+        VStack(alignment: .leading, spacing: 12) {
           Label("Ayurvedic check-in", systemImage: "leaf.circle.fill")
-            .font(.subheadline.weight(.semibold))
+            .font(.headline)
           Text(
             "Optionally update how sleep, digestion, appetite, energy and skin have felt over the past week or two."
           )
-          .font(.caption)
-          .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.76))
+          .font(.subheadline)
+          .foregroundStyle(
+            effectManager.currentGlobalAccentColor.opacity(0.76)
+          )
           HStack {
             Button("Not now") {
-              isDismissed = true
+              withAnimation(.easeInOut(duration: 0.2)) {
+                AyurvedaConstitutionStore.snoozeCheckIn(for: profileID)
+                isDismissed = true
+              }
             }
             .ayurvedaGlassButton()
             Spacer()
@@ -980,9 +989,16 @@ struct AyurvedaHomeCheckInCard: View {
           }
         }
         .padding()
+        .frame(maxWidth: 520)
         .ayurvedaGlassSurface(cornerRadius: 18)
+        .padding(.horizontal, 20)
+        .transition(.scale(scale: 0.96).combined(with: .opacity))
       }
     }
+    .animation(
+      .easeInOut(duration: 0.2),
+      value: isPresentationAllowed && shouldOfferCheckIn && !isDismissed
+    )
     .onAppear(perform: reload)
     .onReceive(
       NotificationCenter.default.publisher(
@@ -1001,6 +1017,11 @@ struct AyurvedaHomeCheckInCard: View {
 
   private var shouldOfferCheckIn: Bool {
     guard let record else { return false }
+    if let snoozedUntil = AyurvedaConstitutionStore.checkInSnoozedUntil(
+      for: profileID
+    ), Date() < snoozedUntil {
+      return false
+    }
     guard let lastDate = record.latestCheckIn?.createdAt else {
       return Date().timeIntervalSince(record.updatedAt) >= 7 * 86_400
     }

@@ -1012,18 +1012,6 @@ struct NutritionsDetailView: View {
                     }
                     ScrollViewReader { proxy in
                         List {
-                            AyurvedaHomeCheckInCard(profileID: profile.id)
-                                .listRowSeparator(.hidden)
-                                .listRowBackground(Color.clear)
-                                .listRowInsets(
-                                    EdgeInsets(
-                                        top: 4,
-                                        leading: 16,
-                                        bottom: 8,
-                                        trailing: 16
-                                    )
-                                )
-
                             if !isRingsPinned {
                                 VStack(spacing: 8) {
                                     RingsSummaryRow(

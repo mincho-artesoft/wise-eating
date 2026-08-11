@@ -21,7 +21,7 @@ for asset in "${YOGA_ASSETS[@]}"; do
         echo "MISSING Yoga bundle asset: $source_path" >&2
         exit 1
     fi
-    /usr/bin/ditto "$source_path" "$YOGA_DESTINATION_DIRECTORY/$asset"
+    /bin/cp -f "$source_path" "$YOGA_DESTINATION_DIRECTORY/$asset"
 done
 
 echo "copied ${#YOGA_ASSETS[@]} Yoga assets to $YOGA_DESTINATION_DIRECTORY"

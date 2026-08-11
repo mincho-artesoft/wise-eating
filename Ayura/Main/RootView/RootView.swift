@@ -103,6 +103,17 @@ struct RootView: View {
     private var isAnyAIEditorPresented: Bool {
         isMealPlanEditorPresented || isRecipeEditorPresented || isMenuEditorPresented || isFoodDetailEditorPresented || isExerciseDetailEditorPresented || isTrainingPlanEditorPresented || isWorkoutEditorPresented
     }
+
+    private var isAyurvedaCheckInPresentationAllowed: Bool {
+        !isAnyAIEditorPresented
+        && !isPresentingNewProfile
+        && editingProfile == nil
+        && editorState == nil
+        && !isPresentingProfileWizard
+        && !isShowingDailyAIGenerator
+        && profilesMenuState == .collapsed
+        && menuState == .collapsed
+    }
     
     private func hideSearchButton() { withAnimation { isSearchButtonVisible = false } }
     private func showSearchButton() { withAnimation { isSearchButtonVisible = true } }
@@ -673,6 +684,15 @@ struct RootView: View {
             }
             .offset(y: -8)
             .ignoresSafeArea(.keyboard)
+
+            if let profile = selectedProfile {
+                AyurvedaGlobalCheckInOverlay(
+                    profileID: profile.id,
+                    isPresentationAllowed: isAyurvedaCheckInPresentationAllowed
+                )
+                .id(profile.id)
+                .zIndex(100)
+            }
         }
     }
     

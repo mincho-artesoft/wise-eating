@@ -55,6 +55,7 @@ struct DailyAyurvedaSummaryRow: View {
     let computation: AyurvedaIngredientComputation
     let profileDistribution: AyurvedaDoshaDistribution?
     let target: AyurvedaDoshaDistribution?
+    let horizontalPadding: CGFloat
     let summaryTitle: String
     let summarySubtitle: String?
     let accessibilityContext: String
@@ -65,6 +66,7 @@ struct DailyAyurvedaSummaryRow: View {
         computation: AyurvedaIngredientComputation,
         profileDistribution: AyurvedaDoshaDistribution?,
         target: AyurvedaDoshaDistribution?,
+        horizontalPadding: CGFloat = 20,
         summaryTitle: String = "Dosha Balance",
         summarySubtitle: String? = nil,
         accessibilityContext: String = "Daily Ayurveda",
@@ -74,6 +76,7 @@ struct DailyAyurvedaSummaryRow: View {
         self.computation = computation
         self.profileDistribution = profileDistribution
         self.target = target
+        self.horizontalPadding = horizontalPadding
         self.summaryTitle = summaryTitle
         self.summarySubtitle = summarySubtitle
         self.accessibilityContext = accessibilityContext
@@ -92,7 +95,7 @@ struct DailyAyurvedaSummaryRow: View {
                 cardContent
             }
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, horizontalPadding)
         .accessibilityLabel(
             "\(accessibilityContext). Fit \(fitLabel)."
         )
