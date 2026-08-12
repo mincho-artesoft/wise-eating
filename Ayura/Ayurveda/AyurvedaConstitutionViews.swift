@@ -738,6 +738,7 @@ private struct AyurvedaDistributionBars: View {
             .fill(dosha.identityColor)
             .frame(width: proxy.size.width * distribution[dosha])
         }
+        .tubularBarDepth(height: 7)
       }
       .frame(height: 7)
 

@@ -149,6 +149,7 @@ private struct DoshaPercentageBar: View {
           }
         }
         .clipShape(Capsule())
+        .tubularBarDepth(height: 12)
       }
       .frame(height: 12)
 

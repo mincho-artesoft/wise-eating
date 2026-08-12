@@ -200,6 +200,7 @@ struct DoshaScaleSelector: View {
               )
             )
             .frame(height: 8)
+            .tubularBarDepth(height: 8)
 
           ForEach(1..<4, id: \.self) { division in
             Rectangle()

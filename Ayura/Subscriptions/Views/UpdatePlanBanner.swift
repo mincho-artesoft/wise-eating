@@ -35,6 +35,10 @@ struct UpdatePlanBanner: View {
     @State private var hasAppeared: Bool = false
 
     var body: some View {
+        // Банерът за абонамент е изключен глобално.
+        EmptyView()
+
+        /*
         VStack {
             // ✅ СЦЕНАРИЙ 1: ПРОМОЦИЯ (До 17 Януари)
             if subscriptionManager.isPromoActive {
@@ -73,6 +77,7 @@ struct UpdatePlanBanner: View {
             }
         }
         .padding(.top)
+        */
     }
 
     private func refreshContent() {

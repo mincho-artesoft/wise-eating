@@ -87,15 +87,18 @@ struct NutrientProgressBar: View {
                 let W = geo.size.width
 
                 ZStack(alignment: .leading) {
-                    // --- ФОН ---
-                    Capsule()
-                        .fill(effectManager.currentGlobalAccentColor.opacity(0.8))
-                        .frame(height: barHeight)
+                    ZStack(alignment: .leading) {
+                        // --- ФОН ---
+                        Capsule()
+                            .fill(effectManager.currentGlobalAccentColor.opacity(0.8))
+                            .frame(height: barHeight)
 
-                    // --- ЗАПЪЛВАНЕ ---
-                    Capsule()
-                        .fill(isAlert ? Color.red.opacity(0.7) : item.color)
-                        .frame(width: W * progress, height: barHeight)
+                        // --- ЗАПЪЛВАНЕ ---
+                        Capsule()
+                            .fill(isAlert ? Color.red.opacity(0.7) : item.color)
+                            .frame(width: W * progress, height: barHeight)
+                    }
+                    .tubularBarDepth(height: barHeight)
 
                     // --- ▼ RDI ---
                     Triangle()

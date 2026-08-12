@@ -17,45 +17,6 @@ struct ChartDisplayData {
 }
 
 
-// MARK: - Semicircle Cap Shape
-struct SemicircleCapShape: Shape {
-    let arcCenter: CGPoint
-    let arcDrawingRadius: CGFloat
-    let positionAngleRadians: Double
-    let bulgeDirectionRadians: Double
-    let thickness: CGFloat
-
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        let capRadius = thickness / 2.0
-        let semicircleCenterX = arcCenter.x + arcDrawingRadius * cos(CGFloat(positionAngleRadians))
-        let semicircleCenterY = arcCenter.y + arcDrawingRadius * sin(CGFloat(positionAngleRadians))
-        let semicircleCenter = CGPoint(x: semicircleCenterX, y: semicircleCenterY)
-        let flatBasePoint1_Angle = bulgeDirectionRadians + (Double.pi / 2)
-        let flatBasePoint2_Angle = bulgeDirectionRadians - (Double.pi / 2)
-        let p1 = CGPoint(
-            x: semicircleCenter.x + capRadius * cos(CGFloat(flatBasePoint1_Angle)),
-            y: semicircleCenter.y + capRadius * sin(CGFloat(flatBasePoint1_Angle))
-        )
-        let p2 = CGPoint(
-            x: semicircleCenter.x + capRadius * cos(CGFloat(flatBasePoint2_Angle)),
-            y: semicircleCenter.y + capRadius * sin(CGFloat(flatBasePoint2_Angle))
-        )
-        path.move(to: p1)
-        path.addLine(to: p2)
-        path.addArc(
-            center: semicircleCenter,
-            radius: capRadius,
-            startAngle: Angle(radians: flatBasePoint2_Angle),
-            endAngle: Angle(radians: flatBasePoint1_Angle),
-            clockwise: false
-        )
-        path.closeSubpath()
-        return path
-    }
-}
-
-
 // MARK: - Donut Chart View
 struct NutrientProportionDonutChartView: View {
     let proportions: [NutrientProportionData]
@@ -304,46 +265,6 @@ struct ArcSegmentsView: View {
                         style: segmentData.originalData.color,
                         strokeStyle: StrokeStyle(lineWidth: donutRingThickness, lineCap: .butt)
                     )
-                }
-
-                // Добавяме заоблени краища само на първия и последния "действителен" сегмент
-                if let firstActualSegment = actualDataSegments.first {
-                    let segmentStartAngle = firstActualSegment.trueStartAngleRadians
-                    // Посоката на "издуването" на капсулата е перпендикулярна на началото на дъгата
-                    let bulgeDir = segmentStartAngle - (Double.pi / 2.0)
-                    SemicircleCapShape(
-                        arcCenter: arcCenter,
-                        arcDrawingRadius: arcDrawingRadius,
-                        positionAngleRadians: segmentStartAngle,
-                        bulgeDirectionRadians: bulgeDir,
-                        thickness: donutRingThickness
-                    )
-                    .fill(firstActualSegment.originalData.color)
-                    .ringDepth(lineWidth: donutRingThickness)
-                }
-
-                if let lastActualSegment = actualDataSegments.last {
-                    // Проверяваме дали последният сегмент не запълва целия кръг, за да избегнем двойно заобляне на едно и също място
-                    // Това е малко вероятно при .butt, но за всеки случай
-                    let firstAngle = actualDataSegments.first?.trueStartAngleRadians ?? 0
-                    let lastAngle = lastActualSegment.trueEndAngleRadians
-                    
-                    // Ако разликата е почти 360 градуса, значи е пълен кръг и не добавяме втора капсула, ако има само един сегмент.
-                    let isFullCircleByOneSegment = actualDataSegments.count == 1 && abs(lastAngle - firstAngle - 2 * .pi) < 0.01
-
-                    if !isFullCircleByOneSegment {
-                        // Посоката на "издуването" е перпендикулярна на края на дъгата
-                        let bulgeDir = lastAngle + (Double.pi / 2.0)
-                        SemicircleCapShape(
-                            arcCenter: arcCenter,
-                            arcDrawingRadius: arcDrawingRadius,
-                            positionAngleRadians: lastAngle,
-                            bulgeDirectionRadians: bulgeDir,
-                            thickness: donutRingThickness
-                        )
-                        .fill(lastActualSegment.originalData.color)
-                        .ringDepth(lineWidth: donutRingThickness)
-                    }
                 }
             }
         )

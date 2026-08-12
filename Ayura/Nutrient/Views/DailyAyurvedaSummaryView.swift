@@ -240,6 +240,7 @@ struct DailyAyurvedaSummaryRow: View {
                         )
                     )
                     .frame(height: 8)
+                    .tubularBarDepth(height: 8)
 
                 ForEach(1..<4, id: \.self) { division in
                     Rectangle()
@@ -428,12 +429,23 @@ private struct DoshaBalanceGlyph: View {
             triangle.addLine(to: leading)
             triangle.addLine(to: trailing)
             triangle.closeSubpath()
+
+            // Lower-right extrusion and a fine upper-left highlight make the
+            // connector itself read as a raised wire at this small size.
+            context.stroke(
+                triangle.offsetBy(dx: 0.9, dy: 1.0),
+                with: .color(.black.opacity(0.25)),
+                lineWidth: 2.2
+            )
             context.stroke(
                 triangle,
-                with: .color(
-                    effectManager.currentGlobalAccentColor.opacity(0.55)
-                ),
-                lineWidth: 1.5
+                with: .color(effectManager.currentGlobalAccentColor.opacity(0.68)),
+                lineWidth: 2.0
+            )
+            context.stroke(
+                triangle.offsetBy(dx: -0.35, dy: -0.45),
+                with: .color(.white.opacity(0.78)),
+                lineWidth: 0.7
             )
 
             drawNode(at: top, color: .blue, in: &context)

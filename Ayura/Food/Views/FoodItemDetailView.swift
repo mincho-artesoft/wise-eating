@@ -827,6 +827,7 @@ fileprivate struct MacroProportionBarView: View {
                     }
                     .frame(height: 12)
                     .clipShape(Capsule())
+                    .tubularBarDepth(height: 12)
                 }
                 .frame(height: 12)
             }
@@ -910,6 +911,7 @@ fileprivate struct PHScaleView: View {
                     )
                     .frame(height: barHeight)
                     .clipShape(Capsule())
+                    .tubularBarDepth(height: barHeight)
 
                     TriangleUp()
                         .fill(effectManager.currentGlobalAccentColor)

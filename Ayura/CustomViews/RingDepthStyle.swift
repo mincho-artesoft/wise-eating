@@ -16,6 +16,18 @@ struct TubularRingStroke<RingShape: Shape, RingStyle: ShapeStyle>: View {
 
     private var lineWidth: CGFloat { strokeStyle.lineWidth }
 
+    private var ridgeHighlightOpacity: Double {
+        role == .track ? 0.56 : 0.78
+    }
+
+    private var specularOpacity: Double {
+        role == .track ? 0.48 : 0.62
+    }
+
+    private var ridgeShadowOpacity: Double {
+        role == .track ? 0.27 : 0.19
+    }
+
     private var ridgeStyle: StrokeStyle {
         StrokeStyle(
             lineWidth: lineWidth * 0.42,
@@ -55,12 +67,20 @@ struct TubularRingStroke<RingShape: Shape, RingStyle: ShapeStyle>: View {
         let ridgeBlur = max(0.35, lineWidth * 0.09)
 
         ZStack {
+            // The translucent track used to lose its antialiased edges against
+            // light cards and therefore looked thinner than the filled value.
+            // This neutral undercoat defines the full stroke without changing
+            // its geometry or protruding from underneath the coloured segment.
+            if role == .track {
+                shape.stroke(.black.opacity(0.12), style: strokeStyle)
+            }
+
             shape.stroke(style, style: strokeStyle)
 
             // Broad light rolling over the upper-left side of the tube.
             ZStack {
                 shape
-                    .stroke(.white.opacity(0.78), style: ridgeStyle)
+                    .stroke(.white.opacity(ridgeHighlightOpacity), style: ridgeStyle)
                     .blur(radius: ridgeBlur)
                     .offset(x: -lightOffset, y: -lightOffset)
             }
@@ -72,7 +92,7 @@ struct TubularRingStroke<RingShape: Shape, RingStyle: ShapeStyle>: View {
             // Thin glossy crest keeps the ring visibly rounded at small sizes.
             ZStack {
                 shape
-                    .stroke(.white.opacity(0.62), style: specularStyle)
+                    .stroke(.white.opacity(specularOpacity), style: specularStyle)
                     .offset(x: -lightOffset * 1.12, y: -lightOffset * 1.12)
             }
             .mask {
@@ -83,7 +103,7 @@ struct TubularRingStroke<RingShape: Shape, RingStyle: ShapeStyle>: View {
             // Opposite ridge is the tube's self-shadow, not only a drop shadow.
             ZStack {
                 shape
-                    .stroke(.black.opacity(0.19), style: shadowRidgeStyle)
+                    .stroke(.black.opacity(ridgeShadowOpacity), style: shadowRidgeStyle)
                     .blur(radius: ridgeBlur * 0.72)
                     .offset(x: darkOffset * 0.72, y: darkOffset * 0.72)
             }

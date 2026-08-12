@@ -51,7 +51,7 @@ struct NutrientRingView: View {
                 TubularRingStroke(
                     shape: Circle().inset(by: ringInset).trim(from: 0, to: progress),
                     style: item.color,
-                    strokeStyle: StrokeStyle(lineWidth: ringWidth, lineCap: .round)
+                    strokeStyle: StrokeStyle(lineWidth: ringWidth, lineCap: .butt)
                 )
                     .rotationEffect(.degrees(-90))
 

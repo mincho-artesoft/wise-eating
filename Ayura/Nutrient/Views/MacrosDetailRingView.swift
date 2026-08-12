@@ -157,6 +157,7 @@ struct MacrosDetailRingView: View {
                         }
                         .clipShape(Capsule())
                     }
+                    .tubularBarDepth(height: 12)
                 }
                 .frame(height: 12) // Constrain the height of the GeometryReader
                 
