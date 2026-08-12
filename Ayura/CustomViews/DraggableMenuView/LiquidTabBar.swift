@@ -40,6 +40,10 @@ struct LiquidTabBar: View {
         effectManager.isLightRowTextColor ? .white : .black
     }
 
+    private var selectedTabIconColor: Color {
+        effectManager.isLightRowTextColor ? .black : .white
+    }
+
     init(
         menuState: Binding<MenuState>,
         selectedTab: Binding<AppTab>,
@@ -140,7 +144,7 @@ struct LiquidTabBar: View {
                                 hasNewTraining: $hasNewTraining,
                                 hasUnreadAINotifications: $hasUnreadAINotifications,
                                 isAIGenerating: isAIGenerating,
-                                iconColor: tabIconColor,
+                                iconColor: selectedTab == tab ? selectedTabIconColor : tabIconColor,
                                 animationNamespace: animation,
                                 isAnimating: isAnimatingSelection
                             )
@@ -267,14 +271,14 @@ struct LiquidTabBar: View {
                                 .resizable()
                                 .renderingMode(.template)
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 34, height: 34)
+                                .frame(width: 28.8, height: 28.8, alignment: .center)
                                 .foregroundStyle(tabIconColor)
                         } else {
                             Image("search_icon")
                                 .resizable()
                                 .renderingMode(.template)
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 34, height: 34)
+                                .frame(width: 36, height: 36, alignment: .center)
                                 .foregroundStyle(tabIconColor)
                         }
                     }
@@ -349,20 +353,18 @@ private struct TabItem: View {
     let isAnimating: Bool
     
     var body: some View {
-        VStack {
-            ZStack(alignment: .topTrailing) {
-                iconView
-                
-                // Notification Dots
-                if hasNewNutrition && tab == .nutrition && selectedTab != .nutrition {
-                    Circle().fill(Color.orange).frame(width: 8, height: 8).offset(x: 1, y: 5)
-                }
-                if hasNewTraining && tab == .training && selectedTab != .training {
-                    Circle().fill(Color.orange).frame(width: 8, height: 8).offset(x: 1, y: 5)
-                }
-                if hasUnreadAINotifications && tab == .aiGenerate && selectedTab != .aiGenerate {
-                    Circle().fill(Color.orange).frame(width: 8, height: 8).offset(x: 1, y: 5)
-                }
+        ZStack(alignment: .topTrailing) {
+            iconView
+
+            // Notification Dots
+            if hasNewNutrition && tab == .nutrition && selectedTab != .nutrition {
+                Circle().fill(Color.orange).frame(width: 8, height: 8).offset(x: 1, y: 5)
+            }
+            if hasNewTraining && tab == .training && selectedTab != .training {
+                Circle().fill(Color.orange).frame(width: 8, height: 8).offset(x: 1, y: 5)
+            }
+            if hasUnreadAINotifications && tab == .aiGenerate && selectedTab != .aiGenerate {
+                Circle().fill(Color.orange).frame(width: 8, height: 8).offset(x: 1, y: 5)
             }
         }
         .frame(maxWidth: .infinity)
@@ -372,7 +374,7 @@ private struct TabItem: View {
                 .matchedGeometryEffect(id: tab, in: animationNamespace, isSource: true)
         )
         // Мащабиране само при селекция и анимация
-        .scaleEffect(selectedTab == tab && isAnimating ? 1.2 : 1.0)
+        .scaleEffect(selectedTab == tab && isAnimating ? 1.08 : 1.0)
     }
     
     @ViewBuilder
@@ -383,14 +385,13 @@ private struct TabItem: View {
                 isActive: isAIGenerating,
                 tintColor: iconColor
             )
-                .frame(height: 44)
+                .frame(width: 36, height: 36, alignment: .center)
         } else {
             Image(tab.iconName)
                 .resizable()
                 .renderingMode(.template)
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 34, height: 34)
-                .frame(height: 44)
+                .scaledToFit()
+                .frame(width: 36, height: 36, alignment: .center)
                 .foregroundStyle(iconColor)
         }
     }
@@ -410,8 +411,8 @@ private struct BreathingAssetIcon: View {
         Image(imageName)
             .resizable()
             .renderingMode(.template)
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 34, height: 34)
+            .scaledToFit()
+            .frame(width: 36, height: 36, alignment: .center)
             .foregroundStyle(tintColor)
             .scaleEffect(breathingScale)
             .opacity(breathingOpacity)

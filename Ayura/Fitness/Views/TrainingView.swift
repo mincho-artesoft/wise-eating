@@ -1467,9 +1467,12 @@ struct TrainingView: View {
         let scale = aiIsDragging ? 1.05 : (aiIsPressed ? 0.92 : 1.0)
         
         ZStack {
-            Image(systemName: "sparkles")
-                .font(.title2)
-                .foregroundColor(effectManager.currentGlobalAccentColor)
+            Image("aiGenerate_icon")
+                .resizable()
+                .renderingMode(.template)
+                .scaledToFit()
+                .frame(width: 36, height: 36)
+                .foregroundStyle(effectManager.currentGlobalAccentColor)
         }
         .frame(width: buttonSize, height: buttonSize)
         .glassCardStyle(cornerRadius: buttonSize / 2 + 2)

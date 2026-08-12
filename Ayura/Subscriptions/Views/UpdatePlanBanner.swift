@@ -92,33 +92,25 @@ struct UpdatePlanBanner: View {
             Button(action: {
                 NotificationCenter.default.post(name: .openSubscriptionFlow, object: nil)
             }) {
-                HStack(spacing: 6) {
-                    Image("Sub_Icon")
-                        .resizable()
-                        .renderingMode(.original)
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 24, height: 24)
-
-                    Text("Upgrade plan & Support Us")
-                        .font(.subheadline.weight(.semibold))
-                }
-                .padding(.vertical, 6)
-                .padding(.horizontal, 12)
-                .background(.white.opacity(0.25))
-                .glassCardStyle(cornerRadius: 15)
+                Image("Sub_Icon")
+                    .resizable()
+                    .renderingMode(.original)
+                    .scaledToFit()
+                    .frame(width: 176.4, height: 61.6, alignment: .center)
+                    .contentShape(Rectangle())
+                    .accessibilityLabel("Upgrade plan & Support Us")
             }
             .buttonStyle(.plain)
-            .foregroundColor(effectManager.currentGlobalAccentColor)
 
             Spacer()
         }
-        .padding(.vertical, 10)
-        .background(
-            RoundedRectangle(cornerRadius: 20)
-                .fill(
-                    effectManager.isLightRowTextColor ? Color.yellow.opacity(0.5) : Color.green.opacity(0.5)
-                )
-        )
+        .frame(height: 88, alignment: .center)
+        .padding(.vertical, 4)
+        .background {
+            Rectangle()
+                .fill(effectManager.isLightRowTextColor ? .white.opacity(0.2) : .black.opacity(0.2))
+        }
+        .glassCardStyle(cornerRadius: 20)
         .overlay(
             closeButton,
             alignment: .trailing
@@ -156,8 +148,9 @@ struct UpdatePlanBanner: View {
             Image(systemName: "xmark")
                 .font(.headline)
                 .fontWeight(.bold)
-                .foregroundColor(effectManager.currentGlobalAccentColor)
+                .foregroundStyle(.white)
                 .padding(10)
+                .background(.black.opacity(0.18), in: Circle())
                 .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
