@@ -813,11 +813,11 @@ fileprivate struct MacroProportionBarView: View {
             if totalWeight > 0 {
                 GeometryReader { geo in
                     HStack(spacing: 2) {
-                        Rectangle().fill(Color(hex: "4A86E8"))
+                        Rectangle().fill(MacroNutrientPalette.protein)
                             .frame(width: geo.size.width * (protein / totalWeight))
-                        Rectangle().fill(Color(hex: "FCC934"))
+                        Rectangle().fill(MacroNutrientPalette.carbohydrates)
                             .frame(width: geo.size.width * (carbs / totalWeight))
-                        Rectangle().fill(Color(hex: "34A853"))
+                        Rectangle().fill(MacroNutrientPalette.fat)
                             .frame(width: geo.size.width * (fat / totalWeight))
                         if other > 0 {
                             Rectangle()
@@ -831,11 +831,11 @@ fileprivate struct MacroProportionBarView: View {
                 .frame(height: 12)
             }
             HStack {
-                legendItem(label: "Protein", value: protein, color: Color(hex: "4A86E8"))
+                legendItem(label: "Protein", value: protein, color: MacroNutrientPalette.protein)
                 Spacer()
-                legendItem(label: "Carbs", value: carbs, color: Color(hex: "FCC934"))
+                legendItem(label: "Carbs", value: carbs, color: MacroNutrientPalette.carbohydrates)
                 Spacer()
-                legendItem(label: "Fat", value: fat, color: Color(hex: "34A853"))
+                legendItem(label: "Fat", value: fat, color: MacroNutrientPalette.fat)
             }.font(.caption)
         }
     }

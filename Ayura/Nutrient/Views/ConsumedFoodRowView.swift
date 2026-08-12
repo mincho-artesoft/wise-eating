@@ -30,9 +30,9 @@ struct ConsumedFoodRowView: View {
             return item.other?.energyKcal?.value ?? 0
         }()
         var slices: [NutrientProportionData] = []
-        if p > 0 { slices.append(.init(name: "Protein", value: p * factor, color: Color(hex: "E6E0F8").opacity(0.85))) }
-        if f > 0 { slices.append(.init(name: "Fat", value: f * factor, color: Color(hex: "FFE5CC").opacity(0.85))) }
-        if c > 0 { slices.append(.init(name: "Carbs", value: c * factor, color: Color(hex: "D6ECFF").opacity(0.85))) }
+        if p > 0 { slices.append(.init(name: "Protein", value: p * factor, color: MacroNutrientPalette.protein)) }
+        if f > 0 { slices.append(.init(name: "Fat", value: f * factor, color: MacroNutrientPalette.fat)) }
+        if c > 0 { slices.append(.init(name: "Carbs", value: c * factor, color: MacroNutrientPalette.carbohydrates)) }
         
         return ChartDisplayData(
             proportions: slices.sorted { $0.value > $1.value },

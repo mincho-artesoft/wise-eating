@@ -27,14 +27,19 @@ struct GoalRingView: View {
     var body: some View {
         ZStack {
             // фонов трак
-            Circle()
-                .stroke(effectManager.currentGlobalAccentColor.opacity(0.2), lineWidth: 6)
+            TubularRingStroke(
+                shape: Circle(),
+                style: effectManager.currentGlobalAccentColor.opacity(0.2),
+                strokeStyle: StrokeStyle(lineWidth: 6),
+                role: .track
+            )
 
             // прогрес
-            Circle()
-                .trim(from: 0, to: progress)
-                .stroke(progressColor, // <-- Използваме новото свойство тук
-                        style: StrokeStyle(lineWidth: 6, lineCap: .round))
+            TubularRingStroke(
+                shape: Circle().trim(from: 0, to: progress),
+                style: progressColor,
+                strokeStyle: StrokeStyle(lineWidth: 6, lineCap: .butt)
+            )
                 .rotationEffect(.degrees(-90))
                 .animation(.easeInOut, value: progress)
 
@@ -42,6 +47,7 @@ struct GoalRingView: View {
             Text("\(achieved) / \(total)")
                 .font(.caption.monospacedDigit())
                 .foregroundColor(effectManager.currentGlobalAccentColor)
+                .ringCenterDepth()
         }
         .frame(width: diameter, height: diameter)
     }

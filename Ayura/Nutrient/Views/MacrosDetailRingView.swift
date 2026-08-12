@@ -151,9 +151,9 @@ struct MacrosDetailRingView: View {
                         
                         HStack(spacing: 0) {
                             // Calculate widths based on the available width, not the screen width
-                            Rectangle().fill(Color(hex: "4A86E8")).frame(width: (protein / totalWeight) * availableWidth)
-                            Rectangle().fill(Color(hex: "FCC934")).frame(width: (carbs / totalWeight) * availableWidth)
-                            Rectangle().fill(Color(hex: "34A853")).frame(width: (fat / totalWeight) * availableWidth)
+                            Rectangle().fill(MacroNutrientPalette.protein).frame(width: (protein / totalWeight) * availableWidth)
+                            Rectangle().fill(MacroNutrientPalette.carbohydrates).frame(width: (carbs / totalWeight) * availableWidth)
+                            Rectangle().fill(MacroNutrientPalette.fat).frame(width: (fat / totalWeight) * availableWidth)
                         }
                         .clipShape(Capsule())
                     }
@@ -161,11 +161,11 @@ struct MacrosDetailRingView: View {
                 .frame(height: 12) // Constrain the height of the GeometryReader
                 
                 HStack {
-                    legendItem(label: "Protein", value: protein, color: Color(hex: "4A86E8"), macroType: .protein)
+                    legendItem(label: "Protein", value: protein, color: MacroNutrientPalette.protein, macroType: .protein)
                     Spacer()
-                    legendItem(label: "Carbs", value: carbs, color: Color(hex: "FCC934"), macroType: .carbs)
+                    legendItem(label: "Carbs", value: carbs, color: MacroNutrientPalette.carbohydrates, macroType: .carbs)
                     Spacer()
-                    legendItem(label: "Fat", value: fat, color: Color(hex: "34A853"), macroType: .fat)
+                    legendItem(label: "Fat", value: fat, color: MacroNutrientPalette.fat, macroType: .fat)
                 }
                 .font(.caption)
             }

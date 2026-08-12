@@ -41,20 +41,25 @@ struct NutrientRingView: View {
             ZStack {
                 let ringInset = ringWidth / 2 + 0.5
 
-                Circle()
-                    .inset(by: ringInset)
-                    .stroke(resolvedAccent.opacity(0.18), lineWidth: ringWidth)
+                TubularRingStroke(
+                    shape: Circle().inset(by: ringInset),
+                    style: resolvedAccent.opacity(0.18),
+                    strokeStyle: StrokeStyle(lineWidth: ringWidth),
+                    role: .track
+                )
 
-                Circle()
-                    .inset(by: ringInset)
-                    .trim(from: 0, to: progress)
-                    .stroke(item.color, style: .init(lineWidth: ringWidth, lineCap: .round))
+                TubularRingStroke(
+                    shape: Circle().inset(by: ringInset).trim(from: 0, to: progress),
+                    style: item.color,
+                    strokeStyle: StrokeStyle(lineWidth: ringWidth, lineCap: .round)
+                )
                     .rotationEffect(.degrees(-90))
 
                 Text("\(percent)%")
                     .font(.system(size: diameter * 0.24, weight: .bold, design: .rounded))
                     .foregroundStyle(percentColor)
                     .monospacedDigit()
+                    .ringCenterDepth(scale: diameter / 70)
             }
             .frame(width: diameter, height: diameter)
             .contentShape(Rectangle())

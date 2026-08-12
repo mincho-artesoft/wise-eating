@@ -79,7 +79,7 @@ struct NutritionsDetailView: View {
     @State private var mealActionContent: MealActionMenuContent = .actions
     
     @State private var loadMealsTask: Task<Void, Never>? = nil
-    @State private var isRingsPinned: Bool = true
+    @State private var isRingsPinned: Bool = false
     private func pinKey(for profile: Profile) -> String { "nutritions.ringsPinned.\(profile.id.uuidString)" }
     @State private var dayProgress: [DateComponents : Double] = [:]
     private func key(for d: Date) -> DateComponents { Calendar.current.dateComponents([.year, .month, .day], from: d) }
@@ -931,13 +931,13 @@ struct NutritionsDetailView: View {
     private var macroProportionsData: [NutrientProportionData] {
         var data: [NutrientProportionData] = []
         if totalCarbsGrams > 0 {
-            data.append(.init(name: "Carbs", value: totalCarbsGrams, color: Color.blue.opacity(0.8)))
+            data.append(.init(name: "Carbs", value: totalCarbsGrams, color: MacroNutrientPalette.carbohydrates))
         }
         if totalProteinGrams > 0 {
-            data.append(.init(name: "Protein", value: totalProteinGrams, color: Color.orange.opacity(0.9)))
+            data.append(.init(name: "Protein", value: totalProteinGrams, color: MacroNutrientPalette.protein))
         }
         if totalFatGrams > 0 {
-            data.append(.init(name: "Fat", value: totalFatGrams, color: Color.purple.opacity(0.7)))
+            data.append(.init(name: "Fat", value: totalFatGrams, color: MacroNutrientPalette.fat))
         }
         return data
     }
@@ -1488,14 +1488,18 @@ struct NutritionsDetailView: View {
         let progress = targetCalories > 0 ? (totalCalories / targetCalories) : 0
         
         ZStack {
-            Circle()
-                .stroke(lineWidth: 6)
-                .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.2))
+            TubularRingStroke(
+                shape: Circle(),
+                style: effectManager.currentGlobalAccentColor.opacity(0.2),
+                strokeStyle: StrokeStyle(lineWidth: 6),
+                role: .track
+            )
             
-            Circle()
-                .trim(from: 0.0, to: min(progress, 1.0))
-                .stroke(style: StrokeStyle(lineWidth: 6, lineCap: .round, lineJoin: .round))
-                .foregroundColor(.orange)
+            TubularRingStroke(
+                shape: Circle().trim(from: 0.0, to: min(progress, 1.0)),
+                style: Color.orange,
+                strokeStyle: StrokeStyle(lineWidth: 6, lineCap: .butt, lineJoin: .round)
+            )
                 .rotationEffect(Angle(degrees: 270.0))
                 .animation(.linear(duration: 0.5), value: progress)
             
@@ -1517,6 +1521,7 @@ struct NutritionsDetailView: View {
                     .font(.system(size: 9, weight: .medium, design: .rounded))
                     .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
             }
+            .ringCenterDepth()
         }
     }
     

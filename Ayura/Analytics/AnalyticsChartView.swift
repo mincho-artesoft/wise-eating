@@ -728,9 +728,9 @@ private extension AnalyticsChartView {
           switch nutrientID {
           case "calories": return .orange
           case "water": return .blue
-          case "protein": return Color(hex: "#C9BFED")
-          case "carbohydrates": return Color(hex: "#A8D7FF")
-          case "fat": return Color(hex: "#FFDAB3")
+          case "protein": return MacroNutrientPalette.protein
+          case "carbohydrates": return MacroNutrientPalette.carbohydrates
+          case "fat": return MacroNutrientPalette.fat
           case "profile_weight": return .blue
           case "profile_height": return .green
           default:

@@ -47,9 +47,9 @@ struct MealSummaryRowEventView: View {
 
     private var chartDisplayInformation: ChartDisplayData {
         var segments: [NutrientProportionData] = []
-        if totalProtein > 0 { segments.append(.init(name: "Protein", value: totalProtein, color: Color(hex: "E6E0F8"))) }
-        if totalFat > 0 { segments.append(.init(name: "Fat", value: totalFat, color: Color(hex: "FFE5CC"))) }
-        if totalCarbs > 0 { segments.append(.init(name: "Carbs", value: totalCarbs, color: Color(hex: "D6ECFF"))) }
+        if totalProtein > 0 { segments.append(.init(name: "Protein", value: totalProtein, color: MacroNutrientPalette.protein)) }
+        if totalFat > 0 { segments.append(.init(name: "Fat", value: totalFat, color: MacroNutrientPalette.fat)) }
+        if totalCarbs > 0 { segments.append(.init(name: "Carbs", value: totalCarbs, color: MacroNutrientPalette.carbohydrates)) }
         return ChartDisplayData(proportions: segments.sorted { $0.value > $1.value }, centralKcalDisplay: totalKcal, totalReferenceForChart: totalWeightG)
     }
     

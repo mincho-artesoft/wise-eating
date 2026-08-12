@@ -20,14 +20,18 @@ struct CalorieBurnRingView: View {
     // MARK: - Body
     var body: some View {
         ZStack {
-            Circle()
-                .stroke(lineWidth: 6)
-                .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.2))
+            TubularRingStroke(
+                shape: Circle(),
+                style: effectManager.currentGlobalAccentColor.opacity(0.2),
+                strokeStyle: StrokeStyle(lineWidth: 6),
+                role: .track
+            )
 
-            Circle()
-                .trim(from: 0.0, to: min(progress, 1.0))
-                .stroke(style: StrokeStyle(lineWidth: 6, lineCap: .round, lineJoin: .round))
-                .foregroundColor(color)
+            TubularRingStroke(
+                shape: Circle().trim(from: 0.0, to: min(progress, 1.0)),
+                style: color,
+                strokeStyle: StrokeStyle(lineWidth: 6, lineCap: .butt, lineJoin: .round)
+            )
                 .rotationEffect(Angle(degrees: 270.0))
                 .animation(.linear(duration: 0.5), value: progress)
                 
@@ -45,6 +49,7 @@ struct CalorieBurnRingView: View {
                     .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.8))
                 
             }
+            .ringCenterDepth()
         }
     }
 }

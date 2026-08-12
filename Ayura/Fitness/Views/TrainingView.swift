@@ -115,7 +115,7 @@ struct TrainingView: View {
         }
     }
     
-    @State private var isRingsPinned: Bool = true
+    @State private var isRingsPinned: Bool = false
     private func pinKey(for profile: Profile) -> String { "training.ringsPinned.\(profile.id.uuidString)" }
     
     private struct TaskTrigger: Equatable {

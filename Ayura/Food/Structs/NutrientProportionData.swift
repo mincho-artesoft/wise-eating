@@ -145,11 +145,14 @@ struct NutrientProportionDonutChartView: View {
                 .strokeBorder(.clear, lineWidth: canalRingThickness)
                 .frame(width: canalRingPathDiameter, height: canalRingPathDiameter)
 
-            Circle()
-                .stroke(ringTrackColor, lineWidth: donutRingThickness)
+            TubularRingStroke(
+                shape: Circle(),
+                style: ringTrackColor,
+                strokeStyle: StrokeStyle(lineWidth: donutRingThickness),
+                role: .track
+            )
                 .frame(width: arcDrawingRadius * 2,
                        height: arcDrawingRadius * 2)
-                 .shadow(color: Color.black.opacity(0.04), radius: 0.5, x: 0, y: 0.5)
 
             ArcSegmentsView(
                 proportions: allSegmentsIncludingGap,
@@ -210,6 +213,7 @@ struct NutrientProportionDonutChartView: View {
                             .foregroundColor(adaptiveTextColor.opacity(0.7))
                     }
                     .frame(width: centralContentDiameter * 0.95, height: centralContentDiameter * 0.95)
+                    .ringCenterDepth(scale: centralContentDiameter / 60)
                 } else {
                      centralImageView
                         .resizable()
@@ -286,21 +290,20 @@ struct ArcSegmentsView: View {
 
         return AnyView(
             ZStack {
-                // Рисуваме всички сегменти (включително "Remaining", ако има такъв)
-                ForEach(allProcessedSegments) { segmentData in
-                    Path { path in
-                        path.addArc(
-                            center: arcCenter,
-                            radius: arcDrawingRadius,
-                            startAngle: segmentData.displayStartAngle,
-                            endAngle: segmentData.displayEndAngle,
-                            clockwise: false // Рисуваме по посока на часовниковата стрелка
-                        )
-                    }
-                    .stroke(segmentData.originalData.color, // Използваме цвета от данните
-                            style: StrokeStyle(lineWidth: donutRingThickness, lineCap: .butt)) // .butt за да няма заобляне от stroke-а
-                    // Добавяме сянка само ако сегментът не е прозрачен
-                    .shadow(color: segmentData.originalData.color == .clear ? .clear : segmentData.originalData.color.opacity(0.4), radius: 2.5, x: 1, y: 2)
+                ForEach(actualDataSegments) { segmentData in
+                    TubularRingStroke(
+                        shape: Path { path in
+                            path.addArc(
+                                center: arcCenter,
+                                radius: arcDrawingRadius,
+                                startAngle: segmentData.displayStartAngle,
+                                endAngle: segmentData.displayEndAngle,
+                                clockwise: false // Рисуваме по посока на часовниковата стрелка
+                            )
+                        },
+                        style: segmentData.originalData.color,
+                        strokeStyle: StrokeStyle(lineWidth: donutRingThickness, lineCap: .butt)
+                    )
                 }
 
                 // Добавяме заоблени краища само на първия и последния "действителен" сегмент
@@ -316,7 +319,7 @@ struct ArcSegmentsView: View {
                         thickness: donutRingThickness
                     )
                     .fill(firstActualSegment.originalData.color)
-                    .shadow(color: firstActualSegment.originalData.color.opacity(0.4), radius: 2.5, x: 1, y: 2)
+                    .ringDepth(lineWidth: donutRingThickness)
                 }
 
                 if let lastActualSegment = actualDataSegments.last {
@@ -339,7 +342,7 @@ struct ArcSegmentsView: View {
                             thickness: donutRingThickness
                         )
                         .fill(lastActualSegment.originalData.color)
-                        .shadow(color: lastActualSegment.originalData.color.opacity(0.4), radius: 2.5, x: 1, y: 2)
+                        .ringDepth(lineWidth: donutRingThickness)
                     }
                 }
             }

@@ -402,9 +402,9 @@ struct FoodSearchPanelView: View {
     
     private func nutrientColor(for id: String) -> Color {
         switch id {
-        case "protein": return Color(hex: "#C9BFED")
-        case "fat": return Color(hex: "#FFDAB3")
-        case "carbohydrates": return Color(hex: "#A8D7FF")
+        case "protein": return MacroNutrientPalette.protein
+        case "fat": return MacroNutrientPalette.fat
+        case "carbohydrates": return MacroNutrientPalette.carbohydrates
         default: break
         }
         if id.starts(with: "vit_"), let vitamin = allVitamins.first(where: { "vit_\($0.key)" == id }) { return Color(hex: vitamin.colorHex) }

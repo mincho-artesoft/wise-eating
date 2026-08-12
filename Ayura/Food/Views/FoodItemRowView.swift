@@ -36,15 +36,15 @@ struct FoodItemRowView: View {
         let fat     = item.totalFat?.value ?? 0
         let carbs   = item.totalCarbohydrates?.value ?? 0
         if let w = displayWeightG, w > 0 {
-            if protein > 0 { segments.append(.init(name: "Protein", value: protein, color: Color(hex: "E6E0F8"))) }
-            if fat     > 0 { segments.append(.init(name: "Fat",     value: fat,     color: Color(hex: "FFE5CC"))) }
-            if carbs   > 0 { segments.append(.init(name: "Carbs",   value: carbs,   color: Color(hex: "D6ECFF"))) }
+            if protein > 0 { segments.append(.init(name: "Protein", value: protein, color: MacroNutrientPalette.protein)) }
+            if fat     > 0 { segments.append(.init(name: "Fat",     value: fat,     color: MacroNutrientPalette.fat)) }
+            if carbs   > 0 { segments.append(.init(name: "Carbs",   value: carbs,   color: MacroNutrientPalette.carbohydrates)) }
             referenceWeight = w
         } else {
             let pk = protein * 4; let fk = fat * 9; let ck = carbs * 4
-            if pk > 0 { segments.append(.init(name: "Protein (kcal)", value: pk, color: Color(hex: "E6E0F8"))) }
-            if fk > 0 { segments.append(.init(name: "Fat (kcal)",     value: fk, color: Color(hex: "FFE5CC"))) }
-            if ck > 0 { segments.append(.init(name: "Carbs (kcal)",   value: ck, color: Color(hex: "D6ECFF"))) }
+            if pk > 0 { segments.append(.init(name: "Protein (kcal)", value: pk, color: MacroNutrientPalette.protein)) }
+            if fk > 0 { segments.append(.init(name: "Fat (kcal)",     value: fk, color: MacroNutrientPalette.fat)) }
+            if ck > 0 { segments.append(.init(name: "Carbs (kcal)",   value: ck, color: MacroNutrientPalette.carbohydrates)) }
         }
         return ChartDisplayData(
             proportions: segments.sorted { $0.value > $1.value },

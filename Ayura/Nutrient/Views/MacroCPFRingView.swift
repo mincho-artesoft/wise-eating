@@ -46,9 +46,12 @@ struct MacroCPFRingView: View {
         
         ZStack {
 
-            Circle()
-                .stroke(style: StrokeStyle(lineWidth: donutRingThickness))
-                .foregroundColor(ringTrackColor) // Използваме цвета за "пътя"
+            TubularRingStroke(
+                shape: Circle(),
+                style: ringTrackColor,
+                strokeStyle: StrokeStyle(lineWidth: donutRingThickness),
+                role: .track
+            )
                 // Диаметърът на този кръг трябва да е два пъти радиуса на чертане,
                 // за да съвпадне перфектно с арките на сегментите.
                 .frame(width: arcDrawingRadius * 2, height: arcDrawingRadius * 2)
@@ -71,6 +74,7 @@ struct MacroCPFRingView: View {
                     .foregroundColor(colorForMacro(named: "Fat"))
             }
             .font(.system(size: centralContentDiameter * 0.4, weight: .bold, design: .rounded))
+            .ringCenterDepth(scale: centralContentDiameter / 39)
             
         }
         .frame(width: totalDiameter, height: totalDiameter)
@@ -79,11 +83,15 @@ struct MacroCPFRingView: View {
     
     /// Помощна функция за намиране на цвета на макронутриента
     private func colorForMacro(named macroName: String) -> Color {
-        // Ако има пропорция с това име и стойност по-голяма от 0, връщаме нейния цвят.
-        if let proportion = proportions.first(where: { $0.name.contains(macroName) && $0.value > 0.01 }) {
-            return proportion.color
+        guard proportions.contains(where: { $0.name.contains(macroName) && $0.value > 0.01 }) else {
+            return effectManager.currentGlobalAccentColor.opacity(0.8)
         }
-        // В противен случай връщаме неутрален сив цвят.
-        return effectManager.currentGlobalAccentColor.opacity(0.8)
+
+        switch macroName {
+        case "Carbs": return MacroNutrientPalette.carbohydrates
+        case "Protein": return MacroNutrientPalette.protein
+        case "Fat": return MacroNutrientPalette.fat
+        default: return effectManager.currentGlobalAccentColor.opacity(0.8)
+        }
     }
 }

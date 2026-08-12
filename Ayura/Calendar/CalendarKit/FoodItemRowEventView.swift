@@ -43,9 +43,9 @@ struct FoodItemRowEventView: View {
 
     private var chartDisplayInformation: ChartDisplayData {
         var segments: [NutrientProportionData] = []
-        if scaledProtein > 0 { segments.append(.init(name: "Protein", value: scaledProtein, color: Color(hex: "E6E0F8"))) }
-        if scaledFat > 0 { segments.append(.init(name: "Fat", value: scaledFat, color: Color(hex: "FFE5CC"))) }
-        if scaledCarbs > 0 { segments.append(.init(name: "Carbs", value: scaledCarbs, color: Color(hex: "D6ECFF"))) }
+        if scaledProtein > 0 { segments.append(.init(name: "Protein", value: scaledProtein, color: MacroNutrientPalette.protein)) }
+        if scaledFat > 0 { segments.append(.init(name: "Fat", value: scaledFat, color: MacroNutrientPalette.fat)) }
+        if scaledCarbs > 0 { segments.append(.init(name: "Carbs", value: scaledCarbs, color: MacroNutrientPalette.carbohydrates)) }
 
         return ChartDisplayData(
             proportions: segments.sorted { $0.value > $1.value },
