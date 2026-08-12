@@ -96,7 +96,7 @@ struct UpdatePlanBanner: View {
                     .resizable()
                     .renderingMode(.original)
                     .scaledToFit()
-                    .frame(width: 176.4, height: 61.6, alignment: .center)
+                    .frame(width: 141.12, height: 49.28, alignment: .center)
                     .contentShape(Rectangle())
                     .accessibilityLabel("Upgrade plan & Support Us")
             }
@@ -104,8 +104,7 @@ struct UpdatePlanBanner: View {
 
             Spacer()
         }
-        .frame(height: 88, alignment: .center)
-        .padding(.vertical, 4)
+        .frame(height: 76.8, alignment: .center)
         .background {
             Rectangle()
                 .fill(effectManager.isLightRowTextColor ? .white.opacity(0.2) : .black.opacity(0.2))
