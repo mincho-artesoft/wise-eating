@@ -3,7 +3,7 @@ import SwiftUI
 /// Represents the user's current subscription level.
 enum SubscriptionStatus: String, CaseIterable {
     case base
-    case removeAds = "Ads"
+    case removeAds = "No Ads"
     case advance = "Advanced"
     case premium = "Premium"
 

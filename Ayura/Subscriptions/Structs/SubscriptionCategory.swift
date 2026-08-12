@@ -3,7 +3,7 @@ import Foundation
 // MARK: - Category Enum
 enum SubscriptionCategory: String, CaseIterable, Identifiable {
     case base     = "Base"
-    case removeAds  = "Ads"
+    case removeAds  = "No Ads"
     case advance  = "Advanced"
     case premium  = "Premium"
 

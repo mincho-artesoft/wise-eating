@@ -74,22 +74,22 @@ struct SubscriptionView: View {
 
                     case .removeAds:
                         SubscriptionListView(
-                            title: "Ads",
-                            products: manager.sortedProducts.filter { $0.id.localizedCaseInsensitiveContains("remove.ads") },
+                            title: "No Ads",
+                            products: manager.sortedProducts.filter { $0.id == SubscriptionProductID.noAds },
                             selectedProductID: $selectedProductID
                         )
 
                     case .advance:
                         SubscriptionListView(
                             title: "Advanced",
-                            products: manager.sortedProducts.filter { $0.id.localizedCaseInsensitiveContains("advanced") },
+                            products: manager.sortedProducts.filter { $0.id == SubscriptionProductID.advanced },
                             selectedProductID: $selectedProductID
                         )
 
                     case .premium:
                         SubscriptionListView(
                             title: "Premium",
-                            products: manager.sortedProducts.filter { $0.id.localizedCaseInsensitiveContains("premium") },
+                            products: manager.sortedProducts.filter { $0.id == SubscriptionProductID.premium },
                             selectedProductID: $selectedProductID
                         )
                     }
@@ -193,11 +193,11 @@ struct SubscriptionView: View {
         let categoryMatches: (Product) -> Bool = { product in
             switch selectedCategory {
             case .removeAds:
-                return product.id.localizedCaseInsensitiveContains("remove.ads")
+                return product.id == SubscriptionProductID.noAds
             case .advance:
-                return product.id.localizedCaseInsensitiveContains("advanced")
+                return product.id == SubscriptionProductID.advanced
             case .premium:
-                return product.id.localizedCaseInsensitiveContains("premium")
+                return product.id == SubscriptionProductID.premium
             case .base:
                 return false
             }

@@ -13,25 +13,6 @@ extension Product.SubscriptionPeriod.Unit {
         }
     }
 
-    var sortIndex: Int {
-        switch self {
-        case .day: return 0
-        case .week: return 1
-        case .month: return 2
-        case .year: return 3
-        @unknown default: return .max
-        }
-    }
-
-    var perPeriodString: String {
-        switch self {
-        case .day: return "/day"
-        case .week: return "/week"
-        case .month: return "/month"
-        case .year: return "/year"
-        @unknown default: return ""
-        }
-    }
 }
 
 extension Product {
@@ -44,29 +25,5 @@ extension Product {
         case .year: return "Yearly"
         @unknown default: return "Recurring"
         }
-    }
-
-    var pricePerMonth: String? {
-        guard let subscription = subscription else { return nil }
-        let period = subscription.subscriptionPeriod
-        guard period.value > 0 else { return nil }
-
-        var multiplier: Double
-        switch period.unit {
-        case .day: multiplier = 30.0 / Double(period.value)
-        case .week: multiplier = 4.0 / Double(period.value)
-        case .month: multiplier = 1.0 / Double(period.value)
-        case .year: multiplier = 1.0 / (Double(period.value) * 12.0)
-        @unknown default: return nil
-        }
-
-        let perMonthPrice = price * Decimal(multiplier)
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.locale = priceFormatStyle.locale
-        formatter.maximumFractionDigits = 2
-
-        // --- THIS IS THE CORRECTED LINE ---
-        return formatter.string(from: perMonthPrice as NSDecimalNumber)
     }
 }

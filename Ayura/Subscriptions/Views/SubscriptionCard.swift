@@ -19,13 +19,6 @@ struct SubscriptionCard: View {
                     Text(product.displayPrice)
                         .font(.title2.weight(.semibold))
                     
-                    if let monthly = product.pricePerMonth,
-                       product.subscription?.subscriptionPeriod.unit == .year {
-                        Text("Equivalent to \(monthly) per month")
-                            .font(.caption)
-                            .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.8))
-                    }
-
                     if !isActive, let intro = product.subscription?.introductoryOffer {
                         let plural = intro.period.value > 1
                         let unit = intro.period.unit.noun(plural: plural).lowercased()

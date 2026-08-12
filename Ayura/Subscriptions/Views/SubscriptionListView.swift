@@ -19,21 +19,13 @@ struct SubscriptionListView: View {
     
     @ObservedObject private var effectManager = EffectManager.shared
 
-    private var privacyPolicyURL: URL? {
-        guard
-            let value = Bundle.main.object(forInfoDictionaryKey: "AyurvedaAsanaYogaPrivacyPolicyURL") as? String,
-            !value.isEmpty
-        else {
-            return nil
-        }
-        return URL(string: value)
-    }
+    private let privacyPolicyURL = URL(string: "https://www.wise-eating.com/privacy")!
 
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 20) {
                 // 1. Feature Info Views
-                if title == "Ads" {
+                if title == "No Ads" {
                     RemoveAdsSubscriptionView()
                 } else if title == "Advanced" {
                     AdvancedSubscriptionView()
@@ -95,17 +87,15 @@ struct SubscriptionListView: View {
                     }
                     
                     HStack {
-                        if let privacyPolicyURL {
-                            Button {
-                                openLink(privacyPolicyURL)
-                            } label: {
-                                Label("Privacy Policy", systemImage: "lock.shield")
-                            }
-                            .font(.footnote)
-                            .foregroundStyle(effectManager.currentGlobalAccentColor)
-
-                            Spacer()
+                        Button {
+                            openLink(privacyPolicyURL)
+                        } label: {
+                            Label("Privacy Policy", systemImage: "lock.shield")
                         }
+                        .font(.footnote)
+                        .foregroundStyle(effectManager.currentGlobalAccentColor)
+
+                        Spacer()
                         
                         Button {
                             openLink(URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!)
