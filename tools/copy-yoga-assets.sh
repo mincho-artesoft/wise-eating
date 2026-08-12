@@ -21,6 +21,11 @@ for asset in "${YOGA_ASSETS[@]}"; do
         echo "MISSING Yoga bundle asset: $source_path" >&2
         exit 1
     fi
+    # NOT ditto. ENABLE_USER_SCRIPT_SANDBOXING = YES restricts writes to the
+    # paths declared in this phase's outputPaths. ditto writes a randomly-named
+    # temp file (.BC.T_xxxxxx) and renames it into place; that name can never be
+    # declared, so the sandbox denies it and the build fails. cp writes straight
+    # to the declared destination.
     /bin/cp -f "$source_path" "$YOGA_DESTINATION_DIRECTORY/$asset"
 done
 

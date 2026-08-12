@@ -11,3 +11,50 @@ xcuserdata/
 
 # Scratch parked for deletion (device_bash cannot rm on a mounted folder)
 _to_delete/
+
+# ---------------------------------------------------------------------------
+# Yoga imagery and video pipeline — 2026-08-12
+#
+# Working files on Mincho's machine, not repo content. The 908 shipped yoga
+# images are committed as the frame archive under Ayura/; everything below is
+# the machinery that produced them, plus the video pilot. None of it is an input
+# to a build. The files stay on disk — they are only hidden from git.
+#
+# Rules are written as explicit names rather than wildcards. A blanket
+# `ayurveda-data/yoga/*.py` was tried first and it shadowed the tracked
+# materialize_uuid_ids.py, which is exactly the mistake this comment exists to
+# stop the next person repeating. asanas.json, sequences.json and
+# materialize_uuid_ids.py are tracked app data and must never be matched here.
+# ---------------------------------------------------------------------------
+
+# --- image prompt pipeline (untracked scripts, docs and generated job sets) ---
+ayurveda-data/yoga/apply_fallback.py
+ayurveda-data/yoga/apply_geometry.py
+ayurveda-data/yoga/expand_derived.py
+ayurveda-data/yoga/make_reroll.py
+ayurveda-data/yoga/make_yoga_jobs.py
+ayurveda-data/yoga/refocus_prompts.py
+ayurveda-data/yoga/soften_prompts.py
+ayurveda-data/yoga/upload_reference.py
+ayurveda-data/yoga/cleanup-review-scratch.sh
+ayurveda-data/yoga/README-HANDOFF.md
+ayurveda-data/yoga/RUNBOOK-yoga-images.md
+ayurveda-data/yoga/TASK-YOGA-DATA.md
+ayurveda-data/yoga/TASK-YOGA-IMAGES.md
+ayurveda-data/yoga/review-failures-*.txt
+ayurveda-data/yoga/rows-without-image.txt
+ayurveda-data/yoga/_*.json
+ayurveda-data/yoga/yoga_jobs*.json
+ayurveda-data/yoga/yoga_jobs_run.json.bak-*
+ayurveda-data/yoga/asana_jobs.json
+ayurveda-data/yoga/upload_job.json
+ayurveda-data/yoga/pose_geometry.json
+ayurveda-data/yoga/image_fallback*.json
+
+# --- video pilot: scripts, manifests and ~59 MB of stills and clips ----------
+ayurveda-data/yoga-video/
+
+# --- imagery runner editing copies -------------------------------------------
+# results/ is NOT ignored: results/ledger.json is tracked and is the record of
+# every generation run.
+ayurveda-data/imagery/*.bak-*

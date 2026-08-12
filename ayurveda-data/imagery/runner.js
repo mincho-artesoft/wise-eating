@@ -66,6 +66,16 @@ const TERMINAL = new Set(["done", "downloaded", "error", "cancelled"]);
 // seconds later is worth much more than catching it 100 jobs later.
 const seenHashes = new Map();
 const IMG_EXT = [".jpeg", ".jpg", ".png", ".webp"];
+const VID_EXT = [".mp4"];
+
+// Keep these sets type-selected.  They must not be merged: a video job that
+// lands a JPEG means Flow was left in Image mode, and accepting that file would
+// silently spend a video job without producing a clip.
+function extensionsFor(type) {
+  if (type === "image") return IMG_EXT;
+  if (type === "video") return VID_EXT;
+  throw new Error(`unsupported job type "${type}" (expected image or video)`);
+}
 
 /**
  * Verify what actually landed on disk for this job, not what we asked for.
@@ -78,8 +88,8 @@ const IMG_EXT = [".jpeg", ".jpg", ".png", ".webp"];
  *     and it is no longer knowable which file belongs to which submission
  *   - nothing landed at all, or more than one new file did
  */
-function landedPath(filename) {
-  for (const ext of IMG_EXT) {
+function landedPath(filename, type) {
+  for (const ext of extensionsFor(type)) {
     const p = path.join(OUTDIR, filename + ext);
     if (fs.existsSync(p)) return p;   // _rejected/ is a subfolder, so never matched here
   }
@@ -91,9 +101,9 @@ function landedPath(filename) {
  * the move into OUTDIR failed. Recovering it costs nothing; regenerating it costs
  * a credit for an image that already exists.
  */
-function rescueFromDownloads(filename) {
+function rescueFromDownloads(filename, type) {
   if (!DOWNLOADS || !fs.existsSync(DOWNLOADS) || !OUTDIR) return null;
-  for (const ext of IMG_EXT) {
+  for (const ext of extensionsFor(type)) {
     const src = path.join(DOWNLOADS, filename + ext);
     if (!fs.existsSync(src)) continue;
     const dst = path.join(OUTDIR, filename + ext);
@@ -127,12 +137,12 @@ function saveLedger(results) {
   fs.writeFileSync(LEDGER, JSON.stringify(l, null, 2));
 }
 
-function dupeVariants(filename) {
+function dupeVariants(filename, type) {
   // Chrome writes "name (1).jpeg" when the same name is downloaded twice.
   const esc = filename.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const re = new RegExp("^" + esc + " \\(\\d+\\)$");
   return fs.readdirSync(OUTDIR).filter(
-    (f) => IMG_EXT.includes(path.extname(f).toLowerCase()) && re.test(path.basename(f, path.extname(f)))
+    (f) => extensionsFor(type).includes(path.extname(f).toLowerCase()) && re.test(path.basename(f, path.extname(f)))
   );
 }
 
@@ -144,14 +154,14 @@ function dupeVariants(filename) {
  * download then lands inside a LATER job's window. Checking the expected name
  * directly is immune to that and still catches the failures that matter.
  */
-function verifyLanded(filename, sinceMs) {
+function verifyLanded(filename, sinceMs, type) {
   if (!OUTDIR || !fs.existsSync(OUTDIR)) return null;
-  const p = landedPath(filename);
-  if (!p) return "job reported success but no file with the expected name appeared";
+  const p = landedPath(filename, type);
+  if (!p) return `job reported success but no ${type} file with the expected name appeared`;
   const st = fs.statSync(p);
   if (st.mtimeMs < sinceMs - 1000)
     return `the file predates this job (${new Date(st.mtimeMs).toISOString()}) — it is a leftover from an earlier run`;
-  const extra = dupeVariants(filename);
+  const extra = dupeVariants(filename, type);
   if (extra.length)
     return `Chrome de-duplicated the name (${extra.join(", ")}) — this submission ran more than once`;
   const h = crypto.createHash("sha256").update(fs.readFileSync(p)).digest("hex");
@@ -170,7 +180,8 @@ function reconcile(results, batchStart) {
   let recovered = 0;
   for (const r of results) {
     if (r.status !== "error" || !r.filename) continue;
-    if (!verifyLanded(r.filename, batchStart) || (landedPath(r.filename) && r.skippedExisting)) {
+    if (!verifyLanded(r.filename, batchStart, r.mediaType) ||
+        (landedPath(r.filename, r.mediaType) && r.skippedExisting)) {
       log(`  recovered ${r.filename} — it landed after the runner gave up on it`);
       r.status = "downloaded"; r.error = null; r.recoveredLate = true; recovered++;
     }
@@ -182,12 +193,20 @@ function reconcile(results, batchStart) {
 /** Map a known failure string to the action that fixes it. Unknown -> say so. */
 function diagnose(err) {
   const e = String(err);
+  if (/FLOW_POLICY_REFUSED/.test(e))
+    return "Flow rejected THIS PROMPT on content policy. The account is fine and the run\n" +
+           "                continues - the row is recorded as refused_policy and left with no file, so a\n" +
+           "                later run picks it up. To clear it for good, reword the prompt (see\n" +
+           "                yoga/soften_prompts.py) and re-run just the quarantine file.";
   if (/FLOW_REFUSED/.test(e))
     return "Flow REFUSED the request — this is an anti-abuse or quota block, not a stall.\n" +
            "                Stop. Do not retry in a loop: repeated submissions into a refusal are\n" +
            "                what escalate it. Wait for it to clear, then generate ONE image by hand\n" +
            "                in the Flow UI to confirm before running anything scripted again, and\n" +
-           "                resume at a much lower rate (--limit 25 --settle 30000).";
+           "                resume more gently: a SMALLER batch and a LONGER settle, e.g.\n" +
+           "                --limit 100 --settle 90000. (settle is the pause AFTER each job, so a\n" +
+           "                bigger number is slower. Earlier text here said --settle 30000, which is\n" +
+           "                FASTER than the 60000 default and would have made the block worse.)";
   if (/already exists/.test(e))
     return "A bridge from an earlier run is still holding these job ids. Kill it and restart:\n" +
            "                lsof -ti:8787 | xargs kill   then re-run the bridge.";
@@ -295,7 +314,11 @@ function seedFromDisk() {
   if (!OUTDIR || !fs.existsSync(OUTDIR)) return 0;
   let n = 0;
   for (const f of fs.readdirSync(OUTDIR)) {
-    if (!IMG_EXT.includes(path.extname(f).toLowerCase())) continue;
+    const ext = path.extname(f).toLowerCase();
+    // This only seeds duplicate hashes.  Landing/skip correctness still uses
+    // extensionsFor(job.type), so seeing both families here cannot make a
+    // wrong-media job pass.
+    if (!IMG_EXT.includes(ext) && !VID_EXT.includes(ext)) continue;
     const h = crypto.createHash("sha256").update(fs.readFileSync(path.join(OUTDIR, f))).digest("hex");
     if (!seenHashes.has(h)) seenHashes.set(h, path.basename(f, path.extname(f)));
     n++;
@@ -303,8 +326,27 @@ function seedFromDisk() {
   return n;
 }
 
+function materializeFiles(files, filename) {
+  return files.map((spec) => {
+    if (!spec.path) return { ...spec };
+    const { path: sourcePath, ...wireSpec } = spec;
+    const resolved = path.resolve(sourcePath);
+    const bytes = fs.readFileSync(resolved);
+    if (!bytes.length) throw new Error(`reference file is empty: ${resolved}`);
+    const data = bytes.toString("base64");
+    if (spec.role === "start") {
+      log(`  start frame ${filename}: ${bytes.length} source bytes -> ${data.length} base64 characters`);
+    }
+    // The content script runs inside the page and cannot dereference a local
+    // filesystem path.  Encode only the one file being submitted; keeping the
+    // 907 source paths in jobs.json avoids a ~1.2 GB base64-tracked artifact.
+    return { ...wireSpec, data };
+  });
+}
+
 async function runBatch(file) {
   const batch = JSON.parse(fs.readFileSync(file, "utf8"));
+  for (const job of batch.jobs) extensionsFor(job.type);
   const name = path.basename(file);
   log(`START ${name} — ${batch.jobs.length} jobs, styleHash ${batch.styleHash}` +
       (has("no-settings") ? " [--no-settings: using the composer's current state]" : ""));
@@ -320,9 +362,10 @@ async function runBatch(file) {
   // seeding, a re-run would neither skip finished rows nor notice that a new
   // download is byte-identical to one from an earlier run.
   const onDisk = seedFromDisk();
-  if (onDisk) log(`  ${onDisk} image(s) already in ${OUTDIR}`);
+  if (onDisk) log(`  ${onDisk} media file(s) already in ${OUTDIR}`);
   const results = [];
   let consecutive = 0;
+  const policyRefused = [];   // per-prompt content rejections; reported at the end
   let skippedExisting = 0;
   const ABORT_AFTER = Number(arg("abort-after", 3));
   for (const [i, job] of batch.jobs.entries()) {
@@ -331,34 +374,38 @@ async function runBatch(file) {
       log(`ABORT — ${consecutive} consecutive failures, skipping the remaining ${batch.jobs.length - i} jobs.`);
       log(`        last error: ${last.error || last.status || "unknown"}`);
       log(`        ${diagnose(last.error || "")}`);
-      for (const rest of batch.jobs.slice(i)) results.push({ ...rest._row, filename: rest.output.filename, status: "skipped", error: "aborted after consecutive failures" });
+      for (const rest of batch.jobs.slice(i)) results.push({ ...rest._row, filename: rest.output.filename, mediaType: rest.type, status: "skipped", error: "aborted after consecutive failures" });
       break;
     }
     // The bridge keeps finished jobs in memory and rejects a repeated id with 409.
     // The batch id stays deterministic for traceability; the SUBMITTED id carries a
     // per-run suffix so re-running a batch against a still-live bridge works.
     const submitId = `${job.id}-${RUN_ID}`;
+    // Already generated in an earlier run: do not pay for it twice. --force overrides.
+    if (!has("force") && !landedPath(job.output.filename, job.type)) {
+      const rescued = rescueFromDownloads(job.output.filename, job.type);
+      if (rescued) log(`  rescued ${job.output.filename} from Downloads — already generated, never moved`);
+    }
+    if (!has("force") && landedPath(job.output.filename, job.type)) {
+      skippedExisting++;
+      results.push({ ...job._row, filename: job.output.filename, mediaType: job.type, status: "downloaded", skippedExisting: true });
+      continue;
+    }
     // --no-settings: leave the composer alone and reuse whatever it is set to.
     // The settings are identical for all 1,844 jobs, so driving the popover per
     // job repeats the most fragile interaction in the chain for no benefit.
     const payload = {
       id: submitId, type: job.type, prompt: job.prompt,
+      // Materialize local reference paths here, one job at a time. The bridge
+      // receives transport-safe base64 and the tracked job file stays compact.
+      ...(job.files ? { files: materializeFiles(job.files, job.output.filename) } : {}),
       ...(has("no-settings") ? { skipSettings: true, settings: {} } : { settings: job.settings }),
       output: { ...job.output, ...(OUTDIR ? { moveTo: OUTDIR } : {}) },
     };
-    // Already generated in an earlier run: do not pay for it twice. --force overrides.
-    if (!has("force") && !landedPath(job.output.filename)) {
-      const rescued = rescueFromDownloads(job.output.filename);
-      if (rescued) log(`  rescued ${job.output.filename} from Downloads — already generated, never moved`);
-    }
-    if (!has("force") && landedPath(job.output.filename)) {
-      skippedExisting++;
-      results.push({ ...job._row, filename: job.output.filename, status: "downloaded", skippedExisting: true });
-      continue;
-    }
-    if (has("dry-run")) { log(`  [dry] ${job.output.filename}`); results.push({ ...job._row, status: "dry" }); continue; }
+    if (has("dry-run")) { log(`  [dry] ${job.output.filename}`); results.push({ ...job._row, filename: job.output.filename, mediaType: job.type, status: "dry" }); continue; }
 
     const jobStartedAt = Date.now();
+    log(`  submit ${i + 1}/${batch.jobs.length} ${job.type} ${job.output.filename}`);
     let done = null, lastErr = null;
     for (let attempt = 0; attempt <= RETRIES; attempt++) {
       const id = attempt === 0 ? submitId : `${submitId}-r${attempt}`;
@@ -391,21 +438,37 @@ async function runBatch(file) {
       }
     }
 
+    // A PER-PROMPT policy rejection is not an account block. On 2026-08-05 one
+    // refused asana ("might violate our policies. Please try a different prompt")
+    // was treated as an anti-abuse stop and skipped the remaining 96 jobs of a
+    // healthy batch. Record it, leave no file so a later run retries it, move on.
+    // The same prompt is not reliably refused - seated-meditation was refused in
+    // one run and generated in the next - so this is a per-attempt verdict, not a
+    // permanent property of the row.
+    if (/FLOW_POLICY_REFUSED/.test(String(lastErr))) {
+      log(`  REFUSED ${i + 1}/${batch.jobs.length} ${job.output.filename} — content policy, continuing`);
+      policyRefused.push(job.output.filename);
+      results.push({ ...job._row, filename: job.output.filename, mediaType: job.type, status: "refused_policy", error: String(lastErr) });
+      try { saveLedger(results); } catch (e) { log(`  ledger write failed: ${e.message}`); }
+      await new Promise((r) => setTimeout(r, settle));
+      continue;
+    }
+
     if (/FLOW_REFUSED/.test(String(lastErr))) {
       log(`  REFUSED ${i + 1}/${batch.jobs.length} ${job.output.filename}`);
       log(`        ${lastErr}`);
       log(`        ${diagnose(String(lastErr))}`);
-      for (const rest of batch.jobs.slice(i)) results.push({ ...rest._row, filename: rest.output.filename, status: "skipped", error: "aborted: Flow refused" });
+      for (const rest of batch.jobs.slice(i)) results.push({ ...rest._row, filename: rest.output.filename, mediaType: rest.type, status: "skipped", error: "aborted: Flow refused" });
       break;
     }
 
     const ok = done && (done.status === "done" || done.status === "downloaded");
-    const problem = ok ? verifyLanded(job.output.filename, jobStartedAt) : null;
+    const problem = ok ? verifyLanded(job.output.filename, jobStartedAt, job.type) : null;
     if (problem) {
       // A rejected download MUST NOT stay in OUTDIR under the correct name. If it
       // does, the next run finds the filename, skips the row, and the wrong image
       // becomes permanent — the failure the check exists to prevent, made durable.
-      const bad = landedPath(job.output.filename);
+      const bad = landedPath(job.output.filename, job.type);
       if (bad) {
         const q = path.join(OUTDIR, "_rejected");
         fs.mkdirSync(q, { recursive: true });
@@ -415,12 +478,12 @@ async function runBatch(file) {
       }
       log(`  FAIL ${i + 1}/${batch.jobs.length} ${job.output.filename} — ${problem}`);
       consecutive += 1;
-      results.push({ ...job._row, filename: job.output.filename, status: "error", error: problem,
+      results.push({ ...job._row, filename: job.output.filename, mediaType: job.type, status: "error", error: problem,
                      mediaId: (done && done.mediaId) || null });
     } else {
       log(`  ${ok ? "ok  " : "FAIL"} ${i + 1}/${batch.jobs.length} ${job.output.filename}${ok ? "" : " — " + lastErr}`);
       consecutive = ok ? 0 : consecutive + 1;
-      results.push({ ...job._row, filename: job.output.filename, status: ok ? done.status : "error",
+      results.push({ ...job._row, filename: job.output.filename, mediaType: job.type, status: ok ? done.status : "error",
                      error: ok ? null : lastErr, mediaId: (done && done.mediaId) || null });
     }
 
@@ -445,7 +508,7 @@ async function runBatch(file) {
       log(`  BACKING OFF — ${Math.round(rate * 100)}% of the last ${recent.length} jobs failed unrecoverably.`);
       log("        Timeouts are excluded from this rate because they usually reconcile. This is");
       log("        real lost work, so stopping rather than continuing to submit.");
-      for (const rest of batch.jobs.slice(i + 1)) results.push({ ...rest._row, filename: rest.output.filename, status: "skipped", error: "aborted: sustained failure rate" });
+      for (const rest of batch.jobs.slice(i + 1)) results.push({ ...rest._row, filename: rest.output.filename, mediaType: rest.type, status: "skipped", error: "aborted: sustained failure rate" });
       break;
     }
     if (rate > 0.3 && settle < 60000) {
@@ -461,6 +524,11 @@ async function runBatch(file) {
   const stalls = results.filter((r) => /timeout/i.test(String(r.error || ""))).length;
   if (stalls) log(`  ${stalls}/${results.length} job(s) stalled on card binding (recovered below if their image landed)`);
   if (skippedExisting) log(`  skipped ${skippedExisting} row(s) already present on disk (--force to regenerate)`);
+  if (policyRefused.length) {
+    log(`  ${policyRefused.length} row(s) refused on content policy - no file written, still queued:`);
+    for (const f of policyRefused) log(`        ${f}`);
+    log("        Re-running may clear them; a row refused repeatedly needs its prompt reworded.");
+  }
   if (!has("dry-run")) { await new Promise((r) => setTimeout(r, 8000)); reconcile(results, batchStartedAt); }
   const bad = results.filter((r) => !["done", "downloaded", "dry", "skipped"].includes(r.status));
   const skipped = results.filter((r) => r.status === "skipped");
@@ -491,7 +559,8 @@ async function main() {
   if (fs.existsSync(JOBS_FILE) && !has("use-batches")) {
     const all = JSON.parse(fs.readFileSync(JOBS_FILE, "utf8"));
     seedFromDisk();
-    const todo = all.jobs.filter((j) => !landedPath(j.output.filename));
+    for (const job of all.jobs) extensionsFor(job.type);
+    const todo = all.jobs.filter((j) => !landedPath(j.output.filename, j.type));
     log(`master list ${all.jobs.length} prompts — ${all.jobs.length - todo.length} already done, ${todo.length} remaining`);
     if (!todo.length) { log("nothing left to generate"); return; }
     const slice = todo.slice(0, LIMIT);

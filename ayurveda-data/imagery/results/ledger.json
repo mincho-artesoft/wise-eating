@@ -13186,5 +13186,4790 @@
     "kind": "recipe",
     "error": null,
     "mediaId": "f078a218-e9c3-4bc5-8378-757b256eaa84"
+  },
+  "map_00_meadow_gate": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c24d4323-c996-4ee3-8606-fae09ba95ac1"
+  },
+  "map_01_birch_wood": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8a39ce71-cc3b-4ef0-b6dc-a6d2757b7d3f"
+  },
+  "map_02_stone_bridge": {
+    "status": "done",
+    "error": null,
+    "mediaId": "02b2784b-0152-4310-8b22-7c047917230d"
+  },
+  "map_03_hill_farm": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9a49dcc5-7c9f-499f-9da6-b2de68d3a402"
+  },
+  "map_04_quarry_steps": {
+    "status": "done",
+    "error": null,
+    "mediaId": "35fe7e0b-af8c-4d47-911f-99cad3d67833"
+  },
+  "map_05_fog_hollow": {
+    "status": "done",
+    "error": null,
+    "mediaId": "42dfa266-61f4-480d-b046-e8331493e29c"
+  },
+  "map_06_pine_slope": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d61c3162-5db0-4580-bde4-bee0df033dad"
+  },
+  "map_07_mirror_lake": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a51e971b-ad73-4fde-8f70-1c4480c03d8f"
+  },
+  "map_08_great_falls": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7c3180ba-d865-4ffd-8b42-3a4db4f9a15b"
+  },
+  "map_09_cliff_village": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8d5fe571-e70b-47bf-92ce-070aa2acb222"
+  },
+  "map_10_cloud_shelf": {
+    "status": "done",
+    "error": null,
+    "mediaId": "63b08e65-683f-4ee4-9a46-37c1d761e74f"
+  },
+  "map_11_first_snow": {
+    "status": "done",
+    "error": null,
+    "mediaId": "53030603-f0fc-48eb-a838-e0a71777eb3e"
+  },
+  "map_12_ice_pass": {
+    "status": "done",
+    "error": null,
+    "mediaId": "af70eac5-70e2-4616-8d82-689750591692"
+  },
+  "map_13_thaw_valley": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7b210af3-0fa1-4695-a322-d90d773c78d0"
+  },
+  "map_14_mill_river": {
+    "status": "done",
+    "error": null,
+    "mediaId": "812a0b70-fb99-49a5-ae80-18c6a4450b64"
+  },
+  "map_15_blossom_grove": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ecda0ef4-45b8-4f2c-9752-5786b4a5502c"
+  },
+  "map_16_market_road": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6c6abb6e-ebf8-4cdc-92ad-d66944a9cd6a"
+  },
+  "map_17_reed_delta": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5564c4f2-400b-4178-aa69-90c78ddd9ebb"
+  },
+  "map_18_sky_terrace": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8a0d52c2-9092-4807-8213-aaaad8ec98c4"
+  },
+  "map_19_canyon_span": {
+    "status": "done",
+    "error": null,
+    "mediaId": "852aaacb-fe4e-44f2-814e-900eeec693c4"
+  },
+  "map_20_twin_falls": {
+    "status": "done",
+    "error": null,
+    "mediaId": "cf3a9076-39a0-4ba1-a749-14d4c539a2d5"
+  },
+  "map_21_lantern_wood": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f7cbf695-658e-41f2-8f31-0c8e674308e6"
+  },
+  "map_22_hot_springs": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9135748c-f0a5-4b58-baa6-9318b8e277aa"
+  },
+  "map_23_island_causeway": {
+    "status": "done",
+    "error": null,
+    "mediaId": "220be190-abff-4353-82ba-93af9cf54faf"
+  },
+  "map_24_fern_gorge": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5c099785-7e8c-4b00-8369-a4719146e7da"
+  },
+  "map_25_watch_tower": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e091be53-903c-4c27-b46d-5d60cf64d6a1"
+  },
+  "map_26_glacier_camp": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b82856dc-9bef-4d7b-a4aa-fb5d66672d7e"
+  },
+  "map_27_spring_thaw": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e2ac8ba6-c996-485c-8a32-cb7f6f53c3fe"
+  },
+  "prop_00_pine": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6870a6c7-f63b-4ce0-80f9-d9a6af08778e"
+  },
+  "prop_01_oak": {
+    "status": "done",
+    "error": null,
+    "mediaId": "59408d0f-a520-4223-9f2e-0b75e972c95a"
+  },
+  "prop_02_boulder": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3c5b314b-2aff-4ac4-9bd9-c921a3f8c213"
+  },
+  "prop_03_flowers": {
+    "status": "done",
+    "error": null,
+    "mediaId": "077d3d4e-4fdf-42e0-b07f-41a0ef9c0f99"
+  },
+  "prop_04_mushrooms": {
+    "status": "done",
+    "error": null,
+    "mediaId": "20030a7b-570f-4428-976c-1a088a97504f"
+  },
+  "prop_05_signpost": {
+    "status": "done",
+    "error": null,
+    "mediaId": "574115a0-d15f-4a28-9c28-0176c4b3853d"
+  },
+  "prop_06_lantern": {
+    "status": "error",
+    "error": "card_bind_failed",
+    "mediaId": null
+  },
+  "prop_07_waterwheel": {
+    "status": "error",
+    "error": "byte-identical to prop_05_signpost — the result card was matched globally and returned an earlier image",
+    "mediaId": "574115a0-d15f-4a28-9c28-0176c4b3853d"
+  },
+  "prop_08_tent": {
+    "status": "error",
+    "error": "byte-identical to prop_05_signpost — the result card was matched globally and returned an earlier image",
+    "mediaId": "574115a0-d15f-4a28-9c28-0176c4b3853d"
+  },
+  "prop_09_chest": {
+    "status": "skipped",
+    "error": "aborted after consecutive failures",
+    "mediaId": null
+  },
+  "prop_10_cairn": {
+    "status": "skipped",
+    "error": "aborted after consecutive failures",
+    "mediaId": null
+  },
+  "prop_11_logbridge": {
+    "status": "skipped",
+    "error": "aborted after consecutive failures",
+    "mediaId": null
+  },
+  "prop_12_reeds": {
+    "status": "skipped",
+    "error": "aborted after consecutive failures",
+    "mediaId": null
+  },
+  "prop_13_snowman": {
+    "status": "skipped",
+    "error": "aborted after consecutive failures",
+    "mediaId": null
+  },
+  "prop_14_fence": {
+    "status": "skipped",
+    "error": "aborted after consecutive failures",
+    "mediaId": null
+  },
+  "prop_15_haybale": {
+    "status": "skipped",
+    "error": "aborted after consecutive failures",
+    "mediaId": null
+  },
+  "prop_16_crystal": {
+    "status": "skipped",
+    "error": "aborted after consecutive failures",
+    "mediaId": null
+  },
+  "prop_17_campfire": {
+    "status": "skipped",
+    "error": "aborted after consecutive failures",
+    "mediaId": null
+  },
+  "prop_18_windmill": {
+    "status": "skipped",
+    "error": "aborted after consecutive failures",
+    "mediaId": null
+  },
+  "prop_19_cart": {
+    "status": "skipped",
+    "error": "aborted after consecutive failures",
+    "mediaId": null
+  },
+  "asana-mountain-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3b89681c-8a2a-4961-8ddb-25b765d71123"
+  },
+  "asana-upward-salute": {
+    "status": "done",
+    "error": null,
+    "mediaId": "1b595669-eae1-4b67-b177-3d8fcf7fb469"
+  },
+  "asana-standing-forward-fold": {
+    "status": "done",
+    "error": null,
+    "mediaId": "aca27150-8029-48f0-93c8-c7c1892185c8"
+  },
+  "asana-half-forward-fold": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a574c458-cbfb-4123-b90f-94b55ea6496b"
+  },
+  "reference-check": {
+    "status": "error",
+    "error": "Upload (+) button not found in composer",
+    "mediaId": null
+  },
+  "asana-four-limbed-staff-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e9303e61-dcb2-42ed-8f55-f32240a4dd89"
+  },
+  "asana-upward-facing-dog": {
+    "status": "done",
+    "error": null,
+    "mediaId": "1730fd2f-c8f3-48c4-82f0-d66e6e7a7d56"
+  },
+  "asana-cobra-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d637def3-e9f3-462f-a7d9-5fbab343ea4b"
+  },
+  "asana-downward-facing-dog": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6eb1ae68-adb0-40c4-839b-7d52c4e772c5"
+  },
+  "asana-plank-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "065e3657-e26a-4f45-920e-e1116e1b3262"
+  },
+  "asana-knees-chest-chin": {
+    "status": "done",
+    "error": null,
+    "mediaId": "0ba2496c-17e2-44a1-9620-80ce0ba7e6ba"
+  },
+  "asana-low-lunge": {
+    "status": "done",
+    "error": null,
+    "mediaId": "606d28f0-7560-4602-a41c-c46fe250f256"
+  },
+  "asana-high-lunge": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6a079673-3800-4af4-ae84-bee59b3aca52"
+  },
+  "asana-staff-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "79e76b05-459c-4d38-b717-3e7d9d28e610"
+  },
+  "asana-warrior-i": {
+    "status": "done",
+    "error": null,
+    "mediaId": "eaf62688-04cc-43c9-8fa0-7d4dc1b35353"
+  },
+  "asana-warrior-ii": {
+    "status": "done",
+    "error": null,
+    "mediaId": "617481ae-2655-4753-9aae-317a0e868baf"
+  },
+  "asana-reverse-warrior": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6f4be708-2c9d-47e1-a8df-aa4018c001da"
+  },
+  "asana-extended-side-angle": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e267a649-ea69-4958-94c3-edc82e2e2f84"
+  },
+  "asana-triangle-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a9789682-b1ca-4f45-8666-5f5f03fa3543"
+  },
+  "asana-revolved-triangle": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b156f7b4-cc6f-4157-a743-5d909d451977"
+  },
+  "asana-wide-legged-forward-fold": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5713ecee-cd5d-497a-92da-2c6e55df0dab"
+  },
+  "asana-pyramid-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ff3e7cc6-cb88-4909-84ea-2ad6fb82cc40"
+  },
+  "asana-chair-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "99d0adbd-9ea3-41c9-94b5-cc7d4feb9fd9"
+  },
+  "asana-revolved-chair": {
+    "status": "done",
+    "error": null,
+    "mediaId": "81664d59-b4d2-479e-987d-c5bb08b5b7ee"
+  },
+  "asana-standing-half-forward-bend-at-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "eea5e17c-e812-472e-bd4c-d4afcaf31a60"
+  },
+  "asana-garland-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d7d54321-f474-4c62-a178-87674cc0f4b2"
+  },
+  "asana-standing-wide-squat": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9ce45e19-beaf-4e52-b144-297ea3d6d072"
+  },
+  "asana-goddess-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "887d9117-8b1c-4e55-a2c4-c478f0edead2"
+  },
+  "asana-standing-side-bend": {
+    "status": "done",
+    "error": null,
+    "mediaId": "db498152-3b77-43ab-b899-501dd3db18aa"
+  },
+  "asana-warrior-iii": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c9df9ee0-b32d-4d6f-bf65-51410ad7d09e"
+  },
+  "asana-tree-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5d2566d5-dc43-4990-af74-aa741c249741"
+  },
+  "asana-eagle-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "09d1f192-3a9a-4040-9847-9e91423fda7c"
+  },
+  "asana-dancer-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b9850d5e-5c6b-4aed-8765-3de1c4b9f5f6"
+  },
+  "asana-half-moon-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d23afff9-03a7-4eb9-866e-36bb73f95374"
+  },
+  "asana-revolved-half-moon": {
+    "status": "done",
+    "error": null,
+    "mediaId": "fb4b5295-e17c-489b-9404-18a893e1eb7d"
+  },
+  "asana-extended-hand-to-big-toe": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f0c82a4e-1684-4000-9047-be99a9f0c0f6"
+  },
+  "asana-standing-split": {
+    "status": "done",
+    "error": null,
+    "mediaId": "020e43f2-c77c-4972-a61b-35ea9fc59dd4"
+  },
+  "asana-warrior-i-twist": {
+    "status": "done",
+    "error": null,
+    "mediaId": "538e8c2e-b035-42a2-888e-383e4a2210f9"
+  },
+  "asana-humble-warrior": {
+    "status": "done",
+    "error": null,
+    "mediaId": "0726c4ed-fca8-4002-b477-0efd04040ab0"
+  },
+  "asana-crescent-lunge-twist": {
+    "status": "done",
+    "error": null,
+    "mediaId": "0dd455d0-d928-425c-9502-8305ee247695"
+  },
+  "asana-gate-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "212e8893-d653-4d39-bb49-8369e0ccd4e0"
+  },
+  "asana-standing-backbend": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3d1d82eb-4483-4d2c-aac6-369b0a77e28e"
+  },
+  "asana-five-pointed-star": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b9ba3616-9aea-402a-8004-9345fadc1ad8"
+  },
+  "asana-wide-legged-forward-fold-with-clasp": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ea5ef977-2885-48fd-a529-0c3485286a02"
+  },
+  "asana-intense-side-stretch-with-reverse-prayer": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d0234774-ee85-413d-9336-22f9ef6bd95a"
+  },
+  "asana-chair-pose-with-prayer-twist": {
+    "status": "done",
+    "error": null,
+    "mediaId": "98222113-37d8-43c0-a22a-b58c94f7837e"
+  },
+  "asana-warrior-ii-side-bend": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3258df8f-baf8-454f-8cb1-06dd5f88f18d"
+  },
+  "asana-bound-angle-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f0d8fa98-b1d8-433b-bd37-a0fe208fcfd2"
+  },
+  "asana-reclined-bound-angle": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9fc83de2-58ef-4895-9871-41eb2069d41f"
+  },
+  "asana-head-to-knee-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5e0720f2-4fee-4037-89af-004040e30af2"
+  },
+  "asana-seated-forward-bend": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7a8d77ce-beca-44a8-bce1-867ce58414a8"
+  },
+  "asana-revolved-head-to-knee": {
+    "status": "done",
+    "error": null,
+    "mediaId": "87afb6a8-eb54-4c54-adce-c4e3e2728e62"
+  },
+  "asana-wide-angle-seated-forward-bend": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8857e10b-f9d6-47a0-97b7-731006311f47"
+  },
+  "asana-cow-face-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ce6d40ec-563c-4bdc-a58d-132ba4634f0c"
+  },
+  "asana-hero-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "78537c8f-9b94-4d28-b453-2b50e7e27248"
+  },
+  "asana-reclined-hero": {
+    "status": "done",
+    "error": null,
+    "mediaId": "58b2f97c-e016-4e68-9e1a-5ff2422a1959"
+  },
+  "asana-thunderbolt-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7c37be2d-9c75-4614-b626-236e7a2470bc"
+  },
+  "asana-easy-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2e6b8ff6-774e-4a31-8e80-cee2f854d326"
+  },
+  "asana-half-lotus": {
+    "status": "done",
+    "error": null,
+    "mediaId": "62e73301-d4ac-4ac8-872c-3c7198bc928a"
+  },
+  "asana-lotus-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8eb7e25b-7a33-4ba5-bf36-a080dcb8f65a"
+  },
+  "asana-accomplished-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "0c1b106f-2617-4c3f-b213-ce3e7c1f951a"
+  },
+  "asana-seated-twist": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5d97c254-186d-4f2d-8c43-c4751e4a3a9b"
+  },
+  "asana-full-lord-of-the-fishes": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3a6cc74b-5949-4198-b5ea-eade5a2e8143"
+  },
+  "asana-sage-marichi-i": {
+    "status": "done",
+    "error": null,
+    "mediaId": "981dff57-4dc6-4ebf-9782-1c6cee77de0b"
+  },
+  "asana-sage-marichi-iii": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7ee6b113-68ad-406c-b69b-2a766dd664d9"
+  },
+  "asana-boat-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b6ddb0e1-6813-4fb2-b67e-4bcc82f70418"
+  },
+  "asana-half-boat-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2f0fec65-9c8f-436e-8d1a-7a45c7ce4f01"
+  },
+  "asana-seated-wide-legged-twist": {
+    "status": "done",
+    "error": null,
+    "mediaId": "12e32452-400c-4eda-abf2-b4fd712dfae3"
+  },
+  "asana-firelog-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "0ddc9f1d-096b-49d1-8f2d-622a76f590dd"
+  },
+  "asana-half-pigeon": {
+    "status": "done",
+    "error": null,
+    "mediaId": "1f645933-0546-4d23-9a0d-2c758caa7816"
+  },
+  "asana-king-pigeon": {
+    "status": "done",
+    "error": null,
+    "mediaId": "655d978f-d7ab-407e-b440-88085e3eaf2f"
+  },
+  "asana-double-pigeon": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5c973b4e-2c51-4e69-8a58-9b9adfd9431a"
+  },
+  "asana-lizard-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e2b96586-b86c-45d5-b425-dbe756b1d8b7"
+  },
+  "asana-frog-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e304f43b-2f6c-4a7c-841e-29beb97b32b4"
+  },
+  "asana-butterfly-fold": {
+    "status": "done",
+    "error": null,
+    "mediaId": "90e545de-8113-4f87-b69d-246d5d5d5c04"
+  },
+  "asana-compass-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "79b91358-b338-4961-83e8-421fd8ff136d"
+  },
+  "asana-heron-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "17530d05-af23-40bd-ad8a-c1a36cdeea08"
+  },
+  "asana-tortoise-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "abf2ef86-3480-4714-b156-f8e9bd8321ce"
+  },
+  "asana-sleeping-tortoise": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b352b9ee-0737-45ca-858c-1b4b191ba064"
+  },
+  "asana-bharadvaja-s-twist": {
+    "status": "done",
+    "error": null,
+    "mediaId": "907d909e-f4c4-428c-9fa9-1004723253f1"
+  },
+  "asana-sage-vasistha-s-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "cb95c78c-01a0-42be-9de2-2f0c3df9908c"
+  },
+  "asana-side-plank-with-leg-lift": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2feb1cbd-125c-44e7-9e7c-b639d1e75ef9"
+  },
+  "asana-staff-pose-lift": {
+    "status": "done",
+    "error": null,
+    "mediaId": "26542fa5-673c-4c3f-9309-8f85914fa55d"
+  },
+  "asana-seated-cat-cow": {
+    "status": "done",
+    "error": null,
+    "mediaId": "80f46706-4eca-4fb9-ac5b-2b93c62708ab"
+  },
+  "asana-seated-side-stretch": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ef0acf2c-a0c9-4aaf-a1b9-5675efa3a560"
+  },
+  "asana-cradle-stretch": {
+    "status": "done",
+    "error": null,
+    "mediaId": "affc7342-0bb3-4098-98ed-5e3b0b76a8f0"
+  },
+  "asana-seated-forward-bend-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "731136f7-b82e-4992-91c7-bd0c2f66458c"
+  },
+  "asana-half-bound-lotus-forward-bend": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8a59eed8-7af2-41f4-a90d-c1134882fd19"
+  },
+  "asana-bridge-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b0bf2f37-2bb3-408b-b5ad-5ccb6a7d370c"
+  },
+  "asana-supported-bridge": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e0f4e5f7-711f-4af2-a80e-9ca6f8663363"
+  },
+  "asana-wheel-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "008d314f-9080-4fb1-a58e-28d85b1199ce"
+  },
+  "asana-camel-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e4cac79b-bac1-41b4-a8c5-15ac39230844"
+  },
+  "asana-bow-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2cf742ac-a8de-4478-8267-be4ce16b698b"
+  },
+  "asana-locust-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "1b9d054a-3faf-40f5-81ce-150d6d4c9754"
+  },
+  "asana-half-locust": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6a863da8-1505-4d51-a69b-db855bbb9210"
+  },
+  "asana-sphinx-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "03a80184-685c-4d99-ab18-9dfdf605145f"
+  },
+  "asana-seal-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e9835873-0a83-4554-95af-0380de799a3a"
+  },
+  "asana-fish-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2634f14c-6f4a-42f7-a92e-650673e7586e"
+  },
+  "asana-supported-fish": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e6f9826d-4ccf-4897-8cc4-88f85cc01439"
+  },
+  "asana-upward-bow-with-blocks": {
+    "status": "done",
+    "error": null,
+    "mediaId": "21bba56d-89c2-438a-8fb9-ea0fb6b94fcc"
+  },
+  "asana-little-thunderbolt": {
+    "status": "done",
+    "error": null,
+    "mediaId": "029b254d-c01b-4078-8d83-c2da06141606"
+  },
+  "asana-pigeon-king-prep-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d3126a7e-a848-4123-be41-5ebb8648d63f"
+  },
+  "asana-cat-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d2c2d5db-3fd2-4077-b704-09a722da76be"
+  },
+  "asana-cow-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9bb6d8ad-7d4b-4b8b-855e-e662f27a3a37"
+  },
+  "asana-thread-the-needle": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3beeaed5-6498-45ee-abff-391525702918"
+  },
+  "asana-puppy-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f7220f25-e7ac-4d3b-86ba-30b026c305aa"
+  },
+  "asana-child-s-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "dd6a445d-76c3-477a-8bbb-818676efc934"
+  },
+  "asana-wide-knee-child-s-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ae1cbbb6-1fee-4c9b-b5d8-0fb7edc1bce1"
+  },
+  "asana-extended-puppy-with-blocks": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c8ba78a7-3e79-4fc0-82ba-139dc590ebfb"
+  },
+  "asana-knees-to-chest": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7cd46684-5e02-4604-8c74-b6c6eb85140c"
+  },
+  "asana-supine-twist": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2cdb7b0c-a905-40a1-a006-f053fc10130e"
+  },
+  "asana-reclined-hand-to-big-toe": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3d674a6d-af35-4da7-af7d-4b4d8c788f09"
+  },
+  "asana-reclined-pigeon": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9ca55b14-e75b-40e2-98eb-bdabffd70e89"
+  },
+  "asana-happy-baby": {
+    "status": "done",
+    "error": null,
+    "mediaId": "cc282033-3652-4a74-96d9-988bb5adf1f1"
+  },
+  "asana-legs-up-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "bb79a2f0-166a-4939-be80-e8bb19e0d8cf"
+  },
+  "asana-corpse-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5e7cbaa8-4277-4b15-bc0c-dfc51d7bba44"
+  },
+  "asana-reclined-twist-with-bolster": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2c25119f-7f65-4e38-829c-9486134d2c7d"
+  },
+  "asana-wind-relieving-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "892b3b52-f056-4a10-b57c-db92ca6e5d57"
+  },
+  "asana-supine-bound-angle-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "1914fafa-9e68-469a-8af4-4d6a394f5c17"
+  },
+  "asana-constructive-rest": {
+    "status": "done",
+    "error": null,
+    "mediaId": "dcd871b5-3c89-4852-b58e-2d6c23224f76"
+  },
+  "asana-shoulderstand": {
+    "status": "done",
+    "error": null,
+    "mediaId": "92d5210a-cf57-49fc-a225-4137a6048f99"
+  },
+  "asana-halasana-plough": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8d800c9e-5840-45dc-8071-f407470edadf"
+  },
+  "asana-ear-pressure-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a1902efc-e90b-4d01-99ef-00108637bc79"
+  },
+  "asana-headstand": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5ee5146e-02c5-467d-b9f0-49844475575e"
+  },
+  "asana-supported-headstand-at-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b14382a5-4097-4e3d-9484-c39434a75b32"
+  },
+  "asana-forearm-stand": {
+    "status": "done",
+    "error": null,
+    "mediaId": "04e9fd8f-e96d-406d-b66c-e7d8a807d4fa"
+  },
+  "asana-handstand": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3b2c23d1-3654-4efc-b685-e7b262a7574f"
+  },
+  "asana-dolphin-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2c6d8fd6-c453-41e2-8978-2a1000502d13"
+  },
+  "asana-crow-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "97e01557-6f5a-4b58-b606-a7212fbac009"
+  },
+  "asana-crane-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "893c1aab-018b-47ce-a0bd-a8124b85cf47"
+  },
+  "asana-side-crow": {
+    "status": "done",
+    "error": null,
+    "mediaId": "1bc9bdb0-d7a7-4d35-ab8e-e4e96d16d126"
+  },
+  "asana-eight-angle-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "1eb7559f-7caf-4075-85c1-30a2dee4dafe"
+  },
+  "asana-firefly-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "85ecbb99-6c09-4f85-b59c-5b3153f5034b"
+  },
+  "asana-flying-pigeon": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8ffffa45-6188-4d98-b9f7-64c9c60126f4"
+  },
+  "asana-peacock-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8aab22d7-501b-4bd4-be63-785bbd87350f"
+  },
+  "asana-scale-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "59f902a6-b6bd-4889-a0ae-2400751285e9"
+  },
+  "asana-rooster-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "74077380-efd7-46e0-89ca-5e40cf508461"
+  },
+  "asana-shoulder-pressing-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c0354628-63b4-4537-b155-592c724b3f5d"
+  },
+  "asana-grasshopper-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "340d8c3b-0b9b-4c7d-abbb-b9f84fccc596"
+  },
+  "asana-crow-to-headstand-transition": {
+    "status": "done",
+    "error": null,
+    "mediaId": "0d10a900-f458-4147-8cef-f31c54bbddd7"
+  },
+  "asana-tripod-headstand": {
+    "status": "done",
+    "error": null,
+    "mediaId": "34a76701-02c3-4fa1-b7bc-c48f56da170c"
+  },
+  "asana-chin-stand": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4320a7d6-171a-4c7f-8e24-538784ce9b50"
+  },
+  "asana-boat-to-low-boat": {
+    "status": "done",
+    "error": null,
+    "mediaId": "495ed8cb-b30b-4f3a-a9c0-a50f49cf2ceb"
+  },
+  "asana-forearm-plank": {
+    "status": "done",
+    "error": null,
+    "mediaId": "61d47315-6289-4204-b772-41977de25c15"
+  },
+  "asana-side-plank-knee-down": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f46604a5-9c0c-4a46-884c-d04d307607b3"
+  },
+  "asana-dolphin-plank": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e17d5f66-aaa7-4dc3-836d-33a2397541a1"
+  },
+  "asana-knee-to-nose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4cd6f3e6-cc1d-4b64-bd3d-f7ca6554a6fd"
+  },
+  "asana-three-legged-dog": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7486dc9b-8074-4274-bec7-03e8eee5b859"
+  },
+  "asana-wild-thing": {
+    "status": "done",
+    "error": null,
+    "mediaId": "22b43912-f7bc-438a-b71d-f968c2e65e6c"
+  },
+  "asana-downward-dog-split-twist": {
+    "status": "done",
+    "error": null,
+    "mediaId": "32f42781-fd8e-492c-8bc6-18959d4c462d"
+  },
+  "asana-chaturanga-to-upward-dog": {
+    "status": "done",
+    "error": null,
+    "mediaId": "080f2a0e-4209-4a9b-b903-c0a41709d653"
+  },
+  "asana-jump-back": {
+    "status": "done",
+    "error": null,
+    "mediaId": "1970518f-5f32-4d58-9345-00f7a5ab945e"
+  },
+  "asana-jump-through": {
+    "status": "done",
+    "error": null,
+    "mediaId": "99b7d519-9b93-4240-b122-92cf801a38b6"
+  },
+  "asana-handstand-hops": {
+    "status": "done",
+    "error": null,
+    "mediaId": "983ff341-5b12-4a41-9a19-11717f37e4a3"
+  },
+  "asana-reverse-plank": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2ff60986-ab23-4a33-aa6d-5e7809189f8c"
+  },
+  "asana-upward-plank-with-bent-knees": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8f56cb75-09ad-484b-8cd9-e847a4075644"
+  },
+  "asana-downward-dog-at-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e9423b9b-d944-464d-816e-26db48041c83"
+  },
+  "asana-chair-twist-at-chair": {
+    "status": "done",
+    "error": null,
+    "mediaId": "59b2fe56-2bb2-433b-b214-57073ecc35cb"
+  },
+  "asana-standing-cat-cow": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5290ef7e-adba-4ce0-a28f-7ffca54daa4b"
+  },
+  "asana-wall-plank": {
+    "status": "done",
+    "error": null,
+    "mediaId": "0169f6e6-6d1b-476d-a05a-977147b49ff7"
+  },
+  "asana-bird-dog": {
+    "status": "done",
+    "error": null,
+    "mediaId": "302e0846-8a77-4ad5-bb52-be640296498a"
+  },
+  "asana-tabletop": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6b60f09c-7080-48ce-b849-e4bed6235661"
+  },
+  "asana-kneeling-side-plank": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4e178e9d-4c5b-4a75-81ad-57e25ab5ff85"
+  },
+  "asana-hollow-body-hold": {
+    "status": "done",
+    "error": null,
+    "mediaId": "dbd44fa3-02b5-4e6b-ace3-48cfa35cff44"
+  },
+  "asana-leg-lowering": {
+    "status": "done",
+    "error": null,
+    "mediaId": "56146ce7-8822-4674-a871-a77c3aeec8c2"
+  },
+  "asana-supine-bicycle": {
+    "status": "done",
+    "error": null,
+    "mediaId": "17ddcdc9-5536-4630-a573-2d71a7980ef3"
+  },
+  "asana-three-part-breath": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b2882eba-73fa-4dd8-92ff-f2f6330abee3"
+  },
+  "asana-victorious-breath": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ebbbd138-eb81-46e7-8e75-41b0f48d9e86"
+  },
+  "asana-alternate-nostril-breath": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4b8cd2fc-3687-490c-8808-233057bdf841"
+  },
+  "asana-skull-shining-breath": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f3bb3311-5dc9-45ae-8ccd-1babe8343cb8"
+  },
+  "asana-bellows-breath": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c997a8b0-ae33-4c87-91b0-fa847edcbb7c"
+  },
+  "asana-cooling-breath": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f84124da-c63d-4f99-81b5-83888e3951a5"
+  },
+  "asana-hissing-breath": {
+    "status": "done",
+    "error": null,
+    "mediaId": "76f0de36-11b8-4bd0-8246-8735ed596da3"
+  },
+  "asana-humming-bee-breath": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ec6b040a-94f7-4129-bd0e-d9e6e143f0fb"
+  },
+  "asana-victorious-breath-with-retention": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3716aee3-1cfc-4dab-90a1-1d34e5158c61"
+  },
+  "asana-equal-breath": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4c4a0ec8-d9fa-4fb0-959e-d4881218d78d"
+  },
+  "asana-extended-exhale": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9b337d83-08a9-4b10-9166-8a13f9d9e45f"
+  },
+  "asana-ocean-breath-seated": {
+    "status": "done",
+    "error": null,
+    "mediaId": "de341150-7dd6-49e4-bec5-0b8e9c519e54"
+  },
+  "asana-root-lock": {
+    "status": "done",
+    "error": null,
+    "mediaId": "aa7b1a7e-8ddd-45bc-8fb4-36400ae47cae"
+  },
+  "asana-abdominal-lock": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f50ee3d2-afb6-435d-8815-bdf2b17a7e44"
+  },
+  "asana-throat-lock": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3f019e77-d6fc-4ddc-855c-2384dd45f03c"
+  },
+  "asana-great-lock": {
+    "status": "done",
+    "error": null,
+    "mediaId": "535d99e7-27da-4680-b212-2cd92d06b91a"
+  },
+  "asana-consciousness-gesture": {
+    "status": "done",
+    "error": null,
+    "mediaId": "1e8ce122-bb32-43bc-9420-b606793e3c1f"
+  },
+  "asana-knowledge-gesture": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7c0482d7-a333-4c14-9522-ff656bbeeb0d"
+  },
+  "asana-life-gesture": {
+    "status": "done",
+    "error": null,
+    "mediaId": "618a1a92-877e-47e6-8330-a247292d8bd9"
+  },
+  "asana-vital-air-gesture": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2ff85c32-a505-4402-993d-288ae455e535"
+  },
+  "asana-great-gesture": {
+    "status": "done",
+    "error": null,
+    "mediaId": "34af81a4-a159-4c60-bb80-0bf2f627eece"
+  },
+  "asana-stomach-churning": {
+    "status": "done",
+    "error": null,
+    "mediaId": "18761579-f44c-49b4-be90-8983b78e26b0"
+  },
+  "asana-alternating-nostril-cleansing": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4a4c28f6-4b6e-491f-ab7c-1053247f4c95"
+  },
+  "asana-eye-cleansing-gaze": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8a643b51-48fc-4eb6-bd93-9700be393c31"
+  },
+  "asana-seated-meditation": {
+    "status": "done",
+    "error": null,
+    "mediaId": "761bfd50-468b-4d39-af7d-d7996eab37b2"
+  },
+  "asana-concentration-practice": {
+    "status": "done",
+    "error": null,
+    "mediaId": "389b96e5-8634-4c1d-b6bd-927dc454ffd5"
+  },
+  "asana-sense-withdrawal": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f2ab15ff-1ecc-4371-bbcb-18a927bba32c"
+  },
+  "asana-yogic-sleep": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a21caa2f-b546-4311-a1ba-1df0c9f3dc4a"
+  },
+  "asana-body-scan": {
+    "status": "done",
+    "error": null,
+    "mediaId": "06342fd2-94f4-4121-b2dc-719c9e6efc82"
+  },
+  "asana-mantra-repetition": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b8c18160-1462-438a-8029-bba0edcaa9ee"
+  },
+  "asana-sun-salutation-a": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7ef11ba7-7901-49e0-9ee3-2c9d132b2232"
+  },
+  "asana-sun-salutation-b": {
+    "status": "done",
+    "error": null,
+    "mediaId": "bdb1c20c-be2a-4034-8125-ea40f29d2958"
+  },
+  "asana-classical-sun-salutation": {
+    "status": "done",
+    "error": null,
+    "mediaId": "72fb4fcf-e194-446c-92ab-8a9bdd82e994"
+  },
+  "asana-moon-salutation": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2a8ddce6-fa12-4c58-8fc8-212bc12499ca"
+  },
+  "asana-half-sun-salutation": {
+    "status": "done",
+    "error": null,
+    "mediaId": "adea281a-dcbe-43ca-a01c-593ad3b25624"
+  },
+  "asana-warrior-i-at-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "218bc41c-ad1d-42cd-bc94-a556c32ce20d"
+  },
+  "asana-warrior-ii-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b65679b6-118b-4af4-b72e-acfd3f3f0c2c"
+  },
+  "asana-triangle-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2e9170da-65ac-47c0-b9ba-3f83876d415a"
+  },
+  "asana-bound-extended-side-angle": {
+    "status": "done",
+    "error": null,
+    "mediaId": "1084c3a1-e1f9-4727-baea-b38f3a3338bb"
+  },
+  "asana-bound-triangle": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7bc1ef21-e316-4545-a81d-734c27a9140a"
+  },
+  "asana-warrior-ii-to-reverse-flow": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b85cc2ad-64ea-4474-b534-d02cd556e836"
+  },
+  "asana-skandasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "fea741c9-c656-4af6-8176-d36c16693dd4"
+  },
+  "asana-side-lunge": {
+    "status": "done",
+    "error": null,
+    "mediaId": "bc83c7f5-59ad-46a9-a193-9d9a12f6229c"
+  },
+  "asana-runner-s-lunge": {
+    "status": "done",
+    "error": null,
+    "mediaId": "0cdb3313-e22b-4844-8a16-af5d655a3a87"
+  },
+  "asana-half-split": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a6e7acfb-f102-4806-b915-0b8e60058ef5"
+  },
+  "asana-full-split": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f8554bb2-fab0-4cdb-a971-85e8f7e49fdd"
+  },
+  "asana-middle-split": {
+    "status": "done",
+    "error": null,
+    "mediaId": "12241a15-e0a8-44eb-a3e2-fbc0712073db"
+  },
+  "asana-monkey-pose-prep-with-blocks": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6d8663fa-180c-40cf-b0f6-e4dbe186f315"
+  },
+  "asana-pyramid-with-blocks": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a608d21f-43da-476f-adbc-586b5f95f018"
+  },
+  "asana-standing-forward-fold-with-clasp": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a9e32218-33d9-498b-ad8e-80f6591f49a0"
+  },
+  "asana-rag-doll": {
+    "status": "done",
+    "error": null,
+    "mediaId": "bd59fb4d-b1bd-4c1b-a47e-abe25da13d90"
+  },
+  "asana-bound-ardha-chandrasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b17fbbb2-1985-49a8-848f-44c796c1451a"
+  },
+  "asana-sugarcane-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c3e39573-b6c5-4a50-82ce-fda67cbf0d6c"
+  },
+  "asana-tree-with-hands-overhead": {
+    "status": "done",
+    "error": null,
+    "mediaId": "58a52976-70ef-488d-ba0d-6b6c19e3f74f"
+  },
+  "asana-toe-stand": {
+    "status": "done",
+    "error": null,
+    "mediaId": "001e9829-fe8d-4264-9966-53b9815bbbdd"
+  },
+  "asana-chair-pose-on-toes": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8e43cd50-aabe-44de-ab20-ae8e8260a3ae"
+  },
+  "asana-revolved-hand-to-big-toe": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ae8c9137-6409-46e7-9377-ea219f395137"
+  },
+  "asana-eagle-arms-only": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f868c945-d616-4b20-b584-3d2bf492ce84"
+  },
+  "asana-cow-face-arms-only": {
+    "status": "done",
+    "error": null,
+    "mediaId": "0a15c621-638c-4278-9fae-798d8cb163be"
+  },
+  "asana-reverse-prayer": {
+    "status": "done",
+    "error": null,
+    "mediaId": "35cb7c59-2e9d-4c7c-9aa6-72bd9efb4ea8"
+  },
+  "asana-shoulder-flossing-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "54bf1773-8b34-46da-b203-6a24c9e88c7f"
+  },
+  "asana-neck-rolls": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3defb8d8-278d-45be-9b3c-ca28c2e77e6f"
+  },
+  "asana-wrist-circles": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6d5e05df-719c-486c-bfe2-8ac509b873bb"
+  },
+  "asana-ankle-rotations": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e7004ab9-99d3-4d87-9c52-5e87c355ade5"
+  },
+  "asana-butterfly-flaps": {
+    "status": "done",
+    "error": null,
+    "mediaId": "49eff698-70af-45ab-a480-3d1c8b167091"
+  },
+  "asana-seated-neck-stretch": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e68aa54a-7c7b-4918-9c53-5196ab3e14ff"
+  },
+  "asana-reclined-figure-four-twist": {
+    "status": "done",
+    "error": null,
+    "mediaId": "31f831ab-9100-429f-9a52-2a158f443476"
+  },
+  "asana-reclined-big-toe-side": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b55a59d8-3654-4ae0-8a70-cee9f7edb182"
+  },
+  "asana-reclined-twist-with-extended-leg": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b65b2af2-945c-41fb-928c-4dd0b0ad96cd"
+  },
+  "asana-bridge-with-block-between-thighs": {
+    "status": "done",
+    "error": null,
+    "mediaId": "266773d7-a909-4c29-89bf-1a8a9a71065b"
+  },
+  "asana-one-legged-bridge": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ad8406c3-9492-48b3-b31a-e3aff99a4a5d"
+  },
+  "asana-one-legged-wheel": {
+    "status": "done",
+    "error": null,
+    "mediaId": "007cc203-b27a-4473-a3c5-f39bc0ad7136"
+  },
+  "asana-bow-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6dab0e6f-881a-4eb0-8439-634350ada609"
+  },
+  "asana-half-frog": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3a4f9a4d-bb51-4318-a1f5-76b2f4008d34"
+  },
+  "asana-cobra-with-hands-lifted": {
+    "status": "done",
+    "error": null,
+    "mediaId": "17f7a02d-fe69-45ce-bf09-f30576f40a18"
+  },
+  "asana-superman": {
+    "status": "done",
+    "error": null,
+    "mediaId": "68feede0-9814-4d0d-b8a3-c590c38a60cd"
+  },
+  "asana-swimming-locust": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9e492972-98b4-4642-a678-53996ce46cfa"
+  },
+  "asana-camel-with-hands-on-sacrum": {
+    "status": "done",
+    "error": null,
+    "mediaId": "af38cbd6-e138-4042-b4f8-9a960d9fc247"
+  },
+  "asana-camel-on-blocks": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f57c43f0-3dfe-4c50-8d9c-050026857e43"
+  },
+  "asana-dolphin-to-forearm-stand-drill": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9aa38e7c-ba06-4928-948e-d3cd718a1846"
+  },
+  "asana-shoulderstand-at-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5c503a37-3a64-4762-8a96-1a7bd6ca7d66"
+  },
+  "asana-supported-shoulderstand-with-blankets": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b5c43449-5d2f-4183-a803-664c215c20c2"
+  },
+  "asana-legs-up-wall-with-bolster": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4a840749-ba37-437c-b5dc-07860b03dce9"
+  },
+  "asana-supported-child-s-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6c6c517c-acb5-4ce0-a379-a262eb7ba5a2"
+  },
+  "asana-side-lying-savasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "949798db-b478-4870-a7ce-c5a383286990"
+  },
+  "asana-supported-forward-fold": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c711c082-7f9f-4d87-9af2-290e3507cc50"
+  },
+  "asana-reclined-butterfly-with-blocks": {
+    "status": "done",
+    "error": null,
+    "mediaId": "649b691c-1bcb-463b-87e4-1b3d66050e33"
+  },
+  "asana-melting-heart": {
+    "status": "done",
+    "error": null,
+    "mediaId": "04ac08a0-f5db-482d-b9ce-f98c43cb8964"
+  },
+  "asana-dragon-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b7a53798-2611-4092-8319-02d730348be3"
+  },
+  "asana-sleeping-swan": {
+    "status": "done",
+    "error": null,
+    "mediaId": "692380e3-730a-4774-8d66-33a3ca724f5f"
+  },
+  "asana-caterpillar": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e5511226-a7b0-4ede-b4ef-39f7ffebc1be"
+  },
+  "asana-shoelace-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f06725fc-c648-4bb1-91a2-8308e4ef1426"
+  },
+  "asana-saddle-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7d3e53f2-a78b-48fd-bfe2-995c0028c6ec"
+  },
+  "asana-banana-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f3be560b-19f5-4b57-9289-60d99e3b9084"
+  },
+  "asana-square-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e26bc463-dee5-4914-be19-921781867bde"
+  },
+  "asana-snail-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "166c3c54-2b3e-47fb-aead-df8a259b24ac"
+  },
+  "asana-deer-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "17109a23-befb-44e2-9a80-5415262f491f"
+  },
+  "asana-sphinx-yin-hold": {
+    "status": "done",
+    "error": null,
+    "mediaId": "89a454cf-1941-42f1-b9d3-02e9599c005c"
+  },
+  "asana-chair-mountain": {
+    "status": "done",
+    "error": null,
+    "mediaId": "1dd0f081-d238-44ec-970c-378d7f19da86"
+  },
+  "asana-chair-forward-fold": {
+    "status": "done",
+    "error": null,
+    "mediaId": "bb2357b7-aa27-4589-b871-b01a908eb3ec"
+  },
+  "asana-chair-warrior": {
+    "status": "done",
+    "error": null,
+    "mediaId": "be6e9738-534e-417a-a4f0-544b1038c222"
+  },
+  "asana-chair-eagle-arms": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e641edd9-5a27-4909-a2fe-7c524f928b73"
+  },
+  "asana-chair-pigeon": {
+    "status": "done",
+    "error": null,
+    "mediaId": "af7c50c8-10a0-4542-b407-acf17fe8800c"
+  },
+  "asana-chair-cat-cow": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b87825e3-c66b-40a4-b176-3e062ec0eb03"
+  },
+  "asana-chair-twist": {
+    "status": "done",
+    "error": null,
+    "mediaId": "09e775a7-a36e-49ab-8e7c-1ddd1e188930"
+  },
+  "asana-wall-downward-dog": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b47d27f7-0d61-41eb-bead-70543f5a58f7"
+  },
+  "asana-wall-tree": {
+    "status": "done",
+    "error": null,
+    "mediaId": "75d7d87c-c34f-4bb8-936e-63107d7b86c2"
+  },
+  "asana-wall-chair": {
+    "status": "done",
+    "error": null,
+    "mediaId": "21b895d1-dcaa-4fca-b8d1-4a0f63eb558d"
+  },
+  "asana-wall-bridge": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c78d216b-44b6-4c9d-ad72-b32eb9eb7729"
+  },
+  "asana-prenatal-wide-squat": {
+    "status": "done",
+    "error": null,
+    "mediaId": "1c8f2c47-4280-418d-8347-aca330ce6f5a"
+  },
+  "asana-prenatal-cat-cow": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b7d4ef3c-89b3-4630-a889-7c0370a32a28"
+  },
+  "asana-prenatal-side-lying-rest": {
+    "status": "done",
+    "error": null,
+    "mediaId": "63953875-0430-4d06-a43b-bc542f61ea71"
+  },
+  "asana-prenatal-supported-goddess": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2dfe7108-9317-411a-aebb-807c43e43935"
+  },
+  "asana-standing-pelvic-tilts": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8c23bfff-3196-4054-85c5-501688553f2b"
+  },
+  "asana-standing-twist": {
+    "status": "done",
+    "error": null,
+    "mediaId": "12b9945a-7545-4aa1-93b4-1d2e509a7606"
+  },
+  "asana-shoulder-shrugs": {
+    "status": "done",
+    "error": null,
+    "mediaId": "bf689234-009a-4604-a9c3-f568c652788c"
+  },
+  "asana-arm-circles": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7b28a9d2-989d-4f2e-9d3e-a2741e39558b"
+  },
+  "asana-hip-circles": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2020c27c-1a7b-4578-a438-d77cb555b546"
+  },
+  "asana-knee-circles": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2d4f6c48-52dd-4000-b878-d7169c9b9fb1"
+  },
+  "asana-squat-and-rise": {
+    "status": "done",
+    "error": null,
+    "mediaId": "0eec0156-0762-43f2-bec5-9b8c571cfb17"
+  },
+  "asana-standing-knee-hug": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7b800bc0-ec99-4d1d-a1b2-54ed6c3ee041"
+  },
+  "asana-standing-quad-stretch": {
+    "status": "done",
+    "error": null,
+    "mediaId": "42ba4c2b-c49a-476f-8805-48c348715c4e"
+  },
+  "asana-standing-figure-four": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c59029b4-e322-4605-a879-1023787e7182"
+  },
+  "asana-crescent-with-blocks": {
+    "status": "done",
+    "error": null,
+    "mediaId": "dc9a1f3b-be0b-4637-85ef-f1accd5160e5"
+  },
+  "asana-warrior-iii-at-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "654777c7-7e8f-46d5-9997-a8372a186cea"
+  },
+  "asana-downward-dog-with-blocks": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ea16d11d-a6d5-40b1-b5a6-5c7959205fca"
+  },
+  "asana-puppy-at-chair": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f44202a9-2e17-42b1-bca4-7d0a4f762091"
+  },
+  "asana-standing-wide-fold-with-blocks": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4ae6592c-bd66-48e1-b052-47f19d300859"
+  },
+  "asana-cobra-at-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5372cec4-8403-475a-b801-770e6ebd67ae"
+  },
+  "asana-seated-meditation-on-chair": {
+    "status": "done",
+    "error": null,
+    "mediaId": "0e391b53-736d-4c28-8474-b0d23461aac8"
+  },
+  "asana-walking-meditation": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7d4b427e-2c95-4bde-bdb9-092995bfee59"
+  },
+  "asana-alternate-leg-raises": {
+    "status": "done",
+    "error": null,
+    "mediaId": "00ae317f-014a-4696-8e2b-e1b3c0891e7d"
+  },
+  "asana-double-leg-raises": {
+    "status": "done",
+    "error": null,
+    "mediaId": "0b6046ff-bad1-4077-8554-5e0d32352aed"
+  },
+  "asana-cycling-legs": {
+    "status": "done",
+    "error": null,
+    "mediaId": "391adf00-0a33-455f-9bb1-a4b943168b96"
+  },
+  "asana-rocking-boat": {
+    "status": "done",
+    "error": null,
+    "mediaId": "feeb090a-9a11-4be0-bb6e-6c1325e9ed0c"
+  },
+  "asana-churning-the-mill": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4bf4102f-6f95-4290-aed0-47fd41c64aef"
+  },
+  "asana-boat-rowing": {
+    "status": "done",
+    "error": null,
+    "mediaId": "64b4f4ea-aa45-4b12-83a3-81eef59e41e4"
+  },
+  "asana-wood-chopping": {
+    "status": "done",
+    "error": null,
+    "mediaId": "22d01a87-6304-4227-af25-2fd39ecece71"
+  },
+  "asana-crow-walking": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3ff43728-7801-48c5-8530-8709c7aeed0c"
+  },
+  "asana-dynamic-spinal-twist": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b4f80a63-1dd8-43ae-b0d1-cba06e7490e8"
+  },
+  "asana-standing-forward-bend-dynamic": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7eb1e08d-f269-41f7-9db4-2d0804ccb093"
+  },
+  "asana-sun-salutation-with-lunges": {
+    "status": "done",
+    "error": null,
+    "mediaId": "fd80b51a-f5e5-4f60-b69d-6a5de524b706"
+  },
+  "asana-sun-salutation-c": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6cf7cd90-d0d5-4ed8-b808-cb72d9eedf38"
+  },
+  "asana-kneeling-sun-salutation": {
+    "status": "done",
+    "error": null,
+    "mediaId": "79d2541b-a6b9-47a8-8493-38ac252b528d"
+  },
+  "asana-seated-sun-salutation": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3418aae0-f189-4a18-a136-b53bd354ed83"
+  },
+  "asana-camel-to-child-flow": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d3ac77fb-88b1-4ed6-b25c-6b7d939feebe"
+  },
+  "asana-cat-cow-to-downward-dog-flow": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ccd9dfad-a08e-4fb5-be51-8d6f64b776a2"
+  },
+  "asana-lunge-to-half-split-flow": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c07b161f-81e5-4676-8ca3-13ace717ba08"
+  },
+  "asana-warrior-ii-to-half-moon-flow": {
+    "status": "done",
+    "error": null,
+    "mediaId": "1bd7c68d-a7ab-480b-852d-f853f8f81984"
+  },
+  "asana-scorpion-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "56658d56-2c45-462b-8ec9-6b7687e5dc26"
+  },
+  "asana-handstand-scorpion": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d5e58a94-03a6-49c1-8a21-d07d173c2490"
+  },
+  "asana-feathered-peacock": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8926a778-c7c3-491d-820c-561d254b51ac"
+  },
+  "asana-lotus-headstand": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8500029c-7194-433b-9885-d4f1ba5ac196"
+  },
+  "asana-lotus-shoulderstand": {
+    "status": "done",
+    "error": null,
+    "mediaId": "70e0f031-311b-40e3-9a7a-fdc29da3a6ef"
+  },
+  "asana-embryo-in-womb": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4b92d976-c64c-407a-ac68-25cf1e602fb3"
+  },
+  "asana-yogic-sleep-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "89e4bb0d-bbc3-420c-bfa0-d7b34bc5c18c"
+  },
+  "asana-one-leg-behind-head": {
+    "status": "done",
+    "error": null,
+    "mediaId": "299420d8-3f6b-4a5d-a5bb-868deae37056"
+  },
+  "asana-both-legs-behind-head": {
+    "status": "done",
+    "error": null,
+    "mediaId": "0b56a76d-852a-4957-a4e0-4ca464d3b0d9"
+  },
+  "asana-formidable-face-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6a177fb0-ce25-4b75-a709-bcd480a06873"
+  },
+  "asana-destroyer-of-the-universe": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a47a109d-83b8-4915-abd9-b2055b5ba446"
+  },
+  "asana-sundial-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7a97cc39-ef89-4c99-b350-51edcd3c9822"
+  },
+  "asana-elephant-trunk-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c8cae0e4-e3a9-45e1-8644-ee502ddba87f"
+  },
+  "asana-two-footed-arm-balance": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8f1a5664-3176-4868-8f72-78956a68e40b"
+  },
+  "asana-sage-koundinya-i": {
+    "status": "done",
+    "error": null,
+    "mediaId": "48f15ded-46dd-435e-908f-f35824c92fab"
+  },
+  "asana-sage-koundinya-ii": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3c32ff1b-58c5-46e3-8a26-2ddcc163c8de"
+  },
+  "asana-split-arm-balance": {
+    "status": "done",
+    "error": null,
+    "mediaId": "23d8a1f4-1003-48c1-ab57-4b2d5857a337"
+  },
+  "asana-peacock-feather-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c5f79d04-d8b5-4aaa-87ee-c02fb020c589"
+  },
+  "asana-sideways-crow": {
+    "status": "done",
+    "error": null,
+    "mediaId": "84ec925e-7654-41ff-aef8-5027d8d7f6e7"
+  },
+  "asana-rooster-in-lotus": {
+    "status": "done",
+    "error": null,
+    "mediaId": "90c3a902-9340-4964-989c-4c06139f9892"
+  },
+  "asana-frog-in-lotus-roll": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5d3b5c08-e297-4932-92c2-dca8fec79baf"
+  },
+  "asana-noose-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "58051d44-ce8e-4cea-85e3-8efd10bbef36"
+  },
+  "asana-sage-twist-with-bind": {
+    "status": "done",
+    "error": null,
+    "mediaId": "30f58448-6b66-448a-b3e9-f157dd002b75"
+  },
+  "asana-sage-marichi-ii": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9a108878-b196-4a45-8d9b-41830559de48"
+  },
+  "asana-reverse-table-with-head-back": {
+    "status": "done",
+    "error": null,
+    "mediaId": "bac7c950-a701-4bee-ad11-7dc4a42f81ed"
+  },
+  "asana-bridge-with-clasp": {
+    "status": "done",
+    "error": null,
+    "mediaId": "97788c47-4258-4cae-9dbe-351e84a42913"
+  },
+  "asana-wheel-from-standing": {
+    "status": "done",
+    "error": null,
+    "mediaId": "11ba1f17-c82d-4f8d-9a9d-4892834824f9"
+  },
+  "asana-pigeon-with-bind": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7555dc58-56dd-40b3-876d-fd4c2f6690fb"
+  },
+  "asana-full-pigeon": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2bf448bb-6a42-4158-b6f1-32c66678e6bc"
+  },
+  "asana-cobra-full-expression": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e83240f5-8cc7-4d00-a82f-3da9e35d02c1"
+  },
+  "asana-bow-with-feet-to-head": {
+    "status": "done",
+    "error": null,
+    "mediaId": "75a83dcf-d207-47d5-9622-0d96e6bf5f90"
+  },
+  "asana-side-bow": {
+    "status": "done",
+    "error": null,
+    "mediaId": "55754646-c850-463a-99c6-c3eae2f9aa6c"
+  },
+  "asana-standing-split-with-bind": {
+    "status": "done",
+    "error": null,
+    "mediaId": "19661c64-60a7-48ed-b3e9-ea5562313dd2"
+  },
+  "asana-grasshopper-variation": {
+    "status": "done",
+    "error": null,
+    "mediaId": "985c5e58-3515-40d2-a5ba-51178da5f42c"
+  },
+  "asana-hurdler-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d8d3aaa2-f3ce-4cff-bf35-b48299d37cb0"
+  },
+  "asana-crow-with-head-down": {
+    "status": "done",
+    "error": null,
+    "mediaId": "afbe3a8c-0ff4-4100-9e9f-6ab7712f26bf"
+  },
+  "asana-wall-handstand-hold": {
+    "status": "done",
+    "error": null,
+    "mediaId": "398bf323-02fc-4640-b357-1f4d8e4e98cc"
+  },
+  "asana-chest-to-wall-handstand": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ea716a8f-b6f7-4d37-9ae9-52e7cabe6b9e"
+  },
+  "asana-headstand-leg-variations": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8f31c438-b010-4532-82db-0aa05093cce6"
+  },
+  "asana-shoulderstand-leg-variations": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c08777d8-ef6b-4812-9e0d-247846887f03"
+  },
+  "asana-bound-lotus": {
+    "status": "done",
+    "error": null,
+    "mediaId": "bff5149a-53fb-4922-bd6e-969873c270da"
+  },
+  "asana-fish-in-lotus": {
+    "status": "done",
+    "error": null,
+    "mediaId": "1d48fc43-505f-454b-b0ae-a6d909166676"
+  },
+  "asana-downward-dog-with-twist": {
+    "status": "done",
+    "error": null,
+    "mediaId": "74f79a7a-4ce5-4507-9878-6174a4368fc0"
+  },
+  "asana-revolved-lunge-with-bind": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4f428d3c-f750-43d9-a6dc-21cbf058dba0"
+  },
+  "asana-revolved-side-angle-with-bind": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9ccc3d4a-2051-46d9-a904-f6da4d1436e7"
+  },
+  "asana-half-bound-standing-forward-fold": {
+    "status": "done",
+    "error": null,
+    "mediaId": "97e91f72-2670-4433-9b8b-abc0a87670c9"
+  },
+  "asana-sleeping-vishnu": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5114ac49-319d-4b0c-b757-b3a8336b8712"
+  },
+  "asana-side-lying-leg-lifts": {
+    "status": "done",
+    "error": null,
+    "mediaId": "34f12ed0-cf45-4745-85dd-a58faa553e4a"
+  },
+  "asana-reclined-cow-face": {
+    "status": "done",
+    "error": null,
+    "mediaId": "700996ee-13f1-46d2-b821-eb9033ec9a9e"
+  },
+  "asana-corpse-with-bolster": {
+    "status": "done",
+    "error": null,
+    "mediaId": "684d0940-2ee8-4e7a-9345-ace3a4ddcd8f"
+  },
+  "asana-guided-relaxation": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f6014e65-471f-45bc-8fa0-fbc84f5af2bb"
+  },
+  "asana-standing-deep-breathing": {
+    "status": "done",
+    "error": null,
+    "mediaId": "57c7c8c9-e8a8-4e47-a3f8-67fabe3c5119"
+  },
+  "asana-half-moon-with-hands-to-feet": {
+    "status": "done",
+    "error": null,
+    "mediaId": "388d9cc2-5444-47d7-9c97-99c5563fd4fa"
+  },
+  "asana-awkward-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "90a0e5f8-0fae-431b-86a1-b49486430694"
+  },
+  "asana-standing-bow-pulling": {
+    "status": "done",
+    "error": null,
+    "mediaId": "190620fd-2328-4d52-9872-68c7dfc18a1c"
+  },
+  "asana-balancing-stick": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4512de60-c27e-4f48-a79a-67667a4b14a9"
+  },
+  "asana-standing-separate-leg-stretching": {
+    "status": "done",
+    "error": null,
+    "mediaId": "cfbb894f-bb42-4588-9350-c531fa739a51"
+  },
+  "asana-standing-separate-leg-head-to-knee": {
+    "status": "done",
+    "error": null,
+    "mediaId": "28bb5332-95cd-4ac7-b226-ef91d8fc0cec"
+  },
+  "asana-tree-pose-bikram": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e617571c-d6ac-467f-b1b1-6d1e2c5b73bb"
+  },
+  "asana-wind-removing-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c15c821c-4fd9-49c3-be4e-7e28265ba3f1"
+  },
+  "asana-fixed-firm-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "666103e3-9bb6-4017-bd81-5feab7882199"
+  },
+  "asana-rabbit-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "af42d7b9-0756-4452-9ecd-e4d7a0f03b3b"
+  },
+  "asana-spine-twisting-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "aacb77fe-0d64-4add-9e52-62589f7e4bb9"
+  },
+  "asana-blowing-in-firm": {
+    "status": "done",
+    "error": null,
+    "mediaId": "30fc4ca0-357c-44da-a1ff-e81bb8494e91"
+  },
+  "asana-eagle-bikram": {
+    "status": "done",
+    "error": null,
+    "mediaId": "04fb4f2a-d21d-4258-b005-dee5421bcffa"
+  },
+  "asana-padangusthasana-big-toe-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2e1bdb79-f13e-4afd-9fb1-6658f40aa8a0"
+  },
+  "asana-padahastasana-hand-under-foot": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ec7c3757-c917-405c-adf0-67d18ec0496d"
+  },
+  "asana-utthita-trikonasana-a": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d71f63b6-f779-4a64-8ee9-50a2b322bfc3"
+  },
+  "asana-utthita-trikonasana-b": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d6a6b365-2b54-4431-9aa6-5d96a5388d3e"
+  },
+  "asana-prasarita-padottanasana-a": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f6b0c992-5874-42ae-ac6c-3c40fac7dc24"
+  },
+  "asana-prasarita-padottanasana-b": {
+    "status": "done",
+    "error": null,
+    "mediaId": "bc1f634b-da70-454c-868b-d9a810c81162"
+  },
+  "asana-prasarita-padottanasana-d": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e04ef4b9-7110-4ef1-8d68-fb8b1ea31743"
+  },
+  "asana-utthita-parsvasahita": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c3659077-c6ff-4e23-82ae-bdb13c3794c1"
+  },
+  "asana-ardha-baddha-padmottanasana-ashtanga": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ff6b7d90-c209-4bc9-89a8-06542bb1142c"
+  },
+  "asana-utkatasana-ashtanga": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b82556c9-0a96-409f-ab42-62d93bd42ee4"
+  },
+  "asana-virabhadrasana-a-and-b-flow": {
+    "status": "done",
+    "error": null,
+    "mediaId": "cac5cf8b-3879-4fd1-a498-c9d672455791"
+  },
+  "asana-purvottanasana-ashtanga": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e25cdf10-6fc1-4d2f-982d-56e7d0e03b67"
+  },
+  "asana-triang-mukha-eka-pada-paschimottanasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "1e9e032b-6a3f-4015-99f5-608ca36c9815"
+  },
+  "asana-janu-sirsasana-b": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a86c92e3-1b77-4ab8-bce7-f820b2039792"
+  },
+  "asana-janu-sirsasana-c": {
+    "status": "done",
+    "error": null,
+    "mediaId": "515aceb7-8fd2-4859-8dac-7f17c266397e"
+  },
+  "asana-navasana-ashtanga-five-rounds": {
+    "status": "done",
+    "error": null,
+    "mediaId": "535f9864-905a-4919-85dd-8cff15101ffe"
+  },
+  "asana-baddha-konasana-a-and-b": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f60aaee2-26b4-45d3-b44f-82cdce349fc7"
+  },
+  "asana-upavistha-konasana-a-and-b": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b57fa480-e12e-41e4-833e-5517d59a201a"
+  },
+  "asana-supta-konasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "20b9741b-cc22-4b24-abdd-dd704ab94e4f"
+  },
+  "asana-ubhaya-padangusthasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "1f315555-f025-425b-b0a7-0598d9205f1e"
+  },
+  "asana-urdhva-mukha-paschimottanasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d9c1135c-40bc-457c-b018-79ec202030d8"
+  },
+  "asana-setu-bandhasana-ashtanga": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9914ad55-26f1-42ed-b426-ec7e8bb3bcba"
+  },
+  "asana-salamba-sarvangasana-ashtanga": {
+    "status": "done",
+    "error": null,
+    "mediaId": "0d302b65-bbdf-415c-8c49-89c6c16c65a8"
+  },
+  "asana-uttana-padasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "bdb88389-0412-45b7-9a49-bbb40fc1a216"
+  },
+  "asana-baddha-hasta-sirsasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "624d6688-22e0-415b-a3dc-321d48be9b27"
+  },
+  "asana-mukta-hasta-sirsasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c8ddd494-24f3-4c98-85f9-e341cb9ef9a3"
+  },
+  "asana-yoga-mudra-in-lotus": {
+    "status": "done",
+    "error": null,
+    "mediaId": "bf27878e-fead-4fa9-8408-ed1a626c6708"
+  },
+  "asana-tolasana-lift": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3715eb3c-2958-437b-93c5-a936066e7f8f"
+  },
+  "asana-pranidhanasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "df56d286-e529-4d4d-8c9b-73e4748253d7"
+  },
+  "asana-ananda-balasana-rock": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3821dce8-5725-452c-9beb-e8720c71850a"
+  },
+  "asana-supta-tadasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "0546ef36-14ef-4ea9-a01e-ac6140dae6a9"
+  },
+  "asana-makarasana-crocodile": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7165a87c-a92b-4394-8ba8-35714a940850"
+  },
+  "asana-advasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f017b6b3-f267-4d47-9f78-015d2ed87786"
+  },
+  "asana-jyestikasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "bb17cbe2-245e-42e4-b3df-ac27f19df2c6"
+  },
+  "asana-matsya-kridasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8be377ea-3ef5-4d39-8c93-99bc5fcefefe"
+  },
+  "asana-shashankasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "dbf67173-a1e8-45e1-b03b-6ace8557ecc9"
+  },
+  "asana-shashank-bhujangasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7a8ae0ab-ced5-4847-8c8e-29898853ee4f"
+  },
+  "asana-marjari-asana-dynamic": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f85d5820-d562-4da8-9c05-370c14ebcb16"
+  },
+  "asana-vyaghrasana-tiger": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ebaabfdc-8ac5-4753-a77c-144f8f2dcb7c"
+  },
+  "asana-ushtrasana-dynamic": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7d1f100a-e50c-4ca9-a6c3-b0a9fc267f24"
+  },
+  "asana-kandharasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "fa055f72-fe5b-4730-a509-83cad90ad640"
+  },
+  "asana-grivasana-neck-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c3ecf2a1-263a-4137-9e72-23a13d225a32"
+  },
+  "asana-naukasana-prone-boat": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8b2f2613-b02b-4146-b799-9aa9290c06a8"
+  },
+  "asana-setu-asana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9e3f69d4-90c5-42e7-92a6-7fb36f9a6114"
+  },
+  "asana-gomukhasana-dynamic": {
+    "status": "done",
+    "error": null,
+    "mediaId": "781d7074-16f6-47f0-9707-fd7c078b21b7"
+  },
+  "asana-vatayanasana-horse-face": {
+    "status": "done",
+    "error": null,
+    "mediaId": "0aaa1477-9035-4a14-bdb8-7ea9296e1fe9"
+  },
+  "asana-durvasasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ad4e6faf-ea22-4cd2-b0cd-1f30549fa04e"
+  },
+  "asana-ruchikasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f4dd01d4-ae4b-4d79-aff2-8c06671f31d1"
+  },
+  "asana-skandasana-standing": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8f1fb47f-7025-4dbe-b30d-15770ca61500"
+  },
+  "asana-viranchyasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "41418822-d098-4551-adee-6edd66b04199"
+  },
+  "asana-chakorasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2078cd24-a6a6-4122-9521-8dbf982f7cab"
+  },
+  "asana-bhairavasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f26c8753-5c05-41b2-8e81-f1813d47dfd9"
+  },
+  "asana-supta-trivikramasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9d32908b-f61a-446a-9224-11926d1cc2ab"
+  },
+  "asana-trivikramasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "0480998f-7f37-4980-bfb8-b3f17781fcea"
+  },
+  "asana-natarajasana-full": {
+    "status": "done",
+    "error": null,
+    "mediaId": "632d1ad8-0a2b-4e8d-972a-aea713372e25"
+  },
+  "asana-padangustha-dhanurasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "634df56e-1abd-4b1d-8b62-2392923e1589"
+  },
+  "asana-rajakapotasana-full": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2581f054-e150-44a2-81fd-353774bb677d"
+  },
+  "asana-tiriang-mukhottanasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b820f19a-c48e-4071-b6f0-624a5fe7b514"
+  },
+  "asana-viparita-chakrasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3c7e4386-1be0-4e49-830c-9e9eadda918c"
+  },
+  "asana-vrschikasana-ii": {
+    "status": "done",
+    "error": null,
+    "mediaId": "abec50f8-4629-41a3-a153-64106a2f8a11"
+  },
+  "asana-sayanasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ecd66533-7e2e-44d2-ba5f-fd6b6906ddb2"
+  },
+  "asana-bhujangasana-full": {
+    "status": "done",
+    "error": null,
+    "mediaId": "54909206-b9a8-419d-8302-66e4e4fa8015"
+  },
+  "asana-kapotasana-full": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a03dcf33-1126-4e6c-9cf1-e33b67d1f427"
+  },
+  "asana-eka-pada-viparita-dandasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "cb1c70a1-74fe-4271-afb7-0dc9f3ca4812"
+  },
+  "asana-dwi-pada-viparita-dandasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "fccf15a6-9da6-4991-b1b6-5bf293ff1db7"
+  },
+  "asana-mandalasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6cfe2732-0eb3-4da5-b447-b776ffd980bf"
+  },
+  "asana-flip-dog": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c4e4cb9a-2920-4b7c-89df-1198a8b04914"
+  },
+  "asana-fallen-triangle": {
+    "status": "done",
+    "error": null,
+    "mediaId": "bb5c7556-645e-4c1d-9e9a-333fb78b0837"
+  },
+  "asana-rock-star": {
+    "status": "done",
+    "error": null,
+    "mediaId": "791bbccb-c17a-4f29-a4e8-36d2c12cdf6a"
+  },
+  "asana-puppy-dog-twist": {
+    "status": "done",
+    "error": null,
+    "mediaId": "349a00d6-8242-4d53-9014-b005f61e5f01"
+  },
+  "asana-waterfall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b582e995-470a-4f82-a218-20281af97bf7"
+  },
+  "asana-plow-to-shoulderstand-flow": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5dc87459-aa2f-47c9-ab9c-e0eeb4f88328"
+  },
+  "asana-bound-half-moon": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7962bc6f-f597-4279-864b-b65c8d6a294a"
+  },
+  "asana-bird-of-paradise": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e1892be8-22da-40ca-8cb5-d245bd2b3304"
+  },
+  "asana-bound-extended-side-angle-to-bird": {
+    "status": "done",
+    "error": null,
+    "mediaId": "49539424-d4c8-4a58-bd92-11aa55c0f1e3"
+  },
+  "asana-cactus-arms-backbend": {
+    "status": "done",
+    "error": null,
+    "mediaId": "01ff0581-4fea-4d68-beac-ace4eed8a867"
+  },
+  "asana-heart-bench": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3dc92f3d-2c0d-467e-9008-a0ee4507f50d"
+  },
+  "asana-supported-half-frog": {
+    "status": "done",
+    "error": null,
+    "mediaId": "00e56621-3395-43a6-9abc-6897e0f69490"
+  },
+  "asana-legs-on-chair": {
+    "status": "done",
+    "error": null,
+    "mediaId": "929c52cf-cab6-4a6e-8aa4-2cf2f1465288"
+  },
+  "asana-supported-twist-over-bolster": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6a85ed31-2004-4aa3-a2f1-7e242ce5960d"
+  },
+  "asana-side-lying-quad-stretch": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a6777650-aab6-4888-9415-7535e18bd0a8"
+  },
+  "asana-thread-the-needle-supine": {
+    "status": "done",
+    "error": null,
+    "mediaId": "899a6eac-59ce-434a-aeab-0cdc61c891f5"
+  },
+  "asana-windshield-wipers": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4b684ca4-99bd-4d1e-baa6-b6ebef788447"
+  },
+  "asana-bridge-rolls": {
+    "status": "done",
+    "error": null,
+    "mediaId": "409afe9b-a5ea-4e4b-9afa-a21e5cd99e76"
+  },
+  "asana-cat-pulling-its-tail": {
+    "status": "done",
+    "error": null,
+    "mediaId": "437f2aa3-7b57-4b15-8ab7-6dae396730d0"
+  },
+  "asana-swan-dive": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e030558f-77ff-46f1-9d8e-61a983f22698"
+  },
+  "asana-toe-squat": {
+    "status": "done",
+    "error": null,
+    "mediaId": "288438f0-a683-43ad-9c46-2c8b244760ad"
+  },
+  "asana-ankle-stretch": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a310eaaa-6ec9-475d-99ef-003e63ebf335"
+  },
+  "asana-half-butterfly": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ab6224e1-c043-4f0c-b13f-08a227b5fb05"
+  },
+  "asana-reclining-twist-yin": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8237203b-bb47-44fc-b9c0-4ca033ec97ce"
+  },
+  "asana-straddle-yin": {
+    "status": "done",
+    "error": null,
+    "mediaId": "36cd6bf4-ff7f-4d0b-a1fc-f9c85d0ab5fe"
+  },
+  "asana-bananasana-side": {
+    "status": "done",
+    "error": null,
+    "mediaId": "865e3eed-0708-4157-8ad4-2e9cd7144892"
+  },
+  "asana-supported-fish-yin": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4a773092-1551-4d5b-abf2-a479960f40c3"
+  },
+  "asana-iyengar-wall-rope-dog": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f3d8f903-6323-4501-88f2-e56da0459aef"
+  },
+  "asana-chair-shoulderstand": {
+    "status": "done",
+    "error": null,
+    "mediaId": "945b11fa-0abd-47c4-a7fe-6bba7c4272ff"
+  },
+  "asana-supported-backbend-over-bolster": {
+    "status": "done",
+    "error": null,
+    "mediaId": "14c76fa8-2a74-4526-9639-210a910d4610"
+  },
+  "asana-wall-splits": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6c79fd55-a69c-455f-948c-d01e7ebf109c"
+  },
+  "asana-belted-shoulderstand": {
+    "status": "done",
+    "error": null,
+    "mediaId": "1613ad0e-df11-4bf3-89ba-f0d472853e36"
+  },
+  "asana-block-between-blocks-bridge": {
+    "status": "done",
+    "error": null,
+    "mediaId": "bf1ba018-6a59-4713-af97-6c18ef45000c"
+  },
+  "asana-prone-savasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d9d009f1-bcdd-4ecf-9d21-8a451ab9af60"
+  },
+  "asana-frog-at-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ae9b670a-a9c7-4a25-878e-1f24c196ef50"
+  },
+  "asana-ego-eradicator": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5be946cb-ee6c-467f-abc1-69ae20519b2e"
+  },
+  "asana-breath-of-fire": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c6a890e3-9bf6-406f-aa7f-76e1d0b960e7"
+  },
+  "asana-sat-kriya": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8e7f877a-e8b0-4940-8f3e-5b1871bde776"
+  },
+  "asana-spinal-flex": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5cc7deb8-d5e6-4128-9c61-2d7b12f841a0"
+  },
+  "asana-life-nerve-stretch": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e5f089b9-8a3e-4291-b2ff-f48427769874"
+  },
+  "asana-archer-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "950bd1a8-24c8-442c-804b-a391beb73c67"
+  },
+  "asana-frog-squats": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5ea8d34b-1b75-4f90-8677-eb8bba0097b2"
+  },
+  "asana-stretch-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3d3406fe-c841-43e1-8ef2-29013d660e84"
+  },
+  "asana-chair-twist-kundalini": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e965957c-590a-4c17-b43f-13be9837fa93"
+  },
+  "asana-yoga-squat-hold": {
+    "status": "done",
+    "error": null,
+    "mediaId": "92c1fb61-6366-447b-a4d9-7aa32e5d7025"
+  },
+  "asana-wall-sit-yoga": {
+    "status": "done",
+    "error": null,
+    "mediaId": "11f3b952-c77a-494c-a1f7-fc772e09c500"
+  },
+  "asana-standing-wide-fold-twist": {
+    "status": "done",
+    "error": null,
+    "mediaId": "cfeb3227-496b-4f84-91b6-573ed68a4ef9"
+  },
+  "asana-downward-dog-calf-stretch": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f6bd1c3f-2b32-424b-acda-6c16decf717c"
+  },
+  "asana-ragdoll-sway": {
+    "status": "done",
+    "error": null,
+    "mediaId": "cfffb37c-cd67-4602-8493-b67439984896"
+  },
+  "asana-neck-release-in-fold": {
+    "status": "done",
+    "error": null,
+    "mediaId": "717bc2b0-12a8-4382-a2e4-7cd8017fe5ee"
+  },
+  "asana-standing-forward-fold-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "fce91389-9d2c-4ea7-95ef-263ad604346c"
+  },
+  "asana-half-forward-fold-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "92a63f8d-52c8-484f-b875-40855c80a978"
+  },
+  "asana-upward-facing-dog-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "93890df3-2e6a-4579-9d5c-ba4295ee6424"
+  },
+  "asana-cobra-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "fa92424a-6fb3-40f9-bce9-8d25c45e9f27"
+  },
+  "asana-low-lunge-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f7739eb1-830d-47cf-9736-d7a4a36d8121"
+  },
+  "asana-high-lunge-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "34446da0-7d90-4920-af7e-499a4699469e"
+  },
+  "asana-staff-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5c282a02-e7ce-45a6-b241-e8dc7f76b58f"
+  },
+  "asana-warrior-i-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "396528b5-be86-462b-9a77-f863dc26ca01"
+  },
+  "asana-reverse-warrior-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4c45ffe8-c5a6-41fb-b25f-e8efdf88900e"
+  },
+  "asana-extended-side-angle-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "bd77362e-e089-4f84-a736-9f81e5e03274"
+  },
+  "asana-wide-legged-forward-fold-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "34ef6eba-e13a-495a-8a31-4c3af3ddd851"
+  },
+  "asana-pyramid-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7384ac7c-81a4-48d5-8aa0-ce77c86a1b89"
+  },
+  "asana-garland-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f3a225e9-d039-4e5e-8b3c-7f84195eb959"
+  },
+  "asana-standing-wide-squat-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5b13ade6-b3da-4a55-befb-b5ed9a7e532a"
+  },
+  "asana-goddess-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e78dc7af-824b-41db-b349-4895b5a7d8c8"
+  },
+  "asana-standing-side-bend-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8d9ae708-a1ba-4773-8780-3bd854428aef"
+  },
+  "asana-warrior-iii-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9b1172bf-645d-4a6b-b7dd-c3bf4b89fbdf"
+  },
+  "asana-tree-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4c883d9b-023c-4127-955f-e2b8fbc187cd"
+  },
+  "asana-eagle-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "356c3f3e-495c-4d11-9da8-d868e829f8f7"
+  },
+  "asana-dancer-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "15bb8fd2-6d49-4e2f-b900-270720a35f23"
+  },
+  "asana-half-moon-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2e08fd48-e2c8-48f7-a6e2-bb2184d83097"
+  },
+  "asana-extended-hand-to-big-toe-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "0f520f43-07d9-40ab-806f-ad619eb5f7bc"
+  },
+  "asana-standing-split-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c3e7a292-93b6-4cd0-b9ff-3a7f8a4c2962"
+  },
+  "asana-warrior-i-twist-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c6fde02c-87ce-4e50-8080-d096a026029d"
+  },
+  "asana-humble-warrior-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "36cd1f6a-31a1-43b4-92f7-4d73469ce4f6"
+  },
+  "asana-crescent-lunge-twist-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "39cea1a7-91fe-4df7-aef9-ae26fda09c90"
+  },
+  "asana-gate-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "fd8d3ac0-1e2f-4f00-a162-24b5eddc1903"
+  },
+  "asana-standing-backbend-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "07788583-0382-4ee1-8714-cd92176de662"
+  },
+  "asana-wide-legged-forward-fold-with-clasp-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9ae13548-d8f8-4f57-acef-bc04aa6ad480"
+  },
+  "asana-intense-side-stretch-with-reverse-prayer-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ec6d2f05-f32d-4385-84f8-8b429b4694c6"
+  },
+  "asana-warrior-ii-side-bend-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "25c08383-1f9f-4cd8-b9d2-643e013af146"
+  },
+  "asana-head-to-knee-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a826774f-3f96-430d-855d-c4da24ac3e11"
+  },
+  "asana-seated-forward-bend-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ef319022-59ba-40c5-b9e6-5b1c7b485cfe"
+  },
+  "asana-wide-angle-seated-forward-bend-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9a6b2bd7-f4d9-487d-b2f4-c1fbe6c3e9b2"
+  },
+  "asana-cow-face-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "cb4a179d-1e82-47e9-af26-c54116de9514"
+  },
+  "asana-hero-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "28ac1591-3ba4-492f-8069-234c7c83891d"
+  },
+  "asana-reclined-hero-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a2b4c6b9-bcb5-42a6-a59b-e905075087d9"
+  },
+  "asana-thunderbolt-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "30b19a7a-cd42-4eb1-8988-f9f88f22a010"
+  },
+  "asana-seated-twist-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5d74e95d-7c21-47f8-addf-730f9397ce87"
+  },
+  "asana-full-lord-of-the-fishes-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "87fb8271-0685-436d-ae2a-1f87a553562b"
+  },
+  "asana-sage-marichi-i-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "93b9f30c-34fe-4712-8395-065c1c4cc91f"
+  },
+  "asana-sage-marichi-iii-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5db6a6d0-5cd5-4040-921b-2a7bc1b48dab"
+  },
+  "asana-seated-wide-legged-twist-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f3e841fb-1cdc-4e4e-93ec-a1e936ea420a"
+  },
+  "asana-firelog-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3b37fe5b-61f7-462a-933d-92bbe5d30189"
+  },
+  "asana-half-pigeon-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "90147194-0d13-4185-9c73-55d95b8b59a2"
+  },
+  "asana-king-pigeon-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "60d64e3e-fde4-43c7-8d7b-c2a1f59b20bb"
+  },
+  "asana-double-pigeon-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7114a9af-0231-48a0-bd3b-21ca93fae49d"
+  },
+  "asana-lizard-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7ec60167-93cb-402e-905d-9fb61a6db9b0"
+  },
+  "asana-frog-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "dc7ee577-82ea-497b-a676-ee272bc71db3"
+  },
+  "asana-butterfly-fold-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3b41886f-ab46-4b35-834e-c42ca4215053"
+  },
+  "asana-compass-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b230c34d-53ec-41ed-89e3-ae35a7d0be60"
+  },
+  "asana-heron-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6852861b-ae71-45c7-a318-6f0f7e7357ee"
+  },
+  "asana-tortoise-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3ab34faf-cc81-4acc-bec2-8654aac0c5aa"
+  },
+  "asana-sleeping-tortoise-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "74ace6a4-537e-4ed5-a931-b9ee4f8bf100"
+  },
+  "asana-bharadvaja-s-twist-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "086b9614-5c2e-4d7c-9e1d-f446fe2ab682"
+  },
+  "asana-seated-cat-cow-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "011884c9-7ff8-4c7d-9091-08522d4f22c4"
+  },
+  "asana-seated-side-stretch-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "405df933-6050-4d21-bc71-52378b862995"
+  },
+  "asana-cradle-stretch-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3d612c0f-805f-4344-9d8f-2537dcc3eb52"
+  },
+  "asana-bridge-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "538d0f86-6bba-4e61-bae1-e91e4b1dfb68"
+  },
+  "asana-wheel-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2a4fd04b-cf72-4380-81f6-51f27e0d40a1"
+  },
+  "asana-camel-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9772bd6c-f5e8-404d-aab6-85bd86b4fe48"
+  },
+  "asana-bow-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5a3eab1c-7045-450c-9862-2e434db9b38f"
+  },
+  "asana-locust-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "fd19b8ae-bc2e-4d13-a10e-2fa74f70b6e6"
+  },
+  "asana-half-locust-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "eae54373-8beb-47d6-b14d-0c9595d634bc"
+  },
+  "asana-sphinx-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "27f8a466-47c2-4eec-96d0-8fbfbdb4127f"
+  },
+  "asana-seal-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a39dc3a5-b537-4638-ad0d-07ca171e93cb"
+  },
+  "asana-fish-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "10d42476-a498-40fc-87eb-7097e34ed576"
+  },
+  "asana-little-thunderbolt-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "0f9e3267-903f-484d-b509-7e9e01baf1ab"
+  },
+  "asana-cat-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a787b4b3-4483-4567-bf3b-eaf6ae87dc9e"
+  },
+  "asana-cow-pose-with-block": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5de6916c-da5b-43bb-8665-2496dd00402d"
+  },
+  "asana-standing-forward-fold-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ef75044b-701c-433f-b08a-a2007a332b3c"
+  },
+  "asana-upward-facing-dog-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "87d5460a-87ef-4587-bdac-c2a1e625fc04"
+  },
+  "asana-high-lunge-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2b77fb8f-a499-4878-b6b9-2d8d59b1d706"
+  },
+  "asana-warrior-ii-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a50bf73d-c6ec-4672-b8c8-6b49efb3854b"
+  },
+  "asana-reverse-warrior-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8d53e2fd-46d6-40f1-ba5b-85dc9c9c5a41"
+  },
+  "asana-extended-side-angle-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b45ff587-6324-4e4c-ad2f-d8257898d413"
+  },
+  "asana-triangle-pose-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e7a6f2cf-f26d-4400-a5a5-0701f63749b4"
+  },
+  "asana-wide-legged-forward-fold-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b5d77d85-e6f3-47cf-8b5a-d9ee61f272ab"
+  },
+  "asana-pyramid-pose-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e089c2f8-1545-46f5-91c8-92d863a8f008"
+  },
+  "asana-goddess-pose-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b463ddb8-630d-4310-a9fc-117751ae1c9c"
+  },
+  "asana-standing-side-bend-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "36624d0c-08eb-4377-807b-b5d9839dbb9d"
+  },
+  "asana-eagle-pose-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c3e0ce82-873e-4412-ae9f-26f19f8c6c2a"
+  },
+  "asana-dancer-pose-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2513f681-d8f5-4506-a50d-875bdb633938"
+  },
+  "asana-half-moon-pose-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "65c586c2-13bf-4edf-9ce5-1a925f1952d4"
+  },
+  "asana-extended-hand-to-big-toe-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "399299c4-d0ff-4d14-adcf-c9d0331fc3cf"
+  },
+  "asana-standing-split-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "cab9751e-4f7c-48e2-b556-70654fcc1c87"
+  },
+  "asana-humble-warrior-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d2d70c43-c2dd-4cb1-88a4-b4bc065b846e"
+  },
+  "asana-gate-pose-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6250028a-aee0-41cd-9042-043998c375ad"
+  },
+  "asana-standing-backbend-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "13394a7d-9d3a-41f4-957f-5118edcb2237"
+  },
+  "asana-wide-legged-forward-fold-with-clasp-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "cf9ee6c9-0f16-4f69-b1b1-dc6951207e2a"
+  },
+  "asana-intense-side-stretch-with-reverse-prayer-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8adc5acc-d154-494c-ba32-832b8ab2e09f"
+  },
+  "asana-warrior-ii-side-bend-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4032b07c-7528-4367-b57d-047b662fd6c0"
+  },
+  "asana-head-to-knee-pose-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e8d348e2-8e02-45ba-8844-a63f3bd6feb0"
+  },
+  "asana-seated-forward-bend-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "1aad5774-4884-4457-ad2e-700509105ec3"
+  },
+  "asana-wide-angle-seated-forward-bend-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "1e674e5d-6dfe-40f7-8867-84ae3bbdd308"
+  },
+  "asana-reclined-hero-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7bbd6b33-3aeb-40d2-8e5e-ae80e24febf7"
+  },
+  "asana-sage-marichi-i-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b84828f1-15e0-428e-b2e7-d860a07b0140"
+  },
+  "asana-king-pigeon-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "1bf103a6-74d5-4884-8b51-8f53c2f5b080"
+  },
+  "asana-butterfly-fold-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d0646ef7-c10f-4187-95a9-8617902d1297"
+  },
+  "asana-heron-pose-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9706700f-3a74-4378-86e5-371fd4439b2b"
+  },
+  "asana-tortoise-pose-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3ceed3b3-6619-4703-a809-75cfb2d9e19f"
+  },
+  "asana-sleeping-tortoise-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "1f3ad700-2abb-4110-a957-8c2fc4377dbb"
+  },
+  "asana-bridge-pose-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "01332bbf-4762-4132-9e04-1d01ff082d37"
+  },
+  "asana-wheel-pose-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "94173645-01e3-48cc-82a1-266c12375101"
+  },
+  "asana-camel-pose-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "035ae330-dc1a-42bc-baa8-db41f34c2bf6"
+  },
+  "asana-bow-pose-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5a646c54-049d-4fd5-8211-91da3ddd7a2f"
+  },
+  "asana-locust-pose-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "313c3d63-c5b0-462b-a8d1-4dfb8462fc95"
+  },
+  "asana-half-locust-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c458c85b-521d-4266-8223-655ff780367c"
+  },
+  "asana-sphinx-pose-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "85885ab8-902d-43fc-ad8b-c792adb75ca6"
+  },
+  "asana-seal-pose-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "dfeef088-1edf-4b05-96e5-c0d8520c25d5"
+  },
+  "asana-fish-pose-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9e75de0f-0ff4-4d91-930f-0219cb54fdc3"
+  },
+  "asana-little-thunderbolt-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f2b8d6bf-943b-4916-b9cf-e0d321d9e649"
+  },
+  "asana-puppy-pose-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "05b43ce9-296e-4bd7-bc80-0f49edf94ea4"
+  },
+  "asana-shoulderstand-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9a0a9268-2bb8-4122-91d1-144604fff628"
+  },
+  "asana-halasana-plough-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "bfe72836-e584-4e16-9277-80f68c114ff9"
+  },
+  "asana-ear-pressure-pose-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "323ec4f7-95fb-4d90-9934-710a15796ee2"
+  },
+  "asana-forearm-stand-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4b29b05c-7d98-4d4b-9d79-079ded704107"
+  },
+  "asana-dolphin-pose-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "116b7497-b473-48b3-b777-e64adf1e4c21"
+  },
+  "asana-tripod-headstand-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "727c7b4f-b364-4f34-9fd5-a132c257cb4b"
+  },
+  "asana-chin-stand-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "74a862c7-826e-4e27-9159-7c85401b8877"
+  },
+  "asana-three-legged-dog-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5aa18800-20f8-4d1b-8243-2c9905183835"
+  },
+  "asana-wild-thing-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "af5ab965-15b5-4a80-8ad6-30dd8f6bca24"
+  },
+  "asana-handstand-hops-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b55f0c59-52f7-4581-935e-a078269dd3aa"
+  },
+  "asana-reverse-plank-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8ff98a50-a1af-4450-acdf-461118a5fe2f"
+  },
+  "asana-upward-plank-with-bent-knees-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ab36d5f3-e790-4230-9572-e7d7fb4c0443"
+  },
+  "asana-half-split-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9dbfd9cb-0bd2-450a-a4eb-7263f22c57e7"
+  },
+  "asana-middle-split-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8dac8c70-401c-4166-b725-1673f7d5c66f"
+  },
+  "asana-standing-forward-fold-with-clasp-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c966b6a8-fe5b-499c-9ab4-afdde3cc74ae"
+  },
+  "asana-rag-doll-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c99b09dd-0d43-47c3-b638-6eb234933281"
+  },
+  "asana-sugarcane-pose-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4e70be61-5cc5-4411-a78a-96b86a6445da"
+  },
+  "asana-tree-with-hands-overhead-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "af59efab-5824-463b-8301-6eeb6fe1057d"
+  },
+  "asana-toe-stand-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "00c763f3-1178-4905-ab94-d46dbadb8b86"
+  },
+  "asana-one-legged-bridge-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "dfad2bf0-c119-4281-918d-610908092b2a"
+  },
+  "asana-one-legged-wheel-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "451d0491-bb6f-4339-a959-0535d1b7dadf"
+  },
+  "asana-half-frog-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "551cd022-7a3e-451e-8763-459911bd7e30"
+  },
+  "asana-cobra-with-hands-lifted-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3d880e47-154a-4de9-b7fb-9761ed728016"
+  },
+  "asana-superman-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f9a14652-6a85-4c4d-87db-0e7e165b62e6"
+  },
+  "asana-swimming-locust-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9655eb79-bf12-4818-9ec9-6c93fd3a1a3d"
+  },
+  "asana-camel-with-hands-on-sacrum-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9653ea88-b13b-4bfe-87cc-d3b2b4665f9f"
+  },
+  "asana-dolphin-to-forearm-stand-drill-at-the-wall": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d7c062ff-f9bf-4bf5-a2c1-c722ab2af50e"
+  },
+  "asana-standing-forward-fold-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d525e589-7e95-4377-83d7-c14b58ce11f2"
+  },
+  "asana-half-forward-fold-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c3012e61-a32f-43cf-b5a6-baf57dc23c26"
+  },
+  "asana-upward-facing-dog-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5cc1c507-1fde-41be-bde3-0970f1f362dc"
+  },
+  "asana-cobra-pose-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a6834157-226c-445e-a41e-4791c629cf0f"
+  },
+  "asana-low-lunge-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e9de9af7-b36e-4944-a629-2320857e7b29"
+  },
+  "asana-staff-pose-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9ed57d95-4f97-440a-be44-f6b0b0cf3b98"
+  },
+  "asana-wide-legged-forward-fold-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "88d0e6c4-5605-4b9e-ba57-fbf1a17ea4c6"
+  },
+  "asana-pyramid-pose-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "1ccf9688-f81e-458b-97a4-35627a72de79"
+  },
+  "asana-garland-pose-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "51691aef-0774-43fb-b437-c09fc9d2a998"
+  },
+  "asana-standing-wide-squat-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "938f7052-6560-4147-8830-2f0ca89df1e4"
+  },
+  "asana-standing-backbend-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5b8bbe7f-c7d1-4b47-957e-e9dd3d63b1fc"
+  },
+  "asana-wide-legged-forward-fold-with-clasp-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "24a026f3-4f3c-4e54-9575-066313ff50a4"
+  },
+  "asana-intense-side-stretch-with-reverse-prayer-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f331a61c-a8d3-45ff-ab65-73e3a885c6ba"
+  },
+  "asana-head-to-knee-pose-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "903fd10d-7958-4f66-95a5-abdcf0d343bc"
+  },
+  "asana-wide-angle-seated-forward-bend-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e2e98c66-505f-4bc5-a009-103316305b1f"
+  },
+  "asana-cow-face-pose-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "bc861b0e-4819-473b-b74f-c359e9672813"
+  },
+  "asana-hero-pose-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "0a81e62b-366c-4a4a-b52d-20810c763d9e"
+  },
+  "asana-reclined-hero-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "980c3bef-752f-4d50-9d90-815eb5a76936"
+  },
+  "asana-thunderbolt-pose-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4957c852-9353-4ecf-a699-6bca53290541"
+  },
+  "asana-sage-marichi-i-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4f9c49e6-7ecf-4ead-8faf-de57a7a2d38c"
+  },
+  "asana-firelog-pose-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "05ead426-bb7e-4bc3-8e2b-fce848ce6fe6"
+  },
+  "asana-half-pigeon-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a94c2783-4288-4cb9-8a92-d901806c29ca"
+  },
+  "asana-double-pigeon-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b90f185c-05fb-4fa2-9cb8-44291ae2556b"
+  },
+  "asana-lizard-pose-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6085eff7-bba9-4498-b138-0b179563cdd0"
+  },
+  "asana-frog-pose-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6e11f252-9d9d-4c4a-a88c-8b67e1ecfa6b"
+  },
+  "asana-butterfly-fold-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a760f199-3dc0-4fa2-9814-17bb1f4959ea"
+  },
+  "asana-compass-pose-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6d2a01eb-513b-4f3e-9a91-ec21ae7da30f"
+  },
+  "asana-heron-pose-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a754538e-350b-4e16-a018-25ba6708fd2a"
+  },
+  "asana-tortoise-pose-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "45813c88-cbe5-4916-97ad-781416631475"
+  },
+  "asana-sleeping-tortoise-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ac6141bb-74fa-47dd-8f5d-689aad5e5ddf"
+  },
+  "asana-seated-cat-cow-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6e9b9694-8bec-4e31-b1af-516bfeea7499"
+  },
+  "asana-seated-side-stretch-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f65f5535-39a6-4368-bea7-56a00ef31c64"
+  },
+  "asana-cradle-stretch-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "0f285bcf-75d8-43e7-a5ca-faf497e1df66"
+  },
+  "asana-bridge-pose-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2c0eda55-482b-4a64-a4c6-1563743dad55"
+  },
+  "asana-wheel-pose-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e9a6abfb-5a7d-415c-a688-7339b7585fa3"
+  },
+  "asana-camel-pose-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "51c36924-e6f6-4c5f-8b39-387c7ca49ee4"
+  },
+  "asana-locust-pose-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "734c08e4-0796-4f69-a465-ca99941bf460"
+  },
+  "asana-half-locust-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "82fa7fd6-27fb-4b28-9fee-5a90a5a393be"
+  },
+  "asana-sphinx-pose-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "47d6ae89-7370-4c0e-882a-b8cd371676d5"
+  },
+  "asana-seal-pose-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c494c7d3-def5-4c33-a28e-b50f2baebc0a"
+  },
+  "asana-fish-pose-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5791cb09-5c13-471f-a637-78e09cbcac12"
+  },
+  "asana-little-thunderbolt-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "477abdbc-c8a1-4f19-bae0-42eca678cc3d"
+  },
+  "asana-cat-pose-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6163661c-4bf4-48ec-8b68-dbbf554abd86"
+  },
+  "asana-cow-pose-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "06d48a6f-0c75-454d-8095-73c9371e37be"
+  },
+  "asana-puppy-pose-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4ba43430-487c-49c9-8843-57a54844f02a"
+  },
+  "asana-knees-to-chest-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "56502932-1d8e-48ef-8b0f-01531a71853e"
+  },
+  "asana-reclined-hand-to-big-toe-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "98e821da-f809-49d5-8fdb-db11db5dd175"
+  },
+  "asana-reclined-pigeon-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d5e90259-6e0d-4d25-904b-9f78c10b8ba7"
+  },
+  "asana-happy-baby-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "038b43df-ab0d-47ec-8028-a10c99fd9832"
+  },
+  "asana-wind-relieving-pose-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "849b2ae7-7304-4ad3-93ca-c27d9cdfbb7b"
+  },
+  "asana-chin-stand-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "976e0abb-bf79-4d0a-9f23-0c1edd0a3eba"
+  },
+  "asana-wild-thing-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "60edfba6-b475-4325-ad58-d8cfe6cabdca"
+  },
+  "asana-downward-dog-split-twist-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "542dde29-18b7-4b3d-a359-fa0f80507412"
+  },
+  "asana-reverse-plank-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "75af8357-a1db-451c-9931-06a8e01d64a2"
+  },
+  "asana-upward-plank-with-bent-knees-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a4e5b4e1-c8d5-47e0-9da2-9a00807e4b33"
+  },
+  "asana-skandasana-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "48783c23-1b78-4e2b-8c6a-cdb78386005d"
+  },
+  "asana-side-lunge-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e06d47ff-108f-45ec-9d94-f075558c2eb3"
+  },
+  "asana-runner-s-lunge-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b4f41c94-d765-4178-96bb-e4b5db437551"
+  },
+  "asana-half-split-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "0954975c-12f9-41a5-a4e0-539e8235afec"
+  },
+  "asana-full-split-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "0af1e1a9-ab8b-41e0-947d-df96dd0cca8c"
+  },
+  "asana-middle-split-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a6e4c125-2c89-4e46-9192-cee729688efe"
+  },
+  "asana-standing-forward-fold-with-clasp-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "44018f6d-f95b-4092-92ca-ad5dea31e401"
+  },
+  "asana-rag-doll-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "1877cad7-8343-4fa6-8c82-04c605307cd1"
+  },
+  "asana-eagle-arms-only-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ff406b9d-6813-4b58-9814-758a1bccf22d"
+  },
+  "asana-cow-face-arms-only-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2d65d492-de22-4657-851d-4cb74f39c304"
+  },
+  "asana-reverse-prayer-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3b912999-48dc-4b29-a973-7f50b2d03319"
+  },
+  "asana-neck-rolls-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b1b83a5b-bd3d-44bd-8a92-034f793bad75"
+  },
+  "asana-wrist-circles-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9249753e-6809-4cb8-b5f8-2ffbcc7bb92c"
+  },
+  "asana-ankle-rotations-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6346986d-df9b-4316-b419-113584d060f4"
+  },
+  "asana-butterfly-flaps-with-strap": {
+    "status": "done",
+    "error": null,
+    "mediaId": "516af897-b562-40f0-9d61-496e99d70f6d"
+  },
+  "asana-bound-low-lunge": {
+    "status": "done",
+    "error": null,
+    "mediaId": "50b2b438-b4ce-49ac-b0ae-1b78014de0d1"
+  },
+  "asana-bound-high-lunge": {
+    "status": "done",
+    "error": null,
+    "mediaId": "0d347990-947b-4152-8391-9aa4291de9e8"
+  },
+  "asana-bound-staff-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d110db72-ffe0-44c2-8ce2-c37f2a4b298f"
+  },
+  "asana-bound-warrior-i": {
+    "status": "done",
+    "error": null,
+    "mediaId": "31382475-dffb-4484-9fbb-574a57d4936b"
+  },
+  "asana-bound-warrior-ii": {
+    "status": "done",
+    "error": null,
+    "mediaId": "97a12065-009d-4a18-ae2f-b05bde1d8241"
+  },
+  "asana-bound-reverse-warrior": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f5f20f2c-66cf-4b05-a03e-da8cbf53a007"
+  },
+  "asana-bound-garland-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "1df7de98-3cb1-4e74-b8d8-6cade091960b"
+  },
+  "asana-bound-standing-wide-squat": {
+    "status": "done",
+    "error": null,
+    "mediaId": "dae8db0d-c9a3-4d42-871f-aff8360519db"
+  },
+  "asana-bound-goddess-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9bf668f5-e23d-458d-be7f-3f0d52246fc0"
+  },
+  "asana-bound-standing-side-bend": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f33497df-7c08-4a90-8de3-6838c469ee1a"
+  },
+  "asana-bound-warrior-iii": {
+    "status": "done",
+    "error": null,
+    "mediaId": "be1b2898-d700-4d34-90b7-68eaca24359d"
+  },
+  "asana-bound-tree-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a0b82be1-6e43-4422-b1c7-5b3ccb6e071b"
+  },
+  "asana-bound-eagle-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d7deb688-60cd-4c53-bfc0-ef4feeacfd83"
+  },
+  "asana-bound-dancer-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a12ed620-e5c5-426e-94a6-40a5b404ee31"
+  },
+  "asana-bound-extended-hand-to-big-toe": {
+    "status": "done",
+    "error": null,
+    "mediaId": "fda2dd64-8a71-44f4-bb7c-d4feb9ccf83b"
+  },
+  "asana-bound-standing-split": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8ccb1e45-8079-401e-bd9f-652160bfe8d2"
+  },
+  "asana-bound-warrior-i-twist": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ef7ed304-4408-46ab-8f24-222bf78eca75"
+  },
+  "asana-bound-humble-warrior": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2bea1e4e-9ee7-4462-b605-2c35f9d88aa0"
+  },
+  "asana-bound-crescent-lunge-twist": {
+    "status": "done",
+    "error": null,
+    "mediaId": "82979276-b5bb-4c0d-97b0-e8f8dd58cdcb"
+  },
+  "asana-bound-gate-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c352ae78-063a-4308-81bc-2093a9f42af6"
+  },
+  "asana-bound-warrior-ii-side-bend": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5d38c36b-a53e-458c-91f0-a635586259d4"
+  },
+  "asana-bound-cow-face-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d03b3471-e1fd-4a46-96f8-bf621d74cea2"
+  },
+  "asana-bound-hero-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "03dd487c-cc85-47b8-82ca-ebb30a4ea09c"
+  },
+  "asana-bound-thunderbolt-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c290d68f-1e21-45db-b51e-6abe00779b77"
+  },
+  "asana-bound-seated-twist": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8b5ce885-2c3f-4bf3-bcd0-94185af2514e"
+  },
+  "asana-bound-full-lord-of-the-fishes": {
+    "status": "done",
+    "error": null,
+    "mediaId": "bd440aa3-26d1-46f8-b603-161e6b78979e"
+  },
+  "asana-bound-sage-marichi-iii": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d1da734a-04f9-4cc6-b2d1-2fe85369702c"
+  },
+  "asana-bound-seated-wide-legged-twist": {
+    "status": "done",
+    "error": null,
+    "mediaId": "cddf4a5d-3eac-4775-aeb8-8d5f374410ef"
+  },
+  "asana-bound-firelog-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9351d209-0d50-4c2c-a147-21979e657a98"
+  },
+  "asana-bound-half-pigeon": {
+    "status": "done",
+    "error": null,
+    "mediaId": "021e98b9-c101-4d0b-a929-7d67cc6d301a"
+  },
+  "asana-bound-double-pigeon": {
+    "status": "done",
+    "error": null,
+    "mediaId": "26002253-b70e-427e-a485-47e3bab76902"
+  },
+  "asana-bound-lizard-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f8e8ce4b-6e9b-452d-a332-efef35eb16f1"
+  },
+  "asana-bound-frog-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "761348bf-1efa-461d-883a-395a4d54d9ea"
+  },
+  "asana-bound-compass-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6df1ee00-15d0-4835-8a62-f505f4d1d93e"
+  },
+  "asana-bound-bharadvaja-s-twist": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ff46358a-c02f-4a03-b865-1d7a69fad75f"
+  },
+  "asana-bound-seated-cat-cow": {
+    "status": "done",
+    "error": null,
+    "mediaId": "256b5a88-64ec-49d8-ae13-9d93ecd74a66"
+  },
+  "asana-bound-seated-side-stretch": {
+    "status": "done",
+    "error": null,
+    "mediaId": "99843297-0026-41e3-98e3-3d3eb53b68bd"
+  },
+  "asana-bound-cradle-stretch": {
+    "status": "done",
+    "error": null,
+    "mediaId": "11c34c1c-4172-4b22-9a82-1b1150fe1fb6"
+  },
+  "asana-bound-thread-the-needle": {
+    "status": "done",
+    "error": null,
+    "mediaId": "946a31a8-4e95-4d4a-9705-e215f89a56e6"
+  },
+  "asana-bound-supine-twist": {
+    "status": "done",
+    "error": null,
+    "mediaId": "73ea1593-3933-4d5e-89a7-cc57d1514891"
+  },
+  "asana-bound-reclined-pigeon": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c217ddec-e247-449f-857c-572135a0514a"
+  },
+  "asana-bound-happy-baby": {
+    "status": "done",
+    "error": null,
+    "mediaId": "89a950ed-59f6-47ef-90c1-895ef4fe0f03"
+  },
+  "asana-bound-downward-dog-split-twist": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e153e565-897f-4119-bf5d-548fdb3e59e8"
+  },
+  "asana-bound-standing-cat-cow": {
+    "status": "done",
+    "error": null,
+    "mediaId": "1e27a6ae-059e-47d3-9e7b-a727f57b3905"
+  },
+  "asana-bound-skandasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4db94876-31b4-4c63-8b4e-92b8d030a97b"
+  },
+  "asana-bound-side-lunge": {
+    "status": "done",
+    "error": null,
+    "mediaId": "aa4cd7e9-9a63-4bb9-aaf3-40d3c9fb304b"
+  },
+  "asana-bound-runner-s-lunge": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4e770ac6-ac39-4d5e-947b-a6cb62d2c718"
+  },
+  "asana-bound-sugarcane-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b995b14b-da54-4c50-857d-c08096a37d87"
+  },
+  "asana-bound-tree-with-hands-overhead": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f2efa60a-4517-4016-bfa3-dfccbdd946cb"
+  },
+  "asana-bound-toe-stand": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9f0edc73-bb7d-47b3-929f-d6c260879c56"
+  },
+  "asana-bound-eagle-arms-only": {
+    "status": "done",
+    "error": null,
+    "mediaId": "958658d1-91b3-4d18-8a2f-1c72103266f8"
+  },
+  "asana-bound-cow-face-arms-only": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8b0b5c24-0b10-4dd6-a59b-940ae692b82f"
+  },
+  "asana-bound-reverse-prayer": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2c09af9d-7ee4-4830-8783-d1d9d819bc1e"
+  },
+  "asana-bound-butterfly-flaps": {
+    "status": "done",
+    "error": null,
+    "mediaId": "dcee01bc-cf59-4a15-9f99-fb6d357460e8"
+  },
+  "asana-bound-reclined-figure-four-twist": {
+    "status": "done",
+    "error": null,
+    "mediaId": "336becd3-2c9a-468d-937c-b10f49b6bfc7"
+  },
+  "asana-bound-reclined-big-toe-side": {
+    "status": "done",
+    "error": null,
+    "mediaId": "96f30222-f73c-49fd-923e-9160fcf56ba9"
+  },
+  "asana-bound-reclined-twist-with-extended-leg": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b680de14-2f31-4639-ac76-f2c549bd99b4"
+  },
+  "asana-bound-dragon-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8c00c0a9-ce5f-472e-b0b0-4f0f0b19f8e3"
+  },
+  "asana-bound-sleeping-swan": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ea54d960-4916-4368-87e2-2681b3ccdf85"
+  },
+  "asana-bound-shoelace-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f327ab24-5c0e-42db-9f64-80becbac993e"
+  },
+  "asana-bound-square-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e1f5dd72-0a12-46de-ba82-2e88d5eac15a"
+  },
+  "asana-bound-deer-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ca8ca7bb-1486-44f4-bffd-40df6d8be1ad"
+  },
+  "asana-bound-prenatal-wide-squat": {
+    "status": "done",
+    "error": null,
+    "mediaId": "239044da-7902-4ad1-85a7-157823d0bc91"
+  },
+  "asana-bound-prenatal-cat-cow": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ffc379f8-62e7-466d-992b-05926281904f"
+  },
+  "asana-bound-standing-twist": {
+    "status": "done",
+    "error": null,
+    "mediaId": "31ff5c87-78d4-4dd2-9820-e3dbdfbcb9ba"
+  },
+  "asana-bound-squat-and-rise": {
+    "status": "done",
+    "error": null,
+    "mediaId": "1f8e4361-8235-44c1-a2fc-8738864c59a7"
+  },
+  "asana-bound-standing-knee-hug": {
+    "status": "done",
+    "error": null,
+    "mediaId": "cd7e7a23-86df-465f-b803-be6a7b7ae060"
+  },
+  "asana-bound-standing-quad-stretch": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f215a8fb-849c-46e2-bd68-acf516c09248"
+  },
+  "asana-bound-standing-figure-four": {
+    "status": "done",
+    "error": null,
+    "mediaId": "34d13c8e-5ad9-4858-936c-b30c7a2f2b5c"
+  },
+  "asana-bound-churning-the-mill": {
+    "status": "done",
+    "error": null,
+    "mediaId": "01820c7c-4c3b-46e1-ab7c-a41575460b99"
+  },
+  "asana-revolved-standing-forward-fold": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e64010b2-9e28-49e2-8a54-ce4b7d91c015"
+  },
+  "asana-revolved-half-forward-fold": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3a466be5-4c70-4310-b7e7-13c22f2f246f"
+  },
+  "asana-revolved-low-lunge": {
+    "status": "done",
+    "error": null,
+    "mediaId": "45508923-e889-4b33-abc6-a4ea02968de7"
+  },
+  "asana-revolved-staff-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e2ca91fa-2455-4fc4-9dbb-23d39cfd3ca1"
+  },
+  "asana-revolved-warrior-i": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6ae1d9b1-5d17-4c7d-a22f-75dfa59c3d17"
+  },
+  "asana-revolved-warrior-ii": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9a344c4c-9eea-491b-9861-5447033704d1"
+  },
+  "asana-revolved-reverse-warrior": {
+    "status": "done",
+    "error": null,
+    "mediaId": "193c37d3-d811-4d60-a7e3-e49374936574"
+  },
+  "asana-revolved-extended-side-angle": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6feb8fd9-f6ce-4904-8606-c7fc88ee3009"
+  },
+  "asana-revolved-wide-legged-forward-fold": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e1568032-5e39-4231-b259-5f0f76a69545"
+  },
+  "asana-revolved-pyramid-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a0e43273-cffa-446b-b207-7d6ad5b59bf9"
+  },
+  "asana-revolved-garland-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e1a987a9-1006-4bb3-9495-e41184bb0c7a"
+  },
+  "asana-revolved-standing-wide-squat": {
+    "status": "done",
+    "error": null,
+    "mediaId": "26ae83e0-8e58-41ec-9b08-42286e4b7e8f"
+  },
+  "asana-revolved-goddess-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c95ad6fe-5638-4c53-8f6b-a0549764b93f"
+  },
+  "asana-revolved-standing-side-bend": {
+    "status": "done",
+    "error": null,
+    "mediaId": "72aa1398-4ba9-4fae-ba82-569c00c653e5"
+  },
+  "asana-revolved-warrior-iii": {
+    "status": "done",
+    "error": null,
+    "mediaId": "09a5515c-c760-4fdd-b7d8-cd6ccedd6591"
+  },
+  "asana-revolved-tree-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "fc46f09f-4ff4-4d31-a36d-be1e9d8986b9"
+  },
+  "asana-revolved-eagle-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7b970233-bdc6-47fc-85ad-743623aef0cf"
+  },
+  "asana-revolved-dancer-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "346e1902-d5bc-4ac1-b2de-fec77aa40bfe"
+  },
+  "asana-revolved-extended-hand-to-big-toe": {
+    "status": "done",
+    "error": null,
+    "mediaId": "76d0f59e-fb06-41a0-8c86-767647303c6b"
+  },
+  "asana-revolved-standing-split": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e1a37f98-6839-48e0-b078-34440f919543"
+  },
+  "asana-revolved-humble-warrior": {
+    "status": "done",
+    "error": null,
+    "mediaId": "825b06eb-4a93-445c-a71a-31190c93de5f"
+  },
+  "asana-revolved-gate-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "35940360-a1d1-4421-82bc-f0af4be72c6c"
+  },
+  "asana-revolved-five-pointed-star": {
+    "status": "done",
+    "error": null,
+    "mediaId": "699d0e44-925a-408d-acf9-ab56124ac8e7"
+  },
+  "asana-revolved-wide-legged-forward-fold-with-clasp": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6a6b2892-86d8-4a26-9a8a-c60a278011ab"
+  },
+  "asana-revolved-intense-side-stretch-with-reverse-prayer": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b8085c9f-5ed7-42aa-9902-fea2604e1e23"
+  },
+  "asana-revolved-warrior-ii-side-bend": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d6e5b50a-d3b2-43ac-aa53-dbcfdd49ee43"
+  },
+  "asana-revolved-seated-forward-bend": {
+    "status": "done",
+    "error": null,
+    "mediaId": "08aad565-c8d9-4831-8d1b-cfa1dc8468cd"
+  },
+  "asana-revolved-cow-face-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f7d0c966-59f0-483f-8e47-ce1a1db8c23a"
+  },
+  "asana-revolved-hero-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "cbd85356-e298-472f-b7a8-c1ad45b43ee5"
+  },
+  "asana-revolved-thunderbolt-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ae44b09e-d5a6-47c7-bd2c-7c6fc87d0920"
+  },
+  "asana-revolved-sage-marichi-i": {
+    "status": "done",
+    "error": null,
+    "mediaId": "11415e1e-fe83-4821-b690-c740f542e4bc"
+  },
+  "asana-revolved-firelog-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "fe9b4050-8b68-477f-9a38-9e3441d7bb86"
+  },
+  "asana-revolved-half-pigeon": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c49aacde-522e-42c8-b4f3-872f602140ef"
+  },
+  "asana-revolved-double-pigeon": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4e1df953-5f64-489c-ab81-7c85acf9007a"
+  },
+  "asana-revolved-lizard-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "12d743f4-42f5-46ab-a7f0-7ea630d21324"
+  },
+  "asana-revolved-frog-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ca58e35a-a4c9-4491-b5d6-6a07b4038937"
+  },
+  "asana-revolved-butterfly-fold": {
+    "status": "done",
+    "error": null,
+    "mediaId": "cd65776e-29c0-493c-9b7e-50a563d47cd7"
+  },
+  "asana-revolved-compass-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4cdce7aa-603a-4658-9625-dd198f5d9726"
+  },
+  "asana-revolved-heron-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4a56e2b3-be11-48d0-b2e2-cf0f6e752e1b"
+  },
+  "asana-revolved-tortoise-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2709afd7-6bfb-4908-a34b-ca269f50cefe"
+  },
+  "asana-revolved-sleeping-tortoise": {
+    "status": "done",
+    "error": null,
+    "mediaId": "77515c7b-7b67-4a77-b2c3-fca5f339ef50"
+  },
+  "asana-revolved-seated-cat-cow": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f30d26a1-3982-4131-83e1-9f8f75fc6c18"
+  },
+  "asana-revolved-seated-side-stretch": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3df55170-6543-4e6a-b364-16b7680c3525"
+  },
+  "asana-revolved-cradle-stretch": {
+    "status": "done",
+    "error": null,
+    "mediaId": "38425e98-ad5d-432d-a0e7-b20684be41cc"
+  },
+  "asana-revolved-reclined-pigeon": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a618a991-16c0-49e2-a210-2ff3b9909287"
+  },
+  "asana-revolved-happy-baby": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6f458478-ca61-4cfe-995d-d1fb887c80a8"
+  },
+  "asana-revolved-standing-cat-cow": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5a1eae31-6493-4b4c-a5df-11e8eb3f7bd6"
+  },
+  "asana-revolved-skandasana": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3dbc7a09-98ac-46a3-86e7-b7d9af3b229d"
+  },
+  "asana-revolved-side-lunge": {
+    "status": "done",
+    "error": null,
+    "mediaId": "727ce19b-513f-4633-844d-edc9ccc7842e"
+  },
+  "asana-revolved-runner-s-lunge": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ff2e076d-4238-4103-8ceb-81f1c119d700"
+  },
+  "asana-revolved-half-split": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4a42cf21-5fe3-4215-9b96-1c9551575cfd"
+  },
+  "asana-revolved-full-split": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2fd226c6-af7c-4b6b-a7b7-2abd36fc7764"
+  },
+  "asana-revolved-middle-split": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8a6b8315-ba82-4fd5-9a05-6dbbed6f5b74"
+  },
+  "asana-revolved-standing-forward-fold-with-clasp": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7a2ed5d8-5d39-4566-a962-56c040ae599a"
+  },
+  "asana-revolved-rag-doll": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a6fba69e-1cc4-4af4-ab8d-f4da001deea8"
+  },
+  "asana-revolved-sugarcane-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "80f228a9-88a2-4723-a1a3-e996ca496b26"
+  },
+  "asana-revolved-tree-with-hands-overhead": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ba6efea2-9d75-433c-a8ef-a21ede64f123"
+  },
+  "asana-revolved-toe-stand": {
+    "status": "done",
+    "error": null,
+    "mediaId": "5ede2cef-3e89-475c-a214-1b27e0c12cd3"
+  },
+  "asana-revolved-eagle-arms-only": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6c6c66e0-b10e-4787-9e82-234ea3891e48"
+  },
+  "asana-revolved-cow-face-arms-only": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4a14286f-9dfb-45b1-9a08-fdbd1cfec795"
+  },
+  "asana-revolved-reverse-prayer": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ce2ffa8a-c4e9-47a3-81c6-876868b9b0d1"
+  },
+  "asana-revolved-butterfly-flaps": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a040a65c-54a9-4852-b845-dcccf52c3cbf"
+  },
+  "asana-revolved-reclined-big-toe-side": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f362bb67-d7f8-4999-9f00-ad7235169e9c"
+  },
+  "asana-revolved-dragon-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "01abaa1d-7014-40ee-a567-092f54a011a5"
+  },
+  "asana-revolved-sleeping-swan": {
+    "status": "done",
+    "error": null,
+    "mediaId": "bd6c73c7-5f56-4c82-858d-9f472acc6b22"
+  },
+  "asana-revolved-caterpillar": {
+    "status": "done",
+    "error": null,
+    "mediaId": "8cb7e82a-79a8-45d7-b97a-1d2bcca02078"
+  },
+  "asana-revolved-shoelace-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "cec3d7eb-8a8d-4b0f-b5bb-153759ced884"
+  },
+  "asana-revolved-square-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6ccaccb8-02cd-4b57-9a28-a1d8f129de41"
+  },
+  "asana-revolved-prenatal-wide-squat": {
+    "status": "done",
+    "error": null,
+    "mediaId": "60491760-9e74-4b3d-809f-858ec0ff7984"
+  },
+  "asana-revolved-prenatal-cat-cow": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f3f22c03-19eb-40d0-9059-54cba5a8547e"
+  },
+  "asana-one-legged-four-limbed-staff-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "18f126b1-6b24-4694-94e8-00b0b46dd160"
+  },
+  "asana-one-legged-upward-facing-dog": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d1119f41-c1e7-4029-b7f7-1057ceeebe59"
+  },
+  "asana-one-legged-cobra-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c40126bb-9fbb-4fdb-8f8b-248ffdf4509a"
+  },
+  "asana-one-legged-plank-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "df26424d-0acc-440b-9c7b-6098cb920e3e"
+  },
+  "asana-one-legged-high-lunge": {
+    "status": "done",
+    "error": null,
+    "mediaId": "17308e70-5b19-425f-b4e2-5a03ec088469"
+  },
+  "asana-one-legged-warrior-i": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e0585773-3c51-420c-9cc0-8a5f373a3313"
+  },
+  "asana-one-legged-warrior-ii": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2104990c-9d8e-4181-bc08-9a402546b1ae"
+  },
+  "asana-one-legged-reverse-warrior": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3d241cc1-e679-4bfa-a216-695dfc47c43f"
+  },
+  "asana-one-legged-extended-side-angle": {
+    "status": "done",
+    "error": null,
+    "mediaId": "cddcbb7c-6216-4b44-9bc0-76d27e2c2f70"
+  },
+  "asana-one-legged-triangle-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "297d8729-6c03-4f76-ab87-c9be36b5996d"
+  },
+  "asana-one-legged-goddess-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a82e4635-8df8-4b47-b915-878a572f5e75"
+  },
+  "asana-one-legged-standing-side-bend": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7a83c02e-6ef3-4007-8866-42fc01d391dc"
+  },
+  "asana-one-legged-humble-warrior": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f28dd1d5-0169-4582-8704-6f395971b1c8"
+  },
+  "asana-one-legged-gate-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ace18c45-ca03-4219-b6b0-232564bdeb0a"
+  },
+  "asana-one-legged-standing-backbend": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6ff6256b-9809-404f-a492-2bfa6de92e05"
+  },
+  "asana-one-legged-warrior-ii-side-bend": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b7fb08e0-410c-482a-b94f-4191ab07a033"
+  },
+  "asana-one-legged-reclined-hero": {
+    "status": "done",
+    "error": null,
+    "mediaId": "dd618cd4-9571-43d9-9ed7-19b20b9247dc"
+  },
+  "asana-one-legged-boat-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "54f5a224-e8ac-47bd-8ccd-435b521b8ce5"
+  },
+  "asana-one-legged-half-boat-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3cc80d7f-8a1b-49ac-87b9-f88dd817b3cf"
+  },
+  "asana-one-legged-king-pigeon": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e2cbf430-9f35-4eac-be17-1bc74df2ebc3"
+  },
+  "asana-one-legged-sage-vasistha-s-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f249f271-eea5-423f-b668-51df296b5649"
+  },
+  "asana-one-legged-side-plank-with-leg-lift": {
+    "status": "done",
+    "error": null,
+    "mediaId": "4a1e86e2-8063-4907-ab14-ff0d6507f147"
+  },
+  "asana-one-legged-staff-pose-lift": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9ce5dd30-485c-4ea7-83aa-3e57a12caf32"
+  },
+  "asana-one-legged-bridge-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e1878da3-6104-443d-ab79-251da1a1b363"
+  },
+  "asana-one-legged-camel-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "36a869a1-8b59-4f59-b2ab-a52466969a53"
+  },
+  "asana-one-legged-bow-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "c7e6ef35-37fd-4b0a-a61d-68d10e40a4e6"
+  },
+  "asana-one-legged-locust-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "bd7511fc-f2d1-43e2-b5d2-8f0c9c77bc7f"
+  },
+  "asana-one-legged-half-locust": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f65cfc3d-2c54-4f8a-a075-f9c24462688f"
+  },
+  "asana-one-legged-sphinx-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7954fb2d-af36-4043-b2b4-e41837ba044a"
+  },
+  "asana-one-legged-seal-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d1bede42-3887-4bb8-bc8a-a24e41b9441f"
+  },
+  "asana-one-legged-fish-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d61fd0b8-4032-43ee-8550-b12ad0be1062"
+  },
+  "asana-one-legged-little-thunderbolt": {
+    "status": "done",
+    "error": null,
+    "mediaId": "fb9e2048-2272-4b31-a2bd-c554fe88e7fb"
+  },
+  "asana-one-legged-puppy-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6aa03665-5957-46ef-b0af-975eda5b04ad"
+  },
+  "asana-one-legged-shoulderstand": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7a27bd34-02dd-448c-9d74-90bf341609a3"
+  },
+  "asana-one-legged-halasana-plough": {
+    "status": "done",
+    "error": null,
+    "mediaId": "850f4634-dce7-4c8b-b715-5accc9f9cdda"
+  },
+  "asana-one-legged-ear-pressure-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "003fe8bf-fee5-4c33-874d-c889c926b917"
+  },
+  "asana-one-legged-forearm-stand": {
+    "status": "done",
+    "error": null,
+    "mediaId": "201224d8-45bf-4149-a5da-74225f62886d"
+  },
+  "asana-one-legged-handstand": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d06b60ee-1037-4bee-952c-a345c7722149"
+  },
+  "asana-one-legged-dolphin-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "9a8fb241-639a-45cf-b2e5-efc2f951b3ac"
+  },
+  "asana-one-legged-crane-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "a01e2596-0b6a-41d8-93e5-2db1043d1908"
+  },
+  "asana-one-legged-side-crow": {
+    "status": "done",
+    "error": null,
+    "mediaId": "81fed145-406d-4feb-a29e-7753ceb54a85"
+  },
+  "asana-one-legged-eight-angle-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "3e88adcd-e939-4304-a0a4-8ed02f9c566e"
+  },
+  "asana-one-legged-firefly-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d8096a82-4ec7-43ce-88ef-4058dd8f489a"
+  },
+  "asana-one-legged-peacock-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e53462ca-e1c9-42e4-ae6a-f0c18b1cf6b0"
+  },
+  "asana-one-legged-scale-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "ee63eed1-ef4a-4098-83b1-17b708dc4b58"
+  },
+  "asana-one-legged-rooster-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "404f6f39-3c61-4256-b042-53c6fe92ded0"
+  },
+  "asana-one-legged-shoulder-pressing-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "efddc614-1129-48e8-98e6-beddf4627f7f"
+  },
+  "asana-one-legged-grasshopper-pose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "6e28edb2-8178-41e2-948a-9f08c445a3a2"
+  },
+  "asana-one-legged-crow-to-headstand-transition": {
+    "status": "done",
+    "error": null,
+    "mediaId": "fa1b1e26-7797-48be-b9e7-ba983f907dae"
+  },
+  "asana-one-legged-tripod-headstand": {
+    "status": "done",
+    "error": null,
+    "mediaId": "d3378b67-1313-45ef-8d91-8c445ec3397b"
+  },
+  "asana-one-legged-chin-stand": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e7d5ea8a-3087-439c-9d57-82fe52103465"
+  },
+  "asana-one-legged-boat-to-low-boat": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2368ec33-910f-4eae-ab21-fabef020d422"
+  },
+  "asana-one-legged-forearm-plank": {
+    "status": "done",
+    "error": null,
+    "mediaId": "e80461c1-3d39-4804-9ce5-e4153bb419c2"
+  },
+  "asana-one-legged-side-plank-knee-down": {
+    "status": "done",
+    "error": null,
+    "mediaId": "26797c55-812c-433f-807d-c37bdc7e2657"
+  },
+  "asana-one-legged-dolphin-plank": {
+    "status": "done",
+    "error": null,
+    "mediaId": "1300f6a6-832b-4a6f-be91-96e88f1f84df"
+  },
+  "asana-one-legged-knee-to-nose": {
+    "status": "done",
+    "error": null,
+    "mediaId": "bc958ec0-9207-4727-8a81-6f5bb5ea5312"
+  },
+  "asana-one-legged-three-legged-dog": {
+    "status": "done",
+    "error": null,
+    "mediaId": "53b29ea6-8b90-40e7-9294-b0b951f8b152"
+  },
+  "asana-one-legged-wild-thing": {
+    "status": "done",
+    "error": null,
+    "mediaId": "2163c354-5957-40a3-b12c-82da7910d219"
+  },
+  "asana-one-legged-chaturanga-to-upward-dog": {
+    "status": "done",
+    "error": null,
+    "mediaId": "b7743538-dfe3-4555-b9fa-06054893144a"
+  },
+  "asana-one-legged-jump-back": {
+    "status": "done",
+    "error": null,
+    "mediaId": "91e34946-8b03-4844-9672-e8d0d353fd77"
+  },
+  "asana-one-legged-jump-through": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7aeae060-9f7a-4f45-adff-bf3da24f0a66"
+  },
+  "asana-one-legged-handstand-hops": {
+    "status": "done",
+    "error": null,
+    "mediaId": "f86cb709-5e92-4cb3-9c3f-4c56ee42b6b6"
+  },
+  "asana-one-legged-reverse-plank": {
+    "status": "done",
+    "error": null,
+    "mediaId": "7ab67cf7-4666-45e3-80e0-1c54b3a7c523"
   }
 }

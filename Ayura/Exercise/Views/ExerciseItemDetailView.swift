@@ -194,13 +194,16 @@ struct ExerciseItemDetailView: View {
     @ViewBuilder
     private var mainImageSection: some View {
         if let image = mainUIImage {
+            // Archive frames are 1024x1024. A full-width 250pt box is about 1.56:1,
+            // so .fill cropped roughly a third of the height off a square image and
+            // cut off heads and feet. A square container with .fit shows the whole
+            // pose. User photos of other ratios letterbox rather than lose limbs.
             Color.clear
-                .frame(maxWidth: .infinity)
-                .frame(height: 250)
+                .aspectRatio(1, contentMode: .fit)
                 .overlay(
                     Image(uiImage: image)
                         .resizable()
-                        .aspectRatio(contentMode: .fill)
+                        .aspectRatio(contentMode: .fit)
                 )
                 .clipped()
                 .glassCardStyle(cornerRadius: 20)
@@ -216,7 +219,8 @@ struct ExerciseItemDetailView: View {
                     ProgressView()
                         .opacity(selectedImageData != nil ? 1 : 0)
                 )
-                .frame(height: 250)
+                // Square, matching the loaded state, so the layout does not jump.
+                .aspectRatio(1, contentMode: .fit)
                 .clipped()
                 .glassCardStyle(cornerRadius: 20)
         }
