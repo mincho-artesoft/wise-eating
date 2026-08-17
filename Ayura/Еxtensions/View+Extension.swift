@@ -54,9 +54,17 @@ extension View {
         }
     }
     
-    func glassCardStyle(cornerRadius: CGFloat = 20.0, useSnapShot: Int? = 1) -> some View {
+    func glassCardStyle(
+        cornerRadius: CGFloat = 20.0,
+        useSnapShot: Int? = 1,
+        showsShadow: Bool = false
+    ) -> some View {
         self.modifier(GlassCardModifier(cornerRadius: cornerRadius, useSpanShot: useSnapShot!))
-            .shadow(color: .black.opacity(0.15), radius: cornerRadius, y: 10)
+            .shadow(
+                color: showsShadow ? .black.opacity(0.15) : .clear,
+                radius: showsShadow ? cornerRadius : 0,
+                y: showsShadow ? 10 : 0
+            )
     }
     
     func intelligentContrast() -> some View {

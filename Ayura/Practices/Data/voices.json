@@ -1,0 +1,169 @@
+{
+  "format": "maya1-voice-roster/v1",
+  "accentNote": "'Californian' is not in Maya1's documented accent vocabulary. Verify the model responds to it before rendering the library; fall back to 'American accent' across all six if it does not, and change it in this file only.",
+  "renderRules": {
+    "descriptionIsIdentity": "Never edit a description per practice. One string per voice, byte-identical across every cue.",
+    "seed": "Pin the voice's seed on every generation. Same description plus same seed is the only reproducibility Maya1 offers.",
+    "tags": "Only the tags listed on each voice. The other 13 Maya1 tags (<laugh> <laugh_harder> <giggle> <chuckle> <cry> <gasp> <excited> <angry> <scream> <sarcastic> <snort> <gulp> <sing>) are forbidden library-wide — every one of them is wrong in a guided meditation.",
+    "loudness": "Power is set at mastering, not in the prompt. Normalise every render to -16 LUFS integrated so the -20 LUFS ambience sits under it.",
+    "pace": "wordsPerMinute in practices.json is the target. Maya1's 'slow' is nowhere near 95 wpm on its own — expect to add sentence-internal commas and full stops, and to time-stretch by no more than 15%."
+  },
+  "voices": [
+    {
+      "id": "maren",
+      "role": "Primary — most seated meditation",
+      "description": "Female voice in her 30s with a Californian American accent. Low pitch, warm timbre, very slow meditative pacing.",
+      "seed": 471203,
+      "timbre": "Warm and rounded, no edge. Chest resonance rather than head.",
+      "tone": "Unhurried, kind, entirely unperformed. She is not selling anything.",
+      "power": "Soft-to-medium. Speaking to one person a metre away, not to a room.",
+      "emotion": "Settled. Warmth without sweetness — the register of someone who has done this a long time and is not impressed by it.",
+      "expression": "Almost none. Meaning carried by pace and pause rather than inflection. Statements fall at the end; no upward lilt.",
+      "allowedTags": [
+        "<exhale>",
+        "<sigh>"
+      ],
+      "avoid": "Any brightness or lift. If she sounds encouraging, she is wrong."
+    },
+    {
+      "id": "juniper",
+      "role": "Morning, rousing, kapha-reducing",
+      "description": "Female voice in her late 20s with a Californian American accent. Normal pitch, bright clear timbre, slow unhurried pacing.",
+      "seed": 118874,
+      "timbre": "Clear and forward, a little air in it. Brighter than Maren without being thin.",
+      "tone": "Awake and level. Morning without cheerfulness.",
+      "power": "Medium. Present, carrying, but never projecting.",
+      "emotion": "Quiet readiness. The tone of opening a curtain, not of starting a class.",
+      "expression": "Slightly more inflection than Maren — enough to keep a 6 a.m. listener with her. Still no enthusiasm.",
+      "allowedTags": [
+        "<exhale>"
+      ],
+      "avoid": "Perkiness. This is the voice most at risk of sounding like a fitness app."
+    },
+    {
+      "id": "rowan",
+      "role": "Grounding, vata-pacifying, earth visualisations",
+      "description": "Male voice in his 40s with a Californian American accent. Low pitch, warm gravelly timbre, very slow meditative pacing.",
+      "seed": 903517,
+      "timbre": "Low and slightly gravelly. Weight in it. The audible equivalent of the practices it carries.",
+      "tone": "Steady to the point of being immovable. Nothing hurried, nothing raised.",
+      "power": "Soft but dense. Quiet without being breathy.",
+      "emotion": "Calm that does not need to reassure. Presence rather than comfort.",
+      "expression": "Minimal. Long falling lines. Comfortable leaving a sentence to sit.",
+      "allowedTags": [
+        "<exhale>",
+        "<sigh>"
+      ],
+      "avoid": "Gravitas as performance. He is not narrating a documentary."
+    },
+    {
+      "id": "solene",
+      "role": "Sleep, yoga nidra, night",
+      "description": "Female voice in her 40s with a Californian American accent. Low pitch, soft breathy timbre, extremely slow hushed pacing.",
+      "seed": 628190,
+      "timbre": "Very soft, breath audible in it, close-miked. Almost but not quite a whisper.",
+      "tone": "Descending throughout. Every line lower and slower than the one before.",
+      "power": "Lowest in the roster. Should be barely above the ambience.",
+      "emotion": "Nothing being asked. This voice is designed to be abandoned partway through.",
+      "expression": "Flat by design. No emphasis anywhere — emphasis wakes people.",
+      "allowedTags": [
+        "<whisper>",
+        "<exhale>"
+      ],
+      "avoid": "Any rise in pitch or pace, ever. A single lift undoes twenty minutes."
+    },
+    {
+      "id": "ash",
+      "role": "Instructional — pranayama, contraindications, eating",
+      "description": "Male voice in his 30s with a Californian American accent. Normal pitch, clear even timbre, slow measured pacing.",
+      "seed": 254661,
+      "timbre": "Clean and even. The least coloured voice in the roster, deliberately.",
+      "tone": "Plain and precise. A competent teacher explaining a technique.",
+      "power": "Medium and consistent. Intelligibility is the priority here, not intimacy.",
+      "emotion": "Neutral. These practices have real contraindications and a soothing voice reading a safety warning is worse than useless.",
+      "expression": "Ordinary speech rhythm, slowed. Numbers and counts land clearly.",
+      "allowedTags": [
+        "<exhale>"
+      ],
+      "avoid": "Warmth. Warmth over an instruction makes it sound optional."
+    },
+    {
+      "id": "vera",
+      "role": "Inquiry, impermanence, equanimity",
+      "description": "Female voice in her 50s with a Californian American accent. Low pitch, dry smooth timbre, slow spacious pacing.",
+      "seed": 770442,
+      "timbre": "Dry, smooth, no vibrato. Age audible and unhidden.",
+      "tone": "Unsentimental. Says difficult things without softening them.",
+      "power": "Soft-to-medium, very even. Never leans in.",
+      "emotion": "Level regard. These practices look directly at death, envy and helplessness; a comforting voice would be lying about them.",
+      "expression": "Long pauses after the hard lines, and no reassurance afterwards.",
+      "allowedTags": [
+        "<exhale>",
+        "<sigh>"
+      ],
+      "avoid": "Consolation. The silence after the sentence is doing the work."
+    }
+  ],
+  "cast": {
+    "descent-into-sleep": "solene",
+    "yogic-sleep": "solene",
+    "yoga-nidra-short": "solene",
+    "complete-rest": "solene",
+    "evening-review": "solene",
+    "rain-on-the-roof": "solene",
+    "extended-exhale": "solene",
+    "the-night-sky": "solene",
+    "om-resonance": "juniper",
+    "first-light-on-snow": "juniper",
+    "the-open-window": "juniper",
+    "wind-through-grass": "juniper",
+    "high-cloud": "juniper",
+    "morning-intention": "juniper",
+    "standing-deep-breathing": "juniper",
+    "breath-of-fire": "juniper",
+    "bellows-breath": "juniper",
+    "skull-shining-breath": "juniper",
+    "the-hearth": "juniper",
+    "fire-at-the-navel": "juniper",
+    "weight-and-contact": "rowan",
+    "the-forest-floor": "rowan",
+    "the-root-system": "rowan",
+    "the-standing-stone": "rowan",
+    "three-part-breath": "rowan",
+    "rotation-of-awareness": "rowan",
+    "the-slow-river": "rowan",
+    "the-candle": "rowan",
+    "silent-mantra": "rowan",
+    "mantra-repetition": "rowan",
+    "alternate-nostril-breath": "ash",
+    "equal-breath": "ash",
+    "cooling-breath": "ash",
+    "hissing-breath": "ash",
+    "victorious-breath": "ash",
+    "humming-bee-breath": "ash",
+    "eye-cleansing-gaze": "ash",
+    "eating-with-attention": "ash",
+    "the-six-tastes": "ash",
+    "abhyanga-awareness": "ash",
+    "counting-the-exhale": "ash",
+    "walking-meditation": "ash",
+    "neti-neti": "vera",
+    "the-borrowed-body": "vera",
+    "equanimity": "vera",
+    "witness-of-thought": "vera",
+    "before-the-sound": "vera",
+    "the-empty-room": "vera",
+    "the-turn-of-the-season": "vera",
+    "compassion": "vera",
+    "so-hum-breath": "maren",
+    "the-pause-between-breaths": "maren",
+    "cooling-attention": "maren",
+    "the-fading-bell": "maren",
+    "loving-kindness": "maren",
+    "the-still-lake": "maren",
+    "sympathetic-joy": "maren",
+    "the-heart-space": "maren",
+    "listening-to-the-room": "maren",
+    "sense-withdrawal": "maren"
+  }
+}

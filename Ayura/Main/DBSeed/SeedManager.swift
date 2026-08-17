@@ -14,6 +14,7 @@ enum SeedManager {
         migrateExerciseDurationsIfNeeded(context: ctx)
         removeBundledExercisesIfNeeded(context: ctx)
         seedYogaIfNeeded(context: ctx)
+        seedPracticesIfNeeded(context: ctx)
         await seedBarcodesIfNeeded(context: ctx)
         await seedReferenceVitaminsIfNeeded(context: ctx)
         await seedReferenceMineralsIfNeeded(context: ctx)
@@ -87,6 +88,35 @@ enum SeedManager {
             ctx.rollback()
             print("   ❌ Yoga seeding failed: \(error)")
             assertionFailure("Yoga seed gate failed: \(error)")
+        }
+    }
+
+    // MARK: - Practices
+    private static func seedPracticesIfNeeded(context ctx: ModelContext) {
+        print("-> Checking for Practices data...")
+        let versionKey = "practiceSeedVersion"
+        do {
+            let bundleVersion = try PracticeSeeder.bundleSeedVersion()
+            let installedVersion = UserDefaults.standard.integer(forKey: versionKey)
+            let catalogueIsInstalled = try PracticeSeeder.isInstalled(context: ctx)
+            if installedVersion >= bundleVersion, catalogueIsInstalled {
+                print("   Practices seed version already applied, skipping.")
+                return
+            }
+
+            let result = try PracticeSeeder.run(context: ctx)
+            UserDefaults.standard.set(bundleVersion, forKey: versionKey)
+            print(
+                "   Practices seed v\(bundleVersion) installed: "
+                    + "\(result.practiceCount) practices, "
+                    + "\(result.cueCount) cues, "
+                    + "timing=\(result.timingMode), "
+                    + "unresolved seats=\(result.unresolvedSeatReferences)."
+            )
+        } catch {
+            ctx.rollback()
+            print("   ❌ Practices seeding failed: \(error)")
+            assertionFailure("Practice seed gate failed: \(error)")
         }
     }
 

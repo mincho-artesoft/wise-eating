@@ -38,8 +38,14 @@ struct RootView: View {
     @State private var pinnedFromDateSingle: Date = Date()
     @State private var pinnedEventsSingle: [EventDescriptor] = []
     
-    @AppStorage("lastSelectedTabRoot") private var selectedTab: AppTab = .nutrition
-    @AppStorage("lastPreviousTabRoot") private var previousTab: AppTab = .nutrition
+    // Keep the live tab selection in view state. Persisting the binding itself with
+    // @AppStorage lets a launch argument override the value for the whole process,
+    // which makes the tab bar animate while the displayed content stays unchanged.
+    @AppStorage("lastSelectedTabRoot") private var storedSelectedTab: AppTab = .nutrition
+    @AppStorage("lastPreviousTabRoot") private var storedPreviousTab: AppTab = .nutrition
+    @State private var selectedTab: AppTab = .nutrition
+    @State private var previousTab: AppTab = .nutrition
+    @State private var didRestoreStoredTabs = false
     @State private var isSearching = false
     @State private var searchFocusTask: Task<Void, Never>?
     @State private var searchText = ""
@@ -117,9 +123,21 @@ struct RootView: View {
     
     private func hideSearchButton() { withAnimation { isSearchButtonVisible = false } }
     private func showSearchButton() { withAnimation { isSearchButtonVisible = true } }
+
+    private var selectedTabAllowsGlobalSearch: Bool {
+        ![.aiGenerate, .calendar, .analytics, .nodes].contains(selectedTab)
+    }
     
     private var visibleTabs: [AppTab] {
-        AppTab.allCases.filter { $0 != .search && $0 != .analytics && $0 != .foods && $0 != .exercises && $0 != .nodes }
+        [
+            .nutrition,
+            .training,
+            .practices,
+            .calendar,
+            .storage,
+            .shoppingList,
+            .aiGenerate,
+        ]
     }
     
     var body: some View {
@@ -161,6 +179,7 @@ struct RootView: View {
                 // ПРОМЯНА 2: Случаят .notificationsDenied е премахнат, защото вече не блокираме.
             }
         }
+        .onAppear(perform: restoreStoredTabsIfNeeded)
         .onReceive(NotificationCenter.default.publisher(for: .snoozeAds)) { _ in
             print("⏳ Ad Snoozed! Adding 3 minutes to the timer.")
             // Ако следващата реклама е в миналото (трябва да се пусне сега) или в бъдещето,
@@ -175,6 +194,10 @@ struct RootView: View {
             }
         }
         .onChange(of: selectedTab) { _, newTab in
+            if newTab != .search {
+                storedSelectedTab = newTab
+            }
+
             if newTab == .nutrition { hasNewNutrition = false }
             if newTab == .training { hasNewTraining = false }
             trackInteractionAndShowAdIfNeeded()
@@ -247,6 +270,11 @@ struct RootView: View {
                 } else {
                     isSearchButtonVisible = true
                 }
+            }
+        }
+        .onChange(of: previousTab) { _, newTab in
+            if newTab != .search {
+                storedPreviousTab = newTab
             }
         }
         .statusBarHidden(true)
@@ -349,7 +377,7 @@ struct RootView: View {
                         coordinator.profileForPendingAIPlan = nil
                         coordinator.sourceAIGenerationJobID = nil
                         coordinator.pendingAIPlanJobType = nil
-                        isSearchButtonVisible = !(selectedTab == .aiGenerate || selectedTab == .calendar || selectedTab == .analytics)
+                        isSearchButtonVisible = selectedTabAllowsGlobalSearch
                         dismissSearch()
                     }
                 }
@@ -372,7 +400,7 @@ struct RootView: View {
                         isSearchButtonVisible = true
                     }
                     .onDisappear {
-                        isSearchButtonVisible = !(selectedTab == .aiGenerate || selectedTab == .calendar || selectedTab == .analytics)
+                        isSearchButtonVisible = selectedTabAllowsGlobalSearch
                     }
                     .padding(.top, headerTopPadding)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
@@ -389,7 +417,7 @@ struct RootView: View {
                         isSearchButtonVisible = false
                     }
                     .onDisappear {
-                        isSearchButtonVisible = !(selectedTab == .aiGenerate || selectedTab == .calendar || selectedTab == .analytics)
+                        isSearchButtonVisible = selectedTabAllowsGlobalSearch
                     }
                     .padding(.top, headerTopPadding)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
@@ -875,6 +903,15 @@ struct RootView: View {
             if let profile = selectedProfile {
                 NodesListView(profile: profile)
             }
+        case .practices:
+            if let profile = selectedProfile {
+                PracticesView(
+                    profile: profile,
+                    globalSearchText: $searchText,
+                    selectedTab: $selectedTab
+                )
+                    .id(profile)
+            }
             //        case .test:
             //                TestView()
         }
@@ -940,6 +977,10 @@ struct RootView: View {
     
     // MARK: - Setup/Helpers
     private func checkPermissions() {
+        if ProcessInfo.processInfo.arguments.contains("-skipPermissionPrompts") {
+            permissionState = .granted
+            return
+        }
         Task {
             var calendarStatus = CalendarViewModel.shared.isCalendarAccessGranted()
             if !calendarStatus {
@@ -991,6 +1032,25 @@ struct RootView: View {
     }
     
     private func dismissKeyboard() { isSearchFieldFocused = false }
+
+    private func restoreStoredTabsIfNeeded() {
+        guard !didRestoreStoredTabs else { return }
+
+        let restoredPreviousTab = storedPreviousTab == .search ? AppTab.nutrition : storedPreviousTab
+        let restoredSelectedTab = storedSelectedTab == .search ? restoredPreviousTab : storedSelectedTab
+
+        previousTab = restoredPreviousTab
+        selectedTab = restoredSelectedTab
+        didRestoreStoredTabs = true
+
+        // Repair old launches that were terminated while global search was active.
+        if storedPreviousTab == .search {
+            storedPreviousTab = restoredPreviousTab
+        }
+        if storedSelectedTab == .search {
+            storedSelectedTab = restoredSelectedTab
+        }
+    }
     
     
     private func setup() {
@@ -1003,7 +1063,7 @@ struct RootView: View {
         
         let isSheetPresentedAfterDismissal = isPresentingNewProfile || editingProfile != nil || editorState != nil || isPresentingProfileWizard
         
-        if selectedTab == .calendar || selectedTab == .analytics || selectedTab == .aiGenerate || selectedTab == .nodes || isSheetPresentedAfterDismissal {
+        if !selectedTabAllowsGlobalSearch || isSheetPresentedAfterDismissal {
             if !isAnyAIEditorPresented {
                 isSearchButtonVisible = false
             }
@@ -1354,7 +1414,7 @@ extension RootView {
             withAnimation {
                 coordinator.pendingAIRecipe = nil
                 coordinator.sourceAIRecipeJobID = nil
-                isSearchButtonVisible = !(selectedTab == .aiGenerate || selectedTab == .calendar || selectedTab == .analytics)
+                isSearchButtonVisible = selectedTabAllowsGlobalSearch
                 dismissSearch()
             }
         }
@@ -1373,9 +1433,9 @@ extension RootView {
                 menuState = .collapsed
                 isSearchButtonVisible = true
             }
-                .onDisappear {
-                    isSearchButtonVisible = !(selectedTab == .aiGenerate || selectedTab == .calendar || selectedTab == .analytics)
-                }
+            .onDisappear {
+                isSearchButtonVisible = selectedTabAllowsGlobalSearch
+            }
                 .padding(.top, headerTopPadding)
                 .transition(.move(edge: .bottom).combined(with: .opacity))
         )
@@ -1393,7 +1453,7 @@ extension RootView {
             withAnimation {
                 coordinator.pendingAIMenu = nil
                 coordinator.sourceAIMenuJobID = nil
-                isSearchButtonVisible = !(selectedTab == .aiGenerate || selectedTab == .calendar || selectedTab == .analytics)
+                isSearchButtonVisible = selectedTabAllowsGlobalSearch
                 dismissSearch()
             }
         }
@@ -1412,9 +1472,9 @@ extension RootView {
                 menuState = .collapsed
                 isSearchButtonVisible = true
             }
-                .onDisappear {
-                    isSearchButtonVisible = !(selectedTab == .aiGenerate || selectedTab == .calendar || selectedTab == .analytics)
-                }
+            .onDisappear {
+                isSearchButtonVisible = selectedTabAllowsGlobalSearch
+            }
                 .padding(.top, headerTopPadding)
                 .transition(.move(edge: .bottom).combined(with: .opacity))
         )
@@ -1435,7 +1495,7 @@ extension RootView {
             withAnimation {
                 coordinator.pendingAIFoodDetailResponse = nil
                 coordinator.sourceAIFoodDetailJobID = nil
-                isSearchButtonVisible = !(selectedTab == .aiGenerate || selectedTab == .calendar || selectedTab == .analytics)
+                isSearchButtonVisible = selectedTabAllowsGlobalSearch
                 dismissSearch()
             }
         }
@@ -1458,9 +1518,9 @@ extension RootView {
                 menuState = .collapsed
                 isSearchButtonVisible = false
             }
-                .onDisappear {
-                    isSearchButtonVisible = !(selectedTab == .aiGenerate || selectedTab == .calendar || selectedTab == .analytics)
-                }
+            .onDisappear {
+                isSearchButtonVisible = selectedTabAllowsGlobalSearch
+            }
                 .padding(.top, headerTopPadding)
                 .transition(.move(edge: .bottom).combined(with: .opacity))
         )
@@ -1477,7 +1537,7 @@ extension RootView {
                 dismissSearch()
                 coordinator.pendingAIExerciseDetailResponse = nil
                 coordinator.sourceAIExerciseDetailJobID = nil
-                isSearchButtonVisible = !(selectedTab == .aiGenerate || selectedTab == .calendar || selectedTab == .analytics)
+                isSearchButtonVisible = selectedTabAllowsGlobalSearch
                 dismissSearch()
             }
         }
@@ -1499,9 +1559,9 @@ extension RootView {
                 menuState = .collapsed
                 isSearchButtonVisible = false
             }
-                .onDisappear {
-                    isSearchButtonVisible = !(selectedTab == .aiGenerate || selectedTab == .calendar || selectedTab == .analytics)
-                }
+            .onDisappear {
+                isSearchButtonVisible = selectedTabAllowsGlobalSearch
+            }
                 .padding(.top, headerTopPadding)
                 .transition(.move(edge: .bottom).combined(with: .opacity))
         )
@@ -1522,7 +1582,7 @@ extension RootView {
                    coordinator.sourceAITrainingPlanJobID = nil
                    coordinator.profileForPendingAIPlan = nil
                    coordinator.pendingAIPlanJobType = nil
-                   isSearchButtonVisible = !(selectedTab == .aiGenerate || selectedTab == .calendar || selectedTab == .analytics)
+                   isSearchButtonVisible = selectedTabAllowsGlobalSearch
                    dismissSearch()
                }
            }
@@ -1553,7 +1613,7 @@ extension RootView {
                        isSearchButtonVisible = true
                    }
                    .onDisappear {
-                       isSearchButtonVisible = !(selectedTab == .aiGenerate || selectedTab == .calendar || selectedTab == .analytics)
+                       isSearchButtonVisible = selectedTabAllowsGlobalSearch
                    }
                    .padding(.top, headerTopPadding)
                    .transition(.move(edge: .bottom).combined(with: .opacity))
@@ -1578,7 +1638,7 @@ extension RootView {
                        isSearchButtonVisible = false
                    }
                    .onDisappear {
-                       isSearchButtonVisible = !(selectedTab == .aiGenerate || selectedTab == .calendar || selectedTab == .analytics)
+                       isSearchButtonVisible = selectedTabAllowsGlobalSearch
                    }
                    .padding(.top, headerTopPadding)
                    .transition(.move(edge: .bottom).combined(with: .opacity))
@@ -1607,7 +1667,7 @@ extension RootView {
              withAnimation {
                  coordinator.pendingAIWorkout = nil
                  coordinator.sourceAIWorkoutJobID = nil
-                 isSearchButtonVisible = !(selectedTab == .aiGenerate || selectedTab == .calendar || selectedTab == .analytics)
+                 isSearchButtonVisible = selectedTabAllowsGlobalSearch
                  dismissSearch()
              }
          }
@@ -1628,7 +1688,7 @@ extension RootView {
                  isSearchButtonVisible = true
              }
              .onDisappear {
-                 isSearchButtonVisible = !(selectedTab == .aiGenerate || selectedTab == .calendar || selectedTab == .analytics)
+                 isSearchButtonVisible = selectedTabAllowsGlobalSearch
              }
              .padding(.top, headerTopPadding)
              .transition(.move(edge: .bottom).combined(with: .opacity))

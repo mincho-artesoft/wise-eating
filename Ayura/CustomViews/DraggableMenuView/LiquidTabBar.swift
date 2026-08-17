@@ -1,5 +1,10 @@
 import SwiftUI
 
+private enum LiquidTabBarMetrics {
+    static let iconSlotSize: CGFloat = 36
+    static let iconGlyphSize: CGFloat = 32
+}
+
 struct LiquidTabBar: View {
     @ObservedObject private var effectManager = EffectManager.shared
     
@@ -278,7 +283,11 @@ struct LiquidTabBar: View {
                                 .resizable()
                                 .renderingMode(.template)
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 36, height: 36, alignment: .center)
+                                .frame(
+                                    width: LiquidTabBarMetrics.iconGlyphSize,
+                                    height: LiquidTabBarMetrics.iconGlyphSize,
+                                    alignment: .center
+                                )
                                 .foregroundStyle(tabIconColor)
                         }
                     }
@@ -385,13 +394,28 @@ private struct TabItem: View {
                 isActive: isAIGenerating,
                 tintColor: iconColor
             )
-                .frame(width: 36, height: 36, alignment: .center)
+            .frame(
+                width: LiquidTabBarMetrics.iconSlotSize,
+                height: LiquidTabBarMetrics.iconSlotSize,
+                alignment: .center
+            )
+            .clipped()
         } else {
             Image(tab.iconName)
                 .resizable()
                 .renderingMode(.template)
                 .scaledToFit()
-                .frame(width: 36, height: 36, alignment: .center)
+                .frame(
+                    width: LiquidTabBarMetrics.iconGlyphSize,
+                    height: LiquidTabBarMetrics.iconGlyphSize,
+                    alignment: .center
+                )
+                .frame(
+                    width: LiquidTabBarMetrics.iconSlotSize,
+                    height: LiquidTabBarMetrics.iconSlotSize,
+                    alignment: .center
+                )
+                .clipped()
                 .foregroundStyle(iconColor)
         }
     }
@@ -412,7 +436,11 @@ private struct BreathingAssetIcon: View {
             .resizable()
             .renderingMode(.template)
             .scaledToFit()
-            .frame(width: 36, height: 36, alignment: .center)
+            .frame(
+                width: LiquidTabBarMetrics.iconGlyphSize,
+                height: LiquidTabBarMetrics.iconGlyphSize,
+                alignment: .center
+            )
             .foregroundStyle(tintColor)
             .scaleEffect(breathingScale)
             .opacity(breathingOpacity)

@@ -1,9 +1,19 @@
 import Foundation
 
 enum AppTab: Int, CaseIterable, Identifiable {
-    case nutrition, training, foods, calendar, storage, shoppingList, aiGenerate, search, analytics, exercises, nodes//, test
+    case nutrition, training, foods, calendar, storage, shoppingList, aiGenerate, search, analytics, exercises, nodes, practices//, test
 
-    var id: UUID { Self.stableIDs[rawValue] }
+    var id: UUID {
+        precondition(
+            Self.stableIDs.count == Self.allCases.count,
+            "AppTab stableIDs must match allCases"
+        )
+        return Self.stableIDs[rawValue]
+    }
+
+    static var stableIDCountMatchesCases: Bool {
+        stableIDs.count == allCases.count
+    }
 
     private static let stableIDs: [UUID] = [
         UUID(uuidString: "8E6BDEA8-95E3-5958-8A0C-CB0986E87172")!,
@@ -17,6 +27,8 @@ enum AppTab: Int, CaseIterable, Identifiable {
         UUID(uuidString: "D9741028-116F-5EDC-97D7-8C1DC0A9B5FC")!,
         UUID(uuidString: "AB722EAD-A174-50B3-A82D-C8D31DF30527")!,
         UUID(uuidString: "72E9E511-2127-514F-98AD-CA95ED8473FE")!,
+        // uuid5(seed-identities/v1, "app-tab:practices")
+        UUID(uuidString: "F4728EEB-7771-57B2-8B06-48CA4A4A654C")!,
     ]
 
     var title: String {
@@ -32,6 +44,7 @@ enum AppTab: Int, CaseIterable, Identifiable {
         case .exercises: "Exercises"
         case .aiGenerate: "Generate"
         case .nodes: "Notes"
+        case .practices: "Practices"
 //        case .test: "test"
         }
     }
@@ -49,6 +62,7 @@ enum AppTab: Int, CaseIterable, Identifiable {
         case .exercises: "figure.run"
         case .aiGenerate: "aiGenerate_icon"
         case .nodes: "shareplay"
+        case .practices: "practices_icon"
 //        case .test: "search_icon"
         }
     }
