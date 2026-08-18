@@ -10,7 +10,7 @@ import EventKitUI
 public enum CalendarFilterType: String, CaseIterable, Identifiable {
     case all = "All"
     case meal = "Meal"
-    case training = "Yoga"
+    case training = "Training"
     case practice = "Practices"
     public var id: String { self.rawValue }
 }

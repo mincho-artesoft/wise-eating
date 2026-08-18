@@ -105,6 +105,7 @@ struct ProfileWizardView: View {
     @State private var draftMeal: Meal?
     @State private var draftTraining: Training?
     @State private var path = NavigationPath()
+    @State private var scheduledConstitution: AyurvedaDoshaDistribution?
 
     // MARK: - UI State
     enum FocusableWizardField: Hashable {
@@ -240,10 +241,9 @@ struct ProfileWizardView: View {
     private var stepsSequence: [WizardStep] {
         var steps: [WizardStep] = [.name, .photo, .birthday, .gender]
         
-        steps.append(contentsOf: [.height, .weight])
+        steps.append(contentsOf: [.height, .weight, .constitution])
         
         steps.append(contentsOf: [.meals, .trainings, .vitamins, .minerals, .allergens])
-        steps.append(.constitution)
         steps.append(.summary)
         return steps
     }
@@ -862,7 +862,7 @@ struct ProfileWizardView: View {
         AyurvedaConstitutionOnboardingStepView(
             draft: $data.ayurvedaConstitution,
             onBack: backStep,
-            onContinue: nextStep,
+            onContinue: continueFromConstitution,
             onHeaderChange: { title, subtitle in
                 constitutionStepTitle = title
                 constitutionStepSubtitle = subtitle
@@ -1014,6 +1014,107 @@ struct ProfileWizardView: View {
                 currentStep = stepsSequence[currentIndex - 1]
             }
         }
+    }
+
+    private struct DoshaTimeAnchors {
+        let vata: Int
+        let pitta: Int
+        let kapha: Int
+
+        func blendedMinutes(
+            for distribution: AyurvedaDoshaDistribution,
+            roundedTo interval: Int = 5
+        ) -> Int {
+            let minutes = Int((
+                distribution.vata * Double(vata) +
+                distribution.pitta * Double(pitta) +
+                distribution.kapha * Double(kapha)
+            ).rounded())
+            guard interval > 1 else { return minutes }
+            return Int((Double(minutes) / Double(interval)).rounded()) * interval
+        }
+    }
+
+    private func continueFromConstitution() {
+        if let distribution = data.ayurvedaConstitution?.prakriti,
+           distribution != scheduledConstitution {
+            applyDinacharyaDefaults(for: distribution)
+            scheduledConstitution = distribution
+        }
+        nextStep()
+    }
+
+    private func applyDinacharyaDefaults(
+        for distribution: AyurvedaDoshaDistribution
+    ) {
+        // The daily dosha clock is shared. These anchors only personalize where
+        // inside the researched Dinacharya windows each default should sit.
+        let exercise = DoshaTimeAnchors(vata: 420, pitta: 390, kapha: 360)
+        let exerciseDuration = DoshaTimeAnchors(vata: 30, pitta: 40, kapha: 50)
+        let breakfast = DoshaTimeAnchors(vata: 480, pitta: 480, kapha: 510)
+        let lunch = DoshaTimeAnchors(vata: 735, pitta: 720, kapha: 750)
+        let dinner = DoshaTimeAnchors(vata: 1_110, pitta: 1_110, kapha: 1_080)
+
+        let exerciseStartMinutes = exercise.blendedMinutes(for: distribution)
+        let exerciseDurationMinutes = exerciseDuration.blendedMinutes(
+            for: distribution
+        )
+        let suggestedBreakfastMinutes = breakfast.blendedMinutes(
+            for: distribution
+        )
+        let breakfastStartMinutes = max(
+            suggestedBreakfastMinutes,
+            exerciseStartMinutes + exerciseDurationMinutes + 30
+        )
+
+        let exerciseStart = wizardTime(minutesFromMidnight: exerciseStartMinutes)
+        let exerciseEnd = wizardTime(
+            minutesFromMidnight: exerciseStartMinutes + exerciseDurationMinutes
+        )
+        let breakfastStart = wizardTime(minutesFromMidnight: breakfastStartMinutes)
+        let lunchStart = wizardTime(
+            minutesFromMidnight: lunch.blendedMinutes(for: distribution)
+        )
+        let dinnerStart = wizardTime(
+            minutesFromMidnight: dinner.blendedMinutes(for: distribution)
+        )
+
+        let mealDuration: TimeInterval = 2 * 60 * 60
+        data.meals = [
+            Meal(
+                name: "Breakfast",
+                startTime: breakfastStart,
+                endTime: breakfastStart.addingTimeInterval(mealDuration)
+            ),
+            Meal(
+                name: "Lunch",
+                startTime: lunchStart,
+                endTime: lunchStart.addingTimeInterval(mealDuration)
+            ),
+            Meal(
+                name: "Dinner",
+                startTime: dinnerStart,
+                endTime: dinnerStart.addingTimeInterval(mealDuration)
+            ),
+        ]
+
+        data.trainings = [
+            Training(
+                name: "Morning Workout",
+                startTime: exerciseStart,
+                endTime: exerciseEnd
+            ),
+        ]
+    }
+
+    private func wizardTime(minutesFromMidnight: Int) -> Date {
+        let calendar = Calendar.current
+        let startOfDay = calendar.startOfDay(for: .now)
+        return calendar.date(
+            byAdding: .minute,
+            value: minutesFromMidnight,
+            to: startOfDay
+        ) ?? startOfDay
     }
     
     // MARK: - Logic & Meal/Training Management
