@@ -10,54 +10,75 @@ import EventKitUI
 public enum CalendarFilterType: String, CaseIterable, Identifiable {
     case all = "All"
     case meal = "Meal"
-    case training = "Training"
+    case training = "Yoga"
+    case practice = "Practices"
     public var id: String { self.rawValue }
 }
 
-fileprivate struct FilterSegmentedControlView: View {
-    @Binding var currentFilter: CalendarFilterType
-    @ObservedObject private var effectManager = EffectManager.shared
-
-    var body: some View {
-        WrappingSegmentedControl(selection: $currentFilter, layoutMode: .wrap)
-    }
-}
-
-// +++ НАЧАЛО НА ПРОМЯНАТА (1/6): Нов SwiftUI изглед, който комбинира бутона и филтъра +++
 fileprivate struct CalendarToolbarItemsView: View {
     var onNodesTapped: () -> Void
     @Binding var currentFilter: CalendarFilterType
     @ObservedObject private var effectManager = EffectManager.shared
+    @Namespace private var filterAnimation
 
     var body: some View {
-        HStack(spacing: 2) { // Връщаме оригиналното разстояние
-            // 1. "Nodes" бутон, стилизиран като елемент от филтъра
-            Button(action: {
-                UIImpactFeedbackGenerator(style: .light).impactOccurred()
-                onNodesTapped()
-            }) {
-                HStack(spacing: 6) {
-                    Text("Notes")
-                        .font(.caption)
-                        .fontWeight(.semibold)
+        VStack(spacing: 6) {
+            HStack(spacing: 8) {
+                Spacer()
 
-                    Image(systemName: "list.clipboard")
-                        .font(.caption)
+                Button {
+                    UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                    onNodesTapped()
+                } label: {
+                    Label("Notes", systemImage: "list.clipboard")
+                        .font(.caption.weight(.semibold))
+                        .padding(.vertical, 6)
+                        .padding(.horizontal, 12)
+                        .foregroundStyle(effectManager.currentGlobalAccentColor)
                 }
-                .padding(.vertical, 6)
-                .padding(.horizontal, 12)
-                .foregroundStyle(effectManager.currentGlobalAccentColor)
+                .buttonStyle(.plain)
+                .glassCardStyle(cornerRadius: 20)
             }
-            .buttonStyle(.plain)
-            .glassCardStyle(cornerRadius: 20)
 
-
-            // 2. Съществуващият филтър
-            FilterSegmentedControlView(currentFilter: $currentFilter)
+            HStack(spacing: 4) {
+                ForEach(CalendarFilterType.allCases) { filter in
+                    filterButton(filter)
+                        .frame(maxWidth: .infinity)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .center)
         }
+        .frame(maxWidth: .infinity)
+    }
+
+    private func filterButton(_ filter: CalendarFilterType) -> some View {
+        let isSelected = currentFilter == filter
+
+        return Button {
+            guard currentFilter != filter else { return }
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.72)) {
+                currentFilter = filter
+            }
+        } label: {
+            Text(filter.rawValue)
+                .font(.caption.weight(.semibold))
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 6)
+                .foregroundStyle(effectManager.currentGlobalAccentColor)
+                .contentShape(Capsule())
+                .background {
+                    if isSelected {
+                        Capsule()
+                            .fill(Color.clear)
+                            .glassCardStyle(cornerRadius: 20)
+                            .matchedGeometryEffect(id: "calendar-filter", in: filterAnimation)
+                    }
+                }
+        }
+        .buttonStyle(.plain)
     }
 }
-// +++ КРАЙ НА ПРОМЯНАТА (1/6) +++
 
 
 public final class TwoWayPinnedSingleDayMultiCalendarContainerView: UIView,
@@ -69,6 +90,8 @@ public final class TwoWayPinnedSingleDayMultiCalendarContainerView: UIView,
 
     private var calendarsChangedObserver: NSObjectProtocol?
     private var didScrollToNow = false
+    private var sleepLoadTask: Task<Void, Never>?
+    private var loadedSleepDay: Date?
 
     // MARK: - Theme Management
     private var backgroundHostingController: UIHostingController<ThemeBackgroundView>?
@@ -87,6 +110,7 @@ public final class TwoWayPinnedSingleDayMultiCalendarContainerView: UIView,
     public var fromDate: Date = Date() {
         didSet {
             weekView.fromDate = fromDate
+            reloadSleepHighlightsIfNeeded()
             setNeedsLayout()
         }
     }
@@ -95,6 +119,11 @@ public final class TwoWayPinnedSingleDayMultiCalendarContainerView: UIView,
     
     public var onEventTap: ((EventDescriptor) -> Void)? {
         didSet { weekView.onEventTap = onEventTap }
+    }
+    public var onEventMenuPresentationChanged: ((Bool) -> Void)? {
+        didSet {
+            weekView.onEditMenuPresentationChanged = onEventMenuPresentationChanged
+        }
     }
     public var onEventDeleted: ((EventDescriptor) -> Void)? {
         didSet { weekView.onEventDeleted = onEventDeleted }
@@ -180,7 +209,7 @@ public final class TwoWayPinnedSingleDayMultiCalendarContainerView: UIView,
            }
        }
     
-    fileprivate let navBarHeight: CGFloat     = 50
+    fileprivate let navBarHeight: CGFloat     = 82
     fileprivate let daysHeaderHeight: CGFloat = 20
     fileprivate let leftColumnWidth: CGFloat  = 55
     
@@ -198,7 +227,7 @@ public final class TwoWayPinnedSingleDayMultiCalendarContainerView: UIView,
     // ---------------------------------------------------------
     fileprivate let calendarsHeaderScrollView = UIScrollView()
     fileprivate let calendarsHeaderView       = CalendarsHeaderView()
-    fileprivate let calendarsHeaderHeight: CGFloat = 30
+    fileprivate let calendarsHeaderHeight: CGFloat = 0
     
     private var profile: Profile
     
@@ -222,6 +251,12 @@ public final class TwoWayPinnedSingleDayMultiCalendarContainerView: UIView,
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(checkForUnreadNotifications),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(reloadSleepHighlightsAfterForeground),
             name: UIApplication.willEnterForegroundNotification,
             object: nil
         )
@@ -257,9 +292,35 @@ public final class TwoWayPinnedSingleDayMultiCalendarContainerView: UIView,
     }
     
     deinit {
+        sleepLoadTask?.cancel()
         redrawTimer?.invalidate()
         clockTimer?.invalidate()
         NotificationCenter.default.removeObserver(self)
+    }
+
+    private func reloadSleepHighlightsIfNeeded(force: Bool = false) {
+        let day = Calendar.current.startOfDay(for: fromDate)
+        if !force, let loadedSleepDay, Calendar.current.isDate(loadedSleepDay, inSameDayAs: day) {
+            return
+        }
+
+        loadedSleepDay = day
+        sleepLoadTask?.cancel()
+        weekView.sleepIntervals = []
+
+        sleepLoadTask = Task { @MainActor [weak self] in
+            let intervals = await SleepHealthStore.shared.sleepIntervals(for: day)
+            guard !Task.isCancelled,
+                  let self,
+                  Calendar.current.isDate(self.fromDate, inSameDayAs: day) else {
+                return
+            }
+            self.weekView.sleepIntervals = intervals
+        }
+    }
+
+    @objc private func reloadSleepHighlightsAfterForeground() {
+        reloadSleepHighlightsIfNeeded(force: true)
     }
 
     // ---------------------------------------------------------
@@ -405,6 +466,7 @@ public final class TwoWayPinnedSingleDayMultiCalendarContainerView: UIView,
         calendarsHeaderScrollView.bounces = false
         calendarsHeaderScrollView.delegate = self
         calendarsHeaderScrollView.layer.zPosition = 4
+        calendarsHeaderScrollView.isHidden = true
         
         if #available(iOS 11.0, *) {
             calendarsHeaderScrollView.contentInsetAdjustmentBehavior = .never
@@ -479,7 +541,7 @@ public final class TwoWayPinnedSingleDayMultiCalendarContainerView: UIView,
         // Позиционираме етикета за месеца вляво
         monthLabel.frame = CGRect(
             x: 10,
-            y: (navBar.bounds.height - monthLabel.bounds.height) / 2,
+            y: (34 - monthLabel.bounds.height) / 2,
             width: monthLabel.bounds.width,
             height: monthLabel.bounds.height
         )
@@ -487,25 +549,12 @@ public final class TwoWayPinnedSingleDayMultiCalendarContainerView: UIView,
 
         // +++ НАЧАЛО НА ПРОМЯНАТА (5/6): Позиционираме единствения toolbar +++
         // Позиционираме обединения toolbar вдясно, като динамично изчисляваме ширината му
-        let toolbarHeight: CGFloat = 34
-        let rightPadding: CGFloat = 10
-        let spacing: CGFloat = 8 // Разстояние между месеца и инструментите
-        
-        // 1. Изчисляваме максимално наличната ширина за лентата с инструменти
-        let availableToolbarWidth = navBar.bounds.width - monthLabel.frame.maxX - spacing - rightPadding
-        
-        // 2. Оставяме SwiftUI да изчисли идеалния размер, НО го ограничаваме до наличната ширина
-        let idealToolbarSize = toolbarHostingController!.view.sizeThatFits(CGSize(width: availableToolbarWidth, height: toolbarHeight))
-        let finalToolbarWidth = min(availableToolbarWidth, idealToolbarSize.width)
-
-        // 3. Позиционираме лентата с инструменти вдясно
-        let toolbarX = navBar.bounds.width - finalToolbarWidth - rightPadding
-        let toolbarY = (navBar.bounds.height - toolbarHeight) / 2
-        
+        let toolbarHeight: CGFloat = 72
+        let horizontalPadding: CGFloat = 10
         toolbarHostingController?.view.frame = CGRect(
-            x: toolbarX,
-            y: toolbarY,
-            width: finalToolbarWidth,
+            x: horizontalPadding,
+            y: 0,
+            width: navBar.bounds.width - (horizontalPadding * 2),
             height: toolbarHeight
         )
         // +++ КРАЙ НА ПРОМЯНАТА (5/6) +++

@@ -555,6 +555,9 @@ extension CalendarViewModel {
                        if decoded.starts(with: "#TRAINING#") {
                            return false
                        }
+                       if decoded.starts(with: PracticeCalendarEvent.marker) {
+                           return false
+                       }
                    }
                    
                    // Правило 2: Ако името съвпада с шаблон за тренировка, изключваме.

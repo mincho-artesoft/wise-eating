@@ -65,6 +65,9 @@ public final class Profile {
 
     @Relationship(deleteRule: .cascade)
     public var nodes: [Node] = []
+
+    @Relationship(deleteRule: .cascade, inverse: \PracticeSession.profile)
+    public var practiceSessions: [PracticeSession] = []
     // --- END OF CHANGE ---
     
     @Relationship(deleteRule: .cascade)

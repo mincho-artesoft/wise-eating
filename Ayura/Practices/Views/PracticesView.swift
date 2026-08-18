@@ -96,6 +96,9 @@ struct PracticesView: View {
     let profile: Profile
     @Binding var globalSearchText: String
     @Binding var selectedTab: AppTab
+    let onDismissSearch: () -> Void
+    let onHideSearchButton: () -> Void
+    let onShowSearchButton: () -> Void
 
     @Environment(\.safeAreaInsets) private var safeAreaInsets
     @Query(sort: \Practice.catalogNumber) private var practices: [Practice]
@@ -215,7 +218,10 @@ struct PracticesView: View {
                                     PracticeEntryView(
                                         practice: practice,
                                         profile: profile,
-                                        selectedTab: $selectedTab
+                                        selectedTab: $selectedTab,
+                                        onDismissSearch: onDismissSearch,
+                                        onHideSearchButton: onHideSearchButton,
+                                        onShowSearchButton: onShowSearchButton
                                     )
                                 } label: {
                                     PracticeLibraryRow(practice: practice)
@@ -278,14 +284,33 @@ struct PracticesView: View {
     }
 
     private var header: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text("Practices")
-                .font(.system(size: 34, weight: .bold, design: .rounded))
-            Text("Meditation, breath and deep rest")
-                .font(.subheadline)
-                .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.7))
+        HStack(alignment: .center, spacing: 12) {
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Practices")
+                    .font(.system(size: 34, weight: .bold, design: .rounded))
+                Text("Meditation, breath and deep rest")
+                    .font(.subheadline)
+                    .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.7))
+            }
+
+            Spacer(minLength: 8)
+
+            NavigationLink {
+                PracticeHistoryView(
+                    profile: profile,
+                    selectedTab: $selectedTab,
+                    globalSearchText: $globalSearchText
+                )
+            } label: {
+                Label("History", systemImage: "clock.arrow.circlepath")
+                    .font(.caption.weight(.semibold))
+                    .padding(.horizontal, 12)
+                    .frame(height: 38)
+                    .glassCardStyle(cornerRadius: 19)
+            }
+            .buttonStyle(.plain)
+            .accessibilityHint("Shows the history of completed and ended practices")
         }
-        .accessibilityElement(children: .combine)
     }
 
     private var rightNowCard: some View {
@@ -313,10 +338,20 @@ struct PracticesView: View {
                     PracticeEntryView(
                         practice: suggested,
                         profile: profile,
-                        selectedTab: $selectedTab
+                        selectedTab: $selectedTab,
+                        onDismissSearch: onDismissSearch,
+                        onHideSearchButton: onHideSearchButton,
+                        onShowSearchButton: onShowSearchButton
                     )
                 } label: {
                     HStack(spacing: 12) {
+                        PracticeThumbnailView(
+                            practice: suggested,
+                            centralContentDiameter: 36,
+                            donutRingThickness: 3,
+                            canalRingThickness: 3
+                        )
+
                         VStack(alignment: .leading, spacing: 3) {
                             Text("Suggested")
                                 .font(.caption.weight(.semibold))
@@ -500,13 +535,25 @@ private struct PracticeLibraryRow: View {
     }
 }
 
-private struct PracticeThumbnailView: View {
+struct PracticeThumbnailView: View {
     let practice: Practice
     @ObservedObject private var effectManager = EffectManager.shared
 
-    private let centralContentDiameter: CGFloat = 60
-    private let donutRingThickness: CGFloat = 5
-    private let canalRingThickness: CGFloat = 5
+    private let centralContentDiameter: CGFloat
+    private let donutRingThickness: CGFloat
+    private let canalRingThickness: CGFloat
+
+    init(
+        practice: Practice,
+        centralContentDiameter: CGFloat = 60,
+        donutRingThickness: CGFloat = 5,
+        canalRingThickness: CGFloat = 5
+    ) {
+        self.practice = practice
+        self.centralContentDiameter = centralContentDiameter
+        self.donutRingThickness = donutRingThickness
+        self.canalRingThickness = canalRingThickness
+    }
 
     private var doshaSegments: [NutrientProportionData] {
         [
@@ -544,17 +591,6 @@ private struct PracticeThumbnailView: View {
         canalRingOuterDiameter + (2 * donutRingThickness)
     }
 
-    private var symbol: String {
-        switch practice.kind {
-        case "meditation": "brain.head.profile"
-        case "visualisation": "eye"
-        case "pranayama": "wind"
-        case "relaxation": "moon.zzz"
-        case "kriya": "sparkles"
-        default: "circle.hexagongrid"
-        }
-    }
-
     var body: some View {
         ZStack {
             TubularRingStroke(
@@ -575,9 +611,13 @@ private struct PracticeThumbnailView: View {
                 )
             }
 
-            Circle()
-                .fill(effectManager.currentGlobalAccentColor.opacity(0.05))
+            PracticeArtworkView(practice: practice)
                 .frame(width: centralContentDiameter, height: centralContentDiameter)
+                .clipShape(Circle())
+                .overlay {
+                    Circle()
+                        .fill(.black.opacity(0.08))
+                }
                 .overlay {
                     Circle()
                         .stroke(
@@ -600,10 +640,6 @@ private struct PracticeThumbnailView: View {
                             lineWidth: 1.5
                         )
                 }
-
-            Image(systemName: symbol)
-                .font(.system(size: centralContentDiameter * 0.45, weight: .medium))
-                .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.9))
                 .ringCenterDepth(scale: centralContentDiameter / 60)
         }
         .frame(width: totalDiameter, height: totalDiameter)
@@ -723,5 +759,7 @@ func kindDisplayName(_ kind: String) -> String {
 func practiceDuration(_ seconds: Int) -> String {
     let minutes = seconds / 60
     let remainder = seconds % 60
-    return remainder == 0 ? "\(minutes) min" : "\(minutes):\(String(format: "%02d", remainder))"
+    return remainder == 0
+        ? "\(minutes) min"
+        : "\(minutes):\(String(format: "%02d", remainder)) min"
 }

@@ -33,6 +33,7 @@ open class EventView: UIView {
     private var shoppingListHost: UIHostingController<ShoppingListRowsView>?
     // +++ НОВО: Добавляем хост для тренировок +++
     private var trainingHost: UIHostingController<TrainingRowsView>?
+    private var practiceHost: UIHostingController<PracticeCalendarRowView>?
     
     private var pageIndicatorHost: UIHostingController<PageIndicatorView>?
     private var pageState = PageState()
@@ -100,6 +101,8 @@ open class EventView: UIView {
 
         if let shoppingPayload = shoppingListPayload(from: wrap.realEvent) {
             configureForShoppingList(payload: shoppingPayload, wrapper: wrap)
+        } else if PracticeCalendarEvent.isPractice(wrap.realEvent) {
+            configureForPractice(wrapper: wrap)
         } else if isTrainingEvent(wrap.realEvent) {
             configureForTraining(wrapper: wrap)
         } else {
@@ -212,6 +215,17 @@ open class EventView: UIView {
                 height: max(0, availableHeight)
             )
         }
+
+        if let host = practiceHost {
+            let bottomPadding: CGFloat = 8
+            let availableHeight = bounds.height - currentY - bottomPadding
+            host.view.frame = CGRect(
+                x: mealTitleLabel.frame.minX,
+                y: currentY,
+                width: availableWidth,
+                height: max(0, availableHeight)
+            )
+        }
         
         if let indicatorHost = pageIndicatorHost {
             let indicatorHeight: CGFloat = 10
@@ -260,6 +274,7 @@ open class EventView: UIView {
         
         mealHost?.view.removeFromSuperview(); mealHost = nil
         trainingHost?.view.removeFromSuperview(); trainingHost = nil
+        practiceHost?.view.removeFromSuperview(); practiceHost = nil
         pageIndicatorHost?.view.removeFromSuperview(); pageIndicatorHost = nil
         
         mealTitleLabel.text = w.realEvent.title
@@ -355,9 +370,11 @@ open class EventView: UIView {
     ) {
         shoppingListHost?.view.removeFromSuperview(); shoppingListHost = nil
         trainingHost?.view.removeFromSuperview(); trainingHost = nil
+        practiceHost?.view.removeFromSuperview(); practiceHost = nil
 
+        let themeTextColor = UIColor(effectManager.currentGlobalAccentColor)
         mealTitleLabel.text      = w.realEvent.title
-        mealTitleLabel.textColor = w.color
+        mealTitleLabel.textColor = themeTextColor
 
         let showList = !rows.isEmpty && bounds.height >= 80
         mealTitleLabel.isHidden = !showList
@@ -391,7 +408,7 @@ open class EventView: UIView {
         if !rows.isEmpty {
             textView.attributedText = makeCompactString(
                 title: w.realEvent.title,
-                titleColor: w.color,
+                titleColor: themeTextColor,
                 rows: rows
             )
         } else {
@@ -407,11 +424,12 @@ open class EventView: UIView {
         // Почистваме хостовете от другите типове съдържание
         mealHost?.view.removeFromSuperview(); mealHost = nil
         shoppingListHost?.view.removeFromSuperview(); shoppingListHost = nil
+        practiceHost?.view.removeFromSuperview(); practiceHost = nil
         pageIndicatorHost?.view.removeFromSuperview(); pageIndicatorHost = nil
         
         // Задаваме заглавието и цвета
         mealTitleLabel.text = w.realEvent.title
-        mealTitleLabel.textColor = w.color
+        mealTitleLabel.textColor = UIColor(effectManager.currentGlobalAccentColor)
     
         // Взимаме упражненията от payload-а
         let training = Training(event: w.realEvent)
@@ -459,6 +477,105 @@ open class EventView: UIView {
             textView.attributedText = makeFallbackStringForTraining(for: w)
             textView.isHidden = false
         }
+    }
+
+    private func configureForPractice(wrapper w: EKMultiDayWrapper) {
+        mealHost?.view.removeFromSuperview(); mealHost = nil
+        shoppingListHost?.view.removeFromSuperview(); shoppingListHost = nil
+        trainingHost?.view.removeFromSuperview(); trainingHost = nil
+        pageIndicatorHost?.view.removeFromSuperview(); pageIndicatorHost = nil
+
+        let practiceTextColor = UIColor(effectManager.currentGlobalAccentColor)
+        mealTitleLabel.text = w.realEvent.title
+        mealTitleLabel.textColor = practiceTextColor
+
+        let showDetails = bounds.height >= 80
+        mealTitleLabel.isHidden = !showDetails
+
+        if showDetails {
+            textView.removeFromSuperview()
+
+            let session = practiceSession(from: w.realEvent)
+            let practice = practice(for: session)
+            let row = PracticeCalendarRowView(
+                kind: session?.practiceKind ?? "Practice",
+                artworkAssetName: session?.artworkAssetName,
+                doshaVata: practice?.doshaVata ?? 0,
+                doshaPitta: practice?.doshaPitta ?? 0,
+                doshaKapha: practice?.doshaKapha ?? 0,
+                startedAt: w.realEvent.startDate,
+                endedAt: w.realEvent.endDate,
+                accentColor: w.color,
+                textColor: practiceTextColor
+            )
+
+            if let host = practiceHost {
+                host.rootView = row
+            } else {
+                let host = UIHostingController(rootView: row)
+                host.view.backgroundColor = .clear
+                contentContainerView.addSubview(host.view)
+                practiceHost = host
+            }
+            return
+        }
+
+        practiceHost?.view.removeFromSuperview(); practiceHost = nil
+
+        if textView.superview == nil {
+            contentContainerView.addSubview(textView)
+        }
+
+        let icon = NSTextAttachment()
+        icon.image = UIImage(named: "practices_icon")?
+            .withTintColor(practiceTextColor, renderingMode: .alwaysOriginal)
+        icon.bounds = CGRect(x: 0, y: -2, width: 15, height: 15)
+
+        let text = NSMutableAttributedString(attachment: icon)
+        text.append(
+            NSAttributedString(
+                string: " \(w.realEvent.title ?? "Practice")",
+                attributes: [
+                    .font: UIFont.systemFont(ofSize: 12, weight: .semibold),
+                    .foregroundColor: practiceTextColor,
+                ]
+            )
+        )
+        textView.attributedText = text
+        textView.isHidden = false
+    }
+
+    private func practiceSession(from event: EKEvent) -> PracticeSession? {
+        guard let notes = event.notes,
+              let decoded = OptimizedInvisibleCoder.decode(from: notes) else {
+            return nil
+        }
+
+        let components = decoded.split(separator: "|", omittingEmptySubsequences: false)
+        guard components.count > 1,
+              components[0] == Substring(PracticeCalendarEvent.marker),
+              let sessionID = UUID(uuidString: String(components[1])),
+              let context = modelContext ?? GlobalState.modelContext else {
+            return nil
+        }
+
+        let descriptor = FetchDescriptor<PracticeSession>(
+            predicate: #Predicate { $0.id == sessionID }
+        )
+        return (try? context.fetch(descriptor))?.first
+    }
+
+    private func practice(for session: PracticeSession?) -> Practice? {
+        guard let session,
+              let context = modelContext ?? GlobalState.modelContext else {
+            return nil
+        }
+
+        let practiceID = session.practiceID
+        let descriptor = FetchDescriptor<Practice>(
+            predicate: #Predicate { $0.id == practiceID }
+        )
+        return (try? context.fetch(descriptor))?.first
     }
 
     private func setupPageIndicator(pageCount: Int) {
@@ -512,7 +629,10 @@ open class EventView: UIView {
     
     // --- НАЧАЛО НА ПРОМЯНАТА: Опростяваме makeFallbackStringForMeal ---
     private func makeFallbackStringForMeal(for w: EKMultiDayWrapper) -> NSAttributedString {
-        let attr: [NSAttributedString.Key: Any] = [.font: w.font, .foregroundColor: w.color]
+        let attr: [NSAttributedString.Key: Any] = [
+            .font: w.font,
+            .foregroundColor: UIColor(effectManager.currentGlobalAccentColor),
+        ]
         // Просто връщаме заглавието, без да се опитваме да парсваме съставки.
         // `makeCompactString` се грижи за случаите със съставки в малко пространство.
         return NSAttributedString(string: w.text, attributes: attr)
@@ -520,7 +640,10 @@ open class EventView: UIView {
     // --- КРАЙ НА ПРОМЯНАТА ---
     
     private func makeFallbackStringForTraining(for w: EKMultiDayWrapper) -> NSAttributedString {
-        let attr: [NSAttributedString.Key: Any] = [.font: w.font, .foregroundColor: w.color]
+        let attr: [NSAttributedString.Key: Any] = [
+            .font: w.font,
+            .foregroundColor: UIColor(effectManager.currentGlobalAccentColor),
+        ]
         return NSAttributedString(string: w.text, attributes: attr)
     }
     
@@ -554,7 +677,190 @@ open class EventView: UIView {
               result.append(NSAttributedString(string: "  \(item.name)", attributes: foodAttrs))
           }
           return result
-      }
+    }
+}
+
+private struct PracticeCalendarRowView: View {
+    let kind: String
+    let artworkAssetName: String?
+    let doshaVata: Int
+    let doshaPitta: Int
+    let doshaKapha: Int
+    let startedAt: Date
+    let endedAt: Date
+    let accentColor: UIColor
+    let textColor: UIColor
+
+    private var durationMinutes: Int {
+        max(1, Int((endedAt.timeIntervalSince(startedAt) / 60.0).rounded()))
+    }
+
+    private var displayKind: String {
+        kind.replacingOccurrences(of: "_", with: " ").uppercased()
+    }
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 10) {
+            PracticeCalendarThumbnailView(
+                artworkAssetName: artworkAssetName,
+                doshaVata: doshaVata,
+                doshaPitta: doshaPitta,
+                doshaKapha: doshaKapha,
+                accentColor: accentColor
+            )
+            .padding(.top, 2)
+
+            VStack(alignment: .leading, spacing: 4) {
+                HStack(spacing: 6) {
+                    Text(displayKind)
+                        .font(.system(size: 10, weight: .bold))
+                        .lineLimit(1)
+
+                    Spacer(minLength: 4)
+
+                    Text("\(durationMinutes) min total")
+                        .font(.caption2)
+                        .lineLimit(1)
+                }
+
+                HStack(spacing: 4) {
+                    Image(systemName: "clock")
+                        .font(.caption2)
+
+                    Text("\(startedAt.formatted(date: .omitted, time: .shortened)) – \(endedAt.formatted(date: .omitted, time: .shortened))")
+                        .font(.caption2)
+                        .lineLimit(1)
+                }
+            }
+            .foregroundStyle(Color(uiColor: textColor))
+            .layoutPriority(1)
+        }
+    }
+}
+
+private struct PracticeCalendarThumbnailView: View {
+    let artworkAssetName: String?
+    let doshaVata: Int
+    let doshaPitta: Int
+    let doshaKapha: Int
+    let accentColor: UIColor
+
+    private let centralContentDiameter: CGFloat = 40
+    private let donutRingThickness: CGFloat = 4
+    private let canalRingThickness: CGFloat = 4
+
+    private var doshaSegments: [NutrientProportionData] {
+        [
+            NutrientProportionData(
+                name: "Vata",
+                value: Double(max(-doshaVata, 0)),
+                color: .blue
+            ),
+            NutrientProportionData(
+                name: "Pitta",
+                value: Double(max(-doshaPitta, 0)),
+                color: .orange
+            ),
+            NutrientProportionData(
+                name: "Kapha",
+                value: Double(max(-doshaKapha, 0)),
+                color: .green
+            ),
+        ].filter { $0.value > 0 }
+    }
+
+    private var doshaTotal: Double {
+        doshaSegments.reduce(0) { $0 + $1.value }
+    }
+
+    private var canalRingOuterDiameter: CGFloat {
+        centralContentDiameter + (2 * canalRingThickness)
+    }
+
+    private var arcDrawingRadius: CGFloat {
+        (canalRingOuterDiameter / 2) + (donutRingThickness / 2)
+    }
+
+    private var totalDiameter: CGFloat {
+        canalRingOuterDiameter + (2 * donutRingThickness)
+    }
+
+    var body: some View {
+        ZStack {
+            TubularRingStroke(
+                shape: Circle(),
+                style: Color(uiColor: accentColor).opacity(0.1),
+                strokeStyle: StrokeStyle(lineWidth: donutRingThickness),
+                role: .track
+            )
+            .frame(width: arcDrawingRadius * 2, height: arcDrawingRadius * 2)
+
+            if doshaTotal > 0 {
+                ArcSegmentsView(
+                    proportions: doshaSegments,
+                    effectiveTotalForNormalization: doshaTotal,
+                    arcCenter: CGPoint(x: totalDiameter / 2, y: totalDiameter / 2),
+                    arcDrawingRadius: arcDrawingRadius,
+                    donutRingThickness: donutRingThickness
+                )
+            }
+
+            artwork
+                .frame(width: centralContentDiameter, height: centralContentDiameter)
+                .clipShape(Circle())
+                .overlay {
+                    Circle()
+                        .fill(.black.opacity(0.08))
+                }
+                .overlay {
+                    Circle()
+                        .stroke(
+                            LinearGradient(
+                                colors: [.black.opacity(0.3), .clear],
+                                startPoint: .bottomTrailing,
+                                endPoint: .topLeading
+                            ),
+                            lineWidth: 1
+                        )
+                }
+                .overlay {
+                    Circle()
+                        .stroke(
+                            LinearGradient(
+                                colors: [.white.opacity(0.8), .clear],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            ),
+                            lineWidth: 1.5
+                        )
+                }
+                .ringCenterDepth(scale: centralContentDiameter / 60)
+        }
+        .frame(width: totalDiameter, height: totalDiameter)
+        .contentShape(Circle())
+        .drawingGroup()
+        .accessibilityHidden(true)
+    }
+
+    @ViewBuilder
+    private var artwork: some View {
+        if let artworkAssetName,
+           let image = UIImage(named: artworkAssetName) {
+            Image(uiImage: image)
+                .resizable()
+                .scaledToFill()
+        } else {
+            ZStack {
+                Color(uiColor: accentColor).opacity(0.12)
+                Image("practices_icon")
+                    .resizable()
+                    .renderingMode(.template)
+                    .scaledToFit()
+                    .foregroundStyle(Color(uiColor: accentColor))
+                    .padding(8)
+            }
+        }
+    }
 }
 
 // MARK: – Ghost styles
@@ -633,4 +939,3 @@ extension EventView {
         eventResizeHandles.forEach { $0.isHidden = true }
     }
 }
-

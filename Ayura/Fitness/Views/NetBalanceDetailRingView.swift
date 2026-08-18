@@ -9,6 +9,7 @@ struct NetBalanceDetailRingView: View {
     let totalConsumed: Double
     let totalBurned: Double
     let netBalance: Double
+    let healthActivity: HealthActivitySummary
     let dailyTrainings: [Training]
     let onDismiss: () -> Void
     let profile: Profile
@@ -22,10 +23,11 @@ struct NetBalanceDetailRingView: View {
             .sorted { $0.exercise.name < $1.exercise.name }
     }
     
-    init(totalConsumed: Double, totalBurned: Double, netBalance: Double, dailyTrainings: [Training], onDismiss: @escaping () -> Void, profile: Profile) {
+    init(totalConsumed: Double, totalBurned: Double, netBalance: Double, healthActivity: HealthActivitySummary, dailyTrainings: [Training], onDismiss: @escaping () -> Void, profile: Profile) {
         self.totalConsumed = totalConsumed
         self.totalBurned = totalBurned
         self.netBalance = netBalance
+        self.healthActivity = healthActivity
         self.dailyTrainings = dailyTrainings
         self.onDismiss = onDismiss
         self.profile = profile
@@ -48,13 +50,28 @@ struct NetBalanceDetailRingView: View {
 
             VStack(spacing: 16) {
                 summaryCard
-                
-                listHeader
             }
             .padding(.horizontal)
             // Main content
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 16) {
+                    if healthActivity.hasData {
+                        Text("Health Activity")
+                            .font(.headline)
+                            .foregroundStyle(effectManager.currentGlobalAccentColor)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+
+                        if healthActivity.activeEnergyKilocalories > 0 || healthActivity.stepCount > 0 {
+                            HealthActivityCalorieRowView(activity: healthActivity)
+                        }
+
+                        ForEach(healthActivity.workouts) { workout in
+                            HealthWorkoutActivityRowView(activity: workout)
+                        }
+                    }
+
+                    listHeader
+
                     // --- START OF MODIFICATION: Replaced training list with exercise list ---
                     if allExercisesOfTheDay.isEmpty {
                         ContentUnavailableView("No Exercises Logged", systemImage: "dumbbell")
@@ -89,8 +106,9 @@ struct NetBalanceDetailRingView: View {
                     endPoint: .bottom
                 )
             )
+            .frame(maxHeight: .infinity)
         }
-        Spacer()
+        .frame(maxHeight: .infinity, alignment: .top)
     }
     
     private var summaryCard: some View {

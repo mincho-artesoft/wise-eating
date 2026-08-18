@@ -148,6 +148,11 @@
 				TargetAttributes = {
 					508496242DE5D05D0038A7D5 = {
 						CreatedOnToolsVersion = 16.3;
+						SystemCapabilities = {
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -429,8 +434,8 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "Ayurveda & Asana Yoga uses your calendar to save your meals, shopping lists, and workouts.";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Camera is used to scan barcodes and food items so you can quickly add them to the app.";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Ayurveda & Asana Yoga reads your Health data to track your workouts and activity.";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Ayurveda & Asana Yoga writes your workouts to Health so they appear in your activity history.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Ayurveda & Asana Yoga reads your sleep, steps, active energy, and workouts to highlight sleep and include daily activity in calorie totals.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Ayurveda & Asana Yoga writes workout and activity data to Health when you choose to save or test these features.";
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Ayurveda & Asana Yoga needs to connect to your local server to sync your health data across devices.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
@@ -485,8 +490,8 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "Ayurveda & Asana Yoga uses your calendar to save your meals, shopping lists, and workouts.";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Camera is used to scan barcodes and food items so you can quickly add them to the app.";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "Ayurveda & Asana Yoga reads your Health data to track your workouts and activity.";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Ayurveda & Asana Yoga writes your workouts to Health so they appear in your activity history.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Ayurveda & Asana Yoga reads your sleep, steps, active energy, and workouts to highlight sleep and include daily activity in calorie totals.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Ayurveda & Asana Yoga writes workout and activity data to Health when you choose to save or test these features.";
 				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Ayurveda & Asana Yoga needs to connect to your local server to sync your health data across devices.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;

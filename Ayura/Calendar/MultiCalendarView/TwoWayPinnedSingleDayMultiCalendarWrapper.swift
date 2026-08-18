@@ -7,6 +7,7 @@ public struct TwoWayPinnedSingleDayMultiCalendarWrapper: UIViewControllerReprese
     // MARK: - Bindings & Properties
     @Binding var fromDate: Date
     @Binding var events: [EventDescriptor]
+    @Binding var searchText: String
     
     // --- ПРОМЯНА: Добавено е property за профила ---
     let profile: Profile
@@ -28,6 +29,7 @@ public struct TwoWayPinnedSingleDayMultiCalendarWrapper: UIViewControllerReprese
     
     // +++ НАЧАЛО НА ПРОМЯНАТА: Добавяме новия callback +++
     public var onNodesButtonTapped: (() -> Void)?
+    public var onSystemEventPresentationChanged: ((Bool) -> Void)?
     // +++ КРАЙ НА ПРОМЯНАТА +++
     
     // MARK: - UIViewControllerRepresentable Lifecycle
@@ -70,6 +72,10 @@ public struct TwoWayPinnedSingleDayMultiCalendarWrapper: UIViewControllerReprese
             if let multi = descriptor as? EKMultiDayWrapper {
                 context.coordinator.presentSystemDetails(multi.ekEvent, in: vc)
             }
+        }
+
+        container.onEventMenuPresentationChanged = { isPresented in
+            self.onSystemEventPresentationChanged?(isPresented)
         }
         
         container.onEmptyLongPress = { date, calendar in
@@ -130,6 +136,15 @@ public struct TwoWayPinnedSingleDayMultiCalendarWrapper: UIViewControllerReprese
                 as? TwoWayPinnedSingleDayMultiCalendarContainerView else {
             return
         }
+
+        context.coordinator.parent = self
+        if context.coordinator.lastAppliedSearchText != searchText {
+            context.coordinator.lastAppliedSearchText = searchText
+            let coordinator = context.coordinator
+            DispatchQueue.main.async {
+                coordinator.reloadCurrentRange()
+            }
+        }
         
         // --- НАЧАЛО НА ПРОМЯНАТА (2/5): Синхронизираме състоянието ---
         // Уверяваме се, че UI-то на контейнера винаги отразява състоянието от координатора.
@@ -159,6 +174,7 @@ public struct TwoWayPinnedSingleDayMultiCalendarWrapper: UIViewControllerReprese
     public class Coordinator: NSObject, @preconcurrency EKEventEditViewDelegate, @preconcurrency EKEventViewDelegate {
         var parent: TwoWayPinnedSingleDayMultiCalendarWrapper
         weak var containerView: TwoWayPinnedSingleDayMultiCalendarContainerView?
+        var lastAppliedSearchText: String
         
         // --- НАЧАЛО НА ПРОМЯНАТА (3/5): Координаторът управлява състоянието ---
         var currentFilter: CalendarFilterType = .all
@@ -166,6 +182,7 @@ public struct TwoWayPinnedSingleDayMultiCalendarWrapper: UIViewControllerReprese
 
         init(_ parent: TwoWayPinnedSingleDayMultiCalendarWrapper) {
             self.parent = parent
+            self.lastAppliedSearchText = parent.searchText
             super.init()
 
             NotificationCenter.default.addObserver(
@@ -202,6 +219,7 @@ public struct TwoWayPinnedSingleDayMultiCalendarWrapper: UIViewControllerReprese
             controller.dismiss(animated: true) { [weak self] in
                 Task { @MainActor in
                     self?.reloadCurrentRange()
+                    self?.parent.onSystemEventPresentationChanged?(false)
                 }
             }
         }
@@ -229,6 +247,7 @@ public struct TwoWayPinnedSingleDayMultiCalendarWrapper: UIViewControllerReprese
             controller.dismiss(animated: true) { [weak self] in
                 Task { @MainActor in
                     self?.reloadCurrentRange()
+                    self?.parent.onSystemEventPresentationChanged?(false)
                 }
             }
         }
@@ -244,6 +263,7 @@ public struct TwoWayPinnedSingleDayMultiCalendarWrapper: UIViewControllerReprese
         
         private func isMealEvent(_ event: EKEvent, mealTemplates: Set<String>, trainingTemplates: Set<String>) -> Bool {
             if self.isTrainingEvent(event, mealTemplates: mealTemplates, trainingTemplates: trainingTemplates) { return false }
+            if PracticeCalendarEvent.isPractice(event) { return false }
             let title = event.title ?? ""
             if mealTemplates.contains(title) { return true }
             if let notes = event.notes, let decoded = OptimizedInvisibleCoder.decode(from: notes) {
@@ -261,6 +281,10 @@ public struct TwoWayPinnedSingleDayMultiCalendarWrapper: UIViewControllerReprese
             if trainingTemplates.contains(title) { return true }
             if mealTemplates.contains(title) { return false }
             return false
+        }
+
+        private func isPracticeEvent(_ event: EKEvent) -> Bool {
+            PracticeCalendarEvent.isPractice(event)
         }
         
         public func reloadCurrentRange(debug: Bool = false) {
@@ -292,7 +316,7 @@ public struct TwoWayPinnedSingleDayMultiCalendarWrapper: UIViewControllerReprese
             let mealTemplateNames = Set(parent.profile.meals.map { $0.name })
             let trainingTemplateNames = Set(parent.profile.trainings.map { $0.name })
 
-            let filteredEvents = found.filter { event in
+            let categoryFilteredEvents = found.filter { event in
                 if filter == .all {
                     if let notes = event.notes, let decoded = OptimizedInvisibleCoder.decode(from: notes), decoded.trimmingCharacters(in: .whitespaces).starts(with: "{") {
                         return false
@@ -305,9 +329,19 @@ public struct TwoWayPinnedSingleDayMultiCalendarWrapper: UIViewControllerReprese
                     return self.isMealEvent(event, mealTemplates: mealTemplateNames, trainingTemplates: trainingTemplateNames)
                 case .training:
                     return self.isTrainingEvent(event, mealTemplates: mealTemplateNames, trainingTemplates: trainingTemplateNames)
+                case .practice:
+                    return self.isPracticeEvent(event)
                 default:
                     return true
                 }
+            }
+
+            let query = parent.searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+            let filteredEvents = categoryFilteredEvents.filter { event in
+                guard !query.isEmpty else { return true }
+                return (event.title ?? "").localizedCaseInsensitiveContains(query)
+                    || (event.location ?? "").localizedCaseInsensitiveContains(query)
+                    || event.calendar.title.localizedCaseInsensitiveContains(query)
             }
             
             var descriptors: [EventDescriptor] = []
@@ -356,6 +390,7 @@ public struct TwoWayPinnedSingleDayMultiCalendarWrapper: UIViewControllerReprese
             editVC.eventStore = parent.eventStore
             editVC.event = ekEvent
             editVC.editViewDelegate = self
+            parent.onSystemEventPresentationChanged?(true)
             parentVC.present(editVC, animated: true)
         }
         
@@ -410,12 +445,30 @@ public struct TwoWayPinnedSingleDayMultiCalendarWrapper: UIViewControllerReprese
 
             case .training:
                 _createNewTraining(date: date, in: parentVC, preselectedCalendar: preselectedCalendar)
+
+            case .practice:
+                let alert = UIAlertController(
+                    title: NSLocalizedString("Practices", comment: "Practice calendar event title"),
+                    message: NSLocalizedString(
+                        "Practice events are added automatically when you use a practice.",
+                        comment: "Practice calendar event guidance"
+                    ),
+                    preferredStyle: .alert
+                )
+                alert.addAction(
+                    UIAlertAction(
+                        title: NSLocalizedString("OK", comment: "Confirmation action"),
+                        style: .default
+                    )
+                )
+                parentVC.present(alert, animated: true)
             }
         }
         
         public func handleEventDragOrResize(descriptor: EventDescriptor, newDate: Date, isResize: Bool, isAllDay: Bool) {
             if let multi = descriptor as? EKMultiDayWrapper {
                 let ev = multi.realEvent
+                guard !PracticeCalendarEvent.isPractice(ev) else { return }
                 if ev.hasRecurrenceRules {
                     askUserForRecurring(event: ev, newDate: newDate, isResize: isResize)
                 } else {
@@ -511,6 +564,7 @@ public struct TwoWayPinnedSingleDayMultiCalendarWrapper: UIViewControllerReprese
             eventVC.allowsEditing = true
             eventVC.allowsCalendarPreview = true
             let navVC = UINavigationController(rootViewController: eventVC)
+            parent.onSystemEventPresentationChanged?(true)
             parentVC.present(navVC, animated: true)
         }
     }

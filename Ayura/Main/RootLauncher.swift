@@ -100,6 +100,7 @@ struct RootLauncher: View {
                     allMinerals: allMinerals,
                     context: modelContext
                 )
+
             } else {
                 print("Calendar access not granted. Skipping profile reconstruction from calendars.")
             }

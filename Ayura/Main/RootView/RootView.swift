@@ -87,6 +87,7 @@ struct RootView: View {
     @State private var profilesMenuState: MenuState = .collapsed
     @State private var profilesDrawerContent: ProfilesDrawerContent = .profiles
     @State private var isSearchButtonVisible: Bool = true
+    @State private var isCalendarEventPresentationActive = false
     
     @State private var isPresentingProfileWizard = false
     
@@ -124,8 +125,16 @@ struct RootView: View {
     private func hideSearchButton() { withAnimation { isSearchButtonVisible = false } }
     private func showSearchButton() { withAnimation { isSearchButtonVisible = true } }
 
+    private func allowsGlobalSearch(for tab: AppTab) -> Bool {
+        let contentTab = tab == .search ? previousTab : tab
+        if isCalendarEventPresentationActive && contentTab == .calendar {
+            return false
+        }
+        return ![.aiGenerate, .analytics, .nodes].contains(contentTab)
+    }
+
     private var selectedTabAllowsGlobalSearch: Bool {
-        ![.aiGenerate, .calendar, .analytics, .nodes].contains(selectedTab)
+        allowsGlobalSearch(for: selectedTab)
     }
     
     private var visibleTabs: [AppTab] {
@@ -262,7 +271,7 @@ struct RootView: View {
             DispatchQueue.main.async {
                 let isSheetPresentedAfterDismissal = isPresentingNewProfile || editingProfile != nil || editorState != nil || isPresentingProfileWizard
                 
-                if newTab == .calendar || newTab == .analytics || newTab == .aiGenerate || newTab == .nodes || isSheetPresentedAfterDismissal {
+                if !allowsGlobalSearch(for: newTab) || isSheetPresentedAfterDismissal {
                     if !isAnyAIEditorPresented {
                         isSearchButtonVisible = false
                     }
@@ -638,7 +647,6 @@ struct RootView: View {
                             case .profiles:
                                 ProfileListView(
                                     selectedProfile: $selectedProfile,
-                                    isPresentingNewProfile: $isPresentingNewProfile,
                                     editingProfile: $editingProfile,
                                     isPresentingWizard: $isPresentingProfileWizard,
                                     selectedTab: $selectedTab,
@@ -830,12 +838,28 @@ struct RootView: View {
                 TwoWayPinnedSingleDayMultiCalendarWrapper(
                     fromDate: $pinnedFromDateSingle,
                     events: $pinnedEventsSingle,
+                    searchText: $searchText,
                     profile: profile,
                     goalProgressProvider: { date in goalProgress(on: date) },
                     eventStore: CalendarViewModel.shared.eventStore,
                     onNodesButtonTapped: {
                         withAnimation {
                             self.selectedTab = .nodes
+                        }
+                    },
+                    onSystemEventPresentationChanged: { isPresented in
+                        isCalendarEventPresentationActive = isPresented
+                        if isPresented {
+                            if isSearching {
+                                dismissSearch()
+                            }
+                            withAnimation {
+                                isSearchButtonVisible = false
+                            }
+                        } else {
+                            withAnimation {
+                                isSearchButtonVisible = selectedTabAllowsGlobalSearch
+                            }
                         }
                     }
                 )
@@ -908,7 +932,14 @@ struct RootView: View {
                 PracticesView(
                     profile: profile,
                     globalSearchText: $searchText,
-                    selectedTab: $selectedTab
+                    selectedTab: $selectedTab,
+                    onDismissSearch: dismissSearch,
+                    onHideSearchButton: hideSearchButton,
+                    onShowSearchButton: {
+                        withAnimation {
+                            isSearchButtonVisible = selectedTabAllowsGlobalSearch
+                        }
+                    }
                 )
                     .id(profile)
             }
@@ -988,16 +1019,20 @@ struct RootView: View {
             }
             guard calendarStatus else { permissionState = .calendarDenied; return }
             
-            var notificationStatus = await NotificationManager.shared.getAuthorizationStatus()
+            let notificationStatus = await NotificationManager.shared.getAuthorizationStatus()
             // ПРОМЯНА 3: Ако статусът е notDetermined, питаме потребителя.
             if notificationStatus == .notDetermined {
                 _ = await NotificationManager.shared.requestAuthorization()
                 // Изчакваме малко, за да се обнови статусът (по желание, но полезно при бързи преходи)
                 try? await Task.sleep(nanoseconds: 500_000_000)
             }
+
+            // HealthKit е optional: отказът скрива единствено зоните за сън.
+            // Приложението продължава да работи без error/permission screen.
+            _ = await SleepHealthStore.shared.requestReadAuthorizationIfNeeded()
             
             // ПРОМЯНА 4: Без значение дали потребителят е дал разрешение или е отказал,
-            // ние продължаваме напред към .granted, защото нотификациите са optional.
+            // ние продължаваме напред към .granted, защото нотификациите и HealthKit са optional.
             permissionState = .granted
         }
     }

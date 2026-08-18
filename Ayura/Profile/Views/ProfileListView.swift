@@ -13,7 +13,6 @@ struct ProfileListView: View {
 
     // MARK: - Bindings
     @Binding var selectedProfile:   Profile?
-    @Binding var isPresentingNewProfile: Bool
     @Binding var editingProfile:    Profile?
     @Binding var isPresentingWizard: Bool
     @Binding var selectedTab: AppTab
@@ -26,7 +25,6 @@ struct ProfileListView: View {
     // MARK: - State
     @State private var showingDeleteConfirmation = false
     @State private var profileToDelete: Profile?
-    @State private var showAddProfileChoiceAlert = false
     @State private var profileForAIPlan: Profile? = nil
     
     @State private var hasUnreadNotifications: Bool = false
@@ -35,7 +33,6 @@ struct ProfileListView: View {
 
     init(
         selectedProfile: Binding<Profile?>,
-        isPresentingNewProfile: Binding<Bool>,
         editingProfile: Binding<Profile?>,
         isPresentingWizard: Binding<Bool>,
         selectedTab: Binding<AppTab>,
@@ -44,7 +41,6 @@ struct ProfileListView: View {
         onRequestedUpgrade: @escaping (SubscriptionCategory) -> Void
     ) {
         self._selectedProfile = selectedProfile
-        self._isPresentingNewProfile = isPresentingNewProfile
         self._editingProfile = editingProfile
         self._isPresentingWizard = isPresentingWizard
         self._selectedTab = selectedTab
@@ -111,13 +107,6 @@ struct ProfileListView: View {
         } message: {
             Text("Are you sure you want to delete '\(profileToDelete?.name ?? "this profile")'? This action cannot be undone.")
         }
-        .confirmationDialog("Create New Profile", isPresented: $showAddProfileChoiceAlert, titleVisibility: .visible) {
-            Button("Standard Form") { isPresentingNewProfile = true }
-            Button("Wizard") { isPresentingWizard = true }
-            Button("Cancel", role: .cancel) {}
-        } message: {
-            Text("How would you like to create the new profile?")
-        }
         .sheet(item: $profileForAIPlan) { profile in
             AIPlanGenerationView(profile: profile) {
                 profileForAIPlan = nil
@@ -146,7 +135,7 @@ struct ProfileListView: View {
         HStack {
             Spacer()
             HStack {
-                // + профил – вече ВИНАГИ отваря диалога, без лимит
+                // New profiles always use the guided wizard.
                 Button {
                     handleAddProfileTapped()
                 } label: {
@@ -198,9 +187,8 @@ struct ProfileListView: View {
 
     // MARK: - Helpers
 
-    /// Вече не правим проверка за лимит – просто отваряме Standard/Wizard.
     private func handleAddProfileTapped() {
-        showAddProfileChoiceAlert = true
+        isPresentingWizard = true
     }
 
     private func formatAge(from birthDate: Date) -> String {

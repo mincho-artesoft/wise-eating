@@ -37,6 +37,10 @@ public final class SingleDayTimelineMultiCalendarView: UIView, UIGestureRecogniz
     
     public var dayColumnWidth: CGFloat = 100
     public var hourHeight: CGFloat = 95
+
+    public var sleepIntervals: [DateInterval] = [] {
+        didSet { setNeedsDisplay() }
+    }
     
     // +++ НАЧАЛО НА ПРОМЯНАТА (1/2) +++
     public var profile: Profile?
@@ -47,6 +51,7 @@ public final class SingleDayTimelineMultiCalendarView: UIView, UIGestureRecogniz
     
     // MARK: - Public Callbacks
     public var onEventTap: ((EventDescriptor) -> Void)?
+    public var onEditMenuPresentationChanged: ((Bool) -> Void)?
     public var onEmptyLongPress: ((Date, EKCalendar?) -> Void)?
     public var onEventDragEnded: ((EventDescriptor, Date, Bool) -> Void)?
     public var onEventDragResizeEnded: ((EventDescriptor, Date) -> Void)?
@@ -103,7 +108,8 @@ public final class SingleDayTimelineMultiCalendarView: UIView, UIGestureRecogniz
     @objc private func handleEventViewTap(_ gesture: UITapGestureRecognizer) {
        guard
            let tappedView = gesture.view as? EventView,
-           let descriptor = eventViewToDescriptor[tappedView]
+           let descriptor = eventViewToDescriptor[tappedView],
+           !isPracticeDescriptor(descriptor)
        else { return }
        
        self.currentTappedDescriptor = descriptor
@@ -141,7 +147,8 @@ public final class SingleDayTimelineMultiCalendarView: UIView, UIGestureRecogniz
         menuFor configuration: UIEditMenuConfiguration,
         suggestedActions: [UIMenuElement]
     ) -> UIMenu? {
-        guard let descriptor = currentTappedDescriptor else { return nil }
+        guard let descriptor = currentTappedDescriptor,
+              !isPracticeDescriptor(descriptor) else { return nil }
         
         var existingVideoURL: URL? = nil
         if let notes = (descriptor as? EKMultiDayWrapper)?.realEvent.notes {
@@ -340,13 +347,17 @@ public final class SingleDayTimelineMultiCalendarView: UIView, UIGestureRecogniz
             _ interaction: UIEditMenuInteraction,
             willPresentEditMenuWith configuration: UIEditMenuConfiguration,
             animator: UIEditMenuInteractionAnimating
-        ) {}
+        ) {
+            onEditMenuPresentationChanged?(true)
+        }
         
     private func editMenuInteraction(
             _ interaction: UIEditMenuInteraction,
             willDismissEditMenuWith configuration: UIEditMenuConfiguration,
             animator: UIEditMenuInteractionAnimating
-        ) {}
+        ) {
+            onEditMenuPresentationChanged?(false)
+        }
     
     private func setupTapOnEmptySpace() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapOnEmptySpace(_:)))
@@ -356,7 +367,17 @@ public final class SingleDayTimelineMultiCalendarView: UIView, UIGestureRecogniz
     }
     
     public override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if let eventView = gestureRecognizer.view as? EventView,
+           let descriptor = eventViewToDescriptor[eventView],
+           isPracticeDescriptor(descriptor) {
+            return false
+        }
         return true
+    }
+
+    private func isPracticeDescriptor(_ descriptor: EventDescriptor) -> Bool {
+        guard let wrapper = descriptor as? EKMultiDayWrapper else { return false }
+        return PracticeCalendarEvent.isPractice(wrapper.realEvent)
     }
     
     @objc private func handleTapOnEmptySpace(_ gesture: UITapGestureRecognizer) {
@@ -448,7 +469,12 @@ public final class SingleDayTimelineMultiCalendarView: UIView, UIGestureRecogniz
                 let finalX = xPos + gap
                 let finalW = subColumnWidth - 2 * gap
                 let finalY = yStart + gap
-                let finalH = max(1, (yEnd - yStart) - 2 * gap)
+                let naturalHeight = max(1, (yEnd - yStart) - 2 * gap)
+                let isPracticeEvent = (attr.descriptor as? EKMultiDayWrapper)
+                    .map { PracticeCalendarEvent.isPractice($0.realEvent) } ?? false
+                let minimumHeight: CGFloat = isPracticeEvent ? 44 : 1
+                let remainingDayHeight = max(1, topMargin + hourHeight * 24 - finalY)
+                let finalH = min(max(minimumHeight, naturalHeight), remainingDayHeight)
                 
                 let evView = ensureEventView(index: usedEventViewIndex)
                 usedEventViewIndex += 1
@@ -458,7 +484,11 @@ public final class SingleDayTimelineMultiCalendarView: UIView, UIGestureRecogniz
                 
                 evView.updateWithDescriptor(event: attr.descriptor)
                 eventViewToDescriptor[evView] = attr.descriptor
-                if let multi = attr.descriptor as? EKMultiDayWrapper {
+                if isPracticeEvent {
+                    evView.eventResizeHandles.forEach { $0.isHidden = true }
+                }
+                if let multi = attr.descriptor as? EKMultiDayWrapper,
+                   !isPracticeEvent {
                     var isCurrentlyEditedEventView = false
                     if currentlyEditedEventViewID == multi.realEvent.eventIdentifier {
                         isCurrentlyEditedEventView = true
@@ -540,7 +570,8 @@ public final class SingleDayTimelineMultiCalendarView: UIView, UIGestureRecogniz
     
     @objc private func handleEventViewPan(_ gesture: UILongPressGestureRecognizer) {
         guard let evView = gesture.view as? EventView,
-              let descriptor = eventViewToDescriptor[evView] else { return }
+              let descriptor = eventViewToDescriptor[evView],
+              !isPracticeDescriptor(descriptor) else { return }
 
         switch gesture.state {
         case .began:
@@ -699,6 +730,8 @@ public final class SingleDayTimelineMultiCalendarView: UIView, UIGestureRecogniz
         guard let ctx = UIGraphicsGetCurrentContext() else { return }
 
         let totalWidth = dayColumnWidth * CGFloat(dayCount)
+
+        drawSleepHighlights(in: ctx)
         
         ctx.saveGState()
         ctx.setStrokeColor(style.separatorColor.cgColor)
@@ -799,6 +832,61 @@ public final class SingleDayTimelineMultiCalendarView: UIView, UIGestureRecogniz
             ctx.addLine(to: CGPoint(x: currentDayX2, y: yNow))
             ctx.strokePath()
             ctx.restoreGState()
+        }
+    }
+
+    private func drawSleepHighlights(in context: CGContext) {
+        let calendar = Calendar.current
+        let fillColor = UIColor.systemIndigo.withAlphaComponent(0.13)
+        let strokeColor = UIColor.systemIndigo.withAlphaComponent(0.28)
+        let textColor = UIColor.systemIndigo.withAlphaComponent(0.78)
+
+        for dayIndex in 0..<dayCount {
+            let dayStart = dayStartDate(for: dayIndex)
+            guard let dayEnd = calendar.date(byAdding: .day, value: 1, to: dayStart) else {
+                continue
+            }
+
+            for interval in sleepIntervals where interval.start < dayEnd && interval.end > dayStart {
+                let visibleStart = max(interval.start, dayStart)
+                let visibleEnd = min(interval.end, dayEnd)
+                let yStart = topMargin + dateToY(visibleStart)
+                let yEnd: CGFloat
+                if visibleEnd == dayEnd {
+                    yEnd = topMargin + hourHeight * 24
+                } else {
+                    yEnd = topMargin + dateToY(visibleEnd)
+                }
+
+                let rect = CGRect(
+                    x: CGFloat(dayIndex) * dayColumnWidth + 2,
+                    y: yStart + 1,
+                    width: max(0, dayColumnWidth - 4),
+                    height: max(1, yEnd - yStart - 2)
+                )
+                let path = UIBezierPath(roundedRect: rect, cornerRadius: 8)
+
+                context.saveGState()
+                context.setFillColor(fillColor.cgColor)
+                context.addPath(path.cgPath)
+                context.fillPath()
+                context.setStrokeColor(strokeColor.cgColor)
+                context.setLineWidth(1)
+                context.addPath(path.cgPath)
+                context.strokePath()
+                context.restoreGState()
+
+                guard rect.height >= 26, rect.width >= 70 else { continue }
+                let label = NSLocalizedString("Sleep", comment: "Calendar sleep highlight label")
+                let attributes: [NSAttributedString.Key: Any] = [
+                    .font: UIFont.systemFont(ofSize: 11, weight: .semibold),
+                    .foregroundColor: textColor
+                ]
+                NSString(string: "☾  \(label)").draw(
+                    in: rect.insetBy(dx: 8, dy: 6),
+                    withAttributes: attributes
+                )
+            }
         }
     }
     

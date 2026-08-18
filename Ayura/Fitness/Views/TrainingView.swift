@@ -100,6 +100,7 @@ struct TrainingView: View {
     @State private var dailyTrainings: [Training] = []
     @State private var selectedTrainingID: Training.ID?
     @State private var totalCaloriesConsumedToday: Double = 0.0
+    @State private var healthActivitySummary: HealthActivitySummary = .zero
     
     // +++ НАЧАЛО НА ПРОМЯНАТА (1/2) +++
     // Добавяме състояние, което да следи ID-то на разпънатия ред.
@@ -214,7 +215,7 @@ struct TrainingView: View {
         }
     }
     
-    private var totalCaloriesBurnedToday: Double {
+    private var loggedExerciseCaloriesBurnedToday: Double {
         dailyTrainings.reduce(0.0) { tot, tr in
             let exs = tr.exercises(using: ctx)
             let burn = exs.reduce(0.0) { acc, pair in
@@ -225,6 +226,10 @@ struct TrainingView: View {
             }
             return tot + burn
         }
+    }
+
+    private var totalCaloriesBurnedToday: Double {
+        loggedExerciseCaloriesBurnedToday + healthActivitySummary.activeEnergyKilocalories
     }
 
     private var dailyExerciseAyurvedaComputation: AyurvedaIngredientComputation {
@@ -718,6 +723,7 @@ struct TrainingView: View {
             exerciseSearchVM.exclude(Set(currentExercises.keys))
             await loadNodesForDay()
             await fetchAndCalculateDailyIntake()
+            await fetchHealthActivitySummary()
         }
         .onChange(of: currentExercises) { _, newExercises in
             var newTextValues: [ExerciseItem.ID: String] = [:]
@@ -732,6 +738,7 @@ struct TrainingView: View {
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
             Task {
                 await checkForUnreadNotifications()
+                await fetchHealthActivitySummary()
             }
         }
     }
@@ -770,6 +777,7 @@ struct TrainingView: View {
                 verticalContent: {
                     if let detailType = showingTrainingRingDetail {
                         trainingRingDetailContent(for: detailType)
+                            .id(detailType.id)
                     }
                 },
                 onStateChange: { newState in
@@ -804,7 +812,7 @@ struct TrainingView: View {
                 content: .exercise,
                 onDismiss: dismissRingDetail
             )
-        case .workout, .totalBurned, .netBalance:
+        case .workout:
             if let selectedID = selectedTrainingID,
                let trainingIndex = dailyTrainings.firstIndex(
                    where: { $0.id == selectedID }
@@ -814,35 +822,12 @@ struct TrainingView: View {
                     self.scheduleAutosave()
                 }
 
-                VStack(spacing: 0) {
-                    switch detailType {
-                    case .workout:
-                        WorkoutDetailRingView(
-                            training: trainingBinding.wrappedValue,
-                            onDismiss: dismissRingDetail,
-                            profile: profile,
-                            onSaveChanges: onSaveChangesCallback
-                        )
-                    case .totalBurned:
-                        TotalBurnedDetailRingView(
-                            totalCalories: totalCaloriesBurnedToday,
-                            trainings: dailyTrainings,
-                            profile: profile,
-                            onDismiss: dismissRingDetail
-                        )
-                    case .netBalance:
-                        NetBalanceDetailRingView(
-                            totalConsumed: totalCaloriesConsumedToday,
-                            totalBurned: totalCaloriesBurnedToday,
-                            netBalance: netCalorieBalance,
-                            dailyTrainings: dailyTrainings,
-                            onDismiss: dismissRingDetail,
-                            profile: profile
-                        )
-                    case .ayurveda:
-                        EmptyView()
-                    }
-                }
+                WorkoutDetailRingView(
+                    training: trainingBinding.wrappedValue,
+                    onDismiss: dismissRingDetail,
+                    profile: profile,
+                    onSaveChanges: onSaveChangesCallback
+                )
                 .id(detailType.id)
                 .transition(.opacity.animation(.easeInOut(duration: 0.15)))
             } else {
@@ -850,6 +835,28 @@ struct TrainingView: View {
                     .foregroundColor(effectManager.currentGlobalAccentColor)
                     .padding()
             }
+        case .totalBurned:
+            TotalBurnedDetailRingView(
+                totalCalories: totalCaloriesBurnedToday,
+                healthActivity: healthActivitySummary,
+                trainings: dailyTrainings,
+                profile: profile,
+                onDismiss: dismissRingDetail
+            )
+            .id(detailType.id)
+            .transition(.opacity.animation(.easeInOut(duration: 0.15)))
+        case .netBalance:
+            NetBalanceDetailRingView(
+                totalConsumed: totalCaloriesConsumedToday,
+                totalBurned: totalCaloriesBurnedToday,
+                netBalance: netCalorieBalance,
+                healthActivity: healthActivitySummary,
+                dailyTrainings: dailyTrainings,
+                onDismiss: dismissRingDetail,
+                profile: profile
+            )
+            .id(detailType.id)
+            .transition(.opacity.animation(.easeInOut(duration: 0.15)))
         }
     }
     
@@ -1686,6 +1693,15 @@ struct TrainingView: View {
             }
         }
         await MainActor.run { self.totalCaloriesConsumedToday = total }
+    }
+
+    private func fetchHealthActivitySummary() async {
+        let requestedDate = chosenDate
+        let summary = await SleepHealthStore.shared.activitySummary(for: requestedDate)
+        guard Calendar.current.isDate(chosenDate, inSameDayAs: requestedDate) else {
+            return
+        }
+        healthActivitySummary = summary
     }
     
     private func loadTrainings(preselect idToKeep: Training.ID? = nil) {

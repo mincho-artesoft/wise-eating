@@ -7,6 +7,7 @@ struct TotalBurnedDetailRingView: View {
     @Environment(\.modelContext) private var modelContext
 
     let totalCalories: Double
+    let healthActivity: HealthActivitySummary
     let trainings: [Training]
     let profile: Profile
     let onDismiss: () -> Void
@@ -58,8 +59,25 @@ struct TotalBurnedDetailRingView: View {
           
             
             ScrollView(showsIndicators: false) {
-                
                 VStack(spacing: 16) {
+                    if healthActivity.hasData {
+                        Text("Health Activity")
+                            .font(.headline)
+                            .foregroundStyle(effectManager.currentGlobalAccentColor)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal)
+
+                        if healthActivity.activeEnergyKilocalories > 0 || healthActivity.stepCount > 0 {
+                            HealthActivityCalorieRowView(activity: healthActivity)
+                                .padding(.horizontal)
+                        }
+
+                        ForEach(healthActivity.workouts) { workout in
+                            HealthWorkoutActivityRowView(activity: workout)
+                                .padding(.horizontal)
+                        }
+                    }
+
                     collapsedMuscleGroups
                         .padding(.top, 16)
                     
@@ -103,8 +121,9 @@ struct TotalBurnedDetailRingView: View {
                     endPoint: .bottom
                 )
             )
+            .frame(maxHeight: .infinity)
         }
-        Spacer()
+        .frame(maxHeight: .infinity, alignment: .top)
     }
     
     private var summaryCard: some View {

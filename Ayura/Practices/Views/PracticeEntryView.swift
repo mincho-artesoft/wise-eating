@@ -1,9 +1,13 @@
 import SwiftUI
+import UIKit
 
 struct PracticeEntryView: View {
     let practice: Practice
     let profile: Profile
     @Binding var selectedTab: AppTab
+    let onDismissSearch: () -> Void
+    let onHideSearchButton: () -> Void
+    let onShowSearchButton: () -> Void
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.safeAreaInsets) private var safeAreaInsets
@@ -12,15 +16,22 @@ struct PracticeEntryView: View {
     @State private var selectedVoiceMode: PracticeVoiceMode
     @State private var selectedAmbienceName: String?
     @State private var isPresentingPlayer = false
+    @State private var isPresentingArtwork = false
 
     init(
         practice: Practice,
         profile: Profile,
-        selectedTab: Binding<AppTab>
+        selectedTab: Binding<AppTab>,
+        onDismissSearch: @escaping () -> Void,
+        onHideSearchButton: @escaping () -> Void,
+        onShowSearchButton: @escaping () -> Void
     ) {
         self.practice = practice
         self.profile = profile
         _selectedTab = selectedTab
+        self.onDismissSearch = onDismissSearch
+        self.onHideSearchButton = onHideSearchButton
+        self.onShowSearchButton = onShowSearchButton
         _selectedDuration = State(initialValue: practice.availableDurationOptions.first ?? practice.durationSeconds)
         _selectedVoiceMode = State(initialValue: PracticeAudioDefaults.voiceMode)
         _selectedAmbienceName = State(
@@ -62,6 +73,7 @@ struct PracticeEntryView: View {
 
                 ScrollView {
                     VStack(alignment: .leading, spacing: 24) {
+                        artworkHero
                         titleBlock
                         metadata
                         descriptionBlock
@@ -88,6 +100,11 @@ struct PracticeEntryView: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .navigationBar)
+        .onAppear {
+            onDismissSearch()
+            onHideSearchButton()
+        }
+        .onDisappear(perform: onShowSearchButton)
         .onChange(of: selectedTab) { _, newTab in
             guard newTab != .practices else { return }
             dismiss()
@@ -95,10 +112,20 @@ struct PracticeEntryView: View {
         .fullScreenCover(isPresented: $isPresentingPlayer) {
             PracticePlayerView(
                 practice: practice,
+                profile: profile,
                 duration: selectedDuration,
                 voiceMode: selectedVoiceMode,
                 ambienceResourceName: selectedAmbienceName
             )
+        }
+        .fullScreenCover(isPresented: $isPresentingArtwork) {
+            if let artworkImage {
+                FullscreenImageView(image: artworkImage) {
+                    isPresentingArtwork = false
+                }
+            } else {
+                Color.black.ignoresSafeArea()
+            }
         }
     }
 
@@ -128,6 +155,42 @@ struct PracticeEntryView: View {
             }
         }
         .frame(maxWidth: .infinity, minHeight: 40)
+    }
+
+    private var artworkHero: some View {
+        PracticeArtworkView(practice: practice)
+            .frame(maxWidth: .infinity)
+            .frame(height: 230)
+            .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+            .overlay {
+                LinearGradient(
+                    colors: [.clear, .black.opacity(0.18)],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+                .allowsHitTesting(false)
+            }
+            .overlay {
+                RoundedRectangle(cornerRadius: 24, style: .continuous)
+                    .stroke(.white.opacity(0.34), lineWidth: 1)
+                    .allowsHitTesting(false)
+            }
+            .shadow(color: .black.opacity(0.16), radius: 18, y: 9)
+            .contentShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+            .onTapGesture {
+                guard artworkImage != nil else { return }
+                isPresentingArtwork = true
+            }
+            .accessibilityAddTraits(artworkImage == nil ? [] : .isButton)
+            .accessibilityHint(
+                artworkImage == nil ? "" : "Opens the practice image full screen"
+            )
+    }
+
+    private var artworkImage: UIImage? {
+        guard let assetName = practice.artworkAssetName else { return nil }
+        return UIImage(named: assetName)
     }
 
     private var titleBlock: some View {
