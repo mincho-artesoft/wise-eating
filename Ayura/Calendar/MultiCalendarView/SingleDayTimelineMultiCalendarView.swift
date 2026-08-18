@@ -1,5 +1,7 @@
 import UIKit
 import EventKit
+import SwiftUI
+import Combine
 
 public final class SingleDayTimelineMultiCalendarView: UIView, UIGestureRecognizerDelegate, @preconcurrency UIEditMenuInteractionDelegate {
     var highlightedSubColumn: (dayIndex: Int, calIndex: Int)? = nil
@@ -10,6 +12,9 @@ public final class SingleDayTimelineMultiCalendarView: UIView, UIGestureRecogniz
     
     private var isCurrentlyOverAllDay = false
     private let calendarVM = CalendarViewModel.shared
+    private let effectManager = EffectManager.shared
+    private var themeCancellables = Set<AnyCancellable>()
+    private var sleepTextColor: UIColor = .label
 
     private var ghostEmptySpaceView: EventView?
     private var ghostEmptySpaceDescriptor: EventDescriptor?
@@ -39,6 +44,10 @@ public final class SingleDayTimelineMultiCalendarView: UIView, UIGestureRecogniz
     public var hourHeight: CGFloat = 95
 
     public var sleepIntervals: [DateInterval] = [] {
+        didSet { setNeedsDisplay() }
+    }
+
+    var recommendedSleep: AyurvedaSleepRecommendation? {
         didSet { setNeedsDisplay() }
     }
     
@@ -88,6 +97,7 @@ public final class SingleDayTimelineMultiCalendarView: UIView, UIGestureRecogniz
         setupLongPressForEmptySpace()
         setupTapOnEmptySpace()
         setupEditMenuInteraction()
+        setupSleepThemeObservation()
 
     }
     
@@ -97,6 +107,17 @@ public final class SingleDayTimelineMultiCalendarView: UIView, UIGestureRecogniz
         setupLongPressForEmptySpace()
         setupTapOnEmptySpace()
         setupEditMenuInteraction()
+        setupSleepThemeObservation()
+    }
+
+    private func setupSleepThemeObservation() {
+        effectManager.$currentGlobalAccentColor
+            .receive(on: RunLoop.main)
+            .sink { [weak self] color in
+                self?.sleepTextColor = UIColor(color)
+                self?.setNeedsDisplay()
+            }
+            .store(in: &themeCancellables)
     }
     
     private func setupEditMenuInteraction() {
@@ -835,11 +856,25 @@ public final class SingleDayTimelineMultiCalendarView: UIView, UIGestureRecogniz
         }
     }
 
+    private enum SleepHighlightKind {
+        case recorded
+        case recommended
+        case covered
+        case missed
+
+        var color: UIColor {
+            switch self {
+            case .recorded: .systemIndigo
+            case .recommended: .systemGray
+            case .covered: .systemGreen
+            case .missed: .systemRed
+            }
+        }
+    }
+
     private func drawSleepHighlights(in context: CGContext) {
         let calendar = Calendar.current
-        let fillColor = UIColor.systemIndigo.withAlphaComponent(0.13)
-        let strokeColor = UIColor.systemIndigo.withAlphaComponent(0.28)
-        let textColor = UIColor.systemIndigo.withAlphaComponent(0.78)
+        let now = Date()
 
         for dayIndex in 0..<dayCount {
             let dayStart = dayStartDate(for: dayIndex)
@@ -848,46 +883,331 @@ public final class SingleDayTimelineMultiCalendarView: UIView, UIGestureRecogniz
             }
 
             for interval in sleepIntervals where interval.start < dayEnd && interval.end > dayStart {
-                let visibleStart = max(interval.start, dayStart)
-                let visibleEnd = min(interval.end, dayEnd)
-                let yStart = topMargin + dateToY(visibleStart)
-                let yEnd: CGFloat
-                if visibleEnd == dayEnd {
-                    yEnd = topMargin + hourHeight * 24
-                } else {
-                    yEnd = topMargin + dateToY(visibleEnd)
+                drawSleepInterval(
+                    DateInterval(
+                        start: max(interval.start, dayStart),
+                        end: min(interval.end, dayEnd)
+                    ),
+                    kind: .recorded,
+                    dayIndex: dayIndex,
+                    dayEnd: dayEnd,
+                    in: context
+                )
+            }
+
+            guard let recommendedSleep else { continue }
+            let recommendedIntervals = recommendedSleep.visibleIntervals(
+                on: dayStart,
+                calendar: calendar
+            )
+
+            for recommendedInterval in recommendedIntervals {
+                var coveredIntervals: [DateInterval] = []
+                let elapsedEnd = min(recommendedInterval.end, now)
+                if recommendedInterval.start < elapsedEnd {
+                    let elapsed = DateInterval(
+                        start: recommendedInterval.start,
+                        end: elapsedEnd
+                    )
+                    coveredIntervals = intersections(
+                        between: elapsed,
+                        and: sleepIntervals
+                    )
+                    var cursor = elapsed.start
+                    for coveredInterval in coveredIntervals {
+                        if cursor < coveredInterval.start {
+                            drawSleepInterval(
+                                DateInterval(start: cursor, end: coveredInterval.start),
+                                kind: .missed,
+                                dayIndex: dayIndex,
+                                dayEnd: dayEnd,
+                                in: context
+                            )
+                        }
+                        drawSleepInterval(
+                            coveredInterval,
+                            kind: .covered,
+                            dayIndex: dayIndex,
+                            dayEnd: dayEnd,
+                            in: context
+                        )
+                        drawMatchedSleepLabel(
+                            in: coveredInterval,
+                            recommendationStart: recommendedInterval.start,
+                            dayIndex: dayIndex,
+                            dayEnd: dayEnd
+                        )
+                        cursor = max(cursor, coveredInterval.end)
+                    }
+                    if cursor < elapsed.end {
+                        drawSleepInterval(
+                            DateInterval(start: cursor, end: elapsed.end),
+                            kind: .missed,
+                            dayIndex: dayIndex,
+                            dayEnd: dayEnd,
+                            in: context
+                        )
+                    }
                 }
 
-                let rect = CGRect(
-                    x: CGFloat(dayIndex) * dayColumnWidth + 2,
-                    y: yStart + 1,
-                    width: max(0, dayColumnWidth - 4),
-                    height: max(1, yEnd - yStart - 2)
-                )
-                let path = UIBezierPath(roundedRect: rect, cornerRadius: 8)
+                let futureStart = max(recommendedInterval.start, now)
+                if futureStart < recommendedInterval.end {
+                    drawSleepInterval(
+                        DateInterval(
+                            start: futureStart,
+                            end: recommendedInterval.end
+                        ),
+                        kind: .recommended,
+                        dayIndex: dayIndex,
+                        dayEnd: dayEnd,
+                        in: context
+                    )
+                }
 
-                context.saveGState()
-                context.setFillColor(fillColor.cgColor)
-                context.addPath(path.cgPath)
-                context.fillPath()
-                context.setStrokeColor(strokeColor.cgColor)
-                context.setLineWidth(1)
-                context.addPath(path.cgPath)
-                context.strokePath()
-                context.restoreGState()
-
-                guard rect.height >= 26, rect.width >= 70 else { continue }
-                let label = NSLocalizedString("Sleep", comment: "Calendar sleep highlight label")
-                let attributes: [NSAttributedString.Key: Any] = [
-                    .font: UIFont.systemFont(ofSize: 11, weight: .semibold),
-                    .foregroundColor: textColor
-                ]
-                NSString(string: "☾  \(label)").draw(
-                    in: rect.insetBy(dx: 8, dy: 6),
-                    withAttributes: attributes
+                drawRecommendedSleepLabel(
+                    in: recommendedInterval,
+                    timeRange: recommendedSleep.timeRangeLabel,
+                    healthKitIntervals: healthKitIntervals(
+                        relatedTo: recommendedInterval
+                    ),
+                    coveredIntervals: coveredIntervals,
+                    showMissingHealthKitMessage: recommendedInterval.end <= now,
+                    dayIndex: dayIndex,
+                    dayEnd: dayEnd
                 )
             }
         }
+    }
+
+    private func intersections(
+        between interval: DateInterval,
+        and candidates: [DateInterval]
+    ) -> [DateInterval] {
+        candidates.compactMap { candidate in
+            let start = max(interval.start, candidate.start)
+            let end = min(interval.end, candidate.end)
+            guard start < end else { return nil }
+            return DateInterval(start: start, end: end)
+        }.sorted { $0.start < $1.start }
+    }
+
+    private func healthKitIntervals(
+        relatedTo recommendedInterval: DateInterval
+    ) -> [DateInterval] {
+        let comparisonWindow = DateInterval(
+            start: recommendedInterval.start.addingTimeInterval(-4 * 60 * 60),
+            end: recommendedInterval.end.addingTimeInterval(4 * 60 * 60)
+        )
+        return sleepIntervals.filter { sleepInterval in
+            sleepInterval.start < comparisonWindow.end
+                && sleepInterval.end > comparisonWindow.start
+        }
+    }
+
+    private func drawSleepInterval(
+        _ interval: DateInterval,
+        kind: SleepHighlightKind,
+        dayIndex: Int,
+        dayEnd: Date,
+        in context: CGContext
+    ) {
+        guard interval.start < interval.end else { return }
+        let rect = sleepHighlightRect(
+            for: interval,
+            dayIndex: dayIndex,
+            dayEnd: dayEnd
+        )
+        guard !rect.isEmpty else { return }
+
+        let path = UIBezierPath(roundedRect: rect, cornerRadius: 8)
+        let color = kind.color
+
+        context.saveGState()
+        context.setFillColor(color.withAlphaComponent(0.13).cgColor)
+        context.addPath(path.cgPath)
+        context.fillPath()
+        context.setStrokeColor(color.withAlphaComponent(0.34).cgColor)
+        context.setLineWidth(1)
+        context.addPath(path.cgPath)
+        context.strokePath()
+        context.restoreGState()
+    }
+
+    private func sleepHighlightRect(
+        for interval: DateInterval,
+        dayIndex: Int,
+        dayEnd: Date
+    ) -> CGRect {
+        let yStart = topMargin + dateToY(interval.start)
+        let yEnd = interval.end == dayEnd
+            ? topMargin + hourHeight * 24
+            : topMargin + dateToY(interval.end)
+        return CGRect(
+            x: CGFloat(dayIndex) * dayColumnWidth + 2,
+            y: yStart,
+            width: max(0, dayColumnWidth - 4),
+            height: max(1, yEnd - yStart)
+        )
+    }
+
+    private func drawMatchedSleepLabel(
+        in interval: DateInterval,
+        recommendationStart: Date,
+        dayIndex: Int,
+        dayEnd: Date
+    ) {
+        let rect = sleepHighlightRect(
+            for: interval,
+            dayIndex: dayIndex,
+            dayEnd: dayEnd
+        )
+        let recommendationY = topMargin + dateToY(recommendationStart)
+        guard rect.height >= 24,
+              rect.minY - recommendationY >= 58 else {
+            return
+        }
+
+        let matchedLabel = NSLocalizedString(
+            "Matched",
+            comment: "Calendar recommended and recorded sleep overlap label"
+        )
+        let text = "✓  \(matchedLabel)  \(clockRange(from: interval.start, to: interval.end))  ·  \(durationLabel(interval.duration))"
+        NSString(string: text).draw(
+            in: CGRect(
+                x: rect.minX + 8,
+                y: rect.minY + 6,
+                width: max(0, rect.width - 16),
+                height: 17
+            ),
+            withAttributes: [
+                .font: UIFont.systemFont(ofSize: 11, weight: .bold),
+                .foregroundColor: sleepTextColor.withAlphaComponent(0.95)
+            ]
+        )
+    }
+
+    private func drawRecommendedSleepLabel(
+        in interval: DateInterval,
+        timeRange: String,
+        healthKitIntervals: [DateInterval],
+        coveredIntervals: [DateInterval],
+        showMissingHealthKitMessage: Bool,
+        dayIndex: Int,
+        dayEnd: Date
+    ) {
+        let rect = sleepHighlightRect(
+            for: interval,
+            dayIndex: dayIndex,
+            dayEnd: dayEnd
+        )
+        guard rect.height >= 26, rect.width >= 120 else { return }
+
+        let recommendedLabel = NSLocalizedString(
+            "Recommended sleep",
+            comment: "Calendar recommended sleep highlight label"
+        )
+        var lines: [(text: String, color: UIColor)] = [
+            (
+                "☾  \(recommendedLabel)  \(timeRange)",
+                sleepTextColor.withAlphaComponent(0.95)
+            )
+        ]
+
+        if !healthKitIntervals.isEmpty {
+            let firstStart = healthKitIntervals.map(\.start).min() ?? interval.start
+            let lastEnd = healthKitIntervals.map(\.end).max() ?? interval.end
+            let duration = healthKitIntervals.reduce(0) {
+                $0 + $1.duration
+            }
+            let healthKitLabel = NSLocalizedString(
+                "HealthKit sleep",
+                comment: "Calendar recorded sleep summary label"
+            )
+            lines.append((
+                "♥  \(healthKitLabel)  \(clockRange(from: firstStart, to: lastEnd))  ·  \(durationLabel(duration))",
+                sleepTextColor.withAlphaComponent(0.95)
+            ))
+        } else if showMissingHealthKitMessage {
+            let missingLabel = NSLocalizedString(
+                "No HealthKit sleep data for this night",
+                comment: "Calendar missing recorded sleep message"
+            )
+            lines.append((
+                "!  \(missingLabel)",
+                sleepTextColor.withAlphaComponent(0.95)
+            ))
+        }
+
+        if !coveredIntervals.isEmpty {
+            let duration = coveredIntervals.reduce(0) {
+                $0 + $1.duration
+            }
+            let matchedLabel = NSLocalizedString(
+                "Matched",
+                comment: "Calendar recommended and recorded sleep overlap label"
+            )
+            lines.append((
+                "✓  \(matchedLabel)  \(intervalRangesLabel(coveredIntervals))  ·  \(durationLabel(duration))",
+                sleepTextColor.withAlphaComponent(0.95)
+            ))
+        }
+
+        let lineHeight: CGFloat = 17
+        let availableLineCount = max(
+            1,
+            min(lines.count, Int((rect.height - 8) / lineHeight))
+        )
+        let font = UIFont.systemFont(ofSize: 11, weight: .semibold)
+        for (index, line) in lines.prefix(availableLineCount).enumerated() {
+            let lineRect = CGRect(
+                x: rect.minX + 8,
+                y: rect.minY + 6 + CGFloat(index) * lineHeight,
+                width: max(0, rect.width - 16),
+                height: lineHeight
+            )
+            NSString(string: line.text).draw(
+                in: lineRect,
+                withAttributes: [
+                    .font: font,
+                    .foregroundColor: line.color
+                ]
+            )
+        }
+    }
+
+    private func clockRange(from start: Date, to end: Date) -> String {
+        "\(clockLabel(start))–\(clockLabel(end))"
+    }
+
+    private func intervalRangesLabel(_ intervals: [DateInterval]) -> String {
+        let ranges = intervals.prefix(2).map {
+            clockRange(from: $0.start, to: $0.end)
+        }
+        let remainingCount = max(0, intervals.count - ranges.count)
+        let suffix = remainingCount > 0 ? " +\(remainingCount)" : ""
+        return ranges.joined(separator: ", ") + suffix
+    }
+
+    private func clockLabel(_ date: Date) -> String {
+        let components = Calendar.current.dateComponents([.hour, .minute], from: date)
+        return String(
+            format: "%02d:%02d",
+            components.hour ?? 0,
+            components.minute ?? 0
+        )
+    }
+
+    private func durationLabel(_ duration: TimeInterval) -> String {
+        let totalMinutes = max(0, Int((duration / 60).rounded()))
+        let hours = totalMinutes / 60
+        let minutes = totalMinutes % 60
+        if hours == 0 {
+            return "\(minutes)m"
+        }
+        if minutes == 0 {
+            return "\(hours)h"
+        }
+        return "\(hours)h \(minutes)m"
     }
     
     private func dateToY(_ date: Date) -> CGFloat {

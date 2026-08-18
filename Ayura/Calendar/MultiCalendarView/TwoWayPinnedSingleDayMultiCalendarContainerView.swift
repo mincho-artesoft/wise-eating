@@ -262,6 +262,12 @@ public final class TwoWayPinnedSingleDayMultiCalendarContainerView: UIView,
         )
         NotificationCenter.default.addObserver(
             self,
+            selector: #selector(handleAyurvedaConstitutionChanged(_:)),
+            name: .ayurvedaConstitutionDidChange,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
             selector: #selector(checkForUnreadNotifications),
             name: .unreadNotificationStatusChanged,
             object: nil
@@ -271,6 +277,7 @@ public final class TwoWayPinnedSingleDayMultiCalendarContainerView: UIView,
         startRedrawTimer()
         startClockTimer()
         checkForUnreadNotifications()
+        updateRecommendedSleep()
     }
 
     @objc private func handleCalendarsSelectionChanged(_ note: Notification) {
@@ -321,6 +328,22 @@ public final class TwoWayPinnedSingleDayMultiCalendarContainerView: UIView,
 
     @objc private func reloadSleepHighlightsAfterForeground() {
         reloadSleepHighlightsIfNeeded(force: true)
+    }
+
+    @objc private func handleAyurvedaConstitutionChanged(_ notification: Notification) {
+        guard notification.object == nil
+                || (notification.object as? UUID) == profile.id else {
+            return
+        }
+        updateRecommendedSleep()
+    }
+
+    private func updateRecommendedSleep() {
+        let distribution = AyurvedaConstitutionStore.record(for: profile.id)?
+            .prakriti ?? .balanced
+        weekView.recommendedSleep = AyurvedaSleepRecommendation(
+            distribution: distribution
+        )
     }
 
     // ---------------------------------------------------------
@@ -658,12 +681,17 @@ public final class TwoWayPinnedSingleDayMultiCalendarContainerView: UIView,
     }
     
     public func updateProfile(_ newProfile: Profile) {
+        let profileIDChanged = profile.id != newProfile.id
         self.profile = newProfile
         
         // +++ НАЧАЛО НА ПРОМЯНАТА (2/2) +++
         // Уверяваме се, че и weekView се обновява, когато профилът се смени
         self.weekView.profile = newProfile
         // +++ КРАЙ НА ПРОМЯНАТА (2/2) +++
+
+        if profileIDChanged {
+            updateRecommendedSleep()
+        }
         
         setNeedsLayout()
     }

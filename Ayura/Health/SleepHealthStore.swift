@@ -120,19 +120,35 @@ final class SleepHealthStore {
             guard !Task.isCancelled else { return [] }
 
             let asleepValues = HKCategoryValueSleepAnalysis.allAsleepValues
-            let intervals = samples.compactMap { sample -> DateInterval? in
+            let asleepIntervals = samples.compactMap { sample -> DateInterval? in
                 guard let value = HKCategoryValueSleepAnalysis(rawValue: sample.value),
-                      value == .inBed || asleepValues.contains(value) else {
+                      asleepValues.contains(value),
+                      sample.startDate < sample.endDate else {
                     return nil
                 }
-
-                let start = max(sample.startDate, dayStart)
-                let end = min(sample.endDate, dayEnd)
-                guard start < end else { return nil }
-                return DateInterval(start: start, end: end)
+                return DateInterval(start: sample.startDate, end: sample.endDate)
+            }
+            let inBedIntervals = samples.compactMap { sample -> DateInterval? in
+                guard let value = HKCategoryValueSleepAnalysis(rawValue: sample.value),
+                      value == .inBed,
+                      sample.startDate < sample.endDate else {
+                    return nil
+                }
+                return DateInterval(start: sample.startDate, end: sample.endDate)
             }
 
-            return Self.mergingNearbyIntervals(intervals)
+            // Prefer actual sleep stages for each recorded session. Keep an
+            // "in bed" interval only when that particular session has no
+            // overlapping staged sleep; otherwise one staged sample elsewhere
+            // in the day could incorrectly hide the whole night's data.
+            let inBedFallbacks = inBedIntervals.filter { inBedInterval in
+                !asleepIntervals.contains { asleepInterval in
+                    asleepInterval.start < inBedInterval.end
+                        && asleepInterval.end > inBedInterval.start
+                }
+            }
+            let intervals = asleepIntervals + inBedFallbacks
+            return Self.mergingOverlappingIntervals(intervals)
         } catch {
             return []
         }
@@ -540,8 +556,7 @@ final class SleepHealthStore {
     }
     #endif
 
-    private static func mergingNearbyIntervals(_ intervals: [DateInterval]) -> [DateInterval] {
-        let maximumGap: TimeInterval = 30 * 60
+    private static func mergingOverlappingIntervals(_ intervals: [DateInterval]) -> [DateInterval] {
         let sorted = intervals.sorted { lhs, rhs in
             if lhs.start == rhs.start {
                 return lhs.end < rhs.end
@@ -556,7 +571,7 @@ final class SleepHealthStore {
                 continue
             }
 
-            if interval.start.timeIntervalSince(last.end) <= maximumGap {
+            if interval.start <= last.end {
                 merged[merged.count - 1] = DateInterval(
                     start: last.start,
                     end: max(last.end, interval.end)

@@ -70,6 +70,91 @@ struct AyurvedaDoshaDistribution: Codable, Equatable, Sendable {
   }
 }
 
+struct AyurvedaSleepRecommendation: Equatable, Sendable {
+  let bedtimeMinutes: Int
+  let wakeMinutes: Int
+
+  init(distribution: AyurvedaDoshaDistribution) {
+    // These anchors keep the shared Ayurvedic preference for sleeping before
+    // the late-evening pitta period, while allowing the prakriti proportions
+    // to move the recommendation inside that window.
+    bedtimeMinutes = Self.blendedMinutes(
+      vata: 21 * 60 + 30,
+      pitta: 21 * 60 + 30,
+      kapha: 21 * 60 + 45,
+      distribution: distribution
+    )
+    wakeMinutes = Self.blendedMinutes(
+      vata: 6 * 60,
+      pitta: 5 * 60 + 30,
+      kapha: 5 * 60,
+      distribution: distribution
+    )
+  }
+
+  var timeRangeLabel: String {
+    "\(Self.clockLabel(for: bedtimeMinutes))–\(Self.clockLabel(for: wakeMinutes))"
+  }
+
+  func visibleIntervals(
+    on day: Date,
+    calendar: Calendar = .current
+  ) -> [DateInterval] {
+    let dayStart = calendar.startOfDay(for: day)
+    guard
+      let dayEnd = calendar.date(byAdding: .day, value: 1, to: dayStart),
+      let wakeTime = Self.date(
+        on: dayStart,
+        minutesFromMidnight: wakeMinutes,
+        calendar: calendar
+      ),
+      let bedtime = Self.date(
+        on: dayStart,
+        minutesFromMidnight: bedtimeMinutes,
+        calendar: calendar
+      )
+    else {
+      return []
+    }
+
+    return [
+      DateInterval(start: dayStart, end: min(wakeTime, dayEnd)),
+      DateInterval(start: max(bedtime, dayStart), end: dayEnd),
+    ].filter { $0.start < $0.end }
+  }
+
+  private static func blendedMinutes(
+    vata: Int,
+    pitta: Int,
+    kapha: Int,
+    distribution: AyurvedaDoshaDistribution,
+    roundedTo interval: Int = 5
+  ) -> Int {
+    let blended =
+      distribution.vata * Double(vata)
+      + distribution.pitta * Double(pitta)
+      + distribution.kapha * Double(kapha)
+    return Int((blended / Double(interval)).rounded()) * interval
+  }
+
+  private static func date(
+    on dayStart: Date,
+    minutesFromMidnight: Int,
+    calendar: Calendar
+  ) -> Date? {
+    calendar.date(
+      bySettingHour: minutesFromMidnight / 60,
+      minute: minutesFromMidnight % 60,
+      second: 0,
+      of: dayStart
+    )
+  }
+
+  private static func clockLabel(for minutes: Int) -> String {
+    String(format: "%02d:%02d", minutes / 60, minutes % 60)
+  }
+}
+
 enum AyurvedaConstitutionSource: String, Codable, Sendable {
   case selfDeclared
   case questionnaire
