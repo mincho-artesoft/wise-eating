@@ -4,6 +4,7 @@ import SwiftData
 struct ProfileListView: View {
     @ObservedObject private var effectManager = EffectManager.shared
     @ObservedObject private var sleepHealthStore = SleepHealthStore.shared
+    @ObservedObject private var liveActivityManager = NextEventLiveActivityManager.shared
 
     // MARK: – Queries & Dependencies
     @Query private var profiles: [Profile]
@@ -30,6 +31,8 @@ struct ProfileListView: View {
     @State private var profileForAIPlan: Profile? = nil
     
     @State private var hasUnreadNotifications: Bool = false
+    @State private var showingLiveActivityError = false
+    @State private var liveActivityErrorMessage = ""
 
     // MARK: - Init
 
@@ -109,6 +112,11 @@ struct ProfileListView: View {
         } message: {
             Text("Are you sure you want to delete '\(profileToDelete?.name ?? "this profile")'? This action cannot be undone.")
         }
+        .alert("Live Activity", isPresented: $showingLiveActivityError) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(liveActivityErrorMessage)
+        }
         .sheet(item: $profileForAIPlan) { profile in
             AIPlanGenerationView(profile: profile) {
                 profileForAIPlan = nil
@@ -117,6 +125,7 @@ struct ProfileListView: View {
         .task {
             ensureHealthKitProfileSelection()
             await checkForUnreadNotifications()
+            liveActivityManager.refreshStatus()
         }
         .onChange(of: profiles.map(\.id)) { _, _ in
             ensureHealthKitProfileSelection()
@@ -146,8 +155,31 @@ struct ProfileListView: View {
     // MARK: - Top Buttons Row
 
     private var topActionButtonsRow: some View {
-        HStack {
+        HStack(spacing: 10) {
+            Button {
+                toggleLiveActivity()
+            } label: {
+                HStack(spacing: 6) {
+                    Image(systemName: liveActivityManager.isRunning ? "livephoto.slash" : "livephoto")
+                        .font(.title2)
+                    Text(liveActivityManager.isRunning ? "Stop" : "Live")
+                        .font(.headline)
+                }
+                .padding(.horizontal, 10)
+                .padding(.vertical, 8)
+            }
+            .foregroundColor(effectManager.currentGlobalAccentColor)
+            .glassCardStyle(cornerRadius: 20)
+            .disabled(selectedProfile == nil)
+            .opacity(selectedProfile == nil ? 0.4 : 1.0)
+            .accessibilityLabel(
+                liveActivityManager.isRunning
+                    ? "Stop next activity Live Activity"
+                        : "Start next activity Live Activity"
+            )
+
             Spacer()
+
             HStack {
                 // New profiles always use the guided wizard.
                 Button {
@@ -203,6 +235,19 @@ struct ProfileListView: View {
 
     private func handleAddProfileTapped() {
         isPresentingWizard = true
+    }
+
+    private func toggleLiveActivity() {
+        guard let selectedProfile else { return }
+
+        Task {
+            do {
+                try await liveActivityManager.toggle(for: selectedProfile)
+            } catch {
+                liveActivityErrorMessage = error.localizedDescription
+                showingLiveActivityError = true
+            }
+        }
     }
 
     private func formatAge(from birthDate: Date) -> String {

@@ -38,7 +38,7 @@ struct AyurvedaAsanaYogaApp: App {
             }
             AIManager.shared.setup(container: container)
             Task { @MainActor in await CalendarViewModel.shared.ensureSharedShoppingListCalendarExists() }
-            
+
             // --- AD LOADING LOGIC ---
             if AdsConfiguration.shouldShowAds {
                 
@@ -108,6 +108,15 @@ struct AyurvedaAsanaYogaApp: App {
                         Task { @MainActor in await AIManager.shared.fetchJobs() }
                         Task {
                             await NotificationManager.shared.refreshPracticeReminderIfNeeded()
+                        }
+                        Task { @MainActor in
+                            let context = container.mainContext
+                            let settings = (try? context.fetch(FetchDescriptor<UserSettings>()))?.first
+                            if let profile = settings?.lastSelectedProfile {
+                                await NextEventLiveActivityManager.shared.refreshIfRunning(for: profile)
+                            } else {
+                                NextEventLiveActivityManager.shared.refreshStatus()
+                            }
                         }
                         GlobalState.refreshSystemSettings()
                         

@@ -101,6 +101,26 @@ class NotificationManager {
         await scheduleStoredPracticeReminderIfAuthorized()
     }
 
+    struct StoredPracticeReminder {
+        let lastStartedAt: Date
+        let title: String
+    }
+
+    func storedPracticeReminder(for profileID: UUID) -> StoredPracticeReminder? {
+        let defaults = UserDefaults.standard
+        guard let lastStartedAt = defaults.object(
+            forKey: PracticeReminderStorageKey.lastStartedAt
+        ) as? Date,
+        let title = defaults.string(
+            forKey: PracticeReminderStorageKey.practiceTitle
+        ),
+        defaults.string(forKey: PracticeReminderStorageKey.profileID) == profileID.uuidString else {
+            return nil
+        }
+
+        return StoredPracticeReminder(lastStartedAt: lastStartedAt, title: title)
+    }
+
     private func scheduleStoredPracticeReminderIfAuthorized() async {
         let center = UNUserNotificationCenter.current()
         let status = await getAuthorizationStatus()

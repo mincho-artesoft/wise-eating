@@ -3,12 +3,6 @@ import UIKit
 
 enum PracticeArtworkResolver {
     private static let supportedCatalogNumbers = 810_000...810_059
-    private static let halfLotusCatalogNumbers: Set<Int> = [
-        810_006, 810_021, 810_050, 810_051,
-    ]
-    private static let accomplishedPoseCatalogNumbers: Set<Int> = [
-        810_002, 810_042,
-    ]
 
     static func assetName(for practice: Practice) -> String? {
         if let sceneName = practice.sceneImageName,
@@ -19,13 +13,7 @@ enum PracticeArtworkResolver {
         guard supportedCatalogNumbers.contains(practice.catalogNumber) else {
             return nil
         }
-        if accomplishedPoseCatalogNumbers.contains(practice.catalogNumber) {
-            return "asana-accomplished-pose"
-        }
-        if halfLotusCatalogNumbers.contains(practice.catalogNumber) {
-            return "asana-half-lotus"
-        }
-        return "asana-easy-pose"
+        return "practice-\(practice.slug)"
     }
 }
 

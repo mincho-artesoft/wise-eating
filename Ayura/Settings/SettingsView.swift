@@ -191,8 +191,17 @@ struct SettingsView: View {
     @ViewBuilder
     private var notificationsSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Notifications")
-                .font(.title2.bold())
+            HStack(spacing: 8) {
+                Text("Notifications")
+                    .font(.title2.bold())
+
+                Image(
+                    systemName: notificationsAuthorized && appNotificationsEnabled
+                        ? "bell.fill"
+                        : "bell.slash.fill"
+                )
+                .font(.title3.weight(.semibold))
+            }
 
             if !notificationPermissionLoaded {
                 HStack(spacing: 10) {
@@ -206,14 +215,10 @@ struct SettingsView: View {
                 .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
             } else if notificationsAuthorized {
                 HStack(spacing: 12) {
-                    Image(systemName: appNotificationsEnabled ? "bell.badge.fill" : "bell.slash.fill")
-                        .font(.title3)
-                        .frame(width: 32, height: 32)
-                        .background(effectManager.currentGlobalAccentColor.opacity(0.12), in: Circle())
-
                     VStack(alignment: .leading, spacing: 3) {
                         Text("Allow notifications in Ayura")
                             .font(.headline)
+
                         Text("Controls reminders and updates for the entire app.")
                             .font(.caption)
                             .foregroundStyle(.secondary)

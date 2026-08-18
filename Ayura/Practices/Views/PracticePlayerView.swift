@@ -61,6 +61,7 @@ struct PracticePlayerView: View {
                     practiceTitle: practice.title,
                     profileID: profile.id
                 )
+                await NextEventLiveActivityManager.shared.refreshIfRunning(for: profile)
             }
             player.play(
                 practice.makeAudioPlan(
