@@ -17,7 +17,7 @@ public final class Training: Codable, Identifiable, Equatable, @unchecked Sendab
 
     public var profile: Profile?
 
-    public init(id: UUID = .init(), name: String, startTime: Date, endTime: Date, notes: String? = nil, reminderMinutes: Int? = nil, notificationID: String? = nil, calendarEventID: String? = nil, profile: Profile? = nil) {
+    public init(id: UUID = .init(), name: String, startTime: Date, endTime: Date, notes: String? = nil, reminderMinutes: Int? = ReminderDefaults.minutesBeforeEvent, notificationID: String? = nil, calendarEventID: String? = nil, profile: Profile? = nil) {
         self.id = id
         self.name = name
         self.startTime = startTime

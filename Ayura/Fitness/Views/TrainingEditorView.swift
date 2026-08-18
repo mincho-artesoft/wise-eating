@@ -29,7 +29,10 @@ struct TrainingEditorView: View {
         self.isNew = isNew
         self.onSave = onSave
         
-        _reminderOffset = State(initialValue: training.reminderMinutes ?? 0)
+        _reminderOffset = State(
+            initialValue: training.reminderMinutes
+                ?? (isNew ? ReminderDefaults.minutesBeforeEvent : 0)
+        )
 
         _initialState = State(initialValue: InitialState(
             name: training.name,

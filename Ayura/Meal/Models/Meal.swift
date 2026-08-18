@@ -20,7 +20,7 @@ public final class Meal: Codable, Identifiable, Equatable {
     public var notificationID: String? = nil
 
     // --- Initializers ---
-    public init(id: UUID = .init(), name: String, startTime: Date, endTime: Date, notes: String? = nil, descriptiveAIName: String? = nil, reminderMinutes: Int? = nil, notificationID: String? = nil, calendarEventID: String? = nil) {
+    public init(id: UUID = .init(), name: String, startTime: Date, endTime: Date, notes: String? = nil, descriptiveAIName: String? = nil, reminderMinutes: Int? = ReminderDefaults.minutesBeforeEvent, notificationID: String? = nil, calendarEventID: String? = nil) {
         self.id = id
         self.name = name
         self.startTime = startTime

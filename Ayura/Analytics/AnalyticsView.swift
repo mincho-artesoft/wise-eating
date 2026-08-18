@@ -7,6 +7,7 @@ struct AnalyticsView: View {
     // MARK: - Environment & Managers
     @Environment(\.modelContext) private var modelContext
     @ObservedObject private var effectManager = EffectManager.shared
+    @ObservedObject private var sleepHealthStore = SleepHealthStore.shared
 
     // --- НАЧАЛО НА ПРОМЯНА 1: Добавяме safeAreaInsets и състояния за часовника ---
     @Environment(\.safeAreaInsets) private var safeAreaInsets
@@ -21,6 +22,7 @@ struct AnalyticsView: View {
     // MARK: - Data Queries
     @Query(sort: \Vitamin.name) private var allVitamins: [Vitamin]
     @Query(sort: \Mineral.name) private var allMinerals: [Mineral]
+    @Query private var userSettings: [UserSettings]
 
     // MARK: - State & ViewModel
     @StateObject private var viewModel: AnalyticsViewModel
@@ -44,7 +46,19 @@ struct AnalyticsView: View {
         var id: String { self.rawValue }
     }
     
-    private let selectedMetricsKey = "selectedAnalyticMetricIDs"
+    private let legacySelectedMetricsKey = "selectedAnalyticMetricIDs"
+
+    private var selectedMetricsKey: String {
+        "selectedAnalyticMetricIDs.\(profile.id.uuidString)"
+    }
+
+    private var sleepDefaultAppliedKey: String {
+        "analytics.sleepDefaultApplied.\(profile.id.uuidString)"
+    }
+
+    private var calorieBalanceDefaultsAppliedKey: String {
+        "analytics.calorieBalanceDefaultsApplied.\(profile.id.uuidString)"
+    }
     
     // MARK: - Initializer
     init(profile: Profile) {
@@ -61,6 +75,8 @@ struct AnalyticsView: View {
     private var allSelectableNutrients: [SelectableNutrient] {
            var items: [SelectableNutrient] = [
                SelectableNutrient(id: "calories", label: "Calories"),
+               SelectableNutrient(id: "calories_burned", label: "Burned Calories"),
+               SelectableNutrient(id: "net_calorie_balance", label: "Net Calorie Balance"),
                SelectableNutrient(id: "water", label: "Water Intake"),
                SelectableNutrient(id: "protein", label: "Protein"),
                SelectableNutrient(id: "carbohydrates", label: "Carbohydrates"),
@@ -68,10 +84,21 @@ struct AnalyticsView: View {
                SelectableNutrient(id: "profile_weight", label: "Weight"),
                SelectableNutrient(id: "profile_height", label: "Height")
            ]
+           if isHealthKitProfile {
+               items.insert(
+                   SelectableNutrient(id: "sleep", label: "Sleep"),
+                   at: 3
+               )
+           }
            items.append(contentsOf: allVitamins.map { SelectableNutrient(id: "vit_\($0.key)", label: $0.name) })
            items.append(contentsOf: allMinerals.map { SelectableNutrient(id: "min_\($0.key)", label: $0.name) })
            return items
        }
+
+    private var isHealthKitProfile: Bool {
+        sleepHealthStore.isHealthKitEnabled
+            && userSettings.first?.healthKitProfileID == profile.id
+    }
     
     // MARK: - Body
     var body: some View {
@@ -164,6 +191,9 @@ struct AnalyticsView: View {
         .onAppear(perform: loadSelection)
         .onChange(of: selectedNutrientIDs) {
             saveSelection()
+        }
+        .onChange(of: isHealthKitProfile) { _, isPrimary in
+            handleHealthKitProfileChange(isPrimary: isPrimary)
         }
         .onChange(of: selectedTimeRange) { _, newRange in
             if newRange == .custom {
@@ -389,6 +419,7 @@ struct AnalyticsView: View {
         viewModel.customStartDate = customStartDate
         viewModel.customEndDate = customEndDate
         viewModel.selectedNutrientIDs = selectedNutrientIDs
+        viewModel.usesHealthKit = isHealthKitProfile
         await viewModel.processAnalyticsData()
     }
     
@@ -412,10 +443,44 @@ struct AnalyticsView: View {
     }
     
     private func loadSelection() {
-           if let savedArray = UserDefaults.standard.array(forKey: selectedMetricsKey) as? [String] {
-               selectedNutrientIDs = savedArray.isEmpty ? ["calories", "water", "protein", "carbohydrates", "fat"] : Set(savedArray)
-           } else {
-               selectedNutrientIDs = ["calories", "water", "protein", "carbohydrates", "fat"]
-           }
-       }
+        let defaults = UserDefaults.standard
+        let standardSelection: Set<String> = [
+            "calories", "calories_burned", "net_calorie_balance",
+            "water", "protein", "carbohydrates", "fat"
+        ]
+        let savedArray = defaults.array(forKey: selectedMetricsKey) as? [String]
+        let legacyArray = defaults.array(forKey: legacySelectedMetricsKey) as? [String]
+        var selection = Set(savedArray ?? legacyArray ?? Array(standardSelection))
+        selection.formIntersection(Set(allSelectableNutrients.map(\.id)))
+
+        if selection.isEmpty {
+            selection = standardSelection
+        }
+        selectedNutrientIDs = selection
+
+        if !defaults.bool(forKey: calorieBalanceDefaultsAppliedKey) {
+            selectedNutrientIDs.insert("calories_burned")
+            selectedNutrientIDs.insert("net_calorie_balance")
+            defaults.set(true, forKey: calorieBalanceDefaultsAppliedKey)
+        }
+
+        if isHealthKitProfile && !defaults.bool(forKey: sleepDefaultAppliedKey) {
+            selectedNutrientIDs.insert("sleep")
+            defaults.set(true, forKey: sleepDefaultAppliedKey)
+        }
+        saveSelection()
+    }
+
+    private func handleHealthKitProfileChange(isPrimary: Bool) {
+        let defaults = UserDefaults.standard
+        if isPrimary {
+            if !defaults.bool(forKey: sleepDefaultAppliedKey) {
+                selectedNutrientIDs.insert("sleep")
+                defaults.set(true, forKey: sleepDefaultAppliedKey)
+            }
+        } else {
+            selectedNutrientIDs.remove("sleep")
+        }
+        saveSelection()
+    }
 }

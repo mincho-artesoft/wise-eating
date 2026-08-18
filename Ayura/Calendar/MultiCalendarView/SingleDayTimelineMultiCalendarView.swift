@@ -47,6 +47,14 @@ public final class SingleDayTimelineMultiCalendarView: UIView, UIGestureRecogniz
         didSet { setNeedsDisplay() }
     }
 
+    public var usesHealthKit: Bool = true {
+        didSet {
+            if oldValue != usesHealthKit {
+                setNeedsDisplay()
+            }
+        }
+    }
+
     var recommendedSleep: AyurvedaSleepRecommendation? {
         didSet { setNeedsDisplay() }
     }
@@ -873,6 +881,8 @@ public final class SingleDayTimelineMultiCalendarView: UIView, UIGestureRecogniz
     }
 
     private func drawSleepHighlights(in context: CGContext) {
+        guard usesHealthKit else { return }
+
         let calendar = Calendar.current
         let now = Date()
 
@@ -1153,9 +1163,14 @@ public final class SingleDayTimelineMultiCalendarView: UIView, UIGestureRecogniz
         }
 
         let lineHeight: CGFloat = 17
+        let legendSpacing: CGFloat = 6
+        let legendHeight: CGFloat = 32
         let availableLineCount = max(
             1,
-            min(lines.count, Int((rect.height - 8) / lineHeight))
+            min(
+                lines.count,
+                Int((rect.height - 8 - legendSpacing - legendHeight) / lineHeight)
+            )
         )
         let font = UIFont.systemFont(ofSize: 11, weight: .semibold)
         for (index, line) in lines.prefix(availableLineCount).enumerated() {
@@ -1170,6 +1185,95 @@ public final class SingleDayTimelineMultiCalendarView: UIView, UIGestureRecogniz
                 withAttributes: [
                     .font: font,
                     .foregroundColor: line.color
+                ]
+            )
+        }
+
+        let legendY = rect.minY
+            + 6
+            + CGFloat(availableLineCount) * lineHeight
+            + legendSpacing
+        drawSleepLegend(
+            in: CGRect(
+                x: rect.minX + 8,
+                y: legendY,
+                width: max(0, rect.width - 16),
+                height: legendHeight
+            )
+        )
+    }
+
+    private func drawSleepLegend(in rect: CGRect) {
+        guard rect.width >= 104,
+              rect.height >= 32,
+              let context = UIGraphicsGetCurrentContext() else {
+            return
+        }
+
+        let items: [(title: String, kind: SleepHighlightKind)] = [
+            (
+                NSLocalizedString(
+                    "Recommended",
+                    comment: "Calendar recommended sleep legend label"
+                ),
+                .recommended
+            ),
+            (
+                NSLocalizedString(
+                    "Not matched",
+                    comment: "Calendar missed recommended sleep legend label"
+                ),
+                .missed
+            ),
+            (
+                NSLocalizedString(
+                    "Matched",
+                    comment: "Calendar matched sleep legend label"
+                ),
+                .covered
+            ),
+            (
+                NSLocalizedString(
+                    "HealthKit",
+                    comment: "Calendar recorded HealthKit sleep legend label"
+                ),
+                .recorded
+            )
+        ]
+        let columnWidth = rect.width / 2
+        let rowHeight: CGFloat = 16
+        let dotDiameter: CGFloat = 7
+        let font = UIFont.systemFont(ofSize: 9.5, weight: .semibold)
+
+        for (index, item) in items.enumerated() {
+            let column = index % 2
+            let row = index / 2
+            let itemOrigin = CGPoint(
+                x: rect.minX + CGFloat(column) * columnWidth,
+                y: rect.minY + CGFloat(row) * rowHeight
+            )
+            let dotRect = CGRect(
+                x: itemOrigin.x,
+                y: itemOrigin.y + (rowHeight - dotDiameter) / 2,
+                width: dotDiameter,
+                height: dotDiameter
+            )
+
+            context.saveGState()
+            context.setFillColor(item.kind.color.withAlphaComponent(0.95).cgColor)
+            context.fillEllipse(in: dotRect)
+            context.restoreGState()
+
+            NSString(string: item.title).draw(
+                in: CGRect(
+                    x: dotRect.maxX + 5,
+                    y: itemOrigin.y,
+                    width: max(0, columnWidth - dotDiameter - 9),
+                    height: rowHeight
+                ),
+                withAttributes: [
+                    .font: font,
+                    .foregroundColor: sleepTextColor.withAlphaComponent(0.9)
                 ]
             )
         }

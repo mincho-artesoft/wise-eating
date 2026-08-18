@@ -1,5 +1,17 @@
 @preconcurrency import UserNotifications
 
+public enum ReminderDefaults {
+    public static let minutesBeforeEvent = 15
+}
+
+enum NotificationSchedulingError: LocalizedError {
+    case disabledInApp
+
+    var errorDescription: String? {
+        "Notifications are disabled in Ayura settings."
+    }
+}
+
 /// Структура, която представя едно известие в списъка с история.
 struct NotificationHistoryItem: Identifiable, Hashable {
     let id: String // Notification Request Identifier
@@ -24,7 +36,37 @@ struct NotificationHistoryItem: Identifiable, Hashable {
 @MainActor
 class NotificationManager {
     static let shared = NotificationManager()
+
+    static let appNotificationsEnabledKey = "notifications.appEnabled"
+
+    private enum PracticeReminderStorageKey {
+        static let lastStartedAt = "practiceReminder.lastStartedAt"
+        static let practiceTitle = "practiceReminder.practiceTitle"
+        static let profileID = "practiceReminder.profileID"
+    }
+
+    private static let practiceReminderIdentifier = "daily-practice-reminder"
+
     private init() {}
+
+    var areAppNotificationsEnabled: Bool {
+        let defaults = UserDefaults.standard
+        guard defaults.object(forKey: Self.appNotificationsEnabledKey) != nil else {
+            return true
+        }
+        return defaults.bool(forKey: Self.appNotificationsEnabledKey)
+    }
+
+    func setAppNotificationsEnabled(_ isEnabled: Bool) async {
+        UserDefaults.standard.set(isEnabled, forKey: Self.appNotificationsEnabledKey)
+
+        let center = UNUserNotificationCenter.current()
+        if isEnabled {
+            await scheduleStoredPracticeReminderIfAuthorized()
+        } else {
+            center.removeAllPendingNotificationRequests()
+        }
+    }
 
     func requestAuthorization() async -> Bool {
         do {
@@ -42,7 +84,103 @@ class NotificationManager {
         return settings.authorizationStatus
     }
 
+    func updatePracticeReminder(
+        lastPracticeStartedAt: Date,
+        practiceTitle: String,
+        profileID: UUID
+    ) async {
+        let defaults = UserDefaults.standard
+        defaults.set(lastPracticeStartedAt, forKey: PracticeReminderStorageKey.lastStartedAt)
+        defaults.set(practiceTitle, forKey: PracticeReminderStorageKey.practiceTitle)
+        defaults.set(profileID.uuidString, forKey: PracticeReminderStorageKey.profileID)
+
+        await scheduleStoredPracticeReminderIfAuthorized()
+    }
+
+    func refreshPracticeReminderIfNeeded() async {
+        await scheduleStoredPracticeReminderIfAuthorized()
+    }
+
+    private func scheduleStoredPracticeReminderIfAuthorized() async {
+        let center = UNUserNotificationCenter.current()
+        let status = await getAuthorizationStatus()
+
+        guard areAppNotificationsEnabled,
+              status == .authorized || status == .provisional || status == .ephemeral else {
+            center.removePendingNotificationRequests(
+                withIdentifiers: [Self.practiceReminderIdentifier]
+            )
+            return
+        }
+
+        let defaults = UserDefaults.standard
+        guard let lastStartedAt = defaults.object(
+            forKey: PracticeReminderStorageKey.lastStartedAt
+        ) as? Date,
+        let practiceTitle = defaults.string(
+            forKey: PracticeReminderStorageKey.practiceTitle
+        ),
+        let profileID = defaults.string(
+            forKey: PracticeReminderStorageKey.profileID
+        ) else {
+            return
+        }
+
+        let reminderDate = lastStartedAt.addingTimeInterval(
+            -TimeInterval(ReminderDefaults.minutesBeforeEvent * 60)
+        )
+        let reminderTime = Calendar.current.dateComponents(
+            [.hour, .minute],
+            from: reminderDate
+        )
+
+        let content = UNMutableNotificationContent()
+        content.title = "🧘 Workout Reminder"
+        content.body = "Your usual practice time is approaching. Open Ayura when you're ready."
+        content.sound = .default
+        content.threadIdentifier = "practice-reminders"
+        content.userInfo = [
+            "practiceReminder": true,
+            "practiceTitle": practiceTitle,
+            "profileID": profileID,
+        ]
+
+        let trigger = UNCalendarNotificationTrigger(
+            dateMatching: reminderTime,
+            repeats: true
+        )
+        let request = UNNotificationRequest(
+            identifier: Self.practiceReminderIdentifier,
+            content: content,
+            trigger: trigger
+        )
+
+        center.removePendingNotificationRequests(
+            withIdentifiers: [Self.practiceReminderIdentifier]
+        )
+
+        do {
+            try await center.add(request)
+            guard areAppNotificationsEnabled else {
+                center.removePendingNotificationRequests(
+                    withIdentifiers: [Self.practiceReminderIdentifier]
+                )
+                return
+            }
+            print(
+                "Practice reminder scheduled daily at "
+                    + "\(reminderTime.hour ?? 0):"
+                    + String(format: "%02d", reminderTime.minute ?? 0)
+            )
+        } catch {
+            print("Could not schedule practice reminder: \(error.localizedDescription)")
+        }
+    }
+
     func scheduleNotification(title: String, body: String, timeInterval: TimeInterval, userInfo: [String: Sendable], profileID: UUID?) async throws -> String {
+        guard areAppNotificationsEnabled else {
+            throw NotificationSchedulingError.disabledInApp
+        }
         
         let content = UNMutableNotificationContent()
         content.title = title
@@ -60,7 +198,13 @@ class NotificationManager {
         
         let request = UNNotificationRequest(identifier: id, content: content.copy() as! UNNotificationContent, trigger: trigger)
 
-        try await UNUserNotificationCenter.current().add(request)
+        let center = UNUserNotificationCenter.current()
+        try await center.add(request)
+
+        guard areAppNotificationsEnabled else {
+            center.removePendingNotificationRequests(withIdentifiers: [id])
+            throw NotificationSchedulingError.disabledInApp
+        }
         
         print("Нотификация с ID: \(id) е успешно планирана for profile: \(profileID?.uuidString ?? "Unassigned").")
         

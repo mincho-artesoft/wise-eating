@@ -35,7 +35,7 @@ struct AnalyticsChartView: View {
         let lastDate = points.last?.date ?? firstDate
         let totalDuration = lastDate.timeIntervalSince(firstDate)
 
-        let yRange = 0.0...yAxisUpperBound()
+        let yRange = yAxisRange()
 
         let pointsWithPositions = points.map { point -> (PlottableMetric, CGPoint) in
             let xPos: CGFloat
@@ -101,14 +101,28 @@ struct AnalyticsChartView: View {
     @ViewBuilder
     private func emptyChartPlaceholder(accent: Color) -> some View {
         let isProfileMetric = nutrientID == "profile_weight" || nutrientID == "profile_height"
+        let isSleepMetric = nutrientID == "sleep"
+        let isBurnedCaloriesMetric = nutrientID == "calories_burned"
+        let isNetBalanceMetric = nutrientID == "net_calorie_balance"
         ContentUnavailableView {
-            Label("No Data", systemImage: "chart.bar.xaxis.ascending")
+            Label(
+                "No Data",
+                systemImage: isSleepMetric
+                    ? "bed.double.fill"
+                    : "chart.bar.xaxis.ascending"
+            )
                 .foregroundStyle(accent)
         } description: {
             Text(
-                isProfileMetric
-                    ? "This metric will appear after it is changed in the profile editor."
-                    : "No meal data found for this metric."
+                isSleepMetric
+                    ? "No HealthKit sleep data found for this period."
+                    : isBurnedCaloriesMetric
+                        ? "No workout or activity calories found for this period."
+                    : isNetBalanceMetric
+                        ? "No meal or activity data found for this period."
+                    : isProfileMetric
+                        ? "This metric will appear after it is changed in the profile editor."
+                        : "No meal data found for this metric."
             )
                 .foregroundStyle(accent.opacity(0.8))
         }
@@ -128,9 +142,8 @@ struct AnalyticsChartView: View {
                 }
 
                 let (origin, graphSize) = chartGeometry(for: size)
-                let upperDomainBound = yAxisUpperBound()
-                let yValues = yAxisValues(upperBound: upperDomainBound)
-                let yRange = 0.0...upperDomainBound
+                let yRange = yAxisRange()
+                let yValues = yAxisValues(in: yRange)
 
                 drawGridAndLabels(
                     context: &context,
@@ -256,6 +269,8 @@ struct AnalyticsChartView: View {
           let isProteinChart = nutrientID == "protein"
           let isCarbsChart = nutrientID == "carbohydrates"
           let isFatChart = nutrientID == "fat"
+          let isSleepChart = nutrientID == "sleep"
+          let isNetBalanceChart = nutrientID == "net_calorie_balance"
           
           HStack {
               HStack(spacing: 24) {
@@ -265,12 +280,26 @@ struct AnalyticsChartView: View {
                           Circle()
                               .fill(color)
                               .frame(width: 8, height: 8)
-                          Text("\(isCalories || isWaterChart || isProteinChart || isCarbsChart || isFatChart ? "Target" : "MIN"): \(min.clean) \(requirements.unit ?? "")")
+                          Text("\(isCalories || isWaterChart || isProteinChart || isCarbsChart || isFatChart || isSleepChart ? "Target" : "MIN"): \(min.clean) \(requirements.unit ?? "")")
                               .font(.caption.weight(.semibold))
                               .foregroundStyle(accent)
                       }
                   }
-                  if let max = requirements.max, !isCalories, !isWaterChart, !isProteinChart, !isCarbsChart, !isFatChart {
+                  if isNetBalanceChart {
+                      HStack(spacing: 6) {
+                          Circle().fill(.green).frame(width: 8, height: 8)
+                          Text("Deficit")
+                              .font(.caption.weight(.semibold))
+                              .foregroundStyle(accent)
+                      }
+                      HStack(spacing: 6) {
+                          Circle().fill(.orange).frame(width: 8, height: 8)
+                          Text("Surplus")
+                              .font(.caption.weight(.semibold))
+                              .foregroundStyle(accent)
+                      }
+                  }
+                  if let max = requirements.max, !isCalories, !isWaterChart, !isProteinChart, !isCarbsChart, !isFatChart, !isSleepChart {
                       HStack(spacing: 6) {
                           Circle()
                               .fill(.red)
@@ -325,9 +354,16 @@ struct AnalyticsChartView: View {
         return originY - (CGFloat(normalizedValue) * graphHeight)
     }
 
-    private func yAxisUpperBound() -> Double {
+    private func yAxisRange() -> ClosedRange<Double> {
         let requirements = getRequirements(for: nutrientID)
+        let minData = points.map(\.value).min() ?? 0
         let maxData = points.map(\.value).max() ?? 0
+
+        if nutrientID == "net_calorie_balance" {
+            let magnitude = max(abs(minData), abs(maxData), 10) * 1.2
+            return -magnitude...magnitude
+        }
+
         var v = maxData * 1.2
         if let target = requirements.min {
             v = max(v, target * 1.2)
@@ -335,12 +371,12 @@ struct AnalyticsChartView: View {
         if let maxReq = requirements.max {
              v = max(v, maxReq * 1.2)
         }
-        return v == 0 ? 10 : v
+        return 0...(v == 0 ? 10 : v)
     }
 
-    private func yAxisValues(upperBound: Double) -> [Double] {
-        let minVal = 0.0
-        let maxVal = max(upperBound, 1);
+    private func yAxisValues(in yRange: ClosedRange<Double>) -> [Double] {
+        let minVal = yRange.lowerBound
+        let maxVal = max(yRange.upperBound, minVal + 1)
         let range = maxVal - minVal
         let desiredLines = 5.0
         let rawStep = range / desiredLines
@@ -348,8 +384,9 @@ struct AnalyticsChartView: View {
         let candidates = [1.0, 2.0, 2.5, 5.0, 10.0].map { $0 * mag }
         let step = candidates.first { $0 >= rawStep } ?? rawStep
         guard step > 0 else { return [] }
-        let end = (maxVal / step).rounded(.up) * step
-        return stride(from: minVal, through: end, by: step).map { $0 }
+        let start = (minVal / step).rounded(.up) * step
+        let end = (maxVal / step).rounded(.down) * step
+        return stride(from: start, through: end, by: step).map { $0 }
     }
     
     // +++ НАЧАЛО НА ПРОМЯНАТА (2/2) +++
@@ -377,6 +414,9 @@ struct AnalyticsChartView: View {
            if nutrientID == "calories" {
                return (TDEECalculator.calculate(for: profile), nil, "kcal")
            }
+           if nutrientID == "calories_burned" || nutrientID == "net_calorie_balance" {
+               return (nil, nil, "kcal")
+           }
            if nutrientID == "water" {
                let goalInGlasses = calculateWaterGoal(for: profile)
                let goalInMl = Double(goalInGlasses * 200)
@@ -396,6 +436,19 @@ struct AnalyticsChartView: View {
            }
            if nutrientID == "profile_height" {
                return (nil, nil, GlobalState.measurementSystem == "Imperial" ? "in" : "cm")
+           }
+           if nutrientID == "sleep" {
+               let distribution = AyurvedaConstitutionStore.record(for: profile.id)?
+                   .prakriti ?? .balanced
+               let recommendation = AyurvedaSleepRecommendation(
+                   distribution: distribution
+               )
+               let durationMinutes = (
+                   recommendation.wakeMinutes
+                       - recommendation.bedtimeMinutes
+                       + 24 * 60
+               ) % (24 * 60)
+               return (Double(durationMinutes) / 60, nil, "h")
            }
         let requirement: Requirement?
         var unit: String?
@@ -435,12 +488,15 @@ struct AnalyticsChartView: View {
 
     private func nutrientName(for id: String) -> String {
         if id == "calories" { return "Calories" }
+        if id == "calories_burned" { return "Burned Calories" }
+        if id == "net_calorie_balance" { return "Net Calorie Balance" }
         if id == "water" { return "Water Intake" }
         if id == "protein" { return "Protein" }
         if id == "carbohydrates" { return "Carbohydrates" }
         if id == "fat" { return "Fat" }
         if id == "profile_weight" { return "Weight" }
         if id == "profile_height" { return "Height" }
+        if id == "sleep" { return "Sleep" }
         if id.starts(with: "vit_") {
             let key = String(id.dropFirst(4))
             return allVitamins.first { $0.key == key }?.name ?? "Unknown Vitamin"
@@ -551,6 +607,7 @@ private extension AnalyticsChartView {
            let isProteinChart = nutrientID == "protein"
            let isCarbsChart = nutrientID == "carbohydrates"
            let isFatChart = nutrientID == "fat"
+           let isSleepChart = nutrientID == "sleep"
 
            if let min = requirements.min {
                let yPos = yPosition(for: min, inYRange: yRange, graphHeight: graphSize.height, originY: origin.y)
@@ -561,7 +618,7 @@ private extension AnalyticsChartView {
                context.stroke(path, with: .color(color), style: StrokeStyle(lineWidth: 1, dash: [5, 3]))
            }
 
-           if let max = requirements.max, !isCaloriesChart, !isWaterChart, !isProteinChart, !isCarbsChart, !isFatChart {
+           if let max = requirements.max, !isCaloriesChart, !isWaterChart, !isProteinChart, !isCarbsChart, !isFatChart, !isSleepChart {
                let yPos = yPosition(for: max, inYRange: yRange, graphHeight: graphSize.height, originY: origin.y)
                var path = Path()
                path.move(to: CGPoint(x: origin.x, y: yPos))
@@ -585,7 +642,8 @@ private extension AnalyticsChartView {
 
         let isSpecialChart = [
             "calories", "water", "protein", "carbohydrates", "fat",
-            "profile_weight", "profile_height"
+            "profile_weight", "profile_height", "sleep",
+            "calories_burned", "net_calorie_balance"
         ].contains(nutrientID)
         let totalDuration = lastDate.timeIntervalSince(firstDate)
 
@@ -609,6 +667,18 @@ private extension AnalyticsChartView {
 
         if isSpecialChart {
             guard let first = screenPoints.first, let last = screenPoints.last else { return }
+
+            if nutrientID == "net_calorie_balance" {
+                drawNetBalanceData(
+                    context: &context,
+                    screenPoints: screenPoints,
+                    origin: origin,
+                    yRange: yRange,
+                    graphSize: graphSize,
+                    accent: accent
+                )
+                return
+            }
 
             let chartColor = self.chartColor(for: nutrientID)
 
@@ -705,6 +775,85 @@ private extension AnalyticsChartView {
             }
         }
     }
+
+    func drawNetBalanceData(
+        context: inout GraphicsContext,
+        screenPoints: [CGPoint],
+        origin: CGPoint,
+        yRange: ClosedRange<Double>,
+        graphSize: CGSize,
+        accent: Color
+    ) {
+        let baselineY = yPosition(
+            for: 0,
+            inYRange: yRange,
+            graphHeight: graphSize.height,
+            originY: origin.y
+        )
+
+        func color(for value: Double) -> Color {
+            if value > 0 { return .orange }
+            if value < 0 { return .green }
+            return accent
+        }
+
+        if screenPoints.count > 1 {
+            for index in 0..<(screenPoints.count - 1) {
+                let firstPoint = screenPoints[index]
+                let secondPoint = screenPoints[index + 1]
+                let firstValue = points[index].value
+                let secondValue = points[index + 1].value
+                var segmentPoints: [(point: CGPoint, value: Double)] = [
+                    (firstPoint, firstValue)
+                ]
+
+                if firstValue * secondValue < 0 {
+                    let progress = CGFloat(-firstValue / (secondValue - firstValue))
+                    let crossing = CGPoint(
+                        x: firstPoint.x + progress * (secondPoint.x - firstPoint.x),
+                        y: baselineY
+                    )
+                    segmentPoints.append((crossing, 0))
+                }
+                segmentPoints.append((secondPoint, secondValue))
+
+                for partIndex in 0..<(segmentPoints.count - 1) {
+                    let start = segmentPoints[partIndex]
+                    let end = segmentPoints[partIndex + 1]
+                    let segmentColor = color(for: (start.value + end.value) / 2)
+
+                    var fillPath = Path()
+                    fillPath.move(to: CGPoint(x: start.point.x, y: baselineY))
+                    fillPath.addLine(to: start.point)
+                    fillPath.addLine(to: end.point)
+                    fillPath.addLine(to: CGPoint(x: end.point.x, y: baselineY))
+                    fillPath.closeSubpath()
+                    context.fill(fillPath, with: .color(segmentColor.opacity(0.18)))
+
+                    var linePath = Path()
+                    linePath.move(to: start.point)
+                    linePath.addLine(to: end.point)
+                    context.stroke(
+                        linePath,
+                        with: .color(segmentColor),
+                        style: StrokeStyle(
+                            lineWidth: 2.5,
+                            lineCap: .round,
+                            lineJoin: .round
+                        )
+                    )
+                }
+            }
+        }
+
+        for (index, point) in screenPoints.enumerated() {
+            let dot = CGRect(center: point, radius: 4)
+            context.fill(
+                Path(ellipseIn: dot),
+                with: .color(color(for: points[index].value))
+            )
+        }
+    }
     
     func drawInteractionIndicator(
         context: inout GraphicsContext,
@@ -727,12 +876,15 @@ private extension AnalyticsChartView {
     private func chartColor(for nutrientID: String) -> Color {
           switch nutrientID {
           case "calories": return .orange
+          case "calories_burned": return .red
+          case "net_calorie_balance": return .purple
           case "water": return .blue
           case "protein": return MacroNutrientPalette.protein
           case "carbohydrates": return MacroNutrientPalette.carbohydrates
           case "fat": return MacroNutrientPalette.fat
           case "profile_weight": return .blue
           case "profile_height": return .green
+          case "sleep": return .indigo
           default:
               if nutrientID.starts(with: "vit_") {
                   let id = String(nutrientID.dropFirst(4))

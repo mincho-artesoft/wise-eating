@@ -3,9 +3,11 @@ import SwiftData
 
 struct ProfileListView: View {
     @ObservedObject private var effectManager = EffectManager.shared
+    @ObservedObject private var sleepHealthStore = SleepHealthStore.shared
 
     // MARK: – Queries & Dependencies
     @Query private var profiles: [Profile]
+    @Query private var userSettings: [UserSettings]
     @Environment(\.modelContext) private var modelContext
     // MARK: – Subscription
     @ObservedObject private var subscriptionManager = SubscriptionManager.shared
@@ -113,7 +115,19 @@ struct ProfileListView: View {
             }
         }
         .task {
+            ensureHealthKitProfileSelection()
             await checkForUnreadNotifications()
+        }
+        .onChange(of: profiles.map(\.id)) { _, _ in
+            ensureHealthKitProfileSelection()
+        }
+        .onChange(of: activeProfileIDs) { _, _ in
+            ensureHealthKitProfileSelection()
+        }
+        .onChange(of: sleepHealthStore.isHealthKitEnabled) { _, isEnabled in
+            if isEnabled {
+                ensureHealthKitProfileSelection()
+            }
         }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
             Task {
@@ -212,6 +226,7 @@ struct ProfileListView: View {
     @ViewBuilder
     private func row(for profile: Profile) -> some View {
         let isSingleSelected = selectedProfile?.id == profile.id
+        let isHealthKitProfile = userSettings.first?.healthKitProfileID == profile.id
 
         let isImperial = GlobalState.measurementSystem == "Imperial"
         let displayedWeight = isImperial ? UnitConversion.kgToLbs(profile.weight) : profile.weight
@@ -274,6 +289,47 @@ struct ProfileListView: View {
                         .font(.caption2)
                         .foregroundColor(.orange)
                         .fixedSize(horizontal: false, vertical: true)
+                }
+
+                if sleepHealthStore.isHealthKitEnabled {
+                    Button {
+                        setHealthKitProfile(profile)
+                    } label: {
+                        Label(
+                            isHealthKitProfile ? "HealthKit profile" : "Use HealthKit",
+                            systemImage: isHealthKitProfile
+                                ? "heart.text.square.fill"
+                                : "heart.text.square"
+                        )
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(effectManager.currentGlobalAccentColor)
+                        .padding(.horizontal, 9)
+                        .padding(.vertical, 5)
+                        .background(
+                            Capsule()
+                                .fill(
+                                    isHealthKitProfile
+                                        ? effectManager.currentGlobalAccentColor.opacity(0.14)
+                                        : .clear
+                                )
+                        )
+                        .overlay {
+                            Capsule()
+                                .stroke(
+                                    effectManager.currentGlobalAccentColor.opacity(
+                                        isHealthKitProfile ? 0.65 : 0.3
+                                    ),
+                                    lineWidth: 1
+                                )
+                        }
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(isLocked)
+                    .accessibilityLabel(
+                        isHealthKitProfile
+                            ? "Current HealthKit profile"
+                            : "Use HealthKit for \(profile.name)"
+                    )
                 }
             }
 
@@ -385,6 +441,11 @@ struct ProfileListView: View {
                     if settings.lastSelectedProfile?.id == profileIDToDelete {
                         settings.lastSelectedProfile = self.selectedProfile
                     }
+                    if settings.healthKitProfileID == profileIDToDelete {
+                        settings.healthKitProfileID = orderedUnlockedProfiles(
+                            excluding: profileIDToDelete
+                        ).first?.id
+                    }
                 }
 
                 do {
@@ -411,6 +472,49 @@ struct ProfileListView: View {
 
     private func isProfileLocked(_ profile: Profile) -> Bool {
         !activeProfileIDs.contains(profile.id)
+    }
+
+    private func orderedUnlockedProfiles(excluding excludedID: UUID? = nil) -> [Profile] {
+        let remainingProfiles = profiles.filter { $0.id != excludedID }
+        let remainingActiveIDs = subscriptionManager.activeProfileIDs(
+            from: remainingProfiles
+        )
+        return remainingProfiles
+            .filter { remainingActiveIDs.contains($0.id) }
+            .sorted { lhs, rhs in
+                if lhs.createdAt == rhs.createdAt {
+                    return lhs.updatedAt < rhs.updatedAt
+                }
+                return lhs.createdAt < rhs.createdAt
+            }
+    }
+
+    private func ensureHealthKitProfileSelection() {
+        guard sleepHealthStore.isHealthKitEnabled,
+              let settings = userSettings.first else { return }
+        let unlockedProfiles = orderedUnlockedProfiles()
+        let currentIsAvailable = settings.healthKitProfileID.map { selectedID in
+            unlockedProfiles.contains { $0.id == selectedID }
+        } ?? false
+
+        guard !currentIsAvailable else { return }
+        settings.healthKitProfileID = unlockedProfiles.first?.id
+        try? modelContext.save()
+    }
+
+    private func setHealthKitProfile(_ profile: Profile) {
+        guard sleepHealthStore.isHealthKitEnabled,
+              !isProfileLocked(profile),
+              let settings = userSettings.first,
+              settings.healthKitProfileID != profile.id else {
+            return
+        }
+
+        withAnimation(.easeInOut(duration: 0.2)) {
+            settings.healthKitProfileID = profile.id
+        }
+        try? modelContext.save()
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
     }
 
     // MARK: - Add Profile Button State

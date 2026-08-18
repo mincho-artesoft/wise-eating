@@ -10,6 +10,9 @@ class UserSettings: ObservableObject {
     /// Последно избраният профил
     var lastSelectedProfile: Profile?
 
+    /// Единственият профил, към който се отнасят данните от HealthKit.
+    var healthKitProfileID: UUID?
+
     // MARK: - General Settings
     var isAIButtonEnabled: Bool = true
     
@@ -21,6 +24,7 @@ class UserSettings: ObservableObject {
 
     init(
         lastSelectedProfile: Profile? = nil,
+        healthKitProfileID: UUID? = nil,
         isAIButtonEnabled: Bool = true,
         generateLipids: Bool = false,
         generateAminoAcids: Bool = false,
@@ -28,6 +32,7 @@ class UserSettings: ObservableObject {
         generateSterols: Bool = false
     ) {
         self.lastSelectedProfile   = lastSelectedProfile
+        self.healthKitProfileID = healthKitProfileID
         self.isAIButtonEnabled     = isAIButtonEnabled 
         self.generateLipids = generateLipids
         self.generateAminoAcids = generateAminoAcids

@@ -11,6 +11,7 @@ public struct TwoWayPinnedSingleDayMultiCalendarWrapper: UIViewControllerReprese
     
     // --- ПРОМЯНА: Добавено е property за профила ---
     let profile: Profile
+    let usesHealthKit: Bool
     
     var goalProgressProvider: ((Date) -> Double?)?
         
@@ -38,7 +39,10 @@ public struct TwoWayPinnedSingleDayMultiCalendarWrapper: UIViewControllerReprese
         let vc = UIViewController()
         vc.view.backgroundColor = .clear
         
-        let container = TwoWayPinnedSingleDayMultiCalendarContainerView(profile: self.profile)
+        let container = TwoWayPinnedSingleDayMultiCalendarContainerView(
+            profile: self.profile,
+            usesHealthKit: usesHealthKit
+        )
         
         // --- НАЧАЛО НА ПРОМЯНАТА (1/5): Задаваме референция и callback ---
         context.coordinator.containerView = container
@@ -153,7 +157,7 @@ public struct TwoWayPinnedSingleDayMultiCalendarWrapper: UIViewControllerReprese
         }
         // --- КРАЙ НА ПРОМЯНАТА (2/5) ---
         
-        container.updateProfile(self.profile)
+        container.updateProfile(self.profile, usesHealthKit: usesHealthKit)
         container.goalProgressProvider = self.goalProgressProvider
         container.fromDate = fromDate
         

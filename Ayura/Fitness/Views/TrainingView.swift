@@ -12,10 +12,15 @@ struct TrainingView: View {
     private var isAIButtonEnabledGlobally: Bool {
         userSettingsArray.first?.isAIButtonEnabled ?? true
     }
+    private var usesHealthKit: Bool {
+        sleepHealthStore.isHealthKitEnabled
+            && userSettingsArray.first?.healthKitProfileID == profile.id
+    }
     @State private var refreshTrigger = 0
     @State private var isAITapOnCooldown: Bool = false
     // MARK: - AI State
     @ObservedObject private var aiManager = AIManager.shared
+    @ObservedObject private var sleepHealthStore = SleepHealthStore.shared
     @State private var runningGenerationJobID: UUID? = nil
     @State private var showAIGenerationToast = false
     @State private var toastTimer: Timer? = nil
@@ -714,7 +719,9 @@ struct TrainingView: View {
         .onReceive(timer) { _ in
             self.currentTimeString = Self.tFmt.string(from: Date())
         }
-        .task(id: "\(chosenDate)-\(profile.updatedAt)-\(refreshTrigger)") {
+        .task(
+            id: "\(chosenDate)-\(profile.updatedAt)-\(refreshTrigger)-\(usesHealthKit)"
+        ) {
             exerciseSearchVM.attach(context: ctx)
             loadTrainings(preselect: selectedTrainingID)
             exerciseSearchVM.query = globalSearchText
@@ -1622,7 +1629,7 @@ struct TrainingView: View {
                 if reminderDate.timeIntervalSinceNow > 0 {
                     do {
                         let newID = try await NotificationManager.shared.scheduleNotification(
-                            title: "🏋️ Workout Reminder",
+                            title: "🧘 Workout Reminder",
                             body: "Time for your workout: \(training.name)!",
                             timeInterval: reminderDate.timeIntervalSinceNow,
                             userInfo: [
@@ -1696,6 +1703,11 @@ struct TrainingView: View {
     }
 
     private func fetchHealthActivitySummary() async {
+        guard usesHealthKit else {
+            healthActivitySummary = .zero
+            return
+        }
+
         let requestedDate = chosenDate
         let summary = await SleepHealthStore.shared.activitySummary(for: requestedDate)
         guard Calendar.current.isDate(chosenDate, inSameDayAs: requestedDate) else {

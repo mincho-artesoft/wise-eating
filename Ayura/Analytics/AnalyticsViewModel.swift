@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import EventKit
 
 @MainActor
 final class AnalyticsViewModel: ObservableObject {
@@ -11,10 +12,14 @@ final class AnalyticsViewModel: ObservableObject {
     var customStartDate: Date?
     var customEndDate: Date?
     var selectedNutrientIDs: Set<String> = ["calories"]
+    var usesHealthKit = false
     
     // MARK: - Dependencies
     private let profile: Profile
     private weak var modelContext: ModelContext?
+    #if DEBUG && targetEnvironment(simulator)
+    private var isSeedingSimulatorAnalyticsData = false
+    #endif
     
     // MARK: - Initializer
     init(profile: Profile, modelContext: ModelContext) {
@@ -35,10 +40,35 @@ final class AnalyticsViewModel: ObservableObject {
            }
            
            let (conceptualStartDate, conceptualEndDate) = getDateRange()
-           let profileMetricData = profileMetricChartData(
+
+           #if DEBUG && targetEnvironment(simulator)
+           await seedSimulatorAnalyticsDataIfNeeded()
+           #endif
+
+           var standaloneMetricData = profileMetricChartData(
                from: conceptualStartDate,
                until: conceptualEndDate
            )
+
+           let sleepHoursByDay: [Date: Double]
+           if usesHealthKit && selectedNutrientIDs.contains("sleep") {
+               sleepHoursByDay = await SleepHealthStore.shared
+                   .sleepDurationHoursByDay(
+                       from: conceptualStartDate,
+                       until: conceptualEndDate
+                   )
+               standaloneMetricData["sleep"] = sleepHoursByDay
+                   .map { date, hours in
+                       PlottableMetric(
+                           date: date,
+                           metricName: "sleep",
+                           value: hours
+                       )
+                   }
+                   .sorted { $0.date < $1.date }
+           } else {
+               sleepHoursByDay = [:]
+           }
            // LOG 2: Извлечен период от getDateRange
            print("📊 [ANALYTICS] Conceptual date range: \(conceptualStartDate.formatted()) to \(conceptualEndDate.formatted())")
            
@@ -58,6 +88,30 @@ final class AnalyticsViewModel: ObservableObject {
            }
            // LOG 4: Брой дни със събития
            print("📊 [ANALYTICS] Grouped events into \(eventsByDay.count) unique days.")
+
+           let needsEnergyMetrics = selectedNutrientIDs.contains("calories_burned")
+               || selectedNutrientIDs.contains("net_calorie_balance")
+           let exerciseCaloriesByDay = needsEnergyMetrics
+               ? exerciseCaloriesBurnedByDay(
+                   from: allEventsInRange,
+                   startDate: conceptualStartDate,
+                   endDate: conceptualEndDate
+               )
+               : [:]
+           let healthCaloriesByDay: [Date: Double]
+           if needsEnergyMetrics && usesHealthKit {
+               healthCaloriesByDay = await SleepHealthStore.shared
+                   .activeEnergyKilocaloriesByDay(
+                       from: conceptualStartDate,
+                       until: conceptualEndDate
+                   )
+           } else {
+               healthCaloriesByDay = [:]
+           }
+           let burnedCaloriesByDay = exerciseCaloriesByDay.merging(
+               healthCaloriesByDay,
+               uniquingKeysWith: +
+           )
 
         // --- НОВА СТЪПКА: Извличане на данни за водата ---
         // ----- 👇 НАЧАЛО НА КОРЕКЦИЯТА 👇 -----
@@ -80,19 +134,26 @@ final class AnalyticsViewModel: ObservableObject {
         }
 
         // Обединяваме всички дни, за които имаме данни (хранене или вода)
-        let allDates = Set(eventsByDay.keys).union(waterLogsByDay.keys)
+        let allDates = Set(eventsByDay.keys)
+            .union(waterLogsByDay.keys)
+            .union(sleepHoursByDay.keys)
+            .union(burnedCaloriesByDay.keys)
 
         guard !allDates.isEmpty,
               let actualStartDate = allDates.min(),
               let actualEndDate = allDates.max() else {
-            print("📊 [ANALYTICS] No events or water logs found. Showing available profile metrics only.")
-            self.chartData = profileMetricData
+            print("📊 [ANALYTICS] No daily logs found. Showing available standalone metrics only.")
+            self.chartData = standaloneMetricData
             return
         }
            // LOG 6: Реален период на данните
            print("📊 [ANALYTICS] Actual data spans from \(actualStartDate.formatted()) to \(actualEndDate.formatted())")
 
-        var dailyLogs: [Date: (foods: [FoodItem: Double], waterMl: Double)] = [:]
+        var dailyLogs: [Date: (
+            foods: [FoodItem: Double],
+            waterMl: Double,
+            burnedCalories: Double
+        )] = [:]
            var currentDate = actualStartDate
            
            while currentDate <= actualEndDate {
@@ -111,31 +172,51 @@ final class AnalyticsViewModel: ObservableObject {
                let glasses = waterLogsByDay[dayKey]?.first?.glassesConsumed ?? 0
                let waterMilliliters = Double(glasses * 200)
 
-               dailyLogs[dayKey] = (foods: foodsForDay, waterMl: waterMilliliters)
+               dailyLogs[dayKey] = (
+                   foods: foodsForDay,
+                   waterMl: waterMilliliters,
+                   burnedCalories: burnedCaloriesByDay[dayKey] ?? 0
+               )
                
                currentDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
            }
            // LOG 7: Брой дни с обработени логове
            print("📊 [ANALYTICS] Created \(dailyLogs.count) daily logs.")
            
-           updateChartData(from: dailyLogs, profileMetricData: profileMetricData)
+           updateChartData(
+               from: dailyLogs,
+               standaloneMetricData: standaloneMetricData
+           )
        }
 
     /// Обновява `chartData` на базата на събраните дневни логове.
     private func updateChartData(
-        from dailyLogs: [Date: (foods: [FoodItem: Double], waterMl: Double)],
-        profileMetricData: [String: [PlottableMetric]]
+        from dailyLogs: [Date: (
+            foods: [FoodItem: Double],
+            waterMl: Double,
+            burnedCalories: Double
+        )],
+        standaloneMetricData: [String: [PlottableMetric]]
     ) {
-            var newChartData = profileMetricData
+            var newChartData = standaloneMetricData
             
             for nutrientID in selectedNutrientIDs
-            where nutrientID != "profile_weight" && nutrientID != "profile_height" {
+            where nutrientID != "profile_weight"
+                && nutrientID != "profile_height"
+                && nutrientID != "sleep" {
                 var nutrientPoints: [PlottableMetric] = []
                 for (date, logData) in dailyLogs {
                     let totalValue: Double
                     switch nutrientID {
                     case "calories":
                         totalValue = logData.foods.reduce(0) { $0 + $1.key.calories(for: $1.value) }
+                    case "calories_burned":
+                        totalValue = logData.burnedCalories
+                    case "net_calorie_balance":
+                        let consumedCalories = logData.foods.reduce(0) {
+                            $0 + $1.key.calories(for: $1.value)
+                        }
+                        totalValue = consumedCalories - logData.burnedCalories
                     case "water":
                         totalValue = logData.waterMl
                     case "protein":
@@ -176,6 +257,242 @@ final class AnalyticsViewModel: ObservableObject {
             }
             self.chartData = newChartData
         }
+
+    private func exerciseCaloriesBurnedByDay(
+        from events: [EKEvent],
+        startDate: Date,
+        endDate: Date
+    ) -> [Date: Double] {
+        let calendar = Calendar.current
+        let eventTrainingsByDay = Dictionary(
+            grouping: calendarTrainings(from: events)
+        ) { training in
+            calendar.startOfDay(for: training.startTime)
+        }
+
+        var result: [Date: Double] = [:]
+        var caloriesByTrainingPayload: [String: Double] = [:]
+        var day = calendar.startOfDay(for: startDate)
+        while day < endDate {
+            let trainings = mergedTrainings(
+                template: profile.trainings(for: day),
+                calendar: eventTrainingsByDay[day] ?? []
+            )
+            result[day] = trainings.reduce(0) { total, training in
+                total + caloriesBurned(
+                    by: training,
+                    cache: &caloriesByTrainingPayload
+                )
+            }
+
+            guard let nextDay = calendar.date(byAdding: .day, value: 1, to: day) else {
+                break
+            }
+            day = nextDay
+        }
+        return result
+    }
+
+    private func calendarTrainings(from events: [EKEvent]) -> [Training] {
+        let mealTemplateNames = Set(profile.meals.map(\.name))
+        let trainingTemplateNames = Set(profile.trainings.map(\.name))
+
+        return events.filter { event in
+            let title = event.title ?? ""
+            if let notes = event.notes,
+               let decoded = OptimizedInvisibleCoder.decode(from: notes),
+               decoded.starts(with: "#TRAINING#") {
+                return true
+            }
+            if trainingTemplateNames.contains(title) {
+                return true
+            }
+            if mealTemplateNames.contains(title) {
+                return false
+            }
+            return false
+        }
+        .map(Training.init(event:))
+    }
+
+    private func mergedTrainings(
+        template: [Training],
+        calendar events: [Training]
+    ) -> [Training] {
+        var result = template.map(Training.init(from:))
+        var usedEventIDs = Set<String>()
+
+        for index in result.indices {
+            let templateTraining = result[index]
+            guard let matchingEvent = events.first(where: {
+                $0.name == templateTraining.name
+                    && $0.calendarEventID.map { !usedEventIDs.contains($0) } == true
+            }) else {
+                continue
+            }
+
+            result[index].startTime = matchingEvent.startTime
+            result[index].endTime = matchingEvent.endTime
+            result[index].notes = matchingEvent.notes
+            result[index].calendarEventID = matchingEvent.calendarEventID
+            if let eventID = matchingEvent.calendarEventID {
+                usedEventIDs.insert(eventID)
+            }
+        }
+
+        result.append(contentsOf: events.filter {
+            guard let eventID = $0.calendarEventID else { return false }
+            return !usedEventIDs.contains(eventID)
+        })
+        return result
+    }
+
+    private func caloriesBurned(
+        by training: Training,
+        cache: inout [String: Double]
+    ) -> Double {
+        let cacheKey = training.notes ?? ""
+        if let cachedValue = cache[cacheKey] {
+            return cachedValue
+        }
+        guard let modelContext else { return 0 }
+        let value = training.exercises(using: modelContext).reduce(0) { total, item in
+            let (exercise, durationSeconds) = item
+            guard let met = exercise.metValue,
+                  met.isFinite,
+                  met > 0,
+                  durationSeconds.isFinite,
+                  durationSeconds > 0 else {
+                return total
+            }
+            let caloriesPerMinute = (met * 3.5 * profile.weight) / 200
+            return total + caloriesPerMinute * (durationSeconds / 60)
+        }
+        cache[cacheKey] = value
+        return value
+    }
+
+    #if DEBUG && targetEnvironment(simulator)
+    private func seedSimulatorAnalyticsDataIfNeeded() async {
+        let defaultsKey = "analytics.simulatorTestData.v1"
+        guard !UserDefaults.standard.bool(forKey: defaultsKey),
+              !isSeedingSimulatorAnalyticsData,
+              let modelContext else {
+            return
+        }
+        isSeedingSimulatorAnalyticsData = true
+        defer { isSeedingSimulatorAnalyticsData = false }
+
+        var foodDescriptor = FetchDescriptor<FoodItem>()
+        foodDescriptor.fetchLimit = 500
+        let food = (try? modelContext.fetch(foodDescriptor))?.first(where: {
+            !$0.name.contains("=")
+                && !$0.name.contains("|")
+                && $0.referenceWeightG > 0
+                && $0.calories(for: $0.referenceWeightG) >= 50
+        })
+
+        var exerciseDescriptor = FetchDescriptor<ExerciseItem>()
+        exerciseDescriptor.fetchLimit = 500
+        let exercise = (try? modelContext.fetch(exerciseDescriptor))?
+            .filter { ($0.metValue ?? 0) > 0 }
+            .max { ($0.metValue ?? 0) < ($1.metValue ?? 0) }
+
+        guard food != nil || exercise != nil else { return }
+
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        guard let rangeStart = calendar.date(byAdding: .day, value: -6, to: today),
+              let rangeEnd = calendar.date(byAdding: .day, value: 1, to: today) else {
+            return
+        }
+        let existingEvents = await CalendarViewModel.shared.fetchEvents(
+            forProfile: profile,
+            startDate: rangeStart,
+            endDate: rangeEnd
+        )
+        let consumedTargets = [
+            1_800.0, 100.0, 2_200.0, 120.0, 1_600.0, 90.0, 1_400.0
+        ]
+        let workoutMinutes = [55.0, 80.0, 40.0, 90.0, 50.0, 75.0, 45.0]
+
+        for dayOffset in 0...6 {
+            guard let day = calendar.date(
+                byAdding: .day,
+                value: -dayOffset,
+                to: today
+            ) else {
+                continue
+            }
+
+            if let food {
+                let mealTitle = "Analytics Test Meal"
+                let mealExists = existingEvents.contains {
+                    $0.title == mealTitle
+                        && calendar.isDate($0.startDate, inSameDayAs: day)
+                }
+                if !mealExists {
+                    let caloriesPerGram = food.calories(for: 1)
+                    if caloriesPerGram > 0,
+                       let start = calendar.date(
+                           bySettingHour: 13,
+                           minute: 0,
+                           second: 0,
+                           of: day
+                       ) {
+                        let grams = consumedTargets[dayOffset] / caloriesPerGram
+                        let visiblePayload = "\(food.name)=\(grams)"
+                        let payload = OptimizedInvisibleCoder.encode(
+                            from: visiblePayload
+                        )
+                        _ = await CalendarViewModel.shared.createEvent(
+                            forProfile: profile,
+                            startDate: start,
+                            endDate: start.addingTimeInterval(45 * 60),
+                            title: mealTitle,
+                            invisiblePayload: payload
+                        )
+                    }
+                }
+            }
+
+            if let exercise {
+                let workoutTitle = "Analytics Test Workout"
+                let workoutExists = existingEvents.contains {
+                    $0.title == workoutTitle
+                        && calendar.isDate($0.startDate, inSameDayAs: day)
+                }
+                if !workoutExists,
+                   let start = calendar.date(
+                       bySettingHour: 18,
+                       minute: 0,
+                       second: 0,
+                       of: day
+                   ) {
+                    let durationSeconds = workoutMinutes[dayOffset] * 60
+                    let training = Training(
+                        name: workoutTitle,
+                        startTime: start,
+                        endTime: start.addingTimeInterval(durationSeconds)
+                    )
+                    training.updateNotes(
+                        exercises: [exercise: durationSeconds],
+                        detailedLog: nil
+                    )
+                    let payload = OptimizedInvisibleCoder.encode(
+                        from: training.notes ?? "#TRAINING#"
+                    )
+                    _ = await CalendarViewModel.shared.createOrUpdateTrainingEvent(
+                        forProfile: profile,
+                        training: training,
+                        exercisesPayload: payload
+                    )
+                }
+            }
+        }
+        UserDefaults.standard.set(true, forKey: defaultsKey)
+    }
+    #endif
 
     private func profileMetricChartData(
         from startDate: Date,

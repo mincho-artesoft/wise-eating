@@ -501,27 +501,18 @@ private struct CoordinatorObserver: View {
 
     var body: some View {
         Color.clear
+            .onAppear {
+                // A notification can be tapped while the app is fully closed.
+                // In that case the coordinator values may already be set before
+                // SwiftUI installs the onChange observers.
+                handlePendingProfile(coordinator.pendingProfileID)
+                handlePendingTab(coordinator.pendingTab)
+            }
             .onChange(of: coordinator.pendingTab) { _, newTab in
-                guard let tab = newTab else { return }
-                
-                onDismissSearch()
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    withAnimation { selectedTab = tab }
-                    coordinator.pendingTab = nil
-                }
+                handlePendingTab(newTab)
             }
             .onChange(of: coordinator.pendingProfileID) { _, newProfileID in
-                guard let id = newProfileID else { return }
-                
-                onDismissSearch()
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    if let profileToSelect = profiles.first(where: { $0.id == id }) {
-                        selectedProfile = profileToSelect
-                    }
-                    coordinator.pendingProfileID = nil
-                }
+                handlePendingProfile(newProfileID)
             }
             .onChange(of: coordinator.pendingShoppingListID) { _, newID in
                 guard newID != nil else { return }
@@ -788,6 +779,32 @@ private struct CoordinatorObserver: View {
                     coordinator.triggerDailyAIGeneratorForProfile = nil
                 }
             }
+    }
+
+    private func handlePendingTab(_ tab: AppTab?) {
+        guard let tab else { return }
+
+        onDismissSearch()
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            guard coordinator.pendingTab == tab else { return }
+            withAnimation { selectedTab = tab }
+            coordinator.pendingTab = nil
+        }
+    }
+
+    private func handlePendingProfile(_ profileID: UUID?) {
+        guard let profileID else { return }
+
+        onDismissSearch()
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            guard coordinator.pendingProfileID == profileID else { return }
+            if let profileToSelect = profiles.first(where: { $0.id == profileID }) {
+                selectedProfile = profileToSelect
+            }
+            coordinator.pendingProfileID = nil
+        }
     }
 }
 

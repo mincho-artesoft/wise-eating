@@ -83,6 +83,7 @@ struct RootView: View {
     
     @ObservedObject var effectManager = EffectManager.shared
     @ObservedObject private var subscriptionManager = SubscriptionManager.shared
+    @ObservedObject private var sleepHealthStore = SleepHealthStore.shared
     @State private var isProfilesDrawerVisible: Bool = false
     @State private var profilesMenuState: MenuState = .collapsed
     @State private var profilesDrawerContent: ProfilesDrawerContent = .profiles
@@ -298,6 +299,15 @@ struct RootView: View {
         .onChange(of: profiles) {
             if let sel = selectedProfile, !profiles.contains(where: { $0.id == sel.id }) {
                 selectedProfile = nil
+            }
+            ensureHealthKitProfileSelection()
+        }
+        .onChange(of: subscriptionManager.maxProfilesAllowed) { _, _ in
+            ensureHealthKitProfileSelection()
+        }
+        .onChange(of: sleepHealthStore.isHealthKitEnabled) { _, isEnabled in
+            if isEnabled {
+                ensureHealthKitProfileSelection()
             }
         }
         .background(
@@ -840,6 +850,7 @@ struct RootView: View {
                     events: $pinnedEventsSingle,
                     searchText: $searchText,
                     profile: profile,
+                    usesHealthKit: isHealthKitProfile(profile),
                     goalProgressProvider: { date in goalProgress(on: date) },
                     eventStore: CalendarViewModel.shared.eventStore,
                     onNodesButtonTapped: {
@@ -954,8 +965,8 @@ struct RootView: View {
     // ─────────────────────────────────────────────────────────────────────────────
     
     private enum DraggableMenuTab: String, CaseIterable, Identifiable {
-        case nutrients = "Nutrients"
         case settings = "Settings"
+        case nutrients = "Nutrients"
         case subscriptions = "Plans"
         
         var id: String { rawValue }
@@ -968,7 +979,7 @@ struct RootView: View {
         var id: String { rawValue }
     }
     
-    @State private var selectedDraggableMenuTab: DraggableMenuTab = .nutrients
+    @State private var selectedDraggableMenuTab: DraggableMenuTab = .settings
     @State private var selectedNutrientSubTab: NutrientSubTab = .vitamins
     @State private var selectedSubscriptionCategory: SubscriptionCategory = .base
     @State private var pendingUpgradeCategory: SubscriptionCategory? = nil
@@ -1113,21 +1124,25 @@ struct RootView: View {
         
         Task { @MainActor in
             CalendarViewModel.shared.reloadCalendars()
-            
-            if settings.isEmpty {
+
+            let userSettings: UserSettings
+            if let existingSettings = settings.first {
+                userSettings = existingSettings
+            } else {
                 let newSettings = UserSettings()
                 modelContext.insert(newSettings)
-                try? modelContext.save()
+                userSettings = newSettings
             }
-            guard let userSettings = settings.first else { return }
-            
+
             if let last = userSettings.lastSelectedProfile,
                profiles.contains(where: { $0.id == last.id }) {
                 selectedProfile = last
             } else {
-                selectedProfile = profiles.first
+                selectedProfile = orderedUnlockedProfiles().first
+                    ?? orderedProfiles().first
                 userSettings.lastSelectedProfile = selectedProfile
             }
+            ensureHealthKitProfileSelection(in: userSettings)
             AyurvedaConstitutionStore.setActiveProfile(selectedProfile?.id)
             
             try? modelContext.save()
@@ -1147,8 +1162,45 @@ struct RootView: View {
         }
         if let us = settings.first {
             us.lastSelectedProfile  = selectedProfile
+            ensureHealthKitProfileSelection(in: us)
             try? modelContext.save()
         }
+    }
+
+    private func orderedProfiles(excluding excludedID: UUID? = nil) -> [Profile] {
+        profiles
+            .filter { $0.id != excludedID }
+            .sorted { lhs, rhs in
+                if lhs.createdAt == rhs.createdAt {
+                    return lhs.updatedAt < rhs.updatedAt
+                }
+                return lhs.createdAt < rhs.createdAt
+            }
+    }
+
+    private func orderedUnlockedProfiles(excluding excludedID: UUID? = nil) -> [Profile] {
+        let activeIDs = subscriptionManager.activeProfileIDs(from: profiles)
+        return orderedProfiles(excluding: excludedID).filter {
+            activeIDs.contains($0.id)
+        }
+    }
+
+    private func ensureHealthKitProfileSelection(in providedSettings: UserSettings? = nil) {
+        guard sleepHealthStore.isHealthKitEnabled,
+              let userSettings = providedSettings ?? settings.first else { return }
+        let availableProfiles = orderedUnlockedProfiles()
+        let currentIsAvailable = userSettings.healthKitProfileID.map { selectedID in
+            availableProfiles.contains { $0.id == selectedID }
+        } ?? false
+
+        guard !currentIsAvailable else { return }
+        userSettings.healthKitProfileID = availableProfiles.first?.id
+        try? modelContext.save()
+    }
+
+    private func isHealthKitProfile(_ profile: Profile) -> Bool {
+        sleepHealthStore.isHealthKitEnabled
+            && settings.first?.healthKitProfileID == profile.id
     }
     
     private func handleProfileChange(_ newProfile: Profile?) {

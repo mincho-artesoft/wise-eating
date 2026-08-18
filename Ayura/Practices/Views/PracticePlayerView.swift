@@ -52,8 +52,16 @@ struct PracticePlayerView: View {
         .onAppear {
             guard !hasStarted else { return }
             hasStarted = true
-            sessionStartedAt = Date()
+            let startedAt = Date()
+            sessionStartedAt = startedAt
             UIApplication.shared.isIdleTimerDisabled = true
+            Task {
+                await NotificationManager.shared.updatePracticeReminder(
+                    lastPracticeStartedAt: startedAt,
+                    practiceTitle: practice.title,
+                    profileID: profile.id
+                )
+            }
             player.play(
                 practice.makeAudioPlan(
                     duration: duration,

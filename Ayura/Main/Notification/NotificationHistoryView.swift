@@ -157,8 +157,10 @@ struct NotificationHistoryView: View {
         }) {
             HStack(spacing: 12) {
                 VStack {
-                    let iconName = if notification.userInfo["trainingID"] != nil {
-                        "dumbbell.fill"
+                    let iconName = if notification.userInfo["practiceReminder"] as? Bool == true {
+                        "figure.mind.and.body"
+                    } else if notification.userInfo["trainingID"] != nil {
+                        "figure.yoga"
                     } else if notification.userInfo["mealID"] != nil {
                         "fork.knife"
                     } else {
@@ -244,7 +246,10 @@ struct NotificationHistoryView: View {
                 coordinator.pendingProfileID = profileID
             }
             
-            if let listIDString = userInfo["shoppingListID"] as? String,
+            if userInfo["practiceReminder"] as? Bool == true {
+                coordinator.pendingTab = .practices
+            }
+            else if let listIDString = userInfo["shoppingListID"] as? String,
                let listID = UUID(uuidString: listIDString) {
                 coordinator.pendingShoppingListID = listID
             }

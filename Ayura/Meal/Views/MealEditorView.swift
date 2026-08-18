@@ -28,7 +28,10 @@ struct MealEditorView: View {
         _draft = State(initialValue: Meal(from: meal))
         self.isNew = isNew
         self.onSave = onSave
-        _reminderOffset = State(initialValue: meal.reminderMinutes ?? 0)
+        _reminderOffset = State(
+            initialValue: meal.reminderMinutes
+                ?? (isNew ? ReminderDefaults.minutesBeforeEvent : 0)
+        )
 
         _initialState = State(initialValue: InitialState(
             name: meal.name,

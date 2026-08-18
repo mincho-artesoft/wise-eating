@@ -1,12 +1,25 @@
 // ==== FILE: /Users/aleksandarsvinarov/Desktop/Repo/AyurvedaAsanaYoga/AyurvedaAsanaYoga/Settings/SettingsView.swift ====
 import SwiftUI
 import PhotosUI
+import SwiftData
+@preconcurrency import UserNotifications
 
 struct SettingsView: View {
+    @Environment(\.modelContext) private var modelContext
+    @Environment(\.openURL) private var openURL
+
+    @Query private var profiles: [Profile]
+    @Query private var shoppingLists: [ShoppingListModel]
+
     @ObservedObject private var themeManager = ThemeManager.shared
     @ObservedObject private var backgroundManager = BackgroundManager.shared
     @ObservedObject private var effectManager = EffectManager.shared
 
+    @AppStorage(NotificationManager.appNotificationsEnabledKey)
+    private var appNotificationsEnabled = true
+
+    @State private var notificationPermissionLoaded = false
+    @State private var notificationsAuthorized = false
     @State private var showingImagePicker = false
     @State private var inputImage: UIImage?
     @State private var imageToReplace: UIImage?
@@ -16,7 +29,11 @@ struct SettingsView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 20) {
-                 Text("Appearance")
+                notificationsSection
+
+                Divider().padding(.horizontal)
+
+                Text("Appearance")
                     .font(.title2.bold())
                     .padding(.horizontal)
                 
@@ -161,5 +178,185 @@ struct SettingsView: View {
         .onChange(of: themeManager.currentTheme) { _, newTheme in
             themeManager.setTheme(to: newTheme)
         }
+        .task {
+            await refreshNotificationPermission()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+            Task {
+                await refreshNotificationPermission(restoreRemindersWhenAuthorized: true)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var notificationsSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Notifications")
+                .font(.title2.bold())
+
+            if !notificationPermissionLoaded {
+                HStack(spacing: 10) {
+                    ProgressView()
+                    Text("Checking notification permission…")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+                .padding(14)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+            } else if notificationsAuthorized {
+                HStack(spacing: 12) {
+                    Image(systemName: appNotificationsEnabled ? "bell.badge.fill" : "bell.slash.fill")
+                        .font(.title3)
+                        .frame(width: 32, height: 32)
+                        .background(effectManager.currentGlobalAccentColor.opacity(0.12), in: Circle())
+
+                    VStack(alignment: .leading, spacing: 3) {
+                        Text("Allow notifications in Ayura")
+                            .font(.headline)
+                        Text("Controls reminders and updates for the entire app.")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+
+                    Spacer(minLength: 8)
+
+                    Toggle("", isOn: $appNotificationsEnabled)
+                        .labelsHidden()
+                        .tint(effectManager.currentGlobalAccentColor)
+                        .onChange(of: appNotificationsEnabled) { _, isEnabled in
+                            Task {
+                                await applyNotificationPreference(isEnabled)
+                            }
+                        }
+                }
+                .padding(14)
+                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+            } else {
+                VStack(alignment: .leading, spacing: 10) {
+                    Label("Notifications are disabled in iOS", systemImage: "bell.slash.fill")
+                        .font(.headline)
+
+                    Text("Open Settings → Apps → Ayura → Notifications and turn on Allow Notifications.")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+
+                    Button {
+                        guard let url = URL(string: UIApplication.openNotificationSettingsURLString) else { return }
+                        openURL(url)
+                    } label: {
+                        Label("Open iOS Settings", systemImage: "gear")
+                            .font(.subheadline.bold())
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(effectManager.currentGlobalAccentColor)
+                }
+                .padding(14)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+            }
+        }
+        .padding(.horizontal)
+    }
+
+    @MainActor
+    private func refreshNotificationPermission(
+        restoreRemindersWhenAuthorized: Bool = false
+    ) async {
+        let wasAuthorized = notificationsAuthorized
+        let status = await NotificationManager.shared.getAuthorizationStatus()
+        notificationsAuthorized = status == .authorized
+            || status == .provisional
+            || status == .ephemeral
+        notificationPermissionLoaded = true
+
+        if restoreRemindersWhenAuthorized,
+           notificationsAuthorized,
+           !wasAuthorized,
+           appNotificationsEnabled {
+            await restoreFutureReminders()
+        }
+    }
+
+    @MainActor
+    private func applyNotificationPreference(_ isEnabled: Bool) async {
+        await NotificationManager.shared.setAppNotificationsEnabled(isEnabled)
+        if isEnabled {
+            await restoreFutureReminders()
+        }
+    }
+
+    @MainActor
+    private func restoreFutureReminders() async {
+        guard notificationsAuthorized, appNotificationsEnabled else { return }
+
+        for profile in profiles {
+            for meal in profile.meals {
+                if let oldID = meal.notificationID {
+                    NotificationManager.shared.cancelNotification(id: oldID)
+                    meal.notificationID = nil
+                }
+
+                guard let minutes = meal.reminderMinutes, minutes > 0 else { continue }
+                let reminderDate = meal.startTime.addingTimeInterval(-TimeInterval(minutes * 60))
+                guard reminderDate > Date() else { continue }
+
+                meal.notificationID = try? await NotificationManager.shared.scheduleNotification(
+                    title: "🍽️ Meal Reminder",
+                    body: "It's time for your \(meal.name). Enjoy!",
+                    timeInterval: reminderDate.timeIntervalSinceNow,
+                    userInfo: [
+                        "mealID": meal.id.uuidString,
+                        "mealDate": meal.startTime.timeIntervalSince1970,
+                    ],
+                    profileID: profile.id
+                )
+            }
+
+            for training in profile.trainings {
+                if let oldID = training.notificationID {
+                    NotificationManager.shared.cancelNotification(id: oldID)
+                    training.notificationID = nil
+                }
+
+                guard let minutes = training.reminderMinutes, minutes > 0 else { continue }
+                let reminderDate = training.startTime.addingTimeInterval(-TimeInterval(minutes * 60))
+                guard reminderDate > Date() else { continue }
+
+                training.notificationID = try? await NotificationManager.shared.scheduleNotification(
+                    title: "🧘 Workout Reminder",
+                    body: "Time for your workout: \(training.name)!",
+                    timeInterval: reminderDate.timeIntervalSinceNow,
+                    userInfo: [
+                        "trainingID": training.id.uuidString,
+                        "trainingDate": training.startTime.timeIntervalSince1970,
+                        "trainingName": training.name,
+                    ],
+                    profileID: profile.id
+                )
+            }
+        }
+
+        for list in shoppingLists where !list.isCompleted {
+            if let oldID = list.notificationID {
+                NotificationManager.shared.cancelNotification(id: oldID)
+                list.notificationID = nil
+            }
+
+            guard let minutes = list.reminderMinutes, minutes > 0 else { continue }
+            let reminderDate = list.eventStartDate.addingTimeInterval(-TimeInterval(minutes * 60))
+            guard reminderDate > Date() else { continue }
+
+            list.notificationID = try? await NotificationManager.shared.scheduleNotification(
+                title: "🛒 Shopping Reminder",
+                body: "Time to buy groceries for your list: \(list.name)",
+                timeInterval: reminderDate.timeIntervalSinceNow,
+                userInfo: ["shoppingListID": list.id.uuidString],
+                profileID: list.profile?.id
+            )
+        }
+
+        await NotificationManager.shared.refreshPracticeReminderIfNeeded()
+        try? modelContext.save()
     }
 }

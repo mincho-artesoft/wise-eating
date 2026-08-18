@@ -230,15 +230,22 @@ public final class TwoWayPinnedSingleDayMultiCalendarContainerView: UIView,
     fileprivate let calendarsHeaderHeight: CGFloat = 0
     
     private var profile: Profile
+    private var usesHealthKit: Bool
     
     // ---------------------------------------------------------
     // MARK: - Инициализация
     // ---------------------------------------------------------
-    public init(profile: Profile, frame: CGRect = .zero) {
+    public init(
+        profile: Profile,
+        usesHealthKit: Bool,
+        frame: CGRect = .zero
+    ) {
         self.profile = profile
+        self.usesHealthKit = usesHealthKit
         super.init(frame: frame)
         
         self.weekView.profile = profile
+        self.weekView.usesHealthKit = usesHealthKit
         
         setupViews()
 
@@ -307,6 +314,13 @@ public final class TwoWayPinnedSingleDayMultiCalendarContainerView: UIView,
 
     private func reloadSleepHighlightsIfNeeded(force: Bool = false) {
         let day = Calendar.current.startOfDay(for: fromDate)
+        guard usesHealthKit else {
+            loadedSleepDay = day
+            sleepLoadTask?.cancel()
+            weekView.sleepIntervals = []
+            return
+        }
+
         if !force, let loadedSleepDay, Calendar.current.isDate(loadedSleepDay, inSameDayAs: day) {
             return
         }
@@ -680,17 +694,24 @@ public final class TwoWayPinnedSingleDayMultiCalendarContainerView: UIView,
         }
     }
     
-    public func updateProfile(_ newProfile: Profile) {
+    public func updateProfile(_ newProfile: Profile, usesHealthKit: Bool) {
         let profileIDChanged = profile.id != newProfile.id
+        let healthKitUsageChanged = self.usesHealthKit != usesHealthKit
         self.profile = newProfile
+        self.usesHealthKit = usesHealthKit
         
         // +++ НАЧАЛО НА ПРОМЯНАТА (2/2) +++
         // Уверяваме се, че и weekView се обновява, когато профилът се смени
         self.weekView.profile = newProfile
+        self.weekView.usesHealthKit = usesHealthKit
         // +++ КРАЙ НА ПРОМЯНАТА (2/2) +++
 
         if profileIDChanged {
             updateRecommendedSleep()
+        }
+        if profileIDChanged || healthKitUsageChanged {
+            loadedSleepDay = nil
+            reloadSleepHighlightsIfNeeded(force: true)
         }
         
         setNeedsLayout()

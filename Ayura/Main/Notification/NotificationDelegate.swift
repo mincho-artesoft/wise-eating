@@ -66,6 +66,8 @@ class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
         }()
         
         let trainingName = userInfo["trainingName"] as? String
+
+        let isPracticeReminder = userInfo["practiceReminder"] as? Bool == true
         
         let generationJobID: UUID? = {
             if let jobIDString = userInfo["generationJobID"] as? String {
@@ -91,7 +93,11 @@ class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
 
                  // Обработваме конкретното съдържание на нотификацията с if-else if,
                  // за да сме сигурни, че се изпълнява само ЕДНА навигационна логика.
-                 if let listID = listID {
+                 if isPracticeReminder {
+                     print("DELEGATE: Потребителят натисна напомняне за практика")
+                     coordinator.pendingProfileID = profileID
+                     coordinator.pendingTab = .practices
+                 } else if let listID = listID {
                      print("DELEGATE: Потребителят натисна нотификация за Shopping List с ID: \(listID)")
                      coordinator.pendingProfileID = profileID
                      coordinator.pendingShoppingListID = listID

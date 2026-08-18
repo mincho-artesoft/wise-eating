@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 import HealthKit
 
 struct HealthWorkoutActivity: Identifiable, Equatable, Sendable {
@@ -32,9 +33,10 @@ struct HealthActivitySummary: Equatable, Sendable {
 }
 
 @MainActor
-final class SleepHealthStore {
+final class SleepHealthStore: ObservableObject {
     static let shared = SleepHealthStore()
 
+    @Published private(set) var isHealthKitEnabled = false
     private let healthStore = HKHealthStore()
     private var hasRequestedAuthorization = false
 
@@ -47,13 +49,14 @@ final class SleepHealthStore {
 
     func requestReadAuthorizationIfNeeded() async -> Bool {
         if hasRequestedAuthorization {
-            return true
+            return isHealthKitEnabled
         }
 
         guard HKHealthStore.isHealthDataAvailable(),
               let sleepType = HKObjectType.categoryType(forIdentifier: .sleepAnalysis),
               let activeEnergyType = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned),
               let stepCountType = HKObjectType.quantityType(forIdentifier: .stepCount) else {
+            isHealthKitEnabled = false
             return false
         }
 
@@ -73,6 +76,7 @@ final class SleepHealthStore {
         do {
             try await healthStore.requestAuthorization(toShare: shareTypes, read: readTypes)
             hasRequestedAuthorization = true
+            isHealthKitEnabled = true
 
             #if DEBUG && targetEnvironment(simulator)
             await seedSimulatorHealthKitIfNeeded(
@@ -85,25 +89,74 @@ final class SleepHealthStore {
 
             return true
         } catch {
+            isHealthKitEnabled = false
             return false
         }
     }
 
     func sleepIntervals(for day: Date, calendar: Calendar = .current) async -> [DateInterval] {
-        guard let sleepType = HKObjectType.categoryType(forIdentifier: .sleepAnalysis),
-              await requestReadAuthorizationIfNeeded(),
-              !Task.isCancelled else {
-            return []
-        }
-
         let dayStart = calendar.startOfDay(for: day)
         guard let dayEnd = calendar.date(byAdding: .day, value: 1, to: dayStart) else {
             return []
         }
 
+        return await sleepIntervals(overlapping: dayStart, end: dayEnd)
+    }
+
+    /// Returns total recorded sleep in hours, attributed to the day on which
+    /// the sleep session ends. This keeps an overnight session on one chart
+    /// day instead of counting it once before and once after midnight.
+    func sleepDurationHoursByDay(
+        from startDate: Date,
+        until endDate: Date,
+        calendar: Calendar = .current
+    ) async -> [Date: Double] {
+        let firstDay = calendar.startOfDay(for: startDate)
+        guard firstDay < endDate,
+              let queryStart = calendar.date(
+                byAdding: .day,
+                value: -1,
+                to: firstDay
+              ) else {
+            return [:]
+        }
+
+        let intervals = await sleepIntervals(
+            overlapping: queryStart,
+            end: endDate
+        )
+        guard !Task.isCancelled else { return [:] }
+
+        var durationByDay: [Date: TimeInterval] = [:]
+        for session in Self.groupedSleepSessions(intervals) {
+            guard let sessionEnd = session.last?.end else { continue }
+            let finalMoment = sessionEnd.addingTimeInterval(-1)
+            let wakeDay = calendar.startOfDay(for: finalMoment)
+            guard wakeDay >= firstDay, wakeDay < endDate else { continue }
+            // Only the recorded asleep fragments are summed. Awake gaps help
+            // associate fragments with the same night but are never counted.
+            durationByDay[wakeDay, default: 0] += session.reduce(0) {
+                $0 + $1.duration
+            }
+        }
+
+        return durationByDay.mapValues { $0 / (60 * 60) }
+    }
+
+    private func sleepIntervals(
+        overlapping startDate: Date,
+        end endDate: Date
+    ) async -> [DateInterval] {
+        guard startDate < endDate,
+              let sleepType = HKObjectType.categoryType(forIdentifier: .sleepAnalysis),
+              await requestReadAuthorizationIfNeeded(),
+              !Task.isCancelled else {
+            return []
+        }
+
         let datePredicate = HKQuery.predicateForSamples(
-            withStart: dayStart,
-            end: dayEnd,
+            withStart: startDate,
+            end: endDate,
             options: []
         )
         let samplePredicate = HKSamplePredicate<HKCategorySample>.categorySample(
@@ -184,6 +237,57 @@ final class SleepHealthStore {
             stepCount: max(0, Int(result.1.rounded())),
             workouts: result.2
         )
+    }
+
+    /// Returns HealthKit active energy grouped by local calendar day. A single
+    /// statistics-collection query keeps long Analytics ranges efficient.
+    func activeEnergyKilocaloriesByDay(
+        from startDate: Date,
+        until endDate: Date,
+        calendar: Calendar = .current
+    ) async -> [Date: Double] {
+        guard startDate < endDate,
+              await requestReadAuthorizationIfNeeded(),
+              !Task.isCancelled,
+              let activeEnergyType = HKObjectType.quantityType(
+                forIdentifier: .activeEnergyBurned
+              ) else {
+            return [:]
+        }
+
+        let rangePredicate = HKQuery.predicateForSamples(
+            withStart: startDate,
+            end: endDate,
+            options: [.strictStartDate]
+        )
+        let samplePredicate = HKSamplePredicate<HKQuantitySample>.quantitySample(
+            type: activeEnergyType,
+            predicate: rangePredicate
+        )
+        let descriptor = HKStatisticsCollectionQueryDescriptor(
+            predicate: samplePredicate,
+            options: .cumulativeSum,
+            anchorDate: calendar.startOfDay(for: startDate),
+            intervalComponents: DateComponents(day: 1)
+        )
+
+        do {
+            let collection = try await descriptor.result(for: healthStore)
+            guard !Task.isCancelled else { return [:] }
+
+            var values: [Date: Double] = [:]
+            collection.enumerateStatistics(from: startDate, to: endDate) {
+                statistics,
+                _ in
+                let day = calendar.startOfDay(for: statistics.startDate)
+                let kilocalories = statistics.sumQuantity()?
+                    .doubleValue(for: .kilocalorie()) ?? 0
+                values[day] = max(0, kilocalories)
+            }
+            return values
+        } catch {
+            return [:]
+        }
     }
 
     private func workoutActivities(
@@ -581,5 +685,23 @@ final class SleepHealthStore {
             }
         }
         return merged
+    }
+
+    private static func groupedSleepSessions(
+        _ intervals: [DateInterval],
+        maximumGap: TimeInterval = 2 * 60 * 60
+    ) -> [[DateInterval]] {
+        let sorted = intervals.sorted { $0.start < $1.start }
+        var sessions: [[DateInterval]] = []
+
+        for interval in sorted {
+            guard let previousEnd = sessions.last?.last?.end,
+                  interval.start.timeIntervalSince(previousEnd) <= maximumGap else {
+                sessions.append([interval])
+                continue
+            }
+            sessions[sessions.count - 1].append(interval)
+        }
+        return sessions
     }
 }

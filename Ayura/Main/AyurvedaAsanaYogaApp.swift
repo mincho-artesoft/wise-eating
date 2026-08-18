@@ -106,6 +106,9 @@ struct AyurvedaAsanaYogaApp: App {
                         Task { @MainActor in await subscriptionManager.updatePurchasedStatus() }
                         Task { @MainActor in GlobalState.updateAIAvailability() }
                         Task { @MainActor in await AIManager.shared.fetchJobs() }
+                        Task {
+                            await NotificationManager.shared.refreshPracticeReminderIfNeeded()
+                        }
                         GlobalState.refreshSystemSettings()
                         
                     case .background:

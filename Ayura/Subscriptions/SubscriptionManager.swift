@@ -33,6 +33,16 @@ private enum SubscriptionTier: Int {
 
 @MainActor
 class SubscriptionManager: ObservableObject {
+    private static var usesDebugPremiumOverride: Bool {
+        #if DEBUG
+        let arguments = ProcessInfo.processInfo.arguments
+        return !arguments.contains("-useStoreKitSubscription")
+            && !arguments.contains("-uiTestNoAds")
+        #else
+        return false
+        #endif
+    }
+
     @AppStorage("subscriptionStatus") private var subscriptionStatusRaw: String = SubscriptionStatus.base.rawValue
     @Published var restorationAlertMessage: String?
 
@@ -63,6 +73,9 @@ class SubscriptionManager: ObservableObject {
                 // affects that launch. Used by simulator automation (D8 gates).
                 if ProcessInfo.processInfo.arguments.contains("-uiTestNoAds") {
                     return .removeAds
+                }
+                if Self.usesDebugPremiumOverride {
+                    return .premium
                 }
                 // Взимаме реалния статус от базата/покупките
                 let realStatus = SubscriptionStatus(rawValue: subscriptionStatusRaw) ?? .base
@@ -205,6 +218,13 @@ class SubscriptionManager: ObservableObject {
 
     // MARK: - Entitlements
     func updatePurchasedStatus() async {
+        if Self.usesDebugPremiumOverride {
+            purchasedProductIDs = [SubscriptionProductID.premium]
+            expirationDates = [SubscriptionProductID.premium: .distantFuture]
+            print("💎 [SubscriptionManager] DEBUG override: PREMIUM")
+            return
+        }
+
         var activeIDs = Set<String>()
         var expiryDates = [String: Date]()
 
@@ -264,6 +284,12 @@ class SubscriptionManager: ObservableObject {
     }
 
     private func updateSubscriptionStatus() {
+          // The DEBUG Premium entitlement is intentionally session-only and
+          // must never be persisted to subscriptionStatusRaw.
+          if Self.usesDebugPremiumOverride {
+              return
+          }
+
           guard !purchasedProductIDs.isEmpty else {
               subscriptionStatus = .base
               print("💎 [SubscriptionManager] Status updated: BASE (No active purchases)")
