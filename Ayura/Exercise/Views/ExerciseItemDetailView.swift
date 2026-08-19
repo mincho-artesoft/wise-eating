@@ -5,6 +5,7 @@ import AVKit
 struct ExerciseItemDetailView: View {
     // MARK: - Managers and Environment
     @ObservedObject private var effectManager = EffectManager.shared
+    @ObservedObject private var catalogPreferences = CatalogPreferenceStore.shared
     @Environment(\.modelContext) private var modelContext
     @State private var isBannerAdLoaded: Bool = false
     @State private var isShowingFullScreenImage = false
@@ -153,7 +154,8 @@ struct ExerciseItemDetailView: View {
     }
     
     private var customToolbar: some View {
-        HStack {
+        let isFavorite = item.effectiveIsFavorite
+        return HStack {
             HStack{
                 Button { onDismiss() } label: { HStack { Text("Cancel") } }
             }
@@ -178,17 +180,24 @@ struct ExerciseItemDetailView: View {
             }
             
             Button {
-                withAnimation { item.isFavorite.toggle() }
-                try? modelContext.save()
-                NotificationCenter.default.post(name: .exerciseFavoriteToggled, object: item)
+                do {
+                    try item.setEffectiveFavorite(!isFavorite, context: modelContext)
+                    NotificationCenter.default.post(
+                        name: .exerciseFavoriteToggled,
+                        object: item
+                    )
+                } catch {
+                    print("❌ Failed to save exercise favorite: \(error)")
+                }
             } label: {
-                Image(systemName: item.isFavorite ? "star.fill" : "star")
+                Image(systemName: isFavorite ? "star.fill" : "star")
                     .foregroundStyle(.yellow)
                     .font(.title2)
                     .frame(width: 28, height: 28)
             }
         }
         .foregroundColor(effectManager.currentGlobalAccentColor)
+        .animation(.spring(), value: catalogPreferences.revision)
     }
     
     @ViewBuilder

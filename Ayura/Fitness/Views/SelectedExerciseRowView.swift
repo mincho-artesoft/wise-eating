@@ -70,6 +70,7 @@ struct SelectedExerciseRowView: View {
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(exercise.name)
+                    .accessibilityIdentifier("training-exercise-row-\(exercise.name)")
                     .font(.system(size: 16, weight: .semibold))
                     .foregroundStyle(effectManager.currentGlobalAccentColor)
                     .if(showFullText) { view in
@@ -146,6 +147,7 @@ struct SelectedExerciseRowView: View {
                     focused: $focusedField,
                     fieldIdentifier: focusCase
                 )
+                .accessibilityIdentifier("training-exercise-duration-\(exercise.name)")
                 .multilineTextAlignment(.trailing)
                 .frame(width: 40)
                 .foregroundStyle(effectManager.currentGlobalAccentColor)

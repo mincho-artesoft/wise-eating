@@ -13,7 +13,7 @@ public final class Mineral: Identifiable, Hashable, SelectableItem {
     @Relationship(deleteRule: .cascade)
     public var requirements: [Requirement] = []
 
-    @Relationship(inverse: \Profile.priorityMinerals)
+    @Relationship(inverse: \Profile.persistedPriorityMinerals)
     public var profiles: [Profile] = []
     
     public init(id: String, name: String, unit: String, symbol: String, colorHex: String, requirements: [Requirement] = []) {

@@ -1,0 +1,36 @@
+{
+  "formatVersion": 1,
+  "catalogVersion": 1,
+  "contentRevision": "seed-10-search-13-practice-1-catalog-schema-4-20260818",
+  "parts": [
+    {
+      "resource": "preseeded_db.store.gz.part-aa",
+      "byteCount": 73400320,
+      "sha256": "c42891b4a654a8bf875a56b67001ed83db7eec76d671059646b6a64c6ad3cbd3"
+    },
+    {
+      "resource": "preseeded_db.store.gz.part-ab",
+      "byteCount": 73400320,
+      "sha256": "d080aa17ec6ffe4679cf162095dfa398c62abc9439890f2eb8216dca5521791c"
+    },
+    {
+      "resource": "preseeded_db.store.gz.part-ac",
+      "byteCount": 205603,
+      "sha256": "d9b3158a0a796c034215827e96097830efe24f50e81f26ab04b6b96d2b0cc1b2"
+    }
+  ],
+  "expected": {
+    "foods": 14487,
+    "exercises": 908,
+    "yogaSequences": 4419,
+    "practices": 60,
+    "practiceCues": 601,
+    "ayurvedaProfiles": 12480,
+    "ayurvedaLinks": 2336,
+    "vitamins": 22,
+    "minerals": 11,
+    "productBuckets": 8399,
+    "vocabularyEntries": 599085,
+    "searchCaches": 1
+  }
+}

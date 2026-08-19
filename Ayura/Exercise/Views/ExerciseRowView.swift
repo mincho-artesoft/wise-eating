@@ -1,10 +1,15 @@
 import SwiftUI
 import SwiftData
 
+enum ExerciseIconography {
+    static let workoutSystemName = "figure.yoga"
+}
+
 struct ExerciseRowView: View {
     @Bindable var item: ExerciseItem
     
     @ObservedObject private var effectManager = EffectManager.shared
+    @ObservedObject private var catalogPreferences = CatalogPreferenceStore.shared
     @Environment(\.modelContext) private var modelContext
 
     private var descriptionText: String? {
@@ -33,6 +38,7 @@ struct ExerciseRowView: View {
         if item.isDeleted || item.modelContext == nil {
             EmptyView()
         } else {
+            let isFavorite = item.effectiveIsFavorite
             // Целият UI код влиза в else блока
             VStack(alignment: .leading, spacing: 12) {
                 HStack(alignment: .top, spacing: 12) {
@@ -53,22 +59,19 @@ struct ExerciseRowView: View {
                             Spacer()
 
                             Button(action: {
-                                withAnimation(.spring()) {
-                                    item.isFavorite.toggle()
-                                }
                                 do {
-                                    try modelContext.save()
+                                    try item.setEffectiveFavorite(
+                                        !isFavorite,
+                                        context: modelContext
+                                    )
                                     DispatchQueue.main.async {
                                         NotificationCenter.default.post(name: .exerciseFavoriteToggled, object: item)
                                     }
                                 } catch {
                                     print("❌ Грешка при запис на isFavorite: \(error.localizedDescription)")
-                                    withAnimation(.spring()) {
-                                        item.isFavorite.toggle()
-                                    }
                                 }
                             }) {
-                                Image(systemName: item.isFavorite ? "star.fill" : "star")
+                                Image(systemName: isFavorite ? "star.fill" : "star")
                                     .foregroundColor(.yellow)
                                     .font(.title3)
                                     .padding(4)
@@ -76,7 +79,7 @@ struct ExerciseRowView: View {
                             .buttonStyle(.plain)
                             .contentShape(Rectangle())
                         }
-                        .animation(.spring(), value: item.isFavorite)
+                        .animation(.spring(), value: catalogPreferences.revision)
 
                         if let description = descriptionText, !description.isEmpty {
                             Text(description)
@@ -126,7 +129,7 @@ struct ExerciseThumbnailView: View {
                     RoundedRectangle(cornerRadius: cornerRadius)
                         .fill(effectManager.currentGlobalAccentColor.opacity(0.15))
 
-                    Image(systemName: "figure.yoga")
+                    Image(systemName: ExerciseIconography.workoutSystemName)
                         .font(.system(size: size * 0.45, weight: .medium))
                         .foregroundStyle(effectManager.currentGlobalAccentColor.opacity(0.9))
                 }

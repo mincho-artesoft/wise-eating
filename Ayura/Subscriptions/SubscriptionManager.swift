@@ -68,6 +68,12 @@ class SubscriptionManager: ObservableObject {
         // ✅ 2. ПРОМЕНИ GETTER-А НА subscriptionStatus
         var subscriptionStatus: SubscriptionStatus {
             get {
+                // UI tests that exercise profile CRUD need a second unlocked
+                // profile while still suppressing advertising. This override
+                // is process-local and never changes the persisted purchase.
+                if ProcessInfo.processInfo.arguments.contains("-uiTestPremium") {
+                    return .premium
+                }
                 // UI-test support: processes launched with -uiTestNoAds behave as
                 // Remove Ads plan (disables all ad paths). Never persisted; only
                 // affects that launch. Used by simulator automation (D8 gates).

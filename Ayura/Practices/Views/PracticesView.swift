@@ -103,6 +103,7 @@ struct PracticesView: View {
     @Environment(\.safeAreaInsets) private var safeAreaInsets
     @Query(sort: \Practice.catalogNumber) private var practices: [Practice]
     @ObservedObject private var effectManager = EffectManager.shared
+    @ObservedObject private var catalogPreferences = CatalogPreferenceStore.shared
     @State private var selectedKind: String?
     @State private var showsFavoritesOnly = false
     @State private var favoriteRevision = 0
@@ -116,7 +117,7 @@ struct PracticesView: View {
         _ = favoriteRevision
         let kindFiltered: [Practice]
         if showsFavoritesOnly {
-            kindFiltered = eligiblePractices.filter(\.isFavorite)
+            kindFiltered = eligiblePractices.filter(\.effectiveIsFavorite)
         } else if let selectedKind {
             kindFiltered = eligiblePractices.filter { $0.kind == selectedKind }
         } else {
@@ -457,7 +458,7 @@ struct PracticesView: View {
     private func practiceCount(for filter: PracticeListFilter) -> Int {
         if filter == .all { return eligiblePractices.count }
         if filter == .favorites {
-            return eligiblePractices.count(where: \.isFavorite)
+            return eligiblePractices.count(where: \.effectiveIsFavorite)
         }
         guard let kind = filter.kind else { return 0 }
         return eligiblePractices.count { $0.kind == kind }

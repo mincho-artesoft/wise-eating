@@ -236,58 +236,71 @@ struct MealPlanAddDestinationView: View {
     // MARK: - Actions
     
     private func addAsNewDay() {
+        let context = targetPlan.modelContext ?? modelContext
         let newIndex = (targetPlan.days.map { $0.dayIndex }.max() ?? 0) + 1
         let newDay = MealPlanDay(dayIndex: newIndex)
-        
-        for meal in selectedMeals {
-            let newMeal = MealPlanMeal(mealName: meal.name)
-            let foods = meal.foods(using: modelContext)
-            for (foodItem, grams) in foods {
-                let newEntry = MealPlanEntry(food: foodItem, grams: grams)
-                newEntry.meal = newMeal
-                newMeal.entries.append(newEntry)
+        do {
+            for meal in selectedMeals {
+                let newMeal = MealPlanMeal(mealName: meal.name)
+                let foods = meal.foods(using: modelContext)
+                for (foodItem, grams) in foods {
+                    let newEntry = try CatalogReferenceResolver.mealPlanEntry(
+                        for: foodItem,
+                        grams: grams,
+                        meal: newMeal,
+                        userContext: context
+                    )
+                    context.insert(newEntry)
+                    newMeal.entries.append(newEntry)
+                }
+                newMeal.day = newDay
+                context.insert(newMeal)
+                newDay.meals.append(newMeal)
             }
-            newMeal.day = newDay
-            newDay.meals.append(newMeal)
+
+            newDay.plan = targetPlan
+            context.insert(newDay)
+            targetPlan.days.append(newDay)
+            try context.save()
+            onComplete()
+        } catch {
+            print("Error saving meal plan: \(error)")
         }
-        
-        newDay.plan = targetPlan
-        targetPlan.days.append(newDay)
-        
-        saveAndDismiss()
     }
     
     private func replace(day: MealPlanDay) {
+        let context = targetPlan.modelContext ?? modelContext
         let mealNamesToReplace = Set(selectedMeals.map { $0.name })
         let mealsToDelete = day.meals.filter { mealNamesToReplace.contains($0.mealName) }
         
         for meal in mealsToDelete {
-            meal.entries.forEach { modelContext.delete($0) }
-            modelContext.delete(meal)
+            meal.entries.forEach { context.delete($0) }
+            context.delete(meal)
         }
         day.meals.removeAll { mealNamesToReplace.contains($0.mealName) }
 
-        for meal in selectedMeals {
-            let newMeal = MealPlanMeal(mealName: meal.name)
-            let foods = meal.foods(using: modelContext)
-            for (foodItem, grams) in foods {
-                let newEntry = MealPlanEntry(food: foodItem, grams: grams)
-                newEntry.meal = newMeal
-                newMeal.entries.append(newEntry)
-            }
-            newMeal.day = day
-            day.meals.append(newMeal)
-        }
-        
-        saveAndDismiss()
-    }
-    
-    private func saveAndDismiss() {
         do {
-            try modelContext.save()
+            for meal in selectedMeals {
+                let newMeal = MealPlanMeal(mealName: meal.name)
+                let foods = meal.foods(using: modelContext)
+                for (foodItem, grams) in foods {
+                    let newEntry = try CatalogReferenceResolver.mealPlanEntry(
+                        for: foodItem,
+                        grams: grams,
+                        meal: newMeal,
+                        userContext: context
+                    )
+                    context.insert(newEntry)
+                    newMeal.entries.append(newEntry)
+                }
+                newMeal.day = day
+                context.insert(newMeal)
+                day.meals.append(newMeal)
+            }
+            try context.save()
+            onComplete()
         } catch {
             print("Error saving meal plan: \(error)")
         }
-        onComplete()
     }
 }

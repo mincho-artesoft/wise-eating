@@ -72,9 +72,11 @@ struct StorageListView: View {
                         listViewContent
                     }
 
-                    if showStorageEditor {
+                    if showStorageEditor,
+                       let writeContext = viewModel.writeContext {
                         StorageEditorView(
                             owner: profile,
+                            writeContext: writeContext,
                             globalSearchText: $globalSearchText,
                             onDismiss: { shouldDismissGlobalSearch in
                                 if shouldDismissGlobalSearch {
@@ -187,8 +189,15 @@ struct StorageListView: View {
                         customTopGap:  UIScreen.main.bounds.height * 0.1,
                         horizontalContent: { EmptyView() },
                         verticalContent: {
-                            StorageItemDetailView(item: item, viewModel: viewModel, detailMenuState: $detailMenuState)
+                            if let writeContext = viewModel.writeContext {
+                                StorageItemDetailView(
+                                    item: item,
+                                    viewModel: viewModel,
+                                    detailMenuState: $detailMenuState
+                                )
+                                .modelContext(writeContext)
                                 .padding(.bottom, -40)
+                            }
                         },
                         onStateChange: { newState in
                             if newState == .collapsed {
@@ -295,13 +304,12 @@ struct StorageListView: View {
                     if isDragging {
                         buttonOffset = newOffset
                         saveButtonPosition()
-                    } else {
-                        // Тап (без реален drag)
-                        handleButtonTap()
                     }
-                    
-                    isDragging = false
-                    isPressed = false
+
+                    DispatchQueue.main.async {
+                        isDragging = false
+                        isPressed = false
+                    }
                 }
         }
         
@@ -330,11 +338,15 @@ struct StorageListView: View {
             
             let scale = isDragging ? 1.05 : (isPressed ? 0.92 : 1.0)
             
-            return ZStack {
+            return Button {
+                guard !isDragging else { return }
+                handleButtonTap()
+            } label: {
                 Image(systemName: "widget.large.badge.plus")
                     .font(.title3)
                     .foregroundColor(effectManager.currentGlobalAccentColor)
             }
+            .buttonStyle(.plain)
             .frame(width: buttonSize, height: buttonSize)
             .glassCardStyle(cornerRadius: radius)
             .scaleEffect(scale)
@@ -344,7 +356,9 @@ struct StorageListView: View {
             .position(x: centerX, y: centerY) // Използваме position вместо offset
             .opacity(isAddButtonVisible ? 1 : 0)
             .disabled(!isAddButtonVisible)
-            .gesture(dragGesture(geometry: geometry))
+            .simultaneousGesture(dragGesture(geometry: geometry))
+            .accessibilityIdentifier("storage-add-button")
+            .accessibilityLabel("Add to Storage")
             .transition(.scale.combined(with: .opacity))
         }
     
@@ -536,6 +550,8 @@ struct StorageListView: View {
                                                 .symbolRenderingMode(.palette)
                                                 .foregroundStyle(effectManager.currentGlobalAccentColor)
                                         }
+                                        .accessibilityLabel("Delete \(food.name)")
+                                        .accessibilityIdentifier("Delete \(food.name)")
                                         .tint(.clear)
                                     }
                                 }

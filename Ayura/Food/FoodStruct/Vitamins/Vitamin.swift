@@ -13,7 +13,7 @@ public final class Vitamin: Identifiable, Hashable, SelectableItem {
     @Relationship(deleteRule: .cascade)
     public var requirements: [Requirement] = []
     
-    @Relationship(inverse: \Profile.priorityVitamins)
+    @Relationship(inverse: \Profile.persistedPriorityVitamins)
     public var profiles: [Profile] = []
     
     public init(id: String, name: String, unit: String, abbreviation: String, colorHex: String, requirements: [Requirement] = []) {

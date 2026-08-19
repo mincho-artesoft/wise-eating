@@ -329,6 +329,7 @@ struct ExerciseItemEditorView: View {
             
             Button("Save", action: save)
                 .disabled(isSaveDisabled)
+                .accessibilityIdentifier("exercise-editor-save")
                 .padding(.horizontal, 10)
                 .padding(.vertical, 5)
                 .glassCardStyle(cornerRadius: 20)
@@ -397,6 +398,7 @@ struct ExerciseItemEditorView: View {
                         focused: $focusedField,
                         fieldIdentifier: .name
                     )
+                    .accessibilityIdentifier("exercise-editor-name")
                 }
                 .id(FocusableField.name)
                 
@@ -777,16 +779,37 @@ struct ExerciseItemEditorView: View {
         Task {
             isSaving = true
             await Task.yield()
-            
+
+            let writeContext: ModelContext
+            do {
+                writeContext = try CombinedStoreFactory.makeUserWriteContext(
+                    from: ctx.container
+                )
+            } catch {
+                alertMessage = "Failed to open the user database: \(error.localizedDescription)"
+                showAlert = true
+                isSaving = false
+                return
+            }
+
+            let reusableID: UUID?
+            if let existing = exerciseToEdit,
+               !CatalogReferenceResolver.isCatalog(existing) {
+                reusableID = existing.id
+            } else {
+                reusableID = dubExercise?.originalID
+            }
+
             let itemToSave: ExerciseItem
-            if let existing = exerciseToEdit {
-                itemToSave = existing
-            } else if let copy = dubExercise, let id = copy.originalID,
-                      let existing = (try? ctx.fetch(FetchDescriptor<ExerciseItem>(predicate: #Predicate { $0.id == id })))?.first {
+            if let reusableID,
+               let existing = try? CatalogReferenceResolver.userExercise(
+                    id: reusableID,
+                    context: writeContext
+               ) {
                 itemToSave = existing
             } else {
                 itemToSave = ExerciseItem(id: UUID(), name: "", muscleGroups: [])
-                ctx.insert(itemToSave)
+                writeContext.insert(itemToSave)
             }
             
             itemToSave.name = trimmedName
@@ -805,6 +828,12 @@ struct ExerciseItemEditorView: View {
             itemToSave.slug = generatedSlug
             itemToSave.contraindications = generatedContraindications
             itemToSave.assetImageName = generatedAssetImageName
+            itemToSave.isUserAdded = true
+            itemToSave.catalogNumber = nil
+            // SwiftData does not consistently invoke the property observer
+            // for an object refetched into a separate writer context. Keep
+            // the persisted search fields in sync for both create and edit.
+            itemToSave.refreshSearchMetadata()
 
             let hasYogaDetails = itemToSave.family != nil
                 || itemToSave.level != nil
@@ -834,7 +863,7 @@ struct ExerciseItemEditorView: View {
             }
             
             do {
-                try ctx.save()
+                try writeContext.save()
                 
                 // ✅ Ако има завършен AI job, го трием чак сега – при успешно Save
                 if let pendingID = pendingAIJobIDToDeleteOnSave,

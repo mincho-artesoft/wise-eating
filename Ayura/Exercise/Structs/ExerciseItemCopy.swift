@@ -1,6 +1,7 @@
 
 import Foundation
 import SwiftData
+import UIKit
 
 // A Codable, non-persistent representation of an ExerciseItem, used for duplication and AI generation flows.
 public final class ExerciseItemCopy: Identifiable, Codable {
@@ -126,6 +127,12 @@ public final class ExerciseItemCopy: Identifiable, Codable {
     public convenience init(from src: ExerciseItem) {
         var cache: [ObjectIdentifier: ExerciseItemCopy] = [:]
         self.init(from: src, cache: &cache)
+        if photo == nil,
+           let visibleImage = src.exerciseImage(
+               preferredVariants: ["1024", "480"]
+           ) {
+            photo = visibleImage.jpegData(compressionQuality: 0.9)
+        }
     }
 
     // Private convenience init for re-using from cache

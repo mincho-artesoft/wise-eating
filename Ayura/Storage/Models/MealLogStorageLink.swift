@@ -8,8 +8,23 @@ public final class MealLogStorageLink {
     public var mealID: UUID
     public var deductedQuantity: Double
     
-    @Relationship(deleteRule: .nullify)
-    public var food: FoodItem?
+    @Relationship(deleteRule: .nullify, originalName: "food")
+    var persistedFood: FoodItem?
+    public var catalogFoodID: UUID?
+
+    public var food: FoodItem? {
+        get {
+            CatalogReferenceResolver.resolveFood(
+                stored: persistedFood,
+                catalogID: catalogFoodID
+            )
+        }
+        set {
+            let reference = CatalogReferenceResolver.storedFoodReference(for: newValue)
+            persistedFood = reference.stored
+            catalogFoodID = reference.catalogID
+        }
+    }
     
     @Relationship(inverse: \Profile.mealStorageLinks)
     public var profile: Profile?
@@ -18,7 +33,9 @@ public final class MealLogStorageLink {
         self.date = Calendar.current.startOfDay(for: date)
         self.mealID = mealID
         self.deductedQuantity = deductedQuantity
-        self.food = food
+        let reference = CatalogReferenceResolver.storedFoodReference(for: food)
+        self.persistedFood = reference.stored
+        self.catalogFoodID = reference.catalogID
         self.profile = profile
     }
 }

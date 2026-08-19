@@ -12,14 +12,31 @@ public final class StorageTransaction {
     @Relationship(inverse: \Profile.transactions)
     public var profile: Profile?
     
-    @Relationship(deleteRule: .nullify)
-    public var food: FoodItem?
+    @Relationship(deleteRule: .nullify, originalName: "food")
+    var persistedFood: FoodItem?
+    public var catalogFoodID: UUID?
+
+    public var food: FoodItem? {
+        get {
+            CatalogReferenceResolver.resolveFood(
+                stored: persistedFood,
+                catalogID: catalogFoodID
+            )
+        }
+        set {
+            let reference = CatalogReferenceResolver.storedFoodReference(for: newValue)
+            persistedFood = reference.stored
+            catalogFoodID = reference.catalogID
+        }
+    }
     
     public init(date: Date, type: TransactionType, quantityChange: Double, profile: Profile?, food: FoodItem?) {
         self.date = date
         self.type = type
         self.quantityChange = quantityChange
         self.profile = profile
-        self.food = food
+        let reference = CatalogReferenceResolver.storedFoodReference(for: food)
+        self.persistedFood = reference.stored
+        self.catalogFoodID = reference.catalogID
     }
 }

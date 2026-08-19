@@ -64,12 +64,10 @@ enum SeedManager {
             let bundleVersion = try YogaSeeder.bundleSeedVersion()
             let installedVersion = UserDefaults.standard.integer(forKey: versionKey)
             let catalogueIsInstalled = try YogaSeeder.isInstalled(context: ctx)
-            if installedVersion >= bundleVersion, catalogueIsInstalled {
-                print("   Yoga seed version already applied, skipping.")
-                return
-            }
-            if installedVersion == 0, catalogueIsInstalled {
-                UserDefaults.standard.set(bundleVersion, forKey: versionKey)
+            if catalogueIsInstalled {
+                if installedVersion < bundleVersion {
+                    UserDefaults.standard.set(bundleVersion, forKey: versionKey)
+                }
                 print(
                     "   ✅ Yoga v\(bundleVersion) preseed stamp verified; "
                         + "no inserts or updates."
@@ -99,8 +97,14 @@ enum SeedManager {
             let bundleVersion = try PracticeSeeder.bundleSeedVersion()
             let installedVersion = UserDefaults.standard.integer(forKey: versionKey)
             let catalogueIsInstalled = try PracticeSeeder.isInstalled(context: ctx)
-            if installedVersion >= bundleVersion, catalogueIsInstalled {
-                print("   Practices seed version already applied, skipping.")
+            if catalogueIsInstalled {
+                if installedVersion < bundleVersion {
+                    UserDefaults.standard.set(bundleVersion, forKey: versionKey)
+                }
+                print(
+                    "   ✅ Practices v\(bundleVersion) preseed stamp verified; "
+                        + "no inserts or updates."
+                )
                 return
             }
 

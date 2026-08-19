@@ -12,12 +12,29 @@ public final class StorageItem: Identifiable {
     @Relationship(deleteRule: .cascade)
     public var batches: [Batch] = []
 
-    @Relationship(deleteRule: .nullify)
-    public var food: FoodItem?
+    @Relationship(deleteRule: .nullify, originalName: "food")
+    var persistedFood: FoodItem?
+    public var catalogFoodID: UUID?
+
+    public var food: FoodItem? {
+        get {
+            CatalogReferenceResolver.resolveFood(
+                stored: persistedFood,
+                catalogID: catalogFoodID
+            )
+        }
+        set {
+            let reference = CatalogReferenceResolver.storedFoodReference(for: newValue)
+            persistedFood = reference.stored
+            catalogFoodID = reference.catalogID
+        }
+    }
 
     public init(owner: Profile?, food: FoodItem, batches: [Batch] = []) {
         self.owner = owner
-        self.food = food
+        let reference = CatalogReferenceResolver.storedFoodReference(for: food)
+        self.persistedFood = reference.stored
+        self.catalogFoodID = reference.catalogID
         self.batches = batches
     }
     

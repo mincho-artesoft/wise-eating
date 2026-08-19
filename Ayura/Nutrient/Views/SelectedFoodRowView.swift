@@ -124,6 +124,7 @@ struct SelectedFoodRowView: View {
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(item.name)
+                        .accessibilityIdentifier("meal-food-row-\(item.name)")
                         .font(.system(size: 16, weight: .semibold))
                         .foregroundStyle(effectManager.currentGlobalAccentColor)
                         .if(showFullText) { view in
@@ -222,6 +223,7 @@ struct SelectedFoodRowView: View {
                         focused: $focusedField,
                         fieldIdentifier: item
                     )
+                    .accessibilityIdentifier("meal-food-quantity-\(item.name)")
                     .foregroundStyle(effectManager.currentGlobalAccentColor)
                     .multilineTextAlignment(.trailing)
                     .frame(width: 60)

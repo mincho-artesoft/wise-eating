@@ -216,26 +216,41 @@ struct TrainingPlanAddDestinationView: View {
     // --- КРАЙ НА ПРОМЯНАТА (2/2) ---
 
     private func addAsNewDay() {
+        let context = targetPlan.modelContext ?? modelContext
         let newIndex = (targetPlan.days.map { $0.dayIndex }.max() ?? 0) + 1
         let newDay = TrainingPlanDay(dayIndex: newIndex)
-        
-        for training in selectedTrainings {
-            let newWorkout = TrainingPlanWorkout(workoutName: training.name)
-            let exercises = training.exercises(using: modelContext)
-            for (exerciseItem, duration) in exercises {
-                let newExercise = TrainingPlanExercise(exercise: exerciseItem, durationSeconds: duration, workout: newWorkout)
-                newWorkout.exercises.append(newExercise)
+        do {
+            for training in selectedTrainings {
+                let newWorkout = TrainingPlanWorkout(workoutName: training.name)
+                let exercises = training.exercises(using: modelContext)
+                for (exerciseItem, duration) in exercises {
+                    let newExercise = try CatalogReferenceResolver
+                        .trainingPlanExercise(
+                            for: exerciseItem,
+                            durationSeconds: duration,
+                            workout: newWorkout,
+                            userContext: context
+                        )
+                    context.insert(newExercise)
+                    newWorkout.exercises.append(newExercise)
+                }
+                newWorkout.day = newDay
+                context.insert(newWorkout)
+                newDay.workouts.append(newWorkout)
             }
-            newWorkout.day = newDay
-            newDay.workouts.append(newWorkout)
+
+            newDay.plan = targetPlan
+            context.insert(newDay)
+            targetPlan.days.append(newDay)
+            try context.save()
+            onComplete()
+        } catch {
+            print("Error saving training plan: \(error)")
         }
-        
-        newDay.plan = targetPlan
-        targetPlan.days.append(newDay)
-        saveAndDismiss()
     }
     
     private func replace(day: TrainingPlanDay) {
+        let context = targetPlan.modelContext ?? modelContext
         // --- НАЧАЛО НА ПРОМЯНАТА ---
         // Ако денят е бил ден за почивка, маркираме го, че вече не е.
         if day.isRestDay {
@@ -247,26 +262,34 @@ struct TrainingPlanAddDestinationView: View {
         let workoutsToDelete = day.workouts.filter { workoutNamesToReplace.contains($0.workoutName) }
         
         for workout in workoutsToDelete {
-            workout.exercises.forEach { modelContext.delete($0) }
-            modelContext.delete(workout)
+            workout.exercises.forEach { context.delete($0) }
+            context.delete(workout)
         }
         day.workouts.removeAll { workoutNamesToReplace.contains($0.workoutName) }
 
-        for training in selectedTrainings {
-            let newWorkout = TrainingPlanWorkout(workoutName: training.name)
-            let exercises = training.exercises(using: modelContext)
-            for (exerciseItem, duration) in exercises {
-                let newExercise = TrainingPlanExercise(exercise: exerciseItem, durationSeconds: duration, workout: newWorkout)
-                newWorkout.exercises.append(newExercise)
+        do {
+            for training in selectedTrainings {
+                let newWorkout = TrainingPlanWorkout(workoutName: training.name)
+                let exercises = training.exercises(using: modelContext)
+                for (exerciseItem, duration) in exercises {
+                    let newExercise = try CatalogReferenceResolver
+                        .trainingPlanExercise(
+                            for: exerciseItem,
+                            durationSeconds: duration,
+                            workout: newWorkout,
+                            userContext: context
+                        )
+                    context.insert(newExercise)
+                    newWorkout.exercises.append(newExercise)
+                }
+                newWorkout.day = day
+                context.insert(newWorkout)
+                day.workouts.append(newWorkout)
             }
-            newWorkout.day = day
-            day.workouts.append(newWorkout)
+            try context.save()
+            onComplete()
+        } catch {
+            print("Error saving training plan: \(error)")
         }
-        saveAndDismiss()
-    }
-    
-    private func saveAndDismiss() {
-        do { try modelContext.save() } catch { print("Error saving training plan: \(error)") }
-        onComplete()
     }
 }

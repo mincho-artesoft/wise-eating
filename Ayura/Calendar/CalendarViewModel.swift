@@ -1051,12 +1051,15 @@ extension CalendarViewModel {
         do {
             let payload = try JSONDecoder().decode(ShoppingListPayload.self, from: jsonData)
             let listID = payload.id
+            let writeContext = try CombinedStoreFactory.makeUserWriteContext(
+                from: context.container
+            )
             
             let fetchDescriptor = FetchDescriptor<ShoppingListModel>(
                 predicate: #Predicate { $0.id == listID }
             )
             
-            if let listToUpdate = try context.fetch(fetchDescriptor).first {
+            if let listToUpdate = try writeContext.fetch(fetchDescriptor).first {
                 listToUpdate.eventStartDate = event.startDate
                 
                 if let alarm = event.alarms?.first, alarm.relativeOffset < 0 {
@@ -1067,8 +1070,8 @@ extension CalendarViewModel {
                 
                 print("   ✅ ShoppingListModel с ID \(listID) е намерен и данните му са обновени.")
                 
-                if context.hasChanges {
-                    try context.save()
+                if writeContext.hasChanges {
+                    try writeContext.save()
                     print("   💾 Промените в SwiftData са запазени.")
                 }
                 
@@ -1084,42 +1087,44 @@ extension CalendarViewModel {
     @MainActor
     func createShoppingListFromEvent(event: EKEvent, profile: Profile, context: ModelContext) {
         print("VIEWMODEL: 🛒 Започва създаване на ShoppingListModel от EKEvent: \(event.title ?? "N/A")")
-        
-        let profileForList: Profile?
-        if profile.hasSeparateStorage {
-            profileForList = profile
-        } else {
-            profileForList = nil
-        }
-        
-        let newList = ShoppingListModel(profile: profileForList, name: event.title)
-        newList.eventStartDate = event.startDate
-        newList.calendarEventID = event.eventIdentifier
-        
-        if let alarm = event.alarms?.first, alarm.relativeOffset < 0 {
-            newList.reminderMinutes = Int(abs(alarm.relativeOffset / 60))
-        }
-        
-        context.insert(newList)
-        
-        let payload = ShoppingListPayload(from: newList)
-        var invisiblePayload: String? = nil
         do {
+            let writeContext = try CombinedStoreFactory.makeUserWriteContext(
+                from: context.container
+            )
+            let profileForList: Profile?
+            if profile.hasSeparateStorage {
+                guard let writeProfile = try CatalogReferenceResolver
+                    .userProfile(id: profile.id, context: writeContext) else {
+                    throw CatalogReferenceError.missingUserProfile(profile.id)
+                }
+                profileForList = writeProfile
+            } else {
+                profileForList = nil
+            }
+
+            let newList = ShoppingListModel(
+                profile: profileForList,
+                name: event.title
+            )
+            newList.eventStartDate = event.startDate
+            newList.calendarEventID = event.eventIdentifier
+
+            if let alarm = event.alarms?.first, alarm.relativeOffset < 0 {
+                newList.reminderMinutes = Int(abs(alarm.relativeOffset / 60))
+            }
+            writeContext.insert(newList)
+
+            let payload = ShoppingListPayload(from: newList)
+            var invisiblePayload: String? = nil
             let jsonData = try JSONEncoder().encode(payload)
             if let jsonString = String(data: jsonData, encoding: .utf8) {
                 invisiblePayload = OptimizedInvisibleCoder.encode(from: jsonString)
             }
-        } catch {
-            print("VIEWMODEL: ❗️ Грешка при кодиране на новия списък: \(error)")
-        }
-        
-        event.notes = invisiblePayload
-        
-        do {
-            try context.save()
+            event.notes = invisiblePayload
+
+            try writeContext.save()
             try eventStore.save(event, span: .thisEvent, commit: true)
             print("VIEWMODEL: ✅✅ УСПЕХ! Създаден е ShoppingListModel и е обновен EKEvent с payload.")
-            
         } catch {
             print("VIEWMODEL: ❗️❗️ КРИТИЧНА ГРЕШКА при финалния запис на модел/събитие: \(error)")
         }

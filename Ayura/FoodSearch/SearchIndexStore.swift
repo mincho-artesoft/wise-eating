@@ -43,7 +43,10 @@ final class SearchIndexStore {
         if !force {
             let cacheDescriptor = FetchDescriptor<SearchIndexCache>(predicate: #Predicate { $0.key == "main" })
             
-            if let existingCache = try context.fetch(cacheDescriptor).first {
+            let caches = try context.fetch(cacheDescriptor)
+            if let existingCache = caches.first(where: {
+                !CatalogReferenceResolver.isCatalog($0)
+            }) ?? caches.first {
                 if existingCache.version == currentIndexVersion {
                     if existingCache.foodsCount == currentFoodCount {
                         print("✅ SearchIndexStore: Index is up-to-date (version: \(existingCache.version), DB: \(currentFoodCount)). Skipping rebuild.")
@@ -82,12 +85,16 @@ final class SearchIndexStore {
         if !compactFoods.isEmpty { return }
 
         let ctx = ModelContext(container)
+        try? CatalogPreferenceStore.shared.load(context: ctx)
 
         do {
             let cacheDescriptor = FetchDescriptor<SearchIndexCache>(
                 predicate: #Predicate { $0.key == "main" }
             )
-            if let cache = try ctx.fetch(cacheDescriptor).first {
+            let caches = try ctx.fetch(cacheDescriptor)
+            if let cache = caches.first(where: {
+                !CatalogReferenceResolver.isCatalog($0)
+            }) ?? caches.first {
                 if cache.version == currentIndexVersion {
                     if let payload = try? JSONDecoder().decode(SearchIndexPayload.self, from: cache.payloadData) {
                         apply(payload: payload)
@@ -442,7 +449,10 @@ final class SearchIndexStore {
         )
 
         let data = try JSONEncoder().encode(payload)
-        try? context.delete(model: SearchIndexCache.self)
+        for existing in try context.fetch(FetchDescriptor<SearchIndexCache>())
+        where !CatalogReferenceResolver.isCatalog(existing) {
+            context.delete(existing)
+        }
 
         let cache = SearchIndexCache(
             id: mainCacheID,
@@ -459,7 +469,15 @@ final class SearchIndexStore {
     }
 
     private func apply(payload: SearchIndexPayload) {
-        let compact = payload.compactFoods.map { CompactFoodItem($0) }
+        let compact = payload.compactFoods.map {
+            let item = CompactFoodItem($0)
+            let favorite = CatalogPreferenceStore.shared.isFavorite(
+                kind: "food",
+                itemID: item.id,
+                fallback: item.isFavorite
+            )
+            return item.withFavorite(favorite)
+        }
         
         self.compactFoods = compact
         self.compactMap = Dictionary(uniqueKeysWithValues: compact.map { ($0.id, $0) })
@@ -562,7 +580,7 @@ final class SearchIndexStore {
             referenceWeightG: food.referenceWeightG,
             isRecipe: food.isRecipe,
             isMenu: food.isMenu,
-            isFavorite: food.isFavorite,
+            isFavorite: food.effectiveIsFavorite,
             isEdible: food.isEdible,
             ayurvedaFacets: adjustedAyurveda.facets,
             ayurvedaMetadata: adjustedAyurveda,

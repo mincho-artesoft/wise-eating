@@ -326,8 +326,11 @@ open class EventView: UIView {
         let pendingIDs = Set(items.map { $0.id })
         
         do {
+            let writeContext = try CombinedStoreFactory.makeUserWriteContext(
+                from: context.container
+            )
             let descriptor = FetchDescriptor<ShoppingListModel>(predicate: #Predicate { $0.id == listID })
-            guard let listToUpdate = try context.fetch(descriptor).first else {
+            guard let listToUpdate = try writeContext.fetch(descriptor).first else {
                 print("Commit failed: ShoppingListModel not found.")
                 return
             }
@@ -342,7 +345,10 @@ open class EventView: UIView {
             
             listToUpdate.isCompleted = listToUpdate.items.allSatisfy { $0.isBought }
             
-            try listToUpdate.processCompletedItems(initiallyBoughtIDs: initiallyBoughtIDs, context: context)
+            try listToUpdate.processCompletedItems(
+                initiallyBoughtIDs: initiallyBoughtIDs,
+                context: writeContext
+            )
             
             let newPayload = ShoppingListPayload(from: listToUpdate)
             let jsonData = try JSONEncoder().encode(newPayload)
@@ -350,7 +356,7 @@ open class EventView: UIView {
                 realEvent.notes = OptimizedInvisibleCoder.encode(from: jsonString)
             }
             
-            if context.hasChanges { try context.save() }
+            if writeContext.hasChanges { try writeContext.save() }
             try viewModel.eventStore.save(realEvent, span: .thisEvent, commit: true)
             
             if let wrapper = self.descriptor as? EKMultiDayWrapper {

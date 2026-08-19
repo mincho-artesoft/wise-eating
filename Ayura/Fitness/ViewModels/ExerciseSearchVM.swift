@@ -74,6 +74,7 @@ final class ExerciseSearchVM: ObservableObject {
         guard self.context !== context else { return }
         self.context = context
         self.container = context.container
+        try? CatalogPreferenceStore.shared.load(context: context)
     }
 
     func exclude(_ exercises: Set<ExerciseItem>) {
@@ -113,6 +114,10 @@ final class ExerciseSearchVM: ObservableObject {
         let capturedPageSize = self.pageSize
         let capturedGeneration = self.generation
         let capturedMuscleGroup = self.muscleGroupFilter
+        let capturedFavoritesOnly = self.isFavoritesModeActive
+        let capturedFavoriteIDs = Set(
+            CatalogPreferenceStore.shared.favoriteIDs(kind: "exercise")
+        )
         let capturedAyurvedaFilters = self.ayurvedaFilters
         let capturedAyurvedaConstraints = parsedQuery.constraints
         let usesAyurvedaRanking = capturedAyurvedaFilters.isActive
@@ -142,12 +147,20 @@ final class ExerciseSearchVM: ObservableObject {
                     let fetchedItems = try bgContext.fetch(descriptor)
                     if Task.isCancelled { return ([], capturedOffset, false) }
 
+                    let afterFavoriteFilter = capturedFavoritesOnly
+                        ? fetchedItems.filter {
+                            $0.isFavorite || capturedFavoriteIDs.contains($0.id)
+                        }
+                        : fetchedItems
+
                     // 1) muscle filter (in-memory)
                     let afterMuscleFilter: [ExerciseItem]
                     if let group = capturedMuscleGroup {
-                        afterMuscleFilter = fetchedItems.filter { $0.muscleGroups.contains(group) }
+                        afterMuscleFilter = afterFavoriteFilter.filter {
+                            $0.muscleGroups.contains(group)
+                        }
                     } else {
-                        afterMuscleFilter = fetchedItems
+                        afterMuscleFilter = afterFavoriteFilter
                     }
 
                     if usesAyurvedaRanking {
@@ -227,7 +240,6 @@ final class ExerciseSearchVM: ObservableObject {
     ) -> Predicate<ExerciseItem> {
         let normalizedQuery = lexicalQuery.foldedSearchKey
         let capturedExcludedIDs = excludedIDs
-        let capturedIsFavorites = isFavoritesModeActive
         let mode = workoutFilterMode
         let capturedAge = self.profileAgeInMonths
 
@@ -236,14 +248,12 @@ final class ExerciseSearchVM: ObservableObject {
             return #Predicate<ExerciseItem> { exercise in
                 (normalizedQuery.isEmpty || exercise.nameNormalized.contains(normalizedQuery))
                 && (capturedExcludedIDs.isEmpty || !capturedExcludedIDs.contains(exercise.id))
-                && (!capturedIsFavorites || exercise.isFavorite == true)
                 && (capturedAge == nil || exercise.minimalAgeMonths <= capturedAge!)
             }
         case .onlyWorkouts:
             return #Predicate<ExerciseItem> { exercise in
                 (normalizedQuery.isEmpty || exercise.nameNormalized.contains(normalizedQuery))
                 && (capturedExcludedIDs.isEmpty || !capturedExcludedIDs.contains(exercise.id))
-                && (!capturedIsFavorites || exercise.isFavorite == true)
                 && exercise.isWorkout == true
                 && (capturedAge == nil || exercise.minimalAgeMonths <= capturedAge!)
             }
@@ -251,7 +261,6 @@ final class ExerciseSearchVM: ObservableObject {
             return #Predicate<ExerciseItem> { exercise in
                 (normalizedQuery.isEmpty || exercise.nameNormalized.contains(normalizedQuery))
                 && (capturedExcludedIDs.isEmpty || !capturedExcludedIDs.contains(exercise.id))
-                && (!capturedIsFavorites || exercise.isFavorite == true)
                 && exercise.isWorkout == false
                 && (capturedAge == nil || exercise.minimalAgeMonths <= capturedAge!)
             }

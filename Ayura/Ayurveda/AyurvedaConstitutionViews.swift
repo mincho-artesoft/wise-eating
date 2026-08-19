@@ -366,6 +366,7 @@ struct AyurvedaConstitutionSetupView: View {
             )
           }
           .buttonStyle(.plain)
+          .accessibilityIdentifier("ayurveda-constitution-option-\(option.id)")
           .listRowBackground(Color.clear)
           .listRowSeparator(.hidden)
         }
@@ -388,6 +389,7 @@ struct AyurvedaConstitutionSetupView: View {
             Button("Continue", action: completeDeclaredSelection)
               .ayurvedaWizardNavigationButton()
               .disabled(selectedDeclaredTypeID == nil)
+              .accessibilityIdentifier("ayurveda-constitution-continue")
           }
         } else if !completesDirectly {
           Button("Continue", action: completeDeclaredSelection)
@@ -591,6 +593,7 @@ struct AyurvedaConstitutionSetupView: View {
             finish(completedDraft)
           }
           .ayurvedaWizardNavigationButton()
+          .accessibilityIdentifier("ayurveda-constitution-finish")
         }
       }
     }

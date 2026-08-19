@@ -466,8 +466,10 @@ enum AyurvedaUserProfileStore {
     form: AyurvedaForm,
     for food: FoodItem,
     context: ModelContext
-  ) {
-    let existing = profile(foodId: food.id, context: context)
+  ) throws {
+    let writeContext = ModelContext(context.container)
+    writeContext.autosaveEnabled = false
+    let existing = profile(foodId: food.id, context: writeContext)
     guard existing != nil || !form.isEmpty else {
       return
     }
@@ -475,8 +477,23 @@ enum AyurvedaUserProfileStore {
     let profile = existing ?? makeProfile(form: form, food: food)
     apply(form: form, food: food, to: profile)
     if existing == nil {
-      context.insert(profile)
+      try insertMissingProfile(profile, container: context.container)
+    } else {
+      try writeContext.save()
     }
+  }
+
+  /// Inserts a profile for a newly-created user item without first fetching
+  /// the catalogue-backed Ayurveda entity. In a combined SwiftData container,
+  /// that fetch can make the following insert inherit the read-only store.
+  static func insert(
+    form: AyurvedaForm,
+    for food: FoodItem,
+    context: ModelContext
+  ) throws {
+    let profile = makeProfile(form: form, food: food)
+    apply(form: form, food: food, to: profile)
+    try insertMissingProfile(profile, container: context.container)
   }
 
   /// Persists the complete AI payload while allowing the editor's seven
@@ -486,53 +503,39 @@ enum AyurvedaUserProfileStore {
     editorForm: AyurvedaForm,
     for food: FoodItem,
     context: ModelContext
-  ) {
-    let value = generated.overridingEditableFields(with: editorForm)
-    let existing = profile(foodId: food.id, context: context)
+  ) throws {
+    let writeContext = ModelContext(context.container)
+    writeContext.autosaveEnabled = false
+    let existing = profile(foodId: food.id, context: writeContext)
     let profile = existing ?? makeProfile(form: editorForm, food: food)
-
-    profile.kind = "user"
-    profile.foodId = food.id
-    profile.foodIsPlaceholder = false
-    profile.name = food.name
-    profile.doshaVata = value.doshaVata
-    profile.doshaPitta = value.doshaPitta
-    profile.doshaKapha = value.doshaKapha
-    profile.seasons = value.seasons
-    profile.timeOfDay = value.timeOfDay
-    profile.viruddha = value.viruddha
-    profile.provenance = ["ai-generated", "apple-foundation-models"]
-    profile.confidenceAyur = value.confidenceAyur
-    profile.confidenceSci = nil
-    profile.qualityState = "aiDraft"
-    profile.reviewNote = "AI-generated Ayurveda metadata; expert review required."
-    profile.engineExcluded = !food.isEdible
-    profile.edible = food.isEdible
-    profile.inedibleReason = food.inedibleReason
-    profile.seedVersion = bundleSeedVersion
-    profile.sanskrit = value.sanskrit
-    profile.aliases = value.aliases
-    profile.rasa = value.rasa
-    profile.virya = value.virya
-    profile.vipaka = value.vipaka
-    profile.gunas = value.gunas
-    profile.prabhava = value.prabhava
-    profile.agniEffect = value.agniEffect
-    profile.digestibility = value.digestibility
-    profile.combinations = value.combinations
-    profile.contraindications = value.contraindications
-    profile.preparation = value.preparation
-    profile.servingsJSON = nil
-    profile.meal = nil
-    profile.servingsCount = nil
-    profile.prepMinutes = nil
-    profile.cookMinutes = nil
-    profile.steps = []
-    profile.guidance = value.guidance
+    apply(
+      generated: generated,
+      editorForm: editorForm,
+      food: food,
+      to: profile
+    )
 
     if existing == nil {
-      context.insert(profile)
+      try insertMissingProfile(profile, container: context.container)
+    } else {
+      try writeContext.save()
     }
+  }
+
+  static func insert(
+    generated: AyurvedaGeneratedFoodDTO,
+    editorForm: AyurvedaForm,
+    for food: FoodItem,
+    context: ModelContext
+  ) throws {
+    let profile = makeProfile(form: editorForm, food: food)
+    apply(
+      generated: generated,
+      editorForm: editorForm,
+      food: food,
+      to: profile
+    )
+    try insertMissingProfile(profile, container: context.container)
   }
 
   static func remove(foodId: UUID, context: ModelContext) {
@@ -639,8 +642,69 @@ enum AyurvedaUserProfileStore {
     profile.guidance = nil
   }
 
+  private static func apply(
+    generated: AyurvedaGeneratedFoodDTO,
+    editorForm: AyurvedaForm,
+    food: FoodItem,
+    to profile: AyurvedaProfile
+  ) {
+    let value = generated.overridingEditableFields(with: editorForm)
+    profile.kind = "user"
+    profile.foodId = food.id
+    profile.foodIsPlaceholder = false
+    profile.name = food.name
+    profile.doshaVata = value.doshaVata
+    profile.doshaPitta = value.doshaPitta
+    profile.doshaKapha = value.doshaKapha
+    profile.seasons = value.seasons
+    profile.timeOfDay = value.timeOfDay
+    profile.viruddha = value.viruddha
+    profile.provenance = ["ai-generated", "apple-foundation-models"]
+    profile.confidenceAyur = value.confidenceAyur
+    profile.confidenceSci = nil
+    profile.qualityState = "aiDraft"
+    profile.reviewNote = "AI-generated Ayurveda metadata; expert review required."
+    profile.engineExcluded = !food.isEdible
+    profile.edible = food.isEdible
+    profile.inedibleReason = food.inedibleReason
+    profile.seedVersion = bundleSeedVersion
+    profile.sanskrit = value.sanskrit
+    profile.aliases = value.aliases
+    profile.rasa = value.rasa
+    profile.virya = value.virya
+    profile.vipaka = value.vipaka
+    profile.gunas = value.gunas
+    profile.prabhava = value.prabhava
+    profile.agniEffect = value.agniEffect
+    profile.digestibility = value.digestibility
+    profile.combinations = value.combinations
+    profile.contraindications = value.contraindications
+    profile.preparation = value.preparation
+    profile.servingsJSON = nil
+    profile.meal = nil
+    profile.servingsCount = nil
+    profile.prepMinutes = nil
+    profile.cookMinutes = nil
+    profile.steps = []
+    profile.guidance = value.guidance
+  }
+
   private static func profileKey(_ foodId: UUID) -> String {
     "user.\(foodId)"
+  }
+
+  /// A failed cross-store lookup can leave the calling context biased toward
+  /// the read-only catalogue configuration for this shared model type. Insert
+  /// a genuinely missing user profile through a clean context, where the
+  /// combined-store routing has already been verified at application startup.
+  private static func insertMissingProfile(
+    _ profile: AyurvedaProfile,
+    container: ModelContainer
+  ) throws {
+    let writeContext = ModelContext(container)
+    writeContext.autosaveEnabled = false
+    writeContext.insert(profile)
+    try writeContext.save()
   }
 
   private static var bundleSeedVersion: Int {

@@ -2,7 +2,11 @@
 **Read this first. It is the knowledge-transfer document for anyone (human or AI)
 taking over direction of this project. Update it at the end of every milestone —
 that is a standing rule baked into all task packets.**
-Last updated: 2026-08-03 (job 4 re-pins the bundled seed, preseed, concept,
+Last updated: 2026-08-19 (the catalogue/user-store separation makes bundled
+food, exercise, yoga, practice, Ayurveda, barcode, and search data an atomic
+read-only catalogue while preserving app-authored records in a writable store;
+normal catalogue updates no longer repeat the one-time separation or row-wise
+preseeding. Job 4 previously re-pinned the bundled seed, preseed, concept,
 role, imagery, archive, and search-cache artifacts to the post-NUT catalogue. Search cache v7 persists
 full Ayurveda metadata for canonical and linked foods; MP-7 adds build-time culinary roles,
 `notReadyToEat` eligibility, anchor/cap/portion plausibility constraints, and a
@@ -104,6 +108,26 @@ simulation; must always pass).
   `-we6LaunchProfile` enables opt-in Points of Interest plus monotonic launch
   timestamps through the first interactive frame; ordinary launches emit no
   WE-6 probe output.
+- `Ayura/Main/DBSeed/CatalogStoreManager.swift`, `LegacyStoreSeparator.swift`,
+  and `DatabaseSchema.swift` (catalogue separation): the versioned bundled
+  SQLite package is streamed from its gzip parts into a staged store, validates
+  hashes/counts/integrity, receives a fresh Core Data store UUID, and is then
+  published atomically as a read-only catalogue. The legacy
+  `AyurvedaAsanaYoga.store` path remains the writable user store. A one-time,
+  recovery-backed migration converts user references to stable domain UUIDs,
+  preserves catalogue favorites in `CatalogPreference`, and batch-removes the
+  old catalogue copies. This covers foods/recipes/menus, exercises/workouts,
+  meal and training plans, storage, shopping lists, nodes, practice history,
+  priority nutrients, yoga/practice data, Ayurveda rows, barcode data, and the
+  search cache. The staged catalogue is finalized with the exact combined
+  persistent model before its read-only mount. A combined-store factory resolves
+  SwiftData's unordered configuration set and proves user-store routing with
+  editor-exact write probes, including implicitly inserted nutrition/photo
+  children plus recipe, workout, Ayurveda, and search-cache graphs. Later
+  catalogue revisions return through the migration-state fast path before any
+  catalogue ID scans or row deletions. A real Add Food UI regression also
+  enters a unique record and serving weight, saves the full nutrition graph,
+  and verifies that no write-permission alert appears.
 - `Ayura/Main/DBSeed/AyurvedaSeeder.swift` + hooks in `SeedManager.swift`
   (after `seedFoodsIfNeeded`) and `DatabaseSetup.swift` (mainTypes): the shipped
   store already contains 383 placeholder FoodItems (reserved ID band
@@ -234,6 +258,11 @@ simulation; must always pass).
     cache or bucket these exact facts but may not reduce iterations, cap/sample
     candidates, relax constraints, or change deterministic plan output without
     a separate founder ruling.
+17. Bundled catalogue content and user-authored state live in separate physical
+    stores. Catalogue replacement is staged, validated, atomically published,
+    and read-only; user relationships use stable content UUIDs rather than
+    cross-store SwiftData relationships. Never reintroduce destructive whole-
+    database replacement or repeat the legacy separation on a normal update.
 
 ## 4. Working process (the pattern that built all of this)
 
@@ -307,6 +336,7 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | Archive sizes / identity (JOB4) | 144: 43,591,000 bytes · 480: 85,383,373 bytes · restored 1024: 351,950,638 bytes in five parts · 14,477 packets each · zero B-frames · frame map `b0fffc11279025e7e5e95606e0954357ba942ebbb202635e49d8ca4b3d80ca85` · timestamps `d3666f4a56036440f7922e1af59ae9641f1e77ed112c70b89adc616ec11c6d34` |
 | JOB4 regression | 161/161 tests · 25+2 search goldens exact · Debug and Release builds pass · fresh install zero Ayurveda inserts/updates and no index rebuild |
 | JOB4 cold launch (Debug simulator) | candidate **1.392724s** median, IQR 0.012074s, min 1.365718s, max 1.407776s; pre-batch `8ba4099` median 1.396913s; paired median −0.005364s; N=10 same-session AB |
+| Catalogue/user separation | read-only catalogue: 14,487 foods · 908 exercises · 4,419 yoga sequences · 60 practices / 601 cues · 12,480 Ayurveda profiles · 2,336 links · 599,085 vocabulary rows · 8,399 product buckets. One-time simulator migration batch-removed 642,207 legacy catalogue rows in ~17s with a recovery backup. Executable fixture preserves 5 food references, 3 exercise references, 3 favorite overlays, and all profile/plan/storage/node/practice/nutrient records. Normal revision path: **0.0297s**, `normalUpdateReseeded=false`; latest warm catalogue/user check: **0.531s**, editor-exact combined-container gate: **0.340s**. Relevant Python tests: **22/22**; Debug/Release builds and normal/smoke simulator launches pass. See `ayurveda-data/REPORT-CATALOG-SEPARATION.md` |
 
 ## 6. Milestone ledger (update after every task)
 
@@ -340,6 +370,7 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | MP-6 batched narration | ✅ HOST/SIMULATOR COMPLETE — one indexed whole-plan `@Generable` call replaces per-meal title polishing; the Foundation-only template is complete, deterministic, and has zero Foundation Models linkage. MP-1 telemetry proves one narration call at 1/3/7 days and a model-available seven-day total of 2 with MP-4 parsing. All 123 tests, 25+2 goldens, 23/23 solver properties, validator, Debug/Release, fresh zero-insert/no-rebuild, tracked-size, and 1.616s launch gates pass. The 2-call number remains a static host result until the deferred device matrix. See `REPORT-MP6.md` |
 | MP-6b narration copy pass | ✅ COMPLETE — the repeated three-day MP-6 sample is confirmed as a narration fixture, not solver output. Five deterministic sentence frames rotate without adjacent repeats; balanced-agni and mixed-thermal noise is omitted; single tastes fold into the main sentence. A real production-solver seven-day sample over shipped catalogue inputs has 91 distinct food IDs and passes the two-day no-repeat check. All 125 tests, 25+2 goldens, 23/23 solver properties, Debug/Release, flag on/off smoke, two-call telemetry, tracked-size, and 1.543s launch gates pass. See `REPORT-MP6b.md` |
 | MP-7 culinary plausibility | ✅ COMPLETE — rev9 resolves one cached culinary role, readiness flag, and headword for all 14,484 canonical rows; 543 plain-catalogue rows are ineligible and 304 are not ready to eat. Solver meals now require anchors, cap roles/seasonings, and enforce role portions. G0 detects 21/21 known-bad meals; fixtures 71/71, G1/G1b, both G2c directions, G4 150/150, G5 30/30, and G6 +1.550713 pass. A real-catalogue profile replaced the withdrawn synthetic 150ms assumption: behavior-preserving compact role buckets reduce seven-day median to 641.588ms while all 30 plan hashes remain exact. Physical iPhone N=10 ABAB launch is 1.090s median and peak memory +10.281MiB paired vs MP-6b; role cache 44.735ms cold / 1.086ms cached; tracked max 82,726,160 bytes. See `REPORT-MP7.md` |
+| Catalogue/user-store separation | ✅ IMPLEMENTED / SIMULATOR VERIFIED — bundled foods, exercises, yoga, practices, Ayurveda, barcode data, and search cache mount from a versioned read-only catalogue; user profiles, authored foods/recipes, exercises/workouts, plans, logs, storage, lists, nodes, sessions, settings, and favorites remain in the writable store. The one-time migration is recovery-backed and batched; subsequent revisions atomically replace only the catalogue and take the state fast path without row preseeding. Store-UUID collision and SwiftData write routing are covered by executable smoke assertions and editor-exact probes for implicit food nutrition/photo graphs, recipes, exercises, workouts, Ayurveda, and cache writes. See `REPORT-CATALOG-SEPARATION.md` |
 | Expert review pass | ⏳ pending human reviewer: work aiDraft→reviewed, resolve reviewNotes, optional batch-31 top-up to 750 |
 | Later roadmap | media (yoga/meditation content), recommendation engine, dosha assessment — see ayurveda-data/RESTART-PLAN.md history |
 

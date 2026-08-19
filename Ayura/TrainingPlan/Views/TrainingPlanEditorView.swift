@@ -376,6 +376,7 @@ struct TrainingPlanEditorView: View {
             Spacer()
             
             Button("Save", action: savePlan)
+                .accessibilityIdentifier("training-plan-save")
                 .disabled(isSaveDisabled)
                 .padding(.horizontal, 10).padding(.vertical, 5)
                 .glassCardStyle(cornerRadius: 20)
@@ -470,6 +471,7 @@ struct TrainingPlanEditorView: View {
         VStack(spacing: 12) {
             StyledLabeledPicker(label: "Plan Name", isRequired: true) {
                 TextField("", text: $name, prompt: Text("e.g., Strength Phase 1").foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.6)))
+                    .accessibilityIdentifier("training-plan-name")
                     .focused($focusedField, equals: .name)
             }
             .id(FocusableField.name)
@@ -763,11 +765,11 @@ struct TrainingPlanEditorView: View {
                                                 size: 44,
                                                 cornerRadius: 10
                                             )
-                                            if item.isFavorite {
+                                            if item.effectiveIsFavorite {
                                                 Image(systemName: "star.fill").foregroundColor(.yellow).font(.caption)
                                             }
                                             if item.isWorkout {
-                                                Image(systemName: "figure.strengthtraining.traditional").foregroundColor(.orange).font(.caption)
+                                                Image(systemName: ExerciseIconography.workoutSystemName).foregroundColor(.orange).font(.caption)
                                             }
                                             VStack(alignment: .leading, spacing: 5) {
                                                 Text(item.name).lineLimit(1)
@@ -847,7 +849,7 @@ struct TrainingPlanEditorView: View {
                     }
                 }) {
                     HStack(spacing: 6) {
-                        Image(systemName: "figure.yoga")
+                        Image(systemName: ExerciseIconography.workoutSystemName)
                             .imageScale(.medium)
                             .font(.system(size: 13, weight: .semibold))
                         if searchVM.workoutFilterMode == .onlyWorkouts {
@@ -1028,25 +1030,49 @@ struct TrainingPlanEditorView: View {
             isSaving = true
             await Task.yield()
             defer { isSaving = false }
-            
-            let planToSave: TrainingPlan
-            
-            if let existingPlan = planToEdit {
-                planToSave = existingPlan
-            } else {
-                planToSave = TrainingPlan(name: name, profile: profile)
-                modelContext.insert(planToSave)
-            }
-            
-            planToSave.name = name
-            // +++ НОВО (7/8): Запазваме стойността за минимална възраст +++
-            planToSave.minAgeMonths = Int(minAgeMonthsTxt) ?? 0
-            
-            await createOrUpdateWorkouts(for: planToSave)
-            syncDays(of: planToSave, from: self.days)
-            
+
             do {
-                try modelContext.save()
+                // Persist the complete plan, generated workouts and all link
+                // rows in one user-only transaction. Saving a generated
+                // workout in a second context while an unsaved TrainingPlan
+                // lived in the combined context could turn that plan into a
+                // Core Data tombstone with nil required fields.
+                let writeContext = try CombinedStoreFactory.makeUserWriteContext(
+                    from: modelContext.container
+                )
+                guard let writeProfile = try CatalogReferenceResolver.userProfile(
+                    id: profile.id,
+                    context: writeContext
+                ) else {
+                    throw CatalogReferenceError.missingUserProfile(profile.id)
+                }
+
+                let planToSave: TrainingPlan
+                if let planID = planToEdit?.id {
+                    guard let existingPlan = try CatalogReferenceResolver
+                        .userTrainingPlan(id: planID, context: writeContext) else {
+                        throw CatalogReferenceError.missingUserTrainingPlan(planID)
+                    }
+                    planToSave = existingPlan
+                } else {
+                    planToSave = TrainingPlan(name: name, profile: writeProfile)
+                    writeContext.insert(planToSave)
+                }
+
+                planToSave.name = name
+                planToSave.profile = writeProfile
+                planToSave.minAgeMonths = Int(minAgeMonthsTxt) ?? 0
+
+                try createOrUpdateWorkouts(
+                    for: planToSave,
+                    context: writeContext
+                )
+                try syncDays(
+                    of: planToSave,
+                    from: self.days,
+                    context: writeContext
+                )
+                try writeContext.save()
                 if let pendingID = pendingAIJobIDToDeleteOnSave,
                    let job = aiManager.jobs.first(where: { $0.id == pendingID }) {
                     await aiManager.deleteJob(job)
@@ -1054,21 +1080,51 @@ struct TrainingPlanEditorView: View {
                 }
                 onDismiss(planToSave)
             } catch {
+                let nsError = error as NSError
+                print(
+                    "TRAINING_PLAN_SAVE_ERROR|domain=\(nsError.domain)|"
+                        + "code=\(nsError.code)|userInfo=\(nsError.userInfo)"
+                )
+                NSLog(
+                    "TRAINING_PLAN_SAVE_ERROR|domain=%@|code=%d|userInfo=%@",
+                    nsError.domain,
+                    nsError.code,
+                    String(describing: nsError.userInfo)
+                )
+                if let details = nsError.userInfo["NSDetailedErrors"] as? [NSError] {
+                    for detail in details {
+                        print(
+                            "TRAINING_PLAN_SAVE_DETAIL|domain=\(detail.domain)|"
+                                + "code=\(detail.code)|userInfo=\(detail.userInfo)"
+                        )
+                        NSLog(
+                            "TRAINING_PLAN_SAVE_DETAIL|domain=%@|code=%d|userInfo=%@",
+                            detail.domain,
+                            detail.code,
+                            String(describing: detail.userInfo)
+                        )
+                    }
+                }
                 alertMessage = "Failed to save plan. Error: \(error.localizedDescription)"
                 showAlert = true
             }
         }
     }
     
-    private func createOrUpdateWorkouts(for plan: TrainingPlan) async {
+    private func createOrUpdateWorkouts(
+        for plan: TrainingPlan,
+        context writeContext: ModelContext
+    ) throws {
             for day in days {
                 for workout in day.workouts {
                     guard !workout.exercises.isEmpty else {
                         if let oldWorkoutID = workout.linkedWorkoutID {
-                            if let oldWorkoutItem = try? modelContext.fetch(
-                                FetchDescriptor<ExerciseItem>(predicate: #Predicate { $0.id == oldWorkoutID })
-                            ).first {
-                                modelContext.delete(oldWorkoutItem)
+                            if let oldWorkoutItem = try CatalogReferenceResolver
+                                .userExercise(
+                                    id: oldWorkoutID,
+                                    context: writeContext
+                                ) {
+                                writeContext.delete(oldWorkoutItem)
                             }
                             workout.linkedWorkoutID = nil
                         }
@@ -1079,33 +1135,43 @@ struct TrainingPlanEditorView: View {
                     let workoutToUpdate: ExerciseItem
                     
                     if let existingID = workout.linkedWorkoutID,
-                       let found = try? modelContext.fetch(
-                            FetchDescriptor<ExerciseItem>(predicate: #Predicate { $0.id == existingID })
-                       ).first {
+                       let found = try CatalogReferenceResolver.userExercise(
+                            id: existingID,
+                            context: writeContext
+                       ) {
                         workoutToUpdate = found
                     } else {
                         let newID = UUID()
                         workoutToUpdate = ExerciseItem(id: newID, name: workoutName, muscleGroups: [], isWorkout: true)
-                        modelContext.insert(workoutToUpdate)
+                        writeContext.insert(workoutToUpdate)
                         workout.linkedWorkoutID = newID
                     }
                     
                     workoutToUpdate.name = workoutName
                     workoutToUpdate.isWorkout = true
+                    workoutToUpdate.isUserAdded = true
                     
                     // 👉 Вземаме само валидните TrainingPlanExercise
                     let validLinks = workout.exercises.filter { $0.exercise != nil }
                     
                     // Изчистваме старите ExerciseLink от Workout-а в ExerciseItem
-                    workoutToUpdate.exercises?.forEach { modelContext.delete($0) }
-                    
-                    // Създаваме нови ExerciseLink само за валидните упражнения (за ExerciseItem)
-                    workoutToUpdate.exercises = validLinks.map { exerciseLink in
-                        ExerciseLink(
-                            exercise: exerciseLink.exercise!,
+                    workoutToUpdate.exercises?.forEach { writeContext.delete($0) }
+                    workoutToUpdate.exercises = []
+
+                    // Catalogue exercises are stored as scalar UUIDs; user
+                    // exercises are refetched in the user-only context.
+                    for exerciseLink in validLinks {
+                        guard let sourceExercise = exerciseLink.exercise else {
+                            continue
+                        }
+                        let link = try CatalogReferenceResolver.exerciseLink(
+                            for: sourceExercise,
                             durationSeconds: exerciseLink.durationSeconds,
-                            owner: workoutToUpdate
+                            owner: workoutToUpdate,
+                            userContext: writeContext
                         )
+                        writeContext.insert(link)
+                        workoutToUpdate.exercises?.append(link)
                     }
                     
                     // Запазваме сетовете в TrainingPlan структурата
@@ -1138,14 +1204,18 @@ struct TrainingPlanEditorView: View {
         }
 
     
-    private func syncDays(of plan: TrainingPlan, from stateDays: [TrainingPlanDay]) {
+    private func syncDays(
+        of plan: TrainingPlan,
+        from stateDays: [TrainingPlanDay],
+        context: ModelContext
+    ) throws {
         // Преобразуваме за бърз достъп
         let stateDaysByID = Dictionary(uniqueKeysWithValues: stateDays.map { ($0.id, $0) })
         
         // 1. Изтриваме дни от плана, които вече не са в състоянието
         for day in plan.days {
             if stateDaysByID[day.id] == nil {
-                modelContext.delete(day)
+                context.delete(day)
             }
         }
         
@@ -1155,7 +1225,7 @@ struct TrainingPlanEditorView: View {
             let persistedDay = plan.days.first(where: { $0.id == stateDay.id }) ?? {
                 let newDay = TrainingPlanDay(dayIndex: stateDay.dayIndex, isRestDay: stateDay.isRestDay)
                 newDay.plan = plan
-                modelContext.insert(newDay)
+                context.insert(newDay)
                 return newDay
             }()
             
@@ -1165,16 +1235,24 @@ struct TrainingPlanEditorView: View {
             
             if persistedDay.isRestDay {
                 // Ако е ден за почивка, изтриваме всички тренировки от него
-                persistedDay.workouts.forEach { modelContext.delete($0) }
+                persistedDay.workouts.forEach { context.delete($0) }
                 persistedDay.workouts = []
             } else {
                 // Ако не е, синхронизираме тренировките
-                syncWorkouts(of: persistedDay, from: stateDay)
+                try syncWorkouts(
+                    of: persistedDay,
+                    from: stateDay,
+                    context: context
+                )
             }
         }
     }
     
-    private func syncWorkouts(of persistedDay: TrainingPlanDay, from stateDay: TrainingPlanDay) {
+    private func syncWorkouts(
+        of persistedDay: TrainingPlanDay,
+        from stateDay: TrainingPlanDay,
+        context: ModelContext
+    ) throws {
             // 1. Събираме имената на тренировките от State (актуалното състояние)
             // Използваме Set за бързо търсене кои трябва да останат
             let stateWorkoutNames = Set(stateDay.workouts.map { $0.workoutName })
@@ -1183,7 +1261,7 @@ struct TrainingPlanEditorView: View {
             // (Обикаляме копие на масива, за да можем да трием безопасно)
             for workout in persistedDay.workouts {
                 if !stateWorkoutNames.contains(workout.workoutName) {
-                    modelContext.delete(workout)
+                    context.delete(workout)
                 }
             }
             
@@ -1198,7 +1276,7 @@ struct TrainingPlanEditorView: View {
                     // Ако няма - създаваме нова и я закачаме
                     persistedWorkout = TrainingPlanWorkout(workoutName: stateWorkout.workoutName)
                     persistedWorkout.day = persistedDay
-                    modelContext.insert(persistedWorkout)
+                    context.insert(persistedWorkout)
                     persistedDay.workouts.append(persistedWorkout)
                 }
                 
@@ -1207,7 +1285,7 @@ struct TrainingPlanEditorView: View {
                 
                 // 4. Синхронизиране на упражненията (Exercises)
                 // Първо изчистваме старите упражнения в базата
-                persistedWorkout.exercises.forEach { modelContext.delete($0) }
+                persistedWorkout.exercises.forEach { context.delete($0) }
                 persistedWorkout.exercises.removeAll()
                 
                 // Създаваме наново упражненията и сетовете от State
@@ -1215,12 +1293,14 @@ struct TrainingPlanEditorView: View {
                     // Защита: упражнението трябва да е валидно
                     guard let exItem = entry.exercise else { continue }
                     
-                    let newEntry = TrainingPlanExercise(
-                        exercise: exItem,
+                    let newEntry = try CatalogReferenceResolver
+                        .trainingPlanExercise(
+                        for: exItem,
                         durationSeconds: entry.durationSeconds,
-                        workout: persistedWorkout
+                        workout: persistedWorkout,
+                        userContext: context
                     )
-                    modelContext.insert(newEntry)
+                    context.insert(newEntry)
                     persistedWorkout.exercises.append(newEntry)
                     
                     // Запазваме сетовете с правилния индекс
@@ -1234,7 +1314,7 @@ struct TrainingPlanEditorView: View {
                             orderIndex: index
                         )
                         newSet.exercise = newEntry
-                        modelContext.insert(newSet)
+                        context.insert(newSet)
                         newEntry.sets.append(newSet)
                     }
                 }

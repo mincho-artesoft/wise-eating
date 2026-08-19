@@ -143,6 +143,13 @@ struct FoodItemEditorView: View {
             initialVitamins = VitaminForm(from: dub.vitamins?.toOriginal())
             initialMinerals = MineralForm(from: dub.minerals?.toOriginal())
             initialOthers = OtherForm(from: dub.other?.toOriginal())
+            if (initialOthers.weightG?.value ?? 0) <= 0,
+               let displayedServingWeightG = dub.duplicationServingWeightG {
+                initialOthers.weightG = Nutrient(
+                    value: displayedServingWeightG,
+                    unit: "g"
+                )
+            }
             initialAminoAcids = AminoAcidsForm(from: dub.aminoAcids?.toOriginal())
             initialCarbDetails = CarbDetailsForm(from: dub.carbDetails?.toOriginal())
             initialSterols = SterolsForm(from: dub.sterols?.toOriginal())
@@ -288,6 +295,14 @@ struct FoodItemEditorView: View {
            }
            .task {
                prefillAyurvedaIfNeeded()
+               #if DEBUG
+               if food == nil,
+                  ProcessInfo.processInfo.arguments.contains(
+                    "-uiTestNonemptyAyurveda"
+                  ) {
+                   ayurForm.vata = 1
+               }
+               #endif
            }
        }
     
@@ -418,6 +433,7 @@ struct FoodItemEditorView: View {
                         Text("Save")
                     }
                 }
+                .accessibilityIdentifier("food-editor-save")
                 .disabled(isSaveDisabled)
             }
             .padding(.horizontal, 10)
@@ -490,6 +506,7 @@ struct FoodItemEditorView: View {
                         prompt: Text("Blueberries")
                             .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.6))
                     )
+                    .accessibilityIdentifier("food-editor-name")
                     .font(.system(size: 16))
                     .focused($focusedField, equals: .name)
                     .disableAutocorrection(true)
@@ -611,6 +628,8 @@ struct FoodItemEditorView: View {
             .clipShape(Circle())
         }
         .buttonStyle(.plain)
+        .accessibilityIdentifier("food-editor-photo")
+        .accessibilityValue(imageData == nil ? "empty" : "image")
         .confirmationDialog("Select photo source", isPresented: $showPhotoSourceDialog) {
             Button("Take Photo") {
                 isShowingCameraPicker = true
@@ -909,17 +928,41 @@ struct FoodItemEditorView: View {
             isSaving = true
             await Task.yield()
             defer { isSaving = false }
-            
-            let item: FoodItem = food ?? {
-                           // ✅ FIX: Използваме новата логика тук
-                           let newId = UUID()
-                           let new = FoodItem(id: newId, name: name, isUserAdded: true)
-                           ctx.insert(new)
-                           return new
+
+            // Keep editor writes out of the overlapping read-only catalogue
+            // configuration. The dedicated context has only the writable user
+            // configuration, so SwiftData has no ambiguous destination.
+            let writeContext: ModelContext
+            do {
+                writeContext = try CombinedStoreFactory.makeUserWriteContext(
+                    from: ctx.container
+                )
+            } catch {
+                alertMsg = error.localizedDescription
+                showAlert = true
+                return
+            }
+            let editableFoodID = food.flatMap {
+                CatalogReferenceResolver.isCatalog($0) ? nil : $0.id
+            }
+            let existingItem: FoodItem? = {
+                guard let editableFoodID else { return nil }
+                var descriptor = FetchDescriptor<FoodItem>(
+                    predicate: #Predicate { $0.id == editableFoodID }
+                )
+                descriptor.fetchLimit = 1
+                return try? writeContext.fetch(descriptor).first
+            }()
+            let isNewItem = existingItem == nil
+            let item: FoodItem = existingItem ?? {
+                let new = FoodItem(id: UUID(), name: name, isUserAdded: true)
+                writeContext.insert(new)
+                return new
             }()
             
             // Тук се присвоява новото име
             item.name = name
+            item.refreshSearchMetadata()
             
             // ... (другите присвоявания на свойства остават същите) ...
             item.photo = photoData
@@ -933,45 +976,112 @@ struct FoodItemEditorView: View {
             item.inedibleReason = generatedInedibleReason
             item.inedibleContraindications = generatedInedibleContraindications
             
-            item.macronutrients = MacronutrientsData(from: macros)
-            item.lipids         = LipidsData(from: lipids)
-            item.vitamins       = VitaminsData(from: vitamins)
-            item.minerals       = MineralsData(from: minerals)
-            item.other          = OtherCompoundsData(from: others)
-            item.aminoAcids     = AminoAcidsData(from: aminoAcids)
-            item.carbDetails    = CarbDetailsData(from: carbDetails)
-            item.sterols        = SterolsData(from: sterols)
-            
-            item.macronutrients?.foodItem = item
-            item.lipids?.foodItem         = item
-            item.vitamins?.foodItem       = item
-            item.minerals?.foodItem       = item
-            item.other?.foodItem          = item
-            item.aminoAcids?.foodItem     = item
-            item.carbDetails?.foodItem    = item
-            item.sterols?.foodItem        = item
-
-            if let generatedAyurveda {
-                AyurvedaUserProfileStore.upsert(
-                    generated: generatedAyurveda,
-                    editorForm: ayurForm,
-                    for: item,
-                    context: ctx
-                )
-            } else if resolvedAyurFormBaseline == nil
-                || ayurForm != resolvedAyurFormBaseline {
-                AyurvedaUserProfileStore.upsert(
-                    form: ayurForm,
-                    for: item,
-                    context: ctx
-                )
+            // Keep persisted one-to-one nutrient identities stable when an
+            // existing user food is edited. Replacing the whole graph can
+            // retire Core Data object IDs while the combined catalogue/user
+            // transaction is still encoding them.
+            if let value = item.macronutrients {
+                value.apply(macros)
+            } else {
+                let value = MacronutrientsData(from: macros)
+                value.foodItem = item
+                item.macronutrients = value
             }
-            
+            if let value = item.lipids {
+                value.apply(lipids)
+            } else {
+                let value = LipidsData(from: lipids)
+                value.foodItem = item
+                item.lipids = value
+            }
+            if let value = item.vitamins {
+                value.apply(vitamins)
+            } else {
+                let value = VitaminsData(from: vitamins)
+                value.foodItem = item
+                item.vitamins = value
+            }
+            if let value = item.minerals {
+                value.apply(minerals)
+            } else {
+                let value = MineralsData(from: minerals)
+                value.foodItem = item
+                item.minerals = value
+            }
+            if let value = item.other {
+                value.apply(others)
+            } else {
+                let value = OtherCompoundsData(from: others)
+                value.foodItem = item
+                item.other = value
+            }
+            if let value = item.aminoAcids {
+                value.apply(aminoAcids)
+            } else {
+                let value = AminoAcidsData(from: aminoAcids)
+                value.foodItem = item
+                item.aminoAcids = value
+            }
+            if let value = item.carbDetails {
+                value.apply(carbDetails)
+            } else {
+                let value = CarbDetailsData(from: carbDetails)
+                value.foodItem = item
+                item.carbDetails = value
+            }
+            if let value = item.sterols {
+                value.apply(sterols)
+            } else {
+                let value = SterolsData(from: sterols)
+                value.foodItem = item
+                item.sterols = value
+            }
+
             do {
-                try ctx.save()
+                // SwiftData can route different shared catalogue/user model
+                // types to different stores when they are saved in one mixed
+                // transaction. Persist the food graph first, then the
+                // independent Ayurveda override in its own proven transaction.
+                try writeContext.save()
+
+                if let generatedAyurveda {
+                    if isNewItem {
+                        try AyurvedaUserProfileStore.insert(
+                            generated: generatedAyurveda,
+                            editorForm: ayurForm,
+                            for: item,
+                            context: writeContext
+                        )
+                    } else {
+                        try AyurvedaUserProfileStore.upsert(
+                            generated: generatedAyurveda,
+                            editorForm: ayurForm,
+                            for: item,
+                            context: writeContext
+                        )
+                    }
+                } else if resolvedAyurFormBaseline == nil
+                    || ayurForm != resolvedAyurFormBaseline {
+                    if isNewItem {
+                        try AyurvedaUserProfileStore.insert(
+                            form: ayurForm,
+                            for: item,
+                            context: writeContext
+                        )
+                    } else {
+                        try AyurvedaUserProfileStore.upsert(
+                            form: ayurForm,
+                            for: item,
+                            context: writeContext
+                        )
+                    }
+                }
+                if writeContext.hasChanges {
+                    try writeContext.save()
+                }
                 
                 // Тези два реда са ключови и трябва да са СЛЕД ctx.save()
-                SearchIndexStore.shared.updateItem(item, context: ctx)
+                SearchIndexStore.shared.updateItem(item, context: writeContext)
                 
                 cleanupPendingAIJobIfNeeded()
 
@@ -1061,6 +1171,7 @@ struct FoodItemEditorView: View {
                            focused: $focusedField,
                            fieldIdentifier: .servingWeight
                        )
+                       .accessibilityIdentifier("food-editor-serving-weight")
                        .multilineTextAlignment(.trailing)
                        .frame(width: 100)
                        .onChange(of: servingWeightString) { _, newValue in

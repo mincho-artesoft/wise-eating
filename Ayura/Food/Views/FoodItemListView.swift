@@ -396,7 +396,7 @@ struct FoodItemListView: View {
     @ViewBuilder
     private func presentedItemView(for item: PresentedItem) -> some View {
         
-        let onDismissItemFootView: (FoodItem?) -> Void = { _ in
+        let onDismissItemFootView: (FoodItem?) -> Void = { savedItem in
             withAnimation(.easeInOut(duration: 0.3)) {
                 self.presentedItem = nil
                 self.isAddButtonVisible = true
@@ -414,7 +414,19 @@ struct FoodItemListView: View {
                     }
                 }
             }
-            vm.resetAndLoad()
+            if let savedItem {
+                vm.applyUserStoreWrite(savedItem)
+                // Dismissing the editor can trigger a pending browse/search
+                // refresh from the combined read context. Reapply after that
+                // short transition so its cached pre-write instance cannot
+                // overwrite the just-saved user-store value on screen.
+                Task { @MainActor in
+                    try? await Task.sleep(for: .milliseconds(500))
+                    vm.applyUserStoreWrite(savedItem)
+                }
+            } else {
+                vm.resetAndLoad()
+            }
         }
         
         let onDismissItemView: () -> Void = {
@@ -541,7 +553,10 @@ struct FoodItemListView: View {
             // Използваме enumerated() + филтър за favorites, за да имаме индекс за shouldShowAd
             ForEach(
                 Array(vm.items.enumerated())
-                    .filter { vm.filter != .favorites || $0.element.isFavorite },
+                    .filter {
+                        vm.filter != .favorites
+                            || $0.element.effectiveIsFavorite
+                    },
                 id: \.element.id
             ) { index, item in
                 VStack(spacing: 0) {
@@ -552,9 +567,6 @@ struct FoodItemListView: View {
                             present(item: .detail(item))
                         }
                     )
-                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                        swipeActions(for: item)
-                    }
                     .padding(.vertical, 6) // padding върху реда, както при ExerciseListView
                     
                     if shouldShowAd(at: index) {
@@ -564,6 +576,15 @@ struct FoodItemListView: View {
                             .transition(.opacity)
                     }
                 }
+                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                    swipeActions(for: item)
+                }
+                // A save made through the dedicated user-store context can
+                // replace the managed instance while keeping the same UUID.
+                // Use the managed-instance identity so SwiftUI does not reuse
+                // the pre-edit row and its detached model, even when only a
+                // nutrient value (and not the name) was changed.
+                .id(ObjectIdentifier(item))
                 .listRowBackground(Color.clear)
                 .listRowSeparator(.hidden)
                 .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
@@ -646,6 +667,8 @@ struct FoodItemListView: View {
                                     .symbolRenderingMode(.palette)
                                     .foregroundStyle(effectManager.currentGlobalAccentColor)
                             }
+                            .accessibilityLabel("Delete \(plan.name)")
+                            .accessibilityIdentifier("Delete \(plan.name)")
                             .tint(.clear)
                             
                             Button {
@@ -655,6 +678,8 @@ struct FoodItemListView: View {
                                     .symbolRenderingMode(.palette)
                                     .foregroundStyle(effectManager.currentGlobalAccentColor)
                             }
+                            .accessibilityLabel("Edit \(plan.name)")
+                            .accessibilityIdentifier("Edit \(plan.name)")
                             .tint(.clear)
                         }
                         .padding(.vertical, 6)
@@ -722,6 +747,8 @@ struct FoodItemListView: View {
                         .symbolRenderingMode(.palette)
                         .foregroundStyle(effectManager.currentGlobalAccentColor)
                 }
+                .accessibilityLabel("Delete \(item.name)")
+                .accessibilityIdentifier("Delete \(item.name)")
                 .tint(.clear)
             }
             
@@ -738,6 +765,8 @@ struct FoodItemListView: View {
                     .symbolRenderingMode(.palette)
                     .foregroundStyle(effectManager.currentGlobalAccentColor)
             }
+            .accessibilityLabel("Duplicate \(item.name)")
+            .accessibilityIdentifier("Duplicate \(item.name)")
             .tint(.clear)
             
             if item.isUserAdded {
@@ -754,6 +783,8 @@ struct FoodItemListView: View {
                         .symbolRenderingMode(.palette)
                         .foregroundStyle(effectManager.currentGlobalAccentColor)
                 }
+                .accessibilityLabel("Edit \(item.name)")
+                .accessibilityIdentifier("Edit \(item.name)")
                 .tint(.clear)
             }
         }
@@ -821,13 +852,12 @@ struct FoodItemListView: View {
                 if isDragging {
                     buttonOffset = newOffset
                     saveButtonPosition()
-                } else {
-                    // Тап (без реален drag)
-                    handleButtonTap()
                 }
-                
-                isDragging = false
-                isPressed = false
+
+                DispatchQueue.main.async {
+                    isDragging = false
+                    isPressed = false
+                }
             }
     }
 
@@ -857,21 +887,27 @@ struct FoodItemListView: View {
            
            let scale = isDragging ? 1.05 : (isPressed ? 0.92 : 1.0)
            
-           return ZStack {
+           return Button {
+               guard !isDragging else { return }
+               handleButtonTap()
+           } label: {
                Image(systemName: "widget.large.badge.plus")
                    .font(.title3)
                    .foregroundColor(effectManager.currentGlobalAccentColor)
            }
+           .buttonStyle(.plain)
            .frame(width: buttonSize, height: buttonSize)
            .glassCardStyle(cornerRadius: radius)
            .scaleEffect(scale)
            .animation(.spring(response: 0.25, dampingFraction: 0.8), value: isPressed)
            .animation(.spring(response: 0.25, dampingFraction: 0.8), value: isDragging)
-           .contentShape(Circle())
-           .position(x: centerX, y: centerY) // Използваме position вместо offset
+	           .contentShape(Circle())
+	           .position(x: centerX, y: centerY) // Използваме position вместо offset
            .opacity(isAddButtonVisible ? 1 : 0)
            .disabled(!isAddButtonVisible)
-           .gesture(dragGesture(geometry: geometry))
+	           .simultaneousGesture(dragGesture(geometry: geometry))
+           .accessibilityIdentifier("food-add-button")
+           .accessibilityLabel("Add \(vm.filter.rawValue)")
            .transition(.scale.combined(with: .opacity))
        }
     

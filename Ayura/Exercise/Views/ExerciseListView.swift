@@ -360,7 +360,11 @@ What would you like to do?
             ForEach(Array(vm.items.enumerated()), id: \.element.id) { index, item in
                 VStack(spacing: 0) {
                     ExerciseRowView(item: item)
-                        .id(item.id)
+                        // Editors save through the dedicated user-store
+                        // context. A refetched instance can keep the same UUID
+                        // while carrying updated values; force SwiftUI to use
+                        // that managed instance instead of the stale row.
+                        .id(ObjectIdentifier(item))
                         .contentShape(Rectangle())
                         .onTapGesture { present(item: .detail(item)) }
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
@@ -505,6 +509,8 @@ What would you like to do?
                                             effectManager.currentGlobalAccentColor
                                         )
                                 }
+                                .accessibilityLabel("Delete \(planWrapper.name)")
+                                .accessibilityIdentifier("Delete \(planWrapper.name)")
                                 .tint(.clear)
 
                                 Button {
@@ -516,6 +522,8 @@ What would you like to do?
                                             effectManager.currentGlobalAccentColor
                                         )
                                 }
+                                .accessibilityLabel("Edit \(planWrapper.name)")
+                                .accessibilityIdentifier("Edit \(planWrapper.name)")
                                 .tint(.clear)
                             }
                             .padding(.vertical, 6)
@@ -589,6 +597,8 @@ What would you like to do?
                     .symbolRenderingMode(.palette)
                     .foregroundStyle(effectManager.currentGlobalAccentColor)
             }
+            .accessibilityLabel("Delete \(item.name)")
+            .accessibilityIdentifier("Delete \(item.name)")
             .tint(.clear)
 
             Button {
@@ -602,6 +612,8 @@ What would you like to do?
                     .symbolRenderingMode(.palette)
                     .foregroundStyle(effectManager.currentGlobalAccentColor)
             }
+            .accessibilityLabel("Edit \(item.name)")
+            .accessibilityIdentifier("Edit \(item.name)")
             .tint(.clear)
         }
     }
@@ -628,8 +640,8 @@ What would you like to do?
                     }
                 }
             }
-            if savedItem != nil {
-                vm.resetAndLoad()
+            if let savedItem {
+                vm.applyUserStoreWrite(savedItem)
             }
         }
 
@@ -652,8 +664,8 @@ What would you like to do?
                     }
                 }
             }
-            if savedItem != nil {
-                vm.resetAndLoad()
+            if let savedItem {
+                vm.applyUserStoreWrite(savedItem)
             }
         }
 
@@ -889,12 +901,12 @@ What would you like to do?
                 if isDragging {
                     buttonOffset = newOffset
                     saveButtonPosition()
-                } else {
-                    handleButtonTap()
                 }
 
-                isDragging = false
-                isPressed = false
+                DispatchQueue.main.async {
+                    isDragging = false
+                    isPressed = false
+                }
             }
     }
 
@@ -920,11 +932,15 @@ What would you like to do?
 
         let scale = isDragging ? 1.05 : (isPressed ? 0.92 : 1.0)
 
-        return ZStack {
+        return Button {
+            guard !isDragging else { return }
+            handleButtonTap()
+        } label: {
             Image(systemName: "plus")
                 .font(.title3)
                 .foregroundColor(effectManager.currentGlobalAccentColor)
         }
+        .buttonStyle(.plain)
         .frame(width: buttonSize, height: buttonSize)
         .glassCardStyle(cornerRadius: radius)
         .scaleEffect(scale)
@@ -934,7 +950,9 @@ What would you like to do?
         .position(x: centerX, y: centerY)
         .opacity(isAddButtonVisible ? 1 : 0)
         .disabled(!isAddButtonVisible)
-        .gesture(dragGesture(geometry: geometry))
+        .simultaneousGesture(dragGesture(geometry: geometry))
+        .accessibilityIdentifier("exercise-add-button")
+        .accessibilityLabel("Add \(vm.filter.rawValue)")
         .transition(.scale.combined(with: .opacity))
     }
 

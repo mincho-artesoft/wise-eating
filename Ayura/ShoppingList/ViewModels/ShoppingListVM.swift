@@ -28,23 +28,20 @@ class ShoppingListViewModel: ObservableObject {
     
     let profile: Profile
     private var modelContext: ModelContext?
+    private var userProfile: Profile?
+
+    var writeContext: ModelContext? { modelContext }
     
     private var dataOwnerProfileID: PersistentIdentifier? {
-        profile.hasSeparateStorage ? profile.persistentModelID : nil
+        profile.hasSeparateStorage ? userProfile?.persistentModelID : nil
     }
     
     private var dataOwnerProfile: Profile? {
-        profile.hasSeparateStorage ? profile : nil
+        profile.hasSeparateStorage ? userProfile : nil
     }
     
     private var dataOwnerKeySuffix: String {
-        if let profileID = dataOwnerProfileID {
-            if let encodedData = try? JSONEncoder().encode(profileID),
-               let encodedString = String(data: encodedData, encoding: .utf8) {
-                return encodedString.filter { $0.isLetter || $0.isNumber }
-            }
-        }
-        return "global"
+        profile.hasSeparateStorage ? profile.id.uuidString : "global"
     }
     
     init(profile: Profile) {
@@ -58,8 +55,49 @@ class ShoppingListViewModel: ObservableObject {
     
     func setup(context: ModelContext) {
         guard self.modelContext == nil else { return }
-        self.modelContext = context
-        fetchAllData()
+        do {
+            let writeContext = try CombinedStoreFactory.makeUserWriteContext(
+                from: context.container
+            )
+            self.modelContext = writeContext
+            if profile.hasSeparateStorage {
+                self.userProfile = try CatalogReferenceResolver.userProfile(
+                    id: profile.id,
+                    context: writeContext
+                )
+            }
+            fetchAllData()
+        } catch {
+            print("SHOPPING VM: Failed to open user store: \(error)")
+        }
+    }
+
+    func makeDraftList() -> ShoppingListModel? {
+        guard let modelContext else { return nil }
+        let list = ShoppingListModel(
+            profile: dataOwnerProfile,
+            name: "New Shopping List"
+        )
+        modelContext.insert(list)
+        return list
+    }
+
+    func list(withID id: UUID) -> ShoppingListModel? {
+        guard let modelContext else { return nil }
+        var descriptor = FetchDescriptor<ShoppingListModel>(
+            predicate: #Predicate { $0.id == id }
+        )
+        descriptor.fetchLimit = 1
+        return try? modelContext.fetch(descriptor).first
+    }
+
+    func discardDraft(_ list: ShoppingListModel) {
+        guard let modelContext, list.modelContext === modelContext else { return }
+        modelContext.delete(list)
+        if lastOpenedListID == list.id {
+            lastOpenedListID = nil
+        }
+        fetchLists()
     }
     
     func recordLastOpened(_ list: ShoppingListModel) {
@@ -121,29 +159,55 @@ class ShoppingListViewModel: ObservableObject {
     
     func delete(list: ShoppingListModel) {
         guard let modelContext = modelContext else { return }
-        if let notificationID = list.notificationID {
-            NotificationManager.shared.cancelNotification(id: notificationID)
+        let listID = list.id
+
+        do {
+            var descriptor = FetchDescriptor<ShoppingListModel>(
+                predicate: #Predicate { $0.id == listID }
+            )
+            descriptor.fetchLimit = 1
+            guard let storedList = try modelContext.fetch(descriptor).first else {
+                return
+            }
+
+            let notificationID = storedList.notificationID
+            let calendarEventID = storedList.calendarEventID
+            modelContext.delete(storedList)
+            try modelContext.save()
+
+            if let notificationID {
+                NotificationManager.shared.cancelNotification(id: notificationID)
+            }
+            if let calendarEventID {
+                Task {
+                    await CalendarViewModel.shared.deleteEvent(
+                        withIdentifier: calendarEventID
+                    )
+                }
+            }
+            if lastOpenedListID == listID {
+                lastOpenedListID = nil
+            }
+            fetchAllData()
+        } catch {
+            print("SHOPPING VM: Failed to delete list '\(list.name)': \(error)")
         }
-        if let eventID = list.calendarEventID {
-            Task { await CalendarViewModel.shared.deleteEvent(withIdentifier: eventID) }
-        }
-        modelContext.delete(list)
-        saveAndReload()
     }
     
     @discardableResult
     func duplicate(list original: ShoppingListModel) -> ShoppingListModel {
-        let ownerProfile = self.profile.hasSeparateStorage ? self.profile : nil
-        
         let copy = ShoppingListModel(
-            profile: ownerProfile,
+            profile: dataOwnerProfile,
             name: original.name,
             reminderMinutes: original.reminderMinutes
         )
         copy.creationDate = Date()
 
         original.dismissedSuggestions.forEach { dismissedOriginal in
-            let newDismissed = DismissedFoodID(foodID: dismissedOriginal.foodID)
+            let newDismissed = DismissedFoodID(
+                foodID: dismissedOriginal.foodID,
+                list: copy
+            )
             copy.dismissedSuggestions.append(newDismissed)
         }
 
@@ -155,24 +219,14 @@ class ShoppingListViewModel: ObservableObject {
                 isBought: false,
                 foodItem: item.foodItem
             )
+            newItem.list = copy
             copy.items.append(newItem)
         }
         
+        // The detail editor owns the save and calendar synchronization. Doing
+        // either asynchronously here races with Save/Delete and can revive a
+        // just-deleted duplicate in the persistent store.
         modelContext?.insert(copy)
-
-        Task { @MainActor in
-            guard let context = self.modelContext else { return }
-            
-            // --- 👇 НАЧАЛО НА ПРОМЯНАТА 👇 ---
-            let newEventID = await CalendarViewModel.shared.createOrUpdateShoppingListEvent(
-                for: copy,
-                context: context
-            )
-            // --- 👆 КРАЙ НА ПРОМЯНАТА 👆 ---
-
-            copy.calendarEventID = newEventID
-            try? context.save()
-        }
         
         return copy
     }
@@ -217,7 +271,8 @@ class ShoppingListViewModel: ObservableObject {
             }
             
             let inListPredicate = #Predicate<ShoppingListItem> {
-                $0.list?.profile?.persistentModelID == ownerID && $0.foodItem != nil
+                $0.list?.profile?.persistentModelID == ownerID
+                    && ($0.persistedFoodItem != nil || $0.catalogFoodID != nil)
             }
             let listDescriptor = FetchDescriptor(predicate: inListPredicate)
             let listItems = try modelContext.fetch(listDescriptor)

@@ -9,11 +9,41 @@ public final class Node {
     public var calendarEventID: String?
 
     // Relationships
-    @Relationship(deleteRule: .nullify)
-    public var linkedFoods: [FoodItem]? = []
+    @Relationship(deleteRule: .nullify, originalName: "linkedFoods")
+    var persistedFoods: [FoodItem]? = []
+    public var catalogFoodIDs: [UUID] = []
 
-    @Relationship(deleteRule: .nullify)
-    public var linkedExercises: [ExerciseItem]? = []
+    public var linkedFoods: [FoodItem]? {
+        get {
+            CatalogReferenceResolver.resolveFoods(
+                stored: persistedFoods ?? [],
+                catalogIDs: catalogFoodIDs
+            )
+        }
+        set {
+            let split = CatalogReferenceResolver.splitFoods(newValue ?? [])
+            persistedFoods = split.stored
+            catalogFoodIDs = split.catalogIDs
+        }
+    }
+
+    @Relationship(deleteRule: .nullify, originalName: "linkedExercises")
+    var persistedExercises: [ExerciseItem]? = []
+    public var catalogExerciseIDs: [UUID] = []
+
+    public var linkedExercises: [ExerciseItem]? {
+        get {
+            CatalogReferenceResolver.resolveExercises(
+                stored: persistedExercises ?? [],
+                catalogIDs: catalogExerciseIDs
+            )
+        }
+        set {
+            let split = CatalogReferenceResolver.splitExercises(newValue ?? [])
+            persistedExercises = split.stored
+            catalogExerciseIDs = split.catalogIDs
+        }
+    }
 
     @Relationship(inverse: \Profile.nodes)
     public var profile: Profile?

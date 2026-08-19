@@ -164,6 +164,8 @@ struct WrappingSegmentedControl<T: Hashable & Identifiable & CaseIterable & RawR
                 )
         }
         .buttonStyle(.plain)
+        .accessibilityIdentifier("segment-\(item.rawValue)")
+        .accessibilityLabel(item.rawValue)
         // --- НАЧАЛО НА ПРОМЯНАТА (3/3): Прилагаме ефекта за мащабиране ---
         .scaleEffect(isSelected && isAnimatingSelection ? 1.2 : 1.0)
         // --- КРАЙ НА ПРОМЯНАТА (3/3) ---

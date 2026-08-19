@@ -248,6 +248,28 @@ candidate set, and 100-run narration output remain unchanged. The full suite is
 peak-memory delta against MP-6b, inside both product budgets. See
 `REPORT-MP7.md`.
 
+The catalogue/user-store separation is implemented and simulator-verified.
+Bundled foods, exercises, yoga sequences, practices, Ayurveda data, barcode
+tables, reference nutrients, and search cache now mount from a versioned
+read-only catalogue. Profiles and every app-authored record remain in the
+existing writable store. The recovery-backed one-time migration converts
+catalogue relationships to stable UUID references and uses batch deletion;
+later catalogue revisions take a 0.0307-second migration-state fast path with
+`normalUpdateReseeded=false`. The executable fixture preserves food and
+exercise links, meal/training plans, storage, shopping, nodes, practice
+history, priority nutrients, and favorites. The combined-store factory resolves
+SwiftData's unordered configurations and runs editor-exact writable-store probes
+before launch. They cover implicitly inserted food nutrition children and
+gallery photos as well as recipes, workouts, Ayurveda overrides, and search
+cache rows; every persistent ID must resolve to the user store. The staged
+catalogue is finalized against that exact combined model, and the smoke test
+also verifies new food/exercise physical store IDs. The latest normal warm
+launch measured the catalogue/user check at 0.531 seconds and combined-container
+open at 0.340 seconds; no catalogue row preseeding ran.
+The real Add Food UI test also saves a complete nutrition graph without an
+error and returns to the food list. Relevant tests are 22/22 green; see
+`REPORT-CATALOG-SEPARATION.md`.
+
 ## Next milestones
 
 1. **Host/simulator engineering through MP-7 COMPLETE on `ayurveda-app`** — D6 (models+seeder), D34 (all 12,601 foods
@@ -268,7 +290,9 @@ peak-memory delta against MP-6b, inside both product budgets. See
    deterministic Foundation-only fallback), plus MP-6b (five-frame
    conditional fallback copy validated on a real seven-day solver plan), plus
    MP-7 (build-time food roles, readiness/eligibility, hard culinary
-   plausibility, and behavior-preserving real-catalogue solver optimization).
+   plausibility, and behavior-preserving real-catalogue solver optimization),
+   plus the catalogue/user-store separation (atomic read-only catalogue
+   replacement with stable user-owned references and no repeated preseeding).
    See PROJECT-HANDBOOK.md §6 ledger and `REPORT-WE2.md` / `REPORT-WE3.md` /
    `REPORT-WE4.md` / `REPORT-WE5.md` / `REPORT-WE6.md` for gates, timing,
    screenshots, accessibility, search, `REPORT-WE7.md` for legacy audit
@@ -280,7 +304,8 @@ peak-memory delta against MP-6b, inside both product budgets. See
    merge, `REPORT-MP6.md` for narration and the two-call model topology, and
    `REPORT-MP6b.md` for the real-plan copy sample and frame distribution, and
    `REPORT-MP7.md` for role coverage, plausibility, real-catalogue profiling,
-   deterministic plan equivalence, and physical-device launch/memory evidence.
+   deterministic plan equivalence, and physical-device launch/memory evidence,
+   and `REPORT-CATALOG-SEPARATION.md` for migration/update safety evidence.
 2. **Physical-device validation — explicitly pending.** Run the MP-1 nine-run
    matrix/G6/G8, MP-2 twenty-food error table/runtime counters, and MP-3 runtime
    zero-model-call confirmation exactly as registered in

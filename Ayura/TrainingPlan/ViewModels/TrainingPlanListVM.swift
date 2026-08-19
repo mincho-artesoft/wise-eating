@@ -21,30 +21,36 @@ final class TrainingPlanListVM: ObservableObject {
 
     private var allFetchedPlans: [DisplayPlan] = []
     private let profile: Profile?
-    private weak var modelContext: ModelContext?
+    private var combinedContainer: ModelContainer?
+    private var userContext: ModelContext?
 
     init(profile: Profile?) {
         self.profile = profile
     }
 
     func attach(context: ModelContext) {
-        self.modelContext = context
+        combinedContainer = context.container
         fetchPlans()
     }
 
     func fetchPlans() {
-        guard let context = modelContext else { return }
+        guard let combinedContainer,
+              let context = try? CombinedStoreFactory.makeUserWriteContext(
+                from: combinedContainer
+              ) else { return }
+        userContext = context
 
         allFetchedPlans = []
 
-        let profileID = profile?.persistentModelID
+        let profileID = profile?.id
         let descriptor = FetchDescriptor<TrainingPlan>(
-            predicate: #Predicate { $0.profile?.persistentModelID == profileID },
             sortBy: [SortDescriptor(\.creationDate, order: .reverse)]
         )
 
         if let userPlans = try? context.fetch(descriptor) {
-            allFetchedPlans = userPlans.map { plan in
+            allFetchedPlans = userPlans
+                .filter { $0.profile?.id == profileID }
+                .map { plan in
                 DisplayPlan(
                     id: plan.id,
                     name: plan.name,
@@ -72,7 +78,7 @@ final class TrainingPlanListVM: ObservableObject {
 
     /// ✅ Безопасно изтриване по UUID (без да държим TrainingPlan reference в UI state)
     func deletePlan(planID: UUID, alsoDeleteLinkedWorkouts: Bool) {
-        guard let context = modelContext else { return }
+        guard let context = userContext else { return }
 
         do {
             var desc = FetchDescriptor<TrainingPlan>(predicate: #Predicate { $0.id == planID })

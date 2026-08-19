@@ -186,6 +186,151 @@ struct SterolsForm: Sendable {
     init() { }
 }
 
+// MARK: - Persisted graph updates
+
+/// Updates an already-persisted nutrient object without replacing its SwiftData
+/// identity. Keeping the same object is important when the catalogue and user
+/// stores are mounted together: replacing a saved one-to-one child can leave
+/// Core Data trying to encode an object ID that was retired by the cascade.
+private func applyNutrients<Source, Target: AnyObject>(
+    from source: Source,
+    to target: Target,
+    _ mappings: [(KeyPath<Source, Nutrient?>, ReferenceWritableKeyPath<Target, Nutrient?>)]
+) {
+    for (sourceKeyPath, targetKeyPath) in mappings {
+        target[keyPath: targetKeyPath] = source[keyPath: sourceKeyPath]
+    }
+}
+
+extension MacronutrientsData {
+    func apply(_ form: MacroForm) {
+        applyNutrients(from: form, to: self, [
+            (\.carbohydrates, \.carbohydrates),
+            (\.protein, \.protein),
+            (\.fat, \.fat),
+            (\.fiber, \.fiber),
+            (\.totalSugars, \.totalSugars),
+        ])
+    }
+}
+
+extension LipidsData {
+    func apply(_ form: LipidForm) {
+        applyNutrients(from: form, to: self, [
+            (\.totalSaturated, \.totalSaturated),
+            (\.totalMonounsaturated, \.totalMonounsaturated),
+            (\.totalPolyunsaturated, \.totalPolyunsaturated),
+            (\.totalTrans, \.totalTrans),
+            (\.totalTransMonoenoic, \.totalTransMonoenoic),
+            (\.totalTransPolyenoic, \.totalTransPolyenoic),
+            (\.sfa4_0, \.sfa4_0), (\.sfa6_0, \.sfa6_0),
+            (\.sfa8_0, \.sfa8_0), (\.sfa10_0, \.sfa10_0),
+            (\.sfa12_0, \.sfa12_0), (\.sfa13_0, \.sfa13_0),
+            (\.sfa14_0, \.sfa14_0), (\.sfa15_0, \.sfa15_0),
+            (\.sfa16_0, \.sfa16_0), (\.sfa17_0, \.sfa17_0),
+            (\.sfa18_0, \.sfa18_0), (\.sfa20_0, \.sfa20_0),
+            (\.sfa22_0, \.sfa22_0), (\.sfa24_0, \.sfa24_0),
+            (\.mufa14_1, \.mufa14_1), (\.mufa15_1, \.mufa15_1),
+            (\.mufa16_1, \.mufa16_1), (\.mufa17_1, \.mufa17_1),
+            (\.mufa18_1, \.mufa18_1), (\.mufa20_1, \.mufa20_1),
+            (\.mufa22_1, \.mufa22_1), (\.mufa24_1, \.mufa24_1),
+            (\.tfa16_1_t, \.tfa16_1_t), (\.tfa18_1_t, \.tfa18_1_t),
+            (\.tfa22_1_t, \.tfa22_1_t), (\.tfa18_2_t, \.tfa18_2_t),
+            (\.pufa18_2, \.pufa18_2), (\.pufa18_3, \.pufa18_3),
+            (\.pufa18_4, \.pufa18_4), (\.pufa20_2, \.pufa20_2),
+            (\.pufa20_3, \.pufa20_3), (\.pufa20_4, \.pufa20_4),
+            (\.pufa20_5, \.pufa20_5), (\.pufa21_5, \.pufa21_5),
+            (\.pufa22_4, \.pufa22_4), (\.pufa22_5, \.pufa22_5),
+            (\.pufa22_6, \.pufa22_6), (\.pufa2_4, \.pufa2_4),
+        ])
+    }
+}
+
+extension VitaminsData {
+    func apply(_ form: VitaminForm) {
+        applyNutrients(from: form, to: self, [
+            (\.vitaminA_RAE, \.vitaminA_RAE), (\.retinol, \.retinol),
+            (\.caroteneAlpha, \.caroteneAlpha), (\.caroteneBeta, \.caroteneBeta),
+            (\.cryptoxanthinBeta, \.cryptoxanthinBeta),
+            (\.luteinZeaxanthin, \.luteinZeaxanthin), (\.lycopene, \.lycopene),
+            (\.vitaminB1_Thiamin, \.vitaminB1_Thiamin),
+            (\.vitaminB2_Riboflavin, \.vitaminB2_Riboflavin),
+            (\.vitaminB3_Niacin, \.vitaminB3_Niacin),
+            (\.vitaminB5_PantothenicAcid, \.vitaminB5_PantothenicAcid),
+            (\.vitaminB6, \.vitaminB6), (\.folateDFE, \.folateDFE),
+            (\.folateFood, \.folateFood), (\.folateTotal, \.folateTotal),
+            (\.folicAcid, \.folicAcid), (\.vitaminB12, \.vitaminB12),
+            (\.vitaminC, \.vitaminC), (\.vitaminD, \.vitaminD),
+            (\.vitaminE, \.vitaminE), (\.vitaminK, \.vitaminK),
+            (\.choline, \.choline),
+        ])
+    }
+}
+
+extension MineralsData {
+    func apply(_ form: MineralForm) {
+        applyNutrients(from: form, to: self, [
+            (\.calcium, \.calcium), (\.iron, \.iron),
+            (\.magnesium, \.magnesium), (\.phosphorus, \.phosphorus),
+            (\.potassium, \.potassium), (\.sodium, \.sodium),
+            (\.selenium, \.selenium), (\.zinc, \.zinc),
+            (\.copper, \.copper), (\.manganese, \.manganese),
+            (\.fluoride, \.fluoride),
+        ])
+    }
+}
+
+extension OtherCompoundsData {
+    func apply(_ form: OtherForm) {
+        applyNutrients(from: form, to: self, [
+            (\.alcoholEthyl, \.alcoholEthyl), (\.caffeine, \.caffeine),
+            (\.theobromine, \.theobromine), (\.cholesterol, \.cholesterol),
+            (\.energyKcal, \.energyKcal), (\.water, \.water),
+            (\.weightG, \.weightG), (\.ash, \.ash),
+            (\.betaine, \.betaine), (\.alkalinityPH, \.alkalinityPH),
+        ])
+    }
+}
+
+extension AminoAcidsData {
+    func apply(_ form: AminoAcidsForm) {
+        applyNutrients(from: form, to: self, [
+            (\.alanine, \.alanine), (\.arginine, \.arginine),
+            (\.asparticAcid, \.asparticAcid), (\.cystine, \.cystine),
+            (\.glutamicAcid, \.glutamicAcid), (\.glycine, \.glycine),
+            (\.histidine, \.histidine), (\.isoleucine, \.isoleucine),
+            (\.leucine, \.leucine), (\.lysine, \.lysine),
+            (\.methionine, \.methionine), (\.phenylalanine, \.phenylalanine),
+            (\.proline, \.proline), (\.threonine, \.threonine),
+            (\.tryptophan, \.tryptophan), (\.tyrosine, \.tyrosine),
+            (\.valine, \.valine), (\.serine, \.serine),
+            (\.hydroxyproline, \.hydroxyproline),
+        ])
+    }
+}
+
+extension CarbDetailsData {
+    func apply(_ form: CarbDetailsForm) {
+        applyNutrients(from: form, to: self, [
+            (\.starch, \.starch), (\.sucrose, \.sucrose),
+            (\.glucose, \.glucose), (\.fructose, \.fructose),
+            (\.lactose, \.lactose), (\.maltose, \.maltose),
+            (\.galactose, \.galactose),
+        ])
+    }
+}
+
+extension SterolsData {
+    func apply(_ form: SterolsForm) {
+        applyNutrients(from: form, to: self, [
+            (\.phytosterols, \.phytosterols),
+            (\.betaSitosterol, \.betaSitosterol),
+            (\.campesterol, \.campesterol),
+            (\.stigmasterol, \.stigmasterol),
+        ])
+    }
+}
+
 
 //────────────────────────────────────────────────────────────────────────────
 // MARK: –  Binding helper

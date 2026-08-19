@@ -21,6 +21,7 @@ struct ShoppingListView: View {
 
     @StateObject private var viewModel: ShoppingListViewModel
     @State private var listToPresent: ShoppingListModel?
+    @State private var listToPresentIsNew = false
     
     @StateObject private var coordinator = NavigationCoordinator.shared
     @State private var navigationCancellable: AnyCancellable?
@@ -89,7 +90,8 @@ struct ShoppingListView: View {
                 return viewModel.lists
             } else {
                 return viewModel.lists.filter { list in
-                    list.items.contains { item in
+                    list.name.localizedCaseInsensitiveContains(globalSearchText)
+                    || list.items.contains { item in
                         item.name.localizedCaseInsensitiveContains(globalSearchText)
                     }
                 }
@@ -119,8 +121,7 @@ struct ShoppingListView: View {
                     .filter { $0 == true }
                     .first()
                     .sink { _ in
-                        let descriptor = FetchDescriptor<ShoppingListModel>(predicate: #Predicate { $0.id == listID })
-                        if let list = try? modelContext.fetch(descriptor).first {
+                        if let list = viewModel.list(withID: listID) {
                             present(list: list)
                             coordinator.pendingShoppingListID = nil
                         } else {
@@ -159,32 +160,38 @@ struct ShoppingListView: View {
                     .zIndex(1)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
             } else if isShowingAnalyticsView {
-                ShoppingListAnalyticsView(
-                    profile: profile,
-                    onDismiss: {
-                        withAnimation(.easeInOut) {
-                            isShowingAnalyticsView = false
-                            isAddButtonVisible = true
+                if let writeContext = viewModel.writeContext {
+                    ShoppingListAnalyticsView(
+                        profile: profile,
+                        onDismiss: {
+                            withAnimation(.easeInOut) {
+                                isShowingAnalyticsView = false
+                                isAddButtonVisible = true
+                            }
                         }
-                    }
-                )
-                .zIndex(1)
-                .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                    )
+                    .modelContext(writeContext)
+                    .zIndex(1)
+                    .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                }
             } else if let list = listToPresent {
-                ShoppingListDetailView(
-                    list: list,
-                    viewModel: viewModel,
-                    isNew: list.modelContext == nil,
-                    globalSearchText: $globalSearchText,
-                    isSearching: $isSearching,
-                    onDismiss: dismissDetailView,
-                    onDismissSearch: onShouldDismissGlobalSearch,
-                    onShowCalendar: handleShowCalendarFromDetail,
-                    isSearchFieldFocused: $isSearchFieldFocused,
-                    navBarIsHiden: $navBarIsHiden // <-- ПОДАЙТЕ BINDING-А ТУК
-                )
-                .zIndex(1)
-                .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                if let writeContext = viewModel.writeContext {
+                    ShoppingListDetailView(
+                        list: list,
+                        writeContext: writeContext,
+                        viewModel: viewModel,
+                        isNew: listToPresentIsNew,
+                        globalSearchText: $globalSearchText,
+                        isSearching: $isSearching,
+                        onDismiss: dismissDetailView,
+                        onDismissSearch: onShouldDismissGlobalSearch,
+                        onShowCalendar: handleShowCalendarFromDetail,
+                        isSearchFieldFocused: $isSearchFieldFocused,
+                        navBarIsHiden: $navBarIsHiden
+                    )
+                    .zIndex(1)
+                    .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                }
             } else {
                 VStack(spacing: 0) {
                     userToolbar(for: profile)
@@ -256,8 +263,7 @@ struct ShoppingListView: View {
             let payload = try JSONDecoder().decode(ShoppingListPayload.self, from: jsonData)
             let listID = payload.id
             
-            let descriptor = FetchDescriptor<ShoppingListModel>(predicate: #Predicate { $0.id == listID })
-            if let list = try modelContext.fetch(descriptor).first {
+            if let list = viewModel.list(withID: listID) {
                 deactivateShoppingCalendarView()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     self.present(list: list)
@@ -299,6 +305,7 @@ struct ShoppingListView: View {
     private func dismissDetailView() {
         withAnimation(.easeInOut(duration: 0.3)) {
             listToPresent = nil
+            listToPresentIsNew = false
             isAddButtonVisible = true
         }
         
@@ -435,6 +442,8 @@ struct ShoppingListView: View {
                                     .symbolRenderingMode(.palette)
                                     .foregroundStyle(effectManager.currentGlobalAccentColor)
                             }
+                            .accessibilityLabel("Delete \(list.name)")
+                            .accessibilityIdentifier("Delete \(list.name)")
                             .tint(.clear)
                             
                             Button {
@@ -446,6 +455,8 @@ struct ShoppingListView: View {
                                     .symbolRenderingMode(.palette)
                                     .foregroundStyle(effectManager.currentGlobalAccentColor)
                             }
+                            .accessibilityLabel("Duplicate \(list.name)")
+                            .accessibilityIdentifier("Duplicate \(list.name)")
                             .tint(.clear)
                         }
                     }
@@ -547,6 +558,7 @@ struct ShoppingListView: View {
         }
         hasPresentedStartupList = true
         var listToOpen: ShoppingListModel? = nil
+        var shouldTreatAsNew = false
 
         if let lastID = viewModel.lastOpenedListID, let lastOpened = viewModel.lists.first(where: { $0.id == lastID }) {
             listToOpen = lastOpened
@@ -554,16 +566,19 @@ struct ShoppingListView: View {
             listToOpen = unfinished
             viewModel.recordLastOpened(unfinished)
         } else {
-            let profileForList = profile.hasSeparateStorage ? profile : nil
-            listToOpen = ShoppingListModel(profile: profileForList, name: "New Shopping List")
-            viewModel.recordLastOpened(listToOpen!)
+            listToOpen = viewModel.makeDraftList()
+            shouldTreatAsNew = listToOpen != nil
+            if let listToOpen {
+                viewModel.recordLastOpened(listToOpen)
+            }
         }
         
         if let list = listToOpen {
             if animate {
-                present(list: list)
+                present(list: list, isNew: shouldTreatAsNew)
             } else {
                 listToPresent = list
+                listToPresentIsNew = shouldTreatAsNew
             }
         }
     }
@@ -634,13 +649,12 @@ struct ShoppingListView: View {
                     if isDragging {
                         buttonOffset = newOffset
                         saveButtonPosition()
-                    } else {
-                        // Тап (без реален drag)
-                        handleButtonTap()
                     }
-                    
-                    isDragging = false
-                    isPressed = false
+
+                    DispatchQueue.main.async {
+                        isDragging = false
+                        isPressed = false
+                    }
                 }
         }
         
@@ -669,11 +683,15 @@ struct ShoppingListView: View {
             
             let scale = isDragging ? 1.05 : (isPressed ? 0.92 : 1.0)
             
-            return ZStack {
+            return Button {
+                guard !isDragging else { return }
+                handleButtonTap()
+            } label: {
                 Image(systemName: "widget.large.badge.plus")
                     .font(.title3)
                     .foregroundColor(effectManager.currentGlobalAccentColor)
             }
+            .buttonStyle(.plain)
             .frame(width: buttonSize, height: buttonSize)
             .glassCardStyle(cornerRadius: radius)
             .scaleEffect(scale)
@@ -683,20 +701,22 @@ struct ShoppingListView: View {
             .position(x: centerX, y: centerY) // Използваме position вместо offset
             .opacity(isAddButtonVisible ? 1 : 0)
             .disabled(!isAddButtonVisible)
-            .gesture(dragGesture(geometry: geometry))
+            .simultaneousGesture(dragGesture(geometry: geometry))
+            .accessibilityIdentifier("shopping-list-add-button")
+            .accessibilityLabel("Add Shopping List")
             .transition(.scale.combined(with: .opacity))
         }
     
     private func handleButtonTap() {
-        let profileForList = profile.hasSeparateStorage ? profile : nil
-        let newList = ShoppingListModel(profile: profileForList, name: "New Shopping List")
-        present(list: newList)
+        guard let newList = viewModel.makeDraftList() else { return }
+        present(list: newList, isNew: true)
     }
     
-    private func present(list: ShoppingListModel) {
+    private func present(list: ShoppingListModel, isNew: Bool = false) {
         withAnimation(.easeInOut(duration: 0.3)) {
             isAddButtonVisible = false
             listToPresent = list
+            listToPresentIsNew = isNew
         }
         
         viewModel.recordLastOpened(list)

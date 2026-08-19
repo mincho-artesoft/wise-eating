@@ -7,11 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A710000E2F1C00010000000E /* NextEventActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A710000D2F1C00010000000D /* NextEventActivityAttributes.swift */; };
-		A710000F2F1C00010000000F /* AyuraLiveActivityWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A71000022F1C000100000002 /* AyuraLiveActivityWidget.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A55E75102F1B000100000001 /* ayurveda-data/yoga/asanas.json in Resources */ = {isa = PBXBuildFile; fileRef = A55E75202F1B000100000001 /* ayurveda-data/yoga/asanas.json */; };
 		A55E75112F1B000100000001 /* ayurveda-data/yoga/sequences.json in Resources */ = {isa = PBXBuildFile; fileRef = A55E75212F1B000100000001 /* ayurveda-data/yoga/sequences.json */; };
+		A710000E2F1C00010000000E /* Ayura/LiveActivity/NextEventActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A710000D2F1C00010000000D /* Ayura/LiveActivity/NextEventActivityAttributes.swift */; };
+		A710000F2F1C00010000000F /* AyuraLiveActivityWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A71000022F1C000100000002 /* AyuraLiveActivityWidget.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A710000B2F1C00010000000B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5084961D2DE5D05D0038A7D5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A71000012F1C000100000001;
+			remoteInfo = AyuraLiveActivityWidget;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		5076E6C32ECCCE7900FA2B4E /* Embed ExtensionKit Extensions */ = {
@@ -37,22 +47,12 @@
 		};
 /* End PBXCopyFilesBuildPhase section */
 
-/* Begin PBXContainerItemProxy section */
-		A710000B2F1C00010000000B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5084961D2DE5D05D0038A7D5 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A71000012F1C000100000001;
-			remoteInfo = AyuraLiveActivityWidget;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		508496252DE5D05D0038A7D5 /* Ayurveda & Asana Yoga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ayurveda & Asana Yoga.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A71000022F1C000100000002 /* AyuraLiveActivityWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AyuraLiveActivityWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		A710000D2F1C00010000000D /* NextEventActivityAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ayura/LiveActivity/NextEventActivityAttributes.swift; sourceTree = SOURCE_ROOT; };
 		A55E75202F1B000100000001 /* ayurveda-data/yoga/asanas.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "ayurveda-data/yoga/asanas.json"; sourceTree = SOURCE_ROOT; };
 		A55E75212F1B000100000001 /* ayurveda-data/yoga/sequences.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "ayurveda-data/yoga/sequences.json"; sourceTree = SOURCE_ROOT; };
+		A71000022F1C000100000002 /* AyuraLiveActivityWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AyuraLiveActivityWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		A710000D2F1C00010000000D /* Ayura/LiveActivity/NextEventActivityAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ayura/LiveActivity/NextEventActivityAttributes.swift; sourceTree = SOURCE_ROOT; };
 		C843A40D2E7E7C66000B1F28 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -70,7 +70,7 @@
 			);
 			target = 508496242DE5D05D0038A7D5 /* Ayurveda & Asana Yoga */;
 		};
-		A71000042F1C000100000004 /* Exceptions for AyuraLiveActivityWidget folder in AyuraLiveActivityWidget target */ = {
+		A71000042F1C000100000004 /* Exceptions for "AyuraLiveActivityWidget" folder in "AyuraLiveActivityWidget" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -92,7 +92,7 @@
 		A71000032F1C000100000003 /* AyuraLiveActivityWidget */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				A71000042F1C000100000004 /* Exceptions for AyuraLiveActivityWidget folder in AyuraLiveActivityWidget target */,
+				A71000042F1C000100000004 /* Exceptions for "AyuraLiveActivityWidget" folder in "AyuraLiveActivityWidget" target */,
 			);
 			path = AyuraLiveActivityWidget;
 			sourceTree = "<group>";
@@ -126,6 +126,7 @@
 				A55E75212F1B000100000001 /* ayurveda-data/yoga/sequences.json */,
 				C843A40C2E7E7C66000B1F28 /* Frameworks */,
 				508496262DE5D05D0038A7D5 /* Products */,
+				508A8D733034B8AB00411EB1 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -136,6 +137,14 @@
 				A71000022F1C000100000002 /* AyuraLiveActivityWidget.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		508A8D733034B8AB00411EB1 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				A710000D2F1C00010000000D /* Ayura/LiveActivity/NextEventActivityAttributes.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		C843A40C2E7E7C66000B1F28 /* Frameworks */ = {
@@ -348,11 +357,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A710000E2F1C00010000000E /* NextEventActivityAttributes.swift in Sources */,
+				A710000E2F1C00010000000E /* Ayura/LiveActivity/NextEventActivityAttributes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A710000C2F1C00010000000C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A71000012F1C000100000001 /* AyuraLiveActivityWidget */;
+			targetProxy = A710000B2F1C00010000000B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		508496302DE5D05F0038A7D5 /* Debug */ = {
@@ -686,14 +703,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin PBXTargetDependency section */
-		A710000C2F1C00010000000C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A71000012F1C000100000001 /* AyuraLiveActivityWidget */;
-			targetProxy = A710000B2F1C00010000000B /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 	};
 	rootObject = 5084961D2DE5D05D0038A7D5 /* Project object */;
 }

@@ -98,8 +98,21 @@ struct ProfileEditorView: View {
             _gender = State(initialValue: p.gender)
             _weight = State(initialValue: GlobalState.measurementSystem == "Imperial" ? UnitConversion.formatDecimal(UnitConversion.kgToLbs(p.weight)) : UnitConversion.formatDecimal(p.weight))
             _height = State(initialValue: GlobalState.measurementSystem == "Imperial" ? UnitConversion.formatDecimal(UnitConversion.cmToInches(p.height)) : UnitConversion.formatDecimal(p.height))
-            _meals = State(initialValue: p.meals)
-            _trainings = State(initialValue: p.trainings)
+            // Edit detached values. Persisting the combined-context models
+            // directly can make SwiftData attempt a read-only catalogue save.
+            _meals = State(initialValue: p.meals.map(Meal.init(from:)))
+            _trainings = State(initialValue: p.trainings.map {
+                Training(
+                    id: $0.id,
+                    name: $0.name,
+                    startTime: $0.startTime,
+                    endTime: $0.endTime,
+                    notes: $0.notes,
+                    reminderMinutes: $0.reminderMinutes,
+                    notificationID: $0.notificationID,
+                    calendarEventID: $0.calendarEventID
+                )
+            })
             _photoData = State(initialValue: p.photoData)
             _selectedVitIDs = State(initialValue: Set(p.priorityVitamins.map(\.id)))
             _selectedMinIDs = State(initialValue: Set(p.priorityMinerals.map(\.id)))
@@ -239,6 +252,7 @@ struct ProfileEditorView: View {
          HStack {
              Button("Save", action: saveProfile)
                  .disabled(isSaveDisabled)
+                 .accessibilityIdentifier("profile-editor-save")
          }
          .padding(.horizontal, 10)
          .padding(.vertical, 5)
@@ -265,6 +279,7 @@ struct ProfileEditorView: View {
                                .font(.system(size: 16))
                                .focused($focusedField, equals: .name)
                                .disableAutocorrection(true)
+                               .accessibilityIdentifier("profile-editor-name")
                        }
                        .id(Field.name)
                        
@@ -608,10 +623,6 @@ struct ProfileEditorView: View {
          sortMealsIfNeeded()
          return
      }
-     if updated.modelContext == nil {
-         modelContext.insert(updated)
-         try? modelContext.save()
-     }
      meals.append(updated)
      sortMealsIfNeeded()
  }
@@ -625,9 +636,6 @@ struct ProfileEditorView: View {
  @MainActor
  private func saveProfile() {
      formatAllInputs()
-     
-     ensureMealsInserted()
-     ensureTrainingsInserted()
      
      guard let w_display = UnitConversion.parseDecimal(weight),
            let h_display = UnitConversion.parseDecimal(height) else {
@@ -654,73 +662,67 @@ struct ProfileEditorView: View {
      let chosenVitamins = allVitamins.filter { selectedVitIDs.contains($0.id) }
      let chosenMinerals = allMinerals.filter { selectedMinIDs.contains($0.id) }
      let chosenAllergens = selectedAllergens.compactMap { Allergen(rawValue: $0) }
-     let activeProfile: Profile
-     if let p = profile {
-         let weightChanged = abs(p.weight - weightInKg) > 0.01
-         let heightChanged = abs(p.height - heightInCm) > 0.1
 
-         if weightChanged || heightChanged {
-             let newRecord = WeightHeightRecord(
-                 date: Date(),
-                 weight: weightInKg,
-                 height: heightInCm
-             )
-             p.weightHeightHistory.append(newRecord)
-         }
-
-         p.name = name; p.birthday = validBirthday; p.gender = gender; p.weight = weightInKg
-         p.height = heightInCm; p.meals = meals; p.trainings = trainings
-         p.priorityVitamins = chosenVitamins
-         p.priorityMinerals = chosenMinerals; p.allergens = chosenAllergens
-         p.photoData = photoData; p.hasSeparateStorage = hasSeparateStorage; p.updatedAt = Date()
-         
-         activeProfile = p
-     } else {
-         let newProfile = Profile(
-             name: name,
-             birthday: validBirthday,
-             gender: gender,
-             weight: weightInKg,
-             height: heightInCm,
-             meals: meals,
-             trainings: trainings,
-             priorityVitamins: chosenVitamins,
-             priorityMinerals: chosenMinerals,
-             allergens: chosenAllergens,
-             photoData: photoData,
-             hasSeparateStorage: hasSeparateStorage
-         )
-         modelContext.insert(newProfile)
-         activeProfile = newProfile
-     }
-     
      Task { @MainActor in
          guard await calVM.requestCalendarAccessIfNeeded() else {
              showError("Calendar access is required to manage profile data and settings.")
              return
          }
-         
-         calVM.createOrUpdateCalendar(for: activeProfile)
-         await calVM.createOrUpdateShoppingListCalendar(for: activeProfile, context: modelContext)
-         
+
          do {
-             try modelContext.save()
+             let writeContext = try CombinedStoreFactory.makeUserWriteContext(
+                 from: modelContext.container
+             )
+             let request = ProfileWriteRequest(
+                 profileID: profile?.id,
+                 name: name,
+                 birthday: validBirthday,
+                 gender: gender,
+                 weight: weightInKg,
+                 height: heightInCm,
+                 meals: meals,
+                 trainings: trainings,
+                 priorityVitamins: chosenVitamins,
+                 priorityMinerals: chosenMinerals,
+                 allergens: chosenAllergens,
+                 photoData: photoData,
+                 hasSeparateStorage: hasSeparateStorage
+             )
+             let activeProfile = try ProfilePersistence.upsert(
+                 request,
+                 in: writeContext
+             )
+             try writeContext.save()
+
+             calVM.createOrUpdateCalendar(for: activeProfile)
+             await calVM.createOrUpdateShoppingListCalendar(
+                 for: activeProfile,
+                 context: writeContext
+             )
+             if writeContext.hasChanges {
+                 try writeContext.save()
+             }
+
              if profile == nil, let pendingAyurvedaDraft {
                  AyurvedaConstitutionStore.save(
                      pendingAyurvedaDraft,
                      for: activeProfile.id
                  )
              }
-             onDismiss(activeProfile)
+
+             // Refetch through the combined read context so callers never
+             // receive a model owned by the dedicated write context.
+             modelContext.rollback()
+             guard let visibleProfile = try ProfilePersistence.fetch(
+                 id: activeProfile.id,
+                 in: modelContext
+             ) else {
+                 throw CatalogReferenceError.missingUserProfile(activeProfile.id)
+             }
+             onDismiss(visibleProfile)
          } catch {
              showError("Failed to save profile: \(error.localizedDescription)")
          }
-     }
- }
- 
- private func ensureMealsInserted() {
-     for meal in meals where meal.modelContext == nil {
-         modelContext.insert(meal)
      }
  }
  
@@ -800,10 +802,6 @@ struct ProfileEditorView: View {
          sortTrainingsIfNeeded()
          return
      }
-     if updated.modelContext == nil {
-         modelContext.insert(updated)
-         try? modelContext.save()
-     }
      trainings.append(updated)
      sortTrainingsIfNeeded()
  }
@@ -835,12 +833,6 @@ struct ProfileEditorView: View {
         }
     }
 
- 
- private func ensureTrainingsInserted() {
-     for training in trainings where training.modelContext == nil {
-         modelContext.insert(training)
-     }
- }
  
  private func showError(_ msg: String) {
      errorMessage = msg

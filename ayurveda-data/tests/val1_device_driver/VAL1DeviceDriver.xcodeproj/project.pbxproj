@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		53A2A7CAC091B0E1033F7735 /* VAL1DeviceDriverUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EAF1199D2F238D1B090D2E /* VAL1DeviceDriverUITests.swift */; };
+		A41C73D08F3E4A9B8CE11421 /* VAL1CRUDUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C73D08F3E4A9B8CE11420 /* VAL1CRUDUITests.swift */; };
 		A857FADA914817B3B8399804 /* VAL1DeviceDriverApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7893EF917837E97AA6CDC73D /* VAL1DeviceDriverApp.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		35EAF1199D2F238D1B090D2E /* VAL1DeviceDriverUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAL1DeviceDriverUITests.swift; sourceTree = "<group>"; };
+		A41C73D08F3E4A9B8CE11420 /* VAL1CRUDUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAL1CRUDUITests.swift; sourceTree = "<group>"; };
 		60B1FC2950941D753ABE59CF /* VAL1DeviceDriverUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = VAL1DeviceDriverUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7893EF917837E97AA6CDC73D /* VAL1DeviceDriverApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAL1DeviceDriverApp.swift; sourceTree = "<group>"; };
 		CBE5B8D6855CAF0561E76467 /* VAL1DeviceDriver.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = VAL1DeviceDriver.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,6 +52,7 @@
 			isa = PBXGroup;
 			children = (
 				35EAF1199D2F238D1B090D2E /* VAL1DeviceDriverUITests.swift */,
+				A41C73D08F3E4A9B8CE11420 /* VAL1CRUDUITests.swift */,
 			);
 			path = UITests;
 			sourceTree = "<group>";
@@ -155,6 +158,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				53A2A7CAC091B0E1033F7735 /* VAL1DeviceDriverUITests.swift in Sources */,
+				A41C73D08F3E4A9B8CE11421 /* VAL1CRUDUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

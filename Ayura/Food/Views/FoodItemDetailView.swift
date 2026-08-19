@@ -5,6 +5,7 @@ import UIKit
 struct FoodItemDetailView: View {
     @Environment(\.modelContext) private var modelContext
     @ObservedObject private var effectManager = EffectManager.shared
+    @ObservedObject private var catalogPreferences = CatalogPreferenceStore.shared
     @State private var isBannerAdLoaded: Bool = false
     @State private var isShowingFullScreenImage = false
 
@@ -64,14 +65,7 @@ struct FoodItemDetailView: View {
     }
     
     private var displayWeightG: Double? {
-        guard food.isEdible else { return nil }
-        if food.isRecipe || food.isMenu { return food.totalWeightG }
-        if let explicitWeight = food.other?.weightG?.value, explicitWeight > 0 { return explicitWeight }
-        let p = food.macronutrients?.protein?.value ?? 0
-        let f = food.macronutrients?.fat?.value ?? 0
-        let c = food.macronutrients?.carbohydrates?.value ?? 0
-        let calculated = p + f + c
-        return calculated > 0 ? calculated : nil
+        food.effectiveDisplayWeightG
     }
 
     private var displayKcal: Double? {
@@ -218,7 +212,8 @@ struct FoodItemDetailView: View {
     }
 
     private var customToolbar: some View {
-        HStack {
+        let isFavorite = food.effectiveIsFavorite
+        return HStack {
             HStack{
                 Button { onDismiss() } label: { HStack { Text("Cancel") } }
             }
@@ -243,22 +238,28 @@ struct FoodItemDetailView: View {
             }
             
             Button {
-                withAnimation { food.isFavorite.toggle() }
-                try? modelContext.save()
-                
-                // *** НАЧАЛО НА КОРЕКЦИЯТА ***
-                SearchIndexStore.shared.updateFavoriteStatus(for: food.id, isFavorite: food.isFavorite)
-                // *** КРАЙ НА КОРЕКЦИЯТА ***
-                
-                NotificationCenter.default.post(name: .foodFavoriteToggled, object: food)
+                do {
+                    try food.setEffectiveFavorite(!isFavorite, context: modelContext)
+                    SearchIndexStore.shared.updateFavoriteStatus(
+                        for: food.id,
+                        isFavorite: !isFavorite
+                    )
+                    NotificationCenter.default.post(
+                        name: .foodFavoriteToggled,
+                        object: food
+                    )
+                } catch {
+                    print("❌ Failed to save food favorite: \(error)")
+                }
             } label: {
-                Image(systemName: food.isFavorite ? "star.fill" : "star")
+                Image(systemName: isFavorite ? "star.fill" : "star")
                     .foregroundStyle(.yellow)
                     .font(.title2)
                     .frame(width: 28, height: 28)
             }
         }
         .foregroundStyle(effectManager.currentGlobalAccentColor)
+        .animation(.spring(), value: catalogPreferences.revision)
     }
 
     // ... (всички останали views и функции в този файл остават без промяна)

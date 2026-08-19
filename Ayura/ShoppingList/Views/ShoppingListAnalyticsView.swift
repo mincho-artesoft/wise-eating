@@ -37,12 +37,14 @@ struct ShoppingListAnalyticsView: View {
         self.profile = profile
         self.onDismiss = onDismiss
         
-        let profileID = profile.persistentModelID
+        let profileID = profile.id
         let usesSeparateStorage = profile.hasSeparateStorage
         
         let predicate: Predicate<ShoppingListModel>
         if usesSeparateStorage {
-            predicate = #Predicate<ShoppingListModel> { $0.profile?.persistentModelID == profileID }
+            predicate = #Predicate<ShoppingListModel> {
+                $0.profile?.id == profileID
+            }
         } else {
             predicate = #Predicate<ShoppingListModel> { $0.profile == nil }
         }

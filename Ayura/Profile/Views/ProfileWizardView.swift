@@ -323,6 +323,7 @@ struct ProfileWizardView: View {
                                 .font(.title.weight(.bold))
                                 .foregroundStyle(effectManager.currentGlobalAccentColor)
                                 .multilineTextAlignment(.center)
+                                .accessibilityIdentifier("profile-wizard-step-\(currentStep.rawValue)")
                             
                             Text(displayedStepSubtitle)
                                 .font(.subheadline)
@@ -412,6 +413,7 @@ struct ProfileWizardView: View {
                 Button("Close", action: { onDismiss(nil) })
                     .padding(.horizontal, 10).padding(.vertical, 5)
                     .glassCardStyle(cornerRadius: 20)
+                    .accessibilityIdentifier("profile-wizard-close")
             } else {
                 Button("Close", action: { onDismiss(nil) }).hidden()
                     .padding(.horizontal, 10).padding(.vertical, 5)
@@ -467,6 +469,11 @@ struct ProfileWizardView: View {
             .foregroundStyle(isNextDisabled ? effectManager.currentGlobalAccentColor.opacity(0.6) : effectManager.currentGlobalAccentColor)
             .disabled(isNextDisabled)
             .contentShape(Rectangle())
+            .accessibilityIdentifier(
+                currentStep == .summary
+                    ? "profile-wizard-save"
+                    : "profile-wizard-continue"
+            )
         }
     }
 
@@ -484,6 +491,7 @@ struct ProfileWizardView: View {
                     fieldIdentifier: .name
                 )
                 .font(.title3)
+                .accessibilityIdentifier("profile-wizard-name")
             }
             Spacer()
             navigationButtons
@@ -1177,10 +1185,13 @@ struct ProfileWizardView: View {
     private func saveProfile() {
         Task { @MainActor in
             isSaving = true
+            defer { isSaving = false }
             
             guard let weightDisplay = UnitConversion.parseDecimal(data.weight),
                   let heightDisplay = UnitConversion.parseDecimal(data.height) else {
-                alertMessage = "Please enter valid numbers for weight and height."; showAlert = true; isSaving = false; return
+                alertMessage = "Please enter valid numbers for weight and height."
+                showAlert = true
+                return
             }
 
             let weightInKg = isImperial ? UnitConversion.lbsToKg(weightDisplay) : weightDisplay
@@ -1189,21 +1200,36 @@ struct ProfileWizardView: View {
             let chosenVitamins = allVitamins.filter { data.selectedVitIDs.contains($0.id) }
             let chosenMinerals = allMinerals.filter { data.selectedMinIDs.contains($0.id) }
             let chosenAllergens = data.selectedAllergens.compactMap { Allergen(rawValue: $0) }
-            let newProfile = Profile(
-                name: data.name, birthday: data.birthday, gender: data.gender.rawValue,
-                weight: weightInKg, height: heightInCm, meals: data.meals,
-                trainings: data.trainings,
-                priorityVitamins: chosenVitamins, priorityMinerals: chosenMinerals,
-                allergens: chosenAllergens,
-                photoData: data.photoData,
-                hasSeparateStorage: data.hasSeparateStorage
-            )
-            
-            modelContext.insert(newProfile)
+
+            guard await calVM.requestCalendarAccessIfNeeded() else {
+                alertMessage = "Calendar access is required. Please grant permission in Settings."
+                showAlert = true
+                return
+            }
 
             do {
-                try modelContext.save()
-                print("[WizardSave] SwiftData saved profile successfully.")
+                let writeContext = try CombinedStoreFactory.makeUserWriteContext(
+                    from: modelContext.container
+                )
+                let request = ProfileWriteRequest(
+                    name: data.name,
+                    birthday: data.birthday,
+                    gender: data.gender.rawValue,
+                    weight: weightInKg,
+                    height: heightInCm,
+                    meals: data.meals,
+                    trainings: data.trainings,
+                    priorityVitamins: chosenVitamins,
+                    priorityMinerals: chosenMinerals,
+                    allergens: chosenAllergens,
+                    photoData: data.photoData,
+                    hasSeparateStorage: data.hasSeparateStorage
+                )
+                let newProfile = try ProfilePersistence.upsert(
+                    request,
+                    in: writeContext
+                )
+                try writeContext.save()
 
                 if let constitution = data.ayurvedaConstitution {
                     AyurvedaConstitutionStore.save(
@@ -1212,26 +1238,32 @@ struct ProfileWizardView: View {
                     )
                 }
 
-                guard await calVM.requestCalendarAccessIfNeeded() else {
-                    alertMessage = "Calendar access is required. Please grant permission in Settings."; showAlert = true; isSaving = false; return
+                calVM.createOrUpdateCalendar(for: newProfile)
+                await calVM.createOrUpdateShoppingListCalendar(
+                    for: newProfile,
+                    context: writeContext
+                )
+                if writeContext.hasChanges {
+                    try writeContext.save()
+                }
+
+                guard let visibleProfile = try ProfilePersistence.fetch(
+                    id: newProfile.id,
+                    in: modelContext
+                ) else {
+                    throw CatalogReferenceError.missingUserProfile(newProfile.id)
                 }
                 
-                calVM.createOrUpdateCalendar(for: newProfile)
-                await calVM.createOrUpdateShoppingListCalendar(for: newProfile, context: modelContext)
-
-                isSaving = false
-                
                 if generatePlanOnFinish {
-                    self.newlyCreatedProfile = newProfile
+                    self.newlyCreatedProfile = visibleProfile
                     self.showAIGenerationView = true
                 } else {
-                    onDismiss(newProfile)
+                    onDismiss(visibleProfile)
                 }
 
             } catch {
                 alertMessage = "Failed to save profile: \(error.localizedDescription)"
                 showAlert = true
-                isSaving = false
             }
         }
     }

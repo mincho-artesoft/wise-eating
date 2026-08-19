@@ -12,7 +12,7 @@ final class StorageListVM: ObservableObject {
     
     /// Quick check if the database has any items for this profile (to show/hide empty states).
     var hasItems: Bool {
-        guard let modelContext = GlobalState.modelContext else { return false }
+        guard let modelContext else { return false }
         let ownerID = dataOwnerProfileID
         let descriptor = FetchDescriptor<StorageItem>(predicate: #Predicate { $0.owner?.persistentModelID == ownerID })
         if let count = try? modelContext.fetchCount(descriptor) {
@@ -23,8 +23,11 @@ final class StorageListVM: ObservableObject {
 
     // MARK: - Private State
     private let profile: Profile
-    private weak var modelContext: ModelContext?
+    private var modelContext: ModelContext?
+    private var userProfile: Profile?
     private var cancellables = Set<AnyCancellable>()
+
+    var writeContext: ModelContext? { modelContext }
     
     // Smart Search Engine
     private var searchEngine: SmartFoodSearch3?
@@ -35,11 +38,11 @@ final class StorageListVM: ObservableObject {
     
     // Derived Profile Properties
     private var dataOwnerProfileID: PersistentIdentifier? {
-        profile.hasSeparateStorage ? profile.persistentModelID : nil
+        profile.hasSeparateStorage ? userProfile?.persistentModelID : nil
     }
     
     private var dataOwnerProfile: Profile? {
-        profile.hasSeparateStorage ? profile : nil
+        profile.hasSeparateStorage ? userProfile : nil
     }
 
     // MARK: - Init
@@ -47,15 +50,29 @@ final class StorageListVM: ObservableObject {
         self.profile = profile
         
         // 1. Get Context from GlobalState
-        guard let modelContext = GlobalState.modelContext else {
+        guard let combinedContext = GlobalState.modelContext else {
             fatalError("ModelContext not available. It must be set at app launch.")
         }
-        self.modelContext = modelContext
         
         // 2. Initialize Smart Search Engine
-        // FIX: modelContext.container is NOT optional, so we access it directly.
-        let container = modelContext.container
+        let container = combinedContext.container
         self.searchEngine = SmartFoodSearch3(container: container)
+
+        do {
+            let writeContext = try CombinedStoreFactory.makeUserWriteContext(
+                from: container
+            )
+            self.modelContext = writeContext
+            if profile.hasSeparateStorage {
+                self.userProfile = try CatalogReferenceResolver.userProfile(
+                    id: profile.id,
+                    context: writeContext
+                )
+            }
+        } catch {
+            self.modelContext = nil
+            print("STORAGE VM: Failed to open user store: \(error)")
+        }
         
         // Pre-load data in background
         Task {
@@ -417,14 +434,15 @@ final class StorageListVM: ObservableObject {
     private func cleanupPantryHistory(for food: FoodItem?) {
         guard let modelContext, let food else { return }
 
-        let foodID  = food.persistentModelID
+        let foodID  = food.id
         let ownerID = dataOwnerProfileID
 
         do {
             // 1) MealLogStorageLink
             let linksDescriptor = FetchDescriptor<MealLogStorageLink>(
                 predicate: #Predicate {
-                    $0.food?.persistentModelID == foodID &&
+                    ($0.persistedFood?.id == foodID
+                        || $0.catalogFoodID == foodID) &&
                     $0.profile?.persistentModelID == ownerID
                 }
             )
@@ -434,7 +452,8 @@ final class StorageListVM: ObservableObject {
             // 2) StorageTransaction
             let transactionsDescriptor = FetchDescriptor<StorageTransaction>(
                 predicate: #Predicate {
-                    $0.food?.persistentModelID == foodID &&
+                    ($0.persistedFood?.id == foodID
+                        || $0.catalogFoodID == foodID) &&
                     $0.profile?.persistentModelID == ownerID
                 }
             )

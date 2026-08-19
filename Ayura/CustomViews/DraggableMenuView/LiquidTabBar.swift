@@ -245,6 +245,7 @@ struct LiquidTabBar: View {
                             .padding(.leading, 4)
                     }
                     TextField("", text: $localSearchText)
+                        .accessibilityIdentifier("global-search-field")
                         .foregroundColor(effectManager.currentGlobalAccentColor)
                         .tint(effectManager.currentGlobalAccentColor)
                         .textInputAutocapitalization(.never)
@@ -292,6 +293,7 @@ struct LiquidTabBar: View {
                         }
                     }
                     .frame(width: 50, height: 44)
+                    .accessibilityIdentifier("global-search-toggle")
                     .contentShape(Rectangle())
                     .onTapGesture {
                         if isSearching { onDismissSearchTapped() } else { onSearchTapped() }

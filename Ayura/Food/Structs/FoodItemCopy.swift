@@ -1,5 +1,6 @@
 import Foundation
 import SwiftData
+import UIKit
 
 // MARK: - FoodItemCopy -----------------------------------------------------
 
@@ -12,6 +13,10 @@ public final class FoodItemCopy: Identifiable, Codable {
     public var isRecipe:    Bool
     public var isMenu:      Bool
     public var isUserAdded: Bool
+    /// The weight that was actually displayed for the source item. Keep it
+    /// separate from the nutrition reference weight: legacy catalogue foods
+    /// can be calculated per 100 g while displaying a smaller serving.
+    public var sourceDisplayWeightG: Double?
 
     // MARK: – Tags
     public var allergens: [Allergen]?
@@ -55,7 +60,8 @@ public final class FoodItemCopy: Identifiable, Codable {
         carbDetails: CarbDetailsDataCopy? = nil,
         sterols: SterolsDataCopy? = nil,
         ingredients: [IngredientLinkCopy]? = nil,
-        originalID: UUID? = nil
+        originalID: UUID? = nil,
+        sourceDisplayWeightG: Double? = nil
     ) {
         self.name               = name
         self.nameNormalized     = name.foldedSearchKey
@@ -77,6 +83,7 @@ public final class FoodItemCopy: Identifiable, Codable {
         self.sterols            = sterols
         self.ingredients        = ingredients
         self.originalID         = originalID
+        self.sourceDisplayWeightG = sourceDisplayWeightG
     }
     
     @MainActor
@@ -160,6 +167,7 @@ public final class FoodItemCopy: Identifiable, Codable {
     // --- Ръчна имплементация на Codable ---
     enum CodingKeys: String, CodingKey {
         case originalID, name, nameNormalized, isRecipe, isMenu, isUserAdded
+        case sourceDisplayWeightG
         case allergens, macronutrients, lipids, vitamins, minerals, other, aminoAcids, carbDetails, sterols
         case photo, gallery, prepTimeMinutes, itemDescription, ingredients
     }
@@ -172,6 +180,10 @@ public final class FoodItemCopy: Identifiable, Codable {
         isRecipe = try container.decode(Bool.self, forKey: .isRecipe)
         isMenu = try container.decode(Bool.self, forKey: .isMenu)
         isUserAdded = try container.decode(Bool.self, forKey: .isUserAdded)
+        sourceDisplayWeightG = try container.decodeIfPresent(
+            Double.self,
+            forKey: .sourceDisplayWeightG
+        )
         allergens = try container.decodeIfPresent([Allergen].self, forKey: .allergens)
         macronutrients = try container.decodeIfPresent(MacronutrientsDataCopy.self, forKey: .macronutrients)
         lipids = try container.decodeIfPresent(LipidsDataCopy.self, forKey: .lipids)
@@ -200,6 +212,7 @@ public final class FoodItemCopy: Identifiable, Codable {
         try container.encode(isRecipe, forKey: .isRecipe)
         try container.encode(isMenu, forKey: .isMenu)
         try container.encode(isUserAdded, forKey: .isUserAdded)
+        try container.encodeIfPresent(sourceDisplayWeightG, forKey: .sourceDisplayWeightG)
         try container.encodeIfPresent(allergens, forKey: .allergens)
         try container.encodeIfPresent(macronutrients, forKey: .macronutrients)
         try container.encodeIfPresent(lipids, forKey: .lipids)
@@ -493,7 +506,9 @@ extension FoodItemCopy {
             prepTimeMinutes: src.prepTimeMinutes, itemDescription: src.itemDescription,
             macronutrients: mac, lipids: lip, vitamins: vit, minerals: min, other: oth,
             aminoAcids: aa, carbDetails: cd, sterols: st,
-            ingredients: ingCopies, originalID: src.id
+            ingredients: ingCopies,
+            originalID: src.id,
+            sourceDisplayWeightG: src.effectiveDisplayWeightG
         )
         
         ingCopies?.forEach { $0.owner = self }
@@ -503,6 +518,10 @@ extension FoodItemCopy {
     public convenience init(from src: FoodItem) {
         var tmp: [ObjectIdentifier : FoodItemCopy] = [:]
         self.init(from: src, cache: &tmp)
+        if photo == nil,
+           let visibleImage = src.foodImage(variant: "1024") {
+            photo = visibleImage.jpegData(compressionQuality: 0.9)
+        }
     }
 
     private convenience init(from copy: FoodItemCopy) {
@@ -512,8 +531,25 @@ extension FoodItemCopy {
             prepTimeMinutes: copy.prepTimeMinutes, itemDescription: copy.itemDescription,
             macronutrients: copy.macronutrients, lipids: copy.lipids, vitamins: copy.vitamins, minerals: copy.minerals, other: copy.other,
             aminoAcids: copy.aminoAcids, carbDetails: copy.carbDetails, sterols: copy.sterols,
-            ingredients: copy.ingredients, originalID: copy.originalID
+            ingredients: copy.ingredients,
+            originalID: copy.originalID,
+            sourceDisplayWeightG: copy.sourceDisplayWeightG
         )
+    }
+}
+
+extension FoodItemCopy {
+    /// Serving weight to prefill when this value is opened as a duplicate.
+    /// Prefer the explicit stored serving, then the value that was displayed
+    /// for the source FoodItem.
+    var duplicationServingWeightG: Double? {
+        if let explicit = other?.weightG?.value, explicit > 0 {
+            return explicit
+        }
+        if let sourceDisplayWeightG, sourceDisplayWeightG > 0 {
+            return sourceDisplayWeightG
+        }
+        return nil
     }
 }
 

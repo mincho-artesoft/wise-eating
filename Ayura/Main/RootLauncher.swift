@@ -67,6 +67,17 @@ struct RootLauncher: View {
             print("🎨 RootLauncher: Initial snapshot taken and accent color set.")
             AyurvedaAsanaYogaLaunchProbe.event("theme-snapshot-end")
 
+            #if DEBUG
+            if ProcessInfo.processInfo.arguments.contains(
+                "-catalogSeparationSmokeTest"
+            ) {
+                await CatalogSeparationSmokeTestRunner.run(
+                    realContext: container.mainContext
+                )
+                return
+            }
+            #endif
+
             // 2. Seeding (Попълване на базата и създаване на Cache Blob)
             await SeedManager.seedIfNeeded(container: container)
 

@@ -69,7 +69,7 @@ public final class ExerciseItem: Identifiable {
     /// Minimum age (months)
     public var minimalAgeMonths: Int = 0
     
-    @Relationship(inverse: \Node.linkedExercises)
+    @Relationship(inverse: \Node.persistedExercises)
     public var nodes: [Node]? = []
 
     // MARK: - Tokenizers

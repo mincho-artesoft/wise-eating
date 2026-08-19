@@ -21,6 +21,92 @@ enum ZlibError: Error, LocalizedError {
 
 /// GZIP container (DEFLATE) using zlib streaming APIs.
 enum ZlibGzip {
+    static func decompressFile(from sourceURL: URL, to destinationURL: URL) throws {
+        var stream = z_stream()
+        stream.zalloc = nil
+        stream.zfree = nil
+        stream.opaque = nil
+
+        let initCode = inflateInit2_(
+            &stream,
+            15 + 32,
+            ZLIB_VERSION,
+            Int32(MemoryLayout<z_stream>.size)
+        )
+        guard initCode == Z_OK else {
+            throw ZlibError.inflateInit(code: initCode)
+        }
+        defer { inflateEnd(&stream) }
+
+        let fileManager = FileManager.default
+        try? fileManager.removeItem(at: destinationURL)
+        guard fileManager.createFile(
+            atPath: destinationURL.path,
+            contents: nil
+        ) else {
+            throw ZlibError.unknown
+        }
+
+        let input = try FileHandle(forReadingFrom: sourceURL)
+        let output = try FileHandle(forWritingTo: destinationURL)
+        defer {
+            try? input.close()
+            try? output.close()
+        }
+
+        let inputChunkSize = 1_048_576
+        let outputChunkSize = 1_048_576
+        var reachedStreamEnd = false
+
+        while let inputData = try input.read(upToCount: inputChunkSize),
+              !inputData.isEmpty {
+            try inputData.withUnsafeBytes { rawInput in
+                guard let baseAddress = rawInput
+                    .bindMemory(to: Bytef.self).baseAddress else {
+                    throw ZlibError.unknown
+                }
+                stream.next_in = UnsafeMutablePointer<Bytef>(
+                    mutating: baseAddress
+                )
+                stream.avail_in = uInt(inputData.count)
+
+                while stream.avail_in > 0, !reachedStreamEnd {
+                    var outputBuffer = [UInt8](
+                        repeating: 0,
+                        count: outputChunkSize
+                    )
+                    let code = outputBuffer.withUnsafeMutableBytes { rawOutput in
+                        stream.next_out = rawOutput
+                            .bindMemory(to: Bytef.self).baseAddress
+                        stream.avail_out = uInt(outputChunkSize)
+                        return inflate(&stream, Z_NO_FLUSH)
+                    }
+
+                    let produced = outputChunkSize - Int(stream.avail_out)
+                    if produced > 0 {
+                        try output.write(
+                            contentsOf: Data(outputBuffer.prefix(produced))
+                        )
+                    }
+
+                    switch code {
+                    case Z_STREAM_END:
+                        reachedStreamEnd = true
+                    case Z_OK:
+                        break
+                    default:
+                        throw ZlibError.inflate(code: code)
+                    }
+                }
+            }
+            if reachedStreamEnd { break }
+        }
+
+        guard reachedStreamEnd else {
+            throw ZlibError.inflate(code: Z_DATA_ERROR)
+        }
+    }
+
     static func compress(data: Data, level: Int32 = Z_DEFAULT_COMPRESSION) throws -> Data {
         var stream = z_stream()
         stream.zalloc = nil

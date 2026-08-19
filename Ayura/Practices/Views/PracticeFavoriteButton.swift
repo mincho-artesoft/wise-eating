@@ -8,12 +8,14 @@ struct PracticeFavoriteButton: View {
     var onToggle: (() -> Void)? = nil
 
     @Environment(\.modelContext) private var modelContext
+    @ObservedObject private var catalogPreferences = CatalogPreferenceStore.shared
 
     var body: some View {
+        let isFavorite = practice.effectiveIsFavorite
         Button {
             toggleFavorite()
         } label: {
-            Image(systemName: practice.isFavorite ? "star.fill" : "star")
+            Image(systemName: isFavorite ? "star.fill" : "star")
                 .font(font)
                 .foregroundStyle(Color.yellow)
                 .frame(width: frameSize, height: frameSize)
@@ -22,23 +24,18 @@ struct PracticeFavoriteButton: View {
         .buttonStyle(.plain)
         .contentShape(Rectangle())
         .accessibilityLabel(
-            practice.isFavorite ? "Remove from Favorites" : "Add to Favorites"
+            isFavorite ? "Remove from Favorites" : "Add to Favorites"
         )
+        .animation(.spring(), value: catalogPreferences.revision)
     }
 
     private func toggleFavorite() {
-        let previousValue = practice.isFavorite
-        withAnimation(.spring(response: 0.3, dampingFraction: 0.72)) {
-            practice.isFavorite.toggle()
-        }
+        let previousValue = practice.effectiveIsFavorite
 
         do {
-            try modelContext.save()
+            try practice.setEffectiveFavorite(!previousValue, context: modelContext)
             onToggle?()
         } catch {
-            withAnimation {
-                practice.isFavorite = previousValue
-            }
             print("❌ Failed to save practice favorite: \(error.localizedDescription)")
         }
     }

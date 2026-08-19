@@ -27,6 +27,7 @@ struct NodeEditorView: View {
     
     @State private var selectedFoodIDs: Set<FoodItem.ID>
     @State private var selectedExerciseIDs: Set<ExerciseItem.ID>
+    @State private var saveErrorMessage: String?
     @FocusState private var isTextEditorFocused: Bool
     private var isSaveDisabled: Bool {
         nodeText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
@@ -69,6 +70,7 @@ struct NodeEditorView: View {
             }
             
             TextEditor(text: $nodeText)
+                .accessibilityIdentifier("node-editor-text")
                 .font(.system(size: 16))
                 .scrollContentBackground(.hidden)
                 .foregroundStyle(effectManager.currentGlobalAccentColor)
@@ -120,8 +122,16 @@ struct NodeEditorView: View {
         .task(id: date) {
             await loadDataFromCalendar()
         }
-        .alert("Error", isPresented: .constant(false)) {
-            Button("OK") {}
+        .alert(
+            "Unable to Save",
+            isPresented: Binding(
+                get: { saveErrorMessage != nil },
+                set: { if !$0 { saveErrorMessage = nil } }
+            )
+        ) {
+            Button("OK") { saveErrorMessage = nil }
+        } message: {
+            Text(saveErrorMessage ?? "The note could not be saved.")
         }
     }
 
@@ -141,6 +151,7 @@ struct NodeEditorView: View {
                 }
             }
             .disabled(isSaveDisabled)
+            .accessibilityIdentifier("node-editor-save")
             .padding(.horizontal, 10).padding(.vertical, 5)
             .glassCardStyle(cornerRadius: 20)
             .foregroundStyle(isSaveDisabled ? effectManager.currentGlobalAccentColor.opacity(0.5) : effectManager.currentGlobalAccentColor)
@@ -285,32 +296,68 @@ struct NodeEditorView: View {
     }
     
     private func saveNode() async {
-        let node: Node
-        if let existing = nodeToEdit {
-            node = existing
-        } else {
-            node = Node(profile: self.profile)
-            modelContext.insert(node)
-        }
-        
-        node.textContent = nodeText.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty()
-        node.date = date
-        
-        node.linkedFoods = self.linkedFoods.filter { selectedFoodIDs.contains($0.id) }
-        node.linkedExercises = self.linkedExercises.filter { selectedExerciseIDs.contains($0.id) }
-        
-        node.profile = self.profile
-        
-        // --- НАЧАЛО НА ПРОМЯНАТА ---
-        await saveNodeToCalendar(node: node, profile: self.profile)
-        // --- КРАЙ НА ПРОМЯНАТА ---
-        
         do {
-            try modelContext.save()
+            // Nodes are user-owned. Creating or editing them in the combined
+            // catalogue/user read context can route a fault to a store that
+            // the context does not own. Perform the complete mutation in the
+            // single user-store context instead.
+            let writeContext = try CombinedStoreFactory.makeUserWriteContext(
+                from: modelContext.container
+            )
+            guard let writeProfile = try CatalogReferenceResolver.userProfile(
+                id: profile.id,
+                context: writeContext
+            ) else {
+                throw CatalogReferenceError.missingUserProfile(profile.id)
+            }
+
+            let node: Node
+            if let nodeID = nodeToEdit?.id {
+                var descriptor = FetchDescriptor<Node>(
+                    predicate: #Predicate { $0.id == nodeID }
+                )
+                descriptor.fetchLimit = 1
+                guard let existing = try writeContext.fetch(descriptor).first else {
+                    throw NodeSaveError.missingNode
+                }
+                node = existing
+            } else {
+                node = Node(profile: writeProfile)
+                writeContext.insert(node)
+            }
+
+            node.textContent = nodeText
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+                .nilIfEmpty()
+            node.date = date
+            node.profile = writeProfile
+
+            let selectedFoods = linkedFoods.filter {
+                selectedFoodIDs.contains($0.id)
+            }
+            node.linkedFoods = try selectedFoods.map {
+                try CatalogReferenceResolver.foodForUserWrite(
+                    $0,
+                    userContext: writeContext
+                )
+            }
+
+            let selectedExercises = linkedExercises.filter {
+                selectedExerciseIDs.contains($0.id)
+            }
+            node.linkedExercises = try selectedExercises.map {
+                try CatalogReferenceResolver.exerciseForUserWrite(
+                    $0,
+                    userContext: writeContext
+                )
+            }
+
+            await saveNodeToCalendar(node: node, profile: writeProfile)
+            try writeContext.save()
             onDismiss()
         } catch {
-            print("Failed to save node: \(error)")
-            onDismiss()
+            saveErrorMessage = error.localizedDescription
+            print("NODE_SAVE_ERROR|\(error)")
         }
     }
 
@@ -365,4 +412,12 @@ struct NodeEditorView: View {
                       .padding(.horizontal)
               }
           }
+}
+
+private enum NodeSaveError: LocalizedError {
+    case missingNode
+
+    var errorDescription: String? {
+        "The note could not be found in the user database."
+    }
 }

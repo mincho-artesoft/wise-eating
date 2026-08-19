@@ -31,4 +31,24 @@ struct CompactFoodItem: Identifiable, Hashable, Sendable {
     func contains(allergen: String) -> Bool {
         allergens.contains { $0.localizedCaseInsensitiveContains(allergen) }
     }
+
+    func withFavorite(_ value: Bool) -> CompactFoodItem {
+        CompactFoodItem(
+            id: id,
+            name: name,
+            searchTokens: searchTokens,
+            minAgeMonths: minAgeMonths,
+            enforcedMinAgeMonths: enforcedMinAgeMonths,
+            allergens: allergens,
+            ph: ph,
+            referenceWeightG: referenceWeightG,
+            isRecipe: isRecipe,
+            isMenu: isMenu,
+            isFavorite: value,
+            isEdible: isEdible,
+            ayurvedaFacets: ayurvedaFacets,
+            ayurvedaMetadata: ayurvedaMetadata,
+            nutrientValues: nutrientValues
+        )
+    }
 }

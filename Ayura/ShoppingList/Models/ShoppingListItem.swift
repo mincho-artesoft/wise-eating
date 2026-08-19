@@ -11,8 +11,23 @@ public final class ShoppingListItem: Identifiable {
     
     public var list: ShoppingListModel? // Връзка към родителския списък
     
-    @Relationship(deleteRule: .nullify)
-    public var foodItem: FoodItem?
+    @Relationship(deleteRule: .nullify, originalName: "foodItem")
+    var persistedFoodItem: FoodItem?
+    public var catalogFoodID: UUID?
+
+    public var foodItem: FoodItem? {
+        get {
+            CatalogReferenceResolver.resolveFood(
+                stored: persistedFoodItem,
+                catalogID: catalogFoodID
+            )
+        }
+        set {
+            let reference = CatalogReferenceResolver.storedFoodReference(for: newValue)
+            persistedFoodItem = reference.stored
+            catalogFoodID = reference.catalogID
+        }
+    }
     
     public init(name: String, quantity: Double = 1.0, price: Double? = nil, isBought: Bool = false, foodItem: FoodItem? = nil) {
         self.id = UUID()
@@ -20,6 +35,8 @@ public final class ShoppingListItem: Identifiable {
         self.quantity = quantity
         self.price = price
         self.isBought = isBought
-        self.foodItem = foodItem
+        let reference = CatalogReferenceResolver.storedFoodReference(for: foodItem)
+        self.persistedFoodItem = reference.stored
+        self.catalogFoodID = reference.catalogID
     }
 }

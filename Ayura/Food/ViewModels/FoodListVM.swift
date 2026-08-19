@@ -15,6 +15,8 @@ final class FoodListVM: ObservableObject {
     
     // MARK: - Private State
     private var context: ModelContext!
+    private var userContext: ModelContext?
+    private var userContainer: ModelContainer?
     private var container: ModelContainer?
     private var cancellables = Set<AnyCancellable>()
     
@@ -25,6 +27,8 @@ final class FoodListVM: ObservableObject {
     private let pageSize = 50
     private var currentOffset = 0
     private var currentTask: Task<Void, Never>?
+    private var recentUserWrites: [UUID: FoodItem] = [:]
+    private var recentUserWriteContexts: [UUID: ModelContext] = [:]
     
     // MARK: - Init
     init() {
@@ -45,6 +49,11 @@ final class FoodListVM: ObservableObject {
         guard self.context !== context else { return }
         self.context = context
         self.container = context.container
+        self.userContext = try? CombinedStoreFactory.makeUserWriteContext(
+            from: context.container
+        )
+        self.userContainer = self.userContext?.container
+        try? CatalogPreferenceStore.shared.load(context: context)
         
         // Initialize the Smart Search Engine with the container
         if let container = self.container {
@@ -76,6 +85,51 @@ final class FoodListVM: ObservableObject {
         isLoading = true
         
         loadPage(isReset: true)
+    }
+
+    /// Applies a food saved by the dedicated user-store writer immediately.
+    /// The combined read context can retain an older registered instance after
+    /// another container updates the same SQLite row, so refetching alone may
+    /// briefly redisplay stale values until the next launch.
+    func applyUserStoreWrite(_ item: FoodItem) {
+        // Retain the exact context that owns the successfully saved object.
+        // Otherwise the editor's local context can be released on dismissal,
+        // leaving `item.modelContext == nil`; FoodItemRowView deliberately
+        // hides such detached objects even though the row is already in SQLite.
+        let displayItem: FoodItem
+        if let savedContext = item.modelContext {
+            userContext = savedContext
+            recentUserWriteContexts[item.id] = savedContext
+            displayItem = item
+        } else if let userContainer {
+            let freshContext = ModelContext(userContainer)
+            freshContext.autosaveEnabled = false
+            userContext = freshContext
+            let itemID = item.id
+            var descriptor = FetchDescriptor<FoodItem>(
+                predicate: #Predicate { $0.id == itemID }
+            )
+            descriptor.fetchLimit = 1
+            displayItem = (try? freshContext.fetch(descriptor).first) ?? item
+            recentUserWriteContexts[item.id] = freshContext
+        } else {
+            displayItem = item
+        }
+
+        recentUserWrites[displayItem.id] = displayItem
+        print(
+            "USER_FOOD_LIST_WRITE|name=\(displayItem.name)|filter=\(filter.rawValue)"
+        )
+        items.removeAll { $0.id == displayItem.id }
+        if shouldDisplay(displayItem, for: filter) {
+            items.append(displayItem)
+            items.sort {
+                $0.name.localizedCaseInsensitiveCompare($1.name)
+                    == .orderedAscending
+            }
+        }
+        currentOffset = items.count
+        isLoading = false
     }
     
     /// Fetches items. Delegates to SmartSearch if query exists, otherwise uses standard DB fetch.
@@ -172,8 +226,46 @@ final class FoodListVM: ObservableObject {
             descriptor.fetchLimit = limit
             
             do {
-                // Директен fetch от главния контекст
-                let displayItems = try mainCtx.fetch(descriptor)
+                // User-created foods, recipes and menus are read through the
+                // same unambiguous user-only container used by their editors.
+                // Catalogue/default browsing continues through the combined
+                // read context.
+                let browseContext: ModelContext
+                switch currentFilter {
+                case .foods, .recipes, .menus:
+                    if let userContainer {
+                        let freshContext = ModelContext(userContainer)
+                        freshContext.autosaveEnabled = false
+                        userContext = freshContext
+                        browseContext = freshContext
+                    } else {
+                        browseContext = userContext ?? mainCtx
+                    }
+                case .default, .favorites, .plans:
+                    browseContext = mainCtx
+                }
+                var displayItems = try browseContext.fetch(descriptor)
+
+                // A reset can finish after an editor's immediate list update.
+                // Reconcile recent successful writes so that late pagination
+                // results cannot hide the newly saved or edited object.
+                if isReset {
+                    for item in recentUserWrites.values {
+                        displayItems.removeAll { $0.id == item.id }
+                        if shouldDisplay(item, for: currentFilter) {
+                            displayItems.append(item)
+                        }
+                    }
+                    displayItems.sort {
+                        $0.name.localizedCaseInsensitiveCompare($1.name)
+                            == .orderedAscending
+                    }
+                    print(
+                        "USER_FOOD_LIST_FETCH|filter=\(currentFilter.rawValue)"
+                            + "|count=\(displayItems.count)"
+                            + "|recent=\(recentUserWrites.count)"
+                    )
+                }
                 
                 if Task.isCancelled {
                     self.isLoading = false
@@ -200,13 +292,47 @@ final class FoodListVM: ObservableObject {
     // MARK: - Predicate Builder (Empty State Only)
     
     private func makeEmptyStatePredicate(filter: FoodItemListView.Filter) -> Predicate<FoodItem> {
+        let catalogFavoriteIDs = CatalogPreferenceStore.shared.favoriteIDs(
+            kind: "food"
+        )
         switch filter {
         case .foods:     return #Predicate<FoodItem> { $0.isEdible && $0.isUserAdded && !$0.isRecipe && !$0.isMenu }
         case .recipes:   return #Predicate<FoodItem> { $0.isEdible && $0.isUserAdded && $0.isRecipe }
         case .menus:     return #Predicate<FoodItem> { $0.isEdible && $0.isUserAdded && $0.isMenu }
-        case .favorites: return #Predicate<FoodItem> { $0.isEdible && $0.isFavorite }
+        case .favorites: return #Predicate<FoodItem> {
+            $0.isEdible
+                && ($0.isFavorite || catalogFavoriteIDs.contains($0.id))
+        }
         case .default:   return #Predicate<FoodItem> { $0.isEdible && !$0.isUserAdded }
         case .plans:     return #Predicate<FoodItem> { _ in false }
+        }
+    }
+
+    private func shouldDisplay(
+        _ item: FoodItem,
+        for filter: FoodItemListView.Filter
+    ) -> Bool {
+        switch filter {
+        case .foods:
+            return item.isEdible && item.isUserAdded
+                && !item.isRecipe && !item.isMenu
+        case .recipes:
+            return item.isEdible && item.isUserAdded && item.isRecipe
+        case .menus:
+            return item.isEdible && item.isUserAdded && item.isMenu
+        case .favorites:
+            return item.isEdible && (
+                item.isFavorite
+                    || CatalogPreferenceStore.shared.isFavorite(
+                        kind: "food",
+                        itemID: item.id,
+                        fallback: false
+                    )
+            )
+        case .default:
+            return item.isEdible && !item.isUserAdded
+        case .plans:
+            return false
         }
     }
     
@@ -217,7 +343,8 @@ final class FoodListVM: ObservableObject {
         let targetID = item.id
         let descriptor = FetchDescriptor<IngredientLink>(
             predicate: #Predicate<IngredientLink> { link in
-                link.food?.id == targetID
+                link.persistedFood?.id == targetID
+                    || link.catalogFoodID == targetID
             }
         )
         do {
@@ -236,14 +363,16 @@ final class FoodListVM: ObservableObject {
         do {
             let ingredientDesc = FetchDescriptor<IngredientLink>(
                 predicate: #Predicate<IngredientLink> { link in
-                    link.food?.id == targetID
+                    link.persistedFood?.id == targetID
+                        || link.catalogFoodID == targetID
                 }
             )
             let ingredientCount = try ctx.fetch(ingredientDesc).count
             
             let mealEntryDesc = FetchDescriptor<MealPlanEntry>(
                 predicate: #Predicate<MealPlanEntry> { entry in
-                    entry.food?.id == targetID
+                    entry.persistedFood?.id == targetID
+                        || entry.catalogFoodID == targetID
                 }
             )
             let mealEntryCount = try ctx.fetch(mealEntryDesc).count
@@ -256,13 +385,14 @@ final class FoodListVM: ObservableObject {
     }
 
     func deleteDetachingFromRecipesAndMealPlans(_ item: FoodItem) {
-        guard let ctx = context else { return }
+        guard let ctx = userContext else { return }
         let targetID = item.id
         
         do {
             let ingredientDesc = FetchDescriptor<IngredientLink>(
                 predicate: #Predicate<IngredientLink> { link in
-                    link.food?.id == targetID
+                    link.persistedFood?.id == targetID
+                        || link.catalogFoodID == targetID
                 }
             )
             let ingredientLinks = try ctx.fetch(ingredientDesc)
@@ -273,7 +403,8 @@ final class FoodListVM: ObservableObject {
             
             let mealEntryDesc = FetchDescriptor<MealPlanEntry>(
                 predicate: #Predicate<MealPlanEntry> { entry in
-                    entry.food?.id == targetID
+                    entry.persistedFood?.id == targetID
+                        || entry.catalogFoodID == targetID
                 }
             )
             let mealEntries = try ctx.fetch(mealEntryDesc)
@@ -289,85 +420,78 @@ final class FoodListVM: ObservableObject {
     }
 
     func delete(_ item: FoodItem) {
-        guard item.isUserAdded, let ctx = context else { return }
-        
+        guard item.isUserAdded, let ctx = userContext else { return }
         let foodID = item.id
-        
-        // 1) Remove row from UI immediately
-        if let index = items.firstIndex(of: item) {
-            items.remove(at: index)
-        }
-        
-        // 2) Delete logic directly on MainActor to ensure consistency
-        // --- Logic for menus ---
-        if item.isMenu {
-            print("🗑️ Deleting a menu item: \(item.name). Checking for linked meal plans...")
-            let menuIDToDelete = item.id
-            let descriptor = FetchDescriptor<MealPlanMeal>(
-                predicate: #Predicate { $0.linkedMenuID == menuIDToDelete }
-            )
-            do {
-                let linkedMeals = try ctx.fetch(descriptor)
-                if !linkedMeals.isEmpty {
-                    for meal in linkedMeals {
-                        for entry in meal.entries {
-                            ctx.delete(entry)
-                        }
-                        meal.entries.removeAll()
-                        meal.linkedMenuID = nil
-                    }
-                }
-            } catch {
-                print("   - ❌ Failed to fetch linked meal plan meals: \(error)")
-            }
-        }
-        
-        // 3) Cleanup Metadata
-        self.cleanupShoppingMetadata(for: item)
-        self.cleanupPantryHistory(for: item)
-        
-        // 4) Update Search Index (Remove from In-Memory Cache)
-        SearchIndexStore.shared.removeItem(id: foodID, context: ctx)
 
-        // 5) Delete the per-food Ayurveda override before the FoodItem so a
-        // future user-added food cannot inherit stale data if its ID is reused.
-        AyurvedaUserProfileStore.remove(foodId: foodID, context: ctx)
-
-        // 6) Nullify relations
-        item.macronutrients = nil
-        item.lipids         = nil
-        item.vitamins       = nil
-        item.minerals       = nil
-        item.other          = nil
-        item.aminoAcids     = nil
-        item.carbDetails    = nil
-        item.sterols        = nil
-        
-        // 7) Delete
-        ctx.delete(item)
-        
         do {
+            guard let storedItem = try CatalogReferenceResolver.userFood(
+                id: foodID,
+                context: ctx
+            ) else {
+                throw CatalogReferenceError.missingUserFood(foodID)
+            }
+            let itemName = storedItem.name
+
+            // All models mutated below are user-owned. Fetching and deleting
+            // them in the single-store context prevents a combined read
+            // context from merely dropping the visible row while the SQLite
+            // record survives (or from routing a fault to the catalogue).
+            if storedItem.isMenu {
+                print("🗑️ Deleting a menu item: \(itemName). Checking for linked meal plans...")
+                let menuIDToDelete = foodID
+                let descriptor = FetchDescriptor<MealPlanMeal>(
+                    predicate: #Predicate { $0.linkedMenuID == menuIDToDelete }
+                )
+                let linkedMeals = try ctx.fetch(descriptor)
+                for meal in linkedMeals {
+                    for entry in meal.entries {
+                        ctx.delete(entry)
+                    }
+                    meal.entries.removeAll()
+                    meal.linkedMenuID = nil
+                }
+            }
+
+            cleanupShoppingMetadata(forID: foodID, in: ctx)
+            cleanupPantryHistory(forID: foodID, in: ctx)
+            SearchIndexStore.shared.removeItem(id: foodID, context: ctx)
+            AyurvedaUserProfileStore.remove(foodId: foodID, context: ctx)
+
+            storedItem.macronutrients = nil
+            storedItem.lipids         = nil
+            storedItem.vitamins       = nil
+            storedItem.minerals       = nil
+            storedItem.other          = nil
+            storedItem.aminoAcids     = nil
+            storedItem.carbDetails    = nil
+            storedItem.sterols        = nil
+            ctx.delete(storedItem)
             try ctx.save()
+
+            items.removeAll { $0.id == foodID }
+            recentUserWrites.removeValue(forKey: foodID)
+            recentUserWriteContexts.removeValue(forKey: foodID)
         } catch {
-            print("❌ Failed to save context after deleting food '\(item.name)': \(error)")
+            print("❌ Failed to delete food '\(item.name)': \(error)")
         }
     }
-    
+
     func pruneFavoritesAfterToggle() {
         guard filter == .favorites else { return }
-        items.removeAll { !$0.isFavorite }
+        items.removeAll { !$0.effectiveIsFavorite }
     }
     
     // MARK: - Pantry / History cleanup
 
-    private func cleanupPantryHistory(for item: FoodItem) {
-        guard let ctx = context else { return }
-        let targetPID = item.persistentModelID
-        
+    private func cleanupPantryHistory(
+        forID targetID: UUID,
+        in ctx: ModelContext
+    ) {
         do {
             let linksDesc = FetchDescriptor<MealLogStorageLink>(
                 predicate: #Predicate<MealLogStorageLink> {
-                    $0.food?.persistentModelID == targetPID
+                    $0.persistedFood?.id == targetID
+                        || $0.catalogFoodID == targetID
                 }
             )
             let links = try ctx.fetch(linksDesc)
@@ -375,28 +499,29 @@ final class FoodListVM: ObservableObject {
             
             let transactionsDesc = FetchDescriptor<StorageTransaction>(
                 predicate: #Predicate<StorageTransaction> {
-                    $0.food?.persistentModelID == targetPID
+                    $0.persistedFood?.id == targetID
+                        || $0.catalogFoodID == targetID
                 }
             )
             let transactions = try ctx.fetch(transactionsDesc)
             transactions.forEach { ctx.delete($0) }
             
         } catch {
-            print("❌ Failed to cleanup pantry history for food '\(item.name)': \(error)")
+            print("❌ Failed to cleanup pantry history for food \(targetID): \(error)")
         }
     }
 
     // MARK: - Shopping / Suggestions cleanup
 
-    private func cleanupShoppingMetadata(for item: FoodItem) {
-        guard let ctx = context else { return }
-        let targetID  = item.id
-        let targetPID = item.persistentModelID
-        
+    private func cleanupShoppingMetadata(
+        forID targetID: UUID,
+        in ctx: ModelContext
+    ) {
         do {
             let recentDesc = FetchDescriptor<RecentlyAddedFood>(
                 predicate: #Predicate<RecentlyAddedFood> { entry in
-                    entry.food?.id == targetID
+                    entry.persistedFood?.id == targetID
+                        || entry.catalogFoodID == targetID
                 }
             )
             let recentEntries = try ctx.fetch(recentDesc)
@@ -416,7 +541,8 @@ final class FoodListVM: ObservableObject {
             
             let shoppingItemsDesc = FetchDescriptor<ShoppingListItem>(
                 predicate: #Predicate<ShoppingListItem> { sli in
-                    sli.foodItem?.persistentModelID == targetPID
+                    sli.persistedFoodItem?.id == targetID
+                        || sli.catalogFoodID == targetID
                 }
             )
             let shoppingItems = try ctx.fetch(shoppingItemsDesc)
@@ -425,7 +551,7 @@ final class FoodListVM: ObservableObject {
             }
             
         } catch {
-            print("❌ Failed to cleanup shopping metadata for food '\(item.name)': \(error)")
+            print("❌ Failed to cleanup shopping metadata for food \(targetID): \(error)")
         }
     }
 }

@@ -27,39 +27,6 @@ struct DatabaseSetup {
     
     static func createContainer() -> ModelContainer {
         AyurvedaAsanaYogaLaunchProbe.event("database-setup-begin")
-        // 1. Дефинираме типовете за ОСНОВНАТА база (AyurvedaAsanaYoga.store)
-        let mainTypes: [any PersistentModel.Type] = [
-            Profile.self, UserSettings.self,
-            FoodItem.self, Mineral.self,
-            Vitamin.self, Meal.self,
-            StorageItem.self, StorageTransaction.self,
-            MealLogStorageLink.self, WeightHeightRecord.self,
-            ShoppingListItem.self, ShoppingListModel.self,
-            RecentlyAddedFood.self, DismissedFoodID.self,
-            AminoAcidsData.self, CarbDetailsData.self,
-            SterolsData.self,
-            WaterLog.self, MealPlanEntry.self,
-            MealPlan.self, MealPlanDay.self,
-            MealPlanMeal.self, Training.self,
-            ExerciseItem.self, ExercisePhoto.self, YogaSequence.self,
-            Practice.self, PracticeCue.self, PracticeSession.self,
-            ExerciseLink.self, AIGenerationJob.self,
-            TrainingPlan.self, TrainingPlanDay.self,
-            TrainingPlanWorkout.self, TrainingPlanExercise.self,
-            ProductBucket.self, VocabularyEntry.self,
-            Node.self, SearchIndexCache.self,
-            Prompt.self, Requirement.self,
-            FoodPhoto.self,IngredientLink.self,
-            LipidsData.self, MacronutrientsData.self,
-            MineralsData.self, OtherCompoundsData.self,
-            VitaminsData.self, Batch.self,
-            TrainingPlanSet.self,
-            AyurvedaProfile.self, AyurvedaLink.self
-        ]
-        
-        // Създаваме единствената схема на приложението.
-        let mainSchema = Schema(mainTypes)
-
         do {
             let appSupportURL = try FileManager.default.url(
                 for: .applicationSupportDirectory,
@@ -69,62 +36,62 @@ struct DatabaseSetup {
             )
             print("🚀 SwiftData Path: \(appSupportURL.path())")
             
-            // Основна база
-            let mainStoreURL = appSupportURL.appendingPathComponent("AyurvedaAsanaYoga.store")
-            let mainConfig = ModelConfiguration(
-                "AyurvedaAsanaYogaDefault",
-                schema: mainSchema,
-                url: mainStoreURL
+            // The existing path becomes the writable user store. Keeping the
+            // path lets an installed app migrate in place without losing data.
+            let userStoreURL = appSupportURL.appendingPathComponent(
+                "AyurvedaAsanaYoga.store"
+            )
+            let hadLegacyStore = FileManager.default.fileExists(
+                atPath: userStoreURL.path
             )
             removeObsoleteTemplateStore(from: appSupportURL)
-            
-            // --- Логика за копиране на Pre-seeded база ---
-            let usePreSeededDatabaseCopy = true
-            
-            // Използваме ключ, за да копираме само веднъж при първо стартиране на тази версия
-            let didCopyDatabaseKey = "AyurvedaAsanaYoga_DidCopyPreSeededDatabase_v1"
 
             AyurvedaAsanaYogaLaunchProbe.event("preseed-check-begin")
-            if usePreSeededDatabaseCopy && !UserDefaults.standard.bool(forKey: didCopyDatabaseKey) {
-                print("🏁 First launch with pre-seed logic. Preparing to copy databases…")
-                let fm = FileManager.default
+            let preparedCatalog = try CatalogStoreManager.prepareCatalog(
+                in: appSupportURL
+            )
+            let catalogStoreIdentifier = try CatalogStoreManager.storeIdentifier(
+                at: preparedCatalog.storeURL
+            )
+            CatalogReferenceResolver.configure(
+                catalogStoreIdentifier: catalogStoreIdentifier
+            )
 
-                // =====================================================
-                // 1. MAIN STORE COPY (Архивирана или обикновена)
-                // =====================================================
-                // Почистване на дестинацията за Main Store
-                let mainDir = mainStoreURL.deletingLastPathComponent()
-                let mainBase = mainStoreURL.lastPathComponent
-                let mainWal = mainDir.appendingPathComponent(mainBase + "-wal")
-                let mainShm = mainDir.appendingPathComponent(mainBase + "-shm")
-                
-                for fileURL in [mainStoreURL, mainWal, mainShm] {
-                    if fm.fileExists(atPath: fileURL.path) {
-                        try? fm.removeItem(at: fileURL)
-                    }
-                }
-
-                do {
-                    // PreseedLoader подготвя AyurvedaAsanaYoga.store от архивирания seed.
-                    try PreseedLoader.preparePreseededStore(to: mainStoreURL)
-                    print("✅ Successfully prepared pre-seeded MAIN database.")
-                } catch {
-                    print("❌ Failed to prepare pre-seeded MAIN database: \(error). Using empty DB.")
-                }
-                
-                // Маркираме, че сме приключили с първоначалното зареждане
-                UserDefaults.standard.set(true, forKey: didCopyDatabaseKey)
-                
-            } else if usePreSeededDatabaseCopy {
-                print("🏁 Database already pre-seeded in a previous launch. Skipping copy.")
+            let separation = try LegacyStoreSeparator.prepareUserStore(
+                at: userStoreURL,
+                catalogStoreURL: preparedCatalog.storeURL,
+                manifest: preparedCatalog.manifest,
+                hadLegacyStore: hadLegacyStore
+            )
+            if separation.performedMigration {
+                print(
+                    "✅ Catalog/user separation complete: "
+                        + "food refs=\(separation.migratedFoodReferences), "
+                        + "exercise refs=\(separation.migratedExerciseReferences), "
+                        + "preferences=\(separation.preservedPreferences), "
+                        + "removed catalog rows=\(separation.removedCatalogObjects)."
+                )
+            } else if preparedCatalog.installedNewCatalog {
+                print("✅ Catalog replaced atomically; user store was not reseeded.")
+            } else {
+                print("🏁 Catalog and user store are already current.")
             }
             AyurvedaAsanaYogaLaunchProbe.event("preseed-check-end")
-            
-            // Създаваме контейнера само с основната конфигурация.
+
             AyurvedaAsanaYogaLaunchProbe.event("model-container-open-begin")
-            let container = try ModelContainer(
-                for: mainSchema,
-                configurations: [mainConfig]
+            let container = try CombinedStoreFactory.makeContainer(
+                schema: DatabaseSchema.combined,
+                userSchema: DatabaseSchema.user,
+                catalogSchema: DatabaseSchema.catalog,
+                userStoreURL: userStoreURL,
+                catalogStoreURL: preparedCatalog.storeURL
+            )
+            // The new store is now proven mountable. Older immutable versions
+            // are no longer needed and can otherwise consume hundreds of MB
+            // per application update.
+            CatalogStoreManager.removeObsoleteVersions(
+                in: appSupportURL,
+                keeping: preparedCatalog.storeURL
             )
             AyurvedaAsanaYogaLaunchProbe.event("model-container-open-end")
             return container

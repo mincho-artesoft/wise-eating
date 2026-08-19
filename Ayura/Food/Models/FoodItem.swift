@@ -18,9 +18,7 @@ public final class FoodItem: Identifiable {
 
     public var name: String {
         didSet {
-            self.nameNormalized = name.foldedSearchKey
-            self.searchTokens = FoodItem.makeTokens(from: name)
-            self.searchTokens2 = FoodItem.makeTokens2(from: name)
+            refreshSearchMetadata()
         }
     }
     
@@ -61,16 +59,16 @@ public final class FoodItem: Identifiable {
     @Relationship(deleteRule: .cascade)
     public var ingredients: [IngredientLink]?
 
-    @Relationship(deleteRule: .cascade, inverse: \StorageItem.food)
+    @Relationship(deleteRule: .cascade, inverse: \StorageItem.persistedFood)
     var stockEntries: [StorageItem]? = []
 
-    @Relationship(deleteRule: .cascade, inverse: \MealLogStorageLink.food)
+    @Relationship(deleteRule: .cascade, inverse: \MealLogStorageLink.persistedFood)
     public var mealLogLinks: [MealLogStorageLink]? = []
 
-    @Relationship(deleteRule: .cascade, inverse: \StorageTransaction.food)
+    @Relationship(deleteRule: .cascade, inverse: \StorageTransaction.persistedFood)
     public var storageTransactions: [StorageTransaction]? = []
     
-    @Relationship(inverse: \Node.linkedFoods)
+    @Relationship(inverse: \Node.persistedFoods)
     public var nodes: [Node]? = []
 
     // MARK: - Tokenization Static Logic
@@ -121,6 +119,15 @@ public final class FoodItem: Identifiable {
           .folding(options: .diacriticInsensitive, locale: .current)
           .split(whereSeparator: { !$0.isLetter && !$0.isNumber })
           .map { String($0) }
+    }
+
+    /// Keep materialized search fields synchronized after writes made from a
+    /// separate SwiftData context. Property observers are not guaranteed to
+    /// run for an already-persisted model refetched into that context.
+    func refreshSearchMetadata() {
+        nameNormalized = name.foldedSearchKey
+        searchTokens = FoodItem.makeTokens(from: name)
+        searchTokens2 = FoodItem.makeTokens2(from: name)
     }
     
     // MARK: – Init
@@ -528,6 +535,23 @@ extension FoodItem {
     var totalProtein:       Nutrient? { Self.aggregatedNutrition(for: self).macros?.protein }
     var totalFat:           Nutrient? { Self.aggregatedNutrition(for: self).macros?.fat }
     var totalEnergyKcal:    Nutrient? { Self.aggregatedNutrition(for: self).other?.energyKcal }
+
+    /// The serving weight presented to the user. A number of legacy catalogue
+    /// foods have no stored weight, so their existing UI falls back to the sum
+    /// of the three macros instead of inventing a 100 g serving.
+    var effectiveDisplayWeightG: Double? {
+        guard isEdible else { return nil }
+        if isRecipe || isMenu { return totalWeightG }
+        if let explicit = other?.weightG?.value, explicit > 0 {
+            return explicit
+        }
+
+        let carbohydrates = totalCarbohydrates?.value ?? 0
+        let protein = totalProtein?.value ?? 0
+        let fat = totalFat?.value ?? 0
+        let calculated = carbohydrates + protein + fat
+        return calculated > 0 ? calculated : nil
+    }
 
     public func topVitamins(count n: Int = 2) -> [DisplayableNutrient] {
         let aggregatedData = Self.aggregatedNutrition(for: self).vitamins

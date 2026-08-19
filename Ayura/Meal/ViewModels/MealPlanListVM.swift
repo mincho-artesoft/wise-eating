@@ -12,28 +12,34 @@ class MealPlanListVM: ObservableObject {
     
     private var allPlans: [MealPlan] = []
     private let profile: Profile?
-    private weak var modelContext: ModelContext?
+    private var combinedContainer: ModelContainer?
+    private var userContext: ModelContext?
 
     init(profile: Profile?) {
         self.profile = profile
     }
 
     func attach(context: ModelContext) {
-        self.modelContext = context
+        combinedContainer = context.container
         fetchPlans()
     }
     
     func fetchPlans() {
-        guard let context = modelContext else { return }
+        guard let combinedContainer,
+              let context = try? CombinedStoreFactory.makeUserWriteContext(
+                from: combinedContainer
+              ) else { return }
+        userContext = context
         
-        let profileID = profile?.persistentModelID
+        let profileID = profile?.id
         let descriptor = FetchDescriptor<MealPlan>(
-            predicate: #Predicate { $0.profile?.persistentModelID == profileID },
             sortBy: [SortDescriptor(\.creationDate, order: .reverse)]
         )
         
         do {
-            allPlans = try context.fetch(descriptor)
+            allPlans = try context.fetch(descriptor).filter {
+                $0.profile?.id == profileID
+            }
             filterPlans()
         } catch {
             print("Failed to fetch meal plans: \(error)")
@@ -50,7 +56,7 @@ class MealPlanListVM: ObservableObject {
     }
     
     func delete(plan: MealPlan, alsoDeleteMenus: Bool) {
-        guard let context = modelContext else { return }
+        guard let context = userContext else { return }
 
         if alsoDeleteMenus {
             // Collect all linked menu IDs from the plan's meals

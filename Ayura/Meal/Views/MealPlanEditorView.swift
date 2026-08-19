@@ -463,6 +463,7 @@ struct MealPlanEditorView: View {
             Spacer()
             
             Button("Save", action: savePlan)
+                .accessibilityIdentifier("meal-plan-save")
                 .disabled(isSaveDisabled)
                 .padding(.horizontal, 10).padding(.vertical, 5)
                 .glassCardStyle(cornerRadius: 20)
@@ -597,6 +598,7 @@ struct MealPlanEditorView: View {
         VStack(spacing: 12) {
             StyledLabeledPicker(label: "Plan Name", isRequired: true) {
                 TextField("", text: $name, prompt: Text("e.g., High-Protein Week").foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.6)))
+                    .accessibilityIdentifier("meal-plan-name")
                     .focused($focusedField, equals: .name)
             }
             .id(FocusableField.name)
@@ -862,24 +864,44 @@ struct MealPlanEditorView: View {
             loadingOperation = .saving
             await Task.yield()
             defer { loadingOperation = .none }
-            
-            let planToSave: MealPlan
-            
-            if let existingPlan = planToEdit {
-                planToSave = existingPlan
-            } else {
-                planToSave = MealPlan(name: name, profile: profile)
-                modelContext.insert(planToSave)
-            }
-            
-            planToSave.name = name
-            planToSave.minAgeMonths = Int(minAgeMonthsTxt) ?? 0
-            
-            await createOrUpdateMenus(for: planToSave)
-            syncDays(of: planToSave, from: self.days)
-            
+
             do {
-                try modelContext.save()
+                let writeContext = try CombinedStoreFactory.makeUserWriteContext(
+                    from: modelContext.container
+                )
+                guard let writeProfile = try CatalogReferenceResolver.userProfile(
+                    id: profile.id,
+                    context: writeContext
+                ) else {
+                    throw CatalogReferenceError.missingUserProfile(profile.id)
+                }
+
+                let planToSave: MealPlan
+                if let planID = planToEdit?.id {
+                    guard let existingPlan = try CatalogReferenceResolver
+                        .userMealPlan(id: planID, context: writeContext) else {
+                        throw CatalogReferenceError.missingUserMealPlan(planID)
+                    }
+                    planToSave = existingPlan
+                } else {
+                    planToSave = MealPlan(name: name, profile: writeProfile)
+                    writeContext.insert(planToSave)
+                }
+
+                planToSave.name = name
+                planToSave.profile = writeProfile
+                planToSave.minAgeMonths = Int(minAgeMonthsTxt) ?? 0
+
+                try createOrUpdateMenus(
+                    for: planToSave,
+                    context: writeContext
+                )
+                try syncDays(
+                    of: planToSave,
+                    from: self.days,
+                    context: writeContext
+                )
+                try writeContext.save()
                 
                 if let pendingID = pendingAIJobIDToDeleteOnSave,
                    let job = aiManager.jobs.first(where: { $0.id == pendingID }) {
@@ -903,63 +925,111 @@ struct MealPlanEditorView: View {
         }
     }
     
-    private func syncDays(of plan: MealPlan, from stateDays: [MealPlanDay]) {
+    private func syncDays(
+        of plan: MealPlan,
+        from stateDays: [MealPlanDay],
+        context: ModelContext
+    ) throws {
         let stateDaysByIndex = Dictionary(grouping: stateDays, by: { $0.dayIndex }).compactMapValues { $0.first }
         
         for day in plan.days where stateDaysByIndex[day.dayIndex] == nil {
-            modelContext.delete(day)
+            context.delete(day)
         }
         
         for (index, stateDay) in stateDaysByIndex {
             if let persistedDay = plan.days.first(where: { $0.dayIndex == index }) {
-                syncMeals(of: persistedDay, from: stateDay)
+                try syncMeals(of: persistedDay, from: stateDay, context: context)
             } else {
                 let newDay = MealPlanDay(dayIndex: index)
                 newDay.plan = plan
-                modelContext.insert(newDay)
-                syncMeals(of: newDay, from: stateDay)
+                context.insert(newDay)
+                try syncMeals(of: newDay, from: stateDay, context: context)
             }
         }
     }
     
-    private func syncMeals(of persistedDay: MealPlanDay, from stateDay: MealPlanDay) {
+    private func syncMeals(
+        of persistedDay: MealPlanDay,
+        from stateDay: MealPlanDay,
+        context: ModelContext
+    ) throws {
         let stateMealsByName = Dictionary(grouping: stateDay.meals, by: { $0.mealName }).compactMapValues { $0.first }
         
         for meal in persistedDay.meals where stateMealsByName[meal.mealName] == nil {
-            modelContext.delete(meal)
+            context.delete(meal)
         }
         
         for (name, stateMeal) in stateMealsByName {
-            let persistedMeal = getOrCreateMeal(for: name, in: persistedDay)
-            persistedMeal.entries.forEach { modelContext.delete($0) }
-            persistedMeal.entries = stateMeal.entries.map { entry in
-                let newEntry = MealPlanEntry(food: entry.food!, grams: entry.grams, meal: persistedMeal)
-                return newEntry
+            let persistedMeal: MealPlanMeal
+            if let existing = persistedDay.meals.first(where: {
+                $0.mealName == name
+            }) {
+                persistedMeal = existing
+            } else {
+                persistedMeal = MealPlanMeal(mealName: name)
+                persistedMeal.day = persistedDay
+                context.insert(persistedMeal)
+                persistedDay.meals.append(persistedMeal)
+            }
+            persistedMeal.entries.forEach { context.delete($0) }
+            persistedMeal.entries = []
+            for entry in stateMeal.entries {
+                guard let sourceFood = entry.food else { continue }
+                let newEntry = try CatalogReferenceResolver.mealPlanEntry(
+                    for: sourceFood,
+                    grams: entry.grams,
+                    meal: persistedMeal,
+                    userContext: context
+                )
+                context.insert(newEntry)
+                persistedMeal.entries.append(newEntry)
             }
             persistedMeal.linkedMenuID = stateMeal.linkedMenuID
         }
     }
     
-    private func createOrUpdateMenus(for plan: MealPlan) async {
+    private func createOrUpdateMenus(
+        for plan: MealPlan,
+        context writeContext: ModelContext
+    ) throws {
         for (dayIndex, day) in sortedDays.enumerated() {
             for meal in day.meals {
                 guard !meal.entries.isEmpty else { continue }
                 let menuName = "\(plan.name) - Day \(dayIndex + 1) - \(meal.mealName)"
                 let menuToUpdate: FoodItem
-                if let existingMenuID = meal.linkedMenuID, let foundMenu = try? modelContext.fetch(FetchDescriptor<FoodItem>(predicate: #Predicate { $0.id == existingMenuID })).first {
+                if let existingMenuID = meal.linkedMenuID,
+                   let foundMenu = try CatalogReferenceResolver.userFood(
+                        id: existingMenuID,
+                        context: writeContext
+                   ) {
                     menuToUpdate = foundMenu
                 } else {
                     menuToUpdate = FoodItem(id: UUID(), name: menuName, isMenu: true, isUserAdded: true)
-                    modelContext.insert(menuToUpdate)
+                    writeContext.insert(menuToUpdate)
                     meal.linkedMenuID = menuToUpdate.id
                 }
                 menuToUpdate.name = menuName
-                menuToUpdate.ingredients?.forEach { modelContext.delete($0) }
-                menuToUpdate.ingredients = meal.entries.map { entry in
-                    IngredientLink(food: entry.food!, grams: entry.grams, owner: menuToUpdate)
+                menuToUpdate.isMenu = true
+                menuToUpdate.isRecipe = false
+                menuToUpdate.isUserAdded = true
+                menuToUpdate.ingredients?.forEach { writeContext.delete($0) }
+                menuToUpdate.ingredients = []
+                for entry in meal.entries {
+                    guard let sourceFood = entry.food else { continue }
+                    let link = try CatalogReferenceResolver.ingredientLink(
+                        for: sourceFood,
+                        grams: entry.grams,
+                        owner: menuToUpdate,
+                        userContext: writeContext
+                    )
+                    writeContext.insert(link)
+                    menuToUpdate.ingredients?.append(link)
                 }
                 
-                SearchIndexStore.shared.updateItem(menuToUpdate, context: modelContext)
+                SearchIndexStore.shared.updateItem(
+                    menuToUpdate,
+                    context: writeContext
+                )
             }
         }
     }

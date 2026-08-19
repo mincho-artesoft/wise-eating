@@ -107,24 +107,22 @@ struct AyurvedaDoshaResultChips: View {
                         effectManager.currentGlobalAccentColor.opacity(0.7)
                     )
             } else {
-                VStack(alignment: .leading, spacing: 5) {
-                    HStack(spacing: 6) {
-                        doshaChip(
-                            "Vata",
-                            value: vata,
-                            profileWeight: profileDistribution?.vata
-                        )
-                        doshaChip(
-                            "Pitta",
-                            value: pitta,
-                            profileWeight: profileDistribution?.pitta
-                        )
-                        doshaChip(
-                            "Kapha",
-                            value: kapha,
-                            profileWeight: profileDistribution?.kapha
-                        )
-                    }
+                CustomFlowLayout(horizontalSpacing: 6, verticalSpacing: 5) {
+                    doshaChip(
+                        "Vata",
+                        value: vata,
+                        profileWeight: profileDistribution?.vata
+                    )
+                    doshaChip(
+                        "Pitta",
+                        value: pitta,
+                        profileWeight: profileDistribution?.pitta
+                    )
+                    doshaChip(
+                        "Kapha",
+                        value: kapha,
+                        profileWeight: profileDistribution?.kapha
+                    )
                 }
             }
         }
@@ -159,6 +157,12 @@ struct AyurvedaDoshaResultChips: View {
 
         return Text("\(name) \(presentation?.signedValue ?? "—")")
             .font(.caption2.weight(.semibold))
+            .lineLimit(1)
+            .minimumScaleFactor(0.75)
+            // The flow layout must measure each capsule at its natural width.
+            // Otherwise HStack-style compression can wrap only "−1" inside
+            // the capsule instead of moving the whole capsule to row two.
+            .fixedSize(horizontal: true, vertical: false)
             .foregroundStyle(color)
             .padding(.horizontal, 8)
             .padding(.vertical, 4)
@@ -170,6 +174,9 @@ struct AyurvedaDoshaResultChips: View {
             .accessibilityLabel(
                 presentation?.accessibilityLabel(dosha: name)
                     ?? "\(name): no Ayurvedic profile"
+            )
+            .accessibilityIdentifier(
+                "ayurveda-dosha-chip-\(name.lowercased())"
             )
     }
 

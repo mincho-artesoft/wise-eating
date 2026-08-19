@@ -3,13 +3,14 @@ import SwiftData
 
 struct StorageEditorView: View {
     let owner: Profile
+    let writeContext: ModelContext
     @Binding var globalSearchText: String
     let onDismiss: (_ shouldDismissGlobalSearch: Bool) -> Void
     @ObservedObject private var effectManager = EffectManager.shared
 
-    @Environment(\.modelContext) private var modelContext
-
     @State private var productsToAdd: [EditableProduct] = []
+    @State private var showSaveError = false
+    @State private var saveErrorMessage = ""
 
     @FocusState private var focusedBatchID: UUID?
     let onShouldDismissGlobalSearch: () -> Void
@@ -29,6 +30,7 @@ struct StorageEditorView: View {
     // --- НАЧАЛО НА ПРОМЯНАТА (2/4): Коригираме init ---
     init(
         owner: Profile,
+        writeContext: ModelContext,
         globalSearchText: Binding<String>,
         onDismiss: @escaping (_ shouldDismissGlobalSearch: Bool) -> Void,
         onShouldDismissGlobalSearch: @escaping () -> Void,
@@ -37,6 +39,7 @@ struct StorageEditorView: View {
         isSearchFieldFocused: FocusState<Bool>.Binding
     ) {
         self.owner = owner
+        self.writeContext = writeContext
         self._globalSearchText = globalSearchText
         self.onDismiss = onDismiss
         self.onShouldDismissGlobalSearch = onShouldDismissGlobalSearch
@@ -166,6 +169,11 @@ struct StorageEditorView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
+        .alert("Unable to Save", isPresented: $showSaveError) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(saveErrorMessage)
+        }
     }
     
     // MARK: - Toolbar
@@ -190,10 +198,12 @@ struct StorageEditorView: View {
             
             HStack {
                 Button("Save") {
-                    saveItemsToContext()
-                    hideKeyboard()
-                    onDismiss(true)
+                    if saveItemsToContext() {
+                        hideKeyboard()
+                        onDismiss(true)
+                    }
                 }
+                .accessibilityIdentifier("storage-save")
                 .disabled(!isFormValid)
             }
             .padding(.horizontal, 10)
@@ -254,57 +264,90 @@ struct StorageEditorView: View {
         }
     }
     
-    private func saveItemsToContext() {
+    @discardableResult
+    private func saveItemsToContext() -> Bool {
         if let focusedID = focusedBatchID {
             formatFocusedBatch(withId: focusedID)
         }
-        
-        let profileToUseForOwnership = owner.hasSeparateStorage ? owner : nil
-        
-        let productsToSave = productsToAdd.filter { !$0.isMarkedForDeletion }
-        
-        for product in productsToSave {
-            let storageItem = findExistingStorageItem(for: product.food, ownerProfile: profileToUseForOwnership) ?? StorageItem(owner: profileToUseForOwnership, food: product.food)
-            
-            if storageItem.owner != profileToUseForOwnership {
-                storageItem.owner = profileToUseForOwnership
-            }
-            if storageItem.modelContext == nil {
-                modelContext.insert(storageItem)
-            }
-            
-            let batchesToSave = product.batches.filter { !$0.isMarkedForDeletion }
-
-            for batch in batchesToSave {
-                let newBatch = Batch(quantity: batch.quantityValue, expirationDate: batch.hasExpiration ? batch.expirationDate : nil)
-                storageItem.batches.append(newBatch)
-                
-                let transaction = StorageTransaction(
-                    date: Date(),
-                    type: .addition,
-                    quantityChange: batch.quantityValue,
-                    profile: profileToUseForOwnership,
-                    food: product.food
-                )
-                modelContext.insert(transaction)
-            }
-        }
-        
         do {
-            try modelContext.save()
+            let profileToUseForOwnership: Profile?
+            if owner.hasSeparateStorage {
+                guard let writeProfile = try CatalogReferenceResolver
+                    .userProfile(id: owner.id, context: writeContext) else {
+                    throw CatalogReferenceError.missingUserProfile(owner.id)
+                }
+                profileToUseForOwnership = writeProfile
+            } else {
+                profileToUseForOwnership = nil
+            }
+
+            let productsToSave = productsToAdd.filter {
+                !$0.isMarkedForDeletion
+            }
+
+            for product in productsToSave {
+                let storageItem: StorageItem
+                if let existing = findExistingStorageItem(
+                    for: product.food,
+                    ownerProfile: profileToUseForOwnership
+                ) {
+                    storageItem = existing
+                } else {
+                    storageItem = try CatalogReferenceResolver.storageItem(
+                        for: product.food,
+                        owner: profileToUseForOwnership,
+                        userContext: writeContext
+                    )
+                    writeContext.insert(storageItem)
+                }
+                storageItem.owner = profileToUseForOwnership
+
+                let batchesToSave = product.batches.filter {
+                    !$0.isMarkedForDeletion
+                }
+                for batch in batchesToSave {
+                    let newBatch = Batch(
+                        quantity: batch.quantityValue,
+                        expirationDate: batch.hasExpiration
+                            ? batch.expirationDate
+                            : nil,
+                        storageItem: storageItem
+                    )
+                    writeContext.insert(newBatch)
+                    storageItem.batches.append(newBatch)
+
+                    let transaction = try CatalogReferenceResolver
+                        .storageTransaction(
+                            for: product.food,
+                            date: Date(),
+                            type: .addition,
+                            quantityChange: batch.quantityValue,
+                            profile: profileToUseForOwnership,
+                            userContext: writeContext
+                        )
+                    writeContext.insert(transaction)
+                }
+            }
+
+            try writeContext.save()
+            return true
         } catch {
-            print("Failed to save stock items: \(error)")
+            saveErrorMessage = error.localizedDescription
+            showSaveError = true
+            print("STORAGE_SAVE_ERROR|\(error)")
+            return false
         }
     }
     
     private func findExistingStorageItem(for food: FoodItem, ownerProfile: Profile?) -> StorageItem? {
-        let foodID = food.persistentModelID
-        let profileID = ownerProfile?.persistentModelID
+        let foodID = food.id
+        let profileID = ownerProfile?.id
         
         let descriptor = FetchDescriptor<StorageItem>(predicate: #Predicate {
-            $0.food?.persistentModelID == foodID && $0.owner?.persistentModelID == profileID
+            ($0.persistedFood?.id == foodID || $0.catalogFoodID == foodID)
+                && $0.owner?.id == profileID
         })
-        return try? modelContext.fetch(descriptor).first
+        return try? writeContext.fetch(descriptor).first
     }
     
     private func formatFocusedBatch(withId id: UUID) {

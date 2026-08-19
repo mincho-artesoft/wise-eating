@@ -10,11 +10,12 @@ struct TransactionHistoryContent: View {
     init(item: StorageItem) {
         self.item = item
         
-        let foodID = item.food?.persistentModelID
+        let foodID = item.food?.id
         let profileID = item.owner?.persistentModelID
         
         let predicate = #Predicate<StorageTransaction> { transaction in
-            transaction.food?.persistentModelID == foodID &&
+            (transaction.persistedFood?.id == foodID
+                || transaction.catalogFoodID == foodID) &&
             transaction.profile?.persistentModelID == profileID
         }
         

@@ -25,6 +25,8 @@ final class ExerciseListVM: ObservableObject {
 
     // MARK: - Private State
     private var context: ModelContext!
+    private var userContext: ModelContext?
+    private var userContainer: ModelContainer?
     private var container: ModelContainer?
     private var cancellables = Set<AnyCancellable>()
     private let pageSize = 30
@@ -40,6 +42,8 @@ final class ExerciseListVM: ObservableObject {
 
     // За да избегнем двойно първоначално reset при .onAppear + Combine sink
     private var didInitialLoad = false
+    private var recentUserWrites: [UUID: ExerciseItem] = [:]
+    private var recentUserWriteContexts: [UUID: ModelContext] = [:]
 
     // MARK: - Init
     init() {
@@ -59,6 +63,43 @@ final class ExerciseListVM: ObservableObject {
         guard self.context !== context else { return }
         self.context = context
         self.container = context.container
+        self.userContext = try? CombinedStoreFactory.makeUserWriteContext(
+            from: context.container
+        )
+        self.userContainer = self.userContext?.container
+        try? CatalogPreferenceStore.shared.load(context: context)
+    }
+
+    /// Publishes the fresh user-store instance after an editor save, avoiding
+    /// stale registered objects in the combined catalogue/user read context.
+    func applyUserStoreWrite(_ item: ExerciseItem) {
+        let displayItem: ExerciseItem
+        if let savedContext = item.modelContext {
+            userContext = savedContext
+            recentUserWriteContexts[item.id] = savedContext
+            displayItem = item
+        } else if let userContainer {
+            let freshContext = ModelContext(userContainer)
+            freshContext.autosaveEnabled = false
+            userContext = freshContext
+            let itemID = item.id
+            var descriptor = FetchDescriptor<ExerciseItem>(
+                predicate: #Predicate { $0.id == itemID }
+            )
+            descriptor.fetchLimit = 1
+            displayItem = (try? freshContext.fetch(descriptor).first) ?? item
+            recentUserWriteContexts[item.id] = freshContext
+        } else {
+            displayItem = item
+        }
+
+        recentUserWrites[displayItem.id] = displayItem
+        items.removeAll { $0.id == displayItem.id }
+        if shouldDisplayUserWrite(displayItem) {
+            items.append(displayItem)
+            items.sort { $0.nameNormalized < $1.nameNormalized }
+        }
+        isLoading = false
     }
 
     // Позволява на View да извика „първи“ load само веднъж
@@ -93,6 +134,21 @@ final class ExerciseListVM: ObservableObject {
         guard let context, !isLoading, searchPhase != .finished else { return }
         isLoading = true
 
+        let readContext: ModelContext
+        switch filter {
+        case .all, .workouts:
+            if let userContainer {
+                let freshContext = ModelContext(userContainer)
+                freshContext.autosaveEnabled = false
+                userContext = freshContext
+                readContext = freshContext
+            } else {
+                readContext = userContext ?? context
+            }
+        case .default, .favorites, .plans:
+            readContext = context
+        }
+
         let parsedQuery = ExerciseAyurvedaSearch.parse(searchText)
         let search = parsedQuery.lexicalQuery
             .trimmingCharacters(in: .whitespacesAndNewlines)
@@ -101,7 +157,7 @@ final class ExerciseListVM: ObservableObject {
 
         if usesAyurvedaRanking {
             loadAyurvedaPage(
-                context: context,
+                context: readContext,
                 search: search,
                 constraints: parsedQuery.constraints
             )
@@ -124,7 +180,7 @@ final class ExerciseListVM: ObservableObject {
                 var descriptor = FetchDescriptor(predicate: predicate, sortBy: [SortDescriptor(\.nameNormalized)])
                 descriptor.fetchOffset = startsOff
                 descriptor.fetchLimit = self.pageSize
-                let page = try context.fetch(descriptor)
+                let page = try readContext.fetch(descriptor)
                 fetchedItems.append(contentsOf: page)
                 newStartsOffset += page.count
                 if page.count < self.pageSize { newPhase = .contains }
@@ -136,7 +192,7 @@ final class ExerciseListVM: ObservableObject {
                 var descriptor = FetchDescriptor(predicate: predicate, sortBy: [SortDescriptor(\.nameNormalized)])
                 descriptor.fetchOffset = containsOff
                 descriptor.fetchLimit = needed
-                let page = try context.fetch(descriptor)
+                let page = try readContext.fetch(descriptor)
                 fetchedItems.append(contentsOf: page)
                 newContainsOffset += page.count
                 if page.count < needed { newPhase = .finished }
@@ -146,6 +202,7 @@ final class ExerciseListVM: ObservableObject {
             let uniqueNew = fetchedItems.filter { seenIDs.insert($0.id).inserted }
 
             self.items.append(contentsOf: uniqueNew)
+            self.reconcileRecentUserWrites()
             self.searchPhase = newPhase
             self.startsWithOffset = newStartsOffset
             self.containsOffset = newContainsOffset
@@ -156,6 +213,43 @@ final class ExerciseListVM: ObservableObject {
         }
 
         self.isLoading = false
+    }
+
+    private func reconcileRecentUserWrites() {
+        guard !ayurvedaFilters.isActive else { return }
+        for item in recentUserWrites.values {
+            items.removeAll { $0.id == item.id }
+            if shouldDisplayUserWrite(item) {
+                items.append(item)
+                seenIDs.insert(item.id)
+            }
+        }
+        items.sort { $0.nameNormalized < $1.nameNormalized }
+    }
+
+    private func shouldDisplayUserWrite(_ item: ExerciseItem) -> Bool {
+        let matchesFilter: Bool
+        switch filter {
+        case .all:
+            matchesFilter = item.isUserAdded && !item.isWorkout
+        case .workouts:
+            matchesFilter = item.isUserAdded && item.isWorkout
+        case .favorites:
+            matchesFilter = item.effectiveIsFavorite
+        case .default, .plans:
+            matchesFilter = false
+        }
+        guard matchesFilter else { return false }
+
+        let query = searchText
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .folding(options: [.diacriticInsensitive, .caseInsensitive], locale: .current)
+        guard !query.isEmpty else { return true }
+        let normalizedName = item.name.folding(
+            options: [.diacriticInsensitive, .caseInsensitive],
+            locale: .current
+        )
+        return normalizedName.contains(query)
     }
 
     private func loadAyurvedaPage(
@@ -217,13 +311,18 @@ final class ExerciseListVM: ObservableObject {
 
     private func makePredicate(for phase: SearchPhase, search: String) -> Predicate<ExerciseItem> {
         let normalizedSearch = search.foldedSearchKey
+        let catalogFavoriteIDs = CatalogPreferenceStore.shared.favoriteIDs(
+            kind: "exercise"
+        )
         
         print("   🔎 makePredicate -> Filter: \(filter.rawValue), Phase: \(phase), Search: '\(search)'")
 
         if search.isEmpty {
             switch filter {
             case .all: return #Predicate<ExerciseItem> { $0.isUserAdded && !$0.isWorkout }
-            case .favorites: return #Predicate<ExerciseItem> { $0.isFavorite }
+            case .favorites: return #Predicate<ExerciseItem> {
+                $0.isFavorite || catalogFavoriteIDs.contains($0.id)
+            }
             case .workouts: return #Predicate<ExerciseItem> { $0.isUserAdded && $0.isWorkout == true }
             case .default: return #Predicate<ExerciseItem> { !$0.isUserAdded }
             case .plans: return #Predicate<ExerciseItem> { _ in false } // Не връщаме нищо, защото се управлява от друг VM
@@ -237,8 +336,8 @@ final class ExerciseListVM: ObservableObject {
                 #Predicate<ExerciseItem> { $0.isUserAdded && !$0.isWorkout && $0.nameNormalized.contains(normalizedSearch) && !$0.nameNormalized.starts(with: normalizedSearch) }
         case .favorites:
             return phase == .startsWith ?
-                #Predicate<ExerciseItem> { $0.isFavorite && $0.nameNormalized.starts(with: normalizedSearch) } :
-                #Predicate<ExerciseItem> { $0.isFavorite && $0.nameNormalized.contains(normalizedSearch) && !$0.nameNormalized.starts(with: normalizedSearch) }
+                #Predicate<ExerciseItem> { ($0.isFavorite || catalogFavoriteIDs.contains($0.id)) && $0.nameNormalized.starts(with: normalizedSearch) } :
+                #Predicate<ExerciseItem> { ($0.isFavorite || catalogFavoriteIDs.contains($0.id)) && $0.nameNormalized.contains(normalizedSearch) && !$0.nameNormalized.starts(with: normalizedSearch) }
         case .workouts:
             return phase == .startsWith ?
                 #Predicate<ExerciseItem> { $0.isUserAdded && $0.isWorkout == true && $0.nameNormalized.starts(with: normalizedSearch) } :
@@ -254,26 +353,37 @@ final class ExerciseListVM: ObservableObject {
 
     // MARK: - CRUD
     func delete(_ item: ExerciseItem) {
-        guard let context, item.isUserAdded else { return }
-        context.delete(item)
-        if let index = items.firstIndex(of: item) {
-            items.remove(at: index)
+        guard let userContext, item.isUserAdded else { return }
+        let itemID = item.id
+
+        do {
+            guard let storedItem = try CatalogReferenceResolver.userExercise(
+                id: itemID,
+                context: userContext
+            ) else {
+                throw CatalogReferenceError.missingUserExercise(itemID)
+            }
+
+            userContext.delete(storedItem)
+            try userContext.save()
+
+            // Update the visible collection only after SQLite accepted the
+            // deletion. This keeps a failed save from looking successful.
+            items.removeAll { $0.id == itemID }
+            recentUserWrites.removeValue(forKey: itemID)
+            recentUserWriteContexts.removeValue(forKey: itemID)
+        } catch {
+            print("❌ Failed to delete exercise '\(item.name)': \(error)")
         }
-        try? context.save()
     }
     
     /// Обновява състоянието в паметта и ако сме във Favorites – прунва нефаворитните.
     func updateItemAndPruneFavorites(notification: Notification) {
         guard let toggledItem = notification.object as? ExerciseItem else { return }
 
-        if let index = items.firstIndex(where: { $0.id == toggledItem.id }) {
-            items[index].isFavorite = toggledItem.isFavorite
-            print("✅ ExerciseListVM: Updated '\(items[index].name)' in-memory state. isFavorite is now \(items[index].isFavorite).")
-        }
-
         if filter == .favorites {
             print("🧼 Pruning favorites list...")
-            items.removeAll { !$0.isFavorite }
+            items.removeAll { !$0.effectiveIsFavorite }
         }
     }
     
@@ -284,7 +394,8 @@ final class ExerciseListVM: ObservableObject {
 
         let descriptor = FetchDescriptor<ExerciseLink>(
             predicate: #Predicate<ExerciseLink> { link in
-                link.exercise?.id == targetID
+                link.persistedExercise?.id == targetID
+                    || link.catalogExerciseID == targetID
             }
         )
 
@@ -299,23 +410,24 @@ final class ExerciseListVM: ObservableObject {
 
     /// Изтрива упражнението, като преди това го маха от всички workouts (ExerciseLink)
     func deleteDetachingFromWorkouts(_ item: ExerciseItem) {
-        guard let context else { return }
+        guard let userContext else { return }
 
         let targetID = item.id
 
         // 1) Намираме всички ExerciseLink, които сочат към това упражнение и ги трием
         let descriptor = FetchDescriptor<ExerciseLink>(
             predicate: #Predicate<ExerciseLink> { link in
-                link.exercise?.id == targetID
+                link.persistedExercise?.id == targetID
+                    || link.catalogExerciseID == targetID
             }
         )
 
         do {
-            let links = try context.fetch(descriptor)
+            let links = try userContext.fetch(descriptor)
             if !links.isEmpty {
                 print("🧹 Removing \(links.count) exercise links for exercise '\(item.name)'")
                 for link in links {
-                    context.delete(link)
+                    userContext.delete(link)
                 }
             }
         } catch {
@@ -339,14 +451,16 @@ final class ExerciseListVM: ObservableObject {
             // 1) Употреба в Workout-и (ExerciseLink.exercise)
             let inWorkoutsDesc = FetchDescriptor<ExerciseLink>(
                 predicate: #Predicate<ExerciseLink> { link in
-                    link.exercise?.id == targetID
+                    link.persistedExercise?.id == targetID
+                        || link.catalogExerciseID == targetID
                 }
             )
 
             // 2) Употреба в TrainingPlanExercise
             let inPlanDesc = FetchDescriptor<TrainingPlanExercise>(
                 predicate: #Predicate<TrainingPlanExercise> { link in
-                    link.exercise?.id == targetID
+                    link.persistedExercise?.id == targetID
+                        || link.catalogExerciseID == targetID
                 }
             )
             
@@ -360,7 +474,7 @@ final class ExerciseListVM: ObservableObject {
     }
 
     func deleteDetachingFromWorkoutsAndPlans(_ item: ExerciseItem) {
-        guard let context else { return }
+        guard let userContext else { return }
 
         let targetID = item.id   // 👈 Тук също
 
@@ -368,20 +482,22 @@ final class ExerciseListVM: ObservableObject {
             // 1) ExerciseLink в workouts
             let workoutLinksDesc = FetchDescriptor<ExerciseLink>(
                 predicate: #Predicate<ExerciseLink> { link in
-                    link.exercise?.id == targetID
+                    link.persistedExercise?.id == targetID
+                        || link.catalogExerciseID == targetID
                 }
             )
-            let workoutLinks = try context.fetch(workoutLinksDesc)
-            workoutLinks.forEach { context.delete($0) }
+            let workoutLinks = try userContext.fetch(workoutLinksDesc)
+            workoutLinks.forEach { userContext.delete($0) }
             
             // 2) TrainingPlanExercise в тренировъчни планове
             let planLinksDesc = FetchDescriptor<TrainingPlanExercise>(
                 predicate: #Predicate<TrainingPlanExercise> { link in
-                    link.exercise?.id == targetID
+                    link.persistedExercise?.id == targetID
+                        || link.catalogExerciseID == targetID
                 }
             )
-            let planLinks = try context.fetch(planLinksDesc)
-            planLinks.forEach { context.delete($0) }
+            let planLinks = try userContext.fetch(planLinksDesc)
+            planLinks.forEach { userContext.delete($0) }
             
         } catch {
             print("❌ Failed to detach exercise from workouts/plans before delete: \(error)")

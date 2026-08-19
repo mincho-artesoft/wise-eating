@@ -5,18 +5,12 @@ import UIKit
 struct FoodItemRowView: View {
     let item: FoodItem
     @ObservedObject private var effectManager = EffectManager.shared
+    @ObservedObject private var catalogPreferences = CatalogPreferenceStore.shared
     @Environment(\.modelContext) private var modelContext
     @State private var ayurvedaDisplay: AyurvedaDisplay?
 
     private var displayWeightG: Double? {
-        if item.isRecipe || item.isMenu { return item.totalWeightG }
-        let stored = item.other?.weightG?.value ?? 0
-        if stored > 0 { return stored }
-        let p = item.totalProtein?.value ?? 0
-        let f = item.totalFat?.value ?? 0
-        let c = item.totalCarbohydrates?.value ?? 0
-        let fallback = p + f + c
-        return fallback > 0 ? fallback : nil
+        item.effectiveDisplayWeightG
     }
 
     private var displayKcal: Double? {
@@ -77,6 +71,7 @@ struct FoodItemRowView: View {
             } else {
                 // Този код се изпълнява само ако item съществува
                 let chartInfo = chartDisplayInformation
+                let isFavorite = item.effectiveIsFavorite
 
                 VStack(alignment: .leading, spacing: 12) {
                     HStack(alignment: .top, spacing: 12) {
@@ -105,14 +100,24 @@ struct FoodItemRowView: View {
                                 Spacer()
 
                                 Button(action: {
-                                    withAnimation(.spring()) {
-                                        item.isFavorite.toggle()
+                                    do {
+                                        try item.setEffectiveFavorite(
+                                            !isFavorite,
+                                            context: modelContext
+                                        )
+                                        SearchIndexStore.shared.updateFavoriteStatus(
+                                            for: item.id,
+                                            isFavorite: !isFavorite
+                                        )
+                                        NotificationCenter.default.post(
+                                            name: .foodFavoriteToggled,
+                                            object: item
+                                        )
+                                    } catch {
+                                        print("❌ Failed to save food favorite: \(error)")
                                     }
-                                    try? modelContext.save()
-                                    SearchIndexStore.shared.updateFavoriteStatus(for: item.id, isFavorite: item.isFavorite)
-                                    NotificationCenter.default.post(name: .foodFavoriteToggled, object: item)
                                 }) {
-                                    Image(systemName: item.isFavorite ? "star.fill" : "star")
+                                    Image(systemName: isFavorite ? "star.fill" : "star")
                                         .foregroundColor(.yellow)
                                         .font(.title3)
                                         .padding(4)
@@ -120,7 +125,7 @@ struct FoodItemRowView: View {
                                 .buttonStyle(.plain)
                                 .contentShape(Rectangle())
                             }
-                            .animation(.spring(), value: item.isFavorite)
+                            .animation(.spring(), value: catalogPreferences.revision)
 
                             if let txt = descriptionOrIngredientsText, !txt.isEmpty {
                                 Text(txt)

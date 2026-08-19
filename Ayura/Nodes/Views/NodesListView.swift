@@ -33,7 +33,11 @@ struct NodesListView: View {
     let profile: Profile
     @State private var currentFilter: NodesFilterType = .all
     
-    @Query var allNodes: [Node]
+    // Nodes are user-owned, so keep their live instances in a user-only
+    // context. A @Query on the combined catalogue/user context can retain a
+    // fault whose persistent identifier belongs to the other store.
+    @State private var allNodes: [Node] = []
+    @State private var userContext: ModelContext?
     
     @State private var presentedNode: PresentedNode? = nil
 
@@ -206,6 +210,8 @@ struct NodesListView: View {
                                                     .symbolRenderingMode(.palette)
                                                     .foregroundStyle(effectManager.currentGlobalAccentColor)
                                             }
+                                            .accessibilityLabel("Delete \(node.textContent ?? "Untitled")")
+                                            .accessibilityIdentifier("Delete \(node.textContent ?? "Untitled")")
                                             .tint(.clear)
                                         }
                                 }
@@ -245,6 +251,7 @@ struct NodesListView: View {
                     addButton(geometry: geometry)
                 }
                 .onAppear(perform: loadButtonPosition)
+                .task { refreshNodes() }
                 .onReceive(timer) { _ in self.currentTimeString = Self.timeFormatter.string(from: Date()) }
                 .task { await checkForUnreadNotifications() }
                 .opacity(presentedNode == nil ? 1 : 0)
@@ -360,6 +367,7 @@ struct NodesListView: View {
             withAnimation(.easeInOut(duration: 0.3)) {
                 self.presentedNode = nil
             }
+            refreshNodes()
         }
 
         switch presented {
@@ -400,7 +408,10 @@ struct NodesListView: View {
                         Circle().fill(Color.orange).frame(width: 12, height: 12).offset(x: 1, y: -1)
                     }
                 }
-            }.buttonStyle(.plain)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("Open profiles")
+            .accessibilityIdentifier("profile-drawer-button")
         }
     }
     
@@ -500,13 +511,12 @@ struct NodesListView: View {
                     if isDragging {
                         buttonOffset = newOffset
                         saveButtonPosition()
-                    } else {
-                        // Тап (без реален drag)
-                        handleButtonTap()
                     }
-                    
-                    isDragging = false
-                    isPressed = false
+
+                    DispatchQueue.main.async {
+                        isDragging = false
+                        isPressed = false
+                    }
                 }
         }
         
@@ -535,11 +545,15 @@ struct NodesListView: View {
         
         let scale = isDragging ? 1.05 : (isPressed ? 0.92 : 1.0)
         
-        return ZStack {
+        return Button {
+            guard !isDragging else { return }
+            handleButtonTap()
+        } label: {
             Image(systemName: "document.badge.plus")
                 .font(.title3)
                 .foregroundColor(effectManager.currentGlobalAccentColor)
         }
+        .buttonStyle(.plain)
         .frame(width: buttonSize, height: buttonSize)
         .glassCardStyle(cornerRadius: radius)
         .scaleEffect(scale)
@@ -547,7 +561,9 @@ struct NodesListView: View {
         .animation(.spring(response: 0.25, dampingFraction: 0.8), value: isDragging)
         .contentShape(Circle())
         .position(x: centerX, y: centerY) // Използваме position вместо offset
-        .gesture(dragGesture(geometry: geometry))
+        .simultaneousGesture(dragGesture(geometry: geometry))
+        .accessibilityIdentifier("node-add-button")
+        .accessibilityLabel("Add Note")
         .transition(.scale.combined(with: .opacity))
     }
     
@@ -572,11 +588,39 @@ struct NodesListView: View {
     }
     
     private func deleteNode(_ node: Node) {
-        withAnimation {
-            modelContext.delete(node)
-            try? modelContext.save()
+        guard let context = userContext else { return }
+        let nodeID = node.id
+
+        do {
+            var descriptor = FetchDescriptor<Node>(
+                predicate: #Predicate { $0.id == nodeID }
+            )
+            descriptor.fetchLimit = 1
+            if let writableNode = try context.fetch(descriptor).first {
+                context.delete(writableNode)
+                try context.save()
+            }
+            withAnimation { refreshNodes() }
+        } catch {
+            print("NODE_DELETE_ERROR|\(error)")
         }
         nodeToDelete = nil
+    }
+
+    private func refreshNodes() {
+        do {
+            let context = try CombinedStoreFactory.makeUserWriteContext(
+                from: modelContext.container
+            )
+            let descriptor = FetchDescriptor<Node>(
+                sortBy: [SortDescriptor(\.date, order: .reverse)]
+            )
+            allNodes = try context.fetch(descriptor)
+            userContext = context
+        } catch {
+            allNodes = []
+            print("NODE_FETCH_ERROR|\(error)")
+        }
     }
     
     private func shouldShowAd(at index: Int) -> Bool {

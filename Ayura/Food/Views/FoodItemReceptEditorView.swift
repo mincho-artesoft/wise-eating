@@ -438,6 +438,7 @@ struct FoodItemReceptEditorView: View {
                     }
                 }
                 .disabled(isSaveDisabled)
+                .accessibilityIdentifier("recipe-editor-save")
             }
             .padding(.horizontal, 10)
             .padding(.vertical, 5)
@@ -544,6 +545,7 @@ struct FoodItemReceptEditorView: View {
                         prompt: Text(prompt)
                             .foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.6))
                     )
+                    .accessibilityIdentifier("recipe-editor-name")
                     .font(.system(size: 16))
                     .focused($focusedField, equals: .name)
                     .disableAutocorrection(true)
@@ -1086,15 +1088,27 @@ struct FoodItemReceptEditorView: View {
         }
     }
 
-    private func saveAyurveda(for recipe: FoodItem) {
+    private func saveAyurveda(
+        for recipe: FoodItem,
+        isNew: Bool,
+        context: ModelContext
+    ) throws {
         if isManualAyurvedaOverride {
-            AyurvedaUserProfileStore.upsert(
-                form: ayurForm,
-                for: recipe,
-                context: ctx
-            )
+            if isNew {
+                try AyurvedaUserProfileStore.insert(
+                    form: ayurForm,
+                    for: recipe,
+                    context: context
+                )
+            } else {
+                try AyurvedaUserProfileStore.upsert(
+                    form: ayurForm,
+                    for: recipe,
+                    context: context
+                )
+            }
         } else {
-            AyurvedaUserProfileStore.remove(foodId: recipe.id, context: ctx)
+            AyurvedaUserProfileStore.remove(foodId: recipe.id, context: context)
         }
     }
     
@@ -1104,54 +1118,80 @@ struct FoodItemReceptEditorView: View {
             isSaving = true
             await Task.yield()
             defer { isSaving = false }
-            let recipe: FoodItem
-            if isAIInit{
-                recipe = food ?? origRecipe ?? {
-                    let r = FoodItem(id: UUID(), name: name, isRecipe: true, isUserAdded: true)
-                    ctx.insert(r)
-                    return r
+            do {
+                let writeContext = try CombinedStoreFactory.makeUserWriteContext(
+                    from: ctx.container
+                )
+                let editableFoodID = food.flatMap {
+                    CatalogReferenceResolver.isCatalog($0) ? nil : $0.id
+                }
+                let editableOriginalID = origRecipe.flatMap {
+                    CatalogReferenceResolver.isCatalog($0) ? nil : $0.id
+                }
+                let reusableID = isAIInit
+                    ? (editableFoodID ?? editableOriginalID)
+                    : editableFoodID
+                let reusableRecipe = try reusableID.flatMap {
+                    try CatalogReferenceResolver.userFood(
+                        id: $0,
+                        context: writeContext
+                    )
+                }
+                let isNewRecipe = reusableRecipe == nil
+                let recipe = reusableRecipe ?? {
+                    let value = FoodItem(
+                        id: UUID(),
+                        name: name,
+                        isRecipe: true,
+                        isUserAdded: true
+                    )
+                    writeContext.insert(value)
+                    return value
                 }()
-            }else{
-                recipe = food ?? {
-                    let r = FoodItem(id: UUID(), name: name, isRecipe: true, isUserAdded: true)
-                    ctx.insert(r)
-                    return r
-                }()
-            }
-            
-            recipe.name  = name
-            recipe.photo = photoData
-            recipe.itemDescription = itemDescription.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty()
-            recipe.prepTimeMinutes = Int(prepTimeTxt)
-            recipe.minAgeMonths    = Int(minAgeMonthsTxt) ?? 0
-            
-            recipe.allergens = idsToEnums(selectedAllergens, of: Allergen.self)
-            recipe.isRecipe     = true
-            recipe.isUserAdded  = true
-            
-            if recipe.gallery == nil { recipe.gallery = [] }
-            recipe.gallery?.removeAll { photo in !galleryData.contains(photo.data) }
-            for data in galleryData {
-                if !(recipe.gallery?.contains(where: { $0.data == data }) ?? false) {
+
+                recipe.name = name
+                recipe.refreshSearchMetadata()
+                recipe.photo = photoData
+                recipe.itemDescription = itemDescription
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                    .nilIfEmpty()
+                recipe.prepTimeMinutes = Int(prepTimeTxt)
+                recipe.minAgeMonths = Int(minAgeMonthsTxt) ?? 0
+                recipe.allergens = idsToEnums(selectedAllergens, of: Allergen.self)
+                recipe.isRecipe = true
+                recipe.isMenu = false
+                recipe.isUserAdded = true
+
+                if recipe.gallery == nil { recipe.gallery = [] }
+                recipe.gallery?.removeAll { !galleryData.contains($0.data) }
+                for data in galleryData where !(recipe.gallery?.contains {
+                    $0.data == data
+                } ?? false) {
                     recipe.gallery?.append(FoodPhoto(data: data))
                 }
-            }
-            
-            if let existingLinks = recipe.ingredients {
-                for link in existingLinks { ctx.delete(link) }
-            }
-            recipe.ingredients = []
-            
-            for (foodItem, grams) in selectedIng where grams > 0 {
-                let newLink = IngredientLink(food: foodItem, grams: grams, owner: recipe)
-                recipe.ingredients?.append(newLink)
-            }
 
-            saveAyurveda(for: recipe)
-            
-            do {
-                try ctx.save()
-                SearchIndexStore.shared.updateItem(recipe, context: ctx)
+                if let existingLinks = recipe.ingredients {
+                    for link in existingLinks { writeContext.delete(link) }
+                }
+                recipe.ingredients = []
+                for (foodItem, grams) in selectedIng where grams > 0 {
+                    let link = try CatalogReferenceResolver.ingredientLink(
+                        for: foodItem,
+                        grams: grams,
+                        owner: recipe,
+                        userContext: writeContext
+                    )
+                    recipe.ingredients?.append(link)
+                }
+
+                try writeContext.save()
+                try saveAyurveda(
+                    for: recipe,
+                    isNew: isNewRecipe,
+                    context: writeContext
+                )
+                if writeContext.hasChanges { try writeContext.save() }
+                SearchIndexStore.shared.updateItem(recipe, context: writeContext)
                 if let pendingID = pendingAIJobIDToDeleteOnSave,
                    let job = aiManager.jobs.first(where: { $0.id == pendingID }) {
                     await aiManager.deleteJob(job)

@@ -28,6 +28,7 @@ struct ShoppingListDetailView: View {
 
     // MARK: - Original Model & Dependencies
     let list: ShoppingListModel
+    let writeContext: ModelContext
     @ObservedObject var viewModel: ShoppingListViewModel
     let isNew: Bool
     @Binding var globalSearchText: String
@@ -47,6 +48,8 @@ struct ShoppingListDetailView: View {
     @State private var hasBeenSaved: Bool = false
     @State private var isShowingDeleteItemConfirmation = false
     @State private var itemToDelete: EditableShoppingListItem? = nil
+    @State private var showSaveError = false
+    @State private var saveErrorMessage = ""
     
     @State private var notificationStatus: UNAuthorizationStatus = .notDetermined
     
@@ -97,6 +100,7 @@ struct ShoppingListDetailView: View {
     // MARK: - Initializer
     init(
             list: ShoppingListModel,
+            writeContext: ModelContext,
             viewModel: ShoppingListViewModel,
             isNew: Bool = false,
             globalSearchText: Binding<String>,
@@ -108,6 +112,7 @@ struct ShoppingListDetailView: View {
             navBarIsHiden: Binding<Bool>
         ) {
             self.list = list
+            self.writeContext = writeContext
             self.viewModel = viewModel
             self.isNew = isNew
             self._globalSearchText = globalSearchText
@@ -282,11 +287,6 @@ struct ShoppingListDetailView: View {
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
             checkNotificationStatus()
         }
-        .onDisappear {
-            if !hasBeenSaved {
-                if isNew { modelContext.delete(list) }
-            }
-        }
         .onChange(of: lastPricesData) { _, _ in
             reloadLastPricesFromAppStorage()
         }
@@ -298,6 +298,11 @@ struct ShoppingListDetailView: View {
             Button("Cancel", role: .cancel) { itemToDelete = nil }
         } message: {
             Text("Are you sure you want to delete '\(itemToDelete?.name ?? "this item")' from the list? This action cannot be undone.")
+        }
+        .alert("Unable to Save", isPresented: $showSaveError) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(saveErrorMessage)
         }
     }
     
@@ -407,6 +412,7 @@ struct ShoppingListDetailView: View {
                 Divider().frame(height: 20).padding(.horizontal, 4)
                 
                 Button("Save", action: saveChanges)
+                    .accessibilityIdentifier("shopping-list-save")
                     .disabled(isSaveDisabled)
                     .foregroundStyle(isSaveDisabled ? effectManager.currentGlobalAccentColor.opacity(0.4) : effectManager.currentGlobalAccentColor)
                     .padding(.trailing, 10).padding(.leading, 2).padding(.vertical, 5)
@@ -420,6 +426,7 @@ struct ShoppingListDetailView: View {
         Section {
             VStack(spacing: 12) {
                 TextField("", text: $editableName, prompt: Text("Friday market").foregroundColor(effectManager.currentGlobalAccentColor.opacity(0.6)))
+                    .accessibilityIdentifier("shopping-list-name")
                     .focused($focusedField, equals: .listName)
                     .font(.system(size: 16))
                     .onSubmit { focusedField = nil
@@ -652,32 +659,78 @@ struct ShoppingListDetailView: View {
 
     private func saveChanges() {
         hideKeyboard()
-        
-        list.name = editableName
-        list.eventStartDate = editableStartDate
-        list.reminderMinutes = editableReminderOffset == 0 ? nil : editableReminderOffset
-        list.isCompleted = areAllItemsBought
+        do {
+            list.name = editableName
+            list.eventStartDate = editableStartDate
+            list.reminderMinutes = editableReminderOffset == 0
+                ? nil
+                : editableReminderOffset
+            list.isCompleted = areAllItemsBought
 
-        let editableItemOriginalIDs = Set(editableItems.compactMap { $0.originalID })
-        list.items.removeAll { item in !editableItemOriginalIDs.contains(item.id) }
-        
-        for editableItem in editableItems {
-            if let originalID = editableItem.originalID, let existingItem = list.items.first(where: { $0.id == originalID }) {
-                existingItem.quantity = editableItem.quantity
-                existingItem.price = editableItem.price
-                existingItem.isBought = editableItem.isBought
-            } else {
-                let newItem = ShoppingListItem(name: editableItem.name, quantity: editableItem.quantity, price: editableItem.price, isBought: editableItem.isBought, foodItem: editableItem.foodItem)
-                list.items.append(newItem)
+            if isNew && !hasBeenSaved && list.modelContext == nil {
+                writeContext.insert(list)
             }
-        }
-        
-        if isNew && !hasBeenSaved {
-            modelContext.insert(list)
+
+            let editableItemOriginalIDs = Set(
+                editableItems.compactMap { $0.originalID }
+            )
+            let removedItems = list.items.filter {
+                !editableItemOriginalIDs.contains($0.id)
+            }
+            for removedItem in removedItems {
+                writeContext.delete(removedItem)
+            }
+            list.items.removeAll {
+                !editableItemOriginalIDs.contains($0.id)
+            }
+
+            for editableItem in editableItems {
+                if let originalID = editableItem.originalID,
+                   let existingItem = list.items.first(where: {
+                       $0.id == originalID
+                   }) {
+                    existingItem.quantity = editableItem.quantity
+                    existingItem.price = editableItem.price
+                    existingItem.isBought = editableItem.isBought
+                } else {
+                    let newItem = try CatalogReferenceResolver.shoppingListItem(
+                        for: editableItem.foodItem,
+                        name: editableItem.name,
+                        quantity: editableItem.quantity,
+                        price: editableItem.price,
+                        isBought: editableItem.isBought,
+                        list: list,
+                        userContext: writeContext
+                    )
+                    writeContext.insert(newItem)
+                    list.items.append(newItem)
+                }
+            }
+
+            try viewModel.processCompletedItems(
+                for: list,
+                initiallyBoughtIDs: initiallyBoughtItemIDs
+            )
+            if writeContext.hasChanges {
+                try writeContext.save()
+            }
+        } catch {
+            saveErrorMessage = error.localizedDescription
+            showSaveError = true
+            print("SHOPPING_LIST_SAVE_ERROR|\(error)")
+            return
         }
 
-        do { try viewModel.processCompletedItems(for: list, initiallyBoughtIDs: initiallyBoughtItemIDs) }
-        catch { print("Error processing completed items: \(error)") }
+        hasBeenSaved = true
+        initiallyBoughtItemIDs = Set(
+            list.items.filter { $0.isBought }.map { $0.id }
+        )
+        viewModel.fetchAllData()
+        do {
+            lastPricesData = try JSONEncoder().encode(lastPrices)
+        } catch {
+            print("Failed to encode prices: \(error)")
+        }
 
         Task { @MainActor in
             if let oldID = list.notificationID { NotificationManager.shared.cancelNotification(id: oldID); list.notificationID = nil }
@@ -696,29 +749,27 @@ struct ShoppingListDetailView: View {
                     } catch { print("Error scheduling notification: \(error)") }
                 }
             }
-            list.calendarEventID = await CalendarViewModel.shared.createOrUpdateShoppingListEvent(for: list, context: modelContext)
-            if modelContext.hasChanges { try? modelContext.save() }
+            list.calendarEventID = await CalendarViewModel.shared.createOrUpdateShoppingListEvent(for: list, context: writeContext)
+            do {
+                if writeContext.hasChanges { try writeContext.save() }
+            } catch {
+                print("SHOPPING_LIST_CALENDAR_ID_SAVE_ERROR|\(error)")
+            }
         }
-
-        do {
-            if modelContext.hasChanges { try? modelContext.save() }
-            hasBeenSaved = true
-            initiallyBoughtItemIDs = Set(list.items.filter { $0.isBought }.map { $0.id })
-            viewModel.fetchAllData()
-            
-            do { lastPricesData = try JSONEncoder().encode(lastPrices) } catch { print("Failed to encode prices: \(error)") }
-            onDismiss()
-        } catch { print("Final save error: \(error)") }
+        onDismiss()
     }
 
     private func cancelChanges() {
         hideKeyboard()
-        if isNew && !hasBeenSaved { modelContext.delete(list) }
+        if isNew && !hasBeenSaved {
+            viewModel.discardDraft(list)
+            hasBeenSaved = true
+        }
         onDismiss()
     }
     
     private func hideKeyboard() { focusedField = nil; UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil) }
-    private func dismissSuggestion(food: FoodItem) { withAnimation { list.addDismissedSuggestion(foodID: food.id, context: modelContext); viewModel.fetchAllData() } }
+    private func dismissSuggestion(food: FoodItem) { withAnimation { list.addDismissedSuggestion(foodID: food.id, context: writeContext); viewModel.fetchAllData() } }
     private func deleteItem(_ item: EditableShoppingListItem) { withAnimation { editableItems.removeAll { $0.id == item.id } } }
     private func toggleAllItemsBought() {
         let actionIsMarkAll = !areAllItemsBought

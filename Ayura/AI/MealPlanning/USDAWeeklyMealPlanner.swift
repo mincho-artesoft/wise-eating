@@ -1821,10 +1821,20 @@ public final class USDAWeeklyMealPlanner: Sendable {
         }
     }
     
+    @MainActor
     public func savePlan(from preview: MealPlanPreview, for profileID: PersistentIdentifier, onLog: (@Sendable (String) -> Void)?) async throws -> MealPlan {
-        let ctx = ModelContext(self.container)
-        guard let profile = ctx.model(for: profileID) as? Profile else {
+        let readContext = ModelContext(self.container)
+        guard let readProfile = readContext.model(for: profileID) as? Profile else {
             throw NSError(domain: "MealPlannerError", code: 1, userInfo: [NSLocalizedDescriptionKey: "Profile not found."])
+        }
+        let writeContext = try CombinedStoreFactory.makeUserWriteContext(
+            from: container
+        )
+        guard let profile = try CatalogReferenceResolver.userProfile(
+            id: readProfile.id,
+            context: writeContext
+        ) else {
+            throw CatalogReferenceError.missingUserProfile(readProfile.id)
         }
         let newPlan = MealPlan(name: "AI Plan \(Date().formatted(date: .numeric, time: .omitted))", profile: profile)
         var planDays: [MealPlanDay] = []
@@ -1842,20 +1852,30 @@ public final class USDAWeeklyMealPlanner: Sendable {
                     let descriptor = FetchDescriptor<FoodItem>(predicate: #Predicate<FoodItem> { item in
                         item.name == itemName && !item.isUserAdded
                     })
-                    if let foodItem = (try? ctx.fetch(descriptor))?.first {
-                        let newEntry = MealPlanEntry(food: foodItem, grams: previewItem.grams, meal: meal)
+                    if let foodItem = (try? readContext.fetch(descriptor))?.first {
+                        let newEntry = try CatalogReferenceResolver.mealPlanEntry(
+                            for: foodItem,
+                            grams: previewItem.grams,
+                            meal: meal,
+                            userContext: writeContext
+                        )
+                        writeContext.insert(newEntry)
                         entries.append(newEntry)
                     }
                 }
                 meal.entries = entries
+                meal.day = day
+                writeContext.insert(meal)
                 planMeals.append(meal)
             }
             day.meals = planMeals
+            day.plan = newPlan
+            writeContext.insert(day)
             planDays.append(day)
         }
         newPlan.days = planDays
-        ctx.insert(newPlan)
-        try ctx.save()
+        writeContext.insert(newPlan)
+        try writeContext.save()
         onLog?("✅ Successfully saved MealPlan from preview.")
         return newPlan
     }

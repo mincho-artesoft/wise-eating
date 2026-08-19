@@ -9,6 +9,8 @@ struct NutritionsDetailView: View {
     @State private var isShowingDeleteNodeConfirmation = false
     @State private var nodeToDelete: Node? = nil
     @State private var nodesForDay: [Node] = []
+    @State private var nodeUserContext: ModelContext?
+    @State private var recentlyAddedUserContext: ModelContext?
     @State private var presentedNode: PresentedNode? = nil
     @State private var expandedFoodItemID: FoodItem.ID? = nil
     // --- AI Floating Button: State ---
@@ -168,7 +170,7 @@ struct NutritionsDetailView: View {
         self._chosenDate = chosenDate
         self._selectedMealID = selectedMealID
         self._mealNameToPreselect = State(initialValue: preselectMealName)
-        
+
         let mealsToday = profile.meals(for: chosenDate.wrappedValue)
         self._dailyMeals = State(initialValue: mealsToday)
     }
@@ -187,9 +189,9 @@ struct NutritionsDetailView: View {
     private func calculateWaterGoal(for profile: Profile) -> Int {
         let weight = profile.weight
         let age = profile.age
-        
+
         let mlPerKg: Double
-        
+
         switch age {
         case 0...15:
             mlPerKg = 40.0
@@ -661,15 +663,22 @@ struct NutritionsDetailView: View {
             return
         }
         
-        let profileID = profile.persistentModelID
+        let profileID = profile.id
         let predicate = #Predicate<Node> { node in
-            node.profile?.persistentModelID == profileID &&
+            node.profile?.id == profileID &&
             node.date >= startOfDay &&
             node.date < endOfDay
         }
         let descriptor = FetchDescriptor<Node>(predicate: predicate, sortBy: [SortDescriptor(\.date, order: .reverse)])
-        
-        if let nodes = try? ctx.fetch(descriptor) {
+
+        guard let userContext = try? CombinedStoreFactory.makeUserWriteContext(
+            from: ctx.container
+        ) else {
+            nodesForDay = []
+            return
+        }
+        nodeUserContext = userContext
+        if let nodes = try? userContext.fetch(descriptor) {
             self.nodesForDay = nodes
         }
     }
@@ -865,11 +874,22 @@ struct NutritionsDetailView: View {
     }
     
     private func delete(node: Node) {
-        withAnimation {
-            nodesForDay.removeAll { $0.id == node.id }
-            ctx.delete(node)
-            // Запазваме промените в базата данни
-            try? ctx.save()
+        guard let userContext = nodeUserContext else { return }
+        let nodeID = node.id
+        do {
+            var descriptor = FetchDescriptor<Node>(
+                predicate: #Predicate { $0.id == nodeID }
+            )
+            descriptor.fetchLimit = 1
+            if let writableNode = try userContext.fetch(descriptor).first {
+                userContext.delete(writableNode)
+                try userContext.save()
+            }
+            withAnimation {
+                nodesForDay.removeAll { $0.id == nodeID }
+            }
+        } catch {
+            print("NUTRITION_NODE_DELETE_ERROR|\(error)")
         }
     }
     
@@ -1167,6 +1187,8 @@ struct NutritionsDetailView: View {
                                             .symbolRenderingMode(.palette)
                                             .foregroundStyle(effectManager.currentGlobalAccentColor)
                                     }
+                                    .accessibilityLabel("Delete meal food \(item.name)")
+                                    .accessibilityIdentifier("Delete meal food \(item.name)")
                                     .tint(.clear)
                                 }
 
@@ -2043,70 +2065,113 @@ struct NutritionsDetailView: View {
         let foodID = food.id
         
         do {
+            // RecentlyAddedFood is user-owned.  Passing a FoodItem loaded by
+            // the combined catalogue/user context directly to an insert can
+            // make SwiftData try to resolve that object through the
+            // single-store coordinator (or vice versa).  Refetch every
+            // relationship in the explicit user context before writing.
+            let writeContext: ModelContext
+            if let recentlyAddedUserContext {
+                writeContext = recentlyAddedUserContext
+            } else {
+                let newContext = try CombinedStoreFactory.makeUserWriteContext(
+                    from: ctx.container
+                )
+                recentlyAddedUserContext = newContext
+                writeContext = newContext
+            }
+
+            let writableFood = try CatalogReferenceResolver.foodForUserWrite(
+                food,
+                userContext: writeContext
+            )
+            let writableProfile: Profile?
+            if profile.hasSeparateStorage {
+                guard let resolvedProfile = try CatalogReferenceResolver.userProfile(
+                    id: profile.id,
+                    context: writeContext
+                ) else {
+                    throw CatalogReferenceError.missingUserProfile(profile.id)
+                }
+                writableProfile = resolvedProfile
+            } else {
+                writableProfile = nil
+            }
+
             let predicate: Predicate<RecentlyAddedFood>
             
-            if let profileToLogFor = profile.hasSeparateStorage ? profile : nil {
-                let profileID = profileToLogFor.persistentModelID
+            if let writableProfile {
+                let profileID = writableProfile.persistentModelID
                 predicate = #Predicate<RecentlyAddedFood> {
-                    $0.food?.id == foodID && $0.profile?.persistentModelID == profileID
+                    ($0.persistedFood?.id == foodID
+                        || $0.catalogFoodID == foodID)
+                        && $0.profile?.persistentModelID == profileID
                 }
             } else {
                 predicate = #Predicate<RecentlyAddedFood> {
-                    $0.food?.id == foodID && $0.profile == nil
+                    ($0.persistedFood?.id == foodID
+                        || $0.catalogFoodID == foodID)
+                        && $0.profile == nil
                 }
             }
             
             let descriptor = FetchDescriptor(predicate: predicate)
-            let existing = try ctx.fetch(descriptor).first
+            let existing = try writeContext.fetch(descriptor).first
             
             if let existingEntry = existing {
                 existingEntry.dateAdded = Date()
             } else {
-                let profileOwner = profile.hasSeparateStorage ? profile : nil
-                let newRecentEntry = RecentlyAddedFood(dateAdded: Date(), food: food, profile: profileOwner)
-                ctx.insert(newRecentEntry)
+                let newRecentEntry = RecentlyAddedFood(
+                    dateAdded: Date(),
+                    food: writableFood,
+                    profile: writableProfile
+                )
+                writeContext.insert(newRecentEntry)
             }
             
-            cleanupRecentItems()
+            try cleanupRecentItems(
+                in: writeContext,
+                profile: writableProfile
+            )
+
+            if writeContext.hasChanges {
+                try writeContext.save()
+            }
             
         } catch {
             print("Error fetching or updating recent food item: \(error)")
         }
     }
     
-    private func cleanupRecentItems() {
-        do {
-            let predicate: Predicate<RecentlyAddedFood>
-            
-            if let profileToCleanFor = profile.hasSeparateStorage ? profile : nil {
-                let profileID = profileToCleanFor.persistentModelID
-                predicate = #Predicate<RecentlyAddedFood> {
-                    $0.profile?.persistentModelID == profileID
-                }
-            } else {
-                predicate = #Predicate<RecentlyAddedFood> {
-                    $0.profile == nil
-                }
+    private func cleanupRecentItems(
+        in writeContext: ModelContext,
+        profile writableProfile: Profile?
+    ) throws {
+        let predicate: Predicate<RecentlyAddedFood>
+
+        if let writableProfile {
+            let profileID = writableProfile.persistentModelID
+            predicate = #Predicate<RecentlyAddedFood> {
+                $0.profile?.persistentModelID == profileID
             }
-            
-            let descriptor = FetchDescriptor(
-                predicate: predicate,
-                sortBy: [SortDescriptor(\.dateAdded, order: .forward)]
-            )
-            let allItemsForOwner = try ctx.fetch(descriptor)
-            
-            if allItemsForOwner.count > maxRecentItems {
-                let itemsToDeleteCount = allItemsForOwner.count - maxRecentItems
-                let itemsToDelete = allItemsForOwner.prefix(itemsToDeleteCount)
-                for item in itemsToDelete {
-                    ctx.delete(item)
-                }
+        } else {
+            predicate = #Predicate<RecentlyAddedFood> {
+                $0.profile == nil
             }
-            if ctx.hasChanges {
-                try ctx.save()
+        }
+
+        let descriptor = FetchDescriptor(
+            predicate: predicate,
+            sortBy: [SortDescriptor(\.dateAdded, order: .forward)]
+        )
+        let allItemsForOwner = try writeContext.fetch(descriptor)
+
+        if allItemsForOwner.count > maxRecentItems {
+            let itemsToDeleteCount = allItemsForOwner.count - maxRecentItems
+            let itemsToDelete = allItemsForOwner.prefix(itemsToDeleteCount)
+            for item in itemsToDelete {
+                writeContext.delete(item)
             }
-        } catch {
-            print("Failed to cleanup recent items: \(error)")
         }
     }
     
@@ -2218,7 +2283,8 @@ struct NutritionsDetailView: View {
         let ownerID: PersistentIdentifier? = profile.hasSeparateStorage ? profile.persistentModelID : nil
         
         let predicate = #Predicate<StorageItem> {
-            $0.food?.id == foodID && $0.owner?.persistentModelID == ownerID
+            ($0.persistedFood?.id == foodID || $0.catalogFoodID == foodID)
+                && $0.owner?.persistentModelID == ownerID
         }
         let descriptor = FetchDescriptor(predicate: predicate)
         return try? ctx.fetch(descriptor).first
@@ -2230,7 +2296,7 @@ struct NutritionsDetailView: View {
         let profileID = actingProfile?.persistentModelID
         
         let predicate = #Predicate<MealLogStorageLink> {
-            $0.food?.id == foodID &&
+            ($0.persistedFood?.id == foodID || $0.catalogFoodID == foodID) &&
             $0.mealID == mealID &&
             $0.profile?.persistentModelID == profileID &&
             $0.date == dateStart

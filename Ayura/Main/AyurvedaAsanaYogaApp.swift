@@ -15,6 +15,18 @@ struct AyurvedaAsanaYogaApp: App {
         #endif
     }
 
+    private static var isCatalogSeparationSmokeTest: Bool {
+        #if DEBUG
+        ProcessInfo.processInfo.arguments.contains("-catalogSeparationSmokeTest")
+        #else
+        false
+        #endif
+    }
+
+    private static var isIsolatedSmokeTest: Bool {
+        isAIGenerationSmokeTest || isCatalogSeparationSmokeTest
+    }
+
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     @Environment(\.scenePhase) private var scenePhase
     @ObservedObject private var subscriptionManager = SubscriptionManager.shared
@@ -29,11 +41,16 @@ struct AyurvedaAsanaYogaApp: App {
     init() {
             // --- Common Logic ---
             GlobalState.modelContext = container.mainContext
+            do {
+                try CatalogPreferenceStore.shared.load(context: container.mainContext)
+            } catch {
+                print("⚠️ Could not load catalogue preferences: \(error)")
+            }
             
             Task { @MainActor in GlobalState.updateAIAvailability() }
             UNUserNotificationCenter.current().delegate = notificationDelegate
-            if Self.isAIGenerationSmokeTest {
-                print("AI_SMOKE|APP|isolated-launch-mode")
+            if Self.isIsolatedSmokeTest {
+                print("SMOKE_TEST|APP|isolated-launch-mode")
                 return
             }
             AIManager.shared.setup(container: container)
@@ -73,7 +90,7 @@ struct AyurvedaAsanaYogaApp: App {
             RootLauncher(container: container)
                 .preferredColorScheme(effectManager.appColorScheme)
                 .onChange(of: scenePhase) { _, newPhase in
-                    guard !Self.isAIGenerationSmokeTest else { return }
+                    guard !Self.isIsolatedSmokeTest else { return }
                     // ... (старата логика за scenePhase остава същата) ...
                     switch newPhase {
                     case .active:

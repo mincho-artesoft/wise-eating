@@ -5,9 +5,13 @@ enum PreseedLoader {
 
     /// Prepare the pre-seeded SwiftData store by combining split gzip parts (if present),
     /// then gunzipping to a temporary `.store` file and copying it to `storeURL`.
-    static func preparePreseededStore(to storeURL: URL) throws {
+    static func preparePreseededStore(
+        to storeURL: URL,
+        bundle: Bundle = .main,
+        temporaryDirectory: URL? = nil
+    ) throws {
         let fm = FileManager.default
-        let tmpDir = fm.temporaryDirectory
+        let tmpDir = temporaryDirectory ?? fm.temporaryDirectory
 
         // 1) Prefer a complete 3-part split, then the compact 2-part form.
         let supportedPartSuffixes = [
@@ -16,7 +20,7 @@ enum PreseedLoader {
         ]
         let partURLs: [URL] = supportedPartSuffixes.lazy.compactMap { suffixes in
             let urls = suffixes.compactMap { suffix in
-                Bundle.main.url(
+                bundle.url(
                     forResource: "preseeded_db.store.gz",
                     withExtension: "part-\(suffix)"
                 )
@@ -53,19 +57,21 @@ enum PreseedLoader {
 
         // 2) Fallback to a single .gz in bundle
         if gzURL == nil {
-            gzURL = Bundle.main.url(forResource: "preseeded_db", withExtension: "store.gz")
+            gzURL = bundle.url(forResource: "preseeded_db", withExtension: "store.gz")
         }
 
         // 3) Fallback to a plain .store in bundle (legacy path)
-        let plainStoreURL = Bundle.main.url(forResource: "preseeded_db", withExtension: "store")
+        let plainStoreURL = bundle.url(
+            forResource: "preseeded_db",
+            withExtension: "store"
+        )
 
         if let gzURL {
-            // Decompress the gzip file using existing ZlibGzip utility.
-            let gzData = try Data(contentsOf: gzURL, options: .mappedIfSafe)
-            let decompressed = try ZlibGzip.decompress(data: gzData)
+            // Stream to disk so catalogue updates do not hold the compressed
+            // archive and the full SQLite store in memory at the same time.
             let tmpStore = tmpDir.appendingPathComponent("preseeded_db.store")
             try? fm.removeItem(at: tmpStore)
-            try decompressed.write(to: tmpStore, options: .atomic)
+            try ZlibGzip.decompressFile(from: gzURL, to: tmpStore)
 
             // Ensure destination directory exists
             try fm.createDirectory(at: storeURL.deletingLastPathComponent(), withIntermediateDirectories: true)

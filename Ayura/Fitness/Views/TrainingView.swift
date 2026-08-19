@@ -7,6 +7,7 @@ struct TrainingView: View {
     @State private var exerciseItemToView: ExerciseItem? = nil
     @State private var nodeToDelete: Node? = nil
     @State private var nodesForDay: [Node] = []
+    @State private var nodeUserContext: ModelContext?
     @State private var presentedNode: PresentedNode? = nil
     @Query private var userSettingsArray: [UserSettings]   // 👈 ДОБАВИ ТОВА
     private var isAIButtonEnabledGlobally: Bool {
@@ -630,6 +631,8 @@ struct TrainingView: View {
                                             .symbolRenderingMode(.palette)
                                             .foregroundStyle(effectManager.currentGlobalAccentColor)
                                     }
+                                    .accessibilityLabel("Delete training exercise \(exercise.name)")
+                                    .accessibilityIdentifier("Delete training exercise \(exercise.name)")
                                     .tint(.clear)
                                 }
                             }
@@ -1923,13 +1926,13 @@ struct TrainingView: View {
                                                 size: 44,
                                                 cornerRadius: 10
                                             )
-                                            if item.isFavorite {
+                                            if item.effectiveIsFavorite {
                                                 Image(systemName: "star.fill")
                                                     .foregroundColor(.yellow)
                                                     .font(.caption)
                                             }
                                             if item.isWorkout {
-                                                Image(systemName: "figure.strengthtraining.traditional")
+                                                Image(systemName: ExerciseIconography.workoutSystemName)
                                                     .foregroundColor(.orange)
                                                     .font(.caption)
                                             }
@@ -2059,7 +2062,7 @@ struct TrainingView: View {
                     }
                 }) {
                     HStack(spacing: 6) {
-                        Image(systemName: "figure.yoga")
+                        Image(systemName: ExerciseIconography.workoutSystemName)
                             .imageScale(.medium)
                             .font(.system(size: 13, weight: .semibold))
                         if exerciseSearchVM.workoutFilterMode == .onlyWorkouts {
@@ -2266,15 +2269,22 @@ struct TrainingView: View {
             return
         }
         
-        let profileID = profile.persistentModelID
+        let profileID = profile.id
         let predicate = #Predicate<Node> { node in
-            node.profile?.persistentModelID == profileID &&
+            node.profile?.id == profileID &&
             node.date >= startOfDay &&
             node.date < endOfDay
         }
         let descriptor = FetchDescriptor<Node>(predicate: predicate, sortBy: [SortDescriptor(\.date, order: .reverse)])
-        
-        if let nodes = try? ctx.fetch(descriptor) {
+
+        guard let userContext = try? CombinedStoreFactory.makeUserWriteContext(
+            from: ctx.container
+        ) else {
+            nodesForDay = []
+            return
+        }
+        nodeUserContext = userContext
+        if let nodes = try? userContext.fetch(descriptor) {
             self.nodesForDay = nodes
         }
     }
@@ -2369,10 +2379,22 @@ struct TrainingView: View {
     }
     
     private func delete(node: Node) {
-        withAnimation {
-            nodesForDay.removeAll { $0.id == node.id }
-            ctx.delete(node)
-            try? ctx.save()
+        guard let userContext = nodeUserContext else { return }
+        let nodeID = node.id
+        do {
+            var descriptor = FetchDescriptor<Node>(
+                predicate: #Predicate { $0.id == nodeID }
+            )
+            descriptor.fetchLimit = 1
+            if let writableNode = try userContext.fetch(descriptor).first {
+                userContext.delete(writableNode)
+                try userContext.save()
+            }
+            withAnimation {
+                nodesForDay.removeAll { $0.id == nodeID }
+            }
+        } catch {
+            print("TRAINING_NODE_DELETE_ERROR|\(error)")
         }
     }
     

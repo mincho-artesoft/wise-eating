@@ -1097,15 +1097,21 @@ final class AIManager: ObservableObject {
         }
         
         await foodToUpdate.update(from: dto)
+        // Persist the food graph before touching the shared Ayurveda entity.
+        // This prevents a failed cross-store Ayurveda lookup from rolling the
+        // otherwise valid food update into the read-only catalogue store.
+        try context.save()
         if let generatedAyurveda = dto.ayurveda {
-            AyurvedaUserProfileStore.upsert(
+            try AyurvedaUserProfileStore.upsert(
                 generated: generatedAyurveda,
                 editorForm: generatedAyurveda.editorForm,
                 for: foodToUpdate,
                 context: context
             )
         }
-        try context.save()
+        if context.hasChanges {
+            try context.save()
+        }
         
         return Data()
     }

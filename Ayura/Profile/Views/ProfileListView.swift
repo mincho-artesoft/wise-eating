@@ -191,6 +191,8 @@ struct ProfileListView: View {
                 }
                 .disabled(isAddProfileButtonDisabled)
                 .opacity(isAddProfileButtonDisabled ? 0.4 : 1.0)
+                .accessibilityLabel("Add profile")
+                .accessibilityIdentifier("profile-add-button")
 
                 Divider().frame(height: 25)
                     .foregroundStyle(effectManager.currentGlobalAccentColor)
@@ -400,6 +402,7 @@ struct ProfileListView: View {
         .opacity(isLocked ? 0.4 : 1.0)
         .contentShape(Rectangle())
         .glassCardStyle(cornerRadius: 15)
+        .accessibilityIdentifier("profile-row-\(profile.name)")
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             Button(role: .destructive) {
                 if #available(iOS 26.0, *) {
@@ -414,6 +417,7 @@ struct ProfileListView: View {
                     .foregroundStyle(effectManager.currentGlobalAccentColor)
             }
             .tint(.clear)
+            .accessibilityLabel("Delete \(profile.name)")
             
             Button {
                 withAnimation {
@@ -426,6 +430,7 @@ struct ProfileListView: View {
             }
             .tint(.clear)
             .disabled(isLocked)
+            .accessibilityLabel("Edit \(profile.name)")
         }
     }
 
@@ -450,7 +455,6 @@ struct ProfileListView: View {
     private func performDeletion(for profile: Profile) {
         let profileIDToDelete = profile.id
         let calendarIDToDelete = profile.calendarID
-        AyurvedaConstitutionStore.delete(profileID: profileIDToDelete)
 
         CalendarViewModel.shared.markProfileAsDeleted(
             profileUUID: profileIDToDelete,
@@ -465,37 +469,43 @@ struct ProfileListView: View {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             Task { @MainActor in
-                let jobsForProfile = AIManager.shared.jobs.filter { $0.profile?.id == profileIDToDelete }
-
-                if !jobsForProfile.isEmpty {
-                    print("🧠 Profile deletion: Found \(jobsForProfile.count) AI job(s) for profile \(profileIDToDelete). Deleting...")
-                    for job in jobsForProfile {
-                        await AIManager.shared.deleteJob(job)
-                    }
-                } else {
-                    print("🧠 Profile deletion: No AI jobs found for profile \(profileIDToDelete).")
-                }
-
                 await CalendarViewModel.shared.deleteCalendar(withID: calendarIDToDelete)
 
-                if let profileToDeleteInContext = profiles.first(where: { $0.id == profileIDToDelete }) {
-                    modelContext.delete(profileToDeleteInContext)
-                }
-
-                if let settings = try? modelContext.fetch(FetchDescriptor<UserSettings>()).first {
-                    if settings.lastSelectedProfile?.id == profileIDToDelete {
-                        settings.lastSelectedProfile = self.selectedProfile
-                    }
-                    if settings.healthKitProfileID == profileIDToDelete {
-                        settings.healthKitProfileID = orderedUnlockedProfiles(
-                            excluding: profileIDToDelete
-                        ).first?.id
-                    }
-                }
-
                 do {
-                    try modelContext.save()
-                    print("✅ Profile and associated data (including AI jobs) deleted successfully after UI update.")
+                    let writeContext = try CombinedStoreFactory
+                        .makeUserWriteContext(from: modelContext.container)
+                    guard let storedProfile = try ProfilePersistence.fetch(
+                        id: profileIDToDelete,
+                        in: writeContext
+                    ) else {
+                        return
+                    }
+
+                    if let settings = try writeContext.fetch(
+                        FetchDescriptor<UserSettings>()
+                    ).first {
+                        if settings.lastSelectedProfile?.id == profileIDToDelete {
+                            if let nextID = nextProfile?.id {
+                                settings.lastSelectedProfile = try ProfilePersistence
+                                    .fetch(id: nextID, in: writeContext)
+                            } else {
+                                settings.lastSelectedProfile = nil
+                            }
+                        }
+                        if settings.healthKitProfileID == profileIDToDelete {
+                            settings.healthKitProfileID = nextProfile?.id
+                        }
+                    }
+
+                    writeContext.delete(storedProfile)
+                    try writeContext.save()
+                    AyurvedaConstitutionStore.delete(profileID: profileIDToDelete)
+                    await AIManager.shared.fetchJobs()
+
+                    // Drop the combined context's stale registered object;
+                    // the durable deletion already happened in the user store.
+                    modelContext.rollback()
+                    print("✅ Profile and associated data deleted successfully.")
                 } catch {
                     print("❗️ Error saving after profile deletion: \(error)")
                 }

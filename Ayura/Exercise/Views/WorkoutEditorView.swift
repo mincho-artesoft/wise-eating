@@ -411,6 +411,7 @@ struct WorkoutEditorView: View {
             
             Button("Save", action: saveWorkout)
                 .disabled(isSaveDisabled)
+                .accessibilityIdentifier("workout-editor-save")
                 .padding(.horizontal, 10).padding(.vertical, 5)
                 .glassCardStyle(cornerRadius: 20)
                 .foregroundStyle(isSaveDisabled
@@ -538,6 +539,7 @@ struct WorkoutEditorView: View {
                         focused: $focusedField,
                         fieldIdentifier: .name
                     )
+                    .accessibilityIdentifier("workout-editor-name")
                 }
                 .id(FocusableField.name)
                 
@@ -749,7 +751,7 @@ struct WorkoutEditorView: View {
                                             size: 48,
                                             cornerRadius: 10
                                         )
-                                        if item.isFavorite {
+                                        if item.effectiveIsFavorite {
                                             Image(systemName: "star.fill").foregroundColor(.yellow)
                                         }
                                         VStack(alignment: .leading, spacing: 4) {
@@ -1190,19 +1192,39 @@ struct WorkoutEditorView: View {
         Task {
             isSaving = true
             await Task.yield()
-            
+
+            let writeContext: ModelContext
+            do {
+                writeContext = try CombinedStoreFactory.makeUserWriteContext(
+                    from: modelContext.container
+                )
+            } catch {
+                alertMessage = "Failed to open the user database: \(error.localizedDescription)"
+                showAlert = true
+                isSaving = false
+                return
+            }
+
             let itemToSave: ExerciseItem
-            if let existing = workoutToEdit {
-                itemToSave = existing
+            if let existing = workoutToEdit,
+               !CatalogReferenceResolver.isCatalog(existing),
+               let writerItem = try? CatalogReferenceResolver.userExercise(
+                    id: existing.id,
+                    context: writeContext
+               ) {
+                itemToSave = writerItem
             } else {
                 itemToSave = ExerciseItem(id: UUID(), name: "", muscleGroups: [])
-                modelContext.insert(itemToSave)
+                writeContext.insert(itemToSave)
             }
             
             itemToSave.name = trimmedName
             itemToSave.exerciseDescription = description.trimmingCharacters(in: .whitespaces).nilIfEmpty()
             itemToSave.photo = photoData
             itemToSave.isWorkout = true
+            itemToSave.isUserAdded = true
+            itemToSave.catalogNumber = nil
+            itemToSave.refreshSearchMetadata()
             
             itemToSave.minimalAgeMonths = Int(minimalAgeMonthsTxt) ?? 0
             
@@ -1236,18 +1258,23 @@ struct WorkoutEditorView: View {
             
             if let oldLinks = itemToSave.exercises {
                 for link in oldLinks {
-                    modelContext.delete(link)
+                    writeContext.delete(link)
                 }
             }
             itemToSave.exercises = []
-            for e in editableExercises {
-                let link = ExerciseLink(exercise: e.exercise, durationSeconds: e.durationSeconds, owner: itemToSave)
-                modelContext.insert(link)
-                itemToSave.exercises?.append(link)
-            }
-            
+
             do {
-                try modelContext.save()
+                for e in editableExercises {
+                    let link = try CatalogReferenceResolver.exerciseLink(
+                        for: e.exercise,
+                        durationSeconds: e.durationSeconds,
+                        owner: itemToSave,
+                        userContext: writeContext
+                    )
+                    writeContext.insert(link)
+                    itemToSave.exercises?.append(link)
+                }
+                try writeContext.save()
                 if let pendingID = pendingAIJobIDToDeleteOnSave,
                    let job = aiManager.jobs.first(where: { $0.id == pendingID }) {
                     await aiManager.deleteJob(job)
