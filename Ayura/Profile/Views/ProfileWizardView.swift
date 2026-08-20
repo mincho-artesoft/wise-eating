@@ -123,8 +123,6 @@ struct ProfileWizardView: View {
     @State private var newlyCreatedProfile: Profile? = nil
     @State private var showAIGenerationView = false
 
-    @State private var isShowingFullScreenPhoto = false
-    @State private var fullScreenUIImage: UIImage? = nil
     // MARK: - Picker State & Helpers
     // Two-wheel pickers (whole + decimal) for height & weight
     // MARK: - Picker State & Helpers
@@ -512,34 +510,19 @@ struct ProfileWizardView: View {
 
                 if let imageData,
                    let uiImage = UIImage(data: imageData) {
-
-                    // 👉 Tap на аватара = fullscreen
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 250, height: 250)
-                        .clipShape(Circle())
-                        .onTapGesture {
-                            fullScreenUIImage = uiImage
-                            isShowingFullScreenPhoto = true
-                        }
-
-                    // 📷 Малък бутон долу-дясно = избор на източник
                     Button {
                         showPhotoSourceDialog = true
                     } label: {
-                        Image(systemName: "camera.fill")
+                        Image(uiImage: uiImage)
                             .resizable()
-                            .scaledToFit()
-                            .symbolRenderingMode(.hierarchical)
-                            .foregroundColor(effectManager.currentGlobalAccentColor)
-                            .padding(14)
-                            .background(.ultraThinMaterial)
+                            .scaledToFill()
+                            .frame(width: 250, height: 250)
                             .clipShape(Circle())
-                            .shadow(radius: 3)
+                            .contentShape(Circle())
                     }
                     .buttonStyle(.plain)
-                    .offset(x: 90, y: 90)
+                    .accessibilityLabel("Change profile photo")
+                    .accessibilityIdentifier("profile-wizard-photo-selected")
 
                 } else {
                     // Нямаме снимка – целият кръг отваря диалог за източник
