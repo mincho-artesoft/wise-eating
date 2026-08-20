@@ -390,10 +390,11 @@ enum YogaSeeder {
         _ name: String,
         as type: T.Type
     ) throws -> T {
-        guard let url = Bundle.main.url(forResource: name, withExtension: "json") else {
-            throw YogaSeedError.missingResource("\(name).json")
+        do {
+            return try BundledJSONResource.decode(type, named: name)
+        } catch BundledJSONResourceError.missing(_) {
+            throw YogaSeedError.missingResource("\(name).json.gz")
         }
-        return try JSONDecoder().decode(T.self, from: Data(contentsOf: url))
     }
 
     private static func uniqueValues<T: Hashable>(

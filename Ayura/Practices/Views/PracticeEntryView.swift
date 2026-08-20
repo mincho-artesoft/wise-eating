@@ -349,16 +349,16 @@ struct PracticeEntryView: View {
     }
 
     private var availableVoiceModes: [PracticeVoiceMode] {
-        practice.narrationAudioAssetName == nil
-            ? [.deviceTTS, .off]
-            : [.deviceTTS, .off, .recorded]
+        PracticeAudioAssetResolver.hasCompleteRecordedNarration(
+            practiceSlug: practice.slug,
+            cueCount: practice.orderedScript.count
+        ) ? [.recorded, .off] : [.off]
     }
 
     private func voiceModeTitle(_ mode: PracticeVoiceMode) -> String {
         switch mode {
-        case .deviceTTS: "Device voice"
         case .off: "No voice"
-        case .recorded: "Recorded"
+        case .recorded: "Guided voice"
         }
     }
 

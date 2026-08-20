@@ -3,15 +3,15 @@
 ## Completion
 
 - Functional implementation: **100%** for the assets that were supplied.
-- Whole brief including media still not supplied: **92%**.
+- Whole brief including scene artwork still not supplied: **97%**.
 - Clean simulator build: **passed** with Xcode 26.1.1.
-- Simulator runtime smoke test: **passed** for library, entry card, player,
-  device TTS startup, and bundled ambience startup.
+- Bundle verification: **passed** for 60 narration folders, 601 recorded cues,
+  the production manifest, and all 36 ambience tracks.
 
-The remaining 8% is recorded narration, measured narration timing, and final
-scene artwork. None of those assets were present in the handoff. Device TTS,
-authored timing, and an intentionally restrained gradient scene fallback are
-active today.
+The remaining 3% is final scene artwork. Recorded narration now uses the
+delivered production cues and their measured durations. Authored cue start
+times remain active, and an intentionally restrained gradient scene fallback
+is used where no scene artwork is present.
 
 ## App tab and navigation
 
@@ -86,8 +86,8 @@ segmented vata/pitta/kapha pacification ring.
 ![Practice entry card](../../TestReports/Practices/entry.png)
 
 Includes metadata, tradition, contraindications before length whenever present,
-runtime-safe duration options, device/no-voice guidance, all 36 bundled sounds,
-and Begin.
+runtime-safe duration options, recorded/no-voice guidance, all 36 bundled
+sounds, and Begin.
 
 ### Player
 
@@ -115,8 +115,22 @@ assigned across the 60 practices, and that every mapped bundle URL resolves.
 The source and bundled directories both contain 36 MP3 files (133 MB), with no
 filename differences and no SHA-256 differences.
 
-No recorded narration asset was supplied (`audioAssetName` is null for all 60
-practices), so the default remains device TTS. Recorded narration automatically
-falls back to device TTS when its URL is missing.
+The Maya1 delivery contributes **601 production cues** for all **60 practices**.
+The repository copies are MP3 (mono, 24 kHz, 96 kbps, 58.91 MiB), encoded from
+the delivered 24 kHz, 16-bit PCM WAV masters. This saves 174.41 MiB (74.75%);
+the original lossless delivery remains outside the repository as a backup.
+The source assets live in `Resources/PracticeNarration`; an explicit Xcode file
+list and sandboxed copy phase preserve the required
+`narration/audio/<practice-slug>/cue-XX.mp3` hierarchy in the product bundle.
+
+Recorded guidance is now the default and Apple device TTS is no longer part of
+the Practices player. Every cue is selected through the production manifest at
+its authored start time; its measured audio duration controls the visual
+transition into the hold. The entry screen offers `Guided voice` and `No voice`.
+
+The practice seed version is 2 and validates 60 manifest practices, 601
+manifest cues, complete consecutive cue indices, and resolvable bundle files.
+The delivered `practices.json` and `voices.json` match the existing bundled
+copies byte-for-byte, so they were not duplicated.
 
 No new individual file exceeds 90 MB and no commit was created.

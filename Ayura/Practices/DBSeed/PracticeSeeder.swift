@@ -22,7 +22,15 @@ enum PracticeSeeder {
                     + "\(PracticeAudioAssetResolver.mappedDefaultResourceCount)"
             )
         }
-        return 1
+        guard PracticeAudioAssetResolver.recordedNarrationPracticeCount == 60,
+              PracticeAudioAssetResolver.recordedNarrationCueCount == 601 else {
+            throw PracticeSeedError.invalidData(
+                "Expected recorded narration for 60 practices and 601 cues, found "
+                    + "\(PracticeAudioAssetResolver.recordedNarrationPracticeCount) practices "
+                    + "and \(PracticeAudioAssetResolver.recordedNarrationCueCount) cues"
+            )
+        }
+        return 2
     }
 
     static func isInstalled(context: ModelContext) throws -> Bool {
@@ -174,6 +182,18 @@ enum PracticeSeeder {
             throw PracticeSeedError.missingResource(
                 "Missing ambience files: "
                     + missingAmbienceResources.sorted().joined(separator: ", ")
+            )
+        }
+        let incompleteNarration = rows.compactMap { row in
+            PracticeAudioAssetResolver.hasCompleteRecordedNarration(
+                practiceSlug: row.slug,
+                cueCount: row.script.count
+            ) ? nil : row.slug
+        }
+        guard incompleteNarration.isEmpty else {
+            throw PracticeSeedError.missingResource(
+                "Incomplete recorded narration: "
+                    + incompleteNarration.sorted().joined(separator: ", ")
             )
         }
         try requireUnique(rows.map(\.id), label: "practice id")

@@ -2,7 +2,7 @@
 **Read this first. It is the knowledge-transfer document for anyone (human or AI)
 taking over direction of this project. Update it at the end of every milestone —
 that is a standing rule baked into all task packets.**
-Last updated: 2026-08-19 (the catalogue/user-store separation makes bundled
+Last updated: 2026-08-20 (the catalogue/user-store separation makes bundled
 food, exercise, yoga, practice, Ayurveda, barcode, and search data an atomic
 read-only catalogue while preserving app-authored records in a writable store;
 normal catalogue updates no longer repeat the one-time separation or row-wise
@@ -239,8 +239,13 @@ simulation; must always pass).
 13. No GIT-TRACKED file may exceed 100 MB (GitHub's hard push limit).
     Split at 90 MB. Large derived bundle resources ship as split gzip parts;
     never track the reconstructed file. `food_archive_1024.mp4` is restored
-    from its four `food_archive_1024.mp4.gz.part-*` resources at launch by
-    `BundledLargeAssetLoader` and reused from Application Support.
+    from its five `food_archive_1024.mp4.gz.part-*` resources at launch by
+    `BundledLargeAssetLoader` and reused from Application Support. The large
+    `foods`, `product_buckets`, `vocabulary`, and yoga `sequences` JSON sources
+    stay plain for repository tooling but are excluded from the app target.
+    Deterministic `.json.gz` mirrors ship instead; regenerate them with
+    `tools/compress-bundled-json.sh`. `tools/check-assets.sh` rejects stale,
+    invalid, or 100 MB-and-larger mirrors.
 14. Deterministic meal assembly validates hard constraints before emit and
     reports named infeasibility; it never silently relaxes safety. Ayurvedic
     objective authority is `rasa < vipaka < virya < prabhava`. Vikriti is soft,
@@ -310,7 +315,7 @@ Task packets and reports live in `ayurveda-data/` (`TASK-*.md`, `REPORT-*.md`,
 | Preseed parts (v9 rebuild) | `aa` `db5dc492e5f5e1a00f1d92eb557ecaefa8f234e5e24628f7b8ee9b34d3383834` · `ab` `317628daf869601c1d01cfe775678a6397c12133296c5b6131e311003c78074f`; restored store `23b3f5bd19e3813ca6205c477edcd6e0584bbb96fdd5f4395cdc3a0a7984327e` |
 | Age provenance (WE-8c) | dravyas 391 authored / 314 legacyImport · recipes 1,457 / 54 · ingredient contributors 4,957 / 5,687 |
 | Cold launch (WE-6/WE-7/WE-8/WE-8c, Debug simulator) | WE-8c registry median **1.607s** (N=12); same-session WE-8b 1.569s, paired median delta +0.048s. Absolute hard ceiling 1.700s; profiling paydown required above 1.650s |
-| Legacy target (WE-7) | 9 dead Swift inputs removed · 5 live JSON fallback resources retained |
+| Legacy target (WE-7) | 9 dead Swift inputs removed · 5 live JSON fallback sources retained; 3 large Legacy sources ship as `.json.gz` mirrors |
 | Food concepts (current shipped artifact) | artifact v1 / rev5 matching semantics · 25 concepts · 75 aliases · 14,488 catalogue rows · 32,166 bytes · SHA-256 `a90d8dd82ce36bfd967e1f698e502dda6fef9e072e64d90a9f7a7ec7ba398cba` |
 | FC-1e exclusion corpus | non-contested must-exclude 62/76 pass, 0 fail, 14 unresolved · must-not-exclude 26/34 pass, 0 fail, 8 unresolved · 7 contested reported separately |
 | FC-1 cold launch (Debug simulator) | candidate **1.584s** median vs branch point 1.584s, N=10 same-session ABAB; paired median −0.003s, delta smaller than both IQRs |

@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct PracticePlayerView: View {
     let practice: Practice
@@ -12,6 +13,7 @@ struct PracticePlayerView: View {
     @Environment(\.safeAreaInsets) private var safeAreaInsets
     @StateObject private var player = PracticeAudioPlayer()
     @State private var hasStarted = false
+    @State private var playbackStartTask: Task<Void, Never>?
     @State private var sessionStartedAt: Date?
     @State private var hasRecordedSession = false
 
@@ -49,20 +51,48 @@ struct PracticePlayerView: View {
         .ignoresSafeArea()
         .statusBarHidden()
         .persistentSystemOverlays(.hidden)
-        .onAppear {
-            guard !hasStarted else { return }
-            hasStarted = true
+        .background {
+            PracticePlayerDidAppearReader {
+                startPracticeIfNeeded()
+            }
+            .allowsHitTesting(false)
+            .accessibilityHidden(true)
+        }
+        .onDisappear {
+            playbackStartTask?.cancel()
+            playbackStartTask = nil
+            recordSessionIfNeeded(completed: player.state == .finished)
+            UIApplication.shared.isIdleTimerDisabled = false
+            player.stop()
+        }
+        .onChange(of: player.state) { _, state in
+            guard state == .finished else { return }
+            recordSessionIfNeeded(completed: true)
+        }
+    }
+
+    @MainActor
+    private func startPracticeIfNeeded() {
+        guard !hasStarted else { return }
+        hasStarted = true
+        UIApplication.shared.isIdleTimerDisabled = true
+
+        do {
+            try player.prepareForPlayback()
+        } catch {
+            print("⚠️ Practice audio session could not prepare: \(error)")
+        }
+
+        playbackStartTask = Task { @MainActor in
+            do {
+                try await Task.sleep(for: .milliseconds(400))
+            } catch {
+                return
+            }
+            guard !Task.isCancelled else { return }
+
             let startedAt = Date()
             sessionStartedAt = startedAt
-            UIApplication.shared.isIdleTimerDisabled = true
-            Task {
-                await NotificationManager.shared.updatePracticeReminder(
-                    lastPracticeStartedAt: startedAt,
-                    practiceTitle: practice.title,
-                    profileID: profile.id
-                )
-                await NextEventLiveActivityManager.shared.refreshIfRunning(for: profile)
-            }
             player.play(
                 practice.makeAudioPlan(
                     duration: duration,
@@ -71,15 +101,15 @@ struct PracticePlayerView: View {
                 ),
                 voiceMode: voiceMode
             )
-        }
-        .onDisappear {
-            recordSessionIfNeeded(completed: player.state == .finished)
-            UIApplication.shared.isIdleTimerDisabled = false
-            player.stop()
-        }
-        .onChange(of: player.state) { _, state in
-            guard state == .finished else { return }
-            recordSessionIfNeeded(completed: true)
+
+            Task {
+                await NotificationManager.shared.updatePracticeReminder(
+                    lastPracticeStartedAt: startedAt,
+                    practiceTitle: practice.title,
+                    profileID: profile.id
+                )
+                await NextEventLiveActivityManager.shared.refreshIfRunning(for: profile)
+            }
         }
     }
 
@@ -173,38 +203,80 @@ struct PracticePlayerView: View {
 
         let endedAt = Date()
         guard endedAt > sessionStartedAt else { return }
-        hasRecordedSession = true
-
-        let session = PracticeSession(
-            practice: practice,
-            profile: profile,
-            startedAt: sessionStartedAt,
-            endedAt: endedAt,
-            plannedDurationSeconds: duration,
-            completed: completed
-        )
-        modelContext.insert(session)
 
         do {
-            try modelContext.save()
+            let writeContext = try CombinedStoreFactory.makeUserWriteContext(
+                from: modelContext.container
+            )
+            guard let writeProfile = try CatalogReferenceResolver.userProfile(
+                id: profile.id,
+                context: writeContext
+            ) else {
+                throw CatalogReferenceError.missingUserProfile(profile.id)
+            }
+
+            let session = PracticeSession(
+                practice: practice,
+                profile: writeProfile,
+                startedAt: sessionStartedAt,
+                endedAt: endedAt,
+                plannedDurationSeconds: duration,
+                completed: completed
+            )
+            writeContext.insert(session)
+            try writeContext.save()
+            hasRecordedSession = true
+
+            Task { @MainActor in
+                let (_, eventID) = await CalendarViewModel.shared.createEvent(
+                    forProfile: profile,
+                    startDate: session.startedAt,
+                    endDate: session.endedAt,
+                    title: "Practice: \(session.practiceTitle)",
+                    invisiblePayload: PracticeCalendarEvent.invisiblePayload(for: session)
+                )
+
+                if let eventID {
+                    session.calendarEventID = eventID
+                    try? writeContext.save()
+                    NotificationCenter.default.post(
+                        name: .forceCalendarReload,
+                        object: nil
+                    )
+                }
+            }
         } catch {
             print("⚠️ Could not save practice history: \(error)")
         }
+    }
+}
 
-        Task { @MainActor in
-            let (_, eventID) = await CalendarViewModel.shared.createEvent(
-                forProfile: profile,
-                startDate: session.startedAt,
-                endDate: session.endedAt,
-                title: "Practice: \(session.practiceTitle)",
-                invisiblePayload: PracticeCalendarEvent.invisiblePayload(for: session)
-            )
+private struct PracticePlayerDidAppearReader: UIViewControllerRepresentable {
+    let onDidAppear: @MainActor () -> Void
 
-            if let eventID {
-                session.calendarEventID = eventID
-                try? modelContext.save()
-                NotificationCenter.default.post(name: .forceCalendarReload, object: nil)
-            }
+    func makeUIViewController(context: Context) -> DidAppearViewController {
+        let controller = DidAppearViewController()
+        controller.onDidAppear = onDidAppear
+        controller.view.backgroundColor = .clear
+        return controller
+    }
+
+    func updateUIViewController(
+        _ uiViewController: DidAppearViewController,
+        context: Context
+    ) {
+        uiViewController.onDidAppear = onDidAppear
+    }
+
+    final class DidAppearViewController: UIViewController {
+        var onDidAppear: (@MainActor () -> Void)?
+        private var hasReportedAppearance = false
+
+        override func viewDidAppear(_ animated: Bool) {
+            super.viewDidAppear(animated)
+            guard !hasReportedAppearance else { return }
+            hasReportedAppearance = true
+            onDidAppear?()
         }
     }
 }

@@ -5,6 +5,8 @@ struct PracticeAudioCue: Identifiable, Hashable {
     let atSeconds: Double
     let text: String
     let holdSeconds: Double
+    let recordedAudioURL: URL?
+    let recordedDurationSeconds: Double?
 }
 
 struct PracticeAudioPlan {
@@ -12,7 +14,6 @@ struct PracticeAudioPlan {
     let title: String
     let totalDuration: Double
     let cues: [PracticeAudioCue]
-    let recordedNarrationURL: URL?
     let ambienceTrackID: String?
     let ambienceURL: URL?
     let ambienceVolume: Double
@@ -24,7 +25,6 @@ struct PracticeAudioPlan {
         title: String,
         totalDuration: Double,
         cues: [PracticeAudioCue],
-        recordedNarrationURL: URL?,
         ambienceTrackID: String?,
         ambienceURL: URL?,
         ambienceVolume: Double,
@@ -39,7 +39,6 @@ struct PracticeAudioPlan {
         self.title = title
         self.totalDuration = totalDuration
         self.cues = cues
-        self.recordedNarrationURL = recordedNarrationURL
         self.ambienceTrackID = ambienceTrackID
         self.ambienceURL = ambienceURL
         self.ambienceVolume = ambienceVolume
@@ -50,14 +49,13 @@ struct PracticeAudioPlan {
 
 enum PracticeVoiceMode: String, CaseIterable, Identifiable {
     case off
-    case deviceTTS
     case recorded
 
     var id: String { rawValue }
 }
 
 enum PracticeAudioDefaults {
-    static let voiceMode: PracticeVoiceMode = .deviceTTS
+    static let voiceMode: PracticeVoiceMode = .recorded
 }
 
 struct PracticeAmbienceTrack: Identifiable, Hashable {
@@ -69,6 +67,46 @@ struct PracticeAmbienceTrack: Identifiable, Hashable {
 }
 
 enum PracticeAudioAssetResolver {
+    private struct RecordedNarrationManifest: Decodable, Sendable {
+        let format: String
+        let practices: [String: RecordedNarrationPractice]
+    }
+
+    private struct RecordedNarrationPractice: Decodable, Sendable {
+        let cues: [RecordedNarrationCue]
+    }
+
+    private struct RecordedNarrationCue: Decodable, Sendable {
+        let audioAssetName: String
+        let durationSec: Double
+        let index: Int
+    }
+
+    private static let expectedNarrationFormat = "wise-eating-production-narration/v2"
+
+    private static let recordedNarrationManifest: RecordedNarrationManifest? = {
+        guard let resourceRoot = Bundle.main.resourceURL else { return nil }
+        let url = resourceRoot
+            .appendingPathComponent("narration", isDirectory: true)
+            .appendingPathComponent("manifest.json", isDirectory: false)
+        guard FileManager.default.fileExists(atPath: url.path) else { return nil }
+
+        do {
+            let manifest = try JSONDecoder().decode(
+                RecordedNarrationManifest.self,
+                from: Data(contentsOf: url)
+            )
+            guard manifest.format == expectedNarrationFormat else {
+                print("⚠️ Unsupported practice narration manifest: \(manifest.format)")
+                return nil
+            }
+            return manifest
+        } catch {
+            print("⚠️ Practice narration manifest could not be loaded: \(error)")
+            return nil
+        }
+    }()
+
     /// Every supplied ambience file belongs to one logical catalogue mood.
     /// The practice's position inside that mood rotates through the resources,
     /// so all 36 tracks are used as defaults across the 60-practice catalogue.
@@ -158,13 +196,39 @@ enum PracticeAudioAssetResolver {
         mappedDefaultResourceNames.count
     }
 
-    static func recordedNarrationURL(named resourceName: String?) -> URL? {
-        guard let resourceName else { return nil }
-        return resolve(
-            resourceName: resourceName,
-            extensions: ["m4a", "aac", "mp3", "wav"],
-            subdirectories: ["Practices/Narration", "Narration"]
-        )
+    static var recordedNarrationPracticeCount: Int {
+        recordedNarrationManifest?.practices.count ?? 0
+    }
+
+    static var recordedNarrationCueCount: Int {
+        recordedNarrationManifest?.practices.values.reduce(0) {
+            $0 + $1.cues.count
+        } ?? 0
+    }
+
+    static func hasCompleteRecordedNarration(
+        practiceSlug: String,
+        cueCount: Int
+    ) -> Bool {
+        guard let cues = recordedNarrationManifest?.practices[practiceSlug]?.cues,
+              cues.count == cueCount else {
+            return false
+        }
+        return Set(cues.map(\.index)) == Set(0..<cueCount)
+            && cues.allSatisfy { bundledNarrationURL(for: $0.audioAssetName) != nil }
+    }
+
+    static func recordedNarrationCue(
+        practiceSlug: String,
+        index: Int
+    ) -> (url: URL, durationSeconds: Double)? {
+        guard let cue = recordedNarrationManifest?
+            .practices[practiceSlug]?
+            .cues.first(where: { $0.index == index }),
+              let url = bundledNarrationURL(for: cue.audioAssetName) else {
+            return nil
+        }
+        return (url, cue.durationSec)
     }
 
     static func ambienceURL(trackID: String) -> URL? {
@@ -259,6 +323,16 @@ enum PracticeAudioAssetResolver {
         return nil
     }
 
+    private static func bundledNarrationURL(for relativePath: String) -> URL? {
+        guard !relativePath.hasPrefix("/"),
+              !relativePath.split(separator: "/").contains(".."),
+              let resourceRoot = Bundle.main.resourceURL else {
+            return nil
+        }
+        let url = resourceRoot.appendingPathComponent(relativePath, isDirectory: false)
+        return FileManager.default.fileExists(atPath: url.path) ? url : nil
+    }
+
     private static func displayName(for resourceName: String) -> String {
         resourceName
             .replacingOccurrences(of: "_", with: " ")
@@ -273,11 +347,6 @@ extension Practice {
         voiceMode: PracticeVoiceMode,
         ambienceResourceName: String?
     ) -> PracticeAudioPlan {
-        let recordedURL = voiceMode == .recorded
-            ? PracticeAudioAssetResolver.recordedNarrationURL(
-                named: narrationAudioAssetName
-            )
-            : nil
         let ambienceURL = ambienceResourceName.flatMap(
             PracticeAudioAssetResolver.ambienceURL(resourceName:)
         )
@@ -285,15 +354,22 @@ extension Practice {
             practiceID: id,
             title: title,
             totalDuration: Double(duration),
-            cues: orderedScript.map {
-                PracticeAudioCue(
-                    id: $0.id,
-                    atSeconds: $0.atSeconds,
-                    text: $0.text,
-                    holdSeconds: $0.holdSeconds
+            cues: orderedScript.enumerated().map { index, cue in
+                let recordedCue = voiceMode == .recorded
+                    ? PracticeAudioAssetResolver.recordedNarrationCue(
+                        practiceSlug: slug,
+                        index: index
+                    )
+                    : nil
+                return PracticeAudioCue(
+                    id: cue.id,
+                    atSeconds: cue.atSeconds,
+                    text: cue.text,
+                    holdSeconds: cue.holdSeconds,
+                    recordedAudioURL: recordedCue?.url,
+                    recordedDurationSeconds: recordedCue?.durationSeconds
                 )
             },
-            recordedNarrationURL: recordedURL,
             ambienceTrackID: ambienceResourceName,
             ambienceURL: ambienceURL,
             ambienceVolume: ambienceVolume,

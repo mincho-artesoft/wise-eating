@@ -2,7 +2,6 @@ import AVFoundation
 import Combine
 import MediaPlayer
 import SwiftUI
-import UIKit
 
 @MainActor
 final class PracticeAudioPlayer: NSObject, ObservableObject {
@@ -20,16 +19,21 @@ final class PracticeAudioPlayer: NSObject, ObservableObject {
     @Published private(set) var elapsed: Double = 0
 
     private var plan: PracticeAudioPlan?
-    private var voiceMode: PracticeVoiceMode = .deviceTTS
-    private let speechSynthesizer = AVSpeechSynthesizer()
+    private var voiceMode: PracticeVoiceMode = .recorded
     private var ambiencePlayer: AVAudioPlayer?
     private var narrationPlayer: AVAudioPlayer?
     private var tickerTask: Task<Void, Never>?
     private var playbackStartedAt: Date?
     private var elapsedBeforeStart: Double = 0
     private var narrationEndsAt: Double = 0
+    private var audioSessionIsPrepared = false
+
+    private static let narrationFadeInDuration: TimeInterval = 0.22
+    private static let narrationCrossfadeDuration: TimeInterval = 0.08
+    private static let ambienceFadeInDuration: TimeInterval = 1.0
 
     func prepareForPlayback() throws {
+        guard !audioSessionIsPrepared else { return }
         let session = AVAudioSession.sharedInstance()
         try session.setCategory(
             .playback,
@@ -37,6 +41,7 @@ final class PracticeAudioPlayer: NSObject, ObservableObject {
             options: [.mixWithOthers]
         )
         try session.setActive(true)
+        audioSessionIsPrepared = true
     }
 
     func play(
@@ -71,7 +76,6 @@ final class PracticeAudioPlayer: NSObject, ObservableObject {
         guard state == .playing else { return }
         captureElapsed()
         state = .paused
-        speechSynthesizer.pauseSpeaking(at: .immediate)
         ambiencePlayer?.pause()
         narrationPlayer?.pause()
         updateNowPlaying()
@@ -81,11 +85,11 @@ final class PracticeAudioPlayer: NSObject, ObservableObject {
         guard state == .paused else { return }
         playbackStartedAt = Date()
         state = .playing
-        if speechSynthesizer.isPaused {
-            speechSynthesizer.continueSpeaking()
+        if let narrationPlayer,
+           narrationPlayer.currentTime < narrationPlayer.duration {
+            narrationPlayer.play()
         }
         ambiencePlayer?.play()
-        narrationPlayer?.play()
         updateNowPlaying()
     }
 
@@ -101,7 +105,7 @@ final class PracticeAudioPlayer: NSObject, ObservableObject {
             return
         }
 
-        speechSynthesizer.stopSpeaking(at: .immediate)
+        retireNarrationPlayer()
         let nextCue = plan.cues[nextIndex]
         elapsedBeforeStart = nextCue.atSeconds
         elapsed = nextCue.atSeconds
@@ -113,7 +117,8 @@ final class PracticeAudioPlayer: NSObject, ObservableObject {
     func stop(clearNowPlaying: Bool = true) {
         tickerTask?.cancel()
         tickerTask = nil
-        speechSynthesizer.stopSpeaking(at: .immediate)
+        ambiencePlayer?.volume = 0
+        narrationPlayer?.volume = 0
         ambiencePlayer?.stop()
         narrationPlayer?.stop()
         ambiencePlayer = nil
@@ -134,19 +139,16 @@ final class PracticeAudioPlayer: NSObject, ObservableObject {
     private func startAudioBeds(plan: PracticeAudioPlan) throws {
         if let ambienceURL = plan.ambienceURL {
             let player = try AVAudioPlayer(contentsOf: ambienceURL)
-            player.volume = Float(plan.ambienceVolume)
+            let targetVolume = Float(plan.ambienceVolume)
+            player.volume = 0
             player.numberOfLoops = plan.ambienceLoops ? -1 : 0
             player.prepareToPlay()
             player.play()
+            player.setVolume(
+                targetVolume,
+                fadeDuration: Self.ambienceFadeInDuration
+            )
             ambiencePlayer = player
-        }
-
-        if voiceMode == .recorded, let narrationURL = plan.recordedNarrationURL {
-            let player = try AVAudioPlayer(contentsOf: narrationURL)
-            player.numberOfLoops = 0
-            player.prepareToPlay()
-            player.play()
-            narrationPlayer = player
         }
     }
 
@@ -189,23 +191,36 @@ final class PracticeAudioPlayer: NSObject, ObservableObject {
         isHolding = false
 
         let wordCount = cue.text.split(whereSeparator: \.isWhitespace).count
-        let spokenDuration = max(3.2, Double(wordCount) / 95 * 60)
+        var spokenDuration = max(3.2, Double(wordCount) / 95 * 60)
+        retireNarrationPlayer()
+
+        if voiceMode == .recorded {
+            if let narrationURL = cue.recordedAudioURL {
+                do {
+                    let player = try AVAudioPlayer(contentsOf: narrationURL)
+                    player.volume = 0
+                    player.numberOfLoops = 0
+                    player.prepareToPlay()
+                    spokenDuration = player.duration > 0
+                        ? player.duration
+                        : (cue.recordedDurationSeconds ?? spokenDuration)
+                    narrationPlayer = player
+                    if state == .playing {
+                        player.play()
+                        player.setVolume(
+                            1,
+                            fadeDuration: Self.narrationFadeInDuration
+                        )
+                    }
+                } catch {
+                    print("⚠️ Recorded practice cue could not start: \(error)")
+                }
+            } else {
+                print("⚠️ Recorded practice cue is missing: \(cue.id)")
+            }
+        }
         narrationEndsAt = cue.atSeconds + spokenDuration
 
-        UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-
-        let shouldUseTTS = voiceMode == .deviceTTS
-            || (voiceMode == .recorded && plan?.recordedNarrationURL == nil)
-        if shouldUseTTS {
-            speechSynthesizer.stopSpeaking(at: .immediate)
-            let utterance = AVSpeechUtterance(string: cue.text)
-            utterance.rate = 0.38
-            utterance.pitchMultiplier = 0.92
-            utterance.volume = 0.92
-            utterance.preUtteranceDelay = 0.1
-            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-            speechSynthesizer.speak(utterance)
-        }
     }
 
     private func captureElapsed(keepClockRunning: Bool = false) {
@@ -218,12 +233,34 @@ final class PracticeAudioPlayer: NSObject, ObservableObject {
         }
     }
 
+    private func retireNarrationPlayer() {
+        guard let outgoingPlayer = narrationPlayer else { return }
+        narrationPlayer = nil
+
+        guard outgoingPlayer.isPlaying else {
+            outgoingPlayer.stop()
+            return
+        }
+
+        outgoingPlayer.setVolume(
+            0,
+            fadeDuration: Self.narrationCrossfadeDuration
+        )
+        Task { @MainActor in
+            try? await Task.sleep(
+                for: .seconds(Self.narrationCrossfadeDuration)
+            )
+            outgoingPlayer.stop()
+        }
+    }
+
     private func finish() {
         tickerTask?.cancel()
         tickerTask = nil
-        speechSynthesizer.stopSpeaking(at: .immediate)
+        narrationPlayer?.volume = 0
         narrationPlayer?.stop()
         if plan?.sleepSafe != true {
+            ambiencePlayer?.volume = 0
             ambiencePlayer?.stop()
         }
         state = .finished

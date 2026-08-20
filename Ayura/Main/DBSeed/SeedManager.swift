@@ -172,17 +172,6 @@ enum SeedManager {
                 return
             }
 
-            guard let vocabURL = Bundle.main.url(
-                forResource: "vocabulary",
-                withExtension: "json"
-            ), let bucketsURL = Bundle.main.url(
-                forResource: "product_buckets",
-                withExtension: "json"
-            ) else {
-                assertionFailure("barcode seed resources not found")
-                return
-            }
-
             print(
                 "   Updating barcode catalogue to v\(metadata.catalogVersion) "
                     + "(\(metadata.productCount) products)..."
@@ -190,8 +179,8 @@ enum SeedManager {
             try deleteAll(entity: ProductBucket.self, context: ctx)
             try deleteAll(entity: VocabularyEntry.self, context: ctx)
 
-            print("   Seeding Vocabulary from vocabulary.json...")
-            let vocabData = try Data(contentsOf: vocabURL)
+            print("   Seeding Vocabulary from vocabulary.json.gz...")
+            let vocabData = try BundledJSONResource.data(named: "vocabulary")
             let decodedVocab = try JSONDecoder().decode([VocabularySeedDTO].self, from: vocabData)
             for (index, row) in decodedVocab.enumerated() {
                 let entry = VocabularyEntry(
@@ -207,8 +196,10 @@ enum SeedManager {
             if ctx.hasChanges { try ctx.save() }
             print("   ✅ Seeded \(decodedVocab.count) vocabulary entries.")
 
-            print("   Seeding Product Buckets from product_buckets.json...")
-            let bucketsData = try Data(contentsOf: bucketsURL)
+            print("   Seeding Product Buckets from product_buckets.json.gz...")
+            let bucketsData = try BundledJSONResource.data(
+                named: "product_buckets"
+            )
             let decodedBuckets = try JSONDecoder().decode([ProductBucketSeedDTO].self, from: bucketsData)
 
             for (index, row) in decodedBuckets.enumerated() {
@@ -280,13 +271,10 @@ enum SeedManager {
             return
         }
 
-        print("   Seeding Foods from foods.json...")
-        guard let url = Bundle.main.url(forResource: "foods", withExtension: "json") else {
-            assertionFailure("foods.json not found"); return
-        }
+        print("   Seeding Foods from foods.json.gz...")
 
         do {
-            let raw = try Data(contentsOf: url)
+            let raw = try BundledJSONResource.data(named: "foods")
             let dtos = try JSONDecoder().decode([FoodItemDTO].self, from: raw)
 
             var items: [FoodItem] = []

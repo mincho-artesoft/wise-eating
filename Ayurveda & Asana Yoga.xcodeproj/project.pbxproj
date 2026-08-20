@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A55E75102F1B000100000001 /* ayurveda-data/yoga/asanas.json in Resources */ = {isa = PBXBuildFile; fileRef = A55E75202F1B000100000001 /* ayurveda-data/yoga/asanas.json */; };
-		A55E75112F1B000100000001 /* ayurveda-data/yoga/sequences.json in Resources */ = {isa = PBXBuildFile; fileRef = A55E75212F1B000100000001 /* ayurveda-data/yoga/sequences.json */; };
+		A55E75112F1B000100000001 /* ayurveda-data/yoga/sequences.json.gz in Resources */ = {isa = PBXBuildFile; fileRef = A55E75212F1B000100000001 /* ayurveda-data/yoga/sequences.json.gz */; };
 		A710000E2F1C00010000000E /* Ayura/LiveActivity/NextEventActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A710000D2F1C00010000000D /* Ayura/LiveActivity/NextEventActivityAttributes.swift */; };
 		A710000F2F1C00010000000F /* AyuraLiveActivityWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A71000022F1C000100000002 /* AyuraLiveActivityWidget.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -50,7 +50,7 @@
 /* Begin PBXFileReference section */
 		508496252DE5D05D0038A7D5 /* Ayurveda & Asana Yoga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ayurveda & Asana Yoga.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A55E75202F1B000100000001 /* ayurveda-data/yoga/asanas.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "ayurveda-data/yoga/asanas.json"; sourceTree = SOURCE_ROOT; };
-		A55E75212F1B000100000001 /* ayurveda-data/yoga/sequences.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "ayurveda-data/yoga/sequences.json"; sourceTree = SOURCE_ROOT; };
+		A55E75212F1B000100000001 /* ayurveda-data/yoga/sequences.json.gz */ = {isa = PBXFileReference; lastKnownFileType = archive.gzip; path = "ayurveda-data/yoga/sequences.json.gz"; sourceTree = SOURCE_ROOT; };
 		A71000022F1C000100000002 /* AyuraLiveActivityWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AyuraLiveActivityWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		A710000D2F1C00010000000D /* Ayura/LiveActivity/NextEventActivityAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ayura/LiveActivity/NextEventActivityAttributes.swift; sourceTree = SOURCE_ROOT; };
 		C843A40D2E7E7C66000B1F28 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
@@ -61,6 +61,9 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
+				Legacy/foods.json,
+				Legacy/product_buckets.json,
+				Legacy/vocabulary.json,
 				"Yoga/assets-manifest.json",
 				Yoga/frame_index.json,
 				Yoga/frame_timestamps.json,
@@ -123,7 +126,7 @@
 				508496272DE5D05D0038A7D5 /* Ayurveda & Asana Yoga */,
 				A71000032F1C000100000003 /* AyuraLiveActivityWidget */,
 				A55E75202F1B000100000001 /* ayurveda-data/yoga/asanas.json */,
-				A55E75212F1B000100000001 /* ayurveda-data/yoga/sequences.json */,
+				A55E75212F1B000100000001 /* ayurveda-data/yoga/sequences.json.gz */,
 				C843A40C2E7E7C66000B1F28 /* Frameworks */,
 				508496262DE5D05D0038A7D5 /* Products */,
 				508A8D733034B8AB00411EB1 /* Recovered References */,
@@ -167,6 +170,7 @@
 				A55E75012F1B000100000001 /* Check Required Assets */,
 				508496232DE5D05D0038A7D5 /* Resources */,
 				A55E75022F1B000100000002 /* Copy Yoga Archive Resources */,
+				A55E75032F1B000100000003 /* Copy Practice Narration Resources */,
 				C843A4162E7E7C66000B1F28 /* Embed Foundation Extensions */,
 				5076E6C32ECCCE7900FA2B4E /* Embed ExtensionKit Extensions */,
 			);
@@ -258,7 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A55E75102F1B000100000001 /* ayurveda-data/yoga/asanas.json in Resources */,
-				A55E75112F1B000100000001 /* ayurveda-data/yoga/sequences.json in Resources */,
+				A55E75112F1B000100000001 /* ayurveda-data/yoga/sequences.json.gz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +286,14 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/tools/check-assets.sh",
+				"$(SRCROOT)/Ayura/Legacy/foods.json",
+				"$(SRCROOT)/Ayura/Legacy/foods.json.gz",
+				"$(SRCROOT)/Ayura/Legacy/product_buckets.json",
+				"$(SRCROOT)/Ayura/Legacy/product_buckets.json.gz",
+				"$(SRCROOT)/Ayura/Legacy/vocabulary.json",
+				"$(SRCROOT)/Ayura/Legacy/vocabulary.json.gz",
+				"$(SRCROOT)/ayurveda-data/yoga/sequences.json",
+				"$(SRCROOT)/ayurveda-data/yoga/sequences.json.gz",
 				"$(SRCROOT)/Ayura/Food/assets-manifest.json",
 				"$(SRCROOT)/Ayura/Food/frame_index.json",
 				"$(SRCROOT)/Ayura/Food/food_archive_144.mp4",
@@ -341,6 +353,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
 			shellScript = "\"${SRCROOT}/tools/copy-yoga-assets.sh\" \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Yoga\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A55E75032F1B000100000003 /* Copy Practice Narration Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"$(SRCROOT)/tools/practice-narration-inputs.xcfilelist",
+			);
+			inputPaths = (
+				"$(SRCROOT)/tools/copy-practice-narration.sh",
+			);
+			name = "Copy Practice Narration Resources";
+			outputFileListPaths = (
+				"$(SRCROOT)/tools/practice-narration-outputs.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "\"${SRCROOT}/tools/copy-practice-narration.sh\" \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/narration\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

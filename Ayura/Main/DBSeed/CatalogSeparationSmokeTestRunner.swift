@@ -527,7 +527,9 @@ enum CatalogSeparationSmokeTestRunner {
         let catalogFood = try context.fetch(FetchDescriptor<FoodItem>())
             .first(where: { $0.id == IDs.catalogFood }),
         let catalogExercise = try context.fetch(FetchDescriptor<ExerciseItem>())
-            .first(where: { $0.id == IDs.catalogExercise }) else {
+            .first(where: { $0.id == IDs.catalogExercise }),
+        let catalogPractice = try context.fetch(FetchDescriptor<Practice>())
+            .first(where: { $0.id == IDs.catalogPractice }) else {
             throw SmokeError.failed("post-separation plan probe inputs are missing")
         }
 
@@ -642,6 +644,16 @@ enum CatalogSeparationSmokeTestRunner {
         routedTrainingDay.workouts = [routedTrainingWorkout]
         routedTrainingPlan.days = [routedTrainingDay]
         writeContext.insert(routedTrainingPlan)
+
+        let routedPracticeSession = PracticeSession(
+            practice: catalogPractice,
+            profile: writeProfile,
+            startedAt: Date(timeIntervalSince1970: 1_800_000_000),
+            endedAt: Date(timeIntervalSince1970: 1_800_000_060),
+            plannedDurationSeconds: 60,
+            completed: true
+        )
+        writeContext.insert(routedPracticeSession)
         try writeContext.save()
 
         try require(
@@ -657,7 +669,10 @@ enum CatalogSeparationSmokeTestRunner {
                 && routedStorage.catalogFoodID == catalogFood.id
                 && routedStorage.persistedFood == nil
                 && routedTransaction.catalogFoodID == catalogFood.id
-                && routedTransaction.persistedFood == nil,
+                && routedTransaction.persistedFood == nil
+                && routedPracticeSession.persistentModelID.storeIdentifier
+                    == userStoreIdentifier
+                && routedPracticeSession.profile?.id == writeProfile.id,
             "post-separation user references were not routed correctly"
         )
         routedMealPlan.name = "Write Routing Meal Plan Edited"
@@ -682,6 +697,7 @@ enum CatalogSeparationSmokeTestRunner {
         writeContext.delete(routedShoppingList)
         writeContext.delete(routedStorage)
         writeContext.delete(routedTransaction)
+        writeContext.delete(routedPracticeSession)
         writeContext.delete(routedFood)
         writeContext.delete(routedExercise)
         try writeContext.save()
