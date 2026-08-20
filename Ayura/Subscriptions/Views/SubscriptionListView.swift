@@ -19,7 +19,7 @@ struct SubscriptionListView: View {
     
     @ObservedObject private var effectManager = EffectManager.shared
 
-    private let privacyPolicyURL = URL(string: "https://ayurveda-asana-yoga.wise-eating.com/privacy")!
+    private let privacyPolicyURL = URL(string: "https://www.ayurveda-asana-yoga.wise-eating.com/privacy")!
 
     var body: some View {
         ScrollView(showsIndicators: false) {
