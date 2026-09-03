@@ -1,0 +1,679 @@
+{
+  "predraftVersion": "1.0",
+  "batch": "predraft-30",
+  "items": [
+    {
+      "id": "dravya.niger-oil",
+      "name": "Niger seed oil",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "oil-fat",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          0
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 14
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: niger seed oil; niger oil."
+    },
+    {
+      "id": "dravya.mahua-oil",
+      "name": "Mahua oil",
+      "sanskrit": "Madhuka Taila",
+      "aliases": [],
+      "category": "oil-fat",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          1
+        ],
+        "virya": "cooling",
+        "note": "tribal-regional cooking fat"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 14
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: mahua oil; madhuka taila."
+    },
+    {
+      "id": "dravya.corn-oil",
+      "name": "Corn oil",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "oil-fat",
+      "canonHints": {
+        "vpk": [
+          0,
+          0,
+          0
+        ],
+        "virya": "neutral"
+      },
+      "usda": [
+        {
+          "fdcId": 4573,
+          "name": "Corn oil",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 14
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.soybean-oil",
+      "name": "Soybean oil",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "oil-fat",
+      "canonHints": {
+        "vpk": [
+          0,
+          0,
+          0
+        ],
+        "virya": "neutral"
+      },
+      "usda": [
+        {
+          "fdcId": 4581,
+          "name": "Soybean oil",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 14
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.palm-oil",
+      "name": "Palm oil",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "oil-fat",
+      "canonHints": {
+        "vpk": [
+          0,
+          0,
+          1
+        ],
+        "virya": "neutral"
+      },
+      "usda": [
+        {
+          "fdcId": 11997,
+          "name": "Palm Oil (Red)",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 14
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.vanaspati",
+      "name": "Vanaspati (hydrogenated)",
+      "sanskrit": null,
+      "aliases": [
+        "hydrogenated"
+      ],
+      "category": "oil-fat",
+      "canonHints": {
+        "vpk": [
+          1,
+          1,
+          2
+        ],
+        "virya": "neutral",
+        "note": "channel-clogging; texts-aligned caution: avoid"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 14
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: vanaspati."
+    },
+    {
+      "id": "dravya.cane-jaggery",
+      "name": "Cane jaggery (gud)",
+      "sanskrit": "Guda",
+      "aliases": [
+        "gud"
+      ],
+      "category": "sweetener",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          1
+        ],
+        "virya": "heating",
+        "note": "aged jaggery classically superior"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: cane jaggery; guda."
+    },
+    {
+      "id": "dravya.date-palm-jaggery",
+      "name": "Date palm jaggery (nolen gur)",
+      "sanskrit": "Kharjura Guda",
+      "aliases": [
+        "nolen gur"
+      ],
+      "category": "sweetener",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: date palm jaggery; kharjura guda."
+    },
+    {
+      "id": "dravya.palmyra-jaggery",
+      "name": "Palmyra jaggery (tala gud)",
+      "sanskrit": "Tala Guda",
+      "aliases": [
+        "tala gud"
+      ],
+      "category": "sweetener",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: palmyra jaggery; tala guda."
+    },
+    {
+      "id": "dravya.raw-sugar",
+      "name": "Raw sugar (khand)",
+      "sanskrit": "Khanda",
+      "aliases": [
+        "khand"
+      ],
+      "category": "sweetener",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 4647,
+          "name": "Sugar, NFS",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.boora",
+      "name": "Boora sugar",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "sweetener",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: boora sugar; boora."
+    },
+    {
+      "id": "dravya.powdered-jaggery",
+      "name": "Powdered jaggery (shakkar)",
+      "sanskrit": null,
+      "aliases": [
+        "shakkar"
+      ],
+      "category": "sweetener",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: powdered jaggery."
+    },
+    {
+      "id": "dravya.stevia-leaf",
+      "name": "Stevia leaf",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "sweetener",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling",
+        "note": "modern herb sweetener"
+      },
+      "usda": [
+        {
+          "fdcId": 7981,
+          "name": "Sweetener, herbal extract powder from Stevia leaf",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.coconut-sugar",
+      "name": "Coconut sugar",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "sweetener",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: coconut sugar."
+    },
+    {
+      "id": "dravya.date-syrup",
+      "name": "Date syrup",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "sweetener",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: date syrup."
+    },
+    {
+      "id": "dravya.honey-aged",
+      "name": "Aged honey",
+      "sanskrit": "Purana Madhu",
+      "aliases": [],
+      "category": "sweetener",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          -2
+        ],
+        "virya": "heating",
+        "note": "classical kapha-reducer; NEVER heated — viruddha"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 15
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: aged honey; purana madhu; honey aged."
+    },
+    {
+      "id": "dravya.sambhar-salt",
+      "name": "Sambhar lake salt",
+      "sanskrit": "Romaka Lavana",
+      "aliases": [],
+      "category": "salt-mineral",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          0
+        ],
+        "virya": "heating",
+        "note": "classical romaka"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 tsp",
+          "grams": 1.5
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: sambhar lake salt; romaka lavana; sambhar salt."
+    },
+    {
+      "id": "dravya.vida-salt",
+      "name": "Vida salt",
+      "sanskrit": "Vida Lavana",
+      "aliases": [],
+      "category": "salt-mineral",
+      "canonHints": {
+        "vpk": [
+          -2,
+          1,
+          0
+        ],
+        "virya": "heating",
+        "note": "processed classical salt; churans"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 tsp",
+          "grams": 1.5
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: vida salt; vida lavana."
+    },
+    {
+      "id": "dravya.iodized-salt",
+      "name": "Iodized table salt",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "salt-mineral",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 10307,
+          "name": "Salt, table",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 tsp",
+          "grams": 1.5
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.himalayan-pink-salt",
+      "name": "Himalayan pink salt",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "salt-mineral",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          0
+        ],
+        "virya": "cooling",
+        "note": "saindhava variant"
+      },
+      "usda": [
+        {
+          "fdcId": 12392,
+          "name": "Himalayan pink salt",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 tsp",
+          "grams": 1.5
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.edible-lime",
+      "name": "Edible lime (chuna)",
+      "sanskrit": "Churna",
+      "aliases": [
+        "chuna"
+      ],
+      "category": "salt-mineral",
+      "canonHints": {
+        "vpk": [
+          0,
+          1,
+          -1
+        ],
+        "virya": "heating",
+        "note": "trace use with betel; calcium source"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1/4 tsp",
+          "grams": 1.5
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: edible lime; churna."
+    },
+    {
+      "id": "dravya.baking-soda",
+      "name": "Baking soda",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "salt-mineral",
+      "canonHints": {
+        "vpk": [
+          0,
+          1,
+          -1
+        ],
+        "virya": "heating",
+        "note": "modern leavening"
+      },
+      "usda": [
+        {
+          "fdcId": 11654,
+          "name": "Leavening agents, baking soda",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 tsp",
+          "grams": 1.5
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.acacia-gum",
+      "name": "Edible acacia gum (gond)",
+      "sanskrit": "Babbula Niryasa",
+      "aliases": [
+        "gond"
+      ],
+      "category": "salt-mineral",
+      "canonHints": {
+        "vpk": [
+          -2,
+          -1,
+          1
+        ],
+        "virya": "heating",
+        "note": "gond ladoo winter base"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: edible acacia gum; babbula niryasa; acacia gum."
+    },
+    {
+      "id": "dravya.tragacanth-gum",
+      "name": "Tragacanth gum (gond katira)",
+      "sanskrit": null,
+      "aliases": [
+        "gond katira"
+      ],
+      "category": "salt-mineral",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -2,
+          0
+        ],
+        "virya": "cooling",
+        "note": "summer coolant — opposite of gond; do not confuse"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 3
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: tragacanth gum."
+    },
+    {
+      "id": "dravya.silver-leaf",
+      "name": "Edible silver leaf (vark)",
+      "sanskrit": "Rajata Varka",
+      "aliases": [
+        "vark"
+      ],
+      "category": "salt-mineral",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          0
+        ],
+        "virya": "cooling",
+        "note": "trace decorative; classical cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 sheet",
+          "grams": 0.01
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: edible silver leaf; rajata varka; silver leaf."
+    }
+  ]
+}

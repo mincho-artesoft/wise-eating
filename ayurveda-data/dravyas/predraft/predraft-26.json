@@ -1,0 +1,599 @@
+{
+  "predraftVersion": "1.0",
+  "batch": "predraft-26",
+  "items": [
+    {
+      "id": "dravya.white-pepper",
+      "name": "White pepper",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 12146,
+          "name": "White Pepper",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.paprika-mild",
+      "name": "Mild paprika",
+      "sanskrit": null,
+      "aliases": [
+        "sweet paprika"
+      ],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 12360,
+          "name": "Sweet paprika",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.turmeric-black",
+      "name": "Black turmeric",
+      "sanskrit": "Krishna Haridra",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: black turmeric; krishna haridra; turmeric black."
+    },
+    {
+      "id": "dravya.galangal",
+      "name": "Galangal root",
+      "sanskrit": "Kulanjana",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 11909,
+          "name": "Galangal",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.lemongrass",
+      "name": "Lemongrass",
+      "sanskrit": "Bhustrina",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 12103,
+          "name": "Lemongrass",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.kaffir-lime-leaf",
+      "name": "Makrut lime leaf",
+      "sanskrit": null,
+      "aliases": [
+        "kaffir lime leaf"
+      ],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 12297,
+          "name": "Kaffir lime leaf (dried)",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.fenugreek-leaf-dry",
+      "name": "Dried fenugreek leaf",
+      "sanskrit": "Kasuri Methi",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 12368,
+          "name": "Kasuri methi",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.rose-petal-dry",
+      "name": "Dried rose petals",
+      "sanskrit": "Shatapatri",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [
+        {
+          "fdcId": 12572,
+          "name": "Rose petal",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.vetiver",
+      "name": "Vetiver root",
+      "sanskrit": "Ushira",
+      "aliases": [
+        "khus root"
+      ],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: vetiver root; khus root; ushira; vetiver."
+    },
+    {
+      "id": "dravya.camphor-edible",
+      "name": "Edible camphor",
+      "sanskrit": "Karpura",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 pinch",
+          "grams": 0.1
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: edible camphor; karpura; camphor edible."
+    },
+    {
+      "id": "dravya.betel-leaf",
+      "name": "Betel leaf",
+      "sanskrit": "Tambula",
+      "aliases": [
+        "paan leaf"
+      ],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: betel leaf; paan leaf; tambula."
+    },
+    {
+      "id": "dravya.sesame-spice-blend",
+      "name": "Sesame chutney spice blend",
+      "sanskrit": null,
+      "aliases": [
+        "til chutney podi"
+      ],
+      "category": "spice",
+      "canonHints": {},
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: sesame chutney spice blend; til chutney podi; sesame spice blend."
+    },
+    {
+      "id": "dravya.cubeb-pepper",
+      "name": "Cubeb pepper",
+      "sanskrit": "Kankola",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 12558,
+          "name": "Cubeb pepper",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.stone-flower",
+      "name": "Stone flower",
+      "sanskrit": "Dagad Phool / Kalpasi",
+      "aliases": [
+        "Dagad Phool",
+        "Kalpasi"
+      ],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          0,
+          0,
+          -1
+        ],
+        "virya": "neutral"
+      },
+      "usda": [
+        {
+          "fdcId": 12562,
+          "name": "Kalpasi / Dagad phool",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.nagkesar",
+      "name": "Cobra saffron",
+      "sanskrit": "Nagakesara",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: cobra saffron; nagakesara; nagkesar."
+    },
+    {
+      "id": "dravya.marathi-moggu",
+      "name": "Kapok bud",
+      "sanskrit": "Marathi Moggu",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          0,
+          0,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: kapok bud; marathi moggu."
+    },
+    {
+      "id": "dravya.timur-pepper",
+      "name": "Indian Sichuan pepper",
+      "sanskrit": "Tumburu / Timur",
+      "aliases": [
+        "Tumburu",
+        "Timur"
+      ],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 12484,
+          "name": "Timur (Sichuan pepper)",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.mango-ginger",
+      "name": "Mango ginger",
+      "sanskrit": "Amragandhi Haridra / Amba Haldi",
+      "aliases": [
+        "Amragandhi Haridra",
+        "Amba Haldi"
+      ],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: mango ginger; amragandhi haridra; amba haldi."
+    },
+    {
+      "id": "dravya.kachri-powder",
+      "name": "Wild melon powder",
+      "sanskrit": "Kachri",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          0,
+          1,
+          -1
+        ],
+        "virya": "heating",
+        "note": "Rajasthani meat tenderizer"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: wild melon powder; kachri; kachri powder."
+    },
+    {
+      "id": "dravya.alkanet-root",
+      "name": "Alkanet root",
+      "sanskrit": "Ratanjot",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          0
+        ],
+        "virya": "cooling",
+        "note": "coloring use"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: alkanet root; ratanjot."
+    },
+    {
+      "id": "dravya.wild-mustard",
+      "name": "Wild mustard",
+      "sanskrit": "Jakhya",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: wild mustard; jakhya."
+    },
+    {
+      "id": "dravya.wild-celery-seed",
+      "name": "Wild celery seed",
+      "sanskrit": "Ajamoda",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: wild celery seed; ajamoda."
+    },
+    {
+      "id": "dravya.dhana-jeera-powder",
+      "name": "Coriander-cumin powder",
+      "sanskrit": "Dhana-Jeera",
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          -1
+        ],
+        "virya": "neutral"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: coriander cumin powder; dhana jeera; dhana jeera powder."
+    },
+    {
+      "id": "dravya.goda-masala",
+      "name": "Goda masala",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "heating",
+        "note": "Maharashtrian sweet-spice blend"
+      },
+      "usda": [
+        {
+          "fdcId": 12385,
+          "name": "Goda masala",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.chaat-masala",
+      "name": "Chaat masala",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "spice",
+      "canonHints": {
+        "vpk": [
+          0,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tsp",
+          "grams": 2
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: chaat masala."
+    }
+  ]
+}

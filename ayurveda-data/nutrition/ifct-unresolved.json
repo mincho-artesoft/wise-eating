@@ -1,0 +1,1620 @@
+{
+ "ambiguous": [
+  [
+   "dravya.betel-leaf",
+   "Betel leaf",
+   [
+    [
+     "C010",
+     "Betel leaves, big (kolkata)"
+    ],
+    [
+     "C011",
+     "Betel leaves, small"
+    ]
+   ]
+  ],
+  [
+   "dravya.betel-nut",
+   "Betel nut (supari)",
+   [
+    [
+     "H002",
+     "Arecanut, dried, brown"
+    ],
+    [
+     "H003",
+     "Arecanut, dried, red color"
+    ],
+    [
+     "H004",
+     "Arecanut, fresh"
+    ]
+   ]
+  ],
+  [
+   "dravya.elephant-foot-yam",
+   "Elephant foot yam (suran)",
+   [
+    [
+     "F017",
+     "Yam, elephant"
+    ],
+    [
+     "F019",
+     "Yam, wild"
+    ]
+   ]
+  ],
+  [
+   "dravya.field-bean",
+   "Field bean (avarekalu)",
+   [
+    [
+     "B007",
+     "Field bean, black"
+    ],
+    [
+     "B008",
+     "Field bean, brown"
+    ],
+    [
+     "B009",
+     "Field bean, white"
+    ],
+    [
+     "D047",
+     "Field beans, tender, broad"
+    ],
+    [
+     "D048",
+     "Field beans, tender, lean"
+    ]
+   ]
+  ],
+  [
+   "dravya.french-bean",
+   "French bean",
+   [
+    [
+     "D049",
+     "French beans, country"
+    ],
+    [
+     "D050",
+     "French beans, hybrid"
+    ]
+   ]
+  ],
+  [
+   "dravya.fresh-dates",
+   "Fresh dates",
+   [
+    [
+     "E017",
+     "Dates, dry, pale brown"
+    ],
+    [
+     "E018",
+     "Dates, dry, dark brown"
+    ],
+    [
+     "E019",
+     "Dates, processed"
+    ]
+   ]
+  ],
+  [
+   "dravya.gherkin",
+   "Indian gherkin (kundru-dondakaya kin)",
+   [
+    [
+     "D043",
+     "Cucumber, green, elongate"
+    ],
+    [
+     "D044",
+     "Cucumber, green, short"
+    ],
+    [
+     "D045",
+     "Cucumber, orange, round"
+    ]
+   ]
+  ],
+  [
+   "dravya.green-grapes",
+   "Green grapes",
+   [
+    [
+     "E022",
+     "Grapes, seeded, round, black"
+    ],
+    [
+     "E023",
+     "Grapes, seeded, round, green"
+    ],
+    [
+     "E024",
+     "Grapes, seeded, round, red"
+    ],
+    [
+     "E025",
+     "Grapes, seedless, oval, black"
+    ],
+    [
+     "E026",
+     "Grapes, seedless, round, green"
+    ],
+    [
+     "E027",
+     "Grapes, seedless, round, black"
+    ]
+   ]
+  ],
+  [
+   "dravya.green-peas-pod",
+   "Green peas in pod (fresh sabzi)",
+   [
+    [
+     "B017",
+     "Peas, dry"
+    ],
+    [
+     "D061",
+     "Peas, fresh"
+    ]
+   ]
+  ],
+  [
+   "dravya.hung-curd",
+   "Hung curd (chakka)",
+   [
+    [
+     "D051",
+     "Jack fruit, raw"
+    ],
+    [
+     "D052",
+     "Jack fruit, seed, mature"
+    ],
+    [
+     "E030",
+     "Jack fruit, ripe"
+    ]
+   ]
+  ],
+  [
+   "dravya.jamun",
+   "Jamun (java plum)",
+   [
+    [
+     "E013",
+     "Black berry"
+    ],
+    [
+     "E031",
+     "Jambu fruit, ripe"
+    ]
+   ]
+  ],
+  [
+   "dravya.khus-root",
+   "Vetiver root",
+   [
+    [
+     "G030",
+     "Pippali"
+    ],
+    [
+     "G032",
+     "Poppy seeds"
+    ]
+   ]
+  ],
+  [
+   "dravya.manathakkali-greens",
+   "Black nightshade greens",
+   [
+    [
+     "A006",
+     "Maize, dry"
+    ],
+    [
+     "A007",
+     "Maize, tender, local"
+    ],
+    [
+     "A008",
+     "Maize, tender, sweet"
+    ]
+   ]
+  ],
+  [
+   "dravya.niger-seed",
+   "Niger seed (ramtil)",
+   [
+    [
+     "H015",
+     "Niger seeds, black"
+    ],
+    [
+     "H016",
+     "Niger seeds, gray"
+    ]
+   ]
+  ],
+  [
+   "dravya.taro-stem-regional",
+   "Taro stem",
+   [
+    [
+     "D040",
+     "Colocasia, stem, black"
+    ],
+    [
+     "D041",
+     "Colocasia, stem, green"
+    ]
+   ]
+  ],
+  [
+   "dravya.wild-celery-seed",
+   "Wild celery seed",
+   [
+    [
+     "G029",
+     "Omum"
+    ],
+    [
+     "C028",
+     "Parsley"
+    ]
+   ]
+  ]
+ ],
+ "resolvedAmbiguous": [
+  [
+   "dravya.broad-bean",
+   "Broad bean pod (sem)",
+   [
+    [
+     "B007",
+     "Field bean, black"
+    ],
+    [
+     "B008",
+     "Field bean, brown"
+    ],
+    [
+     "B009",
+     "Field bean, white"
+    ],
+    [
+     "D003",
+     "Bean scarlet, tender"
+    ],
+    [
+     "D047",
+     "Field beans, tender, broad"
+    ],
+    [
+     "D048",
+     "Field beans, tender, lean"
+    ],
+    [
+     "E001",
+     "Apple, big"
+    ],
+    [
+     "E002",
+     "Apple, green"
+    ],
+    [
+     "E003",
+     "Apple, small"
+    ],
+    [
+     "E004",
+     "Apple, small, Kashmir"
+    ]
+   ]
+  ],
+  [
+   "dravya.dry-dates",
+   "Dry dates (chhuara)",
+   [
+    [
+     "E017",
+     "Dates, dry, pale brown"
+    ],
+    [
+     "E018",
+     "Dates, dry, dark brown"
+    ],
+    [
+     "E019",
+     "Dates, processed"
+    ]
+   ]
+  ],
+  [
+   "dravya.pumpkin-red",
+   "Red pumpkin (kaddu)",
+   [
+    [
+     "D065",
+     "Pumpkin, green, cylindrical"
+    ],
+    [
+     "D066",
+     "Pumpkin, orange, round"
+    ]
+   ]
+  ],
+  [
+   "dravya.raisins",
+   "Raisins",
+   [
+    [
+     "E057",
+     "Raisins, dried, black"
+    ],
+    [
+     "E058",
+     "Raisins, dried, golden"
+    ]
+   ]
+  ],
+  [
+   "dravya.raw-jackfruit",
+   "Raw jackfruit (kathal)",
+   [
+    [
+     "D051",
+     "Jack fruit, raw"
+    ],
+    [
+     "D052",
+     "Jack fruit, seed, mature"
+    ],
+    [
+     "E030",
+     "Jack fruit, ripe"
+    ]
+   ]
+  ],
+  [
+   "dravya.white-radish",
+   "White radish (mooli)",
+   [
+    [
+     "F009",
+     "Radish, elongate, red skin"
+    ],
+    [
+     "F010",
+     "Radish, elongate, white skin"
+    ],
+    [
+     "F011",
+     "Radish, round, red skin"
+    ],
+    [
+     "F012",
+     "Radish, round, white skin"
+    ]
+   ]
+  ]
+ ],
+ "unmatched": [
+  [
+   "dravya.aam-panna",
+   "Aam panna"
+  ],
+  [
+   "dravya.acacia-gum",
+   "Edible acacia gum (gond)"
+  ],
+  [
+   "dravya.achar-masala",
+   "Pickle masala"
+  ],
+  [
+   "dravya.agathi-flower",
+   "Agathi flower"
+  ],
+  [
+   "dravya.ajwain-water",
+   "Ajwain water"
+  ],
+  [
+   "dravya.alkanet-root",
+   "Alkanet root"
+  ],
+  [
+   "dravya.aloe-vera-pulp",
+   "Aloe vera pulp"
+  ],
+  [
+   "dravya.alphonso-mango",
+   "Alphonso mango"
+  ],
+  [
+   "dravya.ambali",
+   "Ambali (fermented ragi porridge)"
+  ],
+  [
+   "dravya.ambarella",
+   "Ambarella (amtekai)"
+  ],
+  [
+   "dravya.amla-dry",
+   "Dried amla"
+  ],
+  [
+   "dravya.amla-juice",
+   "Amla juice"
+  ],
+  [
+   "dravya.amla-murabba",
+   "Amla murabba"
+  ],
+  [
+   "dravya.anantmool",
+   "Indian sarsaparilla"
+  ],
+  [
+   "dravya.ash-gourd-juice",
+   "Ash gourd juice"
+  ],
+  [
+   "dravya.ash-plantain",
+   "Ash plantain"
+  ],
+  [
+   "dravya.badam-milk",
+   "Badam milk"
+  ],
+  [
+   "dravya.bael-leaf",
+   "Bael leaf"
+  ],
+  [
+   "dravya.bael-murabba",
+   "Bael murabba"
+  ],
+  [
+   "dravya.barley-water",
+   "Barley water"
+  ],
+  [
+   "dravya.barnyard-millet",
+   "Barnyard millet"
+  ],
+  [
+   "dravya.basil-holy-seed",
+   "Tulsi seed"
+  ],
+  [
+   "dravya.basundi",
+   "Basundi"
+  ],
+  [
+   "dravya.bathua",
+   "Bathua (chenopodium)"
+  ],
+  [
+   "dravya.bay-leaf",
+   "Bay leaf, Indian"
+  ],
+  [
+   "dravya.bel-sherbet",
+   "Bael sherbet"
+  ],
+  [
+   "dravya.besan-ladoo",
+   "Besan ladoo"
+  ],
+  [
+   "dravya.besan-pakora",
+   "Besan pakora"
+  ],
+  [
+   "dravya.bhatt-soybean",
+   "Black soybean (bhatt)"
+  ],
+  [
+   "dravya.bibhitaki",
+   "Bibhitaki (belleric myrobalan)"
+  ],
+  [
+   "dravya.black-carrot-kanji",
+   "Black carrot kanji"
+  ],
+  [
+   "dravya.black-grapes",
+   "Black grapes"
+  ],
+  [
+   "dravya.black-rice",
+   "Black rice"
+  ],
+  [
+   "dravya.boora",
+   "Boora sugar"
+  ],
+  [
+   "dravya.bottle-gourd-juice",
+   "Bottle gourd juice"
+  ],
+  [
+   "dravya.brahmi",
+   "Brahmi (bacopa)"
+  ],
+  [
+   "dravya.browntop-millet",
+   "Browntop millet"
+  ],
+  [
+   "dravya.buffalo-ghee",
+   "Buffalo ghee"
+  ],
+  [
+   "dravya.buransh-juice",
+   "Rhododendron juice (buransh)"
+  ],
+  [
+   "dravya.byadgi-chili",
+   "Byadgi chili"
+  ],
+  [
+   "dravya.camel-milk",
+   "Camel milk"
+  ],
+  [
+   "dravya.camphor-edible",
+   "Edible camphor"
+  ],
+  [
+   "dravya.cassia-bark",
+   "Cassia bark"
+  ],
+  [
+   "dravya.castor-oil",
+   "Castor oil (dietary)"
+  ],
+  [
+   "dravya.catechu",
+   "Catechu (katha)"
+  ],
+  [
+   "dravya.ccf-tea",
+   "Cumin-coriander-fennel tea"
+  ],
+  [
+   "dravya.chaas-masala",
+   "Buttermilk masala"
+  ],
+  [
+   "dravya.chaat-masala",
+   "Chaat masala"
+  ],
+  [
+   "dravya.chai-masala",
+   "Chai spice blend"
+  ],
+  [
+   "dravya.chakramarda-greens",
+   "Chakvad greens (cassia tora)"
+  ],
+  [
+   "dravya.chana-dal",
+   "Chana dal (split bengal gram)"
+  ],
+  [
+   "dravya.chaturjata",
+   "Chaturjata spice blend"
+  ],
+  [
+   "dravya.chhurpi",
+   "Chhurpi (Himalayan hard cheese)"
+  ],
+  [
+   "dravya.chirata",
+   "Chirata"
+  ],
+  [
+   "dravya.chironji",
+   "Chironji (charoli)"
+  ],
+  [
+   "dravya.chyawanprash",
+   "Chyawanprash"
+  ],
+  [
+   "dravya.citron",
+   "Citron (bijora)"
+  ],
+  [
+   "dravya.coconut-chutney",
+   "Coconut chutney"
+  ],
+  [
+   "dravya.coconut-rice",
+   "Coconut rice"
+  ],
+  [
+   "dravya.coconut-sugar",
+   "Coconut sugar"
+  ],
+  [
+   "dravya.coconut-vinegar",
+   "Coconut vinegar"
+  ],
+  [
+   "dravya.colocasia-leaf",
+   "Colocasia leaf (arbi patta)"
+  ],
+  [
+   "dravya.colocasia-stem",
+   "Colocasia stem"
+  ],
+  [
+   "dravya.colostrum-milk",
+   "Colostrum milk"
+  ],
+  [
+   "dravya.copper-water",
+   "Copper-stored water"
+  ],
+  [
+   "dravya.country-chicken",
+   "Country chicken (desi)"
+  ],
+  [
+   "dravya.cucumber-seed",
+   "Cucumber seed (magaz)"
+  ],
+  [
+   "dravya.curd-rice",
+   "Curd rice"
+  ],
+  [
+   "dravya.dal-fry-toor",
+   "Dal fry (toor)"
+  ],
+  [
+   "dravya.dal-tadka-mung",
+   "Mung dal tadka"
+  ],
+  [
+   "dravya.date-palm-jaggery",
+   "Date palm jaggery (nolen gur)"
+  ],
+  [
+   "dravya.desi-egg",
+   "Country chicken egg"
+  ],
+  [
+   "dravya.dhana-jeera-powder",
+   "Coriander-cumin powder"
+  ],
+  [
+   "dravya.dhania-water",
+   "Coriander seed water"
+  ],
+  [
+   "dravya.dhokla",
+   "Dhokla"
+  ],
+  [
+   "dravya.dried-water-chestnut",
+   "Dried water chestnut"
+  ],
+  [
+   "dravya.dry-coconut",
+   "Dry coconut (copra)"
+  ],
+  [
+   "dravya.edible-lime",
+   "Edible lime (chuna)"
+  ],
+  [
+   "dravya.egg-bhurji",
+   "Egg bhurji"
+  ],
+  [
+   "dravya.elaichi-banana",
+   "Elaichi banana (small)"
+  ],
+  [
+   "dravya.emmer-wheat",
+   "Emmer wheat (khapli)"
+  ],
+  [
+   "dravya.fenugreek-sprouted",
+   "Sprouted fenugreek"
+  ],
+  [
+   "dravya.fermented-rice-kanji",
+   "Rice kanji (fermented gruel)"
+  ],
+  [
+   "dravya.filter-coffee",
+   "South Indian filter coffee"
+  ],
+  [
+   "dravya.flat-bean",
+   "Flat bean (papdi)"
+  ],
+  [
+   "dravya.full-cream-milk",
+   "Full-cream milk (packaged)"
+  ],
+  [
+   "dravya.garcinia",
+   "Garcinia fruit"
+  ],
+  [
+   "dravya.ghee-cultured",
+   "Cultured ghee"
+  ],
+  [
+   "dravya.ghee-spiced",
+   "Spiced ghee"
+  ],
+  [
+   "dravya.giloy-satva",
+   "Giloy satva (starch extract)"
+  ],
+  [
+   "dravya.ginger-murabba",
+   "Ginger murabba"
+  ],
+  [
+   "dravya.ginger-pickled",
+   "Pickled ginger"
+  ],
+  [
+   "dravya.ginger-tender",
+   "Tender ginger (sabzi/pickle)"
+  ],
+  [
+   "dravya.gokshura",
+   "Gokshura (tribulus)"
+  ],
+  [
+   "dravya.golden-milk",
+   "Golden milk"
+  ],
+  [
+   "dravya.gond-katira-drink",
+   "Gond katira cooler"
+  ],
+  [
+   "dravya.gondhoraj-lime",
+   "Gondhoraj lime"
+  ],
+  [
+   "dravya.gooseberry-star",
+   "Star gooseberry (harfarauri)"
+  ],
+  [
+   "dravya.gotu-kola",
+   "Gotu kola"
+  ],
+  [
+   "dravya.govindbhog-rice",
+   "Govindbhog rice"
+  ],
+  [
+   "dravya.greater-galangal",
+   "Greater galangal"
+  ],
+  [
+   "dravya.guduchi",
+   "Guduchi (giloy) stem"
+  ],
+  [
+   "dravya.gulkand",
+   "Rose petal preserve"
+  ],
+  [
+   "dravya.gunda-dry",
+   "Gunda (dried lasora)"
+  ],
+  [
+   "dravya.gundruk",
+   "Gundruk (fermented greens)"
+  ],
+  [
+   "dravya.halwa-carrot",
+   "Carrot halwa"
+  ],
+  [
+   "dravya.haritaki",
+   "Haritaki (chebulic myrobalan)"
+  ],
+  [
+   "dravya.haritaki-murabba",
+   "Haritaki murabba"
+  ],
+  [
+   "dravya.hawaijar",
+   "Hawaijar (fermented soybean)"
+  ],
+  [
+   "dravya.herbal-kadha",
+   "Herbal kadha"
+  ],
+  [
+   "dravya.hingvastak-churna",
+   "Hingvastak churna"
+  ],
+  [
+   "dravya.honey-aged",
+   "Aged honey"
+  ],
+  [
+   "dravya.idli-dosa-batter",
+   "Fermented idli-dosa batter"
+  ],
+  [
+   "dravya.idli-podi",
+   "Idli podi (gunpowder)"
+  ],
+  [
+   "dravya.ivy-gourd",
+   "Ivy gourd (tindora)"
+  ],
+  [
+   "dravya.jackfruit-seed",
+   "Jackfruit seed"
+  ],
+  [
+   "dravya.jaljeera",
+   "Jaljeera"
+  ],
+  [
+   "dravya.jamun-seed-powder",
+   "Jamun seed powder"
+  ],
+  [
+   "dravya.jamun-vinegar",
+   "Jamun vinegar"
+  ],
+  [
+   "dravya.jeera-water",
+   "Cumin water"
+  ],
+  [
+   "dravya.joha-rice",
+   "Joha rice"
+  ],
+  [
+   "dravya.jowar-bhakri",
+   "Jowar bhakri"
+  ],
+  [
+   "dravya.kachampuli",
+   "Kachampuli vinegar"
+  ],
+  [
+   "dravya.kachnar-buds",
+   "Kachnar buds"
+  ],
+  [
+   "dravya.kachri-powder",
+   "Wild melon powder"
+  ],
+  [
+   "dravya.kadhi",
+   "Kadhi"
+  ],
+  [
+   "dravya.kaji-nemu",
+   "Kaji nemu (Assam lemon)"
+  ],
+  [
+   "dravya.kalmegh",
+   "Kalmegh (andrographis)"
+  ],
+  [
+   "dravya.kamal-gatta-dry",
+   "Dried lotus seed (kamal gatta)"
+  ],
+  [
+   "dravya.karonda-ripe",
+   "Ripe karonda"
+  ],
+  [
+   "dravya.kaunch-beej",
+   "Mucuna seed"
+  ],
+  [
+   "dravya.keema",
+   "Minced mutton (keema)"
+  ],
+  [
+   "dravya.ker-berry",
+   "Ker (desert caper berry)"
+  ],
+  [
+   "dravya.khakhra",
+   "Khakhra"
+  ],
+  [
+   "dravya.khalpi",
+   "Khalpi (fermented cucumber)"
+  ],
+  [
+   "dravya.kharvas",
+   "Kharvas (colostrum pudding)"
+  ],
+  [
+   "dravya.khichadi-vegetable",
+   "Vegetable khichadi"
+  ],
+  [
+   "dravya.khus-sherbet",
+   "Khus sherbet"
+  ],
+  [
+   "dravya.kinema",
+   "Kinema (fermented soybean)"
+  ],
+  [
+   "dravya.kitchari-mung-rice",
+   "Mung and rice kitchari"
+  ],
+  [
+   "dravya.kitchari-tridoshic",
+   "Tridoshic kitchari"
+  ],
+  [
+   "dravya.kokum",
+   "Kokum rind"
+  ],
+  [
+   "dravya.kokum-sherbet",
+   "Kokum sherbet"
+  ],
+  [
+   "dravya.lasora",
+   "Lasora (gunda berry, fresh)"
+  ],
+  [
+   "dravya.lassi-digestive",
+   "Cumin lassi"
+  ],
+  [
+   "dravya.lassi-sweet",
+   "Sweet lassi"
+  ],
+  [
+   "dravya.lemon-rice",
+   "Lemon rice"
+  ],
+  [
+   "dravya.lemongrass-tea",
+   "Lemongrass tea"
+  ],
+  [
+   "dravya.long-brinjal",
+   "Brinjal (long purple)"
+  ],
+  [
+   "dravya.long-cucumber",
+   "Long cucumber (kakri)"
+  ],
+  [
+   "dravya.lotus-seed-fresh",
+   "Fresh lotus seed"
+  ],
+  [
+   "dravya.mahua-flower-dry",
+   "Mahua flower (dried)"
+  ],
+  [
+   "dravya.mahua-flower-fresh",
+   "Mahua flower (fresh)"
+  ],
+  [
+   "dravya.mahua-oil",
+   "Mahua oil"
+  ],
+  [
+   "dravya.mamsa-rasa",
+   "Meat broth (mamsa rasa)"
+  ],
+  [
+   "dravya.mango-pickle",
+   "Mango pickle (achar)"
+  ],
+  [
+   "dravya.marathi-moggu",
+   "Kapok bud"
+  ],
+  [
+   "dravya.masala-chai",
+   "Masala chai"
+  ],
+  [
+   "dravya.medu-vada",
+   "Medu vada"
+  ],
+  [
+   "dravya.methi-water",
+   "Fenugreek water"
+  ],
+  [
+   "dravya.mint-chutney",
+   "Mint chutney"
+  ],
+  [
+   "dravya.mishri",
+   "Rock sugar (mishri)"
+  ],
+  [
+   "dravya.moong-dal-halwa",
+   "Moong dal halwa"
+  ],
+  [
+   "dravya.moringa-flower",
+   "Moringa flower"
+  ],
+  [
+   "dravya.moringa-leaf-dry",
+   "Moringa leaf powder"
+  ],
+  [
+   "dravya.mukhwas",
+   "Mukhwas (fennel mouth-freshener)"
+  ],
+  [
+   "dravya.muskmelon-seed",
+   "Muskmelon seed"
+  ],
+  [
+   "dravya.musta",
+   "Nutgrass tuber"
+  ],
+  [
+   "dravya.mustard-pods",
+   "Tender mustard pods"
+  ],
+  [
+   "dravya.mustard-seed-yellow",
+   "Yellow mustard seed"
+  ],
+  [
+   "dravya.nagkesar",
+   "Cobra saffron"
+  ],
+  [
+   "dravya.navara-rice",
+   "Navara rice"
+  ],
+  [
+   "dravya.neem-flower",
+   "Neem flower"
+  ],
+  [
+   "dravya.neem-leaf",
+   "Neem leaf"
+  ],
+  [
+   "dravya.neera",
+   "Neera (fresh palm sap)"
+  ],
+  [
+   "dravya.nendran-banana",
+   "Nendran banana"
+  ],
+  [
+   "dravya.niger-oil",
+   "Niger seed oil"
+  ],
+  [
+   "dravya.pakhala",
+   "Pakhala (fermented water-rice)"
+  ],
+  [
+   "dravya.palmyra-jaggery",
+   "Palmyra jaggery (karupatti)"
+  ],
+  [
+   "dravya.panchamrita",
+   "Panchamrita"
+  ],
+  [
+   "dravya.panchmeva",
+   "Panchmeva (five dry fruits)"
+  ],
+  [
+   "dravya.panta-bhat",
+   "Panta bhat (fermented rice)"
+  ],
+  [
+   "dravya.papdi-lilva",
+   "Fresh hyacinth beans (lilva)"
+  ],
+  [
+   "dravya.paratha-plain",
+   "Plain paratha"
+  ],
+  [
+   "dravya.parwal-sweet",
+   "Sweet parwal variant"
+  ],
+  [
+   "dravya.paya-soup",
+   "Trotters soup (paya)"
+  ],
+  [
+   "dravya.payasam-mung",
+   "Mung payasam"
+  ],
+  [
+   "dravya.peanut-chikki",
+   "Peanut chikki"
+  ],
+  [
+   "dravya.pippali-root",
+   "Long pepper root"
+  ],
+  [
+   "dravya.pomegranate-sour",
+   "Sour pomegranate"
+  ],
+  [
+   "dravya.pomegranate-sweet",
+   "Sweet pomegranate"
+  ],
+  [
+   "dravya.pongal-sweet",
+   "Sweet pongal"
+  ],
+  [
+   "dravya.pongal-ven",
+   "Ven pongal"
+  ],
+  [
+   "dravya.ponnanganni",
+   "Dwarf copperleaf (ponnanganni)"
+  ],
+  [
+   "dravya.psyllium-husk",
+   "Psyllium husk"
+  ],
+  [
+   "dravya.pumpkin-tendril",
+   "Pumpkin tendrils and leaves"
+  ],
+  [
+   "dravya.punarnava-leaf",
+   "Punarnava leaf"
+  ],
+  [
+   "dravya.puran-poli",
+   "Puran poli"
+  ],
+  [
+   "dravya.purple-yam",
+   "Purple yam (kand)"
+  ],
+  [
+   "dravya.rabri",
+   "Rabri"
+  ],
+  [
+   "dravya.radish-greens",
+   "Radish greens"
+  ],
+  [
+   "dravya.ragi-malt",
+   "Ragi malt (beverage)"
+  ],
+  [
+   "dravya.ramphal",
+   "Ramphal (bullock's heart)"
+  ],
+  [
+   "dravya.rasam",
+   "Rasam"
+  ],
+  [
+   "dravya.rasam-podi",
+   "Rasam spice blend"
+  ],
+  [
+   "dravya.red-amaranth-greens",
+   "Red amaranth greens (lal chaulai)"
+  ],
+  [
+   "dravya.red-banana",
+   "Red banana"
+  ],
+  [
+   "dravya.red-cowpea",
+   "Red cowpea"
+  ],
+  [
+   "dravya.red-onion",
+   "Red onion"
+  ],
+  [
+   "dravya.red-radish",
+   "Red radish"
+  ],
+  [
+   "dravya.red-yellow-capsicum",
+   "Red/yellow capsicum"
+  ],
+  [
+   "dravya.rice-bean",
+   "Rice bean"
+  ],
+  [
+   "dravya.rice-gruel",
+   "Rice gruel"
+  ],
+  [
+   "dravya.rice-red",
+   "Red rice"
+  ],
+  [
+   "dravya.rice-white-basmati",
+   "White basmati rice"
+  ],
+  [
+   "dravya.roasted-chana",
+   "Roasted chana (bhuna)"
+  ],
+  [
+   "dravya.rose-apple",
+   "Rose apple (gulab jamun phal)"
+  ],
+  [
+   "dravya.rose-milk",
+   "Rose milk"
+  ],
+  [
+   "dravya.rose-sherbet",
+   "Rose sherbet"
+  ],
+  [
+   "dravya.sabja-seed",
+   "Sweet basil seed (sabja)"
+  ],
+  [
+   "dravya.sabudana-khichdi",
+   "Sabudana khichdi"
+  ],
+  [
+   "dravya.safed-musli",
+   "Safed musli"
+  ],
+  [
+   "dravya.salted-nimbu-pani",
+   "Salted lime water"
+  ],
+  [
+   "dravya.sambar-podi",
+   "Sambar spice blend"
+  ],
+  [
+   "dravya.sambhar-salt",
+   "Sambhar lake salt"
+  ],
+  [
+   "dravya.sangri",
+   "Sangri (desert bean)"
+  ],
+  [
+   "dravya.sarda-melon",
+   "Sarda melon"
+  ],
+  [
+   "dravya.sattu-drink",
+   "Sattu drink"
+  ],
+  [
+   "dravya.sattu-flour",
+   "Roasted gram flour (sattu)"
+  ],
+  [
+   "dravya.saunf-water",
+   "Fennel water"
+  ],
+  [
+   "dravya.seeraga-samba-rice",
+   "Seeraga samba rice"
+  ],
+  [
+   "dravya.sesame-spice-blend",
+   "Sesame chutney spice blend"
+  ],
+  [
+   "dravya.shankhpushpi",
+   "Shankhpushpi"
+  ],
+  [
+   "dravya.shatavari-powder",
+   "Shatavari root powder"
+  ],
+  [
+   "dravya.shilajit",
+   "Shilajit"
+  ],
+  [
+   "dravya.shrikhand",
+   "Shrikhand"
+  ],
+  [
+   "dravya.silver-leaf",
+   "Edible silver leaf (vark)"
+  ],
+  [
+   "dravya.singhara-atta-halwa",
+   "Singhara flour halwa"
+  ],
+  [
+   "dravya.sinki",
+   "Sinki (fermented radish)"
+  ],
+  [
+   "dravya.small-brinjal",
+   "Brinjal (small round)"
+  ],
+  [
+   "dravya.snake-gourd",
+   "Snake gourd"
+  ],
+  [
+   "dravya.sooji-halwa",
+   "Sooji halwa (sheera)"
+  ],
+  [
+   "dravya.spine-gourd",
+   "Spine gourd (kantola)"
+  ],
+  [
+   "dravya.sponge-gourd",
+   "Sponge gourd (gilki)"
+  ],
+  [
+   "dravya.spring-garlic-greens",
+   "Spring garlic greens"
+  ],
+  [
+   "dravya.sprouted-chana",
+   "Sprouted black chickpea"
+  ],
+  [
+   "dravya.sprouted-mung",
+   "Sprouted mung"
+  ],
+  [
+   "dravya.steamed-modak",
+   "Steamed modak"
+  ],
+  [
+   "dravya.stinging-nettle",
+   "Stinging nettle greens (sisnu)"
+  ],
+  [
+   "dravya.sugarcane-stick",
+   "Sugarcane (chewing)"
+  ],
+  [
+   "dravya.sugarcane-vinegar",
+   "Sugarcane vinegar (sirka)"
+  ],
+  [
+   "dravya.sweet-nimbu-pani",
+   "Sweet lime water"
+  ],
+  [
+   "dravya.sword-bean",
+   "Sword bean"
+  ],
+  [
+   "dravya.tadgola",
+   "Ice apple (tadgola/nungu)"
+  ],
+  [
+   "dravya.tamarind-rice",
+   "Tamarind rice (puliyodarai)"
+  ],
+  [
+   "dravya.tamarind-ripe",
+   "Ripe tamarind (fruit use)"
+  ],
+  [
+   "dravya.tender-bamboo-pickled",
+   "Tender bamboo (fresh, unfermented)"
+  ],
+  [
+   "dravya.tender-cashew-fruit",
+   "Cashew apple"
+  ],
+  [
+   "dravya.tender-coconut-flesh",
+   "Tender coconut flesh"
+  ],
+  [
+   "dravya.tender-tamarind-leaf",
+   "Tender tamarind leaf"
+  ],
+  [
+   "dravya.tender-tamarind-pod",
+   "Tender tamarind pod"
+  ],
+  [
+   "dravya.thandai",
+   "Thandai"
+  ],
+  [
+   "dravya.thandai-masala",
+   "Thandai masala"
+  ],
+  [
+   "dravya.thekera",
+   "Thekera (Assam garcinia)"
+  ],
+  [
+   "dravya.thepla",
+   "Methi thepla"
+  ],
+  [
+   "dravya.til-ladoo",
+   "Til-gud ladoo"
+  ],
+  [
+   "dravya.til-oil-pickle",
+   "Gingelly oil pickle base"
+  ],
+  [
+   "dravya.tragacanth-gum",
+   "Tragacanth gum (gond katira, raw)"
+  ],
+  [
+   "dravya.trikatu",
+   "Trikatu spice blend"
+  ],
+  [
+   "dravya.tulsi-tea",
+   "Tulsi tea"
+  ],
+  [
+   "dravya.turmeric-black",
+   "Black turmeric"
+  ],
+  [
+   "dravya.turnip-greens-root",
+   "Baby turnip with greens"
+  ],
+  [
+   "dravya.urad-flour",
+   "Urad flour"
+  ],
+  [
+   "dravya.urad-papad",
+   "Urad papad"
+  ],
+  [
+   "dravya.uttapam",
+   "Uttapam"
+  ],
+  [
+   "dravya.veg-pulao",
+   "Vegetable pulao"
+  ],
+  [
+   "dravya.vermicelli",
+   "Vermicelli (seviyan)"
+  ],
+  [
+   "dravya.vidari-kanda",
+   "Vidari kanda"
+  ],
+  [
+   "dravya.warm-water",
+   "Warm boiled water"
+  ],
+  [
+   "dravya.water-apple",
+   "Water apple (jamrul)"
+  ],
+  [
+   "dravya.water-chestnut-flour",
+   "Water chestnut flour"
+  ],
+  [
+   "dravya.water-lily-stem",
+   "Water lily stem"
+  ],
+  [
+   "dravya.water-spinach",
+   "Water spinach (kalmi)"
+  ],
+  [
+   "dravya.wheatgrass",
+   "Wheatgrass"
+  ],
+  [
+   "dravya.white-onion",
+   "White onion"
+  ],
+  [
+   "dravya.white-peas",
+   "White peas (safed vatana)"
+  ],
+  [
+   "dravya.wild-brinjal",
+   "Wild brinjal (kantakari class)"
+  ],
+  [
+   "dravya.wild-mustard",
+   "Wild mustard"
+  ],
+  [
+   "dravya.yak-butter",
+   "Yak butter"
+  ],
+  [
+   "dravya.yak-milk",
+   "Yak milk"
+  ],
+  [
+   "dravya.yam-lesser",
+   "Lesser yam"
+  ]
+ ],
+ "withdrawn": [
+  [
+   "dravya.chickpea-white",
+   "White chickpea",
+   "B002",
+   "Bengal gram, whole"
+  ],
+  [
+   "dravya.elephant-apple",
+   "Elephant apple (ou-tenga)",
+   "E067",
+   "Wood Apple"
+  ],
+  [
+   "dravya.foxtail-millet",
+   "Foxtail millet",
+   "A017",
+   "Varagu"
+  ],
+  [
+   "dravya.fresh-water-chestnut",
+   "Fresh water chestnut (singhara)",
+   "F016",
+   "Water Chestnut"
+  ],
+  [
+   "dravya.kanda-poha",
+   "Kanda poha",
+   "A011",
+   "Rice flakes"
+  ],
+  [
+   "dravya.mosambi-juice",
+   "Sweet lime juice",
+   "E034",
+   "Lime, sweet, pulp"
+  ],
+  [
+   "dravya.petha-murabba",
+   "Ash gourd murabba (petha)",
+   "D001",
+   "Ash gourd"
+  ]
+ ]
+}

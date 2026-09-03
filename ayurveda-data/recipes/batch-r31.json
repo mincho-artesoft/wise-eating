@@ -1,0 +1,273 @@
+{
+  "formatVersion": "1.0",
+  "batch": "recipe-batch-r31",
+  "qualityState": "aiDraft",
+  "items": [
+    {
+      "id": "recipe.amla-chutney", "name": "Amla Chutney", "category": "everyday", "meal": "lunch",
+      "servings": 8, "prepMinutes": 10, "cookMinutes": 5,
+      "ingredients": [
+        {"dravyaId": "dravya.amla-fresh", "name": "Fresh amla, deseeded", "grams": 200},
+        {"dravyaId": "dravya.cilantro", "name": "Fresh coriander leaves", "grams": 40},
+        {"dravyaId": "dravya.green-chili", "name": "Green chili", "grams": 10},
+        {"dravyaId": "dravya.ginger-fresh", "name": "Fresh ginger", "grams": 10},
+        {"dravyaId": "dravya.cumin", "name": "Cumin seed", "grams": 3},
+        {"dravyaId": "dravya.rock-salt", "name": "Rock salt", "grams": 3},
+        {"dravyaId": "dravya.jaggery", "name": "Jaggery", "grams": 15}
+      ],
+      "steps": [
+        "Steam the deseeded amla for four to five minutes until it yields to a fingernail; this softens the astringency without losing the sour rasa.",
+        "Dry-roast the cumin until fragrant.",
+        "Grind everything to a coarse paste with a little water, adding the jaggery last so the sourness stays forward.",
+        "Rest for ten minutes before serving; it keeps three days refrigerated."
+      ],
+      "dosha": {"vata": 0, "pitta": -1, "kapha": -1},
+      "seasons": ["sharad", "hemanta", "shishira"], "timeOfDay": ["midday"],
+      "viruddhaFlags": [],
+      "guidance": "Amla is the rare sour that cools rather than heats, which is why this chutney suits pitta where a tamarind or lime one would not. Vata: keep the chili low and add a spoon of sesame oil. Pitta: omit the chili entirely. Kapha: skip the jaggery.",
+      "provenance": ["North Indian amla chutney tradition", "Bhavaprakasha Nighantu, Amalaki"],
+      "confidence": {"ayur": 0.8, "sci": 0.6}
+    },
+    {
+      "id": "recipe.sol-kadhi", "name": "Sol Kadhi", "category": "everyday", "meal": "lunch",
+      "servings": 4, "prepMinutes": 15, "cookMinutes": 0,
+      "ingredients": [
+        {"dravyaId": "dravya.kokum", "name": "Dried kokum petals", "grams": 15},
+        {"dravyaId": "dravya.coconut-fresh", "name": "Fresh grated coconut", "grams": 150},
+        {"dravyaId": "dravya.garlic", "name": "Garlic", "grams": 5},
+        {"dravyaId": "dravya.green-chili", "name": "Green chili", "grams": 5},
+        {"dravyaId": "dravya.cilantro", "name": "Fresh coriander leaves", "grams": 10},
+        {"dravyaId": "dravya.rock-salt", "name": "Rock salt", "grams": 3},
+        {"dravyaId": "dravya.cumin", "name": "Cumin seed", "grams": 2}
+      ],
+      "steps": [
+        "Soak the kokum in 200 ml warm water for fifteen minutes and press out a deep pink extract.",
+        "Blend the coconut with 300 ml warm water and strain firmly to get thick coconut milk.",
+        "Crush the garlic, chili and cumin to a paste and stir into the coconut milk.",
+        "Combine with the kokum extract, salt lightly, and finish with coriander. Serve cool, never boiled — heat splits it."
+      ],
+      "dosha": {"vata": -1, "pitta": -1, "kapha": 0},
+      "seasons": ["grishma", "varsha", "sharad"], "timeOfDay": ["midday"],
+      "viruddhaFlags": [],
+      "guidance": "The Konkan answer to a heavy or fried meal: kokum is sour but sheeta, so it settles pitta rather than provoking it, and the coconut carries it. Vata: serve at room temperature. Pitta: leave out the garlic. Kapha: thin the coconut milk and take a small cup.",
+      "provenance": ["Konkan and Malvani household tradition", "Bhavaprakasha Nighantu, Vrikshamla"],
+      "confidence": {"ayur": 0.8, "sci": 0.6}
+    },
+    {
+      "id": "recipe.khajur-smoothie", "name": "Date-banana Smoothie", "category": "international", "meal": "breakfast",
+      "servings": 2, "prepMinutes": 8, "cookMinutes": 0,
+      "ingredients": [
+        {"dravyaId": "dravya.dates", "name": "Soft dates, pitted", "grams": 60},
+        {"dravyaId": "dravya.banana-ripe", "name": "Ripe banana", "grams": 200},
+        {"dravyaId": "dravya.milk-cow", "name": "Whole milk, warmed and cooled", "grams": 300},
+        {"dravyaId": "dravya.cardamom", "name": "Green cardamom", "grams": 1},
+        {"dravyaId": "dravya.ghee", "name": "Ghee", "grams": 5}
+      ],
+      "steps": [
+        "Soak the dates in a little warm milk for ten minutes to soften.",
+        "Blend everything until completely smooth.",
+        "Serve at room temperature rather than chilled — cold blunts agni and this is already a heavy drink."
+      ],
+      "dosha": {"vata": -2, "pitta": -1, "kapha": 2},
+      "seasons": ["hemanta", "shishira"], "timeOfDay": ["morning"],
+      "viruddhaFlags": ["milk with fruit is a contested combination; banana and milk are named together in some modern viruddha lists though not in the samhitas"],
+      "guidance": "Strongly building, and the classic vata breakfast when appetite is weak but weight is needed. Vata: as written. Pitta: reduce the dates. Kapha: this is the wrong drink — take warm spiced water instead. Compliant variant: replace cow milk with unsweetened almond milk.",
+      "provenance": ["modern preparation; ingredients per Bhavaprakasha Kharjura and Kadali"],
+      "confidence": {"ayur": 0.7, "sci": 0.6}
+    },
+    {
+      "id": "recipe.amla-ginger-shot", "name": "Amla Ginger Morning Shot", "category": "international", "meal": "breakfast",
+      "servings": 2, "prepMinutes": 8, "cookMinutes": 0,
+      "ingredients": [
+        {"dravyaId": "dravya.amla-fresh", "name": "Fresh amla", "grams": 100},
+        {"dravyaId": "dravya.ginger-fresh", "name": "Fresh ginger", "grams": 15},
+        {"dravyaId": "dravya.honey", "name": "Raw honey", "grams": 10},
+        {"dravyaId": "dravya.black-pepper", "name": "Black pepper, freshly ground", "grams": 0.3}
+      ],
+      "steps": [
+        "Juice the amla and ginger together, or blend with 50 ml water and strain.",
+        "Let it come to room temperature before stirring in the honey — honey must never be added to anything hot.",
+        "Add the pepper and drink immediately; amla juice oxidises within minutes."
+      ],
+      "dosha": {"vata": 0, "pitta": -1, "kapha": -1},
+      "seasons": ["sharad", "hemanta", "shishira"], "timeOfDay": ["morning"],
+      "viruddhaFlags": ["honey must not be heated or added to a warm liquid"],
+      "guidance": "Taken on an empty stomach. The pepper is there for absorption, not heat. Vata: halve the ginger and follow with warm water. Pitta: omit the ginger and pepper. Kapha: as written. Not for children under twelve months because of the honey.",
+      "provenance": ["modern rasayana practice; amalaki per Charaka Samhita Chikitsasthana 1"],
+      "confidence": {"ayur": 0.75, "sci": 0.6}
+    },
+    {
+      "id": "recipe.gond-ladoo", "name": "Gond Ladoo", "category": "everyday", "meal": "snack",
+      "servings": 12, "prepMinutes": 20, "cookMinutes": 25,
+      "ingredients": [
+        {"dravyaId": "dravya.acacia-gum", "name": "Edible acacia gum (gond)", "grams": 60},
+        {"dravyaId": "dravya.whole-wheat-flour", "name": "Whole wheat flour", "grams": 200},
+        {"dravyaId": "dravya.ghee", "name": "Ghee", "grams": 150},
+        {"dravyaId": "dravya.jaggery", "name": "Jaggery", "grams": 180},
+        {"dravyaId": "dravya.almond", "name": "Almonds, chopped", "grams": 50},
+        {"dravyaId": "dravya.ginger-dry", "name": "Dry ginger powder", "grams": 5},
+        {"dravyaId": "dravya.cardamom", "name": "Green cardamom", "grams": 3}
+      ],
+      "steps": [
+        "Fry the gond in ghee over low heat until each piece puffs white and crisp; lift out and crush coarsely.",
+        "In the same ghee roast the flour on low heat until it darkens and smells nutty, twelve to fifteen minutes.",
+        "Take off the heat, fold in the jaggery while the mixture is warm but not hot, then the gond, almonds, dry ginger and cardamom.",
+        "Shape into ladoos while warm enough to hold."
+      ],
+      "dosha": {"vata": -2, "pitta": 0, "kapha": 2},
+      "seasons": ["hemanta", "shishira"], "timeOfDay": ["morning"],
+      "viruddhaFlags": [],
+      "guidance": "A winter and postpartum food, brimhana and vata-pacifying, traditionally one a day with warm milk. Heavy by design. Vata: as written. Pitta: reduce the dry ginger. Kapha: not indicated. Not for weak agni or high ama.",
+      "provenance": ["North Indian winter and postpartum tradition", "Bhavaprakasha Nighantu, Guda varga"],
+      "confidence": {"ayur": 0.8, "sci": 0.6}
+    },
+    {
+      "id": "recipe.samak-rice-fasting", "name": "Samak Rice Bowl (Fasting)", "category": "everyday", "meal": "lunch",
+      "servings": 2, "prepMinutes": 10, "cookMinutes": 20,
+      "ingredients": [
+        {"dravyaId": "dravya.barnyard-millet", "name": "Samak rice (barnyard millet)", "grams": 150},
+        {"dravyaId": "dravya.peanut-roasted", "name": "Roasted peanuts, crushed", "grams": 40},
+        {"dravyaId": "dravya.potato", "name": "Potato, cubed", "grams": 120},
+        {"dravyaId": "dravya.ghee", "name": "Ghee", "grams": 20},
+        {"dravyaId": "dravya.cumin", "name": "Cumin seed", "grams": 3},
+        {"dravyaId": "dravya.green-chili", "name": "Green chili", "grams": 5},
+        {"dravyaId": "dravya.rock-salt", "name": "Rock salt", "grams": 4},
+        {"dravyaId": "dravya.cilantro", "name": "Fresh coriander leaves", "grams": 15}
+      ],
+      "steps": [
+        "Rinse the samak and soak fifteen minutes.",
+        "Temper cumin and chili in ghee, add the potato and cook until it takes colour.",
+        "Add the drained samak and twice its volume of water; cook covered until soft, about twelve minutes.",
+        "Fold in the peanuts and coriander; rest five minutes before serving."
+      ],
+      "dosha": {"vata": 0, "pitta": -1, "kapha": -1},
+      "seasons": ["vasanta", "sharad"], "timeOfDay": ["midday"],
+      "viruddhaFlags": [],
+      "guidance": "The vrat staple — samak is a millet, not a grain, which is why it is allowed on fasting days. Lighter than rice and easier on kapha. Vata: extra ghee and serve hot. Pitta: keep the chili out. Kapha: reduce the peanuts.",
+      "provenance": ["Navratri and Ekadashi vrat tradition", "IFCT 2017 barnyard millet"],
+      "confidence": {"ayur": 0.75, "sci": 0.7}
+    },
+    {
+      "id": "recipe.singhara-pakora-fasting", "name": "Singhara Flour Pakora", "category": "everyday", "meal": "snack",
+      "servings": 4, "prepMinutes": 15, "cookMinutes": 15,
+      "ingredients": [
+        {"dravyaId": "dravya.water-chestnut-flour", "name": "Singhara (water chestnut) flour", "grams": 150},
+        {"dravyaId": "dravya.potato", "name": "Potato, sliced thin", "grams": 200},
+        {"dravyaId": "dravya.rock-salt", "name": "Rock salt", "grams": 4},
+        {"dravyaId": "dravya.black-pepper", "name": "Black pepper", "grams": 1},
+        {"dravyaId": "dravya.cumin", "name": "Cumin seed", "grams": 2},
+        {"dravyaId": "dravya.peanut-oil", "name": "Groundnut oil for frying", "grams": 60}
+      ],
+      "steps": [
+        "Whisk the singhara flour with salt, pepper and cumin and enough water for a coating batter; rest ten minutes.",
+        "Dip the potato slices and fry in moderately hot oil until pale gold — singhara flour browns faster than gram flour.",
+        "Drain well and serve hot with a fasting-friendly chutney."
+      ],
+      "dosha": {"vata": 0, "pitta": 1, "kapha": 1},
+      "seasons": ["sharad", "hemanta"], "timeOfDay": ["midday"],
+      "viruddhaFlags": [],
+      "guidance": "A vrat snack. Fried and therefore guru whatever the flour, so occasional rather than habitual. Vata: as written, eaten hot. Pitta: reduce the pepper and avoid in grishma. Kapha: not indicated.",
+      "provenance": ["North Indian vrat tradition", "Bhavaprakasha Nighantu, Shringataka"],
+      "confidence": {"ayur": 0.7, "sci": 0.6}
+    },
+    {
+      "id": "recipe.ugadi-pachadi", "name": "Ugadi Pachadi", "category": "everyday", "meal": "snack",
+      "servings": 6, "prepMinutes": 15, "cookMinutes": 0,
+      "ingredients": [
+        {"dravyaId": "dravya.raw-mango-vegetable", "name": "Raw mango, finely chopped", "grams": 60},
+        {"dravyaId": "dravya.jaggery", "name": "Jaggery", "grams": 60},
+        {"dravyaId": "dravya.tamarind", "name": "Tamarind pulp", "grams": 20},
+        {"dravyaId": "dravya.neem-flower", "name": "Neem flowers", "grams": 5},
+        {"dravyaId": "dravya.green-chili", "name": "Green chili", "grams": 5},
+        {"dravyaId": "dravya.rock-salt", "name": "Rock salt", "grams": 3},
+        {"dravyaId": "dravya.banana-ripe", "name": "Ripe banana", "grams": 60}
+      ],
+      "steps": [
+        "Dissolve the jaggery and tamarind in 200 ml water and strain.",
+        "Stir in the raw mango, neem flowers, chili and salt.",
+        "Fold in the banana last. Serve at once, in small portions."
+      ],
+      "dosha": {"vata": 0, "pitta": 0, "kapha": 0},
+      "seasons": ["vasanta"], "timeOfDay": ["morning"],
+      "viruddhaFlags": [],
+      "guidance": "Eaten at Ugadi to carry all six tastes in one spoon — sweet, sour, salt, pungent, bitter and astringent — as a deliberate statement that the year holds all of them. It is the clearest household expression of sarva-rasa-abhyasa in the calendar. Ritual portion, not a meal.",
+      "provenance": ["Ugadi observance, Andhra and Karnataka", "Charaka Samhita Sutrasthana 25 (sarva-rasa-abhyasa)"],
+      "confidence": {"ayur": 0.85, "sci": 0.5}
+    },
+    {
+      "id": "recipe.horse-gram-soup", "name": "Horse Gram Soup (Kulthi)", "category": "classical", "meal": "lunch",
+      "servings": 4, "prepMinutes": 10, "cookMinutes": 45,
+      "ingredients": [
+        {"dravyaId": "dravya.horse-gram", "name": "Horse gram, soaked overnight", "grams": 150},
+        {"dravyaId": "dravya.ginger-fresh", "name": "Fresh ginger", "grams": 10},
+        {"dravyaId": "dravya.garlic", "name": "Garlic", "grams": 8},
+        {"dravyaId": "dravya.cumin", "name": "Cumin seed", "grams": 3},
+        {"dravyaId": "dravya.turmeric", "name": "Turmeric", "grams": 2},
+        {"dravyaId": "dravya.black-pepper", "name": "Black pepper", "grams": 1},
+        {"dravyaId": "dravya.ghee", "name": "Ghee", "grams": 15},
+        {"dravyaId": "dravya.rock-salt", "name": "Rock salt", "grams": 4}
+      ],
+      "steps": [
+        "Boil the soaked kulthi in plenty of water until soft, forty minutes or so; keep the cooking water.",
+        "Temper cumin, ginger and garlic in ghee and add to the pot with turmeric and pepper.",
+        "Simmer ten minutes more and serve as a thin broth rather than a thick dal."
+      ],
+      "dosha": {"vata": -1, "pitta": 1, "kapha": -2},
+      "seasons": ["hemanta", "shishira", "varsha"], "timeOfDay": ["midday"],
+      "viruddhaFlags": [],
+      "guidance": "Kulattha is the classical lekhana pulse — scraping, drying, kapha- and meda-reducing, and traditionally given for stones. Heating, so pitta should be careful. Vata: extra ghee. Pitta: reduce the ginger and garlic. Kapha: this is the indicated one.",
+      "provenance": ["Charaka Samhita Sutrasthana 27 (kulattha)", "Bhavaprakasha Nighantu, Dhanya varga"],
+      "confidence": {"ayur": 0.85, "sci": 0.6}
+    },
+    {
+      "id": "recipe.parwal-sabzi", "name": "Parwal Sabzi", "category": "everyday", "meal": "lunch",
+      "servings": 4, "prepMinutes": 12, "cookMinutes": 20,
+      "ingredients": [
+        {"dravyaId": "dravya.pointed-gourd", "name": "Parwal, halved lengthwise", "grams": 400},
+        {"dravyaId": "dravya.mustard-oil", "name": "Mustard oil", "grams": 20},
+        {"dravyaId": "dravya.cumin", "name": "Cumin seed", "grams": 3},
+        {"dravyaId": "dravya.turmeric", "name": "Turmeric", "grams": 2},
+        {"dravyaId": "dravya.coriander-seed", "name": "Coriander powder", "grams": 4},
+        {"dravyaId": "dravya.rock-salt", "name": "Rock salt", "grams": 4},
+        {"dravyaId": "dravya.cilantro", "name": "Fresh coriander leaves", "grams": 10}
+      ],
+      "steps": [
+        "Scrape the parwal lightly and halve; leave the seeds in if tender.",
+        "Heat the mustard oil to smoking then cool slightly — this removes its raw pungency — and temper the cumin.",
+        "Add the parwal, turmeric, coriander and salt; cook covered on low heat until soft, turning once.",
+        "Finish with fresh coriander."
+      ],
+      "dosha": {"vata": -1, "pitta": -1, "kapha": -1},
+      "seasons": ["grishma", "varsha", "sharad"], "timeOfDay": ["midday"],
+      "viruddhaFlags": [],
+      "guidance": "Patola is one of the few vegetables the samhitas call tridoshahara and specifically pathya during fever and convalescence. Light, easy to digest. Vata: cook soft with extra oil. Pitta: as written. Kapha: as written.",
+      "provenance": ["Charaka Samhita Sutrasthana 27 (patola)", "Bhavaprakasha Nighantu, Shaka varga"],
+      "confidence": {"ayur": 0.85, "sci": 0.6}
+    },
+    {
+      "id": "recipe.tinda-sabzi", "name": "Tinda Sabzi", "category": "everyday", "meal": "lunch",
+      "servings": 4, "prepMinutes": 12, "cookMinutes": 20,
+      "ingredients": [
+        {"dravyaId": "dravya.tinda", "name": "Tinda, quartered", "grams": 400},
+        {"dravyaId": "dravya.ghee", "name": "Ghee", "grams": 15},
+        {"dravyaId": "dravya.cumin", "name": "Cumin seed", "grams": 3},
+        {"dravyaId": "dravya.asafoetida", "name": "Asafoetida", "grams": 0.3},
+        {"dravyaId": "dravya.turmeric", "name": "Turmeric", "grams": 2},
+        {"dravyaId": "dravya.coriander-seed", "name": "Coriander powder", "grams": 4},
+        {"dravyaId": "dravya.rock-salt", "name": "Rock salt", "grams": 4}
+      ],
+      "steps": [
+        "Peel the tinda thinly and quarter; very young ones need no peeling.",
+        "Temper cumin and asafoetida in ghee, add turmeric and coriander.",
+        "Add the tinda with a splash of water, cover and cook on low until it collapses slightly, about fifteen minutes.",
+        "Salt at the end so it does not draw water early."
+      ],
+      "dosha": {"vata": 0, "pitta": -1, "kapha": -1},
+      "seasons": ["grishma", "varsha"], "timeOfDay": ["midday"],
+      "viruddhaFlags": [],
+      "guidance": "A summer gourd, cooling and light, in the same family as parwal and ash gourd. The asafoetida is there because gourds can be vata-provoking. Vata: cook very soft with extra ghee. Pitta: as written. Kapha: as written.",
+      "provenance": ["Punjabi and north Indian household tradition", "Bhavaprakasha Nighantu, Shaka varga"],
+      "confidence": {"ayur": 0.75, "sci": 0.6}
+    }
+  ]
+}

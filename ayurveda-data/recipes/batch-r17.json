@@ -1,0 +1,3316 @@
+{
+  "formatVersion": "1.0",
+  "batch": "recipe-batch-r17",
+  "qualityState": "aiDraft",
+  "items": [
+    {
+      "id": "recipe.drink-apple-almond-smoothie",
+      "name": "Apple Almond Cinnamon Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.apple",
+          "name": "Apple, chopped",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, soaked",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the chopped apple and soaked almonds.",
+        "Place the prepared ingredients in a blender with the unsweetened almond milk and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the cinnamon and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Apple Almond Cinnamon Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-pear-oat-smoothie",
+      "name": "Pear Oat Cardamom Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pear",
+          "name": "Pear, chopped",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Unsweetened oat milk",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats, soaked",
+          "grams": 35
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the chopped pear and soaked rolled oats.",
+        "Place the prepared ingredients in a blender with the unsweetened oat milk and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the green cardamom and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pear Oat Cardamom Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-blueberry-almond-smoothie",
+      "name": "Blueberry Almond Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.blueberry",
+          "name": "Blueberries",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, soaked",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the blueberries and soaked almonds.",
+        "Place the prepared ingredients in a blender with the unsweetened almond milk and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the cinnamon and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Blueberry Almond Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-strawberry-oat-smoothie",
+      "name": "Strawberry Oat-Milk Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.strawberry",
+          "name": "Strawberries",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Unsweetened oat milk",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats, soaked",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the strawberries and soaked rolled oats.",
+        "Place the prepared ingredients in a blender with the unsweetened oat milk and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the green cardamom and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Strawberry Oat-Milk Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-mango-coconut-water-smoothie",
+      "name": "Mango Coconut Water Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mango-ripe",
+          "name": "Ripe mango, diced",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.coconut-water",
+          "name": "Unsweetened coconut water",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds, soaked",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 80
+        }
+      ],
+      "steps": [
+        "Wash and prepare the diced ripe mango and soaked fennel seeds.",
+        "Place the prepared ingredients in a blender with the unsweetened coconut water and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the green cardamom and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mango Coconut Water Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-pineapple-coconut-water-smoothie",
+      "name": "Pineapple Coconut Water Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pineapple",
+          "name": "Pineapple, diced",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.coconut-water",
+          "name": "Unsweetened coconut water",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint",
+          "grams": 14
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 2
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 80
+        }
+      ],
+      "steps": [
+        "Wash and prepare the diced pineapple and fresh mint.",
+        "Place the prepared ingredients in a blender with the unsweetened coconut water and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the fennel seeds and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pineapple Coconut Water Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-papaya-almond-smoothie",
+      "name": "Papaya Almond-Milk Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.papaya",
+          "name": "Ripe papaya, diced",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the diced ripe papaya and fennel seeds.",
+        "Place the prepared ingredients in a blender with the unsweetened almond milk and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the green cardamom and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Papaya Almond-Milk Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-peach-oat-smoothie",
+      "name": "Peach Oat-Milk Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.peach",
+          "name": "Peach, diced",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Unsweetened oat milk",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, soaked",
+          "grams": 25
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the diced peach and soaked almonds.",
+        "Place the prepared ingredients in a blender with the unsweetened oat milk and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the cinnamon and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Peach Oat-Milk Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-apricot-almond-smoothie",
+      "name": "Apricot Almond-Milk Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.apricot",
+          "name": "Apricots, diced",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, soaked",
+          "grams": 25
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the diced apricots and soaked almonds.",
+        "Place the prepared ingredients in a blender with the unsweetened almond milk and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the green cardamom and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Apricot Almond-Milk Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-plum-oat-smoothie",
+      "name": "Plum Oat-Milk Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.plum",
+          "name": "Plums, pitted and chopped",
+          "grams": 270
+        },
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Unsweetened oat milk",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats, soaked",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the pitted and chopped plums and soaked rolled oats.",
+        "Place the prepared ingredients in a blender with the unsweetened oat milk and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the cinnamon and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Plum Oat-Milk Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-pomegranate-almond-smoothie",
+      "name": "Pomegranate Almond-Milk Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pomegranate",
+          "name": "Pomegranate arils",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the pomegranate arils and fennel seeds.",
+        "Place the prepared ingredients in a blender with the unsweetened almond milk and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the green cardamom and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pomegranate Almond-Milk Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-grape-fennel-coconut-smoothie",
+      "name": "Grape Fennel Coconut-Water Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.grapes",
+          "name": "Sweet grapes",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.coconut-water",
+          "name": "Unsweetened coconut water",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the sweet grapes and fennel seeds.",
+        "Place the prepared ingredients in a blender with the unsweetened coconut water and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the green cardamom and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Grape Fennel Coconut-Water Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-cherry-almond-smoothie",
+      "name": "Cherry Almond-Milk Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cherry",
+          "name": "Sweet cherries, pitted",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, soaked",
+          "grams": 25
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the pitted sweet cherries and soaked almonds.",
+        "Place the prepared ingredients in a blender with the unsweetened almond milk and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the cinnamon and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cherry Almond-Milk Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-fig-oat-smoothie",
+      "name": "Fig Oat-Milk Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.dried-fig",
+          "name": "Dried figs, soaked",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Unsweetened oat milk",
+          "grams": 440
+        },
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats, soaked",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the soaked dried figs and soaked rolled oats.",
+        "Place the prepared ingredients in a blender with the unsweetened oat milk and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the green cardamom and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Fig Oat-Milk Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-date-almond-smoothie",
+      "name": "Date Almond-Milk Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates, pitted",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 440
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, soaked",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the pitted soft dates and soaked almonds.",
+        "Place the prepared ingredients in a blender with the unsweetened almond milk and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the green cardamom and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Date Almond-Milk Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-banana-almond-smoothie",
+      "name": "Banana Almond-Milk Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.banana-ripe",
+          "name": "Ripe banana",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, soaked",
+          "grams": 25
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the ripe banana and soaked almonds.",
+        "Place the prepared ingredients in a blender with the unsweetened almond milk and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the cinnamon and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Banana Almond-Milk Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-banana-oat-smoothie",
+      "name": "Banana Oat-Milk Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.banana-ripe",
+          "name": "Ripe banana",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Unsweetened oat milk",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.oats",
+          "name": "Rolled oats, soaked",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the ripe banana and soaked rolled oats.",
+        "Place the prepared ingredients in a blender with the unsweetened oat milk and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the green cardamom and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Banana Oat-Milk Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-avocado-almond-smoothie",
+      "name": "Avocado Almond-Milk Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.avocado",
+          "name": "Ripe avocado",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 450
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 35
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the ripe avocado and soft dates.",
+        "Place the prepared ingredients in a blender with the unsweetened almond milk and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the green cardamom and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Avocado Almond-Milk Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-cucumber-mint-coconut-smoothie",
+      "name": "Cucumber Mint Coconut-Water Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cucumber",
+          "name": "Cucumber, chopped",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.coconut-water",
+          "name": "Unsweetened coconut water",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 2
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the chopped cucumber and fresh mint.",
+        "Place the prepared ingredients in a blender with the unsweetened coconut water and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the fennel seeds and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "grishma"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cucumber Mint Coconut-Water Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-carrot-ginger-almond-smoothie",
+      "name": "Carrot Ginger Almond-Milk Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, steamed and cooled",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the steamed and cooled carrot and fresh ginger.",
+        "Place the prepared ingredients in a blender with the unsweetened almond milk and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the cinnamon and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Carrot Ginger Almond-Milk Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-beet-apple-oat-smoothie",
+      "name": "Beet Apple Oat-Milk Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, steamed and cooled",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Unsweetened oat milk",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.apple",
+          "name": "Apple, chopped",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the steamed and cooled beetroot and chopped apple.",
+        "Place the prepared ingredients in a blender with the unsweetened oat milk and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the cinnamon and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Beet Apple Oat-Milk Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-pumpkin-date-almond-smoothie",
+      "name": "Pumpkin Date Almond-Milk Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, cooked and cooled",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the cooked and cooled pumpkin and soft dates.",
+        "Place the prepared ingredients in a blender with the unsweetened almond milk and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the cinnamon and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pumpkin Date Almond-Milk Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-sweet-potato-oat-smoothie",
+      "name": "Sweet Potato Oat-Milk Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, cooked and cooled",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Unsweetened oat milk",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 40
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the cooked and cooled sweet potato and soft dates.",
+        "Place the prepared ingredients in a blender with the unsweetened oat milk and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the cinnamon and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sweet Potato Oat-Milk Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-spinach-pear-almond-smoothie",
+      "name": "Spinach Pear Almond-Milk Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pear",
+          "name": "Pear, chopped",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, lightly steamed and cooled",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 2
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the chopped pear and lightly steamed and cooled spinach.",
+        "Place the prepared ingredients in a blender with the unsweetened almond milk and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the fennel seeds and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Spinach Pear Almond-Milk Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-kale-apple-oat-smoothie",
+      "name": "Kale Apple Oat-Milk Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.apple",
+          "name": "Apple, chopped",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Unsweetened oat milk",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.kale",
+          "name": "Kale, lightly steamed and cooled",
+          "grams": 80
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the chopped apple and lightly steamed and cooled kale.",
+        "Place the prepared ingredients in a blender with the unsweetened oat milk and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the cinnamon and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kale Apple Oat-Milk Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-strawberry-banana-almond-smoothie",
+      "name": "Strawberry Banana Almond-Milk Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.strawberry",
+          "name": "Strawberries",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.banana-ripe",
+          "name": "Ripe banana",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the strawberries and ripe banana.",
+        "Place the prepared ingredients in a blender with the unsweetened almond milk and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the green cardamom and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Strawberry Banana Almond-Milk Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-mango-banana-coconut-smoothie",
+      "name": "Mango Banana Coconut-Water Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mango-ripe",
+          "name": "Ripe mango",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.coconut-water",
+          "name": "Unsweetened coconut water",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.banana-ripe",
+          "name": "Ripe banana",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the ripe mango and ripe banana.",
+        "Place the prepared ingredients in a blender with the unsweetened coconut water and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the green cardamom and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mango Banana Coconut-Water Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-blueberry-pear-oat-smoothie",
+      "name": "Blueberry Pear Oat-Milk Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.blueberry",
+          "name": "Blueberries",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Unsweetened oat milk",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.pear",
+          "name": "Pear, chopped",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the blueberries and chopped pear.",
+        "Place the prepared ingredients in a blender with the unsweetened oat milk and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the cinnamon and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Blueberry Pear Oat-Milk Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-papaya-date-almond-smoothie",
+      "name": "Papaya Date Almond-Milk Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.papaya",
+          "name": "Ripe papaya",
+          "grams": 250
+        },
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 45
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the ripe papaya and soft dates.",
+        "Place the prepared ingredients in a blender with the unsweetened almond milk and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the green cardamom and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Papaya Date Almond-Milk Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-pomegranate-beet-coconut-smoothie",
+      "name": "Pomegranate Beet Coconut-Water Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pomegranate",
+          "name": "Pomegranate arils",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.coconut-water",
+          "name": "Unsweetened coconut water",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, steamed and cooled",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 2
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the pomegranate arils and steamed and cooled beetroot.",
+        "Place the prepared ingredients in a blender with the unsweetened coconut water and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the fennel seeds and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pomegranate Beet Coconut-Water Smoothie is a freshly blended drink served without ice. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-banana-cow-milk-smoothie",
+      "name": "Banana Cow-Milk Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.banana-ripe",
+          "name": "Ripe banana",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates",
+          "grams": 35
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the ripe banana and soft dates.",
+        "Place the prepared ingredients in a blender with the whole cow milk and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the green cardamom and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [
+        "fruit combined with dairy (traditional viruddha)"
+      ],
+      "guidance": "This modern banana shake is flagged for combining banana with cow milk. Vata: serve without ice and in a small glass. Pitta: keep sweetener low. Kapha: take a half portion. Compliant variant: replace cow milk with unsweetened almond milk.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-strawberry-yogurt-smoothie",
+      "name": "Strawberry Yogurt Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.strawberry",
+          "name": "Strawberries",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.yogurt",
+          "name": "Plain yogurt",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 12
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 180
+        }
+      ],
+      "steps": [
+        "Wash and prepare the strawberries and rock sugar.",
+        "Place the prepared ingredients in a blender with the plain yogurt and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the green cardamom and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [
+        "fruit combined with dairy (traditional viruddha)"
+      ],
+      "guidance": "This strawberry-yogurt smoothie is flagged for combining fruit with dairy. Vata: serve at cool room temperature. Pitta: keep sweetener low. Kapha: take a small portion. Compliant variant: replace yogurt with unsweetened oat milk.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-mango-yogurt-smoothie",
+      "name": "Mango Yogurt Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mango-ripe",
+          "name": "Ripe mango",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.yogurt",
+          "name": "Plain yogurt",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 10
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 180
+        }
+      ],
+      "steps": [
+        "Wash and prepare the ripe mango and rock sugar.",
+        "Place the prepared ingredients in a blender with the plain yogurt and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the green cardamom and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [
+        "fruit combined with dairy (traditional viruddha)"
+      ],
+      "guidance": "This mango-yogurt smoothie is flagged for combining fruit with dairy. Vata: serve without ice. Pitta: keep sweetener low. Kapha: take a half portion. Compliant variant: replace yogurt with unsweetened almond milk.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-blueberry-cow-milk-smoothie",
+      "name": "Blueberry Cow-Milk Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.blueberry",
+          "name": "Blueberries",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.milk-cow",
+          "name": "Whole cow milk",
+          "grams": 430
+        },
+        {
+          "dravyaId": "dravya.almond",
+          "name": "Almonds, soaked",
+          "grams": 25
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 120
+        }
+      ],
+      "steps": [
+        "Wash and prepare the blueberries and soaked almonds.",
+        "Place the prepared ingredients in a blender with the whole cow milk and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the cinnamon and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [
+        "fruit combined with dairy (traditional viruddha)"
+      ],
+      "guidance": "This blueberry shake is flagged for combining fruit with cow milk. Vata: serve without ice. Pitta: use little cinnamon. Kapha: take a small portion. Compliant variant: replace cow milk with unsweetened oat milk.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-pineapple-yogurt-smoothie",
+      "name": "Pineapple Yogurt Smoothie",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 8,
+      "cookMinutes": 1,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pineapple",
+          "name": "Pineapple, diced",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.yogurt",
+          "name": "Plain yogurt",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 10
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 2
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 180
+        }
+      ],
+      "steps": [
+        "Wash and prepare the diced pineapple and rock sugar.",
+        "Place the prepared ingredients in a blender with the plain yogurt and water.",
+        "Blend until completely smooth, pausing to scrape down the sides.",
+        "Add the fennel seeds and blend briefly again.",
+        "Serve immediately at cool room temperature without ice."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 2,
+        "kapha": 2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [
+        "fruit combined with dairy (traditional viruddha)"
+      ],
+      "guidance": "This pineapple-yogurt smoothie is flagged for combining sour fruit with dairy. Vata: serve at room temperature. Pitta: reduce pineapple. Kapha: take a half portion. Compliant variant: replace yogurt with unsweetened coconut water.",
+      "provenance": [
+        "original international smoothie adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-turmeric-almond-warmer",
+      "name": "Turmeric Almond-Milk Warmer",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 6,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper",
+          "grams": 0.2
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 10
+        }
+      ],
+      "steps": [
+        "Pour the unsweetened almond milk into a small heavy pan and warm it slowly.",
+        "Add the turmeric and cinnamon and black pepper and keep the heat low.",
+        "Simmer gently for five minutes, stirring so the liquid does not catch.",
+        "Remove from the heat and stir in the rock sugar.",
+        "Serve warm in small cups."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Turmeric Almond-Milk Warmer is a mild warm beverage rather than a medicinal preparation. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-drink adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-cinnamon-oat-warmer",
+      "name": "Cinnamon Oat-Milk Warmer",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 6,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Unsweetened oat milk",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 10
+        }
+      ],
+      "steps": [
+        "Pour the unsweetened oat milk into a small heavy pan and warm it slowly.",
+        "Add the cinnamon and green cardamom and keep the heat low.",
+        "Simmer gently for five minutes, stirring so the liquid does not catch.",
+        "Remove from the heat and stir in the rock sugar.",
+        "Serve warm in small cups."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cinnamon Oat-Milk Warmer is a mild warm beverage rather than a medicinal preparation. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-drink adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-cardamom-almond-warmer",
+      "name": "Cardamom Almond-Milk Warmer",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 6,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 10
+        }
+      ],
+      "steps": [
+        "Pour the unsweetened almond milk into a small heavy pan and warm it slowly.",
+        "Add the green cardamom and fennel seeds and keep the heat low.",
+        "Simmer gently for five minutes, stirring so the liquid does not catch.",
+        "Remove from the heat and stir in the rock sugar.",
+        "Serve warm in small cups."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cardamom Almond-Milk Warmer is a mild warm beverage rather than a medicinal preparation. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-drink adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-saffron-almond-warmer",
+      "name": "Saffron Almond-Milk Warmer",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 6,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.saffron",
+          "name": "Saffron strands",
+          "grams": 0.15
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 10
+        }
+      ],
+      "steps": [
+        "Pour the unsweetened almond milk into a small heavy pan and warm it slowly.",
+        "Add the saffron strands and green cardamom and keep the heat low.",
+        "Simmer gently for five minutes, stirring so the liquid does not catch.",
+        "Remove from the heat and stir in the rock sugar.",
+        "Serve warm in small cups."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Saffron Almond-Milk Warmer is a mild warm beverage rather than a medicinal preparation. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-drink adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-ginger-oat-warmer",
+      "name": "Ginger Oat-Milk Warmer",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 6,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Unsweetened oat milk",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger, sliced",
+          "grams": 7
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.honey",
+          "name": "Raw honey",
+          "grams": 10
+        }
+      ],
+      "steps": [
+        "Pour the unsweetened oat milk into a small heavy pan and warm it slowly.",
+        "Add the sliced fresh ginger and cinnamon and keep the heat low.",
+        "Simmer gently for five minutes, stirring so the liquid does not catch.",
+        "Remove from the heat and stir in the raw honey.",
+        "Serve warm in small cups."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Ginger Oat-Milk Warmer is a mild warm beverage rather than a medicinal preparation. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-drink adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-date-almond-warmer",
+      "name": "Date Almond-Milk Warmer",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 6,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.dates",
+          "name": "Soft dates, chopped",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Pour the unsweetened almond milk into a small heavy pan and warm it slowly.",
+        "Add the chopped soft dates and green cardamom and keep the heat low.",
+        "Simmer gently for five minutes, stirring so the liquid does not catch.",
+        "Remove from the heat and strain if a smooth drink is desired.",
+        "Serve warm in small cups."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Date Almond-Milk Warmer is a mild warm beverage rather than a medicinal preparation. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-drink adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-fig-oat-warmer",
+      "name": "Fig Oat-Milk Warmer",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 6,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Unsweetened oat milk",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.dried-fig",
+          "name": "Dried figs, soaked and chopped",
+          "grams": 55
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Pour the unsweetened oat milk into a small heavy pan and warm it slowly.",
+        "Add the soaked and chopped dried figs and green cardamom and keep the heat low.",
+        "Simmer gently for five minutes, stirring so the liquid does not catch.",
+        "Remove from the heat and strain if a smooth drink is desired.",
+        "Serve warm in small cups."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Fig Oat-Milk Warmer is a mild warm beverage rather than a medicinal preparation. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-drink adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-sesame-almond-warmer",
+      "name": "Sesame Almond-Milk Warmer",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 6,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.sesame-seed",
+          "name": "Sesame seeds, ground",
+          "grams": 28
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Pour the unsweetened almond milk into a small heavy pan and warm it slowly.",
+        "Add the ground sesame seeds and green cardamom and keep the heat low.",
+        "Simmer gently for five minutes, stirring so the liquid does not catch.",
+        "Remove from the heat and strain if a smooth drink is desired.",
+        "Serve warm in small cups."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sesame Almond-Milk Warmer is a mild warm beverage rather than a medicinal preparation. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-drink adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-pistachio-oat-warmer",
+      "name": "Pistachio Oat-Milk Warmer",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 6,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Unsweetened oat milk",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.pistachio",
+          "name": "Pistachios, ground",
+          "grams": 30
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        }
+      ],
+      "steps": [
+        "Pour the unsweetened oat milk into a small heavy pan and warm it slowly.",
+        "Add the ground pistachios and green cardamom and keep the heat low.",
+        "Simmer gently for five minutes, stirring so the liquid does not catch.",
+        "Remove from the heat and strain if a smooth drink is desired.",
+        "Serve warm in small cups."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pistachio Oat-Milk Warmer is a mild warm beverage rather than a medicinal preparation. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-drink adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-soy-turmeric-warmer",
+      "name": "Soy Turmeric Warmer",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 6,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.soy-milk",
+          "name": "Unsweetened soy milk",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.turmeric",
+          "name": "Turmeric",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 8
+        }
+      ],
+      "steps": [
+        "Pour the unsweetened soy milk into a small heavy pan and warm it slowly.",
+        "Add the turmeric and fresh ginger and keep the heat low.",
+        "Simmer gently for five minutes, stirring so the liquid does not catch.",
+        "Remove from the heat and stir in the rock sugar.",
+        "Serve warm in small cups."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Soy Turmeric Warmer is a mild warm beverage rather than a medicinal preparation. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-drink adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-oat-nutmeg-warmer",
+      "name": "Nutmeg Oat-Milk Warmer",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 6,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Unsweetened oat milk",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.nutmeg",
+          "name": "Nutmeg",
+          "grams": 0.25
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 8
+        }
+      ],
+      "steps": [
+        "Pour the unsweetened oat milk into a small heavy pan and warm it slowly.",
+        "Add the nutmeg and green cardamom and keep the heat low.",
+        "Simmer gently for five minutes, stirring so the liquid does not catch.",
+        "Remove from the heat and stir in the rock sugar.",
+        "Serve warm in small cups."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "night"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Nutmeg Oat-Milk Warmer is a mild warm beverage rather than a medicinal preparation. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-drink adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-almond-fennel-warmer",
+      "name": "Fennel Almond-Milk Warmer",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 6,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 8
+        }
+      ],
+      "steps": [
+        "Pour the unsweetened almond milk into a small heavy pan and warm it slowly.",
+        "Add the fennel seeds and green cardamom and keep the heat low.",
+        "Simmer gently for five minutes, stirring so the liquid does not catch.",
+        "Remove from the heat and stir in the rock sugar.",
+        "Serve warm in small cups."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Fennel Almond-Milk Warmer is a mild warm beverage rather than a medicinal preparation. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-drink adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-oat-rose-warmer",
+      "name": "Rose Oat-Milk Warmer",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 6,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.oat-milk",
+          "name": "Unsweetened oat milk",
+          "grams": 500
+        },
+        {
+          "fdcId": 12572,
+          "name": "Dried rose petals",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 8
+        }
+      ],
+      "steps": [
+        "Pour the unsweetened oat milk into a small heavy pan and warm it slowly.",
+        "Add the dried rose petals and fennel seeds and keep the heat low.",
+        "Simmer gently for five minutes, stirring so the liquid does not catch.",
+        "Remove from the heat and stir in the rock sugar.",
+        "Serve warm in small cups."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -2,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Rose Oat-Milk Warmer is a mild warm beverage rather than a medicinal preparation. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-drink adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-almond-licorice-warmer",
+      "name": "Licorice Almond-Milk Warmer",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 6,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.almond-milk",
+          "name": "Unsweetened almond milk",
+          "grams": 500
+        },
+        {
+          "fdcId": 12569,
+          "name": "Licorice root, cut",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        }
+      ],
+      "steps": [
+        "Pour the unsweetened almond milk into a small heavy pan and warm it slowly.",
+        "Add the licorice root cut and fennel seeds and keep the heat low.",
+        "Simmer gently for five minutes, stirring so the liquid does not catch.",
+        "Remove from the heat and strain if a smooth drink is desired.",
+        "Serve warm in small cups."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "This is a mild culinary licorice beverage, not a medicinal dose. Vata: serve warm in a small cup. Pitta: keep the licorice amount modest. Kapha: prefer unsweetened fennel tea for a lighter drink.",
+      "provenance": [
+        "original international warm-drink adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.drink-cardamom-soy-warmer",
+      "name": "Cardamom Soy-Milk Warmer",
+      "category": "international",
+      "meal": "drink",
+      "servings": 2,
+      "prepMinutes": 6,
+      "cookMinutes": 10,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.soy-milk",
+          "name": "Unsweetened soy milk",
+          "grams": 500
+        },
+        {
+          "dravyaId": "dravya.cardamom",
+          "name": "Green cardamom",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.mishri",
+          "name": "Rock sugar",
+          "grams": 8
+        }
+      ],
+      "steps": [
+        "Pour the unsweetened soy milk into a small heavy pan and warm it slowly.",
+        "Add the green cardamom and cinnamon and keep the heat low.",
+        "Simmer gently for five minutes, stirring so the liquid does not catch.",
+        "Remove from the heat and stir in the rock sugar.",
+        "Serve warm in small cups."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "morning",
+        "midday"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cardamom Soy-Milk Warmer is a mild warm beverage rather than a medicinal preparation. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international warm-drink adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    }
+  ]
+}

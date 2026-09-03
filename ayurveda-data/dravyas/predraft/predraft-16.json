@@ -1,0 +1,722 @@
+{
+  "predraftVersion": "1.0",
+  "batch": "predraft-16",
+  "items": [
+    {
+      "id": "dravya.fresh-fig",
+      "name": "Fresh fig (anjeer)",
+      "sanskrit": "Anjira",
+      "aliases": [
+        "anjeer"
+      ],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 3661,
+          "name": "Fig, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.fresh-dates",
+      "name": "Fresh dates",
+      "sanskrit": "Kharjura (ardra)",
+      "aliases": [],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 5729,
+          "name": "Dates, medjool",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.starfruit",
+      "name": "Starfruit (kamrakh)",
+      "sanskrit": "Karmaranga",
+      "aliases": [
+        "kamrakh"
+      ],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          0
+        ],
+        "virya": "heating",
+        "note": "kidney caution (modern evidence)"
+      },
+      "usda": [
+        {
+          "fdcId": 3654,
+          "name": "Starfruit, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.water-apple",
+      "name": "Water apple (jamrul)",
+      "sanskrit": null,
+      "aliases": [
+        "jamrul"
+      ],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: water apple."
+    },
+    {
+      "id": "dravya.wood-apple",
+      "name": "Wood apple (kaith)",
+      "sanskrit": "Kapittha",
+      "aliases": [
+        "kaith"
+      ],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          1,
+          -1,
+          -1
+        ],
+        "virya": "cooling",
+        "note": "classical; heavy for voice per texts"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: wood apple; kapittha."
+    },
+    {
+      "id": "dravya.mulberry",
+      "name": "Mulberry (shahtoot)",
+      "sanskrit": "Tuta",
+      "aliases": [
+        "shahtoot"
+      ],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 7300,
+          "name": "Mulberries, raw",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.kiwi",
+      "name": "Kiwi",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          0
+        ],
+        "virya": "cooling",
+        "note": "modern adoption"
+      },
+      "usda": [
+        {
+          "fdcId": 3665,
+          "name": "Kiwi fruit, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.persimmon",
+      "name": "Persimmon (japani phal)",
+      "sanskrit": null,
+      "aliases": [
+        "japani phal"
+      ],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          1,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 3685,
+          "name": "Persimmon, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.pomegranate-sweet",
+      "name": "Sweet pomegranate",
+      "sanskrit": "Madhura Dadima",
+      "aliases": [],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          -1
+        ],
+        "virya": "cooling",
+        "note": "tridoshic; most praised with draksha"
+      },
+      "usda": [
+        {
+          "fdcId": 6590,
+          "name": "Pomegranates, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.pomegranate-sour",
+      "name": "Sour pomegranate",
+      "sanskrit": "Amla Dadima",
+      "aliases": [],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 6590,
+          "name": "Pomegranates, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.tadgola",
+      "name": "Ice apple (tadgola/nungu)",
+      "sanskrit": "Tala Phala",
+      "aliases": [
+        "tadgola/nungu"
+      ],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          0,
+          -2,
+          0
+        ],
+        "virya": "cooling",
+        "note": "summer coolant"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: ice apple; tala phala; tadgola."
+    },
+    {
+      "id": "dravya.sugarcane-stick",
+      "name": "Sugarcane (chewing)",
+      "sanskrit": "Ikshu",
+      "aliases": [
+        "chewing"
+      ],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling",
+        "note": "classical ikshu varga head"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: sugarcane; ikshu; sugarcane stick."
+    },
+    {
+      "id": "dravya.gooseberry-star",
+      "name": "Star gooseberry (harfarauri)",
+      "sanskrit": null,
+      "aliases": [
+        "harfarauri"
+      ],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          0,
+          1,
+          -1
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: star gooseberry; gooseberry star."
+    },
+    {
+      "id": "dravya.tamarind-ripe",
+      "name": "Ripe tamarind (fruit use)",
+      "sanskrit": "Amlika (pakva)",
+      "aliases": [
+        "fruit use"
+      ],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -2,
+          2,
+          1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 5361,
+          "name": "Tamarinds, raw",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.rose-apple",
+      "name": "Rose apple (gulab jamun phal)",
+      "sanskrit": "Jambuka",
+      "aliases": [
+        "gulab jamun phal"
+      ],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          0
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: rose apple; jambuka."
+    },
+    {
+      "id": "dravya.lasora",
+      "name": "Lasora (gunda berry, fresh)",
+      "sanskrit": "Shleshmataka",
+      "aliases": [],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling",
+        "note": "mucilaginous; pickle staple"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: lasora; shleshmataka."
+    },
+    {
+      "id": "dravya.ambarella",
+      "name": "Ambarella (amtekai)",
+      "sanskrit": null,
+      "aliases": [
+        "amtekai"
+      ],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          0
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: ambarella."
+    },
+    {
+      "id": "dravya.elephant-apple",
+      "name": "Elephant apple (ou-tenga)",
+      "sanskrit": null,
+      "aliases": [
+        "ou-tenga"
+      ],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          0
+        ],
+        "virya": "cooling",
+        "note": "Assamese souring fruit"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: elephant apple."
+    },
+    {
+      "id": "dravya.langsat",
+      "name": "Langsat? — placeholder REJECTED",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "fruit",
+      "canonHints": {
+        "vpk": [
+          0,
+          0,
+          0
+        ],
+        "virya": "neutral",
+        "note": "REVIEWER: delete — non-Indian, low confidence; slot for a regional fruit of reviewer's choice"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup pieces",
+          "grams": 150
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: langsat placeholder rejected; langsat."
+    },
+    {
+      "id": "dravya.chironji",
+      "name": "Chironji (charoli)",
+      "sanskrit": "Priyala",
+      "aliases": [
+        "charoli"
+      ],
+      "category": "dry-fruit-nut",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling",
+        "note": "classical kheer nut"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 oz",
+          "grams": 28
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: chironji; priyala."
+    },
+    {
+      "id": "dravya.makhana",
+      "name": "Fox nut (makhana)",
+      "sanskrit": "Makhanna / Padma Beeja",
+      "aliases": [
+        "Makhanna",
+        "Padma Beeja",
+        "makhana"
+      ],
+      "category": "dry-fruit-nut",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          0
+        ],
+        "virya": "cooling",
+        "note": "light, sattvic; fasting staple"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 oz",
+          "grams": 28
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: fox nut; makhanna; padma beeja; makhana."
+    },
+    {
+      "id": "dravya.dry-coconut",
+      "name": "Dry coconut (copra)",
+      "sanskrit": "Narikela (shushka)",
+      "aliases": [
+        "copra"
+      ],
+      "category": "dry-fruit-nut",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 7557,
+          "name": "Nuts, coconut meat, dried (desiccated), not sweetened",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 oz",
+          "grams": 28
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.desiccated-coconut",
+      "name": "Desiccated coconut",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "dry-fruit-nut",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          1
+        ],
+        "virya": "neutral"
+      },
+      "usda": [
+        {
+          "fdcId": 7557,
+          "name": "Nuts, coconut meat, dried (desiccated), not sweetened",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 oz",
+          "grams": 28
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.golden-raisin",
+      "name": "Golden raisin (kishmish)",
+      "sanskrit": "Draksha (shushka)",
+      "aliases": [
+        "kishmish"
+      ],
+      "category": "dry-fruit-nut",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          0
+        ],
+        "virya": "cooling",
+        "note": "classical laxative-mild nourisher"
+      },
+      "usda": [
+        {
+          "fdcId": 5703,
+          "name": "Raisins, golden, seedless",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 oz",
+          "grams": 28
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.munakka",
+      "name": "Large black raisin (munakka)",
+      "sanskrit": "Munakka Draksha",
+      "aliases": [
+        "munakka"
+      ],
+      "category": "dry-fruit-nut",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          0
+        ],
+        "virya": "cooling",
+        "note": "rasayana-grade raisin"
+      },
+      "usda": [
+        {
+          "fdcId": 5705,
+          "name": "Raisins, seeded",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 oz",
+          "grams": 28
+        }
+      ],
+      "_facetsPending": true
+    }
+  ]
+}

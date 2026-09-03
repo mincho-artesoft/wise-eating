@@ -1,0 +1,696 @@
+{
+  "predraftVersion": "1.0",
+  "batch": "predraft-29",
+  "items": [
+    {
+      "id": "dravya.niger-seed",
+      "name": "Niger seed (ramtil)",
+      "sanskrit": null,
+      "aliases": [
+        "ramtil"
+      ],
+      "category": "seed",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          0
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 10
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: niger seed."
+    },
+    {
+      "id": "dravya.lotus-seed-popped",
+      "name": "Popped lotus seed",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "seed",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          -1
+        ],
+        "virya": "cooling",
+        "note": "phool-makhana form"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 10
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: popped lotus seed; lotus seed popped."
+    },
+    {
+      "id": "dravya.basil-holy-seed",
+      "name": "Tulsi seed",
+      "sanskrit": "Tulasi Beeja",
+      "aliases": [],
+      "category": "seed",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          -1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 10
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: tulsi seed; tulasi beeja; basil holy seed."
+    },
+    {
+      "id": "dravya.buffalo-milk",
+      "name": "Buffalo milk",
+      "sanskrit": "Mahisha Ksheera",
+      "aliases": [],
+      "category": "dairy",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          2
+        ],
+        "virya": "cooling",
+        "note": "heavier than cow; sleep-promoting per texts"
+      },
+      "usda": [
+        {
+          "fdcId": 8477,
+          "name": "Milk, indian buffalo, fluid",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 245
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.camel-milk",
+      "name": "Camel milk",
+      "sanskrit": "Ushtra Ksheera",
+      "aliases": [],
+      "category": "dairy",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          -1
+        ],
+        "virya": "heating",
+        "note": "classical for udara conditions; salty-tinged"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 245
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: camel milk; ushtra ksheera."
+    },
+    {
+      "id": "dravya.sheep-milk",
+      "name": "Sheep milk",
+      "sanskrit": "Avi Ksheera",
+      "aliases": [],
+      "category": "dairy",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 8115,
+          "name": "Milk, sheep, fluid",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 245
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.malai",
+      "name": "Fresh cream (malai)",
+      "sanskrit": "Santanika",
+      "aliases": [
+        "malai"
+      ],
+      "category": "dairy",
+      "canonHints": {
+        "vpk": [
+          -2,
+          -2,
+          2
+        ],
+        "virya": "cooling"
+      },
+      "usda": [
+        {
+          "fdcId": 8093,
+          "name": "Cream, fluid, heavy whipping",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 14
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.makkhan",
+      "name": "White butter (makkhan)",
+      "sanskrit": "Navanita",
+      "aliases": [
+        "makkhan"
+      ],
+      "category": "dairy",
+      "canonHints": {
+        "vpk": [
+          -2,
+          -2,
+          2
+        ],
+        "virya": "cooling",
+        "note": "fresh-churned navanita — classical distinct from aged butter"
+      },
+      "usda": [
+        {
+          "fdcId": 10276,
+          "name": "Butter, without salt",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 14
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.khoya",
+      "name": "Khoya (mawa)",
+      "sanskrit": "Kilata",
+      "aliases": [
+        "mawa"
+      ],
+      "category": "dairy",
+      "canonHints": {
+        "vpk": [
+          -2,
+          -1,
+          2
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 245
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: khoya; kilata."
+    },
+    {
+      "id": "dravya.chhena",
+      "name": "Chhena (fresh curd cheese)",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "dairy",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          1
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 oz",
+          "grams": 28
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: chhena."
+    },
+    {
+      "id": "dravya.hung-curd",
+      "name": "Hung curd (chakka)",
+      "sanskrit": null,
+      "aliases": [
+        "chakka"
+      ],
+      "category": "dairy",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          2
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 245
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: hung curd."
+    },
+    {
+      "id": "dravya.whey",
+      "name": "Whey (paneer water)",
+      "sanskrit": "Mastu",
+      "aliases": [
+        "paneer water"
+      ],
+      "category": "dairy",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          -1
+        ],
+        "virya": "heating",
+        "note": "classical mastu — light, channel-clearing"
+      },
+      "usda": [
+        {
+          "fdcId": 148,
+          "name": "Whey, sweet, dry",
+          "tier": "near"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 240
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.colostrum-milk",
+      "name": "Colostrum milk (kharvas base)",
+      "sanskrit": "Piyusha",
+      "aliases": [
+        "kharvas base"
+      ],
+      "category": "dairy",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          2
+        ],
+        "virya": "heating"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 245
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: colostrum milk; piyusha."
+    },
+    {
+      "id": "dravya.buffalo-ghee",
+      "name": "Buffalo ghee",
+      "sanskrit": "Mahisha Ghrita",
+      "aliases": [],
+      "category": "dairy",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          2
+        ],
+        "virya": "cooling",
+        "note": "distinct from cow ghee — heavier, cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 14
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: buffalo ghee; mahisha ghrita."
+    },
+    {
+      "id": "dravya.cultured-butter",
+      "name": "Cultured butter",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "dairy",
+      "canonHints": {
+        "vpk": [
+          -2,
+          -1,
+          2
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 14
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: cultured butter."
+    },
+    {
+      "id": "dravya.skimmed-milk",
+      "name": "Skimmed milk",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "dairy",
+      "canonHints": {
+        "vpk": [
+          0,
+          -1,
+          0
+        ],
+        "virya": "cooling",
+        "note": "modern; lighter but less nourishing"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 cup",
+          "grams": 245
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: skimmed milk."
+    },
+    {
+      "id": "dravya.full-cream-milk",
+      "name": "Full-cream milk (packaged)",
+      "sanskrit": null,
+      "aliases": [
+        "packaged"
+      ],
+      "category": "dairy",
+      "canonHints": {
+        "vpk": [
+          -1,
+          -1,
+          2
+        ],
+        "virya": "cooling"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 14
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: full cream milk."
+    },
+    {
+      "id": "dravya.milk-powder",
+      "name": "Milk powder",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "dairy",
+      "canonHints": {
+        "vpk": [
+          0,
+          0,
+          2
+        ],
+        "virya": "neutral",
+        "note": "modern processed"
+      },
+      "usda": [
+        {
+          "fdcId": 10295,
+          "name": "Milk, dry, whole, without added vitamin D",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1/4 cup",
+          "grams": 32
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.condensed-milk",
+      "name": "Condensed milk",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "dairy",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          2
+        ],
+        "virya": "cooling",
+        "note": "modern processed; very heavy"
+      },
+      "usda": [
+        {
+          "fdcId": 19,
+          "name": "Milk, condensed, sweetened",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "2 tbsp",
+          "grams": 39
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.plain-chaas",
+      "name": "Plain buttermilk (chaas)",
+      "sanskrit": "Takra",
+      "aliases": [
+        "chaas"
+      ],
+      "category": "dairy",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          -1
+        ],
+        "virya": "heating",
+        "note": "takra — classical digestive; 'nectar' per texts"
+      },
+      "usda": [
+        {
+          "fdcId": 10,
+          "name": "Buttermilk",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 14
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.groundnut-oil",
+      "name": "Groundnut oil",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "oil-fat",
+      "canonHints": {
+        "vpk": [
+          -1,
+          1,
+          0
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 8578,
+          "name": "Oil, peanut, salad or cooking",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 14
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.rice-bran-oil",
+      "name": "Rice bran oil",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "oil-fat",
+      "canonHints": {
+        "vpk": [
+          0,
+          0,
+          0
+        ],
+        "virya": "neutral",
+        "note": "modern"
+      },
+      "usda": [
+        {
+          "fdcId": 8225,
+          "name": "Oil, rice bran",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 14
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.castor-oil",
+      "name": "Castor oil (dietary)",
+      "sanskrit": "Eranda Taila",
+      "aliases": [],
+      "category": "oil-fat",
+      "canonHints": {
+        "vpk": [
+          -2,
+          0,
+          -1
+        ],
+        "virya": "heating",
+        "note": "classical virechana; dietary micro-dose only"
+      },
+      "usda": [],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 14
+        }
+      ],
+      "_facetsPending": true,
+      "usdaNote": "No suitable USDA-store row after searches for: castor oil; eranda taila."
+    },
+    {
+      "id": "dravya.almond-oil",
+      "name": "Almond oil (dietary)",
+      "sanskrit": "Vatada Taila",
+      "aliases": [],
+      "category": "oil-fat",
+      "canonHints": {
+        "vpk": [
+          -2,
+          0,
+          1
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 4571,
+          "name": "Almond oil",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 14
+        }
+      ],
+      "_facetsPending": true
+    },
+    {
+      "id": "dravya.walnut-oil",
+      "name": "Walnut oil",
+      "sanskrit": null,
+      "aliases": [],
+      "category": "oil-fat",
+      "canonHints": {
+        "vpk": [
+          -1,
+          0,
+          0
+        ],
+        "virya": "heating"
+      },
+      "usda": [
+        {
+          "fdcId": 4583,
+          "name": "Walnut oil",
+          "tier": "exact"
+        }
+      ],
+      "servings": [
+        {
+          "label": "1 tbsp",
+          "grams": 14
+        }
+      ],
+      "_facetsPending": true
+    }
+  ]
+}

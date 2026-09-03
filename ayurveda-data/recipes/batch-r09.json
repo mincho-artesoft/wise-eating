@@ -1,0 +1,4086 @@
+{
+  "formatVersion": "1.0",
+  "batch": "recipe-batch-r09",
+  "qualityState": "aiDraft",
+  "items": [
+    {
+      "id": "recipe.intl-carrot-ginger-soup",
+      "name": "Carrot Ginger Soup",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrots, sliced",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Additional fresh ginger",
+          "grams": 8
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1250
+        }
+      ],
+      "steps": [
+        "Wash and cut the sliced carrots into even pieces.",
+        "Warm the olive oil; bloom the cumin and soften the additional fresh ginger and fennel seeds.",
+        "Add the main ingredients and water, bring to a boil, then lower to a steady simmer.",
+        "Cook until everything is completely tender; mash or blend all of the soup to give the broth body.",
+        "Add the rock salt, simmer for three more minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Carrot Ginger Soup is a vegetable-forward soup served warm with a fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-soup adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-pumpkin-fennel-soup",
+      "name": "Pumpkin Fennel Soup",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 680
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1250
+        }
+      ],
+      "steps": [
+        "Wash and cut the diced pumpkin into even pieces.",
+        "Warm the olive oil; bloom the cumin and soften the fennel seeds.",
+        "Add the main ingredients and water, bring to a boil, then lower to a steady simmer.",
+        "Cook until everything is completely tender; mash or blend all of the soup to give the broth body.",
+        "Add the rock salt, simmer for three more minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "sharad",
+        "hemanta"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pumpkin Fennel Soup is a vegetable-forward soup served warm with a fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-soup adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-beet-cumin-soup",
+      "name": "Beet Cumin Soup",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.beetroot",
+          "name": "Beetroot, diced",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1250
+        }
+      ],
+      "steps": [
+        "Wash and cut the diced beetroot into even pieces.",
+        "Warm the olive oil; bloom the cumin and soften the coriander seeds.",
+        "Add the main ingredients and water, bring to a boil, then lower to a steady simmer.",
+        "Cook until everything is completely tender; mash or blend all of the soup to give the broth body.",
+        "Add the rock salt, simmer for three more minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Beet Cumin Soup is a vegetable-forward soup served warm with a fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-soup adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-cauliflower-coriander-soup",
+      "name": "Cauliflower Coriander Soup",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower florets",
+          "grams": 650
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1250
+        }
+      ],
+      "steps": [
+        "Wash and cut the cauliflower florets into even pieces.",
+        "Warm the olive oil; bloom the cumin and soften the coriander seeds.",
+        "Add the main ingredients and water, bring to a boil, then lower to a steady simmer.",
+        "Cook until everything is completely tender; mash or blend all of the soup to give the broth body.",
+        "Add the rock salt, simmer for three more minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cauliflower Coriander Soup is a vegetable-forward soup served warm with a fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-soup adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-broccoli-dill-soup",
+      "name": "Broccoli Dill Soup",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.broccoli",
+          "name": "Broccoli florets",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1250
+        }
+      ],
+      "steps": [
+        "Wash and cut the broccoli florets into even pieces.",
+        "Warm the olive oil; bloom the cumin and soften the fresh dill.",
+        "Add the main ingredients and water, bring to a boil, then lower to a steady simmer.",
+        "Cook until everything is completely tender; mash or blend all of the soup to give the broth body.",
+        "Add the rock salt, simmer for three more minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Broccoli Dill Soup is a vegetable-forward soup served warm with a fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-soup adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-zucchini-mint-soup",
+      "name": "Zucchini Mint Soup",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, diced",
+          "grams": 680
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1250
+        }
+      ],
+      "steps": [
+        "Wash and cut the diced zucchini into even pieces.",
+        "Warm the olive oil; bloom the cumin and soften the fresh mint and fennel seeds.",
+        "Add the main ingredients and water, bring to a boil, then lower to a steady simmer.",
+        "Cook until everything is completely tender; mash or blend all of the soup to give the broth body.",
+        "Add the rock salt, simmer for three more minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -2,
+        "kapha": -1
+      },
+      "seasons": [
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Zucchini Mint Soup is a vegetable-forward soup served warm with a fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-soup adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-celery-barley-soup",
+      "name": "Celery Barley Soup",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 42,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.celery",
+          "name": "Celery, sliced",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1450
+        }
+      ],
+      "steps": [
+        "Wash and cut the pearled barley and sliced celery and diced carrot into even pieces.",
+        "Warm the olive oil; bloom the cumin and soften the fresh thyme.",
+        "Add the main ingredients and water, bring to a boil, then lower to a steady simmer.",
+        "Cook until everything is completely tender; mash or blend part of the soup to give the broth body.",
+        "Add the rock salt, simmer for three more minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Celery Barley Soup is a vegetable-forward soup served warm with a fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-soup adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-mushroom-thyme-soup",
+      "name": "Mushroom Thyme Soup",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.white-mushroom",
+          "name": "White mushrooms, sliced",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potato, diced",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1250
+        }
+      ],
+      "steps": [
+        "Wash and cut the sliced white mushrooms and diced potato into even pieces.",
+        "Warm the olive oil; bloom the cumin and soften the fresh thyme.",
+        "Add the main ingredients and water, bring to a boil, then lower to a steady simmer.",
+        "Cook until everything is completely tender; mash or blend all of the soup to give the broth body.",
+        "Add the rock salt, simmer for three more minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mushroom Thyme Soup is a vegetable-forward soup served warm with a fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-soup adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-sweet-potato-cinnamon-soup",
+      "name": "Sweet Potato Cinnamon Soup",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, diced",
+          "grams": 650
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1.5
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Additional fresh ginger",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1250
+        }
+      ],
+      "steps": [
+        "Wash and cut the diced sweet potato into even pieces.",
+        "Warm the olive oil; bloom the cumin and soften the cinnamon and additional fresh ginger.",
+        "Add the main ingredients and water, bring to a boil, then lower to a steady simmer.",
+        "Cook until everything is completely tender; mash or blend all of the soup to give the broth body.",
+        "Add the rock salt, simmer for three more minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sweet Potato Cinnamon Soup is a vegetable-forward soup served warm with a fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-soup adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-turnip-parsley-soup",
+      "name": "Turnip Parsley Soup",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.turnip",
+          "name": "Turnips, diced",
+          "grams": 620
+        },
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potato, diced",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1250
+        }
+      ],
+      "steps": [
+        "Wash and cut the diced turnips and diced potato into even pieces.",
+        "Warm the olive oil; bloom the cumin and soften the fresh parsley.",
+        "Add the main ingredients and water, bring to a boil, then lower to a steady simmer.",
+        "Cook until everything is completely tender; mash or blend all of the soup to give the broth body.",
+        "Add the rock salt, simmer for three more minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Turnip Parsley Soup is a vegetable-forward soup served warm with a fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-soup adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-asparagus-fennel-soup",
+      "name": "Asparagus Fennel Soup",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.asparagus",
+          "name": "Asparagus, cut",
+          "grams": 580
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, sliced",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1250
+        }
+      ],
+      "steps": [
+        "Wash and cut the asparagus cut and sliced fennel bulb into even pieces.",
+        "Warm the olive oil; bloom the cumin and soften the fennel seeds.",
+        "Add the main ingredients and water, bring to a boil, then lower to a steady simmer.",
+        "Cook until everything is completely tender; mash or blend all of the soup to give the broth body.",
+        "Add the rock salt, simmer for three more minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -2,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Asparagus Fennel Soup is a vegetable-forward soup served warm with a fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-soup adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-artichoke-leek-soup",
+      "name": "Artichoke Leek Soup",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.artichoke",
+          "name": "Artichoke hearts, chopped",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.leek",
+          "name": "Leek, sliced",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potato, diced",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1250
+        }
+      ],
+      "steps": [
+        "Wash and cut the chopped artichoke hearts and sliced leek and diced potato into even pieces.",
+        "Warm the olive oil; bloom the cumin and soften the fresh parsley.",
+        "Add the main ingredients and water, bring to a boil, then lower to a steady simmer.",
+        "Cook until everything is completely tender; mash or blend all of the soup to give the broth body.",
+        "Add the rock salt, simmer for three more minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Artichoke Leek Soup is a vegetable-forward soup served warm with a fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-soup adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-cabbage-cumin-soup",
+      "name": "Cabbage Cumin Soup",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, chopped",
+          "grams": 600
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1250
+        }
+      ],
+      "steps": [
+        "Wash and cut the chopped cabbage and diced carrot into even pieces.",
+        "Warm the olive oil; bloom the cumin and soften the coriander seeds.",
+        "Add the main ingredients and water, bring to a boil, then lower to a steady simmer.",
+        "Cook until everything is completely tender; mash or blend part of the soup to give the broth body.",
+        "Add the rock salt, simmer for three more minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cabbage Cumin Soup is a vegetable-forward soup served warm with a fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-soup adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-spinach-mung-soup",
+      "name": "Spinach Mung Soup",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1400
+        }
+      ],
+      "steps": [
+        "Wash and cut the split mung dal and chopped spinach into even pieces.",
+        "Warm the olive oil; bloom the cumin and soften the coriander seeds.",
+        "Add the main ingredients and water, bring to a boil, then lower to a steady simmer.",
+        "Cook until everything is completely tender; mash or blend part of the soup to give the broth body.",
+        "Add the rock salt, simmer for three more minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Spinach Mung Soup is a vegetable-forward soup served warm with a fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-soup adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-tomato-red-lentil-soup",
+      "name": "Tomato Red Lentil Soup",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, chopped",
+          "grams": 480
+        },
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.basil-sweet",
+          "name": "Fresh basil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1350
+        }
+      ],
+      "steps": [
+        "Wash and cut the chopped tomatoes and red lentils and diced carrot into even pieces.",
+        "Warm the olive oil; bloom the cumin and soften the fresh basil.",
+        "Add the main ingredients and water, bring to a boil, then lower to a steady simmer.",
+        "Cook until everything is completely tender; mash or blend part of the soup to give the broth body.",
+        "Add the rock salt, simmer for three more minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tomato Red Lentil Soup is a vegetable-forward soup served warm with a fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-soup adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-tomato-cottage-cheese-soup",
+      "name": "Tomato Cottage Cheese Soup",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, chopped",
+          "grams": 560
+        },
+        {
+          "dravyaId": "dravya.cottage-cheese",
+          "name": "Cottage cheese",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.basil-sweet",
+          "name": "Fresh basil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1250
+        }
+      ],
+      "steps": [
+        "Wash and cut the chopped tomatoes and cottage cheese and diced carrot into even pieces.",
+        "Warm the olive oil; bloom the cumin and soften the fresh basil.",
+        "Add the main ingredients and water, bring to a boil, then lower to a steady simmer.",
+        "Cook until everything is completely tender; mash or blend the tomato and carrot before folding in the cottage cheese to give the broth body.",
+        "Add the rock salt, simmer for three more minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [
+        "cheese combined with tomato (traditional viruddha)"
+      ],
+      "guidance": "This modern creamy tomato soup is flagged because cottage cheese is combined with tomato. Vata: serve warm with a little ghee. Pitta: reduce tomato and omit pepper. Kapha: use less cottage cheese and a smaller bowl. Compliant variant: omit the cottage cheese and blend in cooked white beans or tofu for body.",
+      "provenance": [
+        "original international vegetable-soup adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-green-pea-mint-soup",
+      "name": "Green Pea Mint Soup",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 560
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, diced",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.mint",
+          "name": "Fresh mint",
+          "grams": 22
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1250
+        }
+      ],
+      "steps": [
+        "Wash and cut the green peas and diced zucchini into even pieces.",
+        "Warm the olive oil; bloom the cumin and soften the fresh mint.",
+        "Add the main ingredients and water, bring to a boil, then lower to a steady simmer.",
+        "Cook until everything is completely tender; mash or blend all of the soup to give the broth body.",
+        "Add the rock salt, simmer for three more minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Green Pea Mint Soup is a vegetable-forward soup served warm with a fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-soup adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-corn-black-pepper-soup",
+      "name": "Corn Black Pepper Soup",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.corn",
+          "name": "Sweet corn kernels",
+          "grams": 560
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.black-pepper",
+          "name": "Black pepper",
+          "grams": 2
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1250
+        }
+      ],
+      "steps": [
+        "Wash and cut the sweet corn kernels and diced carrot into even pieces.",
+        "Warm the olive oil; bloom the cumin and soften the black pepper.",
+        "Add the main ingredients and water, bring to a boil, then lower to a steady simmer.",
+        "Cook until everything is completely tender; mash or blend part of the soup to give the broth body.",
+        "Add the rock salt, simmer for three more minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "varsha"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Corn Black Pepper Soup is a vegetable-forward soup served warm with a fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-soup adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-butternut-sage-style-soup",
+      "name": "Butternut Herb Soup",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.butternut-squash",
+          "name": "Butternut squash, diced",
+          "grams": 680
+        },
+        {
+          "dravyaId": "dravya.rosemary",
+          "name": "Fresh rosemary",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1250
+        }
+      ],
+      "steps": [
+        "Wash and cut the diced butternut squash into even pieces.",
+        "Warm the olive oil; bloom the cumin and soften the fresh rosemary and fennel seeds.",
+        "Add the main ingredients and water, bring to a boil, then lower to a steady simmer.",
+        "Cook until everything is completely tender; mash or blend all of the soup to give the broth body.",
+        "Add the rock salt, simmer for three more minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": -2,
+        "pitta": -1,
+        "kapha": 0
+      },
+      "seasons": [
+        "sharad",
+        "hemanta"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Butternut Herb Soup is a vegetable-forward soup served warm with a fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-soup adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-radish-spinach-soup",
+      "name": "Radish Spinach Soup",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.radish",
+          "name": "Radish, sliced",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potato, diced",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1250
+        }
+      ],
+      "steps": [
+        "Wash and cut the sliced radish and chopped spinach and diced potato into even pieces.",
+        "Warm the olive oil; bloom the cumin and soften the fresh parsley.",
+        "Add the main ingredients and water, bring to a boil, then lower to a steady simmer.",
+        "Cook until everything is completely tender; mash or blend part of the soup to give the broth body.",
+        "Add the rock salt, simmer for three more minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -2
+      },
+      "seasons": [
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Radish Spinach Soup is a vegetable-forward soup served warm with a fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-soup adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-kale-white-bean-style-soup",
+      "name": "Kale Chickpea Soup",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.kale",
+          "name": "Kale, chopped",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1400
+        }
+      ],
+      "steps": [
+        "Wash and cut the chopped kale and cooked chickpeas and diced carrot into even pieces.",
+        "Warm the olive oil; bloom the cumin and soften the fresh thyme.",
+        "Add the main ingredients and water, bring to a boil, then lower to a steady simmer.",
+        "Cook until everything is completely tender; mash or blend part of the soup to give the broth body.",
+        "Add the rock salt, simmer for three more minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kale Chickpea Soup is a vegetable-forward soup served warm with a fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-soup adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-collard-chickpea-soup",
+      "name": "Collard Chickpea Soup",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.collard-greens",
+          "name": "Collard greens, chopped",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.celery",
+          "name": "Celery, sliced",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1400
+        }
+      ],
+      "steps": [
+        "Wash and cut the chopped collard greens and cooked chickpeas and sliced celery into even pieces.",
+        "Warm the olive oil; bloom the cumin and soften the dried oregano.",
+        "Add the main ingredients and water, bring to a boil, then lower to a steady simmer.",
+        "Cook until everything is completely tender; mash or blend part of the soup to give the broth body.",
+        "Add the rock salt, simmer for three more minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Collard Chickpea Soup is a vegetable-forward soup served warm with a fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-soup adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-broccoli-mung-soup",
+      "name": "Broccoli Mung Soup",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.broccoli",
+          "name": "Broccoli florets",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 170
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1400
+        }
+      ],
+      "steps": [
+        "Wash and cut the broccoli florets and split mung dal into even pieces.",
+        "Warm the olive oil; bloom the cumin and soften the coriander seeds.",
+        "Add the main ingredients and water, bring to a boil, then lower to a steady simmer.",
+        "Cook until everything is completely tender; mash or blend all of the soup to give the broth body.",
+        "Add the rock salt, simmer for three more minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Broccoli Mung Soup is a vegetable-forward soup served warm with a fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-soup adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-potato-leek-soup",
+      "name": "Potato Leek Soup",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potatoes, diced",
+          "grams": 520
+        },
+        {
+          "dravyaId": "dravya.leek",
+          "name": "Leeks, sliced",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1250
+        }
+      ],
+      "steps": [
+        "Wash and cut the diced potatoes and sliced leeks into even pieces.",
+        "Warm the olive oil; bloom the cumin and soften the fresh thyme.",
+        "Add the main ingredients and water, bring to a boil, then lower to a steady simmer.",
+        "Cook until everything is completely tender; mash or blend all of the soup to give the broth body.",
+        "Add the rock salt, simmer for three more minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Potato Leek Soup is a vegetable-forward soup served warm with a fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-soup adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-red-pepper-tomato-soup",
+      "name": "Roasted Red Pepper Tomato Soup",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.red-bell-pepper",
+          "name": "Red bell peppers, chopped",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, chopped",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.basil-sweet",
+          "name": "Fresh basil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1250
+        }
+      ],
+      "steps": [
+        "Wash and cut the chopped red bell peppers and chopped tomatoes and diced carrot into even pieces.",
+        "Warm the olive oil; bloom the cumin and soften the fresh basil.",
+        "Add the main ingredients and water, bring to a boil, then lower to a steady simmer.",
+        "Cook until everything is completely tender; mash or blend all of the soup to give the broth body.",
+        "Add the rock salt, simmer for three more minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 2,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Roasted Red Pepper Tomato Soup is a vegetable-forward soup served warm with a fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-soup adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-brown-lentil-root-stew",
+      "name": "Brown Lentil Root Vegetable Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-lentil",
+          "name": "Brown lentils",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.turnip",
+          "name": "Turnip, diced",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1200
+        }
+      ],
+      "steps": [
+        "Prepare the brown lentils and diced carrot and diced turnip in bite-size pieces.",
+        "Warm the olive oil; toast the cumin and coriander until fragrant.",
+        "Add the main ingredients and fresh thyme; stir to coat them evenly.",
+        "Pour in the water, add the rock salt, and simmer covered until the legumes or grains are soft and the vegetables are tender.",
+        "Uncover and reduce only until the broth lightly coats a spoon, then serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Brown Lentil Root Vegetable Stew is a moist, slowly simmered international main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian stew adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-chickpea-pumpkin-stew",
+      "name": "Chickpea Pumpkin Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.cinnamon",
+          "name": "Cinnamon",
+          "grams": 1
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Prepare the cooked chickpeas and diced pumpkin in bite-size pieces.",
+        "Warm the olive oil; toast the cumin and coriander until fragrant.",
+        "Add the main ingredients and cinnamon, fresh ginger; stir to coat them evenly.",
+        "Pour in the water, add the rock salt, and simmer covered until the legumes or grains are soft and the vegetables are tender.",
+        "Uncover and reduce only until the broth lightly coats a spoon, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chickpea Pumpkin Stew is a moist, slowly simmered international main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian stew adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-chickpea-kale-stew",
+      "name": "Chickpea Kale Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.kale",
+          "name": "Kale, chopped",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Prepare the cooked chickpeas and chopped kale and diced carrot in bite-size pieces.",
+        "Warm the olive oil; toast the cumin and coriander until fragrant.",
+        "Add the main ingredients and dried oregano; stir to coat them evenly.",
+        "Pour in the water, add the rock salt, and simmer covered until the legumes or grains are soft and the vegetables are tender.",
+        "Uncover and reduce only until the broth lightly coats a spoon, then serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Chickpea Kale Stew is a moist, slowly simmered international main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian stew adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-black-bean-sweet-potato-stew",
+      "name": "Black Bean Sweet Potato Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.black-beans",
+          "name": "Cooked black beans",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, diced",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.red-bell-pepper",
+          "name": "Red bell pepper, diced",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Prepare the cooked black beans and diced sweet potato in bite-size pieces.",
+        "Warm the olive oil; toast the cumin and coriander until fragrant.",
+        "Add the main ingredients and diced red bell pepper; stir to coat them evenly.",
+        "Pour in the water, add the rock salt, and simmer covered until the legumes or grains are soft and the vegetables are tender.",
+        "Uncover and reduce only until the broth lightly coats a spoon, then serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 1,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Black Bean Sweet Potato Stew is a moist, slowly simmered international main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian stew adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-adzuki-carrot-stew",
+      "name": "Adzuki Carrot Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.adzuki",
+          "name": "Cooked adzuki beans",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Prepare the cooked adzuki beans and diced carrot in bite-size pieces.",
+        "Warm the olive oil; toast the cumin and coriander until fragrant.",
+        "Add the main ingredients and fennel seeds; stir to coat them evenly.",
+        "Pour in the water, add the rock salt, and simmer covered until the legumes or grains are soft and the vegetables are tender.",
+        "Uncover and reduce only until the broth lightly coats a spoon, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Adzuki Carrot Stew is a moist, slowly simmered international main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian stew adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-rajma-cabbage-stew",
+      "name": "Kidney Bean Cabbage Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.rajma",
+          "name": "Cooked kidney beans",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, chopped",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.celery",
+          "name": "Celery, sliced",
+          "grams": 110
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Prepare the cooked kidney beans and chopped cabbage in bite-size pieces.",
+        "Warm the olive oil; toast the cumin and coriander until fragrant.",
+        "Add the main ingredients and sliced celery; stir to coat them evenly.",
+        "Pour in the water, add the rock salt, and simmer covered until the legumes or grains are soft and the vegetables are tender.",
+        "Uncover and reduce only until the broth lightly coats a spoon, then serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Kidney Bean Cabbage Stew is a moist, slowly simmered international main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian stew adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-mung-zucchini-stew",
+      "name": "Mung Zucchini Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Mung beans",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, diced",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Prepare the mung beans and diced zucchini in bite-size pieces.",
+        "Warm the olive oil; toast the cumin and coriander until fragrant.",
+        "Add the main ingredients and fennel seeds; stir to coat them evenly.",
+        "Pour in the water, add the rock salt, and simmer covered until the legumes or grains are soft and the vegetables are tender.",
+        "Uncover and reduce only until the broth lightly coats a spoon, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Mung Zucchini Stew is a moist, slowly simmered international main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian stew adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-masoor-eggplant-stew",
+      "name": "Red Lentil Eggplant Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.eggplant",
+          "name": "Eggplant, diced",
+          "grams": 380
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomato, chopped",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Prepare the red lentils and diced eggplant in bite-size pieces.",
+        "Warm the olive oil; toast the cumin and coriander until fragrant.",
+        "Add the main ingredients and chopped tomato; stir to coat them evenly.",
+        "Pour in the water, add the rock salt, and simmer covered until the legumes or grains are soft and the vegetables are tender.",
+        "Uncover and reduce only until the broth lightly coats a spoon, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Red Lentil Eggplant Stew is a moist, slowly simmered international main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian stew adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-toor-pumpkin-stew",
+      "name": "Pigeon Pea Pumpkin Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.toor-dal",
+          "name": "Pigeon peas",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Prepare the pigeon peas and diced pumpkin in bite-size pieces.",
+        "Warm the olive oil; toast the cumin and coriander until fragrant.",
+        "Add the main ingredients and coriander seeds; stir to coat them evenly.",
+        "Pour in the water, add the rock salt, and simmer covered until the legumes or grains are soft and the vegetables are tender.",
+        "Uncover and reduce only until the broth lightly coats a spoon, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pigeon Pea Pumpkin Stew is a moist, slowly simmered international main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian stew adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-barley-mushroom-stew",
+      "name": "Barley Mushroom Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 44,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.barley",
+          "name": "Pearled barley",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.white-mushroom",
+          "name": "White mushrooms, sliced",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 5
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Prepare the pearled barley and sliced white mushrooms and diced carrot in bite-size pieces.",
+        "Warm the olive oil; toast the cumin and coriander until fragrant.",
+        "Add the main ingredients and fresh thyme; stir to coat them evenly.",
+        "Pour in the water, add the rock salt, and simmer covered until the legumes or grains are soft and the vegetables are tender.",
+        "Uncover and reduce only until the broth lightly coats a spoon, then serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Barley Mushroom Stew is a moist, slowly simmered international main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian stew adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-quinoa-vegetable-stew",
+      "name": "Quinoa Vegetable Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.quinoa",
+          "name": "Quinoa",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, diced",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.parsley",
+          "name": "Fresh parsley",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1050
+        }
+      ],
+      "steps": [
+        "Prepare the quinoa and diced zucchini and diced carrot in bite-size pieces.",
+        "Warm the olive oil; toast the cumin and coriander until fragrant.",
+        "Add the main ingredients and fresh parsley; stir to coat them evenly.",
+        "Pour in the water, add the rock salt, and simmer covered until the legumes or grains are soft and the vegetables are tender.",
+        "Uncover and reduce only until the broth lightly coats a spoon, then serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Quinoa Vegetable Stew is a moist, slowly simmered international main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian stew adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-millet-root-stew",
+      "name": "Millet Root Vegetable Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.proso-millet",
+          "name": "Proso millet",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.turnip",
+          "name": "Turnip, diced",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.rosemary",
+          "name": "Fresh rosemary",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Prepare the proso millet and diced carrot and diced turnip in bite-size pieces.",
+        "Warm the olive oil; toast the cumin and coriander until fragrant.",
+        "Add the main ingredients and fresh rosemary; stir to coat them evenly.",
+        "Pour in the water, add the rock salt, and simmer covered until the legumes or grains are soft and the vegetables are tender.",
+        "Uncover and reduce only until the broth lightly coats a spoon, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Millet Root Vegetable Stew is a moist, slowly simmered international main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian stew adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-buckwheat-cabbage-stew",
+      "name": "Buckwheat Cabbage Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.buckwheat",
+          "name": "Buckwheat groats",
+          "grams": 220
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, chopped",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 20
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Prepare the buckwheat groats and chopped cabbage and diced carrot in bite-size pieces.",
+        "Warm the olive oil; toast the cumin and coriander until fragrant.",
+        "Add the main ingredients and fresh dill; stir to coat them evenly.",
+        "Pour in the water, add the rock salt, and simmer covered until the legumes or grains are soft and the vegetables are tender.",
+        "Uncover and reduce only until the broth lightly coats a spoon, then serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Buckwheat Cabbage Stew is a moist, slowly simmered international main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian stew adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-sorghum-bean-stew",
+      "name": "Sorghum Black Bean Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 46,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.jowar",
+          "name": "Sorghum grain",
+          "grams": 190
+        },
+        {
+          "dravyaId": "dravya.black-beans",
+          "name": "Cooked black beans",
+          "grams": 350
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 150
+        },
+        {
+          "dravyaId": "dravya.oregano",
+          "name": "Dried oregano",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1100
+        }
+      ],
+      "steps": [
+        "Prepare the sorghum grain and cooked black beans and diced carrot in bite-size pieces.",
+        "Warm the olive oil; toast the cumin and coriander until fragrant.",
+        "Add the main ingredients and dried oregano; stir to coat them evenly.",
+        "Pour in the water, add the rock salt, and simmer covered until the legumes or grains are soft and the vegetables are tender.",
+        "Uncover and reduce only until the broth lightly coats a spoon, then serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Sorghum Black Bean Stew is a moist, slowly simmered international main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian stew adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-amaranth-greens-stew",
+      "name": "Amaranth Greens Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.amaranth-grain",
+          "name": "Amaranth grain",
+          "grams": 210
+        },
+        {
+          "dravyaId": "dravya.amaranth-leaves",
+          "name": "Amaranth leaves, chopped",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1050
+        }
+      ],
+      "steps": [
+        "Prepare the amaranth grain and chopped amaranth leaves and diced carrot in bite-size pieces.",
+        "Warm the olive oil; toast the cumin and coriander until fragrant.",
+        "Add the main ingredients and coriander seeds; stir to coat them evenly.",
+        "Pour in the water, add the rock salt, and simmer covered until the legumes or grains are soft and the vegetables are tender.",
+        "Uncover and reduce only until the broth lightly coats a spoon, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Amaranth Greens Stew is a moist, slowly simmered international main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian stew adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-tofu-mushroom-stew",
+      "name": "Tofu Mushroom Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.tofu",
+          "name": "Firm tofu, cubed",
+          "grams": 340
+        },
+        {
+          "dravyaId": "dravya.white-mushroom",
+          "name": "White mushrooms, sliced",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Prepare the cubed firm tofu and sliced white mushrooms and diced carrot in bite-size pieces.",
+        "Warm the olive oil; toast the cumin and coriander until fragrant.",
+        "Add the main ingredients and fresh thyme; stir to coat them evenly.",
+        "Pour in the water, add the rock salt, and simmer covered until the legumes or grains are soft and the vegetables are tender.",
+        "Uncover and reduce only until the broth lightly coats a spoon, then serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tofu Mushroom Stew is a moist, slowly simmered international main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian stew adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-tempeh-cabbage-stew",
+      "name": "Tempeh Cabbage Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.tempeh",
+          "name": "Tempeh, cubed",
+          "grams": 320
+        },
+        {
+          "dravyaId": "dravya.cabbage",
+          "name": "Cabbage, chopped",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Additional fresh ginger",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Prepare the cubed tempeh and chopped cabbage and diced carrot in bite-size pieces.",
+        "Warm the olive oil; toast the cumin and coriander until fragrant.",
+        "Add the main ingredients and additional fresh ginger; stir to coat them evenly.",
+        "Pour in the water, add the rock salt, and simmer covered until the legumes or grains are soft and the vegetables are tender.",
+        "Uncover and reduce only until the broth lightly coats a spoon, then serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 0,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tempeh Cabbage Stew is a moist, slowly simmered international main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian stew adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-peanut-sweet-potato-stew",
+      "name": "Peanut Sweet Potato Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.sweet-potato",
+          "name": "Sweet potato, diced",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.peanut",
+          "name": "Peanuts, ground",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomato, chopped",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Prepare the diced sweet potato and ground peanuts and cooked chickpeas in bite-size pieces.",
+        "Warm the olive oil; toast the cumin and coriander until fragrant.",
+        "Add the main ingredients and chopped tomato; stir to coat them evenly.",
+        "Pour in the water, add the rock salt, and simmer covered until the legumes or grains are soft and the vegetables are tender.",
+        "Uncover and reduce only until the broth lightly coats a spoon, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Peanut Sweet Potato Stew is a moist, slowly simmered international main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian stew adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-coconut-chickpea-stew",
+      "name": "Coconut Chickpea Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.zucchini",
+          "name": "Zucchini, diced",
+          "grams": 300
+        },
+        {
+          "dravyaId": "dravya.coconut-fresh",
+          "name": "Fresh coconut, finely grated",
+          "grams": 100
+        },
+        {
+          "dravyaId": "dravya.ginger-fresh",
+          "name": "Fresh ginger",
+          "grams": 6
+        },
+        {
+          "dravyaId": "dravya.coconut-oil",
+          "name": "Coconut oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Prepare the cooked chickpeas and diced zucchini in bite-size pieces.",
+        "Warm the Coconut oil; toast the cumin and coriander until fragrant.",
+        "Add the main ingredients and finely grated fresh coconut, fresh ginger; stir to coat them evenly.",
+        "Pour in the water, add the rock salt, and simmer covered until the legumes or grains are soft and the vegetables are tender.",
+        "Uncover and reduce only until the broth lightly coats a spoon, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": 1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Coconut Chickpea Stew is a moist, slowly simmered international main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian stew adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-tomato-chickpea-stew",
+      "name": "Tomato Chickpea Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.chickpea",
+          "name": "Cooked chickpeas",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, chopped",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 140
+        },
+        {
+          "dravyaId": "dravya.basil-sweet",
+          "name": "Fresh basil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Prepare the cooked chickpeas and chopped tomatoes and diced carrot in bite-size pieces.",
+        "Warm the olive oil; toast the cumin and coriander until fragrant.",
+        "Add the main ingredients and fresh basil; stir to coat them evenly.",
+        "Pour in the water, add the rock salt, and simmer covered until the legumes or grains are soft and the vegetables are tender.",
+        "Uncover and reduce only until the broth lightly coats a spoon, then serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Tomato Chickpea Stew is a moist, slowly simmered international main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian stew adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-green-bean-potato-stew",
+      "name": "Green Bean Potato Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.green-beans",
+          "name": "Green beans, cut",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.potato",
+          "name": "Potatoes, diced",
+          "grams": 360
+        },
+        {
+          "dravyaId": "dravya.dill",
+          "name": "Fresh dill",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Prepare the green beans cut and diced potatoes in bite-size pieces.",
+        "Warm the olive oil; toast the cumin and coriander until fragrant.",
+        "Add the main ingredients and fresh dill; stir to coat them evenly.",
+        "Pour in the water, add the rock salt, and simmer covered until the legumes or grains are soft and the vegetables are tender.",
+        "Uncover and reduce only until the broth lightly coats a spoon, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": 0,
+        "kapha": 0
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Green Bean Potato Stew is a moist, slowly simmered international main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian stew adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-cauliflower-pea-stew",
+      "name": "Cauliflower Green Pea Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.cauliflower",
+          "name": "Cauliflower florets",
+          "grams": 440
+        },
+        {
+          "dravyaId": "dravya.green-peas",
+          "name": "Green peas",
+          "grams": 240
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Prepare the cauliflower florets and green peas in bite-size pieces.",
+        "Warm the olive oil; toast the cumin and coriander until fragrant.",
+        "Add the main ingredients and coriander seeds; stir to coat them evenly.",
+        "Pour in the water, add the rock salt, and simmer covered until the legumes or grains are soft and the vegetables are tender.",
+        "Uncover and reduce only until the broth lightly coats a spoon, then serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -2
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Cauliflower Green Pea Stew is a moist, slowly simmered international main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian stew adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-pumpkin-spinach-stew",
+      "name": "Pumpkin Spinach Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.pumpkin",
+          "name": "Pumpkin, diced",
+          "grams": 420
+        },
+        {
+          "dravyaId": "dravya.spinach",
+          "name": "Spinach, chopped",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.mung-bean",
+          "name": "Split mung dal",
+          "grams": 120
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 950
+        }
+      ],
+      "steps": [
+        "Prepare the diced pumpkin and chopped spinach and split mung dal in bite-size pieces.",
+        "Warm the olive oil; toast the cumin and coriander until fragrant.",
+        "Add the main ingredients and fennel seeds; stir to coat them evenly.",
+        "Pour in the water, add the rock salt, and simmer covered until the legumes or grains are soft and the vegetables are tender.",
+        "Uncover and reduce only until the broth lightly coats a spoon, then serve warm."
+      ],
+      "dosha": {
+        "vata": -1,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Pumpkin Spinach Stew is a moist, slowly simmered international main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian stew adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-lentil-celery-tomato-stew",
+      "name": "Lentil Celery Tomato Stew",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 18,
+      "cookMinutes": 40,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.brown-lentil",
+          "name": "Brown lentils",
+          "grams": 230
+        },
+        {
+          "dravyaId": "dravya.celery",
+          "name": "Celery, sliced",
+          "grams": 180
+        },
+        {
+          "dravyaId": "dravya.tomato",
+          "name": "Tomatoes, chopped",
+          "grams": 280
+        },
+        {
+          "dravyaId": "dravya.thyme",
+          "name": "Fresh thyme",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 18
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.coriander-seed",
+          "name": "Coriander seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1150
+        }
+      ],
+      "steps": [
+        "Prepare the brown lentils and sliced celery and chopped tomatoes in bite-size pieces.",
+        "Warm the olive oil; toast the cumin and coriander until fragrant.",
+        "Add the main ingredients and fresh thyme; stir to coat them evenly.",
+        "Pour in the water, add the rock salt, and simmer covered until the legumes or grains are soft and the vegetables are tender.",
+        "Uncover and reduce only until the broth lightly coats a spoon, then serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": 1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Lentil Celery Tomato Stew is a moist, slowly simmered international main. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international lacto-vegetarian stew adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    },
+    {
+      "id": "recipe.intl-fennel-masoor-soup",
+      "name": "Fennel Red Lentil Soup",
+      "category": "international",
+      "meal": "dinner",
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 34,
+      "ingredients": [
+        {
+          "dravyaId": "dravya.masoor",
+          "name": "Red lentils",
+          "grams": 200
+        },
+        {
+          "dravyaId": "dravya.fennel-bulb",
+          "name": "Fennel bulb, sliced",
+          "grams": 260
+        },
+        {
+          "dravyaId": "dravya.carrot",
+          "name": "Carrot, diced",
+          "grams": 160
+        },
+        {
+          "dravyaId": "dravya.fennel-seed",
+          "name": "Fennel seeds",
+          "grams": 4
+        },
+        {
+          "dravyaId": "dravya.olive-oil",
+          "name": "Olive oil",
+          "grams": 16
+        },
+        {
+          "dravyaId": "dravya.cumin",
+          "name": "Cumin seeds",
+          "grams": 3
+        },
+        {
+          "dravyaId": "dravya.rock-salt",
+          "name": "Rock salt",
+          "grams": 5
+        },
+        {
+          "fdcId": 10444,
+          "name": "Water",
+          "grams": 1400
+        }
+      ],
+      "steps": [
+        "Wash and cut the red lentils and sliced fennel bulb and diced carrot into even pieces.",
+        "Warm the olive oil; bloom the cumin and soften the fennel seeds.",
+        "Add the main ingredients and water, bring to a boil, then lower to a steady simmer.",
+        "Cook until everything is completely tender; mash or blend part of the soup to give the broth body.",
+        "Add the rock salt, simmer for three more minutes, and serve warm."
+      ],
+      "dosha": {
+        "vata": 0,
+        "pitta": -1,
+        "kapha": -1
+      },
+      "seasons": [
+        "vasanta",
+        "grishma",
+        "varsha",
+        "sharad",
+        "hemanta",
+        "shishira"
+      ],
+      "timeOfDay": [
+        "midday",
+        "evening"
+      ],
+      "viruddhaFlags": [],
+      "guidance": "Fennel Red Lentil Soup is a vegetable-forward soup served warm with a fully cooked texture. Vata: serve warm, cook until tender, and add a little ghee if the dish feels dry. Pitta: moderate chilies and sharp sourness, favoring coriander or fennel. Kapha: keep the portion light, reduce added fat, and favor ginger or black pepper.",
+      "provenance": [
+        "original international vegetable-soup adaptation"
+      ],
+      "confidence": {
+        "ayur": 0.78
+      }
+    }
+  ]
+}

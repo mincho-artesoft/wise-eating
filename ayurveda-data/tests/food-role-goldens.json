@@ -1,0 +1,558 @@
+{
+  "goldensVersion": 3,
+  "revision": "rev3 — 2026-07-27. Second label correction: 'Milk, dry, whole' moves other -> ingredientOnly, because rev8 added a role that expresses it properly. Two labels have now been corrected in total, both toward the more accurate answer and neither to move a score. rev2 notes follow. rev2 — 2026-07-27. Companion to food-roles.json rev3. One label CORRECTED against rev1: 'Peanut butter, smooth style' moves side -> condiment, because the MP-7 holdout labeller was right and I was wrong. No other label was touched, and no label was changed to make a score look better. rev1 notes follow. Companion to food-roles.json rev1. The first 26 cases are transcribed verbatim from the MP-6b 21-meal sample; the rest are adversarial cases chosen to break rules that are too blunt.",
+  "author": "Director",
+  "kind": "food-role-goldens",
+  "THIS_IS_A_TRAINING_SET": "Read this before quoting a score from it. These cases were written alongside the rules they test, so a high score here measures self-consistency and nothing else. MP-3 scored 56/56 on the corpus its aliases were built from and 35/48 on a set written afterwards. A HOLDOUT IS MANDATORY: sample 60 rows uniformly at random from the real 14,484-row catalogue with a fixed, reported seed, hand-label them BEFORE running the resolver, and report that score separately. The holdout number is the real number.",
+  "scoring": {
+    "wrongConfident": "Assigning a specific role where the golden says another specific role. Target ZERO on the must-not cases.",
+    "unresolved": "Falling through to `other`. Counted separately and far less serious than a wrong confident assignment.",
+    "gate": "See TASK-MP7.md. Contested cases report but never block."
+  },
+  "counts": {
+    "roleCases": 71,
+    "flagCases": 16,
+    "duplicateCases": 11,
+    "contested": 6,
+    "fromObservedMP6bFailure": 24
+  },
+  "roleCases": [
+    {
+      "name": "Infant formula, organic, powder",
+      "expectRole": "infantProduct",
+      "why": "Served at an adult breakfast.",
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "name": "Infant formula, store brand, added rice",
+      "expectRole": "infantProduct",
+      "why": "Same breakfast.",
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "name": "Infant formula, premature, powder",
+      "expectRole": "infantProduct",
+      "why": "Served at an adult dinner.",
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "name": "Toddler formula, store brand, pediatric shake",
+      "expectRole": "infantProduct",
+      "why": "Served at an adult dinner.",
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "name": "Formula, infant, ready-to-feed",
+      "expectRole": "infantProduct",
+      "why": "Token-inverted form. Tests order-independent vetoTokens."
+    },
+    {
+      "name": "Babyfood, cereal, rice, dry",
+      "expectRole": "infantProduct"
+    },
+    {
+      "name": "Cilantro Coriander Herb Salt",
+      "expectRole": "spice",
+      "why": "Salt-based blend. Was a breakfast component.",
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "name": "Spices, fenugreek seed",
+      "expectRole": "spice",
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "name": "Nigella seed",
+      "expectRole": "spice",
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "name": "Nigella Seed (Kalonji)",
+      "expectRole": "spice",
+      "why": "Authored duplicate of the row above.",
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "name": "Black Cumin (Kalo Jeera)",
+      "expectRole": "spice",
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "name": "Carom Seed (Jowan)",
+      "expectRole": "spice",
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "name": "Black pepper",
+      "expectRole": "spice",
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "name": "Marjoram (dried)",
+      "expectRole": "herb",
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "name": "Spices, marjoram, dried",
+      "expectRole": "herb",
+      "why": "USDA files marjoram under Spices and Herbs; the name rule must win.",
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "name": "Curry Leaves",
+      "expectRole": "herb",
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "name": "Tulsi (dried)",
+      "expectRole": "herb",
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "name": "Lime leaf (dried)",
+      "expectRole": "herb",
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "name": "Mung beans, mature seeds, raw",
+      "expectRole": "main",
+      "why": "Role is main; the requiresCooking flag is what makes it ineligible.",
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "name": "Lentils, pink or red, raw",
+      "expectRole": "main",
+      "why": "Same. Role and edibility are separate questions.",
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "name": "Mung Dal with Okra",
+      "expectRole": "main",
+      "why": "Authored recipe. The one legitimate dish in that breakfast.",
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "name": "Frozen yogurt, chocolate",
+      "expectRole": "sweet",
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "name": "Chocolate milk, whole",
+      "expectRole": "beverage",
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "name": "Milk shake with malt",
+      "expectRole": "beverage",
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "name": "Soy milk, chocolate",
+      "expectRole": "beverage",
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "name": "Hot chocolate / cocoa, NFS",
+      "expectRole": "beverage",
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "name": "Fish, tuna, light, canned in oil, drained solids",
+      "expectRole": "main",
+      "why": "MUST NOT be fat. 'oil' is a preparation word in hundreds of rows."
+    },
+    {
+      "name": "Sardines, Atlantic, canned in oil, drained solids with bone",
+      "expectRole": "main",
+      "why": "Same trap."
+    },
+    {
+      "name": "Peas, green, raw",
+      "expectRole": "side",
+      "why": "MUST NOT carry requiresCooking. An ordinary raw vegetable."
+    },
+    {
+      "name": "Beans, snap, green, raw",
+      "expectRole": "side",
+      "why": "Same."
+    },
+    {
+      "name": "Nuts, almonds, raw",
+      "expectRole": "side",
+      "why": "Raw nuts are food. Nut headwords are absent from dryStapleHeadwords for this reason."
+    },
+    {
+      "name": "Nuts, coconut milk, raw (liquid expressed from grated meat and water)",
+      "expectRole": "side",
+      "why": "MUST NOT be beverage. Cooking ingredient."
+    },
+    {
+      "name": "Milk, dry, whole",
+      "expectRole": "ingredientOnly",
+      "why": "DIRECTOR CORRECTION, rev3: rev1 labelled this `other` and noted only that `beverage` was wrong. Once rev8 gave the taxonomy an `ingredientOnly` role and a concentrated-milk rule, `other` became the weaker of two available answers rather than an acceptable one. Corrected to the stronger label, not to make a score move — this case was already passing as `other`."
+    },
+    {
+      "name": "Peanut butter, smooth style",
+      "expectRole": "condiment",
+      "why": "DIRECTOR CORRECTION, rev2: rev1 labelled this `side` and rev1 was wrong. The MP-7 holdout labeller independently called peanut butter a condiment and was right — `side` carries a 40-250 g portion range for something eaten 15 g at a time. MUST also not be `fat`; the butter veto exists for that."
+    },
+    {
+      "name": "Buttermilk, low fat",
+      "expectRole": "beverage",
+      "why": "Drunk, not a fat."
+    },
+    {
+      "name": "Lemon juice, raw",
+      "expectRole": "condiment",
+      "why": "MUST NOT be beverage. Nobody drinks a glass of it."
+    },
+    {
+      "name": "Orange juice, raw",
+      "expectRole": "beverage",
+      "why": "And this one is a drink. The pair tests the veto's precision."
+    },
+    {
+      "name": "Potatoes, flesh and skin, raw",
+      "expectRole": "staple",
+      "why": "The row that broke FC-1. It must be a staple and nothing else."
+    },
+    {
+      "name": "Sugar, granulated",
+      "expectRole": "sweet"
+    },
+    {
+      "name": "Chocolate, dark, 70-85% cacao solids",
+      "expectRole": "sweet",
+      "why": "Distinguishes from chocolate milk."
+    },
+    {
+      "name": "Soup, lentil, canned, ready-to-serve",
+      "expectRole": "main",
+      "why": "MUST NOT be condiment despite the Soups/Sauces/Gravies category."
+    },
+    {
+      "name": "Sauce, tomato, canned",
+      "expectRole": "condiment",
+      "why": "And this one stays condiment."
+    },
+    {
+      "name": "Gravy, beef, canned",
+      "expectRole": "condiment",
+      "why": "Contains a meat token; the category must still win."
+    },
+    {
+      "name": "Bouillon cube, chicken",
+      "expectRole": "nonFood",
+      "why": "MUST NOT be beverage or main."
+    },
+    {
+      "name": "Tea, brewed, prepared with tap water",
+      "expectRole": "beverage"
+    },
+    {
+      "name": "Tea leaves, dry, unbrewed",
+      "expectRole": "other",
+      "why": "MUST NOT be beverage in its dry form."
+    },
+    {
+      "name": "Egg, whole, cooked, hard-boiled",
+      "expectRole": "main"
+    },
+    {
+      "name": "Eggplant, raw",
+      "expectRole": "side",
+      "why": "MUST NOT match the 'egg' phrase. Token-boundary, never substring."
+    },
+    {
+      "name": "Egg noodles, cooked",
+      "expectRole": "staple",
+      "why": "Vetoed out of main."
+    },
+    {
+      "name": "Ghee, clarified butter",
+      "expectRole": "fat"
+    },
+    {
+      "name": "Butter, salted",
+      "expectRole": "fat"
+    },
+    {
+      "name": "Cake, chocolate, with frosting",
+      "expectRole": "sweet",
+      "why": "MUST NOT be staple via Baked Products."
+    },
+    {
+      "name": "Bread, whole-wheat",
+      "expectRole": "staple"
+    },
+    {
+      "name": "Ashwagandha root powder",
+      "expectRole": "medicinalHerb",
+      "why": "MUST NOT be spice or supplement."
+    },
+    {
+      "name": "Whey protein isolate powder",
+      "expectRole": "supplement"
+    },
+    {
+      "name": "Ensure Plus, nutritional shake",
+      "expectRole": "supplement",
+      "why": "Adult medical nutrition, not infant. Both are ineligible, so the boundary is low-stakes."
+    },
+    {
+      "name": "Garlic powder",
+      "expectRole": "spice"
+    },
+    {
+      "name": "Garlic, raw",
+      "expectRole": "side",
+      "why": "Fresh bulb. MUST NOT be spice."
+    },
+    {
+      "name": "Ginger, ground",
+      "expectRole": "spice"
+    },
+    {
+      "name": "Ginger root, raw",
+      "expectRole": "side"
+    },
+    {
+      "name": "Coriander leaf, raw",
+      "expectRole": "herb",
+      "why": "The rasa/leaf-vs-seed ambiguity that is already an open decision in STATUS s6."
+    },
+    {
+      "name": "Coriander seed",
+      "expectRole": "spice",
+      "why": "Same ambiguity, other side."
+    },
+    {
+      "name": "Rice, white, long-grain, regular, cooked",
+      "expectRole": "staple"
+    },
+    {
+      "name": "Rice, white, long-grain, regular, raw, unenriched",
+      "expectRole": "staple",
+      "why": "Role staple; requiresCooking TRUE."
+    },
+    {
+      "name": "Salt, table",
+      "expectRole": "spice"
+    },
+    {
+      "name": "Yogurt, plain, whole milk",
+      "expectRole": "side",
+      "why": "MUST NOT be beverage."
+    },
+    {
+      "name": "Lassi, sweet, mango",
+      "expectRole": "beverage"
+    },
+    {
+      "name": "Chutney, coconut",
+      "expectRole": "condiment"
+    },
+    {
+      "name": "Papad, roasted",
+      "expectRole": "condiment"
+    },
+    {
+      "name": "Olive oil, extra virgin",
+      "expectRole": "fat"
+    },
+    {
+      "name": "Water, tap, municipal",
+      "expectRole": "nonFood",
+      "why": "Not a plan component."
+    }
+  ],
+  "requiresCookingCases": [
+    {
+      "name": "Mung beans, mature seeds, raw",
+      "requiresCooking": true,
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "name": "Lentils, pink or red, raw",
+      "requiresCooking": true,
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "name": "Cowpeas, common, mature seeds, raw",
+      "requiresCooking": true
+    },
+    {
+      "name": "Pigeon peas (red gram), mature seeds, raw",
+      "requiresCooking": true
+    },
+    {
+      "name": "Chickpeas (garbanzo beans), mature seeds, raw",
+      "requiresCooking": true
+    },
+    {
+      "name": "Kidney beans, red, mature seeds, raw",
+      "requiresCooking": true
+    },
+    {
+      "name": "Rice, white, long-grain, regular, raw, unenriched",
+      "requiresCooking": true
+    },
+    {
+      "name": "Barley, pearled, raw",
+      "requiresCooking": true
+    },
+    {
+      "name": "Peas, green, raw",
+      "requiresCooking": false,
+      "why": "Fresh vegetable. The 'green' veto must hold."
+    },
+    {
+      "name": "Beans, snap, green, raw",
+      "requiresCooking": false
+    },
+    {
+      "name": "Peas, edible-podded, raw",
+      "requiresCooking": false
+    },
+    {
+      "name": "Mung beans, mature seeds, sprouted, raw",
+      "requiresCooking": false,
+      "why": "Sprouted is the veto."
+    },
+    {
+      "name": "Lentils, mature seeds, cooked, boiled, without salt",
+      "requiresCooking": false
+    },
+    {
+      "name": "Chickpea flour (besan)",
+      "requiresCooking": false,
+      "why": "'flour' veto; it is an ingredient, not a raw pulse."
+    },
+    {
+      "name": "Nuts, almonds, raw",
+      "requiresCooking": false,
+      "why": "Nut headwords deliberately excluded."
+    },
+    {
+      "name": "Soybeans, mature seeds, raw",
+      "requiresCooking": true,
+      "why": "Raw soy is actively toxic, not merely unpalatable."
+    }
+  ],
+  "nearDuplicateCases": [
+    {
+      "a": "Marjoram (dried)",
+      "b": "Spices, marjoram, dried",
+      "expectDuplicate": true,
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "a": "Nigella seed",
+      "b": "Nigella Seed (Kalonji)",
+      "expectDuplicate": true,
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "a": "Garlic, dried",
+      "b": "Garlic powder",
+      "expectDuplicate": true,
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "a": "Wild garlic, dried",
+      "b": "Garlic powder",
+      "expectDuplicate": true,
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "a": "Infant formula, organic, powder",
+      "b": "Infant formula, store brand, added rice",
+      "expectDuplicate": true,
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "a": "Chocolate milk, whole",
+      "b": "Milk shake with malt",
+      "expectDuplicate": true,
+      "source": "observed in the MP-6b 21-meal sample"
+    },
+    {
+      "a": "Rice, white, cooked",
+      "b": "Rice, brown, cooked",
+      "expectDuplicate": true,
+      "why": "Two rices in one meal is a variety defect, not a menu."
+    },
+    {
+      "a": "Black Cumin (Kalo Jeera)",
+      "b": "Carom Seed (Jowan)",
+      "expectDuplicate": false,
+      "why": "Different spices. Sharing the role is not enough."
+    },
+    {
+      "a": "Rice, white, cooked",
+      "b": "Dal, toor, cooked",
+      "expectDuplicate": false
+    },
+    {
+      "a": "Yogurt, plain",
+      "b": "Lassi, sweet, mango",
+      "expectDuplicate": false,
+      "why": "Headwords differ and roles differ. A borderline case worth pinning."
+    },
+    {
+      "a": "Milk, whole",
+      "b": "Chocolate milk, whole",
+      "expectDuplicate": true
+    }
+  ],
+  "contested": [
+    {
+      "name": "Kheer (rice pudding)",
+      "candidates": [
+        "sweet",
+        "staple"
+      ],
+      "note": "A sweet in Western framing, a legitimate meal component in Indian practice. Vaidya."
+    },
+    {
+      "name": "Buttermilk / chaas, plain",
+      "candidates": [
+        "beverage",
+        "side"
+      ],
+      "note": "Classically a post-meal digestive. Its role decides whether it counts against the C6 beverage cap."
+    },
+    {
+      "name": "Ghee, clarified butter",
+      "candidates": [
+        "fat",
+        "condiment"
+      ],
+      "note": "Component with its own portion, or an attribute of the dish it is cooked in?"
+    },
+    {
+      "name": "Hummus, commercial",
+      "candidates": [
+        "side",
+        "condiment"
+      ],
+      "note": "Portion range differs by a factor of four between these two."
+    },
+    {
+      "name": "Chyawanprash",
+      "candidates": [
+        "medicinalHerb",
+        "sweet"
+      ],
+      "note": "A rasayana taken by the spoonful; also 60% sugar by mass."
+    },
+    {
+      "name": "Coconut, raw",
+      "candidates": [
+        "side",
+        "fat"
+      ],
+      "note": "Interacts with the open coconut-allergen decision in STATUS s6."
+    }
+  ]
+}
