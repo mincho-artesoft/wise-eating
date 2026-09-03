@@ -31,6 +31,10 @@ enum CatalogReferenceResolver {
         self.catalogStoreIdentifier = catalogStoreIdentifier
     }
 
+    static func reset() {
+        catalogStoreIdentifier = nil
+    }
+
     static func isCatalog<T: PersistentModel>(_ model: T) -> Bool {
         guard let catalogStoreIdentifier else { return false }
         return model.persistentModelID.storeIdentifier == catalogStoreIdentifier

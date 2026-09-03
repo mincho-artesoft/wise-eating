@@ -22,9 +22,11 @@ enum CombinedStoreFactory {
     static func makeUserWriteContext(
         from combinedContainer: ModelContainer
     ) throws -> ModelContext {
-        guard let userConfiguration = combinedContainer.configurations.first(
+        let configurations = Array(combinedContainer.configurations)
+        let userConfiguration = configurations.first(
             where: { $0.name == DatabaseSchema.userConfigurationName }
-        ) else {
+        ) ?? (configurations.count == 1 ? configurations.first : nil)
+        guard let userConfiguration else {
             throw CombinedStoreError.missingUserConfiguration
         }
         let writeContainer: ModelContainer

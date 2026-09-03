@@ -35,10 +35,13 @@ struct AyurvedaAsanaYogaApp: App {
     @AppStorage("isFirstAppLaunch") private var isFirstAppLaunch: Bool = true
     @State private var coldStart: Bool = true
     
-    let container: ModelContainer = DatabaseSetup.createContainer()
+    private let database = DatabaseSetup.createContainer()
     private var notificationDelegate = NotificationDelegate()
     
     init() {
+            guard let container = database.container else {
+                return
+            }
             // --- Common Logic ---
             GlobalState.modelContext = container.mainContext
             do {
@@ -87,9 +90,11 @@ struct AyurvedaAsanaYogaApp: App {
     
     var body: some Scene {
         WindowGroup {
-            RootLauncher(container: container)
-                .preferredColorScheme(effectManager.appColorScheme)
-                .onChange(of: scenePhase) { _, newPhase in
+            if let container = database.container {
+                RootLauncher(container: container)
+                    .modelContainer(container)
+                    .preferredColorScheme(effectManager.appColorScheme)
+                    .onChange(of: scenePhase) { _, newPhase in
                     guard !Self.isIsolatedSmokeTest else { return }
                     // ... (старата логика за scenePhase остава същата) ...
                     switch newPhase {
@@ -144,7 +149,49 @@ struct AyurvedaAsanaYogaApp: App {
                     default: break
                     }
                 }
+            } else {
+                DatabaseUnavailableView(
+                    diagnostic: database.diagnostic ?? "Unknown database error"
+                )
+                .preferredColorScheme(effectManager.appColorScheme)
+            }
         }
-        .modelContainer(container)
+    }
+}
+
+private struct DatabaseUnavailableView: View {
+    let diagnostic: String
+
+    var body: some View {
+        ZStack {
+            ThemeBackgroundView()
+                .ignoresSafeArea()
+
+            VStack(spacing: 16) {
+                Image(systemName: "externaldrive.badge.exclamationmark")
+                    .font(.system(size: 42, weight: .semibold))
+
+                Text("We couldn't prepare your data")
+                    .font(.title2.bold())
+                    .multilineTextAlignment(.center)
+
+                Text(
+                    "Your existing data has not been deleted. "
+                        + "Please close and reopen the app."
+                )
+                .font(.body)
+                .multilineTextAlignment(.center)
+
+                #if DEBUG
+                Text(diagnostic)
+                    .font(.caption.monospaced())
+                    .textSelection(.enabled)
+                #endif
+            }
+            .padding(32)
+            .frame(maxWidth: 520)
+            .glassCardStyle(cornerRadius: 24)
+            .padding()
+        }
     }
 }
