@@ -664,10 +664,9 @@ struct ProfileEditorView: View {
      let chosenAllergens = selectedAllergens.compactMap { Allergen(rawValue: $0) }
 
      Task { @MainActor in
-         guard await calVM.requestCalendarAccessIfNeeded() else {
-             showError("Calendar access is required to manage profile data and settings.")
-             return
-         }
+         // Виж бележката в ProfileWizardView.saveProfile: календарът е
+         // optional и отказът не бива да спира записа на профила.
+         _ = await calVM.requestCalendarAccessIfNeeded()
 
          do {
              let writeContext = try CombinedStoreFactory.makeUserWriteContext(
