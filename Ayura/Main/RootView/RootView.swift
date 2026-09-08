@@ -13,7 +13,7 @@ struct RootView: View {
     enum ProfilesDrawerContent { case profiles, notifications }
     
     // ПРОМЯНА 1: Премахваме .notificationsDenied от enum-а, тъй като вече не блокираме приложението за това.
-    enum PermissionState { case checking, granted }
+    enum PermissionState { case checking, granted, calendarDenied }
     
     @State private var isAIGenerating: Bool = false
     @State private var permissionState: PermissionState = .checking
@@ -183,8 +183,10 @@ struct RootView: View {
                             showInitialSubscriptionIfNeeded()
                         }
                 }
-                // ПРОМЯНА 2: Случаите .notificationsDenied и .calendarDenied са
-                // премахнати, защото вече не блокираме. Виж checkPermissions().
+            case .calendarDenied:
+                PermissionDeniedView(type: .calendar, onTryAgain: checkPermissions)
+                
+                // ПРОМЯНА 2: Случаят .notificationsDenied е премахнат, защото вече не блокираме.
             }
         }
         .onAppear(perform: restoreStoredTabsIfNeeded)
@@ -1022,17 +1024,11 @@ struct RootView: View {
             return
         }
         Task {
-            // Календарът е optional, като нотификациите и HealthKit.
-            //
-            // Тук стоеше guard, който при отказ спираше приложението на екран с
-            // едно копче "опитай пак". App Review натиска "Don't Allow" по
-            // навик, така че никога не влезе вътре -- и отхвърли версията с
-            // "cannot locate the In-App Purchases", защото не можа да намери
-            // нищо. Разрешението пак се иска, за да работи календарната част
-            // при съгласие; отказът само я изключва.
-            if !CalendarViewModel.shared.isCalendarAccessGranted() {
-                _ = await CalendarViewModel.shared.requestCalendarAccessIfNeeded()
+            var calendarStatus = CalendarViewModel.shared.isCalendarAccessGranted()
+            if !calendarStatus {
+                calendarStatus = await CalendarViewModel.shared.requestCalendarAccessIfNeeded()
             }
+            guard calendarStatus else { permissionState = .calendarDenied; return }
             
             let notificationStatus = await NotificationManager.shared.getAuthorizationStatus()
             // ПРОМЯНА 3: Ако статусът е notDetermined, питаме потребителя.

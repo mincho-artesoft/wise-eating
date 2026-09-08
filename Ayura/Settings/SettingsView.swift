@@ -228,7 +228,6 @@ struct SettingsView: View {
 
                     Toggle("", isOn: $appNotificationsEnabled)
                         .labelsHidden()
-                        .tint(effectManager.currentGlobalAccentColor)
                         .onChange(of: appNotificationsEnabled) { _, isEnabled in
                             Task {
                                 await applyNotificationPreference(isEnabled)
@@ -252,6 +251,7 @@ struct SettingsView: View {
                     } label: {
                         Label("Open iOS Settings", systemImage: "gear")
                             .font(.subheadline.bold())
+                            .foregroundStyle(effectManager.contrastingSurfaceColor)
                     }
                     .buttonStyle(.borderedProminent)
                     .tint(effectManager.currentGlobalAccentColor)

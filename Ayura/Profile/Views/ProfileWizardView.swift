@@ -1184,14 +1184,11 @@ struct ProfileWizardView: View {
             let chosenMinerals = allMinerals.filter { data.selectedMinIDs.contains($0.id) }
             let chosenAllergens = data.selectedAllergens.compactMap { Allergen(rawValue: $0) }
 
-            // Календарът е optional. Тук стоеше твърд guard, който при отказ
-            // спираше записа на профила на последната стъпка -- App Review
-            // опря точно в него, след като мина стартовия екран.
-            //
-            // Профилът се записва в SwiftData по-долу без нужда от календар, а
-            // createOrUpdateCalendar и createOrUpdateShoppingListCalendar сами
-            // се отказват при липса на достъп (guard accessGranted).
-            _ = await calVM.requestCalendarAccessIfNeeded()
+            guard await calVM.requestCalendarAccessIfNeeded() else {
+                alertMessage = "Calendar access is required. Please grant permission in Settings."
+                showAlert = true
+                return
+            }
 
             do {
                 let writeContext = try CombinedStoreFactory.makeUserWriteContext(

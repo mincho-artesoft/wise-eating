@@ -517,10 +517,10 @@ private struct FoodRowView: View {
                     
                     Text(ageText)
                         .font(.caption2.weight(.bold))
-                        .foregroundColor(.white)
+                        .foregroundStyle(effectManager.currentGlobalAccentColor)
                         .padding(.horizontal, 6)
                         .padding(.vertical, 2)
-                        .background(Color.green.opacity(0.8))
+                        .background(Color.green.opacity(0.16))
                         .clipShape(Capsule())
                 }
 
@@ -534,7 +534,12 @@ private struct FoodRowView: View {
             VStack(alignment: .leading, spacing: 4) {
                 HStack(spacing: 10) {
                     if let age = engine.searchContext.activeAgeLimit {
-                        Text("Age: \(age)").font(.caption2).padding(4).background(Color.green.opacity(0.1)).cornerRadius(4).foregroundColor(.green)
+                        Text("Age: \(age)")
+                            .font(.caption2)
+                            .padding(4)
+                            .background(Color.green.opacity(0.16))
+                            .cornerRadius(4)
+                            .foregroundStyle(effectManager.currentGlobalAccentColor)
                     }
                     if engine.searchContext.isPhActive {
                         HStack(spacing: 2) {

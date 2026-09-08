@@ -90,10 +90,10 @@ struct SearchResultRow: View {
                                         
                                         Text(ageText)
                                             .font(.caption2.weight(.bold))
-                                            .foregroundColor(.white)
+                                            .foregroundStyle(effectManager.currentGlobalAccentColor)
                                             .padding(.horizontal, 6)
                                             .padding(.vertical, 2)
-                                            .background(Color.green.opacity(0.8))
+                                            .background(Color.green.opacity(0.16))
                                             .clipShape(Capsule())
                                     }
 

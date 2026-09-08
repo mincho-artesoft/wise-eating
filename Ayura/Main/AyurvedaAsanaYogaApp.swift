@@ -94,6 +94,7 @@ struct AyurvedaAsanaYogaApp: App {
                 RootLauncher(container: container)
                     .modelContainer(container)
                     .preferredColorScheme(effectManager.appColorScheme)
+                    .toggleStyle(ThemedSwitchToggleStyle())
                     .onChange(of: scenePhase) { _, newPhase in
                     guard !Self.isIsolatedSmokeTest else { return }
                     // ... (старата логика за scenePhase остава същата) ...

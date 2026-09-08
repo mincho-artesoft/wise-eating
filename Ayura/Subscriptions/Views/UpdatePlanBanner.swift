@@ -35,10 +35,6 @@ struct UpdatePlanBanner: View {
     @State private var hasAppeared: Bool = false
 
     var body: some View {
-        // Банерът за абонамент е изключен глобално.
-        EmptyView()
-
-        /*
         VStack {
             // ✅ СЦЕНАРИЙ 1: ПРОМОЦИЯ (До 17 Януари)
             if subscriptionManager.isPromoActive {
@@ -77,7 +73,6 @@ struct UpdatePlanBanner: View {
             }
         }
         .padding(.top)
-        */
     }
 
     private func refreshContent() {
@@ -91,25 +86,19 @@ struct UpdatePlanBanner: View {
 
     // MARK: - Original Upgrade Banner
     private var upgradePlanContent: some View {
-        HStack {
-            Spacer()
-
-            Button(action: {
-                NotificationCenter.default.post(name: .openSubscriptionFlow, object: nil)
-            }) {
-                Image("Sub_Icon")
-                    .resizable()
-                    .renderingMode(.original)
-                    .scaledToFit()
-                    .frame(width: 141.12, height: 49.28, alignment: .center)
-                    .contentShape(Rectangle())
-                    .accessibilityLabel("Upgrade plan & Support Us")
-            }
-            .buttonStyle(.plain)
-
-            Spacer()
+        Button(action: {
+            NotificationCenter.default.post(name: .openSubscriptionFlow, object: nil)
+        }) {
+            Text("Upgrade plan & Support Us")
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(effectManager.currentGlobalAccentColor)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 48)
+                .padding(.vertical, 12)
+                .frame(maxWidth: .infinity, minHeight: 76.8, alignment: .center)
+                .contentShape(Rectangle())
         }
-        .frame(height: 76.8, alignment: .center)
+        .buttonStyle(.plain)
         .background {
             Rectangle()
                 .fill(effectManager.isLightRowTextColor ? .white.opacity(0.2) : .black.opacity(0.2))
@@ -152,12 +141,13 @@ struct UpdatePlanBanner: View {
             Image(systemName: "xmark")
                 .font(.headline)
                 .fontWeight(.bold)
-                .foregroundStyle(.white)
+                .foregroundStyle(effectManager.currentGlobalAccentColor)
                 .padding(10)
-                .background(.black.opacity(0.18), in: Circle())
+                .background(effectManager.currentGlobalAccentColor.opacity(0.12), in: Circle())
                 .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+        .accessibilityLabel("Dismiss banner")
         .padding(.trailing, 8)
     }
 }
